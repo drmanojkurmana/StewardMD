@@ -11,6 +11,15 @@
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia-scan-targets.js", "kardia-scanlab.js", "kardia.js", "kardia-premium.js", "kardia-qr.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-sync-relay.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js", "kardia-calc-data.js", "kardia-calc.js"];
   /* Transport adapters load best effort: a missing file must not stop Kardia loading. */
   var OPTIONAL = { "kardia-sync-ble.js": 1, "kardia-sync-relay.js": 1 };
+  /* K3 Sim renderer: registered here, lazy loaded only when Sim is
+   * first chosen in the Scan Lab (never at boot). */
+  var SIM_JS = ["kardia-sim-volume.js", "kardia-sim-bmode-gl.js", "kardia-probe-model.js"];
+  var simLoading = null;
+  function loadSim() {
+    if (simLoading) return simLoading;
+    simLoading = SIM_JS.reduce(function (p, src) { return p.then(function () { return js(src); }); }, Promise.resolve()).then(function () { return G.KARDIA_BMODE_GL || null; }, function (e) { simLoading = null; throw e; });
+    return simLoading;
+  }
   var loading = null;
 
   function enabled() {
@@ -51,6 +60,6 @@
     back: function () { return false; },
     close: function () {}
   };
-  G.KARDIA_LOADER = { load: load, enabled: enabled, V: V, CSS: CSS, JS: JS };
+  G.KARDIA_LOADER = { load: load, loadSim: loadSim, enabled: enabled, V: V, CSS: CSS, JS: JS, SIM_JS: SIM_JS };
   if (!G.KARDIA) G.KARDIA = stub;
 })(typeof window !== "undefined" ? window : this);

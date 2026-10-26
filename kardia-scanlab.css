@@ -64,6 +64,18 @@
 .krd-root .ksl-hr{font-size:13px;color:var(--sp-text);font-variant-numeric:tabular-nums;margin:0 0 0 auto}
 .krd-root .ksl-monitor-wrap{position:relative;border-radius:12px;background:#000;overflow:hidden;width:100%;aspect-ratio:4/3;flex:0 0 auto;height:auto;min-height:280px}
 .krd-root #kslMonitor{position:absolute;inset:0;display:block;width:100%;height:100%;background:#000}
+.krd-root #kslSim{position:absolute;inset:0;display:block;width:100%;height:100%;background:#000}
+.krd-root #kslSim[hidden]{display:none}
+.krd-root #kslMonitor[hidden]{display:none}
+.krd-root .ksl-cinesim{position:absolute;top:8px;right:8px;z-index:6;display:flex;border:1px solid var(--sp-line);border-radius:10px;background:var(--sp-s1);overflow:hidden}
+.krd-root .ksl-cinesim button{min-width:56px;min-height:44px;height:44px;padding:8px 12px;border:0;background:transparent;color:var(--sp-text);font-size:14px;font-weight:650;touch-action:manipulation;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;transition:transform 120ms var(--kd-ease),background-color 140ms var(--kd-ease)}
+.krd-root .ksl-cinesim button:active{transform:scale(.97)}
+.krd-root .ksl-cinesim button[aria-checked="true"]{background:var(--sp-acc);color:var(--sp-on-pri)}
+.krd-root .ksl-cinesim button:focus-visible{outline:2px solid var(--sp-acc);outline-offset:-2px}
+@media(hover:hover) and (pointer:fine){.krd-root .ksl-cinesim button:hover{background:var(--sp-s2)}.krd-root .ksl-cinesim button[aria-checked="true"]:hover{background:var(--sp-acc)}}
+.krd-root .ksl-simstate{position:absolute;inset:0;z-index:5;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center;background:#000;color:#f2f4f6;padding:16px;text-align:center}
+.krd-root .ksl-simstate[hidden]{display:none}
+.krd-root .ksl-simstate p{margin:0;font-size:15px;line-height:1.45;overflow-wrap:anywhere}
 .krd-root .ksl-real-mask{position:absolute;inset:0;overflow:hidden;pointer-events:none}
 .krd-root .ksl-real-mask[hidden]{display:none}
 .krd-root #kslReal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transform:scale(1.45);transform-origin:50% 46%;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
@@ -152,6 +164,6 @@
   .krd-root .ksl-result{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){
-  .krd-root .ksl-chip,.krd-root .ksl-btn,.krd-root .ksl-view,.krd-root .ksl-iconbtn,.krd-root .ksl-tut-chip,.krd-root .ksl-syncbtn,.krd-root .ksl-result,.krd-root #kslReal,.krd-root .ksl-load-fill{transition:none}
+  .krd-root .ksl-chip,.krd-root .ksl-btn,.krd-root .ksl-view,.krd-root .ksl-iconbtn,.krd-root .ksl-tut-chip,.krd-root .ksl-syncbtn,.krd-root .ksl-result,.krd-root #kslReal,.krd-root .ksl-load-fill,.krd-root .ksl-cinesim button{transition:none}
   .krd-root .ksl-chip:active,.krd-root .ksl-btn:active,.krd-root .ksl-view:active,.krd-root .ksl-iconbtn:active,.krd-root .ksl-tut-chip:active,.krd-root .ksl-syncbtn:active{transform:none}
 }

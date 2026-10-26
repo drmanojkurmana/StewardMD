@@ -524,7 +524,51 @@
     });
   }
 
+  /* Cine / Sim switch: Cine is the real patient clip (degraded off
+   * target, clean at target); Sim is the live K3 volume B-mode along
+   * the probe plane. Remembered per device, default Cine. */
+  var CINE_SIM_KEY = "ksl_cine_sim_mode";
+  var SIM_FILES = ["kardia-sim-volume.js", "kardia-sim-bmode-gl.js", "kardia-probe-model.js"];
+  function normalizeCineSimMode(v) { return v === "sim" ? "sim" : "cine"; }
+  function loadCineSimMode(storage) {
+    try { return normalizeCineSimMode(storage && storage.getItem ? storage.getItem(CINE_SIM_KEY) : null); } catch (e) { return "cine"; }
+  }
+  function saveCineSimMode(storage, mode) {
+    var m = normalizeCineSimMode(mode);
+    try { if (storage && storage.setItem) storage.setItem(CINE_SIM_KEY, m); } catch (e) {}
+    return m;
+  }
+  function simPoseFromPlane(plane) {
+    if (!plane || !plane.origin) return null;
+    /* The B-mode pose up is the plane normal (elevation): the Scan Lab
+     * plane up is antiparallel to its beam, so passing it would make
+     * the renderer's right vector zero and collapse the image. */
+    return { origin: plane.origin.slice(), beam: (plane.beam || plane.normal || [0, 1, 0]).slice(), up: (plane.normal || plane.up || [0, 0, 1]).slice() };
+  }
+  function simPhaseFromHeart(hs, now) {
+    if (hs && hs.cycleMs) return ((hs.cycleTimeMs || 0) / hs.cycleMs) % 1;
+    return ((now || 0) / 857) % 1;
+  }
+  /* Lazy Sim loader: files load only on first Sim choice, once. */
+  function createSimLazyLoader(deps) {
+    deps = deps || {};
+    var state = "idle", promise = null;
+    function ensure() {
+      if (deps.hasSim && deps.hasSim()) { state = "ready"; return Promise.resolve(true); }
+      if (promise) return promise;
+      state = "loading";
+      var load = deps.loadFiles ? deps.loadFiles() : Promise.reject(new Error("Simulation files are not available"));
+      promise = Promise.resolve(load).then(function () {
+        if (deps.hasSim && deps.hasSim()) { state = "ready"; return true; }
+        state = "error"; promise = null; return false;
+      }, function () { state = "error"; promise = null; return false; });
+      return promise;
+    }
+    return { ensure: ensure, state: function () { return state; } };
+  }
+
   var PURE = { clamp: clamp, wrapDeg: wrapDeg, poseError: poseError, poseDistance: poseDistance, degradationFor: degradationFor, windowBlend: windowBlend, imageMetrics: imageMetrics, isCartoonMetrics: isCartoonMetrics, withinTolerance: withinTolerance,
+    CINE_SIM_KEY: CINE_SIM_KEY, SIM_FILES: SIM_FILES, normalizeCineSimMode: normalizeCineSimMode, loadCineSimMode: loadCineSimMode, saveCineSimMode: saveCineSimMode, simPoseFromPlane: simPoseFromPlane, simPhaseFromHeart: simPhaseFromHeart, createSimLazyLoader: createSimLazyLoader,
     coachText: coachText, createCoach: createCoach, scoreAttempt: scoreAttempt, springStep: springStep, TUTORIAL: TUTORIAL,
     BODY_CREDITS: BODY_CREDITS, bodyCreditsHtml: bodyCreditsHtml, assetCandidates: assetCandidates, assetFileUrl: assetFileUrl,
     registerPoint: registerPoint, parseGlb: parseGlb, cutTriangles: cutTriangles, HUBMAP_CENTRE: HUBMAP_CENTRE,
@@ -633,6 +677,9 @@
       '<div class="ksl-syncbar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<div class="ksl-monitor-wrap" id="kslMonitorWrap">' +
       '<canvas id="kslMonitor" width="640" height="480" aria-label="Ultrasound monitor"></canvas>' +
+      '<canvas id="kslSim" width="640" height="480" aria-label="Simulated ultrasound image from the 3D heart" hidden></canvas>' +
+      '<div class="ksl-simstate" id="kslSimState" role="status" aria-live="polite" hidden><p id="kslSimStateText">Simulation loading</p><button type="button" class="ksl-btn" id="kslSimRetry" hidden>Retry</button><button type="button" class="ksl-btn" id="kslSimUseCine" hidden>Use Cine</button></div>' +
+      '<div class="ksl-cinesim" role="radiogroup" aria-label="Monitor image source"><button type="button" role="radio" data-cinesim="cine" id="kslModeCine" aria-checked="true">Cine</button><button type="button" role="radio" data-cinesim="sim" id="kslModeSim" aria-checked="false">Sim</button></div>' +
       '<canvas id="kslDegraded" width="640" height="480" aria-label="Real patient image, degraded by probe position" hidden></canvas>' +
       '<div class="ksl-real-mask" id="kslRealMask" hidden><video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video></div>' +
       '<video id="kslReal2" muted loop playsinline hidden aria-hidden="true" tabindex="-1"></video>' +
@@ -678,6 +725,95 @@
     function setText(id, txt) { var n = el(id); if (n) n.textContent = txt; }
     var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal"), realMask = el("kslRealMask");
     var degradedCanvas = el("kslDegraded"), video2 = el("kslReal2");
+    var simCanvas = el("kslSim");
+    /* Cine / Sim: remembered per device, default Cine. Sim files lazy
+     * load only when Sim is first chosen; absent files show the
+     * Simulation loading state, then a clear error with a next action. */
+    var cineSimMode = opts.cineSimMode ? normalizeCineSimMode(opts.cineSimMode) : loadCineSimMode(G.localStorage);
+    var simRenderer = null, simState = "idle";
+    debug.cineSimMode = cineSimMode; debug.simState = simState;
+    function hasSimFiles() { return !!(G.KARDIA_SIM_VOLUME && G.KARDIA_BMODE_GL && G.KARDIA_BMODE_GL.create && G.KARDIA_SIM_VOLUME.buildVolumes && G.KARDIA_SIM_VOLUME.packAtlas); }
+    function loadSimFiles() {
+      if (opts.simLoader) return opts.simLoader();
+      if (G.KARDIA_LOADER && G.KARDIA_LOADER.loadSim) return G.KARDIA_LOADER.loadSim();
+      return SIM_FILES.reduce(function (p, src) {
+        return p.then(function () {
+          return new Promise(function (res, rej) {
+            var s = doc.createElement("script"); s.src = "/" + src + "?v=krd8"; s.async = false;
+            s.onload = function () { res(); }; s.onerror = function () { rej(new Error(src)); };
+            doc.head.appendChild(s);
+          });
+        });
+      }, Promise.resolve());
+    }
+    var simLoader = createSimLazyLoader({ hasSim: hasSimFiles, loadFiles: loadSimFiles });
+    function showSimState(text, showRetry) {
+      var box = el("kslSimState"), t = el("kslSimStateText"), r = el("kslSimRetry"), u = el("kslSimUseCine");
+      if (box) box.hidden = !text;
+      if (t && text) t.textContent = text;
+      if (r) r.hidden = !showRetry;
+      if (u) u.hidden = !showRetry;
+    }
+    function ensureSim() {
+      if (simRenderer) { simState = "ready"; debug.simState = simState; return Promise.resolve(true); }
+      if (simState === "loading") return simLoader.ensure();
+      simState = "loading"; debug.simState = simState; showSimState("Simulation loading", false);
+      return simLoader.ensure().then(function (ok) {
+        if (!ok || !hasSimFiles()) { simState = "error"; debug.simState = simState; showSimState("Simulation could not load. Check your connection and try again, or use Cine.", true); return false; }
+        /* Let the loading state paint before the heavy volume build. */
+        return new Promise(function (res) { setTimeout(res, 30); }).then(function () {
+          try {
+            if (!G.__kardiaSimAtlas) G.__kardiaSimAtlas = G.KARDIA_SIM_VOLUME.packAtlas(G.KARDIA_SIM_VOLUME.buildVolumes());
+            simRenderer = G.KARDIA_BMODE_GL.create(simCanvas);
+            simRenderer.setVolume(G.__kardiaSimAtlas);
+            simState = "ready"; debug.simState = simState; showSimState(null, false);
+            if (simCanvas) simCanvas.hidden = false;
+            return true;
+          } catch (e) { debug.errors.push("sim: " + String(e && e.message || e)); simState = "error"; debug.simState = simState; showSimState("Simulation could not start on this device. Use Cine to keep scanning.", true); return false; }
+        });
+      });
+    }
+    function applyCineSimMode() {
+      var cineBtn = el("kslModeCine"), simBtn = el("kslModeSim");
+      if (cineBtn) cineBtn.setAttribute("aria-checked", cineSimMode === "cine" ? "true" : "false");
+      if (simBtn) simBtn.setAttribute("aria-checked", cineSimMode === "sim" ? "true" : "false");
+      debug.cineSimMode = cineSimMode;
+      if (cineSimMode === "sim") {
+        if (video) video.hidden = true;
+        if (realMask) realMask.hidden = true;
+        if (degradedCanvas) degradedCanvas.hidden = true;
+        if (monCanvas) monCanvas.hidden = true;
+        if (simCanvas && simRenderer) simCanvas.hidden = false;
+        ensureSim();
+      } else {
+        if (simCanvas) simCanvas.hidden = true;
+        if (monCanvas) monCanvas.hidden = false;
+        showSimState(null, false);
+      }
+    }
+    function setCineSimMode(mode) {
+      cineSimMode = saveCineSimMode(G.localStorage, mode);
+      haptic("SELECTION");
+      applyCineSimMode();
+      refresh(nowMs());
+    }
+    var modeCineBtn = el("kslModeCine"), modeSimBtn = el("kslModeSim");
+    if (modeCineBtn) modeCineBtn.addEventListener("click", function () { setCineSimMode("cine"); });
+    if (modeSimBtn) modeSimBtn.addEventListener("click", function () { setCineSimMode("sim"); });
+    [modeCineBtn, modeSimBtn].forEach(function (btn) {
+      if (!btn || !btn.addEventListener) return;
+      btn.addEventListener("keydown", function (ev) {
+        if (!ev || (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft" && ev.key !== "ArrowDown" && ev.key !== "ArrowUp")) return;
+        if (ev.preventDefault) ev.preventDefault();
+        var next = cineSimMode === "cine" ? "sim" : "cine";
+        setCineSimMode(next);
+        var target = next === "sim" ? modeSimBtn : modeCineBtn;
+        if (target && target.focus) target.focus();
+      });
+    });
+    var simRetryBtn = el("kslSimRetry"), simUseCineBtn = el("kslSimUseCine");
+    if (simRetryBtn) simRetryBtn.addEventListener("click", function () { simState = "idle"; ensureSim(); });
+    if (simUseCineBtn) simUseCineBtn.addEventListener("click", function () { setCineSimMode("cine"); });
 
     /* ---- three.js scene ---- */
     var THREE = null, renderer = null, scene3 = null, camera = null;
@@ -1153,6 +1289,24 @@
       } catch (e) { debug.errors.push("us frame: " + String(e && e.message || e)); }
     }
 
+    /* Sim mode: live K3 B-mode along the probe plane, beating with
+     * the same heart cycle as the ECG. Same sector, depth and ECG
+     * are drawn by the GL shader; coaching and scoring are shared. */
+    function drawSim(now, plane) {
+      debug.simState = simState;
+      if (!simRenderer) { if (simState === "idle") ensureSim(); return; }
+      try {
+        if (ownHeart && heartInst && heartInst.step) heartInst.step(16);
+        var sp = simPoseFromPlane(plane); if (!sp) return;
+        var hs = null; try { hs = heartInst && heartInst.state ? heartInst.state() : null; } catch (e) {}
+        simRenderer.setPose(sp);
+        simRenderer.setPhase(simPhaseFromHeart(hs, now));
+        simRenderer.setKnobs({ depthMm: pose.depthCm * 10, gain: 1.0, focusMm: 70, dynamicRange: 60 });
+        simRenderer.render(now);
+        if (hs) setText("kslHr", Math.round(hs.heartRateBpm || 70) + " bpm");
+      } catch (e) { debug.errors.push("sim frame: " + String(e && e.message || e)); }
+    }
+
     /* ---- degraded real image at every pose ---- */
     function clipsApi() { return opts.clips || G.KARDIA_CLIPS || null; }
     function windowTargets() {
@@ -1478,8 +1632,8 @@
       }
       if (!inTol) holdSince = 0;
       wasIn = inTol;
-      resolveClip();
-      var rcState = realCine.update({ score: inTol ? 100 : 0, withinTolerance: inTol }, now);
+      if (cineSimMode === "cine") resolveClip();
+      var rcState = cineSimMode === "sim" ? "sim" : realCine.update({ score: inTol ? 100 : 0, withinTolerance: inTol }, now);
       debug.realState = rcState;
       var note = el("kslClipNote");
       if (rcState === "real" && realStatus === "ready" && realSrc) {
@@ -1537,13 +1691,20 @@
         if (!firstFrameDone) { firstFrameDone = true; finishLoadingIfReady(); }
         try { var ps = probeScreen(); if (ps) debug.probeScreen = ps; } catch (e) {}
       }
-      drawMonitor(now, plane || currentPlane());
-      var cleanShowing = (rcState === "real" && realStatus === "ready" && !!realSrc);
-      var degShown = drawDegraded(now, cleanShowing);
-      debug.degradedActive = !!degShown;
-      if (!cleanShowing) {
-        setText("kslMonLabel", degShown ? "Real patient image" : "Simulated image");
-        var det2 = el("kslAttrDetails"); if (det2 && degShown) det2.hidden = false;
+      if (cineSimMode === "sim") {
+        ensureMonitor();
+        drawSim(now, plane || currentPlane());
+        debug.degradedActive = false;
+        setText("kslMonLabel", "Simulated image");
+      } else {
+        drawMonitor(now, plane || currentPlane());
+        var cleanShowing = (rcState === "real" && realStatus === "ready" && !!realSrc);
+        var degShown = drawDegraded(now, cleanShowing);
+        debug.degradedActive = !!degShown;
+        if (!cleanShowing) {
+          setText("kslMonLabel", degShown ? "Real patient image" : "Simulated image");
+          var det2 = el("kslAttrDetails"); if (det2 && degShown) det2.hidden = false;
+        }
       }
       fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; if (showDebug) setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
       try { var handleEl = el("kslHandle"); var ps2 = probeScreen(); if (handleEl && ps2) { handleEl.style.left = Math.round(ps2.x) + "px"; handleEl.style.top = Math.round(ps2.y) + "px"; } } catch (e) {}
@@ -1731,6 +1892,7 @@
       });
     } catch (e) {}
     if (!tutDone) renderTut();
+    applyCineSimMode();
     startLoad();
     raf = rafImpl(loop);
     var instance = {
@@ -1761,7 +1923,9 @@
       debugDegradation: function () { return { degradation: degradationFor(pose, view), blend: windowBlend(pose, windowTargets()), active: degradedActive }; },
       setPathology: function (p) { pathology = p; realKey = ""; degradedSources = {}; degradedLoading = {}; },
       applySyncPose: applySyncPose,
-      getState: function () { return { view: view.id, pose: pose, layer: layer, pathology: pathology }; },
+      getState: function () { return { view: view.id, pose: pose, layer: layer, pathology: pathology, cineSimMode: cineSimMode, simState: simState }; },
+      setCineSimMode: setCineSimMode,
+      getCineSimMode: function () { return cineSimMode; },
       getDebug: function () { return debug; },
       refresh: refresh,
       openTutorial: openTutorial,
