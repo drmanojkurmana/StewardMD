@@ -596,8 +596,8 @@
   function renderProbeCalibrate() {
     S.probeStep = "calibrate";
     showSheet("Use this phone as a probe",
-      '<p class="sp-small">Hold the phone like a probe, marker towards the patient\'s head, tap Calibrate.</p>' +
-      '<p class="sp-small">Keep holding it that way. Turning, fanning and rocking the phone then moves the probe.</p>' +
+      '<p class="sp-small">Lay the phone flat, or hold it like a probe with the marker towards the patient\'s head, then tap Calibrate.</p>' +
+      '<p class="sp-small">Twist it to rotate the probe. Tilt it to fan and rock.</p>' +
       '<div class="krd-sp-glyphwrap" aria-hidden="true">' + glyphSvg(0, 0) + "</div>" +
       '<div class="krd-sp-col"><button type="button" class="sp-btn pri sp-wide" data-act="sp-calibrate">Calibrate</button>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Not now</button></div>');

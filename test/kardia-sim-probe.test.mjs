@@ -169,21 +169,22 @@ test("gyroscope mapping maths: calibrate pose, deltas and low-pass filter", () =
   for (let i = 0; i < 30; i++) f = PROBE.lowPass(f, 30, a);
   assert.ok(f > 29 && f <= 30, "filter settles on the step, got " + f);
 
-  // End to end through a probe: calibrate, then tilt the phone.
+  // End to end through a probe: calibrate flat, then lift the top
+  // edge. In the probe frame that is rock, not the old beta tilt.
   const { p } = settled();
   p.setState({ window: "apical", rotationDeg: 0, tiltDeg: 0, rockDeg: 0 });
-  p.calibrateGyro({ alpha: 0, beta: 40, gamma: 0 });
+  p.calibrateGyro({ alpha: 0, beta: 0, gamma: 0 });
   const before = p.getState();
   let s = before;
-  for (let i = 0; i < 20; i++) s = p.applyGyroSample({ alpha: 0, beta: 60, gamma: 10 }, 16);
-  assert.ok(Math.abs(s.tiltDeg - 20) < 2, "beta drives tilt, got " + s.tiltDeg);
-  assert.ok(Math.abs(s.rotationDeg - 10) < 2, "gamma drives rotation, got " + s.rotationDeg);
-  assert.equal(s.rockDeg, 0);
+  for (let i = 0; i < 20; i++) s = p.applyGyroSample({ alpha: 0, beta: 20, gamma: 0 }, 16);
+  assert.ok(Math.abs(s.rockDeg - 20) < 2, "beta lifts the top edge and drives rock, got " + s.rockDeg);
+  assert.ok(Math.abs(s.rotationDeg) < 2, "rotation stays near zero, got " + s.rotationDeg);
+  assert.ok(Math.abs(s.tiltDeg) < 2, "fan stays near zero, got " + s.tiltDeg);
   // A single noisy sample barely moves the filtered probe.
   p.setState({ rotationDeg: 0, tiltDeg: 0, rockDeg: 0 });
-  p.calibrateGyro({ alpha: 0, beta: 40, gamma: 0 });
-  const one = p.applyGyroSample({ alpha: 0, beta: 70, gamma: 0 }, 16);
-  assert.ok(one.tiltDeg < 15, "one 30 degree spike is damped, got " + one.tiltDeg);
+  p.calibrateGyro({ alpha: 0, beta: 0, gamma: 0 });
+  const one = p.applyGyroSample({ alpha: 0, beta: 30, gamma: 0 }, 16);
+  assert.ok(one.rockDeg < 15, "one 30 degree spike is damped, got " + one.rockDeg);
 });
 
 test("gyroscope is off by default and permission is only asked on request", () => {
