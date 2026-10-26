@@ -342,9 +342,14 @@
    * the same sector shape and depth as the simulated sector. */
   function sectorClipPolygon(w, h, sectorDeg) {
     if (!(w > 0) || !(h > 0)) return "";
-    var apexX = w / 2, apexY = Math.min(h - 8, Math.round(h * 0.02) + 4);
+    /* Fixed sector, same geometry as the simulated and degraded
+     * images: sector occupies the top 87 percent of the box (the ECG
+     * strip takes the rest), apex centred near the top, radius to
+     * the sector bottom. Never the clip's own fan. */
+    var sectorH = Math.round(h * 0.87);
+    var apexX = w / 2, apexY = Math.min(sectorH - 8, Math.round(sectorH * 0.02) + 4);
     if (apexY < 0) apexY = 0;
-    var radius = h - apexY, half = ((sectorDeg || 80) / 2) * Math.PI / 180;
+    var radius = sectorH - apexY, half = ((sectorDeg || 80) / 2) * Math.PI / 180;
     function pt(x, y) { return (Math.round(x / w * 1000) / 10) + "% " + (Math.round(y / h * 1000) / 10) + "%"; }
     var pts = [pt(apexX, apexY)], steps = 16, i, a;
     for (i = 0; i <= steps; i++) {

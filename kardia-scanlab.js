@@ -593,7 +593,7 @@
      * drawn through degradationFor() so every pose shows real anatomy. */
     var degradedSources = {}, degradedLoading = {}, degradedActive = false;
     var clipNoteUntil = 0, clipNoteForKey = "";
-    var tutStep = 0, tutDone = false;
+    var tutStep = 0, tutDone = false, resultTimer = 0, lastClipPolyKey = "";
     try { tutDone = G.localStorage.getItem("ksl_tutorial_done") === "1"; } catch (e) {}
     var debug = { loadingState: "loading", manifestUrl: "", meshesRegistered: {}, drawCalls: 0, frames: 0, usCalls: 0, usCutPolys: -1, fps: 0, beatScale: 1, clipRequestedFor: "", realState: "sim", errors: [] };
 
@@ -609,7 +609,7 @@
       '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
       '<div class="ksl-load" id="kslLoading" role="status"><p class="ksl-note" id="kslLoadText">Loading Scan Lab.</p><div class="ksl-load-track"><span class="ksl-load-fill" id="kslLoadFill"></span></div><button type="button" class="ksl-btn" id="kslRetryLoad" hidden>Retry</button></div>' +
       '<div class="ksl-stage-btns">' +
-      '<button type="button" class="ksl-syncbtn" id="kslSyncProbe" data-act="kecho-syncprobe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Use a phone as the probe</span></button>' +
+      '<button type="button" class="ksl-iconbtn" id="kslSyncProbe" data-act="kecho-syncprobe" aria-label="Use a phone as the probe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></button>' +
       '<button type="button" class="ksl-iconbtn" id="kslPractice" aria-label="Practice this view"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></button>' +
       '<button type="button" class="ksl-iconbtn" id="kslTutorialBtn" aria-label="Open the tutorial"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5h11a3 3 0 0 1 3 3v11H8a3 3 0 0 1-3-3z"/><path d="M8 9h7M8 13h5"/></svg></button>' +
       '<button type="button" class="ksl-iconbtn" id="kslLayersBtn" aria-label="Body layers" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/></svg></button>' +
@@ -627,11 +627,17 @@
       '<video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video>' +
       '<video id="kslReal2" muted loop playsinline hidden aria-hidden="true" tabindex="-1"></video>' +
       '</div>' +
+      '<div class="ksl-result" id="kslResult" role="status" hidden></div>' +
       '</section>' +
+      '<div class="ksl-pickerbar"><nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
+      WINDOWS.map(function (w) { return '<button type="button" class="ksl-chip" data-window="' + w.id + '" id="kslWindow-' + w.id + '" aria-pressed="' + (w.id === activeWindow) + '">' + w.label + '</button>'; }).join("") + '</nav>' +
+      '<div class="ksl-views" id="kslViews" role="group" aria-label="Views">' +
+      T.VIEWS.map(function (v) {
+        return '<button type="button" class="ksl-view" data-view="' + v.id + '" data-win="' + windowForView(v.id) + '" id="kslView-' + v.id + '" aria-pressed="' + (v.id === view.id) + '"><span class="ksl-icon" aria-hidden="true">' + viewIcon(v.id) + '</span><span>' + esc(v.label) + '</span></button>';
+      }).join("") + '</div></div>' +
       '<div class="ksl-underbar">' +
       '<div class="ksl-under-left">' +
       '<p class="ksl-note" id="kslClipNote" role="status" hidden></p>' +
-      '<div class="ksl-result" id="kslResult" hidden></div>' +
       '<div class="ksl-tut" id="kslTutorial" hidden></div>' +
       '</div>' +
       '<div class="ksl-under-right">' +
@@ -646,12 +652,7 @@
       '<p class="ksl-fps" id="kslFps" role="status"' + (showDebug ? "" : " hidden") + '></p>' +
       '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
       '</div></div>' +
-      '<div class="ksl-pickerbar"><nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
-      WINDOWS.map(function (w) { return '<button type="button" class="ksl-chip" data-window="' + w.id + '" id="kslWindow-' + w.id + '" aria-pressed="' + (w.id === activeWindow) + '">' + w.label + '</button>'; }).join("") + '</nav>' +
-      '<div class="ksl-views" id="kslViews" role="group" aria-label="Views">' +
-      T.VIEWS.map(function (v) {
-        return '<button type="button" class="ksl-view" data-view="' + v.id + '" data-win="' + windowForView(v.id) + '" id="kslView-' + v.id + '" aria-pressed="' + (v.id === view.id) + '"><span class="ksl-icon" aria-hidden="true">' + viewIcon(v.id) + '</span><span>' + esc(v.label) + '</span></button>';
-      }).join("") + '</div></div></div>';
+'</div>';
 
     /* Element lookup is scoped to this instance's root, never the whole
      * document: a stopped or repainted Scan Lab instance must not render
@@ -1395,7 +1396,7 @@
         attemptDone = true;
         var sc = scoreAttempt({ timeMs: now - startedAt, travelMm: travelMm, idealMm: 60, finalAngleDeg: Math.abs(err.rotationDeg) });
         try { var store = JSON.parse(G.localStorage.getItem("ksl_scores") || "{}"); store[view.id] = sc; G.localStorage.setItem("ksl_scores", JSON.stringify(store)); } catch (e) {}
-        var r = el("kslResult"); if (r) { r.hidden = false; r.innerHTML = "<strong>View found.</strong> Score " + sc.total + " of 100. Time " + sc.timeS + " seconds. Path efficiency " + sc.efficiency + " percent. Final angle error " + Math.abs(Math.round(err.rotationDeg)) + " degrees."; }
+        var r = el("kslResult"); if (r) { r.hidden = false; r.innerHTML = "<strong>View found.</strong> Score " + sc.total + " of 100. Time " + sc.timeS + " seconds. Path efficiency " + sc.efficiency + " percent. Final angle error " + Math.abs(Math.round(err.rotationDeg)) + " degrees."; if (resultTimer) { try { clearTimeout(resultTimer); } catch (e) {} } resultTimer = setTimeout(function () { var rr = el("kslResult"); if (rr) rr.hidden = true; resultTimer = 0; }, 2500); }
         haptic("MEDIUM");
       }
       if (!inTol) holdSince = 0;
@@ -1409,6 +1410,7 @@
         var badge = el("kslRealBadge"); if (badge) badge.hidden = false;
         var det = el("kslAttrDetails"); if (det) det.hidden = false;
         if (video) {
+          try { var mw2 = monCanvas.clientWidth || 640, mh2 = monCanvas.clientHeight || 480, pk = mw2 + "x" + mh2; if (pk !== lastClipPolyKey && G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.sectorClipPolygon) { var poly2 = G.KARDIA_ECHOLAB._pure.sectorClipPolygon(mw2, mh2, 80); if (poly2) { video.style.clipPath = poly2; video.style.webkitClipPath = poly2; lastClipPolyKey = pk; } } } catch (e) {}
           video.hidden = false;
           video.style.transition = reduced ? "none" : "opacity 600ms ease-out";
           video.style.opacity = "1";
@@ -1549,7 +1551,7 @@
     function bindNudge(id, fn) { var b = el(id); if (b) b.addEventListener("click", fn); }
     function openSyncProbe() { try { if (G.KARDIA_SYNCPROBE && G.KARDIA_SYNCPROBE.open) G.KARDIA_SYNCPROBE.open(); } catch (e) {} }
     bindNudge("kslSyncProbe", openSyncProbe);
-    bindNudge("kslPractice", function () { startedAt = nowMs(); attemptDone = false; travelMm = 0; setText("kslCoach", "Practice. Find " + view.label + " on the body."); var r = el("kslResult"); if (r) r.hidden = true; });
+    bindNudge("kslPractice", function () { startedAt = nowMs(); attemptDone = false; travelMm = 0; setText("kslCoach", "Practice. Find " + view.label + " on the body."); var r = el("kslResult"); if (r) r.hidden = true; var box = el("kslTutorial"); if (box) { box.hidden = false; box.innerHTML = '<strong>Practice this view</strong><p>Find ' + esc(view.label) + ' on the body, then hold still inside the target ranges.</p><button type="button" class="ksl-btn ksl-syncbtn" id="kslPracticeSyncProbe" data-act="kecho-syncprobe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Use a phone as the probe</span></button> <button type="button" class="ksl-btn" id="kslPracticeClose">Close</button>'; var pb = box.querySelector ? box.querySelector("#kslPracticeSyncProbe") : el("kslPracticeSyncProbe"); if (pb) pb.addEventListener("click", openSyncProbe); var pc = box.querySelector ? box.querySelector("#kslPracticeClose") : el("kslPracticeClose"); if (pc) pc.addEventListener("click", function () { box.hidden = true; }); } });
     bindNudge("kslLabels", function () { showLabels = !showLabels; this.setAttribute("aria-pressed", showLabels ? "true" : "false"); });
     bindNudge("kslFullscreen", function () { var st = el("kslStage"); try { if (st && st.requestFullscreen) st.requestFullscreen(); else if (sceneCanvas && sceneCanvas.requestFullscreen) sceneCanvas.requestFullscreen(); } catch (e) {} });
     var layersBox = el("kslLayers");

@@ -88,14 +88,14 @@ test("at-target: needs quality 85 held for 0.5 s, then hysteresis holds to 80", 
   assert.equal(m2.state(), "sim");
 });
 
-test("sectorClipPolygon masks the fan: apex top centre, arc at the depth edge", () => {
+test("sectorClipPolygon masks the fan: apex top centre, arc at the fixed sector depth edge", () => {
   const poly = EL._pure.sectorClipPolygon(400, 300, 80);
   assert.ok(poly.startsWith("polygon(50% "));
   const pts = poly.slice(8, -1).split(", ").map((p) => p.split(" ").map((v) => parseFloat(v)));
   assert.equal(pts.length, 18, "apex plus 17 arc points");
   assert.ok(pts[0][1] < 5, "apex sits near the top");
   const mid = pts[9];
-  assert.ok(Math.abs(mid[0] - 50) < 1 && mid[1] > 95, "the bottom centre of the arc reaches the depth edge");
+  assert.ok(Math.abs(mid[0] - 50) < 1 && mid[1] > 85 && mid[1] < 90, "the bottom centre of the arc reaches the fixed sector depth edge (top 87 percent, above the ECG strip), not the clip box bottom");
   const left = pts[1], right = pts[17];
   assert.ok(Math.abs((50 - left[0]) - (right[0] - 50)) < 1.5, "fan edges are symmetric about the centre");
   assert.equal(EL._pure.sectorClipPolygon(0, 300, 80), "");
