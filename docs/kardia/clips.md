@@ -703,3 +703,146 @@ arrest; TOF (no compliant real-echo video found). Per-view target (2 per
 TTE view) now met for PLAX, PSAX AV (4), papillary (3), A4C (3), A5C, A2C,
 A3C (2), RV focus, subcostal 4C (3), IVC, subcostal aorta (2), suprasternal
 arch (3), suprasternal descending SAX (1) and suprasternal ductal (1).
+
+## WP12m (2026-10-26): gap-view fill from Echocardiographer.org + first real TOF echo
+
+Eleventh sweep, targeting the listed gaps: PSAX apex, RV inflow, RVOT long,
+PA bifurcation, subcostal SAX/bicaval/hepatic, suprasternal, plus TOF (and
+topping up PSAX MV, A5C, A2C to 2 each). 20 downloads, 19 kept (1 backup
+unused: PSAX RV-inflow cPtkMjnqeQQ, held in work/clips/ unfurnished). 19 clips
+added (99 entries total, checkedAt 2026-10-26 for the new entries); outputs in
+work/clips-clean/ (19 mp4, largest tetralogy-of-fallot-2.mp4 at 341796 bytes,
+all under 400 KB).
+
+Reuse statement (Echocardiographer.org, https://www.echocardiographer.org/about-3,
+Re-use-of-Materials section, verified 2026-10-26): "I hope you use these
+materials to educator yourself and others [sic]. Feel free to use any of the
+content here and on my youtube channel for free, but please provide credit to
+this site and me or other authors." The statement covers the site pages
+(/tte-psax, /tte-plax-rvinflow, /tte-plax-rvoutflow, /tte-subcostal-greatvessels,
+/tte-suprasternal and other TTE pages) and the author's linked YouTube channel
+(UCbQoilWBp13troCX_QoU6rw), from which the 17 view clips were downloaded
+(low-resolution mp4s). Quoted verbatim in each credits.json attribution;
+licence recorded as "site permission (free reuse with attribution)". No NC/ND
+restriction stated; commercial use treated as allowed with credit kept.
+
+Commons check for still-missing views and TOF (MediaWiki API file search plus
+Category:Tetralogy of Fallot and Category:Echocardiography): no real-echo TOF
+cine (only the Osmosis animation "Tetralogy of fallot video.webm", rejected as
+non-real like the earlier Osmosis candidates, plus diagrams) and no gap-view
+videos beyond what the library already holds. TOF instead comes from a CC BY
+4.0 journal supplement: Schreier et al., CASE 2026 (DOI
+10.1016/j.case.2026.04.006, PMCID PMC13494407), Videos 2 (PSAX RVOT) and 3
+(PLAX sweep); binaries fetched from the publisher CDN (sizes match the PMC
+manifest: 618050 and 1850769 bytes). PMC's direct /bin links now sit behind a
+proof-of-work challenge page, so els-cdn URLs were used.
+
+Accepted (19): tte-psax-apex-1/2 (Normal PSAX apex Ex1; Transthoracic PSAX at
+Apex), tte-rv-inflow-1/2 (Normal PLAX RV inflow Color Ex1; Transthoracic RV
+Inflow), tte-rvot-long-1/2 (Normal PLAX RV outflow Ex1 twice-uploaded take),
+tte-pa-bifurcation-1 (Normal PSAX PA Ex1), tte-subcostal-sax-1/2 (three-valve
+colour; MV level), tte-subcostal-bicaval-1/2 (Subcostal SVC colour; Subcostal
+IAS colour), tte-subcostal-hepatic-1 (Middle Hepatic Vein Ex1),
+tte-suprasternal-desc-sax-2/3 (Suprasternal short axis Ex1; SSN Short Axis),
+tte-psax-mv-2, tte-a5c-2, tte-a2c-2, tetralogy-of-fallot-1/2. Licences: site
+permission (17), CC BY 4.0 (2).
+
+De-identification (mask-only, no cropping, so sector anatomy is intact):
+machine-parameter blocks, probe/V markers, body-position markers with P/R
+labels, depth/scale numerals, colour-scale columns with labels, BP/HR
+readouts, JPEG tags, caliper lines, grey bars, marker brackets. Kept: ECG
+traces (with white caliper ticks/blocks), colour Doppler flow and ROI boxes,
+bare depth-tick dashes/dots. Small tissue nicks where overlay text overlapped
+the sector edge (sector-tip marker boxes, right-edge slivers, in-sector
+numeral/V/BP boxes) are disclosed per clip in removedOverlay. Apex-2 source
+trimmed 0.35 s (block-corrupt opening frames). Re-encoded H.264 yuv420p,
+native fps, longest side 640, no audio, faststart. Verification: automated
+bright-pixel margin scan over 3 frames per output (rounds 1-3) plus zoomed
+visual sign-off on every in-sector mask; final scan shows only ECG/caliper
+pixels, sector-tip tissue, bare ticks and single-pixel edge speckle. No
+patient names, IDs, dates of birth, date stamps or hospital branding in any
+source or output frame.
+
+Updated counts (99 clips). Views: PLAX 3, PSAX AV 4, PSAX MV 2, PSAX papillary
+3, PSAX apex 2, RV inflow 2, RVOT long axis 2, PA bifurcation 1, A4C 3, A5C 2,
+A2C 2, A3C 2, A4C RV focus 2, A4C coronary sinus 1, subcostal 4C 3, subcostal
+SAX 2, IVC 2, subcostal aorta 2, subcostal bicaval 2, suprasternal arch 3,
+suprasternal descending SAX 3, suprasternal ductal 1, right parasternal aorta
+0, subcostal hepatic vein 1, suprasternal SVC 0; TEE: ME 4C 1, ME 2C 1,
+ME LAX 1, bicaval 1, ME AV SAX 1, ME AV LAX 1, TG mid SAX 0, descending aorta
+SAX 0 (plus two unassigned TEE clips: Gerbode, PFO); POCUS: FAST subxiphoid 1,
+FAST RUQ 1, eFAST lung right 1, eFAST lung left 1, others 0. Pathology: MS 2,
+AS 2, MR 3, AR 2, TR 1, HCM obstructive 2, HCM non-obstructive 2, DCM 2 (1
+still + 1 video), LVH 1, effusion 3, tamponade 3, RWMA-MI 2, ASD 3, VSD 3,
+PDA 1, TOF 2, pulmonary hypertension 1, LV thrombus 2, vegetation 3,
+dissection 1.
+
+Remaining gaps: PA bifurcation second clip, subcostal hepatic second clip
+(no second compliant real-echo cine on either named source), suprasternal SVC,
+right parasternal aorta; TEE TG mid SAX, descending-aorta SAX; POCUS FAST
+LUQ/pelvis, IVC, BLUE, arrest. Per-view target (2 per TTE view) now met for
+PLAX, PSAX AV (4), PSAX MV (2), papillary (3), PSAX apex (2), RV inflow (2),
+RVOT long (2), A4C (3), A5C (2), A2C (2), A3C (2), RV focus, subcostal 4C (3),
+subcostal SAX (2), IVC, subcostal aorta (2), subcostal bicaval (2),
+suprasternal arch (3) and suprasternal descending SAX (3).
+
+## WP12n (2026-10-26): hepatic-vein #2; PA-bifurcation #2 exhaustively missing
+
+Twelfth sweep, constrained to Echocardiographer.org pages/channel and
+Wikimedia Commons. 1 clip added (100 entries total, checkedAt 2026-10-26);
+output in work/clips-clean/ (tte-subcostal-hepatic-2.mp4, 93165 bytes).
+
+Accepted (1): tte-subcostal-hepatic-2 (Systolic flow reversal in hepatic veins
+E00535, CardioNetworks ECHOpedia, CC BY-SA 3.0 via Commons) — subcostal
+hepatic-vein/IVC long axis with colour Doppler showing systolic reversal from
+severe TR; dual-labelled view tte_subcostal_hepatic_vein +
+pathology tricuspid_regurgitation (5th dual-labelled entry). Masking:
+V marker, dim in-sector depth numerals 10/15 (localised by pixel-level
+connected-component analysis after visual estimates proved unreliable; no
+numeral 5 exists on this axis), colour scale, HR readout with frame counter,
+bottom credit strip; colour flow, ROI box, ECG with caliper ticks and bare
+ticks retained. Verified by 3-frame visual sign-off plus numeric sweeps.
+
+Rejected / not filed (all inspected on screen, reasons recorded so the next
+sweep does not repeat them): E00867 RVOT aneurysm (Commons, real echo but
+RVOT plane, no bifurcation; RVOT already has 2); Xmf_tCZhBZo and 8zCfYsOgcKM
+(PSAX AV-level, bifurcation not demonstrated — would be PSAX-AV #5/6);
+xryARPRZUWw (RVOT colour, no bifurcation); ZfDsbq0lPbs (cor pulmonale apical
+4C, wrong view, 23 s); kWm_u9guPjQ (RCC IVC tumour, sepia, no hepatic segment);
+ESWnmqzbB0s (PLSVC bubble study, apical window, not suprasternal SVC);
+ZHGBHwpPB4g/NGEUACKpxn0 not downloaded (RV-inflow carcinoid, wrong view);
+qfO2hwYwz_4, h_jM_RKbpow, jvVnVDdHauc (IVC collapsibility clips; hepatic
+confluence incidental at best — filing any as the hepatic-vein view would be
+mislabeling); CFM Pulmonic regurgitation still (unverifiable plane, no
+Artist/Credit metadata for attribution); canine right-parasternal stills
+(non-human).
+
+Exhaustion notes: the channel's complete /videos listing (259 videos) holds
+exactly one PSAX-PA video, one hepatic-vein video, no ductal, coronary-sinus,
+right-parasternal or suprasternal-SVC TTE video (only TEE coronary/ascending
+aorta); targeted Commons file/video searches for PA-bifurcation (TEE and
+procedure clips only), ductus (none), coronary sinus (ICE/TEE procedure
+clips), right parasternal (canine only), SVC (procedure clips) and hepatic
+echo cine (abdominal stills, rat model) surfaced nothing filable.
+
+Updated counts (100 clips). Views: PLAX 3, PSAX AV 4, PSAX MV 2, PSAX papillary
+3, PSAX apex 2, RV inflow 2, RVOT long axis 2, PA bifurcation 1, A4C 3, A5C 2,
+A2C 2, A3C 2, A4C RV focus 2, A4C coronary sinus 1, subcostal 4C 3, subcostal
+SAX 2, IVC 2, subcostal aorta 2, subcostal bicaval 2, suprasternal arch 3,
+suprasternal descending SAX 3, suprasternal ductal 1, right parasternal aorta
+0, subcostal hepatic vein 2, suprasternal SVC 0; TEE: ME 4C 1, ME 2C 1,
+ME LAX 1, bicaval 1, ME AV SAX 1, ME AV LAX 1, TG mid SAX 0, descending aorta
+SAX 0 (plus Gerbode, PFO); POCUS: FAST subxiphoid 1, FAST RUQ 1, eFAST lung
+right 1, eFAST lung left 1, others 0. Pathology: MS 2, AS 2, MR 3, AR 2,
+TR 2, HCM obstructive 2, HCM non-obstructive 2, DCM 2 (1 still + 1 video),
+LVH 1, effusion 3, tamponade 3, RWMA-MI 2, ASD 3, VSD 3, PDA 1, TOF 2,
+pulmonary hypertension 1, LV thrombus 2, vegetation 3, dissection 1.
+
+Remaining gaps: PA bifurcation second clip, suprasternal ductal second clip,
+coronary-sinus second clip, suprasternal SVC, right parasternal aorta; TEE TG
+mid SAX, descending-aorta SAX; POCUS FAST LUQ/pelvis, IVC, BLUE, arrest.
+Per-view target (2 per TTE view) now met for PLAX, PSAX AV (4), PSAX MV (2),
+papillary (3), PSAX apex (2), RV inflow (2), RVOT long (2), A4C (3), A5C (2),
+A2C (2), A3C (2), RV focus, subcostal 4C (3), subcostal SAX (2), IVC,
+subcostal aorta (2), subcostal bicaval (2), subcostal hepatic vein (2),
+suprasternal arch (3) and suprasternal descending SAX (3).

@@ -37,3 +37,23 @@ Checked with curl on 2026-10-24. Each entry below records the exact version seen
 ## Summary for WP12
 
 PTB-XL and CirCor DigiScope are cleared for WP12 import with attribution. CAMEO stays out until its licence is confirmed, which matches the plan gate that non commercial datasets never enter the repo.
+
+## Echocardiographer.org (real echo teaching cines for Scan Lab gap views)
+
+* Page read: https://www.echocardiographer.org/about-3 (Re-use-of-Materials section)
+* Version seen: About page naming Atif Qasim, MD MSCE; video pages /tte-psax, /tte-plax-rvinflow, /tte-plax-rvoutflow, /tte-subcostal-greatvessels, /tte-suprasternal and other TTE pages read 2026-10-26
+* Licence seen: site permission, exact words: "I hope you use these materials to educator yourself and others. Feel free to use any of the content here and on my youtube channel for free, but please provide credit to this site and me or other authors." (typo "educator" as on the page)
+* Access: open access, anyone can use the content for free
+* Commercial use: allowed. The statement grants free use with no non-commercial restriction, provided credit is given
+* Attribution text required: credit to the site and to Atif Qasim (or other authors). Quoted verbatim in each of the 17 kardia/media/credits.json attributions added 2026-10-26, with the source video URL
+* Verdict: shippable in a paid app with the credit line kept; adaptations (masking overlays, re-encoding) permitted under the grant
+
+## CASE TOF supplements (first real-echo tetralogy of Fallot cine)
+
+* Page read: https://pmc.ncbi.nlm.nih.gov/articles/PMC13494407/ (article XML via Europe PMC)
+* Version seen: Schreier M, Stanley HM, Chen JM, Starc J, Nuri M, Rogers LS, Mercer-Rosa L. Tetralogy of Fallot and Complete Atrioventricular Septal Defect with Absent Atrial Component. CASE: Cardiovascular Imaging Case Reports (2026). DOI 10.1016/j.case.2026.04.006. Supplement Videos 2 (mmc2.mp4, 618050 bytes) and 3 (mmc3.mp4, 1850769 bytes)
+* Licence seen: CC BY 4.0 ("This is an open access article under the CC BY license"), full text at https://creativecommons.org/licenses/by/4.0/
+* Access: open access; binaries fetched from the publisher CDN (PMC /bin links sit behind a proof-of-work challenge)
+* Commercial use: allowed with attribution kept
+* Attribution text required: author list, article citation and CC BY 4.0 notice, recorded in the 2 kardia/media/credits.json attributions added 2026-10-26
+* Verdict: shippable in a paid app with the credit line kept
