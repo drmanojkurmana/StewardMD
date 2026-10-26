@@ -267,6 +267,13 @@ rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/na
 # copy above already carries them; this explicit copy keeps that guarantee
 # if the kardia copy ever gains excludes.
 if [ -d kardia/media/clips ]; then mkdir -p "$WWW/kardia/media/clips"; cp kardia/media/clips/*.mp4 "$WWW/kardia/media/clips/" 2>/dev/null || true; fi
+# Scan Lab body models (kardia/media/k2-assets/: manifest + GLB/bin.gz, about
+# 4.9 MB) and calculator figure media (kardia/media/calc/): bundled so the
+# body loads on-device offline at /kardia/media/k2-assets/manifest.json.
+# The recursive copy above already carries them; these explicit copies keep
+# that guarantee if the kardia copy ever gains excludes.
+if [ -d kardia/media/k2-assets ]; then mkdir -p "$WWW/kardia/media/k2-assets"; cp kardia/media/k2-assets/* "$WWW/kardia/media/k2-assets/" 2>/dev/null || true; fi
+if [ -d kardia/media/calc ]; then mkdir -p "$WWW/kardia/media/calc"; cp kardia/media/calc/* "$WWW/kardia/media/calc/" 2>/dev/null || true; fi
 
 # PrepNucleus (prep.js, loaded by prep-loader.js): the module tree and the per-subject index files (MCQ counts) ship
 # in the app, about 1 MB. The question files (prep/bank/v1/*/mcq/, search.json, about 180 MB) do NOT: the app fetches

@@ -87,12 +87,12 @@ test("scanlab UI has stable ids", () => {
 });
 
 test("asset manifest: real bytes, sha256 verified, under 6 MB", () => {
-  const m = JSON.parse(fs.readFileSync(new URL("../work/k2-assets/manifest.json", import.meta.url), "utf8"));
+  const m = JSON.parse(fs.readFileSync(new URL("../kardia/media/k2-assets/manifest.json", import.meta.url), "utf8"));
   const { createHash } = require("node:crypto");
   let total = 0;
   assert.equal(m.assets.length, 5);
   for (const a of m.assets) {
-    const buf = fs.readFileSync(new URL("../work/k2-assets/" + a.file, import.meta.url));
+    const buf = fs.readFileSync(new URL("../kardia/media/k2-assets/" + a.file, import.meta.url));
     assert.equal(buf.length, a.bytes, a.file);
     assert.equal(createHash("sha256").update(buf).digest("hex"), a.sha256, a.file);
     assert.ok(a.licence && a.attribution && a.sourceUrl);
@@ -128,12 +128,12 @@ test("chooseClip pathology fallback tiers", () => {
 test("GLB assets parse, register and cut in the patient frame", () => {
   const P2 = SL._pure;
   for (const f of ["skin-visible-human-male.glb", "heart-hubmap.glb", "liver-hubmap.glb"]) {
-    const buf = fs.readFileSync(new URL("../work/k2-assets/" + f, import.meta.url));
+    const buf = fs.readFileSync(new URL("../kardia/media/k2-assets/" + f, import.meta.url));
     const mesh = P2.parseGlb(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
     assert.ok(mesh.positions.length > 500, f);
     assert.ok(mesh.indices.length > 1000, f);
   }
-  const heartBuf = fs.readFileSync(new URL("../work/k2-assets/heart-hubmap.glb", import.meta.url));
+  const heartBuf = fs.readFileSync(new URL("../kardia/media/k2-assets/heart-hubmap.glb", import.meta.url));
   const heart = P2.parseGlb(heartBuf.buffer.slice(heartBuf.byteOffset, heartBuf.byteOffset + heartBuf.byteLength));
   // registered heart sits near the LV origin (within 150 mm on each axis)
   const c = heart.positions.reduce((a, p) => [a[0] + p[0] / heart.positions.length, a[1] + p[1] / heart.positions.length, a[2] + p[2] / heart.positions.length], [0, 0, 0]);
@@ -159,7 +159,7 @@ test("asset candidates mirror the geom asset base and credits list all sources",
 });
 
 test("every target contact lies on the skin mesh within 3 mm and in its landmark region", () => {
-  const buf = fs.readFileSync(new URL("../work/k2-assets/skin-visible-human-male.glb", import.meta.url));
+  const buf = fs.readFileSync(new URL("../kardia/media/k2-assets/skin-visible-human-male.glb", import.meta.url));
   const skin = P.parseGlb(buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.byteLength));
   for (const v of T.VIEWS) {
     const d = P.skinDistanceMm(skin, v.contact);

@@ -6,7 +6,7 @@
    the common pitfall and an attribution line. Reduced motion draws the
    key frame named in keyPhase. No patient image is bundled: chamber
    contours are original teaching overlays drawn from standard ASE window
-   anatomy (see work/calc-media/manifest.json for clinical sources the
+   anatomy (see kardia/media/calc/manifest.json for clinical sources the
    lead can upload). Coordinates are normalised 0 to 1 inside the sector:
    x left to right, y near field (top) to far field (bottom). ed and es
    are end diastolic and end systolic contours of the same chamber. */

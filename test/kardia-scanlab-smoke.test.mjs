@@ -1,6 +1,6 @@
 /* Scan Lab smoke test: runs the real kardia-scanlab.js module in Node
  * with a fake DOM, a fake WebGL context and a fake three.js surface,
- * while fetch serves the real files from work/k2-assets. Asserts the
+ * while fetch serves the real files from kardia/media/k2-assets. Asserts the
  * round 2 contract: manifest loaded, every part verified and parsed,
  * meshes registered, first frame drew, loading cleared, debugPose
  * reaches the target and requests the real clip, and the monitor ran
@@ -156,7 +156,7 @@ test("Scan Lab smoke: body loads, probe at target, monitor cuts, clip plays", as
     fetchCalls.push(String(url));
     const u = String(url);
     const k2 = u.match(/k2-assets\/([^/?]+)$/);
-    const file = k2 ? new URL("../work/k2-assets/" + k2[1], import.meta.url) : u.includes("views.json") ? new URL("../kardia/views.json", import.meta.url) : null;
+    const file = k2 ? new URL("../kardia/media/k2-assets/" + k2[1], import.meta.url) : u.includes("views.json") ? new URL("../kardia/views.json", import.meta.url) : null;
     if (!file) return Promise.resolve({ ok: false, status: 404, json: async () => { throw new Error("404"); }, arrayBuffer: async () => new ArrayBuffer(0) });
     const buf = fs.readFileSync(file);
     return Promise.resolve({
@@ -196,7 +196,7 @@ test("Scan Lab smoke: body loads, probe at target, monitor cuts, clip plays", as
   const t0 = Date.now();
   for (let i = 0; i < 5; i++) await pump(t0 + i * 100);
   const dbg = inst.getDebug();
-  assert.ok(dbg.manifestUrl.includes("/work/k2-assets/manifest.json"), "manifest loaded from the worktree path: " + dbg.manifestUrl);
+  assert.ok(dbg.manifestUrl.includes("/kardia/media/k2-assets/manifest.json"), "manifest loaded from the bundled path: " + dbg.manifestUrl);
   assert.ok(fetchCalls.some((u) => u.includes("k2-assets/manifest.json")), "manifest fetched");
   for (const name of ["skin", "heart", "liver", "bones", "vessels"]) assert.ok(dbg.meshesRegistered[name] > 0, name + " registered with vertices: " + dbg.meshesRegistered[name]);
   assert.ok(dbg.frames > 0, "frames rendered");
