@@ -1,0 +1,62 @@
+/* Plain text pages (privacy, support) in the app's Graphite colors. */
+:root {
+  color-scheme: dark;
+}
+html,
+body {
+  margin: 0;
+  background: rgb(8 9 10);
+  color: rgb(182 186 191);
+  font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px calc(64px + env(safe-area-inset-bottom, 0px));
+}
+h1 {
+  margin: 8px 0 4px;
+  font-size: 22px;
+  font-weight: 600;
+  color: rgb(216 218 221);
+}
+h2 {
+  margin: 28px 0 6px;
+  font: 400 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(138 143 150);
+}
+p,
+ul {
+  margin: 0 0 12px;
+}
+ul {
+  padding-left: 20px;
+}
+li {
+  margin-bottom: 4px;
+}
+a {
+  color: rgb(216 218 221);
+  text-decoration-color: rgb(72 76 83);
+  text-underline-offset: 2px;
+}
+a:hover {
+  color: rgb(232 163 58);
+}
+.home {
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.home a {
+  text-decoration: none;
+}
+.date {
+  color: rgb(138 143 150);
+  font-size: 13px;
+}
