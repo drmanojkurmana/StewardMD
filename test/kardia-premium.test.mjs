@@ -35,6 +35,34 @@ test("onboarding: three cards, remembered per device, skip and start both rememb
   assert.equal(P.shouldShow(), false);
 });
 
+test("onboarding: a host repaint that wipes the overlay does not lose first run", () => {
+  function makeEl() {
+    const el = { children: [], parentNode: null, className: "", id: "",
+      appendChild(c) { c.parentNode = el; el.children.push(c); return c; },
+      removeChild(c) { el.children = el.children.filter((x) => x !== c); c.parentNode = null; return c; },
+      querySelector() { return null; }, querySelectorAll() { return []; }, setAttribute() {}, addEventListener() {}, focus() {} };
+    return el;
+  }
+  const root = makeEl(); root.className = "krd-root";
+  const body = makeEl(); root.parentNode = body;
+  const doc = { readyState: "complete", body,
+    createElement: () => makeEl(),
+    querySelector: (s) => (s === ".krd-root" ? root : null),
+    getElementById: (id) => (id === "smdKardia" ? root : null),
+    contains: (n) => { let c = n; while (c) { if (c === body || c === root) return true; c = c.parentNode; } return false; },
+    addEventListener() {} };
+  const { g } = loadPremium({ document: doc });
+  const P = g.KARDIA_PREMIUM;
+  assert.equal(P.showing, true, "shows on the first open, by any route");
+  const ov = root.children.find((c) => c.id === "krdOnboarding");
+  assert.ok(ov, "overlay is in the live root");
+  ov.parentNode = null; root.children = root.children.filter((c) => c !== ov); // engine innerHTML repaint
+  assert.equal(P.showing, false, "a detached overlay is not showing");
+  P.onTab();
+  assert.equal(P.showing, true, "the next tab paint rebuilds it");
+  assert.ok(root.children.some((c) => c.id === "krdOnboarding"));
+});
+
 test("haptics: nothing fires without a native Capacitor plugin", () => {
   const { g } = loadPremium();
   assert.equal(g.KARDIA_PREMIUM.haptic("light"), false);

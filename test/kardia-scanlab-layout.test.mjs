@@ -56,6 +56,29 @@ test("scene camera homes closer on the left chest, and double tap returns to it"
   assert.ok(!js.includes("dist: 700"), "the old far framing is gone");
 });
 
+test("tablet: scene and monitor side by side and tall, coaching spans, picker wraps, nothing truncated", () => {
+  const tablet = css.slice(css.indexOf("@media(min-width:820px)"));
+  assert.match(tablet, /grid-template-columns:minmax\(0,1fr\) minmax\(0,1fr\)/, "equal columns, each at least 48 percent of the row");
+  assert.match(tablet, /minmax\(440px,55dvh\)/, "first row targets 55 percent of the viewport height");
+  assert.match(tablet, /"coach coach"/, "coaching line spans under both");
+  assert.match(tablet, /\.ksl-scene-col,\.krd-root \.ksl-monitor-col\{display:contents\}/);
+  assert.match(tablet, /\.ksl-pickerbar \.ksl-windows\{[^}]*flex-wrap:wrap/, "picker wraps at full width");
+  assert.match(tablet, /\.ksl-pickerbar \.ksl-views\{[^}]*flex-wrap:wrap/);
+  assert.match(tablet, /\.ksl-tut p\{white-space:normal;overflow:visible;text-overflow:clip/, "tutorial text is never truncated");
+  assert.ok(!/\.ksl-tut p\{[^}]*text-overflow:ellipsis/.test(tablet), "no tutorial ellipsis on tablet");
+  assert.match(tablet, /\.ksl-under-left,\.krd-root \.ksl-under-right\{display:contents\}/, "readouts and credits are not squeezed into a side column");
+  assert.match(tablet, /\.ksl-monitor-head\{[^}]*flex-wrap:nowrap/, "clip label, pill and heart rate keep one uncrowded row");
+});
+
+test("overlay covers the page and every tab label fits at 402pt and 375pt; the probe is enlarged", () => {
+  const prem = readFileSync(new URL("../kardia-premium.css", import.meta.url), "utf8");
+  assert.match(prem, /\.krd-root \{ position: fixed; inset: 0[^}]*height: auto/, "the Kardia overlay fully covers the page behind it, safe areas included");
+  assert.match(prem, /@media \(max-width: 430px\)/, "narrow phone tab fit applies at 402pt and 375pt");
+  assert.match(prem, /\.krd-root \.krd-tab \{ flex: 1 1 0[^}]*font-size: 12\.5px/, "all six labels share the row, none cut");
+  assert.match(js, /setScalar\(1\.5\)/, "probe is scaled up from the contact point");
+  assert.match(css, /\.ksl-handle\{[^}]*width:34px/, "the grip ring no longer covers the probe lens");
+});
+
 test("accessibility gates: names, focus, reduced motion", () => {
   assert.ok(js.includes('aria-label="Use a phone as the probe"'));
   assert.match(css, /focus-visible\{outline:2px solid var\(--sp-acc\)/);

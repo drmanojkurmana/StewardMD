@@ -1067,6 +1067,11 @@
         var yy = skinSurfaceY(p[0], p[2]);
         var s = toScene([p[0], yy, p[2]]);
         grp.position.set(s[0], s[1], s[2]);
+        /* The probe reads small against the ribs at phone and tablet
+         * sizes, and the grip ring sits over its lens. Scale the whole
+         * probe up from the contact point so the body, marker and cable
+         * stay clear of the ring on every size. */
+        if (grp.scale) { if (grp.scale.setScalar) grp.scale.setScalar(1.5); else { grp.scale.x = 1.5; grp.scale.y = 1.5; grp.scale.z = 1.5; } }
         var up = new THREE.Vector3(0, 1, 0);
         var dir = new THREE.Vector3(outScene[0], outScene[1], outScene[2]);
         grp.quaternion.setFromUnitVectors(up, dir);

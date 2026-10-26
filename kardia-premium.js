@@ -85,13 +85,34 @@
     if (first && first.focus) { try { first.focus(); } catch (e) {} }
   }
 
+  function liveRoot(root) {
+    var doc = G.document; if (!doc) return root || rootEl || null;
+    var fresh = null;
+    try { fresh = (doc.querySelector && doc.querySelector(".krd-root")) || (doc.getElementById && doc.getElementById("smdKardia")) || null; } catch (e) {}
+    return fresh || root || rootEl || doc.body || null;
+  }
+  function overlayLive() {
+    if (!overlay) return false;
+    try {
+      var doc = G.document;
+      if (doc && typeof doc.contains === "function") return doc.contains(overlay);
+      return !!overlay.parentNode;
+    } catch (e) { return !!overlay.parentNode; }
+  }
   function show(root) {
     try {
       var doc = G.document; if (!doc || !doc.createElement) return false;
-      if (overlay) return true;
-      rootEl = root || doc.querySelector(".krd-root") || doc.getElementById("smdKardia") || doc.body;
+      /* The engine repaints with innerHTML, which detaches this overlay
+       * while the reference stays truthy. A detached overlay is not
+       * showing: drop it and rebuild, or first-run never appears when
+       * Kardia is opened by a deep link (stewardmd://kardia) because the
+       * load paint and the first tab paint both wipe the first card. */
+      if (overlay && overlayLive()) return true;
+      var hadOverlay = !!overlay;
+      overlay = null;
+      rootEl = liveRoot(root);
       if (!rootEl || !rootEl.appendChild) return false;
-      step = 0;
+      if (!hadOverlay) step = 0;
       overlay = doc.createElement("div");
       overlay.className = "krd-onb"; overlay.id = "krdOnboarding";
       rootEl.appendChild(overlay);
@@ -120,7 +141,7 @@
     } catch (e) {}
   }
 
-  function onTab() { refreshOffline(rootEl); if (shouldShow()) show(rootEl); }
+  function onTab() { rootEl = liveRoot(rootEl); refreshOffline(rootEl); if (shouldShow()) show(rootEl); }
 
   function init() {
     try {
@@ -145,7 +166,7 @@
     KEY: KEY, CARDS: CARDS, shouldShow: shouldShow, remember: remember,
     haptic: haptic, show: show, dismiss: dismiss, startScanning: startScanning,
     refreshOffline: refreshOffline, onTab: onTab,
-    get step() { return step; }, get showing() { return !!overlay; }
+    get step() { return step; }, get showing() { return overlayLive(); }
   };
   if (G.document && (G.document.readyState === "complete" || G.document.readyState === "interactive")) init();
   else if (G.document && G.document.addEventListener) G.document.addEventListener("DOMContentLoaded", init);
