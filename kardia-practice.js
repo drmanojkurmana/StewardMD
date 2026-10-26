@@ -226,7 +226,23 @@
     return errors;
   }
 
+  var PROBE_LAB_CREDIT = "Probe Lab by Mohammed Kamareddine, MD, EchoSuite (echosuite.app), reused with the author's permission";
+  function probeLabCreditsHtml(data, escFn) {
+    var e = escFn || function (s) { return String(s == null ? "" : s); };
+    var out = '<h3 class="sp-h3">Probe Lab</h3><p class="sp-small">' + e(PROBE_LAB_CREDIT) + ".</p>";
+    var groups = [["figuresAndAnatomy", "Figures and anatomy"], ["videos", "Videos"]];
+    groups.forEach(function (g) {
+      var list = (data && data[g[0]]) || [];
+      if (!list.length) return;
+      out += '<h3 class="sp-h3">' + e(g[1]) + '</h3><ul class="krdc-credits">' + list.map(function (c) {
+        return "<li>" + e(c.title || "") + '<span class="krdc-meta">' + e(c.creator || "") + (c.license ? " · " + e(c.license) : "") + "</span></li>";
+      }).join("") + "</ul>";
+    });
+    return out;
+  }
+
   var PURE = {
+    PROBE_LAB_CREDIT: PROBE_LAB_CREDIT, probeLabCreditsHtml: probeLabCreditsHtml,
     DRILL_LIMIT_SEC: DRILL_LIMIT_SEC, EXAM_LIMIT_SEC: EXAM_LIMIT_SEC, EXAM_PASS_MARK: EXAM_PASS_MARK,
     ORIENTATION_CRITICAL_DEG: ORIENTATION_CRITICAL_DEG, MBBS_VIEWS: MBBS_VIEWS, EXAM_VIEWS: EXAM_VIEWS,
     KNOB_TARGET: KNOB_TARGET, KNOB_TOLERANCE: KNOB_TOLERANCE, KNOB_SCENARIOS: KNOB_SCENARIOS,
@@ -961,8 +977,14 @@
       G.KARDIA_CLIPS.attach(P.host);
       G.KARDIA_CLIPS.load().then(function () {
         var box = G.document.getElementById("krdpCredits");
-        if (box && P.screen === "credits") box.innerHTML = G.KARDIA_CLIPS.creditsHtml() +
+        if (!box || P.screen !== "credits") return;
+        var headHtml = G.KARDIA_CLIPS.creditsHtml() +
           ((G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.bodyCreditsHtml) ? '<h3 class="sp-h3">Body models</h3>' + G.KARDIA_SCANLAB.bodyCreditsHtml() : "");
+        box.innerHTML = headHtml + probeLabCreditsHtml(null, esc);
+        if (G.fetch) G.fetch(base() + "probelab/assets/credits.json").then(function (r) { return r.json(); }).then(function (data) {
+          var b2 = G.document.getElementById("krdpCredits");
+          if (b2 && P.screen === "credits") b2.innerHTML = headHtml + probeLabCreditsHtml(data, esc);
+        }, function () { /* the Probe Lab credit line above stays if its list cannot load */ });
       }, function () {
         var box = G.document.getElementById("krdpCredits");
         if (box) box.innerHTML = '<p class="krdp-err" role="alert">Credits did not load. Check the connection and try again.</p>';

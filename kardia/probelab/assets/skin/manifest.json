@@ -1,0 +1,92 @@
+{
+  "texture": "assets/skin/SkinRelief.png",
+  "sha256": "2cd540b274a655f054055fcbb2bc01c53b5ad3dbf93d54650d544dfe8e6af3e6",
+  "pixelSize": [
+    768,
+    768
+  ],
+  "exportModification": "None. Byte-identical copy of the native texture.",
+  "nativeProvenance": {
+    "generator": "Tools/geometry/build_skin_relief.py",
+    "purpose": "Display-only skin shading from registered anterior bone; not palpable tissue measurements",
+    "license": "BodyParts3D, The Database Center for Life Science, CC BY-SA 2.1 Japan; HRA skin depth mask CC BY 4.0",
+    "sources": {
+      "Skeleton.usdc": "793ced34e8cb16f714b4453e73924779444b2acdca0efb70146ace7cfe7de7b5",
+      "Skin.usdc": "c2a07d0ca812fb33e43b5d3626f58fbff1fca7c3c2b2db3b6eaf093fe88326a4"
+    },
+    "included_prims": [
+      "rib_left_2",
+      "rib_left_3",
+      "rib_left_4",
+      "rib_left_5",
+      "rib_left_6",
+      "rib_left_7",
+      "rib_left_8",
+      "rib_left_9",
+      "rib_left_10",
+      "rib_left_11",
+      "rib_left_12",
+      "rib_right_2",
+      "rib_right_3",
+      "rib_right_4",
+      "rib_right_5",
+      "rib_right_6",
+      "rib_right_7",
+      "rib_right_8",
+      "rib_right_9",
+      "rib_right_10",
+      "rib_right_11",
+      "rib_right_12",
+      "clavicle_left",
+      "clavicle_right",
+      "manubrium",
+      "sternum_body",
+      "xiphoid"
+    ],
+    "omitted_skin_imprints": [
+      "rib_left_1",
+      "rib_right_1"
+    ],
+    "omission_reason": "Owner-requested removal of the isolated first-rib imprint beneath the clavicle; skeleton unchanged",
+    "size": 768,
+    "patient_xy_min": [
+      -0.25,
+      0.28
+    ],
+    "patient_xy_span": [
+      0.5,
+      0.4
+    ],
+    "maximum_height_m": 0.004,
+    "actual_maximum_height_m": 0.0022519620698215758,
+    "channels": "R height/max; G (dH/dX*255+128)/255; B (dH/dY*255+128)/255; A 1. Top row superior."
+  },
+  "sourceFiles": {
+    "Packages/EchoAnatomyAssets/Resources/SkinRelief.png": "2cd540b274a655f054055fcbb2bc01c53b5ad3dbf93d54650d544dfe8e6af3e6",
+    "Packages/EchoAnatomyAssets/Resources/SkinRelief.json": "93988077c227cb4a1380c7397adba109da2e09abddcf0b70a3abe5d2f2ed3f07",
+    "App/SkinRelief.swift": "e7df09a78cbe07f0b506e458e06f0da4d389fa7c5603dfe6c488571f365cc4ed",
+    "App/SkinRelief.metal": "1b2cf1c39dc849cd8edfbb58bdf88378ec5fe2d5b8ea4732b8601e543af510e3",
+    "App/MannequinMode.swift": "8cc88998966450e961d8de254be3c5f65c5ce8319af94e89f0c2f105fb98b54a",
+    "App/AnatomyRealityView.swift": "ef262dd48c1354892daf6c872685d10f8284eb453fc1d0b6f94552fea31e9452",
+    "Packages/EchoProbeRig/Sources/EchoProbeRig/AnatomyScene.swift": "9ffe390ded8098137c511ed1685451cbcbbd1f46378c899c9caee990d4ca8268"
+  },
+  "sampling": {
+    "colorSpace": "raw numeric data; no sRGB decoding",
+    "origin": "top row superior",
+    "patientUV": [
+      "(patient.x + 0.25) / 0.5",
+      "1 - (patient.y - 0.28) / 0.4"
+    ],
+    "texelCenterUV": "(uv * (size - 1) + 0.5) / size",
+    "filter": "linear, clamp to edge, explicit level 0",
+    "gradientXY": "(field.gb * 255 - 128) / 255",
+    "anteriorWeight": "smoothstep(0, 0.65, normal.z)",
+    "enabled": "Real/tissue only; Glass preserves its unmodified material"
+  },
+  "references": {
+    "geometryAndSurfaceShaders": "App/SkinRelief.metal: echoSkinRelief, echoSkinGel",
+    "modePins": "App/MannequinMode.swift: realSkin, realBone, glassSkin, glassBone",
+    "materialParameters": "Packages/EchoProbeRig/Sources/EchoProbeRig/AnatomyScene.swift: applySkin, applyBone, LiverAppearance, glaze, polishOrgans",
+    "allGlassOrganOverride": "App/AnatomyRealityView.swift: applySkinOpacity (heart/vessels roughness 0.32, specular 0.55)"
+  }
+}

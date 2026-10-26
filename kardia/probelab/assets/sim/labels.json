@@ -1,0 +1,193 @@
+{
+  "table": [
+    {
+      "needle": "left_ventricle",
+      "key": "lv",
+      "role": "chamber"
+    },
+    {
+      "needle": "right_ventricle",
+      "key": "rv",
+      "role": "chamber"
+    },
+    {
+      "needle": "left_cardiac_atrium",
+      "key": "la",
+      "role": "chamber"
+    },
+    {
+      "needle": "right_cardiac_atrium",
+      "key": "ra",
+      "role": "chamber"
+    },
+    {
+      "needle": "aortic_cusp",
+      "key": "av",
+      "role": "valve"
+    },
+    {
+      "needle": "mitral_leaflet",
+      "key": "mv",
+      "role": "valve"
+    },
+    {
+      "needle": "tricuspid_valve",
+      "key": "tv",
+      "role": "valve"
+    },
+    {
+      "needle": "pulmonary_valve",
+      "key": "pv",
+      "role": "valve"
+    },
+    {
+      "needle": "papillary_muscle",
+      "key": "pap",
+      "role": "muscle"
+    },
+    {
+      "needle": "ascending_aorta",
+      "key": "ao",
+      "role": "vesselWall"
+    },
+    {
+      "needle": "aortic_root",
+      "key": "aoroot",
+      "role": "vesselWall"
+    },
+    {
+      "needle": "coronary_sinus",
+      "key": "cs",
+      "role": "vesselLumen"
+    },
+    {
+      "needle": "aortic_arch",
+      "key": "arch",
+      "role": "vesselWall"
+    },
+    {
+      "needle": "descending_aorta",
+      "key": "dao",
+      "role": "vesselLumen"
+    },
+    {
+      "needle": "brachiocephalic_artery",
+      "key": "bca",
+      "role": "vesselWall"
+    },
+    {
+      "needle": "left_common_carotid_artery",
+      "key": "lcca",
+      "role": "vesselWall"
+    },
+    {
+      "needle": "left_subclavian_artery",
+      "key": "lsa",
+      "role": "vesselWall"
+    },
+    {
+      "needle": "pulmonary_artery_r",
+      "key": "rpa",
+      "role": "vesselLumen"
+    },
+    {
+      "needle": "pulmonary_trunk",
+      "key": "pt",
+      "role": "vesselLumen"
+    },
+    {
+      "needle": "liver_capsule",
+      "key": "liver",
+      "role": "muscle"
+    },
+    {
+      "needle": "inferior_vena_cava",
+      "key": "ivc",
+      "role": "vesselLumen"
+    },
+    {
+      "needle": "superior_vena_cava",
+      "key": "svc",
+      "role": "vesselLumen"
+    },
+    {
+      "needle": "hepatic_vein",
+      "key": "hv",
+      "role": "vesselLumen"
+    }
+  ],
+  "names": {
+    "lv": "LV",
+    "rv": "RV",
+    "la": "LA",
+    "ra": "RA",
+    "ao": "ASC AO",
+    "aoroot": "AO ROOT",
+    "arch": "ARCH",
+    "dao": "DAO",
+    "pt": "PA",
+    "bca": "BCA",
+    "lcca": "LCCA",
+    "lsa": "LSA",
+    "rpa": "RPA",
+    "av": "AV",
+    "mv": "MV",
+    "tv": "TV",
+    "pv": "PV",
+    "pap": "PM",
+    "liver": "LIVER",
+    "ivc": "IVC",
+    "svc": "SVC",
+    "hv": "HV",
+    "cs": "CS"
+  },
+  "priority": [
+    "lv",
+    "rv",
+    "la",
+    "ra",
+    "arch",
+    "ao",
+    "dao",
+    "rpa",
+    "av",
+    "mv",
+    "tv",
+    "pv",
+    "aoroot",
+    "pt",
+    "ivc",
+    "svc",
+    "bca",
+    "lcca",
+    "lsa",
+    "hv",
+    "cs",
+    "pap",
+    "liver"
+  ],
+  "beats": {
+    "lv": [
+      "rv"
+    ],
+    "aoroot": [
+      "ao",
+      "rv"
+    ],
+    "ao": [
+      "rv"
+    ],
+    "dao": [
+      "la"
+    ],
+    "cs": [
+      "la"
+    ]
+  },
+  "sources": {
+    "App/CardiacMeshSource.swift": "775835d1249b494c4aaf160864be404ece0a21a4e6029a9b8ec8cb44265b1176",
+    "App/SliceFigure.swift": "d1bc2c43e5a5c09650eb160d6c296671bcd4176c85b9a3d1c4355261dc2e4f26",
+    "App/SliceOcclusion.swift": "9bcfe6f99a016e0574e71109fe2c9e939e9c6edef8b998d4174aba3eee5e2f2f",
+    "Packages/EchoGeometry/Sources/EchoGeometry/MeshSlicer.swift": "f9b460e78496708f24cb0476371f554bcc1b11423cfba7ddce987530fd0abbe2"
+  }
+}

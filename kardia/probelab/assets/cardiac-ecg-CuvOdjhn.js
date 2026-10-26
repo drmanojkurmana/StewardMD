@@ -1,0 +1,1 @@
+const s=0,a=o=>o-Math.floor(o);function e(o){const c=[[0,1],[.022,-.26],[.05,0],[.2,0],[.28,.3],[.35,0],[.7,0],[.79,.17],[.84,0],[.965,0],[.978,-.1]],r=a(o);if(r>=.978)return-.1+1.1*((r-.978)/.022);let t=[-.022,-.1];for(const n of c){if(r<=n[0])return t[1]+(n[1]-t[1])*(r-t[0])/Math.max(n[0]-t[0],1e-9);t=n}return 0}export{s as E,e as c};
