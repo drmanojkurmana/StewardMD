@@ -4,7 +4,21 @@
    badges, the draft footer) is the engine's own, so both themes stay consistent with Tokos and Narke.
    Two themes from the use scene. Monitor (dark): the echo lab at the bedside, near black with the ECG
    trace green as the one accent. Paper (light): the ECG printout, dark ink on white with a deep teal accent.
-   The host resolves the system preference and the in-app choice into body.dark (body.v3-dark on v3 screens). */
+   The host resolves the system preference and the in-app choice into body.dark (body.v3-dark on v3 screens).
+   Layer order (single source of truth; Kardia overlay < Kardia sheets < onboarding < SyncProbe):
+   the engine paints .sp-root at 880, sheets live inside that stacking context, first-run
+   onboarding sits above the sheets only while it is open, and the SyncProbe root sits
+   above both so the role sheet, its sheets, toasts and the QR scanner overlay stay in
+   front. Opening SyncProbe dismisses onboarding. Purpose: the phone as probe action
+   must never paint behind Kardia. States: loading, ready, error, offline, empty and
+   long text wrap as the engine defines; motion follows --kd-ease with reduced motion off. */
+:root {
+  --krd-z-overlay: 880;
+  --krd-z-sheet: 900;
+  --krd-z-onb: 940;
+  --krd-z-syncprobe: 960;
+}
+#smdKardia { z-index: var(--krd-z-overlay); }
 .krd-root {
   height:100dvh;max-height:100dvh;
   --kd-bg: #06090b; --kd-s1: #0e1316; --kd-s2: #171e23; --kd-s3: #232c33; --kd-line: #2c353d;

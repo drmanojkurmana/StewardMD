@@ -40,7 +40,7 @@
 .krd-offline .sp-btn { min-height: 44px; flex: 0 0 auto; }
 /* First-run onboarding: a card over the root, operable by touch and
  * keyboard, safe area respected, long text wraps. */
-.krd-onb { position: absolute; inset: 0; z-index: 40; display: flex; align-items: flex-end;
+.krd-onb { position: absolute; inset: 0; z-index: var(--krd-z-onb, 940); display: flex; align-items: flex-end;
   justify-content: center; padding: var(--kd-sp-4); padding-bottom: calc(var(--kd-sp-4) + env(safe-area-inset-bottom, 0px));
   background: rgba(0, 0, 0, 0.45); }
 .krd-onb-card { width: 100%; max-width: 560px; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;

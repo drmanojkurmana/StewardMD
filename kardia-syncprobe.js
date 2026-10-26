@@ -294,6 +294,7 @@
 
   /* ---------- entry: role chooser ---------- */
   function openRole() {
+    try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.dismiss) G.KARDIA_PREMIUM.dismiss(true); } catch (e) {}
     S.screen = "role";
     showSheet("SyncProbe",
       '<p class="sp-small">Train with two phones. One phone shows the scan, the other becomes the probe.</p>' +
