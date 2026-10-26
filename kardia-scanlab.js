@@ -1,4 +1,4 @@
-/* kardia-scanlab.js - Kardia Scan Lab (Kardia 2.0, round 4).
+/* kardia-scanlab.js - Kardia Scan Lab (Kardia 2.0, round 7).
  *
  * Design contract (anti-ui-slop Operate; impeccable Operate; apple-design
  * springs and interruptible drag; mobile-native safe areas, 44px targets;
@@ -7,10 +7,13 @@
  * purpose: find the target echo view by moving a real 3D probe on a WebGL
  * body, with live coaching above the monitor, readouts, and a monitor that
  * shows the KARDIA_US simulated cut off target and the real patient clip
- * on target. Layout follows Probe Lab: iPad landscape has the body scene
- * left and the monitor right with the coaching line above it and the view
- * picker by window under the monitor; phone portrait stacks body, monitor,
- * then the picker within thumb reach. Tokens: only Kardia tokens from
+ * on target. Round 7 layout: iPad landscape holds the scene and the
+ * monitor side by side at the same height in one grid row, the left
+ * column holds the scene only, and the coaching line, readouts, depth
+ * slider, score row and picker sit in an underbar under the monitor so
+ * nothing ever covers the sector; phone portrait stacks a fixed scene
+ * band, a full width 4:3 monitor, then the underbar. Tokens: only
+ * Kardia tokens from
  * kardia.css; no new palette, no glow backdrop, no banner. States:
  * loading (real asset progress, ends in the rendered body or a specific
  * error with Retry within 10 s), ready, empty (no clip for a view, said
@@ -470,7 +473,7 @@
     var view = T.VIEWS[0], activeWindow = windowForView(view.id), layer = "skin", showLabels = false;
     var pathology = opts.pathology || null;
     var pose = { contact: [-30, 95, 70], rotationDeg: 40, fanDeg: 0, rockDeg: 0, depthCm: 16 };
-    var orbit = { yaw: 2.6, pitch: 0.32, dist: 580 };
+    var orbit = { yaw: 2.6, pitch: 0.32, dist: 400 };
     function nowMs() { return (G.performance && G.performance.now) ? G.performance.now() : Date.now(); }
     var coach = createCoach(450), startedAt = nowMs(), travelMm = 0;
     var holdSince = 0, wasIn = false, attemptDone = false, raf = 0, destroyed = false;
@@ -478,6 +481,7 @@
     try { if (G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.createRealCine) realCine = G.KARDIA_ECHOLAB._pure.createRealCine({}); } catch (e) {}
     if (!realCine) realCine = { _s: "sim", _since: null, state: function () { return this._s; }, reset: function () { this._s = "sim"; this._since = null; }, update: function (inp, now) { if (this._s === "real") { if (!inp.withinTolerance) this._s = "sim"; return this._s; } if (inp.withinTolerance && inp.score >= 85) { if (this._since == null) this._since = now; if (now - this._since >= 500) this._s = "real"; } else this._since = null; return this._s; } };
     var realClip = null, realSrc = "", realStatus = "idle", realKey = "", offlineNoted = false, clipRequested = 0;
+    var clipNoteUntil = 0, clipNoteForKey = "";
     var tutStep = 0, tutDone = false;
     try { tutDone = G.localStorage.getItem("ksl_tutorial_done") === "1"; } catch (e) {}
     var debug = { loadingState: "loading", manifestUrl: "", meshesRegistered: {}, drawCalls: 0, frames: 0, usCalls: 0, usCutPolys: -1, fps: 0, beatScale: 1, clipRequestedFor: "", realState: "sim", errors: [] };
@@ -499,44 +503,43 @@
       '<div class="ksl-layers" id="kslLayers" role="group" aria-label="Body layers" hidden>' +
       ["skin", "glass", "anatomy"].map(function (l) { return '<button type="button" class="ksl-chip" data-layer="' + l + '" aria-pressed="' + (l === layer) + '">' + l.charAt(0).toUpperCase() + l.slice(1) + '</button>'; }).join("") + '</div>' +
       '</div>' +
+      '</section>' +
+      '<section class="ksl-monitor-col" aria-label="Monitor">' +
+      '<div class="ksl-monitor-wrap" id="kslMonitorWrap">' +
+      '<canvas id="kslMonitor" width="640" height="480" aria-label="Ultrasound monitor"></canvas>' +
+      '<video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video>' +
+      '</div>' +
+      '</section>' +
+      '<div class="ksl-underbar">' +
+      '<div class="ksl-under-left">' +
+      '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
+      '<p class="ksl-note" id="kslClipNote" role="status" hidden></p>' +
+      '<div class="ksl-result" id="kslResult" hidden></div>' +
+      '<div class="ksl-tut" id="kslTutorial" hidden></div>' +
+      '</div>' +
+      '<div class="ksl-under-right">' +
+      '<div class="ksl-monitor-head"><p class="ksl-mon-label" id="kslMonLabel">Simulated image</p><span class="ksl-badge" id="kslRealBadge" hidden>Real patient</span><p class="ksl-hr" id="kslHr" role="status"></p></div>' +
       '<div class="ksl-readouts" id="kslReadouts">' +
       [["Rotation", "kslRot"], ["Fan", "kslFan"], ["Rock", "kslRock"], ["Depth", "kslDepth"]].map(function (r) {
         return '<div class="ksl-read"><span>' + r[0] + '</span><strong id="' + r[1] + '">0 deg</strong><span class="ksl-range" id="' + r[1] + 'Range"></span></div>';
       }).join("") + '</div>' +
       '<label class="ksl-depth">Depth <span id="kslDepthVal">16 cm</span><input type="range" id="kslDepthRange" min="8" max="24" step="1" value="16" aria-label="Depth in centimetres"></label>' +
-      '<div class="ksl-result" id="kslResult" hidden></div>' +
-      '<div class="ksl-tut" id="kslTutorial" hidden></div>' +
-      '</section>' +
-      '<section class="ksl-monitor-col" aria-label="Monitor">' +
-      '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
-      '<div class="ksl-monitor-head"><p class="ksl-mon-label" id="kslMonLabel">Simulated image</p><p class="ksl-hr" id="kslHr" role="status"></p></div>' +
-      '<div class="ksl-monitor-wrap" id="kslMonitorWrap">' +
-      '<canvas id="kslMonitor" width="640" height="480" aria-label="Ultrasound monitor"></canvas>' +
-      '<video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video>' +
-      '<span class="ksl-badge" id="kslRealBadge" hidden>Real patient</span>' +
-      '</div>' +
-      '<p class="ksl-note" id="kslClipNote" role="status" hidden></p>' +
       '<details class="ksl-details" id="kslAttrDetails" hidden><summary>Clip details and credits</summary><p class="ksl-note" id="kslAttribution"></p></details>' +
       '<p class="ksl-fps" id="kslFps" role="status"></p>' +
+      '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
+      '</div></div>' +
       '<div class="ksl-pickerbar"><nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
       WINDOWS.map(function (w) { return '<button type="button" class="ksl-chip" data-window="' + w.id + '" id="kslWindow-' + w.id + '" aria-pressed="' + (w.id === activeWindow) + '">' + w.label + '</button>'; }).join("") + '</nav>' +
       '<div class="ksl-views" id="kslViews" role="group" aria-label="Views">' +
       T.VIEWS.map(function (v) {
         return '<button type="button" class="ksl-view" data-view="' + v.id + '" data-win="' + windowForView(v.id) + '" id="kslView-' + v.id + '" aria-pressed="' + (v.id === view.id) + '"><span class="ksl-icon" aria-hidden="true">' + viewIcon(v.id) + '</span><span>' + esc(v.label) + '</span></button>';
-      }).join("") + '</div></div>' +
-      '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
-      '</section></div>';
+      }).join("") + '</div></div></div>';
 
     function el(id) { return doc.getElementById(id); }
-    /* The tutorial sits under the scene as a compact step card, never
-     * over it, so it cannot hide the probe on first open. It stays in
-     * the scene column flow below the depth control. */
-    /* The found view result sits over the monitor, not in the scene
-     * column flow, so scoring a view never shrinks the stage. */
-    try { var res0 = el("kslResult"), monWrap0 = el("kslMonitorWrap"); if (res0 && monWrap0 && monWrap0.appendChild) monWrap0.appendChild(res0); } catch (e) {}
-    /* Same for the offline and empty clip note: over the monitor, so it
-     * never takes height from the sector. */
-    try { var note0 = el("kslClipNote"), monWrap1 = el("kslMonitorWrap"); if (note0 && monWrap1 && monWrap1.appendChild) monWrap1.appendChild(note0); } catch (e) {}
+    /* Round 7: nothing sits over the sector. The score card and the
+     * clip status note live in the underbar under the monitor as slim
+     * rows; the status note clears itself after 2.5 seconds. The left
+     * column holds the scene only, so the stage keeps full height. */
     function setText(id, txt) { var n = el(id); if (n) n.textContent = txt; }
     var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal");
 
@@ -680,19 +683,19 @@
         renderer.setPixelRatio(debug.pixelRatio);
         renderer.setSize(sceneCanvas.clientWidth || 720, sceneCanvas.clientHeight || 620, false);
         if (renderer.outputEncoding !== undefined && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
-        if (renderer.toneMapping !== undefined && THREE.ACESFilmicToneMapping) { renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; }
+        if (renderer.toneMapping !== undefined && THREE.ACESFilmicToneMapping) { renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.18; }
         if (renderer.shadowMap) renderer.shadowMap.enabled = !lowPower;
         camera = new THREE.PerspectiveCamera(36, (sceneCanvas.clientWidth || 720) / (sceneCanvas.clientHeight || 620), 1, 3000);
       }
       scene3 = new THREE.Scene();
       parts = {};
-      if (THREE.Color) scene3.background = new THREE.Color(0x0b1116);
-      if (THREE.Fog) scene3.fog = new THREE.Fog(0x0b1116, 750, 1450);
-      if (THREE.HemisphereLight) scene3.add(new THREE.HemisphereLight(0xdfeaf2, 0x1c1712, 0.5));
-      scene3.add(new THREE.AmbientLight(0xbfd0da, 0.28));
-      var key = new THREE.DirectionalLight(0xfff2e2, 1.35); key.position.set(180, 320, -260); scene3.add(key);
-      var fill = new THREE.DirectionalLight(0x9fb8cc, 0.42); fill.position.set(-260, 120, -140); scene3.add(fill);
-      var rim = new THREE.DirectionalLight(0xcfe6ff, 0.65); rim.position.set(-80, 200, 300); scene3.add(rim);
+      if (THREE.Color) scene3.background = new THREE.Color(0x131b22);
+      if (THREE.Fog) scene3.fog = new THREE.Fog(0x131b22, 750, 1450);
+      if (THREE.HemisphereLight) scene3.add(new THREE.HemisphereLight(0xdfeaf2, 0x1c1712, 0.65));
+      scene3.add(new THREE.AmbientLight(0xbfd0da, 0.35));
+      var key = new THREE.DirectionalLight(0xfff2e2, 1.9); key.position.set(180, 320, -260); scene3.add(key);
+      var fill = new THREE.DirectionalLight(0x9fb8cc, 0.55); fill.position.set(-260, 120, -140); scene3.add(fill);
+      var rim = new THREE.DirectionalLight(0xcfe6ff, 0.8); rim.position.set(-80, 200, 300); scene3.add(rim);
       var grp = new THREE.Group(); scene3.add(grp); parts.root = grp;
       function addMesh(name, mesh, material, filter, renderOrder) {
         if (!mesh) return null;
@@ -701,7 +704,7 @@
         grp.add(m); registered[name] = mesh.vertexCount; debug.meshesRegistered[name] = mesh.vertexCount;
         return m;
       }
-      parts.skin = addMesh("skin", meshes["skin-visible-human-male.glb"], phys({ color: 0xc79a7d, roughness: 0.58, metalness: 0, transparent: true, opacity: 0.2, side: THREE.DoubleSide, depthWrite: false, sheen: 0.6, sheenColor: new THREE.Color(0xd98a6a), emissive: 0x1d0b06, emissiveIntensity: 0.35 }), null, 10);
+      parts.skin = addMesh("skin", meshes["skin-visible-human-male.glb"], phys({ color: 0xd8b096, roughness: 0.58, metalness: 0, transparent: true, opacity: 0.2, side: THREE.DoubleSide, depthWrite: false, sheen: 0.6, sheenColor: new THREE.Color(0xd98a6a), emissive: 0x1d0b06, emissiveIntensity: 0.35 }), null, 10);
       parts.bones = addMesh("bones", meshes["bones-thorax-bodyparts3d.bin.gz"], phys({ color: 0xe9e2cf, roughness: 0.08, metalness: 0, transparent: true, opacity: 0.42, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1.2 }),
         function (x, y, z) { return Math.abs(x) < 230 && y > -120 && y < 180 && z > -120 && z < 260; }, 5);
       parts.heartGroup = new THREE.Group(); parts.heartGroup.name = "heartBeat"; grp.add(parts.heartGroup);
@@ -802,7 +805,7 @@
       var skinM = parts.skin ? parts.skin.material : (parts.skinFallback ? parts.skinFallback.material : null);
       var boneM = parts.bones ? parts.bones.material : null;
       if (layer === "skin") {
-        if (skinM) { skinM.opacity = 0.16; skinM.color.setHex(0x9a7a66); }
+        if (skinM) { skinM.opacity = 0.18; skinM.color.setHex(0xcaa27e); }
         if (boneM) boneM.opacity = 0.7;
         if (parts.heart) parts.heart.material.opacity = 1;
       } else if (layer === "glass") {
@@ -1060,10 +1063,11 @@
         setText("kslMonLabel", "Simulated image");
         if (rcState === "real" && realStatus === "offline" && !offlineNoted) {
           offlineNoted = true;
-          if (note) { note.hidden = false; note.textContent = "You are offline. The real clip for this view is not stored on this device yet, so the simulated image stays on screen."; }
-        } else if (rcState === "real" && realStatus === "empty") {
-          if (note) { note.hidden = false; note.textContent = "No real patient clip for this view yet. The simulated image stays on screen."; }
+          if (note) { note.hidden = false; note.textContent = "You are offline. The real clip for this view is not stored on this device yet, so the simulated image stays on screen."; clipNoteUntil = now + 2500; clipNoteForKey = realKey; }
+        } else if (rcState === "real" && realStatus === "empty" && clipNoteForKey !== realKey) {
+          if (note) { note.hidden = false; note.textContent = "No real patient clip for this view yet. The simulated image stays on screen."; clipNoteUntil = now + 2500; clipNoteForKey = realKey; }
         } else if (note && rcState !== "real") note.hidden = true;
+        if (note && !note.hidden && clipNoteUntil && now > clipNoteUntil) note.hidden = true;
       }
       /* heart beats in sync with the monitor cycle (same heart model
        * drives KARDIA_US and its ECG strip) */
@@ -1086,7 +1090,7 @@
         var cz = Math.cos(orbit.yaw) * Math.cos(orbit.pitch) * orbit.dist;
         var cy = Math.sin(orbit.pitch) * orbit.dist;
         camera.position.set(cx, 40 + cy, cz);
-        camera.lookAt(0, 10, -30);
+        camera.lookAt(0, 25, -35);
         try { renderer.render(scene3, camera); } catch (e) { debug.errors.push("render: " + String(e && e.message || e)); }
         debug.frames++;
         if (renderer.info && renderer.info.render) debug.drawCalls = renderer.info.render.calls || debug.frames;
@@ -1128,7 +1132,7 @@
           pinchDist = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY); drag = { mode: "pinch" }; return;
         }
         var now = Date.now();
-        if (now - lastTapAt < 320) { orbit = { yaw: 2.6, pitch: 0.32, dist: 580 }; lastTapAt = 0; return; }
+        if (now - lastTapAt < 320) { orbit = { yaw: 2.6, pitch: 0.32, dist: 400 }; lastTapAt = 0; return; }
         lastTapAt = now;
         var p = canvasPoint(ev), c = probeScreen();
         var mode = "orbit";
@@ -1199,6 +1203,7 @@
       var vbs = root.querySelectorAll("[data-view]");
       for (var j = 0; j < vbs.length; j++) vbs[j].setAttribute("aria-pressed", vbs[j].getAttribute("data-view") === view.id ? "true" : "false");
       var r = el("kslResult"); if (r) r.hidden = true;
+      var cn = el("kslClipNote"); if (cn) cn.hidden = true; clipNoteUntil = 0;
       applyWindow(); refresh(nowMs());
     }); }
     var viewBtns = root.querySelectorAll("[data-view]");

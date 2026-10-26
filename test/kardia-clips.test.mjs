@@ -83,17 +83,20 @@ test("bundled clips resolve to a local URL that exists in the bundle source", ()
     assert.equal(CLIPS.clipUrl(c, null, "/kardia/"), c.url, c.file + " falls back to its hosted url");
   }
   /* Every Scan Lab view with a bundled clip resolves locally. */
-  for (const view of ["tte_a4c", "tte_psax_mv", "tte_subcostal_4c"]) {
+  for (const view of ["tte_plax", "tte_a4c", "tte_psax_mv", "tte_subcostal_4c"]) {
     const hit = CLIPS.chooseClip(CLIPS.indexClips(credits.clips), { view });
     assert.ok(hit, view + " has a clip");
     assert.ok(CLIPS.localClipUrl(hit, "/kardia/").startsWith("/kardia/media/clips/"), view + " resolves to a bundled local URL, got " + (hit && hit.file));
   }
   const build = readFileSync(new URL("../scripts/build-www.sh", import.meta.url), "utf8");
   assert.ok(build.includes("kardia/media/clips"), "build-www.sh copies the bundled clips into www/");
-  /* PLAX has no bundled clip in this clips job drop: it stays on the
-   * hosted fallback until a de-identified PLAX file is bundled. */
+  /* Round 7: the TOF PLAX sweep (tetralogy-of-fallot-2) is filed under
+   * tte_plax, so PLAX plays from the bundle at target. IVC is the one
+   * Scan Lab view with no bundled clip in the 62-clip set. */
   const plax = CLIPS.chooseClip(CLIPS.indexClips(credits.clips), { view: "tte_plax" });
-  assert.ok(plax && !CLIPS.isBundled(plax), "PLAX is hosted-only in this drop");
+  assert.ok(plax && CLIPS.isBundled(plax), "PLAX resolves to a bundled clip");
+  const ivcBundled = credits.clips.filter((c) => c.view === "tte_subcostal_ivc" && c.localFile);
+  assert.equal(ivcBundled.length, 0, "IVC has no bundled clip in the 62-clip set");
 });
 
 test("pathology lessons map to their pathology clips", () => {
