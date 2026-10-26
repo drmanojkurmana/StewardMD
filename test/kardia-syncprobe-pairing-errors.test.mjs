@@ -17,8 +17,8 @@ const SYNC = require("../kardia-sync.js");
 
 test("failure messages: every reason is specific with one next action", () => {
   const cases = [
-    [{ reason: "sign-in-required" }, /signed out/, /Sign in to pair over the internet/, "sign-in", "Sign in"],
-    [{ message: "Relay session creation failed (401): sign-in required" }, /signed out/, /Sign in to pair over the internet/, "sign-in", "Sign in"],
+    [{ reason: "sign-in-required" }, /does not need sign-in/, /Check the connection on both phones/, "retry", "Try again"],
+    [{ message: "Relay session creation failed (401): sign-in required" }, /does not need sign-in/, /Check the connection on both phones/, "retry", "Try again"],
     [{ reason: "offline" }, /No internet and no Bluetooth/, /Turn on Bluetooth or connect to the internet/, "retry", "Try again"],
     [{ reason: "no-transport" }, /No internet and no Bluetooth/, /./, "retry", "Try again"],
     [{ reason: "relay-unreachable" }, /could not reach the pairing service/, /try again/i, "retry", "Try again"],

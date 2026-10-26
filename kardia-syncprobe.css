@@ -170,6 +170,27 @@
   .krd-sp-glyph-tilt { transition: none; }
   .krd-sp-pill { transition: none; }
 }
+/* Touch probe pad and depth steps: one thumb, 48px targets, transform only. */
+.krd-sp-pad {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-height: 132px; margin-top: 12px; border: 1px solid var(--sp-line); border-radius: 14px;
+  background: var(--sp-s1); color: var(--sp-mut); touch-action: none; user-select: none; -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.krd-sp-pad:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-sp-pad-dot {
+  position: absolute; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--sp-acc); opacity: 0.85; pointer-events: none;
+  transition: transform 100ms var(--kd-ease);
+}
+.krd-sp-pad-label { font-size: 14px; font-weight: 650; pointer-events: none; }
+.krd-sp-depthrow { align-items: center; }
+.krd-sp-depthlabel { flex: 1 1 auto; margin: 0; }
+.krd-sp-step { min-width: 48px; min-height: 48px; flex: 0 0 auto; touch-action: manipulation; }
+@media (prefers-reduced-motion: reduce) {
+  .krd-sp-pad-dot { transition: none; }
+  .krd-sp-syncbtn { transition: none; }
+}
 /* Nearby discovery and one tap join. */
 .krd-sp-nearby { margin-top: 12px; }
 .krd-sp-nearbyitem { margin-top: 8px; min-height: 48px; justify-content: flex-start; text-align: left; overflow-wrap: break-word; }
