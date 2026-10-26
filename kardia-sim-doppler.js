@@ -786,7 +786,7 @@
         }
       }
       /* Velocity axis: ticks, baseline and wall filter gap. */
-      ctx.font = "10px sans-serif"; ctx.fillStyle = "#a3adb3"; ctx.strokeStyle = "rgba(163,173,179,0.35)";
+      ctx.font = "10px 'Inter Variable', system-ui, sans-serif"; ctx.fillStyle = "#a3adb3"; ctx.strokeStyle = "rgba(163,173,179,0.35)";
       labels.ticks.forEach(function (t) {
         var ty = yFor(t.velocityMs);
         ctx.beginPath(); ctx.moveTo(axisW - 4, ty); ctx.lineTo(axisW, ty); ctx.stroke();
@@ -796,9 +796,9 @@
       var y0 = yFor(0);
       ctx.strokeStyle = "#eef3f1"; ctx.beginPath(); ctx.moveTo(axisW, y0); ctx.lineTo(W, y0); ctx.stroke();
       /* Machine style header: mode, sample site, scale and sweep. */
-      ctx.fillStyle = "#eef3f1"; ctx.font = "600 11px sans-serif";
+      ctx.fillStyle = "#eef3f1"; ctx.font = "600 11px 'Inter Variable', system-ui, sans-serif";
       ctx.fillText(labels.title + "  " + labels.site, axisW + 4, 13);
-      ctx.fillStyle = "#a3adb3"; ctx.font = "10px sans-serif";
+      ctx.fillStyle = "#a3adb3"; ctx.font = "10px 'Inter Variable', system-ui, sans-serif";
       ctx.fillText(labels.scaleText + "  " + labels.nyquistText + "  " + labels.sweepText, axisW + 4, 25);
       if (spec.envelopeMs && spec.envelopeMs.length === n) {
         ctx.strokeStyle = "#ffffff"; ctx.beginPath();
@@ -823,7 +823,7 @@
         if (i === 0) ctx.moveTo(ex, ey2); else ctx.lineTo(ex, ey2);
       }
       ctx.stroke();
-      ctx.fillStyle = "#3ee07a"; ctx.font = "10px sans-serif"; ctx.fillText("ECG", 4, H - 6);
+      ctx.fillStyle = "#3ee07a"; ctx.font = "10px 'Inter Variable', system-ui, sans-serif"; ctx.fillText("ECG", 4, H - 6);
       return true;
     }
 
@@ -886,7 +886,7 @@
       ctx.moveTo(box.x, box.y); ctx.lineTo(box.x + box.width, box.y);
       ctx.lineTo(box.x + box.width, box.y + box.height); ctx.lineTo(box.x, box.y + box.height);
       ctx.lineTo(box.x, box.y); ctx.stroke();
-      ctx.fillStyle = "#a3adb3"; ctx.font = "11px sans-serif";
+      ctx.fillStyle = "#a3adb3"; ctx.font = "11px 'Inter Variable', system-ui, sans-serif";
       ctx.fillText("Colour scale " + fmtVel(field.nyquistMs || 0.6) + " to " + fmtVel(-(field.nyquistMs || 0.6)) + " m/s", 8, H - 8);
       return true;
     }

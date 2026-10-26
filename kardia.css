@@ -229,3 +229,8 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-echo-col:has(#krdScanLab .ksl-wrap) #krdLab { display: none; }
 .krd-root .krd-syncbar { flex: 0 0 auto; display: flex; align-items: center; min-height: 0; }
 .krd-root .krd-syncbar .krd-syncpill:empty { display: none; }
+
+/* One font for all of Kardia (owner 2026-10-27): Inter, with Noto Sans
+ * Devanagari for Hindi. Math symbols keep a math font. */
+.krd-root, .krd-root *, .krd-sp, .krd-sp * { font-family: 'Inter Variable', 'Noto Sans Devanagari', -apple-system, system-ui, sans-serif !important; }
+.krd-root math, .krd-root .krd-math { font-family: 'STIX Two Math', 'Cambria Math', math !important; }

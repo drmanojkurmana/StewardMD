@@ -1136,7 +1136,7 @@
     }
     function labelSprite(text, pos) {
       var cv = doc.createElement("canvas"); cv.width = 256; cv.height = 64;
-      var ctx = cv.getContext("2d"); if (ctx) { ctx.font = "600 30px system-ui"; ctx.fillStyle = "#eef3f1"; ctx.fillText(text, 8, 40); }
+      var ctx = cv.getContext("2d"); if (ctx) { ctx.font = "600 30px 'Inter Variable', system-ui, sans-serif"; ctx.fillStyle = "#eef3f1"; ctx.fillText(text, 8, 40); }
       var tex = new THREE.CanvasTexture(cv);
       var sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent: true, depthTest: false }));
       sp.position.set(pos[0], pos[1], pos[2]); sp.scale.set(70, 18, 1); sp.visible = false;

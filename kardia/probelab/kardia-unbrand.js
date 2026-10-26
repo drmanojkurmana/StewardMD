@@ -6,7 +6,9 @@
 (function () {
   "use strict";
   var css = ".site-header,.skip-link,#site-info,dialog#site-info,.site-info,[aria-labelledby=site-info-title],noscript{display:none!important}" +
-    "main{height:100dvh!important;max-height:100dvh!important}body{margin:0}";
+    "main{height:100dvh!important;max-height:100dvh!important}body{margin:0}" +
+    "@font-face{font-family:'Inter Variable';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-variable.woff2) format('woff2')}" +
+    "*:not(math):not([class*=math]){font-family:'Inter Variable',-apple-system,system-ui,sans-serif!important}";
   var st = document.createElement("style"); st.id = "kardiaUnbrand"; st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
   document.title = "Kardia Probe Lab";
