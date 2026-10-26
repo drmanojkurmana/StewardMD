@@ -925,10 +925,22 @@
     fire("pointerup", cx + dx * scale, cy + dy * scale);
     return true;
   }
+  /* The Probe Lab ignores its rotation, fan, rock and depth controls outside
+   * Practice mode (guided views play fixed presets), so a paired probe moved
+   * nothing on the display. Enter Practice before driving it. */
+  function ensureProbeLabPractice(fdoc) {
+    var leave = fdoc.getElementById("leave-practice");
+    if (leave && !leave.hidden) return true;
+    var btn = fdoc.getElementById("practice");
+    if (!btn || btn.disabled) return false;
+    try { btn.click(); } catch (e) { return false; }
+    return true;
+  }
   function driveProbeLab(pose) {
     if (!pose) return false;
     var fdoc = probeLabFrameDoc();
     if (!fdoc) return false;
+    ensureProbeLabPractice(fdoc);
     var any = false;
     if (setProbeLabRange(fdoc, "rotation", pose.rotationDeg)) any = true;
     if (setProbeLabRange(fdoc, "fan", pose.tiltDeg)) any = true;
@@ -1093,6 +1105,9 @@
     }
     var sub = d && d.getElementById("krdSpStateSub");
     if (sub && (S.screen === "probe") && S.probeStep === "active" && name === "connected") {
+      /* The state line was drawn while confirming; keep it in step too. */
+      var line = d.getElementById("krdSpState");
+      if (line && line.textContent !== stateLabel("connected").line) line.textContent = stateLabel("connected").line;
       var st = null;
       try { st = S.core.stats ? S.core.stats() : null; } catch (e) {}
       sub.textContent = "Over " + transportName(S.core.activeTransport && S.core.activeTransport()).toLowerCase() + ", " + fmtLatency(st && st.rttMs);
