@@ -62,9 +62,16 @@
     return null;
   }
 
+  function reasonError(reason, message) {
+    var e = new Error(message || reason);
+    e.reason = reason;
+    e.code = reason;
+    return e;
+  }
+
   function getIdToken(user) {
     if (!user || typeof user.getIdToken !== "function") {
-      return Promise.reject(new Error("Sign-in required"));
+      return Promise.reject(reasonError("sign-in-required", "Sign-in required"));
     }
     return user.getIdToken();
   }
@@ -172,7 +179,7 @@
         if (!settled) {
           settled = true;
           cleanupSocket("connect error");
-          reject(new Error("WebSocket connection error"));
+          reject(reasonError("relay-unreachable", "WebSocket connection error"));
         } else if (handlers && typeof handlers.onError === "function") {
           try {
             handlers.onError(e);
@@ -185,7 +192,7 @@
         if (!settled) {
           settled = true;
           cleanupSocket(reason);
-          reject(new Error("WebSocket closed before open: " + reason));
+          reject(reasonError("relay-unreachable", "WebSocket closed before open: " + reason));
         } else {
           cleanupSocket(reason);
           if (handlers && typeof handlers.onPeerLost === "function") {
@@ -246,7 +253,7 @@
       }
       var user = getFirebaseUser();
       if (!user) {
-        return Promise.reject(new Error("Sign-in required"));
+        return Promise.reject(reasonError("sign-in-required", "Sign-in required"));
       }
 
       var httpUrl = getHttpUrl() + "/sync/session";
@@ -276,13 +283,16 @@
         }).then(function (res) {
           if (!res.ok) {
             return res.text().then(function (txt) {
-              throw new Error("Relay session creation failed (" + res.status + "): " + txt);
+              if (res.status === 401) throw reasonError("sign-in-required", "Sign-in required");
+              throw reasonError("relay-unreachable", "Relay session creation failed (" + res.status + "): " + txt);
             });
           }
           return res.json();
+        }, function (fetchErr) {
+          throw reasonError("relay-unreachable", "Relay session creation failed: " + ((fetchErr && fetchErr.message) || "network error"));
         }).then(function (data) {
           if (!data || !data.roomId || !data.roomToken) {
-            throw new Error("Invalid session response from relay");
+            throw reasonError("relay-unreachable", "Invalid session response from relay");
           }
           // Attach relay credentials to pairing for QR / BLE payload sharing
           pairing.relay = {
@@ -313,7 +323,7 @@
 
       var user = getFirebaseUser();
       if (!user) {
-        return Promise.reject(new Error("Sign-in required"));
+        return Promise.reject(reasonError("sign-in-required", "Sign-in required"));
       }
 
       return getIdToken(user).then(function (token) {

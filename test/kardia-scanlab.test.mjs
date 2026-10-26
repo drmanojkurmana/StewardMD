@@ -186,9 +186,59 @@ test("all 15 view ids and the sc4c alias resolve to a target", () => {
   for (const v of T.VIEWS) assert.equal(T.byView(v.viewId), v, v.viewId);
   assert.equal(T.byId("sc4c").id, "subcostal_4c");
   assert.equal(T.byId("suprasternal").id, "suprasternal_arch");
+  assert.equal(T.byId("ssn").id, "suprasternal_arch");
 });
 
 test("window picker uses the five reference window names", () => {
   assert.deepEqual(P.WINDOWS.map((w) => w.label), ["Parasternal", "Short axis", "Apical", "Subcostal", "Suprasternal"]);
   for (const w of P.WINDOWS) for (const id of w.views) assert.ok(T.byId(id), id);
+});
+
+test("degradation is continuous and vanishes at target", () => {
+  for (const v of T.VIEWS) {
+    const at = { contact: v.contact.slice(), rotationDeg: v.rotationDeg, fanDeg: v.fanDeg, rockDeg: v.rockDeg, depthCm: v.depthCm };
+    const clean = P.degradationFor(at, v);
+    assert.equal(clean.quality, 1, v.id + " quality at target");
+    assert.equal(clean.haze, 0); assert.equal(clean.shadowFrac, 0); assert.equal(clean.blurPx, 0);
+    const small = { contact: [v.contact[0] + 8, v.contact[1], v.contact[2] + 6], rotationDeg: v.rotationDeg + 12, fanDeg: v.fanDeg + 8, rockDeg: v.rockDeg, depthCm: v.depthCm };
+    const large = { contact: [v.contact[0] + 45, v.contact[1], v.contact[2] + 35], rotationDeg: v.rotationDeg + 55, fanDeg: v.fanDeg + 30, rockDeg: v.rockDeg + 20, depthCm: v.depthCm + 4 };
+    const ds = P.degradationFor(small, v), dl = P.degradationFor(large, v);
+    assert.ok(ds.quality < 1 && ds.quality > dl.quality, v.id + " quality falls with error");
+    assert.ok(dl.haze > ds.haze && dl.shadowFrac > ds.shadowFrac && dl.contrast < ds.contrast, v.id + " degradation grows");
+    // continuity: a tiny step changes quality only a tiny amount
+    const step = { ...small, rotationDeg: small.rotationDeg + 1 };
+    assert.ok(Math.abs(P.degradationFor(step, v).quality - ds.quality) < 0.05, v.id + " no hard switch");
+  }
+});
+
+test("window blend crossfades between views of one window", () => {
+  const plax = T.byId("plax"), rvOut = T.byId("rv_outflow");
+  const win = [plax, T.byId("rv_inflow"), rvOut];
+  const atPlax = { contact: plax.contact.slice(), rotationDeg: plax.rotationDeg, fanDeg: plax.fanDeg, rockDeg: plax.rockDeg, depthCm: plax.depthCm };
+  const b0 = P.windowBlend(atPlax, win);
+  assert.equal(b0[0].id, "plax"); assert.ok(b0[0].weight > 0.9, "target view dominates at its pose: " + b0[0].weight);
+  const mid = { contact: [(plax.contact[0] + rvOut.contact[0]) / 2, 60, (plax.contact[2] + rvOut.contact[2]) / 2], rotationDeg: (plax.rotationDeg + rvOut.rotationDeg) / 2, fanDeg: (plax.fanDeg + rvOut.fanDeg) / 2, rockDeg: (plax.rockDeg + rvOut.rockDeg) / 2, depthCm: 15 };
+  const bm = P.windowBlend(mid, win);
+  assert.ok(bm.length === 2 && bm[1].weight > 0.1, "midway pose shares the image: " + JSON.stringify(bm.map((b) => [b.id, b.weight])));
+  assert.ok(Math.abs(bm[0].weight + bm[1].weight - 1) < 1e-9);
+});
+
+test("image metrics reject ring-and-blob but accept textured echo-like frames", () => {
+  const w = 120, h = 90, px = new Uint8ClampedArray(w * h * 4);
+  // ring and blob: flat grey, white ring, black centre
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const i = (y * w + x) * 4, r = Math.hypot(x - w / 2, y - h * 0.52);
+    let v = 110; if (Math.abs(r - Math.min(w, h) * 0.30) < 3) v = 240; else if (r < Math.min(w, h) * 0.30 - 4) v = 8;
+    px[i] = px[i + 1] = px[i + 2] = v; px[i + 3] = 255;
+  }
+  const cartoon = P.imageMetrics(px, w, h);
+  assert.ok(P.isCartoonMetrics(cartoon), "ring-and-blob flagged: " + JSON.stringify(cartoon));
+  // textured frame: deterministic speckle-like variation
+  for (let i = 0; i < w * h; i++) { const v = 30 + ((i * 2654435761 >>> 8) % 160); px[i * 4] = px[i * 4 + 1] = px[i * 4 + 2] = v; px[i * 4 + 3] = 255; }
+  const real = P.imageMetrics(px, w, h);
+  assert.ok(!P.isCartoonMetrics(real), "textured frame passes: " + JSON.stringify(real));
+  const src = fs.readFileSync(new URL("../kardia-scanlab.js", import.meta.url), "utf8");
+  assert.ok(src.includes("kslDegraded") && src.includes("drawDegraded") && src.includes("debugSetPose"), "degraded layer and pose seam present");
+  const css = fs.readFileSync(new URL("../kardia-scanlab.css", import.meta.url), "utf8");
+  assert.ok(/\.ksl-coach\{[^}]*white-space:normal/.test(css), "coaching line wraps");
 });

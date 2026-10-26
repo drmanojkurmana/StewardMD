@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "dims": [
+    160,
+    160,
+    160
+  ],
+  "min": [
+    -88,
+    -80,
+    -88
+  ],
+  "step": [
+    1.1069182389937107,
+    1.0314465408805031,
+    1.1069182389937107
+  ],
+  "cols": 13,
+  "rows": 13,
+  "labels": {
+    "OUTSIDE": 0,
+    "BLOOD": 1,
+    "MYOCARDIUM": 2,
+    "VALVE": 3,
+    "PERICARDIUM": 4,
+    "FAT": 5,
+    "LIVER": 6,
+    "LUNG": 7,
+    "BONE": 8
+  },
+  "tissue": [
+    {
+      "name": "outside",
+      "echo": 0.03,
+      "atten": 0.12,
+      "spec": 0
+    },
+    {
+      "name": "blood",
+      "echo": 0.06,
+      "atten": 0.18,
+      "spec": 0
+    },
+    {
+      "name": "myocardium",
+      "echo": 0.48,
+      "atten": 0.75,
+      "spec": 0.08
+    },
+    {
+      "name": "valve",
+      "echo": 0.88,
+      "atten": 1.05,
+      "spec": 0.85
+    },
+    {
+      "name": "pericardium",
+      "echo": 0.96,
+      "atten": 1.15,
+      "spec": 1
+    },
+    {
+      "name": "fat",
+      "echo": 0.22,
+      "atten": 0.65,
+      "spec": 0.05
+    },
+    {
+      "name": "liver",
+      "echo": 0.4,
+      "atten": 0.8,
+      "spec": 0.12
+    },
+    {
+      "name": "lung",
+      "echo": 0.62,
+      "atten": 3.8,
+      "spec": 0.55
+    },
+    {
+      "name": "bone",
+      "echo": 0.92,
+      "atten": 4.2,
+      "spec": 0.75
+    }
+  ],
+  "files": [
+    {
+      "name": "volume-atlas-0.png",
+      "bytes": 651020,
+      "width": 2080,
+      "height": 960
+    },
+    {
+      "name": "volume-atlas-1.png",
+      "bytes": 503776,
+      "width": 2080,
+      "height": 1120
+    }
+  ],
+  "totalBytes": 1154796,
+  "provenance": "Independent analytic voxelisation registered to HuBMAP heart and liver proportions (CC BY 4.0 assets in kardia/media/k2-assets). No third party code or shader reused."
+}

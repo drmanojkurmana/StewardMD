@@ -1,0 +1,84 @@
+/* Kardia premium layer: one spacing scale, one type scale, consistent
+ * radii, onboarding, offline banner, skeleton and tab transitions.
+ * Design contract: work/review/premium-inventory.md. Tokens map from
+ * the incumbent Kardia tokens in kardia.css; no new palette. The scan
+ * surround (sector, monitor, scene) stays dark in both themes. */
+.krd-root {
+  --kd-sp-1: 4px; --kd-sp-2: 8px; --kd-sp-3: 12px; --kd-sp-4: 16px; --kd-sp-5: 24px; --kd-sp-6: 32px;
+  --kd-fs-1: 12px; --kd-fs-2: 13px; --kd-fs-3: 14px; --kd-fs-4: 15px; --kd-fs-5: 17px; --kd-fs-6: 20px; --kd-fs-7: 28px;
+  --kd-r-s: 8px; --kd-r-m: 12px; --kd-r-l: 16px; --kd-r-pill: 999px;
+  --kd-dur: 180ms;
+}
+/* Consistent radii on the shared Kardia controls. */
+.krd-root .krd-chip, .krd-root .kel-mode, .krd-root .ksl-chip, .krd-root .ksl-btn { border-radius: var(--kd-r-m); }
+.krd-root .krd-knobs, .krd-root .krd-chest, .krd-root .krd-strip, .krd-root .krd-note { border-radius: var(--kd-r-m); }
+.krd-root .ksl-stage, .krd-root .ksl-monitor-wrap, .krd-root .krd-sector-wrap canvas { border-radius: var(--kd-r-m); }
+/* Every Kardia control keeps a 44px target and press feedback. */
+.krd-root button, .krd-root select, .krd-root input[type="range"] { min-height: 44px; touch-action: manipulation; }
+.krd-root input[type="text"], .krd-root input[type="search"], .krd-root .kc-in { font-size: 16px; }
+/* Scan surround always dark, in light theme too. */
+.krd-root .ksl-monitor-wrap, .krd-root .ksl-stage, .krd-root #kslScene, .krd-root #kslMonitor,
+.krd-root .krd-sector-wrap canvas, .krd-root #krdSector { background: #000; }
+/* Tab content transition: opacity and a small rise, from the visible
+ * default, interruptible because each paint is a fresh element.
+ * Purpose: state indication, showing the new tab replaced the old. */
+.krd-root .sp-scroll { animation: krdPremiumIn var(--kd-dur) var(--kd-ease); }
+@keyframes krdPremiumIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+/* Skeleton: the shape of the screen before the first frame, so the
+ * first useful paint is fast and nothing shifts when content lands. */
+.krd-skel { display: block; border-radius: var(--kd-r-m); background: var(--sp-s2); min-height: 44px; margin-top: var(--kd-sp-3); }
+.krd-skel.sector { aspect-ratio: 4 / 3; }
+.krd-skel.line { min-height: 18px; max-width: 70%; }
+.krd-skel-wrap { margin-top: var(--kd-sp-3); }
+.krd-skel-wrap .sp-mut { margin: 0 0 var(--kd-sp-2); }
+/* Offline banner: sits at the top of the root, wraps, never clipped. */
+.krd-offline { display: flex; gap: var(--kd-sp-3); align-items: center; flex-wrap: wrap; flex: 0 0 auto;
+  margin: var(--kd-sp-3) var(--kd-sp-4) 0; padding: var(--kd-sp-3) var(--kd-sp-4);
+  border: 1px solid var(--sp-line); border-radius: var(--kd-r-m); background: var(--sp-s1);
+  color: var(--sp-text); font-size: var(--kd-fs-3); line-height: 1.45; }
+.krd-offline span { flex: 1 1 220px; overflow-wrap: break-word; }
+.krd-offline .sp-btn { min-height: 44px; flex: 0 0 auto; }
+/* First-run onboarding: a card over the root, operable by touch and
+ * keyboard, safe area respected, long text wraps. */
+.krd-onb { position: absolute; inset: 0; z-index: var(--krd-z-onb, 940); display: flex; align-items: flex-end;
+  justify-content: center; padding: var(--kd-sp-4); padding-bottom: calc(var(--kd-sp-4) + env(safe-area-inset-bottom, 0px));
+  background: rgba(0, 0, 0, 0.45); }
+.krd-onb-card { width: 100%; max-width: 560px; max-height: 92dvh; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--sp-bg); color: var(--sp-text); border: 1px solid var(--sp-line);
+  border-radius: var(--kd-r-l); padding: var(--kd-sp-5);
+  animation: krdOnbIn 200ms var(--kd-ease); }
+@keyframes krdOnbIn { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+.krd-onb-step { margin: 0; font-size: var(--kd-fs-2); font-weight: 650; color: var(--sp-mut); }
+.krd-onb-card h2 { margin: var(--kd-sp-2) 0 0; font-size: var(--kd-fs-6); line-height: 1.25; letter-spacing: -0.01em; overflow-wrap: break-word; }
+.krd-onb-body { margin: var(--kd-sp-2) 0 0; font-size: var(--kd-fs-4); line-height: 1.55; overflow-wrap: break-word; }
+.krd-onb-dots { display: flex; gap: var(--kd-sp-2); margin-top: var(--kd-sp-4); }
+.krd-onb-dot { width: 8px; height: 8px; border-radius: var(--kd-r-pill); background: var(--sp-s3); }
+.krd-onb-dot.on { background: var(--sp-acc); }
+.krd-onb-row { display: flex; gap: var(--kd-sp-2); flex-wrap: wrap; margin-top: var(--kd-sp-4); }
+.krd-onb-row .sp-btn { min-height: 44px; flex: 1 1 120px; }
+.krd-onb-note { margin: var(--kd-sp-3) 0 0; font-size: var(--kd-fs-2); line-height: 1.45; color: var(--sp-mut); overflow-wrap: break-word; }
+/* Full coverage: the overlay must hide the page behind it on every
+ * size, including the safe areas. The engine root is fixed at inset 0,
+ * but kardia.css also sets height 100dvh on it, which over-constrains
+ * the fixed box (top plus height win, bottom is ignored) and can leave
+ * a band of the home page showing at the bottom on smaller phones.
+ * Premium loads last, so this restores the stretched fixed box. */
+.krd-root { position: fixed; inset: 0; top: 0; right: 0; bottom: 0; left: 0;
+  height: auto; max-height: none; min-height: 100dvh; background: var(--sp-bg); }
+/* Narrow phones: the strip stays a horizontal scroller with real gaps
+ * and a right edge fade, so Calculators and KardiQ X never overlap at
+ * 375 pt, 402 pt or 440 pt. The active tab scrolls into view. */
+@media (max-width: 430px) {
+  .krd-root .krd-tabs { gap: 16px; padding: 8px 16px 12px; overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x proximity; -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%); }
+  .krd-root .krd-tab { flex: 0 0 auto; min-width: 0; padding: 10px 9px; font-size: 15px;
+    letter-spacing: 0; text-align: left; white-space: nowrap; overflow: visible; text-overflow: clip; }
+}
+/* Small and large phones and iPad: the card never leaves the screen. */
+@media (min-width: 820px) { .krd-onb { align-items: center; } }
+@media (max-width: 374px) { .krd-onb-card { padding: var(--kd-sp-4); } }
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .sp-scroll, .krd-onb-card { animation: none; }
+  .krd-skel { transition: none; }
+}

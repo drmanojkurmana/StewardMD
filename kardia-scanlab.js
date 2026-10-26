@@ -6,8 +6,12 @@
  * web-design-guidelines: focus rings, contrast, 390px and 820px):
  * purpose: find the target echo view by moving a real 3D probe on a WebGL
  * body, with live coaching above the monitor, readouts, and a monitor that
- * shows the KARDIA_US simulated cut off target and the real patient clip
- * on target. Round 7 layout: iPad landscape holds the scene and the
+ * shows real patient anatomy at every pose: the nearest bundled clips
+ * for the window, crossfaded by pose and degraded continuously by the
+ * pose error (shadow, dropout, haze, rotation, foreshortening), so the
+ * image sharpens into the clean clip at target with no switch. The
+ * KARDIA_US simulated cut stays underneath for Doppler and as the
+ * fallback when no clip exists for a window. Round 7 layout: iPad landscape holds the scene and the
  * monitor side by side at the same height in one grid row, the left
  * column holds the scene only, and the coaching line, readouts, depth
  * slider, score row and picker sit in an underbar under the monitor so
@@ -21,6 +25,17 @@
  * long text (names, coaching and attribution wrap), reduced motion
  * (springs and crossfade instant), low power (merged geometry, no
  * shadows, pixel ratio capped). British spelling; no em or en dashes.
+ * Round 8: SyncProbe restored in the scene corner controls and in the
+ * last tutorial step, with its status pill above the monitor. Phone
+ * first screen is scene and monitor only: the coaching line sits on
+ * the scene and wraps without cutting words, the view picker stays
+ * pinned at the bottom of the viewport, and readouts plus depth sit
+ * in a collapsible row so no inner scroll is needed to scan. Probe
+ * handles keep 44 px hit areas with a visible ring. The fps line is
+ * debug only. The first pose starts close to the PLAX target, inside
+ * the coached range, so the first image already looks like a heart.
+ * States: loading, ready, error with retry, offline note, empty clip
+ * note, long text wraps, reduced motion, light and dark.
  */
 (function (G) {
   "use strict";
@@ -41,14 +56,103 @@
   }
   function poseError(pose, target) {
     if (!pose || !target) return null;
+    var dx = (target.contact[0] || 0) - (pose.contact ? pose.contact[0] : 0);
+    var dz = (target.contact[2] || 0) - (pose.contact ? pose.contact[2] : 0);
     return {
       rotationDeg: wrapDeg((target.rotationDeg || 0) - (pose.rotationDeg || 0)),
       fanDeg: (target.fanDeg || 0) - (pose.fanDeg || 0),
       rockDeg: (target.rockDeg || 0) - (pose.rockDeg || 0),
-      slideMm: Math.sqrt(Math.pow((target.contact[0] || 0) - (pose.contact ? pose.contact[0] : 0), 2) +
-        Math.pow((target.contact[2] || 0) - (pose.contact ? pose.contact[2] : 0), 2)),
+      slideMm: Math.sqrt(dx * dx + dz * dz),
+      slideDxMm: dx, slideDzMm: dz,
       depthCm: (target.depthCm || 16) - (pose.depthCm || 16)
     };
+  }
+  /* Normalised pose distance: 0 at the target pose, about 0.3 for a
+   * small miss, above 1 for a large miss. Continuous in every axis. */
+  function poseDistance(pose, target) {
+    var e = poseError(pose, target); if (!e) return 99;
+    var s = e.slideMm / 42, a = Math.sqrt(e.rotationDeg * e.rotationDeg + e.fanDeg * e.fanDeg + e.rockDeg * e.rockDeg) / 48, d = Math.abs(e.depthCm) / 6;
+    return Math.sqrt(s * s + a * a + d * d);
+  }
+  /* How a real scan degrades with pose error. Every field is a
+   * continuous function of the error, so the image sharpens smoothly
+   * into the clean clip at target with no switch point. */
+  function degradationFor(pose, target) {
+    var e = poseError(pose, target);
+    if (!e || !target) return { quality: 0, contrast: 0.6, brightness: 0.85, haze: 0.4, blurPx: 2.5, rotationDeg: 0, foreshorten: 0.85, offsetXFrac: 0, offsetYFrac: 0, shadowFrac: 0.45, shadowSide: 1, shadowAngleRad: 0.38, shadowWidthRad: 0.2, ribDepthFrac: 0.2, dropoutAngleRad: -0.3, dropoutWidthRad: 0.15, gainLoss: 0.42, dropoutFrac: 0.3, dropoutY: 0.5, error: 2 };
+    var dist = poseDistance(pose, target);
+    var quality = 1 / (1 + dist * 1.7);
+    var bad = 1 - quality;
+    return {
+      quality: quality, error: dist,
+      contrast: 0.68 + 0.32 * quality,
+      brightness: 1 - bad * 0.10,
+      haze: bad * 0.34,
+      blurPx: bad * 1.2,
+      rotationDeg: clamp(-e.rotationDeg * 0.22, -10, 10),
+      foreshorten: clamp(1 - Math.abs(e.fanDeg) / 300, 0.88, 1),
+      offsetXFrac: clamp((e.slideDxMm || 0) / 380 + e.rockDeg / 420, -0.16, 0.16),
+      offsetYFrac: clamp((e.slideDzMm || 0) / 460 - e.fanDeg / 380, -0.13, 0.13),
+      shadowFrac: bad * 0.55,
+      shadowSide: (e.slideDxMm || 0) >= 0 ? 1 : -1,
+      /* Physical degradation geometry, all in fixed sector space
+       * (angles from the centre beam, depths as fractions of the
+       * sector radius): a rib shadow starts at the bright rib surface
+       * and runs radially out; dropout is a narrow beam-line wedge;
+       * gain falls with depth. None of these move the sector. */
+      shadowAngleRad: ((e.slideDxMm || 0) >= 0 ? 1 : -1) * 0.38,
+      shadowWidthRad: 0.10 + bad * 0.10,
+      ribDepthFrac: 0.20,
+      dropoutAngleRad: -((e.slideDxMm || 0) >= 0 ? 1 : -1) * 0.30,
+      dropoutWidthRad: 0.07 + bad * 0.08,
+      gainLoss: bad * 0.30,
+      dropoutFrac: bad * 0.5,
+      dropoutY: 0.35 + 0.3 * (0.5 + 0.5 * Math.sin((e.slideMm || 0) * 0.11))
+    };
+  }
+  /* Crossfade weights between views of one window for a pose: the two
+   * nearest targets share the image, weights sum to 1, and the target
+   * view takes all of it at its own pose. Tilting or rotating from one
+   * view toward the next therefore moves the picture continuously. */
+  function windowBlend(pose, targets) {
+    if (!targets || !targets.length) return [];
+    var scored = targets.map(function (t) { var d = poseDistance(pose, t); return { id: t.id, viewId: t.viewId, target: t, distance: d, raw: Math.exp(-(d * d) / (2 * 0.22 * 0.22)) }; });
+    scored.sort(function (a, b) { return a.distance - b.distance; });
+    var top = scored.slice(0, 2), sum = 0, i;
+    for (i = 0; i < top.length; i++) sum += top[i].raw;
+    if (!(sum > 0)) { top[0].weight = 1; if (top[1]) top[1].weight = 0; return top; }
+    for (i = 0; i < top.length; i++) top[i].weight = top[i].raw / sum;
+    return top;
+  }
+  /* Ring-and-blob detector for still captures (used by the realism QC
+   * and unit tests): a bright thin ring around a dark blob on flat
+   * noise has a high ring score and low local variance. Real echo
+   * frames have broad local variance and no such ring. */
+  function imageMetrics(px, w, h) {
+    if (!px || !w || !h) return { localVariance: 0, mean: 0, blackFrac: 1, ringScore: 0 };
+    var n = w * h, sum = 0, i, x, y;
+    var lum = new Float32Array(n);
+    for (i = 0; i < n; i++) { lum[i] = (px[i * 4] + px[i * 4 + 1] + px[i * 4 + 2]) / 3; sum += lum[i]; }
+    var mean = sum / n, black = 0, varSum = 0, cnt = 0;
+    for (i = 0; i < n; i++) if (lum[i] < 12) black++;
+    for (y = 2; y < h - 2; y += 3) for (x = 2; x < w - 2; x += 3) {
+      var c = lum[y * w + x], d = (Math.abs(c - lum[y * w + x + 2]) + Math.abs(c - lum[(y + 2) * w + x])) / 2;
+      varSum += d; cnt++;
+    }
+    var localVariance = cnt ? varSum / cnt : 0;
+    /* Ring score: brightness on a centred circle against its inside. */
+    var cx = w / 2, cy = h * 0.52, R = Math.min(w, h) * 0.30, ring = 0, ringN = 0, inside = 0, insideN = 0;
+    for (y = 0; y < h; y += 2) for (x = 0; x < w; x += 2) {
+      var rr = Math.sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
+      if (Math.abs(rr - R) < 5) { ring += lum[y * w + x]; ringN++; }
+      else if (rr < R - 12) { inside += lum[y * w + x]; insideN++; }
+    }
+    var ringScore = ringN && insideN ? ((ring / ringN) - (inside / insideN)) / 255 : 0;
+    return { localVariance: localVariance, mean: mean, blackFrac: black / n, ringScore: ringScore };
+  }
+  function isCartoonMetrics(m) {
+    if (!m) return true;
+    return m.localVariance < 1.5 || m.blackFrac > 0.92 || m.ringScore > 0.45;
   }
   function withinTolerance(err, target) {
     if (!err || !target) return false;
@@ -282,6 +386,95 @@
     var normal = norm3(cross3(marker, beam));
     return { origin: origin, normal: normal, up: mul3(beam, -1), beam: beam, marker: marker };
   }
+  /* Scan Lab patient mm and the K3 volume both claim x-left, y-anterior,
+   * z-cranial, millimetres, origin near the LV centroid, but they do not
+   * coincide: Scan Lab contacts sit on the HuBMAP / Visible Human skin,
+   * while volume VIEWS origins sit on the compact ellipsoid "chest". A
+   * single offset + signed-permutation + scale leaves apical and
+   * subcostal windows outside the volume (fit RMS ~45 mm). Each Scan Lab
+   * target is therefore rigidly mapped onto its round-1 volume VIEWS
+   * pose: identity axis order, scale 1 on contact deltas, origin offset
+   * = volumeOrigin - R * scanLabContact, with R the basis map from the
+   * parent window's Scan Lab probe (beam = -views.json up, up = normal)
+   * onto VIEWS[parent]. Sibling views (A5C from A4C, PSAX PM from MV)
+   * share the parent R so fan/rock/slide stay continuous. */
+  var SIM_VOL_SCALE = 1;
+  var SIM_VOL_HOME = {
+    plax: { vol: "plax", sl: "plax" },
+    rv_inflow: { vol: "plax", sl: "plax" },
+    rv_outflow: { vol: "plax", sl: "plax" },
+    psax_av: { vol: "psax_av", sl: "psax_av" },
+    psax_mv: { vol: "psax_mv", sl: "psax_mv" },
+    psax_pm: { vol: "psax_mv", sl: "psax_mv" },
+    psax_apex: { vol: "psax_mv", sl: "psax_mv" },
+    a4c: { vol: "a4c", sl: "a4c" },
+    a5c: { vol: "a4c", sl: "a4c" },
+    a2c: { vol: "a2c", sl: "a2c" },
+    a3c: { vol: "a2c", sl: "a2c" },
+    subcostal_4c: { vol: "subcostal_4c", sl: "subcostal_4c" },
+    ivc: { vol: "subcostal_4c", sl: "subcostal_4c" },
+    abdominal_aorta: { vol: "subcostal_4c", sl: "subcostal_4c" },
+    suprasternal_arch: { vol: "suprasternal", sl: "suprasternal_arch" }
+  };
+  var SIM_SL_PROBE = {
+    plax: { normal: [1, 0, 0], up: [0, 0.9507, 0.3102] },
+    rv_inflow: { normal: [0.9707, 0.2402, 0], up: [-0.2402, 0.9707, 0] },
+    rv_outflow: { normal: [0.9707, -0.2402, 0], up: [0.2402, 0.9707, 0] },
+    psax_av: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    psax_mv: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    psax_pm: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    psax_apex: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    a4c: { normal: [0.6891, 0.6434, 0.3333], up: [0.2122, 0.2606, -0.9418] },
+    a5c: { normal: [0.9755, 0.0018, 0.2198], up: [0.2198, 0.0004, -0.9755] },
+    a2c: { normal: [0.0366, 0.9758, -0.2156], up: [-0.0216, -0.2149, -0.9764] },
+    a3c: { normal: [0.7828, -0.5629, 0.2651], up: [0.2152, -0.1548, -0.9642] },
+    subcostal_4c: { normal: [0.5957, 0.7132, 0.3695], up: [-0.2369, -0.2836, 0.9292] },
+    ivc: { normal: [0.0359, -0.9982, 0.048], up: [-0.0137, 0.0476, 0.9988] },
+    abdominal_aorta: { normal: [1, 0, 0], up: [0, -0.3102, 0.9507] },
+    suprasternal_arch: { normal: [1, 0, 0], up: [0, 0.3102, 0.9507] }
+  };
+  function simBasis(beam, upIn) {
+    var beamN = norm3(beam || [0, -1, 0]);
+    var right = cross3(beamN, norm3(upIn || [0, 0, 1]));
+    if (Math.sqrt(dot3(right, right)) < 0.04) right = cross3(beamN, [1, 0, 0]);
+    right = norm3(right);
+    return { beam: beamN, right: right, up: norm3(cross3(right, beamN)) };
+  }
+  function simMapVec(v, from, to) {
+    var vb = dot3(v, from.beam), vu = dot3(v, from.up), vr = dot3(v, from.right);
+    return [
+      to.beam[0] * vb + to.up[0] * vu + to.right[0] * vr,
+      to.beam[1] * vb + to.up[1] * vu + to.right[1] * vr,
+      to.beam[2] * vb + to.up[2] * vu + to.right[2] * vr
+    ];
+  }
+  /* Sim image zoom and gain: the K3 volume is rendered at depth / SIM_ZOOM so the heart fills the sector like the round 1 reference renders. */
+  var SIM_ZOOM = 1.8, SIM_GAIN = 1.6;
+  function simPoseFromScanlab(pose, plane, view, volApi, targetsApi) {
+    var contact = (pose && pose.contact) || (plane && plane.origin) || [0, 60, 20];
+    var slBeam = plane && plane.beam ? plane.beam : (plane && plane.up ? mul3(plane.up, -1) : [0, -1, 0]);
+    var slUp = plane && plane.normal ? plane.normal : [0, 1, 0];
+    var views = volApi && volApi.VIEWS;
+    if (!views || !view) return { origin: contact.slice(), beam: slBeam.slice(), up: slUp.slice() };
+    var home = SIM_VOL_HOME[view.id] || SIM_VOL_HOME.plax;
+    var vol = views[home.vol] || views.plax;
+    var parent = targetsApi && targetsApi.byId ? targetsApi.byId(home.sl) : null;
+    var parentContact = parent && parent.contact ? parent.contact : (view.contact || contact);
+    var probe = SIM_SL_PROBE[home.sl] || SIM_SL_PROBE.plax;
+    var slFrom = simBasis(mul3(probe.up, -1), probe.normal);
+    var volPl = volApi.poseToPlane ? volApi.poseToPlane(vol) : simBasis(vol.beam, vol.up);
+    var volTo = { beam: volPl.beam, up: volPl.up, right: volPl.right };
+    /* Origins stay in patient xyz (same axis order, scale 1): a slide
+     * toward the apex on the body moves the cut toward the apex. Beam
+     * and up go through R so the sector matches the round-1 VIEWS
+     * image, including the subcostal beam sign flip. */
+    var dContact = mul3(sub3(contact, parentContact), SIM_VOL_SCALE);
+    return {
+      origin: add3(vol.origin, dContact),
+      beam: simMapVec(slBeam, slFrom, volTo),
+      up: simMapVec(slUp, slFrom, volTo)
+    };
+  }
   function ptTriDist(p, a, b, c) {
     var ab = sub3(b, a), ac = sub3(c, a), ap = sub3(p, a);
     var d1 = dot3(ab, ap), d2 = dot3(ac, ap);
@@ -420,16 +613,83 @@
     });
   }
 
-  var PURE = { clamp: clamp, wrapDeg: wrapDeg, poseError: poseError, withinTolerance: withinTolerance,
+  /* Cine / Sim switch: Cine is the real patient clip (degraded off
+   * target, clean at target); Sim is the live K3 volume B-mode along
+   * the probe plane. Remembered per device, default Cine. */
+  var CINE_SIM_KEY = "ksl_cine_sim_mode";
+  var SIM_FILES = ["kardia-sim-volume.js", "kardia-sim-bmode-gl.js", "kardia-probe-model.js"];
+  function normalizeCineSimMode(v) { return v === "sim" ? "sim" : "cine"; }
+  function loadCineSimMode(storage) {
+    try { return normalizeCineSimMode(storage && storage.getItem ? storage.getItem(CINE_SIM_KEY) : null); } catch (e) { return "cine"; }
+  }
+  function saveCineSimMode(storage, mode) {
+    var m = normalizeCineSimMode(mode);
+    try { if (storage && storage.setItem) storage.setItem(CINE_SIM_KEY, m); } catch (e) {}
+    return m;
+  }
+  /* Pose for the K3 B-mode renderer: origin is the probe contact point
+   * on the skin, beam is minus the plane up vector, up is the plane
+   * normal (elevation). Passing the plane up as the pose up would make
+   * the renderer's right vector zero and collapse the image. */
+  function simPoseFromPlane(plane, contact) {
+    if (!plane || !plane.origin) return null;
+    var origin = (contact && contact.slice ? contact.slice() : plane.origin.slice());
+    var up = plane.up || [0, -1, 0];
+    var beam = [0 - (up[0] || 0), 0 - (up[1] || 0), 0 - (up[2] || 0)];
+    return { origin: origin, beam: beam, up: (plane.normal || plane.up || [0, 0, 1]).slice() };
+  }
+  /* Atlas loading for the K3 renderer: the prebuilt PNG atlas in
+   * kardia/media/k3-volume/ (fast on a phone) instead of the slow
+   * procedural volume build and pack path. Resolves with the atlas. */
+  var SIM_ATLAS_BASE = "/kardia/media/k3-volume/";
+  function loadSimAtlas(volumeApi, baseUrl) {
+    return new Promise(function (res, rej) {
+      if (!volumeApi || !volumeApi.loadAtlas) { rej(new Error("sim atlas loader is not available")); return; }
+      volumeApi.loadAtlas(baseUrl || SIM_ATLAS_BASE, function (err, atlas) {
+        if (err || !atlas) rej(err || new Error("atlas"));
+        else res(atlas);
+      });
+    });
+  }
+  function simPhaseFromHeart(hs, now) {
+    if (hs && hs.cycleMs) return ((hs.cycleTimeMs || 0) / hs.cycleMs) % 1;
+    return ((now || 0) / 857) % 1;
+  }
+  /* Lazy Sim loader: files load only on first Sim choice, once. */
+  function createSimLazyLoader(deps) {
+    deps = deps || {};
+    var state = "idle", promise = null;
+    function ensure() {
+      if (deps.hasSim && deps.hasSim()) { state = "ready"; return Promise.resolve(true); }
+      if (promise) return promise;
+      state = "loading";
+      var load = deps.loadFiles ? deps.loadFiles() : Promise.reject(new Error("Simulation files are not available"));
+      promise = Promise.resolve(load).then(function () {
+        if (deps.hasSim && deps.hasSim()) { state = "ready"; return true; }
+        state = "error"; promise = null; return false;
+      }, function () { state = "error"; promise = null; return false; });
+      return promise;
+    }
+    return { ensure: ensure, state: function () { return state; } };
+  }
+
+  var PURE = { clamp: clamp, wrapDeg: wrapDeg, poseError: poseError, poseDistance: poseDistance, degradationFor: degradationFor, windowBlend: windowBlend, imageMetrics: imageMetrics, isCartoonMetrics: isCartoonMetrics, withinTolerance: withinTolerance,
+    CINE_SIM_KEY: CINE_SIM_KEY, SIM_FILES: SIM_FILES, SIM_ATLAS_BASE: SIM_ATLAS_BASE, normalizeCineSimMode: normalizeCineSimMode, loadCineSimMode: loadCineSimMode, saveCineSimMode: saveCineSimMode, simPoseFromPlane: simPoseFromPlane, simPhaseFromHeart: simPhaseFromHeart, loadSimAtlas: loadSimAtlas, createSimLazyLoader: createSimLazyLoader,
     coachText: coachText, createCoach: createCoach, scoreAttempt: scoreAttempt, springStep: springStep, TUTORIAL: TUTORIAL,
     BODY_CREDITS: BODY_CREDITS, bodyCreditsHtml: bodyCreditsHtml, assetCandidates: assetCandidates, assetFileUrl: assetFileUrl,
     registerPoint: registerPoint, parseGlb: parseGlb, cutTriangles: cutTriangles, HUBMAP_CENTRE: HUBMAP_CENTRE,
     sha256Hex: sha256Hex, ATLAS_CHUNKS: ATLAS_CHUNKS, ATLAS_ORG: ATLAS_ORG, parseAtlasChunk: parseAtlasChunk,
-    planeFromPose: planeFromPose, skinDistanceMm: skinDistanceMm, inLandmark: inLandmark, heartBeatScale: heartBeatScale, HEART_VESSELS: HEART_VESSELS, WINDOWS: WINDOWS, windowForView: windowForView, viewIcon: viewIcon, loadAssets: loadAssets };
+    planeFromPose: planeFromPose, simPoseFromScanlab: simPoseFromScanlab, SIM_VOL_HOME: SIM_VOL_HOME, SIM_VOL_SCALE: SIM_VOL_SCALE, SIM_SL_PROBE: SIM_SL_PROBE, SIM_ZOOM: SIM_ZOOM, SIM_GAIN: SIM_GAIN,
+    skinDistanceMm: skinDistanceMm, inLandmark: inLandmark, heartBeatScale: heartBeatScale, HEART_VESSELS: HEART_VESSELS, WINDOWS: WINDOWS, windowForView: windowForView, viewIcon: viewIcon, loadAssets: loadAssets };
 
   /* ---------------- browser UI ---------------- */
   function haptic(kind) {
     try {
+      if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.haptic) {
+        if (kind === "MEDIUM") { G.KARDIA_PREMIUM.haptic("success"); return; }
+        if (kind === "SELECTION") { G.KARDIA_PREMIUM.haptic("selection"); return; }
+        G.KARDIA_PREMIUM.haptic("light"); return;
+      }
       var H = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Haptics;
       if (H && H.impact) H.impact({ style: kind || "LIGHT" });
       else if (G.SMD_HAPTICS && G.SMD_HAPTICS.tap) G.SMD_HAPTICS.tap();
@@ -469,10 +729,20 @@
     var fetchImpl = opts.fetch || (G.fetch ? G.fetch.bind(G) : null);
     var rafImpl = opts.raf || (G.requestAnimationFrame ? G.requestAnimationFrame.bind(G) : function (fn) { return setTimeout(function () { fn((G.performance && G.performance.now) ? G.performance.now() : Date.now()); }, 16); });
     var cancelRaf = opts.cancelRaf || (G.cancelAnimationFrame ? G.cancelAnimationFrame.bind(G) : clearTimeout);
-    var view = T.VIEWS[0], activeWindow = windowForView(view.id), layer = "skin", showLabels = false;
+    var view = T.byId("plax") || T.VIEWS[0], activeWindow = windowForView(view.id), layer = "skin", showLabels = false;
     var pathology = opts.pathology || null;
-    var pose = { contact: [-30, 95, 70], rotationDeg: 40, fanDeg: 0, rockDeg: 0, depthCm: 16 };
-    var orbit = { yaw: 2.6, pitch: 0.32, dist: 700 };
+    var showDebug = !!opts.debug;
+    if (!showDebug) try { showDebug = /[?&]debug([=&]|$)/.test(String(G.location && G.location.search || "")); } catch (e) {}
+    /* First open: close to the PLAX target and inside its tolerance, so
+     * the first image already looks like a heart. The small offset keeps
+     * one coaching step for the learner to make. */
+    var pose = { contact: [view.contact[0] - 4, view.contact[1], view.contact[2] + 3], rotationDeg: view.rotationDeg - 5, fanDeg: view.fanDeg + 4, rockDeg: view.rockDeg + 3, depthCm: view.depthCm };
+    /* Home framing: a little closer on the left chest than the old
+     * whole torso shot, so the probe and heart read clearly. The
+     * look target below is raised with it, so the neck stays in
+     * frame and only the lower torso leaves the shot. */
+    var HOME_ORBIT = { yaw: 2.6, pitch: 0.32, dist: 600 };
+    var orbit = { yaw: HOME_ORBIT.yaw, pitch: HOME_ORBIT.pitch, dist: HOME_ORBIT.dist };
     function nowMs() { return (G.performance && G.performance.now) ? G.performance.now() : Date.now(); }
     var coach = createCoach(450), startedAt = nowMs(), travelMm = 0;
     var holdSince = 0, wasIn = false, attemptDone = false, raf = 0, destroyed = false;
@@ -480,20 +750,26 @@
     try { if (G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.createRealCine) realCine = G.KARDIA_ECHOLAB._pure.createRealCine({}); } catch (e) {}
     if (!realCine) realCine = { _s: "sim", _since: null, state: function () { return this._s; }, reset: function () { this._s = "sim"; this._since = null; }, update: function (inp, now) { if (this._s === "real") { if (!inp.withinTolerance) this._s = "sim"; return this._s; } if (inp.withinTolerance && inp.score >= 85) { if (this._since == null) this._since = now; if (now - this._since >= 500) this._s = "real"; } else this._since = null; return this._s; } };
     var realClip = null, realSrc = "", realStatus = "idle", realKey = "", offlineNoted = false, clipRequested = 0;
+    /* Degraded real image: clip sources per view in the active window,
+     * drawn through degradationFor() so every pose shows real anatomy. */
+    var degradedSources = {}, degradedLoading = {}, degradedActive = false;
     var clipNoteUntil = 0, clipNoteForKey = "";
-    var tutStep = 0, tutDone = false;
+    var tutStep = 0, tutDone = false, resultTimer = 0, lastClipPolyKey = "";
     try { tutDone = G.localStorage.getItem("ksl_tutorial_done") === "1"; } catch (e) {}
     var debug = { loadingState: "loading", manifestUrl: "", meshesRegistered: {}, drawCalls: 0, frames: 0, usCalls: 0, usCutPolys: -1, fps: 0, beatScale: 1, clipRequestedFor: "", realState: "sim", errors: [] };
 
+    function shortWindowName(v) { var wid = windowForView(v.id); for (var i = 0; i < WINDOWS.length; i++) if (WINDOWS[i].id === wid) return WINDOWS[i].label; return v.family; }
     root.innerHTML =
       '<div class="ksl-wrap" id="kslWrap">' +
       '<section class="ksl-scene-col" aria-label="Body scene">' +
       '<div class="ksl-stage" id="kslStage">' +
       '<canvas id="kslScene" width="720" height="620" aria-label="3D body with probe on the skin. Drag the grip to slide, the marker dashes to rotate, the tail to fan and rock. Drag empty skin to orbit, pinch to zoom, double tap to reset."></canvas>' +
+      '<div class="ksl-handle" id="kslHandle" aria-hidden="true"></div>' +
       '<div class="ksl-viewname"><h3 class="ksl-title" id="kslTargetName">' + esc(view.label) + '</h3>' +
-      '<p class="ksl-sub" id="kslFamily">' + esc(view.family) + ' window</p></div>' +
+      '<p class="ksl-sub" id="kslFamily">' + esc(shortWindowName(view)) + '</p></div>' +
       '<div class="ksl-load" id="kslLoading" role="status"><p class="ksl-note" id="kslLoadText">Loading Scan Lab.</p><div class="ksl-load-track"><span class="ksl-load-fill" id="kslLoadFill"></span></div><button type="button" class="ksl-btn" id="kslRetryLoad" hidden>Retry</button></div>' +
       '<div class="ksl-stage-btns">' +
+      '<button type="button" class="ksl-iconbtn" id="kslSyncProbe" data-act="kecho-syncprobe" aria-label="Use a phone as the probe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></button>' +
       '<button type="button" class="ksl-iconbtn" id="kslPractice" aria-label="Practice this view"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></button>' +
       '<button type="button" class="ksl-iconbtn" id="kslTutorialBtn" aria-label="Open the tutorial"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 5h11a3 3 0 0 1 3 3v11H8a3 3 0 0 1-3-3z"/><path d="M8 9h7M8 13h5"/></svg></button>' +
       '<button type="button" class="ksl-iconbtn" id="kslLayersBtn" aria-label="Body layers" aria-haspopup="true" aria-expanded="false"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4l9 5-9 5-9-5z"/><path d="M3 14l9 5 9-5"/></svg></button>' +
@@ -502,37 +778,45 @@
       '<div class="ksl-layers" id="kslLayers" role="group" aria-label="Body layers" hidden>' +
       ["skin", "glass", "anatomy"].map(function (l) { return '<button type="button" class="ksl-chip" data-layer="' + l + '" aria-pressed="' + (l === layer) + '">' + l.charAt(0).toUpperCase() + l.slice(1) + '</button>'; }).join("") + '</div>' +
       '</div>' +
+      '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
       '</section>' +
       '<section class="ksl-monitor-col" aria-label="Monitor">' +
+      '<div class="ksl-syncbar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<div class="ksl-monitor-wrap" id="kslMonitorWrap">' +
       '<canvas id="kslMonitor" width="640" height="480" aria-label="Ultrasound monitor"></canvas>' +
-      '<video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video>' +
+      '<canvas id="kslSim" width="640" height="480" aria-label="Simulated ultrasound image from the 3D heart" hidden></canvas>' +
+      '<div class="ksl-simstate" id="kslSimState" role="status" aria-live="polite" hidden><p id="kslSimStateText">Simulation loading</p><button type="button" class="ksl-btn" id="kslSimRetry" hidden>Retry</button><button type="button" class="ksl-btn" id="kslSimUseCine" hidden>Use Cine</button></div>' +
+      '<div class="ksl-cinesim" role="radiogroup" aria-label="Monitor image source"><button type="button" role="radio" data-cinesim="cine" id="kslModeCine" aria-checked="true">Cine</button><button type="button" role="radio" data-cinesim="sim" id="kslModeSim" aria-checked="false">Sim</button></div>' +
+      '<canvas id="kslDegraded" width="640" height="480" aria-label="Real patient image, degraded by probe position" hidden></canvas>' +
+      '<div class="ksl-real-mask" id="kslRealMask" hidden><video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video></div>' +
+      '<video id="kslReal2" muted loop playsinline hidden aria-hidden="true" tabindex="-1"></video>' +
       '</div>' +
+      '<div class="ksl-result" id="kslResult" role="status" hidden></div>' +
       '</section>' +
-      '<div class="ksl-underbar">' +
-      '<div class="ksl-under-left">' +
-      '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
-      '<p class="ksl-note" id="kslClipNote" role="status" hidden></p>' +
-      '<div class="ksl-result" id="kslResult" hidden></div>' +
-      '<div class="ksl-tut" id="kslTutorial" hidden></div>' +
-      '</div>' +
-      '<div class="ksl-under-right">' +
-      '<div class="ksl-monitor-head"><p class="ksl-mon-label" id="kslMonLabel">Simulated image</p><span class="ksl-badge" id="kslRealBadge" hidden>Real patient</span><p class="ksl-hr" id="kslHr" role="status"></p></div>' +
-      '<div class="ksl-readouts" id="kslReadouts">' +
-      [["Rotation", "kslRot"], ["Fan", "kslFan"], ["Rock", "kslRock"], ["Depth", "kslDepth"]].map(function (r) {
-        return '<div class="ksl-read"><span>' + r[0] + '</span><strong id="' + r[1] + '">0 deg</strong><span class="ksl-range" id="' + r[1] + 'Range"></span></div>';
-      }).join("") + '</div>' +
-      '<label class="ksl-depth">Depth <span id="kslDepthVal">16 cm</span><input type="range" id="kslDepthRange" min="8" max="24" step="1" value="16" aria-label="Depth in centimetres"></label>' +
-      '<details class="ksl-details" id="kslAttrDetails" hidden><summary>Clip details and credits</summary><p class="ksl-note" id="kslAttribution"></p></details>' +
-      '<p class="ksl-fps" id="kslFps" role="status"></p>' +
-      '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
-      '</div></div>' +
       '<div class="ksl-pickerbar"><nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
       WINDOWS.map(function (w) { return '<button type="button" class="ksl-chip" data-window="' + w.id + '" id="kslWindow-' + w.id + '" aria-pressed="' + (w.id === activeWindow) + '">' + w.label + '</button>'; }).join("") + '</nav>' +
       '<div class="ksl-views" id="kslViews" role="group" aria-label="Views">' +
       T.VIEWS.map(function (v) {
         return '<button type="button" class="ksl-view" data-view="' + v.id + '" data-win="' + windowForView(v.id) + '" id="kslView-' + v.id + '" aria-pressed="' + (v.id === view.id) + '"><span class="ksl-icon" aria-hidden="true">' + viewIcon(v.id) + '</span><span>' + esc(v.label) + '</span></button>';
-      }).join("") + '</div></div></div>';
+      }).join("") + '</div></div>' +
+      '<div class="ksl-underbar">' +
+      '<div class="ksl-under-left">' +
+      '<p class="ksl-note" id="kslClipNote" role="status" hidden></p>' +
+      '<div class="ksl-tut" id="kslTutorial" hidden></div>' +
+      '</div>' +
+      '<div class="ksl-under-right">' +
+      '<div class="ksl-monitor-head"><p class="ksl-mon-label" id="kslMonLabel">Simulated image</p><span class="ksl-badge" id="kslRealBadge" hidden>Real patient</span><p class="ksl-hr" id="kslHr" role="status"></p></div>' +
+      '<details class="ksl-details ksl-readout-details" id="kslReadoutDetails"><summary>Readouts and depth</summary>' +
+      '<div class="ksl-readouts" id="kslReadouts">' +
+      [["Rotation", "kslRot"], ["Fan", "kslFan"], ["Rock", "kslRock"], ["Depth", "kslDepth"]].map(function (r) {
+        return '<div class="ksl-read"><span>' + r[0] + '</span><strong id="' + r[1] + '">0 deg</strong><span class="ksl-range" id="' + r[1] + 'Range"></span></div>';
+      }).join("") + '</div>' +
+      '<label class="ksl-depth">Depth <span id="kslDepthVal">16 cm</span><input type="range" id="kslDepthRange" min="8" max="24" step="1" value="16" aria-label="Depth in centimetres"></label></details>' +
+      '<details class="ksl-details" id="kslAttrDetails" hidden><summary>Clip details and credits</summary><p class="ksl-note" id="kslAttribution"></p></details>' +
+      '<p class="ksl-fps" id="kslFps" role="status"' + (showDebug ? "" : " hidden") + '></p>' +
+      '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
+      '</div></div>' +
+'</div>';
 
     /* Element lookup is scoped to this instance's root, never the whole
      * document: a stopped or repainted Scan Lab instance must not render
@@ -546,7 +830,97 @@
      * rows; the status note clears itself after 2.5 seconds. The left
      * column holds the scene only, so the stage keeps full height. */
     function setText(id, txt) { var n = el(id); if (n) n.textContent = txt; }
-    var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal");
+    var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal"), realMask = el("kslRealMask");
+    var degradedCanvas = el("kslDegraded"), video2 = el("kslReal2");
+    var simCanvas = el("kslSim");
+    /* Cine / Sim: remembered per device, default Cine. Sim files lazy
+     * load only when Sim is first chosen; absent files show the
+     * Simulation loading state, then a clear error with a next action. */
+    var cineSimMode = opts.cineSimMode ? normalizeCineSimMode(opts.cineSimMode) : loadCineSimMode(G.localStorage);
+    var simRenderer = null, simState = "idle";
+    debug.cineSimMode = cineSimMode; debug.simState = simState;
+    function hasSimFiles() { return !!(G.KARDIA_SIM_VOLUME && G.KARDIA_BMODE_GL && G.KARDIA_BMODE_GL.create && G.KARDIA_SIM_VOLUME.loadAtlas); }
+    function loadSimFiles() {
+      if (opts.simLoader) return opts.simLoader();
+      if (G.KARDIA_LOADER && G.KARDIA_LOADER.loadSim) return G.KARDIA_LOADER.loadSim();
+      return SIM_FILES.reduce(function (p, src) {
+        return p.then(function () {
+          return new Promise(function (res, rej) {
+            var s = doc.createElement("script"); s.src = "/" + src + "?v=krd8"; s.async = false;
+            s.onload = function () { res(); }; s.onerror = function () { rej(new Error(src)); };
+            doc.head.appendChild(s);
+          });
+        });
+      }, Promise.resolve());
+    }
+    var simLoader = createSimLazyLoader({ hasSim: hasSimFiles, loadFiles: loadSimFiles });
+    function showSimState(text, showRetry) {
+      var box = el("kslSimState"), t = el("kslSimStateText"), r = el("kslSimRetry"), u = el("kslSimUseCine");
+      if (box) box.hidden = !text;
+      if (t && text) t.textContent = text;
+      if (r) r.hidden = !showRetry;
+      if (u) u.hidden = !showRetry;
+    }
+    function ensureSim() {
+      if (simRenderer) { simState = "ready"; debug.simState = simState; return Promise.resolve(true); }
+      if (simState === "loading") return simLoader.ensure();
+      simState = "loading"; debug.simState = simState; showSimState("Simulation loading", false);
+      return simLoader.ensure().then(function (ok) {
+        if (!ok || !hasSimFiles()) { simState = "error"; debug.simState = simState; showSimState("Simulation could not load. Check your connection and try again, or use Cine.", true); return false; }
+        /* Let the loading state paint before the atlas fetch starts. */
+        return new Promise(function (res) { setTimeout(res, 30); }).then(function () {
+          return loadSimAtlas(G.KARDIA_SIM_VOLUME, SIM_ATLAS_BASE).then(function (atlas) {
+            G.__kardiaSimAtlas = atlas;
+            simRenderer = G.KARDIA_BMODE_GL.create(simCanvas);
+            simRenderer.setVolume(atlas);
+            simState = "ready"; debug.simState = simState; showSimState(null, false);
+            if (simCanvas) simCanvas.hidden = false;
+            return true;
+          }, function (e) { debug.errors.push("sim: " + String(e && e.message || e)); simState = "error"; debug.simState = simState; showSimState("Simulation could not start on this device. Use Cine to keep scanning.", true); return false; });
+        });
+      });
+    }
+    function applyCineSimMode() {
+      var cineBtn = el("kslModeCine"), simBtn = el("kslModeSim");
+      if (cineBtn) cineBtn.setAttribute("aria-checked", cineSimMode === "cine" ? "true" : "false");
+      if (simBtn) simBtn.setAttribute("aria-checked", cineSimMode === "sim" ? "true" : "false");
+      debug.cineSimMode = cineSimMode;
+      if (cineSimMode === "sim") {
+        if (video) video.hidden = true;
+        if (realMask) realMask.hidden = true;
+        if (degradedCanvas) degradedCanvas.hidden = true;
+        if (monCanvas) monCanvas.hidden = true;
+        if (simCanvas && simRenderer) simCanvas.hidden = false;
+        ensureSim();
+      } else {
+        if (simCanvas) simCanvas.hidden = true;
+        if (monCanvas) monCanvas.hidden = false;
+        showSimState(null, false);
+      }
+    }
+    function setCineSimMode(mode) {
+      cineSimMode = saveCineSimMode(G.localStorage, mode);
+      haptic("SELECTION");
+      applyCineSimMode();
+      refresh(nowMs());
+    }
+    var modeCineBtn = el("kslModeCine"), modeSimBtn = el("kslModeSim");
+    if (modeCineBtn) modeCineBtn.addEventListener("click", function () { setCineSimMode("cine"); });
+    if (modeSimBtn) modeSimBtn.addEventListener("click", function () { setCineSimMode("sim"); });
+    [modeCineBtn, modeSimBtn].forEach(function (btn) {
+      if (!btn || !btn.addEventListener) return;
+      btn.addEventListener("keydown", function (ev) {
+        if (!ev || (ev.key !== "ArrowRight" && ev.key !== "ArrowLeft" && ev.key !== "ArrowDown" && ev.key !== "ArrowUp")) return;
+        if (ev.preventDefault) ev.preventDefault();
+        var next = cineSimMode === "cine" ? "sim" : "cine";
+        setCineSimMode(next);
+        var target = next === "sim" ? modeSimBtn : modeCineBtn;
+        if (target && target.focus) target.focus();
+      });
+    });
+    var simRetryBtn = el("kslSimRetry"), simUseCineBtn = el("kslSimUseCine");
+    if (simRetryBtn) simRetryBtn.addEventListener("click", function () { simState = "idle"; ensureSim(); });
+    if (simUseCineBtn) simUseCineBtn.addEventListener("click", function () { setCineSimMode("cine"); });
 
     /* ---- three.js scene ---- */
     var THREE = null, renderer = null, scene3 = null, camera = null;
@@ -661,42 +1035,103 @@
       } catch (e) { return null; }
     }
     function translation(x, y, z) { var m = new THREE.Matrix4(); if (m.makeTranslation) m.makeTranslation(x, y, z); return m; }
-    function buildProbeMesh(ghost) {
-      var bodyM = ghost ? new THREE.MeshBasicMaterial({ color: 0x9cc8e8, transparent: true, opacity: 0.35 }) : mat({ color: 0xe8e6df, roughness: 0.45, metalness: 0.05 });
-      var darkM = ghost ? bodyM : mat({ color: 0x2b2e30, roughness: 0.6 });
-      var pts = [];
-      [[0, 0], [16, 0], [19, 5], [15, 16], [13, 34], [14, 58], [11, 78], [7, 88], [0, 90]].forEach(function (p) { pts.push(new THREE.Vector2(p[0], p[1])); });
-      var cablePts = [new THREE.Vector3(0, 88, 0), new THREE.Vector3(6, 112, -8), new THREE.Vector3(22, 132, -26), new THREE.Vector3(48, 142, -40)];
-      var bodyC = ghost ? 0x9cc8e8 : 0xe8e6df, darkC = ghost ? 0x9cc8e8 : 0x2b2e30;
-      try {
-        var partsList = [
-          { geom: new THREE.LatheGeometry(pts, lowPower ? 20 : 32), color: bodyC },
-          { geom: new THREE.CylinderGeometry(8, 9, 26, 20), matrix: translation(0, 62, 0), color: darkC },
-          { geom: new THREE.BoxGeometry(4, 8, 3), matrix: translation(14, 10, 0), color: ghost ? 0x9cc8e8 : 0x2ea8e0 },
-          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 20, 3.2, 8), color: darkC }
-        ];
-        for (var di = 0; di < 8; di++) {
-          var ang = di / 8 * Math.PI * 2;
-          var dm = new THREE.Matrix4(); if (dm.makeRotationY) dm.makeRotationY(-ang); if (dm.setPosition) dm.setPosition(Math.cos(ang) * 17, 22, Math.sin(ang) * 17);
-          partsList.push({ geom: new THREE.BoxGeometry(7, 2.2, 2.2), matrix: dm, color: ghost ? 0x9cc8e8 : (di % 2 ? 0x2ea8e0 : 0x17384d) });
+    /* Realistic phased-array probe (route B, procedural): lofted
+     * superellipse sections morph a flat 20 x 14 mm rounded-rect lens
+     * through a tapered neck into a 25 mm round handle. Smooth normals,
+     * separate lens, moulded marker ridge, ribbed strain relief, sagging
+     * cable. No boxes or facets. Ghost shares the shape at 35 percent. */
+    function loftGeometry(sections, radial) {
+      var pos = [], idx = [], ring, i, j;
+      function spow(v, p) { return (v < 0 ? -1 : 1) * Math.pow(Math.abs(v), p); }
+      for (ring = 0; ring < sections.length; ring++) {
+        var s = sections[ring], p = 2 / s[3];
+        for (j = 0; j <= radial; j++) {
+          var t = j / radial * Math.PI * 2;
+          pos.push(s[1] * spow(Math.cos(t), p), s[0], s[2] * spow(Math.sin(t), p));
         }
-        var mergedMat = ghost ? new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35 }) : mat({ vertexColors: true, roughness: 0.45, metalness: 0.05 });
-        var merged = mergedMesh(partsList, mergedMat, ghost ? "ghostProbe" : "probe");
-        if (merged) { merged.userData.dashes = { rotation: { x: 0, y: 0, z: 0 } }; merged.userData.tail = merged; return merged; }
+      }
+      for (ring = 0; ring < sections.length - 1; ring++) for (j = 0; j < radial; j++) {
+        var a = ring * (radial + 1) + j, b = a + radial + 1;
+        idx.push(a, b, a + 1, b, b + 1, a + 1);
+      }
+      /* top cap fan */
+      var topC = pos.length / 3; var ls = sections[sections.length - 1];
+      pos.push(0, ls[0] + 1.5, 0);
+      var base = (sections.length - 1) * (radial + 1);
+      for (j = 0; j < radial; j++) idx.push(base + j, topC, base + j + 1);
+      var g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(pos), 3));
+      g.setIndex(idx);
+      if (g.computeVertexNormals) g.computeVertexNormals();
+      return g;
+    }
+    function buildProbeMesh(ghost) {
+      var gm = function () { return new THREE.MeshBasicMaterial({ color: 0x9cc8e8, transparent: true, opacity: 0.35, depthWrite: false }); };
+      var bodyM = ghost ? gm() : phys({ color: 0xe9e7e0, roughness: 0.45, metalness: 0.02, clearcoat: 0.55, clearcoatRoughness: 0.5 });
+      var lensM = ghost ? gm() : phys({ color: 0x24282b, roughness: 0.38, metalness: 0.02, clearcoat: 0.7, clearcoatRoughness: 0.35 });
+      var rubberM = ghost ? gm() : mat({ color: 0x17191b, roughness: 0.82, metalness: 0 });
+      var ridgeM = ghost ? gm() : phys({ color: 0xdfdcd3, roughness: 0.5, clearcoat: 0.4, clearcoatRoughness: 0.5 });
+      var accentM = ghost ? gm() : mat({ color: 0x2ea8e0, roughness: 0.4 });
+      var radial = lowPower ? 28 : 56;
+      /* One merged mesh per probe keeps the draw-call budget; vertex
+       * colours carry lens, rubber and satin tones under one clearcoat
+       * physical material. */
+      try {
+        var mParts = [
+          { geom: loftGeometry([[0, 9.8, 6.8, 4.2], [1.5, 10, 7, 4.2], [4, 9.5, 6.6, 3.7], [9, 8.1, 5.8, 3.1], [16, 7.9, 6.1, 2.7], [24, 9.1, 7.7, 2.35], [36, 11.1, 10.1, 2.1], [52, 12.3, 11.9, 2.0], [72, 12.5, 12.3, 2.0], [86, 11.9, 11.7, 2.0], [90, 10.4, 10.4, 2.0]], radial), color: ghost ? 0x9cc8e8 : 0xe9e7e0 },
+          { geom: loftGeometry([[-1.4, 8.4, 5.6, 4.2], [-0.6, 9.5, 6.5, 4.2], [0.9, 9.9, 6.9, 4.2]], radial), color: ghost ? 0x9cc8e8 : 0x24282b },
+          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(8.2, 13, 0), new THREE.Vector3(8.0, 22, 0), new THREE.Vector3(9.4, 32, 0), new THREE.Vector3(11.4, 44, 0), new THREE.Vector3(12.6, 58, 0), new THREE.Vector3(12.7, 72, 0)]), 32, 0.85, 8), color: ghost ? 0x9cc8e8 : 0xdfdcd3 },
+          { geom: new THREE.SphereGeometry(1.5, 16, 12), matrix: translation(9.6, 10, 0), color: ghost ? 0x9cc8e8 : 0x2ea8e0 },
+          { geom: new THREE.CylinderGeometry(4.6, 9.6, 20, radial), matrix: translation(0, 99, 0), color: ghost ? 0x9cc8e8 : 0x17191b },
+          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 107, 0), new THREE.Vector3(3, 128, -4), new THREE.Vector3(14, 148, -16), new THREE.Vector3(36, 158, -34), new THREE.Vector3(70, 152, -58), new THREE.Vector3(106, 132, -78)]), 48, 3.0, lowPower ? 6 : 10), color: ghost ? 0x9cc8e8 : 0x17191b }
+        ];
+        for (var rj = 0; rj < 5; rj++) {
+          var rm2 = new THREE.Matrix4(); if (rm2.makeRotationX) rm2.makeRotationX(Math.PI / 2); if (rm2.setPosition) rm2.setPosition(0, 92 + rj * 3.6, 0);
+          mParts.push({ geom: new THREE.TorusGeometry(8.6 - rj * 0.85, 1.15, 8, radial), matrix: rm2, color: ghost ? 0x9cc8e8 : 0x17191b });
+        }
+        for (var dj = 0; dj < 8; dj++) {
+          var ang3 = dj / 8 * Math.PI * 2, dm3 = new THREE.Matrix4();
+          if (dm3.makeRotationY) dm3.makeRotationY(-ang3); if (dm3.setPosition) dm3.setPosition(Math.cos(ang3) * 14.5, 30, Math.sin(ang3) * 14.5);
+          mParts.push({ geom: new THREE.BoxGeometry(5, 1.7, 1.7), matrix: dm3, color: ghost ? 0x9cc8e8 : (dj % 2 ? 0x2ea8e0 : 0x17384d) });
+        }
+        var mMat = ghost ? new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35, depthWrite: false }) : phys({ vertexColors: true, roughness: 0.45, metalness: 0.02, clearcoat: 0.55, clearcoatRoughness: 0.45 });
+        var mergedProbe = mergedMesh(mParts, mMat, ghost ? "ghostProbe" : "probe");
+        if (mergedProbe) { mergedProbe.userData.dashes = { rotation: { x: 0, y: 0, z: 0 } }; mergedProbe.userData.tail = mergedProbe; return mergedProbe; }
       } catch (e) {}
-      var grp = new THREE.Group();
-      var body = new THREE.Mesh(new THREE.LatheGeometry(pts, lowPower ? 20 : 32), bodyM); grp.add(body);
-      var grip = new THREE.Mesh(new THREE.CylinderGeometry(8, 9, 26, 20), darkM); grip.position.y = 62; grp.add(grip);
-      var notch = new THREE.Mesh(new THREE.BoxGeometry(4, 8, 3), ghost ? bodyM : mat({ color: 0x2ea8e0, roughness: 0.4 }));
-      notch.position.set(14, 10, 0); grp.add(notch);
-      var cable = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 20, 3.2, 8), darkM); grp.add(cable);
+      var grp = new THREE.Group(); grp.name = ghost ? "ghostProbe" : "probe";
+      var bodyGeom = loftGeometry([[0, 9.8, 6.8, 4.2], [1.5, 10, 7, 4.2], [4, 9.5, 6.6, 3.7], [9, 8.1, 5.8, 3.1], [16, 7.9, 6.1, 2.7], [24, 9.1, 7.7, 2.35], [36, 11.1, 10.1, 2.1], [52, 12.3, 11.9, 2.0], [72, 12.5, 12.3, 2.0], [86, 11.9, 11.7, 2.0], [90, 10.4, 10.4, 2.0]], radial);
+      var body = new THREE.Mesh(bodyGeom, bodyM); body.name = "probeBody"; grp.add(body);
+      var lens = new THREE.Mesh(loftGeometry([[-1.4, 8.4, 5.6, 4.2], [-0.6, 9.5, 6.5, 4.2], [0.9, 9.9, 6.9, 4.2]], radial), lensM);
+      lens.name = "probeLens"; grp.add(lens);
+      /* moulded orientation ridge on the marker (+x) side */
+      try {
+        var ridgePts = [new THREE.Vector3(8.2, 13, 0), new THREE.Vector3(8.0, 22, 0), new THREE.Vector3(9.4, 32, 0), new THREE.Vector3(11.4, 44, 0), new THREE.Vector3(12.6, 58, 0), new THREE.Vector3(12.7, 72, 0)];
+        var ridge = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(ridgePts), 32, 0.85, 8), ridgeM);
+        ridge.name = "markerRidge"; grp.add(ridge);
+        var dot = new THREE.Mesh(new THREE.SphereGeometry(1.5, 16, 12), accentM);
+        dot.scale.set(0.55, 1, 1); dot.position.set(9.6, 10, 0); dot.name = "markerDot"; grp.add(dot);
+      } catch (e) {}
+      /* ribbed rubber strain relief */
+      try {
+        var relief = new THREE.Mesh(new THREE.CylinderGeometry(4.6, 9.6, 20, radial), rubberM);
+        relief.position.y = 99; relief.name = "strainRelief"; grp.add(relief);
+        for (var ri = 0; ri < 5; ri++) {
+          var rib = new THREE.Mesh(new THREE.TorusGeometry(8.6 - ri * 0.85, 1.15, 8, radial), rubberM);
+          rib.rotation.x = Math.PI / 2; rib.position.y = 92 + ri * 3.6; grp.add(rib);
+        }
+      } catch (e) {}
+      try {
+        var cablePts = [new THREE.Vector3(0, 107, 0), new THREE.Vector3(3, 128, -4), new THREE.Vector3(14, 148, -16), new THREE.Vector3(36, 158, -34), new THREE.Vector3(70, 152, -58), new THREE.Vector3(106, 132, -78)];
+        var cable = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 48, 3.0, lowPower ? 6 : 10), rubberM);
+        cable.name = "probeCable"; grp.add(cable);
+      } catch (e) {}
       var dashes = new THREE.Group(); dashes.name = "markerDashes";
       for (var i = 0; i < 8; i++) {
-        var d = new THREE.Mesh(new THREE.BoxGeometry(7, 2.2, 2.2), ghost ? bodyM : mat({ color: i % 2 ? 0x2ea8e0 : 0x17384d, roughness: 0.4 }));
+        var d = new THREE.Mesh(new THREE.BoxGeometry(5, 1.7, 1.7), ghost ? gm() : mat({ color: i % 2 ? 0x2ea8e0 : 0x17384d, roughness: 0.4 }));
         var ang2 = i / 8 * Math.PI * 2;
-        d.position.set(Math.cos(ang2) * 17, 22, Math.sin(ang2) * 17); d.rotation.y = -ang2; dashes.add(d);
+        d.position.set(Math.cos(ang2) * 14.5, 30, Math.sin(ang2) * 14.5); d.rotation.y = -ang2; dashes.add(d);
       }
-      grp.add(dashes); grp.userData.dashes = dashes; grp.userData.tail = grip;
+      grp.add(dashes); grp.userData.dashes = dashes; grp.userData.tail = body;
       return grp;
     }
     function labelSprite(text, pos) {
@@ -875,6 +1310,11 @@
         var yy = skinSurfaceY(p[0], p[2]);
         var s = toScene([p[0], yy, p[2]]);
         grp.position.set(s[0], s[1], s[2]);
+        /* The probe reads small against the ribs at phone and tablet
+         * sizes, and the grip ring sits over its lens. Scale the whole
+         * probe up from the contact point so the body, marker and cable
+         * stay clear of the ring on every size. */
+        if (grp.scale) { if (grp.scale.setScalar) grp.scale.setScalar(1.5); else { grp.scale.x = 1.5; grp.scale.y = 1.5; grp.scale.z = 1.5; } }
         var up = new THREE.Vector3(0, 1, 0);
         var dir = new THREE.Vector3(outScene[0], outScene[1], outScene[2]);
         grp.quaternion.setFromUnitVectors(up, dir);
@@ -956,8 +1396,236 @@
       } catch (e) { debug.errors.push("us frame: " + String(e && e.message || e)); }
     }
 
-    /* ---- real clip at target ---- */
+    /* Sim mode: live K3 B-mode along the probe plane, beating with
+     * the same heart cycle as the ECG. Same sector, depth and ECG
+     * are drawn by the GL shader; coaching and scoring are shared. */
+    function drawSim(now, plane) {
+      debug.simState = simState;
+      if (!simRenderer) { if (simState === "idle") ensureSim(); return; }
+      try {
+        /* The canvas backing store follows its CSS size on change, or the
+         * sector stretches to fit. */
+        var sw = (simCanvas && simCanvas.clientWidth) || 0, sh = (simCanvas && simCanvas.clientHeight) || 0;
+        if (sw > 0 && sh > 0 && (simCanvas.width !== sw || simCanvas.height !== sh)) { simCanvas.width = sw; simCanvas.height = sh; }
+        if (ownHeart && heartInst && heartInst.step) heartInst.step(16);
+        var sp = simPoseFromScanlab(pose, plane, view, G.KARDIA_SIM_VOLUME, T); if (!sp) return;
+        var hs = null; try { hs = heartInst && heartInst.state ? heartInst.state() : null; } catch (e) {}
+        simRenderer.setPose(sp);
+        simRenderer.setPhase(simPhaseFromHeart(hs, now));
+        simRenderer.setKnobs({ depthMm: pose.depthCm * 10 / SIM_ZOOM, gain: SIM_GAIN, focusMm: 70, dynamicRange: 55 });
+        simRenderer.render(now);
+        if (hs) setText("kslHr", Math.round(hs.heartRateBpm || 70) + " bpm");
+      } catch (e) { debug.errors.push("sim frame: " + String(e && e.message || e)); }
+    }
+
+    /* ---- degraded real image at every pose ---- */
     function clipsApi() { return opts.clips || G.KARDIA_CLIPS || null; }
+    function windowTargets() {
+      var win = null, i;
+      for (i = 0; i < WINDOWS.length; i++) if (WINDOWS[i].id === windowForView(view.id)) win = WINDOWS[i];
+      if (!win) return [view];
+      return win.views.map(function (id) { return T.byId(id); }).filter(Boolean);
+    }
+    function ensureDegradedSource(viewId) {
+      if (degradedSources[viewId] || degradedLoading[viewId]) return;
+      var api = clipsApi(); if (!api || !api.preloadFor) return;
+      degradedLoading[viewId] = true;
+      var tgt = T.byView(viewId);
+      api.preloadFor({ view: viewId, pathology: pathology ? pathology.id : null, severity: pathology ? pathology.severity : null }).then(function (res) {
+        degradedLoading[viewId] = false;
+        if (!res || !res.src) return;
+        degradedSources[viewId] = { clip: res.clip, src: res.src };
+        /* Bind the neighbour source element when this is not the target. */
+        if (video2 && viewId !== view.viewId && video2.getAttribute("src") !== res.src) {
+          try { video2.setAttribute("src", res.src); var p2 = video2.play && video2.play(); if (p2 && p2.catch) p2.catch(function () {}); } catch (e) {}
+        }
+        if (tgt) debug["clip_" + tgt.id] = "ready";
+      }, function () { degradedLoading[viewId] = false; });
+    }
+    function ensureWindowSources() { windowTargets().forEach(function (t) { ensureDegradedSource(t.viewId); }); }
+    function sourceVideoFor(viewId) {
+      if (viewId === view.viewId) return (video && video.getAttribute("src")) ? video : null;
+      if (video2 && degradedSources[viewId] && video2.getAttribute("src") === degradedSources[viewId].src) return video2;
+      return null;
+    }
+    /* Draw the two nearest real clips, crossfaded by pose and degraded
+     * by the pose error, inside the sector. Returns true when a real
+     * frame was drawn. Transform and opacity only in CSS terms: the
+     * canvas work is a rotation, a scale and alpha overlays. */
+    function drawDegraded(now, cleanShowing) {
+      degradedActive = false;
+      if (!degradedCanvas || cleanShowing) { if (degradedCanvas) degradedCanvas.hidden = true; return false; }
+      var ctx = null;
+      try { ctx = degradedCanvas.getContext("2d"); } catch (e) {}
+      if (!ctx || !ctx.drawImage) { if (degradedCanvas) degradedCanvas.hidden = true; return false; }
+      ensureWindowSources();
+      if (video && realStatus === "ready" && realSrc) {
+        try { if (video.paused) { var pv = video.play && video.play(); if (pv && pv.catch) pv.catch(function () {}); } } catch (e) {}
+      }
+      if (video2 && video2.getAttribute && video2.getAttribute("src")) {
+        try { if (video2.paused) { var pv2 = video2.play && video2.play(); if (pv2 && pv2.catch) pv2.catch(function () {}); } } catch (e) {}
+      }
+      var blend = windowBlend(pose, windowTargets());
+      if (blend[1] && video2 && degradedSources[blend[1].viewId] && video2.getAttribute("src") !== degradedSources[blend[1].viewId].src) {
+        try { video2.setAttribute("src", degradedSources[blend[1].viewId].src); } catch (e) {}
+      }
+      var deg = degradationFor(pose, view);
+      var W = degradedCanvas.width || 640, H = degradedCanvas.height || 480;
+      var mw = degradedCanvas.clientWidth || 0, mh = degradedCanvas.clientHeight || 0;
+      if (mw > 0 && mh > 0 && (degradedCanvas.width !== mw || degradedCanvas.height !== mh)) { degradedCanvas.width = mw; degradedCanvas.height = mh; W = mw; H = mh; }
+      var drawn = 0;
+      try {
+        ctx.clearRect(0, 0, W, H);
+        ctx.fillStyle = "#000"; ctx.fillRect(0, 0, W, H);
+        /* Fixed sector, identical in every state: same apex, half
+         * angle and depth as the KARDIA_US layout (sector above an
+         * ECG strip of 13 percent of the height). Only the clip
+         * content below moves; this geometry never does. */
+        var sectorH = Math.round(H * 0.87);
+        var apexX = W / 2, apexY = Math.round(sectorH * 0.02) + 4, radius = sectorH - apexY, half = 40 * Math.PI / 180;
+        var wedgePath = function () {
+          ctx.beginPath(); ctx.moveTo(apexX, apexY);
+          for (var si = 0; si <= 24; si++) { var sa = -half + 2 * half * si / 24; ctx.lineTo(apexX + Math.sin(sa) * radius, apexY + Math.cos(sa) * radius); }
+          ctx.closePath();
+        };
+        var polar = function (ang, r) { return [apexX + Math.sin(ang) * r, apexY + Math.cos(ang) * r]; };
+        /* Content: moves, rotates and foreshortens inside the fan. */
+        ctx.save();
+        wedgePath(); ctx.clip();
+        ctx.translate(apexX + deg.offsetXFrac * W, apexY + deg.offsetYFrac * H);
+        ctx.rotate(deg.rotationDeg * Math.PI / 180);
+        ctx.scale(1, deg.foreshorten);
+        ctx.translate(-apexX, -apexY);
+        try { ctx.filter = "contrast(" + deg.contrast.toFixed(3) + ") brightness(" + deg.brightness.toFixed(3) + ") blur(" + deg.blurPx.toFixed(2) + "px)"; } catch (e) {}
+        for (var bi = blend.length - 1; bi >= 0; bi--) {
+          var b = blend[bi], vid = sourceVideoFor(b.viewId);
+          if (!vid || !(vid.readyState >= 2) || !vid.videoWidth) continue;
+          ctx.globalAlpha = drawn === 0 ? 1 : b.weight;
+          var vw = vid.videoWidth, vh = vid.videoHeight, clipZoom = (G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.realClipZoom) || 1.45, sc = Math.max(W / vw, sectorH / vh) * clipZoom, dw = vw * sc, dh = vh * sc;
+          ctx.drawImage(vid, (W - dw) / 2, sectorH * 0.52 - dh / 2, dw, dh);
+          drawn++;
+        }
+        ctx.globalAlpha = 1;
+        try { ctx.filter = "none"; } catch (e) {}
+        ctx.restore();
+        /* Physical degradation in fixed sector space, along the beam
+         * lines (radial from the apex). No flat fills anywhere:
+         * every layer is a radial or angular gradient, an arc, or
+         * speckle, so anatomy stays readable underneath. */
+        ctx.save();
+        wedgePath(); ctx.clip();
+        var badF = 1 - deg.quality;
+        /* Gain loss with depth: transparent in the near field,
+         * darkest at the far arc, never a uniform wash. */
+        if (deg.gainLoss > 0.01 && ctx.createRadialGradient) {
+          var gg = ctx.createRadialGradient(apexX, apexY, radius * 0.18, apexX, apexY, radius);
+          gg.addColorStop(0, "rgba(0,0,0,0)"); gg.addColorStop(0.55, "rgba(0,0,0," + (deg.gainLoss * 0.45).toFixed(3) + ")"); gg.addColorStop(1, "rgba(0,0,0," + deg.gainLoss.toFixed(3) + ")");
+          ctx.fillStyle = gg; ctx.fillRect(0, 0, W, sectorH);
+        }
+        /* Near field clutter haze: hugs the transducer face and
+         * fades by a third of the depth. */
+        if (deg.haze > 0.01 && ctx.createRadialGradient) {
+          var hg = ctx.createRadialGradient(apexX, apexY, 0, apexX, apexY, radius * 0.38);
+          hg.addColorStop(0, "rgba(168,172,175," + (deg.haze * 0.62).toFixed(3) + ")"); hg.addColorStop(1, "rgba(168,172,175,0)");
+          ctx.fillStyle = hg; ctx.fillRect(0, 0, W, sectorH);
+        }
+        /* Rib shadow: a soft edged wedge along the beam lines,
+         * starting at the bright rib surface, darkest just behind
+         * it and slowly recovering with depth. Layered passes give
+         * the soft angular edge a real shadow has. */
+        if (deg.shadowFrac > 0.01) {
+          var ribR = radius * deg.ribDepthFrac, sA = deg.shadowAngleRad, sW = deg.shadowWidthRad;
+          var passes = [[1.9, 0.16], [1.45, 0.24], [1.0, 0.34]];
+          for (var pi = 0; pi < passes.length; pi++) {
+            var pw = sW * passes[pi][0], pa = Math.min(0.88, deg.shadowFrac * passes[pi][1] * 2.4);
+            var p0 = polar(sA - pw, ribR), p1 = polar(sA - pw, radius), p2 = polar(sA + pw, radius), p3 = polar(sA + pw, ribR);
+            ctx.beginPath(); ctx.moveTo(p0[0], p0[1]); ctx.lineTo(p1[0], p1[1]); ctx.lineTo(p2[0], p2[1]); ctx.lineTo(p3[0], p3[1]); ctx.closePath();
+            if (ctx.createRadialGradient) {
+              var sg = ctx.createRadialGradient(apexX, apexY, ribR, apexX, apexY, radius);
+              sg.addColorStop(0, "rgba(0,0,0," + pa.toFixed(3) + ")"); sg.addColorStop(0.45, "rgba(0,0,0," + (pa * 0.82).toFixed(3) + ")"); sg.addColorStop(1, "rgba(0,0,0," + (pa * 0.45).toFixed(3) + ")");
+              ctx.fillStyle = sg;
+            } else ctx.fillStyle = "rgba(0,0,0," + pa.toFixed(3) + ")";
+            ctx.fill();
+          }
+          /* Bright rib surface the shadow hangs from. */
+          ctx.beginPath(); ctx.arc(apexX, apexY, ribR, Math.PI / 2 - sA - sW * 1.15, Math.PI / 2 - sA + sW * 1.15);
+          ctx.strokeStyle = "rgba(232,232,222," + Math.min(0.75, 0.25 + deg.shadowFrac).toFixed(3) + ")"; ctx.lineWidth = 2.5; ctx.stroke();
+          /* Reverberation streaks inside the shadow. */
+          ctx.lineWidth = 1;
+          for (var ri2 = -2; ri2 <= 2; ri2++) {
+            var ra = sA + ri2 * sW * 0.38, r0p = polar(ra, ribR + 4), r1p = polar(ra, radius * (0.42 + 0.06 * Math.abs(ri2)));
+            ctx.beginPath(); ctx.moveTo(r0p[0], r0p[1]); ctx.lineTo(r1p[0], r1p[1]);
+            ctx.strokeStyle = "rgba(190,195,200," + (0.05 + badF * 0.05).toFixed(3) + ")"; ctx.stroke();
+          }
+          /* A line ghosts: faint arcs repeated at the pleura
+           * spacing, strongest over the shadowed side. */
+          for (var ai = 1; ai <= 3; ai++) {
+            var ar = ribR + ai * radius * 0.16;
+            if (ar >= radius) break;
+            ctx.beginPath(); ctx.arc(apexX, apexY, ar, Math.PI / 2 - sA - sW * 2.6, Math.PI / 2 - sA + sW * 2.6);
+            ctx.strokeStyle = "rgba(205,210,215," + (0.16 * (1 - ai * 0.24) * (0.4 + badF)).toFixed(3) + ")"; ctx.lineWidth = 1.2; ctx.stroke();
+          }
+        }
+        /* Beam line dropout: one narrow soft wedge where the beam
+         * loses contact, edges feathered like the rib shadow. */
+        if (deg.dropoutFrac > 0.01) {
+          var dA = deg.dropoutAngleRad, dW = deg.dropoutWidthRad;
+          var dPass = [[1.8, 0.14], [1.3, 0.22], [1.0, 0.30]];
+          for (var di2 = 0; di2 < dPass.length; di2++) {
+            var dw2 = dW * dPass[di2][0], da2 = Math.min(0.8, deg.dropoutFrac * dPass[di2][1] * 2.2);
+            var q0 = polar(dA - dw2, radius * 0.06), q1 = polar(dA - dw2, radius), q2 = polar(dA + dw2, radius), q3 = polar(dA + dw2, radius * 0.06);
+            ctx.beginPath(); ctx.moveTo(q0[0], q0[1]); ctx.lineTo(q1[0], q1[1]); ctx.lineTo(q2[0], q2[1]); ctx.lineTo(q3[0], q3[1]); ctx.closePath();
+            ctx.fillStyle = "rgba(0,0,0," + da2.toFixed(3) + ")"; ctx.fill();
+          }
+        }
+        /* Speckle over everything degraded: real dropout and shadow
+         * keep grain, they never go uniformly flat. */
+        var speckN = Math.round(350 + badF * 950);
+        for (var ki = 0; ki < speckN; ki++) {
+          var ka = -half + Math.random() * 2 * half, kr = Math.sqrt(Math.random()) * radius;
+          var kp = polar(ka, kr), kv = 110 + Math.floor(Math.random() * 100);
+          ctx.fillStyle = "rgba(" + kv + "," + kv + "," + kv + "," + (0.04 + Math.random() * 0.07).toFixed(3) + ")";
+          ctx.fillRect(kp[0], kp[1], 1.5, 1.5);
+        }
+        ctx.restore();
+        /* Fixed chrome, drawn identically on every degraded frame:
+         * sector edge lines and far arc, depth ticks on the right
+         * edge, apex marker dot, ECG strip below the sector. */
+        ctx.strokeStyle = "rgba(238,242,246,0.92)"; ctx.lineWidth = 1.6;
+        var eL = polar(-half, radius), eR = polar(half, radius);
+        ctx.beginPath(); ctx.moveTo(apexX, apexY); ctx.lineTo(eL[0], eL[1]); ctx.moveTo(apexX, apexY); ctx.lineTo(eR[0], eR[1]);
+        ctx.arc(apexX, apexY, radius, Math.PI / 2 - half, Math.PI / 2 + half); ctx.stroke();
+        ctx.lineWidth = 1.4;
+        for (var ti = 1; ti <= 3; ti++) {
+          var tp = polar(half, radius * ti / 4), tq = polar(half, radius * ti / 4 - 7);
+          ctx.beginPath(); ctx.moveTo(tp[0], tp[1]); ctx.lineTo(tq[0], tq[1]); ctx.stroke();
+        }
+        ctx.fillStyle = "rgba(245,248,250,0.95)";
+        ctx.beginPath(); ctx.arc(apexX, apexY, 2.6, 0, Math.PI * 2); ctx.fill();
+        var ecgTop = sectorH, ecgH = H - sectorH;
+        if (ecgH > 6) {
+          ctx.fillStyle = "#000"; ctx.fillRect(0, ecgTop, W, ecgH);
+          var phase = 0;
+          try { var hs2 = heartInst && heartInst.state ? heartInst.state() : null; if (hs2 && hs2.cycleMs) phase = (hs2.cycleTimeMs || 0) / hs2.cycleMs; } catch (e) {}
+          var ecgFn = (G.KARDIA_US && G.KARDIA_US._pure && G.KARDIA_US._pure.ecgVoltage) || null;
+          ctx.strokeStyle = "rgba(110,240,140,0.95)"; ctx.lineWidth = 1.4; ctx.beginPath();
+          for (var ex = 0; ex <= W; ex += 3) {
+            var ph2 = ((ex / W) + phase) % 1;
+            var ev2 = ecgFn ? ecgFn(ph2) : (ph2 > 0.29 && ph2 < 0.31 ? 1 : 0);
+            var ey2 = ecgTop + ecgH * 0.55 - ev2 * ecgH * 0.32;
+            if (ex === 0) ctx.moveTo(ex, ey2); else ctx.lineTo(ex, ey2);
+          }
+          ctx.stroke();
+        }
+      } catch (e) { debug.errors.push("degraded: " + String(e && e.message || e)); }
+      if (!drawn) { degradedCanvas.hidden = true; return false; }
+      degradedCanvas.hidden = false;
+      degradedActive = true;
+      debug.degraded = { quality: Math.round(deg.quality * 1000) / 1000, blend: blend.map(function (b) { return b.id + ":" + Math.round(b.weight * 100) / 100; }).join(","), drawn: drawn };
+      return true;
+    }
+
+    /* ---- real clip at target ---- */
     function resolveClip() {
       var q = { view: view.viewId, pathology: pathology ? pathology.id : null, severity: pathology ? pathology.severity : null };
       var key = q.view + "|" + (q.pathology || "") + "|" + (q.severity || "");
@@ -975,6 +1643,7 @@
           try {
             var poly = G.KARDIA_ECHOLAB._pure.sectorClipPolygon(monCanvas.clientWidth || 640, monCanvas.clientHeight || 480, 80);
             video.style.clipPath = poly; video.style.webkitClipPath = poly;
+            if (realMask) { realMask.style.clipPath = poly; realMask.style.webkitClipPath = poly; }
           } catch (e) {}
         }
         var attr = "";
@@ -1056,7 +1725,7 @@
       var msg = coach.update(coachText(err, view), now);
       if (msg) setText("kslCoach", msg);
       setText("kslTargetName", view.label);
-      setText("kslFamily", view.family + " window");
+      setText("kslFamily", shortWindowName(view));
       debug.view = view.id; debug.viewLabel = view.label;
       setText("kslRot", Math.round(pose.rotationDeg) + " deg"); setText("kslRotRange", "target " + view.rotationDeg + " plus or minus " + view.tolerance.rotationDeg);
       setText("kslFan", Math.round(pose.fanDeg) + " deg"); setText("kslFanRange", "target " + view.fanDeg + " plus or minus " + view.tolerance.fanDeg);
@@ -1069,13 +1738,13 @@
         attemptDone = true;
         var sc = scoreAttempt({ timeMs: now - startedAt, travelMm: travelMm, idealMm: 60, finalAngleDeg: Math.abs(err.rotationDeg) });
         try { var store = JSON.parse(G.localStorage.getItem("ksl_scores") || "{}"); store[view.id] = sc; G.localStorage.setItem("ksl_scores", JSON.stringify(store)); } catch (e) {}
-        var r = el("kslResult"); if (r) { r.hidden = false; r.innerHTML = "<strong>View found.</strong> Score " + sc.total + " of 100. Time " + sc.timeS + " seconds. Path efficiency " + sc.efficiency + " percent. Final angle error " + Math.abs(Math.round(err.rotationDeg)) + " degrees."; }
+        var r = el("kslResult"); if (r) { r.hidden = false; r.innerHTML = "<strong>View found.</strong> Score " + sc.total + " of 100. Time " + sc.timeS + " seconds. Path efficiency " + sc.efficiency + " percent. Final angle error " + Math.abs(Math.round(err.rotationDeg)) + " degrees."; if (resultTimer) { try { clearTimeout(resultTimer); } catch (e) {} } resultTimer = setTimeout(function () { var rr = el("kslResult"); if (rr) rr.hidden = true; resultTimer = 0; }, 2500); }
         haptic("MEDIUM");
       }
       if (!inTol) holdSince = 0;
       wasIn = inTol;
-      resolveClip();
-      var rcState = realCine.update({ score: inTol ? 100 : 0, withinTolerance: inTol }, now);
+      if (cineSimMode === "cine") resolveClip();
+      var rcState = cineSimMode === "sim" ? "sim" : realCine.update({ score: inTol ? 100 : 0, withinTolerance: inTol }, now);
       debug.realState = rcState;
       var note = el("kslClipNote");
       if (rcState === "real" && realStatus === "ready" && realSrc) {
@@ -1083,6 +1752,8 @@
         var badge = el("kslRealBadge"); if (badge) badge.hidden = false;
         var det = el("kslAttrDetails"); if (det) det.hidden = false;
         if (video) {
+          try { var mw2 = monCanvas.clientWidth || 640, mh2 = monCanvas.clientHeight || 480, pk = mw2 + "x" + mh2; if (pk !== lastClipPolyKey && G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.sectorClipPolygon) { var poly2 = G.KARDIA_ECHOLAB._pure.sectorClipPolygon(mw2, mh2, 80); if (poly2) { video.style.clipPath = poly2; video.style.webkitClipPath = poly2; if (realMask) { realMask.style.clipPath = poly2; realMask.style.webkitClipPath = poly2; } lastClipPolyKey = pk; } } } catch (e) {}
+          if (realMask) realMask.hidden = false;
           video.hidden = false;
           video.style.transition = reduced ? "none" : "opacity 600ms ease-out";
           video.style.opacity = "1";
@@ -1090,7 +1761,8 @@
         }
         if (note) note.hidden = true;
       } else {
-        if (video) { video.hidden = true; video.style.opacity = "0"; try { video.pause && video.pause(); } catch (e) {} }
+        if (video) { video.hidden = true; video.style.opacity = "0"; }
+        if (realMask) realMask.hidden = true;
         var badge2 = el("kslRealBadge"); if (badge2) badge2.hidden = true;
         setText("kslMonLabel", "Simulated image");
         if (rcState === "real" && realStatus === "offline" && !offlineNoted) {
@@ -1122,7 +1794,7 @@
         var cz = Math.cos(orbit.yaw) * Math.cos(orbit.pitch) * orbit.dist;
         var cy = Math.sin(orbit.pitch) * orbit.dist;
         camera.position.set(cx, 40 + cy, cz);
-        camera.lookAt(0, 15, -25);
+        camera.lookAt(8, 28, -32);
         try { renderer.render(scene3, camera); } catch (e) { debug.errors.push("render: " + String(e && e.message || e)); }
         debug.frames++;
         if (renderer.info && renderer.info.render) debug.drawCalls = renderer.info.render.calls || debug.frames;
@@ -1130,8 +1802,23 @@
         if (!firstFrameDone) { firstFrameDone = true; finishLoadingIfReady(); }
         try { var ps = probeScreen(); if (ps) debug.probeScreen = ps; } catch (e) {}
       }
-      drawMonitor(now, plane || currentPlane());
-      fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
+      if (cineSimMode === "sim") {
+        ensureMonitor();
+        drawSim(now, plane || currentPlane());
+        debug.degradedActive = false;
+        setText("kslMonLabel", "Simulated image");
+      } else {
+        drawMonitor(now, plane || currentPlane());
+        var cleanShowing = (rcState === "real" && realStatus === "ready" && !!realSrc);
+        var degShown = drawDegraded(now, cleanShowing);
+        debug.degradedActive = !!degShown;
+        if (!cleanShowing) {
+          setText("kslMonLabel", degShown ? "Real patient image" : "Simulated image");
+          var det2 = el("kslAttrDetails"); if (det2 && degShown) det2.hidden = false;
+        }
+      }
+      fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; if (showDebug) setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
+      try { var handleEl = el("kslHandle"); var ps2 = probeScreen(); if (handleEl && ps2) { handleEl.style.left = Math.round(ps2.x) + "px"; handleEl.style.top = Math.round(ps2.y) + "px"; } } catch (e) {}
     }
     var hiddenPaused = false, suspended = false;
     function loop(now) { if (destroyed || suspended) { raf = 0; return; } if (hiddenPaused || doc.hidden || (G.document && G.document.hidden)) { hiddenPaused = true; debug.pausedHidden = true; raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
@@ -1178,13 +1865,13 @@
           pinchDist = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY); drag = { mode: "pinch" }; return;
         }
         var now = Date.now();
-        if (now - lastTapAt < 320) { orbit = { yaw: 2.6, pitch: 0.32, dist: 700 }; lastTapAt = 0; return; }
+        if (now - lastTapAt < 320) { orbit = { yaw: HOME_ORBIT.yaw, pitch: HOME_ORBIT.pitch, dist: HOME_ORBIT.dist }; lastTapAt = 0; return; }
         lastTapAt = now;
         var p = canvasPoint(ev), c = probeScreen();
         var mode = "orbit";
         if (c) {
           var d = Math.hypot(p.x - c.x, p.y - c.y);
-          if (d < 36) mode = "grip"; else if (p.y < c.y - 30 && d < 130) mode = "tail"; else if (d < 88) mode = "marker";
+          if (d < 48) mode = "grip"; else if (p.y < c.y - 22 && d < 150) mode = "tail"; else if (d < 104) mode = "marker";
         }
         drag = { mode: mode, x: p.x, y: p.y, id: ev.pointerId };
         debug.lastDragMode = mode; debug.lastDragPoint = c ? { x: Math.round(c.x), y: Math.round(c.y), px: Math.round(p.x), py: Math.round(p.y) } : null;
@@ -1213,7 +1900,9 @@
       sceneCanvas.addEventListener("pointercancel", endPointer);
     }
     function bindNudge(id, fn) { var b = el(id); if (b) b.addEventListener("click", fn); }
-    bindNudge("kslPractice", function () { startedAt = nowMs(); attemptDone = false; travelMm = 0; setText("kslCoach", "Practice. Find " + view.label + " on the body."); var r = el("kslResult"); if (r) r.hidden = true; });
+    function openSyncProbe() { try { if (G.KARDIA_SYNCPROBE && G.KARDIA_SYNCPROBE.open) G.KARDIA_SYNCPROBE.open(); } catch (e) {} }
+    bindNudge("kslSyncProbe", openSyncProbe);
+    bindNudge("kslPractice", function () { startedAt = nowMs(); attemptDone = false; travelMm = 0; setText("kslCoach", "Practice. Find " + view.label + " on the body."); var r = el("kslResult"); if (r) r.hidden = true; var box = el("kslTutorial"); if (box) { box.hidden = false; box.innerHTML = '<strong>Practice this view</strong><p>Find ' + esc(view.label) + ' on the body, then hold still inside the target ranges.</p><button type="button" class="ksl-btn ksl-syncbtn" id="kslPracticeSyncProbe" data-act="kecho-syncprobe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Use a phone as the probe</span></button> <button type="button" class="ksl-btn" id="kslPracticeClose">Close</button>'; var pb = box.querySelector ? box.querySelector("#kslPracticeSyncProbe") : el("kslPracticeSyncProbe"); if (pb) pb.addEventListener("click", openSyncProbe); var pc = box.querySelector ? box.querySelector("#kslPracticeClose") : el("kslPracticeClose"); if (pc) pc.addEventListener("click", function () { box.hidden = true; }); } });
     bindNudge("kslLabels", function () { showLabels = !showLabels; this.setAttribute("aria-pressed", showLabels ? "true" : "false"); });
     bindNudge("kslFullscreen", function () { var st = el("kslStage"); try { if (st && st.requestFullscreen) st.requestFullscreen(); else if (sceneCanvas && sceneCanvas.requestFullscreen) sceneCanvas.requestFullscreen(); } catch (e) {} });
     var layersBox = el("kslLayers");
@@ -1279,16 +1968,19 @@
         "<strong>Step " + (tutStep + 1) + " of " + TUTORIAL.length + ": " + esc(s.title) + "</strong><p>" + esc(s.body) + "</p>" +
         '<button type="button" class="ksl-btn" id="kslTutBack" ' + (tutStep === 0 ? "disabled" : "") + ">Back</button> " +
         '<button type="button" class="ksl-btn" id="kslTutNext">' + (tutStep === TUTORIAL.length - 1 ? "Finish" : "Next") + '</button> ' +
-        '<button type="button" class="ksl-btn" id="kslTutSkip">Skip</button>';
+        '<button type="button" class="ksl-btn" id="kslTutSkip">Skip</button>' +
+        (tutStep === TUTORIAL.length - 1 ? ' <button type="button" class="ksl-btn ksl-syncbtn" id="kslTutSyncProbe" data-act="kecho-syncprobe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Use a phone as the probe</span></button>' : "");
       Array.prototype.forEach.call(box.querySelectorAll("[data-tut]"), function (chip) {
-        chip.addEventListener("click", function () { tutStep = +chip.getAttribute("data-tut"); renderTut(); });
+        chip.addEventListener("click", function () { tutStep = +chip.getAttribute("data-tut"); haptic("SELECTION"); renderTut(); });
       });
       var backBtn = box.querySelector ? box.querySelector("#kslTutBack") : el("kslTutBack"), skipBtn = box.querySelector ? box.querySelector("#kslTutSkip") : el("kslTutSkip"), nextBtn = box.querySelector ? box.querySelector("#kslTutNext") : el("kslTutNext");
-      if (backBtn) backBtn.addEventListener("click", function () { if (tutStep > 0) { tutStep--; renderTut(); } });
+      var tutSyncBtn = box.querySelector ? box.querySelector("#kslTutSyncProbe") : el("kslTutSyncProbe");
+      if (tutSyncBtn) tutSyncBtn.addEventListener("click", openSyncProbe);
+      if (backBtn) backBtn.addEventListener("click", function () { if (tutStep > 0) { tutStep--; haptic("SELECTION"); renderTut(); } });
       if (skipBtn) skipBtn.addEventListener("click", function () { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; });
       if (nextBtn) nextBtn.addEventListener("click", function () {
         if (tutStep >= TUTORIAL.length - 1) { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; }
-        else { tutStep++; renderTut(); }
+        else { tutStep++; haptic("SELECTION"); renderTut(); }
       });
     }
     /* Explicit open: always starts again at step 1, clears the
@@ -1311,6 +2003,7 @@
       });
     } catch (e) {}
     if (!tutDone) renderTut();
+    applyCineSimMode();
     startLoad();
     raf = rafImpl(loop);
     var instance = {
@@ -1326,9 +2019,24 @@
           return { view: t.id, pose: pose, within: withinTolerance(poseError(pose, t), t) };
         });
       },
-      setPathology: function (p) { pathology = p; realKey = ""; },
+      debugSetPose: function (viewId, offsets) {
+        return preserveScroll(function () {
+          var t = T.byId(viewId) || T.byView(viewId); if (!t) return null;
+          selectView(t.id);
+          var o = offsets || {};
+          pose = { contact: [t.contact[0] + (o.slideDxMm || 0), t.contact[1], t.contact[2] + (o.slideDzMm || 0)],
+            rotationDeg: t.rotationDeg + (o.rotationDeg || 0), fanDeg: t.fanDeg + (o.fanDeg || 0),
+            rockDeg: t.rockDeg + (o.rockDeg || 0), depthCm: t.depthCm + (o.depthCm || 0) };
+          refresh(nowMs());
+          return { view: t.id, pose: pose, within: withinTolerance(poseError(pose, t), t), degradation: degradationFor(pose, t), blend: windowBlend(pose, windowTargets()) };
+        });
+      },
+      debugDegradation: function () { return { degradation: degradationFor(pose, view), blend: windowBlend(pose, windowTargets()), active: degradedActive }; },
+      setPathology: function (p) { pathology = p; realKey = ""; degradedSources = {}; degradedLoading = {}; },
       applySyncPose: applySyncPose,
-      getState: function () { return { view: view.id, pose: pose, layer: layer, pathology: pathology }; },
+      getState: function () { return { view: view.id, pose: pose, layer: layer, pathology: pathology, cineSimMode: cineSimMode, simState: simState }; },
+      setCineSimMode: setCineSimMode,
+      getCineSimMode: function () { return cineSimMode; },
       getDebug: function () { return debug; },
       refresh: refresh,
       openTutorial: openTutorial,
@@ -1343,6 +2051,7 @@
   var lastInstance = null;
   var API = { create: function (o) { var i = create(o); lastInstance = i; return i; }, _pure: PURE, version: 2, bodyCreditsHtml: bodyCreditsHtml, BODY_CREDITS: BODY_CREDITS,
     debugPose: function (viewId) { return lastInstance ? lastInstance.debugPose(viewId) : null; },
+    debugSetPose: function (viewId, offsets) { return lastInstance ? lastInstance.debugSetPose(viewId, offsets) : null; },
     getLast: function () { return lastInstance; } };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.KARDIA_SCANLAB = API;

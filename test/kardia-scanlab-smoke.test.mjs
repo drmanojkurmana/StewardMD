@@ -271,3 +271,39 @@ test("Scan Lab smoke: body loads, probe at target, monitor cuts, clip plays", as
   assert.ok(inst.getDebug().pixelRatio <= 2, "pixel ratio capped at 2: " + inst.getDebug().pixelRatio);
   inst.stop();
 });
+
+test("Scan Lab renders the SyncProbe button and clicking it opens the SyncProbe role sheet", async () => {
+  const doc = new FakeDoc();
+  const root = new El("div", { id: "root" }, doc);
+  doc.byId.set("root", root); doc.all.push(root);
+  try { global.window.localStorage.removeItem("ksl_tutorial_done"); } catch (e) {}
+  let opened = 0;
+  global.window.KARDIA_SYNCPROBE = { open: () => { opened++; } };
+  const T2 = require("../kardia-scan-targets.js");
+  const SL2 = require("../kardia-scanlab.js");
+  const fetch404 = () => Promise.resolve({ ok: false, status: 404, json: async () => { throw new Error("404"); }, arrayBuffer: async () => new ArrayBuffer(0) });
+  const inst = SL2.create({ doc, root, targets: T2, THREE: fakeTHREE({}), fetch: fetch404, noViewsFetch: true, raf: () => 1, cancelRaf: () => {} });
+  assert.ok(inst, "instance created");
+  const btn = doc.getElementById("kslSyncProbe");
+  assert.ok(btn, "SyncProbe button renders in the scene corner controls");
+  assert.equal(btn.attrs["data-act"], "kecho-syncprobe", "SyncProbe button keeps the kecho-syncprobe action");
+  assert.ok(root.innerHTML.includes("Use a phone as the probe"), "SyncProbe button is clearly labelled");
+  assert.ok(doc.getElementById("krdSyncPill"), "SyncProbe status pill slot renders above the monitor");
+  assert.ok(doc.getElementById("kslHandle"), "visible probe handle ring renders");
+  assert.ok(doc.getElementById("kslReadoutDetails"), "readouts and depth sit in a collapsible row");
+  assert.equal(doc.getElementById("kslFps").hidden, true, "fps line is hidden outside debug");
+  const startPose = inst.getState().pose;
+  const plax = T2.byId("plax");
+  assert.ok(SL2._pure.withinTolerance(SL2._pure.poseError(startPose, plax), plax), "first pose starts inside the PLAX coached range");
+  btn.click();
+  assert.equal(opened, 1, "clicking the SyncProbe button opens the SyncProbe role sheet");
+  const chips = doc._query("[data-tut]").filter((c) => String(c.attrs["data-tut"]) === "6");
+  assert.ok(chips.length, "tutorial last step chip exists");
+  chips[chips.length - 1].click();
+  const tutBtn = doc.getElementById("kslTutSyncProbe");
+  assert.ok(tutBtn, "SyncProbe button renders in the tutorial last step");
+  assert.equal(tutBtn.attrs["data-act"], "kecho-syncprobe");
+  tutBtn.click();
+  assert.equal(opened, 2, "clicking the tutorial SyncProbe button opens the SyncProbe role sheet");
+  inst.stop();
+});

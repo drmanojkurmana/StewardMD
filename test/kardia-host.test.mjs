@@ -133,7 +133,7 @@ function sandbox(extra) {
     classList: { add: (c) => classes.add(c), remove: (c) => classes.delete(c), contains: (c) => classes.has(c) },
     setAttribute() {}, removeAttribute() {},
     addEventListener() {}, appendChild() {}, contains: () => false,
-    // The engine appends its ai_drafted footer into the first .sp-scroll after every paint.
+    // The engine would append a draft footer here if the host opted in; Kardia does not.
     querySelector: (sel) => (sel === ".sp-scroll"
       ? { insertAdjacentHTML: (pos, h) => { root.innerHTML += h; } }
       : null),
@@ -190,7 +190,7 @@ test("flag off: KARDIA.open() is a no-op that touches no DOM", async () => {
   assert.equal(s.painted(), "", "no DOM touched");
 });
 
-test("flag on: six tabs, four levels, engine chrome (Pro badge, draft footer, language)", async () => {
+test("flag on: six tabs, four levels, engine chrome (Pro badge, no draft footer, language)", async () => {
   const s = sandbox();
   s.store.smd_kardia = "1";
   assert.equal(s.G.KARDIA.open(), true);
@@ -200,7 +200,7 @@ test("flag on: six tabs, four levels, engine chrome (Pro badge, draft footer, la
   assert.ok(h.includes('role="tablist"') && h.includes('aria-selected="true"'), "real tabs, one selected");
   for (const l of ["MBBS", "Resident", "Fellow", "Sonographer"]) assert.ok(h.includes(l), "level " + l);
   assert.ok((h.match(/sp-pro/g) || []).length >= 3, "Resident, Fellow and Sonographer carry the engine Pro badge");
-  assert.ok(h.includes("To be verified, draft"), "ai_drafted footer from the engine");
+  assert.ok(!h.includes("To be verified, draft"), "no draft footer on the learner screen (ai_drafted stays in the data)");
   assert.ok(h.includes("data-act=\"lang\""), "language switch from the engine");
   assert.ok(h.includes("Echo Lab"), "Echo Lab opens on the probe lab (WP4), not the old coming soon panel");
   assert.ok(!h.includes("The probe lab opens here"), "the WP8 coming soon panel is gone");

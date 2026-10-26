@@ -2,11 +2,31 @@
    Every colour comes from the Kardia tokens in kardia.css (.krd-root); this file
    only lays out the SyncProbe sheet, pill, banner, glyph and diagnostics. The scan
    sector stays dark in both themes, like the Echo Lab sector. */
-.krd-sp { position: fixed; inset: 0; z-index: 90; pointer-events: none; }
+.krd-sp { position: fixed; inset: 0; z-index: var(--krd-z-syncprobe, 960); pointer-events: none; background: transparent; }
 .krd-sp button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
-.krd-sp-sheet .sp-btn { transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease); }
+/* The SyncProbe root is .krd-root, not the engine .sp-root, so the sheet
+   carries its own button styles from the Kardia tokens. Labels are 17px
+   on 50px targets; the primary action uses the accent fill. */
+.krd-sp-sheet .sp-btn {
+  min-height: 50px; height: auto; box-sizing: border-box;
+  padding: 12px 20px; border: 0; border-radius: 14px;
+  font-size: 17px; line-height: 1.25; font-weight: 650; letter-spacing: -0.005em;
+  text-align: center; cursor: pointer;
+  transition: transform 120ms var(--kd-ease), background-color 140ms var(--kd-ease);
+}
+.krd-sp-sheet .sp-btn.pri { background: var(--sp-pri); color: var(--sp-on-pri); }
+.krd-sp-sheet .sp-btn.sec { background: var(--sp-s2); color: var(--sp-text); }
+.krd-sp-sheet .sp-btn[disabled] { background: var(--sp-s2); color: var(--sp-mut); cursor: default; }
 .krd-sp-sheet .sp-btn:active { transform: scale(0.97); }
-.krd-sp-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.45); pointer-events: auto; }
+.krd-sp-sheet .sp-wide { width: 100%; }
+.krd-sp-sheet .sp-h2 { font-size: 20px; line-height: 1.25; font-weight: 700; color: var(--kd-text); }
+.krd-sp-sheet .sp-h3 { font-size: 15px; line-height: 1.4; font-weight: 650; color: var(--kd-text); }
+.krd-sp-sheet .sp-small { font-size: 15px; line-height: 1.5; color: var(--sp-mut); overflow-wrap: break-word; }
+.krd-sp-error { margin-top: 12px; padding: 14px; border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1); }
+.krd-sp-error p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--kd-text); overflow-wrap: break-word; }
+/* Backdrop dims the Kardia screen behind (about 40 percent black); it
+   must never hide it, so the root and scrim stay transparent black only. */
+.krd-sp-scrim { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.4); pointer-events: auto; }
 .krd-sp-sheet {
   position: absolute; left: 0; right: 0; bottom: 0; max-height: 92dvh;
   overflow-y: auto; overscroll-behavior: contain;
@@ -21,8 +41,8 @@
 .krd-sp-sheet .sp-h2 { margin: 8px 0 4px; letter-spacing: -0.01em; }
 .krd-sp-col { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
 .krd-sp-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-.krd-sp-row .sp-btn { flex: 1 1 140px; min-height: 44px; }
-.krd-sp-col .sp-btn { min-height: 44px; touch-action: manipulation; }
+.krd-sp-row .sp-btn { flex: 1 1 140px; min-height: 50px; }
+.krd-sp-col .sp-btn { min-height: 50px; touch-action: manipulation; }
 .krd-sp-hint { margin: 0 0 4px; }
 .krd-sp-link { margin: 14px 0 0; text-align: center; }
 .krd-sp-minilink {
@@ -60,7 +80,7 @@
 .krd-sp-note p { margin: 0; font-size: 15px; line-height: 1.5; }
 .krd-sp-note b { font-weight: 650; }
 .krd-sp-join { margin-top: 16px; border-top: 1px solid var(--sp-line); padding-top: 12px; }
-.krd-sp-join .sp-btn { margin-top: 10px; min-height: 44px; }
+.krd-sp-join .sp-btn { margin-top: 10px; min-height: 50px; }
 .krd-sp-field { display: block; margin: 12px 0 4px; font-size: 14px; font-weight: 600; }
 .krd-sp-field span { color: var(--sp-mut); font-weight: 500; font-variant-numeric: tabular-nums; }
 .krd-sp-input {

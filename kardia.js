@@ -8,7 +8,7 @@
    localStorage smd_kardia = "1" (same tester mechanism as the other module flags, no early-access tier).
    Levels (engine pattern): MBBS free; Resident, Fellow and Sonographer are StewardMD Pro. The free
    preview is the first KARDIA_FREE_LESSONS Learn ECG lessons; everything else is Pro.
-   Content is ai_drafted: every screen carries the "To be verified, draft" footer until clinical review. */
+   Content stays ai_drafted in the data until clinical review; no draft footer is shown on the learner screen. */
 (function (G) {
   "use strict";
   var SP = G.SPECIALTY;
@@ -49,7 +49,7 @@
     storeKey: "smd_kardia_v1", prefKey: "smd_kardia_prefs", flag: "smd_kardia",
     title: T("Kardia", "कार्डिया"), subtitle: T("Echo and ECG learning", "इको और ECG सीखना"),
     levels: { free: ["mbbs"] }, proFeature: "kardia",
-    statusBg: "#06090b", draft: true
+    statusBg: "#06090b", draft: false
   });
   if (SP.features && SP.features.learn) SP.features.learn(host);
   if (SP.features && SP.features.bank) SP.features.bank(host, { id: "mcq", index: "decks/mcq/index.json" });
@@ -75,6 +75,41 @@
       return '<button type="button" role="tab" class="krd-tab" data-act="ktab" data-t="' + id + '"' +
         ' aria-selected="' + (id === cur) + '">' + I.tx(TAB_T[id]) + "</button>";
     }).join("") + "</div>";
+  }
+
+  /* The strip scrolls sideways on a phone, with an edge fade. After
+   * every paint, bring the active tab fully into view so a label such
+   * as Calculators is never left cut at the edge. Instant when the
+   * user prefers reduced motion. */
+  function scrollActiveTabIntoView() {
+    try {
+      var doc = G.document; if (!doc || !doc.querySelector) return;
+      var strip = doc.querySelector(".krd-root .krd-tabs");
+      var active = strip && strip.querySelector ? strip.querySelector('[aria-selected="true"]') : null;
+      if (!active) return;
+      var reduce = !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      if (active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
+      else if (strip) strip.scrollLeft = Math.max(0, active.offsetLeft - 16);
+      updateKrdTabFade(strip);
+    } catch (e) {}
+  }
+
+  /* Right edge fade only while more tabs sit off screen to the right.
+   * At the far right the fade is removed so the last label reads clean.
+   * Wired once per strip with a passive scroll listener. */
+  function updateKrdTabFade(strip) {
+    try {
+      if (!strip || !strip.style) return;
+      var over = (strip.scrollWidth - strip.clientWidth) > 4;
+      var atEnd = over && (strip.scrollWidth - strip.clientWidth - strip.scrollLeft) < 4;
+      var none = !over || atEnd;
+      strip.style.webkitMaskImage = none ? "none" : "";
+      strip.style.maskImage = none ? "none" : "";
+      if (strip.getAttribute && strip.getAttribute("data-krd-fade") !== "1" && strip.addEventListener) {
+        strip.setAttribute("data-krd-fade", "1");
+        strip.addEventListener("scroll", function () { updateKrdTabFade(strip); }, { passive: true });
+      }
+    } catch (e) {}
   }
 
   function levelsHtml(lv) {
@@ -251,7 +286,7 @@
       '</p><button type="button" class="sp-btn pri" data-act="kecho-retry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
     if (!EL.views) {
       if (!EL.loading) loadEchoViews();
-      return head + '<p class="sp-mut" role="status">' + I.tx(T("Loading Echo Lab.", "Loading Echo Lab.")) + "</p>";
+      return head + '<div class="krd-skel-wrap" aria-hidden="true"><span class="krd-skel sector"></span><span class="krd-skel line"></span></div><p class="sp-mut" role="status">' + I.tx(T("Loading Echo Lab.", "Loading Echo Lab.")) + "</p>";
     }
     var list = echoViewsForLevel(lv);
     if (!list.length) return head + '<p class="sp-small">' + I.tx(T("No echo views at this level yet.", "No echo views at this level yet.")) + "</p>";
@@ -836,20 +871,26 @@
       G.KARDIA_CASES.setNavigator(function (f) { showTab("cases", typeof f === "string" ? f : null); });
       var cbody = G.KARDIA_CASES.html();
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
-      if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); return; }
+      if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {} return; }
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
+      scrollActiveTabIntoView();
+      try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       return;
     }
     if (id === "calc" && G.KARDIA_CALC) {
       G.KARDIA_CALC.attach(host);
       G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + G.KARDIA_CALC.html(), focusSel);
+      scrollActiveTabIntoView();
+      try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       G.KARDIA_CALC.mount();
       return;
     }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
     if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + levelsMenuHtml(lv) + body, focusSel); }
     else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+    scrollActiveTabIntoView();
+    try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
     if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }
