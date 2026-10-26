@@ -102,6 +102,19 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         call.resolve(capsDict())
     }
 
+    /// Runs `body` once the central manager has left .unknown/.resetting, checking
+    /// every 0.2 s for up to 3 s. A scan started on a fresh manager used to fail
+    /// with "Bluetooth is not available" even with Bluetooth on.
+    private func whenStateKnown(_ tries: Int = 0, _ body: @escaping () -> Void) {
+        ensureManagers()
+        let st = centralManager?.state ?? .unknown
+        if (st == .unknown || st == .resetting) && tries < 15 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [weak self] in self?.whenStateKnown(tries + 1, body) }
+            return
+        }
+        body()
+    }
+
     private func flushPendingCaps() {
         if pendingCapsCalls.isEmpty { return }
         let calls = pendingCapsCalls
@@ -198,7 +211,10 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
     /// a plain message when nothing is found before the timeout. One scan at
     /// a time: a second discover while one is running is rejected.
     @objc func discover(_ call: CAPPluginCall) {
-        ensureManagers()
+        whenStateKnown { [weak self] in self?.discoverNow(call) }
+    }
+
+    private func discoverNow(_ call: CAPPluginCall) {
         if pendingDiscover != nil {
             call.reject("A Bluetooth scan is already running. Wait a moment and try again.")
             return
@@ -226,7 +242,10 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc func scanNearby(_ call: CAPPluginCall) {
-        ensureManagers()
+        whenStateKnown { [weak self] in self?.scanNearbyNow(call) }
+    }
+
+    private func scanNearbyNow(_ call: CAPPluginCall) {
         if pendingNearby != nil { call.reject("A Bluetooth scan is already running. Wait a moment and try again."); return }
         guard let cm = centralManager, cm.state == .poweredOn else { call.reject("Bluetooth is not available."); return }
         var timeoutMs = call.getInt("timeoutMs") ?? 5000
