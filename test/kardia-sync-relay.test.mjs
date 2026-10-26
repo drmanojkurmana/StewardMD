@@ -859,7 +859,7 @@ function lookupDeps(overrides = {}) {
 test("code register and resolve round trip returns only the join fields", () => {
   const { directory } = lookupDeps();
   assert.equal(Core.CODE_TTL_MS, 300000, "code lives 5 minutes");
-  assert.equal(Core.CODE_LOOKUP_MAX, 10, "10 lookups per minute");
+  assert.equal(Core.CODE_LOOKUP_MAX, 30, "30 lookups per minute");
   assert.equal(Core.CODE_LOOKUP_WINDOW_MS, 60000);
 
   const reg = directory.register(makeCodeInput());
@@ -940,29 +940,29 @@ test("code compare is constant-time: one-character changes never match", () => {
   assert.equal(deps.directory.size, 1, "guesses do not consume the code");
 });
 
-test("code lookup rate limit: 10 per minute per user and per IP", () => {
+test("code lookup rate limit: 30 per minute per user and per IP", () => {
   const t0 = 800000;
   const deps = lookupDeps();
-  // 10 misses from one user+IP are allowed (misses consume quota too)
-  for (let i = 0; i < 10; i++) {
+  // CODE_LOOKUP_MAX misses from one user+IP are allowed (misses consume quota too)
+  for (let i = 0; i < Core.CODE_LOOKUP_MAX; i++) {
     const res = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "9.9.9.9", now: t0 + i }, deps);
     assert.equal(res.status, 404, "attempt " + (i + 1) + " allowed");
   }
-  const limited = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "9.9.9.9", now: t0 + 10 }, deps);
+  const limited = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "9.9.9.9", now: t0 + Core.CODE_LOOKUP_MAX }, deps);
   assert.equal(limited.status, 429);
   assert.equal(limited.body.error, "rate-limited");
   assert.ok(limited.body.retryAfterMs > 0 && limited.body.retryAfterMs <= 60000);
 
   // Same user on a fresh IP is still limited (per-user bucket)
-  const sameUser = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "8.8.8.8", now: t0 + 11 }, deps);
+  const sameUser = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "8.8.8.8", now: t0 + Core.CODE_LOOKUP_MAX + 1 }, deps);
   assert.equal(sameUser.status, 429);
 
   // Another user on the same IP is still limited (per-IP bucket)
-  const sameIp = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-2", ip: "9.9.9.9", now: t0 + 12 }, deps);
+  const sameIp = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-2", ip: "9.9.9.9", now: t0 + Core.CODE_LOOKUP_MAX + 2 }, deps);
   assert.equal(sameIp.status, 429);
 
   // A different user on a different IP is unaffected
-  const other = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-2", ip: "7.7.7.7", now: t0 + 13 }, deps);
+  const other = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-2", ip: "7.7.7.7", now: t0 + Core.CODE_LOOKUP_MAX + 3 }, deps);
   assert.equal(other.status, 404);
 
   // After the window passes, lookups work again
@@ -1105,7 +1105,7 @@ test("session creation limit: 5 rooms per 10 minutes per IP, then 429 with retry
   assert.equal(limited.status, 429);
   assert.equal(limited.body.error, "rate-limited");
   assert.ok(limited.body.retryAfterMs > 0);
-  assert.equal(Core.handleSessionCreate({ ip: "6.6.6.6", now: t0 + 11 }, { limiter }).status, 200, "another IP unaffected");
+  assert.equal(Core.handleSessionCreate({ ip: "6.6.6.6", now: t0 + Core.CODE_LOOKUP_MAX + 1 }, { limiter }).status, 200, "another IP unaffected");
   const roundTrip = Core.IpRateLimiter.fromJSON(limiter.toJSON(t0));
   assert.equal(Core.handleSessionCreate({ ip: "5.5.5.5", now: t0 + 20 }, { limiter: roundTrip }).status, 429, "limit survives storage round trip");
   assert.equal(Core.handleSessionCreate({ ip: "5.5.5.5", now: t0 + Core.SESSION_CREATE_WINDOW_MS + 1 }, { limiter }).status, 200, "window resets");

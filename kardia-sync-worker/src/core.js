@@ -449,7 +449,7 @@ export class SyncRoomCore {
  */
 export const SHORT_CODE_RE = /^[A-Z2-9]{6}$/;
 export const CODE_TTL_MS = SESSION_TTL_MS;
-export const CODE_LOOKUP_MAX = 10;
+export const CODE_LOOKUP_MAX = 30;
 export const CODE_LOOKUP_WINDOW_MS = 60 * 1000;
 
 /* Normalize a typed code the same way the client does: uppercase, drop
@@ -705,7 +705,7 @@ export function handleCodeLookup({ code, uid, ip, now = Date.now() } = {}, deps 
  * Anonymous session creation is open, so it is strictly limited per IP:
  * at most SESSION_CREATE_MAX rooms per SESSION_CREATE_WINDOW_MS. Every
  * attempt that reaches the check consumes quota, signed in or not. */
-export const SESSION_CREATE_MAX = 5;
+export const SESSION_CREATE_MAX = 30;
 export const SESSION_CREATE_WINDOW_MS = 10 * 60 * 1000;
 
 export class IpRateLimiter {
