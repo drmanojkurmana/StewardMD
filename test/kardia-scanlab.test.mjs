@@ -186,6 +186,7 @@ test("all 15 view ids and the sc4c alias resolve to a target", () => {
   for (const v of T.VIEWS) assert.equal(T.byView(v.viewId), v, v.viewId);
   assert.equal(T.byId("sc4c").id, "subcostal_4c");
   assert.equal(T.byId("suprasternal").id, "suprasternal_arch");
+  assert.equal(T.byId("ssn").id, "suprasternal_arch");
 });
 
 test("window picker uses the five reference window names", () => {

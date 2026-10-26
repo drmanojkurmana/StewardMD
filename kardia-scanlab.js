@@ -386,6 +386,95 @@
     var normal = norm3(cross3(marker, beam));
     return { origin: origin, normal: normal, up: mul3(beam, -1), beam: beam, marker: marker };
   }
+  /* Scan Lab patient mm and the K3 volume both claim x-left, y-anterior,
+   * z-cranial, millimetres, origin near the LV centroid, but they do not
+   * coincide: Scan Lab contacts sit on the HuBMAP / Visible Human skin,
+   * while volume VIEWS origins sit on the compact ellipsoid "chest". A
+   * single offset + signed-permutation + scale leaves apical and
+   * subcostal windows outside the volume (fit RMS ~45 mm). Each Scan Lab
+   * target is therefore rigidly mapped onto its round-1 volume VIEWS
+   * pose: identity axis order, scale 1 on contact deltas, origin offset
+   * = volumeOrigin - R * scanLabContact, with R the basis map from the
+   * parent window's Scan Lab probe (beam = -views.json up, up = normal)
+   * onto VIEWS[parent]. Sibling views (A5C from A4C, PSAX PM from MV)
+   * share the parent R so fan/rock/slide stay continuous. */
+  var SIM_VOL_SCALE = 1;
+  var SIM_VOL_HOME = {
+    plax: { vol: "plax", sl: "plax" },
+    rv_inflow: { vol: "plax", sl: "plax" },
+    rv_outflow: { vol: "plax", sl: "plax" },
+    psax_av: { vol: "psax_av", sl: "psax_av" },
+    psax_mv: { vol: "psax_mv", sl: "psax_mv" },
+    psax_pm: { vol: "psax_mv", sl: "psax_mv" },
+    psax_apex: { vol: "psax_mv", sl: "psax_mv" },
+    a4c: { vol: "a4c", sl: "a4c" },
+    a5c: { vol: "a4c", sl: "a4c" },
+    a2c: { vol: "a2c", sl: "a2c" },
+    a3c: { vol: "a2c", sl: "a2c" },
+    subcostal_4c: { vol: "subcostal_4c", sl: "subcostal_4c" },
+    ivc: { vol: "subcostal_4c", sl: "subcostal_4c" },
+    abdominal_aorta: { vol: "subcostal_4c", sl: "subcostal_4c" },
+    suprasternal_arch: { vol: "suprasternal", sl: "suprasternal_arch" }
+  };
+  var SIM_SL_PROBE = {
+    plax: { normal: [1, 0, 0], up: [0, 0.9507, 0.3102] },
+    rv_inflow: { normal: [0.9707, 0.2402, 0], up: [-0.2402, 0.9707, 0] },
+    rv_outflow: { normal: [0.9707, -0.2402, 0], up: [0.2402, 0.9707, 0] },
+    psax_av: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    psax_mv: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    psax_pm: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    psax_apex: { normal: [-0.1199, 0.1199, 0.9855], up: [0.2121, 0.9729, -0.0926] },
+    a4c: { normal: [0.6891, 0.6434, 0.3333], up: [0.2122, 0.2606, -0.9418] },
+    a5c: { normal: [0.9755, 0.0018, 0.2198], up: [0.2198, 0.0004, -0.9755] },
+    a2c: { normal: [0.0366, 0.9758, -0.2156], up: [-0.0216, -0.2149, -0.9764] },
+    a3c: { normal: [0.7828, -0.5629, 0.2651], up: [0.2152, -0.1548, -0.9642] },
+    subcostal_4c: { normal: [0.5957, 0.7132, 0.3695], up: [-0.2369, -0.2836, 0.9292] },
+    ivc: { normal: [0.0359, -0.9982, 0.048], up: [-0.0137, 0.0476, 0.9988] },
+    abdominal_aorta: { normal: [1, 0, 0], up: [0, -0.3102, 0.9507] },
+    suprasternal_arch: { normal: [1, 0, 0], up: [0, 0.3102, 0.9507] }
+  };
+  function simBasis(beam, upIn) {
+    var beamN = norm3(beam || [0, -1, 0]);
+    var right = cross3(beamN, norm3(upIn || [0, 0, 1]));
+    if (Math.sqrt(dot3(right, right)) < 0.04) right = cross3(beamN, [1, 0, 0]);
+    right = norm3(right);
+    return { beam: beamN, right: right, up: norm3(cross3(right, beamN)) };
+  }
+  function simMapVec(v, from, to) {
+    var vb = dot3(v, from.beam), vu = dot3(v, from.up), vr = dot3(v, from.right);
+    return [
+      to.beam[0] * vb + to.up[0] * vu + to.right[0] * vr,
+      to.beam[1] * vb + to.up[1] * vu + to.right[1] * vr,
+      to.beam[2] * vb + to.up[2] * vu + to.right[2] * vr
+    ];
+  }
+  /* Sim image zoom and gain: the K3 volume is rendered at depth / SIM_ZOOM so the heart fills the sector like the round 1 reference renders. */
+  var SIM_ZOOM = 1.8, SIM_GAIN = 1.6;
+  function simPoseFromScanlab(pose, plane, view, volApi, targetsApi) {
+    var contact = (pose && pose.contact) || (plane && plane.origin) || [0, 60, 20];
+    var slBeam = plane && plane.beam ? plane.beam : (plane && plane.up ? mul3(plane.up, -1) : [0, -1, 0]);
+    var slUp = plane && plane.normal ? plane.normal : [0, 1, 0];
+    var views = volApi && volApi.VIEWS;
+    if (!views || !view) return { origin: contact.slice(), beam: slBeam.slice(), up: slUp.slice() };
+    var home = SIM_VOL_HOME[view.id] || SIM_VOL_HOME.plax;
+    var vol = views[home.vol] || views.plax;
+    var parent = targetsApi && targetsApi.byId ? targetsApi.byId(home.sl) : null;
+    var parentContact = parent && parent.contact ? parent.contact : (view.contact || contact);
+    var probe = SIM_SL_PROBE[home.sl] || SIM_SL_PROBE.plax;
+    var slFrom = simBasis(mul3(probe.up, -1), probe.normal);
+    var volPl = volApi.poseToPlane ? volApi.poseToPlane(vol) : simBasis(vol.beam, vol.up);
+    var volTo = { beam: volPl.beam, up: volPl.up, right: volPl.right };
+    /* Origins stay in patient xyz (same axis order, scale 1): a slide
+     * toward the apex on the body moves the cut toward the apex. Beam
+     * and up go through R so the sector matches the round-1 VIEWS
+     * image, including the subcostal beam sign flip. */
+    var dContact = mul3(sub3(contact, parentContact), SIM_VOL_SCALE);
+    return {
+      origin: add3(vol.origin, dContact),
+      beam: simMapVec(slBeam, slFrom, volTo),
+      up: simMapVec(slUp, slFrom, volTo)
+    };
+  }
   function ptTriDist(p, a, b, c) {
     var ab = sub3(b, a), ac = sub3(c, a), ap = sub3(p, a);
     var d1 = dot3(ab, ap), d2 = dot3(ac, ap);
@@ -590,7 +679,8 @@
     BODY_CREDITS: BODY_CREDITS, bodyCreditsHtml: bodyCreditsHtml, assetCandidates: assetCandidates, assetFileUrl: assetFileUrl,
     registerPoint: registerPoint, parseGlb: parseGlb, cutTriangles: cutTriangles, HUBMAP_CENTRE: HUBMAP_CENTRE,
     sha256Hex: sha256Hex, ATLAS_CHUNKS: ATLAS_CHUNKS, ATLAS_ORG: ATLAS_ORG, parseAtlasChunk: parseAtlasChunk,
-    planeFromPose: planeFromPose, skinDistanceMm: skinDistanceMm, inLandmark: inLandmark, heartBeatScale: heartBeatScale, HEART_VESSELS: HEART_VESSELS, WINDOWS: WINDOWS, windowForView: windowForView, viewIcon: viewIcon, loadAssets: loadAssets };
+    planeFromPose: planeFromPose, simPoseFromScanlab: simPoseFromScanlab, SIM_VOL_HOME: SIM_VOL_HOME, SIM_VOL_SCALE: SIM_VOL_SCALE, SIM_SL_PROBE: SIM_SL_PROBE, SIM_ZOOM: SIM_ZOOM, SIM_GAIN: SIM_GAIN,
+    skinDistanceMm: skinDistanceMm, inLandmark: inLandmark, heartBeatScale: heartBeatScale, HEART_VESSELS: HEART_VESSELS, WINDOWS: WINDOWS, windowForView: windowForView, viewIcon: viewIcon, loadAssets: loadAssets };
 
   /* ---------------- browser UI ---------------- */
   function haptic(kind) {
@@ -1318,11 +1408,11 @@
         var sw = (simCanvas && simCanvas.clientWidth) || 0, sh = (simCanvas && simCanvas.clientHeight) || 0;
         if (sw > 0 && sh > 0 && (simCanvas.width !== sw || simCanvas.height !== sh)) { simCanvas.width = sw; simCanvas.height = sh; }
         if (ownHeart && heartInst && heartInst.step) heartInst.step(16);
-        var sp = simPoseFromPlane(plane, pose.contact); if (!sp) return;
+        var sp = simPoseFromScanlab(pose, plane, view, G.KARDIA_SIM_VOLUME, T); if (!sp) return;
         var hs = null; try { hs = heartInst && heartInst.state ? heartInst.state() : null; } catch (e) {}
         simRenderer.setPose(sp);
         simRenderer.setPhase(simPhaseFromHeart(hs, now));
-        simRenderer.setKnobs({ depthMm: pose.depthCm * 10, gain: 1.25, focusMm: 70, dynamicRange: 55 });
+        simRenderer.setKnobs({ depthMm: pose.depthCm * 10 / SIM_ZOOM, gain: SIM_GAIN, focusMm: 70, dynamicRange: 55 });
         simRenderer.render(now);
         if (hs) setText("kslHr", Math.round(hs.heartRateBpm || 70) + " bpm");
       } catch (e) { debug.errors.push("sim frame: " + String(e && e.message || e)); }

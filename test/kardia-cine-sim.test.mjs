@@ -75,8 +75,10 @@ test("wiring: ensureSim loads the prebuilt atlas, drawSim maps pose and knobs", 
   assert.ok(src.includes('loadAtlas("/kardia/media/k3-volume/"') || src.includes("loadSimAtlas(G.KARDIA_SIM_VOLUME, SIM_ATLAS_BASE)"));
   assert.ok(!/buildVolumes\(\)/.test(src), "must not build volumes on the phone");
   assert.ok(!/packAtlas\(/.test(src), "must not pack an atlas on the phone");
-  assert.ok(src.includes("simPoseFromPlane(plane, pose.contact)"));
-  assert.ok(src.includes("gain: 1.25") && src.includes("dynamicRange: 55"));
+  assert.ok(src.includes("simPoseFromScanlab(pose, plane, view, G.KARDIA_SIM_VOLUME, T)"));
+  assert.ok(src.includes("gain: SIM_GAIN") && src.includes("dynamicRange: 55"));
+  assert.ok(src.includes("SIM_ZOOM = 1.8") && src.includes("SIM_GAIN = 1.6"));
+  assert.ok(src.includes("pose.depthCm * 10 / SIM_ZOOM"));
   assert.ok(src.includes("simCanvas.width = sw") && src.includes("simCanvas.height = sh"));
 });
 
