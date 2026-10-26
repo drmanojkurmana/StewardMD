@@ -39,15 +39,21 @@ test("result clears after 2.5s and tab strips scroll with an edge fade", () => {
   assert.match(css, /\.ksl-windows\{[^}]*overflow-x:auto[^}]*mask-image:linear-gradient\(to right,#000 0,#000 calc\(100% - 24px\),transparent 100%\)/);
 });
 
-test("Calculators tab is never cut: smaller gaps, scroll strip, active tab scrolled into view", () => {
+test("Calculators tab is never cut: 16pt gaps, scroll strip, active tab scrolled into view", () => {
   const hostJs = readFileSync(new URL("../kardia.js", import.meta.url), "utf8");
+  const prem = readFileSync(new URL("../kardia-premium.css", import.meta.url), "utf8");
   assert.ok(hostJs.includes("Calculators"), "full Calculators label is kept");
   assert.ok(!hostJs.includes('calc: T("Calc"'), "label is not shortened to Calc");
-  assert.match(hostCss, /\.krd-tabs \{[^}]*gap: 2px/);
+  assert.match(hostCss, /\.krd-tabs \{[^}]*gap: 16px/);
   assert.match(hostCss, /\.krd-tab \{[^}]*padding: 10px 9px/);
+  assert.match(hostCss, /\.krd-tabs \{[^}]*overflow-x: auto/);
+  assert.match(prem, /\.krd-tabs \{[^}]*gap: 16px/);
+  assert.match(prem, /\.krd-tabs \{[^}]*overflow-x: auto/);
+  assert.ok(!/\.krd-tabs \{[^}]*overflow-x: visible/.test(prem), "narrow phones keep the scroller, never squeeze");
   assert.ok(hostJs.includes("scrollActiveTabIntoView"), "active tab is scrolled into view after paint");
   assert.ok(hostJs.includes('inline: "center"'), "active tab is centred in the strip");
   assert.ok((hostJs.match(/scrollActiveTabIntoView\(\);/g) || []).length >= 3, "every tab paint scrolls the active tab into view");
+  assert.ok(hostJs.includes("updateKrdTabFade"), "right edge fade hides at the far right");
 });
 
 test("scene camera homes closer on the left chest, and double tap returns to it", () => {
@@ -70,11 +76,12 @@ test("tablet: scene and monitor side by side and tall, coaching spans, picker wr
   assert.match(tablet, /\.ksl-monitor-head\{[^}]*flex-wrap:nowrap/, "clip label, pill and heart rate keep one uncrowded row");
 });
 
-test("overlay covers the page and every tab label fits at 402pt and 375pt; the probe is enlarged", () => {
+test("overlay covers the page and the tab strip scrolls at 402pt and 375pt; the probe is enlarged", () => {
   const prem = readFileSync(new URL("../kardia-premium.css", import.meta.url), "utf8");
   assert.match(prem, /\.krd-root \{ position: fixed; inset: 0[^}]*height: auto/, "the Kardia overlay fully covers the page behind it, safe areas included");
-  assert.match(prem, /@media \(max-width: 430px\)/, "narrow phone tab fit applies at 402pt and 375pt");
-  assert.match(prem, /\.krd-root \.krd-tab \{ flex: 1 1 0[^}]*font-size: 12\.5px/, "all six labels share the row, none cut");
+  assert.match(prem, /@media \(max-width: 430px\)/, "narrow phone tab scroll applies at 402pt and 375pt");
+  assert.match(prem, /\.krd-root \.krd-tabs \{[^}]*overflow-x: auto/, "narrow phones scroll, none cut or overlapped");
+  assert.match(prem, /\.krd-root \.krd-tab \{[^}]*flex: 0 0 auto/, "tabs keep their width and never squeeze");
   assert.match(js, /setScalar\(1\.5\)/, "probe is scaled up from the contact point");
   assert.match(css, /\.ksl-handle\{[^}]*width:34px/, "the grip ring no longer covers the probe lens");
 });

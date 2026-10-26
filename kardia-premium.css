@@ -65,14 +65,15 @@
  * Premium loads last, so this restores the stretched fixed box. */
 .krd-root { position: fixed; inset: 0; top: 0; right: 0; bottom: 0; left: 0;
   height: auto; max-height: none; min-height: 100dvh; background: var(--sp-bg); }
-/* Narrow phones: all six tab labels fit on one row with no scrolling
- * and no edge fade, so a label such as Calculators is never cut at
- * 402 pt or 375 pt. The wider scroll strip is unchanged. */
+/* Narrow phones: the strip stays a horizontal scroller with real gaps
+ * and a right edge fade, so Calculators and KardiQ X never overlap at
+ * 375 pt, 402 pt or 440 pt. The active tab scrolls into view. */
 @media (max-width: 430px) {
-  .krd-root .krd-tabs { gap: 0; padding: 8px 8px 4px; overflow-x: visible; overflow-y: hidden;
-    scroll-snap-type: none; -webkit-mask-image: none; mask-image: none; }
-  .krd-root .krd-tab { flex: 1 1 0; min-width: 0; padding: 10px 1px; font-size: 12.5px;
-    letter-spacing: -0.01em; text-align: center; white-space: nowrap; overflow: visible; text-overflow: clip; }
+  .krd-root .krd-tabs { gap: 16px; padding: 8px 16px 12px; overflow-x: auto; overflow-y: hidden;
+    scroll-snap-type: x proximity; -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
+    mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%); }
+  .krd-root .krd-tab { flex: 0 0 auto; min-width: 0; padding: 10px 9px; font-size: 15px;
+    letter-spacing: 0; text-align: left; white-space: nowrap; overflow: visible; text-overflow: clip; }
 }
 /* Small and large phones and iPad: the card never leaves the screen. */
 @media (min-width: 820px) { .krd-onb { align-items: center; } }

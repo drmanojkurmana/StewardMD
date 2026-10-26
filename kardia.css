@@ -52,8 +52,8 @@ body:not(.dark):not(.v3-dark) .krd-root {
    lower half of the labels, worst at 390px where the tabs scroll. flex:none
    keeps both rows at content height; overflow-y stays non-auto so a horizontal
    scroll can never clip the labels vertically. */
-.krd-root .krd-tabs { flex: 0 0 auto; display: flex; gap: 2px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
-  padding: 8px 16px 4px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+.krd-root .krd-tabs { flex: 0 0 auto; display: flex; gap: 16px; overflow-x: auto; overflow-y: hidden; scrollbar-width: none;
+  padding: 8px 16px 12px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
   -webkit-mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%);
   mask-image: linear-gradient(to right, #000 0, #000 calc(100% - 28px), transparent 100%); }
 .krd-root .krd-tabs::-webkit-scrollbar { display: none; }

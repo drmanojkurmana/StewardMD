@@ -100,7 +100,8 @@ test("premium css: one token scale, dark scan surround, reduced motion, no new a
   for (const tok of ["--kd-sp-1", "--kd-fs-1", "--kd-r-m", "--kd-r-pill"]) assert.ok(css.includes(tok), tok);
   assert.match(css, /prefers-reduced-motion: reduce/);
   assert.match(css, /min-height: 44px/);
-  assert.ok(!/#3ee07a|#0c6b4f|purple|gradient/i.test(css), "no new palette, no gradient");
+  assert.ok(!/#3ee07a|#0c6b4f|purple/i.test(css), "no new palette");
+  assert.ok(!/background[^;]*linear-gradient|glow/i.test(css), "no gradient backdrop or glow; the tab strip edge fade uses mask-image only");
 });
 
 test("hooks: host notifies premium on every tab, scanlab success and tutorial selection, syncprobe pairing success", () => {

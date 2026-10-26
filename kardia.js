@@ -90,6 +90,25 @@
       var reduce = !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches);
       if (active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
       else if (strip) strip.scrollLeft = Math.max(0, active.offsetLeft - 16);
+      updateKrdTabFade(strip);
+    } catch (e) {}
+  }
+
+  /* Right edge fade only while more tabs sit off screen to the right.
+   * At the far right the fade is removed so the last label reads clean.
+   * Wired once per strip with a passive scroll listener. */
+  function updateKrdTabFade(strip) {
+    try {
+      if (!strip || !strip.style) return;
+      var over = (strip.scrollWidth - strip.clientWidth) > 4;
+      var atEnd = over && (strip.scrollWidth - strip.clientWidth - strip.scrollLeft) < 4;
+      var none = !over || atEnd;
+      strip.style.webkitMaskImage = none ? "none" : "";
+      strip.style.maskImage = none ? "none" : "";
+      if (strip.getAttribute && strip.getAttribute("data-krd-fade") !== "1" && strip.addEventListener) {
+        strip.setAttribute("data-krd-fade", "1");
+        strip.addEventListener("scroll", function () { updateKrdTabFade(strip); }, { passive: true });
+      }
     } catch (e) {}
   }
 
