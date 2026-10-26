@@ -77,6 +77,22 @@
     }).join("") + "</div>";
   }
 
+  /* The strip scrolls sideways on a phone, with an edge fade. After
+   * every paint, bring the active tab fully into view so a label such
+   * as Calculators is never left cut at the edge. Instant when the
+   * user prefers reduced motion. */
+  function scrollActiveTabIntoView() {
+    try {
+      var doc = G.document; if (!doc || !doc.querySelector) return;
+      var strip = doc.querySelector(".krd-root .krd-tabs");
+      var active = strip && strip.querySelector ? strip.querySelector('[aria-selected="true"]') : null;
+      if (!active) return;
+      var reduce = !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches);
+      if (active.scrollIntoView) active.scrollIntoView({ block: "nearest", inline: "center", behavior: reduce ? "auto" : "smooth" });
+      else if (strip) strip.scrollLeft = Math.max(0, active.offsetLeft - 16);
+    } catch (e) {}
+  }
+
   function levelsHtml(lv) {
     var seg = LEVELS.map(function (l) {
       var locked = levelLockedK(l);
@@ -838,18 +854,21 @@
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
       if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); return; }
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
+      scrollActiveTabIntoView();
       return;
     }
     if (id === "calc" && G.KARDIA_CALC) {
       G.KARDIA_CALC.attach(host);
       G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + G.KARDIA_CALC.html(), focusSel);
+      scrollActiveTabIntoView();
       G.KARDIA_CALC.mount();
       return;
     }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
     if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + levelsMenuHtml(lv) + body, focusSel); }
     else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+    scrollActiveTabIntoView();
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
     if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }

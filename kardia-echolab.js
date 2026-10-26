@@ -340,6 +340,12 @@
    * the height, half-angle sectorDeg/2 about the straight-down beam.
    * The real clip is fitted to the same box, so this mask gives it
    * the same sector shape and depth as the simulated sector. */
+  /* Every real clip is zoomed by this factor inside the fixed sector
+   * mask, so the clip's own fan edges, depth ticks and labels fall
+   * outside the mask and never show. 1.45 pushes the widest shipped
+   * fan (about 82 percent of frame width at the far arc) beyond the
+   * fixed 80 degree sector at every depth below the near field. */
+  var REAL_CLIP_ZOOM = 1.45;
   function sectorClipPolygon(w, h, sectorDeg) {
     if (!(w > 0) || !(h > 0)) return "";
     /* Fixed sector, same geometry as the simulated and degraded
@@ -490,7 +496,8 @@
       try { return !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; }
     }
     var REAL_CSS =
-      ".krd-root .kel-real-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transition:opacity 300ms var(--kd-ease);}" +
+      ".krd-root .kel-real-mask{position:absolute;inset:0;overflow:hidden;pointer-events:none;}" +
+      ".krd-root .kel-real-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transform:scale(1.45);transform-origin:50% 46%;transition:opacity 300ms var(--kd-ease);}" +
       ".krd-root .kel-real-video.kel-real-on{opacity:1;}" +
       ".krd-root .kel-real-bar{margin-top:8px;}" +
       ".krd-root .kel-real-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}" +
@@ -509,10 +516,13 @@
         var st = doc.createElement("style"); st.id = "kelRealStyle"; st.textContent = REAL_CSS;
         (doc.head || doc.documentElement || doc.body).appendChild(st);
       }
+      var mask = doc.createElement("div");
+      mask.id = "krdRealMask"; mask.className = "kel-real-mask";
       var video = doc.createElement("video");
       video.id = "krdRealVideo"; video.className = "kel-real-video";
       video.muted = true; video.loop = true; video.setAttribute("playsinline", "");
       video.setAttribute("preload", "auto"); video.setAttribute("aria-label", "Real patient cine");
+      mask.appendChild(video);
       var bar = doc.createElement("div"); bar.id = "krdRealBar"; bar.className = "kel-real-bar"; bar.hidden = true;
       bar.innerHTML =
         '<div class="kel-real-row"><div class="kel-real-switch" role="group" aria-label="Image source">' +
@@ -521,7 +531,7 @@
         '<button type="button" class="kel-real-label" id="krdRealLabel" aria-expanded="false">Real patient</button></div>' +
         '<p class="kel-real-credit" id="krdRealCredit" hidden></p>' +
         '<p class="kel-real-note" id="krdRealNote" role="status"></p>';
-      realEls = { video: video, bar: bar,
+      realEls = { video: video, mask: mask, bar: bar,
         simBtn: bar.querySelector("#krdRealSim"), realBtn: bar.querySelector("#krdRealReal"),
         label: bar.querySelector("#krdRealLabel"), credit: bar.querySelector("#krdRealCredit"),
         note: bar.querySelector("#krdRealNote") };
@@ -538,7 +548,7 @@
     function attachRealEls() {
       var r = ensureRealEls(); if (!r || !els.sector) return;
       var slot = els.sector.parentNode; if (!slot) return;
-      if (r.video.parentNode !== slot) slot.appendChild(r.video);
+      if (r.mask.parentNode !== slot) slot.appendChild(r.mask);
       var stack = slot, parent = stack.parentNode;
       if (parent && r.bar.parentNode !== parent) parent.insertBefore(r.bar, stack.nextSibling);
       fitRealVideo();
@@ -547,7 +557,10 @@
       if (!realEls || !els.sector) return;
       var w = els.sector.clientWidth || els.sector.width || 0, h = els.sector.clientHeight || els.sector.height || 0;
       var poly = sectorClipPolygon(w, h, uiKnobs().sectorDeg);
-      if (poly) { realEls.video.style.clipPath = poly; realEls.video.style.webkitClipPath = poly; }
+      if (poly) {
+        realEls.video.style.clipPath = poly; realEls.video.style.webkitClipPath = poly;
+        if (realEls.mask) { realEls.mask.style.clipPath = poly; realEls.mask.style.webkitClipPath = poly; }
+      }
       if (reducedMotion()) realEls.video.style.transition = "none";
     }
     function realQuery() {
@@ -1124,7 +1137,7 @@
       pickResolutionScale: pickResolutionScale, targetFps: targetFps, frameIntervalMs: frameIntervalMs, pathologyGeom: pathologyGeom,
       soundKindFor: soundKindFor, severityHeart: severityHeart,
       severityGeom: severityGeom, severitySound: severitySound,
-      createCine: createCine, createRealCine: createRealCine, sectorClipPolygon: sectorClipPolygon, spectrumSource: spectrumSource, imageSource: imageSource,
+      createCine: createCine, createRealCine: createRealCine, sectorClipPolygon: sectorClipPolygon, realClipZoom: REAL_CLIP_ZOOM, spectrumSource: spectrumSource, imageSource: imageSource,
       mmodeColumn: mmodeColumn, mmodeLabels: mmodeLabels,
       probeForPlane: probeForPlane, backingSizeForCssBox: backingSizeForCssBox, fitCanvasToCssBox: fitCanvasToCssBox
     }

@@ -10,7 +10,11 @@
  * clip note, long text wraps, reduced motion, light and dark via
  * Kardia tokens. Motion: press feedback only, transform and
  * opacity, 120 to 140 ms with the Kardia ease; instant under
- * reduced motion. Targets stay 44 px, safe area insets apply. */
+ * reduced motion. Targets stay 44 px, safe area insets apply.
+ * Real clips sit zoomed inside one fixed, vertical sector mask in
+ * every state, so a clip never shows its own fan edges or labels.
+ * The scene homes a little closer on the left chest, neck in
+ * frame, so the probe and heart read at phone size. */
 .krd-root .ksl-wrap{display:flex;flex-direction:column;gap:6px;width:100%;height:auto;min-height:0;overflow:visible;padding-bottom:calc(4px + env(safe-area-inset-bottom,0px));-webkit-tap-highlight-color:transparent}
 .krd-root .ksl-scene-col,.krd-root .ksl-monitor-col{display:flex;flex-direction:column;min-height:0;min-width:0;flex:0 0 auto}
 .krd-root .ksl-title{margin:0;font-size:20px;line-height:1.25;letter-spacing:-.01em;overflow-wrap:anywhere}
@@ -60,7 +64,9 @@
 .krd-root .ksl-hr{font-size:13px;color:var(--sp-text);font-variant-numeric:tabular-nums;margin:0 0 0 auto}
 .krd-root .ksl-monitor-wrap{position:relative;border-radius:12px;background:#000;overflow:hidden;width:100%;aspect-ratio:4/3;flex:0 0 auto;height:auto;min-height:280px}
 .krd-root #kslMonitor{position:absolute;inset:0;display:block;width:100%;height:100%;background:#000}
-.krd-root #kslReal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
+.krd-root .ksl-real-mask{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.krd-root .ksl-real-mask[hidden]{display:none}
+.krd-root #kslReal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transform:scale(1.45);transform-origin:50% 46%;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
 .krd-root #kslReal[hidden]{display:none}
 .krd-root #kslClipNote{border:1px solid var(--sp-line);border-radius:10px;background:var(--sp-s1);color:var(--sp-text);padding:8px 10px;margin:0;font-size:13px;line-height:1.45}
 .krd-root #kslClipNote[hidden]{display:none}

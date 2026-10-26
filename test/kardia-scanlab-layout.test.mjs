@@ -39,6 +39,23 @@ test("result clears after 2.5s and tab strips scroll with an edge fade", () => {
   assert.match(css, /\.ksl-windows\{[^}]*overflow-x:auto[^}]*mask-image:linear-gradient\(to right,#000 0,#000 calc\(100% - 24px\),transparent 100%\)/);
 });
 
+test("Calculators tab is never cut: smaller gaps, scroll strip, active tab scrolled into view", () => {
+  const hostJs = readFileSync(new URL("../kardia.js", import.meta.url), "utf8");
+  assert.ok(hostJs.includes("Calculators"), "full Calculators label is kept");
+  assert.ok(!hostJs.includes('calc: T("Calc"'), "label is not shortened to Calc");
+  assert.match(hostCss, /\.krd-tabs \{[^}]*gap: 2px/);
+  assert.match(hostCss, /\.krd-tab \{[^}]*padding: 10px 9px/);
+  assert.ok(hostJs.includes("scrollActiveTabIntoView"), "active tab is scrolled into view after paint");
+  assert.ok(hostJs.includes('inline: "center"'), "active tab is centred in the strip");
+  assert.ok((hostJs.match(/scrollActiveTabIntoView\(\);/g) || []).length >= 3, "every tab paint scrolls the active tab into view");
+});
+
+test("scene camera homes closer on the left chest, and double tap returns to it", () => {
+  assert.match(js, /HOME_ORBIT = \{ yaw: 2\.6, pitch: 0\.32, dist: 600 \}/);
+  assert.ok(js.includes("camera.lookAt(8, 28, -32)"), "look target is raised toward the left chest so the neck stays in frame");
+  assert.ok(!js.includes("dist: 700"), "the old far framing is gone");
+});
+
 test("accessibility gates: names, focus, reduced motion", () => {
   assert.ok(js.includes('aria-label="Use a phone as the probe"'));
   assert.match(css, /focus-visible\{outline:2px solid var\(--sp-acc\)/);

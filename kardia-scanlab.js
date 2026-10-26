@@ -581,7 +581,12 @@
      * the first image already looks like a heart. The small offset keeps
      * one coaching step for the learner to make. */
     var pose = { contact: [view.contact[0] - 4, view.contact[1], view.contact[2] + 3], rotationDeg: view.rotationDeg - 5, fanDeg: view.fanDeg + 4, rockDeg: view.rockDeg + 3, depthCm: view.depthCm };
-    var orbit = { yaw: 2.6, pitch: 0.32, dist: 700 };
+    /* Home framing: a little closer on the left chest than the old
+     * whole torso shot, so the probe and heart read clearly. The
+     * look target below is raised with it, so the neck stays in
+     * frame and only the lower torso leaves the shot. */
+    var HOME_ORBIT = { yaw: 2.6, pitch: 0.32, dist: 600 };
+    var orbit = { yaw: HOME_ORBIT.yaw, pitch: HOME_ORBIT.pitch, dist: HOME_ORBIT.dist };
     function nowMs() { return (G.performance && G.performance.now) ? G.performance.now() : Date.now(); }
     var coach = createCoach(450), startedAt = nowMs(), travelMm = 0;
     var holdSince = 0, wasIn = false, attemptDone = false, raf = 0, destroyed = false;
@@ -624,7 +629,7 @@
       '<div class="ksl-monitor-wrap" id="kslMonitorWrap">' +
       '<canvas id="kslMonitor" width="640" height="480" aria-label="Ultrasound monitor"></canvas>' +
       '<canvas id="kslDegraded" width="640" height="480" aria-label="Real patient image, degraded by probe position" hidden></canvas>' +
-      '<video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video>' +
+      '<div class="ksl-real-mask" id="kslRealMask" hidden><video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video></div>' +
       '<video id="kslReal2" muted loop playsinline hidden aria-hidden="true" tabindex="-1"></video>' +
       '</div>' +
       '<div class="ksl-result" id="kslResult" role="status" hidden></div>' +
@@ -666,7 +671,7 @@
      * rows; the status note clears itself after 2.5 seconds. The left
      * column holds the scene only, so the stage keeps full height. */
     function setText(id, txt) { var n = el(id); if (n) n.textContent = txt; }
-    var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal");
+    var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal"), realMask = el("kslRealMask");
     var degradedCanvas = el("kslDegraded"), video2 = el("kslReal2");
 
     /* ---- three.js scene ---- */
@@ -1221,7 +1226,7 @@
           var b = blend[bi], vid = sourceVideoFor(b.viewId);
           if (!vid || !(vid.readyState >= 2) || !vid.videoWidth) continue;
           ctx.globalAlpha = drawn === 0 ? 1 : b.weight;
-          var vw = vid.videoWidth, vh = vid.videoHeight, sc = Math.max(W / vw, sectorH / vh) * 1.28, dw = vw * sc, dh = vh * sc;
+          var vw = vid.videoWidth, vh = vid.videoHeight, clipZoom = (G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.realClipZoom) || 1.45, sc = Math.max(W / vw, sectorH / vh) * clipZoom, dw = vw * sc, dh = vh * sc;
           ctx.drawImage(vid, (W - dw) / 2, sectorH * 0.52 - dh / 2, dw, dh);
           drawn++;
         }
@@ -1363,6 +1368,7 @@
           try {
             var poly = G.KARDIA_ECHOLAB._pure.sectorClipPolygon(monCanvas.clientWidth || 640, monCanvas.clientHeight || 480, 80);
             video.style.clipPath = poly; video.style.webkitClipPath = poly;
+            if (realMask) { realMask.style.clipPath = poly; realMask.style.webkitClipPath = poly; }
           } catch (e) {}
         }
         var attr = "";
@@ -1471,7 +1477,8 @@
         var badge = el("kslRealBadge"); if (badge) badge.hidden = false;
         var det = el("kslAttrDetails"); if (det) det.hidden = false;
         if (video) {
-          try { var mw2 = monCanvas.clientWidth || 640, mh2 = monCanvas.clientHeight || 480, pk = mw2 + "x" + mh2; if (pk !== lastClipPolyKey && G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.sectorClipPolygon) { var poly2 = G.KARDIA_ECHOLAB._pure.sectorClipPolygon(mw2, mh2, 80); if (poly2) { video.style.clipPath = poly2; video.style.webkitClipPath = poly2; lastClipPolyKey = pk; } } } catch (e) {}
+          try { var mw2 = monCanvas.clientWidth || 640, mh2 = monCanvas.clientHeight || 480, pk = mw2 + "x" + mh2; if (pk !== lastClipPolyKey && G.KARDIA_ECHOLAB && G.KARDIA_ECHOLAB._pure && G.KARDIA_ECHOLAB._pure.sectorClipPolygon) { var poly2 = G.KARDIA_ECHOLAB._pure.sectorClipPolygon(mw2, mh2, 80); if (poly2) { video.style.clipPath = poly2; video.style.webkitClipPath = poly2; if (realMask) { realMask.style.clipPath = poly2; realMask.style.webkitClipPath = poly2; } lastClipPolyKey = pk; } } } catch (e) {}
+          if (realMask) realMask.hidden = false;
           video.hidden = false;
           video.style.transition = reduced ? "none" : "opacity 600ms ease-out";
           video.style.opacity = "1";
@@ -1480,6 +1487,7 @@
         if (note) note.hidden = true;
       } else {
         if (video) { video.hidden = true; video.style.opacity = "0"; }
+        if (realMask) realMask.hidden = true;
         var badge2 = el("kslRealBadge"); if (badge2) badge2.hidden = true;
         setText("kslMonLabel", "Simulated image");
         if (rcState === "real" && realStatus === "offline" && !offlineNoted) {
@@ -1511,7 +1519,7 @@
         var cz = Math.cos(orbit.yaw) * Math.cos(orbit.pitch) * orbit.dist;
         var cy = Math.sin(orbit.pitch) * orbit.dist;
         camera.position.set(cx, 40 + cy, cz);
-        camera.lookAt(0, 15, -25);
+        camera.lookAt(8, 28, -32);
         try { renderer.render(scene3, camera); } catch (e) { debug.errors.push("render: " + String(e && e.message || e)); }
         debug.frames++;
         if (renderer.info && renderer.info.render) debug.drawCalls = renderer.info.render.calls || debug.frames;
@@ -1575,7 +1583,7 @@
           pinchDist = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY); drag = { mode: "pinch" }; return;
         }
         var now = Date.now();
-        if (now - lastTapAt < 320) { orbit = { yaw: 2.6, pitch: 0.32, dist: 700 }; lastTapAt = 0; return; }
+        if (now - lastTapAt < 320) { orbit = { yaw: HOME_ORBIT.yaw, pitch: HOME_ORBIT.pitch, dist: HOME_ORBIT.dist }; lastTapAt = 0; return; }
         lastTapAt = now;
         var p = canvasPoint(ev), c = probeScreen();
         var mode = "orbit";

@@ -101,6 +101,20 @@ test("sectorClipPolygon masks the fan: apex top centre, arc at the fixed sector 
   assert.equal(EL._pure.sectorClipPolygon(0, 300, 80), "");
 });
 
+test("real clips are zoomed inside the fixed sector so their own fan and labels are cropped away", () => {
+  assert.equal(EL._pure.realClipZoom, 1.45);
+  const lab = readFileSync(new URL("../kardia-echolab.js", import.meta.url), "utf8");
+  assert.ok(lab.includes("kel-real-mask"), "Echo Lab wraps the clip in a sector mask");
+  assert.ok(lab.includes("transform:scale(1.45)"), "Echo Lab clip is zoomed inside the mask");
+  const scan = readFileSync(new URL("../kardia-scanlab.js", import.meta.url), "utf8");
+  const scanCss = readFileSync(new URL("../kardia-scanlab.css", import.meta.url), "utf8");
+  assert.ok(scan.includes('id="kslRealMask"'), "Scan Lab wraps the clip in a sector mask");
+  assert.ok(scan.includes("realMask.style.clipPath"), "Scan Lab masks the wrapper to the fixed sector");
+  assert.match(scanCss, /\.ksl-real-mask\{[^}]*overflow:hidden/);
+  assert.match(scanCss, /#kslReal\{[^}]*transform:scale\(1\.45\)/);
+  assert.ok(scan.includes("realClipZoom"), "degraded clips use the same crop zoom");
+});
+
 test("source gates: ES5, British spelling, probe device never loads clips", () => {
   for (const f of ["../kardia-echolab.js", "../kardia-clips.js"]) {
     const src = readFileSync(new URL(f, import.meta.url), "utf8");
