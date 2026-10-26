@@ -33,7 +33,14 @@ jobs:
       # claim was inferred from the flag being absent and the skip guard existing; the outcome was
       # never checked. On this runner the flag is a no-op that makes the intent explicit and protects
       # against a future pin below 22.13. It fixed nothing that was broken.
+      # The suite has one npm dependency, jsqr (SyncProbe QR round trip, a devDependency). Install
+      # only that, outside the repo, instead of the whole native plugin tree; NODE_PATH lets the
+      # tests' createRequire find it.
+      - name: Install test-only deps
+        run: npm install --no-save --no-audit --no-fund --prefix "$RUNNER_TEMP/testdeps" jsqr@1.4.0
       - name: Run unit tests
+        env:
+          NODE_PATH: ${{ runner.temp }}/testdeps/node_modules
         run: node --test --experimental-test-module-mocks --experimental-sqlite test/*.test.mjs
 
       # A SKIPPED DR SUITE MUST NOT READ AS A PASSING ONE. wardsynq-restore / wardsynq-onprem /
