@@ -19,7 +19,7 @@
   var FREE_LESSONS = 5;
   var FREE_ECHO_PER_AREA = 3;
   var FREE_BANK_QUESTIONS = 20;
-  var TABS = ["echo", "learn", "practice", "cases", "kardiox"];
+  var TABS = ["echo", "learn", "practice", "cases", "calc", "kardiox"];
   var LEVELS = ["mbbs", "resident", "fellow", "sonographer"];
 
   function T(en, hi) { return { en: en, hi: hi }; }
@@ -34,14 +34,14 @@
   }
   var TAB_T = {
     echo: T("Echo Lab", "इको लैब"), learn: T("Learn", "सीखें"), practice: T("Practice", "अभ्यास"),
-    cases: T("Cases", "केस"), kardiox: T("KardiQ X", "KardiQ X")
+    cases: T("Cases", "केस"), calc: T("Calculators", "Calculators"), kardiox: T("KardiQ X", "KardiQ X")
   };
   var TAB_SUB = {
     echo: T("Probe lab and views", "प्रोब लैब और व्यू"),
     learn: T("Learn ECG: the ECG atlas and quiz", "Learn ECG: ECG एटलस और प्रश्नोत्तरी"),
     practice: T("Drills and protocols", "ड्रिल और प्रोटोकॉल"),
     cases: T("Whole patient cases", "पूरे मरीज़ के केस"),
-    kardiox: T("AI ECG reading", "AI ECG रीडिंग")
+    calc: T("Echo calculators and pathways", "Echo calculators and pathways"), kardiox: T("AI ECG reading", "AI ECG रीडिंग")
   };
 
   var host = SP.createHost({
@@ -137,11 +137,34 @@
    * is a real button or labelled range input, 44px tall, with a
    * visible focus ring from the engine. No new palette, no glow. */
   var FREE_ECHO_VIEWS = ["tte_plax", "tte_psax_papillary", "tte_a4c"];
+  /* Short pill labels: the full view name stays in the heading and in
+   * each pill accessible name, so no pill ever cuts a word in half. */
+  var VIEW_ABBR = {
+    tte_plax: "PLAX", tte_psax_av: "PSAX aortic valve", tte_psax_mv: "PSAX mitral valve",
+    tte_psax_papillary: "PSAX papillary", tte_psax_apex: "PSAX apex", tte_rv_inflow: "RV inflow",
+    tte_rvot_long: "RVOT long axis", tte_pa_bifurcation: "PA bifurcation", tte_a4c: "A4C",
+    tte_a5c: "A5C", tte_a2c: "A2C", tte_a3c: "A3C", tte_a4c_rv_focus: "A4C RV focus",
+    tte_a4c_coronary_sinus: "A4C coronary sinus", tte_subcostal_4c: "Subcostal 4C",
+    tte_subcostal_sax: "Subcostal SAX", tte_subcostal_ivc: "Subcostal IVC",
+    tte_subcostal_aorta: "Subcostal aorta", tte_subcostal_bicaval: "Subcostal bicaval",
+    tte_suprasternal_arch_lax: "Suprasternal arch", tte_suprasternal_desc_sax: "Descending aorta SAX",
+    tte_suprasternal_ductal: "Ductal view", tte_right_parasternal_aorta: "Right parasternal aorta",
+    tte_subcostal_hepatic_vein: "Hepatic vein", tte_suprasternal_svc: "Suprasternal SVC",
+    tee_me_4c: "ME 4C", tee_me_2c: "ME 2C", tee_me_lax: "ME long axis", tee_me_bicaval: "ME bicaval",
+    tee_me_av_sax: "ME aortic SAX", tee_me_av_lax: "ME aortic LAX", tee_tg_mid_sax: "TG mid SAX",
+    tee_desc_aorta_sax: "Descending aorta SAX",
+    pocus_fast_ruq: "FAST RUQ", pocus_fast_luq: "FAST LUQ", pocus_fast_pelvis: "FAST pelvis",
+    pocus_fast_subxiphoid: "FAST subxiphoid", pocus_efast_lung_right: "eFAST lung R",
+    pocus_efast_lung_left: "eFAST lung L", pocus_ivc: "IVC collapsibility",
+    pocus_blue_upper: "BLUE upper", pocus_blue_lower: "BLUE lower PLAPS",
+    pocus_arrest_subxiphoid: "Arrest subxiphoid"
+  };
+  function viewAbbr(v) { return VIEW_ABBR[v.id] || v.name; }
   var EL = {
     views: null, loading: false, err: false, viewId: null, probe: null,
     geom: null, heart: null, timer: null, unbind: [], knobsOpen: false,
     knobs: { gain: 55, depth: 160, focus: 55, tgc: [50,50,50,50,50,50,50,50], frequencyMHz: 3.0, sectorDeg: 80, dynamicRange: 55, colourGain: 70, colourNyquistMs: 0.6 }, holdSince: null, gyroMsg: "",
-    mode: "2d", frozen: false, echolab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
+    mode: "2d", frozen: false, echolab: null, scanlab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
     lastCutAt: 0, polys: null, phase: 0
   };
 
@@ -214,11 +237,15 @@
     } catch (e) { fail(); }
   }
 
+  function levelsMenuHtml(lv) {
+    var cur = lv === "mbbs" ? "MBBS" : lv === "resident" ? I.s("resident") : lv === "fellow" ? "Fellow" : "Sonographer";
+    return '<details class="krd-levelmenu"><summary aria-label="' + I.s("level") + ": " + I.esc(cur) + '">' + I.s("level") + ": " + I.esc(cur) + "</summary>" +
+      '<div class="krd-levelmenu-panel">' + levelsHtml(lv) + "</div></details>";
+  }
+
   function echoLabHtml() {
     var lv = klevel(), pro = I.isPro();
-    var head = '<h2 class="sp-h2">' + I.tx(T("Echo Lab", "Echo Lab")) + '</h2><p class="sp-small">' +
-      I.tx(T("Find the target view with the probe. Slide on the chest map, twist with two fingers to rotate, fan with the tilt strip and rock with the rock strip.",
-        "Find the target view with the probe. Slide on the chest map, twist with two fingers to rotate, fan with the tilt strip and rock with the rock strip.")) + "</p>";
+    var head = "";
     if (EL.err) return head + '<div class="sp-err krd-err" role="alert"><p>' +
       I.tx(T("Echo Lab did not load. Check the connection and try again.", "Echo Lab did not load. Check the connection and try again.")) +
       '</p><button type="button" class="sp-btn pri" data-act="kecho-retry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
@@ -236,8 +263,8 @@
     }
     var chips = list.map(function (v) {
       var locked = echoViewLocked(v, lv, pro);
-      return '<button type="button" class="krd-chip" data-act="kecho-view" data-v="' + I.esc(v.id) + '" aria-pressed="' + (v.id === cur.id) + '">' +
-        I.esc(v.name) + (locked ? ' <span class="sp-pro">' + I.ico("lock") + I.s("pro") + "</span>" : "") + "</button>";
+      return '<button type="button" class="krd-chip" data-act="kecho-view" data-v="' + I.esc(v.id) + '" aria-pressed="' + (v.id === cur.id) + '" aria-label="' + I.esc(v.name) + '" title="' + I.esc(v.name) + '">' +
+        I.esc(viewAbbr(v)) + (locked ? ' <span class="sp-pro">' + I.ico("lock") + I.s("pro") + "</span>" : "") + "</button>";
     }).join("");
     var tee = cur.window === "oesophageal" || cur.window === "gastric";
     var p = ensureEchoProbe();
@@ -263,6 +290,8 @@
     }
     var gyroOn = !!(st8 && st8.gyroOn);
     return head +
+      '<div id="krdScanLab"></div>' +
+      '<div class="krd-syncbar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<div class="krd-lab" id="krdLab">' +
       '<div class="krd-chips" role="group" aria-label="' + I.tx(T("Target views", "Target views")) + '">' + chips + "</div>" +
       '<h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + '</h3>' +
@@ -301,7 +330,7 @@
           '<div class="krd-strip krd-strip-h" id="krdRockStrip" role="slider" aria-label="' + I.tx(T("Rock. Drag left or right.", "Rock. Drag left or right.")) + '" aria-valuemin="-60" aria-valuemax="60" aria-valuenow="0" tabindex="0"><span>Rock</span></div>') +
       '<div class="krd-controls">' + controls + "</div>" +
       '<div class="krd-gyro"><button type="button" class="sp-btn sec" data-act="kecho-syncprobe">' +
-        I.tx(T("SyncProbe", "SyncProbe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span>' +
+        I.tx(T("SyncProbe", "SyncProbe")) + '</button>' +
         '<button type="button" class="sp-btn sec" data-act="kecho-gyro" aria-pressed="' + gyroOn + '">' +
         I.tx(T("Use phone as probe", "Use phone as probe")) + '</button>' +
         '<button type="button" class="sp-btn sec" data-act="kecho-cal" id="krdCalBtn"' + (gyroOn ? "" : " disabled") + '>' +
@@ -370,6 +399,10 @@
   }
 
   function stopEchoLab() {
+    /* Scan Lab paints into the repainted tab DOM, so its instance and
+     * render loop must not outlive that DOM: stop it on every leave and
+     * let mountEchoLab create a fresh one in the new #krdScanLab root. */
+    if (EL.scanlab) { try { EL.scanlab.stop(); } catch (e) {} EL.scanlab = null; }
     if (EL.echolab) { try { EL.echolab.stop(); } catch (e) {} }
     if (EL.audioHandle) { try { EL.audioHandle.stop(); } catch (e) {} EL.audioHandle = null; }
     try { if (G.SMD_CLINIX_AUDIO && G.SMD_CLINIX_AUDIO.stopAll) G.SMD_CLINIX_AUDIO.stopAll(); } catch (e) {}
@@ -599,6 +632,13 @@
   }
   function mountEchoLab() {
     stopEchoLab();
+    try {
+      var slRoot = G.document && G.document.getElementById("krdScanLab");
+      if (slRoot && G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.create && !EL.scanlab) {
+        EL.scanlab = G.KARDIA_SCANLAB.create({ doc: G.document, root: slRoot, pathology: EL.pathology || null, geom: EL.geom || null, heart: EL.heart || null });
+        if (EL.scanlab && EL.viewId && G.KARDIA_SCANLAB.debugPose) { /* runner seam stays on KARDIA_SCANLAB */ }
+      }
+    } catch (e) { /* canvas failure: classic Echo Lab controls below stay as fallback */ }
     var p = ensureEchoProbe(), cur = echoCurrentView();
     if (!p || !cur) { drawEchoSector(); return; }
     if (p.getState().window !== cur.window || EL.viewId !== cur.id) startEchoTarget(cur, false);
@@ -782,7 +822,7 @@
   }
 
   function echoBodyHtml() {
-    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + echoLabHtml() + "</div></div>";
+    return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + echoLabHtml() + "</div></div>";
   }
   function showTab(id, focusSel) {
     if (TABS.indexOf(id) < 0) id = "echo";
@@ -800,8 +840,16 @@
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
       return;
     }
+    if (id === "calc" && G.KARDIA_CALC) {
+      G.KARDIA_CALC.attach(host);
+      G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + G.KARDIA_CALC.html(), focusSel);
+      G.KARDIA_CALC.mount();
+      return;
+    }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
-    I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+    if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + levelsMenuHtml(lv) + body, focusSel); }
+    else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
     if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }
@@ -953,8 +1001,8 @@
         return false;
       },
       setProbeState: function (s) { var p = ensureEchoProbe(); if (p) { p.setState(s); updateEchoLab(); } return p ? p.getState() : null; },
-      suspendLive: function () { var lab = ensureEchoLab(); if (lab && lab.suspend) lab.suspend(); if (EL.timer) { try { G.clearInterval(EL.timer); } catch (e) {} EL.timer = null; } return true; },
-      resumeLive: function () { var lab = ensureEchoLab(); if (lab && lab.resume) lab.resume(); if (!EL.timer && host.isOpen() && tab() === "echo") EL.timer = G.setInterval(function () { EL.lastCutAt = 0; updateEchoLab(); }, 450); return true; },
+      suspendLive: function () { var lab = ensureEchoLab(); if (lab && lab.suspend) lab.suspend(); if (EL.scanlab && EL.scanlab.suspend) EL.scanlab.suspend(); if (EL.timer) { try { G.clearInterval(EL.timer); } catch (e) {} EL.timer = null; } return true; },
+      resumeLive: function () { var lab = ensureEchoLab(); if (lab && lab.resume) lab.resume(); if (EL.scanlab && EL.scanlab.resume) EL.scanlab.resume(); if (!EL.timer && host.isOpen() && tab() === "echo") EL.timer = G.setInterval(function () { EL.lastCutAt = 0; updateEchoLab(); }, 450); return true; },
       isLiveSuspended: function () { return !!(EL.echolab && EL.echolab.isSuspended && EL.echolab.isSuspended()); },
       getProbeState: function () { var p = ensureEchoProbe(); return p ? p.getState() : null; },
       getScore: function () { var p = ensureEchoProbe(), v = echoCurrentView(); return p && v ? p.score(v) : null; },
@@ -992,7 +1040,7 @@
       setMode: function (m) { EL.mode = m; var lab = ensureEchoLab(); if (lab) lab.setMode(m); return EL.mode; },
       get knobs() { return EL.knobs; },
       setKnob: function (k, v) { EL.knobs[k] = v; return EL.knobs; },
-      applyPathology: function (cond, sev) { var lab = ensureEchoLab(); if (lab) lab.applyPathology(cond, sev); EL.pathology = cond; return lab ? lab.getSpectrum() : null; },
+      applyPathology: function (cond, sev) { var lab = ensureEchoLab(); if (lab) lab.applyPathology(cond, sev); EL.pathology = cond; if (EL.scanlab && EL.scanlab.setPathology) EL.scanlab.setPathology({ id: cond && cond.id, severity: sev }); return lab ? lab.getSpectrum() : null; },
       freeze: function (f) { EL.frozen = !!f; var lab = ensureEchoLab(); if (lab) lab.setFrozen(f); },
       openMeasure: function () { openMeasure(); return EL.measureUI; },
       stateForView: function (id) { var p = ensureEchoProbe(); return p ? p.stateForView(id) : null; }

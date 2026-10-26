@@ -261,6 +261,12 @@ rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/na
 # needs this line (tracks.json, fetched on first open by the engine). Same failure mode as clinix/surgx:
 # without it the module loads, the tile appears, and the first open renders the load-error state.
 [ -d kardia ] && mkdir -p "$WWW/kardia" && cp -R kardia/. "$WWW/kardia/"
+# Bundled real echo clips (kardia/media/clips/*.mp4, de-identified, with
+# credits merged into kardia/media/credits.json): they ship inside the app
+# so Scan Lab and Echo Lab play them offline with no hosting. The recursive
+# copy above already carries them; this explicit copy keeps that guarantee
+# if the kardia copy ever gains excludes.
+if [ -d kardia/media/clips ]; then mkdir -p "$WWW/kardia/media/clips"; cp kardia/media/clips/*.mp4 "$WWW/kardia/media/clips/" 2>/dev/null || true; fi
 
 # PrepNucleus (prep.js, loaded by prep-loader.js): the module tree and the per-subject index files (MCQ counts) ship
 # in the app, about 1 MB. The question files (prep/bank/v1/*/mcq/, search.json, about 180 MB) do NOT: the app fetches

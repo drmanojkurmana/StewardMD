@@ -42,6 +42,8 @@ import com.getcapacitor.annotation.PermissionCallback;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -84,6 +86,10 @@ public class KardiaBlePlugin extends Plugin {
     private boolean scanning;
 
     private PluginCall pendingDiscover;
+    private PluginCall pendingNearby;
+    private Handler nearbyHandler;
+    private Runnable nearbyTimeout;
+    private final Map<String, JSObject> nearbyFound = new LinkedHashMap<>();
     private Handler discoverHandler;
     private Runnable discoverTimeout;
 
@@ -422,6 +428,47 @@ public class KardiaBlePlugin extends Plugin {
      * before the timeout. One scan at a time: a second discover while one is
      * running is rejected.
      */
+    @PluginMethod
+    public void scanNearby(PluginCall call) {
+        if (pendingNearby != null) { call.reject("A Bluetooth scan is already running. Wait a moment and try again."); return; }
+        int timeoutMs = call.getInt("timeoutMs", 5000);
+        if (timeoutMs < 1000) timeoutMs = 1000;
+        if (timeoutMs > 15000) timeoutMs = 15000;
+        BluetoothAdapter adapter = adapter();
+        if (adapter == null || !adapter.isEnabled()) { call.reject("Bluetooth is not available."); return; }
+        if (!permissionsGranted()) { call.reject("Bluetooth permission is not granted."); return; }
+        BluetoothLeScanner scanner = adapter.getBluetoothLeScanner();
+        if (scanner == null) { call.reject("Bluetooth scanning is not available."); return; }
+        teardown(true);
+        role = "nearby";
+        expectedHash = null;
+        nearbyFound.clear();
+        pendingNearby = call;
+        nearbyHandler = new Handler(Looper.getMainLooper());
+        final int waitMs = timeoutMs;
+        nearbyTimeout = new Runnable() {
+            @Override public void run() {
+                PluginCall c = pendingNearby;
+                pendingNearby = null;
+                nearbyHandler = null; nearbyTimeout = null;
+                stopScan();
+                role = "";
+                if (c == null) return;
+                JSObject ret = new JSObject();
+                com.getcapacitor.JSArray arr = new com.getcapacitor.JSArray();
+                for (JSObject d : nearbyFound.values()) arr.put(d);
+                ret.put("devices", arr);
+                c.resolve(ret);
+            }
+        };
+        nearbyHandler.postDelayed(nearbyTimeout, waitMs);
+        List<ScanFilter> filters = new ArrayList<>();
+        filters.add(new ScanFilter.Builder().setServiceUuid(new ParcelUuid(SERVICE_UUID)).build());
+        ScanSettings settings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY).build();
+        scanning = true;
+        scanner.startScan(filters, settings, scanCallback);
+    }
+
     @PluginMethod
     public void discover(PluginCall call) {
         if (pendingDiscover != null) {
@@ -762,6 +809,13 @@ public class KardiaBlePlugin extends Plugin {
     private void teardown(boolean silent) {
         stopScan();
         cancelDiscoverTimeout();
+        if (pendingNearby != null) {
+            if (nearbyHandler != null && nearbyTimeout != null) { try { nearbyHandler.removeCallbacks(nearbyTimeout); } catch (Exception ignored) { } }
+            nearbyHandler = null; nearbyTimeout = null;
+            PluginCall n = pendingNearby;
+            pendingNearby = null;
+            try { n.reject("Bluetooth discovery was closed."); } catch (Exception ignored) { }
+        }
         if (pendingDiscover != null) {
             PluginCall d = pendingDiscover;
             pendingDiscover = null;

@@ -634,7 +634,11 @@
         gl.useProgram(progF);
         var locQF = gl.getAttribLocation(progF, "aP");
         gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf); gl.enableVertexAttribArray(locQF); gl.vertexAttribPointer(locQF, 2, gl.FLOAT, false, 0, 0);
-        gl.uniform4f(gl.getUniformLocation(progF, "uProps"), ac.echogenicity, flagsOf(ac, g) / 255, clamp((ac.attenuation || 0.9) / 3, 0, 1), 0);
+        /* Rib and lung context caps read as speckled soft tissue, not
+         * bright bone or air with shadow tails (see classify). Blood
+         * pools stay dark, myocardium mid-grey, pericardium bright. */
+        var isCtxBlocker = !!(ac.isBone || ac.isAir);
+        gl.uniform4f(gl.getUniformLocation(progF, "uProps"), isCtxBlocker ? 0.35 : ac.echogenicity, isCtxBlocker ? 0 : flagsOf(ac, g) / 255, clamp((isCtxBlocker ? 0.9 : (ac.attenuation || 0.9)) / 3, 0, 1), 0);
         gl.uniform1f(gl.getUniformLocation(progF, "uSeed"), hash3(gi, 17, 3));
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
         gl.disableVertexAttribArray(locQF);
@@ -656,6 +660,7 @@
           var lpolys = filterPolys(geom.cut(f.planeOrigin, f.n, f.up, extent, extent) || []);
           for (var lpi = 0; lpi < lpolys.length; lpi++) {
             var lp2 = lpolys[lpi], lac = lp2.acoustic, isCh = lp2.kind === "chordae";
+            if (!isCh && (lac.isBone || lac.isAir)) continue;
             if (!isCh && !(lac.echogenicity >= 0.75 && !lac.isAir)) continue;
             if (!isCh) {
               var lmnx = 1e9, lmxx = -1e9, lmny = 1e9, lmxy = -1e9;
@@ -663,7 +668,7 @@
               if (Math.max(lmxx - lmnx, lmxy - lmny) < 4) continue;
             }
             var lflags = flagsOf(lac, lp2);
-            if (lp2.ref === "pericardium") {
+            if (lp2.ref === "pericardium" && lp2.closed) {
               /* Pericardium fill in the B channel: inside its loop,
                * a non-blood low echo (pericardial space fluid or an
                * uncovered cap) reads as pericardium, as CPU
@@ -696,7 +701,7 @@
               lineCtx.stroke();
               continue;
             }
-            if (lac.isBone || lac.isCalcium) {
+            if ((lac.isBone || lac.isCalcium) && lp2.closed) {
               lineCtx.beginPath();
               lp2.points.forEach(function (p, pi2) { var X = (p[0] / extent + 0.5) * TW, Y = (1 - (p[1] / extent + 0.5)) * TW; if (pi2 === 0) lineCtx.moveTo(X, Y); else lineCtx.lineTo(X, Y); });
               lineCtx.closePath(); lineCtx.fill("evenodd");
@@ -833,7 +838,14 @@
     function classify(cx, cy, polys) {
       var best = null, bestArea = 1e18;
       for (var i = 0; i < polys.length; i++) {
+        if (polys[i].open) continue; /* open lines are never filled */
         if (isLineOnly(polys[i])) continue;
+        /* Rib and lung context meshes sit outside the cardiac window:
+         * as filled bright bone or air they paint white blobs with
+         * black shadow tails across the sector. The probe sits in an
+         * intercostal space, so those samples read as the speckled
+         * soft tissue fallback below instead. */
+        if (polys[i].acoustic.isBone || polys[i].acoustic.isAir) continue;
         /* A collapsed pericardial space (no effusion) is not a black
          * fluid gap: the pericardium hugs the epicardium. With a real
          * effusion the fluid polygon renders anechoic as before. */
@@ -856,6 +868,7 @@
       var lineBest = null, lineD = 1e9, chordBest = null, chordD = 0.8;
       for (var j = 0; j < polys.length; j++) {
         var pj = polys[j], isChord = pj.kind === "chordae";
+        if (!isChord && (pj.acoustic.isBone || pj.acoustic.isAir)) continue;
         if (!isChord && !(pj.acoustic.echogenicity >= 0.75 && !pj.acoustic.isAir)) continue;
         if (!isChord) {
           /* a leaflet/pericardium cross-section is an elongated line;

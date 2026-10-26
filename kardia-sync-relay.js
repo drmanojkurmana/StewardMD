@@ -255,12 +255,24 @@
         if (!fetchFn) {
           return Promise.reject(new Error("Fetch API unavailable"));
         }
+        // Register the short code shown on screen so a probe can find
+        // this room by typing the code (no Bluetooth needed). Older
+        // servers ignore the extra body and the relay still works.
+        var codeBody = null;
+        if (pairing && pairing.shortCode && pairing.sessionId && pairing.displayPub) {
+          codeBody = {
+            shortCode: pairing.shortCode,
+            sessionId: pairing.sessionId,
+            displayPub: pairing.displayPub,
+          };
+        }
         return fetchFn(httpUrl, {
           method: "POST",
           headers: {
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json",
           },
+          body: codeBody ? JSON.stringify(codeBody) : undefined,
         }).then(function (res) {
           if (!res.ok) {
             return res.text().then(function (txt) {
@@ -308,6 +320,106 @@
         var wsUrl = getWsUrl() + "/sync/room?id=" + encodeURIComponent(roomId) + "&role=probe";
         var protocols = ["kardia-sync", token, roomToken];
         return connectSocket(wsUrl, protocols, handlers, "probe");
+      });
+    },
+
+    // Probe typed-code lookup: resolve the 6-character code shown on the
+    // display to the room join material. Authenticated, rate limited and
+    // single use server side; unknown, expired and used codes all read
+    // as not-found. Rejects fast when signed out so the typed-code race
+    // can fall through to Bluetooth.
+    resolveCode: function (shortCode) {
+      var code = String(shortCode == null ? "" : shortCode).toUpperCase().replace(/[^A-Z2-9]/g, "");
+      if (!/^[A-Z2-9]{6}$/.test(code)) {
+        var bad = new Error("No display found for that code.");
+        bad.reason = "not-found";
+        bad.code = "not-found";
+        return Promise.reject(bad);
+      }
+
+      var user = getFirebaseUser();
+      if (!user) {
+        var auth = new Error("Sign-in required");
+        auth.reason = "sign-in-required";
+        auth.code = "sign-in-required";
+        return Promise.reject(auth);
+      }
+
+      return getIdToken(user).then(function (token) {
+        var fetchFn = G.fetch || (typeof fetch !== "undefined" ? fetch : null);
+        if (!fetchFn) {
+          return Promise.reject(new Error("Fetch API unavailable"));
+        }
+        var settled = new Promise(function (resolve, reject) {
+          var timer = null;
+          function done(fn, v) {
+            if (timer) {
+              try { clearTimeout(timer); } catch (e) {}
+              timer = null;
+            }
+            fn(v);
+          }
+          try {
+            timer = setTimeout(function () {
+              timer = null;
+              var t = new Error("Relay code lookup timed out.");
+              t.reason = "offline";
+              t.code = "offline";
+              reject(t);
+            }, 15000);
+            if (timer && timer.unref) timer.unref();
+          } catch (e) {}
+          fetchFn(getHttpUrl() + "/sync/code", {
+            method: "POST",
+            headers: {
+              "Authorization": "Bearer " + token,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ code: code }),
+          }).then(function (res) {
+            if (res.status === 404) {
+              var nf = new Error("No display found for that code.");
+              nf.reason = "not-found";
+              nf.code = "not-found";
+              throw nf;
+            }
+            if (res.status === 401) {
+              var se = new Error("Sign-in required");
+              se.reason = "sign-in-required";
+              se.code = "sign-in-required";
+              throw se;
+            }
+            if (res.status === 429) {
+              var rl = new Error("Too many code tries. Wait a minute and try again.");
+              rl.reason = "rate-limited";
+              rl.code = "rate-limited";
+              try { var ra = parseInt(res.headers.get("Retry-After"), 10); if (isFinite(ra)) rl.retryAfterMs = ra * 1000; } catch (e2) {}
+              throw rl;
+            }
+            if (!res.ok) {
+              return res.text().then(function (txt) {
+                throw new Error("Code lookup failed (" + res.status + "): " + txt);
+              });
+            }
+            return res.json();
+          }).then(function (data) {
+            if (!data || !data.roomId || !data.roomToken || !data.sessionId || !data.displayPub || !data.expiresAt) {
+              throw new Error("Invalid code lookup response from relay");
+            }
+            done(resolve, {
+              sessionId: String(data.sessionId).toLowerCase(),
+              displayPub: data.displayPub,
+              shortCode: data.shortCode || code,
+              expiresAt: +data.expiresAt,
+              roomId: String(data.roomId).toLowerCase(),
+              roomToken: data.roomToken,
+              relay: { roomId: String(data.roomId).toLowerCase(), roomToken: data.roomToken },
+            });
+          }, function (err) {
+            done(reject, err);
+          });
+        });
+        return settled;
       });
     },
 

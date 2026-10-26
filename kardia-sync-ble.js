@@ -288,6 +288,34 @@
           function () { if (discoverPending === current) discoverPending = null; });
         return discoverPending;
       },
+      discoverNearby: function (timeoutMs) {
+        var p = getPlugin();
+        if (!p) return Promise.reject(new Error("Bluetooth pairing is only available in the app."));
+        if (typeof p.scanNearby !== "function") return Promise.resolve([]);
+        var timeout = (typeof timeoutMs === "number" && timeoutMs > 0) ? Math.min(timeoutMs, 15000) : 5000;
+        return Promise.resolve(p.scanNearby({ timeoutMs: timeout })).then(function (res) {
+          var list = (res && res.devices) || res || [];
+          if (!Array.isArray(list)) list = [];
+          return list.map(function (d) {
+            var hash = String((d && (d.codeHashHex || d.hash)) || "").toLowerCase();
+            return { name: String((d && d.name) || "Nearby display"), codeHashHex: hash, shortLabel: hash ? hash.slice(0, 4).toUpperCase() : "", rssi: (d && typeof d.rssi === "number") ? d.rssi : null };
+          }).filter(function (d) { return /^[0-9a-f]{8}$/.test(d.codeHashHex); });
+        });
+      },
+      discoverByHash: function (codeHashHex) {
+        var hash = String(codeHashHex || "").toLowerCase();
+        if (!/^[0-9a-f]{8}$/.test(hash)) return Promise.reject(notFoundError());
+        var p = getPlugin();
+        if (!p) return Promise.reject(new Error("Bluetooth pairing is only available in the app."));
+        if (typeof p.discover !== "function") return Promise.reject(new Error("Bluetooth discovery needs the latest app build. Scan the QR code instead."));
+        return Promise.resolve(p.discover({ codeHashHex: hash, timeoutMs: DISCOVER_TIMEOUT_MS })).then(function (res) {
+          var pairing = toDiscoveredPairing(res, "");
+          pairing.shortCode = "";
+          pairing.codeHashHex = hash;
+          delete pairing.payload;
+          return pairing;
+        }, function (err) { throw toDiscoverError(err); });
+      },
       send: function (bytes) {
         if (!connected || !bytes) return false;
         var p = getPlugin();

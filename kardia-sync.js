@@ -126,20 +126,52 @@
   }
   function shortCodeHash4(shortCode) { return sha256(new TextEncoder().encode(String(shortCode))).slice(0, 4); }
   function pairingPayload(p) {
-    return "kardia-sync:1:" + p.sessionId + ":" + p.displayPub + ":" + p.shortCode + ":" + p.expiresAt;
+    var base = "kardia-sync:1:" + p.sessionId + ":" + p.displayPub + ":" + p.shortCode + ":" + p.expiresAt;
+    var roomId = (p.relay && p.relay.roomId) || p.roomId || "";
+    var roomToken = (p.relay && p.relay.roomToken) || p.roomToken || "";
+    if (roomId && roomToken) base += ":" + roomId + ":" + roomToken;
+    return base;
   }
   function parsePairingPayload(str) {
     if (typeof str !== "string") return null;
     var parts = str.split(":");
-    if (parts.length !== 6 || parts[0] !== "kardia-sync" || parts[1] !== "1") return null;
+    if ((parts.length !== 6 && parts.length !== 8) || parts[0] !== "kardia-sync" || parts[1] !== "1") return null;
     if (!/^[0-9a-f]{32}$/i.test(parts[2])) return null;
     var exp = parseInt(parts[5], 10);
     if (!isFinite(exp)) return null;
     var pub;
     try { pub = b64urlDecode(parts[3]); } catch (e) { return null; }
     if (pub.length !== 65 || pub[0] !== 4) return null;
-    return { sessionId: parts[2].toLowerCase(), displayPub: parts[3], displayPubBytes: pub, shortCode: parts[4], expiresAt: exp };
+    var out = { sessionId: parts[2].toLowerCase(), displayPub: parts[3], displayPubBytes: pub, shortCode: parts[4], expiresAt: exp };
+    if (parts.length === 8) {
+      if (!/^[0-9a-f]{32}$/i.test(parts[6]) || !/^[A-Za-z0-9_-]{32,64}$/.test(parts[7])) return null;
+      out.roomId = parts[6].toLowerCase(); out.roomToken = parts[7];
+      out.relay = { roomId: out.roomId, roomToken: out.roomToken };
+    }
+    return out;
   }
+  /* Map any transport or relay error to a stable reason code the UI can
+   * turn into a specific message and one next action. */
+  function transportErrorReason(err) {
+    if (!err) return "unknown";
+    if (err.reason) return String(err.reason);
+    if (err.code && typeof err.code === "string" && err.code !== "not-found") return err.code;
+    var m = String((err && err.message) || err || "");
+    if (/sign-in required|sign in required|401|unauthori[sz]ed/i.test(m)) return "sign-in-required";
+    if (/expired|credential-expired|gone/i.test(m)) return "expired";
+    if (/controller-busy|already training|room_full|busy/i.test(m)) return "busy";
+    if (/not-found|no display found|no display/i.test(m)) return "not-found";
+    if (/rate-limit|too many|429/i.test(m)) return "rate-limited";
+    if (/permission|denied|not authorized/i.test(m) && /bluetooth|ble/i.test(m)) return "bluetooth-permission";
+    if (/bluetooth is (off|not available|powered off)|poweredoff/i.test(m)) return "bluetooth-off";
+    if (/bluetooth/i.test(m) && /not available|only available in the app/i.test(m)) return "bluetooth-unavailable";
+    if (/offline|no internet|internet connection required|network|websocket|fetch/i.test(m)) return "offline";
+    if (/bad-version|version mismatch|protocol/i.test(m)) return "version-mismatch";
+    if (/no-transport|no link is available/i.test(m)) return "no-transport";
+    if (/invalid pairing|bad-pairing|scan the qr/i.test(m)) return "bad-code";
+    return "unknown";
+  }
+  function reasonError(reason, message) { var e = new Error(message || reason); e.reason = reason; e.code = reason; return e; }
   function confirmCodeFromBytes(b) {
     var v = ((b[0] << 8) | b[1]) % 10000;
     return ("000" + v).slice(-4);
@@ -462,6 +494,92 @@
     return mgr;
   }
 
+  /* ---------- raced transport: BLE and relay in parallel ----------
+   * host() and join() start on every candidate at once. The first one to
+   * succeed becomes active; the others stay open as backup (send falls
+   * back to a backup when the active send fails) and are closed only by
+   * close(). If every candidate fails, the rejection carries the reason
+   * of the most specific failure (sign-in and Bluetooth before unknown). */
+  var REASON_RANK = { "sign-in-required": 1, "bluetooth-off": 2, "bluetooth-permission": 3, "offline": 4, "not-found": 5, "expired": 6, "busy": 7, "no-transport": 8, "unknown": 9 };
+  function bestReasonError(errs) {
+    var best = null, bestRank = 99;
+    (errs || []).forEach(function (e) {
+      var r = transportErrorReason(e), rank = REASON_RANK[r] || 9;
+      if (rank < bestRank) { bestRank = rank; best = reasonError(r, (e && e.message) || r); best.causes = errs; }
+    });
+    return best || reasonError("unknown", "No link is available on this phone.");
+  }
+  function raceFirstSuccess(candidates, startFn) {
+    var list = (candidates || []).slice();
+    if (!list.length) return Promise.reject(reasonError("no-transport", "No link is available on this phone."));
+    return new Promise(function (resolve, reject) {
+      var pending = list.length, errs = [], settled = false;
+      list.forEach(function (t, idx) {
+        var job;
+        try { job = startFn(t, idx); } catch (e) { job = Promise.reject(e); }
+        Promise.resolve(job).then(function (v) {
+          if (settled) return;
+          settled = true;
+          resolve({ transport: t, index: idx, value: v });
+        }, function (e) {
+          errs.push(e);
+          if (--pending === 0 && !settled) reject(bestReasonError(errs));
+        });
+      });
+    });
+  }
+  function createRacedTransport(candidates) {
+    var list = (candidates || []).slice();
+    var active = null;
+    function race(method, pairing, handlers) {
+      if (!list.length) return Promise.reject(reasonError("no-transport", "No link is available on this phone."));
+      if (list.length === 1) {
+        return Promise.resolve(list[0][method](pairing, handlers)).then(function (v) { active = list[0]; return v; });
+      }
+      return raceFirstSuccess(list, function (t) { return t[method](pairing, handlers); }).then(function (r) {
+        active = r.transport;
+        return r.value;
+      });
+    }
+    var raced = {
+      id: "raced", kind: "direct",
+      candidates: list,
+      activeId: function () { return active ? active.id : null; },
+      backupIds: function () { return list.filter(function (t) { return t !== active; }).map(function (t) { return t.id; }); },
+      capabilities: function () {
+        return Promise.all(list.map(function (t) {
+          return Promise.resolve(t.capabilities()).then(function (c) { return c; }, function () { return { available: false }; });
+        })).then(function (caps) {
+          var any = caps.some(function (c) { return c && c.available; });
+          return { available: any, canAdvertise: any, canScan: any, needsInternet: false, maxPayload: 512, platform: "web", perTransport: caps };
+        });
+      },
+      host: function (p, h) { return race("host", p, h); },
+      join: function (p, h) { return race("join", p, h); },
+      send: function (bytes) {
+        if (active) { try { if (active.send(bytes)) return true; } catch (e) {} }
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] === active) continue;
+          try { if (list[i].send(bytes)) { active = list[i]; return true; } } catch (e) {}
+        }
+        return false;
+      },
+      close: function (reason) {
+        var jobs = list.map(function (t) { try { return Promise.resolve(t.close(reason)); } catch (e) { return Promise.resolve(); } });
+        active = null;
+        return Promise.all(jobs).then(function () {});
+      },
+      stats: function () { try { return active ? active.stats() : { rttMs: 0, lossPct: 0, sentPerSec: 0, recvPerSec: 0, lastRecvAt: null }; } catch (e) { return { rttMs: 0, lossPct: 0, sentPerSec: 0, recvPerSec: 0, lastRecvAt: null }; } }
+    };
+    var withDiscover = list.filter(function (t) { return typeof t.discover === "function"; });
+    if (withDiscover.length) raced.discover = function (code) { return withDiscover[0].discover(code); };
+    var withNearby = list.filter(function (t) { return typeof t.discoverNearby === "function"; });
+    if (withNearby.length) raced.discoverNearby = function (ms) { return withNearby[0].discoverNearby(ms); };
+    var withByHash = list.filter(function (t) { return typeof t.discoverByHash === "function"; });
+    if (withByHash.length) raced.discoverByHash = function (h) { return withByHash[0].discoverByHash(h); };
+    return raced;
+  }
+
   /* ---------- loopback mock transport ---------- */
   function createLoopbackPair(opts) {
     opts = opts || {};
@@ -645,7 +763,7 @@
           ownKeys = keys;
           sessionIdBytes = randomBytes(16); sessionTag = sessionTagOf(sessionIdBytes);
           var shortCode = makeShortCode();
-          pairing = { sessionId: bytesToHex(sessionIdBytes), shortCode: shortCode, displayPub: keys.publicKeyB64, displayPubBytes: keys.publicKeyBytes, expiresAt: nowFn() + PAIRING_TTL_MS };
+          pairing = { sessionId: bytesToHex(sessionIdBytes), shortCode: shortCode, displayPub: keys.publicKeyB64, displayPubBytes: keys.publicKeyBytes, expiresAt: nowFn() + PAIRING_TTL_MS, codeHashHex: bytesToHex(shortCodeHash4(shortCode)) };
           pairing.payload = pairingPayload(pairing);
           setState("pairing", "pairing-created");
           return pairing;
@@ -1066,7 +1184,11 @@
       send: function (bytes) { if (bytes && bytes[1] === TYPES.PING) F.pingSentAt = nowDefault(); try { return t.send(bytes); } catch (e) { return false; } },
       close: function (r) { return t.close(r); },
       stats: function () { var s = {}; try { s = t.stats() || {}; } catch (e) {} if (F.wrapRttMs && (!s.rttMs || s.rttMs <= 0)) s.rttMs = F.wrapRttMs; return s; },
-      discover: t.discover ? function (c) { return t.discover(c); } : undefined
+      discover: t.discover ? function (c) { return t.discover(c); } : undefined,
+      discoverNearby: t.discoverNearby ? function (ms) { return t.discoverNearby(ms); } : undefined,
+      discoverByHash: t.discoverByHash ? function (h) { return t.discoverByHash(h); } : undefined,
+      activeId: t.activeId ? function () { return t.activeId(); } : undefined,
+      candidates: t.candidates || undefined
     };
   }
   function facadeWrapHandlers(h) {
@@ -1146,7 +1268,26 @@
     if (F.pingTimer) clearInterval(F.pingTimer); F.pingTimer = null;
   }
   function facadePickTransport() {
-    return selectTransport(listTransports()).then(function (row) { return row ? row.transport : null; });
+    /* Race every available transport in parallel: BLE and relay start
+     * together, the first healthy one wins and the other stays as backup
+     * inside the raced transport. Transports whose capabilities fail or
+     * report unavailable (for example relay while signed out) are left
+     * out, but their reason is remembered for a specific error message. */
+    return queryCapabilities(listTransports()).then(function (rows) {
+      var avail = rows.filter(function (r) { return r.caps && r.caps.available; });
+      avail.sort(function (a, b) { return transportPriority(a.transport) - transportPriority(b.transport); });
+      if (!avail.length) {
+        var errs = rows.map(function (r) { return reasonError(transportErrorReason({ message: r.caps && r.caps.reason }), (r.caps && r.caps.reason) || "No link is available on this phone."); });
+        throw bestReasonError(errs);
+      }
+      F.lastTransportErrors = rows.filter(function (r) { return !(r.caps && r.caps.available); }).map(function (r) { return { id: r.transport.id, reason: transportErrorReason({ message: r.caps && r.caps.reason }), message: (r.caps && r.caps.reason) || "" }; });
+      if (avail.length === 1) return avail[0].transport;
+      return createRacedTransport(avail.map(function (r) { return r.transport; }));
+    });
+  }
+  function facadeActiveId() {
+    if (F.transport && F.transport.activeId) { var a = F.transport.activeId(); if (a) return a; }
+    return F.transportId;
   }
   function facadeSessionObject() {
     if (!F.node || !F.pairing) return null;
@@ -1159,6 +1300,26 @@
     if (!out.payload && out.sessionId && out.displayPub) out.payload = pairingPayload(out);
     return out;
   }
+  function facadeJoinParsed(parsed, text) {
+      if (nowDefault() > parsed.expiresAt) { var e4 = new Error("gone"); e4.reason = "expired"; return Promise.reject(e4); }
+      facadeStopLoops(); F.role = "probe"; F.paused = false; F.lastError = null;
+      F.node = facadeMakeNode("probe");
+      F.pairing = { sessionId: parsed.sessionId, displayPub: parsed.displayPub, shortCode: parsed.shortCode, expiresAt: parsed.expiresAt, payload: (text && text.indexOf("kardia-sync:") === 0) ? text : pairingPayload(parsed), confirm: null };
+      if (parsed.roomId) { F.pairing.roomId = parsed.roomId; F.pairing.roomToken = parsed.roomToken; F.pairing.relay = parsed.relay || { roomId: parsed.roomId, roomToken: parsed.roomToken }; }
+      if (parsed.codeHashHex) F.pairing.codeHashHex = parsed.codeHashHex;
+      if (parsed.displayPubBytes) F.pairing.displayPubBytes = parsed.displayPubBytes;
+      return facadePickTransport().then(function (t) {
+        if (!t) { F.lastError = "No link is available on this phone."; var e5 = new Error("no-transport"); e5.reason = "no-transport"; throw e5; }
+        F.transport = facadeWrapTransport(t); F.transportId = t.id === "raced" ? null : t.id;
+        var joinInput = (F.pairing.roomId || F.pairing.codeHashHex) ? { sessionId: parsed.sessionId, displayPub: parsed.displayPub, displayPubBytes: parsed.displayPubBytes || b64urlDecode(parsed.displayPub), shortCode: parsed.shortCode, expiresAt: parsed.expiresAt, roomId: F.pairing.roomId, roomToken: F.pairing.roomToken, relay: F.pairing.relay, codeHashHex: parsed.codeHashHex } : F.pairing.payload;
+        return F.node.joinPairing(joinInput, F.transport).then(function () {
+          F.transportId = facadeActiveId() || F.transportId;
+          if (F.node.state === "failed") { var e6 = new Error(F.node.getState().reason || "failed"); e6.reason = transportErrorReason(e6); throw e6; }
+          facadeStartSender();
+          return true;
+        }, function (err) { throw reasonError(transportErrorReason(err), (err && err.message) || "Could not join."); });
+      }, function (err) { throw reasonError(transportErrorReason(err), (err && err.message) || "No link is available on this phone."); });
+    }
   var facade = {
     on: function (fn) { if (typeof fn === "function") F.listeners.push(fn); return function () { F.listeners = F.listeners.filter(function (f) { return f !== fn; }); }; },
     state: function () { var s = F.node ? F.node.getState() : null; return { name: facadeStateName(), confirm: F.node ? F.node.confirmCode : null, reason: s ? s.reason : null, hint: s ? s.recoveryHint : null }; },
@@ -1175,7 +1336,20 @@
           Object.keys(pairing).forEach(function (k) { if (k !== "displayPubBytes") placeholder[k] = pairing[k]; });
           placeholder.payload = pairing.payload; F.pairing = placeholder;
           facadeLocalPairings[pairing.shortCode] = placeholder;
-          return F.node.hostWith(F.transport, pairing).then(function () { return facadeSessionObject(); });
+          return F.node.hostWith(F.transport, pairing).then(function () {
+            /* Relay hosting creates the room during host(): copy its
+             * credentials onto the shared pairing and rebuild the payload
+             * so the QR carries them. Without this a probe that scans the
+             * QR can never join over the relay. */
+            if (pairing.relay) placeholder.relay = pairing.relay;
+            if (pairing.roomId) placeholder.roomId = pairing.roomId;
+            if (pairing.roomToken) placeholder.roomToken = pairing.roomToken;
+            F.transportId = facadeActiveId() || F.transportId;
+            placeholder.payload = pairingPayload(placeholder);
+            pairing.payload = placeholder.payload;
+            facadeEmit({ type: "pairing", name: facadeStateName() });
+            return facadeSessionObject();
+          });
         });
       });
       ready.then(function () { facadeEmit({ type: "state", name: facadeStateName() }); }, function (e) { F.lastError = (e && e.message) || "Could not start pairing."; facadeEmit({ type: "state", name: facadeStateName(), reason: "no-transport" }); });
@@ -1184,49 +1358,85 @@
       return placeholder;
     },
     joinProbe: function (input) {
+      if (input && typeof input === "object" && input.sessionId && input.displayPub) {
+        var objParsed = { sessionId: String(input.sessionId).toLowerCase(), displayPub: input.displayPub, displayPubBytes: input.displayPubBytes || null, shortCode: input.shortCode || "NEARBY", expiresAt: input.expiresAt || (nowDefault() + PAIRING_TTL_MS), roomId: input.roomId, roomToken: input.roomToken, relay: input.relay, codeHashHex: input.codeHashHex };
+        if (!objParsed.displayPubBytes) { try { objParsed.displayPubBytes = b64urlDecode(objParsed.displayPub); } catch (e) {} }
+        return facadeJoinParsed(objParsed, pairingPayload(objParsed));
+      }
       var text = String(input == null ? "" : input).trim();
       var parsed = parsePairingPayload(text);
       if (!parsed && /^[A-Za-z0-9 ]{6,7}$/.test(text)) {
         var code = text.toUpperCase().replace(/[^A-Z2-9]/g, "");
         if (facadeLocalPairings[code]) parsed = parsePairingPayload(facadeLocalPairings[code].payload);
         if (!parsed) {
-          var discoverable = listTransports().filter(function (t) { return typeof t.discover === "function"; });
-          if (discoverable.length) {
-            return Promise.all(discoverable.map(function (t) {
-              // One transport failing to find the display must not fail the
-              // whole search; only an empty result across all of them is not-found.
-              try { return Promise.resolve(t.discover(code)).then(function (v) { return v; }, function () { return null; }); }
-              catch (e) { return Promise.resolve(null); }
-            })).then(function (found) {
-              var hit = found.filter(Boolean)[0];
-              if (!hit) { var e1 = new Error("not-found"); e1.reason = "not-found"; throw e1; }
-              // BLE discovery returns sessionId and displayPub without an
-              // expiry; tolerate it and keep the short code for the session.
-              // The 4 digit confirmation in the confirming state still guards
-              // this path before control is granted.
-              if (!hit.expiresAt) hit.expiresAt = nowDefault() + PAIRING_TTL_MS;
-              if (!hit.shortCode) hit.shortCode = code;
-              return facade.joinProbe(hit.payload || pairingPayload(hit));
+          // Typed code: race every lookup at once. Bluetooth discovery and
+          // the relay code lookup start in parallel and the first healthy
+          // result wins, the same as the QR path races transports. A
+          // Bluetooth miss never fails the search (only an empty result
+          // across all lookups is not-found); a relay failure keeps its
+          // specific reason so sign-in and rate limits surface.
+          var lookups = [];
+          listTransports().filter(function (t) { return typeof t.discover === "function"; }).forEach(function (t) {
+            lookups.push({
+              run: function () {
+                try { return Promise.resolve(t.discover(code)).then(function (v) { return v; }, function () { return null; }); }
+                catch (e) { return Promise.resolve(null); }
+              }
             });
+          });
+          listTransports().filter(function (t) { return typeof t.resolveCode === "function"; }).forEach(function (t) {
+            lookups.push({
+              run: function () {
+                try { return Promise.resolve(t.resolveCode(code)); }
+                catch (e) { return Promise.reject(e); }
+              }
+            });
+          });
+          if (!lookups.length) {
+            var e0 = new Error("not-found"); e0.reason = "not-found"; return Promise.reject(e0);
           }
-          var e2 = new Error("not-found"); e2.reason = "not-found"; return Promise.reject(e2);
+          return raceFirstSuccess(lookups, function (job) {
+            return job.run().then(function (v) {
+              if (!v) { var e1 = new Error("not-found"); e1.reason = "not-found"; throw e1; }
+              return v;
+            });
+          }).then(function (r) {
+            var hit = r.value;
+            // Bluetooth discovery returns sessionId and displayPub without an
+            // expiry; tolerate it and keep the short code for the session.
+            // The 4 digit confirmation in the confirming state still guards
+            // this path before control is granted.
+            if (!hit.expiresAt) hit.expiresAt = nowDefault() + PAIRING_TTL_MS;
+            if (!hit.shortCode) hit.shortCode = code;
+            return facade.joinProbe(hit.payload || pairingPayload(hit));
+          });
         }
       }
       if (!parsed) { var e3 = new Error("not-found"); e3.reason = "not-found"; return Promise.reject(e3); }
       if (nowDefault() > parsed.expiresAt) { var e4 = new Error("gone"); e4.reason = "expired"; return Promise.reject(e4); }
-      facadeStopLoops(); F.role = "probe"; F.paused = false; F.lastError = null;
-      F.node = facadeMakeNode("probe");
-      F.pairing = { sessionId: parsed.sessionId, displayPub: parsed.displayPub, shortCode: parsed.shortCode, expiresAt: parsed.expiresAt, payload: text.indexOf("kardia-sync:") === 0 ? text : pairingPayload(parsed), confirm: null };
-      return facadePickTransport().then(function (t) {
-        if (!t) { F.lastError = "No link is available on this phone."; var e5 = new Error("no-transport"); e5.reason = "no-transport"; throw e5; }
-        F.transport = facadeWrapTransport(t); F.transportId = t.id;
-        return F.node.joinPairing(F.pairing.payload, F.transport).then(function () {
-          if (F.node.state === "failed") { var e6 = new Error(F.node.getState().reason || "failed"); e6.reason = F.node.getState().reason; throw e6; }
-          facadeStartSender();
-          return true;
-        });
+      return facadeJoinParsed(parsed, text);
+    },
+    discoverNearby: function (timeoutMs) {
+      var ble = listTransports().filter(function (t) { return typeof t.discoverNearby === "function"; });
+      if (!ble.length) return Promise.resolve([]);
+      return Promise.resolve(ble[0].discoverNearby(timeoutMs)).then(function (list) { return list || []; }, function (err) { throw reasonError(transportErrorReason(err), (err && err.message) || "Nearby search failed."); });
+    },
+    joinNearby: function (item) {
+      if (!item || !item.codeHashHex) return Promise.reject(reasonError("not-found", "That display is no longer nearby."));
+      var ble = listTransports().filter(function (t) { return typeof t.discoverByHash === "function"; });
+      if (!ble.length) return Promise.reject(reasonError("bluetooth-unavailable", "Nearby joining needs the latest app build. Scan the QR code instead."));
+      return Promise.resolve(ble[0].discoverByHash(item.codeHashHex)).then(function (hit) {
+        if (!hit) throw reasonError("not-found", "That display is no longer nearby.");
+        if (!hit.expiresAt) hit.expiresAt = nowDefault() + PAIRING_TTL_MS;
+        var obj = { sessionId: hit.sessionId, displayPub: hit.displayPub, displayPubBytes: hit.displayPubBytes || b64urlDecode(hit.displayPub), shortCode: hit.shortCode || "NEARBY", expiresAt: hit.expiresAt, codeHashHex: item.codeHashHex };
+        return facade.joinProbe(obj);
       });
     },
+    refreshDisplay: function () {
+      if (F.node && F.role === "display") { try { F.node.close(); } catch (e) {} F.node = null; F.pairing = null; }
+      return facade.startDisplay();
+    },
+    transportErrors: function () { return F.lastTransportErrors || []; },
     confirm: function () { if (F.node) F.node.confirm(); return true; },
     disconnect: function () {
       if (wirePose.timer) { try { clearTimeout(wirePose.timer); } catch (e) {} wirePose.timer = null; }
@@ -1326,11 +1536,11 @@
     WINDOW_ORDER: WINDOW_ORDER.slice(), PAIRING_TTL_MS: PAIRING_TTL_MS, SESSION_IDLE_MS: SESSION_IDLE_MS, STALE_MS: STALE_MS,
     registerTransport: registerTransport, getTransport: getTransport, listTransports: listTransports,
     selectTransport: selectTransport, queryCapabilities: queryCapabilities,
-    createTransportManager: createTransportManager, createLoopbackPair: createLoopbackPair,
+    createTransportManager: createTransportManager, createRacedTransport: createRacedTransport, raceFirstSuccess: raceFirstSuccess, createLoopbackPair: createLoopbackPair,
     createNode: createNode, createDisplay: createDisplay, createProbe: createProbe, createProbeSender: createProbeSender,
     createSmoother: createSmoother, detectCapabilities: detectCapabilities,
     createBroadcastLoopbackTransport: createBroadcastLoopbackTransport,
-    on: facade.on, state: facade.state, startDisplay: facade.startDisplay, joinProbe: facade.joinProbe,
+    on: facade.on, state: facade.state, startDisplay: facade.startDisplay, joinProbe: facade.joinProbe, discoverNearby: facade.discoverNearby, joinNearby: facade.joinNearby, refreshDisplay: facade.refreshDisplay, transportErrors: facade.transportErrors,
     confirm: facade.confirm, disconnect: facade.disconnect, reconnect: facade.reconnect, recenter: facade.recenter,
     setPaused: facade.setPaused, calibrate: facade.calibrate, probePatch: facade.probePatch,
     renderLatest: facadeRenderLatest,
@@ -1347,7 +1557,7 @@
       sessionTagOf: sessionTagOf, diffU32: diffU32, quatFromEuler: quatFromEuler, eulerFromQuat: eulerFromQuat,
       quatMul: quatMul, quatConj: quatConj, quatNormalize: quatNormalize,
       createSmoother: createSmoother, scanBackoffMs: scanBackoffMs, healthScore: healthScore, isHealthy: isHealthy,
-      detectCapabilities: detectCapabilities, pairingPayload: pairingPayload, parsePairingPayload: parsePairingPayload,
+      detectCapabilities: detectCapabilities, pairingPayload: pairingPayload, parsePairingPayload: parsePairingPayload, transportErrorReason: transportErrorReason,
       HEADER_LEN: HEADER_LEN, MAC_LEN: MAC_LEN
     }
   };

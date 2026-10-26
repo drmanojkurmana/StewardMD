@@ -11,7 +11,10 @@
 .krd-root .kel-load { margin-top: 8px; }
 .krd-root .kel-load-track { height: 8px; border-radius: 999px; background: var(--sp-s2); overflow: hidden; }
 .krd-root .kel-load-fill { display: block; height: 100%; width: 0; background: var(--sp-acc); transition: width 140ms var(--kd-ease); }
-.krd-root .kel-modes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 10px 0 2px; -webkit-overflow-scrolling: touch; }
+.krd-root .kel-modes { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 10px 0 2px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%); }
+.krd-root .kel-mode { scroll-snap-align: start; }
 .krd-root .kel-modes::-webkit-scrollbar { display: none; }
 .krd-root .kel-mode { flex: 1 0 auto; min-height: 44px; padding: 10px 14px; border: 1px solid var(--sp-line); border-radius: 10px; background: var(--sp-s1); color: var(--sp-text); font-size: 14px; font-weight: 650; touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; transition: background-color 140ms var(--kd-ease), transform 120ms var(--kd-ease); }
 .krd-root .kel-mode:active { transform: scale(0.97); }

@@ -21,6 +21,20 @@
  * is dark at the bedside. Reduced motion stops the sheet transition,
  * not the cardiac cycle (content, not decoration).
  *
+ * Real cine (with kardia-clips.js): when the probe holds quality at
+ * least 85 inside tolerance for 0.5 s and a clip exists for the view
+ * (and the active pathology and severity, falling back to the view),
+ * the sector crossfades (300 ms, opacity only, instant under reduced
+ * motion) to the real patient clip, masked to the same sector fan and
+ * depth, looping muted. Leaving the target crossfades back. States:
+ * loading (clip preloading, simulation stays, no note), ready (clip
+ * can show at target), empty (no clip for this view, simulation only
+ * and no extra chrome), offline or error (simulation stays, one plain
+ * line says the real clip needs a connection, shown once), Doppler or
+ * frozen (simulation stays, one line says why when Real is chosen).
+ * The Simulated and Real switch and the Real patient attribution
+ * label are real buttons, 44 px tall; long attributions wrap.
+ *
  * ES5 IIFE, window.KARDIA_ECHOLAB. No allocation per frame: the rAF
  * loop reuses one US renderer, one Doppler instance and preallocated
  * cine slot objects; per frame it only steps the heart, sets the probe
@@ -198,6 +212,37 @@
     if (!cond || !cond.severities || !cond.severities[severity]) return null;
     return cond.severities[severity].sound || null;
   }
+  /* M-mode column: brightness by depth (0 near, 1 far) for one instant.
+   * The septum and posterior wall are bright lines either side of a
+   * dark cavity; their separation follows the LV volume, so the strip
+   * opens in diastole and closes in systole. Speckle is deterministic
+   * per depth and seed (the time column), never a flat band. */
+  function mmodeColumn(lvMl, seed) {
+    var lv = typeof lvMl === "number" && isFinite(lvMl) ? lvMl : 100;
+    var half = clamp(0.10 + lv / 900, 0.16, 0.30);
+    var centre = 0.52, sept = centre - half, post = centre + half;
+    var col = [], j;
+    for (j = 0; j < 56; j++) {
+      var y = j / 55, v;
+      var dS = Math.abs(y - sept), dP = Math.abs(y - post);
+      var sp = Math.sin((j + 1) * 12.9898 + (seed || 0) * 0.37) * 43758.5453; sp -= Math.floor(sp);
+      if (y > sept + 0.015 && y < post - 0.015) v = 0.04 + 0.05 * sp;
+      else if (dS < 0.02 || dP < 0.02) v = 0.92;
+      else if (Math.abs(y - (post + 0.07)) < 0.015) v = 0.98;
+      else v = 0.30 + 0.22 * sp;
+      if (y < 0.08) v = 0.18 + 0.15 * sp;
+      col.push(Math.round(clamp(v, 0, 1) * 255));
+    }
+    return col;
+  }
+  function mmodeLabels(depthMm) {
+    var d = depthMm || 160;
+    return { title: "M-mode", depthText: "Depth " + d + " mm",
+      ticks: [0, 0.25, 0.5, 0.75, 1].map(function (f) {
+        return { fraction: f, label: Math.round(d * f / 10) + " cm" };
+      }),
+      sweepText: "Sweep 25 mm/s" };
+  }
   /* Cine ring buffer: fixed slots, no allocation after create. */
   function createCine(capacity) {
     var slots = [], i;
@@ -257,6 +302,58 @@
     return src;
   }
 
+  /* At-target state machine for real cine. Enter needs quality at
+   * least enterScore, inside tolerance, held for dwellMs; exit needs
+   * quality below exitScore (or leaving tolerance). The gap between
+   * the two scores is the hysteresis band: hovering at the tolerance
+   * edge changes nothing, so the image cannot flicker. Pure and
+   * clock-injected so it is unit tested without a browser. */
+  function createRealCine(opts) {
+    opts = opts || {};
+    var enterScore = opts.enterScore != null ? opts.enterScore : 85;
+    var exitScore = opts.exitScore != null ? opts.exitScore : 80;
+    var dwellMs = opts.dwellMs != null ? opts.dwellMs : 500;
+    var state = "sim", since = null;
+    return {
+      enterScore: enterScore, exitScore: exitScore, dwellMs: dwellMs,
+      state: function () { return state; },
+      reset: function () { state = "sim"; since = null; return state; },
+      update: function (input, nowMs) {
+        input = input || {};
+        var score = typeof input.score === "number" ? input.score : -1;
+        var inside = input.withinTolerance !== false;
+        var now = typeof nowMs === "number" ? nowMs : 0;
+        if (state === "real") {
+          if (!inside || score < exitScore) { state = "sim"; since = null; }
+          return state;
+        }
+        if (inside && score >= enterScore) {
+          if (since == null) since = now;
+          if (now - since >= dwellMs) { state = "real"; since = null; }
+        } else since = null;
+        return state;
+      }
+    };
+  }
+  /* CSS clip-path polygon for the sector fan over a (w, h) box, using
+   * the KARDIA_US layout: apex centred near the top, radius filling
+   * the height, half-angle sectorDeg/2 about the straight-down beam.
+   * The real clip is fitted to the same box, so this mask gives it
+   * the same sector shape and depth as the simulated sector. */
+  function sectorClipPolygon(w, h, sectorDeg) {
+    if (!(w > 0) || !(h > 0)) return "";
+    var apexX = w / 2, apexY = Math.min(h - 8, Math.round(h * 0.02) + 4);
+    if (apexY < 0) apexY = 0;
+    var radius = h - apexY, half = ((sectorDeg || 80) / 2) * Math.PI / 180;
+    function pt(x, y) { return (Math.round(x / w * 1000) / 10) + "% " + (Math.round(y / h * 1000) / 10) + "%"; }
+    var pts = [pt(apexX, apexY)], steps = 16, i, a;
+    for (i = 0; i <= steps; i++) {
+      a = -half + (2 * half * i) / steps;
+      pts.push(pt(apexX + Math.sin(a) * radius, apexY + Math.cos(a) * radius));
+    }
+    return "polygon(" + pts.join(", ") + ")";
+  }
+
   /* ---------------- controller ----------------
    * ctx: {doc, heart, geom, probe, doppler, views, getView(), knobs,
    * onKnobs(ui), isResidentPlus(), isPractice(), pathologyBase}
@@ -279,6 +376,12 @@
     var usCanvas = null, lastError = "", lastFrameAt = 0, chunksLoaded = 0;
     var lastUsProbe = null, resizeObs = null, onWinResize = null;
     var els = {};
+    /* Real cine: preference defaults to Real (the controller only
+     * ever shows it at target with a clip); the state machine, the
+     * chosen clip and its playable src are per view and pathology. */
+    var realCine = createRealCine({}), realPref = "real", realKey = null, realClip = null,
+      realSrc = "", realStatus = "idle", realShowing = false, realScoreAt = 0,
+      realOfflineSaid = false, realEls = null;
 
     function uiKnobs() { return ctx.knobs; }
     var knobCache = { key: "", val: null };
@@ -367,6 +470,194 @@
       }, function (e) { lastError = "anatomy: " + String(e && e.message || e); loadNote = "Offline. Showing the model heart."; return false; });
     }
 
+    /* ---------- real cine ---------- */
+    function isProbeDevice() {
+      if (suspended) return true;
+      try {
+        var s = G.KARDIA_SYNC;
+        if (s && s.core && s.core.role === "probe") return true;
+        var sp = G.KARDIA_SYNCPROBE;
+        if (sp && sp.isProbeRenderSuspended && sp.isProbeRenderSuspended()) return true;
+      } catch (e) {}
+      return false;
+    }
+    function reducedMotion() {
+      try { return !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; }
+    }
+    var REAL_CSS =
+      ".krd-root .kel-real-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transition:opacity 300ms var(--kd-ease);}" +
+      ".krd-root .kel-real-video.kel-real-on{opacity:1;}" +
+      ".krd-root .kel-real-bar{margin-top:8px;}" +
+      ".krd-root .kel-real-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;}" +
+      ".krd-root .kel-real-switch{display:flex;gap:6px;}" +
+      ".krd-root .kel-real-btn,.krd-root .kel-real-label{min-height:44px;padding:10px 14px;border:1px solid var(--sp-line);border-radius:10px;background:var(--sp-s1);color:var(--sp-text);font-size:14px;font-weight:650;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;transition:transform 120ms var(--kd-ease),background-color 140ms var(--kd-ease);}" +
+      ".krd-root .kel-real-btn:active,.krd-root .kel-real-label:active{transform:scale(0.97);}" +
+      ".krd-root .kel-real-btn[aria-pressed=\"true\"]{background:var(--sp-acc);color:var(--sp-on-pri);border-color:var(--sp-acc);}" +
+      ".krd-root .kel-real-btn:focus-visible,.krd-root .kel-real-label:focus-visible{outline:2px solid var(--sp-acc);outline-offset:2px;}" +
+      ".krd-root .kel-real-credit{margin:8px 0 0;font-size:12px;line-height:1.55;color:var(--sp-mut);overflow-wrap:break-word;}" +
+      ".krd-root .kel-real-credit a{color:var(--sp-link);}" +
+      ".krd-root .kel-real-note{margin:6px 0 0;font-size:13px;line-height:1.5;color:var(--sp-mut);overflow-wrap:break-word;}" +
+      "@media (prefers-reduced-motion: reduce){.krd-root .kel-real-video{transition:none;}.krd-root .kel-real-btn:active,.krd-root .kel-real-label:active{transform:none;}}";
+    function ensureRealEls() {
+      if (realEls || !doc || !doc.createElement) return realEls;
+      if (!doc.getElementById || !doc.getElementById("kelRealStyle")) {
+        var st = doc.createElement("style"); st.id = "kelRealStyle"; st.textContent = REAL_CSS;
+        (doc.head || doc.documentElement || doc.body).appendChild(st);
+      }
+      var video = doc.createElement("video");
+      video.id = "krdRealVideo"; video.className = "kel-real-video";
+      video.muted = true; video.loop = true; video.setAttribute("playsinline", "");
+      video.setAttribute("preload", "auto"); video.setAttribute("aria-label", "Real patient cine");
+      var bar = doc.createElement("div"); bar.id = "krdRealBar"; bar.className = "kel-real-bar"; bar.hidden = true;
+      bar.innerHTML =
+        '<div class="kel-real-row"><div class="kel-real-switch" role="group" aria-label="Image source">' +
+        '<button type="button" class="kel-real-btn" id="krdRealSim" data-kel-real="simulated" aria-pressed="false">Simulated</button>' +
+        '<button type="button" class="kel-real-btn" id="krdRealReal" data-kel-real="real" aria-pressed="true">Real</button></div>' +
+        '<button type="button" class="kel-real-label" id="krdRealLabel" aria-expanded="false">Real patient</button></div>' +
+        '<p class="kel-real-credit" id="krdRealCredit" hidden></p>' +
+        '<p class="kel-real-note" id="krdRealNote" role="status"></p>';
+      realEls = { video: video, bar: bar,
+        simBtn: bar.querySelector("#krdRealSim"), realBtn: bar.querySelector("#krdRealReal"),
+        label: bar.querySelector("#krdRealLabel"), credit: bar.querySelector("#krdRealCredit"),
+        note: bar.querySelector("#krdRealNote") };
+      realEls.simBtn.addEventListener("click", function () { setRealPref("simulated"); });
+      realEls.realBtn.addEventListener("click", function () { setRealPref("real"); });
+      realEls.label.addEventListener("click", function () {
+        var open = realEls.credit.hidden;
+        realEls.credit.hidden = !open;
+        realEls.label.setAttribute("aria-expanded", String(open));
+      });
+      video.addEventListener("error", function () { onRealClipFailed(); });
+      return realEls;
+    }
+    function attachRealEls() {
+      var r = ensureRealEls(); if (!r || !els.sector) return;
+      var slot = els.sector.parentNode; if (!slot) return;
+      if (r.video.parentNode !== slot) slot.appendChild(r.video);
+      var stack = slot, parent = stack.parentNode;
+      if (parent && r.bar.parentNode !== parent) parent.insertBefore(r.bar, stack.nextSibling);
+      fitRealVideo();
+    }
+    function fitRealVideo() {
+      if (!realEls || !els.sector) return;
+      var w = els.sector.clientWidth || els.sector.width || 0, h = els.sector.clientHeight || els.sector.height || 0;
+      var poly = sectorClipPolygon(w, h, uiKnobs().sectorDeg);
+      if (poly) { realEls.video.style.clipPath = poly; realEls.video.style.webkitClipPath = poly; }
+      if (reducedMotion()) realEls.video.style.transition = "none";
+    }
+    function realQuery() {
+      var vid = currentViewId();
+      if (!vid) return null;
+      return { view: vid, pathology: pathology ? pathology.id : null, severity: pathology ? pathology.severity : null };
+    }
+    function resolveRealClip(key, query) {
+      realStatus = "loading"; realClip = null; realSrc = "";
+      var api = null;
+      try { api = G.KARDIA_CLIPS; } catch (e) {}
+      if (!api || !api.preloadFor) { realStatus = "empty"; refreshRealUi(); return; }
+      api.preloadFor(query).then(function (res) {
+        if (destroyed || realKey !== key) return;
+        if (!res || !res.clip) { realStatus = "empty"; realClip = null; refreshRealUi(); return; }
+        realClip = res.clip; realSrc = res.src || "";
+        realStatus = "ready"; realOfflineSaid = false;
+        if (realEls && realSrc && realEls.video.getAttribute("src") !== realSrc) realEls.video.setAttribute("src", realSrc);
+        refreshRealUi();
+      }, function () {
+        if (destroyed || realKey !== key) return;
+        realStatus = "offline"; realClip = null;
+        refreshRealUi();
+      });
+    }
+    function onRealClipFailed() {
+      if (!realSrc) return;
+      realStatus = "offline"; setRealShowing(false); refreshRealUi();
+    }
+    function setRealPref(p) {
+      realPref = p === "simulated" ? "simulated" : "real";
+      refreshRealUi();
+    }
+    function setRealShowing(on) {
+      if (!realEls) return;
+      var want = !!on;
+      if (want === realShowing && realEls.video.classList.contains("kel-real-on") === want) return;
+      realShowing = want;
+      if (want) {
+        fitRealVideo();
+        if (realSrc && realEls.video.getAttribute("src") !== realSrc) realEls.video.setAttribute("src", realSrc);
+        realEls.video.classList.add("kel-real-on");
+        var pr = realEls.video.play && realEls.video.play();
+        if (pr && pr.catch) pr.catch(function () {});
+      } else {
+        realEls.video.classList.remove("kel-real-on");
+        try { realEls.video.pause(); } catch (e) {}
+      }
+    }
+    function refreshRealUi() {
+      if (!realEls) return;
+      var hasClip = realStatus === "ready" && !!realClip;
+      realEls.bar.hidden = !(hasClip || realStatus === "offline");
+      realEls.simBtn.setAttribute("aria-pressed", String(realPref === "simulated"));
+      realEls.realBtn.setAttribute("aria-pressed", String(realPref === "real"));
+      if (hasClip && refreshRealUi._clip !== realClip) {
+        refreshRealUi._clip = realClip;
+        var attr = "";
+        try { attr = G.KARDIA_CLIPS._pure.attributionLine(realClip); } catch (e) {}
+        realEls.label.textContent = "Real patient: " + (realClip.title || "clip");
+        realEls.credit.innerHTML = "";
+        realEls.credit.textContent = attr;
+        if (realClip.licenceUrl) {
+          realEls.credit.appendChild(doc.createTextNode(" "));
+          var a = doc.createElement("a");
+          a.href = realClip.licenceUrl; a.target = "_blank"; a.rel = "noopener noreferrer";
+          a.textContent = realClip.licence || "licence";
+          realEls.credit.appendChild(a);
+        }
+      }
+      var note = "";
+      if (realStatus === "offline" && !realOfflineSaid) {
+        note = "The real patient clip needs a connection. Showing the simulated image.";
+        realOfflineSaid = true;
+      } else if (realStatus === "offline") {
+        note = "The real patient clip needs a connection. Showing the simulated image.";
+      } else if (hasClip && realPref === "real" && mode !== "2d") {
+        note = "Doppler uses the simulated image. Switch to 2D at the target to see the real patient clip.";
+      } else if (hasClip && realPref === "real" && frozen) {
+        note = "Measurements use the simulated image.";
+      }
+      var noteText = hasClip || realStatus === "offline" ? note : "";
+      if (refreshRealUi._note !== noteText) { refreshRealUi._note = noteText; realEls.note.textContent = noteText; }
+      var show = hasClip && realPref === "real" && mode === "2d" && !frozen &&
+        realCine.state() === "real" && !isProbeDevice();
+      setRealShowing(show);
+    }
+    /* Called from the frame loop: detects a newly chosen view (the
+     * preload trigger), scores the probe at a throttled rate, and
+     * drives the state machine. Never runs on the probe device. */
+    function updateRealCine(now) {
+      if (!realEls || destroyed || suspended) return;
+      if (isProbeDevice()) { setRealShowing(false); return; }
+      var q = realQuery();
+      var key = q ? (q.view + "|" + (q.pathology || "") + "|" + (q.severity || "")) : null;
+      if (key !== realKey) {
+        realKey = key; realCine.reset(); setRealShowing(false);
+        if (q) resolveRealClip(key, q); else { realStatus = "idle"; }
+        refreshRealUi();
+      }
+      if (!q || now - realScoreAt < 150) { refreshRealUi(); return; }
+      realScoreAt = now;
+      var score = null;
+      try {
+        var v = ctx.getView ? ctx.getView() : null;
+        if (probe && probe.score && v) score = probe.score(v, { noCut: true });
+      } catch (e) {}
+      if (score) realCine.update({ score: score.score, withinTolerance: score.withinTolerance }, now);
+      refreshRealUi();
+    }
+    function realCineDebug() {
+      return { state: realCine.state(), pref: realPref, status: realStatus, showing: realShowing,
+        clip: realClip ? (realClip.file || realClip.title || "") : null, key: realKey };
+    }
+
     function planeNow() { return probe && probe.plane ? probe.plane() : null; }
     function currentViewId() {
       try { var v = ctx.getView ? ctx.getView() : null; if (v && v.id) return v.id; } catch (e) {}
@@ -387,18 +678,19 @@
             var nowC = (G.performance && G.performance.now) ? G.performance.now() : 0;
             if (!drawOverlay._field || nowC - (drawOverlay._fieldAt || 0) > 120) {
               drawOverlay._field = d.colourField({ planeOrigin: pl.origin, planeNormal: pl.normal, planeUp: pl.up,
-              probePosition: pl.origin, nyquistMs: uiKnobs().colourNyquistMs, nx: 18, ny: 14, widthMm: uiKnobs().depth * 1.2, depthMm: uiKnobs().depth });
+              probePosition: pl.origin, nyquistMs: uiKnobs().colourNyquistMs, nx: 36, ny: 28, widthMm: uiKnobs().depth * 1.2, depthMm: uiKnobs().depth });
               drawOverlay._fieldAt = nowC;
             }
             var field = drawOverlay._field;
             var gainA = clamp(uiKnobs().colourGain / 100, 0, 1);
+            var cellW = bw / Math.max(1, field.nx - 1) + 1.5, cellH = bh / Math.max(1, field.ny - 1) + 1.5;
             field.points.forEach(function (p) {
               if (!p.flow) return;
               var px = bx + (p.xMm / field.widthMm + 0.5) * bw;
               var py = by + (p.yMm / field.depthMm + 0.5) * bh;
               if (px < bx || px > bx + bw || py < by || py > by + bh) return;
               c.fillStyle = "rgba(" + p.colour.r + "," + p.colour.g + "," + p.colour.b + "," + (0.25 + 0.65 * gainA) + ")";
-              c.fillRect(px - 5, py - 5, 10, 10);
+              c.fillRect(px - cellW / 2, py - cellH / 2, cellW, cellH);
             });
           } catch (e) {}
         }
@@ -421,9 +713,35 @@
         c.strokeStyle = "rgba(238,243,241,0.9)"; c.lineWidth = 1.5;
         c.beginPath(); c.moveTo(mx, 8); c.lineTo(mx, H - 8); c.stroke();
       }
+      if (mode === "colour") {
+        /* Colour bar at the right edge of the sector: red toward at the
+         * top, blue away at the bottom, with the Nyquist limits. */
+        var nyqC = uiKnobs().colourNyquistMs || 0.6;
+        var barX = W - 30, barY = 18, barH = Math.max(40, H - 56), barW = 10, seg;
+        var stops = null;
+        try { stops = G.KARDIA_DOPPLER && G.KARDIA_DOPPLER.colourBarStops ? G.KARDIA_DOPPLER.colourBarStops(nyqC) : null; } catch (e) {}
+        if (stops) stops.stops.forEach(function (s) {
+          c.fillStyle = "rgb(" + s.r + "," + s.g + "," + s.b + ")";
+          c.fillRect(barX, barY + s.fraction * barH, barW, Math.ceil(barH / stops.stops.length) + 1);
+        });
+        else for (seg = 0; seg < 16; seg++) {
+          var vv = nyqC - 2 * nyqC * seg / 16;
+          var cc = G.KARDIA_DOPPLER && G.KARDIA_DOPPLER.velocityColour ? G.KARDIA_DOPPLER.velocityColour(vv, 0, nyqC) : { r: 180, g: 40, b: 40 };
+          c.fillStyle = "rgb(" + cc.r + "," + cc.g + "," + cc.b + ")";
+          c.fillRect(barX, barY + seg / 16 * barH, barW, Math.ceil(barH / 16) + 1);
+        }
+        c.strokeStyle = "rgba(238,243,241,0.8)"; c.lineWidth = 1; c.strokeRect(barX, barY, barW, barH);
+        c.fillStyle = "#eef3f1"; c.font = "600 9px sans-serif";
+        c.fillText("+" + nyqC.toFixed(2), Math.max(0, barX - 2), barY - 5);
+        c.fillText("0", barX + 2, barY + barH / 2 + 3);
+        c.fillText("-" + nyqC.toFixed(2), Math.max(0, barX - 2), barY + barH + 12);
+        c.fillText("m/s", Math.max(0, barX - 2), barY + barH + 23);
+      }
       if (frozen) {
-        c.fillStyle = "rgba(238,243,241,0.95)"; c.font = "600 13px sans-serif";
-        c.fillText("Frozen", 10, 20);
+        c.fillStyle = "rgba(6,9,11,0.85)"; c.fillRect(8, 8, 70, 22);
+        c.strokeStyle = "#ffc05a"; c.lineWidth = 1.5; c.strokeRect(8, 8, 70, 22);
+        c.fillStyle = "#ffc05a"; c.font = "600 12px sans-serif";
+        c.fillText("Frozen", 16, 23);
       }
     }
 
@@ -444,29 +762,73 @@
       if (els.specReadout) {
         if (spec) {
           var peak = 0; (spec.envelopeMs || []).forEach(function (v) { if (Math.abs(v) > peak) peak = Math.abs(v); });
-          els.specReadout.textContent = m + " peak " + peak.toFixed(2) + " m/s. Gradient " +
+          var lab2 = G.KARDIA_DOPPLER && G.KARDIA_DOPPLER.spectralLabels ? G.KARDIA_DOPPLER.spectralLabels(spec) : null;
+          els.specReadout.textContent = (lab2 ? lab2.title + ", " + lab2.site + ". " : "") + "Peak " + peak.toFixed(2) + " m/s. Gradient " +
             (4 * peak * peak).toFixed(0) + " mmHg." + (spec.anyAliased ? " Aliasing present." : "");
           api.lastPeakMs = peak;
         } else els.specReadout.textContent = "Spectrum unavailable.";
       }
     }
 
+    var mEcg = [];
     function drawMMode() {
       var cv = els.spectrum; if (!cv || cv.isConnected === false) return;
       var c = cv.getContext("2d"); if (!c) return;
       var W = cv.width, H = cv.height;
       c.fillStyle = "#000"; c.fillRect(0, 0, W, H);
-      /* Scrolling strip: each column is the brightness along the cursor
-       * depth at one time step, approximated from the heart volumes. */
       var st = heart && heart.state ? heart.state() : null;
-      var bright = st ? clamp(0.25 + (st.volumes.LV || 100) / 220, 0, 1) : 0.5;
-      mStrip.push(bright); if (mStrip.length > W) mStrip.shift();
-      for (var x = 0; x < mStrip.length; x++) {
-        var g = Math.round(mStrip[x] * 200);
-        c.fillStyle = "rgb(" + g + "," + g + "," + g + ")";
-        c.fillRect(x, H * 0.25, 1, H * 0.5);
+      var lv = st && st.volumes ? (st.volumes.LV || 100) : 100;
+      if (!frozen) {
+        mStrip.push(mmodeColumn(lv, mStrip.length + 1));
+        var d2 = ensureDoppler();
+        mEcg.push(d2 && d2.ecgSample && st ? d2.ecgSample(st.cycleTimeMs || 0) : 0);
+        var maxCols = Math.max(40, W - 44);
+        while (mStrip.length > maxCols) { mStrip.shift(); mEcg.shift(); }
       }
-      if (els.specReadout) els.specReadout.textContent = "M-mode. Drag the cursor line on the image.";
+      var axisW = 36, topH = 22, ecgH = 26;
+      var plotW = Math.max(10, W - axisW), plotH = Math.max(10, H - topH - ecgH - 6);
+      var cols = mStrip.length, rows = cols ? mStrip[0].length : 56, x, y;
+      if (cols && typeof c.createImageData === "function" && typeof c.putImageData === "function") {
+        var img = c.createImageData(plotW, plotH), data = img.data, px, py;
+        for (py = 0; py < plotH; py++) for (px = 0; px < plotW; px++) {
+          var ci = clamp(Math.floor(px / Math.max(1, plotW) * cols), 0, cols - 1);
+          var ri = clamp(Math.floor(py / Math.max(1, plotH) * rows), 0, rows - 1);
+          var gv = mStrip[ci][ri], off = (py * plotW + px) * 4;
+          data[off] = gv; data[off + 1] = gv; data[off + 2] = gv; data[off + 3] = 255;
+        }
+        c.putImageData(img, axisW, topH);
+      } else if (cols) {
+        var cw2 = plotW / cols, ch2 = plotH / rows;
+        for (x = 0; x < cols; x++) for (y = 0; y < rows; y++) {
+          var g3 = mStrip[x][y];
+          c.fillStyle = "rgb(" + g3 + "," + g3 + "," + g3 + ")";
+          c.fillRect(axisW + x * cw2, topH + y * ch2, Math.max(1, cw2), Math.max(1, ch2));
+        }
+      }
+      var lab = mmodeLabels(uiKnobs().depth);
+      c.fillStyle = "#eef3f1"; c.font = "600 11px sans-serif";
+      c.fillText(lab.title + "  " + lab.sweepText, axisW + 4, 14);
+      c.fillStyle = "#a3adb3"; c.font = "10px sans-serif";
+      lab.ticks.forEach(function (t) {
+        var ty = topH + t.fraction * plotH;
+        c.fillText(t.label, 2, ty + 3);
+        c.strokeStyle = "rgba(163,173,179,0.3)"; c.beginPath(); c.moveTo(axisW - 4, ty); c.lineTo(axisW, ty); c.stroke();
+      });
+      var ecgTop = topH + plotH + 4;
+      c.strokeStyle = "#3ee07a"; c.beginPath();
+      for (x = 0; x < mEcg.length; x++) {
+        var ex = axisW + (cols > 1 ? x / (cols - 1) * plotW : 0);
+        var ey = ecgTop + ecgH * 0.62 - mEcg[x] * ecgH * 0.5;
+        if (x === 0) c.moveTo(ex, ey); else c.lineTo(ex, ey);
+      }
+      c.stroke();
+      c.fillStyle = "#3ee07a"; c.fillText("ECG", 4, H - 4);
+      if (frozen) {
+        c.fillStyle = "rgba(6,9,11,0.85)"; c.fillRect(axisW + 6, topH + 6, 62, 20);
+        c.strokeStyle = "#ffc05a"; c.strokeRect(axisW + 6, topH + 6, 62, 20);
+        c.fillStyle = "#ffc05a"; c.font = "600 11px sans-serif"; c.fillText("Frozen", axisW + 14, topH + 20);
+      }
+      if (els.specReadout) els.specReadout.textContent = "M-mode through the mitral valve. Drag the cursor line on the 2D image above.";
     }
 
     /* Size every owned canvas from its CSS box times DPR, uniformly
@@ -479,6 +841,7 @@
       ["sector", "overlay", "spectrum"].forEach(function (k) {
         if (els[k]) out[k] = fitCanvasToCssBox(els[k], dpr);
       });
+      fitRealVideo();
       return out;
     }
     function observeResize() {
@@ -533,9 +896,11 @@
         } else if (ctx.fallbackDraw) ctx.fallbackDraw(cv);
       }
       drawOverlay();
+      updateRealCine(now);
+      if ((mode === "pw" || mode === "cw") && !frozen && now - (frame._specAt || 0) > 200) { specDirty = true; frame._specAt = now; }
       if ((mode === "pw" || mode === "cw") && specDirty) refreshSpectrum();
-      if (mode === "mmode" && !frozen) drawMMode();
-      if (els.fps) els.fps.textContent = "Frame " + emaMs.toFixed(1) + " ms. Target 30 fps.";
+      if (mode === "mmode") drawMMode();
+      if (els.fps) els.fps.textContent = "";
       frameLog.push(emaMs); if (frameLog.length > 120) frameLog.shift();
     }
 
@@ -554,6 +919,7 @@
      * is recreated on the same canvas by resume(). */
     function suspend() {
       suspended = true; stop();
+      setRealShowing(false);
       if (us) {
         try { if (us._loseContext) us._loseContext(); } catch (e) {}
         try { if (us.destroy) us.destroy(); } catch (e) {}
@@ -609,21 +975,25 @@
         els.specReadout = extra.specReadout || null; els.fps = extra.fps || null;
         resizeCanvases(); observeResize();
         if (!suspended) ensureUS(sector);
+        attachRealEls();
         bindOverlay(); if (!suspended) start();
         return api;
       },
       setMode: function (m) {
-        mode = m; specDirty = true; mStrip = [];
+        mode = m; specDirty = true; mStrip = []; mEcg = [];
         if (els.spectrum) els.spectrum.hidden = !(m === "pw" || m === "cw" || m === "mmode");
         resizeCanvases();
         if (m === "pw" || m === "cw") refreshSpectrum();
-        drawOverlay(); return api;
+        drawOverlay(); refreshRealUi(); return api;
       },
       getMode: function () { return mode; },
+      setRealPref: function (p) { setRealPref(p); return api; },
+      getRealPref: function () { return realPref; },
+      realCine: realCineDebug,
       setFrozen: function (f) {
         frozen = !!f;
         if (!frozen) cineBack = 0;
-        drawOverlay(); return api;
+        drawOverlay(); refreshRealUi(); return api;
       },
       isFrozen: function () { return frozen; },
       setCineBack: function (n) { cineBack = clamp(n, 0, Math.max(0, cine.count() - 1)); return cine.at(cineBack); },
@@ -644,6 +1014,7 @@
         if (heart && heart.setParams && cond) heart.setParams(severityHeart(cond, severity));
         if (geom && geom.setPathology && cond) geom.setPathology(pathologyGeom(severityGeom(cond, severity)));
         specDirty = true;
+        realKey = null;
         return api;
       },
       getPathology: function () { return pathology; },
@@ -730,6 +1101,7 @@
       isSuspended: function () { return suspended; },
       destroy: function () {
         destroyed = true; suspended = false; stop();
+        setRealShowing(false);
         if (resizeObs) { try { resizeObs.disconnect(); } catch (e) {} resizeObs = null; }
         if (onWinResize && G.removeEventListener) { try { G.removeEventListener("resize", onWinResize); } catch (e) {} onWinResize = null; }
         if (doc.removeEventListener) doc.removeEventListener("visibilitychange", onVis);
@@ -747,7 +1119,8 @@
       pickResolutionScale: pickResolutionScale, targetFps: targetFps, frameIntervalMs: frameIntervalMs, pathologyGeom: pathologyGeom,
       soundKindFor: soundKindFor, severityHeart: severityHeart,
       severityGeom: severityGeom, severitySound: severitySound,
-      createCine: createCine, spectrumSource: spectrumSource, imageSource: imageSource,
+      createCine: createCine, createRealCine: createRealCine, sectorClipPolygon: sectorClipPolygon, spectrumSource: spectrumSource, imageSource: imageSource,
+      mmodeColumn: mmodeColumn, mmodeLabels: mmodeLabels,
       probeForPlane: probeForPlane, backingSizeForCssBox: backingSizeForCssBox, fitCanvasToCssBox: fitCanvasToCssBox
     }
   };

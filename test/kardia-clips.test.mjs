@@ -4,7 +4,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
-import { readFileSync } from "node:fs";
+import { readFileSync, existsSync } from "node:fs";
 
 const require = createRequire(import.meta.url);
 const CLIPS = require("../kardia-clips.js");
@@ -19,10 +19,10 @@ test("exports: pure helpers, module.exports, ES5 source", () => {
   assert.ok(!/[–—]/.test(src), "no em or en dashes");
 });
 
-test("the catalogue holds 38 clips indexed by view and pathology", () => {
-  assert.equal(credits.clips.length, 38);
+test("the catalogue holds 100 clips indexed by view and pathology", () => {
+  assert.equal(credits.clips.length, 100);
   const idx = CLIPS.indexClips(credits.clips);
-  assert.equal(idx.all.length, 38);
+  assert.equal(idx.all.length, 100);
   assert.ok(Object.keys(idx.byView).length >= 8, "view clips indexed");
   assert.ok(Object.keys(idx.byPathology).length >= 10, "pathology clips indexed");
 });
@@ -64,6 +64,42 @@ test("isVideo and clipUrl follow the file type and the test override", () => {
   assert.equal(CLIPS.clipUrl({ url: "https://x/a.mp4" }), "https://x/a.mp4");
   assert.equal(CLIPS.clipUrl({ url: "https://x/a.mp4" }, "/test/fixture.mp4"), "/test/fixture.mp4");
   assert.equal(CLIPS.clipUrl({ url: "https://x/a.mp4" }, ""), "https://x/a.mp4");
+});
+
+test("bundled clips resolve to a local URL that exists in the bundle source", () => {
+  const bundled = credits.clips.filter((c) => c.localFile);
+  assert.equal(bundled.length, 63, "63 de-identified clips are bundled");
+  for (const c of bundled) {
+    assert.equal(CLIPS.isBundled(c), true, c.file);
+    const local = CLIPS.localClipUrl(c, "/kardia/");
+    assert.equal(local, "/kardia/media/clips/" + c.file, c.file + " local URL");
+    assert.equal(CLIPS.clipUrl(c, null, "/kardia/"), local, c.file + " resolves local first");
+    assert.ok(existsSync(new URL("../kardia/media/clips/" + c.file, import.meta.url)), c.file + " exists under kardia/media/clips/");
+    assert.ok(CLIPS.isVideo(c), c.file + " bundled clip is a video");
+  }
+  const hostedOnly = credits.clips.filter((c) => !c.localFile);
+  assert.equal(hostedOnly.length, 37, "the earlier hosted clips remain as network fallback entries");
+  for (const c of hostedOnly) {
+    assert.equal(CLIPS.clipUrl(c, null, "/kardia/"), c.url, c.file + " falls back to its hosted url");
+  }
+  /* Every Scan Lab view with a bundled clip resolves locally. */
+  for (const view of ["tte_plax", "tte_a4c", "tte_psax_mv", "tte_subcostal_4c"]) {
+    const hit = CLIPS.chooseClip(CLIPS.indexClips(credits.clips), { view });
+    assert.ok(hit, view + " has a clip");
+    assert.ok(CLIPS.localClipUrl(hit, "/kardia/").startsWith("/kardia/media/clips/"), view + " resolves to a bundled local URL, got " + (hit && hit.file));
+  }
+  const build = readFileSync(new URL("../scripts/build-www.sh", import.meta.url), "utf8");
+  assert.ok(build.includes("kardia/media/clips"), "build-www.sh copies the bundled clips into www/");
+  /* Round 8: PLAXnormal (tte-plax-1) is bundled and first in catalogue
+   * order, so a plain PLAX target shows a true normal PLAX (elongated
+   * LV, mitral and aortic valves, aortic root, LA). The TOF PLAX sweep
+   * (tetralogy-of-fallot-2) stays filed under tte_plax for TOF queries.
+   * IVC is the one Scan Lab view with no bundled clip in the 63-clip set. */
+  const plax = CLIPS.chooseClip(CLIPS.indexClips(credits.clips), { view: "tte_plax" });
+  assert.ok(plax && CLIPS.isBundled(plax), "PLAX resolves to a bundled clip");
+  assert.equal(plax.file, "tte-plax-1.mp4", "plain PLAX shows the true normal PLAX clip, not a pathology sweep");
+  const ivcBundled = credits.clips.filter((c) => c.view === "tte_subcostal_ivc" && c.localFile);
+  assert.equal(ivcBundled.length, 0, "IVC has no bundled clip in the 63-clip set");
 });
 
 test("pathology lessons map to their pathology clips", () => {

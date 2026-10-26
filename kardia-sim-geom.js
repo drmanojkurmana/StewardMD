@@ -731,15 +731,59 @@
           }
           if (loop.length >= 3) loops.push(loop);
         });
-        if (!loops.length && segs.length >= 3) {
-          /* open surface (leaflet edge-on etc.): use segment endpoints */
-          var flat = []; segs.forEach(function (sg) { flat.push(sg[0]); flat.push(sg[1]); }); loops = [flat];
-        }
         loops.forEach(function (loop) {
           var pts2 = loop.map(function (p) { var rel = sub(p, planeOrigin); return [dot(rel, right), dot(rel, up)]; });
-          var cu = 0, cv = 0; pts2.forEach(function (p) { cu += p[0]; cv += p[1]; }); cu /= pts2.length; cv /= pts2.length;
+          /* Closed, correctly oriented contours only. A loop that did
+           * not chain back to its start is a broken cut (coarse mesh,
+           * open surface fragment): filling it joins its ends with a
+           * spurious chord and paints letter-like blobs in the sector,
+           * so it is dropped instead of guessed at. The closing point
+           * is removed, consecutive duplicates are removed, degenerate
+           * zero-area slivers are dropped, and every contour
+           * is oriented counter-clockwise in the (right, up) plane so
+           * point-in-polygon and even-odd fills agree on every view. */
+          if (pts2.length < 2) return;
+          var first = pts2[0], lastPt = pts2[pts2.length - 1];
+          if (Math.hypot(first[0] - lastPt[0], first[1] - lastPt[1]) > 0.6) {
+            /* Open cut of a thin sheet (a leaflet edge-on): keep it as
+             * a marked line for the line renderers, never as a filled
+             * contour. Filling it is what painted the blobs. */
+            var cu0 = 0, cv0 = 0;
+            pts2.forEach(function (p) { cu0 += p[0]; cv0 += p[1]; });
+            cu0 /= pts2.length; cv0 /= pts2.length;
+            if (Math.abs(cu0) > w / 2 || Math.abs(cv0) > d / 2) return;
+            polys.push({ id: g.id, ref: g.ref, name: g.name, kind: g.kind, acoustic: g.acoustic, points: pts2, centroid: [cu0, cv0], closed: false, open: true });
+            return;
+          }
+          var clean = [];
+          pts2.forEach(function (p) {
+            var q = clean[clean.length - 1];
+            if (!q || Math.hypot(p[0] - q[0], p[1] - q[1]) > 1e-6) clean.push(p);
+          });
+          if (clean.length > 1) {
+            var f0 = clean[0], l0 = clean[clean.length - 1];
+            if (Math.hypot(f0[0] - l0[0], f0[1] - l0[1]) <= 0.6) clean.pop();
+          }
+          if (clean.length < 3) {
+            /* A closed chain that collapses to a segment is the cut
+             * of a leaflet the plane grazes: keep it as a line. */
+            if (clean.length === 2) {
+              var cu1 = (clean[0][0] + clean[1][0]) / 2, cv1 = (clean[0][1] + clean[1][1]) / 2;
+              if (Math.abs(cu1) <= w / 2 && Math.abs(cv1) <= d / 2) polys.push({ id: g.id, ref: g.ref, name: g.name, kind: g.kind, acoustic: g.acoustic, points: clean, centroid: [cu1, cv1], closed: false, open: true });
+            }
+            return;
+          }
+          var area2 = 0, cu = 0, cv = 0, pi;
+          for (pi = 0; pi < clean.length; pi++) {
+            var pa = clean[pi], pb = clean[(pi + 1) % clean.length];
+            area2 += pa[0] * pb[1] - pb[0] * pa[1];
+            cu += pa[0]; cv += pa[1];
+          }
+          if (Math.abs(area2) < 0.02) return;
+          if (area2 < 0) clean.reverse();
+          cu /= clean.length; cv /= clean.length;
           if (Math.abs(cu) > w / 2 || Math.abs(cv) > d / 2) return;
-          polys.push({ id: g.id, ref: g.ref, name: g.name, kind: g.kind, acoustic: g.acoustic, points: pts2, centroid: [cu, cv] });
+          polys.push({ id: g.id, ref: g.ref, name: g.name, kind: g.kind, acoustic: g.acoustic, points: clean, centroid: [cu, cv], closed: true, areaMm2: Math.abs(area2) / 2 });
         });
       }
       return polys;

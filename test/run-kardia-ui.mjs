@@ -1,7 +1,14 @@
-/* Kardia in the REAL app (headless Chrome): flag OFF = the Home grid is byte-for-byte unchanged
- * (no Kardia tile, KardiQ X tile untouched, KARDIA.open() a no-op); flag ON (?kardia=1 or
- * localStorage smd_kardia = 1, no early-access tier) = the Kardia tile replaces the KardiQ X tile,
- * the tile opens the Specialty Engine host with its five tabs, Learn lists the real atlas preview,
+/* Kardia 2.0 in the REAL app (headless Chrome): Kardia is ON for everyone by default
+ * (kardia-flags.js def:true; only an explicit ?kardia=0 or localStorage smd_kardia = "0"
+ * turns it off). Flag OFF (explicit opt-out) = the Home grid is byte-for-byte unchanged
+ * (no Kardia tile, KardiQ X tile untouched, KARDIA.open() a no-op). Flag ON =
+ * tool-groups.js starter() already puts the Kardia tile first on the Home grid (no pin
+ * needed to see it), the KardiQ X tile is replaced while Kardia is on, tapping the Home
+ * tile opens the Specialty Engine host with its six tabs (Echo Lab, Learn, Practice,
+ * Cases, Calculators, KardiQ X), the level picker on Echo Lab is the compact "Level"
+ * control (the full level row stays on the other tabs), Echo Lab leads with the Scan
+ * Lab (ksl* ids, KARDIA_SCANLAB.debugPose over the 15 KARDIA_SCAN_TARGETS views, real
+ * cine from the bundled kardia/media/clips), Learn lists the real atlas preview,
  * and the KardiQ X tab still holds behind SMD_XACCESS without opening the AI overlay.
  * Screenshots every tab at 390, 820 and 1194 (iPad landscape 1194 x 834) widths in
  * light and dark into work/shots/. At every width it also asserts the tab row sits
@@ -80,10 +87,10 @@ function decodePng(path) {
   }
   return { w, h, ch, data: out };
 }
-/* Sector check on saved pixels. Sector geometry is the renderer's
- * (KARDIA_US layoutFor at the 640x480 live canvas, Echo Lab knobs
- * depth 160 / sector 80): apex centred at the top, beam straight
- * down, half-angle 40 degrees, radius filling the canvas height.
+/* Sector check on saved pixels. Sector geometry is the display
+ * shader's (FS_DISP in kardia-sim-us.js at the 640x480 canvas, knobs
+ * depth 160 / sector 80): apex at (W/2, 0.02 * sectorHeight), beam
+ * straight down, half-angle 40 degrees, radius the sector height.
  * Non-black is luminance over 20 (above the CPU path's Bayer dither).
  * Returns outside non-black percent and the fan axis deviation from
  * vertical: half the difference of the median left and right edge
@@ -91,8 +98,10 @@ function decodePng(path) {
  * radius (median, so isolated fragments cannot swing the edges). */
 function sectorCheck(path) {
   const { w, h, ch, data } = decodePng(path);
-  const apexX = w / 2, apexY = Math.min(h - 8, Math.round(h * 0.02) + 4);
-  const radius = h - apexY, half = 40 * Math.PI / 180;
+  /* FS_DISP geometry (kardia-sim-us.js): apex at (W/2, 0.02 * sectorHeight),
+   * sector radius is the full sectorHeight, half-angle sectorDeg/2. */
+  const apexX = w / 2, apexY = h * 0.02;
+  const radius = h, half = 40 * Math.PI / 180;
   let outside = 0, outsideLit = 0;
   const leftAngles = [], rightAngles = [];
   for (let y = 0; y < h; y++) {
@@ -163,6 +172,10 @@ function anatomyCheck(path, diag) {
    * fall back to the septum structure's own centroid, as the
    * standalone harness does (ventricular_septum_mid). */
   if (!septumPt) { const sp = largest("ventricular_septum_mid") || largest("interventricular_septum"); if (sp) septumPt = interior(sp.ref); }
+  /* Last resort: the midpoint of the two ventricular cavity samples.
+   * In an A4C cut that point sits on the septum wall between the pools,
+   * so the same mid grey band applies. */
+  if (!septumPt) { const li = interior("FJ2422"), ri = interior("FJ2423"); if (li && ri) septumPt = [(li[0] + ri[0]) / 2, (li[1] + ri[1]) / 2]; }
   const usP = diag.usProbe, n2 = norm(usP.normal), r2 = norm(cross(n2, norm(usP.up))), u2 = norm(cross(r2, n2)), beam = mul(u2, -1), apex = usP.origin;
   const lay = diag.layout, sectorH = lay.sectorHeight || h, depthMm = (diag.knobs && diag.knobs.depth) || 160;
   const gpu = diag.rendererMode === "webgl";
@@ -392,13 +405,14 @@ try {
     ok(qa.wording.pass, `${label}: no em/en dash or American spelling${qa.wording.dashes ? " (" + qa.wording.dashes + " dashes)" : ""}${qa.wording.words.length ? " (" + qa.wording.words.join(",") + ")" : ""}`);
   };
 
-  /* ── 1. FLAG OFF: Home is byte-for-byte unchanged ── */
-  console.log("\n--- flag OFF: Home unchanged ---");
+  /* ── 1. FLAG OFF (explicit opt-out, smd_kardia = "0": Kardia is on
+   * for everyone by default in 2.0): Home is byte-for-byte unchanged ── */
+  console.log("\n--- flag OFF (explicit opt-out): Home unchanged ---");
   await load(BASE);
   await ev(`try{localStorage.setItem("smd_kardia","0");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd4/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd8/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -409,28 +423,60 @@ try {
   await ev(`SMD_openRoute("kardia"); return 1;`); await sleep(400);
   ok((await ev(`return !KARDIA.isOpen();`)) === true, "stewardmd://kardia does not open with the flag off");
 
-  /* ── 2. FLAG ON: Kardia replaces the KardiQ X tile ── */
+  /* ── 2. FLAG ON (the default): Kardia replaces the KardiQ X tile and
+   * starter() already puts it first on Home, so a user just taps it. ── */
   console.log("\n--- flag ON: tile swap ---");
-  await ev(`try{localStorage.setItem("smd_kardia","1");}catch(e){} return 1;`);
+  await ev(`try{localStorage.setItem("smd_kardia","1");localStorage.removeItem("smd_home_tools");localStorage.removeItem("smd_kardia_prefs");}catch(e){} return 1;`);
   await load(BASE + "?kardia=1");
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd4/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
-  // Open from All tools and pin it: the real Home tile UI, like a tester would.
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd8/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  /* No pinning needed in 2.0: the starter set leads with Kardia. */
+  ok(await until(`return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "the Kardia tile is already on the Home grid (starter set, no pin needed)");
+  ok((await ev(`return document.querySelector('#rnavToolsGrid .rnav-tile[data-act]').getAttribute('data-act');`)) === "kardia", "the Kardia tile is first on the Home grid");
+  /* The pin flow still exists in All tools and must work both ways:
+   * the pin starts pressed (Kardia is on Home), tapping it removes the
+   * tile, tapping it again puts the tile back. */
   await ev(`document.querySelector('.rnav-tile[data-act=alltools]').click(); return 1;`);
   ok(await until(`return !!document.querySelector('[data-at-open="kardia"]');`, 10000), "All tools lists Kardia (and no KardiQ X row: " + await until(`return !document.querySelector('[data-at-open="kardiox"]');`, 5000) + ")");
+  ok((await ev(`return document.querySelector('[data-at-pin="kardia"]').getAttribute('aria-pressed');`)) === "true", "the All tools pin starts pressed: Kardia is on Home already");
   await ev(`document.querySelector('[data-at-pin="kardia"]').click(); return 1;`);
-  ok(await until(`return !!document.querySelector('.rnav-tile[data-act=kardia]');`, 10000), "pinning puts the Kardia tile on the Home grid");
+  ok(await until(`return !document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "tapping the pin removes the Kardia tile from Home");
+  await ev(`document.querySelector('[data-at-pin="kardia"]').click(); return 1;`);
+  ok(await until(`return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "tapping the pin again puts the Kardia tile back on Home");
+  /* Restore the untouched starter state the pin taps just replaced,
+   * then close the sheet the way a user does (tap the scrim). */
+  await ev(`try{localStorage.removeItem("smd_home_tools");}catch(e){} SMD_showHome(); return 1;`);
+  await ev(`var s=document.getElementById('hvScrim'); if(s) s.click(); return 1;`);
+  await sleep(300);
+  ok(await until(`return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "the Kardia tile is on the Home grid again after restoring the starter set");
 
-  /* ── 3. Open Kardia, walk the five tabs ── */
-  await ev(`var t=document.querySelector('.rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
+  /* ── 3. Open Kardia from its Home tile, walk the six tabs ── */
+  await ev(`var t=document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
-  ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the five tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd4/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd4/.test(u)), "engine + Kardia loaded on open, at the loader token");
-  ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, KardiQ X");
+  ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the six tabs");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd8/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd8/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,calc,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, Calculators, KardiQ X");
+  ok((await ev(`return [].map.call(document.querySelectorAll('#smdKardia .krd-tab'),function(b){return b.textContent.trim();}).join(",");`)) === "Echo Lab,Learn,Practice,Cases,Calculators,KardiQ X", "tab labels: Echo Lab, Learn, Practice, Cases, Calculators, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
   ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
+  /* Compact Level control on Echo Lab: the summary names the level,
+   * opening it and picking Resident (Pro granted in the harness, as in
+   * the lesson section below) refilters the view chips, and picking
+   * MBBS in the same control returns. */
+  ok(await until(`return !!document.querySelector('#smdKardia .krd-levelmenu summary');`, 10000), "Echo Lab carries the compact Level control");
+  ok(/Level: MBBS/.test(await ev(`return document.querySelector('#smdKardia .krd-levelmenu summary').textContent;`) || ""), "the compact Level control names MBBS at first");
+  const chipsMbbs = await ev(`return document.querySelectorAll('#smdKardia [data-act=kecho-view]').length;`);
+  await ev(`window.SMD_PRO={isProSync:function(){return true;},openPaywall:function(){}}; return 1;`);
+  await ev(`document.querySelector('#smdKardia .krd-levelmenu summary').click(); return 1;`);
+  await ev(`var lv=document.querySelector('#smdKardia .krd-levelmenu [data-act=klevel][data-v=resident]'); if(lv) lv.click(); return 1;`);
+  ok(await until(`return /Level: Resident/.test(document.querySelector('#smdKardia .krd-levelmenu summary').textContent);`, 10000), "the compact Level control changes to Resident");
+  const chipsRes = await ev(`return document.querySelectorAll('#smdKardia [data-act=kecho-view]').length;`);
+  ok(typeof chipsRes === "number" && typeof chipsMbbs === "number" && chipsRes > chipsMbbs, `changing level in the compact control refilters the Echo Lab views (${chipsMbbs} to ${chipsRes} chips)`);
+  await ev(`document.querySelector('#smdKardia .krd-levelmenu summary').click(); return 1;`);
+  await ev(`var lv2=document.querySelector('#smdKardia .krd-levelmenu [data-act=klevel][data-v=mbbs]'); if(lv2) lv2.click(); return 1;`);
+  ok(await until(`return /Level: MBBS/.test(document.querySelector('#smdKardia .krd-levelmenu summary').textContent);`, 10000), "the compact Level control returns to MBBS");
   ok(!/[–—]/.test(await ev(`return document.getElementById('smdKardia').innerText;`)), "no em or en dash on screen");
   const tabH = await ev(`return (function(){ var r = document.getElementById("smdKardia"); var scale = 1;
     try { var d = document.createElement("div");
@@ -443,9 +489,15 @@ try {
    * every tab label must be fully visible (a crushed tab row clips the lower
    * half of the labels behind the level row, worst at 390px). Reused at every
    * width below, after scrolling the page to the bottom. */
+  /* The level control under the tab row: the full .sp-levelrow on most
+   * tabs, the compact "Level" <details> summary on Echo Lab (its panel
+   * is absolutely positioned and hidden while closed, so the summary is
+   * the row that must sit clear of the tabs). */
   const tabsClear = `return (function(){var r=document.getElementById('smdKardia'); if(!r) return false;
-    var t=r.querySelector('.krd-tabs'), l=r.querySelector('.sp-levelrow'); if(!t||!l) return false;
-    var tb=t.getBoundingClientRect(), lb=l.getBoundingClientRect(); if(tb.bottom>lb.top+1) return false;
+    var t=r.querySelector('.krd-tabs'); if(!t) return false;
+    var l=r.querySelector('.krd-levelmenu summary') || r.querySelector('.sp-levelrow'); if(!l) return false;
+    var tb=t.getBoundingClientRect(), lb=l.getBoundingClientRect(); if(!(lb.width>0&&lb.height>0)) return false;
+    if(tb.bottom>lb.top+1) return false;
     var bs=r.querySelectorAll('.krd-tab'); if(!bs.length) return false;
     for(var i=0;i<bs.length;i++){ if(bs[i].scrollHeight>bs[i].clientHeight+1) return false; } return true;})();`;
   const scrollBottom = `var sc=document.querySelector('#smdKardia .sp-scroll'); if(sc) sc.scrollTop=sc.scrollHeight; return 1;`;
@@ -490,10 +542,12 @@ try {
   ok(posText === "Apex, fifth intercostal space at the midclavicular line. Marker Toward the left, about three o clock.", `probe position joins as "<position>. Marker <direction>." ("${posText}")`);
   /* Visible pixels only: snapshot() reads renderer-internal/CPU state
    * and passed while the on-screen canvas was black, so it is kept
-   * only as a debug diagnostic, never as the pass condition. */
-  const vis1 = await visibleStats("krdSector");
+   * only as a debug diagnostic, never as the pass condition. Scan Lab
+   * owns the Echo Lab screen now (the classic lab is hidden under it),
+   * so the learner-visible live image is the Scan Lab monitor. */
+  const vis1 = await visibleStats("kslMonitor");
   if (!visibleOk(vis1)) console.log("Echo Lab debug (visible sector failed): " + JSON.stringify(vis1) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
-  ok(visibleOk(vis1), `live image is visible on the sector canvas the learner sees (mean ${fmtMean(vis1)}, hit ${vis1 ? vis1.hitId : "?"}, connected ${vis1 ? vis1.connected : "?"})`);
+  ok(visibleOk(vis1), `live image is visible on the Scan Lab monitor the learner sees (mean ${fmtMean(vis1)}, hit ${vis1 ? vis1.hitId : "?"}, connected ${vis1 ? vis1.connected : "?"})`);
   /* The standalone A4C render is real-mesh: wait for Echo Lab's real
    * anatomy to settle (or fall back), then re-solve the A4C target
    * against the loaded geometry before saving the canvas, exactly
@@ -527,24 +581,30 @@ try {
       `Echo Lab A4C matches standalone: septum is mid grey (${an && typeof an.septum === "number" ? an.septum.toFixed(3) : "?"}, 0.25 to 0.65)`);
     if (!!an && !an.error && !(cav.every((v) => typeof v === "number" && v <= 0.12) && typeof an.septum === "number" && an.septum >= 0.25 && an.septum <= 0.65)) await printFanDiag("anatomy");
   }
-  ok(!!vis1 && vis1.bloodMean < vis1.wallMean && (vis1.wallMean - vis1.bloodMean) > 0.02, `visible blood is darker than visible walls at A4C (blood ${vis1 && typeof vis1.bloodMean === "number" ? vis1.bloodMean.toFixed(3) : "?"} < wall ${vis1 && typeof vis1.wallMean === "number" ? vis1.wallMean.toFixed(3) : "?"})`);
+  ok(!!vis1 && vis1.bloodMean < vis1.wallMean && (vis1.wallMean - vis1.bloodMean) > 0.02, `visible blood is darker than visible walls on the Scan Lab monitor (blood ${vis1 && typeof vis1.bloodMean === "number" ? vis1.bloodMean.toFixed(3) : "?"} < wall ${vis1 && typeof vis1.wallMean === "number" ? vis1.wallMean.toFixed(3) : "?"})`);
   for (const m of ["colour", "pw", "cw", "mmode", "2d"]) {
     await ev(`document.querySelector('#smdKardia [data-act=kecho-mode][data-v=${m}]').click(); return 1;`);
     await sleep(600);
     const vis = await ev(`return document.getElementById('krdSpectrum') ? !document.getElementById('krdSpectrum').hidden : false;`);
     ok(m === "2d" || m === "colour" ? true : vis === true, `mode ${m} renders its strip or overlay`);
+    /* Same pixel tests, pointed at what renders each mode: the sector
+     * canvas for 2d/colour, the spectral canvas for pw/cw/mmode. Scan
+     * Lab owns the screen, so each mode must also leave a live image
+     * on the Scan Lab monitor the learner actually sees. */
     const visEl = (m === "pw" || m === "cw" || m === "mmode") ? "krdSpectrum" : "krdSector";
     const vm = await visibleStats(visEl);
-    if (!vm || !(vm.mean > 0.001 && vm.nonBlackFrac > 0.002 && vm.hitIsCanvas && vm.connected)) console.log(`Echo Lab debug (visible ${m} failed): ` + JSON.stringify(vm) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
-    ok(!!vm && vm.mean > 0.001 && vm.nonBlackFrac > 0.002 && vm.hitIsCanvas && vm.connected, `mode ${m} shows non-black pixels in its visible element ${visEl} (mean ${fmtMean(vm)}, non-black ${vm && typeof vm.nonBlackFrac === "number" ? vm.nonBlackFrac.toFixed(3) : "?"})`);
+    const mon = await visibleStats("kslMonitor");
+    if (!vm || !(vm.mean > 0.001 && vm.nonBlackFrac > 0.002 && vm.connected) || !visibleOk(mon)) console.log(`Echo Lab debug (visible ${m} failed): ` + JSON.stringify(vm) + " monitor=" + JSON.stringify(mon) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
+    ok(!!vm && vm.mean > 0.001 && vm.nonBlackFrac > 0.002 && vm.connected && visibleOk(mon), `mode ${m} shows non-black pixels in its rendered element ${visEl} and a live image on the Scan Lab monitor (mean ${fmtMean(vm)}, non-black ${vm && typeof vm.nonBlackFrac === "number" ? vm.nonBlackFrac.toFixed(3) : "?"}, monitor mean ${fmtMean(mon)})`);
   }
-  const meanBefore = vis1 && typeof vis1.mean === "number" ? vis1.mean : 0;
+  const secBefore = await visibleStats("krdSector");
+  const meanBefore = secBefore && typeof secBefore.mean === "number" ? secBefore.mean : 0;
   await ev(`(function(){var el=document.getElementById('krdGain'); if(el){el.value=95; el.dispatchEvent(new Event('input',{bubbles:true}));} KARDIA._kardia.echoLab.setKnob('gain',95); return 1;})()`);
   await sleep(800);
   const vis2 = await visibleStats("krdSector");
-  const knobOk = !!vis2 && vis2.hitIsCanvas && Math.abs(vis2.mean - meanBefore) > 0.005;
+  const knobOk = !!vis2 && Math.abs(vis2.mean - meanBefore) > 0.005;
   if (!knobOk) console.log("Echo Lab debug (knob failed): " + JSON.stringify(vis2) + " " + await ev(`return JSON.stringify(KARDIA._kardia.echoLab.debug ? KARDIA._kardia.echoLab.debug() : null);`));
-  ok(knobOk, `a knob change changes the visible mean brightness (${meanBefore.toFixed(3)} to ${fmtMean(vis2)})`);
+  ok(knobOk, `a knob change changes the rendered sector mean brightness (${meanBefore.toFixed(3)} to ${fmtMean(vis2)})`);
   await ev(`KARDIA._kardia.echoLab.setKnob('gain',55); return 1;`);
   /* Severe AS: CW peak must exceed 4 m/s. Uses the real pathology file.
    * ev() does not await promises (Runtime.evaluate without awaitPromise),
@@ -597,9 +657,120 @@ try {
   await metrics(820, 1180); await theme(true); await sleep(500); await shot("kardia-echolab-820-dark");
   await metrics(390, 844); await theme(false);
 
+  /* ── 3d. Scan Lab (the Kardia 2.0 Echo Lab): scene and monitor on
+   * screen without scrolling, debugPose over all 15 targets with the
+   * bundled real clip playing where one is bundled, coaching that
+   * follows a synthetic drag, the stage buttons, and the tutorial.
+   * The classic Echo Lab real-cine switch below it is retired here:
+   * real cine now lives on the Scan Lab monitor (kslReal), fed by
+   * KARDIA_CLIPS.preloadFor from the bundled clips, no test stub. ── */
+  console.log("\n--- Scan Lab ---");
+  await metrics(390, 844); await theme(false);
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('kslScene') && !!document.getElementById('kslMonitor');`, 20000), "Scan Lab opens with the 3D scene and the monitor");
+  ok(await until(`return !!(window.KARDIA_SCANLAB && KARDIA_SCANLAB.getLast() && KARDIA_SCANLAB.getLast().getDebug().loadingState==='ready');`, 60000), "Scan Lab finishes loading its body assets");
+  const kslRects = async () => JSON.parse((await ev(`return JSON.stringify((function(){function r(id){var e=document.getElementById(id); if(!e) return null; var b=e.getBoundingClientRect(); return {top:b.top,bottom:b.bottom,left:b.left,right:b.right,w:b.width,h:b.height};} return {scene:r('kslScene'),mon:r('kslMonitor'),vw:window.innerWidth,vh:window.innerHeight};})());`)) || "{}");
+  const kslOnScreen = (rr) => !!rr && !!rr.scene && !!rr.mon && rr.scene.w > 0 && rr.scene.h > 0 && rr.mon.w > 0 && rr.mon.h > 0 &&
+    rr.scene.top >= -1 && rr.mon.top >= -1 && rr.scene.bottom <= rr.vh + 1 && rr.mon.bottom <= rr.vh + 1 && rr.scene.left >= -1 && rr.mon.right <= rr.vw + 1;
+  ok(kslOnScreen(await kslRects()), "390x844: Scan Lab scene and monitor are both visible without scrolling");
+  /* Nothing covers the sector: every sampled point of the monitor
+   * must hit the monitor canvas itself or the real clip video. */
+  ok((await ev(`return (function(){var m=document.getElementById('kslMonitor'); if(!m) return false; var b=m.getBoundingClientRect();
+    var fx=[0.08,0.5,0.92], fy=[0.08,0.5,0.92];
+    for(var i=0;i<fx.length;i++) for(var j=0;j<fy.length;j++){ var hit=document.elementFromPoint(b.left+b.width*fx[i], b.top+b.height*fy[j]);
+      if(hit!==m && (!hit || hit.id!=='kslReal')) return false; } return true;})();`)) === true, "nothing overlaps the Scan Lab sector");
+  const kslMon = await visibleStats("kslMonitor");
+  ok(visibleOk(kslMon), `Scan Lab monitor shows the simulated image (mean ${fmtMean(kslMon)}, hit ${kslMon ? kslMon.hitId : "?"})`);
+  ok((await ev(`return KARDIA_SCANLAB.getLast().getDebug().frames>0 && KARDIA_SCANLAB.getLast().getDebug().drawCalls>0;`)) === true, "Scan Lab scene is rendering frames");
+  /* All 15 targets: debugPose lands inside tolerance, the picker and
+   * title follow, a clip is requested for the mapped view, and where
+   * a bundled clip exists it actually plays on the monitor. */
+  ok(await until(`return !!(window.KARDIA_CLIPS && KARDIA_CLIPS.credits);`, 30000), "the real clip catalogue is loaded for the Scan Lab checks");
+  const scanViews = JSON.parse((await ev(`return JSON.stringify(KARDIA_SCAN_TARGETS.VIEWS.map(function(v){return {id:v.id,label:v.label,viewId:v.viewId};}));`)) || "[]");
+  ok(scanViews.length === 15, `Scan Lab has 15 target views (${scanViews.length})`);
+  for (const sv of scanViews) {
+    const hit = JSON.parse((await ev(`return JSON.stringify(KARDIA_SCANLAB.debugPose("${sv.id}"));`)) || "null");
+    ok(!!hit && hit.within === true, `Scan Lab debugPose reaches the target: ${sv.id}`);
+    ok((await ev(`return document.getElementById('kslTargetName').textContent;`)) === sv.label, `Scan Lab target title follows debugPose: ${sv.id}`);
+    ok((await ev(`return document.getElementById('kslView-${sv.id}').getAttribute('aria-pressed');`)) === "true", `Scan Lab view picker follows debugPose: ${sv.id}`);
+    ok((await ev(`return KARDIA_SCANLAB.getLast().getDebug().clipRequestedFor;`)) === sv.viewId, `Scan Lab requests a clip for ${sv.viewId}`);
+    const bundled = await ev(`return (function(){var c=window.KARDIA_CLIPS.chooseClip({view:"${sv.viewId}"}); return !!(c && window.KARDIA_CLIPS.isBundled(c));})()`);
+    if (bundled) {
+      ok(await until(`return (function(){var v=document.getElementById('kslReal'); return !!v && !v.hidden && !v.paused && v.readyState>=2 && !document.getElementById('kslRealBadge').hidden && document.getElementById('kslMonLabel').textContent==='Real patient clip';})();`, 30000),
+        `Scan Lab plays the bundled real clip at target: ${sv.id}`);
+      const src = await ev(`return document.getElementById('kslReal').getAttribute('src') || '';`);
+      ok(/^(blob:|\/kardia\/media\/clips\/)/.test(src || ""), `Scan Lab real clip for ${sv.id} is bundled, not streamed ("${String(src).slice(0, 60)}")`);
+      ok((await ev(`return (function(){var v=document.getElementById('kslReal'); return v.muted && v.loop && v.hasAttribute('playsinline');})();`)) === true, `Scan Lab real clip for ${sv.id} loops muted and plays inline`);
+      ok((await ev(`return document.getElementById('kslAttribution').textContent.length>0;`)) === true, `Scan Lab real clip for ${sv.id} carries its attribution`);
+    } else {
+      ok(await until(`return document.getElementById('kslMonLabel').textContent==='Simulated image' || document.getElementById('kslMonLabel').textContent==='Real patient clip';`, 10000),
+        `Scan Lab has no bundled clip for ${sv.id} and says which image is on screen ("${sv.viewId}")`);
+    }
+  }
+  await shot("kardia-scanlab-390-light");
+  qaGate(await qaRun(), "390px light: Scan Lab QA gates");
+  /* Coaching follows the probe: settle exactly on PLAX (coaching says
+   * the view is found), then drag the grip on the scene canvas by
+   * synthetic pointer events and the coaching line must change to a
+   * correction while the pose itself moves. */
+  await ev(`KARDIA_SCANLAB.debugPose('plax'); return 1;`);
+  ok(await until(`return /That is the view/.test(document.getElementById('kslCoach').textContent);`, 15000), "Scan Lab coaching confirms the view at the PLAX target");
+  const poseBeforeDrag = await ev(`return JSON.stringify(KARDIA_SCANLAB.getLast().getState().pose.contact);`);
+  await ev(`(function(){var c=document.getElementById('kslScene'); var r=c.getBoundingClientRect(); var p=KARDIA_SCANLAB.getLast().getDebug().probeScreen; if(!p) return 0;
+    var x=r.left+p.x, y=r.top+p.y;
+    function pe(t,dx,dy){c.dispatchEvent(new PointerEvent(t,{pointerId:31,clientX:x+dx,clientY:y+dy,bubbles:true}));}
+    pe('pointerdown',0,0); pe('pointermove',50,10); pe('pointermove',110,20); pe('pointerup',110,20); return 1;})()`);
+  ok(await until(`return JSON.stringify(KARDIA_SCANLAB.getLast().getState().pose.contact) !== ${JSON.stringify(poseBeforeDrag)};`, 8000), "Scan Lab probe moves by synthetic drag on the scene");
+  ok(await until(`return document.getElementById('kslCoach').textContent.length>0 && !/That is the view/.test(document.getElementById('kslCoach').textContent);`, 15000),
+    `Scan Lab coaching line updates when the probe moves ("${await ev(`return document.getElementById('kslCoach').textContent;`)}")`);
+  /* Stage buttons: labels toggle, layers open and switch, practice
+   * restarts the attempt, fullscreen takes the stage full screen
+   * (a real CDP mouse press, so the browser grants the gesture). */
+  await ev(`document.getElementById('kslLabels').click(); return 1;`);
+  ok((await ev(`return document.getElementById('kslLabels').getAttribute('aria-pressed');`)) === "true", "Scan Lab labels button toggles anatomy labels on");
+  await ev(`document.getElementById('kslLabels').click(); return 1;`);
+  ok((await ev(`return document.getElementById('kslLabels').getAttribute('aria-pressed');`)) === "false", "Scan Lab labels button toggles anatomy labels back off");
+  await ev(`document.getElementById('kslLayersBtn').click(); return 1;`);
+  ok((await ev(`return !document.getElementById('kslLayers').hidden && document.getElementById('kslLayersBtn').getAttribute('aria-expanded')==='true';`)) === true, "Scan Lab layers button opens the layer choices");
+  await ev(`document.querySelector('#kslLayers [data-layer=glass]').click(); return 1;`);
+  ok((await ev(`return KARDIA_SCANLAB.getLast().getState().layer;`)) === "glass" &&
+    (await ev(`return document.querySelector('#kslLayers [data-layer=glass]').getAttribute('aria-pressed');`)) === "true", "Scan Lab layer switch selects the glass body");
+  await ev(`document.querySelector('#kslLayers [data-layer=skin]').click(); document.getElementById('kslLayersBtn').click(); return 1;`);
+  ok((await ev(`return KARDIA_SCANLAB.getLast().getState().layer==='skin' && document.getElementById('kslLayers').hidden;`)) === true, "Scan Lab layer switch returns to skin and the choices close");
+  await ev(`document.getElementById('kslPractice').click(); return 1;`);
+  ok(await until(`return /^Practice\\. Find /.test(document.getElementById('kslCoach').textContent);`, 8000), "Scan Lab practice button restarts the attempt with coaching");
+  const fsRect = JSON.parse((await ev(`return JSON.stringify((function(){var b=document.getElementById('kslFullscreen').getBoundingClientRect(); return {x:b.left+b.width/2,y:b.top+b.height/2};})());`)) || "{}");
+  await call("Input.dispatchMouseEvent", { type: "mousePressed", x: fsRect.x, y: fsRect.y, button: "left", clickCount: 1 });
+  await call("Input.dispatchMouseEvent", { type: "mouseReleased", x: fsRect.x, y: fsRect.y, button: "left", clickCount: 1 });
+  ok(await until(`return document.fullscreenElement===document.getElementById('kslStage');`, 8000), "Scan Lab fullscreen button takes the stage full screen");
+  await ev(`if(document.exitFullscreen) document.exitFullscreen(); return 1;`);
+  ok(await until(`return !document.fullscreenElement;`, 8000), "Scan Lab leaves full screen cleanly");
+  /* Tutorial: opens on step 1, Next advances, a step chip jumps,
+   * Back returns, and Skip closes it and remembers. */
+  await ev(`try{localStorage.removeItem('ksl_tutorial_done');}catch(e){} document.getElementById('kslTutorialBtn').click(); return 1;`);
+  ok(await until(`return !document.getElementById('kslTutorial').hidden && /Step 1 of 7/.test(document.getElementById('kslTutorial').textContent);`, 8000), "Scan Lab tutorial opens on step 1");
+  await ev(`document.getElementById('kslTutNext').click(); return 1;`);
+  ok(await until(`return /Step 2 of 7/.test(document.getElementById('kslTutorial').textContent);`, 8000), "Scan Lab tutorial Next advances to step 2");
+  await ev(`document.querySelector('#kslTutorial [data-tut="4"]').click(); return 1;`);
+  ok(await until(`return /Step 5 of 7/.test(document.getElementById('kslTutorial').textContent);`, 8000), "Scan Lab tutorial step chip jumps to step 5");
+  await ev(`document.getElementById('kslTutBack').click(); return 1;`);
+  ok(await until(`return /Step 4 of 7/.test(document.getElementById('kslTutorial').textContent);`, 8000), "Scan Lab tutorial Back returns to step 4");
+  await ev(`document.getElementById('kslTutSkip').click(); return 1;`);
+  ok((await ev(`return document.getElementById('kslTutorial').hidden && localStorage.getItem('ksl_tutorial_done')==='1';`)) === true, "Scan Lab tutorial Skip closes it and remembers");
+  /* iPad landscape: reopen the tab at this size (a fresh arrival, so
+   * no scroll position is carried over) and check the same first
+   * screen, side by side. */
+  await metrics(1194, 834); await theme(false);
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
+  ok(await until(`return !!(window.KARDIA_SCANLAB && KARDIA_SCANLAB.getLast() && KARDIA_SCANLAB.getLast().getDebug().loadingState==='ready');`, 60000), "Scan Lab reloads cleanly when the Echo Lab tab is reopened");
+  await sleep(600);
+  ok(kslOnScreen(await kslRects()), "1194x834: Scan Lab scene and monitor are both visible without scrolling");
+  await shot("kardia-scanlab-1194-light");
+  await metrics(390, 844); await theme(false);
+
   /* ── 4. Screenshots: every tab at 390 and 820, light and dark ── */
   console.log("\n--- screenshots ---");
-  const tabs = [["echo", "Echo Lab"], ["learn", "Echo"], ["practice", "Question bank"], ["cases", "Whole patient"], ["kardiox", "Open KardiQ X"]];
+  const tabs = [["echo", "Echo Lab"], ["learn", "Echo"], ["practice", "Question bank"], ["cases", "Whole patient"], ["calc", "Calculators"], ["kardiox", "Open KardiQ X"]];
   for (const [w, h] of VIEWPORTS) {
     await metrics(w, h);
     for (const dark of [false, true]) {
@@ -678,7 +849,46 @@ try {
     }
   }
 
-  /* ── 4c. SyncProbe end to end: two pages, real core, loopback bridge ──
+  /* ── 4c. Calculators: the tab opens, search finds AVA, the continuity
+   * worked example computes the guideline answer, and the measurement
+   * figure canvas actually draws. ── */
+  console.log("\n--- Calculators ---");
+  await metrics(390, 844); await theme(false);
+  await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=calc]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('kcalc-search');`, 20000), "Calculators tab opens with its search box");
+  const calcTotal = await ev(`return document.querySelectorAll('#smdKardia [data-act=kcalc-open]').length;`);
+  ok(typeof calcTotal === "number" && calcTotal > 10, `Calculators lists the suite (${calcTotal} calculators)`);
+  await ev(`(function(){var s=document.getElementById('kcalc-search'); s.focus(); s.value='AVA'; s.dispatchEvent(new Event('input',{bubbles:true})); return 1;})()`);
+  ok(await until(`return !!document.querySelector('#smdKardia [data-act=kcalc-open][data-id="as-continuity"]');`, 10000), "search finds AVA: the continuity calculator is listed");
+  const calcFound = await ev(`return document.querySelectorAll('#smdKardia [data-act=kcalc-open]').length;`);
+  ok(typeof calcFound === "number" && calcFound >= 1 && calcFound < calcTotal, `search narrows the list (${calcTotal} to ${calcFound})`);
+  ok((await ev(`return document.querySelector('#smdKardia [data-act=kcalc-open][data-id="as-continuity"]').textContent.indexOf('AVA')>=0;`)) === true, "the AVA search result names AVA");
+  await ev(`document.querySelector('#smdKardia [data-act=kcalc-open][data-id="as-continuity"]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('kcalc-result-as-continuity');`, 15000), "the continuity AVA calculator opens with a live result");
+  await ev(`document.querySelector('#smdKardia [data-act=kcalc-example][data-id="as-continuity"]').click(); return 1;`);
+  /* The worked example is the unit-tested one (test/kardia-calc.test.mjs):
+   * LVOT 2.0 cm, LVOT VTI 22 cm, aortic VTI 95 cm gives AVA 0.73 cm2,
+   * graded severe with peak 4.2 m/s and mean gradient 42 mmHg. */
+  ok(await until(`return (document.getElementById('kcalc-result-as-continuity')||{textContent:''}).textContent.indexOf('0.73')>=0;`, 10000), "continuity AVA computes 0.73 from the worked example");
+  const avaText = await ev(`return document.getElementById('kcalc-result-as-continuity').textContent;`);
+  ok(/Severe/.test(avaText || ""), `the worked example grades severe AS ("${(avaText || "").replace(/\s+/g, " ").slice(0, 120)}")`);
+  ok((await ev(`return document.getElementById('kcalc-input-as-continuity-lvotd').value==='2' && document.getElementById('kcalc-input-as-continuity-lvotvti').value==='22' && document.getElementById('kcalc-input-as-continuity-avvti').value==='95';`)) === true, "the worked example fills the LVOT and VTI inputs");
+  /* The figure canvas draws: copy its pixels and require real ink,
+   * not a blank or fully transparent canvas. */
+  ok(await until(`return !!document.querySelector('#smdKardia canvas[data-kcalc-fig="as-continuity"]');`, 20000), "the AVA figure canvas loads");
+  await sleep(700);
+  const figStats = JSON.parse((await ev(`return JSON.stringify((function(){var cv=document.querySelector('#smdKardia canvas[data-kcalc-fig="as-continuity"]'); if(!cv) return {error:'no canvas'};
+    var cx=cv.getContext('2d'); var d=cx.getImageData(0,0,cv.width,cv.height).data;
+    var ink=0, n=0, colours={};
+    for(var i=0;i<d.length;i+=16){ n++; if(d[i+3]>10 && (d[i]+d[i+1]+d[i+2])>24){ ink++; colours[(d[i]>>4)+','+(d[i+1]>>4)+','+(d[i+2]>>4)]=1; } }
+    return {w:cv.width,h:cv.height,inkFrac:n?ink/n:0,colours:Object.keys(colours).length};})());`)) || "{}");
+  ok(!!figStats && !figStats.error && figStats.inkFrac > 0.01 && figStats.colours >= 4, `the AVA figure canvas draws (ink ${figStats && figStats.inkFrac ? figStats.inkFrac.toFixed(3) : "?"}, ${figStats ? figStats.colours : "?"} colour groups)`);
+  await shot("kardia-calc-ava-390-light");
+  qaGate(await qaRun(), "390px light: calculator AVA QA gates");
+  await ev(`document.querySelector('#smdKardia [data-act=kcalc-list]').click(); return 1;`);
+  ok(await until(`return !!document.getElementById('kcalc-search');`, 10000), "Back returns to the calculator list");
+
+  /* ── 4d. SyncProbe end to end: two pages, real core, loopback bridge ──
    * Page A (this page) is the display, page B is a second CDP target in the
    * same headless Chrome. Both load the real kardia-sync.js facade. The only
    * test-only piece is the BroadcastChannel loopback transport, registered
@@ -711,9 +921,12 @@ try {
   await callS(sidB, "Runtime.enable", {}); await callS(sidB, "Page.enable", {});
   await callS(sidB, "Page.navigate", { url: BASE + "?kardia=1&syncprobeLoopback=1" });
   ok(await untilS(sidB, `return !!(window.KARDIA && window.SMD_showHome);`, 30000), "page B loads the app with the loopback test flag");
-  await evS(sidB, `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.setItem("smd_kardia","1");}catch(e){} SMD_showHome(); return 1;`);
+  await evS(sidB, `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.setItem("smd_kardia","1");localStorage.removeItem("smd_home_tools");}catch(e){} SMD_showHome(); return 1;`);
   await sleep(500);
-  await evS(sidB, `KARDIA.open(); return 1;`);
+  /* Page B opens Kardia the way a user does in 2.0: the tile is
+   * already first on its Home grid, so tap it. */
+  ok(await untilS(sidB, `return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "page B has the Kardia tile on its Home grid already");
+  await evS(sidB, `var t=document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await untilS(sidB, `return KARDIA.isOpen() && !!document.querySelector('#smdKardia [data-act=ktab][data-t=echo]');`, 20000), "page B opens Kardia");
   await evS(sidB, `document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
   ok(await untilS(sidB, `return !!document.querySelector('#smdKardia #krdSector');`, 20000), "page B reaches Echo Lab");
@@ -743,22 +956,15 @@ try {
   ok((await spTxtS(sessionId)).indexOf("or type this code") >= 0, "the code sits below as the typed backup");
   ok(spQr >= 200, `QR draws large enough to scan from across a table (${spQr}px wide)`);
   ok(!/[–—]/.test(await spTxtS(sessionId)), "no em or en dash in the pair sheet");
-  // Probe role on page B: intro, denied motion, touch fallback, then join.
+  // Probe role on page B: nearby first, scan second, typing third. Motion
+  // is only asked after pairing, so no motion buttons appear here.
   await evS(sidB, `[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
   await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-probe')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro explains motion first");
-  await evS(sidB, `window.__krdSpMotionForced = 'denied'; return 1;`);
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
-  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); window.__krdSpMotionForced = 'granted'; return 1;`);
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Calibrate')>=0;`, 8000), "granted motion reaches calibration");
-  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-calibrate')`);
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Join the display')>=0;`, 8000), "session screen still offers joining before the link exists");
-  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Scan the QR code')>=0;`, 8000), "scan is the primary join action");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro opens on nearby displays");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Nearby displays')>=0;`, 8000), "nearby displays are the first join path");
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Scan the QR code')>=0;`, 8000), "scan is the second join path");
   ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('or type the 6 character code')>=0;`, 8000), "typing stays as the quiet backup");
+  ok((await spTxtS(sidB)).indexOf('Allow motion') < 0, "motion is not asked before pairing");
   // Page B joins with the full pairing payload from page A, over the loopback.
   await evS(sidB, `(function(){var i=document.getElementById('krdSpCode'); i.removeAttribute('maxlength'); i.value = ${JSON.stringify(spPayload)}; return 1;})()`);
   await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-join-code')`);
@@ -790,6 +996,14 @@ try {
   ok(pillH >= 44, `pill is a 44px target (${pillH}px CSS)`);
   ok(await until(`return !!document.getElementById('krdSpPaired') && document.getElementById('krdSpPaired').innerText.indexOf('Probe paired')>=0;`, 8000), "display shows the Probe paired state");
   ok((await ev(`return document.getElementById('krdRot').disabled && !!document.querySelector('#krdLab input[type=range]');`)) === true, "touch controls are disabled, not removed, while a remote controller is active");
+  // Motion is asked only now, after pairing: denied offers touch, touch opens.
+  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); window.__krdSpMotionForced = 'denied'; return 1;`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Allow motion')>=0;`, 8000), "after pairing the probe offers motion");
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-motion')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Motion is off')>=0;`, 8000), "denied motion explains and offers touch controls");
+  await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-touch')`);
+  ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Touch controls')>=0;`, 8000), "touch fallback opens");
+  await evS(sidB, `window.KARDIA_SYNCPROBE.openProbe(); return 1;`);
   // Scripted rotation from page B: DeviceOrientation events drive page A.
   // End-to-end latency is a step measurement: settle at the baseline, then
   // one scripted step (held, as a real sensor keeps firing at the new
@@ -1080,7 +1294,7 @@ try {
   ok(sweepDashes === 0 && sweepWords.length === 0, `full fixture case text: no em/en dash or American spelling${sweepDashes ? " (" + sweepDashes + " dashes)" : ""}${sweepWords.length ? " (" + sweepWords.join(",") + ")" : ""}`);
 
   /* ── 5. Back OFF: the grid is byte-for-byte what it was ── */
-  await ev(`KARDIA.close(); try{localStorage.setItem("smd_kardia","0");}catch(e){} return 1;`);
+  await ev(`KARDIA.close(); try{localStorage.setItem("smd_kardia","0");localStorage.removeItem("smd_home_tools");}catch(e){} return 1;`);
   await load(BASE);
   const gridBack = await ev(gridActs);
   ok(gridBack === gridOff, "flag back off: the Home grid is byte-for-byte what it was");
