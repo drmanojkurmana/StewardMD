@@ -9,16 +9,19 @@
     "main{height:100dvh!important;max-height:100dvh!important}body{margin:0}" +
     "@font-face{font-family:'Inter Variable';font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/fonts/inter-variable.woff2) format('woff2')}" +
     "@media (max-width:699px){" +
-      /* iPhone: one scrolling page. Big 3D model, then a full width echo
-       * picture, then the views. Scroll by dragging the echo or the buttons. */
-      "html,body{height:auto!important;min-height:100%!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}" +
-      "main{height:auto!important;max-height:none!important;overflow:visible!important}" +
-      ".lab{display:flex!important;flex-direction:column!important;height:auto!important;gap:8px!important;padding:8px!important;box-sizing:border-box}" +
-      ".stage{flex:0 0 auto!important;height:58vh!important;min-height:320px!important}" +
+      /* iPhone: the first screen is two equal halves, the 3D probe on top
+       * and the echo below (--kav is the visible height, set by kardia.js
+       * fitProbeFrame). The view toolkit and controls follow below; the
+       * Kardia page scrolls to them. No guide text (owner 2026-10-27). */
+      "html,body{height:auto!important;overflow:hidden!important}" +
+      "main{height:auto!important;max-height:none!important;overflow:visible!important;padding:8px 48px 8px 8px!important}" +
+      ".lab{display:flex!important;flex-direction:column!important;height:auto!important;gap:8px!important;padding:0!important;box-sizing:border-box}" +
+      ".stage{flex:0 0 auto!important;height:calc(var(--kav,100vh) / 2 - 4px)!important;min-height:0!important}" +
       ".scan-column{display:flex!important;flex-direction:column!important;gap:8px!important;overflow:visible!important;min-height:0!important}" +
-      ".monitor{flex:0 0 auto!important;display:flex!important;flex-direction:column!important;padding:8px!important}" +
-      ".view-guide{font-size:15px!important;line-height:1.4!important;margin:0 0 6px!important}" +
-      "#sim-image,#cine{flex:0 0 auto!important;height:min(96vw,64vh)!important;min-height:300px!important}#slice{height:100%!important;width:100%!important}" +
+      ".monitor{position:relative!important;flex:0 0 auto!important;height:calc(var(--kav,100vh) / 2 - 4px)!important;min-height:0!important;padding:0!important;overflow:hidden!important;display:block!important}" +
+      ".monitor-top{position:absolute!important;top:8px;right:8px;z-index:3;margin:0!important;padding:0!important;background:none!important}" +
+      "#view-guide{display:none!important}" +
+      "#sim-image,#cine{height:100%!important;min-height:0!important;width:100%!important}#slice{height:100%!important;width:100%!important}" +
       ".views{flex:0 0 auto!important;padding:8px!important;gap:8px!important}" +
       ".view-buttons button{min-height:52px!important;padding:8px!important}" +
     "}" +

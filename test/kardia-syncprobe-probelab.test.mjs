@@ -121,7 +121,8 @@ test("Echo Lab bar and touch probe contract in source", async () => {
   assert.ok(kardia.includes('class="krd-probe-bar"'), "bar sits above the frame");
   assert.ok(kardia.includes('id="krdSyncPill"'), "connection pill on the bar");
   const kardiaCss = readFileSync("kardia.css", "utf8");
-  assert.match(kardiaCss, /\.krd-probe-syncbtn \{[^}]*min-height: 48px/, "button is at least 44pt");
+  assert.match(kardiaCss, /\.krd-top-sync \{[^}]*min-height: 44px/, "header SyncProbe button is at least 44pt");
+  assert.ok(kardia.includes('className = "krd-top-sync"') && kardia.includes('"data-act", "kecho-syncprobe"'), "SyncProbe sits in the header beside the language button");
   const ui = readFileSync("kardia-syncprobe.js", "utf8");
   assert.ok(ui.includes("marker towards the patient"), "Calibrate step wording");
   assert.ok(ui.includes("tap Calibrate"), "Calibrate step action");
