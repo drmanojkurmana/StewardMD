@@ -2,7 +2,9 @@
  *
  * ES5 IIFE, window.KARDIA_CLIPS, module.exports under node for the pure
  * selection helpers. The clip catalogue is kardia/media/credits.json
- * (38 clips, each hosted at its "url" with attribution and licence).
+ * (100 clips with attribution and licence). 62 clips are bundled in the
+ * app under kardia/media/clips/ (the entry carries localFile) and play
+ * offline with no hosting; the rest play from their hosted "url".
  * No lesson JSON is edited: the Learn lesson block is added at run time
  * by watching the lesson player for its figure and appending a small
  * "Real patient" block for the lesson view or pathology.
@@ -41,14 +43,22 @@
     var f = String((clip && (clip.file || clip.url)) || "").toLowerCase();
     return /\.mp4($|\?)/.test(f) || /\.webm($|\?)/.test(f);
   }
-  function clipUrl(clip, override) {
+  function isBundled(clip) { return !!(clip && clip.localFile); }
+  function localClipUrl(clip, baseStr) {
+    if (!isBundled(clip)) return "";
+    return (baseStr || "/kardia/") + "media/clips/" + clip.localFile;
+  }
+  /* Local first: a bundled clip plays from the app bundle offline,
+   * with no hosting. The hosted url is the fallback for bundled clips
+   * and the only source for clips that are not bundled yet. */
+  function clipUrl(clip, override, baseStr) {
     if (typeof override === "string" && override) return override;
-    return (clip && clip.url) || "";
+    return localClipUrl(clip, baseStr) || (clip && clip.url) || "";
   }
   function indexClips(clips) {
     var byView = {}, byPathology = {}, all = [];
     (clips || []).forEach(function (c) {
-      if (!c || (!c.view && !c.pathology)) return;
+      if (!c) return;
       all.push(c);
       if (c.view) (byView[c.view] = byView[c.view] || []).push(c);
       if (c.pathology) (byPathology[c.pathology] = byPathology[c.pathology] || []).push(c);
@@ -92,14 +102,18 @@
     var view = query.view || null, path = query.pathology || null, sev = query.severity || null;
     var list = clips && clips.all ? clips.all : (clips || []);
     function pick(pred) {
-      var still = null, i, c;
+      var still = null, hostedVideo = null, i, c;
       for (i = 0; i < list.length; i++) {
         c = list[i];
         if (!c || !pred(c)) continue;
-        if (isVideo(c)) return c;
-        if (!still) still = c;
+        if (isVideo(c)) {
+          /* A bundled clip wins over a hosted one in the same tier:
+           * it plays offline with no hosting. */
+          if (isBundled(c)) return c;
+          if (!hostedVideo) hostedVideo = c;
+        } else if (!still) still = c;
       }
-      return still;
+      return hostedVideo || still;
     }
     var hit = null;
     if (view && path) hit = pick(function (c) { return c.view === view && c.pathology === path && (!sev || c.severity === sev); });
@@ -147,7 +161,7 @@
   }
 
   var PURE = {
-    isVideo: isVideo, clipUrl: clipUrl, indexClips: indexClips,
+    isVideo: isVideo, clipUrl: clipUrl, localClipUrl: localClipUrl, isBundled: isBundled, indexClips: indexClips,
     clipsFor: clipsFor, pathologyOfLesson: pathologyOfLesson,
     attributionLine: attributionLine, chooseClip: chooseClip,
     cacheClipBytes: cacheClipBytes, CLIP_CACHE_NAME: CLIP_CACHE_NAME
@@ -202,8 +216,8 @@
   }
 
   function mediaHtml(clip, label) {
-    var url = clipUrl(clip, testUrl());
-    if (offline() && !testUrl()) {
+    var url = clipUrl(clip, testUrl(), base());
+    if (offline() && !testUrl() && !isBundled(clip)) {
       return '<p class="krdc-offline" role="status">You are offline, so the real patient clip cannot load. ' +
         'The simulated view above still works. Reconnect and reopen this panel to see the clip.</p>';
     }
@@ -322,27 +336,41 @@
       if (!clip) return null;
       var stub = testUrl();
       if (stub) return { clip: clip, src: stub, cached: false };
-      var url = clipUrl(clip);
-      if (!url) return null;
-      if (preloads[url]) return preloads[url];
+      /* Local bundle first (works offline, no hosting), then the
+       * hosted url as the fallback. A bundled clip that cannot be
+       * read locally still tries the network before giving up. */
+      var candidates = [];
+      var local = localClipUrl(clip, base());
+      if (local) candidates.push(local);
+      if (clip.url && clip.url !== local) candidates.push(clip.url);
+      if (!candidates.length) return null;
+      var key = candidates.join("|");
+      if (preloads[key]) return preloads[key];
       var shared = null;
       try { shared = G.SMD_THOREX_MODEL_CACHE; } catch (e) {}
-      var bytesP = (shared && shared.loadModelBytes)
-        ? shared.loadModelBytes(url, { cacheName: CLIP_CACHE_NAME })
-        : cacheClipBytes(url, { caches: G.caches || null, fetch: G.fetch ? G.fetch.bind(G) : null });
-      var p = Promise.resolve(bytesP).then(function (bytes) {
-        var src = url;
-        try {
-          if (bytes && G.Blob && G.URL && G.URL.createObjectURL) {
-            src = G.URL.createObjectURL(new G.Blob([bytes], { type: "video/mp4" }));
-          }
-        } catch (e) {}
-        return { clip: clip, src: src, cached: src !== url };
-      }, function (e) {
-        delete preloads[url];
+      function tryCandidate(i) {
+        var url = candidates[i];
+        var bytesP = (shared && shared.loadModelBytes)
+          ? shared.loadModelBytes(url, { cacheName: CLIP_CACHE_NAME })
+          : cacheClipBytes(url, { caches: G.caches || null, fetch: G.fetch ? G.fetch.bind(G) : null });
+        return Promise.resolve(bytesP).then(function (bytes) {
+          var src = url;
+          try {
+            if (bytes && G.Blob && G.URL && G.URL.createObjectURL) {
+              src = G.URL.createObjectURL(new G.Blob([bytes], { type: isVideo(clip) ? "video/mp4" : "image/webp" }));
+            }
+          } catch (e) {}
+          return { clip: clip, src: src, cached: !!local && i === 0 ? true : src !== url };
+        }, function (e) {
+          if (i + 1 < candidates.length) return tryCandidate(i + 1);
+          throw e;
+        });
+      }
+      var p = tryCandidate(0).then(function (res) { return res; }, function (e) {
+        delete preloads[key];
         throw e;
       });
-      preloads[url] = p;
+      preloads[key] = p;
       return p;
     });
   }
@@ -351,6 +379,8 @@
     load: load, attach: attach, compareHtml: compareHtml, creditsHtml: creditsHtml,
     wirePanel: wirePanel, tryLessonBlock: tryLessonBlock, preloadFor: preloadFor,
     chooseClip: function (q) { return state.credits ? chooseClip(state.credits, q) : null; },
+    clipUrl: function (clip) { return clipUrl(clip, testUrl(), base()); },
+    isBundled: isBundled,
     clipsFor: function (q) { return state.credits ? clipsFor(state.credits, q) : []; },
     get credits() { return state.credits; },
     _pure: PURE

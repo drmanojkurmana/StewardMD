@@ -528,9 +528,9 @@
       '</section></div>';
 
     function el(id) { return doc.getElementById(id); }
-    /* The tutorial lives over the scene, not in the column flow, so its
-     * text can never take height away from the stage. */
-    try { var tutBox0 = el("kslTutorial"), stage0 = el("kslStage"); if (tutBox0 && stage0 && stage0.appendChild) stage0.appendChild(tutBox0); } catch (e) {}
+    /* The tutorial sits under the scene as a compact step card, never
+     * over it, so it cannot hide the probe on first open. It stays in
+     * the scene column flow below the depth control. */
     /* The found view result sits over the monitor, not in the scene
      * column flow, so scoring a view never shrinks the stage. */
     try { var res0 = el("kslResult"), monWrap0 = el("kslMonitorWrap"); if (res0 && monWrap0 && monWrap0.appendChild) monWrap0.appendChild(res0); } catch (e) {}
@@ -902,7 +902,11 @@
         if (ownHeart && heartInst && heartInst.step) heartInst.step(16);
         if (ownGeom && geomInst && heartInst) geomInst.update(heartInst.state());
         rendererUs.setKnobs({ depth: pose.depthCm * 10, showEcg: true, gain: 8, focusMm: 70 });
-        rendererUs.setProbe({ origin: plane.origin, normal: plane.normal, up: plane.up, viewId: view.viewId });
+        /* The sector apex is the skin contact, not the cut plane
+         * origin (which sits at heart level): starting the beam at
+         * the plane origin left the chambers out of the sector and
+         * showed only speckled tissue beyond the heart. */
+        rendererUs.setProbe({ origin: pose.contact.slice(), viewOrigin: plane.origin, normal: plane.normal, up: plane.up, viewId: view.viewId });
         rendererUs.frame(now);
         debug.usCalls++;
         if (rendererUs.stats) {
@@ -947,7 +951,7 @@
          * even when the byte cache path failed. */
         try {
           var chosen = api.chooseClip ? api.chooseClip(q) : null;
-          var direct = chosen && (chosen.url || chosen.file);
+          var direct = chosen && (api.clipUrl ? api.clipUrl(chosen) : (chosen.url || chosen.file));
           if (direct && video) { realClip = chosen; realSrc = direct; realStatus = "ready"; video.setAttribute("src", direct); setText("kslAttribution", (chosen.attribution) || chosen.title || ""); return; }
         } catch (e) {}
         realStatus = "offline";
@@ -1179,14 +1183,24 @@
     }
     var winBtns2 = root.querySelectorAll("[data-window]");
     for (var wi = 0; wi < winBtns2.length; wi++) winBtns2[wi].addEventListener("click", function () { activeWindow = this.getAttribute("data-window"); applyWindow(); });
-    function selectView(id) {
+    /* Switching views must never jump the page: layout changes in the
+     * columns (tutorial card, result card) can otherwise pull the
+     * window scroll. Remember and restore it around every switch. */
+    function preserveScroll(fn) {
+      var wx = 0, wy = 0;
+      try { wx = G.scrollX || 0; wy = G.scrollY || 0; } catch (e) {}
+      var out = fn();
+      try { if ((G.scrollX || 0) !== wx || (G.scrollY || 0) !== wy) { G.scrollTo(wx, wy); debug.scrollRestored = (debug.scrollRestored || 0) + 1; } } catch (e) {}
+      return out;
+    }
+    function selectView(id) { return preserveScroll(function () {
       view = T.byId(id) || view; activeWindow = windowForView(view.id);
       startedAt = nowMs(); travelMm = 0; attemptDone = false; coach.reset(); realKey = ""; realCine.reset();
       var vbs = root.querySelectorAll("[data-view]");
       for (var j = 0; j < vbs.length; j++) vbs[j].setAttribute("aria-pressed", vbs[j].getAttribute("data-view") === view.id ? "true" : "false");
       var r = el("kslResult"); if (r) r.hidden = true;
       applyWindow(); refresh(nowMs());
-    }
+    }); }
     var viewBtns = root.querySelectorAll("[data-view]");
     for (var vi = 0; vi < viewBtns.length; vi++) viewBtns[vi].addEventListener("click", function () { selectView(this.getAttribute("data-view")); });
     applyWindow();
@@ -1201,15 +1215,22 @@
     try {
       if (G.KARDIA_SYNC && G.KARDIA_SYNC.createDisplay) { var disp = G.KARDIA_SYNC.createDisplay({ onPose: applySyncPose }); if (disp && disp.start) disp.start(); }
     } catch (e) {}
-    function renderTut() {
+    function renderTut() { return preserveScroll(renderTutStep); }
+    function renderTutStep() {
       var box = el("kslTutorial");
       if (!box) return;
       if (tutDone) { box.hidden = true; return; }
       box.hidden = false; var s = TUTORIAL[tutStep];
-      box.innerHTML = "<strong>Step " + (tutStep + 1) + " of " + TUTORIAL.length + ": " + esc(s.title) + "</strong><p>" + esc(s.body) + "</p>" +
+      box.innerHTML = '<div class="ksl-tut-chips" role="group" aria-label="Tutorial steps">' + TUTORIAL.map(function (st, i) {
+          return '<button type="button" class="ksl-tut-chip" data-tut="' + i + '" aria-pressed="' + (i === tutStep) + '" aria-label="Step ' + (i + 1) + ": " + esc(st.title) + '">' + (i + 1) + "</button>";
+        }).join("") + "</div>" +
+        "<strong>Step " + (tutStep + 1) + " of " + TUTORIAL.length + ": " + esc(s.title) + "</strong><p>" + esc(s.body) + "</p>" +
         '<button type="button" class="ksl-btn" id="kslTutBack" ' + (tutStep === 0 ? "disabled" : "") + ">Back</button> " +
         '<button type="button" class="ksl-btn" id="kslTutNext">' + (tutStep === TUTORIAL.length - 1 ? "Finish" : "Next") + '</button> ' +
         '<button type="button" class="ksl-btn" id="kslTutSkip">Skip</button>';
+      Array.prototype.forEach.call(box.querySelectorAll("[data-tut]"), function (chip) {
+        chip.addEventListener("click", function () { tutStep = +chip.getAttribute("data-tut"); renderTut(); });
+      });
       el("kslTutBack").addEventListener("click", function () { if (tutStep > 0) { tutStep--; renderTut(); } });
       el("kslTutSkip").addEventListener("click", function () { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; });
       el("kslTutNext").addEventListener("click", function () {
@@ -1222,12 +1243,17 @@
     startLoad();
     raf = rafImpl(loop);
     var instance = {
+      /* debugPose is a test seam: it must never scroll the page. The
+       * whole pose change runs inside preserveScroll (as selectView
+       * does), so a headless capture stays exactly where it was. */
       debugPose: function (viewId) {
-        var t = T.byId(viewId) || T.byView(viewId); if (!t) return null;
-        selectView(t.id);
-        pose = { contact: t.contact.slice(), rotationDeg: t.rotationDeg, fanDeg: t.fanDeg, rockDeg: t.rockDeg, depthCm: t.depthCm };
-        refresh(nowMs());
-        return { view: t.id, pose: pose, within: withinTolerance(poseError(pose, t), t) };
+        return preserveScroll(function () {
+          var t = T.byId(viewId) || T.byView(viewId); if (!t) return null;
+          selectView(t.id);
+          pose = { contact: t.contact.slice(), rotationDeg: t.rotationDeg, fanDeg: t.fanDeg, rockDeg: t.rockDeg, depthCm: t.depthCm };
+          refresh(nowMs());
+          return { view: t.id, pose: pose, within: withinTolerance(poseError(pose, t), t) };
+        });
       },
       setPathology: function (p) { pathology = p; realKey = ""; },
       applySyncPose: applySyncPose,

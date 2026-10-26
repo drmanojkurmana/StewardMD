@@ -106,6 +106,47 @@ test("the A4C cut shows four chambers", () => {
   for (const ref of ["FJ2422", "FJ2425", "FJ2423", "FJ2424"]) assert.ok(refs.has(ref), "A4C missing chamber " + ref);
 });
 
+test("each Scan Lab view cut gives closed, oriented contours of the expected chambers", () => {
+  const { g } = settledGeom();
+  const expected = {
+    tte_plax: ["FJ2422", "FJ2425"],
+    tte_a4c: ["FJ2422", "FJ2425", "FJ2423", "FJ2424"],
+    tte_psax_mv: ["FJ2422"],
+    tte_subcostal_4c: ["FJ2422", "FJ2423", "FJ2425", "FJ2424"]
+  };
+  for (const [vid, chambers] of Object.entries(expected)) {
+    const p = g.viewPlane(vid);
+    const polys = g.cut(p.origin, p.normal, p.up, 260, 260);
+    assert.ok(polys.length > 0, vid + " empty cut");
+    const refs = new Set(polys.map((x) => x.ref));
+    for (const ref of chambers) assert.ok(refs.has(ref), vid + " missing chamber " + ref);
+    for (const ref of chambers) {
+      const chamber = polys.find((x) => x.ref === ref);
+      assert.equal(chamber.closed, true, vid + " chamber " + ref + " contour is not closed");
+    }
+    for (const poly of polys) {
+      if (poly.open) {
+        assert.equal(poly.closed, false, vid + " " + poly.ref + " open line must be marked open");
+        continue;
+      }
+      assert.equal(poly.closed, true, vid + " " + poly.ref + " contour is not closed");
+      assert.ok(poly.points.length >= 3, vid + " " + poly.ref + " contour has too few points");
+      let area2 = 0;
+      for (let i = 0; i < poly.points.length; i++) {
+        const a = poly.points[i], b = poly.points[(i + 1) % poly.points.length];
+        area2 += a[0] * b[1] - b[0] * a[1];
+      }
+      assert.ok(area2 > 0, vid + " " + poly.ref + " contour is not counter-clockwise");
+      assert.ok(Math.abs(area2) / 2 >= 0.01, vid + " " + poly.ref + " contour is a degenerate sliver");
+      if (poly.acoustic.isBlood) assert.ok(poly.acoustic.echogenicity <= 0.1, vid + " blood pool must stay dark");
+    }
+    const myo = polys.find((x) => x.ref === "FJ2428");
+    assert.ok(myo && myo.acoustic.echogenicity >= 0.4 && myo.acoustic.echogenicity <= 0.5, vid + " myocardium must be mid grey");
+    const peri = polys.find((x) => x.ref === "pericardium");
+    assert.ok(peri && peri.acoustic.echogenicity >= 0.9, vid + " pericardium must be bright");
+  }
+});
+
 test("a plane 30 degrees off axis drops at least one landmark", () => {
   const { g } = settledGeom();
   const v = views.views.find((x) => x.id === "tte_a4c");

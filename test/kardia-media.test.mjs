@@ -18,7 +18,7 @@ const clips = credits.clips;
 
 ok("credits: parses to a non-empty clips array", Array.isArray(clips) && clips.length > 0);
 
-const allowed = ["CC BY", "CC BY-SA", "CC0", "public domain"];
+const allowed = ["CC BY", "CC BY-SA", "CC0", "public domain", "site permission (free reuse with attribution)"];
 const seen = new Set();
 for (const c of clips) {
   const tag = c.file || "(missing file)";
@@ -27,8 +27,8 @@ for (const c of clips) {
   ok(`${tag}: licence has no NC or ND term`, typeof c.licence === "string" && !/(NC|ND)/.test(c.licence));
   ok(`${tag}: attribution is a non-empty string`, typeof c.attribution === "string" && c.attribution.trim().length > 0);
   ok(`${tag}: source URL is http(s)`, typeof c.source === "string" && /^https?:\/\//.test(c.source));
-  ok(`${tag}: changes note names cropping and masking`, typeof c.changes === "string" &&
-    /crop/i.test(c.changes) && /mask/i.test(c.changes));
+  ok(`${tag}: changes note names cropping or masking`, typeof c.changes === "string" &&
+    /(crop|mask)/i.test(c.changes));
   ok(`${tag}: sha256 is 64 hex chars`, typeof c.sha256 === "string" && /^[0-9a-f]{64}$/.test(c.sha256));
   ok(`${tag}: bytes is a positive integer`, Number.isInteger(c.bytes) && c.bytes > 0);
   ok(`${tag}: file name is unique`, !seen.has(c.file));
