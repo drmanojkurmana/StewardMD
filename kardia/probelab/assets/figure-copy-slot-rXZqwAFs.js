@@ -1,0 +1,1 @@
+function a(n,r,i,s){const t=n.createElement("div");t.style.cssText=`display:grid;min-width:0;font:${s}`,r.style.gridArea="1 / 1",t.append(r);for(const o of new Set(i)){const e=n.createElement("span");e.textContent=o,e.style.cssText="grid-area:1 / 1;visibility:hidden;pointer-events:none",e.setAttribute("aria-hidden","true"),e.inert=!0,t.append(e)}return t}export{a as f};

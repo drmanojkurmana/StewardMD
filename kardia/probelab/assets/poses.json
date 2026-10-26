@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 1,
+  "referenceSpace": "HuBMAP HRA Visible Human male, identity-registered",
+  "frame": {
+    "x": "patient left",
+    "y": "cephalad",
+    "z": "anterior",
+    "units": "meters",
+    "handedness": "right"
+  },
+  "markerConvention": "clock viewed from anterior; roll 0 = cephalad, +90 = patient left; marker side displays screen right",
+  "solver": "hard-constraint feasibility search (Tools/geometry/feasible.py)",
+  "markerClockProvenance": {
+    "parasternal": "ASE 2019 published clocks for PLAX and the short-axis levels. RV inflow and RV outflow are CONVENTION: ASE publishes no marker clock for either, describing them only as tilts from PLAX with a slight counterclockwise (inflow) or clockwise (outflow) rotation. That DIRECTION is enforced against the solved PLAX clock; the numeric band only brackets the search.",
+    "subcostal": "ASE 2019 published clocks",
+    "suprasternal": "ASE 2019 published clocks",
+    "apical": "MODEL-DERIVED, NOT ASE. ASE's apical clocks (A4C 4-5 o'clock) are specified for left lateral decubitus; this model is supine, and rolling the patient rotates the heart and hence the required marker orientation. Measured offset 45-60 degrees. See view_specs.py MARKER_CLOCK for the derivation. Any teaching text must state the position."
+  },
+  "leftSternalBorderXMeters": 0.009301,
+  "midlineXMeters": -0.006784,
+  "skinMeshFingerprint": "2e5977d4aff5219f",
+  "skinTriangleCount": 40946,
+  "views": [
+    {
+      "id": "plax",
+      "name": "Parasternal long axis",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 10336,
+        "barycentric": [
+          0.058901,
+          0.319622,
+          0.621477
+        ],
+        "pointPatientMeters": [
+          0.022558,
+          0.508748,
+          0.108752
+        ]
+      },
+      "beamAxisPatient": [
+        0.15176281534307545,
+        -0.47178535661002896,
+        -0.8685543305789749
+      ],
+      "surfaceNormalPatient": [
+        -0.031317,
+        0.402102,
+        0.915059
+      ],
+      "markerRollDegrees": 316.92980595037073,
+      "sector": {
+        "azimuthApertureDegrees": 90,
+        "displayDepthMeters": 0.1765,
+        "maximumDepthMeters": 0.1775,
+        "nearFieldFraction": 0
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/plax-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "a4c",
+      "name": "Apical four chamber",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 3799,
+        "barycentric": [
+          0.142173649,
+          0.578902822,
+          0.278923529
+        ],
+        "pointPatientMeters": [
+          0.092208928,
+          0.407501472,
+          0.140073762
+        ]
+      },
+      "beamAxisPatient": [
+        -0.48434410762619007,
+        0.4498701749480884,
+        -0.7503516582909416
+      ],
+      "surfaceNormalPatient": [
+        0.264464715,
+        -0.15332351,
+        0.952129359
+      ],
+      "markerRollDegrees": 73.87353063880306,
+      "sector": {
+        "azimuthApertureDegrees": 60,
+        "displayDepthMeters": 0.22399999,
+        "maximumDepthMeters": 0.2585,
+        "nearFieldFraction": 0.12589285
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/a4c-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "subcostal4c",
+      "name": "Subcostal four chamber",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 1810,
+        "barycentric": [
+          0.317841,
+          0.503703,
+          0.178456
+        ],
+        "pointPatientMeters": [
+          -0.023816,
+          0.389579,
+          0.141989
+        ]
+      },
+      "beamAxisPatient": [
+        0.3142949739525819,
+        0.5656260531233411,
+        -0.7624210368138177
+      ],
+      "surfaceNormalPatient": [
+        0.070106,
+        0.125387,
+        0.989628
+      ],
+      "markerRollDegrees": 99.70212029070032,
+      "sector": {
+        "azimuthApertureDegrees": 75,
+        "displayDepthMeters": 0.1887,
+        "maximumDepthMeters": 0.1887,
+        "nearFieldFraction": 0.04750927
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/subcostal4c-from-ivc-2026-10-05.json",
+        "note": "Mohammed explicitly assigned the IVC editor export to SC4C; shared IVC contact.",
+        "exportedViewID": "ivc",
+        "targetViewID": "subcostal4c"
+      }
+    },
+    {
+      "id": "ivc",
+      "name": "Subcostal IVC long axis",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 1810,
+        "barycentric": [
+          0.317841,
+          0.503703,
+          0.178456
+        ],
+        "pointPatientMeters": [
+          -0.023816,
+          0.389579,
+          0.141989
+        ]
+      },
+      "beamAxisPatient": [
+        0.017055747635272477,
+        0.1575027566318926,
+        -0.9873712488856241
+      ],
+      "surfaceNormalPatient": [
+        0.070106,
+        0.125387,
+        0.989628
+      ],
+      "markerRollDegrees": 0.8726383296238297,
+      "sector": {
+        "azimuthApertureDegrees": 75,
+        "displayDepthMeters": 0.1793,
+        "maximumDepthMeters": 0.1887,
+        "nearFieldFraction": 0.05
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/ivc-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "abdAo",
+      "name": "Abdominal aorta long axis",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 763,
+        "barycentric": [
+          0.359574047,
+          0.017790929,
+          0.622635024
+        ],
+        "pointPatientMeters": [
+          -0.027602884,
+          0.347965228,
+          0.145333434
+        ]
+      },
+      "beamAxisPatient": [
+        0.2489197968836274,
+        0.2064452857090374,
+        -0.9462659661680365
+      ],
+      "surfaceNormalPatient": [
+        -0.021361012,
+        0.04798202,
+        0.998619764
+      ],
+      "markerRollDegrees": 1.520005587635316,
+      "sector": {
+        "azimuthApertureDegrees": 60,
+        "displayDepthMeters": 0.1994,
+        "maximumDepthMeters": 0.1994,
+        "nearFieldFraction": 0.047617856
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/abdAo-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "ssn",
+      "name": "Suprasternal notch, aortic arch",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 34730,
+        "barycentric": [
+          0.326207,
+          0.0,
+          0.673793
+        ],
+        "pointPatientMeters": [
+          -0.003909,
+          0.601939,
+          0.063686
+        ]
+      },
+      "beamAxisPatient": [
+        0.10907417502102934,
+        -0.7358141501418638,
+        -0.6683415001288553
+      ],
+      "surfaceNormalPatient": [
+        0.013482,
+        0.396716,
+        0.917842
+      ],
+      "markerRollDegrees": 21.19237485797699,
+      "sector": {
+        "azimuthApertureDegrees": 80,
+        "displayDepthMeters": 0.147,
+        "maximumDepthMeters": 0.22,
+        "nearFieldFraction": 0.114285715
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/ssn-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "psaxAV",
+      "name": "Parasternal short axis, aortic valve level",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 8688,
+        "barycentric": [
+          0.04627387,
+          0.282053903,
+          0.671672227
+        ],
+        "pointPatientMeters": [
+          0.027969344,
+          0.489833749,
+          0.116763477
+        ]
+      },
+      "beamAxisPatient": [
+        -0.28213129909698276,
+        -0.12146812961121715,
+        -0.951655096954039
+      ],
+      "surfaceNormalPatient": [
+        -0.095502175,
+        0.357062874,
+        0.929185363
+      ],
+      "markerRollDegrees": 16.514957256106047,
+      "sector": {
+        "azimuthApertureDegrees": 73.5,
+        "displayDepthMeters": 0.1365,
+        "maximumDepthMeters": 0.1375,
+        "nearFieldFraction": 0
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/psaxAV-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "psaxMV",
+      "name": "Parasternal short axis, mitral valve level",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 9513,
+        "barycentric": [
+          3.2183e-05,
+          0.0,
+          0.999967817
+        ],
+        "pointPatientMeters": [
+          0.020132249,
+          0.496969165,
+          0.113362234
+        ]
+      },
+      "beamAxisPatient": [
+        0.012896133462327524,
+        -0.3619398049098126,
+        -0.9321122611378784
+      ],
+      "surfaceNormalPatient": [
+        -0.066592963,
+        0.348529665,
+        0.934929115
+      ],
+      "markerRollDegrees": 43.617761500443834,
+      "sector": {
+        "azimuthApertureDegrees": 90,
+        "displayDepthMeters": 0.13,
+        "maximumDepthMeters": 0.16,
+        "nearFieldFraction": 0.16
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/psaxMV-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "psaxPM",
+      "name": "Parasternal short axis, papillary muscle level",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 8691,
+        "barycentric": [
+          0.999908326,
+          0.0,
+          9.1674e-05
+        ],
+        "pointPatientMeters": [
+          0.027794155,
+          0.492872059,
+          0.115562148
+        ]
+      },
+      "beamAxisPatient": [
+        0.04527878776123343,
+        -0.5101125973100464,
+        -0.8589149954707226
+      ],
+      "surfaceNormalPatient": [
+        -0.086389403,
+        0.363768416,
+        0.92747475
+      ],
+      "markerRollDegrees": 36.50939660547195,
+      "sector": {
+        "azimuthApertureDegrees": 70,
+        "displayDepthMeters": 0.139,
+        "maximumDepthMeters": 0.22,
+        "nearFieldFraction": 0.12517986
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/psaxPM-revision2-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "psaxApex",
+      "name": "Parasternal short axis, apical level",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 8691,
+        "barycentric": [
+          0.99990606,
+          0.0,
+          9.394e-05
+        ],
+        "pointPatientMeters": [
+          0.027794155,
+          0.49287205,
+          0.115562152
+        ]
+      },
+      "beamAxisPatient": [
+        0.42731951035670573,
+        -0.6456402703207985,
+        -0.6328875709070227
+      ],
+      "surfaceNormalPatient": [
+        -0.086389433,
+        0.363768391,
+        0.927474756
+      ],
+      "markerRollDegrees": 25.45373806054819,
+      "sector": {
+        "azimuthApertureDegrees": 65,
+        "displayDepthMeters": 0.114999995,
+        "maximumDepthMeters": 0.22,
+        "nearFieldFraction": 0.13565217
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/psaxApex-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "rvInflow",
+      "name": "RV inflow",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 8691,
+        "barycentric": [
+          0.99991,
+          -0.0,
+          9e-05
+        ],
+        "pointPatientMeters": [
+          0.027794,
+          0.492872,
+          0.115562
+        ]
+      },
+      "beamAxisPatient": [
+        -0.18736960111130516,
+        -0.5115348786014384,
+        -0.8385849393791911
+      ],
+      "surfaceNormalPatient": [
+        -0.086389,
+        0.363768,
+        0.927475
+      ],
+      "markerRollDegrees": 298.01828243225185,
+      "sector": {
+        "azimuthApertureDegrees": 85,
+        "maximumDepthMeters": 0.22,
+        "displayDepthMeters": 0.17,
+        "nearFieldFraction": 0.12
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/package_trial.py",
+        "candidate": "rvInflow_fine01",
+        "note": "Review-only preset; original contact and anatomy retained."
+      }
+    },
+    {
+      "id": "rvOutflow",
+      "name": "RV outflow",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 10334,
+        "barycentric": [
+          0.606216,
+          0.1425,
+          0.251285
+        ],
+        "pointPatientMeters": [
+          0.032705,
+          0.501736,
+          0.112258
+        ]
+      },
+      "beamAxisPatient": [
+        -0.23029990082612922,
+        -0.10260485036806297,
+        -0.9676953034713057
+      ],
+      "surfaceNormalPatient": [
+        -0.045915,
+        0.401641,
+        0.914646
+      ],
+      "markerRollDegrees": 351.5764700426176,
+      "sector": {
+        "azimuthApertureDegrees": 90,
+        "displayDepthMeters": 0.13,
+        "maximumDepthMeters": 0.13,
+        "nearFieldFraction": 0
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/rvOutflow-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "a5c",
+      "name": "Apical five chamber",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 3795,
+        "barycentric": [
+          0.999972,
+          2.8e-05,
+          0.0
+        ],
+        "pointPatientMeters": [
+          0.10114,
+          0.408864,
+          0.137406
+        ]
+      },
+      "beamAxisPatient": [
+        -0.5644488871932836,
+        0.49578398875121354,
+        -0.6599967350254092
+      ],
+      "surfaceNormalPatient": [
+        0.353774,
+        -0.175996,
+        0.918624
+      ],
+      "markerRollDegrees": 87.91981509438652,
+      "sector": {
+        "azimuthApertureDegrees": 55,
+        "displayDepthMeters": 0.22919999,
+        "maximumDepthMeters": 0.2417,
+        "nearFieldFraction": 0.26363438
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/a5c-revision3-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "a2c",
+      "name": "Apical two chamber",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 5333,
+        "barycentric": [
+          0.071936,
+          0.8797,
+          0.048364
+        ],
+        "pointPatientMeters": [
+          0.116107,
+          0.420871,
+          0.132203
+        ]
+      },
+      "beamAxisPatient": [
+        -0.5766628234518922,
+        0.3972901285992306,
+        -0.7138771195143452
+      ],
+      "surfaceNormalPatient": [
+        0.469286,
+        -0.069978,
+        0.880269
+      ],
+      "markerRollDegrees": 6.185603608227624,
+      "sector": {
+        "azimuthApertureDegrees": 55,
+        "displayDepthMeters": 0.225,
+        "maximumDepthMeters": 0.2475,
+        "nearFieldFraction": 0.12
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/a2c-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    },
+    {
+      "id": "a3c",
+      "name": "Apical three chamber (apical long axis)",
+      "contact": {
+        "mesh": "VH_M_skin",
+        "triangleIndex": 6159,
+        "barycentric": [
+          0.929849813,
+          0.032156026,
+          0.037994162
+        ],
+        "pointPatientMeters": [
+          0.116134923,
+          0.438142975,
+          0.131169822
+        ]
+      },
+      "beamAxisPatient": [
+        -0.631369096994875,
+        0.26305984874791505,
+        -0.729501596527794
+      ],
+      "surfaceNormalPatient": [
+        0.367658026,
+        0.152706928,
+        0.917337544
+      ],
+      "markerRollDegrees": 312.00238938705974,
+      "sector": {
+        "azimuthApertureDegrees": 60,
+        "displayDepthMeters": 0.22,
+        "maximumDepthMeters": 0.2475,
+        "nearFieldFraction": 0.12272727
+      },
+      "solve": {
+        "solver": "Tools/geometry/view_realism/reviewed_pose.py",
+        "review": "Tools/geometry/view_realism/reviewed/a3c-2026-09-27.json",
+        "note": "User-submitted adjustment; review-trial preset only."
+      }
+    }
+  ],
+  "viewSetID": "view-realism-2026-09-27"
+}

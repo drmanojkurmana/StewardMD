@@ -261,6 +261,11 @@ rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/na
 # needs this line (tracks.json, fetched on first open by the engine). Same failure mode as clinix/surgx:
 # without it the module loads, the tile appears, and the first open renders the load-error state.
 [ -d kardia ] && mkdir -p "$WWW/kardia" && cp -R kardia/. "$WWW/kardia/"
+# EchoSuite Probe Lab (Echo Lab default pane, owner 2026-10-26): the whole
+# local copy under kardia/probelab/ ships so it works offline in the app.
+# The recursive copy above already carries it; this explicit copy keeps
+# that guarantee if the kardia copy ever gains excludes.
+if [ -d kardia/probelab ]; then mkdir -p "$WWW/kardia/probelab"; cp -R kardia/probelab/. "$WWW/kardia/probelab/"; echo "  probelab: $(find "$WWW/kardia/probelab" -type f | wc -l | tr -d ' ') files"; fi
 # Bundled real echo clips (kardia/media/clips/*.mp4, de-identified, with
 # credits merged into kardia/media/credits.json): they ship inside the app
 # so Scan Lab and Echo Lab play them offline with no hosting. The recursive

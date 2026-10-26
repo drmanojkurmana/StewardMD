@@ -204,6 +204,68 @@
   };
 
   function echoBase() { return (host.cfg && host.cfg.base) || G.SMD_KARDIA_BASE || "/kardia/"; }
+
+  /* Echo Lab switch (owner 2026-10-26): Probe Lab (EchoSuite, reused with
+   * permission) is the default; Scan Lab keeps the existing Kardia lab.
+   * Design contract (Operate mode, existing Kardia tokens only): one
+   * segmented switch at the top of the Echo Lab, 44px targets, then one
+   * full height pane with no second scroll bar. States: loading (plain
+   * status line over the pane), error (retry button), offline (the local
+   * Probe Lab still loads, so no offline panel is needed), long labels
+   * wrap in the pane. Motion: none on the switch beyond the engine
+   * segmented colour change, 140ms on --kd-ease, off under reduced
+   * motion in the engine. The choice is kept per device in host prefs. */
+  function labMode() { return st.prefs && st.prefs.klab === "scan" ? "scan" : "probe"; }
+  function probeLabSrc() { return echoBase() + "probelab/index.html"; }
+  function labSwitchHtml() {
+    var m = labMode();
+    return '<div class="krd-labswitch"><div class="sp-seg" role="group" aria-label="' + I.tx(T("Echo Lab view", "Echo Lab view")) + '">' +
+      '<button type="button" data-act="kecho-lab" data-v="probe" aria-pressed="' + (m === "probe") + '">' + I.tx(T("Probe Lab", "Probe Lab")) + "</button>" +
+      '<button type="button" data-act="kecho-lab" data-v="scan" aria-pressed="' + (m === "scan") + '">' + I.tx(T("Scan Lab", "Scan Lab")) + "</button>" +
+      "</div></div>";
+  }
+  function probeLabHtml() {
+    return '<div class="krd-probe-wrap">' +
+      '<p class="sp-small krd-probe-status" id="krdProbeStatus" role="status">' + I.tx(T("Loading Probe Lab.", "Loading Probe Lab.")) + "</p>" +
+      '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
+      I.tx(T("Probe Lab did not load. Try again.", "Probe Lab did not load. Try again.")) +
+      '</p><button type="button" class="sp-btn sec" data-act="kecho-probe-retry">' + I.s("retry") + "</button></div>" +
+      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Probe Lab by EchoSuite", "Probe Lab by EchoSuite")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"></iframe>' +
+      "</div>";
+  }
+  /* Hide EchoSuite navigation that would leave the Probe Lab, from the
+   * Kardia side. The Probe Lab files are not edited. Same origin in the
+   * app, so the parent can add a style and a click guard to the frame
+   * document. The EchoSuite logo and its About and sources sheet stay. */
+  var PROBE_HIDE_CSS = 'a[data-workspace-link="calculators"],a[href="/calculators/"],a[href$="/calculators/"],a[href="/echo-simulator/"],a[href="/learn/"],a[href="/teach/"],a[href="/guides/"],a[href="/agents/"],a[href$="/echo-simulator/"],a[href$="/learn/"],a[href$="/teach/"],a[href$="/guides/"],a[href$="/agents/"]{display:none!important}';
+  function injectProbeNav(frame) {
+    try {
+      var doc = frame && (frame.contentDocument || (frame.contentWindow && frame.contentWindow.document));
+      if (!doc || !doc.head) return false;
+      if (!doc.getElementById("krdProbeHide")) {
+        var style = doc.createElement("style");
+        style.id = "krdProbeHide"; style.textContent = PROBE_HIDE_CSS;
+        doc.head.appendChild(style);
+      }
+      if (!doc.getElementById("krdProbeGuard")) {
+        var script = doc.createElement("script");
+        script.id = "krdProbeGuard";
+        script.textContent = "document.addEventListener('click',function(e){var a=e.target&&e.target.closest?e.target.closest('a'):null;if(!a)return;var h=a.getAttribute('href')||'';if(h.charAt(0)==='/'&&h.charAt(1)!=='/'){e.preventDefault();e.stopPropagation();}},true);";
+        doc.head.appendChild(script);
+      }
+      return true;
+    } catch (e) { return false; }
+  }
+  function mountProbeLab() {
+    var doc = G.document; if (!doc || !doc.getElementById) return;
+    var frame = doc.getElementById("krdProbeFrame"); if (!frame) return;
+    var status = doc.getElementById("krdProbeStatus"), err = doc.getElementById("krdProbeErr");
+    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); }
+    function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
+    if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
+    /* A frame that finished before this mount still gets the guard. */
+    try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
+  }
   function echoViewsForLevel(lv) {
     if (!EL.views) return [];
     return EL.views.views.filter(function (v) { return v.level && v.level.indexOf(lv) >= 0; });
@@ -857,7 +919,8 @@
   }
 
   function echoBodyHtml() {
-    return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + echoLabHtml() + "</div></div>";
+    var pane = labMode() === "probe" ? probeLabHtml() : echoLabHtml();
+    return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + labSwitchHtml() + pane + "</div></div>";
   }
   function showTab(id, focusSel) {
     if (TABS.indexOf(id) < 0) id = "echo";
@@ -892,7 +955,8 @@
     scrollActiveTabIntoView();
     try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
-    if (id === "echo" && EL.views) mountEchoLab();
+    if (id === "echo" && labMode() === "probe") mountProbeLab();
+    else if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }
   }
   function drawEchoSectorSoon() { /* paint waits for views; nothing to draw yet */ }
@@ -935,6 +999,14 @@
   I.ACTIONS.kpro = function () { I.showPro(); };
   I.ACTIONS.kretry = function () { showTab(tab(), "[data-act=kretry]"); };
   I.ACTIONS["kecho-retry"] = function () { EL.err = false; EL.views = null; EL.loading = false; showTab("echo", "[data-act=kecho-retry]"); };
+  I.ACTIONS["kecho-lab"] = function (b) {
+    var v = b.getAttribute("data-v");
+    if (v !== "probe" && v !== "scan") return;
+    if (v === labMode()) return;
+    I.setPref("klab", v);
+    showTab("echo", '[data-act=kecho-lab][data-v="' + v + '"]');
+  };
+  I.ACTIONS["kecho-probe-retry"] = function () { showTab("echo", "[data-act=kecho-probe-retry]"); };
   I.ACTIONS["kecho-view"] = function (b) {
     var id = b.getAttribute("data-v");
     var list = echoViewsForLevel(klevel());
@@ -1032,6 +1104,13 @@
   /* Review Desk style "Read it" hooks and tests read these; the atlas itself stays untouched. */
   host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, freeEchoPerArea: FREE_ECHO_PER_AREA, freeBankQuestions: FREE_BANK_QUESTIONS, on: on, openKardioX: openKardioX,
     freeEchoViews: FREE_ECHO_VIEWS.slice(),
+    probeLab: {
+      get mode() { return labMode(); },
+      get src() { return probeLabSrc(); },
+      setMode: function (v) { if (v !== "probe" && v !== "scan") return labMode(); I.setPref("klab", v); if (host.isOpen() && tab() === "echo") showTab("echo"); return labMode(); },
+      injectNav: injectProbeNav,
+      hideCss: PROBE_HIDE_CSS
+    },
     echoLab: {
       get views() { return EL.views; },
       get probe() { return ensureEchoProbe(); },

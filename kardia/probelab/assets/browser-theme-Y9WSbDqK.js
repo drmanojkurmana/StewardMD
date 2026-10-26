@@ -1,0 +1,1 @@
+const o=Object.freeze({light:"#f3f0e9",dark:"#1f1f26"});function r(e,t=document){t.documentElement.style.colorScheme=e,t.querySelector('meta[name="theme-color"]')?.setAttribute("content",o[e])}export{r as a};
