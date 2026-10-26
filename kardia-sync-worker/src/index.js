@@ -13,8 +13,12 @@ import {
   generateRoomId,
   generateRoomToken,
   handleCodeLookup,
+  handleSessionCreate,
+  normalizeShortCode,
   CodeDirectory,
   LookupRateLimiter,
+  IpRateLimiter,
+  ANON_UID,
   SESSION_TTL_MS,
   SyncRoomCore,
 } from "./core.js";
@@ -101,15 +105,34 @@ export default {
       return text("ok", 200);
     }
 
-    /* ---------------- POST /sync/session ---------------- */
+    /* ---------------- POST /sync/session ----------------
+     * No sign-in required (owner 2026-10-26): the single use code, ECDH
+     * agreement with the 4 digit confirmation and HMAC signed poses secure
+     * the room. A valid Firebase token still binds the room to that user;
+     * no token (or the anonymous marker) creates an anonymous room. A token
+     * that is present but invalid is refused, never silently downgraded.
+     * Creation is strictly rate limited per IP either way. */
     if (url.pathname === "/sync/session") {
       if (request.method !== "POST") {
         return text("method not allowed", 405);
       }
+      const ip = getClientIp(request);
+      const dirStub = getCodeDirectory(env);
+      if (dirStub) {
+        const gate = await dirStub.checkSessionCreate({ ip, now: Date.now() });
+        if (gate && gate.status === 429) {
+          const retrySec = Math.max(1, Math.ceil((gate.body && gate.body.retryAfterMs) || 60000) / 1000);
+          return json(gate.body, 429, { "Retry-After": String(retrySec) });
+        }
+      }
       const token = await extractToken(request);
-      const claims = token ? await verifyFirebaseClaims(token, env).catch(() => null) : null;
-      if (!claims || !claims.sub) {
-        return json({ error: "sign-in required" }, 401);
+      let displayUid = ANON_UID;
+      if (token) {
+        const claims = await verifyFirebaseClaims(token, env).catch(() => null);
+        if (!claims || !claims.sub) {
+          return json({ error: "sign-in required" }, 401);
+        }
+        displayUid = claims.sub;
       }
 
       const roomId = generateRoomId();
@@ -123,7 +146,7 @@ export default {
       await roomStub.initSession({
         roomId,
         roomToken,
-        displayUid: claims.sub,
+        displayUid,
         createdAt: now,
         expiresAt,
       });
@@ -147,7 +170,6 @@ export default {
         if (!normalizedCode || !/^[0-9a-f]{32}$/.test(sid) || typeof pub !== "string" || !/^[A-Za-z0-9_-]{86,88}$/.test(pub)) {
           return json({ error: "invalid code registration" }, 400);
         }
-        const dirStub = getCodeDirectory(env);
         if (dirStub) {
           const reg = await dirStub.registerCode({
             code: normalizedCode,
@@ -165,15 +187,24 @@ export default {
       return json({ roomId, roomToken, expiresAt, codeRegistered }, 200);
     }
 
-    /* ---------------- POST /sync/code (typed-code lookup) ---------------- */
+    /* ---------------- POST /sync/code (typed-code lookup) ----------------
+     * No sign-in required: anonymous lookups are limited per IP in the
+     * directory (single use, 5 minute expiry, no oracle). A token that is
+     * present but invalid is refused, never silently downgraded. The uid
+     * is always derived server side from the verified token or the client
+     * IP; a uid sent in the body is never trusted. */
     if (url.pathname === "/sync/code") {
       if (request.method !== "POST") {
         return text("method not allowed", 405);
       }
       const token = await extractToken(request);
-      const claims = token ? await verifyFirebaseClaims(token, env).catch(() => null) : null;
-      if (!claims || !claims.sub) {
-        return json({ error: "sign-in required" }, 401);
+      let uid = ANON_UID + ":" + getClientIp(request);
+      if (token) {
+        const claims = await verifyFirebaseClaims(token, env).catch(() => null);
+        if (!claims || !claims.sub) {
+          return json({ error: "sign-in required" }, 401);
+        }
+        uid = claims.sub;
       }
       let code = null;
       try {
@@ -188,7 +219,7 @@ export default {
       }
       const res = await dirStub.resolveCode({
         code,
-        uid: claims.sub,
+        uid,
         ip: getClientIp(request),
         now: Date.now(),
       });
@@ -217,16 +248,24 @@ export default {
         return text("bad protocol header", 400);
       }
 
-      const claims = await verifyFirebaseClaims(parsedProto.token, env).catch(() => null);
-      if (!claims || !claims.sub) {
-        return text("sign-in required", 401);
+      /* Anonymous sockets carry the kardia-anon marker instead of a
+       * Firebase token; the room token and the room's role binding in
+       * SyncRoomCore still gate the socket. Signed-in sockets verify as
+       * before. The uid is set server side here, never from the client. */
+      let syncUid = ANON_UID;
+      if (!parsedProto.anonymous) {
+        const claims = await verifyFirebaseClaims(parsedProto.token, env).catch(() => null);
+        if (!claims || !claims.sub) {
+          return text("sign-in required", 401);
+        }
+        syncUid = claims.sub;
       }
 
       const doId = env.SYNC_ROOM.idFromName(roomId);
       const roomStub = env.SYNC_ROOM.get(doId);
 
       const fwdHeaders = new Headers(request.headers);
-      fwdHeaders.set("X-Sync-Uid", claims.sub);
+      fwdHeaders.set("X-Sync-Uid", syncUid);
       fwdHeaders.set("X-Sync-Role", role);
       fwdHeaders.set("X-Sync-Room-Token", parsedProto.roomToken);
 
@@ -429,6 +468,7 @@ export class SyncCodeDirectory extends DurableObject {
     super(ctx, env);
     this.dir = null;
     this.limiter = null;
+    this.sessionLimiter = null;
   }
 
   async load() {
@@ -440,12 +480,17 @@ export class SyncCodeDirectory extends DurableObject {
       const storedLimits = await this.ctx.storage.get("lookup-limits");
       this.limiter = LookupRateLimiter.fromJSON(storedLimits || null);
     }
+    if (!this.sessionLimiter) {
+      const storedCreate = await this.ctx.storage.get("session-limits");
+      this.sessionLimiter = IpRateLimiter.fromJSON(storedCreate || null);
+    }
   }
 
   async save() {
     const now = Date.now();
     await this.ctx.storage.put("codes", this.dir.toJSON());
     await this.ctx.storage.put("lookup-limits", this.limiter.toJSON(now));
+    await this.ctx.storage.put("session-limits", this.sessionLimiter.toJSON(now));
     const next = this.dir.nextExpiry();
     if (next) {
       await this.ctx.storage.setAlarm(next);
@@ -462,6 +507,15 @@ export class SyncCodeDirectory extends DurableObject {
     if (!res.ok) return res;
     await this.save();
     return { ok: true };
+  }
+
+  /* RPC: per-IP gate on anonymous session creation. */
+  async checkSessionCreate({ ip, now }) {
+    await this.load();
+    const t = now == null ? Date.now() : now;
+    const res = handleSessionCreate({ ip, now: t }, { limiter: this.sessionLimiter });
+    await this.save();
+    return res;
   }
 
   /* RPC: probe resolves a typed code to the room join material. */

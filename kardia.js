@@ -226,6 +226,9 @@
   }
   function probeLabHtml() {
     return '<div class="krd-probe-wrap">' +
+      '<div class="krd-probe-bar"><button type="button" class="sp-btn sec krd-probe-syncbtn" data-act="kecho-syncprobe" aria-label="' + I.tx(T("Use a phone as the probe", "Use a phone as the probe")) + '">' +
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18.2" r="1.1" fill="currentColor"/></svg>' +
+      I.tx(T("Use a phone as the probe", "Use a phone as the probe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<p class="sp-small krd-probe-status" id="krdProbeStatus" role="status">' + I.tx(T("Loading Probe Lab.", "Loading Probe Lab.")) + "</p>" +
       '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
       I.tx(T("Probe Lab did not load. Try again.", "Probe Lab did not load. Try again.")) +

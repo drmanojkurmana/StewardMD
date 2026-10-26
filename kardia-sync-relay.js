@@ -76,6 +76,22 @@
     return user.getIdToken();
   }
 
+  /* Pairing token for the relay: the Firebase ID token when signed in, or
+   * the anonymous marker when signed out. The relay secures anonymous rooms
+   * with the single use code, ECDH agreement and HMAC signed poses, so a
+   * signed out phone pairs the same way; it just carries no user binding. */
+  var ANON_TOKEN = "kardia-anon";
+  function getPairingToken() {
+    var user = getFirebaseUser();
+    if (!user) return Promise.resolve(ANON_TOKEN);
+    return getIdToken(user).then(function (token) { return token || ANON_TOKEN; }, function () { return ANON_TOKEN; });
+  }
+  function authHeaders(token) {
+    var h = { "Content-Type": "application/json" };
+    if (token && token !== ANON_TOKEN) h["Authorization"] = "Bearer " + token;
+    return h;
+  }
+
   function startStatsMonitor() {
     if (state.statsInterval) clearInterval(state.statsInterval);
     state.prevSent = state.sentCount;
@@ -223,19 +239,8 @@
         });
       }
 
-      var user = getFirebaseUser();
-      if (!user) {
-        return Promise.resolve({
-          available: false,
-          reason: "Sign-in required",
-          canAdvertise: false,
-          canScan: false,
-          needsInternet: true,
-          maxPayload: 128,
-          platform: getPlatform(),
-        });
-      }
-
+      /* Signed out still pairs: the relay accepts anonymous rooms secured
+       * by the code, ECDH agreement and signed poses. */
       return Promise.resolve({
         available: true,
         canAdvertise: true,
@@ -251,13 +256,8 @@
       if (!pairing || typeof pairing !== "object") {
         return Promise.reject(new Error("Invalid pairing payload"));
       }
-      var user = getFirebaseUser();
-      if (!user) {
-        return Promise.reject(reasonError("sign-in-required", "Sign-in required"));
-      }
-
       var httpUrl = getHttpUrl() + "/sync/session";
-      return getIdToken(user).then(function (token) {
+      return getPairingToken().then(function (token) {
         var fetchFn = G.fetch || (typeof fetch !== "undefined" ? fetch : null);
         if (!fetchFn) {
           return Promise.reject(new Error("Fetch API unavailable"));
@@ -275,14 +275,12 @@
         }
         return fetchFn(httpUrl, {
           method: "POST",
-          headers: {
-            "Authorization": "Bearer " + token,
-            "Content-Type": "application/json",
-          },
+          headers: authHeaders(token),
           body: codeBody ? JSON.stringify(codeBody) : undefined,
         }).then(function (res) {
           if (!res.ok) {
             return res.text().then(function (txt) {
+              if (res.status === 429) { var rl0 = reasonError("rate-limited", "Too many pairing tries. Wait a few minutes and try again."); try { var ra0 = parseInt(res.headers.get("Retry-After"), 10); if (isFinite(ra0)) rl0.retryAfterMs = ra0 * 1000; } catch (e0) {} throw rl0; }
               if (res.status === 401) throw reasonError("sign-in-required", "Sign-in required");
               throw reasonError("relay-unreachable", "Relay session creation failed (" + res.status + "): " + txt);
             });
@@ -321,12 +319,7 @@
         return Promise.reject(new Error("Missing relay room details in pairing payload"));
       }
 
-      var user = getFirebaseUser();
-      if (!user) {
-        return Promise.reject(reasonError("sign-in-required", "Sign-in required"));
-      }
-
-      return getIdToken(user).then(function (token) {
+      return getPairingToken().then(function (token) {
         var wsUrl = getWsUrl() + "/sync/room?id=" + encodeURIComponent(roomId) + "&role=probe";
         var protocols = ["kardia-sync", token, roomToken];
         return connectSocket(wsUrl, protocols, handlers, "probe");
@@ -334,10 +327,9 @@
     },
 
     // Probe typed-code lookup: resolve the 6-character code shown on the
-    // display to the room join material. Authenticated, rate limited and
-    // single use server side; unknown, expired and used codes all read
-    // as not-found. Rejects fast when signed out so the typed-code race
-    // can fall through to Bluetooth.
+    // display to the room join material. No sign-in needed; rate limited
+    // per IP and single use server side. Unknown, expired and used codes
+    // all read as not-found.
     resolveCode: function (shortCode) {
       var code = String(shortCode == null ? "" : shortCode).toUpperCase().replace(/[^A-Z2-9]/g, "");
       if (!/^[A-Z2-9]{6}$/.test(code)) {
@@ -347,15 +339,7 @@
         return Promise.reject(bad);
       }
 
-      var user = getFirebaseUser();
-      if (!user) {
-        var auth = new Error("Sign-in required");
-        auth.reason = "sign-in-required";
-        auth.code = "sign-in-required";
-        return Promise.reject(auth);
-      }
-
-      return getIdToken(user).then(function (token) {
+      return getPairingToken().then(function (token) {
         var fetchFn = G.fetch || (typeof fetch !== "undefined" ? fetch : null);
         if (!fetchFn) {
           return Promise.reject(new Error("Fetch API unavailable"));
@@ -381,10 +365,7 @@
           } catch (e) {}
           fetchFn(getHttpUrl() + "/sync/code", {
             method: "POST",
-            headers: {
-              "Authorization": "Bearer " + token,
-              "Content-Type": "application/json",
-            },
+            headers: authHeaders(token),
             body: JSON.stringify({ code: code }),
           }).then(function (res) {
             if (res.status === 404) {

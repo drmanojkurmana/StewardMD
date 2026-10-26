@@ -686,7 +686,7 @@ test("client adapter: implements contract transport interface (id, kind, capabil
   assert.ok(!capOffline.reason.toLowerCase().includes("offline"), "never describe relay as offline");
   assert.ok(capOffline.reason.toLowerCase().includes("internet"));
 
-  // capabilities() when online but no user
+  // capabilities() when online but no user: anonymous pairing is available
   Object.defineProperty(globalThis, "navigator", {
     value: { onLine: true },
     configurable: true,
@@ -695,8 +695,9 @@ test("client adapter: implements contract transport interface (id, kind, capabil
   globalThis.SMD_AUTH = null;
   globalThis.firebase = null;
   const capNoUser = await relayTransport.capabilities();
-  assert.equal(capNoUser.available, false);
-  assert.equal(capNoUser.reason, "Sign-in required");
+  assert.equal(capNoUser.available, true);
+  assert.equal(capNoUser.canAdvertise, true);
+  assert.equal(capNoUser.canScan, true);
 
   // capabilities() when online and signed in
   globalThis.SMD_AUTH = {
@@ -905,16 +906,19 @@ test("code expiry: resolves inside 5 minutes, not-found after, sweep clears", ()
   assert.equal(deps.directory.size, 0, "expiry sweep removed it");
 });
 
-test("code lookup rejects the wrong user (no auth) but allows another signed-in user", () => {
+test("code lookup needs no sign-in: anonymous callers resolve by IP, only identity-less calls are refused", () => {
   const deps = lookupDeps();
   deps.directory.register(makeCodeInput());
-  for (const badUid of [null, undefined, "", 42]) {
-    const res = Core.handleCodeLookup({ code: "KARD2X", uid: badUid, ip: "1.1.1.1", now: 100001 }, deps);
-    assert.equal(res.status, 401, "uid " + String(badUid) + " rejected");
-    assert.equal(res.body.error, "sign-in required");
-  }
-  assert.equal(deps.directory.size, 1, "rejected lookups do not consume the code");
+  // No uid and no IP at all: nothing to rate limit against, refused.
+  const noIdentity = Core.handleCodeLookup({ code: "KARD2X", uid: null, ip: null, now: 100001 }, deps);
+  assert.equal(noIdentity.status, 401);
+  assert.equal(deps.directory.size, 1, "refused lookups do not consume the code");
+  // Anonymous (no uid, with an IP) resolves the code.
+  const anon = Core.handleCodeLookup({ code: "KARD2X", uid: null, ip: "1.1.1.1", now: 100001 }, deps);
+  assert.equal(anon.status, 200);
+  assert.equal(deps.directory.size, 0, "anonymous resolve is still single use");
   // The probe is a different user than the display: that must succeed
+  deps.directory.register(makeCodeInput());
   const probe = Core.handleCodeLookup({ code: "KARD2X", uid: "uid-probe-other", ip: "2.2.2.2", now: 100001 }, deps);
   assert.equal(probe.status, 200);
 });
@@ -1052,18 +1056,110 @@ test("client resolveCode maps lookup failures to specific reasons", async () => 
   }
 });
 
-test("client resolveCode rejects fast without sign-in or a valid code shape", async () => {
+test("client resolveCode rejects a malformed code without network, signed in or out", async () => {
   const prevFetch = globalThis.fetch;
   let called = false;
   globalThis.fetch = async () => { called = true; throw new Error("must not fetch"); };
   globalThis.SMD_AUTH = null;
   try {
-    await assert.rejects(() => relayTransport.resolveCode("KARD2X"), (e) => e.reason === "sign-in-required");
-    assert.equal(called, false, "no network without sign-in");
     await assert.rejects(() => relayTransport.resolveCode("XY1"), (e) => e.reason === "not-found");
     assert.equal(called, false, "no network for a malformed code");
   } finally {
     globalThis.fetch = prevFetch;
+    globalThis.SMD_AUTH = null;
+  }
+});
+
+/* ==================== 11. Anonymous relay path (no sign-in) ==================== */
+
+test("anonymous protocol: kardia-anon parses, junk tokens do not", () => {
+  const anon = Core.parseProtocol("kardia-sync, kardia-anon, " + TEST_TOKEN);
+  assert.equal(anon.anonymous, true);
+  assert.equal(anon.roomToken, TEST_TOKEN);
+  const jwt = Core.parseProtocol("kardia-sync, aaa.bbb.ccc, " + TEST_TOKEN);
+  assert.equal(jwt.anonymous, false);
+  assert.equal(Core.parseProtocol("kardia-sync, not-a-token, " + TEST_TOKEN), null);
+  assert.equal(Core.ANON_UID, "anon");
+});
+
+test("anonymous room: display and probe connect with the anon marker, room token still gates", () => {
+  const t0 = 2000000;
+  const room = new Core.SyncRoomCore({ roomId: TEST_ROOM, roomToken: TEST_TOKEN, displayUid: Core.ANON_UID, now: t0 });
+  assert.equal(room.canConnect({ role: "display", tokenUid: Core.ANON_UID, roomToken: TEST_TOKEN, now: t0 + 1 }).ok, true);
+  assert.equal(room.connect({ role: "display", tokenUid: Core.ANON_UID, roomToken: TEST_TOKEN, now: t0 + 1 }).ok, true);
+  assert.equal(room.connect({ role: "probe", tokenUid: Core.ANON_UID, roomToken: TEST_TOKEN, now: t0 + 2 }).ok, true);
+  const bad = new Core.SyncRoomCore({ roomId: TEST_ROOM, roomToken: TEST_TOKEN, displayUid: Core.ANON_UID, now: t0 });
+  assert.equal(bad.canConnect({ role: "display", tokenUid: Core.ANON_UID, roomToken: "wrong-token-wrong-token-wrong-123456", now: t0 + 1 }).ok, false);
+  // A signed-in room still refuses the anonymous marker.
+  const signed = createTestRoom({ now: t0 });
+  assert.equal(signed.canConnect({ role: "display", tokenUid: Core.ANON_UID, roomToken: signed.roomToken, now: t0 + 1 }).ok, false);
+});
+
+test("session creation limit: 5 rooms per 10 minutes per IP, then 429 with retry", () => {
+  const t0 = 3000000;
+  const limiter = new Core.IpRateLimiter();
+  for (let i = 0; i < Core.SESSION_CREATE_MAX; i++) {
+    assert.equal(Core.handleSessionCreate({ ip: "5.5.5.5", now: t0 + i }, { limiter }).status, 200);
+  }
+  const limited = Core.handleSessionCreate({ ip: "5.5.5.5", now: t0 + 10 }, { limiter });
+  assert.equal(limited.status, 429);
+  assert.equal(limited.body.error, "rate-limited");
+  assert.ok(limited.body.retryAfterMs > 0);
+  assert.equal(Core.handleSessionCreate({ ip: "6.6.6.6", now: t0 + 11 }, { limiter }).status, 200, "another IP unaffected");
+  const roundTrip = Core.IpRateLimiter.fromJSON(limiter.toJSON(t0));
+  assert.equal(Core.handleSessionCreate({ ip: "5.5.5.5", now: t0 + 20 }, { limiter: roundTrip }).status, 429, "limit survives storage round trip");
+  assert.equal(Core.handleSessionCreate({ ip: "5.5.5.5", now: t0 + Core.SESSION_CREATE_WINDOW_MS + 1 }, { limiter }).status, 200, "window resets");
+});
+
+test("anonymous code lookup is rate limited per IP alone", () => {
+  const t0 = 4000000;
+  const deps = lookupDeps();
+  for (let i = 0; i < Core.CODE_LOOKUP_MAX; i++) {
+    assert.equal(Core.handleCodeLookup({ code: "ZZZZZZ", uid: null, ip: "9.9.9.8", now: t0 + i }, deps).status, 404);
+  }
+  assert.equal(Core.handleCodeLookup({ code: "ZZZZZZ", uid: null, ip: "9.9.9.8", now: t0 + 20 }, deps).status, 429);
+});
+
+test("client host, join and resolveCode work signed out with no Authorization header", async () => {
+  const prevFetch = globalThis.fetch;
+  const prevWs = globalThis.WebSocket;
+  const seen = [];
+  class MockWs2 {
+    constructor(url, protocols) { seen.push({ url, protocols }); this.readyState = 0; setTimeout(() => { this.readyState = 1; if (this.onopen) this.onopen(); }, 5); }
+    send() { return true; }
+    close() { this.readyState = 3; if (this.onclose) this.onclose({ reason: "closed" }); }
+  }
+  globalThis.WebSocket = MockWs2;
+  globalThis.fetch = async (url, opts) => {
+    seen.push({ url, opts });
+    if (String(url).includes("/sync/session")) {
+      return { ok: true, status: 200, json: async () => ({ roomId: TEST_ROOM, roomToken: TEST_TOKEN, expiresAt: 9999999999999 }) };
+    }
+    if (String(url).includes("/sync/code")) {
+      return { ok: true, status: 200, json: async () => ({ roomId: TEST_ROOM, roomToken: TEST_TOKEN, sessionId: TEST_SESSION, displayPub: TEST_PUB, shortCode: "KARD2X", expiresAt: 9999999999999 }) };
+    }
+    throw new Error("unexpected fetch: " + url);
+  };
+  globalThis.SMD_AUTH = null;
+  globalThis.firebase = null;
+  try {
+    const pairing = { sessionId: TEST_SESSION, shortCode: "KARD2X", displayPub: TEST_PUB, expiresAt: 9999999999999 };
+    await relayTransport.host(pairing, {});
+    const sessionCall = seen.find((s) => String(s.url).includes("/sync/session"));
+    assert.ok(sessionCall, "session created while signed out");
+    assert.ok(!sessionCall.opts.headers.Authorization, "no Authorization header when signed out");
+    const wsCall = seen.find((s) => s.protocols);
+    assert.equal(wsCall.protocols[1], "kardia-anon", "socket carries the anonymous marker");
+    await relayTransport.close();
+    const out = await relayTransport.resolveCode("KARD2X");
+    assert.equal(out.roomId, TEST_ROOM);
+    const codeCall = seen.find((s) => String(s.url).includes("/sync/code"));
+    assert.ok(!codeCall.opts.headers.Authorization, "code lookup sends no Authorization when signed out");
+    await relayTransport.join({ roomId: TEST_ROOM, roomToken: TEST_TOKEN }, {});
+    await relayTransport.close();
+  } finally {
+    globalThis.fetch = prevFetch;
+    globalThis.WebSocket = prevWs;
     globalThis.SMD_AUTH = null;
   }
 });

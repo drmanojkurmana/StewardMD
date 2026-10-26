@@ -74,8 +74,8 @@ test("error mapping: every failure is specific with one next action", () => {
   const cases = [
     [{ reason: "expired" }, /expired/, "scan"],
     [{ reason: "busy" }, /already training/, "retry"],
-    [{ reason: "sign-in-required" }, /signed out/, "sign-in"],
-    [{ message: "Relay session creation failed (401): x" }, /signed out/, "sign-in"],
+    [{ reason: "sign-in-required" }, /does not need sign-in/, "retry"],
+    [{ message: "Relay session creation failed (401): x" }, /does not need sign-in/, "retry"],
     [{ reason: "not-found" }, /No display found/, "scan"],
     [{ reason: "bluetooth-off" }, /Bluetooth is off/, "settings"],
     [{ reason: "bluetooth-permission" }, /permission is off/, "settings"],

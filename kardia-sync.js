@@ -17,7 +17,7 @@
 
   var VERSION = 1;
   var TYPES = { HELLO: 1, WELCOME: 2, POSE: 3, CONTROL: 4, PING: 5, PONG: 6, BYE: 7 };
-  var CONTROLS = { PAUSE: 1, RESUME: 2, RECENTER: 3, CALIBRATE: 4, SELECT_WINDOW: 5, END: 6, CONFIRM: 7 };
+  var CONTROLS = { PAUSE: 1, RESUME: 2, RECENTER: 3, CALIBRATE: 4, SELECT_WINDOW: 5, END: 6, CONFIRM: 7, DEPTH: 8 };
   var BYE = { NORMAL: 0, CONTROLLER_BUSY: 1, EXPIRED: 2, MAC_FAILURE: 3, USER: 4 };
   var HEADER_LEN = 12, MAC_LEN = 8;
   var PAIRING_TTL_MS = 5 * 60 * 1000;
@@ -651,6 +651,7 @@
     var clockOffsetMs = null, lastActivityAt = nowFn(), lastPoseAt = 0, lastRenderAt = 0;
     var frozen = false, frozenReason = null, pendingPose = null, lastValidPose = null, lastValidState = null;
     var displayProbe = null, smoother = createSmoother(opts.tauMs || 60), calibQuat = null, calibBase = null, needsCalib = true;
+    var lastDepthCm = null;
     var resumeArmed = false;
     var transport = null, destroyed = false, rejectedHellos = 0, statsIn = { accepted: 0, droppedMac: 0, droppedSeq: 0, droppedStale: 0, droppedBounds: 0, droppedSession: 0, droppedFrozen: 0 };
     var monoStart = nowFn();
@@ -753,7 +754,7 @@
       get clockOffsetMs() { return clockOffsetMs; },
       get rejectedHellos() { return rejectedHellos; },
       getState: function () {
-        return { state: state, reason: stateReason, recoveryHint: recoveryHint, role: role, frozen: frozen, frozenReason: frozenReason, resumeArmed: resumeArmed, confirmCode: confirmCode, sessionId: sessionIdBytes ? bytesToHex(sessionIdBytes) : null, controllerActive: controllerActive, lastSeqIn: lastSeqIn, seqOut: seqOut, clockOffsetMs: clockOffsetMs };
+        return { state: state, reason: stateReason, recoveryHint: recoveryHint, role: role, frozen: frozen, frozenReason: frozenReason, resumeArmed: resumeArmed, confirmCode: confirmCode, sessionId: sessionIdBytes ? bytesToHex(sessionIdBytes) : null, controllerActive: controllerActive, lastSeqIn: lastSeqIn, seqOut: seqOut, clockOffsetMs: clockOffsetMs, depthCm: lastDepthCm };
       },
       setStateForTest: function (s, r) { return setState(s, r); },
       attachTransport: function (t) { transport = t; return node; },
@@ -938,6 +939,7 @@
             else if (confirmedLocal) setState("connected", "both-confirmed");
           } else if (frame.code === CONTROLS.RESUME) { node.armResume(); }
           else if (frame.code === CONTROLS.RECENTER) { needsCalib = true; calibQuat = null; calibBase = null; frozen = false; resumeArmed = false; }
+          else if (frame.code === CONTROLS.DEPTH) { var dcm = frame.arg / 10; if (dcm >= 8 && dcm <= 30) lastDepthCm = dcm; }
           else if (frame.code === CONTROLS.END) { node.handlePeerLost("ended"); }
           else if (frame.code === CONTROLS.PAUSE) { frozen = true; }
         } else if (frame.type === TYPES.BYE) {
@@ -960,6 +962,7 @@
         } else {
           outState = { window: target.window, tiltDeg: sm.tiltDeg, rotationDeg: sm.rotationDeg, rockDeg: sm.rockDeg, position: { x: sm.x, y: sm.y } };
         }
+        if (lastDepthCm != null) outState.depthCm = lastDepthCm;
         lastValidState = outState;
         if (echoLab && typeof echoLab.setProbeState === "function") echoLab.setProbeState(outState);
         else if (displayProbe) displayProbe.setState(outState);
@@ -1008,6 +1011,17 @@
       if (!calibrateAtt) { try { p.calibrateGyro(attitude); } catch (e) {} calibrateAtt = { alpha: attitude.alpha || 0, beta: attitude.beta || 0, gamma: attitude.gamma || 0 }; }
       var st;
       try { st = p.applyGyroSample(attitude, dtMs == null ? 16 : dtMs); } catch (e2) { return null; }
+      /* Dead zone: hold the last sent pose while every axis is within
+       * 1.5 degrees of it, so hand tremor at rest does not jitter the
+       * image. Smoothing upstream (probe filter) and downstream (display
+       * smoother) handles the rest; latency stays one sample. */
+      if (lastPoseState && calibrateAtt) {
+        var dz = Math.max(
+          Math.abs((st.tiltDeg || 0) - (lastPoseState.tiltDeg || 0)),
+          Math.abs((st.rotationDeg || 0) - (lastPoseState.rotationDeg || 0)),
+          Math.abs((st.rockDeg || 0) - (lastPoseState.rockDeg || 0)));
+        if (dz < 1.5) return lastPose;
+      }
       var q = quatFromEuler(st.tiltDeg || 0, st.rotationDeg || 0, st.rockDeg || 0);
       var pose = { quat: q, touch: 0, window: st.window, slideXmm: st.position ? st.position.x : 0, slideYmm: st.position ? st.position.y : 0, flags: { calibrated: true } };
       pose.probeState = st;
@@ -1166,7 +1180,7 @@
     node: null, role: null, listeners: [], pairing: null, transport: null, transportId: null,
     lastError: null, paused: false, sender: null, renderTimer: null, pingTimer: null,
     lastFrameAt: 0, deferredApply: false,
-    transportCaps: {}, capsBusy: false, touchState: { window: "parasternal", rotationDeg: 0, tiltDeg: 0, rockDeg: 0 },
+    transportCaps: {}, capsBusy: false, touchState: { window: "parasternal", rotationDeg: 0, tiltDeg: 0, rockDeg: 0, depthCm: 18, slideX: 0, slideY: 0 },
     wrapRttMs: 0, pingSentAt: 0
   };
   function facadeEmit(evt) { F.listeners.slice().forEach(function (fn) { try { fn(evt); } catch (e) {} }); }
@@ -1236,7 +1250,7 @@
     if (!F.node || F.role !== "display" || F.paused) return null;
     var out = null;
     try { out = F.node.renderFrame(); } catch (e) {}
-    if (out) facadeEmit({ type: "pose", pose: { tiltDeg: out.tiltDeg, rotationDeg: out.rotationDeg, rockDeg: out.rockDeg, window: out.window } });
+    if (out) facadeEmit({ type: "pose", pose: { tiltDeg: out.tiltDeg, rotationDeg: out.rotationDeg, rockDeg: out.rockDeg, window: out.window, slideX: out.position ? out.position.x : 0, slideY: out.position ? out.position.y : 0, depthCm: out.depthCm != null ? out.depthCm : null } });
     return out;
   }
   /* Message-path apply: rAF (and timers) can be paused on a background
@@ -1474,9 +1488,22 @@
       return true;
     },
     probePatch: function (patch) {
-      if (patch) { if (patch.window) F.touchState.window = patch.window; if (patch.rotationDeg != null) F.touchState.rotationDeg = +patch.rotationDeg; if (patch.tiltDeg != null) F.touchState.tiltDeg = +patch.tiltDeg; if (patch.rockDeg != null) F.touchState.rockDeg = +patch.rockDeg; }
-      facadeEmit({ type: "pose", pose: { tiltDeg: F.touchState.tiltDeg, rotationDeg: F.touchState.rotationDeg, rockDeg: F.touchState.rockDeg } });
-      if (F.node && F.role === "probe" && facadeStateName() === "connected" && !F.paused) { try { F.node.sendProbeState({ window: F.touchState.window, rotationDeg: F.touchState.rotationDeg, tiltDeg: F.touchState.tiltDeg, rockDeg: F.touchState.rockDeg, position: { x: 0, y: 0 } }); } catch (e) {} }
+      var depthChanged = false;
+      if (patch) {
+        if (patch.window) F.touchState.window = patch.window;
+        if (patch.rotationDeg != null) F.touchState.rotationDeg = +patch.rotationDeg;
+        if (patch.tiltDeg != null) F.touchState.tiltDeg = +patch.tiltDeg;
+        if (patch.rockDeg != null) F.touchState.rockDeg = +patch.rockDeg;
+        if (patch.depthCm != null && +patch.depthCm !== F.touchState.depthCm) { F.touchState.depthCm = Math.min(30, Math.max(8, +patch.depthCm)); depthChanged = true; }
+        if (patch.slideX != null) F.touchState.slideX = +patch.slideX;
+        if (patch.slideY != null) F.touchState.slideY = +patch.slideY;
+        if (patch.position) { if (patch.position.x != null) F.touchState.slideX = +patch.position.x; if (patch.position.y != null) F.touchState.slideY = +patch.position.y; }
+      }
+      facadeEmit({ type: "pose", pose: { tiltDeg: F.touchState.tiltDeg, rotationDeg: F.touchState.rotationDeg, rockDeg: F.touchState.rockDeg, slideX: F.touchState.slideX, slideY: F.touchState.slideY, depthCm: F.touchState.depthCm } });
+      if (F.node && F.role === "probe" && facadeStateName() === "connected" && !F.paused) {
+        try { F.node.sendProbeState({ window: F.touchState.window, rotationDeg: F.touchState.rotationDeg, tiltDeg: F.touchState.tiltDeg, rockDeg: F.touchState.rockDeg, position: { x: F.touchState.slideX, y: F.touchState.slideY } }); } catch (e) {}
+        if (depthChanged) { try { F.node.sendControl(CONTROLS.DEPTH, Math.round(F.touchState.depthCm * 10)); } catch (e) {} }
+      }
       return true;
     },
     stats: function () {

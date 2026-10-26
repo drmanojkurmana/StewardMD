@@ -530,7 +530,7 @@
     switch (reason) {
       case "expired": return { reason: reason, message: "That code has expired. The display phone is showing a fresh code.", action: "scan", actionLabel: "Scan the fresh code" };
       case "busy": case "controller-busy": return { reason: "busy", message: "That display is already training with another probe. Wait until that session ends.", action: "retry", actionLabel: "Try again" };
-      case "sign-in-required": return { reason: reason, message: "You are signed out. Sign in to pair over the internet. Nearby pairing over Bluetooth works without sign-in.", action: "sign-in", actionLabel: "Sign in" };
+      case "sign-in-required": return { reason: reason, message: "Pairing was refused. Pairing does not need sign-in. Check the connection on both phones, then try again.", action: "retry", actionLabel: "Try again" };
       case "not-found": return { reason: reason, message: "No display found nearby. Keep both phones close, with the display phone showing its code.", action: "scan", actionLabel: "Scan the QR code instead" };
       case "rate-limited": return { reason: reason, message: "Too many code tries. Wait a minute, then try the fresh code.", action: "retry", actionLabel: "Try again" };
       case "bluetooth-off": return { reason: reason, message: "Bluetooth is off. Turn Bluetooth on, then search again.", action: "settings", actionLabel: "Open Settings" };
@@ -591,8 +591,8 @@
   function renderProbeCalibrate() {
     S.probeStep = "calibrate";
     showSheet("Use this phone as a probe",
-      '<p class="sp-small">Hold the phone like a probe on the chest, marker towards the ' +
-      "patient's left shoulder, then tap Calibrate.</p>" +
+      '<p class="sp-small">Hold the phone like a probe, marker towards the patient\'s head, tap Calibrate.</p>' +
+      '<p class="sp-small">Keep holding it that way. Turning, fanning and rocking the phone then moves the probe.</p>' +
       '<div class="krd-sp-glyphwrap" aria-hidden="true">' + glyphSvg(0, 0) + "</div>" +
       '<div class="krd-sp-col"><button type="button" class="sp-btn pri sp-wide" data-act="sp-calibrate">Calibrate</button>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Not now</button></div>');
@@ -642,31 +642,92 @@
   }
   function renderProbeTouch() {
     S.probeStep = "touch";
-    S.touch = S.touch || { window: "parasternal", rotationDeg: 0, tiltDeg: 0 };
+    S.touch = S.touch || { window: "parasternal", rotationDeg: 0, tiltDeg: 0, rockDeg: 0, depthCm: 18, slideX: 0, slideY: 0 };
+    if (S.touch.rockDeg == null) S.touch.rockDeg = 0;
+    if (S.touch.depthCm == null) S.touch.depthCm = 18;
+    if (S.touch.slideX == null) S.touch.slideX = 0;
+    if (S.touch.slideY == null) S.touch.slideY = 0;
     showSheet("Touch controls",
-      '<p class="sp-small">Drag the sliders to move the virtual probe on the display phone.</p>' +
+      '<p class="sp-small">Slide on the pad to move the probe. Use one thumb; every control is at thumb reach.</p>' +
+      '<div class="krd-sp-pad" id="krdSpPad" role="application" aria-label="Slide pad. Drag to slide the probe." tabindex="0">' +
+      '<span class="krd-sp-pad-dot" id="krdSpPadDot" aria-hidden="true"></span>' +
+      '<span class="krd-sp-pad-label">Slide</span></div>' +
+      '<p class="sp-small" id="krdSpSlideVal" role="status">Slide 0, 0</p>' +
       '<div class="krd-sp-col">' +
-      '<label class="krd-sp-field" for="krdSpRot">Rotation <span id="krdSpRotVal">0 deg</span></label>' +
+      '<label class="krd-sp-field" for="krdSpRot">Rotation <span id="krdSpRotVal">' + Math.round(S.touch.rotationDeg) + ' deg</span></label>' +
       '<input type="range" id="krdSpRot" min="-180" max="180" step="1" value="' + S.touch.rotationDeg + '" aria-label="Rotation">' +
-      '<label class="krd-sp-field" for="krdSpTilt">Tilt <span id="krdSpTiltVal">0 deg</span></label>' +
-      '<input type="range" id="krdSpTilt" min="-80" max="80" step="1" value="' + S.touch.tiltDeg + '" aria-label="Tilt">' +
+      '<label class="krd-sp-field" for="krdSpTilt">Fan <span id="krdSpTiltVal">' + Math.round(S.touch.tiltDeg) + ' deg</span></label>' +
+      '<input type="range" id="krdSpTilt" min="-30" max="30" step="1" value="' + S.touch.tiltDeg + '" aria-label="Fan">' +
+      '<label class="krd-sp-field" for="krdSpRock">Rock <span id="krdSpRockVal">' + Math.round(S.touch.rockDeg) + ' deg</span></label>' +
+      '<input type="range" id="krdSpRock" min="-30" max="30" step="1" value="' + S.touch.rockDeg + '" aria-label="Rock">' +
+      '<div class="krd-sp-row krd-sp-depthrow"><span class="krd-sp-field krd-sp-depthlabel" id="krdSpDepthLabel">Depth <span id="krdSpDepthVal">' + (Math.round(S.touch.depthCm * 10) / 10) + ' cm</span></span>' +
+      '<button type="button" class="sp-btn sec krd-sp-step" data-spdepth="-1" aria-label="Depth down">Depth down</button>' +
+      '<button type="button" class="sp-btn sec krd-sp-step" data-spdepth="1" aria-label="Depth up">Depth up</button></div>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-recenter">Recenter</button>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-end">End session</button></div>');
     bindRootClose(closeAll);
     var d = doc();
-    function push() {
-      try { if (S.core.probePatch) S.core.probePatch({ rotationDeg: S.touch.rotationDeg, tiltDeg: S.touch.tiltDeg }); } catch (e) {}
+    var wasCentred = centredTouch();
+    function centredTouch() {
+      return Math.abs(S.touch.rotationDeg) < 2 && Math.abs(S.touch.tiltDeg) < 2 && Math.abs(S.touch.rockDeg) < 2;
     }
-    ["krdSpRot", "krdSpTilt"].forEach(function (id) {
+    function push() {
+      try { if (S.core.probePatch) S.core.probePatch({ rotationDeg: S.touch.rotationDeg, tiltDeg: S.touch.tiltDeg, rockDeg: S.touch.rockDeg, depthCm: S.touch.depthCm, slideX: S.touch.slideX, slideY: S.touch.slideY }); } catch (e) {}
+      /* Haptic tick on reaching the centred target pose. */
+      var nowCentred = centredTouch();
+      if (nowCentred && !wasCentred) spHaptic("selection");
+      wasCentred = nowCentred;
+    }
+    function bindRange(id, key) {
       var el = d.getElementById(id);
-      if (el) el.addEventListener("input", function () {
+      if (!el) return;
+      el.addEventListener("input", function () {
         var v = parseFloat(el.value) || 0;
-        if (id === "krdSpRot") S.touch.rotationDeg = v; else S.touch.tiltDeg = v;
+        S.touch[key] = v;
         var lbl = d.getElementById(id + "Val");
         if (lbl) lbl.textContent = Math.round(v) + " deg";
         push();
       });
-    });
+    }
+    bindRange("krdSpRot", "rotationDeg");
+    bindRange("krdSpTilt", "tiltDeg");
+    bindRange("krdSpRock", "rockDeg");
+    var pad = d.getElementById("krdSpPad");
+    if (pad) {
+      var padPointer = null;
+      function padMove(e) {
+        if (!pad.getBoundingClientRect) return;
+        var r = pad.getBoundingClientRect();
+        var nx = ((e.clientX - r.left) / (r.width || 1) - 0.5) * 2;
+        var ny = ((e.clientY - r.top) / (r.height || 1) - 0.5) * 2;
+        /* Slide range matches the probe slide clamp in millimetres. */
+        S.touch.slideX = Math.round(Math.max(-60, Math.min(60, nx * 60)) * 10) / 10;
+        S.touch.slideY = Math.round(Math.max(-60, Math.min(60, ny * 60)) * 10) / 10;
+        var dot = d.getElementById("krdSpPadDot");
+        if (dot) dot.style.transform = "translate(" + Math.round(nx * 52) + "px, " + Math.round(ny * 52) + "px)";
+        var sv = d.getElementById("krdSpSlideVal");
+        if (sv) sv.textContent = "Slide " + Math.round(S.touch.slideX) + ", " + Math.round(S.touch.slideY);
+        push();
+      }
+      pad.addEventListener("pointerdown", function (e) { padPointer = e.pointerId; try { pad.setPointerCapture(e.pointerId); } catch (x) {} padMove(e); });
+      pad.addEventListener("pointermove", function (e) { if (padPointer != null && e.pointerId !== padPointer) return; if (padPointer != null) padMove(e); });
+      function padEnd(e) { if (e.pointerId === padPointer) { padPointer = null; spHaptic("selection"); } }
+      pad.addEventListener("pointerup", padEnd);
+      pad.addEventListener("pointercancel", padEnd);
+    }
+    var stepBtns = root() ? root().querySelectorAll("[data-spdepth]") : [];
+    for (var si = 0; si < stepBtns.length; si++) {
+      (function (btn) {
+        btn.addEventListener("click", function () {
+          var dir = parseFloat(btn.getAttribute("data-spdepth")) || 0;
+          S.touch.depthCm = Math.round(Math.max(8, Math.min(30, S.touch.depthCm + dir)) * 10) / 10;
+          var lbl = d.getElementById("krdSpDepthVal");
+          if (lbl) lbl.textContent = (Math.round(S.touch.depthCm * 10) / 10) + " cm";
+          spHaptic("selection");
+          push();
+        });
+      })(stepBtns[si]);
+    }
   }
   function glyphSvg(tilt, rot) {
     return '<svg class="krd-sp-glyph" viewBox="0 0 64 96" role="img" aria-label="Probe">' +
@@ -790,6 +851,89 @@
     return null;
   }
 
+  /* ---------- Probe Lab driving (display side) ----------
+   * When this phone is the display and the Echo Lab is showing the Probe
+   * Lab frame, a paired probe phone drives that lab directly: rotation,
+   * fan, rock and depth set its own range inputs (input and change events,
+   * exactly as a user moving them), and slide moves its scene grip with a
+   * short synthetic pointer drag on #scene. Same origin, so the frame
+   * document is reachable; every step is guarded so a missing or loading
+   * frame is a plain no-op and the Scan Lab path is untouched. */
+  var probeLabSlide = { x: null, y: null };
+  function probeLabFrameDoc() {
+    var d = doc();
+    if (!d || !d.getElementById) return null;
+    var frame = d.getElementById("krdProbeFrame");
+    if (!frame) return null;
+    try {
+      return (frame.contentDocument || (frame.contentWindow && frame.contentWindow.document)) || null;
+    } catch (e) { return null; }
+  }
+  function setProbeLabRange(fdoc, id, value) {
+    if (!fdoc || !fdoc.getElementById || value == null || !isFinite(+value)) return false;
+    var el = fdoc.getElementById(id);
+    if (!el) return false;
+    var min = parseFloat(el.min), max = parseFloat(el.max), v = +value;
+    if (isFinite(min)) v = Math.max(min, v);
+    if (isFinite(max)) v = Math.min(max, v);
+    var next = String(v);
+    if (el.value === next) return true;
+    el.value = next;
+    var win = fdoc.defaultView || G;
+    var Evt = (win && win.Event) || (typeof Event !== "undefined" ? Event : null);
+    if (Evt) {
+      try { el.dispatchEvent(new Evt("input", { bubbles: true })); } catch (e) {}
+      try { el.dispatchEvent(new Evt("change", { bubbles: true })); } catch (e) {}
+    }
+    return true;
+  }
+  function driveProbeLabGrip(fdoc, pose) {
+    if (!fdoc || !fdoc.getElementById) return false;
+    var sx = pose.slideX != null ? +pose.slideX : null;
+    var sy = pose.slideY != null ? +pose.slideY : null;
+    if (sx == null || sy == null || !isFinite(sx) || !isFinite(sy)) return false;
+    if (probeLabSlide.x == null) { probeLabSlide.x = sx; probeLabSlide.y = sy; return true; }
+    var dx = sx - probeLabSlide.x, dy = sy - probeLabSlide.y;
+    probeLabSlide.x = sx; probeLabSlide.y = sy;
+    if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) return true;
+    var scene = fdoc.getElementById("scene");
+    if (!scene || !scene.dispatchEvent || !scene.getBoundingClientRect) return false;
+    var rect = scene.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2;
+    var scale = 2; /* px per mm of slide */
+    var win = fdoc.defaultView || G;
+    var PE = (win && win.PointerEvent) || (typeof PointerEvent !== "undefined" ? PointerEvent : null);
+    var ME = (win && win.MouseEvent) || (typeof MouseEvent !== "undefined" ? MouseEvent : null);
+    function fire(type, x, y) {
+      var evt = null;
+      try {
+        if (PE) evt = new PE(type, { bubbles: true, cancelable: true, pointerId: 7, pointerType: "touch", clientX: x, clientY: y, buttons: type === "pointerup" ? 0 : 1 });
+        else if (ME) evt = new ME(type.replace("pointer", "mouse"), { bubbles: true, cancelable: true, clientX: x, clientY: y, buttons: type === "pointerup" ? 0 : 1 });
+        else {
+          var Evt2 = (win && win.Event) || (typeof Event !== "undefined" ? Event : null);
+          if (Evt2) { evt = new Evt2(type, { bubbles: true, cancelable: true }); evt.clientX = x; evt.clientY = y; evt.pointerId = 7; }
+        }
+      } catch (e) { evt = null; }
+      if (evt) try { scene.dispatchEvent(evt); } catch (e2) {}
+    }
+    fire("pointerdown", cx, cy);
+    fire("pointermove", cx + dx * scale, cy + dy * scale);
+    fire("pointerup", cx + dx * scale, cy + dy * scale);
+    return true;
+  }
+  function driveProbeLab(pose) {
+    if (!pose) return false;
+    var fdoc = probeLabFrameDoc();
+    if (!fdoc) return false;
+    var any = false;
+    if (setProbeLabRange(fdoc, "rotation", pose.rotationDeg)) any = true;
+    if (setProbeLabRange(fdoc, "fan", pose.tiltDeg)) any = true;
+    if (setProbeLabRange(fdoc, "rock", pose.rockDeg)) any = true;
+    if (pose.depthCm != null && setProbeLabRange(fdoc, "depth", pose.depthCm)) any = true;
+    if (driveProbeLabGrip(fdoc, pose)) any = true;
+    return any;
+  }
+
   /* ---------- diagnostics ---------- */
   function openDetails() {
     S.detailsFrom = S.screen;
@@ -823,7 +967,15 @@
   /* ---------- core events and actions ---------- */
   function onCoreEvent(evt) {
     evt = evt || {};
-    if (evt.type === "pose") { S.probePose = evt.pose; refreshGlyph(); return; }
+    if (evt.type === "pose") {
+      S.probePose = evt.pose;
+      refreshGlyph();
+      /* Display side: a paired probe also drives the Probe Lab frame when
+       * it is on screen. The Scan Lab pose path runs in the core either
+       * way, so this only adds the frame drive. */
+      try { if (coreRole() === "display") driveProbeLab(evt.pose); } catch (e) {}
+      return;
+    }
     var name = sessionState();
     S.lastState = name;
     refreshChrome();
@@ -902,7 +1054,14 @@
   function ensureChromeSubscription() {
     if (!S.core) S.core = syncCore();
     if (S.core && !chromeUnsub && S.core.on) {
-      try { chromeUnsub = S.core.on(function (evt) { if (evt && evt.type === "pose") return; refreshChrome(); }); } catch (e) {}
+      try { chromeUnsub = S.core.on(function (evt) {
+        if (evt && evt.type === "pose") {
+          S.probePose = evt.pose;
+          try { if (coreRole() === "display") driveProbeLab(evt.pose); } catch (e) {}
+          return;
+        }
+        refreshChrome();
+      }); } catch (e) {}
     }
     if (!chromeTick && G.setInterval) {
       chromeTick = G.setInterval(function () { refreshChrome(); }, 1000);
@@ -989,6 +1148,7 @@
       return;
     }
     if (act === "sp-calibrate") {
+      spHaptic("selection");
       try { if (S.core.calibrate) S.core.calibrate(); } catch (e) {}
       S.probeStep = "active";
       renderProbeActive();
@@ -1086,7 +1246,8 @@
       qrEncode: qrEncode, qrDraw: qrDraw,
       buildPayload: buildPayload, parsePayload: parsePayload, isExpired: isExpired,
       stateLabel: stateLabel, transportName: transportName, signalBars: signalBars, mapReason: mapReason, friendlyReason: friendlyReason, openSignIn: openSignIn, normalizeCodeInput: normalizeCodeInput, formatCodeInput: formatCodeInput,
-      fmtLatency: fmtLatency, fmtExpiry: fmtExpiry, codeGroups: codeGroups
+      fmtLatency: fmtLatency, fmtExpiry: fmtExpiry, codeGroups: codeGroups,
+      driveProbeLab: driveProbeLab, setProbeLabRange: setProbeLabRange, driveProbeLabGrip: driveProbeLabGrip
     }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

@@ -112,7 +112,17 @@ export function timingSafeEqualTokens(a, b) {
   return diff === 0;
 }
 
-/* Parse Sec-WebSocket-Protocol: "kardia-sync, <Firebase ID token>, <roomToken>" */
+/* Anonymous relay identity (owner 2026-10-26): pairing is secured by the
+ * single use 6 character code, ECDH key agreement with the 4 digit match
+ * confirmation and HMAC signed poses, so a Firebase sign-in is not required
+ * to create or join a room. Signed-in rooms keep their uid binding; an
+ * anonymous room binds both roles to this one shared marker and the secret
+ * room token (43 random characters) stays the capability. */
+export const ANON_UID = "anon";
+export const ANON_PROTOCOL_TOKEN = "kardia-anon";
+
+/* Parse Sec-WebSocket-Protocol: "kardia-sync, <Firebase ID token or
+ * kardia-anon>, <roomToken>" */
 export function parseProtocol(h) {
   if (!h || typeof h !== "string") return null;
   const parts = h.split(",").map((s) => s.trim());
@@ -120,11 +130,12 @@ export function parseProtocol(h) {
   if (parts[0] !== "kardia-sync") return null;
   const token = parts[1];
   const roomToken = parts[2];
+  const anonymous = token === ANON_PROTOCOL_TOKEN;
   // Firebase ID token is a 3-part compact JWT
-  if (!/^[\w-]+\.[\w-]+\.[\w-]+$/.test(token)) return null;
+  if (!anonymous && !/^[\w-]+\.[\w-]+\.[\w-]+$/.test(token)) return null;
   // roomToken is random 32 bytes base64url (43 chars, safe range 32-64 chars)
   if (!/^[A-Za-z0-9_-]{32,64}$/.test(roomToken)) return null;
-  return { protocol: "kardia-sync", token, roomToken };
+  return { protocol: "kardia-sync", token, roomToken, anonymous };
 }
 
 /* Base64url encode a byte array without padding */
@@ -653,13 +664,18 @@ export class LookupRateLimiter {
  * display uid and never any session payload. */
 export function handleCodeLookup({ code, uid, ip, now = Date.now() } = {}, deps = {}) {
   const t = now == null ? Date.now() : now;
-  if (!uid || typeof uid !== "string") {
+  /* No sign-in needed: a signed-in caller is limited per user and per IP;
+   * an anonymous caller is limited per IP alone (the uid bucket is keyed
+   * by that same IP, so the strict limit still applies). Only a caller
+   * with neither identity nor IP is refused. */
+  const effectiveUid = typeof uid === "string" && uid ? uid : (ip ? ANON_UID + ":" + ip : null);
+  if (!effectiveUid) {
     return { status: 401, body: { error: "sign-in required" } };
   }
   const directory = deps.directory;
   const limiter = deps.limiter;
   if (limiter) {
-    const lim = limiter.checkLookup({ uid, ip: ip || "unknown", now: t });
+    const lim = limiter.checkLookup({ uid: effectiveUid, ip: ip || "unknown", now: t });
     if (!lim.ok) {
       return { status: 429, body: { error: "rate-limited", retryAfterMs: lim.retryAfterMs } };
     }
@@ -683,4 +699,63 @@ export function handleCodeLookup({ code, uid, ip, now = Date.now() } = {}, deps 
       expiresAt: e.expiresAt,
     },
   };
+}
+
+/* ---------- Per-IP session creation limit ----------
+ * Anonymous session creation is open, so it is strictly limited per IP:
+ * at most SESSION_CREATE_MAX rooms per SESSION_CREATE_WINDOW_MS. Every
+ * attempt that reaches the check consumes quota, signed in or not. */
+export const SESSION_CREATE_MAX = 5;
+export const SESSION_CREATE_WINDOW_MS = 10 * 60 * 1000;
+
+export class IpRateLimiter {
+  constructor(buckets) {
+    this.buckets = buckets instanceof Map ? buckets : new Map();
+  }
+
+  static fromJSON(json) {
+    const lim = new IpRateLimiter();
+    if (json && Array.isArray(json.buckets)) {
+      for (const [key, stamps] of json.buckets) {
+        if (typeof key === "string" && Array.isArray(stamps)) {
+          lim.buckets.set(key, stamps.filter((t) => typeof t === "number"));
+        }
+      }
+    }
+    return lim;
+  }
+
+  toJSON(now = Date.now(), windowMs = SESSION_CREATE_WINDOW_MS) {
+    const t = now == null ? Date.now() : now;
+    const buckets = [];
+    for (const [key, stamps] of this.buckets) {
+      const fresh = stamps.filter((s) => t - s < windowMs);
+      if (fresh.length) buckets.push([key, fresh]);
+    }
+    return { buckets };
+  }
+
+  check({ key, now = Date.now(), max = SESSION_CREATE_MAX, windowMs = SESSION_CREATE_WINDOW_MS }) {
+    const t = now == null ? Date.now() : now;
+    const history = (this.buckets.get(key) || []).filter((s) => t - s < windowMs);
+    if (history.length >= max) {
+      this.buckets.set(key, history);
+      return { ok: false, retryAfterMs: Math.max(0, windowMs - (t - history[0])) };
+    }
+    history.push(t);
+    this.buckets.set(key, history);
+    return { ok: true };
+  }
+}
+
+/* Pure session creation decision shared by the Worker route and tests. */
+export function handleSessionCreate({ ip, now = Date.now() } = {}, deps = {}) {
+  const t = now == null ? Date.now() : now;
+  if (deps.limiter) {
+    const lim = deps.limiter.check({ key: "ip:" + (ip || "unknown"), now: t });
+    if (!lim.ok) {
+      return { status: 429, body: { error: "rate-limited", retryAfterMs: lim.retryAfterMs } };
+    }
+  }
+  return { status: 200, body: { ok: true } };
 }
