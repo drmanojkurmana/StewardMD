@@ -185,6 +185,12 @@
   transition: transform 100ms var(--kd-ease);
 }
 .krd-sp-pad-label { font-size: 14px; font-weight: 650; pointer-events: none; }
+/* Motion mode: big probe on a chest pad; drag it to move the probe. */
+.krd-sp-pad-big { min-height: 300px; margin-top: 8px; overflow: hidden; }
+.krd-sp-pad-hint { position: absolute; top: 10px; left: 14px; font-size: 13px; }
+.krd-sp-pad-probe { position: absolute; width: 104px; height: 152px; pointer-events: none; transition: transform 90ms var(--kd-ease); }
+.krd-sp-pad-probe .krd-sp-glyph { width: 104px; height: 152px; }
+@media (prefers-reduced-motion: reduce) { .krd-sp-pad-probe { transition: none; } }
 .krd-sp-depthrow { align-items: center; }
 .krd-sp-depthlabel { flex: 1 1 auto; margin: 0; }
 .krd-sp-step { min-width: 48px; min-height: 48px; flex: 0 0 auto; touch-action: manipulation; }

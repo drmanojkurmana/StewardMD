@@ -394,3 +394,17 @@ test("probe resends HELLO when the link comes up after join resolves (Bluetooth 
   await sleep(30);
   assert.ok(sends - before <= 0 || display.state !== "pairing", "HELLO is not resent once delivered");
 });
+
+test("probe sender: thumb pad slide moves the probe position while motion sets the angles", () => {
+  const sent = [];
+  const sender = SYNC.createProbeSender({ probeLib: PROBE, env: {}, sendPose: (p) => sent.push(p) });
+  const pose = sender.setSlide(12, -20);
+  assert.equal(sent.length, 1, "a slide sends at once, even with the phone still");
+  assert.equal(pose.slideXmm, 12);
+  assert.equal(pose.slideYmm, -20);
+  sender.handleOrientation({ alpha: 0, beta: 0, gamma: 0 }, 16);
+  sender.handleOrientation({ alpha: 30, beta: 20, gamma: 5 }, 16);
+  const last = sent[sent.length - 1];
+  assert.equal(last.slideXmm, 12, "later motion poses keep the slide");
+  assert.equal(last.slideYmm, -20);
+});

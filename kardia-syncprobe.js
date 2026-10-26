@@ -475,6 +475,7 @@
   }
   function renderProbeIntro() {
     S.motionChosen = false;
+    S.motionSlide = null;
     showSheet("Use this phone as a probe",
       '<p class="sp-small">Connect to the display phone. Nearby displays connect with one tap, with no typing.</p>' +
       nearbyHtml() +
@@ -619,7 +620,8 @@
       '<p class="sp-small" id="krdSpStateSub">' + esc(sub) + "</p>" +
       (joined ? "" : joinBoxHtml()) +
       (joined && !S.motionChosen ? '<div class="krd-sp-note" role="group" aria-label="Probe controls"><p><b>Move the probe.</b> Allow motion to tilt this phone, or use touch controls.</p><div class="krd-sp-col"><button type="button" class="sp-btn pri sp-wide" data-act="sp-motion">Allow motion</button><button type="button" class="sp-btn sec sp-wide" data-act="sp-touch">Use touch controls instead</button></div></div>' : "") +
-      '<div class="krd-sp-glyphwrap" id="krdSpGlyph" aria-label="Probe orientation">' + glyphSvg(0, 0) + "</div>" +
+      (joined && S.controlMode === "motion" ? motionSlidePadHtml() :
+        '<div class="krd-sp-glyphwrap" id="krdSpGlyph" aria-label="Probe orientation">' + glyphSvg(0, 0) + "</div>") +
       '<p class="sp-small krd-sp-posedesc" id="krdSpPoseDesc"></p>' +
       '<div id="krdSpConfirmP"></div>' +
       '<div class="krd-sp-col">' +
@@ -629,9 +631,42 @@
       '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-details">Connection details</button></p>');
     bindRootClose(closeAll);
     bindCodeInput();
+    if (joined && S.controlMode === "motion") bindMotionSlidePad();
     if (!joined && !scannerAvailable()) focusCode();
     renderProbeConfirm();
     refreshGlyph();
+  }
+  /* Motion mode: tilting and turning the phone sets the angles; this pad
+   * moves the probe to another spot on the chest (up, down, across). */
+  function motionSlidePadHtml() {
+    var m = S.motionSlide || { x: 0, y: 0 }, p = S.probePose || {};
+    return '<p class="sp-small"><b>Drag the probe</b> to move it on the chest. Tilt and turn the phone for the angle.</p>' +
+      '<div class="krd-sp-pad krd-sp-pad-big" id="krdSpPad" role="application" aria-label="Probe pad. Drag the probe to move it on the chest." tabindex="0">' +
+      '<span class="krd-sp-pad-label krd-sp-pad-hint">Chest</span>' +
+      '<span class="krd-sp-pad-probe" id="krdSpPadDot" aria-hidden="true" style="transform:translate(' + Math.round(m.x / 60 * 120) + "px, " + Math.round(m.y / 60 * 90) + 'px)">' +
+      '<span id="krdSpGlyph">' + glyphSvg(p.tiltDeg || 0, p.rotationDeg || 0) + "</span></span></div>";
+  }
+  function bindMotionSlidePad() {
+    var d = doc(), pad = d && d.getElementById("krdSpPad");
+    if (!pad) return;
+    var padPointer = null;
+    function padMove(e) {
+      if (!pad.getBoundingClientRect) return;
+      var r = pad.getBoundingClientRect();
+      var nx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / (r.width || 1) - 0.5) * 2));
+      var ny = Math.max(-1, Math.min(1, ((e.clientY - r.top) / (r.height || 1) - 0.5) * 2));
+      S.motionSlide = { x: Math.round(nx * 600) / 10, y: Math.round(ny * 600) / 10 };
+      var dot = d.getElementById("krdSpPadDot");
+      /* Keep the whole probe drawing inside the pad. */
+      var hx = Math.max(0, (r.width || 0) / 2 - 52), hy = Math.max(0, (r.height || 0) / 2 - 76);
+      if (dot) dot.style.transform = "translate(" + Math.round(nx * hx) + "px, " + Math.round(ny * hy) + "px)";
+      try { if (S.core.probeSlide) S.core.probeSlide(S.motionSlide.x, S.motionSlide.y); } catch (x) {}
+    }
+    pad.addEventListener("pointerdown", function (e) { padPointer = e.pointerId; try { pad.setPointerCapture(e.pointerId); } catch (x) {} padMove(e); });
+    pad.addEventListener("pointermove", function (e) { if (padPointer != null && e.pointerId === padPointer) padMove(e); });
+    function padEnd(e) { if (e.pointerId === padPointer) { padPointer = null; spHaptic("selection"); } }
+    pad.addEventListener("pointerup", padEnd);
+    pad.addEventListener("pointercancel", padEnd);
   }
   function renderProbeConfirm() {
     var session = null;
