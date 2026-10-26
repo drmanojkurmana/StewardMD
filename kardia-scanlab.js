@@ -528,6 +528,15 @@
       '</section></div>';
 
     function el(id) { return doc.getElementById(id); }
+    /* The tutorial lives over the scene, not in the column flow, so its
+     * text can never take height away from the stage. */
+    try { var tutBox0 = el("kslTutorial"), stage0 = el("kslStage"); if (tutBox0 && stage0 && stage0.appendChild) stage0.appendChild(tutBox0); } catch (e) {}
+    /* The found view result sits over the monitor, not in the scene
+     * column flow, so scoring a view never shrinks the stage. */
+    try { var res0 = el("kslResult"), monWrap0 = el("kslMonitorWrap"); if (res0 && monWrap0 && monWrap0.appendChild) monWrap0.appendChild(res0); } catch (e) {}
+    /* Same for the offline and empty clip note: over the monitor, so it
+     * never takes height from the sector. */
+    try { var note0 = el("kslClipNote"), monWrap1 = el("kslMonitorWrap"); if (note0 && monWrap1 && monWrap1.appendChild) monWrap1.appendChild(note0); } catch (e) {}
     function setText(id, txt) { var n = el(id); if (n) n.textContent = txt; }
     var sceneCanvas = el("kslScene"), monCanvas = el("kslMonitor"), video = el("kslReal");
 
@@ -886,6 +895,10 @@
       if (lowPower && now - lastUsAt < 33) return;
       lastUsAt = now;
       try {
+        /* The monitor canvas fills its wrap by layout; keep its drawing
+         * buffer at that size or the sector is stretched to fit. */
+        var mw = monCanvas.clientWidth || 0, mh = monCanvas.clientHeight || 0;
+        if (mw > 0 && mh > 0 && (monCanvas.width !== mw || monCanvas.height !== mh)) { monCanvas.width = mw; monCanvas.height = mh; }
         if (ownHeart && heartInst && heartInst.step) heartInst.step(16);
         if (ownGeom && geomInst && heartInst) geomInst.update(heartInst.state());
         rendererUs.setKnobs({ depth: pose.depthCm * 10, showEcg: true, gain: 8, focusMm: 70 });
@@ -1010,6 +1023,8 @@
       setText("kslFan", Math.round(pose.fanDeg) + " deg"); setText("kslFanRange", "target " + view.fanDeg + " plus or minus " + view.tolerance.fanDeg);
       setText("kslRock", Math.round(pose.rockDeg) + " deg"); setText("kslRockRange", "target " + view.rockDeg + " plus or minus " + view.tolerance.rockDeg);
       setText("kslDepth", pose.depthCm + " cm"); setText("kslDepthRange", "target " + view.depthCm + " plus or minus " + view.tolerance.depthCm);
+      var drSync = el("kslDepthRange"); if (drSync && +drSync.value !== pose.depthCm) drSync.value = pose.depthCm;
+      setText("kslDepthVal", pose.depthCm + " cm");
       if (inTol && !wasIn) { holdSince = now; haptic("LIGHT"); }
       if (inTol && now - holdSince > 500 && !attemptDone) {
         attemptDone = true;
@@ -1053,6 +1068,16 @@
       }
       var plane = scene3 ? updateProbeTransforms() : currentPlane();
       if (renderer && scene3 && camera) {
+        /* The canvas is sized by layout (flex basis 0), so its client size
+         * is only known after the first layout pass and changes with the
+         * viewport. Keep the drawing buffer matched to it, or the scene
+         * renders at the size the stage had when the scene was built. */
+        var cw = sceneCanvas.clientWidth || 0, ch = sceneCanvas.clientHeight || 0;
+        if (cw > 0 && ch > 0 && (debug.canvasW !== cw || debug.canvasH !== ch)) {
+          debug.canvasW = cw; debug.canvasH = ch;
+          try { renderer.setSize(cw, ch, false); } catch (e) {}
+          try { camera.aspect = cw / ch; if (camera.updateProjectionMatrix) camera.updateProjectionMatrix(); } catch (e) {}
+        }
         var cx = Math.sin(orbit.yaw) * Math.cos(orbit.pitch) * orbit.dist;
         var cz = Math.cos(orbit.yaw) * Math.cos(orbit.pitch) * orbit.dist;
         var cy = Math.sin(orbit.pitch) * orbit.dist;
