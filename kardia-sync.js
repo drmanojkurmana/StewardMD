@@ -798,8 +798,11 @@
             var handlers = node._handlers();
             var hello = { type: TYPES.HELLO, seq: nextSeq(), tMs: monoMs(), sessionTag: sessionTag, probePub: keys.publicKeyBytes, nonce: randomBytes(12) };
             var helloBytes = encodeFrame(hello, null);
+            node._lastHelloBytes = helloBytes; node._helloSent = false;
             if (transport) {
-              return Promise.resolve(transport.join(parsed, handlers)).then(function () { sendBytes(helloBytes); return node; });
+              /* Bluetooth join resolves when the scan starts, before the link
+               * is up, so this first send can fail; onPeerConnected resends. */
+              return Promise.resolve(transport.join(parsed, handlers)).then(function () { if (!node._helloSent) node._helloSent = sendBytes(helloBytes); return node; });
             }
             node._lastHelloBytes = helloBytes;
             return node;
@@ -809,7 +812,16 @@
       _handlers: function () {
         return {
           onBytes: function (b) { node.handleBytes(b); },
-          onPeerConnected: function () {},
+          onPeerConnected: function () {
+            /* Resend HELLO once the link is up. A fresh Bluetooth link can still
+             * be negotiating its packet size, so retry briefly if refused. */
+            var tries = 0;
+            (function trySend() {
+              if (role !== "probe" || !node._lastHelloBytes || node._helloSent || state !== "pairing") return;
+              node._helloSent = sendBytes(node._lastHelloBytes);
+              if (!node._helloSent && ++tries < 8 && typeof setTimeout !== "undefined") setTimeout(trySend, 400);
+            })();
+          },
           onPeerLost: function (reason) { node.handlePeerLost(reason); },
           onError: function () { node.handlePeerLost("transport-error"); }
         };
@@ -1005,6 +1017,9 @@
     var onError = opts.onError || function () {};
     var probe = opts.probe || null, listening = false, handler = null, lastTs = 0, calibrateAtt = null;
     var lastPose = null, lastPoseState = null, lastMoveAt = 0, resendTimer = null;
+    /* Slide along the skin comes from the thumb pad (setSlide): phone motion
+     * sensors give angles, not a reliable position on the chest. */
+    var slide = null;
     function ensureProbe() { if (!probe && probeLib) probe = probeLib.create({}); return probe; }
     function handleOrientation(attitude, dtMs) {
       var p = ensureProbe(); if (!p) return null;
@@ -1023,7 +1038,7 @@
         if (dz < 1.5) return lastPose;
       }
       var q = quatFromEuler(st.tiltDeg || 0, st.rotationDeg || 0, st.rockDeg || 0);
-      var pose = { quat: q, touch: 0, window: st.window, slideXmm: st.position ? st.position.x : 0, slideYmm: st.position ? st.position.y : 0, flags: { calibrated: true } };
+      var pose = { quat: q, touch: 0, window: st.window, slideXmm: slide ? slide.x : (st.position ? st.position.x : 0), slideYmm: slide ? slide.y : (st.position ? st.position.y : 0), flags: { calibrated: true } };
       pose.probeState = st;
       lastPose = pose; lastPoseState = st; lastMoveAt = nowDefault();
       sendPose(pose, st);
@@ -1046,6 +1061,17 @@
     var sender = {
       get listening() { return listening; },
       get probe() { return probe; },
+      setSlide: function (x, y) {
+        slide = { x: +x || 0, y: +y || 0 };
+        var p = ensureProbe(), win = "parasternal";
+        try { if (p && p.getState) win = p.getState().window || win; } catch (e) {}
+        var base = lastPose || { quat: quatFromEuler(0, 0, 0), touch: 0, window: win, flags: { calibrated: true } };
+        var pose = { quat: base.quat, touch: 0, window: base.window, slideXmm: slide.x, slideYmm: slide.y, flags: base.flags || { calibrated: true } };
+        pose.probeState = base.probeState;
+        lastPose = pose; lastMoveAt = nowDefault();
+        sendPose(pose, lastPoseState);
+        return pose;
+      },
       handleOrientation: handleOrientation,
       calibrate: function (attitude) { calibrateAtt = null; var p = ensureProbe(); if (p && attitude) { p.calibrateGyro(attitude); calibrateAtt = { alpha: attitude.alpha || 0, beta: attitude.beta || 0, gamma: attitude.gamma || 0 }; } return sender; },
       /* Call ONLY from the learner tap on Use This Device as Probe. */
@@ -1487,6 +1513,20 @@
       if (F.role === "display" && F.node) { if (F.paused) { try { F.node.freeze("paused"); } catch (e) {} } else if (F.node.frozen) { try { F.node.resume(); } catch (e) {} } }
       return true;
     },
+    /* Probe phone in motion mode: imaging depth in cm (8 to 30), sent as a
+     * depth control only, so it never overrides the motion angles. */
+    probeDepth: function (cm) {
+      var v = Math.min(30, Math.max(8, +cm || 18));
+      F.touchState.depthCm = v;
+      if (F.node && F.role === "probe" && facadeStateName() === "connected") { try { F.node.sendControl(CONTROLS.DEPTH, Math.round(v * 10)); } catch (e) {} }
+      return v;
+    },
+    /* Probe phone in motion mode: thumb pad slide in millimetres. */
+    probeSlide: function (x, y) {
+      if (!F.sender || typeof F.sender.setSlide !== "function") return false;
+      F.sender.setSlide(x, y);
+      return true;
+    },
     probePatch: function (patch) {
       var depthChanged = false;
       if (patch) {
@@ -1570,7 +1610,7 @@
     createBroadcastLoopbackTransport: createBroadcastLoopbackTransport,
     on: facade.on, state: facade.state, startDisplay: facade.startDisplay, joinProbe: facade.joinProbe, discoverNearby: facade.discoverNearby, joinNearby: facade.joinNearby, refreshDisplay: facade.refreshDisplay, transportErrors: facade.transportErrors,
     confirm: facade.confirm, disconnect: facade.disconnect, reconnect: facade.reconnect, recenter: facade.recenter,
-    setPaused: facade.setPaused, calibrate: facade.calibrate, probePatch: facade.probePatch,
+    setPaused: facade.setPaused, calibrate: facade.calibrate, probePatch: facade.probePatch, probeSlide: facade.probeSlide, probeDepth: facade.probeDepth,
     renderLatest: facadeRenderLatest,
     stats: facade.stats, transports: facade.transports, activeTransport: facade.activeTransport,
     session: facade.session, lastError: facade.lastError,

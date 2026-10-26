@@ -227,9 +227,9 @@
   }
   function probeLabHtml() {
     return '<div class="krd-probe-wrap">' +
-      '<div class="krd-probe-bar"><button type="button" class="sp-btn sec krd-probe-syncbtn" data-act="kecho-syncprobe" aria-label="' + I.tx(T("SyncProbe", "SyncProbe")) + '">' +
-      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18.2" r="1.1" fill="currentColor"/></svg>' +
-      I.tx(T("SyncProbe", "SyncProbe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
+      /* SyncProbe lives in the header beside the language button (mountProbeLab);
+       * this row only shows the live link pill while a probe is paired. */
+      '<div class="krd-probe-bar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<p class="sp-small krd-probe-status" id="krdProbeStatus" role="status">' + I.tx(T("Loading Probe Lab.", "Loading Probe Lab.")) + "</p>" +
       '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
       I.tx(T("Probe Lab did not load. Try again.", "Probe Lab did not load. Try again.")) +
@@ -267,17 +267,41 @@
     function fit() {
       if (!frame.isConnected) { G.removeEventListener("resize", fit); return; }
       var vv = G.visualViewport, vh = vv ? vv.height : G.innerHeight;
-      var r = frame.getBoundingClientRect(), sc = frame.closest ? frame.closest(".krd-root") : null;
+      var r = frame.getBoundingClientRect(), sc = frame.closest ? (frame.closest(".krd-echo-scroll") || frame.closest(".krd-root")) : null;
+      /* Measure from the unscrolled position so the halves stay steady while the column scrolls. */
       var top = r.top + (sc && sc.scrollTop ? sc.scrollTop : 0);
       var h = Math.max(360, Math.floor(vh - top - 8));
+      /* Phone: show the whole Probe Lab at full size and let this page
+       * scroll it; scrolling inside a frame is unreliable on iOS. */
+      if ((G.innerWidth || 0) < 700) {
+        try {
+          var fd = frame.contentDocument, lab = fd && fd.querySelector ? fd.querySelector(".lab") : null;
+          if (fd && fd.documentElement) fd.documentElement.style.setProperty("--kav", h + "px");
+          var ch = lab ? Math.ceil(lab.getBoundingClientRect().height) : 0;
+          if (ch > 200) h = ch;
+          if (lab && !frame._krdRo && G.ResizeObserver) { frame._krdRo = new G.ResizeObserver(function () { fit(); }); frame._krdRo.observe(lab); }
+        } catch (e) {}
+      }
       frame.style.height = h + "px";
     }
-    fit(); G.setTimeout(fit, 300); G.setTimeout(fit, 1200);
+    fit(); G.setTimeout(fit, 300); G.setTimeout(fit, 1200); G.setTimeout(fit, 3000);
+    if (frame.addEventListener) frame.addEventListener("load", function () { fit(); G.setTimeout(fit, 800); });
     G.addEventListener("resize", fit);
     if (G.visualViewport) G.visualViewport.addEventListener("resize", fit);
   }
+  function mountHeaderSyncProbe(doc) {
+    var top = doc.querySelector ? doc.querySelector(".krd-root .sp-top") : null;
+    if (!top || top.querySelector(".krd-top-sync")) return;
+    var lang = top.querySelector(".sp-lang");
+    var b = doc.createElement("button");
+    b.type = "button"; b.className = "krd-top-sync"; b.setAttribute("data-act", "kecho-syncprobe");
+    b.setAttribute("aria-label", T("SyncProbe", "SyncProbe"));
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18.2" r="1.1" fill="currentColor"/></svg><span>' + I.tx(T("SyncProbe", "SyncProbe")) + "</span>";
+    if (lang && lang.parentNode === top) top.insertBefore(b, lang); else top.appendChild(b);
+  }
   function mountProbeLab() {
     var doc = G.document; if (!doc || !doc.getElementById) return;
+    mountHeaderSyncProbe(doc);
     var frame = doc.getElementById("krdProbeFrame"); if (!frame) return;
     var status = doc.getElementById("krdProbeStatus"), err = doc.getElementById("krdProbeErr");
     function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); }

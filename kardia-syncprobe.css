@@ -185,6 +185,12 @@
   transition: transform 100ms var(--kd-ease);
 }
 .krd-sp-pad-label { font-size: 14px; font-weight: 650; pointer-events: none; }
+/* Motion mode: big probe on a chest pad; drag it to move the probe. */
+.krd-sp-pad-big { min-height: 300px; margin-top: 8px; overflow: hidden; }
+.krd-sp-pad-hint { position: absolute; top: 10px; left: 14px; font-size: 13px; }
+.krd-sp-pad-probe { position: absolute; width: 104px; height: 152px; pointer-events: none; transition: transform 90ms var(--kd-ease); }
+.krd-sp-pad-probe .krd-sp-glyph { width: 104px; height: 152px; }
+@media (prefers-reduced-motion: reduce) { .krd-sp-pad-probe { transition: none; } }
 .krd-sp-depthrow { align-items: center; }
 .krd-sp-depthlabel { flex: 1 1 auto; margin: 0; }
 .krd-sp-step { min-width: 48px; min-height: 48px; flex: 0 0 auto; touch-action: manipulation; }
@@ -202,3 +208,33 @@
   .krd-sp-sheet .sp-btn { transition: none; }
   .krd-sp-sheet .sp-btn:active { transform: none; }
 }
+
+/* Live probe view (probe phone, motion mode): fills the screen. */
+.krd-sp-sheet.krd-sp-sheet-live { top: env(safe-area-inset-top, 0px); max-height: none; display: flex; flex-direction: column; gap: 10px; border-radius: 16px 16px 0 0; }
+.krd-sp-sheet-live .sp-h2 { margin: 0; }
+.krd-sp-sheet-live .krd-sp-statusrow { flex-wrap: wrap; column-gap: 8px; }
+.krd-sp-live-sub { margin: 0; }
+.krd-sp-chest {
+  position: relative; flex: 1 1 auto; min-height: 260px; display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--sp-line); border-radius: 20px; background: var(--sp-s1); overflow: hidden;
+  touch-action: none; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent;
+}
+.krd-sp-chest:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-sp-chest-map { position: absolute; inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); pointer-events: none; }
+.krd-sp-chest-sternum { stroke: var(--sp-line); stroke-width: 6; stroke-linecap: round; fill: none; }
+.krd-sp-chest-rib { stroke: var(--sp-line); stroke-width: 3; stroke-linecap: round; fill: none; opacity: 0.8; }
+.krd-sp-live-probe { width: 128px; height: 176px; }
+.krd-sp-probe { width: 128px; height: 176px; overflow: visible; }
+.krd-sp-probe g { transition: transform 90ms var(--kd-ease); transform-box: view-box; transform-origin: 0 0; }
+.krd-sp-probe-contact { fill: #000; opacity: 0.28; }
+.krd-sp-probe-face { fill: var(--sp-s2); stroke: var(--sp-acc); stroke-width: 2; }
+.krd-sp-probe-lens { fill: var(--sp-acc); opacity: 0.55; }
+.krd-sp-probe-collar { fill: var(--sp-s2); stroke: var(--sp-line); stroke-width: 2; }
+.krd-sp-probe-grip { fill: var(--kd-text); opacity: 0.92; }
+.krd-sp-probe-cable { fill: var(--sp-mut); }
+.krd-sp-probe-marker { fill: var(--sp-acc); stroke: var(--kd-bg); stroke-width: 2; }
+.krd-sp-live-row { display: flex; align-items: center; gap: 10px; }
+.krd-sp-live-row .krd-sp-live-btn { flex: 1 1 0; min-height: 56px; }
+.krd-sp-live-depth { min-width: 64px; text-align: center; font-size: 17px; font-weight: 650; color: var(--kd-text); font-variant-numeric: tabular-nums; }
+.krd-sp-sheet-live .krd-sp-link { margin: 0; text-align: center; display: flex; justify-content: center; gap: 24px; }
+@media (prefers-reduced-motion: reduce) { .krd-sp-probe g { transition: none; } }

@@ -121,7 +121,8 @@ test("Echo Lab bar and touch probe contract in source", async () => {
   assert.ok(kardia.includes('class="krd-probe-bar"'), "bar sits above the frame");
   assert.ok(kardia.includes('id="krdSyncPill"'), "connection pill on the bar");
   const kardiaCss = readFileSync("kardia.css", "utf8");
-  assert.match(kardiaCss, /\.krd-probe-syncbtn \{[^}]*min-height: 48px/, "button is at least 44pt");
+  assert.match(kardiaCss, /\.krd-top-sync \{[^}]*min-height: 44px/, "header SyncProbe button is at least 44pt");
+  assert.ok(kardia.includes('className = "krd-top-sync"') && kardia.includes('"data-act", "kecho-syncprobe"'), "SyncProbe sits in the header beside the language button");
   const ui = readFileSync("kardia-syncprobe.js", "utf8");
   assert.ok(ui.includes("marker towards the patient"), "Calibrate step wording");
   assert.ok(ui.includes("tap Calibrate"), "Calibrate step action");
@@ -130,4 +131,21 @@ test("Echo Lab bar and touch probe contract in source", async () => {
   assert.ok(ui.includes("data-spdepth"), "depth buttons");
   assert.ok(!ui.includes("Sign in to pair"), "no sign-in block on the relay path");
   assert.ok(!/[—–]/.test(ui), "no em or en dashes in app text");
+});
+
+test("display enters Probe Lab Practice before driving it (sliders are ignored outside Practice)", () => {
+  const fake = fakeProbeLabDoc();
+  let clicks = 0;
+  const leave = { hidden: true };
+  const practice = { disabled: false, click() { clicks++; leave.hidden = false; } };
+  const get = fake.doc.getElementById;
+  fake.doc.getElementById = (id) => (id === "practice" ? practice : id === "leave-practice" ? leave : get(id));
+  const prevDoc = globalThis.document;
+  globalThis.document = { getElementById: (id) => (id === "krdProbeFrame" ? { contentDocument: fake.doc } : null) };
+  try {
+    SP.driveProbeLab({ rotationDeg: 20, tiltDeg: 5, rockDeg: 0 });
+    SP.driveProbeLab({ rotationDeg: 25, tiltDeg: 5, rockDeg: 0 });
+    assert.equal(clicks, 1, "Practice entered once, not on every pose");
+    assert.equal(fake.ranges.rotation.value, "25");
+  } finally { globalThis.document = prevDoc; }
 });

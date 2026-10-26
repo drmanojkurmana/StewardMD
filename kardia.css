@@ -238,3 +238,18 @@ body:not(.dark):not(.v3-dark) .krd-root {
  * Devanagari for Hindi. Math symbols keep a math font. */
 .krd-root, .krd-root *, .krd-sp, .krd-sp * { font-family: 'Inter Variable', 'Noto Sans Devanagari', -apple-system, system-ui, sans-serif !important; }
 .krd-root math, .krd-root .krd-math { font-family: 'STIX Two Math', 'Cambria Math', math !important; }
+
+/* SyncProbe button in the header, beside the language button. */
+.krd-root .sp-top .krd-top-sync { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 14px; margin-right: 8px; border: 1px solid var(--sp-line, rgba(255,255,255,.14)); border-radius: 999px; background: transparent; color: inherit; font-size: 15px; font-weight: 650; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.krd-root .sp-top .krd-top-sync:active { transform: scale(0.97); }
+.krd-root .krd-probe-bar:has(.krd-syncpill:empty) { display: none; }
+/* Phone: the Probe Lab frame is full height; this column scrolls it. */
+@media (max-width: 699px) {
+  .krd-root .krd-echo-col, .krd-root .krd-probe-wrap { flex: 0 0 auto; height: auto; min-height: 0; }
+  /* iOS paints a white strip down the frame's right edge; the frame is
+   * 40px wider than its box and the box clips it (the Probe Lab pads its
+   * right side by the same 40px, kardia-unbrand.js). */
+  .krd-root .krd-probe-wrap { overflow: hidden; }
+  .krd-root .krd-probe-frame { flex: 0 0 auto; min-height: 0; width: calc(100% + 40px); max-width: none; border-radius: 0; background: transparent; }
+  .krd-root .krd-echo-scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+}
