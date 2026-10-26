@@ -1,5 +1,5 @@
 /* Kardia: the Echo and ECG learning module, a StewardMD specialty host on the specialty engine
-   (specialty-*.js). Tabs: Echo Lab, Learn, Practice, Cases, KardiQ X. Echo Lab, Practice and Cases are
+   (specialty-*.js). Tabs: Echo Lab, Angio Lab, Learn, Practice, Cases, KardiQ X. Echo Lab, Practice and Cases are
    coming soon (WP8: honest placeholder panels, no fake content). Learn opens the existing Learn ECG
    lesson atlas in place, unchanged (KARDIOX.openLearn). KardiQ X opens the existing AI reading screen,
    still behind SMD_XACCESS.gate("kardiox"), untouched.
@@ -19,7 +19,7 @@
   var FREE_LESSONS = 5;
   var FREE_ECHO_PER_AREA = 3;
   var FREE_BANK_QUESTIONS = 20;
-  var TABS = ["echo", "learn", "practice", "cases", "calc", "kardiox"];
+  var TABS = ["echo", "angio", "learn", "practice", "cases", "calc", "kardiox"];
   var LEVELS = ["mbbs", "resident", "fellow", "sonographer"];
 
   function T(en, hi) { return { en: en, hi: hi }; }
@@ -33,11 +33,12 @@
     return (r < 0 ? "minus " + a : "" + a) + " " + (a === 1 ? "degree" : "degrees");
   }
   var TAB_T = {
-    echo: T("Echo Lab", "इको लैब"), learn: T("Learn", "सीखें"), practice: T("Practice", "अभ्यास"),
+    echo: T("Echo Lab", "इको लैब"), angio: T("AngioLAB", "AngioLAB"), learn: T("Learn", "सीखें"), practice: T("Practice", "अभ्यास"),
     cases: T("Cases", "केस"), calc: T("Calculators", "Calculators"), kardiox: T("KardiQ X", "KardiQ X")
   };
   var TAB_SUB = {
     echo: T("Probe lab and views", "प्रोब लैब और व्यू"),
+    angio: T("Coronary angiography views", "कोरोनरी एंजियोग्राफी व्यू"),
     learn: T("Learn ECG: the ECG atlas and quiz", "Learn ECG: ECG एटलस और प्रश्नोत्तरी"),
     practice: T("Drills and protocols", "ड्रिल और प्रोटोकॉल"),
     cases: T("Whole patient cases", "पूरे मरीज़ के केस"),
@@ -960,6 +961,28 @@
     var pane = labMode() === "probe" ? probeLabHtml() : echoLabHtml();
     return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + pane + "</div></div>";
   }
+  /* Angio Lab: the AngioView coronary simulator, whole, in a frame.
+   * Phone, tablet and desktop layouts are the ones AngioView ships.
+   * The frame fills the tab; the page inside scrolls. */
+  function angioSrc() { return echoBase() + "angiolab/index.html"; }
+  function angioHtml() {
+    return '<div class="sp-scroll krd-angio-scroll"><div class="krd-angio-col"><div class="krd-angio-wrap">' +
+      '<p class="sp-small krd-angio-status" id="krdAngioStatus" role="status">' + I.tx(T("Loading AngioLAB.", "AngioLAB लोड हो रही है।")) + "</p>" +
+      '<div class="krd-angio-err" id="krdAngioErr" hidden><p class="sp-small" role="alert">' +
+      I.tx(T("AngioLAB did not load. Try again.", "AngioLAB लोड नहीं हुई। फिर कोशिश करें।")) +
+      '</p><button type="button" class="sp-btn sec" data-act="kangio-retry">' + I.s("retry") + "</button></div>" +
+      '<iframe id="krdAngioFrame" class="krd-angio-frame" title="AngioLAB" src="' + I.esc(angioSrc()) + '"></iframe>' +
+      "</div></div></div>";
+  }
+  function mountAngioLab() {
+    var doc = G.document; if (!doc || !doc.getElementById) return;
+    var frame = doc.getElementById("krdAngioFrame"); if (!frame) return;
+    var status = doc.getElementById("krdAngioStatus"), err = doc.getElementById("krdAngioErr");
+    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; }
+    function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
+    if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
+    try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
+  }
   function showTab(id, focusSel) {
     if (TABS.indexOf(id) < 0) id = "echo";
     stopEchoLab();
@@ -976,6 +999,13 @@
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + cbody, focusSel);
       scrollActiveTabIntoView();
       try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
+      return;
+    }
+    if (id === "angio") {
+      I.paint(I.markTop("") + tabsHtml(id) + angioHtml(), focusSel);
+      scrollActiveTabIntoView();
+      try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
+      mountAngioLab();
       return;
     }
     if (id === "calc" && G.KARDIA_CALC) {
@@ -1045,6 +1075,7 @@
     showTab("echo", '[data-act=kecho-lab][data-v="' + v + '"]');
   };
   I.ACTIONS["kecho-probe-retry"] = function () { showTab("echo", "[data-act=kecho-probe-retry]"); };
+  I.ACTIONS["kangio-retry"] = function () { showTab("angio", "[data-act=kangio-retry]"); };
   I.ACTIONS["kecho-view"] = function (b) {
     var id = b.getAttribute("data-v");
     var list = echoViewsForLevel(klevel());
@@ -1142,6 +1173,7 @@
   /* Review Desk style "Read it" hooks and tests read these; the atlas itself stays untouched. */
   host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, freeEchoPerArea: FREE_ECHO_PER_AREA, freeBankQuestions: FREE_BANK_QUESTIONS, on: on, openKardioX: openKardioX,
     freeEchoViews: FREE_ECHO_VIEWS.slice(),
+    angioLab: { get src() { return angioSrc(); } },
     probeLab: {
       get mode() { return labMode(); },
       get src() { return probeLabSrc(); },

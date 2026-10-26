@@ -266,6 +266,11 @@ rm -rf "$WWW/narke/learn/units" "$WWW/narke/learn/media"/credits-*.json "$WWW/na
 # The recursive copy above already carries it; this explicit copy keeps
 # that guarantee if the kardia copy ever gains excludes.
 if [ -d kardia/probelab ]; then mkdir -p "$WWW/kardia/probelab"; cp -R kardia/probelab/. "$WWW/kardia/probelab/"; echo "  probelab: $(find "$WWW/kardia/probelab" -type f | wc -l | tr -d ' ') files"; fi
+# AngioView coronary simulator (Angio Lab tab): the whole local copy under
+# kardia/angiolab/ ships so the lab works offline in the app. The recursive
+# copy above already carries it; this explicit copy keeps that guarantee
+# if the kardia copy ever gains excludes.
+if [ -d kardia/angiolab ]; then mkdir -p "$WWW/kardia/angiolab"; cp -R kardia/angiolab/. "$WWW/kardia/angiolab/"; echo "  angiolab: $(find "$WWW/kardia/angiolab" -type f | wc -l | tr -d ' ') files"; fi
 # Bundled real echo clips (kardia/media/clips/*.mp4, de-identified, with
 # credits merged into kardia/media/credits.json): they ship inside the app
 # so Scan Lab and Echo Lab play them offline with no hosting. The recursive

@@ -4,7 +4,7 @@
  * (no Kardia tile, KardiQ X tile untouched, KARDIA.open() a no-op). Flag ON =
  * tool-groups.js starter() already puts the Kardia tile first on the Home grid (no pin
  * needed to see it), the KardiQ X tile is replaced while Kardia is on, tapping the Home
- * tile opens the Specialty Engine host with its six tabs (Echo Lab, Learn, Practice,
+ * tile opens the Specialty Engine host with its seven tabs (Echo Lab, AngioLAB, Learn, Practice,
  * Cases, Calculators, KardiQ X), the level picker on Echo Lab is the compact "Level"
  * control (the full level row stays on the other tabs), Echo Lab leads with the Scan
  * Lab (ksl* ids, KARDIA_SCANLAB.debugPose over the 15 KARDIA_SCAN_TARGETS views, real
@@ -412,7 +412,7 @@ try {
   await ev(`try{localStorage.setItem("smd_kardia","0");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd8/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd9/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -431,7 +431,7 @@ try {
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd8/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd9/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
   /* No pinning needed in 2.0: the starter set leads with Kardia. */
   ok(await until(`return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "the Kardia tile is already on the Home grid (starter set, no pin needed)");
   ok((await ev(`return document.querySelector('#rnavToolsGrid .rnav-tile[data-act]').getAttribute('data-act');`)) === "kardia", "the Kardia tile is first on the Home grid");
@@ -452,13 +452,13 @@ try {
   await sleep(300);
   ok(await until(`return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "the Kardia tile is on the Home grid again after restoring the starter set");
 
-  /* ── 3. Open Kardia from its Home tile, walk the six tabs ── */
+  /* ── 3. Open Kardia from its Home tile, walk the seven tabs ── */
   await ev(`var t=document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
-  ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the six tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd8/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd8/.test(u)), "engine + Kardia loaded on open, at the loader token");
-  ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,learn,practice,cases,calc,kardiox", "tabs: Echo Lab, Learn, Practice, Cases, Calculators, KardiQ X");
-  ok((await ev(`return [].map.call(document.querySelectorAll('#smdKardia .krd-tab'),function(b){return b.textContent.trim();}).join(",");`)) === "Echo Lab,Learn,Practice,Cases,Calculators,KardiQ X", "tab labels: Echo Lab, Learn, Practice, Cases, Calculators, KardiQ X");
+  ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the seven tabs");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd9/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd9/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,angio,learn,practice,cases,calc,kardiox", "tabs: Echo Lab, AngioLAB, Learn, Practice, Cases, Calculators, KardiQ X");
+  ok((await ev(`return [].map.call(document.querySelectorAll('#smdKardia .krd-tab'),function(b){return b.textContent.trim();}).join(",");`)) === "Echo Lab,AngioLAB,Learn,Practice,Cases,Calculators,KardiQ X", "tab labels: Echo Lab, AngioLAB, Learn, Practice, Cases, Calculators, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
   ok((await ev(`return KARDIA._kardia.freeLessons;`)) === 5, "free preview is a constant (5 lessons)");
   /* Compact Level control on Echo Lab: the summary names the level,
@@ -770,7 +770,7 @@ try {
 
   /* ── 4. Screenshots: every tab at 390 and 820, light and dark ── */
   console.log("\n--- screenshots ---");
-  const tabs = [["echo", "Echo Lab"], ["learn", "Echo"], ["practice", "Question bank"], ["cases", "Whole patient"], ["calc", "Calculators"], ["kardiox", "Open KardiQ X"]];
+  const tabs = [["echo", "Echo Lab"], ["angio", "Angio"], ["learn", "Echo"], ["practice", "Question bank"], ["cases", "Whole patient"], ["calc", "Calculators"], ["kardiox", "Open KardiQ X"]];
   for (const [w, h] of VIEWPORTS) {
     await metrics(w, h);
     for (const dark of [false, true]) {
