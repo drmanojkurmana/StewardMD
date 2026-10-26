@@ -1,0 +1,107 @@
+{
+  "version": 2,
+  "totalBytes": 4923603,
+  "totalBudgetBytes": 6291456,
+  "underBudget": true,
+  "note": "Decimated GLBs plus BodyParts3D atlas chunks. Lead uploads to R2 under the Kardia asset base used by kardia-sim-geom.js; never overwrite a hashed key; code verifies sha256 before use.",
+  "assets": [
+    {
+      "file": "skin-visible-human-male.glb",
+      "bytes": 464220,
+      "sha256": "3e8270557fa914ec07a63b259af1044287106f765c3e16d6e6dd1ad31988d5f7",
+      "sourceUrl": "https://ccf-ontology.hubmapconsortium.org/objects/v1.2/VH_M_Skin.glb",
+      "licence": "CC BY 4.0",
+      "attribution": "HuBMAP Human Reference Atlas, Visible Human male skin (CCF v1.2), CC BY 4.0, https://humanatlas.io/3d-reference-library",
+      "processing": "Decimated 185314 to 25858 triangles by vertex clustering; source 5931700 bytes",
+      "registration": {
+        "sourceUnit": "metre (HuBMAP GLB) or atlas mm chunk (BodyParts3D)",
+        "patientFrame": "x to patient left, y anterior, z cranial, mm, origin at LV cavity centroid",
+        "axisMap": "patient = [sourceX, sourceZ, sourceY] for HuBMAP GLB (GLB y is cranial); atlas chunks use the kardia-sim-geom.js atlas mapping",
+        "scale": 1000,
+        "recentre": "subtract HuBMAP heart bounds centre (0.0187, 0.4761, 0.0376) m before scaling, so heart, skin and liver share the LV origin; skin and liver keep their source offset relative to that centre"
+      }
+    },
+    {
+      "file": "heart-hubmap.glb",
+      "bytes": 369164,
+      "sha256": "6f9893d150d393380c6455a0523643c49161f8269fc50f7d9b89bf1f0ec8082f",
+      "sourceUrl": "https://ccf-ontology.hubmapconsortium.org/objects/v1.2/VH_M_Heart.glb",
+      "licence": "CC BY 4.0",
+      "attribution": "HuBMAP Human Reference Atlas, Visible Human male heart with valves and chambers (CCF v1.2), CC BY 4.0",
+      "processing": "Decimated 164119 to 22612 triangles; source 4071500 bytes; includes aortic/pulmonary/mitral/tricuspid valves, chambers, septum, papillary muscles",
+      "registration": {
+        "sourceUnit": "metre (HuBMAP GLB) or atlas mm chunk (BodyParts3D)",
+        "patientFrame": "x to patient left, y anterior, z cranial, mm, origin at LV cavity centroid",
+        "axisMap": "patient = [sourceX, sourceZ, sourceY] for HuBMAP GLB (GLB y is cranial); atlas chunks use the kardia-sim-geom.js atlas mapping",
+        "scale": 1000,
+        "recentre": "subtract HuBMAP heart bounds centre (0.0187, 0.4761, 0.0376) m before scaling, so heart, skin and liver share the LV origin; skin and liver keep their source offset relative to that centre"
+      }
+    },
+    {
+      "file": "liver-hubmap.glb",
+      "bytes": 122156,
+      "sha256": "0663172204a989d401b9236b9fcb2fdf1cd1b74706f7a9f49d64eb610aa258e7",
+      "sourceUrl": "https://ccf-ontology.hubmapconsortium.org/objects/v1.2/VH_M_Liver.glb",
+      "licence": "CC BY 4.0",
+      "attribution": "HuBMAP Human Reference Atlas, Visible Human male liver (CCF v1.2), CC BY 4.0",
+      "processing": "Decimated 60369 to 8799 triangles; source 1135892 bytes",
+      "registration": {
+        "sourceUnit": "metre (HuBMAP GLB) or atlas mm chunk (BodyParts3D)",
+        "patientFrame": "x to patient left, y anterior, z cranial, mm, origin at LV cavity centroid",
+        "axisMap": "patient = [sourceX, sourceZ, sourceY] for HuBMAP GLB (GLB y is cranial); atlas chunks use the kardia-sim-geom.js atlas mapping",
+        "scale": 1000,
+        "recentre": "subtract HuBMAP heart bounds centre (0.0187, 0.4761, 0.0376) m before scaling, so heart, skin and liver share the LV origin; skin and liver keep their source offset relative to that centre"
+      }
+    },
+    {
+      "file": "great-vessels-bodyparts3d.bin.gz",
+      "bytes": 2030326,
+      "sha256": "9c01a66e69f0590e9e61f6eed454251c75f3d4c15df3961b2e78fbd71665311c",
+      "sourceUrl": "atlas/3d arterial chunk (BodyParts3D, already in repo)",
+      "licence": "CC BY-SA 2.1 JP",
+      "attribution": "BodyParts3D arterial system, Database Center for Life Science, CC BY-SA 2.1 JP",
+      "processing": "Copied unchanged from atlas/3d (Kardia BodyParts3D package, Float32 pos/Int16 nrm/Uint32 idx chunk layout)",
+      "registration": {
+        "sourceUnit": "metre (HuBMAP GLB) or atlas mm chunk (BodyParts3D)",
+        "patientFrame": "x to patient left, y anterior, z cranial, mm, origin at LV cavity centroid",
+        "axisMap": "patient = [sourceX, sourceZ, sourceY] for HuBMAP GLB (GLB y is cranial); atlas chunks use the kardia-sim-geom.js atlas mapping",
+        "scale": 1000,
+        "recentre": "subtract HuBMAP heart bounds centre (0.0187, 0.4761, 0.0376) m before scaling, so heart, skin and liver share the LV origin; skin and liver keep their source offset relative to that centre"
+      },
+      "chunk": {
+        "v": 101732,
+        "i": 481926,
+        "pos": 0,
+        "nrm": 1220784,
+        "pid": 1831176,
+        "idx": 2034640,
+        "rawBytes": 3962344
+      }
+    },
+    {
+      "file": "bones-thorax-bodyparts3d.bin.gz",
+      "bytes": 1937737,
+      "sha256": "3177b3d0e98bb57bdf546b80c9fa8335874532f0f4b6c7b68910f8c3254ae3a2",
+      "sourceUrl": "atlas/3d skeletal-0.lo chunk (BodyParts3D, already in repo)",
+      "licence": "CC BY-SA 2.1 JP",
+      "attribution": "BodyParts3D skeletal system, Database Center for Life Science, CC BY-SA 2.1 JP",
+      "processing": "Copied unchanged from atlas/3d low LOD skeletal chunk",
+      "registration": {
+        "sourceUnit": "metre (HuBMAP GLB) or atlas mm chunk (BodyParts3D)",
+        "patientFrame": "x to patient left, y anterior, z cranial, mm, origin at LV cavity centroid",
+        "axisMap": "patient = [sourceX, sourceZ, sourceY] for HuBMAP GLB (GLB y is cranial); atlas chunks use the kardia-sim-geom.js atlas mapping",
+        "scale": 1000,
+        "recentre": "subtract HuBMAP heart bounds centre (0.0187, 0.4761, 0.0376) m before scaling, so heart, skin and liver share the LV origin; skin and liver keep their source offset relative to that centre"
+      },
+      "chunk": {
+        "v": 113953,
+        "i": 418434,
+        "pos": 0,
+        "nrm": 1367436,
+        "pid": 2051156,
+        "idx": 2279064,
+        "rawBytes": 3952800
+      }
+    }
+  ]
+}

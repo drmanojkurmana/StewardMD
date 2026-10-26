@@ -67,6 +67,15 @@ test('starter: 6 to 8 role and specialty tools plus Kardia on top, never one Hom
   }
 });
 
+test('starter: Kardia on top does not push Tokós out of the student set (regression #1805)', () => {
+  const { TG } = load();
+  const usable = (a) => !LOCKED.student.includes(a);
+  const s = TG.starter('student', '', usable);
+  assert.equal(s[0], 'kardia', 'Kardia leads');
+  assert.ok(s.includes('tokos'), 'Tokós, the 8th student tool, still renders by default: ' + s.join(','));
+  assert.equal(s.filter((a) => a !== 'kardia').length, 8, 'all 8 student tools fit under Kardia');
+});
+
 test('starter reads the role and the specialty the app stored', () => {
   const { TG } = load({ smd_role: 'student', smd_my_specialty: 'obgyn' });
   assert.equal(TG.role(), 'student');

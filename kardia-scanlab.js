@@ -129,15 +129,14 @@
     }).join("") + "</ul>";
   }
 
-  /* -------- asset URLs: local worktree first on the web build, the R2
-   * atlas host (the kardia-sim-geom.js asset base) as the device path.
-   * Round 1 tried /k2-assets first (404) and never wired completion. */
+  /* -------- asset URLs: bundled copy first (same origin, works offline
+   * in the app bundle at kardia/media/k2-assets/), the network base only
+   * as a fallback. */
   function assetCandidates(opts) {
     opts = opts || {};
     if (opts.assetBase) return [opts.assetBase.replace(/\/$/, "") + "/k2-assets/manifest.json"];
     if (opts.manifestUrl) return [opts.manifestUrl];
-    if (opts.native) return ["https://models.stewardmd.in/atlas3d/k2-assets/manifest.json", "/work/k2-assets/manifest.json"];
-    return ["/work/k2-assets/manifest.json", "/k2-assets/manifest.json", "https://models.stewardmd.in/atlas3d/k2-assets/manifest.json"];
+    return ["/kardia/media/k2-assets/manifest.json", "https://models.stewardmd.in/atlas3d/k2-assets/manifest.json"];
   }
   function assetFileUrl(manifestUrl, file) { return manifestUrl.replace(/manifest\.json.*$/, "") + file; }
 

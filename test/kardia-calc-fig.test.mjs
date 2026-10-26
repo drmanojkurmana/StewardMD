@@ -66,7 +66,7 @@ test("figure data stays compact, ES5, British hygiene, lazy wiring", () => {
   for (const s of ["kardia-calc-fig-data.js", "kardia-calc-fig.js", "data-kcalc-fig", "kcalc-fig-toggle", "prefers-reduced-motion", "What to measure", "Common pitfall"]) assert.ok(ui.includes(s), "UI " + s);
   const css = readFileSync("kardia-calc.css", "utf8");
   assert.ok(css.includes(".kcalc-canvas") && css.includes("min-height:44px"), "figure CSS");
-  const manifest = JSON.parse(readFileSync("work/calc-media/manifest.json", "utf8"));
+  const manifest = JSON.parse(readFileSync("kardia/media/calc/manifest.json", "utf8"));
   assert.ok(Array.isArray(manifest.downloaded) && Array.isArray(manifest.sourcesForLead), "manifest lists sources");
   for (const s of manifest.sourcesForLead) assert.ok(s.sourceUrl && s.licence && s.attribution, "source attributed: " + s.sourceUrl);
 });
