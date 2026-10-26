@@ -230,7 +230,7 @@
       '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
       I.tx(T("Probe Lab did not load. Try again.", "Probe Lab did not load. Try again.")) +
       '</p><button type="button" class="sp-btn sec" data-act="kecho-probe-retry">' + I.s("retry") + "</button></div>" +
-      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Probe Lab by EchoSuite", "Probe Lab by EchoSuite")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"></iframe>' +
+      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Probe Lab", "Probe Lab")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"></iframe>' +
       "</div>";
   }
   /* Hide EchoSuite navigation that would leave the Probe Lab, from the
