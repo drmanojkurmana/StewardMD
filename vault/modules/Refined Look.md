@@ -25,12 +25,7 @@ first paint.
   consistent than a grep suggested). Fixed the gaps: sheet rows get the iOS background highlight, antibiogram
   pills/links get the .97 press, and every tappable presses in at 80ms and releases with a small overshoot spring
   (`cubic-bezier(.32,1.25,.5,1)`, 340ms).
-- **Empty and error placeholders.** `empty-states.js` marks the SIMPLE ones (6-160 chars, <=3 child elements, no
-  controls, >=180px block, not in a table or a row) with `data-smd-empty="empty|error"`; CSS draws a soft icon circle,
-  centred 14px text and a fade-in. ~500 placeholders across ~60 module classes. Ones that already have an icon keep it.
-  Errors get `role="alert"`. Anything with a button or rich structure is left as the module drew it.
-
-## Onboarding and sign-in (same day)
+- **Empty and error placeholders: REMOVED 2026-10-26 (owner).** `empty-states.js` and its `refined.css` block (injected icon circle, forced centred layout, fade-in on ~500 placeholders) are gone; every module draws its own empty and error states again. Do not re-add an app-wide auto-styler for them.
 - **`font: 600 28px/1.15 inherit` is invalid CSS** (`inherit` cannot be the family in the shorthand), so the browser drops
   the whole declaration. On the Welcome screen that left the heading, role chips and call-to-action at default size.
   Fixed all 22 in `onboarding.js` (family is now `var(--sans,'Inter',...)`), and the wordmark moved off IBM Plex Mono
