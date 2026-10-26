@@ -46,12 +46,12 @@ test("smd_kardia defaults ON for everyone (owner 2026-10-26); 0 or ?kardia=0 tur
 /* ---------- 2. boot loads only kardia-loader.js; the loader lists the engine + Kardia at one token ---------- */
 test("app boot loads only kardia-loader.js; the loader lists the engine and Kardia files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
-  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd4" defer></script>'), "loader tag at krd4");
+  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd5" defer></script>'), "loader tag at krd5");
   const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|kardia[-.\w]*)\.(js|css)\?v=\w+/g;
   const got = (html.match(eng) || []).filter((s) => !/kardiox/i.test(s));
-  assert.deepEqual(got, ["kardia-loader.js?v=krd4"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
+  assert.deepEqual(got, ["kardia-loader.js?v=krd5"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
   const L = readFileSync("kardia-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "krd4", "the loader injects at the same token as its own tag");
+  assert.equal(v, "krd5", "the loader injects at the same token as its own tag");
   for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
 });
@@ -104,14 +104,14 @@ test("tool-groups and search know the Kardia tool (repo test enforces one sectio
 });
 
 /* ---------- 4. kardia.js source: engine host, five tabs, four levels, free preview constant ---------- */
-test("kardia.js: Specialty Engine host with five tabs, four levels and a free-preview constant", () => {
+test("kardia.js: Specialty Engine host with six tabs, four levels and a free-preview constant", () => {
   const src = readFileSync("kardia.js", "utf8");
   assert.ok(/SPECIALTY;[^]*createHost|createHost\(cfg\)/.test(src), "built on SPECIALTY.createHost");
   assert.ok(/id: "kardia"/.test(src) && /flag: "smd_kardia"/.test(src), "host id + kill switch");
   assert.ok(/proFeature: "kardia"/.test(src), "Pro lock names the kardia feature");
   assert.ok(/\["mbbs", "resident", "fellow", "sonographer"\]/.test(src), "levels picker: MBBS, Resident, Fellow, Sonographer");
   assert.ok(/var FREE_LESSONS = 5/.test(src), "free preview count is a named constant");
-  for (const t of ["echo", "learn", "practice", "cases", "kardiox"]) assert.ok(src.includes('"' + t + '"'), "tab " + t);
+  for (const t of ["echo", "learn", "practice", "cases", "calc", "kardiox"]) assert.ok(src.includes('"' + t + '"'), "tab " + t);
   assert.ok(!/registerSim|registerClinic|registerExplorer/.test(src), "WP8 registers no sims/clinics/explorers: coming soon states only");
   assert.ok(/SMD_XACCESS\.gate\("kardiox"/.test(src), "KardiQ X tab goes through the untouched access gate");
   assert.ok(/KARDIOX\.openLearn/.test(src), "Learn tab opens the existing atlas in place");
