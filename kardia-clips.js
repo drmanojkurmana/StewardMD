@@ -2,7 +2,7 @@
  *
  * ES5 IIFE, window.KARDIA_CLIPS, module.exports under node for the pure
  * selection helpers. The clip catalogue is kardia/media/credits.json
- * (100 clips with attribution and licence). 62 clips are bundled in the
+ * (100 clips with attribution and licence). 63 clips are bundled in the
  * app under kardia/media/clips/ (the entry carries localFile) and play
  * offline with no hosting; the rest play from their hosted "url".
  * No lesson JSON is edited: the Learn lesson block is added at run time

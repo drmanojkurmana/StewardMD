@@ -19,7 +19,7 @@
   var FREE_LESSONS = 5;
   var FREE_ECHO_PER_AREA = 3;
   var FREE_BANK_QUESTIONS = 20;
-  var TABS = ["echo", "learn", "practice", "cases", "kardiox"];
+  var TABS = ["echo", "learn", "practice", "cases", "calc", "kardiox"];
   var LEVELS = ["mbbs", "resident", "fellow", "sonographer"];
 
   function T(en, hi) { return { en: en, hi: hi }; }
@@ -34,14 +34,14 @@
   }
   var TAB_T = {
     echo: T("Echo Lab", "इको लैब"), learn: T("Learn", "सीखें"), practice: T("Practice", "अभ्यास"),
-    cases: T("Cases", "केस"), kardiox: T("KardiQ X", "KardiQ X")
+    cases: T("Cases", "केस"), calc: T("Calculators", "Calculators"), kardiox: T("KardiQ X", "KardiQ X")
   };
   var TAB_SUB = {
     echo: T("Probe lab and views", "प्रोब लैब और व्यू"),
     learn: T("Learn ECG: the ECG atlas and quiz", "Learn ECG: ECG एटलस और प्रश्नोत्तरी"),
     practice: T("Drills and protocols", "ड्रिल और प्रोटोकॉल"),
     cases: T("Whole patient cases", "पूरे मरीज़ के केस"),
-    kardiox: T("AI ECG reading", "AI ECG रीडिंग")
+    calc: T("Echo calculators and pathways", "Echo calculators and pathways"), kardiox: T("AI ECG reading", "AI ECG रीडिंग")
   };
 
   var host = SP.createHost({
@@ -833,6 +833,13 @@
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
       if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); return; }
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
+      return;
+    }
+    if (id === "calc" && G.KARDIA_CALC) {
+      G.KARDIA_CALC.attach(host);
+      G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + G.KARDIA_CALC.html(), focusSel);
+      G.KARDIA_CALC.mount();
       return;
     }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);

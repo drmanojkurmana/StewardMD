@@ -473,7 +473,7 @@
     var view = T.VIEWS[0], activeWindow = windowForView(view.id), layer = "skin", showLabels = false;
     var pathology = opts.pathology || null;
     var pose = { contact: [-30, 95, 70], rotationDeg: 40, fanDeg: 0, rockDeg: 0, depthCm: 16 };
-    var orbit = { yaw: 2.6, pitch: 0.32, dist: 400 };
+    var orbit = { yaw: 2.6, pitch: 0.32, dist: 700 };
     function nowMs() { return (G.performance && G.performance.now) ? G.performance.now() : Date.now(); }
     var coach = createCoach(450), startedAt = nowMs(), travelMm = 0;
     var holdSince = 0, wasIn = false, attemptDone = false, raf = 0, destroyed = false;
@@ -584,12 +584,39 @@
       g.setAttribute("position", new THREE.BufferAttribute(sp, 3));
       g.setAttribute("normal", new THREE.BufferAttribute(sn, 3));
       g.setIndex(new THREE.BufferAttribute(idx.length && idx.BYTES_PER_ELEMENT === 2 ? new Uint16Array(idx) : idx, 1));
+      /* Smooth shading: recompute vertex normals from the indexed
+       * geometry so decimated skin and bone read as continuous
+       * surfaces, not flat facets. */
+      try { if (g.computeVertexNormals) g.computeVertexNormals(); } catch (e) {}
       return g;
     }
     function mat(o) { return THREE.MeshStandardMaterial ? new THREE.MeshStandardMaterial(o) : new THREE.MeshBasicMaterial({ color: o.color }); }
     function phys(o) {
       if (THREE.MeshPhysicalMaterial) { try { return new THREE.MeshPhysicalMaterial(o); } catch (e) {} }
       return mat(o);
+    }
+    /* Fresnel rim for the glass bone: grazing angles brighten, so the
+     * translucent thorax reads as a glass shell with a lit edge. Guarded:
+     * a material or three build without onBeforeCompile keeps the plain
+     * clearcoat glass. */
+    function addFresnel(m, hex, strength) {
+      try {
+        if (!m || typeof m.onBeforeCompile !== "function") return m;
+        var prev = m.onBeforeCompile;
+        m.onBeforeCompile = function (shader) {
+          if (prev) prev(shader);
+          shader.uniforms.uRimColor = { value: new THREE.Color(hex) };
+          shader.uniforms.uRimStrength = { value: strength };
+          shader.fragmentShader = shader.fragmentShader
+            .replace("#include <common>", "#include <common>\nuniform vec3 uRimColor;\nuniform float uRimStrength;\nvarying vec3 vWorldNormalR;\nvarying vec3 vWorldPosR;")
+            .replace("#include <emissivemap_fragment>", "#include <emissivemap_fragment>\n{ vec3 rimN = normalize(vWorldNormalR); vec3 rimV = normalize(cameraPosition - vWorldPosR); float rimF = pow(1.0 - clamp(dot(rimN, rimV), 0.0, 1.0), 3.0); totalEmissiveRadiance += uRimColor * (rimF * uRimStrength); }");
+          shader.vertexShader = shader.vertexShader
+            .replace("#include <common>", "#include <common>\nvarying vec3 vWorldNormalR;\nvarying vec3 vWorldPosR;")
+            .replace("#include <worldpos_vertex>", "#include <worldpos_vertex>\nvWorldNormalR = normalize(mat3(modelMatrix) * objectNormal);\nvWorldPosR = (modelMatrix * vec4(transformed, 1.0)).xyz;");
+        };
+        m.customProgramCacheKey = function () { return "kardiarim1"; };
+      } catch (e) {}
+      return m;
     }
     function tubeGeom(path, radius) {
       var pts = path.map(function (pt) { var sc = toScene(pt); return new THREE.Vector3(sc[0], sc[1], sc[2]); });
@@ -690,7 +717,7 @@
       scene3 = new THREE.Scene();
       parts = {};
       if (THREE.Color) scene3.background = new THREE.Color(0x131b22);
-      if (THREE.Fog) scene3.fog = new THREE.Fog(0x131b22, 750, 1450);
+      if (THREE.Fog) scene3.fog = new THREE.Fog(0x131b22, 1300, 2400);
       if (THREE.HemisphereLight) scene3.add(new THREE.HemisphereLight(0xdfeaf2, 0x1c1712, 0.65));
       scene3.add(new THREE.AmbientLight(0xbfd0da, 0.35));
       var key = new THREE.DirectionalLight(0xfff2e2, 1.9); key.position.set(180, 320, -260); scene3.add(key);
@@ -704,11 +731,11 @@
         grp.add(m); registered[name] = mesh.vertexCount; debug.meshesRegistered[name] = mesh.vertexCount;
         return m;
       }
-      parts.skin = addMesh("skin", meshes["skin-visible-human-male.glb"], phys({ color: 0xd8b096, roughness: 0.58, metalness: 0, transparent: true, opacity: 0.2, side: THREE.DoubleSide, depthWrite: false, sheen: 0.6, sheenColor: new THREE.Color(0xd98a6a), emissive: 0x1d0b06, emissiveIntensity: 0.35 }), null, 10);
-      parts.bones = addMesh("bones", meshes["bones-thorax-bodyparts3d.bin.gz"], phys({ color: 0xe9e2cf, roughness: 0.08, metalness: 0, transparent: true, opacity: 0.42, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.12, envMapIntensity: 1.2 }),
+      parts.skin = addMesh("skin", meshes["skin-visible-human-male.glb"], phys({ color: 0xd8a37e, roughness: 0.5, metalness: 0, transparent: true, opacity: 0.3, side: THREE.DoubleSide, depthWrite: false, sheen: 1, sheenRoughness: 0.45, sheenColor: new THREE.Color(0xe0876a), emissive: 0x2a0f08, emissiveIntensity: 0.5 }), null, 10);
+      parts.bones = addMesh("bones", meshes["bones-thorax-bodyparts3d.bin.gz"], addFresnel(phys({ color: 0xe9e2cf, roughness: 0.12, metalness: 0, transparent: true, opacity: 0.5, depthWrite: false, clearcoat: 1, clearcoatRoughness: 0.08, envMapIntensity: 1.4 }), 0xcfe0ee, 0.55),
         function (x, y, z) { return Math.abs(x) < 230 && y > -120 && y < 180 && z > -120 && z < 260; }, 5);
       parts.heartGroup = new THREE.Group(); parts.heartGroup.name = "heartBeat"; grp.add(parts.heartGroup);
-      parts.heart = addMesh("heart", meshes["heart-hubmap.glb"], phys({ color: 0xa8322c, roughness: 0.3, metalness: 0.02, clearcoat: 0.65, clearcoatRoughness: 0.35, sheen: 0.4, sheenColor: new THREE.Color(0xe8a08a), emissive: 0x200604, emissiveIntensity: 0.4 }), null, 2);
+      parts.heart = addMesh("heart", meshes["heart-hubmap.glb"], phys({ color: 0xa8231f, roughness: 0.3, metalness: 0.02, clearcoat: 0.85, clearcoatRoughness: 0.3, sheen: 0.4, sheenColor: new THREE.Color(0xe8a08a), emissive: 0x2b0705, emissiveIntensity: 0.5 }), null, 2);
       if (parts.heart) { if (grp.remove) grp.remove(parts.heart); parts.heartGroup.add(parts.heart); }
       parts.liver = addMesh("liver", meshes["liver-hubmap.glb"], phys({ color: 0x9c5f4a, roughness: 0.42, clearcoat: 0.4, clearcoatRoughness: 0.4, transparent: true, opacity: 0.92 }), null, 2);
       parts.vessels = addMesh("vessels", meshes["great-vessels-bodyparts3d.bin.gz"], mat({ color: 0xb0503f, roughness: 0.45, transparent: true, opacity: 0.75 }),
@@ -725,7 +752,7 @@
             var eu = new THREE.Euler ? new THREE.Euler(Math.PI / 2, 0, Math.PI * 0.87) : null;
             if (eu && rm.makeRotationFromEuler) rm.makeRotationFromEuler(eu);
             if (rm.setPosition) rm.setPosition(0, 118 - ri * 17, -55);
-            ribParts.push({ geom: new THREE.TorusGeometry(88 - ri * 2, 3.2, 8, 40, Math.PI * 1.25), matrix: rm, color: 0xe8dbc1 });
+            ribParts.push({ geom: new THREE.TorusGeometry(88 - ri * 2, 3.0, 12, 72, Math.PI * 1.25), matrix: rm, color: 0xe8dbc1 });
           }
           ribParts.push({ geom: new THREE.BoxGeometry(16, 130, 6), matrix: translation(0, 55, 88), color: 0xe8dbc1 });
           ribsMerged = mergedMesh(ribParts, mat({ vertexColors: true, roughness: 0.55, transparent: true, opacity: 0.6 }), "ribsFallback");
@@ -733,7 +760,7 @@
         if (ribsMerged) fall.add(ribsMerged);
         else {
           for (var rj = 0; rj < (lowPower ? 7 : 11); rj++) {
-            var rib = new THREE.Mesh(new THREE.TorusGeometry(88 - rj * 2, 3.2, 8, 40, Math.PI * 1.25), boneM);
+            var rib = new THREE.Mesh(new THREE.TorusGeometry(88 - rj * 2, 3.0, 12, 72, Math.PI * 1.25), boneM);
             rib.position.set(0, 118 - rj * 17, -55); rib.rotation.set(Math.PI / 2, 0, Math.PI * 0.87); fall.add(rib);
           }
           var stern = new THREE.Mesh(new THREE.BoxGeometry(16, 130, 6), boneM); stern.position.set(0, 55, 88); fall.add(stern);
@@ -805,7 +832,7 @@
       var skinM = parts.skin ? parts.skin.material : (parts.skinFallback ? parts.skinFallback.material : null);
       var boneM = parts.bones ? parts.bones.material : null;
       if (layer === "skin") {
-        if (skinM) { skinM.opacity = 0.18; skinM.color.setHex(0xcaa27e); }
+        if (skinM) { skinM.opacity = 0.3; skinM.color.setHex(0xcaa27e); }
         if (boneM) boneM.opacity = 0.7;
         if (parts.heart) parts.heart.material.opacity = 1;
       } else if (layer === "glass") {
@@ -1090,7 +1117,7 @@
         var cz = Math.cos(orbit.yaw) * Math.cos(orbit.pitch) * orbit.dist;
         var cy = Math.sin(orbit.pitch) * orbit.dist;
         camera.position.set(cx, 40 + cy, cz);
-        camera.lookAt(0, 25, -35);
+        camera.lookAt(0, 15, -25);
         try { renderer.render(scene3, camera); } catch (e) { debug.errors.push("render: " + String(e && e.message || e)); }
         debug.frames++;
         if (renderer.info && renderer.info.render) debug.drawCalls = renderer.info.render.calls || debug.frames;
@@ -1132,7 +1159,7 @@
           pinchDist = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY); drag = { mode: "pinch" }; return;
         }
         var now = Date.now();
-        if (now - lastTapAt < 320) { orbit = { yaw: 2.6, pitch: 0.32, dist: 400 }; lastTapAt = 0; return; }
+        if (now - lastTapAt < 320) { orbit = { yaw: 2.6, pitch: 0.32, dist: 700 }; lastTapAt = 0; return; }
         lastTapAt = now;
         var p = canvasPoint(ev), c = probeScreen();
         var mode = "orbit";
@@ -1150,7 +1177,7 @@
         if (drag.mode === "pinch" && Object.keys(pointers).length === 2) {
           var ps = Object.keys(pointers).map(function (k) { return pointers[k]; });
           var nd = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY);
-          if (pinchDist > 0) orbit.dist = clamp(orbit.dist * pinchDist / Math.max(20, nd), 240, 760);
+          if (pinchDist > 0) orbit.dist = clamp(orbit.dist * pinchDist / Math.max(20, nd), 320, 1150);
           pinchDist = nd; return;
         }
         var p = canvasPoint(ev), dx = p.x - drag.x, dy = p.y - drag.y; drag.x = p.x; drag.y = p.y;

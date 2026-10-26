@@ -68,7 +68,7 @@ test("isVideo and clipUrl follow the file type and the test override", () => {
 
 test("bundled clips resolve to a local URL that exists in the bundle source", () => {
   const bundled = credits.clips.filter((c) => c.localFile);
-  assert.equal(bundled.length, 62, "62 de-identified clips are bundled");
+  assert.equal(bundled.length, 63, "63 de-identified clips are bundled");
   for (const c of bundled) {
     assert.equal(CLIPS.isBundled(c), true, c.file);
     const local = CLIPS.localClipUrl(c, "/kardia/");
@@ -78,7 +78,7 @@ test("bundled clips resolve to a local URL that exists in the bundle source", ()
     assert.ok(CLIPS.isVideo(c), c.file + " bundled clip is a video");
   }
   const hostedOnly = credits.clips.filter((c) => !c.localFile);
-  assert.equal(hostedOnly.length, 38, "the earlier hosted clips remain as network fallback entries");
+  assert.equal(hostedOnly.length, 37, "the earlier hosted clips remain as network fallback entries");
   for (const c of hostedOnly) {
     assert.equal(CLIPS.clipUrl(c, null, "/kardia/"), c.url, c.file + " falls back to its hosted url");
   }
@@ -90,13 +90,16 @@ test("bundled clips resolve to a local URL that exists in the bundle source", ()
   }
   const build = readFileSync(new URL("../scripts/build-www.sh", import.meta.url), "utf8");
   assert.ok(build.includes("kardia/media/clips"), "build-www.sh copies the bundled clips into www/");
-  /* Round 7: the TOF PLAX sweep (tetralogy-of-fallot-2) is filed under
-   * tte_plax, so PLAX plays from the bundle at target. IVC is the one
-   * Scan Lab view with no bundled clip in the 62-clip set. */
+  /* Round 8: PLAXnormal (tte-plax-1) is bundled and first in catalogue
+   * order, so a plain PLAX target shows a true normal PLAX (elongated
+   * LV, mitral and aortic valves, aortic root, LA). The TOF PLAX sweep
+   * (tetralogy-of-fallot-2) stays filed under tte_plax for TOF queries.
+   * IVC is the one Scan Lab view with no bundled clip in the 63-clip set. */
   const plax = CLIPS.chooseClip(CLIPS.indexClips(credits.clips), { view: "tte_plax" });
   assert.ok(plax && CLIPS.isBundled(plax), "PLAX resolves to a bundled clip");
+  assert.equal(plax.file, "tte-plax-1.mp4", "plain PLAX shows the true normal PLAX clip, not a pathology sweep");
   const ivcBundled = credits.clips.filter((c) => c.view === "tte_subcostal_ivc" && c.localFile);
-  assert.equal(ivcBundled.length, 0, "IVC has no bundled clip in the 62-clip set");
+  assert.equal(ivcBundled.length, 0, "IVC has no bundled clip in the 63-clip set");
 });
 
 test("pathology lessons map to their pathology clips", () => {
