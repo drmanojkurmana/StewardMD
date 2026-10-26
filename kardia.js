@@ -267,7 +267,7 @@
       '</p><button type="button" class="sp-btn pri" data-act="kecho-retry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
     if (!EL.views) {
       if (!EL.loading) loadEchoViews();
-      return head + '<p class="sp-mut" role="status">' + I.tx(T("Loading Echo Lab.", "Loading Echo Lab.")) + "</p>";
+      return head + '<div class="krd-skel-wrap" aria-hidden="true"><span class="krd-skel sector"></span><span class="krd-skel line"></span></div><p class="sp-mut" role="status">' + I.tx(T("Loading Echo Lab.", "Loading Echo Lab.")) + "</p>";
     }
     var list = echoViewsForLevel(lv);
     if (!list.length) return head + '<p class="sp-small">' + I.tx(T("No echo views at this level yet.", "No echo views at this level yet.")) + "</p>";
@@ -852,9 +852,10 @@
       G.KARDIA_CASES.setNavigator(function (f) { showTab("cases", typeof f === "string" ? f : null); });
       var cbody = G.KARDIA_CASES.html();
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
-      if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); return; }
+      if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {} return; }
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
       scrollActiveTabIntoView();
+      try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       return;
     }
     if (id === "calc" && G.KARDIA_CALC) {
@@ -862,6 +863,7 @@
       G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
       I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + G.KARDIA_CALC.html(), focusSel);
       scrollActiveTabIntoView();
+      try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       G.KARDIA_CALC.mount();
       return;
     }
@@ -869,6 +871,7 @@
     if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + levelsMenuHtml(lv) + body, focusSel); }
     else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
     scrollActiveTabIntoView();
+    try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
     if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }

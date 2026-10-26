@@ -218,6 +218,9 @@
     var r = root();
     if (r) r.innerHTML = "";
   }
+  function spHaptic(kind) {
+    try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.haptic) G.KARDIA_PREMIUM.haptic(kind); } catch (e) {}
+  }
   function sheetHtml(title, bodyHtml) {
     return '<div class="krd-sp-scrim" data-sp="close"></div>' +
       '<div class="krd-sp-sheet" role="dialog" aria-modal="true" aria-label="' + esc(title) + '">' +
@@ -796,7 +799,7 @@
       var session = currentPairing();
       try { if (S.core && S.core.session) session = S.core.session(); } catch (e) {}
       if (name === "confirming") renderConfirm(session);
-      else if (name === "connected") { closeSheet(); ensureWake(); }
+      else if (name === "connected") { spHaptic("success"); closeSheet(); ensureWake(); }
       else if (name === "failed") {
         setStateLine("failed", (evt.reason ? friendlyReason({ reason: evt.reason }) : null));
       } else setStateLine(name);
@@ -805,6 +808,7 @@
     if (evt.type === "state" && S.screen === "probe") {
       if (name === "confirming") renderProbeActive();
       else if (name === "connected") {
+        spHaptic("success");
         if (S.probeStep !== "active" && S.probeStep !== "touch") renderProbeActive();
         else renderProbeConfirm();
         ensureWake();

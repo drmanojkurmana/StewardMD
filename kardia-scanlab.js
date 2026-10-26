@@ -534,6 +534,11 @@
   /* ---------------- browser UI ---------------- */
   function haptic(kind) {
     try {
+      if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.haptic) {
+        if (kind === "MEDIUM") { G.KARDIA_PREMIUM.haptic("success"); return; }
+        if (kind === "SELECTION") { G.KARDIA_PREMIUM.haptic("selection"); return; }
+        G.KARDIA_PREMIUM.haptic("light"); return;
+      }
       var H = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.Haptics;
       if (H && H.impact) H.impact({ style: kind || "LIGHT" });
       else if (G.SMD_HAPTICS && G.SMD_HAPTICS.tap) G.SMD_HAPTICS.tap();
@@ -1689,16 +1694,16 @@
         '<button type="button" class="ksl-btn" id="kslTutSkip">Skip</button>' +
         (tutStep === TUTORIAL.length - 1 ? ' <button type="button" class="ksl-btn ksl-syncbtn" id="kslTutSyncProbe" data-act="kecho-syncprobe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Use a phone as the probe</span></button>' : "");
       Array.prototype.forEach.call(box.querySelectorAll("[data-tut]"), function (chip) {
-        chip.addEventListener("click", function () { tutStep = +chip.getAttribute("data-tut"); renderTut(); });
+        chip.addEventListener("click", function () { tutStep = +chip.getAttribute("data-tut"); haptic("SELECTION"); renderTut(); });
       });
       var backBtn = box.querySelector ? box.querySelector("#kslTutBack") : el("kslTutBack"), skipBtn = box.querySelector ? box.querySelector("#kslTutSkip") : el("kslTutSkip"), nextBtn = box.querySelector ? box.querySelector("#kslTutNext") : el("kslTutNext");
       var tutSyncBtn = box.querySelector ? box.querySelector("#kslTutSyncProbe") : el("kslTutSyncProbe");
       if (tutSyncBtn) tutSyncBtn.addEventListener("click", openSyncProbe);
-      if (backBtn) backBtn.addEventListener("click", function () { if (tutStep > 0) { tutStep--; renderTut(); } });
+      if (backBtn) backBtn.addEventListener("click", function () { if (tutStep > 0) { tutStep--; haptic("SELECTION"); renderTut(); } });
       if (skipBtn) skipBtn.addEventListener("click", function () { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; });
       if (nextBtn) nextBtn.addEventListener("click", function () {
         if (tutStep >= TUTORIAL.length - 1) { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; }
-        else { tutStep++; renderTut(); }
+        else { tutStep++; haptic("SELECTION"); renderTut(); }
       });
     }
     /* Explicit open: always starts again at step 1, clears the
