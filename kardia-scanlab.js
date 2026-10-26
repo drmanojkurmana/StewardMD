@@ -535,7 +535,13 @@
         return '<button type="button" class="ksl-view" data-view="' + v.id + '" data-win="' + windowForView(v.id) + '" id="kslView-' + v.id + '" aria-pressed="' + (v.id === view.id) + '"><span class="ksl-icon" aria-hidden="true">' + viewIcon(v.id) + '</span><span>' + esc(v.label) + '</span></button>';
       }).join("") + '</div></div></div>';
 
-    function el(id) { return doc.getElementById(id); }
+    /* Element lookup is scoped to this instance's root, never the whole
+     * document: a stopped or repainted Scan Lab instance must not render
+     * into (or hide) another instance's nodes through a shared id. */
+    function el(id) {
+      if (root && root.querySelector) { try { var n = root.querySelector("#" + id); if (n) return n; } catch (e) {} }
+      return doc.getElementById(id);
+    }
     /* Round 7: nothing sits over the sector. The score card and the
      * clip status note live in the underbar under the monitor as slim
      * rows; the status note clears itself after 2.5 seconds. The left
@@ -1128,13 +1134,27 @@
       drawMonitor(now, plane || currentPlane());
       fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
     }
-    var hiddenPaused = false;
-    function loop(now) { if (destroyed) return; if (hiddenPaused || doc.hidden || (G.document && G.document.hidden)) { hiddenPaused = true; debug.pausedHidden = true; raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
+    var hiddenPaused = false, suspended = false;
+    function loop(now) { if (destroyed || suspended) { raf = 0; return; } if (hiddenPaused || doc.hidden || (G.document && G.document.hidden)) { hiddenPaused = true; debug.pausedHidden = true; raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
+    /* Probe role (SyncProbe): this page only sends motion, so the 3D
+     * scene and monitor must not render at all. Suspend cancels the
+     * frame loop and pauses any clip; resume restarts the loop. */
+    function suspend() {
+      if (destroyed || suspended) return;
+      suspended = true; debug.suspended = true;
+      if (raf) { try { cancelRaf(raf); } catch (e) {} raf = 0; }
+      if (video) { try { video.pause && video.pause(); } catch (e) {} }
+    }
+    function resume() {
+      if (destroyed || !suspended) return;
+      suspended = false; debug.suspended = false;
+      if (!raf && !(doc.hidden || (G.document && G.document.hidden))) raf = rafImpl(loop);
+    }
     try {
       if (doc.addEventListener) doc.addEventListener("visibilitychange", function () {
         var hid = !!(doc.hidden || (G.document && G.document.hidden));
         if (hid) { hiddenPaused = true; if (raf) cancelRaf(raf); raf = 0; debug.pausedHidden = true; }
-        else if (hiddenPaused) { hiddenPaused = false; debug.pausedHidden = false; if (!destroyed && !raf) raf = rafImpl(loop); }
+        else if (hiddenPaused) { hiddenPaused = false; debug.pausedHidden = false; if (!destroyed && !suspended && !raf) raf = rafImpl(loop); }
       });
     } catch (e) {}
     /* pointer handling: grip slides, marker rotates, tail tilts, pinch zooms */
@@ -1251,8 +1271,9 @@
     function renderTutStep() {
       var box = el("kslTutorial");
       if (!box) return;
-      if (tutDone) { box.hidden = true; return; }
-      box.hidden = false; var s = TUTORIAL[tutStep];
+      debug.tutStep = tutStep; debug.tutDone = tutDone;
+      if (tutDone) { box.hidden = true; debug.tutOpen = false; return; }
+      box.hidden = false; debug.tutOpen = true; var s = TUTORIAL[tutStep];
       box.innerHTML = '<div class="ksl-tut-chips" role="group" aria-label="Tutorial steps">' + TUTORIAL.map(function (st, i) {
           return '<button type="button" class="ksl-tut-chip" data-tut="' + i + '" aria-pressed="' + (i === tutStep) + '" aria-label="Step ' + (i + 1) + ": " + esc(st.title) + '">' + (i + 1) + "</button>";
         }).join("") + "</div>" +
@@ -1263,14 +1284,33 @@
       Array.prototype.forEach.call(box.querySelectorAll("[data-tut]"), function (chip) {
         chip.addEventListener("click", function () { tutStep = +chip.getAttribute("data-tut"); renderTut(); });
       });
-      el("kslTutBack").addEventListener("click", function () { if (tutStep > 0) { tutStep--; renderTut(); } });
-      el("kslTutSkip").addEventListener("click", function () { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; });
-      el("kslTutNext").addEventListener("click", function () {
+      var backBtn = box.querySelector ? box.querySelector("#kslTutBack") : el("kslTutBack"), skipBtn = box.querySelector ? box.querySelector("#kslTutSkip") : el("kslTutSkip"), nextBtn = box.querySelector ? box.querySelector("#kslTutNext") : el("kslTutNext");
+      if (backBtn) backBtn.addEventListener("click", function () { if (tutStep > 0) { tutStep--; renderTut(); } });
+      if (skipBtn) skipBtn.addEventListener("click", function () { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; });
+      if (nextBtn) nextBtn.addEventListener("click", function () {
         if (tutStep >= TUTORIAL.length - 1) { tutDone = true; try { G.localStorage.setItem("ksl_tutorial_done", "1"); } catch (e) {} box.hidden = true; }
         else { tutStep++; renderTut(); }
       });
     }
-    bindNudge("kslTutorialBtn", function () { tutDone = false; tutStep = 0; renderTut(); });
+    /* Explicit open: always starts again at step 1, clears the
+     * remembered flag, renders and unhides in this instance's root. */
+    function openTutorial() {
+      tutDone = false; tutStep = 0;
+      try { G.localStorage.removeItem("ksl_tutorial_done"); } catch (e) {}
+      renderTut();
+      var b2 = el("kslTutorial"); if (b2) b2.hidden = false;
+    }
+    bindNudge("kslTutorialBtn", openTutorial);
+    /* Leaving full screen can repaint the stage around the underbar;
+     * if the tutorial was open, render it again in the settled layout
+     * so the box cannot be left hidden or empty by the transition. */
+    try {
+      if (doc.addEventListener) doc.addEventListener("fullscreenchange", function () {
+        if (destroyed || tutDone) return;
+        var b3 = el("kslTutorial");
+        if (b3 && (!b3.hidden || debug.tutOpen)) renderTut();
+      });
+    } catch (e) {}
     if (!tutDone) renderTut();
     startLoad();
     raf = rafImpl(loop);
@@ -1292,6 +1332,10 @@
       getState: function () { return { view: view.id, pose: pose, layer: layer, pathology: pathology }; },
       getDebug: function () { return debug; },
       refresh: refresh,
+      openTutorial: openTutorial,
+      suspend: suspend,
+      resume: resume,
+      isSuspended: function () { return suspended; },
       stop: function () { destroyed = true; if (raf) cancelRaf(raf); if (us && us.destroy) try { us.destroy(); } catch (e) {} }
     };
     return instance;

@@ -165,6 +165,9 @@
    * Lab's render loop and releases its WebGL context; leaving probe
    * mode (close, end, or switching to the display role) resumes it. */
   var probeRenderSuspended = false;
+  function scanLab() {
+    try { return (G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.getLast && G.KARDIA_SCANLAB.getLast()) || null; } catch (e) { return null; }
+  }
   function suspendProbeRender() {
     if (probeRenderSuspended) return;
     probeRenderSuspended = true;
@@ -173,6 +176,11 @@
       if (L && L.suspendLive) L.suspendLive();
       else if (L && L.echolab && L.echolab.suspend) L.echolab.suspend();
     } catch (e) {}
+    /* Scan Lab renders its own WebGL scene and monitor on this page;
+     * suspend it too (suspendLive already does, this covers a Scan Lab
+     * mounted without the host facade), or its frame loop keeps the
+     * probe phone's main thread busy and motion latency climbs. */
+    try { var SL = scanLab(); if (SL && SL.suspend) SL.suspend(); } catch (e) {}
   }
   function resumeProbeRender() {
     if (!probeRenderSuspended) return;
@@ -182,6 +190,7 @@
       if (L && L.resumeLive) L.resumeLive();
       else if (L && L.echolab && L.echolab.resume) L.echolab.resume();
     } catch (e) {}
+    try { var SL = scanLab(); if (SL && SL.resume) SL.resume(); } catch (e) {}
   }
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {

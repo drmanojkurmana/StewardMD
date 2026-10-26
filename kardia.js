@@ -291,6 +291,7 @@
     var gyroOn = !!(st8 && st8.gyroOn);
     return head +
       '<div id="krdScanLab"></div>' +
+      '<div class="krd-syncbar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<div class="krd-lab" id="krdLab">' +
       '<div class="krd-chips" role="group" aria-label="' + I.tx(T("Target views", "Target views")) + '">' + chips + "</div>" +
       '<h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + '</h3>' +
@@ -329,7 +330,7 @@
           '<div class="krd-strip krd-strip-h" id="krdRockStrip" role="slider" aria-label="' + I.tx(T("Rock. Drag left or right.", "Rock. Drag left or right.")) + '" aria-valuemin="-60" aria-valuemax="60" aria-valuenow="0" tabindex="0"><span>Rock</span></div>') +
       '<div class="krd-controls">' + controls + "</div>" +
       '<div class="krd-gyro"><button type="button" class="sp-btn sec" data-act="kecho-syncprobe">' +
-        I.tx(T("SyncProbe", "SyncProbe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span>' +
+        I.tx(T("SyncProbe", "SyncProbe")) + '</button>' +
         '<button type="button" class="sp-btn sec" data-act="kecho-gyro" aria-pressed="' + gyroOn + '">' +
         I.tx(T("Use phone as probe", "Use phone as probe")) + '</button>' +
         '<button type="button" class="sp-btn sec" data-act="kecho-cal" id="krdCalBtn"' + (gyroOn ? "" : " disabled") + '>' +
@@ -398,6 +399,10 @@
   }
 
   function stopEchoLab() {
+    /* Scan Lab paints into the repainted tab DOM, so its instance and
+     * render loop must not outlive that DOM: stop it on every leave and
+     * let mountEchoLab create a fresh one in the new #krdScanLab root. */
+    if (EL.scanlab) { try { EL.scanlab.stop(); } catch (e) {} EL.scanlab = null; }
     if (EL.echolab) { try { EL.echolab.stop(); } catch (e) {} }
     if (EL.audioHandle) { try { EL.audioHandle.stop(); } catch (e) {} EL.audioHandle = null; }
     try { if (G.SMD_CLINIX_AUDIO && G.SMD_CLINIX_AUDIO.stopAll) G.SMD_CLINIX_AUDIO.stopAll(); } catch (e) {}
@@ -996,8 +1001,8 @@
         return false;
       },
       setProbeState: function (s) { var p = ensureEchoProbe(); if (p) { p.setState(s); updateEchoLab(); } return p ? p.getState() : null; },
-      suspendLive: function () { var lab = ensureEchoLab(); if (lab && lab.suspend) lab.suspend(); if (EL.timer) { try { G.clearInterval(EL.timer); } catch (e) {} EL.timer = null; } return true; },
-      resumeLive: function () { var lab = ensureEchoLab(); if (lab && lab.resume) lab.resume(); if (!EL.timer && host.isOpen() && tab() === "echo") EL.timer = G.setInterval(function () { EL.lastCutAt = 0; updateEchoLab(); }, 450); return true; },
+      suspendLive: function () { var lab = ensureEchoLab(); if (lab && lab.suspend) lab.suspend(); if (EL.scanlab && EL.scanlab.suspend) EL.scanlab.suspend(); if (EL.timer) { try { G.clearInterval(EL.timer); } catch (e) {} EL.timer = null; } return true; },
+      resumeLive: function () { var lab = ensureEchoLab(); if (lab && lab.resume) lab.resume(); if (EL.scanlab && EL.scanlab.resume) EL.scanlab.resume(); if (!EL.timer && host.isOpen() && tab() === "echo") EL.timer = G.setInterval(function () { EL.lastCutAt = 0; updateEchoLab(); }, 450); return true; },
       isLiveSuspended: function () { return !!(EL.echolab && EL.echolab.isSuspended && EL.echolab.isSuspended()); },
       getProbeState: function () { var p = ensureEchoProbe(); return p ? p.getState() : null; },
       getScore: function () { var p = ensureEchoProbe(), v = echoCurrentView(); return p && v ? p.score(v) : null; },

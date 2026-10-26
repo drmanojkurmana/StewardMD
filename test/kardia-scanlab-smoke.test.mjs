@@ -166,7 +166,7 @@ test("Scan Lab smoke: body loads, probe at target, monitor cuts, clip plays", as
     });
   };
   /* real sim modules for the monitor */
-  global.window = { document: doc, THREE, fetch: fetchImpl, localStorage: { _m: {}, getItem(k) { return this._m[k] || null; }, setItem(k, v) { this._m[k] = v; } }, navigator: {}, devicePixelRatio: 1 };
+  global.window = { document: doc, THREE, fetch: fetchImpl, localStorage: { _m: {}, getItem(k) { return this._m[k] || null; }, setItem(k, v) { this._m[k] = v; }, removeItem(k) { delete this._m[k]; } }, navigator: {}, devicePixelRatio: 1 };
   const T = require("../kardia-scan-targets.js");
   const GEOM = require("../kardia-sim-geom.js");
   const HEART = require("../kardia-sim-heart.js");
@@ -235,6 +235,36 @@ test("Scan Lab smoke: body loads, probe at target, monitor cuts, clip plays", as
   assert.equal(doc.getElementById("kslTargetName").textContent, "Subcostal 4C", "sc4c alias switches the title");
   assert.equal(doc.getElementById("kslView-subcostal_4c").attrs["aria-pressed"], "true", "sc4c alias switches the picker");
   assert.equal(inst.getDebug().clipRequestedFor, "tte_subcostal_4c", "sc4c alias switches the monitor");
+  /* Tutorial open path: it is rendered on step 1 at create, Next and
+   * Back move, a step chip jumps, Skip closes and remembers, and the
+   * tutorial button reopens it on step 1 after the done flag is set. */
+  const tut = () => doc.getElementById("kslTutorial");
+  const tutStepIs = (n) => tut() && !tut().hidden && tut().innerHTML.includes("Step " + n + " of 7");
+  assert.ok(tutStepIs(1), "tutorial opens on step 1 at create");
+  doc.getElementById("kslTutNext").click();
+  assert.ok(tutStepIs(2), "tutorial Next advances to step 2");
+  const chips = doc._query("[data-tut]");
+  chips[chips.length - 3].click(); /* last render's chip for step 5 (index 4 of 7) */
+  assert.ok(tutStepIs(5), "tutorial step chip jumps to step 5");
+  doc.getElementById("kslTutBack").click();
+  assert.ok(tutStepIs(4), "tutorial Back returns to step 4");
+  doc.getElementById("kslTutSkip").click();
+  assert.equal(tut().hidden, true, "tutorial Skip closes it");
+  assert.equal(global.window.localStorage.getItem("ksl_tutorial_done"), "1", "tutorial Skip remembers");
+  doc.getElementById("kslTutorialBtn").click();
+  assert.ok(tutStepIs(1), "tutorial button reopens on step 1 after Skip");
+  assert.equal(global.window.localStorage.getItem("ksl_tutorial_done"), null, "tutorial button clears the remembered flag");
+  /* Probe role: suspend stops the render loop, resume restarts it. */
+  const framesBeforeSuspend = inst.getDebug().frames;
+  inst.suspend();
+  assert.equal(inst.isSuspended(), true, "Scan Lab suspends for the probe role");
+  assert.equal(inst.getDebug().suspended, true, "debug reports Scan Lab suspended");
+  await pump(Date.now() + 1200);
+  assert.equal(inst.getDebug().frames, framesBeforeSuspend, "no frames render while suspended");
+  inst.resume();
+  assert.equal(inst.isSuspended(), false, "Scan Lab resumes after the probe role");
+  await pump(Date.now() + 1400);
+  assert.ok(inst.getDebug().frames > framesBeforeSuspend, "frames render again after resume");
   console.log("SCANLAB_EVIDENCE mergedStatic=" + inst.getDebug().mergedStatic + " drawCalls=" + inst.getDebug().drawCalls + " pixelRatio=" + inst.getDebug().pixelRatio + " fps=" + inst.getDebug().fps);
   assert.equal(inst.getDebug().mergedStatic, true, "static geometry merged on the merged path");
   assert.ok(inst.getDebug().drawCalls > 0 && inst.getDebug().drawCalls < 15, "merged draw calls under 15: " + inst.getDebug().drawCalls);

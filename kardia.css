@@ -201,3 +201,5 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-echo-col #krdScanLab { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 .krd-root .krd-echo-col .ksl-wrap.ksl-wrap { height: 100%; }
 .krd-root .krd-echo-col:has(#krdScanLab .ksl-wrap) #krdLab { display: none; }
+.krd-root .krd-syncbar { flex: 0 0 auto; display: flex; align-items: center; min-height: 0; }
+.krd-root .krd-syncbar .krd-syncpill:empty { display: none; }
