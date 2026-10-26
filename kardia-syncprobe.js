@@ -221,9 +221,12 @@
     d.body.appendChild(el);
     return el;
   }
+  /* The layer is fixed over the whole screen and carries the Kardia theme
+   * (.krd-root, solid background), so it must be hidden whenever no sheet
+   * is showing, or it covers Kardia with a blank screen. */
   function clearRoot() {
     var r = root();
-    if (r) r.innerHTML = "";
+    if (r) { r.innerHTML = ""; r.hidden = true; r.onclick = null; r.onkeydown = null; }
   }
   function spHaptic(kind) {
     try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.haptic) G.KARDIA_PREMIUM.haptic(kind); } catch (e) {}
@@ -239,6 +242,7 @@
     if (!r) return;
     var d = doc();
     if (!S.returnFocus && d && d.activeElement && d.activeElement !== d.body) S.returnFocus = d.activeElement;
+    r.hidden = false;
     r.innerHTML = sheetHtml(title, bodyHtml);
     var first = r.querySelector(".krd-sp-sheet .sp-btn");
     if (first) try { first.focus(); } catch (e) {}

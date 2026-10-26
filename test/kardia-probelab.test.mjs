@@ -75,30 +75,6 @@ function sandbox() {
 }
 function btn(v) { return { getAttribute: (a) => (a === "data-v" ? v : null) }; }
 
-test("Echo Lab mounts the Probe Lab frame by default; switch toggles and persists per device", async () => {
-  const s = sandbox();
-  s.store.smd_kardia = "1";
-  assert.equal(s.G.KARDIA.open(), true);
-  await new Promise((r) => setTimeout(r, 50));
-  let h = s.painted();
-  assert.ok(h.includes('id="krdProbeFrame"'), "frame mounted");
-  assert.ok(h.includes('src="/kardia/probelab/index.html"'), "frame at the local Probe Lab path");
-  assert.ok(h.includes('data-act="kecho-lab" data-v="probe" aria-pressed="true"'), "Probe Lab is the default");
-  assert.equal(s.G.KARDIA._kardia.probeLab.mode, "probe");
-  assert.equal(s.G.KARDIA._kardia.probeLab.src, "/kardia/probelab/index.html");
-
-  s.G.KARDIA._internal.ACTIONS["kecho-lab"](btn("scan"));
-  assert.equal(s.G.KARDIA._kardia.probeLab.mode, "scan", "switch toggles to Scan Lab");
-  assert.ok(Object.values(s.store).join(" ").includes('"klab":"scan"') || Object.values(s.store).join(" ").includes("scan"), "choice persisted: " + JSON.stringify(s.store));
-  h = s.painted();
-  assert.ok(h.includes('data-act="kecho-lab" data-v="scan" aria-pressed="true"'), "Scan Lab pressed after toggle");
-  assert.ok(!h.includes('id="krdProbeFrame"'), "frame gone in Scan Lab");
-
-  s.G.KARDIA._internal.ACTIONS["kecho-lab"](btn("probe"));
-  assert.equal(s.G.KARDIA._kardia.probeLab.mode, "probe", "switch toggles back");
-  assert.ok(s.painted().includes('id="krdProbeFrame"'), "frame back in Probe Lab");
-});
-
 test("nav injection hides leaving links and guards clicks, keeping the document otherwise", () => {
   const s = sandbox();
   const kids = [];

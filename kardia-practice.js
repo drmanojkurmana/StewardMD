@@ -978,8 +978,7 @@
       G.KARDIA_CLIPS.load().then(function () {
         var box = G.document.getElementById("krdpCredits");
         if (!box || P.screen !== "credits") return;
-        var headHtml = G.KARDIA_CLIPS.creditsHtml() +
-          ((G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.bodyCreditsHtml) ? '<h3 class="sp-h3">Body models</h3>' + G.KARDIA_SCANLAB.bodyCreditsHtml() : "");
+        var headHtml = G.KARDIA_CLIPS.creditsHtml();
         box.innerHTML = headHtml + probeLabCreditsHtml(null, esc);
         if (G.fetch) G.fetch(base() + "probelab/assets/credits.json").then(function (r) { return r.json(); }).then(function (data) {
           var b2 = G.document.getElementById("krdpCredits");

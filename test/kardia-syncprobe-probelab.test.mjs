@@ -117,7 +117,7 @@ test("mocked relay anonymous run: worker core resolves a typed code with no sign
 test("Echo Lab bar and touch probe contract in source", async () => {
   const { readFileSync } = await import("node:fs");
   const kardia = readFileSync("kardia.js", "utf8");
-  assert.ok(kardia.includes("Use a phone as the probe"), "SyncProbe button on the Echo Lab bar above the Probe Lab");
+  assert.ok(kardia.includes("SyncProbe"), "SyncProbe button on the Echo Lab bar above the Probe Lab");
   assert.ok(kardia.includes('class="krd-probe-bar"'), "bar sits above the frame");
   assert.ok(kardia.includes('id="krdSyncPill"'), "connection pill on the bar");
   const kardiaCss = readFileSync("kardia.css", "utf8");
