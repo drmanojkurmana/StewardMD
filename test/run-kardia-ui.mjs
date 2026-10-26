@@ -678,7 +678,7 @@ try {
   ok((await ev(`return (function(){var m=document.getElementById('kslMonitor'); if(!m) return false; var b=m.getBoundingClientRect();
     var fx=[0.08,0.5,0.92], fy=[0.08,0.5,0.92];
     for(var i=0;i<fx.length;i++) for(var j=0;j<fy.length;j++){ var hit=document.elementFromPoint(b.left+b.width*fx[i], b.top+b.height*fy[j]);
-      if(hit!==m && (!hit || hit.id!=='kslReal')) return false; } return true;})();`)) === true, "nothing overlaps the Scan Lab sector");
+      if(hit!==m && (!hit || (hit.id!=='kslReal' && hit.id!=='kslDegraded'))) return false; } return true;})();`)) === true, "nothing overlaps the Scan Lab sector");
   const kslMon = await visibleStats("kslMonitor");
   ok(visibleOk(kslMon), `Scan Lab monitor shows the simulated image (mean ${fmtMean(kslMon)}, hit ${kslMon ? kslMon.hitId : "?"})`);
   ok((await ev(`return KARDIA_SCANLAB.getLast().getDebug().frames>0 && KARDIA_SCANLAB.getLast().getDebug().drawCalls>0;`)) === true, "Scan Lab scene is rendering frames");
@@ -911,7 +911,8 @@ try {
   await ev(BUSY_INSTALL);
   await ev(`document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
   ok(await until(`return !!window.KARDIA_SYNCPROBE && !!window.KARDIA_SYNC;`, 15000), "SyncProbe UI and the real KARDIA_SYNC core load with Kardia");
-  ok(await until(`return !!document.getElementById('krdSyncPill');`, 8000), "Echo Lab carries the SyncProbe pill slot");
+  ok(await until(`return !!document.getElementById('kslScene') && !!document.querySelector('#krdScanLab [data-act="kecho-syncprobe"]');`, 20000), "Scan Lab renders the SyncProbe button in its scene corner controls");
+  ok(await until(`return !!document.querySelector('#krdScanLab #krdSyncPill');`, 8000), "Scan Lab carries the SyncProbe pill slot above the monitor");
   // Touch controls work with no probe paired (also covered in section 3b).
   ok((await ev(`return !document.getElementById('krdRot').disabled;`)) === true, "touch controls are enabled with no probe paired");
   await ev(`window.__KARDIA_SYNC_LOOPBACK_TEST__ = true; if (!KARDIA_SYNC.getTransport('loopback')) KARDIA_SYNC.registerTransport(KARDIA_SYNC.createBroadcastLoopbackTransport()); return 1;`);
@@ -929,7 +930,7 @@ try {
   await evS(sidB, `var t=document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await untilS(sidB, `return KARDIA.isOpen() && !!document.querySelector('#smdKardia [data-act=ktab][data-t=echo]');`, 20000), "page B opens Kardia");
   await evS(sidB, `document.querySelector('#smdKardia [data-act=ktab][data-t=echo]').click(); return 1;`);
-  ok(await untilS(sidB, `return !!document.querySelector('#smdKardia #krdSector');`, 20000), "page B reaches Echo Lab");
+  ok(await untilS(sidB, `return !!document.getElementById('kslScene') && !!document.querySelector('#krdScanLab [data-act="kecho-syncprobe"]');`, 20000), "page B reaches the Scan Lab with its SyncProbe button");
   /* Headless Chrome has no native barcode scanner, so scannerAvailable()
    * is false and the scan-first join screen quite correctly hides its
    * primary Scan button ("Scanning is not available on this phone").
@@ -941,8 +942,8 @@ try {
   await evS(sidB, BUSY_INSTALL);
   const spTxtS = async (sid) => evS(sid, `return document.getElementById('krdSpRoot') ? document.getElementById('krdSpRoot').innerText : '';`);
   const spClickS = async (sid, sel) => evS(sid, `(function(){var b=${sel}; if(b){b.click(); return 1;} return 0;})()`);
-  // Display role on page A: role sheet, pair sheet, QR, code, live state.
-  await ev(`[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
+  // Display role on page A, started from the Scan Lab: role sheet, pair sheet, QR, code, live state.
+  await ev(`document.querySelector('#krdScanLab [data-act="kecho-syncprobe"]').click(); return 1;`);
   ok(await until(`return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Pair a probe')>=0;`, 8000), "SyncProbe button opens the role sheet");
   await spClickS(sessionId, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-display')`);
   ok(await until(`return !!document.getElementById('krdSpQr') && !!(KARDIA_SYNC.session() && KARDIA_SYNC.session().payload);`, 15000), "pair sheet shows the pairing QR canvas once the real pairing is ready");
@@ -958,7 +959,7 @@ try {
   ok(!/[–—]/.test(await spTxtS(sessionId)), "no em or en dash in the pair sheet");
   // Probe role on page B: nearby first, scan second, typing third. Motion
   // is only asked after pairing, so no motion buttons appear here.
-  await evS(sidB, `[...document.querySelectorAll('#smdKardia [data-act]')].find(b=>b.getAttribute('data-act')==='kecho-syncprobe').click(); return 1;`);
+  await evS(sidB, `document.querySelector('#krdScanLab [data-act="kecho-syncprobe"]').click(); return 1;`);
   await spClickS(sidB, `[...document.querySelectorAll('#krdSpRoot [data-act]')].find(b=>b.getAttribute('data-act')==='sp-probe')`);
   ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Use this phone as a probe')>=0;`, 8000), "probe intro opens on nearby displays");
   ok(await untilS(sidB, `return (document.getElementById('krdSpRoot')||{innerText:''}).innerText.indexOf('Nearby displays')>=0;`, 8000), "nearby displays are the first join path");
@@ -980,7 +981,7 @@ try {
   await spClickS(sidB, `document.querySelector('#krdSpConfirmP [data-act=sp-confirm]')`);
   ok(await until(`return KARDIA_SYNC.state().name==='connected';`, 15000), "page A connects after both confirm");
   ok(await untilS(sidB, `return KARDIA_SYNC.state().name==='connected';`, 15000), "page B connects after both confirm");
-  ok(await until(`return (document.querySelectorAll('#krdSyncPill button').length>0);`, 8000), "connected: the sheet closes and the pill appears on Echo Lab");
+  ok(await until(`return (document.querySelectorAll('#krdScanLab #krdSyncPill button').length>0);`, 8000), "connected: the sheet closes and the pill appears above the Scan Lab monitor");
   const spPill = await ev(`return document.querySelector('#krdSyncPill').innerText;`);
   ok(/ms/.test(spPill || ""), `pill shows link latency ("${(spPill || "").trim()}")`);
   /* Same scale correction as the tab height check above: the app is
@@ -1010,11 +1011,13 @@ try {
   // attitude) and the time for the display tilt to cross half the step.
   // A slow ramp is not measured: it would count the ramp, not the link.
   ok((await evS(sidB, `return window.KARDIA_SYNCPROBE.isProbeRenderSuspended()===true;`)) === true, "probe page: entering probe mode suspends Echo Lab rendering");
+  ok((await evS(sidB, `return !!(window.KARDIA_SCANLAB && KARDIA_SCANLAB.getLast() && KARDIA_SCANLAB.getLast().isSuspended()===true);`)) === true, "probe page: entering probe mode suspends Scan Lab 3D rendering");
   ok((await evS(sidB, `return KARDIA._kardia.echoLab.debug().rendererCreated===false && KARDIA._kardia.echoLab.debug().running===false;`)) === true, "probe page: no live renderer or render loop while it is the probe");
   await ev(BUSY_RESET); await evS(sidB, BUSY_RESET);
   await evS(sidB, `window.dispatchEvent(new DeviceOrientationEvent('deviceorientation',{alpha:0,beta:0,gamma:0})); return 1;`);
   await sleep(400);
   const tiltBefore = await ev(`return KARDIA._kardia.echoLab.getProbeState().tiltDeg;`);
+  const scanPoseBefore = await ev(`return JSON.stringify(KARDIA_SCANLAB.getLast().getState().pose);`);
   const stepDeg = 25, halfTilt = tiltBefore + stepDeg / 2;
   const e2eStart = Date.now();
   let e2eMs = null;
@@ -1026,6 +1029,8 @@ try {
   }
   const tiltAfter = await ev(`return KARDIA._kardia.echoLab.getProbeState().tiltDeg;`);
   ok(e2eMs !== null && Math.abs(tiltAfter - tiltBefore) > 5, `page A probe state follows page B rotation within tolerance (tilt ${tiltBefore} to ${tiltAfter})`);
+  const scanPoseAfter = await ev(`return JSON.stringify(KARDIA_SCANLAB.getLast().getState().pose);`);
+  ok(scanPoseAfter !== scanPoseBefore, "page A Scan Lab 3D probe and image follow the paired phone pose");
   await sleep(1200);
   const rttA = await ev(`return KARDIA_SYNC.stats().rttMs;`);
   const rttB = await evS(sidB, `return KARDIA_SYNC.stats().rttMs;`);
@@ -1077,7 +1082,7 @@ try {
       ok(await untilS(sidB, `return /Probe session|Use this phone/.test((document.getElementById('krdSpRoot')||{innerText:''}).innerText);`, 8000), `${w}px ${th}: probe screen`);
       await shotS(sidB, `kardia-syncprobe-probe-${w}-${th}`);
       await ev(`window.KARDIA_SYNCPROBE.dismiss(); return 1;`);
-      ok(await until(`return (document.querySelector('#krdSyncPill')||{innerText:''}).innerText.length>0;`, 8000), `${w}px ${th}: pill on Echo Lab`);
+      ok(await until(`return (document.querySelector('#krdScanLab #krdSyncPill')||{innerText:''}).innerText.length>0;`, 8000), `${w}px ${th}: pill above the Scan Lab monitor`);
       await shot(`kardia-syncprobe-pill-${w}-${th}`);
     }
   }

@@ -8,7 +8,7 @@
    localStorage smd_kardia = "1" (same tester mechanism as the other module flags, no early-access tier).
    Levels (engine pattern): MBBS free; Resident, Fellow and Sonographer are StewardMD Pro. The free
    preview is the first KARDIA_FREE_LESSONS Learn ECG lessons; everything else is Pro.
-   Content is ai_drafted: every screen carries the "To be verified, draft" footer until clinical review. */
+   Content stays ai_drafted in the data until clinical review; no draft footer is shown on the learner screen. */
 (function (G) {
   "use strict";
   var SP = G.SPECIALTY;
@@ -49,7 +49,7 @@
     storeKey: "smd_kardia_v1", prefKey: "smd_kardia_prefs", flag: "smd_kardia",
     title: T("Kardia", "कार्डिया"), subtitle: T("Echo and ECG learning", "इको और ECG सीखना"),
     levels: { free: ["mbbs"] }, proFeature: "kardia",
-    statusBg: "#06090b", draft: true
+    statusBg: "#06090b", draft: false
   });
   if (SP.features && SP.features.learn) SP.features.learn(host);
   if (SP.features && SP.features.bank) SP.features.bank(host, { id: "mcq", index: "decks/mcq/index.json" });

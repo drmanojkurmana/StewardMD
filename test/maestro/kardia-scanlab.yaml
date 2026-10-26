@@ -1,0 +1,22 @@
+appId: in.stewardmd.app
+name: Kardia Scan Lab
+---
+- openLink: stewardmd://kardia
+- assertVisible: "Open"
+- assertVisible: "Use a phone as the probe"
+- takeScreenshot: kardia-scanlab-first-screen
+- swipe:
+    start: 50%, 40%
+    end: 64%, 40%
+    duration: 400
+- assertVisible: "Parasternal"
+- tapOn: "Parasternal"
+- tapOn: "Short axis"
+- tapOn: "Apical"
+- tapOn: "Subcostal"
+- tapOn: "Suprasternal"
+- tapOn: "Use a phone as the probe"
+- assertVisible: "SyncProbe"
+- assertVisible: "Pair a probe"
+- assertVisible: "Use this phone as a probe"
+- takeScreenshot: kardia-scanlab-syncprobe
