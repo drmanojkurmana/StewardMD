@@ -1,29 +1,22 @@
-/* kardia-scanlab.css - Scan Lab round 8. Only Kardia tokens; no new palette.
- * Design contract: Operate mode. Real flow only, nothing overlays
- * the sector: host header, scene, monitor, slim result row, view
- * picker, then the collapsible readouts. The wrap never scrolls on
- * the phone; scene and monitor flex to the height left between the
- * header and the picker inside 100dvh with safe area insets. The
- * coaching line sits on the scene, wraps without cutting words and
- * is never truncated; readouts plus depth sit in a collapsible row
- * below the picker. States: loading, ready, error with retry,
- * offline note, empty clip note, long text wraps, reduced motion.
- * SyncProbe sits in the scene corner controls and in the last
- * tutorial step, with its status pill above the monitor. Probe
- * handles keep 44 px hit areas with a visible ring. The view title
- * chip never breaks words and uses the short window name. The fps
- * line is debug only. iPad landscape keeps scene and monitor side by
- * side. States: loading, ready, error with retry, offline note,
- * empty clip note, long text wraps, reduced motion, light and dark
- * via Kardia tokens. Motion: press feedback only, transform and
- * opacity, 120 to 140 ms with the Kardia ease; instant under reduced
- * motion. Targets stay 44 px. */
-.krd-root .ksl-wrap{display:flex;flex-direction:column;gap:6px;flex:1 1 auto;width:100%;height:100%;min-height:0;overflow:hidden;padding-bottom:calc(4px + env(safe-area-inset-bottom,0px));-webkit-tap-highlight-color:transparent}
-.krd-root .ksl-scene-col,.krd-root .ksl-monitor-col{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1 1 0}
+/* kardia-scanlab.css - Scan Lab phone layout round 2. Only Kardia tokens; no new palette.
+ * Design contract: Operate mode. Phone portrait is one scrolling
+ * column in the host scroll area, in this order: scene, coaching
+ * line, monitor, view picker, then tutorial, readouts and credits
+ * reached by scrolling. Scene is about 38 percent of the height left
+ * under the Kardia header and tab strip, minimum 260 pt. Monitor is
+ * full width at about 4:3, minimum 280 pt. Nothing overlays the
+ * coaching line and no flex row squeezes the scene or monitor.
+ * States: loading, ready, error with retry, offline note, empty
+ * clip note, long text wraps, reduced motion, light and dark via
+ * Kardia tokens. Motion: press feedback only, transform and
+ * opacity, 120 to 140 ms with the Kardia ease; instant under
+ * reduced motion. Targets stay 44 px, safe area insets apply. */
+.krd-root .ksl-wrap{display:flex;flex-direction:column;gap:6px;width:100%;height:auto;min-height:0;overflow:visible;padding-bottom:calc(4px + env(safe-area-inset-bottom,0px));-webkit-tap-highlight-color:transparent}
+.krd-root .ksl-scene-col,.krd-root .ksl-monitor-col{display:flex;flex-direction:column;min-height:0;min-width:0;flex:0 0 auto}
 .krd-root .ksl-title{margin:0;font-size:20px;line-height:1.25;letter-spacing:-.01em;overflow-wrap:anywhere}
 .krd-root .ksl-sub,.krd-root .ksl-note,.krd-root .ksl-credit{color:var(--sp-mut);font-size:13px;line-height:1.45;margin:4px 0 0;overflow-wrap:anywhere}
 .krd-root .ksl-credit{flex:0 0 auto}
-.krd-root .ksl-stage{position:relative;flex:1 1 0;height:auto;min-height:0;overflow:hidden;border-radius:12px;background:#131b22}
+.krd-root .ksl-stage{position:relative;flex:0 0 auto;height:max(260px,30dvh);min-height:260px;overflow:hidden;border-radius:12px;background:#131b22}
 .krd-root #kslScene{position:absolute;inset:0;display:block;width:100%;height:100%;border-radius:12px;background:#131b22;touch-action:none}
 .krd-root .ksl-viewname{position:absolute;top:10px;left:10px;z-index:5;max-width:calc(100% - 182px);padding:6px 10px;border:1px solid var(--sp-line);border-radius:10px;background:var(--sp-s1);pointer-events:none;word-break:normal;overflow-wrap:normal}
 .krd-root .ksl-viewname .ksl-title,.krd-root .ksl-viewname .ksl-sub{white-space:nowrap;word-break:normal;overflow-wrap:normal}
@@ -53,7 +46,7 @@
 @media(hover:hover) and (pointer:fine){.krd-root .ksl-chip:hover,.krd-root .ksl-btn:hover,.krd-root .ksl-view:hover,.krd-root .ksl-iconbtn:hover{background:var(--sp-s2)}}
 .krd-root .ksl-underbar{display:flex;flex-direction:column;gap:8px;flex:0 0 auto;min-width:0}
 .krd-root .ksl-under-left,.krd-root .ksl-under-right{display:flex;flex-direction:column;gap:6px;min-width:0}
-.krd-root .ksl-coach{position:absolute;left:10px;right:10px;bottom:10px;z-index:5;font-size:15px;line-height:1.4;font-weight:650;margin:0;padding:8px 10px;border:1px solid var(--sp-line);border-radius:10px;background:var(--sp-s1);color:var(--sp-text);overflow-wrap:normal;word-break:normal;white-space:normal;overflow:visible;text-overflow:clip;max-width:calc(100% - 20px);pointer-events:none}
+.krd-root .ksl-coach{position:static;flex:0 0 auto;font-size:15px;line-height:1.4;font-weight:650;margin:6px 0 0;padding:8px 10px;border:1px solid var(--sp-line);border-radius:10px;background:var(--sp-s1);color:var(--sp-text);overflow-wrap:normal;word-break:normal;white-space:normal;overflow:visible;text-overflow:clip;max-width:100%}
 .krd-root .ksl-fps[hidden]{display:none}
 .krd-root .ksl-readout-details .ksl-readouts{margin-top:6px}
 .krd-root .ksl-readout-details .ksl-depth{margin-top:6px}
@@ -65,7 +58,7 @@
 .krd-root .ksl-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;background:var(--sp-acc);color:var(--sp-on-pri);font-size:12px;font-weight:700}
 .krd-root .ksl-badge[hidden]{display:none}
 .krd-root .ksl-hr{font-size:13px;color:var(--sp-text);font-variant-numeric:tabular-nums;margin:0 0 0 auto}
-.krd-root .ksl-monitor-wrap{position:relative;border-radius:12px;background:#000;overflow:hidden;width:100%;aspect-ratio:auto;flex:1 1 0;height:auto;min-height:0}
+.krd-root .ksl-monitor-wrap{position:relative;border-radius:12px;background:#000;overflow:hidden;width:100%;aspect-ratio:4/3;flex:0 0 auto;height:auto;min-height:280px}
 .krd-root #kslMonitor{position:absolute;inset:0;display:block;width:100%;height:100%;background:#000}
 .krd-root #kslReal{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;pointer-events:none;transition:opacity 600ms cubic-bezier(.23,1,.32,1)}
 .krd-root #kslReal[hidden]{display:none}
@@ -151,10 +144,9 @@
   .krd-root .ksl-viewname .ksl-title{font-size:17px;white-space:normal;overflow-wrap:break-word}
   .krd-root .ksl-viewname .ksl-sub{white-space:normal}
   .krd-root .ksl-read .ksl-range{display:none}
-  .krd-root .ksl-wrap{overflow:hidden}
+  .krd-root .ksl-wrap{overflow:visible;height:auto}
   .krd-root .ksl-pickerbar{position:static}
   .krd-root .ksl-underbar{gap:4px}
-  .krd-root .ksl-credit{display:none}
   .krd-root .ksl-result{font-size:13px}
 }
 @media(prefers-reduced-motion:reduce){

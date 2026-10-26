@@ -6,17 +6,22 @@ const css = readFileSync(new URL("../kardia-scanlab.css", import.meta.url), "utf
 const hostCss = readFileSync(new URL("../kardia.css", import.meta.url), "utf8");
 const js = readFileSync(new URL("../kardia-scanlab.js", import.meta.url), "utf8");
 
-test("phone layout is real flow: picker in flow, wrap does not scroll or overlay the sector", () => {
-  assert.match(css, /\.ksl-wrap\{[^}]*overflow:hidden/);
+test("phone layout is a scrolling column: scene, coach, monitor, picker, then tutorial below", () => {
+  assert.match(css, /\.ksl-wrap\{[^}]*overflow:visible/);
   assert.match(css, /\.ksl-pickerbar\{[^}]*position:static/);
   assert.ok(!/\.ksl-pickerbar\{[^}]*position:sticky/.test(css), "picker is never sticky over the monitor");
-  assert.match(css, /\.ksl-scene-col,\.krd-root \.ksl-monitor-col\{[^}]*flex:1 1 0/);
-  assert.match(css, /\.ksl-monitor-wrap\{[^}]*flex:1 1 0/);
+  assert.match(css, /\.ksl-stage\{[^}]*min-height:260px/);
+  assert.match(css, /\.ksl-monitor-wrap\{[^}]*aspect-ratio:4\/3[^}]*min-height:280px/);
+  assert.match(css, /\.ksl-coach\{[^}]*position:static/);
   assert.match(hostCss, /\.krd-root \{\s*height:100dvh/);
+  const scene = js.indexOf('class="ksl-scene-col"');
+  const coach = js.indexOf('id="kslCoach"');
   const monitor = js.indexOf('class="ksl-monitor-col"');
   const result = js.indexOf('id="kslResult"');
   const picker = js.indexOf('class="ksl-pickerbar"');
-  assert.ok(monitor > 0 && result > monitor && picker > result, "slim result row sits under the monitor, before the picker");
+  const tutorial = js.indexOf('id="kslTutorial"');
+  assert.ok(scene > 0 && coach > scene && monitor > coach && result > monitor && picker > result && tutorial > picker, "coach under scene, monitor before picker, tutorial below picker");
+  assert.ok(js.includes('T.byId("plax")'), "first open starts at PLAX");
 });
 
 test("SyncProbe is a 44px round icon button in the scene row; its text label lives in tutorial and Practice sheet", () => {

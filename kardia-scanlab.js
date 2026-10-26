@@ -573,7 +573,7 @@
     var fetchImpl = opts.fetch || (G.fetch ? G.fetch.bind(G) : null);
     var rafImpl = opts.raf || (G.requestAnimationFrame ? G.requestAnimationFrame.bind(G) : function (fn) { return setTimeout(function () { fn((G.performance && G.performance.now) ? G.performance.now() : Date.now()); }, 16); });
     var cancelRaf = opts.cancelRaf || (G.cancelAnimationFrame ? G.cancelAnimationFrame.bind(G) : clearTimeout);
-    var view = T.VIEWS[0], activeWindow = windowForView(view.id), layer = "skin", showLabels = false;
+    var view = T.byId("plax") || T.VIEWS[0], activeWindow = windowForView(view.id), layer = "skin", showLabels = false;
     var pathology = opts.pathology || null;
     var showDebug = !!opts.debug;
     if (!showDebug) try { showDebug = /[?&]debug([=&]|$)/.test(String(G.location && G.location.search || "")); } catch (e) {}
@@ -606,7 +606,6 @@
       '<div class="ksl-handle" id="kslHandle" aria-hidden="true"></div>' +
       '<div class="ksl-viewname"><h3 class="ksl-title" id="kslTargetName">' + esc(view.label) + '</h3>' +
       '<p class="ksl-sub" id="kslFamily">' + esc(shortWindowName(view)) + '</p></div>' +
-      '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
       '<div class="ksl-load" id="kslLoading" role="status"><p class="ksl-note" id="kslLoadText">Loading Scan Lab.</p><div class="ksl-load-track"><span class="ksl-load-fill" id="kslLoadFill"></span></div><button type="button" class="ksl-btn" id="kslRetryLoad" hidden>Retry</button></div>' +
       '<div class="ksl-stage-btns">' +
       '<button type="button" class="ksl-iconbtn" id="kslSyncProbe" data-act="kecho-syncprobe" aria-label="Use a phone as the probe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></button>' +
@@ -618,6 +617,7 @@
       '<div class="ksl-layers" id="kslLayers" role="group" aria-label="Body layers" hidden>' +
       ["skin", "glass", "anatomy"].map(function (l) { return '<button type="button" class="ksl-chip" data-layer="' + l + '" aria-pressed="' + (l === layer) + '">' + l.charAt(0).toUpperCase() + l.slice(1) + '</button>'; }).join("") + '</div>' +
       '</div>' +
+      '<p class="ksl-coach" id="kslCoach" role="status" aria-live="polite">Place the probe on the chest to begin.</p>' +
       '</section>' +
       '<section class="ksl-monitor-col" aria-label="Monitor">' +
       '<div class="ksl-syncbar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
