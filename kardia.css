@@ -137,17 +137,19 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-chest-row { display: flex; gap: 10px; margin-top: 14px; align-items: stretch; }
 .krd-root .krd-chest { position: relative; flex: 1 1 auto; min-height: 132px; min-width: 0;
   border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1);
-  touch-action: none; user-select: none; -webkit-user-select: none; overflow: hidden; }
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; overflow: hidden; }
 .krd-root .krd-chest-label { position: absolute; top: 8px; left: 10px; font-size: 12px;
   font-weight: 650; color: var(--sp-mut); text-transform: capitalize; }
 .krd-root .krd-probe-dot { position: absolute; top: 50%; left: 50%; width: 26px; height: 26px;
-  margin: -13px 0 0 -13px; border-radius: 50%; background: var(--sp-acc); }
+  margin: -13px 0 0 -13px; border-radius: 50%; background: var(--sp-acc); touch-action: none; }
+.krd-root .krd-probe-dot::before { content: ""; position: absolute; inset: -9px; border-radius: 50%; }
 .krd-root .krd-probe-marker { position: absolute; top: 2px; left: 50%; width: 5px; height: 5px;
   margin-left: -2.5px; border-radius: 50%; background: var(--sp-on-pri); }
 .krd-root .krd-strip { display: flex; align-items: center; justify-content: center;
   border: 1px solid var(--sp-line); border-radius: 12px; background: var(--sp-s1);
-  color: var(--sp-mut); font-size: 12px; font-weight: 650; touch-action: none;
+  color: var(--sp-mut); font-size: 12px; font-weight: 650; touch-action: pan-y;
   user-select: none; -webkit-user-select: none; }
+.krd-root .krd-strip-v { touch-action: pan-x; }
 .krd-root .krd-strip-v { flex: 0 0 52px; min-height: 132px; }
 .krd-root .krd-strip-v span { writing-mode: vertical-rl; }
 .krd-root .krd-strip-h { margin-top: 10px; min-height: 44px; width: 100%; }

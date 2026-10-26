@@ -36,6 +36,19 @@
  * the coached range, so the first image already looks like a heart.
  * States: loading, ready, error with retry, offline note, empty clip
  * note, long text wraps, reduced motion, light and dark.
+ * Round 9 (scroll and performance): the scene and monitor are
+ * touch-action pan-y, so any touch that does not start on a probe
+ * handle scrolls the overlay with momentum; the grip, marker, tail
+ * and ghost handles are 44 px DOM targets with touch-action none and
+ * pointer capture, and two fingers orbit and pinch inside the scene
+ * only. Rendering is on demand through a scheduler: frames render
+ * only when the pose, camera, layer or heart phase changes, capped
+ * at 30 fps on phones and 60 fps on tablets, paused while hidden,
+ * off screen (IntersectionObserver) or backgrounded, with the pixel
+ * ratio capped at 2, reused vector temps and a frame summary in
+ * debug. Probe sliders under the monitor cover rotation (-180 to
+ * 180), fan and rock (-30 to 30) and depth (8 to 30 cm), each with
+ * its target range.
  */
 (function (G) {
   "use strict";
@@ -673,7 +686,73 @@
     return { ensure: ensure, state: function () { return state; } };
   }
 
+  /* Probe handle hit test, in scene CSS pixels. Only a press that
+   * lands on the grip, the marker ring, the tail or the ghost target
+   * starts a probe drag; anything else returns null and the press
+   * scrolls the page. Radii keep a 44 px plus hit area on a phone. */
+  function hitTestHandle(p, probe, ghost, opts) {
+    if (!p || !probe) return null;
+    opts = opts || {};
+    var gripR = opts.gripR || 48, markerR = opts.markerR || 104, tailR = opts.tailR || 150, ghostR = opts.ghostR || 48;
+    var d = Math.hypot(p.x - probe.x, p.y - probe.y);
+    if (d <= gripR) return "grip";
+    if (ghost && Math.hypot(p.x - ghost.x, p.y - ghost.y) <= ghostR) return "ghost";
+    if (p.y < probe.y - 22 && d <= tailR) return "tail";
+    if (d <= markerR) return "marker";
+    return null;
+  }
+  /* Render on demand scheduler: a frame is due only when something
+   * was invalidated or the heart phase bucket moved, the surface is
+   * visible and in view, and the frame rate cap allows it. Phones cap
+   * at 30 fps, tablets at 60 fps. No timers live in here, so unit
+   * tests drive it with plain timestamps. */
+  function createRenderScheduler(opts) {
+    opts = opts || {};
+    var maxFps = opts.maxFps || 30;
+    var minInterval = 1000 / Math.max(1, maxFps);
+    var visible = true, inView = true, dirty = true, lastAt = -Infinity, lastPhase = null, renders = 0, skipped = 0;
+    return {
+      invalidate: function () { dirty = true; },
+      setVisible: function (v) { visible = !!v; if (visible) dirty = true; },
+      setInView: function (v) { inView = !!v; if (inView) dirty = true; },
+      isRunnable: function () { return visible && inView; },
+      shouldRender: function (now, phase) {
+        if (!visible || !inView) return false;
+        var phaseMoved = phase != null && phase !== lastPhase;
+        if (!dirty && !phaseMoved) { skipped++; return false; }
+        if (now - lastAt < minInterval) { skipped++; return false; }
+        lastAt = now; if (phase != null) lastPhase = phase; dirty = false; renders++;
+        return true;
+      },
+      stats: function () { return { maxFps: maxFps, renders: renders, skipped: skipped, visible: visible, inView: inView }; }
+    };
+  }
+  /* Probe sliders under the monitor: one source of truth for the
+   * ranges, so the drag clamps, the slider clamps and the tests all
+   * read the same numbers. Rotation is a full turn. */
+  var SLIDERS = [
+    { id: "rotation", key: "rotationDeg", label: "Rotation", min: -180, max: 180, step: 1, unit: " deg" },
+    { id: "fan", key: "fanDeg", label: "Fan", min: -30, max: 30, step: 1, unit: " deg" },
+    { id: "rock", key: "rockDeg", label: "Rock", min: -30, max: 30, step: 1, unit: " deg" },
+    { id: "depth", key: "depthCm", label: "Depth", min: 8, max: 30, step: 1, unit: " cm" }
+  ];
+  function sliderSpec(id) { for (var i = 0; i < SLIDERS.length; i++) if (SLIDERS[i].id === id) return SLIDERS[i]; return null; }
+  function clampSliderValue(id, v) {
+    var s = sliderSpec(id); if (!s) return v;
+    var n = clamp(+v || 0, s.min, s.max);
+    return s.id === "rotation" ? wrapDeg(n === 180 ? 180 : n) : n;
+  }
+  function poseFromSlider(id, v) {
+    var s = sliderSpec(id); if (!s) return {};
+    var patch = {}; patch[s.key] = clampSliderValue(id, v); return patch;
+  }
+  function sliderValueFromPose(id, pose) {
+    var s = sliderSpec(id); if (!s || !pose) return 0;
+    return clampSliderValue(id, pose[s.key]);
+  }
+
   var PURE = { clamp: clamp, wrapDeg: wrapDeg, poseError: poseError, poseDistance: poseDistance, degradationFor: degradationFor, windowBlend: windowBlend, imageMetrics: imageMetrics, isCartoonMetrics: isCartoonMetrics, withinTolerance: withinTolerance,
+    hitTestHandle: hitTestHandle, createRenderScheduler: createRenderScheduler, SLIDERS: SLIDERS, sliderSpec: sliderSpec, clampSliderValue: clampSliderValue, poseFromSlider: poseFromSlider, sliderValueFromPose: sliderValueFromPose,
     CINE_SIM_KEY: CINE_SIM_KEY, SIM_FILES: SIM_FILES, SIM_ATLAS_BASE: SIM_ATLAS_BASE, normalizeCineSimMode: normalizeCineSimMode, loadCineSimMode: loadCineSimMode, saveCineSimMode: saveCineSimMode, simPoseFromPlane: simPoseFromPlane, simPhaseFromHeart: simPhaseFromHeart, loadSimAtlas: loadSimAtlas, createSimLazyLoader: createSimLazyLoader,
     coachText: coachText, createCoach: createCoach, scoreAttempt: scoreAttempt, springStep: springStep, TUTORIAL: TUTORIAL,
     BODY_CREDITS: BODY_CREDITS, bodyCreditsHtml: bodyCreditsHtml, assetCandidates: assetCandidates, assetFileUrl: assetFileUrl,
@@ -764,7 +843,10 @@
       '<section class="ksl-scene-col" aria-label="Body scene">' +
       '<div class="ksl-stage" id="kslStage">' +
       '<canvas id="kslScene" width="720" height="620" aria-label="3D body with probe on the skin. Drag the grip to slide, the marker dashes to rotate, the tail to fan and rock. Drag empty skin to orbit, pinch to zoom, double tap to reset."></canvas>' +
-      '<div class="ksl-handle" id="kslHandle" aria-hidden="true"></div>' +
+      '<div class="ksl-handle" id="kslHandle" data-handle="grip" aria-hidden="true"></div>' +
+      '<div class="ksl-handle ksl-handle-sm" id="kslMarkerHandle" data-handle="marker" aria-hidden="true"></div>' +
+      '<div class="ksl-handle ksl-handle-sm" id="kslTailHandle" data-handle="tail" aria-hidden="true"></div>' +
+      '<div class="ksl-handle ksl-handle-ghost" id="kslGhostHandle" data-handle="ghost" aria-hidden="true"></div>' +
       '<div class="ksl-viewname"><h3 class="ksl-title" id="kslTargetName">' + esc(view.label) + '</h3>' +
       '<p class="ksl-sub" id="kslFamily">' + esc(shortWindowName(view)) + '</p></div>' +
       '<div class="ksl-load" id="kslLoading" role="status"><p class="ksl-note" id="kslLoadText">Loading Scan Lab.</p><div class="ksl-load-track"><span class="ksl-load-fill" id="kslLoadFill"></span></div><button type="button" class="ksl-btn" id="kslRetryLoad" hidden>Retry</button></div>' +
@@ -791,6 +873,12 @@
       '<div class="ksl-real-mask" id="kslRealMask" hidden><video id="kslReal" muted loop playsinline hidden aria-label="Real patient clip"></video></div>' +
       '<video id="kslReal2" muted loop playsinline hidden aria-hidden="true" tabindex="-1"></video>' +
       '</div>' +
+      '<div class="ksl-sliders" role="group" aria-label="Probe controls">' +
+      SLIDERS.map(function (s) {
+        return '<label class="ksl-slider"><span class="ksl-slider-head"><span>' + s.label + '</span><span class="ksl-slider-val" id="kslSliderVal-' + s.id + '">0' + s.unit + '</span></span>' +
+          '<input type="range" id="kslSlider-' + s.id + '" data-slider="' + s.id + '" min="' + s.min + '" max="' + s.max + '" step="' + s.step + '" value="0" aria-label="' + s.label + '">' +
+          '<span class="ksl-slider-range" id="kslSliderRange-' + s.id + '"></span></label>';
+      }).join("") + '</div>' +
       '<div class="ksl-result" id="kslResult" role="status" hidden></div>' +
       '</section>' +
       '<div class="ksl-pickerbar"><nav class="ksl-windows" id="kslWindows" aria-label="Windows">' +
@@ -806,12 +894,12 @@
       '</div>' +
       '<div class="ksl-under-right">' +
       '<div class="ksl-monitor-head"><p class="ksl-mon-label" id="kslMonLabel">Simulated image</p><span class="ksl-badge" id="kslRealBadge" hidden>Real patient</span><p class="ksl-hr" id="kslHr" role="status"></p></div>' +
-      '<details class="ksl-details ksl-readout-details" id="kslReadoutDetails"><summary>Readouts and depth</summary>' +
+      '<details class="ksl-details ksl-readout-details" id="kslReadoutDetails"><summary>Readouts</summary>' +
       '<div class="ksl-readouts" id="kslReadouts">' +
       [["Rotation", "kslRot"], ["Fan", "kslFan"], ["Rock", "kslRock"], ["Depth", "kslDepth"]].map(function (r) {
         return '<div class="ksl-read"><span>' + r[0] + '</span><strong id="' + r[1] + '">0 deg</strong><span class="ksl-range" id="' + r[1] + 'Range"></span></div>';
       }).join("") + '</div>' +
-      '<label class="ksl-depth">Depth <span id="kslDepthVal">16 cm</span><input type="range" id="kslDepthRange" min="8" max="24" step="1" value="16" aria-label="Depth in centimetres"></label></details>' +
+      '</details>' +
       '<details class="ksl-details" id="kslAttrDetails" hidden><summary>Clip details and credits</summary><p class="ksl-note" id="kslAttribution"></p></details>' +
       '<p class="ksl-fps" id="kslFps" role="status"' + (showDebug ? "" : " hidden") + '></p>' +
       '<p class="ksl-credit">Body: HuBMAP Human Reference Atlas (CC BY 4.0) and BodyParts3D (CC BY-SA 2.1 JP), decimated for mobile. Full credits in the Kardia credits list.</p>' +
@@ -1297,6 +1385,7 @@
       } catch (e) {}
       return planeFromPose(pose, view, tp);
     }
+    var beamTemps = null;
     function updateProbeTransforms() {
       if (!scene3 || !parts.probe) return;
       var plane = currentPlane();
@@ -1323,19 +1412,24 @@
         grp.quaternion.premultiply(roll);
         if (grp.userData.dashes) grp.userData.dashes.rotation.y = ((gi ? view.rotationDeg : pose.rotationDeg) * Math.PI) / 180;
       });
-      /* beam fan into the chest */
+      /* beam fan into the chest (reused temps: no per-frame allocation) */
       if (parts.beam) {
+        if (!beamTemps) beamTemps = { origin: new THREE.Vector3(), dir: new THREE.Vector3(), out: new THREE.Vector3(), end: new THREE.Vector3(), side: new THREE.Vector3(), up: new THREE.Vector3(), corner: new THREE.Vector3() };
         var beamS = norm3([plane.beam[0], plane.beam[2], -plane.beam[1]]);
-        var origin = new THREE.Vector3(cScene[0], cScene[1], cScene[2]);
-        var dirV = new THREE.Vector3(beamS[0], beamS[1], beamS[2]);
+        beamTemps.origin.set(cScene[0], cScene[1], cScene[2]);
+        beamTemps.dir.set(beamS[0], beamS[1], beamS[2]);
+        beamTemps.out.set(outScene[0], outScene[1], outScene[2]);
         var lenMm = pose.depthCm * 7;
-        var end = origin.clone().add(dirV.clone().multiplyScalar(lenMm));
-        var side = new THREE.Vector3().crossVectors(dirV, new THREE.Vector3(outScene[0], outScene[1], outScene[2])).normalize().multiplyScalar(lenMm * 0.42);
-        var up2 = new THREE.Vector3().crossVectors(side, dirV).normalize().multiplyScalar(lenMm * 0.30);
+        beamTemps.end.set(beamTemps.origin.x + beamTemps.dir.x * lenMm, beamTemps.origin.y + beamTemps.dir.y * lenMm, beamTemps.origin.z + beamTemps.dir.z * lenMm);
+        beamTemps.side.crossVectors(beamTemps.dir, beamTemps.out).normalize().multiplyScalar(lenMm * 0.42);
+        beamTemps.up.crossVectors(beamTemps.side, beamTemps.dir).normalize().multiplyScalar(lenMm * 0.30);
         var arr = parts.beam.geometry.attributes.position.array;
-        var corners = [end.clone().add(side).add(up2), end.clone().add(side).sub(up2), end.clone().sub(side).sub(up2), end.clone().sub(side).add(up2)];
-        arr[0] = origin.x; arr[1] = origin.y; arr[2] = origin.z;
-        corners.forEach(function (cn, i) { arr[(i+1)*3] = cn.x; arr[(i+1)*3+1] = cn.y; arr[(i+1)*3+2] = cn.z; });
+        arr[0] = beamTemps.origin.x; arr[1] = beamTemps.origin.y; arr[2] = beamTemps.origin.z;
+        var signs = [[1, 1], [1, -1], [-1, -1], [-1, 1]];
+        for (var ci = 0; ci < 4; ci++) {
+          beamTemps.corner.set(beamTemps.end.x + beamTemps.side.x * signs[ci][0] + beamTemps.up.x * signs[ci][1], beamTemps.end.y + beamTemps.side.y * signs[ci][0] + beamTemps.up.y * signs[ci][1], beamTemps.end.z + beamTemps.side.z * signs[ci][0] + beamTemps.up.z * signs[ci][1]);
+          arr[(ci + 1) * 3] = beamTemps.corner.x; arr[(ci + 1) * 3 + 1] = beamTemps.corner.y; arr[(ci + 1) * 3 + 2] = beamTemps.corner.z;
+        }
         parts.beam.geometry.attributes.position.needsUpdate = true;
         if (parts.beam.geometry.computeVertexNormals) parts.beam.geometry.computeVertexNormals();
       }
@@ -1364,6 +1458,23 @@
       Promise.resolve(fetchImpl(opts.viewsUrl || "/kardia/views.json")).then(function (r) { return r && r.ok ? r.json() : null; }).then(function (v) { if (v) { viewsData = v; ensureMonitor(); } }).catch(function () {});
     }
     var lastUsAt = 0, fpsFrames = 0, fpsLastAt = 0;
+    /* Render on demand: phones cap at 30 fps, tablets at 60 fps.
+     * Both schedulers pause together when Kardia is hidden, off
+     * screen or in the background. poseVersion lets one frame skip
+     * every readout write when nothing moved. */
+    var isTablet = false;
+    try { isTablet = !!(G.matchMedia && G.matchMedia("(min-width: 820px)").matches); } catch (e) {}
+    var maxFps = opts.maxFps || (isTablet ? 60 : 30);
+    var sceneSched = createRenderScheduler({ maxFps: maxFps });
+    var monSched = createRenderScheduler({ maxFps: maxFps });
+    var poseVersion = 0, shownPoseVersion = -1, lastInputAt = 0;
+    debug.maxFps = maxFps;
+    debug.perf = { renders: 0, maxFrameMs: 0, avgFrameMs: 0, lastInputMs: 0, summary: "" };
+    var perfMsTotal = 0;
+    function touchPose() { poseVersion++; sceneSched.invalidate(); monSched.invalidate(); }
+    function invalidateAll() { sceneSched.invalidate(); monSched.invalidate(); }
+    function heartPhaseBucket(now) { return reduced ? 0 : Math.floor(((now % 857) / 857) * 30); }
+    function perfMark(name) { try { if (G.performance && G.performance.mark) G.performance.mark(name); } catch (e) {} }
     function drawMonitor(now, plane) {
       var rendererUs = ensureMonitor();
       if (!rendererUs) return;
@@ -1719,20 +1830,35 @@
     if (retryBtn) retryBtn.addEventListener("click", function () { startLoad(); });
 
     /* ---- interaction ---- */
-    function refresh(now) {
+    function syncSliders() {
+      for (var i = 0; i < SLIDERS.length; i++) {
+        var s = SLIDERS[i], input = el("kslSlider-" + s.id);
+        var val = sliderValueFromPose(s.id, pose);
+        if (input && doc.activeElement !== input && +input.value !== val) input.value = val;
+        setText("kslSliderVal-" + s.id, Math.round(val) + s.unit);
+        var targetVal = s.id === "depth" ? view.depthCm : view[s.key];
+        var tol = s.id === "rotation" ? view.tolerance.rotationDeg : s.id === "fan" ? view.tolerance.fanDeg : s.id === "rock" ? view.tolerance.rockDeg : view.tolerance.depthCm;
+        setText("kslSliderRange-" + s.id, "Target " + targetVal + s.unit + ", plus or minus " + tol + s.unit);
+      }
+    }
+    function refresh(now, renderScene, renderMonitor) {
       now = now || nowMs();
+      if (renderScene == null) renderScene = true;
+      if (renderMonitor == null) renderMonitor = true;
       var err = poseError(pose, view), inTol = withinTolerance(err, view);
       var msg = coach.update(coachText(err, view), now);
       if (msg) setText("kslCoach", msg);
-      setText("kslTargetName", view.label);
-      setText("kslFamily", shortWindowName(view));
-      debug.view = view.id; debug.viewLabel = view.label;
-      setText("kslRot", Math.round(pose.rotationDeg) + " deg"); setText("kslRotRange", "target " + view.rotationDeg + " plus or minus " + view.tolerance.rotationDeg);
-      setText("kslFan", Math.round(pose.fanDeg) + " deg"); setText("kslFanRange", "target " + view.fanDeg + " plus or minus " + view.tolerance.fanDeg);
-      setText("kslRock", Math.round(pose.rockDeg) + " deg"); setText("kslRockRange", "target " + view.rockDeg + " plus or minus " + view.tolerance.rockDeg);
-      setText("kslDepth", pose.depthCm + " cm"); setText("kslDepthRange", "target " + view.depthCm + " plus or minus " + view.tolerance.depthCm);
-      var drSync = el("kslDepthRange"); if (drSync && +drSync.value !== pose.depthCm) drSync.value = pose.depthCm;
-      setText("kslDepthVal", pose.depthCm + " cm");
+      if (poseVersion !== shownPoseVersion) {
+        shownPoseVersion = poseVersion;
+        setText("kslTargetName", view.label);
+        setText("kslFamily", shortWindowName(view));
+        debug.view = view.id; debug.viewLabel = view.label;
+        setText("kslRot", Math.round(pose.rotationDeg) + " deg"); setText("kslRotRange", "target " + view.rotationDeg + " plus or minus " + view.tolerance.rotationDeg);
+        setText("kslFan", Math.round(pose.fanDeg) + " deg"); setText("kslFanRange", "target " + view.fanDeg + " plus or minus " + view.tolerance.fanDeg);
+        setText("kslRock", Math.round(pose.rockDeg) + " deg"); setText("kslRockRange", "target " + view.rockDeg + " plus or minus " + view.tolerance.rockDeg);
+        setText("kslDepth", pose.depthCm + " cm"); setText("kslDepthRange", "target " + view.depthCm + " plus or minus " + view.tolerance.depthCm);
+        syncSliders();
+      }
       if (inTol && !wasIn) { holdSince = now; haptic("LIGHT"); }
       if (inTol && now - holdSince > 500 && !attemptDone) {
         attemptDone = true;
@@ -1778,8 +1904,8 @@
       if (parts.heartGroup && heartInst && heartInst.state) {
         try { var hs = heartInst.state(); var cyc = (hs.cycleMs || 857) ? ((hs.cycleTimeMs || 0) / (hs.cycleMs || 857)) : 0; var bs = reduced ? 1 : heartBeatScale(cyc); parts.heartGroup.scale.set(bs, bs, bs); debug.beatScale = bs; debug.beatCycle = cyc; } catch (e) {}
       }
-      var plane = scene3 ? updateProbeTransforms() : currentPlane();
-      if (renderer && scene3 && camera) {
+      var plane = (renderScene || renderMonitor) ? (scene3 ? updateProbeTransforms() : currentPlane()) : null;
+      if (renderScene && renderer && scene3 && camera) {
         /* The canvas is sized by layout (flex basis 0), so its client size
          * is only known after the first layout pass and changes with the
          * viewport. Keep the drawing buffer matched to it, or the scene
@@ -1802,26 +1928,69 @@
         if (!firstFrameDone) { firstFrameDone = true; finishLoadingIfReady(); }
         try { var ps = probeScreen(); if (ps) debug.probeScreen = ps; } catch (e) {}
       }
-      if (cineSimMode === "sim") {
-        ensureMonitor();
-        drawSim(now, plane || currentPlane());
-        debug.degradedActive = false;
-        setText("kslMonLabel", "Simulated image");
-      } else {
-        drawMonitor(now, plane || currentPlane());
-        var cleanShowing = (rcState === "real" && realStatus === "ready" && !!realSrc);
-        var degShown = drawDegraded(now, cleanShowing);
-        debug.degradedActive = !!degShown;
-        if (!cleanShowing) {
-          setText("kslMonLabel", degShown ? "Real patient image" : "Simulated image");
-          var det2 = el("kslAttrDetails"); if (det2 && degShown) det2.hidden = false;
+      if (renderMonitor) {
+        if (cineSimMode === "sim") {
+          ensureMonitor();
+          drawSim(now, plane || currentPlane());
+          debug.degradedActive = false;
+          setText("kslMonLabel", "Simulated image");
+        } else {
+          drawMonitor(now, plane || currentPlane());
+          var cleanShowing = (rcState === "real" && realStatus === "ready" && !!realSrc);
+          var degShown = drawDegraded(now, cleanShowing);
+          debug.degradedActive = !!degShown;
+          if (!cleanShowing) {
+            setText("kslMonLabel", degShown ? "Real patient image" : "Simulated image");
+            var det2 = el("kslAttrDetails"); if (det2 && degShown) det2.hidden = false;
+          }
         }
       }
-      fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; if (showDebug) setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
-      try { var handleEl = el("kslHandle"); var ps2 = probeScreen(); if (handleEl && ps2) { handleEl.style.left = Math.round(ps2.x) + "px"; handleEl.style.top = Math.round(ps2.y) + "px"; } } catch (e) {}
+      if (renderScene || renderMonitor) {
+        fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; if (showDebug) setText("kslFps", fps + " fps, cap " + maxFps + (lowPower ? ", low power" : "") + ", " + (debug.drawCalls || 0) + " draw calls, frame avg " + debug.perf.avgFrameMs + " ms max " + debug.perf.maxFrameMs + " ms, input " + debug.perf.lastInputMs + " ms"); }
+      }
+      if (renderScene) positionHandles();
     }
-    var hiddenPaused = false, suspended = false;
-    function loop(now) { if (destroyed || suspended) { raf = 0; return; } if (hiddenPaused || doc.hidden || (G.document && G.document.hidden)) { hiddenPaused = true; debug.pausedHidden = true; raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
+    var handleEls = null;
+    function positionHandles() {
+      try {
+        if (!handleEls) handleEls = { grip: el("kslHandle"), marker: el("kslMarkerHandle"), tail: el("kslTailHandle"), ghost: el("kslGhostHandle") };
+        placeHandle(handleEls.grip, probeScreen());
+        if (handleEls.marker) placeHandle(handleEls.marker, screenOfLocal(parts.probe, 16, 30, 0));
+        if (handleEls.tail) placeHandle(handleEls.tail, screenOfLocal(parts.probe, 0, 105, 0));
+        if (handleEls.ghost) placeHandle(handleEls.ghost, screenOfLocal(parts.ghost, 0, 0, 0));
+      } catch (e) {}
+    }
+    function placeHandle(node, pt) { if (node && pt) { node.style.left = Math.round(pt.x) + "px"; node.style.top = Math.round(pt.y) + "px"; } }
+    var hiddenPaused = false, suspended = false, viewObserver = null;
+    function ensureLoop() {
+      if (destroyed || suspended || raf) return;
+      if (!sceneSched.isRunnable()) return;
+      if (doc.hidden || (G.document && G.document.hidden)) return;
+      raf = rafImpl(loop);
+    }
+    function loop(now) {
+      if (destroyed || suspended) { raf = 0; return; }
+      now = now != null ? now : nowMs();
+      if (doc.hidden || (G.document && G.document.hidden) || !sceneSched.isRunnable()) { hiddenPaused = true; debug.pausedHidden = true; raf = 0; return; }
+      hiddenPaused = false; debug.pausedHidden = false;
+      var t0 = nowMs(), phase = heartPhaseBucket(now);
+      var doScene = sceneSched.shouldRender(now, phase), doMon = monSched.shouldRender(now, phase);
+      debug.sceneSkipped = sceneSched.stats().skipped; debug.monSkipped = monSched.stats().skipped;
+      if (doScene || doMon) {
+        perfMark("kardia-frame-start");
+        refresh(now, doScene, doMon);
+        var frameMs = nowMs() - t0;
+        debug.perf.renders++; perfMsTotal += frameMs;
+        debug.perf.avgFrameMs = Math.round((perfMsTotal / Math.max(1, debug.perf.renders)) * 10) / 10;
+        if (frameMs > debug.perf.maxFrameMs) debug.perf.maxFrameMs = Math.round(frameMs * 10) / 10;
+        if (lastInputAt) { debug.perf.lastInputMs = Math.round(nowMs() - lastInputAt); lastInputAt = 0; }
+        debug.perf.summary = "cap " + maxFps + " fps, renders " + debug.perf.renders + ", skipped " + (sceneSched.stats().skipped + monSched.stats().skipped) + ", frame avg " + debug.perf.avgFrameMs + " ms, max " + debug.perf.maxFrameMs + " ms, input " + debug.perf.lastInputMs + " ms";
+        perfMark("kardia-frame-end");
+      } else {
+        refresh(now, false, false);
+      }
+      raf = rafImpl(loop);
+    }
     /* Probe role (SyncProbe): this page only sends motion, so the 3D
      * scene and monitor must not render at all. Suspend cancels the
      * frame loop and pauses any clip; resume restarts the loop. */
@@ -1834,14 +2003,27 @@
     function resume() {
       if (destroyed || !suspended) return;
       suspended = false; debug.suspended = false;
-      if (!raf && !(doc.hidden || (G.document && G.document.hidden))) raf = rafImpl(loop);
+      invalidateAll(); ensureLoop();
     }
     try {
       if (doc.addEventListener) doc.addEventListener("visibilitychange", function () {
         var hid = !!(doc.hidden || (G.document && G.document.hidden));
-        if (hid) { hiddenPaused = true; if (raf) cancelRaf(raf); raf = 0; debug.pausedHidden = true; }
-        else if (hiddenPaused) { hiddenPaused = false; debug.pausedHidden = false; if (!destroyed && !suspended && !raf) raf = rafImpl(loop); }
+        sceneSched.setVisible(!hid); monSched.setVisible(!hid);
+        debug.pausedHidden = hid;
+        if (hid) { hiddenPaused = true; if (raf) { try { cancelRaf(raf); } catch (e) {} raf = 0; } }
+        else { hiddenPaused = false; ensureLoop(); }
       });
+    } catch (e) {}
+    try {
+      if (typeof IntersectionObserver !== "undefined" && root) {
+        viewObserver = new IntersectionObserver(function (entries) {
+          var vis = !entries.length || !!entries[0].isIntersecting;
+          sceneSched.setInView(vis); monSched.setInView(vis); debug.inView = vis;
+          if (vis) ensureLoop();
+          else if (raf) { try { cancelRaf(raf); } catch (e) {} raf = 0; }
+        }, { threshold: 0.02 });
+        viewObserver.observe(el("kslStage") || root);
+      }
     } catch (e) {}
     /* pointer handling: grip slides, marker rotates, tail tilts, pinch zooms */
     var pointers = {}, drag = null, lastTapAt = 0, pinchDist = 0;
@@ -1849,69 +2031,150 @@
       var r = sceneCanvas.getBoundingClientRect();
       return { x: ev.clientX - r.left, y: ev.clientY - r.top, w: r.width || 720, h: r.height || 620 };
     }
+    var tmpProj = null, psCache = { x: 0, y: 0 };
     function probeScreen() {
       if (!camera || !parts.probe) return null;
-      var v = new THREE.Vector3();
-      parts.probe.getWorldPosition(v); v.project(camera);
+      if (!tmpProj) tmpProj = new THREE.Vector3();
+      parts.probe.getWorldPosition(tmpProj); tmpProj.project(camera);
       var r = sceneCanvas.getBoundingClientRect();
       var w = r.width || sceneCanvas.clientWidth || 720, h = r.height || sceneCanvas.clientHeight || 620;
-      return { x: (v.x * 0.5 + 0.5) * w, y: (-v.y * 0.5 + 0.5) * h };
+      psCache.x = (tmpProj.x * 0.5 + 0.5) * w; psCache.y = (-tmpProj.y * 0.5 + 0.5) * h;
+      return psCache;
     }
+    function ghostScreen() {
+      if (!camera || !parts.ghost) return null;
+      return screenOfLocal(parts.ghost, 0, 0, 0);
+    }
+    var psCache2 = { x: 0, y: 0 };
+    function screenOfLocal(group, lx, ly, lz) {
+      if (!camera || !group) return null;
+      try {
+        if (!tmpProj) tmpProj = new THREE.Vector3();
+        tmpProj.set(lx * 1.5, ly * 1.5, lz * 1.5);
+        if (tmpProj.applyQuaternion && group.quaternion) tmpProj.applyQuaternion(group.quaternion);
+        if (group.getWorldPosition) { var wp = new THREE.Vector3(); group.getWorldPosition(wp); tmpProj.x += wp.x; tmpProj.y += wp.y; tmpProj.z += wp.z; }
+        else if (group.position) { tmpProj.x += group.position.x; tmpProj.y += group.position.y; tmpProj.z += group.position.z; }
+        tmpProj.project(camera);
+        var r = sceneCanvas.getBoundingClientRect();
+        var w = r.width || sceneCanvas.clientWidth || 720, h = r.height || sceneCanvas.clientHeight || 620;
+        psCache2.x = (tmpProj.x * 0.5 + 0.5) * w; psCache2.y = (-tmpProj.y * 0.5 + 0.5) * h;
+        return psCache2;
+      } catch (e) { return null; }
+    }
+    var pinchMid = null;
+    function applyDrag(dx, dy) {
+      if (!drag) return;
+      if (drag.mode === "grip" || drag.mode === "ghost") {
+        pose.contact[0] = clamp(pose.contact[0] + dx * 0.45, -140, 140);
+        pose.contact[2] = clamp(pose.contact[2] - dy * 0.45, -160, 170);
+        travelMm += Math.hypot(dx, dy) * 0.45;
+      } else if (drag.mode === "marker") pose.rotationDeg = wrapDeg(pose.rotationDeg + dx * 0.6);
+      else if (drag.mode === "tail") { pose.fanDeg = clamp(pose.fanDeg - dy * 0.35, -30, 30); pose.rockDeg = clamp(pose.rockDeg + dx * 0.35, -30, 30); }
+      else if (drag.mode === "orbit") { orbit.yaw += dx * 0.008; orbit.pitch = clamp(orbit.pitch + dy * 0.005, -0.25, 1.15); sceneSched.invalidate(); return; }
+      touchPose();
+    }
+    function startDrag(mode, x, y, id, target) {
+      drag = { mode: mode, x: x, y: y, id: id };
+      debug.lastDragMode = mode;
+      lastInputAt = nowMs(); perfMark("kardia-input");
+      if (target) try { target.setPointerCapture(id); } catch (e) {}
+      invalidateAll(); ensureLoop();
+    }
+    function moveDrag(x, y, id) {
+      if (!drag || drag.id !== id) return;
+      var dx = x - drag.x, dy = y - drag.y; drag.x = x; drag.y = y;
+      applyDrag(dx, dy);
+    }
+    function endDrag(id) { if (drag && drag.id === id) drag = null; }
     if (sceneCanvas && sceneCanvas.addEventListener) {
       sceneCanvas.addEventListener("pointerdown", function (ev) {
-        pointers[ev.pointerId] = ev;
-        if (Object.keys(pointers).length === 2) {
-          var ps = Object.keys(pointers).map(function (k) { return pointers[k]; });
-          pinchDist = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY); drag = { mode: "pinch" }; return;
+        pointers[ev.pointerId] = { clientX: ev.clientX, clientY: ev.clientY };
+        var count = Object.keys(pointers).length;
+        if (count === 2) {
+          var ks = Object.keys(pointers), a = pointers[ks[0]], b = pointers[ks[1]];
+          pinchDist = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+          pinchMid = { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
+          drag = { mode: "pinch", id: ev.pointerId };
+          debug.lastDragMode = "pinch";
+          try { sceneCanvas.style.touchAction = "none"; } catch (e) {}
+          try { sceneCanvas.setPointerCapture(ev.pointerId); } catch (e) {}
+          lastInputAt = nowMs(); invalidateAll(); ensureLoop();
+          return;
         }
+        if (count > 2) return;
         var now = Date.now();
-        if (now - lastTapAt < 320) { orbit = { yaw: HOME_ORBIT.yaw, pitch: HOME_ORBIT.pitch, dist: HOME_ORBIT.dist }; lastTapAt = 0; return; }
+        if (now - lastTapAt < 320) { orbit = { yaw: HOME_ORBIT.yaw, pitch: HOME_ORBIT.pitch, dist: HOME_ORBIT.dist }; lastTapAt = 0; sceneSched.invalidate(); ensureLoop(); return; }
         lastTapAt = now;
-        var p = canvasPoint(ev), c = probeScreen();
-        var mode = "orbit";
-        if (c) {
-          var d = Math.hypot(p.x - c.x, p.y - c.y);
-          if (d < 48) mode = "grip"; else if (p.y < c.y - 22 && d < 150) mode = "tail"; else if (d < 104) mode = "marker";
-        }
-        drag = { mode: mode, x: p.x, y: p.y, id: ev.pointerId };
-        debug.lastDragMode = mode; debug.lastDragPoint = c ? { x: Math.round(c.x), y: Math.round(c.y), px: Math.round(p.x), py: Math.round(p.y) } : null;
-        try { sceneCanvas.setPointerCapture(ev.pointerId); } catch (e) {}
+        var p = canvasPoint(ev), c = probeScreen(), g = ghostScreen();
+        var cCopy = c ? { x: c.x, y: c.y } : null, gCopy = g ? { x: g.x, y: g.y } : null;
+        var mode = hitTestHandle(p, cCopy, gCopy);
+        debug.lastDragPoint = cCopy ? { x: Math.round(cCopy.x), y: Math.round(cCopy.y), px: Math.round(p.x), py: Math.round(p.y) } : null;
+        if (mode) { startDrag(mode, p.x, p.y, ev.pointerId, sceneCanvas); return; }
+        /* No handle hit: a touch scrolls the page (the canvas is
+         * touch-action pan-y, and we take no capture). A mouse or pen
+         * drag on empty skin still orbits, as on a desktop. */
+        debug.lastDragMode = "scroll";
+        if (ev.pointerType && ev.pointerType !== "touch") startDrag("orbit", p.x, p.y, ev.pointerId, sceneCanvas);
       });
       sceneCanvas.addEventListener("pointermove", function (ev) {
-        pointers[ev.pointerId] = ev;
+        if (pointers[ev.pointerId]) pointers[ev.pointerId] = { clientX: ev.clientX, clientY: ev.clientY };
         if (!drag) return;
-        if (drag.mode === "pinch" && Object.keys(pointers).length === 2) {
-          var ps = Object.keys(pointers).map(function (k) { return pointers[k]; });
-          var nd = Math.hypot(ps[0].clientX - ps[1].clientX, ps[0].clientY - ps[1].clientY);
+        if (drag.mode === "pinch") {
+          var ks2 = Object.keys(pointers); if (ks2.length !== 2) return;
+          var a2 = pointers[ks2[0]], b2 = pointers[ks2[1]];
+          var nd = Math.hypot(a2.clientX - b2.clientX, a2.clientY - b2.clientY);
+          var mid = { x: (a2.clientX + b2.clientX) / 2, y: (a2.clientY + b2.clientY) / 2 };
           if (pinchDist > 0) orbit.dist = clamp(orbit.dist * pinchDist / Math.max(20, nd), 320, 1150);
-          pinchDist = nd; return;
+          if (pinchMid) { orbit.yaw += (mid.x - pinchMid.x) * 0.008; orbit.pitch = clamp(orbit.pitch + (mid.y - pinchMid.y) * 0.005, -0.25, 1.15); }
+          pinchDist = nd; pinchMid = mid; sceneSched.invalidate(); return;
         }
-        var p = canvasPoint(ev), dx = p.x - drag.x, dy = p.y - drag.y; drag.x = p.x; drag.y = p.y;
-        if (drag.mode === "grip") {
-          pose.contact[0] = clamp(pose.contact[0] + dx * 0.45, -120, 120);
-          pose.contact[2] = clamp(pose.contact[2] - dy * 0.45, -140, 150);
-          travelMm += Math.hypot(dx, dy) * 0.45;
-        } else if (drag.mode === "marker") pose.rotationDeg = wrapDeg(pose.rotationDeg + dx * 0.6);
-        else if (drag.mode === "tail") { pose.fanDeg = clamp(pose.fanDeg - dy * 0.35, -60, 60); pose.rockDeg = clamp(pose.rockDeg + dx * 0.35, -60, 60); }
-        else { orbit.yaw += dx * 0.008; orbit.pitch = clamp(orbit.pitch + dy * 0.005, -0.25, 1.15); }
+        var p = canvasPoint(ev);
+        moveDrag(p.x, p.y, ev.pointerId);
       });
-      function endPointer(ev) { delete pointers[ev.pointerId]; if (!Object.keys(pointers).length) drag = null; }
+      function endPointer(ev) {
+        delete pointers[ev.pointerId];
+        endDrag(ev.pointerId);
+        if (!Object.keys(pointers).length) { drag = null; pinchMid = null; try { sceneCanvas.style.touchAction = ""; } catch (e) {} }
+      }
       sceneCanvas.addEventListener("pointerup", endPointer);
       sceneCanvas.addEventListener("pointercancel", endPointer);
+      /* DOM probe handles: a press that starts on a handle always
+       * moves the probe in every direction (the handles carry
+       * touch-action none in CSS), and nowhere else. */
+      [["kslHandle", "grip"], ["kslMarkerHandle", "marker"], ["kslTailHandle", "tail"], ["kslGhostHandle", "ghost"]].forEach(function (pair) {
+        var node = el(pair[0]); if (!node || !node.addEventListener) return;
+        var mode = pair[1];
+        node.addEventListener("pointerdown", function (ev) {
+          var p = canvasPoint(ev);
+          startDrag(mode, p.x, p.y, ev.pointerId, node);
+          if (ev.preventDefault) ev.preventDefault();
+          if (ev.stopPropagation) ev.stopPropagation();
+        });
+        node.addEventListener("pointermove", function (ev) { var p = canvasPoint(ev); moveDrag(p.x, p.y, ev.pointerId); });
+        node.addEventListener("pointerup", function (ev) { endDrag(ev.pointerId); });
+        node.addEventListener("pointercancel", function (ev) { endDrag(ev.pointerId); });
+      });
     }
     function bindNudge(id, fn) { var b = el(id); if (b) b.addEventListener("click", fn); }
     function openSyncProbe() { try { if (G.KARDIA_SYNCPROBE && G.KARDIA_SYNCPROBE.open) G.KARDIA_SYNCPROBE.open(); } catch (e) {} }
     bindNudge("kslSyncProbe", openSyncProbe);
     bindNudge("kslPractice", function () { startedAt = nowMs(); attemptDone = false; travelMm = 0; setText("kslCoach", "Practice. Find " + view.label + " on the body."); var r = el("kslResult"); if (r) r.hidden = true; var box = el("kslTutorial"); if (box) { box.hidden = false; box.innerHTML = '<strong>Practice this view</strong><p>Find ' + esc(view.label) + ' on the body, then hold still inside the target ranges.</p><button type="button" class="ksl-btn ksl-syncbtn" id="kslPracticeSyncProbe" data-act="kecho-syncprobe"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg><span>Use a phone as the probe</span></button> <button type="button" class="ksl-btn" id="kslPracticeClose">Close</button>'; var pb = box.querySelector ? box.querySelector("#kslPracticeSyncProbe") : el("kslPracticeSyncProbe"); if (pb) pb.addEventListener("click", openSyncProbe); var pc = box.querySelector ? box.querySelector("#kslPracticeClose") : el("kslPracticeClose"); if (pc) pc.addEventListener("click", function () { box.hidden = true; }); } });
-    bindNudge("kslLabels", function () { showLabels = !showLabels; this.setAttribute("aria-pressed", showLabels ? "true" : "false"); });
+    bindNudge("kslLabels", function () { showLabels = !showLabels; this.setAttribute("aria-pressed", showLabels ? "true" : "false"); sceneSched.invalidate(); ensureLoop(); });
     bindNudge("kslFullscreen", function () { var st = el("kslStage"); try { if (st && st.requestFullscreen) st.requestFullscreen(); else if (sceneCanvas && sceneCanvas.requestFullscreen) sceneCanvas.requestFullscreen(); } catch (e) {} });
     var layersBox = el("kslLayers");
     bindNudge("kslLayersBtn", function () { var open = layersBox.hidden; layersBox.hidden = !open; this.setAttribute("aria-expanded", open ? "true" : "false"); });
-    var depthRange = el("kslDepthRange");
-    if (depthRange) depthRange.addEventListener("input", function (ev) { pose.depthCm = +ev.target.value; setText("kslDepthVal", pose.depthCm + " cm"); });
+    var sliderInputs = root.querySelectorAll ? root.querySelectorAll("[data-slider]") : [];
+    for (var si2 = 0; si2 < sliderInputs.length; si2++) sliderInputs[si2].addEventListener("input", function (ev) {
+      var id = this.getAttribute("data-slider"), patch = poseFromSlider(id, +ev.target.value), key;
+      for (key in patch) pose[key] = patch[key];
+      lastInputAt = nowMs(); perfMark("kardia-input");
+      touchPose(); ensureLoop();
+      var valEl = el("kslSliderVal-" + id), spec = sliderSpec(id);
+      if (valEl && spec) valEl.textContent = Math.round(pose[spec.key]) + spec.unit;
+    });
     var layerBtns = root.querySelectorAll("[data-layer]");
     for (var li = 0; li < layerBtns.length; li++) layerBtns[li].addEventListener("click", function () {
-      layer = this.getAttribute("data-layer"); applyLayer();
+      layer = this.getAttribute("data-layer"); applyLayer(); sceneSched.invalidate(); ensureLoop();
       for (var j = 0; j < layerBtns.length; j++) layerBtns[j].setAttribute("aria-pressed", layerBtns[j].getAttribute("data-layer") === layer ? "true" : "false");
     });
     function applyWindow() {
@@ -1939,7 +2202,7 @@
       for (var j = 0; j < vbs.length; j++) vbs[j].setAttribute("aria-pressed", vbs[j].getAttribute("data-view") === view.id ? "true" : "false");
       var r = el("kslResult"); if (r) r.hidden = true;
       var cn = el("kslClipNote"); if (cn) cn.hidden = true; clipNoteUntil = 0;
-      applyWindow(); refresh(nowMs());
+      applyWindow(); touchPose(); refresh(nowMs());
     }); }
     var viewBtns = root.querySelectorAll("[data-view]");
     for (var vi = 0; vi < viewBtns.length; vi++) viewBtns[vi].addEventListener("click", function () { selectView(this.getAttribute("data-view")); });
@@ -1949,8 +2212,9 @@
       if (p.rotationDeg != null) pose.rotationDeg = p.rotationDeg;
       if (p.fanDeg != null) pose.fanDeg = p.fanDeg; if (p.tiltDeg != null) pose.fanDeg = p.tiltDeg;
       if (p.rockDeg != null) pose.rockDeg = p.rockDeg;
-      if (p.slideXmm != null) pose.contact[0] = clamp(pose.contact[0] + p.slideXmm * 0.1, -120, 120);
-      if (p.slideYmm != null) pose.contact[2] = clamp(pose.contact[2] + p.slideYmm * 0.1, -140, 150);
+      if (p.slideXmm != null) pose.contact[0] = clamp(pose.contact[0] + p.slideXmm * 0.1, -140, 140);
+      if (p.slideYmm != null) pose.contact[2] = clamp(pose.contact[2] + p.slideYmm * 0.1, -160, 170);
+      touchPose(); ensureLoop();
     }
     try {
       if (G.KARDIA_SYNC && G.KARDIA_SYNC.createDisplay) { var disp = G.KARDIA_SYNC.createDisplay({ onPose: applySyncPose }); if (disp && disp.start) disp.start(); }
@@ -2015,7 +2279,7 @@
           var t = T.byId(viewId) || T.byView(viewId); if (!t) return null;
           selectView(t.id);
           pose = { contact: t.contact.slice(), rotationDeg: t.rotationDeg, fanDeg: t.fanDeg, rockDeg: t.rockDeg, depthCm: t.depthCm };
-          refresh(nowMs());
+          touchPose(); refresh(nowMs());
           return { view: t.id, pose: pose, within: withinTolerance(poseError(pose, t), t) };
         });
       },
@@ -2027,7 +2291,7 @@
           pose = { contact: [t.contact[0] + (o.slideDxMm || 0), t.contact[1], t.contact[2] + (o.slideDzMm || 0)],
             rotationDeg: t.rotationDeg + (o.rotationDeg || 0), fanDeg: t.fanDeg + (o.fanDeg || 0),
             rockDeg: t.rockDeg + (o.rockDeg || 0), depthCm: t.depthCm + (o.depthCm || 0) };
-          refresh(nowMs());
+          touchPose(); refresh(nowMs());
           return { view: t.id, pose: pose, within: withinTolerance(poseError(pose, t), t), degradation: degradationFor(pose, t), blend: windowBlend(pose, windowTargets()) };
         });
       },
@@ -2043,7 +2307,7 @@
       suspend: suspend,
       resume: resume,
       isSuspended: function () { return suspended; },
-      stop: function () { destroyed = true; if (raf) cancelRaf(raf); if (us && us.destroy) try { us.destroy(); } catch (e) {} }
+      stop: function () { destroyed = true; if (raf) cancelRaf(raf); if (viewObserver) { try { viewObserver.disconnect(); } catch (e) {} viewObserver = null; } if (us && us.destroy) try { us.destroy(); } catch (e) {} }
     };
     return instance;
   }

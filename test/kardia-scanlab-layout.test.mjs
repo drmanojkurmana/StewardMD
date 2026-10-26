@@ -83,7 +83,8 @@ test("overlay covers the page and the tab strip scrolls at 402pt and 375pt; the 
   assert.match(prem, /\.krd-root \.krd-tabs \{[^}]*overflow-x: auto/, "narrow phones scroll, none cut or overlapped");
   assert.match(prem, /\.krd-root \.krd-tab \{[^}]*flex: 0 0 auto/, "tabs keep their width and never squeeze");
   assert.match(js, /setScalar\(1\.5\)/, "probe is scaled up from the contact point");
-  assert.match(css, /\.ksl-handle\{[^}]*width:34px/, "the grip ring no longer covers the probe lens");
+  assert.match(css, /\.ksl-handle\{[^}]*width:44px/, "the grip handle keeps a 44px hit area");
+  assert.match(css, /\.ksl-handle::before\{[^}]*width:34px/, "the visible grip ring stays 34px so it does not cover the probe lens");
 });
 
 test("accessibility gates: names, focus, reduced motion", () => {
