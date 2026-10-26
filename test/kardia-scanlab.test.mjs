@@ -180,6 +180,14 @@ test("great vessels follow curved anatomy and the heart beat scale is cyclic", (
   assert.ok(Math.abs(P.heartBeatScale(1) - 1) < 0.001, "cycle wraps");
 });
 
+test("all 15 view ids and the sc4c alias resolve to a target", () => {
+  assert.equal(T.VIEWS.length, 15);
+  for (const v of T.VIEWS) assert.equal(T.byId(v.id), v, v.id);
+  for (const v of T.VIEWS) assert.equal(T.byView(v.viewId), v, v.viewId);
+  assert.equal(T.byId("sc4c").id, "subcostal_4c");
+  assert.equal(T.byId("suprasternal").id, "suprasternal_arch");
+});
+
 test("window picker uses the five reference window names", () => {
   assert.deepEqual(P.WINDOWS.map((w) => w.label), ["Parasternal", "Short axis", "Apical", "Subcostal", "Suprasternal"]);
   for (const w of P.WINDOWS) for (const id of w.views) assert.ok(T.byId(id), id);

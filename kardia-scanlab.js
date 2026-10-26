@@ -1,4 +1,4 @@
-/* kardia-scanlab.js - Kardia Scan Lab (Kardia 2.0, round 2).
+/* kardia-scanlab.js - Kardia Scan Lab (Kardia 2.0, round 4).
  *
  * Design contract (anti-ui-slop Operate; impeccable Operate; apple-design
  * springs and interruptible drag; mobile-native safe areas, 44px targets;
@@ -485,10 +485,10 @@
     root.innerHTML =
       '<div class="ksl-wrap" id="kslWrap">' +
       '<section class="ksl-scene-col" aria-label="Body scene">' +
-      '<div class="ksl-head"><div><h3 class="ksl-title" id="kslTargetName">' + esc(view.label) + '</h3>' +
-      '<p class="ksl-sub" id="kslFamily">' + esc(view.family) + ' window</p></div></div>' +
       '<div class="ksl-stage" id="kslStage">' +
       '<canvas id="kslScene" width="720" height="620" aria-label="3D body with probe on the skin. Drag the grip to slide, the marker dashes to rotate, the tail to fan and rock. Drag empty skin to orbit, pinch to zoom, double tap to reset."></canvas>' +
+      '<div class="ksl-viewname"><h3 class="ksl-title" id="kslTargetName">' + esc(view.label) + '</h3>' +
+      '<p class="ksl-sub" id="kslFamily">' + esc(view.family) + ' window</p></div>' +
       '<div class="ksl-load" id="kslLoading" role="status"><p class="ksl-note" id="kslLoadText">Loading Scan Lab.</p><div class="ksl-load-track"><span class="ksl-load-fill" id="kslLoadFill"></span></div><button type="button" class="ksl-btn" id="kslRetryLoad" hidden>Retry</button></div>' +
       '<div class="ksl-stage-btns">' +
       '<button type="button" class="ksl-iconbtn" id="kslPractice" aria-label="Practice this view"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></button>' +
@@ -579,28 +579,78 @@
       if (THREE.MeshPhysicalMaterial) { try { return new THREE.MeshPhysicalMaterial(o); } catch (e) {} }
       return mat(o);
     }
-    function tubeFromPath(path, radius, material, name) {
+    function tubeGeom(path, radius) {
       var pts = path.map(function (pt) { var sc = toScene(pt); return new THREE.Vector3(sc[0], sc[1], sc[2]); });
-      var m = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.max(12, path.length * 6), radius, lowPower ? 6 : 8), material);
+      return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), Math.max(12, path.length * 6), radius, lowPower ? 6 : 8);
+    }
+    function tubeFromPath(path, radius, material, name) {
+      var m = new THREE.Mesh(tubeGeom(path, radius), material);
       if (name) m.name = name; return m;
     }
+    /* Merge static parts into one mesh (one draw call). Each part is
+     * {geom, matrix, color}; colours ride in a vertex colour attribute.
+     * Returns null when a geometry has no uploadable attributes (the
+     * test double), and the caller falls back to separate meshes. */
+    function mergedMesh(list, material, name) {
+      try {
+        var pos = [], nrm = [], col = [], pi, i;
+        for (pi = 0; pi < list.length; pi++) {
+          var g = list[pi].geom;
+          if (!g || !g.attributes || !g.attributes.position) return null;
+          var gg = g.index ? (g.toNonIndexed ? g.toNonIndexed() : null) : g;
+          if (!gg || !gg.attributes || !gg.attributes.position) return null;
+          if (list[pi].matrix && gg.applyMatrix4) gg.applyMatrix4(list[pi].matrix);
+          var p = gg.attributes.position.array, n = gg.attributes.normal ? gg.attributes.normal.array : null;
+          var c = new THREE.Color(list[pi].color);
+          var cr = typeof c.r === "number" ? c.r : 1, cg = typeof c.g === "number" ? c.g : 1, cb = typeof c.b === "number" ? c.b : 1;
+          for (i = 0; i < p.length; i += 3) { pos.push(p[i], p[i + 1], p[i + 2]); nrm.push(n ? n[i] : 0, n ? n[i + 1] : 1, n ? n[i + 2] : 0); col.push(cr, cg, cb); }
+        }
+        if (!pos.length) return null;
+        var out = new THREE.BufferGeometry();
+        out.setAttribute("position", new THREE.BufferAttribute(new Float32Array(pos), 3));
+        out.setAttribute("normal", new THREE.BufferAttribute(new Float32Array(nrm), 3));
+        out.setAttribute("color", new THREE.BufferAttribute(new Float32Array(col), 3));
+        var mesh = new THREE.Mesh(out, material);
+        if (name) mesh.name = name;
+        debug.mergedStatic = true;
+        return mesh;
+      } catch (e) { return null; }
+    }
+    function translation(x, y, z) { var m = new THREE.Matrix4(); if (m.makeTranslation) m.makeTranslation(x, y, z); return m; }
     function buildProbeMesh(ghost) {
-      var grp = new THREE.Group();
       var bodyM = ghost ? new THREE.MeshBasicMaterial({ color: 0x9cc8e8, transparent: true, opacity: 0.35 }) : mat({ color: 0xe8e6df, roughness: 0.45, metalness: 0.05 });
       var darkM = ghost ? bodyM : mat({ color: 0x2b2e30, roughness: 0.6 });
       var pts = [];
       [[0, 0], [16, 0], [19, 5], [15, 16], [13, 34], [14, 58], [11, 78], [7, 88], [0, 90]].forEach(function (p) { pts.push(new THREE.Vector2(p[0], p[1])); });
+      var cablePts = [new THREE.Vector3(0, 88, 0), new THREE.Vector3(6, 112, -8), new THREE.Vector3(22, 132, -26), new THREE.Vector3(48, 142, -40)];
+      var bodyC = ghost ? 0x9cc8e8 : 0xe8e6df, darkC = ghost ? 0x9cc8e8 : 0x2b2e30;
+      try {
+        var partsList = [
+          { geom: new THREE.LatheGeometry(pts, lowPower ? 20 : 32), color: bodyC },
+          { geom: new THREE.CylinderGeometry(8, 9, 26, 20), matrix: translation(0, 62, 0), color: darkC },
+          { geom: new THREE.BoxGeometry(4, 8, 3), matrix: translation(14, 10, 0), color: ghost ? 0x9cc8e8 : 0x2ea8e0 },
+          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 20, 3.2, 8), color: darkC }
+        ];
+        for (var di = 0; di < 8; di++) {
+          var ang = di / 8 * Math.PI * 2;
+          var dm = new THREE.Matrix4(); if (dm.makeRotationY) dm.makeRotationY(-ang); if (dm.setPosition) dm.setPosition(Math.cos(ang) * 17, 22, Math.sin(ang) * 17);
+          partsList.push({ geom: new THREE.BoxGeometry(7, 2.2, 2.2), matrix: dm, color: ghost ? 0x9cc8e8 : (di % 2 ? 0x2ea8e0 : 0x17384d) });
+        }
+        var mergedMat = ghost ? new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35 }) : mat({ vertexColors: true, roughness: 0.45, metalness: 0.05 });
+        var merged = mergedMesh(partsList, mergedMat, ghost ? "ghostProbe" : "probe");
+        if (merged) { merged.userData.dashes = { rotation: { x: 0, y: 0, z: 0 } }; merged.userData.tail = merged; return merged; }
+      } catch (e) {}
+      var grp = new THREE.Group();
       var body = new THREE.Mesh(new THREE.LatheGeometry(pts, lowPower ? 20 : 32), bodyM); grp.add(body);
       var grip = new THREE.Mesh(new THREE.CylinderGeometry(8, 9, 26, 20), darkM); grip.position.y = 62; grp.add(grip);
       var notch = new THREE.Mesh(new THREE.BoxGeometry(4, 8, 3), ghost ? bodyM : mat({ color: 0x2ea8e0, roughness: 0.4 }));
       notch.position.set(14, 10, 0); grp.add(notch);
-      var cablePts = [new THREE.Vector3(0, 88, 0), new THREE.Vector3(6, 112, -8), new THREE.Vector3(22, 132, -26), new THREE.Vector3(48, 142, -40)];
       var cable = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 20, 3.2, 8), darkM); grp.add(cable);
       var dashes = new THREE.Group(); dashes.name = "markerDashes";
       for (var i = 0; i < 8; i++) {
         var d = new THREE.Mesh(new THREE.BoxGeometry(7, 2.2, 2.2), ghost ? bodyM : mat({ color: i % 2 ? 0x2ea8e0 : 0x17384d, roughness: 0.4 }));
-        var ang = i / 8 * Math.PI * 2;
-        d.position.set(Math.cos(ang) * 17, 22, Math.sin(ang) * 17); d.rotation.y = -ang; dashes.add(d);
+        var ang2 = i / 8 * Math.PI * 2;
+        d.position.set(Math.cos(ang2) * 17, 22, Math.sin(ang2) * 17); d.rotation.y = -ang2; dashes.add(d);
       }
       grp.add(dashes); grp.userData.dashes = dashes; grp.userData.tail = grip;
       return grp;
@@ -617,7 +667,8 @@
       THREE = THREE || G.THREE;
       if (!renderer) {
         renderer = new THREE.WebGLRenderer({ canvas: sceneCanvas, antialias: !lowPower, alpha: false, powerPreference: "high-performance" });
-        renderer.setPixelRatio(Math.min((G.devicePixelRatio || 1), lowPower ? 1.5 : 2));
+        debug.pixelRatio = Math.min((G.devicePixelRatio || 1), 2, lowPower ? 1.5 : 2);
+        renderer.setPixelRatio(debug.pixelRatio);
         renderer.setSize(sceneCanvas.clientWidth || 720, sceneCanvas.clientHeight || 620, false);
         if (renderer.outputEncoding !== undefined && THREE.sRGBEncoding) renderer.outputEncoding = THREE.sRGBEncoding;
         if (renderer.toneMapping !== undefined && THREE.ACESFilmicToneMapping) { renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05; }
@@ -646,9 +697,7 @@
         function (x, y, z) { return Math.abs(x) < 230 && y > -120 && y < 180 && z > -120 && z < 260; }, 5);
       parts.heartGroup = new THREE.Group(); parts.heartGroup.name = "heartBeat"; grp.add(parts.heartGroup);
       parts.heart = addMesh("heart", meshes["heart-hubmap.glb"], phys({ color: 0xa8322c, roughness: 0.3, metalness: 0.02, clearcoat: 0.65, clearcoatRoughness: 0.35, sheen: 0.4, sheenColor: new THREE.Color(0xe8a08a), emissive: 0x200604, emissiveIntensity: 0.4 }), null, 2);
-      if (parts.heart) { if (grp.remove) grp.remove(parts.heart); parts.heartGroup.add(parts.heart);
-        var fat = new THREE.Mesh(parts.heart.geometry, phys({ color: 0xe6d3a1, roughness: 0.85, transparent: true, opacity: 0.15, depthWrite: false }));
-        fat.scale.set(1.035, 1.035, 1.035); fat.name = "epicardialFat"; parts.heartGroup.add(fat); }
+      if (parts.heart) { if (grp.remove) grp.remove(parts.heart); parts.heartGroup.add(parts.heart); }
       parts.liver = addMesh("liver", meshes["liver-hubmap.glb"], phys({ color: 0x9c5f4a, roughness: 0.42, clearcoat: 0.4, clearcoatRoughness: 0.4, transparent: true, opacity: 0.92 }), null, 2);
       parts.vessels = addMesh("vessels", meshes["great-vessels-bodyparts3d.bin.gz"], mat({ color: 0xb0503f, roughness: 0.45, transparent: true, opacity: 0.75 }),
         function (x, y, z) { return Math.abs(x) < 130 && y > -90 && y < 150 && z > -50 && z < 170; }, 3);
@@ -657,11 +706,26 @@
       var fall = new THREE.Group(); fall.name = "fallback"; grp.add(fall); parts.fallback = fall;
       if (!parts.bones) {
         var boneM = mat({ color: 0xe8dbc1, roughness: 0.55, transparent: true, opacity: 0.6 });
-        for (var ri = 0; ri < (lowPower ? 7 : 11); ri++) {
-          var rib = new THREE.Mesh(new THREE.TorusGeometry(88 - ri * 2, 3.2, 8, 40, Math.PI * 1.25), boneM);
-          rib.position.set(0, 118 - ri * 17, -55); rib.rotation.set(Math.PI / 2, 0, Math.PI * 0.87); fall.add(rib);
+        var ribParts = [], ribsMerged = null;
+        try {
+          for (var ri = 0; ri < (lowPower ? 7 : 11); ri++) {
+            var rm = new THREE.Matrix4();
+            var eu = new THREE.Euler ? new THREE.Euler(Math.PI / 2, 0, Math.PI * 0.87) : null;
+            if (eu && rm.makeRotationFromEuler) rm.makeRotationFromEuler(eu);
+            if (rm.setPosition) rm.setPosition(0, 118 - ri * 17, -55);
+            ribParts.push({ geom: new THREE.TorusGeometry(88 - ri * 2, 3.2, 8, 40, Math.PI * 1.25), matrix: rm, color: 0xe8dbc1 });
+          }
+          ribParts.push({ geom: new THREE.BoxGeometry(16, 130, 6), matrix: translation(0, 55, 88), color: 0xe8dbc1 });
+          ribsMerged = mergedMesh(ribParts, mat({ vertexColors: true, roughness: 0.55, transparent: true, opacity: 0.6 }), "ribsFallback");
+        } catch (e) { ribsMerged = null; }
+        if (ribsMerged) fall.add(ribsMerged);
+        else {
+          for (var rj = 0; rj < (lowPower ? 7 : 11); rj++) {
+            var rib = new THREE.Mesh(new THREE.TorusGeometry(88 - rj * 2, 3.2, 8, 40, Math.PI * 1.25), boneM);
+            rib.position.set(0, 118 - rj * 17, -55); rib.rotation.set(Math.PI / 2, 0, Math.PI * 0.87); fall.add(rib);
+          }
+          var stern = new THREE.Mesh(new THREE.BoxGeometry(16, 130, 6), boneM); stern.position.set(0, 55, 88); fall.add(stern);
         }
-        var stern = new THREE.Mesh(new THREE.BoxGeometry(16, 130, 6), boneM); stern.position.set(0, 55, 88); fall.add(stern);
       }
       if (!parts.heart) {
         var hm = new THREE.Mesh(new THREE.SphereGeometry(52, 24, 18), mat({ color: 0xc0453f, roughness: 0.38 }));
@@ -670,15 +734,35 @@
       var artM = phys({ color: 0xc23b30, roughness: 0.32, clearcoat: 0.5, clearcoatRoughness: 0.35 });
       var venM = phys({ color: 0x3f6fb5, roughness: 0.38, clearcoat: 0.4, clearcoatRoughness: 0.4 });
       var corM = phys({ color: 0xd95f4a, roughness: 0.35, clearcoat: 0.5 });
-      fall.add(tubeFromPath(HEART_VESSELS.aorta, 9, artM, "aortaArch"));
-      fall.add(tubeFromPath(HEART_VESSELS.pulmonaryTrunk, 8, artM, "pulmonaryTrunk"));
-      fall.add(tubeFromPath(HEART_VESSELS.svc, 6.5, venM, "svc"));
-      fall.add(tubeFromPath(HEART_VESSELS.ivc, 7.5, venM, "ivc"));
-      HEART_VESSELS.pulmonaryVeins.forEach(function (pv, i) { fall.add(tubeFromPath(pv, 3.4, venM, "pulmonaryVein" + i)); });
+      var vesselParts = [
+        { geom: tubeGeom(HEART_VESSELS.aorta, 9), color: 0xc23b30 },
+        { geom: tubeGeom(HEART_VESSELS.pulmonaryTrunk, 8), color: 0xc23b30 },
+        { geom: tubeGeom(HEART_VESSELS.svc, 6.5), color: 0x3f6fb5 },
+        { geom: tubeGeom(HEART_VESSELS.ivc, 7.5), color: 0x3f6fb5 }
+      ];
+      HEART_VESSELS.pulmonaryVeins.forEach(function (pv) { vesselParts.push({ geom: tubeGeom(pv, 3.4), color: 0x3f6fb5 }); });
+      var vesselsMerged = mergedMesh(vesselParts, mat({ vertexColors: true, roughness: 0.38 }), "vesselsFallback");
+      if (vesselsMerged) fall.add(vesselsMerged);
+      else {
+        fall.add(tubeFromPath(HEART_VESSELS.aorta, 9, artM, "aortaArch"));
+        fall.add(tubeFromPath(HEART_VESSELS.pulmonaryTrunk, 8, artM, "pulmonaryTrunk"));
+        fall.add(tubeFromPath(HEART_VESSELS.svc, 6.5, venM, "svc"));
+        fall.add(tubeFromPath(HEART_VESSELS.ivc, 7.5, venM, "ivc"));
+        HEART_VESSELS.pulmonaryVeins.forEach(function (pv, i) { fall.add(tubeFromPath(pv, 3.4, venM, "pulmonaryVein" + i)); });
+      }
       if (parts.heartGroup) {
-        parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryLAD, 1.7, corM, "coronaryLAD"));
-        parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryRCA, 1.7, corM, "coronaryRCA"));
-        parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryCx, 1.5, corM, "coronaryCx"));
+        var corParts = [
+          { geom: tubeGeom(HEART_VESSELS.coronaryLAD, 1.7), color: 0xd95f4a },
+          { geom: tubeGeom(HEART_VESSELS.coronaryRCA, 1.7), color: 0xd95f4a },
+          { geom: tubeGeom(HEART_VESSELS.coronaryCx, 1.5), color: 0xd95f4a }
+        ];
+        var corMerged = mergedMesh(corParts, mat({ vertexColors: true, roughness: 0.35 }), "coronaries");
+        if (corMerged) parts.heartGroup.add(corMerged);
+        else {
+          parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryLAD, 1.7, corM, "coronaryLAD"));
+          parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryRCA, 1.7, corM, "coronaryRCA"));
+          parts.heartGroup.add(tubeFromPath(HEART_VESSELS.coronaryCx, 1.5, corM, "coronaryCx"));
+        }
       }
       if (!parts.skin) {
         var sk = new THREE.Mesh(new THREE.SphereGeometry(150, 24, 18), mat({ color: 0xc9a189, roughness: 0.62, transparent: true, opacity: 0.28, side: THREE.DoubleSide, depthWrite: false }));
@@ -921,6 +1005,7 @@
       if (msg) setText("kslCoach", msg);
       setText("kslTargetName", view.label);
       setText("kslFamily", view.family + " window");
+      debug.view = view.id; debug.viewLabel = view.label;
       setText("kslRot", Math.round(pose.rotationDeg) + " deg"); setText("kslRotRange", "target " + view.rotationDeg + " plus or minus " + view.tolerance.rotationDeg);
       setText("kslFan", Math.round(pose.fanDeg) + " deg"); setText("kslFanRange", "target " + view.fanDeg + " plus or minus " + view.tolerance.fanDeg);
       setText("kslRock", Math.round(pose.rockDeg) + " deg"); setText("kslRockRange", "target " + view.rockDeg + " plus or minus " + view.tolerance.rockDeg);
@@ -984,7 +1069,7 @@
       fpsFrames++; if (now - fpsLastAt >= 500) { var fps = Math.round(fpsFrames * 1000 / Math.max(1, now - fpsLastAt)); debug.fps = fps; fpsFrames = 0; fpsLastAt = now; setText("kslFps", fps + " fps" + (lowPower ? " · low power" : "") + " · " + (debug.drawCalls || 0) + " draw calls"); }
     }
     var hiddenPaused = false;
-    function loop(now) { if (destroyed) return; if (hiddenPaused) { raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
+    function loop(now) { if (destroyed) return; if (hiddenPaused || doc.hidden || (G.document && G.document.hidden)) { hiddenPaused = true; debug.pausedHidden = true; raf = 0; return; } refresh(now != null ? now : nowMs()); raf = rafImpl(loop); }
     try {
       if (doc.addEventListener) doc.addEventListener("visibilitychange", function () {
         var hid = !!(doc.hidden || (G.document && G.document.hidden));

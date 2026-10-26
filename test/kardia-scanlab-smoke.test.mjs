@@ -114,8 +114,13 @@ function fakeTHREE(glRef) {
     getWorldPosition(v) { v.copy(this.position); return v; }
     traverse(fn) { fn(this); this.children.forEach((c) => c.traverse ? c.traverse(fn) : fn(c)); }
   }
-  class Geom { constructor() { this.attributes = {}; } setAttribute(n, a) { this.attributes[n] = a; } setIndex(i) { this.index = i; } computeVertexNormals() {} }
+  class Geom {
+    constructor() { this.attributes = { position: { array: new Float32Array([0, 0, 0, 1, 0, 0, 0, 1, 0]) }, normal: { array: new Float32Array([0, 0, 1, 0, 0, 1, 0, 0, 1]) } }; this.index = null; }
+    setAttribute(n, a) { this.attributes[n] = a; } setIndex(i) { this.index = i; } computeVertexNormals() {}
+    toNonIndexed() { return this; } applyMatrix4() { return this; }
+  }
   class Mat { constructor(o) { Object.assign(this, o || {}); this.color = { setHex(h) { this.hex = h; } }; } }
+  class M4 { makeTranslation() { return this; } makeRotationY() { return this; } makeRotationFromEuler() { return this; } setPosition() { return this; } }
   const T = {
     Vector2: class { constructor(x, y) { this.x = x; this.y = y; } },
     Vector3: V3, Quaternion: Q, Group: Obj, Scene: Obj, Object3D: Obj,
@@ -125,7 +130,8 @@ function fakeTHREE(glRef) {
     BufferAttribute: class { constructor(arr, n) { this.array = arr; this.itemSize = n; } },
     CanvasTexture: class { constructor(c) { this.canvas = c; } },
     CatmullRomCurve3: class { constructor(p) { this.points = p; } },
-    Color: class { constructor(h) { this.hex = h; } },
+    Color: class { constructor(h) { this.hex = h; const n = typeof h === "number" ? h : 0xffffff; this.r = ((n >> 16) & 255) / 255; this.g = ((n >> 8) & 255) / 255; this.b = (n & 255) / 255; } },
+    Matrix4: M4, Euler: class { constructor(x, y, z) { this.x = x; this.y = y; this.z = z; } },
     PerspectiveCamera: class extends Obj { constructor() { super(); } lookAt() {} },
     AmbientLight: class extends Obj {}, DirectionalLight: class extends Obj {},
     WebGLRenderer: class {
@@ -212,5 +218,26 @@ test("Scan Lab smoke: body loads, probe at target, monitor cuts, clip plays", as
   assert.equal(vid.attrs.src, "blob:fake-clip", "clip src set from preload");
   assert.ok(doc.getElementById("kslAttribution").textContent.includes("Test Author"), "attribution shown");
   assert.equal(doc.getElementById("kslMonLabel").textContent, "Real patient clip");
+  /* every view id switches view, title, picker and monitor (round 4) */
+  for (const v of T.VIEWS) {
+    const r = inst.debugPose(v.id);
+    assert.ok(r && r.within, "debugPose within for " + v.id);
+    assert.equal(inst.getDebug().view, v.id, "debug view for " + v.id);
+    assert.equal(doc.getElementById("kslTargetName").textContent, v.label, "title for " + v.id);
+    assert.equal(doc.getElementById("kslView-" + v.id).attrs["aria-pressed"], "true", "picker for " + v.id);
+    assert.equal(inst.getDebug().clipRequestedFor, v.viewId, "monitor clip view for " + v.id);
+    for (let i = 0; i < 2; i++) await pump(Date.now() + 900 + i * 120);
+    assert.ok(inst.getDebug().usCalls > 0, "monitor cut ran for " + v.id);
+  }
+  const alias = inst.debugPose("sc4c");
+  assert.ok(alias && alias.within, "debugPose sc4c alias reaches the target");
+  assert.equal(inst.getDebug().view, "subcostal_4c", "sc4c alias switches the view");
+  assert.equal(doc.getElementById("kslTargetName").textContent, "Subcostal 4C", "sc4c alias switches the title");
+  assert.equal(doc.getElementById("kslView-subcostal_4c").attrs["aria-pressed"], "true", "sc4c alias switches the picker");
+  assert.equal(inst.getDebug().clipRequestedFor, "tte_subcostal_4c", "sc4c alias switches the monitor");
+  console.log("SCANLAB_EVIDENCE mergedStatic=" + inst.getDebug().mergedStatic + " drawCalls=" + inst.getDebug().drawCalls + " pixelRatio=" + inst.getDebug().pixelRatio + " fps=" + inst.getDebug().fps);
+  assert.equal(inst.getDebug().mergedStatic, true, "static geometry merged on the merged path");
+  assert.ok(inst.getDebug().drawCalls > 0 && inst.getDebug().drawCalls < 15, "merged draw calls under 15: " + inst.getDebug().drawCalls);
+  assert.ok(inst.getDebug().pixelRatio <= 2, "pixel ratio capped at 2: " + inst.getDebug().pixelRatio);
   inst.stop();
 });

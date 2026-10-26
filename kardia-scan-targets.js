@@ -62,9 +62,10 @@
     { id: "parasternal", label: "Parasternal" }, { id: "apical", label: "Apical" },
     { id: "subcostal", label: "Subcostal" }, { id: "suprasternal", label: "Suprasternal" }
   ];
-  function byId(id) { for (var i = 0; i < VIEWS.length; i++) if (VIEWS[i].id === id) return VIEWS[i]; return null; }
+  var ALIASES = { sc4c: "subcostal_4c", s4c: "subcostal_4c", subcostal: "subcostal_4c", suprasternal: "suprasternal_arch", arch: "suprasternal_arch" };
+  function byId(id) { var want = ALIASES[id] || id; for (var i = 0; i < VIEWS.length; i++) if (VIEWS[i].id === want) return VIEWS[i]; return null; }
   function byView(viewId) { for (var i = 0; i < VIEWS.length; i++) if (VIEWS[i].viewId === viewId) return VIEWS[i]; return null; }
-  var API = { VIEWS: VIEWS, FAMILIES: FAMILIES, LANDMARKS: LANDMARKS, byId: byId, byView: byView, version: 2 };
+  var API = { VIEWS: VIEWS, FAMILIES: FAMILIES, LANDMARKS: LANDMARKS, ALIASES: ALIASES, byId: byId, byView: byView, version: 2 };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.KARDIA_SCAN_TARGETS = API;
 })(typeof window !== "undefined" ? window : this);

@@ -237,9 +237,15 @@
     } catch (e) { fail(); }
   }
 
+  function levelsMenuHtml(lv) {
+    var cur = lv === "mbbs" ? "MBBS" : lv === "resident" ? I.s("resident") : lv === "fellow" ? "Fellow" : "Sonographer";
+    return '<details class="krd-levelmenu"><summary aria-label="' + I.s("level") + ": " + I.esc(cur) + '">' + I.s("level") + ": " + I.esc(cur) + "</summary>" +
+      '<div class="krd-levelmenu-panel">' + levelsHtml(lv) + "</div></details>";
+  }
+
   function echoLabHtml() {
     var lv = klevel(), pro = I.isPro();
-    var head = '<h2 class="sp-h2">' + I.tx(T("Echo Lab", "Echo Lab")) + '</h2>';
+    var head = "";
     if (EL.err) return head + '<div class="sp-err krd-err" role="alert"><p>' +
       I.tx(T("Echo Lab did not load. Check the connection and try again.", "Echo Lab did not load. Check the connection and try again.")) +
       '</p><button type="button" class="sp-btn pri" data-act="kecho-retry">' + I.ico("refresh") + " " + I.s("retry") + "</button></div>";
@@ -811,7 +817,7 @@
   }
 
   function echoBodyHtml() {
-    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + echoLabHtml() + "</div></div>";
+    return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + echoLabHtml() + "</div></div>";
   }
   function showTab(id, focusSel) {
     if (TABS.indexOf(id) < 0) id = "echo";
@@ -830,7 +836,8 @@
       return;
     }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
-    I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+    if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + levelsMenuHtml(lv) + body, focusSel); }
+    else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
     if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }
