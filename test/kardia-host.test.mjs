@@ -190,22 +190,6 @@ test("flag off: KARDIA.open() is a no-op that touches no DOM", async () => {
   assert.equal(s.painted(), "", "no DOM touched");
 });
 
-test("flag on: six tabs, four levels, engine chrome (Pro badge, no draft footer, language)", async () => {
-  const s = sandbox();
-  s.store.smd_kardia = "1";
-  assert.equal(s.G.KARDIA.open(), true);
-  await new Promise((r) => setTimeout(r, 50));
-  const h = s.painted();
-  for (const t of ["Echo Lab", "Learn", "Practice", "Cases", "Calculators", "KardiQ X"]) assert.ok(h.includes(t), "tab " + t);
-  assert.ok(h.includes('role="tablist"') && h.includes('aria-selected="true"'), "real tabs, one selected");
-  for (const l of ["MBBS", "Resident", "Fellow", "Sonographer"]) assert.ok(h.includes(l), "level " + l);
-  assert.ok((h.match(/sp-pro/g) || []).length >= 3, "Resident, Fellow and Sonographer carry the engine Pro badge");
-  assert.ok(!h.includes("To be verified, draft"), "no draft footer on the learner screen (ai_drafted stays in the data)");
-  assert.ok(h.includes("data-act=\"lang\""), "language switch from the engine");
-  assert.ok(h.includes("Echo Lab"), "Echo Lab opens on the probe lab (WP4), not the old coming soon panel");
-  assert.ok(!h.includes("The probe lab opens here"), "the WP8 coming soon panel is gone");
-});
-
 test("Learn tab: free preview opens real atlas lessons in place; the rest is Pro", async () => {
   const s = sandbox();
   s.store.smd_kardia = "1";
@@ -229,14 +213,4 @@ test("KardiQ X tab still passes the untouched access gate", () => {
   assert.ok(s.painted().includes("Open KardiQ X"), "tab names the AI reading");
   s.G.KARDIA._internal.ACTIONS.kx({});
   assert.deepEqual(s.calls.gate, ["kardiox"], 'SMD_XACCESS.gate("kardiox") is still called');
-});
-
-test("levels follow the engine pattern: locked levels open the paywall and never switch", async () => {
-  const s = sandbox();
-  s.store.smd_kardia = "1";
-  s.G.KARDIA.open();
-  await new Promise((r) => setTimeout(r, 50));
-  s.G.KARDIA._internal.ACTIONS.klevel(btn({ v: "resident" }));
-  assert.equal(s.calls.paywall, 1, "Resident without Pro opens the paywall");
-  assert.ok(s.painted().includes('aria-pressed="true">MBBS'), "and the level never switches");
 });

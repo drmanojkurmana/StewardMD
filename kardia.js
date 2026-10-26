@@ -215,7 +215,8 @@
    * wrap in the pane. Motion: none on the switch beyond the engine
    * segmented colour change, 140ms on --kd-ease, off under reduced
    * motion in the engine. The choice is kept per device in host prefs. */
-  function labMode() { return st.prefs && st.prefs.klab === "scan" ? "scan" : "probe"; }
+  /* Owner 2026-10-27: Echo Lab is the Probe Lab only; the Scan Lab switch is removed from the screen (its code stays). */
+  function labMode() { return "probe"; }
   function probeLabSrc() { return echoBase() + "probelab/index.html"; }
   function labSwitchHtml() {
     var m = labMode();
@@ -226,9 +227,9 @@
   }
   function probeLabHtml() {
     return '<div class="krd-probe-wrap">' +
-      '<div class="krd-probe-bar"><button type="button" class="sp-btn sec krd-probe-syncbtn" data-act="kecho-syncprobe" aria-label="' + I.tx(T("Use a phone as the probe", "Use a phone as the probe")) + '">' +
+      '<div class="krd-probe-bar"><button type="button" class="sp-btn sec krd-probe-syncbtn" data-act="kecho-syncprobe" aria-label="' + I.tx(T("SyncProbe", "SyncProbe")) + '">' +
       '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18.2" r="1.1" fill="currentColor"/></svg>' +
-      I.tx(T("Use a phone as the probe", "Use a phone as the probe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
+      I.tx(T("SyncProbe", "SyncProbe")) + '</button><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<p class="sp-small krd-probe-status" id="krdProbeStatus" role="status">' + I.tx(T("Loading Probe Lab.", "Loading Probe Lab.")) + "</p>" +
       '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
       I.tx(T("Probe Lab did not load. Try again.", "Probe Lab did not load. Try again.")) +
@@ -749,13 +750,6 @@
   }
   function mountEchoLab() {
     stopEchoLab();
-    try {
-      var slRoot = G.document && G.document.getElementById("krdScanLab");
-      if (slRoot && G.KARDIA_SCANLAB && G.KARDIA_SCANLAB.create && !EL.scanlab) {
-        EL.scanlab = G.KARDIA_SCANLAB.create({ doc: G.document, root: slRoot, pathology: EL.pathology || null, geom: EL.geom || null, heart: EL.heart || null });
-        if (EL.scanlab && EL.viewId && G.KARDIA_SCANLAB.debugPose) { /* runner seam stays on KARDIA_SCANLAB */ }
-      }
-    } catch (e) { /* canvas failure: classic Echo Lab controls below stay as fallback */ }
     var p = ensureEchoProbe(), cur = echoCurrentView();
     if (!p || !cur) { drawEchoSector(); return; }
     if (p.getState().window !== cur.window || EL.viewId !== cur.id) startEchoTarget(cur, false);
@@ -940,7 +934,7 @@
 
   function echoBodyHtml() {
     var pane = labMode() === "probe" ? probeLabHtml() : echoLabHtml();
-    return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + labSwitchHtml() + pane + "</div></div>";
+    return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + pane + "</div></div>";
   }
   function showTab(id, focusSel) {
     if (TABS.indexOf(id) < 0) id = "echo";
@@ -955,7 +949,7 @@
       var cbody = G.KARDIA_CASES.html();
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
       if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {} return; }
-      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + cbody, focusSel);
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + cbody, focusSel);
       scrollActiveTabIntoView();
       try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       return;
@@ -963,15 +957,15 @@
     if (id === "calc" && G.KARDIA_CALC) {
       G.KARDIA_CALC.attach(host);
       G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
-      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + G.KARDIA_CALC.html(), focusSel);
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + G.KARDIA_CALC.html(), focusSel);
       scrollActiveTabIntoView();
       try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       G.KARDIA_CALC.mount();
       return;
     }
     var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
-    if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + levelsMenuHtml(lv) + body, focusSel); }
-    else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + levelsHtml(lv) + body, focusSel);
+    if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + body, focusSel); }
+    else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + body, focusSel);
     scrollActiveTabIntoView();
     try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
     if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);

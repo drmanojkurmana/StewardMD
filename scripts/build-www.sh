@@ -281,7 +281,6 @@ if [ -d kardia/media/k2-assets ]; then mkdir -p "$WWW/kardia/media/k2-assets"; c
 if [ -d kardia/media/calc ]; then mkdir -p "$WWW/kardia/media/calc"; cp kardia/media/calc/* "$WWW/kardia/media/calc/" 2>/dev/null || true; fi
 # K3 Sim renderer (Cine / Sim switch): lazy loaded only when Sim is first
 # chosen, so it must ship in www without joining the boot bundle.
-for f in kardia-sim-volume.js kardia-sim-bmode-gl.js kardia-probe-model.js; do [ -f "$f" ] && cp "$f" "$WWW/$f"; done
 if [ -d kardia/media/k3-volume ]; then mkdir -p "$WWW/kardia/media/k3-volume"; cp kardia/media/k3-volume/* "$WWW/kardia/media/k3-volume/" 2>/dev/null || true; fi
 
 # PrepNucleus (prep.js, loaded by prep-loader.js): the module tree and the per-subject index files (MCQ counts) ship

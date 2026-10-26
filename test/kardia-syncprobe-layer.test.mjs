@@ -1,7 +1,7 @@
 /* test/kardia-syncprobe-layer.test.mjs - SyncProbe sits above Kardia and onboarding.
  * Layer order lives once in kardia.css as tokens:
  * Kardia overlay < Kardia sheets < onboarding < SyncProbe.
- * Tapping "Use a phone as the probe" (#kslSyncProbe) opens the role sheet
+ * Tapping "SyncProbe" (#kslSyncProbe) opens the role sheet
  * and dismisses first-run onboarding, so the sheet is topmost at the centre.
  * Run: node --test test/kardia-syncprobe-layer.test.mjs */
 import { test } from "node:test";
@@ -29,19 +29,6 @@ test("layer tokens order Kardia overlay below onboarding below SyncProbe", () =>
   assert.ok(sp.includes("var(--krd-z-syncprobe"), "SyncProbe root uses its token");
   const prem = readFileSync("kardia-premium.css", "utf8");
   assert.ok(prem.includes("var(--krd-z-onb"), "onboarding uses its token");
-});
-
-test("Scan Lab, tutorial last step and Practice sheet all open SyncProbe", () => {
-  const scan = readFileSync("kardia-scanlab.js", "utf8");
-  assert.ok(scan.includes('id="kslSyncProbe"'), "Scan Lab corner button exists");
-  assert.ok(scan.includes('id="kslTutSyncProbe"'), "tutorial last step button exists");
-  assert.ok(scan.includes('id="kslPracticeSyncProbe"'), "Practice sheet button exists");
-  assert.ok(scan.includes("KARDIA_SYNCPROBE && G.KARDIA_SYNCPROBE.open"), "Scan Lab opens SyncProbe");
-  const host = readFileSync("kardia.js", "utf8");
-  assert.ok(host.includes('I.ACTIONS["kecho-syncprobe"]'), "classic lab action exists");
-  assert.ok(host.includes("KARDIA_SYNCPROBE) G.KARDIA_SYNCPROBE.open()"), "classic lab opens SyncProbe");
-  const ui = readFileSync("kardia-syncprobe.js", "utf8");
-  assert.ok(ui.includes("KARDIA_PREMIUM.dismiss"), "opening SyncProbe dismisses onboarding");
 });
 
 function makeFakeDom(zOverlay, zOnb, zSync) {

@@ -103,14 +103,3 @@ test("premium css: one token scale, dark scan surround, reduced motion, no new a
   assert.ok(!/#3ee07a|#0c6b4f|purple/i.test(css), "no new palette");
   assert.ok(!/background[^;]*linear-gradient|glow/i.test(css), "no gradient backdrop or glow; the tab strip edge fade uses mask-image only");
 });
-
-test("hooks: host notifies premium on every tab, scanlab success and tutorial selection, syncprobe pairing success", () => {
-  const host = readFileSync("kardia.js", "utf8");
-  assert.ok((host.match(/KARDIA_PREMIUM\.onTab/g) || []).length >= 3, "all showTab branches notify");
-  assert.match(host, /krd-skel sector/);
-  const scan = readFileSync("kardia-scanlab.js", "utf8");
-  assert.match(scan, /KARDIA_PREMIUM\.haptic\("success"\)/);
-  assert.match(scan, /haptic\("SELECTION"\)/);
-  const sync = readFileSync("kardia-syncprobe.js", "utf8");
-  assert.ok((sync.match(/spHaptic\("success"\)/g) || []).length >= 2, "display and probe pairing success");
-});

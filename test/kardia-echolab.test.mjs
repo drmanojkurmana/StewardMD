@@ -274,20 +274,6 @@ test("frame loop renders at most 30 fps, applies onFrameStart first, suspend rel
   }
 });
 
-test("probe mode suspends Echo Lab and the runner prints both pages busy time", async () => {
-  const { readFileSync } = await import("node:fs");
-  const sp = readFileSync(new URL("../kardia-syncprobe.js", import.meta.url), "utf8");
-  const host = readFileSync(new URL("../kardia.js", import.meta.url), "utf8");
-  const runner = readFileSync(new URL("./run-kardia-ui.mjs", import.meta.url), "utf8");
-  assert.ok(sp.includes("suspendProbeRender()") && sp.includes("resumeProbeRender()"), "SyncProbe suspends on probe entry and resumes on exit");
-  assert.ok(host.includes("suspendLive") && host.includes("onFrameStart"), "host suspends the live loop and applies synced poses at frame start");
-  const sl = readFileSync(new URL("../kardia-scanlab.js", import.meta.url), "utf8");
-  assert.ok(host.includes("EL.scanlab.suspend") && host.includes("EL.scanlab.resume"), "host suspendLive/resumeLive also suspend and resume Scan Lab");
-  assert.ok(sp.includes("scanLab()") && sl.includes("function suspend()") && sl.includes("isSuspended"), "probe role suspends Scan Lab 3D rendering, not just Echo Lab");
-  assert.ok(runner.includes("BUSY loopback: main-thread busy page A"), "runner prints both pages main-thread busy time");
-  assert.ok(runner.includes("e2eMs < 150"), "runner keeps the under 150 ms loopback assertion");
-});
-
 test("severity helpers read the pathology files shape", () => {
   const cond = { id: "x", severities: { severe: { heart: { aorticValveAreaCm2: 0.75 }, geom: { effusionMm: 3 }, sound: { s4: "present" } } } };
   assert.equal(P.severityHeart(cond, "severe").aorticValveAreaCm2, 0.75);

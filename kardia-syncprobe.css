@@ -2,7 +2,8 @@
    Every colour comes from the Kardia tokens in kardia.css (.krd-root); this file
    only lays out the SyncProbe sheet, pill, banner, glyph and diagnostics. The scan
    sector stays dark in both themes, like the Echo Lab sector. */
-.krd-sp { position: fixed; inset: 0; z-index: var(--krd-z-syncprobe, 960); pointer-events: none; background: transparent; }
+.krd-sp { position: fixed; inset: 0; z-index: var(--krd-z-syncprobe, 960); pointer-events: none; background: transparent !important; }
+.krd-sp[hidden] { display: none !important; }
 .krd-sp button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
 /* The SyncProbe root is .krd-root, not the engine .sp-root, so the sheet
    carries its own button styles from the Kardia tokens. Labels are 17px

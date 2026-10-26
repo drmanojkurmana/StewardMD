@@ -3,7 +3,7 @@ name: Kardia Scan Lab
 ---
 - openLink: stewardmd://kardia
 - assertVisible: "Open"
-- assertVisible: "Use a phone as the probe"
+- assertVisible: "SyncProbe"
 - takeScreenshot: kardia-scanlab-first-screen
 - swipe:
     start: 50%, 40%
@@ -15,7 +15,7 @@ name: Kardia Scan Lab
 - tapOn: "Apical"
 - tapOn: "Subcostal"
 - tapOn: "Suprasternal"
-- tapOn: "Use a phone as the probe"
+- tapOn: "SyncProbe"
 - assertVisible: "SyncProbe"
 - assertVisible: "Pair a probe"
 - assertVisible: "Use this phone as a probe"
