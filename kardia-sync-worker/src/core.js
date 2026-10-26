@@ -427,3 +427,260 @@ export class SyncRoomCore {
     return new SyncRoomCore(json);
   }
 }
+
+/* ---------- Short-code directory: typed-code relay lookup ----------
+ * The display registers its 6-character short code when it creates a
+ * session; the probe resolves the code to the room join material over
+ * an authenticated endpoint. Entries live for the code lifetime
+ * (CODE_TTL_MS, 5 minutes), are single use (a successful resolve
+ * deletes the entry), and hold only small join fields: never frames,
+ * poses, images, or any other payload.
+ */
+export const SHORT_CODE_RE = /^[A-Z2-9]{6}$/;
+export const CODE_TTL_MS = SESSION_TTL_MS;
+export const CODE_LOOKUP_MAX = 10;
+export const CODE_LOOKUP_WINDOW_MS = 60 * 1000;
+
+/* Normalize a typed code the same way the client does: uppercase, drop
+ * anything outside the short-code alphabet, accept exactly 6 chars. */
+export function normalizeShortCode(code) {
+  if (typeof code !== "string") return null;
+  const c = code.toUpperCase().replace(/[^A-Z2-9]/g, "");
+  return c.length === 6 && SHORT_CODE_RE.test(c) ? c : null;
+}
+
+/* Constant-time code compare: compare SHA-256 digests in a fixed
+ * 32-byte loop so timing reveals nothing about the stored code. */
+export function timingSafeEqualCodes(a, b) {
+  if (typeof a !== "string" || typeof b !== "string") return false;
+  const ha = sha256(a);
+  const hb = sha256(b);
+  let diff = 0;
+  for (let i = 0; i < 32; i++) {
+    diff |= ha[i] ^ hb[i];
+  }
+  return diff === 0;
+}
+
+function digestHex(bytes) {
+  let s = "";
+  for (let i = 0; i < bytes.length; i++) {
+    s += bytes[i].toString(16).padStart(2, "0");
+  }
+  return s;
+}
+
+function isRoomId(s) {
+  return typeof s === "string" && /^[0-9a-f]{32}$/i.test(s);
+}
+
+function isRoomToken(s) {
+  return typeof s === "string" && /^[A-Za-z0-9_-]{32,64}$/.test(s);
+}
+
+function isDisplayPub(s) {
+  return typeof s === "string" && /^[A-Za-z0-9_-]{86,88}$/.test(s);
+}
+
+export class CodeDirectory {
+  constructor(entries) {
+    this.entries = entries instanceof Map ? entries : new Map();
+  }
+
+  static fromJSON(json) {
+    const dir = new CodeDirectory();
+    if (json && Array.isArray(json.entries)) {
+      for (const [key, entry] of json.entries) {
+        if (typeof key === "string" && entry && typeof entry === "object") {
+          dir.entries.set(key, { ...entry });
+        }
+      }
+    }
+    return dir;
+  }
+
+  toJSON() {
+    return { entries: Array.from(this.entries.entries()) };
+  }
+
+  get size() {
+    return this.entries.size;
+  }
+
+  /* Remove expired entries; returns the number removed. */
+  sweep(now = Date.now()) {
+    let removed = 0;
+    for (const [key, entry] of this.entries) {
+      if (now >= entry.expiresAt) {
+        this.entries.delete(key);
+        removed++;
+      }
+    }
+    return removed;
+  }
+
+  /* Earliest expiry timestamp, or null when empty (for DO alarms). */
+  nextExpiry() {
+    let next = null;
+    for (const entry of this.entries.values()) {
+      if (next == null || entry.expiresAt < next) next = entry.expiresAt;
+    }
+    return next;
+  }
+
+  register({ code, roomId, roomToken, sessionId, displayPub, now = Date.now(), ttlMs = CODE_TTL_MS, expiresAt = null }) {
+    const normalized = normalizeShortCode(code);
+    if (!normalized) return { ok: false, reason: "bad-code" };
+    if (!isRoomId(roomId)) return { ok: false, reason: "bad-room" };
+    if (!isRoomToken(roomToken)) return { ok: false, reason: "bad-token" };
+    if (!isRoomId(sessionId)) return { ok: false, reason: "bad-session" };
+    if (!isDisplayPub(displayPub)) return { ok: false, reason: "bad-key" };
+    const t = now == null ? Date.now() : now;
+    // A code never outlives its room: clamp to the room expiry.
+    const end = typeof expiresAt === "number" ? Math.min(t + ttlMs, expiresAt) : t + ttlMs;
+    if (!(end > t)) return { ok: false, reason: "bad-expiry" };
+    this.entries.set(digestHex(sha256(normalized)), {
+      shortCode: normalized,
+      roomId: String(roomId).toLowerCase(),
+      roomToken,
+      sessionId: String(sessionId).toLowerCase(),
+      displayPub,
+      createdAt: t,
+      expiresAt: end,
+    });
+    return { ok: true };
+  }
+
+  /* Single-use resolve: a hit deletes the entry, so a code can only be
+   * joined once. Hits, misses, and expired entries all report the same
+   * not-found shape; the scan is constant-time across entries. */
+  resolve({ code, now = Date.now() }) {
+    const t = now == null ? Date.now() : now;
+    this.sweep(t);
+    const normalized = normalizeShortCode(code);
+    if (!normalized) return { ok: false, reason: "not-found" };
+    let hitKey = null;
+    for (const [key, entry] of this.entries) {
+      if (timingSafeEqualCodes(normalized, entry.shortCode)) {
+        hitKey = key;
+      }
+    }
+    if (hitKey == null) return { ok: false, reason: "not-found" };
+    const entry = this.entries.get(hitKey);
+    this.entries.delete(hitKey);
+    return { ok: true, entry: { ...entry } };
+  }
+
+  deleteByRoom({ roomId }) {
+    if (!isRoomId(roomId)) return { ok: false, removed: 0 };
+    const want = String(roomId).toLowerCase();
+    let removed = 0;
+    for (const [key, entry] of this.entries) {
+      if (entry.roomId === want) {
+        this.entries.delete(key);
+        removed++;
+      }
+    }
+    return { ok: true, removed };
+  }
+}
+
+/* Sliding-window lookup limiter: at most CODE_LOOKUP_MAX attempts per
+ * CODE_LOOKUP_WINDOW_MS per user and per IP, so codes cannot be brute
+ * forced. Both buckets must pass; every attempt that reaches the
+ * lookup consumes quota, hits and misses alike. */
+export class LookupRateLimiter {
+  constructor(buckets) {
+    this.buckets = buckets instanceof Map ? buckets : new Map();
+  }
+
+  static fromJSON(json) {
+    const lim = new LookupRateLimiter();
+    if (json && Array.isArray(json.buckets)) {
+      for (const [key, stamps] of json.buckets) {
+        if (typeof key === "string" && Array.isArray(stamps)) {
+          lim.buckets.set(key, stamps.filter((t) => typeof t === "number"));
+        }
+      }
+    }
+    return lim;
+  }
+
+  toJSON(now = Date.now()) {
+    const t = now == null ? Date.now() : now;
+    const buckets = [];
+    for (const [key, stamps] of this.buckets) {
+      const fresh = stamps.filter((s) => t - s < CODE_LOOKUP_WINDOW_MS);
+      if (fresh.length) buckets.push([key, fresh]);
+    }
+    return { buckets };
+  }
+
+  prune(now = Date.now()) {
+    const t = now == null ? Date.now() : now;
+    for (const [key, stamps] of this.buckets) {
+      const fresh = stamps.filter((s) => t - s < CODE_LOOKUP_WINDOW_MS);
+      if (fresh.length) this.buckets.set(key, fresh);
+      else this.buckets.delete(key);
+    }
+  }
+
+  check({ key, now = Date.now(), max = CODE_LOOKUP_MAX, windowMs = CODE_LOOKUP_WINDOW_MS }) {
+    const t = now == null ? Date.now() : now;
+    const history = (this.buckets.get(key) || []).filter((s) => t - s < windowMs);
+    if (history.length >= max) {
+      this.buckets.set(key, history);
+      return { ok: false, retryAfterMs: Math.max(0, windowMs - (t - history[0])) };
+    }
+    history.push(t);
+    this.buckets.set(key, history);
+    return { ok: true };
+  }
+
+  checkLookup({ uid, ip, now = Date.now() }) {
+    const u = this.check({ key: "uid:" + uid, now });
+    if (!u.ok) return u;
+    const r = this.check({ key: "ip:" + (ip || "unknown"), now });
+    if (!r.ok) return { ok: false, retryAfterMs: r.retryAfterMs };
+    return { ok: true };
+  }
+}
+
+/* Pure lookup decision shared by the Worker route and unit tests.
+ * Returns an HTTP-style { status, body }. Unknown, expired, consumed,
+ * and malformed codes all answer 404 so responses do not oracle which
+ * codes exist. The body carries only the small join fields, never the
+ * display uid and never any session payload. */
+export function handleCodeLookup({ code, uid, ip, now = Date.now() } = {}, deps = {}) {
+  const t = now == null ? Date.now() : now;
+  if (!uid || typeof uid !== "string") {
+    return { status: 401, body: { error: "sign-in required" } };
+  }
+  const directory = deps.directory;
+  const limiter = deps.limiter;
+  if (limiter) {
+    const lim = limiter.checkLookup({ uid, ip: ip || "unknown", now: t });
+    if (!lim.ok) {
+      return { status: 429, body: { error: "rate-limited", retryAfterMs: lim.retryAfterMs } };
+    }
+  }
+  if (!directory) {
+    return { status: 404, body: { error: "not-found" } };
+  }
+  const hit = directory.resolve({ code, now: t });
+  if (!hit.ok) {
+    return { status: 404, body: { error: "not-found" } };
+  }
+  const e = hit.entry;
+  return {
+    status: 200,
+    body: {
+      roomId: e.roomId,
+      roomToken: e.roomToken,
+      sessionId: e.sessionId,
+      displayPub: e.displayPub,
+      shortCode: e.shortCode,
+      expiresAt: e.expiresAt,
+    },
+  };
+}

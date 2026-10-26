@@ -11,9 +11,17 @@ workers_dev = true
 name = "SYNC_ROOM"
 class_name = "SyncRoom"
 
+[[durable_objects.bindings]]
+name = "SYNC_CODES"
+class_name = "SyncCodeDirectory"
+
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["SyncRoom"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["SyncCodeDirectory"]
 
 [vars]
 FIREBASE_PROJECT_ID = "stewardmd-498ec"

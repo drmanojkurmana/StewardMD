@@ -492,6 +492,7 @@
       else if (/expired/i.test(msg)) reason = "expired";
       else if (/controller-busy|busy|already training/i.test(msg)) reason = "busy";
       else if (/not-found|no display found/i.test(msg)) reason = "not-found";
+      else if (/rate-limit|too many code|429/i.test(msg)) reason = "rate-limited";
       else if (/bluetooth/i.test(msg) && /off|powered/i.test(msg)) reason = "bluetooth-off";
       else if (/bluetooth/i.test(msg) && /permission|denied/i.test(msg)) reason = "bluetooth-permission";
       else if (/bluetooth/i.test(msg)) reason = "bluetooth-unavailable";
@@ -505,6 +506,7 @@
       case "busy": case "controller-busy": return { reason: "busy", message: "That display is already training with another probe. Wait until that session ends.", action: "retry", actionLabel: "Try again" };
       case "sign-in-required": return { reason: reason, message: "You are signed out. The internet link needs sign-in. Nearby joining over Bluetooth works without sign-in.", action: "sign-in", actionLabel: "Sign in" };
       case "not-found": return { reason: reason, message: "No display found nearby. Keep both phones close, with the display phone showing its code.", action: "scan", actionLabel: "Scan the QR code instead" };
+      case "rate-limited": return { reason: reason, message: "Too many code tries. Wait a minute, then try the fresh code.", action: "retry", actionLabel: "Try again" };
       case "bluetooth-off": return { reason: reason, message: "Bluetooth is off. Turn Bluetooth on, then search again.", action: "settings", actionLabel: "Open Settings" };
       case "bluetooth-permission": return { reason: reason, message: "Bluetooth permission is off for this app. Allow Bluetooth in Settings, then search again.", action: "settings", actionLabel: "Open Settings" };
       case "bluetooth-unavailable": return { reason: reason, message: "Bluetooth is not available on this phone. Scan the QR code to join over the internet.", action: "scan", actionLabel: "Scan the QR code" };

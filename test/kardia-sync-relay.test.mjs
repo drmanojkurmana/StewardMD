@@ -823,3 +823,277 @@ test("client adapter: host and join methods communicate using pairing payload", 
   globalThis.fetch = prevFetch;
   globalThis.SMD_AUTH = null;
 });
+
+/* ==================== 9. Short-code directory (typed-code relay lookup) ====================
+ * The display registers its 6-character code; the probe resolves it over
+ * POST /sync/code. Entries live 5 minutes, are single use, hold only join
+ * fields, and lookups are rate limited per user and per IP.
+ */
+
+const TEST_PUB = "B" + "A".repeat(86); // 87 chars base64url, like a real P-256 key
+const TEST_ROOM = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+const TEST_TOKEN = "AbCdEfGhIjKlMnOpQrStUvWxYz0123456789-_ab";
+const TEST_SESSION = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
+
+function makeCodeInput(overrides = {}) {
+  return {
+    code: "KARD2X",
+    roomId: TEST_ROOM,
+    roomToken: TEST_TOKEN,
+    sessionId: TEST_SESSION,
+    displayPub: TEST_PUB,
+    now: 100000,
+    ...overrides,
+  };
+}
+
+function lookupDeps(overrides = {}) {
+  return {
+    directory: new Core.CodeDirectory(),
+    limiter: new Core.LookupRateLimiter(),
+    ...overrides,
+  };
+}
+
+test("code register and resolve round trip returns only the join fields", () => {
+  const { directory } = lookupDeps();
+  assert.equal(Core.CODE_TTL_MS, 300000, "code lives 5 minutes");
+  assert.equal(Core.CODE_LOOKUP_MAX, 10, "10 lookups per minute");
+  assert.equal(Core.CODE_LOOKUP_WINDOW_MS, 60000);
+
+  const reg = directory.register(makeCodeInput());
+  assert.equal(reg.ok, true);
+  assert.equal(directory.size, 1);
+
+  const res = Core.handleCodeLookup(
+    { code: "kard2x", uid: "uid-learner-9", ip: "10.0.0.1", now: 100001 },
+    lookupDeps({ directory })
+  );
+  assert.equal(res.status, 200);
+  assert.deepEqual(Object.keys(res.body).sort(), ["displayPub", "expiresAt", "roomId", "roomToken", "sessionId", "shortCode"]);
+  assert.equal(res.body.roomId, TEST_ROOM);
+  assert.equal(res.body.roomToken, TEST_TOKEN);
+  assert.equal(res.body.sessionId, TEST_SESSION);
+  assert.equal(res.body.displayPub, TEST_PUB);
+  assert.equal(res.body.shortCode, "KARD2X");
+  assert.equal(res.body.expiresAt, 100000 + Core.CODE_TTL_MS);
+  assert.ok(!("displayUid" in res.body), "no display uid leaks");
+});
+
+test("code resolve is single use: deleted on join, second lookup is not-found", () => {
+  const deps = lookupDeps();
+  deps.directory.register(makeCodeInput());
+  const first = Core.handleCodeLookup({ code: "KARD2X", uid: "u1", ip: "1.1.1.1", now: 100001 }, deps);
+  assert.equal(first.status, 200);
+  assert.equal(deps.directory.size, 0, "consumed on resolve");
+  const second = Core.handleCodeLookup({ code: "KARD2X", uid: "u1", ip: "1.1.1.1", now: 100002 }, deps);
+  assert.equal(second.status, 404);
+  assert.equal(second.body.error, "not-found");
+});
+
+test("code expiry: resolves inside 5 minutes, not-found after, sweep clears", () => {
+  const t0 = 500000;
+  const deps = lookupDeps();
+  deps.directory.register(makeCodeInput({ now: t0 }));
+  const inside = Core.handleCodeLookup({ code: "KARD2X", uid: "u1", ip: "1.1.1.1", now: t0 + 299999 }, deps);
+  assert.equal(inside.status, 200, "resolves inside 5 minutes");
+  // Re-register and check the boundary without consuming first
+  deps.directory.register(makeCodeInput({ now: t0 }));
+  const atEdge = deps.directory.resolve({ code: "KARD2X", now: t0 + Core.CODE_TTL_MS });
+  assert.equal(atEdge.ok, false, "expired at exactly 5 minutes");
+  assert.equal(atEdge.reason, "not-found");
+  assert.equal(deps.directory.size, 0, "expiry sweep removed it");
+});
+
+test("code lookup rejects the wrong user (no auth) but allows another signed-in user", () => {
+  const deps = lookupDeps();
+  deps.directory.register(makeCodeInput());
+  for (const badUid of [null, undefined, "", 42]) {
+    const res = Core.handleCodeLookup({ code: "KARD2X", uid: badUid, ip: "1.1.1.1", now: 100001 }, deps);
+    assert.equal(res.status, 401, "uid " + String(badUid) + " rejected");
+    assert.equal(res.body.error, "sign-in required");
+  }
+  assert.equal(deps.directory.size, 1, "rejected lookups do not consume the code");
+  // The probe is a different user than the display: that must succeed
+  const probe = Core.handleCodeLookup({ code: "KARD2X", uid: "uid-probe-other", ip: "2.2.2.2", now: 100001 }, deps);
+  assert.equal(probe.status, 200);
+});
+
+test("code compare is constant-time: one-character changes never match", () => {
+  assert.equal(Core.timingSafeEqualCodes("KARD2X", "KARD2X"), true);
+  assert.equal(Core.timingSafeEqualCodes("KARD2X", "KARD2Y"), false);
+  assert.equal(Core.timingSafeEqualCodes("KARD2X", "XARD2X"), false);
+  assert.equal(Core.timingSafeEqualCodes("KARD2X", "KARD2"), false);
+  assert.equal(Core.timingSafeEqualCodes("KARD2X", null), false);
+
+  const deps = lookupDeps();
+  deps.directory.register(makeCodeInput());
+  for (const guess of ["KARD2Y", "XARD2X", "KARD2", "KARD2XX", "******", "kard2y"]) {
+    const res = deps.directory.resolve({ code: guess, now: 100001 });
+    assert.equal(res.ok, false, guess + " must not match");
+    assert.equal(res.reason, "not-found");
+  }
+  assert.equal(deps.directory.size, 1, "guesses do not consume the code");
+});
+
+test("code lookup rate limit: 10 per minute per user and per IP", () => {
+  const t0 = 800000;
+  const deps = lookupDeps();
+  // 10 misses from one user+IP are allowed (misses consume quota too)
+  for (let i = 0; i < 10; i++) {
+    const res = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "9.9.9.9", now: t0 + i }, deps);
+    assert.equal(res.status, 404, "attempt " + (i + 1) + " allowed");
+  }
+  const limited = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "9.9.9.9", now: t0 + 10 }, deps);
+  assert.equal(limited.status, 429);
+  assert.equal(limited.body.error, "rate-limited");
+  assert.ok(limited.body.retryAfterMs > 0 && limited.body.retryAfterMs <= 60000);
+
+  // Same user on a fresh IP is still limited (per-user bucket)
+  const sameUser = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "8.8.8.8", now: t0 + 11 }, deps);
+  assert.equal(sameUser.status, 429);
+
+  // Another user on the same IP is still limited (per-IP bucket)
+  const sameIp = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-2", ip: "9.9.9.9", now: t0 + 12 }, deps);
+  assert.equal(sameIp.status, 429);
+
+  // A different user on a different IP is unaffected
+  const other = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-2", ip: "7.7.7.7", now: t0 + 13 }, deps);
+  assert.equal(other.status, 404);
+
+  // After the window passes, lookups work again
+  const after = Core.handleCodeLookup({ code: "ZZZZZZ", uid: "brute-1", ip: "9.9.9.9", now: t0 + 61001 }, deps);
+  assert.equal(after.status, 404);
+});
+
+test("code normalize: case-insensitive, strips ambiguity, rejects the rest", () => {
+  assert.equal(Core.normalizeShortCode("kard2x"), "KARD2X");
+  assert.equal(Core.normalizeShortCode("KARD 2X"), "KARD2X");
+  assert.equal(Core.normalizeShortCode("ABCDEF1"), "ABCDEF", "ambiguous 1 is stripped");
+  assert.equal(Core.normalizeShortCode("KARD2"), null);
+  assert.equal(Core.normalizeShortCode("KARD2XX"), null);
+  assert.equal(Core.normalizeShortCode("KARD1X"), null, "stripping leaves 5 chars");
+  assert.equal(Core.normalizeShortCode(null), null);
+  assert.equal(Core.normalizeShortCode(""), null);
+});
+
+test("code register validation rejects bad fields and past expiry", () => {
+  const dir = new Core.CodeDirectory();
+  assert.equal(dir.register(makeCodeInput({ code: "BAD1!" })).reason, "bad-code");
+  assert.equal(dir.register(makeCodeInput({ roomId: "xyz" })).reason, "bad-room");
+  assert.equal(dir.register(makeCodeInput({ roomToken: "short" })).reason, "bad-token");
+  assert.equal(dir.register(makeCodeInput({ sessionId: "xyz" })).reason, "bad-session");
+  assert.equal(dir.register(makeCodeInput({ displayPub: "short" })).reason, "bad-key");
+  assert.equal(dir.register(makeCodeInput({ expiresAt: 99999 })).reason, "bad-expiry");
+  assert.equal(dir.size, 0);
+});
+
+test("code unknown, expired and malformed lookups all answer not-found", () => {
+  const deps = lookupDeps();
+  assert.equal(Core.handleCodeLookup({ code: "QQQQQQ", uid: "u1", ip: "1.1.1.1", now: 100 }, deps).status, 404);
+  assert.equal(Core.handleCodeLookup({ code: "not a code!!", uid: "u1", ip: "1.1.1.1", now: 100 }, deps).status, 404);
+  assert.equal(Core.handleCodeLookup({ code: null, uid: "u1", ip: "1.1.1.1", now: 100 }, deps).status, 404);
+});
+
+/* ==================== 10. Client typed-code lookup ==================== */
+
+test("client resolveCode posts the typed code and returns the join material", async () => {
+  const prevFetch = globalThis.fetch;
+  let seenUrl = null, seenOpts = null;
+  globalThis.fetch = async (url, opts) => {
+    seenUrl = url;
+    seenOpts = opts;
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({
+        roomId: TEST_ROOM,
+        roomToken: TEST_TOKEN,
+        sessionId: TEST_SESSION,
+        displayPub: TEST_PUB,
+        shortCode: "KARD2X",
+        expiresAt: 9999999999999,
+      }),
+    };
+  };
+  globalThis.SMD_AUTH = { currentUser: { uid: "probe-1", getIdToken: () => Promise.resolve("jwt-probe-1") } };
+  try {
+    const out = await relayTransport.resolveCode("kard 2x");
+    assert.ok(seenUrl.includes("/sync/code"));
+    assert.equal(seenOpts.method, "POST");
+    assert.deepEqual(JSON.parse(seenOpts.body), { code: "KARD2X" });
+    assert.equal(out.roomId, TEST_ROOM);
+    assert.equal(out.roomToken, TEST_TOKEN);
+    assert.equal(out.sessionId, TEST_SESSION);
+    assert.equal(out.shortCode, "KARD2X");
+    assert.equal(out.relay.roomId, TEST_ROOM);
+  } finally {
+    globalThis.fetch = prevFetch;
+    globalThis.SMD_AUTH = null;
+  }
+});
+
+test("client resolveCode maps lookup failures to specific reasons", async () => {
+  const prevFetch = globalThis.fetch;
+  async function withStatus(status, headers) {
+    globalThis.fetch = async () => ({ ok: status >= 200 && status < 300, status, headers: { get: (n) => (headers || {})[n] || null }, text: async () => "err", json: async () => ({}) });
+    globalThis.SMD_AUTH = { currentUser: { uid: "p", getIdToken: () => Promise.resolve("jwt") } };
+  }
+  try {
+    await withStatus(404);
+    await assert.rejects(() => relayTransport.resolveCode("KARD2X"), (e) => e.reason === "not-found");
+    await withStatus(401);
+    await assert.rejects(() => relayTransport.resolveCode("KARD2X"), (e) => e.reason === "sign-in-required");
+    await withStatus(429, { "Retry-After": "45" });
+    await assert.rejects(() => relayTransport.resolveCode("KARD2X"), (e) => e.reason === "rate-limited" && e.retryAfterMs === 45000);
+  } finally {
+    globalThis.fetch = prevFetch;
+    globalThis.SMD_AUTH = null;
+  }
+});
+
+test("client resolveCode rejects fast without sign-in or a valid code shape", async () => {
+  const prevFetch = globalThis.fetch;
+  let called = false;
+  globalThis.fetch = async () => { called = true; throw new Error("must not fetch"); };
+  globalThis.SMD_AUTH = null;
+  try {
+    await assert.rejects(() => relayTransport.resolveCode("KARD2X"), (e) => e.reason === "sign-in-required");
+    assert.equal(called, false, "no network without sign-in");
+    await assert.rejects(() => relayTransport.resolveCode("XY1"), (e) => e.reason === "not-found");
+    assert.equal(called, false, "no network for a malformed code");
+  } finally {
+    globalThis.fetch = prevFetch;
+    globalThis.SMD_AUTH = null;
+  }
+});
+
+test("client host registers the displayed code with the session", async () => {
+  const prevFetch = globalThis.fetch;
+  const prevWs = globalThis.WebSocket;
+  let seenBody = null;
+  globalThis.fetch = async (url, opts) => {
+    if (String(url).includes("/sync/session")) {
+      seenBody = opts.body ? JSON.parse(opts.body) : null;
+      return { ok: true, status: 200, json: async () => ({ roomId: TEST_ROOM, roomToken: TEST_TOKEN, expiresAt: 9999999999999 }) };
+    }
+    throw new Error("unexpected fetch: " + url);
+  };
+  class MockWs {
+    constructor() { this.readyState = 0; setTimeout(() => { this.readyState = 1; if (this.onopen) this.onopen(); }, 5); }
+    send() { return true; }
+    close() { this.readyState = 3; if (this.onclose) this.onclose({ reason: "closed" }); }
+  }
+  globalThis.WebSocket = MockWs;
+  globalThis.SMD_AUTH = { currentUser: { uid: "doc-1", getIdToken: () => Promise.resolve("jwt-doc-1") } };
+  try {
+    const pairing = { sessionId: TEST_SESSION, shortCode: "KARD2X", displayPub: TEST_PUB, expiresAt: 9999999999999 };
+    await relayTransport.host(pairing, {});
+    assert.deepEqual(seenBody, { shortCode: "KARD2X", sessionId: TEST_SESSION, displayPub: TEST_PUB });
+    await relayTransport.close();
+  } finally {
+    globalThis.fetch = prevFetch;
+    globalThis.WebSocket = prevWs;
+    globalThis.SMD_AUTH = null;
+  }
+});
