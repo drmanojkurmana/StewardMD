@@ -36,6 +36,13 @@
  * sheet rises 200ms on --kd-ease, banners fade, glyph tilts with transform only;
  * all motion off under reduced motion. Every control is a real button, 44px or
  * taller, visible focus, safe area padding. British spelling, no em or en dashes.
+ * Failure states: every host or join failure maps through mapReason to one
+ * specific message and one next action (signed out, Bluetooth off or denied
+ * or unavailable, no internet and no Bluetooth, relay unreachable, expired,
+ * busy, not found, rate limited, version mismatch). The raw reason is logged
+ * to the console; the user never sees a generic message or an empty QR area.
+ * Loading shows "Preparing the code" in the QR area; offline and empty
+ * nearby lists name the next step. Long messages wrap in the error panel.
  */
 (function (G) {
   "use strict";
@@ -311,7 +318,7 @@
   /* ---------- Display: Pair a probe ---------- */
   function openDisplay() {
     resumeProbeRender();
-    S.screen = "display";
+    S.screen = "display"; S.displayError = null;
     S.core = syncCore();
     if (!S.core) {
       showSheet("Pair a probe",
@@ -328,18 +335,20 @@
       var started = S.core.startDisplay();
       S.pairing = started;
       /* The real core makes its pairing keys with WebCrypto, so the first
-       * start returns a thenable pairing. Repaint once it is ready. */
-      if (started && typeof started.then === "function" && !started.sessionId) {
-        started.then(function () { if (S.screen === "display") openDisplay(); }, function () { if (S.screen === "display") setStateLine("failed"); });
+       * start returns a thenable pairing. Repaint once it is ready; on
+       * failure show the specific message and action, not a blank QR. */
+      if (started && typeof started.then === "function") {
+        started.then(function () { if (S.screen === "display" && !S.displayError) openDisplay(); }, function (e) { if (S.screen === "display") showDisplayError(e); });
       }
-    } catch (e) { S.pairing = null; }
+    } catch (e) { S.pairing = null; showDisplayError(e); return; }
     if (S.unsub) { try { S.unsub(); } catch (e) {} S.unsub = null; }
     try { S.unsub = S.core.on(onCoreEvent); } catch (e) {}
     var p = currentPairing();
     var payload = p ? buildPayload(p) : "";
     showSheet("Pair a probe",
       '<p class="sp-small">Scan this with the probe phone.</p>' +
-      '<div class="krd-sp-qrwrap"><canvas id="krdSpQr" width="280" height="280" role="img" aria-label="Pairing code for the probe phone"></canvas></div>' +
+      '<div class="krd-sp-qrwrap"><canvas id="krdSpQr" width="280" height="280" role="img" aria-label="Pairing code for the probe phone"></canvas>' +
+      (payload ? "" : '<p class="sp-small" id="krdSpQrWait" role="status">Preparing the code</p>') + "</div>" +
       '<p class="sp-small krd-sp-codelabel">or type this code</p>' +
       '<p class="krd-sp-code" aria-label="Probe code">' + esc(codeGroups(p && p.shortCode)) + "</p>" +
       (p && p.codeHashHex ? '<p class="sp-small krd-sp-codelabel">Nearby name KS-' + esc(String(p.codeHashHex).slice(0, 4).toUpperCase()) + "</p>" : "") +
@@ -500,16 +509,20 @@
   function mapReason(e) {
     var reason = (e && e.reason) || "";
     var msg = String((e && (e.message || e.reason)) || e || "");
+    /* Raw reason always reaches the console for the lead; the user only
+       ever sees the specific message below, never the raw text. */
+    try { console.warn("[SyncProbe] pairing failed:", reason || msg || "unknown", e || ""); } catch (x) {}
     if (!reason) {
-      if (/sign-in required|401|unauthori[sz]ed/i.test(msg)) reason = "sign-in-required";
+      if (/sign-in required|sign in required|401|unauthori[sz]ed/i.test(msg)) reason = "sign-in-required";
       else if (/expired/i.test(msg)) reason = "expired";
       else if (/controller-busy|busy|already training/i.test(msg)) reason = "busy";
       else if (/not-found|no display found/i.test(msg)) reason = "not-found";
       else if (/rate-limit|too many code|429/i.test(msg)) reason = "rate-limited";
       else if (/bluetooth/i.test(msg) && /off|powered/i.test(msg)) reason = "bluetooth-off";
       else if (/bluetooth/i.test(msg) && /permission|denied/i.test(msg)) reason = "bluetooth-permission";
+      else if (/relay|pairing service|websocket|failed to fetch|session creation failed|code lookup failed/i.test(msg)) reason = "relay-unreachable";
       else if (/bluetooth/i.test(msg)) reason = "bluetooth-unavailable";
-      else if (/offline|internet|network|websocket/i.test(msg)) reason = "offline";
+      else if (/offline|internet|network/i.test(msg)) reason = "offline";
       else if (/version/i.test(msg)) reason = "version-mismatch";
       else if (/no-transport|no link/i.test(msg)) reason = "no-transport";
       else reason = "unknown";
@@ -517,19 +530,39 @@
     switch (reason) {
       case "expired": return { reason: reason, message: "That code has expired. The display phone is showing a fresh code.", action: "scan", actionLabel: "Scan the fresh code" };
       case "busy": case "controller-busy": return { reason: "busy", message: "That display is already training with another probe. Wait until that session ends.", action: "retry", actionLabel: "Try again" };
-      case "sign-in-required": return { reason: reason, message: "You are signed out. The internet link needs sign-in. Nearby joining over Bluetooth works without sign-in.", action: "sign-in", actionLabel: "Sign in" };
+      case "sign-in-required": return { reason: reason, message: "You are signed out. Sign in to pair over the internet. Nearby pairing over Bluetooth works without sign-in.", action: "sign-in", actionLabel: "Sign in" };
       case "not-found": return { reason: reason, message: "No display found nearby. Keep both phones close, with the display phone showing its code.", action: "scan", actionLabel: "Scan the QR code instead" };
       case "rate-limited": return { reason: reason, message: "Too many code tries. Wait a minute, then try the fresh code.", action: "retry", actionLabel: "Try again" };
       case "bluetooth-off": return { reason: reason, message: "Bluetooth is off. Turn Bluetooth on, then search again.", action: "settings", actionLabel: "Open Settings" };
       case "bluetooth-permission": return { reason: reason, message: "Bluetooth permission is off for this app. Allow Bluetooth in Settings, then search again.", action: "settings", actionLabel: "Open Settings" };
       case "bluetooth-unavailable": return { reason: reason, message: "Bluetooth is not available on this phone. Scan the QR code to join over the internet.", action: "scan", actionLabel: "Scan the QR code" };
-      case "offline": case "no-transport": return { reason: "offline", message: "No internet and no Bluetooth link. Turn on Bluetooth or connect to the internet.", action: "retry", actionLabel: "Try again" };
+      case "relay-unreachable": return { reason: reason, message: "We could not reach the pairing service. Check the connection and try again.", action: "retry", actionLabel: "Try again" };
+      case "offline": case "no-transport": return { reason: "offline", message: "No internet and no Bluetooth link. Turn on Bluetooth or connect to the internet, then try again.", action: "retry", actionLabel: "Try again" };
       case "version-mismatch": case "bad-version": return { reason: "version-mismatch", message: "The two phones are on different app versions. Update both phones, then pair again.", action: "retry", actionLabel: "Try again" };
       case "bad-code": return { reason: reason, message: "That code does not look right. Check the display phone and try again.", action: "retry", actionLabel: "Check the code" };
       default:
-        try { console.warn("[SyncProbe] pairing failed:", msg || reason); } catch (x) {}
         return { reason: "unknown", message: "The phones could not reach each other. Move closer and try again.", action: "retry", actionLabel: "Try again" };
     }
+  }
+  /* Open the app sign-in the way other StewardMD screens do: the email
+     sign-in sheet, falling back to the account screen. */
+  function openSignIn() {
+    try { if (G.SMD_EMAIL_AUTH && G.SMD_EMAIL_AUTH.openEmail) { G.SMD_EMAIL_AUTH.openEmail("signin"); return true; } } catch (e) {}
+    try { if (typeof G.SMD_openProfile === "function") { G.SMD_openProfile(); return true; } } catch (e) {}
+    return false;
+  }
+  /* Display host failure: replace the empty QR area with the specific
+     message and its one next action. Never a generic try again. */
+  function showDisplayError(err) {
+    var info = mapReason(err || {});
+    S.screen = "display"; S.displayError = info;
+    showSheet("Pair a probe",
+      '<div class="krd-sp-error" role="alert"><p>' + esc(info.message) + "</p></div>" +
+      '<div class="krd-sp-col">' +
+      (info.action ? '<button type="button" class="sp-btn pri sp-wide" data-act="sp-err-' + esc(info.action) + '">' + esc(info.actionLabel) + "</button>" : "") +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Cancel</button></div>' +
+      '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-details">Connection details</button></p>');
+    bindRootClose(closeAll);
   }
   function friendlyReason(e) { return mapReason(e).message; }
   function setProbeBusy(line) {
@@ -802,7 +835,8 @@
       if (name === "confirming") renderConfirm(session);
       else if (name === "connected") { spHaptic("success"); closeSheet(); ensureWake(); }
       else if (name === "failed") {
-        setStateLine("failed", (evt.reason ? friendlyReason({ reason: evt.reason }) : null));
+        showDisplayError({ reason: evt.reason || (S.core && S.core.lastError ? S.core.lastError() : "") });
+        return;
       } else setStateLine(name);
       renderConfirm(name === "confirming" ? session : null);
     }
@@ -814,7 +848,7 @@
         else renderProbeConfirm();
         ensureWake();
       }
-      else if (name === "failed") { setProbeBusy("Something went wrong"); }
+      else if (name === "failed") { S.probeStep = "intro"; renderProbeIntro(); joinErr(null, mapReason({ reason: evt.reason || "" })); }
       else if (name === "connecting" || name === "discovering" || name === "pairing") setProbeBusy(stateLabel(name).line);
     }
     if (evt.type === "stats") refreshPill();
@@ -941,12 +975,14 @@
     }
     if (act === "sp-err-scan") { scanCode(); return; }
     if (act === "sp-err-sign-in") {
-      try { if (G.SMD_EMAIL_AUTH && G.SMD_EMAIL_AUTH.openEmail) G.SMD_EMAIL_AUTH.openEmail(); else if (typeof G.SMD_openProfile === "function") G.SMD_openProfile(); else joinErr("Open Account and sign in, then try again."); }
-      catch (e) { joinErr("Open Account and sign in, then try again."); }
+      if (!openSignIn()) {
+        if (S.screen === "display") showDisplayError({ reason: "sign-in-required" });
+        else joinErr("Open Account and sign in, then try again.");
+      }
       return;
     }
     if (act === "sp-err-settings") { joinErr("Open Settings, allow Bluetooth for this app, then search again."); return; }
-    if (act === "sp-err-retry") { startNearbySearch(); return; }
+    if (act === "sp-err-retry") { if (S.screen === "display" || S.displayError) openDisplay(); else startNearbySearch(); return; }
     if (act === "sp-join-code") {
       var d = doc(), input = d && d.getElementById("krdSpCode");
       probeJoin(input ? input.value : "");
@@ -1025,7 +1061,7 @@
   }
   function closeSheet() {
     clearRoot();
-    S.screen = null; S.probeStep = "intro"; S.probePose = null;
+    S.screen = null; S.probeStep = "intro"; S.probePose = null; S.displayError = null;
   }
   function closeAll() {
     resumeProbeRender();
@@ -1049,7 +1085,7 @@
     _pure: {
       qrEncode: qrEncode, qrDraw: qrDraw,
       buildPayload: buildPayload, parsePayload: parsePayload, isExpired: isExpired,
-      stateLabel: stateLabel, transportName: transportName, signalBars: signalBars, mapReason: mapReason, friendlyReason: friendlyReason, normalizeCodeInput: normalizeCodeInput, formatCodeInput: formatCodeInput,
+      stateLabel: stateLabel, transportName: transportName, signalBars: signalBars, mapReason: mapReason, friendlyReason: friendlyReason, openSignIn: openSignIn, normalizeCodeInput: normalizeCodeInput, formatCodeInput: formatCodeInput,
       fmtLatency: fmtLatency, fmtExpiry: fmtExpiry, codeGroups: codeGroups
     }
   };

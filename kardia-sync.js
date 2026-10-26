@@ -164,8 +164,9 @@
     if (/rate-limit|too many|429/i.test(m)) return "rate-limited";
     if (/permission|denied|not authorized/i.test(m) && /bluetooth|ble/i.test(m)) return "bluetooth-permission";
     if (/bluetooth is (off|not available|powered off)|poweredoff/i.test(m)) return "bluetooth-off";
-    if (/bluetooth/i.test(m) && /not available|only available in the app/i.test(m)) return "bluetooth-unavailable";
-    if (/offline|no internet|internet connection required|network|websocket|fetch/i.test(m)) return "offline";
+    if (/bluetooth/i.test(m) && /not available|only available in the app|needs the latest app/i.test(m)) return "bluetooth-unavailable";
+    if (/relay|pairing service|session creation failed|code lookup failed|websocket connection|websocket closed|failed to fetch|fetch api unavailable|networkerror|load failed/i.test(m)) return "relay-unreachable";
+    if (/offline|no internet|internet connection required|network/i.test(m)) return "offline";
     if (/bad-version|version mismatch|protocol/i.test(m)) return "version-mismatch";
     if (/no-transport|no link is available/i.test(m)) return "no-transport";
     if (/invalid pairing|bad-pairing|scan the qr/i.test(m)) return "bad-code";
@@ -500,7 +501,7 @@
    * back to a backup when the active send fails) and are closed only by
    * close(). If every candidate fails, the rejection carries the reason
    * of the most specific failure (sign-in and Bluetooth before unknown). */
-  var REASON_RANK = { "sign-in-required": 1, "bluetooth-off": 2, "bluetooth-permission": 3, "offline": 4, "not-found": 5, "expired": 6, "busy": 7, "no-transport": 8, "unknown": 9 };
+  var REASON_RANK = { "sign-in-required": 1, "bluetooth-off": 2, "bluetooth-permission": 3, "offline": 4, "relay-unreachable": 5, "not-found": 6, "expired": 7, "busy": 8, "bluetooth-unavailable": 9, "no-transport": 10, "unknown": 11 };
   function bestReasonError(errs) {
     var best = null, bestRank = 99;
     (errs || []).forEach(function (e) {
@@ -1352,7 +1353,7 @@
           });
         });
       });
-      ready.then(function () { facadeEmit({ type: "state", name: facadeStateName() }); }, function (e) { F.lastError = (e && e.message) || "Could not start pairing."; facadeEmit({ type: "state", name: facadeStateName(), reason: "no-transport" }); });
+      ready.then(function () { facadeEmit({ type: "state", name: facadeStateName() }); }, function (e) { F.lastError = (e && e.message) || "Could not start pairing."; try { console.warn("[SyncProbe] pairing failed:", (e && (e.reason || e.message)) || e); } catch (x) {} facadeEmit({ type: "state", name: facadeStateName(), reason: transportErrorReason(e), error: e }); });
       placeholder.then = function (onF, onR) { return ready.then(onF, onR); };
       placeholder.catch = function (onR) { return ready.catch(onR); };
       return placeholder;

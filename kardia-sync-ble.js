@@ -63,6 +63,11 @@
     e.reason = "not-found"; e.code = "not-found";
     return e;
   }
+  function unavailableError() {
+    var e = new Error("Bluetooth pairing is only available in the app.");
+    e.reason = "bluetooth-unavailable"; e.code = "bluetooth-unavailable";
+    return e;
+  }
   function discoverBackoffMs(attempt) {
     return Math.min(2000 * Math.pow(2, Math.max(0, attempt || 0)), 15000);
   }
@@ -219,7 +224,7 @@
       },
       host: function (pairing, h) {
         var p = getPlugin();
-        if (!p) return Promise.reject(new Error("Bluetooth pairing is only available in the app."));
+        if (!p) return Promise.reject(unavailableError());
         role = "display"; connected = false;
         return attach(h).then(function () { return codeHashHex(pairing); }).then(function (hash) {
           return p.host({
@@ -236,7 +241,7 @@
       },
       join: function (pairing, h) {
         var p = getPlugin();
-        if (!p) return Promise.reject(new Error("Bluetooth pairing is only available in the app."));
+        if (!p) return Promise.reject(unavailableError());
         role = "probe"; connected = false;
         return attach(h).then(function () { return codeHashHex(pairing); }).then(function (hash) {
           return p.join({
@@ -257,7 +262,7 @@
         if (timeout > 30000) timeout = 30000;
         discoverPending = codeHashHex({ shortCode: code }).then(function (hash) {
           var p = getPlugin();
-          if (!p) throw new Error("Bluetooth pairing is only available in the app.");
+          if (!p) throw unavailableError();
           if (!p.discover || typeof p.discover !== "function") {
             throw new Error("Bluetooth discovery needs the latest app build. Scan the QR code instead.");
           }
@@ -290,7 +295,7 @@
       },
       discoverNearby: function (timeoutMs) {
         var p = getPlugin();
-        if (!p) return Promise.reject(new Error("Bluetooth pairing is only available in the app."));
+        if (!p) return Promise.reject(unavailableError());
         if (typeof p.scanNearby !== "function") return Promise.resolve([]);
         var timeout = (typeof timeoutMs === "number" && timeoutMs > 0) ? Math.min(timeoutMs, 15000) : 5000;
         return Promise.resolve(p.scanNearby({ timeoutMs: timeout })).then(function (res) {
@@ -306,7 +311,7 @@
         var hash = String(codeHashHex || "").toLowerCase();
         if (!/^[0-9a-f]{8}$/.test(hash)) return Promise.reject(notFoundError());
         var p = getPlugin();
-        if (!p) return Promise.reject(new Error("Bluetooth pairing is only available in the app."));
+        if (!p) return Promise.reject(unavailableError());
         if (typeof p.discover !== "function") return Promise.reject(new Error("Bluetooth discovery needs the latest app build. Scan the QR code instead."));
         return Promise.resolve(p.discover({ codeHashHex: hash, timeoutMs: DISCOVER_TIMEOUT_MS })).then(function (res) {
           var pairing = toDiscoveredPairing(res, "");

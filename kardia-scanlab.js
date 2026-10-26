@@ -538,12 +538,29 @@
     try { if (storage && storage.setItem) storage.setItem(CINE_SIM_KEY, m); } catch (e) {}
     return m;
   }
-  function simPoseFromPlane(plane) {
+  /* Pose for the K3 B-mode renderer: origin is the probe contact point
+   * on the skin, beam is minus the plane up vector, up is the plane
+   * normal (elevation). Passing the plane up as the pose up would make
+   * the renderer's right vector zero and collapse the image. */
+  function simPoseFromPlane(plane, contact) {
     if (!plane || !plane.origin) return null;
-    /* The B-mode pose up is the plane normal (elevation): the Scan Lab
-     * plane up is antiparallel to its beam, so passing it would make
-     * the renderer's right vector zero and collapse the image. */
-    return { origin: plane.origin.slice(), beam: (plane.beam || plane.normal || [0, 1, 0]).slice(), up: (plane.normal || plane.up || [0, 0, 1]).slice() };
+    var origin = (contact && contact.slice ? contact.slice() : plane.origin.slice());
+    var up = plane.up || [0, -1, 0];
+    var beam = [0 - (up[0] || 0), 0 - (up[1] || 0), 0 - (up[2] || 0)];
+    return { origin: origin, beam: beam, up: (plane.normal || plane.up || [0, 0, 1]).slice() };
+  }
+  /* Atlas loading for the K3 renderer: the prebuilt PNG atlas in
+   * kardia/media/k3-volume/ (fast on a phone) instead of the slow
+   * procedural volume build and pack path. Resolves with the atlas. */
+  var SIM_ATLAS_BASE = "/kardia/media/k3-volume/";
+  function loadSimAtlas(volumeApi, baseUrl) {
+    return new Promise(function (res, rej) {
+      if (!volumeApi || !volumeApi.loadAtlas) { rej(new Error("sim atlas loader is not available")); return; }
+      volumeApi.loadAtlas(baseUrl || SIM_ATLAS_BASE, function (err, atlas) {
+        if (err || !atlas) rej(err || new Error("atlas"));
+        else res(atlas);
+      });
+    });
   }
   function simPhaseFromHeart(hs, now) {
     if (hs && hs.cycleMs) return ((hs.cycleTimeMs || 0) / hs.cycleMs) % 1;
@@ -568,7 +585,7 @@
   }
 
   var PURE = { clamp: clamp, wrapDeg: wrapDeg, poseError: poseError, poseDistance: poseDistance, degradationFor: degradationFor, windowBlend: windowBlend, imageMetrics: imageMetrics, isCartoonMetrics: isCartoonMetrics, withinTolerance: withinTolerance,
-    CINE_SIM_KEY: CINE_SIM_KEY, SIM_FILES: SIM_FILES, normalizeCineSimMode: normalizeCineSimMode, loadCineSimMode: loadCineSimMode, saveCineSimMode: saveCineSimMode, simPoseFromPlane: simPoseFromPlane, simPhaseFromHeart: simPhaseFromHeart, createSimLazyLoader: createSimLazyLoader,
+    CINE_SIM_KEY: CINE_SIM_KEY, SIM_FILES: SIM_FILES, SIM_ATLAS_BASE: SIM_ATLAS_BASE, normalizeCineSimMode: normalizeCineSimMode, loadCineSimMode: loadCineSimMode, saveCineSimMode: saveCineSimMode, simPoseFromPlane: simPoseFromPlane, simPhaseFromHeart: simPhaseFromHeart, loadSimAtlas: loadSimAtlas, createSimLazyLoader: createSimLazyLoader,
     coachText: coachText, createCoach: createCoach, scoreAttempt: scoreAttempt, springStep: springStep, TUTORIAL: TUTORIAL,
     BODY_CREDITS: BODY_CREDITS, bodyCreditsHtml: bodyCreditsHtml, assetCandidates: assetCandidates, assetFileUrl: assetFileUrl,
     registerPoint: registerPoint, parseGlb: parseGlb, cutTriangles: cutTriangles, HUBMAP_CENTRE: HUBMAP_CENTRE,
@@ -732,7 +749,7 @@
     var cineSimMode = opts.cineSimMode ? normalizeCineSimMode(opts.cineSimMode) : loadCineSimMode(G.localStorage);
     var simRenderer = null, simState = "idle";
     debug.cineSimMode = cineSimMode; debug.simState = simState;
-    function hasSimFiles() { return !!(G.KARDIA_SIM_VOLUME && G.KARDIA_BMODE_GL && G.KARDIA_BMODE_GL.create && G.KARDIA_SIM_VOLUME.buildVolumes && G.KARDIA_SIM_VOLUME.packAtlas); }
+    function hasSimFiles() { return !!(G.KARDIA_SIM_VOLUME && G.KARDIA_BMODE_GL && G.KARDIA_BMODE_GL.create && G.KARDIA_SIM_VOLUME.loadAtlas); }
     function loadSimFiles() {
       if (opts.simLoader) return opts.simLoader();
       if (G.KARDIA_LOADER && G.KARDIA_LOADER.loadSim) return G.KARDIA_LOADER.loadSim();
@@ -760,16 +777,16 @@
       simState = "loading"; debug.simState = simState; showSimState("Simulation loading", false);
       return simLoader.ensure().then(function (ok) {
         if (!ok || !hasSimFiles()) { simState = "error"; debug.simState = simState; showSimState("Simulation could not load. Check your connection and try again, or use Cine.", true); return false; }
-        /* Let the loading state paint before the heavy volume build. */
+        /* Let the loading state paint before the atlas fetch starts. */
         return new Promise(function (res) { setTimeout(res, 30); }).then(function () {
-          try {
-            if (!G.__kardiaSimAtlas) G.__kardiaSimAtlas = G.KARDIA_SIM_VOLUME.packAtlas(G.KARDIA_SIM_VOLUME.buildVolumes());
+          return loadSimAtlas(G.KARDIA_SIM_VOLUME, SIM_ATLAS_BASE).then(function (atlas) {
+            G.__kardiaSimAtlas = atlas;
             simRenderer = G.KARDIA_BMODE_GL.create(simCanvas);
-            simRenderer.setVolume(G.__kardiaSimAtlas);
+            simRenderer.setVolume(atlas);
             simState = "ready"; debug.simState = simState; showSimState(null, false);
             if (simCanvas) simCanvas.hidden = false;
             return true;
-          } catch (e) { debug.errors.push("sim: " + String(e && e.message || e)); simState = "error"; debug.simState = simState; showSimState("Simulation could not start on this device. Use Cine to keep scanning.", true); return false; }
+          }, function (e) { debug.errors.push("sim: " + String(e && e.message || e)); simState = "error"; debug.simState = simState; showSimState("Simulation could not start on this device. Use Cine to keep scanning.", true); return false; });
         });
       });
     }
@@ -1296,12 +1313,16 @@
       debug.simState = simState;
       if (!simRenderer) { if (simState === "idle") ensureSim(); return; }
       try {
+        /* The canvas backing store follows its CSS size on change, or the
+         * sector stretches to fit. */
+        var sw = (simCanvas && simCanvas.clientWidth) || 0, sh = (simCanvas && simCanvas.clientHeight) || 0;
+        if (sw > 0 && sh > 0 && (simCanvas.width !== sw || simCanvas.height !== sh)) { simCanvas.width = sw; simCanvas.height = sh; }
         if (ownHeart && heartInst && heartInst.step) heartInst.step(16);
-        var sp = simPoseFromPlane(plane); if (!sp) return;
+        var sp = simPoseFromPlane(plane, pose.contact); if (!sp) return;
         var hs = null; try { hs = heartInst && heartInst.state ? heartInst.state() : null; } catch (e) {}
         simRenderer.setPose(sp);
         simRenderer.setPhase(simPhaseFromHeart(hs, now));
-        simRenderer.setKnobs({ depthMm: pose.depthCm * 10, gain: 1.0, focusMm: 70, dynamicRange: 60 });
+        simRenderer.setKnobs({ depthMm: pose.depthCm * 10, gain: 1.25, focusMm: 70, dynamicRange: 55 });
         simRenderer.render(now);
         if (hs) setText("kslHr", Math.round(hs.heartRateBpm || 70) + " bpm");
       } catch (e) { debug.errors.push("sim frame: " + String(e && e.message || e)); }

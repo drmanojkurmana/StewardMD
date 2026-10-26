@@ -40,10 +40,44 @@ test("lazy load: dedupes, retries after failure, ready when files present", asyn
 
 test("sim pose and phase map the shared plane and ECG cycle", () => {
   const plane = { origin: [1, 2, 3], beam: [0, 1, 0], up: [0, -1, 0], normal: [1, 0, 0] };
+  // Origin is the probe contact point, beam is minus the plane up vector, up is the plane normal.
+  assert.deepEqual(P.simPoseFromPlane(plane, [4, 5, 6]), { origin: [4, 5, 6], beam: [0, 1, 0], up: [1, 0, 0] });
+  // No contact: fall back to the plane origin.
   assert.deepEqual(P.simPoseFromPlane(plane), { origin: [1, 2, 3], beam: [0, 1, 0], up: [1, 0, 0] });
+  // The plane beam field is ignored: beam always derives from minus the plane up.
+  assert.deepEqual(P.simPoseFromPlane({ origin: [1, 2, 3], beam: [9, 9, 9], up: [0, 0, -1], normal: [0, 1, 0] }, [0, 0, 0]).beam, [0, 0, 1]);
   assert.equal(P.simPoseFromPlane(null), null);
+  assert.equal(P.simPoseFromPlane(null, [1, 1, 1]), null);
   assert.equal(P.simPhaseFromHeart({ cycleTimeMs: 214, cycleMs: 857 }, 0), 214 / 857);
   assert.ok(P.simPhaseFromHeart(null, 857) === 0);
+});
+
+test("loadSimAtlas: resolves the prebuilt atlas, rejects on error", async () => {
+  const fakeAtlas = { width: 8, height: 8, cols: 1 };
+  let seenBase = null;
+  const okApi = { loadAtlas: (base, cb) => { seenBase = base; cb(null, fakeAtlas); } };
+  assert.equal(await P.loadSimAtlas(okApi, "/custom/base/"), fakeAtlas);
+  assert.equal(seenBase, "/custom/base/");
+  // Default base is the prebuilt on-device atlas.
+  await P.loadSimAtlas(okApi);
+  assert.equal(seenBase, P.SIM_ATLAS_BASE);
+  assert.ok(P.SIM_ATLAS_BASE === "/kardia/media/k3-volume/");
+  const errApi = { loadAtlas: (base, cb) => cb(new Error("manifest")) };
+  await assert.rejects(() => P.loadSimAtlas(errApi), /manifest/);
+  const nullApi = { loadAtlas: (base, cb) => cb(null, null) };
+  await assert.rejects(() => P.loadSimAtlas(nullApi), /atlas/);
+  await assert.rejects(() => P.loadSimAtlas({}), /not available/);
+  await assert.rejects(() => P.loadSimAtlas(null), /not available/);
+});
+
+test("wiring: ensureSim loads the prebuilt atlas, drawSim maps pose and knobs", () => {
+  const src = fs.readFileSync(new URL("../kardia-scanlab.js", import.meta.url), "utf8");
+  assert.ok(src.includes('loadAtlas("/kardia/media/k3-volume/"') || src.includes("loadSimAtlas(G.KARDIA_SIM_VOLUME, SIM_ATLAS_BASE)"));
+  assert.ok(!/buildVolumes\(\)/.test(src), "must not build volumes on the phone");
+  assert.ok(!/packAtlas\(/.test(src), "must not pack an atlas on the phone");
+  assert.ok(src.includes("simPoseFromPlane(plane, pose.contact)"));
+  assert.ok(src.includes("gain: 1.25") && src.includes("dynamicRange: 55"));
+  assert.ok(src.includes("simCanvas.width = sw") && src.includes("simCanvas.height = sh"));
 });
 
 test("registration: loader SIM_JS lazy, build-www ships sim files", () => {
