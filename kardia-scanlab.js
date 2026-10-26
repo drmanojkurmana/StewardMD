@@ -782,42 +782,103 @@
       } catch (e) { return null; }
     }
     function translation(x, y, z) { var m = new THREE.Matrix4(); if (m.makeTranslation) m.makeTranslation(x, y, z); return m; }
-    function buildProbeMesh(ghost) {
-      var bodyM = ghost ? new THREE.MeshBasicMaterial({ color: 0x9cc8e8, transparent: true, opacity: 0.35 }) : mat({ color: 0xe8e6df, roughness: 0.45, metalness: 0.05 });
-      var darkM = ghost ? bodyM : mat({ color: 0x2b2e30, roughness: 0.6 });
-      var pts = [];
-      [[0, 0], [16, 0], [19, 5], [15, 16], [13, 34], [14, 58], [11, 78], [7, 88], [0, 90]].forEach(function (p) { pts.push(new THREE.Vector2(p[0], p[1])); });
-      var cablePts = [new THREE.Vector3(0, 88, 0), new THREE.Vector3(6, 112, -8), new THREE.Vector3(22, 132, -26), new THREE.Vector3(48, 142, -40)];
-      var bodyC = ghost ? 0x9cc8e8 : 0xe8e6df, darkC = ghost ? 0x9cc8e8 : 0x2b2e30;
-      try {
-        var partsList = [
-          { geom: new THREE.LatheGeometry(pts, lowPower ? 20 : 32), color: bodyC },
-          { geom: new THREE.CylinderGeometry(8, 9, 26, 20), matrix: translation(0, 62, 0), color: darkC },
-          { geom: new THREE.BoxGeometry(4, 8, 3), matrix: translation(14, 10, 0), color: ghost ? 0x9cc8e8 : 0x2ea8e0 },
-          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 20, 3.2, 8), color: darkC }
-        ];
-        for (var di = 0; di < 8; di++) {
-          var ang = di / 8 * Math.PI * 2;
-          var dm = new THREE.Matrix4(); if (dm.makeRotationY) dm.makeRotationY(-ang); if (dm.setPosition) dm.setPosition(Math.cos(ang) * 17, 22, Math.sin(ang) * 17);
-          partsList.push({ geom: new THREE.BoxGeometry(7, 2.2, 2.2), matrix: dm, color: ghost ? 0x9cc8e8 : (di % 2 ? 0x2ea8e0 : 0x17384d) });
+    /* Realistic phased-array probe (route B, procedural): lofted
+     * superellipse sections morph a flat 20 x 14 mm rounded-rect lens
+     * through a tapered neck into a 25 mm round handle. Smooth normals,
+     * separate lens, moulded marker ridge, ribbed strain relief, sagging
+     * cable. No boxes or facets. Ghost shares the shape at 35 percent. */
+    function loftGeometry(sections, radial) {
+      var pos = [], idx = [], ring, i, j;
+      function spow(v, p) { return (v < 0 ? -1 : 1) * Math.pow(Math.abs(v), p); }
+      for (ring = 0; ring < sections.length; ring++) {
+        var s = sections[ring], p = 2 / s[3];
+        for (j = 0; j <= radial; j++) {
+          var t = j / radial * Math.PI * 2;
+          pos.push(s[1] * spow(Math.cos(t), p), s[0], s[2] * spow(Math.sin(t), p));
         }
-        var mergedMat = ghost ? new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35 }) : mat({ vertexColors: true, roughness: 0.45, metalness: 0.05 });
-        var merged = mergedMesh(partsList, mergedMat, ghost ? "ghostProbe" : "probe");
-        if (merged) { merged.userData.dashes = { rotation: { x: 0, y: 0, z: 0 } }; merged.userData.tail = merged; return merged; }
+      }
+      for (ring = 0; ring < sections.length - 1; ring++) for (j = 0; j < radial; j++) {
+        var a = ring * (radial + 1) + j, b = a + radial + 1;
+        idx.push(a, b, a + 1, b, b + 1, a + 1);
+      }
+      /* top cap fan */
+      var topC = pos.length / 3; var ls = sections[sections.length - 1];
+      pos.push(0, ls[0] + 1.5, 0);
+      var base = (sections.length - 1) * (radial + 1);
+      for (j = 0; j < radial; j++) idx.push(base + j, topC, base + j + 1);
+      var g = new THREE.BufferGeometry();
+      g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(pos), 3));
+      g.setIndex(idx);
+      if (g.computeVertexNormals) g.computeVertexNormals();
+      return g;
+    }
+    function buildProbeMesh(ghost) {
+      var gm = function () { return new THREE.MeshBasicMaterial({ color: 0x9cc8e8, transparent: true, opacity: 0.35, depthWrite: false }); };
+      var bodyM = ghost ? gm() : phys({ color: 0xe9e7e0, roughness: 0.45, metalness: 0.02, clearcoat: 0.55, clearcoatRoughness: 0.5 });
+      var lensM = ghost ? gm() : phys({ color: 0x24282b, roughness: 0.38, metalness: 0.02, clearcoat: 0.7, clearcoatRoughness: 0.35 });
+      var rubberM = ghost ? gm() : mat({ color: 0x17191b, roughness: 0.82, metalness: 0 });
+      var ridgeM = ghost ? gm() : phys({ color: 0xdfdcd3, roughness: 0.5, clearcoat: 0.4, clearcoatRoughness: 0.5 });
+      var accentM = ghost ? gm() : mat({ color: 0x2ea8e0, roughness: 0.4 });
+      var radial = lowPower ? 28 : 56;
+      /* One merged mesh per probe keeps the draw-call budget; vertex
+       * colours carry lens, rubber and satin tones under one clearcoat
+       * physical material. */
+      try {
+        var mParts = [
+          { geom: loftGeometry([[0, 9.8, 6.8, 4.2], [1.5, 10, 7, 4.2], [4, 9.5, 6.6, 3.7], [9, 8.1, 5.8, 3.1], [16, 7.9, 6.1, 2.7], [24, 9.1, 7.7, 2.35], [36, 11.1, 10.1, 2.1], [52, 12.3, 11.9, 2.0], [72, 12.5, 12.3, 2.0], [86, 11.9, 11.7, 2.0], [90, 10.4, 10.4, 2.0]], radial), color: ghost ? 0x9cc8e8 : 0xe9e7e0 },
+          { geom: loftGeometry([[-1.4, 8.4, 5.6, 4.2], [-0.6, 9.5, 6.5, 4.2], [0.9, 9.9, 6.9, 4.2]], radial), color: ghost ? 0x9cc8e8 : 0x24282b },
+          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(8.2, 13, 0), new THREE.Vector3(8.0, 22, 0), new THREE.Vector3(9.4, 32, 0), new THREE.Vector3(11.4, 44, 0), new THREE.Vector3(12.6, 58, 0), new THREE.Vector3(12.7, 72, 0)]), 32, 0.85, 8), color: ghost ? 0x9cc8e8 : 0xdfdcd3 },
+          { geom: new THREE.SphereGeometry(1.5, 16, 12), matrix: translation(9.6, 10, 0), color: ghost ? 0x9cc8e8 : 0x2ea8e0 },
+          { geom: new THREE.CylinderGeometry(4.6, 9.6, 20, radial), matrix: translation(0, 99, 0), color: ghost ? 0x9cc8e8 : 0x17191b },
+          { geom: new THREE.TubeGeometry(new THREE.CatmullRomCurve3([new THREE.Vector3(0, 107, 0), new THREE.Vector3(3, 128, -4), new THREE.Vector3(14, 148, -16), new THREE.Vector3(36, 158, -34), new THREE.Vector3(70, 152, -58), new THREE.Vector3(106, 132, -78)]), 48, 3.0, lowPower ? 6 : 10), color: ghost ? 0x9cc8e8 : 0x17191b }
+        ];
+        for (var rj = 0; rj < 5; rj++) {
+          var rm2 = new THREE.Matrix4(); if (rm2.makeRotationX) rm2.makeRotationX(Math.PI / 2); if (rm2.setPosition) rm2.setPosition(0, 92 + rj * 3.6, 0);
+          mParts.push({ geom: new THREE.TorusGeometry(8.6 - rj * 0.85, 1.15, 8, radial), matrix: rm2, color: ghost ? 0x9cc8e8 : 0x17191b });
+        }
+        for (var dj = 0; dj < 8; dj++) {
+          var ang3 = dj / 8 * Math.PI * 2, dm3 = new THREE.Matrix4();
+          if (dm3.makeRotationY) dm3.makeRotationY(-ang3); if (dm3.setPosition) dm3.setPosition(Math.cos(ang3) * 14.5, 30, Math.sin(ang3) * 14.5);
+          mParts.push({ geom: new THREE.BoxGeometry(5, 1.7, 1.7), matrix: dm3, color: ghost ? 0x9cc8e8 : (dj % 2 ? 0x2ea8e0 : 0x17384d) });
+        }
+        var mMat = ghost ? new THREE.MeshBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.35, depthWrite: false }) : phys({ vertexColors: true, roughness: 0.45, metalness: 0.02, clearcoat: 0.55, clearcoatRoughness: 0.45 });
+        var mergedProbe = mergedMesh(mParts, mMat, ghost ? "ghostProbe" : "probe");
+        if (mergedProbe) { mergedProbe.userData.dashes = { rotation: { x: 0, y: 0, z: 0 } }; mergedProbe.userData.tail = mergedProbe; return mergedProbe; }
       } catch (e) {}
-      var grp = new THREE.Group();
-      var body = new THREE.Mesh(new THREE.LatheGeometry(pts, lowPower ? 20 : 32), bodyM); grp.add(body);
-      var grip = new THREE.Mesh(new THREE.CylinderGeometry(8, 9, 26, 20), darkM); grip.position.y = 62; grp.add(grip);
-      var notch = new THREE.Mesh(new THREE.BoxGeometry(4, 8, 3), ghost ? bodyM : mat({ color: 0x2ea8e0, roughness: 0.4 }));
-      notch.position.set(14, 10, 0); grp.add(notch);
-      var cable = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 20, 3.2, 8), darkM); grp.add(cable);
+      var grp = new THREE.Group(); grp.name = ghost ? "ghostProbe" : "probe";
+      var bodyGeom = loftGeometry([[0, 9.8, 6.8, 4.2], [1.5, 10, 7, 4.2], [4, 9.5, 6.6, 3.7], [9, 8.1, 5.8, 3.1], [16, 7.9, 6.1, 2.7], [24, 9.1, 7.7, 2.35], [36, 11.1, 10.1, 2.1], [52, 12.3, 11.9, 2.0], [72, 12.5, 12.3, 2.0], [86, 11.9, 11.7, 2.0], [90, 10.4, 10.4, 2.0]], radial);
+      var body = new THREE.Mesh(bodyGeom, bodyM); body.name = "probeBody"; grp.add(body);
+      var lens = new THREE.Mesh(loftGeometry([[-1.4, 8.4, 5.6, 4.2], [-0.6, 9.5, 6.5, 4.2], [0.9, 9.9, 6.9, 4.2]], radial), lensM);
+      lens.name = "probeLens"; grp.add(lens);
+      /* moulded orientation ridge on the marker (+x) side */
+      try {
+        var ridgePts = [new THREE.Vector3(8.2, 13, 0), new THREE.Vector3(8.0, 22, 0), new THREE.Vector3(9.4, 32, 0), new THREE.Vector3(11.4, 44, 0), new THREE.Vector3(12.6, 58, 0), new THREE.Vector3(12.7, 72, 0)];
+        var ridge = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(ridgePts), 32, 0.85, 8), ridgeM);
+        ridge.name = "markerRidge"; grp.add(ridge);
+        var dot = new THREE.Mesh(new THREE.SphereGeometry(1.5, 16, 12), accentM);
+        dot.scale.set(0.55, 1, 1); dot.position.set(9.6, 10, 0); dot.name = "markerDot"; grp.add(dot);
+      } catch (e) {}
+      /* ribbed rubber strain relief */
+      try {
+        var relief = new THREE.Mesh(new THREE.CylinderGeometry(4.6, 9.6, 20, radial), rubberM);
+        relief.position.y = 99; relief.name = "strainRelief"; grp.add(relief);
+        for (var ri = 0; ri < 5; ri++) {
+          var rib = new THREE.Mesh(new THREE.TorusGeometry(8.6 - ri * 0.85, 1.15, 8, radial), rubberM);
+          rib.rotation.x = Math.PI / 2; rib.position.y = 92 + ri * 3.6; grp.add(rib);
+        }
+      } catch (e) {}
+      try {
+        var cablePts = [new THREE.Vector3(0, 107, 0), new THREE.Vector3(3, 128, -4), new THREE.Vector3(14, 148, -16), new THREE.Vector3(36, 158, -34), new THREE.Vector3(70, 152, -58), new THREE.Vector3(106, 132, -78)];
+        var cable = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(cablePts), 48, 3.0, lowPower ? 6 : 10), rubberM);
+        cable.name = "probeCable"; grp.add(cable);
+      } catch (e) {}
       var dashes = new THREE.Group(); dashes.name = "markerDashes";
       for (var i = 0; i < 8; i++) {
-        var d = new THREE.Mesh(new THREE.BoxGeometry(7, 2.2, 2.2), ghost ? bodyM : mat({ color: i % 2 ? 0x2ea8e0 : 0x17384d, roughness: 0.4 }));
+        var d = new THREE.Mesh(new THREE.BoxGeometry(5, 1.7, 1.7), ghost ? gm() : mat({ color: i % 2 ? 0x2ea8e0 : 0x17384d, roughness: 0.4 }));
         var ang2 = i / 8 * Math.PI * 2;
-        d.position.set(Math.cos(ang2) * 17, 22, Math.sin(ang2) * 17); d.rotation.y = -ang2; dashes.add(d);
+        d.position.set(Math.cos(ang2) * 14.5, 30, Math.sin(ang2) * 14.5); d.rotation.y = -ang2; dashes.add(d);
       }
-      grp.add(dashes); grp.userData.dashes = dashes; grp.userData.tail = grip;
+      grp.add(dashes); grp.userData.dashes = dashes; grp.userData.tail = body;
       return grp;
     }
     function labelSprite(text, pos) {
