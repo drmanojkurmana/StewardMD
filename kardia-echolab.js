@@ -749,7 +749,7 @@
           c.fillRect(barX, barY + seg / 16 * barH, barW, Math.ceil(barH / 16) + 1);
         }
         c.strokeStyle = "rgba(238,243,241,0.8)"; c.lineWidth = 1; c.strokeRect(barX, barY, barW, barH);
-        c.fillStyle = "#eef3f1"; c.font = "600 9px sans-serif";
+        c.fillStyle = "#eef3f1"; c.font = "600 9px 'Inter Variable', system-ui, sans-serif";
         c.fillText("+" + nyqC.toFixed(2), Math.max(0, barX - 2), barY - 5);
         c.fillText("0", barX + 2, barY + barH / 2 + 3);
         c.fillText("-" + nyqC.toFixed(2), Math.max(0, barX - 2), barY + barH + 12);
@@ -758,7 +758,7 @@
       if (frozen) {
         c.fillStyle = "rgba(6,9,11,0.85)"; c.fillRect(8, 8, 70, 22);
         c.strokeStyle = "#ffc05a"; c.lineWidth = 1.5; c.strokeRect(8, 8, 70, 22);
-        c.fillStyle = "#ffc05a"; c.font = "600 12px sans-serif";
+        c.fillStyle = "#ffc05a"; c.font = "600 12px 'Inter Variable', system-ui, sans-serif";
         c.fillText("Frozen", 16, 23);
       }
     }
@@ -824,9 +824,9 @@
         }
       }
       var lab = mmodeLabels(uiKnobs().depth);
-      c.fillStyle = "#eef3f1"; c.font = "600 11px sans-serif";
+      c.fillStyle = "#eef3f1"; c.font = "600 11px 'Inter Variable', system-ui, sans-serif";
       c.fillText(lab.title + "  " + lab.sweepText, axisW + 4, 14);
-      c.fillStyle = "#a3adb3"; c.font = "10px sans-serif";
+      c.fillStyle = "#a3adb3"; c.font = "10px 'Inter Variable', system-ui, sans-serif";
       lab.ticks.forEach(function (t) {
         var ty = topH + t.fraction * plotH;
         c.fillText(t.label, 2, ty + 3);
@@ -844,7 +844,7 @@
       if (frozen) {
         c.fillStyle = "rgba(6,9,11,0.85)"; c.fillRect(axisW + 6, topH + 6, 62, 20);
         c.strokeStyle = "#ffc05a"; c.strokeRect(axisW + 6, topH + 6, 62, 20);
-        c.fillStyle = "#ffc05a"; c.font = "600 11px sans-serif"; c.fillText("Frozen", axisW + 14, topH + 20);
+        c.fillStyle = "#ffc05a"; c.font = "600 11px 'Inter Variable', system-ui, sans-serif"; c.fillText("Frozen", axisW + 14, topH + 20);
       }
       if (els.specReadout) els.specReadout.textContent = "M-mode through the mitral valve. Drag the cursor line on the 2D image above.";
     }

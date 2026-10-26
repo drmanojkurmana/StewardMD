@@ -393,7 +393,7 @@
     ctx.strokeStyle = "rgba(220,235,230,0.7)";
     ctx.beginPath(); ctx.moveTo(cx, top); ctx.arc(cx, top, radius, Math.PI / 2 - 0.62, Math.PI / 2 + 0.62); ctx.closePath(); ctx.stroke();
     if (label) {
-      ctx.fillStyle = "#a3adb3"; ctx.font = "13px system-ui, sans-serif"; ctx.textAlign = "center";
+      ctx.fillStyle = "#a3adb3"; ctx.font = "13px 'Inter Variable', system-ui, sans-serif"; ctx.textAlign = "center";
       ctx.fillText(label, cx, H - 10);
     }
   }

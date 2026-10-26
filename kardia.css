@@ -214,11 +214,11 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-levelmenu-panel .sp-levelrow { padding: 0; }
 .krd-root .krd-echo-scroll { flex: 1 1 auto; min-height: 0; overflow: hidden; padding: 0 12px; display: flex; flex-direction: column; }
 .krd-root .krd-echo-col { display: flex; flex-direction: column; flex: 1 1 auto; height: 100%; min-height: 0; max-width: none; margin: 0; }
-.krd-root .krd-labswitch { flex: 0 0 auto; display: flex; padding: 8px 0 10px; }
+.krd-root .krd-labswitch { flex: 0 0 auto; display: flex; padding: 4px 0 6px; }
 .krd-root .krd-labswitch .sp-seg { flex: 1 1 auto; }
 .krd-root .krd-labswitch .sp-seg button { flex: 1 1 0; min-height: 44px; touch-action: manipulation; user-select: none; -webkit-user-select: none; }
 .krd-root .krd-probe-wrap { position: relative; flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; padding-bottom: env(safe-area-inset-bottom, 0px); }
-.krd-root .krd-probe-frame { flex: 1 1 auto; width: 100%; min-height: calc(100dvh - 230px); border: 0; border-radius: 12px; background: var(--sp-s1); display: block; }
+.krd-root .krd-probe-frame { flex: 1 1 auto; width: 100%; min-height: 360px; border: 0; border-radius: 12px; background: var(--sp-s1); display: block; }
 .krd-root .krd-probe-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; padding: 0 0 10px; flex-wrap: wrap; }
 .krd-root .krd-probe-syncbtn { display: inline-flex; align-items: center; gap: 8px; min-height: 48px; min-width: 48px; padding: 10px 16px; touch-action: manipulation; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
 .krd-root .krd-probe-syncbtn:active { transform: scale(0.97); }
@@ -233,3 +233,8 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-echo-col:has(#krdScanLab .ksl-wrap) #krdLab { display: none; }
 .krd-root .krd-syncbar { flex: 0 0 auto; display: flex; align-items: center; min-height: 0; }
 .krd-root .krd-syncbar .krd-syncpill:empty { display: none; }
+
+/* One font for all of Kardia (owner 2026-10-27): Inter, with Noto Sans
+ * Devanagari for Hindi. Math symbols keep a math font. */
+.krd-root, .krd-root *, .krd-sp, .krd-sp * { font-family: 'Inter Variable', 'Noto Sans Devanagari', -apple-system, system-ui, sans-serif !important; }
+.krd-root math, .krd-root .krd-math { font-family: 'STIX Two Math', 'Cambria Math', math !important; }

@@ -259,6 +259,22 @@
       return true;
     } catch (e) { return false; }
   }
+  /* Size the Probe Lab frame to exactly the space left under the Kardia
+   * header on this screen (phone or iPad), so the whole Probe Lab is visible
+   * without scrolling. Re-fits on resize, rotation and keyboard. */
+  function fitProbeFrame(frame) {
+    function fit() {
+      if (!frame.isConnected) { G.removeEventListener("resize", fit); return; }
+      var vv = G.visualViewport, vh = vv ? vv.height : G.innerHeight;
+      var r = frame.getBoundingClientRect(), sc = frame.closest ? frame.closest(".krd-root") : null;
+      var top = r.top + (sc && sc.scrollTop ? sc.scrollTop : 0);
+      var h = Math.max(360, Math.floor(vh - top - 8));
+      frame.style.height = h + "px";
+    }
+    fit(); G.setTimeout(fit, 300); G.setTimeout(fit, 1200);
+    G.addEventListener("resize", fit);
+    if (G.visualViewport) G.visualViewport.addEventListener("resize", fit);
+  }
   function mountProbeLab() {
     var doc = G.document; if (!doc || !doc.getElementById) return;
     var frame = doc.getElementById("krdProbeFrame"); if (!frame) return;
@@ -266,6 +282,7 @@
     function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); }
     function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
+    fitProbeFrame(frame);
     /* A frame that finished before this mount still gets the guard. */
     try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
   }
