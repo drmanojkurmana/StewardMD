@@ -296,7 +296,7 @@
     var lang = top.querySelector(".sp-lang");
     var b = doc.createElement("button");
     b.type = "button"; b.className = "krd-top-sync"; b.setAttribute("data-act", "kecho-syncprobe");
-    b.setAttribute("aria-label", T("SyncProbe", "SyncProbe"));
+    b.setAttribute("aria-label", I.tx(T("SyncProbe", "SyncProbe")));
     b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18.2" r="1.1" fill="currentColor"/></svg><span>' + I.tx(T("SyncProbe", "SyncProbe")) + "</span>";
     if (lang && lang.parentNode === top) top.insertBefore(b, lang); else top.appendChild(b);
   }
