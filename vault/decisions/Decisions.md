@@ -5,18 +5,6 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
-## 2026-10-26 · One quiet error and notification look; no icon circles, no Dynamic Island (owner)
-
-**Decision.** (1) `empty-states.js` and its `refined.css` block are deleted: nothing auto-styles placeholders any more.
-(2) Every toast, Undo card and foreground push draws with `toast.js`: a left-aligned card, title plus one detail line, a
-small dot only for errors and warnings, an optional action button, no icons. `SMD_dynNotify` stays as the API but routes
-to that card; the gooey Island is opt-in (`smd_dyn_notify=island`). (3) `smd-error.js` + `smd-error.css` is the one panel
-for a screen that failed to load (what failed, why, real actions, code behind Details). ThoreX, SknX, KardiQ X, FundX and
-three ClinIX notices use it or lost their error icons.
-**Why.** Both the 2026-10-12 placeholder styler and the Island card put icons and one look on ~1,670 messages the owner
-never asked for. **Trade-off.** Hundreds of module-local inline error strings keep their own wording and class until a screen
-is converted one at a time; warning icons inside clinical teaching content stay on purpose. **Status.** PR #1803.
-
 ## 2026-10-16 · No page zoom above 1.0 on iPad (owner: "many modules go out of screen and are not operable")
 
 **Decision.** On a large touch screen (`bigTouchD`: touch points > 1, shorter screen side >= 600) the Display auto fit no

@@ -388,25 +388,16 @@
     layer.addEventListener("pointercancel", function (e) { end(e, true); });
   }
 
-  // 2026-10-26 (owner): the gooey Island card and its icons are retired as the default look. Every caller still
-  // goes through this API, but it draws with toast.js's plain card. localStorage smd_dyn_notify=island brings the Island back.
-  function island() { try { return window.localStorage.getItem("smd_dyn_notify") === "island"; } catch (e) { return false; } }
-  function api(opts) { if (!island() && window.SMD_toastCard) { window.SMD_toastCard(opts); return; } show(opts); }
+  function api(opts) { show(opts); }
   api.fromText = function (text, extra) {
-    if (!island() && window.SMD_toastCard) {
-      var c = { text: String(text) };
-      if (extra) for (var j in extra) c[j] = extra[j];
-      window.SMD_toastCard(c);
-      return;
-    }
     var s = splitText(text);
     var o = { title: s.title, message: s.message, symbol: kindOf(text) };
     if (extra) for (var k in extra) o[k] = extra[k];
     show(o);
   };
-  api.dismiss = function () { if (!island() && window.SMD_toastDismiss) { window.SMD_toastDismiss(); return; } dismiss(); };
+  api.dismiss = function () { dismiss(); };
   api.enabled = enabled;
-  api.isVisible = function () { if (!island() && window.SMD_toastVisible) return window.SMD_toastVisible(); return phase === "open"; };
+  api.isVisible = function () { return phase === "open"; };
   window.SMD_dynNotify = api;
 
   document.addEventListener("visibilitychange", sync);

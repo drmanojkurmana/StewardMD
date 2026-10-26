@@ -1087,10 +1087,10 @@
   function renderEmpty(host, ctx) {
     ctx = ctx || {};
     var notFound = ctx.emptyReason === "not-found";
-    var icon = "search_off";
-    var title = notFound ? "Couldn't open this X-ray" : "No analyses yet";
+    var icon = notFound ? "error" : "search_off";
+    var title = notFound ? "Result unavailable" : "No analyses yet";
     var sub = notFound
-      ? "It may have been deleted, or the saved results on this phone did not respond. Your other results are not affected."
+      ? "This chest X-ray result couldn't be loaded. It may have been deleted, or the local store is unavailable."
       : "Analyze a chest X-ray to see it here.";
     host.innerHTML =
       '<div class="tx-list-head">' +
@@ -1098,12 +1098,10 @@
         '<h2 class="tx-list-title">ThoreX</h2>' +
       "</div>" +
       '<div class="tx-list-body">' +
-        (notFound && window.SMD_error
-          ? SMD_error.html({ title: title, why: sub, actions: [{ label: "Back to list", act: "tx-back", primary: true }] })
-          : '<div class="tx-empty">' + (notFound ? "" : ic(icon)) +
-              '<b class="tx-empty-title">' + esc(title) + "</b>" +
-              '<span class="tx-empty-sub">' + esc(sub) + "</span>" +
-            "</div>") +
+        '<div class="tx-empty">' + ic(icon) +
+          '<b class="tx-empty-title">' + esc(title) + "</b>" +
+          '<span class="tx-empty-sub">' + esc(sub) + "</span>" +
+        "</div>" +
       "</div>";
   }
 

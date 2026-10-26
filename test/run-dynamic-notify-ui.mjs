@@ -1,7 +1,5 @@
-/* LEGACY Dynamic Island notifications (dynamic-notify.js) in a real headless browser.
- * Since 2026-10-26 the Island is opt-in (localStorage smd_dyn_notify=island); by default SMD_dynNotify and toast()
- * draw toast.js's plain card. This harness turns the Island on, covers it, then checks the default card path.
- * Covers: SMD_dynNotify.fromText routes into the island, the card springs to rest under the pill, content is
+/* Dynamic Island notifications (dynamic-notify.js) in a real headless browser.
+ * Covers: toast() routes into the island, the card springs to rest under the pill, content is
  * readable, tap fires onPress and dismisses, swipe up dismisses, a second notification morphs the
  * open card, the kill switch (smd_dyn_notify=0) restores the old bottom toast.
  *
@@ -49,14 +47,13 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.enable");
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{localStorage.setItem('smd_dyn_notify','island')}catch(e){}" });
   const load = async () => { await call("Page.navigate", { url: BASE + "test/fixtures/dynamic-notify.html" }); for (let i = 0; i < 50; i++) { if (await ev("return !!(window.SMD_dynNotify && window.toast)")) return; await sleep(100); } };
   await load();
 
   ok(await ev("return typeof SMD_dynNotify === 'function' && SMD_dynNotify.enabled()"), "SMD_dynNotify defined and on by default");
 
-  // 1. fromText (the old toast route) draws the island when it is opted in
-  await ev("SMD_dynNotify.fromText('Saved to your notes'); return 1");
+  // 1. toast() routes into the island
+  await ev("toast('Saved to your notes'); return 1");
   await sleep(90); await shot("1-opening");
   // Wait for the springs to settle (position AND width: a cold or loaded headless run delays the frames).
   for (let i = 0; i < 60; i++) { if (await ev("var r=document.querySelectorAll('svg g rect')[1]; return r && Math.abs(+r.getAttribute('y')-55)<0.5 && Math.abs(+r.getAttribute('width')-366)<0.5")) break; await sleep(100); }
@@ -66,7 +63,7 @@ try {
     return JSON.stringify({vis:SMD_dynNotify.isVisible(), text:document.body.innerText.indexOf('Saved to your notes')>=0,
       oldToast:!!document.getElementById('smdToast'), cy:+r.getAttribute('y'), ch:+r.getAttribute('height'), cw:+r.getAttribute('width'),
       py:+p.getAttribute('y'), ph:+p.getAttribute('height'), pw:+p.getAttribute('width')})`));
-  ok(st.vis && st.text, "fromText shows as a dynamic notification with its text");
+  ok(st.vis && st.text, "toast() shows as a dynamic notification with its text");
   ok(!st.oldToast, "old bottom toast not used");
   ok(Math.abs(st.pw - 126) < 0.5 && Math.abs(st.ph - 37) < 0.5 && Math.abs(st.py - 8) < 0.5, "pill at rest: 126x37 at the top " + JSON.stringify([st.pw, st.ph, st.py]));
   ok(Math.abs(st.cy - (8 + 37 + 10)) < 0.5 && Math.abs(st.cw - 366) < 0.5 && st.ch >= 63.5, "card at rest under the pill " + JSON.stringify([st.cy, st.cw, st.ch]));
@@ -114,16 +111,11 @@ try {
   ok(Math.abs(zc.l - zc.r) <= 1 && Math.abs(zc.pc - zc.vw / 2) <= 1, "zoomed page (0.95): card centred and pill on the island " + JSON.stringify(zc));
   await ev("SMD_dynNotify.dismiss(); document.documentElement.style.zoom=''; return 1"); await sleep(1200);
 
-  // 6. default (Island not opted in): toast() and SMD_dynNotify both draw the plain card, no SVG island
+  // 6. kill switch restores the old toast
+  await ev("localStorage.setItem('smd_dyn_notify','0'); return 1"); await load();
+  await ev("toast('Legacy path'); return 1"); await sleep(400);
+  ok(await ev("return !!document.getElementById('smdToast') && !SMD_dynNotify.isVisible()"), "smd_dyn_notify=0 uses the old bottom toast");
   await ev("localStorage.removeItem('smd_dyn_notify'); return 1");
-  await call("Page.removeScriptToEvaluateOnNewDocument", { identifier: "1" }).catch(() => {});
-  await call("Page.navigate", { url: BASE + "test/fixtures/dynamic-notify.html" }); await sleep(1200);
-  await ev("localStorage.removeItem('smd_dyn_notify'); return 1");
-  await ev("toast(\"Couldn't save the note\"); return 1"); await sleep(500);
-  ok(await ev("var t=document.getElementById('smdToast'); return !!t && t.textContent.indexOf(\"Couldn't save the note\")>=0"), "toast() draws the plain card by default");
-  ok(await ev("return document.querySelectorAll('svg g rect').length===0 || !SMD_dynNotify.isVisible() || !!document.getElementById('smdToast')"), "no Island on the default path");
-  await ev("SMD_dynNotify({title:'Antibiogram removed', message:'From this device', action:{label:'Undo', onPress:function(){window.__undo=1}}}); return 1"); await sleep(500);
-  ok(await ev("var b=document.querySelector('#smdToast [data-act]'); return !!b && b.textContent==='Undo'"), "Undo action renders as a button on the plain card");
 } catch (e) { console.log("FAIL harness:", e && e.message); fails++; }
 finally { try { chrome.kill(); } catch {} try { serveProc && serveProc.kill(); } catch {} }
 console.log(fails ? `\n${fails} FAILED` : "\nALL PASS");

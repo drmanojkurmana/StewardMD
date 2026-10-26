@@ -97,7 +97,7 @@
       '<div class="sknx-cap-body sknx-review"><ol class="sknx-journey" aria-label="Analysis steps"><li><b>✓</b> Add photo</li><li aria-current="step"><b>2</b> Add context</li><li><b>3</b> Review findings</li></ol>' +
       '<figure class="sknx-preview"><img src="' + esc(state.previewUrl || "") + '" alt="Selected skin photo for review"><figcaption>Check focus, lighting, and the area of interest.</figcaption></figure>' +
       '<button type="button" class="sknx-btn sknx-btn-secondary" data-act="sknx-source" data-source="library">' + ic("photo_library") + 'Replace photo</button>' + hxFormHtml("capture") +
-      (state.error ? '<div class="sknx-error" role="alert"><span>' + esc(state.error) + '</span></div>' : '') +
+      (state.error ? '<div class="sknx-error" role="alert">' + ic("error") + '<span>' + esc(state.error) + '</span></div>' : '') +
       '<div class="sknx-review-footer"><button type="button" class="sknx-btn sknx-btn-primary" data-act="sknx-analyze">' + ic("auto_awesome") + 'Analyze photo' + ic("arrow_forward") + '</button><p>Educational decision support for clinician review.</p></div></div>';
     var preview = host.querySelector(".sknx-preview img");
     if (preview) preview.onerror = function () { preview.hidden = true; host.querySelector(".sknx-preview figcaption").textContent = "Preview unavailable for this format. Choose a JPEG or PNG if you need to inspect the photo here."; };
@@ -188,10 +188,10 @@
         '<button class="sknx-result-back" type="button" data-act="sknx-back" aria-label="Back">' + ic("arrow_back") + "</button>" +
         '<div class="sknx-result-title">SknX</div>' +
       "</div>" +
-      (window.SMD_error
-        ? SMD_error.html({ title: "Couldn't open this result", why: "This analysis could not be loaded. Try analyzing the photo again.", actions: [{ label: "Back", act: "sknx-back", primary: true }] })
-        : '<div class="sknx-empty"><b class="sknx-empty-title">Couldn\'t open this result</b>' +
-            '<span class="sknx-empty-sub">This analysis could not be loaded. Try analyzing the photo again.</span></div>');
+      '<div class="sknx-empty">' + ic("error") +
+        '<b class="sknx-empty-title">Result unavailable</b>' +
+        '<span class="sknx-empty-sub">This analysis could not be loaded. Try analyzing the photo again.</span>' +
+      "</div>";
   }
 
   function renderResult(host, ctx) {
