@@ -368,3 +368,29 @@ test("existing touch probe controls and the KardiQ X gate are untouched", () => 
   assert.ok(!syncSrc.includes("SMD_XACCESS"), "SyncProbe must not touch the KardiQ X gate");
   assert.ok(!/—|–/.test(syncSrc.split("\n").filter((l) => l.includes("Connection lost")).join("")), "no dash characters in user text");
 });
+
+test("probe resends HELLO when the link comes up after join resolves (Bluetooth scan-then-connect)", async () => {
+  const echo = fakeEcho();
+  const display = SYNC.createDisplay({ probeLib: PROBE, echoLab: echo });
+  const probe = SYNC.createProbe({ probeLib: PROBE });
+  const pair = SYNC.createLoopbackPair({});
+  const inner = pair[1];
+  let up = false, probeHandlers = null, sends = 0;
+  const gated = Object.assign({}, inner, {
+    join(p, h) { probeHandlers = h; return inner.join(p, Object.assign({}, h, { onPeerConnected() {} })); },
+    send(b) { sends++; return up ? inner.send(b) : false; }
+  });
+  const pairing = await display.createPairing();
+  await display.hostWith(pair[0]);
+  await probe.joinPairing(pairing.payload, gated);
+  await sleep(30);
+  assert.equal(display.state, "pairing", "HELLO was dropped while the link was down");
+  up = true;
+  probeHandlers.onPeerConnected({ role: "probe" });
+  await sleep(60);
+  assert.notEqual(display.state, "pairing", "display received the resent HELLO");
+  const before = sends;
+  probeHandlers.onPeerConnected({ role: "probe" });
+  await sleep(30);
+  assert.ok(sends - before <= 0 || display.state !== "pairing", "HELLO is not resent once delivered");
+});

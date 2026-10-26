@@ -28,6 +28,10 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
     static let protocolVersion: UInt8 = 1
 
     private var centralManager: CBCentralManager?
+    /* getCapabilities calls waiting for the first real Bluetooth state: a new
+     * CBCentralManager reports .unknown for a moment, which used to read as
+     * "Bluetooth is off" even with Bluetooth on. */
+    private var pendingCapsCalls: [CAPPluginCall] = []
     private var peripheralManager: CBPeripheralManager?
     private var role: String = ""
     private var expectedHash: Data?
@@ -37,6 +41,9 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
 
     private var hostCentral: CBCentral?
     private var hostReady = false
+    /// True once the subscribed probe has written a frame. A central that leaves
+    /// before that is not reported as lost; the display keeps advertising.
+    private var hostGotData = false
     private var infoChar: CBMutableCharacteristic?
     private var downChar: CBMutableCharacteristic?
     private var upChar: CBMutableCharacteristic?
@@ -84,7 +91,24 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
                 "authorization": auth.rawValue]
     }
 
-    @objc func getCapabilities(_ call: CAPPluginCall) { call.resolve(capsDict()) }
+    @objc func getCapabilities(_ call: CAPPluginCall) {
+        ensureManagers()
+        let state = centralManager?.state ?? .unknown
+        if state == .unknown || state == .resetting {
+            pendingCapsCalls.append(call)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in self?.flushPendingCaps() }
+            return
+        }
+        call.resolve(capsDict())
+    }
+
+    private func flushPendingCaps() {
+        if pendingCapsCalls.isEmpty { return }
+        let calls = pendingCapsCalls
+        pendingCapsCalls = []
+        let caps = capsDict()
+        for c in calls { c.resolve(caps) }
+    }
 
     override public func requestPermissions(_ call: CAPPluginCall) {
         ensureManagers()
@@ -290,7 +314,7 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
         peripheralManager?.removeAllServices()
         serviceAdded = false
         probePeripheral = nil; probeDown = nil; probeUp = nil; probeInfo = nil
-        hostCentral = nil; hostReady = false
+        hostCentral = nil; hostReady = false; hostGotData = false
         if !silent { role = "" }
         pendingHost = nil; pendingJoin = nil
         discoverWork?.cancel(); discoverWork = nil
@@ -326,6 +350,7 @@ public class KardiaBlePlugin: CAPPlugin, CAPBridgedPlugin {
 
 extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
     public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        if central.state != .unknown && central.state != .resetting { flushPendingCaps() }
         notifyListeners("stateChanged", data: capsDict())
         if central.state == .poweredOn {
             if role == "display" { startHostingIfReady() }
@@ -404,9 +429,13 @@ extension KardiaBlePlugin: CBCentralManagerDelegate, CBPeripheralDelegate {
     }
 
     public func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        /* Discovery only reads the info characteristic. Subscribing here made the
+         * display treat the short discovery connection as the probe joining, and
+         * the disconnect after it as the probe leaving, which ended the session. */
+        let discovering = pendingDiscover != nil
         for ch in service.characteristics ?? [] {
-            if ch.uuid == Self.downUUID { probeDown = ch; peripheral.setNotifyValue(true, for: ch) }
-            if ch.uuid == Self.upUUID { probeUp = ch; peripheral.setNotifyValue(true, for: ch) }
+            if ch.uuid == Self.downUUID { probeDown = ch; if !discovering { peripheral.setNotifyValue(true, for: ch) } }
+            if ch.uuid == Self.upUUID { probeUp = ch; if !discovering { peripheral.setNotifyValue(true, for: ch) } }
             if ch.uuid == Self.infoUUID { probeInfo = ch; peripheral.readValue(for: ch) }
         }
     }
@@ -476,8 +505,9 @@ extension KardiaBlePlugin: CBPeripheralManagerDelegate {
 
     public func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
         if central === hostCentral && characteristic.uuid == Self.downUUID {
-            hostReady = false; hostCentral = nil
-            emitLost("The probe disconnected.")
+            let wasActive = hostGotData
+            hostReady = false; hostCentral = nil; hostGotData = false
+            if wasActive { emitLost("The probe disconnected.") }
         }
     }
 
@@ -491,7 +521,7 @@ extension KardiaBlePlugin: CBPeripheralManagerDelegate {
     public func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
         for req in requests {
             if hostCentral != nil && req.central !== hostCentral { continue }
-            if let v = req.value { emitBytes(v) }
+            if let v = req.value { hostGotData = true; emitBytes(v) }
             // CBATTRequest has no responseNeeded flag on iOS: a request on a
             // with-response (write) characteristic must be answered, a
             // write-without-response request must not be.

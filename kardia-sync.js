@@ -798,8 +798,11 @@
             var handlers = node._handlers();
             var hello = { type: TYPES.HELLO, seq: nextSeq(), tMs: monoMs(), sessionTag: sessionTag, probePub: keys.publicKeyBytes, nonce: randomBytes(12) };
             var helloBytes = encodeFrame(hello, null);
+            node._lastHelloBytes = helloBytes; node._helloSent = false;
             if (transport) {
-              return Promise.resolve(transport.join(parsed, handlers)).then(function () { sendBytes(helloBytes); return node; });
+              /* Bluetooth join resolves when the scan starts, before the link
+               * is up, so this first send can fail; onPeerConnected resends. */
+              return Promise.resolve(transport.join(parsed, handlers)).then(function () { if (!node._helloSent) node._helloSent = sendBytes(helloBytes); return node; });
             }
             node._lastHelloBytes = helloBytes;
             return node;
@@ -809,7 +812,16 @@
       _handlers: function () {
         return {
           onBytes: function (b) { node.handleBytes(b); },
-          onPeerConnected: function () {},
+          onPeerConnected: function () {
+            /* Resend HELLO once the link is up. A fresh Bluetooth link can still
+             * be negotiating its packet size, so retry briefly if refused. */
+            var tries = 0;
+            (function trySend() {
+              if (role !== "probe" || !node._lastHelloBytes || node._helloSent || state !== "pairing") return;
+              node._helloSent = sendBytes(node._lastHelloBytes);
+              if (!node._helloSent && ++tries < 8 && typeof setTimeout !== "undefined") setTimeout(trySend, 400);
+            })();
+          },
           onPeerLost: function (reason) { node.handlePeerLost(reason); },
           onError: function () { node.handlePeerLost("transport-error"); }
         };
