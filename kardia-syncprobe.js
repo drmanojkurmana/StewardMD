@@ -475,7 +475,7 @@
   }
   function renderProbeIntro() {
     S.motionChosen = false;
-    S.motionSlide = null;
+    S.motionSlide = null; S.slideTick = null; S.motionDepth = null;
     showSheet("Use this phone as a probe",
       '<p class="sp-small">Connect to the display phone. Nearby displays connect with one tap, with no typing.</p>' +
       nearbyHtml() +
@@ -603,7 +603,75 @@
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Not now</button></div>');
     bindRootClose(closeAll);
   }
+  /* A transducer seen from above: grip, collar and the contact face with its
+   * orientation marker. Turning the phone turns it; fan leans the grip over
+   * the face; rock narrows it, as a real probe looks when rocked. */
+  function probeTopSvg(tilt, rot, rock) {
+    var t = Math.max(-40, Math.min(40, +tilt || 0)), r = +rot || 0, k = Math.max(-40, Math.min(40, +rock || 0));
+    var lean = Math.round(t * 0.9), squash = (1 - Math.abs(k) / 120).toFixed(3);
+    return '<svg class="krd-sp-probe" viewBox="-80 -110 160 220" role="img" aria-label="Probe">' +
+      '<ellipse cx="0" cy="0" rx="46" ry="16" class="krd-sp-probe-contact"/>' +
+      '<g style="transform: rotate(' + Math.round(r) + 'deg) scaleX(' + squash + ')">' +
+      '<rect x="-38" y="-12" width="76" height="24" rx="12" class="krd-sp-probe-face"/>' +
+      '<g style="transform: translate(' + lean + 'px, 0)">' +
+      '<path d="M-30 -10 L30 -10 L22 -46 L-22 -46 Z" class="krd-sp-probe-collar"/>' +
+      '<rect x="-22" y="-98" width="44" height="56" rx="18" class="krd-sp-probe-grip"/>' +
+      '<rect x="-5" y="-108" width="10" height="14" rx="4" class="krd-sp-probe-cable"/></g>' +
+      '<rect x="-34" y="-5" width="68" height="10" rx="5" class="krd-sp-probe-lens"/>' +
+      '<circle cx="-44" cy="0" r="6" class="krd-sp-probe-marker"/></g></svg>';
+  }
+  function renderProbeLive() {
+    S.probeStep = "active";
+    var st = null, stName = "idle", sub = "";
+    try { st = S.core.stats ? S.core.stats() : null; } catch (e) {}
+    try { stName = S.core.state ? S.core.state().name : "idle"; } catch (e) {}
+    sub = stateLabel(stName).sub;
+    if (stName === "connected") { try { sub = "Over " + transportName(S.core.activeTransport()).toLowerCase() + ", " + fmtLatency(st && st.rttMs); } catch (e) {} }
+    var m = S.motionSlide || { x: 0, y: 0 }, p = S.probePose || {};
+    if (S.motionDepth == null) S.motionDepth = 18;
+    showSheet("Probe",
+      '<div id="krdSpLostSlot"></div>' +
+      '<div class="krd-sp-statusrow"><span class="krd-sp-dot" aria-hidden="true"></span>' +
+      '<p class="sp-small" id="krdSpState" role="status">' + esc(stateLabel(stName).line) + "</p>" +
+      '<p class="sp-small krd-sp-live-sub" id="krdSpStateSub">' + esc(sub) + "</p></div>" +
+      '<div class="krd-sp-chest" id="krdSpPad" role="application" aria-label="Chest. Drag the probe to move it on the chest. Tilt and turn the phone to angle it." tabindex="0">' +
+      '<svg class="krd-sp-chest-map" viewBox="0 0 200 260" preserveAspectRatio="xMidYMid meet" aria-hidden="true">' +
+      '<path d="M100 12 L100 200" class="krd-sp-chest-sternum"/>' +
+      '<path d="M100 40 C60 46 34 60 22 86 M100 40 C140 46 166 60 178 86 M100 74 C60 80 32 96 20 124 M100 74 C140 80 168 96 180 124 M100 108 C62 116 34 134 24 162 M100 108 C138 116 166 134 176 162 M100 142 C66 152 42 172 34 198 M100 142 C134 152 158 172 166 198" class="krd-sp-chest-rib"/></svg>' +
+      '<span class="krd-sp-pad-probe krd-sp-live-probe" id="krdSpPadDot" aria-hidden="true" style="transform:translate(' + Math.round(m.x / 60 * 120) + "px, " + Math.round(m.y / 60 * 150) + 'px)">' +
+      '<span id="krdSpGlyph" data-kind="top">' + probeTopSvg(p.tiltDeg, p.rotationDeg, p.rockDeg) + "</span></span></div>" +
+      '<p class="sp-small krd-sp-posedesc" id="krdSpPoseDesc">Drag the probe to move it. Tilt and turn the phone to angle it.</p>' +
+      '<div id="krdSpConfirmP"></div>' +
+      '<div class="krd-sp-live-row">' +
+      '<button type="button" class="sp-btn sec krd-sp-live-btn" data-spdepthm="-1" aria-label="Shallower">Depth <b>-</b></button>' +
+      '<span class="krd-sp-live-depth" id="krdSpDepthM" role="status">' + S.motionDepth + " cm</span>" +
+      '<button type="button" class="sp-btn sec krd-sp-live-btn" data-spdepthm="1" aria-label="Deeper">Depth <b>+</b></button></div>' +
+      '<div class="krd-sp-live-row">' +
+      '<button type="button" class="sp-btn sec krd-sp-live-btn" data-act="sp-pause">Freeze</button>' +
+      '<button type="button" class="sp-btn pri krd-sp-live-btn" data-act="sp-recenter">Recenter</button></div>' +
+      '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-details">Connection details</button>' +
+      ' <button type="button" class="krd-sp-minilink" data-act="sp-end">Disconnect</button></p>');
+    var sheet = root() && root().querySelector(".krd-sp-sheet");
+    if (sheet && sheet.classList) sheet.classList.add("krd-sp-sheet-live");
+    bindRootClose(closeAll);
+    bindMotionSlidePad();
+    var btns = root() ? root().querySelectorAll("[data-spdepthm]") : [];
+    for (var i = 0; i < btns.length; i++) (function (b) {
+      b.addEventListener("click", function () {
+        S.motionDepth = Math.min(30, Math.max(8, S.motionDepth + (+b.getAttribute("data-spdepthm") || 0)));
+        try { if (S.core.probeDepth) S.motionDepth = S.core.probeDepth(S.motionDepth); } catch (e) {}
+        var dv = doc() && doc().getElementById("krdSpDepthM");
+        if (dv) dv.textContent = S.motionDepth + " cm";
+        spHaptic("selection");
+      });
+    })(btns[i]);
+    renderProbeConfirm();
+    refreshGlyph();
+  }
   function renderProbeActive() {
+    var joinedNow = false;
+    try { var nm = S.core.state ? S.core.state().name : "idle"; joinedNow = nm !== "idle" && nm !== "disconnected" && nm !== "failed"; } catch (e) {}
+    if (joinedNow && S.controlMode === "motion") return renderProbeLive();
     S.probeStep = "active";
     var st = null, stName = "idle";
     try { st = S.core.stats ? S.core.stats() : null; } catch (e) {}
@@ -650,21 +718,31 @@
     var d = doc(), pad = d && d.getElementById("krdSpPad");
     if (!pad) return;
     var padPointer = null;
+    var grab = null;
     function padMove(e) {
       if (!pad.getBoundingClientRect) return;
       var r = pad.getBoundingClientRect();
-      var nx = Math.max(-1, Math.min(1, ((e.clientX - r.left) / (r.width || 1) - 0.5) * 2));
-      var ny = Math.max(-1, Math.min(1, ((e.clientY - r.top) / (r.height || 1) - 0.5) * 2));
+      var px = ((e.clientX - r.left) / (r.width || 1) - 0.5) * 2, py = ((e.clientY - r.top) / (r.height || 1) - 0.5) * 2;
+      /* Relative drag: the probe moves with the finger from where it was,
+       * so touching the pad never makes it jump. */
+      var cur = S.motionSlide || { x: 0, y: 0 };
+      if (!grab) grab = { px: px, py: py, x: cur.x / 60, y: cur.y / 60 };
+      var nx = Math.max(-1, Math.min(1, grab.x + (px - grab.px)));
+      var ny = Math.max(-1, Math.min(1, grab.y + (py - grab.py)));
       S.motionSlide = { x: Math.round(nx * 600) / 10, y: Math.round(ny * 600) / 10 };
       var dot = d.getElementById("krdSpPadDot");
       /* Keep the whole probe drawing inside the pad. */
-      var hx = Math.max(0, (r.width || 0) / 2 - 52), hy = Math.max(0, (r.height || 0) / 2 - 76);
+      var big = pad.className.indexOf("krd-sp-chest") >= 0;
+      var hx = Math.max(0, (r.width || 0) / 2 - (big ? 64 : 52)), hy = Math.max(0, (r.height || 0) / 2 - (big ? 70 : 76));
       if (dot) dot.style.transform = "translate(" + Math.round(nx * hx) + "px, " + Math.round(ny * hy) + "px)";
       try { if (S.core.probeSlide) S.core.probeSlide(S.motionSlide.x, S.motionSlide.y); } catch (x) {}
+      /* A light tick every 6 mm along the skin, like ribs under a real probe. */
+      var lt = S.slideTick || { x: 0, y: 0 };
+      if (Math.abs(S.motionSlide.x - lt.x) + Math.abs(S.motionSlide.y - lt.y) >= 6) { S.slideTick = { x: S.motionSlide.x, y: S.motionSlide.y }; spHaptic("light"); }
     }
     pad.addEventListener("pointerdown", function (e) { padPointer = e.pointerId; try { pad.setPointerCapture(e.pointerId); } catch (x) {} padMove(e); });
     pad.addEventListener("pointermove", function (e) { if (padPointer != null && e.pointerId === padPointer) padMove(e); });
-    function padEnd(e) { if (e.pointerId === padPointer) { padPointer = null; spHaptic("selection"); } }
+    function padEnd(e) { if (e.pointerId === padPointer) { padPointer = null; grab = null; spHaptic("selection"); } }
     pad.addEventListener("pointerup", padEnd);
     pad.addEventListener("pointercancel", padEnd);
   }
@@ -778,7 +856,9 @@
   function refreshGlyph() {
     var d = doc(), g = d && d.getElementById("krdSpGlyph");
     if (!g || !S.probePose) return;
-    g.innerHTML = glyphSvg(S.probePose.tiltDeg, S.probePose.rotationDeg);
+    g.innerHTML = g.getAttribute && g.getAttribute("data-kind") === "top"
+      ? probeTopSvg(S.probePose.tiltDeg, S.probePose.rotationDeg, S.probePose.rockDeg)
+      : glyphSvg(S.probePose.tiltDeg, S.probePose.rotationDeg);
     var desc = d.getElementById("krdSpPoseDesc");
     if (desc) desc.textContent = "Tilt " + Math.round(S.probePose.tiltDeg || 0) + " deg, rotation " +
       Math.round(S.probePose.rotationDeg || 0) + " deg.";
@@ -935,6 +1015,12 @@
     var dx = sx - probeLabSlide.x, dy = sy - probeLabSlide.y;
     probeLabSlide.x = sx; probeLabSlide.y = sy;
     if (Math.abs(dx) < 0.05 && Math.abs(dy) < 0.05) return true;
+    /* Our Probe Lab copy exposes its own slide path (kardia-slide-hook), so
+     * the probe moves on the skin exactly as when its grip is dragged. */
+    var fwin = fdoc.defaultView;
+    if (fwin && typeof fwin.__kardiaProbeSlide === "function") {
+      try { if (fwin.__kardiaProbeSlide(dx * 3, dy * 3)) return true; } catch (e) {}
+    }
     var scene = fdoc.getElementById("scene");
     if (!scene || !scene.dispatchEvent || !scene.getBoundingClientRect) return false;
     var rect = scene.getBoundingClientRect();
@@ -1212,7 +1298,9 @@
     if (act === "sp-pause") {
       var paused = btn && btn.getAttribute("data-p") === "1";
       try { if (S.core.setPaused) S.core.setPaused(!paused); } catch (e) {}
-      if (btn) { btn.textContent = paused ? "Pause" : "Resume"; btn.setAttribute("data-p", paused ? "0" : "1"); }
+      var live = btn && btn.className.indexOf("krd-sp-live-btn") >= 0;
+      if (btn) { btn.textContent = paused ? (live ? "Freeze" : "Pause") : (live ? "Unfreeze" : "Resume"); btn.setAttribute("data-p", paused ? "0" : "1"); }
+      spHaptic("selection");
       return;
     }
     if (act === "sp-recenter") { try { if (S.core.recenter) S.core.recenter(); } catch (e) {} return; }

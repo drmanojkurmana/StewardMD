@@ -1513,6 +1513,14 @@
       if (F.role === "display" && F.node) { if (F.paused) { try { F.node.freeze("paused"); } catch (e) {} } else if (F.node.frozen) { try { F.node.resume(); } catch (e) {} } }
       return true;
     },
+    /* Probe phone in motion mode: imaging depth in cm (8 to 30), sent as a
+     * depth control only, so it never overrides the motion angles. */
+    probeDepth: function (cm) {
+      var v = Math.min(30, Math.max(8, +cm || 18));
+      F.touchState.depthCm = v;
+      if (F.node && F.role === "probe" && facadeStateName() === "connected") { try { F.node.sendControl(CONTROLS.DEPTH, Math.round(v * 10)); } catch (e) {} }
+      return v;
+    },
     /* Probe phone in motion mode: thumb pad slide in millimetres. */
     probeSlide: function (x, y) {
       if (!F.sender || typeof F.sender.setSlide !== "function") return false;
@@ -1602,7 +1610,7 @@
     createBroadcastLoopbackTransport: createBroadcastLoopbackTransport,
     on: facade.on, state: facade.state, startDisplay: facade.startDisplay, joinProbe: facade.joinProbe, discoverNearby: facade.discoverNearby, joinNearby: facade.joinNearby, refreshDisplay: facade.refreshDisplay, transportErrors: facade.transportErrors,
     confirm: facade.confirm, disconnect: facade.disconnect, reconnect: facade.reconnect, recenter: facade.recenter,
-    setPaused: facade.setPaused, calibrate: facade.calibrate, probePatch: facade.probePatch, probeSlide: facade.probeSlide,
+    setPaused: facade.setPaused, calibrate: facade.calibrate, probePatch: facade.probePatch, probeSlide: facade.probeSlide, probeDepth: facade.probeDepth,
     renderLatest: facadeRenderLatest,
     stats: facade.stats, transports: facade.transports, activeTransport: facade.activeTransport,
     session: facade.session, lastError: facade.lastError,
