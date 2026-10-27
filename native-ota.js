@@ -276,7 +276,9 @@
       });
     }
     function download() {
-      return tryDownload(1).then(null, function (e) {
+      // The plugin already retries each file inside a delta download, so a delta failure goes straight to the zip fallback
+      // (a second delta attempt here doubled the wait before the fallback even started).
+      return tryDownload(mode === "delta" ? 0 : 1).then(null, function (e) {
         if (mode !== "delta") throw e;
         // The delta path failed (a file 404, a hash mismatch, a dropped link). The zip is the proven path: use it.
         try { console.warn("[ota] delta download failed, falling back to the zip:", e && e.message); } catch (x) {}
@@ -370,7 +372,10 @@
         else {
           ph.textContent = info.delta ? "Downloading changes" : "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta);
           // Delta install: say plainly that this is only what changed, and how it compares with the whole app.
-          var nt = q(".otp-note"); if (nt && info.delta && !nt.getAttribute("data-d")) { nt.setAttribute("data-d", "1"); nt.textContent = "Only what changed since your version is downloaded: " + info.files + " file" + (info.files === 1 ? "" : "s") + ", " + fmtMB(info.total) + " MB instead of the full " + fmtMB(info.full) + " MB. Keep the app open."; }
+          var nt = q(".otp-note");
+          if (nt && info.delta && !nt.getAttribute("data-d")) { nt.setAttribute("data-d", "1"); nt.setAttribute("data-o", nt.textContent); nt.textContent = "Only what changed since your version is downloaded: " + info.files + " file" + (info.files === 1 ? "" : "s") + ", " + fmtMB(info.total) + " MB instead of the full " + fmtMB(info.full) + " MB. Keep the app open."; }
+          // Fell back to the whole zip: the "only what changed" note is no longer true, so put the original note back.
+          else if (nt && !info.delta && nt.getAttribute("data-d")) { nt.textContent = nt.getAttribute("data-o") || ""; nt.removeAttribute("data-d"); nt.removeAttribute("data-o"); }
         }
         q(".otp-pc").textContent = noSample ? "" : info.pct + "%";
         bar.classList.toggle("wait", info.phase === "waiting");
