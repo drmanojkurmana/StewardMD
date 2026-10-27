@@ -15,13 +15,13 @@
   .copy h1 { font-size: 46pt; margin: 3mm 0 4mm; }
   .copy .lede { font-size: 13pt; width: 190mm; margin: 0 auto; }
   .fan { position: absolute; z-index: 3; left: 0; right: 0; top: 90mm; height: 110mm; }
-  .fan .phone, .fan .ipad, .fan .watch { position: absolute; left: 50%; }
-  .fan .phone { width: 40mm; z-index: 3; }
+  .fan .dev, .fan .ipad { position: absolute; left: 50%; }
   .f-ipad { width: 136mm; margin-left: -68mm; top: 4mm; z-index: 2; }
-  .f-pl { margin-left: -118mm; top: 18mm; transform: rotate(-4deg); }
-  .f-pr { margin-left: 78mm; top: 18mm; transform: rotate(4deg); }
-  .f-wl { margin-left: -146mm; top: 34mm; width: 40mm; z-index: 4 !important; }
-  .f-wr { margin-left: 104mm; top: 30mm; width: 42mm; z-index: 4 !important; }
+  .f-fold { width: 52mm; margin-left: -116mm; top: 12mm; z-index: 3; }
+  .f-ios { width: 36mm; margin-left: 60mm; top: 16mm; z-index: 3; }
+  .f-and { width: 34mm; margin-left: 86mm; top: 26mm; z-index: 4; }
+  .f-wl { width: 34mm; margin-left: -146mm; top: 44mm; z-index: 4; }
+  .f-wr { width: 34mm; margin-left: 112mm; top: 48mm; z-index: 5; }
   .body { padding: 47mm 18mm 0; }
   .section-title { font-size: 22pt; }
   .stats { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 5mm; border-top: .3mm solid var(--line); }
@@ -62,11 +62,12 @@
     </div>
   </div>
   <div class="fan">
-    <div class="ipad f-ipad"><div class="scr"><img src="img/ipad-dose.jpg" alt=""></div></div>
-    <div class="phone f-pl"><div class="island"></div><div class="scr"><img src="img/clinix.jpg" alt=""></div></div>
-    <div class="phone f-pr"><div class="island"></div><div class="scr"><img src="img/abg.jpg" alt=""></div></div>
-    <img class="watch f-wl" src="img/watch-alpine-codeblue.png" alt="">
-    <img class="watch f-wr" src="img/watch-ocean-critical.png" alt="">
+    <div class="ipad f-ipad"><div class="scr"><img src="img/ipad-kardia.jpg" alt=""></div></div>
+    <img class="dev f-fold" src="img/fold-angio.png" alt="">
+    <img class="dev f-ios" src="img/ios-clinix.png" alt="">
+    <img class="dev f-and" src="img/and-dose.png" alt="">
+    <img class="dev f-wl watch" src="img/watch-alpine-codeblue.png" alt="">
+    <img class="dev f-wr watch" src="img/watch-ocean-critical.png" alt="">
   </div>
 
   <div class="body">
@@ -91,7 +92,7 @@
         <h2>Learn it, log it, pass it</h2>
         <div class="feat"><div class="ico" data-ico="log"></div><div><h3>NMC PG e-Logbook</h3><p>The <b>PGMER-2023</b> logbook: weekly entries, monthly guide authentication, faculty verification.</p></div></div>
         <div class="feat"><div class="ico" data-ico="stetho"></div><div><h3>CliniX bedside skills</h3><p><b>9 systems, 117 topics</b>, OSCE and viva on the NMC CBME syllabus, with an AI tutor.</p></div></div>
-        <div class="feat"><div class="ico" data-ico="heart"></div><div><h3>Kardia, Anesthetica, Tokós, Ophthalmós</h3><p>Echo lab, anaesthesia, CTG and eye trainers with simulators, in English and हिन्दी.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="heart"></div><div><h3>Kardia, Anesthetica, Tokós, Ophthalmós</h3><p>Echo lab, anaesthesia, CTG and eye trainers with simulators, in English and <span lang="hi">हिन्दी</span>.</p></div></div>
         <div class="feat"><div class="ico" data-ico="book"></div><div><h3>PrepNucleus</h3><p><b>176,430 questions</b> for NEET-PG, INI-CET, NEET-SS, USMLE and FMGE with spaced repetition.</p></div></div>
         <div class="feat"><div class="ico" data-ico="cube"></div><div><h3>RadioAnatome and SURGˣ</h3><p>CT, MRI and 3D anatomy; operative notes, procedures and surgical cases.</p></div></div>
       </div>
@@ -101,7 +102,7 @@
         <div class="feat"><div class="ico" data-ico="calc"></div><div><h3>Dose Calculator</h3><p>Weight, age, <b>CrCl, dialysis and Child-Pugh</b>, for this patient.</p></div></div>
         <div class="feat"><div class="ico" data-ico="microbe"></div><div><h3>Indian antibiograms</h3><p>By specimen and setting, from ICMR, NARS-Net and hospitals. Import your own.</p></div></div>
         <div class="feat"><div class="ico" data-ico="icu"></div><div><h3>ICU, Neonatal, Oncology</h3><p>Auto SOFA and APACHE II, NICU tools, dosed chemo regimens, Code Blue with Apple Watch.</p></div></div>
-        <div class="feat"><div class="ico" data-ico="mic"></div><div><h3>OPD, Scribe, Documents, FollowCare</h3><p>Queue, on-device scribe, consent forms in <b>English, తెలుగు, हिन्दी</b>, WhatsApp follow-up.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="mic"></div><div><h3>OPD, Scribe, Documents, FollowCare</h3><p>Queue, on-device scribe, consent forms in <b>English, <span lang="te">తెలుగు</span>, <span lang="hi">हिन्दी</span></b>, WhatsApp follow-up.</p></div></div>
       </div>
     </div>
 

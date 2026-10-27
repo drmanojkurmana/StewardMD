@@ -6,13 +6,14 @@
 <link rel="stylesheet" href="pamphlet.css">
 <style>
   .hero { height: 122mm; }
-  .copy { position: relative; z-index: 2; width: 96mm; margin-top: 11mm; }
-  .copy h1 { font-size: 28.5pt; margin: 3mm 0 4mm; }
-  .copy .lede { width: 88mm; }
-  .devices { position: absolute; z-index: 3; right: 9mm; top: 25mm; width: 98mm; height: 104mm; }
-  .d-ipad { right: 0; top: 4mm; width: 88mm; }
-  .d-phone { position: absolute; left: 0; top: 30mm; width: 33mm; z-index: 2; }
-  .d-watch { right: -4mm; top: 40mm; width: 32mm; z-index: 3; }
+  .copy { position: relative; z-index: 2; width: 86mm; margin-top: 11mm; }
+  .copy h1 { font-size: 26pt; margin: 3mm 0 4mm; }
+  .copy .lede { width: 84mm; }
+  .devices { position: absolute; z-index: 3; right: 9mm; top: 27mm; width: 98mm; height: 104mm; }
+  .d-ipad { right: 0; top: 2mm; width: 88mm; }
+  .d-ios { left: -2mm; top: 24mm; width: 31mm; z-index: 2; }
+  .d-and { left: 31mm; top: 38mm; width: 29mm; z-index: 3; }
+  .d-watch { right: -4mm; top: 42mm; width: 30mm; z-index: 4; }
   .body { padding: 8mm 13mm 0; }
   .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3.6mm 6mm; margin-top: 4.2mm; }
   .grid .feat { grid-template-columns: 6.4mm 1fr; gap: 2mm; }
@@ -36,8 +37,9 @@
     </div>
 <div class="devices">
       <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-abg.jpg" alt=""></div></div>
-      <div class="phone d-phone"><div class="island"></div><div class="scr"><img src="img/dose.jpg" alt=""></div></div>
-      <img class="watch d-watch" src="img/watch-ocean-critical.png" alt="">
+      <img class="dev d-ios" src="img/ios-dose.png" alt="">
+      <img class="dev d-and" src="img/and-maik.png" alt="">
+      <img class="dev d-watch watch" src="img/watch-ocean-critical.png" alt="">
     </div>
   </div>
 
@@ -54,12 +56,12 @@
       <div class="feat"><div class="ico" data-ico="icu"></div><div><h3>ICU and Code Blue</h3><p>Auto SOFA, APACHE II, NEWS2. Code Blue log with <b>Apple Watch CPR assist</b>.</p></div></div>
       <div class="feat"><div class="ico" data-ico="baby"></div><div><h3>Neonatal layer</h3><p>One baby record, ten NICU tools: dosing, infusions, GIR, bilirubin, growth.</p></div></div>
       <div class="feat"><div class="ico" data-ico="onco"></div><div><h3>Oncology</h3><p><b>260+ chemotherapy regimens</b> with dosing, TNM staging, CTCAE and RECIST.</p></div></div>
-      <div class="feat"><div class="ico" data-ico="doc"></div><div><h3>Documents in 3 languages</h3><p>Consent forms, handouts, certificates and referrals in <b>English, తెలుగు, हिन्दी</b>.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="doc"></div><div><h3>Documents in 3 languages</h3><p>Consent forms, handouts, certificates and referrals in <b>English, <span lang="te">తెలుగు</span>, <span lang="hi">हिन्दी</span></b>.</p></div></div>
       <div class="feat"><div class="ico" data-ico="users"></div><div><h3>FollowCare and colleagues</h3><p>Post-discharge follow-up on WhatsApp, <b>26 pathways</b>. Refer and hand over in-app.</p></div></div>
     </div>
 
     <div class="ai">
-      <div class="t">AI imaging: point the phone, get a second look.</div>
+      <div class="t">AI imaging, on the phone</div>
       <div class="m"><b>KardiQ X <span class="chip">Early access</span></b><span>ECG photo to rhythm and STEMI check</span></div>
       <div class="m"><b>ThoreX <span class="chip">Early access</span></b><span>Chest X-ray, 18 findings, structured report</span></div>
       <div class="m"><b>FundX <span class="chip">Early access</span></b><span>Smartphone fundus, DR and glaucoma cues</span></div>

@@ -6,13 +6,14 @@
 <link rel="stylesheet" href="pamphlet.css">
 <style>
   .hero { height: 128mm; }
-  .copy { position: relative; z-index: 2; width: 96mm; margin-top: 11mm; }
-  .copy h1 { font-size: 28.5pt; margin: 3mm 0 4mm; }
-  .copy .lede { width: 88mm; }
+  .copy { position: relative; z-index: 2; width: 88mm; margin-top: 11mm; }
+  .copy h1 { font-size: 26pt; margin: 3mm 0 4mm; }
+  .copy .lede { width: 84mm; }
   .devices { position: absolute; z-index: 3; right: 9mm; top: 27mm; width: 98mm; height: 104mm; }
-  .d-ipad { right: 0; top: 4mm; width: 88mm; }
-  .d-phone { position: absolute; left: 0; top: 30mm; width: 33mm; z-index: 2; }
-  .d-watch { right: -4mm; top: 40mm; width: 32mm; z-index: 3; }
+  .d-ipad { right: 0; top: 2mm; width: 88mm; }
+  .d-ios { left: -2mm; top: 24mm; width: 31mm; z-index: 2; }
+  .d-and { left: 31mm; top: 38mm; width: 29mm; z-index: 3; }
+  .d-watch { right: -4mm; top: 42mm; width: 30mm; z-index: 4; }
   .body { padding: 8mm 13mm 0; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.6mm 8mm; margin-top: 4.4mm; }
   .contrast { margin-top: 5.4mm; }
@@ -27,9 +28,10 @@
       <p class="lede">One app that takes a student from the first history to the PG exam, keeps the NMC logbook your residents must maintain, and stays useful on the ward the day after they qualify.</p>
     </div>
 <div class="devices">
-      <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-kardia.jpg" alt=""></div></div>
-      <div class="phone d-phone"><div class="island"></div><div class="scr"><img src="img/clinix.jpg" alt=""></div></div>
-      <img class="watch d-watch" src="img/watch-alpine-codeblue.png" alt="">
+      <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-angio.jpg" alt=""></div></div>
+      <img class="dev d-ios" src="img/ios-clinix.png" alt="">
+      <img class="dev d-and" src="img/and-kbl.png" alt="">
+      <img class="dev d-watch watch" src="img/watch-alpine-codeblue.png" alt="">
     </div>
   </div>
 

@@ -5,7 +5,7 @@ const http = require("http"), fs = require("fs"), path = require("path");
 const DIR = __dirname, OUT = path.join(DIR, "out");
 const PAGES = { colleges: "a4", clinicians: "a4", numbers: "a4", poster: "a3" };
 const SIZE = { a4: { w: 210, h: 297 }, a3: { w: 297, h: 420 } };
-const TYPES = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".jpg": "image/jpeg", ".png": "image/png", ".svg": "image/svg+xml" };
+const TYPES = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".jpg": "image/jpeg", ".png": "image/png", ".svg": "image/svg+xml", ".ttf": "font/ttf", ".otf": "font/otf" };
 const srv = http.createServer((q, r) => {
   const f = path.join(DIR, decodeURIComponent(q.url.split("?")[0]));
   if (!f.startsWith(DIR) || !fs.existsSync(f)) { r.writeHead(404); return r.end(); }

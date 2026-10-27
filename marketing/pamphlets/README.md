@@ -18,19 +18,24 @@ node render.cjs poster     # one
 
 `render.cjs` serves this folder, renders with the pre-installed Playwright Chromium and writes
 `out/<name>.pdf` plus a `out/<name>.png` preview (PNGs are gitignored). Type follows the app:
-Bricolage Grotesque for display (`--smd-dsp`) and Inter for text, loaded from Google Fonts at render
-time and embedded in the PDF.
+Bricolage Grotesque for display (`--smd-dsp`) and Inter for text (see Fonts below).
 
 Screens in `img/` were captured from the real app bundle in headless Chromium on 2026-10-27:
 phone 390 x 844 @3x, iPad 1180 x 820 @2x. `make-screens.py <capture_dir>` adds the iOS status bar
 (so the notch sits over it, never over the app header) and builds the watch images.
 
 Devices:
-- iPhone and iPad frames are CSS (`pamphlet.css`, `.phone`, `.ipad`).
-- Apple Watch frames in `img/frames/` are the owner's supplied Ultra images (Ocean and Alpine Loop),
-  background removed with `cut-frames.py`. Their source and licence are the owner's call; replace
-  them with Apple's official marketing frames before a large print run.
-- Watch screens are the app's own Code Blue and Critical labs renders (`_site/assets/s/`).
+- iPhone, Android phone, foldable and Apple Watch frames in `img/frames/` are the owner's supplied images
+  (transparent outside and in the screen; the two watch images had their backgrounds removed with
+  `cut-frames.py`). Their source and licence are the owner's call; swap in the makers' official marketing
+  frames before a large print run. `make-screens.py` fits each capture to its frame's own screen opening.
+- iPad: CSS frame (`.ipad` in `pamphlet.css`).
+- Big screens carry the high-reach modules: Kardia Echo Lab and AngioLAB, Antibiogram.
+
+Fonts: static TrueType files in `fonts/` (Inter, Bricolage Grotesque, Noto Sans Telugu, Noto Sans Devanagari;
+all OFL, `fonts/OFL.txt`), instanced from Google Fonts' variable sources. Chrome writes variable web fonts
+into a PDF as Type 3 glyphs, which the iPhone PDF viewer draws soft and unhinted; check with
+`pdffonts out/<name>.pdf` that every font is CID TrueType.
 
 No blurred `box-shadow` anywhere: Chromium writes it into the PDF as a translucent image that the
 iPhone PDF viewer draws as a grey box. The footer credits MaiKnowledge (logo from the company letterhead).

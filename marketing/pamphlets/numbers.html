@@ -9,10 +9,11 @@
   .copy { position: relative; z-index: 2; width: 100mm; margin-top: 10mm; }
   .copy h1 { font-size: 24pt; margin: 3mm 0 4mm; }
   .copy .lede { width: 96mm; }
-  .devices { position: absolute; z-index: 3; right: 8mm; top: 24mm; width: 84mm; height: 88mm; }
-  .d-ipad { right: 0; top: 2mm; width: 76mm; }
-  .d-phone { position: absolute; left: 0; top: 22mm; width: 27mm; z-index: 2; }
-  .d-watch { right: -4mm; top: 30mm; width: 27mm; z-index: 3; }
+  .devices { position: absolute; z-index: 3; right: 8mm; top: 22mm; width: 86mm; height: 90mm; }
+  .d-fold { left: 18mm; top: 0; width: 50mm; z-index: 1; }
+  .d-ios { left: 0; top: 24mm; width: 25mm; z-index: 2; }
+  .d-and { right: 6mm; top: 30mm; width: 24mm; z-index: 2; }
+  .d-watch { right: -5mm; top: 42mm; width: 22mm; z-index: 3; }
   .body { padding: 7mm 13mm 0; }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 4.6mm; border-top: .3mm solid var(--line); }
   .stat { padding: 3.2mm 3mm 3mm 0; border-bottom: .3mm solid var(--line); }
@@ -38,9 +39,10 @@
       <p class="lede">Every figure below is something you can open, calculate or practise on your phone today, from the first year of MBBS to the ICU.</p>
     </div>
     <div class="devices">
-      <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-kbl.jpg" alt=""></div></div>
-      <div class="phone d-phone"><div class="island"></div><div class="scr"><img src="img/home.jpg" alt=""></div></div>
-      <img class="watch d-watch" src="img/watch-ocean-codeblue.png" alt="">
+      <img class="dev d-fold" src="img/fold-kardia.png" alt="">
+      <img class="dev d-ios" src="img/ios-home.png" alt="">
+      <img class="dev d-and" src="img/and-abg.png" alt="">
+      <img class="dev d-watch watch" src="img/watch-ocean-codeblue.png" alt="">
     </div>
   </div>
 
@@ -72,7 +74,7 @@
       <div class="t">Made in India,<br><em>for Indian wards.</em></div>
       <ul>
         <li>ICMR guidance</li><li>Indian antibiograms</li><li>Indian brands and prices</li><li>NMC PG logbook</li><li>NMC CBME syllabus</li>
-        <li>Govt health scheme search</li><li>ABDM ready</li><li>English, తెలుగు, हिन्दी</li><li>On-device AI options</li><li>Offline drug library</li>
+        <li>Govt health scheme search</li><li>ABDM ready</li><li>English, <span lang="te">తెలుగు</span>, <span lang="hi">हिन्दी</span></li><li>On-device AI options</li><li>Offline drug library</li>
       </ul>
     </div>
   </div>
