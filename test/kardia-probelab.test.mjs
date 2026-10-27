@@ -17,12 +17,11 @@ test("build-www.sh copies kardia/probelab into www with all files", () => {
   assert.ok(b.includes('"$WWW/kardia/probelab/"'), "target is www/kardia/probelab");
 });
 
-test("credits: Probe Lab credit line and EchoSuite credits render", () => {
+test("credits: only the resource attributions render (no author or permission statement)", () => {
   const P = require("../kardia-practice.js");
-  assert.equal(P.PROBE_LAB_CREDIT, "Probe Lab, EchoSuite (echosuite.app), reused with the author's permission");
   const data = JSON.parse(readFileSync("kardia/probelab/assets/credits.json", "utf8"));
   const html = P.probeLabCreditsHtml(data, (s) => String(s));
-  assert.ok(html.includes(P.PROBE_LAB_CREDIT), "credit line");
+  assert.ok(!/Kamareddine|permission/.test(html), "no author name or permission statement");
   assert.ok(html.includes("HuBMAP Human Reference Atlas"), "figures credit");
   assert.ok(html.includes("PLAX normal"), "video credit");
   const src = readFileSync("kardia-practice.js", "utf8");
