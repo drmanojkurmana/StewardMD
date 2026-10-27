@@ -6,10 +6,13 @@
 <link rel="stylesheet" href="pamphlet.css">
 <style>
   .hero { height: 94mm; }
-  .copy { position: relative; z-index: 2; width: 118mm; margin-top: 10mm; }
-  .copy h1 { font-size: 27pt; margin: 3mm 0 4mm; }
-  .copy .lede { width: 104mm; }
-  .phone.solo { position: absolute; z-index: 3; right: 17mm; top: 27mm; width: 42mm; height: 89mm; transform: rotate(4deg); }
+  .copy { position: relative; z-index: 2; width: 100mm; margin-top: 10mm; }
+  .copy h1 { font-size: 24pt; margin: 3mm 0 4mm; }
+  .copy .lede { width: 96mm; }
+  .devices { position: absolute; z-index: 3; right: 8mm; top: 24mm; width: 84mm; height: 88mm; }
+  .d-ipad { right: 0; top: 2mm; width: 76mm; }
+  .d-phone { position: absolute; left: 0; top: 22mm; width: 27mm; z-index: 2; }
+  .d-watch { right: -4mm; top: 30mm; width: 27mm; z-index: 3; }
   .body { padding: 7mm 13mm 0; }
   .stats { display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 4.6mm; border-top: .3mm solid var(--line); }
   .stat { padding: 3.2mm 3mm 3mm 0; border-bottom: .3mm solid var(--line); }
@@ -19,27 +22,30 @@
   .stat .l { margin-top: .5mm; }
   .band { margin-top: 5mm; display: grid; grid-template-columns: 44mm 1fr; gap: 5mm; align-items: center; padding: 4.4mm 5mm; border-radius: 4mm;
     background: linear-gradient(150deg, #0f6e63, #00463d); color: #fff; }
-  .band .t { font-family: Fraunces, Georgia, serif; font-size: 13pt; font-weight: 600; line-height: 1.12; }
+  .band .t { font-family: "Bricolage Grotesque", Inter, sans-serif; font-size: 13pt; font-weight: 600; line-height: 1.12; }
   .band .t em { color: var(--mint-2); font-weight: 500; }
-  .band ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.6mm; }
-  .band li { font-size: 7.4pt; font-weight: 600; padding: 1.1mm 2.6mm; border-radius: 10mm; background: rgba(255,255,255,.1); border: .3mm solid rgba(127,196,184,.4); }
+  .band ul { list-style: none; display: flex; flex-wrap: wrap; gap: 1.6mm 2.4mm; }
+  .band li { font-size: 7.6pt; font-weight: 600; color: #e6f3ef; }
+  .band li + li::before { content: ""; display: inline-block; width: 1mm; height: 1mm; border-radius: 50%; background: var(--mint-2); margin: 0 2.4mm .5mm 0; vertical-align: middle; }
 </style>
 </head>
 <body>
 <div class="page">
   <div class="hero">
-    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">Only on StewardMD</div></div>
+    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">For students, residents, faculty and clinicians</div></div>
     <div class="copy">
-      <div class="kicker">For students, residents, faculty and clinicians</div>
       <h1>A whole medical library,<br><em>rebuilt for the bedside.</em></h1>
       <p class="lede">Every figure below is something you can open, calculate or practise on your phone today, from the first year of MBBS to the ICU.</p>
     </div>
-    <div class="phone solo"><div class="island"></div><div class="scr"><img src="img/kbl.jpg" alt=""></div></div>
+    <div class="devices">
+      <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-kbl.jpg" alt=""></div></div>
+      <div class="phone d-phone"><div class="island"></div><div class="scr"><img src="img/home.jpg" alt=""></div></div>
+      <img class="watch d-watch" src="img/watch-ocean-codeblue.png" alt="">
+    </div>
   </div>
 
   <div class="body">
-    <div class="eyebrow">By the numbers</div>
-    <div class="section-title">What is inside <em>the app</em></div>
+    <h2 class="section-title">What is inside the app</h2>
     <div class="stats">
       <div class="stat"><div class="n">4,700<small>+</small></div><div class="k">Diseases and syndromes</div><div class="l">Across 12 medical branches, each with a reference page</div></div>
       <div class="stat"><div class="n">253</div><div class="k">Bedside protocols</div><div class="l">Sepsis to snakebite to PPH, in 19 subjects</div></div>
@@ -54,7 +60,7 @@
       <div class="stat"><div class="n">176,430</div><div class="k">Exam questions</div><div class="l">NEET-PG, INI-CET, NEET-SS, USMLE and FMGE</div></div>
       <div class="stat"><div class="n">1,041</div><div class="k">ECG lessons</div><div class="l">An ECG atlas with quizzes, plus an echo lab</div></div>
       <div class="stat"><div class="n">3,035</div><div class="k">Ophthalmology questions</div><div class="l">With retinoscopy and neuro-eye simulators</div></div>
-      <div class="stat"><div class="n">46</div><div class="k">Anaesthesia competencies</div><div class="l">The NMC list, taught and tested in Narkē</div></div>
+      <div class="stat"><div class="n">46</div><div class="k">Anaesthesia competencies</div><div class="l">The NMC list, taught and tested in Anesthetica</div></div>
 
       <div class="stat"><div class="n">3,400<small>+</small></div><div class="k">3D anatomy structures</div><div class="l">Whole body, linked to real CT slices</div></div>
       <div class="stat"><div class="n">35</div><div class="k">CT and MRI atlases</div><div class="l">Scroll the slices, tap any structure</div></div>

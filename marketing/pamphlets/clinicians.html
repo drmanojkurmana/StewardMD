@@ -9,26 +9,18 @@
   .copy { position: relative; z-index: 2; width: 96mm; margin-top: 11mm; }
   .copy h1 { font-size: 28.5pt; margin: 3mm 0 4mm; }
   .copy .lede { width: 88mm; }
-  .proof { display: flex; gap: 6mm; margin-top: 5.5mm; }
-  .proof div { border-left: .5mm solid var(--mint-2); padding-left: 2.6mm; }
-  .proof b { display: block; font-family: Fraunces, Georgia, serif; font-size: 17pt; font-weight: 600; color: #fff; line-height: 1; }
-  .proof span { font-size: 6.8pt; color: rgba(255,255,255,.7); line-height: 1.3; display: block; margin-top: 1mm; }
-  .phones { position: absolute; z-index: 3; right: 10mm; top: 25mm; width: 96mm; height: 112mm; }
-  .phones .phone { position: absolute; width: 38mm; height: 81mm; }
-  .p1 { left: 0; top: 16mm; transform: rotate(-6deg); }
-  .p2 { left: 29mm; top: 0; z-index: 2; width: 41mm !important; height: 87mm !important; }
-  .p3 { left: 60mm; top: 18mm; transform: rotate(6deg); }
+  .devices { position: absolute; z-index: 3; right: 9mm; top: 25mm; width: 98mm; height: 104mm; }
+  .d-ipad { right: 0; top: 4mm; width: 88mm; }
+  .d-phone { position: absolute; left: 0; top: 30mm; width: 33mm; z-index: 2; }
+  .d-watch { right: -4mm; top: 40mm; width: 32mm; z-index: 3; }
   .body { padding: 8mm 13mm 0; }
   .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3.6mm 6mm; margin-top: 4.2mm; }
-  .grid .feat { grid-template-columns: 8mm 1fr; gap: 2.2mm; }
-  .grid .ico { width: 8mm; height: 8mm; border-radius: 2.3mm; }
-  .grid .ico svg { width: 4.4mm; height: 4.4mm; }
+  .grid .feat { grid-template-columns: 6.4mm 1fr; gap: 2mm; }
   .grid .feat h3 { font-size: 8.8pt; }
   .grid .feat p { font-size: 7.3pt; }
   .ai { margin-top: 5mm; border-radius: 4mm; padding: 3.6mm 5mm; display: grid; grid-template-columns: 34mm 1fr 1fr 1fr 1fr; gap: 4mm; align-items: center;
     background: linear-gradient(120deg, #fbf2e1, #f4f9f8); border: .3mm solid #ecd3a6; }
-  .ai .t { font-family: Fraunces, Georgia, serif; font-size: 12pt; font-weight: 600; color: var(--ink); line-height: 1.1; }
-  .ai .t small { display: block; font-family: Inter, sans-serif; font-size: 6.4pt; letter-spacing: 1.2pt; text-transform: uppercase; color: var(--gold); font-weight: 800; margin-bottom: 1mm; }
+  .ai .t { font-family: "Bricolage Grotesque", Inter, sans-serif; font-size: 12pt; font-weight: 600; color: var(--ink); line-height: 1.1; }
   .ai .m b { display: block; font-size: 8.6pt; color: var(--ink); }
   .ai .m .chip { display: table; font-size: 5.4pt; margin: .8mm 0 0; padding: .3mm 1.3mm; }
   .ai .m > span { font-size: 7pt; color: var(--muted); line-height: 1.3; display: block; margin-top: .4mm; }
@@ -37,27 +29,20 @@
 <body>
 <div class="page">
   <div class="hero">
-    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">Clinical decision support</div></div>
+    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">For practising doctors in India</div></div>
     <div class="copy">
-      <div class="kicker">For practising doctors in India</div>
       <h1>The answer, at the bedside.<br><em>Not in a library.</em></h1>
       <p class="lede">Dose for this patient's weight and kidneys. The antibiotic your region's bugs still respect. A cited answer from MaiK. One app on your phone, built on Indian data.</p>
-      <div class="proof">
-        <div><b>4,700+</b><span>disease and<br>syndrome entries</span></div>
-        <div><b>450+</b><span>bedside<br>calculators</span></div>
-        <div><b>108</b><span>Indian antibiogram<br>sources</span></div>
-      </div>
     </div>
-    <div class="phones">
-      <div class="phone p1"><div class="island"></div><div class="scr"><img src="img/abg.jpg" alt=""></div></div>
-      <div class="phone p2"><div class="island"></div><div class="scr"><img src="img/dose.jpg" alt=""></div></div>
-      <div class="phone p3"><div class="island"></div><div class="scr"><img src="img/maik.jpg" alt=""></div></div>
+<div class="devices">
+      <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-abg.jpg" alt=""></div></div>
+      <div class="phone d-phone"><div class="island"></div><div class="scr"><img src="img/dose.jpg" alt=""></div></div>
+      <img class="watch d-watch" src="img/watch-ocean-critical.png" alt="">
     </div>
   </div>
 
   <div class="body">
-    <div class="eyebrow">Everything a clinician reaches for</div>
-    <div class="section-title">From the first question <em>to the discharge</em></div>
+    <h2 class="section-title">From the first question to the discharge</h2>
     <div class="grid">
       <div class="feat"><div class="ico" data-ico="spark"></div><div><h3>MaiK clinical AI</h3><p>Ask in plain words. <b>Cited answers</b> grounded in our knowledge base. Clinical questions only.</p></div></div>
       <div class="feat"><div class="ico" data-ico="calc"></div><div><h3>Dose Calculator</h3><p>Weight, age, <b>CrCl and dialysis</b>, Child-Pugh. From <b>1,532 drug monographs</b>.</p></div></div>
@@ -74,7 +59,7 @@
     </div>
 
     <div class="ai">
-      <div class="t"><small>AI imaging</small>Point the phone. Get a second look.</div>
+      <div class="t">AI imaging: point the phone, get a second look.</div>
       <div class="m"><b>KardiQ X <span class="chip">Early access</span></b><span>ECG photo to rhythm and STEMI check</span></div>
       <div class="m"><b>ThoreX <span class="chip">Early access</span></b><span>Chest X-ray, 18 findings, structured report</span></div>
       <div class="m"><b>FundX <span class="chip">Early access</span></b><span>Smartphone fundus, DR and glaucoma cues</span></div>

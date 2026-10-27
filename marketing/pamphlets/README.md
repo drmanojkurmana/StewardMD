@@ -17,11 +17,24 @@ node render.cjs poster     # one
 ```
 
 `render.cjs` serves this folder, renders with the pre-installed Playwright Chromium and writes
-`out/<name>.pdf` plus a `out/<name>.png` preview (PNGs are gitignored). Fonts (Fraunces, Inter)
-load from Google Fonts at render time and are embedded in the PDF.
+`out/<name>.pdf` plus a `out/<name>.png` preview (PNGs are gitignored). Type follows the app:
+Bricolage Grotesque for display (`--smd-dsp`) and Inter for text, loaded from Google Fonts at render
+time and embedded in the PDF.
 
-Screens in `img/` were captured from the real app bundle in headless Chromium (390 x 844, 3x) on
-2026-10-27. `img/qr.svg` points to https://stewardmd.in.
+Screens in `img/` were captured from the real app bundle in headless Chromium on 2026-10-27:
+phone 390 x 844 @3x, iPad 1180 x 820 @2x. `make-screens.py <capture_dir>` adds the iOS status bar
+(so the notch sits over it, never over the app header) and builds the watch images.
+
+Devices:
+- iPhone and iPad frames are CSS (`pamphlet.css`, `.phone`, `.ipad`).
+- Apple Watch frames in `img/frames/` are the owner's supplied Ultra images (Ocean and Alpine Loop),
+  background removed with `cut-frames.py`. Their source and licence are the owner's call; replace
+  them with Apple's official marketing frames before a large print run.
+- Watch screens are the app's own Code Blue and Critical labs renders (`_site/assets/s/`).
+
+No blurred `box-shadow` anywhere: Chromium writes it into the PDF as a translucent image that the
+iPhone PDF viewer draws as a grey box. The footer credits MaiKnowledge (logo from the company letterhead).
+`img/qr.svg` points to https://stewardmd.in.
 
 ## Where each number comes from (checked 2026-10-27)
 - 4,700+ diseases: live `KB_ENRICHMENT.byId` = 4,770 (Knowledge Library shows "4,770 disease entries").
@@ -33,7 +46,7 @@ Screens in `img/` were captured from the real app bundle in headless Chromium (3
 - 260+ chemo regimens: overview counts 267.
 - 106,367 ICD codes: `vault/modules/ICD Search.md`.
 - 176,430 questions: PrepNucleus bank v4 (`vault/handoff/2026-10-06-prepnucleus.md`). Flag `smd_prep` is default OFF.
-- 1,041 ECG lessons, 3,035 ophthalmology questions, 46 NMC anaesthesia competencies, 35 atlases,
+- 1,041 ECG lessons, 3,035 ophthalmology questions, 46 NMC anaesthesia competencies (Anesthetica), 35 atlases,
   26 kits, 26 FollowCare pathways: the module notes in `vault/modules/`.
 - 3,400+ 3D structures: the 3D Anatomy search box reads "Search 3,432 structures".
 

@@ -39,7 +39,7 @@
       '<span>Free to start. Pro unlocks every module. iPhone and Android.</span>' +
       '<div class="stores"><div class="store">' + apple + '<div><small>Download on the</small><strong>App Store</strong></div></div>' +
       '<div class="store">' + play + '<div><small>GET IT ON</small><strong>Google Play</strong></div></div></div></div>' +
-      '<div class="by"><b>Created by Dr. Manoj Kumar Kurmana</b>stewardmd.in &middot; hello@maiknowledge.com' +
+      '<div class="by"><small>Developed by</small><img class="mk" src="img/maiknowledge.png" alt="MaiKnowledge">stewardmd.in &middot; hello@maiknowledge.com' +
       '<div class="safe">Decision support for registered clinicians. It supports, and never replaces, clinical judgement.</div></div>';
   }
 })();

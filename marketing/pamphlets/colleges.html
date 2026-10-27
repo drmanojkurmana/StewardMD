@@ -9,13 +9,10 @@
   .copy { position: relative; z-index: 2; width: 96mm; margin-top: 11mm; }
   .copy h1 { font-size: 28.5pt; margin: 3mm 0 4mm; }
   .copy .lede { width: 88mm; }
-  .pills { display: flex; flex-wrap: wrap; gap: 1.6mm; margin-top: 5mm; }
-  .pills span { font-size: 7.2pt; font-weight: 600; color: #dff1ec; border: .3mm solid rgba(127,196,184,.45); background: rgba(255,255,255,.06); border-radius: 10mm; padding: 1mm 2.6mm; }
-  .phones { position: absolute; z-index: 3; right: 10mm; top: 27mm; width: 96mm; height: 112mm; }
-  .phones .phone { position: absolute; width: 38mm; height: 81mm; }
-  .p1 { left: 0; top: 16mm; transform: rotate(-6deg); }
-  .p2 { left: 29mm; top: 0; z-index: 2; width: 41mm !important; height: 87mm !important; }
-  .p3 { left: 60mm; top: 18mm; transform: rotate(6deg); }
+  .devices { position: absolute; z-index: 3; right: 9mm; top: 27mm; width: 98mm; height: 104mm; }
+  .d-ipad { right: 0; top: 4mm; width: 88mm; }
+  .d-phone { position: absolute; left: 0; top: 30mm; width: 33mm; z-index: 2; }
+  .d-watch { right: -4mm; top: 40mm; width: 32mm; z-index: 3; }
   .body { padding: 8mm 13mm 0; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.6mm 8mm; margin-top: 4.4mm; }
   .contrast { margin-top: 5.4mm; }
@@ -24,28 +21,25 @@
 <body>
 <div class="page">
   <div class="hero">
-    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">Medical education</div></div>
+    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">For colleges, PG residents and faculty</div></div>
     <div class="copy">
-      <div class="kicker">For colleges, PG residents and faculty</div>
       <h1>Learn it. Log it.<br><em>Do it at the bedside.</em></h1>
       <p class="lede">One app that takes a student from the first history to the PG exam, keeps the NMC logbook your residents must maintain, and stays useful on the ward the day after they qualify.</p>
-      <div class="pills"><span>MBBS</span><span>PG residents</span><span>Faculty and guides</span><span>English and हिन्दी</span><span>Works on the phone</span></div>
     </div>
-    <div class="phones">
-      <div class="phone p1"><div class="island"></div><div class="scr"><img src="img/clinix.jpg" alt=""></div></div>
-      <div class="phone p2"><div class="island"></div><div class="scr"><img src="img/kardia.jpg" alt=""></div></div>
-      <div class="phone p3"><div class="island"></div><div class="scr"><img src="img/tokos.jpg" alt=""></div></div>
+<div class="devices">
+      <div class="ipad d-ipad"><div class="scr"><img src="img/ipad-kardia.jpg" alt=""></div></div>
+      <div class="phone d-phone"><div class="island"></div><div class="scr"><img src="img/clinix.jpg" alt=""></div></div>
+      <img class="watch d-watch" src="img/watch-alpine-codeblue.png" alt="">
     </div>
   </div>
 
   <div class="body">
-    <div class="eyebrow">Built for Indian medical education</div>
-    <div class="section-title">StewardMD supports your department <em>with</em></div>
+    <h2 class="section-title">What your department gets</h2>
     <div class="grid">
       <div class="feat"><div class="ico" data-ico="log"></div><div><h3>NMC PG e-Logbook</h3><p>The digital logbook <b>PGMER-2023</b> requires: weekly entries, monthly guide authentication, faculty verification and a department view.</p></div></div>
       <div class="feat"><div class="ico" data-ico="stetho"></div><div><h3>CliniX bedside skills</h3><p><b>9 systems, 117 topics.</b> History, examination, OSCE and viva on the NMC CBME syllabus, with an AI tutor and a simulated patient.</p></div></div>
       <div class="feat"><div class="ico" data-ico="heart"></div><div><h3>Kardia echo and ECG</h3><p>A 3D chest with a TTE probe, live sector image and real clips, plus <b>1,041 ECG lessons</b> with quizzes.</p></div></div>
-      <div class="feat"><div class="ico" data-ico="target"></div><div><h3>Specialty trainers</h3><p><b>Narkē</b> anaesthesia (46 NMC competencies), <b>Tokós</b> CTG reading on real traces, <b>Ophthalmós</b> with 3,035 questions and simulators.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="target"></div><div><h3>Specialty trainers</h3><p><b>Anesthetica</b> anaesthesia (46 NMC competencies), <b>Tokós</b> CTG reading on real traces, <b>Ophthalmós</b> with 3,035 questions and simulators.</p></div></div>
       <div class="feat"><div class="ico" data-ico="cube"></div><div><h3>RadioAnatome and 3D Anatomy</h3><p><b>35 CT and MRI</b> slice atlases and a whole-body 3D model with <b>3,400+ structures</b>, linked both ways.</p></div></div>
       <div class="feat"><div class="ico" data-ico="book"></div><div><h3>PrepNucleus question bank</h3><p><b>176,430 questions</b> for NEET-PG, INI-CET, NEET-SS, USMLE and FMGE, with spaced repetition and mock tests.</p></div></div>
       <div class="feat"><div class="ico" data-ico="scalpel"></div><div><h3>SURGˣ surgical intelligence</h3><p>Operative notes, protocols, step-by-step procedures, evidence and cases with a senior surgeon's questions.</p></div></div>
