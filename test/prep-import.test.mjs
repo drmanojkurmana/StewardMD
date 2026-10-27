@@ -30,7 +30,7 @@ test("the template and prompt round-trip through parseJson", () => {
   assert.equal(t.items[0].o.length, 4);
   const viaPrompt = P.parseJson("```json\n" + P.template() + "\n```");
   assert.equal(viaPrompt.items.length, 1);
-  assert.match(P.prompt(), /Use ONLY questions that are in the file/);
+  assert.match(P.prompt(), /Use ONLY the questions that are in the file/);
   assert.match(P.prompt(), /stewardmd-mcq-v1/);
   assert.ok(!/—/.test(P.prompt()), "no em dash in app text");
 });
@@ -143,4 +143,30 @@ test("the owner's import goes to the Author review list, undecided", async () =>
   assert.equal(au.list.length, 2);
   assert.ok(au.list.every((r) => r.st === "" && /^imp_/.test(r.it.id) && r.it.prov === "SMD" && !r.it.qg));
   assert.equal(saved, 1); assert.equal(backs, 1);
+});
+
+test("the custom prompt carries exam, subject, topic, count and difficulty, and its template parses back", () => {
+  const t = P.promptFor({ exam: "neet-ss", subject: "Medical Oncology", topic: "Soft tissue sarcoma", n: 20, diff: "hard" });
+  assert.match(t, /TASK: Write 20 NEET-SS multiple choice questions on "Soft tissue sarcoma" \(subject: Medical Oncology\)/);
+  assert.match(t, /All hard/);
+  assert.match(t, /downloadable \.json file/);
+  assert.match(t, /Do not ask me any question/);
+  assert.match(t, /ONE code block holding ONE JSON object/);
+  assert.match(t, /exactly 30 questions|exactly 20 questions/);
+  assert.match(t, /why_wrong: exactly 4 strings in option order/);
+  assert.ok(!/—/.test(t), "no em dash in the prompt");
+  const tpl = t.slice(t.indexOf("\n{\n") + 1, t.indexOf("\n}\n\nBEFORE") + 2);
+  const r = P.parseJson(tpl);
+  assert.equal(r.items.length, 1);
+  assert.deepEqual(r.meta, { exam: "NEET-SS", subject: "Medical Oncology", topic: "Soft tissue sarcoma" });
+  assert.equal(r.title, "Soft tissue sarcoma");
+  assert.match(P.promptFor({ exam: "bogus", n: 999, topic: "X" }), /Write 40 NEET-PG multiple choice/, "unknown exam falls back, count is capped at 40");
+  assert.match(P.promptFor({ exam: "usmle-step1", topic: "Anemia", n: 10, diff: "mix" }), /basic science mechanism/);
+});
+
+test("a .txt reply file with the JSON inside is read", () => {
+  const body = "Here is your module:\n\n" + JSON.stringify({ title: "From a file", questions: [good(1), good(2)] }) + "\n";
+  const r = P.parseJson(body);
+  assert.equal(r.items.length, 2);
+  assert.equal(r.title, "From a file");
 });

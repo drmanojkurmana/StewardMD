@@ -12,6 +12,9 @@
   var TEMPLATE = {
     format: FORMAT,
     title: "Module name",
+    exam: "NEET-PG",
+    subject: "Subject",
+    topic: "Topic",
     questions: [{
       q: "Question stem, ending in a question.",
       options: ["Option A text", "Option B text", "Option C text", "Option D text"],
@@ -26,20 +29,71 @@
   function template() { return JSON.stringify(TEMPLATE, null, 2); }
   function prompt() {
     return [
-      "Convert the multiple choice questions in the attached file into the JSON template below, for the StewardMD PrepNucleus app.",
+      "TASK: Convert the multiple choice questions in the attached file into the JSON format below, for the StewardMD PrepNucleus app.",
       "",
-      "Rules:",
-      "- Use ONLY questions that are in the file. Do not invent, merge or reword them. Keep the stem and options as written.",
+      "HOW TO REPLY (important): answer immediately with the finished JSON and nothing else. Do not ask me any question, do not write an introduction, notes or a closing line, and do not browse. Your whole reply is ONE code block holding ONE JSON object that starts with { and ends with }, so I can copy it with one tap. If you can attach a downloadable .json file, give the same JSON as the file instead.",
+      "",
+      "RULES:",
+      "- Use ONLY the questions that are in the file. Do not invent, merge, skip or reword them. Keep each stem and option as written.",
       "- Exactly 4 options per question, in order. If a question has 5 or more, keep the correct one and the 3 most plausible others.",
-      "- answer is one letter: A, B, C or D, the correct option.",
-      "- explanation: why the correct answer is right, from the file. why_wrong: 4 entries in option order, each a short reason that option is wrong (use an empty string for the correct option or when the file gives no reason).",
-      "- key_point: one short line. difficulty: 1 easy, 2 moderate, 3 hard. tags: 0 to 3 short topic words.",
-      "- Plain text only: no markdown, no bullets, no em dash. Use a hyphen or a comma.",
-      "- Output ONLY one JSON object in one code block, nothing before or after it.",
-      "- More than 40 questions: do the first 40, then continue with the next 40 when I say 'continue'. Same format each time.",
+      "- answer: one letter, A, B, C or D, the correct option as given in the file.",
+      "- explanation: why the answer is right, taken from the file. why_wrong: exactly 4 strings in option order, each a short reason that option is wrong from the file (\"\" for the correct option or when the file gives none).",
+      "- key_point: one short line. difficulty: 1 easy, 2 moderate, 3 hard. tags: 0 to 3 short words.",
+      "- Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma).",
+      "- If there are more than 40 questions, give the first 40 and stop. I will say 'continue' for the next 40, in the same format.",
       "",
-      "Template:",
-      template()
+      "FORMAT (the example shows one question; add every question to the \"questions\" array):",
+      template(),
+      "",
+      "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments) and that each answer letter matches the file. Then output the JSON block only."
+    ].join("\n");
+  }
+
+  /* ---------------- custom prompt: PrepNucleus asks, ChatGPT or Gemini writes ---------------- */
+  var EXAMS = [["neet-pg", "NEET-PG"], ["ini-cet", "INI-CET"], ["fmge", "FMGE"], ["neet-ss", "NEET-SS"], ["ini-ss", "INI-SS"], ["usmle-step1", "USMLE Step 1"], ["usmle-step2-ck", "USMLE Step 2 CK"]];
+  var DIFFS = [["mix", "Exam mix"], ["easy", "Easy"], ["moderate", "Moderate"], ["hard", "Hard"]];
+  var COUNTS = [10, 20, 30, 40];
+  var STYLE = {
+    "neet-pg": "NEET-PG: single best answer, mostly short clinical vignettes, Indian context where it matters.",
+    "ini-cet": "INI-CET: single best answer, application and next-best-step questions, a few direct recalls.",
+    "neet-ss": "NEET-SS: super-speciality entrance, deeper clinical reasoning, current guidelines and landmark trials.",
+    "ini-ss": "INI-SS: super-speciality entrance, deeper clinical reasoning, current guidelines and landmark trials.",
+    "fmge": "FMGE: single best answer, core MBBS clinical subjects, direct and short vignettes.",
+    "usmle-step1": "USMLE Step 1: clinical vignette testing the basic science mechanism behind the disease, no recall-only stems.",
+    "usmle-step2-ck": "USMLE Step 2 CK: clinical vignette asking the next best step in diagnosis or management."
+  };
+  function examLabel(id) { for (var i = 0; i < EXAMS.length; i++) if (EXAMS[i][0] === id) return EXAMS[i][1]; return "NEET-PG"; }
+  function diffLine(id) { return id === "easy" ? "All easy (direct recall of a core fact)." : id === "moderate" ? "All moderate (one reasoning step)." : id === "hard" ? "All hard (two-step reasoning, close distractors)." : "Mix: about 30% easy, 50% moderate, 20% hard."; }
+  /* promptFor({ exam, subject, topic, n, diff }) -> the text a doctor pastes into ChatGPT or Gemini. */
+  function promptFor(o) {
+    o = o || {};
+    var exam = EXAMS.some(function (x) { return x[0] === o.exam; }) ? o.exam : "neet-pg", n = Math.max(1, Math.min(40, parseInt(o.n, 10) || 10));
+    var subject = clean(o.subject, 80) || "Medicine", topic = clean(o.topic, 160) || subject;
+    var t = JSON.parse(JSON.stringify(TEMPLATE));
+    t.title = topic; t.exam = examLabel(exam); t.subject = subject; t.topic = topic;
+    return [
+      "TASK: Write " + n + " " + examLabel(exam) + " multiple choice questions on \"" + topic + "\" (subject: " + subject + ").",
+      "Exam style: " + STYLE[exam],
+      "Difficulty: " + diffLine(o.diff),
+      "",
+      "HOW TO REPLY (important): answer immediately with the finished JSON and nothing else. Do not ask me any question, do not write an introduction, notes or a closing line, and do not browse or use tools. Your whole reply is ONE code block holding ONE JSON object that starts with { and ends with }, so I can copy it with one tap. If you can attach a downloadable .json file, give the same JSON as the file instead.",
+      "",
+      "QUESTIONS:",
+      "- Single best answer, exactly 4 options in the order A, B, C, D, one defensible best answer. Distractors are plausible but clearly wrong for a stated reason.",
+      "- Options are parallel in form and similar in length; the correct option is not the longest. Never use 'all of the above', 'none of the above' or 'both A and B'. Spread the correct letter across A to D.",
+      "- Every question tests a different point. No duplicates or near-duplicates.",
+      "- Facts must be current. Follow NICE where it covers the point; for Indian programmes name the body (NACO, ICMR, NTEP) when it matters. Give a dose or cut-off only if you are sure of it.",
+      "- Never name a textbook, author, website or coaching brand, never say a question was asked in an exam, and never include a patient name or identifier.",
+      "",
+      "EXPLANATIONS (this is what the student learns from):",
+      "- explanation: 2 to 4 sentences. Why the answer is right, the mechanism or the feature that separates it from the others, then the practical take-home.",
+      "- why_wrong: exactly 4 strings in option order. For each wrong option, one sentence on why it is wrong or when it would be right. Use \"\" for the correct option.",
+      "- key_point: one line to memorise. difficulty: 1 easy, 2 moderate, 3 hard. tags: 1 to 3 short words.",
+      "",
+      "FORMAT: copy this structure and these field names exactly. Put all " + n + " questions in the \"questions\" array (the example shows one). Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma).",
+      JSON.stringify(t, null, 2),
+      "",
+      "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments), that there are exactly " + n + " questions, and that each answer letter really is the correct option. Then output the JSON block only."
     ].join("\n");
   }
 
@@ -119,7 +173,7 @@
     var blocks = [], re = /```(?:json)?\s*([\s\S]*?)```/gi, m;
     while ((m = re.exec(s))) blocks.push(m[1]);
     if (!blocks.length) blocks = [s];
-    var title = "", list = [], bad = 0;
+    var title = "", list = [], bad = 0, meta = {};
     blocks.forEach(function (b) {
       var o = null, i = Math.min.apply(null, [b.indexOf("{"), b.indexOf("[")].map(function (v) { return v < 0 ? 1e9 : v; }));
       if (i < 1e9) {
@@ -130,11 +184,13 @@
       if (Array.isArray(o)) list = list.concat(o);
       else if (o && typeof o === "object") {
         if (!title && typeof o.title === "string") title = o.title;
+        ["exam", "subject", "topic"].forEach(function (k) { if (!meta[k] && typeof o[k] === "string") meta[k] = clean(o[k], 160); });
         var qs = o.questions || o.items || o.mcqs || o.q;
         if (Array.isArray(qs)) list = list.concat(qs); else if (o.options || o.question) list.push(o);
       }
     });
-    var res = finishParse(title, list);
+    var res = finishParse(title || meta.topic || "", list);
+    res.meta = meta;
     if (!list.length) res.problems.unshift(bad ? "That is not valid JSON. Copy the whole reply, from { to }." : "No questions found in that JSON.");
     return res;
   }
@@ -211,7 +267,7 @@
     });
   }
 
-  var PURE = { decodePua: decodePua, FORMAT: FORMAT, template: template, prompt: prompt, parseJson: parseJson, parsePdfLines: parsePdfLines, looksLikePdf: looksLikePdf, toItems: toItems, normQ: normQ, clean: clean };
+  var PURE = { promptFor: promptFor, EXAMS: EXAMS, DIFFS: DIFFS, COUNTS: COUNTS, decodePua: decodePua, FORMAT: FORMAT, template: template, prompt: prompt, parseJson: parseJson, parsePdfLines: parsePdfLines, looksLikePdf: looksLikePdf, toItems: toItems, normQ: normQ, clean: clean };
   if (typeof module !== "undefined" && module.exports) module.exports = PURE;
   if (!G || !G.document) return;
 
@@ -222,33 +278,50 @@
   function Q() { return G.PREP_QGEN; }
   function ON(el, ev, fn) { if (el && !el["_im" + ev]) { el["_im" + ev] = 1; el.addEventListener(ev, fn); } }
   function onTop(host) { var r = host.root(); return !!(r && r.querySelector("#imView")); }
-  function newState(mode) { return { mode: mode, text: "", title: "", parsed: null, busy: "", err: "", done: null, src: "" }; }
+  function chip(act, v, label, on) { return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + !!on + '" data-act="' + act + '" data-v="' + v + '">' + label + "</button>"; }
+  function seg(label, id, html) { return '<p class="pc-lbl" id="' + id + '">' + label + '</p><div class="pn-wrap pc-seg" role="group" aria-labelledby="' + id + '">' + html + "</div>"; }
+  function examFor(host) { var id = ""; try { id = host.exam().id; } catch (e) {} return EXAMS.some(function (x) { return x[0] === id; }) ? id : "neet-pg"; }
+  function newState(mode, host) { return { mode: mode, text: "", title: "", parsed: null, busy: "", err: "", done: null, src: "", gen: { exam: examFor(host), subject: "", topic: "", n: 20, diff: "mix" } }; }
   function open(host, mode) {
-    is = newState(mode === "owner" ? "owner" : "student");
+    is = newState(mode === "owner" ? "owner" : "student", host);
     host.push(function () { render(host); });
   }
   function copy(host, text, what) {
     try { G.navigator.clipboard.writeText(text).then(function () { host.toast(what + " copied."); }, function () { host.toast("Copy did not work. Select the text and copy it."); }); }
     catch (e) { host.toast("Copy did not work. Select the text and copy it."); }
   }
+  function subjectNames(host) {
+    try { return (host.subjectsOf(/^(neet|ini)-ss$/.test(is.gen.exam) ? "neet-ss" : /^usmle/.test(is.gen.exam) ? "usmle" : "neet-pg") || []).map(function (x) { var n = x && x.name; return String(n && typeof n === "object" ? (n.en || "") : n || x.id || ""); }).filter(Boolean).slice(0, 60); }
+    catch (e) { return []; }
+  }
   function render(host) {
-    var esc = host.esc, p = is.parsed, owner = is.mode === "owner";
+    var esc = host.esc, p = is.parsed, owner = is.mode === "owner", g = is.gen;
     var sum = "";
     if (p) {
       sum = '<section class="pn-panel" role="status" aria-live="polite"><p><b>' + p.items.length + " question" + (p.items.length === 1 ? "" : "s") + " ready</b>" + (p.problems.length ? " · " + p.problems.length + " skipped" : "") + "</p>" +
         (p.notes && p.notes.length ? '<p class="pn-mut pn-small">' + esc(p.notes.join(" ")) + "</p>" : "") +
         (p.problems.length ? '<ul class="pn-mut pn-small">' + p.problems.slice(0, 8).map(function (t) { return "<li>" + esc(t) + "</li>"; }).join("") + (p.problems.length > 8 ? "<li>and " + (p.problems.length - 8) + " more</li>" : "") + "</ul>" : "") + "</section>";
     }
+    var subs = subjectNames(host);
     host.paint(host.bar("Import MCQs", owner ? "Owner: goes to Author review" : "Private module on this phone", "back") + '<div class="pn-body" id="imView">' +
-      '<p class="pn-mut">No AI, no MaiK Tokens. Use a PDF laid out like the INI-SS recall documents, or a JSON file from ChatGPT or Gemini made with our template.</p>' +
-      '<h2 class="pn-sec">1. From a JSON template</h2>' +
-      '<button type="button" class="pn-btn" data-act="g-imp-copyp">Copy the prompt and template</button>' +
-      '<p class="pn-mut pn-small">Paste it into ChatGPT or Gemini with your PDF attached. It answers with JSON. Paste that below.</p>' +
-      '<label class="pc-lbl" for="imText">Paste the JSON</label><textarea id="imText" name="json" class="pc-in pc-ta" rows="6" placeholder="{ &quot;format&quot;: &quot;' + FORMAT + '&quot; ... }">' + esc(is.text) + "</textarea>" +
-      '<button type="button" class="pn-btn" data-act="g-imp-read"' + (is.busy ? " disabled" : "") + ">Read the pasted JSON</button>" +
-      '<h2 class="pn-sec">2. Or choose a file</h2>' +
-      '<button type="button" class="pc-drop" data-act="g-imp-pick"' + (is.busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (is.src ? esc(is.src) : "Choose a PDF or JSON file") + "</b><small>PDF in the recall layout (MCQ 1:, Question Stem, Options, Correct Answer) or .json</small></span></button>" +
-      '<input type="file" id="imFile" accept="application/pdf,.pdf,application/json,.json,.txt" hidden aria-hidden="true" tabindex="-1">' +
+      '<p class="pn-mut">No MaiK Tokens. PrepNucleus writes the prompt, ChatGPT or Gemini writes the questions and explanations, and you bring the reply back here.</p>' +
+      '<h2 class="pn-sec">1. Make a prompt</h2>' +
+      seg("Exam", "imEL", EXAMS.map(function (x) { return chip("g-imp-exam", x[0], x[1], g.exam === x[0]); }).join("")) +
+      '<label class="pc-lbl" for="imSub">Subject</label><input id="imSub" name="subject" class="pc-in" maxlength="80" autocomplete="off" list="imSubList" placeholder="For example Medical Oncology" value="' + esc(g.subject) + '">' +
+      '<datalist id="imSubList">' + subs.map(function (n) { return '<option value="' + esc(n) + '"></option>'; }).join("") + "</datalist>" +
+      '<label class="pc-lbl" for="imTop">Topic</label><input id="imTop" name="topic" class="pc-in" maxlength="160" autocomplete="off" placeholder="For example Soft tissue sarcoma" value="' + esc(g.topic) + '">' +
+      seg("How many questions", "imNL", COUNTS.map(function (n) { return chip("g-imp-n", n, String(n), g.n === n); }).join("")) +
+      seg("Difficulty", "imDL", DIFFS.map(function (d) { return chip("g-imp-diff", d[0], d[1], g.diff === d[0]); }).join("")) +
+      '<button type="button" class="pn-btn pri" data-act="g-imp-copyg">Copy the prompt</button>' +
+      '<div class="pn-wrap"><button type="button" class="pn-btn" data-act="g-imp-chatgpt">Open ChatGPT</button><button type="button" class="pn-btn" data-act="g-imp-gemini">Open Gemini</button>' +
+      (G.navigator && G.navigator.share ? '<button type="button" class="pn-btn" data-act="g-imp-share">Share</button>' : "") + "</div>" +
+      '<p class="pn-mut pn-small">Paste the prompt into ChatGPT or Gemini and send. It answers with one code block: tap its copy button, come back here and paste. A downloadable .json file works too.</p>' +
+      '<h2 class="pn-sec">2. Bring the reply back</h2>' +
+      '<label class="pc-lbl" for="imText">Paste the reply</label><textarea id="imText" name="json" class="pc-in pc-ta" rows="5" placeholder="{ &quot;format&quot;: &quot;' + FORMAT + '&quot; ... }">' + esc(is.text) + "</textarea>" +
+      '<button type="button" class="pn-btn" data-act="g-imp-read"' + (is.busy ? " disabled" : "") + ">Read the pasted reply</button>" +
+      '<button type="button" class="pc-drop" data-act="g-imp-pick"' + (is.busy ? " disabled" : "") + '><span class="pn-ic sm" style="--h:174" aria-hidden="true">' + host.ico("dl") + "</span><span><b>" + (is.src ? esc(is.src) : "Or choose a file") + "</b><small>The .json or .txt file ChatGPT or Gemini gave you, or a PDF in the INI-SS recall layout</small></span></button>" +
+      '<input type="file" id="imFile" accept="application/pdf,.pdf,application/json,.json,.txt,text/plain" hidden aria-hidden="true" tabindex="-1">' +
+      '<p class="pn-mut pn-small">Already have the questions in a PDF? <button type="button" class="pn-link" data-act="g-imp-copyp">Copy the convert prompt</button> and give it to ChatGPT or Gemini with the PDF.</p>' +
       (is.busy ? '<section class="pn-panel pc-readp" role="status" aria-live="polite"><span class="pc-spin" aria-hidden="true"></span><p class="pn-load">' + esc(is.busy) + "</p></section>" : "") +
       (is.err ? '<p class="pn-err" role="alert" id="imErr" tabindex="-1">' + esc(is.err) + "</p>" : "") + sum +
       (p && p.items.length && !owner ? '<label class="pc-lbl" for="imTitle">Module name</label><input id="imTitle" name="title" class="pc-in" maxlength="120" autocomplete="off" value="' + esc(is.title || p.title) + '">' +
@@ -259,6 +332,8 @@
     var r = host.root(); if (!r) return;
     ON(r.querySelector("#imText"), "input", function () { is.text = r.querySelector("#imText").value; });
     ON(r.querySelector("#imTitle"), "input", function () { is.title = r.querySelector("#imTitle").value; });
+    ON(r.querySelector("#imSub"), "input", function () { is.gen.subject = r.querySelector("#imSub").value; });
+    ON(r.querySelector("#imTop"), "input", function () { is.gen.topic = r.querySelector("#imTop").value; });
     ON(r.querySelector("#imFile"), "change", function () { var f = r.querySelector("#imFile"); if (f.files && f.files[0]) pickFile(f.files[0], host); });
   }
   function fail(host, m) { is.err = m; is.busy = ""; if (onTop(host)) host.rerender(); }
@@ -330,7 +405,7 @@
     var p = is.parsed, D = DK(); if (!p || !p.items.length || !D) return;
     var title = clean(is.title || p.title || "Imported module", 120) || "Imported module", now = Date.now();
     var id = "imp_" + D.sha12("import:" + now + ":" + Math.random() + ":" + title);
-    var exam = (Q() && host.exam && host.exam().id) || "neet-pg";
+    var exam = is.gen.exam;
     var items = toItems(p, { deckId: id, sha12: D.sha12, exam: exam, title: title, owner: false });
     items.forEach(function (it) { it.deckId = id; it._s = "deck"; it._m = "deck-" + id; });
     var m = D.newManifest({ id: id, title: title, exam: exam, profileV: 1, pv: "imp1", model: "import", source: { type: "import", name: title, pages: null, sha: id }, now: now });
@@ -352,10 +427,25 @@
     host.back(); host.toast(n + " added to the review list.");
   }
 
+  function openOut(host, url) { try { G.open(url, "_blank", "noopener"); } catch (e) { host.toast("Could not open the app. Paste the prompt there yourself."); } }
+  function readGen(host) {
+    var r = host.root(), sv = r && r.querySelector("#imSub"), tv = r && r.querySelector("#imTop");
+    if (sv) is.gen.subject = sv.value; if (tv) is.gen.topic = tv.value;
+    if (!clean(is.gen.topic) && !clean(is.gen.subject)) { host.toast("Type a subject or a topic first."); return null; }
+    return promptFor(is.gen);
+  }
   function act(a, el, host) {
     if (a === "g-imp") return open(host, "student");
     if (a === "g-imp-owner") return open(host, "owner");
     if (!is) return;
+    var v = el && el.getAttribute("data-v");
+    if (a === "g-imp-exam") { is.gen.exam = v; return host.rerender(); }
+    if (a === "g-imp-n") { is.gen.n = +v || 20; return host.rerender(); }
+    if (a === "g-imp-diff") { is.gen.diff = v; return host.rerender(); }
+    if (a === "g-imp-copyg") { var t0 = readGen(host); return t0 && copy(host, t0, "Prompt"); }
+    if (a === "g-imp-chatgpt") { var t1 = readGen(host); if (!t1) return; copy(host, t1, "Prompt"); return openOut(host, "https://chatgpt.com/?q=" + encodeURIComponent(t1)); }
+    if (a === "g-imp-gemini") { var t2 = readGen(host); if (!t2) return; copy(host, t2, "Prompt"); return openOut(host, "https://gemini.google.com/app"); }
+    if (a === "g-imp-share") { var t3 = readGen(host); if (!t3) return; try { return G.navigator.share({ text: t3 }); } catch (e) { return copy(host, t3, "Prompt"); } }
     if (a === "g-imp-copyp") return copy(host, prompt(), "Prompt");
     if (a === "g-imp-read") return readJson(host);
     if (a === "g-imp-pick") { var f = host.root() && host.root().querySelector("#imFile"); if (f) { f.value = ""; f.click(); } return; }
