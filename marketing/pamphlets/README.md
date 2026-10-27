@@ -7,7 +7,9 @@ Print pieces for the app (benchmark: ClinicalKey's two A4 notice-board sheets).
 | `colleges.html` | A4 | Medical colleges, PG residents, faculty |
 | `clinicians.html` | A4 | Practising doctors |
 | `numbers.html` | A4 | Everyone: "Only on StewardMD" numbers sheet |
-| `poster.html` | A3 | Corridor poster combining all three |
+| `poster.html` | A3 | Corridor poster A: "Learn it. Look it up." (Echo Lab, CliniX, Dose, Code Blue watch) |
+| `poster-food.html` | A3 | Poster B: "Before food or after, doctor?" (metoprolol monograph, Quick facts > Meal) |
+| `poster-mechanism.html` | A3 | Poster C: "Don't memorise the mechanism." (How beta-blockers work figure) |
 
 Print-ready PDFs are in `out/`. Rebuild after any edit:
 
@@ -53,6 +55,8 @@ iPhone PDF viewer draws as a grey box. The footer credits MaiKnowledge (logo fro
 - 176,430 questions: PrepNucleus bank v4 (`vault/handoff/2026-10-06-prepnucleus.md`). Flag `smd_prep` is default OFF.
 - 1,041 ECG lessons, 3,035 ophthalmology questions, 46 NMC anaesthesia competencies (Anesthetica), 35 atlases,
   26 kits, 26 FollowCare pathways: the module notes in `vault/modules/`.
+- 337 interactive figures (257 animated): `prep/figures/figures.json`.
+- 400,000+ Indian brands: the Drugs screen's own count (`api.js` `#dbCount`, 412,224).
 - 3,400+ 3D structures: the 3D Anatomy search box reads "Search 3,432 structures".
 
 KardiQ X, ThoreX, FundX and SknX carry an "Early access" chip: they sit behind the access code.

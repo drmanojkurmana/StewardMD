@@ -1,14 +1,14 @@
 """Prepare device images for the pamphlets.
 
-Phones and the foldable: each capture gets its platform's status bar (sized so the Dynamic Island or the
+Phones: each capture gets its platform's status bar (sized so the Dynamic Island or the
 punch-hole camera sits inside it, never over the app header), then goes into the owner's frame
-(img/frames/iphone.png, android.png, fold.png: transparent outside and in the screen). The screen is cut
+(img/frames/iphone.png, android.png: transparent outside and in the screen). The screen is cut
 to the frame's own opening, so the image fills it exactly and its corners follow the glass.
 iPad: the capture plus an iOS status bar; the frame is CSS (.ipad in pamphlet.css).
 Watch: the app's own Code Blue / Critical labs renders (_site/assets/s/) inside the owner's Ultra frames.
 
 Usage: python3 make-screens.py <capture_dir>
-  <capture_dir> holds ios-<n>.png (393x798 @3x), and-<n>.png (412x874 @3x), fold-<n>.png (640x846 @2.5x)
+  <capture_dir> holds ios-<n>.png (393x798 @3x), and-<n>.png (412x874 @3x)
   and ipad-<n>.png (1180x820 @2x).
 """
 import os
@@ -26,18 +26,16 @@ FONT = "/usr/share/fonts/opentype/inter/Inter-SemiBold.otf"
 DEVICES = {
     "ios": ("iphone.png", 393, 54, "ios"),
     "and": ("android.png", 412, 44, "android"),
-    "fold": ("fold.png", 640, 84, "android"),
 }
 SHOTS = {
-    "ios": ["home", "clinix", "dose"],
-    "and": ["maik", "kbl", "abg", "dose"],
-    "fold": ["angio", "kardia"],
+    "ios": ["home", "clinix", "dose", "mono", "beta"],
+    "and": ["maik", "kbl", "dose", "mono", "beta"],
 }
-IPADS = ["angio", "kardia", "abg"]
+IPADS = ["angio", "kardia", "abg", "mono", "beta"]
 WATCH = {"codeblue": "watch-frame-codeblue.png", "critical": "watch-frame-critical.png"}
 WATCH_BOX = (62, 246, 620, 926)  # display area inside the 720x1172 watch renders
 WATCH_FRAMES = {"ocean": "ocean-frame.png", "alpine": "alpine-frame.png"}
-WATCHES = [("alpine", "codeblue"), ("ocean", "codeblue"), ("ocean", "critical")]
+WATCHES = [("alpine", "codeblue"), ("ocean", "critical")]
 
 
 def _fg(img):
