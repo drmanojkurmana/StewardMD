@@ -112,15 +112,19 @@
     clearTimeout(dwell); dwell = setTimeout(function () { commit(L); }, 220);
   }
 
+  var hideT = 0;
   function sync() {
     timer = 0;
     var ch = findChips(), show = !!(ch && overlayVisible(ch.row));
     // iPad split view (list left, detail right): the strip would sit on the right edge of the DETAIL pane, over its
     // text, and the A-Z chips are already on screen in the list. Only show it when the list reaches the right edge.
     if (show) { try { if (ch.row.getBoundingClientRect().right < window.innerWidth * 0.75) show = false; } catch (e) {} }
-    if (!show) { if (strip) { strip.style.opacity = "0"; strip.style.pointerEvents = "none"; strip.style.transform = "translate(8px,-50%)"; } return; }
+    // Hidden means hidden: once faded out it also leaves layout visibility, so its letters are not on screen
+    // 8 px past the edge (foldable inner screen and split view, where the list stops short of the right edge).
+    if (!show) { if (strip) { strip.style.opacity = "0"; strip.style.pointerEvents = "none"; strip.style.transform = "translate(8px,-50%)"; clearTimeout(hideT); hideT = setTimeout(function () { if (strip && strip.style.opacity === "0") strip.style.visibility = "hidden"; }, 220); } return; }
     if (!strip || !strip.isConnected) build();
     ABC.forEach(function (L, i) { strip.children[i].style.opacity = ch.map[L] ? "1" : ".28"; });
+    clearTimeout(hideT); strip.style.visibility = "visible";
     strip.style.opacity = "1"; strip.style.pointerEvents = "auto"; strip.style.transform = "translate(0,-50%)";
   }
   function schedule() { if (!timer) timer = setTimeout(sync, 120); }

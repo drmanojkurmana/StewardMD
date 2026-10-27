@@ -11891,3 +11891,16 @@ Owner asked to remove "Created by Annas Rahman · annasrahman.com" (AngioLAB) an
 Owner: "Rename narke to Anesthetica (both in posters and inside app)". Display strings only (EN + HI);
 every identifier stays `narke` so flags, routes, stored progress (`storeKey`) and the Review Desk ledger keep working.
 Same pattern as SURGX (brand in strings, ASCII id in code).
+
+## 2026-10-27: Foldables (Galaxy Z Fold / Pixel Fold class) are audited like iPads
+Owner: "make our app layouts support duo too". `DEVICES=fold node test/run-ipad-fit.mjs` runs every Home action at the
+cover screen (344 x 882), inner portrait (712 x 840), inner landscape (841 x 701) and a spanned width (1114 x 720).
+- Android keeps the activity across fold/unfold (`configChanges` already has screenSize, smallestScreenSize,
+  screenLayout), and auto fit re-zooms on the width change, so no state is lost.
+- targetSdk 36: Android 16 ignores `screenOrientation="portrait"` on large screens (sw >= 600dp), so an unfolded
+  phone runs the app in landscape. Every module must work landscape; the audit covers it.
+- First run: every tool fit except the Drugs A-Z strip, faded but 6 px off-screen at inner widths; fixed
+  (`az-scrubber.js`: visibility hidden after the fade). AngioLAB's 3D tool strip was a fixed 36 px while its
+  buttons wrapped to two rows (iPad, inner landscape); `kardia/angiolab/kardia-embed.js` lets it grow.
+- Dual screens with a physical gap (Surface Duo) open apps on one screen by default; no hinge-specific layout was
+  built. Revisit with the Viewport Segments API only if a spanned layout is asked for.

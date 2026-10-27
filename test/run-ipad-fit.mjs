@@ -15,7 +15,15 @@ const ALL = "home startcase reasoning search cases calculators guidelines drugs 
 const outDir = process.env.OUT || ((process.env.CLAUDE_JOB_DIR || "/tmp") + "/ipad-fit"), actsArg = process.argv[2] || ALL.join(",");
 mkdirSync(outDir, { recursive: true });
 const acts = actsArg.split(",");
-const SIZES = [[820, 1180, "ipad-p"], [1180, 820, "ipad-l"], [1024, 1366, "pro-p"], [1366, 1024, "pro-l"]];
+// DEVICES=fold audits foldables instead (owner 2026-10-27: "make our app layouts support duo too"): the cover screen,
+// the inner screen portrait (Galaxy Z Fold class) and landscape (Pixel Fold class; Android 16 ignores the portrait lock
+// on large screens for SDK 36 apps), and a spanned dual screen. Each size carries its own screen so the app's own
+// tablet detection (screen min side >= 600) sees what the device reports.
+const FOLD = process.env.DEVICES === "fold";
+const SIZES = FOLD
+  ? [[344, 882, "cover", 344, 882], [712, 840, "inner-p", 712, 840], [841, 701, "inner-l", 841, 701], [1114, 720, "duo-span", 1114, 720]]
+  : [[820, 1180, "ipad-p", 820, 1366], [1180, 820, "ipad-l", 820, 1366], [1024, 1366, "pro-p", 1024, 1366], [1366, 1024, "pro-l", 1024, 1366]];
+const SHOT = FOLD ? ["cover", "inner-l"] : ["ipad-p", "pro-l"];
 const port = 9300 + Math.floor(Math.random() * 600);
 const chrome = spawn("/opt/pw-browsers/chromium", ["--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--mute-audio", ...(process.env.LEGACY ? ["--disable-blink-features=StandardizedBrowserZoom"] : []), `--remote-debugging-port=${port}`, `--user-data-dir=/tmp/ipad-${port}`, "about:blank"], { stdio: "ignore" });
 let tabs; for (let i = 0; i < 60; i++) { try { tabs = await (await fetch(`http://127.0.0.1:${port}/json`)).json(); if (tabs.length) break; } catch {} await sleep(100); }
@@ -75,7 +83,7 @@ const MEASURE = `(function(){
 })()`;
 for (const act of acts) {
   errs = [];
-  await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 1, mobile: true, screenWidth: 1024, screenHeight: 1366 }); await call("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
+  await call("Emulation.setDeviceMetricsOverride", { width: SIZES[0][0], height: SIZES[0][1], deviceScaleFactor: 1, mobile: true, screenWidth: SIZES[0][3], screenHeight: SIZES[0][4] }); await call("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
   await call("Page.navigate", { url: "http://localhost:8994/?tour=0&prep=1&clinix=1" });
   for (let i = 0; i < 100; i++) { if (await ev("!!document.getElementById('homeV2')")) break; await sleep(200); }
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}), true`);
@@ -85,20 +93,20 @@ for (const act of acts) {
     await ev(`(function(){var b=document.createElement('button');b.setAttribute('data-act',${JSON.stringify(act)});b.style.cssText='position:fixed;left:-50px;top:0;width:1px;height:1px';document.getElementById('homeV2').appendChild(b);b.click();b.remove();return 1})()`);
     await sleep(3500);
   }
-  for (const [w, h, tag] of SIZES) {
-    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: true, screenWidth: Math.min(w,h) < 900 ? 820 : 1024, screenHeight: 1366 });
+  for (const [w, h, tag, sw, sh] of SIZES) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 1, mobile: true, screenWidth: sw, screenHeight: sh });
     await sleep(700);
     res.sizes[tag] = await ev(MEASURE); res.sizes[tag].zoom = await ev("document.documentElement.style.zoom");
-    if (tag === "ipad-p" || tag === "pro-l") {
+    if (SHOT.includes(tag)) {
       const shot = await call("Page.captureScreenshot", { format: "jpeg", quality: 60 });
       if (shot.result) writeFileSync(`${outDir}/${act}-${tag}.jpg`, Buffer.from(shot.result.data, "base64"));
     }
   }
   res.errors = errs.slice(0, 5);
   writeFileSync(`${outDir}/${act}.json`, JSON.stringify(res, null, 1));
-  const s = res.sizes; console.log(act, Object.keys(s).map(k => `${k}:${s[k].n}/${s[k].docOver}@${s[k].zoom}`).join(" "), s["ipad-p"].layer);
+  const s = res.sizes; console.log(act, Object.keys(s).map(k => `${k}:${s[k].n}/${s[k].docOver}@${s[k].zoom}`).join(" "), s[SIZES[0][2]].layer);
 }
 chrome.kill();
 const bad = []; for (const a of acts) { try { const r = JSON.parse((await import("node:fs")).readFileSync(`${outDir}/${a}.json`, "utf8")); for (const k in r.sizes) if (r.sizes[k].n) bad.push(a + "@" + k + ": " + JSON.stringify(r.sizes[k].rows.concat(r.sizes[k].low || []).slice(0, 3))); } catch (e) { bad.push(a + ": no result"); } }
 if (bad.length) { console.log("\nFAIL\n" + bad.join("\n")); process.exit(1); }
-console.log("\nall " + acts.length + " screens fit at 4 iPad sizes"); process.exit(0);
+console.log("\nall " + acts.length + " screens fit at 4 " + (FOLD ? "foldable" : "iPad") + " sizes"); process.exit(0);
