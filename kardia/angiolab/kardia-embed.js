@@ -4,6 +4,25 @@
  * no tap flash, no pull-to-refresh, controls are not selectable, and the
  * home indicator does not cover the last row. The top inset stays with
  * the Kardia shell, which already clears the notch. */
+/* Kardia full screen: iOS shows its own "is in full screen, swipe down" banner for the Fullscreen API and leaves the app
+ * mis-sized after it exits. Emulate the API instead (state plus fullscreenchange) and tell the Kardia page, which hides its
+ * own header and tabs so the lab fills the screen. */
+(function () {
+  "use strict";
+  var on = false, el = null, D = document;
+  function fire() {
+    ["fullscreenchange", "webkitfullscreenchange"].forEach(function (n) { try { D.dispatchEvent(new Event(n)); } catch (e) {} });
+    try { parent.postMessage({ krdFs: on }, "*"); } catch (e) {}
+  }
+  function req() { on = true; el = this; fire(); return Promise.resolve(); }
+  function ex() { if (on) { on = false; el = null; fire(); } return Promise.resolve(); }
+  try {
+    Element.prototype.requestFullscreen = req; Element.prototype.webkitRequestFullscreen = req;
+    D.exitFullscreen = ex; D.webkitExitFullscreen = ex;
+    ["fullscreenEnabled", "webkitFullscreenEnabled"].forEach(function (k) { Object.defineProperty(D, k, { get: function () { return true; }, configurable: true }); });
+    ["fullscreenElement", "webkitFullscreenElement"].forEach(function (k) { Object.defineProperty(D, k, { get: function () { return el; }, configurable: true }); });
+  } catch (e) {}
+})();
 (function () {
   "use strict";
   var css = "html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}" +
