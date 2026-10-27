@@ -266,3 +266,8 @@ body:not(.dark):not(.v3-dark) .krd-root {
   .krd-root .krd-echo-scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
   .krd-root .krd-echo-scroll:has(.krd-probe-wrap) { padding-bottom: 0; }
 }
+
+/* Lab full screen: header and tabs go, the lab fills the screen below the status bar. */
+.krd-root.krd-fs { padding-top: env(safe-area-inset-top, 0px); }
+.krd-root.krd-fs .sp-top, .krd-root.krd-fs .krd-tabs, .krd-root.krd-fs .sp-levelrow { display: none; }
+body:has(.krd-root.krd-fs) #smdTopBack { visibility: hidden !important; pointer-events: none !important; }
