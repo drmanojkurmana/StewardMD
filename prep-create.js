@@ -180,8 +180,9 @@
   function deckStats(m, store, today) {
     var n = DK.questionCount(m), pg = deckProgress(store, m.id, today), md = (store && store.mod && store.mod["deck-" + m.id]) || null;
     var t = md ? +md.t || 0 : 0, ok = md ? +md.ok || 0 : 0;
-    var max = m && m.qgen ? QGEN_MAX : DECK_MAX;   // a MaiK module (prep-qgen.js) holds up to 30
-    return { n: n, max: max, answered: Math.min(pg.answered, n), due: pg.due, cardsDue: pg.cardsDue, acc: t ? Math.round(ok * 100 / t) : null, attempts: t, full: n >= max };
+    var imp = !!(m && m.source && m.source.type === "import");   // an imported module (prep-import.js) is as big as the file
+    var max = imp ? Math.max(1, n) : m && m.qgen ? QGEN_MAX : DECK_MAX;   // a MaiK module (prep-qgen.js) holds up to 30
+    return { n: n, max: max, answered: Math.min(pg.answered, n), due: pg.due, cardsDue: pg.cardsDue, acc: t ? Math.round(ok * 100 / t) : null, attempts: t, full: !imp && n >= max, imp: imp };
   }
   /* A deck cut off mid-round, or a MaiK module short of its asked count: "Partly made, N of M, tap to finish" for
      Your decks, else "". n is the questions in the deck now. */
@@ -805,7 +806,8 @@
       if (tb) tb.innerHTML = "<h1>" + esc(m.title) + "</h1><p>" + esc(examLabel(m.exam)) + (m.diff && m.diff !== "mix" ? " · " + esc(diffLabel(m.diff)) : "") + "</p>";
       var frac = st.n ? Math.min(1, st.answered / st.n) : 0;
       var more;
-      if (mk) more = st.full ? '<p class="pc-morel"><b>All ' + st.max + ' questions made.</b> Create another module for more.</p>' :
+      if (st.imp) more = '<p class="pc-morel">Imported module with ' + st.n + ' questions. Import another file for more.</p>';
+      else if (mk) more = st.full ? '<p class="pc-morel"><b>All ' + st.max + ' questions made.</b> Create another module for more.</p>' :
         G.PREP_QGEN && G.PREP_QGEN.canCreate() ? '<button type="button" class="pn-btn pri" data-act="g-more" data-d="' + id + '">' + host.ico("plus") + " Make " + Math.min(10, st.max - st.n) + " more questions</button>" +
           '<p class="pn-mut pn-small">' + st.n + " of " + st.max + " in this module.</p>" : '<p class="pc-morel">' + st.n + " of " + st.max + " questions. More can be added when MaiK modules are available.</p>";
       else if (st.full) more = '<p class="pc-morel"><b>All ' + st.max + ' questions made.</b> Make a new deck from the next chapter for more.</p>';

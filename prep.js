@@ -2064,6 +2064,7 @@
       row("downloads", ico("dl"), "Offline content", "Lessons and cards kept offline; questions need a connection") +
       (G.PREP_IDS ? row("id-screen", ico("search"), "Open a shared ID", "A question or lesson a friend sent you") : "") +
       (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
+      (G.PREP_IMPORT ? row("g-imp", ico("dl"), "Import MCQs", "From a JSON template or a PDF, no AI cost") : "") +
       (G.PREP_QGEN && G.PREP_QGEN.isOwner() ? row("g-author", ico("gear"), "Author", "Owner only: write, check and stage new questions") : "") + "</div>" +
       '<h2 class="pn-sec">You</h2><div class="pn-group">' +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days, share your progress") : "") +
@@ -3364,6 +3365,7 @@
       var known = subs.every(function (sb) { return !!st.ix[sb.id]; });
       body = '<div class="pn-group">' + row("custom", ico("plus"), "Custom module", "Your own mix of subjects and count") +
         (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
+        (G.PREP_IMPORT ? row("g-imp", ico("dl"), "Import MCQs", "From a JSON template or a PDF, no AI cost") : "") +
         row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
         row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") + "</div>" +
         '<h2 class="pn-h">Subjects</h2><p class="pn-mut pn-small pn-qbs" id="pnQbS">' + qbSummary(subs, known) + '</p><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>";
@@ -4374,6 +4376,7 @@
     // Share IDs (prep-ids.js) own every data-act starting "id-".
     if (a.indexOf("id-") === 0 && G.PREP_IDS) return G.PREP_IDS.act(a, b, HOST);
     // MaiK modules and the owner's Author screen (prep-qgen.js) own every data-act starting "g-".
+    if (a.indexOf("g-imp") === 0 && G.PREP_IMPORT) return G.PREP_IMPORT.act(a, b, HOST);
     if (a.indexOf("g-") === 0 && G.PREP_QGEN) return G.PREP_QGEN.act(a, b, HOST);
     // Friends, groups and the accuracy page (prep-social.js).
     if (a === "soc-open") return G.PrepSocial && G.PrepSocial.open && G.PrepSocial.open(HOST);

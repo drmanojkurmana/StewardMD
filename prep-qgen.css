@@ -70,3 +70,5 @@
 .pn-root .qg-adv { align-self: flex-start; }
 .pn-root select#qgChap { min-height: 48px; }
 @media (prefers-reduced-motion: reduce) { .pn-root .qg-pv img { animation: none; } }
+/* Import MCQs (prep-import.js): a long file name wraps instead of running off the card. */
+.pc-drop b { overflow-wrap: anywhere; }
