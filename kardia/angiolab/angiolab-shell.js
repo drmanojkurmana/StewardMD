@@ -341,6 +341,20 @@
     study.appendChild(b);
   }
 
+  function parkSliders() {
+    var body = document.querySelector(".angio-body");
+    if (!body) return;
+    var host = body.querySelector(".angio-keys");
+    if (!host) {
+      host = el("div", "angio-keys");
+      body.appendChild(host);
+    }
+    var sliders = document.querySelectorAll(".gslider");
+    for (var i = 0; i < sliders.length; i++) {
+      if (sliders[i].parentElement !== host) host.appendChild(sliders[i]);
+    }
+  }
+
   function ensureResetIcon() {
     var b = document.querySelector(".angio-reset");
     if (!b || b.querySelector("svg")) return;
@@ -393,6 +407,7 @@
       document.querySelector(".o-gantry")
     ]);
     ensureSources(shell.study);
+    parkSliders();
     var presets = document.querySelectorAll(".preset");
     for (var i = 0; i < presets.length; i++) thumbFor(presets[i]);
     placing = false;

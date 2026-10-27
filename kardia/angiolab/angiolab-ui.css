@@ -48,6 +48,8 @@ html.angio-ready .angio-body {
 
 html.angio-ready .angio-tools {
   grid-area: tools;
+  position: relative;
+  z-index: 2;
   color-scheme: light;
   display: flex;
   flex-direction: column;
@@ -279,8 +281,22 @@ html.angio-ready .o-gantry .panel-label {
   display: none !important;
 }
 
-html.angio-ready .ctl-short { display: none !important; }
-html.angio-ready .ctl-long { display: inline !important; }
+html.angio-ready .ctl-short,
+html.angio-ready .short { display: none !important; }
+html.angio-ready .ctl-long,
+html.angio-ready .long { display: inline !important; }
+
+html.angio-ready .angio-keys {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  opacity: 0.02;
+  z-index: 1;
+  pointer-events: none;
+}
 
 html.angio-ready .seg {
   display: flex !important;
@@ -471,7 +487,7 @@ html.angio-ready .o-gantry {
   box-shadow: none !important;
 }
 
-html.angio-ready .o-gantry > :first-child {
+html.angio-ready .o-gantry > :first-child:not(:has(.preset)) {
   position: absolute !important;
   width: 44px !important;
   height: 44px !important;
