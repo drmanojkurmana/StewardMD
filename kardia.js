@@ -305,7 +305,7 @@
     mountHeaderSyncProbe(doc);
     var frame = doc.getElementById("krdProbeFrame"); if (!frame) return;
     var status = doc.getElementById("krdProbeStatus"), err = doc.getElementById("krdProbeErr");
-    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); watchFrameTheme(frame, "probe"); }
+    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); watchFrameTheme(frame, "probe"); fillFrameWidth(frame); }
     function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
     fitProbeFrame(frame);
@@ -1034,11 +1034,35 @@
     frame._krdThemeMo = new G.MutationObserver(function () { if (!frame.isConnected) { frame._krdThemeMo.disconnect(); return; } again(); });
     frame._krdThemeMo.observe(G.document.body, { attributes: true, attributeFilter: ["class"] });
   }
+  /* iOS lays the lab page out narrower than its frame element (a ~20pt blank strip down the right, owner 2026-10-27, twice).
+   * Measure the page's own viewport against the box and widen the frame by the shortfall; the box clips the excess. A no-op
+   * where the page already fills the box (desktop, iPad). */
+  function fillFrameWidth(frame) {
+    function fit() {
+      if (!frame.isConnected) { G.removeEventListener("resize", fit); return; }
+      try {
+        var box = frame.parentNode, want = box.clientWidth, fw = frame.contentWindow, de = frame.contentDocument && frame.contentDocument.documentElement;
+        if (!want || !fw || !de) return;
+        box.style.overflow = "hidden";
+        frame.style.maxWidth = "none"; frame.style.flex = "0 0 auto";
+        var w = want;
+        for (var i = 0; i < 4; i++) {
+          frame.style.width = w + "px";
+          var got = de.clientWidth || fw.innerWidth || w, d = want - got;
+          if (Math.abs(d) < 1) break;
+          w = Math.max(want, w + d);
+        }
+      } catch (e) {}
+    }
+    fit(); G.setTimeout(fit, 300); G.setTimeout(fit, 1200); G.setTimeout(fit, 3000);
+    if (frame.addEventListener) frame.addEventListener("load", function () { fit(); G.setTimeout(fit, 800); });
+    G.addEventListener("resize", fit);
+  }
   function mountAngioLab() {
     var doc = G.document; if (!doc || !doc.getElementById) return;
     var frame = doc.getElementById("krdAngioFrame"); if (!frame) return;
     var status = doc.getElementById("krdAngioStatus"), err = doc.getElementById("krdAngioErr");
-    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; watchFrameTheme(frame, "angio"); }
+    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; watchFrameTheme(frame, "angio"); fillFrameWidth(frame); }
     function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
     try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
