@@ -17,7 +17,6 @@
   st.id = "kardiaAngioEmbed";
   st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
-  if (window.parent !== window) document.documentElement.classList.add("angio-framed");
   function local(url) {
     if (typeof url !== "string" || url.charAt(0) !== "/") return url;
     if (url.indexOf("/anatomy/") === 0) return "anatomy/" + url.slice("/anatomy/".length);
