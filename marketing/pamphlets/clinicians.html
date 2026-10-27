@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StewardMD for Clinicians</title>
+<link rel="stylesheet" href="pamphlet.css">
+<style>
+  .hero { height: 122mm; }
+  .copy { position: relative; z-index: 2; width: 96mm; margin-top: 11mm; }
+  .copy h1 { font-size: 28.5pt; margin: 3mm 0 4mm; }
+  .copy .lede { width: 88mm; }
+  .proof { display: flex; gap: 6mm; margin-top: 5.5mm; }
+  .proof div { border-left: .5mm solid var(--mint-2); padding-left: 2.6mm; }
+  .proof b { display: block; font-family: Fraunces, Georgia, serif; font-size: 17pt; font-weight: 600; color: #fff; line-height: 1; }
+  .proof span { font-size: 6.8pt; color: rgba(255,255,255,.7); line-height: 1.3; display: block; margin-top: 1mm; }
+  .phones { position: absolute; z-index: 3; right: 10mm; top: 25mm; width: 96mm; height: 112mm; }
+  .phones .phone { position: absolute; width: 38mm; height: 81mm; }
+  .p1 { left: 0; top: 16mm; transform: rotate(-6deg); }
+  .p2 { left: 29mm; top: 0; z-index: 2; width: 41mm !important; height: 87mm !important; }
+  .p3 { left: 60mm; top: 18mm; transform: rotate(6deg); }
+  .body { padding: 8mm 13mm 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3.6mm 6mm; margin-top: 4.2mm; }
+  .grid .feat { grid-template-columns: 8mm 1fr; gap: 2.2mm; }
+  .grid .ico { width: 8mm; height: 8mm; border-radius: 2.3mm; }
+  .grid .ico svg { width: 4.4mm; height: 4.4mm; }
+  .grid .feat h3 { font-size: 8.8pt; }
+  .grid .feat p { font-size: 7.3pt; }
+  .ai { margin-top: 5mm; border-radius: 4mm; padding: 3.6mm 5mm; display: grid; grid-template-columns: 34mm 1fr 1fr 1fr 1fr; gap: 4mm; align-items: center;
+    background: linear-gradient(120deg, #fbf2e1, #f4f9f8); border: .3mm solid #ecd3a6; }
+  .ai .t { font-family: Fraunces, Georgia, serif; font-size: 12pt; font-weight: 600; color: var(--ink); line-height: 1.1; }
+  .ai .t small { display: block; font-family: Inter, sans-serif; font-size: 6.4pt; letter-spacing: 1.2pt; text-transform: uppercase; color: var(--gold); font-weight: 800; margin-bottom: 1mm; }
+  .ai .m b { display: block; font-size: 8.6pt; color: var(--ink); }
+  .ai .m .chip { display: table; font-size: 5.4pt; margin: .8mm 0 0; padding: .3mm 1.3mm; }
+  .ai .m > span { font-size: 7pt; color: var(--muted); line-height: 1.3; display: block; margin-top: .4mm; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="hero">
+    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">Clinical decision support</div></div>
+    <div class="copy">
+      <div class="kicker">For practising doctors in India</div>
+      <h1>The answer, at the bedside.<br><em>Not in a library.</em></h1>
+      <p class="lede">Dose for this patient's weight and kidneys. The antibiotic your region's bugs still respect. A cited answer from MaiK. One app on your phone, built on Indian data.</p>
+      <div class="proof">
+        <div><b>4,700+</b><span>disease and<br>syndrome entries</span></div>
+        <div><b>450+</b><span>bedside<br>calculators</span></div>
+        <div><b>108</b><span>Indian antibiogram<br>sources</span></div>
+      </div>
+    </div>
+    <div class="phones">
+      <div class="phone p1"><div class="island"></div><div class="scr"><img src="img/abg.jpg" alt=""></div></div>
+      <div class="phone p2"><div class="island"></div><div class="scr"><img src="img/dose.jpg" alt=""></div></div>
+      <div class="phone p3"><div class="island"></div><div class="scr"><img src="img/maik.jpg" alt=""></div></div>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="eyebrow">Everything a clinician reaches for</div>
+    <div class="section-title">From the first question <em>to the discharge</em></div>
+    <div class="grid">
+      <div class="feat"><div class="ico" data-ico="spark"></div><div><h3>MaiK clinical AI</h3><p>Ask in plain words. <b>Cited answers</b> grounded in our knowledge base. Clinical questions only.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="calc"></div><div><h3>Dose Calculator</h3><p>Weight, age, <b>CrCl and dialysis</b>, Child-Pugh. From <b>1,532 drug monographs</b>.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="microbe"></div><div><h3>Indian antibiograms</h3><p>ICMR, NARS-Net and hospital data by specimen and setting. <b>Import your own</b> hospital's.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="brain"></div><div><h3>Dx My Patient</h3><p>Add findings, watch a <b>live differential</b> re-rank, with the next question to ask.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="pill"></div><div><h3>Drugs, scan and RxChoice</h3><p>Scan a prescription, check QT, renal and bleeding interactions, see <b>4 price options</b> for the same therapy.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="book"></div><div><h3>Protocols and kits</h3><p><b>253 bedside protocols</b> in 19 subjects and <b>26 specialty kits</b> for every branch.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="mic"></div><div><h3>OPD Queue and MaiK Scribe</h3><p>Token queue, WhatsApp updates and an ambient scribe. <b>Audio never leaves the phone.</b></p></div></div>
+      <div class="feat"><div class="ico" data-ico="icu"></div><div><h3>ICU and Code Blue</h3><p>Auto SOFA, APACHE II, NEWS2. Code Blue log with <b>Apple Watch CPR assist</b>.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="baby"></div><div><h3>Neonatal layer</h3><p>One baby record, ten NICU tools: dosing, infusions, GIR, bilirubin, growth.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="onco"></div><div><h3>Oncology</h3><p><b>260+ chemotherapy regimens</b> with dosing, TNM staging, CTCAE and RECIST.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="doc"></div><div><h3>Documents in 3 languages</h3><p>Consent forms, handouts, certificates and referrals in <b>English, తెలుగు, हिन्दी</b>.</p></div></div>
+      <div class="feat"><div class="ico" data-ico="users"></div><div><h3>FollowCare and colleagues</h3><p>Post-discharge follow-up on WhatsApp, <b>26 pathways</b>. Refer and hand over in-app.</p></div></div>
+    </div>
+
+    <div class="ai">
+      <div class="t"><small>AI imaging</small>Point the phone. Get a second look.</div>
+      <div class="m"><b>KardiQ X <span class="chip">Early access</span></b><span>ECG photo to rhythm and STEMI check</span></div>
+      <div class="m"><b>ThoreX <span class="chip">Early access</span></b><span>Chest X-ray, 18 findings, structured report</span></div>
+      <div class="m"><b>FundX <span class="chip">Early access</span></b><span>Smartphone fundus, DR and glaucoma cues</span></div>
+      <div class="m"><b>SknX <span class="chip">Early access</span></b><span>Skin lesion triage, never hides malignancy</span></div>
+    </div>
+  </div>
+
+  <div class="foot" data-part="foot"></div>
+</div>
+<script src="parts.js"></script>
+</body>
+</html>
