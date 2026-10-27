@@ -96,8 +96,16 @@ export async function onRequest(context) {
      * 2026-09-18). The file is content-addressed, so a cache hit can never be stale. */
     const edge = typeof caches !== "undefined" && caches.default ? caches.default : null;
     const wantsRange = !!request.headers.get("Range");
+    /* BYTES MUST ARRIVE EXACTLY AS STORED. Cloudflare rewrites any text/html response on its way out (it injects a
+     * /cdn-cgi/challenge-platform bot-detection script: index.html arrived 3,976 bytes bigger), so the updater's sha256 of every
+     * .html file failed, the changes-only install was rejected and the phone fell back to the whole 188 MB zip (owner, 2026-10-27:
+     * "still downloading whole file", about 3x the time). Every file is therefore served as an opaque binary: the device writes the
+     * bytes to disk and never needs the type. The edge-cache key carries a version so entries cached earlier with a text/html
+     * type are never served again. */
+    const OPAQUE = { "Content-Type": "application/octet-stream", "X-Content-Type-Options": "nosniff" };
+    const cacheKey = new Request(request.url.split("?")[0] + "?ct=2", { method: "GET" });
     if (edge && !wantsRange) {
-      const hit = await edge.match(request).catch(() => null);
+      const hit = await edge.match(cacheKey).catch(() => null);
       if (hit) return hit;
     }
     const head = await OTA.getFile(r2, hash);
@@ -110,11 +118,11 @@ export async function onRequest(context) {
         return new Response(part.body, {
           status: 206,
           headers: {
-            "Content-Type": head.httpMetadata?.contentType || "application/octet-stream",
+            ...OPAQUE,
             "Content-Length": String(wanted.length),
             "Content-Range": "bytes " + wanted.offset + "-" + end + "/" + head.size,
             "Accept-Ranges": "bytes",
-            "Cache-Control": "public, max-age=31536000, immutable",
+            "Cache-Control": "public, max-age=31536000, immutable, no-transform",
             "ETag": '"' + hash + '"',
           },
         });
@@ -126,16 +134,16 @@ export async function onRequest(context) {
     const full = new Response(obj.body, {
       status: 200,
       headers: {
-        "Content-Type": obj.httpMetadata?.contentType || "application/octet-stream",
+        ...OPAQUE,
         "Content-Length": String(obj.size),
-        "Cache-Control": "public, max-age=31536000, immutable",
+        "Cache-Control": "public, max-age=31536000, immutable, no-transform",
         "Accept-Ranges": "bytes",
         "ETag": `"${hash}"`,
       },
     });
     // Keep a copy at the edge so the next device is served from cache instead of streaming from R2.
     if (edge && !wantsRange) {
-      try { context.waitUntil(edge.put(request, full.clone())); } catch (e) { /* best effort */ }
+      try { context.waitUntil(edge.put(cacheKey, full.clone())); } catch (e) { /* best effort */ }
     }
     return full;
   }

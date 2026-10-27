@@ -118,6 +118,8 @@ try {
   const fb = await J(`var d = window.__calls.filter(function (x) { return x[0] === "download"; }); return JSON.stringify({ n: d.length, last: d[d.length - 1][1], ph: (document.querySelector("#otpHost .otp-ph")||{}).textContent });`);
   ok(fb.n >= 2 && fb.last.manifest === undefined && fb.last.checksum === "ab12", "after the delta fails the zip is downloaded (checksum, no manifest): " + fb.n + " calls");
   ok(fb.ph === "Downloading update", "and the card goes back to the whole-update view: " + fb.ph);
+  ok(fb.n === 2, "the failed delta is tried ONCE (the plugin retries per file itself), then the zip: " + fb.n + " download calls");
+  ok(!/Only what changed/.test(await ev(txt(".otp-note"))), "the 'only what changed' note is gone once it has fallen back to the zip");
   ok(await ev(`return window.__probes;`) >= 1, "the zip path measures the link again");
   await ev(`window.__failDelta = false; window.__finishDownload(); return 1;`); await sleep(500);
 

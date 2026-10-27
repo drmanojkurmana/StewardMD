@@ -237,8 +237,19 @@ test("router serves a content-addressed file as immutable-cacheable — it can n
   const request = new Request("https://stewardmd.in/api/ota/file/" + hash);
   const res = await onRequest({ request, env, params: { path: ["file", hash] } });
   assert.equal(res.status, 200);
-  assert.equal(res.headers.get("Cache-Control"), "public, max-age=31536000, immutable");
+  assert.match(res.headers.get("Cache-Control"), /^public, max-age=31536000, immutable/);
   assert.equal(await res.text(), "the-bytes");
+});
+test("router serves EVERY file as opaque binary - Cloudflare injects a script into text/html, which broke the sha256 of every .html file and sank the delta install (2026-10-27)", async () => {
+  const { env, r2 } = fakeR2Env();
+  const hash = "b".repeat(64);
+  await r2.put("ota/files/" + hash, "<html>x</html>", { httpMetadata: { contentType: "text/html; charset=utf-8" } });
+  const res = await onRequest({ request: new Request("https://stewardmd.in/api/ota/file/" + hash), env, params: { path: ["file", hash] } });
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get("Content-Type"), "application/octet-stream", "a text/html type is what Cloudflare rewrites");
+  assert.equal(res.headers.get("X-Content-Type-Options"), "nosniff");
+  assert.match(res.headers.get("Cache-Control"), /no-transform/);
+  assert.equal(await res.text(), "<html>x</html>", "bytes unchanged");
 });
 test("router: admin routes are refused without an owner token — this endpoint controls what every phone runs", async () => {
   const { env } = fakeR2Env();
