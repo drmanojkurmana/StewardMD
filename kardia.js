@@ -1037,24 +1037,6 @@
   /* iOS lays the lab page out narrower than its frame element (a ~20pt blank strip down the right, owner 2026-10-27, twice).
    * Measure the page's own viewport against the box and widen the frame by the shortfall; the box clips the excess. A no-op
    * where the page already fills the box (desktop, iPad). */
-  /* TEMPORARY width readout (flag localStorage smd_krd_dbg, default on until the iOS right strip is fixed, owner 2026-10-27):
-   * a screenshot of it gives the real numbers when the device cannot be attached to a debugger. Remove with the flag. */
-  function dbgOn() { try { return G.localStorage.getItem("smd_krd_dbg") !== "0"; } catch (e) { return true; } }
-  function dbgShow(frame, extra) {
-    if (!dbgOn()) return;
-    try {
-      var d = G.document, box = frame.parentNode, fw = frame.contentWindow, de = frame.contentDocument && frame.contentDocument.documentElement;
-      var root = d.querySelector(".krd-root"), vv = G.visualViewport, maxR = 0, maxEl = "";
-      var nodes = frame.contentDocument ? frame.contentDocument.body.querySelectorAll("*") : [];
-      for (var i = 0; i < nodes.length && i < 4000; i++) { var r = nodes[i].getBoundingClientRect(); if (r.right > maxR && r.width > 0 && r.right <= (de.clientWidth || 9999) + 200) { maxR = r.right; maxEl = nodes[i].tagName + "." + String(nodes[i].className && nodes[i].className.baseVal !== undefined ? "" : nodes[i].className).slice(0, 14); } }
-      var el = d.getElementById("krdDbg");
-      if (!el) { el = d.createElement("pre"); el.id = "krdDbg"; el.style.cssText = "position:fixed;left:4px;bottom:34px;z-index:99999;margin:0;padding:4px 6px;background:rgba(0,0,0,.78);color:#7CFC00;font:10px/1.25 monospace;pointer-events:none;white-space:pre"; d.body.appendChild(el); }
-      el.textContent = "win " + G.innerWidth + " vv " + (vv ? Math.round(vv.width) : "-") + " dpr " + G.devicePixelRatio + " root " + (root ? root.clientWidth : "-") + "\n" +
-        "box " + box.clientWidth + " frameEl " + Math.round(frame.getBoundingClientRect().width) + " style " + frame.style.width + "\n" +
-        "inner clientW " + (de ? de.clientWidth : "-") + " innerW " + (fw ? fw.innerWidth : "-") + " scrollW " + (de ? de.scrollWidth : "-") + "\n" +
-        "content maxRight " + Math.round(maxR) + " " + maxEl + (extra ? "\n" + extra : "");
-    } catch (e) {}
-  }
   function fillFrameWidth(frame) {
     function fit() {
       if (!frame.isConnected) { G.removeEventListener("resize", fit); return; }
@@ -1071,7 +1053,6 @@
           w = Math.max(want, w + d);
         }
       } catch (e) {}
-      dbgShow(frame);
     }
     fit(); G.setTimeout(fit, 300); G.setTimeout(fit, 1200); G.setTimeout(fit, 3000);
     if (frame.addEventListener) frame.addEventListener("load", function () { fit(); G.setTimeout(fit, 800); });
