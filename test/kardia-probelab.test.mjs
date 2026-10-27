@@ -19,7 +19,7 @@ test("build-www.sh copies kardia/probelab into www with all files", () => {
 
 test("credits: Probe Lab credit line and EchoSuite credits render", () => {
   const P = require("../kardia-practice.js");
-  assert.equal(P.PROBE_LAB_CREDIT, "Probe Lab by Mohammed Kamareddine, MD, EchoSuite (echosuite.app), reused with the author's permission");
+  assert.equal(P.PROBE_LAB_CREDIT, "Probe Lab, EchoSuite (echosuite.app), reused with the author's permission");
   const data = JSON.parse(readFileSync("kardia/probelab/assets/credits.json", "utf8"));
   const html = P.probeLabCreditsHtml(data, (s) => String(s));
   assert.ok(html.includes(P.PROBE_LAB_CREDIT), "credit line");

@@ -226,7 +226,7 @@
     return errors;
   }
 
-  var PROBE_LAB_CREDIT = "Probe Lab by Mohammed Kamareddine, MD, EchoSuite (echosuite.app), reused with the author's permission";
+  var PROBE_LAB_CREDIT = "Probe Lab, EchoSuite (echosuite.app), reused with the author's permission";
   function probeLabCreditsHtml(data, escFn) {
     var e = escFn || function (s) { return String(s == null ? "" : s); };
     var out = '<h3 class="sp-h3">Probe Lab</h3><p class="sp-small">' + e(PROBE_LAB_CREDIT) + ".</p>";
