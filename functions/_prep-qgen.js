@@ -19,6 +19,7 @@
  *
  * Secrets: ANTHROPIC_API_KEY (and ANTHROPIC_WORKSPACE_ID, sent as anthropic-workspace-id on every call) are read
  * from env only, never put in a response, a log line or an error message. ANTHROPIC_BASE_URL exists for tests. */
+import { MODEL_RATES, MODEL_HARD_DEFAULT, ACCURATE_MODEL, envModel } from "./_ai_usage.js";
 import { normText, cleanText, prepScrub, sha12, jaccard, gate1, gate2, gate3, gate5, gate9b, gateVerbatim,
   mulberry32, seedFrom, keyPositions, shuffleOptions, toStoredItem, getProfile, ERROR_TYPES, COG_LEVELS } from "./_prep-core.js";
 
@@ -66,13 +67,18 @@ export function creds(env) {
  * here only turns something off or changes a limit. Models from env when they are known Claude ids. */
 export function qgenConfig(env) {
   const e = env || {}, no = (v) => v === "0" || v === "false" || v === 0 || v === false;
-  const keyed = creds(e).key.length > 10;
+  const anth = creds(e).key.length > 10, vtx = !!(e.VERTEX_API_KEY || e.GCP_PROJECT);
+  /* Provider (owner 2026-10-28: "use the existing MaiK AI, Vertex"): Vertex Gemini through the router's callGemini when Vertex
+   * is set up, unless PREP_QGEN_PROVIDER = "anthropic" and the Claude key exists; the Claude key alone still works as before. */
+  const provider = e.PREP_QGEN_PROVIDER === "anthropic" && anth ? "anthropic" : vtx ? "vertex" : anth ? "anthropic" : "";
+  const keyed = !!provider;
   const on = keyed && !no(e.PREP_QGEN_ON);
   const model = (v, d) => (MODELS.indexOf(String(v || "")) >= 0 ? String(v) : d);
   const num = (k, d) => { const v = Number(e[k]); return Number.isFinite(v) && v > 0 ? v : d; };
   return {
-    keyed, on, student: on && !no(e.PREP_QGEN_STUDENT), owner: on,
-    genModel: model(e.PREP_QGEN_MODEL, QGEN.genModel), verifyModel: model(e.PREP_QGEN_VERIFY_MODEL, QGEN.verifyModel),
+    keyed, on, provider, student: on && !no(e.PREP_QGEN_STUDENT), owner: on,
+    genModel: provider === "vertex" ? envModel(e.PREP_QGEN_MODEL, ACCURATE_MODEL) : model(e.PREP_QGEN_MODEL, QGEN.genModel),
+    verifyModel: provider === "vertex" ? envModel(e.PREP_QGEN_VERIFY_MODEL, MODEL_HARD_DEFAULT) : model(e.PREP_QGEN_VERIFY_MODEL, QGEN.verifyModel),
     modulesPerDay: num("PREP_QGEN_MODULES_PER_DAY", 3),
     perModule: num("PREP_QGEN_MODULE_Q_CAP", 30),
     dailyUsd: num("PREP_QGEN_DAILY_USD", 5),
@@ -235,10 +241,55 @@ export function readMessage(j, model) {
   return { json, text, usage: (j && j.usage) || {}, stop: (j && j.stop_reason) || "", model: (j && j.model) || model };
 }
 
+/* ---------------- the Vertex (MaiK) client ---------------- */
+/* JSON Schema -> Gemini's OpenAPI subset: upper-case types, no additionalProperties, propertyOrdering on objects. */
+export function toGeminiSchema(sc) {
+  if (Array.isArray(sc)) return sc.map(toGeminiSchema);
+  if (!sc || typeof sc !== "object") return sc;
+  const out = {};
+  for (const k of Object.keys(sc)) {
+    if (k === "additionalProperties") continue;
+    if (k === "type" && typeof sc[k] === "string") out.type = sc[k].toUpperCase();
+    else if (k === "properties") { out.properties = {}; for (const pk of Object.keys(sc.properties)) out.properties[pk] = toGeminiSchema(sc.properties[pk]); out.propertyOrdering = Object.keys(sc.properties); }
+    else if (k === "items") out.items = toGeminiSchema(sc.items);
+    else out[k] = sc[k];
+  }
+  return out;
+}
+/* callVertex(env, body, opts) -> { json, text, usage, stop, model }: the same shape callMessages gives, from a Messages-API-shaped
+ * body, through the router's callGemini (Vertex, labels app prep). opts.callGemini is injected (circular import). */
+export async function callVertex(env, body, opts) {
+  const o = opts || {}, cg = o.callGemini;
+  if (typeof cg !== "function") throw new QgenError("not-configured");
+  const sys = ((body.system || []).map((b) => b.text).join("\n\n")) || "";
+  const user = (body.messages[0].content || []).map((b) => b.text).join("\n\n");
+  const meta = {};
+  let text = "";
+  try {
+    text = await cg(env, [{ text: user }], Math.min(body.max_tokens || 8000, 12000), { model: body.model, providers: ["vertex"], labels: { app: "prep" }, system: sys, json: true,
+      schema: toGeminiSchema(body.output_config.format.schema), temperature: o.temperature == null ? 0.6 : o.temperature, meta, noTier: true });
+  } catch (e) {
+    const st = Number(e && e.status) || (/\bHTTP (\d{3})\b/.exec(String((e && e.message) || "")) || [])[1] | 0;
+    const code = (e && (e.timeout || e.name === "AbortError")) ? "timeout" : st === 401 || st === 403 ? "auth" : st === 400 || st === 404 ? "bad-request" : st === 429 ? "rate" : st ? "provider" : "network";
+    throw new QgenError(code, st, code === "rate" || code === "network" || st >= 500);
+  }
+  const um = meta.usage || {}, fr = String(meta.finishReason || "");
+  let json = null;
+  try { json = text ? JSON.parse(text) : null; } catch (e) { json = null; }
+  return { json, text, stop: /SAFETY|PROHIBITED|BLOCKLIST|SPII/i.test(fr) ? "refusal" : fr === "MAX_TOKENS" ? "max_tokens" : "end_turn", model: body.model,
+    usage: { input_tokens: Math.max(0, (um.promptTokenCount | 0) - (um.cachedContentTokenCount | 0)), cache_read_input_tokens: um.cachedContentTokenCount | 0,
+      output_tokens: (um.candidatesTokenCount | 0) + (um.thoughtsTokenCount | 0), output_tokens_details: { thinking_tokens: um.thoughtsTokenCount | 0 } } };
+}
+
 /* ---------------- money ---------------- */
 /* usd(model, usage, batch) -> USD for one call from the API's usage object. output_tokens include thinking. */
 export function usd(model, usage, batch) {
-  const p = PRICES[model] || PRICES[QGEN.genModel], u = usage || {};
+  const u = usage || {};
+  if (!PRICES[model]) {   // a Gemini model: _ai_usage MODEL_RATES are INR per 1k tokens
+    const r = MODEL_RATES[model] || MODEL_RATES[MODEL_HARD_DEFAULT];
+    return (((u.input_tokens || 0) + (u.cache_read_input_tokens || 0)) / 1000 * r.in + (u.output_tokens || 0) / 1000 * r.out) / USD_INR;
+  }
+  const p = PRICES[model];
   const v = ((u.input_tokens || 0) * p.in + (u.output_tokens || 0) * p.out + (u.cache_read_input_tokens || 0) * p.cr + (u.cache_creation_input_tokens || 0) * p.cw) / 1e6;
   return batch ? v / 2 : v;
 }
@@ -388,7 +439,8 @@ export function readGen(body, owner) {
 export async function runRound(env, req, opts) {
   const o = opts || {}, cfg = o.cfg || qgenConfig(env);
   let usage = addUsage(null, cfg.genModel, null);
-  const g = await callMessages(env, genBody(req, cfg), { fetch: o.fetch, timeoutMs: o.timeoutMs });
+  const call = cfg.provider === "vertex" ? (e, b, x) => callVertex(e, b, Object.assign({ callGemini: o.callGemini }, x)) : callMessages;
+  const g = await call(env, genBody(req, cfg), { fetch: o.fetch, timeoutMs: o.timeoutMs });
   usage = addUsage(usage, cfg.genModel, g.usage);
   if (g.stop === "refusal") return { items: [], dropped: [{ gate: "refusal" }], flagged: 0, usage, stop: "refusal" };
   const rqs = sanitizeGen(g.json);
@@ -397,7 +449,7 @@ export async function runRound(env, req, opts) {
   let items = toItems(gr.kept, { mod: req.mod, round: req.round, exam: req.exam, grounded: !!req.ground, prov: o.prov, model: cfg.genModel });
   const dropped = gr.rejected.map((r) => ({ gate: r.gate }));
   if (items.length) {
-    const v = await callMessages(env, verifyBody(items, req.ground, cfg), { fetch: o.fetch, timeoutMs: o.timeoutMs });
+    const v = await call(env, verifyBody(items, req.ground, cfg), { fetch: o.fetch, timeoutMs: o.timeoutMs, temperature: 0.1 });
     usage = addUsage(usage, cfg.verifyModel, v.usage);
     items = applyVerify(items, v.stop === "refusal" ? null : v.json, !!req.ground);
   }
