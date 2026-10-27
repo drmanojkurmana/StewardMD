@@ -2,695 +2,889 @@
   color-scheme: dark;
   --ink-950: 18 20 22;
   --ink-900: 28 32 36;
-  --ink-850: 36 40 44;
   --ink-800: 48 52 58;
-  --ink-700: 86 94 104;
   --ink-600: 154 162 170;
-  --ink-500: 176 184 192;
   --ink-400: 196 202 208;
-  --ink-300: 220 224 228;
   --ink-200: 238 240 242;
   --accent: 62 168 128;
   --line: 108 116 126;
-  --r: 0px;
-  --label-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Segoe UI", system-ui, sans-serif;
-  --label-size: 12px;
-  --label-case: uppercase;
-  --label-track: 0;
-  --label-weight: 600;
-  --label-ink: 196 202 208;
-  --panel-shadow: none;
-  --gap: 8px;
-  --pad: 8px;
-  --hdr: 44px;
-  --band-min: 160px;
-  --safe-t: env(safe-area-inset-top, 0px);
-  --safe-r: env(safe-area-inset-right, 0px);
-  --safe-b: env(safe-area-inset-bottom, 0px);
-  --safe-l: env(safe-area-inset-left, 0px);
-  --ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Segoe UI", system-ui, sans-serif;
-  --strip-title-w: max-content;
+  --r: 8px;
+  --ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Segoe UI", sans-serif;
 }
 
-.angio-framed {
-  --safe-t: 0px;
-}
-
-html,
-body {
-  min-height: 100dvh;
+html.angio-dock,
+html.angio-dock body {
   background: rgb(var(--ink-950));
   color: rgb(var(--ink-200));
   font-family: var(--ui);
-  font-weight: 400;
-  font-size: 16px;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+  height: 100%;
 }
 
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
+html.angio-dock ::selection {
+  background: rgb(62 168 128 / 0.35);
+  color: rgb(var(--ink-200));
 }
 
-input,
-select,
-textarea {
-  font-size: 16px;
-}
-
-::selection {
-  background: rgb(var(--accent));
-  color: rgb(var(--ink-950));
-}
-
-.app {
-  scrollbar-color: rgb(var(--line)) rgb(var(--ink-950));
-}
-
-.font-mono,
-.gantry-readout,
-.preset-angles,
-.panel-label {
+html.angio-ready .app {
+  box-sizing: border-box;
+  height: 100dvh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: var(--safe-t) var(--safe-r) 0 var(--safe-l);
+  background: rgb(var(--ink-950));
   font-family: var(--ui);
+}
+
+html.angio-ready main.layout {
+  display: none !important;
+}
+
+html.angio-ready .app > header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0 8px 0 12px;
+  border-bottom: 1px solid rgb(var(--line));
+  background: rgb(var(--ink-950));
+  box-sizing: border-box;
+}
+
+html.angio-ready .app > header > div {
+  display: contents;
+}
+
+html.angio-ready .app > header h1 {
+  order: 1;
+  margin: 0;
+  font-family: var(--ui);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  color: rgb(var(--ink-200));
+}
+
+html.angio-ready .app > header span.hidden {
+  order: 2;
+  display: block !important;
+  margin-right: auto;
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--ui);
+  font-size: 12px;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0;
+  color: rgb(var(--ink-400));
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+html.angio-ready .text-amber {
+  color: rgb(var(--ink-200)) !important;
+  font-weight: 600;
+  font-style: normal;
+}
+
+html.angio-ready .angio-reset {
+  order: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  background: transparent;
+  color: rgb(var(--ink-200));
+  font-family: var(--ui);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  box-shadow: none;
+}
+
+html.angio-ready .angio-reset::before {
+  content: none;
+}
+
+html.angio-ready .app > header button[aria-pressed] {
+  order: 4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  background: transparent;
+  color: rgb(var(--ink-200));
+  box-shadow: none;
+}
+
+html.angio-ready .app > header .hit-area,
+html.angio-ready .o-foot {
+  display: none !important;
+}
+
+html.angio-ready .angio-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  background: rgb(var(--ink-950));
+}
+
+html.angio-ready .angio-stage {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 280px);
+  grid-template-rows: minmax(0, 1fr) 200px;
+  gap: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+html.angio-ready .angio-stage .o-angio {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  aspect-ratio: auto !important;
+  min-height: 0;
+  border: 0 !important;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgb(var(--ink-950));
+}
+
+html.angio-ready .angio-stage .o-heart {
+  grid-column: 2;
+  grid-row: 1;
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto !important;
+  min-height: 0;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgb(var(--ink-950));
+}
+
+html.angio-ready .angio-stage .o-room {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0;
+  aspect-ratio: auto !important;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+html.angio-ready .angio-dock {
+  flex: 0 0 360px;
+  width: 360px;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-left: 1px solid rgb(var(--line));
+  background: rgb(var(--ink-900));
+}
+
+html.angio-ready .angio-rail {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  scrollbar-color: rgb(var(--line)) transparent;
+}
+
+html.angio-ready:not(.is-phone) .angio-tabseg {
+  display: none !important;
+}
+
+html.angio-ready.is-phone .angio-body {
+  flex-direction: column;
+}
+
+html.angio-ready.is-phone .angio-stage {
+  display: flex;
+  padding: 0;
+  gap: 0;
+}
+
+html.angio-ready.is-phone .angio-stage .o-angio {
+  flex: 1 1 auto;
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0;
+}
+
+html.angio-ready.is-phone .angio-dock {
+  flex: 0 0 auto;
+  width: auto;
+  height: min(300px, 42dvh);
+  max-height: min(300px, 42dvh);
+  min-height: 0;
+  overflow: hidden;
+  border-left: 0;
+  border-top: 1px solid rgb(var(--line));
+}
+
+html.angio-ready.is-phone .angio-rail {
+  flex: 1 1 0;
+  min-height: 0;
+  gap: 8px;
+  padding: 8px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+html.angio-ready.is-phone .angio-dock > .angio-tabseg {
+  display: flex !important;
+  flex: 0 0 44px;
+  width: auto;
+  height: 44px !important;
+  min-height: 44px;
+  margin: 0 8px max(4px, env(safe-area-inset-bottom));
+  position: relative;
+  z-index: 2;
+}
+
+html.angio-ready.is-phone[data-dock="setup"] .o-gantry,
+html.angio-ready.is-phone[data-dock="setup"] .o-pad,
+html.angio-ready.is-phone[data-dock="setup"] [data-panel="views"] {
+  display: none !important;
+}
+
+html.angio-ready.is-phone[data-dock="angle"] [data-panel="setup"],
+html.angio-ready.is-phone[data-dock="angle"] [data-panel="views"],
+html.angio-ready.is-phone[data-dock="angle"] .o-gantry [aria-label="Standard views"] {
+  display: none !important;
+}
+
+html.angio-ready.is-phone[data-dock="views"] [data-panel="setup"],
+html.angio-ready.is-phone[data-dock="views"] .o-pad,
+html.angio-ready.is-phone[data-dock="views"] .o-gantry > :first-child {
+  display: none !important;
+}
+
+html.angio-ready.is-phone [data-panel="views"] .o-heart {
+  width: 100% !important;
+  height: 160px !important;
+  aspect-ratio: auto !important;
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+html.angio-dock .o-astrip,
+html.angio-dock .o-astrip .strip-row2,
+html.angio-dock .o-hstrip {
+  display: block !important;
+  height: auto !important;
+  min-height: 0 !important;
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+html.angio-dock .o-astrip .strip-grid,
+html.angio-dock .strip-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  grid-template-columns: none !important;
+}
+
+html.angio-dock .strip-titles,
+html.angio-dock .strip-title,
+html.angio-dock .panel-label {
+  flex: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  font-family: var(--ui);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgb(var(--ink-400));
+  white-space: nowrap;
+}
+
+html.angio-dock .o-astrip .strip-row2 + .strip-row2,
+html.angio-dock .strip-row2 {
+  margin-top: 8px !important;
+  border: 0 !important;
+  padding: 0 !important;
+  height: auto !important;
+}
+
+html.angio-dock .strip-row-grafts .strip-grid > :nth-child(2),
+html.angio-dock .strip-row-grafts .strip-grid > :last-child {
+  display: contents !important;
+  flex: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+html.angio-dock .angio-tabseg {
+  position: relative;
+  align-items: stretch;
+  height: 44px;
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  background: rgb(var(--ink-950));
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+html.angio-dock .seg:not(.seg-grafts):not(.angio-tabseg) {
+  position: relative;
+  display: flex !important;
+  align-items: stretch;
+  width: 100%;
+  height: 44px !important;
+  min-height: 44px;
+  padding: 0;
+  gap: 0;
+  overflow: hidden;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px !important;
+  background: rgb(var(--ink-950)) !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html.angio-dock .seg .long { display: none !important; }
+html.angio-dock .seg .short { display: inline !important; }
+
+html.angio-dock .seg:not(.seg-grafts) > button {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px !important;
+  min-height: 44px;
+  margin: 0;
+  padding: 0 8px;
+  border: 0 !important;
+  border-radius: 8px;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: rgb(var(--ink-200));
+  font-family: var(--ui);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 1 !important;
+}
+
+html.angio-dock .seg:not(.seg-grafts) > button[aria-pressed="true"] {
+  color: rgb(var(--accent));
+  font-weight: 600;
+  background: transparent !important;
+}
+
+html.angio-dock .seg:not(.seg-grafts) > button[aria-disabled="true"] {
+  color: rgb(var(--ink-600));
+}
+
+html.angio-dock .seg-thumb {
+  position: absolute;
+  z-index: 0;
+  top: 3px;
+  bottom: 3px;
+  left: 0;
+  height: auto;
+  border: 1px solid rgb(var(--accent));
+  border-radius: 6px;
+  background: rgb(var(--ink-900));
+  box-sizing: border-box;
+  pointer-events: none;
+  transition: transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1), width 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+html.angio-dock .seg-grafts {
+  display: flex !important;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  width: auto !important;
+  max-width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  padding: 0;
+  overflow: visible !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none;
+}
+
+html.angio-dock .ctl-btn:not(.angio-reset),
+html.angio-dock .seg-grafts > button,
+html.angio-dock .grafts-off {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  height: 44px !important;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 12px;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px !important;
+  background: rgb(var(--ink-950)) !important;
+  box-shadow: none !important;
+  color: rgb(var(--ink-200));
+  font-family: var(--ui);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 1 !important;
+  white-space: nowrap;
+}
+
+html.angio-dock .ctl-btn:not(.angio-reset):not(.grafts-off)::before,
+html.angio-dock .seg-grafts > button::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  flex: 0 0 8px;
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+html.angio-dock .ctl-btn:not(.angio-reset)[data-on="true"],
+html.angio-dock .seg-grafts > button[aria-pressed="true"] {
+  color: rgb(var(--accent));
+  border-color: rgb(var(--accent)) !important;
+  font-weight: 600;
+  background: rgb(var(--ink-950)) !important;
+}
+
+html.angio-dock .ctl-btn:not(.angio-reset)[data-on="true"]::before,
+html.angio-dock .seg-grafts > button[aria-pressed="true"]::before {
+  border-color: rgb(var(--accent));
+  background: rgb(var(--accent));
+}
+
+html.angio-dock .ctl-btn[aria-disabled="true"],
+html.angio-dock .seg-grafts > button[aria-disabled="true"] {
+  color: rgb(var(--ink-600));
+}
+
+html.angio-dock .grafts-off.invisible {
+  display: none !important;
+}
+
+html.angio-dock .o-hstrip .strip-tools,
+html.angio-dock .heart-tools {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  width: 100%;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+html.angio-dock .o-hstrip .ctl-long { display: inline !important; }
+html.angio-dock .o-hstrip .ctl-short { display: none !important; }
+
+html.angio-dock .o-astrip .strip-grid > :nth-child(2),
+html.angio-dock .o-astrip .strip-grid > :last-child,
+html.angio-dock .strip-row2 .strip-grid > :last-child {
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  align-content: flex-start;
+  gap: 8px;
+  width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+}
+
+html.angio-dock .strip-row-grafts .strip-grid {
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+html.angio-dock .strip-row-grafts .strip-titles {
+  flex: 1 0 100% !important;
+}
+
+html.angio-dock .strip-row-grafts .strip-grid > :nth-child(2),
+html.angio-dock .strip-row-grafts .strip-grid > :last-child {
+  display: contents !important;
+}
+
+html.angio-dock .panel {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+html.angio-dock .o-gantry {
+  display: flex !important;
+  flex-direction: column;
+  gap: 8px;
+  width: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html.angio-ready.is-phone .o-gantry .my-2.h-px,
+html.angio-ready.is-phone [aria-label="Rotation, RAO / LAO"] > div[aria-hidden="true"],
+html.angio-ready.is-phone .gantry-grid > div:first-child > .mt-auto,
+html.angio-ready.is-phone .gantry-grid > div:first-child > div:first-child {
+  display: none !important;
+}
+
+html.angio-ready.is-phone [aria-label="Rotation, RAO / LAO"] {
+  gap: 4px;
+  margin: 0 !important;
+}
+
+html.angio-ready.is-phone .gantry-grid {
+  gap: 8px !important;
+}
+
+html.angio-ready.is-phone .gantry-row,
+html.angio-ready.is-phone .gslider-h,
+html.angio-ready.is-phone .gslider-v {
+  margin: 0 !important;
+}
+
+html.angio-ready.is-phone .gantry-readout {
+  font-size: 22px;
+  line-height: 1;
+}
+
+html.angio-ready.is-phone [aria-label="C-arm controls"] {
+  padding: 0 !important;
+}
+
+html.angio-dock .gantry-grid {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  width: 100%;
+}
+
+html.angio-dock .gantry-grid > div {
+  width: 100% !important;
+  min-width: 0;
+}
+
+html.angio-dock .gantry-readout {
+  width: auto !important;
+  margin: 0 !important;
+  font-family: var(--ui);
+  font-size: 28px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+  line-height: 1.1;
+  color: rgb(var(--ink-200));
+}
+
+html.angio-dock [aria-label="Rotation, RAO / LAO"] {
+  display: grid !important;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  grid-template-areas:
+    "name name name"
+    "read read read"
+    "dec rail inc"
+    "ticks ticks ticks";
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+html.angio-dock [aria-label="Rotation, RAO / LAO"] > :nth-child(1) { grid-area: name; }
+html.angio-dock [aria-label="Rotation, RAO / LAO"] > :nth-child(2) { grid-area: read; }
+html.angio-dock [aria-label="Rotation, RAO / LAO"] > .gslider { grid-area: rail; }
+html.angio-dock [aria-label="Rotation, RAO / LAO"] > :nth-child(4) { grid-area: ticks; }
+html.angio-dock .angio-dec { grid-area: dec; }
+html.angio-dock .angio-inc { grid-area: inc; }
+
+html.angio-dock .gantry-grid > div:last-child {
+  display: grid !important;
+  grid-template-columns: auto 44px minmax(0, 1fr) 44px auto;
+  grid-template-areas: "cau dec rail inc cra";
+  align-items: center;
+  gap: 8px;
+}
+
+html.angio-dock .gantry-grid > div:last-child > span:first-child { grid-area: cra; }
+html.angio-dock .gantry-grid > div:last-child > span:nth-of-type(2) { grid-area: cau; }
+html.angio-dock .gantry-grid > div:last-child > .gslider { grid-area: rail; }
+
+html.angio-dock .angio-step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0;
+  border: 1px solid rgb(var(--line));
+  border-radius: 8px;
+  background: rgb(var(--ink-950));
+  color: rgb(var(--ink-200));
+  box-shadow: none;
+}
+
+html.angio-dock .gslider {
+  position: relative;
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px !important;
+  background: rgb(var(--ink-950)) !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html.angio-dock .gslider-v {
+  width: 100% !important;
+  height: 44px !important;
+  min-height: 44px !important;
+}
+
+html.angio-dock .gslider > div.bg-amber:not(:has(> div)) {
+  background: rgb(var(--accent)) !important;
+  opacity: 1 !important;
+}
+
+html.angio-dock .gslider > div.bg-amber:has(> div) {
+  width: 28px !important;
+  height: 28px !important;
+  top: 50% !important;
+  bottom: auto !important;
+  margin-top: -14px;
+  border: 1px solid rgb(var(--accent));
+  border-radius: 8px !important;
+  background: rgb(var(--ink-200)) !important;
+  box-shadow: none !important;
+  box-sizing: border-box;
+}
+
+html.angio-dock .gslider > div.bg-amber:has(> div) > div {
+  background: rgb(var(--ink-950)) !important;
+}
+
+html.angio-dock .preset-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+}
+
+html.angio-dock .preset {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  height: auto !important;
+  padding: 8px;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px !important;
+  background: rgb(var(--ink-950)) !important;
+  box-shadow: none !important;
+  color: rgb(var(--ink-200));
+  font-family: var(--ui);
+  text-align: left;
+}
+
+html.angio-dock .preset-name,
+html.angio-dock .preset-angles {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+  font-family: var(--ui);
+  font-size: 12px;
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
 
-.app > header {
-  box-sizing: border-box;
-  height: auto;
-  min-height: 44px;
-  gap: 8px;
-  padding: 0 12px;
-  border-bottom: 1px solid rgb(var(--line));
-}
-
-.app > header .hit-area {
-  font-style: normal;
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0;
+html.angio-dock .preset-angles {
   color: rgb(var(--ink-400));
 }
 
-.app > header h1 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: 1.2;
-  color: rgb(var(--ink-200));
-}
-
-.app > header span.hidden:not(:empty) {
-  display: inline;
-  font-family: var(--ui);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0;
-  color: rgb(var(--ink-400));
-}
-
-.app > header .text-amber {
-  color: rgb(var(--ink-200));
-  font-weight: 600;
-}
-
-.panel,
-.ctl-btn,
-.seg,
-.preset,
-.o-angio,
-.o-heart,
-.o-room,
-.collapsible,
-dialog,
-.gslider {
-  border-color: rgb(var(--line));
-  border-radius: 0;
-  box-shadow: none;
-}
-
-.panel,
-.o-angio,
-.o-heart,
-.o-room,
-dialog {
-  background: rgb(var(--ink-900));
-}
-
-.ctl-btn,
-.seg > button,
-.preset {
-  border-color: rgb(var(--line));
-  border-radius: 0;
-  background: rgb(var(--ink-950));
-  color: rgb(var(--ink-200));
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0;
-}
-
-.ctl-btn,
-.angio-reset,
-header button[aria-label="Full screen"],
-header button[aria-label="Exit full screen"] {
-  min-height: 32px;
-  min-width: 44px;
-  padding: 0 12px;
-}
-
-.seg {
-  height: auto;
-  min-height: 32px;
-  overflow: visible;
-  background: rgb(var(--ink-950));
-}
-
-.seg > button {
-  min-height: 32px;
-  padding: 0 12px;
-  overflow: visible;
-  flex: 1 0 auto;
-  min-width: max-content;
-}
-
-.o-astrip .strip-grid > :nth-child(2) {
-  min-width: 0;
-  overflow-x: auto;
-}
-
-.o-astrip .seg {
-  width: max-content;
-  max-width: 100%;
-}
-
-.strip-row2 :is(.seg > button, .ctl-btn)::after {
-  content: none;
-}
-
-.ctl-btn[data-on="true"],
-.seg > button[aria-pressed="true"],
-.preset[data-on="true"],
-.detail-link[aria-pressed="true"] {
-  background: rgb(var(--ink-950));
-  color: rgb(var(--accent));
-  border-color: rgb(var(--accent));
-  font-weight: 600;
-}
-
-.seg > button[aria-pressed="true"] {
-  outline: 1px solid rgb(var(--accent));
-  outline-offset: -1px;
-}
-
-.preset[data-on="true"] .preset-name,
-.preset[data-on="true"] .preset-angles {
+html.angio-dock .preset[data-on="true"] {
+  border-color: rgb(var(--accent)) !important;
+  background: rgb(var(--ink-950)) !important;
   color: rgb(var(--accent));
   font-weight: 600;
 }
 
-.ctl-btn:disabled,
-.seg > button:disabled,
-.seg > button[aria-disabled="true"],
-.ctl-btn[aria-disabled="true"] {
-  opacity: 1;
-  color: rgb(var(--ink-600));
-  background: rgb(var(--ink-950));
-  border-color: rgb(var(--line));
-  cursor: not-allowed;
+html.angio-dock .preset[data-on="true"] .preset-name,
+html.angio-dock .preset[data-on="true"] .preset-angles {
+  color: rgb(var(--accent));
+  font-weight: 600;
 }
 
-.preset {
-  min-height: 32px;
-  padding: 8px;
-}
-
-.preset-name,
-.preset-angles {
-  font-family: var(--ui);
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.2;
-  overflow: visible;
-  text-overflow: clip;
-  max-width: none;
-}
-
-.preset-name {
-  color: rgb(var(--ink-200));
-}
-
-.preset-angles {
-  color: rgb(var(--ink-400));
-}
-
-.preset {
-  height: auto;
-  overflow: visible;
-  white-space: normal;
-}
-
-.preset-grid,
-.o-gantry .preset-grid {
-  gap: 8px;
-  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
-}
-
-.gslider {
-  -webkit-appearance: none;
-  appearance: none;
-  background: rgb(var(--ink-950));
+html.angio-dock .o-pad {
+  width: 100% !important;
+  min-height: 160px;
+  margin: 0 !important;
   border: 1px solid rgb(var(--line)) !important;
-  border-radius: 0;
-  touch-action: none;
+  border-radius: 8px !important;
+  background: rgb(var(--ink-950)) !important;
   box-shadow: none !important;
+  overflow: hidden;
 }
 
-.gslider,
-.gslider * {
-  box-shadow: none !important;
-}
-
-.gslider-h {
-  height: 32px;
-  min-height: 32px;
-}
-
-.gslider-v {
-  width: 32px;
-  min-width: 32px;
-}
-
-.gslider .bg-amber {
-  background: rgb(var(--accent)) !important;
-}
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 44px;
-  margin: 0;
+html.angio-dock .collapsible > button {
+  min-height: 44px;
+  border-radius: 8px;
   background: transparent;
-  touch-action: none;
 }
 
-input[type="range"]:focus {
-  outline: none;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  height: 4px;
-  background: rgb(var(--line));
+html.angio-dock .angio-sources {
+  align-self: flex-start;
+  height: 44px;
+  padding: 0 12px;
   border: 0;
-  border-radius: 0;
+  background: transparent;
+  color: rgb(var(--ink-400));
+  font-family: var(--ui);
+  font-size: 14px;
+  font-weight: 400;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  margin-top: -6px;
-  border-radius: 0;
-  border: 1px solid rgb(var(--line));
-  background: rgb(var(--accent));
+@media (hover: hover) and (pointer: fine) {
+  html.angio-dock .angio-reset:hover,
+  html.angio-dock .angio-step:hover,
+  html.angio-dock .ctl-btn:not(.angio-reset):hover,
+  html.angio-dock .seg-grafts > button:hover,
+  html.angio-dock .preset:hover,
+  html.angio-dock .app > header button[aria-pressed]:hover {
+    border-color: rgb(var(--accent)) !important;
+    background: rgb(var(--ink-950)) !important;
+  }
 }
 
-input[type="range"]::-moz-range-track {
-  height: 4px;
-  background: rgb(var(--line));
-  border: 0;
-  border-radius: 0;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
-  border-radius: 0;
-  border: 1px solid rgb(var(--line));
-  background: rgb(var(--accent));
-}
-
-button:focus-visible,
-a:focus-visible,
-[role="button"]:focus-visible,
-[role="slider"]:focus-visible,
-.preset:focus-visible,
-.seg > button:focus-visible,
-.detail-link:focus-visible,
-.ctl-btn:focus-visible,
-input:focus-visible {
+html.angio-dock :focus-visible {
   outline: 2px solid rgb(var(--accent));
   outline-offset: 2px;
 }
 
-.hit-area {
-  min-height: 44px;
+html.angio-dock .rounded-full { border-radius: 8px !important; }
+
+html.angio-dock [aria-label="Rotation, RAO / LAO"] > div:first-child,
+html.angio-dock [aria-label="Angulation, CRA / CAU"] > div:first-child,
+html.angio-dock .strip-titles,
+html.angio-dock .strip-grid > :last-child,
+html.angio-dock .o-hstrip .strip-tools,
+html.angio-dock .o-hstrip .strip-tools > div,
+html.angio-dock .heart-tools {
+  justify-content: flex-start !important;
+  margin-left: 0 !important;
+  text-align: left;
 }
 
-.view-caption {
-  text-shadow: none;
-  background: rgb(var(--ink-950));
-  border: 1px solid rgb(var(--line));
-  border-radius: 0;
-  padding: 4px 8px;
+html.angio-dock .gantry-readout {
+  margin-left: 0 !important;
+  text-align: left !important;
 }
 
-.bg-ink-900\/85,
-.bg-ink-900\/90,
-.bg-ink-900\/80 {
-  background-color: rgb(var(--ink-900));
-}
-
-.rounded-full {
-  border-radius: 0;
-}
-
-.strip-row-on {
-  background: transparent;
-}
-
-.o-foot {
-  gap: 8px;
-  padding-top: 8px;
-  padding-bottom: 8px;
-}
-
-.gantry-grid {
-  column-gap: 8px;
-}
-
-.gantry-row {
-  margin-top: 4px;
-}
-
-.gantry-readout {
-  font-size: 16px;
-  line-height: 1.2;
-  font-weight: 600;
-  color: rgb(var(--ink-200));
-}
-
-.layout > .side {
-  min-height: 0;
-}
-
-dialog {
-  border: 1px solid rgb(var(--line));
-  box-shadow: none;
-}
-
-@media (min-width: 701px) {
-  .o-hstrip .ctl-btn {
-    font-size: 12px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .layout > .side,
-  .o-pad {
-    overflow: auto;
-  }
-}
-
-@media (max-width: 1023px) and (orientation: landscape) {
-  .phone .sq,
-  .phone .o-astrip,
-  .phone .o-hstrip {
-    max-width: calc(100dvh - 48px - var(--astrip) - var(--safe-t) - var(--safe-b));
-  }
-}
-
-@media (max-width: 700px) {
-  :root {
-    --pad: 8px;
-    --gap: 8px;
-  }
-
-  .app > header {
-    flex-wrap: wrap;
-    align-items: center;
-    row-gap: 4px;
-    padding: 0 8px;
-  }
-
-  .app > header span.hidden:not(:empty) {
-    display: block;
-    flex-basis: 100%;
-  }
-
-  header button[aria-label="Full screen"],
-  header button[aria-label="Exit full screen"],
-  .angio-reset,
-  .ctl-btn,
-  .seg > button,
-  .preset,
-  .collapsible > button,
-  .detail-link,
-  .hit-area {
-    min-height: 44px;
-  }
-
-  header button[aria-label="Full screen"],
-  header button[aria-label="Exit full screen"] {
-    width: 44px;
-    height: 44px;
-    padding: 0;
-  }
-
-  .ctl-btn,
-  .seg > button,
-  .preset-name {
-    font-size: 14px;
-  }
-
-  .phone .o-astrip,
-  .o-astrip.strip-two,
-  .strip.strip-two,
-  .strip-two > .strip-grid,
-  .strip-row2,
-  .phone .o-astrip > .strip-row2,
-  .phone .o-astrip > .strip-row2 + .strip-row2,
-  .phone .o-hstrip {
-    height: auto !important;
-    min-height: 44px;
-    overflow: visible;
-  }
-
-  .phone .o-astrip .strip-row2 :is(.seg, .ctl-btn),
-  .phone .o-astrip .strip-row2 .seg > button,
-  .phone .o-astrip .seg > button,
-  .o-astrip .ctl-btn,
-  .o-hstrip .ctl-btn {
-    height: 44px !important;
-    min-height: 44px;
-  }
-
-  .strip-titles,
-  .strip-title,
-  .strip-title-phone {
-    overflow: visible;
-    letter-spacing: 0;
-  }
-
-  .gslider-h {
-    height: 44px;
-    min-height: 44px;
-  }
-
-  .gslider-v {
-    width: 44px;
-    min-width: 44px;
-  }
-
-  .layout.phone,
-  .phone .o-hstrip .strip-tools > div {
-    gap: 8px;
-    row-gap: 8px;
-  }
-
-  .o-angio.sq {
-    width: 100%;
-  }
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .ctl-btn:hover,
-  .seg > button:hover,
-  .preset:hover {
-    background: rgb(var(--ink-950));
-    border-color: rgb(var(--accent));
-  }
-
-  .ctl-btn[data-on="true"]:hover,
-  .seg > button[aria-pressed="true"]:hover,
-  .preset[data-on="true"]:hover {
-    background: rgb(var(--ink-950));
-    color: rgb(var(--accent));
-    border-color: rgb(var(--accent));
-  }
-}
-
-.o-astrip .strip-titles,
-.phone .o-astrip .strip-titles {
-  flex: 0 0 auto;
-  width: auto;
-  min-width: max-content;
-  max-width: none;
-  overflow: visible;
-  text-overflow: clip;
-}
-
-.strip-title,
-.strip-title-phone {
-  letter-spacing: 0;
-  overflow: visible;
-  text-overflow: clip;
-}
-
-.phone .o-astrip .strip-grid > :nth-child(2),
-.o-astrip .strip-grid > :nth-child(2) {
-  flex: 1 1 auto;
-  min-width: 0;
-  overflow-x: auto;
-}
-
-.phone .o-astrip .strip-row2 :is(.seg, .ctl-btn),
-.phone .o-astrip .strip-row2 :is(.seg > button, .ctl-btn) {
-  font-size: 14px;
-  padding: 0 8px;
-  background: rgb(var(--ink-950));
-  color: rgb(var(--ink-200));
-  border-color: rgb(var(--line));
-}
-
-.phone .o-astrip .strip-row2 .ctl-btn {
-  border-style: solid;
-  border-width: 1px;
-}
-
-.phone .o-astrip .strip-row2 .seg > button {
-  border-width: 0;
-}
-
-.phone .o-astrip .strip-row2 .seg {
-  width: max-content;
-  max-width: none;
-  overflow: visible;
-  background: rgb(var(--ink-950));
-  border-color: rgb(var(--line));
-}
-
-.phone .o-astrip .strip-row2 .seg > button,
-.phone .o-astrip .strip-row2 .ctl-btn {
-  flex: 0 0 auto;
-  min-width: 44px;
-  white-space: nowrap;
-}
-
-.phone .o-astrip .strip-row2 :is(.seg > button, .ctl-btn)[aria-disabled="true"] {
-  color: rgb(var(--ink-600));
-  font-weight: 400;
-  background: rgb(var(--ink-950));
-  border-color: rgb(var(--line));
-}
-
-.phone .o-astrip .strip-row2 :is(.seg > button, .ctl-btn)[aria-disabled="true"]:not(:focus-visible) {
-  outline: none;
-}
-
-.phone .o-astrip .strip-row2 .seg > button[aria-pressed="true"] {
-  background: rgb(var(--ink-950));
-  color: rgb(var(--accent));
-  font-weight: 600;
-  outline: 1px solid rgb(var(--accent));
-  outline-offset: -1px;
-}
-
-.phone .o-astrip .strip-row2 .ctl-btn[data-on="true"],
-.phone .o-astrip .strip-row2 .ctl-btn[aria-pressed="true"] {
-  background: rgb(var(--ink-950));
-  color: rgb(var(--accent));
-  border-color: rgb(var(--accent));
-  font-weight: 600;
-}
-
-:is(.ctl-btn, .seg > button, .preset)[aria-disabled="true"],
-:is(.ctl-btn, .seg > button, .preset):disabled {
-  opacity: 1;
-  color: rgb(var(--ink-600));
-  background: rgb(var(--ink-950));
-  border-color: rgb(var(--line));
-}
-
-/* Graft names stay on screen. The row wraps; it does not scroll sideways. */
-.phone .o-astrip .strip-row-grafts {
-  height: auto !important;
-  overflow: visible;
-}
-
-.phone .o-astrip .strip-row-grafts .strip-grid {
-  flex-wrap: wrap;
-  align-items: flex-start;
-  row-gap: 8px;
-  height: auto !important;
-  overflow: visible;
-}
-
-.phone .o-astrip .strip-row-grafts .strip-grid > :nth-child(2) {
-  flex: 1 1 0;
-  min-width: 0;
-  max-width: 100%;
-  overflow: visible;
-}
-
-.phone .o-astrip .strip-row-grafts .strip-grid > :last-child {
-  flex: 0 0 auto;
-  width: auto;
-  margin-left: 0;
-}
-
-.phone .o-astrip .strip-row-grafts .strip-grid > :last-child:has(.grafts-off.invisible) {
-  flex: 0 0 0;
-  width: 0;
-  min-width: 0;
-  overflow: hidden;
-  padding: 0;
-}
-
-.phone .o-astrip .strip-row-grafts .seg.seg-grafts {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
+html.angio-dock .seg:not(.seg-grafts):not(.angio-tabseg) {
   width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  height: auto !important;
-  min-height: 44px;
-  gap: 8px;
-  overflow: visible;
 }
 
-.phone .o-astrip .strip-row-grafts .seg.seg-grafts > button {
-  flex: 0 0 auto;
-  min-width: 44px;
-  min-height: 44px;
-  height: 44px !important;
+html.angio-ready:not(.is-phone) .angio-dock > .angio-tabseg {
+  display: none !important;
+}
+
+/* Original gantry/pad nodes carry flex order. Keep Sources after the angle block. */
+html.angio-ready:not(.is-phone) .angio-rail > [data-panel="views"] {
+  order: 8;
+}
+
+@media (max-height: 800px) {
+  html.angio-ready:not(.is-phone) .angio-rail {
+    gap: 8px;
+    padding: 8px;
+  }
+
+  html.angio-ready:not(.is-phone) [aria-label="Rotation, RAO / LAO"] > div[aria-hidden="true"],
+  html.angio-ready:not(.is-phone) .gantry-grid > div:first-child > .mt-auto {
+    display: none !important;
+  }
+
+  html.angio-ready:not(.is-phone) .gantry-readout {
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  html.angio-ready:not(.is-phone) .gantry-grid,
+  html.angio-ready:not(.is-phone) [aria-label="Rotation, RAO / LAO"] {
+    gap: 4px !important;
+  }
+
+  html.angio-ready:not(.is-phone) .o-gantry [aria-label="Standard views"] {
+    margin-top: 16px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  html.angio-dock .seg-thumb,
+  html.angio-dock * {
+    transition: none !important;
+    animation: none !important;
   }
 }
