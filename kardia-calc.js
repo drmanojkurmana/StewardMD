@@ -33,7 +33,7 @@
     var pending = ["kardia-calc-fig-data.js", "kardia-calc-fig.js"], i = 0;
     function next() {
       if (i >= pending.length) { S.figLoading = 0; repaint(); return; }
-      var s = G.document.createElement("script"); s.src = "/" + pending[i++] + "?v=krd10"; s.async = false;
+      var s = G.document.createElement("script"); s.src = "/" + pending[i++] + "?v=krd11"; s.async = false;
       s.onload = next; s.onerror = next; G.document.head.appendChild(s);
     }
     if (G.document && G.document.head) next(); else S.figLoading = 0;
