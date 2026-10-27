@@ -305,7 +305,7 @@
     mountHeaderSyncProbe(doc);
     var frame = doc.getElementById("krdProbeFrame"); if (!frame) return;
     var status = doc.getElementById("krdProbeStatus"), err = doc.getElementById("krdProbeErr");
-    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); }
+    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); watchFrameTheme(frame, "probe"); }
     function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
     fitProbeFrame(frame);
@@ -974,11 +974,75 @@
       '<iframe id="krdAngioFrame" class="krd-angio-frame" title="AngioLAB" src="' + I.esc(angioSrc()) + '"></iframe>' +
       "</div></div></div>";
   }
+  /* The two embedded labs wear Kardia's own palette, light or dark (owner 2026-10-27: "it should look like a part of this app",
+   * a black lab on a white page with cut white edges). Their pages are same-origin, so Kardia reads its own tokens from
+   * .krd-root and writes them into the frame as a style: AngioLAB's --ink-* ramp and accent, the Probe Lab's --paper/--ink/--rule.
+   * Re-applied whenever the app theme flips. */
+  function parseColor(v) {
+    v = String(v || "").trim();
+    var m = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(v);
+    if (m) { var h = m[1]; if (h.length === 3) h = h.charAt(0) + h.charAt(0) + h.charAt(1) + h.charAt(1) + h.charAt(2) + h.charAt(2); return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)]; }
+    m = /^rgba?\(\s*(\d+)[ ,]+(\d+)[ ,]+(\d+)/i.exec(v);
+    return m ? [+m[1], +m[2], +m[3]] : null;
+  }
+  function mixRgb(a, b, f) { return [0, 1, 2].map(function (i) { return Math.round(a[i] + (b[i] - a[i]) * f); }); }
+  function rgbTri(c) { return c[0] + " " + c[1] + " " + c[2]; }
+  function rgbHex(c) { return "#" + c.map(function (n) { return (n < 16 ? "0" : "") + n.toString(16); }).join(""); }
+  function krdTokens() {
+    var doc = G.document, root = doc && doc.querySelector ? doc.querySelector(".krd-root") : null;
+    if (!root || !G.getComputedStyle) return null;
+    var cs = G.getComputedStyle(root), t = {}, names = { bg: "--kd-bg", s1: "--kd-s1", s2: "--kd-s2", line: "--kd-line", text: "--kd-text", mut: "--kd-mut", acc: "--kd-acc" };
+    for (var k in names) { t[k] = parseColor(cs.getPropertyValue(names[k])); if (!t[k]) return null; }
+    t.dark = (t.bg[0] + t.bg[1] + t.bg[2]) / 3 < 110;
+    return t;
+  }
+  function safeBottomPx() {
+    try {
+      var d = G.document, el = d.createElement("div");
+      el.style.cssText = "position:absolute;visibility:hidden;padding-bottom:env(safe-area-inset-bottom,0px)";
+      d.body.appendChild(el); var px = parseFloat(G.getComputedStyle(el).paddingBottom) || 0; d.body.removeChild(el); return Math.round(px);
+    } catch (e) { return 0; }
+  }
+  function angioThemeCss(t, safeB) {
+    var ramp = { 950: t.bg, 900: t.s1, 850: t.s2, 800: t.line, 700: mixRgb(t.line, t.mut, 0.25), 600: mixRgb(t.line, t.mut, 0.5), 500: mixRgb(t.line, t.mut, 0.75), 400: t.mut, 300: mixRgb(t.mut, t.text, 0.55), 200: t.text };
+    var vars = Object.keys(ramp).map(function (n) { return "--ink-" + n + ":" + rgbTri(ramp[n]); }).join(";");
+    return ":root{" + vars + ";--accent:" + rgbTri(t.acc) + ";--accent-dim:" + rgbTri(mixRgb(t.acc, t.bg, 0.45)) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
+      "html,body{background:rgb(var(--ink-950))!important;color:rgb(var(--ink-200))}" +
+      /* the iOS white strip on a frame's right edge: the box clips 40px and the page keeps out of them (kardia.css) */
+      "@media (max-width:739px){:root{--safe-r:40px!important}" +
+      /* modals and the toast centre on the frame's viewport, which is 40px wider than what shows: keep them in the visible part */
+      "dialog{margin-left:12px!important;margin-right:auto!important;width:min(680px,calc(100vw - 64px))!important}.fixed.right-2{right:48px!important}}" +
+      ".app{padding-bottom:" + safeB + "px!important}";
+  }
+  function probeThemeCss(t, safeB) {
+    return ":root,:root[data-theme=dark]{--paper:" + rgbHex(t.s1) + ";--rule:" + rgbHex(t.line) + ";--muted:" + rgbHex(t.mut) + ";--ink:" + rgbHex(t.text) + ";color:" + rgbHex(t.text) + ";background:" + rgbHex(t.bg) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
+      "html,body{background:" + rgbHex(t.bg) + "!important}" +
+      "@media (max-width:699px){main{padding-bottom:" + (8 + safeB) + "px!important}}";
+  }
+  function applyFrameTheme(frame, kind) {
+    try {
+      var doc = frame && (frame.contentDocument || (frame.contentWindow && frame.contentWindow.document));
+      var t = krdTokens();
+      if (!doc || !doc.head || !t) return false;
+      var safeB = safeBottomPx(), id = "krdFrameTheme", st = doc.getElementById(id);
+      if (!st) { st = doc.createElement("style"); st.id = id; doc.head.appendChild(st); }
+      st.textContent = kind === "angio" ? angioThemeCss(t, safeB) : probeThemeCss(t, safeB);
+      if (kind === "probe") doc.documentElement.setAttribute("data-theme", t.dark ? "dark" : "light");
+      return true;
+    } catch (e) { return false; }
+  }
+  function watchFrameTheme(frame, kind) {
+    var again = function () { applyFrameTheme(frame, kind); };
+    again();
+    if (frame._krdThemeMo || !G.MutationObserver || !G.document || !G.document.body) return;
+    frame._krdThemeMo = new G.MutationObserver(function () { if (!frame.isConnected) { frame._krdThemeMo.disconnect(); return; } again(); });
+    frame._krdThemeMo.observe(G.document.body, { attributes: true, attributeFilter: ["class"] });
+  }
   function mountAngioLab() {
     var doc = G.document; if (!doc || !doc.getElementById) return;
     var frame = doc.getElementById("krdAngioFrame"); if (!frame) return;
     var status = doc.getElementById("krdAngioStatus"), err = doc.getElementById("krdAngioErr");
-    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; }
+    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; watchFrameTheme(frame, "angio"); }
     function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
     try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
