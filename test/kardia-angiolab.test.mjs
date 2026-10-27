@@ -10,6 +10,7 @@ test("Angio Lab ships the AngioView app and its anatomy", () => {
   for (const f of [
     "kardia/angiolab/index.html",
     "kardia/angiolab/kardia-embed.js",
+    "kardia/angiolab/angiolab-ui.css",
     "kardia/angiolab/vercel-noop.js",
     "kardia/angiolab/assets/index-DN5WvsiQ.js",
     "kardia/angiolab/assets/index-Chn8ROhg.css",
@@ -44,6 +45,10 @@ test("bundle paths stay inside the Angio Lab folder", () => {
   const html = readFileSync("kardia/angiolab/index.html", "utf8");
   assert.ok(html.includes("kardia-embed.js"));
   assert.ok(html.includes("assets/index-DN5WvsiQ.js"));
+  assert.ok(html.includes("angiolab-ui.css"));
+  assert.ok(js.includes("angio-reset"), "reset control stays in the bundle");
+  assert.ok(js.includes("globalThis.__angioLab"), "reset uses the existing view store");
+  assert.equal(js.includes("var Cb=20,wb=2,Tb=10;"), true, "slider thumb stays a constant, not a renderer change");
   assert.equal(html.includes("apple-itunes-app"), false, "no App Store banner inside the app");
   assert.equal(html.includes("angioview.com"), false);
 });

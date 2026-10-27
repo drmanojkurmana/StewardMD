@@ -15,13 +15,16 @@ Echo and ECG learning module, a StewardMD specialty host on the Specialty Engine
 
 ## Tabs
 1. **Echo Lab.** Probe lab: 3D chest with a TTE or TEE probe, live sector image, ECG strip, heart sound playback, knobs, view targets.
-2. **Learn.** Echo lessons per view, measurement and Doppler topic plus pathology, and the existing 1,041 lesson Learn ECG atlas moved under Kardia unchanged (`KARDIOX.openLearn`).
-3. **Practice.** View drills, measurement drills, Doppler drills, knobology drills, POCUS protocols, ECG drills, spot diagnosis on real CC BY clips and simulated images.
-4. **Cases.** Whole patient cases with a structured report.
-5. **KardiQ X.** The existing AI ECG reading screen, unchanged except for its host, still code gated.
+2. **AngioLAB.** Coronary view simulator in an iframe (`kardia.js` `angio` tab). Built app: `kardia/angiolab/` (`assets/index-DN5WvsiQ.js` plus anatomy). Presentation: `angiolab-ui.css` only. Reset calls `__angioLab.reset()` (opening RAO caudal view, left system, right dominance, options and grafts to defaults). Do not edit anatomy JSON or projection math.
+
+   Design contract (operate): the angiogram is the task. Charcoal page `18 20 22`, panel `28 32 36`, one 1px border `108 116 126`, one accent `62 168 128` for selected, focus, and the slider mark. Type is the system stack, 12/14/16, weights 400 and 600. Space is 4/8/12/16. Radius 0. Loading and anatomy errors stay in the header copy. Disabled controls stay labelled and readable. Selected is accent text plus accent border, not a second fill.
+3. **Learn.** Echo lessons per view, measurement and Doppler topic plus pathology, and the existing 1,041 lesson Learn ECG atlas moved under Kardia unchanged (`KARDIOX.openLearn`).
+4. **Practice.** View drills, measurement drills, Doppler drills, knobology drills, POCUS protocols, ECG drills, spot diagnosis on real CC BY clips and simulated images.
+5. **Cases.** Whole patient cases with a structured report.
+6. **KardiQ X.** The existing AI ECG reading screen, unchanged except for its host, still code gated.
 
 ## Key files
-- `kardia-loader.js` - the only Kardia file loaded at app boot. A small stand-in `window.KARDIA` (open, openCase, isOpen, back, close). First open injects the engine plus Kardia stylesheets and scripts in order at one shared `?v=` token (now `krd2`). Scripts load with async false so each runs after the one before, and a retry re-adds only files that did not load, so `kardia.js` createHost never runs twice.
+- `kardia-loader.js` - the only Kardia file loaded at app boot. A small stand-in `window.KARDIA` (open, openCase, isOpen, back, close). First open injects the engine plus Kardia stylesheets and scripts in order at one shared `?v=` token (now `krd9`). Scripts load with async false so each runs after the one before, and a retry re-adds only files that did not load, so `kardia.js` createHost never runs twice.
 - `kardia-flags.js` - one source of truth for the flag: key, type, default, `?kardia` alias, description. Resolution per flag: query param wins, else localStorage, else the default.
 - `kardia.js` - the Specialty Engine host (`SPECIALTY.createHost`: id `kardia`, global `KARDIA`, base `/kardia/`, root `krd-root`, store `smd_kardia_v1`). Tabs, levels, free preview counts, Pro gating, coming soon panels for Echo Lab, Practice and Cases, Learn atlas and gated KardiQ X wiring.
 - `kardia-sim-heart.js` (WP1) - cardiac cycle model: lumped parameter time varying elastance model of LA, LV, RA and RV with four valves plus systemic and pulmonary Windkessel circuits, driven by one clock. The same clock emits P, QRS and T timing plus valve events, so ECG (`codeblue-ecg.js`, `kardiox-ecgwave.js`), heart sounds (`clinix-audio.js`: MVC and TVC with S1, AVC and PVC with S2) and echo stay synchronised. Deterministic, no DOM, `KARDIA_HEART`.
@@ -53,7 +56,7 @@ Echo and ECG learning module, a StewardMD specialty host on the Specialty Engine
 - **Never overwrite a hashed name.** Never upload different bytes under an existing R2 key. Deploy order for new or re-cut clips: upload the new hashed file to R2 first, then ship the build whose `credits.json` names it; never delete the old keys (installed apps still use them).
 
 ## Loader token rule
-- Every Kardia stylesheet and script loads at one shared token owned by `kardia-loader.js` (now `krd2`), mirrored by the loader script tag in `index.html`. **Bump `krdN` on every change to any Kardia file**, or devices keep the cached copy behind the service worker and the module looks unshipped.
+- Every Kardia stylesheet and script loads at one shared token owned by `kardia-loader.js` (now `krd9`), mirrored by the loader script tag in `index.html`. **Bump `krdN` on every change to any Kardia file**, or devices keep the cached copy behind the service worker and the module looks unshipped.
 
 ## Gotchas
 - **Port 8995 is shared by every worktree runner.** `ensureServer` reuses a live server on the base URL, so a stale `serve.mjs` from another worktree serves that worktree files and the run passes or fails against the wrong tree. Before a run, kill a stale server or point the runner at a fresh port with `BASE=` (or `PORT=`).

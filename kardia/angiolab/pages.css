@@ -1,13 +1,13 @@
-/* Plain text pages (privacy, support) in the app's Graphite colors. */
+/* Privacy and support. Same charcoal, border, and type as the lab. */
 :root {
   color-scheme: dark;
 }
 html,
 body {
   margin: 0;
-  background: rgb(8 9 10);
-  color: rgb(182 186 191);
-  font: 16px/1.6 system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background: rgb(18 20 22);
+  color: rgb(238 240 242);
+  font: 400 16px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, "Segoe UI", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
   overscroll-behavior: none;
@@ -15,48 +15,52 @@ body {
 main {
   max-width: 640px;
   margin: 0 auto;
-  padding: 32px 20px calc(64px + env(safe-area-inset-bottom, 0px));
+  padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px));
 }
 h1 {
-  margin: 8px 0 4px;
-  font-size: 22px;
+  margin: 16px 0 8px;
+  font-size: 16px;
   font-weight: 600;
-  color: rgb(216 218 221);
+  letter-spacing: 0;
+  color: rgb(238 240 242);
 }
 h2 {
-  margin: 28px 0 6px;
-  font: 400 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
-  letter-spacing: 0.12em;
+  margin: 16px 0 8px;
+  font: 600 12px/1.4 -apple-system, BlinkMacSystemFont, "SF Pro Text", Inter, system-ui, sans-serif;
+  letter-spacing: 0;
   text-transform: uppercase;
-  color: rgb(138 143 150);
+  color: rgb(196 202 208);
 }
 p,
 ul {
   margin: 0 0 12px;
 }
 ul {
-  padding-left: 20px;
+  padding-left: 16px;
 }
 li {
   margin-bottom: 4px;
 }
 a {
-  color: rgb(216 218 221);
-  text-decoration-color: rgb(72 76 83);
+  color: rgb(238 240 242);
+  text-decoration-color: rgb(108 116 126);
   text-underline-offset: 2px;
 }
-a:hover {
-  color: rgb(232 163 58);
+a:focus-visible {
+  outline: 2px solid rgb(62 168 128);
+  outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; }
 }
 .home {
   margin: 0;
   font-weight: 600;
-  letter-spacing: 0.02em;
 }
 .home a {
   text-decoration: none;
 }
 .date {
-  color: rgb(138 143 150);
-  font-size: 13px;
+  color: rgb(196 202 208);
+  font-size: 12px;
 }
