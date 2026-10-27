@@ -89,7 +89,7 @@
     return n + " of " + st.caps.modulesPerDay + " free " + (st.caps.modulesPerDay === 1 ? "module" : "modules") + " left today";
   }
   // A review item's state for the owner: "ok" approved, "drop", or "" (not decided). Flagged items start undecided.
-  function bulkApprove(list) { var n = 0; (list || []).forEach(function (r) { if (!r.st && r.it.qg && r.it.qg.v === "ok") { r.st = "ok"; n++; } }); return n; }
+  function bulkApprove(list) { var n = 0; (list || []).forEach(function (r) { if (!r.st && (!r.it.qg || r.it.qg.v === "ok")) { r.st = "ok"; n++; } }); return n; }
   function approved(list) { return (list || []).filter(function (r) { return r.st === "ok"; }).map(function (r) { return r.it; }); }
   var WHY = { disagree: "The checker chose a different answer", "multiple-best": "More than one option may be right", "factual-doubt": "A fact may be wrong", outdated: "May be outdated", "not-in-source": "Not supported by the source", "no-verdict": "Not checked" };
 
@@ -662,6 +662,7 @@
       '<label class="pc-lbl" for="qgASub">Subject</label><select id="qgASub" name="subject" class="pc-in">' + opt("", "Choose a subject", !au.subject) + subs.map(function (s) { return opt(s.id, plain(s.name) || s.id, au.subject === s.id); }).join("") + "</select>" +
       '<label class="pc-lbl" for="qgAMod">Module</label><select id="qgAMod" name="module" class="pc-in"' + (au.subject ? "" : " disabled") + ">" + opt("", au.subject ? "A new module (name below)" : "Choose a subject first", !au.module) + mods.map(function (t) { return opt(t.id, plain(t.title) || t.id, au.module === t.id); }).join("") + "</select>" +
       (!au.module ? '<label class="pc-lbl" for="qgANew">New module name</label><input id="qgANew" name="module-name" class="pc-in" maxlength="80" autocomplete="off" value="' + esc(au.newName) + '">' : "") +
+      (G.PREP_IMPORT ? '<button type="button" class="pn-mod" data-act="g-imp-owner"><span class="pn-mb"><b>Import MCQs (no AI)</b><small>From a PDF in the recall layout or a JSON template</small></span>' + host.ico("chev") + "</button>" : "") +
       seg("Make it from", "qgASrcL", chip("g-asrc", "topic", "A topic", au.kind === "topic") + chip("g-asrc", "notes", "Notes", au.kind === "notes") + chip("g-asrc", "pdf", "A PDF", au.kind === "pdf")) +
       '<label class="pc-lbl" for="qgATopic">Topic for MaiK</label><input id="qgATopic" name="topic" class="pc-in" maxlength="150" autocomplete="off" value="' + esc(au.topic) + '">' +
       (au.kind === "notes" ? '<label class="pc-lbl" for="qgAText">Notes (every question must be answerable from them)</label><textarea id="qgAText" name="source" class="pc-in pc-ta" rows="7" placeholder="Paste the source chunks…">' + esc(au.text) + "</textarea>" +
@@ -764,7 +765,7 @@
         var it = r.it, fl = it.qg && it.qg.v !== "ok";
         var ed = r.ed;
         return '<li class="pn-panel qg-item' + (r.st === "ok" ? " is-ok" : r.st === "drop" ? " is-drop" : "") + '" data-i="' + i + '">' +
-          '<p class="qg-meta"><span class="qg-n">' + (i + 1) + "</span>" + (fl ? '<span class="qg-flag">' + host.ico("flag") + " " + esc((it.qg.why || []).map(function (w) { return WHY[w] || w; }).join(", ")) + "</span>" : '<span class="qg-pass">' + host.ico("check") + " Passed the checks</span>") +
+          '<p class="qg-meta"><span class="qg-n">' + (i + 1) + "</span>" + (it.imp ? '<span class="qg-pass">Imported, not checked by MaiK</span>' : fl ? '<span class="qg-flag">' + host.ico("flag") + " " + esc((it.qg.why || []).map(function (w) { return WHY[w] || w; }).join(", ")) + "</span>" : '<span class="qg-pass">' + host.ico("check") + " Passed the checks</span>") +
           (it.qg && it.qg.u ? '<span class="qg-u">Not from a source</span>' : "") + "</p>" +
           (ed ? '<label class="pc-lbl" for="qgE' + i + '">Question</label><textarea id="qgE' + i + '" class="pc-in pc-ta qg-edq" data-i="' + i + '" rows="4">' + esc(it.q) + "</textarea>" : '<p class="qg-q">' + esc(it.q) + "</p>") +
           '<ol class="qg-opts">' + it.o.map(function (o, k) { return '<li class="' + (k === it.a ? "key" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + esc(o) + (k === it.a ? '<span class="pc-sr"> (answer)</span>' : "") + (fl && it.qg.pick === k && k !== it.a ? ' <small class="qg-pick">checker chose this</small>' : "") + "</span></li>"; }).join("") + "</ol>" +
@@ -924,6 +925,6 @@
   }
 
   G.PREP_QGEN = { act: act, refresh: refresh, canCreate: canCreate, isOwner: isOwner, sub: sub, report: report, provLine: provLine, more: more,
-    status: function () { return status; }, _pure: PURE, _cs: cs, _job: function () { return job; }, _au: function () { return au; },
+    status: function () { return status; }, saveAuthor: function () { saveAuthor(); }, _pure: PURE, _cs: cs, _job: function () { return job; }, _au: function () { return au; },
     _setStatus: function (s) { status = s; statusAt = Date.now(); } };
 })(typeof window !== "undefined" ? window : this);
