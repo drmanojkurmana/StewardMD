@@ -261,15 +261,8 @@ body:not(.dark):not(.v3-dark) .krd-root {
 /* Phone: the Probe Lab frame is full height; this column scrolls it. */
 @media (max-width: 699px) {
   .krd-root .krd-echo-col, .krd-root .krd-probe-wrap { flex: 0 0 auto; height: auto; min-height: 0; }
-  /* iOS paints a white strip down the frame's right edge; the frame is
-   * 40px wider than its box and the box clips it (the Probe Lab pads its
-   * right side by the same 40px, kardia-unbrand.js). */
-  .krd-root .krd-probe-wrap { overflow: hidden; }
-  .krd-root .krd-probe-frame { flex: 0 0 auto; min-height: 0; width: calc(100% + 40px); max-width: none; border-radius: 0; }
+  /* The labs fill the tab edge to edge; the frames sit on Kardia's own background so nothing shows at the edge. */
+  .krd-root .krd-probe-frame { flex: 0 0 auto; min-height: 0; width: 100%; border-radius: 0; }
   .krd-root .krd-echo-scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
   .krd-root .krd-echo-scroll:has(.krd-probe-wrap) { padding-bottom: 0; }
-  /* AngioLAB gets the same iOS right-edge fix as the Probe Lab (above): the frame is 40px wider than its box, the box clips it,
-     and the page inside reserves those 40px (--safe-r, see kardia.js angioThemeCss). */
-  .krd-root .krd-angio-wrap { overflow: hidden; }
-  .krd-root .krd-angio-frame { flex: 0 0 auto; width: calc(100% + 40px); max-width: none; }
 }

@@ -1008,10 +1008,6 @@
     var vars = Object.keys(ramp).map(function (n) { return "--ink-" + n + ":" + rgbTri(ramp[n]); }).join(";");
     return ":root{" + vars + ";--accent:" + rgbTri(t.acc) + ";--accent-dim:" + rgbTri(mixRgb(t.acc, t.bg, 0.45)) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
       "html,body{background:rgb(var(--ink-950))!important;color:rgb(var(--ink-200))}" +
-      /* the iOS white strip on a frame's right edge: the box clips 40px and the page keeps out of them (kardia.css) */
-      "@media (max-width:739px){:root{--safe-r:40px!important}" +
-      /* modals and the toast centre on the frame's viewport, which is 40px wider than what shows: keep them in the visible part */
-      "dialog{margin-left:12px!important;margin-right:auto!important;width:min(680px,calc(100vw - 64px))!important}.fixed.right-2{right:48px!important}}" +
       ".app{padding-bottom:" + safeB + "px!important}";
   }
   function probeThemeCss(t, safeB) {

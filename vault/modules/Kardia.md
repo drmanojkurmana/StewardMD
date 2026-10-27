@@ -79,3 +79,4 @@ tab with no side margin and sit on `var(--kd-bg)`. iOS paints a white strip down
 and the box clips them; AngioLAB reserves those 40px through its own `--safe-r`, and the injected CSS pulls its `dialog` and toast back into the
 visible part. The credits sheet has no Privacy / Support row. Not reproduced on a real iPhone from CI (no WebKit here): check the right edge and the
 bottom edge on the device after the OTA.
+- **No oversize-frame hack for the labs (2026-10-27).** The 40px wider frame plus reserved right gutter (#1823) guessed at an iOS white strip; on the phone it left a blank right margin and the labs did not fill the tab. Removed: frames are 100% wide, the Probe Lab pads 8px, and both frames sit on Kardia's background so any edge strip is invisible. Do not reintroduce width tricks without measuring on the device.
