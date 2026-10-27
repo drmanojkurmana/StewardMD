@@ -70,3 +70,12 @@ Echo and ECG learning module, a StewardMD specialty host on the Specialty Engine
 - Clinical sign-off: all lesson, drill and case content is `ai_drafted`; KardiQ X AI reading stays code gated until sign-off, as do the PTB-XL and CirCor imports (cleared) and the CAMEO exclusion (licence unconfirmed, stays out).
 
 Deps: [[Specialty Engine]] (host, Learn, bank, clinics, FSRS, notes) · [[KardiQ X]] (Learn ECG atlas plus gated AI reading) · [[RadioAnatome 3D]] (atlas chunks, loader and restore patterns) · [[Code Blue]] and [[Narkē]] (pulse check and POCUS protocol links) · [[Infra]] (R2).
+
+## Embedded labs wear Kardia's palette (2026-10-27)
+AngioLAB and the Probe Lab are same-origin iframes. `kardia.js` (`watchFrameTheme`, `angioThemeCss`, `probeThemeCss`) reads the `--kd-*` tokens
+from `.krd-root` and writes them into the frame as a `<style id="krdFrameTheme">`: AngioLAB's `--ink-950..200` ramp and `--accent` (its Tailwind
+palette is CSS variables), the Probe Lab's `--paper/--ink/--rule` plus `data-theme`. Re-applied on a body class change (theme flip). Frames fill the
+tab with no side margin and sit on `var(--kd-bg)`. iOS paints a white strip down a frame's right edge, so both frames are 40px wider than their box
+and the box clips them; AngioLAB reserves those 40px through its own `--safe-r`, and the injected CSS pulls its `dialog` and toast back into the
+visible part. The credits sheet has no Privacy / Support row. Not reproduced on a real iPhone from CI (no WebKit here): check the right edge and the
+bottom edge on the device after the OTA.
