@@ -63,6 +63,9 @@ export async function onRequest(context) {
     // @capgo/capacitor-updater's download() fetches natively, outside the WebView — it needs an
     // ABSOLUTE url, which only the router (not _ota.js) can construct from the live request.
     if (result.ota && result.zipHash) result.zipUrl = new URL(request.url).origin + "/api/ota/file/" + result.zipHash;
+    // files[] (every www file with its hash, ~150KB of JSON) is only for the delta install, which asks for it with
+    // files=1 at the moment of installing. Every other check (launch, resume) just needs to know "is there an update".
+    if (result.ota && url.searchParams.get("files") !== "1") delete result.files;
     return json(result, 200, { "Cache-Control": "no-store" });   // never let an edge/browser cache "is there an update"
   }
   /* SPEED PROBE for the download card. A plain-text body of n ASCII bytes (1 KB to 1.5 MB, no-store, no R2, no KV): the app
