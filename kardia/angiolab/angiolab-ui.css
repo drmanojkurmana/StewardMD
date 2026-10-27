@@ -629,6 +629,61 @@ dialog {
   border-color: rgb(var(--line));
 }
 
+/* Graft names stay on screen. The row wraps; it does not scroll sideways. */
+.phone .o-astrip .strip-row-grafts {
+  height: auto !important;
+  overflow: visible;
+}
+
+.phone .o-astrip .strip-row-grafts .strip-grid {
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: 8px;
+  height: auto !important;
+  overflow: visible;
+}
+
+.phone .o-astrip .strip-row-grafts .strip-grid > :nth-child(2) {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+  overflow: visible;
+}
+
+.phone .o-astrip .strip-row-grafts .strip-grid > :last-child {
+  flex: 0 0 auto;
+  width: auto;
+  margin-left: 0;
+}
+
+.phone .o-astrip .strip-row-grafts .strip-grid > :last-child:has(.grafts-off.invisible) {
+  flex: 0 0 0;
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.phone .o-astrip .strip-row-grafts .seg.seg-grafts {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  height: auto !important;
+  min-height: 44px;
+  gap: 8px;
+  overflow: visible;
+}
+
+.phone .o-astrip .strip-row-grafts .seg.seg-grafts > button {
+  flex: 0 0 auto;
+  min-width: 44px;
+  min-height: 44px;
+  height: 44px !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
