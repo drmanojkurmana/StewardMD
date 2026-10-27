@@ -6,7 +6,7 @@
    Kill switch (same rule as the home tile in home.js): localStorage smd_narke = "0" or ?narke=0 for this load. */
 (function (G) {
   "use strict";
-  var V = "nrk9";
+  var V = "nrk10";
   var CSS = ["specialty.css", "narke.css", "narke-explore-ui.css", "narke-clinic.css", "narke-vent.css", "narke-vent-bridge.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
     "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "narke.js", "narke-explore-ui.js", "narke-clinic.js", "narke-vent.js", "narke-vent-bridge.js"];
@@ -51,7 +51,7 @@
     }, function (e) { loading = null; throw e; });
     return loading;
   }
-  function fail() { try { if (G.toast) G.toast("Narkē could not load. Check your connection and try again."); } catch (e) {} }
+  function fail() { try { if (G.toast) G.toast("Anesthetica could not load. Check your connection and try again."); } catch (e) {} }
   function real() { return G.NARKE && G.NARKE !== stub ? G.NARKE : null; }
 
   var stub = {

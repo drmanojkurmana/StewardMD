@@ -770,7 +770,7 @@
     var linkHtml = "";
     if (isPulse && pr.i === 0) {
       linkHtml = '<div class="krdp-links"><p><button type="button" class="sp-btn sec sp-wide" data-pact="proto-codeblue">Open in Code Blue</button></p>' +
-        '<p><button type="button" class="sp-btn sec sp-wide" data-pact="proto-narke">Open Narkē for perioperative context</button></p></div>';
+        '<p><button type="button" class="sp-btn sec sp-wide" data-pact="proto-narke">Open Anesthetica for perioperative context</button></p></div>';
     }
     render(head(pr.data.title, pr.data.scenario) +
       '<p class="krdp-step">Step ' + (pr.i + 1) + " of " + pr.data.steps.length + ": " + esc(step.title) + "</p>" +
@@ -863,7 +863,7 @@
     try {
       if (G.NARKE && G.NARKE.open) { G.NARKE.open(); return true; }
     } catch (e) {}
-    try { if (G.toast) G.toast("Narkē is not available on this device."); } catch (e) {}
+    try { if (G.toast) G.toast("Anesthetica is not available on this device."); } catch (e) {}
     return false;
   }
   function openPulseCheckEcho() {
