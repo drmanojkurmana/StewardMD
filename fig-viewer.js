@@ -301,7 +301,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     ".smdc{flex:none;min-width:0;margin:0 0 6px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.smdc>*{min-width:0}.smdc-t{grid-column:1/3;padding:3px}.smdc-t button{min-height:34px;font-size:14px}" +
     ".smdc-r{padding:6px 12px;font-size:13px;gap:1px;border-top:1px solid var(--anatomy-faint)}.smdc-r b{font-size:10px}" +
     "@media (max-width:640px){.smdc{grid-template-columns:1fr}.smdc-t{grid-column:1}}" +
-    ".smd-why{flex:0 0 auto;max-height:24vh;overflow:auto;margin:0 0 6px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
+    ".smd-why{flex:0 0 auto;max-height:28vh;overflow:auto;margin:0 0 6px;-webkit-mask-image:linear-gradient(#000 calc(100% - 22px),transparent);mask-image:linear-gradient(#000 calc(100% - 22px),transparent);padding-bottom:16px;display:grid;gap:3px;--w-t:#f2b84b;--w-m:#b48cff;--w-f:#4fd1a5;--w-i:#ff8fa3;--w-a:#ff7a59}body[data-theme='light'] .smd-why{--w-t:#9a6200;--w-m:#6a3fc4;--w-f:#0f7a5c;--w-i:#b4234a;--w-a:#b8421d}" +
     ".smd-why p{margin:0;padding:4px 10px;border-left:4px solid var(--c);border-radius:6px;background:color-mix(in srgb,var(--c) 11%,transparent);font:13px/1.35 system-ui,-apple-system,sans-serif;color:var(--anatomy-text)}" +
     ".smd-why b{font:700 10px system-ui;letter-spacing:.05em;text-transform:uppercase;color:var(--c);margin-right:6px}.smd-why mark{background:none;color:var(--anatomy-strong);font-weight:700}" +
     "@media (min-width:900px){.smd-why p{font-size:14px}}" +
@@ -318,7 +318,7 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     ".smdc .smdc-r{display:none}.smdc-t{grid-column:1/3}" +
     "@media (min-width:800px) and (min-aspect-ratio:5/4){body{display:grid;width:100%;grid-template-columns:minmax(0,1fr) minmax(300px,min(380px,38vw));grid-template-rows:minmax(0,1fr) auto}.iso-page{grid-column:1;grid-row:1/3;min-width:0}" +
     ".smd-dock{grid-column:2;grid-row:1;min-height:0;overflow:auto;border-top:0;border-left:1px solid var(--anatomy-faint);padding:10px 14px}.smd-foot{grid-column:2;grid-row:2;min-width:0;background:var(--anatomy-card)}" +
-    ".smd-dock .dr-controls{grid-template-columns:minmax(0,1fr)}.smd-why{max-height:none;margin-bottom:10px}.smd-why p{font-size:14px}}" +
+    ".smd-dock .dr-controls{grid-template-columns:minmax(0,1fr)}.smd-why{max-height:none;margin-bottom:10px;-webkit-mask-image:none;mask-image:none;padding-bottom:0}.smd-why p{font-size:14px}}" +
     "@media (max-width:799px){.smd-dock{max-height:44dvh;overflow-y:auto}}" +
     ".iso-page,.smd-dock,.smd-foot,.iso-figure,.iso-plate,.dr-svg,.smdz-st,.dr-controls,.dr-range,.smd-why{min-width:0;max-width:100%}" +
     ".smd-help{position:absolute;inset:0;z-index:9;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.45)}" +
@@ -487,6 +487,12 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     try { masteryPanel(el, String(o.src || "")); } catch (e) {}
     var key = function (e) { if (e.key === "Escape") { e.stopPropagation(); var ms = el.querySelector(".smdfig-ms"); if (ms && !ms.hidden) { ms.hidden = true; var mb = el.querySelector(".smdfig-ms-btn"); if (mb) mb.setAttribute("aria-expanded", "false"); } else close(); } };
     D.addEventListener("keydown", key, true);
+    // The app zooms the root (auto fit 0.95 on phones under 400 px, a Display size the user chose). An iframe under a
+    // zoomed ancestor lays its page out at the unzoomed size and WebKit draws it scaled into the frame, so the figure
+    // filled 95% of the screen with a white strip right and bottom (owner screenshot, iPhone). The sheet counter-zooms,
+    // like the Display sheet, so the frame and the page inside it are both real screen pixels.
+    var rz = parseFloat(D.documentElement.style.zoom) || 1;
+    if (rz !== 1) el.style.zoom = String(1 / rz);
     D.body.appendChild(el);
     cur = { el: el, from: o.from || null, key: key };
     try { el.querySelector(".smdfig-x").focus(); } catch (e) {}
