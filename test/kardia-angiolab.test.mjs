@@ -68,5 +68,6 @@ test("AngioLAB and the Probe Lab wear Kardia's palette and sit flush (owner 2026
   assert.ok(k.includes('attributeFilter: ["class"]'), "re-themed when the app theme flips");
   assert.ok(/\.krd-angio-frame \{ flex: 1 1 auto;[^}]*background: var\(--kd-bg\)/.test(css), "frame sits on Kardia's background, not a fixed black");
   assert.ok(css.includes(".krd-echo-scroll:has(.krd-probe-wrap) { padding: 0; }"), "Probe Lab is full width, no side margin");
-  assert.ok(/krd-angio-frame \{ flex: 0 0 auto; width: calc\(100% \+ 40px\)/.test(css), "AngioLAB gets the same iOS right-edge clip as the Probe Lab");
+  assert.equal(css.includes("calc(100% + 40px)"), false, "no oversize frame: the labs fit the tab width");
+  assert.equal(k.includes("--safe-r:40px"), false, "no reserved right gutter inside the labs");
 });

@@ -14,7 +14,7 @@
        * fitProbeFrame). The view toolkit and controls follow below; the
        * Kardia page scrolls to them. No guide text (owner 2026-10-27). */
       "html,body{height:auto!important;overflow:hidden!important}" +
-      "main{height:auto!important;max-height:none!important;overflow:visible!important;padding:8px 48px 8px 8px!important}" +
+      "main{height:auto!important;max-height:none!important;overflow:visible!important;padding:8px!important}" +
       ".lab{display:flex!important;flex-direction:column!important;height:auto!important;gap:8px!important;padding:0!important;box-sizing:border-box}" +
       ".stage{flex:0 0 auto!important;height:calc(var(--kav,100vh) / 2 - 4px)!important;min-height:0!important}" +
       ".scan-column{display:flex!important;flex-direction:column!important;gap:8px!important;overflow:visible!important;min-height:0!important}" +
