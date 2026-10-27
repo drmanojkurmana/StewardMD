@@ -28,8 +28,8 @@ DEVICES = {
     "and": ("android.png", 412, 44, "android"),
 }
 SHOTS = {
-    "ios": ["home", "clinix", "dose", "mono", "beta"],
-    "and": ["maik", "kbl", "dose", "mono", "beta"],
+    "ios": ["home", "clinix", "dose", "mono", "beta", "ins"],
+    "and": ["maikans", "kbl", "dose", "mono", "beta"],
 }
 IPADS = ["angio", "kardia", "abg", "mono", "beta"]
 WATCH = {"codeblue": "watch-frame-codeblue.png", "critical": "watch-frame-critical.png"}
@@ -39,8 +39,9 @@ WATCHES = [("alpine", "codeblue"), ("ocean", "critical")]
 
 
 def _fg(img):
-    bg = img.getpixel((4, 4))
-    return bg, ((12, 16, 15) if sum(bg[:3]) > 380 else (255, 255, 255))
+    top = img.crop((0, 0, img.width, 2)).resize((1, 1), Image.BOX).getpixel((0, 0))
+    lum = .2126 * top[0] + .7152 * top[1] + .0722 * top[2]
+    return top, ((12, 16, 15) if lum > 150 else (255, 255, 255))
 
 
 def _battery(d, xr, cy, u, fg):
@@ -70,6 +71,8 @@ def status_bar(img, css_w, bar_css, style):
     bar = int(round(bar_css * u))
     bg, fg = _fg(img)
     out = Image.new("RGB", (w, h + bar), bg)
+    # the bar continues the screen's own top edge (a gradient header stays a gradient), then the screen
+    out.paste(img.crop((0, 0, w, 2)).resize((w, bar)), (0, 0))
     out.paste(img, (0, bar))
     d = ImageDraw.Draw(out)
     if style == "ios":
