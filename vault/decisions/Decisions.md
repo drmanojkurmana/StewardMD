@@ -11885,3 +11885,11 @@ Owner confirmed with the author (Mohammed Kamareddine, MD, echosuite.app) that E
 
 ## 2026-10-27 - Author names, contacts and permission statements removed from AngioLAB and Probe Lab; only resource attributions kept
 Owner asked to remove "Created by Annas Rahman · annasrahman.com" (AngioLAB) and Mohammed Kamareddine, MD (Probe Lab / Echo Lab), then also the author's contact details, and every statement: keep only the attributions for the resources actually used (the CC BY / CC BY-SA clips, figures and anatomy, the published references, and the MIT / OFL notices). Done: AngioLAB credits-sheet "Created by" line and the thank-you sentence; AngioLAB `privacy.html` Contact section and `support.html` contact email; Probe Lab About sheet name and the social and email icons, the "retain their listed rights" paragraph and image-caption sentence, JSON-LD creator; the Kardia credits screen no longer prints a Probe Lab / permission line, only the figures and videos lists from `credits.json` (`PROBE_LAB_CREDIT` removed). Kept deliberately: the clinical disclaimers ("AngioLAB is an educational simulation, not for clinical use"; "EchoSuite is an educational product, not a diagnostic medical device"), the BodyParts3D "derived, re-meshed" modification note CC BY requires, and the font / Three.js licence links. The 2026-10-26 reuse permission above is unchanged. AngioLAB's privacy page now has no contact line; add one back if the stores ask for it.
+
+## 2026-10-28 - Colleagues: server-side contacts, mutual on link, invite link /add/<ID>
+Owner asked to take Colleagues to 10/10. Contacts live on the server (`kx_contacts`), not the phone, so they survive a reinstall
+(which wipes device data, see CLAUDE.md). Every referral, handover and case-room invite links both doctors; adding by ID links both too,
+with a fixed-text push. A contact is addressed by an opaque hash id, never the colleague's uid. Adding a contact needs only sign-in, and the
+colleague need not be verified: no patient data moves, and sending still requires both verified. The invite link carries only the inviter's
+own StewardMD ID; its no-app page does no name lookup, so the directory cannot be browsed. Rides the existing `smd_kits_share` /
+`KITS_SHARE_ON` switches; no separate flag. Do not re-litigate.
