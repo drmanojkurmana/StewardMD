@@ -31,7 +31,12 @@
     "button,[role=button],.ctl-btn,.preset,.seg>button,.hit-area{touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}" +
     "input,textarea,select{font-size:16px}" +
     ".hit-area{min-height:44px;display:inline-flex;align-items:center}" +
-    ".app{padding-bottom:env(safe-area-inset-bottom,0px)}";
+    ".app{padding-bottom:env(safe-area-inset-bottom,0px)}" +
+    // iPad and unfolded foldables: the 3D heart's tool row (Detector, Foreshort., Skeleton, See-through, Labels,
+    // Play) wraps to two rows in a narrow side panel, but its strip is a fixed 36 px, so the first row spilled above
+    // the panel and the second (Labels, Play) was cut off. The strip grows to fit instead.
+    ".strip:has(.heart-tools){height:auto;min-height:36px;padding-top:4px;padding-bottom:4px}" +
+    ".strip:has(.heart-tools) .strip-tools{overflow:visible}";
   var st = document.createElement("style");
   st.id = "kardiaAngioEmbed";
   st.textContent = css;

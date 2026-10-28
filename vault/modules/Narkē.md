@@ -1,4 +1,8 @@
-# Narkē (Anaesthesia)
+# Narkē (Anaesthesia), shown as **Anesthetica**
+
+- **Renamed 2026-10-27 (owner):** the user-facing name is **Anesthetica** (Hindi एनेस्थेटिका) in the app and marketing.
+  Code ids keep `narke` (flag `smd_narke`, route `stewardmd://narke`, files, `window.NARKE`), the SURGX convention.
+  Tokens bumped: `narke-loader` nrk10, `kardia-loader` krd13.
 
 - **What:** Anaesthesia learning module for MBBS and residents, the second host on the [[Specialty Engine]] after [[Tokós]].
 - **Plan:** `docs/superpowers/plans/2026-10-06-narke-anaesthesia-master-plan.md` (46 NMC AS competencies, 2018 Vol III).

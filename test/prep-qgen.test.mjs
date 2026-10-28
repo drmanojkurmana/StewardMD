@@ -330,6 +330,12 @@ test("owner bulk: batch submit, poll to verify, poll to done; stage to R2", asyn
   const saved = env.PREP_BANK_R2.m.get("prep-qgen/staging/" + st.json.stageId + ".json");
   assert.equal(JSON.parse(saved).items.length, p.json.items.length);
   assert.equal(saved.indexOf("prep-bank/"), -1);
+  // a staged set can be brought back to Author (owner only) to publish live instead
+  assert.equal((await post(env, { op: "stageget", stageId: st.json.stageId })).status, 403);
+  assert.equal((await post(env, { op: "stageget", stageId: "bad" }, "tok-o")).status, 400);
+  assert.equal((await post(env, { op: "stageget", stageId: "s20260101-abcdef12" }, "tok-o")).status, 404);
+  const back = await post(env, { op: "stageget", stageId: st.json.stageId }, "tok-o");
+  assert.equal(back.status, 200); assert.equal(back.json.items.length, p.json.items.length); assert.equal(back.json.items[0].q, p.json.items[0].q);
 });
 
 test("owner publish: one reviewed set goes live in several modules, public per module, and can be taken down", async () => {
@@ -355,10 +361,98 @@ test("owner publish: one reviewed set goes live in several modules, public per m
   const { onRequestGet } = await import("../functions/api/prep/fix.js");
   const g = await onRequestGet({ request: new Request("https://x.test/api/prep/fix?module=ph-first"), env });
   assert.equal((await g.json()).a.length, 2);
+  // the repeat took the live copies into its own batch, so the first batch now reaches only the other module
   const u = await post(env, { op: "unpublish", batch: r.json.batch, targets: t }, "tok-o");
-  assert.equal(u.json.removed, 4);
+  assert.equal(u.json.removed, 2);
+  assert.equal(JSON.parse(env.MAIK_KV.m.get("prep:fixmod:ph-first")).a.length, 2);
+  assert.equal((await post(env, { op: "unpublish", batch: again.json.batch, targets: [t[0]] }, "tok-o")).json.removed, 2);
   assert.equal(env.MAIK_KV.m.get("prep:fixmod:ph-first"), undefined);
   assert.deepEqual(JSON.parse(env.MAIK_KV.m.get("prep:fixix")), {});
+});
+
+test("owner publish: republishing updates the live copy, keeps the owner's write-up (x), labels it hand; list and selective or total delete", async () => {
+  reset();
+  const env = envFor();
+  const mk = (n, extra) => Object.assign({ id: "imp_" + String(n).padStart(12, "b"), q: "Which finding number " + n + " is typical of the stated condition?", o: ["Alpha " + n, "Beta " + n, "Gamma " + n, "Delta " + n], a: 2, exp: "Gamma " + n + " is typical.", r: ["A is wrong " + n, "B is wrong " + n, "Gamma " + n + " is typical.", "D is wrong " + n], kp: "", d: 2, cog: "recall", tg: [] }, extra || {});
+  const x1 = { key: "Gamma 1 is typical.", others: { A: "A is wrong 1", B: "B is wrong 1", D: "D is wrong 1", Z: "ignored" }, notes: "## Topic\n- point" };
+  const t = [{ subject: "pharmacology", module: "ph-first" }];
+  const r1 = await post(env, { op: "publish", targets: t, items: [mk(1, { x: x1 }), mk(2), mk(3)] }, "tok-o");
+  assert.equal(r1.json.added, 3); assert.equal(r1.json.updated, 0);
+  const rec1 = JSON.parse(env.MAIK_KV.m.get("prep:fixmod:ph-first"));
+  assert.equal(rec1.a[0].gen, "hand"); assert.equal(rec1.a[0].src, undefined); assert.equal(rec1.a[0].pv, undefined);
+  assert.deepEqual(Object.keys(rec1.a[0].x.others), ["A", "B", "D"]); assert.equal(rec1.a[0].x.notes, "## Topic\n- point");
+  assert.equal(rec1.a[1].x, undefined);
+  // the same question again with a corrected explanation: replaced, not doubled, new batch id
+  const fixed = mk(1, { x: x1, exp: "Gamma 1 is typical, corrected." });
+  const r2 = await post(env, { op: "publish", targets: t, items: [fixed] }, "tok-o");
+  assert.equal(r2.json.added, 0); assert.equal(r2.json.updated, 1);
+  const rec2 = JSON.parse(env.MAIK_KV.m.get("prep:fixmod:ph-first"));
+  assert.equal(rec2.a.length, 3); assert.equal(rec2.a.find((x) => x.q === fixed.q).exp, "Gamma 1 is typical, corrected.");
+  // a second module
+  await post(env, { op: "publish", targets: [{ subject: "medicine", module: "med-first" }], items: [mk(4)] }, "tok-o");
+  // list: owner only
+  assert.equal((await post(env, { op: "plist" })).status, 403);
+  const l = await post(env, { op: "plist" }, "tok-o");
+  assert.equal(l.status, 200); assert.equal(l.json.total, 4); assert.equal(l.json.modules.length, 2);
+  const ph = l.json.modules.find((m) => m.module === "ph-first");
+  assert.equal(ph.subject, "pharmacology"); assert.equal(ph.n, 3); assert.ok(ph.items.every((i) => i.id.startsWith("mk-") && i.q.length <= 160 && i.hand === 1));
+  // selective delete: bad input, then one question
+  assert.equal((await post(env, { op: "pdelete", targets: [{ subject: "pharmacology", module: "ph-first" }] }, "tok-o")).status, 400, "needs all:true or ids");
+  assert.equal((await post(env, { op: "pdelete", targets: [{ subject: "pharmacology", module: "ph-first", ids: ["bad id!"] }] }, "tok-o")).status, 400);
+  assert.equal((await post(env, { op: "pdelete", all: false }, "tok-o")).status, 400);
+  assert.equal((await post(env, { op: "pdelete", all: true })).status, 403);
+  const one = await post(env, { op: "pdelete", targets: [{ subject: "pharmacology", module: "ph-first", ids: [ph.items[0].id] }] }, "tok-o");
+  assert.equal(one.json.removed, 1);
+  assert.equal(JSON.parse(env.MAIK_KV.m.get("prep:fixmod:ph-first")).a.length, 2);
+  // a different subject with the same module id is untouched
+  const wrongSub = await post(env, { op: "pdelete", targets: [{ subject: "medicine", module: "ph-first", all: true }] }, "tok-o");
+  assert.equal(wrongSub.json.removed, 0);
+  // whole module
+  const mod = await post(env, { op: "pdelete", targets: [{ subject: "pharmacology", module: "ph-first", all: true }] }, "tok-o");
+  assert.equal(mod.json.removed, 2);
+  assert.equal(env.MAIK_KV.m.get("prep:fixmod:ph-first"), undefined);
+  assert.ok(!("ph-first" in JSON.parse(env.MAIK_KV.m.get("prep:fixix"))));
+  // content fixes in the same record survive a delete of the added questions
+  env.MAIK_KV.m.set("prep:fixmod:med-first", JSON.stringify(Object.assign(JSON.parse(env.MAIK_KV.m.get("prep:fixmod:med-first")), { q: { "bank-1": { exp: "fixed" } } })));
+  const everything = await post(env, { op: "pdelete", all: true }, "tok-o");
+  assert.equal(everything.json.removed, 1);
+  assert.deepEqual(JSON.parse(env.MAIK_KV.m.get("prep:fixmod:med-first")).q, { "bank-1": { exp: "fixed" } });
+  assert.equal(JSON.parse(env.MAIK_KV.m.get("prep:fixmod:med-first")).a.length, 0);
+  assert.equal((await post(env, { op: "plist" }, "tok-o")).json.total, 0);
+});
+
+test("owner publish: a new module is created from a title, listed for the app, and drops out when its questions are deleted", async () => {
+  reset();
+  const env = envFor();
+  const mk = (n) => ({ id: "imp_" + String(n).padStart(12, "c"), q: "Which finding number " + n + " is typical of the stated new condition?", o: ["Alpha " + n, "Beta " + n, "Gamma " + n, "Delta " + n], a: 0, exp: "Alpha " + n + " is typical.", r: ["Alpha " + n + " is typical.", "B wrong", "C wrong", "D wrong"], kp: "", d: 2, cog: "recall", tg: [] });
+  const { onRequestGet } = await import("../functions/api/prep/fix.js");
+  const nmOf = async () => (await (await onRequestGet({ request: new Request("https://x.test/api/prep/fix?ix=1"), env })).json()).nm;
+  assert.equal((await post(env, { op: "publish", targets: [{ subject: "ss-medical-oncology", title: "x" }], items: [mk(1)] }, "tok-o")).status, 400, "title too short");
+  const r = await post(env, { op: "publish", targets: [{ subject: "ss-medical-oncology", title: "NEET-SS Recall (Oct 2026)" }, { subject: "ss-medical-oncology", module: "son-iniss-recalls" }], items: [mk(1), mk(2)] }, "tok-o");
+  assert.equal(r.status, 200, r.text);
+  assert.deepEqual(r.json.targets[0], { subject: "ss-medical-oncology", module: "au-neet-ss-recall-oct-2026", title: "NEET-SS Recall (Oct 2026)" });
+  assert.deepEqual(r.json.targets[1], { subject: "ss-medical-oncology", module: "son-iniss-recalls" });
+  const rec = JSON.parse(env.MAIK_KV.m.get("prep:fixmod:au-neet-ss-recall-oct-2026"));
+  assert.equal(rec.a.length, 2); assert.equal(rec.a[0].t, "au-neet-ss-recall-oct-2026"); assert.equal(rec.a[0].sub, "ss-medical-oncology");
+  assert.deepEqual(await nmOf(), { "ss-medical-oncology": [{ id: "au-neet-ss-recall-oct-2026", title: "NEET-SS Recall (Oct 2026)", n: 2 }] }, "only the new module is listed, not the existing one");
+  // the same title again reuses the module; replacing does not double
+  const again = await post(env, { op: "publish", targets: [{ subject: "ss-medical-oncology", title: "NEET-SS Recall (Oct 2026)" }], items: [mk(2), mk(3)] }, "tok-o");
+  assert.equal(again.json.targets[0].module, "au-neet-ss-recall-oct-2026"); assert.equal(again.json.added, 1); assert.equal(again.json.updated, 1);
+  assert.equal((await nmOf())["ss-medical-oncology"][0].n, 3);
+  // the same title in another subject gets its own id
+  const other = await post(env, { op: "publish", targets: [{ subject: "ss-haematology", title: "NEET-SS Recall (Oct 2026)" }], items: [mk(4)] }, "tok-o");
+  assert.match(other.json.targets[0].module, /^au-neet-ss-recall-oct-2026-[0-9a-f]{4}$/);
+  const l = await post(env, { op: "plist" }, "tok-o");
+  const pm = l.json.modules.find((m) => m.module === "au-neet-ss-recall-oct-2026");
+  assert.equal(pm.title, "NEET-SS Recall (Oct 2026)"); assert.equal(pm.added, 1);
+  assert.equal(l.json.modules.find((m) => m.module === "son-iniss-recalls").added, undefined);
+  // deleting the questions removes the module from the registry
+  const d = await post(env, { op: "pdelete", targets: [{ subject: "ss-medical-oncology", module: "au-neet-ss-recall-oct-2026", all: true }] }, "tok-o");
+  assert.equal(d.json.removed, 3);
+  const nm = await nmOf();
+  assert.equal(nm["ss-medical-oncology"], undefined); assert.equal(nm["ss-haematology"].length, 1);
+  assert.equal((await post(env, { op: "pdelete", all: true }, "tok-o")).status, 200);
+  assert.deepEqual(await nmOf(), {});
 });
 
 /* ---------------- CLI (tools/prep-qgen.mjs): pure parts and a dry run that sends nothing ---------------- */

@@ -1123,7 +1123,7 @@
     narke: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
       if (!t || !homeToolEligible(t)) return;
-      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Narkē loading…");
+      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Anesthetica loading…");
     },
     // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
     // when its flag is off: the Home tile hides and every entry refuses silently.
@@ -2200,7 +2200,7 @@
       eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
     // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
     // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
-    { act: "narke", ic: "masks", tt: "Narkē", sub: "Anaesthesia",
+    { act: "narke", ic: "masks", tt: "Anesthetica", sub: "Anaesthesia",
       eligible: function () { try { var q = (location.search.match(/[?&]narke=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_narke") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).

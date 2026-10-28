@@ -1,7 +1,8 @@
 /* /api/prep/fix - PrepNucleus content fixes by owners and registered signers (design: functions/_prepfix.js).
  *
  * Public:
- *   GET ?ix=1                 { mods: { "<module>": ts } }  which modules carry fixes (the app asks at most every 30 min)
+ *   GET ?ix=1                 { mods: { "<module>": ts }, nm: { "<subject>": [{ id, title, n }] } }  which modules carry fixes, and the modules
+ *                             the owner created by publishing (the app asks at most every 30 min)
  *   GET ?module=<slug>        { q: { itemId: fix }, l: { lessonKey: fix } }  that module's fixes
  * Editors (owner Firebase login or admin token, or an active registered signer):
  *   GET ?me=1                 { editor: true, role, name }   (200 with editor:false for everyone else)
@@ -21,7 +22,18 @@ export async function onRequestGet({ request, env }) {
   const u = new URL(request.url), sp = u.searchParams, kv = kvOf(env);
   if (sp.get("ix") === "1") {
     const mods = kv ? await kvJson(kv, IX, {}) : {};
-    return json({ mods }, 200, { "Cache-Control": "public, max-age=300" });
+    /* nm: modules the owner created while publishing (no bank file or index row): { subject: [{ id, title, n }] }, n = live questions. */
+    const nm = {};
+    if (kv) {
+      const reg = await kvJson(kv, "prep:newmods", {});
+      for (const sub of Object.keys(reg)) {
+        for (const m of reg[sub] || []) {
+          const rec = await kvJson(kv, MOD(m.id), null), n = rec && Array.isArray(rec.a) ? rec.a.filter((x) => x.sub === sub).length : 0;
+          if (n) (nm[sub] = nm[sub] || []).push({ id: m.id, title: m.title, n });
+        }
+      }
+    }
+    return json({ mods, nm }, 200, { "Cache-Control": "public, max-age=300" });
   }
   const m = sp.get("module");
   if (m != null) {

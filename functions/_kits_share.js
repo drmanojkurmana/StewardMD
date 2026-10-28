@@ -9,6 +9,9 @@
  *                 test names, contacts) for its members; versions are immutable
  *   E3/E4 history kit values saved per patient across visits (antenatal card), per doctor
  *   F1 reviews    review-desk decisions synced for the owner, reviewer identity from the token
+ *   Contacts      each doctor's saved colleagues: added by StewardMD ID or email (or an invite link),
+ *                 and filled in automatically by every referral, handover and case room between two
+ *                 doctors. A contact is addressed by an opaque id, never the colleague's uid.
  *
  * Rules, all enforced here rather than trusted from the client:
  *   - Every caller is a Firebase-verified account; sending anything with patient data needs BOTH
@@ -37,7 +40,7 @@ export const LIMITS = {
   unitInvestigations: 30, unitContacts: 10, histKeys: 80, histValue: 600, histEntries: 40, reviews: 600
 };
 export const TTL = { referral: 31 * 864e5, handover: 3 * 864e5, caseIdle: 90 * 864e5, hist: 400 * 864e5 };
-export const RATE = { send: [30, 3600], caseCreate: [10, 3600], caseInvite: [30, 3600], casePost: [60, 3600], histAdd: [120, 3600], publish: [20, 3600] };
+export const RATE = { contactAdd: [30, 3600], send: [30, 3600], caseCreate: [10, 3600], caseInvite: [30, 3600], casePost: [60, 3600], histAdd: [120, 3600], publish: [20, 3600] };
 const KINDS = ["referral", "handover"];
 const URGENCY = ["Routine", "Soon (within 2 weeks)", "Urgent (within 24 hours)", "Emergency (now)"];
 const MSG_STATUS = { referral: ["seen", "accepted", "declined", "withdrawn"], handover: ["seen", "acknowledged", "withdrawn"] };
@@ -47,8 +50,10 @@ const PUSH = {
   referral: { title: "StewardMD", body: "A colleague sent you a referral. Open StewardMD to read it." },
   handover: { title: "StewardMD", body: "A colleague handed over patients to you. Open StewardMD to read it." },
   caseInvite: { title: "StewardMD", body: "A colleague asked for your opinion on a case. Open StewardMD to read it." },
-  casePost: { title: "StewardMD", body: "New reply in a case you follow." }
+  casePost: { title: "StewardMD", body: "New reply in a case you follow." },
+  contact: { title: "StewardMD", body: "A colleague added you on StewardMD." }
 };
+const REPLY_STATES = ["accepted", "declined", "acknowledged"];
 
 /* ------------------------------------------------------------------ small pure helpers */
 const enc = new TextEncoder(), dec = new TextDecoder();
@@ -122,6 +127,13 @@ async function limited(ctx, bucket) {
 /** { smdId } or { email } -> { uid } of a verified doctor, or an error code. */
 async function resolveColleague(ctx, to) {
   const d = ctx.deps; to = to || {};
+  if (to.contact) {
+    const c = await d.fsGet("kx_contacts/" + safeDocPart(ctx.uid) + "__" + safeDocPart(to.contact));
+    if (!c || !c.fields || !c.fields.cuid) return { error: "recipient_not_found" };
+    const cc = (await d.getClaims(c.fields.cuid)) || {};
+    if (cc.verified !== true) return { error: "recipient_not_verified" };
+    return { uid: c.fields.cuid, label: c.fields.label || "", name: cleanText(cc.name || c.fields.name || "", 80), regNo: cleanText(cc.regNo || "", 40) };
+  }
   const ident = to.smdId ? { smdId: String(to.smdId).slice(0, 20) } : to.email ? { email: String(to.email).slice(0, 120) } : null;
   if (!ident) return { error: "recipient_required" };
   const uid = await d.resolveUid(ident);
@@ -129,7 +141,7 @@ async function resolveColleague(ctx, to) {
   if (uid === ctx.uid) return { error: "cannot_send_to_self" };
   const c = (await d.getClaims(uid)) || {};
   if (c.verified !== true) return { error: "recipient_not_verified" };
-  return { uid, label: ident.smdId ? String(ident.smdId).toUpperCase() : cleanText(ident.email, 120).toLowerCase(), name: cleanText(c.name || "", 80) };
+  return { uid, label: ident.smdId ? String(ident.smdId).toUpperCase() : cleanText(ident.email, 120).toLowerCase(), name: cleanText(c.name || "", 80), regNo: cleanText(c.regNo || "", 40) };
 }
 function push(ctx, uid, kind, data) {
   const d = ctx.deps; if (!d.push) return;
@@ -173,12 +185,15 @@ export async function msgSend(ctx, body) {
     toLabel: to.label, toName: to.name, kitId: v.meta.kitId, urgency: v.meta.urgency, status: "sent",
     createdAt: now, updatedAt: now, expiresAt: now + TTL[body.kind], box: await seal(ctx.env, v.payload), reply: ""
   };
-  await d.fsCommit([d.wCreate("kx_msgs/" + id, doc)]);
+  await d.fsCommit([d.wCreate("kx_msgs/" + id, doc)].concat(await linkWrites(ctx, to)));
   push(ctx, to.uid, body.kind, { kind: body.kind, id });
   return R(200, { ok: true, id });
 }
 function msgMeta(id, f, me) {
-  return { id, kind: f.kind, dir: f.toUid === me ? "in" : "out", fromName: f.fromName, fromRegNo: f.fromRegNo, toLabel: f.toLabel, toName: f.toName || "",
+  const dir = f.toUid === me ? "in" : "out";
+  // fresh: the recipient has not opened it yet, or the sender has not yet seen the recipient's answer.
+  const fresh = dir === "in" ? f.status === "sent" : REPLY_STATES.indexOf(f.status) >= 0 && f.updatedAt > (f.senderSeenAt || 0);
+  return { id, kind: f.kind, dir, fresh, fromName: f.fromName, fromRegNo: f.fromRegNo, toLabel: f.toLabel, toName: f.toName || "",
     kitId: f.kitId, urgency: f.urgency, status: f.status, createdAt: f.createdAt, updatedAt: f.updatedAt, expiresAt: f.expiresAt };
 }
 export async function msgList(ctx) {
@@ -205,6 +220,9 @@ export async function msgRead(ctx, body) {
   if (f.toUid === ctx.uid && f.status === "sent") {
     await d.fsCommit([d.wUpdate("kx_msgs/" + m.id, { status: "seen", updatedAt: ctx.now }, { updateTime: m.updateTime })]).catch(() => {});
     f.status = "seen";
+  } else if (f.fromUid === ctx.uid && REPLY_STATES.indexOf(f.status) >= 0 && f.updatedAt > (f.senderSeenAt || 0)) {
+    await d.fsCommit([d.wUpdate("kx_msgs/" + m.id, { senderSeenAt: ctx.now }, { updateTime: m.updateTime })]).catch(() => {});
+    f.senderSeenAt = ctx.now;
   }
   return R(200, { msg: Object.assign(msgMeta(m.id, f, ctx.uid), { payload: await unseal(ctx.env, f.box), reply: f.reply ? await unseal(ctx.env, f.reply) : null }) });
 }
@@ -233,15 +251,18 @@ async function caseFor(ctx, id) {
   if (c.fields.expiresAt <= ctx.now) return null;
   return { id, f: c.fields, role: mem.fields.role, updateTime: c.updateTime };
 }
-async function invite(ctx, caseId, smdIds, existing) {
+async function invite(ctx, caseId, smdIds, existing, contacts) {
   const d = ctx.deps, invited = [], notFound = [], writes = [];
-  for (const s of (Array.isArray(smdIds) ? smdIds : []).slice(0, LIMITS.caseMembers)) {
-    const to = await resolveColleague(ctx, String(s).indexOf("@") > 0 ? { email: s } : { smdId: s });
+  const asks = (Array.isArray(smdIds) ? smdIds : []).map((s) => ({ s: String(s), to: String(s).indexOf("@") > 0 ? { email: s } : { smdId: s } }))
+    .concat((Array.isArray(contacts) ? contacts : []).map((c) => ({ s: "a contact", to: { contact: String(c) } }))).slice(0, LIMITS.caseMembers);
+  for (const a of asks) {
+    const s = a.s, to = await resolveColleague(ctx, a.to);
     if (to.error) { notFound.push({ smdId: String(s).slice(0, 20), error: to.error }); continue; }
     if (existing.indexOf(to.uid) >= 0 || invited.some((x) => x.uid === to.uid)) continue;
     if (existing.length + invited.length >= LIMITS.caseMembers) { notFound.push({ smdId: String(s).slice(0, 20), error: "room_full" }); continue; }
     invited.push(to);
     writes.push(d.wCreate("kx_case_mem/" + caseId + "__" + safeDocPart(to.uid), { caseId, uid: to.uid, role: "member", name: to.name, addedAt: ctx.now }));
+    writes.push(...(await linkWrites(ctx, to)));
   }
   return { invited, notFound, writes };
 }
@@ -252,11 +273,11 @@ export async function caseCreate(ctx, body) {
   if (!title || !question) return bad("title_and_question_required");
   if (await limited(ctx, "caseCreate")) return R(429, { error: "rate_limited" });
   const d = ctx.deps, id = newId(16), now = ctx.now;
-  const inv = await invite(ctx, id, b.invite, [ctx.uid]);
+  const inv = await invite(ctx, id, b.invite, [ctx.uid], b.inviteContacts);
   const writes = [
     d.wCreate("kx_cases/" + id, { ownerUid: ctx.uid, ownerName: senderName(ctx.claims), kitId: ID_RE.test(b.kitId || "") ? String(b.kitId).slice(0, 40) : "", status: "open",
-      createdAt: now, updatedAt: now, expiresAt: now + TTL.caseIdle, posts: 0, box: await seal(ctx.env, { title, question, summary }) }),
-    d.wCreate("kx_case_mem/" + id + "__" + safeDocPart(ctx.uid), { caseId: id, uid: ctx.uid, role: "owner", name: senderName(ctx.claims), addedAt: now })
+      createdAt: now, updatedAt: now, expiresAt: now + TTL.caseIdle, posts: 0, lastUid: ctx.uid, box: await seal(ctx.env, { title, question, summary }) }),
+    d.wCreate("kx_case_mem/" + id + "__" + safeDocPart(ctx.uid), { caseId: id, uid: ctx.uid, role: "owner", name: senderName(ctx.claims), addedAt: now, readAt: now })
   ].concat(inv.writes);
   await d.fsCommit(writes);
   inv.invited.forEach((t) => push(ctx, t.uid, "caseInvite", { caseId: id }));
@@ -271,8 +292,10 @@ export async function caseList(ctx) {
     const id = safeDocPart(m.fields.caseId), c = docs.get("kx_cases/" + id);
     if (!c || !c.fields || c.fields.expiresAt <= ctx.now) continue;
     const box = await unseal(ctx.env, c.fields.box);
+    // fresh: never opened, or a colleague wrote since you last opened it.
+    const fresh = !m.fields.readAt || (c.fields.updatedAt > m.fields.readAt && c.fields.lastUid !== ctx.uid);
     out.push({ id, title: (box && box.title) || "", ownerName: c.fields.ownerName, kitId: c.fields.kitId, status: c.fields.status, posts: c.fields.posts || 0,
-      updatedAt: c.fields.updatedAt, role: m.fields.role });
+      updatedAt: c.fields.updatedAt, role: m.fields.role, fresh });
   }
   return R(200, { cases: out.sort((a, b) => b.updatedAt - a.updatedAt) });
 }
@@ -280,6 +303,8 @@ export async function caseRead(ctx, body) {
   const c = await caseFor(ctx, body && body.id); if (!c) return R(404, { error: "not_found" });
   const d = ctx.deps;
   const [posts, mems] = await Promise.all([d.fsQuery("kx_case_posts", { where: { field: "caseId", value: c.id }, limit: LIMITS.casePosts }), d.fsQuery("kx_case_mem", { where: { field: "caseId", value: c.id }, limit: 50 })]);
+  const memPath = "kx_case_mem/" + c.id + "__" + safeDocPart(ctx.uid);
+  const p0 = d.fsCommit([d.wUpdate(memPath, { readAt: ctx.now }, { exists: true })]).catch(() => {}); if (ctx.waitUntil) ctx.waitUntil(p0); else await p0;
   const list = [];
   for (const p of posts) { const box = await unseal(ctx.env, p.fields.box); list.push({ by: p.fields.authorName, mine: p.fields.authorUid === ctx.uid, at: p.fields.createdAt, text: (box && box.text) || "" }); }
   return R(200, { case: Object.assign({ id: c.id, ownerName: c.f.ownerName, kitId: c.f.kitId, status: c.f.status, role: c.role, createdAt: c.f.createdAt }, await unseal(ctx.env, c.f.box)),
@@ -295,7 +320,8 @@ export async function casePost(ctx, body) {
   try {
     await d.fsCommit([
       d.wCreate("kx_case_posts/" + pid, { caseId: c.id, authorUid: ctx.uid, authorName: senderName(ctx.claims), createdAt: now, box: await seal(ctx.env, { text }) }),
-      d.wUpdate("kx_cases/" + c.id, { posts: (c.f.posts || 0) + 1, updatedAt: now, expiresAt: now + TTL.caseIdle }, { updateTime: c.updateTime })
+      d.wUpdate("kx_cases/" + c.id, { posts: (c.f.posts || 0) + 1, updatedAt: now, expiresAt: now + TTL.caseIdle, lastUid: ctx.uid }, { updateTime: c.updateTime }),
+      d.wUpdate("kx_case_mem/" + c.id + "__" + safeDocPart(ctx.uid), { readAt: now }, { exists: true })
     ]);
   } catch (e) { if (e && e.code === "precondition") return R(409, { error: "changed_retry" }); throw e; }
   const mems = await d.fsQuery("kx_case_mem", { where: { field: "caseId", value: c.id }, limit: 50 });
@@ -308,7 +334,7 @@ export async function caseInvite(ctx, body) {
   if (c.f.status !== "open") return R(409, { error: "case_closed" });
   if (await limited(ctx, "caseInvite")) return R(429, { error: "rate_limited" });
   const d = ctx.deps, mems = await d.fsQuery("kx_case_mem", { where: { field: "caseId", value: c.id }, limit: 50 });
-  const inv = await invite(ctx, c.id, body.smdIds, mems.map((m) => m.fields && m.fields.uid).filter(Boolean));
+  const inv = await invite(ctx, c.id, body.smdIds, mems.map((m) => m.fields && m.fields.uid).filter(Boolean), body.contacts);
   if (inv.writes.length) await d.fsCommit(inv.writes);
   inv.invited.forEach((t) => push(ctx, t.uid, "caseInvite", { caseId: c.id }));
   return R(200, { ok: true, invited: inv.invited.length, notFound: inv.notFound });
@@ -318,6 +344,56 @@ export async function caseClose(ctx, body) {
   if (c.role !== "owner") return R(403, { error: "owner_only" });
   const d = ctx.deps;
   await d.fsCommit([d.wUpdate("kx_cases/" + c.id, { status: "closed", updatedAt: ctx.now }, { updateTime: c.updateTime })]);
+  return R(200, { ok: true });
+}
+
+/* ------------------------------------------------------------------ contacts (saved colleagues) */
+/** Opaque, stable id for "my contact X": the client never sees the colleague's uid. */
+export async function contactId(me, other) {
+  return hex(await crypto.subtle.digest("SHA-256", enc.encode("kx-contact\n" + me + "\n" + other))).slice(0, 24);
+}
+function contactDoc(owner, other, name, regNo, label, now, via) {
+  return { uid: owner, cuid: other, name: cleanText(name || "", 80), regNo: cleanText(regNo || "", 40), label: cleanText(label || "", 120), via, addedAt: now, lastAt: now };
+}
+/** Upserts both directions of a link between the caller and a resolved colleague `to`. Merge writes
+ * without a precondition: a second referral only refreshes the name and lastAt. */
+async function linkWrites(ctx, to, via) {
+  const d = ctx.deps, me = ctx.uid, now = ctx.now, c = ctx.claims || {};
+  const mine = contactDoc(me, to.uid, to.name, to.regNo, to.label, now, via || "sent");
+  const theirs = contactDoc(to.uid, me, senderName(c), c.regNo, "", now, via === "added" ? "added_you" : "received");
+  // addedAt and via are kept from the first link: only refreshed fields go in the merge.
+  const keep = (o, existing) => existing ? { name: o.name || existing.name || "", regNo: o.regNo || existing.regNo || "", label: o.label || existing.label || "", lastAt: o.lastAt, uid: o.uid, cuid: o.cuid } : o;
+  const pa = "kx_contacts/" + safeDocPart(me) + "__" + await contactId(me, to.uid), pb = "kx_contacts/" + safeDocPart(to.uid) + "__" + await contactId(to.uid, me);
+  const [ea, eb] = await Promise.all([d.fsGet(pa), d.fsGet(pb)]);
+  return [d.wUpdate(pa, keep(mine, ea && ea.fields)), d.wUpdate(pb, keep(theirs, eb && eb.fields))];
+}
+export async function contactList(ctx) {
+  const rows = await ctx.deps.fsQuery("kx_contacts", { where: { field: "uid", value: ctx.uid }, limit: 300 });
+  const out = rows.filter((r) => r.fields && r.fields.cuid).map((r) => ({
+    id: String(r.id).split("__").pop(), name: r.fields.name || "", regNo: r.fields.regNo || "", label: r.fields.label || "", via: r.fields.via || "", lastAt: r.fields.lastAt || 0
+  }));
+  return R(200, { contacts: out.sort((a, b) => b.lastAt - a.lastAt) });
+}
+/** Add a colleague by StewardMD ID or email. Any signed-in doctor may add (no patient data moves), and
+ * the colleague does not need to be verified yet: sending still checks. Rate-limited before the lookup. */
+export async function contactAdd(ctx, body) {
+  const b = body || {}, t = b.to || {};
+  if (!t.smdId && !t.email) return bad("recipient_required");
+  if (await limited(ctx, "contactAdd")) return R(429, { error: "rate_limited" });
+  const d = ctx.deps, ident = t.smdId ? { smdId: String(t.smdId).slice(0, 20) } : { email: String(t.email).slice(0, 120) };
+  const uid = await d.resolveUid(ident);
+  if (!uid) return R(404, { error: "recipient_not_found" });
+  if (uid === ctx.uid) return bad("cannot_send_to_self");
+  const c = (await d.getClaims(uid)) || {};
+  const to = { uid, name: cleanText(c.name || "", 80), regNo: cleanText(c.regNo || "", 40), label: ident.smdId ? String(ident.smdId).toUpperCase() : cleanText(ident.email, 120).toLowerCase() };
+  const existed = await d.fsGet("kx_contacts/" + safeDocPart(ctx.uid) + "__" + await contactId(ctx.uid, uid));
+  await d.fsCommit(await linkWrites(ctx, to, "added"));
+  if (!(existed && existed.fields)) push(ctx, uid, "contact", { contacts: 1 });
+  return R(200, { ok: true, contact: { id: await contactId(ctx.uid, uid), name: to.name, regNo: to.regNo, label: to.label, verified: c.verified === true }, already: !!(existed && existed.fields) });
+}
+export async function contactRemove(ctx, body) {
+  const id = safeDocPart(body && body.id); if (!id) return bad("bad_id");
+  const d = ctx.deps; await d.fsCommit([d.wDelete("kx_contacts/" + safeDocPart(ctx.uid) + "__" + id)]);
   return R(200, { ok: true });
 }
 
@@ -451,5 +527,6 @@ export const ROUTES = {
   "POST case/create": caseCreate, "GET case/list": caseList, "POST case/read": caseRead, "POST case/post": casePost, "POST case/invite": caseInvite, "POST case/close": caseClose,
   "GET unit": unitGet, "POST unit/publish": unitPublish, "POST unit/retire": unitRetire,
   "POST hist/add": histAdd, "POST hist/read": histRead, "POST hist/forget": histForget,
-  "POST reviews": reviewsPut
+  "POST reviews": reviewsPut,
+  "GET contact/list": contactList, "POST contact/add": contactAdd, "POST contact/remove": contactRemove
 };

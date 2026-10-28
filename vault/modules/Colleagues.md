@@ -17,6 +17,28 @@ module (`kits-share.js`, `window.SMD_SHARE`, sheet `#smdShare` z 12045) and one 
 | B7 hospital version | Inside any kit: "Colleagues and your hospital" shows each hospital's version (notes, contacts, local test names, order sets that queue). The hospital owner, an `admin` or `pg_hod` member (and verified) edits and publishes. Versions are immutable. | `kx_unit`, `kx_unit_ver` |
 | E3/E4 history | OPD kit: "Save this visit to the patient's kit history", "Previous visits" (O&G: "Antenatal card"): a table by visit. | `kx_hist`, per doctor, 40 visits, 400 days |
 | F1 sync | Review Desk: "Send to StewardMD". Owner downloads `GET /api/kits/reviews/all` and runs `scripts/apply-reviews.mjs` on it as is. | `kx_reviews` |
+| Contacts | Colleagues > Contacts: saved colleagues, each with Refer a patient, Hand over, Ask about a case. Filled in automatically by every referral, handover and case-room invite (both directions), or added by ID/email or the invite link. Compose and case rooms offer contacts as chips, so no ID is typed twice. | `kx_contacts/<uid>__<cid>`, cid = SHA-256("kx-contact", me, them)[:24], never the colleague's uid |
+
+
+**Colleagues sheet (2026-10-28 redesign):** ID card (Copy icon, Invite on WhatsApp, Share), three quick actions
+(Refer a patient, Hand over, Ask about a case: they open Documents, with the picked contact remembered for 30
+minutes so its Send button reads "Send to Dr X"), segmented tabs Received / Sent / Cases / Contacts with unread
+counts, a dot on each new row, and empty states that say what to do. Unread = received not yet opened
+(`status sent`), an answer the sender has not opened (`senderSeenAt`), a case room never opened or with a
+colleague's reply since (`kx_case_mem.readAt`, `kx_cases.lastUid`). The Home tile gets a red count badge
+(`SMD_SHARE.unread()`, refreshed on launch, resume and sheet close, at most once a minute). `render()` keeps
+typed field values and focus across a re-render of the same view (a list loading mid-typing wiped the
+recipient field before).
+
+**Invite link:** `https://stewardmd.in/add/SMD-XXXXXX` (only the inviter's own ID). With the app: Universal Link
+(AASA `paths` includes `/add/*`; iOS refreshes AASA via Apple's CDN, so allow time after deploy) or Android App
+Link (host-wide filter) opens the app; `native-bridge.js routeColleagueAdd` calls `SMD_SHARE.openAdd(id)`,
+which shows "Add SMD-XXXXXX to your contacts?". `stewardmd://add/SMD-XXXXXX` does the same (iOS scheme in
+Info.plist; Android scheme filter added 2026-10-28, needs a native rebuild). Without the app:
+`functions/add/[id].js`, a script-free noindex page with the ID, App Store and Play links; allowlisted in
+`_middleware.js`. Adding a contact needs only sign-in (no patient data moves); the colleague gets a fixed-text
+push "A colleague added you on StewardMD." Sending still needs both verified. Rate limit 30 adds an hour,
+counted before the lookup.
 
 Home tile "Colleagues" (`act:"kxinbox"`, defOn false) appears only when the flag is on. Push taps with
 `data.type === "kits"` open the item (`native-push.js`).
@@ -60,12 +82,14 @@ Optional: deploy `firestore.rules` (the kx_* lines only document the catch-all d
 `test/kits-share.test.mjs` (server logic over an in-memory Firestore with the real commit guards:
 verified-only, sealing, fixed pushes, status machine, expiry, rate limit, de-identification, publish
 roles, immutable versions, per-doctor history, review export shape, router gate) and
+`test/colleague-invite-link.test.mjs` (invite page, gate, AASA) and
 `test/run-kits-share-ui.mjs` (full app in Chrome at 390px against a local server running the REAL
 handlers; two doctors: hospital version, order set, history, referral, accept, handover read-back, case
-room, publish v2, review sync, flag off). Shared fixture: `test/helpers/kits-share-world.mjs`.
+room, publish v2, review sync, contacts: refer from a contact, add by ID, invite link, case room from chips,
+unread counts, Home badge, empty states, flag off). Run it with `CHROME=/opt/pw-browsers/chromium` in a cloud
+container. Shared fixture: `test/helpers/kits-share-world.mjs`.
 
 ## Not built / known limits
-- No in-app badge count; pushes and the Colleagues list are the signal.
 - `sendNativeToAll({uid})` scans all native tokens per send (as FollowCare does); fine at beta volume.
 - The ICU `referrals.js` (client-side Firestore, flag off) is separate and unchanged.
 - B4 audit dashboard and B5 case library were not ticked by the owner.

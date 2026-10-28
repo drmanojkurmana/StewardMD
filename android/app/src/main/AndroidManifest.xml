@@ -29,6 +29,15 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="https" android:host="stewardmd.in" />
             </intent-filter>
+            <!-- stewardmd://add/SMD-XXXXXX from the colleague invite page (functions/add/[id].js), the
+                 "I have StewardMD: open it" button when the App Link was not verified. iOS registers
+                 the same scheme in Info.plist. Routed by native-bridge.js routeColleagueAdd. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="stewardmd" />
+            </intent-filter>
         </activity>
 
         <provider

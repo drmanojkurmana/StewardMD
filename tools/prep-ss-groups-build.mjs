@@ -1,7 +1,8 @@
 /* Resolves prep/ss-groups.json (the NEET-SS feeder-group -> super-specialty mapping) against the bank and
  * writes prep-ss-groups.js (window.PREP_SS_GROUPS, ES5, also require()-able), the single copy prep-plan.js reads.
  * (avoid star-slash inside this comment: it would close the block early)
- * Rule: medical-kind groups show own + medicalCore + biostatistics; surgical shows own + biostatistics; every other
+ * Rule: only-kind groups (Medical Oncology, Critical Care: their own super-specialty paper) show own subjects only;
+ * medical-kind groups show own + medicalCore + biostatistics; surgical shows own + biostatistics; every other
  * group shows own + biostatistics. Subjects resolve in taxonomy order. Every mapped subject must exist in
  * prep/taxonomy.json; live counts come from the bank index files plus prep/bank/overlay-counts.json.
  * USAGE: node tools/prep-ss-groups-build.mjs [--check]   (--check: exit 1 when prep-ss-groups.js is not up to date) */
@@ -70,7 +71,7 @@ export function resolve() {
   const groups = src.groups.map((g) => {
     const want = new Set(g.own);
     if (g.kind === "medical") src.medicalCore.forEach((id) => want.add(id));
-    want.add(src.biostatistics);
+    if (g.kind !== "only") want.add(src.biostatistics);
     const subjects = order.filter((id) => want.has(id));
     return { id: g.id, label: g.label, feeder: g.feeder, kind: g.kind, includes: g.includes, subjects };
   });

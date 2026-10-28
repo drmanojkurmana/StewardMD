@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StewardMD Poster: Mechanism</title>
+<link rel="stylesheet" href="pamphlet.css">
+<style>
+  @page { size: A3; margin: 0; }
+  .hero { height: 152mm; padding: 16mm 18mm 0; }
+  .brand .mark { width: 14mm; height: 14mm; border-radius: 3.6mm; }
+  .brand .mark img { width: 10.6mm; height: 10.6mm; }
+  .brand .name { font-size: 21pt; }
+  .brand .tag { font-size: 9pt; padding: 1.8mm 4.4mm; }
+  .copy { position: relative; z-index: 2; text-align: center; margin: 9mm auto 0; width: 250mm; }
+  .copy h1 { font-size: 40pt; margin: 3mm 0 4mm; }
+  .copy .lede { font-size: 13pt; width: 190mm; margin: 0 auto; }
+  .fan { position: absolute; z-index: 3; left: 0; right: 0; top: 90mm; height: 110mm; }
+  .fan .dev, .fan .ipad { position: absolute; left: 50%; }
+  .f-ipad { width: 140mm; margin-left: -70mm; top: 4mm; z-index: 2; }
+  .f-ios { width: 40mm; margin-left: -110mm; top: 16mm; z-index: 3; transform: rotate(-3deg); }
+  .f-and { width: 38mm; margin-left: 72mm; top: 20mm; z-index: 3; transform: rotate(3deg); }
+  .f-w { width: 36mm; margin-left: 104mm; top: 48mm; z-index: 4; }
+  .body { padding: 47mm 18mm 0; }
+  .section-title { font-size: 22pt; }
+  .stats { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 5mm; border-top: .3mm solid var(--line); }
+  .stat { padding: 3mm 3mm 2.8mm 0; border-bottom: .3mm solid var(--line); }
+  .stat:not(:nth-child(6n+1)) { padding-left: 3.6mm; border-left: .3mm solid var(--line); }
+  .stat .n { font-size: 21pt; }
+  .stat .k { font-size: 6.4pt; letter-spacing: .6pt; text-transform: uppercase; font-weight: 800; color: var(--ink); margin-top: 1.2mm; line-height: 1.3; }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; margin-top: 5mm; }
+  .col h2 { font-family: "Bricolage Grotesque", Inter, sans-serif; font-size: 17pt; font-weight: 600; color: var(--ink); margin: 1mm 0 3mm; }
+  .col h2 em { color: var(--teal); font-weight: 500; }
+  .col .feat { margin-bottom: 2.6mm; }
+  .col .feat p { font-size: 8.2pt; }
+  .band { margin-top: 2mm; display: grid; grid-template-columns: 50mm 1fr; gap: 5mm; align-items: center; padding: 4mm 6mm; border-radius: 5mm;
+    background: linear-gradient(150deg, #0f6e63, #00463d); color: #fff; }
+  .band .t { font-family: "Bricolage Grotesque", Inter, sans-serif; font-size: 16pt; font-weight: 600; line-height: 1.12; }
+  .band .t em { color: var(--mint-2); font-weight: 500; }
+  .band ul { list-style: none; display: flex; flex-wrap: wrap; gap: 2mm 2.4mm; }
+  .band li { font-size: 9pt; font-weight: 600; color: #e6f3ef; }
+  .band li + li::before { content: ""; display: inline-block; width: 1mm; height: 1mm; border-radius: 50%; background: var(--mint-2); margin: 0 2.4mm .5mm 0; vertical-align: middle; }
+  .band li .chip { margin-left: 1mm; font-size: 5.6pt; padding: .3mm 1.3mm; }
+  .foot { padding: 6mm 18mm; }
+  .foot .by { font-size: 9pt; }
+  .foot .by b { font-size: 10.5pt; }
+  .foot .by .safe { font-size: 7.6pt; max-width: 80mm; }
+  .store strong { font-size: 10pt; }
+  .foot .qr { width: 30mm; height: 30mm; }
+  .foot .cta b { font-size: 14pt; }
+  .foot .cta span { font-size: 9.4pt; }
+</style>
+</head>
+<body>
+<div class="page a3">
+  <div class="hero">
+    <div class="brand"><div class="mark"><img src="img/logo.png" alt=""></div><div class="name">Steward<b>MD</b></div><div class="tag">For students, residents, faculty and clinicians</div></div>
+    <div class="copy">
+      <h1>Don&rsquo;t memorise the mechanism.<br><em>Watch it work.</em></h1>
+      <p class="lede">Beta-blockers at the receptor, on the heart and the airway, with and without the drug. 337 interactive figures open from the drug page, a lesson or a question.</p>
+    </div>
+  </div>
+  <div class="fan">
+    <div class="ipad f-ipad"><div class="scr"><img src="img/ipad-beta.jpg" alt=""></div></div>
+    <img class="dev f-ios" src="img/ios-beta.png" alt="">
+    <img class="dev f-and" src="img/and-mono.png" alt="">
+  </div>
+
+  <div class="body">
+    <h2 class="section-title">What is inside the app</h2>
+    <div class="stats">
+      <div class="stat"><div class="n">4,700<small>+</small></div><div class="k">Diseases and syndromes</div></div>
+      <div class="stat"><div class="n">253</div><div class="k">Bedside protocols</div></div>
+      <div class="stat"><div class="n">450<small>+</small></div><div class="k">Clinical calculators</div></div>
+      <div class="stat"><div class="n">1,532</div><div class="k">Drug monographs with dose rules</div></div>
+      <div class="stat"><div class="n">108</div><div class="k">Indian antibiogram sources</div></div>
+      <div class="stat"><div class="n">260<small>+</small></div><div class="k">Chemotherapy regimens</div></div>
+      <div class="stat"><div class="n">176,430</div><div class="k">Exam questions</div></div>
+      <div class="stat"><div class="n">106,367</div><div class="k">ICD-10 and ICD-11 codes</div></div>
+      <div class="stat"><div class="n">1,041</div><div class="k">ECG lessons</div></div>
+      <div class="stat"><div class="n">3,400<small>+</small></div><div class="k">3D anatomy structures</div></div>
+      <div class="stat"><div class="n">337</div><div class="k">Interactive drug and disease figures</div></div>
+      <div class="stat"><div class="n">400,000<small>+</small></div><div class="k">Indian brands, searchable</div></div>
+    </div>
+
+    <div class="cols">
+      <div class="col">
+        <h2>Learn it, log it, pass it</h2>
+        <div class="feat"><div class="ico" data-ico="log"></div><div><h3>NMC PG e-Logbook</h3><p>The <b>PGMER-2023</b> logbook: weekly entries, monthly guide authentication, faculty verification.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="stetho"></div><div><h3>CliniX bedside skills</h3><p><b>9 systems, 117 topics</b>, OSCE and viva on the NMC CBME syllabus, with an AI tutor.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="heart"></div><div><h3>Kardia, Anesthetica, Tokós, Ophthalmós</h3><p>Echo lab, anaesthesia, CTG and eye trainers with simulators, in English and <span lang="hi">हिन्दी</span>.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="book"></div><div><h3>PrepNucleus</h3><p><b>176,430 questions</b> for NEET-PG, INI-CET, NEET-SS, USMLE and FMGE with spaced repetition.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="cube"></div><div><h3>RadioAnatome and SURGˣ</h3><p>CT, MRI and 3D anatomy; operative notes, procedures and surgical cases.</p></div></div>
+      </div>
+      <div class="col">
+        <h2>The answer, at the bedside</h2>
+        <div class="feat"><div class="ico" data-ico="spark"></div><div><h3>MaiK clinical AI</h3><p>Plain-word questions, <b>cited answers</b>, clinical questions only, on-device options.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="calc"></div><div><h3>Dose Calculator</h3><p>Weight, age, <b>CrCl, dialysis and Child-Pugh</b>, for this patient.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="microbe"></div><div><h3>Indian antibiograms</h3><p>By specimen and setting, from ICMR, NARS-Net and hospitals. Import your own.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="icu"></div><div><h3>ICU, Neonatal, Oncology</h3><p>Auto SOFA and APACHE II, NICU tools, dosed chemo regimens, Code Blue with Apple Watch.</p></div></div>
+        <div class="feat"><div class="ico" data-ico="mic"></div><div><h3>OPD, Scribe, Documents, FollowCare</h3><p>Queue, on-device scribe, consent forms in <b>English, <span lang="te">తెలుగు</span>, <span lang="hi">हिन्दी</span></b>, WhatsApp follow-up.</p></div></div>
+      </div>
+    </div>
+
+    <div class="band">
+      <div class="t">Made in India,<br><em>for Indian wards.</em></div>
+      <ul>
+        <li>ICMR guidance</li><li>Indian brands and prices</li><li>NMC logbook and CBME</li><li>ABDM ready</li><li>Offline drug library</li>
+        <li>KardiQ X ECG<span class="chip">Early access</span></li><li>ThoreX chest X-ray<span class="chip">Early access</span></li>
+        <li>FundX fundus<span class="chip">Early access</span></li><li>SknX skin<span class="chip">Early access</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot" data-part="foot"></div>
+</div>
+<script src="parts.js"></script>
+</body>
+</html>

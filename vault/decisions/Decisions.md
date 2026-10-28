@@ -11885,3 +11885,36 @@ Owner confirmed with the author (Mohammed Kamareddine, MD, echosuite.app) that E
 
 ## 2026-10-27 - Author names, contacts and permission statements removed from AngioLAB and Probe Lab; only resource attributions kept
 Owner asked to remove "Created by Annas Rahman · annasrahman.com" (AngioLAB) and Mohammed Kamareddine, MD (Probe Lab / Echo Lab), then also the author's contact details, and every statement: keep only the attributions for the resources actually used (the CC BY / CC BY-SA clips, figures and anatomy, the published references, and the MIT / OFL notices). Done: AngioLAB credits-sheet "Created by" line and the thank-you sentence; AngioLAB `privacy.html` Contact section and `support.html` contact email; Probe Lab About sheet name and the social and email icons, the "retain their listed rights" paragraph and image-caption sentence, JSON-LD creator; the Kardia credits screen no longer prints a Probe Lab / permission line, only the figures and videos lists from `credits.json` (`PROBE_LAB_CREDIT` removed). Kept deliberately: the clinical disclaimers ("AngioLAB is an educational simulation, not for clinical use"; "EchoSuite is an educational product, not a diagnostic medical device"), the BodyParts3D "derived, re-meshed" modification note CC BY requires, and the font / Three.js licence links. The 2026-10-26 reuse permission above is unchanged. AngioLAB's privacy page now has no contact line; add one back if the stores ask for it.
+
+
+## 2026-10-27: Narkē is shown as Anesthetica
+Owner: "Rename narke to Anesthetica (both in posters and inside app)". Display strings only (EN + HI);
+every identifier stays `narke` so flags, routes, stored progress (`storeKey`) and the Review Desk ledger keep working.
+Same pattern as SURGX (brand in strings, ASCII id in code).
+
+## 2026-10-27: Foldables (Galaxy Z Fold / Pixel Fold class) are audited like iPads
+Owner: "make our app layouts support duo too". `DEVICES=fold node test/run-ipad-fit.mjs` runs every Home action at the
+cover screen (344 x 882), inner portrait (712 x 840), inner landscape (841 x 701) and a spanned width (1114 x 720).
+- Android keeps the activity across fold/unfold (`configChanges` already has screenSize, smallestScreenSize,
+  screenLayout), and auto fit re-zooms on the width change, so no state is lost.
+- targetSdk 36: Android 16 ignores `screenOrientation="portrait"` on large screens (sw >= 600dp), so an unfolded
+  phone runs the app in landscape. Every module must work landscape; the audit covers it.
+- First run: every tool fit except the Drugs A-Z strip, faded but 6 px off-screen at inner widths; fixed
+  (`az-scrubber.js`: visibility hidden after the fade). AngioLAB's 3D tool strip was a fixed 36 px while its
+  buttons wrapped to two rows (iPad, inner landscape); `kardia/angiolab/kardia-embed.js` lets it grow.
+- Dual screens with a physical gap (Surface Duo) open apps on one screen by default; no hinge-specific layout was
+  built. Revisit with the Viewport Segments API only if a spanned layout is asked for.
+
+## 2026-10-28 - Colleagues: server-side contacts, mutual on link, invite link /add/<ID>
+Owner asked to take Colleagues to 10/10. Contacts live on the server (`kx_contacts`), not the phone, so they survive a reinstall
+(which wipes device data, see CLAUDE.md). Every referral, handover and case-room invite links both doctors; adding by ID links both too,
+with a fixed-text push. A contact is addressed by an opaque hash id, never the colleague's uid. Adding a contact needs only sign-in, and the
+colleague need not be verified: no patient data moves, and sending still requires both verified. The invite link carries only the inviter's
+own StewardMD ID; its no-app page does no name lookup, so the directory cannot be browsed. Rides the existing `smd_kits_share` /
+`KITS_SHARE_ON` switches; no separate flag. Do not re-litigate.
+
+## 2026-10-28 - NEET-SS Medical Oncology and Critical Care groups show only their own subjects
+Owner: choosing the Medical Oncology group showed every medical subject; wanted only oncology modules (INI-SS Medical Oncology = oncology plus General Medicine, unchanged). Source: the NEET-SS 2026 Specialty Groups guide: Medical Oncology and Critical Care Medicine are their own super-specialty papers, "rather than a second full General Medicine paper". `prep/ss-groups.json` gets kind `only` for the `medical-oncology` and `critical-care` groups (own subjects, no medical core, no Biostatistics; Critical Care keeps Pulmonology); the broad Medical group still holds Medical Oncology. This supersedes the 2026-10-14 rule that gave every medical-kind group the medical core. INI-SS scope (`iniSubjects`: course, its degree's General subject, Biostatistics) is unchanged. Do not re-litigate; to add Biostatistics back, switch the group to kind `own`.
+
+## 2026-10-28 - Every NEET-SS group shows only what its paper covers
+Owner: "not just medical oncology but all groups, show relevant only as per groups" (NEET-SS 2026 Specialty Groups guide). `prep/ss-groups.json`: the Medical group is the General Medicine curriculum (General Medicine, Cardiology, Neurology, Nephrology, GI, Hepatology, Endocrinology, Haematology, Rheumatology, Pulmonology, Infectious Diseases, Critical Care, Biostatistics; no Medical Oncology). Respiratory and Radio-diagnosis (kind `own`) show their own subject and Biostatistics (Radio-diagnosis keeps the Radiology subject as an extra); they no longer add the medical core. Medical Oncology and Critical Care stay `only`. INI-SS Medical Oncology still gets General Medicine through `INI_PAIR` in `prep-plan.js` (it used to come from sharing the Medical group). Supersedes the 2026-10-14 medical-core rule and the radiology-plus-medical-core owner rule. Do not re-litigate.

@@ -50,7 +50,7 @@ function item(mod, flag) {
   if (flag) { it.qg.why = ["disagree"]; it.qg.note = "The checker preferred another option."; }
   return it;
 }
-const api = { status: { on: false, student: false, owner: false, caps: { modulesPerDay: 3, perModule: 30, perCall: 5 }, left: 3, models: [] }, calls: [], other: [], mode: "ok", slow: 0, mods: new Set(), q: {} };
+const api = { status: { on: false, student: false, owner: false, caps: { modulesPerDay: 3, perModule: 30, perCall: 5 }, left: 3, models: [] }, calls: [], other: [], mode: "ok", slow: 0, mods: new Set(), q: {}, pubs: [{ subject: "pharmacology", module: "ph-first", items: [1, 2, 3].map((n) => ({ id: "mk-00000000000" + n, q: "Published question number " + n + "?", pb: "pbx", ts: 1, hand: 1 })) }, { subject: "medicine", module: "med-first", items: [{ id: "mk-000000000009", q: "Published in medicine?", pb: "pby", ts: 1, hand: 1 }] }] };
 function qgenReply(body, auth) {
   api.calls.push({ op: body.op, body, auth });
   if (body.op === "status") return [200, api.status];
@@ -80,6 +80,26 @@ function qgenReply(body, auth) {
     return [200, { ok: true, batch: "pb20261016abcdef", n: body.items.length, added: body.items.length * body.targets.length, targets: body.targets }];
   }
   if (body.op === "unpublish") return [200, { ok: true, removed: 3 }];
+  if (body.op === "stageget") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    return [200, { ok: true, subject: "pharmacology", module: "ph-first", title: "T", items: [1, 2, 3].map((n) => Object.assign(item("gen_stage", false), { id: "q_stage00000" + n, q: "Staged question " + n + " about a drug?" })) }];
+  }
+  if (body.op === "plist") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    const mods = api.pubs.filter((m) => m.items.length).map((m) => ({ subject: m.subject, module: m.module, n: m.items.length, items: m.items }));
+    return [200, { ok: true, total: mods.reduce((t, m) => t + m.n, 0), modules: mods }];
+  }
+  if (body.op === "pdelete") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    let removed = 0;
+    for (const m of api.pubs) {
+      const t = body.all ? { all: true } : (body.targets || []).find((x) => x.subject === m.subject && x.module === m.module);
+      if (!t) continue;
+      const keep = m.items.filter((i) => !(t.all || (t.ids || []).includes(i.id)));
+      removed += m.items.length - keep.length; m.items = keep;
+    }
+    return [200, { ok: true, removed }];
+  }
   return [400, { error: "bad-input" }];
 }
 
@@ -368,6 +388,13 @@ try {
   ok(sg && sg.body.items.length === 3 && sg.body.items[0].q === "Edited stem by the owner?" && sg.body.items.every((x) => x.qg.v === "ok"), "stage sends only the 3 approved items, with the edit");
   ok(/node tools\/prep-qgen\.mjs publish --stage s20261010-abc123/.test(await screenText()), "the command is shown to copy");
 
+  // ---- a staged set is not live: the panel says so and can bring the questions back into Review, approved
+  ok(/Staged, NOT live/.test(await screenText()) && /Students do not see them/.test(await screenText()), "staged: the panel says the set is not live");
+  await click('#smdPrep [data-act="g-aunstage"]');
+  ok(await until(`return !!PREP_QGEN._au() && !PREP_QGEN._au().stage && PREP_QGEN._au().list.length >= 3;`, 5000), "staged: Put them back in Review brings the questions back and clears the staged panel");
+  ok(await ev(`return PREP_QGEN._au().list.slice(-3).every(function (x) { return x.st === "ok" && /^Staged question/.test(x.it.q); });`) === true, "staged: the 3 questions are back, already approved");
+  ok(qgCalls("stageget").length === 1 && qgCalls("stageget")[0].body.stageId === "s20261010-abc123", "staged: asks for that stage id");
+
   // ---- owner Author: PDF source, then publish one set to two modules
   await ev(`PREP_QGEN._au().list = []; PREP_QGEN._au().pub = null; PREP_QGEN._au().targets = []; return 1;`);
   ok(await ev(`return !!document.getElementById("qgAuthView");`) === true, "author: back on the Author screen");
@@ -392,14 +419,43 @@ try {
   await ev(`var m=document.getElementById("qgPMod"); m.value=Array.prototype.filter.call(m.options,function(x){return x.value&&x.value!==PREP_QGEN._au().module;})[0].value; m.dispatchEvent(new Event("change")); return 1;`);
   await click('#smdPrep [data-act="g-atadd"]');
   ok(await ev(`return document.querySelectorAll('#qgRevView [data-act="g-atdel"]').length;`) === 2, "publish: a second subject and module is added");
+  // a brand-new module: typing in the field does not repaint it; the button wakes at 3 letters
+  ok(await ev(`return document.querySelector('#qgRevView [data-act="g-atnew"]').disabled;`) === true, "new module: the Add button waits for a name");
+  await ev(`var i=document.getElementById("qgPNew"); i.focus(); i.value="NEET-SS Recall (Oct 2026)"; i.dispatchEvent(new Event("input")); return 1;`);
+  ok(await ev(`return document.activeElement && document.activeElement.id === "qgPNew" && !document.querySelector('#qgRevView [data-act="g-atnew"]').disabled;`) === true, "new module: typing keeps the keyboard in the field and enables Add");
+  await click('#smdPrep [data-act="g-atnew"]');
+  ok(await ev(`return document.querySelectorAll('#qgRevView [data-act="g-atdel"]').length;`) === 3 && /NEET-SS Recall \(Oct 2026\) \(new\)/.test(await screenText()), "new module: added as a third target, marked (new)");
   await ev(`window.confirm=function(){return true;}; return 1;`);
   await shots("publish");
   await click('#smdPrep [data-act="g-apub"]');
   ok(await until(`return !!document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000), "publish: confirmed, with a take-down button");
   const pb = qgCalls("publish")[0];
-  ok(pb && pb.body.targets.length === 2 && pb.body.items.length >= 1 && pb.body.items.every((x) => x.qg.v === "ok"), "publish sends both targets and only approved items");
+  ok(pb && pb.body.targets.length === 3 && pb.body.targets[2].title === "NEET-SS Recall (Oct 2026)" && !("module" in pb.body.targets[2]) && pb.body.items.length >= 1 && pb.body.items.every((x) => x.qg.v === "ok"), "publish sends the two modules and the new module (by title) and only approved items");
   await click('#smdPrep [data-act="g-aundo"]');
   ok(await until(`return !document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000) && qgCalls("unpublish").length === 1, "take-down calls unpublish for the batch");
+
+  // ---- Published questions: list, delete selected, delete a module, delete everything
+  await ev(`PREP._host.back(); return 1;`);
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act="g-pubs"]');`, 5000), "published: the Author screen has a Published questions row");
+  await click('#smdPrep [data-act="g-pubs"]');
+  ok(await until(`return !!document.getElementById("qgPubView") && /4 published questions in 2 modules/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: the list says 4 questions in 2 modules");
+  await ev(`window.confirm=function(){return true;}; return 1;`);
+  await click('#smdPrep [data-act="g-popen"]');
+  ok(await until(`return document.querySelectorAll('#qgPubView [data-act="g-psel"]').length === 3;`, 3000), "published: opening a module lists its questions");
+  await click('#smdPrep [data-act="g-psel"]');
+  ok(/Delete selected \(1\)/.test(await screenText()), "published: one question selected");
+  await click('#smdPrep [data-act="g-pdelsel"]');
+  ok(await until(`return /3 published questions in 2 modules/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: deleting the selected one leaves 3");
+  const d1 = qgCalls("pdelete")[0];
+  ok(d1 && d1.body.targets.length === 1 && d1.body.targets[0].subject === "pharmacology" && d1.body.targets[0].module === "ph-first" && d1.body.targets[0].ids.length === 1 && !d1.body.all, "published: selective delete sends the subject, module and the one id");
+  await click('#smdPrep [data-act="g-pdelmod"]');
+  ok(await until(`return /1 published question in 1 module/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: delete all in a module leaves the other module");
+  const d2 = qgCalls("pdelete")[1];
+  ok(d2 && d2.body.targets[0].all === true && d2.body.targets[0].module === "ph-first", "published: module delete sends all:true for that module");
+  await click('#smdPrep [data-act="g-pdelall"]');
+  ok(await until(`return /Nothing is published right now/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: delete everything empties the list");
+  ok(qgCalls("pdelete")[2].body.all === true, "published: delete everything sends all:true");
+  await shots("published");
 
   // ---- text and errors
   const all = await screenText();

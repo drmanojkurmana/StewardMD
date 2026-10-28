@@ -69,7 +69,7 @@ const AASA = {
   applinks: {
     apps: [],
     details: [
-      { appID: "5QY4LUKX23.in.stewardmd.app", paths: ["/", "/i/*"] },
+      { appID: "5QY4LUKX23.in.stewardmd.app", paths: ["/", "/i/*", "/add/*"] },
       { appIDs: ["5QY4LUKX23.in.stewardmd.app"],
         components: [{ "?": { icujoin: "?*" }, comment: "ICU/Ward unit invite link" }] }
     ]
@@ -208,6 +208,10 @@ export async function onRequest(context) {
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") ||
       url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare") ||
       url.pathname.startsWith("/pglog/v/") ||
+      // /add/<StewardMD ID>: the colleague invite link (functions/add/[id].js). Opens the app through
+      // the Universal/App Link; without the app it is a script-free store page. Carries only the
+      // inviting doctor's own ID, no patient data.
+      url.pathname.startsWith("/add/") ||
       url.pathname === "/verify" || url.pathname.startsWith("/verify/") ||
       url.pathname === "/atlas.js" || url.pathname === "/atlas.css" ||
       // The check-in sheet the STAFF OPD CONSOLE loads. "opd" is already a PUBLIC_PAGE below, but

@@ -1063,8 +1063,19 @@
         if (tries++ < 40) setTimeout(go, 250);
       })();
     }
-    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); routePatientScan(r.url); } }).catch(function () {}); } catch (e) {}
-    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); routePatientScan(d.url); } }); } catch (e) {}
+    // Colleague invite: https://stewardmd.in/add/SMD-XXXXXX (or stewardmd://add/SMD-XXXXXX) opens
+    // Colleagues on "Add this colleague?" (kits-share.js). Only the doctor's own ID is in the link.
+    function routeColleagueAdd(u) {
+      var m = /^(?:https:\/\/(?:www\.)?stewardmd\.in\/|stewardmd:\/\/)add\/((?:SMD-)?[A-Za-z0-9]{6})(?:[/?#]|$)/i.exec(String(u || ""));
+      if (!m) return;
+      var tries = 0;
+      (function go() {
+        if (window.SMD_SHARE && SMD_SHARE.openAdd) { try { SMD_SHARE.openAdd(m[1]); } catch (e) {} return; }
+        if (tries++ < 40) setTimeout(go, 250);
+      })();
+    }
+    try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); routePatientScan(r.url); routeColleagueAdd(r.url); } }).catch(function () {}); } catch (e) {}
+    try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); routePatientScan(d.url); routeColleagueAdd(d.url); } }); } catch (e) {}
     /* RE-WARM THE NATIVE RESOLVER ON RESUME.
      *
      * The sleep/wake DNS failure above is recoverable, but only after something has already failed -
