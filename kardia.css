@@ -20,7 +20,7 @@
 }
 #smdKardia { z-index: var(--krd-z-overlay); }
 .krd-root {
-  height:100dvh;max-height:100dvh;
+  height:auto;max-height:none;   /* .sp-root is fixed + inset:0 and so covers the whole screen; a forced 100dvh stopped short of the home-indicator strip and left it black */
   --kd-bg: #06090b; --kd-s1: #0e1316; --kd-s2: #171e23; --kd-s3: #232c33; --kd-line: #2c353d;
   --kd-text: #eef3f1; --kd-mut: #a3adb3; --kd-ok: #34c759; --kd-bad: #ff6961; --kd-warn: #ffc05a;
   /* accent = the ECG trace green; text on the fill is 12.4:1 */
@@ -35,7 +35,7 @@
   color-scheme: dark;
 }
 body:not(.dark):not(.v3-dark) .krd-root {
-  height:100dvh;max-height:100dvh;
+  height:auto;max-height:none;   /* .sp-root is fixed + inset:0 and so covers the whole screen; a forced 100dvh stopped short of the home-indicator strip and left it black */
   --kd-bg: #fff; --kd-s1: #eef2f1; --kd-s2: #e2e9e7; --kd-s3: #d2dbd9; --kd-line: #cfd8d5;
   --kd-text: #14201d; --kd-mut: #55605c; --kd-ok: #15803d; --kd-bad: #b42318; --kd-warn: #9a5b00;
   --kd-acc: #0c6b4f; --kd-on-acc: #fff; --kd-acc-soft: rgba(12, 107, 79, .1);

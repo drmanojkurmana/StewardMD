@@ -499,8 +499,9 @@ test("image credit chip, sheet, and menu screen wiring", () => {
   const J = read("prep.js");
   const Y = read("prep-pyq.js");
   const C = read("prep.css");
-  assert.match(Y, /pn-img-credit-chip/, "prep-pyq renders credit chip when credit or licence is present");
-  assert.match(C, /\.pn-img-credit-chip/, "prep.css contains credit chip styles");
+  assert.match(Y, /pn-img-credit-foot/, "prep-pyq renders the credit footer when credit or licence is present");
+  assert.doesNotMatch(Y.slice(Y.indexOf("function figure"), Y.indexOf("function creditFoot")), /img-credit/, "the credit is not rendered with the question image (answered only)");
+  assert.match(C, /\.pn-img-credit-foot[^{]*\{[^}]*\}[\s\S]*font-size: 10px/, "prep.css sets the credit footer to 10px");
   assert.match(C, /\.pn-credit-sheet/, "prep.css contains credit sheet styles");
   assert.match(J, /openCreditSheet/, "prep.js defines openCreditSheet");
   assert.match(J, /closeCreditSheet/, "prep.js defines closeCreditSheet");

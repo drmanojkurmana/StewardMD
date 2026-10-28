@@ -496,10 +496,16 @@
      * If it is not available, fall through and behave exactly as before rather than suppressing an
      * update notice forever. Re-checked on a timer, so the banner appears as soon as home is up. */
     try {
-      if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) {
+      /* SMD_PROMPT (home.js) also makes it wait its turn behind the notification and offline-download
+       * asks and the calm period after Home appears, so nothing lands stacked on the doctor. */
+      var wait = function () {
+        if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) return true;
+        return !!(window.SMD_PROMPT && !window.SMD_PROMPT.try("ota", "notice"));
+      };
+      if (wait()) {
         if (!_bannerWait) {
           _bannerWait = setInterval(function () {
-            if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) return;
+            if (wait()) return;
             try { clearInterval(_bannerWait); } catch (e2) {}
             _bannerWait = null;
             showBanner(_bannerPending);
@@ -540,7 +546,7 @@
     }
     requestAnimationFrame(function () { _bannerEl.classList.add("on"); });
   }
-  function hideBanner() { if (_bannerEl) _bannerEl.classList.remove("on"); _bannerPending = null; }
+  function hideBanner() { if (_bannerEl) _bannerEl.classList.remove("on"); _bannerPending = null; try { if (window.SMD_PROMPT) window.SMD_PROMPT.done("ota"); } catch (e) {} }
 
   // Silent auto-update: only when the user opted in via SMD_OTA.setAuto(true). Downloads in the
   // background and queues with next() (never set()) — the update lands on a FUTURE natural

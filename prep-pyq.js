@@ -302,11 +302,15 @@
       return '<figure class="pn-vfig pn-yq-fig' + (where === "exp" ? " pn-xfig" : "") + '"><button type="button" class="pn-vimg" data-act="y-zoom" data-v="' + e(f) + '" data-u="' + e(itemImg(it, P.host, f)) + '" aria-label="Enlarge image ' + (k + 1) + " of " + of + '"><img src="' + e(itemImg(it, P.host, f)) + '" alt="Image for ' + of + " (" + (k + 1) + " of " + it.img.length + ')" loading="lazy" decoding="async" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></button>' +
         '<figcaption><span class="pn-vzi" aria-hidden="true">' + svg("zoom", 16) + '</span><span>Tap to enlarge.</span></figcaption></figure>';
     }).join("");
-    if ((it.credit || it.licence) && (where || "stem") === "stem") {
-      var cred = (it.credit || it.author || "Image credit") + (it.licence ? " · " + it.licence : "");
-      figs += '<div class="pn-img-credit-wrap"><button type="button" class="pn-chip pn-img-credit-chip" data-act="img-credit" data-id="' + e(it.id) + '" aria-label="Image credit: ' + e(cred) + '">' + svg("lic", 14) + '<span>' + e(cred) + '</span></button></div>';
-    }
     return figs;
+  }
+  /* The image credit (CC BY / CC BY-SA attribution), as a 10px footer line. Shown only once the question
+     is answered, so it never sits between the picture and the options (owner: "once answered, not before"). */
+  function creditFoot(it, host) {
+    if (!it || !(it.credit || it.licence)) return "";
+    var e = (host || P.host) ? (host || P.host).esc : function (s) { return s; };
+    var cred = (it.credit || it.author || "Image credit") + (it.licence ? " · " + it.licence : "");
+    return '<p class="pn-img-credit-foot"><button type="button" data-act="img-credit" data-id="' + e(it.id) + '" aria-label="Image credit: ' + e(cred) + '">Image: ' + e(cred) + "</button></p>";
   }
   function prov(it) {
     var p = it.pyq && it.pyq[0], what = p ? (EXAM_LABEL[p.exam] || p.exam) + " " + p.year + " recall question (memory-based, not an official paper)" : "Recall question";
@@ -357,5 +361,5 @@
   function leave() { P.zoom = null; P.mf = {}; }
 
   // items(host): every previous-year item (a shared ID resolves one, prep-ids.js).
-  G.PREP_PYQ = { items: loadItems, homeRow: homeRow, warm: warm, mount: mount, chips: chips, figure: figure, prov: prov, act: act, back: back, leave: leave, _pure: PURE, _st: P };
+  G.PREP_PYQ = { items: loadItems, homeRow: homeRow, warm: warm, mount: mount, chips: chips, figure: figure, creditFoot: creditFoot, prov: prov, act: act, back: back, leave: leave, _pure: PURE, _st: P };
 })(typeof window !== "undefined" ? window : this);

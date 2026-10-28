@@ -11377,19 +11377,55 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function smdPromptOK() { return smdSignedIn() && !smdGateUp(); }
   try { window.SMD_PROMPT_OK = smdPromptOK; } catch (e) {}
 
+  /* One prompt at a time, and room to breathe. Owner: "Let the user breathe dude" after the update
+   * banner, the offline-download sheet and the notification ask all landed together on first open.
+   * Every launch-time prompt (push ask, offline download ask, OTA banner) calls try(name, kind) on
+   * its own poll and shows only when it returns true, then calls done(name) when dismissed.
+   *   - signed in and Home really on screen, continuously for CALM_MS, before anything appears;
+   *   - nothing else currently open (one holder);
+   *   - GAP_MS of quiet after the previous prompt closes;
+   *   - kind "ask" (push, offline download): at most one per app session, the next waits for a later
+   *     launch. kind "notice" (OTA banner) is exempt from that cap but obeys the other three. */
+  var CALM_MS = 20000, GAP_MS = 45000, HOLD_MAX_MS = 600000;
+  var _pCalm = 0, _pHeld = null, _pHeldAt = 0, _pEnd = 0, _pAsk = false;
+  window.SMD_PROMPT = {
+    try: function (name, kind) {
+      var now = Date.now();
+      if (!smdPromptOK() || document.hidden) { _pCalm = 0; return _pHeld === name; }
+      if (!_pCalm) _pCalm = now;
+      if (_pHeld === name) return true;
+      if (_pHeld && now - _pHeldAt < HOLD_MAX_MS) return false;
+      if (now - _pCalm < CALM_MS) return false;
+      if (_pEnd && now - _pEnd < GAP_MS) return false;
+      if (kind === "ask" && _pAsk) return false;
+      _pHeld = name; _pHeldAt = now; if (kind === "ask") _pAsk = true;
+      return true;
+    },
+    done: function (name) { if (_pHeld === name) { _pHeld = null; _pEnd = Date.now(); } }
+  };
+
+  var _pushState = null;
   function maybeOfferPushOnOpen() {
     var P = nativePush(); if (!P || window.__smdPushOffered) return;
     // Not yet: still on the splash / intro / sign-in gate, or not signed in. Asking here is exactly
     // what put this popup on the pre-login screen. The caller retries, so this is a "later", not a no.
     if (!smdPromptOK()) return;
+    if (_pushState === null) {
+      _pushState = "pending";
+      P.checkPermissions().then(function (res) {
+        var st = res && res.receive;
+        if (st === "granted") { window.__smdPushOffered = true; initNativePushListeners(); try { P.register(); } catch (e) {} return; }
+        if (st !== "prompt") { window.__smdPushOffered = true; return; }   // denied → don't nag
+        _pushState = "prompt";
+      }).catch(function () { _pushState = null; });
+      return;
+    }
+    if (_pushState !== "prompt") return;
+    // Permission is undecided: wait for the shared quiet slot instead of landing with other prompts.
+    if (window.SMD_PROMPT && !window.SMD_PROMPT.try("push", "ask")) return;
     window.__smdPushOffered = true;
     initNativePushListeners();
-    P.checkPermissions().then(function (res) {
-      var st = res && res.receive;
-      if (st === "granted") { try { P.register(); } catch (e) {} return; }
-      if (st !== "prompt") return;   // denied → don't nag
-      showPushPopup();
-    }).catch(function () {});
+    showPushPopup();
   }
   function showPushPopup() {
     if (document.getElementById("smdPushPop")) return;
@@ -11406,7 +11442,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid color-mix(in srgb, var(--line,#d7dee3) 80%, transparent);border-radius:14px;background:color-mix(in srgb, var(--panel,#fff) 45%, transparent);color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
       '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:14px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer;box-shadow:0 4px 14px -4px rgba(14,110,99,.65)">Turn on</button></div></div>';
     document.body.appendChild(d);
-    function close() { if (d.parentNode) d.parentNode.removeChild(d); }
+    function close() { if (d.parentNode) d.parentNode.removeChild(d); if (window.SMD_PROMPT) window.SMD_PROMPT.done("push"); }
     d.querySelector("#smdPushLater").addEventListener("click", close);
     d.addEventListener("click", function (e) { if (e.target === d) close(); });
     d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
@@ -11422,7 +11458,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var tries = 0;
         var iv = setInterval(function () {
           try { maybeOfferPushOnOpen(); } catch (e) {}
-          if (window.__smdPushOffered || ++tries > 80) { try { clearInterval(iv); } catch (e2) {} }
+          if (window.__smdPushOffered || ++tries > 400) { try { clearInterval(iv); } catch (e2) {} }
         }, 1500);
       });
     } catch (e) {}

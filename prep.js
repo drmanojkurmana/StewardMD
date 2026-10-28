@@ -2692,7 +2692,7 @@
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
         }).join("") + "</div></div>" : "") +
-        provHtml(it) + (it.qg && G.PREP_QGEN ? G.PREP_QGEN.provLine(it, HOST) : "") + (qid ? IDS.chip(qid) : "") + "</section>";
+        provHtml(it) + (it.qg && G.PREP_QGEN ? G.PREP_QGEN.provLine(it, HOST) : "") + (qid ? IDS.chip(qid) : "") + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>";
       // Nucleus360 (prep-nucleus360.js): inside a Nucleus360 session the concept rail + title go above the unchanged
       // explanation and the Chapter note below it. Without the file, or outside a session, fb is untouched.
       if (G.PREP_NUCLEUS360 && G.PREP_NUCLEUS360.wrap) fb = G.PREP_NUCLEUS360.wrap(fb, it);
@@ -3066,7 +3066,7 @@
           return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
         }).join("") + "</ol>" + ex + whyRowHtml(it, a, i) + outdatedHtml(it) + tagRow +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") +
-        (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
+        (rid ? G.PREP_IDS.chip(rid) : "") + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</div></details></li>";
     }).join("");
     return '<div class="pn-filters" role="group" aria-label="Solutions filter">' + F.map(function (x) {
       var n = sp[x[0]].length, on = x[0] === f;
@@ -3207,7 +3207,7 @@
     paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
     }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
-      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
+      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
     bindRvSwipe();

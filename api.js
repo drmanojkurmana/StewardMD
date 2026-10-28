@@ -141,11 +141,8 @@
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
-        // BUG (2026-08-22, WhatsApp report): this button always fully exits the Drugs Database
-        // (back to wherever it was opened from, usually Home) - a doctor reading it as an "X"
-        // expected it to just dismiss the current drug page and return to the list, which "‹ Back"
-        // already does. A home icon states what it actually does instead of implying "close this".
-        '<button class="db-close" id="dbClose" aria-label="Close and return home">' + dbIco("home") + '</button>' +
+        // The home button was removed (owner 2026-10-28). "‹ Back" steps back; the app's own
+        // back gesture and tab bar leave the database.
       '</div>' +
       '<div class="db-body" id="dbBody"></div>' +
       '<div class="db-scrim" id="dbScrim"></div>' +
@@ -154,7 +151,6 @@
         '<div class="db-dwbody" id="dbDwBody"></div>' +
       '</aside>';
     document.body.appendChild(root);
-    root.querySelector("#dbClose").addEventListener("click", close);
     root.querySelector("#dbBrandBtn").addEventListener("click", openDrawer);
     root.querySelector("#dbDwx").addEventListener("click", closeDrawer);
     root.querySelector("#dbScrim").addEventListener("click", closeDrawer);
