@@ -207,3 +207,68 @@ test("client flag smd_kits_share: ON by default, \"0\" on the device turns it of
     assert.match(home, /act: "kxinbox"[^\n]*defOn: true/, "the Colleagues tile is on Home by default");
   } finally { delete globalThis.localStorage; }
 });
+
+test("contacts: a referral links both doctors, by an opaque id, and the sender can send to the contact", async () => {
+  const w = world();
+  await K.msgSend(w.ctx("uA"), REF);
+  const a = (await K.contactList(w.ctx("uA"))).body.contacts, b = (await K.contactList(w.ctx("uB"))).body.contacts;
+  assert.equal(a.length, 1); assert.equal(a[0].name, "Dr Bala"); assert.equal(a[0].label, "SMD-BBB222"); assert.equal(a[0].via, "sent");
+  assert.equal(b.length, 1); assert.equal(b[0].name, "Dr Asha"); assert.equal(b[0].via, "received");
+  assert.ok(!/uB|uA/.test(JSON.stringify(a)) && !/uA|uB/.test(JSON.stringify(b)), "no uid reaches the client");
+  assert.match(a[0].id, /^[0-9a-f]{24}$/);
+  const r = await K.msgSend(w.ctx("uA"), { ...REF, to: { contact: a[0].id } });
+  assert.equal(r.status, 200); assert.equal(w.docs.get("kx_msgs/" + r.body.id).fields.toUid, "uB");
+  assert.equal((await K.contactList(w.ctx("uA"))).body.contacts.length, 1, "a second referral does not duplicate the contact");
+  assert.equal((await K.contactList(w.ctx("uA"))).body.contacts[0].via, "sent", "first link kept");
+  assert.equal((await K.msgSend(w.ctx("uC"), { ...REF, to: { contact: a[0].id } })).body.error, "recipient_not_found", "another doctor cannot use my contact id");
+  // Bala replies through the contact Asha's referral created.
+  const back = await K.msgSend(w.ctx("uB"), { kind: "handover", to: { contact: b[0].id }, payload: { unit: "LW", rows: [{ bed: "3", summary: "on magnesium" }] } });
+  assert.equal(back.status, 200); assert.equal(w.docs.get("kx_msgs/" + back.body.id).fields.toUid, "uA");
+});
+
+test("contacts: add by ID or email (mutual, one fixed push), refuse self and unknown, rate-limited, remove", async () => {
+  const w = world();
+  const r = await K.contactAdd(w.ctx("uA"), { to: { smdId: "smd-ccc333" } });
+  assert.equal(r.status, 200); assert.equal(r.body.contact.name, "Dr Chitra"); assert.equal(r.body.contact.verified, true); assert.equal(r.body.already, false);
+  assert.equal((await K.contactList(w.ctx("uC"))).body.contacts[0].via, "added_you", "Chitra sees who added her");
+  assert.equal(w.pushes.length, 1); assert.equal(w.pushes[0].uid, "uC"); assert.ok(!/Asha/.test(JSON.stringify(w.pushes[0].msg)), "push is fixed text");
+  assert.equal((await K.contactAdd(w.ctx("uA"), { to: { email: "Chitra@City.example" } })).body.already, true);
+  assert.equal(w.pushes.length, 1, "no second push for the same colleague");
+  assert.equal((await K.contactAdd(w.ctx("uA"), { to: { smdId: "SMD-AAA111" } })).body.error, "cannot_send_to_self");
+  assert.equal((await K.contactAdd(w.ctx("uA"), { to: { smdId: "SMD-NOPE00" } })).status, 404);
+  const u = await K.contactAdd(w.ctx("uA"), { to: { smdId: "SMD-UNV000" } });
+  assert.equal(u.status, 200); assert.equal(u.body.contact.verified, false, "an unverified colleague can be saved");
+  assert.equal((await K.msgSend(w.ctx("uA"), { ...REF, to: { contact: u.body.contact.id } })).body.error, "recipient_not_verified", "but not sent patient data");
+  assert.equal((await K.contactAdd(w.ctx("uU"), { to: { smdId: "SMD-AAA111" } })).status, 200, "an unverified doctor can add a contact (no patient data moves)");
+  w.limits.block = true;
+  assert.equal((await K.contactAdd(w.ctx("uA"), { to: { smdId: "SMD-NOPE00" } })).status, 429, "rate-limited before the lookup");
+  w.limits.block = false;
+  await K.contactRemove(w.ctx("uA"), { id: r.body.contact.id });
+  assert.deepEqual((await K.contactList(w.ctx("uA"))).body.contacts.map((c) => c.name), ["Unverified"]);
+  assert.equal((await K.contactList(w.ctx("uC"))).body.contacts.length, 1, "removing is one-sided");
+});
+
+test("contacts: case rooms invite contacts and link the members; unread markers for inbox, sent and cases", async () => {
+  const w = world();
+  const add = (await K.contactAdd(w.ctx("uA"), { to: { smdId: "SMD-BBB222" } })).body.contact;
+  const c = await K.caseCreate(w.ctx("uA", 2_000_000), { title: "Effusion", question: "Tap or scope?", inviteContacts: [add.id] });
+  assert.equal(c.body.invited, 1);
+  let bl = (await K.caseList(w.ctx("uB", 2_000_001))).body.cases;
+  assert.equal(bl[0].fresh, true, "a new invite is unread");
+  assert.equal((await K.caseList(w.ctx("uA", 2_000_001))).body.cases[0].fresh, false, "the owner has read their own case");
+  await K.caseRead(w.ctx("uB", 2_000_002), { id: c.body.id });
+  assert.equal((await K.caseList(w.ctx("uB", 2_000_003))).body.cases[0].fresh, false, "opened: read");
+  await K.casePost(w.ctx("uB", 2_000_004), { id: c.body.id, text: "Scope" });
+  assert.equal((await K.caseList(w.ctx("uB", 2_000_005))).body.cases[0].fresh, false, "my own reply is not unread for me");
+  assert.equal((await K.caseList(w.ctx("uA", 2_000_005))).body.cases[0].fresh, true, "but is for the owner");
+  // messages
+  const id = (await K.msgSend(w.ctx("uA", 3_000_000), REF)).body.id;
+  assert.equal((await K.msgList(w.ctx("uB", 3_000_001))).body.inbox[0].fresh, true);
+  await K.msgRead(w.ctx("uB", 3_000_002), { id });
+  assert.equal((await K.msgList(w.ctx("uB", 3_000_003))).body.inbox[0].fresh, false);
+  assert.equal((await K.msgList(w.ctx("uA", 3_000_003))).body.sent[0].fresh, false, "seen is not news for the sender");
+  await K.msgStatus(w.ctx("uB", 3_000_004), { id, status: "accepted", note: "ok" });
+  assert.equal((await K.msgList(w.ctx("uA", 3_000_005))).body.sent[0].fresh, true, "an answer is news for the sender");
+  await K.msgRead(w.ctx("uA", 3_000_006), { id });
+  assert.equal((await K.msgList(w.ctx("uA", 3_000_007))).body.sent[0].fresh, false, "until the sender opens it");
+});

@@ -126,18 +126,26 @@ try {
   await ev(`window.SMD_STEWARD_ID={my:function(){return 'SMD-BBB222'},ensure:function(d,cb){cb&&cb('SMD-BBB222')}};1`);
   await ev(`SMD_SHARE.openInbox('in');1`);
   ok(await until(`/Referral: Urgent \\(within 24 hours\\)/.test(document.querySelector('#smdShare')?.textContent||'')&&/Dr Asha/.test(document.querySelector('#smdShare').textContent)`), "Bala's inbox lists the urgent referral from Dr Asha");
-  ok(/Your StewardMD ID: SMD-BBB222/.test(await text('#smdShare')), 'the inbox shows your own StewardMD ID to give to colleagues');
+  ok(/Your StewardMD ID\s*SMD-BBB222/.test(await text('#smdShare')), 'the inbox shows your own StewardMD ID to give to colleagues');
+  ok(await ev(`/^Received\\s*1$/.test(document.querySelector('#smdShare [data-sh-act="tab:in"]').textContent.trim())`), 'the Received tab counts the unread referral');
+  ok(await ev(`!!document.querySelector('#smdShare .rv-row.fresh .sh-dot')`), 'the unread referral is marked new');
+  ok(await ev(`(()=>{const r=document.querySelector('#smdShare [data-sh-act="close"] .kit-ic').getBoundingClientRect();return r.width>=24})()`), 'the close icon is full size');
+  await shot('share-home');
   await armToasts(); await click('#smdShare [data-sh-act="copyid"]');
   ok(await toastHas(/SMD-BBB222/), 'your ID can be copied');
   await ev(`window.__opened=[];window.open=function(u){window.__opened.push(String(u));return {}};1`);
   await click('#smdShare [data-sh-act="wa-invite"]');
   const inv = await ev(`decodeURIComponent((window.__opened[0]||'').split('text=')[1]||'')`);
-  ok(/SMD-BBB222/.test(inv) && /stewardmd\.in/.test(inv) && /^https:\/\/wa\.me\//.test(await ev(`window.__opened[0]||''`)), 'SMD-08 Invite on WhatsApp sends your ID and the app link: ' + inv);
+  ok(/SMD-BBB222/.test(inv) && /https:\/\/stewardmd\.in\/add\/SMD-BBB222/.test(inv) && /^https:\/\/wa\.me\//.test(await ev(`window.__opened[0]||''`)), 'SMD-08 Invite on WhatsApp sends your ID and a one-tap add link: ' + inv);
   await click('#smdShare .rv-row');
   ok(await until(`/Lakshmi Devi/.test(document.querySelector('#smdShare').textContent)&&/Severe pre-eclampsia/.test(document.querySelector('#smdShare').textContent)`), 'opening it shows the letter');
   await setVal('#sh_note', 'Bed ready in the labour ward.'); await click('#smdShare [data-sh-act="st:accepted"]');
   ok(await until(`/Accepted/.test(document.querySelector('#smdShare').textContent)&&/Bed ready in the labour ward/.test(document.querySelector('#smdShare').textContent)`), 'accepted with a reply');
   await shot('share-accepted');
+  await click('#smdShare [data-sh-act="inbox"]'); await until(`!!document.querySelector('#smdShare [data-sh-act="tab:in"]')`);
+  ok(await until(`/^Received$/.test(document.querySelector('#smdShare [data-sh-act="tab:in"]').textContent.trim())`), 'opened: no longer counted');
+  await click('#smdShare [data-sh-act="tab:contacts"]');
+  ok(await until(`/Dr Asha/.test(document.querySelector('#smdShare .sh-person')?.textContent||'')`), 'the referral put Dr Asha in Bala\'s contacts');
 
   /* ---- Bala hands over to Asha; Asha must read back ---- */
   await click('#smdShare [data-sh-act="close"]');
@@ -160,6 +168,43 @@ try {
   await click('#smdShare [data-sh-act="tab:out"]'); await click('#smdShare [data-sh-act="inbox"]');
   await until(`/Received/.test(document.querySelector('#smdShare').textContent)`); await click('#smdShare [data-sh-act="tab:out"]');
   ok(await until(`/Accepted/.test(document.querySelector('#smdShare').textContent)`), "Asha's sent list shows the referral accepted");
+
+  /* ---- contacts: refer straight from a colleague, add by ID, invite link ---- */
+  await click('#smdShare [data-sh-act="tab:contacts"]');
+  ok(await until(`/Dr Bala/.test(document.querySelector('#smdShare .sh-person')?.textContent||'')`), "Asha's contacts list Dr Bala (from the referral)");
+  await shot('share-contacts');
+  await ev(`[...document.querySelectorAll('#smdShare .sh-person')].find(b=>/Dr Bala/.test(b.textContent)).click();1`);
+  ok(await until(`!!document.querySelector('#smdShare [data-sh-act="cstart:referral"]')`), 'a contact opens with Refer, Hand over, Ask about a case');
+  await click('#smdShare [data-sh-act="cstart:referral"]');
+  ok(await until(`document.querySelector('#smdDocs.on')&&!document.querySelector('#smdShare.on')&&!!document.querySelector('#smdDocs [data-dl-f="reason"]')`), 'Refer opens the referral letter');
+  ok(await until(`/Send to Dr Bala in StewardMD/.test(document.querySelector('#smdDocs [data-dl-act="kxsend"]')?.textContent||'')`), 'the Send button names the colleague');
+  await setVal('#smdDocs [data-dl-f="name"]', 'Meena'); await setVal('#smdDocs [data-dl-f="age"]', '31'); await setVal('#smdDocs [data-dl-f="reason"]', 'Placenta praevia, bleeding');
+  await click('#smdDocs [data-dl-act="kxsend"]'); await until(`document.querySelector('#smdShare.on')`);
+  ok(/To\s*Dr Bala/.test(await text('#smdShare .sh-to')) && !await ev(`!!document.querySelector('#sh_to')`), 'compose is already addressed: no ID to type');
+  await setVal('#sh_consent', true); await armToasts(); await click('#smdShare [data-sh-act="send"]');
+  ok(await toastHas(/^Referral sent\.$/), 'sent to the contact');
+  const toB = [...W.docs.values()].filter((d) => d.fields.kind === 'referral' && d.fields.toUid === 'uB').length;
+  ok(toB === 2, 'the second referral reached Dr Bala');
+  await click('#smdShare [data-sh-act="tab:contacts"]'); await until(`!!document.querySelector('#sh_add')`);
+  await setVal('#sh_add', 'ccc333'); await armToasts(); await click('#smdShare [data-sh-act="addcontact"]');
+  ok(await toastHas(/^Dr Chitra added\.$/) && await until(`[...document.querySelectorAll('#smdShare .sh-person')].some(b=>/Dr Chitra/.test(b.textContent))`), 'a colleague is added by ID (prefix optional)');
+  await setVal('#sh_add', 'SMD-NOPE00'); await armToasts(); await click('#smdShare [data-sh-act="addcontact"]');
+  ok(await toastHas(/No StewardMD doctor has that ID/), 'an unknown ID is refused clearly');
+  await click('#smdShare [data-sh-act="close"]'); await click('#smdDocs [data-dl-act="close"]');
+  ok(await ev(`SMD_SHARE.openAdd('smd-ccc333')`) && await until(`/Add SMD-CCC333 to your contacts\?/.test(document.querySelector('#smdShare .sh-add-card')?.textContent||'')`), 'an invite link opens "Add this colleague?"');
+  await armToasts(); await click('#smdShare [data-sh-act="addpending"]');
+  ok(await toastHas(/Dr Chitra is already in your contacts/) && !await ev(`!!document.querySelector('#smdShare .sh-add-card')`), 'adding twice is harmless');
+  ok(!await ev(`SMD_SHARE.openAdd('not-an-id')`), 'a malformed invite link is ignored');
+  await click('#smdShare [data-sh-act="tab:contacts"]'); await until(`!!document.querySelector('#smdShare .sh-person')`);
+  await click('#smdShare .sh-person'); await until(`!!document.querySelector('#smdShare [data-sh-act="cstart:handover"]')`);
+  await click('#smdShare [data-sh-act="cstart:handover"]'); await until(`document.querySelector('#smdDocs.on')`);
+  ok(/Send to Dr \w+ in StewardMD/.test(await text('#smdDocs [data-dl-act="kxsend"]')), 'Hand over from a contact names them on the Send button');
+  await click('#smdDocs [data-dl-act="close"]');
+  ok(await ev(`SMD_SHARE.presetName()===''`), 'closing Documents without sending forgets the colleague');
+  await ev(`SMD_SHARE.openInbox('in');1`); await until(`document.querySelector('#smdShare.on')`);
+  // native-bridge.js routes the Universal Link to openAdd
+  const nb = (await import('node:fs')).readFileSync(new URL('../native-bridge.js', import.meta.url), 'utf8');
+  ok(/routeColleagueAdd\(d\.url\)/.test(nb) && /routeColleagueAdd\(r\.url\)/.test(nb), 'warm and cold launches route https://stewardmd.in/add/<ID> to Colleagues');
   await click('#smdShare [data-sh-act="close"]');
 
   /* ---- case room from a kit, de-identified ---- */
@@ -177,6 +222,21 @@ try {
   ok(await until(`/Thoracoscopy, with pleural biopsy/.test(document.querySelector('#smdShare').textContent)&&/Dr Bala/.test(document.querySelector('#smdShare').textContent)`), 'Bala replies in the thread');
   ok(!await ev(`!!document.querySelector('#smdShare [data-sh-act="closecase"]')`), 'only the owner can close or invite');
   await shot('share-case');
+  await click('#smdShare [data-sh-act="close"]');
+  await as('uA'); await ev(`SMD_SHARE.openInbox('cases');1`);
+  ok(await until(`/^Cases\\s*1$/.test(document.querySelector('#smdShare [data-sh-act="tab:cases"]')?.textContent.trim()||'')`), "Bala's reply shows as 1 new case for Asha");
+  await click('#smdShare [data-sh-act="tab:contacts"]'); await until(`!!document.querySelector('#smdShare .sh-person')`);
+  await ev(`[...document.querySelectorAll('#smdShare .sh-person')].find(b=>/Dr Chitra/.test(b.textContent)).click();1`);
+  await until(`!!document.querySelector('#smdShare [data-sh-act="cstart:case"]')`); await click('#smdShare [data-sh-act="cstart:case"]');
+  ok(await until(`[...document.querySelectorAll('#smdShare .sh-chip.on')].some(b=>/Dr Chitra/.test(b.textContent))`), 'Ask about a case starts with that colleague already invited');
+  await setVal('#sh_title', 'Non-healing ulcer'); await setVal('#sh_q', 'Biopsy now?');
+  await ev(`[...document.querySelectorAll('#smdShare .sh-chip')].find(b=>/Dr Bala/.test(b.textContent)).click();1`);
+  ok(await ev(`document.querySelector('#sh_title').value==='Non-healing ulcer'&&document.querySelector('#sh_q').value==='Biopsy now?'`), 'picking a contact keeps what was typed');
+  await armToasts(); await click('#smdShare [data-sh-act="createcase"]');
+  ok(await toastHas(/Case room opened\. 2 invited\./), 'both contacts invited with a tap');
+  await click('#smdShare [data-sh-act="close"]');
+  await as('uC'); await ev(`SMD_SHARE.openInbox('cases');1`);
+  ok(await until(`/^Cases\\s*1$/.test(document.querySelector('#smdShare [data-sh-act="tab:cases"]')?.textContent.trim()||'')&&/Non-healing ulcer/.test(document.querySelector('#smdShare').textContent)`), 'Chitra sees the new case room, counted as new');
   await click('#smdShare [data-sh-act="close"]');
 
   /* ---- publish version 2 of the hospital's kit ---- */
@@ -198,10 +258,29 @@ try {
   ok(await toastHas(/Sent 1 decision to StewardMD/) && W.docs.has('kx_reviews/uA'), 'review decisions reach the server');
   await click('#smdReview [data-rv-act="close"]'); await ev(`localStorage.removeItem('smd_review_decisions');1`);
 
+  /* ---- Home badge, empty states ---- */
+  await as('uB'); await ev(`SMD_SHARE.openInbox('in');SMD_SHARE.close();1`);
+  ok(await until(`(document.querySelector('[data-act="kxinbox"] .sh-home-badge')||{}).textContent>='1'`, 8000) || !await ev(`!!document.querySelector('[data-act="kxinbox"]')`), 'the Colleagues tile on Home shows the new items');
+  ok(await ev(`SMD_SHARE.unread().then(n=>window.__un=n)`) !== undefined && await until(`window.__un>=1`), 'unread() counts new items for Bala');
+  await as('uC'); await ev(`SMD_SHARE.openInbox('in');1`);
+  ok(await until(`/Nothing received yet/.test(document.querySelector('#smdShare .sh-empty')?.textContent||'')`), 'empty Received explains itself');
+  await click('#smdShare [data-sh-act="tab:out"]');
+  ok(await until(`!!document.querySelector('#smdShare .sh-empty [data-sh-act="start:referral"]')`), 'empty Sent offers Refer a patient and Hand over');
+  await shot('share-empty-sent');
+  await click('#smdShare [data-sh-act="start:handover"]');
+  ok(await until(`document.querySelector('#smdDocs.on')&&!!document.querySelector('#smdDocs [data-dl-act="hadd"]')`), 'Hand over opens the handover sheet from Colleagues');
+  await click('#smdDocs [data-dl-act="close"]');
+  await as('uA');
+
   /* ---- screens: no dashes, no side scroll ---- */
   await ev(`SMD_SHARE.openInbox('in');1`); await until(`document.querySelectorAll('#smdShare .rv-row').length>=1`);
   ok(!/[–—]/.test(await ev(`document.querySelector('#smdShare').innerText`)), 'no em or en dash on the Colleagues sheet');
   ok(await ev(`(()=>{const c=document.querySelector('#smdShare .kit-sheet-body');return c.scrollWidth<=c.clientWidth+1})()`), 'no sideways scroll at 390px');
+  for (const tab of ['out', 'cases', 'contacts']) {
+    await click(`#smdShare [data-sh-act="tab:${tab}"]`); await sleep(300);
+    ok(await ev(`(()=>{const c=document.querySelector('#smdShare .kit-sheet-body');return c.scrollWidth<=c.clientWidth+1})()`) && !/[–—]/.test(await ev(`document.querySelector('#smdShare').innerText`)), `${tab}: no sideways scroll, no dash`);
+  }
+  ok(await ev(`[...document.querySelectorAll('#smdShare button')].filter(b=>b.offsetParent).every(b=>b.getBoundingClientRect().height>=36)`), 'every button is a comfortable tap target');
   await click('#smdShare [data-sh-act="close"]');
 
   /* ---- flag off ---- */

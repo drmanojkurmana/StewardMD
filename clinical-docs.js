@@ -243,7 +243,7 @@
         '<div class="kit-grid">' + FORMS[S.type].map(fieldHtml).join("") + "</div>" + extra +
         '<div class="kit-row"><button type="button" class="kit-add" data-dl-act="print">' + ms("ios_share") + "Print or share</button>" +
         '<button type="button" class="kit-clear" data-dl-act="preview">Preview</button>' +
-        ((S.type === "referral" || S.type === "handover") && G.SMD_SHARE && G.SMD_SHARE.on && G.SMD_SHARE.on() ? '<button type="button" class="kit-pill" data-dl-act="kxsend">' + ms("send") + (S.type === "referral" ? "Send to a colleague in StewardMD" : "Send to the receiving doctor") + "</button>" : "") +
+        ((S.type === "referral" || S.type === "handover") && G.SMD_SHARE && G.SMD_SHARE.on && G.SMD_SHARE.on() ? '<button type="button" class="kit-pill" data-dl-act="kxsend">' + ms("send") + (G.SMD_SHARE.presetName && G.SMD_SHARE.presetName() ? "Send to " + esc(G.SMD_SHARE.presetName()) + " in StewardMD" : S.type === "referral" ? "Send to a colleague in StewardMD" : "Send to the receiving doctor") + "</button>" : "") +
         '</div><div class="dl-preview" hidden></div>';
     }
     body.innerHTML = '<div class="kit dl">' + html + "</div>";
@@ -285,7 +285,7 @@
     if (G.SMD_RX && G.SMD_RX.verifiedInfo) G.SMD_RX.verifiedInfo().then(function (v) { S.regNo = (v && v.verified && v.regNo) || ""; }, function () {});
     render();
   }
-  function close() { var el = D && D.getElementById("smdDocs"); if (el) el.classList.remove("on"); S.ctx = null; S.vals = {}; S.adviceSel = {}; S.advQ = ""; S.kitSummary = ""; S.handover = []; }
+  function close() { var el = D && D.getElementById("smdDocs"); if (el) el.classList.remove("on"); if (G.SMD_SHARE && G.SMD_SHARE.clearPreset) G.SMD_SHARE.clearPreset(); S.ctx = null; S.vals = {}; S.adviceSel = {}; S.advQ = ""; S.kitSummary = ""; S.handover = []; }
 
   // Output exactly as the prescription does: native = file + OS share sheet; web = hidden iframe print.
   function output(html, name) {

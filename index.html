@@ -2261,7 +2261,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1" defer></script>
+<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1-add1" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2388,7 +2388,7 @@ window.openExternal = function (u) {
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2-rd1-km1-ls1-synmgmt1-kbnav1-kbrd1-kbs1-rl1-oncolinks1-fig1-il1">
 <link rel="stylesheet" href="/kb-protocols.css?v=kbp5">
 <link rel="stylesheet" href="/specialty-kits.css?v=kits5-ipad1">
-<link rel="stylesheet" href="/clinical-docs.css?v=docs5-pf2">
+<link rel="stylesheet" href="/clinical-docs.css?v=docs5-pf2-col1">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
 <script src="/kb-search.js?v=kbs1" defer></script>
@@ -2405,7 +2405,7 @@ window.openExternal = function (u) {
 <script src="/kb-protocols.js?v=kbp12.bd81955dcc91" defer></script>
 <!-- Clinical documents (certificates, consent forms, handouts, MLC, MCCD draft). Flag smd_clinical_docs
      (default ON, ?docs=0). Token kept in step with kb/documents/documents.json by scripts/build-documents.mjs. -->
-<script src="/clinical-docs.js?v=docs4.598e7e3c41bc-pm1" defer></script>
+<script src="/clinical-docs.js?v=docs4-col1.598e7e3c41bc" defer></script>
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-prepfix.js?v=pf3" defer></script>
@@ -2416,8 +2416,8 @@ window.openExternal = function (u) {
 <script src="/bulletins-desk.js?v=bl10" defer></script>
 <script src="/mail.js?v=mailpro1" defer></script>
 <!-- Colleagues (wave 2): referrals, handovers, case rooms, the hospital's version of a kit, kit history.
-     Flag smd_kits_share (default OFF, ?share=1); server route /api/kits is off until KITS_SHARE_ON=1. -->
-<script src="/kits-share.js?v=share3-wa1" defer></script>
+     Flag smd_kits_share (default ON, ?share=0 turns it off); server kill switch KITS_SHARE_ON=0. -->
+<script src="/kits-share.js?v=share4-col1" defer></script>
 <!-- Specialty kits (26 kits in 7 groups, from O&G and Paediatrics to Forensic medicine):
      OPD EMR Specialty tab + Home tile. Flag smd_specialty_kits (default ON, ?kits=0 hides both). The
      specialty-kits.js ?v= token is kept in step with the kit + WHO growth data hashes by
