@@ -2368,7 +2368,7 @@ window.openExternal = function (u) {
 <script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1-pf1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
-<script src="/fig-viewer.js?v=fig15" defer></script>
+<script src="/fig-viewer.js?v=fig16" defer></script>
 <script src="/ilearn.js?v=il1" defer></script>
 <script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
@@ -2409,7 +2409,7 @@ window.openExternal = function (u) {
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-prepfix.js?v=pf3" defer></script>
-<script src="/review-desk.js?v=rev5-prep3" defer></script>
+<script src="/review-desk.js?v=rev5-prep3-anest1" defer></script>
 <!-- Clinical Bulletins: signed practice updates on the disease reader (flag smd_kb_bulletins, default off)
      + the Review Desk signing tab. docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md -->
 <script src="/bulletins.js?v=bl6" defer></script>
@@ -2473,7 +2473,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1-embedlocal1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
-<script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg-ft2-kbnav1-conv5" defer></script>
+<script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg-ft2-kbnav1-conv5-prec3" defer></script>
 <!-- MaiK clinician-only scope gate (window.MaiKScope): refuses non-clinical asks instantly, before KB/router/Vertex. -->
 <script src="/kb/ai/maik-scope.js?v=scope-certain1-tools1" defer></script>
 <!-- MaiK Clinical Decision Engine (brain) + Evidence Engine. Deterministic, KB-first.
@@ -2484,7 +2484,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1-ipad2" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-anest1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2534,7 +2534,7 @@ window.openExternal = function (u) {
 <script src="/undo.js?v=pm2" defer></script>
 <script src="/swipe-actions.js?v=pm2" defer></script>
 <script src="/tab-bar.js?v=pm4" defer></script>
-<script src="/az-scrubber.js?v=pm2-ipad1" defer></script>
+<script src="/az-scrubber.js?v=pm2-ipad1-fold1" defer></script>
 <script src="/keyboard-aware.js?v=pm2" defer></script>
 <script src="/blur-up.js?v=pm2" defer></script>
 <script src="/launch-morph.js?v=pm2" defer></script>
@@ -3294,10 +3294,10 @@ window.openExternal = function (u) {
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
 <script src="/prep-loader.js?v=prep92" defer></script>
-<!-- Narkē (Anaesthesia): only the loader at boot; the engine and Narkē files load on first open (narke-loader.js) -->
-<script src="/narke-loader.js?v=nrk9" defer></script>
+<!-- Anesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
+<script src="/narke-loader.js?v=nrk10" defer></script>
 <!-- Kardia (Echo + ECG learning): only the loader at boot; the engine and Kardia files load on first open (kardia-loader.js).
      Flag smd_kardia, default OFF for everyone (?kardia=1 per tester device). -->
-<script src="/kardia-loader.js?v=krd14" defer></script>
+<script src="/kardia-loader.js?v=krd15" defer></script>
 </body>
 </html>
