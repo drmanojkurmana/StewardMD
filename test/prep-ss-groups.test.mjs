@@ -29,7 +29,9 @@ const TAX = JSON.parse(fs.readFileSync(path.join(ROOT, "prep/taxonomy.json"), "u
 
 const KNOWN = new Set();
 TAX.branches.forEach((b) => (b.subjects || []).forEach((s) => KNOWN.add(s.id)));
-const MEDICAL_KIND = ["medical", "respiratory", "critical-care", "medical-oncology", "radio-diagnosis"];
+const MEDICAL_KIND = ["medical", "respiratory", "radio-diagnosis"];
+// NBEMS: Medical Oncology and Critical Care Medicine are their own super-specialty papers, not a second General Medicine paper.
+const ONLY_KIND = ["critical-care", "medical-oncology"];
 const MEDICAL_CORE = new Set(SRC.medicalCore.concat(["ss-general-medicine"]));
 
 function bankVersion(sid) {
@@ -88,8 +90,8 @@ test("every mapped subject exists in the taxonomy and holds live questions", () 
   }
 });
 
-test("every group includes Biostatistics", () => {
-  for (const g of GROUPS.groups) assert.ok(g.subjects.includes("ss-biostatistics"), g.id + " includes Biostatistics");
+test("every group but the dedicated super-specialty papers includes Biostatistics", () => {
+  for (const g of GROUPS.groups) if (!ONLY_KIND.includes(g.id)) assert.ok(g.subjects.includes("ss-biostatistics"), g.id + " includes Biostatistics");
 });
 
 test("medical-kind groups show own subjects plus the medical core and Biostatistics", () => {
@@ -98,6 +100,24 @@ test("medical-kind groups show own subjects plus the medical core and Biostatist
     for (const core of SRC.medicalCore) assert.ok(g.subjects.includes(core), id + " holds medical core " + core);
     assert.ok(g.subjects.includes("ss-biostatistics"), id + " holds Biostatistics");
   }
+});
+
+test("Medical Oncology and Critical Care groups show only their own subjects: no General Medicine, no medical core, no Biostatistics", () => {
+  const onc = GROUPS.groups.find((x) => x.id === "medical-oncology");
+  assert.deepEqual(onc.subjects, ["ss-medical-oncology"]);
+  const cc = GROUPS.groups.find((x) => x.id === "critical-care");
+  assert.deepEqual(new Set(cc.subjects), new Set(["ss-critical-care", "ss-pulmonology"]));
+  for (const g of [onc, cc]) {
+    assert.ok(!g.subjects.includes("ss-general-medicine") && !g.subjects.includes("ss-biostatistics") && !g.subjects.includes("ss-cardiology"), g.id + " has no medical core");
+    assert.equal(g.kind, "only");
+  }
+  assert.ok(GROUPS.groups.find((x) => x.id === "medical").subjects.includes("ss-medical-oncology"), "the broad Medical group still holds Medical Oncology");
+});
+
+test("INI-SS Medical Oncology is the course plus General Medicine (and Biostatistics), not the whole medical tab", () => {
+  const out = PLAN.iniSubjects("ss-medical-oncology");
+  assert.deepEqual(out.slice(0, 2), ["ss-medical-oncology", "ss-general-medicine"]);
+  assert.ok(!out.includes("ss-cardiology") && !out.includes("ss-neurology") && !out.includes("ss-nephrology"));
 });
 
 test("radiology group follows the owner rule: radiology plus medical core plus Biostatistics", () => {
@@ -120,7 +140,7 @@ test("every other group shows its own subjects plus Biostatistics", () => {
   const own = {};
   SRC.groups.forEach((g) => { own[g.id] = new Set(g.own.concat([SRC.biostatistics])); });
   for (const g of GROUPS.groups) {
-    if (MEDICAL_KIND.includes(g.id) || g.id === "surgical") continue;
+    if (MEDICAL_KIND.includes(g.id) || ONLY_KIND.includes(g.id) || g.id === "surgical") continue;
     assert.deepEqual(new Set(g.subjects), own[g.id], g.id + " is own plus Biostatistics");
   }
 });

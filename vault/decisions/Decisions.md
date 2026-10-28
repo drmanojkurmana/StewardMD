@@ -11912,3 +11912,6 @@ with a fixed-text push. A contact is addressed by an opaque hash id, never the c
 colleague need not be verified: no patient data moves, and sending still requires both verified. The invite link carries only the inviter's
 own StewardMD ID; its no-app page does no name lookup, so the directory cannot be browsed. Rides the existing `smd_kits_share` /
 `KITS_SHARE_ON` switches; no separate flag. Do not re-litigate.
+
+## 2026-10-28 - NEET-SS Medical Oncology and Critical Care groups show only their own subjects
+Owner: choosing the Medical Oncology group showed every medical subject; wanted only oncology modules (INI-SS Medical Oncology = oncology plus General Medicine, unchanged). Source: the NEET-SS 2026 Specialty Groups guide: Medical Oncology and Critical Care Medicine are their own super-specialty papers, "rather than a second full General Medicine paper". `prep/ss-groups.json` gets kind `only` for the `medical-oncology` and `critical-care` groups (own subjects, no medical core, no Biostatistics; Critical Care keeps Pulmonology); the broad Medical group still holds Medical Oncology. This supersedes the 2026-10-14 rule that gave every medical-kind group the medical core. INI-SS scope (`iniSubjects`: course, its degree's General subject, Biostatistics) is unchanged. Do not re-litigate; to add Biostatistics back, switch the group to kind `own`.

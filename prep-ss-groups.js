@@ -209,45 +209,21 @@
      "id": "critical-care",
      "label": "Critical Care group",
      "feeder": "Critical Care Medicine (own paper)",
-     "kind": "medical",
-     "includes": "Critical Care, Pulmonology plus the medical subjects and Biostatistics",
+     "kind": "only",
+     "includes": "Critical Care and Pulmonology only",
      "subjects": [
-      "ss-general-medicine",
-      "ss-cardiology",
-      "ss-neurology",
-      "ss-nephrology",
-      "ss-gastroenterology",
-      "ss-hepatology",
-      "ss-endocrinology",
-      "ss-haematology",
-      "ss-medical-oncology",
-      "ss-rheumatology-immunology",
       "ss-pulmonology",
-      "ss-infectious-diseases",
-      "ss-critical-care",
-      "ss-biostatistics"
+      "ss-critical-care"
      ]
     },
     {
      "id": "medical-oncology",
      "label": "Medical Oncology group",
      "feeder": "Medical Oncology (own paper)",
-     "kind": "medical",
-     "includes": "Medical Oncology plus the medical subjects and Biostatistics",
+     "kind": "only",
+     "includes": "Medical Oncology only",
      "subjects": [
-      "ss-general-medicine",
-      "ss-cardiology",
-      "ss-neurology",
-      "ss-nephrology",
-      "ss-gastroenterology",
-      "ss-hepatology",
-      "ss-endocrinology",
-      "ss-haematology",
-      "ss-medical-oncology",
-      "ss-rheumatology-immunology",
-      "ss-pulmonology",
-      "ss-infectious-diseases",
-      "ss-biostatistics"
+      "ss-medical-oncology"
      ]
     }
    ]

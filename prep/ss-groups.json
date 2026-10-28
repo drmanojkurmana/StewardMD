@@ -1,7 +1,7 @@
 {
   "v": 1,
   "source": "NBEMS NEET-SS 2025 Information Bulletin groups and feeder degrees, via .fleet-reports/NEET-SS-GROUPS-INVENTORY.md. Bank subjects from prep/taxonomy.json; live counts from prep/bank/*/index.json plus prep/bank/overlay-counts.json.",
-  "rule": "medical-kind groups show their own super-specialties plus the medical core and Biostatistics; the surgical group shows its own super-specialties plus Biostatistics; every other group shows its own super-specialties plus Biostatistics. Subjects are listed in taxonomy order. A subject with zero live questions is hidden at render time, never shown as coming soon.",
+  "rule": "NBEMS sets Medical Oncology and Critical Care Medicine as their own super-specialty papers, not a second General Medicine paper (NEET-SS 2026 Specialty Groups guide, owner 2026-10-28): only-kind groups show their own subjects and nothing else. medical-kind groups show their own super-specialties plus the medical core and Biostatistics; the surgical group shows its own super-specialties plus Biostatistics; every other group shows its own super-specialties plus Biostatistics. Subjects are listed in taxonomy order. A subject with zero live questions is hidden at render time, never shown as coming soon.",
   "biostatistics": "ss-biostatistics",
   "medicalCore": ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-rheumatology-immunology", "ss-pulmonology", "ss-infectious-diseases"],
   "groups": [
@@ -44,11 +44,11 @@
     {"id": "ent", "label": "ENT group", "feeder": "MS/DNB ENT", "kind": "own",
      "own": ["ss-head-neck-surgery"],
      "includes": "Head and Neck Surgery plus Biostatistics"},
-    {"id": "critical-care", "label": "Critical Care group", "feeder": "Critical Care Medicine (own paper)", "kind": "medical",
+    {"id": "critical-care", "label": "Critical Care group", "feeder": "Critical Care Medicine (own paper)", "kind": "only",
      "own": ["ss-critical-care", "ss-pulmonology"],
-     "includes": "Critical Care, Pulmonology plus the medical subjects and Biostatistics"},
-    {"id": "medical-oncology", "label": "Medical Oncology group", "feeder": "Medical Oncology (own paper)", "kind": "medical",
+     "includes": "Critical Care and Pulmonology only"},
+    {"id": "medical-oncology", "label": "Medical Oncology group", "feeder": "Medical Oncology (own paper)", "kind": "only",
      "own": ["ss-medical-oncology"],
-     "includes": "Medical Oncology plus the medical subjects and Biostatistics"}
+     "includes": "Medical Oncology only"}
   ]
 }
