@@ -204,7 +204,8 @@
     var parts = [];
     if (c.author && !/^See the Commons/i.test(c.author)) parts.push(c.author);
     if (c.licence) parts.push(c.licence);
-    return parts.length ? "Image: " + parts.join(", ") + " (Wikimedia Commons)" : "Image: Wikimedia Commons";
+    var from = c.source || "Wikimedia Commons";
+    return parts.length ? "Image: " + parts.join(", ") + " (" + from + ")" : "Image: " + from;
   }
 
   // Build a single spotter quiz question
