@@ -50,7 +50,7 @@ function item(mod, flag) {
   if (flag) { it.qg.why = ["disagree"]; it.qg.note = "The checker preferred another option."; }
   return it;
 }
-const api = { status: { on: false, student: false, owner: false, caps: { modulesPerDay: 3, perModule: 30, perCall: 5 }, left: 3, models: [] }, calls: [], other: [], mode: "ok", slow: 0, mods: new Set(), q: {} };
+const api = { status: { on: false, student: false, owner: false, caps: { modulesPerDay: 3, perModule: 30, perCall: 5 }, left: 3, models: [] }, calls: [], other: [], mode: "ok", slow: 0, mods: new Set(), q: {}, pubs: [{ subject: "pharmacology", module: "ph-first", items: [1, 2, 3].map((n) => ({ id: "mk-00000000000" + n, q: "Published question number " + n + "?", pb: "pbx", ts: 1, hand: 1 })) }, { subject: "medicine", module: "med-first", items: [{ id: "mk-000000000009", q: "Published in medicine?", pb: "pby", ts: 1, hand: 1 }] }] };
 function qgenReply(body, auth) {
   api.calls.push({ op: body.op, body, auth });
   if (body.op === "status") return [200, api.status];
@@ -80,6 +80,22 @@ function qgenReply(body, auth) {
     return [200, { ok: true, batch: "pb20261016abcdef", n: body.items.length, added: body.items.length * body.targets.length, targets: body.targets }];
   }
   if (body.op === "unpublish") return [200, { ok: true, removed: 3 }];
+  if (body.op === "plist") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    const mods = api.pubs.filter((m) => m.items.length).map((m) => ({ subject: m.subject, module: m.module, n: m.items.length, items: m.items }));
+    return [200, { ok: true, total: mods.reduce((t, m) => t + m.n, 0), modules: mods }];
+  }
+  if (body.op === "pdelete") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    let removed = 0;
+    for (const m of api.pubs) {
+      const t = body.all ? { all: true } : (body.targets || []).find((x) => x.subject === m.subject && x.module === m.module);
+      if (!t) continue;
+      const keep = m.items.filter((i) => !(t.all || (t.ids || []).includes(i.id)));
+      removed += m.items.length - keep.length; m.items = keep;
+    }
+    return [200, { ok: true, removed }];
+  }
   return [400, { error: "bad-input" }];
 }
 
@@ -400,6 +416,29 @@ try {
   ok(pb && pb.body.targets.length === 2 && pb.body.items.length >= 1 && pb.body.items.every((x) => x.qg.v === "ok"), "publish sends both targets and only approved items");
   await click('#smdPrep [data-act="g-aundo"]');
   ok(await until(`return !document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000) && qgCalls("unpublish").length === 1, "take-down calls unpublish for the batch");
+
+  // ---- Published questions: list, delete selected, delete a module, delete everything
+  await ev(`PREP._host.back(); return 1;`);
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act="g-pubs"]');`, 5000), "published: the Author screen has a Published questions row");
+  await click('#smdPrep [data-act="g-pubs"]');
+  ok(await until(`return !!document.getElementById("qgPubView") && /4 published questions in 2 modules/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: the list says 4 questions in 2 modules");
+  await ev(`window.confirm=function(){return true;}; return 1;`);
+  await click('#smdPrep [data-act="g-popen"]');
+  ok(await until(`return document.querySelectorAll('#qgPubView [data-act="g-psel"]').length === 3;`, 3000), "published: opening a module lists its questions");
+  await click('#smdPrep [data-act="g-psel"]');
+  ok(/Delete selected \(1\)/.test(await screenText()), "published: one question selected");
+  await click('#smdPrep [data-act="g-pdelsel"]');
+  ok(await until(`return /3 published questions in 2 modules/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: deleting the selected one leaves 3");
+  const d1 = qgCalls("pdelete")[0];
+  ok(d1 && d1.body.targets.length === 1 && d1.body.targets[0].subject === "pharmacology" && d1.body.targets[0].module === "ph-first" && d1.body.targets[0].ids.length === 1 && !d1.body.all, "published: selective delete sends the subject, module and the one id");
+  await click('#smdPrep [data-act="g-pdelmod"]');
+  ok(await until(`return /1 published question in 1 module/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: delete all in a module leaves the other module");
+  const d2 = qgCalls("pdelete")[1];
+  ok(d2 && d2.body.targets[0].all === true && d2.body.targets[0].module === "ph-first", "published: module delete sends all:true for that module");
+  await click('#smdPrep [data-act="g-pdelall"]');
+  ok(await until(`return /Nothing is published right now/.test(document.getElementById("qgPubView").textContent);`, 8000), "published: delete everything empties the list");
+  ok(qgCalls("pdelete")[2].body.all === true, "published: delete everything sends all:true");
+  await shots("published");
 
   // ---- text and errors
   const all = await screenText();

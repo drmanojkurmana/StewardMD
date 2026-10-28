@@ -20,7 +20,8 @@
       options: ["Option A text", "Option B text", "Option C text", "Option D text"],
       answer: "B",
       explanation: "Why the answer is right.",
-      why_wrong: ["Why A is wrong", "", "Why C is wrong", "Why D is wrong"],
+      why_wrong: ["Why option A is wrong: what A really is and when it would be the answer", "", "Why option C is wrong: what C really is and when it would be the answer", "Why option D is wrong: what D really is and when it would be the answer"],
+      topic_explanation: "The topic behind the question, 3 to 6 sentences: the concept, how to tell the options apart, one exam trap.",
       key_point: "One line to remember.",
       difficulty: 2,
       tags: ["topic"]
@@ -37,7 +38,9 @@
       "- Use ONLY the questions that are in the file. Do not invent, merge, skip or reword them. Keep each stem and option as written.",
       "- Exactly 4 options per question, in order. If a question has 5 or more, keep the correct one and the 3 most plausible others.",
       "- answer: one letter, A, B, C or D, the correct option as given in the file.",
-      "- explanation: why the answer is right, taken from the file. why_wrong: exactly 4 strings in option order, each a short reason that option is wrong from the file (\"\" for the correct option or when the file gives none).",
+      "- explanation: why the answer is right, the COMPLETE text from the file (do not shorten or drop sentences).",
+      "- why_wrong: exactly 4 strings in option order. Every WRONG option gets its own specific reason, 1 to 2 sentences, written as why that option is not correct here and when it would be right (for example: \"Option B is wrong because ... It would be the answer if ...\"). Use the file's reason when it gives one; when it gives none, write it yourself, accurate and specific to that option. Never write a generic line such as \"not the best answer because it does not match the scenario\". Use \"\" only for the correct option.",
+      "- topic_explanation: 3 to 6 sentences on the topic behind the question (the concept, how to tell the options apart, one exam trap), from the file where it has it, otherwise written by you. This is shown below the answer.",
       "- key_point: one short line. difficulty: 1 easy, 2 moderate, 3 hard. tags: 0 to 3 short words.",
       "- Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma).",
       "- If there are more than 40 questions, give the first 40 and stop. I will say 'continue' for the next 40, in the same format.",
@@ -45,7 +48,7 @@
       "FORMAT (the example shows one question; add every question to the \"questions\" array):",
       template(),
       "",
-      "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments) and that each answer letter matches the file. Then output the JSON block only."
+      "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments), that each answer letter matches the file, that no explanation lost a sentence, and that each of the 3 wrong options of every question has its own reason. Then output the JSON block only."
     ].join("\n");
   }
 
@@ -87,13 +90,14 @@
       "",
       "EXPLANATIONS (this is what the student learns from):",
       "- explanation: 2 to 4 sentences. Why the answer is right, the mechanism or the feature that separates it from the others, then the practical take-home.",
-      "- why_wrong: exactly 4 strings in option order. For each wrong option, one sentence on why it is wrong or when it would be right. Use \"\" for the correct option.",
+      "- why_wrong: exactly 4 strings in option order. EVERY wrong option gets its own specific reason, 1 to 2 sentences: why that option is not correct here and when it would be the right answer (for example: \"Option B is wrong because ... It would be the answer if ...\"). Never a generic line such as \"not the best answer because it does not match the scenario\". Use \"\" only for the correct option.",
+      "- topic_explanation: 3 to 6 sentences on the topic behind the question: the concept, how to tell the options apart, one exam trap. It is shown below the answer.",
       "- key_point: one line to memorise. difficulty: 1 easy, 2 moderate, 3 hard. tags: 1 to 3 short words.",
       "",
       "FORMAT: copy this structure and these field names exactly. Put all " + n + " questions in the \"questions\" array (the example shows one). Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma).",
       JSON.stringify(t, null, 2),
       "",
-      "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments), that there are exactly " + n + " questions, and that each answer letter really is the correct option. Then output the JSON block only."
+      "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments), that there are exactly " + n + " questions, that each answer letter really is the correct option, and that each of the 3 wrong options of every question has its own reason. Then output the JSON block only."
     ].join("\n");
   }
 
@@ -112,6 +116,15 @@
       if (count) count.n++;
       return "";
     });
+  }
+  /* Template sentences an LLM writes when it has nothing to say about a wrong option ("X is not the best answer because it does
+     not match the defining feature..."): they teach nothing, so they are dropped and counted, never shown. */
+  var FILLER = /is not the best answer because it does not match|does not match the defining feature|^(?:this|that) (?:option )?is (?:incorrect|wrong|not correct)\.?$|^incorrect\.?$/i;
+  /* cleanNotes: the topic explanation keeps its line breaks (bullets and short headings), nothing else. */
+  function cleanNotes(s, max) {
+    s = String(s == null ? "" : s).replace(/[\u200b\u200c\u200d\ufeff]/g, "").replace(/\r/g, "").replace(/\s*\u2014\s*/g, " - ").replace(/\u2013/g, "-")
+      .replace(/[ \t\u00a0]+/g, " ").replace(/ ?\n ?/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
+    return max && s.length > max ? s.slice(0, max).replace(/\s+\S*$/, "") : s;
   }
   function norm(s) { return clean(s).toLowerCase().replace(/[^a-z0-9]+/g, " ").trim(); }
   function letterOf(v) {
@@ -143,26 +156,35 @@
     if (opts.some(function (t) { return !t; })) return { problem: tag + "an option is empty." };
     var seen = {}; for (var i = 0; i < 4; i++) { var k = norm(opts[i]); if (seen[k]) return { problem: tag + "two options are the same." }; seen[k] = 1; }
     var exp = clean(pick(x, ["explanation", "exp", "why_correct", "rationale"]) || "", 1500);
-    var w = pick(x, ["why_wrong", "wrong", "r", "reasons"]), r = ["", "", "", ""];
-    if (Array.isArray(w)) for (var j = 0; j < 4; j++) r[j] = clean(w[j] || "", 500);
+    var w = pick(x, ["why_wrong", "wrong", "r", "reasons"]), r = ["", "", "", ""], filler = 0;
+    if (w && !Array.isArray(w) && typeof w === "object") w = LETTERS.map(function (L) { return w[L] != null ? w[L] : w[L.toLowerCase()]; });
+    if (Array.isArray(w)) for (var j = 0; j < 4; j++) {
+      r[j] = clean(w[j] || "", 700);
+      if (r[j] && FILLER.test(r[j])) { r[j] = ""; if (j !== a) filler++; }
+    }
+    var gaps = 0; for (var g = 0; g < 4; g++) if (g !== a && !r[g]) gaps++;
+    var nt = cleanNotes(pick(x, ["topic_explanation", "topic_notes", "topic_note", "notes", "concept", "background"]) || "", 3000);
     if (exp && !r[a]) r[a] = exp;
     if (!exp) exp = r[a] || "";
     var d = parseInt(pick(x, ["difficulty", "d", "level"]), 10);
     var tg = pick(x, ["tags", "tg", "topics"]);
     tg = Array.isArray(tg) ? tg : typeof tg === "string" ? tg.split(/[,;]/) : [];
-    return { it: { q: q, o: opts, a: a, exp: exp, r: r, kp: clean(pick(x, ["key_point", "kp", "pearl"]) || "", 400), d: d >= 1 && d <= 3 ? d : 2,
+    return { filler: filler, gaps: gaps, it: { q: q, o: opts, a: a, exp: exp, r: r, nt: nt, kp: clean(pick(x, ["key_point", "kp", "pearl"]) || "", 400), d: d >= 1 && d <= 3 ? d : 2,
       tags: tg.map(function (t) { return clean(t, 40).toLowerCase(); }).filter(Boolean).slice(0, 4) } };
   }
   function finishParse(title, list) {
-    var items = [], problems = [], seen = {};
+    var items = [], problems = [], seen = {}, filler = 0, gapQ = 0, noNotes = 0;
     list.forEach(function (x, i) {
       var r = normQ(x, i + 1);
       if (r.problem) return problems.push(r.problem);
       var k = norm(r.it.q); if (seen[k]) return problems.push("Question " + (i + 1) + ": same as an earlier question.");
-      seen[k] = 1; items.push(r.it);
+      seen[k] = 1; items.push(r.it); filler += r.filler; if (r.gaps) gapQ++; if (!r.it.nt) noNotes++;
     });
     if (items.length > MAX_Q) { problems.push("Only the first " + MAX_Q + " questions are used."); items = items.slice(0, MAX_Q); }
-    return { title: clean(title, 120), items: items, problems: problems };
+    var notes = [];
+    if (filler) notes.push(filler + " generic wrong-option line" + (filler === 1 ? " was" : "s were") + " ignored (they said nothing about the option).");
+    if (gapQ) notes.push(gapQ + " question" + (gapQ === 1 ? " has" : "s have") + " no reason for some wrong options. Use Copy the prompt so ChatGPT or Gemini writes one for every wrong option.");
+    return { title: clean(title, 120), items: items, problems: problems, notes: notes, noTopic: !!items.length && noNotes === items.length };
   }
 
   /* ---------------- JSON ---------------- */
@@ -191,6 +213,7 @@
     });
     var res = finishParse(title || meta.topic || "", list);
     res.meta = meta;
+    if (res.noTopic) res.notes.push("No topic explanation in this file; the answer screen will show only the explanation. Copy the prompt asks for one.");
     if (!list.length) res.problems.unshift(bad ? "That is not valid JSON. Copy the whole reply, from { to }." : "No questions found in that JSON.");
     return res;
   }
@@ -251,7 +274,7 @@
     var res = finishParse(name || "", list.map(function (x) { return x; }));
     // Name the problem by the document's own MCQ number, not the position.
     res.problems = res.problems.map(function (p) { var m = /^Question (\d+):/.exec(p); return m && list[+m[1] - 1] ? p.replace(/^Question \d+:/, "MCQ " + list[+m[1] - 1]._n + ":") : p; });
-    if (lost.n) res.notes = [lost.n + " symbol" + (lost.n === 1 ? "" : "s") + " in the PDF could not be read. Check the questions for a missing sign."];
+    if (lost.n) res.notes.unshift(lost.n + " symbol" + (lost.n === 1 ? "" : "s") + " in the PDF could not be read. Check the questions for a missing sign.");
     return res;
   }
 
@@ -261,9 +284,12 @@
   function toItems(parsed, ctx) {
     var c = ctx || {}, sha = c.sha12 || function (s) { return String(s.length); };
     return (parsed.items || []).map(function (x) {
-      return { id: (c.owner ? "imp_" : "q_") + sha("import:" + (c.deckId || "") + ":" + norm(x.q)), q: x.q, o: x.o.slice(), a: x.a, exp: x.exp || x.r[x.a] || "", t: "gen", d: x.d,
+      var xk = x.nt ? { key: x.exp || x.r[x.a] || "", others: LETTERS.reduce(function (o, L, k) { if (k !== x.a && x.r[k]) o[L] = x.r[k]; return o; }, {}), notes: x.nt } : null;
+      var it = { id: (c.owner ? "imp_" : "q_") + sha("import:" + (c.deckId || "") + ":" + norm(x.q)), q: x.q, o: x.o.slice(), a: x.a, exp: x.exp || x.r[x.a] || "", t: "gen", d: x.d,
         r: x.r.slice(), kp: x.kp, et: ["", "", "", ""], cog: "recall", tg: x.tags.slice(), fid: "imp", src: { name: c.title || "" }, prov: c.owner ? "SMD" : "USR", gen: "hand",
         ex: c.exam ? [String(c.exam)] : [], pv: "imp1", mv: "", rv: null, imp: 1 };
+      if (xk && xk.key) it.x = xk;
+      return it;
     });
   }
 

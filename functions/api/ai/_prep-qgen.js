@@ -127,7 +127,7 @@ export async function handlePrepQgen(ctx) {
   if (b.op === "status") return json(await statusOf(env, store, signed ? who : null, owner, cfg, now));
   if (!signed) return fail(401, "sign-in", "sign-in", { message: "Sign in to create a module with MaiK." });
   if (!cfg.on) return fail(503, "not-configured", "off", { message: "Creating modules with MaiK is not switched on yet." });
-  const ownerOp = b.op === "bsubmit" || b.op === "bpoll" || b.op === "stage" || b.op === "publish" || b.op === "unpublish";
+  const ownerOp = b.op === "bsubmit" || b.op === "bpoll" || b.op === "stage" || b.op === "publish" || b.op === "unpublish" || b.op === "plist" || b.op === "pdelete";
   if (ownerOp && !owner) return fail(403, "owner-only", "owner-only");
   if (!owner && !cfg.student) return fail(403, "off", "student-off", { message: "Creating modules with MaiK is not open yet." });
 
@@ -152,6 +152,8 @@ export async function handlePrepQgen(ctx) {
   if (b.op === "stage") return ownerStage(env, b, uid, now);
   if (b.op === "publish") return ownerPublish(env, b, uid, now);
   if (b.op === "unpublish") return ownerUnpublish(env, b, uid, now);
+  if (b.op === "plist") return ownerPubList(env);
+  if (b.op === "pdelete") return ownerPubDelete(env, b, now);
   if (b.op !== "gen") return fail(400, "bad-input", "op");
 
   // ---- gen ----
@@ -310,6 +312,13 @@ function cleanItem(it) {
   const o = { id: String(it.id || "").replace(/[^A-Za-z0-9_-]/g, "").slice(0, 40), q: s(it.q, 1500), o: it.o.map((x) => s(x, 400)), a: it.a, exp: s(it.exp, 1500),
     r: Array.isArray(it.r) ? it.r.slice(0, 4).map((x) => s(x, 500)) : [], kp: s(it.kp, 400), d: Number.isInteger(it.d) ? it.d : 2, cog: s(it.cog, 20),
     tg: Array.isArray(it.tg) ? it.tg.slice(0, 4).map((x) => s(x, 40)) : [], qg: it.qg && typeof it.qg === "object" ? { g: it.qg.g ? 1 : 0, v: s(it.qg.v, 10), why: Array.isArray(it.qg.why) ? it.qg.why.slice(0, 6).map((x) => s(x, 30)) : undefined, ed: it.qg.ed ? 1 : undefined } : undefined };
+  /* x = the owner's own write-up (imported questions): key line, one reason per wrong option, topic explanation below. */
+  const xr = it.x && typeof it.x === "object" ? it.x : null;
+  if (xr && typeof xr.key === "string" && xr.key.trim()) {
+    const others = {};
+    for (const L of ["A", "B", "C", "D"]) { const v = xr.others && typeof xr.others[L] === "string" ? s(xr.others[L], 700) : ""; if (v) others[L] = v; }
+    o.x = { key: s(xr.key, 1500), others, notes: typeof xr.notes === "string" ? xr.notes.replace(/\r/g, "").replace(/[\u0000-\u0009\u000b-\u001f\u007f]+/g, " ").replace(/[ \t]+/g, " ").replace(/ ?\n ?/g, "\n").replace(/\n{3,}/g, "\n\n").trim().slice(0, 3000) : "" };
+  }
   if (!o.id || !o.q || o.o.some((x) => !x) || new Set(o.o.map(normText)).size !== 4) return null;
   return o;
 }
@@ -334,23 +343,28 @@ async function ownerPublish(env, b, uid, now) {
   const stamped = [];
   for (const it of items) {
     const h = (await sha16(new TextEncoder().encode(normText(it.q)))).slice(0, 12);
-    stamped.push({ id: "mk-" + h, q: it.q, o: it.o, a: it.a, exp: it.exp || it.r[it.a] || "", r: it.r, kp: it.kp, d: it.d, cog: it.cog, tg: it.tg,
-      prov: "SMD", gen: "AI", pv: "qg1", src: { maik: 1 }, qg: it.qg ? { g: it.qg.g, v: it.qg.v, ed: it.qg.ed } : undefined, pb: batch, pby: uid.slice(0, 12), pts: now });
+    const hand = !it.qg;   // imported or hand-written: never labelled as AI
+    stamped.push({ id: "mk-" + h, q: it.q, o: it.o, a: it.a, exp: it.exp || it.r[it.a] || "", r: it.r, kp: it.kp, d: it.d, cog: it.cog, tg: it.tg, x: it.x,
+      prov: "SMD", gen: hand ? "hand" : "AI", pv: hand ? undefined : "qg1", src: hand ? undefined : { maik: 1 }, qg: it.qg ? { g: it.qg.g, v: it.qg.v, ed: it.qg.ed } : undefined, pb: batch, pby: uid.slice(0, 12), pts: now });
   }
   const ix = await kvJson(kv, "prep:fixix", {});
-  let added = 0;
+  let added = 0, updated = 0;
   for (const t of targets) {
     const key = "prep:fixmod:" + t.module, rec = await kvJson(kv, key, { q: {}, l: {} });
     rec.q = rec.q || {}; rec.l = rec.l || {}; rec.a = Array.isArray(rec.a) ? rec.a : [];
+    /* Publishing the same question again REPLACES the live copy (a corrected import updates it); it never doubles. */
+    const ids = new Set(stamped.map((x) => x.id));
     const have = new Set(rec.a.filter((x) => x.sub === t.subject).map((x) => x.id));
-    const fresh = stamped.filter((x) => !have.has(x.id)).map((x) => Object.assign({}, x, { sub: t.subject, t: t.module }));
-    if (rec.a.length + fresh.length > ADD_CAP) return fail(400, "bad-input", "module-full");
-    rec.a = rec.a.concat(fresh); added += fresh.length;
+    const fresh = stamped.map((x) => Object.assign({}, x, { sub: t.subject, t: t.module }));
+    const kept = rec.a.filter((x) => !(x.sub === t.subject && ids.has(x.id)));
+    const isNew = fresh.filter((x) => !have.has(x.id)).length;
+    if (kept.length + fresh.length > ADD_CAP) return fail(400, "bad-input", "module-full");
+    rec.a = kept.concat(fresh); added += isNew; updated += fresh.length - isNew;
     await kv.put(key, JSON.stringify(rec));
     ix[t.module] = now;
   }
   await kv.put("prep:fixix", JSON.stringify(ix));
-  return json({ ok: true, batch, n: items.length, added, targets });
+  return json({ ok: true, batch, n: items.length, added, updated, targets });
 }
 async function ownerUnpublish(env, b, uid, now) {
   const kv = kvOf(env);
@@ -371,6 +385,60 @@ async function ownerUnpublish(env, b, uid, now) {
     const empty = !keep.length && !Object.keys(rec.q || {}).length && !Object.keys(rec.l || {}).length;
     if (empty) { if (kv.delete) await kv.delete(key); else await kv.put(key, JSON.stringify(rec)); delete ix[module]; }
     else { await kv.put(key, JSON.stringify(rec)); ix[module] = now; }
+  }
+  await kv.put("prep:fixix", JSON.stringify(ix));
+  return json({ ok: true, removed });
+}
+/* plist: every question the owner has published, by module (public record prep:fixmod:<module>.a), so the Author screen can
+ * show and delete them after a reload. Text is cut to 160 characters; the full item stays in KV. */
+async function ownerPubList(env) {
+  const kv = kvOf(env);
+  if (!kv) return fail(503, "not-configured", "kv");
+  const ix = await kvJson(kv, "prep:fixix", {});
+  const mods = [];
+  let total = 0;
+  for (const module of Object.keys(ix).slice(0, 400)) {
+    if (!SLUG_RE.test(module)) continue;
+    const rec = await kvJson(kv, "prep:fixmod:" + module, null);
+    if (!rec || !Array.isArray(rec.a) || !rec.a.length) continue;
+    const by = {};
+    for (const x of rec.a) { if (!x || !SLUG_RE.test(String(x.sub || ""))) continue; (by[x.sub] = by[x.sub] || []).push({ id: x.id, q: cleanText(x.q, 160), pb: x.pb || "", ts: x.pts || 0, hand: x.gen === "hand" ? 1 : 0 }); }
+    for (const sub of Object.keys(by)) { mods.push({ subject: sub, module, n: by[sub].length, items: by[sub] }); total += by[sub].length; }
+  }
+  return json({ ok: true, total, modules: mods });
+}
+/* Take published questions down. Body: { all: true } = everything, or { targets: [{ subject, module, all: true | ids: [...] }] }.
+ * Returns how many were removed. Only the owner's added questions (rec.a) are touched, never content fixes. */
+async function ownerPubDelete(env, b, now) {
+  const kv = kvOf(env);
+  if (!kv) return fail(503, "not-configured", "kv");
+  const ix = await kvJson(kv, "prep:fixix", {});
+  let want = [];
+  if (b.all === true) want = Object.keys(ix).filter((m) => SLUG_RE.test(m)).map((m) => ({ module: m, subject: null, ids: null }));
+  else {
+    const tg = Array.isArray(b.targets) ? b.targets.slice(0, 400) : [];
+    if (!tg.length) return fail(400, "bad-input", "targets");
+    for (const t of tg) {
+      const subject = String((t && t.subject) || ""), module = String((t && t.module) || "");
+      if (!SLUG_RE.test(subject) || !SLUG_RE.test(module)) return fail(400, "bad-input", "target");
+      let ids = null;
+      if (!(t && t.all === true)) {
+        if (!Array.isArray(t && t.ids) || !t.ids.length || t.ids.length > 400 || t.ids.some((x) => !/^[A-Za-z0-9_-]{1,40}$/.test(String(x)))) return fail(400, "bad-input", "ids");
+        ids = new Set(t.ids.map(String));
+      }
+      want.push({ module, subject, ids });
+    }
+  }
+  let removed = 0;
+  for (const w of want) {
+    const key = "prep:fixmod:" + w.module, rec = await kvJson(kv, key, null);
+    if (!rec || !Array.isArray(rec.a)) continue;
+    const keep = rec.a.filter((x) => !((w.subject == null || x.sub === w.subject) && (w.ids == null || w.ids.has(x.id))));
+    if (keep.length === rec.a.length) continue;
+    removed += rec.a.length - keep.length; rec.a = keep;
+    const empty = !keep.length && !Object.keys(rec.q || {}).length && !Object.keys(rec.l || {}).length;
+    if (empty) { if (kv.delete) await kv.delete(key); else await kv.put(key, JSON.stringify(rec)); delete ix[w.module]; }
+    else { await kv.put(key, JSON.stringify(rec)); ix[w.module] = now; }
   }
   await kv.put("prep:fixix", JSON.stringify(ix));
   return json({ ok: true, removed });

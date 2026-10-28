@@ -663,6 +663,7 @@
       '<label class="pc-lbl" for="qgAMod">Module</label><select id="qgAMod" name="module" class="pc-in"' + (au.subject ? "" : " disabled") + ">" + opt("", au.subject ? "A new module (name below)" : "Choose a subject first", !au.module) + mods.map(function (t) { return opt(t.id, plain(t.title) || t.id, au.module === t.id); }).join("") + "</select>" +
       (!au.module ? '<label class="pc-lbl" for="qgANew">New module name</label><input id="qgANew" name="module-name" class="pc-in" maxlength="80" autocomplete="off" value="' + esc(au.newName) + '">' : "") +
       (G.PREP_IMPORT ? '<button type="button" class="pn-mod" data-act="g-imp-owner"><span class="pn-mb"><b>Import MCQs (no AI)</b><small>From a PDF in the recall layout or a JSON template</small></span>' + host.ico("chev") + "</button>" : "") +
+      '<button type="button" class="pn-mod" data-act="g-pubs"><span class="pn-mb"><b>Published questions</b><small>See what students have, delete selected ones or all</small></span>' + host.ico("chev") + "</button>" +
       seg("Make it from", "qgASrcL", chip("g-asrc", "topic", "A topic", au.kind === "topic") + chip("g-asrc", "notes", "Notes", au.kind === "notes") + chip("g-asrc", "pdf", "A PDF", au.kind === "pdf")) +
       '<label class="pc-lbl" for="qgATopic">Topic for MaiK</label><input id="qgATopic" name="topic" class="pc-in" maxlength="150" autocomplete="off" value="' + esc(au.topic) + '">' +
       (au.kind === "notes" ? '<label class="pc-lbl" for="qgAText">Notes (every question must be answerable from them)</label><textarea id="qgAText" name="source" class="pc-in pc-ta" rows="7" placeholder="Paste the source chunks…">' + esc(au.text) + "</textarea>" +
@@ -819,7 +820,7 @@
       if (r.status !== 200) { au.err = r.json && r.json.reason === "module-full" ? "A module would pass 300 added questions." : msgOf(codeOf(r.status, r.json)); saveAuthor(); return host.rerender(); }
       au.pub = { batch: r.json.batch, n: r.json.n, targets: au.targets.slice() };
       au.list = au.list.filter(function (x) { return x.st !== "ok"; });
-      saveAuthor(); host.rerender(); host.toast(r.json.n + " questions are live.");
+      saveAuthor(); host.rerender(); host.toast(r.json.updated ? r.json.n + " questions are live (" + r.json.updated + " replaced the older copy)." : r.json.n + " questions are live.");
     });
   }
   function unpublish(host) {
@@ -843,6 +844,87 @@
       au.list = au.list.filter(function (x) { return x.st !== "ok"; });
       saveAuthor(); host.back(); host.toast(r.json.n + " questions staged.");
     });
+  }
+
+  /* ---------- published questions: what students have now, delete selected or all (ops plist, pdelete) ---------- */
+  var pl = { busy: "", err: "", mods: null, total: 0, sel: {}, open: {} };
+  function pkey(m, id) { return m.subject + "|" + m.module + "|" + id; }
+  function selCount() { var n = 0; for (var k in pl.sel) if (pl.sel[k]) n++; return n; }
+  function openPubs(host) {
+    pl = { busy: "Loading…", err: "", mods: null, total: 0, sel: {}, open: {} };
+    host.push(function () { renderPubs(host); });
+    loadPubs(host);
+  }
+  function loadPubs(host) {
+    pl.busy = pl.mods ? "Refreshing…" : "Loading…"; pl.err = "";
+    call({ op: "plist" }, 30000).then(function (r) {
+      pl.busy = "";
+      if (r.status !== 200) pl.err = msgOf(codeOf(r.status, r.json));
+      else { pl.mods = r.json.modules || []; pl.total = r.json.total || 0; if (pl.mods.length === 1) pl.open[pl.mods[0].subject + "|" + pl.mods[0].module] = 1; }
+      if (onTop("#qgPubView", host)) host.rerender();
+    });
+  }
+  function modLabel(host, m) {
+    var ix = host.ix()[m.subject], t = null;
+    if (!ix) { host.loadIndex(m.subject).then(function () { if (onTop("#qgPubView", host)) host.rerender(); }); }
+    else (ix.topics || []).forEach(function (x) { if (x.id === m.module) t = x; });
+    return (t ? plain(t.title) : m.module) + " (" + m.subject + ")";
+  }
+  function renderPubs(host) {
+    var esc = host.esc, mods = pl.mods || [], sc = selCount();
+    var body = '<div class="pn-body qg-author" id="qgPubView">' +
+      '<p class="pn-mut pn-small">Questions you published from Author. Students see them at once; deleting takes them off every phone the next time the module opens.</p>' +
+      (pl.busy ? '<section class="pn-panel pc-readp" role="status" aria-live="polite"><span class="pc-spin" aria-hidden="true"></span><p class="pn-load">' + esc(pl.busy) + "</p></section>" : "") +
+      (pl.err ? '<p class="pn-err" role="alert" id="qgPErr" tabindex="-1">' + esc(pl.err) + "</p>" : "") +
+      (pl.mods ? '<p><b>' + pl.total + " published question" + (pl.total === 1 ? "" : "s") + "</b> in " + mods.length + " module" + (mods.length === 1 ? "" : "s") + "</p>" : "") +
+      (pl.mods && pl.total ? '<div class="pn-wrap"><button type="button" class="pn-btn" data-act="g-pdelsel"' + (sc && !pl.busy ? "" : " disabled") + ">Delete selected (" + sc + ')</button>' +
+        '<button type="button" class="pn-btn" data-act="g-pdelall"' + (pl.busy ? " disabled" : "") + ">Delete everything published (" + pl.total + ")</button></div>" : "") +
+      (pl.mods && !pl.total ? '<p class="pn-mut">Nothing is published right now.</p>' : "") +
+      mods.map(function (m) {
+        var mk = m.subject + "|" + m.module, open = !!pl.open[mk], all = m.items.every(function (x) { return pl.sel[pkey(m, x.id)]; });
+        return '<section class="pn-panel" aria-label="' + esc(modLabel(host, m)) + '"><button type="button" class="pn-mod" data-act="g-popen" data-v="' + esc(mk) + '" aria-expanded="' + open + '"><span class="pn-mb"><b>' + esc(modLabel(host, m)) + "</b><small>" + m.n + " question" + (m.n === 1 ? "" : "s") + "</small></span>" + host.ico("chev") + "</button>" +
+          (open ? '<div class="pn-wrap"><button type="button" class="pn-chip' + (all ? " on" : "") + '" aria-pressed="' + all + '" data-act="g-psall" data-v="' + esc(mk) + '">' + (all ? "Clear selection" : "Select all") + "</button>" +
+            '<button type="button" class="pn-btn" data-act="g-pdelmod" data-v="' + esc(mk) + '"' + (pl.busy ? " disabled" : "") + ">Delete all " + m.n + " in this module</button></div>" +
+            '<ul class="qg-pubs">' + m.items.map(function (x) {
+              var on = !!pl.sel[pkey(m, x.id)];
+              return '<li><button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="g-psel" data-v="' + esc(pkey(m, x.id)) + '">' + (on ? "Selected" : "Select") + "</button> " + esc(x.q) + "</li>";
+            }).join("") + "</ul>" : "") + "</section>";
+      }).join("") + "</div>";
+    host.paint(host.bar("Published questions", "Owner only", "back") + body, pl.err ? "#qgPErr" : null);
+  }
+  function pdel(host, body, what) {
+    if (G.confirm && !G.confirm(what + " This cannot be undone; you can publish them again from Author.")) return;
+    pl.busy = "Deleting…"; pl.err = ""; host.rerender();
+    call(Object.assign({ op: "pdelete" }, body), 60000).then(function (r) {
+      pl.busy = "";
+      if (r.status !== 200) { pl.err = msgOf(codeOf(r.status, r.json)); return onTop("#qgPubView", host) && host.rerender(); }
+      pl.sel = {}; host.toast(r.json.removed + " question" + (r.json.removed === 1 ? "" : "s") + " deleted.");
+      loadPubs(host);
+    });
+  }
+  function pubAct(a, el, host) {
+    var v = el && el.getAttribute("data-v") || "";
+    if (a === "g-pubs") return openPubs(host);
+    if (!pl) return;
+    if (a === "g-popen") { pl.open[v] = !pl.open[v]; return host.rerender(); }
+    if (a === "g-psel") { pl.sel[v] = !pl.sel[v]; return host.rerender(); }
+    if (a === "g-psall") {
+      var m = (pl.mods || []).filter(function (x) { return x.subject + "|" + x.module === v; })[0]; if (!m) return;
+      var all = m.items.every(function (x) { return pl.sel[pkey(m, x.id)]; });
+      m.items.forEach(function (x) { pl.sel[pkey(m, x.id)] = !all; });
+      return host.rerender();
+    }
+    if (a === "g-pdelsel") {
+      var by = {}, n = 0;
+      Object.keys(pl.sel).forEach(function (k) { if (!pl.sel[k]) return; var p = k.split("|"); var mk = p[0] + "|" + p[1]; (by[mk] = by[mk] || { subject: p[0], module: p[1], ids: [] }).ids.push(p[2]); n++; });
+      if (!n) return;
+      return pdel(host, { targets: Object.keys(by).map(function (k) { return by[k]; }) }, "Delete " + n + " selected question" + (n === 1 ? "" : "s") + "?");
+    }
+    if (a === "g-pdelmod") {
+      var p2 = v.split("|"), mm = (pl.mods || []).filter(function (x) { return x.subject === p2[0] && x.module === p2[1]; })[0]; if (!mm) return;
+      return pdel(host, { targets: [{ subject: p2[0], module: p2[1], all: true }] }, "Delete all " + mm.n + " published questions in this module?");
+    }
+    if (a === "g-pdelall") return pdel(host, { all: true }, "Delete EVERY published question (" + pl.total + ") from every module?");
   }
 
   /* ================= events ================= */
@@ -896,6 +978,7 @@
     // owner
     if (a === "g-author") return openAuthor(host);
     if (!au) return;
+    if (/^g-p(?:ubs|open|sel|sall|delsel|delmod|delall)$/.test(a)) return pubAct(a, el, host);
     if (a === "g-aexam") { au.exam = v; au.subject = ""; au.module = ""; saveAuthor(); return host.rerender(); }
     if (a === "g-adiff") { au.diff = diffOf(v)[0]; saveAuthor(); return host.rerender(); }
     if (a === "g-arun") return authorRun(host);

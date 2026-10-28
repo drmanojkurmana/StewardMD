@@ -84,8 +84,8 @@ test("the recall PDF layout parses", () => {
   assert.equal(P.decodePua("a\ue081\ue0ffb", { n: 0 }), "a(b", "an unknown private-use glyph is dropped");
   assert.equal(b.a, 0);
   assert.ok(b.r[1] && b.r[1] === b.r[2] && b.r[2] === b.r[3], "Options B, C, and D: shared reason");
-  assert.equal(r.notes, undefined, "every private-use glyph in the sample is mapped");
-  assert.equal(P.parsePdfLines(["MCQ 1: T", "Question Stem: Stem with \ue0ff odd glyph?", "Options:", "A. aa", "B. bb", "C. cc", "D. dd", "Correct Answer: Option A"], "x").notes.length, 1, "an unknown glyph is reported, not hidden");
+  assert.deepEqual(r.notes, [], "every private-use glyph in the sample is mapped");
+  assert.equal(P.parsePdfLines(["MCQ 1: T", "Question Stem: Stem with \ue0ff odd glyph?", "Options:", "A. aa", "B. bb", "C. cc", "D. dd", "Correct Answer: Option A"], "x").notes[0].startsWith("1 symbol"), true, "an unknown glyph is reported, not hidden");
   assert.equal(r.problems.length, 1);
   assert.match(r.problems[0], /^MCQ 44:/, "the problem names the document's own number");
 });
@@ -107,6 +107,41 @@ const run = (G, host) => {
   return G.PREP_IMPORT;
 };
 const tick = () => new Promise((r) => setTimeout(r, 30));
+
+test("wrong-option reasons: real ones kept, template filler dropped and counted, gaps reported; topic explanation becomes x.notes", () => {
+  const filler = "Observation is not the best answer because it does not match the defining feature or treatment principle in this clinical scenario.";
+  const j = { format: "stewardmd-mcq-v1", questions: [
+    good(1, { why_wrong: ["Option A is wrong because it treats the wrong stage.", "", filler, "Option D is wrong because it is a different disease."], topic_explanation: "Line one.\n- bullet a\n- bullet b\n\n\n\nTrap: x \u2014 y." }),
+    good(2, { why_wrong: [filler, filler, "", filler] })] };
+  const p = P.parseJson(JSON.stringify(j));
+  assert.equal(p.items.length, 2);
+  assert.equal(p.items[0].r[0], "Option A is wrong because it treats the wrong stage.");
+  assert.equal(p.items[0].r[2] === "Because 1" || p.items[0].r[2] === p.items[0].exp, true, "the correct option carries the explanation");
+  assert.equal(p.items[0].r[3], "Option D is wrong because it is a different disease.");
+  assert.equal(p.items[1].r[0], "", "filler dropped");
+  assert.match(p.notes.join(" "), /3 generic wrong-option lines were ignored/);
+  assert.match(p.notes.join(" "), /2 questions have no reason for some wrong options/);
+  assert.equal(p.items[0].nt, "Line one.\n- bullet a\n- bullet b\n\nTrap: x - y.", "line breaks kept, runs of blank lines collapsed, dash normalised");
+  const items = P.toItems(p, { deckId: "own", sha12: DK.sha12, exam: "neet-ss", title: "T", owner: true });
+  assert.equal(items[0].x.notes, p.items[0].nt); assert.equal(items[0].x.key, items[0].exp);
+  assert.deepEqual(Object.keys(items[0].x.others).sort(), ["A", "D"].sort().filter((L) => items[0].x.others[L]).sort());
+  assert.equal(items[1].x, undefined, "no topic explanation, no x block");
+  const none = P.parseJson(JSON.stringify({ questions: [good(3, { why_wrong: ["a", "b", "", "d"] })] }));
+  assert.match(none.notes.join(" "), /No topic explanation/);
+});
+
+test("both prompts ask for a reason for every wrong option and a topic explanation, and the template carries the field", () => {
+  for (const t of [P.prompt(), P.promptFor({ exam: "neet-ss", subject: "Medical Oncology", topic: "GTN", n: 10 })]) {
+    assert.match(t, /EVERY wrong option|Every WRONG option/);
+    assert.match(t, /Never write a generic line|Never a generic line/);
+    assert.match(t, /topic_explanation/);
+    assert.match(t, /why that option is not correct here and when it would be|why that option is not correct here and when it would be right/);
+  }
+  assert.match(P.prompt(), /COMPLETE text/);
+  const t = JSON.parse(P.template());
+  assert.ok(t.questions[0].topic_explanation && t.questions[0].why_wrong.length === 4);
+  assert.equal(P.parseJson(P.template()).items.length, 1);
+});
 
 test("a student's import is a private deck on the phone, with no network call", async () => {
   const items = [], decks = {}, fetches = [], toasts = [];
