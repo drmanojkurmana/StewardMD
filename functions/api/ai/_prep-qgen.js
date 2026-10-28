@@ -127,7 +127,7 @@ export async function handlePrepQgen(ctx) {
   if (b.op === "status") return json(await statusOf(env, store, signed ? who : null, owner, cfg, now));
   if (!signed) return fail(401, "sign-in", "sign-in", { message: "Sign in to create a module with MaiK." });
   if (!cfg.on) return fail(503, "not-configured", "off", { message: "Creating modules with MaiK is not switched on yet." });
-  const ownerOp = b.op === "bsubmit" || b.op === "bpoll" || b.op === "stage" || b.op === "publish" || b.op === "unpublish" || b.op === "plist" || b.op === "pdelete";
+  const ownerOp = b.op === "bsubmit" || b.op === "bpoll" || b.op === "stage" || b.op === "publish" || b.op === "unpublish" || b.op === "plist" || b.op === "pdelete" || b.op === "stageget";
   if (ownerOp && !owner) return fail(403, "owner-only", "owner-only");
   if (!owner && !cfg.student) return fail(403, "off", "student-off", { message: "Creating modules with MaiK is not open yet." });
 
@@ -154,6 +154,7 @@ export async function handlePrepQgen(ctx) {
   if (b.op === "unpublish") return ownerUnpublish(env, b, uid, now);
   if (b.op === "plist") return ownerPubList(env);
   if (b.op === "pdelete") return ownerPubDelete(env, b, now);
+  if (b.op === "stageget") return ownerStageGet(env, b);
   if (b.op !== "gen") return fail(400, "bad-input", "op");
 
   // ---- gen ----
@@ -487,6 +488,19 @@ async function ownerPubDelete(env, b, now) {
   await kv.put("prep:fixix", JSON.stringify(ix));
   await pruneNewMods(kv, now);
   return json({ ok: true, removed });
+}
+/* stageget: a staged set back to the Author screen (it left the Review list when it was staged), to publish live instead. */
+async function ownerStageGet(env, b) {
+  const bucket = env && env.PREP_BANK_R2;
+  if (!bucket) return fail(503, "not-configured", "r2");
+  const id = String(b.stageId || "");
+  if (!/^s\d{8}-[a-z0-9]{6,12}$/.test(id)) return fail(400, "bad-input", "stage");
+  const obj = await bucket.get("prep-qgen/staging/" + id + ".json");
+  if (!obj) return fail(404, "not-found", "stage");
+  let rec = null;
+  try { rec = JSON.parse(await obj.text()); } catch (e) { return fail(500, "bad-stage", "stage"); }
+  const items = Array.isArray(rec && rec.items) ? rec.items.map(cleanItem).filter(Boolean) : [];
+  return json({ ok: true, items, subject: cleanText(rec.subject, 60), module: cleanText(rec.module, 80), title: cleanText(rec.title, 120) });
 }
 async function ownerStage(env, b, uid, now) {
   const bucket = env && env.PREP_BANK_R2;

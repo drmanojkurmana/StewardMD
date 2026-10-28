@@ -330,6 +330,12 @@ test("owner bulk: batch submit, poll to verify, poll to done; stage to R2", asyn
   const saved = env.PREP_BANK_R2.m.get("prep-qgen/staging/" + st.json.stageId + ".json");
   assert.equal(JSON.parse(saved).items.length, p.json.items.length);
   assert.equal(saved.indexOf("prep-bank/"), -1);
+  // a staged set can be brought back to Author (owner only) to publish live instead
+  assert.equal((await post(env, { op: "stageget", stageId: st.json.stageId })).status, 403);
+  assert.equal((await post(env, { op: "stageget", stageId: "bad" }, "tok-o")).status, 400);
+  assert.equal((await post(env, { op: "stageget", stageId: "s20260101-abcdef12" }, "tok-o")).status, 404);
+  const back = await post(env, { op: "stageget", stageId: st.json.stageId }, "tok-o");
+  assert.equal(back.status, 200); assert.equal(back.json.items.length, p.json.items.length); assert.equal(back.json.items[0].q, p.json.items[0].q);
 });
 
 test("owner publish: one reviewed set goes live in several modules, public per module, and can be taken down", async () => {

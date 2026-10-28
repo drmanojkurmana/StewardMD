@@ -80,6 +80,10 @@ function qgenReply(body, auth) {
     return [200, { ok: true, batch: "pb20261016abcdef", n: body.items.length, added: body.items.length * body.targets.length, targets: body.targets }];
   }
   if (body.op === "unpublish") return [200, { ok: true, removed: 3 }];
+  if (body.op === "stageget") {
+    if (!api.status.owner) return [403, { error: "owner-only" }];
+    return [200, { ok: true, subject: "pharmacology", module: "ph-first", title: "T", items: [1, 2, 3].map((n) => Object.assign(item("gen_stage", false), { id: "q_stage00000" + n, q: "Staged question " + n + " about a drug?" })) }];
+  }
   if (body.op === "plist") {
     if (!api.status.owner) return [403, { error: "owner-only" }];
     const mods = api.pubs.filter((m) => m.items.length).map((m) => ({ subject: m.subject, module: m.module, n: m.items.length, items: m.items }));
@@ -383,6 +387,13 @@ try {
   const sg = qgCalls("stage")[0];
   ok(sg && sg.body.items.length === 3 && sg.body.items[0].q === "Edited stem by the owner?" && sg.body.items.every((x) => x.qg.v === "ok"), "stage sends only the 3 approved items, with the edit");
   ok(/node tools\/prep-qgen\.mjs publish --stage s20261010-abc123/.test(await screenText()), "the command is shown to copy");
+
+  // ---- a staged set is not live: the panel says so and can bring the questions back into Review, approved
+  ok(/Staged, NOT live/.test(await screenText()) && /Students do not see them/.test(await screenText()), "staged: the panel says the set is not live");
+  await click('#smdPrep [data-act="g-aunstage"]');
+  ok(await until(`return !!PREP_QGEN._au() && !PREP_QGEN._au().stage && PREP_QGEN._au().list.length >= 3;`, 5000), "staged: Put them back in Review brings the questions back and clears the staged panel");
+  ok(await ev(`return PREP_QGEN._au().list.slice(-3).every(function (x) { return x.st === "ok" && /^Staged question/.test(x.it.q); });`) === true, "staged: the 3 questions are back, already approved");
+  ok(qgCalls("stageget").length === 1 && qgCalls("stageget")[0].body.stageId === "s20261010-abc123", "staged: asks for that stage id");
 
   // ---- owner Author: PDF source, then publish one set to two modules
   await ev(`PREP_QGEN._au().list = []; PREP_QGEN._au().pub = null; PREP_QGEN._au().targets = []; return 1;`);

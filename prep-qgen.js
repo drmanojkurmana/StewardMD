@@ -678,7 +678,7 @@
       jobHtml +
       (au.usage ? '<p class="pn-mut pn-small" id="qgAUse">Last run: $' + Number(au.usage.usd || 0).toFixed(4) + " · " + fmtN(au.usage.inTok + au.usage.cacheRead + au.usage.cacheWrite) + " tokens in, " + fmtN(au.usage.outTok) + " out</p>" : "") +
       (au.list.length ? '<button type="button" class="pn-mod" data-act="g-areview"><span class="pn-mb"><b>Review ' + au.list.length + " questions</b><small>" + ok + " approved · " + pend + " to decide</small></span>" + host.ico("chev") + "</button>" : "") +
-      (au.stage ? '<section class="pn-panel qg-stage"><p><b>Staged for publishing</b> (' + au.stage.n + ' questions)</p><p class="pn-mut pn-small">Run this on the Mac to publish:</p><code class="qg-cmd" id="qgCmd">' + esc(au.stage.cmd) + '</code><button type="button" class="pn-btn" data-act="g-acopy">Copy the command</button></section>' : "") +
+      (au.stage ? '<section class="pn-panel qg-stage"><p><b>Staged, NOT live</b> (' + au.stage.n + ' questions)</p><p class="pn-mut pn-small">Staging only saves them for a command run on a Mac. Students do not see them. To publish from the phone, put them back in Review and use Publish to all students.</p><button type="button" class="pn-btn pri" data-act="g-aunstage"' + (au.busy ? " disabled" : "") + ">Put these " + au.stage.n + ' back in Review</button><p class="pn-mut pn-small">Or run this on the Mac:</p><code class="qg-cmd" id="qgCmd">' + esc(au.stage.cmd) + '</code><button type="button" class="pn-btn" data-act="g-acopy">Copy the command</button></section>' : "") +
       "</div>", au.err ? "#qgAErr" : null);
     var r = host.root(); if (!r) return;
     var bind = function (sel, key, num) { var el = r.querySelector(sel); ON(el, "input", function () { au[key] = num ? Math.max(1, Math.min(400, parseInt(el.value, 10) || 1)) : el.value; saveAuthor(); }); };
@@ -759,7 +759,7 @@
     var esc = host.esc, L = ["A", "B", "C", "D"], ok = au.list.filter(function (r) { return r.st === "ok"; }).length;
     host.paint(host.bar("Review", ok + " of " + au.list.length + " approved", "back") + '<div class="pn-body qg-review" id="qgRevView">' +
       '<div class="qg-revtop"><button type="button" class="pn-btn" data-act="g-abulk">Approve all unflagged</button>' +
-      '<button type="button" class="pn-btn pri" data-act="g-astage"' + (ok ? "" : " disabled") + ">Stage " + ok + " for publishing</button></div>" +
+      '<button type="button" class="pn-btn" data-act="g-astage"' + (ok ? "" : " disabled") + ">Stage " + ok + " for the Mac command (not live)</button></div>" +
       publishHtml(host, esc, ok) +
       (au.err ? '<p class="pn-err" role="alert" id="qgRErr" tabindex="-1">' + esc(au.err) + "</p>" : "") +
       '<ol class="qg-items">' + au.list.slice(0, au.show || 50).map(function (r, i) {
@@ -837,6 +837,22 @@
       au.busy = "";
       if (r.status !== 200) { au.err = msgOf(codeOf(r.status, r.json)); saveAuthor(); return host.rerender(); }
       au.pub = null; saveAuthor(); host.rerender(); host.toast("Taken down.");
+    });
+  }
+  /* A staged set is only on the server for the Mac command and left the Review list when it was staged: bring it back, approved,
+     so it can go live with Publish to all students (existing module or a new one). */
+  function unstage(host) {
+    if (!au.stage || !au.stage.id) return;
+    au.err = ""; au.busy = "Bringing them back…"; host.rerender();
+    call({ op: "stageget", stageId: au.stage.id }, 60000).then(function (r) {
+      au.busy = "";
+      if (r.status !== 200) { au.err = msgOf(codeOf(r.status, r.json)); saveAuthor(); return host.rerender(); }
+      var have = {}; au.list.forEach(function (x) { have[x.it.id] = 1; });
+      var n = 0;
+      (r.json.items || []).forEach(function (it) { if (it && it.id && !have[it.id]) { au.list.push({ it: it, st: "ok" }); n++; } });
+      if (r.json.subject && !au.subject) au.subject = r.json.subject;
+      au.stage = null; saveAuthor(); host.rerender();
+      host.toast(n + " questions are back in Review, approved.");
     });
   }
   function stage(host) {
@@ -996,6 +1012,7 @@
     if (a === "g-aedit" && au.list[i]) { au.list[i].ed = !au.list[i].ed; saveAuthor(); return host.rerender(); }
     if (a === "g-abulk") { var n = bulkApprove(au.list); saveAuthor(); host.rerender(); return host.toast(n + " approved."); }
     if (a === "g-astage") return stage(host);
+    if (a === "g-aunstage") return unstage(host);
     if (a === "g-asrc") { au.kind = v === "notes" || v === "pdf" ? v : "topic"; au.err = ""; pdfUi = "#qgAuthView"; saveAuthor(); return host.rerender(); }
     if (a === "g-atadd") {
       var psb = au.psub || au.subject, ixp = host.ix()[psb], tp = null; ((ixp && ixp.topics) || []).forEach(function (t) { if (t.id === au.pmod) tp = t; });
