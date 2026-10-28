@@ -31,7 +31,7 @@
     "/clinix-examiner.js?v=cx10a927-lazy1",
     "/clinix-practicals.js?v=cxp1-lazy1",
     "/clinix-osce-exam.js?v=cx1-osceexam1",
-    "/clinix-screens.js?v=cx27a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce2-pro1-pn5-prac1"
+    "/clinix-screens.js?v=cx27a927-sandbox1-prolock-snd1-lazy1-own4-obg1-cel1-mkai1-mkw1-iso1-osce2-pro1-pn5-prac1-skfind1"
   ];
 
   function flags() { try { return (typeof window !== "undefined" && window.SMD_CLINIX_FLAGS) || null; } catch (e) { return null; } }
