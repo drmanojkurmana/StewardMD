@@ -158,8 +158,9 @@ test("NEET-SS groups: 15 groups, medical default, empty groups are not offered",
   assert.equal(PLAN.planGroup({ exam: "ini-ss" }), null);
   const med = PLAN.ssGroupSubjects("medical");
   ["ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology",
-    "ss-endocrinology", "ss-haematology", "ss-medical-oncology", "ss-pulmonology",
+    "ss-endocrinology", "ss-haematology", "ss-pulmonology",
     "ss-infectious-diseases", "ss-rheumatology-immunology"].forEach((id) => assert.ok(med.includes(id), "medical holds " + id));
+  assert.ok(!med.includes("ss-medical-oncology"), "Medical Oncology is its own paper, not part of the Medical group (owner 2026-10-28)");
   assert.ok(PLAN.ssGroupSubjects("surgical").includes("ss-general-surgery"), "surgical holds its bank subjects");
   assert.deepEqual(PLAN.normalizePlan({ exam: "neet-pg", group: "medical", subject: "ss-cardiology" }), { exam: "neet-pg" });
 });

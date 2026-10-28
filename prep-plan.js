@@ -63,9 +63,13 @@
    * Radiology course, whose qualifying degree is MD Radiodiagnosis and whose interventional radiology lessons and MCQs
    * live there: owner 2026-10-17, "why can I not see the 1000+ IR MCQs, module and lessons"), then Biostatistics. */
   var INI_GENERAL = ["ss-general-medicine", "ss-general-surgery"];
+  /* Courses whose NEET-SS paper is their own (Medical Oncology, so no group pairs them with General Medicine) but whose INI-SS
+     qualifying degree is MD General Medicine (owner 2026-10-28: "ini medical onco plus gen medicine module"). */
+  var INI_PAIR = { "ss-medical-oncology": "ss-general-medicine" };
   function iniSubjects(id) {
     if (!id) return [];
     var out = [id];
+    if (INI_PAIR[id] && out.indexOf(INI_PAIR[id]) < 0) out.push(INI_PAIR[id]);
     INI_GENERAL.forEach(function (gen) {
       if (gen === id || id === "ss-radiology" || id === "ss-biostatistics") return;
       for (var gi = 0; gi < SS_GROUPS.length; gi++) {
