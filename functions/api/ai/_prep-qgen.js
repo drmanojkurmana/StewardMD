@@ -2,7 +2,9 @@
  * Engine: functions/_prep-qgen.js (Claude via the Anthropic Messages / Message Batches APIs). Vault: PrepNucleus.md
  * "MaiK modules (qgen)".
  *
- * Feature switch: the secret ANTHROPIC_API_KEY (with the workspace id, see creds()). Without it every op except status
+ * Provider (owner 2026-10-28): MaiK's own Vertex path (the router's callGemini, VERTEX_API_KEY) by default; the Claude Messages path stays
+ * when PREP_QGEN_PROVIDER = "anthropic" or when only ANTHROPIC_API_KEY exists. The batch ops need the Claude provider.
+ * Feature switch: Vertex set up (VERTEX_API_KEY or GCP_PROJECT) or the secret ANTHROPIC_API_KEY. Without either every op except status
  * answers 503 { error: "not-configured" } and status says { on: false }, so the app hides its entry points.
  * PREP_QGEN_ON = "0" turns everything off, PREP_QGEN_STUDENT = "0" the student feature only (no var is set by default:
  * the production Pages project is at the 128 text-binding limit).
@@ -110,7 +112,7 @@ async function statusOf(env, store, who, owner, cfg, now) {
 }
 
 export async function handlePrepQgen(ctx) {
-  const { request, env, body } = ctx;
+  const { request, env, body, callGemini } = ctx;
   const later = (p) => { const w = ctx.waitUntil; if (typeof w === "function") { try { w(Promise.resolve(p).catch(() => {})); return; } catch (e) {} } return p; };
   const now = ctx.now || Date.now(), day = istDay(now);
   if (request.method !== "POST") return fail(400, "bad-input", "method");
@@ -202,7 +204,7 @@ export async function handlePrepQgen(ctx) {
   const t0 = Date.now();
   let res = null, err = null;
   try {
-    res = await runRound(env, req, { cfg, keepFlagged: owner, prov: owner ? "SMD" : "USR", bankStems: owner ? await bankStems(env, req.bank) : [] });
+    res = await runRound(env, req, { cfg, callGemini, keepFlagged: owner, prov: owner ? "SMD" : "USR", bankStems: owner ? await bankStems(env, req.bank) : [] });
   } catch (e) { err = e; }
   const latencyMs = Date.now() - t0;
   const usage = (res && res.usage) || addUsage(null, cfg.genModel, null);
@@ -228,7 +230,7 @@ export async function handlePrepQgen(ctx) {
 
   // one usage record, then the project breaker and the console counters (no text anywhere)
   const status = res ? "success" : (err && err.code === "timeout" ? "timeout" : "failed");
-  const extra = { feature: owner ? "prep:qgen-owner" : "prep:qgen", model: cfg.genModel, provider: "anthropic", promptTokens: usage.inTok + usage.cacheRead + usage.cacheWrite, completionTokens: usage.outTok, thinkTokens: usage.thinkTok, estCostInr: inr, latencyMs, status, httpStatus: response.status };
+  const extra = { feature: owner ? "prep:qgen-owner" : "prep:qgen", model: cfg.genModel, provider: cfg.provider === "vertex" ? "vertex" : "anthropic", promptTokens: usage.inTok + usage.cacheRead + usage.cacheWrite, completionTokens: usage.outTok, thinkTokens: usage.thinkTok, estCostInr: inr, latencyMs, status, httpStatus: response.status };
   await later((async () => {
     try {
       if (commit) await commit(extra);
@@ -244,6 +246,7 @@ export async function handlePrepQgen(ctx) {
 
 /* ---------------- owner: bulk via Message Batches ---------------- */
 async function ownerSubmit(env, store, b, cfg, now) {
+  if (cfg.provider !== "anthropic") return fail(503, "not-configured", "batch-provider", { message: "The batch queue needs the Claude provider. Use rounds of up to 10 questions." });
   const n = b.n;
   if (!Number.isInteger(n) || n < 1 || n > cfg.batchMax) return fail(400, "bad-input", "n");
   const rr = readGen(Object.assign({}, b, { n: 1, mod: b.mod || "gen_000000000000" }), true);

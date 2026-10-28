@@ -1806,7 +1806,7 @@ export async function onRequest(context) {
     // PrepNucleus Layer C: one Gemini call per request, its own gates, metering and error shape.
     if (seg === "prep-teach") return await handlePrepTeach({ request, env, body, callGemini, waitUntil: context.waitUntil.bind(context) });
     if (seg === "prep-generate") return await handlePrepGenerate({ request, env, body, callGemini, waitUntil: context.waitUntil.bind(context) });
-    if (seg === "prep-qgen") return await handlePrepQgen({ request, env, body, waitUntil: context.waitUntil.bind(context) });
+    if (seg === "prep-qgen") return await handlePrepQgen({ request, env, body, callGemini, waitUntil: context.waitUntil.bind(context) });
     if (seg === "explain") {
       // Preferred: grounded RAG package (KB primary). The client assembles it from
       // the deterministic engine output + retrieved StewardMD knowledge; we forward

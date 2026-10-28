@@ -11904,3 +11904,11 @@ cover screen (344 x 882), inner portrait (712 x 840), inner landscape (841 x 701
   buttons wrapped to two rows (iPad, inner landscape); `kardia/angiolab/kardia-embed.js` lets it grow.
 - Dual screens with a physical gap (Surface Duo) open apps on one screen by default; no hinge-specific layout was
   built. Revisit with the Viewport Segments API only if a spanned layout is asked for.
+
+## 2026-10-28 - Colleagues: server-side contacts, mutual on link, invite link /add/<ID>
+Owner asked to take Colleagues to 10/10. Contacts live on the server (`kx_contacts`), not the phone, so they survive a reinstall
+(which wipes device data, see CLAUDE.md). Every referral, handover and case-room invite links both doctors; adding by ID links both too,
+with a fixed-text push. A contact is addressed by an opaque hash id, never the colleague's uid. Adding a contact needs only sign-in, and the
+colleague need not be verified: no patient data moves, and sending still requires both verified. The invite link carries only the inviter's
+own StewardMD ID; its no-app page does no name lookup, so the directory cannot be browsed. Rides the existing `smd_kits_share` /
+`KITS_SHARE_ON` switches; no separate flag. Do not re-litigate.
