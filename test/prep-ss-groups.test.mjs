@@ -29,7 +29,7 @@ const TAX = JSON.parse(fs.readFileSync(path.join(ROOT, "prep/taxonomy.json"), "u
 
 const KNOWN = new Set();
 TAX.branches.forEach((b) => (b.subjects || []).forEach((s) => KNOWN.add(s.id)));
-const MEDICAL_KIND = ["medical", "respiratory", "radio-diagnosis"];
+const MEDICAL_KIND = ["medical"];
 // NBEMS: Medical Oncology and Critical Care Medicine are their own super-specialty papers, not a second General Medicine paper.
 const ONLY_KIND = ["critical-care", "medical-oncology"];
 const MEDICAL_CORE = new Set(SRC.medicalCore.concat(["ss-general-medicine"]));
@@ -111,19 +111,32 @@ test("Medical Oncology and Critical Care groups show only their own subjects: no
     assert.ok(!g.subjects.includes("ss-general-medicine") && !g.subjects.includes("ss-biostatistics") && !g.subjects.includes("ss-cardiology"), g.id + " has no medical core");
     assert.equal(g.kind, "only");
   }
-  assert.ok(GROUPS.groups.find((x) => x.id === "medical").subjects.includes("ss-medical-oncology"), "the broad Medical group still holds Medical Oncology");
 });
 
 test("INI-SS Medical Oncology is the course plus General Medicine (and Biostatistics), not the whole medical tab", () => {
   const out = PLAN.iniSubjects("ss-medical-oncology");
-  assert.deepEqual(out.slice(0, 2), ["ss-medical-oncology", "ss-general-medicine"]);
+  assert.deepEqual(out, ["ss-medical-oncology", "ss-general-medicine", "ss-biostatistics"]);
   assert.ok(!out.includes("ss-cardiology") && !out.includes("ss-neurology") && !out.includes("ss-nephrology"));
 });
 
-test("radiology group follows the owner rule: radiology plus medical core plus Biostatistics", () => {
-  const g = GROUPS.groups.find((x) => x.id === "radio-diagnosis");
-  assert.ok(g.subjects.includes("ss-radiology"), "radiology group holds Radiology");
-  assert.ok(g.subjects.includes("ss-cardiology") && g.subjects.includes("ss-neurology"), "radiology group holds the medical core");
+test("Radiodiagnosis and Respiratory groups show their own subject plus Biostatistics, no medical core (owner 2026-10-28)", () => {
+  const r = GROUPS.groups.find((x) => x.id === "radio-diagnosis");
+  assert.deepEqual(new Set(r.subjects), new Set(["ss-radiology", "ss-biostatistics"]));
+  const p = GROUPS.groups.find((x) => x.id === "respiratory");
+  assert.deepEqual(new Set(p.subjects), new Set(["ss-pulmonology", "ss-biostatistics"]));
+});
+
+test("the Medical group is the General Medicine curriculum: its feeder subjects, no dedicated-paper subject", () => {
+  const g = GROUPS.groups.find((x) => x.id === "medical");
+  for (const id of ["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-rheumatology-immunology", "ss-pulmonology", "ss-infectious-diseases", "ss-critical-care", "ss-biostatistics"]) assert.ok(g.subjects.includes(id), "Medical group holds " + id);
+  assert.ok(!g.subjects.includes("ss-medical-oncology") && !g.subjects.some((x) => /surgery|paediatric|radiology/.test(x)));
+});
+
+test("no group lists a subject outside its own paper: surgical, paediatric and the rest hold no medical subject", () => {
+  for (const g of GROUPS.groups) {
+    if (g.id === "medical") continue;
+    for (const id of g.subjects) assert.ok(!["ss-general-medicine", "ss-cardiology", "ss-neurology", "ss-nephrology", "ss-gastroenterology", "ss-hepatology", "ss-endocrinology", "ss-haematology", "ss-rheumatology-immunology", "ss-infectious-diseases"].includes(id), g.id + " must not hold " + id);
+  }
 });
 
 test("surgical group shows surgical subjects plus Biostatistics, no medical subjects", () => {
