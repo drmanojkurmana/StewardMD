@@ -323,6 +323,32 @@ function cleanItem(it) {
   return o;
 }
 const ADD_CAP = 300, ADD_TARGETS = 12, ADD_ITEMS = 200;
+/* New modules the owner creates while publishing: KV prep:newmods = { "<subject>": [{ id, title, ts }] }. The module has no bank
+ * file and no index row; the app adds a row for it from this registry (GET /api/prep/fix?ix=1 -> nm) and its questions are the
+ * published ones in prep:fixmod:<id>. A module with no published question left drops out of the registry. */
+const NEWMODS = "prep:newmods";
+const slugOf = (t) => String(t || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 50).replace(/-+$/, "");
+async function newModId(kv, reg, subject, title) {
+  const base = "au-" + slugOf(title);
+  if (base.length < 6) return "";
+  const own = (reg[subject] || []).find((m) => m.id === base);
+  if (own) return base;
+  const used = Object.keys(reg).some((s2) => s2 !== subject && (reg[s2] || []).some((m) => m.id === base));
+  return used ? base.slice(0, 44) + "-" + (await sha16(new TextEncoder().encode(subject))).slice(0, 4) : base;
+}
+async function pruneNewMods(kv, now) {
+  const reg = await kvJson(kv, NEWMODS, {});
+  let changed = false;
+  for (const sub of Object.keys(reg)) {
+    const keep = [];
+    for (const m of reg[sub] || []) {
+      const rec = await kvJson(kv, "prep:fixmod:" + m.id, null);
+      if (rec && Array.isArray(rec.a) && rec.a.some((x) => x.sub === sub)) keep.push(m); else changed = true;
+    }
+    if (keep.length) reg[sub] = keep; else delete reg[sub];
+  }
+  if (changed) await kv.put(NEWMODS, JSON.stringify(reg));
+}
 /* publish: live additions live next to the content fixes (functions/_prepfix.js): prep:fixmod:<module> = { q, l, a: [items] },
  * prep:fixix lists the modules with changes so the app fetches a module's record only when it changed. Each item keeps the
  * subject it was published to (sub) because module ids are only unique inside a subject. */
@@ -333,10 +359,22 @@ async function ownerPublish(env, b, uid, now) {
   if (!items.length || items.length > ADD_ITEMS || items.some((x) => !x)) return fail(400, "bad-input", "items");
   const tg = Array.isArray(b.targets) ? b.targets : [];
   const seen = new Set(), targets = [];
+  let reg = null, regChanged = false;
   for (const t of tg) {
-    const subject = String((t && t.subject) || ""), module = String((t && t.module) || "");
-    if (!SLUG_RE.test(subject) || !SLUG_RE.test(module)) return fail(400, "bad-input", "target");
-    if (!seen.has(subject + "/" + module)) { seen.add(subject + "/" + module); targets.push({ subject, module }); }
+    const subject = String((t && t.subject) || ""); let module = String((t && t.module) || "");
+    if (!SLUG_RE.test(subject)) return fail(400, "bad-input", "target");
+    let title = "";
+    if (!module) {
+      /* a new module: { subject, title } */
+      title = cleanText(t && t.title, 80);
+      if (title.length < 3) return fail(400, "bad-input", "new-module-title");
+      reg = reg || await kvJson(kv, NEWMODS, {});
+      module = await newModId(kv, reg, subject, title);
+      if (!module || !SLUG_RE.test(module)) return fail(400, "bad-input", "new-module-title");
+      const list = reg[subject] = reg[subject] || [];
+      if (!list.some((m) => m.id === module)) { if (list.length >= 40) return fail(400, "bad-input", "too-many-modules"); list.push({ id: module, title, ts: now }); regChanged = true; }
+    } else if (!SLUG_RE.test(module)) return fail(400, "bad-input", "target");
+    if (!seen.has(subject + "/" + module)) { seen.add(subject + "/" + module); targets.push(title ? { subject, module, title } : { subject, module }); }
   }
   if (!targets.length || targets.length > ADD_TARGETS) return fail(400, "bad-input", "targets");
   const batch = "pb" + istDay(now).replace(/-/g, "") + Math.random().toString(36).slice(2, 8);
@@ -364,6 +402,7 @@ async function ownerPublish(env, b, uid, now) {
     ix[t.module] = now;
   }
   await kv.put("prep:fixix", JSON.stringify(ix));
+  if (regChanged) await kv.put(NEWMODS, JSON.stringify(reg));
   return json({ ok: true, batch, n: items.length, added, updated, targets });
 }
 async function ownerUnpublish(env, b, uid, now) {
@@ -387,6 +426,7 @@ async function ownerUnpublish(env, b, uid, now) {
     else { await kv.put(key, JSON.stringify(rec)); ix[module] = now; }
   }
   await kv.put("prep:fixix", JSON.stringify(ix));
+  await pruneNewMods(kv, now);
   return json({ ok: true, removed });
 }
 /* plist: every question the owner has published, by module (public record prep:fixmod:<module>.a), so the Author screen can
@@ -395,6 +435,7 @@ async function ownerPubList(env) {
   const kv = kvOf(env);
   if (!kv) return fail(503, "not-configured", "kv");
   const ix = await kvJson(kv, "prep:fixix", {});
+  const reg = await kvJson(kv, NEWMODS, {});
   const mods = [];
   let total = 0;
   for (const module of Object.keys(ix).slice(0, 400)) {
@@ -403,7 +444,10 @@ async function ownerPubList(env) {
     if (!rec || !Array.isArray(rec.a) || !rec.a.length) continue;
     const by = {};
     for (const x of rec.a) { if (!x || !SLUG_RE.test(String(x.sub || ""))) continue; (by[x.sub] = by[x.sub] || []).push({ id: x.id, q: cleanText(x.q, 160), pb: x.pb || "", ts: x.pts || 0, hand: x.gen === "hand" ? 1 : 0 }); }
-    for (const sub of Object.keys(by)) { mods.push({ subject: sub, module, n: by[sub].length, items: by[sub] }); total += by[sub].length; }
+    for (const sub of Object.keys(by)) {
+      const nm = (reg[sub] || []).find((m) => m.id === module);
+      mods.push(Object.assign({ subject: sub, module, n: by[sub].length, items: by[sub] }, nm ? { title: nm.title, added: 1 } : {})); total += by[sub].length;
+    }
   }
   return json({ ok: true, total, modules: mods });
 }
@@ -441,6 +485,7 @@ async function ownerPubDelete(env, b, now) {
     else { await kv.put(key, JSON.stringify(rec)); ix[w.module] = now; }
   }
   await kv.put("prep:fixix", JSON.stringify(ix));
+  await pruneNewMods(kv, now);
   return json({ ok: true, removed });
 }
 async function ownerStage(env, b, uid, now) {

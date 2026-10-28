@@ -782,6 +782,9 @@
     var ps = r.querySelector("#qgPSub"), pm = r.querySelector("#qgPMod");
     ON(ps, "change", function () { au.psub = ps.value; au.pmod = ""; saveAuthor(); host.rerender(); });
     ON(pm, "change", function () { au.pmod = pm.value; saveAuthor(); host.rerender(); });
+    var pn = r.querySelector("#qgPNew");
+    // typing must never repaint the input (iOS drops the keyboard): only the button next to it is switched
+    ON(pn, "input", function () { au.pnew = pn.value; saveAuthor(); var b = r.querySelector('[data-act="g-atnew"]'); if (b) b.disabled = !(au.psub || au.subject) || pn.value.trim().length < 3; });
     Array.prototype.forEach.call(r.querySelectorAll(".qg-edq, .qg-edx"), function (ta) {
       ON(ta, "input", function () { var row = au.list[+ta.getAttribute("data-i")]; if (!row) return; if (ta.className.indexOf("qg-edq") >= 0) row.it.q = ta.value; else row.it.exp = ta.value; row.it.qg.ed = 1; saveAuthor(); });
     });
@@ -789,7 +792,7 @@
   /* ---------- publish to students: one reviewed set into one or many subject modules ---------- */
   function targetLabel(host, t) {
     var sub = null; try { (host.subjectsOf(au.exam === "neet-ss" ? "neet-ss" : au.exam === "usmle" ? "usmle" : "neet-pg") || []).forEach(function (x) { if (x.id === t.subject) sub = x; }); } catch (e) {}
-    return t.title ? (sub ? plain(sub.name) + " · " : "") + t.title : t.subject + " / " + t.module;
+    return t.title ? (sub ? plain(sub.name) + " · " : "") + t.title + (t.isNew ? " (new)" : "") : t.subject + " / " + t.module;
   }
   function publishHtml(host, esc, ok) {
     var subs = subjectsFor(host), ps = au.psub || au.subject || "", ix = ps ? host.ix()[ps] : null;
@@ -807,6 +810,8 @@
       '<label class="pc-lbl" for="qgPSub">Subject</label><select id="qgPSub" class="pc-in">' + opt("", "Choose a subject", !ps) + subs.map(function (s2) { return opt(s2.id, plain(s2.name) || s2.id, ps === s2.id); }).join("") + "</select>" +
       '<label class="pc-lbl" for="qgPMod">Module</label><select id="qgPMod" class="pc-in"' + (ps ? "" : " disabled") + ">" + opt("", ps ? "Choose a module" : "Choose a subject first", !au.pmod) + mods.map(function (t) { return opt(t.id, plain(t.title) || t.id, au.pmod === t.id); }).join("") + "</select>" +
       '<button type="button" class="pn-btn" data-act="g-atadd"' + (ps && au.pmod ? "" : " disabled") + ">Add this module</button>" +
+      '<label class="pc-lbl" for="qgPNew">Or create a new module in this subject</label><input id="qgPNew" name="new-module" class="pc-in" maxlength="80" autocomplete="off" placeholder="e.g. NEET-SS Recall (Oct 2026)" value="' + esc(au.pnew || "") + '"' + (ps ? "" : " disabled") + ">" +
+      '<button type="button" class="pn-btn" data-act="g-atnew"' + (ps && (au.pnew || "").trim().length >= 3 ? "" : " disabled") + ">Add as a new module</button>" +
       '<button type="button" class="pn-btn pri" data-act="g-apub"' + (ok && au.targets.length && !au.busy ? "" : " disabled") + ">Publish " + ok + " to " + au.targets.length + " module" + (au.targets.length === 1 ? "" : "s") + "</button>" +
       (au.pub ? '<p class="pn-small" role="status">Published ' + au.pub.n + " questions to " + au.pub.targets.length + " module" + (au.pub.targets.length === 1 ? "" : "s") + '. <button type="button" class="pn-chip" data-act="g-aundo">Take them down</button></p>' : "") + "</section>";
   }
@@ -815,10 +820,11 @@
     if (!items.length || !au.targets.length) return;
     if (G.confirm && !G.confirm("Publish " + items.length + " questions to " + au.targets.length + " module(s)? Every student sees them at once.")) return;
     au.err = ""; au.busy = "Publishing…"; host.rerender();
-    call({ op: "publish", targets: au.targets.map(function (t) { return { subject: t.subject, module: t.module }; }), items: items }, 60000).then(function (r) {
+    call({ op: "publish", targets: au.targets.map(function (t) { return t.isNew ? { subject: t.subject, title: t.title } : { subject: t.subject, module: t.module }; }), items: items }, 60000).then(function (r) {
       au.busy = "";
       if (r.status !== 200) { au.err = r.json && r.json.reason === "module-full" ? "A module would pass 300 added questions." : msgOf(codeOf(r.status, r.json)); saveAuthor(); return host.rerender(); }
-      au.pub = { batch: r.json.batch, n: r.json.n, targets: au.targets.slice() };
+      // a new module now has its real id: the take-down button needs it
+      au.pub = { batch: r.json.batch, n: r.json.n, targets: au.targets.map(function (t, k) { var rt = (r.json.targets || [])[k]; return rt && rt.module ? { subject: rt.subject, module: rt.module, title: t.title } : t; }) };
       au.list = au.list.filter(function (x) { return x.st !== "ok"; });
       saveAuthor(); host.rerender(); host.toast(r.json.updated ? r.json.n + " questions are live (" + r.json.updated + " replaced the older copy)." : r.json.n + " questions are live.");
     });
@@ -868,6 +874,7 @@
     var ix = host.ix()[m.subject], t = null;
     if (!ix) { host.loadIndex(m.subject).then(function () { if (onTop("#qgPubView", host)) host.rerender(); }); }
     else (ix.topics || []).forEach(function (x) { if (x.id === m.module) t = x; });
+    if (m.title) return m.title + " (new, " + m.subject + ")";
     return (t ? plain(t.title) : m.module) + " (" + m.subject + ")";
   }
   function renderPubs(host) {
@@ -998,6 +1005,15 @@
         au.targets.push({ subject: psb, module: au.pmod, title: tp ? plain(tp.title) : "" });
       }
       au.pmod = ""; saveAuthor(); return host.rerender();
+    }
+    if (a === "g-atnew") {
+      var nsb = au.psub || au.subject, nt = (au.pnew || "").replace(/\s+/g, " ").trim();
+      if (!nsb || nt.length < 3) return;
+      if (!au.targets.some(function (t) { return t.subject === nsb && t.isNew && t.title.toLowerCase() === nt.toLowerCase(); })) {
+        if (au.targets.length >= 12) return host.toast("Up to 12 modules in one go.");
+        au.targets.push({ subject: nsb, module: "", title: nt, isNew: true });
+      }
+      au.pnew = ""; saveAuthor(); return host.rerender();
     }
     if (a === "g-atdel") { au.targets.splice(i, 1); saveAuthor(); return host.rerender(); }
     if (a === "g-apub") return publish(host);

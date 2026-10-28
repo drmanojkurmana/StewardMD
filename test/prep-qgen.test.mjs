@@ -415,6 +415,40 @@ test("owner publish: republishing updates the live copy, keeps the owner's write
   assert.equal((await post(env, { op: "plist" }, "tok-o")).json.total, 0);
 });
 
+test("owner publish: a new module is created from a title, listed for the app, and drops out when its questions are deleted", async () => {
+  reset();
+  const env = envFor();
+  const mk = (n) => ({ id: "imp_" + String(n).padStart(12, "c"), q: "Which finding number " + n + " is typical of the stated new condition?", o: ["Alpha " + n, "Beta " + n, "Gamma " + n, "Delta " + n], a: 0, exp: "Alpha " + n + " is typical.", r: ["Alpha " + n + " is typical.", "B wrong", "C wrong", "D wrong"], kp: "", d: 2, cog: "recall", tg: [] });
+  const { onRequestGet } = await import("../functions/api/prep/fix.js");
+  const nmOf = async () => (await (await onRequestGet({ request: new Request("https://x.test/api/prep/fix?ix=1"), env })).json()).nm;
+  assert.equal((await post(env, { op: "publish", targets: [{ subject: "ss-medical-oncology", title: "x" }], items: [mk(1)] }, "tok-o")).status, 400, "title too short");
+  const r = await post(env, { op: "publish", targets: [{ subject: "ss-medical-oncology", title: "NEET-SS Recall (Oct 2026)" }, { subject: "ss-medical-oncology", module: "son-iniss-recalls" }], items: [mk(1), mk(2)] }, "tok-o");
+  assert.equal(r.status, 200, r.text);
+  assert.deepEqual(r.json.targets[0], { subject: "ss-medical-oncology", module: "au-neet-ss-recall-oct-2026", title: "NEET-SS Recall (Oct 2026)" });
+  assert.deepEqual(r.json.targets[1], { subject: "ss-medical-oncology", module: "son-iniss-recalls" });
+  const rec = JSON.parse(env.MAIK_KV.m.get("prep:fixmod:au-neet-ss-recall-oct-2026"));
+  assert.equal(rec.a.length, 2); assert.equal(rec.a[0].t, "au-neet-ss-recall-oct-2026"); assert.equal(rec.a[0].sub, "ss-medical-oncology");
+  assert.deepEqual(await nmOf(), { "ss-medical-oncology": [{ id: "au-neet-ss-recall-oct-2026", title: "NEET-SS Recall (Oct 2026)", n: 2 }] }, "only the new module is listed, not the existing one");
+  // the same title again reuses the module; replacing does not double
+  const again = await post(env, { op: "publish", targets: [{ subject: "ss-medical-oncology", title: "NEET-SS Recall (Oct 2026)" }], items: [mk(2), mk(3)] }, "tok-o");
+  assert.equal(again.json.targets[0].module, "au-neet-ss-recall-oct-2026"); assert.equal(again.json.added, 1); assert.equal(again.json.updated, 1);
+  assert.equal((await nmOf())["ss-medical-oncology"][0].n, 3);
+  // the same title in another subject gets its own id
+  const other = await post(env, { op: "publish", targets: [{ subject: "ss-haematology", title: "NEET-SS Recall (Oct 2026)" }], items: [mk(4)] }, "tok-o");
+  assert.match(other.json.targets[0].module, /^au-neet-ss-recall-oct-2026-[0-9a-f]{4}$/);
+  const l = await post(env, { op: "plist" }, "tok-o");
+  const pm = l.json.modules.find((m) => m.module === "au-neet-ss-recall-oct-2026");
+  assert.equal(pm.title, "NEET-SS Recall (Oct 2026)"); assert.equal(pm.added, 1);
+  assert.equal(l.json.modules.find((m) => m.module === "son-iniss-recalls").added, undefined);
+  // deleting the questions removes the module from the registry
+  const d = await post(env, { op: "pdelete", targets: [{ subject: "ss-medical-oncology", module: "au-neet-ss-recall-oct-2026", all: true }] }, "tok-o");
+  assert.equal(d.json.removed, 3);
+  const nm = await nmOf();
+  assert.equal(nm["ss-medical-oncology"], undefined); assert.equal(nm["ss-haematology"].length, 1);
+  assert.equal((await post(env, { op: "pdelete", all: true }, "tok-o")).status, 200);
+  assert.deepEqual(await nmOf(), {});
+});
+
 /* ---------------- CLI (tools/prep-qgen.mjs): pure parts and a dry run that sends nothing ---------------- */
 test("CLI: chunks, plan, estimate, overlay shape; the dry run makes no call", async () => {
   const C = await import("../tools/prep-qgen.mjs");
