@@ -42,7 +42,7 @@
       "- why_wrong: exactly 4 strings in option order. Every WRONG option gets its own specific reason, 1 to 2 sentences, written as why that option is not correct here and when it would be right (for example: \"Option B is wrong because ... It would be the answer if ...\"). Use the file's reason when it gives one; when it gives none, write it yourself, accurate and specific to that option. Never write a generic line such as \"not the best answer because it does not match the scenario\". Use \"\" only for the correct option.",
       "- topic_explanation: 3 to 6 sentences on the topic behind the question (the concept, how to tell the options apart, one exam trap), from the file where it has it, otherwise written by you. This is shown below the answer.",
       "- key_point: one short line. difficulty: 1 easy, 2 moderate, 3 hard. tags: 0 to 3 short words.",
-      "- Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma).",
+      "- Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma). Straight quotes only: quote a word with single quotes ('like this'), never curly quotes.",
       "- If there are more than 40 questions, give the first 40 and stop. I will say 'continue' for the next 40, in the same format.",
       "",
       "FORMAT (the example shows one question; add every question to the \"questions\" array):",
@@ -94,7 +94,7 @@
       "- topic_explanation: 3 to 6 sentences on the topic behind the question: the concept, how to tell the options apart, one exam trap. It is shown below the answer.",
       "- key_point: one line to memorise. difficulty: 1 easy, 2 moderate, 3 hard. tags: 1 to 3 short words.",
       "",
-      "FORMAT: copy this structure and these field names exactly. Put all " + n + " questions in the \"questions\" array (the example shows one). Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma).",
+      "FORMAT: copy this structure and these field names exactly. Put all " + n + " questions in the \"questions\" array (the example shows one). Plain text only inside the fields: no markdown, no line breaks, no em dash (use a hyphen or a comma). Straight quotes only: quote a word with single quotes ('like this'), never curly quotes.",
       JSON.stringify(t, null, 2),
       "",
       "BEFORE YOU REPLY: check that the JSON is valid (double quotes, no trailing commas, no comments), that there are exactly " + n + " questions, that each answer letter really is the correct option, and that each of the 3 wrong options of every question has its own reason. Then output the JSON block only."
@@ -191,7 +191,7 @@
   /* parseJson(text) -> { title, items, problems }. Tolerates a code fence, text around the JSON, a bare array, or several
      JSON blocks pasted one after another (replies of 40 questions each). */
   function parseJson(text) {
-    var s = String(text || "").replace(/[​﻿]/g, "").replace(/[“”]/g, '"');
+    var s = String(text || "").replace(/[​﻿]/g, "");
     var blocks = [], re = /```(?:json)?\s*([\s\S]*?)```/gi, m;
     while ((m = re.exec(s))) blocks.push(m[1]);
     if (!blocks.length) blocks = [s];
@@ -200,7 +200,11 @@
       var o = null, i = Math.min.apply(null, [b.indexOf("{"), b.indexOf("[")].map(function (v) { return v < 0 ? 1e9 : v; }));
       if (i < 1e9) {
         var open = b.charAt(i), close = open === "{" ? "}" : "]", j = b.lastIndexOf(close);
-        if (j > i) { try { o = JSON.parse(b.slice(i, j + 1)); } catch (e) { o = null; } }
+        if (j > i) {
+          var raw = b.slice(i, j + 1);
+          // Curly quotes inside a string are text and parse as they are; only when the JSON itself was typeset with them (a chat app) are they straightened.
+          try { o = JSON.parse(raw); } catch (e) { try { o = JSON.parse(raw.replace(/[“”]/g, '"')); } catch (e2) { o = null; } }
+        }
       }
       if (o == null) { bad++; return; }
       if (Array.isArray(o)) list = list.concat(o);

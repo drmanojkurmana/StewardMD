@@ -130,6 +130,12 @@ test("wrong-option reasons: real ones kept, template filler dropped and counted,
   assert.match(none.notes.join(" "), /No topic explanation/);
 });
 
+test("curly quotes inside a string parse as text (they used to be turned into straight quotes and break the JSON)", () => {
+  const inner = P.parseJson('{"questions":[{"q":"Which is \u201csomatic\u201d BRCA?","options":["a","b","c","d"],"answer":"B","explanation":"e"}]}');
+  assert.equal(inner.items.length, 1); assert.equal(inner.problems.length, 0);
+  assert.equal(inner.items[0].q, "Which is \u201csomatic\u201d BRCA?");
+});
+
 test("both prompts ask for a reason for every wrong option and a topic explanation, and the template carries the field", () => {
   for (const t of [P.prompt(), P.promptFor({ exam: "neet-ss", subject: "Medical Oncology", topic: "GTN", n: 10 })]) {
     assert.match(t, /EVERY wrong option|Every WRONG option/);
