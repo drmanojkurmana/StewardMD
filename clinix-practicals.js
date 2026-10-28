@@ -254,6 +254,13 @@
     var items = Array.isArray(deckItems) ? deckItems : [];
     if (!items.length) return [];
 
+    /* A spotter is a "what is this?" test, so it needs the picture. Quiz only the items that have a
+     * photograph whenever there are enough of them (owner: "what is the use of a spotter without
+     * images"); the image-less ones stay in Browse. A deck with almost no photos keeps the old
+     * masked-summary questions rather than becoming a 1-question quiz. */
+    var withImg = items.filter(function (it) { return !!(it && it.image && it.image.file); });
+    if (withImg.length >= Math.min(opts.count || 10, items.length, 5)) items = withImg;
+
     var count = Math.min(opts.count || 10, items.length);
     var seed = opts.seed != null ? (typeof opts.seed === "number" ? opts.seed : hashSeed(String(opts.seed))) : hashSeed("quiz:" + Date.now());
     var rand = seededRandom(seed);
