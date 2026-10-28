@@ -360,6 +360,39 @@ try{
  await click('#smdReview [data-rv-act="close"]');
  await ev(`localStorage.removeItem('smd_review_decisions');1`);
 
+ // Tool buttons beside the fields (owner 2026-10-28): not a separate module, and they follow the doctor's specialty.
+ const ftools=()=>ev(`JSON.stringify([...document.querySelectorAll('#smdOpdEmr .oe-ftool')].map(b=>b.dataset.oeAct.replace('kit-tool:','')))`).then(JSON.parse);
+ await ev(`SMD_KITS.setMySpecialty('obgyn','manual');1`);
+ await openOpd('tab:assess'); await click('#smdOpdEmr [data-oe-act="tab:assess"]');
+ ok(await until(`!!document.querySelector('#smdOpdEmr [data-oe-inp="assess:LMP"]')`),'assessment tab renders the LMP field');
+ ok(JSON.stringify(await ftools())===JSON.stringify(['LMP']),'obstetrician: only the dating button, beside LMP');
+ await click('#smdOpdEmr .oe-ftool[data-oe-act="kit-tool:LMP"]');
+ ok(await until(`!!document.querySelector('#smdOpdEmr .oe-toolsheet [data-kit-tool="pregnancy-dating"]')`),'the LMP button opens just the dating tool in a small sheet');
+ ok(await ev(`!document.querySelector('#smdOpdEmr .oe-toolsheet .kit-chip')&&!document.querySelector('#smdOpdEmr .oe-toolsheet [data-kit-tool="growth-who"]')`),'the sheet holds only that tool: no kit picker, no other tool');
+ await setF('dating','lmp','2026-01-01','#smdOpdEmr'); await setF('dating','asOf','2026-03-12','#smdOpdEmr');
+ await shot('opd-field-tool-sheet-390');
+ await click('#smdOpdEmr .oe-toolsheet [data-kit-act="tool:pregnancy-dating"]');
+ v=await vals();
+ ok(/Pregnancy dating: LMP 1 Jan 2026; EDD 8 Oct 2026 \(by LMP\)/.test(v.History_present_illness||'')&&v.LMP==='1 Jan 2026','Add writes the result into the note and the LMP field');
+ ok(await until(`!document.querySelector('#smdOpdEmr .oe-toolsheet')`),'the sheet closes once the result is in the note');
+ ok(await ev(`document.querySelector('#smdOpdEmr [data-oe-inp="assess:LMP"]').value==='1 Jan 2026'`),'the LMP field on the Assessment tab shows it');
+ await ev(`SMD_KITS.setMySpecialty('paediatrics','manual');1`);
+ await openOpd('tab:assess'); await click('#smdOpdEmr [data-oe-act="tab:assess"]');
+ ok(await until(`!!document.querySelector('#smdOpdEmr [data-oe-inp="assess:Weight"]')`),'assessment tab renders Weight');
+ ok((await ftools()).sort().join(',')==='Height,Weight','paediatrician: the growth button beside Weight and Height, no dating button: '+(await ftools()).join(','));
+ await click('#smdOpdEmr .oe-ftool[data-oe-act="kit-tool:Weight"]');
+ ok(await until(`!!document.querySelector('#smdOpdEmr .oe-toolsheet [data-kit-tool="growth-who"]')`),'the Weight button opens the growth tool');
+ await click('#smdOpdEmr [data-oe-act="kit-tool-close"]');
+ ok(await until(`!document.querySelector('#smdOpdEmr .oe-toolsheet')`),'the close button closes the sheet without writing');
+ await ev(`SMD_KITS.setMySpecialty('','manual');localStorage.removeItem('smd_my_specialty');1`);
+ await openOpd('tab:assess'); await click('#smdOpdEmr [data-oe-act="tab:assess"]');
+ ok(await until(`!!document.querySelector('#smdOpdEmr [data-oe-inp="assess:Weight"]')`),'assessment tab renders (no specialty set)');
+ ok((await ftools()).sort().join(',')==='Height,LMP,Weight,local_examination,management_plan','no specialty set: every tool button shows: '+(await ftools()).join(','));
+ await ev(`OPDEMR._state().writeOn=false;OPDEMR.render&&OPDEMR.render();1`);
+ await click('#smdOpdEmr [data-oe-act="tab:profile"]'); await click('#smdOpdEmr [data-oe-act="tab:assess"]');
+ ok(await until(`!document.querySelector('#smdOpdEmr .oe-ftool')`),'read-only consult: no tool buttons');
+ await ev(`OPDEMR.close();localStorage.removeItem('smd_my_specialty');1`);
+
  // Flag off: no Specialty tab, no Home tile.
  await ev(`SMD_KITS_FLAGS.set('smd_specialty_kits',false);1`);
  await openOpd('tab:profile');

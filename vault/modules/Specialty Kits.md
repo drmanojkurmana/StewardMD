@@ -79,6 +79,9 @@ A kit is:
 11. **Colleagues and your hospital** card (wave 2, [[Colleagues]], flag off): the hospital's version of
     the kit, "Ask colleagues about this case", and in the OPD the patient's kit history (O&G: antenatal card).
 
+## Tool buttons inside the OPD notes (2026-10-28, owner: "kits should not be a separate module")
+A small button beside the field a tool belongs to, opening just that tool in a bottom sheet (`.oe-toolsheet`, `opd-emr.js` `toolBtn`, `openFieldTool`, `toolSheetHtml`). Map `FIELD_TOOLS` in `specialty-kits.js`: LMP -> pregnancy-dating, Weight and Height -> growth-who, Local examination -> burns-chart, Management plan -> la-dose. Which buttons show follows my specialty (`KIT_FIELD_TOOLS`: obgyn dating; paediatrics growth; anaesthesia LA dose; emergency burns, LA, growth; general-surgery and orthopaedics burns and LA; community-medicine growth and dating); other specialties none; no specialty set, all five. Only while the assessment is writable. The tool's own Add writes to its own target through the same `kitHost.insert`, then the sheet closes; state shares the consult's kit key. API: `SMD_KITS.fieldTool(field)`, `toolSheetBody(id, { host, key })`. The `tool:` click now works without a selected kit. The Specialty tab and the Home tile are kept for now (owner: "keep both for now"). Not in IPD yet. Test: `test/run-specialty-kits-ui.mjs` (needs `CHROME=/opt/pw-browsers/chromium` here).
+
 ## Key files
 - `specialty-kits.js` (`window.SMD_KITS`) - engine: pure maths (exported `_dating`, `_growth`, ...),
   rendering for a host, events, the standalone sheet. `specialty-kits.css`, `specialty-kits-flags.js`.

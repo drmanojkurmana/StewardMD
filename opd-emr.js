@@ -468,6 +468,22 @@
     var on = st.fieldMic === name;
     return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
   }
+  /* A small tool button beside the field a specialty tool belongs to (specialty-kits.js fieldTool): LMP -> pregnancy dating,
+     Weight and Height -> WHO growth, Local examination -> burns chart, Management plan -> local anaesthetic dose. Which ones show
+     follows the doctor's specialty. Only while the assessment can be written (the tool's Add writes into the note). */
+  function toolBtn(name) {
+    var T = null;
+    try { T = kitsOn() && G.SMD_KITS.fieldTool && G.SMD_KITS.fieldTool(name); } catch (e) { T = null; }
+    if (!T || !st.writeOn || st.assessAuthorized) return "";
+    return '<button type="button" class="oe-ftool" data-oe-act="kit-tool:' + esc(name) + '" aria-label="' + esc(T.title) + '" title="' + esc(T.title) + '">' + ms(T.icon || "calculate") + "</button>";
+  }
+  function toolSheetHtml(st) {
+    var ts = st.toolSheet; if (!ts || !kitsOn()) return "";
+    var T = G.SMD_KITS.fieldTool(ts.field); if (!T) return "";
+    return '<div class="oe-toolsheet" role="dialog" aria-modal="true" aria-label="' + esc(T.title) + '"><div class="oe-toolsheet-card">' +
+      '<header class="oe-toolsheet-h"><b>' + esc(T.title) + '</b><button type="button" class="oe-toolsheet-x" data-oe-act="kit-tool-close" aria-label="Close">' + ms("close") + "</button></header>" +
+      '<div class="oe-toolsheet-b oe-kit">' + G.SMD_KITS.toolSheetBody(T.id, { host: kitHost, key: kitKey() }) + "</div></div></div>";
+  }
   // "Search ICD" button, shown only on the provisional diagnosis field - picking a code appends
   // "CODE - Title" as a new line rather than replacing whatever the doctor already typed, same
   // additive behaviour as the per-field mic. window.SMD_ICD comes from icd.js (loaded default-on,
@@ -487,7 +503,7 @@
     if (f.k === "textarea") {
       var extra = f.n === "provisional_diagnosis" ? (icdBtn(f.n) + icdSuggestBtn(f.n)) : "";
       var panel = f.n === "provisional_diagnosis" ? '<div class="oe-icdsug" id="oeIcdSug"></div>' : "";
-      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + toolBtn(f.n) + extra + "</span>" + panel, f.r, re);
     }
     if (f.k === "yesno") return ynRow(f, val);
     if (f.k === "select" && f.opts && f.opts.length) {
@@ -497,7 +513,7 @@
       return fieldRow(f.l, '<span class="oe-inp-wrap"><select class="oe-inp oe-sel" data-oe-inp="' + esc(id) + '">' + optHtml + '</select>' + fmicBtn(f.n) + '</span>', f.r, re);
     }
     var type = f.k === "number" ? "number" : "text";
-    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '"' + (f.n === "informany_attendant" ? " data-phi-input" : "") + ' value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
+    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '"' + (f.n === "informany_attendant" ? " data-phi-input" : "") + ' value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + toolBtn(f.n) + "</span>", f.r, re);
   }
   // one section = a native <details> accordion (zero-JS collapse; survives typing since onInput doesn't re-render).
   // header shows a required-badge (n/m) or a filled count so the doctor sees at a glance what still needs attention.
@@ -1498,6 +1514,16 @@
     st.assessVals[field] = cur ? cur.replace(/[\s;]+$/, "") + "; " + text : text;
     st.assessTouched[field] = true;
   }
+  function openFieldTool(field) {
+    if (!kitsOn()) return;
+    var T = G.SMD_KITS.fieldTool(field); if (!T) return;
+    var go = function () { st.toolSheet = { field: field }; paint(); };
+    // the tool needs the kit bundle (doses, charts) and, for growth, the WHO tables: open at once, they fill in when they arrive
+    var need = [G.SMD_KITS.loadKits && G.SMD_KITS.loadKits()];
+    if (T.id === "growth-who" && G.SMD_KITS.loadGrowth) need.push(G.SMD_KITS.loadGrowth());
+    go();
+    Promise.all(need.map(function (p) { return p && p.then ? p.then(null, function () {}) : null; })).then(function () { if (st.toolSheet && st.toolSheet.field === field) paint(); });
+  }
   var kitHost = {
     kind: "opd",
     canWrite: function () { return !!st.writeOn && !st.assessAuthorized; },
@@ -1510,13 +1536,14 @@
     fieldLabel: function (n) { return OPD_LABEL[n] || String(n).replace(/_/g, " "); },
     insert: function (field, text, sets) {
       st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      st.toolSheet = null;   // a tool opened from a field closes once it has written into the note
       if (text) kitAppend(field, text);
       var n = 0;
       Object.keys(sets || {}).forEach(function (name) { var v = voiceCoerce(name, sets[name]); if (v != null) { st.assessVals[name] = v; st.assessTouched[name] = true; n++; } });
       paint();
       toast("Added to " + kitHost.fieldLabel(field) + (n ? " and " + n + " more field" + (n > 1 ? "s" : "") : "") + ". Save the assessment to keep it.");
     },
-    repaint: function () { if (st.tab === "kit") paint(); },
+    repaint: function () { if (st.tab === "kit" || st.toolSheet) paint(); },
     protocol: function (id, opts) { st._protoInit = true; st.tab = "protocol"; paint(); if (opts && opts.assign && protoAssignOn()) openProtoAssign(id); else openKbProtocol(id); },
     canAssignProtocol: function () { return protoAssignOn(); },
     // Calculators render in the MEDCALC overlay (z 870), under this overlay (12010): lift it for the
@@ -1558,7 +1585,7 @@
       else if (active === "kit") body = head + kitTab(st);
       else body = head + profileTab(st);
     }
-    var app = '<div class="oe-app">' + header() + recordingBanner(st) + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
+    var app = '<div class="oe-app">' + header() + recordingBanner(st) + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>" + toolSheetHtml(st);
     if (st.report && st.report.open) return app + reportView(st.report);   // report drawer overlays the workspace
     if (st.doseDrawer) return app + ((G.SMD_ONCOUI && G.SMD_ONCOUI.doseDrawerView) ? G.SMD_ONCOUI.doseDrawerView(st.doseDrawer) : "");   // dose drawer, cloned from the report-drawer pattern
     return app;
@@ -1970,6 +1997,8 @@
     if (cmd === "tab") return switchTab(arg);
     if (cmd === "lab" || cmd === "rad") return openReport(cmd, arg);
     if (cmd === "report-close") { st.report = null; paint(); return; }
+    if (cmd === "kit-tool") return openFieldTool(arg);
+    if (cmd === "kit-tool-close") { st.toolSheet = null; paint(); return; }
     if (cmd === "labtrend") return openLabTrend(arg);
     if (cmd === "trend-close") { st.trend = null; paint(); return; }
     if (cmd === "inv-pick") { var s = st.invResults[+arg]; if (s) { st.invDraft = { service: s, diagnosis: (st.invDraft && st.invDraft.diagnosis) || "", emergency: false }; st.invResults = []; st.invQuery = ""; paint(); } return; }

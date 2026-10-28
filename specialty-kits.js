@@ -1461,6 +1461,13 @@
     if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null, kitId: kit.id, kitSummary: host.kind === "opd" ? kitSummary(kit, k) : "" }); return; }
     if (cmd === "picker") { k.picker = !k.picker; host.repaint(); if (k.picker && D) { var qi = D.getElementById("kit_picker_q"); if (qi) try { qi.focus(); } catch (e) {} } return; }
     if (cmd === "mine") { setMySpecialty(arg, "manual"); toast("Saved as your specialty."); host.repaint(); return; }
+    // a tool needs no kit: the one-tool sheet inside a host's notes has none selected
+    if (cmd === "tool") {
+      var T = TOOLS[arg]; if (!T || !T.text) return;
+      var tt = T.text(toolState(k, arg));
+      if (!tt) { toast(arg === "growth-who" && !GROWTH ? "Growth tables are still loading." : "Nothing to add yet."); return; }
+      apply(host, T.target, tt, T.sets ? T.sets(toolState(k, arg)) : {}); return;
+    }
     if (!kit) return;
     if (cmd === "sec") {
       var sec = findSection(kit, arg); if (!sec) return;
@@ -1471,12 +1478,6 @@
       apply(host, sec.target, text, sets); return;
     }
     if (cmd === "clr") { var s2 = findSection(kit, arg); if (s2) s2.fields.forEach(function (f) { delete k.vals[f.id]; }); host.repaint(); return; }
-    if (cmd === "tool") {
-      var T = TOOLS[arg]; if (!T || !T.text) return;
-      var tt = T.text(toolState(k, arg));
-      if (!tt) { toast(arg === "growth-who" && !GROWTH ? "Growth tables are still loading." : "Nothing to add yet."); return; }
-      apply(host, T.target, tt, T.sets ? T.sets(toolState(k, arg)) : {}); return;
-    }
     if (cmd === "adv") { var a = (kit.advice || []).filter(function (x) { return x.id === arg; })[0]; if (a) apply(host, a.target, a.text, {}); return; }
     if (cmd === "inv") { var inv = (kit.investigations || [])[+arg]; if (inv && host.investigate) host.investigate(inv.query); return; }
     if (cmd === "invtick") { var sel = invSelOf(k); sel[+arg] = !sel[+arg]; host.repaint(); return; }
@@ -1570,7 +1571,33 @@
     D.addEventListener("smd:profile-loaded", onProfile, false);
   }
 
+  /* ======================================= tool buttons inside a host's own notes (owner 2026-10-28) =======================================
+   * Not a separate module: the OPD notes put a small button beside the field a tool belongs to (LMP, Weight and Height, Local
+   * examination, Management plan). It opens just that tool in a small sheet; its Add button writes into the tool's own target field
+   * (the same insert the Specialty tab uses). Which buttons show follows the doctor's specialty: an obstetrician sees the dating
+   * button, a paediatrician the growth chart; with no specialty set, all of them. */
+  var FIELD_TOOLS = { LMP: "pregnancy-dating", Weight: "growth-who", Height: "growth-who", local_examination: "burns-chart", management_plan: "la-dose" };
+  var KIT_FIELD_TOOLS = {
+    obgyn: ["pregnancy-dating"], paediatrics: ["growth-who"], anaesthesia: ["la-dose"], emergency: ["burns-chart", "la-dose", "growth-who"],
+    "general-surgery": ["burns-chart", "la-dose"], orthopaedics: ["la-dose", "burns-chart"], "community-medicine": ["growth-who", "pregnancy-dating"]
+  };
+  /* fieldTool(fieldName) -> { id, title, icon } for the tool button that belongs beside that field for this doctor, else null. */
+  function fieldTool(field) {
+    var id = FIELD_TOOLS[field];
+    if (!id || !TOOLS[id] || !flagOn()) return null;
+    var mine = mySpecialty();
+    if (mine && (KIT_FIELD_TOOLS[mine] || []).indexOf(id) < 0) return null;
+    return { id: id, title: TOOLS[id].title, icon: TOOLS[id].icon };
+  }
+  /* toolSheetBody(id, { host, key }) -> the one tool's card, wired like the kit tab (same state key, same Add). */
+  function toolSheetBody(id, ctx) {
+    if (!TOOLS[id] || !ctx || !ctx.host) return "";
+    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + ctx.host.kind + '">' + toolHtml(id, ks(ctx.key), ctx.host) + "</div>";
+  }
+  function toolTitle(id) { return TOOLS[id] ? TOOLS[id].title : ""; }
+
   var API = {
+    fieldTool: fieldTool, toolSheetBody: toolSheetBody, toolTitle: toolTitle, _FIELD_TOOLS: FIELD_TOOLS, _KIT_FIELD_TOOLS: KIT_FIELD_TOOLS,
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
     KITS_V: KITS_V, GROWTH_V: GROWTH_V, DUTY_LINE: DUTY_LINE, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,
