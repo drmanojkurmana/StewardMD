@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-28 · ICU Group/Solo switch works in place, no app restart (owner: "restarts whole app")
+
+**Decision.** The Settings → Group mode switch calls `grpSetMode(on)` in `icu.js`: it writes `smd_icu_groups`, tears
+down every shared-unit listener and timer (`grpStopAll`), reloads the unit's solo buffer onto the board, and on the way
+back re-runs `grpEnsureGroupsSub`. It used to `location.reload()`, which restarted the whole app (splash, home, every
+module) to flip one ICU setting. `icu-collab.js` now defaults group mode ON like `icu.js` (it said OFF, so a fresh
+install showed the group board over an inert API until the user toggled twice to write "1").
+**Trade-off.** None known; the device roster and solo buffers are untouched, as before.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild. Tests:
+`test/run-icu-grptoggle.mjs`, `test/run-icu-board-order.mjs`.
+
 ## 2026-10-16 · No page zoom above 1.0 on iPad (owner: "many modules go out of screen and are not operable")
 
 **Decision.** On a large touch screen (`bigTouchD`: touch points > 1, shorter screen side >= 600) the Display auto fit no

@@ -75,7 +75,10 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   Gotcha: label changes can move `monitorRegion`, invalidating crop caches; run without --cached-only
   (and in foreground chunks on the 8 GB Mac: background runs get killed for low memory).
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
-- ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
+- ICU v2 + collab — v2 is the only dashboard (`icuV2On()` always true). Group mode `smd_icu_groups` defaults ON in
+  BOTH `icu.js` and `icu-collab.js` (only "0" = solo). Settings switch = `grpSetMode()`, in place, no reload
+  (2026-10-28; it used to `location.reload()` the whole app). `grpStopAll()` is the one teardown for every shared-unit
+  listener/timer. Test: `test/run-icu-grptoggle.mjs`.
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed
 - Lab Watch — needs Google/Apple sign-in for 24/7
 
@@ -87,6 +90,12 @@ radii `--r:12 / --r-sm:10 / --r-xs:8 / --r-pill`, `--sh` (1px hairline) + `--sh-
 Rules of the system: hairlines separate (not shadows); status colour is reserved for status (a stable
 bed tile is neutral); header chrome is FLAT `--primary2`, never a gradient; numbers use tabular
 figures; selection is colour + weight, press is brightness. See [[Decisions]] (2026-08-22).
+**Never `text-transform:uppercase` a clinical label.** Labels are authored in clinical case (pH, PaCO₂, SpO₂, FiO₂,
+HCO₃⁻); uppercase turned them into "PH", "PACO₂", "SPO₂". Tile labels (`.icu-vc .vl`), board vital keys
+(`.icu-v2-vk`) and header chips (`.icu-v2-mv-k`) are sentence/clinical case since 2026-10-28.
+Floating buttons: camera `#icuSnap` and Lab Watch `#icuWatch` (48px icon button above it in v2); `#icuRoot.icu-has-fab`
+gives `.icu-scroll` 150px bottom room so the last card clears both. The swipe "Remove" action is
+`visibility:hidden` until a swipe starts (`.sw-on`), or it bleeds through each card's rounded corner as a red arc.
 
 ## Calculators
 CAM-ICU was added 2026-09-19 (`calculators.js`, id `camicu`), the one ICU score the file lacked. It
@@ -97,6 +106,9 @@ CAM (`cam`, Neurology, Inouye 1990), which needs a patient who can be interviewe
 reachable from `MEDCALC.find`. Test: `test/camicu.test.mjs`.
 
 ## Gotchas
+- **Severity sorts use `rankOf(map, k)`, never `map[k] || 9`.** Critical's rank is 0 (falsy), so the old idiom sorted
+  CRITICAL patients to the BOTTOM of the unit board (solo and group) and crit alerts below warnings. Fixed 2026-10-28;
+  test `test/run-icu-board-order.mjs`.
 - Chips feed the engine with NO rebaseline (icu.js only).
 - SW-warmup flakiness in headless tests (warmup protocol).
 - **Always read current vitals via `mergedVitals(_raw.vitals)`, never `latestVitals()`.**

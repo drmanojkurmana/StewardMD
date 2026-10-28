@@ -154,6 +154,9 @@
   // Latest reading = the one with the newest TIMESTAMP (not merely the last-pushed element).
   function latestByTs(arr) { if (!arr || !arr.length) return {}; var b = arr[0]; for (var i = 1; i < arr.length; i++) { if (((arr[i] && arr[i].ts) || 0) >= ((b && b.ts) || 0)) b = arr[i]; } return b || {}; }
   function latestVitals() { return latestByTs(_raw.vitals); }
+  // Rank lookup for severity sorts. NOT `map[k] || 9`: the most urgent rank is 0, which is falsy, so
+  // that idiom sent critical patients to the BOTTOM of the unit board and crit alerts below warnings.
+  function rankOf(map, k) { return Object.prototype.hasOwnProperty.call(map, k) ? map[k] : 9; }
   // Forward-filled "current vitals" snapshot: the newest non-null value for EACH field across the series,
   // NOT just the newest-timestamp row (R1 C1). A sparse update (e.g. re-charting only SpO2) must NOT blank
   // MAP / lactate / GCS and silently drop still-active critical alerts and vital-based scores. Mirrors how
@@ -250,7 +253,7 @@
     }
 
     var order = { crit: 0, warn: 1, info: 2 };
-    a.sort(function (x, y) { return (order[x.severity] || 9) - (order[y.severity] || 9); });
+    a.sort(function (x, y) { return rankOf(order, x.severity) - rankOf(order, y.severity); });
     s.alerts = a;
     // ---- auto-computed clinical scores (icu-autoscores.js → MEDCALC formulas) ----
     try { s.scores = window.ICU_AUTOSCORES ? window.ICU_AUTOSCORES.compute(s, window.MEDCALC) : []; }
@@ -1041,7 +1044,7 @@
       '.icu-vc-tap:focus-visible{outline:2px solid var(--primary);outline-offset:2px}' +
       '.icu-vc-edit{position:absolute;top:5px;right:7px;font-size:10.5px;line-height:1;color:var(--muted);opacity:.5}' +
       '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
-      '.icu-vc .vl{font:600 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.icu-vc .vl{font:600 11.5px var(--font);letter-spacing:.005em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
       '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
       '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
@@ -1326,7 +1329,7 @@
       '#icuRoot.icu-v2 .icu-v2-banner-meta{font:400 12px var(--font);color:rgba(255,255,255,.8);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-banner-vitals{display:flex;gap:6px;margin-top:12px}' +
       '#icuRoot.icu-v2 .icu-v2-mv{flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:6px 4px 7px;text-align:center;min-width:0}' +
-      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 8.5px var(--font);color:rgba(255,255,255,.75);letter-spacing:.09em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 10.5px var(--font);color:rgba(255,255,255,.78);letter-spacing:.005em}' +
       '#icuRoot.icu-v2 .icu-v2-mv-v{font:600 15px var(--mono);margin-top:3px;letter-spacing:-.01em;color:#fff}' +
       // abnormal mini-vitals stand out on the acuity-coloured banner (ring/weight, not colour alone)
       '#icuRoot.icu-v2 .icu-v2-mv.warn{background:rgba(255,255,255,.26)}' +
@@ -1388,7 +1391,7 @@
       '#icuRoot.icu-v2 .icu-v2-attn-detail{font:500 12px var(--font);color:var(--muted);margin-top:3px;line-height:1.4}' +
       // Filters read as one segmented control: equal-height squared chips on a hairline, selected
       // state a solid teal. No pill cloud.
-      '#icuRoot.icu-v2 .icu-v2-filters{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 12px}' +
+      '#icuRoot.icu-v2 .icu-v2-filters{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:16px -16px 12px;padding:0 16px}#icuRoot.icu-v2 .icu-v2-filters::-webkit-scrollbar{display:none}#icuRoot.icu-v2 .icu-v2-filters>*{flex:0 0 auto}' +
       '#icuRoot.icu-v2 .icu-v2-fchip{border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 13px;min-height:40px;cursor:pointer;transition:color var(--ease),border-color var(--ease),background var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-fchip:active{background:var(--panel2)}' +
       '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}' +
@@ -1398,7 +1401,7 @@
       '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:var(--r);padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:8px;transition:border-color var(--ease),box-shadow var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-card:active{box-shadow:var(--sh-lift)}' +
       // swipe-to-remove row: the red action sits BEHIND the (opaque) card and is revealed by dragging left
-      '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}' +
+      '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}#icuRoot.icu-v2 .icu-v2-swipe:not(.sw-on)>.icu-v2-swipe-act{visibility:hidden}' +
       '#icuRoot.icu-v2 .icu-v2-swipe .icu-v2-card{position:relative;z-index:1;touch-action:pan-y}' +
       '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.04em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
       '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}#icuRoot.icu-v2 .icu-v2-card.unassessed{border-left-color:var(--muted)}' +
@@ -1423,7 +1426,7 @@
       // Vitals row: evenly divided columns on a hairline, so values line up down the whole board.
       '#icuRoot.icu-v2 .icu-v2-vstrip{display:flex;gap:0;margin-top:11px;padding-top:10px;border-top:1px solid var(--border-soft)}' +
       '#icuRoot.icu-v2 .icu-v2-vc{flex:1;min-width:0;padding-right:12px}' +
-      '#icuRoot.icu-v2 .icu-v2-vk{font:600 9px var(--font);color:var(--muted);letter-spacing:.09em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-vk{font:600 11px var(--font);color:var(--muted);letter-spacing:.005em}' +
       '#icuRoot.icu-v2 .icu-v2-vv{font:600 14px var(--mono);color:var(--ink);margin-top:3px;letter-spacing:-.01em}' +
       '#icuRoot.icu-v2 .icu-v2-vc.crit .icu-v2-vv{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-vc.warn .icu-v2-vv{color:var(--warn)}' +
       // Provenance strip: who touched this record and when. Recessed surface, quiet type.
@@ -1486,7 +1489,11 @@
       '#icuRoot.icu-v2 .icu-v2-admit{color:var(--primary)}#icuRoot.icu-v2 .icu-v2-admit-ic{width:30px;height:30px;border-radius:var(--r-xs);background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}#icuRoot.icu-v2 .icu-v2-admit .icu-ico{width:18px;height:18px;color:#fff}' +
       // v2 FAB positions (no bottom bar on the patient screen)
       '#icuRoot.icu-v2 #icuSnap{bottom:calc(24px + env(safe-area-inset-bottom))}' +
-      '#icuRoot.icu-v2 #icuWatch{bottom:calc(90px + env(safe-area-inset-bottom))}' +
+      // Lab Watch rides ABOVE the camera as a 48px icon button (the 170px labelled pill sat over the
+      // vitals grid at every scroll position); the scroll gets room so the last card clears both.
+      '#icuRoot.icu-v2 #icuWatch{bottom:calc(88px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px;padding:0;border-radius:50%;justify-content:center}' +
+      '#icuRoot.icu-v2 #icuWatch .icu-lw-lbl{display:none}#icuRoot.icu-v2 #icuWatch .icu-ico{width:21px;height:21px}' +
+      '#icuRoot.icu-v2.icu-has-fab .icu-scroll{padding-bottom:calc(150px + env(safe-area-inset-bottom))}' +
       // ── group mode (smd_icu_groups, Phase 2) — additive, scoped under #icuRoot.icu-v2 ──
       // unit switcher (the header title becomes a tappable group picker)
       '#icuRoot.icu-v2 .icu-v2-gswitch{flex:1;min-width:0;border:none;background:none;color:inherit;text-align:left;cursor:pointer;padding:0;font:700 17px var(--font)}' +
@@ -4212,7 +4219,7 @@
     // displaced from the top by one who simply has no data yet (which could just as easily be a
     // routine, minutes-old admission). Revisit this ordering once the owner has watched it run.
     var rank = { critical: 0, review: 1, unassessed: 2, stable: 3 };
-    list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
+    list.sort(function (a, b) { var d = rankOf(rank, a.sev) - rankOf(rank, b.sev); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
     return list;
   }
   function v2CardVitals(s) {
@@ -4453,7 +4460,7 @@
   function renderV2Settings() {
     var grpOn = icuGroupsOn();
     // iOS-style toggle (replaces the old solo/group button). Same data-icu-act="grptoggle" handler
-    // (flip smd_icu_groups + reload). Conditional inline styles render the on/off state directly.
+    // (grpSetMode: flips smd_icu_groups in place, no reload). Inline styles render the on/off state.
     var swBg = grpOn ? "#0e6e63" : "rgba(120,140,150,.35)", knob = grpOn ? "22px" : "3px";
     var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
       '<button class="icu-grp-toggle" data-icu-act="grptoggle" role="switch" aria-checked="' + grpOn + '" aria-label="Group mode" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:4px 0 2px">' +
@@ -4463,7 +4470,7 @@
       '</button>' +
       '<p class="icu-doc-sub" style="margin:10px 0 0">' + (grpOn
         ? "Switching off affects this device only — your shared units stay for the rest of the team."
-        : "Turn on to invite your team and share patients &amp; round tasks. Reopens the app to sync.") + '</p></div>';
+        : "Turn on to invite your team and share patients &amp; round tasks.") + '</p></div>';
     var notifCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Notifications</div>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">Choose which unit alerts reach you, and check that push is working on this device.</p>' +
       (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
@@ -4672,7 +4679,7 @@
     // displaced from the top by one who simply has no data yet (which could just as easily be a
     // routine, minutes-old admission). Revisit this ordering once the owner has watched it run.
     var rank = { critical: 0, review: 1, unassessed: 2, stable: 3 };
-    list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
+    list.sort(function (a, b) { var d = rankOf(rank, a.sev) - rankOf(rank, b.sev); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
     return list;
   }
 
@@ -4799,6 +4806,34 @@
     try { return (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; }
   }
   function grpStopSubRetry() { if (_grpSubRetry) { try { clearInterval(_grpSubRetry); } catch (e) {} _grpSubRetry = null; } }
+  // Drop EVERY shared-unit listener, timer and cache so solo mode runs with no Firestore traffic.
+  // The device roster and solo buffers are untouched.
+  function grpStopAll() {
+    grpStopSubRetry();
+    if (_grpConnTO) { try { clearTimeout(_grpConnTO); } catch (e) {} _grpConnTO = null; }
+    if (_grpSubErrTimer) { try { clearTimeout(_grpSubErrTimer); } catch (e) {} _grpSubErrTimer = null; }
+    _grpSubErrTries = 0;
+    grpTeardownPatient();
+    grpClearTaskSubs();
+    if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
+    if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
+    if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
+    var api = groupsApi(); try { if (api && api.setActiveGroup) api.setActiveGroup(null, null); } catch (e) {}
+    _grp = null; _grpList = null; _grpPatients = null; _grpMembers = null; _grpErr = null; _grpJustCreated = null;
+  }
+  // Solo <-> Group switch IN PLACE. It used to write the flag and location.reload(), which restarted
+  // the whole app (home screen, splash, every module re-booted) just to flip one ICU setting.
+  function grpSetMode(on) {
+    try { localStorage.setItem("smd_icu_groups", on ? "1" : "0"); } catch (e) {}
+    grpStopAll();
+    // Back to this unit's own solo buffer on the board (a shared patient never stays on screen).
+    try { selectUnit({ cat: _unit.cat || "icu", type: _unit.type, hospital: _unit.hospital }); } catch (e) {}
+    if (on) { try { grpEnsureGroupsSub(); } catch (e) {} }
+    try { notifyUnitsChanged(); } catch (e) {}
+    _screen = "settings"; _paintTop = true;
+    if (ICU.isOpen()) paint();
+    if (window.toast) toast(on ? "Group mode on. Loading your shared units." : "Solo mode on. This device only.");
+  }
   function grpEnsureGroupsSub() {
     // The live groups subscription needs TWO independent async signals ready: (1) the collab API
     // (window.SMD_ICU_GROUPS, loaded by icu-collab.js) and (2) Firebase AUTH resolved (the query is
@@ -6331,10 +6366,11 @@
     } else {
       var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
       var watchFab = labWatchOn()
-        ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
+        ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span class="icu-lw-lbl">Lab Watch 24/7</span></button>'
         : "";
       rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + fab;
     }
+    rootEl.classList.toggle("icu-has-fab", !!rootEl.querySelector("#icuWatch, #icuSnap"));
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
     // Keep the active workspace tab centred in the horizontally-scrollable tab strip so it's never
     // hidden off-screen (the strip now scrolls instead of cramming all tabs into one fixed row).
@@ -8777,7 +8813,19 @@
    * v2SwipeChooser. Delegated on #icuRoot, so re-renders need no re-binding. */
   var SW_W = 104;                                    // matches .icu-v2-swipe-act width
   var _swEl = null, _swOpen = null, _swX = 0, _swY = 0, _swBase = 0, _swDx = 0, _swLock = "", _swTapKill = false;
-  function swSet(el, x, anim) { if (!el) return; el.style.transition = anim ? "transform .2s ease" : "none"; el.style.transform = x ? "translateX(" + x + "px)" : ""; }
+  // The red action sits UNDER the card; it is only shown while the card is moved, or it bleeds
+  // through the card's anti-aliased rounded corners as a red arc on every row at rest.
+  function swSet(el, x, anim) {
+    if (!el) return;
+    var wrap = el.parentNode;
+    if (wrap && wrap.classList) {
+      if (wrap._swHide) { clearTimeout(wrap._swHide); wrap._swHide = null; }
+      if (x) wrap.classList.add("sw-on");
+      else if (anim) wrap._swHide = setTimeout(function () { wrap._swHide = null; wrap.classList.remove("sw-on"); }, 220);
+      else wrap.classList.remove("sw-on");
+    }
+    el.style.transition = anim ? "transform .2s ease" : "none"; el.style.transform = x ? "translateX(" + x + "px)" : "";
+  }
   function swClose() {
     if (_swOpen && document.body.contains(_swOpen)) swSet(_swOpen, 0, true);
     _swOpen = null;
@@ -8915,7 +8963,7 @@
       case "unitback": _pickStep = "units"; _paintTop = true; paint(); break;
       case "unitsel": { var _uc = arg.indexOf(":"); selectUnit({ cat: arg.slice(0, _uc), type: decodeURIComponent(arg.slice(_uc + 1)) }); _paintTop = true; paint(); break; }
       case "unitgrpnew": grpOpenCreate(arg); break;
-      case "grptoggle": try { if (icuGroupsOn()) localStorage.setItem("smd_icu_groups", "0"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
+      case "grptoggle": grpSetMode(!icuGroupsOn()); break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
       case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint(); break; }
