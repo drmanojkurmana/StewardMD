@@ -1450,6 +1450,47 @@
     var out = el.closest("[data-kit-root]").querySelector('[data-kit-out="' + toolId + '"]');
     if (out) out.innerHTML = TOOLS[toolId].out(t);
   }
+  function secSets(sec, k) {
+    var sets = {};
+    (sec.fields || []).forEach(function (f) { if (f.set && k.vals[f.id] != null && String(k.vals[f.id]).trim() !== "" && f.type !== "check") sets[f.set] = f.type === "date" && parseISO(k.vals[f.id]) ? fmtDate(parseISO(k.vals[f.id])) : String(k.vals[f.id]).trim(); });
+    return sets;
+  }
+  /* Everything filled in the current kit as export items { label, target, text, sets }: its sections, then its tools, each aimed at the
+     EMR field the kit already names for it. */
+  function exportItems(kit, k) {
+    var out = [];
+    (kit.sections || []).forEach(function (sec) { var t = composeSection(sec, k.vals); if (t) out.push({ label: sec.title || sec.id, target: sec.target, text: t, sets: secSets(sec, k) }); });
+    (kit.tools || []).forEach(function (id) {
+      var T = TOOLS[id]; if (!T || !T.text || !k.tools[id]) return;
+      var t = ""; try { t = T.text(k.tools[id]); } catch (e) { t = ""; }
+      if (t) out.push({ label: T.title, target: T.target, text: t, sets: T.sets ? T.sets(k.tools[id]) : {} });
+    });
+    return out;
+  }
+  /** Export to the EMR. mode "each" (one tap): every item into its own field. mode "one": all items joined into ONE text block in
+   *  opts.field. One repaint and one toast either way (host.insertMany). Returns the number of items exported. */
+  function exportAll(opts) {
+    var host = opts.host, k = ks(opts.key), kit = kitById(k.kitId);
+    if (!kit) { toast("Pick a specialty kit first."); return 0; }
+    if (!host.canWrite() || !host.ready()) { toast(host.canWrite() ? (host.readyNote ? host.readyNote() : "Not ready yet.") : (host.writeNote ? host.writeNote() : "This note cannot be written.")); return 0; }
+    var items = exportItems(kit, k);
+    if (!items.length) { toast(!GROWTH && (kit.tools || []).indexOf("growth-who") >= 0 ? "Growth tables are still loading." : "Nothing to export yet. Use a tool or fill a section first."); return 0; }
+    var list;
+    if (opts.mode === "one") {
+      var sets = {}; items.forEach(function (it) { Object.keys(it.sets || {}).forEach(function (n) { sets[n] = it.sets[n]; }); });
+      list = [{ field: opts.field || "History_present_illness", text: kit.label + " (" + items.map(function (it) { return it.label; }).join(", ") + "):\n" + items.map(function (it) { return it.text; }).join("\n"), sets: sets }];
+    } else list = items.map(function (it) { return { field: it.target, text: it.text, sets: it.sets || {} }; });
+    if (host.insertMany) host.insertMany(list); else list.forEach(function (it) { host.insert(it.field, it.text, it.sets); });
+    return items.length;
+  }
+  /* The kit that holds a tool, preferring the doctor's own: the kit sheet opens there when a field button is tapped. */
+  function kitHoldingTool(toolId) {
+    var mine = kitById(mySpecialty());
+    if (mine && (mine.tools || []).indexOf(toolId) >= 0) return mine.id;
+    var hit = (kitList() || []).filter(function (kk) { return (kk.tools || []).indexOf(toolId) >= 0; })[0];
+    return hit ? hit.id : "";
+  }
+
   function onClick(e) {
     var btn = e.target && e.target.closest && e.target.closest("[data-kit-act]"); if (!btn) return;
     var act = btn.getAttribute("data-kit-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
@@ -1472,8 +1513,7 @@
     if (cmd === "sec") {
       var sec = findSection(kit, arg); if (!sec) return;
       var text = composeSection(sec, k.vals);
-      var sets = {};
-      sec.fields.forEach(function (f) { if (f.set && k.vals[f.id] != null && String(k.vals[f.id]).trim() !== "" && f.type !== "check") sets[f.set] = f.type === "date" && parseISO(k.vals[f.id]) ? fmtDate(parseISO(k.vals[f.id])) : String(k.vals[f.id]).trim(); });
+      var sets = secSets(sec, k);
       if (!text) { toast("Fill in at least one finding first."); return; }
       apply(host, sec.target, text, sets); return;
     }
@@ -1597,6 +1637,7 @@
   function toolTitle(id) { return TOOLS[id] ? TOOLS[id].title : ""; }
 
   var API = {
+    exportAll: exportAll, exportItems: function (key) { var kk = ks(key), kit = kitById(kk.kitId); return kit ? exportItems(kit, kk) : []; }, kitHoldingTool: kitHoldingTool,
     fieldTool: fieldTool, toolSheetBody: toolSheetBody, toolTitle: toolTitle, _FIELD_TOOLS: FIELD_TOOLS, _KIT_FIELD_TOOLS: KIT_FIELD_TOOLS,
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
