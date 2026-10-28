@@ -14,22 +14,22 @@
 
   var L10N = {
     en: {
-      backHub: "Back to Narkē", caseOf: "Case {i} of {n}", askCapno: "Which capnogram is this?", askMon: "What is the most likely problem?",
+      backHub: "Back to Anesthetica", caseOf: "Case {i} of {n}", askCapno: "Which capnogram is this?", askMon: "What is the most likely problem?",
       teaching: "Teaching signal, not patient data", right: "Correct", wrong: "Not this one", answer: "Answer", yours: "Yours",
       see: "What the trace shows", points: "Teaching points", sources: "Sources", nextReview: "Next review in", day: "day", days: "days",
       next: "Next case", capAria: "Capnograph screen, synthetic teaching signal", monAria: "Monitor screen, synthetic teaching signal",
-      noModel: "The teaching signals did not load. Close Narkē, check your connection and open it again.", close: "Close Narkē",
+      noModel: "The teaching signals did not load. Close Anesthetica, check your connection and open it again.", close: "Close Anesthetica",
       notConn: "Not connected", trend: "EtCO2, last 15 min", co2: "CO2 mmHg", ecg: "ECG II", pleth: "Pleth", nibp: "NIBP", hr: "HR",
       spo2: "SpO2 %", etco2: "EtCO2", rr: "RR", sweepFast: "8 s", sweepSlow: "24 s", keys: "Keys 1 to 4 choose an answer.",
       maikCap: "I am learning to read capnograms. This synthetic teaching trace shows: {t}. I chose: {m}. Explain the features that identify it and how to tell it from my choice.",
       maikMon: "I am learning to read anaesthesia monitors. This synthetic teaching case is: {t}. I chose: {m}. Explain the monitor clues that point to it and the first actions."
     },
     hi: {
-      backHub: "नार्के पर वापस", caseOf: "{n} में से केस {i}", askCapno: "यह कौन सा कैपनोग्राम है?", askMon: "सबसे संभावित समस्या क्या है?",
+      backHub: "एनेस्थेटिका पर वापस", caseOf: "{n} में से केस {i}", askCapno: "यह कौन सा कैपनोग्राम है?", askMon: "सबसे संभावित समस्या क्या है?",
       teaching: "शिक्षण सिग्नल, मरीज़ का डेटा नहीं", right: "सही", wrong: "यह नहीं", answer: "उत्तर", yours: "आपका",
       see: "ट्रेस क्या दिखाता है", points: "मुख्य बातें", sources: "स्रोत", nextReview: "अगला दोहराव", day: "दिन में", days: "दिन में",
       next: "अगला केस", capAria: "कैपनोग्राफ़ स्क्रीन, कृत्रिम शिक्षण सिग्नल", monAria: "मॉनिटर स्क्रीन, कृत्रिम शिक्षण सिग्नल",
-      noModel: "शिक्षण सिग्नल लोड नहीं हुए। नार्के बंद करें, कनेक्शन जांचें और फिर खोलें।", close: "नार्के बंद करें",
+      noModel: "शिक्षण सिग्नल लोड नहीं हुए। एनेस्थेटिका बंद करें, कनेक्शन जांचें और फिर खोलें।", close: "एनेस्थेटिका बंद करें",
       notConn: "जुड़ा नहीं", trend: "EtCO2, पिछले 15 मिनट", co2: "CO2 mmHg", ecg: "ECG II", pleth: "Pleth", nibp: "NIBP", hr: "HR",
       spo2: "SpO2 %", etco2: "EtCO2", rr: "RR", sweepFast: "8 s", sweepSlow: "24 s", keys: "उत्तर चुनने के लिए 1 से 4 कुंजियाँ।",
       maikCap: "I am learning to read capnograms. This synthetic teaching trace shows: {t}. I chose: {m}. Explain the features that identify it and how to tell it from my choice.",

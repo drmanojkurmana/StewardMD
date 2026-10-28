@@ -10,9 +10,9 @@ const read = (f) => readFileSync(f, "utf8");
 
 test("app boot loads only narke-loader.js; the loader lists the engine then narke.js at its own token", () => {
   const html = read("index.html");
-  assert.deepEqual(html.match(/narke[-.\w]*\.(js|css)\?v=\w+/g), ["narke-loader.js?v=nrk9"]);
+  assert.deepEqual(html.match(/narke[-.\w]*\.(js|css)\?v=\w+/g), ["narke-loader.js?v=nrk10"]);
   const L = read("narke-loader.js"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "nrk9");
+  assert.equal(v, "nrk10");
   for (const f of ["specialty.css", "narke.css", "specialty-core.js", "specialty-shell.js", "specialty-notes.js", "narke.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-notes.js"') < L.indexOf('"narke.js"'), "engine before the host");
   assert.ok(!/tokos/i.test(L), "no Tokós name in the Narkē loader");
@@ -44,11 +44,11 @@ test("swipe-back wires NARKE like TOKOS", () => {
 
 test("Review Desk: a Narkē tab whose items name Narkē and never list Tokós clinics", () => {
   const R = createRequire(import.meta.url)("../review-desk.js");
-  assert.ok(/\["narke", "Narkē"\]/.test(read("review-desk.js")));
+  assert.ok(/\["narke", "Anesthetica"\]/.test(read("review-desk.js")));
   const items = R._tokosMore({ learn: { units: [{ id: "as1", title: { en: "Anaesthesiology as a specialty" }, level: "mbbs", lessons: ["as1-a"] }], lessons: { "as1-a": {} } },
     bank: { topics: [{ id: "airway", title: { en: "Airway" }, count: 3 }] }, models: { "tool-x": { id: "tool-x", kind: "tool", title: { en: "X" }, sources: [], examples: [{}] } } }, "narke");
   assert.deepEqual(items.map((x) => x.id), ["unit-as1", "bank-airway", "tool-tool-x"]);
-  assert.ok(items.every((x) => /^Narkē /.test(x.title)), items.map((x) => x.title).join(" | "));
+  assert.ok(items.every((x) => /^Anesthetica /.test(x.title)), items.map((x) => x.title).join(" | "));
   const tok = R._tokosMore({ learn: { units: [], lessons: {} } });
   assert.deepEqual(tok.map((x) => x.id), ["clinic-fetal-planes", "clinic-hc-biometry"], "Tokós default unchanged");
 });

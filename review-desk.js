@@ -27,10 +27,10 @@
   function ms(n) { return '<span class="material-symbols-outlined kit-ic" aria-hidden="true">' + n + "</span>"; }
   function toast(m) { try { (G.toast || G.SMD_toast) && (G.toast || G.SMD_toast)(m); } catch (e) {} }
   var DECISIONS = [["approve", "Approve as it is"], ["approve-minor", "Approve after the minor edits I describe"], ["changes", "Needs changes before use"]];
-  var KINDS = [["protocol", "Protocols"], ["kit", "Specialty kits"], ["consent", "Consent templates"], ["tokos", "Tokós"], ["narke", "Narkē"]];
+  var KINDS = [["protocol", "Protocols"], ["kit", "Specialty kits"], ["consent", "Consent templates"], ["tokos", "Tokós"], ["narke", "Anesthetica"]];
   // Specialty-engine hosts with a Review Desk tab: display name, data base, models global, loader global.
   var SPEC = { tokos: { name: "Tokós", base: "SMD_TOKOS_BASE", dir: "/tokos/", models: "TOKOS_MODELS", loader: "TOKOS_LOADER" },
-    narke: { name: "Narkē", base: "SMD_NARKE_BASE", dir: "/narke/", models: "NARKE_MODELS", loader: "NARKE_LOADER" } };
+    narke: { name: "Anesthetica", base: "SMD_NARKE_BASE", dir: "/narke/", models: "NARKE_MODELS", loader: "NARKE_LOADER" } };
   function specBase(h) { return G[SPEC[h].base] || SPEC[h].dir; }
 
   function loadDecisions() { try { var o = JSON.parse((G.localStorage && G.localStorage.getItem(LS_KEY)) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
@@ -84,7 +84,7 @@
     kind("tool").forEach(function (m) { add("tool-" + m.id, N + " calculator: " + m.title.en, (m.sources || []).length + " source" + ((m.sources || []).length === 1 ? "" : "s") + ", " + (m.examples || []).length + " worked examples"); });
     kind("explorer").forEach(function (m) { add("explorer-" + m.id, N + " explorer: " + m.title.en, (m.sources || []).length + " sources, rules and teaching text"); });
     if (host === "narke") {
-      if (M.signals) { add("clinic-capno", "Narkē clinic: capnography", "Teaching points per pattern, synthetic signals"); add("clinic-monitor", "Narkē clinic: monitor reading", "Teaching points per crisis scenario, synthetic signals"); }
+      if (M.signals) { add("clinic-capno", "Anesthetica clinic: capnography", "Teaching points per pattern, synthetic signals"); add("clinic-monitor", "Anesthetica clinic: monitor reading", "Teaching points per crisis scenario, synthetic signals"); }
       return out;
     }
     if (host !== "tokos") return out;
