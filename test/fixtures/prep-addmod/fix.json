@@ -1,0 +1,75 @@
+{
+ "mods": {
+  "au-neet-fixture": 111
+ },
+ "nm": {
+  "ss-medical-oncology": [
+   {
+    "id": "au-neet-fixture",
+    "title": "Fixture Added Module",
+    "n": 2
+   }
+  ]
+ },
+ "q": {},
+ "l": {},
+ "a": [
+  {
+   "id": "mk-000000000001",
+   "q": "Fixture added question one?",
+   "o": [
+    "Alpha",
+    "Beta",
+    "Gamma",
+    "Delta"
+   ],
+   "a": 1,
+   "exp": "Beta is right in this fixture.",
+   "r": [
+    "Why A is wrong here.",
+    "Beta is right.",
+    "Why C is wrong here.",
+    "Why D is wrong here."
+   ],
+   "kp": "",
+   "d": 2,
+   "t": "au-neet-fixture",
+   "prov": "SMD",
+   "gen": "hand",
+   "sub": "ss-medical-oncology",
+   "x": {
+    "key": "Beta is right in this fixture.",
+    "others": {
+     "A": "Why A is wrong here.",
+     "C": "Why C is wrong here.",
+     "D": "Why D is wrong here."
+    },
+    "notes": "Topic line one.\n- bullet a\n- bullet b"
+   }
+  },
+  {
+   "id": "mk-000000000002",
+   "q": "Fixture added question two?",
+   "o": [
+    "Alpha",
+    "Beta",
+    "Gamma",
+    "Delta"
+   ],
+   "a": 3,
+   "exp": "Delta is right in this fixture.",
+   "r": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "kp": "",
+   "d": 2,
+   "t": "au-neet-fixture",
+   "prov": "SMD",
+   "gen": "hand",
+   "sub": "ss-medical-oncology"
+  }
+ ]
+}

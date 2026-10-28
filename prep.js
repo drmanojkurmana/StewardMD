@@ -821,7 +821,7 @@
         for (var sKey in st_maikCounts) { ovc[sKey] = st_maikCounts[sKey]; }
       }
       (ix.topics || []).forEach(function (t) { var n = ovFor(ovc, sets, sid, t.id); if (n) t.ov = n; });
-      return (st.ix[sid] = ix);
+      return addedModules(sid, ix).then(function () { return (st.ix[sid] = ix); });
     }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
   }
   /* Crosslist groups (prep/taxonomy/crosslist.json): fetched once a session like the taxonomy and kept in
@@ -861,6 +861,18 @@
     });
   }
   // A subject's index, with its cross-listed rows: the same counts the subject screen, the hub and search draw.
+  /* Modules the owner created while publishing (Author > Publish > new module): no bank file, no index row, no taxonomy entry.
+     /api/prep/fix?ix=1 lists them as nm { subject: [{ id, title, n }] }; each becomes a topic row in group "added" with its
+     published questions as the count. A slow or failed ask adds nothing (the next session tries again). */
+  function addedModules(sid, ix) {
+    return raceTo(fixIndex().then(function () { return ((load().fxix || {}).nm || {})[sid] || []; }), 2000, []).then(function (list) {
+      (list || []).forEach(function (m) {
+        if (!m || !m.id || !m.n || (ix.topics || []).some(function (t) { return t.id === m.id; })) return;
+        (ix.topics = ix.topics || []).push({ id: m.id, title: { en: String(m.title || m.id) }, group: "added", count: m.n, all: m.n, d1: 0, d2: m.n, d3: 0, usmle: 0, size: "m", added: 1 });
+      });
+      return ix;
+    }, function () { return ix; });
+  }
   function loadIndex(sid) {
     if (st.ix[sid] && st.ix[sid]._xl) return Promise.resolve(st.ix[sid]);
     if (st.ixP && st.ixP[sid]) return st.ixP[sid];
@@ -1059,7 +1071,8 @@
     if (st.mem[k]) return Promise.resolve(st.mem[k]);
     var bankErr = null, miss = { n: 0 };
     return Promise.all([loadBank(sid, mid).then(null, function (e) { bankErr = e; return []; }), loadOverlay(sid, mid, miss)]).then(function (r) {
-      if (bankErr && !r[1].length) throw bankErr;
+      var addedMod = (topicOf(sid, mid) || {}).added;   // an owner-created module has no bank file: its questions are the published ones
+      if (bankErr && !r[1].length && !addedMod) throw bankErr;
       var items = markLevels(mergeOverlay(r[0], r[1]));
       items.forEach(function (it) { it._s = sid; it._m = mid; });
       // Corrections by owners and registered signers (functions/_prepfix.js) ride on top of the bank and overlay text.
@@ -1073,7 +1086,7 @@
             var c = JSON.parse(JSON.stringify(n)); c._s = sid; c._m = mid; c._pub = 1; items.push(c);
           });
         }
-        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+        if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
         return items;
       });
     });
@@ -1091,7 +1104,7 @@
     st.fxIxP = G.fetch(FIX_API + "?ix=1").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
       st.fxIxP = null;
       if (!j || !j.mods) return last;
-      s.fxix = { mods: j.mods, ts: Date.now() }; save(); return j.mods;
+      s.fxix = { mods: j.mods, nm: j.nm || {}, ts: Date.now() }; save(); return j.mods;
     }, function () { st.fxIxP = null; return last; });
     return st.fxIxP;
   }
@@ -2177,6 +2190,8 @@
         (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
       // Cross-listed modules (prep/taxonomy/crosslist.json): the same disease taught in other subjects, in this
       // subject's list under its own title with the union count. Same rows, same styles, nothing new to learn.
+      var ad = filterModules(ix.topics.filter(function (t) { return t.group === "added"; }), prog, st.filter, s.exam);
+      if (ad.length) html += '<h2 class="pn-sec">Added modules</h2><ol class="pn-mods">' + ad.map(function (t) { return modRow(sid, t, prog, s, null); }).join("") + "</ol>";
       var xl = filterModules(ix.topics.filter(function (t) { return t.group === "xlist"; }), prog, st.filter, s.exam);
       if (xl.length) html += '<h2 class="pn-sec">Cross-listed</h2><ol class="pn-mods">' + xl.map(function (t) { return modRow(sid, t, prog, s, null); }).join("") + "</ol>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];

@@ -408,12 +408,18 @@ try {
   await ev(`var m=document.getElementById("qgPMod"); m.value=Array.prototype.filter.call(m.options,function(x){return x.value&&x.value!==PREP_QGEN._au().module;})[0].value; m.dispatchEvent(new Event("change")); return 1;`);
   await click('#smdPrep [data-act="g-atadd"]');
   ok(await ev(`return document.querySelectorAll('#qgRevView [data-act="g-atdel"]').length;`) === 2, "publish: a second subject and module is added");
+  // a brand-new module: typing in the field does not repaint it; the button wakes at 3 letters
+  ok(await ev(`return document.querySelector('#qgRevView [data-act="g-atnew"]').disabled;`) === true, "new module: the Add button waits for a name");
+  await ev(`var i=document.getElementById("qgPNew"); i.focus(); i.value="NEET-SS Recall (Oct 2026)"; i.dispatchEvent(new Event("input")); return 1;`);
+  ok(await ev(`return document.activeElement && document.activeElement.id === "qgPNew" && !document.querySelector('#qgRevView [data-act="g-atnew"]').disabled;`) === true, "new module: typing keeps the keyboard in the field and enables Add");
+  await click('#smdPrep [data-act="g-atnew"]');
+  ok(await ev(`return document.querySelectorAll('#qgRevView [data-act="g-atdel"]').length;`) === 3 && /NEET-SS Recall \(Oct 2026\) \(new\)/.test(await screenText()), "new module: added as a third target, marked (new)");
   await ev(`window.confirm=function(){return true;}; return 1;`);
   await shots("publish");
   await click('#smdPrep [data-act="g-apub"]');
   ok(await until(`return !!document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000), "publish: confirmed, with a take-down button");
   const pb = qgCalls("publish")[0];
-  ok(pb && pb.body.targets.length === 2 && pb.body.items.length >= 1 && pb.body.items.every((x) => x.qg.v === "ok"), "publish sends both targets and only approved items");
+  ok(pb && pb.body.targets.length === 3 && pb.body.targets[2].title === "NEET-SS Recall (Oct 2026)" && !("module" in pb.body.targets[2]) && pb.body.items.length >= 1 && pb.body.items.every((x) => x.qg.v === "ok"), "publish sends the two modules and the new module (by title) and only approved items");
   await click('#smdPrep [data-act="g-aundo"]');
   ok(await until(`return !document.querySelector('#qgRevView [data-act="g-aundo"]');`, 8000) && qgCalls("unpublish").length === 1, "take-down calls unpublish for the batch");
 
