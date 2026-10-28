@@ -1213,6 +1213,7 @@
       // Prominent Lab Watch FAB — a labelled pill stacked above the Snapshot FAB so the
       // watch-labs action is easy to find (was only a small chip in the header row).
       '#icuWatch{position:absolute;right:14px;bottom:calc(138px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary2,var(--primary));font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}' +
+      '#icuKitFab{position:absolute;right:14px;bottom:calc(190px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary2,var(--primary));font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}#icuKitFab:active{filter:brightness(.95)}' +
       '#icuWatch.on{background:var(--primary);color:#fff;border-color:var(--primary2)}#icuWatch:active{filter:brightness(.95)}#icuWatch .icu-ico{width:17px;height:17px}' +
       '#icuWatch .icu-lw-fab-b{background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);padding:1px 5px;min-width:15px;text-align:center}' +
       // modal
@@ -6308,6 +6309,43 @@
     };
   })();
 
+  /* ---- Specialty tools in the ICU and ward notes (owner 2026-10-28; same kit and Export as the OPD notes) ----
+   * A floating button opens the doctor's specialty kit (specialty-kits.js openHostSheet). Export posts what the doctor used to the
+   * patient's timeline as ONE clinical note with their name (the same note the Rounds screen posts); with no shared unit open there is
+   * no timeline to post to, so the text is copied instead. Nothing is saved or posted until the doctor taps Export or an Add. */
+  function kitToolsOn() { try { return !!(window.SMD_KITS && SMD_KITS.on && SMD_KITS.on() && SMD_KITS.openHostSheet && (grpActive() ? _grpPtId : hasData())); } catch (e) { return false; } }
+  function kitPostNote(text, label) {
+    var t = String(text || "").trim(); if (!t) return false;
+    var api = groupsApi();
+    if (grpActive() && _grpPtId && api && api.addTimelineEvent) {
+      try {
+        var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: (label || "Specialty tools") + " — " + v2AccountName(), detail: t });
+        if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (window.toast) toast("Posted to the patient timeline.");
+        return true;
+      } catch (e) { if (window.toast) toast("The note could not be posted."); return false; }
+    }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {}
+    if (window.toast) toast("Copied. Open a shared unit to post notes to the patient timeline.");
+    return true;
+  }
+  var _kitHost = {
+    kind: "icu", addToNote: true, exportField: "clinical_note",
+    canWrite: function () { return true; }, ready: function () { return true; },
+    writeNote: function () { return ""; }, readyNote: function () { return ""; },
+    addLabel: function () { return "Add to note"; },
+    fieldLabel: function () { return "the clinical note"; },
+    insert: function (field, text) { if (text) kitPostNote(text, "Specialty tools"); },
+    insertMany: function (list) { var t = (list || []).map(function (it) { return it.text; }).filter(Boolean).join("\n"); if (t) kitPostNote(t, "Specialty tools"); },
+    setField: function () {},
+    repaint: function () { try { SMD_KITS.renderHostSheet(); } catch (e) {} },
+    protocol: function (id) { if (window.SMD_KBPROTO && SMD_KBPROTO.open) SMD_KBPROTO.open({ id: id }); },
+    calculator: function (id) { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(id); },
+    investigate: null, openTab: null, setScribe: null,
+    patient: function () { var p = (STATE && STATE.patient) || {}; return { sex: String(p.sex || ""), age: String(p.age || "") }; }
+  };
+  function openKitTools() { if (kitToolsOn()) SMD_KITS.openHostSheet({ host: _kitHost, key: "icu-" + (grpActive() ? _grpPtId : "solo"), title: "Specialty tools", exportLabel: "Export to patient note", oneLabel: "One combined note" }); }
+
   function paintV2() {
     if (!rootEl) return;
     var _osc = rootEl.querySelector(".icu-scroll");
@@ -6333,7 +6371,8 @@
       var watchFab = labWatchOn()
         ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
         : "";
-      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + fab;
+      var kitFab = kitToolsOn() ? '<button id="icuKitFab" data-icu-act="kittools" aria-label="Specialty tools">' + ico("tool", "🛠") + '<span>Specialty tools</span></button>' : "";
+      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + kitFab + fab;
     }
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
     // Keep the active workspace tab centred in the horizontally-scrollable tab strip so it's never
@@ -9126,6 +9165,7 @@
         break;
       }
       case "snapshot": openSnapshot(); break;
+      case "kittools": openKitTools(); break;
       case "savepatientcap": savePatientCapture(); break;
       case "launch":
         if (arg === "elyte") launch(function () {
@@ -9599,7 +9639,7 @@
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
-    _openAskMaik: openAskMaik, _askSend: askSend, _askContextText: askContextText, _askLog: function () { return _askLog.slice(); }, _askReset: askReset,
+    _kitHost: _kitHost, _kitOn: kitToolsOn, _openAskMaik: openAskMaik, _askSend: askSend, _askContextText: askContextText, _askLog: function () { return _askLog.slice(); }, _askReset: askReset,
     // Discharge · MaiK draft — parser + prompt exposed so the section split and the safety rules in
     // the prompt can be asserted without a live model.
     _disAiParse: disAiParse, _disAiPrompt: function () { return disAiPrompt(dischargeFieldVals()); }, _disAiState: function () { return { busy: _disAi.busy, err: _disAi.err, sections: _disAi.sections }; },

@@ -85,6 +85,10 @@ A kit is:
 - **Field shortcuts** (`toolBtn`, `FIELD_TOOLS` in `specialty-kits.js`): LMP, Weight, Height, Local examination, Management plan carry a small button that opens the same sheet on the kit holding that tool (`kitHoldingTool`, preferring the doctor's own) scrolled to it. They follow my specialty (`KIT_FIELD_TOOLS`: obgyn dating; paediatrics growth; anaesthesia LA dose; emergency burns, LA, growth; general-surgery and orthopaedics burns and LA; community-medicine growth and dating; other specialties none; no specialty set, all).
 - The `tool:` click works with no kit selected. The Specialty tab and the Home tile are kept for now. Not in IPD yet. Test: `test/run-specialty-kits-ui.mjs` (here: `CHROME=/opt/pw-browsers/chromium`).
 
+## ICU and ward notes (IPD, 2026-10-28)
+- **Ward patients opened in the EMR workspace** (`GHIS.openAssessment` in `ghis-ward.js` -> `OPDEMR.openProfile({ source: "ghis", episodeId })`) are the same OPD EMR component, so the floating Tools button and Export to EMR above already apply there (with the write permission).
+- **ICU dashboard** (`icu.js`, one dashboard for ICU and Ward units): a floating "Specialty tools" button (`#icuKitFab`, stacked above Lab Watch) shows in an open patient. It calls `SMD_KITS.openHostSheet` (generic host sheet `#smdKitHost`, z 11000: the kit with a footer "Export to patient note" and "One combined note"). The ICU host (`_kitHost`, `kind "icu"`, `addToNote`) turns Export and the per-tool "Add to the clinical note" into ONE timeline note "Specialty tools - <name>" through `groupsApi().addTimelineEvent` (the same note the Rounds screen posts) when a shared unit is open; with no shared unit there is no timeline, so the text is copied and the toast says so. Nothing is posted until the doctor taps. Test: `test/run-icu-kittools.mjs` (`CHROME=/opt/pw-browsers/chromium CHROME_FLAGS=--no-sandbox`); the shared-unit post is not covered by a browser test.
+
 ## Key files
 - `specialty-kits.js` (`window.SMD_KITS`) - engine: pure maths (exported `_dating`, `_growth`, ...),
   rendering for a host, events, the standalone sheet. `specialty-kits.css`, `specialty-kits-flags.js`.
