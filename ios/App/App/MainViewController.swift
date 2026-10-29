@@ -6,7 +6,7 @@ import Capacitor
  * stock CAPBridgeViewController cannot do:
  *
  *  1. Register app-local plugins. `cap sync` only lists npm plugin packages in packageClassList, so a
- *     plugin compiled into this target (SmdDevice) is invisible to Capacitor unless it is handed to
+ *     plugin compiled into this target (SmdDevice, NfcPlugin) is invisible to Capacitor unless it is handed to
  *     the bridge here. capacitorDidLoad runs before the web view loads, so the plugin's JS proxy is
  *     injected with the others at document start.
  *  2. Launch chain colour. Owner decision 2026-10-03: the native launch follows the system light/dark
@@ -18,6 +18,7 @@ import Capacitor
 class MainViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(SmdDevicePlugin())
+        bridge?.registerPluginInstance(NfcPlugin())
         if let launchBackground = UIColor(named: "LaunchBackground") {
             webView?.backgroundColor = launchBackground
             webView?.scrollView.backgroundColor = launchBackground

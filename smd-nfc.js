@@ -1,7 +1,8 @@
 /* smd-nfc.js — Unified NFC bridge for StewardMD (Native Capacitor App + Web NFC).
  *
  * Provides a unified API across:
- *   1. Native Capacitor Android (in.stewardmd.app.NfcPlugin)
+ *   1. Native Capacitor NfcPlugin: Android (in.stewardmd.app.NfcPlugin) and iPhone
+ *      (ios/App/App/NfcPlugin.swift, CoreNFC, one system sheet per scan or write)
  *   2. Web NFC in Chrome on Android (window.NDEFReader)
  *   3. Graceful degradation when NFC is unavailable (with clear error descriptions).
  *
@@ -31,10 +32,19 @@
     return null;
   }
 
-  // iPhone: WKWebView has no Web NFC and the iOS build ships no CoreNFC plugin yet, so say that plainly
-  // (and point at the working alternative) instead of "not supported on this device or browser".
+  // iPhone: WKWebView has no Web NFC. The CoreNFC NfcPlugin (ios/App/App/NfcPlugin.swift) does the work;
+  // IOS_NFC_MSG is only reached when the plugin is missing (a store build from before it shipped, since
+  // an OTA bundle cannot add native code), so say that plainly and point at the working alternative.
   function isIos() {
     try { return !!(window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === "ios"); } catch (e) { return false; }
+  }
+  // True while a tap is being handled. The iPhone NFC sheet must only open from a tap, never from a
+  // page-load listener. Where the browser has no User Activation API this cannot be told, so it allows.
+  function hasUserActivation() {
+    try {
+      var ua = navigator.userActivation;
+      return !ua || !!ua.isActive;
+    } catch (e) { return true; }
   }
   var IOS_NFC_MSG = "NFC is not available in the iPhone app yet. Use Scan QR / Barcode, or type the StewardID.";
 
@@ -125,6 +135,7 @@
   }
 
   var activeListenerHandle = null;
+  var endListenerHandle = null;
   var webNfcAbortController = null;
   var isListening = false;
 
@@ -382,23 +393,49 @@
 
     /**
      * Start background listening for NFC tag taps.
+     * iPhone (on-demand): each call opens the system NFC sheet for ONE tag, so it must come from a
+     * tap; a call with no user gesture rejects with code "NEEDS_USER_TAP" instead of popping the
+     * sheet. options.onEnd({ reason, message }) fires when the sheet closes without a tag
+     * (reason "cancelled" | "timeout" | "error").
      * @param {Function} onTagDiscovered Callback receiving ({ uid, text, url, raw })
-     * @returns {Promise<{ listening: boolean, mode: "native"|"web" }>}
+     * @param {Object} [options] { userInitiated?: boolean, onEnd?: Function }
+     * @returns {Promise<{ listening: boolean, mode: "native"|"web", onDemand?: boolean }>}
      */
-    startScan: async function (onTagDiscovered) {
-      if (isListening) {
-        return { listening: true, mode: getCapacitorPlugin() ? "native" : "web" };
+    startScan: async function (onTagDiscovered, options) {
+      options = options || {};
+      var cap = getCapacitorPlugin();
+      var onDemand = !!(cap && isIos());
+      if (onDemand && !options.userInitiated && !hasUserActivation()) {
+        var gestureErr = new Error("Tap the NFC button to scan a Ni-Key tag.");
+        gestureErr.code = "NEEDS_USER_TAP";
+        throw gestureErr;
+      }
+      if (isListening && !onDemand) {
+        return { listening: true, mode: cap ? "native" : "web" };
       }
 
-      var cap = getCapacitorPlugin();
       if (cap && cap.startScan) {
         try {
           if (cap.addListener) {
             if (activeListenerHandle && activeListenerHandle.remove) {
               activeListenerHandle.remove();
             }
+            if (endListenerHandle && endListenerHandle.remove) {
+              endListenerHandle.remove();
+              endListenerHandle = null;
+            }
+            if (onDemand) {
+              endListenerHandle = await cap.addListener("scanEnded", function (info) {
+                isListening = false;
+                var reason = (info && info.reason) || "";
+                if (reason !== "tag" && typeof options.onEnd === "function") {
+                  try { options.onEnd({ reason: reason, message: (info && info.message) || "" }); } catch (e) {}
+                }
+              });
+            }
             activeListenerHandle = await cap.addListener("tagDiscovered", function (data) {
               var text = (data && (data.text || data.uid)) || "";
+              if (onDemand) isListening = false;
               if (typeof onTagDiscovered === "function") {
                 onTagDiscovered({
                   uid: data.uid || "",
@@ -412,7 +449,7 @@
           }
           await cap.startScan();
           isListening = true;
-          return { listening: true, mode: "native" };
+          return onDemand ? { listening: true, mode: "native", onDemand: true } : { listening: true, mode: "native" };
         } catch (e) {
           throw new Error("Native NFC scan failed: " + (e.message || e));
         }
@@ -484,6 +521,10 @@
       if (activeListenerHandle && activeListenerHandle.remove) {
         try { activeListenerHandle.remove(); } catch (e) {}
         activeListenerHandle = null;
+      }
+      if (endListenerHandle && endListenerHandle.remove) {
+        try { endListenerHandle.remove(); } catch (e) {}
+        endListenerHandle = null;
       }
       if (webNfcAbortController && webNfcAbortController.abort) {
         try { webNfcAbortController.abort(); } catch (e) {}
@@ -666,6 +707,11 @@
           return;
         }
         try { onUhid(uhid, tag, res); } catch (e) {}
+      }
+      // iPhone has no background reader: a launch-time scan would pop the system NFC sheet on every
+      // app open. Taps are read on demand from the NFC buttons instead.
+      if (getCapacitorPlugin() && isIos()) {
+        return Promise.resolve({ listening: false, mode: "native", onDemand: true });
       }
       return SMD_NFC.startScan(function (tag) {
         var uhid = "";
