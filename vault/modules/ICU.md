@@ -126,6 +126,12 @@ CAM (`cam`, Neurology, Inouye 1990), which needs a patient who can be interviewe
 reachable from `MEDCALC.find`. Test: `test/camicu.test.mjs`.
 
 ## Gotchas
+- **Background repaints never run under a focused text field (2026-10-29).** `paint()` rebuilds `#icuRoot`, which
+  replaces the field being typed in, so iOS closed the keyboard after one letter (and the round-note composer lost the
+  text). Anything not caused by a tap goes through `paintPassive()`: the state subscriber, `paintLive`, the scroll
+  flush, the task heartbeat and the `if (ICU.isOpen())` callbacks. It holds the repaint while `typingInRoot()` and
+  lands it on `focusout` (`flushTypingPaint`) or on the next control tap (`onClick` blurs the field). New async code:
+  call `paintPassive()`, not `paint()`. Test: `test/run-icu-typing-focus.mjs`.
 - **Severity sorts use `rankOf(map, k)`, never `map[k] || 9`.** Critical's rank is 0 (falsy), so the old idiom sorted
   CRITICAL patients to the BOTTOM of the unit board (solo and group) and crit alerts below warnings. Fixed 2026-10-28;
   test `test/run-icu-board-order.mjs`.

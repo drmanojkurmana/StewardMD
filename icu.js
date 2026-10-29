@@ -720,7 +720,7 @@
     if (!key) return;
     if (key.indexOf("g:") === 0) { var id = key.slice(2); var g = (_grpList || []).filter(function (x) { return x.id === id; })[0]; if (g) grpSelect(g, true); }
     else if (key.indexOf("s:") === 0) { var p = key.slice(2).split(":"); selectUnit({ cat: p[0], type: decodeURIComponent(p[1] || "") }); }
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
   }
   function currentUnitLabel() {
     if (grpActive() && _grp) return (_grp.name || ctxLabel()) + (_grp.hospital ? " · " + _grp.hospital : "");
@@ -909,7 +909,7 @@
       if (evicted && evicted.id !== id && window.toast) toast((evicted.name ? pv("name", evicted.name) : "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
     }
     saveRoster(capTen(r));
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
     return Promise.resolve(entry);
   }
   // Inverse of addWardPatientToRoster: un-add a Ward-Sync patient from the CURRENT unit's board, using
@@ -923,7 +923,7 @@
       return Promise.reject(new Error("group-api-unavailable"));
     }
     var p = rosterRemove("pw_" + patientId);
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
     return Promise.resolve(p);
   }
 
@@ -2627,7 +2627,7 @@
     _lwBadge += items.length;
     try { if (window.toast) toast(msg); } catch (e) {}
     if (w.delivery === "device" || w.delivery === "both") lwDeviceNotify(head, items.length === 1 ? items[0].text : items.length + " new lab results", crit.length > 0);
-    if (ICU.isOpen()) paint();
+    if (ICU.isOpen()) paintPassive();
     // PHI-safe telemetry only (counts + severity, never values/identifiers).
     try { console.log("[lab-watch] fired", items.length, "items; critical=" + crit.length); } catch (e) {}
   }
@@ -4206,14 +4206,39 @@
     if (_liveBound || !rootEl) return; _liveBound = 1;
     rootEl.addEventListener("scroll", function () {
       _liveScrolling = 1; clearTimeout(_liveScrollT);
-      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paint(); } }, 160);
+      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paintPassive(); } }, 160);   // focusing a field scrolls; never rebuild under it
     }, true);   // capture: catches the .icu-scroll container that paintV2 recreates each render
   }
   function paintLive() {
     _bindLiveScroll();
     if (_liveScrolling) { _livePending = 1; return; }   // defer: don't rebuild during an active scroll
     if (_liveRaf) { _livePending = 1; return; }
-    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paint(); });
+    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paintPassive(); });
+  }
+  // A repaint rebuilds #icuRoot, which REPLACES the text box being typed in, and iOS closes the keyboard
+  // ("type one letter, the keyboard closes, tap again, one more letter..."); the round-note composer also
+  // lost the text itself. Repaints nobody asked for (state changes, live snapshots, the task heartbeat)
+  // wait while a text field in the ICU has focus and land when it is left. A tap on a control still
+  // repaints at once (those call paint() directly).
+  var _paintAfterTyping = false;
+  function typingInRoot() {
+    try {
+      var a = document.activeElement;
+      if (!a || !rootEl || !rootEl.contains(a)) return false;
+      if (a.isContentEditable || a.tagName === "TEXTAREA") return true;
+      return a.tagName === "INPUT" && !/^(checkbox|radio|button|submit|reset|range|file|color|image|hidden)$/i.test(a.type || "");
+    } catch (e) { return false; }
+  }
+  function paintPassive() {
+    if (typingInRoot()) { _paintAfterTyping = true; return; }
+    paint();
+  }
+  function flushTypingPaint() {
+    setTimeout(function () {   // after focus settles: moving to the next field keeps waiting
+      if (!_paintAfterTyping || typingInRoot()) return;
+      _paintAfterTyping = false;
+      if (ICU.isOpen()) { try { grpRoundCaptureText(); } catch (e) {} paint(); }
+    }, 0);
   }
 
   /* ================================================================ ICU v2
@@ -4651,7 +4676,7 @@
   // Resolve it (minting on first ever sign-in) and repaint the Team screen when it lands.
   function ensureStewardId() {
     if (stewardIdVal()) return;
-    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paint(); } };
+    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paintPassive(); } };
     try {
       var api = groupsApi();
       if (api && api.ensureIdentity) { api.ensureIdentity(done); return; }
@@ -4918,7 +4943,7 @@
       _grpSubPts = api.subscribePatients(_grp.id, function (list) {
         _grpPatients = list || []; grpNotifTick(); grpSyncTaskSubs(_grpPatients);
         if (ICU.isOpen() && _screen === "board") paintLive();
-      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     }
     _paintTop = true; paint();
   }
@@ -4959,7 +4984,7 @@
     if (on) { try { grpEnsureGroupsSub(); } catch (e) {} }
     try { notifyUnitsChanged(); } catch (e) {}
     _screen = "settings"; _paintTop = true;
-    if (ICU.isOpen()) paint();
+    if (ICU.isOpen()) paintPassive();
     if (window.toast) toast(on ? "Group mode on. Loading your shared units." : "Solo mode on. This device only.");
   }
   function grpEnsureGroupsSub() {
@@ -4987,7 +5012,7 @@
     grpStopSubRetry();
     try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
     // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
-    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
+    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paintPassive(); }); } catch (e) {}
     if (_grpSubGroups) return;
     // Watchdog: a silent Firestore/network hang (the SDK never finishes loading, or the Listen
     // channel never delivers a first event) fires NEITHER callback below, so _grpList would stay
@@ -5000,7 +5025,7 @@
         if (_grpList !== null) return;                                   // connected in time → nothing to do
         if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
         _grpErr = _grpErr || "Couldn’t connect to your shared units. Check your connection and retry.";
-        if (ICU.isOpen()) paint();
+        if (ICU.isOpen()) paintPassive();
       }, (typeof window !== "undefined" && +window.SMD_ICU_GRP_TIMEOUT_MS) || 20000);
     }
     _grpSubGroups = api.subscribeGroups(function (groups) {
@@ -5555,7 +5580,7 @@
       _grpCreating = false;
       _grpErr = grpErrText(e);
       if (window.toast) toast("Couldn’t create the unit — " + grpErrText(e));
-      if (ICU.isOpen()) paint();
+      if (ICU.isOpen()) paintPassive();
     });
   }
   /* --------------------------- Phase 5: add-by-ID/email + invite-by-link + leave/remove ------- */
@@ -5588,7 +5613,7 @@
       // entry yet. Guide the user with a clear, actionable message (email path gets a full sheet).
       if (m === "not-found") { if (byEmail) grpAddNotFoundEmail(); else if (window.toast) toast("No StewardMD account found for that ID — check it, or use the invite link instead."); }
       else if (window.toast) toast("Couldn’t add — head/professor only");
-      _grpErr = null; if (ICU.isOpen()) paint();
+      _grpErr = null; if (ICU.isOpen()) paintPassive();
     });
   }
   // Change an existing member's designation (+ its derived permission). Admin-only; the sheet is
@@ -5614,7 +5639,7 @@
     }, function (e) {
       _grpErr = grpErrText(e);
       if (window.toast) toast(d.role === "professor" ? "Consultant / Associate Professor can be set by the unit head only" : "Couldn’t update — head/professor only");
-      if (ICU.isOpen()) paint();
+      if (ICU.isOpen()) paintPassive();
     });
   }
   // No StewardMD account is registered for a typed email (no doctorDirectory/e_<hash> entry). Explain
@@ -5662,7 +5687,7 @@
       _grpInvLink = (res && res.url) || null;
       if (_grpInvLink) grpCopyText(_grpInvLink, "Invite link copied — share it with your colleague");
       grpOpenInviteLink();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paint(); });
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paintPassive(); });
   }
   // Clipboard copy (reuses the app's existing navigator.clipboard pattern) with a toast.
   function grpCopyText(txt, msg) {
@@ -5676,7 +5701,7 @@
     api.leaveGroup(_grp.id).then(function () { if (window.toast) toast("You left the unit"); }, function (e) {
       var m = (e && e.message) || "";
       if (window.toast) toast(m === "head-cannot-leave" ? "You are the head — delete the unit instead" : "Couldn’t leave the unit");
-      _grpErr = null; if (ICU.isOpen()) paint();
+      _grpErr = null; if (ICU.isOpen()) paintPassive();
     });
   }
   function grpReclaimHead() {
@@ -5685,21 +5710,21 @@
       if (_grp) _grp.myRole = "head";                                  // optimistic — instructions work immediately
       try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, "head"); } catch (e) {}
       if (window.toast) toast("You are now the Unit Head");
-      if (ICU.isOpen()) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paint(); });
+      if (ICU.isOpen()) paintPassive();
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paintPassive(); });
   }
   function grpDoDelete() {
     var api = groupsApi(); if (!api || !grpActive() || !api.deleteGroup) return;
     if ((_grp && _grp.myRole) !== "head") { if (window.toast) toast("Only the unit head can delete the unit"); return; }
     if (!window.confirm("Delete " + ((_grp && _grp.name) || "this unit") + " for everyone? This cannot be undone.")) return;
-    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paint(); });
+    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paintPassive(); });
   }
   function grpDoRemove(uid) {
     var api = groupsApi(); if (!api || !grpActive() || !uid || !api.removeMember) return;
     var m = null, arr = _grpMembers || []; for (var i = 0; i < arr.length; i++) if (arr[i].uid === uid) { m = arr[i]; break; }
     var nm = (m && m.name) || "this member";
     if (!window.confirm("Remove " + nm + " from " + ((_grp && _grp.name) || "the unit") + "?")) return;
-    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paint(); });
+    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paintPassive(); });
   }
   /* --------------------------- Phase 5: join-by-link (?icujoin=<gid>.<code>) ------------------- */
   function grpJoinParam() { try { return (location.search.match(/[?&]icujoin=([^&]+)/) || [])[1] || ""; } catch (e) { return ""; } }
@@ -5768,7 +5793,7 @@
   function grpDoInvite() { grpDoAddById(); }
   function grpDoReviewed() {
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
-    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Marked reviewed" }); } catch (e) {}
   }
   function grpCycleTask(taskId) {
@@ -5777,7 +5802,7 @@
     if (!t) return;
     var next = t.status === "pending" ? "progress" : t.status === "progress" ? "done" : "pending";
     if (next === "done") { try { window.SMD_SOUND && SMD_SOUND.play("success"); } catch (e) {} }
-    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     // Completing a task self-logs an author-stamped audit event (see the auto-timeline set).
     if (next === "done") { try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "task", title: "Task completed — " + (t.text || "task") }); } catch (e) {} }
   }
@@ -6435,7 +6460,7 @@
     // QA BUG-003: the clinical note posts as its own timeline entry (create + display; the timeline is
     // the audit trail, so a posted note is amended by posting a correction, not edited in place).
     if (noteTxt) {
-      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {}
+      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); }); } catch (e) {}
     }
     if (!chosen.length) {
       _roundNote = "";
@@ -6449,7 +6474,7 @@
     var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
-      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
+      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); }); } catch (e) {} })(plan.tasks[i]);
     }
     if (plan.event) { try { var pe = api.addTimelineEvent(gid, pid, plan.event); if (pe && pe.then) pe.then(null, function () {}); } catch (e) {} }
     // Immediate push to the unit when an instruction is ISSUED (not just when it later goes overdue) —
@@ -6482,7 +6507,7 @@
     if (grpActive() && _grpPtId && api && api.addTimelineEvent) {
       try {
         var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: (label || "Specialty tools") + " — " + v2AccountName(), detail: t });
-        if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
         if (window.toast) toast("Posted to the patient timeline.");
         return true;
       } catch (e) { if (window.toast) toast("The note could not be posted."); return false; }
@@ -8701,7 +8726,7 @@
       _ownerBufSynced = true;
     }
     try { localStorage.setItem(OWNER_KEY, now); } catch (e) {}
-    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paint(); } catch (e) {}
+    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paintPassive(); } catch (e) {}
   }
   function capTen(r) { if (r.length <= MAX_CASES) return r; return r.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); }).slice(0, MAX_CASES); }
   function rosterCount() { return loadRoster().length; }
@@ -8857,7 +8882,7 @@
     api.removePatient(gid, pid).then(function () {
       if (window.toast) toast("Patient removed from unit");
       grpTeardownPatient(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paintPassive(); });
   }
   function newPatient() {
     ICU.reset();
@@ -9063,7 +9088,7 @@
       if (!(api.canInstruct && api.canInstruct(_grp && _grp.myRole))) { if (window.toast) toast("Only instructing roles can remove a patient"); return; }
       api.removePatient(_grp.id, id).then(function () {
         if (window.toast) toast("Patient removed from unit");
-      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paintPassive(); });
       if (id === _grpPtId) grpTeardownPatient();
     } else {
       rosterRemove(id);
@@ -9077,6 +9102,12 @@
 
   /* ------------------------------------------------------ event delegation */
   function onClick(e) {
+    // Tapping a control ends typing (iOS keeps a field focused under a button tap), so a repaint held back
+    // by paintPassive lands now rather than whenever the field happens to blur.
+    try {
+      var _ae = document.activeElement;
+      if (_paintAfterTyping && typingInRoot() && e.target && e.target.closest && e.target.closest("[data-icu-act]") && !_ae.contains(e.target)) _ae.blur();
+    } catch (x) {}
     // A finished swipe fires a click on release — swallow it, and let a tap on an OPEN row close it.
     if (_swTapKill) {
       _swTapKill = false;
@@ -9707,10 +9738,11 @@
         rootEl.addEventListener("touchmove", swMove, { passive: true });
         rootEl.addEventListener("touchend", swEnd);
         rootEl.addEventListener("touchcancel", swEnd);
+        rootEl.addEventListener("focusout", flushTypingPaint);   // a repaint held back while typing lands here
         // Phase 4: reflect connectivity promptly (offline strip + sync indicator) — repaint only
         // when a shared unit is open. Attached once; a no-op while the dashboard is closed.
         try {
-          var _onNet = function () { if (ICU.isOpen() && grpActive()) paint(); };
+          var _onNet = function () { if (ICU.isOpen() && grpActive()) paintPassive(); };
           window.addEventListener("online", _onNet);
           window.addEventListener("offline", _onNet);
         } catch (e) {}
@@ -9853,7 +9885,7 @@
   try { document.addEventListener("visibilitychange", function () { if (!document.hidden) { try { reconcileOwner(); } catch (e) {} } }); } catch (e) {}
 
   // re-render the open dashboard whenever the state changes (any source)
-  _subs.push(function () { if (ICU.isOpen()) paint(); });
+  _subs.push(function () { if (ICU.isOpen()) paintPassive(); });
 
   // Task-deadline heartbeat: while a shared patient is open, re-check every 60s so due countdowns
   // tick, tasks flip to OVERDUE on time, and the overdue device-notification fires even when the unit
@@ -9863,8 +9895,8 @@
       try {
         if (!grpActive() || !_grpPtId || !ICU.isOpen()) return;
         grpNotifTick();
-        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paint();
-        else if (_screen === "alerts") paint();
+        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paintPassive();
+        else if (_screen === "alerts") paintPassive();
       } catch (e) {}
     }, 60000);
   } catch (e) {}
@@ -9895,7 +9927,7 @@
       var luText = grpChangeSummary(events);   // richer "what changed" line for the board footer + notifications
       try {
         var api = groupsApi();
-        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
         if (api && api.addTimelineEvent) {
           for (var i = 0; i < events.length; i++) {
             (function (ev) { try { var pr = api.addTimelineEvent(_grp.id, _grpPtId, ev); if (pr && pr.then) pr.then(null, function () {}); } catch (e) {} })(events[i]);
