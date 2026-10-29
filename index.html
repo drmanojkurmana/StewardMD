@@ -2852,7 +2852,7 @@ window.openExternal = function (u) {
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
 <link rel="stylesheet" href="/patient-register.css?v=preg2-abdm-fr1">
-<script src="/patient-register.js?v=preg8-sid1-sid1-off2-pm1" defer></script>
+<script src="/patient-register.js?v=preg8-sid1-sid1-off2-pm1-nfcios1" defer></script>
 <script src="/opd-pulse-model.js?v=2" defer></script>
 <script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
@@ -2860,7 +2860,7 @@ window.openExternal = function (u) {
 <!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
      (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
      to a blank tag. No-op on browsers without NFC. -->
-<script src="/smd-nfc.js?v=nfc2-2" defer></script>
+<script src="/smd-nfc.js?v=nfc3-ios1" defer></script>
 <!-- Universal Patient Identity (StewardID 2.0 / Ni-Key): the canonical carrier resolver plus the
      mountable station scanner. patient-register.js mints StewardIDs, ward.js checks revocation at
      the bedside, and OPD stations route through these; all degrade gracefully when absent. -->

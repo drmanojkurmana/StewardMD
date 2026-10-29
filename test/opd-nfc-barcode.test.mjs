@@ -275,7 +275,7 @@ test("the written deep link (?uid=) is honoured like ?scan=", () => {
 
 /* ── G. the app shell routes taps to the full chart, blanks to the sheet ────── */
 test("index.html loads the NFC bridge and boots the app listener", () => {
-  assert.match(INDEX, /<script src="\/smd-nfc\.js\?v=nfc-2" defer><\/script>/);
+  assert.match(INDEX, /<script src="\/smd-nfc\.js\?v=[\w-]+" defer><\/script>/);
   assert.match(INDEX, /SMD_NFC\.initAppListener\(\{/);
   assert.match(INDEX, /onUhid: onNfcUhid/);
   assert.match(INDEX, /NFC Tag: UHID " \+ uhid/);

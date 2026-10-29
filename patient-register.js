@@ -801,6 +801,15 @@
           sBtn.disabled = false;
           state.stewardId = (hit && hit.stewardId) || uhid;
           applyResolvedIdentity(uhid, "nfc", hit);
+        }, {
+          /* iPhone: the system NFC sheet closed with no tag (Cancel, timeout or a tag error). */
+          userInitiated: true,
+          onEnd: function (info) {
+            resetScan();
+            if (info && info.reason !== "cancelled" && info.message && root.toast) {
+              root.toast(wT("ward.reg-nfc-read-error", "Ni-Key NFC read error: {msg}", { msg: info.message }));
+            }
+          }
         }).catch(function (err) {
           resetScan();
           var msg = (err && err.message) ? err.message : String(err || "");
