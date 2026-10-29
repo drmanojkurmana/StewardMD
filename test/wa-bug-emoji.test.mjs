@@ -61,10 +61,9 @@ test("antibiogram.js: no rotate emoji in the 'rotate your phone' tooltip", () =>
   assert.ok(s.includes('abIco("refresh")'), "tooltip now uses the shared icon set instead");
 });
 
-test("api.js: Drugs Database detail-page close button states what it does (home, not a bare X)", () => {
+test("api.js: Drugs Database header has no home button; the brands drawer keeps its own close", () => {
   const s = read("api.js");
-  assert.ok(s.includes('aria-label="Close and return home"'), "aria-label now says what the button actually does");
-  assert.ok(s.includes('id="dbClose" aria-label="Close and return home">\' + dbIco("home")'), "close button now renders the home icon, not the close/X icon");
+  assert.ok(!s.includes('id="dbClose"'), "the home button was removed from the drug header (owner 2026-10-28)");
   // The brands-drawer's own dismiss ("X") is a different, correctly-scoped control - untouched.
   assert.ok(s.includes('id="dbDwx" aria-label="Close brands">\' + dbIco("close")'), "the brands drawer's own close button is unchanged");
 });

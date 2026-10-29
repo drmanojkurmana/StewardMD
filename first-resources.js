@@ -75,7 +75,7 @@
     D.head.appendChild(s);
   }
 
-  function close() { var s = D.getElementById("frsSheet"); if (s && s.parentNode) s.parentNode.removeChild(s); }
+  function close() { var s = D.getElementById("frsSheet"); if (s && s.parentNode) s.parentNode.removeChild(s); if (G.SMD_PROMPT) G.SMD_PROMPT.done("offline"); }
   function toast(m) { try { (G.toast || G.SMD_toast || function () {})(m); } catch (e) {} }
 
   function show(p) {
@@ -137,12 +137,16 @@
   function maybeAsk() {
     if (!on() || !native() || lget(KEY_DONE)) return;
     var t0 = Date.now(), timer = setInterval(function () {
-      if (Date.now() - t0 > 180000 || lget(KEY_DONE)) { clearInterval(timer); return; }
+      if (Date.now() - t0 > 900000 || lget(KEY_DONE)) { clearInterval(timer); return; }
       if (D.hidden || !homeReady()) return;
+      /* Signed in, calm, and nothing else open: home.js SMD_PROMPT owns that rule (owner: "let the
+       * user breathe"). Without it, behave as before. */
+      if (G.SMD_PROMPT_OK && !G.SMD_PROMPT_OK()) return;
+      if (G.SMD_PROMPT && !G.SMD_PROMPT.try("offline", "ask")) return;
       clearInterval(timer);
       plan().then(function (p) {
-        if (!p.voice && !p.pack) { lset(KEY_DONE, "yes"); return; }   // nothing to fetch on this phone
-        if (homeReady()) show(p);
+        if (!p.voice && !p.pack) { lset(KEY_DONE, "yes"); if (G.SMD_PROMPT) G.SMD_PROMPT.done("offline"); return; }   // nothing to fetch on this phone
+        if (homeReady()) show(p); else if (G.SMD_PROMPT) G.SMD_PROMPT.done("offline");
       });
     }, 2000);
   }

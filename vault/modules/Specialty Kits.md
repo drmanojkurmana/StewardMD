@@ -79,6 +79,12 @@ A kit is:
 11. **Colleagues and your hospital** card (wave 2, [[Colleagues]], flag off): the hospital's version of
     the kit, "Ask colleagues about this case", and in the OPD the patient's kit history (O&G: antenatal card).
 
+## Specialty tools button and Export to EMR in the OPD (2026-10-28, owner: "kits should not be a separate module")
+- **One floating "Tools" button** (`.oe-fab`, `opd-emr.js` `toolFab`) on every OPD tab except the Specialty tab, only while the assessment is writable. It opens a bottom sheet (`.oe-toolsheet`) holding the doctor's own specialty kit exactly as the Specialty tab shows it (same `SMD_KITS.html`, same state key, chips, tools, sections). Any tool or section can be used there.
+- **Export to EMR** (sheet footer): `SMD_KITS.exportAll({ host, key, mode, field })`. `mode "each"` (one tap): every filled section and tool goes into the EMR field the kit names for it (`target`, plus its `set` fields such as LMP), through `kitHost.insertMany` (one repaint, one toast naming the fields, the sheet closes). `mode "one"` ("One combined note into" a field chosen from Present history, Systemic examination, Management plan): all results joined as "<Kit> (<tools>): ..." in that one field. Nothing used yet: a toast, nothing written. Nothing is saved until the doctor saves the assessment. The per-tool "Add to <field>" buttons inside the kit still work.
+- **Field shortcuts** (`toolBtn`, `FIELD_TOOLS` in `specialty-kits.js`): LMP, Weight, Height, Local examination, Management plan carry a small button that opens the same sheet on the kit holding that tool (`kitHoldingTool`, preferring the doctor's own) scrolled to it. They follow my specialty (`KIT_FIELD_TOOLS`: obgyn dating; paediatrics growth; anaesthesia LA dose; emergency burns, LA, growth; general-surgery and orthopaedics burns and LA; community-medicine growth and dating; other specialties none; no specialty set, all).
+- The `tool:` click works with no kit selected. The Specialty tab and the Home tile are kept for now. Not in IPD yet. Test: `test/run-specialty-kits-ui.mjs` (here: `CHROME=/opt/pw-browsers/chromium`).
+
 ## Key files
 - `specialty-kits.js` (`window.SMD_KITS`) - engine: pure maths (exported `_dating`, `_growth`, ...),
   rendering for a host, events, the standalone sheet. `specialty-kits.css`, `specialty-kits-flags.js`.

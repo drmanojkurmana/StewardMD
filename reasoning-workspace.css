@@ -264,7 +264,7 @@ body.dark #dxOverlay .dx-reader { --reader-accent:#b9b4ff; --reader-soft:#252637
 body.dark #dxOverlay .dx-reader .ev-wrap, body.dark #dxOverlay .dx-reader .ev-top-ic, body.dark #dxOverlay .dx-reader .ev-bc, body.dark #dxOverlay .dx-reader .ev-sec, body.dark #dxOverlay .dx-reader .ev-sec-h { border-color:var(--line); }
 @media(max-width:600px) {
   #dxOverlay .dx-reader .dx-mgmt-top { min-height:56px; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); gap:8px; padding:calc(8px + env(safe-area-inset-top,0px)) 12px 8px; }
-  #dxOverlay .dx-reader .dx-back { min-width:0; max-width:32vw; }
+  #dxOverlay .dx-reader .dx-back { min-width:0; max-width:100%; }
   #dxOverlay .dx-reader-spacer { min-width:0; width:100%; }
   #dxOverlay .dx-reader-brand strong { font-size:14px; }
   #dxOverlay .dx-reader .dx-mgmt-body { padding:14px 14px calc(32px + env(safe-area-inset-bottom,0px)); width:100%; box-sizing:border-box; }

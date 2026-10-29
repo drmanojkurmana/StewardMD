@@ -2083,3 +2083,10 @@ body.dark #clinixRoot .cx-prac-results-card {
   }
 }
 
+
+/* Examination skills: specialty chips scroll sideways, sub-headings split a big group by specialty */
+#clinixRoot .cx-chips--scroll { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 8px; scrollbar-width: none; }
+#clinixRoot .cx-chips--scroll::-webkit-scrollbar { display: none; }
+#clinixRoot .cx-chips--scroll .cx-chip { flex: 0 0 auto; white-space: nowrap; }
+#clinixRoot .cx-subh { padding: 12px 4px 4px; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cx-primary); }
+#clinixRoot .cx-sec-n { font-size: 12px; font-weight: 600; color: var(--cx-muted, #64748b); }
