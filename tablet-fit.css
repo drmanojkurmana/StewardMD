@@ -57,3 +57,10 @@ html.smd-refined body > :not(#homeV2) #smdClinic .pc-empty[data-smd-empty] { max
 @media (min-width: 900px) {
   #saveCasePrompt { max-width: 720px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
 }
+
+/* My Cases: the sync line, the find-by-code bar and the recent list ran edge to edge (1,148 px) in iPad landscape.
+   Keep them a readable 760 px column; the scroller itself stays full width. */
+@media (min-width: 700px) {
+  #myCasesPanel .mcp-body { padding-left: max(14px, calc(50% - 380px)); padding-right: max(14px, calc(50% - 380px)); box-sizing: border-box; }
+  #myCasesPanel .mcp-header { padding-left: max(14px, calc(50% - 380px)); padding-right: max(14px, calc(50% - 380px)); box-sizing: border-box; }
+}

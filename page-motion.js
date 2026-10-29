@@ -11,6 +11,8 @@
  *           close re-shows the element inline for the exit; a REMOVED node gets an inert, id-less
  *           visual copy (no iframes, video or scripts) so nothing in the app sees a lingering node.
  *   back  : tapping a "Back" control cross-fades the screen change (View Transitions API, no hero).
+ * inner : a screen swapped inside a module (a big block added, or replacing a big block with another heading) fades up
+ *           over 220 ms; a repaint of the same screen (same heading) never animates, so answering or typing cannot flicker.
  * Never adds an entrance to an element that already animates its own (CSS transition on opacity/transform/
  * all or a CSS animation), nor a copy-exit to a node it removes itself. Not the splash / intro / sign-in gates, nor anything dialog-motion.js owns.
  * No-op under prefers-reduced-motion. Kill switch: localStorage smd_page_motion = "0". */
@@ -130,11 +132,44 @@
     else if (!now && was) exitInPlace(el, i);
   }
 
+  // ---- screen swaps inside a module
+  var IN2 = { duration: 220, easing: "cubic-bezier(.22,1,.36,1)", fill: "backwards" };
+  var K_IN2 = [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }];
+  var T0 = Date.now(), swapBudget = 0, swapAt = 0;
+  function sig(n) {
+    try {
+      var h = n.querySelector("h1,h2,[role=heading],[class*=title],[class*=-h]");
+      return String((h || n).textContent || "").replace(/\s+/g, " ").trim().slice(0, 60);
+    } catch (e) { return ""; }
+  }
+  function bigBlock(n) {
+    if (n.nodeType !== 1 || skip(n) || !n.childElementCount) return false;
+    var r = n.getBoundingClientRect();
+    return r.width >= innerWidth * 0.55 && r.height >= innerHeight * 0.4;
+  }
+  function innerSwap(m) {
+    if (Date.now() - T0 < 2500 || reduced()) return;
+    var now = Date.now(); if (now - swapAt > 400) swapBudget = 0; swapAt = now;
+    var gone = [], j, n;
+    for (j = 0; j < m.removedNodes.length; j++) { n = m.removedNodes[j]; if (n.nodeType === 1 && n.childElementCount) gone.push(sig(n)); }
+    for (j = 0; j < m.addedNodes.length && swapBudget < 2; j++) {
+      n = m.addedNodes[j];
+      if (n.nodeType !== 1 || !n.isConnected || n.hasAttribute("data-pm-ghost") || n.closest("[data-no-motion],[data-pm-ghost]")) continue;
+      if (n.parentNode === document.body || n.closest(DIALOG)) continue;
+      if (!bigBlock(n)) continue;
+      var cs = getComputedStyle(n);
+      if (selfAnimated(cs) || (parseFloat(cs.opacity) || 1) < 0.99) continue;
+      var sg = sig(n); if (gone.length && gone.indexOf(sg) >= 0) continue;   // same screen repainted
+      swapBudget++;
+      try { n.animate(K_IN2, IN2); } catch (e) {}
+    }
+  }
+
   function handle(muts) {
     for (var k = 0; k < muts.length; k++) {
       var m = muts[k], j, n;
       if (m.type === "attributes") { if (m.target.parentNode === document.body) consider(m.target, "attr"); continue; }
-      if (m.target !== document.body) continue;
+      if (m.target !== document.body) { if (m.type === "childList" && m.addedNodes.length) innerSwap(m); continue; }
       for (j = 0; j < m.addedNodes.length; j++) { n = m.addedNodes[j]; if (n.nodeType === 1) consider(n, "add"); }
       for (j = 0; j < m.removedNodes.length; j++) {
         n = m.removedNodes[j];

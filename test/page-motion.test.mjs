@@ -27,3 +27,7 @@ test("a removed page is faded as an inert, id-less copy that the observer ignore
 test("the drug database header no longer has a home button", () => {
   assert.ok(!fs.readFileSync(join(ROOT, "api.js"), "utf8").includes('id="dbClose"'));
 });
+test("a screen swapped inside a module fades up; a repaint of the same screen does not", () => {
+  assert.match(src, /function innerSwap/);
+  assert.match(src, /same screen repainted/);
+});
