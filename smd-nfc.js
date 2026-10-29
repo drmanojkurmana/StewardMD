@@ -31,6 +31,13 @@
     return null;
   }
 
+  // iPhone: WKWebView has no Web NFC and the iOS build ships no CoreNFC plugin yet, so say that plainly
+  // (and point at the working alternative) instead of "not supported on this device or browser".
+  function isIos() {
+    try { return !!(window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === "ios"); } catch (e) { return false; }
+  }
+  var IOS_NFC_MSG = "NFC is not available in the iPhone app yet. Use Scan QR / Barcode, or type the StewardID.";
+
   function hasWebNfc() {
     try {
       return typeof window !== "undefined" && "NDEFReader" in window;
@@ -463,7 +470,7 @@
         }
       }
 
-      throw new Error("NFC is not supported on this device or browser.");
+      throw new Error(isIos() ? IOS_NFC_MSG : "NFC is not supported on this device or browser.");
     },
 
     /**
@@ -555,7 +562,7 @@
         }
       }
 
-      return Promise.reject(new Error("NFC writing is not available on this device or browser."));
+      return Promise.reject(new Error(isIos() ? IOS_NFC_MSG : "NFC writing is not available on this device or browser."));
     },
 
     /**

@@ -676,3 +676,13 @@ body.dark #smdOpdEmr .oe-notif .material-symbols-outlined { color: #f5c26b; }
 #smdOpdEmr .oe-toolsheet-fr { display: flex; align-items: center; gap: 8px; }
 #smdOpdEmr .oe-toolsheet-fr .oe-btn { min-height: 44px; flex: 1 1 auto; }
 #smdOpdEmr .oe-exsel { flex: 1 1 40%; min-height: 44px; border: 1px solid var(--outline-variant); border-radius: 10px; background: var(--surface); color: var(--on-surface); padding: 0 8px; }
+/* Protocols & dose tools: one collapsed card; the list scrolls inside a fixed-height box. */
+#smdOpdEmr .oe-pbox { margin-top: 12px; }
+#smdOpdEmr .oe-pb-tools { display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; }
+#smdOpdEmr .oe-pb-tools .oe-btn { width: 100%; justify-content: center; }
+#smdOpdEmr .oe-pb-scroll { max-height: 320px; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; border: 1px solid var(--outline-variant); border-radius: 12px; padding: 0 10px; margin-top: 8px; }
+/* Native feel: the EMR never pans sideways. Wide content (tables, chip rows) scrolls inside its own box. */
+#smdOpdEmr, #smdOpdEmr .oe-app { overflow-x: hidden; overscroll-behavior-x: none; }
+#smdOpdEmr .oe-canvas { overflow-x: hidden; overscroll-behavior-x: none; touch-action: pan-y; }
+#smdOpdEmr .oe-canvas > * { min-width: 0; max-width: 100%; }
+#smdOpdEmr .oe-tabs, #smdOpdEmr .oe-proto-branches, #smdOpdEmr .oe-onco-scroll { touch-action: pan-x pan-y; }
