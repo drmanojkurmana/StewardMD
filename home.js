@@ -10240,6 +10240,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var _inv = 1 / z;
     var _sh = document.getElementById("hvSheet"); if (_sh) _sh.style.zoom = _inv;
     var _scr = document.getElementById("hvScrim"); if (_scr) _scr.style.zoom = _inv;
+    // The boot splash must match the native launch screen point for point (2026-10-30): applying the
+    // page zoom while it is up shrank the centred mark mid-launch.
+    var _bs = document.getElementById("smdBootSplash"); if (_bs) _bs.style.zoom = _inv;
   }
   window.SMD_ZOOM = { prep: prepZoomD, now: zoomOfD, apply: zoomNowD };
   try {

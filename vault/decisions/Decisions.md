@@ -5,6 +5,25 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-30 · One still launch frame: native, splash, Face ID and privacy cover are the same (owner: "is this the way an app should start")
+
+**Decision.** Supersedes 2026-09-09 "native launch mark removed". A screen recording showed a returning open as
+flat teal (native, no logo) for 2 s, then a gradient with nothing on it (web splash `sbs-blank` for 700 ms), then
+a grey blur (the iOS privacy cover `systemThickMaterial`, shown because Face ID makes the scene inactive), then home
+cutting in with its icons popping a beat later. Now:
+- `LaunchScreen.storyboard` shows `LaunchLogo` (107pt, centred; light = logo.png, dark = the mark in #4B9E8D).
+- A returning open's web splash is `sbs-quiet`: the same flat LaunchBackground and the same 107pt mark at the exact
+  centre, nothing else, no motion, no phase 2. Pixel check against the native frame: same box within 2 device px.
+  `home.js` counter-zooms the splash so the 0.95 small-phone zoom cannot shrink the mark mid-launch.
+- The privacy cover is the launch screen itself (`UIStoryboard(name: "LaunchScreen")`), so Face ID at launch changes
+  nothing on screen and the app switcher shows the brand. It fades out over 0.2 s and snaps back opaque if the app
+  resigns again mid-fade. Blur is only the fallback.
+- The splash lifts only once the Material Symbols icon font is in (now preloaded), so home arrives complete.
+- The first-ever open keeps its drawn sequence (2026-09-09 decisions) unchanged.
+**Trade-off.** Native changes (storyboard, asset, AppDelegate) need a native rebuild, not just build-www. Android's
+system splash is unchanged (still a transparent icon); its web splash gets the same quiet frame.
+**Status.** Live in the repo. Test: `test/run-splash-ui.mjs`.
+
 ## 2026-10-29 · ICU Overview layout C and no stripes or tints (owner: "is this not ai slop?", then "you select")
 
 **Decision.** Three Overview variants were rendered (A quiet list, B ranked list, C two panes on iPad); C is the default

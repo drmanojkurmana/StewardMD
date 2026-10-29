@@ -206,16 +206,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     // Patient privacy in the app switcher (owner decision 2026-10-03). iOS shows the window as it
-    // stands when the scene goes inactive (app switcher, Control Center, an incoming call) and keeps
-    // that snapshot after backgrounding, so a ward list or a note would sit there in full. A blur
-    // cover goes on top of everything as the scene resigns active and comes off on EVERY activation,
-    // so it can never be left stuck. Found again by tag; the guard stops a double cover.
+    // stands when the scene goes inactive (app switcher, Control Center, an incoming call, Face ID) and
+    // keeps that snapshot after backgrounding, so a ward list or a note would sit there in full. A cover
+    // goes on top of everything as the scene resigns active and comes off on EVERY activation, so it can
+    // never be left stuck. Found again by tag; the guard stops a double cover.
+    // The cover IS the launch screen (2026-10-30): the same colour and centred mark as the boot splash,
+    // so Face ID at launch no longer swaps the splash for a grey blur, and the app switcher shows the
+    // brand instead of frosted glass. Nothing underneath is visible either way. Blur is the fallback.
     static let privacyCoverTag = 0x534D_4450   // "SMDP"
 
     func sceneWillResignActive(_ scene: UIScene) {
-        guard let window = window, window.viewWithTag(SceneDelegate.privacyCoverTag) == nil else { return }
-        // Thickest of the adaptive system materials: nothing underneath should be readable.
-        let cover = UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))
+        guard let window = window else { return }
+        if let fading = window.viewWithTag(SceneDelegate.privacyCoverTag) {
+            // Still fading out from the last activation: make it fully opaque again, at once.
+            fading.layer.removeAllAnimations()
+            fading.alpha = 1
+            window.bringSubviewToFront(fading)
+            return
+        }
+        let cover: UIView = UIStoryboard(name: "LaunchScreen", bundle: nil).instantiateInitialViewController()?.view
+            ?? UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))
         cover.frame = window.bounds
         cover.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         cover.tag = SceneDelegate.privacyCoverTag
@@ -223,7 +233,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        window?.viewWithTag(SceneDelegate.privacyCoverTag)?.removeFromSuperview()
+        if let cover = window?.viewWithTag(SceneDelegate.privacyCoverTag) {
+            // A short fade instead of a one-frame cut back to the app.
+            UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
+                cover.alpha = 0
+            }, completion: { finished in
+                if finished && cover.alpha == 0 { cover.removeFromSuperview() }
+            })
+        }
         smdConsumePendingControlRoute()
     }
 }
