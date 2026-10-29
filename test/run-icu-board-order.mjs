@@ -43,7 +43,7 @@ try {
     localStorage.setItem("smd_icu_groups", "0");
     try { for (var i=localStorage.length-1;i>=0;i--){ var k=localStorage.key(i); if(k&&k.indexOf("stewardmd_icu_patients")===0) localStorage.removeItem(k); } } catch(e){}
     [["Stable One","1",{hr:80,sbp:124,dbp:76,spo2:98,rr:16}],["Crit Pt","9",{hr:128,sbp:80,dbp:46,spo2:89,rr:30}],["Stable Two","4",{hr:76,sbp:120,dbp:72,spo2:97,rr:14}]].forEach(function (p) {
-      ICU.reset(); ICU.ingestPatient({ name: p[0], bed: p[1], diagnosis: "x", age: 60, sex: "F" }); ICU.ingestMonitor(p[2]); ICU.savePatient();
+      ICU.reset(); ICU.ingestPatient({ name: p[0], bed: p[1], diagnosis: "x", age: 60, sex: "F" }); ICU.ingestMonitor(p[2]); ICU.update({ abg: { ph: 7.31, paco2: 30 } }); ICU.savePatient();   // an ABG, so its tiles render (empty ABG collapses to one line)
     });
     ICU.open(); return "1";
   `);

@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-29 · ICU Overview layout C and no stripes or tints (owner: "is this not ai slop?", then "you select")
+
+**Decision.** Three Overview variants were rendered (A quiet list, B ranked list, C two panes on iPad); C is the default
+because it uses the iPad width and is A on a phone. ICU-wide: no coloured left stripes, no tinted alert or tile fills, no
+repeated category tags, section labels are headings, secondary actions are text, Specialty tools joins the FAB stack as
+an icon button (its pill covered "Add findings").
+**Why.** The alert cards encoded severity three times (stripe, tint, tag) and sat under three screens of tiles; that is
+antislop-ui's left-stripe ban and impeccable's card-scaffold and eyebrow bans.
+**Trade-off.** Layout change on the most-used ICU screen. `smd_icu_ov = "0"` restores the old Overview on a device.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild.
+
 ## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
 
 **Decision.** Applied as refinement, not redesign: same layout, palette and copy. Fixed what the skills' rules measure:

@@ -4,6 +4,7 @@
  *  - no tracked-uppercase labels (they also mangled pH / PaCO2 / SpO2)
  *  - no text glyphs standing in for icons (checkbox, pencil)
  *  - dark mode: white-on-teal fills and teal text both >= 4.5:1 (one teal cannot do both)
+ *  - no coloured left-edge stripe on cards, rows or alerts (antislop-ui / impeccable craft floor ban)
  * USAGE: node test/run-icu-ui-floor.mjs   (CHROME=/path/to/chrome to override)
  */
 import { spawn } from "node:child_process";
@@ -45,7 +46,8 @@ try {
     var lum = function (c) { var m = c.match(/[\\d.]+/g); var v = m.slice(0, 3).map(function (x) { x = +x / 255; return x <= .03928 ? x / 12.92 : Math.pow((x + .055) / 1.055, 2.4); }); return { L: .2126 * v[0] + .7152 * v[1] + .0722 * v[2], a: m[3] != null ? +m[3] : 1 }; };
     var bgOf = function (el) { while (el) { var l = lum(getComputedStyle(el).backgroundColor); if (l.a > .5) return l.L; el = el.parentElement; } return 1; };
     var cr = function (el) { var f = lum(getComputedStyle(el).color).L, b = bgOf(el); return (Math.max(f, b) + .05) / (Math.min(f, b) + .05); };
-    var small = [], caps = [], glyph = [], lowc = [];
+    var small = [], caps = [], glyph = [], lowc = [], stripe = [];
+    root.querySelectorAll("*").forEach(function (el) { if (!vis(el)) return; var cs = getComputedStyle(el); if (parseFloat(cs.borderLeftWidth) > 1.5 && cs.borderLeftStyle !== "none" && parseFloat(cs.borderRightWidth) < 1.5) stripe.push((el.className || el.tagName).toString().slice(0, 40)); });
     root.querySelectorAll("button,[role=tab],[role=switch]").forEach(function (el) { if (!vis(el)) return; var zm = parseFloat(document.documentElement.style.zoom) || 1, w = el.offsetWidth * zm, h = el.offsetHeight * zm; if (h < 43.5 || w < 43.5) small.push((el.getAttribute("aria-label") || el.textContent).trim().slice(0, 30) + " " + Math.round(w) + "x" + Math.round(h)); });
     root.querySelectorAll("*").forEach(function (el) {
       if (!vis(el)) return; var own = [].filter.call(el.childNodes, function (n) { return n.nodeType === 3; }).map(function (n) { return n.textContent; }).join("").trim(); if (!own) return;
@@ -54,7 +56,7 @@ try {
       if (/[\\u270E\\u2610\\u2611]/.test(own)) glyph.push(own.slice(0, 24));
       var fs = parseFloat(cs.fontSize), c = cr(el); if (c < ((fs >= 18.66 || (fs >= 14 && +cs.fontWeight >= 700)) ? 3 : 4.5)) lowc.push(own.slice(0, 24) + " " + c.toFixed(2));
     });
-    return JSON.stringify({ small: small, caps: caps, glyph: glyph, lowc: lowc });`;
+    return JSON.stringify({ small: small, caps: caps, glyph: glyph, lowc: lowc, stripe: stripe });`;
   for (const dark of [false, true]) {
     const th = dark ? "dark" : "light";
     await J(`
@@ -75,6 +77,7 @@ try {
       ok(r.caps.length === 0, `${th} ${name}: no tracked-uppercase labels (${r.caps.slice(0, 3).join("; ")})`);
       ok(r.glyph.length === 0, `${th} ${name}: no text glyphs as icons (${r.glyph.slice(0, 3).join("; ")})`);
       ok(r.lowc.length === 0, `${th} ${name}: text contrast passes (${r.lowc.slice(0, 3).join("; ")})`);
+      ok(r.stripe.length === 0, `${th} ${name}: no coloured left-edge stripes (${r.stripe.slice(0, 3).join("; ")})`);
     }
   }
 } catch (e) { console.log("❌ " + (e && e.stack || e)); fails++; }
