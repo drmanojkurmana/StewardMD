@@ -101,6 +101,15 @@ figures; selection is colour + weight, press is brightness. See [[Decisions]] (2
 - Type floor 11px; no tracked uppercase anywhere in `injectCSS()` (print styles excepted).
 - Icons are drawn (`ico()`), never text glyphs: Rounds checkboxes are `.icu-rcb` + `ico("check")`, edit is `ico("edit")`.
 
+**Overview layout C (default since 2026-10-29; `smd_icu_ov` = a | b | c, "0" = the previous Overview):** alerts open the
+page as one hairline panel (`ovAlertsPanel`: severity as a word column, grouped by system, critical groups first), then
+vitals, then the rest; on a tablet (>= 900px) two panes, clinical state left and plan right, with the 820px cap lifted.
+Empty ventilator/ABG collapse to one "Add" line; scores waiting for data fold into one expandable line; Trends and Lab
+Watch are plain rows; the Overview/Rounds sub-chips are hidden (both are top tabs). Composition lives in `renderBody`.
+**No coloured stripes anywhere** (board cards, attention cards, alert rows, status bars, header counts): severity is a
+coloured word, label or icon. Tiles colour only the abnormal value (no tinted fill; normal is ink). Section labels are
+ink headings without icons; secondary card actions are teal text actions. Guarded by `test/run-icu-ui-floor.mjs`.
+
 **Never `text-transform:uppercase` a clinical label.** Labels are authored in clinical case (pH, PaCO₂, SpO₂, FiO₂,
 HCO₃⁻); uppercase turned them into "PH", "PACO₂", "SPO₂". Tile labels (`.icu-vc .vl`), board vital keys
 (`.icu-v2-vk`) and header chips (`.icu-v2-mv-k`) are sentence/clinical case since 2026-10-28.
