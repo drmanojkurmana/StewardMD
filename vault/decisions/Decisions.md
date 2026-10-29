@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-29 · ICU Overview layout C and no stripes or tints (owner: "is this not ai slop?", then "you select")
+
+**Decision.** Three Overview variants were rendered (A quiet list, B ranked list, C two panes on iPad); C is the default
+because it uses the iPad width and is A on a phone. ICU-wide: no coloured left stripes, no tinted alert or tile fills, no
+repeated category tags, section labels are headings, secondary actions are text, Specialty tools joins the FAB stack as
+an icon button (its pill covered "Add findings").
+**Why.** The alert cards encoded severity three times (stripe, tint, tag) and sat under three screens of tiles; that is
+antislop-ui's left-stripe ban and impeccable's card-scaffold and eyebrow bans.
+**Trade-off.** Layout change on the most-used ICU screen. `smd_icu_ov = "0"` restores the old Overview on a device.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild.
+
 ## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
 
 **Decision.** Applied as refinement, not redesign: same layout, palette and copy. Fixed what the skills' rules measure:
@@ -11940,3 +11951,21 @@ Owner: choosing the Medical Oncology group showed every medical subject; wanted 
 
 ## 2026-10-28 - Every NEET-SS group shows only what its paper covers
 Owner: "not just medical oncology but all groups, show relevant only as per groups" (NEET-SS 2026 Specialty Groups guide). `prep/ss-groups.json`: the Medical group is the General Medicine curriculum (General Medicine, Cardiology, Neurology, Nephrology, GI, Hepatology, Endocrinology, Haematology, Rheumatology, Pulmonology, Infectious Diseases, Critical Care, Biostatistics; no Medical Oncology). Respiratory and Radio-diagnosis (kind `own`) show their own subject and Biostatistics (Radio-diagnosis keeps the Radiology subject as an extra); they no longer add the medical core. Medical Oncology and Critical Care stay `only`. INI-SS Medical Oncology still gets General Medicine through `INI_PAIR` in `prep-plan.js` (it used to come from sharing the Medical group). Supersedes the 2026-10-14 medical-core rule and the radiology-plus-medical-core owner rule. Do not re-litigate.
+
+## 2026-10-29 - OPD EMR: protocols box, native-feel scroll lock, voice history inference, iPhone NFC gap
+Owner screenshots: (1) dose calculator, OncoTree button and the oncology protocol list sat at the top of Assessment; (2) EMR panned sideways like a page; (3) voice filled only complaints and past history; (4) Ni-Key NFC fails on iPhone.
+- **Protocols & dose tools** is now ONE collapsed card (`protoBox` in `opd-emr.js`) after the form sections: dose calculator, OncoTree, a search box and a fixed-height scroll list of EVERY protocol (clinical KB index plus oncology regimens). Oncology rows keep the old Apply (staged review stays above the form). Tapping a clinical protocol opens the Protocol tab reader and Back returns to Assessment with the box open. State: `st.pbOpen`, `st.pbQuery`.
+- **No sideways pan**: `overflow-x: hidden`, `overscroll-behavior`, `touch-action: pan-y` on `#smdOpdEmr` and `#smdQueue` canvases; wide strips (tabs, chips, oncology matrix) keep their own horizontal scroll. NOTE the app runs `html { zoom: .95 }`, so `getBoundingClientRect` widths are 0.95x `clientWidth`; do not read that as an overflow in a test.
+- **Voice history**: `_inferHistory` (pure, on-device) ticks comorbidity Yes/No, writes details and current home drugs from the English transcript (negation aware, a drug the doctor is STARTING is not history, never overwrites a filled value). Runs after every cloud refine and on live ambient updates. Server prompt now asks for `homeMeds`, vitals and drug-implied ticks.
+- **iPhone NFC cannot be fixed over the air**: Android has `NfcPlugin.java`; iOS has NO NFC plugin, no `com.apple.developer.nfc.readersession.formats` entitlement and no `NFCReaderUsageDescription`, and WKWebView has no Web NFC. Needs a CoreNFC Capacitor plugin, the entitlement on the App ID and provisioning profile, and a native rebuild (Mac). Until then `smd-nfc.js` says so plainly and points at QR/StewardID.
+
+## 2026-10-29 - iPhone Ni-Key NFC: CoreNFC NfcPlugin, one system sheet per tap (branch worktree-ios-nfc-plugin)
+Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone NFC gap" entry above).
+- **`ios/App/App/NfcPlugin.swift`** (`Capacitor.Plugins.NfcPlugin`, registered in `MainViewController.capacitorDidLoad` like SmdDevice; listed in the App target's Sources in `project.pbxproj`). Same contract as `NfcPlugin.java`: `isAvailable` -> `{available, enabled, onDemand:true}`, `startScan`/`stopScan`, `writeTag({text,url})` -> `{success, uid, text, url, verified, readBack:{text,url}}`, `cancelWrite`, events `tagDiscovered {uid, formattedUid, text, url, records}`, `tagWritten`, and iOS-only `scanEnded {reason: tag|cancelled|timeout|error, message}`.
+- **NFCTagReaderSession for reads too, not NFCNDEFReaderSession.** Only a tag session gives the chip serial, and `smd-nfc.js isEmptyTag()` needs it (both bridges echo the serial into `text` on a blank tag) and the empty-tag sheet shows it. Polls ISO 14443 + ISO 15693 (NTAG/Ultralight, Type 4, ICODE). No FeliCa (would need system codes in Info.plist).
+- **Write = Text record + URI record, then `readNDEF` read-back**; `verified` is the comparison, and smd-nfc.js rejects `WRITE_VERIFICATION_FAILED` on a mismatch. Read-only, unformatted and too-small tags fail with a sentence the sheet shows.
+- **Entitlement `com.apple.developer.nfc.readersession.formats` = `[TAG]` only.** `NDEF` is NOT listed: App Store Connect rejects it (ITMS-90778 "NDEF is disallowed") and TAG already covers NDEF sessions. Info.plist: `NFCReaderUsageDescription` + `com.apple.developer.nfc.readersession.iso7816.select-identifiers = [D2760000850101]` (the NFC Forum NDEF Type 4 application, so Type 4 tags are read instead of failing the session).
+- **iPhone has no background reader.** `smd-nfc.js` treats native+iOS as on-demand: `initAppListener` does NOT scan at launch (it would pop the sheet on every app open); `startScan` re-arms on every call (no `isListening` latch, which is reset by `scanEnded`/`tagDiscovered`) and refuses with `NEEDS_USER_TAP` when there is no user gesture (`navigator.userActivation`) unless the caller passes `{userInitiated:true}`. New `options.onEnd` resets the New patient sheet's button (and the opd.html walk-in button) on Cancel/timeout. So on iPhone a tap on a folder is read from the Read NFC button, not by just holding it to the phone. Android is unchanged.
+- `IOS_NFC_MSG` stays, now only for an iPhone store build without the plugin (OTA cannot add native code).
+- Signing: App ID `in.stewardmd.app` needs the **NFC Tag Reading** capability; with Automatic signing the dev and App Store profiles are regenerated by Xcode (`-allowProvisioningUpdates`) or must be regenerated by hand in the portal.
+- Tests: `test/smd-nfc-ios.test.mjs` (13), `test/run-nfc-ui.mjs` section D (iPhone flow; the script now resolves the repo from its own path instead of a hard-coded home dir). The old `?v=nfc-2` pin in `opd-nfc-barcode.test.mjs` was already failing on main (index ships `nfc2-2`) and is now token-agnostic.

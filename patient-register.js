@@ -660,9 +660,9 @@
         } catch (e) {}
         btn.disabled = false;
         btn.textContent = "\u2713 " + wT("ward.reg-nfc-written", "NFC Tag Written!");
-      }, function () {
+      }, function (e) {
         btn.disabled = false;
-        btn.textContent = wT("ward.reg-nfc-failed", "Could not write the tag. Try again.");
+        btn.textContent = (e && e.message && /iPhone/.test(e.message)) ? e.message : wT("ward.reg-nfc-failed", "Could not write the tag. Try again.");
       });
     }
     try { root.removeEventListener("hashchange", open._onHash); root.addEventListener("hashchange", onHash); open._onHash = onHash; } catch (e) {}
@@ -801,6 +801,15 @@
           sBtn.disabled = false;
           state.stewardId = (hit && hit.stewardId) || uhid;
           applyResolvedIdentity(uhid, "nfc", hit);
+        }, {
+          /* iPhone: the system NFC sheet closed with no tag (Cancel, timeout or a tag error). */
+          userInitiated: true,
+          onEnd: function (info) {
+            resetScan();
+            if (info && info.reason !== "cancelled" && info.message && root.toast) {
+              root.toast(wT("ward.reg-nfc-read-error", "Ni-Key NFC read error: {msg}", { msg: info.message }));
+            }
+          }
         }).catch(function (err) {
           resetScan();
           var msg = (err && err.message) ? err.message : String(err || "");

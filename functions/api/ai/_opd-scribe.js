@@ -80,7 +80,10 @@ export function scribeExtractPrompt(transcript, opts) {
     "- cc: Chief complaints with duration (e.g. 'Fever x 3 days, cough x 2 days')\n" +
     "- presentHx: Detailed Chronological History of Present Illness (symptoms, onset, progression, pertinent positives and negatives)\n" +
     "- pastHx: Past illnesses, prior surgeries, hospital admissions\n" +
-    "- treatmentReceived: Ongoing home medications or prior treatment (e.g. 'Metformin 500mg BD, Telma 40mg OD')\n" +
+    "- homeMeds: the patient's CURRENT home medicines, every one named with dose and frequency when stated (e.g. 'Metformin 500mg BD, Telma 40mg OD'); a stopped medicine is not listed here\n" +
+    "- treatmentReceived: treatment already received for THIS illness (e.g. 'Took paracetamol and an antibiotic from a local doctor')\n" +
+    "- vitals the doctor or nurse states: temp, bpSys, bpDia, pulse, rr, spo2, grbs, weightKg, heightCm as plain numbers (only if spoken)\n" +
+    "- HISTORY TICK-BOXES: whenever a chronic condition is mentioned as present, set its Yes/No key to 'Yes' even if only a drug implies it (e.g. 'on metformin' or 'insulin' => dm 'Yes'; 'telmisartan' => htn 'Yes'; 'thyroxine' => thyroid 'Yes'); set 'No' only when it is explicitly denied. Also cancer, ckd, cld, cva and dyslipidemia ('Yes'/'No') with cancerDetails, ckdDetails, cldDetails, cvaDetails, dyslipidemiaDetails.\n" +
     "- dm / dmDetails: dm is 'Yes'/'No' if stated. dmDetails has duration/treatment (e.g. 'Type 2 DM x 5 years on Metformin 500mg BD')\n" +
     "- htn / htnDetails: htn is 'Yes'/'No' if stated. htnDetails has duration/treatment (e.g. 'HTN x 3 years on Telma 40')\n" +
     "- cardiac, asthma, tb, thyroid, epilepsy: 'Yes'/'No' if stated, with cardiacDetails, asthmaDetails, tbDetails, thyroidDetails, epilepsyDetails if described\n" +

@@ -720,7 +720,7 @@
     if (!key) return;
     if (key.indexOf("g:") === 0) { var id = key.slice(2); var g = (_grpList || []).filter(function (x) { return x.id === id; })[0]; if (g) grpSelect(g, true); }
     else if (key.indexOf("s:") === 0) { var p = key.slice(2).split(":"); selectUnit({ cat: p[0], type: decodeURIComponent(p[1] || "") }); }
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
   }
   function currentUnitLabel() {
     if (grpActive() && _grp) return (_grp.name || ctxLabel()) + (_grp.hospital ? " · " + _grp.hospital : "");
@@ -909,7 +909,7 @@
       if (evicted && evicted.id !== id && window.toast) toast((evicted.name ? pv("name", evicted.name) : "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
     }
     saveRoster(capTen(r));
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
     return Promise.resolve(entry);
   }
   // Inverse of addWardPatientToRoster: un-add a Ward-Sync patient from the CURRENT unit's board, using
@@ -923,7 +923,7 @@
       return Promise.reject(new Error("group-api-unavailable"));
     }
     var p = rosterRemove("pw_" + patientId);
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
     return Promise.resolve(p);
   }
 
@@ -996,7 +996,7 @@
       // real bottom gap before the card content instead of being pulled onto it.
       '.icu-card .icu-sec-lbl{margin:0 0 9px}' +
       '.icu-sbar-head{margin-bottom:10px}' +
-      '.icu-sbar{border-left:3px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
+      '.icu-sbar{border:1px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
       '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.005em;text-transform:none;margin-bottom:4px}' +
       '.icu-sbar-body{font:500 14px/1.5 var(--font);color:var(--ink)}' +
       '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 11px var(--font);vertical-align:middle}' +
@@ -1046,9 +1046,9 @@
       '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
       '.icu-vc .vl{font:600 11.5px var(--font);letter-spacing:.005em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 11px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
-      '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
-      '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
-      '.icu-vc.ok .vv{color:var(--ok)}' +
+      '.icu-vc.crit .vv{color:var(--danger)}' +
+      '.icu-vc.warn .vv{color:var(--warn)}' +
+      '.icu-vc.ok .vv{color:var(--ink)}' +
       '.icu-spark{width:100%;height:18px;display:block;margin-top:5px;color:var(--muted);opacity:.8}' +
       '.icu-vc.crit .icu-spark{color:var(--danger);opacity:1}.icu-vc.warn .icu-spark{color:var(--warn);opacity:1}.icu-vc.ok .icu-spark{color:var(--primary)}' +
       // generic card
@@ -1074,10 +1074,10 @@
       // alert / recommendation / protocol cards
       // Alerts: the coloured rail carries the severity, the fill stays subtle so a screen of alerts
       // does not turn into a wall of red.
-      '.icu-alert{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r-xs);padding:12px 14px;background:var(--panel);margin-bottom:8px}' +
+      '.icu-alert{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);border-radius:var(--r-xs);padding:12px 14px;background:var(--panel);margin-bottom:8px}' +
       '.icu-alert-grp{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
-      '.icu-alert.crit{border-left-color:var(--danger);background:var(--danger-soft)}' +
-      '.icu-alert.warn{border-left-color:var(--warn);background:var(--warn-soft)}' +
+      '.icu-alert.crit .at{color:var(--danger)}' +
+      '.icu-alert.warn .at{color:var(--warn)}' +
       '.icu-alert .at{font:700 13.5px var(--font)}.icu-alert .am{font:500 12.5px/1.45 var(--font);color:var(--muted);margin-top:1px}' +
       '.icu-alert .ax{margin-left:auto;font:700 11px var(--font);text-transform:none;color:var(--muted)}' +
       '.icu-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font:500 13.5px/1.45 var(--font)}.icu-row:last-child{border-bottom:none}.icu-row b{font-weight:700}' +
@@ -1369,23 +1369,23 @@
       // legible and the header keeps a single background.
       '#icuRoot.icu-v2 .icu-v2-strip{display:flex;gap:6px;margin-top:15px}' +
       '#icuRoot.icu-v2 .icu-v2-scount{position:relative;flex:1;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:9px 6px 8px;cursor:pointer;text-align:center;background:rgba(255,255,255,.09);min-height:44px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;transition:background var(--ease)}' +
-      '#icuRoot.icu-v2 .icu-v2-scount::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.34)}' +
+      '' +
       '#icuRoot.icu-v2 .icu-v2-scount b{display:block;font:600 21px var(--mono);letter-spacing:-.02em;color:#fff}#icuRoot.icu-v2 .icu-v2-scount span{display:block;font:600 11px var(--font);letter-spacing:.005em;text-transform:none;margin-top:3px;color:rgba(255,255,255,.8)}' +
-      '#icuRoot.icu-v2 .icu-v2-scount.crit::before{background:#F98C82}#icuRoot.icu-v2 .icu-v2-scount.crit span{color:#FBC2BC}' +
-      '#icuRoot.icu-v2 .icu-v2-scount.review::before{background:#F2C066}#icuRoot.icu-v2 .icu-v2-scount.review span{color:#F6D9A5}' +
-      '#icuRoot.icu-v2 .icu-v2-scount.stable::before{background:#7FD3A2}#icuRoot.icu-v2 .icu-v2-scount.stable span{color:#B4E4C8}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.crit span{color:#FBC2BC}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.review span{color:#F6D9A5}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.stable span{color:#B4E4C8}' +
       // BUG B2 (2026-08-22 ward-round audit, acuity v2): "Not assessed" is deliberately NEUTRAL -
       // neither a green reassurance nor an amber/red alarm, since it means "no verdict yet", not
       // "verdict: fine" or "verdict: unwell". A blue-grey distinct from all three existing tones.
-      '#icuRoot.icu-v2 .icu-v2-scount.unassessed::before{background:#B9C4CE}#icuRoot.icu-v2 .icu-v2-scount.unassessed span{color:#D3DBE2}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.unassessed span{color:#D3DBE2}' +
       // Selected filter = the tile lifts to an opaque white-on-teal state (not an outline sticker).
       '#icuRoot.icu-v2 .icu-v2-scount.on{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.55)}' +
       // board body
       '#icuRoot.icu-v2 .icu-v2-board{padding:16px 16px 10px}' +
       '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:2px 2px 9px}' +
       '#icuRoot.icu-v2 .icu-v2-attn{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px 4px;padding:0 16px 4px;scrollbar-width:none}#icuRoot.icu-v2 .icu-v2-attn::-webkit-scrollbar{display:none}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:var(--r);padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-attn-card.unassessed{border-left-color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
+      '' +
       '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card.critical .icu-v2-attn-kind{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review .icu-v2-attn-kind{color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-name{font:700 14px var(--font);color:var(--ink);margin-top:6px}' +
@@ -1399,13 +1399,13 @@
       // patient card
       // The patient card is the unit of work on this screen: a white slab on a hairline, a 3px acuity
       // rail on the leading edge, no drop shadow competing with the rail.
-      '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:var(--r);padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:8px;transition:border-color var(--ease),box-shadow var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:8px;transition:border-color var(--ease),box-shadow var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-card:active{box-shadow:var(--sh-lift)}' +
       // swipe-to-remove row: the red action sits BEHIND the (opaque) card and is revealed by dragging left
       '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}#icuRoot.icu-v2 .icu-v2-swipe:not(.sw-on)>.icu-v2-swipe-act{visibility:hidden}' +
       '#icuRoot.icu-v2 .icu-v2-swipe .icu-v2-card{position:relative;z-index:1;touch-action:pan-y}' +
       '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.005em;text-transform:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
-      '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}#icuRoot.icu-v2 .icu-v2-card.unassessed{border-left-color:var(--muted)}' +
+      '' +
       '#icuRoot.icu-v2 .icu-v2-card-body{padding:13px 14px 12px}' +
       '#icuRoot.icu-v2 .icu-v2-card-top{display:flex;align-items:center;gap:11px}' +
       // Bed marker: a tile, squarer than the card, reading as a physical bay label.
@@ -1452,8 +1452,8 @@
       '#icuRoot.icu-v2 .icu-v2-slist,#icuRoot.icu-v2 .icu-v2-tlist{padding:14px 16px;display:flex;flex-direction:column;gap:9px}' +
       '#icuRoot.icu-v2 .icu-v2-note{font:500 12.5px var(--font);color:var(--ink2);background:var(--panel2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 13px;line-height:1.55;margin:8px 0}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
       '#icuRoot.icu-v2 .icu-v2-note-x{flex:0 0 auto;background:none;border:none;color:inherit;font:700 13px var(--font);cursor:pointer;padding:0 2px;line-height:1;opacity:.7}#icuRoot.icu-v2 .icu-v2-note-x:hover{opacity:1}' +
-      '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r);padding:12px 14px;cursor:pointer;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-alert-row.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-alert-row.review{border-left-color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;cursor:pointer;box-shadow:var(--sh)}' +
+      '' +
       '#icuRoot.icu-v2 .icu-v2-alert-ic{flex:0 0 auto;width:34px;height:34px;border-radius:var(--r-xs);background:var(--panel2);border:1px solid var(--border-soft);color:var(--muted);display:flex;align-items:center;justify-content:center}#icuRoot.icu-v2 .icu-v2-alert-ic .icu-ico{width:17px;height:17px}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.critical .icu-v2-alert-ic{background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 28%,var(--border));color:var(--danger)}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.review .icu-v2-alert-ic{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 28%,var(--border));color:var(--warn)}' +
@@ -1495,7 +1495,9 @@
       '#icuRoot.icu-v2 #icuWatch{bottom:calc(88px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px;padding:0;border-radius:50%;justify-content:center}' +
       '#icuRoot.icu-v2 #icuWatch .icu-lw-lbl{display:none}#icuRoot.icu-v2 #icuWatch .icu-ico{width:21px;height:21px}' +
       '#icuRoot.icu-v2.icu-has-fab .icu-scroll{padding-bottom:calc(150px + env(safe-area-inset-bottom))}' +
-      '#icuRoot.icu-v2 #icuKitFab{bottom:calc(146px + env(safe-area-inset-bottom));right:16px}#icuRoot.icu-v2.icu-has-kit .icu-scroll{padding-bottom:calc(206px + env(safe-area-inset-bottom))}' +
+      // Specialty tools joins the stack as a 48px icon button too: the labelled pill covered the primary action on Care Plan.
+      '#icuRoot.icu-v2 #icuKitFab{bottom:calc(146px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px;padding:0;border-radius:50%;justify-content:center}#icuRoot.icu-v2 #icuKitFab .icu-kit-lbl{display:none}#icuRoot.icu-v2 #icuKitFab .icu-ico{width:21px;height:21px}' +
+      '#icuRoot.icu-v2.icu-has-kit .icu-scroll{padding-bottom:calc(206px + env(safe-area-inset-bottom))}' +
       // Tap targets: 46px floor on every control = 44pt after home.js's 0.95 small-phone shrink (HIG). Tabs, chips, row tools and header icons were 26-42px.
       '#icuRoot button,#icuRoot [role=tab],#icuRoot [role=switch],.icu-modal button{min-height:46px;min-width:46px}' +
       // Dark: one teal cannot be both text and fill. Text/icon teal #4CC2B0, fill teal #1F7A6E (Refined Look, 2026-10-12).
@@ -1504,6 +1506,38 @@
       '.icu-vc-edit .icu-ico{width:13px;height:13px;display:block}' +
       '.icu-rcb{width:22px;height:22px;border:2px solid var(--muted);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff}.icu-rcb.on{background:var(--ok);border-color:var(--ok)}.icu-rcb .icu-ico{width:15px;height:15px;stroke-width:3}' +
       '.icu-score[data-icu-act],.icu-ward[data-icu-act]{min-height:46px;box-sizing:border-box;display:flex;align-items:center}' +
+      // Overview variants (smd_icu_ov). Alerts panel: hairline rows, severity word column; no stripe, no tint.
+      '.icu-al{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:4px 16px}' +
+      '.icu-al-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 0 10px}' +
+      '.icu-al-t{margin:0;font:650 17px/1.25 var(--font);color:var(--ink)}.icu-al-n{font:600 13px var(--font);color:var(--muted);font-variant-numeric:tabular-nums}' +
+      '.icu-al-g{font:600 12.5px var(--font);color:var(--muted);padding:14px 0 4px;border-top:1px solid var(--border)}' +
+      '.icu-al-r{display:grid;grid-template-columns:72px minmax(0,1fr) auto;column-gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid var(--border-soft,var(--border))}' +
+      '.icu-al-g+.icu-al-r{border-top:none}' +
+      '.icu-al-sev{font:650 13px var(--font);color:var(--muted)}.icu-al-r.crit .icu-al-sev{color:var(--danger)}.icu-al-r.warn .icu-al-sev{color:var(--warn)}' +
+      '.icu-al-tt{font:600 15px/1.3 var(--font);color:var(--ink)}.icu-al-m{font:400 14px/1.45 var(--font);color:var(--ink2,var(--muted));margin-top:2px}' +
+      '.icu-al-src{font:500 12.5px var(--font);color:var(--muted);white-space:nowrap}' +
+      '.icu-al-empty{margin:0 0 12px;font:400 14px/1.45 var(--font);color:var(--muted)}' +
+      '.icu-al-nav{padding:0}.icu-al-nr{display:flex;align-items:center;gap:10px;width:100%;min-height:50px;padding:0 16px;background:none;border:none;border-top:1px solid var(--border);font:500 15px var(--font);color:var(--ink);text-align:left;cursor:pointer}' +
+      '.icu-al-nr:first-child{border-top:none}.icu-al-nr>span:first-child{flex:1}.icu-al-nv{color:var(--muted);font-size:14px}.icu-al-nr .icu-ico{width:16px;height:16px;color:var(--muted)}.icu-al-nr:active{background:var(--panel2)}' +
+      // Variant section titles: a real heading (ink, 15px), not a grey eyebrow with an icon.
+      '#icuRoot .icu-sec-lbl,.icu-modal .icu-sec-lbl{font:650 15px var(--font);color:var(--ink);margin:4px 0 8px}#icuRoot .icu-card>.icu-sec-lbl{margin:0 0 8px}#icuRoot .icu-sec-lbl>.icu-ico,#icuRoot .icu-sec-lbl>.icu-emoji,.icu-modal .icu-sec-lbl>.icu-ico{display:none}' +
+      '.icu-mc-beta{font:500 13px var(--font);color:var(--muted);margin-left:6px}' +
+      // Ward Sync status: a quiet line (an action reads as a teal text action), not a bordered bar.
+      '#icuRoot .icu-ward:not(.on){background:none;border:none;padding:8px 2px;font:500 13.5px var(--font);color:var(--muted)}#icuRoot .icu-ward[data-icu-act]:not(.on){color:var(--primary);font-weight:600;min-height:46px;display:flex;align-items:center}' +
+      // Tiles: abnormal values carry the colour; no tinted fill or coloured border, and normal reads as plain ink.
+      '.icu-ovv-none{display:flex;align-items:center;gap:4px 14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:4px 6px 4px 14px;font:500 14px var(--font);color:var(--muted)}' +
+      '.icu-score-more>summary{list-style:none;display:flex;align-items:center;min-height:46px;font:600 14px var(--font);color:var(--primary);cursor:pointer;border-top:1px solid var(--border)}.icu-score-more>summary::-webkit-details-marker{display:none}' +
+      '.icu-score-more>summary::after{content:"";width:7px;height:7px;margin-left:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}.icu-score-more[open]>summary::after{transform:rotate(-135deg)}' +
+      '.icu-ovv .icu-score.miss{opacity:1}.icu-ovv .icu-score-need{font-style:normal;color:var(--muted)}' +
+      // In-card actions read as text actions, not a full-width outlined box under every card.
+      '#icuRoot .icu-card .icu-btn.ghost{width:auto;border:none;background:none;padding:0 2px;justify-content:flex-start;color:var(--primary);font-weight:600}#icuRoot .icu-card .icu-btn.ghost:active{background:var(--panel2)}' +
+      '.icu-ovv .icu-empty{text-align:left;padding:2px 0}' +
+      '.icu-ovv-none>span{flex:1 1 auto;padding:10px 0}.icu-ovv-add{background:none;border:none;color:var(--primary);font:600 14px var(--font);padding:0 10px;cursor:pointer}' +
+      '.icu-ovv{display:flex;flex-direction:column;gap:14px}' +
+      '@media (max-width:520px){.icu-al-r{grid-template-columns:62px minmax(0,1fr)}.icu-al-src{grid-column:2;margin-top:3px}}' +
+      // C: two panes on a tablet; the 820px cap lifts for this layout only.
+      '.icu-ovv-col{display:flex;flex-direction:column;gap:14px;min-width:0}' +
+      '@media (min-width:900px){#icuRoot .icu-wrap:has(> .icu-ovv-c){max-width:1240px}.icu-ovv-c{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}}' +
       // ── group mode (smd_icu_groups, Phase 2) — additive, scoped under #icuRoot.icu-v2 ──
       // unit switcher (the header title becomes a tappable group picker)
       '#icuRoot.icu-v2 .icu-v2-gswitch{flex:1;min-width:0;border:none;background:none;color:inherit;text-align:left;cursor:pointer;padding:0;font:700 17px var(--font)}' +
@@ -1682,7 +1716,7 @@
     var pencil = edit ? '<span class="icu-vc-edit" aria-hidden="true">' + ico("edit", "✎") + '</span>' : '';
     return '<div class="icu-vc ' + (status || "") + (edit ? " icu-vc-tap" : "") + '"' + attrs + '>' + pencil + '<div class="vl">' + esc(label) + '</div><div class="vv">' + vv + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
-  function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
+  function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div></div>'; }
   // BUG #7: group the alert list by TRUE source, in clinical priority order.
   function alertsGroupedHTML(alerts) {
     var by = {}; (alerts || []).forEach(function (a) { var s = a.source || "Other"; (by[s] = by[s] || []).push(a); });
@@ -1691,6 +1725,54 @@
     return order.filter(function (s) { return by[s] && !seen[s] && (seen[s] = 1); }).map(function (s) {
       return '<div class="icu-alert-grp">' + esc(s) + "</div>" + by[s].map(alertCard).join("");
     }).join("");
+  }
+
+  // Overview layout (2026-10-29, owner picked "you select"): C = alerts first, two panes on a tablet, one column on
+  // a phone. ?icuov= or localStorage smd_icu_ov: a | b | c, and "0"/"off" brings back the previous Overview.
+  function icuOvVariant() {
+    try {
+      var q = (location.search.match(/[?&]icuov=([a-z0-9]+)/) || [])[1];
+      var v = q || localStorage.getItem("smd_icu_ov") || "c";
+      if (v === "0" || v === "off") return "";
+      return /^[abc]$/.test(v) ? v : "c";
+    } catch (e) { return "c"; }
+  }
+  var OV_SEV = { crit: "Critical", warn: "Caution", info: "Note" };
+  function ovAlertRow(a, withSource) {
+    var sev = OV_SEV[a.severity] ? a.severity : "info";
+    return '<div class="icu-al-r ' + sev + '"><span class="icu-al-sev">' + OV_SEV[sev] + '</span>' +
+      '<div class="icu-al-b"><div class="icu-al-tt">' + esc(a.title) + '</div><div class="icu-al-m">' + esc(a.msg) + '</div></div>' +
+      (withSource && a.source ? '<span class="icu-al-src">' + esc(a.source) + '</span>' : "") + '</div>';
+  }
+  // One panel, hairline rows, severity as a word in its own column (not a stripe + tint + repeated tag).
+  // "grouped": body-system sub-headings, groups holding a critical alert first. "ranked": one list, critical first.
+  function ovAlertsPanel(alerts, mode) {
+    alerts = alerts || [];
+    var nC = alerts.filter(function (a) { return a.severity === "crit"; }).length, nW = alerts.filter(function (a) { return a.severity === "warn"; }).length;
+    var count = [nC ? nC + " critical" : "", nW ? nW + " caution" : ""].filter(Boolean).join(" · ");
+    var head = '<div class="icu-al-h"><h3 class="icu-al-t">Alerts</h3>' + (count ? '<span class="icu-al-n">' + count + '</span>' : "") + '</div>';
+    if (!alerts.length) return '<section class="icu-al">' + head + '<p class="icu-al-empty">No active alerts. Enter vitals or labs and they are checked here.</p></section>';
+    var order = { crit: 0, warn: 1, info: 2 }, body;
+    if (mode === "ranked") {
+      body = alerts.map(function (a, i) { return { a: a, i: i }; }).sort(function (x, y) { return (rankOf(order, x.a.severity) - rankOf(order, y.a.severity)) || (x.i - y.i); })
+        .map(function (x) { return ovAlertRow(x.a, true); }).join("");
+    } else {
+      var by = {}; alerts.forEach(function (a) { var k = a.source || "Other"; (by[k] = by[k] || []).push(a); });
+      var keys = Object.keys(by).sort(function (x, y) {
+        var wx = Math.min.apply(null, by[x].map(function (a) { return rankOf(order, a.severity); })), wy = Math.min.apply(null, by[y].map(function (a) { return rankOf(order, a.severity); }));
+        return (wx - wy) || ((ALERT_SOURCES.indexOf(x) < 0 ? 99 : ALERT_SOURCES.indexOf(x)) - (ALERT_SOURCES.indexOf(y) < 0 ? 99 : ALERT_SOURCES.indexOf(y)));
+      });
+      body = keys.map(function (k) {
+        return '<div class="icu-al-g">' + esc(k) + '</div>' + by[k].slice().sort(function (x, y) { return rankOf(order, x.severity) - rankOf(order, y.severity); }).map(function (a) { return ovAlertRow(a, false); }).join("");
+      }).join("");
+    }
+    return '<section class="icu-al">' + head + body + '</section>';
+  }
+  // Plain navigation rows in one panel, instead of a card of sentence + full-width button per destination.
+  function ovActionRows(rows) {
+    return '<section class="icu-al icu-al-nav">' + rows.map(function (r) {
+      return '<button class="icu-al-nr" data-icu-act="' + r.act + '"><span>' + esc(r.t) + '</span>' + (r.v ? '<span class="icu-al-nv">' + esc(r.v) + '</span>' : "") + ico("chev", "›") + '</button>';
+    }).join("") + '</section>';
   }
 
   /* ----------------------------------------------------- live status row */
@@ -1755,6 +1837,17 @@
     ].join("");
   }
   function renderVentAbgTiles() {
+    if (_active === "overview" && icuOvVariant()) {
+      var v0 = _raw.ventilator || {}, g0 = _raw.abg || {};
+      var none = function (o, ks) { return ks.every(function (k) { return o[k] == null || o[k] === ""; }); };
+      var vNone = none(v0, ["mode", "fio2", "peep", "tv", "rr", "plateau", "peak", "drivingP"]), gNone = none(g0, ["ph", "paco2", "pao2", "hco3", "be", "fio2"]);
+      var empty = [];
+      if (vNone) empty.push('<button class="icu-ovv-add" data-icu-act="edit:ventilator">Add ventilator</button>');
+      if (gNone) empty.push('<button class="icu-ovv-add" data-icu-act="edit:abg">Add ABG</button>');
+      return (vNone ? "" : '<div class="icu-sec-lbl" style="margin-top:12px">Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>') +
+        (gNone ? "" : '<div class="icu-sec-lbl" style="margin-top:12px">ABG</div><div class="icu-vitals">' + abgTiles() + '</div>') +
+        (empty.length ? '<div class="icu-ovv-none"><span>' + (vNone && gNone ? "No ventilator or ABG recorded" : vNone ? "No ventilator recorded" : "No ABG recorded") + '</span>' + empty.join("") + '</div>' : "");
+    }
     return '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("lungs", "🫁") + ' Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>' +
       '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("abg", "🩸") + ' ABG</div><div class="icu-vitals">' + abgTiles() + '</div>';
   }
@@ -1793,7 +1886,7 @@
     var missing = (sum.missingInformation || []).slice(0, 4);
     if (!changed.length && !missing.length) return "";
     var label = window.SMD_MEDCORE && SMD_MEDCORE.labelFor ? SMD_MEDCORE.labelFor : function (x) { return x; };
-    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-phase">BETA</span> <span style="font-weight:600;text-transform:none;letter-spacing:0">\u00b7 deterministic, no model</span></div>';
+    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-mc-beta">Beta \u00b7 deterministic, no model</span></div>';
     if (changed.length) {
       out += '<div class="icu-mc-sub">What changed</div>';
       out += changed.map(function (c) {
@@ -2534,7 +2627,7 @@
     _lwBadge += items.length;
     try { if (window.toast) toast(msg); } catch (e) {}
     if (w.delivery === "device" || w.delivery === "both") lwDeviceNotify(head, items.length === 1 ? items[0].text : items.length + " new lab results", crit.length > 0);
-    if (ICU.isOpen()) paint();
+    if (ICU.isOpen()) paintPassive();
     // PHI-safe telemetry only (counts + severity, never values/identifiers).
     try { console.log("[lab-watch] fired", items.length, "items; critical=" + crit.length); } catch (e) {}
   }
@@ -3205,8 +3298,10 @@
     var scoreRow = function (id, label, val, unit, info, manual) {
       return '<div class="icu-score" data-icu-act="calc:' + esc(id) + '"><span class="icu-score-n">' + esc(label) + '</span><span class="icu-score-v">' + esc(val + (unit ? " " + unit : "")) + '</span>' + (manual ? badge : "") + (info ? '<span class="icu-score-i">' + esc(info) + '</span>' : "") + '</div>';
     };
+    var foldMissing = _active === "overview" && !!icuOvVariant(), missingRows = [];
     var body = rows.map(function (r) {
       var m = ms[r.id];
+      if (foldMissing && r.missing && !m) { missingRows.push(r); return ""; }
       // A missing score opens the INLINE fill sheet (scorefill:), not the calculator: it asks only for
       // what is absent and writes it to the patient, so the score appears here instead of sending the
       // clinician to a separate screen that computes nothing back onto the record.
@@ -3216,6 +3311,9 @@
       return scoreRow(r.id, r.label, String(r.value), r.unit || "", iv, false);
     }).join("");
     body += manualExtra.map(function (id) { var m = ms[id]; return scoreRow(id, scoreCalcTitle(id), m.value, m.unit, m.info, true); }).join("");
+    // Variants: scores still waiting for data fold into one expandable line, so computed scores lead.
+    if (missingRows.length) body += '<details class="icu-score-more"><summary>' + missingRows.length + (missingRows.length === 1 ? " score needs" : " scores need") + ' more data</summary>' +
+      missingRows.map(function (r) { return '<div class="icu-score miss" data-icu-act="scorefill:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">add ' + esc(r.missing.join(", ")) + '</span></div>'; }).join("") + '</details>';
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
     return '<div class="icu-sec-lbl">' + ico("trend","📊") + ' Scores</div><div class="icu-card">' + body + sug +
       '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
@@ -3401,7 +3499,7 @@
 
       // 1) Current status (author + time).
       var statusTx = p.status ? p.status : (V2_LABEL[sev] + (reason ? " — " + reason : ""));
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
+      var sStatus = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
         '<p class="icu-dx-cur" style="margin:0 0 4px">' + esc(statusTx) + '</p>' +
         '<p class="icu-doc-sub" style="margin:0">' + esc(who) + (updTs ? " · updated " + fmtAgo(updTs) : "") + '</p>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient" style="margin-top:10px">' + ico("edit", "✎") + ' Update status &amp; details</button></div>';
@@ -3412,7 +3510,7 @@
       var probs = [];
       if (p.workingDx || p.diagnosis) probs.push({ name: (p.workingDx || p.diagnosis), color: (sevDot[sev] || "#92620A"), note: (p.icuDay != null ? "Day " + p.icuDay : "") });
       finds.filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && String(c.canonicalFindingId).indexOf("note:") !== 0; }).slice(0, 6).forEach(function (c) { probs.push({ name: findChipLabel(c), color: "#92620A", note: "" }); });
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
+      var sProblems = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
         (probs.length ? '<div style="display:flex;flex-direction:column;gap:9px;margin-top:2px">' + probs.map(function (pr) {
           return '<div class="icu-ov-prob"><span class="icu-ov-dot" style="background:' + pr.color + '"></span><span class="icu-ov-prob-nm">' + esc(pr.name) + '</span>' + (pr.note ? '<span class="icu-ov-prob-note">' + esc(pr.note) + '</span>' : "") + '</div>';
         }).join("") + '</div>'
@@ -3420,10 +3518,11 @@
         '<button class="icu-btn ghost" data-icu-act="ws:careplan" style="margin-top:10px">' + ico("search", "🩺") + ' Open Care Plan</button></div>';
 
       // 3) Last consultant instruction (group) — teal card + prominent "View N open tasks".
+      var sInstr = "";
       if (grpActive() && _grpPtVM) {
         var gtasks = _grpPtVM.tasks || [], gopen = gtasks.filter(function (t) { return t.status !== "done"; }).length;
         var latest = null; gtasks.forEach(function (t) { if (!latest || (t.ts || 0) > (latest.ts || 0)) latest = t; });
-        out += '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
+        sInstr = '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
           (latest ? '<p class="icu-ov-instr-tx">“' + esc(latest.text || "Instruction") + '”</p><p class="icu-ov-instr-by">' + esc(latest.assignedByName || "Consultant") + (latest.ts ? " · " + fmtAgo(latest.ts) : "") + '</p>'
             : '<p class="icu-doc-sub" style="margin:0">No instructions yet — add one from Rounds.</p>') +
           '<button class="icu-ov-viewtasks" data-icu-act="tab:rounds">View ' + gopen + ' open task' + (gopen === 1 ? "" : "s") + ' →</button></div>';
@@ -3437,37 +3536,46 @@
         tx = infusions.map(function (i) { return { name: i.drug, dose: (i.dose != null ? i.dose + (i.unit ? " " + i.unit : "") : (i.rateMlHr != null ? i.rateMlHr + " mL/h" : "")) }; }).filter(function (t) { return t.name; });
         if (v.mode) tx.push({ name: "Ventilation", dose: v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") });
       }
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
+      var sTx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
         (tx.length ? tx.map(function (t) { return '<div class="icu-ov-tx"><span class="icu-ov-tx-nm">' + esc(t.name) + '</span><span class="icu-ov-tx-dose">' + esc(t.dose || "—") + '</span></div>'; }).join("")
           : '<p class="icu-doc-sub" style="margin:0">No treatment recorded yet.</p>') +
         '<button class="icu-btn ghost" data-icu-act="tab:treatment" style="margin-top:10px">' + ico("syringe", "💊") + ' Add / manage treatment</button></div>';
 
       // 5) Critical alerts — the engine-grouped detail (below the design cards; not in the mock but valuable).
-      out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
-      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+      var sAlerts = '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>' +
+        (alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>');
 
       // 5b) Auto-computed clinical scores (Feature B) — always-on vitals scores + diagnosis-linked.
-      out += renderScoresPanel();
+      var sScores = renderScoresPanel();
 
       // 6) Lab Watch toggle (redesign inline card) — only when the feature is on.
+      var sLW = "", lwOn = labWatchOn() && lwActive();
       if (labWatchOn()) {
-        var lwOn = lwActive();
-        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
+        sLW = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
           '<p class="icu-doc-sub" style="margin:0 0 10px">' + (lwOn ? "Watching this patient’s labs and alerting on critical changes." : "Get alerted when this patient’s labs cross critical thresholds.") + '</p>' +
           '<button class="icu-btn' + (lwOn ? " ghost" : "") + '" data-icu-act="labwatch">' + ico("bell", "🔔") + (lwOn ? " Manage Lab Watch (on)" : " Turn on Lab Watch") + '</button></div>';
       }
 
       // 7) Trends shortcut (kept — one tap to the chart).
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
+      var sTrends = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
         '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
         '<button class="icu-btn" data-icu-act="tab:trends">' + ico("trend", "📈") + ' View vitals &amp; labs trends</button></div>';
 
       // 8) Today's goals (kept).
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
+      var sGoals = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
         ((_raw.goals || []).length ? (_raw.goals).map(function (g) { return '<div class="icu-row"><span>• ' + esc(g) + '</span></div>'; }).join("") : '<div class="icu-empty">No goals set</div>') +
         '<button class="icu-btn ghost" data-icu-act="edit:goals" style="margin-top:8px">＋ Edit goals</button></div>';
 
-      return out;
+      // Overview variants (smd_icu_ov = a|b|c, OFF by default until the owner picks one): alerts first, no
+      // stripe/tint/repeated-category cards (antislop-ui, impeccable craft floor). See ovAlertsPanel.
+      var ovv = hasData() ? icuOvVariant() : "";
+      if (!ovv) return sStatus + sProblems + sInstr + sTx + sAlerts + sScores + sLW + sTrends + sGoals;
+      // Trends and Lab Watch are destinations, not tasks: plain rows, so "Add / update data" stays the one filled button.
+      var navRows = ovActionRows([{ act: "tab:trends", t: "Vitals and labs trends" }].concat(labWatchOn() ? [{ act: "labwatch", t: "Lab Watch", v: lwOn ? "On" : "Off" }] : []));
+      if (ovv === "c") return sStatus + sProblems + sInstr + sTx + navRows + sGoals;   // scores sit in the left pane
+      return sStatus + sProblems + sInstr + sTx + sScores + navRows + sGoals;
+
+
     },
     hemo: function () {
       var lv = mergedVitals(_raw.vitals), h = interpretHemo(lv, _raw.infusions);
@@ -3835,7 +3943,7 @@
       var tlN = (grpActive() && _grpPtVM && (_grpPtVM.timeline || []).length) || 0;
       var srcNote = "Auto-built from this patient’s recorded data" + (tlN ? " and today’s timeline (" + tlN + " event" + (tlN === 1 ? "" : "s") + ")" : "") + ". Advisory — review before you hand over.";
       var cards = sbar.map(function (sec) {
-        return '<div class="icu-sbar" style="border-left-color:' + sec.color + '"><div class="icu-sbar-lbl" style="color:' + sec.color + '">' + esc(sec.label) + '</div><div class="icu-sbar-body">' + esc(sec.body) + '</div></div>';
+        return '<div class="icu-sbar"><div class="icu-sbar-lbl" style="color:' + sec.color + '">' + esc(sec.label) + '</div><div class="icu-sbar-body">' + esc(sec.body) + '</div></div>';
       }).join("");
       return '<div class="icu-card icu-sbar-head"><div class="icu-sec-lbl">' + ico("copy", "⇄") + ' Shift handover (SBAR)</div><p class="icu-doc-sub" style="margin:0">' + esc(srcNote) + '</p></div>' +
         '<div class="icu-card">' + cards +
@@ -3900,6 +4008,7 @@
   // Segmented sub-navigation of the current workspace's members (only when >1).
   function renderSubNav() {
     var w = wsById(_ws), mem = wsMembers(w); if (mem.length < 2) return "";
+    if (w && w.id === "overview" && icuOvVariant()) return "";   // Overview and Rounds are already top tabs
     return '<div class="icu-subnav">' + mem.map(function (m) {
       var meta = MEMBER[m] || { label: m };
       return '<button class="icu-seg ' + (m === _active ? "on" : "") + '" data-icu-act="tab:' + m + '">' + esc(meta.label) + "</button>";
@@ -4058,6 +4167,14 @@
     var addBtn = !mon ? "" : '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
     // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
     var mid = (isOv && !hd) ? emptyStateCard() : (status + addBtn);
+    // Overview variants (smd_icu_ov): alerts open the page, then vitals, then the rest; C splits into two panes.
+    var ovv = (isOv && hd) ? icuOvVariant() : "";
+    if (ovv) {
+      var alertsTop = ovAlertsPanel(_raw.alerts, ovv === "b" ? "ranked" : "grouped"), body;
+      if (ovv === "c") body = '<div class="icu-ovv icu-ovv-c"><div class="icu-ovv-col">' + alertsTop + elyteAlerts + mid + renderScoresPanel() + '</div><div class="icu-ovv-col">' + medCore + tab + '</div></div>';
+      else body = '<div class="icu-ovv icu-ovv-' + ovv + '">' + alertsTop + elyteAlerts + mid + medCore + tab + '</div>';
+      return '<div class="icu-scroll"><div class="icu-wrap">' + patientBanner() + renderSubNav() + (mon ? renderWardBanner() : "") + renderConflicts() + body + '</div></div>';
+    }
     return '<div class="icu-scroll"><div class="icu-wrap">' +
       patientBanner() +
       renderSubNav() +
@@ -4089,14 +4206,39 @@
     if (_liveBound || !rootEl) return; _liveBound = 1;
     rootEl.addEventListener("scroll", function () {
       _liveScrolling = 1; clearTimeout(_liveScrollT);
-      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paint(); } }, 160);
+      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paintPassive(); } }, 160);   // focusing a field scrolls; never rebuild under it
     }, true);   // capture: catches the .icu-scroll container that paintV2 recreates each render
   }
   function paintLive() {
     _bindLiveScroll();
     if (_liveScrolling) { _livePending = 1; return; }   // defer: don't rebuild during an active scroll
     if (_liveRaf) { _livePending = 1; return; }
-    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paint(); });
+    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paintPassive(); });
+  }
+  // A repaint rebuilds #icuRoot, which REPLACES the text box being typed in, and iOS closes the keyboard
+  // ("type one letter, the keyboard closes, tap again, one more letter..."); the round-note composer also
+  // lost the text itself. Repaints nobody asked for (state changes, live snapshots, the task heartbeat)
+  // wait while a text field in the ICU has focus and land when it is left. A tap on a control still
+  // repaints at once (those call paint() directly).
+  var _paintAfterTyping = false;
+  function typingInRoot() {
+    try {
+      var a = document.activeElement;
+      if (!a || !rootEl || !rootEl.contains(a)) return false;
+      if (a.isContentEditable || a.tagName === "TEXTAREA") return true;
+      return a.tagName === "INPUT" && !/^(checkbox|radio|button|submit|reset|range|file|color|image|hidden)$/i.test(a.type || "");
+    } catch (e) { return false; }
+  }
+  function paintPassive() {
+    if (typingInRoot()) { _paintAfterTyping = true; return; }
+    paint();
+  }
+  function flushTypingPaint() {
+    setTimeout(function () {   // after focus settles: moving to the next field keeps waiting
+      if (!_paintAfterTyping || typingInRoot()) return;
+      _paintAfterTyping = false;
+      if (ICU.isOpen()) { try { grpRoundCaptureText(); } catch (e) {} paint(); }
+    }, 0);
   }
 
   /* ================================================================ ICU v2
@@ -4534,7 +4676,7 @@
   // Resolve it (minting on first ever sign-in) and repaint the Team screen when it lands.
   function ensureStewardId() {
     if (stewardIdVal()) return;
-    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paint(); } };
+    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paintPassive(); } };
     try {
       var api = groupsApi();
       if (api && api.ensureIdentity) { api.ensureIdentity(done); return; }
@@ -4801,7 +4943,7 @@
       _grpSubPts = api.subscribePatients(_grp.id, function (list) {
         _grpPatients = list || []; grpNotifTick(); grpSyncTaskSubs(_grpPatients);
         if (ICU.isOpen() && _screen === "board") paintLive();
-      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     }
     _paintTop = true; paint();
   }
@@ -4842,7 +4984,7 @@
     if (on) { try { grpEnsureGroupsSub(); } catch (e) {} }
     try { notifyUnitsChanged(); } catch (e) {}
     _screen = "settings"; _paintTop = true;
-    if (ICU.isOpen()) paint();
+    if (ICU.isOpen()) paintPassive();
     if (window.toast) toast(on ? "Group mode on. Loading your shared units." : "Solo mode on. This device only.");
   }
   function grpEnsureGroupsSub() {
@@ -4870,7 +5012,7 @@
     grpStopSubRetry();
     try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
     // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
-    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
+    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paintPassive(); }); } catch (e) {}
     if (_grpSubGroups) return;
     // Watchdog: a silent Firestore/network hang (the SDK never finishes loading, or the Listen
     // channel never delivers a first event) fires NEITHER callback below, so _grpList would stay
@@ -4883,7 +5025,7 @@
         if (_grpList !== null) return;                                   // connected in time → nothing to do
         if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
         _grpErr = _grpErr || "Couldn’t connect to your shared units. Check your connection and retry.";
-        if (ICU.isOpen()) paint();
+        if (ICU.isOpen()) paintPassive();
       }, (typeof window !== "undefined" && +window.SMD_ICU_GRP_TIMEOUT_MS) || 20000);
     }
     _grpSubGroups = api.subscribeGroups(function (groups) {
@@ -5438,7 +5580,7 @@
       _grpCreating = false;
       _grpErr = grpErrText(e);
       if (window.toast) toast("Couldn’t create the unit — " + grpErrText(e));
-      if (ICU.isOpen()) paint();
+      if (ICU.isOpen()) paintPassive();
     });
   }
   /* --------------------------- Phase 5: add-by-ID/email + invite-by-link + leave/remove ------- */
@@ -5471,7 +5613,7 @@
       // entry yet. Guide the user with a clear, actionable message (email path gets a full sheet).
       if (m === "not-found") { if (byEmail) grpAddNotFoundEmail(); else if (window.toast) toast("No StewardMD account found for that ID — check it, or use the invite link instead."); }
       else if (window.toast) toast("Couldn’t add — head/professor only");
-      _grpErr = null; if (ICU.isOpen()) paint();
+      _grpErr = null; if (ICU.isOpen()) paintPassive();
     });
   }
   // Change an existing member's designation (+ its derived permission). Admin-only; the sheet is
@@ -5497,7 +5639,7 @@
     }, function (e) {
       _grpErr = grpErrText(e);
       if (window.toast) toast(d.role === "professor" ? "Consultant / Associate Professor can be set by the unit head only" : "Couldn’t update — head/professor only");
-      if (ICU.isOpen()) paint();
+      if (ICU.isOpen()) paintPassive();
     });
   }
   // No StewardMD account is registered for a typed email (no doctorDirectory/e_<hash> entry). Explain
@@ -5545,7 +5687,7 @@
       _grpInvLink = (res && res.url) || null;
       if (_grpInvLink) grpCopyText(_grpInvLink, "Invite link copied — share it with your colleague");
       grpOpenInviteLink();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paint(); });
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paintPassive(); });
   }
   // Clipboard copy (reuses the app's existing navigator.clipboard pattern) with a toast.
   function grpCopyText(txt, msg) {
@@ -5559,7 +5701,7 @@
     api.leaveGroup(_grp.id).then(function () { if (window.toast) toast("You left the unit"); }, function (e) {
       var m = (e && e.message) || "";
       if (window.toast) toast(m === "head-cannot-leave" ? "You are the head — delete the unit instead" : "Couldn’t leave the unit");
-      _grpErr = null; if (ICU.isOpen()) paint();
+      _grpErr = null; if (ICU.isOpen()) paintPassive();
     });
   }
   function grpReclaimHead() {
@@ -5568,21 +5710,21 @@
       if (_grp) _grp.myRole = "head";                                  // optimistic — instructions work immediately
       try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, "head"); } catch (e) {}
       if (window.toast) toast("You are now the Unit Head");
-      if (ICU.isOpen()) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paint(); });
+      if (ICU.isOpen()) paintPassive();
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paintPassive(); });
   }
   function grpDoDelete() {
     var api = groupsApi(); if (!api || !grpActive() || !api.deleteGroup) return;
     if ((_grp && _grp.myRole) !== "head") { if (window.toast) toast("Only the unit head can delete the unit"); return; }
     if (!window.confirm("Delete " + ((_grp && _grp.name) || "this unit") + " for everyone? This cannot be undone.")) return;
-    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paint(); });
+    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paintPassive(); });
   }
   function grpDoRemove(uid) {
     var api = groupsApi(); if (!api || !grpActive() || !uid || !api.removeMember) return;
     var m = null, arr = _grpMembers || []; for (var i = 0; i < arr.length; i++) if (arr[i].uid === uid) { m = arr[i]; break; }
     var nm = (m && m.name) || "this member";
     if (!window.confirm("Remove " + nm + " from " + ((_grp && _grp.name) || "the unit") + "?")) return;
-    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paint(); });
+    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paintPassive(); });
   }
   /* --------------------------- Phase 5: join-by-link (?icujoin=<gid>.<code>) ------------------- */
   function grpJoinParam() { try { return (location.search.match(/[?&]icujoin=([^&]+)/) || [])[1] || ""; } catch (e) { return ""; } }
@@ -5651,7 +5793,7 @@
   function grpDoInvite() { grpDoAddById(); }
   function grpDoReviewed() {
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
-    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Marked reviewed" }); } catch (e) {}
   }
   function grpCycleTask(taskId) {
@@ -5660,7 +5802,7 @@
     if (!t) return;
     var next = t.status === "pending" ? "progress" : t.status === "progress" ? "done" : "pending";
     if (next === "done") { try { window.SMD_SOUND && SMD_SOUND.play("success"); } catch (e) {} }
-    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     // Completing a task self-logs an author-stamped audit event (see the auto-timeline set).
     if (next === "done") { try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "task", title: "Task completed — " + (t.text || "task") }); } catch (e) {} }
   }
@@ -6318,7 +6460,7 @@
     // QA BUG-003: the clinical note posts as its own timeline entry (create + display; the timeline is
     // the audit trail, so a posted note is amended by posting a correction, not edited in place).
     if (noteTxt) {
-      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {}
+      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); }); } catch (e) {}
     }
     if (!chosen.length) {
       _roundNote = "";
@@ -6332,7 +6474,7 @@
     var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
-      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
+      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); }); } catch (e) {} })(plan.tasks[i]);
     }
     if (plan.event) { try { var pe = api.addTimelineEvent(gid, pid, plan.event); if (pe && pe.then) pe.then(null, function () {}); } catch (e) {} }
     // Immediate push to the unit when an instruction is ISSUED (not just when it later goes overdue) —
@@ -6365,7 +6507,7 @@
     if (grpActive() && _grpPtId && api && api.addTimelineEvent) {
       try {
         var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: (label || "Specialty tools") + " — " + v2AccountName(), detail: t });
-        if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
         if (window.toast) toast("Posted to the patient timeline.");
         return true;
       } catch (e) { if (window.toast) toast("The note could not be posted."); return false; }
@@ -6416,7 +6558,7 @@
       var watchFab = labWatchOn()
         ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span class="icu-lw-lbl">Lab Watch 24/7</span></button>'
         : "";
-      var kitFab = kitToolsOn() ? '<button id="icuKitFab" data-icu-act="kittools" aria-label="Specialty tools">' + ico("tool", "🛠") + '<span>Specialty tools</span></button>' : "";
+      var kitFab = kitToolsOn() ? '<button id="icuKitFab" data-icu-act="kittools" aria-label="Specialty tools">' + ico("tool", "🛠") + '<span class="icu-kit-lbl">Specialty tools</span></button>' : "";
       rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + kitFab + fab;
     }
     rootEl.classList.toggle("icu-has-fab", !!rootEl.querySelector("#icuWatch, #icuSnap, #icuKitFab"));
@@ -8584,7 +8726,7 @@
       _ownerBufSynced = true;
     }
     try { localStorage.setItem(OWNER_KEY, now); } catch (e) {}
-    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paint(); } catch (e) {}
+    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paintPassive(); } catch (e) {}
   }
   function capTen(r) { if (r.length <= MAX_CASES) return r; return r.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); }).slice(0, MAX_CASES); }
   function rosterCount() { return loadRoster().length; }
@@ -8740,7 +8882,7 @@
     api.removePatient(gid, pid).then(function () {
       if (window.toast) toast("Patient removed from unit");
       grpTeardownPatient(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paintPassive(); });
   }
   function newPatient() {
     ICU.reset();
@@ -8946,7 +9088,7 @@
       if (!(api.canInstruct && api.canInstruct(_grp && _grp.myRole))) { if (window.toast) toast("Only instructing roles can remove a patient"); return; }
       api.removePatient(_grp.id, id).then(function () {
         if (window.toast) toast("Patient removed from unit");
-      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paintPassive(); });
       if (id === _grpPtId) grpTeardownPatient();
     } else {
       rosterRemove(id);
@@ -8960,6 +9102,12 @@
 
   /* ------------------------------------------------------ event delegation */
   function onClick(e) {
+    // Tapping a control ends typing (iOS keeps a field focused under a button tap), so a repaint held back
+    // by paintPassive lands now rather than whenever the field happens to blur.
+    try {
+      var _ae = document.activeElement;
+      if (_paintAfterTyping && typingInRoot() && e.target && e.target.closest && e.target.closest("[data-icu-act]") && !_ae.contains(e.target)) _ae.blur();
+    } catch (x) {}
     // A finished swipe fires a click on release — swallow it, and let a tap on an OPEN row close it.
     if (_swTapKill) {
       _swTapKill = false;
@@ -9590,10 +9738,11 @@
         rootEl.addEventListener("touchmove", swMove, { passive: true });
         rootEl.addEventListener("touchend", swEnd);
         rootEl.addEventListener("touchcancel", swEnd);
+        rootEl.addEventListener("focusout", flushTypingPaint);   // a repaint held back while typing lands here
         // Phase 4: reflect connectivity promptly (offline strip + sync indicator) — repaint only
         // when a shared unit is open. Attached once; a no-op while the dashboard is closed.
         try {
-          var _onNet = function () { if (ICU.isOpen() && grpActive()) paint(); };
+          var _onNet = function () { if (ICU.isOpen() && grpActive()) paintPassive(); };
           window.addEventListener("online", _onNet);
           window.addEventListener("offline", _onNet);
         } catch (e) {}
@@ -9736,7 +9885,7 @@
   try { document.addEventListener("visibilitychange", function () { if (!document.hidden) { try { reconcileOwner(); } catch (e) {} } }); } catch (e) {}
 
   // re-render the open dashboard whenever the state changes (any source)
-  _subs.push(function () { if (ICU.isOpen()) paint(); });
+  _subs.push(function () { if (ICU.isOpen()) paintPassive(); });
 
   // Task-deadline heartbeat: while a shared patient is open, re-check every 60s so due countdowns
   // tick, tasks flip to OVERDUE on time, and the overdue device-notification fires even when the unit
@@ -9746,8 +9895,8 @@
       try {
         if (!grpActive() || !_grpPtId || !ICU.isOpen()) return;
         grpNotifTick();
-        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paint();
-        else if (_screen === "alerts") paint();
+        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paintPassive();
+        else if (_screen === "alerts") paintPassive();
       } catch (e) {}
     }, 60000);
   } catch (e) {}
@@ -9778,7 +9927,7 @@
       var luText = grpChangeSummary(events);   // richer "what changed" line for the board footer + notifications
       try {
         var api = groupsApi();
-        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
         if (api && api.addTimelineEvent) {
           for (var i = 0; i < events.length; i++) {
             (function (ev) { try { var pr = api.addTimelineEvent(_grp.id, _grpPtId, ev); if (pr && pr.then) pr.then(null, function () {}); } catch (e) {} })(events[i]);
