@@ -5,6 +5,17 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
+
+**Decision.** Applied as refinement, not redesign: same layout, palette and copy. Fixed what the skills' rules measure:
+tap targets >= 44pt, no tracked-uppercase labels, no glyph icons, no gradient buttons, dark-mode teal split into text
+and fill tokens, 11px type floor, left-aligned legend, aligned header counts, honest "Sign in to get your ID".
+**Why.** Measured on all ICU screens at 375px, light and dark: 0 findings after, from ~180 before.
+**Trade-off.** Controls are a little taller (38-42 to 46px). `ui-styling` is shadcn/Tailwind/React and does not
+apply to this ES5 build; only its token and accessibility principles were used. Left as-is (identity changes, owner's
+call): the coloured card stripe, the Overview/Rounds sub-chips duplicating top tabs.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild.
+
 ## 2026-10-28 · ICU Group/Solo switch works in place, no app restart (owner: "restarts whole app")
 
 **Decision.** The Settings → Group mode switch calls `grpSetMode(on)` in `icu.js`: it writes `smd_icu_groups`, tears

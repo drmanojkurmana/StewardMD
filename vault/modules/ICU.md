@@ -90,6 +90,17 @@ radii `--r:12 / --r-sm:10 / --r-xs:8 / --r-pill`, `--sh` (1px hairline) + `--sh-
 Rules of the system: hairlines separate (not shadows); status colour is reserved for status (a stable
 bed tile is neutral); header chrome is FLAT `--primary2`, never a gradient; numbers use tabular
 figures; selection is colour + weight, press is brightness. See [[Decisions]] (2026-08-22).
+**UI floor (2026-10-29, impeccable / ui-ux-pro-max / no-slop-ui / antislop-ui pass; test `test/run-icu-ui-floor.mjs`):**
+- `--fill` is the teal under white text; `--primary` is teal TEXT. Dark: text #4CC2B0, fill #1F7A6E (Refined Look
+  split), set by `html body:is(.dark,.v3-dark) :is(#icuRoot,...)` so it outranks `redesign-system.css`, which maps
+  `--primary` to the app-wide dark #2f9184 (4.0:1 as text, 3.9:1 under white). `--danger-fill` likewise for badges.
+  Never colour text with `--primary2` (a dark fill in dark mode).
+- Buttons are SOLID `--fill`, never a gradient.
+- Every control is >= 46 CSS px (= 44pt after home.js's 0.95 small-phone shrink). Specific selectors that set their
+  own `min-height` (tabs, chips, segments) must say 46px too, or they win over the floor.
+- Type floor 11px; no tracked uppercase anywhere in `injectCSS()` (print styles excepted).
+- Icons are drawn (`ico()`), never text glyphs: Rounds checkboxes are `.icu-rcb` + `ico("check")`, edit is `ico("edit")`.
+
 **Never `text-transform:uppercase` a clinical label.** Labels are authored in clinical case (pH, PaCO₂, SpO₂, FiO₂,
 HCO₃⁻); uppercase turned them into "PH", "PACO₂", "SPO₂". Tile labels (`.icu-vc .vl`), board vital keys
 (`.icu-v2-vk`) and header chips (`.icu-v2-mv-k`) are sentence/clinical case since 2026-10-28.

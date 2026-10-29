@@ -305,7 +305,7 @@
       defs.map(function (d) {
         var on = _gcs[key] === d[0];
         return '<button class="icu-btn ghost" data-icu-act="gcspick:' + key + ':' + d[0] + '" aria-pressed="' + (on ? "true" : "false") +
-          '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (on ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") + '">' +
+          '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (on ? ";background:var(--fill);color:#fff;border-color:var(--fill)" : "") + '">' +
           d[0] + " &middot; " + esc(d[1]) + "</button>";
       }).join("") + "</div></div>";
   }
@@ -317,7 +317,7 @@
       gcsRow("v", GCS_V, "Verbal response (V)") +
       gcsRow("m", GCS_M, "Motor response (M)") +
       '<div class="icu-fld" style="grid-column:1/-1"><button class="icu-btn ghost" data-icu-act="gcsvt" aria-pressed="' + (_gcs.vt ? "true" : "false") +
-        '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (_gcs.vt ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") +
+        '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (_gcs.vt ? ";background:var(--fill);color:#fff;border-color:var(--fill)" : "") +
         '">Verbal not testable (intubated)</button></div>' +
       '<div class="icu-fld" style="grid-column:1/-1"><div style="font:800 22px var(--font);color:var(--ink)">' +
         (t == null ? "&mdash;" : t + (_gcs.vt ? "T" : "") + " / 15") + '</div>' +
@@ -938,7 +938,7 @@
       // ── Visual design system (2026-08). Clinical-instrument palette: paper-grey ground, white
       // panels, hairline borders doing the separating work instead of shadows, one deep teal accent,
       // and status colours reserved for status. Behaviour/markup untouched — values only.
-      '#icuRoot,.icu-modal,.icu-tour{--bg:#EDF0F4;--panel:#FFFFFF;--panel2:#F5F7FA;--border:#D9DFE7;--border-soft:#E6EAF0;--ink:#0C1622;--ink2:#33414F;--muted:#5C6A7B;--primary:#0E6F66;--primary2:#0A564F;--primary3:#1B9488;--primary-soft:#E3EFED;--ok:#146B41;--ok-soft:#E5F1E9;--warn:#8A5405;--warn-soft:#FAF0DE;--danger:#A5261B;--danger-soft:#FAE9E7;' +
+      '#icuRoot,.icu-modal,.icu-tour{--bg:#EDF0F4;--panel:#FFFFFF;--panel2:#F5F7FA;--border:#D9DFE7;--border-soft:#E6EAF0;--ink:#0C1622;--ink2:#33414F;--muted:#5C6A7B;--primary:#0E6F66;--fill:#0E6F66;--primary2:#0A564F;--primary3:#1B9488;--primary-soft:#E3EFED;--ok:#146B41;--ok-soft:#E5F1E9;--warn:#8A5405;--warn-soft:#FAF0DE;--danger:#A5261B;--danger-soft:#FAE9E7;' +
       // Radii step down (16→12→10→8): panels read as instrument surfaces, not chat bubbles. Shadow is
       // a single hairline lift; depth comes from borders + the --panel/--panel2/--bg surface ladder.
       '--r:12px;--r-sm:10px;--r-xs:8px;--r-pill:999px;--sh:0 1px 2px rgba(12,22,34,.06);--sh-lift:0 1px 3px rgba(12,22,34,.10);--ease:.18s cubic-bezier(.2,.6,.2,1);' +
@@ -948,7 +948,7 @@
       '#icuRoot.on{display:flex}' +
       // Dark: a neutral slate night surface (not navy), same hairline discipline, accents pulled back
       // from neon so a dim ward at 3am reads calm. Token names/roles are identical to light.
-      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal,body.dark .icu-tour,body.v3-dark .icu-tour{--bg:#0B1017;--panel:#151C25;--panel2:#111822;--border:#28323E;--border-soft:#1E2731;--ink:#E5EBF2;--ink2:#B7C2CF;--muted:#93A1B2;--primary:#34B5A5;--primary2:#1E8D80;--primary3:#5FD0C2;--primary-soft:#12302B;--ok:#4FBE80;--ok-soft:#12281B;--warn:#D6A44A;--warn-soft:#2B2313;--danger:#E5766C;--danger-soft:#301816;--sh:0 1px 2px rgba(0,0,0,.45);--sh-lift:0 2px 6px rgba(0,0,0,.5)}' +
+      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal,body.dark .icu-tour,body.v3-dark .icu-tour{--bg:#0B1017;--panel:#151C25;--panel2:#111822;--border:#28323E;--border-soft:#1E2731;--ink:#E5EBF2;--ink2:#B7C2CF;--muted:#93A1B2;--primary:#34B5A5;--fill:#1F7A6E;--primary2:#1E8D80;--primary3:#5FD0C2;--primary-soft:#12302B;--ok:#4FBE80;--ok-soft:#12281B;--warn:#D6A44A;--warn-soft:#2B2313;--danger:#E5766C;--danger-soft:#301816;--sh:0 1px 2px rgba(0,0,0,.45);--sh-lift:0 2px 6px rgba(0,0,0,.5)}' +
       '#icuRoot *{box-sizing:border-box}' +
       '#icuRoot button{font-family:inherit;-webkit-tap-highlight-color:transparent}' +
       // Typographic spine: optical sizing + antialiasing, slight negative tracking on display sizes,
@@ -970,7 +970,7 @@
       '.icu-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--panel);color:var(--ink2);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 12px;cursor:pointer;flex:0 0 auto;min-height:36px;transition:border-color var(--ease),background var(--ease),color var(--ease)}' +
       '.icu-chip:active{background:var(--panel2)}.icu-chip:hover{border-color:var(--primary);color:var(--primary)}' +
       '.icu-chip .icu-ico{width:15px;height:15px}' +
-      '.icu-chip-primary{background:var(--primary);border-color:var(--primary);color:#fff}.icu-chip-primary:hover{border-color:var(--primary);filter:brightness(1.05)}' +
+      '.icu-chip-primary{background:var(--fill);border-color:var(--fill);color:#fff}.icu-chip-primary:hover{border-color:var(--primary);filter:brightness(1.05)}' +
       // Finer, more instrument-like line weight; round joins keep it friendly at 14-16px.
       '.icu-ico{width:1em;height:1em;flex:0 0 auto;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}' +
       '.icu-emoji{display:inline-flex;align-items:center;line-height:1}' +
@@ -985,21 +985,21 @@
       '.icu-btn .icu-ico{width:16px;height:16px;vertical-align:-3px;margin-right:5px}' +
       '.man .icu-ico{width:12px;height:12px;vertical-align:-1px;margin-right:1px}' +
       '.icu-chip:active{background:var(--primary-soft)}' +
-      '.icu-adddata{background:var(--primary);color:#fff;font:700 15px var(--font);padding:14px;border:none;border-radius:var(--r-sm);width:100%;cursor:pointer;box-shadow:none}' +
+      '.icu-adddata{background:var(--fill);color:#fff;font:700 15px var(--font);padding:14px;border:none;border-radius:var(--r-sm);width:100%;cursor:pointer;box-shadow:none}' +
       // scroll area
       '.icu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(96px + env(safe-area-inset-bottom))}' +
       '.icu-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}' +
       // Eyebrow: small, wide-tracked, quiet. It labels a region; it must never compete with the data.
-      '.icu-sec-lbl{font:700 10.5px var(--font);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:2px 2px -4px;display:flex;align-items:center;gap:7px}' +
+      '.icu-sec-lbl{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:2px 2px -4px;display:flex;align-items:center;gap:7px}' +
       // The -4px above compensates the .icu-wrap flex gap for a STANDALONE eyebrow above a card. But
       // when an eyebrow is a card's own header (inside .icu-card) there is no flex gap, so it needs a
       // real bottom gap before the card content instead of being pulled onto it.
       '.icu-card .icu-sec-lbl{margin:0 0 9px}' +
       '.icu-sbar-head{margin-bottom:10px}' +
       '.icu-sbar{border-left:3px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
-      '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}' +
+      '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.005em;text-transform:none;margin-bottom:4px}' +
       '.icu-sbar-body{font:500 14px/1.5 var(--font);color:var(--ink)}' +
-      '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 10px var(--font);vertical-align:middle}' +
+      '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 11px var(--font);vertical-align:middle}' +
       /* Overview design cards (Active problems · consultant instruction · Current treatment) */
       '.icu-ov-prob{display:flex;align-items:center;gap:9px}' +
       '.icu-ov-dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}' +
@@ -1008,7 +1008,7 @@
       '.icu-ov-instr{background:var(--primary-soft);border-color:color-mix(in srgb,var(--primary) 45%,var(--panel))}' +
       '.icu-ov-instr-tx{font:600 14.5px/1.5 var(--font);color:var(--ink);margin:0}' +
       '.icu-ov-instr-by{font:600 12px var(--font);color:var(--primary);margin:6px 0 0}' +
-      '.icu-ov-viewtasks{width:100%;margin-top:12px;border:none;background:var(--primary);color:#fff;border-radius:12px;font:800 14px var(--font);padding:13px;cursor:pointer}' +
+      '.icu-ov-viewtasks{width:100%;margin-top:12px;border:none;background:var(--fill);color:#fff;border-radius:12px;font:800 14px var(--font);padding:13px;cursor:pointer}' +
       '.icu-ov-tx{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}' +
       '.icu-ov-tx:last-child{border-bottom:none}' +
       '.icu-ov-tx-nm{font:600 13.5px var(--font);color:var(--ink)}' +
@@ -1035,17 +1035,17 @@
       '.icu-imp-thumb{max-height:120px;max-width:calc(100% - 32px);margin:0 16px;border-radius:8px;border:1px solid var(--line);object-fit:contain}' +
       '.icu-imp-rows{flex:1;overflow-y:auto;padding:8px 16px}' +
       '.icu-imp-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:7px 0;font:600 13.5px var(--font)}.icu-imp-k{flex:0 0 34%}.icu-imp-row input{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px;font:600 14px var(--font)}' +
-      '.icu-imp-dup,.icu-imp-diff{flex-basis:100%;margin-left:34%;font:600 10.5px var(--font)}.icu-imp-dup{color:var(--ok)}.icu-imp-diff{color:var(--warn)}' +
+      '.icu-imp-dup,.icu-imp-diff{flex-basis:100%;margin-left:34%;font:600 11px var(--font)}.icu-imp-dup{color:var(--ok)}.icu-imp-diff{color:var(--warn)}' +
       '.icu-imp-actions{display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}.icu-imp-actions .icu-btn{flex:1}.icu-imp-go{background:var(--teal,#0e6e63)!important;color:#fff!important;border-color:var(--teal,#0e6e63)!important}' +
       '.icu-vitals-c{margin:0 0 2px}.icu-vitals-c>summary{list-style:none;cursor:pointer;font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.icu-vitals-c>summary::-webkit-details-marker{display:none}.icu-vitals-c>summary:after{content:"▸";margin-left:auto;color:var(--muted)}.icu-vitals-c[open]>summary:after{content:"▾"}.icu-vitals-c[open]>summary{margin-bottom:8px}.icu-vitals-c .vs-k{color:var(--muted);font-weight:600}' +
       '.icu-vc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-xs);padding:9px 10px;box-shadow:none;min-width:0}' +
       '.icu-vc-tap{cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent;transition:transform .06s ease}' +
       '.icu-vc-tap:active{transform:scale(.97)}' +
       '.icu-vc-tap:focus-visible{outline:2px solid var(--primary);outline-offset:2px}' +
-      '.icu-vc-edit{position:absolute;top:5px;right:7px;font-size:10.5px;line-height:1;color:var(--muted);opacity:.5}' +
+      '.icu-vc-edit{position:absolute;top:6px;right:7px;font-size:11px;line-height:1;color:var(--muted);opacity:.7}' +
       '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
       '.icu-vc .vl{font:600 11.5px var(--font);letter-spacing:.005em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
+      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 11px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
       '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
       '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
       '.icu-vc.ok .vv{color:var(--ok)}' +
@@ -1058,7 +1058,7 @@
       '.icu-score-n{font:800 13px var(--font)}' +
       '.icu-score-v{font:800 13px var(--font);color:var(--primary)}' +
       '.icu-score-i{flex:1 1 100%;font:600 12px/1.45 var(--font);color:var(--muted)}' +
-      '.icu-score-calc{font:800 9px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);border-radius:5px;padding:2px 6px;white-space:nowrap}' +
+      '.icu-score-calc{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);border-radius:5px;padding:2px 6px;white-space:nowrap}' +
       '.icu-score.miss{opacity:.6;cursor:pointer}' +
       '.icu-score-need{font:600 12px var(--font);color:var(--muted);font-style:italic}' +
       '.icu-score-sug{margin-top:10px;font:600 12px/1.6 var(--font);color:var(--muted)}' +
@@ -1069,22 +1069,22 @@
       '.icu-ai{background:var(--panel);border:1px dashed var(--border);border-radius:var(--r-sm);padding:13px;text-align:left;cursor:pointer;color:var(--ink);position:relative;transition:transform var(--ease),box-shadow var(--ease)}' +
       '.icu-ai:active{transform:scale(.98)}.icu-ai:hover{box-shadow:var(--sh)}' +
       '.icu-ai .ic{font-size:22px}.icu-ai .t{font:700 13.5px var(--font);margin-top:6px}.icu-ai .s{font:500 11px/1.4 var(--font);color:var(--muted);margin-top:2px}' +
-      '.icu-badge{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:var(--r-pill);padding:2px 7px;margin-top:8px}' +
+      '.icu-badge{display:inline-block;font:800 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--warn);background:var(--warn-soft);border-radius:var(--r-pill);padding:2px 7px;margin-top:8px}' +
       '.icu-ai .man{display:inline-block;margin-top:8px;margin-left:6px;font:700 11px var(--font);color:var(--primary)}' +
       // alert / recommendation / protocol cards
       // Alerts: the coloured rail carries the severity, the fill stays subtle so a screen of alerts
       // does not turn into a wall of red.
       '.icu-alert{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r-xs);padding:12px 14px;background:var(--panel);margin-bottom:8px}' +
-      '.icu-alert-grp{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
+      '.icu-alert-grp{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
       '.icu-alert.crit{border-left-color:var(--danger);background:var(--danger-soft)}' +
       '.icu-alert.warn{border-left-color:var(--warn);background:var(--warn-soft)}' +
       '.icu-alert .at{font:700 13.5px var(--font)}.icu-alert .am{font:500 12.5px/1.45 var(--font);color:var(--muted);margin-top:1px}' +
-      '.icu-alert .ax{margin-left:auto;font:700 9px var(--font);text-transform:uppercase;color:var(--muted)}' +
+      '.icu-alert .ax{margin-left:auto;font:700 11px var(--font);text-transform:none;color:var(--muted)}' +
       '.icu-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font:500 13.5px/1.45 var(--font)}.icu-row:last-child{border-bottom:none}.icu-row b{font-weight:700}' +
-      '.icu-ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.icu-ev span{font:700 10px var(--font);color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px}' +
+      '.icu-ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.icu-ev span{font:700 11px var(--font);color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px}' +
       // Primary action: a single flat teal with a 4% top-to-bottom shade (enough to read as a raised
       // surface under a thumb, far short of a gradient button). No glow, no scale-bounce.
-      '.icu-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1px solid var(--primary2);border-radius:var(--r-sm);background:linear-gradient(180deg,var(--primary),var(--primary2));color:#fff;font:700 14px var(--font);padding:12px 14px;cursor:pointer;box-shadow:none;margin-top:12px;transition:filter var(--ease),background var(--ease)}.icu-btn:active{filter:brightness(.94)}.icu-btn:hover{filter:brightness(1.04)}' +
+      '.icu-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1px solid var(--primary2);border-radius:var(--r-sm);background:var(--fill);color:#fff;font:700 14px var(--font);padding:12px 14px;cursor:pointer;box-shadow:none;margin-top:12px;transition:filter var(--ease),background var(--ease)}.icu-btn:active{filter:brightness(.94)}.icu-btn:hover{filter:brightness(1.04)}' +
       '.icu-btn.ghost{background:var(--panel);border:1px solid var(--border);color:var(--primary);box-shadow:none}.icu-btn.ghost:active{background:var(--panel2);filter:none}.icu-btn.ghost:hover{border-color:var(--primary);filter:none}' +
       '.icu-empty{font:500 13px var(--font);color:var(--muted);text-align:center;padding:8px 0}' +
       '.icu-coach{background:var(--primary-soft,#0d2e2a);border:1px solid var(--primary,#0f766e);border-radius:14px;padding:13px 14px;margin-bottom:12px}' +
@@ -1101,7 +1101,7 @@
       '.icu-tr-empty-btns{display:flex;flex-direction:column;gap:8px;max-width:270px;margin:14px auto 0}' +
       '.icu-trend-wins{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0 12px}' +
       '.icu-tr-flags{background:var(--warn-soft,#fef3c7);border:1px solid var(--warn,#92620a);border-radius:12px;padding:10px 12px;margin:2px 0 12px}' +
-      '.icu-tr-flags-h{font:800 12px var(--font);color:var(--warn,#92620a);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;display:flex;align-items:center;gap:5px}' +
+      '.icu-tr-flags-h{font:800 12px var(--font);color:var(--warn,#92620a);text-transform:none;letter-spacing:.005em;margin-bottom:8px;display:flex;align-items:center;gap:5px}' +
       '.icu-tr-flags-h span{font-weight:600;text-transform:none;letter-spacing:0;opacity:.85}.icu-tr-flags-h .icu-ico{width:15px;height:15px}' +
       '.icu-tr-flag{display:inline-block;background:var(--panel);border:1px solid var(--warn,#92620a);color:var(--ink);border-radius:999px;font:700 12px var(--font);padding:5px 11px;margin:0 6px 6px 0}' +
       '.icu-tr-group{margin-bottom:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--panel)}' +
@@ -1112,24 +1112,24 @@
       '.icu-tr-none{color:var(--muted);font-weight:600;font-size:12px}.icu-tr-empty{padding:0 14px 14px;color:var(--muted);font:600 12.5px var(--font)}' +
       '.icu-tr-card{margin:0 10px 10px}' +
       // Lab Watch
-      '.icu-chip-lw{background:var(--primary-soft);border-color:var(--primary);color:var(--primary2,var(--primary))}' +
-      '.icu-lw-badge{display:inline-flex;min-width:16px;height:16px;padding:0 4px;align-items:center;justify-content:center;background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);margin-left:3px}' +
+      '.icu-chip-lw{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
+      '.icu-lw-badge{display:inline-flex;min-width:16px;height:16px;padding:0 4px;align-items:center;justify-content:center;background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 11px var(--font);margin-left:3px}' +
       '.icu-tr-card.lw-hi{outline:2px solid var(--primary);outline-offset:1px;box-shadow:0 0 0 4px var(--primary-soft)}' +
       '.icu-lw-sheet .icu-lw-list{max-height:34vh;overflow:auto;margin-bottom:6px}' +
       '.icu-lw-grp{margin:0 0 10px}.icu-lw-grp-h{margin:0 0 6px}' +
-      '.icu-lw-grpall{font:800 11.5px var(--font);letter-spacing:.02em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:2px 0;cursor:pointer}.icu-lw-grpall.on{color:var(--primary)}' +
+      '.icu-lw-grpall{font:800 11.5px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);background:none;border:none;padding:2px 0;cursor:pointer}.icu-lw-grpall.on{color:var(--primary)}' +
       '.icu-lw-chips{display:flex;flex-wrap:wrap;gap:6px}' +
-      '.icu-lw-an{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}.icu-lw-an.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary2,var(--primary))}' +
+      '.icu-lw-an{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}.icu-lw-an.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
       '.icu-lw-none,.icu-lw-empty{font:600 12.5px var(--font);color:var(--muted);padding:10px 2px}' +
-      '.icu-lw-opts{border-top:1px solid var(--border);padding-top:10px;margin-top:4px}.icu-lw-opt{margin-bottom:10px}.icu-lw-opt>label{display:block;font:800 11.5px var(--font);text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:5px}' +
+      '.icu-lw-opts{border-top:1px solid var(--border);padding-top:10px;margin-top:4px}.icu-lw-opt{margin-bottom:10px}.icu-lw-opt>label{display:block;font:800 11.5px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin-bottom:5px}' +
       '.icu-lw-segs{display:flex;flex-wrap:wrap;gap:6px}' +
-      '.icu-lw-seg{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:9px;padding:7px 11px;cursor:pointer}.icu-lw-seg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '.icu-lw-seg{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:9px;padding:7px 11px;cursor:pointer}.icu-lw-seg.on{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '.icu-lw-hint{font:600 11.5px/1.4 var(--font);color:var(--muted);margin-top:6px}' +
       '.icu-lw-count{font:700 12px var(--font);color:var(--muted);text-align:center;margin:6px 0 10px}' +
-      '.icu-lw-state{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px;vertical-align:middle}.icu-lw-state.on{background:var(--ok-soft);color:var(--ok)}.icu-lw-state.pause{background:var(--warn-soft);color:var(--warn)}.icu-lw-state.exp{background:var(--danger-soft);color:var(--danger)}' +
+      '.icu-lw-state{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;padding:2px 8px;border-radius:999px;vertical-align:middle}.icu-lw-state.on{background:var(--ok-soft);color:var(--ok)}.icu-lw-state.pause{background:var(--warn-soft);color:var(--warn)}.icu-lw-state.exp{background:var(--danger-soft);color:var(--danger)}' +
       '.icu-lw-meta{font:600 12.5px var(--font);color:var(--muted);margin:2px 0 8px}' +
       '.icu-lw-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}.icu-lw-tag{font:700 11.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 9px}' +
-      '.icu-lw-banner{font:600 12px/1.4 var(--font);color:var(--primary2,var(--primary));background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-bottom:10px}' +
+      '.icu-lw-banner{font:600 12px/1.4 var(--font);color:var(--primary);background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-bottom:10px}' +
       '.icu-lw-acts{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}' +
       '.icu-lw-act{text-align:left;background:var(--panel2);border:1px solid var(--border);border-left-width:3px;border-radius:10px;padding:8px 11px;cursor:pointer;display:flex;flex-direction:column;gap:2px}' +
       '.icu-lw-act.crit{border-left-color:var(--danger)}.icu-lw-act.chg{border-left-color:var(--warn)}.icu-lw-act.new{border-left-color:var(--primary)}' +
@@ -1142,13 +1142,13 @@
       '.icu-tr-interp{font:800 12.5px var(--font);margin-top:2px;text-transform:capitalize}' +
       '.icu-tr-note{font:600 11.5px var(--font);color:var(--muted);margin-top:4px;font-style:italic}' +
       '.icu-tr-src{display:flex;align-items:center;gap:8px;font:600 11px var(--font);color:var(--muted);margin:6px 0 8px}' +
-      '.icu-tr-st{border-radius:999px;font:800 10px var(--font);padding:2px 8px;text-transform:uppercase;letter-spacing:.03em}' +
+      '.icu-tr-st{border-radius:999px;font:800 11px var(--font);padding:2px 8px;text-transform:none;letter-spacing:.005em}' +
       '.icu-tr-st.crit{background:var(--danger-soft,#fee2e2);color:var(--danger,#b91c1c)}.icu-tr-st.ab{background:var(--warn-soft,#fef3c7);color:var(--warn,#92620a)}.icu-tr-st.ok{background:var(--ok-soft,#dcfce7);color:var(--ok,#15803d)}' +
       '.icu-tr-single{font:600 12px var(--font);color:var(--muted);padding:8px 0}' +
       // persistent patient banner + severity key (A6)
       '.icu-banner{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;font:600 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 11px;margin-bottom:10px}' +
       '.icu-banner b{color:var(--ink);font-weight:800}.icu-banner .bad{color:var(--danger);font-weight:800}.icu-banner .sep{opacity:.4;margin:0 3px}' +
-      '.icu-sevkey{display:flex;gap:14px;justify-content:center;font:600 10.5px var(--font);color:var(--muted);margin-bottom:10px}' +
+      '.icu-sevkey{display:flex;gap:14px;justify-content:flex-start;padding-left:2px;font:600 11px var(--font);color:var(--muted);margin-bottom:10px}' +
       '.icu-sevkey span{display:inline-flex;align-items:center;gap:5px}.icu-sevkey i{width:9px;height:9px;border-radius:50%;display:inline-block}' +
       '.icu-sevkey i.ok{background:var(--ok)}.icu-sevkey i.warn{background:var(--warn)}.icu-sevkey i.bad{background:var(--danger)}' +
       // Medical Core (flag smd_medcore, default OFF). Deliberately the quietest card on the screen:
@@ -1160,10 +1160,10 @@
       '.icu-mc-row .w{margin-left:auto;font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
       // One flex item, so the row gap never lands between a number and its unit.
       '.icu-mc-row .icu-mc-val{white-space:nowrap}' +
-      '.icu-mc-sub{font:700 10px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}' +
+      '.icu-mc-sub{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:10px 0 2px}' +
       '.icu-mc-sub:first-child{margin-top:0}' +
-      '.icu-mc-foot{font:400 10.5px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
-      '.icu-phase{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
+      '.icu-mc-foot{font:400 11px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
+      '.icu-phase{display:inline-block;font:800 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
       // plain-language jargon tooltips (A5) — tap ⓘ to open an explanation
       '.icu-tip{border:none;background:none;color:var(--primary);cursor:pointer;font:600 11px var(--font);padding:0 2px;vertical-align:baseline;-webkit-appearance:none}' +
       '.icu-tip-pop{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,14px);width:min(360px,calc(100vw - 28px));background:var(--panel,#0b1620);border:1px solid var(--primary,#0f766e);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.4);padding:13px 15px;z-index:10040;opacity:0;transition:opacity .2s,transform .2s;pointer-events:auto}' +
@@ -1175,14 +1175,14 @@
       '.icu-tabs{position:absolute;left:0;right:0;bottom:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;background:var(--panel);border-top:1px solid var(--border);padding:5px 6px calc(5px + env(safe-area-inset-bottom));z-index:5}' +
       '.icu-tabs::-webkit-scrollbar{display:none}' +
       '.icu-tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:none;color:var(--muted);cursor:pointer;padding:6px 9px;border-radius:10px;min-width:58px}' +
-      '.icu-tab .ti{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;height:21px}.icu-tab .ti .icu-ico{width:21px;height:21px;stroke-width:1.9}.icu-tab .tl{font:700 9.5px var(--font);white-space:nowrap}' +
+      '.icu-tab .ti{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;height:21px}.icu-tab .ti .icu-ico{width:21px;height:21px;stroke-width:1.9}.icu-tab .tl{font:700 11px var(--font);white-space:nowrap}' +
       '.icu-x .icu-ico{width:19px;height:19px;stroke-width:2}' +
       '#icuSnap .icu-ico{width:24px;height:24px;stroke-width:2}' +
       '.icu-tab.on{color:var(--primary);background:var(--primary-soft);box-shadow:inset 0 2px 0 var(--primary)}' +
       '.icu-tab.on .tl{font-weight:800}' +
       // 5-workspace bottom bar: evenly spaced, no scroll, no truncation
       '.icu-ws-bar{overflow-x:visible;justify-content:space-between;gap:0;padding-left:4px;padding-right:4px}' +
-      '.icu-ws-bar .icu-tab{flex:1 1 0;min-width:0;padding:6px 4px}.icu-ws-bar .icu-tab .tl{font-size:10px}' +
+      '.icu-ws-bar .icu-tab{flex:1 1 0;min-width:0;padding:6px 4px}.icu-ws-bar .icu-tab .tl{font-size:11px}' +
       // segmented sub-navigation (workspace members)
       '.icu-subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding-bottom:2px}.icu-subnav::-webkit-scrollbar{display:none}' +
       '.icu-seg{flex:0 0 auto;border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:999px;font:700 12.5px var(--font);padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}' +
@@ -1194,7 +1194,7 @@
       // tag + title, with a remove (x) button. Never styled as clickable text (it isn't).
       '.icu-dx-icd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:-4px 0 12px}' +
       '.icu-icd-code{font:800 13px var(--mono,monospace);color:var(--ink)}' +
-      '.icu-icd-sys{font:700 10px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-sys{font:700 11px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
       '.icu-icd-title{font:500 12.5px var(--font);color:var(--muted);flex:1;min-width:100px}' +
       '.icu-icd-x{border:none;background:transparent;color:var(--muted);cursor:pointer;min-width:28px;min-height:28px;font-size:12px}' +
       // MaiK ICD-suggestion rows (in the icd-suggest modal sheet) - same card/row shape as the
@@ -1203,7 +1203,7 @@
       '.icu-icd-sugtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}' +
       '.icu-icd-sugtitle{font:600 13.5px var(--font);color:var(--ink)}' +
       '.icu-icd-sugwhy{font:400 12px/1.5 var(--font);color:var(--muted);margin-top:3px}' +
-      '.icu-icd-conf{font:700 10px var(--font);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-conf{font:700 11px var(--font);border-radius:6px;padding:2px 6px}' +
       '.icu-icd-conf-high{background:#14532d;color:#fff}.icu-icd-conf-medium{background:#7c2d12;color:#fff}.icu-icd-conf-low{background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-results{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}' +
       '.icu-dx-hint{font:600 12.5px var(--font);color:var(--muted);padding:8px 2px}' +
@@ -1212,12 +1212,12 @@
       // desktop: centre the 5-workspace bar and widen items (same grouping, roomier)
       '@media (min-width:900px){.icu-ws-bar{justify-content:center;gap:8px}.icu-ws-bar .icu-tab{flex:0 0 auto;min-width:120px;flex-direction:row;gap:8px}.icu-ws-bar .icu-tab .tl{font-size:13px}}' +
       // snapshot FAB
-      '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:52px;height:52px;border-radius:50%;border:1px solid var(--primary2);background:var(--primary);color:#fff;font-size:24px;box-shadow:0 4px 14px rgba(10,86,79,.28);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{filter:brightness(.94)}' +
+      '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:52px;height:52px;border-radius:50%;border:1px solid var(--primary2);background:var(--fill);color:#fff;font-size:24px;box-shadow:0 4px 14px rgba(10,86,79,.28);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{filter:brightness(.94)}' +
       // Prominent Lab Watch FAB — a labelled pill stacked above the Snapshot FAB so the
       // watch-labs action is easy to find (was only a small chip in the header row).
-      '#icuWatch{position:absolute;right:14px;bottom:calc(138px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary2,var(--primary));font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}' +
-      '#icuWatch.on{background:var(--primary);color:#fff;border-color:var(--primary2)}#icuWatch:active{filter:brightness(.95)}#icuWatch .icu-ico{width:17px;height:17px}' +
-      '#icuWatch .icu-lw-fab-b{background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);padding:1px 5px;min-width:15px;text-align:center}' +
+      '#icuWatch{position:absolute;right:14px;bottom:calc(138px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary);font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}' +
+      '#icuWatch.on{background:var(--fill);color:#fff;border-color:var(--primary2)}#icuWatch:active{filter:brightness(.95)}#icuWatch .icu-ico{width:17px;height:17px}' +
+      '#icuWatch .icu-lw-fab-b{background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 11px var(--font);padding:1px 5px;min-width:15px;text-align:center}' +
       // modal
       '.icu-modal{position:fixed;inset:0;z-index:10020;display:none;align-items:flex-end;justify-content:center;background:rgba(8,18,26,.5)}' +
       '.icu-modal.on{display:flex}' +
@@ -1231,33 +1231,33 @@
       // Imaging Notes
       '.icu-img-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.icu-img-btns .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
       '.icu-img-filters{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;-webkit-overflow-scrolling:touch}' +
-      '.icu-img-chip{flex:0 0 auto;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:var(--r-pill);font:700 12px var(--font);padding:7px 12px;cursor:pointer;white-space:nowrap}.icu-img-chip.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '.icu-img-chip{flex:0 0 auto;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:var(--r-pill);font:700 12px var(--font);padding:7px 12px;cursor:pointer;white-space:nowrap}.icu-img-chip.on{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '.icu-img-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin:0 0 10px;overflow:hidden}.icu-img-card.crit{border-color:color-mix(in srgb,var(--danger) 55%,var(--border))}' +
       '.icu-img-hd{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;background:none;border:none;padding:13px 14px 10px;cursor:pointer;color:var(--ink)}.icu-img-hd-l{flex:1;min-width:0}' +
       '.icu-img-title{font:800 15px var(--font);line-height:1.3}' +
       '.icu-img-badges{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}' +
-      '.icu-img-badge{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;background:var(--primary-soft);color:var(--primary);border-radius:6px;padding:3px 7px}' +
-      '.icu-img-tag{font:700 10.5px var(--font);background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:3px 7px}.icu-img-tag.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--border))}' +
+      '.icu-img-badge{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;background:var(--primary-soft);color:var(--primary);border-radius:6px;padding:3px 7px}' +
+      '.icu-img-tag{font:700 11px var(--font);background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:3px 7px}.icu-img-tag.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--border))}' +
       '.icu-img-meta{font:600 11.5px var(--font);color:var(--muted);margin-top:5px}' +
       '.icu-img-chev{flex:0 0 auto;color:var(--muted);font-size:14px;margin-top:2px}' +
       '.icu-img-crit{margin:0 14px 10px;background:var(--danger-soft);color:var(--danger);border:1px solid color-mix(in srgb,var(--danger) 40%,transparent);border-radius:10px;padding:9px 11px;font:600 12.5px/1.45 var(--font)}.icu-img-crit .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--danger)}' +
       '.icu-img-crit-t{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.icu-img-crit-t span{background:color-mix(in srgb,var(--danger) 14%,transparent);border-radius:6px;padding:2px 7px;font:700 11px var(--font)}' +
-      '.icu-img-imp,.icu-img-sec{padding:0 14px 10px;font:600 13.5px/1.5 var(--font);color:var(--ink)}.icu-img-k{display:block;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:3px}' +
+      '.icu-img-imp,.icu-img-sec{padding:0 14px 10px;font:600 13.5px/1.5 var(--font);color:var(--ink)}.icu-img-k{display:block;font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin-bottom:3px}' +
       '.icu-img-raw{white-space:pre-wrap;font:500 12.5px/1.5 var(--mono);color:var(--muted);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;max-height:260px;overflow:auto}' +
       '.icu-img-acts{display:flex;flex-wrap:wrap;gap:6px;padding:2px 12px 12px}.icu-img-act{border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 11.5px var(--font);padding:6px 11px;cursor:pointer}.icu-img-act.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
       '.icu-img-hidden{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;color:var(--muted);font:600 12.5px var(--font);border:1px dashed var(--border);border-radius:10px;margin:0 0 8px}' +
       '.icu-img-btns .icu-ico,.icu-doc-sub+.icu-img-btns .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px}' +
       '.icu-assist-out{margin-top:6px}' +
       '.icu-assist-msg{font:600 13px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}' +
-      '.icu-assist-draft{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 10px;margin-bottom:8px}' +
+      '.icu-assist-draft{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 10px;margin-bottom:8px}' +
       '.icu-assist-summary{font:700 14px/1.5 var(--font);color:var(--ink);margin-bottom:8px}' +
       '.icu-assist-ul{margin:2px 0 0;padding-left:18px}.icu-assist-ul li{font:600 13px/1.5 var(--font);color:var(--ink);margin:1px 0}' +
       '.icu-assist-src{font:600 11px var(--font);color:var(--muted);margin-top:8px}' +
       // Clinical Correlation
       '.icu-corr-meta{font:600 12px var(--font);color:var(--muted);margin:2px 0 10px}' +
-      '.icu-corr-badge{display:inline-block;font:800 11px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:8px;padding:5px 10px;margin-bottom:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
+      '.icu-corr-badge{display:inline-block;font:800 11px var(--font);text-transform:none;letter-spacing:.005em;border-radius:8px;padding:5px 10px;margin-bottom:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-corr-badge.ok{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-corr-badge.partial{background:var(--primary-soft);color:var(--primary)}.icu-corr-badge.warn{background:var(--warn-soft);color:var(--warn)}' +
-      '.icu-corr-sub{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 5px}' +
+      '.icu-corr-sub{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:10px 0 5px}' +
       '.icu-corr-ol{margin:0;padding-left:20px}.icu-corr-ol li{font:700 14px/1.5 var(--font);color:var(--ink)}.icu-corr-conf{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-corr-chips{display:flex;flex-wrap:wrap;gap:6px}.icu-corr-chip{font:600 12px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 10px}.icu-corr-chip.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--border));color:var(--ok)}.icu-corr-chip.muted{color:var(--muted)}' +
       '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
@@ -1265,9 +1265,9 @@
       '.icu-dx-card{border:1px solid var(--border);border-radius:12px;background:var(--panel2);padding:11px 13px;margin:8px 0}' +
       '.icu-dx-h{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;padding:0;cursor:pointer;color:inherit}.icu-dx-nm{font:800 14.5px var(--font);color:var(--ink);flex:1;min-width:0}' +
       '.icu-dx-chev{flex:0 0 auto;color:var(--muted);font-size:13px}.icu-clamp1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.icu-dx-sup{font:600 11px var(--font);color:var(--muted);margin-top:2px}' +
-      '.icu-dx-lvl{flex:0 0 auto;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:999px;padding:3px 9px;background:var(--panel);color:var(--muted);border:1px solid var(--border)}' +
+      '.icu-dx-lvl{flex:0 0 auto;font:800 11px var(--font);text-transform:none;letter-spacing:.005em;border-radius:999px;padding:3px 9px;background:var(--panel);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-lvl.strong{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-dx-lvl.moderate{background:var(--primary-soft);color:var(--primary)}.icu-dx-lvl.possible{background:var(--panel);color:var(--muted)}' +
-      '.icu-dx-red{font:800 10.5px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
+      '.icu-dx-red{font:800 11px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
       '.icu-dx-rsn{font:600 12.5px/1.5 var(--font);color:var(--muted);margin:5px 0 2px}.icu-dx-why{margin:6px 0 2px}' +
       '.icu-dx-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.icu-dx-acts .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
       '.icu-deep-list{margin:10px 0 14px;display:flex;flex-direction:column;gap:5px}' +
@@ -1275,7 +1275,7 @@
       // First-use guided-diagnosis tour (coach-mark above the bottom nav; safe-area aware)
       '.icu-tour{position:fixed;left:0;right:0;bottom:calc(92px + env(safe-area-inset-bottom));z-index:10050;display:none;justify-content:center;padding:0 14px;pointer-events:none}.icu-tour.on{display:flex}' +
       '.icu-tour-card{pointer-events:auto;width:min(440px,100%);background:var(--panel);border:1.5px solid var(--primary);border-radius:16px;box-shadow:0 16px 44px rgba(0,0,0,.4);padding:14px 16px}' +
-      '.icu-tour-step{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}' +
+      '.icu-tour-step{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--primary)}' +
       '.icu-tour-t{font:800 16px var(--font);color:var(--ink);margin:3px 0 5px}.icu-tour-x{font:600 13.5px/1.5 var(--font);color:var(--muted)}' +
       '.icu-tour-chk{display:flex;align-items:center;gap:8px;font:600 13px var(--font);color:var(--ink);margin-top:10px}.icu-tour-chk input{width:18px;height:18px}' +
       '.icu-tour-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:12px}.icu-tour-btns .icu-btn{width:auto;flex:1 1 auto;min-width:0;padding:9px 14px;margin-top:0}' +
@@ -1290,7 +1290,7 @@
       // safe-area-inset is already handled by .icu-sheet padding.
       '#icuFindQ:focus{outline:none;border-color:var(--primary)}' +
       '.icu-find-res{margin-top:10px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
-      '.icu-find-cath{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:12px 0 5px}.icu-find-cath:first-child{margin-top:2px}' +
+      '.icu-find-cath{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:12px 0 5px}.icu-find-cath:first-child{margin-top:2px}' +
       '.icu-find-cnt{display:inline-block;background:var(--primary-soft);color:var(--primary);font:700 11px var(--font);padding:1px 8px;border-radius:999px;margin-left:5px;vertical-align:1px}' +
       '.icu-find-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;background:var(--panel2);overflow:hidden}' +
       '.icu-find-hit{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:12px 13px;min-height:48px;cursor:pointer;color:var(--ink)}.icu-find-hit:last-child{border-bottom:none}.icu-find-hit:active{background:var(--primary-soft)}' +
@@ -1312,7 +1312,7 @@
       '#icuRoot.icu-v2 .icu-v2-tabwrap{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--border);padding:9px 12px}' +
       '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--panel2);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px}' +
       '#icuRoot.icu-v2 .icu-v2-tabs::-webkit-scrollbar{display:none}' +
-      '#icuRoot.icu-v2 .icu-v2-tab{flex:0 0 auto;min-height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:7px;font:600 12.5px var(--font);padding:8px 14px;cursor:pointer;transition:color var(--ease),background var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-tab{flex:0 0 auto;min-height:46px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:7px;font:600 12.5px var(--font);padding:8px 14px;cursor:pointer;transition:color var(--ease),background var(--ease)}' +
       // Selected segment: a raised white slab on the recessed track (iOS/desktop segmented-control
       // convention) with the accent carried by the label, not a saturated fill.
       '#icuRoot.icu-v2 .icu-v2-tab.on{background:var(--panel);color:var(--primary);font-weight:700;box-shadow:var(--sh-lift)}' +
@@ -1325,11 +1325,11 @@
       '#icuRoot.icu-v2 .icu-v2-handover .icu-ico{width:19px;height:19px}' +
       '#icuRoot.icu-v2 .icu-v2-banner-id{flex:1;min-width:0}' +
       '#icuRoot.icu-v2 .icu-v2-banner-nm{font:600 17px var(--font);display:flex;align-items:center;gap:8px;flex-wrap:wrap}' +
-      '#icuRoot.icu-v2 .icu-v2-banner-pill{font:700 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);border-radius:5px;padding:3px 7px;white-space:nowrap}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-pill{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);border-radius:5px;padding:3px 7px;white-space:nowrap}' +
       '#icuRoot.icu-v2 .icu-v2-banner-meta{font:400 12px var(--font);color:rgba(255,255,255,.8);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-banner-vitals{display:flex;gap:6px;margin-top:12px}' +
       '#icuRoot.icu-v2 .icu-v2-mv{flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:6px 4px 7px;text-align:center;min-width:0}' +
-      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 10.5px var(--font);color:rgba(255,255,255,.78);letter-spacing:.005em}' +
+      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 11px var(--font);color:rgba(255,255,255,.78);letter-spacing:.005em}' +
       '#icuRoot.icu-v2 .icu-v2-mv-v{font:600 15px var(--mono);margin-top:3px;letter-spacing:-.01em;color:#fff}' +
       // abnormal mini-vitals stand out on the acuity-coloured banner (ring/weight, not colour alone)
       '#icuRoot.icu-v2 .icu-v2-mv.warn{background:rgba(255,255,255,.26)}' +
@@ -1337,19 +1337,19 @@
       '#icuRoot.icu-v2 .icu-v2-mv.crit .icu-v2-mv-v{font-weight:800}' +
       // persistent safety flags (resuscitation status + allergy)
       '#icuRoot.icu-v2 .icu-v2-banner-flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}' +
-      '#icuRoot.icu-v2 .icu-v2-flag{font:700 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.22);color:#fff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
+      '#icuRoot.icu-v2 .icu-v2-flag{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;padding:3px 7px;border-radius:4px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.22);color:#fff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
       '#icuRoot.icu-v2 .icu-v2-flag.code{background:#fff;color:#b3261e}' +
       '#icuRoot.icu-v2 .icu-v2-flag.allergy{background:#fde68a;color:#7c2d12}' +
       // presence + sync
       '#icuRoot.icu-v2 .icu-v2-presence{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 15px;background:var(--panel);border-bottom:1px solid var(--border)}' +
-      '#icuRoot.icu-v2 .icu-v2-viewer{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-viewer{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:700 11px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-presence-tx{font:500 11.5px var(--font);color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-synced{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
       '#icuRoot.icu-v2 .icu-v2-dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}' +
       // restyle the existing sub-nav into a wrapping row of pills (no hidden scroll)
       '#icuRoot.icu-v2 .icu-subnav{flex-wrap:wrap;overflow:visible;gap:6px;margin:0 0 12px;padding-bottom:0}' +
-      '#icuRoot.icu-v2 .icu-seg{flex:0 0 auto;min-height:40px;border-radius:var(--r-xs);padding:7px 13px;border:1px solid var(--border);background:var(--panel);color:var(--muted);font-weight:600}' +
-      '#icuRoot.icu-v2 .icu-seg.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}' +
+      '#icuRoot.icu-v2 .icu-seg{flex:0 0 auto;min-height:46px;border-radius:var(--r-xs);padding:7px 13px;border:1px solid var(--border);background:var(--panel);color:var(--muted);font-weight:600}' +
+      '#icuRoot.icu-v2 .icu-seg.on{background:var(--fill);border-color:var(--fill);color:#fff;font-weight:700}' +
       // board / screen scroll (board bar overlays it, so pad the bottom)
       '#icuRoot.icu-v2 .icu-v2-scroll{padding:0 0 calc(84px + env(safe-area-inset-bottom))}' +
       // unit header
@@ -1360,16 +1360,16 @@
       '#icuRoot.icu-v2 .icu-v2-ubtn{position:relative;flex:0 0 auto;width:44px;height:44px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.10);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--ease)}#icuRoot.icu-v2 .icu-v2-ubtn:active{background:rgba(255,255,255,.2)}' +
       '#icuRoot.icu-v2 .icu-v2-ubtn .icu-ico{width:20px;height:20px}' +
       // The badge cuts out against the header, so its ring must be the header colour, not the accent.
-      '#icuRoot.icu-v2 .icu-v2-ubadge{position:absolute;top:4px;right:5px;min-width:16px;height:16px;padding:0 3px;background:var(--danger);color:#fff;border:2px solid var(--primary2);border-radius:50%;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-ubadge{position:absolute;top:4px;right:5px;min-width:16px;height:16px;padding:0 3px;background:var(--danger-fill,var(--danger));color:#fff;border:2px solid var(--primary2);border-radius:50%;font:700 11px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-utitle{flex:1;min-width:0;font:600 17px var(--font)}' +
       '#icuRoot.icu-v2 .icu-v2-usub{font:400 12px var(--font);color:rgba(255,255,255,.78);margin-top:2px}' +
       // Census strip: four instrument read-outs, not buttons. Uniform white-tint tiles keep them one
       // family; the severity colour is carried by a 3px top rule + the label, so the numbers stay
       // legible and the header keeps a single background.
       '#icuRoot.icu-v2 .icu-v2-strip{display:flex;gap:6px;margin-top:15px}' +
-      '#icuRoot.icu-v2 .icu-v2-scount{position:relative;flex:1;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:9px 6px 8px;cursor:pointer;text-align:center;background:rgba(255,255,255,.09);min-height:44px;overflow:hidden;transition:background var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount{position:relative;flex:1;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:9px 6px 8px;cursor:pointer;text-align:center;background:rgba(255,255,255,.09);min-height:44px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;transition:background var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-scount::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.34)}' +
-      '#icuRoot.icu-v2 .icu-v2-scount b{display:block;font:600 21px var(--mono);letter-spacing:-.02em;color:#fff}#icuRoot.icu-v2 .icu-v2-scount span{display:block;font:600 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;margin-top:3px;color:rgba(255,255,255,.8)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount b{display:block;font:600 21px var(--mono);letter-spacing:-.02em;color:#fff}#icuRoot.icu-v2 .icu-v2-scount span{display:block;font:600 11px var(--font);letter-spacing:.005em;text-transform:none;margin-top:3px;color:rgba(255,255,255,.8)}' +
       '#icuRoot.icu-v2 .icu-v2-scount.crit::before{background:#F98C82}#icuRoot.icu-v2 .icu-v2-scount.crit span{color:#FBC2BC}' +
       '#icuRoot.icu-v2 .icu-v2-scount.review::before{background:#F2C066}#icuRoot.icu-v2 .icu-v2-scount.review span{color:#F6D9A5}' +
       '#icuRoot.icu-v2 .icu-v2-scount.stable::before{background:#7FD3A2}#icuRoot.icu-v2 .icu-v2-scount.stable span{color:#B4E4C8}' +
@@ -1381,20 +1381,20 @@
       '#icuRoot.icu-v2 .icu-v2-scount.on{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.55)}' +
       // board body
       '#icuRoot.icu-v2 .icu-v2-board{padding:16px 16px 10px}' +
-      '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 10.5px var(--font);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:2px 2px 9px}' +
+      '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:2px 2px 9px}' +
       '#icuRoot.icu-v2 .icu-v2-attn{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px 4px;padding:0 16px 4px;scrollbar-width:none}#icuRoot.icu-v2 .icu-v2-attn::-webkit-scrollbar{display:none}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:var(--r);padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-attn-card.unassessed{border-left-color:var(--muted)}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 9.5px var(--font);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card.critical .icu-v2-attn-kind{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review .icu-v2-attn-kind{color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-name{font:700 14px var(--font);color:var(--ink);margin-top:6px}' +
       '#icuRoot.icu-v2 .icu-v2-attn-detail{font:500 12px var(--font);color:var(--muted);margin-top:3px;line-height:1.4}' +
       // Filters read as one segmented control: equal-height squared chips on a hairline, selected
       // state a solid teal. No pill cloud.
       '#icuRoot.icu-v2 .icu-v2-filters{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:16px -16px 12px;padding:0 16px}#icuRoot.icu-v2 .icu-v2-filters::-webkit-scrollbar{display:none}#icuRoot.icu-v2 .icu-v2-filters>*{flex:0 0 auto}' +
-      '#icuRoot.icu-v2 .icu-v2-fchip{border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 13px;min-height:40px;cursor:pointer;transition:color var(--ease),border-color var(--ease),background var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-fchip{border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 13px;min-height:46px;cursor:pointer;transition:color var(--ease),border-color var(--ease),background var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-fchip:active{background:var(--panel2)}' +
-      '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}' +
+      '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--fill);border-color:var(--fill);color:#fff;font-weight:700}' +
       // patient card
       // The patient card is the unit of work on this screen: a white slab on a hairline, a 3px acuity
       // rail on the leading edge, no drop shadow competing with the rail.
@@ -1403,13 +1403,13 @@
       // swipe-to-remove row: the red action sits BEHIND the (opaque) card and is revealed by dragging left
       '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}#icuRoot.icu-v2 .icu-v2-swipe:not(.sw-on)>.icu-v2-swipe-act{visibility:hidden}' +
       '#icuRoot.icu-v2 .icu-v2-swipe .icu-v2-card{position:relative;z-index:1;touch-action:pan-y}' +
-      '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.04em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
+      '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.005em;text-transform:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
       '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}#icuRoot.icu-v2 .icu-v2-card.unassessed{border-left-color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-card-body{padding:13px 14px 12px}' +
       '#icuRoot.icu-v2 .icu-v2-card-top{display:flex;align-items:center;gap:11px}' +
       // Bed marker: a tile, squarer than the card, reading as a physical bay label.
       '#icuRoot.icu-v2 .icu-v2-bed{width:44px;height:44px;flex:0 0 auto;border-radius:var(--r-xs);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:var(--panel2);border:1px solid var(--border)}' +
-      '#icuRoot.icu-v2 .icu-v2-bed b{font:600 15px var(--mono);line-height:1;letter-spacing:-.02em;color:var(--ink)}#icuRoot.icu-v2 .icu-v2-bed span{font:600 7.5px var(--font);letter-spacing:.1em;color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed b{font:600 15px var(--mono);line-height:1;letter-spacing:-.02em;color:var(--ink)}#icuRoot.icu-v2 .icu-v2-bed span{font:600 11px var(--font);letter-spacing:.1em;color:var(--muted)}' +
       // Acuity tints the bed tile only when it means something (critical / needs review). A stable
       // bed stays neutral, so a board of stable patients is quiet and the exceptions pop.
       '#icuRoot.icu-v2 .icu-v2-bed.critical{background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 30%,var(--border))}#icuRoot.icu-v2 .icu-v2-bed.critical b,#icuRoot.icu-v2 .icu-v2-bed.critical span{color:var(--danger)}' +
@@ -1421,7 +1421,7 @@
       '#icuRoot.icu-v2 .icu-v2-card-demo{font:500 12px var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-card-dx{font:400 13px var(--font);color:var(--muted);opacity:1;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       // Status is a small squared tag, not a lozenge — same shape language as the rest of the chrome.
-      '#icuRoot.icu-v2 .icu-v2-pill{flex:0 0 auto;font:700 9.5px var(--font);border-radius:5px;padding:4px 7px;letter-spacing:.07em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-pill{flex:0 0 auto;font:700 11px var(--font);border-radius:5px;padding:4px 7px;letter-spacing:.005em;text-transform:none}' +
       '#icuRoot.icu-v2 .icu-v2-pill.critical{color:var(--danger);background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-pill.review{color:var(--warn);background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-pill.stable{color:var(--ok);background:var(--ok-soft)}#icuRoot.icu-v2 .icu-v2-pill.unassessed{color:var(--muted);background:color-mix(in srgb,var(--muted) 16%,var(--panel2))}' +
       // Vitals row: evenly divided columns on a hairline, so values line up down the whole board.
       '#icuRoot.icu-v2 .icu-v2-vstrip{display:flex;gap:0;margin-top:11px;padding-top:10px;border-top:1px solid var(--border-soft)}' +
@@ -1431,10 +1431,10 @@
       '#icuRoot.icu-v2 .icu-v2-vc.crit .icu-v2-vv{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-vc.warn .icu-v2-vv{color:var(--warn)}' +
       // Provenance strip: who touched this record and when. Recessed surface, quiet type.
       '#icuRoot.icu-v2 .icu-v2-card-foot{background:var(--panel2);padding:7px 14px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--border-soft)}' +
-      '#icuRoot.icu-v2 .icu-v2-foot-av{width:20px;height:20px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:600 8.5px var(--font);letter-spacing:.02em;display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-av{width:20px;height:20px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:600 11px var(--font);letter-spacing:.02em;display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-foot-txt{font:600 11.5px var(--font);color:var(--ink2)}' +
       '#icuRoot.icu-v2 .icu-v2-foot-ago{font:400 11px var(--font);color:var(--muted);margin-left:auto}' +
-      '#icuRoot.icu-v2 .icu-v2-foot-tasks{display:inline-flex;align-items:center;gap:4px;font:600 10.5px var(--font);color:var(--primary);background:var(--primary-soft);padding:2px 7px;border-radius:5px}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-tasks{display:inline-flex;align-items:center;gap:4px;font:600 11px var(--font);color:var(--primary);background:var(--primary-soft);padding:2px 7px;border-radius:5px}' +
       '#icuRoot.icu-v2 .icu-v2-foot-tasks svg{width:13px;height:13px}' +
       '#icuRoot.icu-v2 .icu-v2-foot-count{text-align:center;font:600 12px var(--font);color:var(--muted);padding:6px 0 2px}' +
       // empty states
@@ -1459,34 +1459,34 @@
       '#icuRoot.icu-v2 .icu-v2-alert-tx{flex:1;min-width:0}' +
       '#icuRoot.icu-v2 .icu-v2-alert-h{display:block;font:700 13.5px var(--font);color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-alert-b{display:block;font:500 12.5px var(--font);color:var(--muted);margin-top:3px;line-height:1.45}' +
-      '#icuRoot.icu-v2 .icu-v2-urg{font:700 9px var(--font);letter-spacing:.08em;color:var(--danger);background:var(--danger-soft);border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}' +
+      '#icuRoot.icu-v2 .icu-v2-urg{font:700 11px var(--font);letter-spacing:.08em;color:var(--danger);background:var(--danger-soft);border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}' +
       '#icuRoot.icu-v2 .icu-v2-member{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-member-av{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 13px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-member-av{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:700 13px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-member-id{flex:1;min-width:0}#icuRoot.icu-v2 .icu-v2-member-nm{display:block;font:700 14.5px var(--font);color:var(--ink)}#icuRoot.icu-v2 .icu-v2-member-role{display:block;font:600 12px var(--font);color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-member-state{flex:0 0 auto;font:600 11px var(--font);color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:4px 10px}' +
       // Phase 5 — team screen: Doctor ID card, online dot, per-member remove, admin actions, role segments
       '#icuRoot.icu-v2 .icu-v2-idcard{display:flex;align-items:center;gap:12px;background:var(--primary-soft);border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));border-radius:var(--r);padding:12px 14px}' +
       '#icuRoot.icu-v2 .icu-v2-idcard-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}' +
-      '#icuRoot.icu-v2 .icu-v2-idcard-lbl{font:600 11px var(--font);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}' +
-      '#icuRoot.icu-v2 .icu-v2-idcard-code{font:600 20px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--primary2,var(--primary));letter-spacing:.09em}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-lbl{font:600 11px var(--font);color:var(--muted);text-transform:none;letter-spacing:.005em}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-code{font:600 20px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--primary);letter-spacing:.09em}#icuRoot.icu-v2 .icu-v2-idcard-code.pending{font:500 14px var(--font);color:var(--muted);letter-spacing:0}' +
       '#icuRoot.icu-v2 .icu-v2-idcopy{flex:0 0 auto;min-height:44px;padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary);border-radius:11px;font:700 13px var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:6px}#icuRoot.icu-v2 .icu-v2-idcopy .icu-ico{width:15px;height:15px}' +
       '#icuRoot.icu-v2 .icu-v2-member-av.on{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--ok)}' +
       '#icuRoot.icu-v2 .icu-v2-memrm{flex:0 0 auto;min-height:36px;padding:0 12px;border:1px solid var(--border);background:var(--panel);color:var(--bad,#c0392b);border-radius:999px;font:700 12px var(--font);cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-teamacts{display:flex;flex-direction:column;gap:9px;margin-top:4px}' +
       '#icuRoot.icu-v2 .icu-v2-roleseg-row{display:flex;flex-wrap:wrap;gap:7px}' +
       '#icuRoot.icu-v2 .icu-v2-roleseg{min-height:40px;padding:0 13px;border:1px solid var(--border);background:var(--panel);color:var(--ink2);border-radius:var(--r-xs);font:600 12.5px var(--font);cursor:pointer}' +
-      '#icuRoot.icu-v2 .icu-v2-roleseg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-roleseg.on{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '#icuRoot.icu-v2 .icu-v2-danger{color:var(--bad,#c0392b);border-color:var(--bad,#c0392b)}' +
       // bottom bar (board / alerts / team only)
       // Bottom bar: a flat instrument tray. Selection is shown twice (colour + a 2px rule) so it
       // survives glare, colour-vision deficiency and a night shift.
       '#icuRoot.icu-v2 .icu-v2-bottombar{position:absolute;left:0;right:0;bottom:0;z-index:7;display:flex;background:var(--panel);border-top:1px solid var(--border);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}' +
-      '#icuRoot.icu-v2 .icu-v2-navbtn{position:relative;flex:1;min-height:46px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);font:500 10.5px var(--font);border-radius:var(--r-xs);transition:color var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-navbtn{position:relative;flex:1;min-height:46px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);font:500 11px var(--font);border-radius:var(--r-xs);transition:color var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-navic{font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;height:22px}#icuRoot.icu-v2 .icu-v2-navbtn .icu-ico{width:21px;height:21px}' +
       // Selected tab: a lit key on the tray (tinted plate + accent colour + heavier label), rather
       // than a detached indicator rule floating above the icon.
       '#icuRoot.icu-v2 .icu-v2-navbtn.on{color:var(--primary);font-weight:600;background:var(--primary-soft)}' +
-      '#icuRoot.icu-v2 .icu-v2-admit{color:var(--primary)}#icuRoot.icu-v2 .icu-v2-admit-ic{width:30px;height:30px;border-radius:var(--r-xs);background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}#icuRoot.icu-v2 .icu-v2-admit .icu-ico{width:18px;height:18px;color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-admit{color:var(--primary)}#icuRoot.icu-v2 .icu-v2-admit-ic{width:30px;height:30px;border-radius:var(--r-xs);background:var(--fill);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}#icuRoot.icu-v2 .icu-v2-admit .icu-ico{width:18px;height:18px;color:#fff}' +
       // v2 FAB positions (no bottom bar on the patient screen)
       '#icuRoot.icu-v2 #icuSnap{bottom:calc(24px + env(safe-area-inset-bottom))}' +
       // Lab Watch rides ABOVE the camera as a 48px icon button (the 170px labelled pill sat over the
@@ -1494,12 +1494,20 @@
       '#icuRoot.icu-v2 #icuWatch{bottom:calc(88px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px;padding:0;border-radius:50%;justify-content:center}' +
       '#icuRoot.icu-v2 #icuWatch .icu-lw-lbl{display:none}#icuRoot.icu-v2 #icuWatch .icu-ico{width:21px;height:21px}' +
       '#icuRoot.icu-v2.icu-has-fab .icu-scroll{padding-bottom:calc(150px + env(safe-area-inset-bottom))}' +
+      // Tap targets: 46px floor on every control = 44pt after home.js's 0.95 small-phone shrink (HIG). Tabs, chips, row tools and header icons were 26-42px.
+      '#icuRoot button,#icuRoot [role=tab],#icuRoot [role=switch],.icu-modal button{min-height:46px;min-width:46px}' +
+      // Dark: one teal cannot be both text and fill. Text/icon teal #4CC2B0, fill teal #1F7A6E (Refined Look, 2026-10-12).
+      // html+body prefix outranks redesign-system.css, which maps --primary to the app-wide #2f9184.
+      'html body:is(.dark,.v3-dark) :is(#icuRoot,.icu-modal,.icu-tour){--primary:#4CC2B0;--fill:#1F7A6E;--danger-fill:#B42318}' +
+      '.icu-vc-edit .icu-ico{width:13px;height:13px;display:block}' +
+      '.icu-rcb{width:22px;height:22px;border:2px solid var(--muted);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff}.icu-rcb.on{background:var(--ok);border-color:var(--ok)}.icu-rcb .icu-ico{width:15px;height:15px;stroke-width:3}' +
+      '.icu-score[data-icu-act],.icu-ward[data-icu-act]{min-height:46px;box-sizing:border-box;display:flex;align-items:center}' +
       // ── group mode (smd_icu_groups, Phase 2) — additive, scoped under #icuRoot.icu-v2 ──
       // unit switcher (the header title becomes a tappable group picker)
       '#icuRoot.icu-v2 .icu-v2-gswitch{flex:1;min-width:0;border:none;background:none;color:inherit;text-align:left;cursor:pointer;padding:0;font:700 17px var(--font)}' +
       // member-avatar stack (→ Team sheet)
       '#icuRoot.icu-v2 .icu-v2-avatars{flex:0 0 auto;display:flex;align-items:center;border:none;background:none;cursor:pointer;padding:0}' +
-      '#icuRoot.icu-v2 .icu-v2-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.20);color:#fff;font:600 10px var(--font);display:flex;align-items:center;justify-content:center;border:2px solid var(--primary2);margin-left:-8px}' +
+      '#icuRoot.icu-v2 .icu-v2-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.20);color:#fff;font:600 11px var(--font);display:flex;align-items:center;justify-content:center;border:2px solid var(--primary2);margin-left:-8px}' +
       '#icuRoot.icu-v2 .icu-v2-av.more{background:rgba(255,255,255,.16)}' +
       // live sync indicator (banner presence row) — Synced / Syncing / Offline
       '#icuRoot.icu-v2 .icu-v2-sync{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
@@ -1509,12 +1517,12 @@
       // other viewers in the presence stack
       '#icuRoot.icu-v2 .icu-v2-viewer.alt{background:var(--warn);margin-left:-6px;border:2px solid var(--panel)}' +
       // "not reviewed" chip on a live card footer
-      '#icuRoot.icu-v2 .icu-v2-unrev{font:700 9px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:2px 6px;margin-right:5px}' +
+      '#icuRoot.icu-v2 .icu-v2-unrev{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:2px 6px;margin-right:5px}' +
       // shared instructions/timeline panel (Rounds tab)
       '#icuRoot.icu-v2 .icu-v2-collab{margin-bottom:6px}' +
       // ── Phase 3: round-note composer + timeline author avatar + smart-notification feed ──
       '#icuRoot.icu-v2 .icu-v2-addround{border:2px dashed var(--primary3);background:var(--panel2);color:var(--primary);box-shadow:none}' +
-      '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 8px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:700 11px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-rbody{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px 16px;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
       '#icuRoot.icu-v2 .icu-v2-rscroll{padding:14px 16px;display:flex;flex-direction:column;gap:10px}' +
       /* suggestions box flexes to fill + scrolls internally; add-your-own + post stay pinned/visible */
@@ -1525,7 +1533,7 @@
       '#icuRoot.icu-v2 .icu-v2-rchip{display:inline-flex;align-items:center;gap:9px;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;cursor:pointer;color:var(--ink);transition:border-color var(--ease),background var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-rchip.on{border-color:var(--primary);background:var(--primary-soft)}' +
       '#icuRoot.icu-v2 .icu-v2-rbox{width:20px;height:20px;flex:0 0 auto;border-radius:6px;border:2px solid var(--border);background:var(--panel);color:transparent;display:flex;align-items:center;justify-content:center;font:800 12px var(--font)}' +
-      '#icuRoot.icu-v2 .icu-v2-rchip.on .icu-v2-rbox{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-rchip.on .icu-v2-rbox{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '#icuRoot.icu-v2 .icu-v2-rtx{min-width:0;font:600 14px var(--font);color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-rx{flex:0 0 auto;color:var(--muted);font:700 12px var(--font);margin-left:2px}' +
       /* priority picker (2x2) */
@@ -1547,11 +1555,11 @@
       '#icuRoot .icu-tl-bar{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 0 8px;scrollbar-width:none}' +
       '#icuRoot .icu-tl-bar::-webkit-scrollbar{display:none}' +
       '#icuRoot .icu-tl-chip{flex:0 0 auto;font:700 12px var(--font);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 13px;min-height:34px;cursor:pointer}' +
-      '#icuRoot .icu-tl-chip.on{color:#fff;background:var(--primary);border-color:var(--primary)}' +
-      '#icuRoot .icu-tl-day{position:sticky;top:0;z-index:1;font:800 11px var(--font);letter-spacing:.03em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:8px;padding:5px 10px;margin:10px 0 6px}' +
+      '#icuRoot .icu-tl-chip.on{color:#fff;background:var(--fill);border-color:var(--fill)}' +
+      '#icuRoot .icu-tl-day{position:sticky;top:0;z-index:1;font:800 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--primary);background:var(--primary-soft);border-radius:8px;padding:5px 10px;margin:10px 0 6px}' +
       '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
-      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 10px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
+      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 11px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
       '#icuRoot.icu-v2 .icu-v2-due{font:600 11.5px/1.5 var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-due.over{color:var(--danger)}' +
       '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-top:6px}' +
@@ -1669,7 +1677,7 @@
     var attrs = edit
       ? ' data-icu-act="editvital:' + edit + '" role="button" tabindex="0" aria-label="' + al + ' — tap to edit"'
       : ' role="group" aria-label="' + al + '"';
-    var pencil = edit ? '<span class="icu-vc-edit" aria-hidden="true">✎</span>' : '';
+    var pencil = edit ? '<span class="icu-vc-edit" aria-hidden="true">' + ico("edit", "✎") + '</span>' : '';
     return '<div class="icu-vc ' + (status || "") + (edit ? " icu-vc-tap" : "") + '"' + attrs + '>' + pencil + '<div class="vl">' + esc(label) + '</div><div class="vv">' + vv + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
   function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
@@ -3661,9 +3669,9 @@
         return '<div class="icu-sec-lbl" style="margin:8px 0 2px">' + esc(g) + "</div>" + groups[g].map(function (it) {
           var r = _raw.rounds[it.k] || {};
           // R5 UX#5: icon-only round buttons need a VoiceOver name + a >=44pt tap target.
-          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" aria-label="' + (r.done ? "Mark not done: " : "Mark done: ") + esc(it.label) + '" aria-pressed="' + (r.done ? "true" : "false") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;min-width:44px;min-height:44px;color:' + (r.done ? "var(--ok)" : "var(--muted)") + '">' + (r.done ? "☑" : "☐") + "</button>" +
+          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" aria-label="' + (r.done ? "Mark not done: " : "Mark done: ") + esc(it.label) + '" aria-pressed="' + (r.done ? "true" : "false") + '" style="border:none;background:none;cursor:pointer;min-width:46px;min-height:46px;display:inline-flex;align-items:center;justify-content:center"><span class="icu-rcb' + (r.done ? " on" : "") + '" aria-hidden="true">' + (r.done ? ico("check", "✓") : "") + "</span></button>" +
             '<span style="flex:1">' + esc(it.label) + (r.note ? ' <span style="color:var(--muted);font-size:12px">— ' + esc(r.note) + "</span>" : "") + "</span>" +
-            '<button data-icu-act="roundnote:' + it.k + '" aria-label="Edit note: ' + esc(it.label) + '" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:14px;min-width:44px;min-height:44px">✎</button></div>';
+            '<button data-icu-act="roundnote:' + it.k + '" aria-label="Edit note: ' + esc(it.label) + '" style="border:none;background:none;color:var(--primary);cursor:pointer;min-width:46px;min-height:46px;display:inline-flex;align-items:center;justify-content:center">' + ico("edit", "✎") + '</button></div>';
         }).join("");
       }).join("");
       return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
@@ -4461,7 +4469,7 @@
     var grpOn = icuGroupsOn();
     // iOS-style toggle (replaces the old solo/group button). Same data-icu-act="grptoggle" handler
     // (grpSetMode: flips smd_icu_groups in place, no reload). Inline styles render the on/off state.
-    var swBg = grpOn ? "#0e6e63" : "rgba(120,140,150,.35)", knob = grpOn ? "22px" : "3px";
+    var swBg = grpOn ? "var(--fill)" : "rgba(120,140,150,.35)", knob = grpOn ? "22px" : "3px";
     var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
       '<button class="icu-grp-toggle" data-icu-act="grptoggle" role="switch" aria-checked="' + grpOn + '" aria-label="Group mode" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:4px 0 2px">' +
         '<span style="flex:1;min-width:0"><span style="display:block;font:700 15px system-ui;color:var(--ink,#14202b)">Group mode</span>' +
@@ -4516,7 +4524,8 @@
   function stewardIdCard() {
     var idVal = stewardIdVal();
     return '<div class="icu-v2-idcard"><div class="icu-v2-idcard-l"><span class="icu-v2-idcard-lbl">Your StewardMD ID</span>' +
-      '<span class="icu-v2-idcard-code">' + (idVal ? esc(idVal) : "Generating…") + '</span></div>' +
+      (idVal ? '<span class="icu-v2-idcard-code">' + esc(idVal) + '</span>'
+        : '<span class="icu-v2-idcard-code pending">' + (ownerNow() === "anon" ? "Sign in to get your ID" : "Generating…") + '</span>') + '</div>' +
       (idVal ? '<button class="icu-v2-idcopy" data-icu-act="grpcopyid" aria-label="Copy your StewardMD ID">' + ico("copy", "📋") + ' Copy</button>' : "") +
       '</div>';
   }
