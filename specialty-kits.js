@@ -622,7 +622,9 @@
       patient: function () { return {}; }
     };
   }
+  var HS = { host: null, key: "", opts: null };   // the generic host sheet (ICU and ward notes), see openHostSheet
   function hostFor(el) {
+    if (el && el.closest && el.closest("#smdKitHost") && HS.host) return HS.host;
     if (el && el.closest && el.closest("#smdOpdEmr") && G.OPDEMR && G.OPDEMR.kitHost) return G.OPDEMR.kitHost;
     return standaloneHost();
   }
@@ -708,7 +710,7 @@
   }
   function addBtn(act, host, label) {
     var dis = !host.canWrite() || !host.ready();
-    return '<button type="button" class="kit-add" data-kit-act="' + act + '"' + (dis ? " disabled" : "") + ">" + ms(host.kind === "opd" ? "playlist_add" : "content_copy") + esc(label || host.addLabel()) + "</button>";
+    return '<button type="button" class="kit-add" data-kit-act="' + act + '"' + (dis ? " disabled" : "") + ">" + ms(host.kind === "opd" || host.addToNote ? "playlist_add" : "content_copy") + esc(label || host.addLabel()) + "</button>";
   }
   function targetName(host, field) { return host.fieldLabel ? host.fieldLabel(field) : field; }
   function sectionHtml(kit, sec, k, host) {
@@ -1189,7 +1191,7 @@
     }
     return '<section class="kit-card kit-tool" data-kit-tool="' + id + '"><h3>' + ms(T.icon) + esc(T.title) + "</h3>" + T.form(t) +
       '<div class="kit-out" data-kit-out="' + id + '" aria-live="polite">' + T.out(t) + "</div>" +
-      (T.text ? '<div class="kit-row">' + addBtn("tool:" + id, host, host.kind === "opd" ? "Add to " + targetName(host, T.target) : "Copy") + "</div>" : "") + "</section>";
+      (T.text ? '<div class="kit-row">' + addBtn("tool:" + id, host, host.kind === "opd" || host.addToNote ? "Add to " + targetName(host, T.target) : "Copy") + "</div>" : "") + "</section>";
   }
 
   /* Investigations (owner, 2026-09-26): tick the ones you want, then ONE button puts them on the
@@ -1491,10 +1493,47 @@
     return hit ? hit.id : "";
   }
 
+  /* ======================================= generic host sheet =======================================
+   * The kit in a sheet for a host with its own notes (ICU and ward, owner 2026-10-28): openHostSheet({ host, key, title, exportLabel,
+   * oneLabel }). The footer's Export puts every result the doctor used into the host's note in one tap (host.insertMany); "One combined
+   * note" joins them into one block. The host decides where a note goes (ICU: the patient timeline). */
+  function hsEl() { return D && D.getElementById("smdKitHost"); }
+  function renderHostSheet() {
+    var el = hsEl(); if (!el || !HS.host) return;
+    var body = el.querySelector(".kit-sheet-body"); if (!body) return;
+    var top = body.scrollTop;
+    body.innerHTML = kitBody({ host: HS.host, key: HS.key, defaultKit: mySpecialty() });
+    body.scrollTop = top;
+  }
+  function openHostSheet(opts) {
+    if (!D || !flagOn() || !opts || !opts.host) return;
+    HS = { host: opts.host, key: opts.key || "host", opts: opts };
+    var wrap = hsEl();
+    if (!wrap) {
+      wrap = D.createElement("div"); wrap.id = "smdKitHost"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-modal", "true"); wrap.setAttribute("aria-label", "Specialty tools");
+      D.body.appendChild(wrap);
+    }
+    wrap.innerHTML = '<div class="kit-sheet"><header class="kit-sheet-top"><button type="button" class="kit-x" data-kit-act="hclose" aria-label="Close specialty tools">' + ms("close") + "</button><h1>" + esc(opts.title || "Specialty tools") + "</h1><span></span></header>" +
+      '<div class="kit-sheet-body"></div><footer class="kit-hfoot"><button type="button" class="kit-hexport" data-kit-act="hexport">' + ms("upload") + esc(opts.exportLabel || "Export to EMR") + "</button>" +
+      '<button type="button" class="kit-hexport ghost" data-kit-act="hexport1">' + esc(opts.oneLabel || "One combined note") + "</button></footer></div>";
+    wrap.classList.add("on"); D.body.style.overflow = "hidden";
+    renderHostSheet();
+    loadKits().then(function () { if (HS.host === opts.host) { if (opts.tool && kitHoldingTool(opts.tool)) ks(HS.key).kitId = kitHoldingTool(opts.tool); renderHostSheet(); if (opts.tool) { var t = wrap.querySelector('[data-kit-tool="' + opts.tool + '"]'); if (t && t.scrollIntoView) t.scrollIntoView({ block: "start" }); } } }, function () {});
+    if (opts.tool === "growth-who") loadGrowth().then(function () { renderHostSheet(); }, function () {});
+  }
+  function closeHostSheet() { var el = hsEl(); if (el) el.classList.remove("on"); if (D) D.body.style.overflow = ""; HS.host = null; micStop(); }
+
   function onClick(e) {
     var btn = e.target && e.target.closest && e.target.closest("[data-kit-act]"); if (!btn) return;
     var act = btn.getAttribute("data-kit-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { micStop(); close(); return; }
+    if (cmd === "hclose") { closeHostSheet(); return; }
+    if (cmd === "hexport" || cmd === "hexport1") {
+      if (!HS.host) return;
+      var nx = exportAll({ host: HS.host, key: HS.key, mode: cmd === "hexport1" ? "one" : "each", field: HS.host.exportField || "" });
+      if (nx) closeHostSheet();
+      return;
+    }
     var key = keyOf(btn); if (!key) return;
     var host = hostFor(btn), k = ks(key), kit = kitById(k.kitId);
     if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; k.invSel = {}; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
@@ -1638,6 +1677,7 @@
 
   var API = {
     exportAll: exportAll, exportItems: function (key) { var kk = ks(key), kit = kitById(kk.kitId); return kit ? exportItems(kit, kk) : []; }, kitHoldingTool: kitHoldingTool,
+    openHostSheet: openHostSheet, closeHostSheet: closeHostSheet, renderHostSheet: renderHostSheet,
     fieldTool: fieldTool, toolSheetBody: toolSheetBody, toolTitle: toolTitle, _FIELD_TOOLS: FIELD_TOOLS, _KIT_FIELD_TOOLS: KIT_FIELD_TOOLS,
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
