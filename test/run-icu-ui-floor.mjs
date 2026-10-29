@@ -1,5 +1,6 @@
 /* ICU UI floor (2026-10-29, impeccable / ui-ux-pro-max / no-slop-ui / antislop-ui pass). Guards:
- *  - every visible control is >= 44pt (46 CSS px; home.js shrinks small phones to 0.95)
+ *  - every visible control is >= 44pt (46 CSS px; home.js shrinks small phones to 0.95). Measured as layout size x
+ *    page zoom, not getBoundingClientRect: press/page animations scale the box mid-transition (read as 43px).
  *  - no tracked-uppercase labels (they also mangled pH / PaCO2 / SpO2)
  *  - no text glyphs standing in for icons (checkbox, pencil)
  *  - dark mode: white-on-teal fills and teal text both >= 4.5:1 (one teal cannot do both)
@@ -45,7 +46,7 @@ try {
     var bgOf = function (el) { while (el) { var l = lum(getComputedStyle(el).backgroundColor); if (l.a > .5) return l.L; el = el.parentElement; } return 1; };
     var cr = function (el) { var f = lum(getComputedStyle(el).color).L, b = bgOf(el); return (Math.max(f, b) + .05) / (Math.min(f, b) + .05); };
     var small = [], caps = [], glyph = [], lowc = [];
-    root.querySelectorAll("button,[role=tab],[role=switch]").forEach(function (el) { if (!vis(el)) return; var r = el.getBoundingClientRect(); if (r.height < 43.5 || r.width < 43.5) small.push((el.getAttribute("aria-label") || el.textContent).trim().slice(0, 30) + " " + Math.round(r.width) + "x" + Math.round(r.height)); });
+    root.querySelectorAll("button,[role=tab],[role=switch]").forEach(function (el) { if (!vis(el)) return; var zm = parseFloat(document.documentElement.style.zoom) || 1, w = el.offsetWidth * zm, h = el.offsetHeight * zm; if (h < 43.5 || w < 43.5) small.push((el.getAttribute("aria-label") || el.textContent).trim().slice(0, 30) + " " + Math.round(w) + "x" + Math.round(h)); });
     root.querySelectorAll("*").forEach(function (el) {
       if (!vis(el)) return; var own = [].filter.call(el.childNodes, function (n) { return n.nodeType === 3; }).map(function (n) { return n.textContent; }).join("").trim(); if (!own) return;
       var cs = getComputedStyle(el);
