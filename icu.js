@@ -1504,6 +1504,36 @@
       '.icu-vc-edit .icu-ico{width:13px;height:13px;display:block}' +
       '.icu-rcb{width:22px;height:22px;border:2px solid var(--muted);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff}.icu-rcb.on{background:var(--ok);border-color:var(--ok)}.icu-rcb .icu-ico{width:15px;height:15px;stroke-width:3}' +
       '.icu-score[data-icu-act],.icu-ward[data-icu-act]{min-height:46px;box-sizing:border-box;display:flex;align-items:center}' +
+      // Overview variants (smd_icu_ov). Alerts panel: hairline rows, severity word column; no stripe, no tint.
+      '.icu-al{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:4px 16px}' +
+      '.icu-al-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 0 10px}' +
+      '.icu-al-t{margin:0;font:650 17px/1.25 var(--font);color:var(--ink)}.icu-al-n{font:600 13px var(--font);color:var(--muted);font-variant-numeric:tabular-nums}' +
+      '.icu-al-g{font:600 12.5px var(--font);color:var(--muted);padding:14px 0 4px;border-top:1px solid var(--border)}' +
+      '.icu-al-r{display:grid;grid-template-columns:72px minmax(0,1fr) auto;column-gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid var(--border-soft,var(--border))}' +
+      '.icu-al-g+.icu-al-r{border-top:none}' +
+      '.icu-al-sev{font:650 13px var(--font);color:var(--muted)}.icu-al-r.crit .icu-al-sev{color:var(--danger)}.icu-al-r.warn .icu-al-sev{color:var(--warn)}' +
+      '.icu-al-tt{font:600 15px/1.3 var(--font);color:var(--ink)}.icu-al-m{font:400 14px/1.45 var(--font);color:var(--ink2,var(--muted));margin-top:2px}' +
+      '.icu-al-src{font:500 12.5px var(--font);color:var(--muted);white-space:nowrap}' +
+      '.icu-al-empty{margin:0 0 12px;font:400 14px/1.45 var(--font);color:var(--muted)}' +
+      '.icu-al-nav{padding:0}.icu-al-nr{display:flex;align-items:center;gap:10px;width:100%;min-height:50px;padding:0 16px;background:none;border:none;border-top:1px solid var(--border);font:500 15px var(--font);color:var(--ink);text-align:left;cursor:pointer}' +
+      '.icu-al-nr:first-child{border-top:none}.icu-al-nr>span:first-child{flex:1}.icu-al-nv{color:var(--muted);font-size:14px}.icu-al-nr .icu-ico{width:16px;height:16px;color:var(--muted)}.icu-al-nr:active{background:var(--panel2)}' +
+      // Variant section titles: a real heading (ink, 15px), not a grey eyebrow with an icon.
+      '.icu-ovv .icu-sec-lbl{font:650 15px var(--font);color:var(--ink);margin:4px 0 8px}.icu-ovv .icu-card>.icu-sec-lbl{margin:0 0 8px}.icu-ovv .icu-sec-lbl .icu-ico,.icu-ovv .icu-sec-lbl .icu-emoji{display:none}' +
+      // Tiles: abnormal values carry the colour; no tinted fill or coloured border, and normal reads as plain ink.
+      '.icu-ovv .icu-vc.warn,.icu-ovv .icu-vc.crit{background:var(--panel);border-color:var(--border)}.icu-ovv .icu-vc.ok .vv{color:var(--ink)}' +
+      '.icu-ovv-none{display:flex;align-items:center;gap:4px 14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:4px 6px 4px 14px;font:500 14px var(--font);color:var(--muted)}' +
+      '.icu-score-more>summary{list-style:none;display:flex;align-items:center;min-height:46px;font:600 14px var(--font);color:var(--primary);cursor:pointer;border-top:1px solid var(--border)}.icu-score-more>summary::-webkit-details-marker{display:none}' +
+      '.icu-score-more>summary::after{content:"";width:7px;height:7px;margin-left:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}.icu-score-more[open]>summary::after{transform:rotate(-135deg)}' +
+      '.icu-ovv .icu-score.miss{opacity:1}.icu-ovv .icu-score-need{font-style:normal;color:var(--muted)}' +
+      // In-card actions read as text actions, not a full-width outlined box under every card.
+      '.icu-ovv .icu-card .icu-btn.ghost{width:auto;border:none;background:none;padding:0 2px;justify-content:flex-start;color:var(--primary);font-weight:600}.icu-ovv .icu-card .icu-btn.ghost:active{background:var(--panel2)}' +
+      '.icu-ovv .icu-empty{text-align:left;padding:2px 0}' +
+      '.icu-ovv-none>span{flex:1 1 auto;padding:10px 0}.icu-ovv-add{background:none;border:none;color:var(--primary);font:600 14px var(--font);padding:0 10px;cursor:pointer}' +
+      '.icu-ovv{display:flex;flex-direction:column;gap:14px}' +
+      '@media (max-width:520px){.icu-al-r{grid-template-columns:62px minmax(0,1fr)}.icu-al-src{grid-column:2;margin-top:3px}}' +
+      // C: two panes on a tablet; the 820px cap lifts for this layout only.
+      '.icu-ovv-col{display:flex;flex-direction:column;gap:14px;min-width:0}' +
+      '@media (min-width:900px){#icuRoot .icu-wrap:has(> .icu-ovv-c){max-width:1240px}.icu-ovv-c{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}}' +
       // ── group mode (smd_icu_groups, Phase 2) — additive, scoped under #icuRoot.icu-v2 ──
       // unit switcher (the header title becomes a tappable group picker)
       '#icuRoot.icu-v2 .icu-v2-gswitch{flex:1;min-width:0;border:none;background:none;color:inherit;text-align:left;cursor:pointer;padding:0;font:700 17px var(--font)}' +
@@ -1693,6 +1723,52 @@
     }).join("");
   }
 
+  // Overview variant flag: ?icuov=a|b|c or localStorage smd_icu_ov. Unset = the current Overview.
+  function icuOvVariant() {
+    try {
+      var q = (location.search.match(/[?&]icuov=([abc])/) || [])[1];
+      var v = q || localStorage.getItem("smd_icu_ov") || "";
+      return /^[abc]$/.test(v) ? v : "";
+    } catch (e) { return ""; }
+  }
+  var OV_SEV = { crit: "Critical", warn: "Caution", info: "Note" };
+  function ovAlertRow(a, withSource) {
+    var sev = OV_SEV[a.severity] ? a.severity : "info";
+    return '<div class="icu-al-r ' + sev + '"><span class="icu-al-sev">' + OV_SEV[sev] + '</span>' +
+      '<div class="icu-al-b"><div class="icu-al-tt">' + esc(a.title) + '</div><div class="icu-al-m">' + esc(a.msg) + '</div></div>' +
+      (withSource && a.source ? '<span class="icu-al-src">' + esc(a.source) + '</span>' : "") + '</div>';
+  }
+  // One panel, hairline rows, severity as a word in its own column (not a stripe + tint + repeated tag).
+  // "grouped": body-system sub-headings, groups holding a critical alert first. "ranked": one list, critical first.
+  function ovAlertsPanel(alerts, mode) {
+    alerts = alerts || [];
+    var nC = alerts.filter(function (a) { return a.severity === "crit"; }).length, nW = alerts.filter(function (a) { return a.severity === "warn"; }).length;
+    var count = [nC ? nC + " critical" : "", nW ? nW + " caution" : ""].filter(Boolean).join(" · ");
+    var head = '<div class="icu-al-h"><h3 class="icu-al-t">Alerts</h3>' + (count ? '<span class="icu-al-n">' + count + '</span>' : "") + '</div>';
+    if (!alerts.length) return '<section class="icu-al">' + head + '<p class="icu-al-empty">No active alerts. Enter vitals or labs and they are checked here.</p></section>';
+    var order = { crit: 0, warn: 1, info: 2 }, body;
+    if (mode === "ranked") {
+      body = alerts.map(function (a, i) { return { a: a, i: i }; }).sort(function (x, y) { return (rankOf(order, x.a.severity) - rankOf(order, y.a.severity)) || (x.i - y.i); })
+        .map(function (x) { return ovAlertRow(x.a, true); }).join("");
+    } else {
+      var by = {}; alerts.forEach(function (a) { var k = a.source || "Other"; (by[k] = by[k] || []).push(a); });
+      var keys = Object.keys(by).sort(function (x, y) {
+        var wx = Math.min.apply(null, by[x].map(function (a) { return rankOf(order, a.severity); })), wy = Math.min.apply(null, by[y].map(function (a) { return rankOf(order, a.severity); }));
+        return (wx - wy) || ((ALERT_SOURCES.indexOf(x) < 0 ? 99 : ALERT_SOURCES.indexOf(x)) - (ALERT_SOURCES.indexOf(y) < 0 ? 99 : ALERT_SOURCES.indexOf(y)));
+      });
+      body = keys.map(function (k) {
+        return '<div class="icu-al-g">' + esc(k) + '</div>' + by[k].slice().sort(function (x, y) { return rankOf(order, x.severity) - rankOf(order, y.severity); }).map(function (a) { return ovAlertRow(a, false); }).join("");
+      }).join("");
+    }
+    return '<section class="icu-al">' + head + body + '</section>';
+  }
+  // Plain navigation rows in one panel, instead of a card of sentence + full-width button per destination.
+  function ovActionRows(rows) {
+    return '<section class="icu-al icu-al-nav">' + rows.map(function (r) {
+      return '<button class="icu-al-nr" data-icu-act="' + r.act + '"><span>' + esc(r.t) + '</span>' + (r.v ? '<span class="icu-al-nv">' + esc(r.v) + '</span>' : "") + ico("chev", "›") + '</button>';
+    }).join("") + '</section>';
+  }
+
   /* ----------------------------------------------------- live status row */
   function vstat(v, lo, hi, clo, chi) {
     if (v == null) return "";
@@ -1755,6 +1831,17 @@
     ].join("");
   }
   function renderVentAbgTiles() {
+    if (_active === "overview" && icuOvVariant()) {
+      var v0 = _raw.ventilator || {}, g0 = _raw.abg || {};
+      var none = function (o, ks) { return ks.every(function (k) { return o[k] == null || o[k] === ""; }); };
+      var vNone = none(v0, ["mode", "fio2", "peep", "tv", "rr", "plateau", "peak", "drivingP"]), gNone = none(g0, ["ph", "paco2", "pao2", "hco3", "be", "fio2"]);
+      var empty = [];
+      if (vNone) empty.push('<button class="icu-ovv-add" data-icu-act="edit:ventilator">Add ventilator</button>');
+      if (gNone) empty.push('<button class="icu-ovv-add" data-icu-act="edit:abg">Add ABG</button>');
+      return (vNone ? "" : '<div class="icu-sec-lbl" style="margin-top:12px">Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>') +
+        (gNone ? "" : '<div class="icu-sec-lbl" style="margin-top:12px">ABG</div><div class="icu-vitals">' + abgTiles() + '</div>') +
+        (empty.length ? '<div class="icu-ovv-none"><span>' + (vNone && gNone ? "No ventilator or ABG recorded" : vNone ? "No ventilator recorded" : "No ABG recorded") + '</span>' + empty.join("") + '</div>' : "");
+    }
     return '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("lungs", "🫁") + ' Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>' +
       '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("abg", "🩸") + ' ABG</div><div class="icu-vitals">' + abgTiles() + '</div>';
   }
@@ -3205,8 +3292,10 @@
     var scoreRow = function (id, label, val, unit, info, manual) {
       return '<div class="icu-score" data-icu-act="calc:' + esc(id) + '"><span class="icu-score-n">' + esc(label) + '</span><span class="icu-score-v">' + esc(val + (unit ? " " + unit : "")) + '</span>' + (manual ? badge : "") + (info ? '<span class="icu-score-i">' + esc(info) + '</span>' : "") + '</div>';
     };
+    var foldMissing = _active === "overview" && !!icuOvVariant(), missingRows = [];
     var body = rows.map(function (r) {
       var m = ms[r.id];
+      if (foldMissing && r.missing && !m) { missingRows.push(r); return ""; }
       // A missing score opens the INLINE fill sheet (scorefill:), not the calculator: it asks only for
       // what is absent and writes it to the patient, so the score appears here instead of sending the
       // clinician to a separate screen that computes nothing back onto the record.
@@ -3216,6 +3305,9 @@
       return scoreRow(r.id, r.label, String(r.value), r.unit || "", iv, false);
     }).join("");
     body += manualExtra.map(function (id) { var m = ms[id]; return scoreRow(id, scoreCalcTitle(id), m.value, m.unit, m.info, true); }).join("");
+    // Variants: scores still waiting for data fold into one expandable line, so computed scores lead.
+    if (missingRows.length) body += '<details class="icu-score-more"><summary>' + missingRows.length + (missingRows.length === 1 ? " score needs" : " scores need") + ' more data</summary>' +
+      missingRows.map(function (r) { return '<div class="icu-score miss" data-icu-act="scorefill:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">add ' + esc(r.missing.join(", ")) + '</span></div>'; }).join("") + '</details>';
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
     return '<div class="icu-sec-lbl">' + ico("trend","📊") + ' Scores</div><div class="icu-card">' + body + sug +
       '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
@@ -3401,7 +3493,7 @@
 
       // 1) Current status (author + time).
       var statusTx = p.status ? p.status : (V2_LABEL[sev] + (reason ? " — " + reason : ""));
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
+      var sStatus = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
         '<p class="icu-dx-cur" style="margin:0 0 4px">' + esc(statusTx) + '</p>' +
         '<p class="icu-doc-sub" style="margin:0">' + esc(who) + (updTs ? " · updated " + fmtAgo(updTs) : "") + '</p>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient" style="margin-top:10px">' + ico("edit", "✎") + ' Update status &amp; details</button></div>';
@@ -3412,7 +3504,7 @@
       var probs = [];
       if (p.workingDx || p.diagnosis) probs.push({ name: (p.workingDx || p.diagnosis), color: (sevDot[sev] || "#92620A"), note: (p.icuDay != null ? "Day " + p.icuDay : "") });
       finds.filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && String(c.canonicalFindingId).indexOf("note:") !== 0; }).slice(0, 6).forEach(function (c) { probs.push({ name: findChipLabel(c), color: "#92620A", note: "" }); });
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
+      var sProblems = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
         (probs.length ? '<div style="display:flex;flex-direction:column;gap:9px;margin-top:2px">' + probs.map(function (pr) {
           return '<div class="icu-ov-prob"><span class="icu-ov-dot" style="background:' + pr.color + '"></span><span class="icu-ov-prob-nm">' + esc(pr.name) + '</span>' + (pr.note ? '<span class="icu-ov-prob-note">' + esc(pr.note) + '</span>' : "") + '</div>';
         }).join("") + '</div>'
@@ -3420,10 +3512,11 @@
         '<button class="icu-btn ghost" data-icu-act="ws:careplan" style="margin-top:10px">' + ico("search", "🩺") + ' Open Care Plan</button></div>';
 
       // 3) Last consultant instruction (group) — teal card + prominent "View N open tasks".
+      var sInstr = "";
       if (grpActive() && _grpPtVM) {
         var gtasks = _grpPtVM.tasks || [], gopen = gtasks.filter(function (t) { return t.status !== "done"; }).length;
         var latest = null; gtasks.forEach(function (t) { if (!latest || (t.ts || 0) > (latest.ts || 0)) latest = t; });
-        out += '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
+        sInstr = '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
           (latest ? '<p class="icu-ov-instr-tx">“' + esc(latest.text || "Instruction") + '”</p><p class="icu-ov-instr-by">' + esc(latest.assignedByName || "Consultant") + (latest.ts ? " · " + fmtAgo(latest.ts) : "") + '</p>'
             : '<p class="icu-doc-sub" style="margin:0">No instructions yet — add one from Rounds.</p>') +
           '<button class="icu-ov-viewtasks" data-icu-act="tab:rounds">View ' + gopen + ' open task' + (gopen === 1 ? "" : "s") + ' →</button></div>';
@@ -3437,37 +3530,46 @@
         tx = infusions.map(function (i) { return { name: i.drug, dose: (i.dose != null ? i.dose + (i.unit ? " " + i.unit : "") : (i.rateMlHr != null ? i.rateMlHr + " mL/h" : "")) }; }).filter(function (t) { return t.name; });
         if (v.mode) tx.push({ name: "Ventilation", dose: v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") });
       }
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
+      var sTx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
         (tx.length ? tx.map(function (t) { return '<div class="icu-ov-tx"><span class="icu-ov-tx-nm">' + esc(t.name) + '</span><span class="icu-ov-tx-dose">' + esc(t.dose || "—") + '</span></div>'; }).join("")
           : '<p class="icu-doc-sub" style="margin:0">No treatment recorded yet.</p>') +
         '<button class="icu-btn ghost" data-icu-act="tab:treatment" style="margin-top:10px">' + ico("syringe", "💊") + ' Add / manage treatment</button></div>';
 
       // 5) Critical alerts — the engine-grouped detail (below the design cards; not in the mock but valuable).
-      out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
-      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+      var sAlerts = '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>' +
+        (alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>');
 
       // 5b) Auto-computed clinical scores (Feature B) — always-on vitals scores + diagnosis-linked.
-      out += renderScoresPanel();
+      var sScores = renderScoresPanel();
 
       // 6) Lab Watch toggle (redesign inline card) — only when the feature is on.
+      var sLW = "", lwOn = labWatchOn() && lwActive();
       if (labWatchOn()) {
-        var lwOn = lwActive();
-        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
+        sLW = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
           '<p class="icu-doc-sub" style="margin:0 0 10px">' + (lwOn ? "Watching this patient’s labs and alerting on critical changes." : "Get alerted when this patient’s labs cross critical thresholds.") + '</p>' +
           '<button class="icu-btn' + (lwOn ? " ghost" : "") + '" data-icu-act="labwatch">' + ico("bell", "🔔") + (lwOn ? " Manage Lab Watch (on)" : " Turn on Lab Watch") + '</button></div>';
       }
 
       // 7) Trends shortcut (kept — one tap to the chart).
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
+      var sTrends = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
         '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
         '<button class="icu-btn" data-icu-act="tab:trends">' + ico("trend", "📈") + ' View vitals &amp; labs trends</button></div>';
 
       // 8) Today's goals (kept).
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
+      var sGoals = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
         ((_raw.goals || []).length ? (_raw.goals).map(function (g) { return '<div class="icu-row"><span>• ' + esc(g) + '</span></div>'; }).join("") : '<div class="icu-empty">No goals set</div>') +
         '<button class="icu-btn ghost" data-icu-act="edit:goals" style="margin-top:8px">＋ Edit goals</button></div>';
 
-      return out;
+      // Overview variants (smd_icu_ov = a|b|c, OFF by default until the owner picks one): alerts first, no
+      // stripe/tint/repeated-category cards (antislop-ui, impeccable craft floor). See ovAlertsPanel.
+      var ovv = hasData() ? icuOvVariant() : "";
+      if (!ovv) return sStatus + sProblems + sInstr + sTx + sAlerts + sScores + sLW + sTrends + sGoals;
+      if (ovv === "b") return sStatus + sProblems + sInstr + sTx + sScores +
+        ovActionRows([{ act: "tab:trends", t: "Vitals and labs trends" }].concat(labWatchOn() ? [{ act: "labwatch", t: "Lab Watch", v: lwOn ? "On" : "Off" }] : [])) + sGoals;
+      if (ovv === "c") return sStatus + sProblems + sInstr + sTx + sLW + sTrends + sGoals;   // scores sit in the left pane
+      return sStatus + sProblems + sInstr + sTx + sScores + sLW + sTrends + sGoals;
+
+
     },
     hemo: function () {
       var lv = mergedVitals(_raw.vitals), h = interpretHemo(lv, _raw.infusions);
@@ -4058,6 +4160,14 @@
     var addBtn = !mon ? "" : '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
     // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
     var mid = (isOv && !hd) ? emptyStateCard() : (status + addBtn);
+    // Overview variants (smd_icu_ov): alerts open the page, then vitals, then the rest; C splits into two panes.
+    var ovv = (isOv && hd) ? icuOvVariant() : "";
+    if (ovv) {
+      var alertsTop = ovAlertsPanel(_raw.alerts, ovv === "b" ? "ranked" : "grouped"), body;
+      if (ovv === "c") body = '<div class="icu-ovv icu-ovv-c"><div class="icu-ovv-col">' + alertsTop + elyteAlerts + mid + renderScoresPanel() + '</div><div class="icu-ovv-col">' + medCore + tab + '</div></div>';
+      else body = '<div class="icu-ovv icu-ovv-' + ovv + '">' + alertsTop + elyteAlerts + mid + medCore + tab + '</div>';
+      return '<div class="icu-scroll"><div class="icu-wrap">' + patientBanner() + renderSubNav() + (mon ? renderWardBanner() : "") + renderConflicts() + body + '</div></div>';
+    }
     return '<div class="icu-scroll"><div class="icu-wrap">' +
       patientBanner() +
       renderSubNav() +
