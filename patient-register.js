@@ -660,9 +660,9 @@
         } catch (e) {}
         btn.disabled = false;
         btn.textContent = "\u2713 " + wT("ward.reg-nfc-written", "NFC Tag Written!");
-      }, function () {
+      }, function (e) {
         btn.disabled = false;
-        btn.textContent = wT("ward.reg-nfc-failed", "Could not write the tag. Try again.");
+        btn.textContent = (e && e.message && /iPhone/.test(e.message)) ? e.message : wT("ward.reg-nfc-failed", "Could not write the tag. Try again.");
       });
     }
     try { root.removeEventListener("hashchange", open._onHash); root.addEventListener("hashchange", onHash); open._onHash = onHash; } catch (e) {}
