@@ -1263,7 +1263,17 @@
       ".db-overlay.db-sheet{border-radius:20px 20px 0 0}",
       ".db-overlay.db-sheet .db-top{flex-wrap:wrap}",
       ".db-grab{flex:1 1 100%;display:grid;place-items:center;padding:2px 0 6px;cursor:grab;touch-action:none}",
-      ".db-grab i{width:40px;height:5px;border-radius:3px;background:#c7c7cc;display:block}",
+      // Owner 2026-10-30: no grey pill. The strip stays as an invisible drag handle; the title is centred on the screen,
+      // not in what is left after the Back button; the A-Z chip grid is hidden (the right-edge letter strip does that job).
+      // The chips stay in the page, clipped, because az-scrubber.js presses THEM.
+      ".db-grab i{display:none}",
+      ".db-grab{flex:0 0 100%;height:12px;padding:0}",
+      ".db-overlay.db-sheet .db-top{display:grid;grid-template-columns:1fr auto 1fr;flex-wrap:nowrap}",
+      ".db-overlay.db-sheet .db-top .db-grab{grid-column:1/-1}",
+      ".db-overlay.db-sheet .db-top .db-back{justify-self:start}",
+      ".db-overlay.db-sheet .db-top .db-title{grid-column:2;text-align:center;min-width:0;max-width:62vw}",
+      ".db-overlay.db-sheet .db-top .db-brandbtn{grid-column:3;justify-self:end}",
+      ".db-overlay .db-az{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;clip:rect(0 0 0 0);opacity:0;pointer-events:none}",
       ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
