@@ -12029,3 +12029,9 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   38s transform drift, still under reduced motion. Cards stay solid.
 - React/Tailwind component libraries (shadcn, Magic UI, etc.) were requested; not adopted: the app is a buildless ES5
   bundle with no React or Tailwind build. Their patterns (inset grouped list, tokens) are applied in plain CSS instead.
+- Follow-up same day: plum (#6f2c6b light / #d9a8d6 dark) replaces teal on every onco surface by re-pointing --teal,
+  --ot-accent, --ot-primary and --ps-primary inside .oh-overlay / .ot-overlay / .ps-overlay (onco-home.css), plus the
+  hard-coded greens in oncotree.css and protocol-sheet.css. Severity colours (--sev-*, CTCAE/irAE grade badges) unchanged.
+  OncoTree disease icons share one plum chip (no rainbow). Tactile layer: raised surfaces sink 1px on press; version /
+  category / filter choices are segmented controls; OncoTree header keys 44px; its spotlight/beam pseudo-layers hidden;
+  the NCCN capsule badge and duplicate Calvert pill above the OncoTree title became a plain source line.

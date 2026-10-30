@@ -12,8 +12,8 @@
   -webkit-font-smoothing: antialiased;
 }
 body.dark .oh-overlay {
-  --oh-accent: #2dd4bf;
-  --oh-accent-soft: rgba(45, 212, 191, 0.12);
+  --oh-accent: #d9a8d6;
+  --oh-accent-soft: rgba(217, 168, 214, 0.14);
 }
 
 .oh-title { font-weight: 700 !important; letter-spacing: -0.02em !important; }
@@ -406,7 +406,7 @@ body.dark .oh-overlay, body.v3-dark .oh-overlay { background: #0e0b16 !important
     radial-gradient(38% 30% at 22% 18%, rgba(167, 139, 250, .34), transparent 70%),
     radial-gradient(34% 28% at 80% 30%, rgba(196, 181, 253, .40), transparent 70%),
     radial-gradient(40% 34% at 62% 78%, rgba(139, 92, 246, .20), transparent 72%),
-    radial-gradient(30% 26% at 18% 82%, rgba(14, 110, 99, .10), transparent 70%);
+    radial-gradient(30% 26% at 18% 82%, rgba(111, 44, 107, .12), transparent 70%);
   animation: ohFlow 38s ease-in-out infinite alternate;
   will-change: transform;
 }
@@ -415,7 +415,7 @@ body.dark .oh-overlay::before {
     radial-gradient(38% 30% at 22% 18%, rgba(139, 92, 246, .30), transparent 70%),
     radial-gradient(34% 28% at 80% 30%, rgba(167, 139, 250, .20), transparent 70%),
     radial-gradient(40% 34% at 62% 78%, rgba(109, 40, 217, .26), transparent 72%),
-    radial-gradient(30% 26% at 18% 82%, rgba(45, 212, 191, .08), transparent 70%);
+    radial-gradient(30% 26% at 18% 82%, rgba(217, 168, 214, .10), transparent 70%);
 }
 @keyframes ohFlow {
   0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
@@ -429,3 +429,116 @@ body.dark .oh-overlay > .oh-top { background: color-mix(in srgb, #0e0b16 72%, tr
 .oh-search { background: var(--oh-card) !important; }
 /* Coloured left edges are kept ONLY where they encode clinical state: CTCAE grade (.ctc-g1..5), RECIST
    response (.rec-out) and evidence layers. The decorative teal stripe on stage-group rows was removed. */
+
+/* ===== Plum accent for every oncology surface (owner 2026-10-30: "that green is not matching, use
+   lavender only, plum in place of green for ONCQIS, OncoTree, everything onco"). The app teal is
+   re-pointed to plum INSIDE the onco overlays only, so every var(--teal) / var(--ot-accent) /
+   var(--ps-primary) rule there follows. Clinical severity colours (--sev-*, CTCAE grades) are
+   left alone: their colour is the meaning. Plum #6f2c6b on white is 9:1; #d9a8d6 on the dark
+   lavender ground is 10:1. Lives here because onco-home.css is the shared onco sheet; the higher
+   specificity (html ...) beats oncotree.css and protocol-sheet.css, which load after it. */
+html .oh-overlay, html .ot-overlay, html .ps-overlay {
+  --teal: #6f2c6b; --teal-soft: #f3e8f2; --teal-ink: #5a2157;
+  --ot-accent: #6f2c6b; --ot-accent-light: #9c4f97; --ot-accent-glow: rgba(111, 44, 107, 0.12); --ot-accent-subtle: #f6eef6;
+  --ot-primary: #6f2c6b;
+  --ps-primary: #6f2c6b;
+}
+html body.dark .oh-overlay, html body.dark .ot-overlay, html body.dark .ps-overlay,
+html body.v3-dark .oh-overlay, html body.v3-dark .ot-overlay, html body.v3-dark .ps-overlay, html.dark .ps-overlay {
+  --teal: #d9a8d6; --teal-soft: rgba(217, 168, 214, 0.14); --teal-ink: #e9c9e7;
+  --ot-accent: #d9a8d6; --ot-accent-light: #e9c9e7; --ot-accent-glow: rgba(217, 168, 214, 0.18); --ot-accent-subtle: rgba(217, 168, 214, 0.08);
+  --ot-primary: #d9a8d6;
+  --ps-primary: #d9a8d6;
+}
+/* filled plum controls keep white text in light; in dark the light plum fill takes dark ink */
+body.dark .oh-overlay .stg-vbtn.on, body.dark .oh-overlay .oh-cta { color: #1a0f1a; }
+/* In dark mode the plum fill is light (#d9a8d6), so filled plum controls take dark ink, not white */
+html body.dark .ot-overlay .ot-tab-chip.on, html body.dark .ot-overlay .ot-btn.primary, html body.dark .ot-overlay .ot-auc-tag.on,
+html body.dark .ot-overlay .ot-calc-pill:active,
+html body.dark .ps-overlay .ps-btn.primary, html body.dark .ps-overlay .ps-pct-btn.on, html body.dark .ps-overlay .ps-wardsync-btn,
+html body.dark .ps-overlay .ps-inst-logo, html body.dark .ps-overlay .ps-chk input:checked + .ps-chk-box,
+html body.dark #smdOncoFlow .oe-btn.primary, html body.dark #smdOncoFlow .oe-btn.on { color: #1a0f1a !important; }
+html body.dark .ot-overlay .ot-tab-chip.on * { color: inherit; }
+
+/* ===== Tactile controls for every onco screen (owner 2026-10-30: "better UI elements, 3D touch
+   clickability, non vibe coded"). Two shared patterns, one press physics:
+   1. Pressable surfaces sit slightly raised (hairline border + a 1px lower edge + soft contact
+      shadow) and sink on press: translateY(1px), the edge and shadow collapse, the face tints plum.
+      90ms in, so it tracks the finger; no hover glow, no spring overshoot.
+   2. Choice rows (version, category, filter) are a segmented control: one recessed track, the
+      chosen segment a raised white key. Replaces loose pills with a filled plum pill.
+   html-prefixed so it outranks oncotree.css / protocol-sheet.css, which load after this file. */
+html .oh-overlay, html .ot-overlay, html .ps-overlay {
+  --tac-edge: rgba(60, 20, 70, 0.10);
+  --tac-shadow: 0 1px 0 var(--tac-edge), 0 3px 8px -3px rgba(60, 20, 70, 0.16);
+  --tac-press: inset 0 1px 2px rgba(60, 20, 70, 0.10);
+  --seg-track: rgba(111, 44, 107, 0.08);
+  --seg-key: #ffffff;
+  --seg-key-shadow: 0 1px 0 rgba(60, 20, 70, 0.10), 0 2px 6px -2px rgba(60, 20, 70, 0.22);
+}
+html body.dark .oh-overlay, html body.dark .ot-overlay, html body.dark .ps-overlay {
+  --tac-edge: rgba(0, 0, 0, 0.55);
+  --tac-shadow: 0 1px 0 var(--tac-edge), 0 4px 10px -4px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --tac-press: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  --seg-track: rgba(255, 255, 255, 0.07);
+  --seg-key: #2a2233;
+  --seg-key-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* 1. pressable surfaces */
+html .oh-overlay .oh-row, html .oh-overlay .oh-favchip, html .oh-overlay .oh-back,
+html .oh-overlay .oh-grid, html .ot-overlay .ot-disease, html .ot-overlay .ot-hbtn,
+html .ot-overlay .ot-flow-card, html .ot-overlay .ot-flow-opt-card, html .ot-overlay .ot-proto-card {
+  box-shadow: var(--tac-shadow) !important;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out, background-color 90ms ease-out !important;
+}
+html .oh-overlay .oh-row:active, html .oh-overlay .oh-favchip:active, html .oh-overlay .oh-back:active,
+html .ot-overlay .ot-disease:active, html .ot-overlay .ot-hbtn:active,
+html .ot-overlay .ot-flow-card:active, html .ot-overlay .ot-flow-opt-card:active, html .ot-overlay .ot-proto-card:active {
+  transform: translateY(1px) !important;
+  box-shadow: var(--tac-press) !important;
+  background: color-mix(in srgb, var(--teal) 6%, var(--oh-card, var(--ot-card, #fff))) !important;
+}
+/* rows inside a grouped list press in place (the group is the raised slab) */
+html .oh-overlay .oh-grid .oh-card:active { transform: none !important; box-shadow: var(--tac-press) !important; background: color-mix(in srgb, var(--teal) 7%, var(--oh-card)) !important; }
+html .oh-overlay #stgResults .oh-row { box-shadow: none !important; }
+html .oh-overlay #stgResults .oh-row:active { transform: none !important; }
+/* the old cursor spotlight and hover border beam are decoration on a touch screen */
+html .ot-overlay .ot-disease::before, html .ot-overlay .ot-disease::after,
+html .ot-overlay .ot-flow-card::before, html .ot-overlay .ot-flow-card::after,
+html .ot-overlay .ot-flow-opt-card::before, html .ot-overlay .ot-flow-opt-card::after,
+html .ot-overlay .ot-proto-card::before, html .ot-overlay .ot-proto-card::after { display: none !important; }
+
+/* header buttons: 44px keys, not 34px grey dots */
+html .ot-overlay .ot-hbtn { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--ot-line); background: var(--ot-card); color: var(--ot-ink); }
+html .ot-overlay .ot-hbtn .material-symbols-outlined, html .ot-overlay .ot-hbtn .material-symbols-rounded { font-size: 21px; }
+html .ot-overlay .ot-hbtn-calc, html .ot-overlay .ot-hbtn-stg { color: var(--ot-accent); background: var(--ot-card); }
+
+/* 2. segmented controls */
+html .oh-overlay .stg-vtoggle, html .ot-overlay .ot-picker-tabs {
+  display: flex; flex-wrap: nowrap; gap: 2px; padding: 3px; margin: 2px 0 16px;
+  background: var(--seg-track); border-radius: 12px; overflow-x: auto; scrollbar-width: none;
+  box-shadow: inset 0 1px 2px rgba(60, 20, 70, 0.08);
+}
+html .oh-overlay .stg-vtoggle::-webkit-scrollbar { display: none; }
+html .oh-overlay .stg-vbtn, html .ot-overlay .ot-tab-chip {
+  flex: 1 0 auto; min-height: 36px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 0 !important; border-radius: 9px; background: transparent !important; box-shadow: none !important;
+  font: 600 13px var(--rds-font, var(--sans, system-ui)); color: var(--rds-muted, var(--ot-sub, #5b7083)) !important;
+  white-space: nowrap; cursor: pointer; transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+}
+html .oh-overlay .stg-vbtn.on, html .ot-overlay .ot-tab-chip.on {
+  background: var(--seg-key) !important; color: var(--rds-ink, var(--ot-ink, #14202b)) !important; box-shadow: var(--seg-key-shadow) !important;
+}
+html .oh-overlay .stg-vbtn:active, html .ot-overlay .ot-tab-chip:active { transform: none; background: color-mix(in srgb, var(--teal) 10%, transparent) !important; }
+html .oh-overlay .stg-vbtn.on:active, html .ot-overlay .ot-tab-chip.on:active { background: var(--seg-key) !important; box-shadow: var(--tac-press) !important; }
+html .ot-overlay .ot-tab-chip .ot-chip-num { background: transparent; opacity: .7; font-weight: 600; padding: 0; }
+html .ot-overlay .ot-picker-tabs { margin: 10px 0 0; padding-top: 3px; }
+html .oh-overlay .stg-vtoggle + .oh-row, html .oh-overlay .stg-vtoggle + .oh-sec-h { margin-top: 0; }
+html body.dark .oh-overlay .stg-vbtn.on, html body.dark .ot-overlay .ot-tab-chip.on { color: #f3eef6 !important; }
+
+/* OncoTree search: the same white field as ONCQIS, not a grey well that reads as disabled */
+html .ot-overlay .ot-search-box { background: var(--ot-card); border-color: var(--ot-line); box-shadow: inset 0 1px 2px rgba(60, 20, 70, 0.05); height: 46px; }
+html .ot-overlay .ot-picker-controls { background: transparent; }
+html .ot-overlay .ot-picker-src { display: flex; align-items: center; gap: 6px; margin: -6px 0 14px; font: 500 12.5px var(--ot-font, system-ui); color: var(--ot-sub); }
+html .ot-overlay .ot-picker-src .material-symbols-outlined, html .ot-overlay .ot-picker-src .material-symbols-rounded { font-size: 16px; color: var(--ot-accent); }

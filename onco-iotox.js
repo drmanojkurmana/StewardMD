@@ -118,19 +118,19 @@
       '<div class="oh-sec-h" style="display:flex;align-items:center;gap:6px;">' + ms("rule") + ' 4 Pillars of irAE Management</div>' +
       '<div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:10px;margin-top:8px;">' +
         '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;">' +
-          '<div style="font-weight:700;font-size:13px;color:#10b981;margin-bottom:4px;">1. Grade-Based Action</div>' +
+          '<div style="font-weight:700;font-size:13px;color:var(--teal);margin-bottom:4px;">1. Grade-Based Action</div>' +
           '<div style="font-size:12px;opacity:0.85;line-height:1.4;">Grade 1: Continue ICI + close monitoring.<br/>Grade 2: Withhold ICI + oral steroids.<br/>Grade 3: Withhold/discontinue + high-dose IV steroids.<br/>Grade 4: Permanently discontinue + hospitalize / ICU.</div>' +
         '</div>' +
         '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;">' +
-          '<div style="font-weight:700;font-size:13px;color:#38bdf8;margin-bottom:4px;">2. Corticosteroid Taper Rule</div>' +
+          '<div style="font-weight:700;font-size:13px;color:var(--teal);margin-bottom:4px;">2. Corticosteroid Taper Rule</div>' +
           '<div style="font-size:12px;opacity:0.85;line-height:1.4;">Once symptoms improve to Grade 1 or resolution, corticosteroids must be tapered slowly over at least 4 to 6 weeks to prevent rebound toxicity.</div>' +
         '</div>' +
         '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;">' +
-          '<div style="font-weight:700;font-size:13px;color:#f59e0b;margin-bottom:4px;">3. Endocrinopathy Exception</div>' +
+          '<div style="font-weight:700;font-size:13px;color:var(--teal);margin-bottom:4px;">3. Endocrinopathy Exception</div>' +
           '<div style="font-size:12px;opacity:0.85;line-height:1.4;">Endocrinopathies are managed by physiologic hormone replacement (Thyroxine, Hydrocortisone, Insulin). Continue or resume ICI; immunosuppression is NOT required.</div>' +
         '</div>' +
         '<div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;">' +
-          '<div style="font-weight:700;font-size:13px;color:#f43f5e;margin-bottom:4px;">4. Refractory Biologic Escalation</div>' +
+          '<div style="font-weight:700;font-size:13px;color:var(--teal);margin-bottom:4px;">4. Refractory Biologic Escalation</div>' +
           '<div style="font-size:12px;opacity:0.85;line-height:1.4;">If toxicity fails to improve after 48-72 hours of systemic corticosteroids, escalate to second-line biologics (Infliximab/Vedolizumab for colitis, Mycophenolate for hepatitis).</div>' +
         '</div>' +
       '</div>' +
@@ -160,9 +160,9 @@
 
     var searchBox = '<div><input type="search" id="iotSearchInput" class="oh-search stg-search" placeholder="Search irAE by organ, symptom or toxicity (e.g. pneumonitis, colitis, myocarditis)..." value="' + esc(ix.query || "") + '" /></div>';
 
-    var tabs = '<div class="stg-vtoggle" style="margin-bottom:14px;flex-wrap:wrap;">' +
+    var tabs = '<div class="stg-vtoggle">' +
       '<button class="stg-vbtn' + (ix.tab === "all" ? " on" : "") + '" data-iot-act="tab:all">All (' + catalog.organs.length + ')</button>' +
-      '<button class="stg-vbtn' + (ix.tab === "critical" ? " on" : "") + '" data-iot-act="tab:critical" style="' + (ix.tab === "critical" ? "background:#ef4444;color:#fff;" : "") + '">Critical / High Acuity</button>' +
+      '<button class="stg-vbtn' + (ix.tab === "critical" ? " on" : "") + '" data-iot-act="tab:critical">Critical / High Acuity</button>' +
       '<button class="stg-vbtn' + (ix.tab === "pulmonary_gi" ? " on" : "") + '" data-iot-act="tab:pulmonary_gi">Pulmonary & GI</button>' +
       '<button class="stg-vbtn' + (ix.tab === "endocrine" ? " on" : "") + '" data-iot-act="tab:endocrine">Endocrine</button>' +
       '<button class="stg-vbtn' + (ix.tab === "cardiac_neuro" ? " on" : "") + '" data-iot-act="tab:cardiac_neuro">Cardiac & Neuro</button>' +
@@ -174,7 +174,7 @@
         ? '<span class="stg-badge" style="background:#ef4444;color:#fff;border:none;font-weight:700;font-size:10px;padding:2px 6px;">HIGH ACUITY</span>'
         : '<span class="stg-badge stg-badge-sc" style="font-size:10px;">irAE</span>';
       return '<button class="oh-row" data-iot-act="organ:' + esc(o.id) + '" style="display:flex;align-items:center;gap:12px;padding:12px 14px;">' +
-        '<div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;color:#38bdf8;flex-shrink:0;">' +
+        '<div style="width:36px;height:36px;border-radius:8px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0;">' +
           ms(meta.icon) +
         '</div>' +
         '<div style="flex:1;min-width:0;text-align:left;">' +
@@ -231,7 +231,7 @@
     return back +
       acuityBanner +
       '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">' +
-        '<div style="width:40px;height:40px;border-radius:10px;background:rgba(56,189,248,0.15);display:flex;align-items:center;justify-content:center;color:#38bdf8;">' +
+        '<div style="width:40px;height:40px;border-radius:10px;background:var(--teal-soft);display:flex;align-items:center;justify-content:center;color:var(--teal);">' +
           ms(meta.icon) +
         '</div>' +
         '<div>' +

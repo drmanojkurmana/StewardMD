@@ -153,7 +153,7 @@
     // Same search field as the ONCQIS landing (it was a dark-tinted inline style that read as disabled in light mode).
     var searchBox = '<input type="search" id="stgSearchInput" class="oh-search stg-search" aria-label="Search cancer staging" placeholder="Search: liver, BCLC, breast, FIGO, myeloma" value="' + esc(stg.query || "") + '" />';
 
-    var tabs = '<div class="stg-vtoggle" style="margin-bottom:14px;">' +
+    var tabs = '<div class="stg-vtoggle">' +
       '<button class="stg-vbtn' + (stg.tab === "all" ? " on" : "") + '" data-stg-act="tab:all">All (' + stg.index.length + ')</button>' +
       '<button class="stg-vbtn' + (stg.tab === "clinical" ? " on" : "") + '" data-stg-act="tab:clinical">Clinical systems</button>' +
       '<button class="stg-vbtn' + (stg.tab === "tnm" ? " on" : "") + '" data-stg-act="tab:tnm">AJCC / UICC TNM</button>' +
