@@ -199,9 +199,9 @@
     var el = rootEl();
     var body = (cx.loading && !cx.loaded) ? skelHtml() : (cx.ae ? aeDetailHtml() : aeListHtml());
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-ctc-act="close" aria-label="Close">' + (cx.ae ? "&lsaquo; All terms" : "&lsaquo; Close") + '</button>' +
-      '<div class="oh-title">CTCAE grading</div><span style="width:64px"></span></div>' +
-      '<div class="oh-body"><div id="ctcResults">' + body + "</div></div>";
+      '<div class="oh-top"><button class="oh-back" data-ctc-act="close" aria-label="Close">' + (cx.ae ? '<span class="material-symbols-rounded" aria-hidden="true">arrow_back</span><span class="oh-sr">All terms</span>' : '<span class="material-symbols-rounded" aria-hidden="true">close</span><span class="oh-sr">Close</span>') + '</button>' +
+      '<div class="oh-title">CTCAE grading</div><span class="oh-hspace"></span></div>' +
+      '<div class="oh-body"><h1 class="oh-ltitle">CTCAE grading</h1><div id="ctcResults">' + body + "</div></div>";
   }
 
   function onInput(e) {

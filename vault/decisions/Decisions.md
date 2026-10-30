@@ -12035,3 +12035,7 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   OncoTree disease icons share one plum chip (no rainbow). Tactile layer: raised surfaces sink 1px on press; version /
   category / filter choices are segmented controls; OncoTree header keys 44px; its spotlight/beam pseudo-layers hidden;
   the NCCN capsule badge and duplicate Calvert pill above the OncoTree title became a plain source line.
+- Collapsing onco header (owner: "mix of both", CliniX large title + PrepNucleus bar): .oh-top floats over .oh-body,
+  transparent with round 44px frosted keys at rest; onco-home.js toggles .oh-overlay.oh-scrolled past 28px and the
+  frosted bar + compact title (mark, name, subtitle) fade in. Large titles (.oh-ltitle / ONCQIS brand hero) live in the
+  page. Back/close keys are icons; their words stay as .oh-sr text. ONCQIS bar has a search key that focuses the field.

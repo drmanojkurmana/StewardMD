@@ -254,9 +254,9 @@
     var el = rootEl();
     var body = (ix.loading && !ix.loaded) ? skelHtml() : (ix.organ ? organDetailHtml() : organListHtml());
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-iot-act="close" aria-label="Close">' + (ix.organ ? "&lsaquo; All toxicities" : "&lsaquo; Close") + '</button>' +
-      '<div class="oh-title">IO Toxicity (irAE) Reference</div><span style="width:64px"></span></div>' +
-      '<div class="oh-body"><div id="iotResults">' + body + "</div></div>";
+      '<div class="oh-top"><button class="oh-back" data-iot-act="close" aria-label="Close">' + (ix.organ ? '<span class="material-symbols-rounded" aria-hidden="true">arrow_back</span><span class="oh-sr">All toxicities</span>' : '<span class="material-symbols-rounded" aria-hidden="true">close</span><span class="oh-sr">Close</span>') + '</button>' +
+      '<div class="oh-title">IO toxicity (irAE)</div><span class="oh-hspace"></span></div>' +
+      '<div class="oh-body"><h1 class="oh-ltitle">IO toxicity (irAE)</h1><div id="iotResults">' + body + "</div></div>";
   }
 
   function onInput(e) {

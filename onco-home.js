@@ -423,7 +423,8 @@
     return favSection() + contextStrip(state.ctx) + gridHtml();
   }
 
-  function backLabel() { return st.mode ? "&lsaquo; Back" : "&lsaquo; Close"; }
+  // Round icon key (the visible label stays for screen readers and tests).
+  function backLabel() { return st.mode ? '<span class="material-symbols-rounded" aria-hidden="true">arrow_back</span><span class="oh-sr">Back</span>' : '<span class="material-symbols-rounded" aria-hidden="true">close</span><span class="oh-sr">Close</span>'; }
   function renderResults() { var box = document.getElementById("ohResults"); if (box) box.innerHTML = bodyHtml(st); var el = document.getElementById("smdOncoHome"); var back = el && el.querySelector ? el.querySelector(".oh-back") : null; if (back) back.innerHTML = backLabel(); }
 
   // Protocols now open through the ONE universal sheet (SMD_PROTOSHEET), which carries its own
@@ -461,6 +462,7 @@
       return false;
     }
     if (verb === "close") { if (st.mode) { st.mode = null; renderResults(); return; } close(); return; }
+    if (verb === "find") { var bd = document.querySelector("#smdOncoHome .oh-body"), si = document.getElementById("ohSearch"); if (bd) bd.scrollTop = 0; if (si) si.focus(); return; }
     if (verb === "calc-cat") { openOverlay("Calculators", G.MEDCALC && G.MEDCALC.openList, function () { G.MEDCALC.openList("Oncology"); }); return; }
     if (verb === "calc") { openOverlay("Calculators", G.MEDCALC && G.MEDCALC.open, function () { G.MEDCALC.open(arg); }); return; }
     if (verb === "kb-browse") { st.mode = (st.mode === "kb") ? null : "kb"; renderResults(); return; }
@@ -490,17 +492,21 @@
 
   // Landing identity: a plain title and the safety line above the persistent search. It used to be a
   // gradient card with an eyebrow label and a watermark logo, which pushed the tools below the fold.
+  // Large brand title at rest (mark + name, like CliniX); it hands over to the compact bar on scroll.
   function heroHtml() {
     return '<section class="oh-hero">' +
-      '<h1 class="oh-hero-title">The Cancer Library</h1>' +
-      '<p class="oh-hero-sub">Staging, toxicity, protocols, drugs and calculators in one place. StewardMD never invents a dose, stage or score.</p>' +
+      '<div class="oh-hero-brand"><span class="oh-hero-mark" aria-hidden="true">' + ms("oncology") + '</span><h1 class="oh-hero-title">ONCQIS</h1></div>' +
+      '<p class="oh-hero-sub">The Cancer Library: staging, toxicity, protocols, drugs and calculators in one place. StewardMD never invents a dose, stage or score.</p>' +
       "</section>";
   }
   function paintShell() {
     var el = rootEl();
     el.innerHTML =
+      // Header in the PrepNucleus pattern: round keys, mark + name + subtitle. Transparent over the
+      // large title at rest; a frosted bar fades in behind it once the page scrolls (.oh-scrolled).
       '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">' + backLabel() + '</button>' +
-      '<div class="oh-title">ONCQIS</div><span style="width:64px"></span></div>' +
+      '<div class="oh-title"><span class="oh-title-mark" aria-hidden="true">' + ms("oncology") + '</span><span class="oh-title-txt"><b>ONCQIS</b><small>The Cancer Library</small></span></div>' +
+      '<button class="oh-hbtn" data-oh-act="find" aria-label="Search">' + ms("search") + '</button></div>' +
       '<div class="oh-body">' + heroHtml() +
       '<input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +
       '<div id="ohResults"></div></div>';
@@ -528,6 +534,21 @@
   function foreground() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("oh-bg"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on")) close(); }); } catch (e) {}
+
+  // Collapsing header for every onco overlay (ONCQIS, staging, CTCAE, irAE, RECIST): .oh-scrolled
+  // switches the frosted bar on once the page leaves the large title. One capture listener for all of
+  // them; it only touches a class when the state changes. Re-checked after a tap because a module
+  // repaint resets its scroll to the top without firing a scroll event.
+  function syncScrolled(body) {
+    var ov = body && body.parentNode;
+    if (!ov || !ov.classList || !ov.classList.contains("oh-overlay")) return;
+    var on = body.scrollTop > 28;
+    if (ov.classList.contains("oh-scrolled") !== on) ov.classList.toggle("oh-scrolled", on);
+  }
+  try {
+    document.addEventListener("scroll", function (e) { var t = e.target; if (t && t.classList && t.classList.contains("oh-body")) syncScrolled(t); }, true);
+    document.addEventListener("click", function () { setTimeout(function () { var bs = document.querySelectorAll(".oh-overlay.on > .oh-body"); for (var i = 0; i < bs.length; i++) syncScrolled(bs[i]); }, 0); }, true);
+  } catch (e) {}
 
   // Testing/launch hook (mirrors queue.js): with the flag on, ?oncohome=1 auto-opens.
   try {

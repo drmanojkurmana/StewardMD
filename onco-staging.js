@@ -285,9 +285,9 @@
     var listBody = (stg.loaded || !G.fetch) ? siteListHtml() : skelHtml();
     var body = stg.site ? siteDetailHtml() : listBody;
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-stg-act="close" aria-label="Close">' + (stg.site ? "&lsaquo; All sites" : "&lsaquo; Close") + '</button>' +
-      '<div class="oh-title">Cancer staging</div><span style="width:64px"></span></div>' +
-      '<div class="oh-body"><div id="stgResults">' + body + "</div></div>" +
+      '<div class="oh-top"><button class="oh-back" data-stg-act="close" aria-label="Close">' + (stg.site ? '<span class="material-symbols-rounded" aria-hidden="true">arrow_back</span><span class="oh-sr">All sites</span>' : '<span class="material-symbols-rounded" aria-hidden="true">close</span><span class="oh-sr">Close</span>') + '</button>' +
+      '<div class="oh-title">Cancer staging</div><span class="oh-hspace"></span></div>' +
+      '<div class="oh-body"><h1 class="oh-ltitle">Cancer staging</h1><div id="stgResults">' + body + "</div></div>" +
       // A footer of the overlay, not of the scrolling list: it sits flush on the bottom edge and the
       // list scrolls above it. Pinned inside .oh-body it floated over rows with list showing beneath.
       '<div class="stg-license">' + esc(STAGING_ATTRIB) + "</div>";

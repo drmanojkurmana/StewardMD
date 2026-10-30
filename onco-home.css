@@ -542,3 +542,69 @@ html .ot-overlay .ot-search-box { background: var(--ot-card); border-color: var(
 html .ot-overlay .ot-picker-controls { background: transparent; }
 html .ot-overlay .ot-picker-src { display: flex; align-items: center; gap: 6px; margin: -6px 0 14px; font: 500 12.5px var(--ot-font, system-ui); color: var(--ot-sub); }
 html .ot-overlay .ot-picker-src .material-symbols-outlined, html .ot-overlay .ot-picker-src .material-symbols-rounded { font-size: 16px; color: var(--ot-accent); }
+
+/* ===== Collapsing header (owner 2026-10-30: "mix of both rather than a standard heading bar").
+   At rest: CliniX-style large title in the page, with floating round keys and NO bar.
+   Scrolled (.oh-scrolled, set in onco-home.js): PrepNucleus-style frosted bar fades in behind the
+   same keys and the compact title (mark + name + subtitle) fades up. The header floats over the
+   scroll body, so content passes under the frost instead of stopping at a hard edge. */
+html .oh-overlay > .oh-top {
+  position: absolute !important; top: 0; left: 0; right: 0; z-index: 6;
+  display: grid !important; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px !important;
+  background: transparent !important; border-bottom: 1px solid transparent !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  transition: background-color .22s ease, border-color .22s ease;
+}
+html .oh-overlay.oh-scrolled > .oh-top {
+  background: color-mix(in srgb, #f6f3fc 74%, transparent) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.5) !important; backdrop-filter: blur(20px) saturate(1.5) !important;
+  border-bottom-color: var(--oh-line) !important;
+}
+html body.dark .oh-overlay.oh-scrolled > .oh-top { background: color-mix(in srgb, #0e0b16 70%, transparent) !important; }
+html .oh-overlay > .oh-body { padding-top: calc(66px + env(safe-area-inset-top)) !important; }
+
+/* round keys: frosted discs that stay legible over the lavender field with or without the bar */
+html .oh-overlay .oh-back, html .oh-overlay .oh-hbtn {
+  width: 44px; height: 44px; min-width: 44px; padding: 0 !important; border-radius: 50% !important;
+  display: grid; place-items: center; cursor: pointer;
+  background: rgba(255, 255, 255, .72) !important; color: var(--rds-ink, #14202b) !important;
+  border: 1px solid rgba(60, 20, 70, .08) !important;
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(60, 20, 70, .06), 0 4px 12px -4px rgba(60, 20, 70, .22) !important;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out !important;
+}
+html body.dark .oh-overlay .oh-back, html body.dark .oh-overlay .oh-hbtn {
+  background: rgba(42, 34, 51, .72) !important; color: #f3eef6 !important; border-color: rgba(255, 255, 255, .08) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .5), 0 4px 12px -4px rgba(0, 0, 0, .7) !important;
+}
+html .oh-overlay .oh-back:active, html .oh-overlay .oh-hbtn:active { transform: translateY(1px) scale(.97) !important; box-shadow: inset 0 1px 2px rgba(60, 20, 70, .12) !important; }
+html .oh-overlay .oh-back .material-symbols-rounded, html .oh-overlay .oh-hbtn .material-symbols-rounded { font-size: 22px; }
+html .oh-overlay .oh-hspace { width: 44px; height: 44px; }
+.oh-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* compact title: hidden over the large title, fades up with the bar */
+html .oh-overlay > .oh-top .oh-title {
+  display: flex; align-items: center; gap: 10px; min-width: 0; text-align: left;
+  font: 700 17px/1.2 var(--rds-font, var(--sans)) !important; color: var(--rds-ink, #14202b);
+  opacity: 0; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+html .oh-overlay.oh-scrolled > .oh-top .oh-title { opacity: 1; transform: none; }
+html body.dark .oh-overlay > .oh-top .oh-title { color: #f3eef6; }
+.oh-title-mark { width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; color: var(--teal); }
+.oh-title-mark .material-symbols-rounded { font-size: 26px; }
+.oh-title-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.oh-title-txt b { font-weight: 700; font-size: 17px; }
+.oh-title-txt small { font: 500 12.5px var(--rds-font, var(--sans)); color: var(--rds-muted, #5b7083); }
+html body.dark .oh-title-txt small { color: rgba(236, 241, 244, .66); }
+
+/* large titles in the page */
+.oh-ltitle { margin: 6px 2px 12px; font: 700 30px/1.12 var(--rds-font, var(--sans)); letter-spacing: -.025em; color: var(--rds-ink, #14202b); }
+body.dark .oh-ltitle { color: #f3eef6; }
+.oh-hero { margin: 6px 2px 18px; }
+.oh-hero-brand { display: flex; align-items: center; gap: 12px; }
+.oh-hero-mark { width: 46px; height: 46px; flex: 0 0 46px; display: grid; place-items: center; border-radius: 14px; background: var(--teal-soft); color: var(--teal); box-shadow: 0 1px 0 rgba(60, 20, 70, .06), 0 4px 12px -6px rgba(60, 20, 70, .3); }
+.oh-hero-mark .material-symbols-rounded { font-size: 30px; }
+html .oh-overlay .oh-hero-title { font-size: 34px; letter-spacing: -.03em; }
+html .oh-overlay .oh-hero-sub { margin-top: 10px; }
