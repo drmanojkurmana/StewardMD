@@ -144,25 +144,26 @@
     var gaps = filtered.filter(function (s) { return s.type !== "clinical" && s.status !== "scaffold"; });
 
     function row(s) {
-      var badge = s.type === "clinical"
-        ? '<span class="stg-badge stg-badge-sc" style="background:linear-gradient(135deg, #2563eb, #7c3aed);color:#fff;border:none;">CLINICAL</span>'
-        : (s.status === "scaffold" ? '<span class="stg-badge stg-badge-sc">TNM</span>' : '<span class="stg-badge stg-badge-gap">Gap</span>');
+      // The section heading already says clinical or TNM, so only a real state (content still being
+      // added) earns a badge. The per-row blue-to-violet "CLINICAL" pill repeated the subtitle.
+      var badge = (s.type !== "clinical" && s.status !== "scaffold") ? '<span class="stg-badge stg-badge-gap">Gap</span>' : "";
       return '<button class="oh-row" data-stg-act="site:' + esc(s.id) + '"><span class="oh-row-t">' + esc(s.name) + " " + badge + '</span><span class="oh-row-s">' + esc(s.system || "") + "</span></button>";
     }
 
-    var searchBox = '<div style="margin:12px 0 12px 0;"><input type="search" id="stgSearchInput" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(0,0,0,0.25);color:inherit;font-size:14px;" placeholder="Search cancer staging (e.g. liver, BCLC, breast, FIGO, myeloma)..." value="' + esc(stg.query || "") + '" /></div>';
+    // Same search field as the ONCQIS landing (it was a dark-tinted inline style that read as disabled in light mode).
+    var searchBox = '<input type="search" id="stgSearchInput" class="oh-search stg-search" aria-label="Search cancer staging" placeholder="Search: liver, BCLC, breast, FIGO, myeloma" value="' + esc(stg.query || "") + '" />';
 
     var tabs = '<div class="stg-vtoggle" style="margin-bottom:14px;">' +
       '<button class="stg-vbtn' + (stg.tab === "all" ? " on" : "") + '" data-stg-act="tab:all">All (' + stg.index.length + ')</button>' +
-      '<button class="stg-vbtn' + (stg.tab === "clinical" ? " on" : "") + '" data-stg-act="tab:clinical">Clinical Systems (BCLC, FIGO, R-ISS...)</button>' +
+      '<button class="stg-vbtn' + (stg.tab === "clinical" ? " on" : "") + '" data-stg-act="tab:clinical">Clinical systems</button>' +
       '<button class="stg-vbtn' + (stg.tab === "tnm" ? " on" : "") + '" data-stg-act="tab:tnm">AJCC / UICC TNM</button>' +
       '</div>';
 
-    var out = '<div class="stg-intro">International cancer staging engine supporting both disease-specific clinical systems (BCLC, FIGO, R-ISS, Lugano, NCCN) and standard TNM classifications.</div>' +
+    var out = '<div class="stg-intro">Disease-specific systems (BCLC, FIGO, R-ISS, Lugano, NCCN) and AJCC / UICC TNM by site.</div>' +
       searchBox + tabs;
 
     if (clinicalSites.length) {
-      out += '<div class="oh-sec-h" style="color:#60a5fa;">Disease-Specific & Clinical Systems (Standard of Care)</div>' + clinicalSites.map(row).join("");
+      out += '<div class="oh-sec-h">Clinical staging systems</div>' + clinicalSites.map(row).join("");
     }
     if (tnmScaffold.length) {
       out += '<div class="oh-sec-h" style="margin-top:16px;">TNM Cancer Staging Sites</div>' + tnmScaffold.map(row).join("");
@@ -171,7 +172,7 @@
       out += '<div class="oh-sec-h" style="margin-top:16px;">Sites being added</div>' + gaps.map(row).join("");
     }
     if (!filtered.length) {
-      out += '<div class="oh-empty" style="padding:28px 16px;text-align:center;opacity:0.7;">No staging sites matching "' + esc(stg.query) + '"</div>';
+      out += '<div class="oh-empty" style="padding:28px 16px;text-align:center;">No staging site matches "' + esc(stg.query) + '". Try the organ (liver, cervix) or the system (BCLC, FIGO).</div>';
     }
     return out;
   }
@@ -285,9 +286,11 @@
     var body = stg.site ? siteDetailHtml() : listBody;
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-stg-act="close" aria-label="Close">' + (stg.site ? "&lsaquo; All sites" : "&lsaquo; Close") + '</button>' +
-      '<div class="oh-title">Cancer Staging Engine</div><span style="width:64px"></span></div>' +
-      '<div class="oh-body"><div id="stgResults">' + body + "</div>" +
-      '<div class="stg-license">' + esc(STAGING_ATTRIB) + "</div></div>";
+      '<div class="oh-title">Cancer staging</div><span style="width:64px"></span></div>' +
+      '<div class="oh-body"><div id="stgResults">' + body + "</div></div>" +
+      // A footer of the overlay, not of the scrolling list: it sits flush on the bottom edge and the
+      // list scrolls above it. Pinned inside .oh-body it floated over rows with list showing beneath.
+      '<div class="stg-license">' + esc(STAGING_ATTRIB) + "</div>";
   }
 
   function openSite(id) {

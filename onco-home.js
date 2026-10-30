@@ -274,18 +274,6 @@
       resultSection("Protocols", r.protocols.map(protocolRowHtml).join(""));
   }
 
-  function quickActionsHtml() {
-    return '<div class="oh-quick">' +
-      '<button class="oh-qa" data-oh-act="oncotree-open">' + ms("account_tree") + "OncoTree</button>" +
-      '<button class="oh-qa" data-oh-act="staging-open">' + ms("stairs") + "Staging</button>" +
-      '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
-      '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
-      '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +
-      '<button class="oh-qa" data-oh-act="drug-mech">' + ms("animation") + "Drug mechanisms</button>" +
-      '<button class="oh-qa" data-oh-act="drug-interactions">' + ms("compare_arrows") + "Interactions</button>" +
-      "</div>";
-  }
-
   var GRID = [
     { group: "Diagnosis & Staging", cards: [
       { title: "Diseases & knowledge base", sub: "Oncology reference (KB)", act: "kb-browse", icon: "book_2" },
@@ -302,8 +290,9 @@
     { group: "Calculators & tools", cards: [
       { title: "RECIST 1.1", sub: "Target-lesion response calculator", act: "recist-open", flag: "smd_onco_recist", icon: "straighten" },
       { title: "Drug info & interaction", sub: "Formulary + interaction checker", act: "drug-onco", icon: "pill" },
-      { title: "Prognostic scores", sub: "ECOG, Karnofsky, Khorana, IPI and more", act: "calc-cat", icon: "insights" },
-      { title: "Formulas", sub: "BSA, Calvert, Cockcroft-Gault and more", act: "calc-cat", icon: "function" }
+      { title: "Drug mechanisms", sub: "Animated: how each drug works and why side effects happen", act: "drug-mech", icon: "animation" },
+      // Scores and formulas open the same oncology calculator list, so they are one entry.
+      { title: "Calculators & scores", sub: "ECOG, Karnofsky, Khorana, IPI, BSA, Calvert, Cockcroft-Gault", act: "calc-cat", icon: "calculate" }
     ] }
   ];
   function cardHtml(c) {
@@ -430,7 +419,8 @@
     if (state.mode === "drugonco") return drugOncoHtml();
     if (state.mode === "drugmech") return drugMechHtml();
     if (state.mode === "protoref") return protoRefHtml();
-    return favSection() + contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
+    // One entry per tool: the old quick-action row repeated five of the grid's tools (and ignored their flags).
+    return favSection() + contextStrip(state.ctx) + gridHtml();
   }
 
   function backLabel() { return st.mode ? "&lsaquo; Back" : "&lsaquo; Close"; }
@@ -454,7 +444,7 @@
     // other interaction foregrounds it again. In-place modes (kb-browse / protoref /
     // drugonco / home-dash) repaint inside this overlay and never background it. Protocol taps
     // (protodetail:*) open the universal SMD_PROTOSHEET overlay instead of an in-place view.
-    var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1, fig: 1 };
+    var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "oncotree-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1, fig: 1 };
     if (OPENS_OVERLAY[verb]) background(); else foreground();
 
     /* Every one of these verbs used to read `try { MOD && MOD.fn && MOD.fn(arg); } catch (e2) {}` -
@@ -492,17 +482,19 @@
     if (verb === "ctcae-open") { openOverlay("CTCAE grading", G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList, function () { G.SMD_ONCOCTCAE.openList(); }); return; }
     if (verb === "iotox-open") { openOverlay("Immunotherapy toxicity", G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList, function () { G.SMD_ONCOIOTOX.openList(); }); return; }
     if (verb === "recist-open") { openOverlay("RECIST", G.SMD_ONCORECIST && G.SMD_ONCORECIST.open, function () { G.SMD_ONCORECIST.open(); }); return; }
-    if (verb === "oncotree-open") { close(); if (G.SMD_ONCOTREE && G.SMD_ONCOTREE.open) G.SMD_ONCOTREE.open(); else if (G.toast) G.toast("OncoTree loading…"); return; }
+    // OncoTree (z-index 14000) opens over ONCQIS, which stays mounted behind it, so closing OncoTree
+    // returns here instead of dropping to the app home. ONCQIS is the single oncology entry point.
+    if (verb === "oncotree-open") { openOverlay("OncoTree", G.SMD_ONCOTREE && G.SMD_ONCOTREE.open, function () { G.SMD_ONCOTREE.open(); }); return; }
     if (verb === "protocol-open") { st.mode = "protoref"; renderResults(); return; }   // browse the library -> tap a protocol for its regimen/calc/PDF (no hospital needed)
   }
 
-  // Landing identity: teal gradient hero card (masked logo). Painted once above the persistent search.
+  // Landing identity: a plain title and the safety line above the persistent search. It used to be a
+  // gradient card with an eyebrow label and a watermark logo, which pushed the tools below the fold.
   function heroHtml() {
     return '<section class="oh-hero">' +
-      '<div class="oh-hero-eyebrow">ONCOLOGY</div>' +
-      '<div class="oh-hero-title">The Cancer Library</div>' +
-      '<div class="oh-hero-sub">Staging, toxicity, protocols, drugs and calculators in one place. StewardMD never invents a dose, stage or score.</div>' +
-      '<span class="oh-hero-mark" aria-hidden="true"></span></section>';
+      '<h1 class="oh-hero-title">The Cancer Library</h1>' +
+      '<p class="oh-hero-sub">Staging, toxicity, protocols, drugs and calculators in one place. StewardMD never invents a dose, stage or score.</p>' +
+      "</section>";
   }
   function paintShell() {
     var el = rootEl();
@@ -536,19 +528,6 @@
   function foreground() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("oh-bg"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on")) close(); }); } catch (e) {}
-
-  // React Bits Spotlight tracking: calculates cursor/pointer offset for luminous gradients
-  try {
-    if (typeof document !== "undefined") {
-      document.addEventListener("pointermove", function (e) {
-        var card = e.target && e.target.closest ? e.target.closest(".oh-card, .oh-qa, .oh-row, .oh-favchip, .ctc-grow, .stg-trow, .stg-grow, .rec-out") : null;
-        if (!card) return;
-        var r = card.getBoundingClientRect();
-        card.style.setProperty("--mouse-x", (e.clientX - r.left) + "px");
-        card.style.setProperty("--mouse-y", (e.clientY - r.top) + "px");
-      }, { passive: true });
-    }
-  } catch (e) {}
 
   // Testing/launch hook (mirrors queue.js): with the flag on, ?oncohome=1 auto-opens.
   try {

@@ -12013,3 +12013,19 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   only saw the logo. The personalised splash script now clears `__smdBootFast` / `sbs-fast` and sets `__smdBootPersonal`.
 - `BEAT` 1560 -> 1500 (screen 1 for 1.5s), hide-loop `MIN` 2500 for personal opens (screen 2 for 1s), counted from when
   the frame is seen. Guests and signed-out returning opens keep the fast path; first open keeps 3s.
+
+## 2026-10-30 - ONCQIS: single home tile, polish pass, lavender field
+- Home grid shows one oncology tool, ONCQIS ("Single tool please"). OncoTree and Cancer Staging tiles appear only when
+  `smd_onco_home` is off (`oncqisOn()` in home.js). OncoTree opened from ONCQIS now stacks over it (backgrounded, not
+  closed), so closing OncoTree returns to ONCQIS.
+- Landing: removed the quick-action row that duplicated five list tools (and ignored their flags); the gradient hero card
+  with eyebrow and watermark is a plain title + safety line; the 2-column clamped tiles are grouped inset rows with full
+  descriptions. "Prognostic scores" + "Formulas" (same calc-cat target) merged; "Drug mechanisms" gained a list entry.
+- Removed the "Apple / React Bits" CSS layer (SF Pro override, cursor spotlight, hover border beam, fake sheet grabber)
+  and its pointermove JS. Section labels sentence case.
+- Staging list: no per-row blue-violet CLINICAL pills (only the Gap state keeps a badge), shared search field, grouped rows,
+  license bar is an overlay footer flush to the bottom edge (it floated 52px up inside the scroll body).
+- Lavender (all-cancers ribbon colour) gaussian field behind every .oh-overlay: radial gradients on one ::before layer,
+  38s transform drift, still under reduced motion. Cards stay solid.
+- React/Tailwind component libraries (shadcn, Magic UI, etc.) were requested; not adopted: the app is a buildless ES5
+  bundle with no React or Tailwind build. Their patterns (inset grouped list, tokens) are applied in plain CSS instead.

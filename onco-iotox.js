@@ -158,7 +158,7 @@
              (o.id && o.id.toLowerCase().indexOf(q) >= 0);
     });
 
-    var searchBox = '<div style="margin:12px 0 12px 0;"><input type="search" id="iotSearchInput" style="width:100%;box-sizing:border-box;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.15);background:rgba(0,0,0,0.25);color:inherit;font-size:14px;" placeholder="Search irAE by organ, symptom or toxicity (e.g. pneumonitis, colitis, myocarditis)..." value="' + esc(ix.query || "") + '" /></div>';
+    var searchBox = '<div><input type="search" id="iotSearchInput" class="oh-search stg-search" placeholder="Search irAE by organ, symptom or toxicity (e.g. pneumonitis, colitis, myocarditis)..." value="' + esc(ix.query || "") + '" /></div>';
 
     var tabs = '<div class="stg-vtoggle" style="margin-bottom:14px;flex-wrap:wrap;">' +
       '<button class="stg-vbtn' + (ix.tab === "all" ? " on" : "") + '" data-iot-act="tab:all">All (' + catalog.organs.length + ')</button>' +
