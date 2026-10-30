@@ -17,3 +17,12 @@ test("Select this diagnosis, a live pick and a recent decision open the wizard, 
   assert.match(wz, /openCase: openCase/);
   assert.match(wz, /function backToDx\(\)/, "Back returns to Clinical Reasoning");
 });
+
+test("the old classic page can never be shown, and the Drugs A-Z slider keeps its chip row at full width", () => {
+  assert.match(read("tablet-fit.css"), /\.shell, \.shell\.visible \{ display: none !important; \}/);
+  const api = read("api.js");
+  // az-scrubber.js shows its edge strip only when the chip row reaches the right edge, and checks opacity and display on it
+  assert.match(api, /\.db-overlay \.db-az\{height:0;margin:0;padding:0;overflow:hidden;pointer-events:none\}/);
+  assert.doesNotMatch(api, /\.db-az\{[^}]*opacity:0/);
+  assert.doesNotMatch(api, /\.db-az\{[^}]*display:none/);
+});

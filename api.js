@@ -1273,7 +1273,7 @@
       ".db-overlay.db-sheet .db-top .db-back{justify-self:start}",
       ".db-overlay.db-sheet .db-top .db-title{grid-column:2;text-align:center;min-width:0;max-width:62vw}",
       ".db-overlay.db-sheet .db-top .db-brandbtn{grid-column:3;justify-self:end}",
-      ".db-overlay .db-az{position:absolute;width:1px;height:1px;margin:0;padding:0;overflow:hidden;clip:rect(0 0 0 0);opacity:0;pointer-events:none}",
+      ".db-overlay .db-az{height:0;margin:0;padding:0;overflow:hidden;pointer-events:none}",   // keeps its full width: az-scrubber.js shows its strip only when this row reaches the right edge
       ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",
