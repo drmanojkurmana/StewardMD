@@ -46,6 +46,7 @@ const ev = async (e) => { const r = await call("Runtime.evaluate", { expression:
 const until = async (e, ms = 10000) => { const t0 = Date.now(); while (Date.now() - t0 < ms) { if (await ev(e) === true) return true; await sleep(150); } return false; };
 let fails = 0; const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 const click = (sel) => ev(`var b=document.querySelector(${JSON.stringify(sel)}); if(!b) return "missing"; b.click(); return 1;`);
+const text = (sel) => ev(`var e=document.querySelector(${JSON.stringify(sel)}); return e ? e.textContent.replace(/\\s+/g," ").trim() : "";`);
 const screenText = () => ev(`var r=document.getElementById("smdPrep"); return r ? r.innerText : "";`);
 const small = (scope) => ev(`var r=document.querySelector(${JSON.stringify(scope)}); if(!r) return "none"; return [].filter.call(r.querySelectorAll("button"), function(b){ return b.offsetParent && !b.closest(".pn-bar") && b.getBoundingClientRect().height < 44 * 0.95 - 0.5; }).map(function(b){ return (b.getAttribute("data-act")||"") + ":" + Math.round(b.getBoundingClientRect().height); }).join(",");`);
 // A tools action as the app dispatches it: a real button in the PrepNucleus root, clicked.
@@ -188,10 +189,15 @@ try {
   await shot("tools-data");
   await click("#smdPrep [data-act=x-rgo]");
   ok(await until(`return !!document.querySelector("#pxSheet [data-act=x-rdo]");`, 3000), "Reset asks first");
+  ok(/uses one of your 3 resets for the year \(2 left after it\)/.test(await text("#pxSheet")), "the confirm sheet says it uses one of 3");
   await shot("tools-reset-ask");
   await click("#pxSheet [data-act=x-rdo]");
   ok(await until(`var s=PREP._host.store(); return !Object.keys(s.cards).some(function(k){ return k.indexOf("p:ana-brachial-plexus:") === 0; }) && !s.mod["ana-brachial-plexus"];`, 8000), "after reset: anatomy cards and accuracy are gone");
   ok(await store(`!!s.bm["${Q2}"] && !!s.qn["${Q1}"] && !!s.mk["${Q1}"]`) === true, "bookmarks, notes and marked questions stay");
+  ok(await store(`Array.isArray(s.rsl) && s.rsl.length === 1`) === true, "the reset is logged");
+  ok(await until(`var w=document.querySelector("#smdPrep .px-data .px-warn"); return !!w && /next reset is available on/.test(w.textContent) && !document.querySelector("#smdPrep [data-act=x-rgo]") && !document.querySelector("#smdPrep [data-act=x-rsub]");`, 3000), "a second reset within 3 months is refused, with the date and no subject choice");
+  ok(/2 of 3 left/.test(await text("#smdPrep .px-quota")), "the quota reads 2 of 3 left: " + await text("#smdPrep .px-quota"));
+  await shot("tools-reset-limit");
 
   // ---- Revision timetable
   await act("tt-open");

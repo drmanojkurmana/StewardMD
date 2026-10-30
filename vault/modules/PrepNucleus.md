@@ -1796,6 +1796,9 @@ Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Deci
 - **Setup sheet filters:** New or repeat gains "With my note" and "Marked in tests" (hidden when the pool has none).
 - **Reset progress** (You > Progress and data): one subject (its cards, conf, mod, mt, coach, ky_q, ra) or every subject
   (also streak days; test history only when ticked). Bookmarks, notes, decks, settings stay. Refused with sync on.
+  Limits (owner 2026-10-30): one reset in any 3 months and at most 3 in any 12 months (`resetQuota`, log `store.rsl`,
+  synced as a scalar). A subject reset counts; a reset that cleared nothing does not. Clearing the app's data also wipes
+  the log, but it wipes the progress with it.
 - **Timetable:** the student picks subjects and order, start, finish of first reading, rest weekdays. Days split by module
   count (at least one), blocks stored in `tt.blocks` so they never shift; Mark done on today's subject re-plans from today;
   Re-plan from today lays the unfinished subjects over the days left. Today's plan (`prep-plan.js makePlan`): a study day

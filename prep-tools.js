@@ -99,10 +99,25 @@
     return p;
   }
 
+  /* Reset limits (owner 2026-10-30): one reset in any 3 months and at most RESET_YEAR in any 12 months, counted from
+     store.rsl (the ms of each reset that cleared something). A one-subject reset counts like a full one.
+     resetQuota(log, now) -> { used, left, ok, next }: used/left in the last 12 months, ok = a reset is allowed now,
+     next = the ms when the next one is allowed (null when ok). */
+  var RESET_YEAR = 3, RESET_GAP_MONTHS = 3;
+  function addMonths(ms, n) { var d = new Date(ms), day = d.getDate(); d.setMonth(d.getMonth() + n); if (d.getDate() !== day) d.setDate(0); return d.getTime(); }
+  function resetQuota(log, now) {
+    var yr = (log || []).filter(function (t) { return typeof t === "number" && addMonths(t, 12) > now; }).sort(function (a, b) { return a - b; });
+    var next = 0;
+    if (yr.length) next = addMonths(yr[yr.length - 1], RESET_GAP_MONTHS);
+    if (yr.length >= RESET_YEAR) next = Math.max(next, addMonths(yr[yr.length - RESET_YEAR], 12));
+    return { used: yr.length, left: Math.max(0, RESET_YEAR - yr.length), ok: next <= now, next: next > now ? next : null };
+  }
+  function noteReset(s, now) { s.rsl = (s.rsl || []).filter(function (t) { return typeof t === "number" && addMonths(t, 12) > now; }).concat([now]); }
+
   /* ================= browser ================= */
   if (NODE) {
     module.exports = { stem: stem, cleanNote: cleanNote, setNote: setNote, noteOf: noteOf, noteMarks: noteMarks, statRow: statRow, statExam: statExam,
-      resetPlan: resetPlan, resetApply: resetApply, NOTE_MAX: NOTE_MAX };
+      resetPlan: resetPlan, resetApply: resetApply, resetQuota: resetQuota, noteReset: noteReset, addMonths: addMonths, NOTE_MAX: NOTE_MAX, RESET_YEAR: RESET_YEAR };
     return;
   }
   // Flag smd_prep_tools, default ON (owner 2026-10-30): localStorage "0" or ?tools=0 leaves PREP_TOOLS undefined, so
@@ -264,36 +279,42 @@
   /* ---------- progress and data: statistics switch and Reset progress ---------- */
   function dataRow(h) { H = h; return H.row("x-data", ic(IC.reset), "Progress and data", "Anonymous statistics, reset progress"); }
   function renderData() {
-    var s = store(), subs = H.subjectsOf(s.exam), rs = T.rs, ch = statsChoice(), sync = syncOn();
+    var s = store(), subs = H.subjectsOf(s.exam), rs = T.rs, ch = statsChoice(), sync = syncOn(), q = resetQuota(s.rsl, Date.now());
     if (rs.sid && rs.sid !== "*" && !subs.some(function (sb) { return sb.id === rs.sid; })) rs.sid = "";
     var chip = function (v, label) { var on = rs.sid === v; return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="x-rsub" data-v="' + esc(v) + '">' + label + "</button>"; };
     H.paint(H.bar("Progress and data", "", "back") + '<div class="pn-body px-data">' +
       '<section class="pn-panel"><h2 class="pn-sec">Anonymous statistics</h2><p class="pn-mut pn-small">Share each answer\'s question number, right or wrong, the option picked and the time taken. Nothing that identifies you is sent. It feeds "How others answered" and test ranks for everyone.</p>' +
       '<button type="button" class="pn-btn' + (ch === "1" ? "" : " pri") + '" data-act="x-stats" aria-pressed="' + (ch === "1") + '">' + (ch === "1" ? "On: tap to stop sharing" : "Share anonymous statistics") + "</button></section>" +
       '<section class="pn-panel"><h2 class="pn-sec">Reset progress</h2><p class="pn-mut pn-small">Clears answers, memory schedule, mistakes, coaching and accuracy. Bookmarks, notes, your decks and settings stay. This cannot be undone.</p>' +
+      '<p class="pn-small px-quota">One reset every 3 months, ' + RESET_YEAR + " a year. " + (q.used ? q.left + " of " + RESET_YEAR + " left in the next 12 months." : "You have not used any.") + "</p>" +
       (sync ? '<p class="px-warn" role="note">Sync is on. A reset here would come back from your synced copy. Turn sync off in Settings first.</p>' :
+        !q.ok ? '<p class="px-warn" role="note">Your next reset is available on ' + esc(longDate(q.next)) + ".</p>" :
         '<div class="pn-wrap">' + chip("*", "Every subject") + subs.map(function (sb) { return chip(sb.id, H.tx(sb.name)); }).join("") + "</div>" +
         (rs.sid === "*" ? '<label class="px-chk"><input type="checkbox" data-act="x-rtests"' + (rs.tests ? " checked" : "") + "> Also clear test and mock history</label>" : "") +
         '<button type="button" class="pn-btn px-danger" data-act="x-rgo"' + (rs.sid ? "" : " disabled") + ">" + (rs.sid ? "Reset " + esc(rs.sid === "*" ? "every subject" : subjName(rs.sid)) : "Pick what to reset") + "</button>") +
       "</section></div>");
   }
+  function longDate(t) { try { return new Date(t).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }); } catch (e) { return ""; } }
   function askReset() {
-    var rs = T.rs; if (!rs.sid || syncOn()) return;
+    var rs = T.rs, q = resetQuota(store().rsl, Date.now()); if (!rs.sid || syncOn() || !q.ok) return;
     closeSheet(true);
     var what = rs.sid === "*" ? "every subject" : subjName(rs.sid), el = D.createElement("div");
     el.className = "pn-sheet-wrap"; el.id = "pxSheet";
     el.innerHTML = '<div class="pn-scrim" data-act="x-close"></div><section class="pn-sheet px-sheet" role="alertdialog" aria-modal="true" aria-labelledby="pxRsT" aria-describedby="pxRsD" tabindex="-1">' +
       '<span class="pn-grab" aria-hidden="true"></span><h2 id="pxRsT">Reset ' + esc(what) + "?</h2>" +
       '<p id="pxRsD">Every answer, review date, mistake and accuracy figure for ' + esc(what) + " on this phone is cleared" + (rs.sid === "*" ? ", with your streak" + (rs.tests ? " and test history" : "") : "") + ". This cannot be undone.</p>" +
+      '<p class="pn-mut pn-small">This uses one of your ' + RESET_YEAR + " resets for the year (" + (q.left - 1) + " left after it), and the next one is possible in 3 months.</p>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="x-close">Cancel</button><button type="button" class="pn-btn px-danger" data-act="x-rdo">Reset</button></div></section>';
     T.sheet = el; T.prev = D.activeElement;
     H.root().appendChild(el);
     try { el.querySelector("[data-act=x-close].pn-btn").focus({ preventScroll: true }); } catch (e) {}
   }
   function doReset() {
-    var rs = T.rs, s = store(); if (!rs.sid || syncOn()) return closeSheet();
+    var rs = T.rs, s = store(); if (!rs.sid || syncOn() || !resetQuota(s.rsl, Date.now()).ok) return closeSheet();
     var fin = function (mods) {
       var p = resetApply(s, mods, rs.sid === "*" ? null : rs.sid, { tests: rs.tests });
+      // Only a reset that cleared something uses up one of the allowed resets.
+      if (p.cards.length || p.mod.length || p.mt.length) noteReset(s, Date.now());
       H.save(); closeSheet(true);
       H.toast(p.cards.length || p.mod.length || p.mt.length ? "Progress reset" : "Nothing to reset");
       rs.sid = ""; rs.tests = false;
@@ -341,5 +362,5 @@
 
   G.PREP_TOOLS = { bind: bind, act: act, back: back, strikeBtn: strikeBtn, struck: struck, noteBtn: noteBtn, noteHtml: noteHtml, peerHtml: peerHtml, prefetch: prefetch,
     noteAnswer: noteAnswer, flush: flush, finished: finished, notebookRow: notebookRow, dataRow: dataRow,
-    _pure: { stem: stem, cleanNote: cleanNote, setNote: setNote, noteOf: noteOf, noteMarks: noteMarks, statRow: statRow, statExam: statExam, resetPlan: resetPlan, resetApply: resetApply } };
+    _pure: { stem: stem, cleanNote: cleanNote, setNote: setNote, noteOf: noteOf, noteMarks: noteMarks, statRow: statRow, statExam: statExam, resetPlan: resetPlan, resetApply: resetApply, resetQuota: resetQuota } };
 })(typeof window !== "undefined" ? window : this);

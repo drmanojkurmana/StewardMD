@@ -180,3 +180,23 @@ test("timetable: move and next module", () => {
   assert.equal(TT.suggestEnd(100, null), 220);
   assert.equal(TT.suggestEnd(100, 200), 200 - TT.revDays(100) - 1);
 });
+
+test("reset limits: one in any 3 months, 3 in any 12 months", () => {
+  const D = (s) => Date.parse(s + "T10:00:00Z");
+  assert.deepEqual(T.resetQuota([], D("2026-01-10")), { used: 0, left: 3, ok: true, next: null });
+  // One reset: the next is 3 months later.
+  let q = T.resetQuota([D("2026-01-10")], D("2026-03-01"));
+  assert.equal(q.ok, false); assert.equal(q.left, 2); assert.equal(q.next, T.addMonths(D("2026-01-10"), 3));
+  assert.equal(T.resetQuota([D("2026-01-10")], D("2026-04-10")).ok, true);
+  // Three in 9 months: the 4th waits for the first to be 12 months old, not just 3 months after the last.
+  const three = [D("2026-01-10"), D("2026-04-10"), D("2026-07-10")];
+  q = T.resetQuota(three, D("2026-10-11"));
+  assert.equal(q.used, 3); assert.equal(q.left, 0); assert.equal(q.ok, false); assert.equal(q.next, T.addMonths(D("2026-01-10"), 12));
+  assert.equal(T.resetQuota(three, D("2027-01-10")).ok, true);
+  // Month ends do not spill: 30 Nov + 3 months is the end of February.
+  assert.equal(new Date(T.addMonths(Date.parse("2026-11-30T10:00:00"), 3)).getDate(), 28);
+  // noteReset keeps only the last 12 months.
+  const s = { rsl: [D("2024-01-01"), D("2026-01-10")] };
+  T.noteReset(s, D("2026-05-01"));
+  assert.deepEqual(s.rsl, [D("2026-01-10"), D("2026-05-01")]);
+});

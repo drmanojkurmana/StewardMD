@@ -19,7 +19,7 @@ only after 30 answers, so they appear on their own as students answer and nothin
 clinicians in training about difficulty and distractors; the automatic switch-on gives the owner the same end state.
 **Trade-off.** Empty bars at launch; ranks on randomly drawn mocks compare different question sets (labelled "read it
 as a guide"; fixed papers compare like with like). Reset is refused while sync is on (sync keeps the card further along,
-so a reset would come back). **Status.** On branch, not on the phone until build-www + native rebuild/OTA; D1 migration
+so a reset would come back). Resets are limited to one in 3 months and 3 in 12 months (owner, same day). **Status.** On branch, not on the phone until build-www + native rebuild/OTA; D1 migration
 `prep-arena-worker/migrations/0006_prep_rank.sql` must be applied before rank works.
 
 ## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
