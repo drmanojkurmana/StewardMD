@@ -86,19 +86,7 @@ try {
   const iosLaunch = readFileSync(join(ROOT, "ios/App/App/Base.lproj/LaunchScreen.storyboard"), "utf8");
   const androidTheme = readFileSync(join(ROOT, "android/app/src/main/res/values/styles.xml"), "utf8");
   const capConfig = JSON.parse(readFileSync(join(ROOT, "capacitor.config.json"), "utf8"));
-  /* One continuous launch (owner 2026-10-30: "is this the way an app should start"): the native launch
-     screen, the returning-open web splash and the iOS privacy cover (up during Face ID) are the same
-     still frame: LaunchBackground plus the 107pt mark at the exact centre. */
-  ok(/image="LaunchLogo"/.test(iosLaunch) && /firstAttribute="width" constant="107"/.test(iosLaunch) &&
-     /firstAttribute="centerX" secondItem="snD-IY-ifK"/.test(iosLaunch) && /firstAttribute="centerY" secondItem="snD-IY-ifK"/.test(iosLaunch),
-     "iOS launch screen shows the 107pt mark at the exact centre");
-  const launchLogo = JSON.parse(readFileSync(join(ROOT, "ios/App/App/Assets.xcassets/LaunchLogo.imageset/Contents.json"), "utf8"));
-  ok(launchLogo.images.some(i => /dark/.test(i.filename) && i.appearances) && launchLogo.images.length === 6, "the launch mark has light and dark variants at 1x/2x/3x");
-  const appDelegate = readFileSync(join(ROOT, "ios/App/App/AppDelegate.swift"), "utf8");
-  ok(/UIStoryboard\(name: "LaunchScreen"/.test(appDelegate), "the privacy cover (Face ID, app switcher) is the launch screen, not a grey blur");
-  const indexHtml = readFileSync(join(ROOT, "index.html"), "utf8");
-  ok(/rel="preload" href="\/assets\/fonts\/material-symbols-rounded\.woff2"/.test(indexHtml) && /function ready\(\)\{try\{\s*if\(!iconsIn\(\)\)return false;/.test(indexHtml),
-     "home is revealed only once its icon font is in (preloaded), so icons never pop in after the splash");
+  ok(!/image="Splash"/.test(iosLaunch), "iOS native launch surface has no standalone logo");
   ok(/windowSplashScreenAnimatedIcon">@android:color\/transparent</.test(androidTheme), "Android native launch icon is transparent");
   ok(capConfig.plugins.SplashScreen.launchAutoHide === false, "native splash waits for the painted web handoff");
 
@@ -434,26 +422,18 @@ try {
   okv(await ev(`return localStorage.getItem("smd_boot_seen");`), "1", "finishing the first open records smd_boot_seen");
   await call("Page.navigate", { url: BASE });
   let fastSeen = false;   // the new document can lift its splash within ~100ms, so sample until seen
-  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-quiet");`); }
-  okv(fastSeen, true, "later open: the quiet launch frame (sbs-quiet), not a blank surface");
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); if(!e) return "gone";
-      var cs=getComputedStyle(e), m=[e.querySelector(".sbs-logo"),e.querySelector(".sbs-mark")].filter(function(x){return x&&getComputedStyle(x).display!=="none";})[0];
-      if(!m) return "no mark"; var r=m.getBoundingClientRect(), z=parseFloat(e.style.zoom)||1;
-      if(getComputedStyle(e.querySelector(".sbs-center")).visibility!=="visible") return "mark hidden";
-      if(Math.abs(r.width/(1)-107*z)>2 && Math.abs(r.width-107)>2) return "size "+r.width;
-      if(Math.abs(r.left+r.width/2-innerWidth/2)>1.5||Math.abs(r.top+r.height/2-innerHeight/2)>1.5) return "off-centre "+Math.round(r.left)+","+Math.round(r.top);
-      if(cs.backgroundImage!=="none"||cs.backgroundColor!=="rgb(255, 255, 255)") return "background "+cs.backgroundColor+" "+cs.backgroundImage.slice(0,30);
-      var extra=[".sbs-word",".sbs-tag",".sbs-bar",".sbs-foot","#sbsHello"].filter(function(q){var x=e.querySelector(q);return x&&getComputedStyle(x).display!=="none";});
-      return extra.length ? "extra: "+extra.join(",") : "launch-frame";`), "launch-frame",
-    "later open: only the 107pt mark, at the exact centre, on the flat launch colour (matches the native launch screen)");
+  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-blank");`); }
+  okv(fastSeen, true, "later open: fast path, plain surface (no logo flash)");
+  okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "hidden",
+    "later open: the mark is not shown while it would only flash");
   let goneAt = 0;
   await ev(`var g=document.getElementById("accountGate"); if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");} return 1;`);
   for (let i = 0; i < 20 && !goneAt; i++) { await sleep(100); if (await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`)) goneAt = (i + 1) * 100; }
   ok(goneAt > 0 && goneAt <= 700, `later open: the splash lifts as soon as the app is ready (${goneAt}ms), not after 3s`);
   await call("Page.navigate", { url: BASE });
   await sleep(900);
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || (!e.classList.contains("sbs-blank") && !e.classList.contains("smd-boot-phase2"));`), true,
-    "later open, slow boot: still the same launch frame (no blank phase, no second screen swapping in)");
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || !e.classList.contains("sbs-blank");`), true,
+    "later open, slow boot: the mark appears after 700ms so it never looks stuck");
   await ev(`localStorage.clear(); return 1;`);
 
   /* ---------- 3. Guest: no personalisation ---------- */

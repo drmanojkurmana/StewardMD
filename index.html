@@ -55,7 +55,7 @@
      fallback, and the interstitials are the very first paint, so start the fetch here rather
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<!-- The header, tab bar and home tools draw their icons from this font. Fetched early so the launch can
+<!-- The header, tab bar and home tools draw their icons from this font. Fetched early so the splash can
      wait for it: revealing home before it loaded made every icon pop in a beat after the splash lifted. -->
 <link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/redesign-system.css?v=hit1-spheretiles2-splashv2e-betachip1-darksphere1-appfeel1-energy1-icons1-fr1-live1-knife1-ox2-alltools1-maikmark3-glow20">
@@ -331,7 +331,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
    only. Every later open is fast: a plain surface in the launch color that fades as soon as the app
    is ready, so the logo never flashes for a split second. If boot is slow the mark appears after
    700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace. */
-(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast","sbs-quiet");}}catch(e){}})();</script>
+(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast","sbs-blank");setTimeout(function(){s.classList.remove("sbs-blank");},700);}}catch(e){}})();</script>
 <script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
    profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
    Firebase user by account.js) — because Firebase has not booted this early. Signed-in users only;
@@ -361,7 +361,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
      Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
   var BEAT=1560,XF=220,rm=false,t0=Date.now();
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
-  function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide")&&!s.classList.contains("sbs-quiet");}
+  function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
   /* Do not consume the beat behind the native launch surface. native-bridge starts this clock at
      the exact handoff, so the drawing motion is visible instead of completing off-screen. */
   function seen(){try{if(!s.classList.contains("sbs-visible"))return 0;return Date.now()-(window.__smdSplashShownAt||t0);}catch(e){return Date.now()-t0;}}
@@ -383,19 +383,6 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   /* fast (returning) opens: quick fade, and a plain surface until 700ms so the mark never flashes */
   html #smdBootSplash.sbs-fast{transition:opacity .16s cubic-bezier(.23,1,.32,1)}
   html #smdBootSplash.sbs-blank>*{visibility:hidden}
-  /* Returning opens (2026-10-30): the splash IS the native launch screen, continued. Same flat colour
-     (LaunchBackground: #fff / #08302b), same 107pt mark at the exact centre, nothing else, no motion.
-     Native launch, this splash and the iOS privacy cover (shown during Face ID) are one still frame,
-     and the app then rises out of it (launch-morph). The first-ever open keeps its drawn sequence. */
-  html #smdBootSplash.sbs-quiet,html #smdBootSplash.sbs-quiet.sbs-dark{background:#fff}
-  html #smdBootSplash.sbs-quiet.sbs-dark{background:#08302b}
-  html #smdBootSplash.sbs-quiet::before,html #smdBootSplash.sbs-quiet::after{display:none!important}
-  html #smdBootSplash.sbs-quiet .sbs-center{transform:none!important;gap:0!important}
-  html #smdBootSplash.sbs-quiet .sbs-center>:not(.sbs-logo-stage),html #smdBootSplash.sbs-quiet .sbs-foot{display:none!important}
-  html #smdBootSplash.sbs-quiet .sbs-logo-stage{width:107px!important;height:107px!important}
-  html #smdBootSplash.sbs-quiet .sbs-logo-trace,html #smdBootSplash.sbs-quiet .sbs-reflection{display:none!important}
-  html #smdBootSplash.sbs-quiet .sbs-logo,html #smdBootSplash.sbs-quiet .sbs-mark{width:107px!important;height:107px!important;animation:none!important;opacity:1!important;filter:none!important;transform:none!important}
-  html #smdBootSplash.sbs-quiet.sbs-dark .sbs-mark{background:#4b9e8d!important}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
   #smdBootSplash .sbs-logo-stage{position:relative;width:107px;height:107px;flex:0 0 auto}
   #smdBootSplash .sbs-logo,#smdBootSplash .sbs-mark,#smdBootSplash .sbs-logo-trace{position:absolute;inset:0;width:100%;height:100%}
@@ -2282,7 +2269,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1-add1-launch1" defer></script>
+<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1-add1" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2505,7 +2492,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1-ipad2" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1-launch1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->

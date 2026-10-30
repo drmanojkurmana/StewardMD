@@ -793,9 +793,8 @@
     }, true);
   })();
 
-  // Splash: launchAutoHide is false (see capacitor.config.json). Since 2026-10-30 the native launch screen
-  // shows the 107pt mark at the exact centre, and a returning open's web splash (sbs-quiet) is that same
-  // frame, so this handoff is invisible; the first-ever open keeps the drawn sequence. App scripts
+  // Splash: launchAutoHide is false (see capacitor.config.json). The native launch layer is an
+  // unbranded white bridge; the animated web splash is the first visible StewardMD logo. App scripts
   // are `defer`, so the WebView does not paint the app's own boot splash until they
   // all execute — hiding the native splash before that shows a BLACK unpainted WebView.
   // The KB (~4.8MB) is now lazy-loaded AFTER first paint (see index.html), so the app's
