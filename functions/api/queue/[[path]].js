@@ -5780,6 +5780,14 @@ export async function onRequest(context) {
         const r = await PAT.resolveStewardId(env, pOrg, url.searchParams.get("id") || "");
         return json(r, r.ok ? 200 : r.error === "not_a_steward_id" ? 422 : r.error === "revoked" ? 410 : 404, request);
       }
+      /* Find a patient by name, phone, MRN or StewardID: the check-in sheet's "Find existing patient". Same authority as
+       * resolve (anybody who can see the queue). Results carry name and mobile, so never logged or cached. */
+      if (sub === "search" && method === "GET") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json(azRefusal(az), az.reason === "org_not_found" ? 404 : 403, request);
+        const r = await PAT.searchPatients(env, pOrg, url.searchParams.get("q") || "");
+        return json(r, 200, request);
+      }
       /* A lost or replaced card is revoked HERE, once, for every device. The desk issues cards, so the
        * desk's authority revokes them, and always with a reason. */
       if (sub === "revoke" && method === "POST") {

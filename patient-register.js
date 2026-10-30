@@ -40,7 +40,7 @@
 
   /* Privacy mode (privacy-mode.js): identifiers are wrapped so they can be masked on screen, identifier inputs
    * draw as dots. Without SMD_PRIVACY_MODE (the staff console) the markup is exactly what it was. */
-  var PHI_INPUT = { name: 1, mobile: 1, mrn: 1, abhaNumber: 1, abhaAddress: 1, address: 1, abdmId: 1, abdmAadhaar: 1, abdmMobile: 1 };
+  var PHI_INPUT = { name: 1, mobile: 1, mrn: 1, abhaNumber: 1, abhaAddress: 1, address: 1, abdmId: 1, abdmAadhaar: 1, abdmMobile: 1, find: 1 };
   function phi(kind, v, html) { var P = G.SMD_PRIVACY_MODE; return P ? P.wrap(kind, v, html) : (html == null ? esc(v) : html); }
   function pv(kind, v) { var P = G.SMD_PRIVACY_MODE; return P ? P.screenText(kind, v) : String(v == null ? "" : v); }
 
@@ -211,6 +211,13 @@
     }
   }
 
+  /* "Find existing patient": a name, a phone number (or its last digits), an MRN or a StewardID. Results are tapped, never auto-picked. */
+  function findHtml() {
+    return '<div class="pr-find" id="prFindBox">' +
+      field("find", wT("ward.reg-find-patient", "Find existing patient"), { ph: wT("ward.reg-find-ph", "Name or phone number"), max: 60, mode: "search" }).replace('autocomplete="off"', 'autocomplete="off" enterkeyhint="search"') +
+      '<div class="pr-finds" id="prFinds" role="listbox" aria-label="' + wTH("ward.reg-find-results", "Matching patients") + '"></div>' +
+      '<div class="pr-pick" id="prPick" hidden></div></div>';
+  }
   function sheetHtml(o) {
     var us = isUS(o);
     var mrLine = o.mode === "native"
@@ -225,6 +232,7 @@
 
         '<div class="pr-body">' +
           '<div class="pr-dup" id="prDup" hidden></div>' +
+          (o.canSearch ? findHtml() : "") +
           '<div style="display:flex;gap:8px;margin-bottom:14px">' +
             '<button type="button" class="pr-btn ghost" data-a="read-nfc" style="flex:1;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">&#128241; ' + wTH("ward.reg-read-nfc", "Ni-Key: Read NFC Tag") + '</button>' +
             '<button type="button" class="pr-btn ghost" data-a="scan-qr" style="flex:1;padding:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px">&#128247; ' + wTH("ward.reg-scan-qr", "Scan QR / Barcode") + '</button>' +
@@ -350,7 +358,7 @@
     opts = opts || {};
     var host = el(), state = { gender: "", visitType: "new", confirmDuplicate: false };
     host.className = "on";
-    host.innerHTML = sheetHtml(opts);
+    host.innerHTML = sheetHtml(Object.assign({}, opts, { canSearch: typeof opts.search === "function" }));
 
     var q = function (id) { return host.querySelector("#pr_" + id); };
     function setErr(f, msg) {
@@ -560,8 +568,9 @@
       var who = dup.mrn || dup.stewardId || dup.mobile || "";
       d.innerHTML = "<b>" + wTH("ward.reg-mobile-already-registered", "This mobile is already registered") + "</b>" +
         "<span>" + wTH("ward.reg-duplicate-explain", "{mrn} is using this number. If this is the same person, open their record instead. If it is a different patient sharing the phone, continue.", { mrn: phi(dup.mrn || dup.stewardId ? "id" : "phone", who) }) + "</span>" +
-        (ids ? '<span class="pr-dupids" lang="en">' + [(dup.stewardId ? "StewardID " + phi("id", dup.stewardId) : ""), (dup.mrn ? phi("id", dup.mrn) : ""), (dup.mobile ? phi("phone", dup.mobile) : "")].filter(Boolean).join("  &middot;  ") + "</span>" : "") +
-        '<button type="button" class="pr-btn ghost" data-a="dup-continue">' + wTH("ward.reg-different-patient", "This is a different patient") + "</button>";
+        (ids && ids !== who ? '<span class="pr-dupids" lang="en">' + [(dup.stewardId ? "StewardID " + phi("id", dup.stewardId) : ""), (dup.mrn ? phi("id", dup.mrn) : ""), (dup.mobile ? phi("phone", dup.mobile) : "")].filter(Boolean).join("  &middot;  ") + "</span>" : "") +
+        '<div class="pr-dupbtns">' + (opts && typeof opts.search === "function" ? '<button type="button" class="pr-btn primary" data-a="dup-open" data-q="' + esc(dup.mrn || dup.stewardId || dup.mobile || "") + '">' + wTH("ward.reg-open-patient", "Open this patient") + "</button>" : "") +
+        '<button type="button" class="pr-btn ghost" data-a="dup-continue">' + wTH("ward.reg-different-patient", "This is a different patient") + "</button></div>";
       d.scrollIntoView({ block: "nearest" });
     }
 
@@ -666,6 +675,72 @@
       });
     }
     try { root.removeEventListener("hashchange", open._onHash); root.addEventListener("hashchange", onHash); open._onHash = onHash; } catch (e) {}
+
+    // ---- find an existing patient (opts.search) and use them instead of registering again
+    var findTimer = 0, findSeq = 0;
+    function runFind(term, cb) {
+      var my = ++findSeq;
+      Promise.resolve(opts.search(term)).then(function (r) { if (my === findSeq) cb(r && r.ok ? r : { ok: false }); }, function () { if (my === findSeq) cb({ ok: false }); });
+    }
+    function paintFinds(r, term) {
+      var box = host.querySelector("#prFinds"); if (!box) return;
+      if (!r.ok) { box.innerHTML = '<p class="pr-findmsg">' + wTH("ward.reg-find-fail", "Could not search. Check your connection.") + "</p>"; return; }
+      state.found = r.results || [];
+      if (!state.found.length) { box.innerHTML = '<p class="pr-findmsg">' + wTH("ward.reg-find-none", "No matching patient. Fill the form to register a new one.") + "</p>"; return; }
+      box.innerHTML = state.found.map(function (p, i) {
+        return '<button type="button" class="pr-find-row" role="option" data-a="pick" data-i="' + i + '"><b>' + phi("name", p.name || "", esc(p.name || "")) + "</b><span>" +
+          esc((p.ageYears != null && p.ageYears !== "" ? p.ageYears + "y " : "") + (p.gender || "")) + (p.mobile ? " &middot; " + phi("phone", p.mobile) : "") + (p.mrn ? " &middot; " + phi("id", p.mrn) : "") + "</span></button>";
+      }).join("") + (r.truncated ? '<p class="pr-findmsg">' + wTH("ward.reg-find-more", "Many patients here. Type more of the name or number to narrow it.") + "</p>" : "");
+    }
+    function showPick(p) {
+      state.picked = p;
+      var fb = host.querySelector("#prFinds"); if (fb) fb.innerHTML = "";
+      var pb = host.querySelector("#prPick"); if (!pb) return;
+      pb.hidden = false;
+      pb.innerHTML = '<b>' + phi("name", p.name || "", esc(p.name || "")) + "</b><span>" + esc((p.ageYears != null && p.ageYears !== "" ? p.ageYears + "y " : "") + (p.gender || "")) +
+        (p.mobile ? " &middot; " + phi("phone", p.mobile) : "") + (p.mrn ? " &middot; " + phi("id", p.mrn) : "") + "</span>" +
+        '<div class="pr-dupbtns"><button type="button" class="pr-btn primary" data-a="pick-go">' + (typeof opts.useExisting === "function" ? wTH("ward.reg-add-existing", "Add to queue") : wTH("ward.reg-use-details", "Use these details")) + '</button>' +
+        '<button type="button" class="pr-btn ghost" data-a="pick-cancel">' + wTH("ward.reg-cancel", "Cancel") + "</button></div>";
+      pb.scrollIntoView({ block: "nearest" });
+    }
+    function findAndPick(term) {
+      var d = host.querySelector("#prDup"); if (d) d.hidden = true;
+      runFind(term, function (r) {
+        var hit = r.ok && r.results && r.results[0];
+        if (hit) { showPick(hit); return; }
+        if (root.toast) root.toast(wT("ward.reg-find-none", "No matching patient. Fill the form to register a new one."));
+      });
+    }
+    // No queue hook on this host: copy the found patient's details into the form (a follow-up, reusing their StewardID).
+    function fillExisting(p) {
+      state.stewardId = p.stewardId || "";
+      if (p.name && q("name")) q("name").value = p.name;
+      if (p.mobile && q("mobile")) q("mobile").value = p.mobile;
+      if (p.ageYears != null && p.ageYears !== "" && q("ageYears")) q("ageYears").value = p.ageYears;
+      var g = String(p.gender || "").toLowerCase();
+      if (g === "female" || g === "male" || g === "other") { var gb = host.querySelector('[data-seg="gender"] [data-v="' + g + '"]'); if (gb) gb.click(); }
+      var fu = host.querySelector('[data-f="visitType"] [data-v="followup"]'); if (fu) fu.click();
+    }
+    function useExisting(p) {
+      if (!p) return;
+      if (typeof opts.useExisting !== "function") { fillExisting(p); var pb = host.querySelector("#prPick"); if (pb) { pb.hidden = true; pb.innerHTML = ""; } return; }
+      var go = host.querySelector('[data-a="pick-go"]'); if (go) { go.disabled = true; go.textContent = wT("ward.reg-adding", "Adding…"); }
+      var dep = q("departmentId") ? q("departmentId").value : "";
+      if (opts.departmentRequired && q("departmentId") && !dep) { if (go) { go.disabled = false; go.textContent = wT("ward.reg-add-existing", "Add to queue"); } setErr("departmentId", wT("ward.reg-choose-department-for-token", "Choose a department to give a token.")); return; }
+      Promise.resolve(opts.useExisting(p, { departmentId: dep })).then(function (r) {
+        if (r && r.ok === false) { if (go) { go.disabled = false; go.textContent = wT("ward.reg-add-existing", "Add to queue"); } host.querySelector("#prFerr").textContent = r.message || wT("ward.reg-could-not-add", "Could not add the patient. Check your connection and try again."); return; }
+        state.doneMrn = p.mrn || ""; state.doneStewardId = p.stewardId || p.mrn || "";
+        host.innerHTML = doneHtml({ mrn: p.mrn, stewardId: state.doneStewardId, pending: p.pending, name: p.name });
+      }, function () { if (go) { go.disabled = false; go.textContent = wT("ward.reg-add-existing", "Add to queue"); } host.querySelector("#prFerr").textContent = wT("ward.reg-could-not-add", "Could not add the patient. Check your connection and try again."); });
+    }
+    host.addEventListener("input", function (ev) {
+      if (!ev.target || ev.target.id !== "pr_find") return;
+      var term = ev.target.value.trim(), box = host.querySelector("#prFinds");
+      clearTimeout(findTimer);
+      var pb = host.querySelector("#prPick"); if (pb) { pb.hidden = true; pb.innerHTML = ""; }
+      if (term.length < 2) { if (box) box.innerHTML = ""; findSeq++; return; }
+      findTimer = setTimeout(function () { runFind(term, function (r) { paintFinds(r, term); }); }, 350);
+    });
 
     host.onclick = function (ev) {
       var t = ev.target;
@@ -824,6 +899,10 @@
       if (a === "write-nfc") return writeNfc(b);
       if (a === "print-token") { try { if (opts.printToken && state.offline) opts.printToken(state.offline); } catch (e) {} return; }
       if (a === "print-label") { try { if (root.openFileLabel) root.openFileLabel(state.doneMrn, state.doneStewardId); } catch (e) {} return; }
+      if (a === "dup-open") { return findAndPick(b.getAttribute("data-q")); }
+      if (a === "pick") { var pk = state.found && state.found[+b.getAttribute("data-i")]; if (pk) showPick(pk); return; }
+      if (a === "pick-cancel") { var pb = host.querySelector("#prPick"); if (pb) { pb.hidden = true; pb.innerHTML = ""; } return; }
+      if (a === "pick-go") { return useExisting(state.picked); }
       if (a === "dup-continue") { state.confirmDuplicate = true; host.querySelector("#prDup").hidden = true; return save(); }
       if (a === "more") {
         var panel = host.querySelector("#prOpt"), on = panel.hidden;
@@ -834,7 +913,7 @@
     };
     host.addEventListener("keydown", function (ev) {
       if (ev.key === "Escape") close();
-      if (ev.key === "Enter" && ev.target && ev.target.tagName === "INPUT") { ev.preventDefault(); save(); }
+      if (ev.key === "Enter" && ev.target && ev.target.tagName === "INPUT") { ev.preventDefault(); if (ev.target.id !== "pr_find") save(); }
     });
     var n = q("name"); if (n) n.focus();
     return { close: close };
