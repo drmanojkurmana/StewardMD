@@ -557,11 +557,11 @@ html .oh-overlay > .oh-top {
   transition: background-color .22s ease, border-color .22s ease;
 }
 html .oh-overlay.oh-scrolled > .oh-top {
-  background: color-mix(in srgb, #f6f3fc 74%, transparent) !important;
+  background: color-mix(in srgb, #f6f3fc 90%, transparent) !important;
   -webkit-backdrop-filter: blur(20px) saturate(1.5) !important; backdrop-filter: blur(20px) saturate(1.5) !important;
   border-bottom-color: var(--oh-line) !important;
 }
-html body.dark .oh-overlay.oh-scrolled > .oh-top { background: color-mix(in srgb, #0e0b16 70%, transparent) !important; }
+html body.dark .oh-overlay.oh-scrolled > .oh-top { background: color-mix(in srgb, #0e0b16 88%, transparent) !important; }
 html .oh-overlay > .oh-body { padding-top: calc(66px + env(safe-area-inset-top)) !important; }
 
 /* round keys: frosted discs that stay legible over the lavender field with or without the bar */
@@ -608,3 +608,25 @@ body.dark .oh-ltitle { color: #f3eef6; }
 .oh-hero-mark .material-symbols-rounded { font-size: 30px; }
 html .oh-overlay .oh-hero-title { font-size: 34px; letter-spacing: -.03em; }
 html .oh-overlay .oh-hero-sub { margin-top: 10px; }
+
+/* ONCQIS brand mark + wordmark (owner's logo: hexagonal immune lattice, antibodies, targeted red core).
+   Vector, transparent, two theme variants; the wordmark is live text in the logo's teal gradient so it
+   stays crisp and selectable, with the logo's own tagline under it, CliniX-style. */
+.oq-logo { display: inline-grid; place-items: center; flex: 0 0 auto; }
+.oq-logo img { width: 100%; height: 100%; display: block; }
+.oq-logo .oq-d { display: none; }
+body.dark .oq-logo .oq-l { display: none; }
+body.dark .oq-logo .oq-d { display: block; }
+html .oh-overlay .oh-hero-mark { width: 64px; height: 64px; flex: 0 0 64px; background: none !important; box-shadow: none !important; border-radius: 0; }
+html .oh-overlay .oh-title-mark { width: 34px; height: 34px; flex: 0 0 34px; }
+.oh-hero-brand { gap: 12px !important; }
+.oh-hero-word { display: flex; flex-direction: column; min-width: 0; }
+html .oh-overlay .oh-hero-title {
+  font: 600 38px/1 var(--rds-font, var(--sans)) !important; letter-spacing: .03em !important;
+  background: linear-gradient(90deg, #0b4252, #2f95a8); -webkit-background-clip: text; background-clip: text; color: transparent !important;
+}
+body.dark .oh-overlay .oh-hero-title { background-image: linear-gradient(90deg, #6cc3cf, #b6e7ec); }
+.oh-hero-tag { margin-top: 5px; font: 500 12.5px/1.2 var(--rds-font, var(--sans)); color: var(--rds-ink, #14202b); opacity: .78; letter-spacing: .01em; }
+body.dark .oh-hero-tag { color: #f3eef6; }
+.oh-title-txt b { background: linear-gradient(90deg, #0b4252, #2f95a8); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: .03em; }
+body.dark .oh-title-txt b { background-image: linear-gradient(90deg, #6cc3cf, #b6e7ec); }

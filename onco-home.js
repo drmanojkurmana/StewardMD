@@ -492,10 +492,13 @@
 
   // Landing identity: a plain title and the safety line above the persistent search. It used to be a
   // gradient card with an eyebrow label and a watermark logo, which pushed the tools below the fold.
+  // ONCQIS mark (assets/oncqis-mark.svg, vector redraw of the owner's logo). Two files because the light
+  // mark's deep-teal lattice disappears on the dark ground; CSS shows the one matching the theme.
+  function oqMark(cls) { return '<span class="oq-logo ' + cls + '" aria-hidden="true"><img class="oq-l" src="/assets/oncqis-mark.svg" alt=""><img class="oq-d" src="/assets/oncqis-mark-dark.svg" alt=""></span>'; }
   // Large brand title at rest (mark + name, like CliniX); it hands over to the compact bar on scroll.
   function heroHtml() {
     return '<section class="oh-hero">' +
-      '<div class="oh-hero-brand"><span class="oh-hero-mark" aria-hidden="true">' + ms("oncology") + '</span><h1 class="oh-hero-title">ONCQIS</h1></div>' +
+      '<div class="oh-hero-brand">' + oqMark("oh-hero-mark") + '<div class="oh-hero-word"><h1 class="oh-hero-title">ONCQIS</h1><span class="oh-hero-tag">Oncology Clinical Intelligence System</span></div></div>' +
       '<p class="oh-hero-sub">The Cancer Library: staging, toxicity, protocols, drugs and calculators in one place. StewardMD never invents a dose, stage or score.</p>' +
       "</section>";
   }
@@ -505,7 +508,7 @@
       // Header in the PrepNucleus pattern: round keys, mark + name + subtitle. Transparent over the
       // large title at rest; a frosted bar fades in behind it once the page scrolls (.oh-scrolled).
       '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">' + backLabel() + '</button>' +
-      '<div class="oh-title"><span class="oh-title-mark" aria-hidden="true">' + ms("oncology") + '</span><span class="oh-title-txt"><b>ONCQIS</b><small>The Cancer Library</small></span></div>' +
+      '<div class="oh-title">' + oqMark("oh-title-mark") + '<span class="oh-title-txt"><b>ONCQIS</b><small>The Cancer Library</small></span></div>' +
       '<button class="oh-hbtn" data-oh-act="find" aria-label="Search">' + ms("search") + '</button></div>' +
       '<div class="oh-body">' + heroHtml() +
       '<input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +

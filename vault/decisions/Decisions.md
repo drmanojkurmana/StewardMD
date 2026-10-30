@@ -12039,3 +12039,8 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   transparent with round 44px frosted keys at rest; onco-home.js toggles .oh-overlay.oh-scrolled past 28px and the
   frosted bar + compact title (mark, name, subtitle) fade in. Large titles (.oh-ltitle / ONCQIS brand hero) live in the
   page. Back/close keys are icons; their words stay as .oh-sr text. ONCQIS bar has a search key that focuses the field.
+- ONCQIS logo: vector redraw of the owner's mark (hexagonal immune lattice, six antibodies with heavy + light chains,
+  targeted red core) in assets/oncqis-mark.svg + oncqis-mark-dark.svg (lighter lattice for dark). Header shows the mark
+  with a live-text "ONCQIS" wordmark in the logo's teal gradient and its tagline (CliniX-style). assets/oncqis-logo.png is
+  the owner's lockup, background removed and upscaled (palette PNG, 97 KB); oncqis-mark.png a 1024px raster.
+  build-www.sh copies assets/oncqis-*. The logo keeps its own teal/red: the plum rule covers UI accents, not the brand mark.
