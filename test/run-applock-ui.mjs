@@ -107,10 +107,10 @@ try {
   await fresh(BASE + "?applock=1");
   await ev(`window.SMD_APPLOCK.promptSetup({hospital:"AIIMS Delhi"}); return 1;`);
   await sleep(150);
-  okv(await ev(`return document.querySelectorAll("#smdApplock [data-m]").length;`), 1,
-    "institutional account: only PIN is offered (no native bridge here, no lock hidden)");
-  ok(await ev(`return !document.querySelector('#smdApplock [data-m="none"]');`) === true,
-    "\"No lock\" is never offered once a hospital is on file — the whole point of the gate");
+  okv(await ev(`return document.querySelectorAll("#smdApplock [data-m]").length;`), 2,
+    "institutional account: PIN and No lock (no native bridge here); the lock is optional for everyone");
+  ok(await ev(`return !!document.querySelector('#smdApplock [data-m="none"]');`) === true,
+    "\"No lock\" is offered even with a hospital on file (owner 2026-10-30: Face ID / PIN is optional)");
 
   /* ---------- 5. PIN set/verify round-trip + lockout ---------- */
   await fresh(BASE + "?applock=1");
@@ -311,7 +311,7 @@ try {
   okv(await ev(`return window.SMD_APPLOCK.configured();`), false, "...and did not force a method");
   await ev(`window.SMD_APPLOCK.manage("Apollo"); return 1;`);
   await sleep(300);
-  ok(await ev(`return !document.getElementById("salGrace");`) === true, "institutional account gets NO grace toggle (same rule as no-lock)");
+  ok(await ev(`return !!document.getElementById("salGrace");`) === true, "institutional account gets the grace toggle too (the lock is optional)");
   await ev(`window.SMD_APPLOCK.manage(""); return 1;`);
   await sleep(300);
   await ev(`document.getElementById("salGrace").click(); return 1;`);
@@ -388,7 +388,7 @@ try {
   await ev(`var s=document.getElementById("smdBootSplash"); if (s) s.parentNode.removeChild(s); return 1;`);
   await sleep(900);
   ok(await ev(`return !!document.querySelector('#smdApplock [data-m="pin"]');`) === true, "screen free: the forced chooser is up");
-  ok(await ev(`return !document.getElementById("salKeep");`) === true, "...with NO close (first-run shape, not Manage)");
+  ok(await ev(`return !!document.getElementById("salKeep");`) === true, "...and it can be skipped (the lock is optional)");
   okv(await ev(`return window.SMD_APPLOCK.isOn();`), false, "...even though the rollout flag is off (forcing is not flag-gated)");
   await ev(`window.SMD_ACCOUNT._emit(); window.SMD_ACCOUNT._emit(); return 1;`);
   await sleep(300);
