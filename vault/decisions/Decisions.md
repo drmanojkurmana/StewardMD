@@ -22,6 +22,17 @@ as a guide"; fixed papers compare like with like). Reset is refused while sync i
 so a reset would come back). Resets are limited to one in 3 months and 3 in 12 months (owner, same day). **Status.** On branch, not on the phone until build-www + native rebuild/OTA; D1 migration
 `prep-arena-worker/migrations/0006_prep_rank.sql` must be applied before rank works.
 
+## 2026-10-29 · ICU Overview layout C and no stripes or tints (owner: "is this not ai slop?", then "you select")
+
+**Decision.** Three Overview variants were rendered (A quiet list, B ranked list, C two panes on iPad); C is the default
+because it uses the iPad width and is A on a phone. ICU-wide: no coloured left stripes, no tinted alert or tile fills, no
+repeated category tags, section labels are headings, secondary actions are text, Specialty tools joins the FAB stack as
+an icon button (its pill covered "Add findings").
+**Why.** The alert cards encoded severity three times (stripe, tint, tag) and sat under three screens of tiles; that is
+antislop-ui's left-stripe ban and impeccable's card-scaffold and eyebrow bans.
+**Trade-off.** Layout change on the most-used ICU screen. `smd_icu_ov = "0"` restores the old Overview on a device.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild.
+
 ## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
 
 **Decision.** Applied as refinement, not redesign: same layout, palette and copy. Fixed what the skills' rules measure:
@@ -11964,3 +11975,23 @@ Owner screenshots: (1) dose calculator, OncoTree button and the oncology protoco
 - **No sideways pan**: `overflow-x: hidden`, `overscroll-behavior`, `touch-action: pan-y` on `#smdOpdEmr` and `#smdQueue` canvases; wide strips (tabs, chips, oncology matrix) keep their own horizontal scroll. NOTE the app runs `html { zoom: .95 }`, so `getBoundingClientRect` widths are 0.95x `clientWidth`; do not read that as an overflow in a test.
 - **Voice history**: `_inferHistory` (pure, on-device) ticks comorbidity Yes/No, writes details and current home drugs from the English transcript (negation aware, a drug the doctor is STARTING is not history, never overwrites a filled value). Runs after every cloud refine and on live ambient updates. Server prompt now asks for `homeMeds`, vitals and drug-implied ticks.
 - **iPhone NFC cannot be fixed over the air**: Android has `NfcPlugin.java`; iOS has NO NFC plugin, no `com.apple.developer.nfc.readersession.formats` entitlement and no `NFCReaderUsageDescription`, and WKWebView has no Web NFC. Needs a CoreNFC Capacitor plugin, the entitlement on the App ID and provisioning profile, and a native rebuild (Mac). Until then `smd-nfc.js` says so plainly and points at QR/StewardID.
+
+## 2026-10-29 - iPhone Ni-Key NFC: CoreNFC NfcPlugin, one system sheet per tap (branch worktree-ios-nfc-plugin)
+Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone NFC gap" entry above).
+- **`ios/App/App/NfcPlugin.swift`** (`Capacitor.Plugins.NfcPlugin`, registered in `MainViewController.capacitorDidLoad` like SmdDevice; listed in the App target's Sources in `project.pbxproj`). Same contract as `NfcPlugin.java`: `isAvailable` -> `{available, enabled, onDemand:true}`, `startScan`/`stopScan`, `writeTag({text,url})` -> `{success, uid, text, url, verified, readBack:{text,url}}`, `cancelWrite`, events `tagDiscovered {uid, formattedUid, text, url, records}`, `tagWritten`, and iOS-only `scanEnded {reason: tag|cancelled|timeout|error, message}`.
+- **NFCTagReaderSession for reads too, not NFCNDEFReaderSession.** Only a tag session gives the chip serial, and `smd-nfc.js isEmptyTag()` needs it (both bridges echo the serial into `text` on a blank tag) and the empty-tag sheet shows it. Polls ISO 14443 + ISO 15693 (NTAG/Ultralight, Type 4, ICODE). No FeliCa (would need system codes in Info.plist).
+- **Write = Text record + URI record, then `readNDEF` read-back**; `verified` is the comparison, and smd-nfc.js rejects `WRITE_VERIFICATION_FAILED` on a mismatch. Read-only, unformatted and too-small tags fail with a sentence the sheet shows.
+- **Entitlement `com.apple.developer.nfc.readersession.formats` = `[TAG]` only.** `NDEF` is NOT listed: App Store Connect rejects it (ITMS-90778 "NDEF is disallowed") and TAG already covers NDEF sessions. Info.plist: `NFCReaderUsageDescription` + `com.apple.developer.nfc.readersession.iso7816.select-identifiers = [D2760000850101]` (the NFC Forum NDEF Type 4 application, so Type 4 tags are read instead of failing the session).
+- **iPhone has no background reader.** `smd-nfc.js` treats native+iOS as on-demand: `initAppListener` does NOT scan at launch (it would pop the sheet on every app open); `startScan` re-arms on every call (no `isListening` latch, which is reset by `scanEnded`/`tagDiscovered`) and refuses with `NEEDS_USER_TAP` when there is no user gesture (`navigator.userActivation`) unless the caller passes `{userInitiated:true}`. New `options.onEnd` resets the New patient sheet's button (and the opd.html walk-in button) on Cancel/timeout. So on iPhone a tap on a folder is read from the Read NFC button, not by just holding it to the phone. Android is unchanged.
+- `IOS_NFC_MSG` stays, now only for an iPhone store build without the plugin (OTA cannot add native code).
+- Signing: App ID `in.stewardmd.app` needs the **NFC Tag Reading** capability; with Automatic signing the dev and App Store profiles are regenerated by Xcode (`-allowProvisioningUpdates`) or must be regenerated by hand in the portal.
+- Tests: `test/smd-nfc-ios.test.mjs` (13), `test/run-nfc-ui.mjs` section D (iPhone flow; the script now resolves the repo from its own path instead of a hard-coded home dir). The old `?v=nfc-2` pin in `opd-nfc-barcode.test.mjs` was already failing on main (index ships `nfc2-2`) and is now token-agnostic.
+
+## 2026-10-30 - Startup: original screen kept, only the jank removed
+- The original boot splash design stays exactly as it was (owner rejected a redesign). Only timing changed.
+- Later opens no longer show a blank glow for 700 ms (`sbs-blank` dropped): the original screen is visible from the
+  first frame and held at least 700 ms (`MIN`), first open keeps its 3 s sequence. `smd_splash_fast="0"` still reverts.
+- Face ID at launch resigned the scene and the iOS privacy blur replaced the splash with a grey sheet. JS now calls
+  `SmdDevice.setBootSplash({up})`; `SceneDelegate.sceneWillResignActive` skips the cover while it is up (20 s native
+  expiry, cleared in `reallyFinish`). Android method is a no-op. Needs a native rebuild.
+- Splash `ready()` also waits for the Material Symbols font (preloaded) so icons never pop in as text.

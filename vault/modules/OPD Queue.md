@@ -41,6 +41,20 @@ a MECHANISM test proving a source-less `openProfile` defers to GHIS, run against
 unlocked on this device -> Start toasts "Unlock your Shared Clinic" and opens `SMD_SHARED` instead of
 the assessment. Different cause, same "Start sent me somewhere else" symptom.
 
+## Ni-Key NFC file tags (Android + iPhone)
+`smd-nfc.js` (window.SMD_NFC / NiKey) drives `Capacitor.Plugins.NfcPlugin`: Android
+`android/app/src/main/java/in/stewardmd/app/NfcPlugin.java`, iPhone `ios/App/App/NfcPlugin.swift` (CoreNFC,
+2026-10-29). Readers: New patient sheet "Ni-Key: Read NFC Tag" (`patient-register.js` read-nfc), the done
+card's "Write NFC Tag" (`writeNfc`, Text + /opd?uid= deep link, read-back verified), the empty-tag sheet
+(`showEmptyTagPrompt`) and the app-wide tap router in index.html (`initAppListener`).
+- **iPhone is on-demand.** Every scan or write opens the system NFC sheet for one tag. No launch-time
+  listener (`initAppListener` returns `{listening:false, onDemand:true}`), so a folder tap is read from the
+  button; scans without a user gesture reject `NEEDS_USER_TAP`. Android keeps foreground reader mode.
+- Needs a native build with the NFC Tag Reading capability on the App ID (entitlement `formats = [TAG]`).
+  An older iPhone store build has no plugin and shows "NFC is not available in the iPhone app yet".
+- Tests: `test/smd-nfc.test.mjs`, `test/smd-nfc-ios.test.mjs`, `test/opd-nfc-barcode.test.mjs`, `test/run-nfc-ui.mjs`.
+- Decision: Decisions.md 2026-10-29 "iPhone Ni-Key NFC".
+
 ## Flags
 `smd_opd_queue`, `smd_opd_emr` (EMR overlay), `smd_opd_emr_write` (+ server `QUEUE_EMR_WRITE=1`),
 `smd_opd_maik` (localStorage-only kill switch, not in queue-flags DEFS), `smd_opd_wp` ("0" restores

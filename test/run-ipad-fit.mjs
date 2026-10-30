@@ -26,7 +26,7 @@ const SIZES = FOLD
 const SHOT = FOLD ? ["cover", "inner-l"] : ["ipad-p", "pro-l"];
 const port = 9300 + Math.floor(Math.random() * 600);
 const chrome = spawn("/opt/pw-browsers/chromium", ["--headless=new", "--no-sandbox", "--disable-gpu", "--hide-scrollbars", "--mute-audio", ...(process.env.LEGACY ? ["--disable-blink-features=StandardizedBrowserZoom"] : []), `--remote-debugging-port=${port}`, `--user-data-dir=/tmp/ipad-${port}`, "about:blank"], { stdio: "ignore" });
-let tabs; for (let i = 0; i < 60; i++) { try { tabs = await (await fetch(`http://127.0.0.1:${port}/json`)).json(); if (tabs.length) break; } catch {} await sleep(100); }
+let tabs; for (let i = 0; i < 300; i++) { try { tabs = await (await fetch(`http://127.0.0.1:${port}/json`)).json(); if (tabs.length) break; } catch {} await sleep(100); }
 const ws = new WebSocket(tabs.find((t) => t.type === "page").webSocketDebuggerUrl);
 await new Promise((r) => (ws.onopen = r));
 let id = 0; const pend = new Map(); let errs = [];

@@ -211,8 +211,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // cover goes on top of everything as the scene resigns active and comes off on EVERY activation,
     // so it can never be left stuck. Found again by tag; the guard stops a double cover.
     static let privacyCoverTag = 0x534D_4450   // "SMDP"
+    // Set by SmdDevice.setBootSplash while the web boot splash covers the whole app (expires by itself).
+    // Face ID at launch resigns the scene; with the splash up there is nothing to hide, so no grey cover.
+    static var bootSplashUntil: Date? = nil
 
     func sceneWillResignActive(_ scene: UIScene) {
+        if let until = SceneDelegate.bootSplashUntil, Date() < until { return }
         guard let window = window, window.viewWithTag(SceneDelegate.privacyCoverTag) == nil else { return }
         // Thickest of the adaptive system materials: nothing underneath should be readable.
         let cover = UIVisualEffectView(effect: UIBlurEffect(style: .systemThickMaterial))

@@ -1,14 +1,17 @@
-/* SCRATCH (not committed): NFC walk-in / follow-up / empty-tag browser verification.
+/* NFC walk-in / follow-up / empty-tag browser verification, plus the iPhone on-demand flow (D).
  * Real headless Chrome + CDP against the REAL smd-nfc.js + patient-register.js.
- *   node /tmp/run-nfc-ui.mjs
+ *   node test/run-nfc-ui.mjs
  */
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
-import { readFileSync } from "node:fs";
+import { readFileSync, mkdtempSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = "/Users/diwakarkumar/Developer/StewardMD/.claude/worktrees/whatsapp-bugs-atoz";
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PORT = 8817, DBG = 9417;
-const userDir = "/tmp/nfc-ui-chrome";
+const userDir = mkdtempSync(path.join(tmpdir(), "nfc-ui-chrome-"));
 const BASE = `http://localhost:${PORT}/`;
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
@@ -108,6 +111,40 @@ try {
   ok(await waitFor(`return document.getElementById("prWriteNfc").textContent;`, "Could not write the tag. Try again."), "a failed write says so");
   ok(await ev(`return document.getElementById("prWriteNfc").disabled;`) === false, "the button stays retryable after failure");
   await ev(`window.Capacitor.Plugins.NfcPlugin.writeTag = function(o){ window.__written.push(o); return Promise.resolve({success:true}); }; return 1;`);
+
+  // ---- D. iPhone (CoreNFC NfcPlugin): one system sheet per tap, none at launch ----
+  await ev(`
+    window.__ios = { start: 0, listeners: {} };
+    window.Capacitor = { getPlatform: function(){ return "ios"; }, Plugins: { NfcPlugin: {
+      isAvailable: function(){ return Promise.resolve({available:true, enabled:true, onDemand:true}); },
+      startScan: function(){ window.__ios.start++; return Promise.resolve({status:"listening"}); },
+      stopScan: function(){ return Promise.resolve({status:"stopped"}); },
+      writeTag: function(o){ window.__written.push(o); return Promise.resolve({success:true, uid:"04E5", text:o.text, url:o.url, verified:true, readBack:{text:o.text, url:o.url}}); },
+      addListener: function(evt, cb){ window.__ios.listeners[evt] = cb; return Promise.resolve({remove:function(){ if (window.__ios.listeners[evt] === cb) delete window.__ios.listeners[evt]; }}); }
+    }}};
+    window.SMD_NFC.stopScan();
+    window.__iosBoot = null;
+    window.SMD_NFC.initAppListener({ onUhid: function(){} }).then(function(r){ window.__iosBoot = r; });
+    return 1;`);
+  ok(await waitFor(`return window.__iosBoot && window.__iosBoot.onDemand === true && window.__ios.start === 0;`, true), "iPhone: app launch does not open the NFC sheet");
+  await ev(`window.SMD_PATIENTREG.open({ mode: "native", submit: function(){ return Promise.resolve({ ok: true, mrn: "SMD-I-4" }); } }); return 1;`);
+  ok(await waitFor(`return !!document.querySelector('[data-a="read-nfc"]');`, true), "iPhone: New patient sheet shows Ni-Key: Read NFC Tag");
+  await ev(`document.querySelector('[data-a="read-nfc"]').click(); return 1;`);
+  ok(await waitFor(`return window.__ios.start;`, 1), "iPhone: tapping Read NFC Tag opens the sheet");
+  ok(await waitFor(`return typeof window.__ios.listeners.scanEnded;`, "function"), "iPhone: the sheet's close is listened for");
+  await ev(`window.__ios.listeners.scanEnded({reason:"cancelled", message:"NFC scan cancelled."}); return 1;`);
+  ok(await waitFor(`var b=document.querySelector('[data-a="read-nfc"]'); return !b.disabled && b.textContent.indexOf("Ni-Key: Read NFC Tag") !== -1;`, true), "iPhone: Cancel on the sheet resets the button");
+  await ev(`document.querySelector('[data-a="read-nfc"]').click(); return 1;`);
+  ok(await waitFor(`return window.__ios.start;`, 2), "iPhone: a second tap opens the sheet again");
+  await ev(`window.__ios.listeners.tagDiscovered({uid:"04E5", formattedUid:"04:E5", text:"SMD-I-77", url:"https://stewardmd.in/opd?uid=SMD-I-77"}); return 1;`);
+  ok(await waitFor(`return document.querySelector('[data-a="read-nfc"]').textContent.indexOf("SMD-I-77") !== -1;`, true), "iPhone: a read Ni-Key tag fills the sheet");
+  await ev(`document.getElementById("pr_name").value = "Iphone Test"; document.querySelector('[data-seg="gender"] .pr-segb[data-v="female"]').click(); document.getElementById("pr_ageYears").value = "33"; document.getElementById("pr_mobile").value = "9876500000"; document.querySelector('[data-a="save"]').click(); return 1;`);
+  ok(await waitFor(`return !!document.getElementById("prWriteNfc");`, true), "iPhone: adding the patient shows Write NFC Tag");
+  await ev(`window.__written = []; document.getElementById("prWriteNfc").click(); return 1;`);
+  ok(await waitFor(`return document.getElementById("prWriteNfc").textContent;`, "✓ NFC Tag Written!"), "iPhone: write + native read-back says NFC Tag Written!");
+  ok(await ev(`return window.__written.length === 1 && window.__written[0].url.indexOf("https://stewardmd.in/opd?uid=") === 0;`) === true, "iPhone: written payload is the id + /opd deep link");
+  await ev(`window.Capacitor.Plugins.NfcPlugin.writeTag = function(o){ return Promise.resolve({success:true, text:o.text, url:o.url, verified:false, readBack:{text:"x", url:""}}); }; document.getElementById("prWriteNfc").click(); return 1;`);
+  ok(await waitFor(`return document.getElementById("prWriteNfc").textContent;`, "Could not write the tag. Try again."), "iPhone: a failed read-back is reported, not hidden");
 
   // ---- C. opd.html loads clean with the new code ----
   const errors = [];

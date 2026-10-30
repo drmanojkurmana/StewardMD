@@ -1777,7 +1777,7 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - **NEET-SS Oncology recall module (2026-10-28):** the owner's recall PDF (Part I oncology 46, Part II general medicine and statistics 20; Part III is 15 fragments with no usable stem, Part IV an index) is published through Author > Import MCQs, not as a bank overlay (an `iniss2` overlay was built and removed: it needed an R2 upload from a Mac and phantom-counted 46 questions). Recall text never enters git (public repo, same rule as PYQ).
 - **Custom prompt (2026-10-28):** the Import screen builds the prompt from exam (7 profile ids), subject, topic, count (10 to 40) and difficulty (`promptFor`), with "Copy the prompt", "Open ChatGPT" (prefilled `?q=`), "Open Gemini" (prompt copied first) and Share. The prompt is written so any LLM answers at once with one code block of JSON (no questions back, no intro, no tools, a validity and answer-key self-check at the end, explanation rules: 2 to 4 sentences with mechanism and take-home, `why_wrong` per option). The reply comes back pasted or as a .json/.txt file; the template carries `exam`, `subject`, `topic` so the module name defaults to the topic. The convert prompt (`prompt()`) uses the same reply rules for an existing PDF.
 
-## Study tools and revision timetable (2026-10-30, prep98)
+## Study tools and revision timetable (2026-10-30, prep99)
 Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Decisions]] 2026-10-30.
 - **Files:** `prep-tools.js` + `prep-tools.css` (`window.PREP_TOOLS`, acts `x-*`, flag `smd_prep_tools`, default ON,
   `?tools=0` off) and `prep-timetable.js` + `prep-timetable.css` (`window.PREP_TT`, acts `tt-*`, flag `smd_prep_tt`,
