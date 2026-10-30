@@ -12006,3 +12006,10 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
 - Shared Clinic header: the title-centering spacer reused the bordered `.sc-ic` class and drew an empty circle; hidden.
 - Sweep method: open every `window.*.open()` module at 390x844 (liquid appearance) and flag vertical scrollers with
   horizontal overflow. ABG's spectrum grid is the only hit and scrolls sideways on purpose.
+
+## 2026-10-30 - Startup: logo intro + welcome-back screen on every signed-in open, 2.5s
+- Owner: "I need start up to have both logo intro plus user intro", "total 2.5sec, 1.5sec intro, 1sec user intro".
+- The 2026-10-03 fast later-open pace lifted the splash at 0.7s, before screen 2 (BEAT) ever showed, so signed-in users
+  only saw the logo. The personalised splash script now clears `__smdBootFast` / `sbs-fast` and sets `__smdBootPersonal`.
+- `BEAT` 1560 -> 1500 (screen 1 for 1.5s), hide-loop `MIN` 2500 for personal opens (screen 2 for 1s), counted from when
+  the frame is seen. Guests and signed-out returning opens keep the fast path; first open keeps 3s.
