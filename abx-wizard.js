@@ -137,7 +137,7 @@
     var box = el("div", "abxw-find");
     var inp = el("input", "abxw-find-input"); inp.type = "search"; inp.setAttribute("autocomplete", "off");
     inp.setAttribute("data-search", "1"); inp.setAttribute("aria-label", "Search findings");
-    inp.placeholder = "Search findings… cough, rash, altered sensorium"; inp.value = W.query || "";
+    inp.placeholder = "Search findings… cough, rash, fever"; inp.value = W.query || "";
     box.appendChild(inp);
     var res = el("div", "abxw-find-results"); res.id = "abxwFindResults"; res.innerHTML = findResultsHTML();
     box.appendChild(res);

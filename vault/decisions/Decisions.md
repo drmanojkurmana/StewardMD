@@ -11995,3 +11995,14 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   `SmdDevice.setBootSplash({up})`; `SceneDelegate.sceneWillResignActive` skips the cover while it is up (20 s native
   expiry, cleared in `reallyFinish`). Android method is a no-op. Needs a native rebuild.
 - Splash `ready()` also waits for the Material Symbols font (preloaded) so icons never pop in as text.
+
+## 2026-10-30 - Phone UI sweep: antibiotic header, sideways pan, icon font, spacer circle
+- Antibiotic engine (`abx-wizard.css`): the glass appearances painted `.abxw-head` as a boxed panel with zero side padding,
+  so the logo and Reset sat flush on its square edges. It is now a full-width top bar (bleeds over the 16px gutter, keeps
+  contents on the 16px margin). The text-size `zoom` on `.abxw-wrap` left a phantom scroll width (390 -> 411px), so the
+  screen dragged sideways and the step rail slid under the edges; `.abxw-scroll` is `overflow-x: hidden`.
+- `protocol-maker.css` named only 'Material Symbols Outlined' (not shipped), so My protocols showed "close", "add",
+  "science" as serif words. Rounded is first now, header icons 24px, header buttons 44px.
+- Shared Clinic header: the title-centering spacer reused the bordered `.sc-ic` class and drew an empty circle; hidden.
+- Sweep method: open every `window.*.open()` module at 390x844 (liquid appearance) and flag vertical scrollers with
+  horizontal overflow. ABG's spectrum grid is the only hit and scrolls sideways on purpose.

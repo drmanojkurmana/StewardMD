@@ -61,12 +61,12 @@
     });
   }
 
-  function renderLoading(msg) { var el = document.getElementById("smdShared"); if (el) el.innerHTML = '<div class="sc-top"><span class="sc-ic"></span><div class="sc-ttl">Shared Clinic</div><span class="sc-ic"></span></div><div class="sc-body"><div class="sc-empty">' + esc(msg || "Loading…") + "</div></div>"; }
+  function renderLoading(msg) { var el = document.getElementById("smdShared"); if (el) el.innerHTML = '<div class="sc-top"><span class="sc-ic" aria-hidden="true" style="visibility:hidden"></span><div class="sc-ttl">Shared Clinic</div><span class="sc-ic" aria-hidden="true" style="visibility:hidden"></span></div><div class="sc-body"><div class="sc-empty">' + esc(msg || "Loading…") + "</div></div>"; }
 
   function renderSetup() {
     var el = document.getElementById("smdShared"); if (!el) return;
     el.innerHTML =
-      '<div class="sc-top"><button class="sc-ic" data-sc="close" aria-label="Close">&#10005;</button><div class="sc-ttl">Shared Clinic</div><span class="sc-ic"></span></div>' +
+      '<div class="sc-top"><button class="sc-ic" data-sc="close" aria-label="Close">&#10005;</button><div class="sc-ttl">Shared Clinic</div><span class="sc-ic" aria-hidden="true" style="visibility:hidden"></span></div>' +
       '<div class="sc-body">' +
         '<div class="sc-card"><div class="sc-card-t">Create a clinic</div>' +
           '<div class="sc-card-s">For a clinic or small hospital with no EMR. Patients + consults are shared across all your clinic devices, encrypted, through your clinic Google account.</div>' +
@@ -108,7 +108,7 @@
   function renderUnlock(cfg) {
     var el = document.getElementById("smdShared"); if (!el) return;
     el.innerHTML =
-      '<div class="sc-top"><button class="sc-ic" data-sc="close" aria-label="Close">&#10005;</button><div class="sc-ttl">' + esc(cfg.name || "Shared Clinic") + '</div><span class="sc-ic"></span></div>' +
+      '<div class="sc-top"><button class="sc-ic" data-sc="close" aria-label="Close">&#10005;</button><div class="sc-ttl">' + esc(cfg.name || "Shared Clinic") + '</div><span class="sc-ic" aria-hidden="true" style="visibility:hidden"></span></div>' +
       '<div class="sc-body"><div class="sc-card"><div class="sc-card-t">Unlock this clinic</div>' +
         '<div class="sc-card-s">Enter the clinic passphrase to open patients on this device.</div>' +
         '<form id="scUnlock" class="sc-form" style="margin-top:12px"><label class="sc-f"><span>Passphrase</span><input name="pw" type="password" autocomplete="off" required></label>' +
@@ -145,7 +145,7 @@
   function renderNew() {
     var el = document.getElementById("smdShared"); if (!el) return;
     el.innerHTML =
-      '<div class="sc-top"><button class="sc-ic" data-sc="list" aria-label="Back">&#8249;</button><div class="sc-ttl">New patient</div><span class="sc-ic"></span></div>' +
+      '<div class="sc-top"><button class="sc-ic" data-sc="list" aria-label="Back">&#8249;</button><div class="sc-ttl">New patient</div><span class="sc-ic" aria-hidden="true" style="visibility:hidden"></span></div>' +
       '<div class="sc-body"><form id="scForm" class="sc-form">' +
         '<label class="sc-f"><span>Name</span><input data-phi-input name="name" autocomplete="off" required></label>' +
         '<div class="sc-frow"><label class="sc-f"><span>Age</span><input name="age" inputmode="numeric"></label>' +
