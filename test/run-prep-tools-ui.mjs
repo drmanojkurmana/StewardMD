@@ -76,7 +76,7 @@ try {
     if (m.method === "Fetch.requestPaused") {
       const p = m.params, url = p.request.url;
       let status = 404, body = { error: "not-found" };
-      if (/\/api\/prep\/rank/.test(url)) {
+      if (/\/api\/prep\/stats\?rank=1/.test(url) || (/\/api\/prep\/stats$/.test(url) && /"kind":"rank"/.test(p.request.postData || ""))) {
         api.rank.push({ method: p.request.method, url, post: p.request.postData || null });
         const n = api.rankN; status = 200;
         body = n >= 20 ? { n, above: 4, same: 1, below: n - 5, min: 20, rank: 5, percentile: Math.round(((n - 5) + 0.5) / n * 100) } : { n, above: 2, same: 0, below: n - 2, min: 20, rank: null, percentile: null };
@@ -95,7 +95,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {}); await call("DOM.enable", {});
-  await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/stats*", requestStage: "Request" }, { urlPattern: "*/api/prep/rank*", requestStage: "Request" }] });
+  await call("Fetch.enable", { patterns: [{ urlPattern: "*/api/prep/stats*", requestStage: "Request" }] });
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.SMD_PREP_SETUP=false; window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; try{localStorage.setItem("smd_prep","1"); localStorage.setItem("smd_prep_stats","1");}catch(e){}` });
   await call("Page.navigate", { url: BASE });
@@ -238,7 +238,7 @@ try {
   await ev(`localStorage.setItem("smd_prep_stats", "0"); return 1;`);
   const full = await rk();
   ok(/5\s*of 240/.test(full) && /98\s*percentile/.test(full) && /not an all-India rank/.test(full) && /compared, not added/.test(full), "240 attempts: rank 5 of 240, 98th percentile, labelled as PrepNucleus students only: " + full);
-  ok(api.rank[1].method === "GET" && /key=neet-pg%3Agrand&pct=51.5/.test(api.rank[1].url), "not opted in: read only (GET) " + api.rank[1].url);
+  ok(api.rank[1].method === "GET" && /rank=1&key=neet-pg%3Agrand&pct=51.5/.test(api.rank[1].url), "not opted in: read only (GET) " + api.rank[1].url);
   await ev(`localStorage.setItem("smd_prep_stats", "1"); return 1;`);
 
   ok(!DASH.test(await screenText()), "no em or en dash");

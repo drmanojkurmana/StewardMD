@@ -1790,7 +1790,8 @@ Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Deci
 - **How others answered:** `GET /api/prep/stats?pct=1&ids=` (public, 60 ids, cached 30 min) returns an item only with
   `PCT_MIN_N` = 30 answers. Practice answers are POSTed (type `practice`, no id) only with `smd_prep_stats = "1"`, the
   same opt-in as Tests 2; the switch is also in **Progress and data** (You). Nothing is estimated or seeded.
-- **Rank:** `functions/api/prep/rank.js`, D1 `prep_score_hist` (k, bin = pct x 10, n); apply
+- **Rank:** `functions/_prep-rank.js`, served by `/api/prep/stats` (`?rank=1`, POST `kind: "rank"`; one public door for the
+  security scan's allowlist), D1 `prep_score_hist` (k, bin = pct x 10, n); apply
   `prep-arena-worker/migrations/0006_prep_rank.sql` first. Key `<profile>:<type>[:<paper>]`. Opted in: POST adds the
   score; else GET reads. `rank`/`percentile` null under `MIN_N` = 20. Shown in the Tests 2 result's Analysis tab.
 - **Setup sheet filters:** New or repeat gains "With my note" and "Marked in tests" (hidden when the pool has none).

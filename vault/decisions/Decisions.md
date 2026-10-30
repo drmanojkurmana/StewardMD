@@ -12,7 +12,7 @@ a note on any question with a notebook, "% of users who chose each option", rank
 filters and reset progress. Built as `prep-tools.js` (flag `smd_prep_tools`) and `prep-timetable.js` (flag `smd_prep_tt`),
 both default ON, `?tools=0` / `?tt=0` off. Rank reverses the 2026-10-10 Tests 2 line "never a rank or percentile": it is now
 shown as a rank among PrepNucleus students (never "all-India"), from an anonymous score histogram
-(`/api/prep/rank`), and only once 20 attempts exist. **Peer percentages: the owner asked for fake numbers until users
+(`/api/prep/stats?rank=1`, `functions/_prep-rank.js`), and only once 20 attempts exist. **Peer percentages: the owner asked for fake numbers until users
 arrive; not done.** The bars come from real anonymous answers (`/api/prep/stats?pct=1`) and the server returns an item
 only after 30 answers, so they appear on their own as students answer and nothing invented is ever shown (same rule as
 "every line true", 2026-10-06 nudges). **Why.** Invented statistics shown as other students' answers would mislead

@@ -939,7 +939,7 @@
   }
 
   /* ---------- rank and percentile among PrepNucleus students (owner 2026-10-30, reverses "never a rank") ----------
-     functions/api/prep/rank.js keeps an anonymous score histogram per test key. A student who opted in to anonymous
+     /api/prep/stats (functions/_prep-rank.js) keeps an anonymous score histogram per test key. A student who opted in to anonymous
      statistics adds this attempt's percentage (one POST, no id of any kind); everyone else only reads where the score
      falls. Nothing shows a rank until MIN_N attempts exist (the server answers rank: null), and a re-run of a daily test
      already counted today is read, never added. */
@@ -952,10 +952,10 @@
   function rankFetch(r, rec, p, t) {
     var v = rankPct(rec.score); if (v == null || !G.fetch) return;
     var key = rankKey(p, t), add = statsChoice() === "1" && !(t.idem && t.dailyFresh === false);
-    var api = G.SMD_PREP_RANK_API || "/api/prep/rank";
+    var api = G.SMD_PREP_STATS_API || "/api/prep/stats";
     t.rank = { state: "load" };
-    var q = add ? G.fetch(api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, key: key, pct: v }), credentials: "omit" })
-      : G.fetch(api + "?key=" + encodeURIComponent(key) + "&pct=" + v, { credentials: "omit" });
+    var q = add ? G.fetch(api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, kind: "rank", key: key, pct: v }), credentials: "omit" })
+      : G.fetch(api + "?rank=1&key=" + encodeURIComponent(key) + "&pct=" + v, { credentials: "omit" });
     q.then(function (res) { return res.ok ? res.json() : null; }).then(function (j) {
       t.rank = j && typeof j.n === "number" ? { state: "ok", d: j, added: add } : { state: "off" };
       if (H && H.run_ && H.run_() === r) H.rerender();

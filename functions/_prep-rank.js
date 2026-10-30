@@ -1,10 +1,12 @@
-/* /api/prep/rank - rank and percentile for a PrepNucleus test, among PrepNucleus students (owner 2026-10-30).
+/* Rank and percentile for a PrepNucleus test, among PrepNucleus students (owner 2026-10-30). Not a route of its own:
+ * functions/api/prep/stats.js serves it (?rank=1 and POST kind "rank"), so the app's anonymous counters stay one
+ * public door (scripts/security-scan.mjs PUBLIC_ALLOWLIST).
  *
  * The store is a histogram: per test key, how many attempts scored each 0.1% bin. No sign-in, no user, device or
  * attempt id, no timestamp: a bin count cannot be traced to a person.
- *   POST { v: 1, key, pct }  adds one attempt (only sent when the student opted in to anonymous statistics),
+ *   POST { v: 1, kind: "rank", key, pct }  adds one attempt (only sent when the student opted in to anonymous statistics),
  *                            then answers like GET.
- *   GET  ?key=&pct=          reads only: { n, above, same, below, rank, percentile, min }. rank and percentile are
+ *   GET  ?rank=1&key=&pct=   reads only: { n, above, same, below, rank, percentile, min }. rank and percentile are
  *                            null until n >= MIN_N, so the app says "after N students" instead of a thin number.
  * key = "<profile>:<test type>[:<paper id>]" (prep-tests.js rankKey). pct = marks / max x 100, -100..100.
  * Storage: D1 PREP_STATS_DB (falls back to PREP_ARENA_DB), table prep_score_hist (migrations/0006_prep_rank.sql).
@@ -51,15 +53,15 @@ async function limited(env, request) {
   return false;
 }
 
-export async function onRequestGet({ request, env }) {
+export async function rankGet(request, env) {
   const u = new URL(request.url), k = u.searchParams.get("key"), bin = binOf(u.searchParams.get("pct"));
   if (!validKey(k) || bin === null) return json({ error: "bad-request" }, 400);
   const db = dbOf(env); if (!db) return json({ error: "not-configured" }, 503);
   try { return json(standing(await rows(db, k), bin), 200, "public, max-age=300"); } catch (e) { return json({ error: "db-error" }, 503); }
 }
 
-export async function onRequestPost({ request, env }) {
-  let b = null; try { b = await request.json(); } catch (e) {}
+// b = the parsed POST body (stats.js reads it once and hands a { kind: "rank" } body here).
+export async function rankPost(b, request, env) {
   const bin = b ? binOf(b.pct) : null;
   if (!b || b.v !== 1 || !validKey(b.key) || bin === null) return json({ error: "bad-request" }, 400);
   if (await limited(env, request)) return json({ error: "rate-limited" }, 429);

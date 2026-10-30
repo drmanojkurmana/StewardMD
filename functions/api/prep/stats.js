@@ -8,6 +8,8 @@
  *
  * GET: read-only aggregate statistics. Owner/admin gated (ownerOK) or published snapshot (?snapshot=1).
  *   Query params: ?item_id=<id> for a single item, or ?exam=<exam>&limit=<1..500>&offset=<n> for aggregates.
+ * Rank (functions/_prep-rank.js): GET ?rank=1&key=&pct= and POST { v: 1, kind: "rank", key, pct }, an anonymous
+ *   score histogram per test; same no-identity rule as the item counters.
  * GET ?pct=1&ids=a,b,c (public, up to PCT_MAX_IDS): "how others answered" for the app. Only items with at least
  *   PCT_MIN_N answers are returned, as { n, o: [% per option] }; an item under that is left out, so the app shows
  *   nothing until real answers exist. Counts only, never a row per student.
@@ -17,6 +19,7 @@
  *   o0..o3 (counts of option choices), updated (IST date). "wrong" is derived as n - right - blank.
  */
 import { ownerOK } from "../../_adminauth.js";
+import { rankGet, rankPost } from "../../_prep-rank.js";
 
 const ID_RE = /^[A-Za-z0-9_.:-]{2,100}$/;
 export const EXAMS = {
@@ -66,6 +69,7 @@ const SQL = "INSERT INTO prep_item_stats (item_id, exam, n, right, blank, secs, 
 export async function onRequestPost({ request, env }) {
   if (await rateLimited(env, request)) return json({ error: "rate-limited" }, 429);
   let b = null; try { b = await request.json(); } catch (e) {}
+  if (b && b.kind === "rank") return rankPost(b, request, env);
   const x = clean(b);
   if (!x) return json({ error: "bad-request" }, 400);
 
@@ -182,6 +186,7 @@ async function pctGet(url, env) {
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
   if (url.searchParams.get("pct") === "1") return pctGet(url, env);
+  if (url.searchParams.get("rank") === "1") return rankGet(request, env);
   const isSnapshot = url.searchParams.get("snapshot") === "1";
   const isOwner = await ownerOK(request, env);
   if (!isSnapshot && !isOwner) return json({ error: "forbidden" }, 403);

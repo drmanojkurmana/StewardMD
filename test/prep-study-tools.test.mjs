@@ -15,7 +15,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import * as Stats from "../functions/api/prep/stats.js";
-import * as Rank from "../functions/api/prep/rank.js";
+import * as Rank from "../functions/_prep-rank.js";
 
 const require = createRequire(import.meta.url);
 const T = require("../prep-tools.js");
@@ -114,6 +114,19 @@ test("stats pct GET answers only items with enough answers", async () => {
   const j = await res.json();
   assert.deepEqual(Object.keys(j.items), ["q1"]);
   assert.deepEqual(j.items.q1.o, [67, 33, 0, 0]);
+});
+
+test("rank is served by the stats door, not a route of its own", async () => {
+  const rows = [{ bin: 900, n: 30 }];
+  const db = { prepare: () => ({ bind: () => ({ all: async () => ({ results: rows }), run: async () => ({}) }) }) };
+  const g = await Stats.onRequestGet({ request: new Request("https://x/api/prep/stats?rank=1&key=neet-pg:grand&pct=50"), env: { PREP_STATS_DB: db } });
+  assert.equal(g.status, 200);
+  const j = await g.json();
+  assert.equal(j.n, 30); assert.equal(j.rank, 31); assert.equal(j.percentile, 0);
+  const p = await Stats.onRequestPost({ request: new Request("https://x/api/prep/stats", { method: "POST", body: JSON.stringify({ v: 1, kind: "rank", key: "neet-pg:grand", pct: 95 }) }), env: { PREP_STATS_DB: db } });
+  assert.equal(p.status, 200);
+  const bad = await Stats.onRequestPost({ request: new Request("https://x/api/prep/stats", { method: "POST", body: JSON.stringify({ v: 1, kind: "rank", key: "bad key", pct: 95 }) }), env: { PREP_STATS_DB: db } });
+  assert.equal(bad.status, 400);
 });
 
 test("rank: standing from the histogram", () => {
