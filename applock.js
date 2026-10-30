@@ -249,20 +249,21 @@
       }
       var rows = opt("pin", "keypad", "Set a PIN", "A 4–6 digit code, works on any device");
       if (bioAvailable) rows += opt("biometric", "fingerprint", "Face ID / Touch ID", "Fastest, no code to remember");
-      if (!isInstitutional) rows += opt("none", "warn", "No lock, open automatically", "Anyone with this phone opens your patient data. Personal devices only.");
+      rows += opt("none", "warn", "No lock, open automatically", "Anyone with this phone opens your patient data. Your choice, change it any time from Account.");
       el.innerHTML =
         '<div class="smdal-card">' +
           '<div class="smdal-h">Lock StewardMD</div>' +
-          '<div class="smdal-sub">Choose how to open the app on this device.' + (isInstitutional ? " Your profile has a hospital on file, so a PIN or Face ID/Touch ID is required." : " You can change this later from Account.") + '</div>' +
+          '<div class="smdal-sub">Choose how to open the app on this device.' + (isInstitutional ? " A PIN or Face ID/Touch ID is recommended on a hospital device. It is your choice, and you can change it later from Account." : " This is optional. You can change it later from Account.") + '</div>' +
           '<div class="smdal-opts">' + rows + '</div>' +
           // grace is the same own-risk class as "no lock": personal devices only, off by default
-          (isInstitutional ? "" : '<label class="smdal-chk"><input type="checkbox" id="salGrace"' + (graceOn() ? " checked" : "") + '><span>Don\'t ask again if I reopen the app within 2 hours</span></label>') +
-          (_fromManage ? '<button class="smdal-ghost" id="salKeep">' + (configured() ? "Keep current setting" : "Not now") + '</button>' : "") +
+          ('<label class="smdal-chk"><input type="checkbox" id="salGrace"' + (graceOn() ? " checked" : "") + '><span>Don\'t ask again if I reopen the app within 2 hours</span></label>') +
+          '<button class="smdal-ghost" id="salKeep">' + (configured() ? "Keep current setting" : "Skip, no lock for now") + '</button>' +
         '</div>';
       var g = el.querySelector("#salGrace");
       if (g) g.onchange = function () { lset(K_GRACE, g.checked ? "2h" : "0"); };
       var keep = el.querySelector("#salKeep");
-      if (keep) keep.onclick = closeOverlay;
+      // Optional (owner 2026-10-30): skipping the first-run chooser settles on "no lock" so it is not asked at every boot.
+      if (keep) keep.onclick = function () { if (!_fromManage && !configured()) lset(K_METHOD, "none"); closeOverlay(); };
       el.onclick = function (e) {
         var b = e.target.closest && e.target.closest("[data-m]"); if (!b) return;
         var m = b.getAttribute("data-m");
@@ -460,7 +461,7 @@
   // provider signed them in, at boot and on every later sign-in (SMD_ACCOUNT.onChange). Waits
   // until the app actually owns the screen (no sign-in / intro / verify gate, no boot splash, no
   // first-run profile form, which hands over via promptSetup() itself), then insists: the
-  // first-run chooser has no close. Institutional rule uses the profile's hospital.
+  // first-run chooser can be skipped (optional since 2026-10-30). Institutional rule uses the profile's hospital.
   var _ensuring = false;
   function screenBusy() {
     try {
