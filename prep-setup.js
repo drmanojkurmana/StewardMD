@@ -6,7 +6,8 @@
    The student chooses:
      Question type   All / Image-based / Clinical scenario / One-liner / Mix
      How many        10 / 20 / 30 / 50, or a custom count (stepper), never more than the pool
-     New or repeat   New / Incorrect before / Bookmarked / Due for review / All / Mix
+     New or repeat   New / Incorrect before / Bookmarked / Due for review / With my note / Marked in tests / All / Mix
+                     (the last two from prep-tools.js: store qn and mk; they show only when the pool has such items)
      Difficulty      Easy / Moderate / Hard / Very hard / Mix (item.d 1, 2, 3, 4; Mix keeps the pool's own spread)
      Mode            Learning Mode (each answer explained before the next) / Test Mode (marked at the end); two cards
      Timer           A switch, on by default; Each question (60 s by default, 30, 45, 60 to 100 s) or Whole set (exam
@@ -90,13 +91,15 @@
     if (v === "due") return !!c && c[3] <= ctx.today;
     if (v === "wrong") return wrongBefore(it, ctx, c);
     if (v === "bm") return !!(ctx && ctx.bm && ctx.bm[it.id]);
+    if (v === "nt") return !!(ctx && ctx.qn && ctx.qn[it.id]);
+    if (v === "mk") return !!(ctx && ctx.mk && ctx.mk[it.id]);
     return true;
   }
   // Very hard items carry vh: true in the bank files (d 3 there); the app counts them as level 4.
   function dOf(it) { return it.vh === true || it.d === 4 ? 4 : it.d === 1 || it.d === 3 ? it.d : 2; }
 
   var TYPES = [["all", "All"], ["img", "Image-based"], ["case", "Clinical scenario"], ["line", "One-liner"], ["mix", "Mix"]];
-  var SEENS = [["new", "New"], ["wrong", "Incorrect before"], ["bm", "Bookmarked"], ["due", "Due for review"], ["all", "All"], ["mix", "Mix"]];
+  var SEENS = [["new", "New"], ["wrong", "Incorrect before"], ["bm", "Bookmarked"], ["due", "Due for review"], ["nt", "With my note"], ["mk", "Marked in tests"], ["all", "All"], ["mix", "Mix"]];
   var DIFFS = [["1", "Easy"], ["2", "Moderate"], ["3", "Hard"], ["4", "Very hard"], ["mix", "Mix"]];
   var COUNTS = [10, 20, 30, 50], N_MAX = 200;
   /* Timer (owner 2026-10-10): on by default, a clock for every question, 60 s each; the student may go up to 100 s.
@@ -277,7 +280,7 @@
     L.forEach(function (l) { flat = flat.concat(l); });
     return core().diverseOrder(diversifySwap(pick(L, sel.n, dims, ctx, rnd), flat, ctx, rnd), rnd);
   }
-  var LABEL = { type: { img: "image-based", "case": "clinical scenario", line: "one-liner" }, seen: { "new": "new", wrong: "incorrect before", bm: "bookmarked", due: "due for review" }, d: { 1: "easy", 2: "moderate", 3: "hard", 4: "very hard" } };
+  var LABEL = { type: { img: "image-based", "case": "clinical scenario", line: "one-liner" }, seen: { "new": "new", wrong: "incorrect before", bm: "bookmarked", due: "due for review", nt: "with your note", mk: "marked in tests" }, d: { 1: "easy", 2: "moderate", 3: "hard", 4: "very hard" } };
   var RELAX = { type: "Question type: All", seen: "New or repeat: All", d: "Difficulty: Mix" };
   /* An empty pool: which one row to open up, the one that frees the most questions. { msg, dim } or null when the
      scope itself has nothing. */
@@ -368,7 +371,7 @@
     if (scope.n) sel.n = Math.max(1, Math.min(N_MAX, Math.round(scope.n)));
     S = { scope: scope, sel: sel, lists: null, host: host, prev: G.document.activeElement, loading: true, err: "", more: filtered(sel, scope.rows || {}) };
     var s = host.store();
-    S.ctx = { cards: s.cards || {}, today: host.today(), mt: s.mt || {}, bm: s.bm || {} };
+    S.ctx = { cards: s.cards || {}, today: host.today(), mt: s.mt || {}, bm: s.bm || {}, qn: s.qn || {}, mk: s.mk || {} };
     var el = G.document.createElement("div");
     el.className = "pn-sheet-wrap su-wrap"; el.id = "pnSetup";
     el.innerHTML = '<div class="pn-scrim" data-act="su-close"></div><section class="pn-sheet su-sheet" role="dialog" aria-modal="true" aria-labelledby="suT" tabindex="-1"></section>';
@@ -481,7 +484,7 @@
         '<button type="button" class="su-more" data-act="su-more" aria-expanded="' + !!S.more + '" aria-controls="suFilt"><span class="su-mt"><b>Filter questions</b><small>' + esc(filtSummary(sel, rows)) + '</small></span><span class="su-mchev" aria-hidden="true">' + svg("chev") + "</span></button>" +
         '<div class="su-filt" id="suFilt"' + (S.more ? "" : " hidden") + ">" + (S.more ?
           (rows.type === false ? "" : grp("type", "Question type", seg("su-type", "Question type", TYPES, sel.type, c.type))) +
-          (rows.seen === false ? "" : grp("seen", "New or repeat", seg("su-seen", "New or repeat", SEENS, sel.seen, c.seen))) +
+          (rows.seen === false ? "" : grp("seen", "New or repeat", seg("su-seen", "New or repeat", SEENS.filter(function (o) { return !((o[0] === "nt" || o[0] === "mk") && !c.seen[o[0]] && sel.seen !== o[0]); }), sel.seen, c.seen))) +
           grp("d", "Difficulty", seg("su-d", "Difficulty", DIFFS, sel.d, c.d)) : "") + "</div>";
       S.n = n;
     }
@@ -517,7 +520,7 @@
      instead (it explains which choice to relax). */
   function quick(scope, host) {
     var sel = recall(readMap(), scope.kind, scope.id), s = host.store();
-    var ctx = { cards: s.cards || {}, today: host.today(), mt: s.mt || {}, bm: s.bm || {} };
+    var ctx = { cards: s.cards || {}, today: host.today(), mt: s.mt || {}, bm: s.bm || {}, qn: s.qn || {}, mk: s.mk || {} };
     if (scope.rows && scope.rows.seen === false) sel.seen = "all";
     return Promise.resolve().then(scope.load).then(function (lists) {
       var list = draw((lists || []).map(function (l) { return (l || []).filter(Boolean); }), sel, ctx);

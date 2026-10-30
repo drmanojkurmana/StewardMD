@@ -166,3 +166,11 @@ CREATE TABLE IF NOT EXISTS prep_item_stats (
 );
 CREATE INDEX IF NOT EXISTS prep_item_stats_exam ON prep_item_stats (exam, n DESC);
 
+
+-- PrepNucleus test rank (migrations/0006_prep_rank.sql)
+CREATE TABLE IF NOT EXISTS prep_score_hist (
+  k TEXT NOT NULL,
+  bin INTEGER NOT NULL,
+  n INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (k, bin)
+);

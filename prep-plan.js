@@ -203,15 +203,17 @@
      in the weak modules (at least 5, else none). The list reads reviews, lesson, new questions, mock.
      -> { items: [{ k, n?, min, ... }], total, minutes }. Every total fits the minutes. */
   function planDay(o) {
-    var left = o.minutes, rev = null, lesson = null, mock = null, fresh = null, late = o.daysLeft != null && o.daysLeft <= 14;
+    var left = o.minutes, rev = null, lesson = null, mock = null, fresh = null, late = o.late || (o.daysLeft != null && o.daysLeft <= 14);
     if (o.due > 0) {
       var nr = Math.min(o.due, Math.floor(left / REV_MIN));
       if (nr > 0) { rev = { k: "rev", n: nr, min: Math.ceil(nr * REV_MIN) }; left -= rev.min; }
     }
+    // A timetable rest day (prep-timetable.js): due reviews only.
+    if (o.rest) { var r0 = [rev].filter(Boolean); return { items: r0, total: r0.reduce(function (a, it) { return a + it.min; }, 0), minutes: o.minutes }; }
     if (o.mock && (o.weekend || late) && left >= o.mock.min) { mock = { k: "mock", id: o.mock.id, label: o.mock.label, min: o.mock.min }; left -= mock.min; }
     if (o.lesson && !late && left >= o.lesson.minutes) { lesson = { k: "lsn", m: o.lesson.m, s: o.lesson.s, title: o.lesson.title, min: o.lesson.minutes }; if (o.lesson.k && o.lesson.k !== o.lesson.m) lesson.l = o.lesson.k; left -= lesson.min; }
     var per = o.perQ || 1, nn = Math.floor(left / per);
-    if (nn >= 5) { fresh = { k: "new", n: nn, min: Math.ceil(nn * per), mods: (o.weak || []).slice(0, 3) }; left -= fresh.min; }
+    if (nn >= 5) { fresh = { k: "new", n: nn, min: Math.ceil(nn * per), mods: (o.weak || []).slice(0, 3) }; if (o.tts) fresh.tts = o.tts; left -= fresh.min; }
     var items = [rev, lesson, fresh, mock].filter(Boolean);
     return { items: items, total: items.reduce(function (a, it) { return a + it.min; }, 0), minutes: o.minutes };
   }
@@ -270,6 +272,7 @@
   };
   function ic(n) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICO[n] + "</svg>"; }
   function esc(s) { return H.esc(s); }
+  function subjName(sid) { var sb = H.subjectById(sid); return sb ? H.tx(sb.name) : sid; }
   function store() { return H.store(); }
   function cfg() { var s = store(); if (!s.pl) s.pl = emptyCfg(); return s.pl; }
   function dayOf(ms) { return CORE.dayNum(ms, new Date(ms).getTimezoneOffset()); }
@@ -317,15 +320,19 @@
     var inExam = {}; order.forEach(function (id) { inExam[id] = 1; });
     var weak = H.pure.weakModules(s, 6).map(function (m) { return { s: H.subjectOfModule(m), m: m }; }).filter(function (x) { return x.s && inExam[x.s]; });
     var wd = new Date().getDay();
-    var p = planDay({ minutes: cfg().min || 30, due: dueNow(s, td), perQ: ex.sec / 60, lesson: pickLesson(lessons.filter(function (l) { return inExam[l.s]; }), order, s),
-      mock: mockFor(), weekend: wd === 0 || wd === 6, daysLeft: examDays(), weak: weak });
+    // Revision timetable (prep-timetable.js): a study day takes its new questions and lesson from that day's subject,
+    // a rest day keeps only reviews, the revision stretch plans like the last two weeks.
+    var TW = G.PREP_TT ? G.PREP_TT.today(H) : null, ttSid = TW && TW.k === "study" ? TW.sid : null;
+    if (ttSid) { order = [ttSid]; weak = TW.mods || []; }
+    var p = planDay({ minutes: cfg().min || 30, due: dueNow(s, td), perQ: ex.sec / 60, lesson: pickLesson(lessons.filter(function (l) { return ttSid ? l.s === ttSid : inExam[l.s]; }), order, s),
+      mock: mockFor(), weekend: wd === 0 || wd === 6, daysLeft: examDays(), weak: weak, rest: !!(TW && TW.k === "rest"), late: !!(TW && TW.k === "rev"), tts: ttSid });
     var due0 = dueNow(s, td), base = newToday(s, td), t0 = Date.now();
     p.items.forEach(function (it) { if (it.k === "rev") it.due0 = due0; if (it.k === "new") it.base = base; if (it.k === "mock") it.t0 = t0; });
     s.pt = { d: td, ex: ex.id, min: cfg().min || 30, items: p.items, total: p.total };   // the minutes step can be skipped: the plan was built on 30
     H.save();
     return s.pt;
   }
-  function planValid(s) { return s.pt && s.pt.d === H.today() && s.pt.ex === H.exam().id && s.pt.min === cfg().min; }
+  function planValid(s) { return s.pt && s.pt.d === H.today() && s.pt.ex === H.exam().id && s.pt.min === cfg().min; }   // a timetable change clears s.pt
 
   /* ---------- home ---------- */
   // The readiness card (2026-10-10 quiet pass): the score and the days to the exam as two figures, one bar for the score,
@@ -364,7 +371,7 @@
   }
   // Section heads: a small line above each, from real data (today's date for the plan).
   function eyebrow() { try { return new Date().toLocaleDateString("en-IN", { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
-  function planHead() { return '<p class="pn-eb" aria-hidden="true">' + esc(eyebrow()) + '</p><h2 class="pn-h">Today\'s plan</h2>'; }
+  function planHead() { return '<p class="pn-eb" aria-hidden="true">' + esc(eyebrow()) + '</p><h2 class="pn-h">Today\'s plan</h2>' + (G.PREP_TT ? G.PREP_TT.lineHtml(H) : ""); }
   // The item's one-line name: the plan row, the widget's "next" and the Live Activity.
   function itemTitle(it) {
     return it.k === "rev" ? "Review " + plural(it.n, "due question", "due questions") : it.k === "lsn" ? "Lesson: " + it.title :
@@ -374,7 +381,7 @@
     var t = itemTitle(it), sub, attrs = "";
     if (it.k === "rev") { sub = "About " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
     else if (it.k === "lsn") { sub = "About " + it.min + " min" + (it.l ? "" : ", then 3 quick questions"); attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"' + (it.l ? ' data-l="' + esc(it.l) + '"' : ""); }
-    else if (it.k === "new") { sub = (it.mods && it.mods.length ? "In your weakest modules" : "Where you left off") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
+    else if (it.k === "new") { sub = (it.tts ? "Timetable: " + subjName(it.tts) : it.mods && it.mods.length ? "In your weakest modules" : "Where you left off") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
     else { sub = "50 questions, " + it.min + " min, marked like the exam"; }
     var act = it.k === "lsn" ? "l-open" : "p-go";
     // The first task not yet done is the one filled control on home ("Up next").
@@ -480,6 +487,7 @@
     };
     if (pairs.length) return go2(pairs);
     var subs = H.subjectsOf(ex.id);
+    if (it.tts) { var one = H.subjectById(it.tts); if (one) subs = [one]; }
     Promise.all(subs.map(function (sb) { return H.loadIndex(sb.id); })).then(function () {
       var nx = H.pure.solveNext(subs, H.ix(), s, H.today(), ex.id);
       if (!nx) return H.toast("Every module is started. Open a subject below.");
