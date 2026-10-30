@@ -341,7 +341,7 @@
     if (t.hasAttribute("data-mode")) { W.mode = t.getAttribute("data-mode"); W.open = null; render(); return; }
     var act = t.getAttribute("data-act");
     if (act === "reset") { W.step = 1; W.findings = {}; W.open = null; W.locked = null; W.query = ""; _pendingResume = null; _resumeOffered = true; clearW(); render(); return; }
-    if (act === "close") { close(); return; }
+    if (act === "close") { if (W.fromDx) return backToDx(); close(); return; }
     if (act === "toclassic") { // switch to CLASSIC UI: set pref, close, reopen Start Case (now not intercepted)
       try { localStorage.setItem("smd_abx_wizard", "0"); } catch (x) {}
       close();
@@ -359,7 +359,7 @@
     // any real work below means the user chose to continue, not resume → dismiss
     // the pending offer so persistW() starts saving the CURRENT case again.
     if (_pendingResume) { _pendingResume = null; _resumeOffered = true; }
-    if (act === "back") { if (W.step > 1) { W.step--; render(); } else close(); return; }
+    if (act === "back") { if (W.step === 4 && W.fromDx) return backToDx(); if (W.step > 1) { W.step--; render(); } else close(); return; }
     if (act === "next") { next(); return; }
     if (act === "stepdot") { var s = +t.getAttribute("data-step"); if (s <= maxStep()) { W.step = s; render(); } return; }
     if (t.hasAttribute("data-group")) { var gn = t.getAttribute("data-group"); W.open = (W.open === gn ? null : gn); render();
@@ -856,13 +856,30 @@
     document.documentElement.classList.add("abxw-open");
     render();
   }
+  /* Open the wizard on a case that already has its findings (and, usually, a chosen diagnosis): Decision step for a
+   * diagnosis, Differential step without one. Replaces revealing the old classic page behind Home (owner 2026-10-30:
+   * "where did this old page come from, that is unaligned, delete it permanently"). fromDx: Back returns to Clinical Reasoning. */
+  function openCase(findings, id, fromDx) {
+    if (!root) build();
+    loadTS(); applyTS();
+    W.mode = "advanced"; W.findings = Object.assign({}, findings || {}); W.locked = id || null; W.step = id ? 4 : 3; W.open = null; W.query = "";
+    W.fromDx = !!fromDx; _pendingResume = null; _resumeOffered = true;
+    root.classList.add("on");
+    document.documentElement.classList.add("abxw-open");
+    render();
+    return true;
+  }
+  function backToDx() {
+    W.fromDx = false; close();
+    setTimeout(function () { try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (x) {} }, 60);
+  }
   function close() {
     restoreOutputArea(); // give the borrowed #outputArea back to the classic engine
     if (root) root.classList.remove("on");
     document.documentElement.classList.remove("abxw-open");
   }
   // _sevOf: read-only test seam (test/run-gate-v2.mjs checks every engine gate class has a severity)
-  window.ABX_WIZARD = { open: open, close: close, _sevOf: sevOf };
+  window.ABX_WIZARD = { open: open, openCase: openCase, close: close, _sevOf: sevOf };
 
   // DEFAULT ON (MARINAM wizard). Start Case opens the MARINAM wizard unless the
   // user has explicitly opted into the FULL classic engine (complete stewardship

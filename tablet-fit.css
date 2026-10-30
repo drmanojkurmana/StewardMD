@@ -64,3 +64,8 @@ html.smd-refined body > :not(#homeV2) #smdClinic .pc-empty[data-smd-empty] { max
   #myCasesPanel .mcp-body { padding-left: max(14px, calc(50% - 380px)); padding-right: max(14px, calc(50% - 380px)); box-sizing: border-box; }
   #myCasesPanel .mcp-header { padding-left: max(14px, calc(50% - 380px)); padding-right: max(14px, calc(50% - 380px)); box-sizing: border-box; }
 }
+
+/* The old classic page (long engine output, acknowledgements and the footer on one page) is never shown. Its markup stays
+   in the document only because the Start Case wizard borrows the engine's output area and the About box reads the
+   acknowledgements from it (home.js ackHTML). Owner 2026-10-30: "I don't want to see that old long page ... delete". */
+.shell, .shell.visible { display: none !important; }

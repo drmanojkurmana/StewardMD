@@ -105,20 +105,8 @@
   function restoreDecision(snap) {
     snap = snap || {};
     var findings = snap.findings || {};
-    var adv = document.getElementById("modeAdvancedCard");
-    var run = document.getElementById("runBtn");
-    if (adv || run) {
-      try {
-        var shell = document.querySelector(".shell"); if (shell) shell.style.display = "block";
-        if (adv) adv.click();
-        setTimeout(function () {
-          try { if (window.SMD_setFindings) window.SMD_setFindings(findings); } catch (x) {}
-          var r = document.getElementById("runBtn");
-          if (r) { r.click(); var oa = document.getElementById("outputArea"); if (oa && oa.scrollIntoView) try { oa.scrollIntoView({ behavior: "smooth", block: "start" }); } catch (x) {} }
-        }, adv ? 120 : 0);
-        return;
-      } catch (x) {}
-    }
+    // The classic form is gone from view (owner 2026-10-30): the case opens in the Start Case wizard, on the differential.
+    if (window.ABX_WIZARD && window.ABX_WIZARD.openCase) { try { window.ABX_WIZARD.openCase(findings, null, false); return; } catch (x) {} }
     // fallback — reopen in the reasoning workspace with the same findings
     if (window.DX && window.DX.restore) window.DX.restore({ findings: findings, caseId: snap.caseId });
   }

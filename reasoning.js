@@ -4149,28 +4149,15 @@
     if (syn[id]) {
       try {
         var vitals = {};
-        if (typeof window.SMD_restoreCase === "function") {
-          try { window.__smdDxReturn = true; } catch (e) {}   // BUG-10: remember we drilled in from Clinical Reasoning so Back can return
+        /* The case opens in the Start Case wizard (Decision step) with the findings entered here; Back returns to
+         * Clinical Reasoning. It no longer reveals the old classic page behind Home (owner 2026-10-30). */
+        if (window.ABX_WIZARD && typeof window.ABX_WIZARD.openCase === "function") {
           close();
-          window.SMD_restoreCase(S.f, id, vitals);
-          // reveal the classic stewardship output so the rendered #outputArea isn't left hidden
-          // → the "white screen" on select. Hide the v4 Home AND show the classic .shell
-          // (which is display:none until a classic case is started).
-          try { if (window.SMD_hideHome) SMD_hideHome(); } catch (e) {}
-          try { var _sh = document.querySelector(".shell"); if (_sh) _sh.style.display = "block"; } catch (e) {}
-          // bring the freshly-rendered stewardship page into view — without this the
-          // overlay closes but the output stays off-screen (the "click does nothing"
-          // bug). Mirrors the My-Cases restore path, which scrolls #outputArea.
-          try {
-            setTimeout(function () {
-              var oa = document.getElementById("outputArea");
-              if (oa && oa.innerHTML.trim()) oa.scrollIntoView({ behavior: "smooth", block: "start" });
-            }, 150);
-          } catch (e) {}
+          window.ABX_WIZARD.openCase(S.f, id, true);
           return;
         }
       } catch (e) {}
-      alert("Opening the disease page — stewardship module is loading.");
+      try { if (window.toast) window.toast("The stewardship page is still loading. Try again in a moment."); } catch (e) {}
       return;
     }
     // non-infectious -> open the management / treatment panel for this diagnosis
@@ -7627,10 +7614,8 @@
   function smdLiveSelect(id) {
     var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
     try {
-      if (window.SYNDROMES && window.SYNDROMES[id] && typeof window.SMD_restoreCase === "function") window.SMD_restoreCase(findings, id, {});
-      else if (typeof window.renderOutput === "function") window.renderOutput(findings, id);
+      if (window.SYNDROMES && window.SYNDROMES[id] && window.ABX_WIZARD && window.ABX_WIZARD.openCase) window.ABX_WIZARD.openCase(findings, id, false);
     } catch (e) {}
-    setTimeout(function () { var oa = document.getElementById("outputArea"); if (oa && oa.innerHTML.trim()) oa.scrollIntoView({ behavior: "smooth", block: "start" }); }, 150);
   }
   var _liveWired = false, _liveDeb = null;
   function smdEnsureLivePanel() {
