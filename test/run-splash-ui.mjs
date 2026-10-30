@@ -422,18 +422,14 @@ try {
   okv(await ev(`return localStorage.getItem("smd_boot_seen");`), "1", "finishing the first open records smd_boot_seen");
   await call("Page.navigate", { url: BASE });
   let fastSeen = false;   // the new document can lift its splash within ~100ms, so sample until seen
-  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-blank");`); }
-  okv(fastSeen, true, "later open: fast path, plain surface (no logo flash)");
-  okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "hidden",
-    "later open: the mark is not shown while it would only flash");
+  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && !e.classList.contains("sbs-blank");`); }
+  okv(fastSeen, true, "later open: fast path shows the original screen at once (no empty glow)");
+  okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "visible",
+    "later open: the mark is on screen from the first frame");
   let goneAt = 0;
   await ev(`var g=document.getElementById("accountGate"); if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");} return 1;`);
   for (let i = 0; i < 20 && !goneAt; i++) { await sleep(100); if (await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`)) goneAt = (i + 1) * 100; }
-  ok(goneAt > 0 && goneAt <= 700, `later open: the splash lifts as soon as the app is ready (${goneAt}ms), not after 3s`);
-  await call("Page.navigate", { url: BASE });
-  await sleep(900);
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || !e.classList.contains("sbs-blank");`), true,
-    "later open, slow boot: the mark appears after 700ms so it never looks stuck");
+  ok(goneAt > 0 && goneAt <= 1200, `later open: the splash lifts once ready after a 700ms hold (${goneAt}ms), not after 3s`);
   await ev(`localStorage.clear(); return 1;`);
 
   /* ---------- 3. Guest: no personalisation ---------- */

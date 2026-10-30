@@ -55,6 +55,9 @@
      fallback, and the interstitials are the very first paint, so start the fetch here rather
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<!-- The header, tab bar and home tools draw their icons from this font. Fetched early so the splash can
+     wait for it: revealing home before it loaded made every icon pop in a beat after the splash lifted. -->
+<link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/redesign-system.css?v=hit1-spheretiles2-splashv2e-betachip1-darksphere1-appfeel1-energy1-icons1-fr1-live1-knife1-ox2-alltools1-maikmark3-glow20">
 <!-- Refined clinical look for INNER screens only (never #homeV2; owner 2026-10-12). Class smd-refined on <html> is set below; localStorage smd_refined="0" turns it off. -->
 <link rel="stylesheet" href="/refined.css?v=rf1-noempty1">
@@ -328,7 +331,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
    only. Every later open is fast: a plain surface in the launch color that fades as soon as the app
    is ready, so the logo never flashes for a split second. If boot is slow the mark appears after
    700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace. */
-(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast","sbs-blank");setTimeout(function(){s.classList.remove("sbs-blank");},700);}}catch(e){}})();</script>
+(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast");}}catch(e){}})();</script>
 <script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
    profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
    Firebase user by account.js) — because Firebase has not booted this early. Signed-in users only;
@@ -597,7 +600,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 /* Three-second sequence on the FIRST open only (draw first, then Loading your workspace); every
    later open has MIN 0 and lifts as soon as ready() (see the splash pace script above, owner decision
    2026-10-03). CAP is a short fail-open, never a stuck splash. */
-MIN=window.__smdBootFast?0:3000,CAP=6000;
+MIN=window.__smdBootFast?700:3000,CAP=6000;
+/* Later opens show the full startup screen from the first frame (it used to be blank for 700 ms, which read as
+   an empty glow) and hold it at least 700 ms of seen time, so it can never flash past half-drawn. */
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
@@ -610,7 +615,12 @@ try{requestAnimationFrame(function(){requestAnimationFrame(function(){window.__s
 });});}catch(e){s.classList.add("sbs-visible");}
 var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||localStorage.getItem("stewardmd_guest_used"));}catch(e){}
 function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
+/* Home's header, tab bar and tool icons are Material Symbols ligatures: lift the splash only once that
+   font is in, or the icons pop in after the reveal. The CAP fail-open still applies. */
+try{document.fonts&&document.fonts.load('24px "Material Symbols Rounded"');}catch(e){}
+function iconsIn(){try{return !document.fonts||!document.fonts.check||document.fonts.check('24px "Material Symbols Rounded"');}catch(e){return true;}}
 function ready(){try{
+  if(!iconsIn())return false;
   var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;
   // Unverified/relaunched users land on the verify gate (or the account gate on any launch) — those
   // are real "boot finished" states, so lift the white splash immediately instead of sitting on it
@@ -621,7 +631,13 @@ function ready(){try{
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
 var lockShowing=false;
-function reallyFinish(){done=true;try{localStorage.setItem("smd_boot_seen","1");}catch(e){}s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+/* While this splash covers the app there is no patient data on screen, so iOS skips its app-switcher privacy
+   blur (SmdDevice.setBootSplash); without this the launch Face ID swapped the splash for a grey sheet.
+   Cleared the moment the splash lifts; the native flag also expires by itself after 20 s. */
+function bootCover(up){try{var P=window.Capacitor&&window.Capacitor.Plugins;if(P&&P.SmdDevice&&P.SmdDevice.setBootSplash){var r=P.SmdDevice.setBootSplash({up:up});if(r&&r.catch)r.catch(function(){});return true;}}catch(e){}return false;}
+/* the plugin can register a beat after this script runs (see haptics.js), so retry briefly while the splash is up */
+(function coverUp(n){if(done||bootCover(true)||n>30)return;setTimeout(function(){coverUp(n+1);},100);})(0);
+function reallyFinish(){bootCover(false);done=true;try{localStorage.setItem("smd_boot_seen","1");}catch(e){}s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
 /* App Lock: if a PIN/biometric is configured, the splash holds after its frame (3s first open, instant later) and
    Face ID / PIN fires by itself instead of revealing the app. Fails open —
    if applock.js hasn't loaded yet (or throws), window.SMD_APPLOCK is undefined/required()
