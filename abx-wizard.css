@@ -354,3 +354,19 @@ html body.dark.abx-ui #abxWizard .abxw-emerg-list li { color: #ffc2cc; }
   html.abx-ui #abxWizard .abxw-reset { order: 4; flex: 0 0 auto; padding: 0 12px; }
   html.abx-ui #abxWizard .abxw-reset-t { display: none; }   /* icon-only on phone, like the Aa button */
 }
+
+/* Header bar is edge to edge (2026-10-30). The appearance themes paint .abxw-head as a glass panel, but it had no
+   side padding: the logo and the Reset button sat flush on its edges, with square corners floating 16px in from
+   the screen. It now bleeds over the wrap's 16px gutter as a full-width top bar (under the status bar too) and
+   keeps its contents on the same 16px margin as the page. */
+html.abx-ui[class] #abxWizard:not(#_) .abxw-head {
+  margin-left: -16px; margin-right: -16px;
+  padding-left: calc(16px + env(safe-area-inset-left)); padding-right: calc(16px + env(safe-area-inset-right));
+  border-width: 0 0 1px; border-radius: 0;
+}
+/* The text-size zoom on .abxw-wrap leaves a phantom scroll width (390px at 95% scrolls to 411px), so the whole
+   screen could be dragged sideways and both ends of the step rail slid under the edges. Nothing here scrolls
+   horizontally on purpose (wide rows carry their own overflow), so the shell never does. */
+html.abx-ui #abxWizard .abxw-scroll { overflow-x: hidden; overscroll-behavior-x: none; }
+/* Placeholder ended mid-letter ("sensoriu") at phone width; shorter copy above, and an ellipsis if text size grows. */
+html.abx-ui #abxWizard .abxw-find-input { text-overflow: ellipsis; }
