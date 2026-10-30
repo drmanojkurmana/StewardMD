@@ -1814,3 +1814,8 @@ Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Deci
 ## MediGram (proposed, 2026-10-31)
 
 Optional short-form adaptive learning feed inside PrepNucleus: MCQs, explanations, first-party micro-lessons, curated clinical discovery and spaced recall. Reuses the existing bank, lessons, My Mistakes, bookmarks and FSRS-6; it does not create a parallel learning engine. Proposed flag: smd_prep_medigram (default OFF). YouTube is an optional compliant public-video source only; personalised Shorts feeds are not imported or cloned. Smart Break is time-bounded and deferred until the Study Feed is validated. Full product, architecture, rollout, policy, privacy, measurement and test plan: [[plans/PrepNucleus-MediGram]].
+
+
+## PrepNucleus Sound (proposed, 2026-10-31)
+
+Optional background-music layer for reading, MCQs, lessons, MediGram and mock-test preparation on Android and Web/PWA. One provider-independent Sound Dock supports embedded playback where officially permitted and external-app handoff otherwise. Proposed flag: `smd_prep_sound` (default OFF; requires `smd_prep`). MVP starts with provider handoff plus a first-party licensed-audio path; Apple Music is the first embedded catalogue candidate subject to Android SDK and commercial validation. Spotify remote controls/streaming require written commercial approval; no unofficial provider APIs or scraping. Full architecture, provider matrix, Android/web lifecycle, privacy, licensing, rollout and test plan: [[plans/PrepNucleus-Sound]].
