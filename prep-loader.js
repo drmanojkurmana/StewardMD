@@ -24,15 +24,17 @@
    prep-tests.js is the Tests tab's test types (flag smd_prep_tests2, default ON since 2026-10-11; optional). prep-nucleus360.js is
    Nucleus360, learn-a-topic-A-to-Z (flag smd_prep_nucleus360, default ON; optional: without it no Nucleus360 entry
    shows and every screen renders as before). prep-reason.js is
-   the reasoning explanations and knowledge links (optional: without it every item renders as before). */
+   the reasoning explanations and knowledge links (optional: without it every item renders as before). prep-tools.js is the study
+   tools (cross out, notes, My notebook, how others answered, reset progress) and prep-timetable.js the revision timetable that
+   steers Today's plan (both optional: without them nothing changes). */
 (function (G) {
   "use strict";
-  var V = "prep97";
+  var V = "prep98";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css"];
-  var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js"];
+  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css"];
+  var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js"];
   // Optional files: a missing one (404, not yet shipped) is skipped instead of failing PrepNucleus.
-  var OPTIONAL = { "prep-bank-client.js": 1, "prep-reason.js": 1, "prep-tests.js": 1, "prep-nucleus360.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1, "prep-qgen.js": 1, "prep-import.js": 1 };
+  var OPTIONAL = { "prep-bank-client.js": 1, "prep-reason.js": 1, "prep-tests.js": 1, "prep-nucleus360.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1, "prep-qgen.js": 1, "prep-import.js": 1, "prep-tools.js": 1, "prep-timetable.js": 1 };
   var loading = null;
 
   function enabled() {

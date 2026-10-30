@@ -270,3 +270,10 @@
 /* Universal search (Home): the scope control sits between the box and the results. */
 .pn-root .pn-seg4.pn-fscope { margin: 10px 0 14px; }
 .pn-root #pnFound .pn-sec { margin-top: 14px; }
+
+/* Rank among PrepNucleus students (prep-tests.js rankHtml) */
+.pn-root .pn-t2r2 .t2rank { margin: 4px 0 8px; }
+.pn-root .pn-t2r2 .t2rank-n { display: flex; gap: 12px; }
+.pn-root .pn-t2r2 .t2rank-n p { flex: 1; margin: 0; padding: 12px 14px; border-radius: var(--pn-r-md, 12px); background: var(--pn-why-card, #0D1D23); border: 1px solid var(--pn-why-edge, #16323B); }
+.pn-root .pn-t2r2 .t2rank-n b { display: block; font: 700 26px/1.1 var(--pn-num); color: var(--pn-why-ink, #E2F1EE); font-variant-numeric: tabular-nums; }
+.pn-root .pn-t2r2 .t2rank-n small { display: block; margin-top: 2px; font-size: 13px; color: #9DB8B0; }

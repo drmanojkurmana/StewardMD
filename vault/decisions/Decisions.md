@@ -5,6 +5,23 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-30 · PrepNucleus: study tools, timetable, rank among students; no made-up peer numbers (owner)
+
+**Decision.** Owner asked for the features other QBanks have: a revision timetable the student builds, cross out options,
+a note on any question with a notebook, "% of users who chose each option", rank and percentile in tests, custom test
+filters and reset progress. Built as `prep-tools.js` (flag `smd_prep_tools`) and `prep-timetable.js` (flag `smd_prep_tt`),
+both default ON, `?tools=0` / `?tt=0` off. Rank reverses the 2026-10-10 Tests 2 line "never a rank or percentile": it is now
+shown as a rank among PrepNucleus students (never "all-India"), from an anonymous score histogram
+(`/api/prep/rank`), and only once 20 attempts exist. **Peer percentages: the owner asked for fake numbers until users
+arrive; not done.** The bars come from real anonymous answers (`/api/prep/stats?pct=1`) and the server returns an item
+only after 30 answers, so they appear on their own as students answer and nothing invented is ever shown (same rule as
+"every line true", 2026-10-06 nudges). **Why.** Invented statistics shown as other students' answers would mislead
+clinicians in training about difficulty and distractors; the automatic switch-on gives the owner the same end state.
+**Trade-off.** Empty bars at launch; ranks on randomly drawn mocks compare different question sets (labelled "read it
+as a guide"; fixed papers compare like with like). Reset is refused while sync is on (sync keeps the card further along,
+so a reset would come back). **Status.** On branch, not on the phone until build-www + native rebuild/OTA; D1 migration
+`prep-arena-worker/migrations/0006_prep_rank.sql` must be applied before rank works.
+
 ## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
 
 **Decision.** Applied as refinement, not redesign: same layout, palette and copy. Fixed what the skills' rules measure:

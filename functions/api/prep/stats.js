@@ -8,6 +8,9 @@
  *
  * GET: read-only aggregate statistics. Owner/admin gated (ownerOK) or published snapshot (?snapshot=1).
  *   Query params: ?item_id=<id> for a single item, or ?exam=<exam>&limit=<1..500>&offset=<n> for aggregates.
+ * GET ?pct=1&ids=a,b,c (public, up to PCT_MAX_IDS): "how others answered" for the app. Only items with at least
+ *   PCT_MIN_N answers are returned, as { n, o: [% per option] }; an item under that is left out, so the app shows
+ *   nothing until real answers exist. Counts only, never a row per student.
  *
  * Storage: D1 binding PREP_STATS_DB (falls back to PREP_ARENA_DB), table prep_item_stats, or KV (UPDATES_KV/MAIK_KV).
  *   Columns: item_id, exam, n (exposures/sample size), right (correct), blank (omitted), secs (sum of seconds),
@@ -19,9 +22,12 @@ const ID_RE = /^[A-Za-z0-9_.:-]{2,100}$/;
 export const EXAMS = {
   "neet-pg": 1, "ini-cet": 1, fmge: 1, "neet-ss": 1, "ini-ss": 1,
   "usmle-step1": 1, "usmle-step2ck": 1, "plab-1": 1, "mrcp-1": 1,
-  "mrcp-2": 1, "mrcs-a": 1, "amc-1": 1, "mccqe-1": 1
+  "mrcp-2": 1, "mrcs-a": 1, "amc-1": 1, "mccqe-1": 1,
+  // PrepNucleus exam tabs, sent by practice answers (prep-tools.js), which know the tab, not a test profile.
+  usmle: 1, plab: 1, mrcs: 1, amc: 1, mccqe: 1, mrcp: 1
 };
 export const MAX_ITEMS = 300;
+export const PCT_MIN_N = 30, PCT_MAX_IDS = 60;
 const RATE_LIMIT_CAP = 60; // max submissions per IP per 10 minutes
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
@@ -141,8 +147,41 @@ function formatRow(r) {
   };
 }
 
+/* pctOf(row) -> { n, o: [4 whole percents] } or null under PCT_MIN_N answered (blanks are not answers). */
+export function pctOf(r) {
+  if (!r) return null;
+  const o = [Number(r.o0 || 0), Number(r.o1 || 0), Number(r.o2 || 0), Number(r.o3 || 0)];
+  const n = o[0] + o[1] + o[2] + o[3];
+  if (n < PCT_MIN_N) return null;
+  return { n, o: o.map((x) => Math.round((x / n) * 100)) };
+}
+export function pctIds(q) {
+  const seen = {}, out = [];
+  for (const id of String(q || "").split(",")) { if (ID_RE.test(id) && !seen[id] && out.length < PCT_MAX_IDS) { seen[id] = 1; out.push(id); } }
+  return out;
+}
+async function pctGet(url, env) {
+  const ids = pctIds(url.searchParams.get("ids"));
+  const out = {};
+  const pub = (o) => new Response(JSON.stringify(o), { status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "public, max-age=1800" } });
+  if (!ids.length) return pub({ min: PCT_MIN_N, items: out });
+  const db = env && (env.PREP_STATS_DB || env.PREP_ARENA_DB);
+  const kv = env && (env.UPDATES_KV || env.MAIK_KV);
+  try {
+    if (db && db.prepare) {
+      const qs = ids.map((_, i) => "?" + (i + 1)).join(",");
+      const res = await db.prepare("SELECT item_id, o0, o1, o2, o3 FROM prep_item_stats WHERE item_id IN (" + qs + ")").bind(...ids).all();
+      for (const r of (res && res.results) || []) { const p = pctOf(r); if (p) out[r.item_id] = p; }
+    } else if (kv) {
+      for (const id of ids) { let r = null; try { r = JSON.parse(await kv.get("prep:stats:" + id)); } catch (e) {} const p = pctOf(r); if (p) out[id] = p; }
+    }
+  } catch (e) { return json({ error: "store-error" }, 503); }
+  return pub({ min: PCT_MIN_N, items: out });
+}
+
 export async function onRequestGet({ request, env }) {
   const url = new URL(request.url);
+  if (url.searchParams.get("pct") === "1") return pctGet(url, env);
   const isSnapshot = url.searchParams.get("snapshot") === "1";
   const isOwner = await ownerOK(request, env);
   if (!isSnapshot && !isOwner) return json({ error: "forbidden" }, 403);

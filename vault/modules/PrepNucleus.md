@@ -1777,3 +1777,31 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - **NEET-SS Oncology recall module (2026-10-28):** the owner's recall PDF (Part I oncology 46, Part II general medicine and statistics 20; Part III is 15 fragments with no usable stem, Part IV an index) is published through Author > Import MCQs, not as a bank overlay (an `iniss2` overlay was built and removed: it needed an R2 upload from a Mac and phantom-counted 46 questions). Recall text never enters git (public repo, same rule as PYQ).
 - **Custom prompt (2026-10-28):** the Import screen builds the prompt from exam (7 profile ids), subject, topic, count (10 to 40) and difficulty (`promptFor`), with "Copy the prompt", "Open ChatGPT" (prefilled `?q=`), "Open Gemini" (prompt copied first) and Share. The prompt is written so any LLM answers at once with one code block of JSON (no questions back, no intro, no tools, a validity and answer-key self-check at the end, explanation rules: 2 to 4 sentences with mechanism and take-home, `why_wrong` per option). The reply comes back pasted or as a .json/.txt file; the template carries `exam`, `subject`, `topic` so the module name defaults to the topic. The convert prompt (`prompt()`) uses the same reply rules for an existing PDF.
 
+## Study tools and revision timetable (2026-10-30, prep98)
+Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Decisions]] 2026-10-30.
+- **Files:** `prep-tools.js` + `prep-tools.css` (`window.PREP_TOOLS`, acts `x-*`, flag `smd_prep_tools`, default ON,
+  `?tools=0` off) and `prep-timetable.js` + `prep-timetable.css` (`window.PREP_TT`, acts `tt-*`, flag `smd_prep_tt`,
+  default ON, `?tt=0` off). Both optional in `prep-loader.js`; with either missing or off, every screen is as before.
+- **Cross out:** a toggle beside each option before the answer, in practice and timed tests (`r.strike`, run only).
+- **Notes:** pencil in the study bar (not in a timed test), note under the explanation; store `qn[id] = [s, m, text, ts,
+  stem]`. **My notebook** (home Practise and You): Notes and Marked in tests (`mk[id] = [s, m, ts, stem]`, written when a
+  timed test finishes with questions marked), Practise these reloads them from their module files. `qn`, `mk` and `tt`
+  sync through `prep-sync.js` (MAPS / SCALARS).
+- **How others answered:** `GET /api/prep/stats?pct=1&ids=` (public, 60 ids, cached 30 min) returns an item only with
+  `PCT_MIN_N` = 30 answers. Practice answers are POSTed (type `practice`, no id) only with `smd_prep_stats = "1"`, the
+  same opt-in as Tests 2; the switch is also in **Progress and data** (You). Nothing is estimated or seeded.
+- **Rank:** `functions/api/prep/rank.js`, D1 `prep_score_hist` (k, bin = pct x 10, n); apply
+  `prep-arena-worker/migrations/0006_prep_rank.sql` first. Key `<profile>:<type>[:<paper>]`. Opted in: POST adds the
+  score; else GET reads. `rank`/`percentile` null under `MIN_N` = 20. Shown in the Tests 2 result's Analysis tab.
+- **Setup sheet filters:** New or repeat gains "With my note" and "Marked in tests" (hidden when the pool has none).
+- **Reset progress** (You > Progress and data): one subject (its cards, conf, mod, mt, coach, ky_q, ra) or every subject
+  (also streak days; test history only when ticked). Bookmarks, notes, decks, settings stay. Refused with sync on.
+- **Timetable:** the student picks subjects and order, start, finish of first reading, rest weekdays. Days split by module
+  count (at least one), blocks stored in `tt.blocks` so they never shift; Mark done on today's subject re-plans from today;
+  Re-plan from today lays the unfinished subjects over the days left. Today's plan (`prep-plan.js makePlan`): a study day
+  takes new questions and the lesson from that subject (`fresh.tts`), a rest day plans reviews only (`planDay` `rest`), the
+  revision stretch plans like the last two weeks (`late`). Saving clears `s.pt` so the plan is remade.
+- **Tests:** `test/prep-study-tools.test.mjs` (pure + server) and `test/run-prep-tools-ui.mjs` (headless; SHOTS=<dir>).
+- **Gotcha:** `.pn-panel .pn-btn:not(.pri)` (prep.css) beats a plain `.pn-btn.x`; the red Reset button needs the panel and
+  sheet selectors too.
+

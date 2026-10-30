@@ -1,0 +1,52 @@
+/* PrepNucleus study tools (prep-tools.js): cross out, notes, My notebook, how others answered, progress and data.
+   Theme tokens only, so body.dark follows prep.css. */
+
+/* Cross out: the option and its toggle share a row; a struck option dims and its text is lined through. */
+.pn-root .pn-opts li.px-ol { display: flex; align-items: stretch; gap: 6px; }
+.pn-root .pn-opts li.px-ol > .pn-opt { flex: 1 1 auto; min-width: 0; }
+.pn-root .px-strike { flex: 0 0 44px; width: 44px; min-height: 44px; align-self: center; color: var(--pn-mut); border-radius: var(--pn-r-md); }
+.pn-root .px-strike.on { color: var(--pn-bad); background: var(--pn-bad-bg); }
+.pn-root .pn-opt.px-struck { opacity: .55; }
+.pn-root .pn-opt.px-struck > span:nth-child(2) { text-decoration: line-through; text-decoration-thickness: 2px; }
+.pn-root .px-nb.on { color: var(--pn-pri-ink); }
+
+/* Your note, inside the explanation and the sheet. */
+.pn-root .px-note { display: flex; flex-direction: column; gap: 4px; padding: 12px 14px; border-radius: var(--pn-r-md); background: var(--pn-s1); border: 1px solid var(--pn-edge); }
+.pn-root .px-note > b { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--pn-mut); }
+.pn-root .px-note p { margin: 0; color: var(--pn-text); line-height: 1.5; overflow-wrap: anywhere; }
+.pn-root .px-note .pn-link { align-self: flex-start; min-height: 44px; }
+.pn-root .px-ta { min-height: 140px; padding: 12px 14px; line-height: 1.5; resize: vertical; }
+.pn-root .px-stem { margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* How others answered: one bar a option, the right answer in the ok colour, the student's pick in the bad colour. */
+.pn-root .px-peer h3 { margin: 4px 0 8px; font-size: 15px; }
+.pn-root .px-peer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.pn-root .px-pr { display: flex; align-items: center; gap: 10px; }
+.pn-root .px-pr .pn-l { width: 26px; height: 26px; font-size: 13px; }
+.pn-root .px-pb { position: relative; flex: 1 1 auto; height: 10px; border-radius: var(--pn-r-pill); background: var(--pn-s2); overflow: hidden; }
+.pn-root .px-pb i { position: absolute; inset: 0; transform-origin: left center; border-radius: inherit; background: var(--pn-mut2); }
+.pn-root .px-pr.ok .px-pb i { background: var(--pn-ok); }
+.pn-root .px-pr.me .px-pb i { background: var(--pn-bad); }
+.pn-root .px-pv { flex: 0 0 3.2em; text-align: right; font-family: var(--pn-num); font-variant-numeric: tabular-nums; font-weight: 650; color: var(--pn-text); }
+.pn-root .px-peer > p { margin: 8px 0 0; }
+
+/* My notebook */
+.pn-root .px-nb-body { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .px-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.pn-root .px-list li p { margin: 0 0 6px; overflow-wrap: anywhere; }
+.pn-root .px-list .px-q { color: var(--pn-text); font-weight: 600; line-height: 1.4; }
+.pn-root .px-list .px-nt { color: var(--pn-text); line-height: 1.5; padding-left: 10px; border-left: 3px solid var(--pn-pri); }
+.pn-root .px-empty { padding: 24px 4px; text-align: center; }
+
+/* Progress and data */
+.pn-root .px-data { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .px-data .pn-panel { display: flex; flex-direction: column; gap: 10px; }
+.pn-root .px-warn { margin: 0; padding: 10px 12px; border-radius: var(--pn-r-md); background: var(--pn-bad-bg); color: var(--pn-bad); font-weight: 600; }
+.pn-root .px-chk { display: flex; align-items: center; gap: 10px; min-height: 44px; color: var(--pn-text); }
+.pn-root .px-chk input { width: 22px; height: 22px; accent-color: var(--pn-pri); }
+/* Matches prep.css ".pn-panel .pn-btn:not(.pri)" and ".pn-sheet .pn-btn:not(.pri)" (0,4,0) and its hover rule, then wins by order. */
+.pn-root .pn-btn.px-danger, .pn-root .pn-panel .pn-btn.px-danger, .pn-root .pn-sheet .pn-btn.px-danger,
+.pn-root .pn-btn.px-danger:not([disabled]):hover { background: var(--pn-bad); color: #fff; border-color: transparent; }
+.pn-root .pn-btn.px-danger[disabled] { opacity: .5; }
+/* Dark: --pn-bad is a light red (#ff8f8f), so the label goes dark for contrast. */
+body.dark .pn-root .pn-btn.px-danger, body.dark .pn-root .pn-panel .pn-btn.px-danger, body.dark .pn-root .pn-sheet .pn-btn.px-danger { color: var(--pn-c-midnight, #1a1a2e); }
