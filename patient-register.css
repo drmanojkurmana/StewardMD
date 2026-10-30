@@ -399,3 +399,17 @@
   background: var(--pr-panel-sub); font: 400 13px/1.5 var(--pr-font);
 }
 #smdPatReg .pr-f input[readonly] { background: var(--pr-teal-light); }
+
+/* ---- find an existing patient ---- */
+#smdPatReg .pr-find { margin-bottom: 14px; }
+#smdPatReg .pr-finds { display: flex; flex-direction: column; gap: 6px; margin-top: 6px; }
+#smdPatReg .pr-find-row { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; width: 100%; min-height: 48px; padding: 10px 14px; text-align: left; cursor: pointer; border-radius: 12px; border: 1px solid var(--pr-line); background: var(--pr-panel); color: inherit; font: inherit; }
+#smdPatReg .pr-find-row b { font-size: 14.5px; }
+#smdPatReg .pr-find-row span { font-size: 12.5px; opacity: .75; }
+#smdPatReg .pr-find-row:active { transform: scale(.985); }
+#smdPatReg .pr-findmsg { margin: 4px 2px; font-size: 12.5px; opacity: .75; }
+#smdPatReg .pr-pick { margin-top: 8px; padding: 12px 14px; border-radius: 14px; border: 1px solid var(--pr-teal, #0e6e63); background: var(--pr-teal-light); }
+#smdPatReg .pr-pick b { display: block; font-size: 15px; }
+#smdPatReg .pr-pick > span { display: block; margin-bottom: 10px; font-size: 13px; opacity: .8; }
+#smdPatReg .pr-dupbtns { display: flex; flex-wrap: wrap; gap: 8px; }
+#smdPatReg .pr-dupbtns .pr-btn { flex: 1 1 auto; }
