@@ -2157,12 +2157,14 @@
       eligible: function () { try { if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
-    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "The Cancer Library",
-      eligible: function () { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } } },
+    // One oncology tool on the home grid (owner 2026-10-30: "Single tool please"). ONCQIS already opens
+    // OncoTree and Cancer Staging from inside, so their own tiles only appear when ONCQIS is switched off.
+    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "OncoTree, staging, protocols",
+      eligible: oncqisOn },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
-      eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
+      eligible: function () { if (oncqisOn()) return false; try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
     { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "AJCC/TNM 32 Sites", feat: true, defOn: true,
-      eligible: function () { return true; } },
+      eligible: function () { return !oncqisOn(); } },
     // Specialty kits (specialty-kits.js): O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology,
     // Psychiatry, Dental. eligible() reads the flag directly: home.js loads before specialty-kits-flags.js,
     // so SMD_KITS_FLAGS may not exist yet at tile-render time. Same resolution: ?kits= then localStorage.
@@ -3028,6 +3030,7 @@
     } catch (e) { return true; }
   }
   // One flag check for every Govt Schemes entry point (HOME_TOOLS tile, Hospital hub, More sheet).
+  function oncqisOn() { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } }
   function govschemesOn() { return !!(window.SMD_GOVSCHEMES_FLAGS && SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes")); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   // A small section label inside the More sheet (same look as the old "Legal & safety" heading).

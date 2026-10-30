@@ -96,9 +96,9 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/ophthalmos-learn.css?v=oph14">
 <link rel="stylesheet" href="/ophthalmos-explore.css?v=oph14">
 <link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark2">
-<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1">
-<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1">
-<link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1">
+<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1-logo1">
+<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1-plum1">
+<link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1-plum1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm2-fr1-ic1">
 <link rel="stylesheet" href="/fundx.css?v=sar1-fr1-ipad1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark-fr1">
@@ -330,7 +330,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
    Pace (owner decision 2026-10-03): the full three-second branded sequence plays on the FIRST open
    only. Every later open is fast: a plain surface in the launch color that fades as soon as the app
    is ready, so the logo never flashes for a split second. If boot is slow the mark appears after
-   700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace. */
+   700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace.
+   Signed-in clinicians are the exception (owner 2026-10-30): the personalised script below turns the
+   fast path back off, so they get the logo intro and then the welcome-back screen on every open. */
 (function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast");}}catch(e){}})();</script>
 <script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
    profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
@@ -356,10 +358,14 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   }
   dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
   host.hidden=false;s.classList.add("sbs-personal");
+  /* Owner 2026-10-30: a signed-in clinician gets BOTH screens on every open (logo intro, then the
+     welcome-back screen). The fast later-open pace lifted the splash at 0.7s, before screen 2 ever
+     appeared, so it is switched off here and the shared 3s window applies. */
+  window.__smdBootFast=0;window.__smdBootPersonal=1;s.classList.remove("sbs-fast");
   /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
      (avatar, name, glass foot), which stays within the boot script's three-second total and
      Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
-  var BEAT=1560,XF=220,rm=false,t0=Date.now();
+  var BEAT=1500,XF=220,rm=false,t0=Date.now();
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
   function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
   /* Do not consume the beat behind the native launch surface. native-bridge starts this clock at
@@ -600,7 +606,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 /* Three-second sequence on the FIRST open only (draw first, then Loading your workspace); every
    later open has MIN 0 and lifts as soon as ready() (see the splash pace script above, owner decision
    2026-10-03). CAP is a short fail-open, never a stuck splash. */
-MIN=window.__smdBootFast?700:3000,CAP=6000;
+MIN=window.__smdBootFast?700:window.__smdBootPersonal?2500:3000,CAP=6000;
 /* Later opens show the full startup screen from the first frame (it used to be blank for 700 ms, which read as
    an empty glow) and hold it at least 700 ms of seen time, so it can never flash past half-drawn. */
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
@@ -2425,7 +2431,7 @@ window.openExternal = function (u) {
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-prepfix.js?v=pf3" defer></script>
-<script src="/review-desk.js?v=rev5-prep3-anest1" defer></script>
+<script src="/review-desk.js?v=rev5-prep3-anest1-onc1" defer></script>
 <!-- Clinical Bulletins: signed practice updates on the disease reader (flag smd_kb_bulletins, default off)
      + the Review Desk signing tab. docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md -->
 <script src="/bulletins.js?v=bl6" defer></script>
@@ -2500,7 +2506,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1-ipad2" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1-onc1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2942,15 +2948,15 @@ window.openExternal = function (u) {
      honest gaps for sites not yet added), ISMP tall-man drug names, onco drug+interaction view, and a
      read-only protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
-<script src="/onco-staging.js?v=op7-race1" defer></script>
+<script src="/onco-staging.js?v=op7-race1-hdr1" defer></script>
 <!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
      all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
      fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
      doses), RECIST 1.1 target-lesion response calculator, and localStorage Favorites/Recent. These load
      before onco-home.js so their globals + SMD_ONCOFAV exist when the grid renders. -->
-<script src="/onco-ctcae.js?v=op3" defer></script>
-<script src="/onco-iotox.js?v=op5-icons1" defer></script>
-<script src="/onco-recist.js?v=op1" defer></script>
+<script src="/onco-ctcae.js?v=op3-hdr1" defer></script>
+<script src="/onco-iotox.js?v=op5-icons1-hdr1" defer></script>
+<script src="/onco-recist.js?v=op1-hdr1" defer></script>
 <script src="/onco-favorites.js?v=oh3" defer></script>
 <!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
      (window.SMD_ONCORECOMMEND). Decision-support only - suggests APPLICABLE ACTIVE Standard Protocols
@@ -2968,7 +2974,7 @@ window.openExternal = function (u) {
 <script src="/onco-cycle-timeline.js?v=op1" defer></script>
 <script src="/onco-ddi-sentry.js?v=op1" defer></script>
 <script src="/onco-genomics.js?v=op1" defer></script>
-<script src="/onco-home.js?v=hardlocal8" defer></script>
+<script src="/onco-home.js?v=hardlocal8-logo1" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
@@ -2976,7 +2982,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot6" defer></script>
-<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1" defer></script>
+<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1-tac1" defer></script>
 <script src="/protocol-sheet.js?v=ps6-fr1-oncolinks1-fig1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
