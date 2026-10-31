@@ -122,6 +122,7 @@
   // Strip any residual "R1 verification" caveat from a displayed provenance string (gate removed).
   function noR1(s) {
     return String(s == null ? "" : s)
+      .replace(/\s*Requires\s+R1\s+clinical\s+(verification|sign-?off)\s+before\s+unchecked\s+use\.?/gi, "")
       .replace(/\s*(,|;|and)?\s*R1\s+clinical\s+(verification|sign-?off)/gi, "")
       .replace(/\bpending\s+review\b/gi, "").replace(/\bR1\b/gi, "")
       .replace(/\s+([.;,])/g, "$1").replace(/\s{2,}/g, " ").trim();

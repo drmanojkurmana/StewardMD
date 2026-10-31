@@ -15,11 +15,11 @@
   var D = (typeof document !== "undefined") ? document : null;
 
   var CAT = {
-    criteria: { color: "#785EF0", icon: "checklist", name: "Criteria" },
-    workup: { color: "#648FFF", icon: "biotech", name: "Work-up" },
-    treatment: { color: "#FE6100", icon: "medication", name: "Treatment" },
-    surveillance: { color: "#FFB000", icon: "monitor_heart", name: "Surveillance" },
-    other: { color: "#870F54", icon: "more_horiz", name: "Other" }
+    criteria: { color: "#7a4fd0", icon: "checklist", name: "Criteria" },
+    workup: { color: "#5868c9", icon: "biotech", name: "Work-up" },
+    treatment: { color: "#9c3a8f", icon: "medication", name: "Treatment" },
+    surveillance: { color: "#b0658f", icon: "monitor_heart", name: "Surveillance" },
+    other: { color: "#6f2c6b", icon: "more_horiz", name: "Other" }
   };
 
   // Diseases with an authored + reviewed navigator graph (kb/oncotree/<id>.json). The engine + UI are
@@ -160,9 +160,9 @@
       var label = sel.length ? sel[0].label : "";
       return '<button class="ot-rail-chip" data-ot-act="edit" data-ot-node="' + esc(n.id) + '">' +
         '<span class="ot-rail-k">' + esc(n.name) + "</span>" +
-        '<span class="ot-rail-v">' + esc(shortLabel(label)) + "</span>" + ms("edit") + "</button>";
-    }).join('<span class="ot-rail-arrow">' + ms("chevron_right") + "</span>");
-    return '<div class="ot-rail">' + chips + "</div>";
+        '<span class="ot-rail-v">' + esc(shortLabel(label)) + "</span>" + ms("chevron_right") + "</button>";
+    }).join("");
+    return '<div class="ot-rail" aria-label="Answered steps">' + chips + "</div>";
   }
   function shortLabel(l) { l = String(l || ""); var i = l.indexOf(" ("); return i > 0 ? l.slice(0, i) : l; }
 
@@ -552,9 +552,9 @@
         "<div>Phenotype: " + esc(phenoSummary(s.phenotype)) + "</div>" +
       "</div>" +
       '<div class="ot-sel-actions">' +
+        '<button class="ot-btn primary" data-ot-act="handoff">' + ms("open_in_new") + "Continue in treatment workflow</button>" +
         '<button class="ot-btn ghost" data-ot-act="back-pathway">' + ms("arrow_back") + "Back to pathway</button>" +
         (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost" data-ot-act="proto-sheet" data-ot-proto="' + esc(s.protocolId) + '">' + ms("description") + "Protocol sheet</button>" : "") +
-        '<button class="ot-btn primary" data-ot-act="handoff">' + ms("open_in_new") + "Continue in treatment workflow</button>" +
       "</div></div>";
   }
   function phenoSummary(ph) {
@@ -1667,25 +1667,32 @@
   function shellHtml() {
     var hasGraph = !!st.graph;
     var title = hasGraph ? (st.graph.title || "ONCOTREE") : "OncoTree";
+    // Graph views: a three-way segmented control (text only, equal segments) with Summary and Restart as round
+    // keys at its end. Staging lives once, in the header, instead of also being a fourth segment.
     var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
-      '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" data-ot-act="view-navigator">' + ms("account_tree") + "Navigator</button>" +
-      '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("format_list_bulleted") + "Step Flow</button>" +
-      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Overview</button>" +
-      '<button class="ot-vt ot-vt-stg" data-ot-act="open-staging" title="TNM Staging for this cancer">' + ms("stairs") + "Staging</button>" +
-      '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
-    var kicker = hasGraph
-      ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
-      : "";   // the picker page already titles itself; no all-caps eyebrow above the header name
+      '<div class="ot-seg" role="tablist" aria-label="View">' +
+        '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" role="tab" aria-selected="' + (st.view === "navigator") + '" data-ot-act="view-navigator">Navigator</button>' +
+        '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" role="tab" aria-selected="' + (st.view === "pathway") + '" data-ot-act="view-pathway">Steps</button>' +
+        '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" role="tab" aria-selected="' + (st.view === "map") + '" data-ot-act="view-map">Overview</button>' +
+      '</div>' +
+      '<button type="button" class="ot-vkey" data-ot-act="summary" aria-label="Pathway summary">' + ms("summarize") + '</button>' +
+      '<button type="button" class="ot-vkey" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + '</button>' +
+      '</div>') : "";
+    // The cancer name is the title; tapping it changes cancer (no all-caps "change cancer" eyebrow above it).
+    var titleHtml = hasGraph
+      ? '<button type="button" class="ot-htitle-btn" data-ot-act="change-disease" aria-label="Change cancer"><span class="ot-hname">' + esc(title) + '</span>' + ms("expand_more") + '</button>'
+      : '<span class="ot-hname">' + esc(title) + '</span>';
     var rightBtn = '<div class="ot-h-actions">' +
       '<button type="button" class="ot-hbtn ot-hbtn-stg" data-ot-act="open-staging" aria-label="TNM Cancer Staging" title="TNM Cancer Staging">' + ms("stairs") + '</button>' +
       '<button type="button" class="ot-hbtn ot-hbtn-calc" data-ot-act="open-calvert-calc" aria-label="Creatinine & Calvert Calculator" title="Creatinine & Calvert Calculator">' + ms("calculate") + '</button>' +
-      (hasGraph ? '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + '</button>' : '<span class="ot-hbtn" aria-hidden="true" style="opacity:0;pointer-events:none;"></span>') +
       '</div>';
     var isNavScrollLocked = !!st.graph && !st.openedProtocol && !st.selection && (st.view === "navigator");
-    return '<div class="ot-shell">' +
+    // The picker carries its own large "Oncology Navigator" title, so its bar starts transparent and untitled and
+    // only frosts (with the compact title) once the list scrolls under it; see syncOtScrolled().
+    return '<div class="ot-shell' + (hasGraph ? "" : " ot-collapse") + '">' +
       '<header class="ot-header">' +
         '<button class="ot-hbtn" data-ot-act="close" aria-label="Close">' + ms("close") + "</button>" +
-        '<div class="ot-htitle">' + kicker + '<span class="ot-hname">' + esc(title) + "</span></div>" +
+        '<div class="ot-htitle">' + titleHtml + "</div>" +
         rightBtn +
       "</header>" +
       viewToggle +
@@ -1729,9 +1736,21 @@
     var el = D && D.getElementById("smdOncoTree");
     if (!el) return;
     el.innerHTML = shellHtml();
+    bindOtScroll();
     motionRender();
     setupGraph();
     setupNavigatorCanvas();
+  }
+  function syncOtScrolled() {
+    var sh = D && D.querySelector("#smdOncoTree .ot-shell"), b = D && D.getElementById("otBody");
+    if (sh && b) sh.classList.toggle("ot-scrolled", b.scrollTop > 28);
+  }
+  function bindOtScroll() {
+    var b = D && D.getElementById("otBody");
+    if (!b || b.__otScrollBound) { syncOtScrolled(); return; }
+    b.__otScrollBound = true;
+    b.addEventListener("scroll", syncOtScrolled, { passive: true });
+    syncOtScrolled();
   }
   function repaintBody() {
     var b = D && D.getElementById("otBody");
