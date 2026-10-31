@@ -12019,3 +12019,41 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
 - Shared Clinic header: the title-centering spacer reused the bordered `.sc-ic` class and drew an empty circle; hidden.
 - Sweep method: open every `window.*.open()` module at 390x844 (liquid appearance) and flag vertical scrollers with
   horizontal overflow. ABG's spectrum grid is the only hit and scrolls sideways on purpose.
+
+## 2026-10-30 - Startup: logo intro + welcome-back screen on every signed-in open, 2.5s
+- Owner: "I need start up to have both logo intro plus user intro", "total 2.5sec, 1.5sec intro, 1sec user intro".
+- The 2026-10-03 fast later-open pace lifted the splash at 0.7s, before screen 2 (BEAT) ever showed, so signed-in users
+  only saw the logo. The personalised splash script now clears `__smdBootFast` / `sbs-fast` and sets `__smdBootPersonal`.
+- `BEAT` 1560 -> 1500 (screen 1 for 1.5s), hide-loop `MIN` 2500 for personal opens (screen 2 for 1s), counted from when
+  the frame is seen. Guests and signed-out returning opens keep the fast path; first open keeps 3s.
+
+## 2026-10-30 - ONCQIS: single home tile, polish pass, lavender field
+- Home grid shows one oncology tool, ONCQIS ("Single tool please"). OncoTree and Cancer Staging tiles appear only when
+  `smd_onco_home` is off (`oncqisOn()` in home.js). OncoTree opened from ONCQIS now stacks over it (backgrounded, not
+  closed), so closing OncoTree returns to ONCQIS.
+- Landing: removed the quick-action row that duplicated five list tools (and ignored their flags); the gradient hero card
+  with eyebrow and watermark is a plain title + safety line; the 2-column clamped tiles are grouped inset rows with full
+  descriptions. "Prognostic scores" + "Formulas" (same calc-cat target) merged; "Drug mechanisms" gained a list entry.
+- Removed the "Apple / React Bits" CSS layer (SF Pro override, cursor spotlight, hover border beam, fake sheet grabber)
+  and its pointermove JS. Section labels sentence case.
+- Staging list: no per-row blue-violet CLINICAL pills (only the Gap state keeps a badge), shared search field, grouped rows,
+  license bar is an overlay footer flush to the bottom edge (it floated 52px up inside the scroll body).
+- Lavender (all-cancers ribbon colour) gaussian field behind every .oh-overlay: radial gradients on one ::before layer,
+  38s transform drift, still under reduced motion. Cards stay solid.
+- React/Tailwind component libraries (shadcn, Magic UI, etc.) were requested; not adopted: the app is a buildless ES5
+  bundle with no React or Tailwind build. Their patterns (inset grouped list, tokens) are applied in plain CSS instead.
+- Follow-up same day: plum (#6f2c6b light / #d9a8d6 dark) replaces teal on every onco surface by re-pointing --teal,
+  --ot-accent, --ot-primary and --ps-primary inside .oh-overlay / .ot-overlay / .ps-overlay (onco-home.css), plus the
+  hard-coded greens in oncotree.css and protocol-sheet.css. Severity colours (--sev-*, CTCAE/irAE grade badges) unchanged.
+  OncoTree disease icons share one plum chip (no rainbow). Tactile layer: raised surfaces sink 1px on press; version /
+  category / filter choices are segmented controls; OncoTree header keys 44px; its spotlight/beam pseudo-layers hidden;
+  the NCCN capsule badge and duplicate Calvert pill above the OncoTree title became a plain source line.
+- Collapsing onco header (owner: "mix of both", CliniX large title + PrepNucleus bar): .oh-top floats over .oh-body,
+  transparent with round 44px frosted keys at rest; onco-home.js toggles .oh-overlay.oh-scrolled past 28px and the
+  frosted bar + compact title (mark, name, subtitle) fade in. Large titles (.oh-ltitle / ONCQIS brand hero) live in the
+  page. Back/close keys are icons; their words stay as .oh-sr text. ONCQIS bar has a search key that focuses the field.
+- ONCQIS logo: vector redraw of the owner's mark (hexagonal immune lattice, six antibodies with heavy + light chains,
+  targeted red core) in assets/oncqis-mark.svg + oncqis-mark-dark.svg (lighter lattice for dark). Header shows the mark
+  with a live-text "ONCQIS" wordmark in the logo's teal gradient and its tagline (CliniX-style). assets/oncqis-logo.png is
+  the owner's lockup, background removed and upscaled (palette PNG, 97 KB); oncqis-mark.png a 1024px raster.
+  build-www.sh copies assets/oncqis-*. The logo keeps its own teal/red: the plum rule covers UI accents, not the brand mark.

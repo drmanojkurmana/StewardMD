@@ -1,146 +1,47 @@
-/* ── ONCQIS APPLE DESIGN & REACT BITS REDESIGN SYSTEM ── */
+/* ONCQIS base layer (polish 2026-10-30). This block used to be an "Apple / React Bits" layer that
+   forced SF Pro over the app font, painted a cursor-tracking spotlight and a glowing border beam on
+   every card and row, and drew an iOS sheet grabber on a full-screen view that cannot be dragged.
+   It now only sets the shared surface for every ONCQIS screen (landing, staging, CTCAE, irAE,
+   RECIST): one radius, a hairline border, a near-flat shadow, and a press state. Colours stay on
+   the app tokens (--teal, --rds-*) declared further down. */
 .oh-overlay {
-  --oh-bg: #f5f5f7;
-  --oh-card: #ffffff;
-  --oh-ink: #1d1d1f;
-  --oh-sub: #6e6e73;
-  --oh-line: rgba(0, 0, 0, 0.08);
-  --oh-accent: #0e6e63;
-  --oh-accent-glow: rgba(14, 110, 99, 0.14);
-  --oh-glass: rgba(255, 255, 255, 0.84);
-  --oh-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
-  font-family: var(--oh-font) !important;
-  letter-spacing: -0.011em;
+  --oh-card: var(--rds-surface, var(--panel, #fff));
+  --oh-line: var(--rds-line, var(--line, #e3eaee));
+  --oh-accent: var(--teal, #0e6e63);
+  --oh-accent-soft: var(--teal-soft, #e4f2ef);
   -webkit-font-smoothing: antialiased;
 }
-
 body.dark .oh-overlay {
-  --oh-bg: #000000;
-  --oh-card: #1c1c1e;
-  --oh-ink: #f5f5f7;
-  --oh-sub: #a1a1a6;
-  --oh-line: rgba(255, 255, 255, 0.12);
-  --oh-accent: #14b8a6;
-  --oh-accent-glow: rgba(20, 184, 166, 0.22);
-  --oh-glass: rgba(28, 28, 30, 0.84);
+  --oh-accent: #d9a8d6;
+  --oh-accent-soft: rgba(217, 168, 214, 0.14);
 }
 
-/* Translucent Frosted Glass Header */
-.oh-top {
+.oh-title { font-weight: 700 !important; letter-spacing: -0.02em !important; }
+
+/* Shared surface for tool rows, result rows, favourites and the staging / CTCAE / RECIST rows */
+.oh-card, .oh-row, .oh-favchip, .ctc-grow, .stg-trow, .stg-grow, .rec-out {
   position: relative;
-  background: var(--oh-glass) !important;
-  backdrop-filter: blur(28px) saturate(190%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
-  border-bottom: 1px solid var(--oh-line) !important;
-  padding-top: calc(16px + env(safe-area-inset-top)) !important;
-}
-.oh-top::before {
-  content: "";
-  position: absolute;
-  top: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 36px;
-  height: 5px;
-  background: var(--oh-sub);
-  opacity: 0.35;
-  border-radius: 9999px;
-  pointer-events: none;
-}
-.oh-title {
-  font-family: var(--oh-font) !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.022em !important;
-}
-
-/* Apple Museum Gallery Hero */
-.oh-hero {
-  background: linear-gradient(135deg, #0e6e63 0%, #084c44 100%) !important;
-  border-radius: 24px !important;
-  box-shadow: 0 12px 32px -4px rgba(14, 110, 99, 0.32) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
-}
-.oh-hero-title {
-  font-family: var(--oh-font) !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.025em !important;
-}
-
-/* React Bits Spotlight Cards for Tools, Staging & Protocol Cards */
-.oh-card, .oh-qa, .oh-row, .oh-favchip, .ctc-grow, .stg-trow, .stg-grow, .rec-out {
-  position: relative;
-  overflow: hidden;
-  border-radius: 18px !important;
-  border: 1px solid var(--oh-line) !important;
-  background: var(--oh-card) !important;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.04) !important;
-  transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.16s ease, border-color 0.16s ease !important;
-}
-
-body.dark .oh-card, body.dark .oh-qa, body.dark .oh-row, body.dark .oh-favchip,
-body.dark .ctc-grow, body.dark .stg-trow, body.dark .stg-grow, body.dark .rec-out {
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.08), 0 4px 16px rgba(0, 0, 0, 0.35) !important;
-}
-
-.oh-card::before, .oh-qa::before, .oh-row::before, .oh-favchip::before,
-.ctc-grow::before, .stg-trow::before, .stg-grow::before, .rec-out::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(300px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--oh-accent-glow), transparent 75%);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Luminous Border Beam Glow on Hover */
-.oh-card::after, .oh-qa::after, .oh-row::after, .oh-favchip::after,
-.ctc-grow::after, .stg-trow::after, .stg-grow::after, .rec-out::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: radial-gradient(220px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), var(--oh-accent), transparent 60%);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  z-index: 2;
-}
-
-.oh-card:hover::before, .oh-qa:hover::before, .oh-row:hover::before, .oh-favchip:hover::before,
-.ctc-grow:hover::before, .stg-trow:hover::before, .stg-grow:hover::before, .rec-out:hover::before,
-.oh-card:hover::after, .oh-qa:hover::after, .oh-row:hover::after, .oh-favchip:hover::after,
-.ctc-grow:hover::after, .stg-trow:hover::after, .stg-grow:hover::after, .rec-out:hover::after {
-  opacity: 1;
-}
-
-/* Emil Kowalski: Instant Touch Latency Elimination & Spring Touch */
-.oh-card:active, .oh-qa:active, .oh-row:active, .oh-favchip:active, .oh-back:active, .oh-cta:active,
-.ctc-grow:active, .stg-trow:active, .stg-grow:active {
-  transform: scale(0.976) translateY(1px) !important;
-  transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-/* iOS Sheet Handle */
-.oh-sheet-handle {
-  width: 36px;
-  height: 5px;
-  background: var(--oh-sub);
-  opacity: 0.35;
-  border-radius: 9999px;
-  margin: 8px auto 14px;
-}
-
-.oh-card-ic, .oh-qa .material-symbols-rounded, .oh-qa .material-symbols-outlined {
   border-radius: 14px !important;
-  background: var(--oh-accent-glow) !important;
-  color: var(--oh-accent) !important;
+  border-color: var(--oh-line);
+  background: var(--oh-card) !important;
+  box-shadow: 0 1px 2px rgba(13, 27, 36, 0.04) !important;
+  transition: background-color 0.15s ease, border-color 0.15s ease !important;
 }
+body.dark .oh-card, body.dark .oh-row, body.dark .oh-favchip,
+body.dark .ctc-grow, body.dark .stg-trow, body.dark .stg-grow, body.dark .rec-out { box-shadow: none !important; }
+
+/* Press feedback: a tint, not a bounce. Rows are read in a hurry on a ward round. */
+.oh-card:active, .oh-row:active, .oh-favchip:active, .ctc-grow:active, .stg-trow:active, .stg-grow:active {
+  transform: none !important;
+  background: color-mix(in srgb, var(--oh-accent) 7%, var(--oh-card)) !important;
+  border-color: color-mix(in srgb, var(--oh-accent) 35%, var(--oh-line)) !important;
+}
+.oh-back:active, .oh-cta:active { transform: scale(0.98) !important; }
+.oh-card:focus-visible, .oh-row:focus-visible, .oh-favchip:focus-visible, .oh-back:focus-visible {
+  outline: 2px solid var(--oh-accent); outline-offset: 2px;
+}
+
+.oh-card-ic { border-radius: 12px !important; background: var(--oh-accent-soft) !important; color: var(--oh-accent) !important; }
 
 /* Icon font binding: without this the ligature NAMES render as literal words
    ("book_2", "star", "chevron_right"). Scoped to the overlay, same fix as oncotree.css. */
@@ -153,34 +54,10 @@ body.dark .ctc-grow, body.dark .stg-trow, body.dark .stg-grow, body.dark .rec-ou
   vertical-align: middle; user-select: none;
 }
 
-/* Patient Context Pill Bar */
-.oh-ctx {
-  border-radius: 18px !important;
-  background: color-mix(in srgb, var(--oh-accent) 6%, var(--oh-card)) !important;
-  border: 1px solid color-mix(in srgb, var(--oh-accent) 24%, transparent) !important;
-}
-.oh-chip {
-  border-radius: 9999px !important;
-  font-weight: 600 !important;
-}
+.oh-ctx { border-radius: 14px !important; }
 
-/* Search Bar */
-.oh-search {
-  border-radius: 16px !important;
-  border: 1.5px solid var(--oh-line) !important;
-  background: var(--oh-card) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03) !important;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-.oh-search:focus {
-  border-color: var(--oh-accent) !important;
-  box-shadow: 0 0 0 4px var(--oh-accent-glow) !important;
-}
-
-/* Dosage & Calculator Numbers Tabular Alignment */
-.rec-nums, .stg-code {
-  font-variant-numeric: tabular-nums !important;
-}
+/* Dose, stage and score numbers line up in columns */
+.rec-nums, .stg-code { font-variant-numeric: tabular-nums !important; }
 
 /* onco-home.css — ONCQIS "The Cancer Library" + the shared chrome for every onco reference tool
    (staging / CTCAE / irAE / RECIST) and the doctor plan-flow. REBUILT (2026-08) onto the app's
@@ -211,11 +88,11 @@ body.oh-lock { overflow: hidden; }
 .oh-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px; max-width: 920px; margin: 0 auto; width: 100%; box-sizing: border-box; padding-bottom: calc(52px + env(safe-area-inset-bottom)); }
 
 /* ===== Hero (ONCQIS landing) — teal gradient card, masked logo, one strong search ========= */
-.oh-hero { position: relative; overflow: hidden; border-radius: 20px; padding: 22px 20px; margin-bottom: 18px; color: #fff; background: linear-gradient(135deg, var(--teal, #0e6e63), #0b574e); box-shadow: var(--rds-el-cta, 0 6px 18px rgba(15,118,110,.22)); }
-.oh-hero-eyebrow { font: 800 11px var(--rds-font, var(--sans)); letter-spacing: .14em; text-transform: uppercase; opacity: .82; }
-.oh-hero-title { font: 800 26px/1.12 var(--rds-font, var(--sans)); letter-spacing: -.02em; margin: 6px 0 4px; }
-.oh-hero-sub { font: 500 13.5px/1.5 var(--rds-font, var(--sans)); opacity: .9; max-width: 40ch; }
-.oh-hero-mark { position: absolute; right: -14px; bottom: -20px; width: 128px; height: 128px; opacity: .16; -webkit-mask: url(/logo.png) center/contain no-repeat; mask: url(/logo.png) center/contain no-repeat; background: #fff; pointer-events: none; }
+/* Landing heading: plain title + the safety line. Was a gradient card with an eyebrow label and a
+   watermark logo that took a third of the first screen before any tool was visible. */
+.oh-hero { margin: 4px 2px 16px; }
+.oh-hero-title { margin: 0; font: 700 24px/1.15 var(--rds-font, var(--sans)); letter-spacing: -.02em; color: var(--rds-ink, var(--ink, #0d1b24)); }
+.oh-hero-sub { margin: 6px 0 0; font: 400 14px/1.5 var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate, #5b7083)); max-width: 52ch; }
 
 .oh-search { width: 100%; box-sizing: border-box; border: 1.5px solid var(--rds-line, var(--line)); border-radius: 13px; padding: 14px 16px; font: 500 15px var(--rds-font, var(--sans)); background: var(--rds-surface, var(--panel, #fff)); color: var(--rds-ink, var(--ink)); margin-bottom: 16px; transition: border-color .18s, box-shadow .18s; }
 .oh-search:focus { outline: none; border-color: var(--teal, #0e6e63); box-shadow: 0 0 0 3px color-mix(in srgb, var(--teal, #0e6e63) 18%, transparent); }
@@ -250,29 +127,30 @@ body.oh-lock { overflow: hidden; }
 }
 
 
-.oh-grp { margin-bottom: 22px; }
-.oh-grp-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .09em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin: 0 0 11px; }
-.oh-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: stretch; }
-/* vertical tile: icon top, title + sub pinned to the bottom (space-between) so every tile is equal
-   height and text baselines align across a row. min-height + line-clamp guarantee identical sizing.
-   The card is wrapped in .oh-card-wrap (favourite star sibling); wrap + card both stretch to fill
-   the grid cell so every tile in a row shares one baseline. */
-.oh-card-wrap { position: relative; display: flex; flex-direction: column; width: 100%; height: 100%; }
-.oh-card { position: relative; width: 100%; min-width: 0; box-sizing: border-box; flex: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 14px; min-height: 138px; text-align: left; border: 1px solid var(--rds-line, var(--line)); border-radius: 18px; background: var(--rds-surface, var(--panel, #fff)); padding: 16px; cursor: pointer; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); transition: transform .16s var(--rds-ease, cubic-bezier(.2,.7,.2,1)), border-color .18s, box-shadow .18s; }
-.oh-card:active { transform: scale(.985); border-color: var(--teal, #0e6e63); box-shadow: var(--rds-el-cta, 0 6px 18px rgba(15,118,110,.22)); }
-.oh-card-ic { width: 46px; height: 46px; flex: 0 0 46px; display: flex; align-items: center; justify-content: center; border-radius: 14px; background: var(--teal-soft, #e4f2ef); color: var(--teal, #0e6e63); }
-.oh-card-ic .material-symbols-rounded, .oh-card-ic .material-symbols-outlined { font-size: 25px; }
-.oh-card-body { min-width: 0; }
-.oh-card-ph { opacity: .5; cursor: default; box-shadow: none; }
-.oh-card-ph:active { transform: none; border-color: var(--rds-line, var(--line)); box-shadow: none; }
-.oh-card-t { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font: 700 14.5px/1.25 var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); letter-spacing: -.01em; padding-right: 26px; }
-.oh-card-s { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font: 500 12px/1.45 var(--rds-font, var(--sans)); color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin-top: 3px; padding-right: 18px; }
-.oh-card-go { position: absolute; bottom: 14px; right: 13px; color: var(--rds-line-strong, #c7d3da); pointer-events: none; }
-.oh-card-go .material-symbols-rounded, .oh-card-go .material-symbols-outlined { font-size: 18px; }
+/* ===== Tool list: grouped rows ===========================================================
+   Was a 2-column grid of tall tiles whose descriptions were clamped mid-word ("pathway navigator
+   &..."). Each group is now one inset list: icon, full title and description, favourite star,
+   chevron. Every tool reads in full and the whole library fits in about two screens. */
+.oh-grp { margin-bottom: 20px; }
+.oh-grp-h { font: 600 13px var(--rds-font, var(--sans)); letter-spacing: 0; text-transform: none; color: var(--rds-muted, var(--slate, #5b7083)); margin: 0 4px 8px; }
+.oh-grid { display: flex; flex-direction: column; border: 1px solid var(--oh-line); border-radius: 14px; background: var(--oh-card); overflow: hidden; }
+.oh-card-wrap { position: relative; }
+.oh-card-wrap + .oh-card-wrap { border-top: 1px solid var(--oh-line); }
+.oh-grid .oh-card { width: 100%; box-sizing: border-box; display: flex; flex-direction: row; align-items: center; gap: 12px; min-height: 64px; padding: 12px 84px 12px 14px; text-align: left; cursor: pointer; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; }
+.oh-card-ic { width: 36px; height: 36px; flex: 0 0 36px; display: flex; align-items: center; justify-content: center; }
+.oh-card-ic .material-symbols-rounded, .oh-card-ic .material-symbols-outlined { font-size: 21px; }
+.oh-card-body { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.oh-card-ph { opacity: .5; cursor: default; }
+.oh-card-t { font: 600 15px/1.3 var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); letter-spacing: -.01em; }
+.oh-card-s { font: 400 13px/1.4 var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate, #5b7083)); }
+.oh-card-go { position: absolute; top: 50%; right: 12px; transform: translateY(-50%); color: var(--rds-faint, #8ca2b1); pointer-events: none; display: flex; }
+.oh-card-go .material-symbols-rounded, .oh-card-go .material-symbols-outlined { font-size: 20px; }
+body.dark .oh-grp-h, body.dark .oh-card-s, body.dark .oh-hero-sub { color: rgba(236, 241, 244, .66); }
 
 /* ===== Search results / KB browse rows ================================================== */
 .oh-sec { margin-bottom: 18px; }
-.oh-sec-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin: 0 0 10px; }
+/* section labels match the landing group labels: sentence case, readable size, no wide tracking */
+.oh-sec-h { font: 600 13px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate, #5b7083)); margin: 0 4px 8px; }
 .oh-row { display: flex; flex-direction: column; align-items: flex-start; width: 100%; box-sizing: border-box; text-align: left; border: 1px solid var(--rds-line, var(--line)); border-radius: 13px; background: var(--rds-surface, var(--panel, #fff)); padding: 12px 14px; margin-bottom: 8px; cursor: pointer; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); transition: transform .16s, border-color .18s; }
 .oh-row:active { transform: scale(.99); border-color: var(--teal, #0e6e63); }
 .oh-row-t { font: 700 14px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); }
@@ -311,7 +189,7 @@ body.oh-lock { overflow: hidden; }
 .oh-badge-active { background: var(--sev-stable-bg); color: var(--sev-stable-fg); }
 
 /* ===== TNM cancer staging overlay ======================================================= */
-.stg-intro { font: 500 12.5px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); line-height: 1.55; border: 1px solid var(--rds-line, var(--line)); border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; background: var(--rds-surface, var(--panel, #fff)); }
+.stg-intro { font: 400 14px/1.5 var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate, #5b7083)); margin: 2px 4px 14px; }  /* plain lead text, not a boxed card */
 .stg-badge { display: inline-block; font: 800 9px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .04em; border-radius: 6px; padding: 2px 7px; margin-left: 6px; vertical-align: middle; }
 .stg-badge-sc { background: var(--sev-info-bg); color: var(--sev-info-fg); }
 .stg-badge-gap { background: var(--sev-warning-bg); color: var(--sev-warning-fg); }
@@ -325,11 +203,11 @@ body.oh-lock { overflow: hidden; }
 .stg-r1 { display: inline-block; font: 800 9.5px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .04em; background: var(--sev-warning-bg); color: var(--sev-warning-fg); border-radius: 6px; padding: 3px 8px; }
 
 .stg-cat { margin-bottom: 16px; }
-.stg-cat-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .08em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin: 0 0 8px; }
+.stg-cat-h { font: 600 13px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate, #5b7083)); margin: 0 4px 8px; }
 .stg-trow { display: flex; gap: 10px; padding: 9px 12px; border: 1px solid var(--rds-line, var(--line)); border-radius: 11px; margin-bottom: 6px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
 .stg-code { flex: 0 0 46px; font: 800 12.5px var(--rds-font, var(--sans)); color: var(--teal, #0e6e63); }
 .stg-lab { font: 500 12.5px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); line-height: 1.45; }
-.stg-grow { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; padding: 10px 12px; border: 1px solid var(--rds-line, var(--line)); border-left: 4px solid var(--teal, #0e6e63); border-radius: 11px; margin-bottom: 6px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
+.stg-grow { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; padding: 10px 12px; border: 1px solid var(--rds-line, var(--line)); border-radius: 11px; margin-bottom: 6px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
 .stg-stage { font: 800 13px var(--rds-font, var(--sans)); color: var(--teal, #0e6e63); }
 .stg-map { font: 700 12.5px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); }
 .stg-basis { flex: 1 1 100%; font: 500 11.5px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); line-height: 1.45; }
@@ -338,7 +216,9 @@ body.oh-lock { overflow: hidden; }
 .stg-ul { margin: 0; padding-left: 18px; }
 .stg-ul li { font: 500 13px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); line-height: 1.5; margin-bottom: 4px; }
 /* Mandatory content-licence source acknowledgement footer (must stay visible + legible). */
-.stg-license { position: sticky; bottom: 0; margin: 18px -16px 0; padding: 9px 16px calc(9px + env(safe-area-inset-bottom)); font: 700 10.5px var(--rds-font, var(--sans)); letter-spacing: .03em; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); background: color-mix(in srgb, var(--rds-surface, #fff) 90%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-top: 1px solid var(--rds-line, var(--line)); text-align: center; }
+/* footer bar of the staging overlay: a flex child under .oh-body, flush to the bottom edge, solid */
+.stg-license { flex: 0 0 auto; margin: 0; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); font: 600 11px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate, #5b7083)); background: var(--rds-surface, #fff); border-top: 1px solid var(--rds-line, var(--line)); text-align: center; }
+#smdOncoStaging .oh-body { padding-bottom: 20px; }
 
 .stg-gap { border: 1px solid var(--sev-warning-bd); background: var(--sev-warning-bg); border-radius: 14px; padding: 15px; }
 .stg-gap-h { font: 800 11px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .06em; color: var(--sev-warning-fg); margin-bottom: 6px; }
@@ -379,7 +259,8 @@ body.oh-lock { overflow: hidden; }
 /* ===== Favorites + Recent — Material star, not a dingbat ================================= */
 /* The star lives INSIDE the card boundary (above the card's glow layers) so it never leaks into
    the column gap; the wrap is sized by the rules next to .oh-card above, this only pins the star. */
-.oh-card-wrap .oh-star { position: absolute; top: 10px; right: 10px; z-index: 3; }
+/* star sits between the text and the chevron, vertically centred, with a 44px target */
+.oh-card-wrap .oh-star { position: absolute; top: 50%; right: 36px; transform: translateY(-50%); z-index: 3; min-width: 44px; min-height: 44px; justify-content: center; }
 .oh-star-row { display: flex; align-items: stretch; gap: 6px; margin-bottom: 8px; }
 .oh-star-row .oh-row, .oh-star-row .oh-favchip { flex: 1; margin-bottom: 0; }
 .oh-star { flex: 0 0 auto; background: transparent; border: none; color: var(--rds-faint, var(--slate-soft, #8ca2b1)); line-height: 1; padding: 5px 7px; cursor: pointer; border-radius: 9px; display: inline-flex; align-items: center; }
@@ -387,6 +268,7 @@ body.oh-lock { overflow: hidden; }
 .oh-star.on { color: var(--teal, #0e6e63); }
 .oh-star.on .material-symbols-rounded, .oh-star.on .material-symbols-outlined { font-variation-settings: 'FILL' 1; }
 .oh-star:active { transform: scale(.88); }
+.oh-card-wrap .oh-star:active { transform: translateY(-50%) scale(.9); }
 .oh-favlist { display: flex; flex-direction: column; gap: 0; }
 .oh-favchip { text-align: left; background: var(--rds-surface, var(--panel, #fff)); border: 1px solid var(--rds-line, var(--line)); border-radius: 12px; padding: 11px 13px; cursor: pointer; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
 .oh-favchip:active { border-color: var(--teal, #0e6e63); transform: scale(.99); }
@@ -495,4 +377,256 @@ body.dark .oh-overlay, body.v3-dark .oh-overlay { background: var(--rds-bg, var(
 #smdOncoFlow .oe-btn[disabled] { opacity: .45; cursor: not-allowed; box-shadow: none; }
 
 /* iPad pass (2026-10-16): the sticky "Licensed content" banner floated 52 px above the bottom (.oh-body padding). */
-.oh-body > .stg-license:last-child, .oh-body .stg-license { margin-bottom: calc(-52px - env(safe-area-inset-bottom, 0px)); }
+
+/* Staging list search reuses .oh-search; a little less bottom gap above the filter chips */
+.stg-search { margin-bottom: 12px; }
+body.dark .oh-sec-h, body.dark .stg-cat-h { color: rgba(236, 241, 244, .66); }
+body.dark .stg-license { background: var(--rds-surface, #111a21); color: rgba(236, 241, 244, .66); }
+body.dark .stg-intro { color: rgba(236, 241, 244, .66); }
+/* Staging site list: consecutive rows join into one inset list (same pattern as the ONCQIS tool
+   groups) instead of a stack of separate floating cards. */
+#stgResults .oh-row { margin: 0 !important; border-radius: 0 !important; box-shadow: none !important; padding: 12px 14px; }
+#stgResults .oh-row + .oh-row { border-top-width: 0 !important; }
+#stgResults .oh-sec-h + .oh-row, #stgResults .stg-vtoggle + .oh-row { border-top-left-radius: 14px !important; border-top-right-radius: 14px !important; }
+#stgResults .oh-row:not(:has(+ .oh-row)) { border-bottom-left-radius: 14px !important; border-bottom-right-radius: 14px !important; margin-bottom: 18px !important; }
+#stgResults .oh-row-t { font-weight: 600; font-size: 15px; }
+#stgResults .oh-row-s { font-size: 13px; color: var(--rds-muted, var(--slate, #5b7083)); }
+body.dark #stgResults .oh-row-s { color: rgba(236, 241, 244, .66); }
+
+/* ===== Lavender field (owner 2026-10-30: "lavender lively background, gaussian flow, implying
+   oncology"). Lavender is the all-cancers awareness ribbon colour. Soft gaussian light (radial
+   gradients, no filter: blur, so it stays cheap on a phone) drifts slowly behind every ONCQIS
+   screen. One compositor-only transform on one layer; cards and rows stay solid so text keeps
+   its contrast. Still under prefers-reduced-motion. */
+.oh-overlay { background: #f6f3fc !important; isolation: isolate; }
+body.dark .oh-overlay, body.v3-dark .oh-overlay { background: #0e0b16 !important; }
+.oh-overlay::before {
+  content: ""; position: absolute; inset: -25%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(38% 30% at 22% 18%, rgba(167, 139, 250, .34), transparent 70%),
+    radial-gradient(34% 28% at 80% 30%, rgba(196, 181, 253, .40), transparent 70%),
+    radial-gradient(40% 34% at 62% 78%, rgba(139, 92, 246, .20), transparent 72%),
+    radial-gradient(30% 26% at 18% 82%, rgba(111, 44, 107, .12), transparent 70%);
+  animation: ohFlow 38s ease-in-out infinite alternate;
+  will-change: transform;
+}
+body.dark .oh-overlay::before {
+  background:
+    radial-gradient(38% 30% at 22% 18%, rgba(139, 92, 246, .30), transparent 70%),
+    radial-gradient(34% 28% at 80% 30%, rgba(167, 139, 250, .20), transparent 70%),
+    radial-gradient(40% 34% at 62% 78%, rgba(109, 40, 217, .26), transparent 72%),
+    radial-gradient(30% 26% at 18% 82%, rgba(217, 168, 214, .10), transparent 70%);
+}
+@keyframes ohFlow {
+  0%   { transform: translate3d(0, 0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.06); }
+  100% { transform: translate3d(-4%, 3%, 0) rotate(-6deg) scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) { .oh-overlay::before { animation: none; } }
+.oh-overlay > .oh-top, .oh-overlay > .oh-body, .oh-overlay > .stg-license { position: relative; z-index: 1; }
+.oh-overlay > .oh-top { position: sticky; z-index: 5; background: color-mix(in srgb, #f6f3fc 72%, transparent); }
+body.dark .oh-overlay > .oh-top { background: color-mix(in srgb, #0e0b16 72%, transparent); }
+.oh-search { background: var(--oh-card) !important; }
+/* Coloured left edges are kept ONLY where they encode clinical state: CTCAE grade (.ctc-g1..5), RECIST
+   response (.rec-out) and evidence layers. The decorative teal stripe on stage-group rows was removed. */
+
+/* ===== Plum accent for every oncology surface (owner 2026-10-30: "that green is not matching, use
+   lavender only, plum in place of green for ONCQIS, OncoTree, everything onco"). The app teal is
+   re-pointed to plum INSIDE the onco overlays only, so every var(--teal) / var(--ot-accent) /
+   var(--ps-primary) rule there follows. Clinical severity colours (--sev-*, CTCAE grades) are
+   left alone: their colour is the meaning. Plum #6f2c6b on white is 9:1; #d9a8d6 on the dark
+   lavender ground is 10:1. Lives here because onco-home.css is the shared onco sheet; the higher
+   specificity (html ...) beats oncotree.css and protocol-sheet.css, which load after it. */
+html .oh-overlay, html .ot-overlay, html .ps-overlay {
+  --teal: #6f2c6b; --teal-soft: #f3e8f2; --teal-ink: #5a2157;
+  --ot-accent: #6f2c6b; --ot-accent-light: #9c4f97; --ot-accent-glow: rgba(111, 44, 107, 0.12); --ot-accent-subtle: #f6eef6;
+  --ot-primary: #6f2c6b;
+  --ps-primary: #6f2c6b;
+}
+html body.dark .oh-overlay, html body.dark .ot-overlay, html body.dark .ps-overlay,
+html body.v3-dark .oh-overlay, html body.v3-dark .ot-overlay, html body.v3-dark .ps-overlay, html.dark .ps-overlay {
+  --teal: #d9a8d6; --teal-soft: rgba(217, 168, 214, 0.14); --teal-ink: #e9c9e7;
+  --ot-accent: #d9a8d6; --ot-accent-light: #e9c9e7; --ot-accent-glow: rgba(217, 168, 214, 0.18); --ot-accent-subtle: rgba(217, 168, 214, 0.08);
+  --ot-primary: #d9a8d6;
+  --ps-primary: #d9a8d6;
+}
+/* filled plum controls keep white text in light; in dark the light plum fill takes dark ink */
+body.dark .oh-overlay .stg-vbtn.on, body.dark .oh-overlay .oh-cta { color: #1a0f1a; }
+/* In dark mode the plum fill is light (#d9a8d6), so filled plum controls take dark ink, not white */
+html body.dark .ot-overlay .ot-tab-chip.on, html body.dark .ot-overlay .ot-btn.primary, html body.dark .ot-overlay .ot-auc-tag.on,
+html body.dark .ot-overlay .ot-calc-pill:active,
+html body.dark .ps-overlay .ps-btn.primary, html body.dark .ps-overlay .ps-pct-btn.on, html body.dark .ps-overlay .ps-wardsync-btn,
+html body.dark .ps-overlay .ps-inst-logo, html body.dark .ps-overlay .ps-chk input:checked + .ps-chk-box,
+html body.dark #smdOncoFlow .oe-btn.primary, html body.dark #smdOncoFlow .oe-btn.on { color: #1a0f1a !important; }
+html body.dark .ot-overlay .ot-tab-chip.on * { color: inherit; }
+
+/* ===== Tactile controls for every onco screen (owner 2026-10-30: "better UI elements, 3D touch
+   clickability, non vibe coded"). Two shared patterns, one press physics:
+   1. Pressable surfaces sit slightly raised (hairline border + a 1px lower edge + soft contact
+      shadow) and sink on press: translateY(1px), the edge and shadow collapse, the face tints plum.
+      90ms in, so it tracks the finger; no hover glow, no spring overshoot.
+   2. Choice rows (version, category, filter) are a segmented control: one recessed track, the
+      chosen segment a raised white key. Replaces loose pills with a filled plum pill.
+   html-prefixed so it outranks oncotree.css / protocol-sheet.css, which load after this file. */
+html .oh-overlay, html .ot-overlay, html .ps-overlay {
+  --tac-edge: rgba(60, 20, 70, 0.10);
+  --tac-shadow: 0 1px 0 var(--tac-edge), 0 3px 8px -3px rgba(60, 20, 70, 0.16);
+  --tac-press: inset 0 1px 2px rgba(60, 20, 70, 0.10);
+  --seg-track: rgba(111, 44, 107, 0.08);
+  --seg-key: #ffffff;
+  --seg-key-shadow: 0 1px 0 rgba(60, 20, 70, 0.10), 0 2px 6px -2px rgba(60, 20, 70, 0.22);
+}
+html body.dark .oh-overlay, html body.dark .ot-overlay, html body.dark .ps-overlay {
+  --tac-edge: rgba(0, 0, 0, 0.55);
+  --tac-shadow: 0 1px 0 var(--tac-edge), 0 4px 10px -4px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --tac-press: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+  --seg-track: rgba(255, 255, 255, 0.07);
+  --seg-key: #2a2233;
+  --seg-key-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 2px 6px -2px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* 1. pressable surfaces */
+html .oh-overlay .oh-row, html .oh-overlay .oh-favchip, html .oh-overlay .oh-back,
+html .oh-overlay .oh-grid, html .ot-overlay .ot-disease, html .ot-overlay .ot-hbtn,
+html .ot-overlay .ot-flow-card, html .ot-overlay .ot-flow-opt-card, html .ot-overlay .ot-proto-card {
+  box-shadow: var(--tac-shadow) !important;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out, background-color 90ms ease-out !important;
+}
+html .oh-overlay .oh-row:active, html .oh-overlay .oh-favchip:active, html .oh-overlay .oh-back:active,
+html .ot-overlay .ot-disease:active, html .ot-overlay .ot-hbtn:active,
+html .ot-overlay .ot-flow-card:active, html .ot-overlay .ot-flow-opt-card:active, html .ot-overlay .ot-proto-card:active {
+  transform: translateY(1px) !important;
+  box-shadow: var(--tac-press) !important;
+  background: color-mix(in srgb, var(--teal) 6%, var(--oh-card, var(--ot-card, #fff))) !important;
+}
+/* rows inside a grouped list press in place (the group is the raised slab) */
+html .oh-overlay .oh-grid .oh-card:active { transform: none !important; box-shadow: var(--tac-press) !important; background: color-mix(in srgb, var(--teal) 7%, var(--oh-card)) !important; }
+html .oh-overlay #stgResults .oh-row { box-shadow: none !important; }
+html .oh-overlay #stgResults .oh-row:active { transform: none !important; }
+/* the old cursor spotlight and hover border beam are decoration on a touch screen */
+html .ot-overlay .ot-disease::before, html .ot-overlay .ot-disease::after,
+html .ot-overlay .ot-flow-card::before, html .ot-overlay .ot-flow-card::after,
+html .ot-overlay .ot-flow-opt-card::before, html .ot-overlay .ot-flow-opt-card::after,
+html .ot-overlay .ot-proto-card::before, html .ot-overlay .ot-proto-card::after { display: none !important; }
+
+/* header buttons: 44px keys, not 34px grey dots */
+html .ot-overlay .ot-hbtn { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--ot-line); background: var(--ot-card); color: var(--ot-ink); }
+html .ot-overlay .ot-hbtn .material-symbols-outlined, html .ot-overlay .ot-hbtn .material-symbols-rounded { font-size: 21px; }
+html .ot-overlay .ot-hbtn-calc, html .ot-overlay .ot-hbtn-stg { color: var(--ot-accent); background: var(--ot-card); }
+
+/* 2. segmented controls */
+html .oh-overlay .stg-vtoggle, html .ot-overlay .ot-picker-tabs {
+  display: flex; flex-wrap: nowrap; gap: 2px; padding: 3px; margin: 2px 0 16px;
+  background: var(--seg-track); border-radius: 12px; overflow-x: auto; scrollbar-width: none;
+  box-shadow: inset 0 1px 2px rgba(60, 20, 70, 0.08);
+}
+html .oh-overlay .stg-vtoggle::-webkit-scrollbar { display: none; }
+html .oh-overlay .stg-vbtn, html .ot-overlay .ot-tab-chip {
+  flex: 1 0 auto; min-height: 36px; padding: 0 12px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  border: 0 !important; border-radius: 9px; background: transparent !important; box-shadow: none !important;
+  font: 600 13px var(--rds-font, var(--sans, system-ui)); color: var(--rds-muted, var(--ot-sub, #5b7083)) !important;
+  white-space: nowrap; cursor: pointer; transition: background-color 120ms ease, box-shadow 120ms ease, color 120ms ease;
+}
+html .oh-overlay .stg-vbtn.on, html .ot-overlay .ot-tab-chip.on {
+  background: var(--seg-key) !important; color: var(--rds-ink, var(--ot-ink, #14202b)) !important; box-shadow: var(--seg-key-shadow) !important;
+}
+html .oh-overlay .stg-vbtn:active, html .ot-overlay .ot-tab-chip:active { transform: none; background: color-mix(in srgb, var(--teal) 10%, transparent) !important; }
+html .oh-overlay .stg-vbtn.on:active, html .ot-overlay .ot-tab-chip.on:active { background: var(--seg-key) !important; box-shadow: var(--tac-press) !important; }
+html .ot-overlay .ot-tab-chip .ot-chip-num { background: transparent; opacity: .7; font-weight: 600; padding: 0; }
+html .ot-overlay .ot-picker-tabs { margin: 10px 0 0; padding-top: 3px; }
+html .oh-overlay .stg-vtoggle + .oh-row, html .oh-overlay .stg-vtoggle + .oh-sec-h { margin-top: 0; }
+html body.dark .oh-overlay .stg-vbtn.on, html body.dark .ot-overlay .ot-tab-chip.on { color: #f3eef6 !important; }
+
+/* OncoTree search: the same white field as ONCQIS, not a grey well that reads as disabled */
+html .ot-overlay .ot-search-box { background: var(--ot-card); border-color: var(--ot-line); box-shadow: inset 0 1px 2px rgba(60, 20, 70, 0.05); height: 46px; }
+html .ot-overlay .ot-picker-controls { background: transparent; }
+html .ot-overlay .ot-picker-src { display: flex; align-items: center; gap: 6px; margin: -6px 0 14px; font: 500 12.5px var(--ot-font, system-ui); color: var(--ot-sub); }
+html .ot-overlay .ot-picker-src .material-symbols-outlined, html .ot-overlay .ot-picker-src .material-symbols-rounded { font-size: 16px; color: var(--ot-accent); }
+
+/* ===== Collapsing header (owner 2026-10-30: "mix of both rather than a standard heading bar").
+   At rest: CliniX-style large title in the page, with floating round keys and NO bar.
+   Scrolled (.oh-scrolled, set in onco-home.js): PrepNucleus-style frosted bar fades in behind the
+   same keys and the compact title (mark + name + subtitle) fades up. The header floats over the
+   scroll body, so content passes under the frost instead of stopping at a hard edge. */
+html .oh-overlay > .oh-top {
+  position: absolute !important; top: 0; left: 0; right: 0; z-index: 6;
+  display: grid !important; grid-template-columns: 44px minmax(0, 1fr) 44px; align-items: center; gap: 12px;
+  padding: calc(10px + env(safe-area-inset-top)) 16px 10px !important;
+  background: transparent !important; border-bottom: 1px solid transparent !important;
+  -webkit-backdrop-filter: none !important; backdrop-filter: none !important;
+  transition: background-color .22s ease, border-color .22s ease;
+}
+html .oh-overlay.oh-scrolled > .oh-top {
+  background: color-mix(in srgb, #f6f3fc 90%, transparent) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.5) !important; backdrop-filter: blur(20px) saturate(1.5) !important;
+  border-bottom-color: var(--oh-line) !important;
+}
+html body.dark .oh-overlay.oh-scrolled > .oh-top { background: color-mix(in srgb, #0e0b16 88%, transparent) !important; }
+html .oh-overlay > .oh-body { padding-top: calc(66px + env(safe-area-inset-top)) !important; }
+
+/* round keys: frosted discs that stay legible over the lavender field with or without the bar */
+html .oh-overlay .oh-back, html .oh-overlay .oh-hbtn {
+  width: 44px; height: 44px; min-width: 44px; padding: 0 !important; border-radius: 50% !important;
+  display: grid; place-items: center; cursor: pointer;
+  background: rgba(255, 255, 255, .72) !important; color: var(--rds-ink, #14202b) !important;
+  border: 1px solid rgba(60, 20, 70, .08) !important;
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(60, 20, 70, .06), 0 4px 12px -4px rgba(60, 20, 70, .22) !important;
+  transition: transform 90ms ease-out, box-shadow 90ms ease-out !important;
+}
+html body.dark .oh-overlay .oh-back, html body.dark .oh-overlay .oh-hbtn {
+  background: rgba(42, 34, 51, .72) !important; color: #f3eef6 !important; border-color: rgba(255, 255, 255, .08) !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .5), 0 4px 12px -4px rgba(0, 0, 0, .7) !important;
+}
+html .oh-overlay .oh-back:active, html .oh-overlay .oh-hbtn:active { transform: translateY(1px) scale(.97) !important; box-shadow: inset 0 1px 2px rgba(60, 20, 70, .12) !important; }
+html .oh-overlay .oh-back .material-symbols-rounded, html .oh-overlay .oh-hbtn .material-symbols-rounded { font-size: 22px; }
+html .oh-overlay .oh-hspace { width: 44px; height: 44px; }
+.oh-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* compact title: hidden over the large title, fades up with the bar */
+html .oh-overlay > .oh-top .oh-title {
+  display: flex; align-items: center; gap: 10px; min-width: 0; text-align: left;
+  font: 700 17px/1.2 var(--rds-font, var(--sans)) !important; color: var(--rds-ink, #14202b);
+  opacity: 0; transform: translateY(6px); transition: opacity .2s ease, transform .2s ease;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+html .oh-overlay.oh-scrolled > .oh-top .oh-title { opacity: 1; transform: none; }
+html body.dark .oh-overlay > .oh-top .oh-title { color: #f3eef6; }
+.oh-title-mark { width: 30px; height: 30px; flex: 0 0 30px; display: grid; place-items: center; color: var(--teal); }
+.oh-title-mark .material-symbols-rounded { font-size: 26px; }
+.oh-title-txt { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.oh-title-txt b { font-weight: 700; font-size: 17px; }
+.oh-title-txt small { font: 500 12.5px var(--rds-font, var(--sans)); color: var(--rds-muted, #5b7083); }
+html body.dark .oh-title-txt small { color: rgba(236, 241, 244, .66); }
+
+/* large titles in the page */
+.oh-ltitle { margin: 6px 2px 12px; font: 700 30px/1.12 var(--rds-font, var(--sans)); letter-spacing: -.025em; color: var(--rds-ink, #14202b); }
+body.dark .oh-ltitle { color: #f3eef6; }
+.oh-hero { margin: 6px 2px 18px; }
+.oh-hero-brand { display: flex; align-items: center; gap: 12px; }
+.oh-hero-mark { width: 46px; height: 46px; flex: 0 0 46px; display: grid; place-items: center; border-radius: 14px; background: var(--teal-soft); color: var(--teal); box-shadow: 0 1px 0 rgba(60, 20, 70, .06), 0 4px 12px -6px rgba(60, 20, 70, .3); }
+.oh-hero-mark .material-symbols-rounded { font-size: 30px; }
+html .oh-overlay .oh-hero-title { font-size: 34px; letter-spacing: -.03em; }
+html .oh-overlay .oh-hero-sub { margin-top: 10px; }
+
+/* ONCQIS brand mark + wordmark (owner's logo: hexagonal immune lattice, antibodies, targeted red core).
+   Vector, transparent, two theme variants; the wordmark is live text in the logo's teal gradient so it
+   stays crisp and selectable, with the logo's own tagline under it, CliniX-style. */
+.oq-logo { display: inline-grid; place-items: center; flex: 0 0 auto; }
+.oq-logo img { width: 100%; height: 100%; display: block; }
+.oq-logo .oq-d { display: none; }
+body.dark .oq-logo .oq-l { display: none; }
+body.dark .oq-logo .oq-d { display: block; }
+html .oh-overlay .oh-hero-mark { width: 64px; height: 64px; flex: 0 0 64px; background: none !important; box-shadow: none !important; border-radius: 0; }
+html .oh-overlay .oh-title-mark { width: 34px; height: 34px; flex: 0 0 34px; }
+.oh-hero-brand { gap: 12px !important; }
+.oh-hero-word { display: flex; flex-direction: column; min-width: 0; }
+html .oh-overlay .oh-hero-title {
+  font: 600 38px/1 var(--rds-font, var(--sans)) !important; letter-spacing: .03em !important;
+  background: linear-gradient(90deg, #0b4252, #2f95a8); -webkit-background-clip: text; background-clip: text; color: transparent !important;
+}
+body.dark .oh-overlay .oh-hero-title { background-image: linear-gradient(90deg, #6cc3cf, #b6e7ec); }
+.oh-hero-tag { margin-top: 5px; font: 500 12.5px/1.2 var(--rds-font, var(--sans)); color: var(--rds-ink, #14202b); opacity: .78; letter-spacing: .01em; }
+body.dark .oh-hero-tag { color: #f3eef6; }
+.oh-title-txt b { background: linear-gradient(90deg, #0b4252, #2f95a8); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: .03em; }
+body.dark .oh-title-txt b { background-image: linear-gradient(90deg, #6cc3cf, #b6e7ec); }

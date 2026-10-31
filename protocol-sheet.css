@@ -1,7 +1,7 @@
 /* Chemotherapy Protocol Sheet - mobile overlay + print-to-PDF (A4). Self-contained; light/dark aware. */
 .ps-overlay {
   --ps-ink: #14202b; --ps-muted: #5a7184; --ps-line: #d7dee3; --ps-bg: #f4f6f5; --ps-card: #ffffff;
-  --ps-primary: #0e6e63; --ps-danger: #c0392b; --ps-x: #b6bfc7;
+  --ps-primary: #6f2c6b; --ps-danger: #c0392b; --ps-x: #b6bfc7;
   position: fixed; inset: 0; z-index: 15000; display: none; background: var(--ps-bg);
   font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--ps-ink);
 }
@@ -59,7 +59,7 @@ body.dark .ps-overlay, body.v3-dark .ps-overlay, html.dark .ps-overlay { --ps-in
 .ps-wardsync-btn:active { opacity: .88; transform: scale(.98); }
 
 /* Full-width regimen banner: protocol identity at a glance */
-.ps-regimenbanner { background: linear-gradient(135deg, var(--ps-primary), #0b574e); color: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 6px 18px -6px rgba(14, 110, 99, .45); border: 1px solid rgba(255, 255, 255, .18); }
+.ps-regimenbanner { background: linear-gradient(135deg, var(--ps-primary), #4f1d4c); color: #fff; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 6px 18px -6px rgba(111, 44, 107, .45); border: 1px solid rgba(255, 255, 255, .18); }
 .ps-regimen-kicker { font: 800 10px system-ui; text-transform: uppercase; letter-spacing: .12em; opacity: .8; }
 .ps-regimen-name { font: 800 17px/1.2 system-ui; letter-spacing: -.01em; margin-top: 3px; }
 .ps-regimen-name .ps-custombadge { margin-left: 6px; }
@@ -167,10 +167,10 @@ body.dark .ps-warns { color: #fbbf24; background: #3a2e05; border-color: #78350f
 
 /* action bar */
 .ps-actionbar { flex: 0 0 auto; display: flex; gap: 10px; padding: 10px 14px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); background: var(--ps-card); border-top: 1px solid var(--ps-line); }
-.ps-btn { flex: 1; min-height: 48px; border: none; border-radius: 14px; font: 700 15px/1.2 system-ui; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(14, 110, 99, .18); }
+.ps-btn { flex: 1; min-height: 48px; border: none; border-radius: 14px; font: 700 15px/1.2 system-ui; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(111, 44, 107, .18); }
 .ps-btn .material-symbols-rounded, .ps-btn .material-symbols-outlined { font-size: 20px; flex: 0 0 auto; }
 .ps-btn.ghost { background: color-mix(in srgb, var(--ps-primary) 8%, var(--ps-card)); color: var(--ps-primary); border: 1px solid color-mix(in srgb, var(--ps-primary) 30%, transparent); }
-.ps-btn.primary { background: var(--ps-primary); color: #fff; box-shadow: 0 6px 16px -4px rgba(14, 110, 99, .5); }
+.ps-btn.primary { background: var(--ps-primary); color: #fff; box-shadow: 0 6px 16px -4px rgba(111, 44, 107, .5); }
 .ps-btn:active { transform: scale(.98); }
 
 /* Narrow phones (360-430px): tighter padding, stacked EMR bar, full-width touch targets */
@@ -301,7 +301,7 @@ body.dark .ps-oral-lang-title { color: #60a5fa; }
 .ps-pct-btn { background: color-mix(in srgb, var(--ps-primary) 10%, var(--ps-card)); color: var(--ps-primary); border: 1px solid color-mix(in srgb, var(--ps-primary) 30%, transparent); border-radius: 6px; font: 700 10.5px system-ui; padding: 3px 8px; cursor: pointer; }
 .ps-pct-btn:active { transform: scale(0.96); }
 .ps-pct-btn.on { background: var(--ps-primary); color: #fff; border-color: var(--ps-primary); }
-.ps-page { box-sizing: border-box; width: 100%; border: 1.5px solid var(--ps-primary, #0f766e); border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
+.ps-page { box-sizing: border-box; width: 100%; border: 1.5px solid var(--ps-primary, #6f2c6b); border-radius: 6px; padding: 16px 20px; margin-bottom: 16px; }
 .ps-page-break-deliberate { display: none; }
 .ps-page2-header { display: none; }
 .ps-quick-reasons { display: flex; flex-wrap: wrap; gap: 4px; margin-top: -4px; }
@@ -368,7 +368,7 @@ body.dark .ps-oral-lang-title { color: #60a5fa; }
   .ps-sig-pad canvas { border: 1px solid #000 !important; }
   .ps-page-break-auto, .ps-page { page-break-inside: avoid; break-inside: avoid; }
   .ps-page-break-deliberate { display: block !important; page-break-before: always !important; break-before: page !important; height: 0 !important; margin: 0 !important; padding: 0 !important; }
-  .ps-page2-header { display: flex !important; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #0f766e; padding-bottom: 5px; margin-bottom: 12px; font-size: 8.5pt; color: #64748b; font-weight: 600; }
+  .ps-page2-header { display: flex !important; justify-content: space-between; align-items: center; border-bottom: 1.5px solid #6f2c6b; padding-bottom: 5px; margin-bottom: 12px; font-size: 8.5pt; color: #64748b; font-weight: 600; }
   .ps-cards { grid-template-columns: minmax(0,1.15fr) minmax(0,1fr) !important; }
   .ps-cards-col2 { display: flex !important; flex-direction: column !important; gap: 8px !important; }
   .ps-table td, .ps-table th, .ps-table tr { page-break-inside: avoid !important; break-inside: avoid !important; }
