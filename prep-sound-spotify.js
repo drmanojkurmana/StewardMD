@@ -383,7 +383,13 @@
     };
   }
 
-  var PURE = { esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
+  // kind "smartphone"/"tablet": only that Spotify (never another device's, which plays out of earshot); null: active, else first.
+  function pickDeviceFor(ds, kind) {
+    var ok = (ds || []).filter(function (x) { return x && x.id && !x.is_restricted; });
+    if (kind) return ok.filter(function (x) { return String(x.type || "").toLowerCase() === kind; })[0] || null;
+    return ok.filter(function (x) { return x.is_active; })[0] || ok[0] || null;
+  }
+  var PURE = { pickDeviceFor: pickDeviceFor, esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
     parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, parseQueue: parseQueue, premiumOf: function (me) { return !(me && me.product && me.product !== "premium"); }, capsForPlayer: capsForPlayer,
@@ -671,11 +677,30 @@
   function clearErr() { if (!S.err) return; S.err = null; var el = S.sheet && S.sheet.querySelector(".pn-sound-sp-err"); if (el) el.parentNode.removeChild(el); }
   // A command with no active Spotify device: wake the account's first available device, then retry once.
   var ASLEEP = "Your iPhone or iPad paused Spotify in the background, so Spotify cannot restart from here. Tap Open Spotify once; your song continues here when you come back.";
+  // Spotify's own "active device" is whatever played last (often another tablet or computer, so music played
+  // silently elsewhere). In the app, start on the Spotify of the device in the learner's hand.
+  function localKind() {
+    if (!native()) return null;
+    var n = G.navigator || {}, ua = n.userAgent || "";
+    if (/iPad/.test(ua) || (/Macintosh/.test(ua) && n.maxTouchPoints > 1)) return "tablet";
+    return /iPhone|Android/.test(ua) ? "smartphone" : null;
+  }
+  function pickDevice(ds) { return pickDeviceFor(ds, localKind()); }
+  function playHere(body) {
+    return client().devices().then(function (ds) {
+      var d = pickDevice(ds);
+      if (!d) throw { reason: "no_device", message: ASLEEP };
+      return client().play(body, d.id).then(function () { return d; }, function (e) {
+        if (e && e.reason === "no_active_device") throw { reason: "no_device", message: ASLEEP };
+        throw e;
+      });
+    });
+  }
   function withDevice(fn) {
     return fn().then(null, function (e) {
       if (!e || e.reason !== "no_active_device") throw e;
       return client().devices().then(function (ds) {
-        var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
+        var d = pickDevice(ds);
         if (!d) throw { reason: "no_device", message: ASLEEP };
         // iOS refuses to restart audio in a backgrounded Spotify even when it is still listed: one message, not two.
         return client().transfer(d.id).then(function () { return fn(d.id); }).then(null, function (e2) {
@@ -744,7 +769,7 @@
   function playFromIdle(m) {
     var body = playBody(m);
     if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
-    return withDevice(function (id) { return client().play(body, id); }).then(function () { S.pendingPlay = null; if (S.now) S.now.lastPlayed = false; clearErr(); syncLastNote(); syncMiniSoon(); refreshCard(); }, function (e) {
+    return playHere(body).then(function () { S.pendingPlay = null; if (S.now) S.now.lastPlayed = false; clearErr(); syncLastNote(); syncMiniSoon(); refreshCard(); }, function (e) {
       if (e && e.reason === "no_device") { S.pendingPlay = body || playBody(lastOf(m)) || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: ASLEEP }); }
       if (S.now) S.now.isPlaying = false; fail(e);
     });
@@ -754,7 +779,7 @@
     if (!S.pendingPlay || S.resuming || D.visibilityState === "hidden") return;
     var body = S.pendingPlay; S.resuming = true;   // kept until Spotify takes it: visibilitychange and app resume both try
     client().devices().then(function (ds) {
-      var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
+      var d = pickDevice(ds);
       if (!d) return say("Spotify is not running. Press play in Spotify once, then use the player here.");
       return client().play(body && (body.uris || body.context_uri) ? body : undefined, d.id).then(function () { if (S.now) { S.now.lastPlayed = false; S.now.isPlaying = true; } clearErr(); syncLastNote(); S.pendingPlay = null; say("Playing on " + (d.name || "Spotify") + "."); syncMiniSoon(); refreshCard(); });
     }).then(function () { S.resuming = false; }, function () { S.resuming = false; });
@@ -794,7 +819,7 @@
   function pick(uri) {
     var body = /^spotify:track:/.test(uri) ? { uris: [uri] } : { context_uri: uri };
     // Plays right here on the learner's Spotify; PrepNucleus never switches apps on its own (owner 2026-10-31).
-    withDevice(function (id) { return client().play(body, id); }).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
+    playHere(body).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
       if (e && e.reason === "no_device") S.pendingPlay = body;
       fail(e);
     });
