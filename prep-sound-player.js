@@ -322,8 +322,23 @@
       if (!s) return;
       state.model = normalizeModel(s.model); state.caps = normalizeCaps(s.caps);
       state.baseAt = Date.now();
+      // Re-sync every 5 s: rebuild only when something besides the position changed, else the art reloads and flickers.
+      var still = {}; for (var k in state.model) still[k] = state.model[k]; still.positionMs = 0;
+      var key = cardHtml(still, state.caps, currentOpts());
+      if (key === state.key && el.firstChild) return showPos(true);
+      state.key = key;
       el.innerHTML = cardHtml(state.model, state.caps, currentOpts());
       wire();
+    }
+    function showPos(force) {
+      if (!state.model || (!force && !state.model.isPlaying)) return;
+      var pos = state.model.isPlaying ? interpolatePosition(state.model, state.baseAt, Date.now()) : (state.model.positionMs || 0);
+      var t = el.querySelector("[data-player-elapsed]");
+      if (t) t.textContent = formatMs(pos);
+      var seek = el.querySelector("[data-player-seek]");
+      if (seek && !state.dragging) seek.value = String(Math.min(pos, Number(seek.max) || pos));
+      var bar = el.querySelector(".pn-player-bar span");
+      if (bar && state.model.durationMs > 0) bar.style.width = Math.min(100, (pos / state.model.durationMs) * 100) + "%";
     }
     function wire() {
       var seek = el.querySelector("[data-player-seek]");
@@ -350,16 +365,7 @@
       if (typeof o.onAction === "function") o.onAction(act, null, b);
     }
     el.addEventListener("click", onClick);
-    var tickTimer = setInterval(function () {
-      if (!state.model || !state.model.isPlaying) return;
-      var pos = interpolatePosition(state.model, state.baseAt, Date.now());
-      var t = el.querySelector("[data-player-elapsed]");
-      if (t) t.textContent = formatMs(pos);
-      var seek = el.querySelector("[data-player-seek]");
-      if (seek && !state.dragging) seek.value = String(Math.min(pos, Number(seek.max) || pos));
-      var bar = el.querySelector(".pn-player-bar span");
-      if (bar && state.model.durationMs > 0) bar.style.width = Math.min(100, (pos / state.model.durationMs) * 100) + "%";
-    }, 1000);
+    var tickTimer = setInterval(function () { showPos(false); }, 1000);
     var poller = null;
     poller = armPoller();
     if (typeof o.fetchState === "function") poller.start();
