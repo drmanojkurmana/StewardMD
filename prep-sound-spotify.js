@@ -507,12 +507,18 @@
     }).join("") + "</ul>";
   }
   // Now playing, or (nothing active anywhere) the last played track so the card is never blank.
+  function notePause() {
+    var sk = S.sheet && S.sheet.querySelector("[data-player-seek]"), pos = sk ? Number(sk.value) : (S.now && S.now.positionMs);
+    if (S.now && S.now.trackUri) S.paused = { uri: S.now.trackUri, pos: pos > 0 ? pos : 0 };
+  }
   function nowOrLast() {
     return client().nowPlaying().then(function (m) {
       if (m && m.title) return m;
       if (S.now && S.now.title) {   // Spotify went to sleep (iPadOS suspends it after a pause): keep the song on screen, paused, until Spotify reports another
         var keep = {}; for (var k in S.now) keep[k] = S.now[k];
-        keep.isPlaying = false; keep.lastPlayed = true; keep.contextUri = keep.contextUri || ""; return keep;
+        keep.isPlaying = false; keep.lastPlayed = true; keep.contextUri = keep.contextUri || "";
+        if (S.paused && S.paused.uri === keep.trackUri) keep.positionMs = S.paused.pos;
+        return keep;
       }
       return client().lastPlayed().then(function (l) { return l || m; }, function () { return m; });
     });
@@ -606,7 +612,8 @@
       return Promise.all([nowOrLast(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
         S.now = a[0]; S.queue = keepQueue(a[1]);
         var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"), nh = nextHtml(); if (nb && S.nextShown !== nh) { nb.innerHTML = nh; S.nextShown = nh; }   // unchanged rows: no thumbnail reload
-        clearErr(); syncLastNote();
+        if (S.now && S.now.isPlaying) clearErr();
+        syncLastNote();
         return cardState();
       });
     }
@@ -626,6 +633,7 @@
         if (act === "toggle" && !m.isPlaying) { playFromIdle(m); return; }
         if (act === "toggle") {
           var was = !!m.isPlaying;
+          if (was) notePause();
           if (S.now) { S.now.isPlaying = !was; if (S.playerHandle) S.playerHandle.refresh(cardState()); }   // flip at once; Spotify confirms
           after(withDevice(function () { return was ? client().pause() : client().play(); }));
         }
@@ -736,20 +744,20 @@
   function playFromIdle(m) {
     var body = playBody(m);
     if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
-    return withDevice(function (id) { return client().play(body, id); }).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
+    return withDevice(function (id) { return client().play(body, id); }).then(function () { S.pendingPlay = null; if (S.now) S.now.lastPlayed = false; clearErr(); syncLastNote(); syncMiniSoon(); refreshCard(); }, function (e) {
       if (e && e.reason === "no_device") { S.pendingPlay = body || playBody(lastOf(m)) || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: ASLEEP }); }
       if (S.now) S.now.isPlaying = false; fail(e);
     });
   }
   function pendingUri() { var b = S.pendingPlay || {}; return (b.uris && b.uris[0]) || b.context_uri || ""; }
   function resumePending() {
-    if (!S.pendingPlay || D.visibilityState === "hidden") return;
-    var body = S.pendingPlay; S.pendingPlay = null;
+    if (!S.pendingPlay || S.resuming || D.visibilityState === "hidden") return;
+    var body = S.pendingPlay; S.resuming = true;   // kept until Spotify takes it: visibilitychange and app resume both try
     client().devices().then(function (ds) {
       var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
       if (!d) return say("Spotify is not running. Press play in Spotify once, then use the player here.");
-      return client().play(body && (body.uris || body.context_uri) ? body : undefined, d.id).then(function () { say("Playing on " + (d.name || "Spotify") + "."); syncMiniSoon(); refreshCard(); });
-    }, function () {});
+      return client().play(body && (body.uris || body.context_uri) ? body : undefined, d.id).then(function () { if (S.now) { S.now.lastPlayed = false; S.now.isPlaying = true; } clearErr(); syncLastNote(); S.pendingPlay = null; say("Playing on " + (d.name || "Spotify") + "."); syncMiniSoon(); refreshCard(); });
+    }).then(function () { S.resuming = false; }, function () { S.resuming = false; });
   }
   D.addEventListener("visibilitychange", resumePending);
   function refreshCard() { if (S.playerHandle) nowOrLast().then(function (n) { S.now = n; if (S.playerHandle) S.playerHandle.refresh(cardState()); syncLastNote(); }, function () {}); }
@@ -803,6 +811,7 @@
     if (a === "sp-mini-toggle" && !(S.now && S.now.isPlaying)) return playFromIdle(S.now);
     if (a === "sp-mini-toggle") {
       var was = !!(S.now && S.now.isPlaying);
+      if (was) notePause();
       if (S.now) { S.now.isPlaying = !was; paintDock(); }
       return withDevice(function () { return was ? client().pause() : client().play(); }).then(syncMiniSoon, function (e) { syncMiniSoon(); say(e && e.message || "Spotify did not answer. Try again."); });
     }
@@ -909,6 +918,7 @@
     var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App, isCb = function (u) { return /^stewardmd:\/\/spotify-callback/.test(u || ""); };
     if (AppP) {
       AppP.addListener("appUrlOpen", function (d) { if (d && isCb(d.url)) handleReturn(d.url); });
+      AppP.addListener("resume", function () { G.setTimeout(resumePending, 900); });   // WKWebView may skip visibilitychange on app switch
       AppP.getLaunchUrl().then(function (d) { if (d && isCb(d.url)) handleReturn(d.url); }).catch(function () {});
     }
   } catch (e) {}
