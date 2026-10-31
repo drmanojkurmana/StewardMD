@@ -544,6 +544,7 @@
         '<div class="pn-sheet-act"><button type="button" class="pn-btn pri pn-sound-sp-connect" data-act="sp-connect">Connect Spotify</button></div>';
       return h;
     }
+    if (S.diagOn) h += '<pre class="pn-sound-sp-diag" data-sp-diag>' + esc((S.diag || ["no calls yet"]).join("\n")) + "</pre>";
     if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") +
       (S.err.reason === "no_device" || S.err.reason === "no_active_device" ? ' <a href="' + esc(openUrl(pendingUri())) + '" target="_blank" rel="noopener">Open Spotify</a>' : "") + "</p>";
     /* The shared Now Playing card (prep-sound-player.js) replaces the old
@@ -656,6 +657,11 @@
   }
   function wireSheet() {
     if (!S.sheet) return;
+    var t = S.sheet.querySelector("#pnSoundSpT"), lp = null;
+    if (t) {
+      t.addEventListener("pointerdown", function () { lp = G.setTimeout(function () { S.diagOn = !S.diagOn; paintSheet(); }, 900); });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(function (ev) { t.addEventListener(ev, function () { G.clearTimeout(lp); }); });
+    }
     var f = S.sheet.querySelector("[data-sp-search]");
     if (f) f.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -686,11 +692,19 @@
     return /iPhone|Android/.test(ua) ? "smartphone" : null;
   }
   function pickDevice(ds) { return pickDeviceFor(ds, localKind()); }
+  // Long-press "Music" shows this: what Spotify listed and where each play went. Names/types/status only, never tokens.
+  function diag(line) {
+    S.diag = (S.diag || []).concat(new Date().toTimeString().slice(0, 8) + " " + line).slice(-8);
+    var el = S.sheet && S.sheet.querySelector("[data-sp-diag]"); if (el) el.textContent = S.diag.join("\n");
+  }
+  function devLine(ds) { return (ds || []).map(function (x) { return (x.name || "?") + "/" + (x.type || "?") + (x.is_active ? "*" : "") + (x.is_restricted ? "!" : ""); }).join(", ") || "none"; }
   function playHere(body) {
     return client().devices().then(function (ds) {
       var d = pickDevice(ds);
+      diag("devices: " + devLine(ds) + " | want " + (localKind() || "any") + " -> " + (d ? d.name : "none"));
       if (!d) throw { reason: "no_device", message: ASLEEP };
-      return client().play(body, d.id).then(function () { return d; }, function (e) {
+      return client().play(body, d.id).then(function () { diag("play -> " + d.name + " ok"); return d; }, function (e) {
+        diag("play -> " + d.name + " failed " + ((e && (e.status + " " + e.reason)) || "?"));
         if (e && e.reason === "no_active_device") throw { reason: "no_device", message: ASLEEP };
         throw e;
       });
@@ -780,9 +794,12 @@
     var body = S.pendingPlay; S.resuming = true;   // kept until Spotify takes it: visibilitychange and app resume both try
     client().devices().then(function (ds) {
       var d = pickDevice(ds);
+      diag("resume #" + (S.resumeTry || 0) + " devices: " + devLine(ds) + " -> " + (d ? d.name : "none"));
+      if (!d && (S.resumeTry = (S.resumeTry || 0) + 1) < 4) { G.setTimeout(resumePending, 2500); return; }   // Spotify registers a few seconds after opening
+      S.resumeTry = 0;
       if (!d) return say("Spotify is not running. Press play in Spotify once, then use the player here.");
       return client().play(body && (body.uris || body.context_uri) ? body : undefined, d.id).then(function () { if (S.now) { S.now.lastPlayed = false; S.now.isPlaying = true; } clearErr(); syncLastNote(); S.pendingPlay = null; say("Playing on " + (d.name || "Spotify") + "."); syncMiniSoon(); refreshCard(); });
-    }).then(function () { S.resuming = false; }, function () { S.resuming = false; });
+    }).then(function () { S.resuming = false; }, function (e) { S.resuming = false; diag("resume failed " + ((e && (e.status + " " + e.reason)) || "?")); });
   }
   D.addEventListener("visibilitychange", resumePending);
   function refreshCard() { if (S.playerHandle) nowOrLast().then(function (n) { S.now = n; if (S.playerHandle) S.playerHandle.refresh(cardState()); syncLastNote(); }, function () {}); }
