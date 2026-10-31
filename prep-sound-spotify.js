@@ -318,6 +318,7 @@
         if (/not (be )?registered|developer\.spotify\.com\/dashboard|developer dashboard/i.test(t || ""))   // Spotify: "Check settings on developer.spotify.com/dashboard, the user may not be registered."
           throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
         if (/PREMIUM_REQUIRED/.test(t || "")) throw apiError(403);
+        if (/Player command failed|Restriction violated|NO_ACTIVE_DEVICE/i.test(t || "")) throw { reason: "no_active_device", status: 403, message: "Spotify is asleep on your devices." };
         throw { reason: "forbidden", status: 403, message: "Spotify did not allow that here. Try again, or reconnect Spotify." };
       }, function () { throw { reason: "forbidden", status: 403, message: "Spotify did not allow that here." }; });
     }
@@ -509,6 +510,10 @@
   function nowOrLast() {
     return client().nowPlaying().then(function (m) {
       if (m && m.title) return m;
+      if (S.now && S.now.title) {   // Spotify went to sleep (iPadOS suspends it after a pause): keep the song on screen, paused, until Spotify reports another
+        var keep = {}; for (var k in S.now) keep[k] = S.now[k];
+        keep.isPlaying = false; keep.lastPlayed = true; keep.contextUri = keep.contextUri || ""; return keep;
+      }
       return client().lastPlayed().then(function (l) { return l || m; }, function () { return m; });
     });
   }
@@ -609,7 +614,7 @@
       p.then(function () {
         clearErr();
         G.setTimeout(function () { if (S.playerHandle) fresh().then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, function () {}); }, 700);
-        return client().nowPlaying().then(function (m) { S.now = m; if (S.playerHandle) S.playerHandle.refresh(cardState()); });
+        return nowOrLast().then(function (m) { S.now = m; if (S.playerHandle) S.playerHandle.refresh(cardState()); syncLastNote(); });
       }).then(null, fail);
     }
     S.playerHandle = PL.mount(box, {
@@ -662,7 +667,7 @@
       if (!e || e.reason !== "no_active_device") throw e;
       return client().devices().then(function (ds) {
         var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
-        if (!d) throw { reason: "no_device", message: "Spotify is not running on any of your devices. Tap Open Spotify once; your song starts here when you come back." };
+        if (!d) throw { reason: "no_device", message: "iPadOS or iOS put Spotify to sleep in the background, so it cannot be started from here. Tap Open Spotify once; your song continues here when you come back." };
         return client().transfer(d.id).then(function () { return fn(d.id); });   // retry aimed at the woken device
       });
     });
@@ -714,12 +719,17 @@
   /* Play from idle: resume (or start the last played track) on an active or available Spotify device. With Spotify
      closed everywhere the Web API has nothing to control, so open the Spotify app on the song and finish when the
      learner returns: the reopened app is then an available device and takes the transfer + play. */
-  function playBody(m) { return m && m.lastPlayed ? (m.contextUri ? { context_uri: m.contextUri } : { uris: [m.trackUri] }) : undefined; }
+  function playBody(m) {
+    if (!m || !m.lastPlayed) return undefined;
+    var b = m.contextUri ? { context_uri: m.contextUri, offset: { uri: m.trackUri } } : { uris: [m.trackUri] };
+    if (m.positionMs > 0) b.position_ms = Math.round(m.positionMs);   // continue where it paused, not from 0:00
+    return b;
+  }
   function playFromIdle(m) {
     var body = playBody(m);
     if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
     return withDevice(function (id) { return client().play(body, id); }).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
-      if (e && e.reason === "no_device") { S.pendingPlay = body || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: "Spotify is not running on any of your devices. Tap Open Spotify once; your song starts here when you come back." }); }
+      if (e && e.reason === "no_device") { S.pendingPlay = body || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: "iPadOS or iOS put Spotify to sleep in the background, so it cannot be started from here. Tap Open Spotify once; your song continues here when you come back." }); }
       if (S.now) S.now.isPlaying = false; fail(e);
     });
   }

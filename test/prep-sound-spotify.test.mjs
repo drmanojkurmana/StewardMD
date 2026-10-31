@@ -316,6 +316,8 @@ test("403s: only Spotify's PREMIUM_REQUIRED means Free; scope / retired-endpoint
   await assert.rejects(c.next(), (e) => e.reason === "premium_required");
   next = body(JSON.stringify({ error: { status: 403, message: "Insufficient client scope" } }));
   await assert.rejects(c.next(), (e) => e.reason === "forbidden");
+  next = body(JSON.stringify({ error: { status: 403, message: "Player command failed: Restriction violated", reason: "UNKNOWN" } }));
+  await assert.rejects(c.next(), (e) => e.reason === "no_active_device", "iPadOS suspended Spotify after a pause: treat as asleep, never as Free");
   next = body("Check settings on developer.spotify.com/dashboard, the user may not be registered.");
   await assert.rejects(c.next(), (e) => e.reason === "not_allowlisted");
 });
