@@ -434,7 +434,7 @@
     player: null, now: null, playerHandle: null, playlists: null, results: null, busy: false, err: null, query: "",
     queue: null, showAll: false, provOpen: false, state: readState(), dock: null, tick: 0 };
   // Mini or closed, per device (owner 2026-10-31). A UI preference only; never tokens or listening data.
-  function readState() { try { return G.localStorage.getItem("smd_prep_player_state") === "closed" ? "closed" : "mini"; } catch (e) { return "mini"; } }
+  function readState() { try { var v = G.localStorage.getItem("smd_prep_player_state"); return v === "closed" || v === "icon" ? v : "mini"; } catch (e) { return "mini"; } }
   function setState(v) { S.state = v; try { G.localStorage.setItem("smd_prep_player_state", v); } catch (e) {} }
   function rng(n) { var b = new Uint8Array(n); (G.crypto || G.msCrypto).getRandomValues(b); return b; }
   function subtleChallenge(verifier) {
@@ -559,7 +559,7 @@
       if (capabilities(true, S.player).volumeControl)
         h += '<label class="pn-sound-sp-vol">Volume <input type="range" min="0" max="100" step="1" value="' + S.player.device.volume + '" data-sp-vol aria-label="Volume"></label>';
     }
-    h += '<div data-sp-next>' + nextHtml() + "</div>";
+    S.nextShown = nextHtml(); h += '<div data-sp-next>' + S.nextShown + "</div>";
     if (!S.showAll) return h;   // search, playlists and Disconnect live behind See all (kept, never removed)
     h += '<form class="pn-sound-sp-search" data-sp-search><label class="pn-sr" for="pnSoundSpQ">Search Spotify</label>' +
       '<input id="pnSoundSpQ" type="search" autocomplete="off" placeholder="Search tracks and playlists" value="' + esc(S.query) + '">' +
@@ -605,7 +605,7 @@
     function fresh() {
       return Promise.all([nowOrLast(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
         S.now = a[0]; S.queue = keepQueue(a[1]);
-        var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"); if (nb) nb.innerHTML = nextHtml();
+        var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"), nh = nextHtml(); if (nb && S.nextShown !== nh) { nb.innerHTML = nh; S.nextShown = nh; }   // unchanged rows: no thumbnail reload
         clearErr(); syncLastNote();
         return cardState();
       });
@@ -662,7 +662,7 @@
   }
   function clearErr() { if (!S.err) return; S.err = null; var el = S.sheet && S.sheet.querySelector(".pn-sound-sp-err"); if (el) el.parentNode.removeChild(el); }
   // A command with no active Spotify device: wake the account's first available device, then retry once.
-  var ASLEEP = "iPadOS paused Spotify in the background, so it cannot restart from here. Tap Open Spotify once; your song continues here when you come back.";
+  var ASLEEP = "Your iPhone or iPad paused Spotify in the background, so Spotify cannot restart from here. Tap Open Spotify once; your song continues here when you come back.";
   function withDevice(fn) {
     return fn().then(null, function (e) {
       if (!e || e.reason !== "no_active_device") throw e;
@@ -704,7 +704,7 @@
     // The panel is not a bottom sheet: without .pn-sheet-wrap the shared swipe-to-dismiss (which closes by tapping a
     // scrim the panel does not have, leaving it invisible off-screen) and the sheet key capture leave it alone.
     el.className = (wide ? "pn-sound-sp-wrap is-panel" : "pn-sheet-wrap pn-sound-sp-wrap"); el.id = "pnSoundSpSheet";
-    el.innerHTML = (wide ? "" : '<div class="pn-scrim" data-act="sp-min"></div>') +
+    el.innerHTML = (wide ? "" : '<div class="pn-scrim" data-act="sp-icon"></div>') +
       '<section class="pn-sheet pn-sound-sp-sheet" role="dialog" aria-modal="' + !wide + '" aria-labelledby="pnSoundSpT" tabindex="-1"></section>';
     el.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.stopPropagation(); minimise(); } });
     S.prev = D.activeElement; root.appendChild(el); S.sheet = el;
@@ -795,6 +795,7 @@
     if (host) S.host = host;
     if (a === "sp-open") { setState("mini"); return openSheet(host); }
     if (a === "sp-min") return minimise();
+    if (a === "sp-icon") { setState("icon"); if (!closeSheet()) paintDock(); return true; }   // swiped away: just the music button
     if (a === "sp-close") { setState("closed"); return closeSheet(); }
     if (a === "sp-prov") { S.provOpen = !S.provOpen; return paintSheet(); }
     if (a === "sp-switch") { closeSheet(); try { G.PREP_SOUND.act("s-open", b, S.host); } catch (e) {} return true; }
@@ -817,15 +818,15 @@
   function dockButtonHtml() {
     return '<button type="button" class="pn-sound-sp-fab" data-act="sp-open" aria-label="Music on Spotify">' + ico("music") + "</button>";
   }
-  function miniOn() { return !S.sheet && S.state !== "closed" && client().store.has() && !!(S.now && S.now.title); }
+  function miniOn() { return !S.sheet && S.state !== "closed" && S.state !== "icon" && client().store.has() && !!(S.now && S.now.title); }
   function miniHtml() {
-    var m = S.now, pct = m.durationMs ? Math.min(100, Math.round((m.positionMs / m.durationMs) * 100)) : 0;
+    var m = S.now;
     return '<div class="pn-sound-sp-mini" role="region" aria-label="Now playing on Spotify">' +
       '<button type="button" class="pn-sound-sp-mbody" data-act="sp-open" aria-label="Open player, ' + esc(m.title) + (m.artist ? " by " + esc(m.artist) : "") + '">' +
       thumb(m.images, 44) + '<span class="pn-sound-sp-it"><b>' + esc(m.title) + "</b><small>" + esc(m.artist || "Spotify") + "</small></span></button>" +
       (S.premium ? '<button type="button" class="pn-sound-sp-mbtn play" data-act="sp-mini-toggle" aria-label="' + (m.isPlaying ? "Pause" : "Play") + '">' + ico(m.isPlaying ? "pause" : "play") + "</button>" +
         '<button type="button" class="pn-sound-sp-mbtn" data-act="sp-mini-next" aria-label="Next track">' + ico("next") + "</button>" : "") +
-      '<span class="pn-sound-sp-mprog" aria-hidden="true"><span style="width:' + pct + '%"></span></span></div>';
+      '<span class="pn-sound-sp-mprog" aria-hidden="true"><span></span></span></div>';
   }
   // One dock in the PrepNucleus root: the mini player while something plays, else the round music button.
   function paintDock() {
@@ -835,7 +836,24 @@
     if (!S.dock || !S.dock.isConnected) { S.dock = D.createElement("div"); S.dock.className = "pn-sound-sp-dock"; root.appendChild(S.dock); }
     var html = S.sheet ? "" : miniOn() ? miniHtml() : dockButtonHtml();
     S.dock.classList.toggle("is-stacked", !!root.querySelector(".pn-sound-dock"));   // sit above the ambience dock
-    if (S.dock.getAttribute("data-html") !== html) { S.dock.innerHTML = html; S.dock.setAttribute("data-html", html); }
+    if (S.dock.getAttribute("data-html") !== html) { S.dock.innerHTML = html; S.dock.setAttribute("data-html", html); wireSwipe(S.dock.firstChild); }
+    var bar = S.dock.querySelector(".pn-sound-sp-mprog span"), m = S.now;
+    if (bar && m && m.durationMs) bar.style.width = Math.min(100, Math.round((m.positionMs / m.durationMs) * 100)) + "%";
+  }
+  // Swipe the mini player down or sideways: it shrinks to the round music button (tap it to open again).
+  function wireSwipe(el) {
+    if (!el || !el.classList || !el.classList.contains("pn-sound-sp-mini")) return;
+    var x0 = null, y0 = 0, swiped = false;
+    el.addEventListener("pointerdown", function (e) { x0 = e.clientX; y0 = e.clientY; swiped = false; });
+    el.addEventListener("pointermove", function (e) {
+      if (x0 == null) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      if (dy > 0 || Math.abs(dx) > Math.abs(dy)) el.style.transform = Math.abs(dx) > dy ? "translateX(" + dx + "px)" : "translateY(" + dy + "px)";
+      if (dy > 36 || Math.abs(dx) > 56) swiped = true;
+    });
+    function end() { x0 = null; if (swiped) { act("sp-icon"); } else el.style.transform = ""; }
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", function () { x0 = null; swiped = false; el.style.transform = ""; });
+    el.addEventListener("click", function (e) { if (swiped) { e.stopPropagation(); e.preventDefault(); swiped = false; } }, true);
   }
   function syncMini() {
     if (!client().store.has() || S.state === "closed" || S.sheet) return;

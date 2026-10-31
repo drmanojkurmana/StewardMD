@@ -2,7 +2,7 @@
    .pn-sound-sp-* and reads the PrepNucleus --pn-* tokens (restrained dark green sheet surface
    --pn-why-* #071318/#0D1D23/#42CDB5). No glow, no gradient, no backdrop blur. Targets are at
    least 44px; focus is always visible; reduced motion keeps fades only. */
-.pn-root .pn-sound-sp-fab{position:absolute;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-card,#0D1D23);color:var(--pn-why-accent,#42CDB5);box-shadow:var(--pn-shadow);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-fab{position:absolute;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-card,#0D1D23);color:var(--pn-why-accent,#42CDB5);box-shadow:var(--pn-shadow);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
 .pn-root .pn-sound-sp-fab:active{transform:scale(.97)}
 .pn-root .pn-sound-sp-fab:focus-visible,.pn-root .pn-sound-sp-btn:focus-visible,.pn-root .pn-sound-sp-item:focus-visible{outline:2px solid var(--pn-why-accent,#42CDB5);outline-offset:2px}
 .pn-root .pn-sound-sp-sheet{background:var(--pn-why-card,#0D1D23);color:var(--pn-why-ink,#E2F1EE);max-height:82vh;overflow:auto}
@@ -98,3 +98,7 @@
 .pn-root .pn-sound-sp-sheet .pn-sound-sp-brand,.pn-root .pn-sound-sp-sheet .pn-sound-sp-prov,.pn-root .pn-sound-sp-sheet .pn-sound-sp-note,
 .pn-root .pn-sound-sp-mini .pn-sound-sp-it small{color:rgba(240,248,246,.86)}
 .pn-root .pn-sound-sp-sheet .pn-player-title,.pn-root .pn-sound-sp-sheet h2,.pn-root .pn-sound-sp-sheet .pn-sound-sp-it b,.pn-root .pn-sound-sp-mini .pn-sound-sp-it b{color:#fff}
+
+/* Swipe-to-icon: the mini follows the finger; touch-action lets the page still scroll vertically elsewhere. */
+.pn-root .pn-sound-sp-mini{touch-action:pan-x pan-y;transition:transform 180ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-dock.is-stacked .pn-sound-sp-fab{bottom:calc(152px + env(safe-area-inset-bottom,0px))}
