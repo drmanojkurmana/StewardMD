@@ -84,7 +84,8 @@ try {
   ok(!errors.length, "no uncaught PrepReels error" + (errors.length ? ": " + errors[0] : ""));
   ok(!reqs.some((u) => /youtube\.com|youtube-nocookie\.com|googleapis\.com\/youtube/.test(u)), "no YouTube or paid API request was made");
   // Sound flag on: the first-party Sound path loads (PREP_SOUND defined) after open.
-  await call("Page.navigate", { url: BASE + "?prep=1&sound=1" });
+  reqs.length = 0;   // only this page's requests count for the spotify=0 check
+  await call("Page.navigate", { url: BASE + "?prep=1&sound=1&spotify=0" });
   ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots with ?sound=1");
   await ev(clean);
   await ev(`try{localStorage.removeItem("smd_prep_sound_prefs");}catch(e){} return 1;`);
@@ -116,9 +117,9 @@ try {
   ok(await ev(`return window.PREP_SOUND.isPlaying();`) === false, "ambience card Pause stops the ambience");
   // All flags off: explicit =0 beats the seeded localStorage, so the loader must fetch no medigram file
   // and the home must show no PrepReels row. reqs is reset so this sweep only sees the flags-off page.
-  await ev(`try{localStorage.setItem("smd_prep_medigram","0"); localStorage.setItem("smd_prep_sound","0");}catch(e){} return 1;`);
+  await ev(`try{localStorage.setItem("smd_prep_medigram","0"); localStorage.setItem("smd_prep_sound","0"); localStorage.setItem("smd_prep_sound_spotify","0");}catch(e){} return 1;`);
   reqs.length = 0;
-  await call("Page.navigate", { url: BASE + "?prep=1&medigram=0&sound=0" });
+  await call("Page.navigate", { url: BASE + "?prep=1&medigram=0&sound=0&spotify=0" });
   ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots with all flags off");
   await ev(clean);
   await evA(`window.PREP.open({})`);
@@ -126,6 +127,13 @@ try {
   ok(!reqs.some((u) => /prep-medigram/.test(u)), "with all flags off prep-loader fetches none of the medigram files");
   ok(await ev(`return !document.querySelector('#smdPrep [data-act=mg-open]');`) === true, "with all flags off no PrepReels row shows");
   ok(!reqs.some((u) => /prep-sound/.test(u)), "with all flags off prep-loader fetches none of the sound files");
+  // Owner 2026-10-31: Spotify is ON by default with no flag or link (only an explicit "0" turns it off).
+  await ev(`try{localStorage.removeItem("smd_prep_sound_spotify");}catch(e){} return 1;`);
+  reqs.length = 0;
+  await call("Page.navigate", { url: BASE + "?prep=1&medigram=0&sound=0" });
+  await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
+  await evA(`window.PREP.open({})`);
+  ok(await until(`return !!window.PREP_LOADER && performance.getEntriesByType("resource").some(function(e){return /prep-sound-spotify\\.js/.test(e.name);});`, 20000) || reqs.some((u) => /prep-sound-spotify\.js/.test(u)), "Spotify loads by default with no flag (Sound off)");
   ok(await ev(`return !document.querySelector('#smdPrep [data-act=s-enable]') && !document.querySelector('#smdPrep [data-act=s-open]');`) === true, "with all flags off no Sound section shows");
   ok(!errors.length, "no uncaught error after the flag sweeps" + (errors.length ? ": " + errors[0] : ""));
 } catch (e) { console.log("FAIL harness: " + (e && e.message || e)); fails++; }

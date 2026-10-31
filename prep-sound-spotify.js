@@ -282,11 +282,19 @@
               body: body ? JSON.stringify(body) : undefined });
           }).then(function (r2) {
             if (r2.status === 200 || r2.status === 204) return bodyOf(r2);
-            throw apiError(r2.status, retryOf(r2));
+            return failOf(r2);
           });
         }
-        throw apiError(r.status, retryOf(r));
+        return failOf(r);
       }, function (e) { if (e && e.reason) throw e; throw { reason: "offline", message: "No connection. Check your network and try again." }; });
+    }
+    // Development mode: Spotify answers accounts not on the app's User Management allowlist with 403 "User not registered in the Developer Dashboard".
+    function failOf(r) {
+      if (r.status !== 403 || !r.text) throw apiError(r.status, retryOf(r));
+      return r.text().then(function (t) {
+        if (/not registered|developer dashboard/i.test(t || "")) throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
+        throw apiError(403);
+      }, function () { throw apiError(403); });
     }
     function retryOf(r) { try { var v = r.headers && r.headers.get && r.headers.get("Retry-After"); return v ? Number(v) : null; } catch (e) { return null; } }
     /* Liked check with endpoint-generation fallback: the 2026 library
@@ -349,11 +357,12 @@
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= flags + config (inert unless every gate is on) ================= */
-  function flagOn(key, param) {
+  function flagOn(key, param, def) {
     try {
       var q = (G.location.search.match(new RegExp("[?&]" + param + "=([^&]+)")) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return G.localStorage.getItem(key) === "1";
+      var v = G.localStorage.getItem(key);
+      return def ? v !== "0" : v === "1";
     } catch (e) { return false; }
   }
   function prepOn() {
@@ -380,7 +389,8 @@
     return G.location.origin + G.location.pathname;
   }
   var CID = clientId();
-  if (!prepOn() || !flagOn("smd_prep_sound", "sound") || !flagOn("smd_prep_sound_spotify", "spotify") || !CID) return;
+  // Spotify is ON by default for everyone (owner 2026-10-31); smd_prep_sound_spotify="0" or ?spotify=0 turns it off.
+  if (!prepOn() || !flagOn("smd_prep_sound_spotify", "spotify", true) || !CID) return;
 
   /* ================= live state + sheet ================= */
   var D = G.document;
