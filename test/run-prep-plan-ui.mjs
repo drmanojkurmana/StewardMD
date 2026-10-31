@@ -6,7 +6,7 @@
  * and moves readiness off 0; the settings sheet edits the plan and re-plans (a lesson appears once the exam is more than
  * 14 days away or undecided); a lesson finished today is ticked; skipping onboarding still lands on home and never shows it
  * again; the FMGE tab lists the MBBS subjects, its mock screen carries the bulletin pattern and a mini mock is marked +1
- * with no negative marking and a pass line; the FMGE Arena says coming soon; no uncaught PrepNucleus error, no /api/ai call.
+ * with no negative marking and a pass line; the FMGE Arena is open; no uncaught PrepNucleus error, no /api/ai call.
  *
  * USAGE: node test/run-prep-plan-ui.mjs   (SHOTS=<dir> saves screenshots, PN_LIGHT=1 light theme; CHROME=, PORT=, CHROME_PORT=)
  */
@@ -63,7 +63,7 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Network.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
-  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_QGEN=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;};` });
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_QGEN=false; window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; window.SMD_PREP_BASE=${JSON.stringify(FIX)}; window.SMD_PREP_BANK_API=${JSON.stringify(FIX + "api/")}; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")}; window.confirm=function(){return true;}; try{localStorage.setItem("smd_prep_tests2","0");}catch(e){}` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.PREP;`, 30000);
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_arena");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
@@ -203,7 +203,9 @@ try {
   await click("#smdPrep [data-act=donerun]");
   await ev(`PREP.back(); return 1;`);
   await ev(`localStorage.setItem("smd_prep_arena","1"); window.SMD_AUTH={currentUser:{uid:"u1",displayName:"Test",getIdToken:function(){return Promise.resolve("t");}}}; PREP._st.stack[PREP._st.stack.length-1](); return 1;`);
-  ok(await until(`return /FMGE Arena: coming soon/.test((document.getElementById("pnCompete")||{}).textContent||"");`, 5000), "the FMGE Arena says coming soon");
+  // FMGE joined the Arena (functions/_prep-arena.js EXAMS): it is open and asks the server, which this harness does not
+  // run, so it offers a retry rather than "coming soon" or "unavailable".
+  ok(await until(`var t=(document.getElementById("pnCompete")||{}).textContent||""; return /Arena did not load/.test(t) && !/coming soon|unavailable/i.test(t);`, 5000), "the FMGE Arena is open (asks the server): " + await text("#pnCompete"));
   await ev(`localStorage.removeItem("smd_prep_arena"); delete window.SMD_AUTH; return 1;`);
   await ev(`PREP._host.setExam("neet-pg"); return 1;`);
 
