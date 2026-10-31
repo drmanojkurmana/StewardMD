@@ -609,7 +609,10 @@
     });
     rc.onConnection(function (c) {
       diag("remote connection: " + (c && c.connected ? "connected" : "lost"));
-      if (!c || !c.connected) paintDock();
+      if (c && c.connected) {
+        S.remoteSeen = true;
+        if (S.wakeSeek > 0) { var ms = S.wakeSeek; S.wakeSeek = 0; rc.seek(ms).then(null, function () {}); }   // continue where it paused
+      } else paintDock();
     });
     S.remote = rc;
     return rc;
@@ -782,8 +785,8 @@
     // App Remote could not reach Spotify because it is not running: one clear line and the
     // Wake button. wake() runs only from this tap (owner rule: never switch apps on our own).
     if (S.remoteWake)
-      h += '<p class="pn-sound-sp-note" data-sp-wake-note>Spotify is not running on this device, so this player cannot reach it.</p>' +
-        '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="sp-wake">Wake Spotify</button></div>';
+      h += '<p class="pn-sound-sp-note" data-sp-wake-note>iOS paused Spotify in the background. Resume opens Spotify for a second and brings you straight back here.</p>' +
+        '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="sp-wake">Resume</button></div>';
     S.nextShown = nextHtml(); h += '<div data-sp-next>' + S.nextShown + "</div>";
     if (!S.showAll) return h;   // search, playlists and Disconnect live behind See all (kept, never removed)
     h += '<form class="pn-sound-sp-search" data-sp-search><label class="pn-sr" for="pnSoundSpQ">Search Spotify</label>' +
@@ -996,6 +999,13 @@
   }
   function lastOf(m) { if (!m || !m.trackUri) return null; var k, c = {}; for (k in m) c[k] = m[k]; c.lastPlayed = true; return c; }
   function playFromIdle(m) {
+    if (getRemote() && S.remoteSeen && !remoteActive()) {
+      S.remoteWake = true; S.wakeUri = (m && m.trackUri) || S.wakeUri || "";
+      if (S.now) S.now.isPlaying = false;
+      diag("remote: play while Spotify asleep -> Resume offered");
+      if (S.sheet) paintSheet(); else paintDock();
+      return Promise.resolve(false);
+    }
     // App Remote connected: resume (or replay the paused song) in the Spotify app directly.
     if (remoteActive()) {
       if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
@@ -1092,9 +1102,9 @@
       var wrc = getRemote();
       if (!wrc) return false;
       diag("remote: Wake Spotify tapped");
+      S.wakeSeek = (S.now && S.now.positionMs) || 0;
       return wrc.wake((S.now && S.now.trackUri) || S.wakeUri || "").then(function () {
         S.remoteWake = false;
-        say("Opening Spotify — your song starts there. Come back here and this player takes over.");
         if (S.sheet) paintSheet();
       }, fail);
     }
