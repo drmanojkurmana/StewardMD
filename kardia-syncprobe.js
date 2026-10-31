@@ -163,6 +163,106 @@
     return String(code == null ? "" : code).replace(/(.{3})/g, "$1 ").trim();
   }
 
+  /* ================= SyncProbe demo (no second phone needed) =================
+   * A short scripted sweep played through driveProbeLab, the same route a
+   * paired probe uses. Content status: ai_drafted, to be verified.
+   * Normal run is about 40 seconds. With reduced motion it runs slower
+   * (about 60 seconds) and never loops on its own. */
+  var DEMO_DURATION_MS = 40000;
+  var DEMO_REDUCED_MS = 60000;
+  var DEMO_STEPS = [
+    { tMs: 0, caption: "Start at the parasternal window. The marker points to the right shoulder.", pose: { rotationDeg: 0, tiltDeg: 0, rockDeg: 0, slideX: -18, slideY: -8, depthCm: 18 } },
+    { tMs: 7000, caption: "Slide a little down the sternum to settle in the window.", pose: { rotationDeg: 0, tiltDeg: 0, rockDeg: 0, slideX: 0, slideY: 0, depthCm: 18 } },
+    { tMs: 14000, caption: "Rotate a quarter turn clockwise for the short axis.", pose: { rotationDeg: 90, tiltDeg: 0, rockDeg: 0, slideX: 0, slideY: 0, depthCm: 18 } },
+    { tMs: 22000, caption: "Fan slowly towards the base of the heart.", pose: { rotationDeg: 90, tiltDeg: -18, rockDeg: 0, slideX: 0, slideY: 0, depthCm: 18 } },
+    { tMs: 28000, caption: "Fan slowly through the levels towards the apex.", pose: { rotationDeg: 90, tiltDeg: 18, rockDeg: 0, slideX: 0, slideY: 0, depthCm: 18 } },
+    { tMs: 34000, caption: "Slide down and across to find the apical window.", pose: { rotationDeg: 60, tiltDeg: 5, rockDeg: 0, slideX: 34, slideY: 28, depthCm: 16 } },
+    { tMs: 40000, caption: "Rest at the apex. That is the whole sweep.", pose: { rotationDeg: 60, tiltDeg: 5, rockDeg: 0, slideX: 34, slideY: 28, depthCm: 16 } }
+  ];
+  function demoDurationMs(reduced) { return reduced ? DEMO_REDUCED_MS : DEMO_DURATION_MS; }
+  function lerpNum(a, b, f) { return a + (b - a) * f; }
+  function demoPoseAt(tMs, reduced) {
+    var dur = demoDurationMs(reduced);
+    var t = Math.max(0, Math.min(dur, +tMs || 0));
+    var scaled = t / dur * DEMO_DURATION_MS;
+    var i, a = DEMO_STEPS[0], b = DEMO_STEPS[DEMO_STEPS.length - 1];
+    for (i = 0; i < DEMO_STEPS.length - 1; i++) {
+      if (scaled >= DEMO_STEPS[i].tMs && scaled <= DEMO_STEPS[i + 1].tMs) { a = DEMO_STEPS[i]; b = DEMO_STEPS[i + 1]; break; }
+    }
+    var span = Math.max(1, b.tMs - a.tMs);
+    var f = Math.max(0, Math.min(1, (scaled - a.tMs) / span));
+    return {
+      rotationDeg: Math.round(lerpNum(a.pose.rotationDeg, b.pose.rotationDeg, f) * 10) / 10,
+      tiltDeg: Math.round(lerpNum(a.pose.tiltDeg, b.pose.tiltDeg, f) * 10) / 10,
+      rockDeg: Math.round(lerpNum(a.pose.rockDeg, b.pose.rockDeg, f) * 10) / 10,
+      slideX: Math.round(lerpNum(a.pose.slideX, b.pose.slideX, f) * 10) / 10,
+      slideY: Math.round(lerpNum(a.pose.slideY, b.pose.slideY, f) * 10) / 10,
+      depthCm: Math.round(lerpNum(a.pose.depthCm, b.pose.depthCm, f) * 10) / 10
+    };
+  }
+  function demoCaptionAt(tMs, reduced) {
+    var dur = demoDurationMs(reduced);
+    var t = Math.max(0, Math.min(dur, +tMs || 0));
+    var scaled = t / dur * DEMO_DURATION_MS;
+    var cap = DEMO_STEPS[0].caption;
+    for (var i = 0; i < DEMO_STEPS.length; i++) if (scaled >= DEMO_STEPS[i].tMs) cap = DEMO_STEPS[i].caption;
+    return cap;
+  }
+  function createDemoPlayer(opts) {
+    opts = opts || {};
+    var reduced = !!opts.reduced;
+    var intervalMs = opts.intervalMs || 50;
+    var setFn = opts.setInterval || (typeof setInterval !== "undefined" ? setInterval : null);
+    var clearFn = opts.clearInterval || (typeof clearInterval !== "undefined" ? clearInterval : null);
+    var playing = false, timer = null, elapsed = 0, lastCaption = null;
+    function emit() {
+      var pose = demoPoseAt(elapsed, reduced);
+      if (opts.onPose) opts.onPose(pose, elapsed);
+      var cap = demoCaptionAt(elapsed, reduced);
+      if (cap !== lastCaption) { lastCaption = cap; if (opts.onCaption) opts.onCaption(cap, elapsed); }
+    }
+    var player = {
+      start: function () {
+        if (playing) return false;
+        if (!setFn) return false;
+        playing = true; elapsed = 0; lastCaption = null;
+        emit();
+        timer = setFn(function () {
+          if (!playing) return;
+          elapsed += intervalMs;
+          if (elapsed >= demoDurationMs(reduced)) {
+            elapsed = demoDurationMs(reduced);
+            emit();
+            player.stop();
+            if (opts.onEnd) opts.onEnd();
+            return;
+          }
+          emit();
+        }, intervalMs);
+        return true;
+      },
+      stop: function () {
+        if (timer != null && clearFn) { try { clearFn(timer); } catch (e) {} }
+        timer = null; playing = false;
+        return true;
+      },
+      isPlaying: function () { return playing; },
+      elapsedMs: function () { return elapsed; },
+      durationMs: function () { return demoDurationMs(reduced); }
+    };
+    return player;
+  }
+  /* One page class script, about one minute read aloud. ai_drafted. */
+  var CLASS_DEMO_LINES = [
+    { at: "0:00", text: "Say: This phone is now the ultrasound probe. The big screen is the patient. Watch the probe and the picture move together." },
+    { at: "0:10", text: "Tap Watch a demo. Say: We start beside the sternum. That is the parasternal window. The marker points to the right shoulder." },
+    { at: "0:20", text: "Say: A small slide settles the probe in the window. Small moves matter. Big moves lose the picture." },
+    { at: "0:30", text: "Say: Now a quarter turn clockwise. Same window, new plane. This is the short axis. Rotation changes the plane, not the place." },
+    { at: "0:40", text: "Say: Fan slowly. The plane sweeps through the heart, base to apex. Slow is clear. Fast is a blur." },
+    { at: "0:50", text: "Say: Slide down and across to the apex for the apical view. Then try it with two phones. One is the probe. One is the screen." },
+    { at: "1:00", text: "Stop and ask: Which move changes the plane? Which move changes the window? Let learners answer before you move on." }
+  ];
+
   /* ================= session screens ================= */
   function syncCore() { try { return G.KARDIA_SYNC || null; } catch (e) { return null; } }
   function echoLab() {
@@ -303,19 +403,100 @@
     return S.pairing;
   }
 
+  function stepIconSvg(kind) {
+    if (kind === "probe") return '<svg class="krd-sp-stepicon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="7" y="2.5" width="10" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="18.2" r="1.1" fill="currentColor"/></svg>';
+    if (kind === "tap") return '<svg class="krd-sp-stepicon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 11.5V6a1.5 1.5 0 0 1 3 0v4.5l4.2 1.2c.8.2 1.2 1.1.9 1.9l-1.4 3.6A3 3 0 0 1 12.9 19H11a3 3 0 0 1-2.3-1L6 15.4a1.6 1.6 0 0 1 2.2-2.2L9 14z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>';
+    return '<svg class="krd-sp-stepicon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M9 21h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>';
+  }
+  function pairStepsHtml() {
+    return '<ol class="krd-sp-steps">' +
+      '<li><span class="krd-sp-stepnum">1</span>' + stepIconSvg("phone") + '<span>Open Kardia on the other phone</span></li>' +
+      '<li><span class="krd-sp-stepnum">2</span>' + stepIconSvg("probe") + '<span>Tap SyncProbe, Use this phone as a probe</span></li>' +
+      '<li><span class="krd-sp-stepnum">3</span>' + stepIconSvg("tap") + '<span>Tap the iPad in the list</span></li></ol>';
+  }
+  function prefersReducedMotion() {
+    try { return !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches); } catch (e) { return false; }
+  }
+  function stopDemo() {
+    if (S.demoPlayer) { try { S.demoPlayer.stop(); } catch (e) {} S.demoPlayer = null; }
+  }
+  function openDemo() {
+    stopDemo();
+    S.screen = "demo";
+    var reduced = prefersReducedMotion();
+    showSheet("Watch a demo",
+      '<p class="sp-small">No second phone? Watch the probe sweep on its own. The probe and the echo move together.</p>' +
+      '<p class="krd-sp-demo-caption" id="krdSpDemoCaption" role="status">Ready when you are.</p>' +
+      '<div class="krd-sp-demo-track" aria-hidden="true"><span class="krd-sp-demo-bar" id="krdSpDemoBar"></span></div>' +
+      '<p class="sp-small" id="krdSpDemoState" role="status">' + (reduced ? "Slow pace is on. The demo will not loop." : "About 40 seconds. You can stop it at any time.") + "</p>" +
+      '<div class="krd-sp-col">' +
+      '<button type="button" class="sp-btn pri sp-wide" data-act="sp-demo-start">Start the demo</button>' +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-demo-stop">Stop</button>' +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-back">Back</button></div>' +
+      '<p class="krd-sp-note">Draft teaching material, to be verified before clinical use.</p>');
+    bindRootClose(closeAll);
+  }
+  function startDemo() {
+    stopDemo();
+    var reduced = prefersReducedMotion();
+    var d = doc();
+    var capEl = d && d.getElementById("krdSpDemoCaption");
+    var barEl = d && d.getElementById("krdSpDemoBar");
+    var stateEl = d && d.getElementById("krdSpDemoState");
+    if (stateEl) stateEl.textContent = "Playing. Tap Stop to stop it.";
+    S.demoPlayer = createDemoPlayer({
+      reduced: reduced, intervalMs: 50,
+      setInterval: G.setInterval ? G.setInterval.bind(G) : null,
+      clearInterval: G.clearInterval ? G.clearInterval.bind(G) : null,
+      onPose: function (pose, elapsed) {
+        try { driveProbeLab(pose); } catch (e) {}
+        S.probePose = { tiltDeg: pose.tiltDeg, rotationDeg: pose.rotationDeg, rockDeg: pose.rockDeg };
+        if (barEl) barEl.style.transform = "scaleX(" + Math.max(0, Math.min(1, elapsed / demoDurationMs(reduced))).toFixed(3) + ")";
+      },
+      onCaption: function (cap) { if (capEl) capEl.textContent = cap; },
+      onEnd: function () {
+        S.demoPlayer = null;
+        var s2 = doc() && doc().getElementById("krdSpDemoState");
+        if (s2) s2.textContent = "Done. Start it again, or pair a real probe.";
+        var b2 = doc() && doc().getElementById("krdSpDemoBar");
+        if (b2) b2.style.transform = "scaleX(1)";
+      }
+    });
+    S.demoPlayer.start();
+  }
+  function openClassDemo() {
+    stopDemo();
+    S.screen = "classdemo"; S.detailsFrom = "role";
+    var rows = CLASS_DEMO_LINES.map(function (l) {
+      return '<li><span class="krd-sp-class-at">' + esc(l.at) + "</span><span>" + esc(l.text) + "</span></li>";
+    }).join("");
+    showSheet("Class demo",
+      '<p class="sp-small">Read this aloud in class. It takes about one minute.</p>' +
+      '<ol class="krd-sp-class">' + rows + "</ol>" +
+      '<div class="krd-sp-col"><button type="button" class="sp-btn pri sp-wide" data-act="sp-demo">Watch a demo</button>' +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-back">Back</button></div>' +
+      '<p class="krd-sp-note">Draft teaching material, to be verified before clinical use.</p>');
+    bindRootClose(closeAll);
+  }
+
   /* ---------- entry: role chooser ---------- */
   function openRole() {
+    stopDemo();
     try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.dismiss) G.KARDIA_PREMIUM.dismiss(true); } catch (e) {}
     S.screen = "role";
     showSheet("SyncProbe",
       '<p class="sp-small">Train with two phones. One phone shows the scan, the other becomes the probe.</p>' +
+      pairStepsHtml() +
       '<div class="krd-sp-col">' +
       '<button type="button" class="sp-btn pri sp-wide" data-act="sp-display">Pair a probe</button>' +
       '<p class="sp-small krd-sp-hint">This phone shows the scan. The learner scans your code.</p>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-probe">Use this phone as a probe</button>' +
       '<p class="sp-small krd-sp-hint">Motion on this phone drives the scan on the other phone.</p>' +
+      '<button type="button" class="sp-btn sec sp-wide" data-act="sp-demo">Watch a demo</button>' +
+      '<p class="sp-small krd-sp-hint">No second phone? Watch a short probe sweep here.</p>' +
       '<button type="button" class="sp-btn sec sp-wide" data-act="sp-close">Not now</button>' +
-      "</div>");
+      "</div>" +
+      '<p class="krd-sp-link"><button type="button" class="krd-sp-minilink" data-act="sp-classdemo">Class demo script for teachers</button></p>');
     bindRootClose(closeAll);
   }
 
@@ -1253,6 +1434,15 @@
     }
     if (act === "sp-display") { openDisplay(); return; }
     if (act === "sp-probe") { openProbe(); return; }
+    if (act === "sp-demo") { openDemo(); return; }
+    if (act === "sp-demo-start") { startDemo(); return; }
+    if (act === "sp-demo-stop") {
+      stopDemo();
+      var stEl = doc() && doc().getElementById("krdSpDemoState");
+      if (stEl) stEl.textContent = "Stopped. Start it again, or pair a real probe.";
+      return;
+    }
+    if (act === "sp-classdemo") { openClassDemo(); return; }
     if (act === "sp-motion") {
       requestMotion().then(function (ok) {
         if (ok) { S.motionChosen = true; S.controlMode = "motion"; renderProbeCalibrate(); }
@@ -1313,6 +1503,7 @@
     if (act === "sp-details") { openDetails(); return; }
     if (act === "sp-back") {
       var from = S.detailsFrom; S.detailsFrom = null;
+      if (S.screen === "demo" || S.screen === "classdemo") { openRole(); return; }
       if (S.screen === "display" || from === "display") openDisplay();
       else if (S.screen === "probe" || from === "probe") { if (S.probeStep === "active" || S.probeStep === "touch") renderProbeActive(); else renderProbeIntro(); }
       else if (from === "role" || S.screen === "role") openRole();
@@ -1362,6 +1553,7 @@
     } catch (e) { joinErr("Scanning is not available on this phone. Type the code instead."); focusCode(); }
   }
   function closeSheet() {
+    stopDemo();
     clearRoot();
     S.screen = null; S.probeStep = "intro"; S.probePose = null; S.displayError = null;
   }
@@ -1382,6 +1574,8 @@
 
   var API = {
     open: openRole, openRole: openRole, openDisplay: openDisplay, openProbe: openProbe,
+    openDemo: openDemo, openClassDemo: openClassDemo, stopDemo: stopDemo,
+    isDemoPlaying: function () { return !!(S.demoPlayer && S.demoPlayer.isPlaying()); },
     isProbeRenderSuspended: function () { return probeRenderSuspended; },
     close: closeAll, dismiss: closeSheet, details: openDetails,
     _pure: {
@@ -1389,7 +1583,9 @@
       buildPayload: buildPayload, parsePayload: parsePayload, isExpired: isExpired,
       stateLabel: stateLabel, transportName: transportName, signalBars: signalBars, mapReason: mapReason, friendlyReason: friendlyReason, openSignIn: openSignIn, normalizeCodeInput: normalizeCodeInput, formatCodeInput: formatCodeInput,
       fmtLatency: fmtLatency, fmtExpiry: fmtExpiry, codeGroups: codeGroups,
-      driveProbeLab: driveProbeLab, setProbeLabRange: setProbeLabRange, driveProbeLabGrip: driveProbeLabGrip
+      driveProbeLab: driveProbeLab, setProbeLabRange: setProbeLabRange, driveProbeLabGrip: driveProbeLabGrip,
+      demoSteps: DEMO_STEPS, demoDurationMs: demoDurationMs, demoPoseAt: demoPoseAt, demoCaptionAt: demoCaptionAt,
+      createDemoPlayer: createDemoPlayer, classDemoLines: CLASS_DEMO_LINES, pairStepsHtml: pairStepsHtml
     }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
