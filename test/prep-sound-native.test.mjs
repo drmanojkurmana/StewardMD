@@ -161,6 +161,36 @@ test("plugin contract: manifest, service and plugin sources declare the targetSd
   assert.ok(!settings.includes("../../"), "capacitor.settings.gradle keeps ../ paths");
 });
 
+test("system media contract: listener service, manifest gate and plugin methods (rs-android-media)", () => {
+  const manifest = read("local-plugins/capacitor-prep-sound/android/src/main/AndroidManifest.xml");
+  assert.match(manifest, /PrepMediaListenerService/);
+  assert.match(manifest, /android\.permission\.BIND_NOTIFICATION_LISTENER_SERVICE/);
+  assert.match(manifest, /android\.service\.notification\.NotificationListenerService/);
+
+  const listener = read("local-plugins/capacitor-prep-sound/android/src/main/java/in/stewardmd/prepsound/PrepMediaListenerService.java");
+  assert.match(listener, /extends NotificationListenerService/);
+  assert.match(listener, /reads NO\s*\n?\s*\*?\s*notification content/);
+  // The service must never read notification content: no extras/accessor use at all.
+  assert.ok(!/getNotification\(\)|\\.extras|getTitle|getText/.test(listener), "listener reads no notification content");
+
+  const plugin = read("local-plugins/capacitor-prep-sound/android/src/main/java/in/stewardmd/prepsound/PrepSoundPlugin.java");
+  for (const m of ["mediaAccessStatus", "openMediaAccessSettings", "nowPlaying", "control"]) {
+    assert.ok(plugin.includes("public void " + m + "("), "plugin method " + m);
+  }
+  for (const needle of ["ACTION_NOTIFICATION_LISTENER_SETTINGS", "getActiveSessions",
+    "TransportControls", "nowPlayingChanged", "MediaController.Callback",
+    "PlaybackState.ACTION_SEEK_TO", "PlaybackState.ACTION_SKIP_TO_NEXT"]) {
+    assert.ok(plugin.includes(needle), "plugin: " + needle);
+  }
+  // PrepNucleus's own ambience session is skipped; artwork is capped small.
+  assert.ok(plugin.includes("own.equals(controller.getPackageName())"), "own session ignored");
+  assert.ok(plugin.includes("256"), "artwork max ~256px");
+  assert.ok(plugin.includes("data:image/jpeg;base64,"), "artwork is a JPEG data URL");
+  // Observation stops with the last JS listener and on background.
+  assert.ok(plugin.includes("releaseMediaCallback"), "callback released");
+  assert.ok(!/Log\.[a-z]+\([^)]*(title|artist|album)/.test(plugin), "track metadata is never logged");
+});
+
 test("committed WAV assets match the deterministic renderer", async () => {
   const gen = await import("../tools/prep-sound-render-wavs.mjs");
   const files = gen.renderAll();

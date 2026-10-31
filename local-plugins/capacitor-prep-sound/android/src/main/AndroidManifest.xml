@@ -14,5 +14,21 @@
             android:name="in.stewardmd.prepsound.PrepSoundService"
             android:exported="false"
             android:foregroundServiceType="mediaPlayback" />
+
+        <!-- System media access (rs-android-media): exists ONLY so
+             MediaSessionManager.getActiveSessions() can list other music
+             apps' sessions after the user enables PrepNucleus under
+             Settings > Notification access. It reads NO notification
+             content (see PrepMediaListenerService). Only the system may
+             bind it (BIND_NOTIFICATION_LISTENER_SERVICE). -->
+        <service
+            android:name="in.stewardmd.prepsound.PrepMediaListenerService"
+            android:exported="true"
+            android:label="PrepNucleus media access"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
     </application>
 </manifest>

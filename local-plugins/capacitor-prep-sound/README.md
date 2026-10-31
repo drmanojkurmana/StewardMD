@@ -53,6 +53,30 @@ per write, ciphertext Base64-stored in private SharedPreferences. No
 are never logged. The only current caller stores the Spotify refresh token
 under `prep_sound_spotify_refresh_token`, on native Android only.
 
+## System media — any music app (Android only, job rs-android-media)
+
+See and control whatever music app is already playing (Gaana, JioSaavn,
+Amazon Music, YouTube Music, Spotify, ...) through its MediaSession:
+`mediaAccessStatus() -> { granted }`, `openMediaAccessSettings()` (opens
+Settings > Notification access), `nowPlaying()` (top other-app session:
+`{ app, package, title, artist, album, artwork, durationMs, positionMs,
+isPlaying, actions { play, pause, next, previous, seek } }`; artwork is a
+JPEG `data:` URL capped at ~256px), `control({ action, value? })` for
+`play|pause|next|previous|seek`, and the `nowPlayingChanged` listener
+event. The native `MediaController.Callback` is registered only while JS
+listens, and unregistered when the last listener is removed or the app
+backgrounds. PrepNucleus's own ambience session is ignored. The JS side is
+`prep-sound-system.js` (`window.PREP_SOUND_SYSTEM`); it is inert on web/iOS.
+
+`PrepMediaListenerService` (declared in the plugin manifest with
+`android.permission.BIND_NOTIFICATION_LISTENER_SERVICE`) reads **no
+notification content** — it exists only so
+`MediaSessionManager.getActiveSessions()` is allowed once the user enables
+PrepNucleus under Notification access. User-facing copy: "Lets PrepNucleus
+show and control the song playing in your music app. PrepNucleus does not
+read your notifications." Track values are never logged, stored or sent to
+analytics.
+
 ## Store note
 
 This is native code. An OTA/web update cannot deliver it: phones need a new
