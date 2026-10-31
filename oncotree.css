@@ -145,9 +145,7 @@ body.dark .ot-overlay {
   font-weight: 700 !important;
   font-size: 17px !important;
   letter-spacing: -0.025em !important;
-  background: linear-gradient(180deg, var(--ot-ink) 0%, color-mix(in srgb, var(--ot-ink) 80%, transparent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--ot-ink);
 }
 
 .ot-hkicker {
@@ -252,7 +250,7 @@ body.dark .ot-overlay {
 .ot-flow-proto-card {
   border-radius: 18px !important;
   border: 1px solid var(--ot-line) !important;
-  border-left: 4px solid var(--ot-accent) !important;
+  border-left: 1px solid var(--ot-line) !important;
   padding: 16px 18px !important;
   box-shadow: var(--ot-shadow-card) !important;
 }
@@ -759,7 +757,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
 .ot-edge.disabled { stroke: var(--sev-critical-fg); stroke-width: 1.6; stroke-dasharray: 3 5; opacity: .38; }
 
 .ot-gnode { position: absolute; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; padding: 7px 9px;
-  text-align: left; border: 1px solid var(--ot-line); border-top: 3px solid var(--ot-c, var(--ot-line));
+  text-align: left; border: 1px solid var(--ot-line);
   border-radius: 12px; background: var(--ot-card); color: var(--ot-ink); cursor: pointer; overflow: hidden;
   box-shadow: 0 1px 3px rgba(0,0,0,.07), 0 4px 12px rgba(0,0,0,.04); transition: box-shadow .18s ease, transform .12s ease; -webkit-tap-highlight-color: transparent; }
 .ot-gnode:active { transform: scale(.97); }
@@ -820,7 +818,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
 .ot-toc-empty { padding: 14px 12px; font: 500 12.5px system-ui; color: var(--ot-sub); }
 
 .ot-mappop { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; padding: 13px 15px 15px;
-  border: 1px solid var(--ot-line); border-left: 4px solid var(--ot-c, var(--ot-accent)); border-radius: 16px;
+  border: 1px solid var(--ot-line); border-radius: 16px;
   background: color-mix(in srgb, var(--ot-card) 96%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 -4px 24px rgba(0,0,0,.18); }
 .ot-mappop-x { position: absolute; top: 9px; right: 9px; width: 30px; height: 30px; display: grid; place-items: center; border: none; background: transparent; color: var(--ot-sub); cursor: pointer; }
@@ -1291,7 +1289,6 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
   border-radius: 14px;
   box-shadow: 0 4px 16px rgba(11, 34, 56, 0.08), 0 1px 3px rgba(0, 0, 0, 0.04);
   border: 1px solid #DCE3E8;
-  border-top: 4px solid var(--ot-nav-c, #1976D2);
   overflow: hidden;
   transition: transform 0.15s, box-shadow 0.15s, opacity 0.2s;
   box-sizing: border-box;
@@ -1712,7 +1709,6 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
 /* Completed Step Card */
 .ot-flow-card.completed {
   background: #FAFCFE;
-  border-left: 4px solid #4CAF50;
   padding: 12px 16px;
 }
 .ot-flow-card.completed .ot-flow-card-hd {
@@ -1787,8 +1783,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
 
 /* Active Step Card */
 .ot-flow-card.active {
-  border-top: 4px solid var(--ot-nav-c, #1976D2);
-  border-color: #90CAF9;
+  border-color: color-mix(in srgb, var(--ot-accent, #6f2c6b) 45%, var(--ot-line));
   box-shadow: 0 8px 28px rgba(25, 118, 210, 0.14), 0 2px 8px rgba(0, 0, 0, 0.04);
   padding: 20px;
 }
@@ -2004,8 +1999,7 @@ body.dark .ot-search-box { background: rgba(255, 255, 255, 0.06); }
 
 /* Outcome Card (Recommendations / Regimens) */
 .ot-flow-card.outcome {
-  border-top: 4px solid #2E7D32;
-  border-color: #A5D6A7;
+  border-color: color-mix(in srgb, var(--ot-accent, #6f2c6b) 35%, var(--ot-line));
   background: #ffffff;
   padding: 20px;
   box-shadow: 0 8px 28px rgba(46, 125, 50, 0.12);
@@ -2454,10 +2448,10 @@ body.dark .ot-alert.danger { background: rgba(239, 68, 68, 0.18); color: #f87171
   padding: 10px 14px;
   background: #ffffff;
 }
-.ot-day-admin { border-left: 5px solid #6f2c6b; background: #f6eef6; }
-.ot-day-nadir { border-left: 5px solid #dc2626; background: #fef2f2; }
-.ot-day-labs { border-left: 5px solid #0284c7; background: #f0f9ff; }
-.ot-day-recovery { border-left: 5px solid #94a3b8; }
+.ot-day-admin { background: #f6eef6; }
+.ot-day-nadir { background: #fef2f2; }
+.ot-day-labs { background: #f0f9ff; }
+.ot-day-recovery { background: color-mix(in srgb, #94a3b8 10%, transparent); }
 .ot-day-header {
   display: flex;
   justify-content: space-between;
@@ -2613,3 +2607,89 @@ html .ot-overlay .ot-sel-actions > .ot-btn:only-of-type, html .ot-overlay .ot-se
 html .ot-overlay .ot-toc-hd { text-transform: none; letter-spacing: 0; font: 600 14px/1.2 var(--ot-font, system-ui); color: var(--ot-ink); }
 /* Header keys are round, matching the ONCQIS / Staging / CTCAE headers */
 html .ot-overlay .ot-header .ot-hbtn { width: 44px; height: 44px; border-radius: 50% !important; }
+
+/* ── Overview map, 2026-10-31: focus view by default, readable nodes, frosted controls ── */
+html .ot-overlay .ot-graph { height: calc(100dvh - 196px - env(safe-area-inset-top, 0px)); margin: -16px -14px 0; border: 0; border-radius: 0;
+  background: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ot-accent) 16%, transparent) 1px, transparent 0) 0 0 / 20px 20px, transparent; }
+html .ot-overlay .ot-graph-focus .ot-graph-vp { touch-action: pan-y; }
+
+/* top bar: Contents key (left, the existing fab) + Your path / Full map switch */
+.ot-graph-bar { position: absolute; top: 12px; left: 64px; right: 64px; z-index: 5; display: flex; justify-content: center; pointer-events: none; }
+.ot-gseg { pointer-events: auto; display: inline-grid; grid-template-columns: 1fr 1fr; gap: 2px; padding: 3px; border-radius: 12px;
+  background: color-mix(in srgb, var(--ot-card) 82%, transparent); -webkit-backdrop-filter: blur(16px) saturate(1.5); backdrop-filter: blur(16px) saturate(1.5);
+  border: 1px solid var(--ot-line); box-shadow: 0 1px 0 rgba(60, 20, 70, .05), 0 6px 16px -8px rgba(60, 20, 70, .3); }
+.ot-gseg-b { min-height: 34px; padding: 0 14px; border: 0; border-radius: 9px; background: transparent; color: var(--ot-sub); font: 600 13px/1 var(--ot-font, system-ui); white-space: nowrap; cursor: pointer; }
+.ot-gseg-b.on { background: var(--ot-accent); color: #fff; box-shadow: 0 1px 2px rgba(60, 20, 70, .25); }
+html body.dark .ot-overlay .ot-gseg-b.on { color: #1a0f1c; }
+html .ot-overlay .ot-toc-fab { left: 14px; top: 12px; width: 40px; height: 40px; border-radius: 50%; background: color-mix(in srgb, var(--ot-card) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); color: var(--ot-accent); box-shadow: 0 1px 0 rgba(60, 20, 70, .05), 0 6px 16px -8px rgba(60, 20, 70, .3); }
+html .ot-overlay .ot-toc { top: 60px; left: 14px; }
+html .ot-overlay .ot-graph-pop .ot-toc, html .ot-overlay .ot-graph-pop .ot-toc-fab, html .ot-overlay .ot-graph-pop .ot-graph-bar,
+html .ot-overlay .ot-graph-pop .ot-graph-ctl, html .ot-overlay .ot-graph-pop .ot-graph-more { display: none; }
+
+/* round frosted zoom / locate keys */
+html .ot-overlay .ot-graph-ctl { right: 14px; bottom: 16px; gap: 8px; }
+html .ot-overlay .ot-gctl { width: 44px; height: 44px; border-radius: 50%; color: var(--ot-accent); background: color-mix(in srgb, var(--ot-card) 82%, transparent);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); box-shadow: 0 1px 0 rgba(60, 20, 70, .05), 0 6px 16px -8px rgba(60, 20, 70, .3); }
+html .ot-overlay .ot-gctl:active { transform: translateY(1px); box-shadow: inset 0 1px 2px rgba(60, 20, 70, .16); }
+html .ot-overlay .ot-graph-hint { display: none; }
+.ot-graph-more { position: absolute; left: 14px; bottom: 16px; z-index: 4; display: inline-flex; align-items: center; gap: 2px; min-height: 40px; padding: 0 8px 0 14px;
+  border: 1px solid var(--ot-line); border-radius: 999px; background: color-mix(in srgb, var(--ot-card) 82%, transparent); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  color: var(--ot-ink); font: 500 13px/1 var(--ot-font, system-ui); cursor: pointer; box-shadow: 0 6px 16px -8px rgba(60, 20, 70, .3); }
+.ot-graph-more .material-symbols-outlined { font-size: 18px; color: var(--ot-sub); }
+
+/* edges: plum walked path, dashed possible next, faint excluded */
+html .ot-overlay .ot-edge { stroke: color-mix(in srgb, var(--ot-sub) 38%, transparent); stroke-width: 1.6; }
+html .ot-overlay .ot-edge.active { stroke: var(--ot-accent); stroke-width: 2.5; filter: none; }
+html .ot-overlay .ot-edge.next { stroke: color-mix(in srgb, var(--ot-accent) 55%, transparent); stroke-width: 1.6; stroke-dasharray: 4 5; }
+html .ot-overlay .ot-edge.disabled { stroke: color-mix(in srgb, var(--ot-sub) 40%, transparent); stroke-dasharray: 2 5; opacity: .5; }
+
+/* nodes: card with a category bar on the left, label over name, answer underneath */
+html .ot-overlay .ot-gnode { gap: 3px; padding: 9px 13px; justify-content: center; border: 1px solid var(--ot-line); border-radius: 14px; background: var(--ot-card);
+  box-shadow: 0 1px 0 rgba(60, 20, 70, .05), 0 4px 12px -6px rgba(60, 20, 70, .22); }
+html .ot-overlay .ot-gnode::before { content: none; }
+html .ot-overlay .ot-gnode:active { transform: translateY(1px); box-shadow: inset 0 1px 2px rgba(60, 20, 70, .14); }
+html .ot-overlay .ot-gn-top { gap: 6px; }
+html .ot-overlay .ot-gn-cat { font: 500 11.5px/1.2 var(--ot-font, system-ui); letter-spacing: 0; text-transform: none; color: var(--ot-sub); }
+html .ot-overlay .ot-gn-mark { margin-left: auto; display: inline-flex; }
+html .ot-overlay .ot-gn-mark .material-symbols-outlined { font-size: 18px; color: var(--ot-accent); }
+html .ot-overlay .ot-gn-name { font: 600 14.5px/1.25 var(--ot-font, system-ui); letter-spacing: -.01em; -webkit-line-clamp: 1; }
+html .ot-overlay .ot-gnode.narrow .ot-gn-name { font-size: 13px; -webkit-line-clamp: 2; }
+html .ot-overlay .ot-gn-sel { font: 500 12.5px/1.25 var(--ot-font, system-ui); color: var(--ot-accent); }
+html .ot-overlay .ot-graph-all .ot-gn-name { font-size: 13px; -webkit-line-clamp: 2; }
+html .ot-overlay .ot-gnode.active { border-color: color-mix(in srgb, var(--ot-accent) 28%, var(--ot-line)); }
+html .ot-overlay .ot-gnode.frontier { border-color: var(--ot-accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--ot-accent) 18%, transparent), 0 8px 20px -8px color-mix(in srgb, var(--ot-accent) 50%, transparent); animation: none; }
+html .ot-overlay .ot-gnode.frontier .ot-gn-cat { color: var(--ot-accent); font-weight: 600; }
+html .ot-overlay .ot-gnode.unresolved { border-style: dashed; background: color-mix(in srgb, var(--ot-card) 72%, transparent); box-shadow: none; }
+html .ot-overlay .ot-gnode.disabled, html .ot-overlay .ot-gnode.unreachable { opacity: .45; border-top-color: var(--ot-line); box-shadow: none; }
+html .ot-overlay .ot-gnode.disabled .ot-gn-name, html .ot-overlay .ot-gnode.unreachable .ot-gn-name { text-decoration: none; }
+html .ot-overlay .ot-gnode.disabled .ot-gn-mark .material-symbols-outlined { color: var(--ot-sub); }
+html .ot-overlay .ot-gnode.sel { box-shadow: 0 0 0 3px color-mix(in srgb, var(--ot-accent) 35%, transparent); transform: none; }
+
+/* tapped node: a bottom sheet that scrolls, with a grabber, nothing laid over its title */
+html .ot-overlay .ot-mappop { left: 0; right: 0; bottom: 0; max-height: 62%; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 22px 18px calc(18px + env(safe-area-inset-bottom, 0px));
+  border: 1px solid var(--ot-line); border-bottom: 0; border-radius: 22px 22px 0 0; background: color-mix(in srgb, var(--ot-card) 97%, transparent);
+  box-shadow: 0 -10px 30px -12px rgba(60, 20, 70, .35); }
+html .ot-overlay .ot-mappop::before { content: ""; position: absolute; top: 8px; left: 50%; width: 36px; height: 5px; margin-left: -18px; border-radius: 3px; background: color-mix(in srgb, var(--ot-sub) 35%, transparent); }
+html .ot-overlay .ot-mappop-x { top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: color-mix(in srgb, var(--ot-sub) 12%, transparent); }
+html .ot-overlay .ot-mappop-cat { font: 500 12.5px/1.2 var(--ot-font, system-ui); text-transform: none; letter-spacing: 0; color: var(--ot-sub); }
+html .ot-overlay .ot-mappop-cat .material-symbols-outlined { color: var(--ot-c, var(--ot-accent)); }
+html .ot-overlay .ot-mappop-name { font: 700 18px/1.25 var(--ot-font, system-ui); letter-spacing: -.01em; margin: 4px 44px 0 0; }
+html .ot-overlay .ot-mappop-sel { color: var(--ot-accent); }
+html .ot-overlay .ot-mappop-why { color: var(--ot-sub); }
+html .ot-overlay .ot-mappop .ot-btn.primary { width: 100%; min-height: 48px; justify-content: center; margin-top: 14px; }
+
+/* No coloured side or top stripes on cards (owner 2026-10-31: "vibe coded line"); fixed at the source rules. */
+html .ot-overlay .ot-toc-sec-h { text-transform: none; letter-spacing: 0; font: 600 12px/1.2 var(--ot-font, system-ui); color: var(--ot-sub); }
+html .ot-overlay .ot-gn-sel { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+html .ot-overlay .ot-graph-canvas .ot-graph-more { position: absolute; left: 0; bottom: auto; justify-content: center; min-height: 48px; padding: 0 14px; border-radius: 14px;
+  -webkit-backdrop-filter: none; backdrop-filter: none; background: var(--ot-card); box-shadow: 0 1px 0 rgba(60, 20, 70, .05), 0 4px 12px -6px rgba(60, 20, 70, .22); color: var(--ot-accent); font-weight: 600; }
+html .ot-overlay .ot-graph-canvas .ot-graph-more .material-symbols-outlined { color: var(--ot-accent); }
+/* frosted band under the map's top controls so cards scroll softly beneath them */
+html .ot-overlay .ot-graph::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 72px; z-index: 4; pointer-events: none;
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); background: color-mix(in srgb, var(--ot-bg, #f7f3fb) 55%, transparent);
+  -webkit-mask-image: linear-gradient(#000 62%, transparent); mask-image: linear-gradient(#000 62%, transparent); }
+html .ot-overlay .ot-graph-pop::before { display: none; }
+/* Your path: the locate key joins the top row, so nothing floats over the cards */
+html .ot-overlay .ot-graph-focus .ot-graph-ctl { top: 12px; bottom: auto; }
+html .ot-overlay .ot-graph-focus .ot-gctl { width: 40px; height: 40px; }

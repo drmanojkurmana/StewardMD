@@ -227,16 +227,16 @@ body.dark .oh-grp-h, body.dark .oh-card-s, body.dark .oh-hero-sub { color: rgba(
 
 /* ===== CTCAE grading + IO toxicity — severity-coloured grade chips ======================= */
 .ctc-note { font: 500 12px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); background: var(--teal-soft, #e4f2ef); border-radius: 10px; padding: 9px 12px; margin-bottom: 14px; line-height: 1.5; }
-.ctc-grow { display: flex; gap: 12px; padding: 11px 13px; border: 1px solid var(--rds-line, var(--line)); border-left: 4px solid var(--rds-line, var(--line)); border-radius: 11px; margin-bottom: 7px; background: var(--rds-surface, var(--panel, #fff)); align-items: baseline; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
+.ctc-grow { display: flex; gap: 12px; padding: 11px 13px; border: 1px solid var(--rds-line, var(--line)); border-radius: 11px; margin-bottom: 7px; background: var(--rds-surface, var(--panel, #fff)); align-items: baseline; box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
 .ctc-gnum { flex: 0 0 74px; font: 800 12px var(--rds-font, var(--sans)); }
 .ctc-gtext { flex: 1; font: 500 12.5px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); line-height: 1.5; }
 .ctc-nd { font: 500 12px var(--rds-font, var(--sans)); color: var(--rds-faint, var(--slate-soft, #8ca2b1)); font-style: italic; }
 /* Grade severity: 1 stable, 2 info, 3 warning, 4 urgent, 5 critical (add class .ctc-g1..5 to .ctc-grow) */
-.ctc-g1 { border-left-color: var(--sev-stable-bd); } .ctc-g1 .ctc-gnum { color: var(--sev-stable-fg); }
-.ctc-g2 { border-left-color: var(--sev-info-bd); }   .ctc-g2 .ctc-gnum { color: var(--sev-info-fg); }
-.ctc-g3 { border-left-color: var(--sev-warning-bd); }.ctc-g3 .ctc-gnum { color: var(--sev-warning-fg); }
-.ctc-g4 { border-left-color: var(--sev-urgent-bd); } .ctc-g4 .ctc-gnum { color: var(--sev-urgent-fg); }
-.ctc-g5 { border-left-color: var(--sev-critical-bd); }.ctc-g5 .ctc-gnum { color: var(--sev-critical-fg); }
+.ctc-g1 .ctc-gnum { color: var(--sev-stable-fg); }
+.ctc-g2 .ctc-gnum { color: var(--sev-info-fg); }
+.ctc-g3 .ctc-gnum { color: var(--sev-warning-fg); }
+.ctc-g4 .ctc-gnum { color: var(--sev-urgent-fg); }
+.ctc-g5 .ctc-gnum { color: var(--sev-critical-fg); }
 
 /* ===== RECIST 1.1 — severity-tinted result ============================================== */
 .rec-form { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; margin-bottom: 16px; }
@@ -245,14 +245,14 @@ body.dark .oh-grp-h, body.dark .oh-card-s, body.dark .oh-hero-sub { color: rgba(
 .rec-field > span { font: 700 11.5px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); }
 .rec-field .oh-search { margin-bottom: 0; padding: 12px 14px; }
 .rec-check { display: flex; align-items: center; gap: 9px; font: 600 13px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); }
-.rec-out { border: 1px solid var(--rds-line, var(--line)); border-left-width: 5px; border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
+.rec-out { border: 1px solid var(--rds-line, var(--line)); border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
 .rec-cat { font: 800 16px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); }
 .rec-reason { font: 500 12.5px var(--rds-font, var(--sans)); color: var(--rds-muted, var(--slate)); margin-top: 6px; line-height: 1.5; }
 .rec-nums { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 9px; font: 700 12px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); font-variant-numeric: tabular-nums; }
-.rec-CR { border-left-color: var(--sev-stable-fg); background: color-mix(in srgb, var(--sev-stable-bg) 55%, var(--rds-surface, #fff)); }
-.rec-PR { border-left-color: var(--sev-stable-fg); }
-.rec-SD { border-left-color: var(--sev-done-fg); }
-.rec-PD { border-left-color: var(--sev-critical-fg); background: color-mix(in srgb, var(--sev-critical-bg) 45%, var(--rds-surface, #fff)); }
+.rec-CR { background: color-mix(in srgb, var(--sev-stable-bg) 55%, var(--rds-surface, #fff)); }
+
+
+.rec-PD { background: color-mix(in srgb, var(--sev-critical-bg) 45%, var(--rds-surface, #fff)); }
 .rec-PD .rec-cat { color: var(--sev-critical-fg); }
 .rec-CR .rec-cat, .rec-PR .rec-cat { color: var(--sev-stable-fg); }
 
@@ -277,10 +277,9 @@ body.dark .oh-grp-h, body.dark .oh-card-s, body.dark .oh-hero-sub { color: rgba(
 /* ===== ONCQIS Phase C: evidence layers + UPDATE AVAILABLE + divergence =================== */
 .oev-empty { font: 500 11.5px var(--rds-font, var(--sans)); color: var(--rds-faint, var(--slate-soft, #8ca2b1)); padding: 6px 0; }
 .oev-layers { display: flex; flex-direction: column; gap: 12px; }
-.oev-layer { border: 1px solid var(--rds-line, var(--line)); border-left-width: 5px; border-radius: 13px; padding: 12px 14px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
-.oev-layer-core { border-left-color: var(--sev-done-fg); }
-.oev-layer-guide { border-left-color: var(--sev-info-fg); }
-.oev-layer-inst { border-left-color: var(--teal, #0e6e63); }
+.oev-layer { border: 1px solid var(--rds-line, var(--line)); border-radius: 13px; padding: 12px 14px; background: var(--rds-surface, var(--panel, #fff)); box-shadow: var(--rds-el-card, 0 1px 2px rgba(13,27,36,.04)); }
+
+
 .oev-layer-h { font: 800 12px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .06em; color: var(--rds-ink, var(--ink)); }
 .oev-layer-sub { font: 500 11px var(--rds-font, var(--sans)); color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin: 3px 0 8px; line-height: 1.45; }
 .oev-prow { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; padding: 7px 0; border-top: 1px dashed var(--rds-line, var(--line)); }
@@ -312,7 +311,7 @@ body.dark .oh-grp-h, body.dark .oh-card-s, body.dark .oh-hero-sub { color: rgba(
 .oev-ua-btn-ghost { background: transparent; color: var(--teal, #0e6e63); border-style: dashed; }
 .oev-ua-note { font: 500 11px var(--rds-font, var(--sans)); color: var(--rds-faint, var(--slate-soft, #8ca2b1)); margin-top: 10px; line-height: 1.5; }
 
-.oev-div { border: 1px solid var(--rds-line, var(--line)); border-left: 5px solid var(--sev-warning-fg); border-radius: 13px; padding: 13px; background: var(--rds-surface, var(--panel, #fff)); }
+.oev-div { border: 1px solid var(--rds-line, var(--line)); border-radius: 13px; padding: 13px; background: var(--rds-surface, var(--panel, #fff)); }
 .oev-div-h { display: inline-block; font: 800 10px var(--rds-font, var(--sans)); text-transform: uppercase; letter-spacing: .06em; background: var(--sev-warning-bg); color: var(--sev-warning-fg); border-radius: 7px; padding: 3px 9px; }
 .oev-div-field { font: 700 13px var(--rds-font, var(--sans)); color: var(--rds-ink, var(--ink)); margin: 9px 0 8px; }
 .oev-div-src { display: flex; gap: 8px; padding: 6px 0; border-top: 1px dashed var(--rds-line, var(--line)); }
@@ -427,8 +426,8 @@ body.dark .oh-overlay::before {
 .oh-overlay > .oh-top { position: sticky; z-index: 5; background: color-mix(in srgb, #f6f3fc 72%, transparent); }
 body.dark .oh-overlay > .oh-top { background: color-mix(in srgb, #0e0b16 72%, transparent); }
 .oh-search { background: var(--oh-card) !important; }
-/* Coloured left edges are kept ONLY where they encode clinical state: CTCAE grade (.ctc-g1..5), RECIST
-   response (.rec-out) and evidence layers. The decorative teal stripe on stage-group rows was removed. */
+/* No coloured side stripes anywhere in ONCQIS (owner 2026-10-31). Clinical state is carried by a tinted grade chip
+   (CTCAE), the heading colour and a tinted surface (RECIST), and the heading colour (evidence layers). */
 
 /* ===== Plum accent for every oncology surface (owner 2026-10-30: "that green is not matching, use
    lavender only, plum in place of green for ONCQIS, OncoTree, everything onco"). The app teal is
@@ -623,10 +622,24 @@ html .oh-overlay .oh-title-mark { width: 34px; height: 34px; flex: 0 0 34px; }
 .oh-hero-word { display: flex; flex-direction: column; min-width: 0; }
 html .oh-overlay .oh-hero-title {
   font: 600 38px/1 var(--rds-font, var(--sans)) !important; letter-spacing: .03em !important;
-  background: linear-gradient(90deg, #0b4252, #2f95a8); -webkit-background-clip: text; background-clip: text; color: transparent !important;
+  color: #0e5466 !important;   /* the logo's deep teal, solid (no gradient text) */
 }
-body.dark .oh-overlay .oh-hero-title { background-image: linear-gradient(90deg, #6cc3cf, #b6e7ec); }
+body.dark .oh-overlay .oh-hero-title { color: #8fd3dc !important; }
 .oh-hero-tag { margin-top: 5px; font: 500 12.5px/1.2 var(--rds-font, var(--sans)); color: var(--rds-ink, #14202b); opacity: .78; letter-spacing: .01em; }
 body.dark .oh-hero-tag { color: #f3eef6; }
-.oh-title-txt b { background: linear-gradient(90deg, #0b4252, #2f95a8); -webkit-background-clip: text; background-clip: text; color: transparent; letter-spacing: .03em; }
-body.dark .oh-title-txt b { background-image: linear-gradient(90deg, #6cc3cf, #b6e7ec); }
+.oh-title-txt b { color: #0e5466; letter-spacing: .03em; }
+body.dark .oh-title-txt b { color: #8fd3dc; }
+
+/* CTCAE grade severity lives in a tinted grade chip (no side stripe). */
+html .oh-overlay .ctc-grow { align-items: flex-start; }
+html .oh-overlay .ctc-gnum { flex: 0 0 auto; min-width: 64px; text-align: center; padding: 3px 8px; border-radius: 8px; font-weight: 700; }
+html .oh-overlay .ctc-g1 .ctc-gnum { background: var(--sev-stable-bg); }
+html .oh-overlay .ctc-g2 .ctc-gnum { background: var(--sev-info-bg); }
+html .oh-overlay .ctc-g3 .ctc-gnum { background: var(--sev-warning-bg); }
+html .oh-overlay .ctc-g4 .ctc-gnum { background: var(--sev-urgent-bg); }
+html .oh-overlay .ctc-g5 .ctc-gnum { background: var(--sev-critical-bg); }
+html .oh-overlay .rec-SD .rec-cat { color: var(--sev-done-fg); }
+html .oh-overlay .oev-div { background: color-mix(in srgb, var(--sev-warning-bg) 40%, var(--rds-surface, #fff)); }
+html .oh-overlay .oev-layer-core .oev-layer-h { color: var(--sev-done-fg); }
+html .oh-overlay .oev-layer-guide .oev-layer-h { color: var(--sev-info-fg); }
+html .oh-overlay .oev-layer-inst .oev-layer-h { color: var(--teal); }
