@@ -1,0 +1,33 @@
+/* PrepNucleus Sound — Spotify mini-player (prep-sound-spotify.js). Every rule is scoped under
+   .pn-sound-sp-* and reads the PrepNucleus --pn-* tokens (restrained dark green sheet surface
+   --pn-why-* #071318/#0D1D23/#42CDB5). No glow, no gradient, no backdrop blur. Targets are at
+   least 44px; focus is always visible; reduced motion keeps fades only. */
+.pn-root .pn-sound-sp-fab{position:absolute;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-card,#0D1D23);color:var(--pn-why-accent,#42CDB5);box-shadow:var(--pn-shadow);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-fab:active{transform:scale(.97)}
+.pn-root .pn-sound-sp-fab:focus-visible,.pn-root .pn-sound-sp-btn:focus-visible,.pn-root .pn-sound-sp-item:focus-visible{outline:2px solid var(--pn-why-accent,#42CDB5);outline-offset:2px}
+.pn-root .pn-sound-sp-sheet{background:var(--pn-why-card,#0D1D23);color:var(--pn-why-ink,#E2F1EE);max-height:82vh;overflow:auto}
+.pn-root .pn-sound-sp-head{display:flex;align-items:baseline;gap:8px}
+.pn-root .pn-sound-sp-head h2{margin:0;font-size:21px;letter-spacing:-.01em}
+.pn-root .pn-sound-sp-brand{font-size:13px;color:var(--pn-why-mut,#94B4AB)}
+.pn-root .pn-sound-sp-note{margin:0;font-size:15px;line-height:1.5;color:var(--pn-why-body,#CDE2DC)}
+.pn-root .pn-sound-sp-err{margin:0;font-size:15px;line-height:1.5;color:#F3B8B2}
+.pn-root .pn-sound-sp-now{display:flex;flex-direction:column;gap:2px}
+.pn-root .pn-sound-sp-now b{font-size:17px}
+.pn-root .pn-sound-sp-now small{font-size:13px;color:var(--pn-why-mut,#94B4AB)}
+.pn-root .pn-sound-sp-controls{display:flex;align-items:center;justify-content:center;gap:12px}
+.pn-root .pn-sound-sp-btn{display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-bg,#071318);color:var(--pn-why-ink,#E2F1EE);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-btn.main{width:56px;height:56px;min-width:56px;min-height:56px;background:var(--pn-why-accent,#42CDB5);color:var(--pn-why-on,#16383E);border-color:transparent}
+.pn-root .pn-sound-sp-btn:active{transform:scale(.97)}
+.pn-root .pn-sound-sp-vol{display:flex;align-items:center;gap:12px;min-height:44px;font-size:13px;color:var(--pn-why-mut,#94B4AB)}
+.pn-root .pn-sound-sp-vol input{flex:1;min-height:44px;accent-color:var(--pn-why-accent,#42CDB5)}
+.pn-root .pn-sound-sp-search{display:flex;gap:8px;align-items:center}
+.pn-root .pn-sound-sp-search input{flex:1;min-height:44px;padding:8px 12px;border-radius:12px;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-bg,#071318);color:var(--pn-why-ink,#E2F1EE);font-size:16px}
+.pn-root .pn-sound-sp-lists h3{margin:4px 0 8px;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--pn-why-mut,#94B4AB)}
+.pn-root .pn-sound-sp-list{list-style:none;margin:0 0 12px;padding:0;display:flex;flex-direction:column;gap:4px}
+.pn-root .pn-sound-sp-item{display:flex;align-items:center;gap:12px;width:100%;min-height:44px;padding:8px 10px;border:0;border-radius:12px;background:transparent;color:inherit;text-align:left;text-decoration:none;cursor:pointer;font:inherit}
+.pn-root .pn-sound-sp-item:hover{background:var(--pn-why-hover,#142830)}
+.pn-root .pn-sound-sp-ib{display:flex;flex:none;color:var(--pn-why-accent,#42CDB5)}
+.pn-root .pn-sound-sp-it{display:flex;flex-direction:column;gap:1px;min-width:0}
+.pn-root .pn-sound-sp-it b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pn-root .pn-sound-sp-it small{font-size:13px;color:var(--pn-why-mut,#94B4AB);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media (prefers-reduced-motion:reduce){.pn-root .pn-sound-sp-fab,.pn-root .pn-sound-sp-btn{transition:none}}
