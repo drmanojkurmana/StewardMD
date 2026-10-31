@@ -127,7 +127,7 @@ test("reminders say what to read and practise: smart nudges and the daily remind
 
 test("PDF: a valid file (header, objects, xref offsets, trailer), every page footed, text wrapped to the column", () => {
   const rows = [];
-  for (let i = 0; i < 80; i++) rows.push({ cells: ["Mon " + i, "Study", "Anthracyclines (doxorubicin), platinum agents and 5–FU/capecitabine: topic " + i, "80 topic MCQs + 47 mixed"], fill: i % 7 === 4 ? "gt" : null });
+  for (let i = 0; i < 80; i++) rows.push({ cells: ["Mon " + i, "Study", "Anthracyclines (doxorubicin), platinum agents and 5\u2013FU/capecitabine: topic " + i, "80 topic MCQs + 47 mixed"], fill: i % 7 === 4 ? "gt" : null });
   const pdf = TT.pdfDoc({ title: "ReWise: NEET-SS Medical Oncology", sub: "46-day plan", box: { head: "HOW", text: "Weakest first." }, facts: [["Rest days:", "Sun"]],
     sections: [{ h: "3. Date-wise plan", table: { boldSecond: true, cols: [["Date", 1], ["Main task", 1], ["Topics", 3], ["Practice", 2]], rows } }, { h: "Rules", bullets: ["Rest."] }], foot: "ReWise" });
   assert.ok(pdf.startsWith("%PDF-1.4\n"));
@@ -147,5 +147,5 @@ test("PDF: a valid file (header, objects, xref offsets, trailer), every page foo
   assert.ok(pdf.indexOf("Anthracyclines \\(doxorubicin\\)") > 0, "brackets are escaped");
   // Wrapping: no line wider than its width.
   TT.wrap("A long topic name that has to wrap across more than one line in a narrow cell", 9, false, 80).forEach((l) => assert.ok(TT.textW(l, 9, false) <= 80, l));
-  assert.equal(TT.pdfText("a—b ≥ c 中"), "a-b >= c ?");
+  assert.equal(TT.pdfText("a\u2014b \u2265 c \u4e2d"), "a-b >= c ?");
 });

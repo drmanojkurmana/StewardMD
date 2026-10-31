@@ -264,7 +264,7 @@
      -> a binary string (every char code under 256), ready for btoa. Widths are Helvetica's AFM widths, so wrapping holds. */
   var HW = [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
   var HB = [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584];
-  var PDF_MAP = { "‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "•": "-", "…": "...", " ": " ", "→": "->", "≥": ">=", "≤": "<=", "·": "-" };
+  var PDF_MAP = { "\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"', "\u2013": "-", "\u2014": "-", "\u2022": "-", "\u2026": "...", "\u00a0": " ", "\u2192": "->", "\u2265": ">=", "\u2264": "<=", "\u00b7": "-" };
   function pdfText(s) { return String(s == null ? "" : s).replace(/[^\x20-\x7e\xa0-\xff]/g, function (c) { return PDF_MAP[c] != null ? PDF_MAP[c] : c === "\n" ? " " : "?"; }); }
   function textW(s, size, bold) { var t = pdfText(s), w = 0, tb = bold ? HB : HW; for (var i = 0; i < t.length; i++) { var c = t.charCodeAt(i); w += c >= 32 && c <= 126 ? tb[c - 32] : 556; } return w * size / 1000; }
   // Greedy word wrap to a width; a word longer than the line is cut.
@@ -522,9 +522,9 @@
     if (tt()) {
       var x = info(H.today(), null); if (!x) return "";
       var ex = examDay(), bad = ex != null && ex < H.today();
-      var tx = bad ? "ReWise: your exam date has passed. Set the new date" : x.k === "before" ? "ReWise starts " + fmtDay(tt().start, true) : "ReWise · " + (KIND[x.k] || "") + (x.k === "learn" || x.k === "rev" ? ": " + x.head : "");
+      var tx = bad ? "ReWise: your exam date has passed. Set the new date" : x.k === "before" ? "ReWise starts " + fmtDay(tt().start, true) : "ReWise \u00b7 " + (KIND[x.k] || "") + (x.k === "learn" || x.k === "rev" ? ": " + x.head : "");
       var miss = missed(tt().days, H.today(), studied).length;
-      return '<button type="button" class="pn-link tt-line" data-act="tt-open">' + H.ico("cal") + "<span>" + esc(tx) + (miss && !bad ? " · " + plural(miss, "day", "days") + " missed" : "") + "</span></button>";
+      return '<button type="button" class="pn-link tt-line" data-act="tt-open">' + H.ico("cal") + "<span>" + esc(tx) + (miss && !bad ? " \u00b7 " + plural(miss, "day", "days") + " missed" : "") + "</span></button>";
     }
     var w = today(h); if (!w || !tt1()) return "";
     var tx1 = w.k === "study" ? "Timetable: " + esc(w.name) + ", day " + w.n + " of " + w.of : w.k === "rest" ? "Timetable: rest day. Due reviews only." : w.k === "rev" ? "Timetable: revision and mocks" : "Timetable starts " + esc(fmtDay(tt1().start, true));
@@ -615,7 +615,7 @@
     if (live && (b.k === "errors" || b.k === "first") && !(pr && pr.none)) act = '<button type="button" class="pn-btn sm" data-act="tt-err" data-v="' + Math.max(5, Math.round(b.min / Q_MIN)) + '">Start</button>';
     if (live && b.k === "quick") act = x.t[0] && x.k === "learn" ? '<button type="button" class="pn-btn sm" data-act="k-open" data-s="' + esc(subjOfMod(x.t[0]) || "") + '" data-m="' + esc(x.t[0]) + '" data-t="' + esc(mname(x.t[0])) + '">Open</button>' : '<button type="button" class="pn-btn sm" data-act="k-due">Open</button>';
     return '<li class="tt-bk' + (done ? " done" : "") + '">' + (live ? '<button type="button" class="tt-tick" role="checkbox" aria-checked="' + done + '" data-act="tt-tick" data-v="' + b.k + '" aria-label="' + esc(b.title) + ' done"><i aria-hidden="true"></i></button>' : "") +
-      '<span class="tt-bn"><b>' + esc(b.title) + " <small>" + b.min + " min" + (pr && pr.of && !pr.done ? " · " + pr.x + " of " + pr.of : "") + "</small></b><small>" + esc(b.sub || "") + "</small></span>" + act + "</li>";
+      '<span class="tt-bn"><b>' + esc(b.title) + " <small>" + b.min + " min" + (pr && pr.of && !pr.done ? " \u00b7 " + pr.x + " of " + pr.of : "") + "</small></b><small>" + esc(b.sub || "") + "</small></span>" + act + "</li>";
   }
   function dayRow(x, td) {
     var tag = x.d === td ? "Today" : fmtDay(x.d, true), what = x.k === "learn" ? x.list : x.k === "rev" ? "Revision: " + x.head : KIND[x.k] || "";
