@@ -106,6 +106,14 @@ try {
   ok(await ev(`return !!(window.PREP_SOUND_WEB && window.PREP_SOUND_WEB.supported() && window.PREP_SOUND_WEB.current());`) === true, "a live WebAudio track backs the playing state");
   await sleep(1500);
   ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "after a 1500ms settle nothing in #smdPrep is wider than the 390 px screen");
+  // Now Playing card (rs-player-ui): the same card renders ambience in the Sound
+  // sheet — play shows pause, progress (elapsed) and the volume control present.
+  ok(await ev(`return !!document.querySelector('.pn-sound-sheet .pn-player');`) === true, "Sound sheet shows the shared Now Playing card for ambience");
+  ok(await ev(`return !!document.querySelector('.pn-sound-sheet .pn-player [data-player-act="toggle"][aria-label="Pause"]');`) === true, "ambience card shows Pause while playing (play shows pause)");
+  ok(await ev(`return !!document.querySelector('.pn-sound-sheet .pn-player [data-player-volume]');`) === true, "ambience card shows its volume control");
+  ok(await ev(`return !!document.querySelector('.pn-sound-sheet .pn-player [data-player-elapsed]');`) === true, "ambience card shows progress (elapsed time)");
+  await click(".pn-sound-sheet .pn-player [data-player-act=toggle]");
+  ok(await ev(`return window.PREP_SOUND.isPlaying();`) === false, "ambience card Pause stops the ambience");
   // All flags off: explicit =0 beats the seeded localStorage, so the loader must fetch no medigram file
   // and the home must show no PrepReels row. reqs is reset so this sweep only sees the flags-off page.
   await ev(`try{localStorage.setItem("smd_prep_medigram","0"); localStorage.setItem("smd_prep_sound","0");}catch(e){} return 1;`);

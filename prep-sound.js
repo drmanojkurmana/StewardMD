@@ -16,6 +16,7 @@
   function CORE() { return (G && G.PREP_SOUND_CORE) || null; }
   function WEB() { return (G && G.PREP_SOUND_WEB) || null; }
   function PROV() { return (G && G.PREP_SOUND_PROVIDERS) || null; }
+  function PLAYER() { return (G && G.PREP_SOUND_PLAYER) || null; }
 
   /* ================= pure (node-testable HTML builders) ================= */
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -95,10 +96,16 @@
     var prefs = '<div class="pn-sound-prefs">' +
       '<button type="button" class="pn-sound-toggle" aria-pressed="' + !!o.prefs.pauseBeforeVideo + '" data-act="s-pref" data-v="pauseBeforeVideo"><i aria-hidden="true"></i>Pause before videos</button>' +
       '<button type="button" class="pn-sound-toggle" aria-pressed="' + !!o.prefs.backgroundPlayback + '" data-act="s-pref" data-v="backgroundPlayback"><i aria-hidden="true"></i>Keep playing in background</button></div>';
+    /* The shared Now Playing card (prep-sound-player.js) leads the sheet when
+       present: ambience gets play/pause + volume with a generated tile;
+       external providers get the honest "Playing in <app>" card. o.playerHtml /
+       o.externalHtml are pre-rendered by state() (browser only); without them
+       the original control row renders, so older builds never break. */
+    var lead = o.playerHtml || o.externalHtml || (ctl + vol);
     return '<button type="button" class="pn-sound-scrim" data-act="s-close" aria-label="Close Sound"></button>' +
       '<div class="pn-sound-sheet" role="dialog" aria-modal="true" aria-label="Sound">' +
       '<div class="pn-sound-sheeth"><h2>Sound</h2><button type="button" class="pn-sound-dbtn" data-act="s-close" aria-label="Close">✕</button></div>' +
-      ctl + vol +
+      lead +
       '<h3>Providers</h3><ul class="pn-sound-provs">' + providerRows(o.providers) + "</ul>" +
       '<h3>Focus presets <small>original ambience, made on this device</small></h3>' + presetChips(o.presets, o.preset) +
       share + prefs +
@@ -160,9 +167,24 @@
     try { G.open(r.url, "_blank", "noopener"); } catch (e) { S.sm = "error"; S.note = "Could not open the link."; }
   }
   function state() {
-    return { prefsEnabled: S.prefs.enabled, sm: S.sm, note: S.note, preset: S.preset, presets: C.PRESETS,
+    var st = { prefsEnabled: S.prefs.enabled, sm: S.sm, note: S.note, preset: S.preset, presets: C.PRESETS,
       provider: provider(), providerName: provider().name, providerKind: provider().kind, trackTitle: trackTitle(),
       controls: controls(), volume: S.volume, prefs: S.prefs, providers: C.PROVIDERS.filter(function (p) { return p.kind !== "reserved" || PROV().getAdapter("spotify_remote"); }), shareMsg: S.shareMsg };
+    var PL = PLAYER();
+    if (PL && PL._pure) {
+      var pr = provider();
+      if (pr.kind === "embedded") {
+        var preset = C.presetById(S.preset);
+        var model = PL.ambienceModel({ title: trackTitle() || (preset ? preset.title : "Ambience"), presetId: S.preset,
+          isPlaying: S.sm === "playing_embedded", volume01: S.volume, positionMs: 0 });
+        st.playerHtml = PL.render(model, PL.ambienceCaps(), { volumeDataAttr: 'data-svol="1"',
+          acts: { toggle: S.sm === "playing_embedded" ? "s-pause" : "s-play" } });
+      } else if (pr.kind === "external") {
+        var ios = /iphone|ipad|ipod/i.test((G.navigator && G.navigator.userAgent) || "");
+        st.externalHtml = PL.externalHtml(pr.id, pr.name, { platform: ios ? "ios" : "other", openAct: "s-home", openV: pr.id });
+      }
+    }
+    return st;
   }
 
   /* ---------- dock + sheet (body-level: prep.js paint() repaints root) ---------- */
