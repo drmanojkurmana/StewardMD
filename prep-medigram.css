@@ -5,7 +5,6 @@
 .pn-root .pn-mg-tab { flex: 1 1 0; min-height: 44px; padding: 0 12px; border: 0; border-radius: var(--pn-r-sm); background: none; color: var(--pn-mut); font-size: 14px; font-weight: 600; }
 .pn-root .pn-mg-tab.on { background: var(--pn-card); color: var(--pn-text); box-shadow: 0 0 0 1px var(--pn-edge); }
 .pn-root .pn-mg-missions, .pn-root .pn-mg-lang { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.pn-root .pn-mg-cad { display: inline-flex; gap: 6px; margin-left: auto; }
 .pn-root .pn-mg-chip { min-height: 44px; padding: 0 14px; border: 1px solid var(--pn-edge); border-radius: var(--pn-r-pill); background: var(--pn-card); color: var(--pn-text); font-size: 14px; font-weight: 600; }
 .pn-root .pn-mg-chip.sm { min-height: 40px; padding: 0 12px; font-size: 13px; }
 .pn-root .pn-mg-chip.on { background: #0d1d23; border-color: #42cdb5; color: #e2f1ee; }
@@ -40,7 +39,6 @@ body.dark .pn-root .pn-mg-chip.on { background: #0d1d23; color: #e2f1ee; }
 .pn-root .pn-mg button:focus-visible { outline: 2px solid #42cdb5; outline-offset: 2px; }
 @media (max-width: 420px) {
   .pn-root .pn-mg-card { padding: 14px; }
-  .pn-root .pn-mg-cad { margin-left: 0; }
   .pn-root .pn-mg-nav { flex-direction: column; }
   .pn-root .pn-mg-btn { width: 100%; }
 }

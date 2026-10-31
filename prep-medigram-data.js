@@ -52,7 +52,22 @@
       youtube: pick("medigram_youtube", "smd_prep_medigram_youtube", false)
     };
   }
-  function cadenceN(key) { return CADENCES[key] || 3; }
+  function resolveCadence(arm) {
+    if (arm == null) return "3:1";
+    var s = String(arm).trim();
+    if (s === "2" || s === "2:1") return "2:1";
+    if (s === "5" || s === "5:1") return "5:1";
+    if (s === "3" || s === "3:1") return "3:1";
+    return "3:1";
+  }
+  function cadenceN(key) {
+    if (CADENCES[key]) return CADENCES[key];
+    var k = String(key || "").trim();
+    if (CADENCES[k + ":1"]) return CADENCES[k + ":1"];
+    var n = Number(key);
+    if (n === 2 || n === 3 || n === 5) return n;
+    return 3;
+  }
 
   /* Candidate contract (plan section 10). Returns { ok, errors[] }; errors are field names, never content. */
   function validateCandidate(c, opts) {
@@ -238,6 +253,7 @@
   }
 
   var PURE = { LANGS: LANGS, KINDS: KINDS, CADENCES: CADENCES, MISSIONS: MISSIONS, resolveFlags: resolveFlags, cadenceN: cadenceN,
+    resolveCadence: resolveCadence,
     validateCandidate: validateCandidate, isEligible: isEligible, eligible: eligible, dedupe: dedupe,
     scoreCandidate: scoreCandidate, rankCandidates: rankCandidates, reasonFor: reasonFor, isQuestion: isQuestion, isLesson: isLesson,
     buildFeed: buildFeed, missionById: missionById, missionProgress: missionProgress, isMissionComplete: isMissionComplete,
