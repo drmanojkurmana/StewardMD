@@ -131,7 +131,7 @@
     { id: "diagnosis", label: "Diagnosis" }, { id: "debrief", label: "Debrief" }
   ];
   var FREE_CASES = 2;
-  var S = { index: null, err: false, loading: false, cur: null, curId: null, step: 0, revealed: {}, listened: {}, playing: false, echoIn: {}, echoGrade: {}, reportIn: {}, reportGrade: null, diagIn: "", diagGrade: null, pathology: null, recorded: false, nav: null };
+  var S = { index: null, err: false, loading: false, cur: null, curId: null, step: 0, revealed: {}, listened: {}, playing: false, echoIn: {}, echoGrade: {}, reportIn: {}, reportGrade: null, diagIn: "", diagGrade: null, pathology: null, recorded: false, nav: null, pendingOpen: null };
   var hostRef = null, I = null, st = null;
 
   function esc(s) { return I ? I.esc(s) : String(s == null ? "" : s); }
@@ -155,14 +155,43 @@
     if (!pro() && entry.level === "mbbs" && idx >= FREE_CASES) return I.showPro();
     S.err = false; loadCase(entry);
   }
-  function loadIndex() {
-    if (S.index || S.loading) return;
+  /* Open one case by id for a deep link, exactly like a tap on its row:
+   * the same level lock and paywall apply. A case at another level names
+   * the level instead of failing silently. Returns false only when the id
+   * names no case at all. An index that has not loaded yet holds the id
+   * and opens it when the load lands. */
+  function openCaseById(id) {
+    id = String(id == null ? "" : id);
+    if (!id || !I) return false;
+    if (!S.index) { S.pendingOpen = id; loadIndex(); return true; }
+    var list = filtered(), i;
+    for (i = 0; i < list.length; i++) if (list[i].id === id) {
+      if (lockedAt(list, i)) { I.showPro(); return true; }
+      S.err = false; loadCase(list[i]); return true;
+    }
+    var all = S.index.cases || [];
+    for (i = 0; i < all.length; i++) if (all[i].id === id) {
+      I.toast("That case sits at another level. Change the level above and try again.");
+      return true;
+    }
+    return false;
+  }
+  /* Start the index load without painting: warms case titles for Teach rows. */
+  function ensureIndex() { if (!I || S.index || S.loading) return; S.wantPaint = false; loadIndex(true); }
+  function loadIndex(quiet) {
+    if (!I || S.index || S.loading) return;
     S.loading = true; S.err = false;
     /* Lesson titles for the debrief links; a missing index falls back to the id. */
     if (!S.lix) I.getJSON("learn/index.json").then(function (x) { S.lix = x || {}; }, function () { S.lix = {}; });
     I.getJSON("cases/index.json").then(function (ix) {
-      S.index = ix && ix.cases ? ix : { cases: [] }; S.loading = false; repaint();
-      if (S.pendingShelf) { var pid = S.pendingShelf; S.pendingShelf = null; openShelf(pid); }
+      S.index = ix && ix.cases ? ix : { cases: [] }; S.loading = false;
+      if (S.pendingShelf) { var sid = S.pendingShelf; S.pendingShelf = null; repaint(); openShelf(sid); return; }
+      if (S.pendingOpen) {
+        var pid = S.pendingOpen; S.pendingOpen = null;
+        if (openCaseById(pid)) return;
+      }
+      /* A quiet Teach warm must not swallow a Cases list that asked after it. */
+      if (!quiet || S.wantPaint) { S.wantPaint = false; repaint(); }
     }, function () { S.err = true; S.loading = false; repaint(); });
   }
   function loadCase(entry) {
@@ -190,7 +219,7 @@
       return head + '<div class="sp-err kc-err" role="alert"><p>Cases did not load. Check the connection and try again.</p>' +
         '<button type="button" class="sp-btn pri" data-act="kcase-retry">Try again</button></div>';
     }
-    if (!S.index) { loadIndex(); return head + '<p class="sp-mut" role="status">Loading cases.</p>'; }
+    if (!S.index) { S.wantPaint = true; loadIndex(); return head + '<p class="sp-mut" role="status">Loading cases.</p>'; }
     var list = filtered();
     if (!list.length) return head + '<div class="kc-empty"><p>No cases at this level yet.</p><p class="sp-small">Cases at other levels stay listed when you change the level above.</p></div>';
     var rows = list.map(function (c, i) {
@@ -337,7 +366,8 @@
       S.cur = null; S.curId = null; repaint(); return true;
     };
     st.again = function () { repaint(); };
-    return I.top("Cases", S.cur.title, STEPS[S.step].label + " · step " + (S.step + 1) + " of " + STEPS.length) +
+    return I.top("Cases", S.cur.title, STEPS[S.step].label + " · step " + (S.step + 1) + " of " + STEPS.length,
+      '<button type="button" class="sp-lang" data-act="kcase-copylink" aria-label="Copy link to this case">Copy link</button>') +
       '<div class="sp-scroll sp-pad"><div class="sp-col kc-case">' + progressHtml() + stepHtml() + "</div></div>";
   }
   function html() {
@@ -358,7 +388,12 @@
   function attach(h) {
     if (!h || !h._internal || hostRef === h) return;
     hostRef = h; I = h._internal; st = h._st;
-    I.ACTIONS["kcase-retry"] = function () { S.err = false; S.index = null; S.loading = false; loadIndex(); repaint(); };
+    I.ACTIONS["kcase-retry"] = function () { S.err = false; S.index = null; S.loading = false; S.wantPaint = true; loadIndex(); repaint(); };
+    I.ACTIONS["kcase-copylink"] = function () {
+      var L = G.KARDIA_LINKS;
+      if (!S.curId || !L || !L.link) return;
+      L.copy(L.link("case", S.curId), function (m) { I.toast(m); });
+    };
     I.ACTIONS["kcase-pro"] = function () { I.showPro(); };
     I.ACTIONS["kcase-open"] = function (b) {
       var id = b.getAttribute("data-id"), list = filtered();
@@ -405,7 +440,7 @@
     };
   }
 
-  var API = { helpers: HELPERS, attach: attach, html: html, openShelf: openShelf, setNavigator: function (fn) { S.nav = fn; }, _state: S, FREE_CASES: FREE_CASES, STEPS: STEPS };
+  var API = { helpers: HELPERS, attach: attach, html: html, openShelf: openShelf, openCaseById: openCaseById, ensureIndex: ensureIndex, setNavigator: function (fn) { S.nav = fn; }, _state: S, FREE_CASES: FREE_CASES, STEPS: STEPS };
   G.KARDIA_CASES = API;
   if (G.KARDIA && G.KARDIA._internal) attach(G.KARDIA);
 })(typeof window !== "undefined" ? window : this);

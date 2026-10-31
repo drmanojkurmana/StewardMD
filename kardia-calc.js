@@ -33,7 +33,8 @@
     var pending = ["kardia-calc-fig-data.js", "kardia-calc-fig.js"], i = 0;
     function next() {
       if (i >= pending.length) { S.figLoading = 0; repaint(); return; }
-      var s = G.document.createElement("script"); s.src = "/" + pending[i++] + "?v=krd16"; s.async = false;
+      var tok = (G.KARDIA_LOADER && G.KARDIA_LOADER.V) || "krd16";
+      var s = G.document.createElement("script"); s.src = "/" + pending[i++] + "?v=" + tok; s.async = false;
       s.onload = next; s.onerror = next; G.document.head.appendChild(s);
     }
     if (G.document && G.document.head) next(); else S.figLoading = 0;
@@ -121,6 +122,7 @@
     var h = '<button type="button" class="sp-btn sec kcalc-back" data-act="kcalc-list">Back to calculators</button>';
     h += '<div class="kcalc-head"><h2>' + esc(c.name) + '</h2><p class="kcalc-sub">' + esc(c.cat) + " · " + esc(c.source) + "</p></div>";
     h += '<button type="button" class="kcalc-fav kcalc-favbig" data-act="kcalc-fav" data-id="' + c.id + '" aria-pressed="' + !!S.favs[c.id] + '">' + (S.favs[c.id] ? "Saved as favourite" : "Save as favourite") + "</button>";
+    h += '<button type="button" class="sp-btn sec kcalc-copy" data-act="kcalc-copylink" data-id="' + c.id + '" aria-label="Copy link to ' + esc(c.name) + '">Copy link</button>';
     h += '<section aria-label="Where to measure"><h3 class="kcalc-sec">Where to measure</h3>' + figureHtml(c) + "</section>";
     h += '<section aria-label="Inputs"><h3 class="kcalc-sec">Inputs</h3>';
     c.inputs.forEach(function (inp, i) {
@@ -187,10 +189,23 @@
     A["kcalc-fav"] = function (b) { var id = b.getAttribute("data-id"); S.favs[id] = !S.favs[id]; if (!S.favs[id]) delete S.favs[id]; save(); repaint(); };
     A["kcalc-example"] = function (b) { var c = calcById(b.getAttribute("data-id")); if (!c) return; var t = trustOf(c); var ex = (t && t.example) || c.example; Object.keys(ex).forEach(function (k) { S.vals[c.id + ":" + k] = ex[k]; delete S.units[c.id + ":" + k]; }); repaint(); };
     A["kcalc-unit"] = function (b) { var c = calcById(b.getAttribute("data-id")); if (!c) return; var k = b.getAttribute("data-k"); var inp = null; c.inputs.forEach(function (x) { if (x.k === k) inp = x; }); if (!inp) return; var key = c.id + ":" + k; var alt = ALT[inp.u]; var cur = S.units[key] || inp.u; var curVal = parseFloat(S.vals[key] != null ? S.vals[key] : inp.d); if (cur === inp.u) { S.units[key] = alt.u; S.vals[key] = Math.round(curVal * alt.f * 100) / 100; } else { delete S.units[key]; S.vals[key] = Math.round(curVal / alt.f * 100) / 100; } repaint("#kcalc-input-" + c.id + "-" + k); };
+    A["kcalc-copylink"] = function (b) {
+      var id = b.getAttribute("data-id"), L = G.KARDIA_LINKS;
+      if (!id || !L || !L.link || !S.I) return;
+      L.copy(L.link("calc", id), function (m) { S.I.toast(m); });
+    };
     A["kcalc-fig-toggle"] = function (b) { S.figPlay = S.figPlay === false ? true : false; if (S.figPlay === false && S.figRaf && G.cancelAnimationFrame) G.cancelAnimationFrame(S.figRaf); repaint(); };
     A["kcalc-scan"] = function (b) { var view = b.getAttribute("data-view"); try { if (S.host._kardia && S.host._kardia.echoLab) S.host._kardia.echoLab.setView(view); } catch (e) {} if (S.nav) S.nav("echo"); };
   }
-  G.KARDIA_CALC = { attach: attach, html: html, mount: mount, setNavigator: function (fn) { S.nav = fn; }, _state: S, calcById: calcById, filtered: filtered,
-    openCalc: function (id) { if (!calcById(id)) return false; S.cur = id; touchRecent(id); return true; } };
+  /* Open one calculator by id for a deep link. Selects it and repaints
+   * through the host navigator when one is set. Returns false when unknown. */
+  function openCalc(id) {
+    var c = calcById(id);
+    if (!c) return false;
+    S.cur = c.id; touchRecent(c.id);
+    repaint();
+    return true;
+  }
+  G.KARDIA_CALC = { attach: attach, html: html, mount: mount, openCalc: openCalc, setNavigator: function (fn) { S.nav = fn; }, _state: S, calcById: calcById, filtered: filtered };
   if (G.KARDIA && G.KARDIA._internal) attach(G.KARDIA);
 })(typeof window !== "undefined" ? window : this);

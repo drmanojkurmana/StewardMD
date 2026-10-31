@@ -52,8 +52,9 @@ test("app boot loads only kardia-loader.js; the loader lists the engine and Kard
   assert.deepEqual(got, ["kardia-loader.js?v=krd16"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
   const L = readFileSync("kardia-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
   assert.equal(v, "krd16", "the loader injects at the same token as its own tag");
-  for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"]) assert.ok(L.includes('"' + f + '"'), f);
+  for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia-links.js", "kardia.js", "kardia-teach.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
+  assert.ok(L.indexOf('"kardia-links.js"') < L.indexOf('"kardia.js"'), "deep links load before the host reads them");
 });
 
 test("the loader follows the on-for-everyone flag (owner 2026-10-26): on unless the device stored 0", () => {
