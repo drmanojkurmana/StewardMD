@@ -31,9 +31,10 @@ body.dark .pn-root {
 }
 
 /* While the bar shows, the scrolling body ends above it, and the home bar's Menu button steps aside (You is that
-   screen). visibility keeps the bar's layout symmetric (the close button on the left). */
+   screen). It is removed, not just hidden: a hidden one kept its slot and pushed Search in from the right edge (owner
+   screenshot 2026-10-30), so the bar is one button each side, Close and Search, at the same gutter. */
 .pn-root.pn-navon > .pn-body { padding-bottom: calc(var(--pnv-h) + var(--pnv-b) + 28px); scroll-padding-bottom: calc(var(--pnv-h) + var(--pnv-b) + 16px); }
-.pn-root.pn-navon > .pn-bar-brand > .pn-ib[data-act="menu"] { visibility: hidden; }
+.pn-root.pn-navon > .pn-bar-brand > .pn-ib[data-act="menu"] { display: none; }
 
 /* The hidden bar sits below the screen (translated): with overflow hidden that is scrollable overflow, and focusing a
    field in a sheet scrolled the whole overlay up by the bar's height (Ask MaiK test). clip never scrolls. */

@@ -157,9 +157,10 @@
     });
   }
 
+  // A day covered by a PrepNucleus streak freeze (store.frz.used, prep-play.js) keeps the streak alive without adding to it.
   function streak(store, today) {
-    var n = 0;
-    for (var d = store.days[today] ? today : today - 1; store.days[d]; d--) n++;
+    var n = 0, fz = store.frz && store.frz.used, on = function (d) { return store.days[d] || (fz && fz.indexOf(d) >= 0); };
+    for (var d = store.days[today] ? today : today - 1; on(d); d--) if (store.days[d]) n++;
     return n;
   }
 

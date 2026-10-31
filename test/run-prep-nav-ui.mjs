@@ -135,13 +135,16 @@ async function assertions(engine) {
       const tabs = [].slice.call(n.querySelectorAll(".pnv-tab")).map((t) => { const b = t.getBoundingClientRect(); return { id: t.getAttribute("data-tab"), w: b.width, h: b.height, label: t.textContent.trim() }; });
       const menu = document.querySelector("#smdPrep .pn-bar-brand [data-act=menu]");
       return { tag: n.tagName, label: n.getAttribute("aria-label"), inDialog: !!n.closest('[role="dialog"]#smdPrep'), navs: document.querySelectorAll("nav.pnv").length, tabs, w: r.width, l: r.left, rr: innerWidth - r.right, b: innerHeight - r.bottom,
-        menuVis: menu ? getComputedStyle(menu).visibility : "none", pad: getComputedStyle(document.querySelector("#smdPrep > .pn-body")).paddingBottom };
+        menuDisp: menu ? getComputedStyle(menu).display : "none",
+        // Close on the left and Search on the right sit at the same gutter (owner screenshot 2026-10-30).
+        gut: (function () { var c = document.querySelector("#smdPrep .pn-bar-brand [data-act=close]"), f = document.querySelector("#smdPrep .pn-bar-brand [data-act=find]"); if (!c || !f) return null; var a = c.getBoundingClientRect(), b = f.getBoundingClientRect(); return { l: Math.round(a.left), r: Math.round(innerWidth - b.right) }; })(), pad: getComputedStyle(document.querySelector("#smdPrep > .pn-body")).paddingBottom };
     });
     ok(meta.tag === "NAV" && meta.label === "PrepNucleus" && meta.inDialog && meta.navs === 1, E + "one nav landmark labelled PrepNucleus inside the #smdPrep dialog");
     ok(meta.tabs.map((t) => t.label).join(",") === "Home,Learn,Tests,You" && s.cur === "home", E + "tabs Home, Learn, Tests, You; Home is aria-current (" + meta.tabs.map((t) => t.label).join(",") + ")");
     ok(meta.tabs.every((t) => t.w >= 44 && t.h >= 44), E + "every tab >= 44 x 44 (" + meta.tabs.map((t) => Math.round(t.w) + "x" + Math.round(t.h)).join(", ") + ")");
     ok(meta.w <= 420.5 && Math.abs(meta.l - meta.rr) < 1.5 && meta.b >= 11.5, E + "the bar is centred, " + Math.round(meta.w) + " px wide, " + Math.round(meta.b) + " px above the bottom");
-    ok(meta.menuVis === "hidden", E + "the home bar's Menu button steps aside while the bar shows (" + meta.menuVis + "), body padding-bottom " + meta.pad);
+    ok(meta.menuDisp === "none", E + "the home bar's Menu button steps aside while the bar shows (" + meta.menuDisp + "), body padding-bottom " + meta.pad);
+    ok(meta.gut && Math.abs(meta.gut.l - meta.gut.r) <= 2, E + "Search is flush right at the same gutter as Close on the left (" + JSON.stringify(meta.gut) + ")");
     let c = await clearOfBar(page);
     ok(c.ok, E + "home scrolled to the bottom: the last block (" + c.last + ") ends at " + c.lb + ", above the bar at " + c.nt);
     const lensInfo = await page.evaluate(() => { const n = document.querySelector("#smdPrep > nav.pnv"), cs = getComputedStyle(n); const f = cs.backdropFilter || cs.webkitBackdropFilter || ""; const im = n.querySelector("#pnvMap"); return { lens: n.classList.contains("pnv-lens"), f, wf: cs.webkitBackdropFilter || "", map: !!(im && /^data:image\/svg/.test(im.getAttribute("href") || "")) }; });

@@ -120,6 +120,8 @@
       x.you = { k: isInt(m.you && m.you.k) ? m.you.k : -1, pts: Number(m.you && m.you.pts) || 0 };
       x.them = { k: isInt(m.opp && m.opp.k) ? m.opp.k : -1, pts: Number(m.opp && m.opp.pts) || 0 };
       if (Array.isArray(m.score) && m.score.length === 2) x.score = [Number(m.score[0]) || 0, Number(m.score[1]) || 0];
+      // Each closed round, for Revenge (replay the ones missed): question, options, answer, the player's pick.
+      x.log = (b.log || []).concat([{ q: b.q, o: b.o, a: m.a, k: x.you.k }]);
       return x;
     }
     if (m.t === "end" && (m.result === "win" || m.result === "loss" || m.result === "draw")) {
@@ -546,9 +548,26 @@
       var why = b.forfeit === "opp" ? esc(b.opp.name) + " left the battle." : b.forfeit === "you" ? "You were away for more than 10 seconds." : b.forfeit === "both" ? "Both players left, so it is a draw." : "";
       body = versus(b) + '<section class="pn-panel pn-score pn-final ' + b.result + '"><p class="pn-big">' + head + '</p><p class="pn-final-s">' + b.score[0] + " to " + b.score[1] + "</p>" + (why ? '<p class="pn-mut">' + why + "</p>" : "") +
         (rt ? '<p class="pn-mut pn-rtl">Rating ' + rt.before + ' to <b class="pn-rtick" data-from="' + rt.before + '" data-to="' + rt.after + '">' + rt.after + '</b> <span class="pn-dchip' + (rt.after >= rt.before ? " up" : " down") + '">(' + signed(rt.after - rt.before) + ")</span></p>" : "") + "</section>" +
+        (missedRounds(b).length ? '<button type="button" class="pn-btn" data-act="a-revenge">Revenge: replay the ' + missedRounds(b).length + " you missed</button>" : "") +
         '<div class="pn-navrow"><button type="button" class="pn-btn' + (A.room ? " pri" : "") + '" data-act="back">Done</button>' + (A.room ? "" : '<button type="button" class="pn-btn pri" data-act="a-again">Play again</button>') + "</div>";
     }
     H.paint(H.bar(battleTitle(b), b.opp ? "vs " + esc(b.opp.name) : esc(planLabel()), "back") + '<div class="pn-body pn-run pn-battle">' + body + "</div>", focus);
+  }
+
+  /* ---------- Revenge (owner 2026-10-30) ----------
+     The rounds missed in the battle just played, as a practice set with explanations off the battle's own key. Battle
+     questions carry no bank id, so nothing is recorded to memory or mistakes (norec); then one tap back into battle. */
+  function missedRounds(b) { return (b && b.log || []).filter(function (x) { return x && x.q && x.o && x.a >= 0 && x.k !== x.a; }); }
+  function revenge() {
+    var b = A.battle, miss = missedRounds(b); if (!miss.length) return;
+    var items = miss.map(function (x, i) { return { id: "rv-" + (b.id || "b") + "-" + i, q: x.q, o: x.o, a: x.a, _s: "deck", _rv: 1 }; });
+    H.run(items, "study", "Revenge", { norec: true, custom: { submit: revengeDone, render: revengeDone } });
+  }
+  function revengeDone(r) {
+    var right = r.items.filter(function (it, i) { return r.ans[i] === it.a; }).length, all = right === r.items.length;
+    H.paint(H.bar("Revenge", "", "back") + '<div class="pn-body"><section class="pn-panel pn-score"' + (all ? ' data-cele="balloons"' : "") + '><p class="pn-big">' + right + " of " + r.items.length + "</p><p>" +
+      (all ? "Every one you missed, now right. Ready for the next battle." : "Closer. The ones still wrong are worth a second look.") + "</p></section>" +
+      '<div class="pn-navrow"><button type="button" class="pn-btn" data-act="back">Done</button>' + (A.room ? "" : '<button type="button" class="pn-btn pri" data-act="a-again">Battle again</button>') + "</div></div>");
   }
 
   /* ---------- My stats ---------- */
@@ -683,6 +702,7 @@
     var v = b.getAttribute("data-v");
     if (a === "a-stats") return H.push(renderStats);
     if (a === "a-share") return shareProgress(b);
+    if (a === "a-revenge") return revenge();
     // A battle or consent sheet opened from prep-social.js (friend challenge) works with the Arena flag off.
     if (!on() && !A.sheet && !A.battle) return;
     if (a === "a-retryhome") { A.events = null; return H.rerender(); }

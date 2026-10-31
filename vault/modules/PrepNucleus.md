@@ -1809,3 +1809,48 @@ Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Deci
 - **Gotcha:** `.pn-panel .pn-btn:not(.pri)` (prep.css) beats a plain `.pn-btn.x`; the red Reset button needs the panel and
   sheet selectors too.
 
+## Play (2026-10-30, prep100)
+Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decision: [[decisions/Decisions]] 2026-10-30 Play.
+- **Files:** `prep-play.js` + `prep-play.css` (`window.PREP_PLAY`, acts `v-*`, flag `smd_prep_play` default ON, `?play=0` off;
+  optional in `prep-loader.js`). Server `functions/api/prep/play/[[path]].js` + `functions/_prep-play.js`, D1 tables in
+  `prep-arena-worker/migrations/0007_prep_play.sql` (apply before focus, spot board and mnemonics work). Squads live in
+  `functions/api/prep/social` + `prep-social.js`; revenge in `prep-arena.js`.
+- **Home Play section:** Swipe feed, Spot diagnosis of the day, Boss battles, Quick fire, Voice mode, Focus room, Wrapped,
+  Season (Arena on), Streak freezes.
+- **Swipe feed:** vertical scroll-snap cards from 4 random plan modules; a pearl after every 3rd question (only from a
+  question already passed), an image card (eye/PSM atlas) after every 5th. Answers record through `HOST.record`.
+- **Spot diagnosis:** pool = `prep/imglearn/eye.json` + `psm.json` (now copied by build-www; the Eye and PSM atlases were
+  empty in the app bundle before). Pick = hash of the IST day, so everyone gets the same image; right dx + 3 from its deck.
+  10 s. Store `spot`, `spoth[day]`; board POST/GET `play/spot` (Arena consent; right answers by ms).
+- **Boss battles:** per plan subject, 20 questions hard first (`bossPick`), 3 lives (`r.onAnswer` ends the run at 0),
+  `custom` result; store `boss[sid] = { won, best, tries }`.
+- **Quick fire:** one question (a due one when the draw has one). Deep link `PREP.open({ play: "quick" | "spot" | "feed" |
+  "focus" })` for widgets, watch and notifications; the native widget and watch faces themselves are NOT changed yet
+  (Swift/Kotlin, needs a Mac build).
+- **Voice mode:** reads question and options (Capacitor TextToSpeech, else speechSynthesis), listens through
+  `SMD_NATIVE.transcribe` only when `Capacitor.Plugins.SpeechRecognition` exists (it throws otherwise), else Web Speech;
+  `parseVoice` takes letters, ordinals, option words, skip/repeat/stop. Two misses on a question: waits for a tap.
+- **Focus room:** 25/50/90 min, `localStorage smd_prep_focus`, heartbeat POST each minute; live count = heartbeats in
+  150 s (`play/focus`). Minutes in `fxm[month]` (under a minute logs nothing).
+- **Wrapped:** story cards from the store only (`days`, `wm[month][subject]`, `mod`, `hr`, `boss`, `spoth`, `fxm`), then a
+  1080x1920 share image (Filesystem + Share on the phone). Before the 6th of a month it shows the previous month.
+- **Seasons:** 8 weeks from Monday 2026-01-05 IST; points = battle win 3, draw 1, each submitted sprint or grand test 1;
+  tiers Bronze 0, Silver 15, Gold 40, Platinum 80, Diamond 140; computed from `arena_battles` and `arena_entries` (no table).
+- **Mnemonic lab:** under an explained question (signed in): top 5 by Helpful votes, add (6 to 280 chars, no links,
+  handles or phone numbers, 5 a day), report (hidden at 3), delete own. Labelled "written by students and not checked".
+- **Streak freezes:** earned, never bought: one for a day with 50 beyond the daily goal, 2 banked at most (`frz`);
+  `applyFreezes` on the first home paint of a day covers a gap right before today; `specialty-core.js streak()` treats a
+  used day as a link that does not add to the count.
+- **Squads:** a study group of 3 to 6; GET groups adds `squad, streak, todayAll` (`squadStreak` = days in a row every
+  member hit the target); GET `squads/board` ranks squads by questions this week.
+- **Revenge:** `battleStep` keeps `log` of closed rounds; the battle end offers "Revenge: replay the N you missed" (study
+  run, `norec`, items `_s: "deck"`, `_rv`), then Battle again.
+- **Hooks in prep.js:** `HOST.record/finish/poolFor/countFor`, runQuestions `onAnswer`, `onRender`, `norec`; record() calls
+  `PREP_PLAY.noteAnswer` (hour, month, freeze earn).
+- **Leaving the Arena** deletes play rows (`socialDeleteStmts`).
+- **Tests:** `test/prep-play.test.mjs`, `test/prep-play-server.test.mjs`, `test/run-prep-play-ui.mjs` (SHOTS=<dir>).
+- **Gotchas:** `app.js` reassigns `window.SMD_AUTH` after boot: a UI test's signed-in stub must be pinned
+  (defineProperty), or calls go out unsigned at random. Chromium has its own `window.SpeechRecognition`; stub both names.
+  Home bar: the Menu button is `display: none` under the tab bar (a `visibility: hidden` one kept its slot and pushed
+  Search in from the edge).
+

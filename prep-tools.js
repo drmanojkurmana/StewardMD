@@ -154,7 +154,7 @@
 
   /* ---------- notes ---------- */
   function noteBtn(it) {
-    if (!h0() || !it || it.id == null) return "";
+    if (!h0() || !it || it._rv || it.id == null) return "";
     var has = !!noteOf(store(), it.id);
     return '<button type="button" class="pn-ib px-nb' + (has ? " on" : "") + '" data-act="x-note" aria-label="' + (has ? "Edit your note" : "Add a note to this question") + '">' + ic(IC.note) + "</button>";
   }

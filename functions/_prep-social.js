@@ -16,6 +16,20 @@ export const istDay = (t) => new Date(t + IST).toISOString().slice(0, 10);
 // Monday (IST) of t's week, as YYYY-MM-DD.
 export function weekStart(t) { const d = new Date(t + IST); return istDay(t - ((d.getUTCDay() + 6) % 7) * DAY); }
 
+/* ---------- squads (owner 2026-10-30) ----------
+ * A squad is a study group of SQUAD_MIN..SQUAD_MAX members. Its streak is the number of IST days in a row, ending today
+ * (when every member has met the daily target already) or else yesterday, on which EVERY current member met the
+ * group's daily target. done = { uidh: { "YYYY-MM-DD": n } }. */
+export const SQUAD_MIN = 3, SQUAD_MAX = 6;
+export function squadStreak(members, done, target, now) {
+  if (!members.length || !(target > 0)) return { streak: 0, today: false };
+  const all = (day) => members.every((u) => ((done[u] || {})[day] || 0) >= target);
+  const today = all(istDay(now));
+  let n = today ? 1 : 0;
+  for (let k = 1; k < 400; k++) { if (!all(istDay(now - k * DAY))) break; n++; }
+  return { streak: n, today };
+}
+
 /* ---------- codes ---------- */
 const CODE_ABC = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";   // steward-id.js alphabet: no 0/O/1/I/L
 export function randomCode(n) {
@@ -100,5 +114,11 @@ export function socialDeleteStmts(db, uidh) {
     db.prepare("DELETE FROM social_push WHERE uidh = ?").bind(uidh),
     ...leaveGroupStmts(db, uidh, null),
     db.prepare("DELETE FROM social_ids WHERE uidh = ?").bind(uidh),
+    // PrepNucleus play (functions/api/prep/play): focus heartbeat, spot results, the student's mnemonics and votes.
+    db.prepare("DELETE FROM play_focus WHERE uidh = ?").bind(uidh),
+    db.prepare("DELETE FROM play_spot WHERE uidh = ?").bind(uidh),
+    db.prepare("DELETE FROM play_mn_vote WHERE uidh = ? OR mn IN (SELECT id FROM play_mn WHERE uidh = ?)").bind(uidh, uidh),
+    db.prepare("DELETE FROM play_mn_report WHERE uidh = ?").bind(uidh),
+    db.prepare("DELETE FROM play_mn WHERE uidh = ?").bind(uidh),
   ];
 }
