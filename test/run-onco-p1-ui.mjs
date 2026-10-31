@@ -52,8 +52,9 @@ try {
   ok(await ev(`return !!(document.getElementById("smdOncoStaging") && document.getElementById("smdOncoStaging").classList.contains("on"));`) === true, "clicking Staging opens the staging overlay (#smdOncoStaging)");
 
   const siteText = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
-  ok(/TNM/.test(siteText) && /Gap/.test(siteText), "the site list shows both seeded TNM sites and Gap sites");
-  ok(/International TNM-based cancer staging/i.test(siteText), "the intro presents neutral TNM-based staging (licensed content)");
+  // Every site is now seeded (the crawl list is done), so the list shows TNM sites and the clinical systems.
+  ok(/TNM/.test(siteText) && /Clinical/i.test(siteText), "the site list shows TNM sites and clinical staging systems");
+  ok(/AJCC \/ UICC TNM/i.test(siteText), "the intro presents AJCC / UICC TNM staging");
 
   // ---- Open a scaffold site (breast): flagged TNM framework ----
   await ev(`document.querySelector('[data-stg-act="site:breast"]').click(); return 1;`);
@@ -71,11 +72,15 @@ try {
   const gapVer = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
   ok(/Staging for this cancer site is being added/.test(gapVer), "switching to an un-seeded edition shows the honest content-gap placeholder");
 
-  // ---- A gap-only site shows the honest gap, never a fabricated table ----
+  // ---- No gap-only sites remain: anus now renders its staging; its un-seeded edition still shows the honest gap ----
   await ev(`document.querySelector('[data-stg-act="list"]').click(); return 1;`); await sleep(200);
   await ev(`document.querySelector('[data-stg-act="site:anus"]').click(); return 1;`); await sleep(300);
+  const anus = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
+  ok(/Stage grouping/i.test(anus) && !/Staging for this cancer site is being added/.test(anus), "anus (formerly a gap-only site) renders its staging");
+  ok(!/unchecked use|\bR1\b/.test(anus), "the provenance line carries no leftover R1 caveat fragment");
+  await ev(`var b=Array.prototype.filter.call(document.querySelectorAll('.stg-vbtn'),function(x){return /gap/i.test(x.textContent);})[0]; if(b) b.click(); return 1;`); await sleep(250);
   const gapSite = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
-  ok(/Staging for this cancer site is being added/.test(gapSite), "a gap-only site (anus, still on the crawl list) shows the honest content-gap placeholder");
+  ok(/Staging for this cancer site is being added/.test(gapSite), "an un-seeded edition shows the honest content-gap placeholder");
   ok(!/\d\s?cm\b/.test(gapSite), "the gap card contains no fabricated measurement content");
   await ev(`document.querySelector('[data-stg-act="close"]').click(); return 1;`); await sleep(200);
 

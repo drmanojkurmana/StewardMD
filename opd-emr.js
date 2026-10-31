@@ -1229,18 +1229,20 @@
   // "Protocols and dose tools": ONE collapsed card under the treatment section. Inside: the dose
   // calculator, the OncoTree navigator, and a search box over a fixed-height scroll box that lists EVERY
   // protocol (clinical KB + oncology regimens), so it never pushes the form down the page.
-  function protoBox(st) {
-    var tools = doseCalcBtn(st) + (oncoFlagOn() && st.writeOn ? oncoTreeLaunchBtn() : "");
+  function protoBox(ps) {
+    var tools = doseCalcBtn(ps) + (oncoFlagOn() && ps.writeOn ? oncoTreeLaunchBtn() : "");
     var clinOn = kbpOn(), oncOn = oncoFlagOn();
     if (!tools && !clinOn && !oncOn) return "";
-    var open = !!st.pbOpen;
-    if (open) { try { maybeLoadKbp(); maybeLoadOncoProtocols(true); } catch (e) {} }
-    var n = (st.kbpIndex ? st.kbpIndex.count : 0) + (oncOn ? (st.oncoProtocols || []).length : 0);
+    var open = !!ps.pbOpen;
+    // Load only for the live screen state (as protocolTab does): a render of another state object must not
+    // start fetches that later repaint the live screen.
+    if (open && ps === st) { try { maybeLoadKbp(); maybeLoadOncoProtocols(true); } catch (e) {} }
+    var n = (ps.kbpIndex ? ps.kbpIndex.count : 0) + (oncOn ? (ps.oncoProtocols || []).length : 0);
     return '<details class="oe-acc oe-pbox" data-oe-pb' + (open ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms("account_tree") + '</span><span class="oe-acc-t">Protocols &amp; dose tools</span>' +
       (n ? '<span class="oe-cnt">' + n + "</span>" : "") + '<span class="oe-chev">' + ms("expand_more") + "</span></summary>" +
       '<div class="oe-acc-body">' + (tools ? '<div class="oe-pb-tools">' + tools + "</div>" : "") +
-      (clinOn || oncOn ? searchBox("pb", st.pbQuery, "Search any protocol: sepsis, pneumonia, hypothermia, drug") +
-        '<div class="oe-pb-scroll" id="oe-out-pb">' + (open ? pbResults(st) : "") + "</div>" : "") + "</div></details>";
+      (clinOn || oncOn ? searchBox("pb", ps.pbQuery, "Search any protocol: sepsis, pneumonia, hypothermia, drug") +
+        '<div class="oe-pb-scroll" id="oe-out-pb">' + (open ? pbResults(ps) : "") + "</div>" : "") + "</div></details>";
   }
   function pbResults(st) {
     return protoResults({ kbpIndex: st.kbpIndex, kbpError: st.kbpError, oncoProtocols: st.oncoProtocols, oncoProtocolsReady: st.oncoProtocolsReady,

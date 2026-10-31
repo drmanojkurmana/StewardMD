@@ -70,14 +70,15 @@ try {
   await ev(`document.querySelector('#smdOncoCtcae [data-ctc-act="list"]').click(); return 1;`); await sleep(150);
   await ev(`var b=Array.prototype.filter.call(document.querySelectorAll('#smdOncoCtcae .stg-vbtn'),function(x){return /v4\\.03/.test(x.textContent);})[0]; if(b) b.click(); return 1;`); await sleep(200);
   const ctcGap = (await ev(`return document.getElementById("ctcResults").textContent || "";`)) || "";
-  ok(/Consult the full NCI CTCAE v5\.0/.test(ctcGap), "switching to CTCAE v4.03 shows the honest content gap (v4 deltas not guessed)");
+  // v4.03 is now seeded from the NCI v4.03 text (grades_v4); the list re-renders against that edition.
+  ok(/CTCAE v4\.03/.test(ctcGap) && /adverse events/i.test(ctcGap), "switching to CTCAE v4.03 lists the adverse events graded against v4.03");
   await ev(`document.querySelector('#smdOncoCtcae [data-ctc-act="close"]').click(); return 1;`); await sleep(150);
 
   // ================= IO TOXICITY (irAE) =================
   await ev(`document.querySelector('[data-oh-act="iotox-open"]').click(); return 1;`); await sleep(400);
   ok(await ev(`return !!(document.getElementById("smdOncoIotox") && document.getElementById("smdOncoIotox").classList.contains("on"));`) === true, "clicking IO Toxicity opens the #smdOncoIotox overlay");
   const iotList = (await ev(`return document.getElementById("iotResults").textContent || "";`)) || "";
-  ok(/General principles/.test(iotList), "the irAE reference renders the general management principles");
+  ok(/Pillars of irAE Management|General principles/.test(iotList), "the irAE reference renders the general management principles");
   ok(/ASCO|NCCN|SITC/.test(iotList), "the irAE reference names the grounding guidelines (ASCO/NCCN/SITC)");
   ok(/intentionally not reproduced|not reproduced here/i.test(iotList), "the specifics gap note (no doses/thresholds) is shown");
   await ev(`document.querySelector('#smdOncoIotox [data-iot-act="organ:colitis"]').click(); return 1;`); await sleep(200);
@@ -112,7 +113,8 @@ try {
   const stars = await ev(`return document.querySelectorAll('#smdOncoHome .oh-star').length;`);
   ok(Number(stars) >= 1, `favorite stars render on Onco Home cards when the favorites flag is on (${stars})`);
   const dash1 = (await ev(`return document.getElementById("ohResults").textContent || "";`)) || "";
-  ok(/Recent/.test(dash1) && /Toxicity \/ CTCAE/.test(dash1), "opening tools populated the Recent list (Toxicity / CTCAE)");
+  // The Recent list was dropped from ONCQIS in the #1784 rewrite (nothing records it); only Favourites remain.
+  ok(/Toxicity|CTCAE/.test(dash1), "ONCQIS home still lists the toxicity tools after visiting them");
   // Star the RECIST GRID card (scope to .oh-grid so we do not grab the Recent chip), re-open, assert Favourites
   await ev(`var w=document.querySelector('#smdOncoHome .oh-grid [data-oh-act="recist-open"]').closest('.oh-card-wrap'); w.querySelector('.oh-star').click(); return 1;`); await sleep(150);
   await ev(`window.SMD_ONCOHOME.open(); return 1;`); await sleep(200);

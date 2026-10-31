@@ -2562,3 +2562,54 @@ html .ot-overlay .ot-picker-tabs { overflow: hidden; }
 html .ot-overlay .ot-tab-chip { flex: 1 1 0; min-width: 0; padding: 0 4px; gap: 3px; font-size: 12.5px; }
 html .ot-overlay .ot-tab-chip .ot-chip-num { font-size: 10.5px; }
 @media (max-width: 359px) { html .ot-overlay .ot-tab-chip .ot-chip-num { display: none; } }
+
+/* ── 2026-10-31 pass: collapsing header, segmented views, answered-steps list, calm step labels ── */
+html .ot-overlay .ot-header { grid-template-columns: minmax(96px, 1fr) minmax(0, auto) minmax(96px, 1fr); transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease; }
+html .ot-overlay .ot-htitle { overflow: hidden; }
+html .ot-overlay .ot-hname { display: block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ot-htitle-btn { display: inline-flex; align-items: center; gap: 2px; max-width: 100%; min-height: 44px; padding: 0 6px; border: 0; background: none; color: var(--ot-ink); cursor: pointer; font: inherit; border-radius: 12px; }
+.ot-htitle-btn .ot-hname { min-width: 0; }
+.ot-htitle-btn .material-symbols-outlined { flex: 0 0 auto; font-size: 20px; color: var(--ot-accent); }
+.ot-htitle-btn:active { background: color-mix(in srgb, var(--ot-accent) 10%, transparent); }
+
+/* Picker: transparent untitled bar at rest (the page has its own large title), frosted bar + compact title once scrolled */
+html .ot-overlay .ot-shell.ot-collapse .ot-header { background: transparent !important; border-bottom-color: transparent !important; box-shadow: none !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+html .ot-overlay .ot-shell.ot-collapse .ot-hname { opacity: 0; transform: translateY(4px); transition: opacity .2s ease, transform .2s ease; }
+html .ot-overlay .ot-shell.ot-collapse.ot-scrolled .ot-header { background: color-mix(in srgb, #fbf8fd 90%, transparent) !important; border-bottom-color: var(--ot-line) !important; -webkit-backdrop-filter: blur(20px) saturate(1.6) !important; backdrop-filter: blur(20px) saturate(1.6) !important; }
+html body.dark .ot-overlay .ot-shell.ot-collapse.ot-scrolled .ot-header { background: color-mix(in srgb, #120e1a 88%, transparent) !important; }
+html .ot-overlay .ot-shell.ot-collapse.ot-scrolled .ot-hname { opacity: 1; transform: none; }
+html .ot-overlay .ot-shell.ot-collapse.ot-scrolled .ot-picker-controls { border-top: 0; }
+
+/* View switcher: one segmented control, three equal text segments, then two round keys */
+html .ot-overlay .ot-viewtoggle { display: flex !important; align-items: center; gap: 8px !important; padding: 8px 14px 10px !important; overflow: visible; }
+.ot-seg { flex: 1 1 auto; min-width: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; padding: 3px; border-radius: 12px; background: var(--seg-track, color-mix(in srgb, var(--ot-accent) 9%, var(--ot-card))); box-shadow: inset 0 1px 2px rgba(60, 20, 70, .10); }
+html .ot-overlay .ot-seg .ot-vt { min-width: 0; min-height: 36px; padding: 0 4px !important; border: 0 !important; border-radius: 9px !important; background: transparent !important; color: var(--ot-sub) !important; font: 600 13.5px/1 var(--ot-font, system-ui) !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; box-shadow: none !important; justify-content: center; }
+html .ot-overlay .ot-seg .ot-vt.on { background: var(--seg-key, var(--ot-card)) !important; color: var(--ot-accent) !important; box-shadow: 0 1px 0 rgba(60, 20, 70, .06), 0 2px 6px -2px rgba(60, 20, 70, .22) !important; }
+.ot-vkey { flex: 0 0 auto; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--ot-line); background: var(--ot-card); color: var(--ot-accent); cursor: pointer; box-shadow: 0 1px 0 rgba(60, 20, 70, .06), 0 3px 8px -4px rgba(60, 20, 70, .25); }
+.ot-vkey .material-symbols-outlined { font-size: 20px; }
+.ot-vkey:active { transform: translateY(1px); box-shadow: inset 0 1px 2px rgba(60, 20, 70, .14); }
+
+/* Answered steps: one grouped list, label over value, chevron to edit (was wrapping pills with arrows between) */
+html .ot-overlay .ot-rail { display: flex; flex-direction: column; flex-wrap: nowrap; gap: 0; margin-bottom: 14px; border-radius: 16px; overflow: hidden; background: var(--ot-card); border: 1px solid var(--ot-line); box-shadow: 0 1px 0 rgba(60, 20, 70, .05); }
+html .ot-overlay .ot-rail-chip { display: grid !important; grid-template-columns: 1fr auto; grid-template-rows: auto auto; column-gap: 10px; align-items: center; width: 100%; max-width: none; min-height: 52px; padding: 9px 12px 9px 14px !important; border: 0 !important; border-radius: 0 !important; background: transparent !important; text-align: left !important; box-shadow: none !important; transform: none !important; }
+html .ot-overlay .ot-rail-chip + .ot-rail-chip { border-top: 1px solid var(--ot-line) !important; }
+html .ot-overlay .ot-rail-chip:active { background: color-mix(in srgb, var(--ot-accent) 8%, transparent) !important; }
+html .ot-overlay .ot-rail-k { grid-column: 1; grid-row: 1; font: 500 12px/1.3 var(--ot-font, system-ui); color: var(--ot-sub); text-align: left; }
+html .ot-overlay .ot-rail-v { grid-column: 1; grid-row: 2; font: 600 14px/1.35 var(--ot-font, system-ui); color: var(--ot-ink); text-align: left; }
+html .ot-overlay .ot-rail-chip .material-symbols-outlined { grid-column: 2; grid-row: 1 / span 2; font-size: 20px; color: var(--ot-sub); }
+
+/* Step card head: sentence-case category label, coloured icon only (no all-caps orange eyebrow) */
+html .ot-overlay .ot-cat { text-transform: none !important; letter-spacing: 0 !important; font: 600 13px/1 var(--ot-font, system-ui) !important; color: var(--ot-sub) !important; }
+html .ot-overlay .ot-cat .material-symbols-outlined { color: var(--ot-c, var(--ot-accent)); font-size: 17px; }
+html .ot-overlay .ot-step-sec { text-transform: none !important; letter-spacing: 0 !important; font-size: 12.5px !important; }
+
+/* Selection: plum check, primary action full width on top, two secondary actions side by side under it */
+html .ot-overlay .ot-sel-icon { color: var(--ot-accent); }
+html .ot-overlay .ot-sel-payload b { text-transform: none; letter-spacing: 0; font-size: 12px; font-weight: 600; }
+html .ot-overlay .ot-sel-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+html .ot-overlay .ot-sel-actions > .ot-btn { min-height: 48px; justify-content: center; white-space: normal; line-height: 1.2; }
+html .ot-overlay .ot-sel-actions > .ot-btn.primary { grid-column: 1 / -1; }
+html .ot-overlay .ot-sel-actions > .ot-btn:only-of-type, html .ot-overlay .ot-sel-actions > .ot-btn.ghost:last-child:nth-child(2) { grid-column: 1 / -1; }
+html .ot-overlay .ot-toc-hd { text-transform: none; letter-spacing: 0; font: 600 14px/1.2 var(--ot-font, system-ui); color: var(--ot-ink); }
+/* Header keys are round, matching the ONCQIS / Staging / CTCAE headers */
+html .ot-overlay .ot-header .ot-hbtn { width: 44px; height: 44px; border-radius: 50% !important; }
