@@ -67,7 +67,7 @@ Provider support is not uniform. Treat each provider as a separate adapter with 
 | Provider | Embedded playback | External handoff / remote control | Initial decision |
 |---|---|---|---|
 | Apple Music | MusicKit provides catalog access and playback on web and Android, subject to SDK/platform support, subscription, entitlements and terms. Validate the current Android SDK in a proof of concept. | Open Apple Music links; do not assume arbitrary remote control of the Apple Music app. | First embedded-provider candidate; technical and commercial review required. |
-| Spotify | Web Playback SDK can play in browser for Premium users, but Spotify says it must not be used in commercial projects without prior written approval. Spotify classifies SDK/API playback control as a streaming SDA and imposes commercial-use restrictions. | Android App Remote can control the installed Spotify app with user authorisation and supported scopes; this is still a streaming SDA under Spotify policy. Use only after written approval for this commercial product. | External deep link only in MVP; no OAuth/SDK playback controls until written approval. |
+| Spotify | Web Playback SDK can play in browser for Premium users, but Spotify says it must not be used in commercial projects without prior written approval. Spotify classifies SDK/API playback control as a streaming SDA and imposes commercial-use restrictions. | Android App Remote can control the installed Spotify app with user authorisation and supported scopes; this is still a streaming SDA under Spotify policy. Use only after written approval for this commercial product. | External deep link in public MVP; owner-requested mini-player with Spotify sign-in is built and tested on allowlisted accounts, and enabled for all only after written approval (section 8.1). |
 | YouTube Music | No supported public third-party Music playback SDK identified for this use case. Do not use YouTube Data API as a music playback API. | Open user-selected playlist/song/app links. Generic cross-app transport controls are not available to a web page. | External handoff only. |
 | Amazon Music | Developer portal describes a closed-beta Web API and certification/approval requirements; no generally available public third-party mobile SDK for this use case. | Open Amazon Music app/deep link where supported. | External handoff only unless Amazon grants access and certifies the integration. |
 | JioSaavn | No verified public playback SDK/API for this product use case. Do not scrape endpoints or reverse-engineer private APIs. | Open supported app/web links. | External handoff only. |
@@ -206,6 +206,29 @@ Therefore:
 - Do not use Spotify audio in MediGram videos, mix it with other audio, synchronise it to video, use it for quiz/game mechanics, or mimic Spotify's core experience.
 - If approval is not obtained, leave the external handoff option only.
 
+### 8.1 Owner-requested Spotify mini-player (supersedes the "external link only in MVP" line above)
+
+**Problem to remove:** the learner pauses a test, leaves PrepNucleus for Spotify, changes or searches a song, and returns.
+
+**Experience:**
+- A small round music button in the Sound Dock (hidden unless `smd_prep_sound_spotify` is on). Tap opens a compact sheet; the study screen stays underneath.
+- First open shows "Connect Spotify" and nothing else. Music never starts without a tap.
+- After sign-in the sheet shows now-playing, play/pause, next/previous, volume where allowed, the user's own playlists (their library only), and a search box for tracks and playlists.
+- Choosing a playlist or track starts it on the user's Spotify and the sheet closes back to the question. Disconnect is one tap.
+- Show only controls that work. Spotify Premium is required for playback control; free accounts see playlists and an "Open in Spotify" fallback, with a plain explanation.
+
+**How it works (to confirm in the Phase 0 spike):**
+- Sign-in uses Authorization Code with PKCE, with no client secret in the app. Scopes requested are the minimum: playlist read, library read, and playback state/control.
+- Playlists and search come from the Web API. Playback control either drives the Spotify app already on the phone (Android App Remote or the Web API player endpoints) or the Web Playback SDK in the browser. Pick one per platform in the spike; do not build all three.
+- Tokens live in secure native storage on Android and a short-lived in-memory plus refresh flow on web. Nothing goes to PrepNucleus analytics or AI Tutor.
+
+**The hard gate:** Spotify's Developer Policy treats this as a streaming integration and requires written approval for commercial use. Until approved, the app stays in Spotify's development mode, which is limited to a small allowlist of named test users (your own account and a few testers). That is enough to build and verify it, not to ship it to every user. Ship order:
+1. Phase 0: register the Spotify app, build the sheet against allowlisted accounts, and send the approval request describing exactly this feature (study app, optional, user's own account, no resale or redistribution of audio).
+2. If approved, enable for all users behind `smd_prep_sound_spotify`.
+3. If refused, the button degrades to deep links into the Spotify app (the Phase 1 handoff), and the plan section 8 MVP applies.
+
+Restrictions that stay regardless: no Spotify audio inside PrepReels videos, no mixing or syncing with other audio, no use in quiz or game mechanics, and Spotify branding and attribution as their guidelines require.
+
 ## 9. First-party audio fallback and rights
 
 A first-party library is the only reliable provider-independent embedded option.
@@ -342,11 +365,13 @@ Do not optimise for listening minutes or longer study sessions as a goal in itse
 
 ## 14. Owner decisions before implementation
 
-1. Is Apple Music the first embedded provider to prototype? Recommendation: yes, subject to current Android SDK validation and commercial review.
-2. Is Spotify remote control worth pursuing with written approval? Recommendation: submit an inquiry, but do not block MVP on it.
-3. Which first-party audio pack should ship first: ambient/white noise only, or commissioned instrumental tracks too?
-4. Should playback auto-resume after app restart? Recommendation: off by default; offer an explicit preference.
-5. Is offline music required? Recommendation: defer until asset licences explicitly allow downloads/caching.
+**Owner decisions, 2026-10-31:**
+1. **Scope: all of it** (handoff, first-party player, Apple Music spike, Spotify). Each provider keeps its own flag and approval gate, so a refusal or delay on one does not block the others.
+2. **Spotify is the priority provider (owner request).** Marrow users leave the app between tests to change the song, search, and come back. PrepNucleus should remove that trip: a small music button opens a panel with controls and the user's own Spotify playlists after Spotify sign-in. See section 8.1.
+3. **First-party audio pack: ambient and white noise only.**
+4. Playback auto-resume after restart: off by default, explicit preference (unchanged recommendation).
+5. Offline music: deferred until asset licences explicitly allow caching (unchanged recommendation).
+6. Still open: Apple Music Android SDK result, Spotify approval outcome.
 
 ## 15. Definition of done
 
