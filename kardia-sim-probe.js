@@ -127,9 +127,8 @@
   function lowPass(prev, sample, alpha) { return prev + alpha * (sample - prev); }
 
   /* Gyroscope attitude to probe deltas, relative to a calibrate pose.
-   * attitude and calibrate are {alpha, beta, gamma} in degrees, as
-   * deviceorientation reports them. Returns {tiltDeg, rotationDeg,
-   * rockDeg} deltas to add to the probe state at calibrate time. */
+   * Legacy naive mapping kept for compatibility only; the live gyro
+   * path uses the quaternion probe frame below. */
   function gyroDeltas(attitude, calibrate) {
     if (!attitude || !calibrate) return { tiltDeg: 0, rotationDeg: 0, rockDeg: 0 };
     return {
@@ -139,14 +138,95 @@
     };
   }
 
+  /* ---------- quaternion probe frame (real probe feel) ----------
+   * Device frame: X right, Y to the top edge, Z out of the screen.
+   * World frame: Z up, so gravity is [0, 0, -1] in world coords.
+   * Quaternions are [x, y, z, w], Hamilton product, device to world. */
+  function quatNormalize(q) {
+    var n = Math.sqrt(q[0] * q[0] + q[1] * q[1] + q[2] * q[2] + q[3] * q[3]) || 1;
+    return [q[0] / n, q[1] / n, q[2] / n, q[3] / n];
+  }
+  function quatConj(q) { return [-q[0], -q[1], -q[2], q[3]]; }
+  function quatMul(a, b) {
+    return quatNormalize([
+      a[3] * b[0] + a[0] * b[3] + a[1] * b[2] - a[2] * b[1],
+      a[3] * b[1] - a[0] * b[2] + a[1] * b[3] + a[2] * b[0],
+      a[3] * b[2] + a[0] * b[1] - a[1] * b[0] + a[2] * b[3],
+      a[3] * b[3] - a[0] * b[0] - a[1] * b[1] - a[2] * b[2]
+    ]);
+  }
+  function quatFromAxisAngle(axis, angleDeg) {
+    var h = rad(angleDeg) / 2, s = Math.sin(h), q = [0, 0, 0, Math.cos(h)];
+    q[axis] = s;
+    return q;
+  }
+  function quatRotateVec(q, v) {
+    var qq = quatNormalize(q);
+    var r = quatMul(quatMul(qq, [v[0], v[1], v[2], 0]), quatConj(qq));
+    return [r[0], r[1], r[2]];
+  }
+  /* W3C DeviceOrientation is intrinsic Z-X'-Y'' (alpha about Z, beta
+   * about X, gamma about Y), so q = Rz(alpha) * Rx(beta) * Ry(gamma). */
+  function quatFromDeviceOrientation(alpha, beta, gamma) {
+    var qz = quatFromAxisAngle(2, +alpha || 0);
+    var qx = quatFromAxisAngle(0, +beta || 0);
+    var qy = quatFromAxisAngle(1, +gamma || 0);
+    return quatNormalize(quatMul(quatMul(qz, qx), qy));
+  }
+  /* Probe axis: the signed device axis most aligned with gravity at
+   * calibrate. Marker: Z axis probe uses +Y, Y axis probe uses +Z,
+   * X axis probe uses +Y. n = a x m completes the probe frame. */
+  function probeFrameFromQuat(q0) {
+    var g = quatRotateVec(quatConj(quatNormalize(q0)), [0, 0, -1]);
+    var cands = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
+    var a = cands[0], best = -2, i;
+    for (i = 0; i < cands.length; i++) {
+      var d = dot(cands[i], g);
+      if (d > best) { best = d; a = cands[i]; }
+    }
+    var m = a[2] !== 0 ? [0, 1, 0] : a[1] !== 0 ? [0, 0, 1] : [0, 1, 0];
+    var n = cross(a, m);
+    return { a: a.slice(), m: m.slice(), n: n, gravity: g };
+  }
+  function chooseProbeFrame(q0) { return probeFrameFromQuat(q0); }
+  /* Swing-twist decomposition of the relative rotation r about the
+   * probe axis a. Twist is rotation; the swung axis gives fan (tilt)
+   * toward n and rock toward m. Fan and rock clamp to the Probe Lab
+   * ranges (#fan and #rock are -30 to 30, rotation -180 to 180). */
+  var FAN_LIMIT = 30, ROCK_LIMIT = 30;
+  function decomposeProbePose(q, calib) {
+    var q0 = calib.q0 || calib.quat || calib;
+    var frame = calib.a ? calib : probeFrameFromQuat(q0);
+    var a = frame.a, m = frame.m, n = frame.n || cross(a, m);
+    var r = quatMul(quatConj(quatNormalize(q0)), quatNormalize(q));
+    var proj = r[0] * a[0] + r[1] * a[1] + r[2] * a[2];
+    var twistDeg = wrapDeg(deg(2 * Math.atan2(proj, r[3])));
+    var a2 = quatRotateVec(r, a);
+    var da = dot(a2, a);
+    var fanDeg = clamp(deg(Math.atan2(dot(a2, n), da)), -FAN_LIMIT, FAN_LIMIT);
+    var rockDeg = clamp(deg(Math.atan2(dot(a2, m), da)), -ROCK_LIMIT, ROCK_LIMIT);
+    return { rotationDeg: twistDeg, tiltDeg: fanDeg, fanDeg: fanDeg, rockDeg: rockDeg, a2: a2 };
+  }
+  function probePoseFromQuat(q, calib) { return decomposeProbePose(q, calib); }
+  function probePoseFromOrientation(attitude, calibAttitude) {
+    var q = quatFromDeviceOrientation(attitude.alpha || 0, attitude.beta || 0, attitude.gamma || 0);
+    var q0 = quatFromDeviceOrientation(calibAttitude.alpha || 0, calibAttitude.beta || 0, calibAttitude.gamma || 0);
+    var frame = probeFrameFromQuat(q0);
+    var calib = { q0: q0, a: frame.a, m: frame.m, n: frame.n };
+    return decomposeProbePose(q, calib);
+  }
+
   function create(options) {
     options = options || {};
     var viewsData = options.views || null;
     var geom = options.geom || null;
     var listeners = [];
-    var gyroFilter = null;      /* {tilt, rotation, rock} filtered deltas */
+    var gyroFilter = null;      /* {tilt, rotation, rock} filtered deltas; rotation is unwrapped */
     var gyroCalibrate = null;   /* attitude at calibrate time */
     var gyroBase = null;        /* probe state at calibrate time */
+    var gyroFrame = null;       /* {q0, a, m, n} probe frame at calibrate */
+    var gyroPrevRawRotation = null;
+    var gyroRotationTarget = 0; /* unwrapped twist target in degrees */
     var achievedSince = null;   /* ms timestamp, for the 1 s hold */
 
     function views() { return viewsData && viewsData.views ? viewsData.views : []; }
@@ -842,9 +922,15 @@
       } catch (e) { return Promise.resolve(false); }
     }
     function calibrateGyro(attitude) {
+      attitude = attitude || {};
       gyroCalibrate = { alpha: attitude.alpha || 0, beta: attitude.beta || 0, gamma: attitude.gamma || 0 };
       gyroBase = copyState(state);
       gyroFilter = { tiltDeg: 0, rotationDeg: 0, rockDeg: 0 };
+      var q0 = quatFromDeviceOrientation(gyroCalibrate.alpha, gyroCalibrate.beta, gyroCalibrate.gamma);
+      var frame = probeFrameFromQuat(q0);
+      gyroFrame = { q0: q0, a: frame.a, m: frame.m, n: frame.n };
+      gyroPrevRawRotation = 0;
+      gyroRotationTarget = 0;
       return getState();
     }
     /* One attitude sample in, filtered probe state out. The filter
@@ -852,21 +938,41 @@
      * (or enableGyro) resets it. dtMs is the gap since the last
      * sample, used for the cutoff maths. */
     function applyGyroSample(attitude, dtMs) {
-      if (!gyroCalibrate || !gyroBase) calibrateGyro(attitude);
-      var raw = gyroDeltas(attitude, gyroCalibrate);
-      var alpha = lowPassAlpha(5, dtMs == null ? 16 : dtMs);
-      gyroFilter.tiltDeg = lowPass(gyroFilter.tiltDeg, raw.tiltDeg, alpha);
-      gyroFilter.rotationDeg = lowPass(gyroFilter.rotationDeg, raw.rotationDeg, alpha);
-      gyroFilter.rockDeg = lowPass(gyroFilter.rockDeg, raw.rockDeg, alpha);
+      if (!gyroCalibrate || !gyroBase || !gyroFrame) calibrateGyro(attitude);
+      var dt = dtMs == null ? 16 : dtMs;
+      var q = quatFromDeviceOrientation(attitude.alpha || 0, attitude.beta || 0, attitude.gamma || 0);
+      var raw = decomposeProbePose(q, gyroFrame);
+      /* Unwrap rotation against the previous raw twist, before the
+       * filter, so a full turn never makes a 360 degree jump. */
+      if (gyroPrevRawRotation == null) { gyroPrevRawRotation = raw.rotationDeg; gyroRotationTarget = raw.rotationDeg; }
+      else {
+        gyroRotationTarget += wrapDeg(raw.rotationDeg - gyroPrevRawRotation);
+        gyroPrevRawRotation = raw.rotationDeg;
+      }
+      var alphaFanRock = lowPassAlpha(5, dt);
+      var alphaRot = lowPassAlpha(8, dt);
+      gyroFilter.tiltDeg = lowPass(gyroFilter.tiltDeg, raw.tiltDeg, alphaFanRock);
+      gyroFilter.rockDeg = lowPass(gyroFilter.rockDeg, raw.rockDeg, alphaFanRock);
+      gyroFilter.rotationDeg = lowPass(gyroFilter.rotationDeg, gyroRotationTarget, alphaRot);
+      var rotationOut = wrapDeg(gyroFilter.rotationDeg);
       var def = windowDef(state.window);
       if (def.tee) {
-        setState({ omniplaneDeg: gyroBase.omniplaneDeg + gyroFilter.rotationDeg, flexDeg: gyroBase.flexDeg + gyroFilter.tiltDeg });
+        setState({ omniplaneDeg: gyroBase.omniplaneDeg + rotationOut, flexDeg: gyroBase.flexDeg + gyroFilter.tiltDeg });
       } else {
         setState({
           tiltDeg: gyroBase.tiltDeg + gyroFilter.tiltDeg,
-          rotationDeg: gyroBase.rotationDeg + gyroFilter.rotationDeg,
+          rotationDeg: gyroBase.rotationDeg + rotationOut,
           rockDeg: gyroBase.rockDeg + gyroFilter.rockDeg
         });
+        /* setState adds the base then clamps to -180..180; when the
+         * summed rotation wraps past 180 keep it wrapped, not clamped
+         * at the stop, so the probe keeps turning. */
+        var summed = gyroBase.rotationDeg + rotationOut;
+        if (summed > 180 || summed < -180) {
+          state.rotationDeg = wrapDeg(summed);
+          state.markerDeg = state.rotationDeg;
+          emit();
+        }
       }
       return getState();
     }
@@ -874,7 +980,7 @@
     function enableGyro() {
       state.gyroOn = true;
       gyroFilter = { tiltDeg: 0, rotationDeg: 0, rockDeg: 0 };
-      gyroCalibrate = null; gyroBase = null; gyroLastTs = 0;
+      gyroCalibrate = null; gyroBase = null; gyroFrame = null; gyroPrevRawRotation = null; gyroRotationTarget = 0; gyroLastTs = 0;
       if (!gyroHandler && typeof G.addEventListener === "function") {
         gyroHandler = function (e) {
           if (!state.gyroOn) return;
@@ -1019,11 +1125,12 @@
       onChange: function (fn) { if (typeof fn === "function") listeners.push(fn); return api; },
       gyroSupported: gyroSupported, requestGyroPermission: requestGyroPermission,
       calibrateGyro: calibrateGyro, applyGyroSample: applyGyroSample,
-      resetGyroCalibration: function () { gyroCalibrate = null; gyroBase = null; gyroFilter = { tiltDeg: 0, rotationDeg: 0, rockDeg: 0 }; return getState(); },
+      resetGyroCalibration: function () { gyroCalibrate = null; gyroBase = null; gyroFrame = null; gyroPrevRawRotation = null; gyroRotationTarget = 0; gyroFilter = { tiltDeg: 0, rotationDeg: 0, rockDeg: 0 }; return getState(); },
       enableGyro: enableGyro, disableGyro: disableGyro,
       bindTouchSurface: bindTouchSurface, bindDragControl: bindDragControl,
       setViews: function (v) { viewsData = v; frameCache = {}; targetCache = {}; teeSolveCache = {}; return api; },
       setGeom: function (g) { geom = g; frameCache = {}; targetCache = {}; teeSolveCache = {}; return api; },
+      getGyroFrame: function () { return gyroFrame ? { q0: gyroFrame.q0.slice(), a: gyroFrame.a.slice(), m: gyroFrame.m.slice(), n: gyroFrame.n.slice() } : null; },
       getViews: function () { return viewsData; }
     };
     return api;
@@ -1033,7 +1140,9 @@
     create: create, WINDOWS: WINDOWS, windowDef: windowDef, isTeeWindow: isTeeWindow,
     gyroDeltas: gyroDeltas, lowPassAlpha: lowPassAlpha, lowPass: lowPass,
     wrapDeg: wrapDeg,
-    _pure: { rot: rot, angleBetween: angleBetween, frameFromBeam: frameFromBeam, gyroDeltas: gyroDeltas, lowPassAlpha: lowPassAlpha, lowPass: lowPass, wrapDeg: wrapDeg }
+    quatFromDeviceOrientation: quatFromDeviceOrientation, quatMul: quatMul, quatConj: quatConj, quatNormalize: quatNormalize, quatRotateVec: quatRotateVec,
+    probeFrameFromQuat: probeFrameFromQuat, chooseProbeFrame: probeFrameFromQuat, decomposeProbePose: decomposeProbePose, probePoseFromQuat: decomposeProbePose, probePoseFromOrientation: probePoseFromOrientation,
+    _pure: { rot: rot, angleBetween: angleBetween, frameFromBeam: frameFromBeam, gyroDeltas: gyroDeltas, lowPassAlpha: lowPassAlpha, lowPass: lowPass, wrapDeg: wrapDeg, quatFromDeviceOrientation: quatFromDeviceOrientation, quatMul: quatMul, quatConj: quatConj, quatNormalize: quatNormalize, quatRotateVec: quatRotateVec, quatFromAxisAngle: quatFromAxisAngle, probeFrameFromQuat: probeFrameFromQuat, chooseProbeFrame: probeFrameFromQuat, probeFrame: probeFrameFromQuat, decomposeProbePose: decomposeProbePose, probePoseFromQuat: decomposeProbePose, swingTwist: decomposeProbePose, probePoseFromOrientation: probePoseFromOrientation }
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (G) G.KARDIA_PROBE = API;

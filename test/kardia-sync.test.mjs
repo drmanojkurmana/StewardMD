@@ -329,7 +329,7 @@ test("probe sender: granted permission maps DeviceOrientation through KARDIA_PRO
   handler({ alpha: 0, beta: 0, gamma: 0, timeStamp: 1000 });
   handler({ alpha: 0, beta: 20, gamma: 0, timeStamp: 1016 });
   assert.ok(sent.length >= 2);
-  assert.ok(sent[1].st.tiltDeg > 0);
+  assert.ok(sent[1].st.rockDeg > 0, "lifting the top edge of a flat phone rocks the probe");
   sender.disable();
 });
 
@@ -338,7 +338,7 @@ test("probe sender handleOrientation uses calibration: first sample is the zero 
   const sender = SYNC.createProbeSender({ env: {}, probeLib: PROBE, sendPose: (p, st) => sent.push(st) });
   sender.handleOrientation({ alpha: 10, beta: 30, gamma: 5 });
   sender.handleOrientation({ alpha: 10, beta: 50, gamma: 5 });
-  assert.ok(sent[1].tiltDeg > sent[0].tiltDeg);
+  assert.ok(sent[1].rockDeg > sent[0].rockDeg, "raising beta from the calibrate pose rocks the probe");
 });
 
 test("idle expiry wipes the session key after 30 minutes", async () => {
