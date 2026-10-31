@@ -34,8 +34,9 @@
 
 /* Floating player (owner target 2026-10-31). Wide screens: a non-modal panel top-right beside the
    study page. Phones: the same layout in the bottom sheet. Mini player: a pill above the tab bar. */
-.pn-root .pn-sound-sp-wrap.is-panel{inset:auto;top:calc(84px + env(safe-area-inset-top,0px));right:20px;width:min(440px,calc(100% - 40px));padding:0;display:block;pointer-events:none}
-.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet{pointer-events:auto;max-width:none;max-height:calc(100vh - 200px);overflow-y:auto;margin:0;padding:16px 18px 18px;gap:14px;border-radius:22px;border:1px solid var(--pn-why-edge,#16323B);box-shadow:0 24px 48px -16px rgba(2,8,10,.55),0 4px 12px -4px rgba(2,8,10,.35);animation:pn-sp-in 220ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-wrap.is-panel{position:absolute;z-index:5;inset:auto;top:calc(84px + env(safe-area-inset-top,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px));right:20px;width:min(440px,calc(100% - 40px));padding:0;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;pointer-events:none}
+/* pinned between header and bottom edge; the panel scrolls inside instead of running off-screen (100vh is unreliable in the iPad web view) */
+.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet{pointer-events:auto;max-width:none;max-height:100%;min-height:0;flex:0 1 auto;overflow-y:auto;overscroll-behavior:contain;margin:0;padding:16px 18px 18px;gap:14px;border-radius:22px;border:1px solid var(--pn-why-edge,#16323B);box-shadow:0 24px 48px -16px rgba(2,8,10,.55),0 4px 12px -4px rgba(2,8,10,.35);animation:pn-sp-in 220ms cubic-bezier(.23,1,.32,1)}
 .pn-root .pn-sound-sp-wrap.is-panel .pn-grab{display:none}
 @keyframes pn-sp-in{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
 .pn-root .pn-sound-sp-head{align-items:center;gap:10px;min-height:44px}

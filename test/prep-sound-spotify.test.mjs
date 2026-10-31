@@ -252,7 +252,9 @@ test("secure storage: plugin wrapper shape and source contract (no logging, Andr
   });
   assert.ok(store);
   const src = read("prep-sound-spotify.js");
-  assert.match(src, /getPlatform\(\) !== "android"/, "secure storage is gated to native Android");
+  // Owner 2026-10-31: stay connected until Disconnect on iOS too (Keychain plugin); still native-only, web stays memory-only.
+  assert.match(src, /if \(!C \|\| !C\.isNativePlatform \|\| !C\.isNativePlatform\(\)\) return null;/, "secure storage is native-only");
+  assert.match(src, /makeKeychainStore\(P\.SecureStoragePlugin\)/, "iOS (and older Android builds) use the Keychain plugin");
   assert.match(src, /restoreSession\(\)/, "cold-start restore is wired");
   assert.ok(!/console\.(log|info|warn|error)\([^)]*(refresh|access|token)/i.test(src), "tokens are never logged");
 });
@@ -277,4 +279,25 @@ test("premium: Spotify dropped user.product for dev-mode apps (Feb 2026), so a m
   assert.equal(pre({ product: "premium" }), true);
   assert.equal(pre({ product: "free" }), false);
   assert.equal(pre(null), true);
+});
+
+test("stay connected: refresh token kept in the iOS Keychain plugin, restored on cold start, cleared on Disconnect", async () => {
+  const P = createRequire(import.meta.url)(join(ROOT, "prep-sound-spotify.js"));
+  const box = new Map();
+  const plugin = { set: async ({ key, value }) => { box.set(key, value); }, get: async ({ key }) => { if (!box.has(key)) throw new Error("missing"); return { value: box.get(key) }; }, remove: async ({ key }) => { box.delete(key); } };
+  const X = P._pure || P;
+  const sec = X.makeKeychainStore(plugin);
+  assert.ok(sec, "adapter built from set/get/remove");
+  assert.equal(X.makeKeychainStore({ set() {} }), null, "incomplete plugin is ignored");
+  assert.equal(await sec.getSecret("nope"), null, "missing key reads as null, never throws");
+  let now = 1000;
+  const tokenFetch = async (url, o) => ({ status: 200, json: async () => ({ access_token: "A" + (++now), refresh_token: "R1", expires_in: 3600, scope: "user-read-playback-state" }) });
+  const c1 = X.makeClient({ fetch: tokenFetch, now: () => now, clientId: "cid", redirectUri: "stewardmd://spotify-callback", secureStore: sec });
+  await c1.exchange("code", "verifier");
+  assert.equal([...box.values()][0], "R1", "refresh token persisted after sign-in");
+  const c2 = X.makeClient({ fetch: tokenFetch, now: () => now, clientId: "cid", redirectUri: "stewardmd://spotify-callback", secureStore: sec });
+  assert.equal(await c2.restoreSession(), true, "a fresh app start restores the session");
+  assert.ok(c2.store.has());
+  c2.disconnect(); await new Promise((r) => setTimeout(r, 0));
+  assert.equal(box.size, 0, "Disconnect removes the saved token");
 });
