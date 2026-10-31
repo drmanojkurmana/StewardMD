@@ -133,7 +133,19 @@
     { id: "night_shift", title: "Night ward", track: "night_quiet", blurb: "Even hush for late sessions." },
     { id: "slow_breath", title: "Slow shore", track: "ocean_slow", blurb: "Slow waves, nothing sudden." }
   ];
+  /* Native asset files rendered by tools/prep-sound-render-wavs.mjs for the
+     Android foreground service; ids must stay in step with TRACKS. */
+  var TRACK_FILES = { rain_soft: "prep-sound/rain_soft.wav", night_quiet: "prep-sound/night_quiet.wav", deep_drone: "prep-sound/deep_drone.wav", ocean_slow: "prep-sound/ocean_slow.wav" };
   function trackById(id) { for (var i = 0; i < TRACKS.length; i++) if (TRACKS[i].id === id) return TRACKS[i]; return null; }
+  /* Playback-backend selection (rs-android-native): native Android with the
+     PrepSound plugin present wins; iOS and every other case use the web player.
+     env: { platform, isNative, hasPlugin, webSupported }. */
+  function selectPlaybackBackend(env) {
+    env = env || {};
+    if (env.platform === "android" && env.isNative && env.hasPlugin) return { backend: "native", reason: "android-plugin" };
+    if (env.webSupported) return { backend: "web", reason: env.platform === "ios" ? "ios-web-fallback" : "web" };
+    return { backend: "none", reason: "unsupported" };
+  }
   function presetById(id) { for (var i = 0; i < PRESETS.length; i++) if (PRESETS[i].id === id) return PRESETS[i]; return null; }
   /* Rights gate for CI: only original ambient/white-noise with no expiry may ship. */
   function checkManifest(tracks) {
@@ -216,7 +228,7 @@
     defaultPrefs: defaultPrefs, migratePrefs: migratePrefs, validatePrefs: validatePrefs, enabled: enabled,
     PROVIDERS: PROVIDERS, providerById: providerById,
     handoffHome: handoffHome, handoffShare: handoffShare, handoffSearch: handoffSearch,
-    TRACKS: TRACKS, PRESETS: PRESETS, trackById: trackById, presetById: presetById, checkManifest: checkManifest,
+    TRACKS: TRACKS, TRACK_FILES: TRACK_FILES, PRESETS: PRESETS, trackById: trackById, presetById: presetById, checkManifest: checkManifest, selectPlaybackBackend: selectPlaybackBackend,
     STATES: STATES, transition: transition, visibleControls: visibleControls, unsupported: unsupported };
   if (NODE) { module.exports = PURE; return; }
   G.PREP_SOUND_CORE = PURE;

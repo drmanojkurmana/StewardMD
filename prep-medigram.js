@@ -34,7 +34,9 @@
   var S = null; // { host, mode, feed, i, mission, answered, correct, retrievalAnswered, chosen, revealed, showWhy, brk, timer, cadence, lang, events }
   function esc(s) { return S && S.host ? S.host.esc(s) : String(s == null ? "" : s); }
   function freshSession(host, mode) {
-    return { host: host, mode: mode || "study", feed: [], i: 0, mission: DATA.missionById("mix"), answered: 0, correct: 0, retrievalAnswered: 0, chosen: -1, revealed: false, showWhy: false, brk: null, timer: 0, cadence: lsGet("smd_prep_medigram_cadence") || "3:1", lang: lsGet("smd_prep_medigram_lang") || "en", events: [] };
+    var rawCad = lsGet("smd_prep_medigram_cadence");
+    var cad = DATA.resolveCadence ? DATA.resolveCadence(rawCad) : (rawCad || "3:1");
+    return { host: host, mode: mode || "study", feed: [], i: 0, mission: DATA.missionById("mix"), answered: 0, correct: 0, retrievalAnswered: 0, chosen: -1, revealed: false, showWhy: false, brk: null, timer: 0, cadence: cad, lang: lsGet("smd_prep_medigram_lang") || "en", events: [] };
   }
   function consent() { return { analytics: lsGet("smd_prep_stats") === "1" }; }
   function emit(name, data) {
@@ -113,8 +115,7 @@
     var c = S.feed[S.i];
     host.paint(host.bar("PrepReels", esc(progressText()), "back") + '<div class="pn-body pn-mg">' + modeTabs() +
       '<div class="pn-mg-missions" role="group" aria-label="Session">' + DATA.MISSIONS.map(function (m) { return '<button type="button" class="pn-mg-chip' + (S.mission.id === m.id ? " on" : "") + '" aria-pressed="' + (S.mission.id === m.id) + '" data-act="mg-mission" data-v="' + m.id + '">' + esc(m.label) + "</button>"; }).join("") + "</div>" +
-      '<div class="pn-mg-lang" role="group" aria-label="Language">' + DATA.LANGS.map(function (l) { return '<button type="button" class="pn-mg-chip sm' + (S.lang === l ? " on" : "") + '" aria-pressed="' + (S.lang === l) + '" data-act="mg-lang" data-v="' + l + '">' + (l === "en" ? "English" : l === "hi" ? "Hindi" : "Telugu") + "</button>"; }).join("") +
-      '<span class="pn-mg-cad" role="group" aria-label="Cadence">' + Object.keys(DATA.CADENCES).map(function (k) { return '<button type="button" class="pn-mg-chip sm' + (S.cadence === k ? " on" : "") + '" aria-pressed="' + (S.cadence === k) + '" data-act="mg-cadence" data-v="' + k + '">' + k + "</button>"; }).join("") + "</span></div>" +
+      '<div class="pn-mg-lang" role="group" aria-label="Language">' + DATA.LANGS.map(function (l) { return '<button type="button" class="pn-mg-chip sm' + (S.lang === l ? " on" : "") + '" aria-pressed="' + (S.lang === l) + '" data-act="mg-lang" data-v="' + l + '">' + (l === "en" ? "English" : l === "hi" ? "Hindi" : "Telugu") + "</button>"; }).join("") + "</div>" +
       cardHtml(c) + actionsHtml(c) +
       '<div class="pn-mg-nav"><button type="button" class="pn-mg-btn" data-act="mg-prev"' + (S.i ? "" : " disabled") + '>Previous</button>' +
       '<button type="button" class="pn-mg-btn" data-act="mg-next">' + (S.i < S.feed.length - 1 ? "Next" : "Review finish") + '</button></div>' +
@@ -157,9 +158,27 @@
     emit("session_started", { mode: S.mode, mission: S.mission.id, cadence: S.cadence });
     host.push(function () { renderFeed(); });
   }
+  function setCadence(arm) {
+    var c = DATA.resolveCadence ? DATA.resolveCadence(arm) : (arm === "2" || arm === "2:1" ? "2:1" : arm === "5" || arm === "5:1" ? "5:1" : "3:1");
+    try { G.localStorage.setItem("smd_prep_medigram_cadence", String(arm)); } catch (e) {}
+    if (S) {
+      S.cadence = c;
+      buildCurrent();
+      if (S.host && S.host.rerender) S.host.rerender();
+    }
+    return c;
+  }
+  function homeRowHtml(host) {
+    var icon = (host && host.ico ? host.ico("play") : '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l12 7-12 7z"/></svg>');
+    if (host && host.row) {
+      return host.row("mg-open", icon, "PrepReels", "Short study feed · finish anytime");
+    }
+    var chev = (host && host.ico ? host.ico("chev") : '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>');
+    return '<button type="button" class="pn-row" data-act="mg-open"><span class="pn-ri" aria-hidden="true">' + icon + '</span><span class="pn-rb"><b>PrepReels</b><small>Short study feed · finish anytime</small></span>' + chev + '</button>';
+  }
   function homeHtml(host) {
     if (!FLAGS.study && !FLAGS.discovery && !FLAGS.breakMode) return "";
-    return '<h2 class="pn-h">PrepReels</h2><div class="pn-group"><button type="button" class="pn-row" data-act="mg-open"><span class="pn-rb"><b>PrepReels</b><small>Short study feed · finish anytime</small></span></button></div>';
+    return '<h2 class="pn-h">PrepReels</h2><div class="pn-group">' + homeRowHtml(host) + '</div>';
   }
 
   function act(a, el, host) {
@@ -169,7 +188,7 @@
     if (a === "mg-mode") { releaseMedia(); stopBreakTimer(); S.brk = null; S.mode = v || "study"; buildCurrent(); return renderFeed(); }
     if (a === "mg-mission") { S.mission = DATA.missionById(v); buildCurrent(); return renderFeed(); }
     if (a === "mg-lang") { try { G.localStorage.setItem("smd_prep_medigram_lang", v); } catch (e) {} S.lang = v; buildCurrent(); return renderFeed(); }
-    if (a === "mg-cadence") { try { G.localStorage.setItem("smd_prep_medigram_cadence", v); } catch (e) {} S.cadence = v; buildCurrent(); return renderFeed(); }
+    if (a === "mg-cadence") { setCadence(v); return renderFeed(); }
     if (a === "mg-answer") {
       if (S.revealed || !c) return;
       var k = Number(el.getAttribute("data-k")), ok = k === c.a;
@@ -203,5 +222,5 @@
   function back() { releaseMedia(); return false; }
   function leave() { releaseMedia(); stopBreakTimer(); S = null; }
 
-  G.PREP_MEDIGRAM = { open: start, act: act, back: back, leave: leave, homeHtml: homeHtml, candidates: function () { return CANDIDATES.slice(); }, _pure: DATA, _flags: FLAGS, _s: function () { return S; } };
+  G.PREP_MEDIGRAM = { open: start, act: act, back: back, leave: leave, homeHtml: homeHtml, homeRow: homeRowHtml, setCadence: setCadence, candidates: function () { return CANDIDATES.slice(); }, _pure: DATA, _flags: FLAGS, _s: function () { return S; } };
 })(typeof window !== "undefined" ? window : this);

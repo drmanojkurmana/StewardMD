@@ -1,0 +1,46 @@
+/* PrepNucleus Sound — Now Playing card (prep-sound-player.js, job rs-player-ui).
+   .pn-player-* only. Fixed owner palette #071318 / #0D1D23 / accent #42CDB5 on
+   a restrained dark card (AA in the app's light AND dark themes because the
+   card carries its own ink); no glows, gradients or backdrop filters.
+   Centred-artwork layout after the owner's reference card. Every target is
+   at least 44px; focus is always visible; motion honours reduced motion. */
+.pn-player { box-sizing: border-box; max-width: 420px; margin: 0 auto; padding: 16px; border-radius: 20px; border: 1px solid #16323B; background: #0D1D23; color: #E2F1EE; text-align: center; }
+.pn-player *, .pn-player *::before, .pn-player *::after { box-sizing: border-box; }
+.pn-player-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; }
+.pn-player-prov { font-size: 13px; font-weight: 600; color: #94B4AB; }
+.pn-player-art { width: min(300px, 72vw); aspect-ratio: 1; margin: 8px auto 14px; border-radius: 14px; overflow: hidden; background: #071318; }
+.pn-player-art img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pn-player-tile { width: min(300px, 72vw); aspect-ratio: 1; margin: 8px auto 14px; border-radius: 14px; background: #071318; display: flex; align-items: center; justify-content: center; }
+.pn-player-empty .pn-player-tile, .pn-player-external .pn-player-tile { width: 132px; }
+.pn-player-tile svg { width: 62%; height: 62%; }
+.pn-player-title { margin: 0; font-size: 19px; font-weight: 700; line-height: 1.3; letter-spacing: -.01em; overflow-wrap: anywhere; }
+.pn-player-artist { margin: 4px 0 0; font-size: 15px; color: #CDE2DC; overflow-wrap: anywhere; }
+.pn-player-album { margin: 2px 0 0; font-size: 13px; color: #94B4AB; overflow-wrap: anywhere; }
+.pn-player-nothing { margin: 0 0 10px; font-size: 17px; font-weight: 650; }
+.pn-player-note { margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: #94B4AB; }
+.pn-player-elapsed { margin: 10px 0 0; font-size: 13px; color: #94B4AB; }
+.pn-player-seekrow { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+.pn-player-time { flex: 0 0 auto; font-size: 12px; font-variant-numeric: tabular-nums; color: #94B4AB; min-width: 36px; }
+.pn-player-seek, .pn-player-volrange { flex: 1 1 auto; min-width: 0; min-height: 44px; accent-color: #42CDB5; cursor: pointer; }
+.pn-player-bar { flex: 1 1 auto; height: 6px; border-radius: 999px; background: #16323B; overflow: hidden; }
+.pn-player-bar span { display: block; height: 100%; background: #42CDB5; }
+.pn-player-transport { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.pn-player-iconbtn { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 50%; border: 1px solid #16323B; background: #071318; color: #CDE2DC; cursor: pointer; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), color 120ms ease; }
+.pn-player-iconbtn.on { color: #42CDB5; border-color: #42CDB5; }
+.pn-player-iconbtn:disabled { opacity: .45; cursor: default; }
+.pn-player-iconbtn:active:not(:disabled), .pn-player-play:active, .pn-player-pick:active { transform: scale(.97); }
+.pn-player-rep1 { position: absolute; right: 2px; bottom: 1px; font-size: 10px; font-weight: 800; line-height: 1; }
+.pn-player-play { display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; min-width: 64px; min-height: 64px; border-radius: 50%; border: 0; background: #42CDB5; color: #071318; cursor: pointer; transition: transform 120ms cubic-bezier(.23, 1, .32, 1); }
+.pn-player-play svg { width: 28px; height: 28px; }
+.pn-player-vol { display: flex; align-items: center; gap: 12px; margin-top: 6px; font-size: 13px; color: #94B4AB; text-align: left; }
+.pn-player-pick { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px; border-radius: 12px; border: 0; background: #42CDB5; color: #071318; font-size: 15px; font-weight: 700; cursor: pointer; transition: transform 120ms cubic-bezier(.23, 1, .32, 1); }
+.pn-player-external .pn-player-pick { margin-top: 12px; }
+.pn-player button:focus-visible, .pn-player input[type="range"]:focus-visible { outline: 2px solid #42CDB5; outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .pn-player-iconbtn:hover:not(:disabled) { color: #42CDB5; }
+  .pn-player-play:hover, .pn-player-pick:hover { background: #50E2C8; }
+}
+@media (max-width: 420px) { .pn-player { padding: 14px; } }
+@media (prefers-reduced-motion: reduce) {
+  .pn-player-iconbtn, .pn-player-play, .pn-player-pick { transition: none; }
+}

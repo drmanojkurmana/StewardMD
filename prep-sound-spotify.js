@@ -7,7 +7,9 @@
    controls: capabilities come from the live account (Premium?) and device (supports_volume?).
 
    Auth is Authorization Code + PKCE with NO client secret anywhere. Minimum scopes only (see
-   SCOPES). Tokens live in memory only; nothing goes to PrepNucleus analytics or the AI Tutor,
+   SCOPES). Tokens live in memory only, except the refresh token on native Android, which is
+   kept in Keystore AES-GCM storage via the PrepSound plugin and restored on cold start
+   (rs-android-native); web/iOS stay memory-only. Nothing goes to PrepNucleus analytics or the AI Tutor,
    and no listening history is collected. The PKCE verifier + OAuth state sit in localStorage
    only for the redirect round-trip and are deleted at exchange. Playback path: the Spotify Web
    API player endpoints controlling the learner's active Spotify app on every platform — see
@@ -28,7 +30,7 @@
   var API = "https://api.spotify.com/v1";
   // Minimum scopes: account product (Premium check), playback read/control, own playlists, library.
   var SCOPES = ["user-read-private", "user-read-playback-state", "user-read-currently-playing",
-    "user-modify-playback-state", "playlist-read-private", "playlist-read-collaborative", "user-library-read"];
+    "user-modify-playback-state", "playlist-read-private", "playlist-read-collaborative", "user-library-read", "user-library-modify"];
   var VERIFIER_KEY = "smd_spotify_pkce", STATE_KEY = "smd_spotify_state";
 
   function esc(s) {
@@ -67,8 +69,43 @@
   function trackOf(t) {
     if (!t || !t.uri) return null;
     var artists = (t.artists || []).map(function (a) { return a && a.name; }).filter(Boolean).join(", ");
-    return { kind: "track", uri: t.uri, name: String(t.name || "Untitled"), artists: artists,
-      album: t.album ? String(t.album.name || "") : "", durationMs: t.duration_ms || 0 };
+    return { kind: "track", uri: t.uri, id: t.id ? String(t.id) : "", name: String(t.name || "Untitled"), artists: artists,
+      album: t.album ? String(t.album.name || "") : "", images: (t.album && t.album.images) || [], durationMs: t.duration_ms || 0 };
+  }
+  /* Provider-neutral Now Playing model for prep-sound-player.js from a raw
+     GET /me/player body (2026 shapes included: shuffle_state, repeat_state,
+     device.volume_percent). liked is merged in by the client (contains call). */
+  function parseNowPlaying(j, liked) {
+    if (!j || !j.item || !j.item.uri) {
+      return { provider: "spotify", providerLabel: "Spotify", title: "", artist: "", album: "",
+        artworkUrl: null, durationMs: 0, positionMs: 0, isPlaying: false, shuffle: false,
+        repeat: "off", liked: null, likeAvailable: true, volume: null, trackId: "", trackUri: "" };
+    }
+    var t = trackOf(j.item);
+    var dev = j.device || {};
+    return { provider: "spotify", providerLabel: "Spotify", title: t.name, artist: t.artists, album: t.album,
+      artworkUrl: null, images: t.images, durationMs: t.durationMs, positionMs: j.progress_ms || 0,
+      isPlaying: !!j.is_playing, shuffle: !!j.shuffle_state,
+      repeat: j.repeat_state === "track" || j.repeat_state === "context" ? j.repeat_state : "off",
+      liked: liked === true ? true : liked === false ? false : null, likeAvailable: true,
+      volume: typeof dev.volume_percent === "number" ? dev.volume_percent : null,
+      supportsVolume: dev.supports_volume !== false, trackId: t.id, trackUri: t.uri };
+  }
+  /* Liked-check bodies differ by endpoint generation: /me/tracks/contains
+     returns [true]; /me/library/contains returns [{ uri, contains }]. Both
+     (and a bare { contains } object) collapse to true|false|null. */
+  function parseLiked(j) {
+    if (Array.isArray(j)) {
+      if (!j.length) return null;
+      if (typeof j[0] === "boolean") return j[0];
+      if (j[0] && typeof j[0] === "object") {
+        if (typeof j[0].contains === "boolean") return j[0].contains;
+        if (typeof j[0].saved === "boolean") return j[0].saved;
+      }
+      return null;
+    }
+    if (j && typeof j.contains === "boolean") return j.contains;
+    return null;
   }
   function playlistOf(p) {
     if (!p || !p.uri) return null;
@@ -103,15 +140,53 @@
     return { embeddedPlayback: false, externalHandoff: true, remoteControls: !!isPremium,
       queueControls: !!isPremium, volumeControl: vol, trackMetadata: true, backgroundPlayback: false };
   }
+  /* prep-sound-player caps: transport/shuffle/repeat/seek only for Premium
+     (Spotify refuses control otherwise); volume also needs a device that
+     reports it; save (like) works on Free too but needs the sign-in scope. */
+  function capsForPlayer(isPremium, model, hasLikeScope) {
+    var ctrl = !!isPremium;
+    var hasTrack = !!(model && model.title);
+    return { play: ctrl, pause: ctrl, next: ctrl, previous: ctrl,
+      seek: ctrl && hasTrack, shuffle: ctrl && hasTrack, repeat: ctrl && hasTrack,
+      like: hasTrack, volume: !!(ctrl && model && model.supportsVolume !== false && model.volume != null),
+      artwork: hasTrack };
+  }
+
+  /* Secure-storage key for the refresh token on native Android only. Web and
+     iOS never persist it (memory only below). The value is never logged. */
+  var REFRESH_SECRET_KEY = "prep_sound_spotify_refresh_token";
+  /* Wrap Capacitor.Plugins.PrepSound-shaped plugin into the secureStore shape
+     makeClient consumes. Returns null when any method is missing. */
+  function makePluginSecureStore(plugin) {
+    if (!plugin || typeof plugin.setSecret !== "function" || typeof plugin.getSecret !== "function" || typeof plugin.removeSecret !== "function") return null;
+    return {
+      setSecret: function (key, value) { return Promise.resolve(plugin.setSecret({ key: key, value: value })); },
+      getSecret: function (key) { return Promise.resolve(plugin.getSecret({ key: key })).then(function (r) { return r && typeof r.value === "string" ? r.value : null; }); },
+      removeSecret: function (key) { return Promise.resolve(plugin.removeSecret({ key: key })); }
+    };
+  }
 
   /* ================= token store: memory only ================= */
   function makeTokenStore(now) {
-    var t = null; // { access, refresh, expiresAt } — never persisted, never logged.
+    var t = null; // { access, refresh, expiresAt, scope } — never persisted, never logged.
     return {
       set: function (j) {
         if (!j || !j.access_token) return false;
         t = { access: j.access_token, refresh: j.refresh_token || (t && t.refresh) || null,
-          expiresAt: now() + (j.expires_in ? j.expires_in * 1000 : 3600000) };
+          expiresAt: now() + (j.expires_in ? j.expires_in * 1000 : 3600000),
+          scope: typeof j.scope === "string" ? j.scope : (t && t.scope) || "" };
+        return true;
+      },
+      /* Granted scopes from the token response (space-separated). A session
+         whose grant lacks user-library-modify shows the save heart disabled;
+         it is never force-reconnected. Unknown (restored) grants return "". */
+      scope: function () { return t && t.scope ? t.scope : ""; },
+      hasScope: function (name) { return (" " + (t && t.scope ? t.scope : "") + " ").indexOf(" " + name + " ") >= 0; },
+      /* Cold-start restore: seed only the refresh token; the next ensureToken
+         refreshes it into a live access token. */
+      setRefreshOnly: function (refresh) {
+        if (typeof refresh !== "string" || !refresh) return false;
+        t = { access: null, refresh: refresh, expiresAt: 0 };
         return true;
       },
       access: function () { return t && t.access ? t.access : null; },
@@ -127,6 +202,23 @@
   // deps: { fetch, now, clientId, redirectUri, store? } — no secret, no analytics hooks exist here.
   function makeClient(deps) {
     var store = deps.store || makeTokenStore(deps.now), refreshing = null;
+    var secure = deps.secureStore || null; // native Android only; null on web/iOS
+    function persistRefresh() {
+      if (!secure) return Promise.resolve(true);
+      var rt = store.refreshToken();
+      if (!rt) return Promise.resolve(true);
+      try {
+        return Promise.resolve(secure.setSecret(REFRESH_SECRET_KEY, rt)).then(
+          function () { return true; }, function () { return true; });
+      } catch (e) { return Promise.resolve(true); }
+    }
+    function clearPersisted() {
+      if (!secure) return Promise.resolve(true);
+      try {
+        return Promise.resolve(secure.removeSecret(REFRESH_SECRET_KEY)).then(
+          function () { return true; }, function () { return true; });
+      } catch (e) { return Promise.resolve(true); }
+    }
     function tokenPost(body) {
       return deps.fetch(TOKEN_URL, { method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body })
@@ -134,8 +226,25 @@
         .then(function (x) {
           // A refused code/refresh grant (400/401) means sign-in again, never a raw provider error.
           if (x.r.status !== 200 || !store.set(x.j)) throw apiError(401);
-          return true;
+          return persistRefresh().then(function () { return true; });
         }, function () { throw { reason: "offline", message: "No connection. Check your network and try again." }; });
+    }
+    /* Cold start on native Android: load the persisted refresh token (if any)
+       and exchange it for a fresh access token. Resolves true when a session
+       was restored. A dead refresh token clears the persisted copy. */
+    function restoreSession() {
+      if (!secure || store.access()) return Promise.resolve(false);
+      var loaded;
+      try { loaded = secure.getSecret(REFRESH_SECRET_KEY); }
+      catch (e) { return Promise.resolve(false); }
+      return Promise.resolve(loaded).then(function (rt) {
+        if (typeof rt !== "string" || !rt) return false;
+        if (!store.setRefreshOnly(rt)) return false;
+        return refresh().then(function () { return true; }, function (e) {
+          store.clear();
+          return clearPersisted().then(function () { throw e; });
+        });
+      }, function () { return false; });
     }
     function exchange(code, verifier) {
       return tokenPost("grant_type=authorization_code&code=" + encodeURIComponent(code) +
@@ -173,17 +282,57 @@
               body: body ? JSON.stringify(body) : undefined });
           }).then(function (r2) {
             if (r2.status === 200 || r2.status === 204) return bodyOf(r2);
-            throw apiError(r2.status, retryOf(r2));
+            return failOf(r2);
           });
         }
-        throw apiError(r.status, retryOf(r));
+        return failOf(r);
       }, function (e) { if (e && e.reason) throw e; throw { reason: "offline", message: "No connection. Check your network and try again." }; });
     }
+    // Development mode: Spotify answers accounts not on the app's User Management allowlist with 403 "User not registered in the Developer Dashboard".
+    function failOf(r) {
+      if (r.status !== 403 || !r.text) throw apiError(r.status, retryOf(r));
+      return r.text().then(function (t) {
+        if (/not registered|developer dashboard/i.test(t || "")) throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
+        throw apiError(403);
+      }, function () { throw apiError(403); });
+    }
     function retryOf(r) { try { var v = r.headers && r.headers.get && r.headers.get("Retry-After"); return v ? Number(v) : null; } catch (e) { return null; } }
+    /* Liked check with endpoint-generation fallback: the 2026 library
+       endpoint first, the long-standing tracks endpoint on 404. A failed
+       check resolves null (unknown), never fails the player read. */
+    function likedCheck(trackId, trackUri) {
+      return call("GET", "/me/library/contains?uris=" + encodeURIComponent(trackUri || ("spotify:track:" + trackId)))
+        .then(parseLiked, function (e) {
+          if (!e || e.status !== 404) return null;
+          return call("GET", "/me/tracks/contains?ids=" + encodeURIComponent(trackId)).then(parseLiked, function () { return null; });
+        });
+    }
+    function setLiked(trackId, trackUri, want) {
+      var method = want ? "PUT" : "DELETE";
+      return call(method, "/me/tracks?ids=" + encodeURIComponent(trackId)).then(function (v) { return v; }, function (e) {
+        if (!e || e.status !== 404) throw e;
+        return call(method, "/me/library?uris=" + encodeURIComponent(trackUri || ("spotify:track:" + trackId)));
+      });
+    }
     return {
-      store: store, exchange: exchange, refresh: refresh,
+      store: store, exchange: exchange, refresh: refresh, restoreSession: restoreSession,
       me: function () { return call("GET", "/me"); },
       player: function () { return call("GET", "/me/player").then(parsePlayer); },
+      /* Full neutral model for prep-sound-player.js (+ granted-scope flag). */
+      nowPlaying: function () {
+        return call("GET", "/me/player").then(function (j) {
+          var base = parseNowPlaying(j, null);
+          if (!base.trackId) { base.likeAvailable = store.hasScope("user-library-modify"); return base; }
+          return likedCheck(base.trackId, base.trackUri).then(function (liked) {
+            base.liked = liked; base.likeAvailable = store.hasScope("user-library-modify"); return base;
+          });
+        });
+      },
+      shuffle: function (state) { return call("PUT", "/me/player/shuffle?state=" + (state ? "true" : "false")); },
+      repeatMode: function (state) { return call("PUT", "/me/player/repeat?state=" + encodeURIComponent(state)); },
+      seekMs: function (positionMs) { return call("PUT", "/me/player/seek?position_ms=" + Math.max(0, Math.round(positionMs))); },
+      saveTrack: function (trackId, trackUri) { return setLiked(trackId, trackUri, true); },
+      removeTrack: function (trackId, trackUri) { return setLiked(trackId, trackUri, false); },
       play: function (body, deviceId) { return call("PUT", "/me/player/play" + (deviceId ? "?device_id=" + encodeURIComponent(deviceId) : ""), body || {}); },
       devices: function () { return call("GET", "/me/player/devices").then(function (j) { return (j && j.devices) || []; }); },
       pause: function () { return call("PUT", "/me/player/pause"); },
@@ -194,23 +343,26 @@
       search: function (q) {
         return call("GET", "/search?type=track,playlist&limit=10&market=from_token&q=" + encodeURIComponent(q)).then(parseSearch);
       },
-      disconnect: function () { store.clear(); }
+      disconnect: function () { store.clear(); clearPersisted(); }
     };
   }
 
   var PURE = { esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
+    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, capsForPlayer: capsForPlayer,
     apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient,
+    makePluginSecureStore: makePluginSecureStore, REFRESH_SECRET_KEY: REFRESH_SECRET_KEY,
     SCOPES: SCOPES, AUTH_URL: AUTH_URL, TOKEN_URL: TOKEN_URL, API: API };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= flags + config (inert unless every gate is on) ================= */
-  function flagOn(key, param) {
+  function flagOn(key, param, def) {
     try {
       var q = (G.location.search.match(new RegExp("[?&]" + param + "=([^&]+)")) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return G.localStorage.getItem(key) === "1";
+      var v = G.localStorage.getItem(key);
+      return def ? v !== "0" : v === "1";
     } catch (e) { return false; }
   }
   function prepOn() {
@@ -237,20 +389,31 @@
     return G.location.origin + G.location.pathname;
   }
   var CID = clientId();
-  if (!prepOn() || !flagOn("smd_prep_sound", "sound") || !flagOn("smd_prep_sound_spotify", "spotify") || !CID) return;
+  // Spotify is ON by default for everyone (owner 2026-10-31); smd_prep_sound_spotify="0" or ?spotify=0 turns it off.
+  if (!prepOn() || !flagOn("smd_prep_sound_spotify", "spotify", true) || !CID) return;
 
   /* ================= live state + sheet ================= */
   var D = G.document;
   var S = { host: null, sheet: null, prev: null, client: null, premium: false, me: null,
-    player: null, playlists: null, results: null, busy: false, err: null, query: "" };
+    player: null, now: null, playerHandle: null, playlists: null, results: null, busy: false, err: null, query: "" };
   function rng(n) { var b = new Uint8Array(n); (G.crypto || G.msCrypto).getRandomValues(b); return b; }
   function subtleChallenge(verifier) {
     var data = new TextEncoder().encode(verifier);
     return G.crypto.subtle.digest("SHA-256", data).then(function (buf) { return b64url(new Uint8Array(buf)); });
   }
+  /* Secure storage exists only on native Android with the PrepSound plugin.
+     Web and iOS return null here and keep tokens memory-only. */
+  function secureStore() {
+    try {
+      var C = G.Capacitor;
+      if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
+      if (typeof C.getPlatform === "function" && C.getPlatform() !== "android") return null;
+      return makePluginSecureStore(C.Plugins && C.Plugins.PrepSound);
+    } catch (e) { return null; }
+  }
   function client() {
     if (!S.client) S.client = makeClient({ fetch: function (u, o) { return G.fetch(u, o); },
-      now: function () { return Date.now(); }, clientId: CID, redirectUri: redirectUri() });
+      now: function () { return Date.now(); }, clientId: CID, redirectUri: redirectUri(), secureStore: secureStore() });
     return S.client;
   }
   function ico(name) { // inline SVG, currentColor; no emoji, no external assets
@@ -276,7 +439,14 @@
       return h;
     }
     if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") + "</p>";
-    if (!S.premium) {
+    /* The shared Now Playing card (prep-sound-player.js) replaces the old
+       now-playing line + 3 buttons: it always shows what is playing, ticks
+       locally and re-syncs while visible. Without it (older build) the
+       plain line below still renders — never a dead control either way. */
+    if (G.PREP_SOUND_PLAYER && G.PREP_SOUND_PLAYER._pure) {
+      h += '<div data-sp-player></div>';
+      if (!S.premium) h += '<p class="pn-sound-sp-note">You are on Spotify Free, so PrepNucleus cannot play or pause for you. Pick a playlist to open it in Spotify, then press play there.</p>';
+    } else if (!S.premium) {
       h += '<p class="pn-sound-sp-note">You are on Spotify Free, so PrepNucleus cannot play or pause for you. Pick a playlist to open it in Spotify, then press play there.</p>';
     } else if (S.player && S.player.track) {
       var t = S.player.track;
@@ -284,7 +454,7 @@
     } else {
       h += '<p class="pn-sound-sp-note">Nothing is playing. Pick a playlist or search below — it starts on your Spotify.</p>';
     }
-    if (S.premium) {
+    if (!G.PREP_SOUND_PLAYER && S.premium) {
       var playing = !!(S.player && S.player.playing);
       h += '<div class="pn-sound-sp-controls" role="group" aria-label="Playback controls">' +
         '<button type="button" class="pn-sound-sp-btn" data-act="sp-prev" aria-label="Previous track">' + ico("prev") + "</button>" +
@@ -318,7 +488,45 @@
     if (!S.playlists.length) return '<p class="pn-sound-sp-note">No playlists in your Spotify library yet. Search above instead.</p>';
     return "<h3>Your playlists</h3>" + '<ul class="pn-sound-sp-list">' + S.playlists.map(item).join("") + "</ul>";
   }
-  function paintSheet() { syncCaps(); if (S.sheet) S.sheet.querySelector(".pn-sheet").innerHTML = sheetHtml(); wireSheet(); }
+  function paintSheet() { syncCaps(); if (S.sheet) S.sheet.querySelector(".pn-sheet").innerHTML = sheetHtml(); wireSheet(); mountPlayerCard(); }
+  /* Mount the shared card into the sheet. The card ticks locally (1s) and
+     the poller re-syncs from Spotify (~5s) only while the sheet is visible;
+     paintSheet remounts after a full repaint, closeSheet unmounts so no
+     timer outlives the sheet. */
+  function cardState() {
+    var PL = G.PREP_SOUND_PLAYER, m = S.now;
+    if (!m) m = { provider: "spotify", providerLabel: "Spotify", title: "", likeAvailable: client().store.hasScope("user-library-modify") };
+    var copy = {}; for (var k in m) copy[k] = m[k];
+    copy.artworkUrl = PL._pure.pickArtwork(m.images || []);
+    return { model: copy, caps: capsForPlayer(S.premium, m, client().store.hasScope("user-library-modify")) };
+  }
+  function mountPlayerCard() {
+    var PL = G.PREP_SOUND_PLAYER;
+    if (!PL || !S.sheet) return;
+    var box = S.sheet.querySelector("[data-sp-player]");
+    if (!box) return;
+    function fresh() {
+      return client().nowPlaying().then(function (m) { S.now = m; return cardState(); });
+    }
+    function after(p) { p.then(function () { return fresh(); }).then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, fail); }
+    S.playerHandle = PL.mount(box, {
+      getState: cardState,
+      renderOpts: { pickLabel: "Pick a playlist or search below" },
+      fetchState: fresh,
+      onAction: function (act, value) {
+        var m = S.now || {};
+        if (act === "toggle") after(m.isPlaying ? client().pause() : client().play());
+        else if (act === "next") after(client().next());
+        else if (act === "previous") after(client().previous());
+        else if (act === "shuffle") after(client().shuffle(!m.shuffle));
+        else if (act === "repeat") after(client().repeatMode(PL._pure.nextRepeat(m.repeat)));
+        else if (act === "seek") after(client().seekMs(value));
+        else if (act === "volume") client().volume(value).then(function () {}, fail);
+        else if (act === "like" && m.trackId) after(m.liked ? client().removeTrack(m.trackId, m.trackUri) : client().saveTrack(m.trackId, m.trackUri));
+        else if (act === "pick") { var q = S.sheet && S.sheet.querySelector("#pnSoundSpQ"); if (q) q.focus(); }
+      }
+    });
+  }
   function wireSheet() {
     if (!S.sheet) return;
     var f = S.sheet.querySelector("[data-sp-search]");
@@ -342,6 +550,7 @@
     return c.me().then(function (me) {
       S.me = me; S.premium = !!(me && me.product === "premium");
       return Promise.all([c.player().then(function (pl) { S.player = pl; }, function (e) { S.err = e; }),
+        c.nowPlaying().then(function (m) { S.now = m; }, function () {}),
         c.playlists().then(function (pl) { S.playlists = pl; }, function () { S.playlists = []; })]);
     }).then(paintSheet, fail);
   }
@@ -360,6 +569,8 @@
   }
   function closeSheet() {
     if (!S.sheet) return false;
+    try { if (G.PREP_SOUND_PLAYER) { var pb = S.sheet.querySelector("[data-sp-player]"); if (pb) G.PREP_SOUND_PLAYER.unmount(pb); } } catch (e) {}
+    S.playerHandle = null;
     if (S.sheet.parentNode) S.sheet.parentNode.removeChild(S.sheet);
     S.sheet = null;
     try { if (S.prev && S.prev.isConnected) S.prev.focus({ preventScroll: true }); } catch (e) {}
@@ -414,7 +625,7 @@
     if (a === "sp-open") return openSheet(host);
     if (a === "sp-close") return closeSheet();
     if (a === "sp-connect") return connect();
-    if (a === "sp-disconnect") { client().disconnect(); S.premium = false; S.me = null; S.player = null; S.playlists = null; S.results = null; S.err = null; return paintSheet(); }
+    if (a === "sp-disconnect") { client().disconnect(); S.premium = false; S.me = null; S.player = null; S.now = null; S.playlists = null; S.results = null; S.err = null; return paintSheet(); }
     if (a === "sp-play") return client().play().then(refresh, fail);
     if (a === "sp-pause") return client().pause().then(refresh, fail);
     if (a === "sp-next") return client().next().then(refresh, fail);
@@ -460,6 +671,17 @@
     dockButtonHtml: dockButtonHtml, adapter: adapter, back: function () { return closeSheet(); },
     leave: function () { return closeSheet(); }, _pure: PURE, _s: S };
   handleReturn();
+  /* Cold start on native Android: restore the Spotify session from secure
+     storage (refresh token only). Skipped during an OAuth return, which
+     exchanges its own code. Failure leaves the Connect state untouched. */
+  try {
+    var hasCode = /[?&]code=/.test(G.location.search || "");
+    if (!hasCode && secureStore()) {
+      client().restoreSession().then(function (restored) {
+        if (restored && S.sheet) loadConnected();
+      }, function () {});
+    }
+  } catch (e) {}
   // Warm return (appUrlOpen) and cold start from the link (getLaunchUrl); the verifier is single-use, so a repeat is a no-op.
   try {
     var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App, isCb = function (u) { return /^stewardmd:\/\/spotify-callback/.test(u || ""); };

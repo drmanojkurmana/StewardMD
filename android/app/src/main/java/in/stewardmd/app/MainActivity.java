@@ -14,6 +14,7 @@ import com.getcapacitor.BridgeActivity;
 import com.getcapacitor.BridgeWebViewClient;
 import com.getcapacitor.community.speechrecognition.SpeechRecognition;
 import in.stewardmd.captureguard.CaptureGuardPlugin;
+import in.stewardmd.prepsound.PrepSoundPlugin;
 import in.stewardmd.whisper.WhisperPlugin;
 
 public class MainActivity extends BridgeActivity {
@@ -35,6 +36,9 @@ public class MainActivity extends BridgeActivity {
         // Lesson-image capture guard (FLAG_SECURE while a realistic lesson image is on screen).
         // Registered explicitly like Whisper so it exists even if capacitor.plugins.json is stale.
         registerPlugin(CaptureGuardPlugin.class);
+        // PrepNucleus Sound: background ambient service + Keystore secure storage.
+        // Registered explicitly like CaptureGuard so it exists even if capacitor.plugins.json is stale.
+        registerPlugin(PrepSoundPlugin.class);
         // App-local power state (Battery Saver) + system haptics for the web layer (Premium-Feel
         // plan, owner decisions 2026-10-03).
         registerPlugin(SmdDevicePlugin.class);

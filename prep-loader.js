@@ -28,19 +28,28 @@
    tools (cross out, notes, My notebook, how others answered, reset progress) and prep-timetable.js the revision timetable that
    steers Today's plan (both optional: without them nothing changes). prep-sound-core.js + prep-sound-providers.js +
    prep-sound-web.js + prep-sound.js (+ prep-sound.css) are Sound (focus ambience and provider handoff; flag
-   smd_prep_sound, default OFF, optional: without them no Sound section shows). prep-play.js is Play (swipe feed, spot diagnosis,
+   smd_prep_sound, default OFF, requires smd_prep, lazy: without them no Sound section shows and no Sound file
+   downloads; prep-sound-spotify.js/.css need smd_prep_sound_spotify too). prep-play.js is Play (swipe feed, spot diagnosis,
    boss battles, quick fire, voice mode, focus room, Wrapped, seasons, mnemonic lab, streak freezes; flag smd_prep_play, optional). */
 (function (G) {
   "use strict";
   var V = "prep103";
   // Layer C (prep-source, prep-decks, prep-cards, prep-create) after prep.js; prep-create.js reads the two before it.
-  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css", "prep-play.css", "prep-sound-spotify.css", "prep-sound.css"];
-  var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js", "prep-play.js", "prep-sound-spotify.js", "prep-sound-core.js", "prep-sound-providers.js", "prep-sound-web.js", "prep-sound.js"];
+  var CSS = ["prep.css", "prep-create.css", "prep-plan.css", "prep-flash.css", "prep-pro.css", "prep-social.css", "prep-setup.css", "prep-ask.css", "prep-lx.css", "prep-ids.css", "prep-qgen.css", "prep-tests.css", "prep-coach.css", "prep-nav.css", "prep-pearl.css", "prep-action-row.css", "prep-tools.css", "prep-timetable.css", "prep-play.css"];
+  var JS = ["prep-bank-client.js", "specialty-core.js", "specialty-bank.js", "prep-profiles.js", "prep-assess.js", "prep-coach.js", "prep-insight.js", "prep-knowyouriq-data.js", "prep.js", "prep-listfmt.js", "prep-expfmt.js", "prep-reason.js", "prep-tests.js", "prep-nucleus360.js", "prep-viewer.js", "prep-motion.js", "prep-tide.js", "prep-nav.js", "prep-sync.js", "prep-arena.js", "prep-action-row.js", "prep-pearl.js", "prep-lessons.js", "prep-imglearn.js", "prep-pyq.js", "prep-rad.js", "prep-ids.js", "prep-setup.js", "prep-ss-groups.js", "prep-timetable.js", "prep-plan.js", "prep-nudges.js", "prep-native.js", "prep-flash.js", "prep-teacher.js", "prep-ask.js", "prep-pro.js", "prep-social.js", "prep-source.js", "prep-decks.js", "prep-cards.js", "prep-create.js", "prep-qgen.js", "prep-import.js", "prep-tools.js", "prep-play.js"];
   // Optional files: a missing one (404, not yet shipped) is skipped instead of failing PrepNucleus.
-  var OPTIONAL = { "prep-bank-client.js": 1, "prep-reason.js": 1, "prep-tests.js": 1, "prep-nucleus360.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1, "prep-qgen.js": 1, "prep-import.js": 1, "prep-tools.js": 1, "prep-timetable.js": 1, "prep-play.js": 1, "prep-sound-spotify.js": 1, "prep-medigram-data.js": 1, "prep-medigram-media.js": 1, "prep-medigram.js": 1, "prep-sound-core.js": 1, "prep-sound-providers.js": 1, "prep-sound-web.js": 1, "prep-sound.js": 1 };
+  var OPTIONAL = { "prep-bank-client.js": 1, "prep-reason.js": 1, "prep-tests.js": 1, "prep-nucleus360.js": 1, "prep-viewer.js": 1, "prep-ask.js": 1, "prep-setup.js": 1, "prep-rad.js": 1, "prep-motion.js": 1, "prep-tide.js": 1, "prep-nav.js": 1, "prep-ids.js": 1, "prep-sync.js": 1, "prep-pro.js": 1, "prep-social.js": 1, "prep-nudges.js": 1, "prep-qgen.js": 1, "prep-import.js": 1, "prep-tools.js": 1, "prep-timetable.js": 1, "prep-play.js": 1, "prep-sound-spotify.js": 1, "prep-medigram-data.js": 1, "prep-medigram-media.js": 1, "prep-medigram.js": 1, "prep-sound-core.js": 1, "prep-sound-providers.js": 1, "prep-sound-player.js": 1, "prep-sound-native.js": 1, "prep-sound-system.js": 1, "prep-sound-web.js": 1, "prep-sound.js": 1, "prep-sound-player.css": 1 };
   // PrepReels (MediGram, flag smd_prep_medigram, default OFF, requires smd_prep): loaded lazily only when on.
   var MG_CSS = ["prep-medigram.css"], MG_JS = ["prep-medigram-data.js", "prep-medigram-media.js", "prep-medigram.js"];
   function mgOn() { try { var q = (G.location.search.match(/[?&]medigram=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return enabled() && G.localStorage.getItem("smd_prep_medigram") === "1"; } catch (e) { return false; } }
+  // Sound (flag smd_prep_sound, default OFF, requires smd_prep): same lazy pattern: no Sound
+  // file downloads while off. The Spotify mini-player is ON by default and independent of Sound
+  // (owner 2026-10-31): only smd_prep_sound_spotify = "0" or ?spotify=0 leaves its files out.
+  var SOUND_CSS = ["prep-sound.css", "prep-sound-player.css"], SOUND_JS = ["prep-sound-core.js", "prep-sound-providers.js", "prep-sound-player.js", "prep-sound-native.js", "prep-sound-system.js", "prep-sound-web.js", "prep-sound.js"];
+  // Spotify is ON by default (owner 2026-10-31) and does not need Sound; it brings the shared player card with it.
+  var SPOTIFY_CSS = ["prep-sound-player.css", "prep-sound-spotify.css"], SPOTIFY_JS = ["prep-sound-player.js", "prep-sound-spotify.js"];
+  function soundOn() { try { var q = (G.location.search.match(/[?&]sound=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound") === "1"; } catch (e) { return false; } }
+  function spotifyOn() { try { var q = (G.location.search.match(/[?&]spotify=([^&]+)/) || [])[1]; if (q != null) return enabled() && (q === "1" || q === "on" || q === "true"); return enabled() && G.localStorage.getItem("smd_prep_sound_spotify") !== "0"; } catch (e) { return false; } }
   var loading = null;
 
   function enabled() {
@@ -68,6 +77,8 @@
     if (loading) return loading;
     var cssList = CSS.slice(), jsList = JS.slice();
     if (mgOn()) { cssList = cssList.concat(MG_CSS); jsList = jsList.concat(MG_JS); }
+    if (soundOn()) { cssList = cssList.concat(SOUND_CSS); jsList = jsList.concat(SOUND_JS); }
+    if (spotifyOn()) { cssList = cssList.concat(SPOTIFY_CSS); jsList = jsList.concat(SPOTIFY_JS.filter(function (f) { return jsList.indexOf(f) < 0; })); }
     cssList.forEach(css);
     loading = Promise.all(jsList.map(js)).then(function () { return G.PREP; }, function (e) { loading = null; throw e; });
     return loading;

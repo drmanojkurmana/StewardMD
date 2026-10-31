@@ -16,6 +16,7 @@
   function CORE() { return (G && G.PREP_SOUND_CORE) || null; }
   function WEB() { return (G && G.PREP_SOUND_WEB) || null; }
   function PROV() { return (G && G.PREP_SOUND_PROVIDERS) || null; }
+  function PLAYER() { return (G && G.PREP_SOUND_PLAYER) || null; }
 
   /* ================= pure (node-testable HTML builders) ================= */
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
@@ -30,20 +31,27 @@
     if (st.sm === "error") return "Something failed · " + (st.note || "try again");
     return "Ready · " + (st.providerName || "");
   }
-  function presetChips(presets, current) {
+  /* presetChips renders the app's own themed chips (pn-chip, .on when current) inside
+     the PrepNucleus home so text stays AA in light AND dark; pass "pn-sound-chip" for
+     the body-level dark sheet, which lives outside .pn-root where pn-chip has no rules.
+     (Root cause rs-sound-ui#1: .pn-root button { color: inherit } beats the unscoped
+     .pn-sound-btn/.pn-sound-chip, so the home controls inherited dark-navy ink on the
+     dark fill in the light theme.) */
+  function presetChips(presets, current, cls) {
+    var chip = cls || "pn-sound-chip";
     return '<div class="pn-sound-chips" role="group" aria-label="Focus presets">' + presets.map(function (p) {
       var on = current === p.id;
-      return '<button type="button" class="pn-sound-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="s-preset" data-v="' + esc(p.id) + '">' + esc(p.title) + "</button>";
+      return '<button type="button" class="' + chip + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="s-preset" data-v="' + esc(p.id) + '">' + esc(p.title) + "</button>";
     }).join("") + "</div>";
   }
   function homeSectionHtml(o) {
     var inner;
     if (!o.prefsEnabled) {
       inner = '<p class="pn-sound-status">' + esc(statusText({ prefsEnabled: false })) + ' Optional focus ambience. Nothing plays until you tap.</p>' +
-        '<button type="button" class="pn-sound-btn" data-act="s-enable">Enable Sound</button>';
+        '<button type="button" class="pn-btn pri" data-act="s-enable">Enable Sound</button>';
     } else {
-      inner = '<p class="pn-sound-status" role="status">' + esc(statusText(o)) + "</p>" + presetChips(o.presets, o.preset) +
-        '<div class="pn-sound-homerow"><button type="button" class="pn-sound-btn" data-act="s-open">Providers and settings</button>' +
+      inner = '<p class="pn-sound-status" role="status">' + esc(statusText(o)) + "</p>" + presetChips(o.presets, o.preset, "pn-chip") +
+        '<div class="pn-sound-homerow"><button type="button" class="pn-btn" data-act="s-open">Providers and settings</button>' +
         '<button type="button" class="pn-sound-link" data-act="s-disable">Turn off</button></div>';
     }
     return '<h2 class="pn-h">Sound</h2><div class="pn-group pn-sound-home">' + inner + "</div>";
@@ -51,15 +59,15 @@
   function dockHtml(o) {
     var c = o.controls;
     var btn = "";
-    if (c.play) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-play" aria-label="Play">▶</button>';
-    if (c.pause) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-pause" aria-label="Pause">⏸</button>';
+    if (c.play) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-play" aria-label="Play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>';
+    if (c.pause) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-pause" aria-label="Pause"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg></button>';
     var label = o.providerKind === "embedded"
       ? (o.trackTitle || "Ambience") + " · PrepNucleus"
       : "In " + (o.providerName || "music app") + " · external";
     return '<div class="pn-sound-dock" role="region" aria-label="Sound">' +
       btn +
       '<button type="button" class="pn-sound-dlabel" data-act="s-open" aria-label="Open Sound settings"><b>' + esc(label) + "</b><small>" + esc(o.hint || "Tap for providers") + "</small></button>" +
-      (c.stop ? '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop">⏹</button>' : "") +
+      (c.stop ? '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>' : "") +
       "</div>";
   }
   function providerRows(providers) {
@@ -74,10 +82,10 @@
     var C = CORE();
     var ext = o.provider && o.provider.kind !== "embedded";
     var ctl = '<div class="pn-sound-ctl">';
-    if (o.controls.play) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-play" aria-label="Play">▶</button>';
-    if (o.controls.pause) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-pause" aria-label="Pause">⏸</button>';
+    if (o.controls.play) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-play" aria-label="Play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>';
+    if (o.controls.pause) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-pause" aria-label="Pause"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg></button>';
     ctl += '<span class="pn-sound-now"><b>' + esc(o.trackTitle || o.providerName || "Sound") + "</b><small>" + esc(ext ? "External playback — use the music app for controls" : statusText(o)) + "</small></span>";
-    if (o.controls.stop) ctl += '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop">⏹</button>';
+    if (o.controls.stop) ctl += '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>';
     ctl += "</div>";
     var vol = o.controls.volume
       ? '<label class="pn-sound-vol">Volume <input type="range" min="0" max="100" value="' + Math.round(o.volume * 100) + '" data-svol="1" aria-label="Volume"></label>' : "";
@@ -88,14 +96,21 @@
     var prefs = '<div class="pn-sound-prefs">' +
       '<button type="button" class="pn-sound-toggle" aria-pressed="' + !!o.prefs.pauseBeforeVideo + '" data-act="s-pref" data-v="pauseBeforeVideo"><i aria-hidden="true"></i>Pause before videos</button>' +
       '<button type="button" class="pn-sound-toggle" aria-pressed="' + !!o.prefs.backgroundPlayback + '" data-act="s-pref" data-v="backgroundPlayback"><i aria-hidden="true"></i>Keep playing in background</button></div>';
+    /* The shared Now Playing card (prep-sound-player.js) leads the sheet when
+       present: ambience gets play/pause + volume with a generated tile;
+       external providers get the honest "Playing in <app>" card. o.playerHtml /
+       o.externalHtml are pre-rendered by state() (browser only); without them
+       the original control row renders, so older builds never break. */
+    var lead = o.playerHtml || o.externalHtml || (ctl + vol);
     return '<button type="button" class="pn-sound-scrim" data-act="s-close" aria-label="Close Sound"></button>' +
       '<div class="pn-sound-sheet" role="dialog" aria-modal="true" aria-label="Sound">' +
       '<div class="pn-sound-sheeth"><h2>Sound</h2><button type="button" class="pn-sound-dbtn" data-act="s-close" aria-label="Close">✕</button></div>' +
-      ctl + vol +
+      lead +
       '<h3>Providers</h3><ul class="pn-sound-provs">' + providerRows(o.providers) + "</ul>" +
       '<h3>Focus presets <small>original ambience, made on this device</small></h3>' + presetChips(o.presets, o.preset) +
       share + prefs +
-      '<button type="button" class="pn-sound-link" data-act="s-disconnect">Stop and disconnect</button>' +
+      '<div class="pn-sound-homerow"><button type="button" class="pn-sound-link" data-act="s-disable">Turn off</button>' +
+      '<button type="button" class="pn-sound-link" data-act="s-disconnect">Stop and disconnect</button></div>' +
       "</div>";
   }
 
@@ -118,6 +133,11 @@
   var S = { prefs: loadPrefs(), sm: "idle", provider: "first_party", preset: "deep_focus", track: null, note: "", sheet: false, shareMsg: "", volume: 0.8 };
   if (S.prefs.preferredProvider && S.prefs.preferredProvider !== "first_party") S.provider = "first_party"; // external sessions never survive a restart
   S.preset = S.prefs.preferredPreset || "deep_focus";
+  /* Root cause rs-sound-ui#4b: "idle" exposes no Play control and the machine rejects
+     PLAY there, so the sheet after s-open could never start audio. Enabling Sound
+     selects the first-party provider, which lands on "ready" — still silent until an
+     explicit tap (PLAY is the only path to sound). */
+  if (S.prefs.enabled) S.sm = "ready";
   var dockEl = null, sheetEl = null;
 
   function provider() { return C.providerById(S.provider) || C.providerById("first_party"); }
@@ -147,9 +167,24 @@
     try { G.open(r.url, "_blank", "noopener"); } catch (e) { S.sm = "error"; S.note = "Could not open the link."; }
   }
   function state() {
-    return { prefsEnabled: S.prefs.enabled, sm: S.sm, note: S.note, preset: S.preset, presets: C.PRESETS,
+    var st = { prefsEnabled: S.prefs.enabled, sm: S.sm, note: S.note, preset: S.preset, presets: C.PRESETS,
       provider: provider(), providerName: provider().name, providerKind: provider().kind, trackTitle: trackTitle(),
       controls: controls(), volume: S.volume, prefs: S.prefs, providers: C.PROVIDERS.filter(function (p) { return p.kind !== "reserved" || PROV().getAdapter("spotify_remote"); }), shareMsg: S.shareMsg };
+    var PL = PLAYER();
+    if (PL && PL._pure) {
+      var pr = provider();
+      if (pr.kind === "embedded") {
+        var preset = C.presetById(S.preset);
+        var model = PL.ambienceModel({ title: trackTitle() || (preset ? preset.title : "Ambience"), presetId: S.preset,
+          isPlaying: S.sm === "playing_embedded", volume01: S.volume, positionMs: 0 });
+        st.playerHtml = PL.render(model, PL.ambienceCaps(), { volumeDataAttr: 'data-svol="1"',
+          acts: { toggle: S.sm === "playing_embedded" ? "s-pause" : "s-play" } });
+      } else if (pr.kind === "external") {
+        var ios = /iphone|ipad|ipod/i.test((G.navigator && G.navigator.userAgent) || "");
+        st.externalHtml = PL.externalHtml(pr.id, pr.name, { platform: ios ? "ios" : "other", openAct: "s-home", openV: pr.id });
+      }
+    }
+    return st;
   }
 
   /* ---------- dock + sheet (body-level: prep.js paint() repaints root) ---------- */
@@ -225,7 +260,8 @@
   function onAct(a, b) {
     var v = b && b.getAttribute ? b.getAttribute("data-v") : null;
     switch (a) {
-      case "s-enable": S.prefs.enabled = true; S.sm = "idle"; savePrefs(); render(); return;
+      case "s-enable": S.prefs.enabled = true; S.provider = "first_party"; S.note = ""; S.shareMsg = "";
+        applyMachine({ t: "ENABLE" }); applyMachine({ t: "SELECT_PROVIDER", provider: "first_party" }); return;
       case "s-disable": S.prefs.enabled = false; applyMachine({ t: "STOP" }); S.sheet = false; render(); return;
       case "s-open": S.sheet = true; S.shareMsg = ""; render(); return;
       case "s-close": S.sheet = false; S.shareMsg = ""; S.wantFocus = true; render(); return;

@@ -75,6 +75,8 @@ test("cadence: 3:1 sequence, retrieval after lesson, finite; 2:1 and 5:1 config"
   assert.equal(feed[3].id, "l1");
   assert.equal(feed[4]._retrievalFor, "l1", "question after a lesson is its retrieval check");
   assert.equal(D.cadenceN("2:1"), 2); assert.equal(D.cadenceN("5:1"), 5); assert.equal(D.cadenceN("bogus"), 3);
+  assert.equal(D.cadenceN("2"), 2); assert.equal(D.cadenceN("3"), 3); assert.equal(D.cadenceN("5"), 5);
+  assert.equal(D.resolveCadence("2"), "2:1"); assert.equal(D.resolveCadence("5"), "5:1"); assert.equal(D.resolveCadence(null), "3:1");
   assert.deepEqual(D.dedupe([qs[0], qs[0], qs[1]]).map((c) => c.id), ["q1", "q2"], "duplicate prevention, stable ids");
 });
 
@@ -144,5 +146,79 @@ test("wiring: loader fetches PrepReels only when on; prep.js hooks stay guarded;
   const ui = read("prep-medigram.js");
   assert.match(ui, /Finish session/);
   assert.match(ui, /I don't understand|I don\\'t understand/);
+  assert.doesNotMatch(ui, /data-act="mg-cadence"/);
+  assert.doesNotMatch(ui, /aria-label="Cadence"/);
+  assert.match(ui, /host\.row\("mg-open", icon, "PrepReels", "Short study feed · finish anytime"\)/);
+  assert.match(ui, /class="pn-ri"/);
+  assert.match(ui, /class="pn-rb"/);
+  assert.match(ui, /ico\("play"\)/);
   assert.doesNotMatch(ui, /api\.youtube\.com|googleapis|fetch\(/, "no paid or YouTube API call in the feed");
+});
+
+test("home row: matches sibling rows with leading icon tile and trailing chevron", () => {
+  const mockG = {
+    PREP_MG_DATA: D,
+    PREP_MG_MEDIA: M,
+    localStorage: { getItem: () => null, setItem: () => {} },
+    location: { search: "?medigram=1" }
+  };
+  const code = read("prep-medigram.js");
+  new Function("window", code)(mockG);
+  const mg = mockG.PREP_MEDIGRAM;
+  assert.ok(mg, "PREP_MEDIGRAM registered");
+
+  const mockHost = {
+    row: (act, icon, title, sub, attrs) => `<button type="button" class="pn-row" data-act="${act}"${attrs || ""}><span class="pn-ri" aria-hidden="true">${icon}</span><span class="pn-rb"><b>${title}</b><small>${sub}</small></span><chev/></button>`,
+    ico: (n) => `<ico-${n}/>`,
+    esc: (s) => s
+  };
+
+  const html = mg.homeHtml(mockHost);
+  assert.match(html, /class="pn-row"/);
+  assert.match(html, /data-act="mg-open"/);
+  assert.match(html, /class="pn-ri"[^>]*><ico-play\/>/);
+  assert.match(html, /class="pn-rb"[^>]*><b>PrepReels<\/b><small>Short study feed · finish anytime<\/small><\/span>/);
+  assert.match(html, /<chev\/>/);
+
+  // Standalone fallback without host also provides pn-ri, pn-rb, play icon and chevron
+  const fallbackHtml = mg.homeHtml({});
+  assert.match(fallbackHtml, /class="pn-row"/);
+  assert.match(fallbackHtml, /data-act="mg-open"/);
+  assert.match(fallbackHtml, /class="pn-ri"/);
+  assert.match(fallbackHtml, /d="M7 5l12 7-12 7z"/, "play icon path");
+  assert.match(fallbackHtml, /d="M9 6l6 6-6 6"/, "chevron icon path");
+});
+
+test("cadence arm: set internally via localStorage or setCadence, no learner chip in UI", () => {
+  let stored = {};
+  const mockG = {
+    PREP_MG_DATA: D,
+    PREP_MG_MEDIA: M,
+    localStorage: {
+      getItem: (k) => stored[k] ?? null,
+      setItem: (k, v) => { stored[k] = String(v); }
+    },
+    location: { search: "?medigram=1" }
+  };
+  const code = read("prep-medigram.js");
+  new Function("window", code)(mockG);
+  const mg = mockG.PREP_MEDIGRAM;
+
+  // Default cadence is 3:1
+  assert.equal(D.resolveCadence(null), "3:1");
+
+  // Arm set to "2" via localStorage
+  stored["smd_prep_medigram_cadence"] = "2";
+  assert.equal(D.resolveCadence(mockG.localStorage.getItem("smd_prep_medigram_cadence")), "2:1");
+  assert.equal(D.cadenceN(mockG.localStorage.getItem("smd_prep_medigram_cadence")), 2);
+
+  // Arm set to "5" via localStorage
+  stored["smd_prep_medigram_cadence"] = "5";
+  assert.equal(D.resolveCadence(mockG.localStorage.getItem("smd_prep_medigram_cadence")), "5:1");
+  assert.equal(D.cadenceN(mockG.localStorage.getItem("smd_prep_medigram_cadence")), 5);
+
+  // Arm set via setCadence API
+  assert.equal(mg.setCadence("2"), "2:1");
+  assert.equal(stored["smd_prep_medigram_cadence"], "2");
+  assert.equal(D.cadenceN(stored["smd_prep_medigram_cadence"]), 2);
 });

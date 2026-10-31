@@ -1,0 +1,17 @@
+{
+  "name": "@stewardmd/capacitor-prep-sound",
+  "version": "1.0.0",
+  "description": "PrepNucleus Sound native bridge (Android only). Foreground media-playback service with platform MediaSession/MediaPlayer for first-party ambient loops, plus Keystore AES-GCM secure storage for the Spotify refresh token. Exposed to JS as Capacitor.Plugins.PrepSound. iOS is intentionally unsupported: the web player is used there.",
+  "capacitor": {
+    "android": {
+      "src": "android"
+    }
+  },
+  "files": [
+    "android/src/main",
+    "android/build.gradle",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}

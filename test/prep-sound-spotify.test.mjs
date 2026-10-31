@@ -182,6 +182,77 @@ test("gate: loader lists the module as optional; prep.js forwards sp- acts only"
   assert.match(read("prep.js"), /a\.indexOf\("sp-"\) === 0 && G\.PREP_SOUND_SPOTIFY/);
   const src = read("prep-sound-spotify.js");
   assert.match(src, /smd_prep_sound_spotify/);
-  assert.match(src, /if \(!prepOn\(\) \|\| !flagOn\("smd_prep_sound"/, "inert unless every flag + client id is present");
+  // Owner 2026-10-31: Spotify is ON by default (explicit "0" turns it off) and still inert without PrepNucleus or a client id.
+  assert.match(src, /if \(!prepOn\(\) \|\| !flagOn\("smd_prep_sound_spotify", "spotify", true\) \|\| !CID\) return;/, "on by default, inert without prep or client id");
   assert.match(read("_headers"), /https:\/\/api\.spotify\.com https:\/\/accounts\.spotify\.com/);
+});
+
+test("secure storage (native Android): refresh token persisted on exchange, restored on cold start, cleared on disconnect", async () => {
+  const saved = new Map();
+  const secureStore = {
+    setSecret: async (k, v) => { saved.set(k, v); return { ok: true }; },
+    getSecret: async (k) => (saved.has(k) ? saved.get(k) : null),
+    removeSecret: async (k) => { saved.delete(k); return { ok: true }; },
+  };
+  const withSecure = (fetch, now) => ({ fetch, now: now || (() => 1_000_000), clientId: "cid-test", redirectUri: "https://app.test/prep", secureStore });
+
+  // Exchange persists only the refresh token, under the one namespaced key.
+  const fetch1 = mockFetch([resp(200, { access_token: "a1", refresh_token: "r1", expires_in: 3600 })]);
+  const c1 = P.makeClient(withSecure(fetch1));
+  await c1.exchange("code-1", "verifier-1");
+  assert.equal(saved.get(P.REFRESH_SECRET_KEY), "r1");
+  assert.deepEqual([...saved.keys()], [P.REFRESH_SECRET_KEY], "access token is never persisted");
+
+  // Cold start: a fresh client restores by refreshing the persisted token.
+  const fetch2 = mockFetch([resp(200, { access_token: "a2", refresh_token: "r2", expires_in: 3600 })]);
+  const c2 = P.makeClient(withSecure(fetch2));
+  assert.equal(c2.store.has(), false);
+  assert.equal(await c2.restoreSession(), true);
+  assert.equal(c2.store.access(), "a2");
+  assert.ok(fetch2.calls[0].opts.body.includes("grant_type=refresh_token"));
+  assert.equal(saved.get(P.REFRESH_SECRET_KEY), "r2", "rotated refresh token replaces the old one");
+
+  // Disconnect clears both memory and secure storage.
+  c2.disconnect();
+  await new Promise((r) => setImmediate(r));
+  assert.equal(c2.store.has(), false);
+  assert.equal(saved.has(P.REFRESH_SECRET_KEY), false);
+});
+
+test("secure storage: dead refresh token on restore clears the persisted copy and rejects", async () => {
+  const saved = new Map([[P.REFRESH_SECRET_KEY, "dead-refresh"]]);
+  const secureStore = {
+    setSecret: async (k, v) => { saved.set(k, v); return { ok: true }; },
+    getSecret: async (k) => (saved.has(k) ? saved.get(k) : null),
+    removeSecret: async (k) => { saved.delete(k); return { ok: true }; },
+  };
+  const fetch = mockFetch([resp(400, {})]);
+  const c = P.makeClient({ fetch, now: () => 1_000_000, clientId: "cid-test", redirectUri: "https://app.test/prep", secureStore });
+  await assert.rejects(c.restoreSession(), (e) => e.reason === "auth_expired");
+  assert.equal(c.store.has(), false);
+  assert.equal(saved.has(P.REFRESH_SECRET_KEY), false, "dead token is not kept for the next cold start");
+});
+
+test("secure storage: no secureStore (web/iOS) keeps the old memory-only behaviour", async () => {
+  const fetch = mockFetch([resp(200, { access_token: "a1", refresh_token: "r1", expires_in: 3600 })]);
+  const c = P.makeClient(deps(fetch));
+  await c.exchange("code-1", "verifier-1");
+  assert.equal(await c.restoreSession(), false, "nothing to restore without secure storage");
+  c.disconnect();
+  assert.equal(c.store.has(), false);
+});
+
+test("secure storage: plugin wrapper shape and source contract (no logging, Android-only gate)", () => {
+  assert.equal(P.makePluginSecureStore(null), null);
+  assert.equal(P.makePluginSecureStore({ setSecret: async () => {} }), null, "all three methods are required");
+  const store = P.makePluginSecureStore({
+    setSecret: async (a) => ({ ok: true, echo: a }),
+    getSecret: async () => ({ value: 42 }),
+    removeSecret: async () => ({ ok: true }),
+  });
+  assert.ok(store);
+  const src = read("prep-sound-spotify.js");
+  assert.match(src, /getPlatform\(\) !== "android"/, "secure storage is gated to native Android");
+  assert.match(src, /restoreSession\(\)/, "cold-start restore is wired");
+  assert.ok(!/console\.(log|info|warn|error)\([^)]*(refresh|access|token)/i.test(src), "tokens are never logged");
 });
