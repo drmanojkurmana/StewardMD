@@ -12078,3 +12078,14 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   fetches that later repainted the live screen (it surfaced as onco-ui.test.mjs leaking async work). The two
   long-red unit checks are fixed: the assessTab test opens the box (regimens live there since the protocol-box
   redesign) and opd-profile-sheet accepts later queue.css bumps (q13 -> q14) that keep the profilescroll marker.
+- 2026-10-31 No coloured side or top stripes on any onco card (owner: "remove this vibe coded line"). Removed at the
+  source rules in oncotree.css, onco-home.css and protocol-sheet.css: map sheet, regimen cards, navigator step cards
+  (were blue/green top bars), completed/outcome cards, cycle-day cards, CTCAE grade rows, RECIST result, evidence
+  layers/divergence, protocol-sheet toxicity note. Clinical state now reads from a tinted grade chip (CTCAE), heading
+  colour + tinted surface (RECIST, evidence). ONCQIS wordmark is solid logo teal (#0e5466 / #8fd3dc), not gradient
+  text; the OncoTree header title lost its gradient too. Impeccable detector is clean on all three files except the
+  printed sheet's Inter font.
+- 2026-10-31 OncoTree Overview map: opens on "Your path" (walked steps in one readable column, the options open from
+  the current step under it, a link to the rest) instead of fitting all 53 nodes at 16% zoom. "Full map" shows the
+  whole graph at a readable 72% zoom centred on the current step; zoom/fit stay there. Contents panel starts closed;
+  a tapped node opens a scrolling bottom sheet with nothing laid over its title.
