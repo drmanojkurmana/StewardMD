@@ -1421,12 +1421,14 @@
     else if (!live || live.d === 0) y = st.pk && st.pk.key === key ? oldY : 0;
     // A screen restored by back that first paints a short loading state: its next paint still goes to the kept place.
     if (st.want && st.want.key === key && Date.now() - st.want.t < 2000 && (!live || live.d === 0)) y = Math.max(y, st.want.y);
-    var ghost = null;
-    if (old && live && live.d !== 0 && !st.navKey) {
+    var ghost = null, SMM0 = G.SMD_MOTION && G.SMD_MOTION.on() ? G.SMD_MOTION : null;
+    // A tab or segment (nav 0) tapped to the right or left of the current one pages sideways (Motion 3).
+    var pg = old && live && live.d === 0 && !st.navKey && SMM0 && SMM0.tabDir ? SMM0.tabDir() : 0;
+    if (old && live && (live.d !== 0 || pg) && !st.navKey) {
       // Outside the overlay (so the new screen's text, ids and queries are the only ones in #smdPrep), fixed over the
       // body's place, in the overlay's styles. Sizes in CSS px: the app may zoom html (text size), so divide by it.
       var ob = old.getBoundingClientRect(), z = (old.offsetWidth ? ob.width / old.offsetWidth : 1) || 1;
-      ghost = D.createElement("div"); ghost.className = "pn-root pn-ghost"; ghost.setAttribute("aria-hidden", "true"); ghost.inert = true;
+      ghost = D.createElement("div"); ghost.className = "pn-root pn-ghost"; ghost.setAttribute("aria-hidden", "true"); ghost.setAttribute("data-no-motion", ""); ghost.inert = true;
       ghost.style.cssText = "left:" + (ob.left / z) + "px;top:" + (ob.top / z) + "px;width:" + (ob.width / z) + "px;height:" + (ob.height / z) + "px";
       old.parentNode.removeChild(old);
       Array.prototype.forEach.call(old.querySelectorAll("[id]"), function (n) { n.removeAttribute("id"); });
@@ -1452,13 +1454,13 @@
       var gx = live.d > 0 ? -18 : 18, ga = null, SMM = G.SMD_MOTION && G.SMD_MOTION.on() ? G.SMD_MOTION : null;
       // Motion 3 (smd-motion.js): the leaving screen drifts a third of the way and fades under a push; on a pop it
       // slides off to the right over the screen coming back, with a soft edge shadow (iOS).
-      if (SMM) { if (live.d < 0) ghost.style.background = "var(--pn-bg)"; ga = SMM.push(null, ghost, live.d)[0]; }
+      if (SMM) { ghost.style.background = "var(--pn-bg)"; ga = pg ? SMM.page(null, ghost, pg)[0] : SMM.push(null, ghost, live.d)[0]; }
       else try { ga = ghost.animate([{ opacity: 1, transform: "translateX(0px)" }, { opacity: 0, transform: "translateX(" + (reducedMo() ? 0 : gx) + "px)" }], { duration: reducedMo() ? 140 : 200, easing: "cubic-bezier(.23, 1, .32, 1)", fill: "forwards" }); } catch (e) {}
       var drop = function () { if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost = null; };
       if (ga) ga.onfinish = drop;
       G.setTimeout(drop, SMM ? 900 : 450);
     }
-    if (live && G.PREP_MOTION && G.PREP_MOTION.nav) { try { G.PREP_MOTION.nav(root, live.d); } catch (e) {} }
+    if (live && G.PREP_MOTION && G.PREP_MOTION.nav) { try { G.PREP_MOTION.nav(root, live.d, pg); } catch (e) {} }
     // A patched screen keeps the focus where it was (the control just pressed is the same node).
     var f = focusSel ? root.querySelector(focusSel) : inPlace && keep && keep !== D.body && root.contains(keep) ? null : root.querySelector(".pn-bar .pn-ib");
     try { if (f) f.focus({ preventScroll: true }); } catch (e) {}

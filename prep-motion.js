@@ -141,16 +141,24 @@
   function balloons() {}
   // Screen to screen (round 4). prep.js marks a push (1), a pop (-1) or a tab (0) and calls this right after the paint.
   // Push and pop: the shared axis, the new body arriving 28 px from the side the student is heading to while it fades
-  // in (240 ms, strong ease-out); the title and tabs travel 12 px. A tab or filter: the body cross-fades (180 ms).
+  // in (240 ms, strong ease-out); the title and tabs travel 12 px. A tab or filter: the body cross-fades (180 ms); under Motion 3 it pages sideways or slides up instead.
   // Reduced motion: every case is a 160 ms cross-fade, no travel. WAAPI only (compositor), so it needs no Motion build.
   // The first paint after the overlay opens is not animated: the overlay itself just arrived.
   // A patched screen keeps its body node (prep.js paint): a transition still running on it from the last navigation is
   // ended first, so the new one starts from the settled state instead of stacking on it.
   function wa(el, kf, o) { try { if (el.getAnimations) el.getAnimations().forEach(function (a) { if (a.id === "pn-nav") a.cancel(); }); var a = el.animate(kf, o); a.id = "pn-nav"; return a; } catch (e) { return null; } }
-  function nav(r, d) {
+  function nav(r, d, pg) {
     if (!r || r !== root || Date.now() - attachedAt < 450) return;
     var pick = function (s) { return Array.prototype.slice.call(r.querySelectorAll(s)); };
     var body = pick(":scope > .pn-body, :scope > .pn-qprog, :scope > .pn-load"), head = pick(":scope > .pn-bar > .pn-t, :scope > .pn-tabs, :scope > .pn-filters, :scope > .pn-lsn-prog");
+    var SM3 = G.SMD_MOTION && G.SMD_MOTION.on() ? G.SMD_MOTION : null;
+    // Motion 3, a tab (owner 2026-10-31, no cross-fades): pages sideways from the tapped tab's side (prep.js moves the
+    // old content out the other way); with no side to come from (a filter, the exam picker) it slides up into place.
+    if (d === 0 && SM3) {
+      body.forEach(function (el) { if (el.getAnimations) el.getAnimations().forEach(function (a) { if (a.id === "pn-nav") a.cancel(); }); });
+      if (pg) SM3.page(body, null, pg); else SM3.nudgeUp(body);
+      return;
+    }
     if (d === 0 || reduced()) {
       (d === 0 ? body : body.concat(head)).forEach(function (el) { wa(el, [{ opacity: 0 }, { opacity: 1 }], { duration: reduced() ? 160 : 180, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
       return;
@@ -158,11 +166,11 @@
     var x = d > 0 ? 1 : -1;
     if (d > 0) navAt = Date.now();
     // Motion 3 (smd-motion.js): the body comes in from the edge on the push spring (prep.js moves the leaving one).
-    var SMM = G.SMD_MOTION && G.SMD_MOTION.on() ? G.SMD_MOTION : null;
+    var SMM = SM3;
     if (SMM) {
       body.forEach(function (el) { if (el.getAnimations) el.getAnimations().forEach(function (a) { if (a.id === "pn-nav") a.cancel(); }); });
       SMM.push(body, null, d);
-      head.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 24 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 260, easing: SMM.ease("push").easing }); });
+      head.forEach(function (el) { wa(el, [{ transform: "translateX(" + Math.round(G.innerWidth * 0.4) * x + "px)" }, { transform: "translateX(0px)" }], { duration: SMM.ease("push").duration, easing: SMM.ease("push").easing }); });
       return;
     }
     body.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 28 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 240, easing: "cubic-bezier(.23, 1, .32, 1)" }); });

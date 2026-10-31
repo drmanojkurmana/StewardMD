@@ -227,9 +227,17 @@ try {
   // ---- back to home: bookmark count, exam tab
   await ev(`PREP.back(); return 1;`);
   ok(await until(`return !!document.querySelector("#smdPrep #pnHome");`, 5000), "back() unwinds to home");
-  // Round 4: a tab cross-fades (opacity, no travel); Escape goes back with no animation; reduced motion is a fade.
+  // Round 4 (Motion 3, 2026-10-31): a tab pages sideways, no cross-fade; Escape goes back with no animation; reduced motion is a fade.
   const navTab = JSON.parse(await ev(`PREP._host.setExam(PREP._host.exam().id); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
-  ok(navTab.n === 1 && !navTab.from && String(navTab.op) === "0", "an exam tab cross-fades the body: " + JSON.stringify(navTab));
+  ok(navTab.n === 1 && navTab.from === "translateY(22px)" && navTab.op == null, "an exam change with no tab tapped slides the body up, no cross-fade: " + JSON.stringify(navTab));
+  // A tab tapped right of the current one pages sideways: the body in from the right edge, the old one out left.
+  await ev(`var H=PREP._host; window.__tb=1; H.push(function pnTabT(){ H.paint(H.bar("Tabs","","back")+'<div class="pn-tabs" role="tablist" aria-label="T"><button type="button" role="tab" class="pn-tab'+(__tb===1?" on":"")+'" aria-selected="'+(__tb===1)+'">One</button><button type="button" role="tab" class="pn-tab'+(__tb===2?" on":"")+'" aria-selected="'+(__tb===2)+'">Two</button></div><div class="pn-body"><p>Tab '+__tb+'</p></div>'); }); return 1;`);
+  await sleep(700);
+  await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); return 1;`);
+  const tabPg = JSON.parse(await ev(`var tabs=[].slice.call(document.querySelectorAll("#smdPrep .pn-tabs > *")), cur=tabs.findIndex(function(t){return t.classList.contains("on")||t.getAttribute("aria-selected")==="true";}), nx=tabs[cur+1]||null; if(!nx) return JSON.stringify({skip:tabs.length,cur:cur}); nx.dispatchEvent(new PointerEvent("pointerdown",{bubbles:true})); window.__tb=2; PREP._host.nav(0); PREP._host.rerender(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; var g=document.querySelector("body > .pn-ghost"), gk=g&&g.getAnimations()[0]?g.getAnimations()[0].effect.getKeyframes():[]; return JSON.stringify({from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null, g:gk.length?gk[gk.length-1].transform:""});`));
+  if (tabPg.skip == null) ok(tabPg.from === "translateX(390px)" && tabPg.op == null && tabPg.g === "translateX(-390px)", "a tab to the right pages the body in from the right and the old one out left: " + JSON.stringify(tabPg));
+  else ok(false, "the test screen has a second tab: " + JSON.stringify(tabPg));
+  await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); PREP.back(); return 1;`); await sleep(500);
   await sleep(300); await click("#smdPrep [data-act=bookmarks]"); await until(`return /Bookmarks/.test(document.querySelector("#smdPrep .pn-t h1").textContent);`, 3000); await sleep(300);
   const navKey = JSON.parse(await ev(`document.getElementById("smdPrep").dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",bubbles:true})); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
   ok(navKey.n === 0 && await ev(`return !!document.querySelector("#smdPrep #pnHome");`) === true, "Escape goes back with no animation: " + JSON.stringify(navKey));
