@@ -58,15 +58,15 @@
   function dockHtml(o) {
     var c = o.controls;
     var btn = "";
-    if (c.play) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-play" aria-label="Play">▶</button>';
-    if (c.pause) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-pause" aria-label="Pause">⏸</button>';
+    if (c.play) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-play" aria-label="Play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>';
+    if (c.pause) btn += '<button type="button" class="pn-sound-dbtn" data-act="s-pause" aria-label="Pause"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg></button>';
     var label = o.providerKind === "embedded"
       ? (o.trackTitle || "Ambience") + " · PrepNucleus"
       : "In " + (o.providerName || "music app") + " · external";
     return '<div class="pn-sound-dock" role="region" aria-label="Sound">' +
       btn +
       '<button type="button" class="pn-sound-dlabel" data-act="s-open" aria-label="Open Sound settings"><b>' + esc(label) + "</b><small>" + esc(o.hint || "Tap for providers") + "</small></button>" +
-      (c.stop ? '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop">⏹</button>' : "") +
+      (c.stop ? '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>' : "") +
       "</div>";
   }
   function providerRows(providers) {
@@ -81,10 +81,10 @@
     var C = CORE();
     var ext = o.provider && o.provider.kind !== "embedded";
     var ctl = '<div class="pn-sound-ctl">';
-    if (o.controls.play) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-play" aria-label="Play">▶</button>';
-    if (o.controls.pause) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-pause" aria-label="Pause">⏸</button>';
+    if (o.controls.play) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-play" aria-label="Play"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>';
+    if (o.controls.pause) ctl += '<button type="button" class="pn-sound-dbtn lg" data-act="s-pause" aria-label="Pause"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx="1"/><rect x="13.5" y="5" width="4" height="14" rx="1"/></svg></button>';
     ctl += '<span class="pn-sound-now"><b>' + esc(o.trackTitle || o.providerName || "Sound") + "</b><small>" + esc(ext ? "External playback — use the music app for controls" : statusText(o)) + "</small></span>";
-    if (o.controls.stop) ctl += '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop">⏹</button>';
+    if (o.controls.stop) ctl += '<button type="button" class="pn-sound-dbtn" data-act="s-stop" aria-label="Stop"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg></button>';
     ctl += "</div>";
     var vol = o.controls.volume
       ? '<label class="pn-sound-vol">Volume <input type="range" min="0" max="100" value="' + Math.round(o.volume * 100) + '" data-svol="1" aria-label="Volume"></label>' : "";
