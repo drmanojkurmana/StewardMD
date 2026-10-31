@@ -5,6 +5,69 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-30 · PrepNucleus Play: Gen Z features, honest by rule (owner: "build all")
+
+**Decision.** Twelve engagement features in one optional module (`prep-play.js`, flag `smd_prep_play` default on) plus
+server routes (`/api/prep/play`, squads in `/api/prep/social`): swipe feed, spot diagnosis of the day, boss battles,
+quick fire, voice mode, focus room, Wrapped, seasons, mnemonic lab, earned streak freezes, squads, revenge.
+**Why.** The owner wants PrepNucleus to feel new to students who live in short-form feeds and shared streaks.
+**Rules kept.** Every live count and board is real or empty ("every line true", 2026-10-06); freezes are earned, never
+sold; no countdown urgency; student mnemonics are labelled unchecked, reportable and hidden at 3 reports, links and
+phone numbers refused; names appear only for Arena players (consent), and leaving the Arena deletes play rows.
+**Trade-off.** More surface on home; the widget and watch quick-fire faces need native work (deep link
+`PREP.open({ play })` is ready). Seasons are computed from battles on each request (fine at current scale; a table if
+it grows). **Status.** Branch; needs migration 0007 and an app build.
+
+## 2026-10-30 · PrepNucleus: study tools, timetable, rank among students; no made-up peer numbers (owner)
+
+**Decision.** Owner asked for the features other QBanks have: a revision timetable the student builds, cross out options,
+a note on any question with a notebook, "% of users who chose each option", rank and percentile in tests, custom test
+filters and reset progress. Built as `prep-tools.js` (flag `smd_prep_tools`) and `prep-timetable.js` (flag `smd_prep_tt`),
+both default ON, `?tools=0` / `?tt=0` off. Rank reverses the 2026-10-10 Tests 2 line "never a rank or percentile": it is now
+shown as a rank among PrepNucleus students (never "all-India"), from an anonymous score histogram
+(`/api/prep/stats?rank=1`, `functions/_prep-rank.js`), and only once 20 attempts exist. **Peer percentages: the owner asked for fake numbers until users
+arrive; not done.** The bars come from real anonymous answers (`/api/prep/stats?pct=1`) and the server returns an item
+only after 30 answers, so they appear on their own as students answer and nothing invented is ever shown (same rule as
+"every line true", 2026-10-06 nudges). **Why.** Invented statistics shown as other students' answers would mislead
+clinicians in training about difficulty and distractors; the automatic switch-on gives the owner the same end state.
+**Trade-off.** Empty bars at launch; ranks on randomly drawn mocks compare different question sets (labelled "read it
+as a guide"; fixed papers compare like with like). Reset is refused while sync is on (sync keeps the card further along,
+so a reset would come back). Resets are limited to one in 3 months and 3 in 12 months (owner, same day). **Status.** On branch, not on the phone until build-www + native rebuild/OTA; D1 migration
+`prep-arena-worker/migrations/0006_prep_rank.sql` must be applied before rank works.
+
+## 2026-10-29 · ICU Overview layout C and no stripes or tints (owner: "is this not ai slop?", then "you select")
+
+**Decision.** Three Overview variants were rendered (A quiet list, B ranked list, C two panes on iPad); C is the default
+because it uses the iPad width and is A on a phone. ICU-wide: no coloured left stripes, no tinted alert or tile fills, no
+repeated category tags, section labels are headings, secondary actions are text, Specialty tools joins the FAB stack as
+an icon button (its pill covered "Add findings").
+**Why.** The alert cards encoded severity three times (stripe, tint, tag) and sat under three screens of tiles; that is
+antislop-ui's left-stripe ban and impeccable's card-scaffold and eyebrow bans.
+**Trade-off.** Layout change on the most-used ICU screen. `smd_icu_ov = "0"` restores the old Overview on a device.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild.
+
+## 2026-10-29 · ICU UI floor from the design skills (owner: "apply impeccable, ui-ux-pro-max, no-slop-ui, ui-styling, antislop-ui to ICU")
+
+**Decision.** Applied as refinement, not redesign: same layout, palette and copy. Fixed what the skills' rules measure:
+tap targets >= 44pt, no tracked-uppercase labels, no glyph icons, no gradient buttons, dark-mode teal split into text
+and fill tokens, 11px type floor, left-aligned legend, aligned header counts, honest "Sign in to get your ID".
+**Why.** Measured on all ICU screens at 375px, light and dark: 0 findings after, from ~180 before.
+**Trade-off.** Controls are a little taller (38-42 to 46px). `ui-styling` is shadcn/Tailwind/React and does not
+apply to this ES5 build; only its token and accessibility principles were used. Left as-is (identity changes, owner's
+call): the coloured card stripe, the Overview/Rounds sub-chips duplicating top tabs.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild.
+
+## 2026-10-28 · ICU Group/Solo switch works in place, no app restart (owner: "restarts whole app")
+
+**Decision.** The Settings → Group mode switch calls `grpSetMode(on)` in `icu.js`: it writes `smd_icu_groups`, tears
+down every shared-unit listener and timer (`grpStopAll`), reloads the unit's solo buffer onto the board, and on the way
+back re-runs `grpEnsureGroupsSub`. It used to `location.reload()`, which restarted the whole app (splash, home, every
+module) to flip one ICU setting. `icu-collab.js` now defaults group mode ON like `icu.js` (it said OFF, so a fresh
+install showed the group board over an inert API until the user toggled twice to write "1").
+**Trade-off.** None known; the device roster and solo buffers are untouched, as before.
+**Status.** Live in the repo; reaches the phone after build-www, cap sync and a native rebuild. Tests:
+`test/run-icu-grptoggle.mjs`, `test/run-icu-board-order.mjs`.
+
 ## 2026-10-16 · No page zoom above 1.0 on iPad (owner: "many modules go out of screen and are not operable")
 
 **Decision.** On a large touch screen (`bigTouchD`: touch points > 1, shorter screen side >= 600) the Display auto fit no
@@ -11882,3 +11945,116 @@ only until the next store or device build. Do not re-litigate.
 
 ## 2026-10-26 - EchoSuite Probe Lab inside Kardia as the Echo Lab default
 Owner confirmed with the author (Mohammed Kamareddine, MD, echosuite.app) that EchoSuite is free to reuse, and asked for it to be used directly. The local copy in `kardia/probelab/` is shown in the Kardia Echo Lab in a frame at `kardia/probelab/index.html`; the existing Kardia Scan Lab (SyncProbe, scoring, real clip library, Cine and Sim) stays behind a "Probe Lab / Scan Lab" switch at the top of the Echo Lab, default Probe Lab, remembered per device. EchoSuite site navigation that would leave the Probe Lab is hidden from the Kardia side, without editing the Probe Lab bundles; the EchoSuite logo and its About and sources sheet stay. Credit: "Probe Lab by Mohammed Kamareddine, MD, EchoSuite (echosuite.app), reused with the author's permission", plus EchoSuite's own credits from `kardia/probelab/assets/credits.json`, in the Kardia credits screen (Practice, Real patient credits). Do not re-litigate the reuse permission.
+
+## 2026-10-27 - Author names, contacts and permission statements removed from AngioLAB and Probe Lab; only resource attributions kept
+Owner asked to remove "Created by Annas Rahman · annasrahman.com" (AngioLAB) and Mohammed Kamareddine, MD (Probe Lab / Echo Lab), then also the author's contact details, and every statement: keep only the attributions for the resources actually used (the CC BY / CC BY-SA clips, figures and anatomy, the published references, and the MIT / OFL notices). Done: AngioLAB credits-sheet "Created by" line and the thank-you sentence; AngioLAB `privacy.html` Contact section and `support.html` contact email; Probe Lab About sheet name and the social and email icons, the "retain their listed rights" paragraph and image-caption sentence, JSON-LD creator; the Kardia credits screen no longer prints a Probe Lab / permission line, only the figures and videos lists from `credits.json` (`PROBE_LAB_CREDIT` removed). Kept deliberately: the clinical disclaimers ("AngioLAB is an educational simulation, not for clinical use"; "EchoSuite is an educational product, not a diagnostic medical device"), the BodyParts3D "derived, re-meshed" modification note CC BY requires, and the font / Three.js licence links. The 2026-10-26 reuse permission above is unchanged. AngioLAB's privacy page now has no contact line; add one back if the stores ask for it.
+
+
+## 2026-10-27: Narkē is shown as Anesthetica
+Owner: "Rename narke to Anesthetica (both in posters and inside app)". Display strings only (EN + HI);
+every identifier stays `narke` so flags, routes, stored progress (`storeKey`) and the Review Desk ledger keep working.
+Same pattern as SURGX (brand in strings, ASCII id in code).
+
+## 2026-10-27: Foldables (Galaxy Z Fold / Pixel Fold class) are audited like iPads
+Owner: "make our app layouts support duo too". `DEVICES=fold node test/run-ipad-fit.mjs` runs every Home action at the
+cover screen (344 x 882), inner portrait (712 x 840), inner landscape (841 x 701) and a spanned width (1114 x 720).
+- Android keeps the activity across fold/unfold (`configChanges` already has screenSize, smallestScreenSize,
+  screenLayout), and auto fit re-zooms on the width change, so no state is lost.
+- targetSdk 36: Android 16 ignores `screenOrientation="portrait"` on large screens (sw >= 600dp), so an unfolded
+  phone runs the app in landscape. Every module must work landscape; the audit covers it.
+- First run: every tool fit except the Drugs A-Z strip, faded but 6 px off-screen at inner widths; fixed
+  (`az-scrubber.js`: visibility hidden after the fade). AngioLAB's 3D tool strip was a fixed 36 px while its
+  buttons wrapped to two rows (iPad, inner landscape); `kardia/angiolab/kardia-embed.js` lets it grow.
+- Dual screens with a physical gap (Surface Duo) open apps on one screen by default; no hinge-specific layout was
+  built. Revisit with the Viewport Segments API only if a spanned layout is asked for.
+
+## 2026-10-28 - Colleagues: server-side contacts, mutual on link, invite link /add/<ID>
+Owner asked to take Colleagues to 10/10. Contacts live on the server (`kx_contacts`), not the phone, so they survive a reinstall
+(which wipes device data, see CLAUDE.md). Every referral, handover and case-room invite links both doctors; adding by ID links both too,
+with a fixed-text push. A contact is addressed by an opaque hash id, never the colleague's uid. Adding a contact needs only sign-in, and the
+colleague need not be verified: no patient data moves, and sending still requires both verified. The invite link carries only the inviter's
+own StewardMD ID; its no-app page does no name lookup, so the directory cannot be browsed. Rides the existing `smd_kits_share` /
+`KITS_SHARE_ON` switches; no separate flag. Do not re-litigate.
+
+## 2026-10-28 - NEET-SS Medical Oncology and Critical Care groups show only their own subjects
+Owner: choosing the Medical Oncology group showed every medical subject; wanted only oncology modules (INI-SS Medical Oncology = oncology plus General Medicine, unchanged). Source: the NEET-SS 2026 Specialty Groups guide: Medical Oncology and Critical Care Medicine are their own super-specialty papers, "rather than a second full General Medicine paper". `prep/ss-groups.json` gets kind `only` for the `medical-oncology` and `critical-care` groups (own subjects, no medical core, no Biostatistics; Critical Care keeps Pulmonology); the broad Medical group still holds Medical Oncology. This supersedes the 2026-10-14 rule that gave every medical-kind group the medical core. INI-SS scope (`iniSubjects`: course, its degree's General subject, Biostatistics) is unchanged. Do not re-litigate; to add Biostatistics back, switch the group to kind `own`.
+
+## 2026-10-28 - Every NEET-SS group shows only what its paper covers
+Owner: "not just medical oncology but all groups, show relevant only as per groups" (NEET-SS 2026 Specialty Groups guide). `prep/ss-groups.json`: the Medical group is the General Medicine curriculum (General Medicine, Cardiology, Neurology, Nephrology, GI, Hepatology, Endocrinology, Haematology, Rheumatology, Pulmonology, Infectious Diseases, Critical Care, Biostatistics; no Medical Oncology). Respiratory and Radio-diagnosis (kind `own`) show their own subject and Biostatistics (Radio-diagnosis keeps the Radiology subject as an extra); they no longer add the medical core. Medical Oncology and Critical Care stay `only`. INI-SS Medical Oncology still gets General Medicine through `INI_PAIR` in `prep-plan.js` (it used to come from sharing the Medical group). Supersedes the 2026-10-14 medical-core rule and the radiology-plus-medical-core owner rule. Do not re-litigate.
+
+## 2026-10-29 - OPD EMR: protocols box, native-feel scroll lock, voice history inference, iPhone NFC gap
+Owner screenshots: (1) dose calculator, OncoTree button and the oncology protocol list sat at the top of Assessment; (2) EMR panned sideways like a page; (3) voice filled only complaints and past history; (4) Ni-Key NFC fails on iPhone.
+- **Protocols & dose tools** is now ONE collapsed card (`protoBox` in `opd-emr.js`) after the form sections: dose calculator, OncoTree, a search box and a fixed-height scroll list of EVERY protocol (clinical KB index plus oncology regimens). Oncology rows keep the old Apply (staged review stays above the form). Tapping a clinical protocol opens the Protocol tab reader and Back returns to Assessment with the box open. State: `st.pbOpen`, `st.pbQuery`.
+- **No sideways pan**: `overflow-x: hidden`, `overscroll-behavior`, `touch-action: pan-y` on `#smdOpdEmr` and `#smdQueue` canvases; wide strips (tabs, chips, oncology matrix) keep their own horizontal scroll. NOTE the app runs `html { zoom: .95 }`, so `getBoundingClientRect` widths are 0.95x `clientWidth`; do not read that as an overflow in a test.
+- **Voice history**: `_inferHistory` (pure, on-device) ticks comorbidity Yes/No, writes details and current home drugs from the English transcript (negation aware, a drug the doctor is STARTING is not history, never overwrites a filled value). Runs after every cloud refine and on live ambient updates. Server prompt now asks for `homeMeds`, vitals and drug-implied ticks.
+- **iPhone NFC cannot be fixed over the air**: Android has `NfcPlugin.java`; iOS has NO NFC plugin, no `com.apple.developer.nfc.readersession.formats` entitlement and no `NFCReaderUsageDescription`, and WKWebView has no Web NFC. Needs a CoreNFC Capacitor plugin, the entitlement on the App ID and provisioning profile, and a native rebuild (Mac). Until then `smd-nfc.js` says so plainly and points at QR/StewardID.
+
+## 2026-10-29 - iPhone Ni-Key NFC: CoreNFC NfcPlugin, one system sheet per tap (branch worktree-ios-nfc-plugin)
+Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone NFC gap" entry above).
+- **`ios/App/App/NfcPlugin.swift`** (`Capacitor.Plugins.NfcPlugin`, registered in `MainViewController.capacitorDidLoad` like SmdDevice; listed in the App target's Sources in `project.pbxproj`). Same contract as `NfcPlugin.java`: `isAvailable` -> `{available, enabled, onDemand:true}`, `startScan`/`stopScan`, `writeTag({text,url})` -> `{success, uid, text, url, verified, readBack:{text,url}}`, `cancelWrite`, events `tagDiscovered {uid, formattedUid, text, url, records}`, `tagWritten`, and iOS-only `scanEnded {reason: tag|cancelled|timeout|error, message}`.
+- **NFCTagReaderSession for reads too, not NFCNDEFReaderSession.** Only a tag session gives the chip serial, and `smd-nfc.js isEmptyTag()` needs it (both bridges echo the serial into `text` on a blank tag) and the empty-tag sheet shows it. Polls ISO 14443 + ISO 15693 (NTAG/Ultralight, Type 4, ICODE). No FeliCa (would need system codes in Info.plist).
+- **Write = Text record + URI record, then `readNDEF` read-back**; `verified` is the comparison, and smd-nfc.js rejects `WRITE_VERIFICATION_FAILED` on a mismatch. Read-only, unformatted and too-small tags fail with a sentence the sheet shows.
+- **Entitlement `com.apple.developer.nfc.readersession.formats` = `[TAG]` only.** `NDEF` is NOT listed: App Store Connect rejects it (ITMS-90778 "NDEF is disallowed") and TAG already covers NDEF sessions. Info.plist: `NFCReaderUsageDescription` + `com.apple.developer.nfc.readersession.iso7816.select-identifiers = [D2760000850101]` (the NFC Forum NDEF Type 4 application, so Type 4 tags are read instead of failing the session).
+- **iPhone has no background reader.** `smd-nfc.js` treats native+iOS as on-demand: `initAppListener` does NOT scan at launch (it would pop the sheet on every app open); `startScan` re-arms on every call (no `isListening` latch, which is reset by `scanEnded`/`tagDiscovered`) and refuses with `NEEDS_USER_TAP` when there is no user gesture (`navigator.userActivation`) unless the caller passes `{userInitiated:true}`. New `options.onEnd` resets the New patient sheet's button (and the opd.html walk-in button) on Cancel/timeout. So on iPhone a tap on a folder is read from the Read NFC button, not by just holding it to the phone. Android is unchanged.
+- `IOS_NFC_MSG` stays, now only for an iPhone store build without the plugin (OTA cannot add native code).
+- Signing: App ID `in.stewardmd.app` needs the **NFC Tag Reading** capability; with Automatic signing the dev and App Store profiles are regenerated by Xcode (`-allowProvisioningUpdates`) or must be regenerated by hand in the portal.
+- Tests: `test/smd-nfc-ios.test.mjs` (13), `test/run-nfc-ui.mjs` section D (iPhone flow; the script now resolves the repo from its own path instead of a hard-coded home dir). The old `?v=nfc-2` pin in `opd-nfc-barcode.test.mjs` was already failing on main (index ships `nfc2-2`) and is now token-agnostic.
+- **Shipped + device-verified**: merged #1841 (main 975476023) 2026-10-29, TestFlight 2.1 (40) uploaded 2026-10-29 (first archive needed the owner to accept the new Apple Program License Agreement; `-allowProvisioningUpdates` then added NFC Tag Reading to the App ID itself). Owner confirmed on his iPhone 2026-10-31: "working".
+
+## 2026-10-30 - Startup: original screen kept, only the jank removed
+- The original boot splash design stays exactly as it was (owner rejected a redesign). Only timing changed.
+- Later opens no longer show a blank glow for 700 ms (`sbs-blank` dropped): the original screen is visible from the
+  first frame and held at least 700 ms (`MIN`), first open keeps its 3 s sequence. `smd_splash_fast="0"` still reverts.
+- Face ID at launch resigned the scene and the iOS privacy blur replaced the splash with a grey sheet. JS now calls
+  `SmdDevice.setBootSplash({up})`; `SceneDelegate.sceneWillResignActive` skips the cover while it is up (20 s native
+  expiry, cleared in `reallyFinish`). Android method is a no-op. Needs a native rebuild.
+- Splash `ready()` also waits for the Material Symbols font (preloaded) so icons never pop in as text.
+
+## 2026-10-30 - Phone UI sweep: antibiotic header, sideways pan, icon font, spacer circle
+- Antibiotic engine (`abx-wizard.css`): the glass appearances painted `.abxw-head` as a boxed panel with zero side padding,
+  so the logo and Reset sat flush on its square edges. It is now a full-width top bar (bleeds over the 16px gutter, keeps
+  contents on the 16px margin). The text-size `zoom` on `.abxw-wrap` left a phantom scroll width (390 -> 411px), so the
+  screen dragged sideways and the step rail slid under the edges; `.abxw-scroll` is `overflow-x: hidden`.
+- `protocol-maker.css` named only 'Material Symbols Outlined' (not shipped), so My protocols showed "close", "add",
+  "science" as serif words. Rounded is first now, header icons 24px, header buttons 44px.
+- Shared Clinic header: the title-centering spacer reused the bordered `.sc-ic` class and drew an empty circle; hidden.
+- Sweep method: open every `window.*.open()` module at 390x844 (liquid appearance) and flag vertical scrollers with
+  horizontal overflow. ABG's spectrum grid is the only hit and scrolls sideways on purpose.
+
+## 2026-10-30 - Startup: logo intro + welcome-back screen on every signed-in open, 2.5s
+- Owner: "I need start up to have both logo intro plus user intro", "total 2.5sec, 1.5sec intro, 1sec user intro".
+- The 2026-10-03 fast later-open pace lifted the splash at 0.7s, before screen 2 (BEAT) ever showed, so signed-in users
+  only saw the logo. The personalised splash script now clears `__smdBootFast` / `sbs-fast` and sets `__smdBootPersonal`.
+- `BEAT` 1560 -> 1500 (screen 1 for 1.5s), hide-loop `MIN` 2500 for personal opens (screen 2 for 1s), counted from when
+  the frame is seen. Guests and signed-out returning opens keep the fast path; first open keeps 3s.
+
+## 2026-10-30 - ONCQIS: single home tile, polish pass, lavender field
+- Home grid shows one oncology tool, ONCQIS ("Single tool please"). OncoTree and Cancer Staging tiles appear only when
+  `smd_onco_home` is off (`oncqisOn()` in home.js). OncoTree opened from ONCQIS now stacks over it (backgrounded, not
+  closed), so closing OncoTree returns to ONCQIS.
+- Landing: removed the quick-action row that duplicated five list tools (and ignored their flags); the gradient hero card
+  with eyebrow and watermark is a plain title + safety line; the 2-column clamped tiles are grouped inset rows with full
+  descriptions. "Prognostic scores" + "Formulas" (same calc-cat target) merged; "Drug mechanisms" gained a list entry.
+- Removed the "Apple / React Bits" CSS layer (SF Pro override, cursor spotlight, hover border beam, fake sheet grabber)
+  and its pointermove JS. Section labels sentence case.
+- Staging list: no per-row blue-violet CLINICAL pills (only the Gap state keeps a badge), shared search field, grouped rows,
+  license bar is an overlay footer flush to the bottom edge (it floated 52px up inside the scroll body).
+- Lavender (all-cancers ribbon colour) gaussian field behind every .oh-overlay: radial gradients on one ::before layer,
+  38s transform drift, still under reduced motion. Cards stay solid.
+- React/Tailwind component libraries (shadcn, Magic UI, etc.) were requested; not adopted: the app is a buildless ES5
+  bundle with no React or Tailwind build. Their patterns (inset grouped list, tokens) are applied in plain CSS instead.
+- Follow-up same day: plum (#6f2c6b light / #d9a8d6 dark) replaces teal on every onco surface by re-pointing --teal,
+  --ot-accent, --ot-primary and --ps-primary inside .oh-overlay / .ot-overlay / .ps-overlay (onco-home.css), plus the
+  hard-coded greens in oncotree.css and protocol-sheet.css. Severity colours (--sev-*, CTCAE/irAE grade badges) unchanged.
+  OncoTree disease icons share one plum chip (no rainbow). Tactile layer: raised surfaces sink 1px on press; version /
+  category / filter choices are segmented controls; OncoTree header keys 44px; its spotlight/beam pseudo-layers hidden;
+  the NCCN capsule badge and duplicate Calvert pill above the OncoTree title became a plain source line.
+- Collapsing onco header (owner: "mix of both", CliniX large title + PrepNucleus bar): .oh-top floats over .oh-body,
+  transparent with round 44px frosted keys at rest; onco-home.js toggles .oh-overlay.oh-scrolled past 28px and the
+  frosted bar + compact title (mark, name, subtitle) fade in. Large titles (.oh-ltitle / ONCQIS brand hero) live in the
+  page. Back/close keys are icons; their words stay as .oh-sr text. ONCQIS bar has a search key that focuses the field.
+- ONCQIS logo: vector redraw of the owner's mark (hexagonal immune lattice, six antibodies with heavy + light chains,
+  targeted red core) in assets/oncqis-mark.svg + oncqis-mark-dark.svg (lighter lattice for dark). Header shows the mark
+  with a live-text "ONCQIS" wordmark in the logo's teal gradient and its tagline (CliniX-style). assets/oncqis-logo.png is
+  the owner's lockup, background removed and upscaled (palette PNG, 97 KB); oncqis-mark.png a 1024px raster.
+  build-www.sh copies assets/oncqis-*. The logo keeps its own teal/red: the plum rule covers UI accents, not the brand mark.

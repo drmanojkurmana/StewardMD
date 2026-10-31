@@ -12,7 +12,7 @@
   var host = SP.createHost({
     id: "narke", global: "NARKE", base: G.SMD_NARKE_BASE || "/narke/", rootId: "smdNarke", rootClass: "nrk-root",
     storeKey: "smd_narke_v1", prefKey: "smd_narke_prefs", flag: "smd_narke",
-    title: { en: "Narkē", hi: "नार्के" }, subtitle: { en: "Anaesthesia", hi: "एनेस्थीसिया" },
+    title: { en: "Anesthetica", hi: "एनेस्थेटिका" }, subtitle: { en: "Anaesthesia", hi: "एनेस्थीसिया" },
     levels: { free: ["mbbs"] }, proFeature: "narke", models: "NARKE_MODELS",
     statusBg: "#faf8f3", draft: true,
     strings: {

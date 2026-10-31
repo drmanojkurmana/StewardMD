@@ -43,6 +43,12 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NFCReaderUsageDescription</key>
+	<string>StewardMD reads and writes Ni-Key NFC tags on patient files so a tap opens the right patient. Only the patient ID on the tag is read or written.</string>
+	<key>com.apple.developer.nfc.readersession.iso7816.select-identifiers</key>
+	<array>
+		<string>D2760000850101</string>
+	</array>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>StewardMD uses Bluetooth to pair this device with a nearby phone or iPad for Kardia SyncProbe training.</string>
 	<key>NSCameraUsageDescription</key>

@@ -80,7 +80,7 @@ try {
   await ev(`document.querySelector('[data-stg-act="close"]').click(); return 1;`); await sleep(200);
 
   // ---- Onco drug view: tall-man antineoplastic names + supportive care from MEDDRUGS ----
-  await ev(`document.querySelector('[data-oh-act="drug-browse"]').click(); return 1;`);
+  await ev(`document.querySelector('.oh-grid [data-oh-act="drug-onco"]').click(); return 1;`);
   await sleep(200);
   const drugView = (await ev(`return document.getElementById("ohResults").textContent || "";`)) || "";
   ok(/DOXOrubicin/.test(drugView), "the onco drug view renders the ISMP tall-man form DOXOrubicin (tall-man flag on)");

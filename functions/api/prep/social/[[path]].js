@@ -16,6 +16,9 @@
  *   POST   groups/create {name, dailyTarget} -> { code };  groups/join {code};  groups/leave {code} -> { ok:true }
  *   GET    groups                      -> { groups:[{code,name,dailyTarget,owner,mine,members:[{name,todayDone}]}] }
  *   GET    groups/board?code=          -> { rows:[{name,score}], week }
+ *   GET    squads/board                -> { week, rows:[{rank,name,size,score,streak}], me:[{code,rank}] }   (groups of 3 to 6)
+ * Each group in GET groups also carries { squad, streak, todayAll }: a squad (3 to 6 members) keeps a streak of days on
+ * which every member met the daily target (functions/_prep-social.js squadStreak).
  *   POST   progress {done}             -> { ok:true }   (questions done today; feeds todayDone and the group sprint)
  *   POST   nudges {on, token, quiet, tz} -> { ok:true } | { error }   (social pushes for this phone, functions/_prep-nudge-push.js)
  *   POST   digest  (no user: X-Prep-Cron = PREP_CRON_TOKEN, the prep-arena Worker's cron) -> { players, sent }
@@ -28,6 +31,7 @@
 import { verifiedClaimsFor } from "../../../_fbauth.js";
 import { EXAMS, uidHash } from "../../../_prep-arena.js";
 import { register as nudgeRegister, pushTo, digest, cronOk, safely, first } from "../../../_prep-nudge-push.js";
+import { squadStreak, SQUAD_MIN, SQUAD_MAX } from "../../../_prep-social.js";
 import { istDay, weekStart, randomCode, ROOM_RE, GROUP_RE, COLLEGES, collegeKey, cleanText, uidhForSmd, ensureMySmd, leaveGroupStmts, normalizeSmdId } from "../../../_prep-social.js";
 
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
@@ -247,7 +251,26 @@ export async function handle(request, env, path, now = Date.now(), bg = null) {
       if (!by.has(r.code)) by.set(r.code, { code: r.code, name: r.name, dailyTarget: r.daily_target, owner: r.owner_name || null, mine: r.owner === uidh, members: [] });
       by.get(r.code).members.push({ name: r.m_name, todayDone: r.done });
     }
-    return json({ groups: [...by.values()] });
+    const groups = [...by.values()];
+    const small = groups.filter((g) => g.members.length >= SQUAD_MIN && g.members.length <= SQUAD_MAX);
+    for (const g of groups) { g.squad = false; g.streak = 0; g.todayAll = false; }
+    if (small.length) {
+      const codes = small.map((g) => g.code), since = istDay(now - 400 * DAY);
+      const { results: rows } = await db.prepare(
+        "SELECT m.code, m.uidh, pr.day, pr.done FROM social_group_members m LEFT JOIN social_progress pr ON pr.uidh = m.uidh AND pr.day >= ? " +
+        "WHERE m.code IN (" + codes.map(() => "?").join(",") + ")").bind(since, ...codes).all();
+      const mem = new Map(), done = {};
+      for (const r of rows || []) {
+        if (!mem.has(r.code)) mem.set(r.code, new Set());
+        mem.get(r.code).add(r.uidh);
+        if (r.day) (done[r.uidh] = done[r.uidh] || {})[r.day] = r.done;
+      }
+      for (const g of small) {
+        const st = squadStreak([...(mem.get(g.code) || [])], done, g.dailyTarget, now);
+        g.squad = true; g.streak = st.streak; g.todayAll = st.today;
+      }
+    }
+    return json({ groups });
   }
   if (route === "GET groups/board") {
     const code = q("code").trim().toUpperCase();
@@ -258,6 +281,19 @@ export async function handle(request, env, path, now = Date.now(), bg = null) {
       "SELECT p.name, COALESCE((SELECT SUM(pr.done) FROM social_progress pr WHERE pr.uidh = m.uidh AND pr.day >= ? AND pr.day <= ?), 0) AS score " +
       "FROM social_group_members m JOIN arena_players p ON p.uidh = m.uidh WHERE m.code = ? ORDER BY score DESC, p.name").bind(week, today, code).all();
     return json({ week, rows: (results || []).map((r) => ({ name: r.name, score: r.score })) });
+  }
+
+  if (route === "GET squads/board") {
+    const week = weekStart(now);
+    const { results } = await db.prepare(
+      "SELECT g.code, g.name, COUNT(DISTINCT m.uidh) AS size, COALESCE(SUM(pr.done), 0) AS score FROM social_groups g " +
+      "JOIN social_group_members m ON m.code = g.code LEFT JOIN social_progress pr ON pr.uidh = m.uidh AND pr.day >= ? AND pr.day <= ? " +
+      "GROUP BY g.code HAVING size >= ? AND size <= ? ORDER BY score DESC, g.created_at LIMIT 200").bind(week, today, SQUAD_MIN, SQUAD_MAX).all();
+    const mineRows = await db.prepare("SELECT code FROM social_group_members WHERE uidh = ?").bind(uidh).all();
+    const mine = new Set(((mineRows && mineRows.results) || []).map((r) => r.code));
+    const rk = ranked(results || [], (r) => r.score);
+    return json({ week, rows: rk.slice(0, 50).map(({ rank, r }) => ({ rank, name: r.name, size: r.size, score: r.score, mine: mine.has(r.code) })),
+      me: rk.filter(({ r }) => mine.has(r.code)).map(({ rank, r }) => ({ name: r.name, rank, score: r.score })) });
   }
 
   return err("not-found", 404);

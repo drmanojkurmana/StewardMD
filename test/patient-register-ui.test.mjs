@@ -110,7 +110,7 @@ test("both hosts use the SAME sheet — that is the point", () => {
 });
 
 test("REGRESSION: the app no longer registers patients through prompt() boxes", () => {
-  const fn = QUEUE.slice(QUEUE.indexOf("function openAdd()"), QUEUE.indexOf("function openAdd()") + 1400);
+  const fn = QUEUE.slice(QUEUE.indexOf("function openAdd()"), QUEUE.indexOf("function openAdd()") + 3400);
   // a real call passes a string; the word also appears in the comment explaining what was removed
   assert.equal(/prompt\(\s*["']/.test(fn), false, "the prompt() chain must be gone");
   assert.match(fn, /workplaceMode/, "the workplace decides who issues the MR");
@@ -172,4 +172,14 @@ test("the client does not re-implement the server's validation rules", () => {
   assert.match(SRC, /validAadhaar\(aad\)/, "the Aadhaar pre-check guards the OTP request");
   assert.match(SRC, /r\.errors/, "server errors are rendered per field");
   assert.match(SRC, /setErr\(/);
+});
+
+test("Find existing patient: shown only when the host can search; a duplicate offers Open this patient", () => {
+  assert.equal(API._sheetHtml({ mode: "native" }).includes('id="pr_find"'), false, "no search box without opts.search");
+  const withSearch = API._sheetHtml({ mode: "native", canSearch: true });
+  assert.match(withSearch, /id="pr_find"/);
+  assert.match(withSearch, /Name or phone number/);
+  assert.match(QUEUE, /patient\/search\?orgId=/, "the queue host passes the server search");
+  assert.match(QUEUE, /useExisting:/, "a found patient is queued as themselves, never registered twice");
+  assert.match(SRC, /data-a="dup-open"/);
 });

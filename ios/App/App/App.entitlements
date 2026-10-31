@@ -16,6 +16,13 @@
 	<array>
 		<string>applinks:stewardmd.in</string>
 	</array>
+	<!-- Ni-Key NFC file tags (App/NfcPlugin.swift). TAG covers NFCTagReaderSession AND
+	     NFCNDEFReaderSession. "NDEF" is deliberately absent: App Store Connect rejects it
+	     (ITMS-90778 "NDEF is disallowed") for apps built with the iOS 13+ SDK. -->
+	<key>com.apple.developer.nfc.readersession.formats</key>
+	<array>
+		<string>TAG</string>
+	</array>
 	<!-- On-device MaiK model (capacitor-llama). A ~2.5 GB mmap plus its KV cache exceeds the default
 	     per-app footprint iOS allows before jetsam on an 8 GB device (iPhone 15 Pro / 16 Pro).
 	     increased-memory-limit raises that ceiling; extended-virtual-addressing allows the large

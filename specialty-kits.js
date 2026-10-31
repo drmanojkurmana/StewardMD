@@ -622,7 +622,9 @@
       patient: function () { return {}; }
     };
   }
+  var HS = { host: null, key: "", opts: null };   // the generic host sheet (ICU and ward notes), see openHostSheet
   function hostFor(el) {
+    if (el && el.closest && el.closest("#smdKitHost") && HS.host) return HS.host;
     if (el && el.closest && el.closest("#smdOpdEmr") && G.OPDEMR && G.OPDEMR.kitHost) return G.OPDEMR.kitHost;
     return standaloneHost();
   }
@@ -708,7 +710,7 @@
   }
   function addBtn(act, host, label) {
     var dis = !host.canWrite() || !host.ready();
-    return '<button type="button" class="kit-add" data-kit-act="' + act + '"' + (dis ? " disabled" : "") + ">" + ms(host.kind === "opd" ? "playlist_add" : "content_copy") + esc(label || host.addLabel()) + "</button>";
+    return '<button type="button" class="kit-add" data-kit-act="' + act + '"' + (dis ? " disabled" : "") + ">" + ms(host.kind === "opd" || host.addToNote ? "playlist_add" : "content_copy") + esc(label || host.addLabel()) + "</button>";
   }
   function targetName(host, field) { return host.fieldLabel ? host.fieldLabel(field) : field; }
   function sectionHtml(kit, sec, k, host) {
@@ -1189,7 +1191,7 @@
     }
     return '<section class="kit-card kit-tool" data-kit-tool="' + id + '"><h3>' + ms(T.icon) + esc(T.title) + "</h3>" + T.form(t) +
       '<div class="kit-out" data-kit-out="' + id + '" aria-live="polite">' + T.out(t) + "</div>" +
-      (T.text ? '<div class="kit-row">' + addBtn("tool:" + id, host, host.kind === "opd" ? "Add to " + targetName(host, T.target) : "Copy") + "</div>" : "") + "</section>";
+      (T.text ? '<div class="kit-row">' + addBtn("tool:" + id, host, host.kind === "opd" || host.addToNote ? "Add to " + targetName(host, T.target) : "Copy") + "</div>" : "") + "</section>";
   }
 
   /* Investigations (owner, 2026-09-26): tick the ones you want, then ONE button puts them on the
@@ -1450,10 +1452,88 @@
     var out = el.closest("[data-kit-root]").querySelector('[data-kit-out="' + toolId + '"]');
     if (out) out.innerHTML = TOOLS[toolId].out(t);
   }
+  function secSets(sec, k) {
+    var sets = {};
+    (sec.fields || []).forEach(function (f) { if (f.set && k.vals[f.id] != null && String(k.vals[f.id]).trim() !== "" && f.type !== "check") sets[f.set] = f.type === "date" && parseISO(k.vals[f.id]) ? fmtDate(parseISO(k.vals[f.id])) : String(k.vals[f.id]).trim(); });
+    return sets;
+  }
+  /* Everything filled in the current kit as export items { label, target, text, sets }: its sections, then its tools, each aimed at the
+     EMR field the kit already names for it. */
+  function exportItems(kit, k) {
+    var out = [];
+    (kit.sections || []).forEach(function (sec) { var t = composeSection(sec, k.vals); if (t) out.push({ label: sec.title || sec.id, target: sec.target, text: t, sets: secSets(sec, k) }); });
+    (kit.tools || []).forEach(function (id) {
+      var T = TOOLS[id]; if (!T || !T.text || !k.tools[id]) return;
+      var t = ""; try { t = T.text(k.tools[id]); } catch (e) { t = ""; }
+      if (t) out.push({ label: T.title, target: T.target, text: t, sets: T.sets ? T.sets(k.tools[id]) : {} });
+    });
+    return out;
+  }
+  /** Export to the EMR. mode "each" (one tap): every item into its own field. mode "one": all items joined into ONE text block in
+   *  opts.field. One repaint and one toast either way (host.insertMany). Returns the number of items exported. */
+  function exportAll(opts) {
+    var host = opts.host, k = ks(opts.key), kit = kitById(k.kitId);
+    if (!kit) { toast("Pick a specialty kit first."); return 0; }
+    if (!host.canWrite() || !host.ready()) { toast(host.canWrite() ? (host.readyNote ? host.readyNote() : "Not ready yet.") : (host.writeNote ? host.writeNote() : "This note cannot be written.")); return 0; }
+    var items = exportItems(kit, k);
+    if (!items.length) { toast(!GROWTH && (kit.tools || []).indexOf("growth-who") >= 0 ? "Growth tables are still loading." : "Nothing to export yet. Use a tool or fill a section first."); return 0; }
+    var list;
+    if (opts.mode === "one") {
+      var sets = {}; items.forEach(function (it) { Object.keys(it.sets || {}).forEach(function (n) { sets[n] = it.sets[n]; }); });
+      list = [{ field: opts.field || "History_present_illness", text: kit.label + " (" + items.map(function (it) { return it.label; }).join(", ") + "):\n" + items.map(function (it) { return it.text; }).join("\n"), sets: sets }];
+    } else list = items.map(function (it) { return { field: it.target, text: it.text, sets: it.sets || {} }; });
+    if (host.insertMany) host.insertMany(list); else list.forEach(function (it) { host.insert(it.field, it.text, it.sets); });
+    return items.length;
+  }
+  /* The kit that holds a tool, preferring the doctor's own: the kit sheet opens there when a field button is tapped. */
+  function kitHoldingTool(toolId) {
+    var mine = kitById(mySpecialty());
+    if (mine && (mine.tools || []).indexOf(toolId) >= 0) return mine.id;
+    var hit = (kitList() || []).filter(function (kk) { return (kk.tools || []).indexOf(toolId) >= 0; })[0];
+    return hit ? hit.id : "";
+  }
+
+  /* ======================================= generic host sheet =======================================
+   * The kit in a sheet for a host with its own notes (ICU and ward, owner 2026-10-28): openHostSheet({ host, key, title, exportLabel,
+   * oneLabel }). The footer's Export puts every result the doctor used into the host's note in one tap (host.insertMany); "One combined
+   * note" joins them into one block. The host decides where a note goes (ICU: the patient timeline). */
+  function hsEl() { return D && D.getElementById("smdKitHost"); }
+  function renderHostSheet() {
+    var el = hsEl(); if (!el || !HS.host) return;
+    var body = el.querySelector(".kit-sheet-body"); if (!body) return;
+    var top = body.scrollTop;
+    body.innerHTML = kitBody({ host: HS.host, key: HS.key, defaultKit: mySpecialty() });
+    body.scrollTop = top;
+  }
+  function openHostSheet(opts) {
+    if (!D || !flagOn() || !opts || !opts.host) return;
+    HS = { host: opts.host, key: opts.key || "host", opts: opts };
+    var wrap = hsEl();
+    if (!wrap) {
+      wrap = D.createElement("div"); wrap.id = "smdKitHost"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-modal", "true"); wrap.setAttribute("aria-label", "Specialty tools");
+      D.body.appendChild(wrap);
+    }
+    wrap.innerHTML = '<div class="kit-sheet"><header class="kit-sheet-top"><button type="button" class="kit-x" data-kit-act="hclose" aria-label="Close specialty tools">' + ms("close") + "</button><h1>" + esc(opts.title || "Specialty tools") + "</h1><span></span></header>" +
+      '<div class="kit-sheet-body"></div><footer class="kit-hfoot"><button type="button" class="kit-hexport" data-kit-act="hexport">' + ms("upload") + esc(opts.exportLabel || "Export to EMR") + "</button>" +
+      '<button type="button" class="kit-hexport ghost" data-kit-act="hexport1">' + esc(opts.oneLabel || "One combined note") + "</button></footer></div>";
+    wrap.classList.add("on"); D.body.style.overflow = "hidden";
+    renderHostSheet();
+    loadKits().then(function () { if (HS.host === opts.host) { if (opts.tool && kitHoldingTool(opts.tool)) ks(HS.key).kitId = kitHoldingTool(opts.tool); renderHostSheet(); if (opts.tool) { var t = wrap.querySelector('[data-kit-tool="' + opts.tool + '"]'); if (t && t.scrollIntoView) t.scrollIntoView({ block: "start" }); } } }, function () {});
+    if (opts.tool === "growth-who") loadGrowth().then(function () { renderHostSheet(); }, function () {});
+  }
+  function closeHostSheet() { var el = hsEl(); if (el) el.classList.remove("on"); if (D) D.body.style.overflow = ""; HS.host = null; micStop(); }
+
   function onClick(e) {
     var btn = e.target && e.target.closest && e.target.closest("[data-kit-act]"); if (!btn) return;
     var act = btn.getAttribute("data-kit-act"), i = act.indexOf(":"), cmd = i < 0 ? act : act.slice(0, i), arg = i < 0 ? "" : act.slice(i + 1);
     if (cmd === "close") { micStop(); close(); return; }
+    if (cmd === "hclose") { closeHostSheet(); return; }
+    if (cmd === "hexport" || cmd === "hexport1") {
+      if (!HS.host) return;
+      var nx = exportAll({ host: HS.host, key: HS.key, mode: cmd === "hexport1" ? "one" : "each", field: HS.host.exportField || "" });
+      if (nx) closeHostSheet();
+      return;
+    }
     var key = keyOf(btn); if (!key) return;
     var host = hostFor(btn), k = ks(key), kit = kitById(k.kitId);
     if (cmd === "kit") { k.kitId = arg; k.picker = false; k.pickerQ = ""; k.invSel = {}; pushRecent(arg); var kk = kitById(arg); if (kk && kk.scribe && host.setScribe) host.setScribe(kk.scribe); host.repaint(); return; }
@@ -1461,22 +1541,22 @@
     if (cmd === "docs") { if (G.SMD_DOCS) G.SMD_DOCS.open({ ctx: host.patient && host.kind === "opd" && host.consult ? host.consult() : null, kitId: kit.id, kitSummary: host.kind === "opd" ? kitSummary(kit, k) : "" }); return; }
     if (cmd === "picker") { k.picker = !k.picker; host.repaint(); if (k.picker && D) { var qi = D.getElementById("kit_picker_q"); if (qi) try { qi.focus(); } catch (e) {} } return; }
     if (cmd === "mine") { setMySpecialty(arg, "manual"); toast("Saved as your specialty."); host.repaint(); return; }
-    if (!kit) return;
-    if (cmd === "sec") {
-      var sec = findSection(kit, arg); if (!sec) return;
-      var text = composeSection(sec, k.vals);
-      var sets = {};
-      sec.fields.forEach(function (f) { if (f.set && k.vals[f.id] != null && String(k.vals[f.id]).trim() !== "" && f.type !== "check") sets[f.set] = f.type === "date" && parseISO(k.vals[f.id]) ? fmtDate(parseISO(k.vals[f.id])) : String(k.vals[f.id]).trim(); });
-      if (!text) { toast("Fill in at least one finding first."); return; }
-      apply(host, sec.target, text, sets); return;
-    }
-    if (cmd === "clr") { var s2 = findSection(kit, arg); if (s2) s2.fields.forEach(function (f) { delete k.vals[f.id]; }); host.repaint(); return; }
+    // a tool needs no kit: the one-tool sheet inside a host's notes has none selected
     if (cmd === "tool") {
       var T = TOOLS[arg]; if (!T || !T.text) return;
       var tt = T.text(toolState(k, arg));
       if (!tt) { toast(arg === "growth-who" && !GROWTH ? "Growth tables are still loading." : "Nothing to add yet."); return; }
       apply(host, T.target, tt, T.sets ? T.sets(toolState(k, arg)) : {}); return;
     }
+    if (!kit) return;
+    if (cmd === "sec") {
+      var sec = findSection(kit, arg); if (!sec) return;
+      var text = composeSection(sec, k.vals);
+      var sets = secSets(sec, k);
+      if (!text) { toast("Fill in at least one finding first."); return; }
+      apply(host, sec.target, text, sets); return;
+    }
+    if (cmd === "clr") { var s2 = findSection(kit, arg); if (s2) s2.fields.forEach(function (f) { delete k.vals[f.id]; }); host.repaint(); return; }
     if (cmd === "adv") { var a = (kit.advice || []).filter(function (x) { return x.id === arg; })[0]; if (a) apply(host, a.target, a.text, {}); return; }
     if (cmd === "inv") { var inv = (kit.investigations || [])[+arg]; if (inv && host.investigate) host.investigate(inv.query); return; }
     if (cmd === "invtick") { var sel = invSelOf(k); sel[+arg] = !sel[+arg]; host.repaint(); return; }
@@ -1570,7 +1650,35 @@
     D.addEventListener("smd:profile-loaded", onProfile, false);
   }
 
+  /* ======================================= tool buttons inside a host's own notes (owner 2026-10-28) =======================================
+   * Not a separate module: the OPD notes put a small button beside the field a tool belongs to (LMP, Weight and Height, Local
+   * examination, Management plan). It opens just that tool in a small sheet; its Add button writes into the tool's own target field
+   * (the same insert the Specialty tab uses). Which buttons show follows the doctor's specialty: an obstetrician sees the dating
+   * button, a paediatrician the growth chart; with no specialty set, all of them. */
+  var FIELD_TOOLS = { LMP: "pregnancy-dating", Weight: "growth-who", Height: "growth-who", local_examination: "burns-chart", management_plan: "la-dose" };
+  var KIT_FIELD_TOOLS = {
+    obgyn: ["pregnancy-dating"], paediatrics: ["growth-who"], anaesthesia: ["la-dose"], emergency: ["burns-chart", "la-dose", "growth-who"],
+    "general-surgery": ["burns-chart", "la-dose"], orthopaedics: ["la-dose", "burns-chart"], "community-medicine": ["growth-who", "pregnancy-dating"]
+  };
+  /* fieldTool(fieldName) -> { id, title, icon } for the tool button that belongs beside that field for this doctor, else null. */
+  function fieldTool(field) {
+    var id = FIELD_TOOLS[field];
+    if (!id || !TOOLS[id] || !flagOn()) return null;
+    var mine = mySpecialty();
+    if (mine && (KIT_FIELD_TOOLS[mine] || []).indexOf(id) < 0) return null;
+    return { id: id, title: TOOLS[id].title, icon: TOOLS[id].icon };
+  }
+  /* toolSheetBody(id, { host, key }) -> the one tool's card, wired like the kit tab (same state key, same Add). */
+  function toolSheetBody(id, ctx) {
+    if (!TOOLS[id] || !ctx || !ctx.host) return "";
+    return '<div class="kit" data-kit-root data-kit-key="' + esc(ctx.key) + '" data-kit-host="' + ctx.host.kind + '">' + toolHtml(id, ks(ctx.key), ctx.host) + "</div>";
+  }
+  function toolTitle(id) { return TOOLS[id] ? TOOLS[id].title : ""; }
+
   var API = {
+    exportAll: exportAll, exportItems: function (key) { var kk = ks(key), kit = kitById(kk.kitId); return kit ? exportItems(kit, kk) : []; }, kitHoldingTool: kitHoldingTool,
+    openHostSheet: openHostSheet, closeHostSheet: closeHostSheet, renderHostSheet: renderHostSheet,
+    fieldTool: fieldTool, toolSheetBody: toolSheetBody, toolTitle: toolTitle, _FIELD_TOOLS: FIELD_TOOLS, _KIT_FIELD_TOOLS: KIT_FIELD_TOOLS,
     open: open, close: close, html: kitBody, loadKits: loadKits, loadGrowth: loadGrowth, kits: kitList, kit: kitById,
     mySpecialty: mySpecialty, setMySpecialty: setMySpecialty, myScribe: myScribe, myLabel: myLabel, kitForProfile: kitForProfile, state: ks, forget: forget, on: flagOn, notifiable: notifiable, groups: groupList,
     KITS_V: KITS_V, GROWTH_V: GROWTH_V, DUTY_LINE: DUTY_LINE, TOOL_IDS: Object.keys(TOOLS), refresh: refresh, _kitSummary: kitSummary, _histHtml: histHtml, _unitHtml: unitHtml,

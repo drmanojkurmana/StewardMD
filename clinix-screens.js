@@ -129,6 +129,7 @@
     catalog: null,
     built: null,
     skillsAll: null,          // the loaded disease bundle
+    skillQ: "", skillSys: "", // Examination skills: search text and specialty chip
     systemId: null,
     diseaseId: null,
     chapterId: null,
@@ -458,6 +459,76 @@
   /* The door that was missing. Skills were always teachable on their own - compileLesson() never
    * needed a disease - but the only way in was through a disease pathway, so "teach me how to
    * percuss" was unreachable. This lists every skill by what you are DOING. */
+  var SKILL_SYS = [
+    ["core", "Core"], ["general", "General"], ["cardiovascular", "Cardiovascular"], ["respiratory", "Respiratory"],
+    ["abdomen", "Abdomen"], ["neurology", "Neurology"], ["surgery", "Surgery"], ["obgyn", "Obs & Gynae"],
+    ["paediatrics", "Paediatrics"], ["anaesthesia", "Anaesthesia"]
+  ];
+  function skillSysLabel(id) { for (var i = 0; i < SKILL_SYS.length; i++) if (SKILL_SYS[i][0] === id) return SKILL_SYS[i][1]; return id ? String(id) : ""; }
+  function skillSysRank(id) { for (var i = 0; i < SKILL_SYS.length; i++) if (SKILL_SYS[i][0] === id) return i; return 99; }
+
+  function skillRowHTML(b, sk) {
+    var m = P() ? P().mastery(sk.id) : { level: "new", pct: 0 };
+    var nMedia = countRenderableMedia(b, sk);
+    return '<button type="button" class="cx-row cx-row--skill" data-act="cx-skill" data-id="' + esc(sk.id) + '">' +
+      '<span class="cx-row-ic cx-m-' + esc(m.level) + '">' + ic(masteryIcon(m.level)) + "</span>" +
+      '<span class="cx-row-txt"><span class="cx-row-t">' + esc(sk.title) + "</span>" +
+      '<span class="cx-row-s">' + esc(sk.oneLine || "") + "</span>" +
+      '<span class="cx-row-meta">' + esc(masteryLabel(m)) + (nMedia ? " &middot; " + nMedia + " visual" + (nMedia > 1 ? "s" : "") : "") + "</span></span>" +
+      (nMedia ? '<span class="cx-row-media">' + ic("play_circle") + "</span>" : "") +
+      ic("chevron_right") + "</button>";
+  }
+
+  /* The filter chips (one per specialty actually present) and the list under them. Rewritten in
+   * place on every keystroke / chip tap so the search box keeps focus and the caret. */
+  function skillsChipsHTML(groups) {
+    var counts = {}, total = 0, gi, si;
+    for (gi = 0; gi < groups.length; gi++) for (si = 0; si < groups[gi].skills.length; si++) {
+      var sy = groups[gi].skills[si].system || ""; counts[sy] = (counts[sy] || 0) + 1; total++;
+    }
+    var html = '<button type="button" class="cx-chip' + (state.skillSys ? "" : " cx-chip--on") + '" data-act="cx-skill-sys" data-id="">All ' + total + "</button>";
+    for (var i = 0; i < SKILL_SYS.length; i++) {
+      var id = SKILL_SYS[i][0]; if (!counts[id]) continue;
+      html += '<button type="button" class="cx-chip' + (state.skillSys === id ? " cx-chip--on" : "") + '" data-act="cx-skill-sys" data-id="' + id + '">' + esc(SKILL_SYS[i][1]) + " " + counts[id] + "</button>";
+    }
+    return html;
+  }
+  function skillsListHTML(b, groups) {
+    var q = String(state.skillQ || "").toLowerCase().split(/\s+/).filter(Boolean), sysF = state.skillSys || "", html = "", shown = 0;
+    for (var gi = 0; gi < groups.length; gi++) {
+      var g = groups[gi], list = [];
+      for (var si = 0; si < g.skills.length; si++) {
+        var sk = g.skills[si];
+        if (sysF && sk.system !== sysF) continue;
+        if (q.length) {
+          var hay = (sk.title + " " + (sk.oneLine || "") + " " + skillSysLabel(sk.system) + " " + g.title).toLowerCase(), ok = true;
+          for (var qi = 0; qi < q.length; qi++) if (hay.indexOf(q[qi]) < 0) { ok = false; break; }
+          if (!ok) continue;
+        }
+        list.push(sk);
+      }
+      if (!list.length) continue;
+      list.sort(function (x, y) { return skillSysRank(x.system) - skillSysRank(y.system) || String(x.title).localeCompare(String(y.title)); });
+      var multi = !sysF && list.some(function (x) { return x.system !== list[0].system; }), last = null;
+      html += '<section class="cx-sec"><div class="cx-sec-h cx-sec-h--row"><span>' + esc(g.title) + '</span><span class="cx-sec-n">' + list.length + "</span></div>" +
+        (q.length ? "" : '<div class="cx-blurb cx-blurb--tight">' + esc(g.blurb) + "</div>") + '<div class="cx-rows">';
+      for (var k = 0; k < list.length; k++) {
+        if (multi && list[k].system !== last) { last = list[k].system; html += '<div class="cx-subh">' + esc(skillSysLabel(last)) + "</div>"; }
+        html += skillRowHTML(b, list[k]); shown++;
+      }
+      html += "</div></section>";
+    }
+    if (!shown) html = emptyState("search", "No skills match", q.length ? "Try a shorter word, or clear the specialty filter." : "Nothing in this specialty yet.");
+    return html;
+  }
+  function refreshSkillsList() {
+    var b = state.skillsAll; if (!b) return;
+    var groups = C().skillGroups(b);
+    var l = document.getElementById("cxSkillList"), c = document.getElementById("cxSkillChips");
+    if (l) l.innerHTML = skillsListHTML(b, groups);
+    if (c) c.innerHTML = skillsChipsHTML(groups);
+  }
+
   function renderSkills(host) {
     var b = state.skillsAll;
     if (!b) { host.innerHTML = header("Examination skills", "Learn the technique itself") + skeleton(); return; }
@@ -474,25 +545,9 @@
     html += '<div class="cx-pathhead">' + progressBar(
       totalIds.length ? Math.round((comp.mastered / totalIds.length) * 100) : 0,
       comp.mastered + " of " + totalIds.length + " skills mastered") + "</div>";
-
-    for (gi = 0; gi < groups.length; gi++) {
-      var g = groups[gi];
-      html += '<section class="cx-sec"><div class="cx-sec-h">' + esc(g.title) + "</div>" +
-        '<div class="cx-blurb cx-blurb--tight">' + esc(g.blurb) + "</div>" + '<div class="cx-rows">';
-      for (si = 0; si < g.skills.length; si++) {
-        var sk = g.skills[si];
-        var m = P() ? P().mastery(sk.id) : { level: "new", pct: 0 };
-        var nMedia = countRenderableMedia(b, sk);
-        html += '<button type="button" class="cx-row cx-row--skill" data-act="cx-skill" data-id="' + esc(sk.id) + '">' +
-          '<span class="cx-row-ic cx-m-' + esc(m.level) + '">' + ic(masteryIcon(m.level)) + "</span>" +
-          '<span class="cx-row-txt"><span class="cx-row-t">' + esc(sk.title) + "</span>" +
-          '<span class="cx-row-s">' + esc(sk.oneLine || "") + "</span>" +
-          '<span class="cx-row-meta">' + esc(masteryLabel(m)) + (nMedia ? " &middot; " + nMedia + " visual" + (nMedia > 1 ? "s" : "") : "") + "</span></span>" +
-          (nMedia ? '<span class="cx-row-media">' + ic("play_circle") + "</span>" : "") +
-          ic("chevron_right") + "</button>";
-      }
-      html += "</div></section>";
-    }
+    html += '<div class="cx-dx-search"><input class="cx-input" id="cxSkillQ" type="search" autocomplete="off" placeholder="Search skills, e.g. percussion, cord, shock" value="' + esc(state.skillQ || "") + '"></div>' +
+      '<div class="cx-chips cx-chips--scroll" id="cxSkillChips">' + skillsChipsHTML(groups) + "</div>" +
+      '<div id="cxSkillList">' + skillsListHTML(b, groups) + "</div>";
     html += disclaimer();
     host.innerHTML = html;
   }
@@ -508,7 +563,7 @@
 
   function openSkills() {
     state.loading = true;
-    state.skillsAll = null;
+    state.skillsAll = null; state.skillQ = ""; state.skillSys = "";
     go("skills");
     C().loadAllSkills(isPro()).then(function (b) {
       state.skillsAll = b;
@@ -4458,6 +4513,7 @@
       case "cx-lesson": haptic("tap"); openLesson(id); return;
       case "cx-competency": haptic("tap"); go("competency"); return;
       case "cx-skills": haptic("tap"); openSkills(); return;
+      case "cx-skill-sys": haptic("tap"); state.skillSys = id || ""; refreshSkillsList(); return;
       case "cx-skill": haptic("tap"); openSkillLesson(id); return;
 
       case "cx-turn-next": nextTurn(); return;
@@ -4906,6 +4962,7 @@
       if (rs) rs.innerHTML = dxResultsHTML(state.casePhase === "differential");
       return;
     }
+    if (t && t.id === "cxSkillQ") { state.skillQ = String(t.value || ""); refreshSkillsList(); return; }
     if (t && t.id === "cxPracSearchInput") {
       var Prac = PRACTICALS();
       if (Prac && Prac.onSearchInput) Prac.onSearchInput(t.value, { esc: esc, ic: ic, emptyState: emptyState });

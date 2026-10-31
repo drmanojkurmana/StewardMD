@@ -46,12 +46,12 @@ test("smd_kardia defaults ON for everyone (owner 2026-10-26); 0 or ?kardia=0 tur
 /* ---------- 2. boot loads only kardia-loader.js; the loader lists the engine + Kardia at one token ---------- */
 test("app boot loads only kardia-loader.js; the loader lists the engine and Kardia files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
-  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd9" defer></script>'), "loader tag at krd9");
+  assert.ok(html.includes('<script src="/kardia-loader.js?v=krd15" defer></script>'), "loader tag at krd15");
   const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|kardia[-.\w]*)\.(js|css)\?v=\w+/g;
   const got = (html.match(eng) || []).filter((s) => !/kardiox/i.test(s));
-  assert.deepEqual(got, ["kardia-loader.js?v=krd9"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
+  assert.deepEqual(got, ["kardia-loader.js?v=krd15"], "boot requests no engine or Kardia file but the loader, and no KardiQ X file is mistaken for Kardia: " + got.join(","));
   const L = readFileSync("kardia-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
-  assert.equal(v, "krd9", "the loader injects at the same token as its own tag");
+  assert.equal(v, "krd15", "the loader injects at the same token as its own tag");
   for (const f of ["specialty.css", "kardia.css", "specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "kardia-flags.js", "kardia.js"]) assert.ok(L.includes('"' + f + '"'), f);
   assert.ok(L.indexOf('"specialty-shell.js"') < L.indexOf('"kardia.js"'), "engine, then the host");
 });

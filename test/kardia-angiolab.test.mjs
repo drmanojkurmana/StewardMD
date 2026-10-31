@@ -33,7 +33,7 @@ test("bundle paths stay inside the Angio Lab folder", () => {
   assert.ok(js.includes("anatomy/coronary-"), "coronary fetch is relative");
   assert.ok(js.includes("baseUrl??`anatomy/`") || js.includes("baseUrl??\"anatomy/\""), "mesh base is relative");
   assert.equal(js.includes("app-store-badge"), false);
-  assert.ok(js.includes("privacy.html") && js.includes("support.html"));
+  assert.equal(js.includes("children:`Privacy`") || js.includes("children:`Support`"), false, "no Privacy / Support buttons on the credits sheet (owner 2026-10-27)");
   assert.ok(js.includes("vercel-noop.js") && !js.includes("/_vercel/"));
   assert.ok(js.includes("Tp=function(e){return`/kardia/angiolab/`+e}"), "chunk preload stays under the Angio Lab folder");
   assert.ok(js.includes("children:`AngioLAB`"));
@@ -59,4 +59,15 @@ test("Kardia opens Angio Lab in a frame next to Echo Lab and the build ships it"
   const b = readFileSync("scripts/build-www.sh", "utf8");
   assert.ok(b.includes("cp -R kardia/angiolab/."));
   assert.ok(b.includes('"$WWW/kardia/angiolab/"'));
+});
+
+test("AngioLAB and the Probe Lab wear Kardia's palette and sit flush (owner 2026-10-27: a black lab on a white page with cut white edges)", () => {
+  const k = readFileSync("kardia.js", "utf8"), css = readFileSync("kardia.css", "utf8");
+  assert.ok(k.includes('watchFrameTheme(frame, "angio")') && k.includes('watchFrameTheme(frame, "probe")'), "both frames are themed on load");
+  assert.ok(k.includes("--ink-") && k.includes("--accent:") && k.includes("--paper:"), "AngioLAB ramp and Probe Lab variables are written from Kardia tokens");
+  assert.ok(k.includes('attributeFilter: ["class"]'), "re-themed when the app theme flips");
+  assert.ok(/\.krd-angio-frame \{ flex: 1 1 auto;[^}]*background: var\(--kd-bg\)/.test(css), "frame sits on Kardia's background, not a fixed black");
+  assert.ok(css.includes(".krd-echo-scroll:has(.krd-probe-wrap) { padding: 0; }"), "Probe Lab is full width, no side margin");
+  assert.equal(css.includes("calc(100% + 40px)"), false, "no oversize frame: the labs fit the tab width");
+  assert.equal(k.includes("--safe-r:40px"), false, "no reserved right gutter inside the labs");
 });

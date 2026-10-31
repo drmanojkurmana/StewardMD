@@ -1123,7 +1123,7 @@
     narke: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
       if (!t || !homeToolEligible(t)) return;
-      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Narkē loading…");
+      if (window.NARKE && NARKE.open) NARKE.open(); else toast("Anesthetica loading…");
     },
     // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
     // when its flag is off: the Home tile hides and every entry refuses silently.
@@ -2157,12 +2157,14 @@
       eligible: function () { try { if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "queue", ic: "groups", tt: "OPD Queue", sub: "Patient flow",
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
-    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "The Cancer Library",
-      eligible: function () { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } } },
+    // One oncology tool on the home grid (owner 2026-10-30: "Single tool please"). ONCQIS already opens
+    // OncoTree and Cancer Staging from inside, so their own tiles only appear when ONCQIS is switched off.
+    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "OncoTree, staging, protocols", anim: "oncqis",
+      eligible: oncqisOn },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
-      eligible: function () { try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
+      eligible: function () { if (oncqisOn()) return false; try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
     { act: "staging", ic: "stairs", tt: "Cancer Staging", sub: "AJCC/TNM 32 Sites", feat: true, defOn: true,
-      eligible: function () { return true; } },
+      eligible: function () { return !oncqisOn(); } },
     // Specialty kits (specialty-kits.js): O&G, Paediatrics, Orthopaedics, Ophthalmology, ENT, Dermatology,
     // Psychiatry, Dental. eligible() reads the flag directly: home.js loads before specialty-kits-flags.js,
     // so SMD_KITS_FLAGS may not exist yet at tile-render time. Same resolution: ?kits= then localStorage.
@@ -2200,7 +2202,7 @@
       eligible: function () { try { var q = (location.search.match(/[?&]prep=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_prep") !== "0"; } catch (e) { return true; } } },
     // Narkē (narke.js on the specialty engine, loaded on first open by narke-loader.js): Anaesthesia learning. ON for all
     // (owner 2026-10-06); kill switch smd_narke="0" or ?narke=0. Content stays "draft" until an anaesthesiologist approves it.
-    { act: "narke", ic: "masks", tt: "Narkē", sub: "Anaesthesia",
+    { act: "narke", ic: "masks", tt: "Anesthetica", sub: "Anaesthesia",
       eligible: function () { try { var q = (location.search.match(/[?&]narke=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_narke") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
@@ -2427,7 +2429,10 @@
     // knife"): redesign-system.css sweeps a streak of light across the mark, clipped to its shape.
     surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">',
     // PrepNucleus: the 4K nucleus mark (prepnucleus-logo.png), alpha-masked; brightness(0) invert(1) forces it white on this badge.
-    prep: '<img class="ai-brandmark ai-prep-img" src="/prepnucleus-logo.png" alt="PrepNucleus">'
+    prep: '<img class="ai-brandmark ai-prep-img" src="/prepnucleus-logo.png" alt="PrepNucleus">',
+    // ONCQIS: a tile-size cut of the owner's mark (assets/oncqis-glyph.svg): hexagon network, antibodies and the
+    // targeted core, with the fine inner lattice dropped because it fused into a blob at 38px. Already white.
+    oncqis: '<img class="ai-brandmark ai-oncqis-img" src="/assets/oncqis-glyph.svg" alt="">'
   };
   /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the
    * open ones, and explain themselves on tap. role-features.js owns the map; this is presentation
@@ -3028,6 +3033,7 @@
     } catch (e) { return true; }
   }
   // One flag check for every Govt Schemes entry point (HOME_TOOLS tile, Hospital hub, More sheet).
+  function oncqisOn() { try { if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.bool) return SMD_QUEUE_FLAGS.bool("smd_onco_home"); return localStorage.getItem("smd_onco_home") !== "0"; } catch (e) { return true; } }
   function govschemesOn() { return !!(window.SMD_GOVSCHEMES_FLAGS && SMD_GOVSCHEMES_FLAGS.bool("smd_govt_schemes")); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   // A small section label inside the More sheet (same look as the old "Legal & safety" heading).
@@ -11377,19 +11383,55 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function smdPromptOK() { return smdSignedIn() && !smdGateUp(); }
   try { window.SMD_PROMPT_OK = smdPromptOK; } catch (e) {}
 
+  /* One prompt at a time, and room to breathe. Owner: "Let the user breathe dude" after the update
+   * banner, the offline-download sheet and the notification ask all landed together on first open.
+   * Every launch-time prompt (push ask, offline download ask, OTA banner) calls try(name, kind) on
+   * its own poll and shows only when it returns true, then calls done(name) when dismissed.
+   *   - signed in and Home really on screen, continuously for CALM_MS, before anything appears;
+   *   - nothing else currently open (one holder);
+   *   - GAP_MS of quiet after the previous prompt closes;
+   *   - kind "ask" (push, offline download): at most one per app session, the next waits for a later
+   *     launch. kind "notice" (OTA banner) is exempt from that cap but obeys the other three. */
+  var CALM_MS = 20000, GAP_MS = 45000, HOLD_MAX_MS = 600000;
+  var _pCalm = 0, _pHeld = null, _pHeldAt = 0, _pEnd = 0, _pAsk = false;
+  window.SMD_PROMPT = {
+    try: function (name, kind) {
+      var now = Date.now();
+      if (!smdPromptOK() || document.hidden) { _pCalm = 0; return _pHeld === name; }
+      if (!_pCalm) _pCalm = now;
+      if (_pHeld === name) return true;
+      if (_pHeld && now - _pHeldAt < HOLD_MAX_MS) return false;
+      if (now - _pCalm < CALM_MS) return false;
+      if (_pEnd && now - _pEnd < GAP_MS) return false;
+      if (kind === "ask" && _pAsk) return false;
+      _pHeld = name; _pHeldAt = now; if (kind === "ask") _pAsk = true;
+      return true;
+    },
+    done: function (name) { if (_pHeld === name) { _pHeld = null; _pEnd = Date.now(); } }
+  };
+
+  var _pushState = null;
   function maybeOfferPushOnOpen() {
     var P = nativePush(); if (!P || window.__smdPushOffered) return;
     // Not yet: still on the splash / intro / sign-in gate, or not signed in. Asking here is exactly
     // what put this popup on the pre-login screen. The caller retries, so this is a "later", not a no.
     if (!smdPromptOK()) return;
+    if (_pushState === null) {
+      _pushState = "pending";
+      P.checkPermissions().then(function (res) {
+        var st = res && res.receive;
+        if (st === "granted") { window.__smdPushOffered = true; initNativePushListeners(); try { P.register(); } catch (e) {} return; }
+        if (st !== "prompt") { window.__smdPushOffered = true; return; }   // denied → don't nag
+        _pushState = "prompt";
+      }).catch(function () { _pushState = null; });
+      return;
+    }
+    if (_pushState !== "prompt") return;
+    // Permission is undecided: wait for the shared quiet slot instead of landing with other prompts.
+    if (window.SMD_PROMPT && !window.SMD_PROMPT.try("push", "ask")) return;
     window.__smdPushOffered = true;
     initNativePushListeners();
-    P.checkPermissions().then(function (res) {
-      var st = res && res.receive;
-      if (st === "granted") { try { P.register(); } catch (e) {} return; }
-      if (st !== "prompt") return;   // denied → don't nag
-      showPushPopup();
-    }).catch(function () {});
+    showPushPopup();
   }
   function showPushPopup() {
     if (document.getElementById("smdPushPop")) return;
@@ -11406,7 +11448,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid color-mix(in srgb, var(--line,#d7dee3) 80%, transparent);border-radius:14px;background:color-mix(in srgb, var(--panel,#fff) 45%, transparent);color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
       '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:14px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer;box-shadow:0 4px 14px -4px rgba(14,110,99,.65)">Turn on</button></div></div>';
     document.body.appendChild(d);
-    function close() { if (d.parentNode) d.parentNode.removeChild(d); }
+    function close() { if (d.parentNode) d.parentNode.removeChild(d); if (window.SMD_PROMPT) window.SMD_PROMPT.done("push"); }
     d.querySelector("#smdPushLater").addEventListener("click", close);
     d.addEventListener("click", function (e) { if (e.target === d) close(); });
     d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
@@ -11422,7 +11464,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         var tries = 0;
         var iv = setInterval(function () {
           try { maybeOfferPushOnOpen(); } catch (e) {}
-          if (window.__smdPushOffered || ++tries > 80) { try { clearInterval(iv); } catch (e2) {} }
+          if (window.__smdPushOffered || ++tries > 400) { try { clearInterval(iv); } catch (e2) {} }
         }, 1500);
       });
     } catch (e) {}

@@ -75,7 +75,10 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
   Gotcha: label changes can move `monitorRegion`, invalidating crop caches; run without --cached-only
   (and in foreground chunks on the 8 GB Mac: background runs get killed for low memory).
 - Imaging import + correlation — Phase 1 shipped (`smd_icu_imaging`); phases 2–4 pending
-- ICU v2 redesign + collab — `feat/icu-v2-redesign` BUILT, flags `smd_icu_v2`/`smd_icu_groups` OFF, NOT deployed (owner must deploy rules+indexes, emulator + 2-device test)
+- ICU v2 + collab — v2 is the only dashboard (`icuV2On()` always true). Group mode `smd_icu_groups` defaults ON in
+  BOTH `icu.js` and `icu-collab.js` (only "0" = solo). Settings switch = `grpSetMode()`, in place, no reload
+  (2026-10-28; it used to `location.reload()` the whole app). `grpStopAll()` is the one teardown for every shared-unit
+  listener/timer. Test: `test/run-icu-grptoggle.mjs`.
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed
 - Lab Watch — needs Google/Apple sign-in for 24/7
 
@@ -87,6 +90,32 @@ radii `--r:12 / --r-sm:10 / --r-xs:8 / --r-pill`, `--sh` (1px hairline) + `--sh-
 Rules of the system: hairlines separate (not shadows); status colour is reserved for status (a stable
 bed tile is neutral); header chrome is FLAT `--primary2`, never a gradient; numbers use tabular
 figures; selection is colour + weight, press is brightness. See [[Decisions]] (2026-08-22).
+**UI floor (2026-10-29, impeccable / ui-ux-pro-max / no-slop-ui / antislop-ui pass; test `test/run-icu-ui-floor.mjs`):**
+- `--fill` is the teal under white text; `--primary` is teal TEXT. Dark: text #4CC2B0, fill #1F7A6E (Refined Look
+  split), set by `html body:is(.dark,.v3-dark) :is(#icuRoot,...)` so it outranks `redesign-system.css`, which maps
+  `--primary` to the app-wide dark #2f9184 (4.0:1 as text, 3.9:1 under white). `--danger-fill` likewise for badges.
+  Never colour text with `--primary2` (a dark fill in dark mode).
+- Buttons are SOLID `--fill`, never a gradient.
+- Every control is >= 46 CSS px (= 44pt after home.js's 0.95 small-phone shrink). Specific selectors that set their
+  own `min-height` (tabs, chips, segments) must say 46px too, or they win over the floor.
+- Type floor 11px; no tracked uppercase anywhere in `injectCSS()` (print styles excepted).
+- Icons are drawn (`ico()`), never text glyphs: Rounds checkboxes are `.icu-rcb` + `ico("check")`, edit is `ico("edit")`.
+
+**Overview layout C (default since 2026-10-29; `smd_icu_ov` = a | b | c, "0" = the previous Overview):** alerts open the
+page as one hairline panel (`ovAlertsPanel`: severity as a word column, grouped by system, critical groups first), then
+vitals, then the rest; on a tablet (>= 900px) two panes, clinical state left and plan right, with the 820px cap lifted.
+Empty ventilator/ABG collapse to one "Add" line; scores waiting for data fold into one expandable line; Trends and Lab
+Watch are plain rows; the Overview/Rounds sub-chips are hidden (both are top tabs). Composition lives in `renderBody`.
+**No coloured stripes anywhere** (board cards, attention cards, alert rows, status bars, header counts): severity is a
+coloured word, label or icon. Tiles colour only the abnormal value (no tinted fill; normal is ink). Section labels are
+ink headings without icons; secondary card actions are teal text actions. Guarded by `test/run-icu-ui-floor.mjs`.
+
+**Never `text-transform:uppercase` a clinical label.** Labels are authored in clinical case (pH, PaCO₂, SpO₂, FiO₂,
+HCO₃⁻); uppercase turned them into "PH", "PACO₂", "SPO₂". Tile labels (`.icu-vc .vl`), board vital keys
+(`.icu-v2-vk`) and header chips (`.icu-v2-mv-k`) are sentence/clinical case since 2026-10-28.
+Floating buttons: camera `#icuSnap` and Lab Watch `#icuWatch` (48px icon button above it in v2); `#icuRoot.icu-has-fab`
+gives `.icu-scroll` 150px bottom room so the last card clears both. The swipe "Remove" action is
+`visibility:hidden` until a swipe starts (`.sw-on`), or it bleeds through each card's rounded corner as a red arc.
 
 ## Calculators
 CAM-ICU was added 2026-09-19 (`calculators.js`, id `camicu`), the one ICU score the file lacked. It
@@ -97,6 +126,15 @@ CAM (`cam`, Neurology, Inouye 1990), which needs a patient who can be interviewe
 reachable from `MEDCALC.find`. Test: `test/camicu.test.mjs`.
 
 ## Gotchas
+- **Background repaints never run under a focused text field (2026-10-29).** `paint()` rebuilds `#icuRoot`, which
+  replaces the field being typed in, so iOS closed the keyboard after one letter (and the round-note composer lost the
+  text). Anything not caused by a tap goes through `paintPassive()`: the state subscriber, `paintLive`, the scroll
+  flush, the task heartbeat and the `if (ICU.isOpen())` callbacks. It holds the repaint while `typingInRoot()` and
+  lands it on `focusout` (`flushTypingPaint`) or on the next control tap (`onClick` blurs the field). New async code:
+  call `paintPassive()`, not `paint()`. Test: `test/run-icu-typing-focus.mjs`.
+- **Severity sorts use `rankOf(map, k)`, never `map[k] || 9`.** Critical's rank is 0 (falsy), so the old idiom sorted
+  CRITICAL patients to the BOTTOM of the unit board (solo and group) and crit alerts below warnings. Fixed 2026-10-28;
+  test `test/run-icu-board-order.mjs`.
 - Chips feed the engine with NO rebaseline (icu.js only).
 - SW-warmup flakiness in headless tests (warmup protocol).
 - **Always read current vitals via `mergedVitals(_raw.vitals)`, never `latestVitals()`.**

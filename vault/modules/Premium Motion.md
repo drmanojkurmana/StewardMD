@@ -1,7 +1,7 @@
 ---
 tags: [module, ui, native, motion]
 status: BUILT, browser-tested on the real app (headless Chromium, touch emulation). Not yet seen on a handset. The Live Activity Swift (plugin + widget) is written but NOT compiled in this session (no toolchain in the cloud container) - needs a native rebuild.
-flag: one kill switch per module, all default ON except sounds - localStorage smd_sheet_drag, smd_sheet_depth, smd_view_tx, smd_large_title, smd_pull_refresh, smd_picker_haptics, smd_skeletons, smd_peek, smd_live_activity, smd_swipe_actions, smd_tab_indicator, smd_status_top, smd_az_scrub, smd_kb_aware, smd_undo, smd_blur_up, smd_launch_morph, smd_sound_module = "0". Sounds are OFF until `smd_sound=1` (Settings > Display & Accessibility > Sounds)
+flag: one kill switch per module, all default ON except sounds - localStorage smd_sheet_drag, smd_sheet_depth, smd_view_tx, smd_page_motion, smd_large_title, smd_pull_refresh, smd_picker_haptics, smd_skeletons, smd_peek, smd_live_activity, smd_swipe_actions, smd_tab_indicator, smd_status_top, smd_az_scrub, smd_kb_aware, smd_undo, smd_blur_up, smd_launch_morph, smd_sound_module = "0". Sounds are OFF until `smd_sound=1` (Settings > Display & Accessibility > Sounds)
 ---
 # Premium Motion (iOS-like interaction layer)
 
@@ -19,6 +19,7 @@ module edits), each with its own kill switch, loaded by index.html right after s
 | `picker-haptics.js` | sliders tick per step (firmer at ends); wheel pickers tick per row | `input[type=range]`; small vertical scroll-snap lists |
 | `skeletons.js` | the ~70 "Loading…" placeholders become shimmer rows; content fades up when it arrives | MutationObserver; pure CSS on the placeholder, text kept (screen readers still hear it) |
 | `long-press-preview.js` | hold a row with its own buttons: it lifts over a blurred page with an iOS menu ("Open" + the row's actions) | rows with inner controls only; no copy/share (no-copy.js PHI rule stands) |
+| `page-motion.js` | (2026-10-28) any full-screen page/module that is a direct child of body rises+fades in and fades down on close, instead of popping; a tapped Back control cross-fades | class/hidden/style flip to `display:none` is re-shown inline for a 190ms exit; a REMOVED node gets an inert, id-less copy (no iframes/video/scripts, `data-pm-ghost`). Never adds an entrance to a page that animates its own (CSS transition/animation); skips splash/intro/sign-in gates and anything dialog-motion.js owns. Kill switch `smd_page_motion` |
 | `live-activities.js` + Swift | ICU task deadline / OPD consult on the Dynamic Island and Lock Screen, clock ticking natively | `SMD_liveActivity.upsert/end`, called from icu.js `grpLiveActivity()` and queue.js `liveActivity()` |
 
 ## Round 2 (same day)

@@ -468,6 +468,51 @@
     var on = st.fieldMic === name;
     return '<button type="button" class="oe-fmic' + (on ? " on" : "") + '" data-oe-act="fieldmic:' + esc(name) + '" aria-label="Dictate this field" title="Dictate this field">' + ms(on ? "stop" : "mic") + "</button>";
   }
+  /* A small tool button beside the field a specialty tool belongs to (specialty-kits.js fieldTool): LMP -> pregnancy dating,
+     Weight and Height -> WHO growth, Local examination -> burns chart, Management plan -> local anaesthetic dose. Which ones show
+     follows the doctor's specialty. Only while the assessment can be written (the tool's Add writes into the note). */
+  function toolBtn(name) {
+    var T = null;
+    try { T = kitsOn() && G.SMD_KITS.fieldTool && G.SMD_KITS.fieldTool(name); } catch (e) { T = null; }
+    if (!T || !st.writeOn || st.assessAuthorized) return "";
+    return '<button type="button" class="oe-ftool" data-oe-act="kit-tool:' + esc(name) + '" aria-label="' + esc(T.title) + '" title="' + esc(T.title) + '">' + ms(T.icon || "calculate") + "</button>";
+  }
+  /* One floating "Specialty tools" button on every OPD tab opens the doctor's specialty kit (the same kit as the Specialty tab, chips and
+     all) in a sheet; any tool or section can be used there, and Export to EMR puts everything used into the note in one tap
+     (each result in its own field) or as one combined note. A field button (toolBtn) opens the same sheet at that tool. */
+  var KIT_EXPORT_FIELDS = [["History_present_illness", "Present history"], ["sys_examination", "Systemic examination"], ["management_plan", "Management plan"]];
+  function toolFab(st) {
+    if (!kitsOn() || !st.writeOn || st.assessAuthorized || st.loading || st.error || st.toolSheet || st.tab === "kit") return "";
+    return '<button type="button" class="oe-fab" data-oe-act="kit-tool" aria-label="Specialty tools" title="Specialty tools">' + ms("construction") + "<span>Tools</span></button>";
+  }
+  function toolSheetHtml(st) {
+    if (!st.toolSheet || !kitsOn()) return "";
+    var opts = KIT_EXPORT_FIELDS.map(function (o) { return '<option value="' + esc(o[0]) + '">' + esc(o[1]) + "</option>"; }).join("");
+    return '<div class="oe-toolsheet" role="dialog" aria-modal="true" aria-label="Specialty tools"><div class="oe-toolsheet-card">' +
+      '<header class="oe-toolsheet-h"><b>Specialty tools</b><button type="button" class="oe-toolsheet-x" data-oe-act="kit-tool-close" aria-label="Close">' + ms("close") + "</button></header>" +
+      '<div class="oe-toolsheet-b oe-kit">' + G.SMD_KITS.html({ host: kitHost, key: kitKey(), defaultKit: G.SMD_KITS.mySpecialty() || scribeSpecialtyId() }) + "</div>" +
+      '<footer class="oe-toolsheet-f"><div class="oe-toolsheet-fr"><button type="button" class="oe-btn pri oe-export" data-oe-act="kit-export">' + ms("upload") + "Export to EMR</button></div>" +
+      '<div class="oe-toolsheet-fr"><button type="button" class="oe-btn oe-export1" data-oe-act="kit-export-one">One combined note into</button>' +
+      '<select class="oe-exsel" id="oeKitExField" aria-label="Field for the combined note">' + opts + "</select></div></footer></div></div>";
+  }
+  function openToolSheet(field) {
+    if (!kitsOn()) return;
+    var T = field ? G.SMD_KITS.fieldTool(field) : null;
+    st.toolSheet = { tool: T ? T.id : "" }; paint();
+    var load = G.SMD_KITS.loadKits ? G.SMD_KITS.loadKits() : Promise.resolve();
+    var more = T && T.id === "growth-who" && G.SMD_KITS.loadGrowth ? G.SMD_KITS.loadGrowth() : null;
+    Promise.all([load, more]).then(null, function () {}).then(function () {
+      if (!st.toolSheet) return;
+      if (T) { var kid = G.SMD_KITS.kitHoldingTool(T.id); if (kid) G.SMD_KITS.state(kitKey()).kitId = kid; }
+      paint();
+      if (T) setTimeout(function () { var el = document.querySelector('#smdOpdEmr .oe-toolsheet [data-kit-tool="' + T.id + '"]'); if (el && el.scrollIntoView) el.scrollIntoView({ block: "start" }); }, 60);
+    });
+  }
+  function exportToEmr(mode) {
+    var sel = document.getElementById("oeKitExField");
+    var n = G.SMD_KITS.exportAll({ host: kitHost, key: kitKey(), mode: mode, field: sel ? sel.value : "History_present_illness" });
+    return n;
+  }
   // "Search ICD" button, shown only on the provisional diagnosis field - picking a code appends
   // "CODE - Title" as a new line rather than replacing whatever the doctor already typed, same
   // additive behaviour as the per-field mic. window.SMD_ICD comes from icd.js (loaded default-on,
@@ -487,7 +532,7 @@
     if (f.k === "textarea") {
       var extra = f.n === "provisional_diagnosis" ? (icdBtn(f.n) + icdSuggestBtn(f.n)) : "";
       var panel = f.n === "provisional_diagnosis" ? '<div class="oe-icdsug" id="oeIcdSug"></div>' : "";
-      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + extra + "</span>" + panel, f.r, re);
+      return fieldRow(f.l, '<span class="oe-inp-wrap"><textarea class="oe-inp" data-oe-inp="' + esc(id) + '">' + esc(val) + "</textarea>" + fmicBtn(f.n) + toolBtn(f.n) + extra + "</span>" + panel, f.r, re);
     }
     if (f.k === "yesno") return ynRow(f, val);
     if (f.k === "select" && f.opts && f.opts.length) {
@@ -497,7 +542,7 @@
       return fieldRow(f.l, '<span class="oe-inp-wrap"><select class="oe-inp oe-sel" data-oe-inp="' + esc(id) + '">' + optHtml + '</select>' + fmicBtn(f.n) + '</span>', f.r, re);
     }
     var type = f.k === "number" ? "number" : "text";
-    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '"' + (f.n === "informany_attendant" ? " data-phi-input" : "") + ' value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + "</span>", f.r, re);
+    return fieldRow(f.l, '<span class="oe-inp-wrap"><input class="oe-inp" type="' + type + '" data-oe-inp="' + esc(id) + '"' + (f.n === "informany_attendant" ? " data-phi-input" : "") + ' value="' + esc(val) + '" placeholder="' + esc(f.p) + '">' + fmicBtn(f.n) + toolBtn(f.n) + "</span>", f.r, re);
   }
   // one section = a native <details> accordion (zero-JS collapse; survives typing since onInput doesn't re-render).
   // header shows a required-badge (n/m) or a filled count so the doctor sees at a glance what still needs attention.
@@ -735,6 +780,95 @@
       }
     }
     return { vals: out, filled: filled, dropped: dropped, conflicts: conflicts };
+  }
+
+  // ---- voice history inference: comorbidities + home drugs said in the consult -----------------------
+  // The cloud draft sometimes leaves the Y/N tick-boxes empty even when the doctor said "known diabetic on
+  // metformin". This on-device pass reads the English transcript and ticks the matching comorbidity, writes
+  // its details and the current medicines. Conservative: a denied condition is never ticked, a drug the
+  // doctor is STARTING today is not history, nothing is overwritten that already has a value, and it only
+  // ever fills the Y/N + details + medicines fields (vitals stay with the deterministic extractor).
+  var HX_CONDS = [
+    { id: "dm", n: /\b(diabet\w*|dm|t2dm|t1dm|type\s*(?:2|ii|two|1|i|one)\s*(?:dm|diabetes)|sugar\s+(?:patient|problem|disease)|k\/?c\/?o\s+dm)\b/,
+      d: /\b(metformin|glimepiride|gliclazide|glipizide|glibenclamide|insulin|glargine|lantus|mixtard|actrapid|sitagliptin|vildagliptin|teneligliptin|linagliptin|saxagliptin|dapagliflozin|empagliflozin|canagliflozin|pioglitazone|voglibose|acarbose|semaglutide|liraglutide|dulaglutide|glycomet|amaryl|janumet|galvus)\b/ },
+    { id: "htn", n: /\b(hypertensi\w*|htn|high\s+(?:bp|blood\s+pressure)|k\/?c\/?o\s+htn)\b/,
+      d: /\b(telmisartan|amlodipine|losartan|olmesartan|valsartan|candesartan|irbesartan|enalapril|ramipril|lisinopril|perindopril|hydrochlorothiazide|chlorthalidone|indapamide|nifedipine|cilnidipine|telma|amlong|prazosin)\b/ },
+    { id: "cardiac", n: /\b(coronary|cad|ihd|ischemic\s+heart|ischaemic\s+heart|heart\s+attack|myocardial\s+infarction|stent|angioplasty|cabg|bypass\s+surgery|heart\s+failure|chf|cardiomyopathy|atrial\s+fibrillation|afib|rheumatic\s+heart|valvular)\b/,
+      d: /\b(clopidogrel|ticagrelor|prasugrel|sacubitril|isosorbide|digoxin|ivabradine|ranolazine)\b/ },
+    { id: "asthma", n: /\b(asthma|asthmatic|copd|chronic\s+obstructive)\b/,
+      d: /\b(salbutamol|levosalbutamol|formoterol|budesonide|tiotropium|montelukast|seroflo|foracort|ipratropium)\b/ },
+    { id: "tb", n: /\b(tuberculosis|tb|koch'?s?|pulmonary\s+tb)\b/,
+      d: /\b(rifampicin|rifampin|isoniazid|ethambutol|pyrazinamide|akt|att|anti[\s-]*tubercular)\b/ },
+    { id: "thyroid", n: /\b(thyroid|hypothyroid\w*|hyperthyroid\w*|graves)\b/,
+      d: /\b(thyroxine|levothyroxine|eltroxin|thyronorm|carbimazole|neomercazole|methimazole)\b/ },
+    { id: "epilepsy", n: /\b(epilep\w*|seizure\s+disorder)\b/,
+      d: /\b(phenytoin|levetiracetam|valpro\w*|carbamazepine|lamotrigine|oxcarbazepine|topiramate|eptoin|levipil|anti[\s-]*epileptic)\b/ },
+    { id: "ckd", n: /\b(ckd|chronic\s+kidney|chronic\s+renal|renal\s+failure|kidney\s+failure|dialysis)\b/, d: null },
+    { id: "cld", n: /\b(cirrhosis|chronic\s+liver|hepatitis\s*[bc]|liver\s+disease|hbsag\s+positive)\b/, d: null },
+    { id: "cancer", n: /\b(cancer|carcinoma|malignan\w*|lymphoma|leuk(?:a)?emia|myeloma|sarcoma|chemotherapy|chemo)\b/, d: null },
+    { id: "cva", n: /\b(stroke|cva|hemiplegia|hemiparesis|paralytic\s+attack|cerebrovascular)\b/, d: null },
+    { id: "dyslipidemia", n: /\b(dyslipid\w*|hypercholesterol\w*|high\s+cholesterol|hyperlipid\w*)\b/,
+      d: /\b(atorvastatin|rosuvastatin|simvastatin|fenofibrate|ezetimibe|statin)\b/ }
+  ];
+  var HX_DRUGS = /\b(metformin|glimepiride|gliclazide|glipizide|insulin|sitagliptin|vildagliptin|teneligliptin|dapagliflozin|empagliflozin|pioglitazone|telmisartan|amlodipine|losartan|olmesartan|enalapril|ramipril|atenolol|metoprolol|bisoprolol|carvedilol|hydrochlorothiazide|chlorthalidone|nifedipine|atorvastatin|rosuvastatin|clopidogrel|aspirin|ecosprin|warfarin|apixaban|rivaroxaban|thyroxine|levothyroxine|salbutamol|montelukast|phenytoin|levetiracetam|valproate|carbamazepine|prednisolone|omeprazole|pantoprazole|furosemide|spironolactone|allopurinol|febuxostat|paracetamol|diclofenac|tamsulosin|finasteride|folic\s+acid)\b/g;
+  var HX_NEG = /\b(no|not|non|denies|denied|without|nil|negative|never|neither|rule[sd]?\s+out)\b/;
+  var HX_START = /\b(start|starting|started|restart\w*|prescrib\w*|advis\w*|add|adding|give|giving|put\s+(?:him|her|them)\s+on|initiat\w*|we\s+will|i\s+will|let'?s|plan|syp|tab\.?\s+to)\b/;
+  function _hxSentences(text) {
+    return String(text || "").replace(/\s+/g, " ").split(/(?<=[.;?!])\s+|\n+/).map(function (x) { return x.trim(); }).filter(Boolean);
+  }
+  // Is the match at index i inside a negated stretch? Looks back to the sentence start or a " but ".
+  function _hxNegated(sent, i) {
+    var back = sent.slice(Math.max(0, i - 80), i), cut = Math.max(back.lastIndexOf(" but "), back.lastIndexOf(" however "), back.lastIndexOf(" and has "), back.lastIndexOf(" also has "));
+    if (cut >= 0) back = back.slice(cut + 1);
+    // "no fever, known diabetic": the comma ends the denial. "no diabetes, hypertension": a bare list
+    // item right after the comma carries the denial on.
+    var segs = back.split(","), k = segs.length - 1;
+    while (k > 0 && /^\s*(?:(?:or|and|nor)\s+)?(?:[a-z\/\-]+\s*){0,3}$/.test(segs[k]) && !/\b(known|has|have|had|on|taking|history|c\/o|k\/c\/o)\b/.test(segs[k])) k--;
+    return HX_NEG.test(segs.slice(k).join(","));
+  }
+  function _hxDrugLine(sent, m) {
+    var tail = sent.slice(m.index + m[0].length, m.index + m[0].length + 40);
+    var dose = tail.match(/^\s*(\d+(?:\.\d+)?\s*(?:mg|mcg|g|units?|iu|ml)?)?\s*(od|bd|bid|tds|tid|qid|hs|once\s+(?:a\s+)?day|once\s+daily|twice\s+(?:a\s+)?day|twice\s+daily|thrice\s+(?:a\s+)?day|daily|at\s+night|morning|sos)?/i);
+    var name = m[0].charAt(0).toUpperCase() + m[0].slice(1).toLowerCase();
+    var bits = dose ? [dose[1], dose[2]].filter(function (x) { return x && x.trim(); }).map(function (x) { return x.trim(); }) : [];
+    return (name + (bits.length ? " " + bits.join(" ") : "")).replace(/\s+/g, " ");
+  }
+  // PURE. Returns [{field, value, applied}] in the VOICE_MAP key space (dm, dmDetails, homeMeds ...).
+  // `vals` is the current assessVals, used so a value already on the form is never overwritten.
+  function _inferHistory(text, vals) {
+    vals = vals || {}; var out = [], seen = {}, meds = [], medSeen = {};
+    var sents = _hxSentences(text);
+    function put(field, value) { if (!seen[field]) { seen[field] = 1; out.push({ field: field, value: value, applied: true }); } }
+    sents.forEach(function (sent) {
+      var low = sent.toLowerCase(), starting = HX_START.test(low);
+      HX_CONDS.forEach(function (c) {
+        var yn = VOICE_MAP[c.id], det = VOICE_MAP[c.id + "Details"];
+        if (!yn || vals[yn] === "Y" && !det) return;
+        var nm = c.n.exec(low), hit = false, neg = false, drug = null;
+        if (nm) { neg = _hxNegated(low, nm.index); hit = !neg; }
+        if (!hit && !neg && c.d && !starting) { drug = c.d.exec(low); if (drug && !_hxNegated(low, drug.index)) hit = true; }
+        if (neg && vals[yn] !== "Y" && !seen[c.id]) { if (!vals[yn]) put(c.id, "No"); return; }
+        if (!hit) return;
+        if (vals[yn] !== "Y") { seen[c.id] = 1; out = out.filter(function (u) { return u.field !== c.id; }); out.push({ field: c.id, value: "Yes", applied: true }); }
+        var dkey = c.id + "Details";
+        if (det && !vals[det] && !seen[dkey]) put(dkey, sent.length > 220 ? sent.slice(0, 217) + "..." : sent);
+      });
+      // Home medicines said in a history sentence (not ones the doctor is prescribing now).
+      if (!starting) {
+        var re = new RegExp(HX_DRUGS.source, "g"), m;
+        while ((m = re.exec(low))) {
+          if (_hxNegated(low, m.index)) continue;
+          var line = _hxDrugLine(low, m), key = m[0].toLowerCase();
+          if (!medSeen[key]) { medSeen[key] = 1; meds.push(line); }
+        }
+      }
+    });
+    if (meds.length && !vals.home_medications) out.push({ field: "homeMeds", value: meds.join(", "), applied: true });
+    return out;
+  }
+  function applyInferredHistory(text) {
+    if (!text || !st || !st.assessVals) return;
+    try { applyVoice({ updates: _inferHistory(text, st.assessVals) }); } catch (e) {}
   }
 
   // Ambient consultation control bar (shown only when the ambient engine is loaded): start/pause/stop
@@ -1085,18 +1219,34 @@
         '<button class="oe-btn ghost" data-oe-act="rx-summary" title="View, print, or share patient consultation summary">' + ms("print") + "Summary</button>" +
         saveBtn + authBtn + "</div>";
     }
-    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + doseCalcBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
+    return consultBar(st) + reviewPanel(st) + scribeClinicalPanels(st) + triageHtml + allergyHtml + notifHtml + vitalsSyncBanner() + maikAskBtn(st) + oncoReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + protoBox(st) + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
-  // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
-  // as the other AI-assist panels): offers ONLY ACTIVE protocols already fetched into st.oncoProtocols
-  // (Phase 4). Once a plan is staged (st.oncoDraft), this slot shows the review/override panel
-  // instead. Gated the same way the rest of the write UI is gated (flag + st.writeOn); delegates the
-  // actual markup to onco-protocols.js (window.SMD_ONCOUI) so opd-emr.js stays the shell.
-  function oncoApplyOrReviewPanel(st) {
-    if (!oncoFlagOn() || !st.writeOn) return "";
-    if (st.oncoDraft) return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildReviewPanel) ? G.SMD_ONCOUI._buildReviewPanel(st.oncoDraft) : "";
-    return oncoTreeLaunchBtn() + ((G.SMD_ONCOUI && G.SMD_ONCOUI._buildApplyPanel) ? G.SMD_ONCOUI._buildApplyPanel(st.oncoProtocols || []) : "");
+  // Review/override panel for a STAGED oncology plan stays where the doctor expects it (above the form).
+  function oncoReviewPanel(st) {
+    if (!oncoFlagOn() || !st.writeOn || !st.oncoDraft) return "";
+    return (G.SMD_ONCOUI && G.SMD_ONCOUI._buildReviewPanel) ? G.SMD_ONCOUI._buildReviewPanel(st.oncoDraft) : "";
   }
+  // "Protocols and dose tools": ONE collapsed card under the treatment section. Inside: the dose
+  // calculator, the OncoTree navigator, and a search box over a fixed-height scroll box that lists EVERY
+  // protocol (clinical KB + oncology regimens), so it never pushes the form down the page.
+  function protoBox(st) {
+    var tools = doseCalcBtn(st) + (oncoFlagOn() && st.writeOn ? oncoTreeLaunchBtn() : "");
+    var clinOn = kbpOn(), oncOn = oncoFlagOn();
+    if (!tools && !clinOn && !oncOn) return "";
+    var open = !!st.pbOpen;
+    if (open) { try { maybeLoadKbp(); maybeLoadOncoProtocols(true); } catch (e) {} }
+    var n = (st.kbpIndex ? st.kbpIndex.count : 0) + (oncOn ? (st.oncoProtocols || []).length : 0);
+    return '<details class="oe-acc oe-pbox" data-oe-pb' + (open ? " open" : "") + '><summary class="oe-acc-h"><span class="oe-acc-ic">' + ms("account_tree") + '</span><span class="oe-acc-t">Protocols &amp; dose tools</span>' +
+      (n ? '<span class="oe-cnt">' + n + "</span>" : "") + '<span class="oe-chev">' + ms("expand_more") + "</span></summary>" +
+      '<div class="oe-acc-body">' + (tools ? '<div class="oe-pb-tools">' + tools + "</div>" : "") +
+      (clinOn || oncOn ? searchBox("pb", st.pbQuery, "Search any protocol: sepsis, pneumonia, hypothermia, drug") +
+        '<div class="oe-pb-scroll" id="oe-out-pb">' + (open ? pbResults(st) : "") + "</div>" : "") + "</div></details>";
+  }
+  function pbResults(st) {
+    return protoResults({ kbpIndex: st.kbpIndex, kbpError: st.kbpError, oncoProtocols: st.oncoProtocols, oncoProtocolsReady: st.oncoProtocolsReady,
+      writeOn: st.writeOn, protoBranch: "all", protoBasis: "all", protoQuery: st.pbQuery || "", protoOncoType: "", pbMode: true });
+  }
+  function renderPbOut() { try { var el = document.querySelector("#smdOpdEmr #oe-out-pb"); if (el) el.innerHTML = pbResults(st); } catch (e) {} }
   // Launch the OncoTree pathway navigator FOR THIS PATIENT (carries patient ctx so its "Continue in
   // treatment workflow" hands the chosen protocol straight back here to compute doses). Nav-flag gated.
   function oncoNavOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_navigator")); } catch (e) { return false; } }
@@ -1236,9 +1386,9 @@
     if (ready) { st.kbpIndex = ready; return; }
     var mine = st; st.kbpLoading = true; st.kbpError = false;
     G.SMD_KBPROTO.loadIndex().then(function (idx) {
-      if (mine !== st) return; st.kbpIndex = idx; st.kbpLoading = false; if (st.tab === "protocol") paint();
+      if (mine !== st) return; st.kbpIndex = idx; st.kbpLoading = false; if (st.tab === "protocol") paint(); else renderPbOut();
     }, function () {
-      if (mine !== st) return; st.kbpLoading = false; st.kbpError = true; if (st.tab === "protocol") paint();
+      if (mine !== st) return; st.kbpLoading = false; st.kbpError = true; if (st.tab === "protocol") paint(); else renderPbOut();
     });
   }
   function protocolTab(ps) {
@@ -1297,10 +1447,12 @@
     return '<div class="oe-proto-row static"><button type="button" class="oe-proto-b" data-oe-act="proto-open:' + esc(p.id) + '">' + body + "</button>" +
       '<button type="button" class="oe-btn primary oe-proto-as" data-oe-act="proto-as-open:' + esc(p.id) + '">' + ms("assignment_turned_in") + "Assign</button></div>";
   }
-  function oncoRow(p, writeOn) {
+  function oncoRow(p, writeOn, pb) {
     var intents = [].concat(p.intentOptions || p.treatmentIntent || []).filter(Boolean);
     var meta = [oncoDiseaseLabel(p.diseaseId), intents.join("/")].filter(Boolean).map(esc).join(" · ");
-    var right = writeOn
+    var right = writeOn && pb
+      ? '<button class="oe-btn primary" data-oe-act="onco-apply:' + esc(p.id) + '" style="flex:0 0 auto">' + ms("add") + "Apply</button>"
+      : writeOn
       ? '<button class="oe-btn primary" data-oe-act="proto-assign:' + esc(p.id) + '" style="flex:0 0 auto">' + ms("assignment_turned_in") + "Assign</button>"
       : '<span class="oe-search-note" style="margin:0">view only</span>';
     return '<div class="oe-proto-row static"><span class="oe-proto-b"><span class="oe-proto-t">' + esc(p.name || p.id) + "</span>" +
@@ -1329,7 +1481,7 @@
     if (oncOn && basis !== "india" && (br === "all" || br === "oncology")) {
       var onc = (ps.oncoProtocols || []).filter(function (p) { return oncoMatches(p, q) && (br !== "oncology" || !ps.protoOncoType || p.diseaseId === ps.protoOncoType); });
       shown += onc.length;
-      if (onc.length) html += '<div class="oe-proto-grp">Oncology regimens · ' + onc.length + "</div>" + onc.map(function (p) { return oncoRow(p, ps.writeOn); }).join("");
+      if (onc.length) html += '<div class="oe-proto-grp">Oncology regimens · ' + onc.length + "</div>" + onc.map(function (p) { return oncoRow(p, ps.writeOn, ps.pbMode); }).join("");
       else if (!ps.oncoProtocolsReady) { waiting = true; html += '<div class="oe-search-note">' + ms("hourglass_top") + "Loading oncology regimens…</div>"; }
     }
     if (!shown && !waiting) return '<div class="oe-search-note">' + ms("search_off") + (q ? "No protocol matches “" + esc(q) + "”. Try another term or branch." : "No protocols in this branch yet.") + "</div>";
@@ -1432,6 +1584,7 @@
     if (!id || !G.SMD_KBPROTO || !G.SMD_KBPROTO.loadProtocol) return;
     try { var c = document.querySelector("#smdOpdEmr .oe-canvas"); st.protoListScroll = c ? c.scrollTop : 0; } catch (e) {}
     var mine = st; st.protoOpenId = id; st.protoDoc = null; st.protoDocErr = "";
+    if (st.tab === "assess") { st.protoFromAssess = true; st.tab = "protocol"; }
     paint(); canvasTop(0);
     G.SMD_KBPROTO.loadProtocol(id).then(function (p) {
       if (mine !== st || st.protoOpenId !== id) return; st.protoDoc = p; paint(); canvasTop(0);
@@ -1439,7 +1592,11 @@
       if (mine !== st || st.protoOpenId !== id) return; st.protoDocErr = "This protocol could not be loaded. Check your connection and try again."; paint();
     });
   }
-  function closeKbProtocol() { st.protoOpenId = ""; st.protoDoc = null; st.protoDocErr = ""; st.protoAssign = null; paint(); canvasTop(st.protoListScroll); }
+  function closeKbProtocol() {
+    st.protoOpenId = ""; st.protoDoc = null; st.protoDocErr = ""; st.protoAssign = null;
+    if (st.protoFromAssess) { st.protoFromAssess = false; st.tab = "assess"; st.pbOpen = true; }
+    paint(); canvasTop(st.protoListScroll);
+  }
   function assignProtocol(id) {
     var p = (st.oncoProtocols || []).filter(function (x) { return String(x.id) === String(id); })[0];
     if (!p) { toast("Protocol not found."); return; }
@@ -1516,7 +1673,18 @@
       paint();
       toast("Added to " + kitHost.fieldLabel(field) + (n ? " and " + n + " more field" + (n > 1 ? "s" : "") : "") + ". Save the assessment to keep it.");
     },
-    repaint: function () { if (st.tab === "kit") paint(); },
+    // Export to EMR: several results at once, one repaint, one toast. The sheet closes.
+    insertMany: function (list) {
+      st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
+      var fields = [];
+      (list || []).forEach(function (it) {
+        if (it.text) { kitAppend(it.field, it.text); if (fields.indexOf(it.field) < 0) fields.push(it.field); }
+        Object.keys(it.sets || {}).forEach(function (name) { var v = voiceCoerce(name, it.sets[name]); if (v != null) { st.assessVals[name] = v; st.assessTouched[name] = true; if (fields.indexOf(name) < 0) fields.push(name); } });
+      });
+      st.toolSheet = null; paint();
+      toast("Exported to " + fields.map(function (f) { return kitHost.fieldLabel(f); }).join(", ") + ". Save the assessment to keep it.");
+    },
+    repaint: function () { if (st.tab === "kit" || st.toolSheet) paint(); },
     protocol: function (id, opts) { st._protoInit = true; st.tab = "protocol"; paint(); if (opts && opts.assign && protoAssignOn()) openProtoAssign(id); else openKbProtocol(id); },
     canAssignProtocol: function () { return protoAssignOn(); },
     // Calculators render in the MEDCALC overlay (z 870), under this overlay (12010): lift it for the
@@ -1558,7 +1726,7 @@
       else if (active === "kit") body = head + kitTab(st);
       else body = head + profileTab(st);
     }
-    var app = '<div class="oe-app">' + header() + recordingBanner(st) + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
+    var app = '<div class="oe-app">' + header() + recordingBanner(st) + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>" + toolFab(st) + toolSheetHtml(st);
     if (st.report && st.report.open) return app + reportView(st.report);   // report drawer overlays the workspace
     if (st.doseDrawer) return app + ((G.SMD_ONCOUI && G.SMD_ONCOUI.doseDrawerView) ? G.SMD_ONCOUI.doseDrawerView(st.doseDrawer) : "");   // dose drawer, cloned from the report-drawer pattern
     return app;
@@ -1885,8 +2053,15 @@
     // (no repaint) like every other draft field above - the [Resolve clearance] tap is what submits it.
     if (inp === "onco-clr-status") { st.oncoClearanceDraft = st.oncoClearanceDraft || {}; st.oncoClearanceDraft.status = val; return; }
   }
+  // Remember whether the protocol box is open, so a repaint (every tap repaints) does not collapse it.
+  function onToggle(e) {
+    var el = e.target; if (!el || !el.hasAttribute || !el.hasAttribute("data-oe-pb")) return;
+    st.pbOpen = !!el.open;
+    if (st.pbOpen) { try { maybeLoadKbp(); maybeLoadOncoProtocols(true); renderPbOut(); } catch (x) {} }
+  }
   function onInput(e) {
     var el = e.target, inp = el.getAttribute && el.getAttribute("data-oe-inp"); if (!inp) return;
+    if (inp === "pb-q") { st.pbQuery = el.value; renderPbOut(); return; }
     if (inp === "proto-q") { st.protoQuery = el.value; renderProtoOut(); return; }   // local filter, no network, keep focus
     if (inp === "proto-type") { st.protoOncoType = el.value; renderProtoOut(); return; }
     if (inp === "scribe-spec") return setScribeSpecialty(el.value);
@@ -1970,6 +2145,10 @@
     if (cmd === "tab") return switchTab(arg);
     if (cmd === "lab" || cmd === "rad") return openReport(cmd, arg);
     if (cmd === "report-close") { st.report = null; paint(); return; }
+    if (cmd === "kit-tool") return openToolSheet(arg);
+    if (cmd === "kit-export") return exportToEmr("each");
+    if (cmd === "kit-export-one") return exportToEmr("one");
+    if (cmd === "kit-tool-close") { st.toolSheet = null; paint(); return; }
     if (cmd === "labtrend") return openLabTrend(arg);
     if (cmd === "trend-close") { st.trend = null; paint(); return; }
     if (cmd === "inv-pick") { var s = st.invResults[+arg]; if (s) { st.invDraft = { service: s, diagnosis: (st.invDraft && st.invDraft.diagnosis) || "", emergency: false }; st.invResults = []; st.invQuery = ""; paint(); } return; }
@@ -4261,6 +4440,7 @@
       if (reducer) {
         try { applyVoice(reducer(enText, { speaker: "doctor", state: {}, now: now() })); } catch (e) {}
       }
+      applyInferredHistory(enText);   // comorbidity ticks + home drugs the cloud draft left blank
     }
     // Alcohol: patient stated an amount -> tick Alcohol/Habits + write the amount with computed
     // grams of ethanol + WHO standard drinks into the details field (respecting a doctor edit).
@@ -4308,7 +4488,7 @@
       chunkMs: 15000, refineEveryChunks: scribeLiveOn() ? 2 : 8,
       getState: function () { return {}; },                 // manual-override is enforced in _voiceMerge via assessTouched
       llmExtract: assessLLM,                                 // narrative only; deterministic vitals/exam run every tick
-      onUpdate: applyVoice,
+      onUpdate: function (res) { applyVoice(res); applyInferredHistory(_lastFullTranscript); },
       onTranscript: function (t) { _lastFullTranscript = _priorTranscript + (t || ""); setTranscript(_lastFullTranscript); if (scribeLiveOn()) _lastSpeechAt = now(); },
       onModel: function (code) { setModelChip(code); },     // "which model" chip (Auto adapts per chunk)
       onRefine: gatedRefine,                                 // rolling capture (Task 5) is wired: fires every refineEveryChunks windows + once more on Stop (the flushed final chunk); stopVoice() only makes its own call as a fallback when there's no in-flight chunk to flush. gatedRefine cost-guards the periodic ticks; the flush call still always refines (see gatedRefine's comment).
@@ -4943,6 +5123,7 @@
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     el.removeEventListener("input", onInput); el.addEventListener("input", onInput);
+    el.removeEventListener("toggle", onToggle, true); el.addEventListener("toggle", onToggle, true);
     st = freshState();
     // age/sex are carried ONLY when the caller actually has them (the scribe safety check reads them);
     // nothing infers them, so an absent age stays absent rather than becoming a guessed one.
@@ -5191,6 +5372,6 @@
   // support/debug screen) can read or wipe it without reaching into OPDEMR internals.
   G.SMD_SCRIBE_FEEDBACK = { list: scribeFeedbackRead, clear: function () { scribeFeedbackWrite([]); } };
 
-  G.OPDEMR = { openProfile: openProfile, close: close, kitHost: kitHost, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
-  if (typeof module !== "undefined" && module.exports) module.exports = { kitHost: kitHost, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
+  G.OPDEMR = { openProfile: openProfile, close: close, kitHost: kitHost, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _toggleFieldMic: toggleFieldMic, _endConsult: endConsult, _consultToER: consultToER, _askMaik: askMaik, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _voiceCoerce: voiceCoerce, _inferHistory: _inferHistory, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
+  if (typeof module !== "undefined" && module.exports) module.exports = { kitHost: kitHost, _render: _render, _assessPayload: buildAssessPayload, _voiceMerge: _voiceMerge, VOICE_MAP: VOICE_MAP, _applyRefine: _applyRefine, _groundOpts: groundOpts, _differentialFor: differentialFor, _assessFindingsText: assessFindingsText, _treatmentLines: treatmentLines, _buildMaikSuggestions: buildMaikSuggestions, _rankDifferential: rankDifferential, _clinicalRerank: clinicalRerank, _emrCorrections: emrCorrections, _askMaikPro: askMaikPro, _assessProText: assessProText, _alcoholCalc: alcoholCalc, _detectInvestigations: detectInvestigations, _expandQuery: expandQuery, _mergeNoteIntoHistory: mergeNoteIntoHistory, _buildOncoMatrix: _buildOncoMatrixDelegate, oncoTab: oncoTab, _wardsynqSafetyNote: wardsynqSafetyNote, _calcBmiBsa: calcBmiBsa, _checkAllergyConflicts: checkAllergyConflicts, _detectTriageRedFlags: detectTriageRedFlags, _visitSummaryHtml: visitSummaryHtml, _liveRefineGate: _liveRefineGate, _refineStale: _refineStale, _shouldOfflineFallback: _shouldOfflineFallback, _scribeReviewOn: scribeReviewOn, _scribeBannerOn: scribeBannerOn, _scribeFeedbackOn: scribeFeedbackOn, _visitConsentKey: visitConsentKey, _askScribeConsent: askScribeConsent, _consentCap: SCRIBE_CONSENT_CAP, _doRefine: function (t, isFinal) { _finishPending = !!isFinal; return doRefine(t); }, _setField: setField, _state: function () { return st; }, _buildReviewRows: _buildReviewRows, _feedbackPush: _feedbackPush, _consentReducer: _consentReducer, _consentStatus: _consentStatus, _isUnreachableError: isUnreachableError, _scribeOfflineDraftOn: scribeOfflineDraftOn, _scribeClinicalOn: scribeClinicalOn, _drugFixText: _drugFixText, _drugFixRows: _drugFixRows, _mergeRxRows: _mergeRxRows, _icdCandidateRows: _icdCandidateRows, _safetyRows: _safetyRows, _speakerTurns: _speakerTurns, _specialtyPrompt: _specialtyPrompt, _requiredMissing: _requiredMissing, _specialtyKey: _specialtyKey, _scribeSafetyCtx: _scribeSafetyCtx, _scribeSendPrep: scribeSendPrep, _scribeDeltaOn: scribeDeltaOn, _deltaPlan: _deltaPlan, _enAccum: _enAccum, _draftAccum: _draftAccum, _snapOption: _snapOption, _inferHistory: _inferHistory, _voiceCoerce: voiceCoerce, _dedupeSkip: _dedupeSkip, _applyVoice: applyVoice, _startVoice: startVoice, _stopVoice: stopVoice, _setTranscript: setTranscript, _followUpLink: followUpLink };
 })();

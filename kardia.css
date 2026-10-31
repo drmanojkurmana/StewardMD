@@ -20,7 +20,7 @@
 }
 #smdKardia { z-index: var(--krd-z-overlay); }
 .krd-root {
-  height:100dvh;max-height:100dvh;
+  height:auto;max-height:none;   /* .sp-root is fixed + inset:0 and so covers the whole screen; a forced 100dvh stopped short of the home-indicator strip and left it black */
   --kd-bg: #06090b; --kd-s1: #0e1316; --kd-s2: #171e23; --kd-s3: #232c33; --kd-line: #2c353d;
   --kd-text: #eef3f1; --kd-mut: #a3adb3; --kd-ok: #34c759; --kd-bad: #ff6961; --kd-warn: #ffc05a;
   /* accent = the ECG trace green; text on the fill is 12.4:1 */
@@ -35,7 +35,7 @@
   color-scheme: dark;
 }
 body:not(.dark):not(.v3-dark) .krd-root {
-  height:100dvh;max-height:100dvh;
+  height:auto;max-height:none;   /* .sp-root is fixed + inset:0 and so covers the whole screen; a forced 100dvh stopped short of the home-indicator strip and left it black */
   --kd-bg: #fff; --kd-s1: #eef2f1; --kd-s2: #e2e9e7; --kd-s3: #d2dbd9; --kd-line: #cfd8d5;
   --kd-text: #14201d; --kd-mut: #55605c; --kd-ok: #15803d; --kd-bad: #b42318; --kd-warn: #9a5b00;
   --kd-acc: #0c6b4f; --kd-on-acc: #fff; --kd-acc-soft: rgba(12, 107, 79, .1);
@@ -223,7 +223,13 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root .krd-angio-scroll { overflow: hidden; padding: 0; display: flex; flex-direction: column; }
 .krd-root .krd-angio-col, .krd-root .krd-angio-wrap { display: flex; flex-direction: column; flex: 1 1 auto; min-height: 0; height: 100%; }
 .krd-root .krd-angio-wrap { position: relative; }
-.krd-root .krd-angio-frame { flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; border: 0; background: #0b0c0d; display: block; }
+.krd-root .krd-angio-frame { flex: 1 1 auto; width: 100%; height: 100%; min-height: 0; border: 0; background: var(--kd-bg); display: block; }
+/* The labs are part of Kardia, not a site in a box: full width, no side margin, and the frame sits on Kardia's own background
+   so no strip of another colour shows at the edges or under the home indicator. */
+.krd-root .krd-angio-wrap, .krd-root .krd-angio-scroll { background: var(--kd-bg); }
+.krd-root .krd-echo-scroll:has(.krd-probe-wrap) { padding: 0; }
+.krd-root .krd-probe-wrap { background: var(--kd-bg); }
+.krd-root .krd-probe-frame { background: var(--kd-bg); }
 .krd-root .krd-angio-scroll { overscroll-behavior: none; }
 .krd-root .krd-angio-status, .krd-root .krd-angio-err { position: absolute; left: 12px; right: 12px; z-index: 2; }
 .krd-root .krd-angio-status { top: 12px; margin: 0; pointer-events: none; }
@@ -255,10 +261,13 @@ body:not(.dark):not(.v3-dark) .krd-root {
 /* Phone: the Probe Lab frame is full height; this column scrolls it. */
 @media (max-width: 699px) {
   .krd-root .krd-echo-col, .krd-root .krd-probe-wrap { flex: 0 0 auto; height: auto; min-height: 0; }
-  /* iOS paints a white strip down the frame's right edge; the frame is
-   * 40px wider than its box and the box clips it (the Probe Lab pads its
-   * right side by the same 40px, kardia-unbrand.js). */
-  .krd-root .krd-probe-wrap { overflow: hidden; }
-  .krd-root .krd-probe-frame { flex: 0 0 auto; min-height: 0; width: calc(100% + 40px); max-width: none; border-radius: 0; background: transparent; }
+  /* The labs fill the tab edge to edge; the frames sit on Kardia's own background so nothing shows at the edge. */
+  .krd-root .krd-probe-frame { flex: 0 0 auto; min-height: 0; width: 100%; border-radius: 0; }
   .krd-root .krd-echo-scroll { overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .krd-root .krd-echo-scroll:has(.krd-probe-wrap) { padding-bottom: 0; }
 }
+
+/* Lab full screen: header and tabs go, the lab fills the screen below the status bar. */
+.krd-root.krd-fs { padding-top: env(safe-area-inset-top, 0px); }
+.krd-root.krd-fs .sp-top, .krd-root.krd-fs .krd-tabs, .krd-root.krd-fs .sp-levelrow { display: none; }
+body:has(.krd-root.krd-fs) #smdTopBack { visibility: hidden !important; pointer-events: none !important; }

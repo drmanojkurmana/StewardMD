@@ -91,9 +91,9 @@
   function paintShell() {
     var el = rootEl();
     el.innerHTML =
-      '<div class="oh-top"><button class="oh-back" data-rec-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">RECIST 1.1</div><span style="width:64px"></span></div>' +
-      '<div class="oh-body">' +
+      '<div class="oh-top"><button class="oh-back" data-rec-act="close" aria-label="Close"><span class="material-symbols-rounded" aria-hidden="true">close</span><span class="oh-sr">Close</span></button>' +
+      '<div class="oh-title">RECIST 1.1</div><span class="oh-hspace"></span></div>' +
+      '<div class="oh-body"><h1 class="oh-ltitle">RECIST 1.1</h1>' +
         '<div class="stg-intro">RECIST 1.1 target-lesion response. Enter the sum of target-lesion diameters (mm). Nadir defaults to baseline; set it to the smallest sum recorded on study for the progression check. New lesions always score as progression.</div>' +
         '<div class="rec-form">' +
           '<label class="rec-field"><span>Baseline sum (mm)</span><input id="recBase" class="oh-search" type="number" inputmode="decimal" min="0" step="0.1" value="' + esc(rc.baseline) + '"></label>' +

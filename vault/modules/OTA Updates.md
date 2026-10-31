@@ -153,11 +153,7 @@ should not phone a third party, and it also keeps the 900s timeout off any exter
 
 **Bundle size is the standing risk here.** 48MB zip / 123MB unpacked / 1328 files, of which ~66MB is
 rarely-changing ML/wasm (`kb.enrichment*.js`, onnxruntime, mediapipe, `face_landmarker.task`,
-`offline-clinical.json.gz`). capgo supports a delta path — `download({manifest})` with
-`{file_name, file_hash, download_url}` entries — and `_ota.js checkForDevice` already returns
-`files[]` with `path`/`hash`/`size` for exactly that. Not wired up: the FIRST manifest download has
-no delta cache, so it fetches all 1328 files individually and is slower than the one zip. Worth
-doing only alongside a cache-warming story.
+`offline-clinical.json.gz`). capgo supports a delta path (see "Delta install" below), now wired up.
 
 ## Version numbering the doctor reads (2026-09-18)
 The server counts releases as a monotonic integer because a rollback republishes an old bundle under
@@ -192,3 +188,22 @@ bundle URL every ~1.5 s measures the link, and the speed summed over time (cappe
 percentages in the 1 to 69 band the meter uses them (exact, no "about"); the 70% event stops the probes and shows Installing; 20 s without a probe answer
 shows "Waiting for the network" and freezes the bar. The silent auto-update path passes no onProgress and spends no probe traffic. It cannot tell a stalled
 native transfer from a slow one while the network itself is fine. Test: `test/run-ota-progress-ui.mjs`.
+
+## Delta install (2026-10-27)
+Owner: "OTA never shows download status ... why is it 170 MB, it must only contain what is missing". Both complaints had one root cause: the
+install was a single whole-app zip. Read from `@capgo/capacitor-updater` 8.54 source: iOS `downloadZip` emits 0%, nothing during the
+transfer, then 70% (the estimate/probe card in "Download card" was a workaround). Manifest mode (`download({url, version, manifest})`) is the
+plugin's own delta: per file it reuses the copy inside the app's `public/` or the delta cache (earlier OTA bundles) when the sha256 matches,
+downloads only the rest (32 at a time), and emits a real event per finished file (iOS 10..70 over ALL files, reused ones included).
+- `native-ota.js planDelta()`: `GET /api/ota/check?...&files=1` (router strips `files[]` from plain checks, ~150KB), builds
+  `{file_name, file_hash, download_url: <origin>/api/ota/file/<hash>}`, asks `getMissingBundleFiles({manifest})`, sums the missing sizes.
+  Used when at least one file is reusable; otherwise (or on any error, or a plugin without the API) the old zip path runs.
+- Card: heading "Downloading changes", exact "x of y MB" for the MISSING bytes, a note naming the saving ("10.0 MB instead of the full 100.0 MB"),
+  speed derived from how fast the per-file events advance. No probe traffic in delta mode. The "waiting for the network" stall is off in delta
+  mode (events are per file, so one big file is a long silence).
+- A failed delta falls back to the zip once (`download()` then `useZip()`), so it can only help.
+- Android: manifest percent is `clamp(completedFiles/total*100, 10, 70)`, so 70 arrives early; only the `download()` promise ends the phase there.
+  Not verified on a device.
+- Granularity is the file: a changed 20 MB wasm file is downloaded whole. Savings depend on the phone's built-in bundle and earlier OTA bundles
+  matching the new one; a phone on an old native build with a very different `www/` reuses little and uses the zip.
+- NOT verified on a real device yet. Tests: `test/run-ota-delta-ui.mjs` (fake plugin), `test/ota.test.mjs` (files=1 router case).

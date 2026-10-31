@@ -74,7 +74,7 @@ test("only owners and registered signers may write; students and anonymous may n
 });
 test("a saved fix is public per module, listed in the index, logged, and revertible", async () => {
   const env = env0();
-  assert.deepEqual(await (await fix.onRequestGet({ ...call("GET", "?ix=1"), env })).json(), { mods: {} });
+  assert.deepEqual(await (await fix.onRequestGet({ ...call("GET", "?ix=1"), env })).json(), { mods: {}, nm: {} });
   const s = await fix.onRequestPost({ ...call("POST", "", "tok-signer", { ...Q, fix: { exp: "First wording." }, note: "typo in key point" }), env });
   assert.equal(s.status, 200);
   await fix.onRequestPost({ ...call("POST", "", "tok-owner", { ...Q, fix: { exp: "Second wording.", kp: "Remember this." } }), env });
@@ -86,7 +86,7 @@ test("a saved fix is public per module, listed in the index, logged, and reverti
   assert.equal((await fix.onRequestGet({ ...call("GET", "?log=1&kind=question&id=q-abc-1", "tok-student"), env })).status, 403);
   assert.equal((await fix.onRequestDelete({ ...call("DELETE", "", "tok-signer", Q), env })).status, 200);
   assert.deepEqual((await (await fix.onRequestGet({ ...call("GET", "?module=ana-spleen"), env })).json()).q, {});
-  assert.deepEqual(await (await fix.onRequestGet({ ...call("GET", "?ix=1"), env })).json(), { mods: {} });
+  assert.deepEqual(await (await fix.onRequestGet({ ...call("GET", "?ix=1"), env })).json(), { mods: {}, nm: {} });
   assert.equal((await (await fix.onRequestGet({ ...call("GET", "?log=1&kind=question&id=q-abc-1", "tok-owner"), env })).json()).log.length, 3);
 });
 test("a lesson fix is stored under its own slot", async () => {

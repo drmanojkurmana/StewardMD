@@ -11,7 +11,7 @@
      "label": "Medical group",
      "feeder": "MD/DNB General Medicine",
      "kind": "medical",
-     "includes": "Cardiology, Neurology, Nephrology and 10 more",
+     "includes": "Cardiology, Neurology, Nephrology and 9 more",
      "subjects": [
       "ss-general-medicine",
       "ss-cardiology",
@@ -21,7 +21,6 @@
       "ss-hepatology",
       "ss-endocrinology",
       "ss-haematology",
-      "ss-medical-oncology",
       "ss-rheumatology-immunology",
       "ss-pulmonology",
       "ss-infectious-diseases",
@@ -107,21 +106,9 @@
      "id": "radio-diagnosis",
      "label": "Radio-diagnosis group",
      "feeder": "MD/DNB Radiodiagnosis",
-     "kind": "medical",
-     "includes": "Radiology plus the medical subjects and Biostatistics",
+     "kind": "own",
+     "includes": "Radiology and Biostatistics",
      "subjects": [
-      "ss-general-medicine",
-      "ss-cardiology",
-      "ss-neurology",
-      "ss-nephrology",
-      "ss-gastroenterology",
-      "ss-hepatology",
-      "ss-endocrinology",
-      "ss-haematology",
-      "ss-medical-oncology",
-      "ss-rheumatology-immunology",
-      "ss-pulmonology",
-      "ss-infectious-diseases",
       "ss-biostatistics",
       "ss-radiology"
      ]
@@ -130,22 +117,10 @@
      "id": "respiratory",
      "label": "Respiratory Medicine group",
      "feeder": "MD/DNB Respiratory Medicine",
-     "kind": "medical",
-     "includes": "Pulmonology, Critical Care plus the medical subjects and Biostatistics",
+     "kind": "own",
+     "includes": "Pulmonology and Biostatistics",
      "subjects": [
-      "ss-general-medicine",
-      "ss-cardiology",
-      "ss-neurology",
-      "ss-nephrology",
-      "ss-gastroenterology",
-      "ss-hepatology",
-      "ss-endocrinology",
-      "ss-haematology",
-      "ss-medical-oncology",
-      "ss-rheumatology-immunology",
       "ss-pulmonology",
-      "ss-infectious-diseases",
-      "ss-critical-care",
       "ss-biostatistics"
      ]
     },
@@ -209,45 +184,21 @@
      "id": "critical-care",
      "label": "Critical Care group",
      "feeder": "Critical Care Medicine (own paper)",
-     "kind": "medical",
-     "includes": "Critical Care, Pulmonology plus the medical subjects and Biostatistics",
+     "kind": "only",
+     "includes": "Critical Care and Pulmonology only",
      "subjects": [
-      "ss-general-medicine",
-      "ss-cardiology",
-      "ss-neurology",
-      "ss-nephrology",
-      "ss-gastroenterology",
-      "ss-hepatology",
-      "ss-endocrinology",
-      "ss-haematology",
-      "ss-medical-oncology",
-      "ss-rheumatology-immunology",
       "ss-pulmonology",
-      "ss-infectious-diseases",
-      "ss-critical-care",
-      "ss-biostatistics"
+      "ss-critical-care"
      ]
     },
     {
      "id": "medical-oncology",
      "label": "Medical Oncology group",
      "feeder": "Medical Oncology (own paper)",
-     "kind": "medical",
-     "includes": "Medical Oncology plus the medical subjects and Biostatistics",
+     "kind": "only",
+     "includes": "Medical Oncology only",
      "subjects": [
-      "ss-general-medicine",
-      "ss-cardiology",
-      "ss-neurology",
-      "ss-nephrology",
-      "ss-gastroenterology",
-      "ss-hepatology",
-      "ss-endocrinology",
-      "ss-haematology",
-      "ss-medical-oncology",
-      "ss-rheumatology-immunology",
-      "ss-pulmonology",
-      "ss-infectious-diseases",
-      "ss-biostatistics"
+      "ss-medical-oncology"
      ]
     }
    ]

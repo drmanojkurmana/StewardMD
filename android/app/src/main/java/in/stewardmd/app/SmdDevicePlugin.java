@@ -63,6 +63,13 @@ public class SmdDevicePlugin extends Plugin {
         powerReceiver = null;
     }
 
+    // iOS twin skips its privacy cover while the boot splash is up. Android has no such cover at launch,
+    // so this only acknowledges the call (JS calls one API on both platforms).
+    @PluginMethod
+    public void setBootSplash(PluginCall call) {
+        call.resolve();
+    }
+
     @PluginMethod
     public void getPowerState(PluginCall call) {
         call.resolve(powerState());

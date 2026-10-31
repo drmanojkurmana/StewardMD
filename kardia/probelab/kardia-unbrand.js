@@ -3,6 +3,25 @@
  * header (logo, wordmark, site nav, theme and About buttons) and About
  * sheet, and renames any visible "EchoSuite" text to Kardia. The author's
  * credit stays on the Kardia credits screen. */
+/* Kardia full screen: iOS shows its own "is in full screen, swipe down" banner for the Fullscreen API and leaves the app
+ * mis-sized after it exits. Emulate the API instead (state plus fullscreenchange) and tell the Kardia page, which hides its
+ * own header and tabs so the lab fills the screen. */
+(function () {
+  "use strict";
+  var on = false, el = null, D = document;
+  function fire() {
+    ["fullscreenchange", "webkitfullscreenchange"].forEach(function (n) { try { D.dispatchEvent(new Event(n)); } catch (e) {} });
+    try { parent.postMessage({ krdFs: on }, "*"); } catch (e) {}
+  }
+  function req() { on = true; el = this; fire(); return Promise.resolve(); }
+  function ex() { if (on) { on = false; el = null; fire(); } return Promise.resolve(); }
+  try {
+    Element.prototype.requestFullscreen = req; Element.prototype.webkitRequestFullscreen = req;
+    D.exitFullscreen = ex; D.webkitExitFullscreen = ex;
+    ["fullscreenEnabled", "webkitFullscreenEnabled"].forEach(function (k) { Object.defineProperty(D, k, { get: function () { return true; }, configurable: true }); });
+    ["fullscreenElement", "webkitFullscreenElement"].forEach(function (k) { Object.defineProperty(D, k, { get: function () { return el; }, configurable: true }); });
+  } catch (e) {}
+})();
 (function () {
   "use strict";
   var css = ".site-header,.skip-link,#site-info,dialog#site-info,.site-info,[aria-labelledby=site-info-title],noscript{display:none!important}" +
@@ -14,7 +33,7 @@
        * fitProbeFrame). The view toolkit and controls follow below; the
        * Kardia page scrolls to them. No guide text (owner 2026-10-27). */
       "html,body{height:auto!important;overflow:hidden!important}" +
-      "main{height:auto!important;max-height:none!important;overflow:visible!important;padding:8px 48px 8px 8px!important}" +
+      "main{height:auto!important;max-height:none!important;overflow:visible!important;padding:8px!important}" +
       ".lab{display:flex!important;flex-direction:column!important;height:auto!important;gap:8px!important;padding:0!important;box-sizing:border-box}" +
       ".stage{flex:0 0 auto!important;height:calc(var(--kav,100vh) / 2 - 4px)!important;min-height:0!important}" +
       ".scan-column{display:flex!important;flex-direction:column!important;gap:8px!important;overflow:visible!important;min-height:0!important}" +

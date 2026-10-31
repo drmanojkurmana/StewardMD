@@ -226,10 +226,9 @@
     return errors;
   }
 
-  var PROBE_LAB_CREDIT = "Probe Lab by Mohammed Kamareddine, MD, EchoSuite (echosuite.app), reused with the author's permission";
   function probeLabCreditsHtml(data, escFn) {
     var e = escFn || function (s) { return String(s == null ? "" : s); };
-    var out = '<h3 class="sp-h3">Probe Lab</h3><p class="sp-small">' + e(PROBE_LAB_CREDIT) + ".</p>";
+    var out = "";
     var groups = [["figuresAndAnatomy", "Figures and anatomy"], ["videos", "Videos"]];
     groups.forEach(function (g) {
       var list = (data && data[g[0]]) || [];
@@ -242,7 +241,7 @@
   }
 
   var PURE = {
-    PROBE_LAB_CREDIT: PROBE_LAB_CREDIT, probeLabCreditsHtml: probeLabCreditsHtml,
+    probeLabCreditsHtml: probeLabCreditsHtml,
     DRILL_LIMIT_SEC: DRILL_LIMIT_SEC, EXAM_LIMIT_SEC: EXAM_LIMIT_SEC, EXAM_PASS_MARK: EXAM_PASS_MARK,
     ORIENTATION_CRITICAL_DEG: ORIENTATION_CRITICAL_DEG, MBBS_VIEWS: MBBS_VIEWS, EXAM_VIEWS: EXAM_VIEWS,
     KNOB_TARGET: KNOB_TARGET, KNOB_TOLERANCE: KNOB_TOLERANCE, KNOB_SCENARIOS: KNOB_SCENARIOS,
@@ -771,7 +770,7 @@
     var linkHtml = "";
     if (isPulse && pr.i === 0) {
       linkHtml = '<div class="krdp-links"><p><button type="button" class="sp-btn sec sp-wide" data-pact="proto-codeblue">Open in Code Blue</button></p>' +
-        '<p><button type="button" class="sp-btn sec sp-wide" data-pact="proto-narke">Open Narkē for perioperative context</button></p></div>';
+        '<p><button type="button" class="sp-btn sec sp-wide" data-pact="proto-narke">Open Anesthetica for perioperative context</button></p></div>';
     }
     render(head(pr.data.title, pr.data.scenario) +
       '<p class="krdp-step">Step ' + (pr.i + 1) + " of " + pr.data.steps.length + ": " + esc(step.title) + "</p>" +
@@ -864,7 +863,7 @@
     try {
       if (G.NARKE && G.NARKE.open) { G.NARKE.open(); return true; }
     } catch (e) {}
-    try { if (G.toast) G.toast("Narkē is not available on this device."); } catch (e) {}
+    try { if (G.toast) G.toast("Anesthetica is not available on this device."); } catch (e) {}
     return false;
   }
   function openPulseCheckEcho() {

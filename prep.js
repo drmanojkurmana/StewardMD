@@ -821,7 +821,7 @@
         for (var sKey in st_maikCounts) { ovc[sKey] = st_maikCounts[sKey]; }
       }
       (ix.topics || []).forEach(function (t) { var n = ovFor(ovc, sets, sid, t.id); if (n) t.ov = n; });
-      return (st.ix[sid] = ix);
+      return addedModules(sid, ix).then(function () { return (st.ix[sid] = ix); });
     }, function () { return (st.ix[sid] = { id: sid, topics: [], counts: { total: 0 } }); });
   }
   /* Crosslist groups (prep/taxonomy/crosslist.json): fetched once a session like the taxonomy and kept in
@@ -861,6 +861,18 @@
     });
   }
   // A subject's index, with its cross-listed rows: the same counts the subject screen, the hub and search draw.
+  /* Modules the owner created while publishing (Author > Publish > new module): no bank file, no index row, no taxonomy entry.
+     /api/prep/fix?ix=1 lists them as nm { subject: [{ id, title, n }] }; each becomes a topic row in group "added" with its
+     published questions as the count. A slow or failed ask adds nothing (the next session tries again). */
+  function addedModules(sid, ix) {
+    return raceTo(fixIndex().then(function () { return ((load().fxix || {}).nm || {})[sid] || []; }), 2000, []).then(function (list) {
+      (list || []).forEach(function (m) {
+        if (!m || !m.id || !m.n || (ix.topics || []).some(function (t) { return t.id === m.id; })) return;
+        (ix.topics = ix.topics || []).push({ id: m.id, title: { en: String(m.title || m.id) }, group: "added", count: m.n, all: m.n, d1: 0, d2: m.n, d3: 0, usmle: 0, size: "m", added: 1 });
+      });
+      return ix;
+    }, function () { return ix; });
+  }
   function loadIndex(sid) {
     if (st.ix[sid] && st.ix[sid]._xl) return Promise.resolve(st.ix[sid]);
     if (st.ixP && st.ixP[sid]) return st.ixP[sid];
@@ -1059,7 +1071,8 @@
     if (st.mem[k]) return Promise.resolve(st.mem[k]);
     var bankErr = null, miss = { n: 0 };
     return Promise.all([loadBank(sid, mid).then(null, function (e) { bankErr = e; return []; }), loadOverlay(sid, mid, miss)]).then(function (r) {
-      if (bankErr && !r[1].length) throw bankErr;
+      var addedMod = (topicOf(sid, mid) || {}).added;   // an owner-created module has no bank file: its questions are the published ones
+      if (bankErr && !r[1].length && !addedMod) throw bankErr;
       var items = markLevels(mergeOverlay(r[0], r[1]));
       items.forEach(function (it) { it._s = sid; it._m = mid; });
       // Corrections by owners and registered signers (functions/_prepfix.js) ride on top of the bank and overlay text.
@@ -1073,7 +1086,7 @@
             var c = JSON.parse(JSON.stringify(n)); c._s = sid; c._m = mid; c._pub = 1; items.push(c);
           });
         }
-        if (!bankErr && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
+        if ((!bankErr || addedMod) && !miss.n) st.mem[k] = items;   // offline overlay miss: ask again next time
         return items;
       });
     });
@@ -1091,7 +1104,7 @@
     st.fxIxP = G.fetch(FIX_API + "?ix=1").then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
       st.fxIxP = null;
       if (!j || !j.mods) return last;
-      s.fxix = { mods: j.mods, ts: Date.now() }; save(); return j.mods;
+      s.fxix = { mods: j.mods, nm: j.nm || {}, ts: Date.now() }; save(); return j.mods;
     }, function () { st.fxIxP = null; return last; });
     return st.fxIxP;
   }
@@ -1480,6 +1493,8 @@
   function back() {
     if (!st.open) return false;
     if (closeCreditSheet()) return true;   // an image credit sheet closes first
+    if (G.PREP_TOOLS && G.PREP_TOOLS.back()) return true;   // a note or reset sheet (prep-tools.js) closes first
+    if (G.PREP_PLAY && G.PREP_PLAY.back()) return true;   // a play sheet or the feed's own state (prep-play.js) first
     if (G.PREP_VIEWER && G.PREP_VIEWER.close()) return true;   // an enlarged image (prep-viewer.js) closes first
     if (G.PREP_REASON && G.PREP_REASON.back && G.PREP_REASON.back()) return true;   // Know more sheet closes first
     if (G.PREP_IDS && G.PREP_IDS.back()) return true;   // the share sheet (prep-ids.js) closes first
@@ -1559,6 +1574,8 @@
       else if (opts && opts.query) openQuery(opts);
       // A friends or boards nudge (server push, prep-nudges.js): home, then that tab.
       else if (opts && opts.social && G.PrepSocial) { push(renderHome); G.PrepSocial.open(String(opts.social)); }
+      // Play (prep-play.js): a widget, watch or notification link straight into quick fire, the spot or the feed.
+      else if (opts && opts.play && G.PREP_PLAY) { push(renderHome); G.PREP_PLAY.open(String(opts.play), HOST); }
       // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
       else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) push(function () { G.PREP_PLAN.onboard(HOST); });
       else push(renderHome);
@@ -1583,6 +1600,8 @@
   }
   function close() {
     stopTimer();
+    try { if (G.PREP_TOOLS) G.PREP_TOOLS.flush(); } catch (e) {}
+    try { if (G.PREP_PLAY) G.PREP_PLAY.leave(); } catch (e) {}
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
@@ -1948,7 +1967,9 @@
       '<div class="pn-group">' +
       // Nucleus360 (prep-nucleus360.js): learn a topic A to Z. Was only a button inside a module; it leads the Practise group now.
       (G.PREP_NUCLEUS360 && G.PREP_NUCLEUS360.on() ? row("n360-hub", ico("grid"), "Nucleus360", "Learn a topic A to Z through MCQs") : "") +
+      (G.PREP_TT ? G.PREP_TT.homeRow(HOST) : "") +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(nb) + " saved") +
+      (G.PREP_TOOLS ? G.PREP_TOOLS.notebookRow(HOST) : "") +
       row("custom", ico("plus"), "Custom module", "Your own mix and count") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
       row("mocks", ico("clock"), "Mock exam", "Full pattern, marked") +
@@ -1959,6 +1980,7 @@
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       "</div>" +
+      (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
@@ -2064,11 +2086,13 @@
       row("downloads", ico("dl"), "Offline content", "Lessons and cards kept offline; questions need a connection") +
       (G.PREP_IDS ? row("id-screen", ico("search"), "Open a shared ID", "A question or lesson a friend sent you") : "") +
       (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
+      (G.PREP_IMPORT ? row("g-imp", ico("dl"), "Import MCQs", "From a JSON template or a PDF, no AI cost") : "") +
       (G.PREP_QGEN && G.PREP_QGEN.isOwner() ? row("g-author", ico("gear"), "Author", "Owner only: write, check and stage new questions") : "") + "</div>" +
       '<h2 class="pn-sec">You</h2><div class="pn-group">' +
       (G.PREP_ARENA ? row("a-stats", ico("stats"), "My stats", "Accuracy by subject, the last 30 days, share your progress") : "") +
       row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
       row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") +
+      (G.PREP_TOOLS ? G.PREP_TOOLS.notebookRow(HOST) + G.PREP_TOOLS.dataRow(HOST) : "") +
       row("img-credits", ico("tag"), "Image credits", "Attribution for openly licensed images") +
       (G.PrepSocial ? row("soc-open", ico("user"), "Friends and groups", "Challenge a friend, college boards") + row("soc-acc", ico("check"), "Accuracy", "Your public accuracy page") : "") + "</div>" +
       '<p class="pn-note">Practice and progress stay on this device.</p></div>');
@@ -2176,6 +2200,8 @@
         (mods.length ? '<span class="pn-subbar pn-fills" aria-hidden="true">' + seg("d", done) + seg("p", part) + seg("n", nm - done - part) + '</span><span class="pn-subkey"><span><i class="d"></i>' + done + ' completed</span><span><i class="p"></i>' + part + ' in progress</span><span><i class="n"></i>' + (mods.length - done - part) + " not started</span></span>" : "") + "</section>";
       // Cross-listed modules (prep/taxonomy/crosslist.json): the same disease taught in other subjects, in this
       // subject's list under its own title with the union count. Same rows, same styles, nothing new to learn.
+      var ad = filterModules(ix.topics.filter(function (t) { return t.group === "added"; }), prog, st.filter, s.exam);
+      if (ad.length) html += '<h2 class="pn-sec">Added modules</h2><ol class="pn-mods">' + ad.map(function (t) { return modRow(sid, t, prog, s, null); }).join("") + "</ol>";
       var xl = filterModules(ix.topics.filter(function (t) { return t.group === "xlist"; }), prog, st.filter, s.exam);
       if (xl.length) html += '<h2 class="pn-sec">Cross-listed</h2><ol class="pn-mods">' + xl.map(function (t) { return modRow(sid, t, prog, s, null); }).join("") + "</ol>";
       var mixed = ix.topics.filter(function (t) { return t.group === "mixed"; })[0];
@@ -2296,7 +2322,14 @@
     // A set made by the student (practice setup sheet, custom module) is saved when it finishes (psSave); a re-practise
     // of a whole saved set updates that set (psId).
     if (opts.save && !opts.custom) st.run.save = opts.save;
+    // Play runs (prep-play.js): onAnswer(r, k) after each answer, onRender(r) after each paint of a question, norec =
+    // answers are not recorded (battle replays carry no bank id).
+    if (opts.onAnswer) st.run.onAnswer = opts.onAnswer;
+    if (opts.onRender) st.run.onRender = opts.onRender;
+    if (opts.norec) st.run.norec = true;
     if (opts.psId) st.run.psId = opts.psId;
+    // How others answered (prep-tools.js): asked once per question, drawn after the answer when it has arrived.
+    if (G.PREP_TOOLS) { G.PREP_TOOLS.bind(HOST); if (!opts.custom) G.PREP_TOOLS.prefetch(items); }
     st.stack.push(renderRun);
     nav(1);
     if (st.run.sc && opts.resume) secResume(st.run);
@@ -2626,19 +2659,22 @@
     var pyq = G.PREP_PYQ ? { tags: G.PREP_PYQ.chips(it, HOST), fig: G.PREP_PYQ.figure(it, HOST) } : { tags: "", fig: "" };
     // Radiology image series (prep-rad.js): the scroll stack sits under the image slot.
     if (G.PREP_RAD) pyq.fig += G.PREP_RAD.figure(it, HOST);
-    var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+    var L = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"], TOOLS = G.PREP_TOOLS || null;
     var opts = it.o.map(function (o, k) {
       var cls = "pn-opt";
       if (shown) { if (k === it.a) cls += " right"; else if (k === chosen) cls += " wrong"; }
       else if (k === chosen) cls += " sel";
-      return '<li><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span>" +
-        (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : !shown && k === chosen ? '<span class="pn-mark pn-pick" aria-hidden="true">' + ico("check") + "</span>" : "") + "</button></li>";
+      // Study tools (prep-tools.js): a crossed-out option dims until the answer shows; its toggle sits beside it.
+      var xs = TOOLS ? TOOLS.strikeBtn(r, k, shown, locked) : "";
+      if (xs && TOOLS.struck(r, k)) cls += " px-struck";
+      return '<li' + (xs ? ' class="px-ol"' : "") + '><button type="button" class="' + cls + '" data-act="answer" data-k="' + k + '"' + (locked ? " disabled" : shown ? ' aria-disabled="true"' : "") + ' aria-pressed="' + (k === chosen) + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span>" +
+        (shown && k === it.a ? '<span class="pn-mark">' + ico("check") + "</span>" : shown && k === chosen ? '<span class="pn-mark">' + ico("x") + "</span>" : !shown && k === chosen ? '<span class="pn-mark pn-pick" aria-hidden="true">' + ico("check") + "</span>" : "") + "</button>" + xs + "</li>";
     }).join("");
     // Your own deck's questions stay on this phone: no bookmark (bookmarks reload from the bank) and no report.
     // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
     // Share IDs (prep-ids.js): share in the bar, the ID itself under the question (tap copies). Not your own deck's items.
     var IDS = !own && G.PREP_IDS ? G.PREP_IDS : null, qid = IDS ? IDS.ofItem(it) : null;
-    var acts = (qid ? IDS.shareBtn(qid) : "") + (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
+    var acts = (qid ? IDS.shareBtn(qid) : "") + (TOOLS ? TOOLS.noteBtn(it) : "") + (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
       (shown && (!own || it.qg) ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
     // A clock per question shows its figure in the progress row, at the end of the line (the bar keeps the title room).
     var clk = r.limit || r.qsec || r.sc ? (r.qc && r.qc.used ? "" : clockHtml(r)) : "";
@@ -2659,6 +2695,7 @@
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + lfOpt(it.o[it.a]) + "</span></p>" +
+        (TOOLS ? TOOLS.peerHtml(it, chosen) + TOOLS.noteHtml(it) : "") + (G.PREP_PLAY && !r.norec ? G.PREP_PLAY.mnHtml(it) : "") +
         (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
@@ -2676,7 +2713,7 @@
           var on = (s.mt[it.id] || [])[2] === t[0];
           return '<button type="button" class="pn-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="mtag" data-v="' + t[0] + '">' + t[1] + "</button>";
         }).join("") + "</div></div>" : "") +
-        provHtml(it) + (it.qg && G.PREP_QGEN ? G.PREP_QGEN.provLine(it, HOST) : "") + (qid ? IDS.chip(qid) : "") + "</section>";
+        provHtml(it) + (it.qg && G.PREP_QGEN ? G.PREP_QGEN.provLine(it, HOST) : "") + (qid ? IDS.chip(qid) : "") + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>";
       // Nucleus360 (prep-nucleus360.js): inside a Nucleus360 session the concept rail + title go above the unchanged
       // explanation and the Chapter note below it. Without the file, or outside a session, fb is untouched.
       if (G.PREP_NUCLEUS360 && G.PREP_NUCLEUS360.wrap) fb = G.PREP_NUCLEUS360.wrap(fb, it);
@@ -2710,6 +2747,7 @@
     tlSync(r);
     bindRunSwipe();
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
+    if (r.onRender) { try { r.onRender(r); } catch (e) {} }
   }
   /* A fresh answer: the page stays where the finger was. When the verdict card starts below the fold, the body glides
      just far enough to show its first lines (never up, never past the card's top), 280 ms, instant under reduced motion. */
@@ -2907,6 +2945,10 @@
     if (G.PREP_PLAN) G.PREP_PLAN.noteAnswer(s, it._m || it.t, ok);
     if (G.PREP_NUDGES) G.PREP_NUDGES.studied();
     if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
+    // Anonymous practice statistics (prep-tools.js, opt-in); a Tests 2 attempt sends its own from prep-tests.js.
+    if (G.PREP_TOOLS && !(st.run && st.run.t2)) G.PREP_TOOLS.noteAnswer(it, chosen, msT, s.exam);
+    // Play (prep-play.js): the study hour, this month's subject counts, earned streak freezes.
+    if (G.PREP_PLAY && chosen >= 0) G.PREP_PLAY.noteAnswer(s, it, ok, td);
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
@@ -2919,8 +2961,10 @@
     if (r.qc) { var i0 = r.i; qtick(r); if (r.done || r.i !== i0 || r.qc.out[i0]) return; }   // the time ran out first: no answer after it
     if (r.sc) { secTick(r); if (r.done || r.phase === "between" || !inSec(r, r.i)) return; }   // a closed section never takes an answer
     if (r.changed && r.ans[r.i] >= 0 && r.ans[r.i] !== k) r.changed[r.i]++;
-    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
+    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; if (!r.norec) record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
     else r.ans[r.i] = k;
+    // A run's own rule after each answer (prep-play.js boss lives); it may finish the run.
+    if (r.onAnswer) { try { r.onAnswer(r, k); } catch (e) {} if (r.done) return; }
     renderRun();
   }
   function finish() {
@@ -2943,6 +2987,8 @@
     // Tests 2: the attempt record (prep-assess.js result), daily completion, the saved session cleared.
     if (r.t2 && G.PREP_TESTS) { try { G.PREP_TESTS.finished(r); } catch (e) {} }
     if (r.save || r.psId) psSave(r);
+    // Study tools: questions left marked for review go to My notebook; queued anonymous statistics are sent.
+    if (G.PREP_TOOLS) { try { G.PREP_TOOLS.finished(HOST, r); } catch (e) {} }
     if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
@@ -3050,7 +3096,7 @@
           return '<li><div class="pn-opt' + (k === it.a ? " right" : k === a ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
         }).join("") + "</ol>" + ex + whyRowHtml(it, a, i) + outdatedHtml(it) + tagRow +
         (G.PREP_ASK && !it._gone ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") +
-        (rid ? G.PREP_IDS.chip(rid) : "") + "</div></details></li>";
+        (rid ? G.PREP_IDS.chip(rid) : "") + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</div></details></li>";
     }).join("");
     return '<div class="pn-filters" role="group" aria-label="Solutions filter">' + F.map(function (x) {
       var n = sp[x[0]].length, on = x[0] === f;
@@ -3191,7 +3237,7 @@
     paint(bar("Review", esc(r.title), "back", rvActs) + '<div class="pn-body pn-run pn-rv">' + pager + '<div class="pn-qw' + enter + '" id="pnRvQ">' + tu + (G.PREP_PYQ ? G.PREP_PYQ.chips(it, HOST) : "") + '<div class="pn-q">' + lfStem(it.q) + "</div>" + (G.PREP_PYQ ? G.PREP_PYQ.figure(it, HOST) : "") + (G.PREP_RAD ? G.PREP_RAD.figure(it, HOST) : "") + '<ol class="pn-opts">' + it.o.map(function (o, k) {
       return '<li><div class="pn-opt' + (k === it.a ? " right" : k === r.ans[i] ? " wrong" : "") + '"><span class="pn-l">' + L[k] + "</span><span>" + lfOpt(o) + "</span></div></li>";
     }).join("") + '</ol><section class="pn-fb">' + ex + outdatedHtml(it) +
-      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
+      (G.PREP_ASK ? askBtn("ask-rv", "Ask MaiK", ' data-i="' + i + '"') : "") + provHtml(it) + (G.PREP_PYQ ? G.PREP_PYQ.creditFoot(it, HOST) : "") + "</section>" + (rid ? G.PREP_IDS.chip(rid) : "") + "</div></div>");
     if (G.PREP_REASON && G.PREP_REASON.fill) G.PREP_REASON.fill(HOST);
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
     bindRvSwipe();
@@ -3364,6 +3410,7 @@
       var known = subs.every(function (sb) { return !!st.ix[sb.id]; });
       body = '<div class="pn-group">' + row("custom", ico("plus"), "Custom module", "Your own mix of subjects and count") +
         (G.PREP_QGEN && G.PREP_QGEN.canCreate() ? row("g-new", ico("bolt"), "Create a module with MaiK", G.PREP_QGEN.sub()) : "") +
+        (G.PREP_IMPORT ? row("g-imp", ico("dl"), "Import MCQs", "From a JSON template or a PDF, no AI cost") : "") +
         row("bookmarks", ico("bm"), "Bookmarks", fmt(Object.keys(s.bm).length) + " saved") +
         row("mistakes", ico("x"), "My mistakes", fmt(Object.keys(s.mt).length) + " to fix") + "</div>" +
         '<h2 class="pn-h">Subjects</h2><p class="pn-mut pn-small pn-qbs" id="pnQbS">' + qbSummary(subs, known) + '</p><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>";
@@ -4177,6 +4224,9 @@
     if (a === "close") return close();
     if (a.indexOf("n-") === 0 && G.PREP_NAV) return G.PREP_NAV.act(a, b, HOST);
     if (a.indexOf("t2-") === 0 && G.PREP_TESTS) return G.PREP_TESTS.act(a, b, HOST);
+    if (a.indexOf("x-") === 0 && G.PREP_TOOLS) return G.PREP_TOOLS.act(a, b, HOST);
+    if (a.indexOf("tt-") === 0 && G.PREP_TT) return G.PREP_TT.act(a, b, HOST);
+    if (a.indexOf("v-") === 0 && G.PREP_PLAY) return G.PREP_PLAY.act(a, b, HOST);
     if (a.indexOf("n360-") === 0 && G.PREP_NUCLEUS360) return G.PREP_NUCLEUS360.act(a, b, HOST);
     if (a === "back") return back();
     if (a === "retry") { close(); return open(); }
@@ -4374,6 +4424,7 @@
     // Share IDs (prep-ids.js) own every data-act starting "id-".
     if (a.indexOf("id-") === 0 && G.PREP_IDS) return G.PREP_IDS.act(a, b, HOST);
     // MaiK modules and the owner's Author screen (prep-qgen.js) own every data-act starting "g-".
+    if (a.indexOf("g-imp") === 0 && G.PREP_IMPORT) return G.PREP_IMPORT.act(a, b, HOST);
     if (a.indexOf("g-") === 0 && G.PREP_QGEN) return G.PREP_QGEN.act(a, b, HOST);
     // Friends, groups and the accuracy page (prep-social.js).
     if (a === "soc-open") return G.PrepSocial && G.PrepSocial.open && G.PrepSocial.open(HOST);
@@ -4471,7 +4522,9 @@
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
     openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits,
     // MaiK modules (prep-qgen.js): the bank and overlay files of a module, for the owner's duplicate check on the server.
-    modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); } };
+    modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); },
+    // Play (prep-play.js): record an answer given outside the runner (the feed), finish the run in progress.
+    record: function (it, k, cap) { record(it, k, cap); }, finish: function () { finish(); }, poolFor: poolFor, countFor: countFor };
 
   var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
     // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.

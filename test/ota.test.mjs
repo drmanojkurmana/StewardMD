@@ -207,6 +207,17 @@ test("router builds an ABSOLUTE zipUrl from the live request's origin — capaci
   assert.equal(body.ota, true);
   assert.equal(body.zipUrl, "https://stewardmd.in/api/ota/file/feedface", `got ${body.zipUrl}`);
 });
+test("router sends the per-file list only when asked (files=1) - ~150KB of JSON must not ride every launch/resume check", async () => {
+  const { env, r2 } = fakeR2Env();
+  await r2.put("ota/candidate.json", JSON.stringify({ commit: "abc123", manifestKey: "ota/manifests/abc123.json" }));
+  await r2.put("ota/manifests/abc123.json", JSON.stringify({ commit: "abc123", zipHash: "feedface", zipSize: 99, files: [{ path: "a.js", hash: "h1", size: 5 }] }));
+  await OTA.publish(r2, { by: "owner@x.com" });
+  const plain = await (await onRequest({ request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7"), env, params: { path: ["check"] } })).json();
+  assert.equal(plain.ota, true);
+  assert.equal(plain.files, undefined, "a plain check carries no file list");
+  const full = await (await onRequest({ request: new Request("https://stewardmd.in/api/ota/check?version=0&nativeBuild=7&files=1"), env, params: { path: ["check"] } })).json();
+  assert.deepEqual(full.files, [{ path: "a.js", hash: "h1", size: 5 }], "files=1 returns path, hash and size for the delta install");
+});
 test("router never caches the check response — an edge/browser cache saying 'no update' forever would be its own silent staleness bug", async () => {
   const { env, r2 } = fakeR2Env();
   const request = new Request("https://stewardmd.in/api/ota/check");
@@ -226,8 +237,19 @@ test("router serves a content-addressed file as immutable-cacheable — it can n
   const request = new Request("https://stewardmd.in/api/ota/file/" + hash);
   const res = await onRequest({ request, env, params: { path: ["file", hash] } });
   assert.equal(res.status, 200);
-  assert.equal(res.headers.get("Cache-Control"), "public, max-age=31536000, immutable");
+  assert.match(res.headers.get("Cache-Control"), /^public, max-age=31536000, immutable/);
   assert.equal(await res.text(), "the-bytes");
+});
+test("router serves EVERY file as opaque binary - Cloudflare injects a script into text/html, which broke the sha256 of every .html file and sank the delta install (2026-10-27)", async () => {
+  const { env, r2 } = fakeR2Env();
+  const hash = "b".repeat(64);
+  await r2.put("ota/files/" + hash, "<html>x</html>", { httpMetadata: { contentType: "text/html; charset=utf-8" } });
+  const res = await onRequest({ request: new Request("https://stewardmd.in/api/ota/file/" + hash), env, params: { path: ["file", hash] } });
+  assert.equal(res.status, 200);
+  assert.equal(res.headers.get("Content-Type"), "application/octet-stream", "a text/html type is what Cloudflare rewrites");
+  assert.equal(res.headers.get("X-Content-Type-Options"), "nosniff");
+  assert.match(res.headers.get("Cache-Control"), /no-transform/);
+  assert.equal(await res.text(), "<html>x</html>", "bytes unchanged");
 });
 test("router: admin routes are refused without an owner token — this endpoint controls what every phone runs", async () => {
   const { env } = fakeR2Env();

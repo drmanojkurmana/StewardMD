@@ -154,6 +154,9 @@
   // Latest reading = the one with the newest TIMESTAMP (not merely the last-pushed element).
   function latestByTs(arr) { if (!arr || !arr.length) return {}; var b = arr[0]; for (var i = 1; i < arr.length; i++) { if (((arr[i] && arr[i].ts) || 0) >= ((b && b.ts) || 0)) b = arr[i]; } return b || {}; }
   function latestVitals() { return latestByTs(_raw.vitals); }
+  // Rank lookup for severity sorts. NOT `map[k] || 9`: the most urgent rank is 0, which is falsy, so
+  // that idiom sent critical patients to the BOTTOM of the unit board and crit alerts below warnings.
+  function rankOf(map, k) { return Object.prototype.hasOwnProperty.call(map, k) ? map[k] : 9; }
   // Forward-filled "current vitals" snapshot: the newest non-null value for EACH field across the series,
   // NOT just the newest-timestamp row (R1 C1). A sparse update (e.g. re-charting only SpO2) must NOT blank
   // MAP / lactate / GCS and silently drop still-active critical alerts and vital-based scores. Mirrors how
@@ -250,7 +253,7 @@
     }
 
     var order = { crit: 0, warn: 1, info: 2 };
-    a.sort(function (x, y) { return (order[x.severity] || 9) - (order[y.severity] || 9); });
+    a.sort(function (x, y) { return rankOf(order, x.severity) - rankOf(order, y.severity); });
     s.alerts = a;
     // ---- auto-computed clinical scores (icu-autoscores.js → MEDCALC formulas) ----
     try { s.scores = window.ICU_AUTOSCORES ? window.ICU_AUTOSCORES.compute(s, window.MEDCALC) : []; }
@@ -302,7 +305,7 @@
       defs.map(function (d) {
         var on = _gcs[key] === d[0];
         return '<button class="icu-btn ghost" data-icu-act="gcspick:' + key + ':' + d[0] + '" aria-pressed="' + (on ? "true" : "false") +
-          '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (on ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") + '">' +
+          '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (on ? ";background:var(--fill);color:#fff;border-color:var(--fill)" : "") + '">' +
           d[0] + " &middot; " + esc(d[1]) + "</button>";
       }).join("") + "</div></div>";
   }
@@ -314,7 +317,7 @@
       gcsRow("v", GCS_V, "Verbal response (V)") +
       gcsRow("m", GCS_M, "Motor response (M)") +
       '<div class="icu-fld" style="grid-column:1/-1"><button class="icu-btn ghost" data-icu-act="gcsvt" aria-pressed="' + (_gcs.vt ? "true" : "false") +
-        '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (_gcs.vt ? ";background:var(--primary);color:#fff;border-color:var(--primary)" : "") +
+        '" style="width:auto;margin:0;padding:8px 11px;font-size:12.5px' + (_gcs.vt ? ";background:var(--fill);color:#fff;border-color:var(--fill)" : "") +
         '">Verbal not testable (intubated)</button></div>' +
       '<div class="icu-fld" style="grid-column:1/-1"><div style="font:800 22px var(--font);color:var(--ink)">' +
         (t == null ? "&mdash;" : t + (_gcs.vt ? "T" : "") + " / 15") + '</div>' +
@@ -717,7 +720,7 @@
     if (!key) return;
     if (key.indexOf("g:") === 0) { var id = key.slice(2); var g = (_grpList || []).filter(function (x) { return x.id === id; })[0]; if (g) grpSelect(g, true); }
     else if (key.indexOf("s:") === 0) { var p = key.slice(2).split(":"); selectUnit({ cat: p[0], type: decodeURIComponent(p[1] || "") }); }
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
   }
   function currentUnitLabel() {
     if (grpActive() && _grp) return (_grp.name || ctxLabel()) + (_grp.hospital ? " · " + _grp.hospital : "");
@@ -906,7 +909,7 @@
       if (evicted && evicted.id !== id && window.toast) toast((evicted.name ? pv("name", evicted.name) : "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
     }
     saveRoster(capTen(r));
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
     return Promise.resolve(entry);
   }
   // Inverse of addWardPatientToRoster: un-add a Ward-Sync patient from the CURRENT unit's board, using
@@ -920,7 +923,7 @@
       return Promise.reject(new Error("group-api-unavailable"));
     }
     var p = rosterRemove("pw_" + patientId);
-    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    try { if (ICU.isOpen()) paintPassive(); } catch (e) {}
     return Promise.resolve(p);
   }
 
@@ -935,7 +938,7 @@
       // ── Visual design system (2026-08). Clinical-instrument palette: paper-grey ground, white
       // panels, hairline borders doing the separating work instead of shadows, one deep teal accent,
       // and status colours reserved for status. Behaviour/markup untouched — values only.
-      '#icuRoot,.icu-modal,.icu-tour{--bg:#EDF0F4;--panel:#FFFFFF;--panel2:#F5F7FA;--border:#D9DFE7;--border-soft:#E6EAF0;--ink:#0C1622;--ink2:#33414F;--muted:#5C6A7B;--primary:#0E6F66;--primary2:#0A564F;--primary3:#1B9488;--primary-soft:#E3EFED;--ok:#146B41;--ok-soft:#E5F1E9;--warn:#8A5405;--warn-soft:#FAF0DE;--danger:#A5261B;--danger-soft:#FAE9E7;' +
+      '#icuRoot,.icu-modal,.icu-tour{--bg:#EDF0F4;--panel:#FFFFFF;--panel2:#F5F7FA;--border:#D9DFE7;--border-soft:#E6EAF0;--ink:#0C1622;--ink2:#33414F;--muted:#5C6A7B;--primary:#0E6F66;--fill:#0E6F66;--primary2:#0A564F;--primary3:#1B9488;--primary-soft:#E3EFED;--ok:#146B41;--ok-soft:#E5F1E9;--warn:#8A5405;--warn-soft:#FAF0DE;--danger:#A5261B;--danger-soft:#FAE9E7;' +
       // Radii step down (16→12→10→8): panels read as instrument surfaces, not chat bubbles. Shadow is
       // a single hairline lift; depth comes from borders + the --panel/--panel2/--bg surface ladder.
       '--r:12px;--r-sm:10px;--r-xs:8px;--r-pill:999px;--sh:0 1px 2px rgba(12,22,34,.06);--sh-lift:0 1px 3px rgba(12,22,34,.10);--ease:.18s cubic-bezier(.2,.6,.2,1);' +
@@ -945,7 +948,7 @@
       '#icuRoot.on{display:flex}' +
       // Dark: a neutral slate night surface (not navy), same hairline discipline, accents pulled back
       // from neon so a dim ward at 3am reads calm. Token names/roles are identical to light.
-      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal,body.dark .icu-tour,body.v3-dark .icu-tour{--bg:#0B1017;--panel:#151C25;--panel2:#111822;--border:#28323E;--border-soft:#1E2731;--ink:#E5EBF2;--ink2:#B7C2CF;--muted:#93A1B2;--primary:#34B5A5;--primary2:#1E8D80;--primary3:#5FD0C2;--primary-soft:#12302B;--ok:#4FBE80;--ok-soft:#12281B;--warn:#D6A44A;--warn-soft:#2B2313;--danger:#E5766C;--danger-soft:#301816;--sh:0 1px 2px rgba(0,0,0,.45);--sh-lift:0 2px 6px rgba(0,0,0,.5)}' +
+      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal,body.dark .icu-tour,body.v3-dark .icu-tour{--bg:#0B1017;--panel:#151C25;--panel2:#111822;--border:#28323E;--border-soft:#1E2731;--ink:#E5EBF2;--ink2:#B7C2CF;--muted:#93A1B2;--primary:#34B5A5;--fill:#1F7A6E;--primary2:#1E8D80;--primary3:#5FD0C2;--primary-soft:#12302B;--ok:#4FBE80;--ok-soft:#12281B;--warn:#D6A44A;--warn-soft:#2B2313;--danger:#E5766C;--danger-soft:#301816;--sh:0 1px 2px rgba(0,0,0,.45);--sh-lift:0 2px 6px rgba(0,0,0,.5)}' +
       '#icuRoot *{box-sizing:border-box}' +
       '#icuRoot button{font-family:inherit;-webkit-tap-highlight-color:transparent}' +
       // Typographic spine: optical sizing + antialiasing, slight negative tracking on display sizes,
@@ -967,7 +970,7 @@
       '.icu-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);background:var(--panel);color:var(--ink2);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 12px;cursor:pointer;flex:0 0 auto;min-height:36px;transition:border-color var(--ease),background var(--ease),color var(--ease)}' +
       '.icu-chip:active{background:var(--panel2)}.icu-chip:hover{border-color:var(--primary);color:var(--primary)}' +
       '.icu-chip .icu-ico{width:15px;height:15px}' +
-      '.icu-chip-primary{background:var(--primary);border-color:var(--primary);color:#fff}.icu-chip-primary:hover{border-color:var(--primary);filter:brightness(1.05)}' +
+      '.icu-chip-primary{background:var(--fill);border-color:var(--fill);color:#fff}.icu-chip-primary:hover{border-color:var(--primary);filter:brightness(1.05)}' +
       // Finer, more instrument-like line weight; round joins keep it friendly at 14-16px.
       '.icu-ico{width:1em;height:1em;flex:0 0 auto;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round}' +
       '.icu-emoji{display:inline-flex;align-items:center;line-height:1}' +
@@ -982,21 +985,21 @@
       '.icu-btn .icu-ico{width:16px;height:16px;vertical-align:-3px;margin-right:5px}' +
       '.man .icu-ico{width:12px;height:12px;vertical-align:-1px;margin-right:1px}' +
       '.icu-chip:active{background:var(--primary-soft)}' +
-      '.icu-adddata{background:var(--primary);color:#fff;font:700 15px var(--font);padding:14px;border:none;border-radius:var(--r-sm);width:100%;cursor:pointer;box-shadow:none}' +
+      '.icu-adddata{background:var(--fill);color:#fff;font:700 15px var(--font);padding:14px;border:none;border-radius:var(--r-sm);width:100%;cursor:pointer;box-shadow:none}' +
       // scroll area
       '.icu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(96px + env(safe-area-inset-bottom))}' +
       '.icu-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}' +
       // Eyebrow: small, wide-tracked, quiet. It labels a region; it must never compete with the data.
-      '.icu-sec-lbl{font:700 10.5px var(--font);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:2px 2px -4px;display:flex;align-items:center;gap:7px}' +
+      '.icu-sec-lbl{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:2px 2px -4px;display:flex;align-items:center;gap:7px}' +
       // The -4px above compensates the .icu-wrap flex gap for a STANDALONE eyebrow above a card. But
       // when an eyebrow is a card's own header (inside .icu-card) there is no flex gap, so it needs a
       // real bottom gap before the card content instead of being pulled onto it.
       '.icu-card .icu-sec-lbl{margin:0 0 9px}' +
       '.icu-sbar-head{margin-bottom:10px}' +
-      '.icu-sbar{border-left:3px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
-      '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px}' +
+      '.icu-sbar{border:1px solid var(--border);background:var(--panel2);border-radius:10px;padding:11px 13px;margin-bottom:10px}' +
+      '.icu-sbar-lbl{font:800 11px var(--font);letter-spacing:.005em;text-transform:none;margin-bottom:4px}' +
       '.icu-sbar-body{font:500 14px/1.5 var(--font);color:var(--ink)}' +
-      '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 10px var(--font);vertical-align:middle}' +
+      '.icu-v2-tabbadge{display:inline-flex;align-items:center;justify-content:center;min-width:17px;height:17px;padding:0 4px;margin-left:5px;border-radius:9px;background:var(--danger);color:#fff;font:800 11px var(--font);vertical-align:middle}' +
       /* Overview design cards (Active problems · consultant instruction · Current treatment) */
       '.icu-ov-prob{display:flex;align-items:center;gap:9px}' +
       '.icu-ov-dot{width:8px;height:8px;border-radius:50%;flex:0 0 auto}' +
@@ -1005,7 +1008,7 @@
       '.icu-ov-instr{background:var(--primary-soft);border-color:color-mix(in srgb,var(--primary) 45%,var(--panel))}' +
       '.icu-ov-instr-tx{font:600 14.5px/1.5 var(--font);color:var(--ink);margin:0}' +
       '.icu-ov-instr-by{font:600 12px var(--font);color:var(--primary);margin:6px 0 0}' +
-      '.icu-ov-viewtasks{width:100%;margin-top:12px;border:none;background:var(--primary);color:#fff;border-radius:12px;font:800 14px var(--font);padding:13px;cursor:pointer}' +
+      '.icu-ov-viewtasks{width:100%;margin-top:12px;border:none;background:var(--fill);color:#fff;border-radius:12px;font:800 14px var(--font);padding:13px;cursor:pointer}' +
       '.icu-ov-tx{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)}' +
       '.icu-ov-tx:last-child{border-bottom:none}' +
       '.icu-ov-tx-nm{font:600 13.5px var(--font);color:var(--ink)}' +
@@ -1032,20 +1035,20 @@
       '.icu-imp-thumb{max-height:120px;max-width:calc(100% - 32px);margin:0 16px;border-radius:8px;border:1px solid var(--line);object-fit:contain}' +
       '.icu-imp-rows{flex:1;overflow-y:auto;padding:8px 16px}' +
       '.icu-imp-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:7px 0;font:600 13.5px var(--font)}.icu-imp-k{flex:0 0 34%}.icu-imp-row input{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px;font:600 14px var(--font)}' +
-      '.icu-imp-dup,.icu-imp-diff{flex-basis:100%;margin-left:34%;font:600 10.5px var(--font)}.icu-imp-dup{color:var(--ok)}.icu-imp-diff{color:var(--warn)}' +
+      '.icu-imp-dup,.icu-imp-diff{flex-basis:100%;margin-left:34%;font:600 11px var(--font)}.icu-imp-dup{color:var(--ok)}.icu-imp-diff{color:var(--warn)}' +
       '.icu-imp-actions{display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}.icu-imp-actions .icu-btn{flex:1}.icu-imp-go{background:var(--teal,#0e6e63)!important;color:#fff!important;border-color:var(--teal,#0e6e63)!important}' +
       '.icu-vitals-c{margin:0 0 2px}.icu-vitals-c>summary{list-style:none;cursor:pointer;font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.icu-vitals-c>summary::-webkit-details-marker{display:none}.icu-vitals-c>summary:after{content:"▸";margin-left:auto;color:var(--muted)}.icu-vitals-c[open]>summary:after{content:"▾"}.icu-vitals-c[open]>summary{margin-bottom:8px}.icu-vitals-c .vs-k{color:var(--muted);font-weight:600}' +
       '.icu-vc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-xs);padding:9px 10px;box-shadow:none;min-width:0}' +
       '.icu-vc-tap{cursor:pointer;position:relative;-webkit-tap-highlight-color:transparent;transition:transform .06s ease}' +
       '.icu-vc-tap:active{transform:scale(.97)}' +
       '.icu-vc-tap:focus-visible{outline:2px solid var(--primary);outline-offset:2px}' +
-      '.icu-vc-edit{position:absolute;top:5px;right:7px;font-size:10.5px;line-height:1;color:var(--muted);opacity:.5}' +
+      '.icu-vc-edit{position:absolute;top:6px;right:7px;font-size:11px;line-height:1;color:var(--muted);opacity:.7}' +
       '.icu-vc-tap:active .icu-vc-edit,.icu-vc-tap:hover .icu-vc-edit{opacity:.9}' +
-      '.icu-vc .vl{font:600 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
-      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 10px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
-      '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
-      '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
-      '.icu-vc.ok .vv{color:var(--ok)}' +
+      '.icu-vc .vl{font:600 11.5px var(--font);letter-spacing:.005em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+      '.icu-vc .vv{font:600 19px/1.1 var(--mono);margin-top:4px;letter-spacing:-.01em}.icu-vc .vu{font:500 11px var(--font);color:var(--muted);margin-left:3px}.icu-vc .vu-tight{margin-left:0}' +
+      '.icu-vc.crit .vv{color:var(--danger)}' +
+      '.icu-vc.warn .vv{color:var(--warn)}' +
+      '.icu-vc.ok .vv{color:var(--ink)}' +
       '.icu-spark{width:100%;height:18px;display:block;margin-top:5px;color:var(--muted);opacity:.8}' +
       '.icu-vc.crit .icu-spark{color:var(--danger);opacity:1}.icu-vc.warn .icu-spark{color:var(--warn);opacity:1}.icu-vc.ok .icu-spark{color:var(--primary)}' +
       // generic card
@@ -1055,7 +1058,7 @@
       '.icu-score-n{font:800 13px var(--font)}' +
       '.icu-score-v{font:800 13px var(--font);color:var(--primary)}' +
       '.icu-score-i{flex:1 1 100%;font:600 12px/1.45 var(--font);color:var(--muted)}' +
-      '.icu-score-calc{font:800 9px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);border-radius:5px;padding:2px 6px;white-space:nowrap}' +
+      '.icu-score-calc{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent);border-radius:5px;padding:2px 6px;white-space:nowrap}' +
       '.icu-score.miss{opacity:.6;cursor:pointer}' +
       '.icu-score-need{font:600 12px var(--font);color:var(--muted);font-style:italic}' +
       '.icu-score-sug{margin-top:10px;font:600 12px/1.6 var(--font);color:var(--muted)}' +
@@ -1066,22 +1069,22 @@
       '.icu-ai{background:var(--panel);border:1px dashed var(--border);border-radius:var(--r-sm);padding:13px;text-align:left;cursor:pointer;color:var(--ink);position:relative;transition:transform var(--ease),box-shadow var(--ease)}' +
       '.icu-ai:active{transform:scale(.98)}.icu-ai:hover{box-shadow:var(--sh)}' +
       '.icu-ai .ic{font-size:22px}.icu-ai .t{font:700 13.5px var(--font);margin-top:6px}.icu-ai .s{font:500 11px/1.4 var(--font);color:var(--muted);margin-top:2px}' +
-      '.icu-badge{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:var(--r-pill);padding:2px 7px;margin-top:8px}' +
+      '.icu-badge{display:inline-block;font:800 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--warn);background:var(--warn-soft);border-radius:var(--r-pill);padding:2px 7px;margin-top:8px}' +
       '.icu-ai .man{display:inline-block;margin-top:8px;margin-left:6px;font:700 11px var(--font);color:var(--primary)}' +
       // alert / recommendation / protocol cards
       // Alerts: the coloured rail carries the severity, the fill stays subtle so a screen of alerts
       // does not turn into a wall of red.
-      '.icu-alert{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r-xs);padding:12px 14px;background:var(--panel);margin-bottom:8px}' +
-      '.icu-alert-grp{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
-      '.icu-alert.crit{border-left-color:var(--danger);background:var(--danger-soft)}' +
-      '.icu-alert.warn{border-left-color:var(--warn);background:var(--warn-soft)}' +
+      '.icu-alert{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--border);border-radius:var(--r-xs);padding:12px 14px;background:var(--panel);margin-bottom:8px}' +
+      '.icu-alert-grp{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:10px 0 4px}.icu-alert-grp:first-child{margin-top:0}' +
+      '.icu-alert.crit .at{color:var(--danger)}' +
+      '.icu-alert.warn .at{color:var(--warn)}' +
       '.icu-alert .at{font:700 13.5px var(--font)}.icu-alert .am{font:500 12.5px/1.45 var(--font);color:var(--muted);margin-top:1px}' +
-      '.icu-alert .ax{margin-left:auto;font:700 9px var(--font);text-transform:uppercase;color:var(--muted)}' +
+      '.icu-alert .ax{margin-left:auto;font:700 11px var(--font);text-transform:none;color:var(--muted)}' +
       '.icu-row{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font:500 13.5px/1.45 var(--font)}.icu-row:last-child{border-bottom:none}.icu-row b{font-weight:700}' +
-      '.icu-ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.icu-ev span{font:700 10px var(--font);color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px}' +
+      '.icu-ev{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}.icu-ev span{font:700 11px var(--font);color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px}' +
       // Primary action: a single flat teal with a 4% top-to-bottom shade (enough to read as a raised
       // surface under a thumb, far short of a gradient button). No glow, no scale-bounce.
-      '.icu-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1px solid var(--primary2);border-radius:var(--r-sm);background:linear-gradient(180deg,var(--primary),var(--primary2));color:#fff;font:700 14px var(--font);padding:12px 14px;cursor:pointer;box-shadow:none;margin-top:12px;transition:filter var(--ease),background var(--ease)}.icu-btn:active{filter:brightness(.94)}.icu-btn:hover{filter:brightness(1.04)}' +
+      '.icu-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:1px solid var(--primary2);border-radius:var(--r-sm);background:var(--fill);color:#fff;font:700 14px var(--font);padding:12px 14px;cursor:pointer;box-shadow:none;margin-top:12px;transition:filter var(--ease),background var(--ease)}.icu-btn:active{filter:brightness(.94)}.icu-btn:hover{filter:brightness(1.04)}' +
       '.icu-btn.ghost{background:var(--panel);border:1px solid var(--border);color:var(--primary);box-shadow:none}.icu-btn.ghost:active{background:var(--panel2);filter:none}.icu-btn.ghost:hover{border-color:var(--primary);filter:none}' +
       '.icu-empty{font:500 13px var(--font);color:var(--muted);text-align:center;padding:8px 0}' +
       '.icu-coach{background:var(--primary-soft,#0d2e2a);border:1px solid var(--primary,#0f766e);border-radius:14px;padding:13px 14px;margin-bottom:12px}' +
@@ -1098,7 +1101,7 @@
       '.icu-tr-empty-btns{display:flex;flex-direction:column;gap:8px;max-width:270px;margin:14px auto 0}' +
       '.icu-trend-wins{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:10px 0 12px}' +
       '.icu-tr-flags{background:var(--warn-soft,#fef3c7);border:1px solid var(--warn,#92620a);border-radius:12px;padding:10px 12px;margin:2px 0 12px}' +
-      '.icu-tr-flags-h{font:800 12px var(--font);color:var(--warn,#92620a);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;display:flex;align-items:center;gap:5px}' +
+      '.icu-tr-flags-h{font:800 12px var(--font);color:var(--warn,#92620a);text-transform:none;letter-spacing:.005em;margin-bottom:8px;display:flex;align-items:center;gap:5px}' +
       '.icu-tr-flags-h span{font-weight:600;text-transform:none;letter-spacing:0;opacity:.85}.icu-tr-flags-h .icu-ico{width:15px;height:15px}' +
       '.icu-tr-flag{display:inline-block;background:var(--panel);border:1px solid var(--warn,#92620a);color:var(--ink);border-radius:999px;font:700 12px var(--font);padding:5px 11px;margin:0 6px 6px 0}' +
       '.icu-tr-group{margin-bottom:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:var(--panel)}' +
@@ -1109,24 +1112,24 @@
       '.icu-tr-none{color:var(--muted);font-weight:600;font-size:12px}.icu-tr-empty{padding:0 14px 14px;color:var(--muted);font:600 12.5px var(--font)}' +
       '.icu-tr-card{margin:0 10px 10px}' +
       // Lab Watch
-      '.icu-chip-lw{background:var(--primary-soft);border-color:var(--primary);color:var(--primary2,var(--primary))}' +
-      '.icu-lw-badge{display:inline-flex;min-width:16px;height:16px;padding:0 4px;align-items:center;justify-content:center;background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);margin-left:3px}' +
+      '.icu-chip-lw{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
+      '.icu-lw-badge{display:inline-flex;min-width:16px;height:16px;padding:0 4px;align-items:center;justify-content:center;background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 11px var(--font);margin-left:3px}' +
       '.icu-tr-card.lw-hi{outline:2px solid var(--primary);outline-offset:1px;box-shadow:0 0 0 4px var(--primary-soft)}' +
       '.icu-lw-sheet .icu-lw-list{max-height:34vh;overflow:auto;margin-bottom:6px}' +
       '.icu-lw-grp{margin:0 0 10px}.icu-lw-grp-h{margin:0 0 6px}' +
-      '.icu-lw-grpall{font:800 11.5px var(--font);letter-spacing:.02em;text-transform:uppercase;color:var(--muted);background:none;border:none;padding:2px 0;cursor:pointer}.icu-lw-grpall.on{color:var(--primary)}' +
+      '.icu-lw-grpall{font:800 11.5px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);background:none;border:none;padding:2px 0;cursor:pointer}.icu-lw-grpall.on{color:var(--primary)}' +
       '.icu-lw-chips{display:flex;flex-wrap:wrap;gap:6px}' +
-      '.icu-lw-an{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}.icu-lw-an.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary2,var(--primary))}' +
+      '.icu-lw-an{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:6px 11px;cursor:pointer}.icu-lw-an.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
       '.icu-lw-none,.icu-lw-empty{font:600 12.5px var(--font);color:var(--muted);padding:10px 2px}' +
-      '.icu-lw-opts{border-top:1px solid var(--border);padding-top:10px;margin-top:4px}.icu-lw-opt{margin-bottom:10px}.icu-lw-opt>label{display:block;font:800 11.5px var(--font);text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-bottom:5px}' +
+      '.icu-lw-opts{border-top:1px solid var(--border);padding-top:10px;margin-top:4px}.icu-lw-opt{margin-bottom:10px}.icu-lw-opt>label{display:block;font:800 11.5px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin-bottom:5px}' +
       '.icu-lw-segs{display:flex;flex-wrap:wrap;gap:6px}' +
-      '.icu-lw-seg{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:9px;padding:7px 11px;cursor:pointer}.icu-lw-seg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '.icu-lw-seg{font:700 12.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:9px;padding:7px 11px;cursor:pointer}.icu-lw-seg.on{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '.icu-lw-hint{font:600 11.5px/1.4 var(--font);color:var(--muted);margin-top:6px}' +
       '.icu-lw-count{font:700 12px var(--font);color:var(--muted);text-align:center;margin:6px 0 10px}' +
-      '.icu-lw-state{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:999px;vertical-align:middle}.icu-lw-state.on{background:var(--ok-soft);color:var(--ok)}.icu-lw-state.pause{background:var(--warn-soft);color:var(--warn)}.icu-lw-state.exp{background:var(--danger-soft);color:var(--danger)}' +
+      '.icu-lw-state{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;padding:2px 8px;border-radius:999px;vertical-align:middle}.icu-lw-state.on{background:var(--ok-soft);color:var(--ok)}.icu-lw-state.pause{background:var(--warn-soft);color:var(--warn)}.icu-lw-state.exp{background:var(--danger-soft);color:var(--danger)}' +
       '.icu-lw-meta{font:600 12.5px var(--font);color:var(--muted);margin:2px 0 8px}' +
       '.icu-lw-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px}.icu-lw-tag{font:700 11.5px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 9px}' +
-      '.icu-lw-banner{font:600 12px/1.4 var(--font);color:var(--primary2,var(--primary));background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-bottom:10px}' +
+      '.icu-lw-banner{font:600 12px/1.4 var(--font);color:var(--primary);background:var(--primary-soft);border-radius:10px;padding:9px 11px;margin-bottom:10px}' +
       '.icu-lw-acts{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}' +
       '.icu-lw-act{text-align:left;background:var(--panel2);border:1px solid var(--border);border-left-width:3px;border-radius:10px;padding:8px 11px;cursor:pointer;display:flex;flex-direction:column;gap:2px}' +
       '.icu-lw-act.crit{border-left-color:var(--danger)}.icu-lw-act.chg{border-left-color:var(--warn)}.icu-lw-act.new{border-left-color:var(--primary)}' +
@@ -1139,13 +1142,13 @@
       '.icu-tr-interp{font:800 12.5px var(--font);margin-top:2px;text-transform:capitalize}' +
       '.icu-tr-note{font:600 11.5px var(--font);color:var(--muted);margin-top:4px;font-style:italic}' +
       '.icu-tr-src{display:flex;align-items:center;gap:8px;font:600 11px var(--font);color:var(--muted);margin:6px 0 8px}' +
-      '.icu-tr-st{border-radius:999px;font:800 10px var(--font);padding:2px 8px;text-transform:uppercase;letter-spacing:.03em}' +
+      '.icu-tr-st{border-radius:999px;font:800 11px var(--font);padding:2px 8px;text-transform:none;letter-spacing:.005em}' +
       '.icu-tr-st.crit{background:var(--danger-soft,#fee2e2);color:var(--danger,#b91c1c)}.icu-tr-st.ab{background:var(--warn-soft,#fef3c7);color:var(--warn,#92620a)}.icu-tr-st.ok{background:var(--ok-soft,#dcfce7);color:var(--ok,#15803d)}' +
       '.icu-tr-single{font:600 12px var(--font);color:var(--muted);padding:8px 0}' +
       // persistent patient banner + severity key (A6)
       '.icu-banner{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;font:600 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 11px;margin-bottom:10px}' +
       '.icu-banner b{color:var(--ink);font-weight:800}.icu-banner .bad{color:var(--danger);font-weight:800}.icu-banner .sep{opacity:.4;margin:0 3px}' +
-      '.icu-sevkey{display:flex;gap:14px;justify-content:center;font:600 10.5px var(--font);color:var(--muted);margin-bottom:10px}' +
+      '.icu-sevkey{display:flex;gap:14px;justify-content:flex-start;padding-left:2px;font:600 11px var(--font);color:var(--muted);margin-bottom:10px}' +
       '.icu-sevkey span{display:inline-flex;align-items:center;gap:5px}.icu-sevkey i{width:9px;height:9px;border-radius:50%;display:inline-block}' +
       '.icu-sevkey i.ok{background:var(--ok)}.icu-sevkey i.warn{background:var(--warn)}.icu-sevkey i.bad{background:var(--danger)}' +
       // Medical Core (flag smd_medcore, default OFF). Deliberately the quietest card on the screen:
@@ -1157,10 +1160,10 @@
       '.icu-mc-row .w{margin-left:auto;font:600 11px var(--font);color:var(--muted);white-space:nowrap}' +
       // One flex item, so the row gap never lands between a number and its unit.
       '.icu-mc-row .icu-mc-val{white-space:nowrap}' +
-      '.icu-mc-sub{font:700 10px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:10px 0 2px}' +
+      '.icu-mc-sub{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:10px 0 2px}' +
       '.icu-mc-sub:first-child{margin-top:0}' +
-      '.icu-mc-foot{font:400 10.5px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
-      '.icu-phase{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
+      '.icu-mc-foot{font:400 11px/1.5 var(--font);color:var(--muted);margin:9px 0 0}' +
+      '.icu-phase{display:inline-block;font:800 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
       // plain-language jargon tooltips (A5) — tap ⓘ to open an explanation
       '.icu-tip{border:none;background:none;color:var(--primary);cursor:pointer;font:600 11px var(--font);padding:0 2px;vertical-align:baseline;-webkit-appearance:none}' +
       '.icu-tip-pop{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,14px);width:min(360px,calc(100vw - 28px));background:var(--panel,#0b1620);border:1px solid var(--primary,#0f766e);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.4);padding:13px 15px;z-index:10040;opacity:0;transition:opacity .2s,transform .2s;pointer-events:auto}' +
@@ -1172,14 +1175,14 @@
       '.icu-tabs{position:absolute;left:0;right:0;bottom:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;background:var(--panel);border-top:1px solid var(--border);padding:5px 6px calc(5px + env(safe-area-inset-bottom));z-index:5}' +
       '.icu-tabs::-webkit-scrollbar{display:none}' +
       '.icu-tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:none;color:var(--muted);cursor:pointer;padding:6px 9px;border-radius:10px;min-width:58px}' +
-      '.icu-tab .ti{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;height:21px}.icu-tab .ti .icu-ico{width:21px;height:21px;stroke-width:1.9}.icu-tab .tl{font:700 9.5px var(--font);white-space:nowrap}' +
+      '.icu-tab .ti{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;height:21px}.icu-tab .ti .icu-ico{width:21px;height:21px;stroke-width:1.9}.icu-tab .tl{font:700 11px var(--font);white-space:nowrap}' +
       '.icu-x .icu-ico{width:19px;height:19px;stroke-width:2}' +
       '#icuSnap .icu-ico{width:24px;height:24px;stroke-width:2}' +
       '.icu-tab.on{color:var(--primary);background:var(--primary-soft);box-shadow:inset 0 2px 0 var(--primary)}' +
       '.icu-tab.on .tl{font-weight:800}' +
       // 5-workspace bottom bar: evenly spaced, no scroll, no truncation
       '.icu-ws-bar{overflow-x:visible;justify-content:space-between;gap:0;padding-left:4px;padding-right:4px}' +
-      '.icu-ws-bar .icu-tab{flex:1 1 0;min-width:0;padding:6px 4px}.icu-ws-bar .icu-tab .tl{font-size:10px}' +
+      '.icu-ws-bar .icu-tab{flex:1 1 0;min-width:0;padding:6px 4px}.icu-ws-bar .icu-tab .tl{font-size:11px}' +
       // segmented sub-navigation (workspace members)
       '.icu-subnav{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 0 12px;padding-bottom:2px}.icu-subnav::-webkit-scrollbar{display:none}' +
       '.icu-seg{flex:0 0 auto;border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:999px;font:700 12.5px var(--font);padding:7px 14px;cursor:pointer;transition:border-color .15s,background .15s}' +
@@ -1191,7 +1194,7 @@
       // tag + title, with a remove (x) button. Never styled as clickable text (it isn't).
       '.icu-dx-icd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:-4px 0 12px}' +
       '.icu-icd-code{font:800 13px var(--mono,monospace);color:var(--ink)}' +
-      '.icu-icd-sys{font:700 10px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-sys{font:700 11px var(--font);color:var(--primary);background:var(--sc-high);border-radius:6px;padding:2px 6px}' +
       '.icu-icd-title{font:500 12.5px var(--font);color:var(--muted);flex:1;min-width:100px}' +
       '.icu-icd-x{border:none;background:transparent;color:var(--muted);cursor:pointer;min-width:28px;min-height:28px;font-size:12px}' +
       // MaiK ICD-suggestion rows (in the icd-suggest modal sheet) - same card/row shape as the
@@ -1200,7 +1203,7 @@
       '.icu-icd-sugtop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}' +
       '.icu-icd-sugtitle{font:600 13.5px var(--font);color:var(--ink)}' +
       '.icu-icd-sugwhy{font:400 12px/1.5 var(--font);color:var(--muted);margin-top:3px}' +
-      '.icu-icd-conf{font:700 10px var(--font);border-radius:6px;padding:2px 6px}' +
+      '.icu-icd-conf{font:700 11px var(--font);border-radius:6px;padding:2px 6px}' +
       '.icu-icd-conf-high{background:#14532d;color:#fff}.icu-icd-conf-medium{background:#7c2d12;color:#fff}.icu-icd-conf-low{background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-results{margin-top:10px;display:flex;flex-direction:column;gap:6px;max-height:46vh;overflow:auto}' +
       '.icu-dx-hint{font:600 12.5px var(--font);color:var(--muted);padding:8px 2px}' +
@@ -1209,12 +1212,13 @@
       // desktop: centre the 5-workspace bar and widen items (same grouping, roomier)
       '@media (min-width:900px){.icu-ws-bar{justify-content:center;gap:8px}.icu-ws-bar .icu-tab{flex:0 0 auto;min-width:120px;flex-direction:row;gap:8px}.icu-ws-bar .icu-tab .tl{font-size:13px}}' +
       // snapshot FAB
-      '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:52px;height:52px;border-radius:50%;border:1px solid var(--primary2);background:var(--primary);color:#fff;font-size:24px;box-shadow:0 4px 14px rgba(10,86,79,.28);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{filter:brightness(.94)}' +
+      '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:52px;height:52px;border-radius:50%;border:1px solid var(--primary2);background:var(--fill);color:#fff;font-size:24px;box-shadow:0 4px 14px rgba(10,86,79,.28);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{filter:brightness(.94)}' +
       // Prominent Lab Watch FAB — a labelled pill stacked above the Snapshot FAB so the
       // watch-labs action is easy to find (was only a small chip in the header row).
-      '#icuWatch{position:absolute;right:14px;bottom:calc(138px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary2,var(--primary));font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}' +
-      '#icuWatch.on{background:var(--primary);color:#fff;border-color:var(--primary2)}#icuWatch:active{filter:brightness(.95)}#icuWatch .icu-ico{width:17px;height:17px}' +
-      '#icuWatch .icu-lw-fab-b{background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 10px var(--font);padding:1px 5px;min-width:15px;text-align:center}' +
+      '#icuWatch{position:absolute;right:14px;bottom:calc(138px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary);font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}' +
+      '#icuKitFab{position:absolute;right:14px;bottom:calc(190px + env(safe-area-inset-bottom));z-index:6;height:42px;border-radius:var(--r-sm);padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary);font:600 13px var(--font);box-shadow:0 3px 12px rgba(12,22,34,.14);cursor:pointer;display:inline-flex;align-items:center;gap:6px}#icuKitFab:active{filter:brightness(.95)}' +
+      '#icuWatch.on{background:var(--fill);color:#fff;border-color:var(--primary2)}#icuWatch:active{filter:brightness(.95)}#icuWatch .icu-ico{width:17px;height:17px}' +
+      '#icuWatch .icu-lw-fab-b{background:var(--danger,#b91c1c);color:#fff;border-radius:999px;font:800 11px var(--font);padding:1px 5px;min-width:15px;text-align:center}' +
       // modal
       '.icu-modal{position:fixed;inset:0;z-index:10020;display:none;align-items:flex-end;justify-content:center;background:rgba(8,18,26,.5)}' +
       '.icu-modal.on{display:flex}' +
@@ -1228,33 +1232,33 @@
       // Imaging Notes
       '.icu-img-btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.icu-img-btns .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
       '.icu-img-filters{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;-webkit-overflow-scrolling:touch}' +
-      '.icu-img-chip{flex:0 0 auto;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:var(--r-pill);font:700 12px var(--font);padding:7px 12px;cursor:pointer;white-space:nowrap}.icu-img-chip.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '.icu-img-chip{flex:0 0 auto;border:1px solid var(--border);background:var(--panel2);color:var(--muted);border-radius:var(--r-pill);font:700 12px var(--font);padding:7px 12px;cursor:pointer;white-space:nowrap}.icu-img-chip.on{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '.icu-img-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh);margin:0 0 10px;overflow:hidden}.icu-img-card.crit{border-color:color-mix(in srgb,var(--danger) 55%,var(--border))}' +
       '.icu-img-hd{display:flex;align-items:flex-start;gap:10px;width:100%;text-align:left;background:none;border:none;padding:13px 14px 10px;cursor:pointer;color:var(--ink)}.icu-img-hd-l{flex:1;min-width:0}' +
       '.icu-img-title{font:800 15px var(--font);line-height:1.3}' +
       '.icu-img-badges{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 2px}' +
-      '.icu-img-badge{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;background:var(--primary-soft);color:var(--primary);border-radius:6px;padding:3px 7px}' +
-      '.icu-img-tag{font:700 10.5px var(--font);background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:3px 7px}.icu-img-tag.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--border))}' +
+      '.icu-img-badge{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;background:var(--primary-soft);color:var(--primary);border-radius:6px;padding:3px 7px}' +
+      '.icu-img-tag{font:700 11px var(--font);background:var(--panel2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:3px 7px}.icu-img-tag.ok{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--border))}' +
       '.icu-img-meta{font:600 11.5px var(--font);color:var(--muted);margin-top:5px}' +
       '.icu-img-chev{flex:0 0 auto;color:var(--muted);font-size:14px;margin-top:2px}' +
       '.icu-img-crit{margin:0 14px 10px;background:var(--danger-soft);color:var(--danger);border:1px solid color-mix(in srgb,var(--danger) 40%,transparent);border-radius:10px;padding:9px 11px;font:600 12.5px/1.45 var(--font)}.icu-img-crit .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--danger)}' +
       '.icu-img-crit-t{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}.icu-img-crit-t span{background:color-mix(in srgb,var(--danger) 14%,transparent);border-radius:6px;padding:2px 7px;font:700 11px var(--font)}' +
-      '.icu-img-imp,.icu-img-sec{padding:0 14px 10px;font:600 13.5px/1.5 var(--font);color:var(--ink)}.icu-img-k{display:block;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-bottom:3px}' +
+      '.icu-img-imp,.icu-img-sec{padding:0 14px 10px;font:600 13.5px/1.5 var(--font);color:var(--ink)}.icu-img-k{display:block;font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin-bottom:3px}' +
       '.icu-img-raw{white-space:pre-wrap;font:500 12.5px/1.5 var(--mono);color:var(--muted);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:9px 10px;max-height:260px;overflow:auto}' +
       '.icu-img-acts{display:flex;flex-wrap:wrap;gap:6px;padding:2px 12px 12px}.icu-img-act{border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 11.5px var(--font);padding:6px 11px;cursor:pointer}.icu-img-act.on{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}' +
       '.icu-img-hidden{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;color:var(--muted);font:600 12.5px var(--font);border:1px dashed var(--border);border-radius:10px;margin:0 0 8px}' +
       '.icu-img-btns .icu-ico,.icu-doc-sub+.icu-img-btns .icu-ico{width:15px;height:15px;vertical-align:-2px;margin-right:4px}' +
       '.icu-assist-out{margin-top:6px}' +
       '.icu-assist-msg{font:600 13px var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}' +
-      '.icu-assist-draft{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 10px;margin-bottom:8px}' +
+      '.icu-assist-draft{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--warn);background:var(--warn-soft);border-radius:8px;padding:6px 10px;margin-bottom:8px}' +
       '.icu-assist-summary{font:700 14px/1.5 var(--font);color:var(--ink);margin-bottom:8px}' +
       '.icu-assist-ul{margin:2px 0 0;padding-left:18px}.icu-assist-ul li{font:600 13px/1.5 var(--font);color:var(--ink);margin:1px 0}' +
       '.icu-assist-src{font:600 11px var(--font);color:var(--muted);margin-top:8px}' +
       // Clinical Correlation
       '.icu-corr-meta{font:600 12px var(--font);color:var(--muted);margin:2px 0 10px}' +
-      '.icu-corr-badge{display:inline-block;font:800 11px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:8px;padding:5px 10px;margin-bottom:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
+      '.icu-corr-badge{display:inline-block;font:800 11px var(--font);text-transform:none;letter-spacing:.005em;border-radius:8px;padding:5px 10px;margin-bottom:8px;background:var(--panel2);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-corr-badge.ok{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-corr-badge.partial{background:var(--primary-soft);color:var(--primary)}.icu-corr-badge.warn{background:var(--warn-soft);color:var(--warn)}' +
-      '.icu-corr-sub{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:10px 0 5px}' +
+      '.icu-corr-sub{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:10px 0 5px}' +
       '.icu-corr-ol{margin:0;padding-left:20px}.icu-corr-ol li{font:700 14px/1.5 var(--font);color:var(--ink)}.icu-corr-conf{font:700 11px var(--font);color:var(--muted)}' +
       '.icu-corr-chips{display:flex;flex-wrap:wrap;gap:6px}.icu-corr-chip{font:600 12px var(--font);background:var(--panel2);border:1px solid var(--border);color:var(--ink);border-radius:999px;padding:4px 10px}.icu-corr-chip.ok{border-color:color-mix(in srgb,var(--ok) 40%,var(--border));color:var(--ok)}.icu-corr-chip.muted{color:var(--muted)}' +
       '.icu-corr-deep{margin-top:10px;border-top:1px solid var(--border);padding-top:10px}' +
@@ -1262,9 +1266,9 @@
       '.icu-dx-card{border:1px solid var(--border);border-radius:12px;background:var(--panel2);padding:11px 13px;margin:8px 0}' +
       '.icu-dx-h{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;text-align:left;background:none;border:none;padding:0;cursor:pointer;color:inherit}.icu-dx-nm{font:800 14.5px var(--font);color:var(--ink);flex:1;min-width:0}' +
       '.icu-dx-chev{flex:0 0 auto;color:var(--muted);font-size:13px}.icu-clamp1{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.icu-dx-sup{font:600 11px var(--font);color:var(--muted);margin-top:2px}' +
-      '.icu-dx-lvl{flex:0 0 auto;font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.03em;border-radius:999px;padding:3px 9px;background:var(--panel);color:var(--muted);border:1px solid var(--border)}' +
+      '.icu-dx-lvl{flex:0 0 auto;font:800 11px var(--font);text-transform:none;letter-spacing:.005em;border-radius:999px;padding:3px 9px;background:var(--panel);color:var(--muted);border:1px solid var(--border)}' +
       '.icu-dx-lvl.strong{background:var(--ok-soft);color:var(--ok);border-color:color-mix(in srgb,var(--ok) 35%,var(--border))}.icu-dx-lvl.moderate{background:var(--primary-soft);color:var(--primary)}.icu-dx-lvl.possible{background:var(--panel);color:var(--muted)}' +
-      '.icu-dx-red{font:800 10.5px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
+      '.icu-dx-red{font:800 11px var(--font);color:var(--danger);background:var(--danger-soft);border-radius:6px;padding:2px 6px;margin-left:6px}' +
       '.icu-dx-rsn{font:600 12.5px/1.5 var(--font);color:var(--muted);margin:5px 0 2px}.icu-dx-why{margin:6px 0 2px}' +
       '.icu-dx-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.icu-dx-acts .icu-btn{width:auto;flex:1 1 auto;min-width:44%}' +
       '.icu-deep-list{margin:10px 0 14px;display:flex;flex-direction:column;gap:5px}' +
@@ -1272,7 +1276,7 @@
       // First-use guided-diagnosis tour (coach-mark above the bottom nav; safe-area aware)
       '.icu-tour{position:fixed;left:0;right:0;bottom:calc(92px + env(safe-area-inset-bottom));z-index:10050;display:none;justify-content:center;padding:0 14px;pointer-events:none}.icu-tour.on{display:flex}' +
       '.icu-tour-card{pointer-events:auto;width:min(440px,100%);background:var(--panel);border:1.5px solid var(--primary);border-radius:16px;box-shadow:0 16px 44px rgba(0,0,0,.4);padding:14px 16px}' +
-      '.icu-tour-step{font:800 10.5px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--primary)}' +
+      '.icu-tour-step{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--primary)}' +
       '.icu-tour-t{font:800 16px var(--font);color:var(--ink);margin:3px 0 5px}.icu-tour-x{font:600 13.5px/1.5 var(--font);color:var(--muted)}' +
       '.icu-tour-chk{display:flex;align-items:center;gap:8px;font:600 13px var(--font);color:var(--ink);margin-top:10px}.icu-tour-chk input{width:18px;height:18px}' +
       '.icu-tour-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:12px}.icu-tour-btns .icu-btn{width:auto;flex:1 1 auto;min-width:0;padding:9px 14px;margin-top:0}' +
@@ -1287,7 +1291,7 @@
       // safe-area-inset is already handled by .icu-sheet padding.
       '#icuFindQ:focus{outline:none;border-color:var(--primary)}' +
       '.icu-find-res{margin-top:10px;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
-      '.icu-find-cath{font:800 11px var(--font);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin:12px 0 5px}.icu-find-cath:first-child{margin-top:2px}' +
+      '.icu-find-cath{font:800 11px var(--font);text-transform:none;letter-spacing:.005em;color:var(--muted);margin:12px 0 5px}.icu-find-cath:first-child{margin-top:2px}' +
       '.icu-find-cnt{display:inline-block;background:var(--primary-soft);color:var(--primary);font:700 11px var(--font);padding:1px 8px;border-radius:999px;margin-left:5px;vertical-align:1px}' +
       '.icu-find-list{display:flex;flex-direction:column;border:1px solid var(--border);border-radius:12px;background:var(--panel2);overflow:hidden}' +
       '.icu-find-hit{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--border);padding:12px 13px;min-height:48px;cursor:pointer;color:var(--ink)}.icu-find-hit:last-child{border-bottom:none}.icu-find-hit:active{background:var(--primary-soft)}' +
@@ -1309,7 +1313,7 @@
       '#icuRoot.icu-v2 .icu-v2-tabwrap{flex:0 0 auto;background:var(--panel);border-bottom:1px solid var(--border);padding:9px 12px}' +
       '#icuRoot.icu-v2 .icu-v2-tabs{display:flex;gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;background:var(--panel2);border:1px solid var(--border);border-radius:var(--r-sm);padding:3px}' +
       '#icuRoot.icu-v2 .icu-v2-tabs::-webkit-scrollbar{display:none}' +
-      '#icuRoot.icu-v2 .icu-v2-tab{flex:0 0 auto;min-height:40px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:7px;font:600 12.5px var(--font);padding:8px 14px;cursor:pointer;transition:color var(--ease),background var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-tab{flex:0 0 auto;min-height:46px;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border:none;background:none;color:var(--muted);border-radius:7px;font:600 12.5px var(--font);padding:8px 14px;cursor:pointer;transition:color var(--ease),background var(--ease)}' +
       // Selected segment: a raised white slab on the recessed track (iOS/desktop segmented-control
       // convention) with the accent carried by the label, not a saturated fill.
       '#icuRoot.icu-v2 .icu-v2-tab.on{background:var(--panel);color:var(--primary);font-weight:700;box-shadow:var(--sh-lift)}' +
@@ -1322,11 +1326,11 @@
       '#icuRoot.icu-v2 .icu-v2-handover .icu-ico{width:19px;height:19px}' +
       '#icuRoot.icu-v2 .icu-v2-banner-id{flex:1;min-width:0}' +
       '#icuRoot.icu-v2 .icu-v2-banner-nm{font:600 17px var(--font);display:flex;align-items:center;gap:8px;flex-wrap:wrap}' +
-      '#icuRoot.icu-v2 .icu-v2-banner-pill{font:700 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);border-radius:5px;padding:3px 7px;white-space:nowrap}' +
+      '#icuRoot.icu-v2 .icu-v2-banner-pill{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.24);border-radius:5px;padding:3px 7px;white-space:nowrap}' +
       '#icuRoot.icu-v2 .icu-v2-banner-meta{font:400 12px var(--font);color:rgba(255,255,255,.8);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-banner-vitals{display:flex;gap:6px;margin-top:12px}' +
       '#icuRoot.icu-v2 .icu-v2-mv{flex:1;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:6px 4px 7px;text-align:center;min-width:0}' +
-      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 8.5px var(--font);color:rgba(255,255,255,.75);letter-spacing:.09em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-mv-k{font:600 11px var(--font);color:rgba(255,255,255,.78);letter-spacing:.005em}' +
       '#icuRoot.icu-v2 .icu-v2-mv-v{font:600 15px var(--mono);margin-top:3px;letter-spacing:-.01em;color:#fff}' +
       // abnormal mini-vitals stand out on the acuity-coloured banner (ring/weight, not colour alone)
       '#icuRoot.icu-v2 .icu-v2-mv.warn{background:rgba(255,255,255,.26)}' +
@@ -1334,19 +1338,19 @@
       '#icuRoot.icu-v2 .icu-v2-mv.crit .icu-v2-mv-v{font-weight:800}' +
       // persistent safety flags (resuscitation status + allergy)
       '#icuRoot.icu-v2 .icu-v2-banner-flags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}' +
-      '#icuRoot.icu-v2 .icu-v2-flag{font:700 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;padding:3px 7px;border-radius:4px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.22);color:#fff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
+      '#icuRoot.icu-v2 .icu-v2-flag{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;padding:3px 7px;border-radius:4px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.22);color:#fff;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
       '#icuRoot.icu-v2 .icu-v2-flag.code{background:#fff;color:#b3261e}' +
       '#icuRoot.icu-v2 .icu-v2-flag.allergy{background:#fde68a;color:#7c2d12}' +
       // presence + sync
       '#icuRoot.icu-v2 .icu-v2-presence{flex:0 0 auto;display:flex;align-items:center;gap:8px;padding:8px 15px;background:var(--panel);border-bottom:1px solid var(--border)}' +
-      '#icuRoot.icu-v2 .icu-v2-viewer{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-viewer{width:24px;height:24px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:700 11px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-presence-tx{font:500 11.5px var(--font);color:var(--muted);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-synced{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
       '#icuRoot.icu-v2 .icu-v2-dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}' +
       // restyle the existing sub-nav into a wrapping row of pills (no hidden scroll)
       '#icuRoot.icu-v2 .icu-subnav{flex-wrap:wrap;overflow:visible;gap:6px;margin:0 0 12px;padding-bottom:0}' +
-      '#icuRoot.icu-v2 .icu-seg{flex:0 0 auto;min-height:40px;border-radius:var(--r-xs);padding:7px 13px;border:1px solid var(--border);background:var(--panel);color:var(--muted);font-weight:600}' +
-      '#icuRoot.icu-v2 .icu-seg.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}' +
+      '#icuRoot.icu-v2 .icu-seg{flex:0 0 auto;min-height:46px;border-radius:var(--r-xs);padding:7px 13px;border:1px solid var(--border);background:var(--panel);color:var(--muted);font-weight:600}' +
+      '#icuRoot.icu-v2 .icu-seg.on{background:var(--fill);border-color:var(--fill);color:#fff;font-weight:700}' +
       // board / screen scroll (board bar overlays it, so pad the bottom)
       '#icuRoot.icu-v2 .icu-v2-scroll{padding:0 0 calc(84px + env(safe-area-inset-bottom))}' +
       // unit header
@@ -1357,56 +1361,56 @@
       '#icuRoot.icu-v2 .icu-v2-ubtn{position:relative;flex:0 0 auto;width:44px;height:44px;border-radius:var(--r-sm);border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.10);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background var(--ease)}#icuRoot.icu-v2 .icu-v2-ubtn:active{background:rgba(255,255,255,.2)}' +
       '#icuRoot.icu-v2 .icu-v2-ubtn .icu-ico{width:20px;height:20px}' +
       // The badge cuts out against the header, so its ring must be the header colour, not the accent.
-      '#icuRoot.icu-v2 .icu-v2-ubadge{position:absolute;top:4px;right:5px;min-width:16px;height:16px;padding:0 3px;background:var(--danger);color:#fff;border:2px solid var(--primary2);border-radius:50%;font:700 9px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-ubadge{position:absolute;top:4px;right:5px;min-width:16px;height:16px;padding:0 3px;background:var(--danger-fill,var(--danger));color:#fff;border:2px solid var(--primary2);border-radius:50%;font:700 11px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-utitle{flex:1;min-width:0;font:600 17px var(--font)}' +
       '#icuRoot.icu-v2 .icu-v2-usub{font:400 12px var(--font);color:rgba(255,255,255,.78);margin-top:2px}' +
       // Census strip: four instrument read-outs, not buttons. Uniform white-tint tiles keep them one
       // family; the severity colour is carried by a 3px top rule + the label, so the numbers stay
       // legible and the header keeps a single background.
       '#icuRoot.icu-v2 .icu-v2-strip{display:flex;gap:6px;margin-top:15px}' +
-      '#icuRoot.icu-v2 .icu-v2-scount{position:relative;flex:1;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:9px 6px 8px;cursor:pointer;text-align:center;background:rgba(255,255,255,.09);min-height:44px;overflow:hidden;transition:background var(--ease)}' +
-      '#icuRoot.icu-v2 .icu-v2-scount::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:rgba(255,255,255,.34)}' +
-      '#icuRoot.icu-v2 .icu-v2-scount b{display:block;font:600 21px var(--mono);letter-spacing:-.02em;color:#fff}#icuRoot.icu-v2 .icu-v2-scount span{display:block;font:600 9.5px var(--font);letter-spacing:.07em;text-transform:uppercase;margin-top:3px;color:rgba(255,255,255,.8)}' +
-      '#icuRoot.icu-v2 .icu-v2-scount.crit::before{background:#F98C82}#icuRoot.icu-v2 .icu-v2-scount.crit span{color:#FBC2BC}' +
-      '#icuRoot.icu-v2 .icu-v2-scount.review::before{background:#F2C066}#icuRoot.icu-v2 .icu-v2-scount.review span{color:#F6D9A5}' +
-      '#icuRoot.icu-v2 .icu-v2-scount.stable::before{background:#7FD3A2}#icuRoot.icu-v2 .icu-v2-scount.stable span{color:#B4E4C8}' +
+      '#icuRoot.icu-v2 .icu-v2-scount{position:relative;flex:1;border:1px solid rgba(255,255,255,.14);border-radius:var(--r-xs);padding:9px 6px 8px;cursor:pointer;text-align:center;background:rgba(255,255,255,.09);min-height:44px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-start;align-items:center;transition:background var(--ease)}' +
+      '' +
+      '#icuRoot.icu-v2 .icu-v2-scount b{display:block;font:600 21px var(--mono);letter-spacing:-.02em;color:#fff}#icuRoot.icu-v2 .icu-v2-scount span{display:block;font:600 11px var(--font);letter-spacing:.005em;text-transform:none;margin-top:3px;color:rgba(255,255,255,.8)}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.crit span{color:#FBC2BC}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.review span{color:#F6D9A5}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.stable span{color:#B4E4C8}' +
       // BUG B2 (2026-08-22 ward-round audit, acuity v2): "Not assessed" is deliberately NEUTRAL -
       // neither a green reassurance nor an amber/red alarm, since it means "no verdict yet", not
       // "verdict: fine" or "verdict: unwell". A blue-grey distinct from all three existing tones.
-      '#icuRoot.icu-v2 .icu-v2-scount.unassessed::before{background:#B9C4CE}#icuRoot.icu-v2 .icu-v2-scount.unassessed span{color:#D3DBE2}' +
+      '#icuRoot.icu-v2 .icu-v2-scount.unassessed span{color:#D3DBE2}' +
       // Selected filter = the tile lifts to an opaque white-on-teal state (not an outline sticker).
       '#icuRoot.icu-v2 .icu-v2-scount.on{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.55)}' +
       // board body
       '#icuRoot.icu-v2 .icu-v2-board{padding:16px 16px 10px}' +
-      '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 10.5px var(--font);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:2px 2px 9px}' +
+      '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted);margin:2px 2px 9px}' +
       '#icuRoot.icu-v2 .icu-v2-attn{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px 4px;padding:0 16px 4px;scrollbar-width:none}#icuRoot.icu-v2 .icu-v2-attn::-webkit-scrollbar{display:none}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:var(--r);padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-attn-card.unassessed{border-left-color:var(--muted)}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 9.5px var(--font);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
+      '' +
+      '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card.critical .icu-v2-attn-kind{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review .icu-v2-attn-kind{color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-name{font:700 14px var(--font);color:var(--ink);margin-top:6px}' +
       '#icuRoot.icu-v2 .icu-v2-attn-detail{font:500 12px var(--font);color:var(--muted);margin-top:3px;line-height:1.4}' +
       // Filters read as one segmented control: equal-height squared chips on a hairline, selected
       // state a solid teal. No pill cloud.
-      '#icuRoot.icu-v2 .icu-v2-filters{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0 12px}' +
-      '#icuRoot.icu-v2 .icu-v2-fchip{border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 13px;min-height:40px;cursor:pointer;transition:color var(--ease),border-color var(--ease),background var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-filters{display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;margin:16px -16px 12px;padding:0 16px}#icuRoot.icu-v2 .icu-v2-filters::-webkit-scrollbar{display:none}#icuRoot.icu-v2 .icu-v2-filters>*{flex:0 0 auto}' +
+      '#icuRoot.icu-v2 .icu-v2-fchip{border:1px solid var(--border);background:var(--panel);color:var(--muted);border-radius:var(--r-xs);font:600 12.5px var(--font);padding:8px 13px;min-height:46px;cursor:pointer;transition:color var(--ease),border-color var(--ease),background var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-fchip:active{background:var(--panel2)}' +
-      '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700}' +
+      '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--fill);border-color:var(--fill);color:#fff;font-weight:700}' +
       // patient card
       // The patient card is the unit of work on this screen: a white slab on a hairline, a 3px acuity
       // rail on the leading edge, no drop shadow competing with the rail.
-      '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--primary);border-radius:var(--r);padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:8px;transition:border-color var(--ease),box-shadow var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:8px;transition:border-color var(--ease),box-shadow var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-card:active{box-shadow:var(--sh-lift)}' +
       // swipe-to-remove row: the red action sits BEHIND the (opaque) card and is revealed by dragging left
-      '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}' +
+      '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}#icuRoot.icu-v2 .icu-v2-swipe:not(.sw-on)>.icu-v2-swipe-act{visibility:hidden}' +
       '#icuRoot.icu-v2 .icu-v2-swipe .icu-v2-card{position:relative;z-index:1;touch-action:pan-y}' +
-      '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.04em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
-      '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}#icuRoot.icu-v2 .icu-v2-card.unassessed{border-left-color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.005em;text-transform:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
+      '' +
       '#icuRoot.icu-v2 .icu-v2-card-body{padding:13px 14px 12px}' +
       '#icuRoot.icu-v2 .icu-v2-card-top{display:flex;align-items:center;gap:11px}' +
       // Bed marker: a tile, squarer than the card, reading as a physical bay label.
       '#icuRoot.icu-v2 .icu-v2-bed{width:44px;height:44px;flex:0 0 auto;border-radius:var(--r-xs);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:var(--panel2);border:1px solid var(--border)}' +
-      '#icuRoot.icu-v2 .icu-v2-bed b{font:600 15px var(--mono);line-height:1;letter-spacing:-.02em;color:var(--ink)}#icuRoot.icu-v2 .icu-v2-bed span{font:600 7.5px var(--font);letter-spacing:.1em;color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed b{font:600 15px var(--mono);line-height:1;letter-spacing:-.02em;color:var(--ink)}#icuRoot.icu-v2 .icu-v2-bed span{font:600 11px var(--font);letter-spacing:.1em;color:var(--muted)}' +
       // Acuity tints the bed tile only when it means something (critical / needs review). A stable
       // bed stays neutral, so a board of stable patients is quiet and the exceptions pop.
       '#icuRoot.icu-v2 .icu-v2-bed.critical{background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 30%,var(--border))}#icuRoot.icu-v2 .icu-v2-bed.critical b,#icuRoot.icu-v2 .icu-v2-bed.critical span{color:var(--danger)}' +
@@ -1418,20 +1422,20 @@
       '#icuRoot.icu-v2 .icu-v2-card-demo{font:500 12px var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-card-dx{font:400 13px var(--font);color:var(--muted);opacity:1;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       // Status is a small squared tag, not a lozenge — same shape language as the rest of the chrome.
-      '#icuRoot.icu-v2 .icu-v2-pill{flex:0 0 auto;font:700 9.5px var(--font);border-radius:5px;padding:4px 7px;letter-spacing:.07em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-pill{flex:0 0 auto;font:700 11px var(--font);border-radius:5px;padding:4px 7px;letter-spacing:.005em;text-transform:none}' +
       '#icuRoot.icu-v2 .icu-v2-pill.critical{color:var(--danger);background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-pill.review{color:var(--warn);background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-pill.stable{color:var(--ok);background:var(--ok-soft)}#icuRoot.icu-v2 .icu-v2-pill.unassessed{color:var(--muted);background:color-mix(in srgb,var(--muted) 16%,var(--panel2))}' +
       // Vitals row: evenly divided columns on a hairline, so values line up down the whole board.
       '#icuRoot.icu-v2 .icu-v2-vstrip{display:flex;gap:0;margin-top:11px;padding-top:10px;border-top:1px solid var(--border-soft)}' +
       '#icuRoot.icu-v2 .icu-v2-vc{flex:1;min-width:0;padding-right:12px}' +
-      '#icuRoot.icu-v2 .icu-v2-vk{font:600 9px var(--font);color:var(--muted);letter-spacing:.09em;text-transform:uppercase}' +
+      '#icuRoot.icu-v2 .icu-v2-vk{font:600 11px var(--font);color:var(--muted);letter-spacing:.005em}' +
       '#icuRoot.icu-v2 .icu-v2-vv{font:600 14px var(--mono);color:var(--ink);margin-top:3px;letter-spacing:-.01em}' +
       '#icuRoot.icu-v2 .icu-v2-vc.crit .icu-v2-vv{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-vc.warn .icu-v2-vv{color:var(--warn)}' +
       // Provenance strip: who touched this record and when. Recessed surface, quiet type.
       '#icuRoot.icu-v2 .icu-v2-card-foot{background:var(--panel2);padding:7px 14px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--border-soft)}' +
-      '#icuRoot.icu-v2 .icu-v2-foot-av{width:20px;height:20px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:600 8.5px var(--font);letter-spacing:.02em;display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-av{width:20px;height:20px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:600 11px var(--font);letter-spacing:.02em;display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-foot-txt{font:600 11.5px var(--font);color:var(--ink2)}' +
       '#icuRoot.icu-v2 .icu-v2-foot-ago{font:400 11px var(--font);color:var(--muted);margin-left:auto}' +
-      '#icuRoot.icu-v2 .icu-v2-foot-tasks{display:inline-flex;align-items:center;gap:4px;font:600 10.5px var(--font);color:var(--primary);background:var(--primary-soft);padding:2px 7px;border-radius:5px}' +
+      '#icuRoot.icu-v2 .icu-v2-foot-tasks{display:inline-flex;align-items:center;gap:4px;font:600 11px var(--font);color:var(--primary);background:var(--primary-soft);padding:2px 7px;border-radius:5px}' +
       '#icuRoot.icu-v2 .icu-v2-foot-tasks svg{width:13px;height:13px}' +
       '#icuRoot.icu-v2 .icu-v2-foot-count{text-align:center;font:600 12px var(--font);color:var(--muted);padding:6px 0 2px}' +
       // empty states
@@ -1448,51 +1452,98 @@
       '#icuRoot.icu-v2 .icu-v2-slist,#icuRoot.icu-v2 .icu-v2-tlist{padding:14px 16px;display:flex;flex-direction:column;gap:9px}' +
       '#icuRoot.icu-v2 .icu-v2-note{font:500 12.5px var(--font);color:var(--ink2);background:var(--panel2);border:1px solid var(--border);border-radius:var(--r-sm);padding:11px 13px;line-height:1.55;margin:8px 0}#icuRoot.icu-v2 .icu-v2-note .icu-ico{width:14px;height:14px;vertical-align:-2px;color:var(--primary)}' +
       '#icuRoot.icu-v2 .icu-v2-note-x{flex:0 0 auto;background:none;border:none;color:inherit;font:700 13px var(--font);cursor:pointer;padding:0 2px;line-height:1;opacity:.7}#icuRoot.icu-v2 .icu-v2-note-x:hover{opacity:1}' +
-      '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:var(--r);padding:12px 14px;cursor:pointer;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-alert-row.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-alert-row.review{border-left-color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-alert-row{display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;cursor:pointer;box-shadow:var(--sh)}' +
+      '' +
       '#icuRoot.icu-v2 .icu-v2-alert-ic{flex:0 0 auto;width:34px;height:34px;border-radius:var(--r-xs);background:var(--panel2);border:1px solid var(--border-soft);color:var(--muted);display:flex;align-items:center;justify-content:center}#icuRoot.icu-v2 .icu-v2-alert-ic .icu-ico{width:17px;height:17px}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.critical .icu-v2-alert-ic{background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 28%,var(--border));color:var(--danger)}' +
       '#icuRoot.icu-v2 .icu-v2-alert-row.review .icu-v2-alert-ic{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 28%,var(--border));color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-alert-tx{flex:1;min-width:0}' +
       '#icuRoot.icu-v2 .icu-v2-alert-h{display:block;font:700 13.5px var(--font);color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-alert-b{display:block;font:500 12.5px var(--font);color:var(--muted);margin-top:3px;line-height:1.45}' +
-      '#icuRoot.icu-v2 .icu-v2-urg{font:700 9px var(--font);letter-spacing:.08em;color:var(--danger);background:var(--danger-soft);border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}' +
+      '#icuRoot.icu-v2 .icu-v2-urg{font:700 11px var(--font);letter-spacing:.08em;color:var(--danger);background:var(--danger-soft);border-radius:4px;padding:2px 6px;margin-left:6px;vertical-align:1px}' +
       '#icuRoot.icu-v2 .icu-v2-member{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-member-av{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 13px var(--font);display:flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-member-av{width:40px;height:40px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:700 13px var(--font);display:flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-member-id{flex:1;min-width:0}#icuRoot.icu-v2 .icu-v2-member-nm{display:block;font:700 14.5px var(--font);color:var(--ink)}#icuRoot.icu-v2 .icu-v2-member-role{display:block;font:600 12px var(--font);color:var(--muted);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '#icuRoot.icu-v2 .icu-v2-member-state{flex:0 0 auto;font:600 11px var(--font);color:var(--ok);background:var(--ok-soft);border-radius:999px;padding:4px 10px}' +
       // Phase 5 — team screen: Doctor ID card, online dot, per-member remove, admin actions, role segments
       '#icuRoot.icu-v2 .icu-v2-idcard{display:flex;align-items:center;gap:12px;background:var(--primary-soft);border:1px solid color-mix(in srgb,var(--primary) 35%,var(--border));border-radius:var(--r);padding:12px 14px}' +
       '#icuRoot.icu-v2 .icu-v2-idcard-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}' +
-      '#icuRoot.icu-v2 .icu-v2-idcard-lbl{font:600 11px var(--font);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}' +
-      '#icuRoot.icu-v2 .icu-v2-idcard-code{font:600 20px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--primary2,var(--primary));letter-spacing:.09em}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-lbl{font:600 11px var(--font);color:var(--muted);text-transform:none;letter-spacing:.005em}' +
+      '#icuRoot.icu-v2 .icu-v2-idcard-code{font:600 20px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--primary);letter-spacing:.09em}#icuRoot.icu-v2 .icu-v2-idcard-code.pending{font:500 14px var(--font);color:var(--muted);letter-spacing:0}' +
       '#icuRoot.icu-v2 .icu-v2-idcopy{flex:0 0 auto;min-height:44px;padding:0 14px;border:1px solid var(--primary);background:var(--panel);color:var(--primary);border-radius:11px;font:700 13px var(--font);cursor:pointer;display:inline-flex;align-items:center;gap:6px}#icuRoot.icu-v2 .icu-v2-idcopy .icu-ico{width:15px;height:15px}' +
       '#icuRoot.icu-v2 .icu-v2-member-av.on{box-shadow:0 0 0 2px var(--panel),0 0 0 4px var(--ok)}' +
       '#icuRoot.icu-v2 .icu-v2-memrm{flex:0 0 auto;min-height:36px;padding:0 12px;border:1px solid var(--border);background:var(--panel);color:var(--bad,#c0392b);border-radius:999px;font:700 12px var(--font);cursor:pointer}' +
       '#icuRoot.icu-v2 .icu-v2-teamacts{display:flex;flex-direction:column;gap:9px;margin-top:4px}' +
       '#icuRoot.icu-v2 .icu-v2-roleseg-row{display:flex;flex-wrap:wrap;gap:7px}' +
       '#icuRoot.icu-v2 .icu-v2-roleseg{min-height:40px;padding:0 13px;border:1px solid var(--border);background:var(--panel);color:var(--ink2);border-radius:var(--r-xs);font:600 12.5px var(--font);cursor:pointer}' +
-      '#icuRoot.icu-v2 .icu-v2-roleseg.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-roleseg.on{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '#icuRoot.icu-v2 .icu-v2-danger{color:var(--bad,#c0392b);border-color:var(--bad,#c0392b)}' +
       // bottom bar (board / alerts / team only)
       // Bottom bar: a flat instrument tray. Selection is shown twice (colour + a 2px rule) so it
       // survives glare, colour-vision deficiency and a night shift.
       '#icuRoot.icu-v2 .icu-v2-bottombar{position:absolute;left:0;right:0;bottom:0;z-index:7;display:flex;background:var(--panel);border-top:1px solid var(--border);padding:6px 6px calc(6px + env(safe-area-inset-bottom))}' +
-      '#icuRoot.icu-v2 .icu-v2-navbtn{position:relative;flex:1;min-height:46px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);font:500 10.5px var(--font);border-radius:var(--r-xs);transition:color var(--ease)}' +
+      '#icuRoot.icu-v2 .icu-v2-navbtn{position:relative;flex:1;min-height:46px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--muted);font:500 11px var(--font);border-radius:var(--r-xs);transition:color var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-navic{font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;height:22px}#icuRoot.icu-v2 .icu-v2-navbtn .icu-ico{width:21px;height:21px}' +
       // Selected tab: a lit key on the tray (tinted plate + accent colour + heavier label), rather
       // than a detached indicator rule floating above the icon.
       '#icuRoot.icu-v2 .icu-v2-navbtn.on{color:var(--primary);font-weight:600;background:var(--primary-soft)}' +
-      '#icuRoot.icu-v2 .icu-v2-admit{color:var(--primary)}#icuRoot.icu-v2 .icu-v2-admit-ic{width:30px;height:30px;border-radius:var(--r-xs);background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}#icuRoot.icu-v2 .icu-v2-admit .icu-ico{width:18px;height:18px;color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-admit{color:var(--primary)}#icuRoot.icu-v2 .icu-v2-admit-ic{width:30px;height:30px;border-radius:var(--r-xs);background:var(--fill);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px}#icuRoot.icu-v2 .icu-v2-admit .icu-ico{width:18px;height:18px;color:#fff}' +
       // v2 FAB positions (no bottom bar on the patient screen)
       '#icuRoot.icu-v2 #icuSnap{bottom:calc(24px + env(safe-area-inset-bottom))}' +
-      '#icuRoot.icu-v2 #icuWatch{bottom:calc(90px + env(safe-area-inset-bottom))}' +
+      // Lab Watch rides ABOVE the camera as a 48px icon button (the 170px labelled pill sat over the
+      // vitals grid at every scroll position); the scroll gets room so the last card clears both.
+      '#icuRoot.icu-v2 #icuWatch{bottom:calc(88px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px;padding:0;border-radius:50%;justify-content:center}' +
+      '#icuRoot.icu-v2 #icuWatch .icu-lw-lbl{display:none}#icuRoot.icu-v2 #icuWatch .icu-ico{width:21px;height:21px}' +
+      '#icuRoot.icu-v2.icu-has-fab .icu-scroll{padding-bottom:calc(150px + env(safe-area-inset-bottom))}' +
+      // Specialty tools joins the stack as a 48px icon button too: the labelled pill covered the primary action on Care Plan.
+      '#icuRoot.icu-v2 #icuKitFab{bottom:calc(146px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px;padding:0;border-radius:50%;justify-content:center}#icuRoot.icu-v2 #icuKitFab .icu-kit-lbl{display:none}#icuRoot.icu-v2 #icuKitFab .icu-ico{width:21px;height:21px}' +
+      '#icuRoot.icu-v2.icu-has-kit .icu-scroll{padding-bottom:calc(206px + env(safe-area-inset-bottom))}' +
+      // Tap targets: 46px floor on every control = 44pt after home.js's 0.95 small-phone shrink (HIG). Tabs, chips, row tools and header icons were 26-42px.
+      '#icuRoot button,#icuRoot [role=tab],#icuRoot [role=switch],.icu-modal button{min-height:46px;min-width:46px}' +
+      // Dark: one teal cannot be both text and fill. Text/icon teal #4CC2B0, fill teal #1F7A6E (Refined Look, 2026-10-12).
+      // html+body prefix outranks redesign-system.css, which maps --primary to the app-wide #2f9184.
+      'html body:is(.dark,.v3-dark) :is(#icuRoot,.icu-modal,.icu-tour){--primary:#4CC2B0;--fill:#1F7A6E;--danger-fill:#B42318}' +
+      '.icu-vc-edit .icu-ico{width:13px;height:13px;display:block}' +
+      '.icu-rcb{width:22px;height:22px;border:2px solid var(--muted);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;color:#fff}.icu-rcb.on{background:var(--ok);border-color:var(--ok)}.icu-rcb .icu-ico{width:15px;height:15px;stroke-width:3}' +
+      '.icu-score[data-icu-act],.icu-ward[data-icu-act]{min-height:46px;box-sizing:border-box;display:flex;align-items:center}' +
+      // Overview variants (smd_icu_ov). Alerts panel: hairline rows, severity word column; no stripe, no tint.
+      '.icu-al{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:4px 16px}' +
+      '.icu-al-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:12px 0 10px}' +
+      '.icu-al-t{margin:0;font:650 17px/1.25 var(--font);color:var(--ink)}.icu-al-n{font:600 13px var(--font);color:var(--muted);font-variant-numeric:tabular-nums}' +
+      '.icu-al-g{font:600 12.5px var(--font);color:var(--muted);padding:14px 0 4px;border-top:1px solid var(--border)}' +
+      '.icu-al-r{display:grid;grid-template-columns:72px minmax(0,1fr) auto;column-gap:12px;align-items:baseline;padding:11px 0;border-top:1px solid var(--border-soft,var(--border))}' +
+      '.icu-al-g+.icu-al-r{border-top:none}' +
+      '.icu-al-sev{font:650 13px var(--font);color:var(--muted)}.icu-al-r.crit .icu-al-sev{color:var(--danger)}.icu-al-r.warn .icu-al-sev{color:var(--warn)}' +
+      '.icu-al-tt{font:600 15px/1.3 var(--font);color:var(--ink)}.icu-al-m{font:400 14px/1.45 var(--font);color:var(--ink2,var(--muted));margin-top:2px}' +
+      '.icu-al-src{font:500 12.5px var(--font);color:var(--muted);white-space:nowrap}' +
+      '.icu-al-empty{margin:0 0 12px;font:400 14px/1.45 var(--font);color:var(--muted)}' +
+      '.icu-al-nav{padding:0}.icu-al-nr{display:flex;align-items:center;gap:10px;width:100%;min-height:50px;padding:0 16px;background:none;border:none;border-top:1px solid var(--border);font:500 15px var(--font);color:var(--ink);text-align:left;cursor:pointer}' +
+      '.icu-al-nr:first-child{border-top:none}.icu-al-nr>span:first-child{flex:1}.icu-al-nv{color:var(--muted);font-size:14px}.icu-al-nr .icu-ico{width:16px;height:16px;color:var(--muted)}.icu-al-nr:active{background:var(--panel2)}' +
+      // Variant section titles: a real heading (ink, 15px), not a grey eyebrow with an icon.
+      '#icuRoot .icu-sec-lbl,.icu-modal .icu-sec-lbl{font:650 15px var(--font);color:var(--ink);margin:4px 0 8px}#icuRoot .icu-card>.icu-sec-lbl{margin:0 0 8px}#icuRoot .icu-sec-lbl>.icu-ico,#icuRoot .icu-sec-lbl>.icu-emoji,.icu-modal .icu-sec-lbl>.icu-ico{display:none}' +
+      '.icu-mc-beta{font:500 13px var(--font);color:var(--muted);margin-left:6px}' +
+      // Ward Sync status: a quiet line (an action reads as a teal text action), not a bordered bar.
+      '#icuRoot .icu-ward:not(.on){background:none;border:none;padding:8px 2px;font:500 13.5px var(--font);color:var(--muted)}#icuRoot .icu-ward[data-icu-act]:not(.on){color:var(--primary);font-weight:600;min-height:46px;display:flex;align-items:center}' +
+      // Tiles: abnormal values carry the colour; no tinted fill or coloured border, and normal reads as plain ink.
+      '.icu-ovv-none{display:flex;align-items:center;gap:4px 14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:4px 6px 4px 14px;font:500 14px var(--font);color:var(--muted)}' +
+      '.icu-score-more>summary{list-style:none;display:flex;align-items:center;min-height:46px;font:600 14px var(--font);color:var(--primary);cursor:pointer;border-top:1px solid var(--border)}.icu-score-more>summary::-webkit-details-marker{display:none}' +
+      '.icu-score-more>summary::after{content:"";width:7px;height:7px;margin-left:10px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px)}.icu-score-more[open]>summary::after{transform:rotate(-135deg)}' +
+      '.icu-ovv .icu-score.miss{opacity:1}.icu-ovv .icu-score-need{font-style:normal;color:var(--muted)}' +
+      // In-card actions read as text actions, not a full-width outlined box under every card.
+      '#icuRoot .icu-card .icu-btn.ghost{width:auto;border:none;background:none;padding:0 2px;justify-content:flex-start;color:var(--primary);font-weight:600}#icuRoot .icu-card .icu-btn.ghost:active{background:var(--panel2)}' +
+      '.icu-ovv .icu-empty{text-align:left;padding:2px 0}' +
+      '.icu-ovv-none>span{flex:1 1 auto;padding:10px 0}.icu-ovv-add{background:none;border:none;color:var(--primary);font:600 14px var(--font);padding:0 10px;cursor:pointer}' +
+      '.icu-ovv{display:flex;flex-direction:column;gap:14px}' +
+      '@media (max-width:520px){.icu-al-r{grid-template-columns:62px minmax(0,1fr)}.icu-al-src{grid-column:2;margin-top:3px}}' +
+      // C: two panes on a tablet; the 820px cap lifts for this layout only.
+      '.icu-ovv-col{display:flex;flex-direction:column;gap:14px;min-width:0}' +
+      '@media (min-width:900px){#icuRoot .icu-wrap:has(> .icu-ovv-c){max-width:1240px}.icu-ovv-c{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:start}}' +
       // ── group mode (smd_icu_groups, Phase 2) — additive, scoped under #icuRoot.icu-v2 ──
       // unit switcher (the header title becomes a tappable group picker)
       '#icuRoot.icu-v2 .icu-v2-gswitch{flex:1;min-width:0;border:none;background:none;color:inherit;text-align:left;cursor:pointer;padding:0;font:700 17px var(--font)}' +
       // member-avatar stack (→ Team sheet)
       '#icuRoot.icu-v2 .icu-v2-avatars{flex:0 0 auto;display:flex;align-items:center;border:none;background:none;cursor:pointer;padding:0}' +
-      '#icuRoot.icu-v2 .icu-v2-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.20);color:#fff;font:600 10px var(--font);display:flex;align-items:center;justify-content:center;border:2px solid var(--primary2);margin-left:-8px}' +
+      '#icuRoot.icu-v2 .icu-v2-av{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.20);color:#fff;font:600 11px var(--font);display:flex;align-items:center;justify-content:center;border:2px solid var(--primary2);margin-left:-8px}' +
       '#icuRoot.icu-v2 .icu-v2-av.more{background:rgba(255,255,255,.16)}' +
       // live sync indicator (banner presence row) — Synced / Syncing / Offline
       '#icuRoot.icu-v2 .icu-v2-sync{display:flex;align-items:center;gap:5px;font:600 11px var(--font);color:var(--ok);flex:0 0 auto}' +
@@ -1502,12 +1553,12 @@
       // other viewers in the presence stack
       '#icuRoot.icu-v2 .icu-v2-viewer.alt{background:var(--warn);margin-left:-6px;border:2px solid var(--panel)}' +
       // "not reviewed" chip on a live card footer
-      '#icuRoot.icu-v2 .icu-v2-unrev{font:700 9px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:2px 6px;margin-right:5px}' +
+      '#icuRoot.icu-v2 .icu-v2-unrev{font:700 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--warn);background:var(--warn-soft);border-radius:4px;padding:2px 6px;margin-right:5px}' +
       // shared instructions/timeline panel (Rounds tab)
       '#icuRoot.icu-v2 .icu-v2-collab{margin-bottom:6px}' +
       // ── Phase 3: round-note composer + timeline author avatar + smart-notification feed ──
       '#icuRoot.icu-v2 .icu-v2-addround{border:2px dashed var(--primary3);background:var(--panel2);color:var(--primary);box-shadow:none}' +
-      '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--primary);color:#fff;font:700 8px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
+      '#icuRoot.icu-v2 .icu-v2-tlav{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--fill);color:#fff;font:700 11px var(--font);display:inline-flex;align-items:center;justify-content:center}' +
       '#icuRoot.icu-v2 .icu-v2-rbody{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:14px 16px;overflow-y:auto;-webkit-overflow-scrolling:touch}' +
       '#icuRoot.icu-v2 .icu-v2-rscroll{padding:14px 16px;display:flex;flex-direction:column;gap:10px}' +
       /* suggestions box flexes to fill + scrolls internally; add-your-own + post stay pinned/visible */
@@ -1518,7 +1569,7 @@
       '#icuRoot.icu-v2 .icu-v2-rchip{display:inline-flex;align-items:center;gap:9px;text-align:left;background:var(--panel);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;cursor:pointer;color:var(--ink);transition:border-color var(--ease),background var(--ease)}' +
       '#icuRoot.icu-v2 .icu-v2-rchip.on{border-color:var(--primary);background:var(--primary-soft)}' +
       '#icuRoot.icu-v2 .icu-v2-rbox{width:20px;height:20px;flex:0 0 auto;border-radius:6px;border:2px solid var(--border);background:var(--panel);color:transparent;display:flex;align-items:center;justify-content:center;font:800 12px var(--font)}' +
-      '#icuRoot.icu-v2 .icu-v2-rchip.on .icu-v2-rbox{background:var(--primary);border-color:var(--primary);color:#fff}' +
+      '#icuRoot.icu-v2 .icu-v2-rchip.on .icu-v2-rbox{background:var(--fill);border-color:var(--fill);color:#fff}' +
       '#icuRoot.icu-v2 .icu-v2-rtx{min-width:0;font:600 14px var(--font);color:var(--ink)}' +
       '#icuRoot.icu-v2 .icu-v2-rx{flex:0 0 auto;color:var(--muted);font:700 12px var(--font);margin-left:2px}' +
       /* priority picker (2x2) */
@@ -1540,11 +1591,11 @@
       '#icuRoot .icu-tl-bar{display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:2px 0 8px;scrollbar-width:none}' +
       '#icuRoot .icu-tl-bar::-webkit-scrollbar{display:none}' +
       '#icuRoot .icu-tl-chip{flex:0 0 auto;font:700 12px var(--font);color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:999px;padding:6px 13px;min-height:34px;cursor:pointer}' +
-      '#icuRoot .icu-tl-chip.on{color:#fff;background:var(--primary);border-color:var(--primary)}' +
-      '#icuRoot .icu-tl-day{position:sticky;top:0;z-index:1;font:800 11px var(--font);letter-spacing:.03em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:8px;padding:5px 10px;margin:10px 0 6px}' +
+      '#icuRoot .icu-tl-chip.on{color:#fff;background:var(--fill);border-color:var(--fill)}' +
+      '#icuRoot .icu-tl-day{position:sticky;top:0;z-index:1;font:800 11px var(--font);letter-spacing:.005em;text-transform:none;color:var(--primary);background:var(--primary-soft);border-radius:8px;padding:5px 10px;margin:10px 0 6px}' +
       '#icuRoot.icu-v2 .icu-v2-obchip.on .icu-v2-obrole{color:var(--primary);opacity:.8}' +
       /* task priority badge + overdue chip in the Instructions panel */
-      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 10px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
+      '#icuRoot.icu-v2 .icu-v2-prio{display:inline-block;font:700 11px var(--font);color:#fff;border-radius:999px;padding:3px 9px;letter-spacing:.03em;vertical-align:middle}' +
       '#icuRoot.icu-v2 .icu-v2-due{font:600 11.5px/1.5 var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-due.over{color:var(--danger)}' +
       '#icuRoot.icu-v2 .icu-v2-taskexpl{font:600 11.5px/1.5 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin-top:6px}' +
@@ -1662,10 +1713,10 @@
     var attrs = edit
       ? ' data-icu-act="editvital:' + edit + '" role="button" tabindex="0" aria-label="' + al + ' — tap to edit"'
       : ' role="group" aria-label="' + al + '"';
-    var pencil = edit ? '<span class="icu-vc-edit" aria-hidden="true">✎</span>' : '';
+    var pencil = edit ? '<span class="icu-vc-edit" aria-hidden="true">' + ico("edit", "✎") + '</span>' : '';
     return '<div class="icu-vc ' + (status || "") + (edit ? " icu-vc-tap" : "") + '"' + attrs + '>' + pencil + '<div class="vl">' + esc(label) + '</div><div class="vv">' + vv + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
-  function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
+  function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div></div>'; }
   // BUG #7: group the alert list by TRUE source, in clinical priority order.
   function alertsGroupedHTML(alerts) {
     var by = {}; (alerts || []).forEach(function (a) { var s = a.source || "Other"; (by[s] = by[s] || []).push(a); });
@@ -1674,6 +1725,54 @@
     return order.filter(function (s) { return by[s] && !seen[s] && (seen[s] = 1); }).map(function (s) {
       return '<div class="icu-alert-grp">' + esc(s) + "</div>" + by[s].map(alertCard).join("");
     }).join("");
+  }
+
+  // Overview layout (2026-10-29, owner picked "you select"): C = alerts first, two panes on a tablet, one column on
+  // a phone. ?icuov= or localStorage smd_icu_ov: a | b | c, and "0"/"off" brings back the previous Overview.
+  function icuOvVariant() {
+    try {
+      var q = (location.search.match(/[?&]icuov=([a-z0-9]+)/) || [])[1];
+      var v = q || localStorage.getItem("smd_icu_ov") || "c";
+      if (v === "0" || v === "off") return "";
+      return /^[abc]$/.test(v) ? v : "c";
+    } catch (e) { return "c"; }
+  }
+  var OV_SEV = { crit: "Critical", warn: "Caution", info: "Note" };
+  function ovAlertRow(a, withSource) {
+    var sev = OV_SEV[a.severity] ? a.severity : "info";
+    return '<div class="icu-al-r ' + sev + '"><span class="icu-al-sev">' + OV_SEV[sev] + '</span>' +
+      '<div class="icu-al-b"><div class="icu-al-tt">' + esc(a.title) + '</div><div class="icu-al-m">' + esc(a.msg) + '</div></div>' +
+      (withSource && a.source ? '<span class="icu-al-src">' + esc(a.source) + '</span>' : "") + '</div>';
+  }
+  // One panel, hairline rows, severity as a word in its own column (not a stripe + tint + repeated tag).
+  // "grouped": body-system sub-headings, groups holding a critical alert first. "ranked": one list, critical first.
+  function ovAlertsPanel(alerts, mode) {
+    alerts = alerts || [];
+    var nC = alerts.filter(function (a) { return a.severity === "crit"; }).length, nW = alerts.filter(function (a) { return a.severity === "warn"; }).length;
+    var count = [nC ? nC + " critical" : "", nW ? nW + " caution" : ""].filter(Boolean).join(" · ");
+    var head = '<div class="icu-al-h"><h3 class="icu-al-t">Alerts</h3>' + (count ? '<span class="icu-al-n">' + count + '</span>' : "") + '</div>';
+    if (!alerts.length) return '<section class="icu-al">' + head + '<p class="icu-al-empty">No active alerts. Enter vitals or labs and they are checked here.</p></section>';
+    var order = { crit: 0, warn: 1, info: 2 }, body;
+    if (mode === "ranked") {
+      body = alerts.map(function (a, i) { return { a: a, i: i }; }).sort(function (x, y) { return (rankOf(order, x.a.severity) - rankOf(order, y.a.severity)) || (x.i - y.i); })
+        .map(function (x) { return ovAlertRow(x.a, true); }).join("");
+    } else {
+      var by = {}; alerts.forEach(function (a) { var k = a.source || "Other"; (by[k] = by[k] || []).push(a); });
+      var keys = Object.keys(by).sort(function (x, y) {
+        var wx = Math.min.apply(null, by[x].map(function (a) { return rankOf(order, a.severity); })), wy = Math.min.apply(null, by[y].map(function (a) { return rankOf(order, a.severity); }));
+        return (wx - wy) || ((ALERT_SOURCES.indexOf(x) < 0 ? 99 : ALERT_SOURCES.indexOf(x)) - (ALERT_SOURCES.indexOf(y) < 0 ? 99 : ALERT_SOURCES.indexOf(y)));
+      });
+      body = keys.map(function (k) {
+        return '<div class="icu-al-g">' + esc(k) + '</div>' + by[k].slice().sort(function (x, y) { return rankOf(order, x.severity) - rankOf(order, y.severity); }).map(function (a) { return ovAlertRow(a, false); }).join("");
+      }).join("");
+    }
+    return '<section class="icu-al">' + head + body + '</section>';
+  }
+  // Plain navigation rows in one panel, instead of a card of sentence + full-width button per destination.
+  function ovActionRows(rows) {
+    return '<section class="icu-al icu-al-nav">' + rows.map(function (r) {
+      return '<button class="icu-al-nr" data-icu-act="' + r.act + '"><span>' + esc(r.t) + '</span>' + (r.v ? '<span class="icu-al-nv">' + esc(r.v) + '</span>' : "") + ico("chev", "›") + '</button>';
+    }).join("") + '</section>';
   }
 
   /* ----------------------------------------------------- live status row */
@@ -1738,6 +1837,17 @@
     ].join("");
   }
   function renderVentAbgTiles() {
+    if (_active === "overview" && icuOvVariant()) {
+      var v0 = _raw.ventilator || {}, g0 = _raw.abg || {};
+      var none = function (o, ks) { return ks.every(function (k) { return o[k] == null || o[k] === ""; }); };
+      var vNone = none(v0, ["mode", "fio2", "peep", "tv", "rr", "plateau", "peak", "drivingP"]), gNone = none(g0, ["ph", "paco2", "pao2", "hco3", "be", "fio2"]);
+      var empty = [];
+      if (vNone) empty.push('<button class="icu-ovv-add" data-icu-act="edit:ventilator">Add ventilator</button>');
+      if (gNone) empty.push('<button class="icu-ovv-add" data-icu-act="edit:abg">Add ABG</button>');
+      return (vNone ? "" : '<div class="icu-sec-lbl" style="margin-top:12px">Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>') +
+        (gNone ? "" : '<div class="icu-sec-lbl" style="margin-top:12px">ABG</div><div class="icu-vitals">' + abgTiles() + '</div>') +
+        (empty.length ? '<div class="icu-ovv-none"><span>' + (vNone && gNone ? "No ventilator or ABG recorded" : vNone ? "No ventilator recorded" : "No ABG recorded") + '</span>' + empty.join("") + '</div>' : "");
+    }
     return '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("lungs", "🫁") + ' Ventilator</div><div class="icu-vitals">' + ventTiles() + '</div>' +
       '<div class="icu-sec-lbl" style="margin-top:12px">' + ico("abg", "🩸") + ' ABG</div><div class="icu-vitals">' + abgTiles() + '</div>';
   }
@@ -1776,7 +1886,7 @@
     var missing = (sum.missingInformation || []).slice(0, 4);
     if (!changed.length && !missing.length) return "";
     var label = window.SMD_MEDCORE && SMD_MEDCORE.labelFor ? SMD_MEDCORE.labelFor : function (x) { return x; };
-    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-phase">BETA</span> <span style="font-weight:600;text-transform:none;letter-spacing:0">\u00b7 deterministic, no model</span></div>';
+    var out = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("refresh", "\u21bb") + ' Medical Core <span class="icu-mc-beta">Beta \u00b7 deterministic, no model</span></div>';
     if (changed.length) {
       out += '<div class="icu-mc-sub">What changed</div>';
       out += changed.map(function (c) {
@@ -2517,7 +2627,7 @@
     _lwBadge += items.length;
     try { if (window.toast) toast(msg); } catch (e) {}
     if (w.delivery === "device" || w.delivery === "both") lwDeviceNotify(head, items.length === 1 ? items[0].text : items.length + " new lab results", crit.length > 0);
-    if (ICU.isOpen()) paint();
+    if (ICU.isOpen()) paintPassive();
     // PHI-safe telemetry only (counts + severity, never values/identifiers).
     try { console.log("[lab-watch] fired", items.length, "items; critical=" + crit.length); } catch (e) {}
   }
@@ -3188,8 +3298,10 @@
     var scoreRow = function (id, label, val, unit, info, manual) {
       return '<div class="icu-score" data-icu-act="calc:' + esc(id) + '"><span class="icu-score-n">' + esc(label) + '</span><span class="icu-score-v">' + esc(val + (unit ? " " + unit : "")) + '</span>' + (manual ? badge : "") + (info ? '<span class="icu-score-i">' + esc(info) + '</span>' : "") + '</div>';
     };
+    var foldMissing = _active === "overview" && !!icuOvVariant(), missingRows = [];
     var body = rows.map(function (r) {
       var m = ms[r.id];
+      if (foldMissing && r.missing && !m) { missingRows.push(r); return ""; }
       // A missing score opens the INLINE fill sheet (scorefill:), not the calculator: it asks only for
       // what is absent and writes it to the patient, so the score appears here instead of sending the
       // clinician to a separate screen that computes nothing back onto the record.
@@ -3199,6 +3311,9 @@
       return scoreRow(r.id, r.label, String(r.value), r.unit || "", iv, false);
     }).join("");
     body += manualExtra.map(function (id) { var m = ms[id]; return scoreRow(id, scoreCalcTitle(id), m.value, m.unit, m.info, true); }).join("");
+    // Variants: scores still waiting for data fold into one expandable line, so computed scores lead.
+    if (missingRows.length) body += '<details class="icu-score-more"><summary>' + missingRows.length + (missingRows.length === 1 ? " score needs" : " scores need") + ' more data</summary>' +
+      missingRows.map(function (r) { return '<div class="icu-score miss" data-icu-act="scorefill:' + esc(r.id) + '"><span class="icu-score-n">' + esc(r.label) + '</span><span class="icu-score-need">add ' + esc(r.missing.join(", ")) + '</span></div>'; }).join("") + '</details>';
     var sug = suggest.length ? '<div class="icu-score-sug">Suggested for “' + esc(dx) + '”: ' + suggest.map(function (id) { return '<button type="button" class="icu-score-chip" data-icu-act="calc:' + esc(id) + '">' + esc(scoreCalcTitle(id)) + '</button>'; }).join(" ") + '</div>' : "";
     return '<div class="icu-sec-lbl">' + ico("trend","📊") + ' Scores</div><div class="icu-card">' + body + sug +
       '<p class="icu-doc-sub" style="margin:8px 0 0">Auto-calculated from entered data — tap any score to open the full calculator; your calculated results are saved here. Decision-support only.</p></div>';
@@ -3384,7 +3499,7 @@
 
       // 1) Current status (author + time).
       var statusTx = p.status ? p.status : (V2_LABEL[sev] + (reason ? " — " + reason : ""));
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
+      var sStatus = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("pulse", "❤️") + ' Current status</div>' +
         '<p class="icu-dx-cur" style="margin:0 0 4px">' + esc(statusTx) + '</p>' +
         '<p class="icu-doc-sub" style="margin:0">' + esc(who) + (updTs ? " · updated " + fmtAgo(updTs) : "") + '</p>' +
         '<button class="icu-btn ghost" data-icu-act="edit:patient" style="margin-top:10px">' + ico("edit", "✎") + ' Update status &amp; details</button></div>';
@@ -3395,7 +3510,7 @@
       var probs = [];
       if (p.workingDx || p.diagnosis) probs.push({ name: (p.workingDx || p.diagnosis), color: (sevDot[sev] || "#92620A"), note: (p.icuDay != null ? "Day " + p.icuDay : "") });
       finds.filter(function (c) { return c.polarity !== "absent" && c.canonicalFindingId && String(c.canonicalFindingId).indexOf("note:") !== 0; }).slice(0, 6).forEach(function (c) { probs.push({ name: findChipLabel(c), color: "#92620A", note: "" }); });
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
+      var sProblems = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("rounds", "🩺") + ' Active problems</div>' +
         (probs.length ? '<div style="display:flex;flex-direction:column;gap:9px;margin-top:2px">' + probs.map(function (pr) {
           return '<div class="icu-ov-prob"><span class="icu-ov-dot" style="background:' + pr.color + '"></span><span class="icu-ov-prob-nm">' + esc(pr.name) + '</span>' + (pr.note ? '<span class="icu-ov-prob-note">' + esc(pr.note) + '</span>' : "") + '</div>';
         }).join("") + '</div>'
@@ -3403,10 +3518,11 @@
         '<button class="icu-btn ghost" data-icu-act="ws:careplan" style="margin-top:10px">' + ico("search", "🩺") + ' Open Care Plan</button></div>';
 
       // 3) Last consultant instruction (group) — teal card + prominent "View N open tasks".
+      var sInstr = "";
       if (grpActive() && _grpPtVM) {
         var gtasks = _grpPtVM.tasks || [], gopen = gtasks.filter(function (t) { return t.status !== "done"; }).length;
         var latest = null; gtasks.forEach(function (t) { if (!latest || (t.ts || 0) > (latest.ts || 0)) latest = t; });
-        out += '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
+        sInstr = '<div class="icu-card icu-ov-instr"><div class="icu-sec-lbl" style="color:var(--primary);margin-bottom:8px">' + ico("rounds", "🩺") + ' Last consultant instruction</div>' +
           (latest ? '<p class="icu-ov-instr-tx">“' + esc(latest.text || "Instruction") + '”</p><p class="icu-ov-instr-by">' + esc(latest.assignedByName || "Consultant") + (latest.ts ? " · " + fmtAgo(latest.ts) : "") + '</p>'
             : '<p class="icu-doc-sub" style="margin:0">No instructions yet — add one from Rounds.</p>') +
           '<button class="icu-ov-viewtasks" data-icu-act="tab:rounds">View ' + gopen + ' open task' + (gopen === 1 ? "" : "s") + ' →</button></div>';
@@ -3420,37 +3536,46 @@
         tx = infusions.map(function (i) { return { name: i.drug, dose: (i.dose != null ? i.dose + (i.unit ? " " + i.unit : "") : (i.rateMlHr != null ? i.rateMlHr + " mL/h" : "")) }; }).filter(function (t) { return t.name; });
         if (v.mode) tx.push({ name: "Ventilation", dose: v.mode + (v.fio2 ? " · FiO₂ " + v.fio2 + "%" : "") });
       }
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
+      var sTx = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("syringe", "💊") + ' Current treatment</div>' +
         (tx.length ? tx.map(function (t) { return '<div class="icu-ov-tx"><span class="icu-ov-tx-nm">' + esc(t.name) + '</span><span class="icu-ov-tx-dose">' + esc(t.dose || "—") + '</span></div>'; }).join("")
           : '<p class="icu-doc-sub" style="margin:0">No treatment recorded yet.</p>') +
         '<button class="icu-btn ghost" data-icu-act="tab:treatment" style="margin-top:10px">' + ico("syringe", "💊") + ' Add / manage treatment</button></div>';
 
       // 5) Critical alerts — the engine-grouped detail (below the design cards; not in the mock but valuable).
-      out += '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>';
-      out += alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>';
+      var sAlerts = '<div class="icu-sec-lbl">' + ico("warn", "🚨") + ' Critical alerts</div>' +
+        (alerts.length ? alertsGroupedHTML(alerts) : '<div class="icu-card"><p class="icu-doc-sub" style="margin:0">No active alerts. Enter vitals/labs to populate the dashboard.</p></div>');
 
       // 5b) Auto-computed clinical scores (Feature B) — always-on vitals scores + diagnosis-linked.
-      out += renderScoresPanel();
+      var sScores = renderScoresPanel();
 
       // 6) Lab Watch toggle (redesign inline card) — only when the feature is on.
+      var sLW = "", lwOn = labWatchOn() && lwActive();
       if (labWatchOn()) {
-        var lwOn = lwActive();
-        out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
+        sLW = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Lab Watch</div>' +
           '<p class="icu-doc-sub" style="margin:0 0 10px">' + (lwOn ? "Watching this patient’s labs and alerting on critical changes." : "Get alerted when this patient’s labs cross critical thresholds.") + '</p>' +
           '<button class="icu-btn' + (lwOn ? " ghost" : "") + '" data-icu-act="labwatch">' + ico("bell", "🔔") + (lwOn ? " Manage Lab Watch (on)" : " Turn on Lab Watch") + '</button></div>';
       }
 
       // 7) Trends shortcut (kept — one tap to the chart).
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
+      var sTrends = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("trend", "📈") + ' Trends</div>' +
         '<p class="icu-doc-sub" style="margin:0 0 8px">See how this patient’s vitals and labs are moving over time.</p>' +
         '<button class="icu-btn" data-icu-act="tab:trends">' + ico("trend", "📈") + ' View vitals &amp; labs trends</button></div>';
 
       // 8) Today's goals (kept).
-      out += '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
+      var sGoals = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("check", "🎯") + " Today's goals</div>" +
         ((_raw.goals || []).length ? (_raw.goals).map(function (g) { return '<div class="icu-row"><span>• ' + esc(g) + '</span></div>'; }).join("") : '<div class="icu-empty">No goals set</div>') +
         '<button class="icu-btn ghost" data-icu-act="edit:goals" style="margin-top:8px">＋ Edit goals</button></div>';
 
-      return out;
+      // Overview variants (smd_icu_ov = a|b|c, OFF by default until the owner picks one): alerts first, no
+      // stripe/tint/repeated-category cards (antislop-ui, impeccable craft floor). See ovAlertsPanel.
+      var ovv = hasData() ? icuOvVariant() : "";
+      if (!ovv) return sStatus + sProblems + sInstr + sTx + sAlerts + sScores + sLW + sTrends + sGoals;
+      // Trends and Lab Watch are destinations, not tasks: plain rows, so "Add / update data" stays the one filled button.
+      var navRows = ovActionRows([{ act: "tab:trends", t: "Vitals and labs trends" }].concat(labWatchOn() ? [{ act: "labwatch", t: "Lab Watch", v: lwOn ? "On" : "Off" }] : []));
+      if (ovv === "c") return sStatus + sProblems + sInstr + sTx + navRows + sGoals;   // scores sit in the left pane
+      return sStatus + sProblems + sInstr + sTx + sScores + navRows + sGoals;
+
+
     },
     hemo: function () {
       var lv = mergedVitals(_raw.vitals), h = interpretHemo(lv, _raw.infusions);
@@ -3654,9 +3779,9 @@
         return '<div class="icu-sec-lbl" style="margin:8px 0 2px">' + esc(g) + "</div>" + groups[g].map(function (it) {
           var r = _raw.rounds[it.k] || {};
           // R5 UX#5: icon-only round buttons need a VoiceOver name + a >=44pt tap target.
-          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" aria-label="' + (r.done ? "Mark not done: " : "Mark done: ") + esc(it.label) + '" aria-pressed="' + (r.done ? "true" : "false") + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;min-width:44px;min-height:44px;color:' + (r.done ? "var(--ok)" : "var(--muted)") + '">' + (r.done ? "☑" : "☐") + "</button>" +
+          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" aria-label="' + (r.done ? "Mark not done: " : "Mark done: ") + esc(it.label) + '" aria-pressed="' + (r.done ? "true" : "false") + '" style="border:none;background:none;cursor:pointer;min-width:46px;min-height:46px;display:inline-flex;align-items:center;justify-content:center"><span class="icu-rcb' + (r.done ? " on" : "") + '" aria-hidden="true">' + (r.done ? ico("check", "✓") : "") + "</span></button>" +
             '<span style="flex:1">' + esc(it.label) + (r.note ? ' <span style="color:var(--muted);font-size:12px">— ' + esc(r.note) + "</span>" : "") + "</span>" +
-            '<button data-icu-act="roundnote:' + it.k + '" aria-label="Edit note: ' + esc(it.label) + '" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:14px;min-width:44px;min-height:44px">✎</button></div>';
+            '<button data-icu-act="roundnote:' + it.k + '" aria-label="Edit note: ' + esc(it.label) + '" style="border:none;background:none;color:var(--primary);cursor:pointer;min-width:46px;min-height:46px;display:inline-flex;align-items:center;justify-content:center">' + ico("edit", "✎") + '</button></div>';
         }).join("");
       }).join("");
       return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
@@ -3818,7 +3943,7 @@
       var tlN = (grpActive() && _grpPtVM && (_grpPtVM.timeline || []).length) || 0;
       var srcNote = "Auto-built from this patient’s recorded data" + (tlN ? " and today’s timeline (" + tlN + " event" + (tlN === 1 ? "" : "s") + ")" : "") + ". Advisory — review before you hand over.";
       var cards = sbar.map(function (sec) {
-        return '<div class="icu-sbar" style="border-left-color:' + sec.color + '"><div class="icu-sbar-lbl" style="color:' + sec.color + '">' + esc(sec.label) + '</div><div class="icu-sbar-body">' + esc(sec.body) + '</div></div>';
+        return '<div class="icu-sbar"><div class="icu-sbar-lbl" style="color:' + sec.color + '">' + esc(sec.label) + '</div><div class="icu-sbar-body">' + esc(sec.body) + '</div></div>';
       }).join("");
       return '<div class="icu-card icu-sbar-head"><div class="icu-sec-lbl">' + ico("copy", "⇄") + ' Shift handover (SBAR)</div><p class="icu-doc-sub" style="margin:0">' + esc(srcNote) + '</p></div>' +
         '<div class="icu-card">' + cards +
@@ -3883,6 +4008,7 @@
   // Segmented sub-navigation of the current workspace's members (only when >1).
   function renderSubNav() {
     var w = wsById(_ws), mem = wsMembers(w); if (mem.length < 2) return "";
+    if (w && w.id === "overview" && icuOvVariant()) return "";   // Overview and Rounds are already top tabs
     return '<div class="icu-subnav">' + mem.map(function (m) {
       var meta = MEMBER[m] || { label: m };
       return '<button class="icu-seg ' + (m === _active ? "on" : "") + '" data-icu-act="tab:' + m + '">' + esc(meta.label) + "</button>";
@@ -4041,6 +4167,14 @@
     var addBtn = !mon ? "" : '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
     // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
     var mid = (isOv && !hd) ? emptyStateCard() : (status + addBtn);
+    // Overview variants (smd_icu_ov): alerts open the page, then vitals, then the rest; C splits into two panes.
+    var ovv = (isOv && hd) ? icuOvVariant() : "";
+    if (ovv) {
+      var alertsTop = ovAlertsPanel(_raw.alerts, ovv === "b" ? "ranked" : "grouped"), body;
+      if (ovv === "c") body = '<div class="icu-ovv icu-ovv-c"><div class="icu-ovv-col">' + alertsTop + elyteAlerts + mid + renderScoresPanel() + '</div><div class="icu-ovv-col">' + medCore + tab + '</div></div>';
+      else body = '<div class="icu-ovv icu-ovv-' + ovv + '">' + alertsTop + elyteAlerts + mid + medCore + tab + '</div>';
+      return '<div class="icu-scroll"><div class="icu-wrap">' + patientBanner() + renderSubNav() + (mon ? renderWardBanner() : "") + renderConflicts() + body + '</div></div>';
+    }
     return '<div class="icu-scroll"><div class="icu-wrap">' +
       patientBanner() +
       renderSubNav() +
@@ -4072,14 +4206,39 @@
     if (_liveBound || !rootEl) return; _liveBound = 1;
     rootEl.addEventListener("scroll", function () {
       _liveScrolling = 1; clearTimeout(_liveScrollT);
-      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paint(); } }, 160);
+      _liveScrollT = setTimeout(function () { _liveScrolling = 0; if (_livePending) { _livePending = 0; paintPassive(); } }, 160);   // focusing a field scrolls; never rebuild under it
     }, true);   // capture: catches the .icu-scroll container that paintV2 recreates each render
   }
   function paintLive() {
     _bindLiveScroll();
     if (_liveScrolling) { _livePending = 1; return; }   // defer: don't rebuild during an active scroll
     if (_liveRaf) { _livePending = 1; return; }
-    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paint(); });
+    _liveRaf = requestAnimationFrame(function () { _liveRaf = 0; if (_liveScrolling) { _livePending = 1; return; } paintPassive(); });
+  }
+  // A repaint rebuilds #icuRoot, which REPLACES the text box being typed in, and iOS closes the keyboard
+  // ("type one letter, the keyboard closes, tap again, one more letter..."); the round-note composer also
+  // lost the text itself. Repaints nobody asked for (state changes, live snapshots, the task heartbeat)
+  // wait while a text field in the ICU has focus and land when it is left. A tap on a control still
+  // repaints at once (those call paint() directly).
+  var _paintAfterTyping = false;
+  function typingInRoot() {
+    try {
+      var a = document.activeElement;
+      if (!a || !rootEl || !rootEl.contains(a)) return false;
+      if (a.isContentEditable || a.tagName === "TEXTAREA") return true;
+      return a.tagName === "INPUT" && !/^(checkbox|radio|button|submit|reset|range|file|color|image|hidden)$/i.test(a.type || "");
+    } catch (e) { return false; }
+  }
+  function paintPassive() {
+    if (typingInRoot()) { _paintAfterTyping = true; return; }
+    paint();
+  }
+  function flushTypingPaint() {
+    setTimeout(function () {   // after focus settles: moving to the next field keeps waiting
+      if (!_paintAfterTyping || typingInRoot()) return;
+      _paintAfterTyping = false;
+      if (ICU.isOpen()) { try { grpRoundCaptureText(); } catch (e) {} paint(); }
+    }, 0);
   }
 
   /* ================================================================ ICU v2
@@ -4212,7 +4371,7 @@
     // displaced from the top by one who simply has no data yet (which could just as easily be a
     // routine, minutes-old admission). Revisit this ordering once the owner has watched it run.
     var rank = { critical: 0, review: 1, unassessed: 2, stable: 3 };
-    list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
+    list.sort(function (a, b) { var d = rankOf(rank, a.sev) - rankOf(rank, b.sev); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
     return list;
   }
   function v2CardVitals(s) {
@@ -4453,8 +4612,8 @@
   function renderV2Settings() {
     var grpOn = icuGroupsOn();
     // iOS-style toggle (replaces the old solo/group button). Same data-icu-act="grptoggle" handler
-    // (flip smd_icu_groups + reload). Conditional inline styles render the on/off state directly.
-    var swBg = grpOn ? "#0e6e63" : "rgba(120,140,150,.35)", knob = grpOn ? "22px" : "3px";
+    // (grpSetMode: flips smd_icu_groups in place, no reload). Inline styles render the on/off state.
+    var swBg = grpOn ? "var(--fill)" : "rgba(120,140,150,.35)", knob = grpOn ? "22px" : "3px";
     var grpCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("user", "👥") + ' ICU Group mode</div>' +
       '<button class="icu-grp-toggle" data-icu-act="grptoggle" role="switch" aria-checked="' + grpOn + '" aria-label="Group mode" style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:4px 0 2px">' +
         '<span style="flex:1;min-width:0"><span style="display:block;font:700 15px system-ui;color:var(--ink,#14202b)">Group mode</span>' +
@@ -4463,7 +4622,7 @@
       '</button>' +
       '<p class="icu-doc-sub" style="margin:10px 0 0">' + (grpOn
         ? "Switching off affects this device only — your shared units stay for the rest of the team."
-        : "Turn on to invite your team and share patients &amp; round tasks. Reopens the app to sync.") + '</p></div>';
+        : "Turn on to invite your team and share patients &amp; round tasks.") + '</p></div>';
     var notifCard = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("bell", "🔔") + ' Notifications</div>' +
       '<p class="icu-doc-sub" style="margin:0 0 10px">Choose which unit alerts reach you, and check that push is working on this device.</p>' +
       (grpActive() ? '<button class="icu-btn ghost" data-icu-act="notifprefs">' + ico("settings", "⚙️") + ' Notification preferences</button>' : "") +
@@ -4509,14 +4668,15 @@
   function stewardIdCard() {
     var idVal = stewardIdVal();
     return '<div class="icu-v2-idcard"><div class="icu-v2-idcard-l"><span class="icu-v2-idcard-lbl">Your StewardMD ID</span>' +
-      '<span class="icu-v2-idcard-code">' + (idVal ? esc(idVal) : "Generating…") + '</span></div>' +
+      (idVal ? '<span class="icu-v2-idcard-code">' + esc(idVal) + '</span>'
+        : '<span class="icu-v2-idcard-code pending">' + (ownerNow() === "anon" ? "Sign in to get your ID" : "Generating…") + '</span>') + '</div>' +
       (idVal ? '<button class="icu-v2-idcopy" data-icu-act="grpcopyid" aria-label="Copy your StewardMD ID">' + ico("copy", "📋") + ' Copy</button>' : "") +
       '</div>';
   }
   // Resolve it (minting on first ever sign-in) and repaint the Team screen when it lands.
   function ensureStewardId() {
     if (stewardIdVal()) return;
-    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paint(); } };
+    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paintPassive(); } };
     try {
       var api = groupsApi();
       if (api && api.ensureIdentity) { api.ensureIdentity(done); return; }
@@ -4672,7 +4832,7 @@
     // displaced from the top by one who simply has no data yet (which could just as easily be a
     // routine, minutes-old admission). Revisit this ordering once the owner has watched it run.
     var rank = { critical: 0, review: 1, unassessed: 2, stable: 3 };
-    list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
+    list.sort(function (a, b) { var d = rankOf(rank, a.sev) - rankOf(rank, b.sev); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
     return list;
   }
 
@@ -4783,7 +4943,7 @@
       _grpSubPts = api.subscribePatients(_grp.id, function (list) {
         _grpPatients = list || []; grpNotifTick(); grpSyncTaskSubs(_grpPatients);
         if (ICU.isOpen() && _screen === "board") paintLive();
-      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+      }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     }
     _paintTop = true; paint();
   }
@@ -4799,6 +4959,34 @@
     try { return (window.SMD_AUTH && SMD_AUTH.currentUser) || (window.firebase && firebase.auth && firebase.auth().currentUser) || null; } catch (e) { return null; }
   }
   function grpStopSubRetry() { if (_grpSubRetry) { try { clearInterval(_grpSubRetry); } catch (e) {} _grpSubRetry = null; } }
+  // Drop EVERY shared-unit listener, timer and cache so solo mode runs with no Firestore traffic.
+  // The device roster and solo buffers are untouched.
+  function grpStopAll() {
+    grpStopSubRetry();
+    if (_grpConnTO) { try { clearTimeout(_grpConnTO); } catch (e) {} _grpConnTO = null; }
+    if (_grpSubErrTimer) { try { clearTimeout(_grpSubErrTimer); } catch (e) {} _grpSubErrTimer = null; }
+    _grpSubErrTries = 0;
+    grpTeardownPatient();
+    grpClearTaskSubs();
+    if (_grpSubPts) { try { _grpSubPts(); } catch (e) {} _grpSubPts = null; }
+    if (_grpSubMembers) { try { _grpSubMembers(); } catch (e) {} _grpSubMembers = null; }
+    if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
+    var api = groupsApi(); try { if (api && api.setActiveGroup) api.setActiveGroup(null, null); } catch (e) {}
+    _grp = null; _grpList = null; _grpPatients = null; _grpMembers = null; _grpErr = null; _grpJustCreated = null;
+  }
+  // Solo <-> Group switch IN PLACE. It used to write the flag and location.reload(), which restarted
+  // the whole app (home screen, splash, every module re-booted) just to flip one ICU setting.
+  function grpSetMode(on) {
+    try { localStorage.setItem("smd_icu_groups", on ? "1" : "0"); } catch (e) {}
+    grpStopAll();
+    // Back to this unit's own solo buffer on the board (a shared patient never stays on screen).
+    try { selectUnit({ cat: _unit.cat || "icu", type: _unit.type, hospital: _unit.hospital }); } catch (e) {}
+    if (on) { try { grpEnsureGroupsSub(); } catch (e) {} }
+    try { notifyUnitsChanged(); } catch (e) {}
+    _screen = "settings"; _paintTop = true;
+    if (ICU.isOpen()) paintPassive();
+    if (window.toast) toast(on ? "Group mode on. Loading your shared units." : "Solo mode on. This device only.");
+  }
   function grpEnsureGroupsSub() {
     // The live groups subscription needs TWO independent async signals ready: (1) the collab API
     // (window.SMD_ICU_GROUPS, loaded by icu-collab.js) and (2) Firebase AUTH resolved (the query is
@@ -4824,7 +5012,7 @@
     grpStopSubRetry();
     try { if (api.setSeverityFn) api.setSeverityFn(function (st) { try { return v2Severity(st); } catch (e) { return null; } }); } catch (e) {}
     // Phase 5: mint the account-linked StewardMD Doctor ID lazily (first team engagement).
-    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paint(); }); } catch (e) {}
+    try { if (api.ensureIdentity) api.ensureIdentity(function (id) { _grpDoctorId = id || null; if (ICU.isOpen() && _screen === "team") paintPassive(); }); } catch (e) {}
     if (_grpSubGroups) return;
     // Watchdog: a silent Firestore/network hang (the SDK never finishes loading, or the Listen
     // channel never delivers a first event) fires NEITHER callback below, so _grpList would stay
@@ -4837,7 +5025,7 @@
         if (_grpList !== null) return;                                   // connected in time → nothing to do
         if (_grpSubGroups) { try { _grpSubGroups(); } catch (e) {} _grpSubGroups = null; }
         _grpErr = _grpErr || "Couldn’t connect to your shared units. Check your connection and retry.";
-        if (ICU.isOpen()) paint();
+        if (ICU.isOpen()) paintPassive();
       }, (typeof window !== "undefined" && +window.SMD_ICU_GRP_TIMEOUT_MS) || 20000);
     }
     _grpSubGroups = api.subscribeGroups(function (groups) {
@@ -5392,7 +5580,7 @@
       _grpCreating = false;
       _grpErr = grpErrText(e);
       if (window.toast) toast("Couldn’t create the unit — " + grpErrText(e));
-      if (ICU.isOpen()) paint();
+      if (ICU.isOpen()) paintPassive();
     });
   }
   /* --------------------------- Phase 5: add-by-ID/email + invite-by-link + leave/remove ------- */
@@ -5425,7 +5613,7 @@
       // entry yet. Guide the user with a clear, actionable message (email path gets a full sheet).
       if (m === "not-found") { if (byEmail) grpAddNotFoundEmail(); else if (window.toast) toast("No StewardMD account found for that ID — check it, or use the invite link instead."); }
       else if (window.toast) toast("Couldn’t add — head/professor only");
-      _grpErr = null; if (ICU.isOpen()) paint();
+      _grpErr = null; if (ICU.isOpen()) paintPassive();
     });
   }
   // Change an existing member's designation (+ its derived permission). Admin-only; the sheet is
@@ -5451,7 +5639,7 @@
     }, function (e) {
       _grpErr = grpErrText(e);
       if (window.toast) toast(d.role === "professor" ? "Consultant / Associate Professor can be set by the unit head only" : "Couldn’t update — head/professor only");
-      if (ICU.isOpen()) paint();
+      if (ICU.isOpen()) paintPassive();
     });
   }
   // No StewardMD account is registered for a typed email (no doctorDirectory/e_<hash> entry). Explain
@@ -5499,7 +5687,7 @@
       _grpInvLink = (res && res.url) || null;
       if (_grpInvLink) grpCopyText(_grpInvLink, "Invite link copied — share it with your colleague");
       grpOpenInviteLink();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paint(); });
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t create the link — head/professor only"); if (ICU.isOpen()) paintPassive(); });
   }
   // Clipboard copy (reuses the app's existing navigator.clipboard pattern) with a toast.
   function grpCopyText(txt, msg) {
@@ -5513,7 +5701,7 @@
     api.leaveGroup(_grp.id).then(function () { if (window.toast) toast("You left the unit"); }, function (e) {
       var m = (e && e.message) || "";
       if (window.toast) toast(m === "head-cannot-leave" ? "You are the head — delete the unit instead" : "Couldn’t leave the unit");
-      _grpErr = null; if (ICU.isOpen()) paint();
+      _grpErr = null; if (ICU.isOpen()) paintPassive();
     });
   }
   function grpReclaimHead() {
@@ -5522,21 +5710,21 @@
       if (_grp) _grp.myRole = "head";                                  // optimistic — instructions work immediately
       try { if (api.setActiveGroup) api.setActiveGroup(_grp.id, "head"); } catch (e) {}
       if (window.toast) toast("You are now the Unit Head");
-      if (ICU.isOpen()) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paint(); });
+      if (ICU.isOpen()) paintPassive();
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t restore head — " + grpErrText(e)); if (ICU.isOpen()) paintPassive(); });
   }
   function grpDoDelete() {
     var api = groupsApi(); if (!api || !grpActive() || !api.deleteGroup) return;
     if ((_grp && _grp.myRole) !== "head") { if (window.toast) toast("Only the unit head can delete the unit"); return; }
     if (!window.confirm("Delete " + ((_grp && _grp.name) || "this unit") + " for everyone? This cannot be undone.")) return;
-    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paint(); });
+    api.deleteGroup(_grp.id).then(function () { if (window.toast) toast("Unit deleted"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t delete the unit"); if (ICU.isOpen()) paintPassive(); });
   }
   function grpDoRemove(uid) {
     var api = groupsApi(); if (!api || !grpActive() || !uid || !api.removeMember) return;
     var m = null, arr = _grpMembers || []; for (var i = 0; i < arr.length; i++) if (arr[i].uid === uid) { m = arr[i]; break; }
     var nm = (m && m.name) || "this member";
     if (!window.confirm("Remove " + nm + " from " + ((_grp && _grp.name) || "the unit") + "?")) return;
-    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paint(); });
+    api.removeMember(_grp.id, uid).then(function () { if (window.toast) toast("Removed from unit"); }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — head/professor only"); if (ICU.isOpen()) paintPassive(); });
   }
   /* --------------------------- Phase 5: join-by-link (?icujoin=<gid>.<code>) ------------------- */
   function grpJoinParam() { try { return (location.search.match(/[?&]icujoin=([^&]+)/) || [])[1] || ""; } catch (e) { return ""; } }
@@ -5605,7 +5793,7 @@
   function grpDoInvite() { grpDoAddById(); }
   function grpDoReviewed() {
     var api = groupsApi(); if (!api || !grpActive() || !_grpPtId) return;
-    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    api.setReviewed(_grp.id, _grpPtId).then(function () { if (window.toast) toast("Marked reviewed"); }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Marked reviewed" }); } catch (e) {}
   }
   function grpCycleTask(taskId) {
@@ -5614,7 +5802,7 @@
     if (!t) return;
     var next = t.status === "pending" ? "progress" : t.status === "progress" ? "done" : "pending";
     if (next === "done") { try { window.SMD_SOUND && SMD_SOUND.play("success"); } catch (e) {} }
-    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+    api.setTaskStatus(_grp.id, _grpPtId, taskId, next).then(function () {}, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
     // Completing a task self-logs an author-stamped audit event (see the auto-timeline set).
     if (next === "done") { try { api.addTimelineEvent(_grp.id, _grpPtId, { type: "task", title: "Task completed — " + (t.text || "task") }); } catch (e) {} }
   }
@@ -6272,7 +6460,7 @@
     // QA BUG-003: the clinical note posts as its own timeline entry (create + display; the timeline is
     // the audit trail, so a posted note is amended by posting a correction, not edited in place).
     if (noteTxt) {
-      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {}
+      try { var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: "Clinical note — " + v2AccountName(), detail: noteTxt }); if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); }); } catch (e) {}
     }
     if (!chosen.length) {
       _roundNote = "";
@@ -6286,7 +6474,7 @@
     var plan = grpRoundPlan(chosen, instr, v2AccountName(), _roundPriority, onBehalf);
     var gid = _grp.id, pid = _grpPtId, i;
     for (i = 0; i < plan.tasks.length; i++) {
-      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); }); } catch (e) {} })(plan.tasks[i]);
+      (function (task) { try { var pr = api.addTask(gid, pid, task); if (pr && pr.then) pr.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); }); } catch (e) {} })(plan.tasks[i]);
     }
     if (plan.event) { try { var pe = api.addTimelineEvent(gid, pid, plan.event); if (pe && pe.then) pe.then(null, function () {}); } catch (e) {} }
     // Immediate push to the unit when an instruction is ISSUED (not just when it later goes overdue) —
@@ -6307,6 +6495,43 @@
       return grpActive() ? (grpRoundsPanel() + base) : base;
     };
   })();
+
+  /* ---- Specialty tools in the ICU and ward notes (owner 2026-10-28; same kit and Export as the OPD notes) ----
+   * A floating button opens the doctor's specialty kit (specialty-kits.js openHostSheet). Export posts what the doctor used to the
+   * patient's timeline as ONE clinical note with their name (the same note the Rounds screen posts); with no shared unit open there is
+   * no timeline to post to, so the text is copied instead. Nothing is saved or posted until the doctor taps Export or an Add. */
+  function kitToolsOn() { try { return !!(window.SMD_KITS && SMD_KITS.on && SMD_KITS.on() && SMD_KITS.openHostSheet && (grpActive() ? _grpPtId : hasData())); } catch (e) { return false; } }
+  function kitPostNote(text, label) {
+    var t = String(text || "").trim(); if (!t) return false;
+    var api = groupsApi();
+    if (grpActive() && _grpPtId && api && api.addTimelineEvent) {
+      try {
+        var pn = api.addTimelineEvent(_grp.id, _grpPtId, { type: "note", title: (label || "Specialty tools") + " — " + v2AccountName(), detail: t });
+        if (pn && pn.then) pn.then(null, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
+        if (window.toast) toast("Posted to the patient timeline.");
+        return true;
+      } catch (e) { if (window.toast) toast("The note could not be posted."); return false; }
+    }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {}
+    if (window.toast) toast("Copied. Open a shared unit to post notes to the patient timeline.");
+    return true;
+  }
+  var _kitHost = {
+    kind: "icu", addToNote: true, exportField: "clinical_note",
+    canWrite: function () { return true; }, ready: function () { return true; },
+    writeNote: function () { return ""; }, readyNote: function () { return ""; },
+    addLabel: function () { return "Add to note"; },
+    fieldLabel: function () { return "the clinical note"; },
+    insert: function (field, text) { if (text) kitPostNote(text, "Specialty tools"); },
+    insertMany: function (list) { var t = (list || []).map(function (it) { return it.text; }).filter(Boolean).join("\n"); if (t) kitPostNote(t, "Specialty tools"); },
+    setField: function () {},
+    repaint: function () { try { SMD_KITS.renderHostSheet(); } catch (e) {} },
+    protocol: function (id) { if (window.SMD_KBPROTO && SMD_KBPROTO.open) SMD_KBPROTO.open({ id: id }); },
+    calculator: function (id) { if (window.MEDCALC && MEDCALC.open) MEDCALC.open(id); },
+    investigate: null, openTab: null, setScribe: null,
+    patient: function () { var p = (STATE && STATE.patient) || {}; return { sex: String(p.sex || ""), age: String(p.age || "") }; }
+  };
+  function openKitTools() { if (kitToolsOn()) SMD_KITS.openHostSheet({ host: _kitHost, key: "icu-" + (grpActive() ? _grpPtId : "solo"), title: "Specialty tools", exportLabel: "Export to patient note", oneLabel: "One combined note" }); }
 
   function paintV2() {
     if (!rootEl) return;
@@ -6331,10 +6556,13 @@
     } else {
       var fab = isMonWs() ? '<button id="icuSnap" data-icu-act="snapshot" aria-label="ICU Snapshot">' + ico("camera", "📷") + '</button>' : "";
       var watchFab = labWatchOn()
-        ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span>Lab Watch 24/7</span></button>'
+        ? '<button id="icuWatch" data-icu-act="lwmgr" aria-label="Lab Watch 24/7 — alerts even when the app is closed">' + ico("bell", "🔔") + '<span class="icu-lw-lbl">Lab Watch 24/7</span></button>'
         : "";
-      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + fab;
+      var kitFab = kitToolsOn() ? '<button id="icuKitFab" data-icu-act="kittools" aria-label="Specialty tools">' + ico("tool", "🛠") + '<span class="icu-kit-lbl">Specialty tools</span></button>' : "";
+      rootEl.innerHTML = renderV2Banner() + renderV2Presence() + grpOfflineBar() + renderV2TopTabs() + renderBody() + watchFab + kitFab + fab;
     }
+    rootEl.classList.toggle("icu-has-fab", !!rootEl.querySelector("#icuWatch, #icuSnap, #icuKitFab"));
+    rootEl.classList.toggle("icu-has-kit", !!rootEl.querySelector("#icuKitFab"));
     if (_keepTop) { var _nsc = rootEl.querySelector(".icu-scroll"); if (_nsc) _nsc.scrollTop = _keepTop; }
     // Keep the active workspace tab centred in the horizontally-scrollable tab strip so it's never
     // hidden off-screen (the strip now scrolls instead of cramming all tabs into one fixed row).
@@ -8498,7 +8726,7 @@
       _ownerBufSynced = true;
     }
     try { localStorage.setItem(OWNER_KEY, now); } catch (e) {}
-    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paint(); } catch (e) {}
+    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paintPassive(); } catch (e) {}
   }
   function capTen(r) { if (r.length <= MAX_CASES) return r; return r.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); }).slice(0, MAX_CASES); }
   function rosterCount() { return loadRoster().length; }
@@ -8654,7 +8882,7 @@
     api.removePatient(gid, pid).then(function () {
       if (window.toast) toast("Patient removed from unit");
       grpTeardownPatient(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint();
-    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+    }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paintPassive(); });
   }
   function newPatient() {
     ICU.reset();
@@ -8777,7 +9005,19 @@
    * v2SwipeChooser. Delegated on #icuRoot, so re-renders need no re-binding. */
   var SW_W = 104;                                    // matches .icu-v2-swipe-act width
   var _swEl = null, _swOpen = null, _swX = 0, _swY = 0, _swBase = 0, _swDx = 0, _swLock = "", _swTapKill = false;
-  function swSet(el, x, anim) { if (!el) return; el.style.transition = anim ? "transform .2s ease" : "none"; el.style.transform = x ? "translateX(" + x + "px)" : ""; }
+  // The red action sits UNDER the card; it is only shown while the card is moved, or it bleeds
+  // through the card's anti-aliased rounded corners as a red arc on every row at rest.
+  function swSet(el, x, anim) {
+    if (!el) return;
+    var wrap = el.parentNode;
+    if (wrap && wrap.classList) {
+      if (wrap._swHide) { clearTimeout(wrap._swHide); wrap._swHide = null; }
+      if (x) wrap.classList.add("sw-on");
+      else if (anim) wrap._swHide = setTimeout(function () { wrap._swHide = null; wrap.classList.remove("sw-on"); }, 220);
+      else wrap.classList.remove("sw-on");
+    }
+    el.style.transition = anim ? "transform .2s ease" : "none"; el.style.transform = x ? "translateX(" + x + "px)" : "";
+  }
   function swClose() {
     if (_swOpen && document.body.contains(_swOpen)) swSet(_swOpen, 0, true);
     _swOpen = null;
@@ -8848,7 +9088,7 @@
       if (!(api.canInstruct && api.canInstruct(_grp && _grp.myRole))) { if (window.toast) toast("Only instructing roles can remove a patient"); return; }
       api.removePatient(_grp.id, id).then(function () {
         if (window.toast) toast("Patient removed from unit");
-      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paintPassive(); });
       if (id === _grpPtId) grpTeardownPatient();
     } else {
       rosterRemove(id);
@@ -8862,6 +9102,12 @@
 
   /* ------------------------------------------------------ event delegation */
   function onClick(e) {
+    // Tapping a control ends typing (iOS keeps a field focused under a button tap), so a repaint held back
+    // by paintPassive lands now rather than whenever the field happens to blur.
+    try {
+      var _ae = document.activeElement;
+      if (_paintAfterTyping && typingInRoot() && e.target && e.target.closest && e.target.closest("[data-icu-act]") && !_ae.contains(e.target)) _ae.blur();
+    } catch (x) {}
     // A finished swipe fires a click on release — swallow it, and let a tap on an OPEN row close it.
     if (_swTapKill) {
       _swTapKill = false;
@@ -8915,7 +9161,7 @@
       case "unitback": _pickStep = "units"; _paintTop = true; paint(); break;
       case "unitsel": { var _uc = arg.indexOf(":"); selectUnit({ cat: arg.slice(0, _uc), type: decodeURIComponent(arg.slice(_uc + 1)) }); _paintTop = true; paint(); break; }
       case "unitgrpnew": grpOpenCreate(arg); break;
-      case "grptoggle": try { if (icuGroupsOn()) localStorage.setItem("smd_icu_groups", "0"); else localStorage.setItem("smd_icu_groups", "1"); } catch (e) {} try { location.reload(); } catch (e) {} break;
+      case "grptoggle": grpSetMode(!icuGroupsOn()); break;
       // ---- ICU v2 group mode (smd_icu_groups, Phase 2) — unit switcher / create / invite / tasks ----
       case "grppick": grpOpenPicker(); break;
       case "grpsel": { var _gsel = grpById(decodeURIComponent(arg)); if (_gsel) grpSelect(_gsel, false); closeForm(); _screen = "board"; _paintTop = true; if (ICU.isOpen()) paint(); break; }
@@ -9126,6 +9372,7 @@
         break;
       }
       case "snapshot": openSnapshot(); break;
+      case "kittools": openKitTools(); break;
       case "savepatientcap": savePatientCapture(); break;
       case "launch":
         if (arg === "elyte") launch(function () {
@@ -9491,10 +9738,11 @@
         rootEl.addEventListener("touchmove", swMove, { passive: true });
         rootEl.addEventListener("touchend", swEnd);
         rootEl.addEventListener("touchcancel", swEnd);
+        rootEl.addEventListener("focusout", flushTypingPaint);   // a repaint held back while typing lands here
         // Phase 4: reflect connectivity promptly (offline strip + sync indicator) — repaint only
         // when a shared unit is open. Attached once; a no-op while the dashboard is closed.
         try {
-          var _onNet = function () { if (ICU.isOpen() && grpActive()) paint(); };
+          var _onNet = function () { if (ICU.isOpen() && grpActive()) paintPassive(); };
           window.addEventListener("online", _onNet);
           window.addEventListener("offline", _onNet);
         } catch (e) {}
@@ -9599,7 +9847,7 @@
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
-    _openAskMaik: openAskMaik, _askSend: askSend, _askContextText: askContextText, _askLog: function () { return _askLog.slice(); }, _askReset: askReset,
+    _kitHost: _kitHost, _kitOn: kitToolsOn, _openAskMaik: openAskMaik, _askSend: askSend, _askContextText: askContextText, _askLog: function () { return _askLog.slice(); }, _askReset: askReset,
     // Discharge · MaiK draft — parser + prompt exposed so the section split and the safety rules in
     // the prompt can be asserted without a live model.
     _disAiParse: disAiParse, _disAiPrompt: function () { return disAiPrompt(dischargeFieldVals()); }, _disAiState: function () { return { busy: _disAi.busy, err: _disAi.err, sections: _disAi.sections }; },
@@ -9637,7 +9885,7 @@
   try { document.addEventListener("visibilitychange", function () { if (!document.hidden) { try { reconcileOwner(); } catch (e) {} } }); } catch (e) {}
 
   // re-render the open dashboard whenever the state changes (any source)
-  _subs.push(function () { if (ICU.isOpen()) paint(); });
+  _subs.push(function () { if (ICU.isOpen()) paintPassive(); });
 
   // Task-deadline heartbeat: while a shared patient is open, re-check every 60s so due countdowns
   // tick, tasks flip to OVERDUE on time, and the overdue device-notification fires even when the unit
@@ -9647,8 +9895,8 @@
       try {
         if (!grpActive() || !_grpPtId || !ICU.isOpen()) return;
         grpNotifTick();
-        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paint();
-        else if (_screen === "alerts") paint();
+        if (_screen === "patient" && (_active === "rounds" || _active === "overview")) paintPassive();
+        else if (_screen === "alerts") paintPassive();
       } catch (e) {}
     }, 60000);
   } catch (e) {}
@@ -9679,7 +9927,7 @@
       var luText = grpChangeSummary(events);   // richer "what changed" line for the board footer + notifications
       try {
         var api = groupsApi();
-        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paint(); });
+        if (api && api.upsertPatient) api.upsertPatient(_grp.id, _grpPtId, _raw, luText).then(function () { _grpErr = null; }, function (e) { _grpErr = grpErrText(e); if (ICU.isOpen()) paintPassive(); });
         if (api && api.addTimelineEvent) {
           for (var i = 0; i < events.length; i++) {
             (function (ev) { try { var pr = api.addTimelineEvent(_grp.id, _grpPtId, ev); if (pr && pr.then) pr.then(null, function () {}); } catch (e) {} })(events[i]);

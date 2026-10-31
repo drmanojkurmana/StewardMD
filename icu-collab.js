@@ -91,13 +91,15 @@
   function normInviteRole(r) { return LINK_ROLES.indexOf(r) >= 0 ? r : "junior_resident"; }
 
   /* ------------------------------------------------------------------- flag */
-  // ?icugroups=1/0 → localStorage['smd_icu_groups'] → default OFF.
+  // ?icugroups=1/0 → localStorage['smd_icu_groups'] → default ON. MUST match icuGroupsOn() in icu.js:
+  // when this said default OFF, a fresh install showed the group board (icu.js) over an inert API that
+  // returned no units and refused createGroup, until the user toggled solo and back to write "1".
   function icuGroupsOn() {
     try {
       var q = (location.search.match(/[?&]icugroups=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return localStorage.getItem("smd_icu_groups") === "1";
-    } catch (e) { return false; }
+      return localStorage.getItem("smd_icu_groups") !== "0";
+    } catch (e) { return true; }
   }
   // At-rest encryption of the shared patient doc (name/dx/bed/state). ?icuenc=1/0 →
   // localStorage['smd_icu_encrypt'] → default OFF. Requires window.SMD_ICU_CRYPTO + the server

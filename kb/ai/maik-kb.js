@@ -378,7 +378,10 @@
     // management steps from the DX_MGMT brief
     if (dx && nonEmpty(dx.tx)) parts.push("**Management**\n" + bullets(dx.tx, 6));
     if (!parts.length) return { ok: false };
-    var head = "**Treatment of " + t.name + "**" + (precedence && precedence.length ? " _(precedence: " + arr(precedence).join(" ▸ ") + ")_" : "");
+    // The evidence order on its own plain line: MaiK's renderer has no single-underscore italics ("_(...)_" showed its
+    // underscores) and drops the space after a bold run, so a trailing note ran into the heading.
+    var SRC = { icmr: "ICMR", guideline: "guidelines", harrison: "textbook", hospital: "hospital policy" };
+    var head = "**Treatment of " + t.name + "**" + (precedence && precedence.length ? "\nEvidence order: " + arr(precedence).map(function (p) { return SRC[String(p).toLowerCase()] || p; }).join(" ▸ ") : "");
     return { ok: true, text: head + "\n\n" + parts.join("\n\n") + "\n\n" + citeSrc(t) + " · doses are standard references, verify locally" };
   }
   // Extract the specific agent the clinician named in a dose query ("dose of amiodarone in AF"

@@ -331,9 +331,9 @@ try {
   await shot("splash-05a-boot-classic-light");
 
   /* ---- screen 2 after the beat ---- */
-  await sleep(1500);   // t ~1.9s: past BEAT (1.5s) + the 220ms crossfade
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2");`), true,
-    "after the beat the splash crossfades into screen 2");
+  let phase2 = false;   // BEAT (1.5s) + 220ms crossfade, counted from when the frame is seen; load time varies
+  for (let i = 0; i < 25 && !phase2; i++) { await sleep(100); phase2 = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2");`); }
+  okv(phase2, true, "after the beat the splash crossfades into screen 2");
   ok(await ev(`var e=document.getElementById("sbsHello"); return !!e && !e.hidden && e.offsetHeight>1;`) === true,
     "screen 2: the personalised welcome row is up");
   ok(await ev(`var e=document.getElementById("sbsHelloName"); return e ? e.textContent : "";`) === "Dr. Manoj Kumar Kurmana",
@@ -363,12 +363,11 @@ try {
       if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
       return !!g;`;
   okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
-  await sleep(150);    // t ~2.5s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-hide");`), true,
-    "screen 2 stays up until the shared 3s window completes");
-  await sleep(1300);   // t ~3.8s
+    "screen 2 stays up until the 2.5s window completes");
+  await sleep(1000);   // t ~3.3s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
-    "the complete two-phase splash hides shortly after 3s (no tap)");
+    "the complete two-phase splash hides at 2.5s (1.5s logo + 1s welcome, no tap)");
 
   /* ---- the clocks start when the frame is SEEN: with the native splash lifting late (native-bridge
      stamps __smdSplashShownAt), both the beat and the hold count from that stamp */
@@ -384,9 +383,26 @@ try {
   await sleep(1300);   // seen ~2s: screen 2
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2") && !e.classList.contains("sbs-hide");`), true,
     "...and 2s after the stamp it is screen 2, still up");
-  await sleep(1300);   // seen ~3.3s
+  await sleep(900);    // seen ~2.9s
   okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
-    "...and hides after 3s total counted from the native handoff");
+    "...and hides after 2.5s total counted from the native handoff");
+
+  /* ---- owner 2026-10-30: a signed-in clinician gets BOTH screens on every later open too ---- */
+  await call("Page.navigate", { url: BASE });
+  await sleep(300);
+  await ev(`localStorage.removeItem("smd_splash_fast"); localStorage.setItem("smd_boot_seen","1"); return 1;`);
+  await call("Page.navigate", { url: BASE });
+  await sleep(300);
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && !e.classList.contains("sbs-fast") && !e.classList.contains("smd-boot-phase2");`), true,
+    "signed-in later open: no fast path, opens on the logo intro");
+  await ev(makeReady);
+  let welcome = false;   // the clock starts when the frame is seen (after load), so sample for screen 2
+  for (let i = 0; i < 30 && !welcome; i++) { await sleep(100); welcome = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("smd-boot-phase2") && !e.classList.contains("sbs-hide");`); }
+  okv(welcome, true, "signed-in later open: the welcome-back screen follows the logo intro");
+  await sleep(1500);   // screen 2 holds ~1s, then the 0.45s fade
+  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`), true,
+    "signed-in later open: the whole startup is done by 2.5s (+ fade)");
+  await ev(`localStorage.setItem("smd_splash_fast","0"); return 1;`);
 
   // the same two screens in the dark theme (Direction C's gradient mesh on screen 2)
   await newTab();
@@ -422,18 +438,14 @@ try {
   okv(await ev(`return localStorage.getItem("smd_boot_seen");`), "1", "finishing the first open records smd_boot_seen");
   await call("Page.navigate", { url: BASE });
   let fastSeen = false;   // the new document can lift its splash within ~100ms, so sample until seen
-  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && e.classList.contains("sbs-blank");`); }
-  okv(fastSeen, true, "later open: fast path, plain surface (no logo flash)");
-  okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "hidden",
-    "later open: the mark is not shown while it would only flash");
+  for (let i = 0; i < 50 && !fastSeen; i++) { await sleep(20); fastSeen = await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-fast") && !e.classList.contains("sbs-blank");`); }
+  okv(fastSeen, true, "later open: fast path shows the original screen at once (no empty glow)");
+  okv(await ev(`var c=document.querySelector("#smdBootSplash .sbs-center"); return !!c && getComputedStyle(c).visibility;`), "visible",
+    "later open: the mark is on screen from the first frame");
   let goneAt = 0;
   await ev(`var g=document.getElementById("accountGate"); if(g){g.classList.remove("hidden"); g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");} return 1;`);
   for (let i = 0; i < 20 && !goneAt; i++) { await sleep(100); if (await ev(`var e=document.getElementById("smdBootSplash"); return !e || e.classList.contains("sbs-hide");`)) goneAt = (i + 1) * 100; }
-  ok(goneAt > 0 && goneAt <= 700, `later open: the splash lifts as soon as the app is ready (${goneAt}ms), not after 3s`);
-  await call("Page.navigate", { url: BASE });
-  await sleep(900);
-  okv(await ev(`var e=document.getElementById("smdBootSplash"); return !e || !e.classList.contains("sbs-blank");`), true,
-    "later open, slow boot: the mark appears after 700ms so it never looks stuck");
+  ok(goneAt > 0 && goneAt <= 1200, `later open: the splash lifts once ready after a 700ms hold (${goneAt}ms), not after 3s`);
   await ev(`localStorage.clear(); return 1;`);
 
   /* ---------- 3. Guest: no personalisation ---------- */

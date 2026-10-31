@@ -55,11 +55,14 @@
      fallback, and the interstitials are the very first paint, so start the fetch here rather
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<!-- The header, tab bar and home tools draw their icons from this font. Fetched early so the splash can
+     wait for it: revealing home before it loaded made every icon pop in a beat after the splash lifted. -->
+<link rel="preload" href="/assets/fonts/material-symbols-rounded.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/redesign-system.css?v=hit1-spheretiles2-splashv2e-betachip1-darksphere1-appfeel1-energy1-icons1-fr1-live1-knife1-ox2-alltools1-maikmark3-glow20">
 <!-- Refined clinical look for INNER screens only (never #homeV2; owner 2026-10-12). Class smd-refined on <html> is set below; localStorage smd_refined="0" turns it off. -->
 <link rel="stylesheet" href="/refined.css?v=rf1-noempty1">
 <!-- Native-app behaviour app-wide (no tap flash, no double-tap zoom, no selectable buttons, no page rubber-band). Owner 2026-10-16. localStorage smd_native_feel=0 turns it off. -->
-<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf4"><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
+<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf6"><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
 <link rel="stylesheet" href="/motion.css?v=gold1-pf2">
 <script src="/smd-num.js?v=num2" defer></script>
 <!-- B2 privacy mode (window.SMD_PRIVACY_MODE; not privacy-config.js's SMD_PRIVACY): one tap in the home header masks patient names, IDs, phones and photos ON
@@ -77,11 +80,11 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432-sd1">
-<link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
-<link rel="stylesheet" href="/queue.css?v=q13-profilescroll-prio1-fr1">
+<link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7-head1">
+<link rel="stylesheet" href="/queue.css?v=q14-profilescroll-prio1-fr1">
 <link rel="stylesheet" href="/ward.css?v=ward36-rcm-fr1-pf2-ipad1">
 <link rel="stylesheet" href="/discharge.css?v=dis4-clinforms-fr1">
-<link rel="stylesheet" href="/opd-emr.css?v=voicenote1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1-edit1">
+<link rel="stylesheet" href="/opd-emr.css?v=native1-micbar1-auth2-icdsug1-scribe18-proto3-kits2-fr1-assign1-edit1-ftool2">
 <link rel="stylesheet" href="/atlas.css?v=atlas6">
 <link rel="stylesheet" href="/atlas3d.css?v=a3d6-fr1">
 <link rel="stylesheet" href="/ophthalmos.css?v=oph14">
@@ -93,10 +96,10 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/ophthalmos-learn.css?v=oph14">
 <link rel="stylesheet" href="/ophthalmos-explore.css?v=oph14">
 <link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark2">
-<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1">
-<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1">
-<link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1">
-<link rel="stylesheet" href="/protocol-maker.css?v=pm2-fr1">
+<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1-logo1">
+<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1-align1">
+<link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1-plum1">
+<link rel="stylesheet" href="/protocol-maker.css?v=pm2-fr1-ic1">
 <link rel="stylesheet" href="/fundx.css?v=sar1-fr1-ipad1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark-fr1">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7-fr1-pf1">
@@ -104,7 +107,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/thorex-screens.css?v=tx13-fr1-pf1">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx18-calm-fr1">
 <link rel="stylesheet" href="/insulin.css?v=ins15-fr1-ipad1">
-<link rel="stylesheet" href="/clinix.css?v=cx20b927-prac1-osce2">
+<link rel="stylesheet" href="/clinix.css?v=cx20b927-prac1-osce2-skfind1">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc-md1-ipad1">
 <link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar-quick1-fr1-easy1-pf1">
 <link rel="stylesheet" href="/govschemes.css?v=gs2-browse">
@@ -133,7 +136,7 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <script defer src="/abx-redesign.js?v=gold476"></script>
 <!-- 5-step guided wizard (Vitals→Systems→Differential→Decision→Plan): owns #abxWizard, wired to
      the real engine (FIELD_GROUPS + SMD_REASON.assess + DX_MGMT). Start Case opens it. Flag-gated. -->
-<script defer src="/abx-wizard.js?v=gold1057-build7-gatev2a-calib1"></script>
+<script defer src="/abx-wizard.js?v=gold1057-build7-gatev2a-calib1-ph1-wiz1"></script>
 <script>
 /* Service worker (offline + instant repeat loads) — WEB ONLY.
    On the NATIVE app (Capacitor) the SW is disabled: its stale-while-revalidate cache pins the
@@ -327,8 +330,10 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
    Pace (owner decision 2026-10-03): the full three-second branded sequence plays on the FIRST open
    only. Every later open is fast: a plain surface in the launch color that fades as soon as the app
    is ready, so the logo never flashes for a split second. If boot is slow the mark appears after
-   700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace. */
-(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast","sbs-blank");setTimeout(function(){s.classList.remove("sbs-blank");},700);}}catch(e){}})();</script>
+   700ms so it never looks stuck. localStorage smd_splash_fast="0" restores the old pace.
+   Signed-in clinicians are the exception (owner 2026-10-30): the personalised script below turns the
+   fast path back off, so they get the logo intro and then the welcome-back screen on every open. */
+(function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;if(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)s.classList.add("sbs-dark");var L=window.localStorage,fast=false;try{fast=L.getItem("smd_splash_fast")!=="0"&&!!(L.getItem("smd_boot_seen")||L.getItem("stewardmd_account")||L.getItem("stewardmd_guest_used"));}catch(e){}if(fast){window.__smdBootFast=1;s.classList.add("sbs-fast");}}catch(e){}})();</script>
 <script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
    profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
    Firebase user by account.js) — because Firebase has not booted this early. Signed-in users only;
@@ -353,10 +358,14 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   }
   dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
   host.hidden=false;s.classList.add("sbs-personal");
+  /* Owner 2026-10-30: a signed-in clinician gets BOTH screens on every open (logo intro, then the
+     welcome-back screen). The fast later-open pace lifted the splash at 0.7s, before screen 2 ever
+     appeared, so it is switched off here and the shared 3s window applies. */
+  window.__smdBootFast=0;window.__smdBootPersonal=1;s.classList.remove("sbs-fast");
   /* SEQUENCE: the classic frame holds a beat, then crossfades into the personalised phase 2
      (avatar, name, glass foot), which stays within the boot script's three-second total and
      Face ID / PIN fires by itself. Both screens are passive: no button, no hold. */
-  var BEAT=1560,XF=220,rm=false,t0=Date.now();
+  var BEAT=1500,XF=220,rm=false,t0=Date.now();
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
   function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
   /* Do not consume the beat behind the native launch surface. native-bridge starts this clock at
@@ -597,7 +606,9 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 /* Three-second sequence on the FIRST open only (draw first, then Loading your workspace); every
    later open has MIN 0 and lifts as soon as ready() (see the splash pace script above, owner decision
    2026-10-03). CAP is a short fail-open, never a stuck splash. */
-MIN=window.__smdBootFast?0:3000,CAP=6000;
+MIN=window.__smdBootFast?700:window.__smdBootPersonal?2500:3000,CAP=6000;
+/* Later opens show the full startup screen from the first frame (it used to be blank for 700 ms, which read as
+   an empty glow) and hold it at least 700 ms of seen time, so it can never flash past half-drawn. */
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
    DOM), signal native-bridge to lift the native splash. Hiding only on this signal — never on
    a timer — guarantees the native splash covers the WebView-init gap, so there is no black
@@ -610,7 +621,12 @@ try{requestAnimationFrame(function(){requestAnimationFrame(function(){window.__s
 });});}catch(e){s.classList.add("sbs-visible");}
 var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||localStorage.getItem("stewardmd_guest_used"));}catch(e){}
 function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
+/* Home's header, tab bar and tool icons are Material Symbols ligatures: lift the splash only once that
+   font is in, or the icons pop in after the reveal. The CAP fail-open still applies. */
+try{document.fonts&&document.fonts.load('24px "Material Symbols Rounded"');}catch(e){}
+function iconsIn(){try{return !document.fonts||!document.fonts.check||document.fonts.check('24px "Material Symbols Rounded"');}catch(e){return true;}}
 function ready(){try{
+  if(!iconsIn())return false;
   var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;
   // Unverified/relaunched users land on the verify gate (or the account gate on any launch) — those
   // are real "boot finished" states, so lift the white splash immediately instead of sitting on it
@@ -621,7 +637,13 @@ function ready(){try{
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
 var lockShowing=false;
-function reallyFinish(){done=true;try{localStorage.setItem("smd_boot_seen","1");}catch(e){}s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+/* While this splash covers the app there is no patient data on screen, so iOS skips its app-switcher privacy
+   blur (SmdDevice.setBootSplash); without this the launch Face ID swapped the splash for a grey sheet.
+   Cleared the moment the splash lifts; the native flag also expires by itself after 20 s. */
+function bootCover(up){try{var P=window.Capacitor&&window.Capacitor.Plugins;if(P&&P.SmdDevice&&P.SmdDevice.setBootSplash){var r=P.SmdDevice.setBootSplash({up:up});if(r&&r.catch)r.catch(function(){});return true;}}catch(e){}return false;}
+/* the plugin can register a beat after this script runs (see haptics.js), so retry briefly while the splash is up */
+(function coverUp(n){if(done||bootCover(true)||n>30)return;setTimeout(function(){coverUp(n+1);},100);})(0);
+function reallyFinish(){bootCover(false);done=true;try{localStorage.setItem("smd_boot_seen","1");}catch(e){}s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
 /* App Lock: if a PIN/biometric is configured, the splash holds after its frame (3s first open, instant later) and
    Face ID / PIN fires by itself instead of revealing the app. Fails open —
    if applock.js hasn't loaded yet (or throws), window.SMD_APPLOCK is undefined/required()
@@ -2261,7 +2283,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1" defer></script>
+<script src="/native-bridge.js?v=nb-pdf4-scribe18-frs1-ondev2-edge4-ondev3-wg1-add1" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -2335,7 +2357,7 @@ window.openExternal = function (u) {
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
      @capgo/capacitor-updater via `npm install && npx cap sync` and rebuilds natively — see
      vault/modules/OTA Updates.md. Must load AFTER native-bridge.js (needs window.SMD_IS_NATIVE). -->
-<script src="/native-ota.js?v=ota7-truth-pfdraw1-prog2" defer></script>
+<script src="/native-ota.js?v=ota9-delta2-calm" defer></script>
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
@@ -2368,9 +2390,9 @@ window.openExternal = function (u) {
 <script defer src="/medlist.js?v=ddiaudit20260925-fr2-mlwrap1-ledger1-qa7-cel1-pf1"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js?v=ddiaudit20260925"></script>
-<script src="/fig-viewer.js?v=fig15" defer></script>
+<script src="/fig-viewer.js?v=fig16" defer></script>
 <script src="/ilearn.js?v=il1" defer></script>
-<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1" defer></script>
+<script src="/api.js?v=ddiaudit20260925-monofit1-fr2-gold1-nodraft1-dosecalc1-lbl1-fig1-ipad1-dbclean2" defer></script>
 <!-- Offline drug database (native + Pro only; no-op on web). Loads after api.js so it can
      route MEDAPI drug searches to the local SQLite copy when offline. -->
 <script src="/fflate.min.js" defer></script>
@@ -2384,16 +2406,16 @@ window.openExternal = function (u) {
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363-nlpv2a-kbv2a-nlp2r-allon-r79" defer></script>
 <script src="/id-token.js?v=idtok2-quota1" defer></script>
-<link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1-priorsw-r20">
+<link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1-priorsw-r20-hdr1">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2-rd1-km1-ls1-synmgmt1-kbnav1-kbrd1-kbs1-rl1-oncolinks1-fig1-il1">
 <link rel="stylesheet" href="/kb-protocols.css?v=kbp5">
-<link rel="stylesheet" href="/specialty-kits.css?v=kits5-ipad1">
-<link rel="stylesheet" href="/clinical-docs.css?v=docs5-pf2">
+<link rel="stylesheet" href="/specialty-kits.css?v=kits5-ipad1-host1">
+<link rel="stylesheet" href="/clinical-docs.css?v=docs5-pf2-col1">
 <script src="/icu-monitor-parser.js?v=hardlocal3" defer></script>
 <script src="/phi-india.js?v=phiindia1" defer></script>
 <script src="/kb-search.js?v=kbs1" defer></script>
 <script src="/cancer-protocols-map.js?v=oncolinks1-fig1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002-cost1002-synmgmt1-kbnav1-emptyreply1-noloc1-kbrd1-mkai1-mkw1-quota1-cutshort1-kbs1-rl1-oncolinks1-kbfig1-fig1-il1" defer></script>
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002-cost1002-synmgmt1-kbnav1-emptyreply1-noloc1-kbrd1-mkai1-mkw1-quota1-cutshort1-kbs1-rl1-oncolinks1-kbfig1-fig1-il1-wiz1" defer></script>
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
@@ -2405,19 +2427,19 @@ window.openExternal = function (u) {
 <script src="/kb-protocols.js?v=kbp12.bd81955dcc91" defer></script>
 <!-- Clinical documents (certificates, consent forms, handouts, MLC, MCCD draft). Flag smd_clinical_docs
      (default ON, ?docs=0). Token kept in step with kb/documents/documents.json by scripts/build-documents.mjs. -->
-<script src="/clinical-docs.js?v=docs4.598e7e3c41bc-pm1" defer></script>
+<script src="/clinical-docs.js?v=docs4-col1.598e7e3c41bc" defer></script>
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-prepfix.js?v=pf3" defer></script>
-<script src="/review-desk.js?v=rev5-prep3" defer></script>
+<script src="/review-desk.js?v=rev5-prep3-anest1-onc2" defer></script>
 <!-- Clinical Bulletins: signed practice updates on the disease reader (flag smd_kb_bulletins, default off)
      + the Review Desk signing tab. docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md -->
 <script src="/bulletins.js?v=bl6" defer></script>
 <script src="/bulletins-desk.js?v=bl10" defer></script>
 <script src="/mail.js?v=mailpro1" defer></script>
 <!-- Colleagues (wave 2): referrals, handovers, case rooms, the hospital's version of a kit, kit history.
-     Flag smd_kits_share (default OFF, ?share=1); server route /api/kits is off until KITS_SHARE_ON=1. -->
-<script src="/kits-share.js?v=share3-wa1" defer></script>
+     Flag smd_kits_share (default ON, ?share=0 turns it off); server kill switch KITS_SHARE_ON=0. -->
+<script src="/kits-share.js?v=share4-col1" defer></script>
 <!-- Specialty kits (26 kits in 7 groups, from O&G and Paediatrics to Forensic medicine):
      OPD EMR Specialty tab + Home tile. Flag smd_specialty_kits (default ON, ?kits=0 hides both). The
      specialty-kits.js ?v= token is kept in step with the kit + WHO growth data hashes by
@@ -2473,7 +2495,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/steward-ai.browser.js?v=gold1035-kbgate-names1-embedlocal1" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
-<script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg-ft2-kbnav1-conv5" defer></script>
+<script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg-ft2-kbnav1-conv5-prec3" defer></script>
 <!-- MaiK clinician-only scope gate (window.MaiKScope): refuses non-clinical asks instantly, before KB/router/Vertex. -->
 <script src="/kb/ai/maik-scope.js?v=scope-certain1-tools1" defer></script>
 <!-- MaiK Clinical Decision Engine (brain) + Evidence Engine. Deterministic, KB-first.
@@ -2484,7 +2506,7 @@ window.openExternal = function (u) {
 <script src="/electrolytes.js?v=bug808-nodupe-focus1-fr1-worksheet1-carepath1-nodraft1-ipad2" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
 <script src="/abdm.js?v=abdm1" defer></script>
-<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
+<!-- lazy loaded: hospitals-in --><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4-pm1" defer></script><script src="/hospital-registry.js?v=hr1" defer></script><script src="/institutions-in.js?v=inst2" defer></script><script src="/connect-agent-boot.js?v=cab42" defer></script><script src="/queue-flags.js?v=q5-all-on-imm1" defer></script><script src="/govschemes-flags.js?v=gs2-defaulton" defer></script><link rel="stylesheet" href="/maik-atmosphere.css?v=5-gradientorb-fr1-mkbg1-dim1-ocean1"><script src="/maik-atmosphere.js?v=2-energy1-mkbg1-pwr1" defer></script><script src="/maik-companion.js?v=2a" defer></script><script src="/thinking-orbs.js?v=3-gradientorb-pal1-ocean1-pwr1-detach1" defer></script><script src="/tool-groups.js?v=tg2" defer></script><script src="/home.js?v=surgx1-hardlocal3-hint10s-connecthosp1-kbguard1-hosptile1-mkpolish1-mkactions1-mkcomposer1-hospitalglass1-maikglass2-thinkingorbs1-nofocusbox1-assumecheck1-clinix1-figs1-chiptopic1-cont2-audit1-calcroute1-ui2-researchchip1-betatiles1-raghybrid1-pdf1-kbchip1-kbexists1-kbopen1-thread1-chip1-hap1-fu2-us1-c4-v11facts1-whoanswers1-perf1-agentperm1-darksphere1-opdbilling1-wsqbilling1-druglink1-ci1-stop1-len1-lenscope1-mem1-stopweb1-me1-nodash1-audA-audB-onedir-kbprev1-energy1-buddy2-kits3-fr1-kxon1-flagrel925-mtretail1-mkclose1-ptcard1-roles1-pfopen1-roleios1-hub1-phonehub1-pfdraw1-helpcentre1-phoneok1-qa16-stream1-corrupt1-live1-knife1-ox2-alltools1-dosecalc1-dosecalc2-toolicons1-bl2-tokos3-neo1-neo2-convo1002-cost1002-pf1-pm1-mail1-edge4-fa1-edgeon1-edgefirst1-edgeneo1-kbnav1-maikedge1-conv5-askany1-adultref1-emptyreply1-pfsrv1-prep2-nrk1-nrkon1-prepndg1-settings1005-mkai1-mkw1-maikmark1-stopall1-pnscale1-quota1-usagepro1-cutshort1-usage2-pfsave2-snd1-dd1-errwhy1-toolgroups1-menus1-tablet5-liq1-krd1-calm1-anest1-onc2" defer></script><script src="/role-features.js?v=roles3-roleios1" defer></script><script src="/profile-setup.js?v=pfs5-kbsheet1-savefix1-roles1-srvsave1-patch1" defer></script><script src="/phone-verify.js?v=phv6-hw-roles1-phonehub1-phoneok1-claimfresh1-honest1" defer></script><script src="/bug-report.js?v=bug4-realtime-honest1-nophi1-ipad1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm3" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced / Experimental). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -2522,6 +2544,7 @@ window.openExternal = function (u) {
 <script src="/sheet-drag.js?v=pm1" defer></script>
 <script src="/long-press-preview.js?v=pm1" defer></script>
 <script src="/view-transitions.js?v=pm1" defer></script>
+<script src="/page-motion.js?v=pgm2" defer></script>
 <script src="/large-title.js?v=pm1" defer></script>
 <script src="/pull-refresh.js?v=pm2" defer></script>
 <script src="/picker-haptics.js?v=pm1" defer></script>
@@ -2534,7 +2557,7 @@ window.openExternal = function (u) {
 <script src="/undo.js?v=pm2" defer></script>
 <script src="/swipe-actions.js?v=pm2" defer></script>
 <script src="/tab-bar.js?v=pm4" defer></script>
-<script src="/az-scrubber.js?v=pm2-ipad1" defer></script>
+<script src="/az-scrubber.js?v=pm2-ipad1-fold1" defer></script>
 <script src="/keyboard-aware.js?v=pm2" defer></script>
 <script src="/blur-up.js?v=pm2" defer></script>
 <script src="/launch-morph.js?v=pm2" defer></script>
@@ -2549,7 +2572,7 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=hardlocal3-qa24-fr1r925-pushdiag1-dosecalc1-cel1-pm2-wg1-mkai1-mkw1-la1-snd1" defer></script>
+<script src="/icu.js?v=hardlocal3-qa24-fr1r925-pushdiag1-dosecalc1-cel1-pm2-wg1-mkai1-mkw1-la1-snd1-grp1-ui1-kit1-ov1-ty1" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 
 <!-- WardSynQ shadow observation of GHIS ingest. BOTH DEFAULT OFF and neither ships enabled.
@@ -2601,9 +2624,9 @@ window.openExternal = function (u) {
 <script src="/hospital-auth.js?v=wsqp1" defer></script>
 <script src="/wardsynq-alert-ui.js?v=wsqp1-fu1-pm1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
-     Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
+     Firestore subscription layer; NO DOM. Flag smd_icu_groups (default ON, "0" = solo). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
-<script src="/icu-collab.js?v=gold455-energy1" defer></script><link rel="preload" href="/fonts/inter-codeblue-opsz.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/codeblue-trainer.css?v=cb4"><link rel="stylesheet" href="/codeblue-ecg.css?v=cb4"><link rel="stylesheet" href="/codeblue-sheet.css?v=cb4"><script src="/codeblue-trainer-data.js?v=cb4" defer></script><script src="/codeblue-trainer.js?v=cb4" defer></script><script src="/codeblue-ecg.js?v=cb4" defer></script><script src="/codeblue-sheet.js?v=cb4" defer></script><link rel="stylesheet" href="/codeblue-live.css?v=cb5"><link rel="stylesheet" href="/codeblue-prefs.css?v=cb5"><link rel="stylesheet" href="/codeblue-fx.css?v=cb5"><script src="/codeblue-audio.js?v=cb4" defer></script><script src="/codeblue-prefs.js?v=cb4" defer></script><script src="/codeblue-fx-counter.js?v=cb5" defer></script><script src="/codeblue-fx-specular.js?v=cb5" defer></script><script src="/codeblue-fx-list.js?v=cb5" defer></script><script src="/codeblue-fx-slider.js?v=cb5" defer></script><script src="/codeblue-live.js?v=cb5" defer></script><script src="/referrals.js?v=ref1-pm1" defer></script>
+<script src="/icu-collab.js?v=gold455-energy1-grp1" defer></script><link rel="preload" href="/fonts/inter-codeblue-opsz.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/codeblue-trainer.css?v=cb4"><link rel="stylesheet" href="/codeblue-ecg.css?v=cb4"><link rel="stylesheet" href="/codeblue-sheet.css?v=cb4"><script src="/codeblue-trainer-data.js?v=cb4" defer></script><script src="/codeblue-trainer.js?v=cb4" defer></script><script src="/codeblue-ecg.js?v=cb4" defer></script><script src="/codeblue-sheet.js?v=cb4" defer></script><link rel="stylesheet" href="/codeblue-live.css?v=cb5"><link rel="stylesheet" href="/codeblue-prefs.css?v=cb5"><link rel="stylesheet" href="/codeblue-fx.css?v=cb5"><script src="/codeblue-audio.js?v=cb4" defer></script><script src="/codeblue-prefs.js?v=cb4" defer></script><script src="/codeblue-fx-counter.js?v=cb5" defer></script><script src="/codeblue-fx-specular.js?v=cb5" defer></script><script src="/codeblue-fx-list.js?v=cb5" defer></script><script src="/codeblue-fx-slider.js?v=cb5" defer></script><script src="/codeblue-live.js?v=cb5" defer></script><script src="/referrals.js?v=ref1-pm1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
 <script src="/native-push.js?v=gold364-thread-ref1-wsqp1-fu3-kits1-pushdiag1-bl1-prepndg1-dyn1" defer></script>
@@ -2618,7 +2641,7 @@ window.openExternal = function (u) {
      Loads after icu.js/reasoning.js/native-bridge/api.js - only invoked on user tap, so order is safe. -->
 <script src="/voice.js?v=hardlocal3-uigroups1-scribe18-sttfb2-ondev4-nodash1-nogem1" defer></script>
 <!-- First-run resource download (bug SMD-DVVJVN): asks once on native to fetch the voice model and the MaiK pack suited to the phone. Flag smd_first_resources. -->
-<script src="/first-resources.js?v=frs1" defer></script>
+<script src="/first-resources.js?v=frs2-calm" defer></script>
 <!-- Ambient voice extraction engine (window.SMD_VVITALS / SMD_EMRMAP / SMD_AMBIENT). Deterministic,
      zero-token, offline: spoken vitals/exam -> structured assessment fields, with a patient-speech +
      manual-override safety gate. A building block for autofilling the OPD assessment (opd-emr.js);
@@ -2650,7 +2673,7 @@ window.openExternal = function (u) {
      default. Pure registry, no dependencies; inert until a consumer (opd-emr.js's specialty picker,
      ward.js, discharge.js) asks for a template. -->
 <script src="/scribe-templates.js?v=gold1-kits2" defer></script>
-<script src="/recent.js?v=gold983-pm1" defer></script>
+<script src="/recent.js?v=gold983-pm1-wiz1" defer></script>
 <!-- Experimental Access framework (window.SMD_DEVICE + window.SMD_XACCESS) — the one-code /
      one-device beta unlock gate. Loaded before FundX so its tile/Settings entry can gate on it.
      All validation is server-side (/api/experimental/*); the client keeps only a signed token. -->
@@ -2850,16 +2873,16 @@ window.openExternal = function (u) {
      default could never take effect and only a localStorage override made the tile appear. -->
 <!-- Shared OPD patient check-in sheet (ABDM-ready). Used by queue.js AND the staff web console
      (opd.html), so the two registration forms can never drift apart. -->
-<link rel="stylesheet" href="/patient-register.css?v=preg2-abdm-fr1">
-<script src="/patient-register.js?v=preg7-sid1-sid1-off2-pm1" defer></script>
+<link rel="stylesheet" href="/patient-register.css?v=preg3-abdm-fr1-find1">
+<script src="/patient-register.js?v=preg9-sid1-sid1-off2-pm1-nfcios1-find1" defer></script>
 <script src="/opd-pulse-model.js?v=2" defer></script>
 <script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
-<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1-phi1-fu1-prio1-off2-live1-pm1-la1" defer></script>
+<script src="/queue.js?v=fdesk4-pulse1-profilex1-sid1-phi1-fu1-prio1-off2-live1-pm1-la1-find1" defer></script>
 <!-- Unified NFC bridge (native Capacitor NfcPlugin + Web NFC). The file-tag tap listener below
      (smdNfcBoot) routes a tapped folder to the patient's full chart, or offers to write a UHID
      to a blank tag. No-op on browsers without NFC. -->
-<script src="/smd-nfc.js?v=nfc-2" defer></script>
+<script src="/smd-nfc.js?v=nfc3-ios1" defer></script>
 <!-- Universal Patient Identity (StewardID 2.0 / Ni-Key): the canonical carrier resolver plus the
      mountable station scanner. patient-register.js mints StewardIDs, ward.js checks revocation at
      the bedside, and OPD stations route through these; all degrade gracefully when absent. -->
@@ -2900,7 +2923,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=hardlocal3-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1-dosecalc1-cost1002-cel1-pm1-ondev2-mkai1-mkw1" defer></script>
+<script src="/opd-emr.js?v=native1-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1-dosecalc1-cost1002-cel1-pm1-ondev2-mkai1-mkw1-ftool2" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6-pm1" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2914,7 +2937,7 @@ window.openExternal = function (u) {
 <script src="/clinic-drive.js?v=sc1" defer></script>
 <script src="/shared-clinic.js?v=sc5" defer></script>
 <script src="/clinic-app.js?v=sc4" defer></script>
-<script src="/shared-clinic-ui.js?v=sc2-pm1" defer></script>
+<script src="/shared-clinic-ui.js?v=sc2-pm1-sp1" defer></script>
 <!-- Onco Home Phase 8 P0 (flag smd_onco_home, default OFF): the reference/tool-library workbench —
      global search + a grouped tool grid over the EXISTING MEDCALC/KB/drugs assets (never a copy of
      their data). Complements the onco-*.js patient treatment-plan executor above. Inert unless the
@@ -2925,15 +2948,15 @@ window.openExternal = function (u) {
      honest gaps for sites not yet added), ISMP tall-man drug names, onco drug+interaction view, and a
      read-only protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
-<script src="/onco-staging.js?v=op7-race1" defer></script>
+<script src="/onco-staging.js?v=op7-race1-hdr1" defer></script>
 <!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
      all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
      fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
      doses), RECIST 1.1 target-lesion response calculator, and localStorage Favorites/Recent. These load
      before onco-home.js so their globals + SMD_ONCOFAV exist when the grid renders. -->
-<script src="/onco-ctcae.js?v=op3" defer></script>
-<script src="/onco-iotox.js?v=op5-icons1" defer></script>
-<script src="/onco-recist.js?v=op1" defer></script>
+<script src="/onco-ctcae.js?v=op3-hdr1" defer></script>
+<script src="/onco-iotox.js?v=op5-icons1-hdr1" defer></script>
+<script src="/onco-recist.js?v=op1-hdr1" defer></script>
 <script src="/onco-favorites.js?v=oh3" defer></script>
 <!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
      (window.SMD_ONCORECOMMEND). Decision-support only - suggests APPLICABLE ACTIVE Standard Protocols
@@ -2951,7 +2974,7 @@ window.openExternal = function (u) {
 <script src="/onco-cycle-timeline.js?v=op1" defer></script>
 <script src="/onco-ddi-sentry.js?v=op1" defer></script>
 <script src="/onco-genomics.js?v=op1" defer></script>
-<script src="/onco-home.js?v=hardlocal8" defer></script>
+<script src="/onco-home.js?v=hardlocal8-logo1" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->
@@ -2959,7 +2982,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot6" defer></script>
-<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1" defer></script>
+<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1-align1" defer></script>
 <script src="/protocol-sheet.js?v=ps6-fr1-oncolinks1-fig1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
@@ -3293,11 +3316,11 @@ window.openExternal = function (u) {
 <script src="/tokos-loader.js?v=tok12" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
-<script src="/prep-loader.js?v=prep88" defer></script>
-<!-- Narkē (Anaesthesia): only the loader at boot; the engine and Narkē files load on first open (narke-loader.js) -->
-<script src="/narke-loader.js?v=nrk9" defer></script>
+<script src="/prep-loader.js?v=prep100" defer></script>
+<!-- Anesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
+<script src="/narke-loader.js?v=nrk10" defer></script>
 <!-- Kardia (Echo + ECG learning): only the loader at boot; the engine and Kardia files load on first open (kardia-loader.js).
      Flag smd_kardia, default OFF for everyone (?kardia=1 per tester device). -->
-<script src="/kardia-loader.js?v=krd9" defer></script>
+<script src="/kardia-loader.js?v=krd15" defer></script>
 </body>
 </html>

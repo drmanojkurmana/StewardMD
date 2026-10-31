@@ -154,6 +154,47 @@ export async function getPatient(env, orgId, mrn) {
   };
 }
 
+/* Find a patient at this hospital by name or phone (or a typed MRN / StewardID), for the check-in sheet.
+ *  - 10+ digits: the exact mobile index (one read), the same index registration checks for duplicates.
+ *  - 3+ digits: a mobile ending or containing those digits.
+ *  - MRN or StewardID: one read each.
+ *  - otherwise a name: every word typed must appear in the name, any order, ignoring case.
+ * Names and numbers are stored encrypted, so partial matches read this org's patients (newest names last) and
+ * decrypt them here, capped at SEARCH_SCAN; past the cap the answer says truncated:true instead of pretending. */
+const SEARCH_SCAN = 1500, SEARCH_MAX = 20;
+const slim = (p) => ({ mrn: p.mrn, stewardId: p.stewardId || "", name: p.name || "", mobile: p.mobile || "", gender: p.gender || "", ageYears: p.ageYears, ageMonths: p.ageMonths, pending: !!p.pending });
+export async function searchPatients(env, orgId, query) {
+  const q = String(query == null ? "" : query).trim().slice(0, 60);
+  if (q.length < 2) return { ok: true, results: [], truncated: false };
+  const digits = q.replace(/\D/g, "");
+  const out = [];
+  const push = (p) => { if (p && !p.supersededBy && !out.some((x) => x.mrn === p.mrn)) out.push(slim(p)); };
+  const sid = normalizeStewardId(q);
+  if (sid) { const r = await resolveStewardId(env, orgId, sid); if (r.ok) push(r.patient); if (out.length) return { ok: true, results: out, truncated: false }; }
+  if (/^[A-Za-z0-9-]{4,}$/.test(q) && /\d/.test(q) && !/^\d+$/.test(q)) { const p = await getPatient(env, orgId, q.toUpperCase()).catch(() => null); if (p) return { ok: true, results: [slim(p)], truncated: false }; }
+  const phoneLike = digits.length >= 3 && /^[\d\s+()-]+$/.test(q);
+  if (phoneLike && digits.length >= 10) {
+    const dup = await mobileDuplicateOf(env, orgId, q);
+    if (dup) push(await getPatient(env, orgId, dup.mrn).catch(() => null));
+    if (out.length) return { ok: true, results: out, truncated: false };
+  }
+  const { readAll } = await import("./_fs_read_all.js");   // lazy: only a partial-match search needs the paged reader
+  const { rows, truncated } = await readAll(env, "q_patients", [{ field: "orgId", value: String(orgId) }], SEARCH_SCAN);
+  const words = phoneLike ? [] : q.toLowerCase().split(/\s+/).filter(Boolean);
+  for (let i = rows.length - 1; i >= 0 && out.length < SEARCH_MAX; i--) {
+    const f = rows[i].fields || rows[i];
+    if (!f || f.supersededBy) continue;
+    const mob = await decPHI(env, f.encMobile).catch(() => "");
+    if (phoneLike) { if (!String(mob || "").replace(/\D/g, "").includes(digits)) continue; }
+    else {
+      const nm = String(await decPHI(env, f.encName).catch(() => "") || "").toLowerCase();
+      if (!words.every((w) => nm.includes(w))) continue;
+    }
+    push({ mrn: f.mrn, stewardId: f.stewardId || "", name: await decPHI(env, f.encName).catch(() => ""), mobile: mob, gender: f.gender, ageYears: f.ageYears, ageMonths: f.ageMonths, pending: !!f.pending, supersededBy: f.supersededBy || "" });
+  }
+  return { ok: true, results: out, truncated: !!truncated };
+}
+
 /* ---- StewardID resolve + revoke: the one lookup behind QR, Ni-Key, barcode and typed entry ----------
  *
  * Every carrier lands here with whatever it read. The ID is normalised and CHECKED first

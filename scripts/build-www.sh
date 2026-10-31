@@ -87,6 +87,9 @@ if [ -d assets/fonts ]; then mkdir -p "$WWW/assets/fonts"; cp assets/fonts/* "$W
 if [ -d assets/kb-diagrams ]; then mkdir -p "$WWW/assets/kb-diagrams"; cp assets/kb-diagrams/*.svg "$WWW/assets/kb-diagrams/" 2>/dev/null || true; fi
 # The MaiK AI mark (maik-ai-mark.js injects it as a sprite for every "Ask MaiK" icon): one SVG, replaceable in place.
 [ -f assets/maik-ai-mark.svg ] && mkdir -p "$WWW/assets" && cp assets/maik-ai-mark.svg "$WWW/assets/"
+# ONCQIS brand: the vector mark (light + dark variants) that onco-home.js shows in its header, plus the
+# transparent PNG lockup and a 1024px raster mark for anywhere an <img> needs a bitmap.
+mkdir -p "$WWW/assets" && cp assets/oncqis-* "$WWW/assets/" 2>/dev/null || true
 # MaiK logo (circle), the icon on every Ask MaiK entry: maik-ai-mark.js renders it at 128/256/512 px.
 mkdir -p "$WWW/assets" && cp assets/maik-logo-*.webp "$WWW/assets/" 2>/dev/null || true
 # Knowledge Base real clinical images (authentic X-rays, CTs, ECGs, photographs under assets/kb-real-images/)
@@ -313,6 +316,9 @@ if [ -f prep/taxonomy.json ]; then
   [ -f prep/bank/overlay-counts.json ] && mkdir -p "$WWW/prep/bank" && cp prep/bank/overlay-counts.json "$WWW/prep/bank/"
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
+  # Image learning manifests (prep-imglearn.js Eye and PSM atlases; prep-play.js spot diagnosis): read from the bundle at
+  # prep/imglearn/*.json, the images themselves from R2 through /api/prep/bank/img/. Without these the atlases are empty.
+  [ -d prep/imglearn ] && mkdir -p "$WWW/prep/imglearn" && cp prep/imglearn/*.json "$WWW/prep/imglearn/"
   if [ -f prep/lessons/v1/index.json ]; then
     mkdir -p "$WWW/prep/lessons/v1" && cp prep/lessons/v1/*.json "$WWW/prep/lessons/v1/"
     [ -d prep/lessons/media ] && mkdir -p "$WWW/prep/lessons/media" && cp prep/lessons/media/* "$WWW/prep/lessons/media/"

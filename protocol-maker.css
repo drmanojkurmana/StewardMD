@@ -6,12 +6,12 @@
   font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--mkp-ink);
 }
 body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mkp-ink: #eceef2; --mkp-muted: #9aa0ab; --mkp-line: #2a2d34; --mkp-bg: #0e0f12; --mkp-card: #16181d; --mkp-primary: #4fd1c5; }
-.mkp-overlay .material-symbols-outlined { font-family: 'Material Symbols Outlined'; line-height: 1; vertical-align: middle; }
+.mkp-overlay .material-symbols-outlined { font-family: 'Material Symbols Rounded', 'Material Symbols Outlined'; font-size: 20px; line-height: 1; vertical-align: middle; }
 .mkp-wrap { display: flex; flex-direction: column; height: 100%; }
 .mkp-overlay * { box-sizing: border-box; }
 
 .mkp-header { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 12px; padding-top: calc(env(safe-area-inset-top, 0px) + 10px); background: var(--mkp-card); border-bottom: 1px solid var(--mkp-line); }
-.mkp-hbtn { width: 40px; height: 40px; display: grid; place-items: center; border: none; background: transparent; color: var(--mkp-ink); cursor: pointer; border-radius: 10px; }
+.mkp-hbtn { width: 44px; height: 44px; display: grid; place-items: center; border: none; background: transparent; color: var(--mkp-ink); cursor: pointer; border-radius: 10px; }
 .mkp-hbtn:active { background: color-mix(in srgb, var(--mkp-ink) 8%, transparent); }
 .mkp-htitle { flex: 1; display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
 .mkp-hkicker { font: 700 10px system-ui; letter-spacing: .08em; text-transform: uppercase; color: var(--mkp-primary); }
@@ -61,3 +61,5 @@ body.dark .mkp-overlay, body.v3-dark .mkp-overlay, html.dark .mkp-overlay { --mk
 .mkp-btn:active { transform: scale(.99); }
 
 @media (max-width: 520px) { .mkp-drug { grid-template-columns: minmax(0,1fr); } }
+/* header close/back/add read as 12px glyphs once the icon font applied; give them the app's 24px header size */
+.mkp-hbtn .material-symbols-outlined { font-size: 24px; }

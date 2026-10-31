@@ -907,6 +907,20 @@
       departments: dp.departments, departmentRequired: dp.required,
       /* One patient lookup for every carrier (QR, Ni-Key, barcode, typed): the server's, so a patient registered on another device is found. */
       resolve: function (id) { return apiGet("/patient/resolve?orgId=" + encodeURIComponent(st.orgId || st.hospital || "") + "&id=" + encodeURIComponent(id)); },
+      /* Find an existing patient by name, phone, MRN or StewardID (server: GET /patient/search). */
+      search: function (term) { return apiGet("/patient/search?orgId=" + encodeURIComponent(st.orgId || st.hospital || "") + "&q=" + encodeURIComponent(term)); },
+      /* A found patient goes straight into today's queue as a follow-up with their own MR number: nothing is registered twice. */
+      useExisting: function (p, extra) {
+        var sid2 = st.session && st.session.id;
+        if (!sid2) return Promise.resolve({ ok: false, message: "Reopen OPD Queue to add them to today's list." });
+        return act(sid2, "/ticket", {
+          name: p.name, mrn: p.mrn, mobile: p.mobile, visitType: "followup", priority: 0,
+          departmentId: (extra && extra.departmentId) || ""
+        }).then(function (q) {
+          if (q && q.ok) { queuedSay({ mrn: p.mrn, patient: p }, q); return { ok: true }; }
+          return { ok: false, message: (q && (q.message || q.error)) || "Could not add the patient to the queue." };
+        }, function () { return { ok: false, message: "Could not add the patient to the queue. Check your connection and try again." }; });
+      },
       submit: function (body) {
         body.orgId = st.orgId || st.hospital || "";
         body.workplaceMode = mode;

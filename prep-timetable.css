@@ -1,0 +1,43 @@
+/* PrepNucleus revision timetable (prep-timetable.js). Theme tokens only, so body.dark follows prep.css. */
+.pn-root .tt-line { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: -4px 0 6px; color: var(--pn-pri-ink); font-weight: 600; text-align: left; }
+.pn-root .tt-edit, .pn-root .tt-view { display: flex; flex-direction: column; gap: 12px; }
+.pn-root .tt-edit .pn-panel { display: flex; flex-direction: column; gap: 10px; }
+.pn-root .tt-dates { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.pn-root .tt-dates label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: var(--pn-mut); }
+.pn-root .tt-dates .pn-in { padding: 0 12px; }
+.pn-root .tt-wd .pn-chip { min-width: 52px; min-height: 44px; justify-content: center; }
+.pn-root .tt-list, .pn-root .tt-blocks, .pn-root .tt-week { list-style: none; margin: 0; padding: 0; }
+.pn-root .tt-list { display: flex; flex-direction: column; gap: 6px; }
+.pn-root .tt-sr { display: flex; align-items: center; gap: 4px; padding: 6px 4px 6px 12px; border-radius: var(--pn-r-md); background: var(--pn-s1); }
+.pn-root .tt-sn, .pn-root .tt-bn { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pn-root .tt-sn b, .pn-root .tt-bn b { color: var(--pn-text); overflow-wrap: anywhere; }
+.pn-root .tt-sn small, .pn-root .tt-bn small { color: var(--pn-mut); font-size: 13px; }
+.pn-root .tt-sr .pn-ib[disabled] { opacity: .35; }
+.pn-root .tt-warn { margin: 0; padding: 10px 12px; border-radius: var(--pn-r-md); background: var(--pn-bad-bg); color: var(--pn-bad); font-weight: 600; }
+.pn-root .tt-off { align-self: center; min-height: 44px; color: var(--pn-bad); }
+
+.pn-root .tt-today { display: flex; flex-direction: column; gap: 10px; }
+.pn-root .tt-today .pn-eb { margin: 0; }
+.pn-root .tt-now { margin: 0; display: flex; flex-direction: column; gap: 2px; }
+.pn-root .tt-now b { font: 700 24px/1.2 var(--pn-disp); color: var(--pn-text); }
+.pn-root .tt-now small { color: var(--pn-mut); font-size: 14px; }
+.pn-root .tt-lag { display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--pn-bad-line); }
+.pn-root .tt-lag p { margin: 0; }
+.pn-root .tt-week { display: flex; flex-direction: column; border-radius: var(--pn-r-md); background: var(--pn-card); border: 1px solid var(--pn-edge); overflow: hidden; }
+.pn-root .tt-week li { display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 8px 14px; }
+.pn-root .tt-week li + li { border-top: 1px solid var(--pn-edge); }
+.pn-root .tt-week li span { flex: 0 0 4.2em; font-size: 14px; color: var(--pn-mut); font-weight: 600; }
+.pn-root .tt-week li b { flex: 1 1 auto; min-width: 0; font-size: 15px; color: var(--pn-text); overflow-wrap: anywhere; }
+.pn-root .tt-week li.now { background: var(--pn-pri-soft); }
+.pn-root .tt-week li.now span, .pn-root .tt-week li.now b { color: var(--pn-pri-ink); }
+.pn-root .tt-week li.rest b { color: var(--pn-mut); font-weight: 500; }
+.pn-root .tt-blocks { display: flex; flex-direction: column; gap: 6px; }
+.pn-root .tt-b { display: flex; align-items: center; gap: 10px; min-height: 56px; padding: 8px 12px; border-radius: var(--pn-r-md); background: var(--pn-card); border: 1px solid var(--pn-edge); }
+.pn-root .tt-b.done { opacity: .7; }
+.pn-root .tt-b.done .tt-bn b { text-decoration: line-through; }
+.pn-root .tt-b.now { border-color: var(--pn-pri); }
+.pn-root .tt-b.late { border-color: var(--pn-bad-line); }
+.pn-root .tt-tag { flex: 0 0 auto; padding: 2px 8px; border-radius: var(--pn-r-pill); font-size: 12px; font-weight: 700; background: var(--pn-s1); color: var(--pn-mut); }
+.pn-root .tt-b.now .tt-tag { background: var(--pn-pri-soft); color: var(--pn-pri-ink); }
+.pn-root .tt-b.late .tt-tag { background: var(--pn-bad-bg); color: var(--pn-bad); }
+.pn-root .tt-b .pn-link { min-height: 44px; }

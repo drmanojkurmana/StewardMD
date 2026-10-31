@@ -1727,6 +1727,9 @@ body.dark .pn-root :is(.pn-next, .pn-qotd, .pn-subs > .pn-tile, .pl-upnext) { ba
 .pn-root .pn-img-credit-wrap { margin-top: 6px; margin-bottom: 8px; }
 .pn-root .pn-img-credit-chip { display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; padding: 4px 10px; background: var(--pn-s1); border-radius: var(--pn-r-sm); border: 1px solid var(--pn-edge); color: var(--pn-mut); cursor: pointer; }
 .pn-root .pn-img-credit-chip:hover { color: var(--pn-text); }
+/* Image credit footer: after the answer only, 10px */
+.pn-root .pn-img-credit-foot { margin: 10px 0 0; text-align: left; }
+.pn-root .pn-img-credit-foot button { background: none; border: 0; padding: 2px 0; font: inherit; font-size: 10px; line-height: 1.4; color: var(--pn-mut); cursor: pointer; text-align: left; }
 .pn-root .pn-credit-wrap { z-index: 100; }
 .pn-root .pn-credit-sheet { max-height: 80vh; overflow-y: auto; }
 .pn-root .pn-credit-body { display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.5; margin: 8px 0; }
@@ -2001,3 +2004,4 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pn-why-chip { transition: none; }
 }
+

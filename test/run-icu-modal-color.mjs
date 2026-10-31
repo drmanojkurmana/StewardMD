@@ -55,9 +55,11 @@ try {
 
   console.log("  buggy:", JSON.stringify(buggy), "\n  fixed:", JSON.stringify(fixed));
   // The bug: white text AND no gradient background (→ invisible on white).
-  ok(buggy.col === "rgb(255, 255, 255)" && !buggy.hasGradient, "reproduced bug: white label + no button background (invisible)");
+  // The button fill is solid since 2026-10-29 (no-slop: no gradient buttons); either a gradient or an opaque fill counts.
+  const filled = (r) => r.hasGradient || !/rgba\(\d+, \d+, \d+, 0\)|transparent/.test(r.bgc);
+  ok(buggy.col === "rgb(255, 255, 255)" && !filled(buggy), "reproduced bug: white label + no button background (invisible)");
   // The fix: theme vars resolve → teal gradient background renders (label now sits on teal, readable).
-  ok(fixed.hasGradient === true, "fix: button gets its teal gradient background (label visible on it)");
+  ok(filled(fixed), "fix: button gets its teal background (label visible on it)");
 
   console.log(`\n${fail === 0 ? "ALL GREEN — import chooser text is now visible" : fail + " FAILED"} — ${pass} passed, ${fail} failed`);
   if (fail) process.exitCode = 1;

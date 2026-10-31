@@ -166,3 +166,51 @@ CREATE TABLE IF NOT EXISTS prep_item_stats (
 );
 CREATE INDEX IF NOT EXISTS prep_item_stats_exam ON prep_item_stats (exam, n DESC);
 
+
+-- PrepNucleus test rank (migrations/0006_prep_rank.sql)
+CREATE TABLE IF NOT EXISTS prep_score_hist (
+  k TEXT NOT NULL,
+  bin INTEGER NOT NULL,
+  n INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (k, bin)
+);
+
+-- PrepNucleus play (migrations/0007_prep_play.sql)
+CREATE TABLE IF NOT EXISTS play_focus (
+  uidh TEXT PRIMARY KEY,
+  at INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS play_focus_at ON play_focus (at);
+CREATE TABLE IF NOT EXISTS play_spot (
+  day TEXT NOT NULL,
+  uidh TEXT NOT NULL,
+  ok INTEGER NOT NULL,
+  ms INTEGER NOT NULL,
+  at INTEGER NOT NULL,
+  PRIMARY KEY (day, uidh)
+);
+CREATE TABLE IF NOT EXISTS play_mn (
+  id TEXT PRIMARY KEY,
+  item TEXT NOT NULL,
+  uidh TEXT NOT NULL,
+  text TEXT NOT NULL,
+  up INTEGER NOT NULL DEFAULT 0,
+  rep INTEGER NOT NULL DEFAULT 0,
+  hidden INTEGER NOT NULL DEFAULT 0,
+  at INTEGER NOT NULL,
+  day TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS play_mn_item ON play_mn (item, hidden, up DESC);
+CREATE INDEX IF NOT EXISTS play_mn_uidh ON play_mn (uidh, day);
+CREATE TABLE IF NOT EXISTS play_mn_vote (
+  mn TEXT NOT NULL,
+  uidh TEXT NOT NULL,
+  up INTEGER NOT NULL,
+  PRIMARY KEY (mn, uidh)
+);
+CREATE TABLE IF NOT EXISTS play_mn_report (
+  mn TEXT NOT NULL,
+  uidh TEXT NOT NULL,
+  at INTEGER NOT NULL,
+  PRIMARY KEY (mn, uidh)
+);

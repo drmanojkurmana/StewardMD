@@ -104,29 +104,39 @@
    * makes the MB figure an ESTIMATE and the screen says so. If the plugin ever sends intermediate percentages (the
    * 1 to 69 band, 70 = file landed on iOS) the meter switches to those and drops the "about". No traffic is spent when
    * nobody is watching (the silent auto-update path passes no onProgress). */
-  function makeMeter(total) {
-    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [], t0 = Date.now(), samples = 0, err = "";
-    return {
+  function makeMeter(total, delta) {
+    var last = Date.now(), lastPush = 0, speed = 0, est = 0, exact = null, lastOk = Date.now(), hist = [], t0 = Date.now(), samples = 0, err = "", xb = 0, xt = Date.now();
+    var m = {
       sample: function (bytes, ms) {
         if (!(bytes > 0 && ms > 0)) return;
         var s = bytes * 1000 / ms; speed = speed ? speed * 0.6 + s * 0.4 : s; lastOk = Date.now(); samples++; err = "";
       },
       fail: function (code) { err = String(code || "failed").slice(0, 24); },
-      real: function (frac) { if (frac > 0 && frac < 1) exact = Math.max(exact || 0, frac); },
+      // frac is the fraction of the download that has landed. In delta mode it comes from the plugin's own per-file
+      // events, so the speed is derived from how fast that fraction moves (no probe traffic needed).
+      real: function (frac) {
+        if (!(frac >= 0 && frac < 1)) return;
+        var nb = frac * total, nt = Date.now();
+        if (exact != null && nb > xb && nt > xt) m.sample(nb - xb, nt - xt);
+        if (exact == null || nb > xb) { xb = nb; xt = nt; }
+        exact = Math.max(exact || 0, frac);
+      },
       read: function (now, phase) {
         var dt = Math.max(0, now - last); last = now;
         // "Waiting for the network" only after a measurement has worked and then stopped. A probe that never worked says
-        // nothing about the real download (which runs natively), so it must not claim the network is dead.
-        var stalled = phase === "download" && samples > 0 && now - lastOk > 20000;
+        // nothing about the real download (which runs natively), so it must not claim the network is dead. In delta mode
+        // events arrive per finished FILE, so one big file is a long, legitimate silence: never call that a stall.
+        var stalled = !delta && phase === "download" && samples > 0 && now - lastOk > 20000;
         if (phase === "download" && !stalled && exact == null && total) est = Math.min(total * 0.97, est + speed * dt / 1000);
         var bytes = phase !== "download" ? total : (exact != null ? exact * total : est);
         if (now - lastPush >= 1000) { lastPush = now; hist.push(stalled ? 0 : speed); if (hist.length > 90) hist.shift(); }
         var sp = stalled ? 0 : speed;
         return { bytes: bytes, total: total, pct: total ? Math.min(100, Math.round(bytes * 100 / total)) : 0, speed: sp,
           eta: sp > 0 && total ? Math.max(0, (total - bytes) / sp) : null, est: exact == null,
-          phase: stalled ? "waiting" : phase, history: hist.slice(), samples: samples, err: err, elapsed: Math.max(0, now - t0) };
+          phase: stalled ? "waiting" : phase, history: hist.slice(), samples: samples, err: err, elapsed: Math.max(0, now - t0), delta: !!delta };
       }
     };
+    return m;
   }
   function startProbe(url, total, meter, timeoutMs) {
     var alive = true, ctl = null, timer = null, chunk = 393216;
@@ -181,62 +191,119 @@
   // away via set() — the right choice for an explicit tap ("Update now" / "Download & install").
   // The silent auto-update path (see maybeAutoApply below) passes immediate:false (next()), so an
   // update queued in the background never yanks the screen out from under an open session.
+  /* DELTA FIRST (owner, 2026-10-27: "OTA never shows download status ... why is it 170 MB, it must only contain what is missing").
+   * A single-zip download is the WHOLE app every time and, on iOS, the plugin reports no bytes while it runs (CapgoUpdater.swift
+   * downloadZip: 0%, nothing, 70%). Manifest mode is the plugin's own delta path: for every file the plugin reuses the copy that
+   * shipped inside the app, or one from an earlier OTA bundle, when the sha256 matches, and downloads only the rest, reporting a
+   * real event as each file lands. So we hand it the file list (server /api/ota/check?files=1), ask which files are missing, and
+   * the card shows the size of THAT, not of the zip. Any failure on this path falls back to the zip, so it can only help. */
+  function isIOS() { try { return window.Capacitor && window.Capacitor.getPlatform && window.Capacitor.getPlatform() === "ios"; } catch (e) { return false; } }
+  function planDelta(p, pending) {
+    if (!p.getMissingBundleFiles || !pending.zipUrl) return Promise.resolve(null);
+    var origin = String(pending.zipUrl).replace(/\/api\/ota\/file\/[0-9a-fA-F]+.*$/, "");
+    return _truth.then(nativeBuild).then(function (build) {
+      return fetch(API_BASE + "/api/ota/check?version=" + myVersion() + "&nativeBuild=" + build + "&files=1", { cache: "no-store" });
+    }).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j || !j.ota || !j.files || !j.files.length || String(j.version) !== String(pending.version)) return null;
+      var size = {}, manifest = [];
+      j.files.forEach(function (f) { size[f.hash] = +f.size || 0; manifest.push({ file_name: f.path, file_hash: f.hash, download_url: origin + "/api/ota/file/" + f.hash }); });
+      return Promise.resolve(p.getMissingBundleFiles({ manifest: manifest })).then(function (m) {
+        var miss = (m && m.missing) || [], bytes = 0;
+        miss.forEach(function (e) { bytes += size[e.file_hash] || 0; });
+        return { manifest: manifest, files: manifest.length, missingN: miss.length, reused: manifest.length - miss.length, bytes: bytes };
+      });
+    }).then(null, function (e) { try { console.warn("[ota] delta plan failed:", e && e.message); } catch (x) {} return null; });
+  }
+
+  // install(pending, onProgress): downloads + applies. `immediate` (default true) reloads right
+  // away via set() — the right choice for an explicit tap ("Update now" / "Download & install").
+  // The silent auto-update path (see maybeAutoApply below) passes immediate:false (next()), so an
+  // update queued in the background never yanks the screen out from under an open session.
   function install(pending, onProgress, immediate) {
     var p = plugin();
     if (!p || !p.download || !pending || !pending.zipUrl) return Promise.resolve({ ok: false, error: "unavailable" });
-    var offDl = null, offFail = null, tick = null;
+    var offDl = null, tick = null;
     /* WHAT THE BAR CAN KNOW (owner, 2026-09-27: "progress didn't show 0 to 100 but restarted and
-     * updated"). Read from @capgo/capacitor-updater 8.51 CapgoUpdater.swift: for a single-zip bundle
-     * it emits 0% when the request opens, then NOTHING while the bytes transfer (the request is
-     * awaited with no byte callback), then 70% once the whole file has landed, then set() restarts
-     * the app. So a percentage sat at 0% for the entire ~50 MB download and then vanished.
-     *
-     * The honest display is the one we can back: the size, a running clock while the transfer is in
-     * flight, then Installing when the plugin reports the file complete, then Restarting. Callers get
-     * (percent, label); the label is what to show. */
-    var mb = pending.zipSize ? (Math.round(pending.zipSize / 104857.6) / 10) + " MB" : "";
-    var t0 = Date.now(), phase = "download", meter = onProgress ? makeMeter(pending.zipSize || 0) : null, stopProbe = null;
+     * updated"). Read from @capgo/capacitor-updater 8.5x: for a single-zip bundle iOS emits 0% when the
+     * request opens, then NOTHING while the bytes transfer, then 70% once the whole file has landed.
+     * (Android does report real zip percentages.) The delta path (planDelta) emits one event per finished
+     * file, mapped to 10..70 on iOS, so it gets a real bar. The zip path keeps the speed-probe estimate. */
+    var phase = "download", t0 = Date.now(), meter = null, stopProbe = null, plan = null, mode = "zip";
+    var ios = isIOS();
+    function mbOf(n) { return n ? (Math.round(n / 104857.6) / 10) + " MB" : ""; }
     function say(pct) {
       if (!onProgress) return;
-      var secs = Math.round((Date.now() - t0) / 1000);
+      var secs = Math.round((Date.now() - t0) / 1000), mb = mbOf(mode === "delta" ? plan.bytes : pending.zipSize);
       var label = phase === "download" ? "Downloading update" + (mb ? " (" + mb + ")" : "") + "\u2026 " + secs + "s"
         : phase === "install" ? "Installing\u2026"
         : "Restarting to finish\u2026";
-      try { onProgress(pct, label, meter ? meter.read(Date.now(), phase) : null); } catch (e) {}
+      var info = null;
+      if (meter) { info = meter.read(Date.now(), phase); if (mode === "delta") { info.full = pending.zipSize || 0; info.files = plan.missingN; info.reused = plan.reused; } }
+      try { onProgress(pct, label, info); } catch (e) {}
     }
-    function cleanup() { try { if (stopProbe) stopProbe(); } catch (e) {} try { if (tick) clearInterval(tick); } catch (e) {} try { if (offDl && offDl.remove) offDl.remove(); } catch (e) {} try { if (offFail && offFail.remove) offFail.remove(); } catch (e) {} }
-    try {
-      if (onProgress && p.addListener) {
-        p.addListener("download", function (ev) {
-          var pct = Math.round((ev && ev.percent) || 0);
-          if (meter && pct > 0 && pct < 70) meter.real(pct / 70);   // intermediate percentages (if the plugin ever sends them) beat the estimate
-          if (pct >= 70 && phase === "download") { phase = "install"; try { if (stopProbe) { stopProbe(); stopProbe = null; } } catch (e) {} }   // the file is down; unzip + verify
-          say(pct);
-        }).then(function (h) { offDl = h; });
+    function useZip() {
+      mode = "zip"; plan = null;
+      meter = onProgress ? makeMeter(pending.zipSize || 0, false) : null;
+      if (onProgress && meter && pending.zipSize) stopProbe = startProbe(pending.zipUrl, pending.zipSize, meter);
+    }
+    function cleanup() { try { if (stopProbe) stopProbe(); } catch (e) {} stopProbe = null; try { if (tick) clearInterval(tick); } catch (e) {} try { if (offDl && offDl.remove) offDl.remove(); } catch (e) {} }
+    function onEvent(ev) {
+      var pct = Math.round((ev && ev.percent) || 0);
+      if (mode === "delta") {
+        // iOS: 10..70 over ALL manifest files (reused ones count). Android: percent of files, 10..70 clamp, so 70 can
+        // arrive early and means nothing; there only the download() promise ends the phase.
+        var done = ios ? (pct - 10) / 60 : pct / 100;
+        if (meter && plan && pct > 0 && pct < 70 && plan.missingN > 0) meter.real(Math.max(0, done * plan.files - plan.reused) / plan.missingN);
+        if (ios && pct >= 70 && phase === "download") phase = "install";
+      } else {
+        if (meter && pct > 0 && pct < 70) meter.real(pct / 70);   // Android zip: real percentages; iOS zip: none until 70
+        if (pct >= 70 && phase === "download") { phase = "install"; try { if (stopProbe) { stopProbe(); stopProbe = null; } } catch (e) {} }   // the file is down; unzip + verify
       }
-      if (onProgress) { say(0); tick = setInterval(function () { if (phase === "download") say(0); }, 1000); if (meter && pending.zipSize) stopProbe = startProbe(pending.zipUrl, pending.zipSize, meter); }
-    } catch (e) {}
+      say(pct);
+    }
     // One automatic retry on a transport-class download failure. The plugin verifies the
     // sha256 NATIVELY after fetching, so a connection that drops mid-file surfaces as
     // "Checksum failed", not as a network error — retrying network-only would miss the most
     // common ward-connection failure. The GET is idempotent with the checksum verified on
     // every attempt, so one retry is safe; storage and auth failures still fail fast.
     function tryDownload(retriesLeft) {
-      return p.download({ url: pending.zipUrl, version: String(pending.version), checksum: pending.zipHash || undefined })
-        .then(null, function (e) {
-          var code = otaCode(e, "download-failed");
-          if (retriesLeft > 0 && (code === "network" || code === "checksum")) return tryDownload(retriesLeft - 1);
-          throw e;
-        });
+      var args = { url: pending.zipUrl, version: String(pending.version) };
+      if (mode === "delta") args.manifest = plan.manifest; else args.checksum = pending.zipHash || undefined;
+      return p.download(args).then(null, function (e) {
+        var code = otaCode(e, "download-failed");
+        if (retriesLeft > 0 && (code === "network" || code === "checksum")) return tryDownload(retriesLeft - 1);
+        throw e;
+      });
     }
-    return tryDownload(1)
-      .then(function (bundle) {
+    function download() {
+      // The plugin already retries each file inside a delta download, so a delta failure goes straight to the zip fallback
+      // (a second delta attempt here doubled the wait before the fallback even started).
+      return tryDownload(mode === "delta" ? 0 : 1).then(null, function (e) {
+        if (mode !== "delta") throw e;
+        // The delta path failed (a file 404, a hash mismatch, a dropped link). The zip is the proven path: use it.
+        try { console.warn("[ota] delta download failed, falling back to the zip:", e && e.message); } catch (x) {}
+        phase = "download"; t0 = Date.now(); useZip(); say(0);
+        return tryDownload(1);
+      });
+    }
+    try {
+      if (onProgress && p.addListener) p.addListener("download", onEvent).then(function (h) { offDl = h; });
+    } catch (e) {}
+    return planDelta(p, pending).then(function (pl) {
+      if (pl && pl.missingN < pl.files) {   // some files reusable: the delta path is a real saving
+        plan = pl; mode = "delta";
+        meter = onProgress ? makeMeter(plan.bytes, true) : null;
+        if (meter) meter.real(0.0001);   // exact mode from the first frame: a real 0%, not the estimate's "measuring"
+      } else useZip();
+      if (onProgress) { say(0); tick = setInterval(function () { if (phase === "download") say(0); }, 1000); }
+      return download();
+    }).then(function (bundle) {
         phase = "restart"; say(100);
         cleanup();
         var applied = (immediate === false) ? p.next({ id: bundle.id }) : p.set({ id: bundle.id });
         return applied.then(function () {
           setMyVersion(pending.version);
-          return { ok: true, immediate: immediate !== false };
+          return { ok: true, immediate: immediate !== false, delta: mode === "delta" };
         }, function (e) { return { ok: false, error: otaCode(e, "apply-failed") }; });
       }, function (e) {
         cleanup();
@@ -302,7 +369,14 @@
           ph.textContent = "Downloading update"; q(".otp-mb").textContent = fmtMB(info.total) + " MB";
           q(".otp-sp").textContent = info.elapsed > 4000 ? "speed not available · " + Math.round(info.elapsed / 1000) + " s elapsed" + (info.err ? " (" + info.err + ")" : "") : "measuring your connection…";
         }
-        else { ph.textContent = "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta); }
+        else {
+          ph.textContent = info.delta ? "Downloading changes" : "Downloading update"; q(".otp-mb").textContent = (info.est ? "about " : "") + fmtMB(info.bytes) + " of " + fmtMB(info.total) + " MB"; q(".otp-sp").textContent = (info.speed ? fmtSpeed(info.speed) + " · " : "") + fmtEta(info.eta);
+          // Delta install: say plainly that this is only what changed, and how it compares with the whole app.
+          var nt = q(".otp-note");
+          if (nt && info.delta && !nt.getAttribute("data-d")) { nt.setAttribute("data-d", "1"); nt.setAttribute("data-o", nt.textContent); nt.textContent = "Only what changed since your version is downloaded: " + info.files + " file" + (info.files === 1 ? "" : "s") + ", " + fmtMB(info.total) + " MB instead of the full " + fmtMB(info.full) + " MB. Keep the app open."; }
+          // Fell back to the whole zip: the "only what changed" note is no longer true, so put the original note back.
+          else if (nt && !info.delta && nt.getAttribute("data-d")) { nt.textContent = nt.getAttribute("data-o") || ""; nt.removeAttribute("data-d"); nt.removeAttribute("data-o"); }
+        }
         q(".otp-pc").textContent = noSample ? "" : info.pct + "%";
         bar.classList.toggle("wait", info.phase === "waiting");
         bar.classList.toggle("ind", !!noSample);
@@ -422,10 +496,16 @@
      * If it is not available, fall through and behave exactly as before rather than suppressing an
      * update notice forever. Re-checked on a timer, so the banner appears as soon as home is up. */
     try {
-      if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) {
+      /* SMD_PROMPT (home.js) also makes it wait its turn behind the notification and offline-download
+       * asks and the calm period after Home appears, so nothing lands stacked on the doctor. */
+      var wait = function () {
+        if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) return true;
+        return !!(window.SMD_PROMPT && !window.SMD_PROMPT.try("ota", "notice"));
+      };
+      if (wait()) {
         if (!_bannerWait) {
           _bannerWait = setInterval(function () {
-            if (typeof window.SMD_PROMPT_OK === "function" && !window.SMD_PROMPT_OK()) return;
+            if (wait()) return;
             try { clearInterval(_bannerWait); } catch (e2) {}
             _bannerWait = null;
             showBanner(_bannerPending);
@@ -466,7 +546,7 @@
     }
     requestAnimationFrame(function () { _bannerEl.classList.add("on"); });
   }
-  function hideBanner() { if (_bannerEl) _bannerEl.classList.remove("on"); _bannerPending = null; }
+  function hideBanner() { if (_bannerEl) _bannerEl.classList.remove("on"); _bannerPending = null; try { if (window.SMD_PROMPT) window.SMD_PROMPT.done("ota"); } catch (e) {} }
 
   // Silent auto-update: only when the user opted in via SMD_OTA.setAuto(true). Downloads in the
   // background and queues with next() (never set()) — the update lands on a FUTURE natural

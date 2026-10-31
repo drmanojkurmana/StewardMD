@@ -995,3 +995,9 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
     gap: 10px;
   }
 }
+/* Native feel: the queue never pans sideways or rubber-bands to the page behind it. Wide strips keep
+   their own horizontal scroll inside their box. */
+#smdQueue, #smdQueue .q-app, #smdQueue .q-main { overflow-x: hidden; overscroll-behavior: none; }
+#smdQueue .q-canvas { overflow-x: hidden; overscroll-behavior: contain; touch-action: pan-y; }
+#smdQueue .q-canvas > * { min-width: 0; max-width: 100%; }
+#smdQueue .q-pulse-row, #smdQueue .q-fd .q-pulse-row { touch-action: pan-x pan-y; overscroll-behavior-x: contain; }

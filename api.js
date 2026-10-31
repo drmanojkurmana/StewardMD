@@ -141,11 +141,8 @@
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
-        // BUG (2026-08-22, WhatsApp report): this button always fully exits the Drugs Database
-        // (back to wherever it was opened from, usually Home) - a doctor reading it as an "X"
-        // expected it to just dismiss the current drug page and return to the list, which "‹ Back"
-        // already does. A home icon states what it actually does instead of implying "close this".
-        '<button class="db-close" id="dbClose" aria-label="Close and return home">' + dbIco("home") + '</button>' +
+        // The home button was removed (owner 2026-10-28). "‹ Back" steps back; the app's own
+        // back gesture and tab bar leave the database.
       '</div>' +
       '<div class="db-body" id="dbBody"></div>' +
       '<div class="db-scrim" id="dbScrim"></div>' +
@@ -154,7 +151,6 @@
         '<div class="db-dwbody" id="dbDwBody"></div>' +
       '</aside>';
     document.body.appendChild(root);
-    root.querySelector("#dbClose").addEventListener("click", close);
     root.querySelector("#dbBrandBtn").addEventListener("click", openDrawer);
     root.querySelector("#dbDwx").addEventListener("click", closeDrawer);
     root.querySelector("#dbScrim").addEventListener("click", closeDrawer);
@@ -1267,7 +1263,17 @@
       ".db-overlay.db-sheet{border-radius:20px 20px 0 0}",
       ".db-overlay.db-sheet .db-top{flex-wrap:wrap}",
       ".db-grab{flex:1 1 100%;display:grid;place-items:center;padding:2px 0 6px;cursor:grab;touch-action:none}",
-      ".db-grab i{width:40px;height:5px;border-radius:3px;background:#c7c7cc;display:block}",
+      // Owner 2026-10-30: no grey pill. The strip stays as an invisible drag handle; the title is centred on the screen,
+      // not in what is left after the Back button; the A-Z chip grid is hidden (the right-edge letter strip does that job).
+      // The chips stay in the page, clipped, because az-scrubber.js presses THEM.
+      ".db-grab i{display:none}",
+      ".db-grab{flex:0 0 100%;height:12px;padding:0}",
+      ".db-overlay.db-sheet .db-top{display:grid;grid-template-columns:1fr auto 1fr;flex-wrap:nowrap}",
+      ".db-overlay.db-sheet .db-top .db-grab{grid-column:1/-1}",
+      ".db-overlay.db-sheet .db-top .db-back{justify-self:start}",
+      ".db-overlay.db-sheet .db-top .db-title{grid-column:2;text-align:center;min-width:0;max-width:62vw}",
+      ".db-overlay.db-sheet .db-top .db-brandbtn{grid-column:3;justify-self:end}",
+      ".db-overlay .db-az{height:0;margin:0;padding:0;overflow:hidden;pointer-events:none}",   // keeps its full width: az-scrubber.js shows its strip only when this row reaches the right edge
       ".db-overlay.db-sheet{transition:transform 180ms ease-out}",
       "@media(prefers-reduced-motion:reduce){.db-overlay.db-sheet{transition:none}}",
       ".db-brand-price{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:999px;padding:4px 11px;font-size:13px}",

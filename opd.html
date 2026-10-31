@@ -363,10 +363,10 @@
 <script src="/opd-offline-desk.js?v=3" defer></script>
 <script src="/opd-live.js?v=1" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
-<script src="/patient-register.js?v=preg7-sid1-sid1-off2" defer></script>
+<script src="/patient-register.js?v=preg8-sid1-sid1-off2-nfcios1" defer></script>
 <script src="/pglog-qr.js?v=pgqr1"></script>
 <script src="/barcode128.js?v=bc128-1"></script>
-<script src="/smd-nfc.js?v=nfc-2"></script>
+<script src="/smd-nfc.js?v=nfc3-ios1"></script>
 <script src="/steward-identity-resolver.js?v=sir-1-sid1-phi1"></script>
 <script src="/smd-identity-scanner.js?v=sis-1"></script>
 </head>
@@ -1377,7 +1377,12 @@
               if(inputN && !inputN.value) inputN.value = uhid;
               toast("Ni-Key Tag read: " + uhid);
             }
-          }).catch(function(e){
+          }, { userInitiated: true, onEnd: function(info){
+            // iPhone: the system NFC sheet closed with no tag (Cancel, timeout or a tag error).
+            scanBtn.disabled=false;
+            scanBtn.textContent="📱 Ni-Key: Read NFC Tag from File";
+            if(info && info.reason !== "cancelled" && info.message) toast("Ni-Key NFC read error: " + info.message);
+          } }).catch(function(e){
             scanBtn.disabled=false;
             scanBtn.textContent="\uD83D\uDCF1 Ni-Key: Read NFC Tag from File";
             var msg = (e && e.message) ? e.message : String(e || "");

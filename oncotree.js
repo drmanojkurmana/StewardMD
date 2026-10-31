@@ -653,12 +653,11 @@
 
     return '<div class="ot-picker">' +
       '<div class="ot-picker-hd">' +
-        '<div class="ot-picker-topline">' +
-          '<div class="ot-picker-badge">' + ms("verified") + '<span>NCCN GUIDELINES HARMONIZED · V2026</span></div>' +
-          '<button type="button" class="ot-calc-pill" data-ot-act="open-calvert-calc">' + ms("calculate") + '<span>Creatinine &amp; Calvert</span></button>' +
-        '</div>' +
+        // The two capsules that sat above the title (an all-caps "harmonized" badge and a Calvert pill
+        // that repeated the header's calculator button) are gone; the source line is plain text.
         '<h1 class="ot-picker-h">Oncology Navigator</h1>' +
         '<p class="ot-picker-sub">Evidence-based clinical decision algorithms, biomarker stratifications, and standardized treatment protocols.</p>' +
+        '<p class="ot-picker-src">' + ms("verified") + '<span>Harmonized with NCCN guidelines, v2026</span></p>' +
       '</div>' +
       '<div class="ot-picker-controls">' +
         '<div class="ot-search-box">' +
@@ -670,8 +669,8 @@
           '<button class="ot-tab-chip' + (curCat === "all" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="all">All <span class="ot-chip-num">' + counts.all + '</span></button>' +
           '<button class="ot-tab-chip' + (curCat === "common" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="common">Common <span class="ot-chip-num">' + counts.common + '</span></button>' +
           '<button class="ot-tab-chip' + (curCat === "solid" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="solid">Solid <span class="ot-chip-num">' + counts.solid + '</span></button>' +
-          '<button class="ot-tab-chip' + (curCat === "heme" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="heme">Hematologic <span class="ot-chip-num">' + counts.heme + '</span></button>' +
-          '<button class="ot-tab-chip' + (curCat === "peds" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="peds">Pediatric <span class="ot-chip-num">' + counts.peds + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "heme" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="heme">Heme <span class="ot-chip-num">' + counts.heme + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "peds" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="peds">Peds <span class="ot-chip-num">' + counts.peds + '</span></button>' +
         '</div>' +
       '</div>' +
       '<div class="ot-disease-list" id="otDiseaseList">' +
@@ -1539,9 +1538,10 @@
       '<div class="ot-calc-desc">Bedside Cockcroft-Gault CrCl &amp; Calvert Carboplatin dosing engine with ASCO/FDA/NCCN safety caps.</div>' +
       ((G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) || (G.GHIS && G.GHIS.pickPatient) ? (
         '<div class="ot-calc-sync-row">' +
-          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + ' Pick patient from WardSynQ &amp; fetch labs</button>' +
-          '<div class="ot-calc-patient" data-ot-calc-patient style="font:600 12px system-ui;color:#607D8B;margin-top:6px">' + esc(p.name ? (p.name + (p.patientId ? " · MR " + p.patientId : "")) : "No patient picked yet. Values below are editable defaults.") + '</div>' +
-        '</div>'
+          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + '<span>Pick patient from WardSynQ &amp; fetch labs</span></button>' +
+          '<div class="ot-calc-patient" data-ot-calc-patient>' + esc(p.name ? (p.name + (p.patientId ? " · MR " + p.patientId : "")) : "No patient picked yet. Values below are editable defaults.") + '</div>' +
+        '</div>'   // patient note. NB .ot-calc-sync-row is closed by a later </div> in this template, so the fields
+                   // below sit inside it; oncotree.css makes the row a block so they lay out full width.
       ) : '') +
       '<div class="ot-calc-grid">' +
         '<div class="ot-calc-f">' +
@@ -1666,7 +1666,7 @@
   // ---- shell + paint -----------------------------------------------------------------------------
   function shellHtml() {
     var hasGraph = !!st.graph;
-    var title = hasGraph ? (st.graph.title || "ONCOTREE") : "Oncology Navigator";
+    var title = hasGraph ? (st.graph.title || "ONCOTREE") : "OncoTree";
     var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
       '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" data-ot-act="view-navigator">' + ms("account_tree") + "Navigator</button>" +
       '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("format_list_bulleted") + "Step Flow</button>" +
@@ -1675,7 +1675,7 @@
       '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
     var kicker = hasGraph
       ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
-      : '<span class="ot-hkicker">STEWARDMD ONCOLOGY</span>';
+      : "";   // the picker page already titles itself; no all-caps eyebrow above the header name
     var rightBtn = '<div class="ot-h-actions">' +
       '<button type="button" class="ot-hbtn ot-hbtn-stg" data-ot-act="open-staging" aria-label="TNM Cancer Staging" title="TNM Cancer Staging">' + ms("stairs") + '</button>' +
       '<button type="button" class="ot-hbtn ot-hbtn-calc" data-ot-act="open-calvert-calc" aria-label="Creatinine & Calvert Calculator" title="Creatinine & Calvert Calculator">' + ms("calculate") + '</button>' +

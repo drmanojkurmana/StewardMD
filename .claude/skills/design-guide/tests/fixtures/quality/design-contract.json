@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "1.0",
+  "contractStatus": "approved",
+  "productRole": "Browser quality fixture",
+  "audience": "design-guide maintainers",
+  "primaryFlow": ["open fixture", "inspect state", "continue with keyboard"],
+  "breakpoints": [390, 1024, 1440],
+  "requiredStates": ["loading", "empty", "error", "success"],
+  "flows": [
+    {
+      "id": "loading-state",
+      "coversStates": ["loading"],
+      "start": "/?state=loading",
+      "steps": [{"action": "expect-text", "selector": "#state-title", "value": "Loading"}]
+    },
+    {
+      "id": "empty-state",
+      "coversStates": ["empty"],
+      "start": "/?state=empty",
+      "steps": [{"action": "expect-text", "selector": "#state-title", "value": "No results"}]
+    },
+    {
+      "id": "error-state",
+      "coversStates": ["error"],
+      "start": "/?state=error",
+      "steps": [{"action": "expect-text", "selector": "#state-title", "value": "Unable to load"}]
+    },
+    {
+      "id": "success-keyboard",
+      "coversStates": ["success"],
+      "start": "/?state=success",
+      "steps": [
+        {"action": "expect-text", "selector": "#state-title", "value": "Ready"},
+        {"action": "press", "selector": "body", "value": "Tab"},
+        {"action": "expect-visible", "selector": "button:focus"},
+        {"action": "screenshot", "name": "focused-state"}
+      ]
+    }
+  ],
+  "designSystem": {
+    "color": "neutral with blue focus",
+    "typography": "system UI",
+    "spacing": "8px base",
+    "radius": "square",
+    "motion": "reduced-motion safe"
+  },
+  "accessibility": {
+    "maxAxeViolations": 0,
+    "keyboardComplete": true,
+    "requireAccessibleNames": true,
+    "reducedMotion": true
+  },
+  "performance": {
+    "maxLoadMs": 3000,
+    "maxTransferBytes": 100000,
+    "maxRequests": 5,
+    "maxConsoleErrors": 0,
+    "maxVisualDiffRatio": 0.01,
+    "minLighthouseScore": 0.8
+  },
+  "dataContracts": [],
+  "visualBaselines": {},
+  "approval": {
+    "direction": "Minimal semantic fixture",
+    "artifacts": ["tests/fixtures/quality/review-artifact.html"],
+    "tradeoffs": ["Fixture tests the verification pipeline rather than product styling"]
+  }
+}

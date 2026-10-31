@@ -1762,3 +1762,105 @@ numbers or R-L letters. Book credit kept; the book figures are never called "ori
 - `hemodialysis-simple` (tools/figures/scenes/dialysis-bench.mjs): the first, flat bench layout of the same figure, reached by the "Show simple bench view" button on the unit page (and back). Not in the registry; the button carries the Without/With setting and blood flow across via `?d=&l=`. Both generators share `dialysis.page.js` and `dialysis.css`.
 - Cell-scene figures on the shared framework (`bio-scene.mjs`, `bio.lib.js`, `bio-scene.css`; each scene is `<name>.mjs` + `<name>.page.js`, run with ANIMA_DIR set): `sepsis-pathogenesis`, `airway-inflammation`, `graft-rejection`. Each has a model (`modelOf`, asserted by TESTS), a level slider, a treatment select (Without = setting 0, With = last non-zero via data-without/data-with), gauges and hover text. Never put CSS `opacity` on a pooled particle class: it overrides the opacity attribute.
 - Pathophysiology scenes (same framework): `acs-myocardial-infarction`, `shock-types`, `heart-failure-pathophysiology`, `cardiac-conduction-ecg`, `coagulation-dic`, `hypersensitivity-types`, `tb-pathogenesis`, `hiv-pathogenesis`, `malaria-life-cycle`, `dka-pathophysiology`. Each has `<name>.reg.json` (the registry entry) beside its generator. Candidate topics still open, ranked by lessons mentioning them: nephron/AKI/nephrotic vs nephritic, respiratory V/Q and acid-base, portal hypertension, endocrine feedback axes (thyroid, adrenal), raised ICP, apoptosis and cell injury, leukocyte adhesion, pulmonary embolism, fluid and electrolyte (Na, K), calcium/PTH, pregnancy/labour, fetal circulation, glycolysis/TCA.
+- **MaiK modules run on Vertex (2026-10-28, owner: "use the existing MaiK AI").** `qgenConfig(env).provider`: `vertex` when `VERTEX_API_KEY` or `GCP_PROJECT` exists (default), `anthropic` when `PREP_QGEN_PROVIDER=anthropic` with the Claude key or when only that key exists. Vertex goes through the router's injected `callGemini` (`callVertex` in `functions/_prep-qgen.js` maps the Messages-shaped body, converts the JSON schema with `toGeminiSchema`, maps usage and finish reason). Models: gen `PREP_QGEN_MODEL` (default `ACCURATE_MODEL`), verify `PREP_QGEN_VERIFY_MODEL` (default `MODEL_HARD_DEFAULT`), costed from `_ai_usage` MODEL_RATES. Owner batch ops (`bsubmit`/`bpoll`) stay Claude-only and answer 503 `batch-provider` on Vertex. Caps, wallet, gates and verifier unchanged.
+
+## Import MCQs (2026-10-28, owner: no AI tokens)
+- **What:** `prep-import.js` (`window.PREP_IMPORT`, optional in `prep-loader.js` after `prep-qgen.js`, token prep89) turns questions that already exist into a module with no AI call. Two inputs: (1) JSON from the template (`PREP_IMPORT._pure.template()` / `.prompt()`: the user gives the prompt + PDF to ChatGPT or Gemini and pastes the JSON back; format `stewardmd-mcq-v1`, tolerant of code fences, a bare array, aliases, 5 options, "Option B", several pasted blocks); (2) a PDF in the INI-SS recall layout (`MCQ n:`, Question Stem, Options, Correct Answer, Why Correct, Why Other Options Are Wrong incl. "Options B, C, and D:"), parsed on the phone by `parsePdfLines`. Bad questions are skipped with a reason, never silently.
+- **Student:** Menu and QBank rows "Import MCQs" (`g-imp`): a PRIVATE deck on the phone (manifest `source.type "import"`, `prov "hand"`, items `gen "hand"`, no `qg` block, no network). The deck screen shows "Imported module with N questions" (no 50 cap, no "make more").
+- **Owner:** Author > "Import MCQs (no AI)" (`g-imp-owner`) pushes the questions into `au.list` undecided (ids `imp_<sha12>`, no `qg`, review shows "Imported, not checked by MaiK"); Approve all, then the existing publish op (`mk-<sha12>` ids, 200 a call) puts them in chosen subject modules for every student.
+- **PDF reading gotcha:** the app's `PREP_SRC.readPdfPages` scrubs hyphens and brackets and drops pages it calls "garbled" (lost MCQ 1). Import reads `getTextContent()` directly (`hasEOL` = line end). Google Docs exports carry `( ) [ ] - : < > + ~` as private-use glyphs U+E081.. which `decodePua` maps (table aligned against poppler on the recall PDF; `>=`/`<=` are glyph pairs). Unknown glyphs are dropped and the screen says how many. If a PDF is not in the layout the screen says so and points to the JSON route.
+- **Verified:** the real 70-page recall PDF gives 68 questions in headless Chromium, identical (alphanumerics) to poppler text. Tests: `test/prep-import.test.mjs` (fixture `test/fixtures/import-recall-sample.txt`).
+- **Per-option reasons, topic explanation, publish fixes (2026-10-28, prep91):** `normQ` reads `topic_explanation` (aliases `topic_notes`, `notes`, `concept`, `background`; line breaks kept, 3,000 chars) and `toItems` stores it as `x { key: exp, others: {A..D wrong-option reasons}, notes }` (only when a topic explanation exists), so the answer screen shows "Why A is right", the key line, the topic notes below, and each wrong option's own reason (`r`). Template filler ("X is not the best answer because it does not match the defining feature...") is dropped and counted; the import summary says how many and how many questions still lack a reason for some wrong option. `prompt()` and `promptFor()` now require: the COMPLETE explanation (no shortened sentences; a JSON conversion of the NEET-SS recall PDF had cut 18 of 46), a specific reason for every wrong option ("Option B is wrong because ... It would be the answer if ..."), never a generic line, and a 3 to 6 sentence `topic_explanation`. **Publish** (`functions/api/ai/_prep-qgen.js`): `cleanItem` keeps `x`; imported items are stamped `gen "hand"` (no `pv`/`src.maik`) and are never labelled AI; publishing a question again REPLACES the live copy (it used to be skipped, so a corrected import never updated), `updated` is returned and the item moves to the new batch; new owner ops `plist` (every published question by subject and module, text cut to 160) and `pdelete` (`{ all: true }`, or `{ targets: [{ subject, module, all: true | ids: [...] }] }`; only `rec.a` is touched, content fixes in the same record stay; the module key is deleted when nothing is left). Author > "Published questions" (`g-pubs`, `openPubs` in `prep-qgen.js`): list by module, select any, "Delete selected", "Delete all in this module", "Delete everything published"; it reads the server list, so it works after a reload (the old "Take them down" only knew the last batch from this phone). Tests: `test/prep-qgen.test.mjs` (upsert, x, hand label, list, selective and total delete), `test/prep-import.test.mjs`, headless `test/run-prep-qgen-ui.mjs`.
+- **New module from Author publish (2026-10-28, prep93):** Publish has "Or create a new module in this subject" (title, 3 to 80 chars; `g-atnew`). `op publish` targets `{ subject, title }` (no `module`) create the module: id `au-<slug of the title>` (a clash with another subject adds `-<4 hex of the subject>`; the same title again reuses it), registered in KV `prep:newmods` `{ subject: [{ id, title, ts }] }`; the questions are the published ones in `prep:fixmod:<id>`. `GET /api/prep/fix?ix=1` now also returns `nm { subject: [{ id, title, n }] }` (only modules with live questions); `prep.js` `addedModules` (called from `loadIndexRaw`, 2 s race) pushes each as an index row `group "added", added: 1`, the subject screen lists them under "Added modules", and `loadModuleSingle` skips the missing bank file for them. A module with no published question left leaves the registry (`pruneNewMods` after unpublish and pdelete). Limits: 40 new modules a subject; the module list refreshes with the fix index (up to 30 min on a phone, 5 min on the server cache); added modules are not in taxonomy.json, so they have no cross-links, lessons or Nucleus360 link. Tests: `test/prep-qgen.test.mjs`, `test/run-prep-qgen-ui.mjs`, headless `test/run-prep-addmod-ui.mjs` (synthetic `test/fixtures/prep-addmod/fix.json`).
+- **NEET-SS group scope (2026-10-28, prep95):** `prep/ss-groups.json` kinds are `medical` (own + medical core + Biostatistics), `surgical`/`own` (own + Biostatistics) and the new `only` (own subjects only). `medical-oncology` and `critical-care` are `only` (see Decisions 2026-10-28), so the Medical Oncology group lists Medical Oncology alone; Respiratory and Radio-diagnosis are `own` (no medical core), the Medical group has no Medical Oncology, and INI-SS Medical Oncology gets General Medicine from `INI_PAIR` (`prep-plan.js`). Rebuild with `node tools/prep-ss-groups-build.mjs` (writes `prep-ss-groups.js`). Test: `test/prep-ss-groups.test.mjs`.
+- **Stage is not publish (2026-10-28, prep94):** Review has two routes: "Stage N for the Mac command (not live)" (`op stage`: saves the set to R2 for `tools/prep-qgen.mjs publish`, and REMOVES the approved questions from the Review list) and "Publish to all students" (live, no Mac). An owner staged 60 questions by mistake and thought they were live. The button now says "not live", the staged panel says "Staged, NOT live" and offers "Put these N back in Review" (`op stageget`, owner only, returns the staged items; they come back approved, so they can go live with Publish, existing or new module). Test: `test/prep-qgen.test.mjs`, `test/run-prep-qgen-ui.mjs`.
+- **NEET-SS Oncology recall module (2026-10-28):** the owner's recall PDF (Part I oncology 46, Part II general medicine and statistics 20; Part III is 15 fragments with no usable stem, Part IV an index) is published through Author > Import MCQs, not as a bank overlay (an `iniss2` overlay was built and removed: it needed an R2 upload from a Mac and phantom-counted 46 questions). Recall text never enters git (public repo, same rule as PYQ).
+- **Custom prompt (2026-10-28):** the Import screen builds the prompt from exam (7 profile ids), subject, topic, count (10 to 40) and difficulty (`promptFor`), with "Copy the prompt", "Open ChatGPT" (prefilled `?q=`), "Open Gemini" (prompt copied first) and Share. The prompt is written so any LLM answers at once with one code block of JSON (no questions back, no intro, no tools, a validity and answer-key self-check at the end, explanation rules: 2 to 4 sentences with mechanism and take-home, `why_wrong` per option). The reply comes back pasted or as a .json/.txt file; the template carries `exam`, `subject`, `topic` so the module name defaults to the topic. The convert prompt (`prompt()`) uses the same reply rules for an existing PDF.
+
+## Study tools and revision timetable (2026-10-30, prep99)
+Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Decisions]] 2026-10-30.
+- **Files:** `prep-tools.js` + `prep-tools.css` (`window.PREP_TOOLS`, acts `x-*`, flag `smd_prep_tools`, default ON,
+  `?tools=0` off) and `prep-timetable.js` + `prep-timetable.css` (`window.PREP_TT`, acts `tt-*`, flag `smd_prep_tt`,
+  default ON, `?tt=0` off). Both optional in `prep-loader.js`; with either missing or off, every screen is as before.
+- **Cross out:** a toggle beside each option before the answer, in practice and timed tests (`r.strike`, run only).
+- **Notes:** pencil in the study bar (not in a timed test), note under the explanation; store `qn[id] = [s, m, text, ts,
+  stem]`. **My notebook** (home Practise and You): Notes and Marked in tests (`mk[id] = [s, m, ts, stem]`, written when a
+  timed test finishes with questions marked), Practise these reloads them from their module files. `qn`, `mk` and `tt`
+  sync through `prep-sync.js` (MAPS / SCALARS).
+- **How others answered:** `GET /api/prep/stats?pct=1&ids=` (public, 60 ids, cached 30 min) returns an item only with
+  `PCT_MIN_N` = 30 answers. Practice answers are POSTed (type `practice`, no id) only with `smd_prep_stats = "1"`, the
+  same opt-in as Tests 2; the switch is also in **Progress and data** (You). Nothing is estimated or seeded.
+- **Rank:** `functions/_prep-rank.js`, served by `/api/prep/stats` (`?rank=1`, POST `kind: "rank"`; one public door for the
+  security scan's allowlist), D1 `prep_score_hist` (k, bin = pct x 10, n); apply
+  `prep-arena-worker/migrations/0006_prep_rank.sql` first. Key `<profile>:<type>[:<paper>]`. Opted in: POST adds the
+  score; else GET reads. `rank`/`percentile` null under `MIN_N` = 20. Shown in the Tests 2 result's Analysis tab.
+- **Setup sheet filters:** New or repeat gains "With my note" and "Marked in tests" (hidden when the pool has none).
+- **Reset progress** (You > Progress and data): one subject (its cards, conf, mod, mt, coach, ky_q, ra) or every subject
+  (also streak days; test history only when ticked). Bookmarks, notes, decks, settings stay. Refused with sync on.
+  Limits (owner 2026-10-30): one reset in any 3 months and at most 3 in any 12 months (`resetQuota`, log `store.rsl`,
+  synced as a scalar). A subject reset counts; a reset that cleared nothing does not. Clearing the app's data also wipes
+  the log, but it wipes the progress with it.
+- **Timetable:** the student picks subjects and order, start, finish of first reading, rest weekdays. Days split by module
+  count (at least one), blocks stored in `tt.blocks` so they never shift; Mark done on today's subject re-plans from today;
+  Re-plan from today lays the unfinished subjects over the days left. Today's plan (`prep-plan.js makePlan`): a study day
+  takes new questions and the lesson from that subject (`fresh.tts`), a rest day plans reviews only (`planDay` `rest`), the
+  revision stretch plans like the last two weeks (`late`). Saving clears `s.pt` so the plan is remade.
+- **Tests:** `test/prep-study-tools.test.mjs` (pure + server) and `test/run-prep-tools-ui.mjs` (headless; SHOTS=<dir>).
+- **Gotcha:** `.pn-panel .pn-btn:not(.pri)` (prep.css) beats a plain `.pn-btn.x`; the red Reset button needs the panel and
+  sheet selectors too.
+
+## Play (2026-10-30, prep100)
+Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decision: [[decisions/Decisions]] 2026-10-30 Play.
+- **Files:** `prep-play.js` + `prep-play.css` (`window.PREP_PLAY`, acts `v-*`, flag `smd_prep_play` default ON, `?play=0` off;
+  optional in `prep-loader.js`). Server `functions/api/prep/play/[[path]].js` + `functions/_prep-play.js`, D1 tables in
+  `prep-arena-worker/migrations/0007_prep_play.sql` (apply before focus, spot board and mnemonics work). Squads live in
+  `functions/api/prep/social` + `prep-social.js`; revenge in `prep-arena.js`.
+- **Home Play section:** Swipe feed, Spot diagnosis of the day, Boss battles, Quick fire, Voice mode, Focus room, Wrapped,
+  Season (Arena on), Streak freezes.
+- **Swipe feed:** vertical scroll-snap cards from 4 random plan modules; a pearl after every 3rd question (only from a
+  question already passed), an image card (eye/PSM atlas) after every 5th. Answers record through `HOST.record`.
+- **Spot diagnosis:** pool = `prep/imglearn/eye.json` + `psm.json` (now copied by build-www; the Eye and PSM atlases were
+  empty in the app bundle before). Pick = hash of the IST day, so everyone gets the same image; right dx + 3 from its deck.
+  10 s. Store `spot`, `spoth[day]`; board POST/GET `play/spot` (Arena consent; right answers by ms).
+- **Boss battles:** per plan subject, 20 questions hard first (`bossPick`), 3 lives (`r.onAnswer` ends the run at 0),
+  `custom` result; store `boss[sid] = { won, best, tries }`.
+- **Quick fire:** one question (a due one when the draw has one). Deep link `PREP.open({ play: "quick" | "spot" | "feed" |
+  "focus" })` for widgets, watch and notifications; the native widget and watch faces themselves are NOT changed yet
+  (Swift/Kotlin, needs a Mac build).
+- **Voice mode:** reads question and options (Capacitor TextToSpeech, else speechSynthesis), listens through
+  `SMD_NATIVE.transcribe` only when `Capacitor.Plugins.SpeechRecognition` exists (it throws otherwise), else Web Speech;
+  `parseVoice` takes letters, ordinals, option words, skip/repeat/stop. Two misses on a question: waits for a tap.
+- **Focus room:** 25/50/90 min, `localStorage smd_prep_focus`, heartbeat POST each minute; live count = heartbeats in
+  150 s (`play/focus`). Minutes in `fxm[month]` (under a minute logs nothing).
+- **Wrapped:** story cards from the store only (`days`, `wm[month][subject]`, `mod`, `hr`, `boss`, `spoth`, `fxm`), then a
+  1080x1920 share image (Filesystem + Share on the phone). Before the 6th of a month it shows the previous month.
+- **Seasons:** 8 weeks from Monday 2026-01-05 IST; points = battle win 3, draw 1, each submitted sprint or grand test 1;
+  tiers Bronze 0, Silver 15, Gold 40, Platinum 80, Diamond 140; computed from `arena_battles` and `arena_entries` (no table).
+- **Mnemonic lab:** under an explained question (signed in): top 5 by Helpful votes, add (6 to 280 chars, no links,
+  handles or phone numbers, 5 a day), report (hidden at 3), delete own. Labelled "written by students and not checked".
+- **Streak freezes:** earned, never bought: one for a day with 50 beyond the daily goal, 2 banked at most (`frz`);
+  `applyFreezes` on the first home paint of a day covers a gap right before today; `specialty-core.js streak()` treats a
+  used day as a link that does not add to the count.
+- **Squads:** a study group of 3 to 6; GET groups adds `squad, streak, todayAll` (`squadStreak` = days in a row every
+  member hit the target); GET `squads/board` ranks squads by questions this week.
+- **Revenge:** `battleStep` keeps `log` of closed rounds; the battle end offers "Revenge: replay the N you missed" (study
+  run, `norec`, items `_s: "deck"`, `_rv`), then Battle again.
+- **Hooks in prep.js:** `HOST.record/finish/poolFor/countFor`, runQuestions `onAnswer`, `onRender`, `norec`; record() calls
+  `PREP_PLAY.noteAnswer` (hour, month, freeze earn).
+- **Leaving the Arena** deletes play rows (`socialDeleteStmts`).
+- **Tests:** `test/prep-play.test.mjs`, `test/prep-play-server.test.mjs`, `test/run-prep-play-ui.mjs` (SHOTS=<dir>).
+- **Gotchas:** `app.js` reassigns `window.SMD_AUTH` after boot: a UI test's signed-in stub must be pinned
+  (defineProperty), or calls go out unsigned at random. Chromium has its own `window.SpeechRecognition`; stub both names.
+  Home bar: the Menu button is `display: none` under the tab bar (a `visibility: hidden` one kept its slot and pushed
+  Search in from the edge).
+
+
+
+## MediGram (proposed, 2026-10-31)
+
+Optional short-form adaptive learning feed inside PrepNucleus: MCQs, explanations, first-party micro-lessons, curated clinical discovery and spaced recall. Reuses the existing bank, lessons, My Mistakes, bookmarks and FSRS-6; it does not create a parallel learning engine. Proposed flag: smd_prep_medigram (default OFF). YouTube is an optional compliant public-video source only; personalised Shorts feeds are not imported or cloned. Smart Break is time-bounded and deferred until the Study Feed is validated. Full product, architecture, rollout, policy, privacy, measurement and test plan: [[plans/PrepNucleus-MediGram]].
+
+
+## PrepNucleus Sound (proposed, 2026-10-31)
+
+Optional background-music layer for reading, MCQs, lessons, MediGram and mock-test preparation on Android and Web/PWA. One provider-independent Sound Dock supports embedded playback where officially permitted and external-app handoff otherwise. Proposed flag: `smd_prep_sound` (default OFF; requires `smd_prep`). MVP starts with provider handoff plus a first-party licensed-audio path; Apple Music is the first embedded catalogue candidate subject to Android SDK and commercial validation. Spotify remote controls/streaming require written commercial approval; no unofficial provider APIs or scraping. Full architecture, provider matrix, Android/web lifecycle, privacy, licensing, rollout and test plan: [[plans/PrepNucleus-Sound]].

@@ -6,7 +6,7 @@ import Capacitor
  * stock CAPBridgeViewController cannot do:
  *
  *  1. Register app-local plugins. `cap sync` only lists npm plugin packages in packageClassList, so a
- *     plugin compiled into this target (SmdDevice) is invisible to Capacitor unless it is handed to
+ *     plugin compiled into this target (SmdDevice, NfcPlugin) is invisible to Capacitor unless it is handed to
  *     the bridge here. capacitorDidLoad runs before the web view loads, so the plugin's JS proxy is
  *     injected with the others at document start.
  *  2. Launch chain colour. Owner decision 2026-10-03: the native launch follows the system light/dark
@@ -18,6 +18,7 @@ import Capacitor
 class MainViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(SmdDevicePlugin())
+        bridge?.registerPluginInstance(NfcPlugin())
         if let launchBackground = UIColor(named: "LaunchBackground") {
             webView?.backgroundColor = launchBackground
             webView?.scrollView.backgroundColor = launchBackground
@@ -47,7 +48,8 @@ public class SmdDevicePlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "getPowerState", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "haptic", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "getTextScale", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "getTextScale", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "setBootSplash", returnType: CAPPluginReturnPromise)
     ]
 
     override public func load() {
@@ -71,6 +73,18 @@ public class SmdDevicePlugin: CAPPlugin, CAPBridgedPlugin {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             self.notifyListeners("textScaleChange", data: ["scale": self.textScale()])
+        }
+    }
+
+    // The web boot splash is up ({up: true}) or gone ({up: false}). While it is up it covers every pixel of the
+    // app, so there is no patient data to hide, and the app-switcher privacy blur would only replace it with a
+    // grey sheet during the launch Face ID. The flag expires on its own after 20 s, so a page that never
+    // clears it cannot leave the privacy cover off.
+    @objc func setBootSplash(_ call: CAPPluginCall) {
+        let up = call.getBool("up") ?? false
+        DispatchQueue.main.async {
+            SceneDelegate.bootSplashUntil = up ? Date().addingTimeInterval(20) : nil
+            call.resolve()
         }
     }
 

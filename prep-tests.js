@@ -934,8 +934,44 @@
     H.save();
     H.cachePut(REC_KEY + rec.attempt_id, rec);
     sendStats(rec);
+    rankFetch(r, rec, p, t);
     clearSess();
   }
+
+  /* ---------- rank and percentile among PrepNucleus students (owner 2026-10-30, reverses "never a rank") ----------
+     /api/prep/stats (functions/_prep-rank.js) keeps an anonymous score histogram per test key. A student who opted in to anonymous
+     statistics adds this attempt's percentage (one POST, no id of any kind); everyone else only reads where the score
+     falls. Nothing shows a rank until MIN_N attempts exist (the server answers rank: null), and a re-run of a daily test
+     already counted today is read, never added. */
+  function rankKey(p, t) {
+    var k = String(p.id || "").toLowerCase().replace(/[^a-z0-9-]/g, "") + ":" + String(t.type || "").toLowerCase().replace(/[^a-z0-9_-]/g, "");
+    if (t.paper) k += ":" + String(t.paper).replace(/[^A-Za-z0-9_.-]/g, "").slice(0, 60);
+    return k;
+  }
+  function rankPct(sc) { if (!sc || !sc.max) return null; var v = Math.round(sc.raw * 1000 / sc.max) / 10; return Math.max(-100, Math.min(100, v)); }
+  function rankFetch(r, rec, p, t) {
+    var v = rankPct(rec.score); if (v == null || !G.fetch) return;
+    var key = rankKey(p, t), add = statsChoice() === "1" && !(t.idem && t.dailyFresh === false);
+    var api = G.SMD_PREP_STATS_API || "/api/prep/stats";
+    t.rank = { state: "load" };
+    var q = add ? G.fetch(api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ v: 1, kind: "rank", key: key, pct: v }), credentials: "omit" })
+      : G.fetch(api + "?rank=1&key=" + encodeURIComponent(key) + "&pct=" + v, { credentials: "omit" });
+    q.then(function (res) { return res.ok ? res.json() : null; }).then(function (j) {
+      t.rank = j && typeof j.n === "number" ? { state: "ok", d: j, added: add } : { state: "off" };
+      if (H && H.run_ && H.run_() === r) H.rerender();
+    }, function () { t.rank = { state: "off" }; if (H && H.run_ && H.run_() === r) H.rerender(); });
+  }
+  function rankHtml(t) {
+    var x = t.rank; if (!x || x.state === "off") return "";
+    var same = t.paper ? "this paper" : "a " + esc(typeName(t.type)).toLowerCase();
+    if (x.state === "load") return '<section class="t2rank" aria-busy="true"><h3 class="t2h">Your rank</h3><p class="t2note">Checking where your score falls…</p></section>';
+    var d = x.d;
+    if (d.rank == null) return '<section class="t2rank"><h3 class="t2h">Your rank</h3><p class="t2note">Your rank shows once ' + d.min + " PrepNucleus students have taken " + same + ". " + (d.n ? fmtN(d.n) + " so far." : "You are among the first.") + "</p>" + (x.added ? "" : rankWhy()) + "</section>";
+    return '<section class="t2rank"><h3 class="t2h">Your rank</h3><div class="t2rank-n"><p><b>' + fmtN(d.rank) + "</b><small>of " + fmtN(d.n) + "</small></p><p><b>" + d.percentile + "</b><small>percentile</small></p></div>" +
+      '<p class="t2note">Among PrepNucleus students who took ' + same + ", not an all-India rank." + (t.paper ? "" : " Each student gets their own draw of questions, so read it as a guide.") + "</p>" + (x.added ? "" : rankWhy()) + "</section>";
+  }
+  function rankWhy() { return '<p class="t2note">Your score was compared, not added. Share anonymous statistics (Tests tab) to count in the ranks.</p>'; }
+  function fmtN(n) { try { return Number(n).toLocaleString("en-IN"); } catch (e) { return String(n); } }
   function pct(x) { return x == null ? "-" : Math.round(x * 100) + "%"; }
   /* IQoach capture: compact chip counts for a t2h row, from the attempt record's items. */
   function confCounts(items) {
@@ -969,8 +1005,9 @@
   }
 
   /* ---------- richer results (Tests 2 ON): Analysis / Graphs / Solutions tabs ----------
-     Honesty: counts, accuracy labelled "practice mastery", per-question outcomes and the student's own earlier
-     attempts only. Never a rank, percentile, readiness score or prediction. Under 5 questions the trend and the
+     Honesty: counts, accuracy labelled "practice mastery", per-question outcomes, the student's own earlier attempts
+     and, from 2026-10-30, a rank among PrepNucleus students once enough have taken the test (rankHtml). Never a
+     readiness score or prediction here. Under 5 questions the trend and the
      bars hide behind a plain "too few questions" note. Everything renders from the stored attempt record
      offline; the only network is the pre-existing opt-in anonymous stats and cached link shards. */
   function r2tab(r) {
@@ -1160,13 +1197,13 @@
     } else {
       var trend = small ? [] : A.ownTrend(store().t2h, { exam: rec.exam, test_type: rec.test_type, attempt_id: rec.attempt_id });
       var tr = (t.type === "grand" || t.type === "part" || t.type === "mini") && !small ? '<h3 class="t2h">Your earlier attempts</h3>' + (trend.length ? '<ul class="t2list">' + trend.slice().reverse().map(function (h) { return '<li><div class="t2row static"><span class="t2row-t"><b>' + dm(h.ts) + "</b><small>" + h.correct + " right · " + h.incorrect + " wrong · " + h.unanswered + ' not answered</small></span><span class="t2row-v">' + fmtMarks(h.raw) + " / " + h.max + "</span></div></li>"; }).join("") + "</ul>" : '<p class="t2note">Your first ' + esc(typeName(t.type).toLowerCase()) + " for " + esc(p.name) + ". Later attempts are compared with this one.</p>") +
-        '<p class="t2note">Compared only with your own attempts. No national rank or percentile is shown: no representative group of candidates exists to compare with.</p>' : "";
+        '<p class="t2note">Compared with your own attempts. Your rank among other students is above.</p>' : "";
       var how = '<details class="t2how"><summary>How this test was built</summary><p class="t2note">Profile ' + esc(rec.exam) + " v" + esc(rec.profile_version) + " (" + esc(p.status) + "). " + esc(srcLine(p)) + "</p>" +
         (rec.distribution.deviations.length ? '<ul class="t2dl">' + rec.distribution.deviations.map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("") + "</ul>" : '<p class="t2note">Built as planned.</p>') +
         '<ul class="t2dist">' + Object.keys(rec.distribution.actual).map(function (k) { return "<li><span>" + esc(subjectName(k)) + "</span><span>" + rec.distribution.actual[k] + (rec.distribution.planned[k] != null && rec.distribution.planned[k] !== rec.distribution.actual[k] ? " of " + rec.distribution.planned[k] + " planned" : "") + "</span></li>"; }).join("") + "</ul></details>";
       panel = '<div role="tabpanel" id="t2p-analysis" aria-labelledby="t2tab-analysis" tabindex="0">' +
         (small ? "" : '<h3 class="t2h">Patterns</h3>' + r2patterns(rec)) +
-        '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) + (H.coachResult ? H.coachResult(r) : "") +
+        rankHtml(t) + '<h3 class="t2h">Knowledge gaps</h3>' + r2gaps(r, rec, p.id) + r2pearls(r) + (H.coachResult ? H.coachResult(r) : "") +
         (G.PREP_ASK ? '<button type="button" class="t2btn pri t2ask" data-act="ask-sum">Ask MaiK about this result</button><p class="t2note">MaiK answers from this result on your phone, or online with your say-so.</p>' : "") +
         tr + how + statsAsk() + "</div>";
     }
@@ -1184,7 +1221,7 @@
     if (a === "t2-pre") return prepare(pid, k, b.getAttribute("data-s"), b.getAttribute("data-m"));
     if (a === "t2-fixed") return prepareFixed(b.getAttribute("data-fx"));
     if (a === "t2-go") return go();
-    if (a === "t2-stats") { try { G.localStorage.setItem(STATS, b.getAttribute("data-v") === "1" ? "1" : "0"); } catch (e) {} var r0 = H.run_ && H.run_(); if (b.getAttribute("data-v") === "1" && r0 && r0.t2 && r0.t2.rec) sendStats(r0.t2.rec); var box = b.closest(".pn-t2ask"); if (box) box.innerHTML = '<p class="pn-mut pn-small" role="status">' + (b.getAttribute("data-v") === "1" ? "Thank you. Anonymous statistics are on." : "Nothing will be sent.") + "</p>"; return; }
+    if (a === "t2-stats") { try { G.localStorage.setItem(STATS, b.getAttribute("data-v") === "1" ? "1" : "0"); } catch (e) {} var r0 = H.run_ && H.run_(); if (b.getAttribute("data-v") === "1" && r0 && r0.t2 && r0.t2.rec) { sendStats(r0.t2.rec); if (r0.t2.rank && r0.t2.rank.state === "ok" && !r0.t2.rank.added) { var p0 = A.profile(r0.t2.exam); if (p0) rankFetch(r0, r0.t2.rec, p0, r0.t2); } } var box = b.closest(".pn-t2ask"); if (box) box.innerHTML = '<p class="pn-mut pn-small" role="status">' + (b.getAttribute("data-v") === "1" ? "Thank you. Anonymous statistics are on." : "Nothing will be sent.") + "</p>"; return; }
     if (a === "t2-pick") return pickSubject(A.profile(pid), k);
     if (a === "t2-pickm") return pickModule(A.profile(pid), b.getAttribute("data-s"));
     if (a === "t2-ccpick") return pickCustomEngine(A.profile(pid));
@@ -1240,6 +1277,6 @@
       return;
     }
   }
-  G.PREP_TESTS = { on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess, poolOf: poolOf, poolItems: poolItems,
+  G.PREP_TESTS = { _rank: { key: rankKey, pct: rankPct, fetch: rankFetch, html: rankHtml }, on: on, testsHtml: testsHtml, mounted: mounted, act: act, persist: persist, left: left, finished: finished, resultHtml: resultHtml, askCtx: askCtx, _P: P, _clear: clearSess, poolOf: poolOf, poolItems: poolItems,
     _grp: { ORDER: GRP_ORDER, FIRST: GRP_FIRST, SEARCH_AT: GRP_SEARCH_AT, name: grpName, short: grpShort, examOrder: examOrder, fxFor: fxFor, paperSubject: paperSubject, fxInPlan: fxInPlan, groupVisible: groupVisible, visibleFormats: visibleFormats, paperDone: paperDone, engineDone: engineDone, dailyDoneByKey: dailyDoneByKey, countFxDone: countFxDone, defaultExamOpen: defaultExamOpen, defaultGrpOpen: defaultGrpOpen, loadGrp: loadGrp, saveGrp: saveGrp, grpIsOpen: grpIsOpen, examIsOpen: examIsOpen, setGrpOpen: setGrpOpen, setExamOpen: setExamOpen, filterFx: filterFx, visibleFx: visibleFx, grpKey: grpKey, groupCounts: groupCounts, examCounts: examCounts, metaTxt: metaTxt } };
 })(typeof window !== "undefined" ? window : this);
