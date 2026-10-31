@@ -144,7 +144,8 @@
     lofi_calm: '<path d="M14 44q8-10 16 0t16 0 16 0 16 0 16 0 12 0" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".7"/><path d="M14 66q8-10 16 0t16 0 16 0 16 0 16 0 12 0" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".45"/><path d="M14 86q8-10 16 0t16 0 16 0 16 0 16 0 12 0" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".25"/>',
     night_shift: '<circle cx="82" cy="38" r="13" fill="#42CDB5" opacity=".85"/><circle cx="34" cy="30" r="2.4" fill="#E2F1EE"/><circle cx="52" cy="52" r="1.8" fill="#E2F1EE" opacity=".8"/><circle cx="28" cy="76" r="2.4" fill="#E2F1EE" opacity=".6"/><circle cx="88" cy="84" r="1.8" fill="#E2F1EE" opacity=".7"/><circle cx="64" cy="98" r="2.2" fill="#E2F1EE" opacity=".5"/>',
     slow_breath: '<path d="M8 78q26-30 52-18t52-6" fill="none" stroke="#42CDB5" stroke-width="3" opacity=".75"/><path d="M8 94q26-26 52-14t52-4" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".4"/>',
-    default: '<path d="M48 84V40l28-6v34" fill="none" stroke="#42CDB5" stroke-width="3"/><circle cx="38" cy="84" r="9" fill="none" stroke="#42CDB5" stroke-width="3"/><circle cx="66" cy="68" r="9" fill="none" stroke="#42CDB5" stroke-width="3"/>'
+    // Same solid beamed notes as the music button, scaled into the 120 tile (one icon everywhere).
+    default: '<path transform="translate(30 30) scale(2.5)" fill="#42CDB5" d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/>'
   };
   function tileHtml(model) {
     var p = TILE_PATHS[model.artworkKey] || TILE_PATHS.default;

@@ -435,7 +435,8 @@
     return S.client;
   }
   function ico(name) { // inline SVG, currentColor; no emoji, no external assets
-    var p = { music: '<path d="M9 18V6l10-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/>',
+    // Solid beamed eighth notes (the old stroke path rendered as a filled blob with fill=currentColor).
+    var p = { music: '<path d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/>',
       play: '<path d="M8 5v14l11-7z"/>', pause: '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>',
       next: '<path d="M6 6l8 6-8 6zM16 6h2v12h-2z"/>', prev: '<path d="M18 6l-8 6 8 6zM6 6h2v12H6z"/>',
       ext: '<path d="M14 4h6v6h-2V6.4L10.4 14 9 12.6 16.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/>',
