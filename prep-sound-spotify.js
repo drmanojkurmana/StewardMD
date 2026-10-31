@@ -178,7 +178,17 @@
     };
   }
 
-  /* ================= token store: memory only ================= */
+  // capacitor-secure-storage-plugin (iOS Keychain / Android Keystore): set/get/remove; get rejects when the key is absent.
+  function makeKeychainStore(p) {
+    if (!p || typeof p.set !== "function" || typeof p.get !== "function" || typeof p.remove !== "function") return null;
+    return {
+      setSecret: function (key, value) { return Promise.resolve(p.set({ key: key, value: value })); },
+      getSecret: function (key) { return Promise.resolve(p.get({ key: key })).then(function (r) { return r && typeof r.value === "string" ? r.value : null; }, function () { return null; }); },
+      removeSecret: function (key) { return Promise.resolve(p.remove({ key: key })).then(null, function () { return true; }); }
+    };
+  }
+
+  /* ================= token store: memory, refresh token mirrored to the OS secure store ================= */
   function makeTokenStore(now) {
     var t = null; // { access, refresh, expiresAt, scope } — never persisted, never logged.
     return {
@@ -365,7 +375,7 @@
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
     parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, parseQueue: parseQueue, premiumOf: function (me) { return !(me && me.product && me.product !== "premium"); }, capsForPlayer: capsForPlayer,
-    apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient,
+    apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient, makeKeychainStore: makeKeychainStore,
     makePluginSecureStore: makePluginSecureStore, REFRESH_SECRET_KEY: REFRESH_SECRET_KEY,
     SCOPES: SCOPES, AUTH_URL: AUTH_URL, TOKEN_URL: TOKEN_URL, API: API };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
@@ -419,14 +429,16 @@
     var data = new TextEncoder().encode(verifier);
     return G.crypto.subtle.digest("SHA-256", data).then(function (buf) { return b64url(new Uint8Array(buf)); });
   }
-  /* Secure storage exists only on native Android with the PrepSound plugin.
-     Web and iOS return null here and keep tokens memory-only. */
+  /* Stay connected until Disconnect (owner 2026-10-31): only the refresh token is kept, in the OS secure store.
+     Android: the PrepSound Keystore plugin when that store build is installed; otherwise (iOS Keychain, older
+     Android builds) capacitor-secure-storage-plugin, already in both store builds. Web stays memory-only. */
   function secureStore() {
     try {
       var C = G.Capacitor;
       if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
-      if (typeof C.getPlatform === "function" && C.getPlatform() !== "android") return null;
-      return makePluginSecureStore(C.Plugins && C.Plugins.PrepSound);
+      var P = C.Plugins || {};
+      var android = typeof C.getPlatform === "function" && C.getPlatform() === "android";
+      return (android && makePluginSecureStore(P.PrepSound)) || makeKeychainStore(P.SecureStoragePlugin);
     } catch (e) { return null; }
   }
   function client() {
@@ -474,7 +486,7 @@
     var rows = S.showAll ? S.queue : S.queue.slice(0, 3);
     var h = '<div class="pn-sound-sp-nexthead"><h3>Up next</h3><button type="button" class="pn-sound-sp-link" data-act="sp-all" aria-expanded="' + !!S.showAll + '">' +
       (S.showAll ? "Show less" : "See all") + "</button></div>";
-    if (!rows.length) return h + '<p class="pn-sound-sp-note">Nothing queued. Open See all to pick a playlist or search.</p>';
+    if (!rows.length) return h + '<p class="pn-sound-sp-note">' + (S.showAll ? "Nothing queued. Pick a playlist or search below." : "Nothing queued. Open See all to pick a playlist or search.") + "</p>";
     return h + '<ul class="pn-sound-sp-queue">' + rows.map(function (q) {
       var inner = thumb(q.images, 48) + '<span class="pn-sound-sp-it"><b>' + esc(q.title) + "</b><small>" + esc(q.subtitle) + '</small></span><span class="pn-sound-sp-dur">' + (q.durationMs ? fmt(q.durationMs) : "") + "</span>";
       return S.premium
@@ -657,7 +669,9 @@
     var el = D.createElement("div");
     // Wide screens: a floating panel beside the study page (no scrim, not modal). Phones: the bottom sheet.
     var wide = !!(G.matchMedia && G.matchMedia("(min-width: 700px)").matches);
-    el.className = "pn-sheet-wrap pn-sound-sp-wrap" + (wide ? " is-panel" : ""); el.id = "pnSoundSpSheet";
+    // The panel is not a bottom sheet: without .pn-sheet-wrap the shared swipe-to-dismiss (which closes by tapping a
+    // scrim the panel does not have, leaving it invisible off-screen) and the sheet key capture leave it alone.
+    el.className = (wide ? "pn-sound-sp-wrap is-panel" : "pn-sheet-wrap pn-sound-sp-wrap"); el.id = "pnSoundSpSheet";
     el.innerHTML = (wide ? "" : '<div class="pn-scrim" data-act="sp-min"></div>') +
       '<section class="pn-sheet pn-sound-sp-sheet" role="dialog" aria-modal="' + !wide + '" aria-labelledby="pnSoundSpT" tabindex="-1"></section>';
     el.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.stopPropagation(); minimise(); } });
@@ -761,6 +775,7 @@
   function paintDock() {
     var root = G.PREP && G.PREP._host && G.PREP._host.root && G.PREP._host.root();
     if (!root) return;
+    if (S.sheet && !S.sheet.isConnected) { S.sheet = null; S.playerHandle = null; S.provOpen = false; }   // removed by someone else: show the dock again
     if (!S.dock || !S.dock.isConnected) { S.dock = D.createElement("div"); S.dock.className = "pn-sound-sp-dock"; root.appendChild(S.dock); }
     var html = S.sheet ? "" : miniOn() ? miniHtml() : dockButtonHtml();
     S.dock.classList.toggle("is-stacked", !!root.querySelector(".pn-sound-dock"));   // sit above the ambience dock
@@ -810,7 +825,8 @@
     var hasCode = /[?&]code=/.test(G.location.search || "");
     if (!hasCode && secureStore()) {
       client().restoreSession().then(function (restored) {
-        if (restored && S.sheet) loadConnected();
+        if (!restored) return;
+        if (S.sheet) loadConnected(); else syncMini();   // back to the mini player without waiting for the 5 s tick
       }, function () {});
     }
   } catch (e) {}
