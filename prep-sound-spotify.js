@@ -1007,9 +1007,9 @@
     if (getRemote() && S.remoteSeen && !remoteActive()) {
       S.remoteWake = true; S.wakeUri = (m && m.trackUri) || S.wakeUri || "";
       if (S.now) S.now.isPlaying = false;
-      diag("remote: play while Spotify asleep -> Resume offered");
+      diag("remote: play while Spotify asleep -> wake (owner 2026-11-01: Play itself does the one-second flash)");
       if (S.sheet) paintSheet(); else paintDock();
-      return Promise.resolve(false);
+      return act("sp-wake");   // the learner pressed Play; Resume stays on the card if the wake fails
     }
     // App Remote connected: resume (or replay the paused song) in the Spotify app directly.
     if (remoteActive()) {
