@@ -604,7 +604,7 @@
     if (!box) return;
     function fresh() {
       return Promise.all([nowOrLast(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
-        S.now = a[0]; S.queue = a[1] || [];
+        S.now = a[0]; S.queue = keepQueue(a[1]);
         var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"); if (nb) nb.innerHTML = nextHtml();
         clearErr(); syncLastNote();
         return cardState();
@@ -662,16 +662,23 @@
   }
   function clearErr() { if (!S.err) return; S.err = null; var el = S.sheet && S.sheet.querySelector(".pn-sound-sp-err"); if (el) el.parentNode.removeChild(el); }
   // A command with no active Spotify device: wake the account's first available device, then retry once.
+  var ASLEEP = "iPadOS paused Spotify in the background, so it cannot restart from here. Tap Open Spotify once; your song continues here when you come back.";
   function withDevice(fn) {
     return fn().then(null, function (e) {
       if (!e || e.reason !== "no_active_device") throw e;
       return client().devices().then(function (ds) {
         var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
-        if (!d) throw { reason: "no_device", message: "iPadOS or iOS put Spotify to sleep in the background, so it cannot be started from here. Tap Open Spotify once; your song continues here when you come back." };
-        return client().transfer(d.id).then(function () { return fn(d.id); });   // retry aimed at the woken device
+        if (!d) throw { reason: "no_device", message: ASLEEP };
+        // iOS refuses to restart audio in a backgrounded Spotify even when it is still listed: one message, not two.
+        return client().transfer(d.id).then(function () { return fn(d.id); }).then(null, function (e2) {
+          if (e2 && e2.reason === "no_active_device") throw { reason: "no_device", message: ASLEEP };
+          throw e2;
+        });
       });
     });
   }
+  // A paused, backgrounded Spotify reports an empty queue; keep the last rows until something plays again.
+  function keepQueue(q) { return (q && q.length) || (S.now && S.now.isPlaying) || !S.queue ? (q || []) : S.queue; }
   function refresh() {
     var c = client();
     G.setTimeout(function () { if (S.sheet) c.player().then(function (pl) { S.player = pl; paintSheet(); }, function () {}); }, 700);
@@ -683,7 +690,7 @@
       S.me = me; S.premium = premiumOf(me);
       return Promise.all([c.player().then(function (pl) { S.player = pl; }, function (e) { S.err = e; }),
         nowOrLast().then(function (m) { S.now = m; }, function () {}),
-        c.queue().then(function (q) { S.queue = q; }, function () { S.queue = []; }),
+        c.queue().then(function (q) { S.queue = keepQueue(q); }, function () { S.queue = S.queue || []; }),
         c.playlists().then(function (pl) { S.playlists = pl; }, function () { S.playlists = []; })]);
     }).then(paintSheet, fail);
   }
@@ -725,11 +732,12 @@
     if (m.positionMs > 0) b.position_ms = Math.round(m.positionMs);   // continue where it paused, not from 0:00
     return b;
   }
+  function lastOf(m) { if (!m || !m.trackUri) return null; var k, c = {}; for (k in m) c[k] = m[k]; c.lastPlayed = true; return c; }
   function playFromIdle(m) {
     var body = playBody(m);
     if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
     return withDevice(function (id) { return client().play(body, id); }).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
-      if (e && e.reason === "no_device") { S.pendingPlay = body || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: "iPadOS or iOS put Spotify to sleep in the background, so it cannot be started from here. Tap Open Spotify once; your song continues here when you come back." }); }
+      if (e && e.reason === "no_device") { S.pendingPlay = body || playBody(lastOf(m)) || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: ASLEEP }); }
       if (S.now) S.now.isPlaying = false; fail(e);
     });
   }
