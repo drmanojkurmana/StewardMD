@@ -42,9 +42,9 @@
   // PrepReels (MediGram, flag smd_prep_medigram, default OFF, requires smd_prep): loaded lazily only when on.
   var MG_CSS = ["prep-medigram.css"], MG_JS = ["prep-medigram-data.js", "prep-medigram-media.js", "prep-medigram.js"];
   function mgOn() { try { var q = (G.location.search.match(/[?&]medigram=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return enabled() && G.localStorage.getItem("smd_prep_medigram") === "1"; } catch (e) { return false; } }
-  // Sound (flag smd_prep_sound, default OFF, requires smd_prep): same lazy pattern — no Sound
-  // file downloads while off. Spotify mini-player files load only when Sound is on AND its
-  // own sub-flag smd_prep_sound_spotify is on (default OFF).
+  // Sound (flag smd_prep_sound, default OFF, requires smd_prep): same lazy pattern: no Sound
+  // file downloads while off. The Spotify mini-player is ON by default and independent of Sound
+  // (owner 2026-10-31): only smd_prep_sound_spotify = "0" or ?spotify=0 leaves its files out.
   var SOUND_CSS = ["prep-sound.css", "prep-sound-player.css"], SOUND_JS = ["prep-sound-core.js", "prep-sound-providers.js", "prep-sound-player.js", "prep-sound-native.js", "prep-sound-system.js", "prep-sound-web.js", "prep-sound.js"];
   // Spotify is ON by default (owner 2026-10-31) and does not need Sound; it brings the shared player card with it.
   var SPOTIFY_CSS = ["prep-sound-player.css", "prep-sound-spotify.css"], SPOTIFY_JS = ["prep-sound-player.js", "prep-sound-spotify.js"];
