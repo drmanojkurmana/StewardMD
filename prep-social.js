@@ -255,8 +255,11 @@
     if (!g) return '<p class="pn-load" role="status">Loading your groups…</p>';
     var h = '<h2 class="pn-sec">Your groups</h2>' + (g.length ? '<div class="pn-group">' + g.map(function (x) {
       var m = x.members || [], done = m.filter(function (y) { return (y.todayDone || 0) >= (x.dailyTarget || 1); }).length;
-      return H.row("s-group", '<span class="ps-gi">' + esc(initials(x.name)) + "</span>", esc(x.name), (x.mine ? "Yours · " : "") + m.length + (m.length === 1 ? " member" : " members") + " · " + done + " hit " + fmt(x.dailyTarget) + " today", ' data-v="' + esc(x.code) + '"');
+      // A squad (3 to 6 members, owner 2026-10-30) keeps a streak of days on which everyone hit the target.
+      return H.row("s-group", '<span class="ps-gi">' + esc(initials(x.name)) + "</span>", esc(x.name), (x.squad ? "Squad · " + (x.streak ? x.streak + (x.streak === 1 ? " day" : " days") + " all in · " : "") : "") + (x.mine ? "Yours · " : "") + m.length + (m.length === 1 ? " member" : " members") + " · " + done + " hit " + fmt(x.dailyTarget) + " today", ' data-v="' + esc(x.code) + '"');
     }).join("") + "</div>" : '<p class="ps-empty">No groups yet. Make one for your batch, or join with a code a friend sends you.</p>');
+    h += '<p class="pn-mut pn-small">A group of 3 to 6 is a squad: it keeps a streak of days on which every member hits the target, and it climbs the squad board.</p>' +
+      H.row("s-squads", ico("trophy"), "Squad board", "Squads ranked by questions this week");
     h += '<form class="ps-form" data-sform="s-gnew" novalidate><h2 class="pn-sec">Start a group</h2><label for="psGName">Group name</label><input class="pn-in" id="psGName" maxlength="40" autocomplete="off" enterkeyhint="next" name="group" placeholder="Batch 2021 PG prep…">' +
       '<label for="psGTarget">Daily target, questions each</label><input class="pn-in" id="psGTarget" name="target" type="number" inputmode="numeric" min="5" max="500" step="5" value="30" enterkeyhint="done">' +
       '<button type="submit" class="pn-btn pri">Create group</button>' + msg("psGNewMsg") + "</form>";
@@ -271,6 +274,8 @@
     var m = (g.members || []).slice().sort(function (a, b) { return (b.todayDone || 0) - (a.todayDone || 0); }), t = g.dailyTarget || 1, b = S.gboard;
     H.paint(H.bar(esc(g.name), "Study group", "back") + '<div class="pn-body ps-body">' +
       '<section class="pn-panel ps-share"><span><small>Group code</small><b class="ps-code" translate="no">' + esc(g.code) + '</b></span><button type="button" class="pn-btn sm pri" data-act="s-share" data-v="' + esc(g.code) + '">Share code</button></section>' +
+      (g.squad ? '<section class="pn-panel ps-squad"><p class="pn-eb">Squad streak</p><p class="ps-sq-n"><b>' + fmt(g.streak || 0) + "</b> " + ((g.streak || 0) === 1 ? "day" : "days") + "</p><p class=\"pn-mut pn-small\">" +
+        (g.todayAll ? "Everyone hit the target today." : m.filter(function (x) { return (x.todayDone || 0) < t; }).length + " still to hit the target today. The streak needs every member.") + "</p></section>" : "") +
       '<h2 class="pn-sec">Today</h2><p class="pn-mut pn-small">Target: ' + fmt(t) + " questions each</p>" +
       '<ul class="ps-members">' + m.map(function (x) {
         var d = x.todayDone || 0, ok = d >= t;
@@ -280,6 +285,17 @@
         '<ol class="pn-board" aria-label="This week">' + b.rows.map(function (x, i) { return '<li class="pn-lb"><span class="pn-lb-r">' + (i + 1) + '</span><span class="pn-lb-n">' + esc(String(x.name || "Doctor").slice(0, 40)) + '</span><span class="pn-lb-v">' + fmt(x.score) + "</span></li>"; }).join("") + "</ol>" +
         (b.week ? '<p class="pn-mut pn-small">Daily sprint scores added up, ' + esc(String(b.week)) + "</p>" : "")) +
       '<button type="button" class="pn-link pn-danger" data-act="s-gleave" data-v="' + esc(g.code) + '">' + ico("leave") + " Leave this group</button></div>");
+  }
+  function renderSquads() {
+    var b = S.sqboard;
+    H.paint(H.bar("Squad board", "Questions this week", "back") + '<div class="pn-body ps-body">' +
+      (!b ? '<p class="pn-load" role="status">Loading the squads…</p>' : b.error ? '<p class="pn-err" role="alert">' + esc(b.error) + "</p>" : !(b.rows || []).length ? '<p class="ps-empty">No squads have scored this week yet. Make a group of 3 to 6 and start.</p>' :
+        '<ol class="pn-board" aria-label="Squads this week">' + b.rows.map(function (x) { return '<li class="pn-lb' + (x.mine ? " me" : "") + '"><span class="pn-lb-r">' + x.rank + '</span><span class="pn-lb-n">' + esc(String(x.name || "Squad").slice(0, 40)) + "<small> · " + x.size + '</small></span><span class="pn-lb-v">' + fmt(x.score) + "</span></li>"; }).join("") + "</ol>" +
+        ((b.me || []).length ? '<p class="pn-mut pn-small">' + b.me.map(function (x) { return esc(x.name) + ": " + x.rank + (x.rank === 1 ? "st" : x.rank === 2 ? "nd" : x.rank === 3 ? "rd" : "th"); }).join(" · ") + "</p>" : "")) + "</div>");
+  }
+  function openSquads() {
+    S.sqboard = null; H.push(renderSquads);
+    api("GET", "squads/board").then(function (b) { S.sqboard = b; onScreen(renderSquads); }, function (e) { S.sqboard = { error: errText(e) }; onScreen(renderSquads); });
   }
   function openGroup(code) {
     S.gcode = code; S.gboard = null; H.push(renderGroup);
@@ -316,6 +332,7 @@
     if (a === "s-scope") { S.scope = v; return loadBoard(); }
     if (a === "s-coldel") return api("DELETE", "college").then(function () { S.college = false; S.board = null; H.toast("College tag removed."); renderMain(); load(); }, function (e) { H.toast(errText(e)); });
     if (a === "s-group") return openGroup(v);
+    if (a === "s-squads") return openSquads();
     if (a === "s-share") return share(v);
     if (a === "s-gleave") {
       var g = groupOf(v);

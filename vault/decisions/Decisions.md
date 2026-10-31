@@ -5,6 +5,19 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-10-30 · PrepNucleus Play: Gen Z features, honest by rule (owner: "build all")
+
+**Decision.** Twelve engagement features in one optional module (`prep-play.js`, flag `smd_prep_play` default on) plus
+server routes (`/api/prep/play`, squads in `/api/prep/social`): swipe feed, spot diagnosis of the day, boss battles,
+quick fire, voice mode, focus room, Wrapped, seasons, mnemonic lab, earned streak freezes, squads, revenge.
+**Why.** The owner wants PrepNucleus to feel new to students who live in short-form feeds and shared streaks.
+**Rules kept.** Every live count and board is real or empty ("every line true", 2026-10-06); freezes are earned, never
+sold; no countdown urgency; student mnemonics are labelled unchecked, reportable and hidden at 3 reports, links and
+phone numbers refused; names appear only for Arena players (consent), and leaving the Arena deletes play rows.
+**Trade-off.** More surface on home; the widget and watch quick-fire faces need native work (deep link
+`PREP.open({ play })` is ready). Seasons are computed from battles on each request (fine at current scale; a table if
+it grows). **Status.** Branch; needs migration 0007 and an app build.
+
 ## 2026-10-30 · PrepNucleus: study tools, timetable, rank among students; no made-up peer numbers (owner)
 
 **Decision.** Owner asked for the features other QBanks have: a revision timetable the student builds, cross out options,

@@ -316,6 +316,9 @@ if [ -f prep/taxonomy.json ]; then
   [ -f prep/bank/overlay-counts.json ] && mkdir -p "$WWW/prep/bank" && cp prep/bank/overlay-counts.json "$WWW/prep/bank/"
   # Lessons (prep-lessons.js): the committed pilot lessons, their index and their original diagrams, a few KB each.
   # tools/prep-lessons.mjs work files (prep/lessons/work) never ship.
+  # Image learning manifests (prep-imglearn.js Eye and PSM atlases; prep-play.js spot diagnosis): read from the bundle at
+  # prep/imglearn/*.json, the images themselves from R2 through /api/prep/bank/img/. Without these the atlases are empty.
+  [ -d prep/imglearn ] && mkdir -p "$WWW/prep/imglearn" && cp prep/imglearn/*.json "$WWW/prep/imglearn/"
   if [ -f prep/lessons/v1/index.json ]; then
     mkdir -p "$WWW/prep/lessons/v1" && cp prep/lessons/v1/*.json "$WWW/prep/lessons/v1/"
     [ -d prep/lessons/media ] && mkdir -p "$WWW/prep/lessons/media" && cp prep/lessons/media/* "$WWW/prep/lessons/media/"

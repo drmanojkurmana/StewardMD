@@ -1494,6 +1494,7 @@
     if (!st.open) return false;
     if (closeCreditSheet()) return true;   // an image credit sheet closes first
     if (G.PREP_TOOLS && G.PREP_TOOLS.back()) return true;   // a note or reset sheet (prep-tools.js) closes first
+    if (G.PREP_PLAY && G.PREP_PLAY.back()) return true;   // a play sheet or the feed's own state (prep-play.js) first
     if (G.PREP_VIEWER && G.PREP_VIEWER.close()) return true;   // an enlarged image (prep-viewer.js) closes first
     if (G.PREP_REASON && G.PREP_REASON.back && G.PREP_REASON.back()) return true;   // Know more sheet closes first
     if (G.PREP_IDS && G.PREP_IDS.back()) return true;   // the share sheet (prep-ids.js) closes first
@@ -1573,6 +1574,8 @@
       else if (opts && opts.query) openQuery(opts);
       // A friends or boards nudge (server push, prep-nudges.js): home, then that tab.
       else if (opts && opts.social && G.PrepSocial) { push(renderHome); G.PrepSocial.open(String(opts.social)); }
+      // Play (prep-play.js): a widget, watch or notification link straight into quick fire, the spot or the feed.
+      else if (opts && opts.play && G.PREP_PLAY) { push(renderHome); G.PREP_PLAY.open(String(opts.play), HOST); }
       // First plain open: onboarding (prep-plan.js), skippable. SMD_PREP_ONBOARD = false (UI tests) skips it.
       else if (G.PREP_PLAN && G.SMD_PREP_ONBOARD !== false && G.PREP_PLAN.needsOnboard(load())) push(function () { G.PREP_PLAN.onboard(HOST); });
       else push(renderHome);
@@ -1598,6 +1601,7 @@
   function close() {
     stopTimer();
     try { if (G.PREP_TOOLS) G.PREP_TOOLS.flush(); } catch (e) {}
+    try { if (G.PREP_PLAY) G.PREP_PLAY.leave(); } catch (e) {}
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
@@ -1976,6 +1980,7 @@
       (G.PREP_FLASH ? G.PREP_FLASH.homeRow(HOST) : "") +
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       "</div>" +
+      (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
@@ -2317,6 +2322,11 @@
     // A set made by the student (practice setup sheet, custom module) is saved when it finishes (psSave); a re-practise
     // of a whole saved set updates that set (psId).
     if (opts.save && !opts.custom) st.run.save = opts.save;
+    // Play runs (prep-play.js): onAnswer(r, k) after each answer, onRender(r) after each paint of a question, norec =
+    // answers are not recorded (battle replays carry no bank id).
+    if (opts.onAnswer) st.run.onAnswer = opts.onAnswer;
+    if (opts.onRender) st.run.onRender = opts.onRender;
+    if (opts.norec) st.run.norec = true;
     if (opts.psId) st.run.psId = opts.psId;
     // How others answered (prep-tools.js): asked once per question, drawn after the answer when it has arrived.
     if (G.PREP_TOOLS) { G.PREP_TOOLS.bind(HOST); if (!opts.custom) G.PREP_TOOLS.prefetch(items); }
@@ -2685,7 +2695,7 @@
       fb = '<section class="pn-fb ' + (ok ? "ok" : "no") + (fresh ? " pn-new" : "") + '" role="status" tabindex="-1">';
       fb += '<p class="pn-verdict' + (tup ? " pn-vtu" : "") + '"><span class="pn-vb" aria-hidden="true">' + ico(ok ? "check" : tup ? "clock" : "x") + "</span><span><b>" + (ok ? "Correct" : tup ? "Time up" : "Incorrect") + "</b>" + (ok ? "" : "<small>" + (tup ? "Not answered in time" : "You chose " + L[chosen]) + "</small>") + "</span></p>" +
         '<p class="pn-ans"><span class="pn-l">' + L[it.a] + '</span><span><small>Right answer</small>' + lfOpt(it.o[it.a]) + "</span></p>" +
-        (TOOLS ? TOOLS.peerHtml(it, chosen) + TOOLS.noteHtml(it) : "") +
+        (TOOLS ? TOOLS.peerHtml(it, chosen) + TOOLS.noteHtml(it) : "") + (G.PREP_PLAY && !r.norec ? G.PREP_PLAY.mnHtml(it) : "") +
         (RX ? RX.body(it, { why: whyHtml(it, xo, why, L), pearl: (xo.x && xo.x.pearl) || it.kp || "", rs: rs, chosen: chosen, md: mdLite, inl: inlineMd }) :
         whyHtml(it, xo, why, L) +
         (others.length ? "<h3>Why the others are wrong</h3><ul class=\"pn-why\">" + others.map(function (k) {
@@ -2737,6 +2747,7 @@
     tlSync(r);
     bindRunSwipe();
     if (G.PREP_RAD) G.PREP_RAD.mount(root);
+    if (r.onRender) { try { r.onRender(r); } catch (e) {} }
   }
   /* A fresh answer: the page stays where the finger was. When the verdict card starts below the fold, the body glides
      just far enough to show its first lines (never up, never past the card's top), 280 ms, instant under reduced motion. */
@@ -2936,6 +2947,8 @@
     if (G.PREP_NATIVE) G.PREP_NATIVE.changed();
     // Anonymous practice statistics (prep-tools.js, opt-in); a Tests 2 attempt sends its own from prep-tests.js.
     if (G.PREP_TOOLS && !(st.run && st.run.t2)) G.PREP_TOOLS.noteAnswer(it, chosen, msT, s.exam);
+    // Play (prep-play.js): the study hour, this month's subject counts, earned streak freezes.
+    if (G.PREP_PLAY && chosen >= 0) G.PREP_PLAY.noteAnswer(s, it, ok, td);
     // Mistakes (bank questions only; a deck's questions live in Layer C storage): kept until answered right.
     // PYQ items live in their paper, not a module file, so My mistakes (which reloads modules) leaves them out.
     if (it._s !== "deck" && !it._py) { if (ok) delete s.mt[it.id]; else s.mt[it.id] = [it._s, it._m || it.t, (s.mt[it.id] || [])[2] || null, Date.now(), String(it.q || "").slice(0, 140)]; }
@@ -2948,8 +2961,10 @@
     if (r.qc) { var i0 = r.i; qtick(r); if (r.done || r.i !== i0 || r.qc.out[i0]) return; }   // the time ran out first: no answer after it
     if (r.sc) { secTick(r); if (r.done || r.phase === "between" || !inSec(r, r.i)) return; }   // a closed section never takes an answer
     if (r.changed && r.ans[r.i] >= 0 && r.ans[r.i] !== k) r.changed[r.i]++;
-    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
+    if (r.mode === "study") { if (r.ans[r.i] >= 0) return; r.ans[r.i] = k; r.fresh = st.kb ? -1 : r.i; r.kyHide = true; if (!r.norec) record(r.items[r.i], k, { conf: r.conf && r.conf[r.i], pair: r.confPair && r.confPair[r.i], ms: Date.now() - (r.qt0 || r.t0) }); }
     else r.ans[r.i] = k;
+    // A run's own rule after each answer (prep-play.js boss lives); it may finish the run.
+    if (r.onAnswer) { try { r.onAnswer(r, k); } catch (e) {} if (r.done) return; }
     renderRun();
   }
   function finish() {
@@ -4211,6 +4226,7 @@
     if (a.indexOf("t2-") === 0 && G.PREP_TESTS) return G.PREP_TESTS.act(a, b, HOST);
     if (a.indexOf("x-") === 0 && G.PREP_TOOLS) return G.PREP_TOOLS.act(a, b, HOST);
     if (a.indexOf("tt-") === 0 && G.PREP_TT) return G.PREP_TT.act(a, b, HOST);
+    if (a.indexOf("v-") === 0 && G.PREP_PLAY) return G.PREP_PLAY.act(a, b, HOST);
     if (a.indexOf("n360-") === 0 && G.PREP_NUCLEUS360) return G.PREP_NUCLEUS360.act(a, b, HOST);
     if (a === "back") return back();
     if (a === "retry") { close(); return open(); }
@@ -4506,7 +4522,9 @@
     planToday: function () { return planToday(load(), today()); }, staticBase: STATIC, pnow: function () { return pnow(); },
     openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits,
     // MaiK modules (prep-qgen.js): the bank and overlay files of a module, for the owner's duplicate check on the server.
-    modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); } };
+    modulePath: modulePath, overlaysOf: function (sid) { return overlaysOfSid(sid); },
+    // Play (prep-play.js): record an answer given outside the runner (the feed), finish the run in progress.
+    record: function (it, k, cap) { record(it, k, cap); }, finish: function () { finish(); }, poolFor: poolFor, countFor: countFor };
 
   var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
     // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.

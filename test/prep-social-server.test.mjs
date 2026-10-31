@@ -174,7 +174,7 @@ test("groups: create, join, full at 30, leave passes ownership, members today, w
   await call(env, "POST", "progress", "b", { done: 25 });
   assert.equal((await call(env, "POST", "progress", "a", { done: -1 })).status, 400);
   const g = (await call(env, "GET", "groups", "b")).body.groups;
-  assert.deepEqual(g, [{ code, name: "Night owls", dailyTarget: 50, owner: "Asha Rao", mine: false, members: [{ name: "Asha Rao", todayDone: 40 }, { name: "Bilal K", todayDone: 25 }] }]);
+  assert.deepEqual(g, [{ code, name: "Night owls", dailyTarget: 50, owner: "Asha Rao", mine: false, members: [{ name: "Asha Rao", todayDone: 40 }, { name: "Bilal K", todayDone: 25 }], squad: false, streak: 0, todayAll: false }]);   // 2 members: not a squad
   const bd = (await call(env, "GET", "groups/board?code=" + code, "a")).body;
   assert.deepEqual(bd, { week: "2026-10-05", rows: [{ name: "Bilal K", score: 55 }, { name: "Asha Rao", score: 40 }] });
   assert.equal((await call(env, "GET", "groups/board?code=" + code, "c")).status, 404, "members only");
