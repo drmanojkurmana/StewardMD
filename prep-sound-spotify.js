@@ -219,8 +219,13 @@
     } catch (e) {}
     return "9545526c500040058279facbdcdba9ee";   // owner's Spotify app (public PKCE client id, no secret); dev-mode allowlist only until approval
   }
+  function native() {
+    try { return !!(G.Capacitor && G.Capacitor.isNativePlatform && G.Capacitor.isNativePlatform()); } catch (e) { return false; }
+  }
   function redirectUri() {
     try { if (G.SMD_SPOTIFY_REDIRECT_URI) return String(G.SMD_SPOTIFY_REDIRECT_URI); } catch (e) {}
+    // In the app the page is https://localhost / capacitor://localhost, which Spotify rejects; use the app's own scheme.
+    if (native()) return "stewardmd://spotify-callback";
     return G.location.origin + G.location.pathname;
   }
   var CID = clientId();
@@ -362,13 +367,15 @@
     });
   }
   // OAuth return: ?code=&state= on the redirect URI. State must match; verifier is single-use.
-  function handleReturn() {
-    var code = (G.location.search.match(/[?&]code=([^&]+)/) || [])[1];
+  // url: the stewardmd://spotify-callback?code=&state= deep link in the app; omitted on web (page query).
+  function handleReturn(url) {
+    var src = url || G.location.search;
+    var code = (src.match(/[?&]code=([^&#]+)/) || [])[1];
     if (!code) return;
-    var state = (G.location.search.match(/[?&]state=([^&]+)/) || [])[1], want = null, verifier = null;
+    var state = (src.match(/[?&]state=([^&#]+)/) || [])[1], want = null, verifier = null;
     try { want = G.sessionStorage.getItem(STATE_KEY); verifier = G.sessionStorage.getItem(VERIFIER_KEY); } catch (e) {}
     try { G.sessionStorage.removeItem(STATE_KEY); G.sessionStorage.removeItem(VERIFIER_KEY); } catch (e) {}
-    try { G.history.replaceState(null, "", G.location.pathname + G.location.hash); } catch (e) {}
+    if (!url) try { G.history.replaceState(null, "", G.location.pathname + G.location.hash); } catch (e) {}
     if (!state || !want || state !== want || !verifier) return;
     client().exchange(decodeURIComponent(code), verifier).then(function () {
       if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
@@ -429,6 +436,11 @@
     dockButtonHtml: dockButtonHtml, adapter: adapter, back: function () { return closeSheet(); },
     leave: function () { return closeSheet(); }, _pure: PURE, _s: S };
   handleReturn();
+  // shortcut: warm return only (appUrlOpen); if the OS killed the app during sign-in the sessionStorage verifier is gone and the user taps Connect again.
+  try {
+    var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App;
+    if (AppP) AppP.addListener("appUrlOpen", function (d) { if (d && /^stewardmd:\/\/spotify-callback/.test(d.url || "")) handleReturn(d.url); });
+  } catch (e) {}
 })(typeof window !== "undefined" ? window : this);
 
 

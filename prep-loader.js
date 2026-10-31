@@ -81,6 +81,21 @@
     back: function () { return false; },
     close: function () {}
   };
-  G.PREP_LOADER = { load: load, enabled: enabled, V: V, CSS: CSS, JS: JS };
+  // Test switch for the opt-in PrepNucleus flags inside the app (no address bar there):
+  // stewardmd://prep-flags?sound=1&spotify=1&medigram=1 (0 turns one off). Only these three keys can be set.
+  var FLAG_KEYS = { sound: "smd_prep_sound", spotify: "smd_prep_sound_spotify", medigram: "smd_prep_medigram" };
+  function applyFlagLink(url) {
+    var m = /^stewardmd:\/\/prep-flags\?(.*)$/.exec(String(url || "")); if (!m) return false;
+    var n = 0;
+    m[1].split("&").forEach(function (kv) { var p = kv.split("="), k = FLAG_KEYS[p[0]];
+      if (k && (p[1] === "1" || p[1] === "0")) { try { G.localStorage.setItem(k, p[1]); n++; } catch (e) {} } });
+    if (n) try { G.location.reload(); } catch (e) {}
+    return n > 0;
+  }
+  try {
+    var AppP = G.Capacitor && G.Capacitor.Plugins && G.Capacitor.Plugins.App;
+    if (AppP) AppP.addListener("appUrlOpen", function (d) { applyFlagLink(d && d.url); });
+  } catch (e) {}
+  G.PREP_LOADER = { load: load, enabled: enabled, V: V, CSS: CSS, JS: JS, applyFlagLink: applyFlagLink };
   if (!G.PREP) G.PREP = stub;
 })(typeof window !== "undefined" ? window : this);
