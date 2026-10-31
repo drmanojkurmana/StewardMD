@@ -149,14 +149,25 @@ test("selecting a protocol shows the handoff confirmation, not an activation", (
 test("interactive map: node-graph with positioned nodes, curved edges + state classes", () => {
   reset({ n_histology: ["invasive"], n_stage: ["s2"], n_setting: ["neoadjuvant"], n_her2: ["pos"], n_hr2p: ["neg"] });
   UI._st.view = "map";
+  // default "Your path": walked steps + next options only, a locate key, and a way to the full map
+  UI._st.mapAll = false;
+  const focus = UI._bodyHtml();
+  assert.ok(/ot-graph-canvas/.test(focus));                // pan canvas
+  assert.ok(/ot-gnode active/.test(focus));                // the walked path
+  assert.ok(!/ot-gnode[^"]*disabled/.test(focus));         // excluded branches stay out of this view
+  assert.ok(/data-ot-act="graph-locate"/.test(focus));     // go to the current step
+  assert.ok(/data-ot-act="map-mode" data-ot-arg="all"/.test(focus));   // way to the whole graph
+  noPlaceholders(focus);
+  // "Full map": the whole graph with excluded branches and zoom / fit controls
+  UI._st.mapAll = true;
   const html = UI._bodyHtml();
-  assert.ok(/ot-graph-canvas/.test(html));                 // pan/zoom canvas
   assert.ok(/ot-gnode active/.test(html));                 // an active node
   assert.ok(/ot-gnode[^"]*disabled/.test(html));           // an excluded branch node
   assert.ok(/<path class="ot-edge/.test(html));            // SVG edges between nodes
   assert.ok(/left:\d+px;top:\d+px/.test(html));            // nodes are absolutely positioned (layout ran)
   assert.ok(/data-ot-act="graph-fit"/.test(html));         // zoom/fit controls present
   noPlaceholders(html);
+  UI._st.mapAll = false;
 });
 
 test("answering prunes now-unreachable downstream answers (no stale deep answer)", () => {

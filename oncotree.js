@@ -15,11 +15,11 @@
   var D = (typeof document !== "undefined") ? document : null;
 
   var CAT = {
-    criteria: { color: "#785EF0", icon: "checklist", name: "Criteria" },
-    workup: { color: "#648FFF", icon: "biotech", name: "Work-up" },
-    treatment: { color: "#FE6100", icon: "medication", name: "Treatment" },
-    surveillance: { color: "#FFB000", icon: "monitor_heart", name: "Surveillance" },
-    other: { color: "#870F54", icon: "more_horiz", name: "Other" }
+    criteria: { color: "#7a4fd0", icon: "checklist", name: "Criteria" },
+    workup: { color: "#5868c9", icon: "biotech", name: "Work-up" },
+    treatment: { color: "#9c3a8f", icon: "medication", name: "Treatment" },
+    surveillance: { color: "#b0658f", icon: "monitor_heart", name: "Surveillance" },
+    other: { color: "#6f2c6b", icon: "more_horiz", name: "Other" }
   };
 
   // Diseases with an authored + reviewed navigator graph (kb/oncotree/<id>.json). The engine + UI are
@@ -160,9 +160,9 @@
       var label = sel.length ? sel[0].label : "";
       return '<button class="ot-rail-chip" data-ot-act="edit" data-ot-node="' + esc(n.id) + '">' +
         '<span class="ot-rail-k">' + esc(n.name) + "</span>" +
-        '<span class="ot-rail-v">' + esc(shortLabel(label)) + "</span>" + ms("edit") + "</button>";
-    }).join('<span class="ot-rail-arrow">' + ms("chevron_right") + "</span>");
-    return '<div class="ot-rail">' + chips + "</div>";
+        '<span class="ot-rail-v">' + esc(shortLabel(label)) + "</span>" + ms("chevron_right") + "</button>";
+    }).join("");
+    return '<div class="ot-rail" aria-label="Answered steps">' + chips + "</div>";
   }
   function shortLabel(l) { l = String(l || ""); var i = l.indexOf(" ("); return i > 0 ? l.slice(0, i) : l; }
 
@@ -407,34 +407,90 @@
     return { pos: pos, edges: edges, width: canvasW, height: (maxL + 1) * (NH + VGAP) - VGAP, ids: ids };
   }
 
+  // Focus layout (the default Overview on a phone): the walked path stacked in one readable column, and the
+  // branches open from the current step laid out under it in two columns. Excluded and not-yet-reachable
+  // branches stay out of this view; "Full map" shows the whole graph. Positions carry their own w/h.
+  var FW = 320, FH = 66, FGAP = 34, OW = 154, OH = 62, OGAP = 12;
+  function focusLayout(state) {
+    var order = asArr(state.order), links = state.links || {};
+    var path = order.filter(function (id) { return state.nodes[id] && state.nodes[id].status === "active"; });
+    var onPath = {}; path.forEach(function (id) { onPath[id] = true; });
+    var frontier = path.filter(function (id) { return !state.nodes[id].isAnswered; });
+    var nextIds = [], seen = {};
+    Object.keys(links).forEach(function (lid) {
+      var l = links[lid];
+      if (frontier.indexOf(l.from) < 0 || onPath[l.to] || seen[l.to]) return;
+      var ns = state.nodes[l.to]; if (!ns || ns.status === "disabled" || ns.status === "unreachable") return;
+      seen[l.to] = true; nextIds.push(l.to);
+    });
+    nextIds.sort(function (x, y) { return order.indexOf(x) - order.indexOf(y); });
+    var pos = {}, y = 0;
+    path.forEach(function (id) {
+      var h = state.nodes[id].isAnswered ? FH + 20 : FH;   // answered steps show their answer on a third line
+      pos[id] = { x: 0, y: y, w: FW, h: h }; y += h + FGAP;
+    });
+    var optTop = y + (nextIds.length ? 10 : 0) - (path.length ? 0 : FGAP);
+    nextIds.forEach(function (id, i) {
+      var col = nextIds.length === 1 ? -1 : i % 2, row = nextIds.length === 1 ? 0 : Math.floor(i / 2);
+      var w = col < 0 ? FW : OW, x = col < 0 ? 0 : col * (OW + OGAP);
+      pos[id] = { x: x, y: optTop + row * (OH + OGAP), w: w, h: OH };
+    });
+    var height = nextIds.length ? optTop + Math.ceil(nextIds.length / (nextIds.length === 1 ? 1 : 2)) * (OH + OGAP) - OGAP : Math.max(y - FGAP, FH);
+    var edges = [];
+    for (var i = 1; i < path.length; i++) {
+      var a = pos[path[i - 1]], b = pos[path[i]];
+      edges.push({ d: "M" + (a.x + a.w / 2) + "," + (a.y + a.h) + " L" + (b.x + b.w / 2) + "," + b.y, active: true });
+    }
+    var src = frontier.length ? pos[frontier[frontier.length - 1]] : null;
+    if (src) nextIds.forEach(function (id) {
+      var t = pos[id], x1 = src.x + src.w / 2, y1 = src.y + src.h, x2 = t.x + t.w / 2, y2 = t.y, my = (y1 + y2) / 2;
+      edges.push({ d: "M" + x1 + "," + y1 + " C" + x1 + "," + my + " " + x2 + "," + my + " " + x2 + "," + y2, next: true });
+    });
+    return { pos: pos, edges: edges, width: FW, height: height, ids: path.concat(nextIds), hidden: order.length - path.length - nextIds.length, focus: true,
+      frontier: frontier[frontier.length - 1] || path[path.length - 1] || null };
+  }
+
   function mapHtml(state) {
-    var g = graphLayout(state);
-    st._graphSize = { w: g.width, h: g.height };
+    var all = !!st.mapAll;
+    var g = all ? graphLayout(state) : focusLayout(state);
+    if (all) { g.frontier = asArr(state.order).filter(function (id) { var n = state.nodes[id]; return n && n.status === "active" && !n.isAnswered; })[0] || null; }
+    st._graphSize = { w: g.width, h: g.height + (!all && g.hidden > 0 ? 78 : 0) };
     st._graphPos = g.pos;
+    st._graphFocus = g.frontier;
     var paths = g.edges.map(function (e) {
-      return '<path class="ot-edge' + (e.active ? " active" : "") + (e.disabled ? " disabled" : "") + '" d="' + e.d + '"/>';
+      return '<path class="ot-edge' + (e.active ? " active" : "") + (e.disabled ? " disabled" : "") + (e.next ? " next" : "") + '" d="' + e.d + '"/>';
     }).join("");
     var svg = '<svg class="ot-graph-svg" width="' + g.width + '" height="' + g.height + '" viewBox="0 0 ' + g.width + " " + g.height + '" fill="none">' + paths + "</svg>";
     var nodes = g.ids.map(function (id) {
       var ns = state.nodes[id], raw = st.byId[id] || {}, p = g.pos[id], cat = CAT[raw.nodeCategory] || CAT.other;
       var sel = ns.options.filter(function (o) { return o.isSelected; });
       var frontier = ns.status === "active" && !ns.isAnswered;
-      var cls = "ot-gnode " + ns.status + (raw.nodeType === "end" ? " end" : "") + (ns.isResolved ? " resolved" : "") + (frontier ? " frontier" : "") + (st.mapSel === id ? " sel" : "");
-      var mark = ns.status === "active" ? (ns.isAnswered ? "task_alt" : "radio_button_unchecked") : ns.status === "disabled" ? "block" : "more_horiz";
-      return '<button class="' + cls + '" data-ot-act="mapnode" data-ot-node="' + esc(id) + '" style="left:' + p.x + "px;top:" + p.y + "px;width:" + NW + "px;height:" + NH + "px;--ot-c:" + cat.color + '">' +
-        '<span class="ot-gn-top">' + ms(cat.icon) + '<span class="ot-gn-cat">' + esc(cat.name) + "</span>" + '<span class="ot-gn-mark">' + ms(mark) + "</span></span>" +
+      var w = p.w || NW, h = p.h || NH;
+      var cls = "ot-gnode " + ns.status + (raw.nodeType === "end" ? " end" : "") + (ns.isResolved ? " resolved" : "") + (frontier ? " frontier" : "") + (st.mapSel === id ? " sel" : "") + (w < 200 ? " narrow" : "");
+      var mark = ns.status === "active" ? (ns.isAnswered ? "check_circle" : "radio_button_checked") : ns.status === "disabled" ? "block" : "";
+      var label = frontier ? "Current step" : ns.status === "disabled" || ns.status === "unreachable" ? "Excluded" : ns.status === "active" ? cat.name : "Possible next";
+      return '<button class="' + cls + '" data-ot-act="mapnode" data-ot-node="' + esc(id) + '" style="left:' + p.x + "px;top:" + p.y + "px;width:" + w + "px;height:" + h + "px;--ot-c:" + cat.color + '">' +
+        '<span class="ot-gn-top"><span class="ot-gn-cat">' + esc(label) + "</span>" + (mark ? '<span class="ot-gn-mark">' + ms(mark) + "</span>" : "") + "</span>" +
         '<span class="ot-gn-name">' + esc(raw.name || raw.title || id) + "</span>" +
-        (asArr(raw.evidenceCategory).length ? '<span class="ot-gn-ev">' + evBadge(raw) + "</span>" : "") +
         (sel.length ? '<span class="ot-gn-sel">' + esc(shortLabel(sel[0].label)) + "</span>" : "") +
         "</button>";
     }).join("");
-    return '<div class="ot-graph" id="otGraph">' +
-      '<div class="ot-graph-vp" id="otGraphVp"><div class="ot-graph-canvas" id="otGraphCanvas" style="width:' + g.width + "px;height:" + g.height + 'px">' + svg + nodes + "</div></div>" +
+    return '<div class="ot-graph' + (all ? " ot-graph-all" : " ot-graph-focus") + (st.mapSel ? " ot-graph-pop" : "") + '" id="otGraph">' +
+      '<div class="ot-graph-vp" id="otGraphVp"><div class="ot-graph-canvas" id="otGraphCanvas" style="width:' + g.width + "px;height:" + g.height + 'px">' + svg + nodes +
+        // the way to the rest of the graph sits after the last card, in the flow, so it never covers a step
+        (!all && g.hidden > 0 ? '<button class="ot-graph-more" data-ot-act="map-mode" data-ot-arg="all" style="top:' + (g.height + 22) + "px;width:" + g.width + 'px">' + g.hidden + " other steps in the full map" + ms("chevron_right") + "</button>" : "") +
+      "</div></div>" +
+      '<div class="ot-graph-bar">' +
+        '<div class="ot-gseg" role="tablist" aria-label="Map">' +
+          '<button class="ot-gseg-b' + (all ? "" : " on") + '" role="tab" aria-selected="' + !all + '" data-ot-act="map-mode" data-ot-arg="path">Your path</button>' +
+          '<button class="ot-gseg-b' + (all ? " on" : "") + '" role="tab" aria-selected="' + all + '" data-ot-act="map-mode" data-ot-arg="all">Full map</button>' +
+        "</div>" +
+      "</div>" +
       '<div class="ot-graph-ctl">' +
-        '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="out" aria-label="Zoom out">' + ms("remove") + "</button>" +
-        '<button class="ot-gctl" data-ot-act="graph-fit" aria-label="Fit">' + ms("fit_screen") + "</button>" +
-        '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="in" aria-label="Zoom in">' + ms("add") + "</button></div>" +
-      '<div class="ot-graph-hint">' + ms("drag_pan") + "Drag to pan &middot; pinch to zoom &middot; tap a node</div>" +
+        (all ? '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="in" aria-label="Zoom in">' + ms("add") + "</button>" +
+          '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="out" aria-label="Zoom out">' + ms("remove") + "</button>" +
+          '<button class="ot-gctl" data-ot-act="graph-fit" aria-label="Show the whole map">' + ms("fit_screen") + "</button>" : "") +
+        '<button class="ot-gctl" data-ot-act="graph-locate" aria-label="Go to the current step">' + ms("my_location") + "</button></div>" +
       tocHtml(state) +
       (st.mapSel ? mapPopHtml(st.mapSel, state) : "") +
       "</div>";
@@ -472,7 +528,7 @@
     }).join("");
   }
   function tocHtml(state) {
-    if (st.tocOpen === false) return '<button class="ot-toc-fab" data-ot-act="toc-toggle" aria-label="Contents">' + ms("list") + "</button>";
+    if (!st.tocOpen) return '<button class="ot-toc-fab" data-ot-act="toc-toggle" aria-label="Contents">' + ms("list") + "</button>";
     return '<div class="ot-toc"><div class="ot-toc-hd">' + ms("list") + "<span>Contents</span>" +
       '<button class="ot-toc-x" data-ot-act="toc-toggle" aria-label="Collapse contents">' + ms("close") + "</button></div>" +
       '<div class="ot-toc-search-wrap">' + ms("search") +
@@ -552,9 +608,9 @@
         "<div>Phenotype: " + esc(phenoSummary(s.phenotype)) + "</div>" +
       "</div>" +
       '<div class="ot-sel-actions">' +
+        '<button class="ot-btn primary" data-ot-act="handoff">' + ms("open_in_new") + "Continue in treatment workflow</button>" +
         '<button class="ot-btn ghost" data-ot-act="back-pathway">' + ms("arrow_back") + "Back to pathway</button>" +
         (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost" data-ot-act="proto-sheet" data-ot-proto="' + esc(s.protocolId) + '">' + ms("description") + "Protocol sheet</button>" : "") +
-        '<button class="ot-btn primary" data-ot-act="handoff">' + ms("open_in_new") + "Continue in treatment workflow</button>" +
       "</div></div>";
   }
   function phenoSummary(ph) {
@@ -1667,25 +1723,32 @@
   function shellHtml() {
     var hasGraph = !!st.graph;
     var title = hasGraph ? (st.graph.title || "ONCOTREE") : "OncoTree";
+    // Graph views: a three-way segmented control (text only, equal segments) with Summary and Restart as round
+    // keys at its end. Staging lives once, in the header, instead of also being a fourth segment.
     var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
-      '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" data-ot-act="view-navigator">' + ms("account_tree") + "Navigator</button>" +
-      '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("format_list_bulleted") + "Step Flow</button>" +
-      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Overview</button>" +
-      '<button class="ot-vt ot-vt-stg" data-ot-act="open-staging" title="TNM Staging for this cancer">' + ms("stairs") + "Staging</button>" +
-      '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
-    var kicker = hasGraph
-      ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
-      : "";   // the picker page already titles itself; no all-caps eyebrow above the header name
+      '<div class="ot-seg" role="tablist" aria-label="View">' +
+        '<button class="ot-vt' + (st.view === "navigator" ? " on" : "") + '" role="tab" aria-selected="' + (st.view === "navigator") + '" data-ot-act="view-navigator">Navigator</button>' +
+        '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" role="tab" aria-selected="' + (st.view === "pathway") + '" data-ot-act="view-pathway">Steps</button>' +
+        '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" role="tab" aria-selected="' + (st.view === "map") + '" data-ot-act="view-map">Overview</button>' +
+      '</div>' +
+      '<button type="button" class="ot-vkey" data-ot-act="summary" aria-label="Pathway summary">' + ms("summarize") + '</button>' +
+      '<button type="button" class="ot-vkey" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + '</button>' +
+      '</div>') : "";
+    // The cancer name is the title; tapping it changes cancer (no all-caps "change cancer" eyebrow above it).
+    var titleHtml = hasGraph
+      ? '<button type="button" class="ot-htitle-btn" data-ot-act="change-disease" aria-label="Change cancer"><span class="ot-hname">' + esc(title) + '</span>' + ms("expand_more") + '</button>'
+      : '<span class="ot-hname">' + esc(title) + '</span>';
     var rightBtn = '<div class="ot-h-actions">' +
       '<button type="button" class="ot-hbtn ot-hbtn-stg" data-ot-act="open-staging" aria-label="TNM Cancer Staging" title="TNM Cancer Staging">' + ms("stairs") + '</button>' +
       '<button type="button" class="ot-hbtn ot-hbtn-calc" data-ot-act="open-calvert-calc" aria-label="Creatinine & Calvert Calculator" title="Creatinine & Calvert Calculator">' + ms("calculate") + '</button>' +
-      (hasGraph ? '<button class="ot-hbtn" data-ot-act="reset" aria-label="Restart">' + ms("restart_alt") + '</button>' : '<span class="ot-hbtn" aria-hidden="true" style="opacity:0;pointer-events:none;"></span>') +
       '</div>';
     var isNavScrollLocked = !!st.graph && !st.openedProtocol && !st.selection && (st.view === "navigator");
-    return '<div class="ot-shell">' +
+    // The picker carries its own large "Oncology Navigator" title, so its bar starts transparent and untitled and
+    // only frosts (with the compact title) once the list scrolls under it; see syncOtScrolled().
+    return '<div class="ot-shell' + (hasGraph ? "" : " ot-collapse") + '">' +
       '<header class="ot-header">' +
         '<button class="ot-hbtn" data-ot-act="close" aria-label="Close">' + ms("close") + "</button>" +
-        '<div class="ot-htitle">' + kicker + '<span class="ot-hname">' + esc(title) + "</span></div>" +
+        '<div class="ot-htitle">' + titleHtml + "</div>" +
         rightBtn +
       "</header>" +
       viewToggle +
@@ -1729,9 +1792,21 @@
     var el = D && D.getElementById("smdOncoTree");
     if (!el) return;
     el.innerHTML = shellHtml();
+    bindOtScroll();
     motionRender();
     setupGraph();
     setupNavigatorCanvas();
+  }
+  function syncOtScrolled() {
+    var sh = D && D.querySelector("#smdOncoTree .ot-shell"), b = D && D.getElementById("otBody");
+    if (sh && b) sh.classList.toggle("ot-scrolled", b.scrollTop > 28);
+  }
+  function bindOtScroll() {
+    var b = D && D.getElementById("otBody");
+    if (!b || b.__otScrollBound) { syncOtScrolled(); return; }
+    b.__otScrollBound = true;
+    b.addEventListener("scroll", syncOtScrolled, { passive: true });
+    syncOtScrolled();
   }
   function repaintBody() {
     var b = D && D.getElementById("otBody");
@@ -1750,14 +1825,34 @@
     var vp = D && D.getElementById("otGraphVp"), pos = st._graphPos && st._graphPos[id];
     if (!vp || !pos) return;
     var s = (st.graphT && st.graphT.s) || 1;
-    st.graphT = { x: vp.clientWidth / 2 - (pos.x + NW / 2) * s, y: vp.clientHeight / 2 - (pos.y + NH / 2) * s, s: s };
+    st.graphT = { x: vp.clientWidth / 2 - (pos.x + (pos.w || NW) / 2) * s, y: vp.clientHeight * 0.4 - (pos.y + (pos.h || NH) / 2) * s, s: s };
     applyGraphT();
+  }
+  // Opening view. Your path: full width, scrolled so the current step sits in the upper half when the path is
+  // long. Full map: readable zoom (not fit-everything, which made 53 nodes unreadable) centred on the current step.
+  function graphInitial() {
+    var vp = D && D.getElementById("otGraphVp"), sz = st._graphSize; if (!vp || !sz) return;
+    var W = vp.clientWidth, H = vp.clientHeight, top = 64, f = st._graphFocus && st._graphPos && st._graphPos[st._graphFocus];
+    if (!st.mapAll) {
+      var s = Math.min(1.08, (W - 32) / sz.w), x = (W - sz.w * s) / 2, y = top;
+      if (f && top + (f.y + f.h) * s > H * 0.5) y = Math.max(H - 24 - sz.h * s, H * 0.26 - f.y * s);
+      if (sz.h * s + top + 24 <= H) y = top;
+      st.graphT = { x: x, y: y, s: s }; applyGraphT(); return;
+    }
+    st.graphT = { x: 0, y: 0, s: 0.72 };
+    if (f) centerOnNode(st._graphFocus); else graphFit();
+  }
+  function graphLocate() {
+    if (!st._graphFocus) { graphInitial(); return; }
+    if (!st.mapAll) { st.graphT = null; graphInitial(); return; }
+    var t = st.graphT || { s: 0.72 }; if (t.s < 0.6) st.graphT = { x: t.x, y: t.y, s: 0.72 };
+    centerOnNode(st._graphFocus);
   }
   function graphFit() {
     var vp = D && D.getElementById("otGraphVp"), sz = st._graphSize; if (!vp || !sz) return;
-    var pad = 20, s = Math.min((vp.clientWidth - pad * 2) / sz.w, (vp.clientHeight - pad * 2) / sz.h, 1);
+    var pad = 20, top = 64, s = Math.min((vp.clientWidth - pad * 2) / sz.w, (vp.clientHeight - top - pad) / sz.h, 1);
     if (!isFinite(s) || s <= 0) s = 1;
-    st.graphT = { x: Math.max(pad, (vp.clientWidth - sz.w * s) / 2), y: pad, s: s }; applyGraphT();
+    st.graphT = { x: Math.max(pad, (vp.clientWidth - sz.w * s) / 2), y: top, s: s }; applyGraphT();
   }
   function graphZoom(dir) {
     var vp = D && D.getElementById("otGraphVp"); var t = st.graphT || { x: 0, y: 0, s: 1 };
@@ -1769,7 +1864,7 @@
   function setupGraph() {
     if (st.view !== "map") return;
     var vp = D && D.getElementById("otGraphVp"); if (!vp) return;
-    if (!st.graphT) graphFit(); else applyGraphT();
+    if (!st.graphT) graphInitial(); else applyGraphT();
     if (vp._otWired) return; vp._otWired = true;
     var pts = {}, base = null, baseMid = null, baseDist = 0;
     function ids() { return Object.keys(pts); }
@@ -1984,7 +2079,7 @@
     }
     if (act === "view-navigator") { st.openedProtocol = null; st.selection = null; st.view = "navigator"; paint(); return; }
     if (act === "view-pathway") { st.openedProtocol = null; st.selection = null; st.view = "pathway"; paint(); return; }
-    if (act === "view-map") { st.openedProtocol = null; st.selection = null; st.view = "map"; paint(); return; }
+    if (act === "view-map") { st.openedProtocol = null; st.selection = null; st.view = "map"; st.graphT = null; st.mapSel = null; paint(); return; }
     if (act === "nav-sidebar-toggle") { st.sidebarOpen = !(st.sidebarOpen !== false); repaintBody(); return; }
     if (act === "nav-toggle-nonactive") { st.showNonActive = !st.showNonActive; repaintBody(); return; }
     if (act === "nav-zoom-in") { navZoom("in"); return; }
@@ -2016,8 +2111,10 @@
     if (act === "nav-jump-section") { navJumpSection(t.getAttribute("data-ot-sec"), t.getAttribute("data-ot-opt")); return; }
     if (act === "graph-zoom") { graphZoom(t.getAttribute("data-ot-arg")); return; }
     if (act === "graph-fit") { graphFit(); return; }
-    if (act === "toc-toggle") { st.tocOpen = !(st.tocOpen !== false); repaintBody(); return; }
-    if (act === "toc-goto") { st.mapSel = node; repaintBody(); centerOnNode(node); return; }
+    if (act === "toc-toggle") { st.tocOpen = !st.tocOpen; repaintBody(); return; }
+    if (act === "map-mode") { var wantAll = t.getAttribute("data-ot-arg") === "all"; if (!!st.mapAll !== wantAll) { st.mapAll = wantAll; st.graphT = null; st.mapSel = null; repaintBody(); } return; }
+    if (act === "graph-locate") { graphLocate(); return; }
+    if (act === "toc-goto") { if (!(st._graphPos && st._graphPos[node])) { st.mapAll = true; st.graphT = null; } st.mapSel = node; st.tocOpen = false; repaintBody(); centerOnNode(node); return; }
     if (act === "mapnode") { if (graphMoved) { graphMoved = false; return; } st.mapSel = (st.mapSel === node ? null : node); repaintBody(); return; }
     if (act === "mappop-close") { st.mapSel = null; repaintBody(); return; }
     if (act === "footnote") { st.footnoteOpen = t.getAttribute("data-ot-fn"); repaintBody(); return; }

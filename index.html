@@ -96,9 +96,9 @@ try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]spl
 <link rel="stylesheet" href="/ophthalmos-learn.css?v=oph14">
 <link rel="stylesheet" href="/ophthalmos-explore.css?v=oph14">
 <link rel="stylesheet" href="/oph-theme-dark.css?v=ophdark2">
-<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1-logo1">
-<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1-align1">
-<link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1-plum1">
+<link rel="stylesheet" href="/onco-home.css?v=op8-qafit3-fr1-ipad1-logo1-nostripe1">
+<link rel="stylesheet" href="/oncotree.css?v=nccn-nav8-tbfit1-fr1-pf1-align1-hdr2-map1">
+<link rel="stylesheet" href="/protocol-sheet.css?v=ps5-fr1-oncolinks1-plum1-hdr2-nostripe1">
 <link rel="stylesheet" href="/protocol-maker.css?v=pm2-fr1-ic1">
 <link rel="stylesheet" href="/fundx.css?v=sar1-fr1-ipad1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark-fr1">
@@ -2924,7 +2924,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=native1-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1-dosecalc1-cost1002-cel1-pm1-ondev2-mkai1-mkw1-ftool2" defer></script>
+<script src="/opd-emr.js?v=native1-opdcols1-imm1-r6-1-scribe18-sid1-nerdx1-nodash1-proto3-kits3-sttfb2-assign1-edit1-rankv3a-calib1-prior1-nodraft1-oncoapply1-dosecalc1-cost1002-cel1-pm1-ondev2-mkai1-mkw1-ftool2-pbox1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6-pm1" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -2949,7 +2949,7 @@ window.openExternal = function (u) {
      honest gaps for sites not yet added), ISMP tall-man drug names, onco drug+interaction view, and a
      read-only protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
-<script src="/onco-staging.js?v=op7-race1-hdr1" defer></script>
+<script src="/onco-staging.js?v=op7-race1-hdr1-prov1" defer></script>
 <!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
      all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
      fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
@@ -2983,7 +2983,7 @@ window.openExternal = function (u) {
 <script src="/assets/vendor/motion.min.js?v=motion10" defer></script>
 <script src="/oncotree-engine.js?v=ot5" defer></script>
 <script src="/oncotree-recommend.js?v=ot6" defer></script>
-<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1-align1" defer></script>
+<script src="/oncotree.js?v=nccn-nav9-ci1-handoff1-nodraft1-pf1-align1-hdr2-map1" defer></script>
 <script src="/protocol-sheet.js?v=ps6-fr1-oncolinks1-fig1" defer></script>
 <script src="/protocol-maker.js?v=pm2" defer></script>
 <!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
@@ -3317,7 +3317,7 @@ window.openExternal = function (u) {
 <script src="/tokos-loader.js?v=tok12" defer></script>
 <!-- PrepNucleus: only the loader at boot; prep.css, specialty-core.js and prep.js load on first open (prep-loader.js).
      Flag smd_prep, default ON ("0" or ?prep=0 turns it off). -->
-<script src="/prep-loader.js?v=prep101" defer></script>
+<script src="/prep-loader.js?v=prep102" defer></script>
 <!-- Anesthetica (Anaesthesia, code id narke): only the loader at boot; the engine and its files load on first open (narke-loader.js) -->
 <script src="/narke-loader.js?v=nrk10" defer></script>
 <!-- Kardia (Echo + ECG learning): only the loader at boot; the engine and Kardia files load on first open (kardia-loader.js).

@@ -1498,6 +1498,8 @@
     if (closeCreditSheet()) return true;   // an image credit sheet closes first
     if (G.PREP_TOOLS && G.PREP_TOOLS.back()) return true;   // a note or reset sheet (prep-tools.js) closes first
     if (G.PREP_PLAY && G.PREP_PLAY.back()) return true;   // a play sheet or the feed's own state (prep-play.js) first
+    if (G.PREP_SOUND && G.PREP_SOUND.back()) return true;   // the Sound sheet (prep-sound.js) closes first
+    if (G.PREP_MEDIGRAM && G.PREP_MEDIGRAM.back()) return true;   // PrepReels (prep-medigram.js): release the player first
     if (G.PREP_VIEWER && G.PREP_VIEWER.close()) return true;   // an enlarged image (prep-viewer.js) closes first
     if (G.PREP_REASON && G.PREP_REASON.back && G.PREP_REASON.back()) return true;   // Know more sheet closes first
     if (G.PREP_IDS && G.PREP_IDS.back()) return true;   // the share sheet (prep-ids.js) closes first
@@ -1605,6 +1607,8 @@
     stopTimer();
     try { if (G.PREP_TOOLS) G.PREP_TOOLS.flush(); } catch (e) {}
     try { if (G.PREP_PLAY) G.PREP_PLAY.leave(); } catch (e) {}
+    try { if (G.PREP_SOUND) G.PREP_SOUND.leave(); } catch (e) {}
+    try { if (G.PREP_MEDIGRAM) G.PREP_MEDIGRAM.leave(); } catch (e) {}
     try { if (G.PREP_ARENA && G.PREP_ARENA.leave) G.PREP_ARENA.leave(); } catch (e) {}
     try { if (G.PREP_LESSONS) G.PREP_LESSONS.leave(); } catch (e) {}
     try { if (G.PREP_PYQ) G.PREP_PYQ.leave(); } catch (e) {}
@@ -1984,6 +1988,8 @@
       (G.PREP_C ? row("c-home", ico("deck"), "Your decks", "Questions and cards from your PDF or notes") : "") +
       "</div>" +
       (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
+      (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
+      (G.PREP_SOUND ? G.PREP_SOUND.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
@@ -4236,6 +4242,9 @@
     if (a.indexOf("x-") === 0 && G.PREP_TOOLS) return G.PREP_TOOLS.act(a, b, HOST);
     if (a.indexOf("tt-") === 0 && G.PREP_TT) return G.PREP_TT.act(a, b, HOST);
     if (a.indexOf("v-") === 0 && G.PREP_PLAY) return G.PREP_PLAY.act(a, b, HOST);
+    if (a.indexOf("mg-") === 0 && G.PREP_MEDIGRAM) return G.PREP_MEDIGRAM.act(a, b, HOST);
+    // Sound (prep-sound.js) owns every data-act starting "s-" except "sp-" (the Spotify mini-player owns that; its check runs later).
+    if (a.indexOf("s-") === 0 && a.indexOf("sp-") !== 0 && G.PREP_SOUND) return G.PREP_SOUND.act(a, b, HOST);
     if (a.indexOf("n360-") === 0 && G.PREP_NUCLEUS360) return G.PREP_NUCLEUS360.act(a, b, HOST);
     if (a === "back") return back();
     if (a === "retry") { close(); return open(); }
@@ -4459,6 +4468,8 @@
     if (a.indexOf("k-") === 0 && G.PREP_FLASH) return G.PREP_FLASH.act(a, b, HOST);
     // Reasoning explanations and knowledge links (prep-reason.js) own every data-act starting "r-".
     if (a.indexOf("r-") === 0 && G.PREP_REASON) return G.PREP_REASON.act(a, b, HOST);
+    // Spotify mini-player (prep-sound-spotify.js; flags smd_prep_sound + smd_prep_sound_spotify, OFF) owns "sp-".
+    if (a.indexOf("sp-") === 0 && G.PREP_SOUND_SPOTIFY) return G.PREP_SOUND_SPOTIFY.act(a, b, HOST);
   }
   /* Submit the open section early. The official rule (profile navigation.early_section_submit false: NEET-PG, INI-CET,
      FMGE, NEET-SS) keeps a candidate in a section until its time ends; practice allows ending early, and the unused time

@@ -12058,6 +12058,37 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   with a live-text "ONCQIS" wordmark in the logo's teal gradient and its tagline (CliniX-style). assets/oncqis-logo.png is
   the owner's lockup, background removed and upscaled (palette PNG, 97 KB); oncqis-mark.png a 1024px raster.
   build-www.sh copies assets/oncqis-*. The logo keeps its own teal/red: the plum rule covers UI accents, not the brand mark.
+- 2026-10-31 OncoTree header + pathway screens brought to the ONCQIS standard. Picker bar is transparent and untitled at
+  rest (the page has the large "Oncology Navigator" title) and frosts with the compact title once #otBody scrolls past
+  28px (`.ot-collapse` / `.ot-scrolled`). In a cancer, the cancer name is the title and tapping it changes cancer (the
+  all-caps "CHANGE CANCER" eyebrow is gone); header keys are round 44px, Staging + Calvert only. View switcher is one
+  three-segment control (Navigator / Steps / Overview) with Summary and Restart as round keys; the duplicate Staging
+  segment was dropped (it is in the header). Answered steps are a grouped list (label over value, chevron) instead of
+  wrapping pills. Node category colours moved to a plum/lavender family (no orange/yellow); category label is sentence
+  case. Selection screen: plum check, primary action full width over two secondary ones.
+  test/run-oncotree-ui.mjs walk updated to the breast navigator v3.2 graph (the old stage/setting/HER2 questions no
+  longer exist, which was the source of its 8 long-standing failures).
+  Same pass: protocol sheet header keys round, sentence-case kicker, letterhead wraps the "Customize Hospital & Logo"
+  button under the name and the date never breaks (screen only; print layout unchanged). Staging provenance no longer
+  shows the orphaned "Requires before unchecked use." fragment left after the R1 strip. Stale onco UI checks updated to
+  current content: every staging site is seeded (no gap-only sites; anus now staged, its 7th-edition toggle is the gap
+  check), CTCAE v4.03 is seeded, irAE intro is "4 Pillars", and the ONCQIS Recent list no longer exists (#1784).
+- 2026-10-31 opd-emr protoBox(): starts the KB / oncology protocol loads only when rendering the live screen state
+  (`ps === st`, same guard as protocolTab). Rendering any other state object with the box open used to kick off
+  fetches that later repainted the live screen (it surfaced as onco-ui.test.mjs leaking async work). The two
+  long-red unit checks are fixed: the assessTab test opens the box (regimens live there since the protocol-box
+  redesign) and opd-profile-sheet accepts later queue.css bumps (q13 -> q14) that keep the profilescroll marker.
+- 2026-10-31 No coloured side or top stripes on any onco card (owner: "remove this vibe coded line"). Removed at the
+  source rules in oncotree.css, onco-home.css and protocol-sheet.css: map sheet, regimen cards, navigator step cards
+  (were blue/green top bars), completed/outcome cards, cycle-day cards, CTCAE grade rows, RECIST result, evidence
+  layers/divergence, protocol-sheet toxicity note. Clinical state now reads from a tinted grade chip (CTCAE), heading
+  colour + tinted surface (RECIST, evidence). ONCQIS wordmark is solid logo teal (#0e5466 / #8fd3dc), not gradient
+  text; the OncoTree header title lost its gradient too. Impeccable detector is clean on all three files except the
+  printed sheet's Inter font.
+- 2026-10-31 OncoTree Overview map: opens on "Your path" (walked steps in one readable column, the options open from
+  the current step under it, a link to the rest) instead of fitting all 53 nodes at 16% zoom. "Full map" shows the
+  whole graph at a readable 72% zoom centred on the current step; zoom/fit stay there. Contents panel starts closed;
+  a tapped node opens a scrolling bottom sheet with nothing laid over its title.
 
 ## 2026-10-31 - ReWise replaces the subject timetable
 - Owner compared the PrepNucleus timetable with a ChatGPT plan (46 days, NEET-SS Medical Oncology) and asked for the flaws

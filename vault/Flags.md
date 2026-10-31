@@ -259,6 +259,8 @@ default (ON) is what you get.
 | `smd_prep` | **ON** | [[PrepNucleus]] exam prep. Owner 2026-10-06: "Merge deploy on for all as app still not published for public." Off per device: `?prep=0` or `smd_prep = "0"`. |
 | `smd_prep_arena` | **ON** | PrepNucleus Arena (battles, daily/weekly events, boards, social). Same owner decision. Off: `?arena=0` or `smd_prep_arena = "0"`. |
 | `smd_prep_pro_enforce` | OFF | PrepNucleus free-tier limits and paywall. Stays OFF until a real payment test (owner). |
+| `smd_prep_sound` | OFF | PrepNucleus Sound (focus ambience + provider handoff). Requires `smd_prep`. Opt-in per device: `smd_prep_sound = "1"` or `?sound=1`; off leaves PrepNucleus unchanged. `smd_prep_sound_spotify` (mini-player) is reserved for job rs-spotify. See [[PrepNucleus-Sound]]. |
+| `smd_prep_medigram` | OFF | PrepReels (MediGram) short study feed. Requires `smd_prep`. Opt-in: `smd_prep_medigram = "1"` or `?medigram=1`; off leaves PrepNucleus unchanged and no PrepReels file loads. Sub-flags: `smd_prep_medigram_study` (default ON with parent), `smd_prep_medigram_discovery` OFF, `smd_prep_medigram_break` OFF, `smd_prep_medigram_youtube` OFF (policy gate). See [[PrepNucleus-MediGram]]. |
 | `smd_neo` | **ON** (Beta) | [[Neonatal]]. Owner 2026-10-01: "Make it default on for everyone under beta label" (was OFF 2026-09-30). Content ai_drafted with Draft badges; licences not cleared (see the Decisions entry). Off per device: Experimental toggle, `?neo=0` or `smd_neo = "0"`. Per-tool `smd_neo_<dose\|prep\|inf\|fluids\|growth\|bili\|scores\|ref\|proc\|tdm>` default ON under the master; `"0"` pulls one tool. |
 
 ### Insulin  <sub>3 ON · 0 OFF</sub>
