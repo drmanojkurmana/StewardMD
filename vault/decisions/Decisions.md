@@ -12073,3 +12073,8 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   shows the orphaned "Requires before unchecked use." fragment left after the R1 strip. Stale onco UI checks updated to
   current content: every staging site is seeded (no gap-only sites; anus now staged, its 7th-edition toggle is the gap
   check), CTCAE v4.03 is seeded, irAE intro is "4 Pillars", and the ONCQIS Recent list no longer exists (#1784).
+- 2026-10-31 opd-emr protoBox(): starts the KB / oncology protocol loads only when rendering the live screen state
+  (`ps === st`, same guard as protocolTab). Rendering any other state object with the box open used to kick off
+  fetches that later repainted the live screen (it surfaced as onco-ui.test.mjs leaking async work). The two
+  long-red unit checks are fixed: the assessTab test opens the box (regimens live there since the protocol-box
+  redesign) and opd-profile-sheet accepts later queue.css bumps (q13 -> q14) that keep the profilescroll marker.
