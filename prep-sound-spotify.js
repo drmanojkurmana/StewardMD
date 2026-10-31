@@ -30,7 +30,8 @@
   var API = "https://api.spotify.com/v1";
   // Minimum scopes: account product (Premium check), playback read/control, own playlists, library.
   var SCOPES = ["user-read-private", "user-read-playback-state", "user-read-currently-playing",
-    "user-modify-playback-state", "playlist-read-private", "playlist-read-collaborative", "user-library-read", "user-library-modify"];
+    "user-modify-playback-state", "playlist-read-private", "playlist-read-collaborative", "user-library-read", "user-library-modify",
+    "user-read-recently-played"];
   var VERIFIER_KEY = "smd_spotify_pkce", STATE_KEY = "smd_spotify_state";
 
   function esc(s) {
@@ -314,9 +315,11 @@
     function failOf(r) {
       if (r.status !== 403 || !r.text) throw apiError(r.status, retryOf(r));
       return r.text().then(function (t) {
-        if (/not registered|developer dashboard/i.test(t || "")) throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
-        throw apiError(403);
-      }, function () { throw apiError(403); });
+        if (/not (be )?registered|developer\.spotify\.com\/dashboard|developer dashboard/i.test(t || ""))   // Spotify: "Check settings on developer.spotify.com/dashboard, the user may not be registered."
+          throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
+        if (/PREMIUM_REQUIRED/.test(t || "")) throw apiError(403);
+        throw { reason: "forbidden", status: 403, message: "Spotify did not allow that here. Try again, or reconnect Spotify." };
+      }, function () { throw { reason: "forbidden", status: 403, message: "Spotify did not allow that here." }; });
     }
     function retryOf(r) { try { var v = r.headers && r.headers.get && r.headers.get("Retry-After"); return v ? Number(v) : null; } catch (e) { return null; } }
     /* Liked check with endpoint-generation fallback: the 2026 library
@@ -341,6 +344,14 @@
       me: function () { return call("GET", "/me"); },
       player: function () { return call("GET", "/me/player").then(parsePlayer); },
       /* Full neutral model for prep-sound-player.js (+ granted-scope flag). */
+      // Last played track as an idle Now Playing model (needs user-read-recently-played; older sessions return null).
+      lastPlayed: function () {
+        return call("GET", "/me/player/recently-played?limit=1").then(function (j) {
+          var it = j && j.items && j.items[0], m = it && it.track ? parseNowPlaying({ item: it.track, is_playing: false, progress_ms: 0 }, null) : null;
+          if (m) { m.lastPlayed = true; m.contextUri = it.context && it.context.uri || ""; }
+          return m;
+        }, function () { return null; });
+      },
       queue: function () { return call("GET", "/me/player/queue").then(parseQueue); },
       nowPlaying: function () {
         return call("GET", "/me/player").then(function (j) {
@@ -494,6 +505,13 @@
         : '<li><a class="pn-sound-sp-qi" href="' + esc(openUrl(q.uri)) + '" target="_blank" rel="noopener">' + inner + "</a></li>";
     }).join("") + "</ul>";
   }
+  // Now playing, or (nothing active anywhere) the last played track so the card is never blank.
+  function nowOrLast() {
+    return client().nowPlaying().then(function (m) {
+      if (m && m.title) return m;
+      return client().lastPlayed().then(function (l) { return l || m; }, function () { return m; });
+    });
+  }
   function status() {
     if (!client().store.has()) return Promise.resolve({ state: "idle" });
     return client().player().then(function (pl) {
@@ -510,14 +528,15 @@
       return h;
     }
     if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") +
-      (S.err.reason === "no_device" || S.err.reason === "no_active_device" ? ' <a href="https://open.spotify.com/" target="_blank" rel="noopener">Open Spotify</a>' : "") + "</p>";
+      (S.err.reason === "no_device" || S.err.reason === "no_active_device" ? ' <a href="' + esc(openUrl(pendingUri())) + '" target="_blank" rel="noopener">Open Spotify</a>' : "") + "</p>";
     /* The shared Now Playing card (prep-sound-player.js) replaces the old
        now-playing line + 3 buttons: it always shows what is playing, ticks
        locally and re-syncs while visible. Without it (older build) the
        plain line below still renders — never a dead control either way. */
     if (G.PREP_SOUND_PLAYER && G.PREP_SOUND_PLAYER._pure) {
       h += '<div data-sp-player></div>';
-      if (!S.premium) h += '<p class="pn-sound-sp-note">You are on Spotify Free, so PrepNucleus cannot play or pause for you. Pick a playlist to open it in Spotify, then press play there.</p>';
+      if (!S.premium) h += '<p class="pn-sound-sp-note">Spotify says this account needs Premium for remote control. Pick a playlist to open it in Spotify, then press play there.</p>';
+      else if (S.now && S.now.lastPlayed) h += '<p class="pn-sound-sp-note" data-sp-last>Last played. Press play to start it on your Spotify.</p>';
     } else if (!S.premium) {
       h += '<p class="pn-sound-sp-note">You are on Spotify Free, so PrepNucleus cannot play or pause for you. Pick a playlist to open it in Spotify, then press play there.</p>';
     } else if (S.player && S.player.track) {
@@ -579,10 +598,10 @@
     var box = S.sheet.querySelector("[data-sp-player]");
     if (!box) return;
     function fresh() {
-      return Promise.all([client().nowPlaying(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
+      return Promise.all([nowOrLast(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
         S.now = a[0]; S.queue = a[1] || [];
         var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"); if (nb) nb.innerHTML = nextHtml();
-        clearErr();
+        clearErr(); syncLastNote();
         return cardState();
       });
     }
@@ -599,6 +618,7 @@
       fetchState: fresh,
       onAction: function (act, value) {
         var m = S.now || {};
+        if (act === "toggle" && !m.isPlaying) { playFromIdle(m); return; }
         if (act === "toggle") {
           var was = !!m.isPlaying;
           if (S.now) { S.now.isPlaying = !was; if (S.playerHandle) S.playerHandle.refresh(cardState()); }   // flip at once; Spotify confirms
@@ -642,8 +662,8 @@
       if (!e || e.reason !== "no_active_device") throw e;
       return client().devices().then(function (ds) {
         var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
-        if (!d) throw { reason: "no_device", message: "Spotify is closed on your devices. Open Spotify on this iPad or your phone, play any song once, then come back." };
-        return client().transfer(d.id).then(function () { return fn(); });
+        if (!d) throw { reason: "no_device", message: "Spotify is not running on any of your devices. Tap Open Spotify once; your song starts here when you come back." };
+        return client().transfer(d.id).then(function () { return fn(d.id); });   // retry aimed at the woken device
       });
     });
   }
@@ -657,7 +677,7 @@
     return c.me().then(function (me) {
       S.me = me; S.premium = premiumOf(me);
       return Promise.all([c.player().then(function (pl) { S.player = pl; }, function (e) { S.err = e; }),
-        c.nowPlaying().then(function (m) { S.now = m; }, function () {}),
+        nowOrLast().then(function (m) { S.now = m; }, function () {}),
         c.queue().then(function (q) { S.queue = q; }, function () { S.queue = []; }),
         c.playlists().then(function (pl) { S.playlists = pl; }, function () { S.playlists = []; })]);
     }).then(paintSheet, fail);
@@ -691,6 +711,32 @@
     paintDock();
     return true;
   }
+  /* Play from idle: resume (or start the last played track) on an active or available Spotify device. With Spotify
+     closed everywhere the Web API has nothing to control, so open the Spotify app on the song and finish when the
+     learner returns: the reopened app is then an available device and takes the transfer + play. */
+  function playBody(m) { return m && m.lastPlayed ? (m.contextUri ? { context_uri: m.contextUri } : { uris: [m.trackUri] }) : undefined; }
+  function playFromIdle(m) {
+    var body = playBody(m);
+    if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
+    return withDevice(function (id) { return client().play(body, id); }).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
+      if (e && e.reason === "no_device") { S.pendingPlay = body || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: "Spotify is not running on any of your devices. Tap Open Spotify once; your song starts here when you come back." }); }
+      if (S.now) S.now.isPlaying = false; fail(e);
+    });
+  }
+  function pendingUri() { var b = S.pendingPlay || {}; return (b.uris && b.uris[0]) || b.context_uri || ""; }
+  function resumePending() {
+    if (!S.pendingPlay || D.visibilityState === "hidden") return;
+    var body = S.pendingPlay; S.pendingPlay = null;
+    client().devices().then(function (ds) {
+      var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
+      if (!d) return say("Spotify is not running. Press play in Spotify once, then use the player here.");
+      return client().play(body && (body.uris || body.context_uri) ? body : undefined, d.id).then(function () { say("Playing on " + (d.name || "Spotify") + "."); syncMiniSoon(); refreshCard(); });
+    }, function () {});
+  }
+  D.addEventListener("visibilitychange", resumePending);
+  function refreshCard() { if (S.playerHandle) nowOrLast().then(function (n) { S.now = n; if (S.playerHandle) S.playerHandle.refresh(cardState()); syncLastNote(); }, function () {}); }
+  // The "Last played" hint belongs to the idle card only; drop it once something is really playing.
+  function syncLastNote() { var n = S.sheet && S.sheet.querySelector("[data-sp-last]"); if (n && !(S.now && S.now.lastPlayed)) n.parentNode.removeChild(n); }
   function minimise() { setState("mini"); return closeSheet(); }
   function connect() {
     var verifier = makeVerifier(rng), state = makeState(rng);
@@ -721,20 +767,11 @@
   function say(msg) { try { var h = S.host || (G.PREP && G.PREP._host); if (h && h.toast) h.toast(msg); else if (G.toast) G.toast(msg); } catch (e) {} }
   function pick(uri) {
     var body = /^spotify:track:/.test(uri) ? { uris: [uri] } : { context_uri: uri };
-    client().play(body).then(function () { minimise(); }, function (e) {
-      if (!e || e.reason !== "no_active_device") return fail(e);
-      // Nothing active: start it on this account's first available device; with none, open it in the Spotify app.
-      client().devices().then(function (ds) {
-        var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
-        if (d) return client().play(body, d.id).then(function () { minimise(); }, fail);
-        openInSpotify(uri);
-      }, function () { openInSpotify(uri); });
+    // Plays right here on the learner's Spotify; PrepNucleus never switches apps on its own (owner 2026-10-31).
+    withDevice(function (id) { return client().play(body, id); }).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
+      if (e && e.reason === "no_device") S.pendingPlay = body;
+      fail(e);
     });
-  }
-  function openInSpotify(uri) {
-    var m = /^spotify:(track|playlist|album):([A-Za-z0-9]+)$/.exec(uri || "");
-    closeSheet();
-    G.location.href = m ? "https://open.spotify.com/" + m[1] + "/" + m[2] : "https://open.spotify.com/";
   }
   function act(a, b, host) {
     if (host) S.host = host;
@@ -744,6 +781,7 @@
     if (a === "sp-prov") { S.provOpen = !S.provOpen; return paintSheet(); }
     if (a === "sp-switch") { closeSheet(); try { G.PREP_SOUND.act("s-open", b, S.host); } catch (e) {} return true; }
     if (a === "sp-all") { S.showAll = !S.showAll; return paintSheet(); }
+    if (a === "sp-mini-toggle" && !(S.now && S.now.isPlaying)) return playFromIdle(S.now);
     if (a === "sp-mini-toggle") {
       var was = !!(S.now && S.now.isPlaying);
       if (S.now) { S.now.isPlaying = !was; paintDock(); }
@@ -784,7 +822,7 @@
   function syncMini() {
     if (!client().store.has() || S.state === "closed" || S.sheet) return;
     if (!S.me) client().me().then(function (me) { S.me = me; S.premium = premiumOf(me); paintDock(); }, function () {});
-    client().nowPlaying().then(function (m) { S.now = m; paintDock(); }, function () {});
+    nowOrLast().then(function (m) { S.now = m; paintDock(); }, function () {});
   }
   function syncMiniSoon() { G.setTimeout(syncMini, 600); }
   var timer = G.setInterval(function () {
