@@ -69,3 +69,24 @@ The home header icons are 34x36 (redesign-system.css `.rnav-head .rds-icon-btn`,
 
 
 - 2026-10-13: hide-on-scroll for the home tab bar REMOVED at the owner's request (the bar always stays). Do not re-add.
+
+## Motion 3 (2026-10-31, smd-motion.js, switch `smd_motion3` = "0")
+Owner: "any transition in app should have good motion, slide up down or anything premium, new, unique". `npx motion-ai`
+was NOT run: it installs agent skills and hosted MCP servers into the coding agent's config and changes nothing in the
+app; Motion itself was already vendored (`assets/vendor/motion.min.js`, dialogs) and stays.
+- `smd-motion.js` (`window.SMD_MOTION`, loaded before page-motion.js): springs sampled into CSS `linear()` easings and run
+  with Web Animations (a synchronous first frame: no Motion late-start flicker); presets open [340, 28] (about 2%
+  overshoot), push [340, 38], settle [420, 34]; cubic fallback without `linear()`.
+- Open from a tile or row (pointerdown within 700 ms): the page GROWS OUT OF IT (clip-path from the tile's rect, scale
+  .96 to 1 on the open spring, a 160 ms fade) and shrinks back into it on close if the tile is still where it was; with no
+  source it rises 6% on the spring and sinks on close.
+- In a module: a new screen slides 44 px from the right, or from the left after a Back tap (replaces the View Transition
+  cross-fade while Motion 3 is on), and its list rows settle 28 ms apart.
+- PrepNucleus push and pop (prep.js ghost + prep-motion.js nav): iOS style, the new body from the right edge, the old one
+  drifting a third left and fading; on a pop the old one slides off right over the returning one with an edge shadow.
+  Tabs stay a cross-fade; reduced motion stays a fade.
+- Bug fixed on the way: page-motion.js exitGhost's loop variable shadowed its page state, so a removed page never knew
+  where it opened from.
+- Tests: `test/smd-motion.test.mjs`, `test/run-smd-motion-ui.mjs` (morph in and out, rise, Back and forward slides, row
+  stagger, reduced motion, switch off). Known: `test/run-prep-feel-ui.mjs` "back returns to where home was left" fails on
+  this branch before Motion 3 too (home is 74 px further down on return); not investigated yet.
