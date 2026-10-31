@@ -189,10 +189,19 @@
     head += "</div>";
 
     if (!m.title) {
-      return '<section class="pn-player pn-player-empty" data-provider="' + esc(m.provider) + '" aria-label="Now playing">' + head +
+      var row = opts.layout === "row", et = "";
+      // Nothing playing is not "no controls": play resumes the learner's last Spotify session.
+      if (row && (c.previous || c.play || c.next)) {
+        et = '<div class="pn-player-transport" role="group" aria-label="Playback controls">' +
+          (c.previous ? '<button type="button" class="pn-player-iconbtn"' + act("previous") + ' aria-label="Previous track">' + ico("prev") + "</button>" : "") +
+          (c.play ? '<button type="button" class="pn-player-play"' + act("toggle") + ' aria-label="Play">' + ico("play") + "</button>" : "") +
+          (c.next ? '<button type="button" class="pn-player-iconbtn"' + act("next") + ' aria-label="Next track">' + ico("next") + "</button>" : "") + "</div>";
+      }
+      return '<section class="pn-player pn-player-empty' + (row ? " pn-player--row" : "") + '" data-provider="' + esc(m.provider) + '" aria-label="Now playing">' + head +
         tileHtml(m) +
-        '<p class="pn-player-nothing">Nothing playing</p>' +
-        '<button type="button" class="pn-player-pick"' + act("pick") + ">" + esc(opts.pickLabel || "Pick something to play") + "</button>" +
+        (row ? '<h3 class="pn-player-title pn-player-nothing">Nothing playing</h3><p class="pn-player-artist">' + esc(opts.emptyHint || "Press play to resume, or pick from Up next") + "</p>" + et
+          : '<p class="pn-player-nothing">Nothing playing</p>' +
+        '<button type="button" class="pn-player-pick"' + act("pick") + ">" + esc(opts.pickLabel || "Pick something to play") + "</button>") +
         (!m.likeAvailable && c.like ? '<p class="pn-player-note">' + esc(opts.likeDisabledReason || "Reconnect Spotify to save songs") + "</p>" : "") +
         "</section>";
     }

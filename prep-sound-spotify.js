@@ -347,6 +347,7 @@
       saveTrack: function (trackId, trackUri) { return setLiked(trackId, trackUri, true); },
       removeTrack: function (trackId, trackUri) { return setLiked(trackId, trackUri, false); },
       play: function (body, deviceId) { return call("PUT", "/me/player/play" + (deviceId ? "?device_id=" + encodeURIComponent(deviceId) : ""), body || {}); },
+      transfer: function (deviceId) { return call("PUT", "/me/player", { device_ids: [deviceId], play: true }); },
       devices: function () { return call("GET", "/me/player/devices").then(function (j) { return (j && j.devices) || []; }); },
       pause: function () { return call("PUT", "/me/player/pause"); },
       next: function () { return call("POST", "/me/player/next"); },
@@ -363,7 +364,7 @@
   var PURE = { esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
-    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, parseQueue: parseQueue, capsForPlayer: capsForPlayer,
+    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, parseQueue: parseQueue, premiumOf: function (me) { return !(me && me.product && me.product !== "premium"); }, capsForPlayer: capsForPlayer,
     apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient,
     makePluginSecureStore: makePluginSecureStore, REFRESH_SECRET_KEY: REFRESH_SECRET_KEY,
     SCOPES: SCOPES, AUTH_URL: AUTH_URL, TOKEN_URL: TOKEN_URL, API: API };
@@ -495,7 +496,8 @@
         '<div class="pn-sheet-act"><button type="button" class="pn-btn pri pn-sound-sp-connect" data-act="sp-connect">Connect Spotify</button></div>';
       return h;
     }
-    if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") + "</p>";
+    if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") +
+      (S.err.reason === "no_device" || S.err.reason === "no_active_device" ? ' <a href="https://open.spotify.com/" target="_blank" rel="noopener">Open Spotify</a>' : "") + "</p>";
     /* The shared Now Playing card (prep-sound-player.js) replaces the old
        now-playing line + 3 buttons: it always shows what is playing, ticks
        locally and re-syncs while visible. Without it (older build) the
@@ -567,19 +569,30 @@
       return Promise.all([client().nowPlaying(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
         S.now = a[0]; S.queue = a[1] || [];
         var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"); if (nb) nb.innerHTML = nextHtml();
+        clearErr();
         return cardState();
       });
     }
-    function after(p) { p.then(function () { return fresh(); }).then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, fail); }
+    function after(p) {
+      p.then(function () {
+        clearErr();
+        G.setTimeout(function () { if (S.playerHandle) fresh().then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, function () {}); }, 700);
+        return client().nowPlaying().then(function (m) { S.now = m; if (S.playerHandle) S.playerHandle.refresh(cardState()); });
+      }).then(null, fail);
+    }
     S.playerHandle = PL.mount(box, {
       getState: cardState,
-      renderOpts: { layout: "row", pickLabel: "Pick a playlist or search", artHref: S.now && S.now.trackUri ? openUrl(S.now.trackUri) : "" },
+      renderOpts: { layout: "row", pickLabel: "Pick a playlist or search", emptyHint: "Press play to resume, or pick from Up next", artHref: S.now && S.now.trackUri ? openUrl(S.now.trackUri) : "" },
       fetchState: fresh,
       onAction: function (act, value) {
         var m = S.now || {};
-        if (act === "toggle") after(m.isPlaying ? client().pause() : client().play());
-        else if (act === "next") after(client().next());
-        else if (act === "previous") after(client().previous());
+        if (act === "toggle") {
+          var was = !!m.isPlaying;
+          if (S.now) { S.now.isPlaying = !was; if (S.playerHandle) S.playerHandle.refresh(cardState()); }   // flip at once; Spotify confirms
+          after(withDevice(function () { return was ? client().pause() : client().play(); }));
+        }
+        else if (act === "next") after(withDevice(function () { return client().next(); }));
+        else if (act === "previous") after(withDevice(function () { return client().previous(); }));
         else if (act === "shuffle") after(client().shuffle(!m.shuffle));
         else if (act === "repeat") after(client().repeatMode(PL._pure.nextRepeat(m.repeat)));
         else if (act === "seek") after(client().seekMs(value));
@@ -601,7 +614,26 @@
     var v = S.sheet.querySelector("[data-sp-vol]");
     if (v) v.addEventListener("change", function () { client().volume(Number(v.value)).then(refresh, fail); });
   }
-  function fail(e) { S.err = e && e.message ? e : { message: "Spotify did not answer. Try again." }; S.busy = false; paintSheet(); }
+  // Spotify removed user.product for development-mode apps (Feb 2026), so a missing field means "assume Premium";
+  // only an explicit non-premium product, or a real Premium-required refusal (fail), turns controls off.
+  function premiumOf(me) { return !(me && me.product && me.product !== "premium"); }
+  function fail(e) {
+    S.err = e && e.message ? e : { message: "Spotify did not answer. Try again." };
+    if (S.err.reason === "premium_required") S.premium = false;
+    S.busy = false; paintSheet();
+  }
+  function clearErr() { if (!S.err) return; S.err = null; var el = S.sheet && S.sheet.querySelector(".pn-sound-sp-err"); if (el) el.parentNode.removeChild(el); }
+  // A command with no active Spotify device: wake the account's first available device, then retry once.
+  function withDevice(fn) {
+    return fn().then(null, function (e) {
+      if (!e || e.reason !== "no_active_device") throw e;
+      return client().devices().then(function (ds) {
+        var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
+        if (!d) throw { reason: "no_device", message: "Spotify is closed on your devices. Open Spotify on this iPad or your phone, play any song once, then come back." };
+        return client().transfer(d.id).then(function () { return fn(); });
+      });
+    });
+  }
   function refresh() {
     var c = client();
     G.setTimeout(function () { if (S.sheet) c.player().then(function (pl) { S.player = pl; paintSheet(); }, function () {}); }, 700);
@@ -610,7 +642,7 @@
   function loadConnected() {
     var c = client();
     return c.me().then(function (me) {
-      S.me = me; S.premium = !!(me && me.product === "premium");
+      S.me = me; S.premium = premiumOf(me);
       return Promise.all([c.player().then(function (pl) { S.player = pl; }, function (e) { S.err = e; }),
         c.nowPlaying().then(function (m) { S.now = m; }, function () {}),
         c.queue().then(function (q) { S.queue = q; }, function () { S.queue = []; }),
@@ -697,8 +729,12 @@
     if (a === "sp-prov") { S.provOpen = !S.provOpen; return paintSheet(); }
     if (a === "sp-switch") { closeSheet(); try { G.PREP_SOUND.act("s-open", b, S.host); } catch (e) {} return true; }
     if (a === "sp-all") { S.showAll = !S.showAll; return paintSheet(); }
-    if (a === "sp-mini-toggle") return (S.now && S.now.isPlaying ? client().pause() : client().play()).then(syncMiniSoon, function () { syncMiniSoon(); });
-    if (a === "sp-mini-next") return client().next().then(syncMiniSoon, function () { syncMiniSoon(); });
+    if (a === "sp-mini-toggle") {
+      var was = !!(S.now && S.now.isPlaying);
+      if (S.now) { S.now.isPlaying = !was; paintDock(); }
+      return withDevice(function () { return was ? client().pause() : client().play(); }).then(syncMiniSoon, function (e) { syncMiniSoon(); say(e && e.message || "Spotify did not answer. Try again."); });
+    }
+    if (a === "sp-mini-next") return withDevice(function () { return client().next(); }).then(syncMiniSoon, function (e) { syncMiniSoon(); say(e && e.message || "Spotify did not answer. Try again."); });
     if (a === "sp-connect") return connect();
     if (a === "sp-disconnect") { client().disconnect(); S.premium = false; S.me = null; S.player = null; S.now = null; S.playlists = null; S.results = null; S.err = null; return paintSheet(); }
     if (a === "sp-play") return client().play().then(refresh, fail);
@@ -731,7 +767,7 @@
   }
   function syncMini() {
     if (!client().store.has() || S.state === "closed" || S.sheet) return;
-    if (!S.me) client().me().then(function (me) { S.me = me; S.premium = !!(me && me.product === "premium"); paintDock(); }, function () {});
+    if (!S.me) client().me().then(function (me) { S.me = me; S.premium = premiumOf(me); paintDock(); }, function () {});
     client().nowPlaying().then(function (m) { S.now = m; paintDock(); }, function () {});
   }
   function syncMiniSoon() { G.setTimeout(syncMini, 600); }
