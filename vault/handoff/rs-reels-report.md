@@ -24,6 +24,12 @@ Flags: `smd_prep_medigram` (requires `smd_prep`, OFF), `smd_prep_medigram_study`
 
 Compliance pass (code-level): 44px minimum on tabs, chips and actions, 52px on options and primary buttons; mint focus outline; `prefers-reduced-motion` disables transitions; light and dark read the `--pn-*` tokens with the fixed `#071318 / #0D1D23 / #42CDB5` lesson surface; 390px stacks the nav full-width. No gradient, glow or backdrop blur. Ethical rules held in code: finite feed, visible progress, Finish always present, no autoplay, break expiry only offers a return.
 
+## Correction 2026-10-31 (rs-reels-fix; this section only, original above untouched)
+
+- `test/prep-cards.test.mjs` as named in the "Tests run" section does not exist in this worktree (never committed; verified 2026-10-31). The card/deck area is covered by `test/prep-decks.test.mjs`, `test/prep-flash.test.mjs` and `test/prep-layerc-e2e.test.mjs`. The "46 in the combined run" figure is therefore not reproducible as stated.
+- The headless UI harness shipped with a real order bug, not just an unrunnable environment: it asserted the `prep-medigram.js` network fetch and `PREP_MEDIGRAM`/`PREP_MG_DATA` globals *before* calling `PREP.open()`, but `prep-loader.js` only fetches anything (PrepReels included) lazily inside `load()` on first open. Every downstream check failed as a cascade. Fixed in `test/run-prep-medigram-ui.mjs` (open first, then assert; no assertion weakened or deleted) plus new Sound-on and all-flags-off sweeps.
+- The fixed harness still has NOT been executed: this sandbox refuses local listen sockets (`EPERM` on `127.0.0.1`), so `test/serve.mjs` cannot bind and Chrome has nothing to load. It must be run in a normal checkout with `node test/run-prep-medigram-ui.mjs`. Until then, UI behaviour remains verified only by unit and source-wiring assertions, as originally stated.
+
 ## OPEN (needs humans, devices or legal)
 
 Clinical review of any real micro-lesson before it ships; Hindi and Telugu reviewer sign-off per language; YouTube API policy and legal review before `smd_prep_medigram_youtube` is enabled for anyone; real-device tests (background pause, audio focus, offline bank); the 30-learner pilot itself (recruitment, consent, analysis owner); store and rights checks for any commissioned video. None were faked or claimed done. No Spotify work, no approval request, no paid API or media, and no listening or watch history is collected.

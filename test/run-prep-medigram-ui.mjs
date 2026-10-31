@@ -45,9 +45,12 @@ try {
   await ev(`try{localStorage.setItem("smd_prep","1"); localStorage.setItem("smd_prep_medigram","1"); localStorage.removeItem("smd_prep_v1");}catch(e){} return 1;`);
   reqs.length = 0;
   await call("Page.navigate", { url: BASE + "?prep=1&medigram=1&medigram_break=1" }); await until(`return !!(window.PREP && window.SMD_showHome);`, 30000); await ev(clean);
-  ok(reqs.some((u) => /prep-medigram\.js/.test(u)), "prep-loader fetched prep-medigram.js with the flag on");
-  ok(await ev(`return !!window.PREP_MEDIGRAM && !!window.PREP_MG_DATA;`) === true, "PREP_MEDIGRAM and PREP_MG_DATA loaded");
+  // Root cause of the all-red run: prep-loader.js fetches everything (PrepReels included) lazily inside
+  // load(), which only runs on PREP.open() — the same lazy pattern the Play harness uses. Asserting the
+  // fetch and the globals before opening could never pass. Open first, then assert.
   await evA(`return window.PREP.open({});`);
+  ok(await until(`return !!(window.PREP_MEDIGRAM && window.PREP_MG_DATA);`, 20000), "PREP_MEDIGRAM and PREP_MG_DATA loaded");
+  ok(reqs.some((u) => /prep-medigram\.js/.test(u)), "prep-loader fetched prep-medigram.js with the flag on");
   ok(await until(`return !!document.querySelector('#smdPrep [data-act=mg-open]');`, 20000), "home shows the PrepReels row");
   await click("#smdPrep [data-act=mg-open]");
   ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-card');`, 8000), "PrepReels feed opens on a card");
@@ -80,6 +83,24 @@ try {
   ok(await until(`return !!document.querySelector('#smdPrep .pn-mg-card');`, 8000), "Return to study goes back to the feed");
   ok(!errors.length, "no uncaught PrepReels error" + (errors.length ? ": " + errors[0] : ""));
   ok(!reqs.some((u) => /googleapis|youtube\.com\/embed/.test(u)), "no YouTube or paid API request was made");
+  // Sound flag on: the first-party Sound path loads (PREP_SOUND defined) after open.
+  await call("Page.navigate", { url: BASE + "?prep=1&sound=1" });
+  ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots with ?sound=1");
+  await ev(clean);
+  await evA(`return window.PREP.open({});`);
+  ok(await until(`return !!window.PREP_SOUND;`, 20000), "Sound UI path loads when its flag is on");
+  // All flags off: explicit =0 beats the seeded localStorage, so the loader must fetch no medigram file
+  // and the home must show no PrepReels row. reqs is reset so this sweep only sees the flags-off page.
+  await ev(`try{localStorage.setItem("smd_prep_medigram","0"); localStorage.setItem("smd_prep_sound","0");}catch(e){} return 1;`);
+  reqs.length = 0;
+  await call("Page.navigate", { url: BASE + "?prep=1&medigram=0&sound=0" });
+  ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots with all flags off");
+  await ev(clean);
+  await evA(`return window.PREP.open({});`);
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-home");`, 20000), "home renders with all flags off");
+  ok(!reqs.some((u) => /prep-medigram/.test(u)), "with all flags off prep-loader fetches none of the medigram files");
+  ok(await ev(`return !document.querySelector('#smdPrep [data-act=mg-open]');`) === true, "with all flags off no PrepReels row shows");
+  ok(!errors.length, "no uncaught error after the flag sweeps" + (errors.length ? ": " + errors[0] : ""));
 } catch (e) { console.log("FAIL harness: " + (e && e.message || e)); fails++; }
 finally { try { chrome.kill(); } catch {} if (serveProc) try { serveProc.kill(); } catch {} }
 console.log(fails ? `MEDIGRAM UI: ${fails} FAIL` : "MEDIGRAM UI: ALL PASS");
