@@ -84,13 +84,15 @@ try {
   await ev(`document.getElementById("mxNext").click(); __screen("Screen two"); return 1;`);
   await sleep(30);
   const fw = JSON.parse(await anim("#mxBody > .scr"));
-  ok(/translateX\(44px\)/.test(fw.tr) && String(fw.op) === "0", "a new screen slides in from the right: " + JSON.stringify(fw));
+  ok(/translateX\(390px\)/.test(fw.tr) && fw.op == null, "a new screen slides in from the right edge, no fade: " + JSON.stringify(fw));
+  const gh = await ev(`var g=[].slice.call(document.querySelectorAll("body > [data-pm-ghost]")).filter(function(x){ return x.getAnimations().some(function(a){ return a.effect.getKeyframes().some(function(f){ return /inset\\(0px 2/.test(f.clipPath||""); }); }); })[0]; return g ? g.textContent.indexOf("Screen") >= 0 && !g.getAnimations().some(function(a){ return a.effect.getKeyframes().some(function(f){ return f.opacity != null; }); }) : false;`);
+  ok(gh === true, "the old screen is pushed aside and clipped at the new one's edge, not faded");
   ok(await ev(`return document.querySelector("#mxBody li:nth-child(3)").getAnimations().some(function(a){ return a.effect.getTiming().delay > 60; });`) === true, "its rows settle one after another");
   await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); return 1;`);
   await tap("#mxBack"); await ev(`__screen("Screen one again"); return 1;`);
   await sleep(30);
   const bk = JSON.parse(await anim("#mxBody > .scr"));
-  ok(/translateX\(-44px\)/.test(bk.tr), "after Back the screen slides in from the left: " + JSON.stringify(bk));
+  ok(/translateX\(-117px\)/.test(bk.tr), "after Back the screen slides in from the left: " + JSON.stringify(bk));
   await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); return 1;`);
 
   // 3. Close: back into the tile.
@@ -105,7 +107,7 @@ try {
   await sleep(800);
   await ev(`__open(); return 1;`); await sleep(30);
   const rs = JSON.parse(await anim("#mxPage"));
-  ok(!rs.clip && /translateY\(51px\)/.test(rs.tr), "a page opened with no tap rises on the spring: " + JSON.stringify(rs));
+  ok(!rs.clip && /translateY\(844px\)/.test(rs.tr) && rs.op == null, "a page opened with no tap slides up from the bottom edge, no fade: " + JSON.stringify(rs));
   await ev(`document.getAnimations().forEach(function(a){ try { a.finish(); } catch (e) {} }); document.getElementById("mxPage").remove(); return 1;`);
   await sleep(600);
 

@@ -90,3 +90,11 @@ app; Motion itself was already vendored (`assets/vendor/motion.min.js`, dialogs)
 - Tests: `test/smd-motion.test.mjs`, `test/run-smd-motion-ui.mjs` (morph in and out, rise, Back and forward slides, row
   stagger, reduced motion, switch off). Known: `test/run-prep-feel-ui.mjs` "back returns to where home was left" fails on
   this branch before Motion 3 too (home is 74 px further down on return); not investigated yet.
+
+### No cross-fades (2026-10-31, owner: "I dont want cross fade it looks ugly")
+Everything travels; nothing dissolves (reduced motion keeps its short fade; `smd_motion3 = "0"` keeps the old motion).
+- **Push / pop** (`SMD_MOTION.push`): the leaving screen is clipped at the incoming screen's moving edge (both on the same spring) instead of fading. Used by PrepNucleus (`prep.js` ghost) and by in-module swaps (`page-motion.js pushX`, which lays a copy of the removed screen, ids stripped, over the new one's place).
+- **Tabs** (`SMD_MOTION.tabDir` + `page`): pointerdown on a tab or segment records its side against the current one; PrepNucleus pages the body sideways (`prep.js` makes a ghost for nav 0 when a side is known). No side (filter, exam picker): `nudgeUp`, a 22 px spring rise.
+- **Pages with no source tile** and **full-screen dialogs** (`dialog-motion.js` "fade" family) slide up from the bottom edge and back down.
+- **Whole-screen View Transitions** (row taps in `view-transitions.js`, Back in `page-motion.js` with `html.smd-vt-back`): root push/pop slide, CSS injected by `smd-motion.js`. `page-motion.js` stays off while one runs (`vtBusy`, `window.__smdVtAt`).
+- Gotcha fixed: the PrepNucleus ghost carries `data-no-motion`, else page-motion treated it as a page opening and animated it in.

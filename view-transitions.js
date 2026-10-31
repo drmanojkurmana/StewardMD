@@ -1,7 +1,7 @@
 /* StewardMD — shared-element screen transitions (view-transitions.js).
  *
  * Tap a list row (a drug, a patient, a protocol, a menu item) and its title morphs into the title
- * of the screen it opens while everything else crossfades, instead of the screen cutting over.
+ * of the screen it opens while the rest of the screen pushes in from the right (smd-motion.js), instead of the screen cutting over.
  * Uses the platform View Transitions API (WebKit iOS 18+, Android WebView 111+): the browser
  * snapshots before and after and animates between them on the compositor.
  *
@@ -9,7 +9,7 @@
  * with a bold title inside) is held, a view transition starts, and the same click is re-dispatched
  * on the original target inside the transition's update callback. The callback resolves once the
  * DOM has changed and gone quiet (or after 180ms, so a tap never feels laggy), and the new screen's heading whose text matches the row's title
- * is given the same view-transition-name, so the title flies there. No match: a plain crossfade.
+ * is given the same view-transition-name, so the title flies there. No match: the push alone.
  *
  * Skipped: no API, reduced motion, modifier clicks, inner controls inside the row (stars, toggles,
  * checkboxes), anything marked [data-no-vt], form submits, toggles (aria-pressed/aria-expanded/switch),
@@ -44,11 +44,8 @@
   var css = document.createElement("style");
   css.textContent =
     "::view-transition-group(*){animation-duration:.42s;animation-timing-function:cubic-bezier(.32,.72,0,1)}" +
-    "::view-transition-old(root){animation:.22s cubic-bezier(.4,0,1,1) both smdVtOut}" +
-    "::view-transition-new(root){animation:.34s cubic-bezier(0,0,.2,1) .04s both smdVtIn}" +
+    // The root (the rest of the screen) slides as a push: smd-motion.js. No cross-fade (owner, 2026-10-31).
     "::view-transition-old(" + NAME + "),::view-transition-new(" + NAME + "){animation-duration:.42s;height:100%;object-fit:none;object-position:left center}" +
-    "@keyframes smdVtOut{to{opacity:0;transform:scale(.985)}}" +
-    "@keyframes smdVtIn{from{opacity:0;transform:translateY(10px)}}" +
     "@media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}";
   (document.head || document.documentElement).appendChild(css);
 
@@ -114,7 +111,7 @@
     var text = title.textContent.trim();
 
     e.stopImmediatePropagation(); e.preventDefault();
-    busy = true;
+    busy = true; window.__smdVtAt = Date.now();
     title.style.viewTransitionName = NAME;
     var target = e.target, init = { bubbles: true, cancelable: true, composed: true, view: window,
       clientX: e.clientX, clientY: e.clientY, screenX: e.screenX, screenY: e.screenY, detail: e.detail || 1 };

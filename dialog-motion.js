@@ -50,7 +50,9 @@
   var F = {
     sheet: { start: { transform: "translateY(100%)" }, kin: { transform: ["translateY(100%)", "translateY(0px)"], opacity: [0.7, 1] }, oin: { type: "spring", stiffness: 280, damping: 32 }, kout: { transform: "translateY(100%)", opacity: 0.5 }, oout: { duration: 0.22, easing: "ease-in" } },
     scrim: { start: { opacity: "0" }, kin: { opacity: [0, 1] }, oin: { duration: 0.2, easing: "ease-out" }, kout: { opacity: 0 }, oout: { duration: 0.16, easing: "ease-in" } },
-    fade:  { start: { opacity: "0" }, kin: { opacity: [0, 1] }, oin: { duration: 0.22, easing: "ease-out" }, kout: { opacity: 0 }, oout: { duration: 0.16, easing: "ease-in" } },
+    // A full-screen dialog slides up from the bottom edge and back down (owner 2026-10-31: no cross-fades). The family
+    // keeps its old name so callers and tests that read it still match.
+    fade:  { start: { transform: "translateY(100%)" }, kin: { transform: ["translateY(100%)", "translateY(0px)"] }, oin: { type: "spring", stiffness: 340, damping: 36 }, kout: { transform: "translateY(100%)" }, oout: { duration: 0.28, easing: [0.32, 0, 0.67, 0] } },
     modal: { start: { opacity: "0", transform: "scale(0.94)" }, kin: { opacity: [0, 1], transform: ["scale(0.94)", "scale(1)"] }, oin: { type: "spring", stiffness: 340, damping: 28 }, kout: { opacity: 0, transform: "scale(0.97)" }, oout: { duration: 0.14, easing: "ease-in" } }
   };
 

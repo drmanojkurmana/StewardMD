@@ -77,6 +77,7 @@
   function animateIn(el, i) {
     endExit(el);
     var m = SM();
+    if (m && m.vtBusy()) return;   // a View Transition is already pushing the whole screen
     if (m) {
       var src = m.take();
       i.src = src && src.el && !el.contains(src.el) ? src : null;
@@ -92,7 +93,8 @@
       var r = src.el.getBoundingClientRect();
       if (r.width > 8 && Math.abs(r.left - src.left) < 2 && Math.abs(r.top - src.top) < 2) { var mo = m.morphOutKf(el, src); return { kf: mo.kf, o: { duration: 260, easing: e.easing, fill: "forwards" }, origin: mo.origin }; }
     }
-    return { kf: [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(" + Math.round(innerHeight * 0.05) + "px) scale(.985)" }], o: { duration: e.duration, easing: e.easing, fill: "forwards" } };
+    var sk = m.sinkKf();   // no tile to go back to: the page slides down off the bottom edge
+    return { kf: sk.kf, o: sk.o };
   }
 
   // Close without removal: show it again inline (overriding whatever hid it) for one exit beat.
@@ -176,8 +178,8 @@
     var r = n.getBoundingClientRect();
     return r.width >= innerWidth * 0.55 && r.height >= innerHeight * 0.4;
   }
-  function innerSwap(m) {
-    if (Date.now() - T0 < 2500 || reduced()) return;
+  function innerSwap(m, all) {
+    if (Date.now() - T0 < 2500 || reduced() || (SM() && SM().vtBusy())) return;
     var now = Date.now(); if (now - swapAt > 400) swapBudget = 0; swapAt = now;
     var gone = [], j, n;
     for (j = 0; j < m.removedNodes.length; j++) { n = m.removedNodes[j]; if (n.nodeType === 1 && n.childElementCount) gone.push(sig(n)); }
@@ -192,21 +194,53 @@
       swapBudget++;
       var mm = SM();
       if (mm) {
-        var back = Date.now() - backAt < 700, e2 = mm.ease("push");
-        try { n.animate([{ opacity: 0, transform: "translateX(" + (back ? -44 : 44) + "px)" }, { opacity: 1, transform: "none" }], { duration: e2.duration, easing: e2.easing, fill: "backwards" }); } catch (e) {}
-        var rows = n.querySelectorAll(":scope > ul > li, :scope > ol > li, :scope > * > ul > li");
-        if (rows.length > 1) mm.stagger(rows);
+        // Motion 3, no cross-fades (owner 2026-10-31): a real push. A copy of the screen that left is laid over the
+        // new one's place and travels with it (pushX); a Back tap runs it the other way.
+        pushX(n, oldNode(m, all), Date.now() - backAt < 700 ? -1 : 1, mm);
         continue;
       }
       try { n.animate(K_IN2, IN2); } catch (e) {}
     }
   }
 
+  // The screen a swap removed (the largest element node), to copy for the push.
+  function oldNode(m, all) {
+    var best = null, bn = 0, recs = (all || [m]).filter(function (r) { return r.target === m.target && r.type === "childList"; });
+    recs.forEach(function (r) { for (var j = 0; j < r.removedNodes.length; j++) { var x = r.removedNodes[j]; if (x.nodeType === 1 && x.childElementCount > bn) { best = x; bn = x.childElementCount; } } });
+    return best;
+  }
+  function pushX(n, old, dir, mm) {
+    var g = null;
+    if (old) {
+      try {
+        var r = n.getBoundingClientRect(), z = (n.offsetWidth ? r.width / n.offsetWidth : 1) || 1;
+        var c = old.cloneNode(true);
+        c.removeAttribute("id"); Array.prototype.forEach.call(c.querySelectorAll("[id]"), function (x) { x.removeAttribute("id"); });
+        g = document.createElement("div"); g.setAttribute("data-pm-ghost", ""); g.setAttribute("aria-hidden", "true"); g.inert = true;
+        var bg = "", p = n.parentElement;
+        for (; p && !bg; p = p.parentElement) { var b = getComputedStyle(p).backgroundColor; if (b && b !== "transparent" && !/rgba\([^)]*,\s*0\)$/.test(b)) bg = b; }
+        g.style.cssText = "position:fixed;left:" + r.left / z + "px;top:" + r.top / z + "px;width:" + r.width / z + "px;height:" + r.height / z + "px;overflow:hidden;pointer-events:none;z-index:2147482000;contain:paint;background:" + (bg || "var(--bg, #fff)");
+        c.style.margin = "0";
+        g.appendChild(c); document.body.appendChild(g);
+      } catch (e) { g = null; }
+    }
+    var e2 = mm.ease("push"), a = g ? mm.push(dir > 0 ? [n] : [], g, dir) : [];
+    // Back (under the copy sliding off) or no copy to push against: the new screen travels a third of the width.
+    if (dir < 0 || !g) { try { n.animate([{ transform: "translateX(" + Math.round(innerWidth * 0.3) * dir + "px)" }, { transform: "translateX(0px)" }], { duration: e2.duration, easing: e2.easing, fill: "backwards" }); } catch (e) {} }
+    if (g) {
+      var drop = function () { if (g && g.parentNode) g.parentNode.removeChild(g); g = null; };
+      var ga = a[a.length - 1]; if (ga) ga.onfinish = ga.oncancel = drop;
+      setTimeout(drop, 900);
+    }
+    var rows = n.querySelectorAll(":scope > ul > li, :scope > ol > li, :scope > * > ul > li");
+    if (dir > 0 && rows.length > 1) mm.stagger(rows);
+  }
+
   function handle(muts) {
     for (var k = 0; k < muts.length; k++) {
       var m = muts[k], j, n;
       if (m.type === "attributes") { if (m.target.parentNode === document.body) consider(m.target, "attr"); continue; }
-      if (m.target !== document.body) { if (m.type === "childList" && m.addedNodes.length) innerSwap(m); continue; }
+      if (m.target !== document.body) { if (m.type === "childList" && m.addedNodes.length) innerSwap(m, muts); continue; }
       for (j = 0; j < m.addedNodes.length; j++) { n = m.addedNodes[j]; if (n.nodeType === 1) consider(n, "add"); }
       for (j = 0; j < m.removedNodes.length; j++) {
         n = m.removedNodes[j];
@@ -216,7 +250,7 @@
     }
   }
 
-  // Cross-fade a Back tap (View Transitions API). Not inside modal dialogs: their taps are synchronous by contract.
+  // A Back tap as a pop (View Transitions API, slide rules in smd-motion.js). Not inside modal dialogs: their taps are synchronous by contract.
   var BACK = "button.db-back,button.dx-back,button[data-act='back'],button[aria-label='Back'],a[aria-label='Back']";
   var replaying = false, busy = false, backAt = 0;
   function settled(ms) {
@@ -237,11 +271,12 @@
     var init = { bubbles: true, cancelable: true, composed: true, view: window, clientX: e.clientX, clientY: e.clientY, detail: e.detail || 1 };
     function replay() { replaying = true; try { b.dispatchEvent(new MouseEvent("click", init)); } finally { replaying = false; } }
     try {
+      window.__smdVtAt = Date.now(); document.documentElement.classList.add("smd-vt-back");   // slides the other way (smd-motion.js)
       var vt = document.startViewTransition(function () { replay(); return settled(160); });
-      var free = function () { busy = false; };
+      var free = function () { busy = false; document.documentElement.classList.remove("smd-vt-back"); };
       vt.finished.then(free, free);
       setTimeout(free, 1500);
-    } catch (x) { busy = false; replay(); }
+    } catch (x) { busy = false; document.documentElement.classList.remove("smd-vt-back"); replay(); }
   }
 
   function boot() {
