@@ -166,3 +166,9 @@ test("undo needs both perform and restore, and a message", () => {
   assert.equal(UN.ok({ message: "x", perform() {} }), false);
   assert.equal(UN.ok({ perform() {}, restore() {} }), false);
 });
+
+test("UI sounds never take the iOS audio session while off, so Spotify keeps playing through taps", () => {
+  const src = require("node:fs").readFileSync(new URL("../sound.js", import.meta.url), "utf8");
+  assert.match(src, /function unlock\(\) \{\s*if \(!Ctx \|\| !enabled\(\)\) return;/, "no AudioContext on a tap unless sounds are on");
+  assert.match(src, /audioSession\.type = "ambient"/, "when on, mix with the learner's music instead of pausing it");
+});
