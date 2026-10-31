@@ -44,3 +44,34 @@
 @media (prefers-reduced-motion: reduce) {
   .pn-player-iconbtn, .pn-player-play, .pn-player-pick { transition: none; }
 }
+
+/* Row layout (owner target 2026-10-31, the floating Spotify panel): artwork left, title/artist/heart
+   right, thin seek bar and transport under them. Same markup as the centred card, placed by grid. */
+.pn-player--row { max-width: none; margin: 0; padding: 0; border: 0; background: none; text-align: left;
+  display: grid; grid-template-columns: 132px minmax(0, 1fr) auto; column-gap: 16px; align-items: center;
+  grid-template-areas: "art title like" "art artist like" "art seek seek" "art transport transport" "vol vol vol" "note note note"; }
+.pn-player--row .pn-player-top { display: contents; }
+.pn-player--row .pn-player-prov, .pn-player--row .pn-player-album { display: none; }
+.pn-player--row .pn-player-top .pn-player-iconbtn { grid-area: like; align-self: start; border: 0; background: none; }
+.pn-player--row .pn-player-art, .pn-player--row .pn-player-tile { grid-area: art; width: 132px; margin: 0; border-radius: 12px; align-self: start; box-shadow: 0 10px 24px -10px rgba(2, 8, 10, .7); }
+.pn-player--row .pn-player-title { grid-area: title; align-self: end; font-size: 20px; letter-spacing: -.02em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+.pn-player--row .pn-player-artist { grid-area: artist; align-self: start; margin-top: 2px; color: #A9C6BE; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pn-player--row .pn-player-seekrow, .pn-player--row .pn-player-elapsed { grid-area: seek; margin-top: 6px; gap: 8px; flex-wrap: wrap; }
+.pn-player--row .pn-player-seekrow .pn-player-seek, .pn-player--row .pn-player-seekrow .pn-player-bar { order: -1; flex: 1 0 100%; }
+.pn-player--row .pn-player-seekrow .pn-player-time:last-child { margin-left: auto; text-align: right; }
+.pn-player--row .pn-player-seek { min-height: 28px; height: 28px; }
+.pn-player--row .pn-player-transport { grid-area: transport; justify-content: space-between; flex-wrap: nowrap; gap: 0; margin-top: 2px; }
+.pn-player--row .pn-player-transport .pn-player-iconbtn { border: 0; background: none; }
+.pn-player--row .pn-player-play { width: 56px; height: 56px; min-width: 56px; min-height: 56px; }
+.pn-player--row .pn-player-vol { grid-area: vol; margin-top: 10px; }
+.pn-player--row .pn-player-note { grid-area: note; }
+/* Spotify is the provider: its green on play/pause only (owner decision); dark ink keeps AA on it. */
+.pn-player[data-provider="spotify"] .pn-player-play { background: #1DB954; color: #04140B; }
+.pn-player[data-provider="spotify"] .pn-player-iconbtn.on { color: #1DB954; border-color: #1DB954; }   /* liked heart, shuffle, repeat: as in the owner target */
+@media (hover: hover) and (pointer: fine) { .pn-player[data-provider="spotify"] .pn-player-play:hover { background: #1ED760; } }
+@media (max-width: 420px) {
+  .pn-player--row { grid-template-columns: 96px minmax(0, 1fr) auto; column-gap: 12px; }
+  .pn-player--row .pn-player-art, .pn-player--row .pn-player-tile { width: 96px; }
+  .pn-player--row .pn-player-title { font-size: 17px; }
+  .pn-player--row .pn-player-transport { grid-column: 1 / -1; margin-top: 10px; justify-content: space-around; }
+}

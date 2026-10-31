@@ -130,7 +130,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_v1"); localStorage.removeItem("smd_prep_focus");}catch(e){} indexedDB.deleteDatabase("prep-bank"); ${SIGN_IN} return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_PLAY && !!document.querySelector("#smdPrep [data-act=v-feed]");`, 20000), "Play loads and home shows its section");
-  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep103";`) === true, "all nine Play rows; loader prep103");
+  ok(await ev(`return ["v-feed","v-spot","v-boss","v-quick","v-voice","v-focus","v-wrap","v-season","v-freeze"].every(function(a){ return !!document.querySelector("#smdPrep [data-act="+a+"]"); }) && PREP_LOADER.V === "prep104";`) === true, "all nine Play rows; loader prep104");
   // Header: Close and Search at the same gutter (owner screenshot 2026-10-30: Search sat one slot in from the edge).
   const gut = await ev(`var c=document.querySelector("#smdPrep .pn-bar-brand [data-act=close]"), f=document.querySelector("#smdPrep .pn-bar-brand [data-act=find]"), m=document.querySelector("#smdPrep .pn-bar-brand [data-act=menu]"); var a=c.getBoundingClientRect(), b=f.getBoundingClientRect(); return JSON.stringify({ l: Math.round(a.left), r: Math.round(innerWidth - b.right), nav: document.getElementById("smdPrep").classList.contains("pn-navon"), menu: m ? getComputedStyle(m).display : "none" });`);
   const g = JSON.parse(gut);
