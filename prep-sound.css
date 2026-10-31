@@ -4,17 +4,27 @@
    #42CDB5, restrained dark green; no glows, gradients or backdrop filters.
    Targets are at least 44px; focus is always visible; motion honours
    prefers-reduced-motion; layout is fluid down to 390px. */
-.pn-sound-layer { position: fixed; inset: 0; z-index: 40; pointer-events: none; }
+/* Body-level layer: must sit ABOVE the PrepNucleus overlay (.pn-root is z-index
+   885, ghost 886) or the dock and sheet render invisibly behind it (rs-sound-ui#4a).
+   Still far below the full-screen image viewer. */
+.pn-sound-layer { position: fixed; inset: 0; z-index: 890; pointer-events: none; }
 .pn-sound-layer .pn-sound-dock, .pn-sound-layer .pn-sound-scrim, .pn-sound-layer .pn-sound-sheet { pointer-events: auto; }
 
-/* Home section (rendered inside root, inherits .pn-root type). */
+/* Home section (rendered inside root, inherits .pn-root type). Buttons and chips
+   there use the app's own pn-btn / pn-chip classes; only the card box, status text
+   and the text-link keep pn-sound rules, scoped under .pn-root so they beat
+   `.pn-root button { color: inherit }` in both themes (rs-sound-ui#1). */
+.pn-root .pn-sound-home { padding: 16px; }
 .pn-sound-home .pn-sound-status { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: var(--pn-mut); }
 .pn-sound-home .pn-sound-homerow { display: flex; align-items: center; gap: 12px; margin-top: 10px; flex-wrap: wrap; }
+.pn-root .pn-sound-home .pn-sound-link { color: var(--pn-pri); }
 .pn-sound-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: 12px; border: 1px solid #16323B; background: #0D1D23; color: #E2F1EE; font-weight: 600; font-size: 15px; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
 .pn-sound-btn:active { transform: scale(.97); }
 .pn-sound-btn.sm { min-height: 44px; padding: 0 14px; font-size: 14px; border-radius: 9px; flex: 0 0 auto; }
 .pn-sound-link { min-height: 44px; padding: 0 6px; border: 0; background: none; color: #42CDB5; font-size: 14px; font-weight: 600; }
-.pn-sound-chips { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 6px; scrollbar-width: none; }
+/* Chips wrap like the PrepReels mission chips: nothing may clip past the card or
+   the 390px viewport (rs-sound-ui#3). */
+.pn-sound-chips { display: flex; flex-wrap: wrap; gap: 8px; padding: 2px 0 6px; max-width: 100%; }
 .pn-sound-chip { flex: 0 0 auto; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #16323B; background: #0D1D23; color: #CDE2DC; font-size: 14px; font-weight: 600; white-space: nowrap; transition: transform 120ms cubic-bezier(.23, 1, .32, 1), background-color 120ms ease; }
 .pn-sound-chip:active { transform: scale(.97); }
 .pn-sound-chip.on { background: #42CDB5; border-color: transparent; color: #071318; }
@@ -71,6 +81,9 @@ button.pn-sound-dbtn:focus-visible, button.pn-sound-dlabel:focus-visible, button
 @media (hover: hover) and (pointer: fine) {
   .pn-sound-btn:hover, .pn-sound-chip:hover { background: #142830; }
   .pn-sound-chip.on:hover { background: #50E2C8; }
+}
+@media (max-width: 420px) {
+  .pn-root .pn-sound-home { padding: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .pn-sound-sheet { animation: none; }

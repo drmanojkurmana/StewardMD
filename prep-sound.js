@@ -30,20 +30,27 @@
     if (st.sm === "error") return "Something failed · " + (st.note || "try again");
     return "Ready · " + (st.providerName || "");
   }
-  function presetChips(presets, current) {
+  /* presetChips renders the app's own themed chips (pn-chip, .on when current) inside
+     the PrepNucleus home so text stays AA in light AND dark; pass "pn-sound-chip" for
+     the body-level dark sheet, which lives outside .pn-root where pn-chip has no rules.
+     (Root cause rs-sound-ui#1: .pn-root button { color: inherit } beats the unscoped
+     .pn-sound-btn/.pn-sound-chip, so the home controls inherited dark-navy ink on the
+     dark fill in the light theme.) */
+  function presetChips(presets, current, cls) {
+    var chip = cls || "pn-sound-chip";
     return '<div class="pn-sound-chips" role="group" aria-label="Focus presets">' + presets.map(function (p) {
       var on = current === p.id;
-      return '<button type="button" class="pn-sound-chip' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="s-preset" data-v="' + esc(p.id) + '">' + esc(p.title) + "</button>";
+      return '<button type="button" class="' + chip + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="s-preset" data-v="' + esc(p.id) + '">' + esc(p.title) + "</button>";
     }).join("") + "</div>";
   }
   function homeSectionHtml(o) {
     var inner;
     if (!o.prefsEnabled) {
       inner = '<p class="pn-sound-status">' + esc(statusText({ prefsEnabled: false })) + ' Optional focus ambience. Nothing plays until you tap.</p>' +
-        '<button type="button" class="pn-sound-btn" data-act="s-enable">Enable Sound</button>';
+        '<button type="button" class="pn-btn pri" data-act="s-enable">Enable Sound</button>';
     } else {
-      inner = '<p class="pn-sound-status" role="status">' + esc(statusText(o)) + "</p>" + presetChips(o.presets, o.preset) +
-        '<div class="pn-sound-homerow"><button type="button" class="pn-sound-btn" data-act="s-open">Providers and settings</button>' +
+      inner = '<p class="pn-sound-status" role="status">' + esc(statusText(o)) + "</p>" + presetChips(o.presets, o.preset, "pn-chip") +
+        '<div class="pn-sound-homerow"><button type="button" class="pn-btn" data-act="s-open">Providers and settings</button>' +
         '<button type="button" class="pn-sound-link" data-act="s-disable">Turn off</button></div>';
     }
     return '<h2 class="pn-h">Sound</h2><div class="pn-group pn-sound-home">' + inner + "</div>";
@@ -95,7 +102,8 @@
       '<h3>Providers</h3><ul class="pn-sound-provs">' + providerRows(o.providers) + "</ul>" +
       '<h3>Focus presets <small>original ambience, made on this device</small></h3>' + presetChips(o.presets, o.preset) +
       share + prefs +
-      '<button type="button" class="pn-sound-link" data-act="s-disconnect">Stop and disconnect</button>' +
+      '<div class="pn-sound-homerow"><button type="button" class="pn-sound-link" data-act="s-disable">Turn off</button>' +
+      '<button type="button" class="pn-sound-link" data-act="s-disconnect">Stop and disconnect</button></div>' +
       "</div>";
   }
 
@@ -118,6 +126,11 @@
   var S = { prefs: loadPrefs(), sm: "idle", provider: "first_party", preset: "deep_focus", track: null, note: "", sheet: false, shareMsg: "", volume: 0.8 };
   if (S.prefs.preferredProvider && S.prefs.preferredProvider !== "first_party") S.provider = "first_party"; // external sessions never survive a restart
   S.preset = S.prefs.preferredPreset || "deep_focus";
+  /* Root cause rs-sound-ui#4b: "idle" exposes no Play control and the machine rejects
+     PLAY there, so the sheet after s-open could never start audio. Enabling Sound
+     selects the first-party provider, which lands on "ready" — still silent until an
+     explicit tap (PLAY is the only path to sound). */
+  if (S.prefs.enabled) S.sm = "ready";
   var dockEl = null, sheetEl = null;
 
   function provider() { return C.providerById(S.provider) || C.providerById("first_party"); }
@@ -225,7 +238,8 @@
   function onAct(a, b) {
     var v = b && b.getAttribute ? b.getAttribute("data-v") : null;
     switch (a) {
-      case "s-enable": S.prefs.enabled = true; S.sm = "idle"; savePrefs(); render(); return;
+      case "s-enable": S.prefs.enabled = true; S.provider = "first_party"; S.note = ""; S.shareMsg = "";
+        applyMachine({ t: "ENABLE" }); applyMachine({ t: "SELECT_PROVIDER", provider: "first_party" }); return;
       case "s-disable": S.prefs.enabled = false; applyMachine({ t: "STOP" }); S.sheet = false; render(); return;
       case "s-open": S.sheet = true; S.shareMsg = ""; render(); return;
       case "s-close": S.sheet = false; S.shareMsg = ""; S.wantFocus = true; render(); return;

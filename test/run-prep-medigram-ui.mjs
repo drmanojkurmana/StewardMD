@@ -87,8 +87,25 @@ try {
   await call("Page.navigate", { url: BASE + "?prep=1&sound=1" });
   ok(await until(`return !!(window.PREP && window.SMD_showHome);`, 30000), "app boots with ?sound=1");
   await ev(clean);
+  await ev(`try{localStorage.removeItem("smd_prep_sound_prefs");}catch(e){} return 1;`);
   await evA(`window.PREP.open({})`);
   ok(await until(`return !!window.PREP_SOUND;`, 20000), "Sound UI path loads when its flag is on");
+  ok(reqs.some((u) => /prep-sound\.js/.test(u)), "prep-loader fetched prep-sound.js with ?sound=1");
+  ok(!reqs.some((u) => /prep-sound-spotify/.test(u)), "spotify files stay unfetched while the spotify sub-flag is off");
+  // Sound card (rs-sound-ui): Enable -> Providers and settings opens the sheet with a Play
+  // control; Play starts the first-party ambience (WebAudio nodes, playing state).
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=s-enable]');`, 20000), "home shows the Sound section with Enable Sound");
+  await click("#smdPrep [data-act=s-enable]");
+  ok(await until(`return !!document.querySelector('#smdPrep [data-act=s-open]');`, 8000), "Enable Sound reveals Providers and settings");
+  await click("#smdPrep [data-act=s-open]");
+  ok(await until(`return !!document.querySelector('.pn-sound-sheet [data-act=s-play]');`, 8000), "s-open shows the sheet with a Play control");
+  ok(await ev(`return !!document.querySelector('.pn-sound-sheet [data-act=s-preset]');`) === true, "sheet lists the focus presets");
+  ok(await ev(`return !!document.querySelector('.pn-sound-sheet [data-act=s-provider]') && !!document.querySelector('.pn-sound-sheet [data-act=s-disable]');`) === true, "sheet has the provider chooser and Turn off");
+  await click(".pn-sound-sheet [data-act=s-play]");
+  ok(await ev(`return !!(window.PREP_SOUND && window.PREP_SOUND.isPlaying());`) === true, "Play starts the first-party ambience (playing state)");
+  ok(await ev(`return !!(window.PREP_SOUND_WEB && window.PREP_SOUND_WEB.supported() && window.PREP_SOUND_WEB.current());`) === true, "a live WebAudio track backs the playing state");
+  await sleep(1500);
+  ok(await ev(`var o=[]; document.querySelectorAll("#smdPrep *").forEach(function(e){var r=e.getBoundingClientRect(); if(r.width && r.right>innerWidth+1) o.push(1);}); return o.length;`) === 0, "after a 1500ms settle nothing in #smdPrep is wider than the 390 px screen");
   // All flags off: explicit =0 beats the seeded localStorage, so the loader must fetch no medigram file
   // and the home must show no PrepReels row. reqs is reset so this sweep only sees the flags-off page.
   await ev(`try{localStorage.setItem("smd_prep_medigram","0"); localStorage.setItem("smd_prep_sound","0");}catch(e){} return 1;`);
@@ -100,6 +117,8 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .pn-home");`, 20000), "home renders with all flags off");
   ok(!reqs.some((u) => /prep-medigram/.test(u)), "with all flags off prep-loader fetches none of the medigram files");
   ok(await ev(`return !document.querySelector('#smdPrep [data-act=mg-open]');`) === true, "with all flags off no PrepReels row shows");
+  ok(!reqs.some((u) => /prep-sound/.test(u)), "with all flags off prep-loader fetches none of the sound files");
+  ok(await ev(`return !document.querySelector('#smdPrep [data-act=s-enable]') && !document.querySelector('#smdPrep [data-act=s-open]');`) === true, "with all flags off no Sound section shows");
   ok(!errors.length, "no uncaught error after the flag sweeps" + (errors.length ? ": " + errors[0] : ""));
 } catch (e) { console.log("FAIL harness: " + (e && e.message || e)); fails++; }
 finally { try { chrome.kill(); } catch {} if (serveProc) try { serveProc.kill(); } catch {} }

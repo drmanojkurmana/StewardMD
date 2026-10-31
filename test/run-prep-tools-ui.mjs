@@ -103,7 +103,7 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); try{localStorage.removeItem("smd_prep_v1");}catch(e){} indexedDB.deleteDatabase("prep-bank"); return 1;`);
   await ev(`PREP.open(); return 1;`);
   ok(await until(`return !!window.PREP_TOOLS && !!window.PREP_TT && !!document.querySelector("#smdPrep .pn-home");`, 20000), "prep-tools.js and prep-timetable.js load with PrepNucleus");
-  ok(await ev(`return !!document.querySelector('link[data-prep="prep-tools.css"]') && !!document.querySelector('link[data-prep="prep-timetable.css"]') && PREP_LOADER.V === "prep101";`) === true, "both stylesheets load; loader at prep100");
+  ok(await ev(`return !!document.querySelector('link[data-prep="prep-tools.css"]') && !!document.querySelector('link[data-prep="prep-timetable.css"]') && PREP_LOADER.V === "prep102";`) === true, "both stylesheets load; loader at prep102");
   ok(await ev(`return !!document.querySelector('#smdPrep [data-act=x-notebook]') && !!document.querySelector('#smdPrep [data-act=tt-open]');`) === true, "home lists My notebook and Revision timetable");
 
   // ---- practice: cross out, answer, others, note
