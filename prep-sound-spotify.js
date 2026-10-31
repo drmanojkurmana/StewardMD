@@ -217,7 +217,7 @@
       if (typeof G.SMD_SPOTIFY_CLIENT_ID === "string" && G.SMD_SPOTIFY_CLIENT_ID) return G.SMD_SPOTIFY_CLIENT_ID;
       if (G.SMD_CONFIG && G.SMD_CONFIG.spotifyClientId) return String(G.SMD_CONFIG.spotifyClientId);
     } catch (e) {}
-    return "";
+    return "9545526c500040058279facbdcdba9ee";   // owner's Spotify app (public PKCE client id, no secret); dev-mode allowlist only until approval
   }
   function redirectUri() {
     try { if (G.SMD_SPOTIFY_REDIRECT_URI) return String(G.SMD_SPOTIFY_REDIRECT_URI); } catch (e) {}
