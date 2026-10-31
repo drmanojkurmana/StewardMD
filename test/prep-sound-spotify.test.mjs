@@ -301,3 +301,33 @@ test("stay connected: refresh token kept in the iOS Keychain plugin, restored on
   c2.disconnect(); await new Promise((r) => setTimeout(r, 0));
   assert.equal(box.size, 0, "Disconnect removes the saved token");
 });
+
+test("403s: only Spotify's PREMIUM_REQUIRED means Free; scope / retired-endpoint 403s never hide controls", async () => {
+  const X = P._pure || P;
+  let next = null; let now = 1000;
+  const fetch = async (url, o) => {
+    if (/accounts\.spotify\.com/.test(url)) return { status: 200, json: async () => ({ access_token: "A", refresh_token: "R", expires_in: 3600, scope: "x" }) };
+    return next;
+  };
+  const c = X.makeClient({ fetch, now: () => now, clientId: "cid", redirectUri: "stewardmd://spotify-callback" });
+  await c.exchange("code", "v");
+  const body = (b) => ({ status: 403, headers: { get: () => null }, text: async () => b, json: async () => JSON.parse(b) });
+  next = body(JSON.stringify({ error: { status: 403, message: "Player command failed: Premium required", reason: "PREMIUM_REQUIRED" } }));
+  await assert.rejects(c.next(), (e) => e.reason === "premium_required");
+  next = body(JSON.stringify({ error: { status: 403, message: "Insufficient client scope" } }));
+  await assert.rejects(c.next(), (e) => e.reason === "forbidden");
+  next = body("Check settings on developer.spotify.com/dashboard, the user may not be registered.");
+  await assert.rejects(c.next(), (e) => e.reason === "not_allowlisted");
+});
+
+test("last played: an idle card from GET /me/player/recently-played instead of a blank player", async () => {
+  const X = P._pure || P; let now = 1000;
+  const fetch = async (url) => {
+    if (/accounts\.spotify\.com/.test(url)) return { status: 200, json: async () => ({ access_token: "A", refresh_token: "R", expires_in: 3600, scope: "x" }) };
+    return { status: 200, text: async () => JSON.stringify({ items: [{ track: { uri: "spotify:track:s", id: "s", name: "Sulthana", artists: [{ name: "Ravi Basrur" }], duration_ms: 225000, album: { images: [] } }, context: { uri: "spotify:playlist:p" } }] }) };
+  };
+  const c = X.makeClient({ fetch, now: () => now, clientId: "cid", redirectUri: "x" });
+  await c.exchange("code", "v");
+  const m = await c.lastPlayed();
+  assert.equal(m.title, "Sulthana"); assert.equal(m.isPlaying, false); assert.equal(m.lastPlayed, true); assert.equal(m.contextUri, "spotify:playlist:p");
+});
