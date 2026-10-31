@@ -269,3 +269,12 @@ test("queue: Up next rows from GET /me/player/queue (tracks, episodes, unknown s
   assert.deepEqual(P.parseQueue({ items: [{ uri: "spotify:track:b", name: "B" }] }).map((r) => r.title), ["B"]);
   assert.deepEqual(P.parseQueue(null), []);
 });
+
+test("premium: Spotify dropped user.product for dev-mode apps (Feb 2026), so a missing field keeps controls on", () => {
+  const P = createRequire(import.meta.url)(join(ROOT, "prep-sound-spotify.js"));
+  const pre = (P._pure || P).premiumOf;
+  assert.equal(pre({ id: "u" }), true, "no product field: assume Premium");
+  assert.equal(pre({ product: "premium" }), true);
+  assert.equal(pre({ product: "free" }), false);
+  assert.equal(pre(null), true);
+});
