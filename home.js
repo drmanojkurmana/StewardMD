@@ -2159,7 +2159,7 @@
       eligible: function () { try { var q = (location.search.match(/[?&]q=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.SMD_QUEUE_FLAGS && SMD_QUEUE_FLAGS.on) return SMD_QUEUE_FLAGS.on(); return localStorage.getItem("smd_opd_queue") === "1"; } catch (e) { return false; } } },
     // One oncology tool on the home grid (owner 2026-10-30: "Single tool please"). ONCQIS already opens
     // OncoTree and Cancer Staging from inside, so their own tiles only appear when ONCQIS is switched off.
-    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "OncoTree, staging, protocols",
+    { act: "oncohome", ic: "oncology", tt: "ONCQIS", sub: "OncoTree, staging, protocols", anim: "oncqis",
       eligible: oncqisOn },
     { act: "oncotree", ic: "account_tree", tt: "OncoTree", sub: "Cancer pathway navigator", feat: true, anim: "oncotree",
       eligible: function () { if (oncqisOn()) return false; try { var q = (location.search.match(/[?&]qoncotree=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_onco_navigator") !== "0"; } catch (e) { return true; } } },
@@ -2429,7 +2429,10 @@
     // knife"): redesign-system.css sweeps a streak of light across the mark, clipped to its shape.
     surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">',
     // PrepNucleus: the 4K nucleus mark (prepnucleus-logo.png), alpha-masked; brightness(0) invert(1) forces it white on this badge.
-    prep: '<img class="ai-brandmark ai-prep-img" src="/prepnucleus-logo.png" alt="PrepNucleus">'
+    prep: '<img class="ai-brandmark ai-prep-img" src="/prepnucleus-logo.png" alt="PrepNucleus">',
+    // ONCQIS: a tile-size cut of the owner's mark (assets/oncqis-glyph.svg): hexagon network, antibodies and the
+    // targeted core, with the fine inner lattice dropped because it fused into a blob at 38px. Already white.
+    oncqis: '<img class="ai-brandmark ai-oncqis-img" src="/assets/oncqis-glyph.svg" alt="">'
   };
   /* Role box (owner, 2026-09-26): tools outside the user's role stay on Home but locked, after the
    * open ones, and explain themselves on tap. role-features.js owns the map; this is presentation

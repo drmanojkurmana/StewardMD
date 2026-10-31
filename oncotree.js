@@ -669,8 +669,8 @@
           '<button class="ot-tab-chip' + (curCat === "all" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="all">All <span class="ot-chip-num">' + counts.all + '</span></button>' +
           '<button class="ot-tab-chip' + (curCat === "common" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="common">Common <span class="ot-chip-num">' + counts.common + '</span></button>' +
           '<button class="ot-tab-chip' + (curCat === "solid" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="solid">Solid <span class="ot-chip-num">' + counts.solid + '</span></button>' +
-          '<button class="ot-tab-chip' + (curCat === "heme" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="heme">Hematologic <span class="ot-chip-num">' + counts.heme + '</span></button>' +
-          '<button class="ot-tab-chip' + (curCat === "peds" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="peds">Pediatric <span class="ot-chip-num">' + counts.peds + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "heme" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="heme">Heme <span class="ot-chip-num">' + counts.heme + '</span></button>' +
+          '<button class="ot-tab-chip' + (curCat === "peds" ? " on" : "") + '" data-ot-act="picker-filter" data-ot-cat="peds">Peds <span class="ot-chip-num">' + counts.peds + '</span></button>' +
         '</div>' +
       '</div>' +
       '<div class="ot-disease-list" id="otDiseaseList">' +
@@ -1538,9 +1538,10 @@
       '<div class="ot-calc-desc">Bedside Cockcroft-Gault CrCl &amp; Calvert Carboplatin dosing engine with ASCO/FDA/NCCN safety caps.</div>' +
       ((G.SMD_ONCO_ORGAN_DOSE && G.SMD_ONCO_ORGAN_DOSE.fetchWardSyncPatientLabs) || (G.GHIS && G.GHIS.pickPatient) ? (
         '<div class="ot-calc-sync-row">' +
-          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + ' Pick patient from WardSynQ &amp; fetch labs</button>' +
-          '<div class="ot-calc-patient" data-ot-calc-patient style="font:600 12px system-ui;color:#607D8B;margin-top:6px">' + esc(p.name ? (p.name + (p.patientId ? " · MR " + p.patientId : "")) : "No patient picked yet. Values below are editable defaults.") + '</div>' +
-        '</div>'
+          '<button type="button" class="ot-btn ghost sm ot-sync-btn" data-ot-act="calc-wardsync-fetch">' + ms("sync") + '<span>Pick patient from WardSynQ &amp; fetch labs</span></button>' +
+          '<div class="ot-calc-patient" data-ot-calc-patient>' + esc(p.name ? (p.name + (p.patientId ? " · MR " + p.patientId : "")) : "No patient picked yet. Values below are editable defaults.") + '</div>' +
+        '</div>'   // patient note. NB .ot-calc-sync-row is closed by a later </div> in this template, so the fields
+                   // below sit inside it; oncotree.css makes the row a block so they lay out full width.
       ) : '') +
       '<div class="ot-calc-grid">' +
         '<div class="ot-calc-f">' +
