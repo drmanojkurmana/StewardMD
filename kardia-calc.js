@@ -174,6 +174,7 @@
     A["kcalc-fig-toggle"] = function (b) { S.figPlay = S.figPlay === false ? true : false; if (S.figPlay === false && S.figRaf && G.cancelAnimationFrame) G.cancelAnimationFrame(S.figRaf); repaint(); };
     A["kcalc-scan"] = function (b) { var view = b.getAttribute("data-view"); try { if (S.host._kardia && S.host._kardia.echoLab) S.host._kardia.echoLab.setView(view); } catch (e) {} if (S.nav) S.nav("echo"); };
   }
-  G.KARDIA_CALC = { attach: attach, html: html, mount: mount, setNavigator: function (fn) { S.nav = fn; }, _state: S, calcById: calcById, filtered: filtered };
+  G.KARDIA_CALC = { attach: attach, html: html, mount: mount, setNavigator: function (fn) { S.nav = fn; }, _state: S, calcById: calcById, filtered: filtered,
+    openCalc: function (id) { if (!calcById(id)) return false; S.cur = id; touchRecent(id); return true; } };
   if (G.KARDIA && G.KARDIA._internal) attach(G.KARDIA);
 })(typeof window !== "undefined" ? window : this);

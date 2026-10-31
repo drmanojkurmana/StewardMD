@@ -143,6 +143,18 @@
     var l = S.lix && S.lix.lessons && S.lix.lessons[lid];
     return (l && l.title && (l.title.en || l.title)) || lid.replace(/_/g, " ");
   }
+  function openShelf(id) {
+    if (!S.index) { S.pendingShelf = id; loadIndex(); return; }
+    var entry = null;
+    for (var i = 0; i < S.index.cases.length; i++) if (S.index.cases[i].id === id) entry = S.index.cases[i];
+    if (!entry) return;
+    if (!pro() && entry.level !== "mbbs" && entry.level !== level()) return I.showPro();
+    var same = S.index.cases.filter(function (c) { return c.level === entry.level; });
+    var idx = -1;
+    for (var j = 0; j < same.length; j++) if (same[j].id === id) idx = j;
+    if (!pro() && entry.level === "mbbs" && idx >= FREE_CASES) return I.showPro();
+    S.err = false; loadCase(entry);
+  }
   function loadIndex() {
     if (S.index || S.loading) return;
     S.loading = true; S.err = false;
@@ -150,6 +162,7 @@
     if (!S.lix) I.getJSON("learn/index.json").then(function (x) { S.lix = x || {}; }, function () { S.lix = {}; });
     I.getJSON("cases/index.json").then(function (ix) {
       S.index = ix && ix.cases ? ix : { cases: [] }; S.loading = false; repaint();
+      if (S.pendingShelf) { var pid = S.pendingShelf; S.pendingShelf = null; openShelf(pid); }
     }, function () { S.err = true; S.loading = false; repaint(); });
   }
   function loadCase(entry) {
@@ -392,7 +405,7 @@
     };
   }
 
-  var API = { helpers: HELPERS, attach: attach, html: html, setNavigator: function (fn) { S.nav = fn; }, _state: S, FREE_CASES: FREE_CASES, STEPS: STEPS };
+  var API = { helpers: HELPERS, attach: attach, html: html, openShelf: openShelf, setNavigator: function (fn) { S.nav = fn; }, _state: S, FREE_CASES: FREE_CASES, STEPS: STEPS };
   G.KARDIA_CASES = API;
   if (G.KARDIA && G.KARDIA._internal) attach(G.KARDIA);
 })(typeof window !== "undefined" ? window : this);

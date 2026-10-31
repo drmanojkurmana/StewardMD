@@ -943,7 +943,16 @@
   }
 
   function learnHtml() {
-    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + echoHtml() + ecgHtml() + "</div></div>";
+    var paths = "";
+    try {
+      if (G.KARDIA_PATHS) {
+        G.KARDIA_PATHS.attach(host);
+        G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { showTab("cases"); });
+        paths = G.KARDIA_PATHS.learnHtml();
+      }
+    } catch (e) { paths = ""; }
+    if (paths && G.KARDIA_PATHS && G.KARDIA_PATHS.isOpen()) return '<div class="sp-scroll sp-pad"><div class="sp-col">' + paths + "</div></div>";
+    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + paths + echoHtml() + ecgHtml() + "</div></div>";
   }
 
   function kardioxHtml() {
@@ -1098,7 +1107,15 @@
       var cbody = G.KARDIA_CASES.html();
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
       if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {} return; }
-      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + cbody, focusSel);
+      var shelf = "";
+      try {
+        if (G.KARDIA_PATHS) {
+          G.KARDIA_PATHS.attach(host);
+          G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { showTab("cases"); });
+          shelf = '<div class="sp-scroll sp-pad"><div class="sp-col">' + G.KARDIA_PATHS.casesShelfHtml() + "</div></div>";
+        }
+      } catch (e) { shelf = ""; }
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + shelf + cbody, focusSel);
       scrollActiveTabIntoView();
       try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       return;
