@@ -333,3 +333,12 @@ test("last played: an idle card from GET /me/player/recently-played instead of a
   const m = await c.lastPlayed();
   assert.equal(m.title, "Sulthana"); assert.equal(m.isPlaying, false); assert.equal(m.lastPlayed, true); assert.equal(m.contextUri, "spotify:playlist:p");
 });
+
+test("Play targets the Spotify in the learner's hand, never another device out of earshot", () => {
+  const ds = [{ id: "ipad", type: "Tablet", is_active: true }, { id: "mac", type: "Computer" }, { id: "phone", type: "Smartphone" }];
+  assert.equal(P.pickDeviceFor(ds, "smartphone").id, "phone", "on the iPhone: the iPhone, even though the iPad is active");
+  assert.equal(P.pickDeviceFor(ds, "tablet").id, "ipad");
+  assert.equal(P.pickDeviceFor([{ id: "ipad", type: "Tablet", is_active: true }], "smartphone"), null, "phone's Spotify asleep: say so, do not play on the iPad");
+  assert.equal(P.pickDeviceFor(ds, null).id, "ipad", "web: the active device");
+  assert.equal(P.pickDeviceFor([{ id: "r", type: "Smartphone", is_restricted: true }], "smartphone"), null);
+});
