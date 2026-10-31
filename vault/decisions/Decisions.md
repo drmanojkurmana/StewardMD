@@ -12058,3 +12058,23 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   with a live-text "ONCQIS" wordmark in the logo's teal gradient and its tagline (CliniX-style). assets/oncqis-logo.png is
   the owner's lockup, background removed and upscaled (palette PNG, 97 KB); oncqis-mark.png a 1024px raster.
   build-www.sh copies assets/oncqis-*. The logo keeps its own teal/red: the plum rule covers UI accents, not the brand mark.
+- 2026-10-31 OncoTree header + pathway screens brought to the ONCQIS standard. Picker bar is transparent and untitled at
+  rest (the page has the large "Oncology Navigator" title) and frosts with the compact title once #otBody scrolls past
+  28px (`.ot-collapse` / `.ot-scrolled`). In a cancer, the cancer name is the title and tapping it changes cancer (the
+  all-caps "CHANGE CANCER" eyebrow is gone); header keys are round 44px, Staging + Calvert only. View switcher is one
+  three-segment control (Navigator / Steps / Overview) with Summary and Restart as round keys; the duplicate Staging
+  segment was dropped (it is in the header). Answered steps are a grouped list (label over value, chevron) instead of
+  wrapping pills. Node category colours moved to a plum/lavender family (no orange/yellow); category label is sentence
+  case. Selection screen: plum check, primary action full width over two secondary ones.
+  test/run-oncotree-ui.mjs walk updated to the breast navigator v3.2 graph (the old stage/setting/HER2 questions no
+  longer exist, which was the source of its 8 long-standing failures).
+  Same pass: protocol sheet header keys round, sentence-case kicker, letterhead wraps the "Customize Hospital & Logo"
+  button under the name and the date never breaks (screen only; print layout unchanged). Staging provenance no longer
+  shows the orphaned "Requires before unchecked use." fragment left after the R1 strip. Stale onco UI checks updated to
+  current content: every staging site is seeded (no gap-only sites; anus now staged, its 7th-edition toggle is the gap
+  check), CTCAE v4.03 is seeded, irAE intro is "4 Pillars", and the ONCQIS Recent list no longer exists (#1784).
+- 2026-10-31 opd-emr protoBox(): starts the KB / oncology protocol loads only when rendering the live screen state
+  (`ps === st`, same guard as protocolTab). Rendering any other state object with the box open used to kick off
+  fetches that later repainted the live screen (it surfaced as onco-ui.test.mjs leaking async work). The two
+  long-red unit checks are fixed: the assessTab test opens the box (regimens live there since the protocol-box
+  redesign) and opd-profile-sheet accepts later queue.css bumps (q13 -> q14) that keep the profilescroll marker.

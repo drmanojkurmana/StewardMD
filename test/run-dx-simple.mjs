@@ -150,7 +150,9 @@ try {
   ok(seen.close > 0 && seen.clear > 0, `on  · both labels occur across the fixtures (close ${seen.close}, clear ${seen.clear})`);
   ok(v.wide && (await ev(`var j=document.querySelector('[data-dx-jump="dxIntake"]'); j.click(); var b=document.querySelector('#dxOverlay .dx-body'); return b.scrollWidth<=b.clientWidth+1;`)) === true, "on  · no horizontal overflow at 390px (review and intake)");
   const dark = await ev(`document.body.classList.add('dark'); var c=getComputedStyle(document.querySelector('#dxOverlay')).backgroundColor; var ev=document.querySelector('#dxOverlay .ev-wrap'); var e=ev?getComputedStyle(ev).backgroundColor:''; document.body.classList.remove('dark'); return c+'|'+e;`);
-  ok(!/^rgb\(0, 0, 0\)/.test(dark) && !/rgb\(255, 255, 255\)$/.test(dark), `slop · dark mode is off-black, and "Know more" follows the theme (${dark})`);
+  // The app-wide Graphite dark appearance (graphite-dark.css) sets --paper / --rds-bg to true black on purpose, so the
+  // overlay may be #000; what must hold is that it is dark and "Know more" does not stay a white card.
+  ok(/^rgba?\((\d|[1-3]\d), (\d|[1-3]\d), (\d|[1-3]\d)/.test(dark) && !/rgb\(255, 255, 255\)$/.test(dark), `slop · dark mode is dark (Graphite), and "Know more" follows the theme (${dark})`);
   // guideline box: folded, its page button kept outside and still working
   await open(MEN);
   const pol = JSON.parse(await ev(`var el=document.querySelector('#dxPolicy'); return JSON.stringify({fold:!!el.querySelector(':scope > details.dx-pol-fold'), btn:!!el.querySelector(':scope > .dx-select[data-sel]'), sum:(el.querySelector('summary')||{}).textContent||''});`));

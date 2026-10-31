@@ -192,7 +192,7 @@ test("_buildReviewPanel enables Create & Activate once every staged override car
 
 test("opd-emr.js assessTab (write mode, oncoFlagOn) offers the apply panel for active and draft protocols", () => {
   const active = fixtureActiveTemplate();
-  const state = { tab: "assess", writeOn: true, assessVals: {}, oncoProtocols: [active, RCHOP], patient: {}, loading: false, error: "" };
+  const state = { tab: "assess", writeOn: true, assessVals: {}, oncoProtocols: [active, RCHOP], oncoProtocolsReady: true, oncoProtocolsLoaded: true, pbOpen: true, patient: {}, loading: false, error: "" };   // the regimens live in the collapsed "Protocols & dose tools" box, listed once it is open
   const html = OPDEMR._render(state);
   assert.ok(html.indexOf('data-oe-act="onco-apply:' + active.id + '"') >= 0, "active protocol offered near the assessment");
   assert.ok(html.indexOf('data-oe-act="onco-apply:' + RCHOP.id + '"') >= 0, "draft protocol offered too (owner 2026-09-28)");

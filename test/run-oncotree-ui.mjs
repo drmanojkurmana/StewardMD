@@ -1,6 +1,6 @@
 /* ONCOTREE UI drive test (real headless Chrome, mobile viewport). Loads the REAL oncotree scripts +
  * REAL kb/oncotree/breast.json + kb/protocols/*.json, then walks the breast pathway with real clicks:
- * histology -> stage -> setting -> HER2 -> outcome, asserting protocol cards + DRAFT badges +
+ * histology -> workup -> sequencing -> response -> residual subtype -> outcome, asserting protocol cards + DRAFT badges +
  * disabledBy explanation + protocol detail + Select handoff. Also asserts NO console errors/exceptions
  * and NO horizontal overflow at 390px. USAGE: node test/run-oncotree-ui.mjs */
 import { spawn } from "node:child_process";
@@ -47,32 +47,34 @@ try {
   ok(Number(await ev(`return document.querySelectorAll(".ot-disease").length;`)) >= 2, "disease picker lists multiple cancers (breast + lung)");
   await clickAct(`[data-ot-act="pick"][data-ot-guideline="breast"]`);
   for (let i = 0; i < 40; i++) { await sleep(150); if (await ev(`return !!document.querySelector(".ot-step-title");`)) break; }
-  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("histology") >= 0, "picking Breast opens the histology question");
+  ok(/breast cancer type|histolog/i.test((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`)) || ""), "picking Breast opens the histology question");
 
-  // walk the pathway
-  ok(await clickAct(`[data-ot-act="answer"][data-ot-opt="invasive"]`), "answer histology = invasive");
-  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("stage") >= 0, "stage question appears");
-  await clickAct(`[data-ot-act="answer"][data-ot-opt="s2"]`);
-  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").toLowerCase().indexOf("setting") >= 0, "setting question appears");
-  await clickAct(`[data-ot-act="answer"][data-ot-opt="neoadjuvant"]`);
-  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("HER2") >= 0, "HER2 question appears");
+  // walk the pathway (breast navigator v3.2: histology -> workup -> sequencing -> preop regimens -> response -> residual subtype)
+  const title = async () => (await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`)) || "";
+  const pickOpt = (node, opt) => clickAct(`[data-ot-act="answer"][data-ot-node="${node}"][data-ot-opt="${opt}"]`);
+  ok(await pickOpt("n_histology", "invasive"), "answer histology = invasive");
+  ok(/workup/i.test(await title()), "invasive workup step appears");
+  ok(await pickOpt("n_inv_wk", "continue"), "workup reviewed");
+  ok(/sequenc/i.test(await title()), "primary sequencing question appears");
+  ok(await pickOpt("n_inv_approach", "preop"), "answer sequencing = preoperative");
+  ok(/neoadjuvant|preoperative/i.test(await title()), "preoperative regimen step appears");
+  ok(await pickOpt("n_tx_preop", "continue"), "surgery completed - evaluate response");
+  ok(await pickOpt("n_preop_response", "residual"), "answer response = residual disease");
+  ok(/residual/i.test(await title()), "residual subtype question appears");
 
   // progress rail shows prior answers
-  ok(Number(await ev(`return document.querySelectorAll(".ot-rail-chip").length;`)) >= 3, "progress rail shows answered steps");
+  ok(Number(await ev(`return document.querySelectorAll(".ot-rail-chip").length;`)) >= 4, "progress rail shows answered steps");
 
-  // HER2 positive -> HR question (HR is captured for HER2+ too) -> HR negative -> outcome
-  await clickAct(`[data-ot-act="answer"][data-ot-opt="pos"]`);
-  ok((await ev(`return (document.querySelector(".ot-step-title")||{}).textContent||"";`) || "").indexOf("Hormone receptor") >= 0, "HER2+ routes through the hormone-receptor question");
-  await clickAct(`[data-ot-act="answer"][data-ot-opt="neg"]`);
-  ok(Number(await ev(`return document.querySelectorAll(".ot-card").length;`)) > 0, "HER2-positive outcome shows applicable protocol cards");
-  ok(await ev(`return !document.querySelector(".ot-badge.exp, .ot-badge.draft") && !/DRAFT|BETA/.test(document.querySelector(".ot-outcome").textContent||"");`) === true, "protocol cards carry no draft / Beta badge (owner decision 2026-09-28)");
-  ok((await ev(`return document.querySelector(".ot-outcome").textContent||"";`) || "").toLowerCase().indexOf("her2-positive") >= 0, "outcome is the HER2-positive branch");
+  ok(await pickOpt("n_preop_residual_subtype", "her2pos"), "answer residual subtype = HER2-positive");
+  ok(Number(await ev(`return document.querySelectorAll(".ot-card").length;`)) > 0, "HER2-positive residual outcome shows applicable protocol cards");
+  ok(await ev(`return !document.querySelector(".ot-badge.exp, .ot-badge.draft") && !/DRAFT|BETA/.test((document.querySelector(".ot-outcome, #otBody")||{}).textContent||"");`) === true, "protocol cards carry no draft / Beta badge (owner decision 2026-09-28)");
+  ok(/T-DM1|trastuzumab emtansine|T-DXd|deruxtecan/i.test((await ev(`return document.getElementById("otBody").textContent||"";`)) || ""), "outcome is the HER2-positive residual branch (T-DM1 / T-DXd)");
 
   // disabledBy explanation
   await clickAct(`[data-ot-act="toggle-excluded"]`);
   ok(await ev(`return !!document.querySelector(".ot-excl");`) === true, "excluded pathways panel lists not-applicable branches");
-  await clickAct(`[data-ot-act="why"][data-ot-node="n_hrpos"]`);   // the HR+ branch (excluded by HER2+)
-  ok((await ev(`return (document.querySelector(".ot-excl-why")||{}).textContent||"";`) || "").indexOf("HER2") >= 0, "Why? explains exclusion by the HER2 decision");
+  await clickAct(`[data-ot-act="why"]`);
+  ok(((await ev(`return (document.querySelector(".ot-excl-why")||{}).textContent||"";`)) || "").trim().length > 10, "Why? explains the exclusion");
 
   // protocol detail
   await clickAct(`[data-ot-act="view-proto"]`);

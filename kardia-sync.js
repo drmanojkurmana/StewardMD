@@ -342,18 +342,20 @@
             a[3] * b[2] + a[0] * b[1] - a[1] * b[0] + a[2] * b[3],
             a[3] * b[3] - a[0] * b[0] - a[1] * b[1] - a[2] * b[2]];
   }
+  function wrapDeg180(d) { var x = d % 360; if (x > 180) x -= 360; if (x < -180) x += 360; return x; }
+  /* Wire Euler order is Y-X-Z: Q = Ry(tilt) * Rx(rock) * Rz(rotation).
+   * The middle angle is rock, which is clamped to a small range, so
+   * rotation can run the full -180 to 180 without gimbal lock. */
   function quatFromEuler(tiltDeg, rotationDeg, rockDeg) {
     function qAxis(ax, deg) { var h = deg * Math.PI / 360, s = Math.sin(h); var q = [0, 0, 0, Math.cos(h)]; q[ax] = s; return q; }
-    return quatNormalize(quatMul(quatMul(qAxis(1, tiltDeg), qAxis(2, rotationDeg)), qAxis(0, rockDeg)));
+    return quatNormalize(quatMul(quatMul(qAxis(1, tiltDeg), qAxis(0, rockDeg)), qAxis(2, rotationDeg)));
   }
   function eulerFromQuat(q0) {
     var q = quatNormalize(q0), x = q[0], y = q[1], z = q[2], w = q[3];
-    var tilt = Math.atan2(2 * (w * y + x * z), 1 - 2 * (y * y + x * x));
-    var s = clamp(2 * (w * x - z * y), -1, 1);
-    var rock = Math.asin(s);
-    var rot = Math.atan2(2 * (w * z + x * y), 1 - 2 * (z * z + x * x));
+    var r02 = 2 * (x * z + w * y), r12 = 2 * (y * z - w * x), r22 = 1 - 2 * (x * x + y * y);
+    var r10 = 2 * (x * y + w * z), r11 = 1 - 2 * (x * x + z * z);
     function d(r) { return r * 180 / Math.PI; }
-    return { tiltDeg: d(tilt), rotationDeg: d(rot), rockDeg: d(rock) };
+    return { tiltDeg: d(Math.atan2(r02, r22)), rotationDeg: d(Math.atan2(r10, r11)), rockDeg: d(Math.asin(clamp(-r12, -1, 1))) };
   }
   function createSmoother(tauMs) {
     var tau = tauMs || 60, cur = null, vel = { tiltDeg: 0, rotationDeg: 0, rockDeg: 0, x: 0, y: 0 };
@@ -373,7 +375,9 @@
       step: function (target, dtMs) {
         if (!cur) return this.reset(target);
         var dt = clamp(dtMs == null ? 16 : dtMs, 1, 100);
-        stepField("tiltDeg", target.tiltDeg || 0, dt); stepField("rotationDeg", target.rotationDeg || 0, dt);
+        var rotTarget = target.rotationDeg || 0;
+        if (cur) rotTarget = cur.rotationDeg + wrapDeg180(rotTarget - cur.rotationDeg);
+        stepField("tiltDeg", target.tiltDeg || 0, dt); stepField("rotationDeg", rotTarget, dt);
         stepField("rockDeg", target.rockDeg || 0, dt); stepField("x", target.x || 0, dt); stepField("y", target.y || 0, dt);
         return this.current();
       }
@@ -651,6 +655,7 @@
     var clockOffsetMs = null, lastActivityAt = nowFn(), lastPoseAt = 0, lastRenderAt = 0;
     var frozen = false, frozenReason = null, pendingPose = null, lastValidPose = null, lastValidState = null;
     var displayProbe = null, smoother = createSmoother(opts.tauMs || 60), calibQuat = null, calibBase = null, needsCalib = true;
+    var relPrevRotation = null, relRotationUnwrapped = 0;
     var lastDepthCm = null;
     var resumeArmed = false;
     var transport = null, destroyed = false, rejectedHellos = 0, statsIn = { accepted: 0, droppedMac: 0, droppedSeq: 0, droppedStale: 0, droppedBounds: 0, droppedSession: 0, droppedFrozen: 0 };
@@ -717,22 +722,32 @@
         }
         if (needsCalib || !calibQuat) {
           calibQuat = pose.quat.slice(); needsCalib = false;
+          relPrevRotation = null; relRotationUnwrapped = 0;
           try { dp.calibrateGyro({ alpha: 0, beta: 0, gamma: 0 }); } catch (e) {}
           calibBase = dp.getState();
         }
         var rel = quatNormalize(quatMul(quatConj(calibQuat), pose.quat));
         var eu = eulerFromQuat(rel);
+        /* Keep rotation continuous: unwrap the relative rotation
+         * against the previous sample before adding the base. */
+        if (relPrevRotation == null) relRotationUnwrapped = eu.rotationDeg;
+        else relRotationUnwrapped += wrapDeg180(eu.rotationDeg - relPrevRotation);
+        relPrevRotation = eu.rotationDeg;
+        var euCont = { tiltDeg: eu.tiltDeg, rotationDeg: relRotationUnwrapped, rockDeg: eu.rockDeg };
         var ps;
         if (probeLib && typeof probeLib.isTeeWindow === "function" && probeLib.isTeeWindow(pose.window)) {
-          try { dp.applyGyroSample({ alpha: eu.rockDeg, beta: eu.tiltDeg, gamma: eu.rotationDeg }, 16); } catch (e2) {}
-          ps = dp.getState();
+          var baseT = calibBase || dp.getState();
+          try { ps = dp.setState({ omniplaneDeg: (baseT.omniplaneDeg || 0) + euCont.rotationDeg, flexDeg: (baseT.flexDeg || 0) + euCont.tiltDeg, rotationDeg: (baseT.rotationDeg || 0) + euCont.rotationDeg, tiltDeg: (baseT.tiltDeg || 0) + euCont.tiltDeg, rockDeg: (baseT.rockDeg || 0) + euCont.rockDeg }); } catch (e2) { ps = dp.getState(); }
         } else {
           // No second low-pass here: the probe already filtered its samples,
           // and re-filtering on the display doubled the lag. Set the target
           // directly from the relative euler angles off the calibrate base.
           var base = calibBase || dp.getState();
-          try { ps = dp.setState({ tiltDeg: base.tiltDeg + eu.tiltDeg, rotationDeg: base.rotationDeg + eu.rotationDeg, rockDeg: base.rockDeg + eu.rockDeg }); }
+          try { ps = dp.setState({ tiltDeg: base.tiltDeg + euCont.tiltDeg, rotationDeg: wrapDeg180(base.rotationDeg + euCont.rotationDeg), rockDeg: base.rockDeg + euCont.rockDeg }); }
           catch (e2) { ps = dp.getState(); }
+          /* dp.setState clamps rotation; return the unwrapped target
+           * so the smoother does not jump at the wrap. */
+          ps = { window: ps.window, position: ps.position, tiltDeg: ps.tiltDeg, rotationDeg: base.rotationDeg + euCont.rotationDeg, rockDeg: ps.rockDeg, depthCm: ps.depthCm, omniplaneDeg: ps.omniplaneDeg, flexDeg: ps.flexDeg, markerDeg: ps.markerDeg, gyroOn: ps.gyroOn };
         }
         target = { window: pose.window, tiltDeg: ps.tiltDeg, rotationDeg: ps.rotationDeg, rockDeg: ps.rockDeg, x: pose.slideXmm, y: pose.slideYmm, raw: { tiltDeg: eu.tiltDeg, rotationDeg: eu.rotationDeg, rockDeg: eu.rockDeg } };
       } else {
@@ -970,9 +985,9 @@
         var sm = smoother.step({ tiltDeg: target.tiltDeg, rotationDeg: target.rotationDeg, rockDeg: target.rockDeg, x: target.x, y: target.y }, dt);
         var outState;
         if (displayProbe) {
-          outState = { window: target.window, tiltDeg: sm.tiltDeg, rotationDeg: sm.rotationDeg, rockDeg: sm.rockDeg, position: { x: sm.x, y: sm.y } };
+          outState = { window: target.window, tiltDeg: sm.tiltDeg, rotationDeg: wrapDeg180(sm.rotationDeg), rockDeg: sm.rockDeg, position: { x: sm.x, y: sm.y } };
         } else {
-          outState = { window: target.window, tiltDeg: sm.tiltDeg, rotationDeg: sm.rotationDeg, rockDeg: sm.rockDeg, position: { x: sm.x, y: sm.y } };
+          outState = { window: target.window, tiltDeg: sm.tiltDeg, rotationDeg: wrapDeg180(sm.rotationDeg), rockDeg: sm.rockDeg, position: { x: sm.x, y: sm.y } };
         }
         if (lastDepthCm != null) outState.depthCm = lastDepthCm;
         lastValidState = outState;
@@ -1033,7 +1048,7 @@
       if (lastPoseState && calibrateAtt) {
         var dz = Math.max(
           Math.abs((st.tiltDeg || 0) - (lastPoseState.tiltDeg || 0)),
-          Math.abs((st.rotationDeg || 0) - (lastPoseState.rotationDeg || 0)),
+          Math.abs(wrapDeg180((st.rotationDeg || 0) - (lastPoseState.rotationDeg || 0))),
           Math.abs((st.rockDeg || 0) - (lastPoseState.rockDeg || 0)));
         if (dz < 1.5) return lastPose;
       }
@@ -1622,7 +1637,7 @@
       clampPose: clampPose, validatePose: validatePose, windowIndexOf: windowIndexOf, windowIdOf: windowIdOf, windowClamps: windowClamps,
       makeShortCode: makeShortCode, shortCodeHash4: shortCodeHash4, confirmCodeFromBytes: confirmCodeFromBytes,
       bytesToHex: bytesToHex, hexToBytes: hexToBytes, b64urlEncode: b64urlEncode, b64urlDecode: b64urlDecode,
-      sessionTagOf: sessionTagOf, diffU32: diffU32, quatFromEuler: quatFromEuler, eulerFromQuat: eulerFromQuat,
+      sessionTagOf: sessionTagOf, diffU32: diffU32, quatFromEuler: quatFromEuler, eulerFromQuat: eulerFromQuat, wrapDeg: wrapDeg180, wrapDeg180: wrapDeg180,
       quatMul: quatMul, quatConj: quatConj, quatNormalize: quatNormalize,
       createSmoother: createSmoother, scanBackoffMs: scanBackoffMs, healthScore: healthScore, isHealthy: isHealthy,
       detectCapabilities: detectCapabilities, pairingPayload: pairingPayload, parsePairingPayload: parsePairingPayload, transportErrorReason: transportErrorReason,

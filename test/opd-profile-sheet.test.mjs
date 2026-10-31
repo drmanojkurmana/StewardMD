@@ -61,7 +61,7 @@ test("the card is capped to the visible viewport and scrolls inside itself", () 
 
 test("the bundle tokens moved with the fix", () => {
   const idx = readFileSync(fileURLToPath(new URL("../index.html", import.meta.url)), "utf8");
-  assert.match(idx, /queue\.css\?v=q13-profilescroll/);
+  assert.match(idx, /queue\.css\?v=q\d+-profilescroll/);   // later queue.css bumps keep the profilescroll marker
   assert.match(idx, /queue\.js\?v=[^"]*profilex1/);
   assert.match(readFileSync(fileURLToPath(new URL("../sw.js", import.meta.url)), "utf8"), /var CACHE = "[^"]*opdprofile1/);
 });
