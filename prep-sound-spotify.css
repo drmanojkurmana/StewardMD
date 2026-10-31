@@ -77,11 +77,12 @@
    reads through softly; hairline light edge + top highlight; offset soft shadow. Solid fallback where blur is
    unsupported or the learner asked for reduced transparency. */
 .pn-root .pn-sound-sp-sheet,.pn-root .pn-sound-sp-mini{
-  background:rgba(9,24,29,.8);
-  -webkit-backdrop-filter:blur(28px) saturate(170%);backdrop-filter:blur(28px) saturate(170%);
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 24px 48px -16px rgba(2,8,10,.5),0 4px 12px -4px rgba(2,8,10,.3)}
-.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet{border-color:rgba(255,255,255,.14)}
+  /* owner 2026-10-31: "transparent glass": light tint, heavy blur does the legibility work */
+  background:rgba(9,24,29,.5);
+  -webkit-backdrop-filter:blur(34px) saturate(190%) brightness(.72);backdrop-filter:blur(34px) saturate(190%) brightness(.72);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.04),0 24px 48px -16px rgba(2,8,10,.45),0 4px 12px -4px rgba(2,8,10,.25)}
+.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet{border-color:rgba(255,255,255,.22)}
 .pn-root .pn-sound-sp-hbtn,.pn-root .pn-sound-sp-menu{background:rgba(255,255,255,.08)}
 .pn-root .pn-sound-sp-nexthead{border-top-color:rgba(255,255,255,.10)}
 .pn-root .pn-sound-sp-qi img,.pn-root .pn-sound-sp-thumb0,.pn-root .pn-sound-sp-mbody img,.pn-root .pn-sound-sp-mbody .pn-sound-sp-thumb0{background:rgba(255,255,255,.06)}
@@ -91,3 +92,9 @@
 @media (hover:hover) and (pointer:fine){.pn-root .pn-sound-sp-qi:hover,.pn-root .pn-sound-sp-mi:hover{background:rgba(255,255,255,.08)}}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.pn-root .pn-sound-sp-sheet,.pn-root .pn-sound-sp-mini{background:#0D1D23}}
 @media (prefers-reduced-transparency:reduce){.pn-root .pn-sound-sp-sheet,.pn-root .pn-sound-sp-mini{background:#0D1D23;-webkit-backdrop-filter:none;backdrop-filter:none}}
+/* On see-through glass the page can be light: secondary text goes near-white (AA over the darkened, blurred backdrop). */
+.pn-root .pn-sound-sp-sheet .pn-player-artist,.pn-root .pn-sound-sp-sheet .pn-player-time,.pn-root .pn-sound-sp-sheet .pn-player-vol,
+.pn-root .pn-sound-sp-sheet .pn-sound-sp-it small,.pn-root .pn-sound-sp-sheet .pn-sound-sp-dur,.pn-root .pn-sound-sp-sheet .pn-sound-sp-link,
+.pn-root .pn-sound-sp-sheet .pn-sound-sp-brand,.pn-root .pn-sound-sp-sheet .pn-sound-sp-prov,.pn-root .pn-sound-sp-sheet .pn-sound-sp-note,
+.pn-root .pn-sound-sp-mini .pn-sound-sp-it small{color:rgba(240,248,246,.86)}
+.pn-root .pn-sound-sp-sheet .pn-player-title,.pn-root .pn-sound-sp-sheet h2,.pn-root .pn-sound-sp-sheet .pn-sound-sp-it b,.pn-root .pn-sound-sp-mini .pn-sound-sp-it b{color:#fff}
