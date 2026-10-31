@@ -154,7 +154,7 @@ public class SpotifyRemotePlugin: CAPPlugin, CAPBridgedPlugin {
             connectCall = nil
             call.reject("Disconnected.", "spotify_disconnected")
         }
-        appRemote?.playerAPI?.unsubscribeToPlayerState(nil)
+        appRemote?.playerAPI?.unsubscribe(toPlayerState: nil)
         appRemote?.playerAPI?.delegate = nil
         appRemote?.disconnect()
         appRemote?.delegate = nil
@@ -178,17 +178,17 @@ public class SpotifyRemotePlugin: CAPPlugin, CAPBridgedPlugin {
         let track = state.track
         var dict: [String: Any] = [
             "connected": true,
-            "trackUri": track?.uri ?? "",
-            "title": track?.name ?? "",
-            "artist": track?.artist?.name ?? "",
-            "album": track?.album?.name ?? "",
-            "durationMs": Int(track?.duration ?? 0),
+            "trackUri": track.uri,
+            "title": track.name,
+            "artist": track.artist.name,
+            "album": track.album.name,
+            "durationMs": Int(track.duration),
             "positionMs": state.playbackPosition,
             "isPaused": state.isPaused,
             "shuffle": state.playbackOptions.isShuffling,
             "repeat": repeatName(state.playbackOptions.repeatMode)
         ]
-        if let uri = track?.uri, uri == lastImageTrackURI, let dataUrl = lastImageDataUrl {
+        if track.uri == lastImageTrackURI, let dataUrl = lastImageDataUrl {
             dict["imageDataUrl"] = dataUrl
         }
         return dict
@@ -202,10 +202,10 @@ public class SpotifyRemotePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     private func fetchImageIfNeeded(for state: SPTAppRemotePlayerState) {
-        guard let track = state.track, let uri = track.uri, uri != lastImageTrackURI,
-              let imageAPI = appRemote?.imageAPI else { return }
+        let track = state.track, uri = track.uri
+        guard uri != lastImageTrackURI, let imageAPI = appRemote?.imageAPI else { return }
         lastImageTrackURI = uri
-        imageAPI.fetchImage(for: track, with: CGSize(width: 300, height: 300)) { [weak self] result, _ in
+        imageAPI.fetchImage(forItem: track, with: CGSize(width: 300, height: 300), callback: { [weak self] result, _ in
             guard let image = result as? UIImage,
                   let data = image.jpegData(compressionQuality: 0.8) else { return }
             DispatchQueue.main.async { [weak self] in
@@ -218,7 +218,7 @@ public class SpotifyRemotePlugin: CAPPlugin, CAPBridgedPlugin {
                     self.notifyListeners("playerState", data: dict)
                 }
             }
-        }
+        })
     }
 
     @objc func getState(_ call: CAPPluginCall) {
@@ -298,12 +298,12 @@ public class SpotifyRemotePlugin: CAPPlugin, CAPBridgedPlugin {
 
     @objc func next(_ call: CAPPluginCall) {
         let done = settle(call)
-        withPlayerAPI(call) { playerAPI in playerAPI.skipToNext(done) }
+        withPlayerAPI(call) { playerAPI in playerAPI.skip(toNext: done) }
     }
 
     @objc func previous(_ call: CAPPluginCall) {
         let done = settle(call)
-        withPlayerAPI(call) { playerAPI in playerAPI.skipToPrevious(done) }
+        withPlayerAPI(call) { playerAPI in playerAPI.skip(toPrevious: done) }
     }
 
     @objc func seek(_ call: CAPPluginCall) {
@@ -404,7 +404,7 @@ public class SpotifyRemotePlugin: CAPPlugin, CAPBridgedPlugin {
         // restore it on foreground when a token was given.
         wasConnectedBeforeBackground = appRemote?.isConnected == true
         guard wasConnectedBeforeBackground else { return }
-        appRemote?.playerAPI?.unsubscribeToPlayerState(nil)
+        appRemote?.playerAPI?.unsubscribe(toPlayerState: nil)
         appRemote?.playerAPI?.delegate = nil
         appRemote?.disconnect()
         appRemote?.delegate = nil
@@ -428,11 +428,11 @@ extension SpotifyRemotePlugin: SPTAppRemoteDelegate {
         DispatchQueue.main.async { [weak self] in
             guard let self else { return }
             appRemote.playerAPI?.delegate = self
-            appRemote.playerAPI?.subscribeToPlayerState { [weak self] result, _ in
+            appRemote.playerAPI?.subscribe(toPlayerState: { [weak self] result, _ in
                 if let state = result as? SPTAppRemotePlayerState {
                     DispatchQueue.main.async { self?.emitState(state) }
                 }
-            }
+            })
             self.settleConnect(connected: true, error: nil)
             self.notifyListeners("connection", data: ["connected": true])
         }
