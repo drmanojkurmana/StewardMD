@@ -37,10 +37,14 @@
   }
   /* The notification for the next reminder. planDay = the day today's plan was made for ("YYYY-MM-DD") and n its item
      count: the count shows only when the reminder falls on that day; otherwise the plan is made when the app opens. */
-  function reminderPayload(rem, now, planDay, n) {
+  /* rw = [today, tomorrow] ReWise lines (prep-timetable.js notice): the reminder then says what to read and practise
+     that day. A rest day keeps the plain line. */
+  function reminderPayload(rem, now, planDay, n, rw) {
     var at = nextAt(rem, now); if (at == null) return null;
-    var body = planDay && planDay === ymd(at) && n > 0 ? "Today's plan: " + n + (n === 1 ? " item" : " items") : "Today's plan is ready";
-    return { id: NOTIF_ID, title: "PrepNucleus", body: body, schedule: { at: new Date(at), allowWhileIdle: true }, extra: { route: "prep" } };
+    var body = planDay && planDay === ymd(at) && n > 0 ? "Today's plan: " + n + (n === 1 ? " item" : " items") : "Today's plan is ready", title = "PrepNucleus";
+    var r = rw && rw[ymd(at) === ymd(now) ? 0 : 1];
+    if (r && r.k !== "rest" && r.body) { title = "ReWise: " + r.title; body = r.body; }
+    return { id: NOTIF_ID, title: title, body: body, schedule: { at: new Date(at), allowWhileIdle: true }, extra: { route: "prep" } };
   }
   /* The widget and Live Activity data. o: { score, exam, daysLeft, items: [{ label, done }], now }. */
   function snapshot(o) {
@@ -138,8 +142,8 @@
       return c.then(function () { return N.feed(h, x || data(), LN); });
     }
     if (N && (R.ndg !== "off" || force)) { R.ndg = "off"; N.stop(LN); }
-    var p = reminderPayload(rem, Date.now(), planDay, n); if (!p) return Promise.resolve();
-    var key = p.schedule.at.getTime() + "|" + p.body;
+    var p = reminderPayload(rem, Date.now(), planDay, n, x && x.rw); if (!p) return Promise.resolve();
+    var key = p.schedule.at.getTime() + "|" + p.title + "|" + p.body;
     if (key === R.remKey && !force) return Promise.resolve();
     return call(LN, "checkPermissions").then(function (r) {
       R.perm = r && r.display;
