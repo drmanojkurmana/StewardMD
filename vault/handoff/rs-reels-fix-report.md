@@ -76,10 +76,16 @@ reused code was located with repo search instead.
 
 ## OPEN (needs a normal checkout, humans, or devices)
 
-- The fixed harness was NOT executed here: this sandbox refuses local listen sockets
-  (`Error: listen EPERM: operation not permitted 127.0.0.1`), so `test/serve.mjs` cannot bind
-  and headless Chrome has nothing to load. Run `node test/run-prep-medigram-ui.mjs` in a normal
-  checkout (Chrome at `/Applications/Google Chrome.app`) and paste the result into this report.
+- The fixed harness was NOT executed here, verified again 2026-10-31: this sandbox refuses
+  local listen sockets (`BIND_FAIL: listen EPERM: operation not permitted 127.0.0.1` on a
+  minimal `node:http` probe), so `test/serve.mjs` cannot bind and headless Chrome has nothing
+  to load. A one-time unsandboxed run was requested and denied (`approval prompts are
+  disabled`), so no loopback-capable runtime is reachable from this session. Run
+  `node test/run-prep-medigram-ui.mjs` in a normal checkout (Chrome at
+  `/Applications/Google Chrome.app`) and paste the real PASS/FAIL counts into this report.
+  Until then the harness result stays unexecuted — not green. Re-verified this session without
+  touching the harness: `node --check test/run-prep-medigram-ui.mjs` passes, and the key unit
+  suites still pass 27/27 (`prep-medigram` 13 + `prep-sound` 6 + `prep-sound-core` 8, 0 fail).
 - Clinical review of any real micro-lesson, Hindi/Telugu reviewer sign-off, YouTube API policy
   and legal review before `smd_prep_medigram_youtube` is enabled for anyone, real-device
   background/audio-focus/offline tests, the 30-learner pilot, store/rights checks for commissioned
