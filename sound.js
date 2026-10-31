@@ -30,8 +30,11 @@
 
   var Ctx = window.AudioContext || window.webkitAudioContext, ctx = null, last = {};
   function enabled() { try { return localStorage.getItem("smd_sound") === "1"; } catch (e) { return false; } }
+  // A running AudioContext takes the iOS audio session and pauses Spotify / Apple Music. So: no context unless
+  // the doctor turned sounds on, and then an "ambient" session that mixes with their music instead.
   function unlock() {
-    if (!Ctx) return;
+    if (!Ctx || !enabled()) return;
+    try { if (navigator.audioSession && navigator.audioSession.type !== "ambient") navigator.audioSession.type = "ambient"; } catch (e) {}
     try { if (!ctx) ctx = new Ctx(); if (ctx.state === "suspended") ctx.resume(); } catch (e) {}
   }
   ["pointerdown", "touchend", "keydown"].forEach(function (t) { document.addEventListener(t, unlock, { capture: true, passive: true }); });
@@ -54,7 +57,7 @@
   window.SMD_SOUND = {
     play: play,
     enabled: enabled,
-    setEnabled: function (on) { try { localStorage.setItem("smd_sound", on ? "1" : "0"); } catch (e) {} if (on) unlock(); },
+    setEnabled: function (on) { try { localStorage.setItem("smd_sound", on ? "1" : "0"); } catch (e) {} if (on) unlock(); else if (ctx) { try { ctx.close(); } catch (e) {} ctx = null; } },
     supported: function () { return !!Ctx; }
   };
 })();
