@@ -39,9 +39,8 @@ No Spotify approval request sent or drafted (owner §14.6). No paid calls, no ne
 - Both files' hook lines landed in HEAD via rs-spotify's commit `6ec75bf0c` (it staged
   the shared files while my lines were in the working tree). Content is mine, attribution
   is theirs — stated here so the history stays honest.
-- `vault/Flags.md`: `smd_prep_sound` OFF row written to the working tree but **left
-  uncommitted** — the adjacent `smd_prep_medigram` row belongs to rs-reels, and committing
-  the file would sweep their line into my commit. It lands with their commit.
+- `vault/Flags.md`: `smd_prep_sound` OFF row (mine) + `smd_prep_medigram` row (rs-reels);
+  both landed in HEAD via rs-reels' commit `893ef0631` — same shared-file situation as above.
 - `index.html`/CSP untouched (none needed — synthesis is local, handoff is `window.open`).
 
 ## Tests run + results
