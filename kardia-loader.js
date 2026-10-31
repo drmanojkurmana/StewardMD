@@ -6,9 +6,9 @@
    DEFAULT OFF for everyone; there is no early-access tier. */
 (function (G) {
   "use strict";
-  var V = "krd15";
+  var V = "krd16";
   var CSS = ["specialty.css", "kardia.css", "kardia-syncprobe.css", "kardia-cases.css", "kardia-practice.css", "kardia-echolab.css", "kardia-calc.css", "kardia-premium.css"];
-  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia.js", "kardia-premium.js", "kardia-qr.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js", "kardia-calc-data.js", "kardia-calc.js"];
+  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-links.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia.js", "kardia-premium.js", "kardia-qr.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js", "kardia-calc-data.js", "kardia-calc.js", "kardia-teach.js"];
   /* Transport adapters load best effort: a missing file must not stop Kardia loading. */
   var OPTIONAL = { "kardia-sync-ble.js": 1, "kardia-sync-relay.js": 1 };
   var SIM_JS = [];
@@ -52,7 +52,7 @@
   function real() { return G.KARDIA && G.KARDIA !== stub ? G.KARDIA : null; }
 
   var stub = {
-    open: function () { if (!enabled()) return false; load().then(function () { var t = real(); if (t) t.open(); else fail(); }, fail); return true; },
+    open: function () { if (!enabled()) return false; var args = arguments; load().then(function () { var t = real(); if (t) t.open.apply(t, args); else fail(); }, fail); return true; },
     openCase: function () { if (!enabled()) return false; return load().then(function () { var t = real(); if (!t) fail(); return t ? t.openCase.apply(t, arguments) : false; }, function () { fail(); return false; }); },
     isOpen: function () { return false; },
     back: function () { return false; },

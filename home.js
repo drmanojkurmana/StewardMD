@@ -1127,10 +1127,10 @@
     },
     // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
     // when its flag is off: the Home tile hides and every entry refuses silently.
-    kardia: function () {
+    kardia: function (opts) {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "kardia"; })[0];
       if (!t || !homeToolEligible(t)) return;
-      if (window.KARDIA && KARDIA.open) KARDIA.open(); else toast("Kardia loading…");
+      if (window.KARDIA && KARDIA.open) KARDIA.open(opts); else toast("Kardia loading…");
     },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
@@ -1378,7 +1378,8 @@
       }
       var key = map[r] || (ACT[r] ? r : null);
       if (key === "home") { try { closeAllModules && closeAllModules(); } catch (e) {} return; }
-      if (key && ACT[key]) { try { if (key === "prep") ACT.prep(opts); else ACT[key](); } catch (e) {} }
+      // PrepNucleus and Kardia take link opts (a shared id / a stable deep link); every other entry opens as before.
+      if (key && ACT[key]) { try { if (key === "prep" || key === "kardia") ACT[key](opts); else ACT[key](); } catch (e) {} }
     };
   } catch (e) {}
   // --- Resume where you left off. iOS suspends a backgrounded app and, under memory pressure,

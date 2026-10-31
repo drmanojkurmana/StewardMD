@@ -365,9 +365,13 @@
         body = doneHtml(l); foot = false;
       }
       var pct = Math.round((i + 1) * 100 / n);
-      // back: the previous step, or from the first step the tab the lesson was opened from
+      // back: the previous step, or from the first step the tab the lesson was opened from.
+      // Kardia lessons also offer a Copy link button (stewardmd://kardia/lesson/<id>);
+      // other hosts have no link builder, so their header is byte for byte unchanged.
+      var copyBtn = (cfg.id === "kardia" && host._kardia && host._kardia.link)
+        ? '<button type="button" class="sp-lang" data-act="lncopylink" aria-label="' + s("copyLink") + ": " + esc(D.t(l.title, L())) + '">' + s("copyLink") + "</button>" : "";
       paint(I.top(i > 0 ? rawS("prevStep") : st.prefs.tab === "test" ? rawS("backTest") : rawS("backLearn"), tx(l.title), s("stepOf", { i: i + 1, n: n }),
-          '<button type="button" class="sp-icon" data-act="lnexit" aria-label="' + s("closeLesson") + '">' + (ico("close") || "×") + "</button>" + I.langBtn()) +
+          '<button type="button" class="sp-icon" data-act="lnexit" aria-label="' + s("closeLesson") + '">' + (ico("close") || "×") + "</button>" + copyBtn + I.langBtn()) +
         '<div class="ln-prog" role="progressbar" aria-label="' + s("stepOf", { i: i + 1, n: n }) + '" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="' + (i + 1) + '"><i style="width:' + pct + '%"></i></div>' +
         '<div class="sp-scroll sp-pad" id="lnScroll"><article class="ln-art" id="lnArt" data-step="' + key + '">' + body + "</article></div>" +
         (foot ? '<div class="sp-foot ln-foot">' + (i > 0 ? '<button type="button" class="sp-btn sec" data-act="lnprev">' + s("prev") + "</button>" : "<span></span>") +
@@ -714,6 +718,14 @@
     A.setlang = function (b) { I.setPref("lang", b.getAttribute("data-l") === "hi" ? "hi" : "en"); firstRun(); var f = G.document.querySelector('#' + cfg.rootId + ' [data-act=setlang][data-l="' + L() + '"]'); try { f.focus({ preventScroll: true }); } catch (e) {} };
     A.lnretryix = function () { load(); home(); };
     A.lesson = function (b) { openLesson(b.getAttribute("data-l") || b.getAttribute("data-k")); };
+    // Kardia only (the header button exists only there): copy this lesson's stable link.
+    A.lncopylink = function () {
+      try {
+        var l = W.les;
+        if (!l || !host._kardia || !host._kardia.link || !G.KARDIA_LINKS) return;
+        G.KARDIA_LINKS.copy(host._kardia.link("lesson", l.id), function (m) { I.toast(m); });
+      } catch (e) {}
+    };
     A.lnexit = function () { I.leave(); I.renderHub(); };
     A.lnnext = function () { if (W.les && W.step < stepKeys(W.les).length - 1) renderStep(W.step + 1); };
     A.lnprev = function () { if (W.les && W.step > 0) renderStep(W.step - 1); };
