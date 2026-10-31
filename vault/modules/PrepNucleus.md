@@ -1800,11 +1800,8 @@ Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Deci
   Limits (owner 2026-10-30): one reset in any 3 months and at most 3 in any 12 months (`resetQuota`, log `store.rsl`,
   synced as a scalar). A subject reset counts; a reset that cleared nothing does not. Clearing the app's data also wipes
   the log, but it wipes the progress with it.
-- **Timetable:** the student picks subjects and order, start, finish of first reading, rest weekdays. Days split by module
-  count (at least one), blocks stored in `tt.blocks` so they never shift; Mark done on today's subject re-plans from today;
-  Re-plan from today lays the unfinished subjects over the days left. Today's plan (`prep-plan.js makePlan`): a study day
-  takes new questions and the lesson from that subject (`fresh.tts`), a rest day plans reviews only (`planDay` `rest`), the
-  revision stretch plans like the last two weeks (`late`). Saving clears `s.pt` so the plan is remade.
+- **Timetable:** superseded by ReWise (below). A stored v1 subject timetable (`tt.v === 1`) switches to ReWise on the
+  next home draw.
 - **Tests:** `test/prep-study-tools.test.mjs` (pure + server) and `test/run-prep-tools-ui.mjs` (headless; SHOTS=<dir>).
 - **Gotcha:** `.pn-panel .pn-btn:not(.pri)` (prep.css) beats a plain `.pn-btn.x`; the red Reset button needs the panel and
   sheet selectors too.
@@ -1864,3 +1861,55 @@ Optional short-form adaptive learning feed inside PrepNucleus: MCQs, explanation
 ## PrepNucleus Sound (proposed, 2026-10-31)
 
 Optional background-music layer for reading, MCQs, lessons, MediGram and mock-test preparation on Android and Web/PWA. One provider-independent Sound Dock supports embedded playback where officially permitted and external-app handoff otherwise. Proposed flag: `smd_prep_sound` (default OFF; requires `smd_prep`). MVP starts with provider handoff plus a first-party licensed-audio path; Apple Music is the first embedded catalogue candidate subject to Android SDK and commercial validation. Spotify remote controls/streaming require written commercial approval; no unofficial provider APIs or scraping. Full architecture, provider matrix, Android/web lifecycle, privacy, licensing, rollout and test plan: [[plans/PrepNucleus-Sound]].
+
+## ReWise, the revision plan (2026-10-31, prep101)
+Owner: "see the timetable your PrepNucleus vs ChatGPT created, find the flaws, name it ReWise"; "revision should be
+integrated into the app, reminding us what to read, what to practise". Decision: [[decisions/Decisions]] 2026-10-31.
+- **Why v2:** v1 planned by subject, so a one-subject paper (NEET-SS Medical Oncology, 104 topics) showed "Medical
+  Oncology" on every day. It had no grand tests, no daily routine, no use of weak data, and did not flag a past exam date.
+  Its lists also sat at the left edge on the iPad: `.tt-week { margin: 0 }` beat `.pn-body > * { margin: auto }`.
+- **Files:** `prep-timetable.js` (still `window.PREP_TT`, acts `tt-*`, flag `smd_prep_tt`), `prep-timetable.css`. Pure
+  planner exported for node: `tierOf whyOf priority pack kinds plan blocks missed readSet weakest summary`.
+- **Store:** `tt = { v: 2, ex, start, end (first reading by), off, gt (weekday or -1), hrs, order, weak: { mid: 1 },
+  days: [{ d, k, t?, g? }], strong, topicsAll, tk: { day: { block: 1 } } }`. Exam date stays in `pl.date` (the editor
+  writes it there). Synced as the `tt` scalar.
+- **Day kinds:** learn (topics), gt (Friday by default, never in the first 3 days or the taper), gtr (next study day:
+  error review + repair on the 3 weakest topics with 10+ answers), rev (whole sections, weakest first, 3/4 of the
+  revision days), mixed, taper (last 2 days when the exam is 10+ days out), rest, exam.
+- **Topic tiers (own numbers only):** 1 weak (ticked, <60% over 10+, or a quarter guessed/confused), 2 under 10
+  answers, 3 rest, 4 strong (80%+ over 30+, no first-reading day). Reasons shown under today's topics.
+- **Blocks (share of hrs):** learn = recall 10, read 30, topic MCQs 25, mixed 15, errors 15, quick recall 5; questions
+  at 1.5 min each, reviews 0.5 min. Each block has Start/Open (p-go items, l-open, module, tt-err = mistakes, k-open)
+  and a tick (`tt.tk`).
+- **Integration:** `PREP_TT.planItems` makes Today's plan when ReWise is on (`prac` and `mix` items: progress = answers in
+  their modules since the plan was made, `modAnswers`; a grand test is `mock` with `full`). `PREP_PLAN.ensure(h)` makes the
+  plan from the ReWise screen. `PREP_TT.notice(h, 0|1)` gives "Read X. Practise N questions on Y." for the snapshot
+  (`rw`), smart nudges (`rw_today`, `rw_next`; never on a rest day) and the daily reminder (title "ReWise: ...").
+- **Missed days:** a past learn day whose topics have no answer since that day. Re-plan lays the unread topics from
+  today; nothing is doubled up.
+- **Block progress (today):** measured where the app can see it, so the tick sets itself: Recall, Topic MCQs, Mixed
+  MCQs, the grand test and a lesson from Today's plan items; Error review from its own run over My mistakes (newest
+  first, `tt.ac[day] = { err, errT }`, counted by the runner's `onAnswer`); Quick recall from flashcards graded today
+  (10 to 40). Reading notes without a lesson stays a hand tick (`tt.tk`). Mixed never shares a module with today's
+  topics, so the two counts stay apart.
+- **QBank modules per day:** under Today, the day's modules (learn: its topics; rev: its sections' modules, 8 shown then
+  Show all; review day: the repair modules), each with its question count (`tt.tn`, real counts from the indexes only),
+  unique questions seen (card keys), accuracy, misses in the test, a seen bar, and `data-act="module"` to open it.
+  Question targets never exceed what the modules hold. The PDF's date table names the modules with their counts.
+- **Grand test review:** prep.js now keeps each finished test's misses in `mh[]` (`wq` ids, 150 max; `wm` per module).
+  A test day's First review and the review day's Error review become "Name each error" (`tt-gtrev` screen: each miss
+  still in My mistakes with the runner's four reasons, saved as `mt[id][2]`; "Answer these again"). The block ticks when
+  every miss is named; the review day repairs the test's 3 most-missed modules (fallback: weakest overall) and says
+  "From Fri's test: 12 misses, 8 named: Did not know 5, ...". Pure: `lastTest missTop tagCounts`.
+- **Checked on the real bank:** NEET-SS Medical Oncology, 46 days at 8 h: 92 topics with questions, 3 to 6 a learn day,
+  weekly test and review, 3 section sweeps, mixed, 2 light days. Several topics: the card heading reads "4 topics,
+  weakest first" with each topic and its reason below.
+- **PDF:** "Share the plan as PDF" draws the whole plan (routine, own-number priorities, every remaining day, the
+  grand test protocol, rules) with `pdfDoc`, a small PDF 1.4 writer in the file (Helvetica, WinAnsi, AFM widths for
+  wrapping, no library). The phone shares it through Capacitor Filesystem (CACHE) + Share; without the plugins (the
+  test harness) it is a download (`window.__rwPdf`). `PREP_TT._pdf(h)` returns the bytes for tests.
+- **v1 switch:** a stored subject timetable becomes ReWise by itself on the next home draw (same subjects, dates and
+  rest days, grand test Friday unless Friday is a rest day), with a one-time toast.
+- **Tests:** `test/prep-rewise.test.mjs` (planner, reminders, PDF structure: offsets, lengths, footers, wrapping);
+  `test/run-prep-tools-ui.mjs` ReWise section (phone and iPad column, home plan, block progress, Error review run, PDF
+  read back with pdftotext when installed, v1 switch, rest day, past exam date).

@@ -37,6 +37,16 @@
       ["{name}, aaj ka plan ready hai", "{items}, about {min} min. Shuru karein?"],
       ["Study time", "Your plan has {items}, about {min} min. Start small, start now."]
     ],
+    // ReWise (prep-timetable.js): the day's own line, "Read X. Practise N questions on Y." The plan is fixed by date
+    // until the student re-plans, which reschedules, so tomorrow's line is still true tomorrow.
+    rw_today: [
+      ["Today: {head}", "{body}"],
+      ["ReWise for today", "{body}"]
+    ],
+    rw_next: [
+      ["Tomorrow: {head}", "{body}"],
+      ["ReWise tomorrow", "{body}"]
+    ],
     plan_half: [
       ["{done} of {total} done", "About {min} min left in today's plan. Finish strong?"],
       ["{lq} questions to go", "{done} of {total} plan items done. The rest take about {min} min."],
@@ -181,7 +191,8 @@
        due on day 0, 1, ... 21] (questions only; reviewing needs the app, which reschedules), streak (days, counted
        through today if studied today, else through yesterday), studiedToday, weak: { id, name, score } | null,
        wins: [{ key, k: "win_q"|"win_streak"|"win_acc", vars, route? }], recap: { k (day offset of the Sunday), q,
-       acc, from?, to? } | null, arena: exam id when the student joined the Arena, hist (settled history) }
+       acc, from?, to? } | null, arena: exam id when the student joined the Arena, hist (settled history),
+       rw: [today, tomorrow] ReWise lines { k, title, body } or null (prep-timetable.js notice) }
      -> [{ id, k, v, key?, at, title, body, extra: { route: "prep", prep: opts } }] sorted by time. */
   function build(o) {
     var now = o.now, q = parseQuiet(o.quiet), A = o.anchor, hist = o.hist || [], per = ignoredRun(hist) >= 3 ? 1 : 2;
@@ -228,6 +239,8 @@
     if (k === 0) {
       var it = plan ? plan.items : [], dn = it.filter(function (x) { return x.done; }).length;
       if (milestone && dn === 0) out.push({ k: "countdown", ms: prim, vars: b });
+      var rw0 = o.rw && o.rw[0] && o.rw[0].k !== "rest" ? o.rw[0] : null;
+      if (plan && dn === 0 && rw0) out.push({ k: "rw_today", ms: prim, vars: vars(b, { head: rw0.title, body: rw0.body }), route: {} });
       if (plan && dn === 0) {
         var m0 = it.reduce(function (s, x) { return s + (x.min || 0); }, 0);
         out.push({ k: "plan_start", ms: prim, vars: vars(b, { items: plural(it.length, "item", "items"), min: m0 }), route: {} });
@@ -239,7 +252,9 @@
     } else if (k === 1) {
       if (milestone) out.push({ k: "countdown", ms: prim, vars: b });
       if (due >= 20) out.push({ k: "due", ms: prim, vars: vars(b, { due: fmt(due), min: dueMin }) });
-      if (weak) out.push({ k: "weak", ms: prim, vars: weak, route: weakRoute });
+      var rw1 = o.rw && o.rw[1] && o.rw[1].k !== "rest" ? o.rw[1] : null;
+      if (rw1) out.push({ k: "rw_next", ms: prim, vars: vars(b, { head: rw1.title, body: rw1.body }), route: {} });
+      if (weak && !rw1) out.push({ k: "weak", ms: prim, vars: weak, route: weakRoute });
       out.push({ k: "plan_ready", ms: prim, vars: b, route: {} });
     } else {
       if (k === 2 && milestone) out.push({ k: "countdown", ms: prim, vars: b });
@@ -346,7 +361,7 @@
     return {
       st: st,
       o: { now: now, quiet: st.q || QUIET, anchor: anchorFor(bestTime(st.ses, now), s.pl && s.pl.rem, parseQuiet(st.q || QUIET)), name: firstName(user() && user().displayName),
-        exam: x.exam, examDays: x.daysLeft, plan: x.items && x.items.length ? { items: x.items } : null,
+        exam: x.exam, examDays: x.daysLeft, plan: x.items && x.items.length ? { items: x.items } : null, rw: x.rw || null,
         due: P && P.isQ ? dueByDay(s.cards, today, P.isQ) : [], streak: streak, studiedToday: studiedToday, weak: x.weak || null,
         wins: wins({ total: T0, streak: streak, studiedToday: studiedToday, today: today, accWin: aw }), recap: recap(st.sn, today, dow, cur),
         arena: lsGet("smd_prep_arena_in") === "1" ? h.exam().id : null }

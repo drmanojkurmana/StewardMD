@@ -107,7 +107,7 @@ try {
   // overlay opens are not animated, as the overlay itself just arrived, so wait past them)
   await sleep(500);
   const navIn = JSON.parse(await ev(`document.querySelector("#smdPrep .pn-tile[data-s=anatomy]").click(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
-  ok(navIn.n === 1 && /translateX\(28px\)/.test(navIn.from) && String(navIn.op) === "0", "a push slides the new screen in from the right: " + JSON.stringify(navIn));
+  ok(navIn.n === 1 && /translateX\(390px\)/.test(navIn.from), "Motion 3: a push slides the new screen in from the right edge on the push spring: " + JSON.stringify(navIn));
   ok(await ev(`var p=document.createElement("p"); p.className="pn-load"; p.textContent="Loading"; document.querySelector("#smdPrep .pn-body").appendChild(p); var b=getComputedStyle(p,"::before"), a=getComputedStyle(p,"::after"), r=b.content!=="none" && parseFloat(getComputedStyle(p).minHeight)>=300 && /pn-shim/.test(a.animationName) && b.boxShadow!=="none"; p.remove(); return r;`) === true, "loading states draw a skeleton with a moving shimmer");
   ok(await until(`return document.querySelectorAll("#smdPrep .pn-mod[data-act=module]").length === 2;`, 10000), "subject lists its 2 modules with questions (empty modules stay hidden, #1525)");
   ok(await ev(`return Array.from(document.querySelectorAll("#smdPrep .pn-sec")).map(function(h){return h.textContent;}).join("|");`) === "Embryology|Upper limb", "sections in taxonomy order");
@@ -212,7 +212,7 @@ try {
 
   // ---- search within the subject (round 4: a pop slides the previous screen in from the left)
   const navOut = JSON.parse(await ev(`PREP.back(); var an=document.getAnimations().filter(function(a){var t=a.effect&&a.effect.target; return t&&t.matches&&t.matches("#smdPrep > .pn-body");}); var k=an.length?an[0].effect.getKeyframes():[]; return JSON.stringify({n:an.length, from:(k[0]&&k[0].transform)||"", op:k[0]?k[0].opacity:null});`));
-  ok(navOut.n === 1 && /translateX\(-28px\)/.test(navOut.from), "back slides the previous screen in from the left: " + JSON.stringify(navOut));
+  ok(navOut.n === 1 && /translateX\(-117px\)/.test(navOut.from), "Motion 3: back brings the previous screen from a third to the left while the leaving one slides off: " + JSON.stringify(navOut));
   ok(await until(`return !!document.querySelector("#smdPrep [data-act=search]");`, 3000), "the subject screen has a search button");
   await click("#smdPrep [data-act=search]");
   ok(await until(`return document.activeElement && document.activeElement.id === "pnSearch";`, 3000), "search opens with the field focused");

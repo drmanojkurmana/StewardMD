@@ -157,6 +157,14 @@
     }
     var x = d > 0 ? 1 : -1;
     if (d > 0) navAt = Date.now();
+    // Motion 3 (smd-motion.js): the body comes in from the edge on the push spring (prep.js moves the leaving one).
+    var SMM = G.SMD_MOTION && G.SMD_MOTION.on() ? G.SMD_MOTION : null;
+    if (SMM) {
+      body.forEach(function (el) { if (el.getAnimations) el.getAnimations().forEach(function (a) { if (a.id === "pn-nav") a.cancel(); }); });
+      SMM.push(body, null, d);
+      head.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 24 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 260, easing: SMM.ease("push").easing }); });
+      return;
+    }
     body.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 28 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 240, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
     head.forEach(function (el) { wa(el, [{ opacity: 0, transform: "translateX(" + 12 * x + "px)" }, { opacity: 1, transform: "translateX(0px)" }], { duration: 200, easing: "cubic-bezier(.23, 1, .32, 1)" }); });
   }

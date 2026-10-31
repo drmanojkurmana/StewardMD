@@ -7,7 +7,9 @@
  *    one it left out; with anonymous statistics on, a finished practice set POSTs its answers (type practice);
  *  - a timed test's marked question lands in My notebook (Marked in tests), and the notebook lists notes;
  *  - Reset progress: refused with sync on; one subject clears its cards and keeps bookmarks and notes;
- *  - timetable: made from the defaults, Today's plan names today's subject; a rest day today plans reviews only;
+ *  - ReWise: made by topic (ticked weak topic first), six daily blocks with targets, Today's plan and the reminder line
+ *    name what to read and practise, the day list lines up with the Today card (phone and iPad), a rest day plans
+ *    reviews only, a past exam date is called out;
  *  - no em or en dash on screen, buttons at least 44 px on the new screens, no uncaught error.
  * Screenshots (phone 390 x 844, light and dark): SHOTS=<dir>.
  * USAGE: node test/run-prep-tools-ui.mjs   (CHROME, CHROME_PORT, BASE, SHOTS)
@@ -199,33 +201,119 @@ try {
   ok(/2 of 3 left/.test(await text("#smdPrep .px-quota")), "the quota reads 2 of 3 left: " + await text("#smdPrep .px-quota"));
   await shot("tools-reset-limit");
 
-  // ---- Revision timetable
+  // ---- ReWise (revision plan v2, owner 2026-10-31)
   await act("tt-open");
-  ok(await until(`return !!document.querySelector("#smdPrep .tt-edit") && document.querySelectorAll("#smdPrep .tt-sr").length > 0;`, 3000), "timetable opens on the editor with the exam's subjects");
+  ok(await until(`return !!document.querySelector("#smdPrep .tt-edit") && !!document.querySelector("#smdPrep [data-act=tt-hrs]") && !!document.querySelector("#smdPrep [data-act=tt-gt]") && !!document.querySelector("#smdPrep .tt-wk");`, 3000), "ReWise opens on the editor: hours, rest days, grand test day, weak topics");
   ok(await small("#smdPrep .tt-edit") === "", "editor buttons at least 44 px " + await small("#smdPrep .tt-edit"));
-  const first = await ev(`return document.querySelector("#smdPrep .tt-sr b").textContent;`);
-  await shot("tt-edit");
-  // Make sure today is a study day: no rest days.
-  await ev(`var wd=(PREP._host.today()+4)%7; [].forEach.call(document.querySelectorAll("#smdPrep [data-act=tt-off][aria-pressed=true]"), function(b){ b.click(); }); return wd;`);
+  await shot("rw-edit");
+  // A study day today: no rest days, no grand test, 4 hours, one topic ticked weak.
+  await ev(`[].forEach.call(document.querySelectorAll("#smdPrep [data-act=tt-off][aria-pressed=true]"), function(b){ b.click(); }); return 1;`);
   await until(`return !document.querySelector("#smdPrep [data-act=tt-off][aria-pressed=true]");`, 3000);
+  ok(/No rest day/.test(await text("#smdPrep .tt-edit")), "no rest day is allowed but warned");
+  await click('#smdPrep [data-act=tt-gt][data-v="-1"]');
+  await click('#smdPrep [data-act=tt-hrs][data-v="4"]');
+  await until(`return document.querySelector('#smdPrep [data-act=tt-hrs][data-v="4"]').getAttribute("aria-pressed") === "true";`, 3000);
+  const weakId = await ev(`var b=document.querySelectorAll("#smdPrep [data-act=tt-weak]"); var x=b[b.length-1]; x.click(); return x.getAttribute("data-v");`);
+  await until(`return !!document.querySelector('#smdPrep [data-act=tt-weak][aria-pressed=true]');`, 3000);
   await click("#smdPrep [data-act=tt-save]");
-  ok(await until(`return !!document.querySelector("#smdPrep .tt-view .tt-today");`, 3000), "Make timetable shows the timetable");
-  ok(await store(`!!(s.tt && s.tt.blocks && s.tt.blocks.length > 0 && s.tt.start === PREP._host.today())`) === true, "the timetable is stored with its blocks");
-  ok(await ev(`return document.querySelector("#smdPrep .tt-now b").textContent;`) === first.replace(/^1\. /, ""), "today is the first subject: " + first);
-  ok(await ev(`return document.querySelectorAll("#smdPrep .tt-week li").length === 7;`) === true, "this week shows 7 days");
-  await shot("tt-view");
-  ok(await ev(`var w = PREP_TT.today(PREP._host); return w && w.k === "study";`) === true, "Today's plan sees a study day");
+  ok(await until(`return !!document.querySelector("#smdPrep .tt-view .tt-today");`, 8000), "Make my ReWise plan shows the plan");
+  ok(await store(`!!(s.tt && s.tt.v === 2 && s.tt.days.length > 0 && s.tt.start === PREP._host.today() && s.tt.hrs === 4 && s.tt.weak[${JSON.stringify(weakId)}] === 1)`) === true, "stored as ReWise v2 with its days, hours and the weak tick");
+  ok(await store(`s.tt.days[0].k === "learn" && s.tt.days[0].t[0] === ${JSON.stringify(weakId)}`) === true, "day one starts with the ticked weak topic");
+  ok(await until(`var w=document.querySelector("#smdPrep .tt-why1"); return !!w && w.textContent === "You marked it weak" && !document.querySelector("#smdPrep .tt-why");`, 3000), "one topic today: its reason sits under the heading, not repeated in a list: " + await text("#smdPrep .tt-why1"));
+  ok(await ev(`return [].map.call(document.querySelectorAll("#smdPrep .tt-bk .tt-bn > b"), function(b){ return b.firstChild.textContent.trim(); }).join("|");`) === "Recall|Read|Topic MCQs|Mixed MCQs|Error review|Quick recall", "the day's six blocks in order");
+  ok(/(\d+) questions on/.test(await text("#smdPrep .tt-bks")), "Topic MCQs carry a question target");
+  ok(await ev(`return document.querySelectorAll("#smdPrep .tt-dr").length >= 1 && /Today/.test(document.querySelector("#smdPrep .tt-dr").textContent);`) === true, "the day list starts today, with dates");
+  ok(await ev(`var a=document.querySelector("#smdPrep .tt-today").getBoundingClientRect(), b=document.querySelector("#smdPrep .tt-days").getBoundingClientRect(); return Math.abs(a.left-b.left) < 1 && Math.abs(a.width-b.width) < 1;`) === true, "the day list lines up with the Today card");
+  ok(await ev(`var w = PREP_TT.today(PREP._host); return w && w.k === "study" && w.mods.length >= 1;`) === true, "Today's plan sees a study day with its topics");
+  ok(/^Read .+\. Practise \d+ questions on .+\.$/.test(await ev(`return PREP_TT.notice(PREP._host, 0).body;`)), "the reminder line says what to read and practise: " + await ev(`return PREP_TT.notice(PREP._host, 0).body;`));
+  // Tick a block by hand (Read has no lesson here, so it is a tick).
+  await click('#smdPrep [data-act=tt-tick][data-v="read"]');
+  ok(await until(`return document.querySelector('#smdPrep [data-act=tt-tick][data-v="read"]').getAttribute("aria-checked") === "true" && !!PREP._host.store().tt.tk[PREP._host.today()].read;`, 3000), "a block ticks and is kept");
+  // Measured blocks: Topic MCQs counts answers in today's topics; Quick recall counts cards graded today.
+  ok(await until(`return /0 of \\d+/.test(document.querySelector('#smdPrep [data-act=tt-tick][data-v="topic"]').closest("li").textContent) && /0 of \\d+/.test(document.querySelector('#smdPrep [data-act=tt-tick][data-v="quick"]').closest("li").textContent);`, 8000), "Topic MCQs and Quick recall show their progress");
+  await ev(`var s=PREP._host.store(), it=s.pt.items.filter(function(i){return i.k==="prac";})[0]; it.mods.forEach(function(p){ var m=s.mod[p.m]||(s.mod[p.m]={t:0,ok:0}); m.t += it.n; }); PREP._host.save(); PREP._host.rerender(); return 1;`);
+  ok(await until(`return document.querySelector('#smdPrep [data-act=tt-tick][data-v="topic"]').getAttribute("aria-checked") === "true";`, 3000), "Topic MCQs tick themselves once the answers are in");
+  // Error review: its own run over My mistakes; each answer counts.
+  await ev(`var s=PREP._host.store(); s.mt = s.mt || {}; s.mt["${Q1}"] = ["anatomy","ana-brachial-plexus",null,Date.now()]; PREP._host.save(); PREP._host.rerender(); return 1;`);
+  await until(`return !!document.querySelector('#smdPrep [data-act=tt-err]');`, 3000);
+  await click('#smdPrep [data-act=tt-err]');
+  ok(await until(`return !!document.querySelector("#smdPrep .pn-q") && /Error review/.test(document.getElementById("smdPrep").innerText);`, 8000), "Error review opens a run of my mistakes");
+  await click('#smdPrep .pn-opt[data-k="0"]');
+  ok(await until(`var a=(PREP._host.store().tt.ac||{})[PREP._host.today()]; return !!a && a.err === 1 && a.errT === 1;`, 5000), "the answer counts toward Error review");
+  await ev(`while (PREP._host.stack().length > 1) PREP._host.stack().pop(); PREP._host.stack().push(function(){}); PREP._host.rerender(); return 1;`);
+  await act("tt-open");
+  ok(await until(`var b=document.querySelector('#smdPrep [data-act=tt-tick][data-v="errors"]'); return !!b && b.getAttribute("aria-checked") === "true";`, 5000), "Error review ticks itself when its run is done");
+  // The day's QBank modules: listed with size and progress, and each opens in QBank.
+  ok(await until(`var r=document.querySelector('#smdPrep .tt-qbl .tt-qb[data-m="ana-brachial-plexus"]'); return !!r && /QBank modules for today/.test(document.querySelector("#smdPrep .tt-view").innerText) && /\\d+ questions · \\d+ seen/.test(r.textContent);`, 3000), "today's QBank module is listed with its questions and progress: " + await text("#smdPrep .tt-qbl"));
+  ok(await small("#smdPrep .tt-qbl") === "", "QBank rows at least 44 px");
+  await click('#smdPrep .tt-qb[data-m="ana-brachial-plexus"]');
+  ok(await until(`return !document.querySelector("#smdPrep .tt-view") && /Brachial plexus/.test(document.getElementById("smdPrep").innerText);`, 5000), "the QBank row opens the module");
+  await ev(`while (PREP._host.stack().length > 1) PREP._host.stack().pop(); PREP._host.rerender(); return 1;`);
+  await act("tt-open");
+  await until(`return !!document.querySelector("#smdPrep .tt-view");`, 3000);
+  // A grand test review day: the test's own misses are named one by one, and its most-missed module is repaired.
+  await ev(`var s=PREP._host.store(), td=PREP._host.today(); s.tt.days.forEach(function(y){ if (y.d === td) { y.k = "gtr"; y.t = []; } }); s.mt["${Q1}"] = ["anatomy","ana-brachial-plexus",null,Date.now(),"A man cannot abduct his arm"]; s.mh = (s.mh||[]).concat([{ ts: Date.now() - 864e5, label: "NEET-PG pattern", marks: 40, max: 200, n: 50, wq: ["${Q1}"], wm: { "ana-brachial-plexus": 1 } }]); s.pt = null; PREP._host.save(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var v=document.querySelector("#smdPrep .tt-view"); return !!v && /Name each error/.test(v.innerText) && /0 of 1/.test(v.innerText) && /QBank modules to repair today/.test(v.innerText) && /1 missed in the test/.test(v.innerText) && /1 miss, 0 named/.test(v.innerText);`, 5000), "review day: name each error (0 of 1), the test's most-missed module to repair");
+  await click("#smdPrep [data-act=tt-gtrev]");
+  ok(await until(`return !!document.querySelector("#smdPrep .tt-gr") && /A man cannot abduct his arm/.test(document.querySelector("#smdPrep .tt-gr").innerText) && document.querySelectorAll("#smdPrep [data-act=tt-tag]").length === 4;`, 3000), "the review lists the miss with four reasons");
+  ok(await small("#smdPrep .tt-gr") === "", "review buttons at least 44 px " + await small("#smdPrep .tt-gr"));
+  await shot("rw-gt-review");
+  await click('#smdPrep [data-act=tt-tag][data-v="mixed"]');
+  ok(await until(`return PREP._host.store().mt["${Q1}"][2] === "mixed" && /1 of 1 named/.test(document.querySelector("#smdPrep .tt-gr").innerText);`, 3000), "a reason is saved on the mistake");
+  await ev(`PREP._host.stack().pop(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var b=document.querySelector('#smdPrep .tt-bk [data-act=tt-gtrev]'); return !!b && b.closest("li").querySelector(".tt-tick").getAttribute("aria-checked") === "true" && /Mixed up two options 1/.test(document.querySelector("#smdPrep .tt-view").innerText);`, 3000), "named: the block ticks itself and the reasons are counted");
+  await shot("rw-gt-day");
+  await ev(`var s=PREP._host.store(), td=PREP._host.today(); s.tt.days.forEach(function(y){ if (y.d === td) { y.k = "learn"; y.t = ["ana-brachial-plexus"]; } }); s.pt = null; PREP._host.save(); PREP._host.rerender(); return 1;`);
+  await until(`return /QBank modules for today/.test(document.querySelector("#smdPrep .tt-view").innerText);`, 3000);
+  // The PDF: shared through the phone's share sheet; here the harness takes the download.
+  await click("#smdPrep [data-act=tt-pdf]");
+  ok(await until(`return !!window.__rwPdf && /^ReWise-plan-\\d{4}-\\d{2}-\\d{2}\\.pdf$/.test(window.__rwPdf.name) && window.__rwPdf.size > 2000;`, 3000), "Share the plan as PDF makes the file");
+  const pdfBin = await ev(`return PREP_TT._pdf(PREP._host);`);
+  ok(typeof pdfBin === "string" && pdfBin.startsWith("%PDF-1.4"), "the PDF starts as a PDF");
+  if (typeof pdfBin === "string") {
+    const f = join(process.env.CLAUDE_JOB_DIR || tmpdir(), "rewise-" + Date.now() + ".pdf");
+    writeFileSync(f, Buffer.from(pdfBin, "latin1"));
+    if (SHOTS) writeFileSync(join(SHOTS, "rewise.pdf"), Buffer.from(pdfBin, "latin1"));
+    const { spawnSync } = await import("node:child_process");
+    const r = spawnSync("pdftotext", ["-layout", f, "-"], { encoding: "utf8" });
+    if (r.status === 0) ok(/ReWise: NEET-PG/.test(r.stdout) && /Date-wise plan/.test(r.stdout) && /Brachial plexus/.test(r.stdout) && /Daily routine/.test(r.stdout) && /You marked it weak/.test(r.stdout), "pdftotext reads the plan: title, routine, dates, the weak topic and its reason");
+    if (r.status === 0) ok(/QBank modules/.test(r.stdout), "the date table names the QBank modules");
+    else console.log("SKIP pdftotext not installed");
+  }
+  await shot("rw-view");
+  // iPad width: the lists stay in the panel column (the screenshot bug).
+  await call("Emulation.setDeviceMetricsOverride", { width: 1000, height: 750, deviceScaleFactor: 2, mobile: true });
+  await sleep(300);
+  ok(await ev(`var a=document.querySelector("#smdPrep .tt-today").getBoundingClientRect(), b=document.querySelector("#smdPrep .tt-days").getBoundingClientRect(), h=document.querySelector("#smdPrep .tt-view > .pn-sec").getBoundingClientRect(); return Math.abs(a.left-b.left) < 1 && Math.abs(a.left-h.left) < 1 && a.left > 40 && Math.abs((a.left + a.width / 2) - innerWidth / 2) < 2;`) === true, "iPad: Today card, headings and the day list share one centred column");
+  await shot("rw-view-ipad");
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  // Home: the plan follows ReWise.
+  await ev(`while (PREP._host.stack().length > 1) PREP._host.stack().pop(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var s=PREP._host.store(), l=document.querySelector("#smdPrep .tt-line"); return !!l && /ReWise/.test(l.textContent) && !!s.pt && s.pt.rw === 1 && s.pt.items.some(function(i){ return i.k === "prac" && /^Practise \\d+ questions: /.test(i.ttl); });`, 8000), "home: the plan line says ReWise and the plan holds today's practice");
+  ok(await ev(`var s=PREP._host.store(), p=s.pt.items.filter(function(i){return i.k==="prac";})[0], m=s.pt.items.filter(function(i){return i.k==="mix";})[0]; return !m || !m.mods.some(function(x){ return p.mods.some(function(y){ return y.m === x.m; }); });`) === true, "mixed practice never shares a module with today's topics, so each counts its own answers");
+  ok(await until(`return [].some.call(document.querySelectorAll("#smdPrep .pl-item b"), function(b){ return /Practise \\d+ questions/.test(b.textContent); });`, 5000), "home: Today's plan names the practice");
+  ok(await ev(`var x = PREP_PLAN.snapshot(PREP._host); return !!(x.rw && x.rw[0] && /Practise/.test(x.rw[0].body));`) === true, "the widget and reminder snapshot carries the ReWise line");
+  await shot("rw-home");
   // A rest day today: edit, set today's weekday off, save.
+  await act("tt-open");
+  await until(`return !!document.querySelector("#smdPrep .tt-view");`, 3000);
   await click("#smdPrep [data-act=tt-edit]");
   await until(`return !!document.querySelector("#smdPrep .tt-edit");`, 3000);
   await ev(`var wd=(PREP._host.today()+4)%7; document.querySelector('#smdPrep [data-act=tt-off][data-v="'+wd+'"]').click(); return 1;`);
   await until(`return !!document.querySelector("#smdPrep [data-act=tt-off][aria-pressed=true]");`, 3000);
   await click("#smdPrep [data-act=tt-save]");
-  ok(await until(`return /Rest day/.test(document.querySelector("#smdPrep .tt-now").innerText);`, 3000), "today set as a rest day reads Rest day");
+  ok(await until(`var k=document.querySelector("#smdPrep .tt-kind"); return !!k && /Rest day/.test(k.textContent);`, 8000), "today set as a rest day reads Rest day");
   ok(await ev(`var w = PREP_TT.today(PREP._host); return w && w.k === "rest";`) === true, "Today's plan sees a rest day");
+  // An exam date in the past is called out.
+  await ev(`var s=PREP._host.store(); s.pl = s.pl || {}; s.pl.date = new Date((PREP._host.today()-7)*864e5).toISOString().slice(0,10); PREP._host.save(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var w=document.querySelector("#smdPrep .tt-view .tt-warn"); return !!w && /has passed/.test(w.textContent);`, 3000), "a past exam date is called out: " + await text("#smdPrep .tt-view .tt-warn"));
+  await ev(`var s=PREP._host.store(); s.pl.date = null; PREP._host.save(); return 1;`);
   await ev(`while (PREP._host.stack().length > 1) PREP._host.stack().pop(); PREP._host.rerender(); return 1;`);
-  ok(await until(`var s=PREP._host.store(); return !!document.querySelector("#smdPrep .tt-line") && /rest day/i.test(document.querySelector("#smdPrep .tt-line").textContent) && !!s.pt && s.pt.items.every(function(i){ return i.k === "rev"; });`, 8000), "home: the plan says rest day and holds reviews only");
-  await shot("tt-home");
+  ok(await until(`var s=PREP._host.store(); return !!document.querySelector("#smdPrep .tt-line") && !!s.pt && s.pt.items.every(function(i){ return i.k === "rev"; });`, 8000), "home: a rest day holds reviews only");
+  await shot("rw-home-rest");
+  // A stored v1 (subject) timetable switches to ReWise by itself on the next home draw, same subjects and rest days.
+  await ev(`var s=PREP._host.store(), td=PREP._host.today(), sid=s.tt.order[0]; s.tt = { v: 1, ex: PREP._host.exam().id, start: td, end: td + 20, off: [0], order: [sid], done: {}, blocks: [{ sid: sid, from: td, to: td + 20, days: 18 }] }; s.pt = null; PREP._host.save(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var t=PREP._host.store().tt; return !!t && t.v === 2 && t.off.length === 1 && t.off[0] === 0 && t.order.length === 1 && t.days.length >= 20;`, 8000), "a v1 timetable becomes ReWise by itself");
 
   // ---- rank on a test result (prep-tests.js): opted in, the score is added (POST); under 20 attempts no rank shows
   const rk = async () => { await ev(`window.__t = { type: "grand", exam: "neet-pg" }; window.__r = PREP._st.run; PREP_TESTS._rank.fetch(window.__r, { score: { raw: 412, max: 800 } }, { id: "neet-pg" }, window.__t); return 1;`); await until(`return window.__t.rank && window.__t.rank.state === "ok";`, 5000); return ev(`var d=document.createElement("div"); d.innerHTML = PREP_TESTS._rank.html(window.__t); return d.innerText.replace(/\\s+/g, " ");`); };

@@ -15,7 +15,13 @@
  *           over 220 ms; a repaint of the same screen (same heading) never animates, so answering or typing cannot flicker.
  * Never adds an entrance to an element that already animates its own (CSS transition on opacity/transform/
  * all or a CSS animation), nor a copy-exit to a node it removes itself. Not the splash / intro / sign-in gates, nor anything dialog-motion.js owns.
- * No-op under prefers-reduced-motion. Kill switch: localStorage smd_page_motion = "0". */
+ * No-op under prefers-reduced-motion. Kill switch: localStorage smd_page_motion = "0".
+ *
+ * Motion 3 (owner 2026-10-31, smd-motion.js, switch smd_motion3 = "0" for the motion above): a page opened from a tile
+ * or row GROWS OUT OF IT (the container transform: clipped from the tile's rect to the full screen on a spring) and
+ * shrinks back into it on close when the tile is still there; a page with no source rises on the open spring and
+ * sinks on close. Inside a module a new screen slides in on the push spring from the side it was reached (from the
+ * left after a Back tap, which replaces the View Transition cross-fade) and its first rows settle one after another. */
 (function () {
   "use strict";
   if (typeof window === "undefined" || typeof document === "undefined") return;
@@ -67,7 +73,27 @@
 
   function endExit(el) { var x = exiting.get(el); if (x) { exiting.delete(el); x.done(); } }
 
-  function animateIn(el) { endExit(el); try { el.animate(K_IN, IN); } catch (e) {} }
+  var SM = function () { var m = window.SMD_MOTION; return m && m.on() ? m : null; };
+  function animateIn(el, i) {
+    endExit(el);
+    var m = SM();
+    if (m) {
+      var src = m.take();
+      i.src = src && src.el && !el.contains(src.el) ? src : null;
+      if (i.src ? m.morphIn(el, i.src) : m.riseIn(el)) return;
+    }
+    try { el.animate(K_IN, IN); } catch (e) {}
+  }
+  // The close: back into the tile it came from when that tile is still on screen where it was, else a sink.
+  function outFor(el, i) {
+    var m = SM(); if (!m) return { kf: K_OUT, o: OUT };
+    var src = i && i.src, e = m.ease("close");
+    if (src && src.el && src.el.isConnected) {
+      var r = src.el.getBoundingClientRect();
+      if (r.width > 8 && Math.abs(r.left - src.left) < 2 && Math.abs(r.top - src.top) < 2) { var mo = m.morphOutKf(el, src); return { kf: mo.kf, o: { duration: 260, easing: e.easing, fill: "forwards" }, origin: mo.origin }; }
+    }
+    return { kf: [{ opacity: 1, transform: "none" }, { opacity: 0, transform: "translateY(" + Math.round(innerHeight * 0.05) + "px) scale(.985)" }], o: { duration: e.duration, easing: e.easing, fill: "forwards" } };
+  }
 
   // Close without removal: show it again inline (overriding whatever hid it) for one exit beat.
   var FORCE = { opacity: "1", transform: "none", visibility: "visible", transition: "none", animation: "none", pointerEvents: "none" };
@@ -82,11 +108,13 @@
     for (k in FORCE) el.style[k] = FORCE[k];
     el.style.display = disp;
     if (!big(el)) { restore(); return; }
-    var a; try { a = el.animate(K_OUT, OUT); } catch (e) { restore(); return; }
+    var x = outFor(el, i), oo = el.style.transformOrigin; if (x.origin) el.style.transformOrigin = x.origin;
+    var a; try { a = el.animate(x.kf, x.o); } catch (e) { el.style.transformOrigin = oo; restore(); return; }
     var finished = false;
     function done() {
       if (finished) return; finished = true;
       try { a.cancel(); } catch (e) {}
+      el.style.transformOrigin = oo;
       restore();
       exiting.delete(el);
       i.vis = !!shownState(el);
@@ -97,7 +125,7 @@
   }
 
   // Close by removal: fade an inert, id-less copy where the page was.
-  function exitGhost(node, parent, next) {
+  function exitGhost(node, parent, next, st) {
     if (!parent || !parent.isConnected) return;
     var g;
     try { g = node.cloneNode(true); } catch (e) { return; }
@@ -109,7 +137,8 @@
     g.setAttribute("inert", ""); g.setAttribute("aria-hidden", "true"); g.setAttribute("data-pm-ghost", "");
     g.style.pointerEvents = "none";
     try { parent.insertBefore(g, next && next.parentNode === parent ? next : null); } catch (e) { return; }
-    var a; try { a = g.animate(K_OUT, OUT); } catch (e) { if (g.parentNode) g.parentNode.removeChild(g); return; }
+    var x = outFor(node, st); if (x.origin) g.style.transformOrigin = x.origin;
+    var a; try { a = g.animate(x.kf, x.o); } catch (e) { if (g.parentNode) g.parentNode.removeChild(g); return; }
     function gone() { try { if (g.parentNode) g.parentNode.removeChild(g); } catch (e) {} }
     a.onfinish = gone; setTimeout(gone, 700);
   }
@@ -128,7 +157,7 @@
     if (reduced()) return;
     // A page that animates its own ENTRANCE (a CSS transition) still vanishes at once when it is
     // hidden with display:none, because a transition cannot run on a display change: give it the exit.
-    if (now && !was) { if (!i.own) animateIn(el); }
+    if (now && !was) { if (!i.own) animateIn(el, i); }
     else if (!now && was) exitInPlace(el, i);
   }
 
@@ -161,6 +190,14 @@
       if (selfAnimated(cs) || (parseFloat(cs.opacity) || 1) < 0.99) continue;
       var sg = sig(n); if (gone.length && gone.indexOf(sg) >= 0) continue;   // same screen repainted
       swapBudget++;
+      var mm = SM();
+      if (mm) {
+        var back = Date.now() - backAt < 700, e2 = mm.ease("push");
+        try { n.animate([{ opacity: 0, transform: "translateX(" + (back ? -44 : 44) + "px)" }, { opacity: 1, transform: "none" }], { duration: e2.duration, easing: e2.easing, fill: "backwards" }); } catch (e) {}
+        var rows = n.querySelectorAll(":scope > ul > li, :scope > ol > li, :scope > * > ul > li");
+        if (rows.length > 1) mm.stagger(rows);
+        continue;
+      }
       try { n.animate(K_IN2, IN2); } catch (e) {}
     }
   }
@@ -174,14 +211,14 @@
       for (j = 0; j < m.removedNodes.length; j++) {
         n = m.removedNodes[j];
         var i = n.nodeType === 1 ? info.get(n) : null;
-        if (i && i.vis && !i.own && !reduced() && !n.isConnected) { i.vis = false; exitGhost(n, m.target, m.nextSibling); }
+        if (i && i.vis && !i.own && !reduced() && !n.isConnected) { i.vis = false; exitGhost(n, m.target, m.nextSibling, i); }
       }
     }
   }
 
   // Cross-fade a Back tap (View Transitions API). Not inside modal dialogs: their taps are synchronous by contract.
   var BACK = "button.db-back,button.dx-back,button[data-act='back'],button[aria-label='Back'],a[aria-label='Back']";
-  var replaying = false, busy = false;
+  var replaying = false, busy = false, backAt = 0;
   function settled(ms) {
     return new Promise(function (res) {
       var done = false, mo, quiet = 0;
@@ -191,6 +228,7 @@
     });
   }
   function onBack(e) {
+    if (!replaying && SM() && e.target && e.target.closest && e.target.closest(BACK)) { backAt = Date.now(); return; }
     if (replaying || busy || e.defaultPrevented || e.button !== 0 || reduced() || typeof document.startViewTransition !== "function") return;
     var t = e.target; if (!t || !t.closest) return;
     var b = t.closest(BACK); if (!b || b.disabled || b.closest("[role=dialog],[aria-modal=true],[data-no-vt],[data-no-motion]")) return;
