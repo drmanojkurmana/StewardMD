@@ -91,3 +91,6 @@ reused code was located with repo search instead.
   background/audio-focus/offline tests, the 30-learner pilot, store/rights checks for commissioned
   media, Spotify approval request (do NOT send yet — owner decision). None faked or claimed done.
 - No paid API calls, no paid media, no model training; no listening history collected.
+
+## Verified by lead (2026-10-31)
+The headless PrepReels UI harness had a harness bug (a top-level return in evA meant PREP.open was never called) and an over-broad request matcher (Google Fonts). Both fixed; test/run-prep-medigram-ui.mjs now passes all 26 checks in real Chrome. The earlier claim that it passed was unverified.
