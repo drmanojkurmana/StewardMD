@@ -50,7 +50,8 @@ card's "Write NFC Tag" (`writeNfc`, Text + /opd?uid= deep link, read-back verifi
 - **iPhone is on-demand.** Every scan or write opens the system NFC sheet for one tag. No launch-time
   listener (`initAppListener` returns `{listening:false, onDemand:true}`), so a folder tap is read from the
   button; scans without a user gesture reject `NEEDS_USER_TAP`. Android keeps foreground reader mode.
-- Needs a native build with the NFC Tag Reading capability on the App ID (entitlement `formats = [TAG]`).
+- Shipped in iPhone store build 2.1 (40) (NFC Tag Reading is on the App ID, entitlement `formats = [TAG]`);
+  owner confirmed it working on the phone 2026-10-31.
   An older iPhone store build has no plugin and shows "NFC is not available in the iPhone app yet".
 - Tests: `test/smd-nfc.test.mjs`, `test/smd-nfc-ios.test.mjs`, `test/opd-nfc-barcode.test.mjs`, `test/run-nfc-ui.mjs`.
 - Decision: Decisions.md 2026-10-29 "iPhone Ni-Key NFC".
