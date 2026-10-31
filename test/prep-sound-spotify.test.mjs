@@ -150,12 +150,14 @@ test("sheet contract + privacy: Connect first, no autoplay, no token persistence
   // First-open state is Connect-only; nothing calls play before a user tap (no play() at load).
   assert.match(src, /Connect Spotify/);
   assert.ok(!/\.play\(/.test(src.split("handleReturn();")[0].split("function handleReturn")[0].slice(-200)) || true);
-  assert.ok(!src.includes("localStorage.setItem"), "tokens/preferences never written to localStorage");
+  // Only the single-use PKCE verifier + state may touch localStorage (they survive an app reload mid sign-in, removed at exchange); never tokens.
+  const writes = src.match(/localStorage\.setItem\([^,]+/g) || [];
+  assert.ok(writes.every((w) => /setItem\((VERIFIER_KEY|STATE_KEY)$/.test(w)), "tokens/preferences never written to localStorage: " + writes.join(" | "));
   assert.ok(!/SMD_ANALYTICS|analytics\.track|gtag\(|sendBeacon/.test(src), "no analytics calls");
   assert.ok(!/client_secret/.test(src.replace(/NO client secret|no client secret|No `client_secret`/g, "")), "no client secret anywhere");
   // Session storage holds only the single-use PKCE verifier + state, deleted at exchange.
-  assert.match(src, /sessionStorage\.setItem\(VERIFIER_KEY/);
-  assert.match(src, /sessionStorage\.removeItem\(VERIFIER_KEY/);
+  assert.match(src, /localStorage\.setItem\(VERIFIER_KEY/);
+  assert.match(src, /localStorage\.removeItem\(VERIFIER_KEY/);
   assert.match(src, /data-act="sp-open"[^>]*aria-label="Music on Spotify"/);
   assert.match(src, /Open in Spotify|on Spotify/);
 });
