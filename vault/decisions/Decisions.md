@@ -12089,3 +12089,12 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
   the current step under it, a link to the rest) instead of fitting all 53 nodes at 16% zoom. "Full map" shows the
   whole graph at a readable 72% zoom centred on the current step; zoom/fit stay there. Contents panel starts closed;
   a tapped node opens a scrolling bottom sheet with nothing laid over its title.
+
+## 2026-10-31 - ReWise replaces the subject timetable
+- Owner compared the PrepNucleus timetable with a ChatGPT plan (46 days, NEET-SS Medical Oncology) and asked for the flaws
+  fixed, a name (ReWise), and revision integrated with reminders of what to read and practise.
+- Plan by topic (tree modules), weakest first from the student's own answers and ticks; weekly grand test plus a review
+  day; revision by sections, then mixed; a light last 2 days; six daily blocks sized to hours a day.
+- Today's plan, the widget snapshot, smart nudges and the daily reminder all take the day's line from ReWise. No
+  invented numbers: reasons are the student's own accuracy and counts.
+- v1 timetables keep working until the student opens ReWise and saves. Flag unchanged (`smd_prep_tt`).

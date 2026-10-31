@@ -231,8 +231,11 @@
     if (it.k === "new") { var y = Math.min(it.n, Math.max(0, newToday(store, today) - (it.base || 0))); return { x: y, of: it.n, done: y >= it.n }; }
     if (it.k === "lsn") { var l = (store.ls || {})[it.l || it.m], d = !!(l && l.done && dayOf(l.done) === today); return { x: d ? 1 : 0, of: 1, done: d }; }
     if (it.k === "mock") { var m = (store.mh || []).some(function (h) { return dayOf(h.ts) === today && h.ts >= (it.t0 || 0); }); return { x: m ? 1 : 0, of: 1, done: m }; }
+    // ReWise practice (prep-timetable.js planItems): answers in its modules since the plan was made, old or new.
+    if (it.k === "prac" || it.k === "mix") { var z = Math.min(it.n, Math.max(0, modAnswers(store, it.mods) - (it.b0 || 0))); return { x: z, of: it.n, done: z >= it.n }; }
     return { x: 0, of: 1, done: false };
   }
+  function modAnswers(store, mods) { var n = 0; (mods || []).forEach(function (p) { var r = (store.mod || {})[p.m]; if (r) n += r.t || 0; }); return n; }
   // The answer log prep.js keeps: [module, 1|0], newest last, at most RA_MAX.
   function noteAnswer(store, mid, ok) { var ra = store.ra || (store.ra = []); ra.push([mid, ok ? 1 : 0]); if (ra.length > RA_MAX) ra.splice(0, ra.length - RA_MAX); }
 
@@ -255,7 +258,7 @@
   var PURE = { xpOf: xpOf, levelOf: levelOf, EXAM_CHOICES: EXAM_CHOICES, SS_GROUPS: SS_GROUPS, MINUTES: MINUTES, BLUEPRINT: BLUEPRINT, choiceOf: choiceOf,
     ssGroupOf: ssGroupOf, ssGroupSubjects: ssGroupSubjects, ssGroupExtras: ssGroupExtras, iniSubjects: iniSubjects, defaultSsGroup: defaultSsGroup, planProfileId: planProfileId, planGroup: planGroup, normalizePlan: normalizePlan, emptyCfg: emptyCfg, needsOnboard: needsOnboard,
     dayOfDate: dayOfDate, daysLeft: daysLeft, geo: geo, readiness: readiness, subjectAction: subjectAction, pickLesson: pickLesson, planDay: planDay,
-    newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, noteAnswer: noteAnswer, isQ: isQ };
+    newToday: newToday, dueNow: dueNow, itemProgress: itemProgress, modAnswers: modAnswers, noteAnswer: noteAnswer, isQ: isQ };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -322,13 +325,16 @@
     var wd = new Date().getDay();
     // Revision timetable (prep-timetable.js): a study day takes its new questions and lesson from that day's subject,
     // a rest day keeps only reviews, the revision stretch plans like the last two weeks.
-    var TW = G.PREP_TT ? G.PREP_TT.today(H) : null, ttSid = TW && TW.k === "study" ? TW.sid : null;
+    // ReWise (timetable v2): the day's blocks become the plan (read, practise, mixed, the grand test), sized to its hours.
+    var RW = G.PREP_TT && G.PREP_TT.planItems ? G.PREP_TT.planItems(H, { due: dueNow(s, td), lessons: lessons }) : null;
+    var TW = !RW && G.PREP_TT ? G.PREP_TT.today(H) : null, ttSid = TW && TW.k === "study" ? TW.sid : null;
     if (ttSid) { order = [ttSid]; weak = TW.mods || []; }
-    var p = planDay({ minutes: cfg().min || 30, due: dueNow(s, td), perQ: ex.sec / 60, lesson: pickLesson(lessons.filter(function (l) { return ttSid ? l.s === ttSid : inExam[l.s]; }), order, s),
+    var p = RW || planDay({ minutes: cfg().min || 30, due: dueNow(s, td), perQ: ex.sec / 60, lesson: pickLesson(lessons.filter(function (l) { return ttSid ? l.s === ttSid : inExam[l.s]; }), order, s),
       mock: mockFor(), weekend: wd === 0 || wd === 6, daysLeft: examDays(), weak: weak, rest: !!(TW && TW.k === "rest"), late: !!(TW && TW.k === "rev"), tts: ttSid });
     var due0 = dueNow(s, td), base = newToday(s, td), t0 = Date.now();
-    p.items.forEach(function (it) { if (it.k === "rev") it.due0 = due0; if (it.k === "new") it.base = base; if (it.k === "mock") it.t0 = t0; });
-    s.pt = { d: td, ex: ex.id, min: cfg().min || 30, items: p.items, total: p.total };   // the minutes step can be skipped: the plan was built on 30
+    p.items.forEach(function (it) { if (it.k === "rev") it.due0 = due0; if (it.k === "new") it.base = base; if (it.k === "mock") it.t0 = t0; if (it.k === "prac" || it.k === "mix") it.b0 = modAnswers(s, it.mods); });
+    s.pt = { d: td, ex: ex.id, min: cfg().min || 30, items: p.items, total: p.total };
+    if (RW) { s.pt.cap = RW.cap; s.pt.rw = 1; }   // the minutes step can be skipped: the plan was built on 30
     H.save();
     return s.pt;
   }
@@ -374,15 +380,17 @@
   function planHead() { return '<p class="pn-eb" aria-hidden="true">' + esc(eyebrow()) + '</p><h2 class="pn-h">Today\'s plan</h2>' + (G.PREP_TT ? G.PREP_TT.lineHtml(H) : ""); }
   // The item's one-line name: the plan row, the widget's "next" and the Live Activity.
   function itemTitle(it) {
+    if (it.ttl) return it.ttl;
     return it.k === "rev" ? "Review " + plural(it.n, "due question", "due questions") : it.k === "lsn" ? "Lesson: " + it.title :
       it.k === "new" ? plural(it.n, "new question", "new questions") : "Mini mock: " + String(it.label || "").replace(/ pattern$/, "");
   }
   function itemHtml(it, pr, nextUp) {
     var t = itemTitle(it), sub, attrs = "";
     if (it.k === "rev") { sub = "About " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
-    else if (it.k === "lsn") { sub = "About " + it.min + " min" + (it.l ? "" : ", then 3 quick questions"); attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"' + (it.l ? ' data-l="' + esc(it.l) + '"' : ""); }
+    else if (it.k === "lsn") { sub = (it.rw ? "ReWise · " : "") + "About " + it.min + " min" + (it.l ? "" : ", then 3 quick questions"); attrs = ' data-s="' + esc(it.s) + '" data-m="' + esc(it.m) + '"' + (it.l ? ' data-l="' + esc(it.l) + '"' : ""); }
     else if (it.k === "new") { sub = (it.tts ? "Timetable: " + subjName(it.tts) : it.mods && it.mods.length ? "In your weakest modules" : "Where you left off") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
-    else { sub = "50 questions, " + it.min + " min, marked like the exam"; }
+    else if (it.k === "prac" || it.k === "mix") { sub = (it.sub || "ReWise") + " · about " + it.min + " min" + (pr.x && !pr.done ? " · " + pr.x + " of " + it.n + " done" : ""); }
+    else { sub = it.sub || "50 questions, " + it.min + " min, marked like the exam"; }
     var act = it.k === "lsn" ? "l-open" : "p-go";
     // The first task not yet done is the one filled control on home ("Up next").
     var now = !pr.done && nextUp;
@@ -400,7 +408,7 @@
   function planHtml(pt, live) {
     if (!pt) return '<div class="pl-plan pl-wait" role="status"><p class="pn-mut pn-small">Working out today\'s plan</p></div>';
     var s = store(), td = H.today(), prs = pt.items.map(function (it) { return itemProgress(it, s, td, dayOf); }), done = prs.filter(function (p) { return p.done; }).length;
-    var foot = !pt.items.length ? "Nothing to plan yet for this exam." : done === pt.items.length ? "Today's plan is done. Anything more still counts." : "About " + pt.total + " of your " + (pt.min || 30) + " minutes";
+    var foot = !pt.items.length ? (pt.rw ? "Nothing planned today in ReWise." : "Nothing to plan yet for this exam.") : done === pt.items.length ? "Today's plan is done. Anything more still counts." : "About " + pt.total + " of your " + (pt.cap || pt.min || 30) + " minutes";
     var cele = !!(live && pt.items.length && done === pt.items.length && celePlan());
     var firstOpen = -1; prs.some(function (p, i) { if (!p.done) { firstOpen = i; return true; } return false; });
     return '<div class="pl-plan"' + (cele ? ' data-cele="balloons"' : "") + ">" + (pt.items.length ? '<ul class="pn-group pl-list">' + pt.items.map(function (it, i) { return itemHtml(it, prs[i], i === firstOpen); }).join("") + "</ul>" : "") +
@@ -442,7 +450,8 @@
     return { score: rd.score, exam: examLabel(), examId: H.exam().id, daysLeft: examDays(),
       items: pt ? pt.items.map(function (it) { var p = itemProgress(it, s, td, dayOf); return { label: itemTitle(it), done: p.done, k: it.k, x: p.x, of: p.of, min: it.min }; }) : [],
       planDay: pt ? d.toISOString().slice(0, 10) : null,
-      weak: sb ? { id: w.id, name: String(sb.name && typeof sb.name === "object" ? sb.name.en || "" : sb.name || ""), score: w.score } : null };
+      weak: sb ? { id: w.id, name: String(sb.name && typeof sb.name === "object" ? sb.name.en || "" : sb.name || ""), score: w.score } : null,
+      rw: G.PREP_TT && G.PREP_TT.notice ? [G.PREP_TT.notice(H, 0), G.PREP_TT.notice(H, 1)] : null };
   }
 
   /* ---------- starting an item ---------- */
@@ -450,7 +459,8 @@
     var s = store(), pt = s.pt; if (!pt) return;
     var it = pt.items.filter(function (x) { return x.k === k; })[0]; if (!it) return;
     var pr = itemProgress(it, s, H.today(), dayOf);
-    if (k === "mock") return H.startMock(it.id, "mini");
+    if (k === "mock") return H.startMock(it.id, it.full ? "full" : "mini");
+    if (k === "prac" || k === "mix") return startNew(it, Math.max(5, it.n - pr.x));
     if (k === "rev") return startReviews(Math.max(1, it.n - pr.x));
     if (k === "new") return startNew(it, Math.max(5, it.n - pr.x));
   }
@@ -478,11 +488,11 @@
   function startNew(it, n) {
     var s = store(), ex = H.exam(), pairs = (it.mods || []).filter(function (x) { return x.s; });
     var go2 = function (pp) {
-      loadingScreen("New questions");
+      loadingScreen(it.rw ? "ReWise practice" : "New questions");
       loadPairs(pp).then(function (lists) {
         var per = Math.ceil(Math.min(n, 50) / Math.max(1, lists.length)), out = [], td = H.today();
         lists.forEach(function (l) { out = out.concat(H.pure.diversePick(H.pure.poolFor(l.items, ex.id, s.hid && s.hid.ids), per, { cards: s.cards, dk: "p:" + l.m, today: td, mt: s.mt, target: H.pure.targetDifficulty(s.mod[l.m]), seed: "plan-new:" + l.m + ":" + td })); });
-        done(H.pure.diverseOrder(out), "New questions", "No new questions left in these modules. Pick a subject below.");
+        done(H.pure.diverseOrder(out), it.rw ? "ReWise practice" : "New questions", it.rw ? "No questions loaded for these topics. Check the connection and try again." : "No new questions left in these modules. Pick a subject below.");
       });
     };
     if (pairs.length) return go2(pairs);
@@ -895,5 +905,13 @@
   }
   function leave() { P.sheet = null; P.ob = null; SET = null; if (G.PREP_NATIVE) G.PREP_NATIVE.leave(); }
 
-  G.PREP_PLAN = { needsOnboard: needsOnboard, onboard: onboard, homeHtml: homeHtml, progressHtml: progressHtml, homeMounted: homeMounted, snapshot: snapshot, act: act, back: back, leave: leave, noteAnswer: noteAnswer, _pure: PURE, _p: P };
+  /* ensure(h): today's plan made (ReWise's Start buttons use its items). One make at a time. */
+  var making = null;
+  function ensure(h) {
+    H = h || H;
+    if (planValid(store())) return Promise.resolve(store().pt);
+    if (!making) making = lessonList().then(function (lessons) { making = null; return planValid(store()) ? store().pt : makePlan(lessons); }, function () { making = null; });
+    return making;
+  }
+  G.PREP_PLAN = { ensure: ensure, needsOnboard: needsOnboard, onboard: onboard, homeHtml: homeHtml, progressHtml: progressHtml, homeMounted: homeMounted, snapshot: snapshot, act: act, back: back, leave: leave, noteAnswer: noteAnswer, _pure: PURE, _p: P };
 })(typeof window !== "undefined" ? window : this);

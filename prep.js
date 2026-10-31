@@ -1449,11 +1449,14 @@
     st.pk = { key: key, depth: st.stack.length, fn: top };
     if (ghost) {
       D.body.appendChild(ghost); old.scrollTop = oldY;
-      var gx = live.d > 0 ? -18 : 18, ga = null;
-      try { ga = ghost.animate([{ opacity: 1, transform: "translateX(0px)" }, { opacity: 0, transform: "translateX(" + (reducedMo() ? 0 : gx) + "px)" }], { duration: reducedMo() ? 140 : 200, easing: "cubic-bezier(.23, 1, .32, 1)", fill: "forwards" }); } catch (e) {}
+      var gx = live.d > 0 ? -18 : 18, ga = null, SMM = G.SMD_MOTION && G.SMD_MOTION.on() ? G.SMD_MOTION : null;
+      // Motion 3 (smd-motion.js): the leaving screen drifts a third of the way and fades under a push; on a pop it
+      // slides off to the right over the screen coming back, with a soft edge shadow (iOS).
+      if (SMM) { if (live.d < 0) ghost.style.background = "var(--pn-bg)"; ga = SMM.push(null, ghost, live.d)[0]; }
+      else try { ga = ghost.animate([{ opacity: 1, transform: "translateX(0px)" }, { opacity: 0, transform: "translateX(" + (reducedMo() ? 0 : gx) + "px)" }], { duration: reducedMo() ? 140 : 200, easing: "cubic-bezier(.23, 1, .32, 1)", fill: "forwards" }); } catch (e) {}
       var drop = function () { if (ghost && ghost.parentNode) ghost.parentNode.removeChild(ghost); ghost = null; };
       if (ga) ga.onfinish = drop;
-      G.setTimeout(drop, 450);
+      G.setTimeout(drop, SMM ? 900 : 450);
     }
     if (live && G.PREP_MOTION && G.PREP_MOTION.nav) { try { G.PREP_MOTION.nav(root, live.d); } catch (e) {} }
     // A patched screen keeps the focus where it was (the control just pressed is the same node).
@@ -2995,7 +2998,13 @@
     if (r.save || r.psId) psSave(r);
     // Study tools: questions left marked for review go to My notebook; queued anonymous statistics are sent.
     if (G.PREP_TOOLS) { try { G.PREP_TOOLS.finished(HOST, r); } catch (e) {} }
-    if (r.scheme) { var sc = scoreMock(r.items, r.ans, r.scheme), s = load(); s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length }]).slice(-20); save(); }
+    // ReWise (prep-timetable.js) reviews a grand test from its own misses: wq = the wrong or blank question ids (150 at
+    // most), wm = misses per module. Only the last 20 tests are kept.
+    if (r.scheme) {
+      var sc = scoreMock(r.items, r.ans, r.scheme), s = load(), wq = [], wm = {};
+      r.items.forEach(function (it, i) { if (it._gone || r.ans[i] === it.a || it._s === "deck" || it._py) return; var m = it._m || it.t; if (wq.length < 150) wq.push(it.id); if (m) wm[m] = (wm[m] || 0) + 1; });
+      s.mh = (s.mh || []).concat([{ ts: Date.now(), label: r.title, marks: sc.marks, max: sc.max, n: r.items.length, wq: wq, wm: wm }]).slice(-20); save();
+    }
     if (!st.kb) nav(1);   // the result arrives like a pushed screen (a key finish stays still)
     renderResult();
     if (G.PREP_NATIVE) G.PREP_NATIVE.finished();
