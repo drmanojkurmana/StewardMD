@@ -85,15 +85,23 @@
     } catch (e) {}
     live = null;
   }
-  function supported() { return !!(G.AudioContext || G.webkitAudioContext); }
-  function isPlaying() { return !!live; }
-  function current() { return live ? live.track : null; }
+  function NATIVE() {
+    try { var N = G.PREP_SOUND_NATIVE; return N && N.isNativeAvailable && N.isNativeAvailable() ? N : null; } catch (e) { return null; }
+  }
+  function backgroundPref() {
+    try { var raw = JSON.parse(G.localStorage.getItem("smd_prep_sound_prefs") || "null"); return !!(raw && raw.backgroundPlayback === true); } catch (e) { return false; }
+  }
+  function supported() { return !!NATIVE() || !!(G.AudioContext || G.webkitAudioContext); }
+  function isPlaying() { var N = NATIVE(); return N ? N.isPlaying() : !!live; }
+  function current() { var N = NATIVE(); return N ? N.current() : (live ? live.track : null); }
 
   /* Start (or restart) a track. Must be called from a user gesture; resumes a
      suspended context first. Returns { ok } / { ok:false, error }. */
   function start(trackId, volume) {
     var recipe = TRACK_SYNTH[trackId];
     if (!recipe) return { ok: false, error: "unknown-track" };
+    var N = NATIVE();
+    if (N) return N.start(trackId, volume, { backgroundPlayback: backgroundPref() });
     var c = ac();
     if (!c) return { ok: false, error: "unavailable:webaudio" };
     try {
@@ -129,9 +137,10 @@
       return { ok: true };
     } catch (e) { stopLive(); return { ok: false, error: "unavailable:start-failed" }; }
   }
-  function pause() { stopLive(); mediaMeta(null, false); return { ok: true }; }
-  function stop() { return pause(); }
+  function pause() { var N = NATIVE(); if (N) return N.pause(); stopLive(); mediaMeta(null, false); return { ok: true }; }
+  function stop() { var N = NATIVE(); if (N) return N.stop(); return pause(); }
   function setVolume(v) {
+    var N = NATIVE(); if (N) return N.setVolume(v);
     if (!live) return { ok: false, error: "not-playing" };
     try { live.master.gain.value = Math.max(0, Math.min(1, v)); return { ok: true }; }
     catch (e) { return { ok: false, error: "unavailable:volume" }; }
@@ -152,6 +161,8 @@
     } catch (e) {}
   }
   function bindMediaKeys(handlers) {
+    var N = NATIVE();
+    if (N) { try { N.bindMediaKeys(handlers); } catch (e) {} return; }
     try {
       var ms = G.navigator && G.navigator.mediaSession;
       if (!ms || !ms.setActionHandler) return;

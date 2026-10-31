@@ -7,7 +7,9 @@
    controls: capabilities come from the live account (Premium?) and device (supports_volume?).
 
    Auth is Authorization Code + PKCE with NO client secret anywhere. Minimum scopes only (see
-   SCOPES). Tokens live in memory only; nothing goes to PrepNucleus analytics or the AI Tutor,
+   SCOPES). Tokens live in memory only, except the refresh token on native Android, which is
+   kept in Keystore AES-GCM storage via the PrepSound plugin and restored on cold start
+   (rs-android-native); web/iOS stay memory-only. Nothing goes to PrepNucleus analytics or the AI Tutor,
    and no listening history is collected. The PKCE verifier + OAuth state sit in sessionStorage
    only for the redirect round-trip and are deleted at exchange. Playback path: the Spotify Web
    API player endpoints controlling the learner's active Spotify app on every platform — see
@@ -101,6 +103,20 @@
       queueControls: !!isPremium, volumeControl: vol, trackMetadata: true, backgroundPlayback: false };
   }
 
+  /* Secure-storage key for the refresh token on native Android only. Web and
+     iOS never persist it (memory only below). The value is never logged. */
+  var REFRESH_SECRET_KEY = "prep_sound_spotify_refresh_token";
+  /* Wrap Capacitor.Plugins.PrepSound-shaped plugin into the secureStore shape
+     makeClient consumes. Returns null when any method is missing. */
+  function makePluginSecureStore(plugin) {
+    if (!plugin || typeof plugin.setSecret !== "function" || typeof plugin.getSecret !== "function" || typeof plugin.removeSecret !== "function") return null;
+    return {
+      setSecret: function (key, value) { return Promise.resolve(plugin.setSecret({ key: key, value: value })); },
+      getSecret: function (key) { return Promise.resolve(plugin.getSecret({ key: key })).then(function (r) { return r && typeof r.value === "string" ? r.value : null; }); },
+      removeSecret: function (key) { return Promise.resolve(plugin.removeSecret({ key: key })); }
+    };
+  }
+
   /* ================= token store: memory only ================= */
   function makeTokenStore(now) {
     var t = null; // { access, refresh, expiresAt } — never persisted, never logged.
@@ -109,6 +125,13 @@
         if (!j || !j.access_token) return false;
         t = { access: j.access_token, refresh: j.refresh_token || (t && t.refresh) || null,
           expiresAt: now() + (j.expires_in ? j.expires_in * 1000 : 3600000) };
+        return true;
+      },
+      /* Cold-start restore: seed only the refresh token; the next ensureToken
+         refreshes it into a live access token. */
+      setRefreshOnly: function (refresh) {
+        if (typeof refresh !== "string" || !refresh) return false;
+        t = { access: null, refresh: refresh, expiresAt: 0 };
         return true;
       },
       access: function () { return t && t.access ? t.access : null; },
@@ -124,6 +147,23 @@
   // deps: { fetch, now, clientId, redirectUri, store? } — no secret, no analytics hooks exist here.
   function makeClient(deps) {
     var store = deps.store || makeTokenStore(deps.now), refreshing = null;
+    var secure = deps.secureStore || null; // native Android only; null on web/iOS
+    function persistRefresh() {
+      if (!secure) return Promise.resolve(true);
+      var rt = store.refreshToken();
+      if (!rt) return Promise.resolve(true);
+      try {
+        return Promise.resolve(secure.setSecret(REFRESH_SECRET_KEY, rt)).then(
+          function () { return true; }, function () { return true; });
+      } catch (e) { return Promise.resolve(true); }
+    }
+    function clearPersisted() {
+      if (!secure) return Promise.resolve(true);
+      try {
+        return Promise.resolve(secure.removeSecret(REFRESH_SECRET_KEY)).then(
+          function () { return true; }, function () { return true; });
+      } catch (e) { return Promise.resolve(true); }
+    }
     function tokenPost(body) {
       return deps.fetch(TOKEN_URL, { method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: body })
@@ -131,8 +171,25 @@
         .then(function (x) {
           // A refused code/refresh grant (400/401) means sign-in again, never a raw provider error.
           if (x.r.status !== 200 || !store.set(x.j)) throw apiError(401);
-          return true;
+          return persistRefresh().then(function () { return true; });
         }, function () { throw { reason: "offline", message: "No connection. Check your network and try again." }; });
+    }
+    /* Cold start on native Android: load the persisted refresh token (if any)
+       and exchange it for a fresh access token. Resolves true when a session
+       was restored. A dead refresh token clears the persisted copy. */
+    function restoreSession() {
+      if (!secure || store.access()) return Promise.resolve(false);
+      var loaded;
+      try { loaded = secure.getSecret(REFRESH_SECRET_KEY); }
+      catch (e) { return Promise.resolve(false); }
+      return Promise.resolve(loaded).then(function (rt) {
+        if (typeof rt !== "string" || !rt) return false;
+        if (!store.setRefreshOnly(rt)) return false;
+        return refresh().then(function () { return true; }, function (e) {
+          store.clear();
+          return clearPersisted().then(function () { throw e; });
+        });
+      }, function () { return false; });
     }
     function exchange(code, verifier) {
       return tokenPost("grant_type=authorization_code&code=" + encodeURIComponent(code) +
@@ -174,7 +231,7 @@
     }
     function retryOf(r) { try { var v = r.headers && r.headers.get && r.headers.get("Retry-After"); return v ? Number(v) : null; } catch (e) { return null; } }
     return {
-      store: store, exchange: exchange, refresh: refresh,
+      store: store, exchange: exchange, refresh: refresh, restoreSession: restoreSession,
       me: function () { return call("GET", "/me"); },
       player: function () { return call("GET", "/me/player").then(parsePlayer); },
       play: function (body) { return call("PUT", "/me/player/play", body || {}); },
@@ -186,7 +243,7 @@
       search: function (q) {
         return call("GET", "/search?type=track,playlist&limit=10&market=from_token&q=" + encodeURIComponent(q)).then(parseSearch);
       },
-      disconnect: function () { store.clear(); }
+      disconnect: function () { store.clear(); clearPersisted(); }
     };
   }
 
@@ -194,6 +251,7 @@
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
     apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient,
+    makePluginSecureStore: makePluginSecureStore, REFRESH_SECRET_KEY: REFRESH_SECRET_KEY,
     SCOPES: SCOPES, AUTH_URL: AUTH_URL, TOKEN_URL: TOKEN_URL, API: API };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
@@ -240,9 +298,19 @@
     var data = new TextEncoder().encode(verifier);
     return G.crypto.subtle.digest("SHA-256", data).then(function (buf) { return b64url(new Uint8Array(buf)); });
   }
+  /* Secure storage exists only on native Android with the PrepSound plugin.
+     Web and iOS return null here and keep tokens memory-only. */
+  function secureStore() {
+    try {
+      var C = G.Capacitor;
+      if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
+      if (typeof C.getPlatform === "function" && C.getPlatform() !== "android") return null;
+      return makePluginSecureStore(C.Plugins && C.Plugins.PrepSound);
+    } catch (e) { return null; }
+  }
   function client() {
     if (!S.client) S.client = makeClient({ fetch: function (u, o) { return G.fetch(u, o); },
-      now: function () { return Date.now(); }, clientId: CID, redirectUri: redirectUri() });
+      now: function () { return Date.now(); }, clientId: CID, redirectUri: redirectUri(), secureStore: secureStore() });
     return S.client;
   }
   function ico(name) { // inline SVG, currentColor; no emoji, no external assets
@@ -436,6 +504,17 @@
     dockButtonHtml: dockButtonHtml, adapter: adapter, back: function () { return closeSheet(); },
     leave: function () { return closeSheet(); }, _pure: PURE, _s: S };
   handleReturn();
+  /* Cold start on native Android: restore the Spotify session from secure
+     storage (refresh token only). Skipped during an OAuth return, which
+     exchanges its own code. Failure leaves the Connect state untouched. */
+  try {
+    var hasCode = /[?&]code=/.test(G.location.search || "");
+    if (!hasCode && secureStore()) {
+      client().restoreSession().then(function (restored) {
+        if (restored && S.sheet) loadConnected();
+      }, function () {});
+    }
+  } catch (e) {}
   // shortcut: warm return only (appUrlOpen); if the OS killed the app during sign-in the sessionStorage verifier is gone and the user taps Connect again.
   try {
     var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App;

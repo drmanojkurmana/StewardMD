@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Foreground media playback (targetSdk 36): both permissions are required
+         before a mediaPlayback foreground service may start. POST_NOTIFICATIONS
+         is already declared by the host app; it is not re-declared here. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+
+    <application>
+        <!-- First-party ambient playback only. Not exported: only this app
+             (via PrepSoundPlugin) may start or command it. -->
+        <service
+            android:name="in.stewardmd.prepsound.PrepSoundService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+    </application>
+</manifest>
