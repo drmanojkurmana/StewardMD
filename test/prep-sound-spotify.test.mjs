@@ -53,7 +53,10 @@ test("authorize URL: PKCE S256, minimum scopes, no secret, no extra scopes", () 
   assert.equal(u.searchParams.get("code_challenge"), "ch");
   assert.equal(u.searchParams.get("state"), "st");
   assert.deepEqual(u.searchParams.get("scope").split(" ").sort(), [...P.SCOPES].sort());
-  assert.ok(!/streaming|app-remote|secret/i.test(u + ""), "no streaming/App Remote scope, no secret");
+  // app-remote-control joined the minimum set for the native App Remote path (existing users
+  // reconnect once); streaming (Web Playback SDK) and any secret stay forbidden.
+  assert.ok(P.SCOPES.includes("app-remote-control"), "App Remote scope requested");
+  assert.ok(!/streaming|secret/i.test(u + ""), "no streaming scope, no secret");
 });
 
 test("token exchange + refresh: PKCE verifier sent, tokens stay in memory, refresh deduped", async () => {
@@ -332,6 +335,146 @@ test("last played: an idle card from GET /me/player/recently-played instead of a
   await c.exchange("code", "v");
   const m = await c.lastPlayed();
   assert.equal(m.title, "Sulthana"); assert.equal(m.isPlaying, false); assert.equal(m.lastPlayed, true); assert.equal(m.contextUri, "spotify:playlist:p");
+});
+
+/* ---- App Remote (SpotifyRemote plugin): mocked plugin, no network ---- */
+function mockPlugin(opts) {
+  const o = opts || {};
+  const calls = [];
+  const listeners = {};
+  const plugin = {
+    calls,
+    emit(name, data) { (listeners[name] || []).forEach((cb) => cb(data)); },
+    async isAvailable() { calls.push({ m: "isAvailable" }); return { available: o.installed !== false, spotifyInstalled: o.installed !== false }; },
+    async connect(args) {
+      calls.push({ m: "connect", args });
+      if (o.connectFails) throw Object.assign(new Error("Spotify is not running."), { code: "spotify_not_connected" });
+      plugin.emit("connection", { connected: true });
+      return { connected: true };
+    },
+    async disconnect() { calls.push({ m: "disconnect" }); plugin.emit("connection", { connected: false }); return { connected: false }; },
+    async getState() { calls.push({ m: "getState" }); return o.state || { connected: true, trackUri: "", title: "", artist: "", album: "", durationMs: 0, positionMs: 0, isPaused: true, shuffle: false, repeat: "off" }; },
+    async play(args) { calls.push({ m: "play", args }); return { ok: true }; },
+    async resume() { calls.push({ m: "resume" }); return { ok: true }; },
+    async pause() { calls.push({ m: "pause" }); return { ok: true }; },
+    async next() { calls.push({ m: "next" }); return { ok: true }; },
+    async previous() { calls.push({ m: "previous" }); return { ok: true }; },
+    async seek(args) { calls.push({ m: "seek", args }); return { ok: true }; },
+    async setShuffle(args) { calls.push({ m: "setShuffle", args }); return { ok: true }; },
+    async setRepeat(args) { calls.push({ m: "setRepeat", args }); return { ok: true }; },
+    async wake(args) { calls.push({ m: "wake", args }); return { opened: true }; },
+    addListener(name, cb) { (listeners[name] = listeners[name] || []).push(cb); return Promise.resolve({ remove: async () => {} }); },
+  };
+  return plugin;
+}
+const seedWeb = () => {
+  const fetch = mockFetch([resp(204), resp(204), resp(204), resp(204), resp(204), resp(204), resp(204), resp(204)]);
+  const c = P.makeClient(deps(fetch));
+  c.store.set({ access_token: "a", refresh_token: "r", expires_in: 3600, scope: "app-remote-control" });
+  return { fetch, c };
+};
+
+test("App Remote state maps to the neutral Now Playing model (artwork/liked kept for the same track)", () => {
+  const prev = { trackUri: "spotify:track:t1", artworkUrl: "https://i.scdn.co/x.jpg", images: [{ url: "https://i.scdn.co/x.jpg" }], liked: true, volume: 40, supportsVolume: true };
+  const m = P.remoteStateToModel({ connected: true, trackUri: "spotify:track:t1", title: "Song", artist: "Ann", album: "Al", durationMs: 200000, positionMs: 5000, isPaused: false, shuffle: true, repeat: "track" }, prev);
+  assert.equal(m.title, "Song"); assert.equal(m.isPlaying, true); assert.equal(m.shuffle, true); assert.equal(m.repeat, "track");
+  assert.equal(m.trackId, "t1"); assert.equal(m.artworkUrl, "https://i.scdn.co/x.jpg"); assert.equal(m.liked, true); assert.equal(m.volume, 40);
+  const other = P.remoteStateToModel({ trackUri: "spotify:track:t2", title: "Next", isPaused: true, repeat: "bogus" }, prev);
+  assert.equal(other.liked, null, "a different track never inherits the like");
+  assert.equal(other.repeat, "off"); assert.equal(other.isPlaying, false);
+  const art = P.remoteStateToModel({ trackUri: "spotify:track:t2", title: "Next", imageDataUrl: "data:image/jpeg;base64,AA==" }, null);
+  assert.equal(art.artworkUrl, "data:image/jpeg;base64,AA==", "plugin artwork wins when present");
+});
+
+test("App Remote scope gate: a known grant without app-remote-control asks for one reconnect", () => {
+  assert.equal(P.tokenLacksRemoteScope("user-read-private user-modify-playback-state"), true);
+  assert.equal(P.tokenLacksRemoteScope("user-read-private app-remote-control"), false);
+  assert.equal(P.tokenLacksRemoteScope(""), false, "unknown grant never triggers the note");
+  assert.equal(P.tokenLacksRemoteScope(null), false);
+  assert.equal(P.makeRemoteClient(null), null, "no plugin object, no remote client");
+  assert.equal(P.makeRemoteClient({ connect: async () => {} }), null, "getState is required too");
+});
+
+test("App Remote connected: transport drives the plugin, never fetch", async () => {
+  const plugin = mockPlugin({ state: { connected: true, trackUri: "spotify:track:t1", title: "Song", artist: "Ann", album: "", durationMs: 1000, positionMs: 0, isPaused: false, shuffle: false, repeat: "off" } });
+  const rc = P.makeRemoteClient(plugin);
+  await rc.connect("token-1");
+  assert.equal(rc.connected(), true);
+  assert.deepEqual(plugin.calls.find((x) => x.m === "connect").args, { accessToken: "token-1" }, "Web API token handed to the plugin");
+  const { fetch, c } = seedWeb();
+  const env = { remote: rc, web: c };
+  await P.callTransport(env, "toggle", null, { isPlaying: true });
+  await P.callTransport(env, "next");
+  await P.callTransport(env, "previous");
+  await P.callTransport(env, "shuffle", true);
+  await P.callTransport(env, "repeat", "context");
+  await P.callTransport(env, "seek", 42000);
+  await P.callTransport(env, "toggle", null, { isPlaying: false });
+  assert.deepEqual(plugin.calls.filter((x) => x.m !== "connect").map((x) => x.m),
+    ["pause", "next", "previous", "setShuffle", "setRepeat", "seek", "resume"]);
+  assert.deepEqual(plugin.calls.find((x) => x.m === "seek").args, { positionMs: 42000 });
+  assert.deepEqual(plugin.calls.find((x) => x.m === "setShuffle").args, { on: true });
+  assert.deepEqual(plugin.calls.find((x) => x.m === "setRepeat").args, { mode: "context" });
+  assert.equal(fetch.calls.length, 0, "no Web API call while App Remote is connected");
+  // playerState events become the model; a paused last-played toggle replays the song.
+  const seen = [];
+  rc.onState((s) => seen.push(s));
+  plugin.emit("playerState", { connected: true, trackUri: "spotify:track:t9", title: "Live", artist: "A", album: "", durationMs: 3000, positionMs: 100, isPaused: true, shuffle: false, repeat: "off" });
+  assert.equal(seen.length, 1);
+  assert.equal(rc.model(null).title, "Live");
+  await P.callTransport(env, "toggle", null, { isPlaying: false, lastPlayed: true, trackUri: "spotify:track:t9", positionMs: 700 });
+  assert.deepEqual(plugin.calls.at(-1), { m: "play", args: { uri: "spotify:track:t9", positionMs: 700 } });
+  assert.equal(fetch.calls.length, 0);
+});
+
+test("App Remote not running: connect fails, Wake Spotify shows, wake fires only on the tap", async () => {
+  const plugin = mockPlugin({ connectFails: true });
+  const rc = P.makeRemoteClient(plugin);
+  await assert.rejects(rc.connect("token-1"), /not running/);
+  assert.equal(rc.connected(), false);
+  assert.equal(plugin.calls.filter((x) => x.m === "wake").length, 0, "a failed connect never wakes Spotify on its own");
+  const src = read("prep-sound-spotify.js");
+  assert.match(src, /S\.remoteWake = true/, "connect failure raises the Wake state");
+  assert.match(src, /data-sp-wake-note>iOS paused Spotify in the background/);
+  assert.match(src, /data-act="sp-wake">Resume</);
+  assert.match(src, /S\.remoteSeen && !remoteActive\(\)/, "Play while the SDK link is gone never fakes playing");
+  assert.equal((src.match(/\.wake\(/g) || []).length, 1, "wake() has exactly one call site");
+  assert.match(src, /if \(a === "sp-wake"\) \{[\s\S]{0,500}wrc\.wake\(/, "that call site is the Wake tap handler");
+  // The tap itself (what act("sp-wake") runs):
+  await rc.wake("spotify:track:paused1");
+  assert.deepEqual(plugin.calls.filter((x) => x.m === "wake"), [{ m: "wake", args: { uri: "spotify:track:paused1" } }]);
+});
+
+test("no plugin (web/Android/older build): transport stays on the Web API, unchanged", async () => {
+  const { fetch, c } = seedWeb();
+  const env = { remote: P.makeRemoteClient(null), web: c };
+  assert.equal(env.remote, null);
+  await P.callTransport(env, "toggle", null, { isPlaying: true });
+  await P.callTransport(env, "next");
+  await P.callTransport(env, "shuffle", true);
+  assert.deepEqual(fetch.calls.map((x) => x.url.replace(P.API, "")),
+    ["/me/player/pause", "/me/player/next", "/me/player/shuffle?state=true"]);
+  // A disconnected plugin falls back the same way.
+  const plugin = mockPlugin({});
+  const rc = P.makeRemoteClient(plugin);
+  assert.equal(rc.connected(), false);
+  await P.callTransport({ remote: rc, web: c }, "previous");
+  assert.equal(plugin.calls.length, 0, "disconnected plugin is never called");
+  assert.equal(fetch.calls.at(-1).url, P.API + "/me/player/previous");
+  const src = read("prep-sound-spotify.js");
+  assert.match(src, /remoteActive\(\) \? callTransport\(transportEnv\(\), "next"\) : withDevice/, "card keeps the Web API device path when not remote");
+  assert.match(src, /function remotePlugin\(\)/, "plugin detection is guarded");
+});
+
+test("App Remote wiring contract: events replace the poll, Web API keeps playlists/search/queue/like, diagnostics added", () => {
+  const src = read("prep-sound-spotify.js");
+  assert.match(src, /rc\.onState\(function/, "playerState events drive the card and the mini");
+  assert.match(src, /function nowOrLast\(\) \{\s*var rc = getRemote\(\);/, "Now Playing prefers App Remote while connected");
+  assert.match(src, /accessToken: function \(\) \{ return ensureToken\(\)/, "plugin receives a live token, never a logged one");
+  assert.ok(!/console\.(log|info|warn|error)\([^)]*accessToken/.test(src), "token is never logged");
+  assert.match(src, /diag\("remote: connected"\)/, "diagnostics (long-press Music) gain plugin lines");
+  assert.match(src, /diag\("remote state:/);
+  assert.match(src, /data-sp-scope-note>One more Spotify permission[^]*data-act="sp-connect">Add permission/, "missing scope is said plainly, with its own button");
 });
 
 test("Play targets the Spotify in the learner's hand, never another device out of earshot", () => {
