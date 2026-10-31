@@ -604,6 +604,7 @@
       diag("remote state: " + (st.title || "nothing") + (st.isPaused ? " (paused)" : " (playing)"));
       S.remoteWake = false;
       S.now = remoteStateToModel(st, S.now);
+      if (st.isPaused && st.trackUri && st.positionMs > 0) S.paused = { uri: st.trackUri, pos: st.positionMs };   // the SDK's own pause point
       if (S.playerHandle) S.playerHandle.refresh(cardState());
       paintDock(); syncLastNote();
     });
@@ -724,7 +725,11 @@
   }
   function webNowOrLast() {
     return client().nowPlaying().then(function (m) {
-      if (m && m.title) return m;
+      if (m && m.title) {
+        // A frozen Spotify reports the song at 0:00; keep where the learner actually paused.
+        if (!m.isPlaying && !(m.positionMs > 0) && S.paused && S.paused.uri === m.trackUri) m.positionMs = S.paused.pos;
+        return m;
+      }
       if (S.now && S.now.title) {   // Spotify went to sleep (iPadOS suspends it after a pause): keep the song on screen, paused, until Spotify reports another
         var keep = {}; for (var k in S.now) keep[k] = S.now[k];
         keep.isPlaying = false; keep.lastPlayed = true; keep.contextUri = keep.contextUri || "";
@@ -1102,7 +1107,7 @@
       var wrc = getRemote();
       if (!wrc) return false;
       diag("remote: Wake Spotify tapped");
-      S.wakeSeek = (S.now && S.now.positionMs) || 0;
+      S.wakeSeek = (S.now && S.now.positionMs) || (S.paused && S.now && S.paused.uri === S.now.trackUri ? S.paused.pos : 0);
       return wrc.wake((S.now && S.now.trackUri) || S.wakeUri || "").then(function () {
         S.remoteWake = false;
         if (S.sheet) paintSheet();
