@@ -435,9 +435,9 @@ test("App Remote not running: connect fails, Wake Spotify shows, wake fires only
   assert.equal(plugin.calls.filter((x) => x.m === "wake").length, 0, "a failed connect never wakes Spotify on its own");
   const src = read("prep-sound-spotify.js");
   assert.match(src, /S\.remoteWake = true/, "connect failure raises the Wake state");
-  assert.match(src, /data-sp-wake-note>Spotify is not running on this device/);
+  assert.match(src, /data-sp-wake-note>iOS paused Spotify in the background/);
   assert.match(src, /data-act="sp-wake">Resume</);
-  assert.match(src, /S.remoteSeen && !remoteActive()/, "Play while the SDK link is gone never fakes playing");
+  assert.match(src, /S\.remoteSeen && !remoteActive\(\)/, "Play while the SDK link is gone never fakes playing");
   assert.equal((src.match(/\.wake\(/g) || []).length, 1, "wake() has exactly one call site");
   assert.match(src, /if \(a === "sp-wake"\) \{[\s\S]{0,300}wrc\.wake\(/, "that call site is the Wake tap handler");
   // The tap itself (what act("sp-wake") runs):
