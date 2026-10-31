@@ -33,7 +33,7 @@
     var pending = ["kardia-calc-fig-data.js", "kardia-calc-fig.js"], i = 0;
     function next() {
       if (i >= pending.length) { S.figLoading = 0; repaint(); return; }
-      var s = G.document.createElement("script"); s.src = "/" + pending[i++] + "?v=krd15"; s.async = false;
+      var s = G.document.createElement("script"); s.src = "/" + pending[i++] + "?v=krd16"; s.async = false;
       s.onload = next; s.onerror = next; G.document.head.appendChild(s);
     }
     if (G.document && G.document.head) next(); else S.figLoading = 0;
@@ -78,6 +78,21 @@
       (r.g ? '<p class="kcalc-grade kcalc-t-' + tone + '">' + esc(r.g.grade) + '</p><p class="kcalc-gdetail">' + esc(r.g.detail) + "</p>" : "") +
       '<p class="kcalc-src">Source: ' + esc(c.source) + ". Draft, to be verified.</p></div>";
   }
+  function trustOf(c) { return (G.KCALC_TRUST && G.KCALC_TRUST[c.id]) || null; }
+  function trustHtml(c) {
+    var t = trustOf(c); if (!t) return "";
+    var units = c.inputs.map(function (inp) {
+      return "<li><span class=\"kcalc-trust-k\">" + esc(inp.l) + "</span> in " + esc(t.units[inp.k] || inp.u) + "</li>";
+    }).join("");
+    var steps = t.steps.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("");
+    return '<section class="kcalc-trust" aria-label="How this works"><h3 class="kcalc-sec">How this works</h3>' +
+      '<p class="kcalc-trust-formula">' + esc(t.formula) + "</p>" +
+      '<p class="kcalc-trust-lab">Units</p><ul class="kcalc-trust-units">' + units + "</ul>" +
+      '<p class="kcalc-trust-lab">How to measure it</p><ol class="kcalc-trust-steps">' + steps + "</ol>" +
+      '<p class="kcalc-trust-ref">Guideline: ' + esc(t.ref) + '.</p><p><span class="kcalc-trust-badge">Draft, awaiting review</span></p>' +
+      '<button type="button" class="sp-btn sec kcalc-trustbtn" data-act="kcalc-example" data-id="' + c.id + '">Try a worked example</button>' +
+      '<p class="kcalc-trust-note">Fills the inputs above with illustrative values, so you can see a full calculation before typing.</p></section>';
+  }
   function formulaHtml(c) {
     var chips = c.inputs.map(function (inp, i) { return '<span class="kcalc-var kcalc-v' + (i % 4) + '">' + esc(inp.l) + "</span>"; }).join(' <span aria-hidden="true">·</span> ');
     return '<p class="kcalc-formula"><span class="kcalc-var kcalc-vout">' + esc(c.out.l) + "</span> <span aria-hidden=\"true\">= f(</span>" + chips + '<span aria-hidden="true">)</span></p><p class="kcalc-how">' + esc(c.how) + "</p>";
@@ -117,6 +132,7 @@
     });
     h += "</section>";
     h += '<div id="kcalc-live-' + c.id + '">' + resultHtml(c) + "</div>";
+    h += trustHtml(c);
     h += '<section aria-label="Formula"><h3 class="kcalc-sec">Formula</h3>' + formulaHtml(c) + "</section>";
     h += '<div class="kcalc-actions"><button type="button" class="sp-btn pri" data-act="kcalc-example" data-id="' + c.id + '">Worked example</button>' +
       '<button type="button" class="sp-btn sec" data-act="kcalc-scan" data-view="' + esc(c.view) + '">Measure this in Scan Lab</button></div>';
@@ -169,7 +185,7 @@
     A["kcalc-open"] = function (b) { S.cur = b.getAttribute("data-id"); touchRecent(S.cur); repaint("#kcalc-input-" + S.cur + "-" + (calcById(S.cur) ? calcById(S.cur).inputs[0].k : "")); };
     A["kcalc-list"] = function () { S.cur = null; repaint("#kcalc-search"); };
     A["kcalc-fav"] = function (b) { var id = b.getAttribute("data-id"); S.favs[id] = !S.favs[id]; if (!S.favs[id]) delete S.favs[id]; save(); repaint(); };
-    A["kcalc-example"] = function (b) { var c = calcById(b.getAttribute("data-id")); if (!c) return; Object.keys(c.example).forEach(function (k) { S.vals[c.id + ":" + k] = c.example[k]; delete S.units[c.id + ":" + k]; }); repaint(); };
+    A["kcalc-example"] = function (b) { var c = calcById(b.getAttribute("data-id")); if (!c) return; var t = trustOf(c); var ex = (t && t.example) || c.example; Object.keys(ex).forEach(function (k) { S.vals[c.id + ":" + k] = ex[k]; delete S.units[c.id + ":" + k]; }); repaint(); };
     A["kcalc-unit"] = function (b) { var c = calcById(b.getAttribute("data-id")); if (!c) return; var k = b.getAttribute("data-k"); var inp = null; c.inputs.forEach(function (x) { if (x.k === k) inp = x; }); if (!inp) return; var key = c.id + ":" + k; var alt = ALT[inp.u]; var cur = S.units[key] || inp.u; var curVal = parseFloat(S.vals[key] != null ? S.vals[key] : inp.d); if (cur === inp.u) { S.units[key] = alt.u; S.vals[key] = Math.round(curVal * alt.f * 100) / 100; } else { delete S.units[key]; S.vals[key] = Math.round(curVal / alt.f * 100) / 100; } repaint("#kcalc-input-" + c.id + "-" + k); };
     A["kcalc-fig-toggle"] = function (b) { S.figPlay = S.figPlay === false ? true : false; if (S.figPlay === false && S.figRaf && G.cancelAnimationFrame) G.cancelAnimationFrame(S.figRaf); repaint(); };
     A["kcalc-scan"] = function (b) { var view = b.getAttribute("data-view"); try { if (S.host._kardia && S.host._kardia.echoLab) S.host._kardia.echoLab.setView(view); } catch (e) {} if (S.nav) S.nav("echo"); };
