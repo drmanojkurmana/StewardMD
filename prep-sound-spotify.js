@@ -777,7 +777,8 @@
     // App Remote: an older sign-in lacks the direct-control permission; say so plainly and let
     // the learner reconnect once (Disconnect + Connect below) — never force it, never hide it.
     if (remotePlugin() && tokenLacksRemoteScope(c.store.scope()))
-      h += '<p class="pn-sound-sp-note" data-sp-scope-note>One more Spotify permission is needed to control Spotify directly from here. Disconnect Spotify below, then connect again to add it. Playback keeps working as before until you do.</p>';
+      h += '<p class="pn-sound-sp-note" data-sp-scope-note>One more Spotify permission lets this player control Spotify directly. Playback keeps working as before until you add it.</p>' +
+        '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="sp-connect">Add permission</button></div>';
     // App Remote could not reach Spotify because it is not running: one clear line and the
     // Wake button. wake() runs only from this tap (owner rule: never switch apps on our own).
     if (S.remoteWake)
@@ -844,7 +845,7 @@
     }
     S.playerHandle = PL.mount(box, {
       getState: cardState,
-      renderOpts: { layout: "row", pickLabel: "Pick a playlist or search", emptyHint: "Press play to resume, or pick from Up next", artHref: S.now && S.now.trackUri ? openUrl(S.now.trackUri) : "" },
+      renderOpts: { layout: "row", pickLabel: "Pick a playlist or search", emptyHint: "Press play to resume, or pick from Up next", artHref: "" },   // no art link: a tap there must never leave the study session (owner rule)
       fetchState: fresh,
       onAction: function (act, value) {
         var m = S.now || {};
@@ -1051,7 +1052,8 @@
     if (!state || !want || state !== want || !verifier) return say("Spotify sign-in did not finish. Tap Connect Spotify again.");
     client().exchange(decodeURIComponent(code), verifier).then(function () {
       say("Spotify connected.");
-      if (S.sheet) paintSheet(); else if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
+      S.err = null; S.premium = true; S.me = null;   // fresh grant: drop any stale "needs Premium" from before
+      if (S.sheet) loadConnected(); else if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
     }, function (e) { say((e && e.message) || "Spotify sign-in failed. Tap Connect Spotify again."); });
   }
   function say(msg) { try { var h = S.host || (G.PREP && G.PREP._host); if (h && h.toast) h.toast(msg); else if (G.toast) G.toast(msg); } catch (e) {} }

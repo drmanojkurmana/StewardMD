@@ -473,7 +473,7 @@ test("App Remote wiring contract: events replace the poll, Web API keeps playlis
   assert.ok(!/console\.(log|info|warn|error)\([^)]*accessToken/.test(src), "token is never logged");
   assert.match(src, /diag\("remote: connected"\)/, "diagnostics (long-press Music) gain plugin lines");
   assert.match(src, /diag\("remote state:/);
-  assert.match(src, /data-sp-scope-note>One more Spotify permission is needed/, "missing scope is said plainly");
+  assert.match(src, /data-sp-scope-note>One more Spotify permission[^]*data-act="sp-connect">Add permission/, "missing scope is said plainly, with its own button");
 });
 
 test("Play targets the Spotify in the learner's hand, never another device out of earshot", () => {
