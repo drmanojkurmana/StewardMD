@@ -1892,6 +1892,18 @@ integrated into the app, reminding us what to read, what to practise". Decision:
   first, `tt.ac[day] = { err, errT }`, counted by the runner's `onAnswer`); Quick recall from flashcards graded today
   (10 to 40). Reading notes without a lesson stays a hand tick (`tt.tk`). Mixed never shares a module with today's
   topics, so the two counts stay apart.
+- **QBank modules per day:** under Today, the day's modules (learn: its topics; rev: its sections' modules, 8 shown then
+  Show all; review day: the repair modules), each with its question count (`tt.tn`, real counts from the indexes only),
+  unique questions seen (card keys), accuracy, misses in the test, a seen bar, and `data-act="module"` to open it.
+  Question targets never exceed what the modules hold. The PDF's date table names the modules with their counts.
+- **Grand test review:** prep.js now keeps each finished test's misses in `mh[]` (`wq` ids, 150 max; `wm` per module).
+  A test day's First review and the review day's Error review become "Name each error" (`tt-gtrev` screen: each miss
+  still in My mistakes with the runner's four reasons, saved as `mt[id][2]`; "Answer these again"). The block ticks when
+  every miss is named; the review day repairs the test's 3 most-missed modules (fallback: weakest overall) and says
+  "From Fri's test: 12 misses, 8 named: Did not know 5, ...". Pure: `lastTest missTop tagCounts`.
+- **Checked on the real bank:** NEET-SS Medical Oncology, 46 days at 8 h: 92 topics with questions, 3 to 6 a learn day,
+  weekly test and review, 3 section sweeps, mixed, 2 light days. Several topics: the card heading reads "4 topics,
+  weakest first" with each topic and its reason below.
 - **PDF:** "Share the plan as PDF" draws the whole plan (routine, own-number priorities, every remaining day, the
   grand test protocol, rules) with `pdfDoc`, a small PDF 1.4 writer in the file (Helvetica, WinAnsi, AFM widths for
   wrapping, no library). The phone shares it through Capacitor Filesystem (CACHE) + Share; without the plugins (the

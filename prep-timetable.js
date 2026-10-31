@@ -249,6 +249,21 @@
   function weakest(topics, n) {
     return (topics || []).filter(function (x) { return (x.t || 0) >= 10; }).sort(function (a, b) { return accOf(a) - accOf(b) || b.t - a.t; }).slice(0, n || 3).map(function (x) { return x.id; });
   }
+  /* The grand test a day reviews: the newest finished test in mh (prep.js keeps { ts, label, marks, max, n, wq, wm })
+     taken on a day from `from` to `to`. dayOf(ms) -> day number. */
+  function lastTest(mh, dayOf, from, to) {
+    var r = null; (mh || []).forEach(function (h) { var dd = dayOf(h.ts); if (dd >= from && dd <= to && (!r || h.ts > r.ts)) r = h; });
+    return r;
+  }
+  // Modules the test missed most, most first (ties by name for a stable order).
+  function missTop(wm, n) { return Object.keys(wm || {}).sort(function (a, b) { return wm[b] - wm[a] || (a < b ? -1 : 1); }).slice(0, n || 3); }
+  /* The test's misses still in My mistakes and how many carry a reason. mt[id] = [sid, mid, tag, ts, stem].
+     -> { n, tagged, by: { tag: count } } */
+  function tagCounts(wq, mt) {
+    var o = { n: 0, tagged: 0, by: {} };
+    (wq || []).forEach(function (id) { var b = mt && mt[id]; if (!b) return; o.n++; if (b[2]) { o.tagged++; o.by[b[2]] = (o.by[b[2]] || 0) + 1; } });
+    return o;
+  }
   // Counts for the editor's summary line.
   function summary(days) {
     var c = { learn: 0, gt: 0, rest: 0, rev: 0 };
@@ -357,7 +372,7 @@
 
   var PURE = { weekday: weekday, isOff: isOff, studyDays: studyDays, nthStudyDay: nthStudyDay, dayOfIso: dayOfIso, isoOfDay: isoOfDay, revDays: revDays,
     suggestEnd: suggestEnd, split: split, schedule: schedule, lay: lay, where: where, behind: behind, move: move, nextModule: nextModule,
-    tierOf: tierOf, whyOf: whyOf, priority: priority, pack: pack, kinds: kinds, plan: plan, blocks: blocks, missed: missed, readSet: readSet, weakest: weakest, summary: summary, TAPER: TAPER, Q_MIN: Q_MIN, pdfDoc: pdfDoc, wrap: wrap, textW: textW, pdfText: pdfText };
+    tierOf: tierOf, whyOf: whyOf, priority: priority, pack: pack, kinds: kinds, plan: plan, blocks: blocks, missed: missed, readSet: readSet, weakest: weakest, summary: summary, lastTest: lastTest, missTop: missTop, tagCounts: tagCounts, TAPER: TAPER, Q_MIN: Q_MIN, pdfDoc: pdfDoc, wrap: wrap, textW: textW, pdfText: pdfText };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -402,7 +417,7 @@
           (sec.modules || []).forEach(function (m) {
             if (has && !(cnt[m.id] > 0)) return;
             var md = (s.mod || {})[m.id] || {}, cf = md.cf ? (md.cf.guessing || 0) + (md.cf.confused || 0) : 0;
-            out.push({ id: m.id, sid: sid, g: sec.id, n: cnt[m.id] || 20, t: md.t || 0, ok: md.ok || 0, cf: cf, weak: !!(weak && weak[m.id]) });
+            out.push({ id: m.id, sid: sid, g: sec.id, n: cnt[m.id] || 20, nq: has ? cnt[m.id] : 0, t: md.t || 0, ok: md.ok || 0, cf: cf, weak: !!(weak && weak[m.id]) });
           });
         });
       });
@@ -428,7 +443,12 @@
     var t = tt(); if (!t) return null;
     var x = dayAt(t, d); if (!x) return d < t.start ? { d: d, k: "before" } : null;
     var s = store(), k = x.k, ids = (x.t || []).slice(), due = 0, td = H.today();
-    if (k === "gtr") ids = weakest(t.topicsAll ? t.topicsAll.map(function (id) { return topicNow(id, t.weak); }) : [], 3);
+    var dOf = function (ms) { return H.core().dayNum(ms, new Date(ms).getTimezoneOffset()); };
+    // The grand test this day reviews: today's on a test day, the last week's on its review day.
+    var gtE = k === "gt" ? lastTest(s.mh, dOf, d, d) : k === "gtr" ? lastTest(s.mh, dOf, d - 7, d - 1) : null;
+    var fromGt = !!(gtE && gtE.wm && Object.keys(gtE.wm).length);
+    if (k === "gtr") ids = fromGt ? missTop(gtE.wm, 3).filter(function (m) { return !!subjOfMod(m); }) : weakest(t.topicsAll ? t.topicsAll.map(function (id) { return topicNow(id, t.weak); }) : [], 3);
+    var tc = gtE ? tagCounts(gtE.wq, s.mt) : null;
     if (d === td && G.PREP_PLAN && G.PREP_PLAN._pure) due = G.PREP_PLAN._pure.dueNow(s, td);
     var mock = gtMock(), bl = blocks(k, hours(t) * 60, { due: due, gtMin: mock ? mock.min : 180 });
     var names = ids.map(mname), first = ids[0], fs = first ? subjOfMod(first) : null;
@@ -441,28 +461,38 @@
     }
     var secs = (x.g || []).map(secName), secList = secs.join(", ");
     var past = learnedBefore(t, d);
+    // Never ask for more questions than the modules hold (counts known once their index has loaded).
+    var avail = function (list) { var n = 0, all = true; (list || []).forEach(function (id) { var c = (t.tn || {})[id]; if (c) n += c; else all = false; }); return all && list && list.length ? n : Infinity; };
+    bl.forEach(function (b) {
+      if (b.k === "topic" || b.k === "repair") b.n = Math.max(1, Math.min(b.n, avail(ids)));
+      if (b.k === "mixed" && k === "rev") b.n = Math.max(1, Math.min(b.n, avail(ids)));
+    });
     bl.forEach(function (b) {
       if (b.k === "recall") { b.title = "Recall"; b.sub = b.n ? b.n + " due reviews, from your spaced repetition" : d === td ? (past.length ? "Nothing due. Recall " + mname(past[past.length - 1]) + " from memory, book closed" : "Nothing due yet. Reviews arrive as you answer") : "Your due reviews that day"; b.go = "rev"; }
-      if (b.k === "read") { b.title = "Read"; b.sub = read ? "Lesson: " + read.title + ". Then a one-page table, not long notes" : "Notes on " + list + ". A one-page table, not long notes"; }
-      if (b.k === "topic") { b.title = "Topic MCQs"; b.sub = b.n + " questions on " + list + ". Answer each before the explanation"; b.go = "prac"; }
+      if (b.k === "read") { b.title = "Read"; b.sub = read ? "Lesson: " + read.title + ". Then a one-page table, not long notes" : "Your notes or textbook on " + list + ". A one-page table, not long notes"; }
+      if (b.k === "topic") { b.title = "Topic MCQs"; b.sub = b.n + " questions on " + (names.length > 1 ? "today's " + names.length + " topics" : list) + ". Answer each before the explanation"; b.go = "prac"; }
       if (b.k === "mixed") { b.title = "Mixed MCQs"; b.sub = b.n + " questions " + (k === "rev" ? "across " + secList : past.length ? "across the topics you have studied" : "across the syllabus") + (k === "mixed" ? ", in timed blocks" : ""); b.go = "mix"; }
       if (b.k === "errors") { b.title = k === "taper" ? "Error notebook" : "Error review"; b.sub = k === "taper" ? "Only the mistakes that came back. No new topics" : "Every wrong, guessed and slow answer: what you thought, the clue you missed, the rule"; }
+      if ((b.k === "errors" && k === "gtr" && tc && tc.n) || (b.k === "first" && tc && tc.n)) { b.title = "Name each error"; b.sub = tc.n + (tc.n === 1 ? " miss" : " misses") + " from " + gtE.label.replace(/ pattern$/, "") + ": why each one, then answer them again"; b.gtrev = 1; }
       if (b.k === "quick") { b.title = "Quick recall"; b.sub = first && k === "learn" ? "Flashcards for " + mname(first) : "Your flashcards due today"; }
-      if (b.k === "repair") { b.title = "Repair"; b.sub = ids.length ? b.n + " questions on your weakest topics: " + list : "Your weakest topics show after 10 answers in a topic"; b.go = ids.length ? "prac" : null; }
+      if (b.k === "repair") { b.title = "Repair"; b.sub = ids.length ? b.n + " questions on " + (fromGt ? "the test's most-missed topics: " : "your weakest topics: ") + list : "Your weakest topics show after 10 answers in a topic"; b.go = ids.length ? "prac" : null; }
       if (b.k === "gt") { b.title = "Grand test"; b.sub = (mock ? mock.label.replace(/ pattern$/, "") + ", " + mock.n + " questions, " : "") + "timed. Mark how sure you are on each answer"; b.go = "mock"; }
-      if (b.k === "first") { b.title = "First review"; b.sub = "Straight after: tag every wrong, guessed and slow answer"; }
+      if (b.k === "first" && !b.gtrev) { b.title = "First review"; b.sub = "Straight after the test: name why you missed each question"; }
     });
-    var head = k === "learn" ? list : k === "rev" ? secList : k === "gtr" ? "Review the grand test" : KIND[k] || "";
+    // The card heading stays short: one topic by name, several by count (each is named, with its reason, below it).
+    var head = k === "learn" ? (names.length > 1 ? names.length + " topics, weakest first" : list) : k === "rev" ? secList : k === "gtr" ? "Review the grand test" : KIND[k] || "";
     // One line for home, reminders and the widget: what to read and what to practise.
     var tb = bl.filter(function (b) { return b.k === "topic" || b.k === "repair"; })[0], mb = bl.filter(function (b) { return b.k === "mixed"; })[0];
     var line = k === "learn" ? "Read " + (read ? read.title : names[0] || "") + ". Practise " + (tb ? tb.n : 0) + " questions on " + list + "." :
       k === "gt" ? "Grand test today, then review every wrong and guessed answer." :
-      k === "gtr" ? "Review the grand test" + (ids.length ? ", then " + tb.n + " questions on " + list : "") + "." :
+      k === "gtr" ? "Review the grand test" + (tc && tc.n ? " (" + plural(tc.n, "miss", "misses") + ")" : "") + (ids.length ? ", then " + tb.n + " questions on " + list : "") + "." :
       k === "rev" ? "Revise " + secList + ": " + (mb ? mb.n : 0) + " mixed questions." :
       k === "mixed" ? (mb ? mb.n : 0) + " mixed questions in timed blocks, then your errors." :
       k === "taper" ? "Light day: your error notebook and quick recall. No new topics." :
       k === "rest" ? "Rest day. Nothing planned." : k === "exam" ? "Exam day. All the best." : "";
-    return { d: d, k: k, t: ids, g: x.g || [], names: names, list: list, blocks: bl, read: read, head: head, line: line, fs: fs, past: past };
+    // The QBank modules this day works through, with their question counts.
+    var qb = k === "learn" || k === "rev" || k === "gtr" ? ids.slice() : [];
+    return { d: d, k: k, t: ids, g: x.g || [], names: names, list: list, blocks: bl, read: read, head: head, line: line, fs: fs, past: past, gtE: gtE, fromGt: fromGt, tc: tc, qb: qb };
   }
   // Topics on learn days before d (studied first reading), newest last.
   function learnedBefore(t, d) { var out = []; (t.days || []).forEach(function (x) { if (x.k === "learn" && x.d < d) (x.t || []).forEach(function (id) { if (out.indexOf(id) < 0) out.push(id); }); }); return out; }
@@ -478,7 +508,7 @@
     x.blocks.forEach(function (b) {
       if (b.k === "recall" && o.due > 0 && b.min) { var n = Math.min(o.due, Math.max(1, b.n || 0)); if (n) items.push({ k: "rev", n: n, min: Math.ceil(n * REV_Q_MIN), rw: 1 }); }
       if (b.k === "read" && x.read) { var l = { k: "lsn", m: x.read.m, s: x.read.s, title: x.read.title, min: x.read.minutes || 5, ttl: "Read: " + x.read.title, rw: 1 }; if (x.read.k && x.read.k !== x.read.m) l.l = x.read.k; items.push(l); }
-      if ((b.k === "topic" || b.k === "repair") && x.t.length) items.push({ k: "prac", n: b.n, min: b.min, mods: x.t.map(pair).filter(Boolean), ttl: "Practise " + b.n + " questions: " + x.list, sub: b.k === "repair" ? "ReWise repair: your weakest topics" : "ReWise: today's topics", rw: 1 });
+      if ((b.k === "topic" || b.k === "repair") && x.t.length) items.push({ k: "prac", n: b.n, min: b.min, mods: x.t.map(pair).filter(Boolean), ttl: "Practise " + b.n + " questions: " + x.list, sub: (b.k === "repair" ? "ReWise repair · QBank: " : "ReWise · QBank: ") + x.list, rw: 1 });
       if (b.k === "mixed") {
         // Mixed never shares a module with today's topics, so each block's count is its own answers.
         var pool = (x.k === "rev" ? x.t : x.past.length ? x.past : (t.topicsAll || [])).filter(function (id) { return x.k === "rev" || x.t.indexOf(id) < 0; });
@@ -498,7 +528,7 @@
     if (t) {
       var x = info(H.today(), null); if (!x) return null;
       var k = x.k === "learn" ? "study" : x.k === "rev" || x.k === "mixed" || x.k === "taper" ? "rev" : x.k;
-      return { k: k, rk: x.k, mods: x.t.map(function (id) { return { s: subjOfMod(id), m: id }; }).filter(function (p) { return p.s; }), name: x.head, sid: x.fs, n: 1, of: 1 };
+      return { k: k, rk: x.k, mods: x.t.map(function (id) { return { s: subjOfMod(id), m: id }; }).filter(function (p) { return p.s; }), name: x.k === "learn" ? x.list : x.head, sid: x.fs, n: 1, of: 1 };
     }
     var t1 = tt1(); if (!t1) return null;
     var w = where(t1, t1.blocks || [], H.today()); if (!w) return null;
@@ -522,7 +552,7 @@
     if (tt()) {
       var x = info(H.today(), null); if (!x) return "";
       var ex = examDay(), bad = ex != null && ex < H.today();
-      var tx = bad ? "ReWise: your exam date has passed. Set the new date" : x.k === "before" ? "ReWise starts " + fmtDay(tt().start, true) : "ReWise \u00b7 " + (KIND[x.k] || "") + (x.k === "learn" || x.k === "rev" ? ": " + x.head : "");
+      var tx = bad ? "ReWise: your exam date has passed. Set the new date" : x.k === "before" ? "ReWise starts " + fmtDay(tt().start, true) : "ReWise \u00b7 " + (KIND[x.k] || "") + (x.k === "learn" ? ": " + x.list : x.k === "rev" ? ": " + x.head : "");
       var miss = missed(tt().days, H.today(), studied).length;
       return '<button type="button" class="pn-link tt-line" data-act="tt-open">' + H.ico("cal") + "<span>" + esc(tx) + (miss && !bad ? " \u00b7 " + plural(miss, "day", "days") + " missed" : "") + "</span></button>";
     }
@@ -538,7 +568,7 @@
   }
 
   /* ---------- screens ---------- */
-  function open() { T.d = null; T.all = false; H.push(tt() ? renderView : renderEdit); }
+  function open() { T.d = null; T.all = false; T.qbAll = false; H.push(tt() ? renderView : renderEdit); }
   function draft() {
     if (T.d) return T.d;
     var t = tt() || tt1(), td = H.today(), ids = pool().map(function (x) { return x.id; }), ex = examDay();
@@ -612,7 +642,8 @@
     if (live && b.go === "rev" && b.n) act = '<button type="button" class="pn-btn sm" data-act="p-go" data-k="rev">Start</button>';
     if (live && b.go === "mock") act = '<button type="button" class="pn-btn sm" data-act="p-go" data-k="mock">Start</button>';
     if (live && b.k === "read") act = x.read ? '<button type="button" class="pn-btn sm" data-act="l-open" data-s="' + esc(x.read.s) + '" data-m="' + esc(x.read.m) + '"' + (x.read.k && x.read.k !== x.read.m ? ' data-l="' + esc(x.read.k) + '"' : "") + ">Open</button>" : x.t[0] ? '<button type="button" class="pn-btn sm" data-act="module" data-s="' + esc(subjOfMod(x.t[0]) || "") + '" data-m="' + esc(x.t[0]) + '">Open</button>' : "";
-    if (live && (b.k === "errors" || b.k === "first") && !(pr && pr.none)) act = '<button type="button" class="pn-btn sm" data-act="tt-err" data-v="' + Math.max(5, Math.round(b.min / Q_MIN)) + '">Start</button>';
+    if (live && b.gtrev) act = '<button type="button" class="pn-btn sm" data-act="tt-gtrev">Open</button>';
+    else if (live && b.k === "errors" && !(pr && pr.none)) act = '<button type="button" class="pn-btn sm" data-act="tt-err" data-v="' + Math.max(5, Math.round(b.min / Q_MIN)) + '">Start</button>';
     if (live && b.k === "quick") act = x.t[0] && x.k === "learn" ? '<button type="button" class="pn-btn sm" data-act="k-open" data-s="' + esc(subjOfMod(x.t[0]) || "") + '" data-m="' + esc(x.t[0]) + '" data-t="' + esc(mname(x.t[0])) + '">Open</button>' : '<button type="button" class="pn-btn sm" data-act="k-due">Open</button>';
     return '<li class="tt-bk' + (done ? " done" : "") + '">' + (live ? '<button type="button" class="tt-tick" role="checkbox" aria-checked="' + done + '" data-act="tt-tick" data-v="' + b.k + '" aria-label="' + esc(b.title) + ' done"><i aria-hidden="true"></i></button>' : "") +
       '<span class="tt-bn"><b>' + esc(b.title) + " <small>" + b.min + " min" + (pr && pr.of && !pr.done ? " \u00b7 " + pr.x + " of " + pr.of : "") + "</small></b><small>" + esc(b.sub || "") + "</small></span>" + act + "</li>";
@@ -620,6 +651,59 @@
   function dayRow(x, td) {
     var tag = x.d === td ? "Today" : fmtDay(x.d, true), what = x.k === "learn" ? x.list : x.k === "rev" ? "Revision: " + x.head : KIND[x.k] || "";
     return '<li class="tt-dr k-' + x.k + (x.d === td ? " now" : "") + '"><span>' + esc(tag) + "</span><b>" + esc(what) + "</b>" + (x.k === "gt" || x.k === "gtr" || x.k === "rest" || x.k === "taper" || x.k === "exam" ? '<em class="tt-kd">' + esc(KIND[x.k]) + "</em>" : "") + "</li>";
+  }
+  // Answers seen per module (unique questions): p:<module>:<id> card keys, flashcards left out.
+  function seenBy() { var out = {}, c = store().cards || {}; Object.keys(c).forEach(function (k) { var p = k.split(":"); if (p.length === 3 && p[0] === "p") out[p[1]] = (out[p[1]] || 0) + 1; }); return out; }
+  function qCount(t, mid) { return (t.tn && t.tn[mid]) || 0; }
+  // The day's QBank modules: each opens in QBank, with its size, how much is seen and the student's accuracy there.
+  function qbankHtml(x, t) {
+    var seen = seenBy(), s = store();
+    var many = x.qb.length > 8 && !T.qbAll;
+    var rows = x.qb.slice(0, many ? 8 : x.qb.length).map(function (mid) {
+      var sid = subjOfMod(mid); if (!sid) return "";
+      var n = qCount(t, mid), sn = Math.min(n || Infinity, seen[mid] || 0), md = (s.mod || {})[mid] || {}, pc = md.t ? Math.round((md.ok || 0) * 100 / md.t) : null;
+      var sub = (n ? n + " questions · " + sn + " seen" : sn + " seen") + (pc != null ? " · " + pc + "% right" : "") + (x.fromGt && x.gtE.wm[mid] ? " · " + x.gtE.wm[mid] + " missed in the test" : "");
+      return '<li><button type="button" class="pn-row tt-qb" data-act="module" data-s="' + esc(sid) + '" data-m="' + esc(mid) + '"><span class="pn-rb"><b>' + esc(mname(mid)) + "</b><small>" + esc(sub) + "</small></span>" +
+        (n ? '<span class="tt-qbm" aria-hidden="true"><i style="transform:scaleX(' + Math.min(1, sn / n).toFixed(3) + ')"></i></span>' : "") + H.ico("chev") + "</button></li>";
+    }).join("");
+    var h = x.k === "rev" ? "QBank modules to revise today" : x.k === "gtr" ? "QBank modules to repair today" : "QBank modules for today";
+    return '<h2 class="pn-sec">' + h + '</h2><ul class="pn-group tt-qbl">' + rows + "</ul>" + (many ? '<button type="button" class="pn-link" data-act="tt-qball">Show all ' + x.qb.length + " modules</button>" : "");
+  }
+  var TAGS = [["know", "Did not know"], ["misread", "Misread the question"], ["mixed", "Mixed up two options"], ["careless", "Careless slip"]];
+  // "From Fri's test: 12 misses, 8 named: Did not know 5, Mixed up two options 3."
+  function gtLine(x) {
+    var tc = x.tc, by = TAGS.filter(function (g) { return tc.by[g[0]]; }).map(function (g) { return g[1] + " " + tc.by[g[0]]; });
+    return "From " + fmtDay(H.core().dayNum(x.gtE.ts, new Date(x.gtE.ts).getTimezoneOffset()), true) + "'s test: " + plural(tc.n, "miss", "misses") + ", " + tc.tagged + " named" + (by.length ? ": " + by.join(", ") : "") + ".";
+  }
+  /* The grand test review: every miss of the test that is still in My mistakes, its question line, and four reasons to
+     pick (the same tags as the runner's "Why did you miss it?"). Then the misses as a practice run. */
+  function renderGtRev() {
+    var t = tt(), x = t ? info(H.today(), null) : null, s = store();
+    var E = x && x.gtE; if (!E) { H.stack().pop(); return H.rerender(); }
+    var tc = tagCounts(E.wq, s.mt), ids = (E.wq || []).filter(function (id) { return s.mt && s.mt[id]; });
+    var top = missTop(E.wm, 5).map(function (m) { return esc(mname(m)) + " (" + E.wm[m] + ")"; }).join(", ");
+    H.paint(H.bar("Grand test review", esc(E.label.replace(/ pattern$/, "")), "back") + '<div class="pn-body tt-gr">' +
+      '<section class="pn-panel"><p class="tt-now"><b>' + tc.tagged + " of " + tc.n + ' named</b><small>' + esc(E.marks + " of " + E.max + " marks · " + E.n + " questions") + "</small></p>" +
+      (top ? '<p class="pn-mut pn-small">Most missed: ' + top + ".</p>" : "") +
+      '<p class="pn-mut pn-small">Name why you missed each one. A question leaves this list when you answer it right.</p>' +
+      (ids.length ? '<button type="button" class="pn-btn pri" data-act="tt-gtprac">' + H.ico("play") + " Answer these again</button>" : "") + "</section>" +
+      (ids.length ? '<ol class="tt-grl">' + ids.map(function (id) {
+        var b = s.mt[id];
+        return '<li class="pn-panel"><p class="tt-grq">' + esc(b[4] || "") + '</p><small class="pn-mut">' + esc(mname(b[1])) + '</small><div class="pn-wrap" role="group" aria-label="Why did you miss it?">' +
+          TAGS.map(function (g) { var on = b[2] === g[0]; return '<button type="button" class="pn-chip sm' + (on ? " on" : "") + '" aria-pressed="' + on + '" data-act="tt-tag" data-id="' + esc(id) + '" data-v="' + g[0] + '">' + g[1] + "</button>"; }).join("") + "</div></li>";
+      }).join("") + "</ol>" : '<p class="pn-empty">Every miss from this test is answered right now.</p>') + "</div>");
+  }
+  function startIds(ids, title) {
+    var s = store(), pairs = [], seen = {}, want = {};
+    ids.forEach(function (id) { var b = s.mt[id]; if (!b) return; want[id] = 1; if (!seen[b[1]]) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
+    if (!pairs.length) return;
+    H.stack().push(function () {}); H.loadingScreen(title, "Loading questions");
+    H.loadMany(pairs.slice(0, 20), H.stepMsg).then(function (lists) {
+      var out = []; lists.forEach(function (l) { H.pool(l.items).forEach(function (it) { if (want[it.id]) out.push(it); }); });
+      H.stack().pop();
+      if (!out.length) { H.toast("These questions need a connection to load once."); return H.rerender(); }
+      H.run(out.slice(0, 50), "study", title);
+    });
   }
   function renderView() {
     var t = tt(); if (!t) return renderEdit();
@@ -637,9 +721,13 @@
     var head;
     if (!x) head = '<p class="tt-now"><b>Plan finished</b><small>Make a new plan for what is next</small></p>';
     else if (x.k === "before") head = '<p class="tt-now"><b>Starts ' + esc(fmtDay(t.start, true)) + "</b></p>";
-    else head = '<p class="tt-now"><span class="tt-kind k-' + x.k + '">' + esc(KIND[x.k]) + "</span><b>" + esc(x.k === "learn" || x.k === "rev" ? x.head : x.line) + "</b>" + (ex != null && ex >= td ? "<small>" + (ex === td ? "Exam today" : plural(ex - td, "day", "days") + " to the exam") + "</small>" : "") + "</p>";
-    var why = x && x.k === "learn" ? '<ul class="tt-why">' + x.t.map(function (id) { var tp = topicNow(id, t.weak); return "<li><b>" + esc(mname(id)) + "</b><small>" + esc(whyOf(tp)) + "</small></li>"; }).join("") + "</ul>" : "";
+    else head = '<p class="tt-now"><span class="tt-kind k-' + x.k + '">' + esc(KIND[x.k]) + "</span><b>" + esc(x.k === "learn" || x.k === "rev" || x.k === "gtr" ? x.head : x.line) + "</b>" + (ex != null && ex >= td ? "<small>" + (ex === td ? "Exam today" : plural(ex - td, "day", "days") + " to the exam") + "</small>" : "") + "</p>";
+    // Why these topics: one topic gets its reason under the heading, several get a line each.
+    var why = !x || x.k !== "learn" || !x.t.length ? "" : x.t.length === 1 ? '<p class="tt-why1">' + esc(whyOf(topicNow(x.t[0], t.weak))) + "</p>" :
+      '<ul class="tt-why">' + x.t.map(function (id) { var tp = topicNow(id, t.weak); return "<li><b>" + esc(mname(id)) + "</b><small>" + esc(whyOf(tp)) + "</small></li>"; }).join("") + "</ul>";
+    if (x && x.k === "gtr" && x.tc && x.tc.n) why = '<p class="tt-why1">' + esc(gtLine(x)) + "</p>";
     var bl = x && x.blocks && x.blocks.length ? '<ul class="tt-bks">' + x.blocks.map(function (b) { return blockHtml(b, x, tick, true, t); }).join("") + "</ul>" : "";
+    var qbank = x && x.qb && x.qb.length ? qbankHtml(x, t) : "";
     var rest = x && x.k === "rest" ? '<p class="pn-mut pn-small">Nothing is planned. Due reviews stay in Today\'s plan if you want them.</p>' : "";
     // Days: the next 14, or all.
     var list = [], end = T.all ? Infinity : td + 13;
@@ -651,7 +739,7 @@
     var pc = planned.length ? read / planned.length : 0;
     H.paint(H.bar("ReWise", "", "back", '<button type="button" class="pn-ib" data-act="tt-edit" aria-label="Edit ReWise">' + H.ico("gear") + "</button>") + '<div class="pn-body tt-view">' +
       examWarn(ex, td).replace("below", "in Edit") + (ex != null && ex < td ? '<button type="button" class="pn-btn" data-act="tt-edit">Set the new exam date</button>' : "") +
-      '<section class="pn-panel tt-today"><p class="pn-eb tt-eb">Today</p>' + head + why + bl + rest + "</section>" +
+      '<section class="pn-panel tt-today"><p class="pn-eb tt-eb">Today</p>' + head + why + bl + rest + "</section>" + qbank +
       (miss.length ? '<section class="pn-panel tt-lag" role="note"><p><b>' + plural(miss.length, "study day", "study days") + " missed:</b> " + esc(miss.slice(0, 3).map(function (y) { return fmtDay(y.d); }).join(", ")) + (miss.length > 3 ? " and more" : "") + ".</p>" +
         '<p class="pn-mut pn-small">Re-plan lays the topics not yet studied over the days left, from today. Nothing is doubled up to catch up.</p><button type="button" class="pn-btn" data-act="tt-replan">Re-plan from today</button></section>' : "") +
       '<h2 class="pn-sec">' + (T.all ? "Every day" : "Next 14 days") + '</h2><ol class="tt-days">' + list.map(function (z) { return dayRow(z, td); }).join("") + "</ol>" +
@@ -672,7 +760,7 @@
       var p = plan({ start: d.start, end: d.end, exam: ex, off: d.off, gt: d.gt, topics: topics, skip: skip });
       var past = keepPast && t0 ? (t0.days || []).filter(function (y) { return y.d < d.start; }) : [];
       var t = { v: 2, ex: H.exam().id, start: past.length ? past[0].d : d.start, end: d.end, off: d.off.slice(), gt: d.gt, hrs: d.hrs, order: d.order.slice(), weak: d.weak,
-        days: past.concat(p.days), strong: p.strong, topicsAll: topics.map(function (x) { return x.id; }), tk: t0 && t0.tk ? t0.tk : {} };
+        days: past.concat(p.days), strong: p.strong, topicsAll: topics.map(function (x) { return x.id; }), tn: topics.reduce(function (o, x) { if (x.nq) o[x.id] = x.nq; return o; }, {}), tk: t0 && t0.tk ? t0.tk : {} };
       T.busy = false;
       saveTt(t);
       return t;
@@ -699,6 +787,7 @@
     if (b.k === "mixed") return item("mix");
     if (b.k === "gt") return item("mock");
     if (b.k === "read") return x.read ? item("lsn") : null;
+    if (b.gtrev && x.tc) return { x: x.tc.tagged, of: x.tc.n, done: x.tc.tagged >= x.tc.n };
     if (b.k === "errors" || b.k === "first") {
       var ac = (t.ac || {})[td] || {}, nmt = Object.keys(s.mt || {}).length;
       if (ac.errT) return { x: Math.min(ac.err || 0, ac.errT), of: ac.errT, done: (ac.err || 0) >= ac.errT };
@@ -740,7 +829,8 @@
     var weakTp = (t.topicsAll || []).map(function (id) { return topicNow(id, t.weak); }).filter(function (x) { return tierOf(x) === 1; });
     var rows = t.days.filter(function (y) { return y.d >= td; }).map(function (y) {
       var z = info(y.d, null), bl = z.blocks, tq = bl.filter(function (b) { return b.k === "topic" || b.k === "repair"; })[0], mq = bl.filter(function (b) { return b.k === "mixed"; })[0];
-      var task = KIND[y.k] || "", topicsTxt = y.k === "learn" ? z.names.join(", ") : y.k === "rev" ? z.head : y.k === "gt" ? (mock ? mock.label.replace(/ pattern$/, "") + ", timed" : "Timed full test") : y.k === "gtr" ? "Review every wrong, guessed and slow answer; repair the weakest topics" : y.k === "mixed" ? "Timed mixed blocks across the syllabus" : y.k === "taper" ? "Error notebook, quick recall. No new topics" : y.k === "rest" ? "Full rest" : y.k === "exam" ? "The exam" : "";
+      var withN = function (ids) { return ids.map(function (id) { var n = qCount(t, id); return mname(id) + (n ? " (" + n + ")" : ""); }).join(", "); };
+      var task = KIND[y.k] || "", topicsTxt = y.k === "learn" ? withN(z.t) : y.k === "rev" ? z.head + ": " + withN(z.t) : y.k === "gt" ? (mock ? mock.label.replace(/ pattern$/, "") + ", timed" : "Timed full test") : y.k === "gtr" ? "Name each miss of the test, answer them again; repair the most-missed modules" + (z.t.length && y.d === td ? ": " + withN(z.t) : "") : y.k === "mixed" ? "Timed mixed blocks across the syllabus" : y.k === "taper" ? "Error notebook, quick recall. No new topics" : y.k === "rest" ? "Full rest" : y.k === "exam" ? "The exam" : "";
       var prac = y.k === "learn" ? (tq ? tq.n : 0) + " topic MCQs + " + (mq ? mq.n : 0) + " mixed" : y.k === "rev" || y.k === "mixed" ? (mq ? mq.n : 0) + " mixed MCQs, then errors" : y.k === "gt" ? (mock ? mock.n + " questions, " + mock.min + " min" : "") + "; first review the same day" : y.k === "gtr" ? (tq ? tq.n + " repair MCQs" : "Error review") : y.k === "rest" ? "Nothing planned" : y.k === "taper" ? "Sleep and confidence" : "";
       return { cells: [fmtDay(y.d, true), task, topicsTxt, prac], fill: y.d === td ? "now" : y.k === "gt" ? "gt" : y.k === "gtr" ? "gtr" : y.k === "rest" ? "rest" : y.k === "taper" ? "taper" : y.k === "exam" ? "exam" : null };
     });
@@ -758,7 +848,7 @@
           p: ["Answer first, then read the explanation. A wrong answer, a lucky guess and a slow right answer are different errors; review all three."] },
         { h: "2. Priority from your own answers", p: weakTp.length ? ["These come first because of your numbers (or your own tick):"] : ["No weak topics yet: fewer than 10 answers in most topics. The plan follows the syllabus order and puts unstarted topics first. It reorders as you answer."],
           bullets: weakTp.slice(0, 20).map(function (x) { return mname(x.id) + ": " + whyOf(x); }).concat(weakTp.length > 20 ? [(weakTp.length - 20) + " more weak topics in the plan."] : []).concat(t.strong && t.strong.length ? [plural(t.strong.length, "topic is", "topics are") + " already strong (80% or more over 30 answers): mixed practice only."] : []) },
-        { h: "3. Date-wise plan", table: { boldSecond: true, cols: [["Date", 1.25], ["Main task", 1.45], ["Topics", 3.7], ["Practice", 2]], rows: rows } },
+        { h: "3. Date-wise plan", p: ["Topics are your QBank modules, with each module's question count in brackets."], table: { boldSecond: true, cols: [["Date", 1.25], ["Main task", 1.45], ["QBank modules", 3.7], ["Practice", 2]], rows: rows } },
         { h: "4. After every grand test", table: { cols: [["When", 1.6], ["Do this", 6]], rows: [
           { cells: ["Within 10 minutes", "Note the score, questions attempted, accuracy, unanswered and how the time went."] },
           { cells: ["First review", "Every wrong answer and every guessed right answer. Explain why each close option is wrong."] },
@@ -805,8 +895,12 @@
     var v = b.getAttribute("data-v"), d;
     if (a === "tt-open") return open();
     if (a === "tt-pdf") return sharePdf();
+    if (a === "tt-gtrev") return H.push(renderGtRev);
+    if (a === "tt-tag") { var sm = store(), id = b.getAttribute("data-id"), mb = sm.mt && sm.mt[id]; if (mb) { mb[2] = mb[2] === v ? null : v; H.save(); } return H.rerender(); }
+    if (a === "tt-gtprac") { var t3 = tt(), x3 = t3 ? info(H.today(), null) : null; if (x3 && x3.gtE) startIds(x3.gtE.wq || [], "Grand test misses"); return; }
     if (a === "tt-edit") { T.d = null; return H.push(renderEdit); }
     if (a === "tt-all") { T.all = !T.all; return H.rerender(); }
+    if (a === "tt-qball") { T.qbAll = true; return H.rerender(); }
     if (a === "tt-err") return startErrors(Number(v) || 30);
     if (a === "tt-tick") {
       var t2 = tt(); if (!t2) return; var td2 = H.today(); t2.tk = t2.tk || {};

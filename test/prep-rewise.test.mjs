@@ -149,3 +149,13 @@ test("PDF: a valid file (header, objects, xref offsets, trailer), every page foo
   TT.wrap("A long topic name that has to wrap across more than one line in a narrow cell", 9, false, 80).forEach((l) => assert.ok(TT.textW(l, 9, false) <= 80, l));
   assert.equal(TT.pdfText("a\u2014b \u2265 c \u4e2d"), "a-b >= c ?");
 });
+
+test("grand test review: the right test, its most-missed modules, reasons counted", () => {
+  const dayOf = (ms) => Math.floor(ms / 864e5);
+  const mh = [{ ts: 10 * 864e5 + 5, wm: { a: 1 } }, { ts: 14 * 864e5 + 5, wm: { b: 4, c: 2, d: 4, e: 1 }, wq: ["q1", "q2", "q3", "q4"] }, { ts: 20 * 864e5, wm: {} }];
+  assert.equal(TT.lastTest(mh, dayOf, 8, 15).ts, 14 * 864e5 + 5, "the newest test in the window");
+  assert.equal(TT.lastTest(mh, dayOf, 15, 19), null);
+  assert.deepEqual(TT.missTop(mh[1].wm, 3), ["b", "d", "c"]);
+  const mt = { q1: ["s", "b", "know"], q2: ["s", "b", null], q4: ["s", "d", "mixed"] };
+  assert.deepEqual(TT.tagCounts(mh[1].wq, mt), { n: 3, tagged: 2, by: { know: 1, mixed: 1 } }, "q3 was answered right since, so it is not counted");
+});

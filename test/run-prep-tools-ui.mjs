@@ -219,7 +219,7 @@ try {
   ok(await until(`return !!document.querySelector("#smdPrep .tt-view .tt-today");`, 8000), "Make my ReWise plan shows the plan");
   ok(await store(`!!(s.tt && s.tt.v === 2 && s.tt.days.length > 0 && s.tt.start === PREP._host.today() && s.tt.hrs === 4 && s.tt.weak[${JSON.stringify(weakId)}] === 1)`) === true, "stored as ReWise v2 with its days, hours and the weak tick");
   ok(await store(`s.tt.days[0].k === "learn" && s.tt.days[0].t[0] === ${JSON.stringify(weakId)}`) === true, "day one starts with the ticked weak topic");
-  ok(await until(`var w=document.querySelectorAll("#smdPrep .tt-why li"); return w.length >= 1 && /You marked it weak/.test(w[0].textContent);`, 3000), "today names its topics with the reason: " + await text("#smdPrep .tt-why"));
+  ok(await until(`var w=document.querySelector("#smdPrep .tt-why1"); return !!w && w.textContent === "You marked it weak" && !document.querySelector("#smdPrep .tt-why");`, 3000), "one topic today: its reason sits under the heading, not repeated in a list: " + await text("#smdPrep .tt-why1"));
   ok(await ev(`return [].map.call(document.querySelectorAll("#smdPrep .tt-bk .tt-bn > b"), function(b){ return b.firstChild.textContent.trim(); }).join("|");`) === "Recall|Read|Topic MCQs|Mixed MCQs|Error review|Quick recall", "the day's six blocks in order");
   ok(/(\d+) questions on/.test(await text("#smdPrep .tt-bks")), "Topic MCQs carry a question target");
   ok(await ev(`return document.querySelectorAll("#smdPrep .tt-dr").length >= 1 && /Today/.test(document.querySelector("#smdPrep .tt-dr").textContent);`) === true, "the day list starts today, with dates");
@@ -243,6 +243,28 @@ try {
   await ev(`while (PREP._host.stack().length > 1) PREP._host.stack().pop(); PREP._host.stack().push(function(){}); PREP._host.rerender(); return 1;`);
   await act("tt-open");
   ok(await until(`var b=document.querySelector('#smdPrep [data-act=tt-tick][data-v="errors"]'); return !!b && b.getAttribute("aria-checked") === "true";`, 5000), "Error review ticks itself when its run is done");
+  // The day's QBank modules: listed with size and progress, and each opens in QBank.
+  ok(await until(`var r=document.querySelector('#smdPrep .tt-qbl .tt-qb[data-m="ana-brachial-plexus"]'); return !!r && /QBank modules for today/.test(document.querySelector("#smdPrep .tt-view").innerText) && /\\d+ questions · \\d+ seen/.test(r.textContent);`, 3000), "today's QBank module is listed with its questions and progress: " + await text("#smdPrep .tt-qbl"));
+  ok(await small("#smdPrep .tt-qbl") === "", "QBank rows at least 44 px");
+  await click('#smdPrep .tt-qb[data-m="ana-brachial-plexus"]');
+  ok(await until(`return !document.querySelector("#smdPrep .tt-view") && /Brachial plexus/.test(document.getElementById("smdPrep").innerText);`, 5000), "the QBank row opens the module");
+  await ev(`while (PREP._host.stack().length > 1) PREP._host.stack().pop(); PREP._host.rerender(); return 1;`);
+  await act("tt-open");
+  await until(`return !!document.querySelector("#smdPrep .tt-view");`, 3000);
+  // A grand test review day: the test's own misses are named one by one, and its most-missed module is repaired.
+  await ev(`var s=PREP._host.store(), td=PREP._host.today(); s.tt.days.forEach(function(y){ if (y.d === td) { y.k = "gtr"; y.t = []; } }); s.mt["${Q1}"] = ["anatomy","ana-brachial-plexus",null,Date.now(),"A man cannot abduct his arm"]; s.mh = (s.mh||[]).concat([{ ts: Date.now() - 864e5, label: "NEET-PG pattern", marks: 40, max: 200, n: 50, wq: ["${Q1}"], wm: { "ana-brachial-plexus": 1 } }]); s.pt = null; PREP._host.save(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var v=document.querySelector("#smdPrep .tt-view"); return !!v && /Name each error/.test(v.innerText) && /0 of 1/.test(v.innerText) && /QBank modules to repair today/.test(v.innerText) && /1 missed in the test/.test(v.innerText) && /1 miss, 0 named/.test(v.innerText);`, 5000), "review day: name each error (0 of 1), the test's most-missed module to repair");
+  await click("#smdPrep [data-act=tt-gtrev]");
+  ok(await until(`return !!document.querySelector("#smdPrep .tt-gr") && /A man cannot abduct his arm/.test(document.querySelector("#smdPrep .tt-gr").innerText) && document.querySelectorAll("#smdPrep [data-act=tt-tag]").length === 4;`, 3000), "the review lists the miss with four reasons");
+  ok(await small("#smdPrep .tt-gr") === "", "review buttons at least 44 px " + await small("#smdPrep .tt-gr"));
+  await shot("rw-gt-review");
+  await click('#smdPrep [data-act=tt-tag][data-v="mixed"]');
+  ok(await until(`return PREP._host.store().mt["${Q1}"][2] === "mixed" && /1 of 1 named/.test(document.querySelector("#smdPrep .tt-gr").innerText);`, 3000), "a reason is saved on the mistake");
+  await ev(`PREP._host.stack().pop(); PREP._host.rerender(); return 1;`);
+  ok(await until(`var b=document.querySelector('#smdPrep .tt-bk [data-act=tt-gtrev]'); return !!b && b.closest("li").querySelector(".tt-tick").getAttribute("aria-checked") === "true" && /Mixed up two options 1/.test(document.querySelector("#smdPrep .tt-view").innerText);`, 3000), "named: the block ticks itself and the reasons are counted");
+  await shot("rw-gt-day");
+  await ev(`var s=PREP._host.store(), td=PREP._host.today(); s.tt.days.forEach(function(y){ if (y.d === td) { y.k = "learn"; y.t = ["ana-brachial-plexus"]; } }); s.pt = null; PREP._host.save(); PREP._host.rerender(); return 1;`);
+  await until(`return /QBank modules for today/.test(document.querySelector("#smdPrep .tt-view").innerText);`, 3000);
   // The PDF: shared through the phone's share sheet; here the harness takes the download.
   await click("#smdPrep [data-act=tt-pdf]");
   ok(await until(`return !!window.__rwPdf && /^ReWise-plan-\\d{4}-\\d{2}-\\d{2}\\.pdf$/.test(window.__rwPdf.name) && window.__rwPdf.size > 2000;`, 3000), "Share the plan as PDF makes the file");
@@ -255,6 +277,7 @@ try {
     const { spawnSync } = await import("node:child_process");
     const r = spawnSync("pdftotext", ["-layout", f, "-"], { encoding: "utf8" });
     if (r.status === 0) ok(/ReWise: NEET-PG/.test(r.stdout) && /Date-wise plan/.test(r.stdout) && /Brachial plexus/.test(r.stdout) && /Daily routine/.test(r.stdout) && /You marked it weak/.test(r.stdout), "pdftotext reads the plan: title, routine, dates, the weak topic and its reason");
+    if (r.status === 0) ok(/QBank modules/.test(r.stdout), "the date table names the QBank modules");
     else console.log("SKIP pdftotext not installed");
   }
   await shot("rw-view");
