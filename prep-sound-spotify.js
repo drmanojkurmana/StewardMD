@@ -8,7 +8,7 @@
 
    Auth is Authorization Code + PKCE with NO client secret anywhere. Minimum scopes only (see
    SCOPES). Tokens live in memory only; nothing goes to PrepNucleus analytics or the AI Tutor,
-   and no listening history is collected. The PKCE verifier + OAuth state sit in sessionStorage
+   and no listening history is collected. The PKCE verifier + OAuth state sit in localStorage
    only for the redirect round-trip and are deleted at exchange. Playback path: the Spotify Web
    API player endpoints controlling the learner's active Spotify app on every platform — see
    vault/plans/PrepSound-spotify-spike.md for why (no Web Playback SDK, no App Remote in v1).
@@ -73,7 +73,10 @@
   function playlistOf(p) {
     if (!p || !p.uri) return null;
     return { kind: "playlist", uri: p.uri, name: String(p.name || "Untitled playlist"),
-      owner: p.owner ? String(p.owner.display_name || "") : "", tracks: p.tracks ? (p.tracks.total || 0) : 0 };
+      owner: p.owner ? String(p.owner.display_name || "") : "", tracks: count(p.items) != null ? count(p.items) : count(p.tracks) };
+  }
+  // Spotify renamed playlist.tracks to playlist.items (2026 Web API); read either, null when neither has a total.
+  function count(o) { return o && !Array.isArray(o) && typeof o.total === "number" ? o.total : null;
   }
   function parsePlaylists(j) { return ((j && j.items) || []).map(playlistOf).filter(Boolean); }
   function parseSearch(j) {
@@ -152,20 +155,24 @@
       if (!store.has()) return Promise.reject(apiError(401));
       return store.needsRefresh() ? refresh() : Promise.resolve(true);
     }
+    function bodyOf(r) {
+      if (r.status === 204) return null;
+      return (r.text ? r.text() : r.json().then(JSON.stringify)).then(function (t) { if (!t) return null; try { return JSON.parse(t); } catch (e) { return null; } });
+    }
     function call(method, path, body) {
       return ensureToken().then(function () {
         return deps.fetch(API + path, { method: method,
           headers: { Authorization: "Bearer " + store.access(), "Content-Type": "application/json" },
           body: body ? JSON.stringify(body) : undefined });
       }).then(function (r) {
-        if (r.status === 200 || r.status === 204) return r.status === 204 ? null : r.json();
+        if (r.status === 200 || r.status === 204) return bodyOf(r);
         if (r.status === 401) { // one forced refresh + one retry, then surface auth_expired
           return refresh().then(function () {
             return deps.fetch(API + path, { method: method,
               headers: { Authorization: "Bearer " + store.access(), "Content-Type": "application/json" },
               body: body ? JSON.stringify(body) : undefined });
           }).then(function (r2) {
-            if (r2.status === 200 || r2.status === 204) return r2.status === 204 ? null : r2.json();
+            if (r2.status === 200 || r2.status === 204) return bodyOf(r2);
             throw apiError(r2.status, retryOf(r2));
           });
         }
@@ -177,7 +184,8 @@
       store: store, exchange: exchange, refresh: refresh,
       me: function () { return call("GET", "/me"); },
       player: function () { return call("GET", "/me/player").then(parsePlayer); },
-      play: function (body) { return call("PUT", "/me/player/play", body || {}); },
+      play: function (body, deviceId) { return call("PUT", "/me/player/play" + (deviceId ? "?device_id=" + encodeURIComponent(deviceId) : ""), body || {}); },
+      devices: function () { return call("GET", "/me/player/devices").then(function (j) { return (j && j.devices) || []; }); },
       pause: function () { return call("PUT", "/me/player/pause"); },
       next: function () { return call("POST", "/me/player/next"); },
       previous: function () { return call("POST", "/me/player/previous"); },
@@ -296,7 +304,7 @@
   function listsHtml() {
     var h = "";
     function item(it) {
-      var sub = it.kind === "track" ? it.artists : (it.tracks + (it.tracks === 1 ? " track" : " tracks"));
+      var sub = it.kind === "track" ? it.artists : it.tracks == null ? "Playlist" : (it.tracks + (it.tracks === 1 ? " track" : " tracks"));
       if (S.premium) return '<li><button type="button" class="pn-sound-sp-item" data-act="sp-pick" data-v="' + esc(it.uri) + '"><span class="pn-sound-sp-ib">' + ico("play") + '</span><span class="pn-sound-sp-it"><b>' + esc(it.name) + "</b><small>" + esc(sub) + "</small></span></button></li>";
       return '<li><a class="pn-sound-sp-item" href="' + esc(openUrl(it.uri)) + '" target="_blank" rel="noopener"><span class="pn-sound-sp-ib">' + ico("ext") + '</span><span class="pn-sound-sp-it"><b>' + esc(it.name) + "</b><small>" + esc(sub) + " · Open in Spotify</small></span></a></li>";
     }
@@ -326,6 +334,7 @@
   function fail(e) { S.err = e && e.message ? e : { message: "Spotify did not answer. Try again." }; S.busy = false; paintSheet(); }
   function refresh() {
     var c = client();
+    G.setTimeout(function () { if (S.sheet) c.player().then(function (pl) { S.player = pl; paintSheet(); }, function () {}); }, 700);
     return c.player().then(function (pl) { S.player = pl; S.err = null; paintSheet(); }, fail);
   }
   function loadConnected() {
@@ -359,8 +368,8 @@
   function connect() {
     var verifier = makeVerifier(rng), state = makeState(rng);
     try {
-      G.sessionStorage.setItem(VERIFIER_KEY, verifier);
-      G.sessionStorage.setItem(STATE_KEY, state);
+      G.localStorage.setItem(VERIFIER_KEY, verifier);
+      G.localStorage.setItem(STATE_KEY, state);
     } catch (e) { if (S.host) S.host.toast("Sign-in needs browser storage for a moment. Allow it and try again."); return; }
     subtleChallenge(verifier).then(function (ch) {
       G.location.href = authorizeUrl({ clientId: CID, redirectUri: redirectUri(), state: state, challenge: ch });
@@ -373,17 +382,32 @@
     var code = (src.match(/[?&]code=([^&#]+)/) || [])[1];
     if (!code) return;
     var state = (src.match(/[?&]state=([^&#]+)/) || [])[1], want = null, verifier = null;
-    try { want = G.sessionStorage.getItem(STATE_KEY); verifier = G.sessionStorage.getItem(VERIFIER_KEY); } catch (e) {}
-    try { G.sessionStorage.removeItem(STATE_KEY); G.sessionStorage.removeItem(VERIFIER_KEY); } catch (e) {}
+    try { want = G.localStorage.getItem(STATE_KEY); verifier = G.localStorage.getItem(VERIFIER_KEY); } catch (e) {}
+    try { G.localStorage.removeItem(STATE_KEY); G.localStorage.removeItem(VERIFIER_KEY); } catch (e) {}
     if (!url) try { G.history.replaceState(null, "", G.location.pathname + G.location.hash); } catch (e) {}
-    if (!state || !want || state !== want || !verifier) return;
+    if (!state || !want || state !== want || !verifier) return say("Spotify sign-in did not finish. Tap Connect Spotify again.");
     client().exchange(decodeURIComponent(code), verifier).then(function () {
-      if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
-    }, function () {});
+      say("Spotify connected.");
+      if (S.sheet) paintSheet(); else if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
+    }, function (e) { say((e && e.message) || "Spotify sign-in failed. Tap Connect Spotify again."); });
   }
+  function say(msg) { try { var h = S.host || (G.PREP && G.PREP._host); if (h && h.toast) h.toast(msg); else if (G.toast) G.toast(msg); } catch (e) {} }
   function pick(uri) {
     var body = /^spotify:track:/.test(uri) ? { uris: [uri] } : { context_uri: uri };
-    client().play(body).then(function () { closeSheet(); }, fail);
+    client().play(body).then(function () { closeSheet(); }, function (e) {
+      if (!e || e.reason !== "no_active_device") return fail(e);
+      // Nothing active: start it on this account's first available device; with none, open it in the Spotify app.
+      client().devices().then(function (ds) {
+        var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
+        if (d) return client().play(body, d.id).then(function () { closeSheet(); }, fail);
+        openInSpotify(uri);
+      }, function () { openInSpotify(uri); });
+    });
+  }
+  function openInSpotify(uri) {
+    var m = /^spotify:(track|playlist|album):([A-Za-z0-9]+)$/.exec(uri || "");
+    closeSheet();
+    G.location.href = m ? "https://open.spotify.com/" + m[1] + "/" + m[2] : "https://open.spotify.com/";
   }
   function act(a, b, host) {
     if (host) S.host = host;
@@ -436,10 +460,13 @@
     dockButtonHtml: dockButtonHtml, adapter: adapter, back: function () { return closeSheet(); },
     leave: function () { return closeSheet(); }, _pure: PURE, _s: S };
   handleReturn();
-  // shortcut: warm return only (appUrlOpen); if the OS killed the app during sign-in the sessionStorage verifier is gone and the user taps Connect again.
+  // Warm return (appUrlOpen) and cold start from the link (getLaunchUrl); the verifier is single-use, so a repeat is a no-op.
   try {
-    var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App;
-    if (AppP) AppP.addListener("appUrlOpen", function (d) { if (d && /^stewardmd:\/\/spotify-callback/.test(d.url || "")) handleReturn(d.url); });
+    var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App, isCb = function (u) { return /^stewardmd:\/\/spotify-callback/.test(u || ""); };
+    if (AppP) {
+      AppP.addListener("appUrlOpen", function (d) { if (d && isCb(d.url)) handleReturn(d.url); });
+      AppP.getLaunchUrl().then(function (d) { if (d && isCb(d.url)) handleReturn(d.url); }).catch(function () {});
+    }
   } catch (e) {}
 })(typeof window !== "undefined" ? window : this);
 
