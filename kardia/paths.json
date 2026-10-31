@@ -1,0 +1,63 @@
+{
+ "v": 1,
+ "review": "ai_drafted",
+ "note": "Thin overlays only. Every step points at an existing lesson, Echo Lab view, calculator, case or MCQ id. No content is copied here.",
+ "paths": [
+  {
+   "id": "aortic-stenosis",
+   "title": "Aortic stenosis",
+   "sub": "From the calcified valve to the gradient, the area and the decision.",
+   "steps": [
+    { "type": "lesson", "id": "view_a5c" },
+    { "type": "lesson", "id": "path_aortic_stenosis" },
+    { "type": "view", "id": "tte_a5c" },
+    { "type": "lesson", "id": "dop_continuity_ava" },
+    { "type": "calc", "id": "as-continuity" },
+    { "type": "case", "id": "kd11a_as_severe_01" },
+    { "type": "mcq", "ids": ["pathology003", "pathology004", "measurements015", "measurements016", "measurements017", "measurements018", "doppler005", "doppler006", "doppler020", "doppler021"] }
+   ]
+  },
+  {
+   "id": "lv-function-ef",
+   "title": "LV function and EF",
+   "sub": "Trace the ventricle, get a true ejection fraction and read the weak pump.",
+   "steps": [
+    { "type": "lesson", "id": "view_a4c" },
+    { "type": "lesson", "id": "meas_simpson_ef" },
+    { "type": "view", "id": "tte_a4c" },
+    { "type": "lesson", "id": "path_dilated_cardiomyopathy" },
+    { "type": "calc", "id": "lv-ef" },
+    { "type": "case", "id": "kd11a_dcm_severe_01" },
+    { "type": "mcq", "ids": ["measurements001", "measurements002", "measurements003", "measurements004", "measurements035", "measurements040", "pathology013", "pathology014", "pathology040", "views029"] }
+   ]
+  },
+  {
+   "id": "right-heart-pressure",
+   "title": "Right heart and pulmonary pressure",
+   "sub": "Size the right heart, measure TAPSE and turn the TR jet into a pressure.",
+   "steps": [
+    { "type": "lesson", "id": "view_a4c_rv_focus" },
+    { "type": "lesson", "id": "meas_rv_tapse" },
+    { "type": "view", "id": "tte_a4c_rv_focus" },
+    { "type": "lesson", "id": "meas_pasp" },
+    { "type": "calc", "id": "rvsp" },
+    { "type": "case", "id": "kd11a_ph_intermediate_01" },
+    { "type": "mcq", "ids": ["measurements007", "measurements008", "measurements009", "measurements010", "measurements032", "measurements033", "measurements036", "pathology009", "pathology027", "pathology046"] }
+   ]
+  },
+  {
+   "id": "pocus-trauma-fast",
+   "title": "POCUS trauma (FAST and eFAST)",
+   "sub": "Free fluid, pericardial fluid and lung sliding in the injured patient.",
+   "steps": [
+    { "type": "lesson", "id": "pocus_fast_protocol" },
+    { "type": "lesson", "id": "pocus_efast_protocol" },
+    { "type": "view", "id": "pocus_fast_ruq" },
+    { "type": "lesson", "id": "pocus_fast_subxiphoid" },
+    { "type": "calc", "id": "effusion-size" },
+    { "type": "case", "id": "kd11a_tamponade_severe_01" },
+    { "type": "mcq", "ids": ["pocus001", "pocus002", "pocus003", "pocus004", "pocus005", "pocus006", "pocus007", "pocus008", "pocus011", "pocus035"] }
+   ]
+  }
+ ]
+}
