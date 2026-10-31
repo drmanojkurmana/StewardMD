@@ -371,7 +371,8 @@ Do not optimise for listening minutes or longer study sessions as a goal in itse
 3. **First-party audio pack: ambient and white noise only.**
 4. Playback auto-resume after restart: off by default, explicit preference (unchanged recommendation).
 5. Offline music: deferred until asset licences explicitly allow caching (unchanged recommendation).
-6. Still open: Apple Music Android SDK result, Spotify approval outcome.
+6. **Spotify approval request: not yet** (owner, 2026-10-31). Build and test on allowlisted accounts first; send the request when the mini-player works end to end, so it describes a real feature.
+7. Still open: Apple Music Android SDK result.
 
 ## 15. Definition of done
 

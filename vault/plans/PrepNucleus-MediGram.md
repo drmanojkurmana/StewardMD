@@ -369,9 +369,10 @@ No test should require real YouTube playback or a live paid AI call; use determi
 1. **UI name: PrepReels** (MediGram stays the internal/plan name; flag stays `smd_prep_medigram`).
 2. **v1 modes: all three** (Study Feed, Clinical Discovery, Smart Break). Each mode gets its own sub-flag so one can be switched off without the others; Study Feed is the default and the only one on until the others pass their content-review gate. Risk noted: Smart Break is the highest distraction risk, so it keeps the section 3.3 limits (3 or 5 minutes, user-chosen, no autoplay chain, no lock).
 3. **Video sources: own micro-lessons plus official YouTube embeds.** YouTube stays behind the section 7 policy review and the Phase 2 gate; the feed must work with YouTube disabled.
-4. **Languages for the first video set: English, Hindi and one regional language.** The regional language is still to be picked; each language needs its own captions and clinical reviewer before it ships.
+4. **Languages for the first video set: English, Hindi and one regional language.** The regional language is **Telugu** (owner, 2026-10-31); each language needs its own captions and clinical reviewer before it ships.
 5. **Budget: free tier only, no paid media.** YouTube API stays inside the free quota, and videos are built from existing lesson assets. Any paid media or quota needs a new owner yes.
-6. Still open: pilot cohort, duration and primary delayed-recall outcome; which regional language.
+6. **Pilot: 30 learners, 4 weeks**, matched topics against normal PrepNucleus practice; primary outcome is 7-day delayed recall on concepts met in PrepReels, pre-registered before the pilot starts. A 30-day recall check and mock-test comparison are secondary.
+7. Nothing is open for the owner before Phase 0 starts.
 
 ## 17. Definition of done
 
