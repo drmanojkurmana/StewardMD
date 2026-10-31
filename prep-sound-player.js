@@ -199,9 +199,11 @@
 
     var art = "";
     if (c.artwork) {
-      art = m.artworkUrl
-        ? '<div class="pn-player-art"><img src="' + esc(m.artworkUrl) + '" alt="" width="300" height="300" loading="lazy"></div>'
-        : tileHtml(m);
+      // Spotify's display rules: artwork shown unmodified and linking back to the item on Spotify (opts.artHref).
+      var img = '<img src="' + esc(m.artworkUrl || "") + '" alt="" width="300" height="300" loading="lazy">';
+      art = !m.artworkUrl ? tileHtml(m) : opts.artHref
+        ? '<a class="pn-player-art" href="' + esc(opts.artHref) + '" target="_blank" rel="noopener" aria-label="Open ' + esc(m.title) + ' in ' + esc(m.providerLabel) + '">' + img + "</a>"
+        : '<div class="pn-player-art">' + img + "</div>";
     }
     var seek = "";
     if (m.durationMs > 0) {
@@ -238,7 +240,7 @@
     var likeNote = !m.likeAvailable && c.like
       ? '<p class="pn-player-note">' + esc(opts.likeDisabledReason || "Reconnect Spotify to save songs") + "</p>" : "";
 
-    return '<section class="pn-player" data-provider="' + esc(m.provider) + '" aria-label="Now playing on ' + esc(m.providerLabel) + '">' +
+    return '<section class="pn-player' + (opts.layout === "row" ? " pn-player--row" : "") + '" data-provider="' + esc(m.provider) + '" aria-label="Now playing on ' + esc(m.providerLabel) + '">' +
       head + art +
       '<h3 class="pn-player-title">' + esc(m.title) + "</h3>" +
       (m.artist ? '<p class="pn-player-artist">' + esc(m.artist) + "</p>" : "") +

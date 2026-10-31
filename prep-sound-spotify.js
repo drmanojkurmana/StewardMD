@@ -72,6 +72,18 @@
     return { kind: "track", uri: t.uri, id: t.id ? String(t.id) : "", name: String(t.name || "Untitled"), artists: artists,
       album: t.album ? String(t.album.name || "") : "", images: (t.album && t.album.images) || [], durationMs: t.duration_ms || 0 };
   }
+  /* GET /me/player/queue -> Up next rows. Tracks carry album art; podcast episodes carry their own
+     images or the show's. Unknown shapes are dropped, never rendered. */
+  function parseQueue(j) {
+    var list = (j && (Array.isArray(j.queue) ? j.queue : Array.isArray(j.items) ? j.items : null)) || [];
+    return list.map(function (it) {
+      if (!it || !it.uri) return null;
+      var t = trackOf(it), show = it.show || {};
+      var subtitle = t.artists || String(show.name || "");
+      var images = (it.album && it.album.images) || it.images || show.images || [];
+      return { uri: it.uri, title: t.name, subtitle: subtitle, images: images, durationMs: t.durationMs };
+    }).filter(Boolean);
+  }
   /* Provider-neutral Now Playing model for prep-sound-player.js from a raw
      GET /me/player body (2026 shapes included: shuffle_state, repeat_state,
      device.volume_percent). liked is merged in by the client (contains call). */
@@ -319,6 +331,7 @@
       me: function () { return call("GET", "/me"); },
       player: function () { return call("GET", "/me/player").then(parsePlayer); },
       /* Full neutral model for prep-sound-player.js (+ granted-scope flag). */
+      queue: function () { return call("GET", "/me/player/queue").then(parseQueue); },
       nowPlaying: function () {
         return call("GET", "/me/player").then(function (j) {
           var base = parseNowPlaying(j, null);
@@ -350,7 +363,7 @@
   var PURE = { esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
-    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, capsForPlayer: capsForPlayer,
+    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, parseQueue: parseQueue, capsForPlayer: capsForPlayer,
     apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient,
     makePluginSecureStore: makePluginSecureStore, REFRESH_SECRET_KEY: REFRESH_SECRET_KEY,
     SCOPES: SCOPES, AUTH_URL: AUTH_URL, TOKEN_URL: TOKEN_URL, API: API };
@@ -395,7 +408,11 @@
   /* ================= live state + sheet ================= */
   var D = G.document;
   var S = { host: null, sheet: null, prev: null, client: null, premium: false, me: null,
-    player: null, now: null, playerHandle: null, playlists: null, results: null, busy: false, err: null, query: "" };
+    player: null, now: null, playerHandle: null, playlists: null, results: null, busy: false, err: null, query: "",
+    queue: null, showAll: false, provOpen: false, state: readState(), dock: null, tick: 0 };
+  // Mini or closed, per device (owner 2026-10-31). A UI preference only; never tokens or listening data.
+  function readState() { try { return G.localStorage.getItem("smd_prep_player_state") === "closed" ? "closed" : "mini"; } catch (e) { return "mini"; } }
+  function setState(v) { S.state = v; try { G.localStorage.setItem("smd_prep_player_state", v); } catch (e) {} }
   function rng(n) { var b = new Uint8Array(n); (G.crypto || G.msCrypto).getRandomValues(b); return b; }
   function subtleChallenge(verifier) {
     var data = new TextEncoder().encode(verifier);
@@ -420,8 +437,48 @@
     var p = { music: '<path d="M9 18V6l10-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/>',
       play: '<path d="M8 5v14l11-7z"/>', pause: '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>',
       next: '<path d="M6 6l8 6-8 6zM16 6h2v12h-2z"/>', prev: '<path d="M18 6l-8 6 8 6zM6 6h2v12H6z"/>',
-      ext: '<path d="M14 4h6v6h-2V6.4L10.4 14 9 12.6 16.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/>' };
+      ext: '<path d="M14 4h6v6h-2V6.4L10.4 14 9 12.6 16.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/>',
+      chev: '<path d="M7.4 9 12 13.6 16.6 9 18 10.4l-6 6-6-6z"/>', min: '<path d="M5 11h14v2H5z"/>',
+      close: '<path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4z"/>' };
     return '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" focusable="false">' + (p[name] || p.music) + "</svg>";
+  }
+  // Spotify icon (brand guidelines: unaltered, Spotify green). Path from the public Spotify icon mark.
+  function spotifyMark() {
+    return '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>';
+  }
+  function fmt(ms) { var t = Math.max(0, Math.round((ms || 0) / 1000)); return Math.floor(t / 60) + ":" + ("0" + (t % 60)).slice(-2); }
+  function thumb(images, px) {
+    var u = G.PREP_SOUND_PLAYER ? G.PREP_SOUND_PLAYER._pure.pickArtwork(images || [], 64) : null;
+    return u ? '<img src="' + esc(u) + '" alt="" width="' + px + '" height="' + px + '" loading="lazy">' : '<span class="pn-sound-sp-thumb0" aria-hidden="true">' + ico("music") + "</span>";
+  }
+  // Other places the switcher can send the learner: only providers whose module is loaded on this device.
+  function otherProviders() { return G.PREP_SOUND && G.PREP_SOUND.act ? [{ id: "sound", label: "PrepNucleus ambience and other apps" }] : []; }
+  function headHtml(connected) {
+    var others = otherProviders();
+    var h = '<div class="pn-sound-sp-head"><span class="pn-sound-sp-logo">' + spotifyMark() + '</span><h2 id="pnSoundSpT">Music</h2>' +
+      (others.length ? '<button type="button" class="pn-sound-sp-prov" data-act="sp-prov" aria-haspopup="true" aria-expanded="' + !!S.provOpen + '">on Spotify' + ico("chev") + "</button>"
+        : '<span class="pn-sound-sp-brand">on Spotify</span>') +
+      '<span class="pn-sound-sp-hsp"></span>' +
+      (connected ? '<button type="button" class="pn-sound-sp-hbtn" data-act="sp-min" aria-label="Minimise player">' + ico("min") + "</button>" : "") +
+      '<button type="button" class="pn-sound-sp-hbtn" data-act="sp-close" aria-label="Close player">' + ico("close") + "</button></div>";
+    if (S.provOpen && others.length) {
+      h += '<div class="pn-sound-sp-menu" role="group" aria-label="Play music from"><button type="button" class="pn-sound-sp-mi on" aria-pressed="true" data-act="sp-prov">Spotify</button>' +
+        others.map(function (o) { return '<button type="button" class="pn-sound-sp-mi" aria-pressed="false" data-act="sp-switch" data-v="' + o.id + '">' + esc(o.label) + "</button>"; }).join("") + "</div>";
+    }
+    return h;
+  }
+  function nextHtml() {
+    if (S.queue == null) return "";
+    var rows = S.showAll ? S.queue : S.queue.slice(0, 3);
+    var h = '<div class="pn-sound-sp-nexthead"><h3>Up next</h3><button type="button" class="pn-sound-sp-link" data-act="sp-all" aria-expanded="' + !!S.showAll + '">' +
+      (S.showAll ? "Show less" : "See all") + "</button></div>";
+    if (!rows.length) return h + '<p class="pn-sound-sp-note">Nothing queued. Open See all to pick a playlist or search.</p>';
+    return h + '<ul class="pn-sound-sp-queue">' + rows.map(function (q) {
+      var inner = thumb(q.images, 48) + '<span class="pn-sound-sp-it"><b>' + esc(q.title) + "</b><small>" + esc(q.subtitle) + '</small></span><span class="pn-sound-sp-dur">' + (q.durationMs ? fmt(q.durationMs) : "") + "</span>";
+      return S.premium
+        ? '<li><button type="button" class="pn-sound-sp-qi" data-act="sp-pick" data-v="' + esc(q.uri) + '" aria-label="Play ' + esc(q.title) + ' now">' + inner + "</button></li>"
+        : '<li><a class="pn-sound-sp-qi" href="' + esc(openUrl(q.uri)) + '" target="_blank" rel="noopener">' + inner + "</a></li>";
+    }).join("") + "</ul>";
   }
   function status() {
     if (!client().store.has()) return Promise.resolve({ state: "idle" });
@@ -432,7 +489,7 @@
   function sheetHtml() {
     var c = client(), h = "";
     h += '<span class="pn-grab" aria-hidden="true"></span>';
-    h += '<div class="pn-sound-sp-head"><h2 id="pnSoundSpT">Music</h2><span class="pn-sound-sp-brand">on Spotify</span></div>';
+    h += headHtml(c.store.has());
     if (!c.store.has()) {
       h += '<p class="pn-sound-sp-note" id="pnSoundSpD">Connect your own Spotify to change songs without leaving your test. Music never starts on its own.</p>' +
         '<div class="pn-sheet-act"><button type="button" class="pn-btn pri pn-sound-sp-connect" data-act="sp-connect">Connect Spotify</button></div>';
@@ -463,12 +520,13 @@
       if (capabilities(true, S.player).volumeControl)
         h += '<label class="pn-sound-sp-vol">Volume <input type="range" min="0" max="100" step="1" value="' + S.player.device.volume + '" data-sp-vol aria-label="Volume"></label>';
     }
+    h += '<div data-sp-next>' + nextHtml() + "</div>";
+    if (!S.showAll) return h;   // search, playlists and Disconnect live behind See all (kept, never removed)
     h += '<form class="pn-sound-sp-search" data-sp-search><label class="pn-sr" for="pnSoundSpQ">Search Spotify</label>' +
       '<input id="pnSoundSpQ" type="search" autocomplete="off" placeholder="Search tracks and playlists" value="' + esc(S.query) + '">' +
       '<button type="submit" class="pn-btn sm">Search</button></form>';
     h += '<div class="pn-sound-sp-lists">' + listsHtml() + "</div>";
-    h += '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="sp-disconnect">Disconnect</button>' +
-      '<button type="button" class="pn-btn" data-act="sp-close">Back to study</button></div>';
+    h += '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="sp-disconnect">Disconnect Spotify</button></div>';
     return h;
   }
   function listsHtml() {
@@ -506,12 +564,16 @@
     var box = S.sheet.querySelector("[data-sp-player]");
     if (!box) return;
     function fresh() {
-      return client().nowPlaying().then(function (m) { S.now = m; return cardState(); });
+      return Promise.all([client().nowPlaying(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
+        S.now = a[0]; S.queue = a[1] || [];
+        var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"); if (nb) nb.innerHTML = nextHtml();
+        return cardState();
+      });
     }
     function after(p) { p.then(function () { return fresh(); }).then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, fail); }
     S.playerHandle = PL.mount(box, {
       getState: cardState,
-      renderOpts: { pickLabel: "Pick a playlist or search below" },
+      renderOpts: { layout: "row", pickLabel: "Pick a playlist or search", artHref: S.now && S.now.trackUri ? openUrl(S.now.trackUri) : "" },
       fetchState: fresh,
       onAction: function (act, value) {
         var m = S.now || {};
@@ -551,6 +613,7 @@
       S.me = me; S.premium = !!(me && me.product === "premium");
       return Promise.all([c.player().then(function (pl) { S.player = pl; }, function (e) { S.err = e; }),
         c.nowPlaying().then(function (m) { S.now = m; }, function () {}),
+        c.queue().then(function (q) { S.queue = q; }, function () { S.queue = []; }),
         c.playlists().then(function (pl) { S.playlists = pl; }, function () { S.playlists = []; })]);
     }).then(paintSheet, fail);
   }
@@ -559,10 +622,14 @@
     var root = S.host && S.host.root && S.host.root();
     if (!root || S.sheet) return S.sheet ? true : false;
     var el = D.createElement("div");
-    el.className = "pn-sheet-wrap pn-sound-sp-wrap"; el.id = "pnSoundSpSheet";
-    el.innerHTML = '<div class="pn-scrim" data-act="sp-close"></div><section class="pn-sheet pn-sound-sp-sheet" role="dialog" aria-modal="true" aria-labelledby="pnSoundSpT" tabindex="-1"></section>';
+    // Wide screens: a floating panel beside the study page (no scrim, not modal). Phones: the bottom sheet.
+    var wide = !!(G.matchMedia && G.matchMedia("(min-width: 700px)").matches);
+    el.className = "pn-sheet-wrap pn-sound-sp-wrap" + (wide ? " is-panel" : ""); el.id = "pnSoundSpSheet";
+    el.innerHTML = (wide ? "" : '<div class="pn-scrim" data-act="sp-min"></div>') +
+      '<section class="pn-sheet pn-sound-sp-sheet" role="dialog" aria-modal="' + !wide + '" aria-labelledby="pnSoundSpT" tabindex="-1"></section>';
+    el.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.stopPropagation(); minimise(); } });
     S.prev = D.activeElement; root.appendChild(el); S.sheet = el;
-    paintSheet();
+    paintSheet(); paintDock();
     var f = el.querySelector(".pn-sheet"); try { f.focus({ preventScroll: true }); } catch (e) {}
     if (client().store.has() && S.playlists == null) loadConnected();
     return true;
@@ -572,10 +639,12 @@
     try { if (G.PREP_SOUND_PLAYER) { var pb = S.sheet.querySelector("[data-sp-player]"); if (pb) G.PREP_SOUND_PLAYER.unmount(pb); } } catch (e) {}
     S.playerHandle = null;
     if (S.sheet.parentNode) S.sheet.parentNode.removeChild(S.sheet);
-    S.sheet = null;
+    S.sheet = null; S.provOpen = false;
     try { if (S.prev && S.prev.isConnected) S.prev.focus({ preventScroll: true }); } catch (e) {}
+    paintDock();
     return true;
   }
+  function minimise() { setState("mini"); return closeSheet(); }
   function connect() {
     var verifier = makeVerifier(rng), state = makeState(rng);
     try {
@@ -605,12 +674,12 @@
   function say(msg) { try { var h = S.host || (G.PREP && G.PREP._host); if (h && h.toast) h.toast(msg); else if (G.toast) G.toast(msg); } catch (e) {} }
   function pick(uri) {
     var body = /^spotify:track:/.test(uri) ? { uris: [uri] } : { context_uri: uri };
-    client().play(body).then(function () { closeSheet(); }, function (e) {
+    client().play(body).then(function () { minimise(); }, function (e) {
       if (!e || e.reason !== "no_active_device") return fail(e);
       // Nothing active: start it on this account's first available device; with none, open it in the Spotify app.
       client().devices().then(function (ds) {
         var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
-        if (d) return client().play(body, d.id).then(function () { closeSheet(); }, fail);
+        if (d) return client().play(body, d.id).then(function () { minimise(); }, fail);
         openInSpotify(uri);
       }, function () { openInSpotify(uri); });
     });
@@ -622,8 +691,14 @@
   }
   function act(a, b, host) {
     if (host) S.host = host;
-    if (a === "sp-open") return openSheet(host);
-    if (a === "sp-close") return closeSheet();
+    if (a === "sp-open") { setState("mini"); return openSheet(host); }
+    if (a === "sp-min") return minimise();
+    if (a === "sp-close") { setState("closed"); return closeSheet(); }
+    if (a === "sp-prov") { S.provOpen = !S.provOpen; return paintSheet(); }
+    if (a === "sp-switch") { closeSheet(); try { G.PREP_SOUND.act("s-open", b, S.host); } catch (e) {} return true; }
+    if (a === "sp-all") { S.showAll = !S.showAll; return paintSheet(); }
+    if (a === "sp-mini-toggle") return (S.now && S.now.isPlaying ? client().pause() : client().play()).then(syncMiniSoon, function () { syncMiniSoon(); });
+    if (a === "sp-mini-next") return client().next().then(syncMiniSoon, function () { syncMiniSoon(); });
     if (a === "sp-connect") return connect();
     if (a === "sp-disconnect") { client().disconnect(); S.premium = false; S.me = null; S.player = null; S.now = null; S.playlists = null; S.results = null; S.err = null; return paintSheet(); }
     if (a === "sp-play") return client().play().then(refresh, fail);
@@ -635,14 +710,34 @@
   function dockButtonHtml() {
     return '<button type="button" class="pn-sound-sp-fab" data-act="sp-open" aria-label="Music on Spotify">' + ico("music") + "</button>";
   }
-  // Until the Sound Dock (rs-sound) lands, mount the round button in the PrepNucleus root.
-  function mountButton() {
-    var root = G.PREP && G.PREP._host && G.PREP._host.root && G.PREP._host.root();
-    if (!root || root.querySelector(".pn-sound-sp-fab")) return;
-    var d = D.createElement("div"); d.innerHTML = dockButtonHtml();
-    root.appendChild(d.firstChild);
+  function miniOn() { return !S.sheet && S.state !== "closed" && client().store.has() && !!(S.now && S.now.title); }
+  function miniHtml() {
+    var m = S.now, pct = m.durationMs ? Math.min(100, Math.round((m.positionMs / m.durationMs) * 100)) : 0;
+    return '<div class="pn-sound-sp-mini" role="region" aria-label="Now playing on Spotify">' +
+      '<button type="button" class="pn-sound-sp-mbody" data-act="sp-open" aria-label="Open player, ' + esc(m.title) + (m.artist ? " by " + esc(m.artist) : "") + '">' +
+      thumb(m.images, 44) + '<span class="pn-sound-sp-it"><b>' + esc(m.title) + "</b><small>" + esc(m.artist || "Spotify") + "</small></span></button>" +
+      (S.premium ? '<button type="button" class="pn-sound-sp-mbtn play" data-act="sp-mini-toggle" aria-label="' + (m.isPlaying ? "Pause" : "Play") + '">' + ico(m.isPlaying ? "pause" : "play") + "</button>" +
+        '<button type="button" class="pn-sound-sp-mbtn" data-act="sp-mini-next" aria-label="Next track">' + ico("next") + "</button>" : "") +
+      '<span class="pn-sound-sp-mprog" aria-hidden="true"><span style="width:' + pct + '%"></span></span></div>';
   }
-  var timer = G.setInterval(function () { try { mountButton(); } catch (e) {} }, 1000);
+  // One dock in the PrepNucleus root: the mini player while something plays, else the round music button.
+  function paintDock() {
+    var root = G.PREP && G.PREP._host && G.PREP._host.root && G.PREP._host.root();
+    if (!root) return;
+    if (!S.dock || !S.dock.isConnected) { S.dock = D.createElement("div"); S.dock.className = "pn-sound-sp-dock"; root.appendChild(S.dock); }
+    var html = S.sheet ? "" : miniOn() ? miniHtml() : dockButtonHtml();
+    S.dock.classList.toggle("is-stacked", !!root.querySelector(".pn-sound-dock"));   // sit above the ambience dock
+    if (S.dock.getAttribute("data-html") !== html) { S.dock.innerHTML = html; S.dock.setAttribute("data-html", html); }
+  }
+  function syncMini() {
+    if (!client().store.has() || S.state === "closed" || S.sheet) return;
+    if (!S.me) client().me().then(function (me) { S.me = me; S.premium = !!(me && me.product === "premium"); paintDock(); }, function () {});
+    client().nowPlaying().then(function (m) { S.now = m; paintDock(); }, function () {});
+  }
+  function syncMiniSoon() { G.setTimeout(syncMini, 600); }
+  var timer = G.setInterval(function () {
+    try { paintDock(); if (++S.tick % 5 === 0 && D.visibilityState !== "hidden") syncMini(); } catch (e) {}
+  }, 1000);
 
   // Sound plan 4.2 adapter, in the exact registry shape prep-sound-providers.js checks:
   // capabilities is a live object (same reference, mutated as Premium/device state arrives).

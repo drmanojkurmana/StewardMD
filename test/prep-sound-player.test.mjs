@@ -190,7 +190,8 @@ test("spotify client: shuffle/repeat/seek URLs and liked fallback across endpoin
 test("css: fixed palette, 44px targets, focus, reduced motion, no glow/gradient/backdrop", () => {
   for (const hex of ["#071318", "#0D1D23", "#42CDB5"]) assert.ok(CSS.includes(hex), "palette " + hex);
   assert.ok(!/linear-gradient|radial-gradient/.test(CSS), "no gradients");
-  assert.ok(!/box-shadow|backdrop-filter/.test(CSS), "no glows or backdrops");
+  // Owner 2026-10-31 asked for subtle shadows: offset soft shadows are allowed, zero-offset glows and backdrop blur are not.
+  assert.ok(!/backdrop-filter/.test(CSS) && !/box-shadow:\s*0\s+0\s/.test(CSS), "no glows or backdrops");
   assert.match(CSS, /\.pn-player-play \{[^}]*width:\s*64px[^}]*height:\s*64px/, "big play/pause target");
   assert.match(CSS, /\.pn-player-iconbtn \{[^}]*width:\s*44px[^}]*height:\s*44px/, "44px icon targets");
   assert.match(CSS, /focus-visible/, "visible focus");

@@ -150,9 +150,9 @@ test("sheet contract + privacy: Connect first, no autoplay, no token persistence
   // First-open state is Connect-only; nothing calls play before a user tap (no play() at load).
   assert.match(src, /Connect Spotify/);
   assert.ok(!/\.play\(/.test(src.split("handleReturn();")[0].split("function handleReturn")[0].slice(-200)) || true);
-  // Only the single-use PKCE verifier + state may touch localStorage (they survive an app reload mid sign-in, removed at exchange); never tokens.
+  // Only the single-use PKCE verifier + state (and the mini/closed UI preference, owner 2026-10-31) may touch localStorage (they survive an app reload mid sign-in, removed at exchange); never tokens.
   const writes = src.match(/localStorage\.setItem\([^,]+/g) || [];
-  assert.ok(writes.every((w) => /setItem\((VERIFIER_KEY|STATE_KEY)$/.test(w)), "tokens/preferences never written to localStorage: " + writes.join(" | "));
+  assert.ok(writes.every((w) => /setItem\((VERIFIER_KEY|STATE_KEY|"smd_prep_player_state")$/.test(w)), "tokens/preferences never written to localStorage: " + writes.join(" | "));
   assert.ok(!/SMD_ANALYTICS|analytics\.track|gtag\(|sendBeacon/.test(src), "no analytics calls");
   assert.ok(!/client_secret/.test(src.replace(/NO client secret|no client secret|No `client_secret`/g, "")), "no client secret anywhere");
   // Session storage holds only the single-use PKCE verifier + state, deleted at exchange.
@@ -255,4 +255,17 @@ test("secure storage: plugin wrapper shape and source contract (no logging, Andr
   assert.match(src, /getPlatform\(\) !== "android"/, "secure storage is gated to native Android");
   assert.match(src, /restoreSession\(\)/, "cold-start restore is wired");
   assert.ok(!/console\.(log|info|warn|error)\([^)]*(refresh|access|token)/i.test(src), "tokens are never logged");
+});
+
+test("queue: Up next rows from GET /me/player/queue (tracks, episodes, unknown shapes dropped)", () => {
+  const rows = P.parseQueue({ queue: [
+    { uri: "spotify:track:a", name: "Rita, popular", artists: [{ name: "Rita Ora" }], duration_ms: 208000, album: { images: [{ url: "https://i.scdn.co/a.jpg", width: 64 }] } },
+    { uri: "spotify:episode:e", name: "Ep 1", duration_ms: 3252000, show: { name: "Workout Show", images: [{ url: "https://i.scdn.co/s.jpg" }] } },
+    { name: "no uri" }, null ] });
+  assert.equal(rows.length, 2);
+  assert.deepEqual([rows[0].title, rows[0].subtitle, rows[0].durationMs], ["Rita, popular", "Rita Ora", 208000]);
+  assert.equal(rows[1].subtitle, "Workout Show");
+  assert.equal(rows[1].images[0].url, "https://i.scdn.co/s.jpg");
+  assert.deepEqual(P.parseQueue({ items: [{ uri: "spotify:track:b", name: "B" }] }).map((r) => r.title), ["B"]);
+  assert.deepEqual(P.parseQueue(null), []);
 });

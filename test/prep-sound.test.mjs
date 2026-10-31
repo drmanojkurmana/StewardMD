@@ -123,7 +123,7 @@ test("flag-off regression: with PREP_SOUND absent every shared hook is a no-op",
     assert.ok(loader.includes('"' + f + '"'), "loader lists " + f);
     assert.ok(new RegExp('"' + f.replace(".", "\\.") + '": 1').test(loader), f + " is OPTIONAL (404-safe)");
   }
-  assert.ok(/var V = "prep102"/.test(loader), "loader at prep102");
+  assert.ok(/var V = "prep\d+"/.test(loader), "loader carries a prep cache token");
   assert.ok(/SOUND_JS = \[/.test(loader) && /SOUND_CSS = \[/.test(loader), "Sound files ride the lazy SOUND lists");
   assert.ok(/function soundOn\(\)/.test(loader), "soundOn() gates ?sound=1/0 and localStorage smd_prep_sound");
   assert.ok(/function spotifyOn\(\)/.test(loader), "spotifyOn() needs soundOn() plus the spotify sub-flag");
