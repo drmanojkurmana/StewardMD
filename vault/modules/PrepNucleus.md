@@ -1800,8 +1800,8 @@ Owner: match other QBanks on bookmarks-plus features. Decision: [[decisions/Deci
   Limits (owner 2026-10-30): one reset in any 3 months and at most 3 in any 12 months (`resetQuota`, log `store.rsl`,
   synced as a scalar). A subject reset counts; a reset that cleared nothing does not. Clearing the app's data also wipes
   the log, but it wipes the progress with it.
-- **Timetable:** superseded by ReWise (below). The v1 subject timetable (`tt.v === 1`) is still read by `PREP_TT.today()`
-  until the student opens ReWise, which offers to switch and saves v2.
+- **Timetable:** superseded by ReWise (below). A stored v1 subject timetable (`tt.v === 1`) switches to ReWise on the
+  next home draw.
 - **Tests:** `test/prep-study-tools.test.mjs` (pure + server) and `test/run-prep-tools-ui.mjs` (headless; SHOTS=<dir>).
 - **Gotcha:** `.pn-panel .pn-btn:not(.pri)` (prep.css) beats a plain `.pn-btn.x`; the red Reset button needs the panel and
   sheet selectors too.
@@ -1887,5 +1887,17 @@ integrated into the app, reminding us what to read, what to practise". Decision:
   (`rw`), smart nudges (`rw_today`, `rw_next`; never on a rest day) and the daily reminder (title "ReWise: ...").
 - **Missed days:** a past learn day whose topics have no answer since that day. Re-plan lays the unread topics from
   today; nothing is doubled up.
-- **Tests:** `test/prep-rewise.test.mjs`; `test/run-prep-tools-ui.mjs` ReWise section (phone and iPad column, home plan,
-  rest day, past exam date). Not built yet: PDF export of the full table.
+- **Block progress (today):** measured where the app can see it, so the tick sets itself: Recall, Topic MCQs, Mixed
+  MCQs, the grand test and a lesson from Today's plan items; Error review from its own run over My mistakes (newest
+  first, `tt.ac[day] = { err, errT }`, counted by the runner's `onAnswer`); Quick recall from flashcards graded today
+  (10 to 40). Reading notes without a lesson stays a hand tick (`tt.tk`). Mixed never shares a module with today's
+  topics, so the two counts stay apart.
+- **PDF:** "Share the plan as PDF" draws the whole plan (routine, own-number priorities, every remaining day, the
+  grand test protocol, rules) with `pdfDoc`, a small PDF 1.4 writer in the file (Helvetica, WinAnsi, AFM widths for
+  wrapping, no library). The phone shares it through Capacitor Filesystem (CACHE) + Share; without the plugins (the
+  test harness) it is a download (`window.__rwPdf`). `PREP_TT._pdf(h)` returns the bytes for tests.
+- **v1 switch:** a stored subject timetable becomes ReWise by itself on the next home draw (same subjects, dates and
+  rest days, grand test Friday unless Friday is a rest day), with a one-time toast.
+- **Tests:** `test/prep-rewise.test.mjs` (planner, reminders, PDF structure: offsets, lengths, footers, wrapping);
+  `test/run-prep-tools-ui.mjs` ReWise section (phone and iPad column, home plan, block progress, Error review run, PDF
+  read back with pdftotext when installed, v1 switch, rest day, past exam date).

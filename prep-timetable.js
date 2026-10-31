@@ -256,9 +256,108 @@
     return c;
   }
 
+  /* ================= ReWise PDF (no library) =================
+     A plain A4 PDF 1.4 with the two standard Helvetica fonts (WinAnsi), drawn from a model:
+       { title, sub, box: { head, text }, facts: [[label, text]], sections: [{ h, p?: [text], table?: { cols: [[label, width
+       share]], rows: [{ cells: [text], fill?: "gt" | "gtr" | "rest" | "now" | "taper" | "exam" }] }, bullets?: [text] }],
+       foot }
+     -> a binary string (every char code under 256), ready for btoa. Widths are Helvetica's AFM widths, so wrapping holds. */
+  var HW = [278,278,355,556,556,889,667,191,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,278,278,584,584,584,556,1015,667,667,722,722,667,611,778,722,278,500,667,556,833,722,778,667,778,722,667,611,722,667,944,667,667,611,278,278,278,469,556,333,556,556,500,556,556,278,556,556,222,222,500,222,833,556,556,556,556,333,500,278,556,500,722,500,500,500,334,260,334,584];
+  var HB = [278,333,474,556,556,889,722,238,333,333,389,584,278,333,278,278,556,556,556,556,556,556,556,556,556,556,333,333,584,584,584,611,975,722,722,722,722,667,611,778,722,278,556,722,611,833,722,778,667,778,722,667,611,722,667,944,667,667,611,333,278,333,584,556,333,556,611,556,611,556,333,611,611,278,278,556,278,889,611,611,611,611,389,556,333,611,556,778,556,556,500,389,280,389,584];
+  var PDF_MAP = { "‘": "'", "’": "'", "“": '"', "”": '"', "–": "-", "—": "-", "•": "-", "…": "...", " ": " ", "→": "->", "≥": ">=", "≤": "<=", "·": "-" };
+  function pdfText(s) { return String(s == null ? "" : s).replace(/[^\x20-\x7e\xa0-\xff]/g, function (c) { return PDF_MAP[c] != null ? PDF_MAP[c] : c === "\n" ? " " : "?"; }); }
+  function textW(s, size, bold) { var t = pdfText(s), w = 0, tb = bold ? HB : HW; for (var i = 0; i < t.length; i++) { var c = t.charCodeAt(i); w += c >= 32 && c <= 126 ? tb[c - 32] : 556; } return w * size / 1000; }
+  // Greedy word wrap to a width; a word longer than the line is cut.
+  function wrap(s, size, bold, width) {
+    var words = pdfText(s).split(/\s+/).filter(Boolean), lines = [], cur = "";
+    words.forEach(function (w) {
+      while (textW(w, size, bold) > width && w.length > 1) { var k = w.length - 1; while (k > 1 && textW(w.slice(0, k), size, bold) > width) k--; if (cur) { lines.push(cur); cur = ""; } lines.push(w.slice(0, k)); w = w.slice(k); }
+      var t = cur ? cur + " " + w : w;
+      if (textW(t, size, bold) <= width) cur = t; else { if (cur) lines.push(cur); cur = w; }
+    });
+    if (cur) lines.push(cur);
+    return lines.length ? lines : [""];
+  }
+  function pesc(s) { return pdfText(s).replace(/\\/g, "\\\\").replace(/\(/g, "\\(").replace(/\)/g, "\\)"); }
+  var PC = { ink: "0.106 0.165 0.290", mut: "0.37 0.40 0.46", head: "0.106 0.165 0.290", line: "0.85 0.86 0.88", box: "0.92 0.95 0.97",
+    gt: "0.99 0.95 0.84", gtr: "0.91 0.94 0.98", rest: "0.91 0.96 0.93", now: "0.86 0.91 0.98", taper: "0.95 0.93 0.98", exam: "0.99 0.90 0.88" };
+  function pdfDoc(m) {
+    var W = 595, Hh = 842, M = 48, CW = W - 2 * M, pages = [], ops = null, y = 0;
+    function page() { ops = []; pages.push(ops); y = Hh - M; }
+    function txt(x, yy, size, bold, s, col) { ops.push("BT /" + (bold ? "F2" : "F1") + " " + size + " Tf " + (col || PC.ink) + " rg " + x.toFixed(2) + " " + yy.toFixed(2) + " Td (" + pesc(s) + ") Tj ET"); }
+    function rect(x, yy, w, h, col) { ops.push(col + " rg " + x.toFixed(2) + " " + yy.toFixed(2) + " " + w.toFixed(2) + " " + h.toFixed(2) + " re f"); }
+    function hline(x, yy, w) { ops.push(PC.line + " RG 0.6 w " + x.toFixed(2) + " " + yy.toFixed(2) + " m " + (x + w).toFixed(2) + " " + yy.toFixed(2) + " l S"); }
+    function need(h) { if (y - h < M + 24) page(); }
+    function para(s, size, bold, col, gap) { wrap(s, size, bold, CW).forEach(function (l) { need(size * 1.35); txt(M, y - size, size, bold, l, col); y -= size * 1.35; }); y -= gap || 4; }
+    page();
+    // Title block
+    wrap(m.title, 22, true, CW).forEach(function (l) { txt(M, y - 22, 22, true, l, PC.head); y -= 27; });
+    if (m.sub) { y -= 2; para(m.sub, 11, false, PC.mut, 10); }
+    if (m.box) {
+      var bl = wrap(m.box.text, 10, false, CW - 24), bh = 26 + bl.length * 13.5;
+      need(bh + 8); rect(M, y - bh, CW, bh, PC.box);
+      txt(M + 12, y - 18, 9.5, true, m.box.head, PC.head);
+      bl.forEach(function (l, i) { txt(M + 12, y - 32 - i * 13.5, 10, false, l, PC.ink); });
+      y -= bh + 14;
+    }
+    (m.facts || []).forEach(function (f) {
+      var lw = textW(f[0] + " ", 10, true), lines = wrap(f[1], 10, false, CW - lw);
+      need(lines.length * 13.5); txt(M, y - 10, 10, true, f[0], PC.ink);
+      lines.forEach(function (l, i) { txt(M + lw, y - 10 - i * 13.5, 10, false, l, PC.ink); }); y -= lines.length * 13.5 + 3;
+    });
+    (m.sections || []).forEach(function (sec) {
+      y -= 12; need(60); wrap(sec.h, 15, true, CW).forEach(function (l) { txt(M, y - 15, 15, true, l, PC.head); y -= 20; }); y -= 4;
+      (sec.p || []).forEach(function (p) { para(p, 10, false, PC.ink, 6); });
+      if (sec.table) {
+        var cols = sec.table.cols, tot = cols.reduce(function (a, c) { return a + c[1]; }, 0), cw = cols.map(function (c) { return CW * c[1] / tot; });
+        var head = function () {
+          var hl = cols.map(function (c, i) { return wrap(c[0], 9, true, cw[i] - 10); }), hh = Math.max.apply(null, hl.map(function (l) { return l.length; })) * 11.5 + 9;
+          need(hh + 20); rect(M, y - hh, CW, hh, PC.head);
+          var x = M; hl.forEach(function (ls, i) { ls.forEach(function (l, j) { txt(x + 5, y - 13 - j * 11.5, 9, true, l, "1 1 1"); }); x += cw[i]; });
+          y -= hh;
+        };
+        head();
+        sec.table.rows.forEach(function (r) {
+          var cl = r.cells.map(function (c, i) { return wrap(c, 8.8, i === 1 && !!sec.table.boldSecond, cw[i] - 10); }), rh = Math.max.apply(null, cl.map(function (l) { return l.length; })) * 11 + 9;
+          if (y - rh < M + 24) { page(); head(); }
+          if (r.fill && PC[r.fill]) rect(M, y - rh, CW, rh, PC[r.fill]);
+          var x = M; cl.forEach(function (ls, i) { ls.forEach(function (l, j) { txt(x + 5, y - 12.5 - j * 11, 8.8, i === 1 && !!sec.table.boldSecond, l, PC.ink); }); x += cw[i]; });
+          y -= rh; hline(M, y, CW);
+        });
+        y -= 6;
+      }
+      (sec.bullets || []).forEach(function (b) {
+        var lines = wrap(b, 10, false, CW - 14); need(lines.length * 13.5 + 2);
+        txt(M, y - 10, 10, true, "-", PC.mut);
+        lines.forEach(function (l, i) { txt(M + 12, y - 10 - i * 13.5, 10, false, l, PC.ink); }); y -= lines.length * 13.5 + 4;
+      });
+    });
+    // Footer on every page.
+    pages.forEach(function (p, i) { var f = (m.foot ? m.foot + "   " : "") + "Page " + (i + 1) + " of " + pages.length; p.push(PC.line + " RG 0.6 w " + M + " " + (M - 4) + " m " + (W - M) + " " + (M - 4) + " l S"); p.push("BT /F1 8 Tf " + PC.mut + " rg " + M + " " + (M - 16) + " Td (" + pesc(f) + ") Tj ET"); });
+    // Objects: 1 catalog, 2 pages, 3 Helvetica, 4 Helvetica-Bold, then page and content pairs.
+    var objs = [], kids = [];
+    objs[1] = "<< /Type /Catalog /Pages 2 0 R >>";
+    objs[3] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
+    objs[4] = "<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
+    pages.forEach(function (p, i) {
+      var po = 5 + i * 2, co = po + 1, body = p.join("\n");
+      kids.push(po + " 0 R");
+      objs[po] = "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 " + W + " " + Hh + "] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents " + co + " 0 R >>";
+      objs[co] = "<< /Length " + body.length + " >>\nstream\n" + body + "\nendstream";
+    });
+    objs[2] = "<< /Type /Pages /Kids [" + kids.join(" ") + "] /Count " + pages.length + " >>";
+    var out = "%PDF-1.4\n%\xe2\xe3\xcf\xd3\n", off = [];
+    for (var n = 1; n < objs.length; n++) { off[n] = out.length; out += n + " 0 obj\n" + objs[n] + "\nendobj\n"; }
+    var xref = out.length, pad = function (k) { return ("0000000000" + k).slice(-10); };
+    out += "xref\n0 " + objs.length + "\n0000000000 65535 f \n";
+    for (var k = 1; k < objs.length; k++) out += pad(off[k]) + " 00000 n \n";
+    out += "trailer\n<< /Size " + objs.length + " /Root 1 0 R /Info << /Title (" + pesc(m.title) + ") /Producer (PrepNucleus ReWise) >> >>\nstartxref\n" + xref + "\n%%EOF\n";
+    return out;
+  }
+
   var PURE = { weekday: weekday, isOff: isOff, studyDays: studyDays, nthStudyDay: nthStudyDay, dayOfIso: dayOfIso, isoOfDay: isoOfDay, revDays: revDays,
     suggestEnd: suggestEnd, split: split, schedule: schedule, lay: lay, where: where, behind: behind, move: move, nextModule: nextModule,
-    tierOf: tierOf, whyOf: whyOf, priority: priority, pack: pack, kinds: kinds, plan: plan, blocks: blocks, missed: missed, readSet: readSet, weakest: weakest, summary: summary, TAPER: TAPER, Q_MIN: Q_MIN };
+    tierOf: tierOf, whyOf: whyOf, priority: priority, pack: pack, kinds: kinds, plan: plan, blocks: blocks, missed: missed, readSet: readSet, weakest: weakest, summary: summary, TAPER: TAPER, Q_MIN: Q_MIN, pdfDoc: pdfDoc, wrap: wrap, textW: textW, pdfText: pdfText };
   if (NODE) { module.exports = PURE; return; }
 
   /* ================= browser ================= */
@@ -381,7 +480,8 @@
       if (b.k === "read" && x.read) { var l = { k: "lsn", m: x.read.m, s: x.read.s, title: x.read.title, min: x.read.minutes || 5, ttl: "Read: " + x.read.title, rw: 1 }; if (x.read.k && x.read.k !== x.read.m) l.l = x.read.k; items.push(l); }
       if ((b.k === "topic" || b.k === "repair") && x.t.length) items.push({ k: "prac", n: b.n, min: b.min, mods: x.t.map(pair).filter(Boolean), ttl: "Practise " + b.n + " questions: " + x.list, sub: b.k === "repair" ? "ReWise repair: your weakest topics" : "ReWise: today's topics", rw: 1 });
       if (b.k === "mixed") {
-        var pool = x.k === "rev" ? x.t : x.past.length ? x.past : (t.topicsAll || []);
+        // Mixed never shares a module with today's topics, so each block's count is its own answers.
+        var pool = (x.k === "rev" ? x.t : x.past.length ? x.past : (t.topicsAll || [])).filter(function (id) { return x.k === "rev" || x.t.indexOf(id) < 0; });
         var pick = pool.map(function (id) { return topicNow(id, t.weak); }).sort(function (a, c) { return (a.t ? a.ok / a.t : 0) - (c.t ? c.ok / c.t : 0); }).slice(0, 8).map(function (p) { return p.id; });
         if (pick.length) items.push({ k: "mix", n: b.n, min: b.min, mods: pick.map(pair).filter(Boolean), ttl: "Mixed: " + b.n + " questions", sub: x.k === "rev" ? "ReWise revision: " + x.head : "ReWise: across what you have studied", rw: 1 });
       }
@@ -428,10 +528,11 @@
     }
     var w = today(h); if (!w || !tt1()) return "";
     var tx1 = w.k === "study" ? "Timetable: " + esc(w.name) + ", day " + w.n + " of " + w.of : w.k === "rest" ? "Timetable: rest day. Due reviews only." : w.k === "rev" ? "Timetable: revision and mocks" : "Timetable starts " + esc(fmtDay(tt1().start, true));
-    return '<button type="button" class="pn-link tt-line" data-act="tt-open">' + H.ico("cal") + "<span>" + tx1 + " · ReWise is ready, open to switch</span></button>";
+    migrate();
+    return '<button type="button" class="pn-link tt-line" data-act="tt-open">' + H.ico("cal") + "<span>" + tx1 + "</span></button>";
   }
   function homeRow(h) {
-    H = h; var t = tt(), x = t ? info(H.today(), null) : null;
+    H = h; migrate(); var t = tt(), x = t ? info(H.today(), null) : null;
     var sub = !t ? (tt1() ? "Switch your timetable to ReWise: by topic, with grand tests" : "Your revision plan, topic by topic, with grand tests") : !x ? "Plan finished. Make a new one" : x.k === "learn" ? "Today: " + esc(x.list) : esc(KIND[x.k] || "Set up");
     return H.row("tt-open", H.ico("cal"), "ReWise", sub);
   }
@@ -504,16 +605,17 @@
     if (d.end < d.start) { d.end = d.start; H.toast("The finish date moved to the start date."); }
     if (d.exam != null && d.exam > td && d.end >= d.exam) { d.end = d.exam - 1; H.toast("The first reading now finishes the day before the exam."); }
   }
-  function blockHtml(b, x, tick, live) {
-    var done = !!(tick && tick[b.k]), act = "";
+  function blockHtml(b, x, tick, live, t) {
+    var pr = live ? progressOf(b, x, t) : null, done = !!(tick && tick[b.k]) || !!(pr && pr.done), act = "";
+    if (pr && pr.none) b.sub = "No mistakes to review yet. Wrong answers collect here";
     if (live && b.go && b.go !== "mock" && b.go !== "rev" && !(b.go === "prac" && !x.t.length)) act = '<button type="button" class="pn-btn sm" data-act="p-go" data-k="' + b.go + '">Start</button>';
     if (live && b.go === "rev" && b.n) act = '<button type="button" class="pn-btn sm" data-act="p-go" data-k="rev">Start</button>';
     if (live && b.go === "mock") act = '<button type="button" class="pn-btn sm" data-act="p-go" data-k="mock">Start</button>';
     if (live && b.k === "read") act = x.read ? '<button type="button" class="pn-btn sm" data-act="l-open" data-s="' + esc(x.read.s) + '" data-m="' + esc(x.read.m) + '"' + (x.read.k && x.read.k !== x.read.m ? ' data-l="' + esc(x.read.k) + '"' : "") + ">Open</button>" : x.t[0] ? '<button type="button" class="pn-btn sm" data-act="module" data-s="' + esc(subjOfMod(x.t[0]) || "") + '" data-m="' + esc(x.t[0]) + '">Open</button>' : "";
-    if (live && (b.k === "errors" || b.k === "first")) act = '<button type="button" class="pn-btn sm" data-act="tt-err">Open</button>';
+    if (live && (b.k === "errors" || b.k === "first") && !(pr && pr.none)) act = '<button type="button" class="pn-btn sm" data-act="tt-err" data-v="' + Math.max(5, Math.round(b.min / Q_MIN)) + '">Start</button>';
     if (live && b.k === "quick") act = x.t[0] && x.k === "learn" ? '<button type="button" class="pn-btn sm" data-act="k-open" data-s="' + esc(subjOfMod(x.t[0]) || "") + '" data-m="' + esc(x.t[0]) + '" data-t="' + esc(mname(x.t[0])) + '">Open</button>' : '<button type="button" class="pn-btn sm" data-act="k-due">Open</button>';
     return '<li class="tt-bk' + (done ? " done" : "") + '">' + (live ? '<button type="button" class="tt-tick" role="checkbox" aria-checked="' + done + '" data-act="tt-tick" data-v="' + b.k + '" aria-label="' + esc(b.title) + ' done"><i aria-hidden="true"></i></button>' : "") +
-      '<span class="tt-bn"><b>' + esc(b.title) + " <small>" + b.min + " min</small></b><small>" + esc(b.sub || "") + "</small></span>" + act + "</li>";
+      '<span class="tt-bn"><b>' + esc(b.title) + " <small>" + b.min + " min" + (pr && pr.of && !pr.done ? " · " + pr.x + " of " + pr.of : "") + "</small></b><small>" + esc(b.sub || "") + "</small></span>" + act + "</li>";
   }
   function dayRow(x, td) {
     var tag = x.d === td ? "Today" : fmtDay(x.d, true), what = x.k === "learn" ? x.list : x.k === "rev" ? "Revision: " + x.head : KIND[x.k] || "";
@@ -537,7 +639,7 @@
     else if (x.k === "before") head = '<p class="tt-now"><b>Starts ' + esc(fmtDay(t.start, true)) + "</b></p>";
     else head = '<p class="tt-now"><span class="tt-kind k-' + x.k + '">' + esc(KIND[x.k]) + "</span><b>" + esc(x.k === "learn" || x.k === "rev" ? x.head : x.line) + "</b>" + (ex != null && ex >= td ? "<small>" + (ex === td ? "Exam today" : plural(ex - td, "day", "days") + " to the exam") + "</small>" : "") + "</p>";
     var why = x && x.k === "learn" ? '<ul class="tt-why">' + x.t.map(function (id) { var tp = topicNow(id, t.weak); return "<li><b>" + esc(mname(id)) + "</b><small>" + esc(whyOf(tp)) + "</small></li>"; }).join("") + "</ul>" : "";
-    var bl = x && x.blocks && x.blocks.length ? '<ul class="tt-bks">' + x.blocks.map(function (b) { return blockHtml(b, x, tick, true); }).join("") + "</ul>" : "";
+    var bl = x && x.blocks && x.blocks.length ? '<ul class="tt-bks">' + x.blocks.map(function (b) { return blockHtml(b, x, tick, true, t); }).join("") + "</ul>" : "";
     var rest = x && x.k === "rest" ? '<p class="pn-mut pn-small">Nothing is planned. Due reviews stay in Today\'s plan if you want them.</p>' : "";
     // Days: the next 14, or all.
     var list = [], end = T.all ? Infinity : td + 13;
@@ -554,6 +656,7 @@
         '<p class="pn-mut pn-small">Re-plan lays the topics not yet studied over the days left, from today. Nothing is doubled up to catch up.</p><button type="button" class="pn-btn" data-act="tt-replan">Re-plan from today</button></section>' : "") +
       '<h2 class="pn-sec">' + (T.all ? "Every day" : "Next 14 days") + '</h2><ol class="tt-days">' + list.map(function (z) { return dayRow(z, td); }).join("") + "</ol>" +
       (more && !T.all ? '<button type="button" class="pn-link" data-act="tt-all">Show all ' + (t.days.filter(function (y) { return y.d >= td; }).length) + " days</button>" : "") +
+      '<button type="button" class="pn-btn tt-pdf" data-act="tt-pdf">' + H.ico("dl") + " Share the plan as PDF</button>" +
       '<h2 class="pn-sec">First reading</h2><section class="pn-panel tt-cov"><p><b>' + read + " of " + planned.length + "</b> topics studied on or after their day</p>" +
       '<span class="pn-meter" aria-hidden="true"><i style="transform:scaleX(' + pc.toFixed(3) + ')"></i></span>' +
       (t.strong && t.strong.length ? '<p class="pn-mut pn-small">' + plural(t.strong.length, "topic is", "topics are") + " already strong (80% or more over 30 answers): mixed practice only.</p>" : "") + "</section>" +
@@ -583,13 +686,128 @@
     return make(d, true).then(function () { if (!quiet) H.toast("Re-planned from today"); H.rerender(); });
   }
 
+  /* ---------- block progress (today) ----------
+     Measured where the app can see it: Recall, Topic MCQs, Mixed MCQs, the grand test and a lesson from Today's plan
+     items; Error review from answers in its own run (tt.ac[day].err, target set when it starts); Quick recall from
+     flashcards graded today. Reading notes without a lesson stays a tick. -> { x, of, done } | null (tick only). */
+  function cardsToday(s, td) { var n = 0; Object.keys(s.cards || {}).forEach(function (k) { var p = k.split(":"); if (p.length === 4 && p[2] === "c" && s.cards[k][2] === td) n++; }); return n; }
+  function progressOf(b, x, t) {
+    var s = store(), td = H.today(), PP = G.PREP_PLAN, pt = s.pt && s.pt.d === td && s.pt.rw ? s.pt : null;
+    var item = function (k) { var it = pt ? pt.items.filter(function (i) { return i.k === k; })[0] : null; return it && PP && PP._pure ? PP._pure.itemProgress(it, s, td, function (ms) { return H.core().dayNum(ms, new Date(ms).getTimezoneOffset()); }) : null; };
+    if (b.k === "recall") return item("rev") || (PP && PP._pure && PP._pure.dueNow(s, td) === 0 ? { x: 0, of: 0, done: true } : null);
+    if (b.k === "topic" || b.k === "repair") return item("prac");
+    if (b.k === "mixed") return item("mix");
+    if (b.k === "gt") return item("mock");
+    if (b.k === "read") return x.read ? item("lsn") : null;
+    if (b.k === "errors" || b.k === "first") {
+      var ac = (t.ac || {})[td] || {}, nmt = Object.keys(s.mt || {}).length;
+      if (ac.errT) return { x: Math.min(ac.err || 0, ac.errT), of: ac.errT, done: (ac.err || 0) >= ac.errT };
+      return nmt ? null : { x: 0, of: 0, done: true, none: true };
+    }
+    if (b.k === "quick") { var n = Math.max(10, Math.min(40, b.min * 2)), c = cardsToday(s, td); return { x: Math.min(c, n), of: n, done: c >= n }; }
+    return null;
+  }
+  // Error review: today's mistakes, newest first, as many as the block holds; each answer counts toward it.
+  function startErrors(n) {
+    var s = store(), t = tt(), td = H.today(), hid = H.hidden ? H.hidden() : null;
+    var ids = Object.keys(s.mt || {}).sort(function (a, b) { return s.mt[b][3] - s.mt[a][3]; }).slice(0, Math.max(5, Math.min(50, n || 30)));
+    if (!ids.length) { H.toast("No mistakes to review yet. Wrong answers collect here."); return; }
+    var pairs = [], seen = {}, want = {};
+    ids.forEach(function (id) { var b = s.mt[id]; want[id] = 1; if (!seen[b[1]]) { seen[b[1]] = 1; pairs.push({ s: b[0], m: b[1] }); } });
+    H.stack().push(function () {}); H.loadingScreen("Error review", "Loading questions");
+    H.loadMany(pairs.slice(0, 12), H.stepMsg).then(function (lists) {
+      var out = []; lists.forEach(function (l) { H.pool(l.items).forEach(function (it) { if (want[it.id]) out.push(it); }); });
+      H.stack().pop();
+      if (!out.length) { H.toast("These questions need a connection to load once."); return H.rerender(); }
+      if (t) { t.ac = t.ac || {}; var ac = t.ac[td] || (t.ac[td] = {}); ac.errT = Math.max(ac.errT || 0, Math.min(out.length, n || out.length)); Object.keys(t.ac).forEach(function (d) { if (+d < td - 60) delete t.ac[d]; }); H.save(); }
+      H.run(out, "study", "Error review", { onAnswer: function () { var t2 = tt(); if (!t2) return; var a2 = (t2.ac = t2.ac || {})[td] || (t2.ac[td] = {}); a2.err = (a2.err || 0) + 1; H.save(); } });
+    });
+  }
+
+  /* ---------- the PDF ---------- */
+  function pdfModel() {
+    var t = tt(), td = H.today(), ex = examDay(), hrs = hours(t), mock = gtMock(), pl = store().pl || {};
+    var scope = (H.planScopeLabel && H.planScopeLabel()) || "", exam = (H.planExamLabel && H.planExamLabel()) || H.exam().label;
+    var first = t.days[0].d, last = t.days[t.days.length - 1].d;
+    var lb = blocks("learn", hrs * 60, { due: 0 }), WHAT = {
+      recall: "Closed-book recall of yesterday's topic and every review due today.",
+      read: "Read only today's topics; make a one-page table or algorithm, not long notes.",
+      topic: "Questions on today's topics; answer each before reading the explanation.",
+      mixed: "Mixed questions across what you have studied; practise switching between topics.",
+      errors: "Every wrong, guessed and slow answer: what you thought, the clue you missed, the rule, why the closest option is wrong.",
+      quick: "Flashcards for today's topics: the facts you keep forgetting, said aloud from memory." };
+    var NAME = { recall: "Recall", read: "Read", topic: "Topic MCQs", mixed: "Mixed MCQs", errors: "Error review", quick: "Quick recall" };
+    var weakTp = (t.topicsAll || []).map(function (id) { return topicNow(id, t.weak); }).filter(function (x) { return tierOf(x) === 1; });
+    var rows = t.days.filter(function (y) { return y.d >= td; }).map(function (y) {
+      var z = info(y.d, null), bl = z.blocks, tq = bl.filter(function (b) { return b.k === "topic" || b.k === "repair"; })[0], mq = bl.filter(function (b) { return b.k === "mixed"; })[0];
+      var task = KIND[y.k] || "", topicsTxt = y.k === "learn" ? z.names.join(", ") : y.k === "rev" ? z.head : y.k === "gt" ? (mock ? mock.label.replace(/ pattern$/, "") + ", timed" : "Timed full test") : y.k === "gtr" ? "Review every wrong, guessed and slow answer; repair the weakest topics" : y.k === "mixed" ? "Timed mixed blocks across the syllabus" : y.k === "taper" ? "Error notebook, quick recall. No new topics" : y.k === "rest" ? "Full rest" : y.k === "exam" ? "The exam" : "";
+      var prac = y.k === "learn" ? (tq ? tq.n : 0) + " topic MCQs + " + (mq ? mq.n : 0) + " mixed" : y.k === "rev" || y.k === "mixed" ? (mq ? mq.n : 0) + " mixed MCQs, then errors" : y.k === "gt" ? (mock ? mock.n + " questions, " + mock.min + " min" : "") + "; first review the same day" : y.k === "gtr" ? (tq ? tq.n + " repair MCQs" : "Error review") : y.k === "rest" ? "Nothing planned" : y.k === "taper" ? "Sleep and confidence" : "";
+      return { cells: [fmtDay(y.d, true), task, topicsTxt, prac], fill: y.d === td ? "now" : y.k === "gt" ? "gt" : y.k === "gtr" ? "gtr" : y.k === "rest" ? "rest" : y.k === "taper" ? "taper" : y.k === "exam" ? "exam" : null };
+    });
+    var nDays = last - td + 1;
+    return {
+      title: "ReWise: " + exam + (scope ? " " + scope : ""),
+      sub: nDays + "-day revision plan | " + fmtDay(Math.max(td, first), true) + " to " + fmtDay(last, true) + (ex != null ? " | exam " + fmtDay(ex, true) : ""),
+      box: { head: "HOW THIS PLAN WORKS", text: "Weakest topics first, from your own answers in PrepNucleus and the topics you marked weak; then the rest of the syllabus. Every grand test is followed by a review day that repairs your weakest topics. " + (t.off.length ? "A rest day every week is protected." : "No rest day is set.") },
+      facts: [["Hours a day:", hrs + " h. Question targets follow these hours; with fewer hours, cut questions, never the error review."],
+        ["Rest days:", t.off.length ? t.off.slice().sort().map(function (i) { return WD[i]; }).join(", ") + ". Nothing planned, no catch-up debt." : "none"],
+        ["Grand test:", t.gt >= 0 ? "every " + WD[t.gt] + (mock ? ", " + mock.label.replace(/ pattern$/, "") + " (" + mock.n + " questions, " + mock.min + " min)" : "") + ". The next study day reviews it." : "none set"],
+        ["Made:", fmtDay(td, true) + " in PrepNucleus. It changes when you re-plan; the app always has the current version."]],
+      sections: [
+        { h: "1. Daily routine (a study day)", table: { cols: [["Block", 1.6], ["Time", 0.9], ["What to do", 5.5]], rows: lb.map(function (b) { return { cells: [NAME[b.k], b.min + " min", (b.n && b.k !== "recall" ? b.n + " questions. " : "") + WHAT[b.k]] }; }) },
+          p: ["Answer first, then read the explanation. A wrong answer, a lucky guess and a slow right answer are different errors; review all three."] },
+        { h: "2. Priority from your own answers", p: weakTp.length ? ["These come first because of your numbers (or your own tick):"] : ["No weak topics yet: fewer than 10 answers in most topics. The plan follows the syllabus order and puts unstarted topics first. It reorders as you answer."],
+          bullets: weakTp.slice(0, 20).map(function (x) { return mname(x.id) + ": " + whyOf(x); }).concat(weakTp.length > 20 ? [(weakTp.length - 20) + " more weak topics in the plan."] : []).concat(t.strong && t.strong.length ? [plural(t.strong.length, "topic is", "topics are") + " already strong (80% or more over 30 answers): mixed practice only."] : []) },
+        { h: "3. Date-wise plan", table: { boldSecond: true, cols: [["Date", 1.25], ["Main task", 1.45], ["Topics", 3.7], ["Practice", 2]], rows: rows } },
+        { h: "4. After every grand test", table: { cols: [["When", 1.6], ["Do this", 6]], rows: [
+          { cells: ["Within 10 minutes", "Note the score, questions attempted, accuracy, unanswered and how the time went."] },
+          { cells: ["First review", "Every wrong answer and every guessed right answer. Explain why each close option is wrong."] },
+          { cells: ["Name each error", "Knowledge gap, mixed up two options, misread the clue, could not recall, ran out of time, or a lucky guess."] },
+          { cells: ["Repair (review day)", "Read the least needed, then answer related questions. ReWise plans these on your weakest topics."] },
+          { cells: ["Re-test", "Wrong answers come back in your reviews after 1, 3 and 7 days until you get them right."] }] } },
+        { h: "5. Rules", bullets: ["Do not give up the rest day.", "Do not chase a number of questions; the targets are guides. Reviewing errors beats doing more.", "Do not reread strong topics; test them with mixed questions.", "One score does not define you. Watch the trend and the error types.", "Last 2 days: consolidate, recall, sleep. No new topics."] }
+      ],
+      foot: "ReWise in PrepNucleus by StewardMD"
+    };
+  }
+  function b64(bin) { if (G.btoa) return G.btoa(bin); return ""; }
+  function sharePdf() {
+    var t = tt(); if (!t) return;
+    var bin = pdfDoc(pdfModel()), name = "ReWise-plan-" + isoOfDay(H.today()) + ".pdf", C = G.Capacitor, P = C && C.Plugins;
+    if (P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
+      return P.Filesystem.writeFile({ path: name, data: b64(bin), directory: "CACHE" }).then(function (w) {
+        return P.Share.share({ title: "My ReWise plan", url: w.uri, dialogTitle: "Share your ReWise plan" });
+      }).catch(function (e) { if (!/cancel/i.test(String(e && (e.message || e)))) H.toast("The PDF could not be shared. Try again."); });
+    }
+    // Test harness and builds without the plugins: hand the file over as a download.
+    try {
+      var u8 = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u8[i] = bin.charCodeAt(i);
+      var url = URL.createObjectURL(new Blob([u8], { type: "application/pdf" })), a = G.document.createElement("a");
+      a.href = url; a.download = name; a.hidden = true; G.document.body.appendChild(a); a.click(); a.remove();
+      G.setTimeout(function () { URL.revokeObjectURL(url); }, 30000);
+      G.__rwPdf = { name: name, size: bin.length };
+    } catch (e) { H.toast("The PDF could not be made on this device."); }
+  }
+
+  /* ---------- v1 to ReWise ----------
+     A stored subject timetable becomes ReWise with the same subjects, dates, rest days and order the first time home
+     draws with the indexes reachable; a note says so once. */
+  function migrate() {
+    var t1 = tt1(); if (!t1 || T.mig || T.busy) return;
+    T.mig = true;
+    var td = H.today(), ex = examDay(), d = { start: Math.max(td, t1.start), end: Math.max(td, t1.end), exam: ex, off: (t1.off || []).slice(), gt: (t1.off || []).indexOf(5) >= 0 ? -1 : 5, hrs: hours(null), order: (t1.order || []).slice(), weak: {} };
+    if (ex != null && ex > td && d.end >= ex) d.end = ex - 1;
+    make(d, false).then(function () { T.mig = false; H.toast("Your timetable is now ReWise: by topic, with grand tests and daily blocks."); if (H.stackTop && H.stackTop() === H.home) H.rerender(); }, function () { T.mig = false; });
+  }
+
   function act(a, b, h) {
     H = h;
     var v = b.getAttribute("data-v"), d;
     if (a === "tt-open") return open();
+    if (a === "tt-pdf") return sharePdf();
     if (a === "tt-edit") { T.d = null; return H.push(renderEdit); }
     if (a === "tt-all") { T.all = !T.all; return H.rerender(); }
-    if (a === "tt-err") return H.openMistakes ? H.openMistakes() : null;
+    if (a === "tt-err") return startErrors(Number(v) || 30);
     if (a === "tt-tick") {
       var t2 = tt(); if (!t2) return; var td2 = H.today(); t2.tk = t2.tk || {};
       var k = t2.tk[td2] || (t2.tk[td2] = {}); if (k[v]) delete k[v]; else k[v] = 1;
@@ -622,5 +840,5 @@
   }
   function back() { return false; }
 
-  G.PREP_TT = { act: act, back: back, today: today, planItems: planItems, notice: notice, lineHtml: lineHtml, homeRow: homeRow, info: function (h, d) { H = h || H; return info(d, null); }, _pure: PURE };
+  G.PREP_TT = { _pdf: function (h) { H = h || H; return tt() ? pdfDoc(pdfModel()) : null; }, act: act, back: back, today: today, planItems: planItems, notice: notice, lineHtml: lineHtml, homeRow: homeRow, info: function (h, d) { H = h || H; return info(d, null); }, _pure: PURE };
 })(typeof window !== "undefined" ? window : this);

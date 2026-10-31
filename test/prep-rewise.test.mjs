@@ -124,3 +124,28 @@ test("reminders say what to read and practise: smart nudges and the daily remind
   assert.equal(r2.title, "ReWise: Grand test", "a reminder that falls tomorrow uses tomorrow's line");
   assert.equal(P("18:00", now, "2026-10-31", 3, null).body, "Today's plan: 3 items");
 });
+
+test("PDF: a valid file (header, objects, xref offsets, trailer), every page footed, text wrapped to the column", () => {
+  const rows = [];
+  for (let i = 0; i < 80; i++) rows.push({ cells: ["Mon " + i, "Study", "Anthracyclines (doxorubicin), platinum agents and 5–FU/capecitabine: topic " + i, "80 topic MCQs + 47 mixed"], fill: i % 7 === 4 ? "gt" : null });
+  const pdf = TT.pdfDoc({ title: "ReWise: NEET-SS Medical Oncology", sub: "46-day plan", box: { head: "HOW", text: "Weakest first." }, facts: [["Rest days:", "Sun"]],
+    sections: [{ h: "3. Date-wise plan", table: { boldSecond: true, cols: [["Date", 1], ["Main task", 1], ["Topics", 3], ["Practice", 2]], rows } }, { h: "Rules", bullets: ["Rest."] }], foot: "ReWise" });
+  assert.ok(pdf.startsWith("%PDF-1.4\n"));
+  assert.ok(/%%EOF\n$/.test(pdf));
+  assert.ok([...pdf].every((c) => c.charCodeAt(0) < 256), "one byte per char");
+  const xref = +pdf.match(/startxref\n(\d+)\n/)[1];
+  assert.equal(pdf.slice(xref, xref + 4), "xref");
+  const n = +pdf.slice(xref).match(/^xref\n0 (\d+)/)[1];
+  const offs = pdf.slice(xref).split("\n").slice(3, 2 + n).map((l) => +l.slice(0, 10));
+  offs.forEach((o, i) => assert.equal(pdf.slice(o, o + String(i + 1).length + 6), (i + 1) + " 0 obj", "object " + (i + 1) + " at its offset"));
+  // Each stream's /Length is its byte count.
+  for (const m of pdf.matchAll(/<< \/Length (\d+) >>\nstream\n/g)) { const st = m.index + m[0].length; assert.equal(pdf.slice(st + +m[1], st + +m[1] + 10), "\nendstream"); }
+  const pages = +pdf.match(/\/Type \/Pages \/Kids \[[^\]]*\] \/Count (\d+)/)[1];
+  assert.ok(pages >= 3, "80 rows run over pages: " + pages);
+  assert.equal((pdf.match(/\(ReWise   Page \d+ of \d+\) Tj/g) || []).length, pages, "every page has the footer with the count");
+  assert.ok(pdf.indexOf("(5-FU/capecitabine:") > 0 || pdf.indexOf("5-FU/capecitabine") > 0, "an en dash becomes a hyphen");
+  assert.ok(pdf.indexOf("Anthracyclines \\(doxorubicin\\)") > 0, "brackets are escaped");
+  // Wrapping: no line wider than its width.
+  TT.wrap("A long topic name that has to wrap across more than one line in a narrow cell", 9, false, 80).forEach((l) => assert.ok(TT.textW(l, 9, false) <= 80, l));
+  assert.equal(TT.pdfText("a—b ≥ c 中"), "a-b >= c ?");
+});
