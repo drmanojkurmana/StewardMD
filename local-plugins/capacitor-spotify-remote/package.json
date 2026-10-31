@@ -1,0 +1,22 @@
+{
+  "name": "@stewardmd/capacitor-spotify-remote",
+  "version": "1.0.0",
+  "description": "Spotify App Remote (SPTAppRemote) bridge for the PrepNucleus music player. iOS: controls the Spotify app on the same device directly (connect/play/pause/next/previous/seek/shuffle/repeat, player-state events, wake via authorizeAndPlayURI). Android: stub that resolves {available:false} for every call so the Web API path is kept. Exposed to JS as Capacitor.Plugins.SpotifyRemote.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "Package.swift",
+    "android/src/main",
+    "android/build.gradle",
+    "package.json"
+  ],
+  "author": "StewardMD",
+  "license": "MIT"
+}
