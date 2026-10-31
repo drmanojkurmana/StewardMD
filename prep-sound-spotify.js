@@ -305,7 +305,7 @@
     if (!S.playlists.length) return '<p class="pn-sound-sp-note">No playlists in your Spotify library yet. Search above instead.</p>';
     return "<h3>Your playlists</h3>" + '<ul class="pn-sound-sp-list">' + S.playlists.map(item).join("") + "</ul>";
   }
-  function paintSheet() { if (S.sheet) S.sheet.querySelector(".pn-sheet").innerHTML = sheetHtml(); wireSheet(); }
+  function paintSheet() { syncCaps(); if (S.sheet) S.sheet.querySelector(".pn-sheet").innerHTML = sheetHtml(); wireSheet(); }
   function wireSheet() {
     if (!S.sheet) return;
     var f = S.sheet.querySelector("[data-sp-search]");
@@ -402,16 +402,28 @@
   }
   var timer = G.setInterval(function () { try { mountButton(); } catch (e) {} }, 1000);
 
-  var adapter = { id: "spotify_remote", capabilities: function () { return capabilities(S.premium, S.player); },
-    getStatus: status,
-    play: function () { return client().play().then(function () { return { ok: true }; }, function (e) { return { ok: false, reason: e.reason || "provider_error" }; }); },
-    pause: function () { return client().pause().then(function () { return { ok: true }; }, function (e) { return { ok: false, reason: e.reason || "provider_error" }; }); },
-    stop: function () { return client().pause().then(function () { return { ok: true }; }, function (e) { return { ok: false, reason: e.reason || "provider_error" }; }); },
-    next: function () { return client().next().then(function () { return { ok: true }; }, function (e) { return { ok: false, reason: e.reason || "provider_error" }; }); },
-    previous: function () { return client().previous().then(function () { return { ok: true }; }, function (e) { return { ok: false, reason: e.reason || "provider_error" }; }); },
-    openExternal: function (target) { G.open(openUrl(target && target.uri), "_blank", "noopener"); return Promise.resolve({ ok: true }); },
-    disconnect: function () { client().disconnect(); return Promise.resolve({ ok: true }); },
-    dispose: function () { G.clearInterval(timer); closeSheet(); return Promise.resolve({ ok: true }); } };
+  // Sound plan 4.2 adapter, in the exact registry shape prep-sound-providers.js checks:
+  // capabilities is a live object (same reference, mutated as Premium/device state arrives).
+  var caps = capabilities(false, null);
+  function syncCaps() { var n = capabilities(S.premium, S.player); for (var k in n) caps[k] = n[k]; }
+  function res(p) { return p.then(function () { return { ok: true }; }, function (e) { return { ok: false, error: "spotify:" + (e.reason || "provider_error") }; }); }
+  var adapter = { id: "spotify_remote", capabilities: caps,
+    getStatus: function () { return status().then(function (s) { return { ok: s.state !== "error", state: s.state, player: s.player || null }; }); },
+    play: function () { return caps.remoteControls ? res(client().play()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:play" }); },
+    pause: function () { return caps.remoteControls ? res(client().pause()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:pause" }); },
+    stop: function () { return caps.remoteControls ? res(client().pause()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:stop" }); },
+    next: function () { return caps.queueControls ? res(client().next()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:next" }); },
+    previous: function () { return caps.queueControls ? res(client().previous()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:previous" }); },
+    setVolume: function (v) { return caps.volumeControl ? res(client().volume(Number(v) * 100)) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:setVolume" }); },
+    openExternal: function (target) {
+      var url = target && (target.url || openUrl(target.uri));
+      if (typeof url !== "string" || !/^https:\/\//.test(url)) return Promise.resolve({ ok: false, error: "unavailable:bad-url" });
+      G.open(url, "_blank", "noopener"); return Promise.resolve({ ok: true });
+    },
+    disconnect: function () { client().disconnect(); S.premium = false; syncCaps(); return Promise.resolve({ ok: true }); },
+    dispose: function () { G.clearInterval(timer); closeSheet(); return Promise.resolve(); } };
+  // Register with the Sound Dock when it is present (rs-sound); harmless when it is not.
+  try { if (G.PREP_SOUND_PROVIDERS && G.PREP_SOUND_PROVIDERS.registerAdapter) G.PREP_SOUND_PROVIDERS.registerAdapter(adapter); } catch (e) {}
 
   G.PREP_SOUND_SPOTIFY = { act: act, openSheet: openSheet, closeSheet: closeSheet,
     dockButtonHtml: dockButtonHtml, adapter: adapter, back: function () { return closeSheet(); },

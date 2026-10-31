@@ -160,6 +160,20 @@ test("sheet contract + privacy: Connect first, no autoplay, no token persistence
   assert.match(src, /Open in Spotify|on Spotify/);
 });
 
+test("adapter registers cleanly in the rs-sound registry shape (plan 4.2)", () => {
+  const PROV = createRequire(import.meta.url)(join(ROOT, "prep-sound-providers.js"));
+  const adapter = { id: "spotify_remote", capabilities: P.capabilities(true, { device: { supportsVolume: true, volume: 10 } }),
+    getStatus: async () => ({ ok: true, state: "ready" }),
+    play: async () => ({ ok: true }), setVolume: async () => ({ ok: true }),
+    openExternal: async () => ({ ok: true }), disconnect: async () => ({ ok: true }),
+    dispose: async () => {} };
+  assert.deepEqual(PROV.checkShape(adapter), []);
+  assert.equal(PROV.registerAdapter(adapter), true);
+  assert.equal(PROV.getAdapter("spotify_remote"), adapter);
+  assert.match(read("prep-sound-spotify.js"), /PREP_SOUND_PROVIDERS\.registerAdapter\(adapter\)/);
+  assert.match(read("prep-sound-spotify.js"), /error: "unsupported:spotify_remote:/);
+});
+
 test("gate: loader lists the module as optional; prep.js forwards sp- acts only", () => {
   assert.match(read("prep-loader.js"), /"prep-sound-spotify\.js": 1/);
   assert.match(read("prep-loader.js"), /"prep-sound-spotify\.css"/);

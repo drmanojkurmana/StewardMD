@@ -19,11 +19,12 @@ Authorization Code + PKCE, S256, `state` verified on return, verifier single-use
 | [prep.js](/Volumes/WD BLACK SN7100 1TB Media/wt-prep-reels-sound/prep.js:4453) | Two lines in `act()`: `sp-` acts forward to `PREP_SOUND_SPOTIFY.act(a, b, HOST)` |
 | [_headers](/Volumes/WD BLACK SN7100 1TB Media/wt-prep-reels-sound/_headers:18) | `https://api.spotify.com https://accounts.spotify.com` added to the Report-Only `connect-src` |
 
-rs-sound had **not** landed when checked (`git log` on this branch, no `prep-sound*` files), so the module is built against the Sound plan 4.2 contract and stays self-contained, as instructed.
+rs-sound landed during this job (`0dbaefa3e`, `prep-sound-providers.js` registry). The adapter was aligned to its exact checked shape — live `capabilities` object, `getStatus() -> {ok, state}`, `{ok:false, error:"unsupported:spotify_remote:…"}` results, `setVolume(0..1)`, `openExternal({url})` — and registers via `PREP_SOUND_PROVIDERS.registerAdapter(adapter)` when the registry is present (guarded; harmless when absent). The module otherwise stays self-contained.
 
 ## Tests run + results
 
-- `node --test test/prep-sound-spotify.test.mjs` — **11 pass, 0 fail**: RFC 7636 PKCE test vector; verifier/challenge shape; authorize URL (minimum scopes, no secret); token exchange + deduped refresh; 401 refresh+retry and persistent-401; 403/404/429/offline typed errors; playlist/search/player parsing + escaping; capability honesty (Free / no-volume); play bodies; privacy/source contract (no `localStorage`, no analytics, no secret); loader/flag wiring.
+- `node --test test/prep-sound-spotify.test.mjs` — **12 pass, 0 fail**: RFC 7636 PKCE test vector; verifier/challenge shape; authorize URL (minimum scopes, no secret); token exchange + deduped refresh; 401 refresh+retry and persistent-401; 403/404/429/offline typed errors; playlist/search/player parsing + escaping; capability honesty (Free / no-volume); play bodies; rs-sound registry shape (`checkShape` + `registerAdapter`); privacy/source contract (no `localStorage`, no analytics, no secret); loader/flag wiring.
+- `node --test test/prep-sound.test.mjs test/prep-sound-web.test.mjs` (rs-sound's suites) — **8 pass, 0 fail** with this module present.
 - `node --check prep-sound-spotify.js` — syntax OK.
 - Neighbour suite `test/prep-ids.test.mjs`: 12 pass, 1 fail — the live-cache count test (1514 lessons on this machine vs its 1700 floor). Data-dependent, pre-existing, unrelated to this change; not modified.
 - Compliance pass (code-level, web-design-guidelines style): ≥44px targets ✓; focus-visible ✓; reduced-motion ✓; contrast — sheet ink `#E2F1EE`/muted `#94B4AB` on `#0D1D23` ✓; 390px — sheet is fluid `max-width:720px`, lists truncate with ellipsis ✓; light+dark — the sheet uses the dark-green `--pn-why-*` surface in both themes, matching the existing PrepNucleus "why" cards ✓. Not rendered on a real device (see OPEN).
