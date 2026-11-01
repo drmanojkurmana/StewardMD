@@ -6,9 +6,9 @@
    DEFAULT OFF for everyone; there is no early-access tier. */
 (function (G) {
   "use strict";
-  var V = "krd19";
+  var V = "krd20";
   var CSS = ["specialty.css", "kardia.css", "kardia-syncprobe.css", "kardia-cases.css", "kardia-practice.css", "kardia-echolab.css", "kardia-calc.css", "kardia-premium.css", "kardia-paths.css"];
-  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-links.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia.js", "kardia-premium.js", "kardia-qr.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js", "kardia-calc-data.js", "kardia-calc-trust.js", "kardia-calc.js", "kardia-teach.js", "kardia-paths.js"];
+  var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js", "kardia-flags.js", "kardia-links.js", "kardia-textfirst.js", "kardia-sim-heart.js", "kardia-sim-geom.js", "kardia-sim-us.js", "kardia-sim-probe.js", "kardia-sim-doppler.js", "kardia-sim-measure.js", "kardia-echolab.js", "kardia.js", "kardia-premium.js", "kardia-qr.js", "kardia-sync.js", "kardia-sync-ble.js", "kardia-syncprobe.js", "clinix-audio.js", "kardiox-ecgwave.js", "kardia-cases.js", "kardia-clips.js", "kardia-practice.js", "kardia-calc-data.js", "kardia-calc-trust.js", "kardia-calc.js", "kardia-teach.js", "kardia-paths.js"];
   /* Transport adapters load best effort: a missing file must not stop Kardia loading. */
   var OPTIONAL = { "kardia-sync-ble.js": 1, "kardia-sync-relay.js": 1 };
   var SIM_JS = [];

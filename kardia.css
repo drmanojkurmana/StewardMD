@@ -303,3 +303,33 @@ body:has(.krd-root.krd-fs) #smdTopBack { visibility: hidden !important; pointer-
   .krd-root .krd-probe-wrap:has(.krd-probe-status:not([hidden]))::after,
   .krd-root .krd-angio-wrap:has(.krd-angio-status:not([hidden]))::after { animation-duration: 2400ms; }
 }
+/* Text first pane: shown when 3D cannot run or a lab frame fails or is
+   slow. Existing Kardia tokens only, no new palette. Rows are 44px or
+   taller, text wraps and is never cut, press feedback is the shared
+   120ms scale, off under reduced motion. */
+.krd-root .krd-text-pane { padding: 12px 16px calc(16px + env(safe-area-inset-bottom, 0px)); overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.krd-root .krd-angio-wrap .krd-text-pane { position: absolute; inset: 0; background: var(--kd-bg); }
+.krd-root .krd-text-list { display: flex; flex-direction: column; margin-top: 10px; border-top: 1px solid var(--sp-line); }
+.krd-root .krd-text-row { display: flex; flex-direction: column; gap: 2px; align-items: stretch; text-align: left;
+  min-height: 44px; padding: 12px 2px; border: 0; border-bottom: 1px solid var(--sp-line);
+  background: transparent; color: var(--sp-text); font-size: 15px; line-height: 1.5;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent; overflow-wrap: break-word; }
+.krd-root button.krd-text-row { cursor: pointer; transition: background-color 140ms var(--kd-ease); }
+.krd-root button.krd-text-row:active { transform: scale(0.99); }
+@media (hover: hover) and (pointer: fine) {
+  .krd-root button.krd-text-row:hover { background: var(--sp-s1); }
+}
+.krd-root .krd-text-row:focus-visible { outline: 2px solid var(--sp-acc); outline-offset: 2px; }
+.krd-root .krd-text-row b { font-weight: 650; }
+.krd-root .krd-text-pos { color: var(--sp-mut); font-size: 14px; }
+.krd-root .krd-text-see { font-size: 14px; }
+.krd-root #krdTextEchoSlot, .krd-root #krdTextAngioSlot { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+.krd-root .krd-probe-frame[hidden], .krd-root .krd-angio-frame[hidden] { display: none; }
+/* With the text pane up, the kept error box sits in flow above it, not over it. */
+.krd-root .krd-probe-wrap:has(> #krdTextEchoSlot:not([hidden])) .krd-probe-err { position: static; margin: 0 12px 8px; }
+.krd-root .krd-angio-wrap:has(> #krdTextAngioSlot:not([hidden])) .krd-angio-err { position: static; margin: 8px 12px 0; }
+@media (prefers-reduced-motion: reduce) {
+  .krd-root button.krd-text-row { transition: none; }
+  .krd-root button.krd-text-row:active { transform: none; }
+}
+.krd-root .krd-text-row .krd-link { color: var(--kd-acc); font-weight: 600; }
