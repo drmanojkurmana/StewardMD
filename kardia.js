@@ -217,6 +217,69 @@
     LINKS.copy(u, function (m) { I.toast(m); });
   }
 
+  /* Text first path (kardia-textfirst.js): Kardia stays usable when
+   * 3D cannot run or a lab frame fails or is slow. The 3D probe runs
+   * once; a frame gets 20 seconds, then the calm text pane shows
+   * instead of a blank frame. The existing error and retry elements
+   * (#krdProbeErr, #krdAngioErr) stay; the pane is added below them. */
+  var TF = G.KARDIA_TEXTFIRST || null;
+  var LAB_TIMEOUT_MS = 20000;
+  var TF_FORCE = { echo: false, angio: false };
+  var TF_FALLBACK = { echo: false, angio: false };
+  function tfHas3D() { try { return TF ? TF.detect3D() : true; } catch (e) { return true; } }
+  function tfOffline() { try { return TF ? TF.isOffline() : !!(G.navigator && G.navigator.onLine === false); } catch (e) { return false; } }
+  function tfLessons() { try { var W = host._learn && host._learn._w; return W && W.ix ? W.ix.lessons : null; } catch (e) { return null; } }
+  /* A lab frame starts on a blank document and a failed load lands on
+   * an error document: neither counts as loaded, or the 20 second
+   * rule would never fire. Same origin lab pages are always readable
+   * when they truly loaded, so an unreadable frame counts as failed. */
+  function tfFrameState(frame) {
+    try {
+      var d = frame && (frame.contentDocument || (frame.contentWindow && frame.contentWindow.document));
+      if (!d || !d.URL || d.URL === "about:blank") return "wait";
+      if (d.URL.indexOf("chrome-error") === 0) return "fail";
+      return "ok";
+    } catch (e) { return "fail"; }
+  }
+  function tfDraftLine() {
+    return '<p class="krd-note">' + I.ico("info") + "<span>" +
+      I.tx(T("Draft teaching content, to be verified by the owner before clinical use.", "ड्राफ़्ट शिक्षण सामग्री, क्लिनिकल उपयोग से पहले जाँच बाकी है।")) + "</span></p>";
+  }
+  /* "Toward the right shoulder, about ten o clock." -> "Marker towards the right shoulder, about ten o'clock." */
+  function tfMarker(m) {
+    m = String(m).replace(/\.\s*$/, "").replace(/\bo clock\b/g, "o'clock");
+    return "Marker " + m.charAt(0).toLowerCase() + m.slice(1).replace(/^toward\b/, "towards") + ".";
+  }
+  function tfRowHtml(r) {
+    var inner = "<b>" + I.esc(r.name) + "</b>" +
+      (r.position ? '<span class="krd-text-pos">' + I.esc(r.position) + (r.marker ? ". " + I.esc(tfMarker(r.marker)) : "") + "</span>" : "") +
+      (r.system ? '<span class="krd-text-pos">' + I.esc(r.system) + ". " + I.esc(r.angles) + ".</span>" : "") +
+      (r.see ? '<span class="krd-text-see">You should see: ' + I.esc(r.see) + ".</span>" : "") +
+      (r.lessonId ? '<span class="krd-link">' + I.tx(T("Read the lesson", "पाठ पढ़ें")) + "</span>" : "");
+    if (r.lessonId) return '<button type="button" class="krd-text-row" data-act="ktext-lesson" data-l="' + I.esc(r.lessonId) + '" aria-label="' + I.esc("Open the lesson for " + r.name) + '">' + inner + "</button>";
+    return '<div class="krd-text-row krd-text-row-plain">' + inner + "</div>";
+  }
+  function textEchoPaneHtml() {
+    var rows = TF ? TF.echoRows(EL.views, tfLessons(), LINKS) : [];
+    var head = '<div class="krd-text-pane" id="krdTextEcho"><h3 class="sp-h3">' + I.tx(T("Echo Lab in words", "शब्दों में इको लैब")) + "</h3>" +
+      '<p class="sp-small">' + I.tx(T("The 3D lab cannot run on this phone, so the views are listed here. Pick a view to read its lesson. The probe position and what you should see are given for every view.", "इस फ़ोन पर 3D लैब नहीं चल सकती, इसलिए व्यू यहाँ लिखे हैं। किसी व्यू पर टैप करके उसका पाठ पढ़ें।")) + "</p>";
+    if (tfOffline() && !EL.views) head += '<p class="sp-small" role="status">' + I.tx(T("Needs internet", "इंटरनेट चाहिए")) + "</p>";
+    if (!EL.views) head += '<p class="sp-small" role="status">' + I.tx(T("Loading views.", "व्यू लोड हो रहे हैं।")) + "</p>";
+    else if (!rows.length) head += '<p class="sp-small">' + I.tx(T("No echo views yet.", "No echo views yet.")) + "</p>";
+    else head += '<div class="krd-text-list">' + rows.map(tfRowHtml).join("") + "</div>";
+    head += '<p><button type="button" class="sp-btn sec" data-act="kecho-text-try3d">' + I.tx(T("Try 3D again", "3D फिर से चलाएँ")) + "</button></p>" + tfDraftLine() + "</div>";
+    return head;
+  }
+  function textAngioPaneHtml() {
+    var rows = TF ? TF.angioRows(LINKS) : [];
+    var head = '<div class="krd-text-pane" id="krdTextAngio"><h3 class="sp-h3">' + I.tx(T("AngioLAB in words", "शब्दों में AngioLAB")) + "</h3>" +
+      '<p class="sp-small">' + I.tx(T("The 3D lab cannot run on this phone, so the standard projections are listed here with their gantry angles.", "इस फ़ोन पर 3D लैब नहीं चल सकती, इसलिए मानक प्रोजेक्शन उनके कोणों के साथ यहाँ लिखे हैं।")) + "</p>";
+    if (tfOffline()) head += '<p class="sp-small" role="status">' + I.tx(T("Needs internet", "इंटरनेट चाहिए")) + "</p>";
+    head += '<div class="krd-text-list">' + rows.map(tfRowHtml).join("") + "</div>" +
+      '<p><button type="button" class="sp-btn sec" data-act="kangio-text-try3d">' + I.tx(T("Try 3D again", "3D फिर से चलाएँ")) + "</button></p>" + tfDraftLine() + "</div>";
+    return head;
+  }
+
   function echoBase() { return (host.cfg && host.cfg.base) || G.SMD_KARDIA_BASE || "/kardia/"; }
 
   /* Echo Lab switch (owner 2026-10-26): Probe Lab (EchoSuite, reused with
@@ -240,6 +303,8 @@
       "</div></div>";
   }
   function probeLabHtml() {
+    var textFirst = TF && (!tfHas3D() || TF_FALLBACK.echo) && !TF_FORCE.echo;
+    if (textFirst && !EL.views && !EL.loading && !EL.err) loadEchoViews();
     return '<div class="krd-probe-wrap">' +
       /* SyncProbe lives in the header beside the language button (mountProbeLab);
        * this row only shows the live link pill while a probe is paired. */
@@ -248,7 +313,8 @@
       '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
       I.tx(T("Echo Lab did not load. Try again.", "इको लैब लोड नहीं हुई। फिर कोशिश करें।")) +
       '</p><button type="button" class="sp-btn sec" data-act="kecho-probe-retry">' + I.s("retry") + "</button></div>" +
-      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Echo Lab", "इको लैब")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"></iframe>' +
+      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Echo Lab", "इको लैब")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"' + (textFirst ? " hidden" : "") + '></iframe>' +
+      '<div id="krdTextEchoSlot"' + (textFirst ? "" : " hidden") + ">" + (textFirst ? textEchoPaneHtml() : "") + "</div>" +
       "</div>";
   }
   /* Hide EchoSuite navigation that would leave the Probe Lab, from the
@@ -318,9 +384,21 @@
     mountHeaderSyncProbe(doc);
     var frame = doc.getElementById("krdProbeFrame"); if (!frame) return;
     var status = doc.getElementById("krdProbeStatus"), err = doc.getElementById("krdProbeErr");
-    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); watchFrameTheme(frame, "probe"); fillFrameWidth(frame); }
-    function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
+    var slot = doc.getElementById("krdTextEchoSlot");
+    var timer = null;
+    function showText() {
+      TF_FALLBACK.echo = true;
+      if (!EL.views && !EL.loading && !EL.err) loadEchoViews();
+      if (timer) { try { G.clearTimeout(timer); } catch (e) {} timer = null; }
+      if (frame) frame.hidden = true;
+      if (slot) { if (!slot.innerHTML) slot.innerHTML = textEchoPaneHtml(); slot.hidden = false; }
+      if (status) status.hidden = true;
+    }
+    function onLoad() { var fs = tfFrameState(frame); if (fs === "wait") return; if (fs === "fail") { onError(); return; } TF_FALLBACK.echo = false; if (timer) { try { G.clearTimeout(timer); } catch (e) {} timer = null; } if (status) status.hidden = true; if (err) err.hidden = true; injectProbeNav(frame); watchFrameTheme(frame, "probe"); fillFrameWidth(frame); }
+    function onError() { if (status) status.hidden = true; if (err) err.hidden = false; showText(); }
+    if (TF && !tfHas3D() && !TF_FORCE.echo) { showText(); return; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
+    timer = G.setTimeout(function () { if (err) err.hidden = false; showText(); }, LAB_TIMEOUT_MS);
     fitProbeFrame(frame);
     /* A frame that finished before this mount still gets the guard. */
     try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
@@ -1074,12 +1152,14 @@
    * The frame fills the tab; the page inside scrolls. */
   function angioSrc() { return echoBase() + "angiolab/index.html"; }
   function angioHtml() {
+    var textFirst = TF && (!tfHas3D() || TF_FALLBACK.angio) && !TF_FORCE.angio;
     return '<div class="sp-scroll krd-angio-scroll"><div class="krd-angio-col"><div class="krd-angio-wrap">' +
       '<p class="sp-small krd-angio-status" id="krdAngioStatus" role="status">' + I.tx(T("Loading AngioLAB.", "AngioLAB लोड हो रही है।")) + "</p>" +
       '<div class="krd-angio-err" id="krdAngioErr" hidden><p class="sp-small" role="alert">' +
       I.tx(T("AngioLAB did not load. Try again.", "AngioLAB लोड नहीं हुई। फिर कोशिश करें।")) +
       '</p><button type="button" class="sp-btn sec" data-act="kangio-retry">' + I.s("retry") + "</button></div>" +
-      '<iframe id="krdAngioFrame" class="krd-angio-frame" title="AngioLAB" src="' + I.esc(angioSrc()) + '"></iframe>' +
+      '<iframe id="krdAngioFrame" class="krd-angio-frame" title="AngioLAB" src="' + I.esc(angioSrc()) + '"' + (textFirst ? " hidden" : "") + '></iframe>' +
+      '<div id="krdTextAngioSlot"' + (textFirst ? "" : " hidden") + ">" + (textFirst ? textAngioPaneHtml() : "") + "</div>" +
       "</div></div></div>";
   }
   /* The two embedded labs wear Kardia's own palette, light or dark (owner 2026-10-27: "it should look like a part of this app",
@@ -1173,9 +1253,20 @@
     var doc = G.document; if (!doc || !doc.getElementById) return;
     var frame = doc.getElementById("krdAngioFrame"); if (!frame) return;
     var status = doc.getElementById("krdAngioStatus"), err = doc.getElementById("krdAngioErr");
-    function onLoad() { if (status) status.hidden = true; if (err) err.hidden = true; watchFrameTheme(frame, "angio"); fillFrameWidth(frame); }
-    function onError() { if (status) status.hidden = true; if (err) err.hidden = false; }
+    var slot = doc.getElementById("krdTextAngioSlot");
+    var timer = null;
+    function showText() {
+      TF_FALLBACK.angio = true;
+      if (timer) { try { G.clearTimeout(timer); } catch (e) {} timer = null; }
+      if (frame) frame.hidden = true;
+      if (slot) { if (!slot.innerHTML) slot.innerHTML = textAngioPaneHtml(); slot.hidden = false; }
+      if (status) status.hidden = true;
+    }
+    function onLoad() { var fs = tfFrameState(frame); if (fs === "wait") return; if (fs === "fail") { onError(); return; } TF_FALLBACK.angio = false; if (timer) { try { G.clearTimeout(timer); } catch (e) {} timer = null; } if (status) status.hidden = true; if (err) err.hidden = true; watchFrameTheme(frame, "angio"); fillFrameWidth(frame); }
+    function onError() { if (status) status.hidden = true; if (err) err.hidden = false; showText(); }
+    if (TF && !tfHas3D() && !TF_FORCE.angio) { showText(); return; }
     if (frame.addEventListener) { frame.addEventListener("load", onLoad); frame.addEventListener("error", onError); }
+    timer = G.setTimeout(function () { if (err) err.hidden = false; showText(); }, LAB_TIMEOUT_MS);
     try { if (frame.contentDocument && frame.contentDocument.readyState === "complete") onLoad(); } catch (e) {}
   }
   /* Lab full screen (see the shim in kardia-embed.js and kardia-unbrand.js): the frame reports on/off, Kardia hides its header and tabs. */
@@ -1312,7 +1403,8 @@
     if (id === "cases" && G.KARDIA_CASES) {
       G.KARDIA_CASES.attach(host);
       G.KARDIA_CASES.setNavigator(function (f) { showTab("cases", typeof f === "string" ? f : null); });
-      var cbody = G.KARDIA_CASES.html();
+      var cbody = "";
+      try { cbody = G.KARDIA_CASES.html(); } catch (e) { cbody = '<div class="sp-scroll sp-pad"><div class="sp-col"><p class="sp-small" role="status">Cases could not open here. The text lessons still work in Learn.</p></div></div>'; }
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
       if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {} return; }
       var shelf = "";
@@ -1338,18 +1430,22 @@
     if (id === "calc" && G.KARDIA_CALC) {
       G.KARDIA_CALC.attach(host);
       G.KARDIA_CALC.setNavigator(function (arg) { if (arg === "echo") { showTab("echo"); return; } showTab("calc", typeof arg === "string" ? arg : null); });
-      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + G.KARDIA_CALC.html(), focusSel);
+      var calcBody = "";
+      try { calcBody = G.KARDIA_CALC.html(); } catch (e) { calcBody = '<div class="sp-scroll sp-pad"><div class="sp-col"><p class="sp-small" role="status">Calculators could not open here. The text lessons still work in Learn.</p></div></div>'; }
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + calcBody, focusSel);
       scrollActiveTabIntoView();
       try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
-      G.KARDIA_CALC.mount();
+      try { G.KARDIA_CALC.mount(); } catch (e) {}
       return;
     }
-    var body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id);
+    var body = "";
+    try { body = id === "learn" ? learnHtml() : id === "practice" ? practiceHtml() : id === "kardiox" ? kardioxHtml() : id === "echo" ? echoBodyHtml() : soonHtml(id); }
+    catch (e) { body = '<div class="sp-scroll sp-pad"><div class="sp-col"><p class="sp-small" role="status">This section could not open here. The text lessons still work in Learn.</p></div></div>'; }
     if (id === "echo") { I.paint(I.markTop("") + tabsHtml(id) + body, focusSel); }
     else I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + body, focusSel);
     scrollActiveTabIntoView();
     try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
-    if (id === "practice" && G.KARDIA_PRACTICE) G.KARDIA_PRACTICE.mount(host);
+    if (id === "practice" && G.KARDIA_PRACTICE) { try { G.KARDIA_PRACTICE.mount(host); } catch (e) { var pm = G.document && G.document.getElementById ? G.document.getElementById("krdPracticeMount") : null; if (pm) pm.innerHTML = '<p class="sp-small" role="status">Drills could not open here. The text lessons still work in Learn.</p>'; } }
     if (id === "echo" && labMode() === "probe") mountProbeLab();
     else if (id === "echo" && EL.views) mountEchoLab();
     else if (id === "echo" && !EL.err) { loadEchoViews(); drawEchoSectorSoon(); }
@@ -1420,8 +1516,11 @@
     I.setPref("klab", v);
     showTab("echo", '[data-act=kecho-lab][data-v="' + v + '"]');
   };
-  I.ACTIONS["kecho-probe-retry"] = function () { showTab("echo", "[data-act=kecho-probe-retry]"); };
-  I.ACTIONS["kangio-retry"] = function () { showTab("angio", "[data-act=kangio-retry]"); };
+  I.ACTIONS["kecho-probe-retry"] = function () { TF_FORCE.echo = false; TF_FALLBACK.echo = false; showTab("echo", "[data-act=kecho-probe-retry]"); };
+  I.ACTIONS["kangio-retry"] = function () { TF_FORCE.angio = false; TF_FALLBACK.angio = false; showTab("angio", "[data-act=kangio-retry]"); };
+  I.ACTIONS["kecho-text-try3d"] = function () { TF_FORCE.echo = true; TF_FALLBACK.echo = false; showTab("echo", "[data-act=kecho-text-try3d]"); };
+  I.ACTIONS["kangio-text-try3d"] = function () { TF_FORCE.angio = true; TF_FALLBACK.angio = false; showTab("angio", "[data-act=kangio-text-try3d]"); };
+  I.ACTIONS["ktext-lesson"] = function (b) { var id = b && b.getAttribute ? b.getAttribute("data-l") : ""; if (id) routeDeep("lesson", id); };
   I.ACTIONS["kecho-view"] = function (b) {
     var id = b.getAttribute("data-v");
     var list = echoViewsForLevel(klevel());
@@ -1529,6 +1628,7 @@
   host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, freeEchoPerArea: FREE_ECHO_PER_AREA, freeBankQuestions: FREE_BANK_QUESTIONS, on: on, openKardioX: openKardioX,
     openDeep: openDeep, link: function (kind, id) { return deepLink(kind, id); },
     freeEchoViews: FREE_ECHO_VIEWS.slice(),
+    textFirst: { has3D: tfHas3D, isOffline: tfOffline, echoRows: function () { return TF ? TF.echoRows(EL.views, tfLessons(), LINKS) : []; }, angioRows: function () { return TF ? TF.angioRows(LINKS) : []; }, timeoutMs: LAB_TIMEOUT_MS },
     angioLab: { get src() { return angioSrc(); } },
     probeLab: {
       get mode() { return labMode(); },
