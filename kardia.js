@@ -37,7 +37,7 @@
     cases: T("Cases", "केस"), calc: T("Calculators", "Calculators"), kardiox: T("KardiQ X", "KardiQ X")
   };
   var TAB_SUB = {
-    echo: T("Probe lab and views", "प्रोब लैब और व्यू"),
+    echo: T("Echo Lab and views", "इको लैब और व्यू"),
     angio: T("Coronary angiography views", "कोरोनरी एंजियोग्राफी व्यू"),
     learn: T("Learn ECG: the ECG atlas and quiz", "Learn ECG: ECG एटलस और प्रश्नोत्तरी"),
     practice: T("Drills and protocols", "ड्रिल और प्रोटोकॉल"),
@@ -130,7 +130,7 @@
   var SOON = {
     echo: {
       icon: "pulse",
-      lines: T("The probe lab opens here: a beating 3D heart with a live ultrasound sector, the ECG strip and the heart sounds running off the same cycle. Target views with a quality score, from parasternal to apical, then knobology, Doppler and measurements with a known right answer.",
+      lines: T("Echo Lab opens here: a beating 3D heart with a live ultrasound sector, the ECG strip and the heart sounds running off the same cycle. Target views with a quality score, from parasternal to apical, then knobology, Doppler and measurements with a known right answer.",
         "यहाँ प्रोब लैब खुलेगी: धड़कता 3D दिल, लाइव अल्ट्रासाउंड सेक्टर, ECG स्ट्रिप और हृदय ध्वनियाँ एक ही चक्र पर। पैरास्टर्नल से एपिकल तक लक्ष्य व्यू, फिर नॉबोलॉजी, डॉप्लर और ज्ञात सही उत्तर वाली माप।")
     },
     practice: {
@@ -235,7 +235,7 @@
   function labSwitchHtml() {
     var m = labMode();
     return '<div class="krd-labswitch"><div class="sp-seg" role="group" aria-label="' + I.tx(T("Echo Lab view", "Echo Lab view")) + '">' +
-      '<button type="button" data-act="kecho-lab" data-v="probe" aria-pressed="' + (m === "probe") + '">' + I.tx(T("Probe Lab", "Probe Lab")) + "</button>" +
+      '<button type="button" data-act="kecho-lab" data-v="probe" aria-pressed="' + (m === "probe") + '">' + I.tx(T("Echo Lab", "इको लैब")) + "</button>" +
       '<button type="button" data-act="kecho-lab" data-v="scan" aria-pressed="' + (m === "scan") + '">' + I.tx(T("Scan Lab", "Scan Lab")) + "</button>" +
       "</div></div>";
   }
@@ -244,11 +244,11 @@
       /* SyncProbe lives in the header beside the language button (mountProbeLab);
        * this row only shows the live link pill while a probe is paired. */
       '<div class="krd-probe-bar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
-      '<p class="sp-small krd-probe-status" id="krdProbeStatus" role="status">' + I.tx(T("Loading Probe Lab.", "Loading Probe Lab.")) + "</p>" +
+      '<p class="sp-small krd-probe-status" id="krdProbeStatus" role="status">' + I.tx(T("Loading Echo Lab.", "इको लैब लोड हो रही है।")) + "</p>" +
       '<div class="krd-probe-err" id="krdProbeErr" hidden><p class="sp-small" role="alert">' +
-      I.tx(T("Probe Lab did not load. Try again.", "Probe Lab did not load. Try again.")) +
+      I.tx(T("Echo Lab did not load. Try again.", "इको लैब लोड नहीं हुई। फिर कोशिश करें।")) +
       '</p><button type="button" class="sp-btn sec" data-act="kecho-probe-retry">' + I.s("retry") + "</button></div>" +
-      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Probe Lab", "Probe Lab")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"></iframe>' +
+      '<iframe id="krdProbeFrame" class="krd-probe-frame" title="' + I.tx(T("Echo Lab", "इको लैब")) + '" src="' + I.esc(probeLabSrc()) + '" scrolling="no"></iframe>' +
       "</div>";
   }
   /* Hide EchoSuite navigation that would leave the Probe Lab, from the
@@ -1064,7 +1064,7 @@
     if (EL.labOnce === "scan" && EL.views) {
       return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' +
         '<p><button type="button" class="sp-btn sec" data-act="kecho-lab-once">' +
-        I.tx(T("Back to Probe Lab", "Back to Probe Lab")) + "</button></p>" + echoLabHtml() + "</div></div>";
+        I.tx(T("Back to Echo Lab", "इको लैब पर वापस")) + "</button></p>" + echoLabHtml() + "</div></div>";
     }
     var pane = labMode() === "probe" ? probeLabHtml() : echoLabHtml();
     return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + pane + "</div></div>";
@@ -1114,12 +1114,14 @@
   function angioThemeCss(t, safeB) {
     var ramp = { 950: t.bg, 900: t.s1, 850: t.s2, 800: t.line, 700: mixRgb(t.line, t.mut, 0.25), 600: mixRgb(t.line, t.mut, 0.5), 500: mixRgb(t.line, t.mut, 0.75), 400: t.mut, 300: mixRgb(t.mut, t.text, 0.55), 200: t.text };
     var vars = Object.keys(ramp).map(function (n) { return "--ink-" + n + ":" + rgbTri(ramp[n]); }).join(";");
-    return ":root{" + vars + ";--accent:" + rgbTri(t.acc) + ";--accent-dim:" + rgbTri(mixRgb(t.acc, t.bg, 0.45)) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
+    return ":root{" + vars + ";--accent:" + rgbTri(t.acc) + ";--accent-dim:" + rgbTri(mixRgb(t.acc, t.bg, 0.45)) + ";--on-accent:" + onAccent(t.acc) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
       "html,body{background:rgb(var(--ink-950))!important;color:rgb(var(--ink-200))}" +
       ".app{padding-bottom:" + safeB + "px!important}";
   }
+  /* Text on the accent: dark on a light accent, white on a deep one. */
+  function onAccent(c) { return (0.299 * c[0] + 0.587 * c[1] + 0.114 * c[2]) > 150 ? "#04160a" : "#ffffff"; }
   function probeThemeCss(t, safeB) {
-    return ":root,:root[data-theme=dark]{--paper:" + rgbHex(t.s1) + ";--rule:" + rgbHex(t.line) + ";--muted:" + rgbHex(t.mut) + ";--ink:" + rgbHex(t.text) + ";color:" + rgbHex(t.text) + ";background:" + rgbHex(t.bg) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
+    return ":root,:root[data-theme=dark]{--paper:" + rgbHex(t.s1) + ";--rule:" + rgbHex(t.line) + ";--muted:" + rgbHex(t.mut) + ";--ink:" + rgbHex(t.text) + ";--krd-bg:" + rgbHex(t.bg) + ";--krd-s2:" + rgbHex(t.s2) + ";--krd-acc:" + rgbHex(t.acc) + ";--krd-on-acc:" + onAccent(t.acc) + ";color:" + rgbHex(t.text) + ";background:" + rgbHex(t.bg) + ";color-scheme:" + (t.dark ? "dark" : "light") + "}" +
       "html,body{background:" + rgbHex(t.bg) + "!important}" +
       "@media (max-width:699px){main{padding-bottom:" + (8 + safeB) + "px!important}}";
   }
@@ -1132,6 +1134,7 @@
       if (!st) { st = doc.createElement("style"); st.id = id; doc.head.appendChild(st); }
       st.textContent = kind === "angio" ? angioThemeCss(t, safeB) : probeThemeCss(t, safeB);
       if (kind === "probe") doc.documentElement.setAttribute("data-theme", t.dark ? "dark" : "light");
+      doc.documentElement.setAttribute("data-krd-theme", t.dark ? "dark" : "light");
       return true;
     } catch (e) { return false; }
   }

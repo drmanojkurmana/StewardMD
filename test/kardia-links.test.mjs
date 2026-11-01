@@ -243,7 +243,7 @@ test("the new screens paint through the real engine: headers, copy buttons, teac
   h = s.painted();
   assert.ok(h.includes("krd-target-row"), "view header paints the copy row");
   assert.ok(h.includes("Copy link to view"), "view copy button names its target");
-  assert.ok(h.includes("Back to Probe Lab"), "deep view keeps a way back");
+  assert.ok(h.includes("Back to Echo Lab"), "deep view keeps a way back");
   s.G.KARDIA.openDeep("case", "kd11a_as_severe_01");
   await tick(80);
   h = s.painted();
