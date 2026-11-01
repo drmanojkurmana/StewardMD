@@ -17,6 +17,7 @@
     status: "Draft, awaiting review"
   };
   T["lv-mass"] = {
+  provenance: { guideline: "ASE/EACVI chamber quantification 2015", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "LV mass = 0.8 times 1.04 times ((LVIDd + IVSd + PWd) cubed minus LVIDd cubed) + 0.6, then divided by BSA.",
     units: { lvid: "cm", ivs: "cm", pw: "cm", bsa: "m²" },
     steps: ["Freeze a PLAX frame at end diastole, beam square to the walls at the leaflet tips.", "Measure septum, cavity and posterior wall, leading edge to leading edge.", "Enter the BSA used for the rest of the study."],
@@ -25,6 +26,7 @@
     status: "Draft, awaiting review"
   };
   T["lv-ef"] = {
+  provenance: { guideline: "ASE/EACVI chamber quantification 2015", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "LVEF = (EDV minus ESV) divided by EDV, times 100.",
     units: { edv: "mL", esv: "mL" },
     steps: ["Trace endocardium in apical four and two chamber views.", "Take EDV at the largest cavity and ESV at the smallest.", "Average both views and state contrast use if any."],
@@ -65,6 +67,7 @@
     status: "Draft, awaiting review"
   };
   T["la-size"] = {
+  provenance: { guideline: "ASE/EACVI chamber quantification 2015", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "LA volume index = biplane LA volume at end systole divided by BSA.",
     units: { lavi: "mL/m²", lad: "cm" },
     steps: ["Trace LA in dedicated four and two chamber views at end systole.", "Leave out the appendage and vein openings.", "Index to the visit BSA; do not grade on diameter alone."],
@@ -89,6 +92,7 @@
     status: "Draft, awaiting review"
   };
   T["rv-function"] = {
+  provenance: { guideline: "ASE right heart 2010", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "FAC = (EDA minus ESA) divided by EDA, times 100, read with TAPSE and S prime.",
     units: { eda: "cm²", esa: "cm²", tapse: "mm", sp: "cm/s" },
     steps: ["Trace RV areas at end diastole and end systole in the focused view.", "Measure TAPSE by M mode at the lateral annulus.", "Sample S prime by tissue Doppler at the same annulus."],
@@ -129,6 +133,7 @@
     status: "Draft, awaiting review"
   };
   T["lap-ee"] = {
+  provenance: { guideline: "ASE diastolic function 2016", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "Average E/e prime = E times 100 divided by the mean of septal and lateral e prime. 8 or less is normal, 14 or more is raised.",
     units: { e: "m/s", sept: "cm/s", lat: "cm/s" },
     steps: ["Record mitral E at the leaflet tips.", "Sample septal and lateral e prime by tissue Doppler.", "Average at least 3 beats in sinus rhythm."],
@@ -241,6 +246,7 @@
     status: "Draft, awaiting review"
   };
   T["as-continuity"] = {
+  provenance: { guideline: "ESC/EACTS valvular heart disease 2021", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "AVA = LVOT area times LVOT VTI divided by aortic VTI. LVOT area = pi times (diameter over 2) squared.",
     units: { lvotd: "cm", lvotvti: "cm", avvti: "cm", peakv: "m/s", meanG: "mmHg" },
     steps: ["Measure LVOT diameter inner edge to inner edge in systole.", "Trace LVOT VTI just below the valve, laminar and parallel.", "Trace the aortic VTI through the valve with the peak velocity."],
@@ -257,6 +263,7 @@
     status: "Draft, awaiting review"
   };
   T["ar-continuity"] = {
+  provenance: { guideline: "ASE/EACVI regurgitation 2017", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "Regurgitant volume = LVOT forward stroke volume minus Simpson stroke volume, valid with lone AR.",
     units: { lvotd: "cm", lvotvti: "cm", svVol: "mL" },
     steps: ["Measure LVOT forward stroke volume as for continuity.", "Enter the Simpson biplane stroke volume.", "Rule out MR or shunt before trusting the number."],
@@ -289,6 +296,7 @@
     status: "Draft, awaiting review"
   };
   T["mitral-pht"] = {
+  provenance: { guideline: "ESC/EACTS valvular heart disease 2021", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "MVA = 220 divided by pressure half time in ms.",
     units: { pht: "ms" },
     steps: ["Trace the mitral E deceleration slope on continuous Doppler.", "Read pressure half time off the same envelope.", "Record the heart rate beside the area."],
@@ -401,6 +409,7 @@
     status: "Draft, awaiting review"
   };
   T["rvsp"] = {
+  provenance: { guideline: "ASE right heart 2010", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "RVSP = 4 times TR velocity squared plus RAP. It equals PASP without RVOT obstruction.",
     units: { trv: "m/s", rap: "mmHg" },
     steps: ["Trace the full TR envelope, parallel to the jet.", "Record the peak TR velocity.", "Enter RAP from the IVC on the same study."],
@@ -409,6 +418,7 @@
     status: "Draft, awaiting review"
   };
   T["pa-pressure"] = {
+  provenance: { guideline: "ASE right heart 2010", author: "Kardia team (AI drafted)", reviewer: "Awaiting review", date: "2026-11-01" },
     formula: "Systolic = 4 times TR velocity squared plus RAP. Diastolic = 4 times end PR velocity squared plus RAP. Mean blends systolic and diastolic.",
     units: { trv: "m/s", rap: "mmHg", prend: "m/s", pat: "ms" },
     steps: ["Trace TR and end PR jets on the same study.", "Enter RAP from the IVC.", "Record acceleration time as a cross check."],

@@ -80,6 +80,12 @@
       '<p class="kcalc-src">Source: ' + esc(c.source) + ". Draft, to be verified.</p></div>";
   }
   function trustOf(c) { return (G.KCALC_TRUST && G.KCALC_TRUST[c.id]) || null; }
+  function provLine(t) {
+    var p = t.provenance || {};
+    /* The guideline is already printed above; this line says who wrote it and its review state. */
+    var a = p.author || "Kardia team (AI drafted)", w = p.reviewer || "Awaiting review", d = p.date || "2026-11-01";
+    return "Written by " + a + ". " + w + ". Updated " + d + ".";
+  }
   function trustHtml(c) {
     var t = trustOf(c); if (!t) return "";
     var units = c.inputs.map(function (inp) {
@@ -91,6 +97,7 @@
       '<p class="kcalc-trust-lab">Units</p><ul class="kcalc-trust-units">' + units + "</ul>" +
       '<p class="kcalc-trust-lab">How to measure it</p><ol class="kcalc-trust-steps">' + steps + "</ol>" +
       '<p class="kcalc-trust-ref">Guideline: ' + esc(t.ref) + '.</p><p><span class="kcalc-trust-badge">Draft, awaiting review</span></p>' +
+      '<p class="kcalc-trust-src">' + esc(provLine(t)) + "</p>" +
       '<button type="button" class="sp-btn sec kcalc-trustbtn" data-act="kcalc-example" data-id="' + c.id + '">Try a worked example</button>' +
       '<p class="kcalc-trust-note">Fills the inputs above with illustrative values, so you can see a full calculation before typing.</p></section>';
   }
