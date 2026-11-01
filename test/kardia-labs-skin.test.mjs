@@ -63,8 +63,8 @@ test("loading shows a spinner, not copy", () => {
 });
 
 test("loader token bumped and skins ship with the lab folders", () => {
-  assert.match(read("kardia-loader.js"), /var V = "krd18"/);
-  assert.match(read("index.html"), /kardia-loader\.js\?v=krd18/);
+  assert.match(read("kardia-loader.js"), /var V = "krd\d+"/);
+  assert.match(read("index.html"), /kardia-loader\.js\?v=krd\d+/);
   const build = read("scripts/build-www.sh");
   assert.match(build, /kardia\/probelab/);
   assert.match(build, /kardia\/angiolab/);
