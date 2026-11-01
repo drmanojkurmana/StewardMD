@@ -41,6 +41,9 @@
   st.id = "kardiaAngioEmbed";
   st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
+  var skin = document.createElement("link");
+  skin.rel = "stylesheet"; skin.href = "./kardia-skin.css"; skin.id = "kardiaSkin";
+  (document.head || document.documentElement).appendChild(skin);
   function local(url) {
     if (typeof url !== "string" || url.charAt(0) !== "/") return url;
     if (url.indexOf("/anatomy/") === 0) return "anatomy/" + url.slice("/anatomy/".length);

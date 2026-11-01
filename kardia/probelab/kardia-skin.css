@@ -1,0 +1,293 @@
+/* Kardia Echo Lab skin: native iOS look (owner 2026-11-01, "Native iOS").
+   Look only. No element, id, class or control is added, removed or renamed;
+   the bundle and kardia-syncprobe.js keep every hook they use.
+   Loaded by kardia-unbrand.js after the bundle styles.
+   Colour comes from the Kardia theme: kardia.js writes --paper, --ink, --muted,
+   --rule, --krd-bg, --krd-s2, --krd-acc and --krd-on-acc into this frame and sets
+   data-theme. The 3D scene, the echo image and the cine are content and are
+   never recoloured. */
+:root {
+  --krd-bg: var(--bg);
+  --krd-s2: var(--wash);
+  --krd-acc: var(--accent);
+  --krd-on-acc: #fff;
+  --ios-fill: rgb(118 118 128 / .12);
+  --ios-fill-2: rgb(118 118 128 / .2);
+  --ios-sep: rgb(60 60 67 / .18);
+  --ios-material: rgb(250 250 252 / .72);
+  --ios-material-ink: #111214;
+  --ios-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 4px 14px rgb(0 0 0 / .06);
+  --ios-thumb-shadow: 0 3px 8px rgb(0 0 0 / .12), 0 3px 1px rgb(0 0 0 / .04);
+  --ios-ease: cubic-bezier(.32, .72, 0, 1);
+  --ios-press: cubic-bezier(.23, 1, .32, 1);
+  --card-r: 22px;
+}
+:root[data-theme=dark] {
+  --ios-fill: rgb(118 118 128 / .24);
+  --ios-fill-2: rgb(118 118 128 / .36);
+  --ios-sep: rgb(84 84 88 / .5);
+  --ios-material: rgb(28 28 30 / .66);
+  --ios-material-ink: #f5f5f7;
+  --ios-shadow: none;
+  --ios-thumb-shadow: 0 3px 8px rgb(0 0 0 / .3);
+}
+
+html, body, main { background: var(--krd-bg) !important; }
+body { -webkit-font-smoothing: antialiased; }
+.lab, .lab * { letter-spacing: -0.005em; }
+.lab output, #depth-readout, #pose-status, .range-label { font-variant-numeric: tabular-nums; }
+
+/* ---------- Cards ---------- */
+.lab .stage {
+  background: var(--krd-s2) !important;
+  border: 0 !important;
+  border-radius: var(--card-r) !important;
+  box-shadow: var(--ios-shadow) !important;
+}
+.lab .monitor {
+  border-radius: var(--card-r) !important;
+  border: 0 !important;
+  box-shadow: var(--ios-shadow) !important;
+}
+.lab .views {
+  background: var(--paper) !important;
+  border: 0 !important;
+  border-radius: var(--card-r) !important;
+  box-shadow: var(--ios-shadow) !important;
+  padding: 14px !important;
+  margin: 0 !important;
+}
+
+/* ---------- Large title over the scene ---------- */
+.lab #view-title {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.15 !important;
+  color: var(--ink) !important;
+  text-shadow: none !important;
+}
+.lab .stage-title { top: 16px !important; left: 18px !important; }
+
+/* ---------- Floating material buttons on the scene and the monitor ---------- */
+.lab .stage-utilities button,
+.lab #fullscreen-toggle,
+.lab .monitor-actions button,
+.lab .stage-toolbar .segmented {
+  min-height: 44px !important;
+  min-width: 44px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--ios-material) !important;
+  color: var(--ios-material-ink) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
+  backdrop-filter: blur(24px) saturate(1.8) !important;
+  box-shadow: 0 2px 10px rgb(0 0 0 / .12) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+.lab .stage-utilities button svg, .lab #fullscreen-toggle svg,
+.lab .monitor-actions button svg { color: currentColor; }
+.lab .monitor-actions button { padding: 0 14px !important; }
+.lab #labels-toggle { padding: 0 !important; width: 44px; }
+.lab #labels-toggle[aria-pressed=true],
+.lab .monitor-actions button[aria-pressed=true] {
+  background: var(--krd-acc) !important;
+  color: var(--krd-on-acc) !important;
+}
+.lab .monitor .monitor-top { top: 12px !important; right: 12px !important; }
+
+/* Primary action: filled tinted capsule, the one loud thing on the scene. */
+.lab .stage-bottom #practice,
+.lab #practice {
+  min-height: 50px !important;
+  padding: 0 26px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--krd-acc) !important;
+  color: var(--krd-on-acc) !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: 0 4px 14px rgb(0 0 0 / .18) !important;
+}
+.lab .stage-bottom { left: 14px !important; right: 14px !important; bottom: 14px !important; }
+.lab #leave-practice {
+  border-radius: 999px !important;
+  border: 0 !important;
+  background: var(--ios-material) !important;
+  color: var(--ios-material-ink) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  backdrop-filter: blur(24px) saturate(1.8);
+}
+.lab #guide-ghost-toggle, .lab #next-hunt {
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--ios-material) !important;
+  color: var(--ios-material-ink) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.8);
+  backdrop-filter: blur(24px) saturate(1.8);
+  font-size: 15px !important;
+  font-weight: 600 !important;
+}
+
+/* ---------- Segmented controls, iOS style ---------- */
+.lab .segmented,
+.lab .native-picker-families {
+  display: flex !important;
+  gap: 0 !important;
+  padding: 2px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: var(--ios-fill) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  box-shadow: none !important;
+}
+.lab .segmented button,
+.lab .native-picker-families button {
+  flex: 1 1 0 !important;
+  min-height: 40px !important;
+  padding: 0 6px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  box-shadow: none !important;
+  transition: background-color 200ms var(--ios-ease), box-shadow 200ms var(--ios-ease), transform 140ms var(--ios-press) !important;
+}
+.lab .segmented button[aria-pressed=true],
+.lab .native-picker-families button[aria-pressed=true],
+.lab .native-picker-families button[aria-selected=true] {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  box-shadow: var(--ios-thumb-shadow) !important;
+}
+:root[data-theme=dark] .lab .segmented button[aria-pressed=true],
+:root[data-theme=dark] .lab .native-picker-families button[aria-pressed=true],
+:root[data-theme=dark] .lab .native-picker-families button[aria-selected=true] { background: rgb(99 99 102) !important; color: #fff !important; }
+
+/* ---------- View tiles: grouped cards, tinted when chosen ---------- */
+.lab .native-picker { padding: 0 !important; background: transparent !important; border: 0 !important; gap: 12px !important; }
+.lab .native-picker-views { gap: 8px !important; padding: 2px 0 !important; }
+.lab .native-picker-view {
+  min-height: 84px !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  background: var(--ios-fill) !important;
+  color: var(--ink) !important;
+  box-shadow: none !important;
+  gap: 6px !important;
+  transition: background-color 200ms var(--ios-ease), transform 140ms var(--ios-press) !important;
+}
+.lab .native-picker-view span { font-size: 13px !important; font-weight: 600 !important; letter-spacing: 0 !important; text-transform: none !important; }
+.lab .native-picker-view[aria-pressed=true],
+.lab .native-picker-view[aria-selected=true],
+.lab .native-picker-view[aria-current=true] {
+  background: var(--krd-acc) !important;
+  color: var(--krd-on-acc) !important;
+}
+.lab .native-picker-view[aria-pressed=true] img,
+.lab .native-picker-view[aria-selected=true] img,
+.lab .native-picker-view[aria-current=true] img { filter: none; }
+:root[data-theme=dark] .lab .native-picker-view img { filter: invert(1); }
+:root[data-theme=dark] .lab .native-picker-view[aria-pressed=true] img,
+:root[data-theme=dark] .lab .native-picker-view[aria-selected=true] img,
+:root[data-theme=dark] .lab .native-picker-view[aria-current=true] img { filter: none; }
+.lab .native-picker-caption {
+  font-size: 13px !important;
+  line-height: 1.35 !important;
+  color: var(--muted) !important;
+  padding: 0 4px !important;
+  margin: 0 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+
+/* ---------- Practice sliders, iOS slider ---------- */
+.lab .controls { background: var(--paper) !important; border: 0 !important; border-radius: var(--card-r) !important; box-shadow: var(--ios-shadow) !important; padding: 14px 16px !important; }
+.lab .controls label, .lab .phone-depth label { font-size: 13px !important; font-weight: 600 !important; color: var(--muted) !important; text-transform: none !important; letter-spacing: 0 !important; }
+.lab .controls output, .lab .phone-depth output { color: var(--ink) !important; font-weight: 600 !important; }
+.lab input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  height: 44px; background: transparent; touch-action: pan-y;
+}
+.lab input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--ios-fill-2); }
+.lab input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 28px; height: 28px; margin-top: -12px; border-radius: 50%;
+  background: #fff; border: 0;
+  box-shadow: 0 0.5px 4px rgb(0 0 0 / .12), 0 6px 13px rgb(0 0 0 / .12);
+}
+.lab input[type=range]::-moz-range-track { height: 4px; border-radius: 2px; background: var(--ios-fill-2); }
+.lab input[type=range]::-moz-range-progress { height: 4px; border-radius: 2px; background: var(--krd-acc); }
+.lab input[type=range]::-moz-range-thumb { width: 28px; height: 28px; border-radius: 50%; background: #fff; border: 0; box-shadow: 0 6px 13px rgb(0 0 0 / .12); }
+
+/* ---------- Layers sheet and the more menu: iOS menus ---------- */
+.lab .layers-popover, .stage .layers-popover, .lab .stage-menu {
+  border: 0 !important;
+  border-radius: 14px !important;
+  background: var(--ios-material) !important;
+  color: var(--ios-material-ink) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(1.8) !important;
+  backdrop-filter: blur(30px) saturate(1.8) !important;
+  box-shadow: 0 10px 40px rgb(0 0 0 / .22) !important;
+}
+.lab .layer-checks label, .lab .layers-popover > label {
+  min-height: 44px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  font-size: 15px; border-bottom: 0.5px solid var(--ios-sep);
+}
+.lab .layers-popover input[type=checkbox] {
+  -webkit-appearance: none; appearance: none; flex: none;
+  width: 51px !important; height: 31px !important; margin: 0;
+  border-radius: 16px; background: var(--ios-fill-2); position: relative;
+  transition: background-color 220ms var(--ios-ease);
+}
+.lab .layers-popover input[type=checkbox]::after {
+  content: ""; position: absolute; top: 2px; left: 2px; width: 27px; height: 27px; border-radius: 50%;
+  background: #fff; box-shadow: 0 3px 8px rgb(0 0 0 / .15), 0 3px 1px rgb(0 0 0 / .06);
+  transition: transform 260ms var(--ios-ease);
+}
+.lab .layers-popover input[type=checkbox]:checked { background: #34c759; }
+.lab .layers-popover input[type=checkbox]:checked::after { transform: translateX(20px); }
+.lab .stage-menu button { border: 0 !important; border-radius: 0 !important; background: transparent !important; color: inherit !important; font-size: 15px !important; justify-content: flex-start; }
+.lab .stage-menu button + button { border-top: 0.5px solid var(--ios-sep) !important; }
+
+/* ---------- Tutorial card ---------- */
+.lab .tutorial-card { border: 0 !important; border-radius: 18px !important; background: var(--ios-material) !important; color: var(--ios-material-ink) !important; -webkit-backdrop-filter: blur(30px) saturate(1.8); backdrop-filter: blur(30px) saturate(1.8); box-shadow: 0 10px 40px rgb(0 0 0 / .22) !important; }
+.lab .tutorial-card button { border-radius: 999px !important; border: 0 !important; }
+.lab .tutorial-next { background: var(--krd-acc) !important; color: var(--krd-on-acc) !important; font-weight: 600; }
+
+/* ---------- Loading: a quiet spinner, no product name or progress copy ---------- */
+#loading { position: relative; min-height: 160px; }
+#loading-title, #loading-detail, #loading-note, #sim-loading-text { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+#loading-progress { -webkit-appearance: none; appearance: none; display: block; width: 120px; height: 4px; margin: 74px auto 0; border: 0; border-radius: 2px; background: var(--ios-fill-2); overflow: hidden; }
+#loading-progress::-webkit-progress-bar { background: var(--ios-fill-2); border-radius: 2px; }
+#loading-progress::-webkit-progress-value { background: var(--krd-acc); border-radius: 2px; }
+#loading-progress::-moz-progress-bar { background: var(--krd-acc); }
+#loading button { border: 0; border-radius: 999px; background: var(--ios-fill); color: var(--ink); font-weight: 600; margin-top: 16px; }
+
+/* ---------- Generic buttons left in the lab ---------- */
+.lab button { -webkit-tap-highlight-color: transparent; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.lab button:active { transform: scale(.96); }
+.lab button:focus-visible, .lab input:focus-visible { outline: 3px solid color-mix(in srgb, var(--krd-acc) 60%, transparent); outline-offset: 2px; }
+
+@media (min-width: 700px) {
+  .lab { gap: 16px !important; }
+  .lab .views { padding: 16px !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab *, .lab *::after { transition: none !important; }
+  .lab button:active { transform: none; }
+}
+
+/* Owner 2026-10-27: the guide sentence is not needed; hidden on every size, its element stays. */
+#view-guide { display: none !important; }
+.lab .monitor-top { justify-content: flex-end !important; }
+/* View tiles share the row evenly. */
+.lab .native-picker-view { flex: 1 1 0 !important; max-width: none !important; }

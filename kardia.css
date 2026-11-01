@@ -286,3 +286,20 @@ body:has(.krd-root.krd-fs) #smdTopBack { visibility: hidden !important; pointer-
 @media (prefers-reduced-motion: reduce) {
   .krd-root .krd-copylink:active { transform: none; }
 }
+
+/* Echo Lab and AngioLAB loading (owner 2026-11-01: no "Loading ..." copy on screen). The status line stays for screen
+   readers; sighted users see one quiet iOS-style spinner in the middle of the pane until the lab is ready. */
+.krd-root .krd-probe-status, .krd-root .krd-angio-status {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.krd-root .krd-probe-wrap:has(.krd-probe-status:not([hidden]))::after,
+.krd-root .krd-angio-wrap:has(.krd-angio-status:not([hidden]))::after {
+  content: ""; position: absolute; top: 50%; left: 50%; width: 28px; height: 28px; margin: -14px 0 0 -14px; z-index: 3;
+  border-radius: 50%; border: 3px solid color-mix(in srgb, var(--kd-mut) 30%, transparent); border-top-color: var(--kd-mut);
+  animation: krdSpin 800ms linear infinite; pointer-events: none;
+}
+@keyframes krdSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .krd-probe-wrap:has(.krd-probe-status:not([hidden]))::after,
+  .krd-root .krd-angio-wrap:has(.krd-angio-status:not([hidden]))::after { animation-duration: 2400ms; }
+}
