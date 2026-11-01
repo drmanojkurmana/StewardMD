@@ -289,7 +289,7 @@ function patchBucket(id, d) {
 const list = candidates().slice(0, LIMIT);
 console.log("candidates this run", list.length, "spent so far $" + state.spent.toFixed(2), "cap $" + CAP.toFixed(2));
 if (DRY) {
-  for (const c of list.slice(0, 50)) console.log(c.score, "links=" + c.links, c.id, "-", String(c.d.name).slice(0, 70));
+  for (const c of list.slice(0, Number(process.env.DRY_SHOW || 50))) console.log(c.score, "links=" + c.links, c.id, "-", String(c.d.name).slice(0, 70));
   console.log("DRY_RUN: no paid calls, nothing written.");
   process.exit(0);
 }
