@@ -970,7 +970,7 @@
     try {
       if (G.KARDIA_PATHS) {
         G.KARDIA_PATHS.attach(host);
-        G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { showTab("cases"); });
+        G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { if (tab() === "cases") showTab("cases"); });
         paths = G.KARDIA_PATHS.learnHtml();
       }
     } catch (e) { paths = ""; }
@@ -1316,7 +1316,7 @@
       try {
         if (G.KARDIA_PATHS) {
           G.KARDIA_PATHS.attach(host);
-          G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { showTab("cases"); });
+          G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { if (tab() === "cases") showTab("cases"); });
           shelf = '<div class="sp-scroll sp-pad"><div class="sp-col">' + G.KARDIA_PATHS.casesShelfHtml() + "</div></div>";
         }
       } catch (e) { shelf = ""; }

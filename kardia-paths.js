@@ -121,6 +121,7 @@
       try { var c = G.KARDIA_CALC && G.KARDIA_CALC.calcById(step.id); if (c) return c.name; } catch (e) {}
       return humanise(step.id);
     }
+    if (step.type === "view" && step.title) return step.title;
     if (step.type === "mcq") return (step.ids ? step.ids.length : 0) + " questions to finish";
     return humanise(step.id);
   }

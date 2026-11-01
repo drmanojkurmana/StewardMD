@@ -108,3 +108,17 @@ test("new app strings use British spelling with no dash characters", function ()
     assert.ok(!/[\u2013\u2014]/.test(p.title + p.sub), "no dash in path text " + p.id);
   }
 });
+
+test("every view step in an exam path carries its views.json name, so no raw id shows", async () => {
+  const { readFileSync } = await import("node:fs");
+  const names = Object.fromEntries(JSON.parse(readFileSync("kardia/views.json", "utf8")).views.map((v) => [v.id, v.name]));
+  const d = JSON.parse(readFileSync("kardia/paths.json", "utf8"));
+  for (const p of d.paths || d) for (const s of p.steps) if (s.type === "view") assert.equal(s.title, names[s.id], s.id);
+});
+
+test("a background case-list load never pulls the learner off the Learn tab", async () => {
+  const { readFileSync } = await import("node:fs");
+  const k = readFileSync("kardia.js", "utf8");
+  assert.ok(!k.includes('function () { showTab("cases"); });'), "the paths navigator must not switch to Cases unconditionally");
+  assert.ok(k.includes('function () { if (tab() === "cases") showTab("cases"); });'), "it repaints Cases only when Cases is open");
+});
