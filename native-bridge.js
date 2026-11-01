@@ -1036,6 +1036,10 @@
       var route = s.replace("stewardmd://", "").replace(/[/?#].*$/, "").toLowerCase();
       // stewardmd://prep/Q-8K3-M7T-X26: a shared PrepNucleus question or lesson ID (prep-ids.js checks it).
       var idm = /^stewardmd:\/\/prep\/([A-Za-z0-9-]{10,24})(?:[/?#]|$)/.exec(s), ropts = idm ? { id: idm[1] } : undefined;
+      // stewardmd://kardia/<kind>/<id>: a stable Kardia link (kardia-links.js owns the
+      // scheme; kardia.js openDeep lands on that exact item). Additive: prep parsing above is untouched.
+      var km = /^stewardmd:\/\/kardia\/([A-Za-z]+)\/([A-Za-z0-9_.\-]{1,64})(?:[/?#].*)?$/.exec(s);
+      if (km && !ropts) ropts = { deep: { kind: km[1].toLowerCase(), id: km[2] } };
       var tries = 0;
       (function go() {
         if (route === "codeblue") {

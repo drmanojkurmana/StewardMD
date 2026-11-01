@@ -271,3 +271,18 @@ body:not(.dark):not(.v3-dark) .krd-root {
 .krd-root.krd-fs { padding-top: env(safe-area-inset-top, 0px); }
 .krd-root.krd-fs .sp-top, .krd-root.krd-fs .krd-tabs, .krd-root.krd-fs .sp-levelrow { display: none; }
 body:has(.krd-root.krd-fs) #smdTopBack { visibility: hidden !important; pointer-events: none !important; }
+
+/* Stable deep links and Teach pack: copy buttons, link lines, teach lists.
+ * Existing Kardia tokens only, no new palette. The only motion is the 120ms
+ * press feedback shared with the lab buttons, off under reduced motion. */
+.krd-root .krd-target-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.krd-root .krd-target-row .krd-target-name { flex: 1 1 auto; min-width: 0; }
+.krd-root .krd-copylink { flex: 0 0 auto; min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.krd-root .krd-copylink:active { transform: scale(0.97); }
+.krd-root .krd-link { overflow-wrap: anywhere; word-break: break-word; font-size: 13px; color: var(--sp-mut); }
+.krd-root .krd-teach-objs { margin: 8px 0 0; padding-left: 20px; }
+.krd-root .krd-teach-objs li { margin: 6px 0; }
+.krd-root .krd-teach .sp-btn.sec { min-height: 44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  .krd-root .krd-copylink:active { transform: none; }
+}

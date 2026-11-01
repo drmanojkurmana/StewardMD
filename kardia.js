@@ -201,8 +201,21 @@
     geom: null, heart: null, timer: null, unbind: [], knobsOpen: false,
     knobs: { gain: 55, depth: 160, focus: 55, tgc: [50,50,50,50,50,50,50,50], frequencyMHz: 3.0, sectorDeg: 80, dynamicRange: 55, colourGain: 70, colourNyquistMs: 0.6 }, holdSince: null, gyroMsg: "",
     mode: "2d", frozen: false, echolab: null, scanlab: null, pathology: null, pathologyId: "", severity: "", measureUI: null, audioHandle: null, anatomyState: "idle", liveCanvases: null,
-    lastCutAt: 0, polys: null, phase: 0
+    lastCutAt: 0, polys: null, phase: 0,
+    labOnce: null, pendingView: null
   };
+  /* Stable deep link helpers (kardia-links.js owns the scheme). LINKS may be
+   * absent in old sandboxes; every use below falls back to a toast. */
+  var LINKS = G.KARDIA_LINKS || null;
+  function deepLink(kind, id) {
+    try { if (LINKS && LINKS.link) return LINKS.link(kind, id); } catch (e) {}
+    return "";
+  }
+  function copyLink(kind, id) {
+    var u = deepLink(kind, id);
+    if (!u || !LINKS) { I.toast("Links are not ready. Try again."); return; }
+    LINKS.copy(u, function (m) { I.toast(m); });
+  }
 
   function echoBase() { return (host.cfg && host.cfg.base) || G.SMD_KARDIA_BASE || "/kardia/"; }
 
@@ -370,7 +383,14 @@
         var first = echoViewsForLevel(klevel())[0];
         if (first) startEchoTarget(first, false);
       }
+      /* A view deep link that arrived before the catalogue: select its
+       * target now, or fall back to the list with a spoken reason. */
+      if (EL.pendingView && EL.views) {
+        var pid = EL.pendingView; EL.pendingView = null;
+        if (!applyDeepView(pid)) { EL.labOnce = null; I.toast("That view is not in Kardia."); }
+      }
       if (host.isOpen() && tab() === "echo") showTab("echo");
+      else if (host.isOpen() && st.view === "kteach") showTeach(TEACH.cur);
     }
     function fail() { EL.loading = false; EL.err = true; if (host.isOpen() && tab() === "echo") showTab("echo"); }
     try {
@@ -437,7 +457,10 @@
       '<div class="krd-syncbar"><span class="krd-syncpill" id="krdSyncPill"></span></div>' +
       '<div class="krd-lab" id="krdLab">' +
       '<div class="krd-chips" role="group" aria-label="' + I.tx(T("Target views", "Target views")) + '">' + chips + "</div>" +
-      '<h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + '</h3>' +
+      '<div class="krd-target-row"><h3 class="sp-h3 krd-target-name" id="krdTargetName">' + I.esc(cur.name) + "</h3>" +
+      '<button type="button" class="sp-btn sec krd-copylink" data-act="kecho-copylink" aria-label="' +
+      I.esc(I.t({ en: "Copy link to view", hi: "Copy link to view" }) + ": " + cur.name) + '">' +
+      I.tx(T("Copy link", "Copy link")) + "</button></div>" +
       '<p class="sp-small" id="krdTargetPos">' + I.esc(String(cur.probe.position || "").replace(/\.\s*$/, "")) + ". Marker " + I.esc(String(cur.probe.marker || "").replace(/\.\s*$/, "")) + ".</p>" +
       '<div class="krd-sector-wrap kel-sector-stack" id="krdSectorSlot"></div>' +
       '<div class="kel-load" id="krdAnatomyLoad" hidden><p class="sp-small" id="krdAnatomyText" role="status">Loading real anatomy.</p><div class="kel-load-track"><span class="kel-load-fill" id="krdAnatomyFill"></span></div></div>' +
@@ -943,7 +966,85 @@
   }
 
   function learnHtml() {
-    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + echoHtml() + ecgHtml() + "</div></div>";
+    var paths = "";
+    try {
+      if (G.KARDIA_PATHS) {
+        G.KARDIA_PATHS.attach(host);
+        G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { if (tab() === "cases") showTab("cases"); });
+        paths = G.KARDIA_PATHS.learnHtml();
+      }
+    } catch (e) { paths = ""; }
+    if (paths && G.KARDIA_PATHS && G.KARDIA_PATHS.isOpen()) return '<div class="sp-scroll sp-pad"><div class="sp-col">' + paths + "</div></div>";
+    return '<div class="sp-scroll sp-pad"><div class="sp-col">' + paths + echoHtml() + teachEntryHtml() + ecgHtml() + "</div></div>";
+  }
+
+  /* Teach pack entry on the Learn tab: five 30 minute bedside sessions. */
+  function teachEntryHtml() {
+    return '<h2 class="sp-h2">' + I.tx(T("For teachers", "For teachers")) + '</h2><ul class="sp-rows">' +
+      I.row("kteach", ' data-u=""', I.tile("book"), I.tx(T("Teach pack", "Teach pack")),
+        I.tx(T("Five 30 minute bedside sessions with the links to use", "Five 30 minute bedside sessions with the links to use")), "") + "</ul>";
+  }
+  function teachKindName(k) {
+    return k === "view" ? "View" : k === "calc" ? "Calculator" : k === "lesson" ? "Lesson" : "Case";
+  }
+  function teachLinkRow(l) {
+    return I.row("kteach-open", ' data-k="' + I.esc(l.kind) + '" data-id="' + I.esc(l.id) + '"',
+      I.tile(l.kind === "view" ? "pulse" : l.kind === "calc" ? "calc" : l.kind === "case" ? "folder" : "book"),
+      I.esc(resolveTitle(l.kind, l.id)),
+      I.esc(teachKindName(l.kind)) + " · " + I.tx(T("Tap to open", "Tap to open")),
+      '<span class="krd-link">' + I.esc(deepLink(l.kind, l.id)) + "</span>");
+  }
+  function draftNoteHtml() {
+    return '<p class="krd-note">' + I.ico("info") + "<span>" +
+      I.tx(T("Draft teaching content, to be verified by the owner before clinical use.",
+        "Draft teaching content, to be verified by the owner before clinical use.")) + "</span></p>";
+  }
+  function teachHtml(unitId) {
+    var T5 = G.KARDIA_TEACH;
+    var head = '<div class="sp-scroll sp-pad"><div class="sp-col krd-teach">';
+    if (!T5 || !T5.UNITS || !T5.UNITS.length) {
+      return head + '<h2 class="sp-h2">' + I.tx(T("Teach pack", "Teach pack")) + "</h2>" +
+        '<p class="sp-small">' + I.tx(T("Teach pack is not ready yet.", "Teach pack is not ready yet.")) + "</p></div></div>";
+    }
+    var u = unitId ? T5.unitById(unitId) : null;
+    if (!u) {
+      var rows = T5.UNITS.map(function (x) {
+        return I.row("kteach", ' data-u="' + I.esc(x.id) + '"', I.tile("book"), I.esc(I.t(x.name)),
+          I.esc(I.t(x.time)) + " · " + x.links.length + " " + I.tx(T("links", "links")), "");
+      }).join("");
+      return head + '<h2 class="sp-h2">' + I.tx(T("Teach pack", "Teach pack")) + "</h2>" +
+        '<p class="sp-small">' + I.tx(T("Five 30 minute bedside sessions. Each lists its aims, the links to open, and a course note to copy.",
+          "Five 30 minute bedside sessions. Each lists its aims, the links to open, and a course note to copy.")) + "</p>" +
+        '<ul class="sp-rows">' + rows + "</ul>" + draftNoteHtml() + "</div></div>";
+    }
+    var objs = u.objectives.map(function (o) { return "<li>" + I.tx(o) + "</li>"; }).join("");
+    var links = u.links.map(teachLinkRow).join("");
+    return head + '<p><button type="button" class="sp-btn sec" data-act="kteach-list">' +
+      I.tx(T("All teach units", "All teach units")) + "</button></p>" +
+      '<h2 class="sp-h2">' + I.esc(I.t(u.name)) + "</h2>" +
+      '<p class="sp-small">' + I.esc(I.t(u.time)) + "</p>" +
+      "<p>" + I.tx(u.blurb) + "</p>" +
+      '<h3 class="sp-h3">' + I.tx(T("Aims", "Aims")) + '</h3><ul class="krd-teach-objs">' + objs + "</ul>" +
+      '<h3 class="sp-h3">' + I.tx(T("Links to use", "Links to use")) + '</h3><ul class="sp-rows">' + links + "</ul>" +
+      '<h3 class="sp-h3">' + I.tx(T("Course note", "Course note")) + "</h3><p>" + I.tx(u.desc) + "</p>" +
+      '<p><button type="button" class="sp-btn sec" data-act="kteach-copy" data-u="' + I.esc(u.id) + '">' +
+      I.tx(T("Copy course note", "Copy course note")) + "</button></p>" +
+      draftNoteHtml() + "</div></div>";
+  }
+  /* Teach pack screen: a Learn sub screen, so the tab bar stays on Learn. */
+  function showTeach(unitId, focusSel) {
+    /* Warm the title catalogues so linked rows show real names on the next paint. */
+    try {
+      loadEchoViews();
+      if (G.KARDIA_CASES && G.KARDIA_CASES.ensureIndex) G.KARDIA_CASES.ensureIndex();
+    } catch (e) {}
+    TEACH.cur = unitId || null;
+    I.setPref("ktab", "learn");
+    st.view = "kteach";
+    st.onBack = function () { showTab("learn"); return true; };
+    st.again = function (f) { showTeach(TEACH.cur, f || null); };
+    I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml("learn") + teachHtml(TEACH.cur), focusSel);
+    scrollActiveTabIntoView();
   }
 
   function kardioxHtml() {
@@ -958,6 +1059,13 @@
   }
 
   function echoBodyHtml() {
+    /* A view deep link opens the scan pane for that exact target, with a
+     * plain way back to the Probe Lab. The scan switch stays off the screen. */
+    if (EL.labOnce === "scan" && EL.views) {
+      return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' +
+        '<p><button type="button" class="sp-btn sec" data-act="kecho-lab-once">' +
+        I.tx(T("Back to Probe Lab", "Back to Probe Lab")) + "</button></p>" + echoLabHtml() + "</div></div>";
+    }
     var pane = labMode() === "probe" ? probeLabHtml() : echoLabHtml();
     return '<div class="sp-scroll krd-echo-scroll"><div class="krd-echo-col">' + pane + "</div></div>";
   }
@@ -1084,9 +1192,115 @@
       for (var i = 0; i < f.length; i++) if (f[i].contentWindow === e.source) { setLabFullscreen(d.krdFs); return; }
     });
   }
+  /* ================= Stable deep links (openDeep) =================
+   * One link per view, calculator, lesson and case:
+   * stewardmd://kardia/<kind>/<id>. The router (native-bridge.js parses the
+   * URL, home.js SMD_openRoute forwards it) ends here. Each kind opens
+   * exactly like a tap on that item, with the same Pro lock, so a link
+   * never opens what a tap would not. Returns true when the link names an
+   * existing item, false for an unknown kind or id. */
+  var TEACH = { cur: null };
+  var DEEP_KINDS = ["view", "calc", "lesson", "case"];
+  function applyDeepView(id) {
+    var list = EL.views ? EL.views.views : [], v = null, i;
+    for (i = 0; i < list.length; i++) if (list[i].id === id) v = list[i];
+    if (!v) return false;
+    if (echoViewLocked(v, klevel(), I.isPro())) { I.showPro(); return true; }
+    EL.labOnce = "scan"; EL._mountedFor = null;
+    startEchoTarget(v, false);
+    return true;
+  }
+  function openDeepView(id) {
+    id = String(id == null ? "" : id);
+    if (!EL.views) {
+      /* Catalogue still loading: hold the target and the scan pane; done() above applies it. */
+      EL.pendingView = id; EL.labOnce = "scan";
+      loadEchoViews();
+      showTab("echo");
+      return true;
+    }
+    var ok = applyDeepView(id);
+    showTab("echo");
+    if (!ok) I.toast("That view is not in Kardia.");
+    return ok;
+  }
+  function openDeepLesson(id) {
+    id = String(id == null ? "" : id);
+    var W = host._learn && host._learn._w, m = W && W.ix && W.ix.lessons[id];
+    showTab("learn");
+    if (!m) { I.toast("That lesson is not in Kardia."); return false; }
+    I.ACTIONS.lesson({ getAttribute: function (n) { return n === "data-l" ? id : null; } });
+    return true;
+  }
+  function openDeepCase(id) {
+    id = String(id == null ? "" : id);
+    if (!G.KARDIA_CASES) { showTab("cases"); I.toast("Cases are not ready yet."); return false; }
+    showTab("cases");
+    var ok = false;
+    try { ok = G.KARDIA_CASES.openCaseById(id); } catch (e) { ok = false; }
+    if (!ok) I.toast("That case is not in Kardia.");
+    return ok;
+  }
+  function routeDeep(kind, id) {
+    kind = String(kind == null ? "" : kind).toLowerCase();
+    id = String(id == null ? "" : id);
+    if (DEEP_KINDS.indexOf(kind) < 0 || !id) { I.toast("That link did not match anything in Kardia."); return false; }
+    if (kind === "view") return openDeepView(id);
+    if (kind === "lesson") return openDeepLesson(id);
+    if (kind === "case") return openDeepCase(id);
+    /* calc */
+    if (!G.KARDIA_CALC) { I.toast("Calculators are not ready yet."); return false; }
+    showTab("calc");
+    if (G.KARDIA_CALC.openCalc(id)) return true;
+    I.toast("That calculator is not in Kardia.");
+    return false;
+  }
+  /* KARDIA.openDeep(kind, id) or KARDIA.openDeep("stewardmd://kardia/calc/lv-ef").
+   * Opens Kardia first when it is closed, then routes once the engine data has loaded. */
+  function openDeep(a, b) {
+    if (!on()) return false;
+    var kind = a, id = b;
+    if (b == null && typeof a === "string" && a.indexOf("://") >= 0) {
+      var p = null;
+      try { if (LINKS && LINKS.parse) p = LINKS.parse(a); } catch (e) {}
+      if (!p) { if (host.isOpen()) I.toast("That link did not match anything in Kardia."); return false; }
+      kind = p.kind; id = p.id;
+    }
+    if (!host.isOpen()) { S_PENDING_DEEP.kind = kind; S_PENDING_DEEP.id = id; S_PENDING_DEEP.on = true; host.open(); return true; }
+    return routeDeep(kind, id);
+  }
+  var S_PENDING_DEEP = { on: false, kind: "", id: "" };
+  function prettyId(id) {
+    return String(id).replace(/[_.\-]+/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+  }
+  /* Title for a linked item from already loaded data; a readable id when its
+   * catalogue has not loaded yet (the loader repaints when it arrives). */
+  function resolveTitle(kind, id) {
+    try {
+      var i, list;
+      if (kind === "view" && EL.views) {
+        list = EL.views.views;
+        for (i = 0; i < list.length; i++) if (list[i].id === id) return list[i].name;
+      }
+      if (kind === "calc" && G.KARDIA_CALC && G.KARDIA_CALC.calcById) {
+        var c = G.KARDIA_CALC.calcById(id);
+        if (c) return c.name;
+      }
+      if (kind === "lesson" && host._learn && host._learn._w && host._learn._w.ix) {
+        var m = host._learn._w.ix.lessons[id];
+        if (m) return I.t(m.title);
+      }
+      if (kind === "case" && G.KARDIA_CASES && G.KARDIA_CASES._state && G.KARDIA_CASES._state.index) {
+        list = G.KARDIA_CASES._state.index.cases || [];
+        for (i = 0; i < list.length; i++) if (list[i].id === id) return list[i].title;
+      }
+    } catch (e) {}
+    return prettyId(id);
+  }
   function showTab(id, focusSel) {
     bindLabFullscreen(); setLabFullscreen(false);
     if (TABS.indexOf(id) < 0) id = "echo";
+    if (id !== "echo") EL.labOnce = null;
     stopEchoLab();
     I.setPref("ktab", id);
     st.view = "hub"; st.again = function (f) { showTab(tab(), f || null); };
@@ -1098,7 +1312,15 @@
       var cbody = G.KARDIA_CASES.html();
       /* A case in progress paints its own top bar and progress; the list keeps the tab chrome. */
       if (G.KARDIA_CASES._state && G.KARDIA_CASES._state.curId) { I.paint(cbody, focusSel); try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {} return; }
-      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + cbody, focusSel);
+      var shelf = "";
+      try {
+        if (G.KARDIA_PATHS) {
+          G.KARDIA_PATHS.attach(host);
+          G.KARDIA_PATHS.setNavigator(function (f) { showTab("learn", f || null); }, function (t) { showTab(t); }, function () { if (tab() === "cases") showTab("cases"); });
+          shelf = '<div class="sp-scroll sp-pad"><div class="sp-col">' + G.KARDIA_PATHS.casesShelfHtml() + "</div></div>";
+        }
+      } catch (e) { shelf = ""; }
+      I.paint(I.markTop(I.tx(host.cfg.subtitle)) + tabsHtml(id) + shelf + cbody, focusSel);
       scrollActiveTabIntoView();
       try { if (G.KARDIA_PREMIUM && G.KARDIA_PREMIUM.onTab) G.KARDIA_PREMIUM.onTab(id); } catch (e) {}
       return;
@@ -1168,6 +1390,25 @@
   };
   I.ACTIONS.kpro = function () { I.showPro(); };
   I.ACTIONS.kretry = function () { showTab(tab(), "[data-act=kretry]"); };
+  I.ACTIONS["kecho-copylink"] = function () {
+    var v = echoCurrentView();
+    if (v) copyLink("view", v.id);
+  };
+  I.ACTIONS["kecho-lab-once"] = function () { EL.labOnce = null; showTab("echo"); };
+  I.ACTIONS.kteach = function (b) {
+    var u = b && b.getAttribute ? b.getAttribute("data-u") : "";
+    showTeach(u || null, '[data-act=kteach][data-u="' + (u || "") + '"]');
+  };
+  I.ACTIONS["kteach-list"] = function () { showTeach(null, "[data-act=kteach-list]"); };
+  I.ACTIONS["kteach-open"] = function (b) {
+    routeDeep(b.getAttribute("data-k"), b.getAttribute("data-id"));
+  };
+  I.ACTIONS["kteach-copy"] = function (b) {
+    var T5 = G.KARDIA_TEACH, u = T5 && T5.unitById(b.getAttribute("data-u"));
+    if (!u) return;
+    var text = I.t(u.name) + ". " + I.t(u.time) + ". " + I.t(u.desc);
+    if (LINKS && LINKS.copy) LINKS.copy(text, function (m) { I.toast(m === "Link copied." ? "Course note copied." : m); });
+  };
   I.ACTIONS["kecho-retry"] = function () { EL.err = false; EL.views = null; EL.loading = false; showTab("echo", "[data-act=kecho-retry]"); };
   I.ACTIONS["kecho-lab"] = function (b) {
     var v = b.getAttribute("data-v");
@@ -1261,19 +1502,29 @@
      not need it, so paint after the load settles (first open) or at once ( later opens, config cached).
      Attached after the engine's own handlers, so the tab paint always wins, with no flash. */
   var baseOpen = host.open;
-  host.open = function () {
+  /* opts.deep ({kind, id}) routes one stable link after the engine data loads. */
+  host.open = function (opts) {
     if (!on()) return false;
     var r = baseOpen();
     if (!r) return r;
     var L = st.loading;
-    if (L && !st.cfg && !st.err) L.then(showReady, showReady);
-    else showReady();
+    if (L && !st.cfg && !st.err) L.then(function () { showReady(opts); }, function () { showReady(opts); });
+    else showReady(opts);
     return r;
   };
-  function showReady() { if (host.isOpen()) showTab(tab()); }
+  function showReady(opts) {
+    if (!host.isOpen()) return;
+    var d = (opts && opts.deep) || (S_PENDING_DEEP.on ? S_PENDING_DEEP : null);
+    S_PENDING_DEEP.on = false;
+    if (d) { routeDeep(d.kind, d.id); return; }
+    showTab(tab());
+  }
 
   /* Review Desk style "Read it" hooks and tests read these; the atlas itself stays untouched. */
+  /* KARDIA.openDeep(kind, id): the deep link entry, like CLINIX.openDeep. */
+  host.openDeep = openDeep;
   host._kardia = { tabs: TABS.slice(), levels: LEVELS.slice(), freeLessons: FREE_LESSONS, freeEchoPerArea: FREE_ECHO_PER_AREA, freeBankQuestions: FREE_BANK_QUESTIONS, on: on, openKardioX: openKardioX,
+    openDeep: openDeep, link: function (kind, id) { return deepLink(kind, id); },
     freeEchoViews: FREE_ECHO_VIEWS.slice(),
     angioLab: { get src() { return angioSrc(); } },
     probeLab: {
