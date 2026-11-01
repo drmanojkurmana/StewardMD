@@ -1991,7 +1991,6 @@
       "</div>" +
       (G.PREP_PLAY ? G.PREP_PLAY.homeHtml(HOST) : "") +
       (G.PREP_MEDIGRAM ? G.PREP_MEDIGRAM.homeHtml(HOST) : "") +
-      (G.PREP_SOUND ? G.PREP_SOUND.homeHtml(HOST) : "") +
       psHomeHtml(s) +
       (scope ? ssHomeSubjects(scope, subs, known) :
       '<h2 class="pn-h">Subjects</h2><div class="pn-subs" id="pnGrid">' + subs.map(function (sb) { return tile(sb, known ? st.ix[sb.id] : null); }).join("") + "</div>") +
