@@ -183,7 +183,7 @@ async function commonsSearch(q) {
     const em = ii.extmetadata || {};
     const lic = parseLicence(em.LicenseShortName?.value || em.UsageTerms?.value);
     if (!lic) continue;
-    out.push({ title: pg.title, thumb: ii.thumburl || ii.url, page: ii.descriptionurl, author: clean(em.Artist?.value || "Unknown").slice(0, 70), licence: lic, licenceName: clean(em.LicenseShortName?.value) });
+    out.push({ title: pg.title, thumb: ii.thumburl || ii.url, page: ii.descriptionurl, author: clean(em.Artist?.value || "Unknown").split(/\s+Author info\b/)[0].trim().slice(0, 70), licence: lic, licenceName: clean(em.LicenseShortName?.value) });
   }
   return out;
 }
@@ -200,16 +200,16 @@ async function pickCommons(c, pl, cands) {
   const imgs = [];
   for (const k of cands.slice(0, 6)) { const b = await download(k.thumb); if (b) imgs.push({ k, b }); }
   if (!imgs.length) return null;
-  const parts = [{ text: `Article: ${c.d.name} (${c.d.system || "?"}). Article text: ${articleText(c.d).slice(0, 2500)}\nThe article needs an illustration like: ${pl.composition}\nBelow are ${imgs.length} candidate free images, numbered 0..${imgs.length - 1} in order. Pick the single best one for this article.\nCheck: it clearly shows the article topic and is correct for a textbook; legible and good quality; not misleading; ${RULES}\nReturn only JSON: {"best": index or -1 when none is usable, "score": 0-100, "issues": "short problems or empty"}.` }];
+  const parts = [{ text: `Article: ${c.d.name} (${c.d.system || "?"}). Article text: ${articleText(c.d).slice(0, 2500)}\nThe article needs an illustration like: ${pl.composition}\nBelow are ${imgs.length} candidate free images, numbered 0..${imgs.length - 1} in order. Pick the single best one for this article.\nCheck: it clearly shows the article topic and is correct for a textbook; legible and good quality; not misleading; ${RULES}\nReturn only JSON: {"best": index or -1 when none is usable, "score": 0-100, "issues": "short problems or empty", "figureTitle": "under 6 words, naming what the CHOSEN image shows", "caption": "under 14 words, describing only what the CHOSEN image shows", "alt": "under 35 words, describing only what the CHOSEN image shows"}.` }];
   imgs.forEach((x, i) => { parts.push({ text: "Image " + i + ":" }); parts.push({ inlineData: { mimeType: /png/i.test(x.k.thumb) ? "image/png" : "image/jpeg", data: x.b.toString("base64") } }); });
   const j = await gen("gemini-2.5-flash", { contents: [{ role: "user", parts }], generationConfig: { responseMimeType: "application/json", temperature: 0 } }, 0.01);
   const o = JSON.parse(textOf(j)); const i = Number(o.best);
   if (!(i >= 0 && imgs[i])) return { score: Number(o.score) || 0, issues: clean(o.issues), none: true };
-  return { img: imgs[i], score: Number(o.score) || 0, issues: clean(o.issues) };
+  return { img: imgs[i], score: Number(o.score) || 0, issues: clean(o.issues), desc: { figureTitle: o.figureTitle, caption: o.caption, alt: o.alt } };
 }
 
-// ---- generated figure fallback (StewardMD palette: no gradients, no glow, no shadows) ----
-const STYLE = "Clean flat educational medical figure in the style of a modern textbook: pure white background, deep navy (#0D1D23) outlines and text, teal (#42CDB5) as the only accent, no gradients, no glow, no shadows, no photographs, no watermark, no logos, no patient identifiers. Use only the labels given, spelled exactly, in a clear sans-serif font, each label near the structure it names; if a label would crowd the figure leave it out.";
+// ---- generated figure fallback (owner 2026-11-01: full colour, realistic 3D, premium; never the flat teal/navy look) ----
+const STYLE = "Premium full-colour medical illustration with a realistic 3D rendered look, like a high-end anatomy atlas or medical animation still: true-to-life tissue, organ and skin colours, soft realistic lighting and depth, crisp detail, clean light neutral background. No watermark, no logos, no patient identifiers, no photograph of a real identifiable person. Use only the labels given, spelled exactly, in a clear sans-serif font with thin leader lines to the structure each names; if a label would crowd the figure leave it out.";
 async function aiFigure(c, pl, issues) {
   const p = `${STYLE}\nDraw: ${pl.composition}\nLabels (exact spelling): ${pl.labels.join("; ")}${issues ? "\nFix these problems from the previous attempt: " + issues : ""}`;
   const j = await genImage({ contents: [{ role: "user", parts: [{ text: p }] }], generationConfig: { responseModalities: ["TEXT", "IMAGE"] } });
@@ -229,7 +229,7 @@ function toWebp(buf, outFile) {
 function figName(id) { return (id.toLowerCase() + "-fig1").replace(/[^a-z0-9-]/g, "-").slice(0, 78); }
 
 async function one(c) {
-  const pl = await plan(c);
+  let pl = await plan(c);
   if (!pl.imageWorthy) { state.skipped++; return `SKIPPED not-image-worthy (${pl.reason || "no reason"})`.slice(0, 140); }
   const name = figName(c.id);
   let best = null;                                              // { buf, score, issues, kind, credit }
@@ -238,7 +238,7 @@ async function one(c) {
   for (const q of pl.searchQueries) { for (const k of await commonsSearch(q)) if (!seen.has(k.title)) { seen.add(k.title); cands.push(k); } if (cands.length >= 6) break; }
   if (cands.length) {
     const r = await pickCommons(c, pl, cands);
-    if (r && r.img) best = { buf: r.img.b, score: r.score, issues: r.issues, kind: "commons", credit: r.img.k };
+    if (r && r.img) best = { buf: r.img.b, score: r.score, issues: r.issues, kind: "commons", credit: r.img.k, desc: r.desc };
   }
   // 2) generated figure when no free image reached 70
   if (!best || best.score < 70) {
@@ -251,6 +251,7 @@ async function one(c) {
   }
   const webpTmp = path.join(os.tmpdir(), name + ".webp");
   const { ar } = toWebp(best.buf, webpTmp);
+  if (best.desc && best.kind === "commons") pl = { ...pl, ...Object.fromEntries(Object.entries(best.desc).filter(([, v]) => clean(v))) };   // a Commons pick is described from the image itself, not the plan
   const cap = clean(pl.caption).replace(/[.!]+$/, "");
   const credit = best.kind === "commons" ? `Image: ${best.credit.author}, ${best.credit.licence}, Wikimedia Commons.` : "Illustration: StewardMD original.";
   const figTitle = clean(pl.figureTitle) || c.d.name;
