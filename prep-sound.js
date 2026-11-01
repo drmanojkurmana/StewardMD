@@ -56,6 +56,16 @@
     }
     return '<h2 class="pn-h">Sound</h2><div class="pn-group pn-sound-home">' + inner + "</div>";
   }
+  // Settings (owner 2026-11-01): the whole Sound module lives in PrepNucleus Settings, labelled Beta, not on home.
+  function settingsInner(o) {
+    var music = G.PREP_SOUND_SPOTIFY ? '<button type="button" class="pn-btn" data-act="p-music">Music player (Spotify)</button>' : "";
+    var amb = !o.prefsEnabled
+      ? '<p class="pn-sound-status">Focus ambience. Nothing plays until you tap.</p><button type="button" class="pn-btn pri" data-act="s-enable">Enable ambience</button>'
+      : '<p class="pn-sound-status" role="status">' + esc(statusText(o)) + "</p>" + presetChips(o.presets, o.preset, "pn-chip") +
+        '<div class="pn-sound-homerow"><button type="button" class="pn-btn" data-act="s-open">Providers and settings</button>' +
+        '<button type="button" class="pn-sound-link" data-act="s-disable">Turn off</button></div>';
+    return amb + music;
+  }
   function dockHtml(o) {
     var c = o.controls;
     var btn = "";
@@ -231,6 +241,7 @@
       else if (S.wantFocus) { S.wantFocus = false; var dl = dockEl.querySelector(".pn-sound-dlabel"); if (dl) dl.focus(); }
     }
     if (H) { try { if (H.stackTop && H.stackTop() === H.home) H.rerender(); } catch (e) {} }
+    try { var box = D.querySelector("[data-sound-settings]"); if (box) box.innerHTML = settingsInner(state()); } catch (e) {}
   }
 
   function startPreset(id) {
@@ -263,7 +274,7 @@
       case "s-enable": S.prefs.enabled = true; S.provider = "first_party"; S.note = ""; S.shareMsg = "";
         applyMachine({ t: "ENABLE" }); applyMachine({ t: "SELECT_PROVIDER", provider: "first_party" }); return;
       case "s-disable": S.prefs.enabled = false; applyMachine({ t: "STOP" }); S.sheet = false; render(); return;
-      case "s-open": S.sheet = true; S.shareMsg = ""; render(); return;
+      case "s-open": closePlanSheet(); S.sheet = true; S.shareMsg = ""; render(); return;
       case "s-close": S.sheet = false; S.shareMsg = ""; S.wantFocus = true; render(); return;
       case "s-play": togglePlay(); return;
       case "s-pause": togglePlay(); return;
@@ -315,6 +326,9 @@
     render();
   }
   function homeHtml(h) { H = H || h; var st = state(); return homeSectionHtml(st); }
+  function settingsHtml(h) { H = H || h;
+    return '<section class="pl-grp pl-g-sound"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/></svg></span>Sound <span class="pn-sound-beta">Beta</span></h3><div data-sound-settings>' + settingsInner(state()) + "</div></section>"; }
+  function closePlanSheet() { try { if (G.PREP_PLAN) G.PREP_PLAN.act("p-close"); } catch (e) {} }
   function act(a, b, h) { if (h) H = h; onAct(a, b); }
   function back() { if (S.sheet) { S.sheet = false; S.shareMsg = ""; S.wantFocus = true; render(); return true; } return false; }
   function leave() {
@@ -324,7 +338,7 @@
     dockEl = null;
   }
 
-  G.PREP_SOUND = { act: act, back: back, leave: leave, open: function (h) { boot(h); S.sheet = true; render(); }, bind: boot, homeHtml: homeHtml,
+  G.PREP_SOUND = { act: act, back: back, leave: leave, open: function (h) { boot(h); S.sheet = true; render(); }, bind: boot, homeHtml: homeHtml, settingsHtml: settingsHtml,
     pauseForVideo: function () { return hush("video"); }, hushForTts: function () { return hush("tts"); }, hush: hush,
     isPlaying: function () { return S.sm === "playing_embedded"; }, enabled: function () { return S.prefs.enabled; },
     _pure: PURE, _s: S };

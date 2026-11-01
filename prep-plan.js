@@ -669,6 +669,13 @@
   }
   // A plan choice for an exam tab: the first choice on it (legacy "usmle" reads Step 1).
   function choiceForTab(tab) { for (var i = 0; i < EXAM_CHOICES.length; i++) if (EXAM_CHOICES[i].tab === tab) return EXAM_CHOICES[i].id; return null; }
+  // Sound (Beta) lives here, not on home (owner 2026-11-01). Ambience is flag-gated; the Spotify player is on for all.
+  function soundSettingsHtml() {
+    if (G.PREP_SOUND && G.PREP_SOUND.settingsHtml) return G.PREP_SOUND.settingsHtml(H);
+    if (!G.PREP_SOUND_SPOTIFY) return "";
+    return '<section class="pl-grp pl-g-sound"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/></svg></span>Sound <span class="pn-sound-beta">Beta</span></h3>' +
+      '<button type="button" class="pn-btn" data-act="p-music">Music player (Spotify)</button></section>';
+  }
   function settingsSheet() {
     SET = JSON.parse(JSON.stringify(cfg())); P.cal = null; P.calOpen = false;
     if (SET.exam === "usmle") SET.exam = "usmle-step1";
@@ -687,7 +694,7 @@
     var ch = choiceOf(SET.exam), mins = SET.min < 60 ? SET.min + " min" : SET.min === 60 ? "1 hour" : SET.min === 90 ? "1 h 30 min" : "2 hours";
     var sec = function (k, icon, title, body) { return '<section class="pl-grp pl-g-' + k + '"><h3 class="pl-sh"><span class="pl-sic" aria-hidden="true">' + ic(icon) + "</span>" + title + "</h3>" + body + "</section>"; };
     var html = '<span class="pn-grab" aria-hidden="true"></span><div class="pl-shead"><span class="pl-shart" aria-hidden="true"></span><div><h2 id="pnSetT">Your plan</h2><p class="pn-mut pn-small">' + esc((ch ? ch.label : "Your exam") + scopeLabel(SET) + " · " + mins + " a day" + (SET.rem ? " · reminder " + SET.rem : "")) + '</p></div></div><div class="pl-setbody">' +
-      sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_ASK ? G.PREP_ASK.settingsHtml(H) : "") + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
+      sec("exam", "cap", "Exam", f.exam) + sec("date", "cal", "Exam date", f.date) + sec("min", "clock", "Time a day", f.min) + sec("rem", "bell", "Reminder", f.rem) + (G.PREP_ASK ? G.PREP_ASK.settingsHtml(H) : "") + soundSettingsHtml() + (G.PREP_NATIVE ? G.PREP_NATIVE.syncHtml() : "") + "</div>" +
       '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="p-save">Save</button><button type="button" class="pn-btn" data-act="p-close">Cancel</button></div>';
     if (first) openSheet("set", html, "pnSetT");
     else {
@@ -836,6 +843,7 @@
     if (a === "p-why") return whySheet();
     if (a === "p-settings") return settingsSheet();
     if (a === "p-close") return closeSheet();
+    if (a === "p-music") { closeSheet(); try { G.PREP_SOUND_SPOTIFY.act("sp-open", null, H); } catch (e) {} return true; }
     if (a === "p-go") return go(b.getAttribute("data-k"));
     if (a === "p-mod" || a === "p-sub") {
       var sid = b.getAttribute("data-s"), mid = b.getAttribute("data-m");
