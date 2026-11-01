@@ -248,7 +248,8 @@
   /* "Toward the right shoulder, about ten o clock." -> "Marker towards the right shoulder, about ten o'clock." */
   function tfMarker(m) {
     m = String(m).replace(/\.\s*$/, "").replace(/\bo clock\b/g, "o'clock");
-    return "Marker " + m.charAt(0).toLowerCase() + m.slice(1).replace(/^toward\b/, "towards") + ".";
+    m = (m.charAt(0).toLowerCase() + m.slice(1)).replace(/^toward\b/, "towards");
+    return "Marker " + m + ".";
   }
   function tfRowHtml(r) {
     var inner = "<b>" + I.esc(r.name) + "</b>" +
