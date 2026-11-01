@@ -406,6 +406,14 @@
       '<div class="krd-levelmenu-panel">' + levelsHtml(lv) + "</div></details>";
   }
 
+  function echoProvHtml(v) {
+    var p = v && v.provenance ? v.provenance : null;
+    if (!p || !p.guideline) return "";
+    return '<p class="sp-small krd-src">' + I.tx(T("Source", "स्रोत")) + ": " + I.esc(p.guideline) + ". " +
+      I.esc(p.author || "Kardia team (AI drafted)") + ". " +
+      I.tx(T("Awaiting review.", "समीक्षा बाकी है।")) + " " +
+      I.tx(T("Updated", "अपडेट")) + " " + I.esc(p.date || "2026-11-01") + ".</p>";
+  }
   function echoLabHtml() {
     var lv = klevel(), pro = I.isPro();
     var head = "";
@@ -462,6 +470,7 @@
       I.esc(I.t({ en: "Copy link to view", hi: "Copy link to view" }) + ": " + cur.name) + '">' +
       I.tx(T("Copy link", "Copy link")) + "</button></div>" +
       '<p class="sp-small" id="krdTargetPos">' + I.esc(String(cur.probe.position || "").replace(/\.\s*$/, "")) + ". Marker " + I.esc(String(cur.probe.marker || "").replace(/\.\s*$/, "")) + ".</p>" +
+      echoProvHtml(cur) +
       '<div class="krd-sector-wrap kel-sector-stack" id="krdSectorSlot"></div>' +
       '<div class="kel-load" id="krdAnatomyLoad" hidden><p class="sp-small" id="krdAnatomyText" role="status">Loading real anatomy.</p><div class="kel-load-track"><span class="kel-load-fill" id="krdAnatomyFill"></span></div></div>' +
       '<p class="krd-sim-note" id="krdSimNote" role="status"></p>' +

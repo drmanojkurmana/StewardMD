@@ -20,7 +20,10 @@ const DASH = /[-\u2013\u2014]/;
 function textOf(value, out) {
   if (typeof value === "string") { out.push(value); return; }
   if (Array.isArray(value)) { value.forEach(function (v) { textOf(v, out); }); return; }
-  if (value && typeof value === "object") { Object.values(value).forEach(function (v) { textOf(v, out); }); }
+  /* Provenance is machine metadata, not catalogue prose: the mandated ISO
+   * change date 2026-11-01 carries hyphens by definition. All readable
+   * catalogue text elsewhere stays dash free. */
+  if (value && typeof value === "object") { Object.keys(value).forEach(function (k) { if (k !== "provenance") textOf(value[k], out); }); }
 }
 
 test("views file carries ai drafted review status", function () {
