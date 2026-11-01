@@ -144,7 +144,8 @@
     lofi_calm: '<path d="M14 44q8-10 16 0t16 0 16 0 16 0 16 0 12 0" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".7"/><path d="M14 66q8-10 16 0t16 0 16 0 16 0 16 0 12 0" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".45"/><path d="M14 86q8-10 16 0t16 0 16 0 16 0 16 0 12 0" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".25"/>',
     night_shift: '<circle cx="82" cy="38" r="13" fill="#42CDB5" opacity=".85"/><circle cx="34" cy="30" r="2.4" fill="#E2F1EE"/><circle cx="52" cy="52" r="1.8" fill="#E2F1EE" opacity=".8"/><circle cx="28" cy="76" r="2.4" fill="#E2F1EE" opacity=".6"/><circle cx="88" cy="84" r="1.8" fill="#E2F1EE" opacity=".7"/><circle cx="64" cy="98" r="2.2" fill="#E2F1EE" opacity=".5"/>',
     slow_breath: '<path d="M8 78q26-30 52-18t52-6" fill="none" stroke="#42CDB5" stroke-width="3" opacity=".75"/><path d="M8 94q26-26 52-14t52-4" fill="none" stroke="#42CDB5" stroke-width="2.5" opacity=".4"/>',
-    default: '<path d="M48 84V40l28-6v34" fill="none" stroke="#42CDB5" stroke-width="3"/><circle cx="38" cy="84" r="9" fill="none" stroke="#42CDB5" stroke-width="3"/><circle cx="66" cy="68" r="9" fill="none" stroke="#42CDB5" stroke-width="3"/>'
+    // Same solid beamed notes as the music button, scaled into the 120 tile (one icon everywhere).
+    default: '<path transform="translate(30 30) scale(2.5)" fill="#42CDB5" d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/>'
   };
   function tileHtml(model) {
     var p = TILE_PATHS[model.artworkKey] || TILE_PATHS.default;
@@ -189,19 +190,30 @@
     head += "</div>";
 
     if (!m.title) {
-      return '<section class="pn-player pn-player-empty" data-provider="' + esc(m.provider) + '" aria-label="Now playing">' + head +
+      var row = opts.layout === "row", et = "";
+      // Nothing playing is not "no controls": play resumes the learner's last Spotify session.
+      if (row && (c.previous || c.play || c.next)) {
+        et = '<div class="pn-player-transport" role="group" aria-label="Playback controls">' +
+          (c.previous ? '<button type="button" class="pn-player-iconbtn"' + act("previous") + ' aria-label="Previous track">' + ico("prev") + "</button>" : "") +
+          (c.play ? '<button type="button" class="pn-player-play"' + act("toggle") + ' aria-label="Play">' + ico("play") + "</button>" : "") +
+          (c.next ? '<button type="button" class="pn-player-iconbtn"' + act("next") + ' aria-label="Next track">' + ico("next") + "</button>" : "") + "</div>";
+      }
+      return '<section class="pn-player pn-player-empty' + (row ? " pn-player--row" : "") + '" data-provider="' + esc(m.provider) + '" aria-label="Now playing">' + head +
         tileHtml(m) +
-        '<p class="pn-player-nothing">Nothing playing</p>' +
-        '<button type="button" class="pn-player-pick"' + act("pick") + ">" + esc(opts.pickLabel || "Pick something to play") + "</button>" +
+        (row ? '<h3 class="pn-player-title pn-player-nothing">Nothing playing</h3><p class="pn-player-artist">' + esc(opts.emptyHint || "Press play to resume, or pick from Up next") + "</p>" + et
+          : '<p class="pn-player-nothing">Nothing playing</p>' +
+        '<button type="button" class="pn-player-pick"' + act("pick") + ">" + esc(opts.pickLabel || "Pick something to play") + "</button>") +
         (!m.likeAvailable && c.like ? '<p class="pn-player-note">' + esc(opts.likeDisabledReason || "Reconnect Spotify to save songs") + "</p>" : "") +
         "</section>";
     }
 
     var art = "";
     if (c.artwork) {
-      art = m.artworkUrl
-        ? '<div class="pn-player-art"><img src="' + esc(m.artworkUrl) + '" alt="" width="300" height="300" loading="lazy"></div>'
-        : tileHtml(m);
+      // Spotify's display rules: artwork shown unmodified and linking back to the item on Spotify (opts.artHref).
+      var img = '<img src="' + esc(m.artworkUrl || "") + '" alt="" width="300" height="300" loading="lazy">';
+      art = !m.artworkUrl ? tileHtml(m) : opts.artHref
+        ? '<a class="pn-player-art" href="' + esc(opts.artHref) + '" target="_blank" rel="noopener" aria-label="Open ' + esc(m.title) + ' in ' + esc(m.providerLabel) + '">' + img + "</a>"
+        : '<div class="pn-player-art">' + img + "</div>";
     }
     var seek = "";
     if (m.durationMs > 0) {
@@ -238,7 +250,7 @@
     var likeNote = !m.likeAvailable && c.like
       ? '<p class="pn-player-note">' + esc(opts.likeDisabledReason || "Reconnect Spotify to save songs") + "</p>" : "";
 
-    return '<section class="pn-player" data-provider="' + esc(m.provider) + '" aria-label="Now playing on ' + esc(m.providerLabel) + '">' +
+    return '<section class="pn-player' + (opts.layout === "row" ? " pn-player--row" : "") + '" data-provider="' + esc(m.provider) + '" aria-label="Now playing on ' + esc(m.providerLabel) + '">' +
       head + art +
       '<h3 class="pn-player-title">' + esc(m.title) + "</h3>" +
       (m.artist ? '<p class="pn-player-artist">' + esc(m.artist) + "</p>" : "") +
@@ -310,8 +322,23 @@
       if (!s) return;
       state.model = normalizeModel(s.model); state.caps = normalizeCaps(s.caps);
       state.baseAt = Date.now();
+      // Re-sync every 5 s: rebuild only when something besides the position changed, else the art reloads and flickers.
+      var still = {}; for (var k in state.model) still[k] = state.model[k]; still.positionMs = 0;
+      var key = cardHtml(still, state.caps, currentOpts());
+      if (key === state.key && el.firstChild) return showPos(true);
+      state.key = key;
       el.innerHTML = cardHtml(state.model, state.caps, currentOpts());
       wire();
+    }
+    function showPos(force) {
+      if (!state.model || (!force && !state.model.isPlaying)) return;
+      var pos = state.model.isPlaying ? interpolatePosition(state.model, state.baseAt, Date.now()) : (state.model.positionMs || 0);
+      var t = el.querySelector("[data-player-elapsed]");
+      if (t) t.textContent = formatMs(pos);
+      var seek = el.querySelector("[data-player-seek]");
+      if (seek && !state.dragging) seek.value = String(Math.min(pos, Number(seek.max) || pos));
+      var bar = el.querySelector(".pn-player-bar span");
+      if (bar && state.model.durationMs > 0) bar.style.width = Math.min(100, (pos / state.model.durationMs) * 100) + "%";
     }
     function wire() {
       var seek = el.querySelector("[data-player-seek]");
@@ -338,16 +365,7 @@
       if (typeof o.onAction === "function") o.onAction(act, null, b);
     }
     el.addEventListener("click", onClick);
-    var tickTimer = setInterval(function () {
-      if (!state.model || !state.model.isPlaying) return;
-      var pos = interpolatePosition(state.model, state.baseAt, Date.now());
-      var t = el.querySelector("[data-player-elapsed]");
-      if (t) t.textContent = formatMs(pos);
-      var seek = el.querySelector("[data-player-seek]");
-      if (seek && !state.dragging) seek.value = String(Math.min(pos, Number(seek.max) || pos));
-      var bar = el.querySelector(".pn-player-bar span");
-      if (bar && state.model.durationMs > 0) bar.style.width = Math.min(100, (pos / state.model.durationMs) * 100) + "%";
-    }, 1000);
+    var tickTimer = setInterval(function () { showPos(false); }, 1000);
     var poller = null;
     poller = armPoller();
     if (typeof o.fetchState === "function") poller.start();

@@ -12,8 +12,11 @@
    (rs-android-native); web/iOS stay memory-only. Nothing goes to PrepNucleus analytics or the AI Tutor,
    and no listening history is collected. The PKCE verifier + OAuth state sit in localStorage
    only for the redirect round-trip and are deleted at exchange. Playback path: the Spotify Web
-   API player endpoints controlling the learner's active Spotify app on every platform — see
-   vault/plans/PrepSound-spotify-spike.md for why (no Web Playback SDK, no App Remote in v1).
+   API player endpoints controlling the learner's active Spotify app — except on iOS builds
+   carrying the SpotifyRemote plugin (capacitor-spotify-remote, SPTAppRemote), where transport
+   and Now Playing come from the Spotify app on this device directly once connected, because
+   the Web API sometimes reports no device while this phone is playing. Playlists, search,
+   queue and like stay on the Web API on every platform; web/Android keep the Web API path.
 
    Flags: needs smd_prep (default ON) + smd_prep_sound (OFF) + smd_prep_sound_spotify (OFF).
    Client id from window.SMD_SPOTIFY_CLIENT_ID or window.SMD_CONFIG.spotifyClientId; empty by
@@ -29,8 +32,12 @@
   var TOKEN_URL = "https://accounts.spotify.com/api/token";
   var API = "https://api.spotify.com/v1";
   // Minimum scopes: account product (Premium check), playback read/control, own playlists, library.
+  // app-remote-control (added for the native Spotify App Remote path) lets the iOS plugin control
+  // the Spotify app on this device directly; sessions granted before it existed lack it, so the
+  // card asks for one plain reconnect instead of failing quietly (see tokenLacksRemoteScope).
   var SCOPES = ["user-read-private", "user-read-playback-state", "user-read-currently-playing",
-    "user-modify-playback-state", "playlist-read-private", "playlist-read-collaborative", "user-library-read", "user-library-modify"];
+    "user-modify-playback-state", "playlist-read-private", "playlist-read-collaborative", "user-library-read", "user-library-modify",
+    "user-read-recently-played", "app-remote-control"];
   var VERIFIER_KEY = "smd_spotify_pkce", STATE_KEY = "smd_spotify_state";
 
   function esc(s) {
@@ -71,6 +78,18 @@
     var artists = (t.artists || []).map(function (a) { return a && a.name; }).filter(Boolean).join(", ");
     return { kind: "track", uri: t.uri, id: t.id ? String(t.id) : "", name: String(t.name || "Untitled"), artists: artists,
       album: t.album ? String(t.album.name || "") : "", images: (t.album && t.album.images) || [], durationMs: t.duration_ms || 0 };
+  }
+  /* GET /me/player/queue -> Up next rows. Tracks carry album art; podcast episodes carry their own
+     images or the show's. Unknown shapes are dropped, never rendered. */
+  function parseQueue(j) {
+    var list = (j && (Array.isArray(j.queue) ? j.queue : Array.isArray(j.items) ? j.items : null)) || [];
+    return list.map(function (it) {
+      if (!it || !it.uri) return null;
+      var t = trackOf(it), show = it.show || {};
+      var subtitle = t.artists || String(show.name || "");
+      var images = (it.album && it.album.images) || it.images || show.images || [];
+      return { uri: it.uri, title: t.name, subtitle: subtitle, images: images, durationMs: t.durationMs };
+    }).filter(Boolean);
   }
   /* Provider-neutral Now Playing model for prep-sound-player.js from a raw
      GET /me/player body (2026 shapes included: shuffle_state, repeat_state,
@@ -166,7 +185,17 @@
     };
   }
 
-  /* ================= token store: memory only ================= */
+  // capacitor-secure-storage-plugin (iOS Keychain / Android Keystore): set/get/remove; get rejects when the key is absent.
+  function makeKeychainStore(p) {
+    if (!p || typeof p.set !== "function" || typeof p.get !== "function" || typeof p.remove !== "function") return null;
+    return {
+      setSecret: function (key, value) { return Promise.resolve(p.set({ key: key, value: value })); },
+      getSecret: function (key) { return Promise.resolve(p.get({ key: key })).then(function (r) { return r && typeof r.value === "string" ? r.value : null; }, function () { return null; }); },
+      removeSecret: function (key) { return Promise.resolve(p.remove({ key: key })).then(null, function () { return true; }); }
+    };
+  }
+
+  /* ================= token store: memory, refresh token mirrored to the OS secure store ================= */
   function makeTokenStore(now) {
     var t = null; // { access, refresh, expiresAt, scope } — never persisted, never logged.
     return {
@@ -292,9 +321,12 @@
     function failOf(r) {
       if (r.status !== 403 || !r.text) throw apiError(r.status, retryOf(r));
       return r.text().then(function (t) {
-        if (/not registered|developer dashboard/i.test(t || "")) throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
-        throw apiError(403);
-      }, function () { throw apiError(403); });
+        if (/not (be )?registered|developer\.spotify\.com\/dashboard|developer dashboard/i.test(t || ""))   // Spotify: "Check settings on developer.spotify.com/dashboard, the user may not be registered."
+          throw { reason: "not_allowlisted", status: 403, message: "Spotify is still approving PrepNucleus. Until then only invited test accounts can connect." };
+        if (/PREMIUM_REQUIRED/.test(t || "")) throw apiError(403);
+        if (/Player command failed|Restriction violated|NO_ACTIVE_DEVICE/i.test(t || "")) throw { reason: "no_active_device", status: 403, message: "Spotify is asleep on your devices." };
+        throw { reason: "forbidden", status: 403, message: "Spotify did not allow that here. Try again, or reconnect Spotify." };
+      }, function () { throw { reason: "forbidden", status: 403, message: "Spotify did not allow that here." }; });
     }
     function retryOf(r) { try { var v = r.headers && r.headers.get && r.headers.get("Retry-After"); return v ? Number(v) : null; } catch (e) { return null; } }
     /* Liked check with endpoint-generation fallback: the 2026 library
@@ -316,9 +348,20 @@
     }
     return {
       store: store, exchange: exchange, refresh: refresh, restoreSession: restoreSession,
+      // Live (non-expired) access token for the App Remote plugin; never logged, memory only.
+      accessToken: function () { return ensureToken().then(function () { return store.access(); }); },
       me: function () { return call("GET", "/me"); },
       player: function () { return call("GET", "/me/player").then(parsePlayer); },
       /* Full neutral model for prep-sound-player.js (+ granted-scope flag). */
+      // Last played track as an idle Now Playing model (needs user-read-recently-played; older sessions return null).
+      lastPlayed: function () {
+        return call("GET", "/me/player/recently-played?limit=1").then(function (j) {
+          var it = j && j.items && j.items[0], m = it && it.track ? parseNowPlaying({ item: it.track, is_playing: false, progress_ms: 0 }, null) : null;
+          if (m) { m.lastPlayed = true; m.contextUri = it.context && it.context.uri || ""; }
+          return m;
+        }, function () { return null; });
+      },
+      queue: function () { return call("GET", "/me/player/queue").then(parseQueue); },
       nowPlaying: function () {
         return call("GET", "/me/player").then(function (j) {
           var base = parseNowPlaying(j, null);
@@ -334,6 +377,7 @@
       saveTrack: function (trackId, trackUri) { return setLiked(trackId, trackUri, true); },
       removeTrack: function (trackId, trackUri) { return setLiked(trackId, trackUri, false); },
       play: function (body, deviceId) { return call("PUT", "/me/player/play" + (deviceId ? "?device_id=" + encodeURIComponent(deviceId) : ""), body || {}); },
+      transfer: function (deviceId) { return call("PUT", "/me/player", { device_ids: [deviceId], play: true }); },
       devices: function () { return call("GET", "/me/player/devices").then(function (j) { return (j && j.devices) || []; }); },
       pause: function () { return call("PUT", "/me/player/pause"); },
       next: function () { return call("POST", "/me/player/next"); },
@@ -347,11 +391,125 @@
     };
   }
 
-  var PURE = { esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
+  // kind "smartphone"/"tablet": only that Spotify (never another device's, which plays out of earshot); null: active, else first.
+  function pickDeviceFor(ds, kind) {
+    var ok = (ds || []).filter(function (x) { return x && x.id && !x.is_restricted; });
+    if (kind) return ok.filter(function (x) { return String(x.type || "").toLowerCase() === kind; })[0] || null;
+    return ok.filter(function (x) { return x.is_active; })[0] || ok[0] || null;
+  }
+  /* ---- Spotify App Remote (native plugin) pure layer ----
+     The plugin (Capacitor.Plugins.SpotifyRemote, iOS) reports the getState shape
+     {connected, trackUri, title, artist, album, durationMs, positionMs, isPaused, shuffle,
+     repeat, imageDataUrl?} and emits it as "playerState" events. These helpers turn that into
+     the same neutral model parseNowPlaying produces, wrap the plugin in a small client, and
+     route transport: plugin when connected, Web API client otherwise. Volume and like never
+     go through App Remote (it has neither); playlists/search/queue stay on the Web API. */
+  function trackIdOf(uri) { var m = /^spotify:track:([A-Za-z0-9]+)$/.exec(String(uri || "")); return m ? m[1] : ""; }
+  function remoteStateToModel(st, prev) {
+    st = st || {};
+    var same = !!(prev && prev.trackUri && st.trackUri && prev.trackUri === st.trackUri);
+    return { provider: "spotify", providerLabel: "Spotify",
+      title: String(st.title || ""), artist: String(st.artist || ""), album: String(st.album || ""),
+      artworkUrl: typeof st.imageDataUrl === "string" && st.imageDataUrl ? st.imageDataUrl : (same ? (prev.artworkUrl || null) : null),
+      images: same && prev.images ? prev.images : [],
+      durationMs: st.durationMs > 0 ? Math.round(st.durationMs) : 0,
+      positionMs: st.positionMs > 0 ? Math.round(st.positionMs) : 0,
+      isPlaying: !st.isPaused, shuffle: !!st.shuffle,
+      repeat: st.repeat === "track" || st.repeat === "context" ? st.repeat : "off",
+      liked: same ? (prev.liked === true ? true : prev.liked === false ? false : null) : null,
+      likeAvailable: true,
+      volume: same && prev.volume != null ? prev.volume : null,
+      supportsVolume: same ? prev.supportsVolume : false,
+      trackId: trackIdOf(st.trackUri), trackUri: String(st.trackUri || ""), remote: true };
+  }
+  // True only when the granted-scope string is known AND lacks app-remote-control (an unknown
+  // "" grant from a restored session proves nothing, so it never triggers the reconnect note).
+  function tokenLacksRemoteScope(scope) {
+    return typeof scope === "string" && scope !== "" && (" " + scope + " ").indexOf(" app-remote-control ") < 0;
+  }
+  function makeRemoteClient(plugin) {
+    if (!plugin || typeof plugin.connect !== "function" || typeof plugin.getState !== "function") return null;
+    var connected = false, last = null, stateSubs = [], connSubs = [];
+    function fire(list, v) { for (var j = 0; j < list.length; j++) { try { list[j](v); } catch (e) {} } }
+    if (typeof plugin.addListener === "function") {
+      try { plugin.addListener("playerState", function (s) {
+        if (!s || typeof s !== "object") return;
+        last = s; if (s.connected === true) connected = true;
+        fire(stateSubs, s);
+      }); } catch (e) {}
+      try { plugin.addListener("connection", function (c) {
+        connected = !!(c && c.connected);
+        fire(connSubs, c || { connected: false });
+      }); } catch (e) {}
+    }
+    function cmd(name, args) { return Promise.resolve(plugin[name](args || {})); }
+    return {
+      plugin: plugin,
+      connected: function () { return connected; },
+      lastState: function () { return last; },
+      model: function (prev) { return connected && last ? remoteStateToModel(last, prev) : null; },
+      onState: function (cb) { stateSubs.push(cb); },
+      onConnection: function (cb) { connSubs.push(cb); },
+      isAvailable: function () {
+        return typeof plugin.isAvailable === "function"
+          ? Promise.resolve(plugin.isAvailable()) : Promise.resolve({ available: false, spotifyInstalled: false });
+      },
+      connect: function (token) {
+        return Promise.resolve(plugin.connect({ accessToken: token })).then(function (r) {
+          connected = !!(r && r.connected); return r;
+        });
+      },
+      disconnect: function () {
+        connected = false;
+        return typeof plugin.disconnect === "function" ? cmd("disconnect") : Promise.resolve({ connected: false });
+      },
+      getState: function () {
+        return Promise.resolve(plugin.getState()).then(function (s) {
+          if (s && typeof s === "object") { last = s; connected = s.connected === true; }
+          return s;
+        });
+      },
+      play: function (uri, positionMs) { return cmd("play", { uri: uri, positionMs: positionMs }); },
+      resume: function () { return cmd("resume"); },
+      pause: function () { return cmd("pause"); },
+      next: function () { return cmd("next"); },
+      previous: function () { return cmd("previous"); },
+      seek: function (positionMs) { return cmd("seek", { positionMs: Math.max(0, Math.round(positionMs || 0)) }); },
+      setShuffle: function (on) { return cmd("setShuffle", { on: !!on }); },
+      setRepeat: function (mode) { return cmd("setRepeat", { mode: mode }); },
+      wake: function (uri) { return cmd("wake", { uri: uri || "" }); }
+    };
+  }
+  /* One transport entry point. env = {remote, web}; the plugin wins whenever it reports
+     connected, the Web API client otherwise (web, Android, older builds without the plugin).
+     arg: seek -> ms, shuffle -> bool, repeat -> mode string. model: pre-action snapshot for
+     toggle (its isPlaying decides pause vs resume/play). */
+  function callTransport(env, act, arg, model) {
+    var r = env && env.remote, w = env && env.web;
+    var useRemote = !!(r && typeof r.connected === "function" && r.connected());
+    if (act === "toggle") {
+      var playing = !!(model && model.isPlaying);
+      if (useRemote) return playing ? r.pause()
+        : (model && model.lastPlayed && model.trackUri ? r.play(model.trackUri, model.positionMs) : r.resume());
+      return playing ? w.pause() : w.play();
+    }
+    if (act === "next") return useRemote ? r.next() : w.next();
+    if (act === "previous") return useRemote ? r.previous() : w.previous();
+    if (act === "shuffle") return useRemote ? r.setShuffle(arg) : w.shuffle(arg);
+    if (act === "repeat") return useRemote ? r.setRepeat(arg) : w.repeatMode(arg);
+    if (act === "seek") return useRemote ? r.seek(arg) : w.seekMs(arg);
+    if (act === "pause") return useRemote ? r.pause() : w.pause();
+    if (act === "resume") return useRemote ? r.resume() : w.play();
+    return Promise.reject({ reason: "unsupported_action", message: "That control is not available." });
+  }
+
+  var PURE = { pickDeviceFor: pickDeviceFor, esc: esc, b64url: b64url, makeVerifier: makeVerifier, makeState: makeState,
+    remoteStateToModel: remoteStateToModel, makeRemoteClient: makeRemoteClient, callTransport: callTransport,
+    tokenLacksRemoteScope: tokenLacksRemoteScope, trackIdOf: trackIdOf,
     challengeS256: challengeS256, authorizeUrl: authorizeUrl, openUrl: openUrl, trackOf: trackOf,
     playlistOf: playlistOf, parsePlaylists: parsePlaylists, parseSearch: parseSearch, parsePlayer: parsePlayer,
-    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, capsForPlayer: capsForPlayer,
-    apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient,
+    parseNowPlaying: parseNowPlaying, parseLiked: parseLiked, parseQueue: parseQueue, premiumOf: function (me) { return !(me && me.product && me.product !== "premium"); }, capsForPlayer: capsForPlayer,
+    apiError: apiError, capabilities: capabilities, makeTokenStore: makeTokenStore, makeClient: makeClient, makeKeychainStore: makeKeychainStore,
     makePluginSecureStore: makePluginSecureStore, REFRESH_SECRET_KEY: REFRESH_SECRET_KEY,
     SCOPES: SCOPES, AUTH_URL: AUTH_URL, TOKEN_URL: TOKEN_URL, API: API };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
@@ -395,20 +553,27 @@
   /* ================= live state + sheet ================= */
   var D = G.document;
   var S = { host: null, sheet: null, prev: null, client: null, premium: false, me: null,
-    player: null, now: null, playerHandle: null, playlists: null, results: null, busy: false, err: null, query: "" };
+    player: null, now: null, playerHandle: null, playlists: null, results: null, busy: false, err: null, query: "",
+    queue: null, showAll: false, provOpen: false, state: readState(), dock: null, tick: 0,
+    remote: null, remoteBusy: false, remoteWake: false, wakeUri: "" };
+  // Mini or closed, per device (owner 2026-10-31). A UI preference only; never tokens or listening data.
+  function readState() { try { var v = G.localStorage.getItem("smd_prep_player_state"); return v === "closed" || v === "icon" ? v : "mini"; } catch (e) { return "mini"; } }
+  function setState(v) { S.state = v; try { G.localStorage.setItem("smd_prep_player_state", v); } catch (e) {} }
   function rng(n) { var b = new Uint8Array(n); (G.crypto || G.msCrypto).getRandomValues(b); return b; }
   function subtleChallenge(verifier) {
     var data = new TextEncoder().encode(verifier);
     return G.crypto.subtle.digest("SHA-256", data).then(function (buf) { return b64url(new Uint8Array(buf)); });
   }
-  /* Secure storage exists only on native Android with the PrepSound plugin.
-     Web and iOS return null here and keep tokens memory-only. */
+  /* Stay connected until Disconnect (owner 2026-10-31): only the refresh token is kept, in the OS secure store.
+     Android: the PrepSound Keystore plugin when that store build is installed; otherwise (iOS Keychain, older
+     Android builds) capacitor-secure-storage-plugin, already in both store builds. Web stays memory-only. */
   function secureStore() {
     try {
       var C = G.Capacitor;
       if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
-      if (typeof C.getPlatform === "function" && C.getPlatform() !== "android") return null;
-      return makePluginSecureStore(C.Plugins && C.Plugins.PrepSound);
+      var P = C.Plugins || {};
+      var android = typeof C.getPlatform === "function" && C.getPlatform() === "android";
+      return (android && makePluginSecureStore(P.PrepSound)) || makeKeychainStore(P.SecureStoragePlugin);
     } catch (e) { return null; }
   }
   function client() {
@@ -416,12 +581,163 @@
       now: function () { return Date.now(); }, clientId: CID, redirectUri: redirectUri(), secureStore: secureStore() });
     return S.client;
   }
+  /* ---- App Remote plugin (iOS builds carrying capacitor-spotify-remote) ----
+     Absent on web, Android and older builds: every helper below then answers "not remote" and
+     the Web API path runs exactly as before. The plugin's playerState events replace the Web
+     API /me/player poll for the card and the mini while connected; playlists, search, queue
+     and like stay on the Web API. */
+  function remotePlugin() {
+    try {
+      var C = G.Capacitor;
+      if (!C || !C.isNativePlatform || !C.isNativePlatform()) return null;
+      var p = C.Plugins && C.Plugins.SpotifyRemote;
+      return p && typeof p.connect === "function" ? p : null;
+    } catch (e) { return null; }
+  }
+  function getRemote() {
+    if (S.remote) return S.remote;
+    var p = remotePlugin();
+    if (!p) return null;
+    var rc = makeRemoteClient(p);
+    if (!rc) return null;
+    rc.onState(function (st) {
+      diag("remote state: " + (st.title || "nothing") + (st.isPaused ? " (paused)" : " (playing)"));
+      S.remoteWake = false;
+      S.now = remoteStateToModel(st, S.now);
+      if (st.isPaused && st.trackUri && st.positionMs > 0) S.paused = { uri: st.trackUri, pos: st.positionMs };   // the SDK's own pause point
+      if (S.playerHandle) S.playerHandle.refresh(cardState());
+      paintDock(); syncLastNote();
+    });
+    rc.onConnection(function (c) {
+      diag("remote connection: " + (c && c.connected ? "connected" : "lost"));
+      if (c && c.connected) {
+        S.remoteSeen = true;
+        if (S.wakeSeek > 0) { var ms = S.wakeSeek; S.wakeSeek = 0; rc.seek(ms).then(null, function () {}); }   // continue where it paused
+      } else paintDock();
+    });
+    S.remote = rc;
+    return rc;
+  }
+  function remoteActive() { var rc = getRemote(); return !!(rc && rc.connected()); }
+  function transportEnv() { return { remote: getRemote(), web: client() }; }
+  // Connect once a Web API token exists. A failed connect (Spotify installed but not running)
+  // offers Wake Spotify in the sheet; wake() itself runs only from that button's tap.
+  function ensureRemote() {
+    var rc = getRemote();
+    if (!rc || S.remoteBusy || rc.connected() || !client().store.has()) return Promise.resolve(false);
+    if (tokenLacksRemoteScope(client().store.scope())) {
+      diag("remote: token lacks app-remote-control scope (reconnect needed)");
+      return Promise.resolve(false);
+    }
+    S.remoteBusy = true;
+    return rc.isAvailable().then(function (a) {
+      if (!a || !a.available) { diag("remote: Spotify app not available on this device"); S.remoteBusy = false; return false; }
+      return client().accessToken().then(function (token) {
+        if (!token) { S.remoteBusy = false; return false; }
+        diag("remote: connecting via App Remote");
+        return rc.connect(token).then(function () {
+          S.remoteBusy = false; S.remoteWake = false;
+          diag("remote: connected");
+          return rc.getState().then(function (st) {
+            if (st && st.title) {
+              S.now = remoteStateToModel(st, S.now);
+              if (S.playerHandle) S.playerHandle.refresh(cardState());
+              paintDock();
+            }
+            return true;
+          }, function () { return true; });
+        }, function () {
+          S.remoteBusy = false; S.remoteWake = true;
+          S.wakeUri = (S.now && S.now.trackUri) || "";
+          diag("remote: connect failed (Spotify not running) — Wake Spotify offered");
+          if (S.sheet) paintSheet();
+          return false;
+        });
+      });
+    }, function () { S.remoteBusy = false; return false; });
+  }
   function ico(name) { // inline SVG, currentColor; no emoji, no external assets
-    var p = { music: '<path d="M9 18V6l10-2v11"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="15" r="2.5"/>',
+    // Solid beamed eighth notes (the old stroke path rendered as a filled blob with fill=currentColor).
+    var p = { music: '<path d="M20 3v11.6a3.4 3.4 0 1 1-2-3.1V7.3l-8 1.6v7.7a3.4 3.4 0 1 1-2-3.1V5.4L20 3z"/>',
       play: '<path d="M8 5v14l11-7z"/>', pause: '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>',
       next: '<path d="M6 6l8 6-8 6zM16 6h2v12h-2z"/>', prev: '<path d="M18 6l-8 6 8 6zM6 6h2v12H6z"/>',
-      ext: '<path d="M14 4h6v6h-2V6.4L10.4 14 9 12.6 16.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/>' };
+      ext: '<path d="M14 4h6v6h-2V6.4L10.4 14 9 12.6 16.6 5H14zM5 5h6v2H7v10h10v-4h2v6H5z"/>',
+      chev: '<path d="M7.4 9 12 13.6 16.6 9 18 10.4l-6 6-6-6z"/>', min: '<path d="M5 11h14v2H5z"/>',
+      close: '<path d="M6.4 5 12 10.6 17.6 5 19 6.4 13.4 12l5.6 5.6-1.4 1.4-5.6-5.6L6.4 19 5 17.6l5.6-5.6L5 6.4z"/>' };
     return '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" focusable="false">' + (p[name] || p.music) + "</svg>";
+  }
+  // Spotify icon (brand guidelines: unaltered, Spotify green). Path from the public Spotify icon mark.
+  function spotifyMark() {
+    return '<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" focusable="false"><path fill="#1DB954" d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>';
+  }
+  function fmt(ms) { var t = Math.max(0, Math.round((ms || 0) / 1000)); return Math.floor(t / 60) + ":" + ("0" + (t % 60)).slice(-2); }
+  function thumb(images, px) {
+    var u = G.PREP_SOUND_PLAYER ? G.PREP_SOUND_PLAYER._pure.pickArtwork(images || [], 64) : null;
+    return u ? '<img src="' + esc(u) + '" alt="" width="' + px + '" height="' + px + '" loading="lazy">' : '<span class="pn-sound-sp-thumb0" aria-hidden="true">' + ico("music") + "</span>";
+  }
+  // Other places the switcher can send the learner: only providers whose module is loaded on this device.
+  function otherProviders() { return G.PREP_SOUND && G.PREP_SOUND.act ? [{ id: "sound", label: "PrepNucleus ambience and other apps" }] : []; }
+  function headHtml(connected) {
+    var others = otherProviders();
+    var h = '<div class="pn-sound-sp-head"><span class="pn-sound-sp-logo">' + spotifyMark() + '</span><h2 id="pnSoundSpT">Music</h2>' +
+      (others.length ? '<button type="button" class="pn-sound-sp-prov" data-act="sp-prov" aria-haspopup="true" aria-expanded="' + !!S.provOpen + '">on Spotify' + ico("chev") + "</button>"
+        : '<span class="pn-sound-sp-brand">on Spotify</span>') +
+      '<span class="pn-sound-sp-hsp"></span>' +
+      (connected ? '<button type="button" class="pn-sound-sp-hbtn" data-act="sp-min" aria-label="Minimise player">' + ico("min") + "</button>" : "") +
+      '<button type="button" class="pn-sound-sp-hbtn" data-act="sp-close" aria-label="Close player">' + ico("close") + "</button></div>";
+    if (S.provOpen && others.length) {
+      h += '<div class="pn-sound-sp-menu" role="group" aria-label="Play music from"><button type="button" class="pn-sound-sp-mi on" aria-pressed="true" data-act="sp-prov">Spotify</button>' +
+        others.map(function (o) { return '<button type="button" class="pn-sound-sp-mi" aria-pressed="false" data-act="sp-switch" data-v="' + o.id + '">' + esc(o.label) + "</button>"; }).join("") + "</div>";
+    }
+    return h;
+  }
+  function nextHtml() {
+    if (S.queue == null) return "";
+    var rows = S.showAll ? S.queue : S.queue.slice(0, 3);
+    var h = '<div class="pn-sound-sp-nexthead"><h3>Up next</h3><button type="button" class="pn-sound-sp-link" data-act="sp-all" aria-expanded="' + !!S.showAll + '">' +
+      (S.showAll ? "Show less" : "See all") + "</button></div>";
+    if (!rows.length) return h + '<p class="pn-sound-sp-note">' + (S.showAll ? "Nothing queued. Pick a playlist or search below." : "Nothing queued. Open See all to pick a playlist or search.") + "</p>";
+    return h + '<ul class="pn-sound-sp-queue">' + rows.map(function (q) {
+      var inner = thumb(q.images, 48) + '<span class="pn-sound-sp-it"><b>' + esc(q.title) + "</b><small>" + esc(q.subtitle) + '</small></span><span class="pn-sound-sp-dur">' + (q.durationMs ? fmt(q.durationMs) : "") + "</span>";
+      return S.premium
+        ? '<li><button type="button" class="pn-sound-sp-qi" data-act="sp-pick" data-v="' + esc(q.uri) + '" aria-label="Play ' + esc(q.title) + ' now">' + inner + "</button></li>"
+        : '<li><a class="pn-sound-sp-qi" href="' + esc(openUrl(q.uri)) + '" target="_blank" rel="noopener">' + inner + "</a></li>";
+    }).join("") + "</ul>";
+  }
+  // Now playing, or (nothing active anywhere) the last played track so the card is never blank.
+  function notePause() {
+    var sk = S.sheet && S.sheet.querySelector("[data-player-seek]"), pos = sk ? Number(sk.value) : (S.now && S.now.positionMs);
+    if (S.now && S.now.trackUri) S.paused = { uri: S.now.trackUri, pos: pos > 0 ? pos : 0 };
+  }
+  // While App Remote is connected its state (playerState events, refreshed by getState) is the
+  // Now Playing source and no /me/player request is made; anything else uses the Web API path.
+  function nowOrLast() {
+    var rc = getRemote();
+    if (rc && rc.connected()) {
+      var m = rc.model(S.now);
+      if (m && m.title) return Promise.resolve(m);
+      return rc.getState().then(function (st) {
+        var mm = st ? remoteStateToModel(st, S.now) : null;
+        return mm && mm.title ? mm : webNowOrLast();
+      }, function () { return webNowOrLast(); });
+    }
+    return webNowOrLast();
+  }
+  function webNowOrLast() {
+    return client().nowPlaying().then(function (m) {
+      if (m && m.title) {
+        // A frozen Spotify reports the song at 0:00; keep where the learner actually paused.
+        if (!m.isPlaying && !(m.positionMs > 0) && S.paused && S.paused.uri === m.trackUri) m.positionMs = S.paused.pos;
+        return m;
+      }
+      if (S.now && S.now.title) {   // Spotify went to sleep (iPadOS suspends it after a pause): keep the song on screen, paused, until Spotify reports another
+        var keep = {}; for (var k in S.now) keep[k] = S.now[k];
+        keep.isPlaying = false; keep.lastPlayed = true; keep.contextUri = keep.contextUri || "";
+        if (S.paused && S.paused.uri === keep.trackUri) keep.positionMs = S.paused.pos;
+        return keep;
+      }
+      return client().lastPlayed().then(function (l) { return l || m; }, function () { return m; });
+    });
   }
   function status() {
     if (!client().store.has()) return Promise.resolve({ state: "idle" });
@@ -432,20 +748,23 @@
   function sheetHtml() {
     var c = client(), h = "";
     h += '<span class="pn-grab" aria-hidden="true"></span>';
-    h += '<div class="pn-sound-sp-head"><h2 id="pnSoundSpT">Music</h2><span class="pn-sound-sp-brand">on Spotify</span></div>';
+    h += headHtml(c.store.has());
     if (!c.store.has()) {
       h += '<p class="pn-sound-sp-note" id="pnSoundSpD">Connect your own Spotify to change songs without leaving your test. Music never starts on its own.</p>' +
         '<div class="pn-sheet-act"><button type="button" class="pn-btn pri pn-sound-sp-connect" data-act="sp-connect">Connect Spotify</button></div>';
       return h;
     }
-    if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") + "</p>";
+    if (S.diagOn) h += '<pre class="pn-sound-sp-diag" data-sp-diag>' + esc((S.diag || ["no calls yet"]).join("\n")) + "</pre>";
+    if (S.err) h += '<p class="pn-sound-sp-err" role="alert">' + esc(S.err.message || "Something went wrong.") +
+      (S.err.reason === "no_device" || S.err.reason === "no_active_device" ? ' <a href="' + esc(openUrl(pendingUri())) + '" target="_blank" rel="noopener">Open Spotify</a>' : "") + "</p>";
     /* The shared Now Playing card (prep-sound-player.js) replaces the old
        now-playing line + 3 buttons: it always shows what is playing, ticks
        locally and re-syncs while visible. Without it (older build) the
        plain line below still renders — never a dead control either way. */
     if (G.PREP_SOUND_PLAYER && G.PREP_SOUND_PLAYER._pure) {
       h += '<div data-sp-player></div>';
-      if (!S.premium) h += '<p class="pn-sound-sp-note">You are on Spotify Free, so PrepNucleus cannot play or pause for you. Pick a playlist to open it in Spotify, then press play there.</p>';
+      if (!S.premium) h += '<p class="pn-sound-sp-note">Spotify says this account needs Premium for remote control. Pick a playlist to open it in Spotify, then press play there.</p>';
+      else if (S.now && S.now.lastPlayed) h += '<p class="pn-sound-sp-note" data-sp-last>Last played. Press play to start it on your Spotify.</p>';
     } else if (!S.premium) {
       h += '<p class="pn-sound-sp-note">You are on Spotify Free, so PrepNucleus cannot play or pause for you. Pick a playlist to open it in Spotify, then press play there.</p>';
     } else if (S.player && S.player.track) {
@@ -463,12 +782,23 @@
       if (capabilities(true, S.player).volumeControl)
         h += '<label class="pn-sound-sp-vol">Volume <input type="range" min="0" max="100" step="1" value="' + S.player.device.volume + '" data-sp-vol aria-label="Volume"></label>';
     }
+    // App Remote: an older sign-in lacks the direct-control permission; say so plainly and let
+    // the learner reconnect once (Disconnect + Connect below) — never force it, never hide it.
+    if (remotePlugin() && tokenLacksRemoteScope(c.store.scope()))
+      h += '<p class="pn-sound-sp-note" data-sp-scope-note>One more Spotify permission lets this player control Spotify directly. Playback keeps working as before until you add it.</p>' +
+        '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="sp-connect">Add permission</button></div>';
+    // App Remote could not reach Spotify because it is not running: one clear line and the
+    // Wake button. wake() runs only from this tap (owner rule: never switch apps on our own).
+    if (S.remoteWake)
+      h += '<p class="pn-sound-sp-note" data-sp-wake-note>iOS paused Spotify in the background. Resume opens Spotify for a second and brings you straight back here.</p>' +
+        '<div class="pn-sheet-act"><button type="button" class="pn-btn pri" data-act="sp-wake">Resume</button></div>';
+    S.nextShown = nextHtml(); h += '<div data-sp-next>' + S.nextShown + "</div>";
+    if (!S.showAll) return h;   // search, playlists and Disconnect live behind See all (kept, never removed)
     h += '<form class="pn-sound-sp-search" data-sp-search><label class="pn-sr" for="pnSoundSpQ">Search Spotify</label>' +
       '<input id="pnSoundSpQ" type="search" autocomplete="off" placeholder="Search tracks and playlists" value="' + esc(S.query) + '">' +
       '<button type="submit" class="pn-btn sm">Search</button></form>';
     h += '<div class="pn-sound-sp-lists">' + listsHtml() + "</div>";
-    h += '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="sp-disconnect">Disconnect</button>' +
-      '<button type="button" class="pn-btn" data-act="sp-close">Back to study</button></div>';
+    h += '<div class="pn-sheet-act"><button type="button" class="pn-btn" data-act="sp-disconnect">Disconnect Spotify</button></div>';
     return h;
   }
   function listsHtml() {
@@ -506,21 +836,41 @@
     var box = S.sheet.querySelector("[data-sp-player]");
     if (!box) return;
     function fresh() {
-      return client().nowPlaying().then(function (m) { S.now = m; return cardState(); });
+      return Promise.all([nowOrLast(), client().queue().then(null, function () { return S.queue; })]).then(function (a) {
+        S.now = a[0]; S.queue = keepQueue(a[1]);
+        var nb = S.sheet && S.sheet.querySelector("[data-sp-next]"), nh = nextHtml(); if (nb && S.nextShown !== nh) { nb.innerHTML = nh; S.nextShown = nh; }   // unchanged rows: no thumbnail reload
+        if (S.now && S.now.isPlaying) clearErr();
+        syncLastNote();
+        return cardState();
+      });
     }
-    function after(p) { p.then(function () { return fresh(); }).then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, fail); }
+    function after(p) {
+      p.then(function () {
+        clearErr();
+        G.setTimeout(function () { if (S.playerHandle) fresh().then(function (s) { if (S.playerHandle) S.playerHandle.refresh(s); }, function () {}); }, 700);
+        return nowOrLast().then(function (m) { S.now = m; if (S.playerHandle) S.playerHandle.refresh(cardState()); syncLastNote(); });
+      }).then(null, fail);
+    }
     S.playerHandle = PL.mount(box, {
       getState: cardState,
-      renderOpts: { pickLabel: "Pick a playlist or search below" },
+      renderOpts: { layout: "row", pickLabel: "Pick a playlist or search", emptyHint: "Press play to resume, or pick from Up next", artHref: "" },   // no art link: a tap there must never leave the study session (owner rule)
       fetchState: fresh,
       onAction: function (act, value) {
         var m = S.now || {};
-        if (act === "toggle") after(m.isPlaying ? client().pause() : client().play());
-        else if (act === "next") after(client().next());
-        else if (act === "previous") after(client().previous());
-        else if (act === "shuffle") after(client().shuffle(!m.shuffle));
-        else if (act === "repeat") after(client().repeatMode(PL._pure.nextRepeat(m.repeat)));
-        else if (act === "seek") after(client().seekMs(value));
+        if (act === "toggle" && !m.isPlaying) { playFromIdle(m); return; }
+        if (act === "toggle") {
+          var was = !!m.isPlaying;
+          if (was) notePause();
+          if (S.now) { S.now.isPlaying = !was; if (S.playerHandle) S.playerHandle.refresh(cardState()); }   // flip at once; Spotify confirms
+          // App Remote connected: the plugin drives transport, no Web API device dance.
+          after(remoteActive() ? callTransport(transportEnv(), "toggle", null, { isPlaying: was, trackUri: m.trackUri, lastPlayed: m.lastPlayed, positionMs: m.positionMs })
+            : withDevice(function () { return was ? client().pause() : client().play(); }));
+        }
+        else if (act === "next") after(remoteActive() ? callTransport(transportEnv(), "next") : withDevice(function () { return client().next(); }));
+        else if (act === "previous") after(remoteActive() ? callTransport(transportEnv(), "previous") : withDevice(function () { return client().previous(); }));
+        else if (act === "shuffle") after(remoteActive() ? callTransport(transportEnv(), "shuffle", !m.shuffle) : client().shuffle(!m.shuffle));
+        else if (act === "repeat") after(remoteActive() ? callTransport(transportEnv(), "repeat", PL._pure.nextRepeat(m.repeat)) : client().repeatMode(PL._pure.nextRepeat(m.repeat)));
+        else if (act === "seek") after(remoteActive() ? callTransport(transportEnv(), "seek", value) : client().seekMs(value));
         else if (act === "volume") client().volume(value).then(function () {}, fail);
         else if (act === "like" && m.trackId) after(m.liked ? client().removeTrack(m.trackId, m.trackUri) : client().saveTrack(m.trackId, m.trackUri));
         else if (act === "pick") { var q = S.sheet && S.sheet.querySelector("#pnSoundSpQ"); if (q) q.focus(); }
@@ -529,6 +879,11 @@
   }
   function wireSheet() {
     if (!S.sheet) return;
+    var t = S.sheet.querySelector("#pnSoundSpT"), lp = null;
+    if (t) {
+      t.addEventListener("pointerdown", function () { lp = G.setTimeout(function () { S.diagOn = !S.diagOn; paintSheet(); }, 900); });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(function (ev) { t.addEventListener(ev, function () { G.clearTimeout(lp); }); });
+    }
     var f = S.sheet.querySelector("[data-sp-search]");
     if (f) f.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -539,7 +894,60 @@
     var v = S.sheet.querySelector("[data-sp-vol]");
     if (v) v.addEventListener("change", function () { client().volume(Number(v.value)).then(refresh, fail); });
   }
-  function fail(e) { S.err = e && e.message ? e : { message: "Spotify did not answer. Try again." }; S.busy = false; paintSheet(); }
+  // Spotify removed user.product for development-mode apps (Feb 2026), so a missing field means "assume Premium";
+  // only an explicit non-premium product, or a real Premium-required refusal (fail), turns controls off.
+  function premiumOf(me) { return !(me && me.product && me.product !== "premium"); }
+  function fail(e) {
+    S.err = e && e.message ? e : { message: "Spotify did not answer. Try again." };
+    if (S.err.reason === "premium_required") S.premium = false;
+    S.busy = false; paintSheet();
+  }
+  function clearErr() { if (!S.err) return; S.err = null; var el = S.sheet && S.sheet.querySelector(".pn-sound-sp-err"); if (el) el.parentNode.removeChild(el); }
+  // A command with no active Spotify device: wake the account's first available device, then retry once.
+  var ASLEEP = "Your iPhone or iPad paused Spotify in the background, so Spotify cannot restart from here. Tap Open Spotify once; your song continues here when you come back.";
+  // Spotify's own "active device" is whatever played last (often another tablet or computer, so music played
+  // silently elsewhere). In the app, start on the Spotify of the device in the learner's hand.
+  function localKind() {
+    if (!native()) return null;
+    var n = G.navigator || {}, ua = n.userAgent || "";
+    if (/iPad/.test(ua) || (/Macintosh/.test(ua) && n.maxTouchPoints > 1)) return "tablet";
+    return /iPhone|Android/.test(ua) ? "smartphone" : null;
+  }
+  function pickDevice(ds) { return pickDeviceFor(ds, localKind()); }
+  // Long-press "Music" shows this: what Spotify listed and where each play went. Names/types/status only, never tokens.
+  function diag(line) {
+    S.diag = (S.diag || []).concat(new Date().toTimeString().slice(0, 8) + " " + line).slice(-8);
+    var el = S.sheet && S.sheet.querySelector("[data-sp-diag]"); if (el) el.textContent = S.diag.join("\n");
+  }
+  function devLine(ds) { return (ds || []).map(function (x) { return (x.name || "?") + "/" + (x.type || "?") + (x.is_active ? "*" : "") + (x.is_restricted ? "!" : ""); }).join(", ") || "none"; }
+  function playHere(body) {
+    return client().devices().then(function (ds) {
+      var d = pickDevice(ds);
+      diag("devices: " + devLine(ds) + " | want " + (localKind() || "any") + " -> " + (d ? d.name : "none"));
+      if (!d) throw { reason: "no_device", message: ASLEEP };
+      return client().play(body, d.id).then(function () { diag("play -> " + d.name + " ok"); return d; }, function (e) {
+        diag("play -> " + d.name + " failed " + ((e && (e.status + " " + e.reason)) || "?"));
+        if (e && e.reason === "no_active_device") throw { reason: "no_device", message: ASLEEP };
+        throw e;
+      });
+    });
+  }
+  function withDevice(fn) {
+    return fn().then(null, function (e) {
+      if (!e || e.reason !== "no_active_device") throw e;
+      return client().devices().then(function (ds) {
+        var d = pickDevice(ds);
+        if (!d) throw { reason: "no_device", message: ASLEEP };
+        // iOS refuses to restart audio in a backgrounded Spotify even when it is still listed: one message, not two.
+        return client().transfer(d.id).then(function () { return fn(d.id); }).then(null, function (e2) {
+          if (e2 && e2.reason === "no_active_device") throw { reason: "no_device", message: ASLEEP };
+          throw e2;
+        });
+      });
+    });
+  }
+  // A paused, backgrounded Spotify reports an empty queue; keep the last rows until something plays again.
+  function keepQueue(q) { return (q && q.length) || (S.now && S.now.isPlaying) || !S.queue ? (q || []) : S.queue; }
   function refresh() {
     var c = client();
     G.setTimeout(function () { if (S.sheet) c.player().then(function (pl) { S.player = pl; paintSheet(); }, function () {}); }, 700);
@@ -548,23 +956,31 @@
   function loadConnected() {
     var c = client();
     return c.me().then(function (me) {
-      S.me = me; S.premium = !!(me && me.product === "premium");
+      S.me = me; S.premium = premiumOf(me);
       return Promise.all([c.player().then(function (pl) { S.player = pl; }, function (e) { S.err = e; }),
-        c.nowPlaying().then(function (m) { S.now = m; }, function () {}),
+        nowOrLast().then(function (m) { S.now = m; }, function () {}),
+        c.queue().then(function (q) { S.queue = keepQueue(q); }, function () { S.queue = S.queue || []; }),
         c.playlists().then(function (pl) { S.playlists = pl; }, function () { S.playlists = []; })]);
-    }).then(paintSheet, fail);
+    }).then(function () { paintSheet(); ensureRemote(); }, fail);
   }
   function openSheet(host) {
     if (host) S.host = host;
     var root = S.host && S.host.root && S.host.root();
     if (!root || S.sheet) return S.sheet ? true : false;
     var el = D.createElement("div");
-    el.className = "pn-sheet-wrap pn-sound-sp-wrap"; el.id = "pnSoundSpSheet";
-    el.innerHTML = '<div class="pn-scrim" data-act="sp-close"></div><section class="pn-sheet pn-sound-sp-sheet" role="dialog" aria-modal="true" aria-labelledby="pnSoundSpT" tabindex="-1"></section>';
+    // Wide screens: a floating panel beside the study page (no scrim, not modal). Phones: the bottom sheet.
+    var wide = !!(G.matchMedia && G.matchMedia("(min-width: 700px)").matches);
+    // The panel is not a bottom sheet: without .pn-sheet-wrap the shared swipe-to-dismiss (which closes by tapping a
+    // scrim the panel does not have, leaving it invisible off-screen) and the sheet key capture leave it alone.
+    el.className = (wide ? "pn-sound-sp-wrap is-panel" : "pn-sheet-wrap pn-sound-sp-wrap"); el.id = "pnSoundSpSheet";
+    el.innerHTML = (wide ? "" : '<div class="pn-scrim" data-act="sp-icon"></div>') +
+      '<section class="pn-sheet pn-sound-sp-sheet" role="dialog" aria-modal="' + !wide + '" aria-labelledby="pnSoundSpT" tabindex="-1"></section>';
+    el.addEventListener("keydown", function (e) { if (e.key === "Escape") { e.stopPropagation(); minimise(); } });
     S.prev = D.activeElement; root.appendChild(el); S.sheet = el;
-    paintSheet();
+    paintSheet(); paintDock();
     var f = el.querySelector(".pn-sheet"); try { f.focus({ preventScroll: true }); } catch (e) {}
     if (client().store.has() && S.playlists == null) loadConnected();
+    else if (client().store.has()) ensureRemote();
     return true;
   }
   function closeSheet() {
@@ -572,10 +988,62 @@
     try { if (G.PREP_SOUND_PLAYER) { var pb = S.sheet.querySelector("[data-sp-player]"); if (pb) G.PREP_SOUND_PLAYER.unmount(pb); } } catch (e) {}
     S.playerHandle = null;
     if (S.sheet.parentNode) S.sheet.parentNode.removeChild(S.sheet);
-    S.sheet = null;
+    S.sheet = null; S.provOpen = false;
     try { if (S.prev && S.prev.isConnected) S.prev.focus({ preventScroll: true }); } catch (e) {}
+    paintDock();
     return true;
   }
+  /* Play from idle: resume (or start the last played track) on an active or available Spotify device. With Spotify
+     closed everywhere the Web API has nothing to control, so open the Spotify app on the song and finish when the
+     learner returns: the reopened app is then an available device and takes the transfer + play. */
+  function playBody(m) {
+    if (!m || !m.lastPlayed) return undefined;
+    var b = m.contextUri ? { context_uri: m.contextUri, offset: { uri: m.trackUri } } : { uris: [m.trackUri] };
+    if (m.positionMs > 0) b.position_ms = Math.round(m.positionMs);   // continue where it paused, not from 0:00
+    return b;
+  }
+  function lastOf(m) { if (!m || !m.trackUri) return null; var k, c = {}; for (k in m) c[k] = m[k]; c.lastPlayed = true; return c; }
+  function playFromIdle(m) {
+    if (getRemote() && S.remoteSeen && !remoteActive()) {
+      S.remoteWake = true; S.wakeUri = (m && m.trackUri) || S.wakeUri || "";
+      if (S.now) S.now.isPlaying = false;
+      diag("remote: play while Spotify asleep -> wake (owner 2026-11-01: Play itself does the one-second flash)");
+      if (S.sheet) paintSheet(); else paintDock();
+      return act("sp-wake");   // the learner pressed Play; Resume stays on the card if the wake fails
+    }
+    // App Remote connected: resume (or replay the paused song) in the Spotify app directly.
+    if (remoteActive()) {
+      if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
+      var rc = getRemote();
+      var p = m && m.trackUri && m.lastPlayed ? rc.play(m.trackUri, m.positionMs) : rc.resume();
+      return p.then(function () { if (S.now) S.now.lastPlayed = false; clearErr(); syncLastNote(); syncMiniSoon(); refreshCard(); },
+        function (e) { if (S.now) S.now.isPlaying = false; fail(e); });
+    }
+    var body = playBody(m);
+    if (S.now) { S.now.isPlaying = true; if (S.playerHandle) S.playerHandle.refresh(cardState()); paintDock(); }
+    return playHere(body).then(function () { S.pendingPlay = null; if (S.now) S.now.lastPlayed = false; clearErr(); syncLastNote(); syncMiniSoon(); refreshCard(); }, function (e) {
+      if (e && e.reason === "no_device") { S.pendingPlay = body || playBody(lastOf(m)) || {}; if (S.now) S.now.isPlaying = false; return fail({ reason: "no_device", message: ASLEEP }); }
+      if (S.now) S.now.isPlaying = false; fail(e);
+    });
+  }
+  function pendingUri() { var b = S.pendingPlay || {}; return (b.uris && b.uris[0]) || b.context_uri || ""; }
+  function resumePending() {
+    if (!S.pendingPlay || S.resuming || D.visibilityState === "hidden") return;
+    var body = S.pendingPlay; S.resuming = true;   // kept until Spotify takes it: visibilitychange and app resume both try
+    client().devices().then(function (ds) {
+      var d = pickDevice(ds);
+      diag("resume #" + (S.resumeTry || 0) + " devices: " + devLine(ds) + " -> " + (d ? d.name : "none"));
+      if (!d && (S.resumeTry = (S.resumeTry || 0) + 1) < 4) { G.setTimeout(resumePending, 2500); return; }   // Spotify registers a few seconds after opening
+      S.resumeTry = 0;
+      if (!d) return say("Spotify is not running. Press play in Spotify once, then use the player here.");
+      return client().play(body && (body.uris || body.context_uri) ? body : undefined, d.id).then(function () { if (S.now) { S.now.lastPlayed = false; S.now.isPlaying = true; } clearErr(); syncLastNote(); S.pendingPlay = null; say("Playing on " + (d.name || "Spotify") + "."); syncMiniSoon(); refreshCard(); });
+    }).then(function () { S.resuming = false; }, function (e) { S.resuming = false; diag("resume failed " + ((e && (e.status + " " + e.reason)) || "?")); });
+  }
+  D.addEventListener("visibilitychange", resumePending);
+  function refreshCard() { if (S.playerHandle) nowOrLast().then(function (n) { S.now = n; if (S.playerHandle) S.playerHandle.refresh(cardState()); syncLastNote(); }, function () {}); }
+  // The "Last played" hint belongs to the idle card only; drop it once something is really playing.
+  function syncLastNote() { var n = S.sheet && S.sheet.querySelector("[data-sp-last]"); if (n && !(S.now && S.now.lastPlayed)) n.parentNode.removeChild(n); }
+  function minimise() { setState("mini"); return closeSheet(); }
   function connect() {
     var verifier = makeVerifier(rng), state = makeState(rng);
     try {
@@ -599,50 +1067,109 @@
     if (!state || !want || state !== want || !verifier) return say("Spotify sign-in did not finish. Tap Connect Spotify again.");
     client().exchange(decodeURIComponent(code), verifier).then(function () {
       say("Spotify connected.");
-      if (S.sheet) paintSheet(); else if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
+      S.err = null; S.premium = true; S.me = null;   // fresh grant: drop any stale "needs Premium" from before
+      if (S.sheet) loadConnected(); else if (G.PREP && G.PREP._host) openSheet(G.PREP._host);
     }, function (e) { say((e && e.message) || "Spotify sign-in failed. Tap Connect Spotify again."); });
   }
   function say(msg) { try { var h = S.host || (G.PREP && G.PREP._host); if (h && h.toast) h.toast(msg); else if (G.toast) G.toast(msg); } catch (e) {} }
   function pick(uri) {
+    // App Remote connected: play the pick in this device's Spotify app directly.
+    if (remoteActive()) {
+      return getRemote().play(uri).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, fail);
+    }
     var body = /^spotify:track:/.test(uri) ? { uris: [uri] } : { context_uri: uri };
-    client().play(body).then(function () { closeSheet(); }, function (e) {
-      if (!e || e.reason !== "no_active_device") return fail(e);
-      // Nothing active: start it on this account's first available device; with none, open it in the Spotify app.
-      client().devices().then(function (ds) {
-        var d = ds.filter(function (x) { return x && x.id && !x.is_restricted; })[0];
-        if (d) return client().play(body, d.id).then(function () { closeSheet(); }, fail);
-        openInSpotify(uri);
-      }, function () { openInSpotify(uri); });
+    // Plays right here on the learner's Spotify; PrepNucleus never switches apps on its own (owner 2026-10-31).
+    playHere(body).then(function () { clearErr(); syncMiniSoon(); refreshCard(); }, function (e) {
+      if (e && e.reason === "no_device") S.pendingPlay = body;
+      fail(e);
     });
-  }
-  function openInSpotify(uri) {
-    var m = /^spotify:(track|playlist|album):([A-Za-z0-9]+)$/.exec(uri || "");
-    closeSheet();
-    G.location.href = m ? "https://open.spotify.com/" + m[1] + "/" + m[2] : "https://open.spotify.com/";
   }
   function act(a, b, host) {
     if (host) S.host = host;
-    if (a === "sp-open") return openSheet(host);
-    if (a === "sp-close") return closeSheet();
+    if (a === "sp-open") { setState("mini"); return openSheet(host); }
+    if (a === "sp-min") return minimise();
+    if (a === "sp-icon") { setState("icon"); if (!closeSheet()) paintDock(); return true; }   // swiped away: just the music button
+    if (a === "sp-close") { setState("closed"); return closeSheet(); }
+    if (a === "sp-prov") { S.provOpen = !S.provOpen; return paintSheet(); }
+    if (a === "sp-switch") { closeSheet(); try { G.PREP_SOUND.act("s-open", b, S.host); } catch (e) {} return true; }
+    if (a === "sp-all") { S.showAll = !S.showAll; return paintSheet(); }
+    if (a === "sp-mini-toggle" && !(S.now && S.now.isPlaying)) return playFromIdle(S.now);
+    if (a === "sp-mini-toggle") {
+      var was = !!(S.now && S.now.isPlaying);
+      if (was) notePause();
+      if (S.now) { S.now.isPlaying = !was; paintDock(); }
+      return (remoteActive() ? callTransport(transportEnv(), "toggle", null, { isPlaying: was, trackUri: S.now && S.now.trackUri, lastPlayed: S.now && S.now.lastPlayed, positionMs: S.now && S.now.positionMs })
+        : withDevice(function () { return was ? client().pause() : client().play(); })).then(syncMiniSoon, function (e) { syncMiniSoon(); say(e && e.message || "Spotify did not answer. Try again."); });
+    }
+    if (a === "sp-mini-next") return (remoteActive() ? callTransport(transportEnv(), "next") : withDevice(function () { return client().next(); })).then(syncMiniSoon, function (e) { syncMiniSoon(); say(e && e.message || "Spotify did not answer. Try again."); });
+    if (a === "sp-wake") {
+      // The only place wake() is ever called: this explicit tap (owner rule).
+      var wrc = getRemote();
+      if (!wrc) return false;
+      diag("remote: Wake Spotify tapped");
+      S.wakeSeek = (S.now && S.now.positionMs) || (S.paused && S.now && S.paused.uri === S.now.trackUri ? S.paused.pos : 0);
+      return wrc.wake((S.now && S.now.trackUri) || S.wakeUri || "").then(function () {
+        S.remoteWake = false;
+        if (S.sheet) paintSheet();
+      }, fail);
+    }
     if (a === "sp-connect") return connect();
-    if (a === "sp-disconnect") { client().disconnect(); S.premium = false; S.me = null; S.player = null; S.now = null; S.playlists = null; S.results = null; S.err = null; return paintSheet(); }
-    if (a === "sp-play") return client().play().then(refresh, fail);
-    if (a === "sp-pause") return client().pause().then(refresh, fail);
-    if (a === "sp-next") return client().next().then(refresh, fail);
-    if (a === "sp-prev") return client().previous().then(refresh, fail);
+    if (a === "sp-disconnect") { var drc = getRemote(); if (drc) drc.disconnect(); S.remoteWake = false; client().disconnect(); S.premium = false; S.me = null; S.player = null; S.now = null; S.playlists = null; S.results = null; S.err = null; return paintSheet(); }
+    if (a === "sp-play") return (remoteActive() ? callTransport(transportEnv(), "resume") : client().play()).then(refresh, fail);
+    if (a === "sp-pause") return (remoteActive() ? callTransport(transportEnv(), "pause") : client().pause()).then(refresh, fail);
+    if (a === "sp-next") return (remoteActive() ? callTransport(transportEnv(), "next") : client().next()).then(refresh, fail);
+    if (a === "sp-prev") return (remoteActive() ? callTransport(transportEnv(), "previous") : client().previous()).then(refresh, fail);
     if (a === "sp-pick") return pick(b.getAttribute("data-v"));
   }
   function dockButtonHtml() {
     return '<button type="button" class="pn-sound-sp-fab" data-act="sp-open" aria-label="Music on Spotify">' + ico("music") + "</button>";
   }
-  // Until the Sound Dock (rs-sound) lands, mount the round button in the PrepNucleus root.
-  function mountButton() {
-    var root = G.PREP && G.PREP._host && G.PREP._host.root && G.PREP._host.root();
-    if (!root || root.querySelector(".pn-sound-sp-fab")) return;
-    var d = D.createElement("div"); d.innerHTML = dockButtonHtml();
-    root.appendChild(d.firstChild);
+  function miniOn() { return !S.sheet && S.state !== "closed" && S.state !== "icon" && client().store.has() && !!(S.now && S.now.title); }
+  function miniHtml() {
+    var m = S.now;
+    return '<div class="pn-sound-sp-mini" role="region" aria-label="Now playing on Spotify">' +
+      '<button type="button" class="pn-sound-sp-mbody" data-act="sp-open" aria-label="Open player, ' + esc(m.title) + (m.artist ? " by " + esc(m.artist) : "") + '">' +
+      thumb(m.images, 44) + '<span class="pn-sound-sp-it"><b>' + esc(m.title) + "</b><small>" + esc(m.artist || "Spotify") + "</small></span></button>" +
+      (S.premium ? '<button type="button" class="pn-sound-sp-mbtn play" data-act="sp-mini-toggle" aria-label="' + (m.isPlaying ? "Pause" : "Play") + '">' + ico(m.isPlaying ? "pause" : "play") + "</button>" +
+        '<button type="button" class="pn-sound-sp-mbtn" data-act="sp-mini-next" aria-label="Next track">' + ico("next") + "</button>" : "") +
+      '<span class="pn-sound-sp-mprog" aria-hidden="true"><span></span></span></div>';
   }
-  var timer = G.setInterval(function () { try { mountButton(); } catch (e) {} }, 1000);
+  // One dock in the PrepNucleus root: the mini player while something plays, else the round music button.
+  function paintDock() {
+    var root = G.PREP && G.PREP._host && G.PREP._host.root && G.PREP._host.root();
+    if (!root) return;
+    if (S.sheet && !S.sheet.isConnected) { S.sheet = null; S.playerHandle = null; S.provOpen = false; }   // removed by someone else: show the dock again
+    if (!S.dock || !S.dock.isConnected) { S.dock = D.createElement("div"); S.dock.className = "pn-sound-sp-dock"; root.appendChild(S.dock); }
+    var html = S.sheet ? "" : miniOn() ? miniHtml() : dockButtonHtml();
+    S.dock.classList.toggle("is-stacked", !!root.querySelector(".pn-sound-dock"));   // sit above the ambience dock
+    if (S.dock.getAttribute("data-html") !== html) { S.dock.innerHTML = html; S.dock.setAttribute("data-html", html); wireSwipe(S.dock.firstChild); }
+    var bar = S.dock.querySelector(".pn-sound-sp-mprog span"), m = S.now;
+    if (bar && m && m.durationMs) bar.style.width = Math.min(100, Math.round((m.positionMs / m.durationMs) * 100)) + "%";
+  }
+  // Swipe the mini player down or sideways: it shrinks to the round music button (tap it to open again).
+  function wireSwipe(el) {
+    if (!el || !el.classList || !el.classList.contains("pn-sound-sp-mini")) return;
+    var x0 = null, y0 = 0, swiped = false;
+    el.addEventListener("pointerdown", function (e) { x0 = e.clientX; y0 = e.clientY; swiped = false; });
+    el.addEventListener("pointermove", function (e) {
+      if (x0 == null) return;
+      var dx = e.clientX - x0, dy = e.clientY - y0;
+      if (dy > 0 || Math.abs(dx) > Math.abs(dy)) el.style.transform = Math.abs(dx) > dy ? "translateX(" + dx + "px)" : "translateY(" + dy + "px)";
+      if (dy > 36 || Math.abs(dx) > 56) swiped = true;
+    });
+    function end() { x0 = null; if (swiped) { act("sp-icon"); } else el.style.transform = ""; }
+    el.addEventListener("pointerup", end); el.addEventListener("pointercancel", function () { x0 = null; swiped = false; el.style.transform = ""; });
+    el.addEventListener("click", function (e) { if (swiped) { e.stopPropagation(); e.preventDefault(); swiped = false; } }, true);
+  }
+  function syncMini() {
+    if (!client().store.has() || S.state === "closed" || S.sheet) return;
+    if (!S.me) client().me().then(function (me) { S.me = me; S.premium = premiumOf(me); paintDock(); }, function () {});
+    nowOrLast().then(function (m) { S.now = m; paintDock(); }, function () {});
+  }
+  function syncMiniSoon() { G.setTimeout(syncMini, 600); }
+  var timer = G.setInterval(function () {
+    try { paintDock(); if (++S.tick % 5 === 0 && D.visibilityState !== "hidden") syncMini(); } catch (e) {}
+  }, 1000);
 
   // Sound plan 4.2 adapter, in the exact registry shape prep-sound-providers.js checks:
   // capabilities is a live object (same reference, mutated as Premium/device state arrives).
@@ -651,18 +1178,18 @@
   function res(p) { return p.then(function () { return { ok: true }; }, function (e) { return { ok: false, error: "spotify:" + (e.reason || "provider_error") }; }); }
   var adapter = { id: "spotify_remote", capabilities: caps,
     getStatus: function () { return status().then(function (s) { return { ok: s.state !== "error", state: s.state, player: s.player || null }; }); },
-    play: function () { return caps.remoteControls ? res(client().play()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:play" }); },
-    pause: function () { return caps.remoteControls ? res(client().pause()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:pause" }); },
-    stop: function () { return caps.remoteControls ? res(client().pause()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:stop" }); },
-    next: function () { return caps.queueControls ? res(client().next()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:next" }); },
-    previous: function () { return caps.queueControls ? res(client().previous()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:previous" }); },
+    play: function () { return caps.remoteControls ? res(remoteActive() ? callTransport(transportEnv(), "resume") : client().play()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:play" }); },
+    pause: function () { return caps.remoteControls ? res(remoteActive() ? callTransport(transportEnv(), "pause") : client().pause()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:pause" }); },
+    stop: function () { return caps.remoteControls ? res(remoteActive() ? callTransport(transportEnv(), "pause") : client().pause()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:stop" }); },
+    next: function () { return caps.queueControls ? res(remoteActive() ? callTransport(transportEnv(), "next") : client().next()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:next" }); },
+    previous: function () { return caps.queueControls ? res(remoteActive() ? callTransport(transportEnv(), "previous") : client().previous()) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:previous" }); },
     setVolume: function (v) { return caps.volumeControl ? res(client().volume(Number(v) * 100)) : Promise.resolve({ ok: false, error: "unsupported:spotify_remote:setVolume" }); },
     openExternal: function (target) {
       var url = target && (target.url || openUrl(target.uri));
       if (typeof url !== "string" || !/^https:\/\//.test(url)) return Promise.resolve({ ok: false, error: "unavailable:bad-url" });
       G.open(url, "_blank", "noopener"); return Promise.resolve({ ok: true });
     },
-    disconnect: function () { client().disconnect(); S.premium = false; syncCaps(); return Promise.resolve({ ok: true }); },
+    disconnect: function () { var rc = getRemote(); if (rc) rc.disconnect(); S.remoteWake = false; client().disconnect(); S.premium = false; syncCaps(); return Promise.resolve({ ok: true }); },
     dispose: function () { G.clearInterval(timer); closeSheet(); return Promise.resolve(); } };
   // Register with the Sound Dock when it is present (rs-sound); harmless when it is not.
   try { if (G.PREP_SOUND_PROVIDERS && G.PREP_SOUND_PROVIDERS.registerAdapter) G.PREP_SOUND_PROVIDERS.registerAdapter(adapter); } catch (e) {}
@@ -678,7 +1205,8 @@
     var hasCode = /[?&]code=/.test(G.location.search || "");
     if (!hasCode && secureStore()) {
       client().restoreSession().then(function (restored) {
-        if (restored && S.sheet) loadConnected();
+        if (!restored) return;
+        if (S.sheet) loadConnected(); else { syncMini(); ensureRemote(); }   // back to the mini player without waiting for the 5 s tick
       }, function () {});
     }
   } catch (e) {}
@@ -687,6 +1215,7 @@
     var AppP = native() && G.Capacitor.Plugins && G.Capacitor.Plugins.App, isCb = function (u) { return /^stewardmd:\/\/spotify-callback/.test(u || ""); };
     if (AppP) {
       AppP.addListener("appUrlOpen", function (d) { if (d && isCb(d.url)) handleReturn(d.url); });
+      AppP.addListener("resume", function () { G.setTimeout(resumePending, 900); });   // WKWebView may skip visibilitychange on app switch
       AppP.getLaunchUrl().then(function (d) { if (d && isCb(d.url)) handleReturn(d.url); }).catch(function () {});
     }
   } catch (e) {}

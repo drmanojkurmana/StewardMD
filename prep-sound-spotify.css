@@ -2,7 +2,7 @@
    .pn-sound-sp-* and reads the PrepNucleus --pn-* tokens (restrained dark green sheet surface
    --pn-why-* #071318/#0D1D23/#42CDB5). No glow, no gradient, no backdrop blur. Targets are at
    least 44px; focus is always visible; reduced motion keeps fades only. */
-.pn-root .pn-sound-sp-fab{position:absolute;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-card,#0D1D23);color:var(--pn-why-accent,#42CDB5);box-shadow:var(--pn-shadow);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-fab{position:absolute;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;justify-content:center;width:48px;height:48px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-card,#0D1D23);color:var(--pn-why-accent,#42CDB5);box-shadow:var(--pn-shadow);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
 .pn-root .pn-sound-sp-fab:active{transform:scale(.97)}
 .pn-root .pn-sound-sp-fab:focus-visible,.pn-root .pn-sound-sp-btn:focus-visible,.pn-root .pn-sound-sp-item:focus-visible{outline:2px solid var(--pn-why-accent,#42CDB5);outline-offset:2px}
 .pn-root .pn-sound-sp-sheet{background:var(--pn-why-card,#0D1D23);color:var(--pn-why-ink,#E2F1EE);max-height:82vh;overflow:auto}
@@ -31,3 +31,75 @@
 .pn-root .pn-sound-sp-it b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pn-root .pn-sound-sp-it small{font-size:13px;color:var(--pn-why-mut,#94B4AB);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 @media (prefers-reduced-motion:reduce){.pn-root .pn-sound-sp-fab,.pn-root .pn-sound-sp-btn{transition:none}}
+
+/* Floating player (owner target 2026-10-31). Wide screens: a non-modal panel top-right beside the
+   study page. Phones: the same layout in the bottom sheet. Mini player: a pill above the tab bar. */
+.pn-root .pn-sound-sp-wrap.is-panel{position:absolute;z-index:5;inset:auto;top:calc(84px + env(safe-area-inset-top,0px));bottom:calc(100px + env(safe-area-inset-bottom,0px));right:20px;width:min(440px,calc(100% - 40px));padding:0;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;pointer-events:none}
+/* pinned between header and bottom edge; the panel scrolls inside instead of running off-screen (100vh is unreliable in the iPad web view) */
+.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet{pointer-events:auto;max-width:none;max-height:100%;min-height:0;flex:0 1 auto;overflow-y:auto;overscroll-behavior:contain;margin:0;padding:16px 18px 18px;gap:14px;border-radius:22px;border:1px solid var(--pn-why-edge,#16323B);box-shadow:0 24px 48px -16px rgba(2,8,10,.55),0 4px 12px -4px rgba(2,8,10,.35);animation:pn-sp-in 220ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-wrap.is-panel .pn-grab{display:none}
+@keyframes pn-sp-in{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+.pn-root .pn-sound-sp-head{align-items:center;gap:10px;min-height:44px}
+.pn-root .pn-sound-sp-logo{display:flex;flex:none}
+.pn-root .pn-sound-sp-head h2{font-size:19px}
+.pn-root .pn-sound-sp-hsp{flex:1}
+.pn-root .pn-sound-sp-prov{display:inline-flex;align-items:center;gap:2px;min-height:44px;padding:0 6px;border:0;border-radius:10px;background:none;color:var(--pn-why-mut,#94B4AB);font:inherit;font-size:14px;cursor:pointer}
+.pn-root .pn-sound-sp-prov svg{width:18px;height:18px}
+.pn-root .pn-sound-sp-hbtn{display:flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;border:0;border-radius:50%;background:var(--pn-why-bg,#071318);color:var(--pn-why-body,#CDE2DC);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-hbtn:active{transform:scale(.95)}
+.pn-root .pn-sound-sp-menu{display:flex;flex-direction:column;gap:2px;padding:6px;border-radius:14px;background:var(--pn-why-bg,#071318)}
+.pn-root .pn-sound-sp-mi{min-height:44px;padding:0 12px;border:0;border-radius:10px;background:none;color:var(--pn-why-ink,#E2F1EE);font:inherit;font-size:15px;text-align:left;cursor:pointer}
+.pn-root .pn-sound-sp-mi.on{color:var(--pn-why-accent,#42CDB5);font-weight:650}
+.pn-root .pn-sound-sp-nexthead{display:flex;align-items:center;justify-content:space-between;padding-top:12px;border-top:1px solid var(--pn-why-edge,#16323B)}
+.pn-root .pn-sound-sp-nexthead h3{margin:0;font-size:15px;font-weight:650;color:var(--pn-why-ink,#E2F1EE)}
+.pn-root .pn-sound-sp-link{min-height:44px;padding:0 4px;border:0;background:none;color:var(--pn-why-mut,#94B4AB);font:inherit;font-size:14px;cursor:pointer}
+.pn-root .pn-sound-sp-queue{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.pn-root .pn-sound-sp-qi{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:4px 6px;border:0;border-radius:12px;background:none;color:inherit;text-align:left;text-decoration:none;font:inherit;cursor:pointer}
+.pn-root .pn-sound-sp-qi img,.pn-root .pn-sound-sp-thumb0{flex:none;width:48px;height:48px;border-radius:8px;object-fit:cover;background:var(--pn-why-bg,#071318)}
+.pn-root .pn-sound-sp-thumb0{display:flex;align-items:center;justify-content:center;color:var(--pn-why-mut,#94B4AB)}
+.pn-root .pn-sound-sp-qi .pn-sound-sp-it{flex:1}
+.pn-root .pn-sound-sp-dur{flex:none;font-size:13px;font-variant-numeric:tabular-nums;color:var(--pn-why-mut,#94B4AB)}
+.pn-root .pn-sound-sp-mini{position:absolute;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:4;display:flex;align-items:center;gap:4px;width:min(360px,calc(100% - 32px));padding:6px 6px 6px 6px;border-radius:18px;border:1px solid var(--pn-why-edge,#16323B);background:var(--pn-why-card,#0D1D23);color:var(--pn-why-ink,#E2F1EE);box-shadow:0 14px 32px -12px rgba(2,8,10,.55);overflow:hidden;animation:pn-sp-in 200ms cubic-bezier(.23,1,.32,1)}
+/* above the floating tab bar (same offset as the ambience dock); higher again when that dock is showing */
+.pn-root .pn-sound-sp-dock.is-stacked .pn-sound-sp-mini{bottom:calc(152px + env(safe-area-inset-bottom,0px))}
+.pn-root .pn-sound-sp-mbody{display:flex;align-items:center;gap:10px;flex:1;min-width:0;min-height:44px;padding:0;border:0;background:none;color:inherit;text-align:left;font:inherit;cursor:pointer}
+.pn-root .pn-sound-sp-mbody img,.pn-root .pn-sound-sp-mbody .pn-sound-sp-thumb0{flex:none;width:44px;height:44px;border-radius:10px;object-fit:cover}
+.pn-root .pn-sound-sp-mbtn{display:flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;border:0;border-radius:50%;background:none;color:var(--pn-why-ink,#E2F1EE);cursor:pointer;transition:transform 160ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-mbtn.play{background:#1DB954;color:#04140B}
+.pn-root .pn-sound-sp-mbtn:active{transform:scale(.94)}
+.pn-root .pn-sound-sp-mprog{position:absolute;left:14px;right:14px;bottom:3px;height:2px;border-radius:2px;background:var(--pn-why-edge,#16323B)}
+.pn-root .pn-sound-sp-mprog span{display:block;height:100%;border-radius:2px;background:#1DB954}
+.pn-root .pn-sound-sp-hbtn:focus-visible,.pn-root .pn-sound-sp-prov:focus-visible,.pn-root .pn-sound-sp-mi:focus-visible,.pn-root .pn-sound-sp-link:focus-visible,.pn-root .pn-sound-sp-qi:focus-visible,.pn-root .pn-sound-sp-mbody:focus-visible,.pn-root .pn-sound-sp-mbtn:focus-visible{outline:2px solid var(--pn-why-accent,#42CDB5);outline-offset:2px}
+@media (hover:hover) and (pointer:fine){.pn-root .pn-sound-sp-qi:hover,.pn-root .pn-sound-sp-mi:hover{background:var(--pn-why-hover,#142830)}.pn-root .pn-sound-sp-hbtn:hover,.pn-root .pn-sound-sp-link:hover,.pn-root .pn-sound-sp-prov:hover{color:var(--pn-why-ink,#E2F1EE)}}
+@media (prefers-reduced-motion:reduce){.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet,.pn-root .pn-sound-sp-mini{animation:pn-fade 120ms ease-out}.pn-root .pn-sound-sp-hbtn,.pn-root .pn-sound-sp-mbtn{transition:none}}
+
+/* Liquid glass (owner 2026-10-31, the music player only): a dark teal tint over a strong blur so the study page
+   reads through softly; hairline light edge + top highlight; offset soft shadow. Solid fallback where blur is
+   unsupported or the learner asked for reduced transparency. */
+.pn-root .pn-sound-sp-sheet,.pn-root .pn-sound-sp-mini{
+  /* owner 2026-10-31: "transparent glass": light tint, heavy blur does the legibility work */
+  background:rgba(9,24,29,.5);
+  -webkit-backdrop-filter:blur(34px) saturate(190%) brightness(.72);backdrop-filter:blur(34px) saturate(190%) brightness(.72);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.04),0 24px 48px -16px rgba(2,8,10,.45),0 4px 12px -4px rgba(2,8,10,.25)}
+.pn-root .pn-sound-sp-wrap.is-panel>.pn-sheet{border-color:rgba(255,255,255,.22)}
+.pn-root .pn-sound-sp-hbtn,.pn-root .pn-sound-sp-menu{background:rgba(255,255,255,.08)}
+.pn-root .pn-sound-sp-nexthead{border-top-color:rgba(255,255,255,.10)}
+.pn-root .pn-sound-sp-qi img,.pn-root .pn-sound-sp-thumb0,.pn-root .pn-sound-sp-mbody img,.pn-root .pn-sound-sp-mbody .pn-sound-sp-thumb0{background:rgba(255,255,255,.06)}
+.pn-root .pn-sound-sp-search input{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.pn-root .pn-sound-sp-sheet .pn-player-tile,.pn-root .pn-sound-sp-sheet .pn-player-art{background:rgba(255,255,255,.06)}
+.pn-root .pn-sound-sp-err a{color:#E2F1EE;font-weight:650;text-underline-offset:3px}
+@media (hover:hover) and (pointer:fine){.pn-root .pn-sound-sp-qi:hover,.pn-root .pn-sound-sp-mi:hover{background:rgba(255,255,255,.08)}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.pn-root .pn-sound-sp-sheet,.pn-root .pn-sound-sp-mini{background:#0D1D23}}
+@media (prefers-reduced-transparency:reduce){.pn-root .pn-sound-sp-sheet,.pn-root .pn-sound-sp-mini{background:#0D1D23;-webkit-backdrop-filter:none;backdrop-filter:none}}
+/* On see-through glass the page can be light: secondary text goes near-white (AA over the darkened, blurred backdrop). */
+.pn-root .pn-sound-sp-sheet .pn-player-artist,.pn-root .pn-sound-sp-sheet .pn-player-time,.pn-root .pn-sound-sp-sheet .pn-player-vol,
+.pn-root .pn-sound-sp-sheet .pn-sound-sp-it small,.pn-root .pn-sound-sp-sheet .pn-sound-sp-dur,.pn-root .pn-sound-sp-sheet .pn-sound-sp-link,
+.pn-root .pn-sound-sp-sheet .pn-sound-sp-brand,.pn-root .pn-sound-sp-sheet .pn-sound-sp-prov,.pn-root .pn-sound-sp-sheet .pn-sound-sp-note,
+.pn-root .pn-sound-sp-mini .pn-sound-sp-it small{color:rgba(240,248,246,.86)}
+.pn-root .pn-sound-sp-sheet .pn-player-title,.pn-root .pn-sound-sp-sheet h2,.pn-root .pn-sound-sp-sheet .pn-sound-sp-it b,.pn-root .pn-sound-sp-mini .pn-sound-sp-it b{color:#fff}
+
+/* Swipe-to-icon: the mini follows the finger; touch-action lets the page still scroll vertically elsewhere. */
+.pn-root .pn-sound-sp-mini{touch-action:pan-x pan-y;transition:transform 180ms cubic-bezier(.23,1,.32,1)}
+.pn-root .pn-sound-sp-dock.is-stacked .pn-sound-sp-fab{bottom:calc(152px + env(safe-area-inset-bottom,0px))}
+.pn-root .pn-sound-sp-diag{margin:0;padding:8px 10px;border-radius:10px;background:rgba(0,0,0,.35);color:#cfe;font:11px/1.4 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-word;user-select:text}
