@@ -41,16 +41,17 @@ const dir = (smd, uid) => ({ ["doctorDirectory/" + smd]: { uid } });
 const LAUNCH_END = Date.parse("2027-03-31T23:59:00+05:30");
 const AFTER = LAUNCH_END + 1;
 
+// Owner 2026-11-02: list (regular) price is Rs 4,999 a year.
 test("quote: launch price before the end date, list after it (injected clock)", async () => {
   const s = fakeStore();
   const q = await P.quoteFor(ENV, "u1", s.deps, NOW);
   assert.deepEqual([q.plan, q.listPaise, q.firstYearPaise, q.renewalPaise, q.priceReason, q.offPct, q.saveRupees, q.launchEndsAt, q.firstYear],
-    ["year", 599900, 149900, 599900, "launch", 75, 4500, LAUNCH_END, true]);
+    ["year", 499900, 149900, 499900, "launch", 70, 3500, LAUNCH_END, true]);
   assert.equal(q.productId, "in.stewardmd.prep.annual");
   assert.equal(q.store.playOfferId, "prep-launch-1499");
   assert.equal(q.referralCreditDays, 30);
   const a = await P.quoteFor(ENV, "u1", s.deps, AFTER);
-  assert.deepEqual([a.firstYearPaise, a.priceReason, a.offPct, a.launchEndsAt], [599900, "intro", 0, undefined]);
+  assert.deepEqual([a.firstYearPaise, a.priceReason, a.offPct, a.launchEndsAt], [499900, "intro", 0, undefined]);
   const custom = P.prepQuote(P.prepCfg({ PREP_LAUNCH_ENDS: "2026-10-01T00:00:00Z", PREP_INTRO_AFTER_LAUNCH: "299900" }), {}, NOW);
   assert.deepEqual([custom.firstYearPaise, custom.priceReason], [299900, "intro"]);
 });
@@ -61,8 +62,8 @@ test("quote: student 20% is off the LIST price and never stacks on launch", asyn
   const before = await P.quoteFor(ENV, "u1", s.deps, NOW);
   assert.deepEqual([before.firstYearPaise, before.priceReason, before.studentVerified], [149900, "launch", true], "launch 1,499 beats student 4,799; never 1,199");
   const after = await P.quoteFor(ENV, "u1", s.deps, AFTER);
-  assert.deepEqual([after.firstYearPaise, after.priceReason, after.offPct], [479920, "student", 20]);
-  assert.deepEqual([before.storeFirstYearPaise, before.studentPaise, after.storeFirstYearPaise, after.studentPaise], [149900, 479920, 599900, 479920], "store price = launch/intro only");
+  assert.deepEqual([after.firstYearPaise, after.priceReason, after.offPct], [399920, "student", 20]);
+  assert.deepEqual([before.storeFirstYearPaise, before.studentPaise, after.storeFirstYearPaise, after.studentPaise], [149900, 399920, 499900, 399920], "store price = launch/intro only");
   s.deps.claims.u1 = { verified: true };   // a registered doctor is not a student
   assert.equal((await P.quoteFor(ENV, "u1", s.deps, AFTER)).priceReason, "intro");
 });
@@ -70,9 +71,9 @@ test("quote: student 20% is off the LIST price and never stacks on launch", asyn
 test("quote: renewal (already paid once) is list, or the student price; never launch or win-back", () => {
   const cfg = P.prepCfg({});
   const r = P.prepQuote(cfg, { rec: { prepFirstPaidAt: 1 }, offerExpiresAt: NOW + HOUR }, NOW);
-  assert.deepEqual([r.firstYearPaise, r.priceReason, r.firstYear], [599900, "renewal", false]);
+  assert.deepEqual([r.firstYearPaise, r.priceReason, r.firstYear], [499900, "renewal", false]);
   const rs = P.prepQuote(cfg, { rec: { prepFirstPaidAt: 1 }, studentVerified: true }, NOW);
-  assert.deepEqual([rs.firstYearPaise, rs.priceReason], [479920, "student"]);
+  assert.deepEqual([rs.firstYearPaise, rs.priceReason], [399920, "student"]);
 });
 
 test("quote: every combination picks the single lowest price, never a stacked one", () => {
@@ -82,18 +83,18 @@ test("quote: every combination picks the single lowest price, never a stacked on
     [{ studentVerified: true }, NOW, 149900, "launch"],
     [{ offerExpiresAt: o }, NOW, 99900, "winback"],
     [{ offerExpiresAt: o, studentVerified: true }, NOW, 99900, "winback"],
-    [{}, AFTER, 599900, "intro"],
-    [{ studentVerified: true }, AFTER, 479920, "student"],
+    [{}, AFTER, 499900, "intro"],
+    [{ studentVerified: true }, AFTER, 399920, "student"],
     [{ offerExpiresAt: o, studentVerified: true }, AFTER, 99900, "winback"],
   ];
   for (const [opts, now, paise, reason] of cases) {
     const q = P.prepQuote(cfg, opts, now);
     assert.deepEqual([q.firstYearPaise, q.priceReason], [paise, reason], JSON.stringify(opts));
-    const singles = [149900, 599900, 479920, 99900];
+    const singles = [149900, 499900, 399920, 99900];
     assert.ok(singles.includes(q.firstYearPaise), "a stacked price would not be one of the single prices");
   }
   const big = P.prepQuote(P.prepCfg({ PREP_STUDENT_DISCOUNT_PCT: "90" }), { studentVerified: true, offerExpiresAt: o }, NOW);
-  assert.deepEqual([big.firstYearPaise, big.priceReason], [59990, "student"], "a config change can make student the best");
+  assert.deepEqual([big.firstYearPaise, big.priceReason], [49990, "student"], "a config change can make student the best");
 });
 
 test("config: env overrides discount, referral days and list price", () => {
@@ -163,12 +164,12 @@ test("win-back: eligible only on a later visit (>= 1 h after the abandoned check
   assert.deepEqual(await P.getOffer(ENV, "u1", s.deps, NOW + 10 * 60000), { offer: null }, "same visit");
   assert.equal(s.rec("u1").prepOfferShownAt, undefined, "not shown, clock not started");
   const o = await P.getOffer(ENV, "u1", s.deps, NOW + HOUR);
-  assert.deepEqual(o.offer, { kind: "winback", finalPaise: 99900, basePaise: 149900, listPaise: 599900, saveRupees: 500, expiresAt: NOW + HOUR + 48 * HOUR,
+  assert.deepEqual(o.offer, { kind: "winback", finalPaise: 99900, basePaise: 149900, listPaise: 499900, saveRupees: 500, expiresAt: NOW + HOUR + 48 * HOUR,
     productId: "in.stewardmd.prep.annual", iosOfferId: "prep_winback_999", playOfferId: "prep-winback-999" });
   const again = await P.getOffer(ENV, "u1", s.deps, NOW + 5 * HOUR);
   assert.equal(again.offer.expiresAt, NOW + 49 * HOUR, "window starts at FIRST shown");
   const q = await P.quoteFor(ENV, "u1", s.deps, NOW + 5 * HOUR);
-  assert.deepEqual([q.priceReason, q.firstYearPaise, q.offerExpiresAt, q.renewalPaise, q.store.iosOfferId], ["winback", 99900, NOW + 49 * HOUR, 599900, "prep_winback_999"]);
+  assert.deepEqual([q.priceReason, q.firstYearPaise, q.offerExpiresAt, q.renewalPaise, q.store.iosOfferId], ["winback", 99900, NOW + 49 * HOUR, 499900, "prep_winback_999"]);
 });
 
 test("win-back: 48 h expiry, never again; dismiss ends it; one per account ever", async () => {
@@ -225,9 +226,27 @@ test("order route: amount is the server quote; client amount/price/plan fields a
     const out = await res.json();
     assert.equal(res.status, 200);
     assert.equal(sent.length, 1);
-    assert.equal(sent[0].body.amount, 479920, "Rs 5,999 less the 20% student discount (after launch), computed server-side");
+    assert.equal(sent[0].body.amount, 399920, "Rs 4,999 less the 20% student discount (after launch), computed server-side");
     assert.equal(sent[0].body.notes.plan, "prep:year:student");
     assert.equal(out.plan, "prep:year:student");
     assert.equal(s.rec("u1").prepCheckoutAt, AFTER, "pending checkout recorded");
   } finally { globalThis.fetch = realFetch; }
+});
+
+// Owner 2026-11-02: PrepNucleus add-on on the Pro paywall, open to anyone.
+test("add-on prices: Rs 179 a month (regular Rs 499), Rs 1,499 first year (regular Rs 4,999)", () => {
+  const a = P.prepAddonPlan({}, Date.parse("2026-11-02T00:00:00+05:30"));
+  assert.deepEqual([a.amount, a.regular, a.annual, a.annualRegular], [17900, 49900, 149900, 499900]);
+  const after = P.prepAddonPlan({}, Date.parse("2027-04-02T00:00:00+05:30"));
+  assert.equal(after.annual, 499900, "after the launch the first year is the list price");
+  assert.equal(after.launchUntil, null);
+});
+
+test("monthly plan: store product only when configured, and it maps to prep:month", () => {
+  assert.equal(P.prepAddonPlan({}).monthProductId, null, "no monthly store product until the owner creates one");
+  assert.equal(P.prepPlanKeyForProduct({}, "in.stewardmd.prep.monthly"), null);
+  const env = { PREP_IAP_MONTH_PRODUCT: "in.stewardmd.prep.monthly" };
+  assert.equal(P.prepPlanKeyForProduct(env, "in.stewardmd.prep.monthly"), "prep:month");
+  assert.equal(P.prepPlanKeyForProduct(env, "in.stewardmd.prep.annual"), "prep:year");
+  assert.equal(P.prepCfg({}).monthDays, 30);
 });

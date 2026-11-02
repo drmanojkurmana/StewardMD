@@ -43,7 +43,7 @@ const LEX = require("../drug-lexicon.js");
 
 // ---- KB grounding ------------------------------------------------------------------------------------------------
 export const KB_DIRS = ["kb/reference", "kb/diseases", "kb/clinical-protocols", "kb/protocols", "kb/oncotree", "kb/treatments"];
-const SKIP_KEYS = new Set(["id", "aliases", "source", "sources", "sourceEdition", "references", "reference_list", "review", "provenance", "version", "pages", "page",
+const SKIP_KEYS = new Set(["id", "aliases", "hyTerms", "source", "sources", "sourceEdition", "references", "reference_list", "review", "provenance", "version", "pages", "page",
   "chapter", "crossLinks", "url", "urls", "doi", "pmid", "citation", "citations", "updated", "schemaVersion", "evidence", "path", "pills", "sets", "_comment", "license", "licence"]);
 // "(Harrison 22e p.632)", "(Standard Guidelines (NCCN), ... BINV-3; kb/oncotree/breast.json)", "(IBC-1)": book and
 // guideline citations are not facts and must not reach a public lesson.

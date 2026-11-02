@@ -12,6 +12,12 @@
   :root { --paper:#f6f7f5; --ink:#14202b; --panel:#fff; --line:#d7dee3; --slate:#2d4356; --slate-soft:#5a7184;
           --teal:#0e6e63; --teal-soft:#e3f1ee; --gold:#b9852a; --green:#1c7a4a; --green-bg:#e7f5ec; --green-line:#aedcc1;
           --sans: -apple-system, "Segoe UI", Roboto, system-ui, sans-serif; --serif: Georgia, "Times New Roman", serif; }
+  /* The app's own faces and Clinical Tools sphere tokens (index.html / redesign-system.css), so the
+     screenshot shows the sheet as the app renders it. */
+  @font-face { font-family:'Bricolage Grotesque'; src:url(/assets/fonts/bricolage-grotesque.woff2) format('woff2'); font-weight:200 800; }
+  @font-face { font-family:'Inter Variable'; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); font-weight:100 900; }
+  body { --smd-dsp:'Bricolage Grotesque','Inter Variable',system-ui,sans-serif; --mono:'IBM Plex Mono','SF Mono',Consolas,monospace;
+         --sphere-base:#06231e; --sphere-mid:#12564a; --sphere-hi:#2f9184; --rds-surface-2:#eaeeec; }
   body { margin:0; font-family: var(--sans); background:#fff; }
 </style>
 <script>
@@ -24,10 +30,22 @@
       physician:    { amount: 74900, annual: 749000, regular: 149900, label: "Physician" },
       physicianpro: { amount: 89900, annual: 899000, regular: 249900, label: "Physician Pro", premium: true }
     },
-    addons: { onco: { amount: 8900, label: "Physician Onco" } },
+    addons: { onco: { amount: 8900, label: "Physician Onco" }, prep: { label: "PrepNucleus", amount: 17900, regular: 49900, annual: 149900, annualRegular: 499900, launchUntil: 1806517740000, productId: "in.stewardmd.prep.annual", monthProductId: null } },
     tokens: { boost: { mt: 50000, amount: 4900 }, plus: { mt: 250000, amount: 19900, regular: 24500, popular: true }, power: { mt: 750000, amount: 49900, regular: 73500 } }
   } };
   window.STATUS = { signedIn: true, pro: false, promo: false, verified: true };
+  /* Screenshot flags (single-shot headless runs cannot click): ?promo=1 serves a launch-promo
+     status, ?dark=1 flips the host surfaces to the app's dark tokens. Same host harness for
+     before/after captures; only the sheet code under test differs. */
+  (function () {
+    var q = location.search || "";
+    if (/[?&]promo=1/.test(q)) window.STATUS = { signedIn: true, pro: false, promo: true, verified: true, promoUntil: Date.UTC(2026, 5, 30, 12, 0, 0) };
+    if (/[?&]dark=1/.test(q)) {
+      var s = document.createElement("style");
+      s.textContent = ":root{--paper:#0b141a;--ink:#e9f1ee;--panel:#14242c;--line:#2a3f47;--slate:#c2d1d4;--slate-soft:#8fa3ab}body{background:#0b141a}";
+      document.head.appendChild(s);
+    }
+  })();
   window.SMD_PRO = { isProSync: function () { return false; }, proState: function () { return window.STATUS; }, sync: function () { return Promise.resolve(window.STATUS); } };
   window.SMD_AUTH = { currentUser: { getIdToken: function () { return Promise.resolve("tok"); } } };
   window.toast = function () {};
@@ -35,6 +53,28 @@
     var body = String(url).indexOf("/plans") > -1 ? window.PLANS : window.STATUS;
     return Promise.resolve({ ok: true, status: 200, clone: function () { return this; }, json: function () { return Promise.resolve(body); } });
   };
+  /* Same shape as the app registry (home.js ICONS.get): bare viewBox svg, real path data for
+     the names the paywall sheet uses. pro-paywall.js stamps width/height itself. */
+  window.ICONS = { get: function (name) {
+    var P = {
+      note: '<path d="M6 3h8l5 5v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v5h5"/><path d="M8.5 13h7M8.5 16.5h5"/>',
+      mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/>',
+      rounds: '<rect x="6" y="4" width="12" height="17" rx="2"/><path d="M9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1"/><path d="m9 13 2 2 4-4"/>',
+      brain: '<path d="M12 4.6a3 3 0 0 0-5 1.6A2.8 2.8 0 0 0 4.6 11a2.8 2.8 0 0 0 1 4.6A2.6 2.6 0 0 0 9 19a2.6 2.6 0 0 0 3 .6"/><path d="M12 4.6a3 3 0 0 1 5 1.6A2.8 2.8 0 0 1 19.4 11a2.8 2.8 0 0 1-1 4.6A2.6 2.6 0 0 1 15 19a2.6 2.6 0 0 1-3 .6"/><path d="M12 5v14"/>',
+      close: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>',
+      plus: '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+      check: '<path d="m5 12 5 5L20 7"/>',
+      bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+      pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
+      antibiogram: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>',
+      microbe: '<circle cx="12" cy="12" r="5.5"/><path d="M12 3.3v-1M12 21.7v-1M3.3 12h-1M21.7 12h-1M6.3 6.3l-.8-.8M18.5 18.5l-.8-.8M17.7 6.3l.8-.8M5.5 18.5l.8-.8"/><circle cx="10.3" cy="11" r="1" fill="currentColor" stroke="none"/><circle cx="13.7" cy="13.4" r="1" fill="currentColor" stroke="none"/>',
+      cloud: '<path d="M7 18a4.5 4.5 0 0 1-.3-9 6 6 0 0 1 11.5-.5A4 4 0 0 1 17.5 18Z"/>',
+      xray: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 7a3 3 0 0 0-2 5c0 1.6 2 2 2 4M12 7a3 3 0 0 1 2 5c0 1.6-2 2-2 4"/><path d="M8 11h8M8.5 14h7"/>',
+      device: '<rect x="6" y="3" width="12" height="18" rx="2.5"/><line x1="10.5" y1="18" x2="13.5" y2="18"/>',
+      idcard: '<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16a3 3 0 0 1 6 0"/><path d="M14 10h4M14 13h4"/>'
+    };
+    return '<svg viewBox="0 0 24 24" class="smd-ico" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (P[name] || "") + "</svg>";
+  } };
 </script>
 </head>
 <body>

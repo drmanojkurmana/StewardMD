@@ -41,6 +41,7 @@ for (const f of readdirSync(DZ).filter((x) => x.endsWith(".json"))) {
     redFlags: h.redFlags || [],
     prognosis: h.prognosis || null,
     pitfalls: h.pitfalls || [],
+    ...((d.hyTerms || []).length ? { hyTerms: d.hyTerms } : {}),   // per-article high-yield terms the reader shows in purple
     management: h.management || [],
     severityClassification: h.severityClassification || null,
     references: h.references || [],
@@ -79,6 +80,7 @@ if (existsSync(REF)) {
       redFlags: h.redFlags || [],
       prognosis: h.prognosis || null,
       pitfalls: h.pitfalls || [],
+    ...((d.hyTerms || []).length ? { hyTerms: d.hyTerms } : {}),   // per-article high-yield terms the reader shows in purple
       management: h.management || [],
       severityClassification: h.severityClassification || null,
       references: h.references || [],

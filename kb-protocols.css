@@ -109,9 +109,9 @@ body.dark .kblib-tool-protocols { --kbp-intl:#93b8ff; --kbp-india:#f5c26b; }
 .kblib-tool-protocols .kbp-twin strong { color:var(--kl-accent); font-size:14.5px; font-weight:650; }
 @media(max-width:360px) { .kblib-tool-protocols .kbp-seg { font-size:12px; padding-inline:5px; } }
 
-/* high-yield bolding inside protocol items (medFormat spans from reasoning.js), weight not colour */
-.kblib-tool-protocols [class^="md-"]:not(.md-cite) { font-weight: 700; color: inherit; }
-.kblib-tool-protocols .md-ix { font-weight: 600; }
+/* high-yield terms inside protocol items (medFormat spans from reasoning.js): bold purple, warnings red */
+.kblib-tool-protocols [class^="md-"]:not(.md-cite) { font-weight: 700; color: var(--md-hy, #6d28d9); }
+.kblib-tool-protocols .md-abs, .kblib-tool-protocols .md-emerg { color: var(--md-red, #b3261e); }
 .kblib-tool-protocols .md-bug { font-style: italic; font-weight: 600; }
 /* the scrolling tab row fades at the edge so a clipped label reads as "more", not as a bug */
 #sbrefOverlay #sbrefBody .sbref-tabs.kbp-5.can-scroll { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); }

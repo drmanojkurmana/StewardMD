@@ -180,8 +180,8 @@ body.dark #dxOverlay #dxMgmt.dx-reader { --rd-red: #ff8a80; }
 #dxOverlay #dxMgmt.dx-reader :is(.ev-ul li, .ev-sec-in p, .ev-pearl-bd) { color: var(--rd-ink); font-size: 15px; }
 /* high-yield points are bold ink, never colour (owner 2026-09-30): doses, drugs, thresholds, pitfalls,
  * key clinical signs. Tests are medium weight; organisms are italic, as in print. */
-#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: inherit; font-weight: 700; }
-#dxOverlay #dxMgmt.dx-reader .md-ix { font-weight: 600; }
+#dxOverlay #dxMgmt.dx-reader [class^="md-"]:not(.md-cite) { color: var(--md-hy, #6d28d9); font-weight: 700; }
+#dxOverlay #dxMgmt.dx-reader .md-abs, #dxOverlay #dxMgmt.dx-reader .md-emerg { color: var(--md-red, #b3261e); }
 #dxOverlay #dxMgmt.dx-reader .md-bug { font-style: italic; font-weight: 600; }
 @media (max-width: 420px) {
   #dxOverlay #dxMgmt.dx-reader .dx-mgmt-name { font-size: 30px; }
