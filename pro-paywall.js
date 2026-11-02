@@ -141,51 +141,42 @@
    * rises over it, a single row of icon benefits, plan rows with a radio, one CTA. */
   /* The hero follows the plan being looked at: StewardMD is an antibiotic-decision, drug-learning
    * and clinic app, so a resident and a clinic owner each see THEIR outcome. Words and pictures are
-   * illustrative (assistive framing, no statistic, no outcome claim). The antibiotic example follows
-   * NICE NG138 high-severity CAP (owner rule: NICE wins where it covers the point). */
+   * illustrative (assistive framing, no statistic, no outcome claim). */
   var TIER_HERO = {
-    student:      { h: "Make residency the easy part.", art: "abx", ben: [["microbe", "Antibiotic<br>decisions"], ["pills", "Learn<br>drugs"], ["antibiogram", "Local<br>antibiogram"]] },
-    coresident:   { h: "Make residency the easy part, together.", art: "abx", ben: [["microbe", "Antibiotic<br>decisions"], ["pills", "Learn<br>drugs"], ["antibiogram", "Local<br>antibiogram"]] },
-    pro:          { h: "The right antibiotic, at the bedside.", art: "abx", ben: [["microbe", "Antibiotic<br>decisions"], ["antibiogram", "Local<br>antibiogram"], ["xray", "Imaging<br>AI"]] },
-    physician:    { h: "MaiK writes your notes while you see patients.", art: "opd", ben: [["mic", "Voice<br>scribe"], ["rounds", "Smart OPD<br>queue"], ["bell", "FollowCare<br>recalls"]] },
-    physicianpro: { h: "Your whole clinic, hosted for you.", art: "opd", ben: [["cloud", "Cloud<br>clinic"], ["device", "Every<br>device"], ["xray", "Imaging AI<br>(beta)"]] },
+    student:      { h: "Make residency the easy part.", grid: "YOUR LEARNING STREAK", ben: [["microbe", "Antibiotic<br>decisions"], ["pills", "Learn<br>drugs"], ["antibiogram", "Local<br>antibiogram"]] },
+    coresident:   { h: "Make residency the easy part, together.", grid: "YOUR LEARNING STREAK", ben: [["microbe", "Antibiotic<br>decisions"], ["pills", "Learn<br>drugs"], ["antibiogram", "Local<br>antibiogram"]] },
+    pro:          { h: "The right antibiotic, at the bedside.", grid: "BEDSIDE DECISIONS", ben: [["microbe", "Antibiotic<br>decisions"], ["antibiogram", "Local<br>antibiogram"], ["xray", "Imaging<br>AI"]] },
+    physician:    { h: "MaiK writes your notes while you see patients.", grid: "NOTES MAIK DRAFTED", ben: [["mic", "Voice<br>scribe"], ["rounds", "Smart OPD<br>queue"], ["bell", "FollowCare<br>recalls"]] },
+    physicianpro: { h: "Your whole clinic, hosted for you.", grid: "CLINIC DAYS, IN THE CLOUD", ben: [["cloud", "Cloud<br>clinic"], ["device", "Every<br>device"], ["xray", "Imaging AI<br>(beta)"]] },
   };
   function heroOf(id) { return TIER_HERO[id] || TIER_HERO.physician; }
-  function artCard(kind, id) {
-    function row(k, v) {
-      return '<div style="display:grid;grid-template-columns:52px 1fr;gap:10px;padding:7px 0;border-top:1px solid rgba(255,255,255,.08)">' +
-        '<span style="font:500 10.5px/1.6 var(--mono,monospace);letter-spacing:.06em;color:rgba(255,255,255,.5)">' + k + '</span>' +
-        '<span style="font:500 13px/1.5 var(--sans,var(--pp-f));color:rgba(255,255,255,.92)">' + v + '</span></div>';
+  /* The habit, drawn: 20 weeks x 6 days, each square one day of use, brighter = more, getting
+   * busier towards today; the highlighted square is today. A light tint of the theme's own accent,
+   * so every appearance theme carries over. Illustrative (aria-hidden), no count is claimed. */
+  function streakGrid(label) {
+    var cells = "", COLS = 20, ROWS = 6, A = [0.07, 0.16, 0.34, 0.62, 0.92];
+    for (var r = 0; r < ROWS; r++) for (var c = 0; c < COLS; c++) {
+      var h = ((c * 7 + r * 13 + c * r * 3) % 11) / 11;   // fixed pseudo-noise, same picture every open
+      var lv = Math.max(0, Math.min(4, Math.floor(c / COLS * 4.2 + h * 1.6 - 0.4)));
+      var today = (r === 3 && c === COLS - 1);
+      cells += '<i style="display:block;aspect-ratio:1/1;border-radius:4px;background:' +
+        (today ? '#9fe3d4;background:color-mix(in srgb,var(--sphere-hi,#2f9184) 45%,#fff)' : "rgba(255,255,255," + A[lv] + ")") + '"></i>';
     }
-    function head(l, r) {
-      return '<div style="display:flex;align-items:center;gap:8px;padding-bottom:9px">' +
-        '<span style="font:600 10.5px var(--mono,monospace);letter-spacing:.08em;color:rgba(255,255,255,.62);flex:1">' + l + '</span>' +
-        '<span style="width:6px;height:6px;border-radius:50%;background:var(--sphere-hi,#2f9184)"></span>' +
-        '<span style="font:600 11px var(--pp-f);color:rgba(255,255,255,.75)">' + r + '</span></div>';
-    }
-    function foot(t) { return '<div style="padding:9px 0 5px;border-top:1px solid rgba(255,255,255,.08);font:500 11.5px var(--pp-f);color:rgba(255,255,255,.55)">' + t + '</div>'; }
-    var body = kind === "abx"
-      ? head("ANTIBIOTIC DECISION \u00b7 WARD 4", "MaiK checking") +
-        row("DX", "Pneumonia, high severity (CURB-65 3)") +
-        row("PICK", "Co-amoxiclav 1.2 g IV TDS + clarithromycin 500 mg BD") +
-        row("WHY", "Guideline first, checked against your hospital antibiogram") +
-        foot("Review at 48 to 72 h. You decide.")
-      : head(id === "physicianpro" ? "CLOUD CLINIC \u00b7 TOKEN 14" : "OPD \u00b7 TOKEN 14 \u00b7 10:42", id === "physicianpro" ? "Synced" : "MaiK drafting") +
-        row("CC", "Fever 3 days, dry cough") +
-        row("VITALS", "T 38.4 \u00b0C \u00b7 SpO\u2082 97% \u00b7 HR 96") +
-        row("PLAN", "Paracetamol 650 mg TDS \u00b7 CBC, dengue NS1") +
-        foot(id === "physicianpro" ? "Same record on your phone, tablet and desk." : "Draft. Awaiting your sign-off.");
-    return '<div aria-hidden="true" style="margin-top:22px;padding:14px 14px 8px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">' + body + '</div>';
+    return '<div style="margin-top:24px">' +
+      '<div style="font:700 10.5px var(--pp-f);letter-spacing:.1em;color:rgba(255,255,255,.62);margin-bottom:10px">' + esc(label) + '</div>' +
+      '<div aria-hidden="true" style="display:grid;grid-template-columns:repeat(' + COLS + ',1fr);gap:3px">' + cells + '</div>' +
+      '<div aria-hidden="true" style="display:flex;justify-content:space-between;margin-top:10px;font:500 11.5px var(--pp-f);color:rgba(255,255,255,.6)"><span>4 months ago</span><span>Today</span></div>' +
+    '</div>';
   }
   function hero(title) {
     var cfg = heroOf(_tier);
-    return '<div id="ppHero" data-art="' + cfg.art + '" style="background:var(--sphere-base,#06231e);color:#fff;padding:12px 20px 46px">' +
+    return '<div id="ppHero" data-tier="' + esc(_tier) + '" style="background:var(--sphere-base,#06231e);color:#fff;padding:12px 20px 46px">' +
       '<div style="display:flex;align-items:center;justify-content:space-between">' +
         '<button data-pp="close" aria-label="Close" style="flex:none;width:44px;height:44px;margin-left:-6px;border-radius:50%;border:none;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center">' + ppIcoPx("close", 18) + '</button>' +
         '<span style="display:flex;align-items:center;gap:8px;font:700 13px var(--pp-f);letter-spacing:.01em;color:rgba(255,255,255,.9)"><img src="/logo.png" alt="" width="30" height="30" style="display:block;filter:brightness(0) invert(1)">StewardMD Pro</span>' +
       '</div>' +
       '<h2 style="margin:20px 0 0;font:700 29px/1.1 var(--smd-dsp,var(--pp-f));letter-spacing:-.02em;color:#fff;text-wrap:balance;max-width:19ch">' + esc(title || cfg.h) + '</h2>' +
-      artCard(cfg.art, _tier) +
+      streakGrid(cfg.grid) +
     '</div>';
   }
   /* One row of icon benefits for the plan being looked at, icons from the app's ICONS registry. */

@@ -321,10 +321,11 @@ test("FIX 1: the headline says what the doctor gets, not a generic upgrade line"
   assert.ok(!/Choose your plan|Go Pro|Unlock everything|Upgrade to Pro/.test(text(h)), "no generic upgrade headline left");
 });
 
-test("hero shows the outcome (a MaiK OPD note awaiting sign-off) and icon benefits, no sparkle", async () => {
+test("hero shows the habit (a streak grid of the plan's work) and icon benefits, no sparkle", async () => {
   const h = (await open("web")).html;
   assert.ok(h.includes('id="ppHero"'), "outcome hero renders");
-  for (const line of ["Fever 3 days, dry cough", "Draft. Awaiting your sign-off."]) assert.ok(text(h).includes(line), "hero line missing: " + line);
+  for (const line of ["NOTES MAIK DRAFTED", "4 months ago", "Today"]) assert.ok(text(h).includes(line), "hero line missing: " + line);
+  assert.equal((h.match(/aspect-ratio:1\/1/g) || []).length, 120, "20 x 6 streak squares");
   assert.ok(h.includes('id="ppBenefits"'), "benefit row renders");
   for (const b of ["Voice scribe", "Smart OPD queue", "FollowCare recalls"]) assert.ok(text(h).includes(b), "benefit missing: " + b);
   assert.ok(!/ppIco\("(spark|crown|star)"\)/.test(SRC), "no sparkle / crown / star icon is rendered by the sheet");
@@ -336,7 +337,7 @@ test("the hero follows the plan: residents see antibiotic decisions, drugs and t
   r.tap("showall"); r.tap("tier", "data-tier", "student");
   const t = text(r.html);
   assert.ok(t.includes("Make residency the easy part."), "resident headline");
-  assert.ok(/data-art="abx"/.test(r.html) && t.includes("Co-amoxiclav 1.2 g IV TDS + clarithromycin 500 mg BD"), "antibiotic decision picture (NICE NG138 high-severity CAP)");
+  assert.ok(t.includes("YOUR LEARNING STREAK"), "a resident sees a learning habit");
   for (const b of ["Antibiotic decisions", "Learn drugs", "Local antibiogram"]) assert.ok(t.includes(b), "benefit missing: " + b);
   r.tap("tier", "data-tier", "physicianpro");
   assert.ok(text(r.html).includes("Your whole clinic, hosted for you."));
