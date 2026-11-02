@@ -29,7 +29,7 @@ import { getEntitlement, writeEntitlement, clinicLimit, deviceLimit, recordTierP
 import { oncoTrialState } from "../../_features.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
-import { quoteFor, markCheckout, fulfilPrep, prepPlanKeyForProduct, prepProView } from "../../_prep_pro.js";
+import { quoteFor, markCheckout, fulfilPrep, prepPlanKeyForProduct, prepProView, prepCfg, prepAddonPlan } from "../../_prep_pro.js";
 import { quotaOn, quotaKv, quotaPacks, quotaPackFor, packKeyForProduct, credit as quotaCredit, state as quotaState,
   msgTiers, msgTierFromPlanKey, msgTierKeyForProduct, msgPurchasePatch } from "../../_quota.js";
 
@@ -71,6 +71,7 @@ export function plans(env) {
     addons: {
       onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },
       clinic: { amount: P("CLINIC_ADDON_MONTHLY", 13900), label: "Extra clinic" },
+      prep: prepAddonPlan(env),   // PrepNucleus, open to anyone; prices live in functions/_prep_pro.js
     },
     // Clinic Messaging — an add-on-shaped section, but real auto-renewable subscriptions in their own
     // App Store group so they stack on whatever base plan the doctor already holds. Units + product
@@ -436,7 +437,11 @@ export async function onRequest(context) {
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
       const tv = await traineeGate(env, uid, body); if (tv) return json(tv, 403);
       let sel = selectAmount(env, body);
-      if (body.prepPlan) {
+      if (body.prepPlan === "month") {
+        // PrepNucleus monthly: one server price for everyone; any client amount is ignored.
+        sel = { amount: prepCfg(env).monthPaise, months: 0, key: "prep:month", label: "PrepNucleus Pro (1 month)" };
+        try { await markCheckout(env, uid); } catch (e) {}
+      } else if (body.prepPlan) {
         /* PrepNucleus: the amount comes from the server quote only (student discount / win-back /
          * launch decided here); any client amount or price field is ignored. */
         const q = await quoteFor(env, uid);

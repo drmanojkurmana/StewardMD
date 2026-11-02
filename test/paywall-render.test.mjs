@@ -24,7 +24,7 @@ const TIERS = {
 const plansWith = (tiers) => ({ plans: {
   monthly: { months: 1, amount: 59900 }, annual: { months: 12, amount: 599000 },
   tiers,
-  addons: { onco: { amount: 8900, label: "Physician Onco" }, clinic: { amount: 13900, label: "Extra clinic" } },
+  addons: { onco: { amount: 8900, label: "Physician Onco" }, clinic: { amount: 13900, label: "Extra clinic" }, prep: { label: "PrepNucleus", amount: 17900, regular: 49900, annual: 149900, annualRegular: 499900, launchUntil: 1806517740000, productId: "in.stewardmd.prep.annual", monthProductId: null } },
   tokens: { boost: { mt: 50000, amount: 4900 }, plus: { mt: 250000, amount: 19900, regular: 24500, popular: true }, power: { mt: 750000, amount: 49900, regular: 73500 } },
 } });
 const PLANS = plansWith(TIERS);
@@ -391,4 +391,26 @@ test("the payment line names only the store of the build: Google Play on Android
   const w = (await open("web")).html;
   assert.ok(!/Secure payment via/.test(w), "web shows no payment-provider line");
   assert.ok(!/PhonePe|netbanking/.test(a + w), "no PhonePe line anywhere");
+});
+
+test("PrepNucleus add-on: for students and residents, anyone can buy, server prices with the server's struck regular", async () => {
+  const r = await open("web");
+  const card = (r.html.match(/<div id="ppPrep"[\s\S]*?<\/button><\/div><\/div>/) || [""])[0];
+  const t = text(card).replace(/\s+/g, " ");
+  assert.ok(t.includes("PrepNucleus add-on") && t.includes("For students and residents. Anyone can add it."), t);
+  assert.match(card, /data-pp="prep" data-plan="month"/);
+  assert.match(card, /data-pp="prep" data-plan="year"/);
+  assert.ok(/\u20b9179/.test(t) && /line-through">\u20b9499</.test(card), "Rs 179 a month, Rs 499 struck");
+  assert.ok(/\u20b91,499/.test(t) && /line-through">\u20b94,999</.test(card), "Rs 1,499 a year, Rs 4,999 struck");
+  r.tap("showall"); r.tap("tier", "data-tier", "pro");
+  assert.match(r.html, /id="ppPrep"/, "offered on every plan, not only to trainees");
+  // no regular from the server -> nothing struck
+  const bare = plansWith(TIERS); delete bare.plans.addons.prep.regular; delete bare.plans.addons.prep.annualRegular;
+  const r2 = await open("web", bare);
+  assert.ok(!/line-through">\u20b9(499|4,999)</.test(r2.html), "never an invented was-price");
+});
+
+test("PrepNucleus monthly is hidden on iOS until its store product exists", async () => {
+  const h = (await open("ios")).html;
+  assert.ok(!/data-plan="month"/.test(h), "no monthly button on iOS without a monthly product id");
 });

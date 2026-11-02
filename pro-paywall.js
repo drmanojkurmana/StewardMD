@@ -307,6 +307,27 @@
       '<button data-pp="buy-addon" data-addon="onco" style="margin-top:9px;width:100%;min-height:44px;border:1.5px solid var(--teal,#0e6e63);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;padding:10px;font:800 12.5px var(--pp-f);cursor:pointer">Add to any plan</button></div>';
   }
 
+  /* PrepNucleus add-on (owner 2026-11-02): pitched to students and residents, buyable by anyone on
+   * any plan. Every figure is the server's (plans.addons.prep); the struck price is the server's
+   * regular price, never invented. Monthly is hidden on iOS until its store product exists. */
+  function prepAddonRow() {
+    var a = _plans && _plans.addons && _plans.addons.prep; if (!a || !a.amount) return "";
+    var showMonth = !(plat() === "ios" && !a.monthProductId);
+    function opt(plan, price, regular, per, note) {
+      return '<button data-pp="prep" data-plan="' + plan + '" style="flex:1;min-width:0;min-height:64px;text-align:left;box-sizing:border-box;padding:10px 12px;border-radius:12px;border:1px solid var(--line,#dfe3dc);background:var(--paper,#f6f7f5);color:var(--ink,#14202b);cursor:pointer">' +
+        '<span style="display:block;font:700 17px var(--smd-dsp,var(--pp-f));white-space:nowrap">' + inr(price) + '<span style="font:600 12px var(--pp-f)">' + per + '</span>' +
+          (regular > price ? ' <span style="font:500 12px var(--pp-f);color:var(--slate-soft,#5a7184);text-decoration:line-through">' + inr(regular) + '</span>' : '') + '</span>' +
+        (note ? '<span style="display:block;font:500 11px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:3px">' + note + '</span>' : '') + '</button>';
+    }
+    return '<div id="ppPrep" style="margin:4px 20px 14px;padding:14px;border-radius:14px;background:var(--panel,#fff);border:1px solid var(--line,#dfe3dc)">' +
+      '<div style="display:flex;align-items:center;gap:10px"><img src="/prep-logo.png" alt="" width="32" height="32" style="flex:none;border-radius:8px;display:block">' +
+        '<div style="flex:1;min-width:0"><div style="font:700 14px var(--pp-f);color:var(--ink,#14202b)">PrepNucleus add-on</div>' +
+        '<div style="font:500 12px/1.4 var(--pp-f);color:var(--slate-soft,#5a7184)">For students and residents. Anyone can add it.</div></div></div>' +
+      '<div style="display:flex;gap:8px;margin-top:12px">' +
+        (showMonth ? opt("month", a.amount, a.regular, "/mo", "") : "") +
+        (a.annual ? opt("year", a.annual, a.annualRegular, "/yr", a.launchUntil ? "Launch price, first year" : "") : "") +
+      '</div></div>';
+  }
   function tokenStore() {
     var tk = _plans && _plans.tokens; if (!tk) return "";
     var packs = ["boost", "plus", "power"].filter(function (k) { return tk[k]; });
@@ -395,7 +416,7 @@
         benefitRow() + banner +
         '<div role="group" aria-label="Plan" style="display:flex;flex-wrap:wrap;gap:3px;margin:24px 20px 0;padding:3px;border-radius:12px;background:var(--rds-surface-2,#eaeeec)">' + cardsFor(TIER_MAIN) + (_showAll ? cardsFor(TIER_QUIET) : "") + '</div>' +
         moreTiersLink() + cycleCards() + tierDetail() +
-        '<div style="height:18px"></div>' + addonRow() + tokenStore() + '</div>';
+        '<div style="height:18px"></div>' + prepAddonRow() + addonRow() + tokenStore() + '</div>';
     } else {
       body = '<div style="padding:20px 20px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading plans…</div>';
     }
@@ -427,6 +448,8 @@
         el.textContent = inr(Math.round(a - (a - b) * e));
         if (k < 1 && el.isConnected !== false) raf(step);
       });
+      // Frames can pause (app in the background); the exact price must still land.
+      setTimeout(function () { el.textContent = inr(b); }, DUR + 120);
     });
   }
   function wire() {
@@ -441,6 +464,10 @@
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
         if (k === "buy") return doBuy({ tier: _tier, cycle: _cycle }, b);
         if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);
+        if (k === "prep") {
+          var pa = (_plans && _plans.addons && _plans.addons.prep) || {}, month = b.getAttribute("data-plan") === "month";
+          return doBuy({ prepPlan: month ? "month" : "year", productId: month ? pa.monthProductId : pa.productId }, b);
+        }
         if (k === "token") return doBuy({ pack: b.getAttribute("data-pack") }, b);
         if (k === "qpack") return doBuy({ quotaPack: b.getAttribute("data-qpack") }, b);
         if (k === "msgtier") return doBuy({ msgTier: b.getAttribute("data-msgtier") }, b);

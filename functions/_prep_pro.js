@@ -19,23 +19,30 @@ const DAY = 86400000, HOUR = 3600000, MIN = 60000;
 const COLL = "entitlements/";
 
 // The ONE config object. Every value is overridable live (KV billing:cfg via /api/billing/admin/config)
-// or by env var of the same name; the right-hand side is the default. One plan only: a year.
+// or by env var of the same name; the right-hand side is the default. Plans: a year and a month.
 // Store ids are PLACEHOLDERS until the owner creates the products (App Store Connect / Play Console).
 export function prepCfg(env) {
   const P = (k, d) => cfgPrice(env, k, d);
   const S = (k, d) => { const v = cfgFlag(env, k); return v == null || v === "" ? d : String(v); };
   return {
-    listPaise: P("PREP_LIST_PRICE", 599900),          // Rs 5,999 / year: the real price, charged from year 2
+    // Owner 2026-11-02: regular Rs 4,999 / year (the struck anchor, charged from year 2) and a monthly
+    // plan Rs 179 (regular Rs 499). Rs 1,499 stays the launch first-year price.
+    listPaise: P("PREP_LIST_PRICE", 499900),          // Rs 4,999 / year: the real price, charged from year 2
     // Rs 1,499 first year IS the launch price, until PREP_LAUNCH_ENDS (server clock). After it the
     // first year costs PREP_INTRO_AFTER_LAUNCH (default = list, i.e. no intro).
     launchPaise: P("PREP_LAUNCH_PRICE", 149900),
     launchEndsAt: Date.parse(S("PREP_LAUNCH_ENDS", "2027-03-31T23:59:00+05:30")) || 0,
-    introAfterLaunchPaise: P("PREP_INTRO_AFTER_LAUNCH", 599900),
+    introAfterLaunchPaise: P("PREP_INTRO_AFTER_LAUNCH", 499900),
+    monthPaise: P("PREP_MONTH_PRICE", 17900),
+    monthRegularPaise: P("PREP_MONTH_REGULAR", 49900),
+    monthDays: P("PREP_DAYS_MONTH", 30),
     days: P("PREP_DAYS_YEAR", 365),
     studentDiscountPct: Math.min(90, P("PREP_STUDENT_DISCOUNT_PCT", 20)),   // off the LIST price
     referralDays: P("PREP_REFERRAL_DAYS", 30),
     store: {
       productId: S("PREP_IAP_PRODUCT", "in.stewardmd.prep.annual"),         // iOS auto-renewable sub (intro offer set in ASC)
+      // Empty until the owner creates the monthly store product: the app then hides monthly on iOS.
+      monthProductId: S("PREP_IAP_MONTH_PRODUCT", ""),
       iosWinbackOfferId: S("PREP_IOS_WINBACK_OFFER", "prep_winback_999"),  // iOS promotional offer / offer code id
       playBasePlanId: S("PREP_PLAY_BASE_PLAN", "prep-annual"),
       playIntroOfferId: S("PREP_PLAY_INTRO_OFFER", "prep-launch-1499"),
@@ -197,7 +204,8 @@ export async function recordReferral(env, uid, code, deps) {
   });
 }
 
-// Fulfil one verified PrepNucleus payment. planKey "prep:year[:<priceReason>]" (one year of prep_pro).
+// Fulfil one verified PrepNucleus payment. planKey "prep:year[:<priceReason>]" (one year of prep_pro)
+// or "prep:month" (one month).
 // ref = the payment's stable id (Razorpay order id / store transaction hash): a replay is a no-op.
 // The referee's FIRST paid purchase credits the referrer in the SAME atomic commit.
 export async function fulfilPrep(env, uid, planKey, opts, deps) {
@@ -205,8 +213,8 @@ export async function fulfilPrep(env, uid, planKey, opts, deps) {
   const now = opts.now || Date.now();
   const cfg = prepCfg(env);
   const parts = String(planKey || "").toLowerCase().split(":");
-  if (parts[0] !== "prep" || parts[1] !== "year") return { ok: false, reason: "unknown-prep-plan" };
-  const days = +opts.days > 0 ? +opts.days : cfg.days;
+  if (parts[0] !== "prep" || (parts[1] !== "year" && parts[1] !== "month")) return { ok: false, reason: "unknown-prep-plan" };
+  const days = +opts.days > 0 ? +opts.days : (parts[1] === "month" ? cfg.monthDays : cfg.days);
   const ref = String(opts.ref || "").slice(0, 120);
   if (!ref) return { ok: false, reason: "ref-required" };
   return rmw(env, uid, deps, async (d, rec, x) => {
@@ -233,5 +241,22 @@ export async function fulfilPrep(env, uid, planKey, opts, deps) {
 
 // Store product id -> prep plan key (null when not the PrepNucleus subscription).
 export function prepPlanKeyForProduct(env, productId) {
-  return productId && String(productId) === prepCfg(env).store.productId ? "prep:year" : null;
+  const st = prepCfg(env).store, p = String(productId || "");
+  if (!p) return null;
+  if (p === st.productId) return "prep:year";
+  if (st.monthProductId && p === st.monthProductId) return "prep:month";
+  return null;
+}
+
+// The public add-on prices the Pro paywall shows (same for everyone; the per-user quote stays truth
+// for the yearly checkout). Year = this year's first-year price, struck against the list price.
+export function prepAddonPlan(env, now) {
+  const c = prepCfg(env); now = now || Date.now();
+  return {
+    label: "PrepNucleus",
+    amount: c.monthPaise, regular: c.monthRegularPaise,
+    annual: c.launchEndsAt > now ? c.launchPaise : c.introAfterLaunchPaise, annualRegular: c.listPaise,
+    launchUntil: c.launchEndsAt > now ? c.launchEndsAt : null,
+    productId: c.store.productId, monthProductId: c.store.monthProductId || null,
+  };
 }

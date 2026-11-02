@@ -164,6 +164,16 @@ try {
   ok(!/days free|free trial|limited time|only \d+ left/i.test(all), "no invented trial and no fake scarcity");
   ok(!/—/.test(all), "no em-dash in the rendered sheet");
 
+  // ── PrepNucleus add-on (students and residents; anyone can buy) ───────────
+  const prep = String(await ev(`var c=document.querySelector("#ppPrep"); if(!c) return ""; c.scrollIntoView({block:"center"}); return c.innerText;`));
+  ok(/PrepNucleus add-on/.test(prep) && /Anyone can add it/.test(prep), "PrepNucleus add-on card shown");
+  ok(/₹179\/mo/.test(prep.replace(/\s+/g, "")) && /₹499/.test(prep), "₹179/mo with ₹499 struck");
+  ok(/₹1,499\/yr/.test(prep.replace(/\s+/g, "")) && /₹4,999/.test(prep), "₹1,499/yr with ₹4,999 struck");
+  await sleep(1000);
+  const landed = String(await ev(`var e=document.querySelector('[data-roll="monthly"]');return e?e.textContent:""`));
+  ok(landed === "₹199", "after a roll the exact price always lands (even if frames pause): " + landed);
+  await shot("04-prep-addon");
+
   console.log(fails ? `\n${fails} FAILED` : "\nALL GREEN");
   process.exitCode = fails ? 1 : 0;
   ws.close();
