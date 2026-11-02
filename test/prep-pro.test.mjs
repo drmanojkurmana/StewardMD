@@ -84,7 +84,7 @@ test("price view: launch, intro, student, list price; percent only from the quot
   const ren = P.quoteView({ listPaise: 599900, firstYearPaise: 599900, renewalPaise: 599900, priceReason: "renewal" });
   assert.equal(ren.strike + ren.off + ren.reason, "");
   const none = P.quoteView(null);
-  assert.equal(none.price, "Rs 5,999"); assert.equal(none.strike, "");
+  assert.equal(none.price, "Rs 4,999"); assert.equal(none.strike, "");
   assert.equal(P.rs(12345600), "Rs 1,23,456");
 });
 

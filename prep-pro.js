@@ -20,7 +20,7 @@
   /* ================= pure ================= */
   var CFG = { questions: 50, lessons: 1, cards: 10, open: 2 };
   // Fallback display only (published prices); the quote is the truth and checkout never sends a price.
-  var PLAN = { id: "prep_pro_year", listPaise: 599900 };
+  var PLAN = { id: "prep_pro_year", listPaise: 499900 };
   var DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
