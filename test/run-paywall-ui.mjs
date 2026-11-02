@@ -141,6 +141,13 @@ try {
   // ── reveal the trainee tiers ──────────────────────────────────────────────
   await tap('[data-pp="showall"]');
   await sleep(150);
+  // the price ROLLS DOWN from Physician Pro's ₹899/month to the Trainee ₹199/month
+  const rollNum = async () => +String(await ev(`var e=document.querySelector('[data-roll="monthly"]');return e?e.textContent:""`)).replace(/[^\d]/g, "");
+  const midRoll = await rollNum();
+  ok(midRoll > 199 && midRoll < 899, "price is mid-roll after 150 ms: ₹" + midRoll);
+  await sleep(800);
+  ok(await rollNum() === 199, "and lands on the Trainee price ₹199");
+  ok(await selected() === "student", "the student button selects Trainee");
   ok(await cardCount() === 5, "the link reveals Trainee and Co-Resident (" + await cardCount() + " cards)");
   const stu = String(await cardText("student")), co = String(await cardText("coresident"));
   ok(/₹7 a day\. Less than a cup of chai\./.test(stu), "Trainee per-day line: " + JSON.stringify(stu.split("\n").slice(0, 4)));

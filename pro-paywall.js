@@ -38,7 +38,7 @@
   /* Default view: ANNUAL, three cards, Physician preselected. Trainee and Co-Resident are one tap
    * away behind the "I'm a student or resident" link — self-selection, not a hidden price: every
    * tier stays reachable and buyable, and the link opens automatically if one of them is selected. */
-  var _root = null, _tier = "physician", _cycle = "annual", _status = null, _plans = null, _showAll = false;
+  var _root = null, _tier = "physician", _cycle = "annual", _status = null, _plans = null, _showAll = false, _rollFrom = null;
   var TIER_ORDER = ["student", "coresident", "pro", "physician", "physicianpro"];
   var TIER_MAIN = ["pro", "physician", "physicianpro"];
   var TIER_QUIET = ["student", "coresident"];
@@ -269,7 +269,7 @@
       return '<button data-pp="cycle" data-cycle="' + cyc + '" aria-pressed="' + (on ? "true" : "false") + '" style="position:relative;flex:1;min-width:0;text-align:left;min-height:96px;box-sizing:border-box;padding:16px 14px 14px;border-radius:16px;border:' + (on ? "1.5px solid var(--teal,#0e6e63)" : "1px solid var(--line,#dfe3dc)") + ';background:var(--panel,#fff);color:var(--ink,#14202b);cursor:pointer">' +
         (save > 0 ? '<span style="position:absolute;top:-10px;left:12px;font:700 11px var(--pp-f);color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee);border:1px solid var(--paper,#f6f7f5);border-radius:7px;padding:3px 8px">Save ' + save + '%</span>' : '') +
         '<div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font:600 14px var(--pp-f)">' + (annual ? "Yearly" : "Monthly") + '</span>' + tick + '</div>' +
-        '<div style="font:700 21px var(--smd-dsp,var(--pp-f));letter-spacing:-.01em;margin-top:6px;white-space:nowrap">' + inr(price) + '<span style="font:600 13px var(--pp-f)">' + (annual ? "/yr" : "/mo") + '</span></div>' +
+        '<div style="font:700 21px var(--smd-dsp,var(--pp-f));letter-spacing:-.01em;margin-top:6px;white-space:nowrap;font-variant-numeric:tabular-nums"><span data-roll="' + cyc + '" data-to="' + price + '">' + inr(price) + '</span><span style="font:600 13px var(--pp-f)">' + (annual ? "/yr" : "/mo") + '</span></div>' +
         '<div style="font:500 12px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:3px">' +
           (annual ? inr(Math.round(price / 12)) + "/mo" : "Billed monthly") + '</div>' +
       '</button>';
@@ -280,9 +280,15 @@
   // does not open on the two cheapest tiers.
   function moreTiersLink() {
     if (!TIER_QUIET.filter(function (id) { return tierOf(id); }).length) return "";
-    if (_showAll) return '<div style="padding:8px 20px 0;font:500 12px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
-    return '<div style="padding:10px 20px 0;text-align:center"><button data-pp="showall" style="min-height:44px;background:none;border:none;padding:0 2px;font:600 13px var(--pp-f);color:var(--teal,#0e6e63);text-decoration:underline;text-underline-offset:3px;cursor:pointer">I’m a student or resident</button></div>';
+    if (_showAll) return '<div style="padding:10px 22px 0;font:500 12px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
+    // A real button, not a footnote link: students are a third of the doctors who open this sheet.
+    return '<div style="padding:12px 20px 0"><button data-pp="showall" style="display:flex;align-items:center;gap:12px;width:100%;min-height:56px;box-sizing:border-box;padding:10px 14px;border-radius:14px;border:1px dashed var(--teal,#0e6e63);background:var(--panel,#fff);color:var(--ink,#14202b);cursor:pointer;text-align:left">' +
+      '<span style="flex:none;width:34px;height:34px;border-radius:10px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);display:flex;align-items:center;justify-content:center">' + ppIcoPx("idcard", 18) + '</span>' +
+      '<span style="flex:1;min-width:0"><span style="display:block;font:700 14px var(--pp-f)">I\u2019m a student or resident</span>' +
+      '<span style="display:block;font:500 12px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:2px">See your price</span></span>' +
+      '<span aria-hidden="true" style="flex:none;color:var(--teal,#0e6e63);font:600 18px var(--pp-f)">\u203a</span></button></div>';
   }
+
 
   /* Onco add-on: available on EVERY tier, because browsing oncology is free for everyone and the
    * add-on is what buys the oncology AI. Priced from the server (plans.addons.onco); the trial line
@@ -388,7 +394,7 @@
       body = '<div style="background:var(--paper,#f6f7f5);border-radius:24px 24px 0 0;margin-top:-22px;position:relative;padding-top:24px">' +
         benefitRow() + banner +
         '<div role="group" aria-label="Plan" style="display:flex;flex-wrap:wrap;gap:3px;margin:24px 20px 0;padding:3px;border-radius:12px;background:var(--rds-surface-2,#eaeeec)">' + cardsFor(TIER_MAIN) + (_showAll ? cardsFor(TIER_QUIET) : "") + '</div>' +
-        cycleCards() + tierDetail() + moreTiersLink() +
+        moreTiersLink() + cycleCards() + tierDetail() +
         '<div style="height:18px"></div>' + addonRow() + tokenStore() + '</div>';
     } else {
       body = '<div style="padding:20px 20px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading plans…</div>';
@@ -401,15 +407,37 @@
     wire();
   }
 
+  /* Price roll-down: when a doctor moves to a CHEAPER plan (the student button, or any cheaper
+   * tier), both price cards count down from the old figure to the new one. Ease-out, ~700 ms,
+   * fixed-width digits so nothing jumps; never on a price rise; instant with reduced motion. */
+  function rememberPrices() { var t = tierOf(_tier); _rollFrom = t ? { annual: t.annual, monthly: t.amount } : null; }
+  function rollPrices() {
+    var from = _rollFrom; _rollFrom = null;
+    var raf = window.requestAnimationFrame, root = _root;
+    if (!from || !raf || !root || !root.querySelectorAll) return;
+    try { if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; } catch (e) {}
+    [].forEach.call(root.querySelectorAll("[data-roll]"), function (el) {
+      var a = +from[el.getAttribute("data-roll")] || 0, b = +el.getAttribute("data-to") || 0;
+      if (!(a > b)) return;
+      var t0 = 0, DUR = 700;
+      el.textContent = inr(a);
+      raf(function step(ts) {
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / DUR), e = 1 - Math.pow(1 - k, 3);
+        el.textContent = inr(Math.round(a - (a - b) * e));
+        if (k < 1 && el.isConnected !== false) raf(step);
+      });
+    });
+  }
   function wire() {
     var r = _root; if (!r) return;
     r.querySelectorAll("[data-pp]").forEach(function (b) {
       b.onclick = function () {
         var k = b.getAttribute("data-pp");
         if (k === "close") return close();
-        if (k === "tier") { _tier = b.getAttribute("data-tier"); return paint(); }
+        if (k === "tier") { rememberPrices(); _tier = b.getAttribute("data-tier"); paint(); return rollPrices(); }
         if (k === "cycle") { _cycle = b.getAttribute("data-cycle"); return paint(); }
-        if (k === "showall") { _showAll = true; return paint(); }
+        if (k === "showall") { rememberPrices(); _showAll = true; if (tierOf("student")) _tier = "student"; paint(); return rollPrices(); }
         if (k === "signin") { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
         if (k === "buy") return doBuy({ tier: _tier, cycle: _cycle }, b);
         if (k === "buy-addon") return doBuy({ addon: b.getAttribute("data-addon") }, b);

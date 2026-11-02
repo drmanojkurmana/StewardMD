@@ -332,6 +332,15 @@ test("hero shows the habit (a streak grid of the plan's work) and icon benefits,
   assert.ok(!/gradient|glow|blur\(/.test(h), "no gradient, glow or backdrop blur in the sheet");
 });
 
+test("the student button is a real button and takes the doctor straight to the Trainee price", async () => {
+  const r = await open("web");
+  assert.match(r.html, /<button data-pp="showall"[^>]*>[\s\S]*I\u2019m a student or resident[\s\S]*See your price/, "a full button, not a footnote link");
+  r.tap("showall");
+  assert.match(card(r.html, "student"), /aria-pressed="true"/, "Trainee is selected");
+  assert.ok(r.html.includes("Subscribe to Trainee \u00b7 \u20b91,990/year"), "CTA moved to the trainee price");
+  assert.match(r.html, /data-roll="annual" data-to="199000"/, "price carries its roll target");
+});
+
 test("the hero follows the plan: residents see antibiotic decisions, drugs and the antibiogram", async () => {
   const r = await open("web");
   r.tap("showall"); r.tap("tier", "data-tier", "student");
