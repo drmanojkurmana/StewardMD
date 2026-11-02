@@ -27,6 +27,13 @@
   function toast(m) { try { if (window.SMD_toast) return SMD_toast(m); if (window.toast) return toast(m); } catch (e) {} }
 
   function ppIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
+  /* Sized icon: the app registry returns a bare viewBox svg, so stamp width/height for the one
+   * place that renders it. With no ICONS on the page this is still "". */
+  function ppIcoPx(n, px){
+    var s = ppIco(n); if (!s) return "";
+    px = px || 20;
+    return String(s).replace("<svg ", '<svg width="' + px + '" height="' + px + '" ');
+  }
 
   /* Default view: ANNUAL, three cards, Physician preselected. Trainee and Co-Resident are one tap
    * away behind the "I'm a student or resident" link — self-selection, not a hidden price: every
@@ -116,14 +123,44 @@
   // SMD-09: plan text uses the Apple system font (--pp-f), and the sheet stops below the status bar
   // and Dynamic Island so the StewardMD Pro title is never cut off.
   function shell(inner) {
+    /* The focus <style> sits AFTER the dialog so #proPay firstChild stays the dialog: wire()
+     * compares click targets against it. */
     return '<div id="proPay" style="--pp-f:-apple-system,BlinkMacSystemFont,\'SF Pro Text\',\'SF Pro Display\',system-ui,\'Helvetica Neue\',sans-serif;position:fixed;inset:0;z-index:760;background:rgba(6,14,20,.5);display:flex;align-items:flex-end;justify-content:center;font-family:var(--pp-f);-webkit-font-smoothing:antialiased">' +
-      '<div role="dialog" aria-label="StewardMD Pro" style="background:var(--paper,#f6f7f5);color:var(--ink,#14202b);width:100%;max-width:520px;max-height:calc(100vh - env(safe-area-inset-top, 0px) - 14px);max-height:calc(100dvh - env(safe-area-inset-top, 0px) - 14px);overflow:auto;border-radius:20px 20px 0 0;box-shadow:0 -12px 44px rgba(0,0,0,.28)">' + inner + '</div></div>';
+      '<div role="dialog" aria-modal="true" aria-label="StewardMD Pro" style="background:var(--paper,#f6f7f5);color:var(--ink,#14202b);width:100%;max-width:520px;max-height:calc(100vh - env(safe-area-inset-top, 0px) - 14px);max-height:calc(100dvh - env(safe-area-inset-top, 0px) - 14px);overflow:auto;border-radius:20px 20px 0 0;box-shadow:0 -12px 44px rgba(0,0,0,.28)">' + inner + '</div>' +
+      '<style>#proPay button:focus-visible,#proPay input:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}</style></div>';
   }
   function header(sub) {
-    return '<div style="position:sticky;top:0;background:var(--paper,#f6f7f5);padding:16px 18px 8px;display:flex;align-items:flex-start;gap:10px;z-index:2">' +
+    return '<div style="position:sticky;top:0;background:var(--paper,#f6f7f5);padding:18px 20px 10px;display:flex;align-items:flex-start;gap:10px;z-index:2">' +
       '<div style="flex:1"><div style="font:800 20px var(--pp-f);color:var(--ink)">StewardMD <span style="color:var(--teal,#0e6e63)">Pro</span></div>' +
       (sub ? '<div style="font:500 12.5px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
-      '<button data-pp="close" aria-label="Close" style="flex:none;width:34px;height:34px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIco("close") + '</button></div>';
+      '<button data-pp="close" aria-label="Close" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIcoPx("close", 18) + '</button></div>';
+  }
+  /* FIX 2 (hero) + FIX 3 (benefits). The hero is a small sample of what Pro produces, drawn from
+   * the app's own line icons and neutral surfaces: no sparkle, no crown, no gradient, no glow.
+   * The benefits are one glanceable grid of icon + 2-5 words, using only names in the app's
+   * ICONS registry (note, mic, rounds, brain). Words only, no numbers: every price on the sheet
+   * still comes from the server payload. */
+  var PP_BENEFITS = [["note", "Notes written for you"], ["mic", "Voice scribe included"], ["rounds", "Queue and billing handled"], ["brain", "Answers with citations"]];
+  function heroPreview() {
+    function row(ico, t, s) {
+      return '<div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0">' +
+        '<span style="flex:none;width:30px;height:30px;border-radius:9px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);display:flex;align-items:center;justify-content:center">' + ppIcoPx(ico, 17) + '</span>' +
+        '<span style="flex:1;min-width:0"><span style="display:block;font:700 12.5px/1.35 var(--pp-f);color:var(--ink)">' + t + '</span>' +
+        '<span style="display:block;font:500 11.5px/1.45 var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:1px">' + s + '</span></span></div>';
+    }
+    return '<div id="ppHero" style="margin:12px 20px 2px;padding:2px 14px 6px;border-radius:14px;background:var(--panel,#fff)">' +
+      '<div style="font:800 10px var(--pp-f);letter-spacing:.07em;color:var(--slate-soft,#5a7184);padding-top:10px">SAMPLE OF PRO AT WORK</div>' +
+      row("note", "Visit note drafted", "History and plan written up, ready for your sign-off.") +
+      row("rounds", "Queue keeps moving", "Tokens, billing and recalls handled while you examine.") +
+      row("brain", "MaiK answers, cited", "Guideline-backed answers. You decide, always.") + '</div>';
+  }
+  function benefitGrid() {
+    return '<div id="ppBenefits" role="list" aria-label="What Pro does for you" style="margin:14px 20px 4px;display:grid;grid-template-columns:1fr 1fr;gap:12px 10px">' +
+      PP_BENEFITS.map(function (b) {
+        return '<div role="listitem" style="display:flex;gap:8px;align-items:flex-start;min-width:0">' +
+          '<span style="flex:none;width:20px;height:20px;color:var(--teal,#0e6e63);display:flex;align-items:center;justify-content:center">' + ppIcoPx(b[0], 20) + '</span>' +
+          '<span style="font:700 11.5px/1.4 var(--pp-f);color:var(--ink,#14202b)">' + b[1] + '</span></div>';
+      }).join("") + '</div>';
   }
   /* PRICING IS SERVER TRUTH. Every number below is derived from /api/billing/plans:
    *   t.amount  — monthly price now        t.annual  — annual price now
@@ -157,24 +194,41 @@
       var on = _cycle === id;
       return '<button data-pp="cycle" data-cycle="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="flex:1;min-height:44px;padding:9px 6px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12.5px var(--pp-f);cursor:pointer">' + label + '</button>';
     }
-    return '<div role="group" aria-label="Billing period" style="margin:8px 18px 6px;display:flex;gap:4px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual") + '</div>';
+    return '<div role="group" aria-label="Billing period" style="margin:10px 20px 8px;display:flex;gap:4px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual") + '</div>';
   }
 
+  /* FIX 4 (one clear plan). While the launch promo runs, the card states exactly what is
+   * charged afterwards and when: "then Rs X/year from <date>". Both figures are server truth
+   * (the `regular` anchor, x12 on a yearly card, else the plan's own price) and the date is the
+   * server's promo end. No trial exists on any purchase path here, so nothing else promises one. */
+  function promoAfterLine(t) {
+    if (!(_status && _status.promo)) return "";
+    var until = fdate(_status.promoUntil || _status.until);
+    if (!until) return "";
+    var price, per;
+    if (isAnnual(t)) { price = (t.regular && t.regular > t.amount) ? t.regular * 12 : tierPrice(t); per = "/year"; }
+    else { price = (t.regular && t.regular > t.amount) ? t.regular : tierPrice(t); per = "/month"; }
+    return "then " + inr(price) + per + " from " + until + ".";
+  }
   function tierCard(id, t) {
     var on = _tier === id, strike = tierStrike(t), pct = savePct(t);
     var badge = TIER_BADGE[id] || (t.popular ? "MOST POPULAR" : "");
     var note = TIER_NOTE[id] || "";
-    return '<button data-pp="tier" data-tier="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="width:100%;text-align:left;border:2px solid ' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:14px;padding:13px 13px 11px;cursor:pointer;position:relative;margin-bottom:10px">' +
-      (badge ? '<span style="position:absolute;top:-9px;left:12px;font:800 9px var(--pp-f);letter-spacing:.05em;color:#fff;background:' + (t.premium ? "var(--gold,#b9852a)" : "var(--teal,#0e6e63)") + ';border-radius:999px;padding:3px 9px">' + esc(badge) + '</span>' : '') +
+    var after = promoAfterLine(t);
+    /* FIX 4: the selected plan reads as THE choice, large; the rest stay buyable but quiet.
+     * FIX 5: badges and pills share the one brand accent or a neutral; no competing colours. */
+    return '<button data-pp="tier" data-tier="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="width:100%;text-align:left;min-height:44px;border:' + (on ? "2px solid var(--teal,#0e6e63)" : "1px solid var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:' + (on ? "16px" : "14px") + ';padding:' + (on ? "16px 15px 14px" : "10px 12px 9px") + ';cursor:pointer;position:relative;margin-bottom:' + (on ? "14px" : "10px") + '">' +
+      (badge ? '<span style="position:absolute;top:-9px;left:12px;font:800 9px var(--pp-f);letter-spacing:.05em;color:#fff;background:var(--teal,#0e6e63);border-radius:999px;padding:3px 9px">' + esc(badge) + '</span>' : '') +
       '<div style="display:flex;align-items:center;gap:8px">' +
-        '<div style="font:800 15px var(--pp-f);color:var(--ink);flex:1">' + esc(t.label) + (t.requiresVerify ? '<span style="font:600 10.5px var(--pp-f);color:var(--slate-soft)"> · verified trainee</span>' : '') + '</div>' +
-        (pct ? '<span style="flex:none;font:800 10px var(--pp-f);letter-spacing:.03em;color:var(--green,#1c7a4a);background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);border-radius:999px;padding:3px 8px">SAVE ' + pct + '%</span>' : '') +
+        '<div style="font:800 ' + (on ? "16px" : "14px") + ' var(--pp-f);color:var(--ink);flex:1">' + esc(t.label) + (t.requiresVerify ? '<span style="font:600 10.5px var(--pp-f);color:var(--slate-soft)"> · verified trainee</span>' : '') + '</div>' +
+        (pct ? '<span style="flex:none;font:800 10px var(--pp-f);letter-spacing:.03em;color:var(--slate,#2d4356);background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:3px 8px">SAVE ' + pct + '%</span>' : '') +
       '</div>' +
       '<div style="display:flex;align-items:baseline;gap:8px;margin-top:5px">' +
-        '<span style="font:800 22px var(--pp-f);color:var(--ink)">' + inr(tierPrice(t)) + '</span>' +
+        '<span style="font:800 ' + (on ? "26px" : "18px") + ' var(--pp-f);color:var(--ink)">' + inr(tierPrice(t)) + '</span>' +
         '<span style="font:700 11.5px var(--pp-f);color:var(--slate-soft)">' + tierPer(t) + '</span>' +
         (strike ? '<span style="font:600 12px var(--pp-f);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
       '</div>' +
+      (after ? '<div style="font:700 12px/1.45 var(--pp-f);color:var(--ink);margin-top:3px">' + esc(after) + '</div>' : '') +
       '<div style="font:700 13px/1.4 var(--pp-f);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + '</div>' +
       (spendLine(id, t) ? '<div style="font:600 11.5px/1.4 var(--pp-f);color:var(--slate,#2d4356);margin-top:3px">' + esc(spendLine(id, t)) + '</div>' : '') +
       (TIER_BENEFIT[id] ? '<div style="font:700 12px/1.45 var(--pp-f);color:var(--ink);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
@@ -190,8 +244,8 @@
   // does not open on the two cheapest cards.
   function moreTiersLink() {
     if (!TIER_QUIET.filter(function (id) { return tierOf(id); }).length) return "";
-    if (_showAll) return '<div style="padding:0 18px 4px;font:600 11px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
-    return '<div style="padding:0 18px 10px"><button data-pp="showall" style="width:100%;min-height:44px;background:none;border:none;padding:6px;font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer;text-align:center">I\u2019m a student or resident</button></div>';
+    if (_showAll) return '<div style="padding:0 20px 4px;font:600 11px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
+    return '<div style="padding:0 20px 12px"><button data-pp="showall" style="width:100%;min-height:44px;background:none;border:none;padding:6px;font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer;text-align:center">I\u2019m a student or resident</button></div>';
   }
 
   /* Onco add-on: available on EVERY tier, because browsing oncology is free for everyone and the
@@ -201,8 +255,8 @@
   function addonRow() {
     var a = _plans && _plans.addons && _plans.addons.onco; if (!a) return "";
     var trialDays = +(a.trialDays || 0);
-    return '<div style="margin:2px 18px 10px;padding:12px 13px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:var(--panel,#fff)">' +
-      '<div style="display:flex;align-items:center;gap:8px">' + ppIco("plus") +
+    return '<div style="margin:4px 20px 14px;padding:14px;border:none;border-radius:12px;background:var(--panel,#fff)">' +
+      '<div style="display:flex;align-items:center;gap:8px">' + ppIcoPx("plus", 16) +
       '<div style="flex:1;font:800 13px var(--pp-f);color:var(--ink)">Oncology AI add-on</div>' +
       '<div style="font:800 13px var(--pp-f);color:var(--ink)">+' + inr(a.amount) + '<span style="font:600 10.5px var(--pp-f);color:var(--slate-soft)">/month</span></div></div>' +
       '<div style="font:500 11.5px/1.5 var(--pp-f);color:var(--slate-soft);margin-top:5px">Protocols, staging and toxicity are free on every plan. This adds the AI that reads the evidence with you: evidence overlay, protocol recommendations and higher onco AI limits.' +
@@ -215,7 +269,7 @@
     var tk = _plans && _plans.tokens; if (!tk) return "";
     var packs = ["boost", "plus", "power"].filter(function (k) { return tk[k]; });
     if (!packs.length) return "";
-    return '<div style="padding:8px 18px 4px"><div style="font:800 13px var(--pp-f);color:var(--ink)">MaiK Token top-ups</div>' +
+    return '<div style="padding:10px 20px 6px"><div style="font:800 13px var(--pp-f);color:var(--ink)">MaiK Token top-ups</div>' +
       '<div style="font:500 11px var(--pp-f);color:var(--slate-soft);margin:2px 0 8px">One wallet for all AI. Buy once, spend on anything.</div>' +
       '<div style="display:flex;gap:8px">' + packs.map(function (k) {
         var p = tk[k], strike = (p.regular && p.regular > p.amount) ? p.regular : 0;
@@ -235,7 +289,7 @@
     return "Subscribe to " + t.label + " \u00b7 " + inr(tierPrice(t)) + tierPer(t);
   }
   function ctaBar(inner) {
-    return '<div style="position:sticky;bottom:0;z-index:3;background:var(--paper,#f6f7f5);border-top:1px solid var(--line,#d7dee3);padding:10px 18px calc(12px + env(safe-area-inset-bottom,0px))">' + inner + '</div>';
+    return '<div style="position:sticky;bottom:0;z-index:3;background:var(--paper,#f6f7f5);border-top:1px solid var(--line,#d7dee3);padding:12px 20px calc(14px + env(safe-area-inset-bottom,0px))">' + inner + '</div>';
   }
   function ctaBlock() {
     if (!fbUser()) return ctaBar('<button data-pp="signin" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--pp-f);cursor:pointer">Sign in to subscribe</button>');
@@ -243,15 +297,15 @@
     var t = tierOf(_tier);
     var via = plat() === "ios" ? "the App Store" : "PhonePe \u00b7 UPI / cards / netbanking";
     return ctaBar('<button data-pp="buy" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14.5px var(--pp-f);cursor:pointer">' + esc(ctaLabel()) + '</button>' +
-      '<div style="font:500 10.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:6px">Cancel anytime' + (t ? " \u00b7 " + esc(perDayTxt(t)) : "") + '<br>Secure payment via ' + via + '</div>');
+      '<div style="font:500 10.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:8px">Cancel anytime' + (t ? " \u00b7 " + esc(perDayTxt(t)) : "") + '<br>Secure payment via ' + via + '</div>');
   }
 
   // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
   function redeemBlock() {
-    return '<div style="padding:2px 18px 22px"><div style="border-top:1px solid var(--line,#d7dee3);padding-top:12px">' +
-      '<div style="font:700 12.5px var(--pp-f);color:var(--slate,#2d4356);margin-bottom:7px">Have an institution code?</div>' +
-      '<div style="display:flex;gap:8px"><input id="pp-code" placeholder="Enter code" autocapitalize="characters" spellcheck="false" style="flex:1;padding:11px 12px;border:1.5px solid var(--line,#d7dee3);border-radius:11px;font:600 14px var(--pp-f);letter-spacing:.06em;text-transform:uppercase;background:var(--panel,#fff);color:var(--ink)">' +
-      '<button data-pp="redeem" style="flex:none;padding:11px 16px;border:none;border-radius:11px;background:var(--slate,#2d4356);color:#fff;font:800 13px var(--pp-f);cursor:pointer">Redeem</button></div>' +
+    return '<div style="padding:4px 20px 24px"><div style="border-top:1px solid var(--line,#d7dee3);padding-top:14px">' +
+      '<div style="font:700 12.5px var(--pp-f);color:var(--slate,#2d4356);margin-bottom:8px">Have an institution code?</div>' +
+      '<div style="display:flex;gap:8px"><input id="pp-code" placeholder="Enter code" autocapitalize="characters" spellcheck="false" style="flex:1;min-height:44px;box-sizing:border-box;padding:11px 12px;border:1.5px solid var(--line,#d7dee3);border-radius:11px;font:600 14px var(--pp-f);letter-spacing:.06em;text-transform:uppercase;background:var(--panel,#fff);color:var(--ink)">' +
+      '<button data-pp="redeem" style="flex:none;min-height:44px;box-sizing:border-box;padding:11px 16px;border:none;border-radius:11px;background:var(--slate,#2d4356);color:#fff;font:800 13px var(--pp-f);cursor:pointer">Redeem</button></div>' +
       '<div id="pp-code-msg" style="font:600 11.5px var(--pp-f);margin-top:6px;min-height:14px"></div></div></div>';
   }
   function redeem() {
@@ -266,7 +320,7 @@
       .then(function (x) {
         if (btn) { btn.disabled = false; btn.textContent = "Redeem"; }
         if (x.s === 200 && x.d && x.d.ok) {
-          if (msg) { msg.style.color = "var(--green,#1c7a4a)"; msg.textContent = x.d.already ? "Already redeemed on this account." : "Code accepted. Pro unlocked."; }
+          if (msg) { msg.style.color = "var(--teal,#0e6e63)"; msg.textContent = x.d.already ? "Already redeemed on this account." : "Code accepted. Pro unlocked."; }
           toast("Pro unlocked"); if (window.SMD_PRO && SMD_PRO.sync) try { SMD_PRO.sync(); } catch (e) {}
           refresh();
         } else {
@@ -282,21 +336,25 @@
     var promoOn = _status && _status.promo;
     var isPaid = _status && _status.pro && !promoOn;
     var banner = "";
-    if (promoOn) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--green-bg,#e7f5ec);border:1px solid var(--green-line,#aedcc1);font:600 12.5px/1.5 var(--pp-f);color:var(--green,#1c7a4a)">' + ppIco("spark") + ' Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
-    else if (isPaid) banner = '<div style="margin:6px 18px 4px;padding:11px 13px;border-radius:12px;background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63)">' + ppIco("check") + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
+    /* FIX 2: the launch banner states the offer in words. The sparkle icon is gone; the
+     * outcome preview below shows what Pro produces instead. FIX 5: one accent (teal) here. */
+    if (promoOn) banner = '<div style="margin:8px 20px 4px;padding:12px 14px;border-radius:12px;background:var(--teal-soft,#e3f1ee);font:600 12.5px/1.5 var(--pp-f);color:var(--teal,#0e6e63)">Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
+    else if (isPaid) banner = '<div style="margin:8px 20px 4px;padding:12px 14px;border-radius:12px;background:var(--teal-soft,#e3f1ee);font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63)">' + ppIcoPx("check", 15) + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
 
     var ios = plat() === "ios", body;
     if (_plans && _plans.tiers) {
       if (!tierOf(_tier)) { for (var i = TIER_ORDER.length - 1; i >= 0; i--) if (tierOf(TIER_ORDER[i])) _tier = TIER_ORDER[i]; }
       if (TIER_QUIET.indexOf(_tier) > -1) _showAll = true;   // a revealed tier never re-hides itself
-      body = cycleToggle() +
-        '<div style="padding:4px 18px 2px">' + cardsFor(TIER_MAIN) + '</div>' +
-        (_showAll ? '<div style="padding:0 18px 2px">' + cardsFor(TIER_QUIET) + '</div>' : "") +
+      body = heroPreview() + benefitGrid() + cycleToggle() +
+        '<div style="padding:6px 20px 2px">' + cardsFor(TIER_MAIN) + '</div>' +
+        (_showAll ? '<div style="padding:0 20px 2px">' + cardsFor(TIER_QUIET) + '</div>' : "") +
         moreTiersLink() + addonRow() + tokenStore();
     } else {
-      body = '<div style="padding:20px 18px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading plans…</div>';
+      body = '<div style="padding:20px 20px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading plans…</div>';
     }
-    var sub = promoOn ? "Everything unlocked, free until the launch period ends" : (isPaid ? "You’re a Pro member" : "Choose your plan");
+    /* FIX 1: the headline says what the doctor gets, in one concrete line. No outcome claim,
+     * no statistic, no testimonial (see the TIER_BENEFIT rule above). */
+    var sub = promoOn ? "Everything unlocked, free until the launch period ends" : (isPaid ? "You’re a Pro member" : "MaiK writes your notes while you see patients.");
     // The CTA is LAST in the DOM so position:sticky pins it to the bottom of the scrolling sheet.
     _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + body + (ios ? "" : redeemBlock()) + (_plans && _plans.tiers ? ctaBlock() : "");   // coupon hidden on iOS
     wire();
@@ -523,7 +581,7 @@
     var mt = (typeof info.creditsMt === "number") ? info.creditsMt : ((typeof info.credits === "number") ? Math.round(info.credits * 2000) : null);
     var msg = info.message || "You've used today's MaiK Tokens.";
     var inner = header("Today's MaiK Tokens are used up") +
-      '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--pp-f);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +
+      '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--pp-f);color:var(--ink)">' + ppIcoPx("bell", 16) + ' ' + esc(msg) + '</div></div>' +
       '<div style="padding:8px 18px 2px;font:500 12.5px/1.6 var(--pp-f);color:var(--slate-soft)">Your allowance resets at <b>' + esc(resetTxt) + '</b>.' + (mt != null ? ' MaiK Token balance: <b>' + esc(mt.toLocaleString("en-IN")) + '</b>.' : '') + '</div>' +
       '<div style="padding:14px 18px 22px"><button data-pp="ailimit-upgrade" style="width:100%;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--pp-f);cursor:pointer">Add MaiK Tokens or upgrade</button>' +
       '<div style="font:500 11.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:8px">Or wait for the daily reset. No charge.</div></div>';

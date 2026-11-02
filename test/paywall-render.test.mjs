@@ -31,7 +31,7 @@ const PLANS = plansWith(TIERS);
 
 /* Sandbox with just enough DOM to render AND to click: querySelectorAll("[data-pp]") parses the
  * captured HTML back into stub elements, so wire() can bind onclick and a test can tap a card. */
-function run(platform, plans) {
+function run(platform, plans, status) {
   let captured = "";
   // Memoised per render: wire() binds onclick on the objects it is handed, so tap() must get the
   // SAME objects back, not a fresh parse with onclick still null.
@@ -55,7 +55,7 @@ function run(platform, plans) {
   }
   const fetchImpl = async (url) => ({
     status: 200, url, clone() { return this; },
-    json: async () => (String(url).indexOf("/plans") > -1 ? (plans || PLANS) : { promo: false, pro: false }),
+    json: async () => (String(url).indexOf("/plans") > -1 ? (plans || PLANS) : (status || { promo: false, pro: false })),
   });
   const win = {
     SMD_PRO: {}, SMD_API_BASE: "", ICONS: { get: () => "" }, fetch: fetchImpl,
@@ -77,7 +77,7 @@ function run(platform, plans) {
   return root;
 }
 const settle = () => new Promise((r) => setTimeout(r, 40));
-async function open(platform, plans) { const r = run(platform, plans); r.win.SMD_PRO.openPaywall(); await settle(); return r; }
+async function open(platform, plans, status) { const r = run(platform, plans, status); r.win.SMD_PRO.openPaywall(); await settle(); return r; }
 // the innerHTML of the card for one tier
 const card = (h, id) => (h.match(new RegExp('<button data-pp="tier" data-tier="' + id + '"[\\s\\S]*?</button>')) || [""])[0];
 
@@ -307,4 +307,56 @@ test("iOS hides the coupon field and offers the coming-soon CTA when StoreKit is
 test("no em-dash in any app-facing string", () => {
   const ui = SRC.split("\n").filter((l) => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
   assert.ok(!ui.includes("—"), "em-dash found in app-facing text");
+});
+
+test("FIX 1: the headline says what the doctor gets, not a generic upgrade line", async () => {
+  const h = (await open("web")).html;
+  assert.ok(h.includes("MaiK writes your notes while you see patients."), "concrete headline");
+  assert.ok(!/Choose your plan|Go Pro|Unlock everything|Upgrade to Pro/.test(text(h)), "no generic upgrade headline left");
+});
+
+test("FIX 2+3: outcome hero and scannable icon benefits, no sparkle", async () => {
+  const h = (await open("web")).html;
+  assert.ok(h.includes('id="ppHero"'), "outcome preview hero renders");
+  for (const line of ["Visit note drafted", "Queue keeps moving", "MaiK answers, cited"]) {
+    assert.ok(text(h).includes(line), "hero row missing: " + line);
+  }
+  assert.ok(h.includes('id="ppBenefits"'), "benefit grid renders");
+  for (const b of ["Notes written for you", "Voice scribe included", "Queue and billing handled", "Answers with citations"]) {
+    assert.ok(text(h).includes(b), "benefit missing: " + b);
+  }
+  assert.ok(!/ppIco\("(spark|crown|star)"\)/.test(SRC), "no sparkle / crown / star icon is rendered by the sheet");
+  assert.ok(!/gradient|glow|blur\(/.test(h), "no gradient, glow or backdrop blur in the sheet");
+});
+
+test("FIX 4: the selected plan reads as THE choice, large; the rest stay quiet", async () => {
+  const h = (await open("web")).html;
+  assert.match(card(h, "physician"), /font:800 26px/, "selected Physician price is large");
+  assert.match(card(h, "pro"), /font:800 18px/, "unselected Pro price is quieter");
+  assert.match(card(h, "physician"), /2px solid var\(--teal/, "selected card carries the accent border");
+  assert.match(card(h, "pro"), /1px solid var\(--line/, "unselected card is neutral");
+});
+
+test("FIX 4: during the launch promo the card states the real price afterwards and when", async () => {
+  const until = Date.UTC(2026, 5, 30, 12, 0, 0);
+  const dateTxt = new Date(until).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  // annual: regular 149900 x 12 = Rs 17,988/year from the server anchor, charged after the promo ends
+  const r = await open("web", undefined, { promo: true, pro: false, promoUntil: until });
+  assert.match(card(r.html, "physician"), new RegExp("then \u20b917,988/year from " + dateTxt + "\\."));
+  r.tap("cycle", "data-cycle", "monthly");
+  assert.match(card(r.html, "physician"), new RegExp("then \u20b91,499/month from "));
+  // no `regular`: the afterwards price falls back to the plan's own server price
+  const bare = JSON.parse(JSON.stringify(TIERS));
+  for (const k of Object.keys(bare)) delete bare[k].regular;
+  const r2 = await open("web", plansWith(bare), { promo: true, pro: false, promoUntil: until });
+  assert.match(card(r2.html, "physician"), new RegExp("then \u20b97,490/year from "));
+  // no promo: no afterwards line anywhere
+  const r3 = await open("web");
+  assert.ok(!/then \u20b9/.test(r3.html), "afterwards line must not render outside the promo");
+});
+
+test("FIX 5: one accent colour, no competing badge colours", async () => {
+  const h = (await open("web")).html;
+  assert.ok(!h.includes("--gold") && !h.includes("--green"), "no gold badge and no green pill/banner left");
+  assert.match(card(h, "physicianpro"), /background:var\(--teal/, "the premium badge shares the brand accent");
 });
