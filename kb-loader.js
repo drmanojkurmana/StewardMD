@@ -14,7 +14,7 @@
  */
 (function () {
   "use strict";
-  var KB = ["/kb/dist/kb.core.js?v=gold363", "/kb/dist/kb.clinical.js?v=gold363", "/kb/dist/kb.enrichment.js?v=gold410", "/kb/dist/kb.enrichment.2.js?v=gold410", "/kb/dist/kb.expanded.js?v=gold363"];
+  var KB = ["/kb/dist/kb.core.js?v=gold363", "/kb/dist/kb.clinical.js?v=gold363", "/kb/dist/kb.enrichment.js?v=gold411", "/kb/dist/kb.enrichment.2.js?v=gold411", "/kb/dist/kb.expanded.js?v=gold363"];
   var ENC = (typeof window !== "undefined" && window.SMD_KB_ENC === 1);
   var CACHE = "smd_kb_lic";
 
