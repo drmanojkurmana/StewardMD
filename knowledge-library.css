@@ -290,6 +290,12 @@ html[data-appearance] #sbrefOverlay #sbrefBody .kblib-searchbox { --kl-sticky: v
  * keeps every child inside the screen; wide tables and flowcharts scroll inside their own box.
  * ========================================================================== */
 #dxOverlay #dxMgmt.dx-reader { --rd-gut-l: max(20px, env(safe-area-inset-left, 0px)); --rd-gut-r: max(20px, env(safe-area-inset-right, 0px)); }
+/* iPad and wider: the body is the scroller, so it must span the screen (scrollbar at the edge, swipes in the side
+ * margins scroll). The reading column is centred by the gutters instead of a narrow max-width box, and widened to 960px. */
+@media (min-width: 700px) {
+  #dxOverlay #dxMgmt.dx-reader { --rd-gut-l: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); --rd-gut-r: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body { max-width: none; margin-inline: 0; }
+}
 /* the sticky jump row pins to the top of the body's content box, so the top gutter lives on the hero */
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body { grid-template-columns: minmax(0, 1fr); padding-top: 0; padding-left: var(--rd-gut-l); padding-right: var(--rd-gut-r); overscroll-behavior-y: contain; scroll-padding-top: 72px; }
 #dxOverlay #dxMgmt.dx-reader .dx-reader-hero { padding-top: 22px; }

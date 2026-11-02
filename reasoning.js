@@ -4418,8 +4418,10 @@
      button sits under the summary. A link only; nothing else on the page changes. */
   function kbFigRow(name, mgmt, body) {
     var F = window.SMD_FIG; if (!F || !F.matchText) return "";
-    var txt = String(name || "") + " " + String(mgmt || "").replace(/<[^>]*>/g, " ") + " " + String(body || "").replace(/<[^>]*>/g, " ");
-    var ms = F.matchText(txt, 2);
+    // drug figures come from the treatment only: a mediator named in Pathophysiology (interleukin-6 in atrial myxoma) is not a drug
+    var b = String(body || ""), i = b.indexOf('id="kbr-mgmt"'), j = i < 0 ? -1 : b.indexOf("<section", i);
+    var txt = String(mgmt || "").replace(/<[^>]*>/g, " ") + " " + (i < 0 ? "" : b.slice(i, j < 0 ? b.length : j)).replace(/<[^>]*>/g, " ");
+    var ms = F.forArticle ? F.forArticle(name, txt, 2) : F.matchText(String(name || "") + " " + txt, 2);
     if (!ms.length) return "";
     return '<div class="kbr-figrow"><span class="kbr-figlab">Interactive figures</span>' + ms.map(function (m) { return F.chipHtml(m, "kbr-figchip", "fig-open"); }).join("") + "</div>";
   }
