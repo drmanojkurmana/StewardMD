@@ -1,0 +1,163 @@
+/* Kardia AngioLAB skin: native iOS look (owner 2026-11-01, "Native iOS").
+   Look only. No element, id, class or control is added, removed or renamed.
+   Loaded by kardia-embed.js after the bundle styles. Colour comes from the
+   Kardia theme: kardia.js writes the --ink-* ramp and --accent into this frame
+   and sets data-krd-theme. The angiogram, 3D heart and room view are content
+   and are never recoloured. */
+html:root {
+  --r: 12px;
+  --gap: 12px;
+  --pad: 14px;
+  --label-font: "Inter Variable", -apple-system, system-ui, sans-serif;
+  --label-size: 13px;
+  --label-case: none;
+  --label-track: -0.005em;
+  --label-weight: 600;
+  --label-ink: var(--ink-400);
+  --panel-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 4px 14px rgb(0 0 0 / .06);
+  --ios-fill: rgb(118 118 128 / .12);
+  --ios-fill-2: rgb(118 118 128 / .2);
+  --ios-thumb: rgb(var(--ink-900));
+  --ios-thumb-shadow: 0 3px 8px rgb(0 0 0 / .12), 0 3px 1px rgb(0 0 0 / .04);
+  --ios-ease: cubic-bezier(.32, .72, 0, 1);
+  --ios-press: cubic-bezier(.23, 1, .32, 1);
+  --on-accent: #fff;
+}
+html:root[data-krd-theme=dark] {
+  --panel-shadow: none;
+  --ios-fill: rgb(118 118 128 / .24);
+  --ios-fill-2: rgb(118 118 128 / .36);
+  --ios-thumb: 99 99 102;
+  --ios-thumb: rgb(99 99 102);
+  --ios-thumb-shadow: 0 3px 8px rgb(0 0 0 / .3);
+  --on-accent: #04160a;
+}
+
+/* One face for everything; readouts use tabular figures instead of a mono face. */
+html, body, button, input, select, .font-mono, .preset-angles, .panel-label, h1, h2, h3 {
+  font-family: "Inter Variable", -apple-system, system-ui, sans-serif !important;
+}
+.font-mono, .preset-angles { font-variant-numeric: tabular-nums; letter-spacing: 0 !important; }
+body { -webkit-font-smoothing: antialiased; }
+
+/* ---------- Header ---------- */
+.app > header h1 { font-size: 22px !important; font-weight: 700 !important; letter-spacing: -0.02em !important; }
+.app .italic { font-style: normal !important; font-size: 13px !important; color: rgb(var(--ink-400)) !important; }
+
+/* ---------- Cards ---------- */
+.panel, .strip {
+  border: 0 !important;
+  border-radius: 20px !important;
+  background: rgb(var(--ink-900)) !important;
+  box-shadow: var(--panel-shadow) !important;
+}
+.strip-row2 { border-color: rgb(var(--ink-800)) !important; }
+.o-angio, .o-heart, .o-room, .collapsible [class*="aspect-[4/3]"] {
+  border: 0 !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+}
+.collapsible { overflow: hidden; }
+.collapsible > button { min-height: 50px !important; }
+.collapsible > button > span:last-child { color: rgb(var(--accent)) !important; font-weight: 600; font-size: 15px !important; }
+.collapsible > button > span:nth-child(2) { font-size: 15px !important; color: rgb(var(--ink-400)) !important; }
+.panel-label { font-size: 13px !important; }
+.collapsible .panel-label, .strip-title-phone, .o-pad .panel-label, .o-gantry .panel-label { color: rgb(var(--ink-200)) !important; font-size: 15px !important; }
+
+/* ---------- Segmented controls ---------- */
+.seg {
+  display: flex !important;
+  padding: 2px !important;
+  gap: 0 !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: var(--ios-fill) !important;
+  overflow: visible !important;
+  height: auto !important;
+}
+.seg > button {
+  min-height: 34px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: rgb(var(--ink-200)) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  transition: background-color 200ms var(--ios-ease), box-shadow 200ms var(--ios-ease) !important;
+}
+.seg > button[aria-pressed=true] {
+  background: var(--ios-thumb) !important;
+  color: rgb(var(--ink-200)) !important;
+  box-shadow: var(--ios-thumb-shadow) !important;
+}
+:root[data-krd-theme=dark] .seg > button[aria-pressed=true] { color: #fff !important; }
+
+/* ---------- Toggle chips (Detector view, Skeleton, Labels...) ---------- */
+.ctl-btn {
+  height: 34px !important;
+  padding: 0 14px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--ios-fill) !important;
+  color: rgb(var(--ink-200)) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  transition: background-color 200ms var(--ios-ease), color 200ms var(--ios-ease), transform 140ms var(--ios-press) !important;
+}
+.ctl-btn[data-on=true] {
+  background: rgb(var(--accent)) !important;
+  color: var(--on-accent) !important;
+}
+.heart-tools { gap: 8px !important; }
+
+/* ---------- Preset views: tappable cards, filled when chosen ---------- */
+.preset-grid { gap: 8px !important; }
+.preset {
+  height: 56px !important;
+  padding: 0 12px !important;
+  gap: 4px !important;
+  border: 0 !important;
+  border-radius: 14px !important;
+  background: var(--ios-fill) !important;
+  transition: background-color 200ms var(--ios-ease), transform 140ms var(--ios-press) !important;
+}
+.preset-name { font-size: 15px !important; font-weight: 600 !important; color: rgb(var(--ink-200)) !important; }
+.preset-angles { font-size: 12px !important; color: rgb(var(--ink-400)) !important; }
+.preset[data-on=true] { background: rgb(var(--accent)) !important; }
+.preset[data-on=true] .preset-name { color: var(--on-accent) !important; }
+.preset[data-on=true] .preset-angles { color: var(--on-accent) !important; opacity: .75; }
+
+/* ---------- Gantry sliders and angle pad ---------- */
+.gslider, .gslider-h, .gslider-v { border-radius: 10px !important; border-color: transparent !important; background-color: var(--ios-fill) !important; }
+.o-gantry .text-\[30px\], .o-gantry [class*="text-[2"], .o-gantry [class*="text-[3"] { font-weight: 700 !important; letter-spacing: -0.02em !important; }
+.pad-plot { border-radius: 14px; overflow: hidden; }
+
+/* ---------- Credits sheet ---------- */
+dialog { border: 0 !important; border-radius: 20px !important; background: rgb(var(--ink-900)) !important; box-shadow: 0 10px 40px rgb(0 0 0 / .25) !important; }
+dialog::backdrop { background: rgb(0 0 0 / .35); }
+
+/* ---------- Press feedback and focus ---------- */
+button { -webkit-tap-highlight-color: transparent; }
+.ctl-btn:active, .preset:active, .seg > button:active { transform: scale(.96); }
+.ctl-btn:focus-visible, .preset:focus-visible, .seg > button:focus-visible { outline: 3px solid rgb(var(--accent) / .6) !important; outline-offset: 2px !important; }
+@media (prefers-reduced-motion: reduce) {
+  .ctl-btn, .preset, .seg > button { transition: none !important; }
+  .ctl-btn:active, .preset:active, .seg > button:active { transform: none; }
+}
+
+/* Phone strip rows: the segmented control must fit its grid cell. */
+.strip .seg { min-width: 0; }
+.strip .seg > button { min-width: 0; padding: 0 4px !important; font-size: 13px !important; }
+.strip-titles { text-transform: none !important; letter-spacing: 0 !important; }
+@container (width<=470px) {
+  .phone .o-astrip .strip-grid { gap: 8px; }
+  .phone .o-astrip .strip-titles { flex: 0 0 76px !important; }
+  .phone .o-astrip .strip-grid > :nth-child(2) { flex: 1 1 auto !important; min-width: 0 !important; }
+  .phone .o-astrip .strip-grid > :last-child { flex: 0 0 auto !important; margin-left: 0 !important; }
+}
+/* Row labels in the top strip read as iOS row titles; they must fit their 76 px column. */
+.strip .strip-title-phone, .strip .strip-title { font-size: 13px !important; color: rgb(var(--ink-400)) !important; }
+/* Four presets per row in the iPad gantry column: smaller names so they are not cut. */
+.o-gantry .preset { padding: 0 9px !important; }
+.o-gantry .preset-name { font-size: 13px !important; }
+.o-gantry .preset-angles { font-size: 11px !important; }

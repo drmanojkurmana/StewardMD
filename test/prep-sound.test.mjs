@@ -136,7 +136,10 @@ test("flag-off regression: with PREP_SOUND absent every shared hook is a no-op",
   assert.ok(/applyFlagLink/.test(loader), "stewardmd://prep-flags hook unchanged");
   const prep = fs.readFileSync(path.join(ROOT, "prep.js"), "utf8");
   const hooks = prep.split("\n").filter((l) => l.includes("PREP_SOUND") && !l.includes("PREP_SOUND_SPOTIFY"));
-  assert.ok(hooks.length >= 4, "back + leave + home + dispatch hooks present, got " + hooks.length);
+  assert.ok(hooks.length >= 3, "back + leave + dispatch hooks present, got " + hooks.length);
+  assert.ok(!/PREP_SOUND\.homeHtml/.test(prep), "Sound is not on the home page (owner 2026-11-01: Settings, Beta)");
+  const plan = fs.readFileSync(path.join(ROOT, "prep-plan.js"), "utf8");
+  assert.ok(/G\.PREP_SOUND && G\.PREP_SOUND\.settingsHtml/.test(plan) && /Sound <span class="pn-sound-beta">Beta<\/span>/.test(plan), "Settings carries Sound, labelled Beta");
   for (const h of hooks) assert.match(h, /G\.PREP_SOUND\s*(&&|\)|\?)/, "guarded hook: " + h.trim().slice(0, 80));
   const sDispatch = hooks.find((l) => l.includes('"s-"') || l.includes("'s-'"));
   assert.ok(sDispatch, "s- dispatch exists");

@@ -47,11 +47,15 @@
     "*:not(math):not([class*=math]){font-family:'Inter Variable',-apple-system,system-ui,sans-serif!important}";
   var st = document.createElement("style"); st.id = "kardiaUnbrand"; st.textContent = css;
   (document.head || document.documentElement).appendChild(st);
-  document.title = "Kardia Probe Lab";
+  var skin = document.createElement("link"); skin.rel = "stylesheet"; skin.href = "./kardia-skin.css"; skin.id = "kardiaSkin";
+  (document.head || document.documentElement).appendChild(skin);
+  document.title = "Kardia Echo Lab";
+  /* Owner 2026-11-01: the user never sees "Probe Lab"; it is Echo Lab everywhere. */
+  function rename(v) { return v.replace(/EchoSuite/g, "Kardia").replace(/Probe Lab/g, "Echo Lab").replace(/probe lab/gi, "Echo Lab"); }
   function fix(node) {
-    if (node.nodeType === 3) { if (node.nodeValue.indexOf("EchoSuite") >= 0) node.nodeValue = node.nodeValue.replace(/EchoSuite/g, "Kardia"); return; }
+    if (node.nodeType === 3) { if (/EchoSuite|probe lab/i.test(node.nodeValue)) node.nodeValue = rename(node.nodeValue); return; }
     if (node.nodeType !== 1) return;
-    ["aria-label", "title", "alt"].forEach(function (a) { var v = node.getAttribute && node.getAttribute(a); if (v && v.indexOf("EchoSuite") >= 0) node.setAttribute(a, v.replace(/EchoSuite/g, "Kardia")); });
+    ["aria-label", "title", "alt"].forEach(function (a) { var v = node.getAttribute && node.getAttribute(a); if (v && /EchoSuite|probe lab/i.test(v)) node.setAttribute(a, rename(v)); });
     for (var c = node.firstChild; c; c = c.nextSibling) fix(c);
   }
   fix(document.body);

@@ -22,7 +22,8 @@
   var STR = {
     close: T("Close", "बंद करें"), back: T("Back", "वापस"), backTo: T("Back to {t}", "{t} पर वापस"),
     loading: T("Loading…", "लोड हो रहा है…"), loadErr: T("{t} did not load. Check your connection and try again.", "{t} लोड नहीं हुआ। अपना कनेक्शन जांचें और फिर कोशिश करें।"),
-    retry: T("Try again", "फिर कोशिश करें"), langBtn: T("हिन्दी", "English"), langLabel: T("Language: switch to Hindi", "भाषा: अंग्रेज़ी में बदलें"),
+    retry: T("Try again", "फिर कोशिश करें"), copyLink: T("Copy link", "लिंक कॉपी करें"),
+    langBtn: T("हिन्दी", "English"), langLabel: T("Language: switch to Hindi", "भाषा: अंग्रेज़ी में बदलें"),
     level: T("Level", "स्तर"), mbbs: T("MBBS", "MBBS"), resident: T("Resident", "Resident"),
     mbbsSub: T("Core course, free", "मुख्य कोर्स, मुफ़्त"), residentSub: T("Full depth, StewardMD Pro", "पूरी गहराई, StewardMD Pro"),
     pro: T("Pro", "Pro"), trial1: T("1 free try", "1 मुफ़्त प्रयास"), trialUsed: T("Trial used", "प्रयास हो चुका"),

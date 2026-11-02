@@ -238,3 +238,16 @@
 .krd-sp-live-depth { min-width: 64px; text-align: center; font-size: 17px; font-weight: 650; color: var(--kd-text); font-variant-numeric: tabular-nums; }
 .krd-sp-sheet-live .krd-sp-link { margin: 0; text-align: center; display: flex; justify-content: center; gap: 24px; }
 @media (prefers-reduced-motion: reduce) { .krd-sp-probe g { transition: none; } }
+/* First sheet steps, demo and class script. Kardia tokens only. */
+.krd-sp-steps { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.krd-sp-steps li { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; line-height: 1.45; color: var(--kd-text); }
+.krd-sp-stepnum { flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: var(--sp-acc); color: var(--sp-on-pri); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.krd-sp-stepicon { flex: 0 0 auto; width: 20px; height: 20px; color: var(--sp-acc); }
+.krd-sp-demo-caption { margin: 14px 0 0; font-size: 17px; line-height: 1.5; font-weight: 650; color: var(--kd-text); min-height: 51px; }
+.krd-sp-demo-track { margin-top: 10px; height: 6px; border-radius: 999px; background: var(--sp-line); overflow: hidden; }
+.krd-sp-demo-bar { display: block; height: 100%; background: var(--sp-acc); transform: scaleX(0); transform-origin: left center; }
+.krd-sp-class { list-style: none; margin: 12px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.krd-sp-class li { display: flex; gap: 10px; font-size: 15px; line-height: 1.55; color: var(--kd-text); }
+.krd-sp-class-at { flex: 0 0 auto; font-variant-numeric: tabular-nums; font-weight: 700; color: var(--sp-acc); }
+.krd-sp-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: var(--sp-mut); }
+@media (prefers-reduced-motion: reduce) { .krd-sp-demo-bar { transition: none; } }

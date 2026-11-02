@@ -412,7 +412,7 @@ try {
   await ev(`try{localStorage.setItem("smd_kardia","0");localStorage.removeItem("smd_kardia_prefs");localStorage.removeItem("smd_home_tools");localStorage.setItem("smd_role","student");localStorage.setItem("smd_kardiox","1");}catch(e){} return 1;`);
   await load(BASE);
   const ENG = /\/(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?\.(js|css)|kardia\.js|kardia\.css|kardia-flags\.js|kardia\/)/;
-  ok(reqs.some((u) => /kardia-loader\.js\?v=krd15/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
+  ok(reqs.some((u) => /kardia-loader\.js\?v=krd16/.test(u)) && !reqs.some((u) => ENG.test(u)), "app boot loads kardia-loader.js and no engine or Kardia file");
   const gridOff = await ev(gridActs);
   const eligOff = await ev(eligibleActs);
   ok(!/,kardia,/.test("," + eligOff + ","), "Kardia is ineligible with the flag off");
@@ -431,7 +431,7 @@ try {
   const eligOn = await ev(eligibleActs);
   ok(/,kardia,/.test("," + eligOn + ","), "Kardia is eligible with the flag on");
   ok(!/,kardiox,/.test("," + eligOn + ","), "the KardiQ X tile is replaced while Kardia is on");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd15/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd16/.test(u)) === false, "the engine still lazy-loads: nothing fetched until the tile opens");
   /* No pinning needed in 2.0: the starter set leads with Kardia. */
   ok(await until(`return !!document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]');`, 10000), "the Kardia tile is already on the Home grid (starter set, no pin needed)");
   ok((await ev(`return document.querySelector('#rnavToolsGrid .rnav-tile[data-act]').getAttribute('data-act');`)) === "kardia", "the Kardia tile is first on the Home grid");
@@ -456,7 +456,7 @@ try {
   await ev(`var t=document.querySelector('#rnavToolsGrid .rnav-tile[data-act=kardia]'); t.focus(); t.click(); return 1;`);
   ok(await until(`return KARDIA.isOpen() && !!document.getElementById("smdKardia");`, 10000), "tile opens the Kardia overlay");
   ok(await until(`return !!document.querySelector('#smdKardia [data-act=ktab][data-t=kardiox]');`, 20000), "first open loads the engine + Kardia and shows the seven tabs");
-  ok(reqs.some((u) => /specialty-shell\.js\?v=krd15/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd15/.test(u)), "engine + Kardia loaded on open, at the loader token");
+  ok(reqs.some((u) => /specialty-shell\.js\?v=krd16/.test(u)) && reqs.some((u) => /kardia\.js\?v=krd16/.test(u)), "engine + Kardia loaded on open, at the loader token");
   ok((await ev(`return KARDIA._kardia.tabs.join(",");`)) === "echo,angio,learn,practice,cases,calc,kardiox", "tabs: Echo Lab, AngioLAB, Learn, Practice, Cases, Calculators, KardiQ X");
   ok((await ev(`return [].map.call(document.querySelectorAll('#smdKardia .krd-tab'),function(b){return b.textContent.trim();}).join(",");`)) === "Echo Lab,AngioLAB,Learn,Practice,Cases,Calculators,KardiQ X", "tab labels: Echo Lab, AngioLAB, Learn, Practice, Cases, Calculators, KardiQ X");
   ok((await ev(`return KARDIA._kardia.levels.join(",");`)) === "mbbs,resident,fellow,sonographer", "levels: MBBS, Resident, Fellow, Sonographer");
@@ -865,6 +865,11 @@ try {
   ok((await ev(`return document.querySelector('#smdKardia [data-act=kcalc-open][data-id="as-continuity"]').textContent.indexOf('AVA')>=0;`)) === true, "the AVA search result names AVA");
   await ev(`document.querySelector('#smdKardia [data-act=kcalc-open][data-id="as-continuity"]').click(); return 1;`);
   ok(await until(`return !!document.getElementById('kcalc-result-as-continuity');`, 15000), "the continuity AVA calculator opens with a live result");
+  ok(await until(`return !!document.querySelector('#smdKardia .kcalc-trust');`, 10000), "the How this works trust block shows under the result");
+  ok((await ev(`return document.querySelector('#smdKardia .kcalc-trust').textContent;`)).indexOf("Draft, awaiting review") >= 0, "the trust block carries the draft review badge");
+  ok((await ev(`return (function(){var t=document.querySelector('#smdKardia .kcalc-trust').textContent; return t.indexOf('How to measure it')>=0 && t.indexOf('Guideline:')>=0 && t.indexOf('Try a worked example')>=0;})()`)) === true, "the trust block names units, steps, guideline and the worked example button");
+  await ev(`document.querySelector('#smdKardia .kcalc-trust [data-act=kcalc-example][data-id="as-continuity"]').click(); return 1;`);
+  ok(await until(`return (document.getElementById('kcalc-result-as-continuity')||{textContent:''}).textContent.indexOf('0.73')>=0;`, 10000), "Try a worked example fills the trust values and computes 0.73");
   await ev(`document.querySelector('#smdKardia [data-act=kcalc-example][data-id="as-continuity"]').click(); return 1;`);
   /* The worked example is the unit-tested one (test/kardia-calc.test.mjs):
    * LVOT 2.0 cm, LVOT VTI 22 cm, aortic VTI 95 cm gives AVA 0.73 cm2,

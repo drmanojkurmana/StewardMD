@@ -905,9 +905,35 @@
       /* Standard echo display convention: when both ventricles are in
        * the view, the LV sits on the screen right (A4C, PSAX, subcostal).
        * The screen-right axis is cross(normal, up), so flipping the
-       * plane normal sign flips left-right without moving the plane. */
+       * plane normal sign flips left-right without moving the plane.
+       * TEE long-axis exception (ASE and SCA comprehensive TEE
+       * guideline, Hahn et al. 2013): the sector apex (transducer) is
+       * at the top and, at omniplane 0 degrees, the image is a
+       * transverse plane with the patient left on the image right.
+       * Turning the omniplane forward to about 60 to 70 degrees gives
+       * the mid oesophageal two chamber view and to about 120 to 140
+       * degrees gives the mid oesophageal long axis view, and that
+       * forward turn swings the image right from the patient left
+       * towards the head. So in a TEE long-axis plane (normal near
+       * perpendicular to the cranial axis) the image right must point
+       * cranial, not caudal: the left atrial appendage sits to the
+       * image right in the two chamber view, and the left ventricular
+       * outflow tract, aortic valve and aortic root sit to the image
+       * right of the left ventricle, with the apex to the image left,
+       * in the long axis views. A caudal image right is the mirrored
+       * display. Enforce the cranial sense here, at the plane basis,
+       * and do not let the ventricle rule below flip it back: the
+       * right ventricle is not in these planes, so its centroid must
+       * not decide their left and right. Short-axis and transverse
+       * TEE planes keep the ventricle rule as before. */
+      var teeLong = false;
+      if (v.modality === "tee" && Math.abs(dot(norm(useN), [0, 0, 1])) < 0.5) {
+        teeLong = true;
+        var rightT = norm(cross(useN, up));
+        if (dot(rightT, [0, 0, 1]) < 0) { useN = mul(useN, -1); d = -d; }
+      }
       var lvS = byRef.FJ2422, rvS = byRef.FJ2423;
-      if (lvS && rvS) {
+      if (lvS && rvS && !teeLong) {
         var right0 = norm(cross(useN, up));
         if (dot(sub(lvS.centroid, rvS.centroid), right0) < 0) { useN = mul(useN, -1); d = -d; }
       }

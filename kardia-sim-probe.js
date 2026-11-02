@@ -96,7 +96,7 @@
     suprasternal: { label: "Suprasternal",  beam: [0, -0.3, -1],    ref: [1, 0, 0], slideX: [-30, 30], slideY: [-35, 35], rotation: [-180, 180], tilt: [-65, 65], rock: [-50, 50] },
     abdominal:    { label: "Abdominal",     beam: [0, -1, 0.2],     ref: [0, 0, 1], slideX: [-60, 60], slideY: [-60, 60], rotation: [-180, 180], tilt: [-60, 60], rock: [-65, 65] },
     lung:         { label: "Lung",          beam: [-1, 0, 0],       ref: [0, 0, 1], slideX: [-45, 45], slideY: [-60, 60], rotation: [-180, 180], tilt: [-45, 45], rock: [-40, 40] },
-    oesophageal:  { label: "Oesophageal (TEE)", beam: [0, 0.7071, -0.7071], ref: [1, 0, 0], slideX: [-25, 25], slideY: [-25, 25], rotation: [-180, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [25, 45], flex: [-45, 60] },
+    oesophageal:  { label: "Oesophageal (TEE)", beam: [0, 0.7071, 0.7071], ref: [1, 0, 0], slideX: [-25, 25], slideY: [-25, 25], rotation: [-180, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [25, 45], flex: [-45, 60] },
     gastric:      { label: "Gastric (TEE)", beam: [0, 1, 0.3],      ref: [1, 0, 0], slideX: [-25, 25], slideY: [-25, 25], rotation: [-180, 180], tilt: [0, 0], rock: [0, 0], tee: true, depth: [40, 55] }
   };
   function windowDef(id) { return WINDOWS[id] || WINDOWS.parasternal; }
@@ -290,15 +290,21 @@
       var anchor = [0, 0, 0];
       var vs = views().filter(function (v) { return v.window === windowId; });
       /* Oesophageal frame is fixed by anatomy, not rebuilt from the
-       * views: the neutral TEE beam points anterior and 45 degrees
-       * caudal into the heart (ante/retroflexion bends the tip in the
-       * sagittal plane, hence the patient-left marker axis), and the
-       * anchor is the oesophageal lumen below. Rebuilding the frame
-       * from the scattered TEE target beams would tip the flex circle
-       * away from the caudal beams (mid-oesophageal two-chamber,
-       * long-axis and bicaval) and strand them past full retroflexion. */
+       * views. The frame third axis (normal cross up, the image-right
+       * axis the omniplane spin is built on) points anterior and 45
+       * degrees cranial at the neutral pose, and the anchor is the
+       * oesophageal lumen below. TEE display rule (ASE and SCA
+       * comprehensive TEE guideline, Hahn et al. 2013): the sector
+       * apex (transducer) is at the top, at omniplane 0 degrees the
+       * patient left is on the image right, and turning the omniplane
+       * forward (about 60 to 70 degrees for the two chamber view,
+       * about 120 to 140 degrees for the long axis view) swings the
+       * image right towards the head. A caudal neutral axis put that
+       * image right towards the feet instead, which mirrored the mid
+       * oesophageal two chamber and long axis views and stranded
+       * their cranial image-right axes past full retroflexion. */
       if (windowId === "oesophageal") {
-        frame = frameFromBeam([0, 0.7071, -0.7071], [1, 0, 0]);
+        frame = frameFromBeam([0, 0.7071, 0.7071], [1, 0, 0]);
         var oe2 = oesophagusAnchor();
         anchor = oe2 || anchor;
         var out0 = { M: frame.M, N: frame.N, B: frame.B, anchor: anchor, def: def };
