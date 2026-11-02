@@ -2900,12 +2900,40 @@
   var _medRe = null;
   function medRe() { if (!_medRe) _medRe = new RegExp(MED_RULES.map(function (r) { return "(" + r.re + ")"; }).join("|"), "gi"); return _medRe; }
   window.SMD_MEDFORMAT = function (t) { return medFormat(t); };   // shared with kb-protocols.js (same high-yield bolding)
+  // Proper medical symbols on screen (owner 2026-11-02): "<=40%" -> "≤40%", "IL-1beta" -> "IL-1β", "VO2" -> "VO₂",
+  // "Ca2+" -> "Ca²⁺". Display only; the stored text is unchanged.
+  var GREEK = { alpha: "α", beta: "β", gamma: "γ", delta: "δ", kappa: "κ" };
+  var SUP = { "2": "²", "3": "³" };
+  function medSym(t) {
+    return String(t)
+      .replace(/<=/g, "≤").replace(/>=/g, "≥").replace(/\+\/-/g, "±").replace(/ -> /g, " → ")
+      .replace(/\b(IL|TNF|TGF|IFN|PDGF|HIF|PPAR|RAR|HNF|NF)-(\d*)[- ]?(alpha|beta|gamma|delta|kappa)\b/g, function (m, a, n, g) { return a + "-" + n + GREEK[g]; })
+      .replace(/\b(alpha|beta|gamma|delta)(\d)\b/g, function (m, g, n) { return GREEK[g] + n; })
+      .replace(/\b(alpha|beta)[- ](blockers?|blockade|agonists?|antagonists?|adrenergic|receptors?|lactams?|lactamases?|thalassa?emia|globin|cells?|chains?)\b/g, function (m, g, w) { return GREEK[g] + "-" + w; })
+      .replace(/\b(Pa|PA|Sp|Sa|Sv|Scv|Fi|Et|P|V)?(O|CO)2(?=max\b|[^A-Za-z0-9]|$)/g, function (m, p, g) { return (p || "") + g + "₂"; })
+      .replace(/\bH2O\b/g, "H₂O")
+      .replace(/\bHCO3(-?)(?![A-Za-z0-9])/g, function (m, neg) { return "HCO₃" + (neg ? "⁻" : ""); })
+      .replace(/\b(Ca|Mg|Fe|Zn|Cu|Mn)([23])\+/g, function (m, el, n) { return el + SUP[n] + "⁺"; });
+  }
+  // The open article's own high-yield terms (hyTerms, picked per article) are highlighted first, in purple.
+  var _hyRe = null;
+  function medSetTerms(list) {
+    _hyRe = null;
+    var alts = (list || []).filter(function (t) { return t && String(t).length > 1; }).map(function (t) {
+      var x = esc(medSym(String(t)));
+      return (/^\w/.test(x) ? "\\b" : "") + x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + (/\w$/.test(x) ? "\\b" : "");
+    }).sort(function (a, b) { return b.length - a.length; });
+    if (alts.length) _hyRe = new RegExp("(" + alts.join("|") + ")|" + medRe().source, "gi");
+  }
+  window.SMD_MEDSYM = medSym;
   function medFormat(text) {
     if (text == null) return "";
-    var s = esc(stripCite(String(text)));
-    return s.replace(medRe(), function () {
-      var a = arguments;                       // [match, g1..gN, offset, string]
-      for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) {
+    var s = esc(medSym(stripCite(String(text))));
+    var re = _hyRe || medRe(), sh = _hyRe ? 1 : 0;
+    return s.replace(re, function () {
+      var a = arguments;                       // [match, (hy term,) g1..gN, offset, string]
+      if (sh && a[1] != null) return '<span class="md-hi">' + a[0] + '</span>';
+      for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1 + sh] != null) {
         var cls = MED_RULES[i].cls, mt = a[0], tail = "";
         // keep trailing punctuation AND any dangling connector word OUTSIDE the span
         var p1 = mt.match(/[\s,;:)]+$/); if (p1) { tail = p1[0]; mt = mt.slice(0, mt.length - p1[0].length); }
@@ -2964,7 +2992,8 @@
   // the rest as normal paragraphs — so the key statement is grasped at a glance.
   // group sentences into short ~2-sentence paragraphs (readability; no text removed)
   function paraChunks(text) {
-    var sents = String(text).match(/[^.;]*[.;]+|\S[^.;]*$/g) || [text];
+    // split only at a sentence end (full stop then a capital), never at ";" or inside "2.5"
+    var sents = String(text).replace(/([.?!])\s+(?=[A-Z(\[])/g, "$1\u0001").split("\u0001");
     var out = [], buf = [];
     sents.forEach(function (s) { s = s.trim(); if (!s) return; buf.push(s); if (buf.length >= 2) { out.push(buf.join(" ")); buf = []; } });
     if (buf.length) out.push(buf.join(" "));
@@ -2972,7 +3001,7 @@
   }
   function medLead(text) {
     var t = stripCite(text); if (!t) return "";
-    var m = t.match(/^([\s\S]{25,300}?[.;])\s+([\s\S]+)$/);
+    var m = t.match(/^([\s\S]{25,300}?\.)\s+([A-Z(][\s\S]+)$/);
     if (m) return '<p class="ev-lead">' + medFormat(m[1]) + '</p>' + paraChunks(m[2]);
     return '<p>' + medFormat(t) + '</p>';
   }
@@ -3447,10 +3476,11 @@
       ".ev-bt-l{padding-top:11px;padding-right:10px}.ev-bt-l--now{color:#b3261e}",
       ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
-      // high-yield emphasis is weight, not colour (owner 2026-09-30: bold what should be eyeballed)
-      ".md-dose,.md-drug,.md-abs,.md-key,.md-sig,.md-hi,.md-action,.md-emerg,.md-resist{font-weight:700;color:inherit}",
-      ".md-ix{font-weight:600;color:inherit}",
-      ".md-bug{font-style:italic;font-weight:600;color:inherit}",
+      // high-yield terms in bold purple, warnings in red (owner 2026-11-02, replaces the 2026-09-30 weight-only rule)
+      ":root{--md-hy:#6d28d9;--md-red:#b3261e}body.dark{--md-hy:#c4b5fd;--md-red:#ff8a80}",
+      ".md-dose,.md-drug,.md-key,.md-sig,.md-hi,.md-action,.md-resist,.md-ix{font-weight:700;color:var(--md-hy)}",
+      ".md-abs,.md-emerg{font-weight:700;color:var(--md-red)}",
+      ".md-bug{font-style:italic;font-weight:700;color:var(--md-hy)}",
       ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}.ev-wrap[data-ev-src=idsa] .ev-top-ic{color:#5b21b6}",
       ".ev-wrap[data-ev-src=sanford]>.ev-top{background:linear-gradient(180deg,#f0fdf4,#ecfdf5)}.ev-wrap[data-ev-src=sanford] .ev-top-sub{color:#047857}",
       ".ev-rx-note{color:#94a3b8;font-size:.92em}",
@@ -4646,6 +4676,7 @@
     var syn = (window.SYNDROMES || {})[id];
     var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[id]) || null;
+    medSetTerms(H && H.hyTerms);   // this article's own key terms; kept for its lazily opened sections, replaced by the next article
     var name = (syn && syn.name) || (ni && ni.name) || (H && H.name) || id;
     var system = (syn && syn.system) || (ni && ni.system) || (H && H.system) || "";
     var inf = !!syn || !!(H && H.class === "infective");
