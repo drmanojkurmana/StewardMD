@@ -157,14 +157,64 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in calcium-channel blocker overdose",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Continuous cardiac monitoring and serial ECG", "cells": [{"text": "Bradycardia, heart block or conduction change"}], "cite": "c1"},
-        {"parameter": "Blood glucose", "cells": [{"text": "Characteristically high; separates from beta-blocker poisoning"}], "cite": "c1"},
-        {"parameter": "Electrolytes including calcium", "cells": [{"text": "Baseline before calcium therapy"}], "cite": "c1"},
-        {"parameter": "Identification of agent and formulation", "cells": [{"text": "Whether the preparation is modified-release"}], "cite": "c1"},
-        {"parameter": "Blood gas and lactate", "cells": [{"text": "Perfusion"}], "cite": "c1"},
-        {"parameter": "Echocardiography", "cells": [{"text": "Refractory shock"}], "cite": "c1"}
+        {
+          "parameter": "Continuous cardiac monitoring and serial ECG",
+          "cells": [
+            {
+              "text": "Bradycardia, heart block or conduction change"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood glucose",
+          "cells": [
+            {
+              "text": "Characteristically high; separates from beta-blocker poisoning"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Electrolytes including calcium",
+          "cells": [
+            {
+              "text": "Baseline before calcium therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Identification of agent and formulation",
+          "cells": [
+            {
+              "text": "Whether the preparation is modified-release"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Blood gas and lactate",
+          "cells": [
+            {
+              "text": "Perfusion"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Refractory shock"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -172,15 +222,95 @@
       "kind": "treatment",
       "title": "Management options in calcium-channel blocker overdose",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Airway, breathing and circulation", "cells": [{"text": "Resuscitation, intravenous fluids for hypotension"}, {"text": "Immediate"}], "cite": "c1"},
-        {"parameter": "Gastrointestinal decontamination", "cells": [{"text": "Activated charcoal when early; whole-bowel irrigation for modified-release preparations"}, {"text": "Early presentation"}], "cite": "c1"},
-        {"parameter": "Intravenous calcium", "cells": [{"text": "Counters channel blockade; repeated as required"}, {"text": "First-line antidote"}], "cite": "c1"},
-        {"parameter": "High-dose insulin euglycaemic therapy", "cells": [{"text": "With glucose supplementation as a key inotropic treatment; monitor glucose and potassium"}, {"text": "Key therapy"}], "cite": "c1"},
-        {"parameter": "Vasopressors and atropine", "cells": [{"text": "Noradrenaline for refractory hypotension; atropine for symptomatic bradycardia"}, {"text": "Refractory cases"}], "cite": "c1"},
-        {"parameter": "Escalation", "cells": [{"text": "Intravenous lipid emulsion, cardiac pacing or mechanical circulatory support including ECMO"}, {"text": "Refractory shock"}], "cite": "c1"},
-        {"parameter": "Extended monitoring", "cells": [{"text": "After modified-release ingestion given delayed and prolonged toxicity"}, {"text": "Mandatory"}], "cite": "c1"}
+        {
+          "parameter": "Airway, breathing and circulation",
+          "cells": [
+            {
+              "text": "Resuscitation, intravenous fluids for hypotension"
+            },
+            {
+              "text": "Immediate"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Gastrointestinal decontamination",
+          "cells": [
+            {
+              "text": "Activated charcoal when early; whole-bowel irrigation for modified-release preparations"
+            },
+            {
+              "text": "Early presentation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intravenous calcium",
+          "cells": [
+            {
+              "text": "Counters channel blockade; repeated as required"
+            },
+            {
+              "text": "First-line antidote"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "High-dose insulin euglycaemic therapy",
+          "cells": [
+            {
+              "text": "With glucose supplementation as a key inotropic treatment; monitor glucose and potassium"
+            },
+            {
+              "text": "Key therapy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Vasopressors and atropine",
+          "cells": [
+            {
+              "text": "Noradrenaline for refractory hypotension; atropine for symptomatic bradycardia"
+            },
+            {
+              "text": "Refractory cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Escalation",
+          "cells": [
+            {
+              "text": "Intravenous lipid emulsion, cardiac pacing or mechanical circulatory support including ECMO"
+            },
+            {
+              "text": "Refractory shock"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Extended monitoring",
+          "cells": [
+            {
+              "text": "After modified-release ingestion given delayed and prolonged toxicity"
+            },
+            {
+              "text": "Mandatory"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     }
   ],
@@ -190,27 +320,119 @@
       "title": "Diagnosis and management of calcium-channel blocker overdose",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Overdose presenting with hypotension, bradycardia or heart block, and hyperglycaemia", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: refractory hypotension, high-grade heart block, or rising lactate?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: vasopressors, pacing, lipid emulsion; ECMO or mechanical support if refractory", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Continuous cardiac monitoring; glucose, electrolytes, lactate and blood gas", "cite": "c1"},
-        {"id": "n5", "type": "action", "text": "Intravenous calcium and high-dose insulin euglycaemic therapy with glucose", "cite": "c1"},
-        {"id": "n6", "type": "decision", "text": "Haemodynamics stable and modified-release agent excluded?", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Extended cardiac monitoring; whole-bowel irrigation for modified-release product", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "Many recover with prompt insulin and vasoactive support", "cite": "c1"},
-        {"id": "n9", "type": "outcome", "text": "Massive or modified-release ingestion can cause prolonged refractory shock", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Overdose presenting with hypotension, bradycardia or heart block, and hyperglycaemia",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: refractory hypotension, high-grade heart block, or rising lactate?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: vasopressors, pacing, lipid emulsion; ECMO or mechanical support if refractory",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Continuous cardiac monitoring; glucose, electrolytes, lactate and blood gas",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Intravenous calcium and high-dose insulin euglycaemic therapy with glucose",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Haemodynamics stable and modified-release agent excluded?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Extended cardiac monitoring; whole-bowel irrigation for modified-release product",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Many recover with prompt insulin and vasoactive support",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "outcome",
+          "text": "Massive or modified-release ingestion can cause prolonged refractory shock",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Next"},
-        {"from": "n6", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Yes"},
-        {"from": "n7", "to": "n9", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Yes"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "calcium-channel-blocker-overdose-fig1",
+      "type": "image",
+      "title": "Calcium Channel Blocker Overdose Pathophysiology",
+      "src": "v1/kb/media/calcium-channel-blocker-overdose-fig1.webp",
+      "alt": "Illustration of the heart, peripheral arteriole, and pancreatic beta cell demonstrating myocardial depression, arteriolar vasodilation, and blocked calcium channels.",
+      "caption": "Diagram showing myocardial depression, arteriolar vasodilation, and inhibition of pancreatic beta cells. Illustration: StewardMD original.",
+      "ar": 1.3333
     }
   ]
 }
