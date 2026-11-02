@@ -129,38 +129,74 @@
       '<div role="dialog" aria-modal="true" aria-label="StewardMD Pro" style="background:var(--paper,#f6f7f5);color:var(--ink,#14202b);width:100%;max-width:520px;max-height:calc(100vh - env(safe-area-inset-top, 0px) - 14px);max-height:calc(100dvh - env(safe-area-inset-top, 0px) - 14px);overflow:auto;border-radius:20px 20px 0 0;box-shadow:0 -12px 44px rgba(0,0,0,.28)">' + inner + '</div>' +
       '<style>#proPay button:focus-visible,#proPay input:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:2px}</style></div>';
   }
+  // Header for the other sheets (loading, AI limit, token top-up). The Pro sheet uses hero().
   function header(sub) {
     return '<div style="position:sticky;top:0;background:var(--paper,#f6f7f5);padding:18px 20px 10px;display:flex;align-items:flex-start;gap:10px;z-index:2">' +
       '<div style="flex:1"><div style="font:800 20px var(--pp-f);color:var(--ink)">StewardMD <span style="color:var(--teal,#0e6e63)">Pro</span></div>' +
       (sub ? '<div style="font:500 12.5px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:2px">' + sub + '</div>' : '') + '</div>' +
       '<button data-pp="close" aria-label="Close" style="flex:none;width:44px;height:44px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--slate,#2d4356);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.1)">' + ppIcoPx("close", 18) + '</button></div>';
   }
-  /* FIX 2 (hero) + FIX 3 (benefits). The hero is a small sample of what Pro produces, drawn from
-   * the app's own line icons and neutral surfaces: no sparkle, no crown, no gradient, no glow.
-   * The benefits are one glanceable grid of icon + 2-5 words, using only names in the app's
-   * ICONS registry (note, mic, rounds, brain). Words only, no numbers: every price on the sheet
-   * still comes from the server payload. */
-  var PP_BENEFITS = [["note", "Notes written for you"], ["mic", "Voice scribe included"], ["rounds", "Queue and billing handled"], ["brain", "Answers with citations"]];
-  function heroPreview() {
-    function row(ico, t, s) {
-      return '<div style="display:flex;gap:10px;align-items:flex-start;padding:9px 0">' +
-        '<span style="flex:none;width:30px;height:30px;border-radius:9px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);display:flex;align-items:center;justify-content:center">' + ppIcoPx(ico, 17) + '</span>' +
-        '<span style="flex:1;min-width:0"><span style="display:block;font:700 12.5px/1.35 var(--pp-f);color:var(--ink)">' + t + '</span>' +
-        '<span style="display:block;font:500 11.5px/1.45 var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:1px">' + s + '</span></span></div>';
+  /* Layout follows a designer's "fix the AI-slop paywall" teardown (ux.amish, 2026-11-02):
+   * a full-bleed brand hero with the headline over a picture of the OUTCOME, a white sheet that
+   * rises over it, a single row of icon benefits, plan rows with a radio, one CTA. */
+  /* The hero follows the plan being looked at: StewardMD is an antibiotic-decision, drug-learning
+   * and clinic app, so a resident and a clinic owner each see THEIR outcome. Words and pictures are
+   * illustrative (assistive framing, no statistic, no outcome claim). The antibiotic example follows
+   * NICE NG138 high-severity CAP (owner rule: NICE wins where it covers the point). */
+  var TIER_HERO = {
+    student:      { h: "Make residency the easy part.", art: "abx", ben: [["microbe", "Antibiotic<br>decisions"], ["pills", "Learn<br>drugs"], ["antibiogram", "Local<br>antibiogram"]] },
+    coresident:   { h: "Make residency the easy part, together.", art: "abx", ben: [["microbe", "Antibiotic<br>decisions"], ["pills", "Learn<br>drugs"], ["antibiogram", "Local<br>antibiogram"]] },
+    pro:          { h: "The right antibiotic, at the bedside.", art: "abx", ben: [["microbe", "Antibiotic<br>decisions"], ["antibiogram", "Local<br>antibiogram"], ["xray", "Imaging<br>AI"]] },
+    physician:    { h: "MaiK writes your notes while you see patients.", art: "opd", ben: [["mic", "Voice<br>scribe"], ["rounds", "Smart OPD<br>queue"], ["bell", "FollowCare<br>recalls"]] },
+    physicianpro: { h: "Your whole clinic, hosted for you.", art: "opd", ben: [["cloud", "Cloud<br>clinic"], ["device", "Every<br>device"], ["xray", "Imaging AI<br>(beta)"]] },
+  };
+  function heroOf(id) { return TIER_HERO[id] || TIER_HERO.physician; }
+  function artCard(kind, id) {
+    function row(k, v) {
+      return '<div style="display:grid;grid-template-columns:52px 1fr;gap:10px;padding:7px 0;border-top:1px solid rgba(255,255,255,.08)">' +
+        '<span style="font:500 10.5px/1.6 var(--mono,monospace);letter-spacing:.06em;color:rgba(255,255,255,.5)">' + k + '</span>' +
+        '<span style="font:500 13px/1.5 var(--sans,var(--pp-f));color:rgba(255,255,255,.92)">' + v + '</span></div>';
     }
-    return '<div id="ppHero" style="margin:12px 20px 2px;padding:2px 14px 6px;border-radius:14px;background:var(--panel,#fff)">' +
-      '<div style="font:800 10px var(--pp-f);letter-spacing:.07em;color:var(--slate-soft,#5a7184);padding-top:10px">SAMPLE OF PRO AT WORK</div>' +
-      row("note", "Visit note drafted", "History and plan written up, ready for your sign-off.") +
-      row("rounds", "Queue keeps moving", "Tokens, billing and recalls handled while you examine.") +
-      row("brain", "MaiK answers, cited", "Guideline-backed answers. You decide, always.") + '</div>';
+    function head(l, r) {
+      return '<div style="display:flex;align-items:center;gap:8px;padding-bottom:9px">' +
+        '<span style="font:600 10.5px var(--mono,monospace);letter-spacing:.08em;color:rgba(255,255,255,.62);flex:1">' + l + '</span>' +
+        '<span style="width:6px;height:6px;border-radius:50%;background:var(--sphere-hi,#2f9184)"></span>' +
+        '<span style="font:600 11px var(--pp-f);color:rgba(255,255,255,.75)">' + r + '</span></div>';
+    }
+    function foot(t) { return '<div style="padding:9px 0 5px;border-top:1px solid rgba(255,255,255,.08);font:500 11.5px var(--pp-f);color:rgba(255,255,255,.55)">' + t + '</div>'; }
+    var body = kind === "abx"
+      ? head("ANTIBIOTIC DECISION \u00b7 WARD 4", "MaiK checking") +
+        row("DX", "Pneumonia, high severity (CURB-65 3)") +
+        row("PICK", "Co-amoxiclav 1.2 g IV TDS + clarithromycin 500 mg BD") +
+        row("WHY", "Guideline first, checked against your hospital antibiogram") +
+        foot("Review at 48 to 72 h. You decide.")
+      : head(id === "physicianpro" ? "CLOUD CLINIC \u00b7 TOKEN 14" : "OPD \u00b7 TOKEN 14 \u00b7 10:42", id === "physicianpro" ? "Synced" : "MaiK drafting") +
+        row("CC", "Fever 3 days, dry cough") +
+        row("VITALS", "T 38.4 \u00b0C \u00b7 SpO\u2082 97% \u00b7 HR 96") +
+        row("PLAN", "Paracetamol 650 mg TDS \u00b7 CBC, dengue NS1") +
+        foot(id === "physicianpro" ? "Same record on your phone, tablet and desk." : "Draft. Awaiting your sign-off.");
+    return '<div aria-hidden="true" style="margin-top:22px;padding:14px 14px 8px;border-radius:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)">' + body + '</div>';
   }
-  function benefitGrid() {
-    return '<div id="ppBenefits" role="list" aria-label="What Pro does for you" style="margin:14px 20px 4px;display:grid;grid-template-columns:1fr 1fr;gap:12px 10px">' +
-      PP_BENEFITS.map(function (b) {
-        return '<div role="listitem" style="display:flex;gap:8px;align-items:flex-start;min-width:0">' +
-          '<span style="flex:none;width:20px;height:20px;color:var(--teal,#0e6e63);display:flex;align-items:center;justify-content:center">' + ppIcoPx(b[0], 20) + '</span>' +
-          '<span style="font:700 11.5px/1.4 var(--pp-f);color:var(--ink,#14202b)">' + b[1] + '</span></div>';
-      }).join("") + '</div>';
+  function hero(title) {
+    var cfg = heroOf(_tier);
+    return '<div id="ppHero" data-art="' + cfg.art + '" style="background:var(--sphere-base,#06231e);color:#fff;padding:12px 20px 46px">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between">' +
+        '<button data-pp="close" aria-label="Close" style="flex:none;width:44px;height:44px;margin-left:-6px;border-radius:50%;border:none;background:rgba(255,255,255,.1);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center">' + ppIcoPx("close", 18) + '</button>' +
+        '<span style="display:flex;align-items:center;gap:8px;font:700 13px var(--pp-f);letter-spacing:.01em;color:rgba(255,255,255,.9)"><img src="/logo.png" alt="" width="30" height="30" style="display:block;filter:brightness(0) invert(1)">StewardMD Pro</span>' +
+      '</div>' +
+      '<h2 style="margin:20px 0 0;font:700 29px/1.1 var(--smd-dsp,var(--pp-f));letter-spacing:-.02em;color:#fff;text-wrap:balance;max-width:19ch">' + esc(title || cfg.h) + '</h2>' +
+      artCard(cfg.art, _tier) +
+    '</div>';
+  }
+  /* One row of icon benefits for the plan being looked at, icons from the app's ICONS registry. */
+  function benefitRow() {
+    return '<div id="ppBenefits" role="list" aria-label="What this plan does for you" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 20px">' +
+      heroOf(_tier).ben.map(function (b) {
+        return '<div role="listitem" style="display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center;min-width:0">' +
+          '<span style="width:40px;height:40px;box-sizing:border-box;border-radius:12px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);display:flex;align-items:center;justify-content:center">' + ppIcoPx(b[0], 20) + '</span>' +
+          '<span style="font:600 12.5px/1.3 var(--pp-f);color:var(--ink,#14202b)">' + b[1] + '</span></div>';
+      }).join("") + '</div>' +
+      '<div style="text-align:center;font:500 12px/1.5 var(--pp-f);color:var(--slate-soft,#5a7184);margin:16px 20px 0">Assistive AI. You review and decide, every time.</div>';
   }
   /* PRICING IS SERVER TRUTH. Every number below is derived from /api/billing/plans:
    *   t.amount  — monthly price now        t.annual  — annual price now
@@ -189,14 +225,6 @@
   function spendLine(id, t) { var m = TIER_SPEND[isAnnual(t) ? "annual" : _cycle] || TIER_SPEND.monthly; return (m && m[id]) || ""; }
   function tierOf(id) { return (_plans && _plans.tiers && _plans.tiers[id]) || null; }
 
-  function cycleToggle() {
-    function seg(id, label) {
-      var on = _cycle === id;
-      return '<button data-pp="cycle" data-cycle="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="flex:1;min-height:44px;padding:9px 6px;border:none;border-radius:9px;background:' + (on ? "var(--teal,#0e6e63)" : "transparent") + ';color:' + (on ? "#fff" : "var(--slate,#2d4356)") + ';font:800 12.5px var(--pp-f);cursor:pointer">' + label + '</button>';
-    }
-    return '<div role="group" aria-label="Billing period" style="margin:10px 20px 8px;display:flex;gap:4px;background:var(--panel,#eef2f0);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:3px">' + seg("monthly", "Monthly") + seg("annual", "Annual") + '</div>';
-  }
-
   /* FIX 4 (one clear plan). While the launch promo runs, the card states exactly what is
    * charged afterwards and when: "then Rs X/year from <date>". Both figures are server truth
    * (the `regular` anchor, x12 on a yearly card, else the plan's own price) and the date is the
@@ -210,42 +238,59 @@
     else { price = (t.regular && t.regular > t.amount) ? t.regular : tierPrice(t); per = "/month"; }
     return "then " + inr(price) + per + " from " + until + ".";
   }
-  function tierCard(id, t) {
-    var on = _tier === id, strike = tierStrike(t), pct = savePct(t);
-    var badge = TIER_BADGE[id] || (t.popular ? "MOST POPULAR" : "");
-    var note = TIER_NOTE[id] || "";
-    var after = promoAfterLine(t);
-    /* FIX 4: the selected plan reads as THE choice, large; the rest stay buyable but quiet.
-     * FIX 5: badges and pills share the one brand accent or a neutral; no competing colours. */
-    return '<button data-pp="tier" data-tier="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="width:100%;text-align:left;min-height:44px;border:' + (on ? "2px solid var(--teal,#0e6e63)" : "1px solid var(--line,#d7dee3)") + ';background:' + (on ? "var(--teal-soft,#e3f1ee)" : "var(--panel,#fff)") + ';border-radius:' + (on ? "16px" : "14px") + ';padding:' + (on ? "16px 15px 14px" : "10px 12px 9px") + ';cursor:pointer;position:relative;margin-bottom:' + (on ? "14px" : "10px") + '">' +
-      (badge ? '<span style="position:absolute;top:-9px;left:12px;font:800 9px var(--pp-f);letter-spacing:.05em;color:#fff;background:var(--teal,#0e6e63);border-radius:999px;padding:3px 9px">' + esc(badge) + '</span>' : '') +
-      '<div style="display:flex;align-items:center;gap:8px">' +
-        '<div style="font:800 ' + (on ? "16px" : "14px") + ' var(--pp-f);color:var(--ink);flex:1">' + esc(t.label) + (t.requiresVerify ? '<span style="font:600 10.5px var(--pp-f);color:var(--slate-soft)"> · verified trainee</span>' : '') + '</div>' +
-        (pct ? '<span style="flex:none;font:800 10px var(--pp-f);letter-spacing:.03em;color:var(--slate,#2d4356);background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:3px 8px">SAVE ' + pct + '%</span>' : '') +
-      '</div>' +
-      '<div style="display:flex;align-items:baseline;gap:8px;margin-top:5px">' +
-        '<span style="font:800 ' + (on ? "26px" : "18px") + ' var(--pp-f);color:var(--ink)">' + inr(tierPrice(t)) + '</span>' +
-        '<span style="font:700 11.5px var(--pp-f);color:var(--slate-soft)">' + tierPer(t) + '</span>' +
-        (strike ? '<span style="font:600 12px var(--pp-f);color:var(--slate-soft);text-decoration:line-through">' + inr(strike) + '</span>' : '') +
-      '</div>' +
-      (after ? '<div style="font:700 12px/1.45 var(--pp-f);color:var(--ink);margin-top:3px">' + esc(after) + '</div>' : '') +
-      '<div style="font:700 13px/1.4 var(--pp-f);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + '</div>' +
-      (spendLine(id, t) ? '<div style="font:600 11.5px/1.4 var(--pp-f);color:var(--slate,#2d4356);margin-top:3px">' + esc(spendLine(id, t)) + '</div>' : '') +
-      (TIER_BENEFIT[id] ? '<div style="font:700 12px/1.45 var(--pp-f);color:var(--ink);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
-      (note ? '<div style="font:600 11px/1.4 var(--pp-f);color:var(--slate,#2d4356);margin-top:2px">' + esc(note) + '</div>' : '') +
-      '<div style="font:500 11.5px/1.45 var(--pp-f);color:var(--slate-soft);margin-top:5px">' + esc(TIER_BLURB[id] || "") + '</div>' +
-      '</button>';
+  /* Which plan: a quiet chip per tier. The billing choice is the two price cards below. */
+  function tierChip(id, t) {
+    var on = _tier === id;
+    return '<button data-pp="tier" data-tier="' + id + '" aria-pressed="' + (on ? "true" : "false") + '" style="flex:1 1 30%;min-height:40px;padding:0 8px;border:none;border-radius:9px;background:' + (on ? "var(--panel,#fff)" : "transparent") + ';box-shadow:' + (on ? "0 1px 3px rgba(0,0,0,.12)" : "none") + ';color:' + (on ? "var(--ink,#14202b)" : "var(--slate,#2d4356)") + ';font:' + (on ? "700" : "600") + ' 13px var(--pp-f);cursor:pointer;white-space:nowrap">' + esc(t.label) + '</button>';
   }
-
   function cardsFor(ids) {
-    return ids.filter(function (id) { return tierOf(id); }).map(function (id) { return tierCard(id, tierOf(id)); }).join("");
+    return ids.filter(function (id) { return tierOf(id); }).map(function (id) { return tierChip(id, tierOf(id)); }).join("");
+  }
+  /* The selected tier in words. Every tier keeps its own lines (badge, benefit, note, feature
+   * list, per-day figure and everyday comparison); only the selected tier's lines are shown. */
+  function tierDetail() {
+    var id = _tier, t = tierOf(id); if (!t) return "";
+    var badge = TIER_BADGE[id] || (t.popular ? "MOST POPULAR" : "");
+    var spend = spendLine(id, t), note = TIER_NOTE[id] || "";
+    return '<div id="ppTier" data-detail="' + id + '" style="margin:20px 20px 0;padding:16px 2px 0;border-top:1px solid var(--line,#dfe3dc)">' +
+      (badge ? '<div style="font:700 10.5px var(--pp-f);letter-spacing:.07em;color:var(--slate-soft,#5a7184)">' + esc(badge) + (t.requiresVerify ? ' · VERIFIED TRAINEE' : '') + '</div>' : (t.requiresVerify ? '<div style="font:700 10.5px var(--pp-f);letter-spacing:.07em;color:var(--slate-soft,#5a7184)">VERIFIED TRAINEE</div>' : '')) +
+      (TIER_BENEFIT[id] ? '<div style="font:600 14px/1.45 var(--pp-f);color:var(--ink,#14202b);margin-top:4px">' + esc(TIER_BENEFIT[id]) + '</div>' : '') +
+      (note ? '<div style="font:500 12.5px/1.45 var(--pp-f);color:var(--slate,#2d4356);margin-top:4px">' + esc(note) + '</div>' : '') +
+      (TIER_BLURB[id] ? '<div style="font:500 12.5px/1.5 var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:6px">' + esc(TIER_BLURB[id]) + '</div>' : '') +
+      (tierStrike(t) ? '<div style="font:500 12.5px/1.5 var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:6px">Launch price, regular <span style="text-decoration:line-through">' + inr(tierStrike(t)) + '</span> (SAVE ' + savePct(t) + '%)</div>' : '') +
+      '<div style="font:600 12.5px/1.5 var(--pp-f);color:var(--teal,#0e6e63);margin-top:4px">' + esc(perDayLine(id, t)) + (spend ? ' <span style="font-weight:500;color:var(--slate,#2d4356)">' + esc(spend) + '</span>' : '') + '</div>' +
+    '</div>';
+  }
+  /* Yearly / Monthly as two cards side by side, the selected one ticked. The yearly card's
+   * "Save N%" compares the server's yearly price with twelve of its monthly price: both are
+   * current prices, so it never invents a was-price. The launch `regular` anchor, when the
+   * server sends one, is shown struck through under the price, exactly as before. */
+  function cycleCards() {
+    var t = tierOf(_tier); if (!t) return "";
+    function card(cyc) {
+      var on = _cycle === cyc || (cyc === "monthly" && !t.annual);
+      var annual = cyc === "annual";
+      var price = annual ? t.annual : t.amount;
+      var save = annual && t.amount ? Math.round((1 - t.annual / (t.amount * 12)) * 100) : 0;
+      var tick = on
+        ? '<span aria-hidden="true" style="flex:none;width:22px;height:22px;border-radius:50%;background:var(--teal,#0e6e63);color:#fff;display:flex;align-items:center;justify-content:center">' + ppIcoPx("check", 13) + '</span>'
+        : '<span aria-hidden="true" style="flex:none;width:22px;height:22px;box-sizing:border-box;border-radius:50%;border:1.5px solid var(--line,#c9d0c7)"></span>';
+      return '<button data-pp="cycle" data-cycle="' + cyc + '" aria-pressed="' + (on ? "true" : "false") + '" style="position:relative;flex:1;min-width:0;text-align:left;min-height:96px;box-sizing:border-box;padding:16px 14px 14px;border-radius:16px;border:' + (on ? "1.5px solid var(--teal,#0e6e63)" : "1px solid var(--line,#dfe3dc)") + ';background:var(--panel,#fff);color:var(--ink,#14202b);cursor:pointer">' +
+        (save > 0 ? '<span style="position:absolute;top:-10px;left:12px;font:700 11px var(--pp-f);color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee);border:1px solid var(--paper,#f6f7f5);border-radius:7px;padding:3px 8px">Save ' + save + '%</span>' : '') +
+        '<div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font:600 14px var(--pp-f)">' + (annual ? "Yearly" : "Monthly") + '</span>' + tick + '</div>' +
+        '<div style="font:700 21px var(--smd-dsp,var(--pp-f));letter-spacing:-.01em;margin-top:6px;white-space:nowrap">' + inr(price) + '<span style="font:600 13px var(--pp-f)">' + (annual ? "/yr" : "/mo") + '</span></div>' +
+        '<div style="font:500 12px var(--pp-f);color:var(--slate-soft,#5a7184);margin-top:3px">' +
+          (annual ? inr(Math.round(price / 12)) + "/mo" : "Billed monthly") + '</div>' +
+      '</button>';
+    }
+    return '<div role="group" aria-label="Billing period" style="display:flex;gap:10px;margin:24px 20px 0">' + (t.annual ? card("annual") : "") + card("monthly") + '</div>';
   }
   // Quiet self-selection link. Nothing is hidden from someone who needs it; the default view just
-  // does not open on the two cheapest cards.
+  // does not open on the two cheapest tiers.
   function moreTiersLink() {
     if (!TIER_QUIET.filter(function (id) { return tierOf(id); }).length) return "";
-    if (_showAll) return '<div style="padding:0 20px 4px;font:600 11px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
-    return '<div style="padding:0 20px 12px"><button data-pp="showall" style="width:100%;min-height:44px;background:none;border:none;padding:6px;font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63);text-decoration:underline;cursor:pointer;text-align:center">I\u2019m a student or resident</button></div>';
+    if (_showAll) return '<div style="padding:8px 20px 0;font:500 12px var(--pp-f);color:var(--slate-soft)">Trainee and resident plans need a verified registration.</div>';
+    return '<div style="padding:10px 20px 0;text-align:center"><button data-pp="showall" style="min-height:44px;background:none;border:none;padding:0 2px;font:600 13px var(--pp-f);color:var(--teal,#0e6e63);text-decoration:underline;text-underline-offset:3px;cursor:pointer">I’m a student or resident</button></div>';
   }
 
   /* Onco add-on: available on EVERY tier, because browsing oncology is free for everyone and the
@@ -289,15 +334,19 @@
     return "Subscribe to " + t.label + " \u00b7 " + inr(tierPrice(t)) + tierPer(t);
   }
   function ctaBar(inner) {
-    return '<div style="position:sticky;bottom:0;z-index:3;background:var(--paper,#f6f7f5);border-top:1px solid var(--line,#d7dee3);padding:12px 20px calc(14px + env(safe-area-inset-bottom,0px))">' + inner + '</div>';
+    return '<div style="position:sticky;bottom:0;z-index:3;background:var(--paper,#f6f7f5);padding:12px 20px calc(14px + env(safe-area-inset-bottom,0px))">' + inner + '</div>';
   }
   function ctaBlock() {
-    if (!fbUser()) return ctaBar('<button data-pp="signin" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--pp-f);cursor:pointer">Sign in to subscribe</button>');
-    if (plat() === "ios" && !iosNativeIap()) return ctaBar('<button disabled style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--line,#d7dee3);color:var(--slate,#2d4356);font:800 14px var(--pp-f)">Subscriptions coming soon on iOS</button>');
-    var t = tierOf(_tier);
-    var via = plat() === "ios" ? "the App Store" : "PhonePe \u00b7 UPI / cards / netbanking";
-    return ctaBar('<button data-pp="buy" style="width:100%;min-height:48px;padding:14px;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 14.5px var(--pp-f);cursor:pointer">' + esc(ctaLabel()) + '</button>' +
-      '<div style="font:500 10.5px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:8px">Cancel anytime' + (t ? " \u00b7 " + esc(perDayTxt(t)) : "") + '<br>Secure payment via ' + via + '</div>');
+    var BTN = "width:100%;min-height:52px;padding:14px;border:none;border-radius:14px;font:600 15.5px var(--pp-f);";
+    if (!fbUser()) return ctaBar('<button data-pp="signin" style="' + BTN + 'background:var(--teal,#0e6e63);color:#fff;cursor:pointer">Sign in to subscribe</button>');
+    if (plat() === "ios" && !iosNativeIap()) return ctaBar('<button disabled style="' + BTN + 'background:var(--line,#d7dee3);color:var(--slate,#2d4356)">Subscriptions coming soon on iOS</button>');
+    var t = tierOf(_tier), after = t ? promoAfterLine(t) : "";
+    var store = plat() === "ios" ? "the App Store" : plat() === "android" ? "Google Play" : "";
+    // One honest line under the button: what is charged and when, then how. Never a trial.
+    var line = t ? (after ? "Free until the launch ends, " + after.replace(/\.$/, "") : inr(tierPrice(t)) + tierPer(t) + " \u00b7 " + perDayTxt(t)) + ". Cancel anytime." : "Cancel anytime.";
+    return ctaBar('<button data-pp="buy" style="' + BTN + 'background:var(--teal,#0e6e63);color:#fff;cursor:pointer">' + esc(ctaLabel()) + '</button>' +
+      '<div style="font:500 12px/1.5 var(--pp-f);color:var(--slate-soft);text-align:center;margin-top:10px">' + esc(line) +  (store ? '<br>Secure payment via ' + store : '') + '</div>' +
+      ((iosNativeIap() && typeof SMD_IAP.restore === "function") ? '<div style="text-align:center"><button data-pp="restore" style="min-height:44px;border:none;background:none;font:600 12.5px var(--pp-f);color:var(--slate,#2d4356);text-decoration:underline;text-underline-offset:3px;cursor:pointer">Restore purchases</button></div>' : ''));
   }
 
   // Institution coupon redeem — a doctor whose hospital paid enters the code to unlock Pro.
@@ -338,25 +387,26 @@
     var banner = "";
     /* FIX 2: the launch banner states the offer in words. The sparkle icon is gone; the
      * outcome preview below shows what Pro produces instead. FIX 5: one accent (teal) here. */
-    if (promoOn) banner = '<div style="margin:8px 20px 4px;padding:12px 14px;border-radius:12px;background:var(--teal-soft,#e3f1ee);font:600 12.5px/1.5 var(--pp-f);color:var(--teal,#0e6e63)">Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
-    else if (isPaid) banner = '<div style="margin:8px 20px 4px;padding:12px 14px;border-radius:12px;background:var(--teal-soft,#e3f1ee);font:700 12.5px var(--pp-f);color:var(--teal,#0e6e63)">' + ppIcoPx("check", 15) + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
+    if (promoOn) banner = '<div style="margin:18px 20px 0;padding:12px 14px;border-radius:12px;background:var(--panel,#fff);border:1px solid var(--line,#dfe3dc);font:500 13px/1.5 var(--pp-f);color:var(--ink,#14202b)">Launch period: Pro is <b>free for everyone until ' + esc(fdate(_status.promoUntil || _status.until)) + '</b>. Subscribe anytime to keep it after.</div>';
+    else if (isPaid) banner = '<div style="margin:18px 20px 0;padding:12px 14px;border-radius:12px;background:var(--panel,#fff);border:1px solid var(--line,#dfe3dc);font:600 13px var(--pp-f);color:var(--ink,#14202b)">' + ppIcoPx("check", 15) + ' Pro active' + (_status.until ? ' until ' + esc(fdate(_status.until)) : '') + '. Thank you!</div>';
 
     var ios = plat() === "ios", body;
     if (_plans && _plans.tiers) {
       if (!tierOf(_tier)) { for (var i = TIER_ORDER.length - 1; i >= 0; i--) if (tierOf(TIER_ORDER[i])) _tier = TIER_ORDER[i]; }
       if (TIER_QUIET.indexOf(_tier) > -1) _showAll = true;   // a revealed tier never re-hides itself
-      body = heroPreview() + benefitGrid() + cycleToggle() +
-        '<div style="padding:6px 20px 2px">' + cardsFor(TIER_MAIN) + '</div>' +
-        (_showAll ? '<div style="padding:0 20px 2px">' + cardsFor(TIER_QUIET) + '</div>' : "") +
-        moreTiersLink() + addonRow() + tokenStore();
+      body = '<div style="background:var(--paper,#f6f7f5);border-radius:24px 24px 0 0;margin-top:-22px;position:relative;padding-top:24px">' +
+        benefitRow() + banner +
+        '<div role="group" aria-label="Plan" style="display:flex;flex-wrap:wrap;gap:3px;margin:24px 20px 0;padding:3px;border-radius:12px;background:var(--rds-surface-2,#eaeeec)">' + cardsFor(TIER_MAIN) + (_showAll ? cardsFor(TIER_QUIET) : "") + '</div>' +
+        cycleCards() + tierDetail() + moreTiersLink() +
+        '<div style="height:18px"></div>' + addonRow() + tokenStore() + '</div>';
     } else {
       body = '<div style="padding:20px 20px;text-align:center;color:var(--slate-soft);font:500 13px var(--pp-f)">Loading plans…</div>';
     }
     /* FIX 1: the headline says what the doctor gets, in one concrete line. No outcome claim,
      * no statistic, no testimonial (see the TIER_BENEFIT rule above). */
-    var sub = promoOn ? "Everything unlocked, free until the launch period ends" : (isPaid ? "You’re a Pro member" : "MaiK writes your notes while you see patients.");
+    var sub = isPaid ? "You\u2019re a Pro member." : "";
     // The CTA is LAST in the DOM so position:sticky pins it to the bottom of the scrolling sheet.
-    _root.querySelector("#proPay > div").innerHTML = header(sub) + banner + body + (ios ? "" : redeemBlock()) + (_plans && _plans.tiers ? ctaBlock() : "");   // coupon hidden on iOS
+    _root.querySelector("#proPay > div").innerHTML = (_plans && _plans.tiers ? hero(sub) : header("")) + body + (ios ? "" : redeemBlock()) + (_plans && _plans.tiers ? ctaBlock() : "");   // coupon hidden on iOS
     wire();
   }
 
@@ -376,6 +426,11 @@
         if (k === "qpack") return doBuy({ quotaPack: b.getAttribute("data-qpack") }, b);
         if (k === "msgtier") return doBuy({ msgTier: b.getAttribute("data-msgtier") }, b);
         if (k === "redeem") return redeem();
+        if (k === "restore") {
+          b.disabled = true;
+          return SMD_IAP.restore().then(function () { toast("Purchases restored."); try { if (window.SMD_PRO && SMD_PRO.sync) SMD_PRO.sync(); } catch (e) {} refresh(); },
+            function () { b.disabled = false; toast("No purchase to restore on this Apple ID."); });
+        }
         if (k === "ailimit-upgrade") { close(); return openPaywall(); }
       };
     });

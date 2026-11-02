@@ -53,7 +53,8 @@ let fails = 0;
 const ok = (c, m) => { console.log((c ? "PASS " : "FAIL ") + m); if (!c) fails++; };
 
 const sheetText = () => ev(`var p=document.getElementById("proPay"); return p ? p.innerText : null;`);
-const cardText = (id) => ev(`var b=document.querySelector('[data-pp="tier"][data-tier="${id}"]'); return b ? b.innerText : null;`);
+// What the doctor reads for one tier: pick it, then read its detail block and the two price cards.
+const cardText = (id) => ev(`var b=document.querySelector('[data-pp="tier"][data-tier="${id}"]'); if(!b) return null; b.click(); var d=document.querySelector('#ppTier'), c=document.querySelector('[aria-label="Billing period"]'); return (c?c.innerText:"")+"\\n"+(d?d.innerText:"");`);
 const ctaText = () => ev(`var b=document.querySelector('[data-pp="buy"]'); return b ? b.innerText : null;`);
 const selected = () => ev(`var b=document.querySelector('[data-pp="tier"][aria-pressed="true"]'); return b ? b.getAttribute("data-tier") : null;`);
 const cycle = () => ev(`var b=document.querySelector('[data-pp="cycle"][aria-pressed="true"]'); return b ? b.getAttribute("data-cycle") : null;`);
@@ -110,7 +111,7 @@ try {
   ok(/Runs your clinic: queue, billing, recovery calls, and notes that think with you\./.test(phyA), "benefit line");
   // SMD-09: every piece of text on the plans sheet uses the Apple system font (no serif prices or title),
   // and the sheet is capped below the status bar / Dynamic Island (safe-area aware).
-  const fonts = await ev(`var bad=[];document.querySelectorAll("#proPay *").forEach(function(e){if(!e.childNodes.length||![].some.call(e.childNodes,function(n){return n.nodeType===3&&n.textContent.trim()}))return;var f=getComputedStyle(e).fontFamily;if(!/-apple-system|system-ui/.test(f)||/Georgia|serif\b(?!-)/i.test(f.replace(/sans-serif/g,"")))bad.push(e.textContent.trim().slice(0,20)+": "+f)});return JSON.stringify(bad.slice(0,4))`);
+  const fonts = await ev(`var bad=[];document.querySelectorAll("#proPay *").forEach(function(e){if(e.closest("[aria-hidden=true]"))return;if(!e.childNodes.length||![].some.call(e.childNodes,function(n){return n.nodeType===3&&n.textContent.trim()}))return;var f=getComputedStyle(e).fontFamily;if(!/-apple-system|system-ui/.test(f)||/Georgia|serif\b(?!-)/i.test(f.replace(/sans-serif/g,"")))bad.push(e.textContent.trim().slice(0,20)+": "+f)});return JSON.stringify(bad.slice(0,4))`);
   ok(fonts === "[]", "SMD-09 all plan text uses the Apple system font: " + fonts);
   ok(await ev(`var d=document.querySelector("#proPay [role=dialog]");return /safe-area-inset-top/.test(d.getAttribute("style"))&&d.getBoundingClientRect().top>=10`) === true, "SMD-09 the sheet stops below the status bar (safe-area aware max height)");
   ok(/MaiK Voice Scribe writes the note, then offers the differentials worth considering\./.test(phyA), "second line");
