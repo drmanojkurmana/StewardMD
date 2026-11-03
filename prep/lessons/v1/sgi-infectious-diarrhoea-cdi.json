@@ -9,22 +9,15 @@
       "tx": "**Clostridioides difficile** infection (CDI) requires clinical diarrhoea, defined by passing at least 3 unformed liquid stools within 24 hours, alongside microbiological confirmation. Diagnostic algorithms utilize a two-step testing protocol combining sensitive enzyme immunoassay for glutamate dehydrogenase (GDH) with specific **toxin testing** for toxins A and B, using nucleic acid amplification testing (NAAT) to resolve discrepant specimens.",
       "say": "Clostridioides difficile infection requires clinical diarrhoea, defined as passing three or more unformed stools within twenty-four hours, combined with microbiological confirmation. Laboratory algorithms employ a two-step protocol that pairs sensitive glutamate dehydrogenase testing with specific toxin detection assays.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "New-onset diarrhoea (>= 3 unformed stools/24h)"},
-          {"id": "b", "label": "Screening GDH antigen plus Toxin A/B EIA"},
-          {"id": "c", "label": "Both positive: confirms active CDI"},
-          {"id": "d", "label": "GDH+ but Toxin-: reflex to NAAT PCR"}
-        ],
-        "edges": [
-          ["a", "b", "test unformed stool"],
-          ["b", "c", "concordant"],
-          ["b", "d", "discrepant"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/c-diff-fig1.webp",
+        "alt": "Diagram of Clostridioides difficile colitis with antibiotic dysbiosis, toxins A and B, a volcano-like pseudomembrane, colonoscopy plaques that are yellowish white, and a two-step test box listing GDH or NAAT followed by free toxin A/B enzyme immunoassay.",
+        "caption": "Diagnosis needs diarrhoea plus this two-step toxin pathway. A treatment note at the lower edge is cut off, so do not read a drug ranking from the drawing. Illustration: StewardMD.",
+        "ar": 1.3405
       }
     },
     {
-      "tx": "First-line bactericidal therapy for initial and recurrent CDI prioritizes oral **fidaxomicin** (200 mg twice daily for 10 days). Fidaxomicin is a narrow-spectrum macrocyclic RNA polymerase inhibitor that preserves native colonic Bacteroidetes and Firmicutes flora. Compared to **oral vancomycin**, fidaxomicin achieves equivalent initial clinical cure while demonstrating significantly lower subsequent recurrence rates.",
+      "tx": "First-line bactericidal therapy for initial and recurrent CDI prioritizes oral **fidaxomicin** (200 mg twice daily for 10 days). Fidaxomicin is a narrow-spectrum macrocyclic RNA polymerase inhibitor that preserves much of the native colonic flora, especially Bacteroidetes. Compared to **oral vancomycin**, fidaxomicin achieves equivalent initial clinical cure while demonstrating significantly lower subsequent recurrence rates.",
       "say": "First-line bactericidal therapy for initial and recurrent Clostridioides difficile infection relies on oral fidaxomicin given at two hundred milligrams twice daily for ten days. Fidaxomicin selectively inhibits RNA polymerase while sparing commensal anaerobic flora, achieving significantly lower recurrence rates than oral vancomycin.",
       "vis": {
         "kind": "compare",
@@ -98,18 +91,11 @@
       "tx": "**Amoebic colitis** results from mucosal tissue invasion by the protozoan Entamoeba histolytica following ingestion of infective quadrinucleate cysts. Colonoscopy classically reveals discrete, punched-out **flask-shaped ulcerations** with extensive undermining of the submucosa beneath normal-appearing intervening mucosa. Definitive treatment requires systemic tissue amoebicides like metronidazole, followed by oral paromomycin to eliminate persistent luminal cysts.",
       "say": "Amoebic colitis results from mucosal invasion by Entamoeba histolytica after cyst ingestion. Endoscopy reveals punched-out flask-shaped ulcerations that undermine the submucosa, separated by normal intervening mucosa. Definitive treatment requires metronidazole to eradicate tissue trophozoites, followed by paromomycin to clear luminal cysts.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Ingestion of E. histolytica quadrinucleate cysts"},
-          {"id": "b", "label": "Trophozoite mucosal invasion: flask-shaped ulcers"},
-          {"id": "c", "label": "Systemic metronidazole (eradicates tissue trophozoites)"},
-          {"id": "d", "label": "Luminal paromomycin (eradicates persistent cysts)"}
-        ],
-        "edges": [
-          ["a", "b", "pathogenesis"],
-          ["b", "c", "initial therapy"],
-          ["c", "d", "mandatory completion"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/amoebiasis-fig2.webp",
+        "alt": "Three panels of Entamoeba histolytica: a life cycle from a quadrinucleate cyst to a trophozoite with metronidazole and paromomycin labelled, a flask-shaped colonic ulcer with a narrow neck and a broad submucosal base, and a solitary right-lobe liver abscess.",
+        "caption": "Flask-shaped ulcers are the colonic lesion of amoebic colitis. Tissue metronidazole is followed by luminal paromomycin, which the left panel labels. Illustration: StewardMD.",
+        "ar": 1.3405
       }
     },
     {

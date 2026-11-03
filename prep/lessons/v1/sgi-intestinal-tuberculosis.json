@@ -48,25 +48,11 @@
       "tx": "Histopathological examination provides definitive discriminating criteria. Intestinal tuberculosis features **large confluent** (> 400 micrometres) **caseating granulomas**, often numbering more than 5 granulomas per biopsy specimen, located prominently within mucosal and submucosal layers. In contrast, Crohn disease exhibits small (< 200 micrometres), discrete, non-caseating microgranulomas scattered sparsely.",
       "say": "Histological evaluation provides objective criteria to differentiate both diseases. Intestinal tuberculosis demonstrates large confluent caseating granulomas measuring over four hundred micrometres, frequently exceeding five granulomas per biopsy specimen. In contrast, Crohn disease exhibits small discrete non-caseating granulomas without central necrosis.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Intestinal Tuberculosis Histology",
-          "points": [
-            "Large confluent granulomas (> 400 um)",
-            "Prominent central caseating necrosis",
-            "Multiple granulomas (> 5 per biopsy)",
-            "Submucosal and lamina propria location"
-          ]
-        },
-        "right": {
-          "title": "Crohn Disease Histology",
-          "points": [
-            "Small, ill-defined microgranulomas (< 200 um)",
-            "Strictly non-caseating",
-            "Infrequent (< 5 per biopsy specimen)",
-            "Dispersed throughout transmural layers"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/chronic-and-granulomatous-inflammation-fig1.webp",
+        "alt": "Cross-section of a round granuloma with central caseous necrosis, Langhans giant cells, a rim of epithelioid macrophages, and an outer lymphocyte collar.",
+        "caption": "Caseous necrosis in the centre is the histologic mark that separates intestinal tuberculosis from non-caseating Crohn granulomas. No bowel and no size scale are drawn. Illustration: StewardMD.",
+        "ar": 1.3333
       }
     },
     {
@@ -102,7 +88,7 @@
       }
     },
     {
-      "tx": "When endoscopic, histopathologic, and microbiological evaluations remain indeterminate, a **therapeutic trial** of **antitubercular therapy** serves as an established diagnostic strategy in tuberculosis-endemic regions. Reassessment colonoscopy performed after 8 to 12 weeks of therapy that demonstrates complete mucosal healing and ulcer resolution confirms tuberculosis and definitively rules out Crohn disease.",
+      "tx": "When endoscopic, histopathologic, and microbiological evaluations remain indeterminate, a **therapeutic trial** of **antitubercular therapy** serves as an established diagnostic strategy in tuberculosis-endemic regions. Reassessment colonoscopy performed after 8 to 12 weeks of therapy that demonstrates complete mucosal healing and ulcer resolution confirms tuberculosis and excludes Crohn disease.",
       "say": "In clinically ambiguous cases where diagnostic tests remain indeterminate, a therapeutic trial of antitubercular therapy serves as an established management strategy. Performing a repeat colonoscopy after eight to twelve weeks of treatment that confirms mucosal healing verifies the diagnosis of intestinal tuberculosis and excludes Crohn disease.",
       "vis": {
         "kind": "flow",
@@ -135,18 +121,11 @@
       "tx": "Differentiating both conditions carries paramount therapeutic safety implications. Inadvertent administration of biologics or **immunosuppressive therapy** like anti-TNF inhibitors to an undiagnosed patient with intestinal tuberculosis suppresses granuloma-contained mycobacteria, precipitating lethal **disseminated tuberculosis**, fulminant peritonitis, multi-organ failure, and septic death in affected individuals.",
       "say": "Accurate distinction between intestinal tuberculosis and Crohn disease is essential for clinical patient safety. Administering anti-TNF biologics or intense immunosuppressive therapy to an unrecognized case of intestinal tuberculosis dissolves protective granulomas. This mistake precipitates catastrophic disseminated tuberculosis, bowel perforation, and septic death.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Misdiagnosing intestinal TB as Crohn disease"},
-          {"id": "b", "label": "Inadvertent anti-TNF or systemic immunosuppression"},
-          {"id": "c", "label": "Breakdown of protective granulomas and immune containment"},
-          {"id": "d", "label": "Catastrophic disseminated tuberculosis and perforation"}
-        ],
-        "edges": [
-          ["a", "b", "leads to"],
-          ["b", "c", "causes"],
-          ["c", "d", "results in"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/tuberculosis-long-case-fig2.webp",
+        "alt": "Left panel shows a macrophage presenting Mycobacterium tuberculosis to a helper T cell, with interleukin-12, interferon-gamma, and TNF-alpha, then epithelioid cells and a Langhans giant cell. Right panel is a caseating granuloma with caseous necrosis, epithelioid macrophages, Langhans giant cells, helper and cytotoxic T lymphocytes, and a fibroblast capsule.",
+        "caption": "TNF-alpha is one signal that holds this granuloma together. Blocking TNF in untreated intestinal tuberculosis lets the contained bacilli disseminate. Illustration: StewardMD.",
+        "ar": 1.3405
       }
     }
   ],

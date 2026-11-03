@@ -9,20 +9,11 @@
       "tx": "Serological screening for coeliac disease begins with IgA **anti-tissue transglutaminase** (anti-tTG IgA) paired with measurement of total serum IgA. This mandatory pairing identifies **selective IgA deficiency**, which occurs in up to 3% of coeliac patients. When total IgA falls below detectable thresholds, IgG-based serology using deamidated gliadin peptide (DGP IgG) or tTG IgG serves as the diagnostic alternative.",
       "say": "Serological testing for coeliac disease begins with IgA anti-tissue transglutaminase paired with total serum IgA measurement. This pairing is essential to detect selective IgA deficiency, which affects two to three percent of coeliac patients. When total IgA is deficient, IgG deamidated gliadin peptide testing provides accurate diagnostic assessment.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Suspected coeliac disease: anti-tTG IgA + total IgA"},
-          {"id": "b", "label": "Normal total IgA level"},
-          {"id": "c", "label": "Selective IgA deficiency identified"},
-          {"id": "d", "label": "Interpret anti-tTG IgA titre"},
-          {"id": "e", "label": "Order DGP IgG or tTG IgG"}
-        ],
-        "edges": [
-          ["a", "b", "screen"],
-          ["a", "c", "deficiency"],
-          ["b", "d", "proceed"],
-          ["c", "e", "reflex"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/celiac-disease-fig2.webp",
+        "alt": "Two-panel coeliac diagram. One side shows gluten, tissue transglutaminase, presentation by HLA-DQ2 or HLA-DQ8, and antibodies to tTG, endomysium, and deamidated gliadin. The other side shows normal villi, villous atrophy with crypt hyperplasia and intraepithelial lymphocytes, dermatitis herpetiformis with granular IgA, and iron or folate malabsorption.",
+        "caption": "Anti-tTG IgA is the antibody this pathway produces. Total IgA still has to be measured with it, and that pairing is not drawn. Illustration: StewardMD.",
+        "ar": 1.3405
       }
     },
     {
@@ -96,18 +87,11 @@
       "tx": "**Enteropathy-associated T-cell lymphoma** (EATL) is an aggressive, high-grade intestinal non-Hodgkin lymphoma arising primarily from the clonal intraepithelial population in Type 2 refractory coeliac disease. Most common in the jejunum and ileum, **EATL** presents with multifocal ulcerative lesions, small bowel obstruction, acute perforation, and severe cachexia, carrying poor five-year overall survival.",
       "say": "Enteropathy-associated T-cell lymphoma, known as EATL, is a high-grade lymphoma arising directly from aberrant intraepithelial T cells in Type two refractory coeliac disease. It typically involves the jejunum and ileum, presenting with multifocal ulcerations, obstruction, intestinal perforation, and severe cachexia, carrying an aggressive clinical course.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Coeliac disease with chronic gluten exposure"},
-          {"id": "b", "label": "Type 2 refractory coeliac disease (clonal aberrant IELs)"},
-          {"id": "c", "label": "Acquisition of somatic mutations (JAK1, STAT3)"},
-          {"id": "d", "label": "Enteropathy-associated T-cell lymphoma (EATL)"}
-        ],
-        "edges": [
-          ["a", "b", "transformation"],
-          ["b", "c", "oncogenesis"],
-          ["c", "d", "progression"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/enteropathy-associated-t-cell-lymphoma-fig1.webp",
+        "alt": "Panel A shows small-bowel mucosa with villous atrophy, crypt hyperplasia, and abnormal intraepithelial lymphocytes. Panel B shows an opened jejunum with multifocal ulcers and lymphoma cells in the wall.",
+        "caption": "Enteropathy-associated T-cell lymphoma arises from this abnormal intraepithelial population and ulcerates the jejunum. Illustration: StewardMD.",
+        "ar": 1.8349
       }
     },
     {

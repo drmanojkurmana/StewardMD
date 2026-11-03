@@ -9,18 +9,11 @@
       "tx": "**Chronic pancreatitis** is defined pathologically by progressive, irreversible **fibro-inflammatory injury** of the pancreatic parenchyma. Chronic acinar cell necrosis and persistent perilobular fibrosis culminate in ductal stricturing, intraductal stone precipitation, chronic intractable abdominal pain, and progressive loss of both exocrine digestive and endocrine metabolic functions.",
       "say": "Chronic pancreatitis is defined pathologically by progressive irreversible fibro-inflammatory injury of the pancreatic parenchyma. Persistent acinar necrosis and perilobular fibrosis lead to ductal strictures, stone precipitation, severe chronic pain, and progressive destruction of exocrine and endocrine functions.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Repetitive acinar injury (alcohol, smoking, genetic)"},
-          {"id": "b", "label": "Pancreatic stellate cell activation & dense fibrosis"},
-          {"id": "c", "label": "Main duct stricturing, protein plugs & calcification"},
-          {"id": "d", "label": "Exocrine steatorrhoea & pancreatogenic diabetes"}
-        ],
-        "edges": [
-          ["a", "b", "triggers"],
-          ["b", "c", "leads to"],
-          ["c", "d", "results in"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/chronic-pancreatitis-fig1.webp",
+        "alt": "Side-by-side pancreas. The normal side labels exocrine tissue and endocrine tissue. The chronic pancreatitis side labels fibrosis, calcifications, inflammation, and atrophy along a distorted duct.",
+        "caption": "Irreversible fibrosis, atrophy, and calcification are the structural end of chronic pancreatitis. Illustration: StewardMD.",
+        "ar": 1.8349
       }
     },
     {
@@ -135,14 +128,11 @@
       "tx": "Type 1 **autoimmune pancreatitis** (AIP) is the pancreatic manifestation of systemic IgG4-related disease. Cross-sectional imaging demonstrates diffuse, painless **sausage-like enlargement** of the pancreas with loss of lobular architecture and a capsule-like halo of delayed enhancement. Serum IgG4 levels are elevated, and the disorder exhibits dramatic clinical and radiographic response to oral corticosteroids.",
       "say": "Type one autoimmune pancreatitis represents the pancreatic manifestation of systemic IgG4-related disease. Imaging reveals diffuse sausage-like enlargement of the pancreas with loss of normal lobulations and a capsule-like peripancreatic halo. Serum IgG4 levels are elevated, and the disorder shows dramatic response to oral corticosteroids.",
       "vis": {
-        "kind": "table",
-        "cols": ["Feature", "Type 1 Autoimmune Pancreatitis (IgG4-Related)", "Type 2 Autoimmune Pancreatitis (GEL)"],
-        "rows": [
-          ["Systemic involvement", "Systemic IgG4 disease (cholangitis, nephritis)", "Strictly pancreas-isolated; associated with IBD"],
-          ["Serum IgG4 level", "Significantly elevated (> 2x upper limit)", "Normal serum IgG4 levels"],
-          ["Histopathology", "Lymphoplasmacytic sclerosing pancreatitis (LPSP)", "Granulocytic epithelial lesions (GEL) with duct destruction"],
-          ["Response to steroids", "Dramatic, rapid clinical and imaging resolution", "Dramatic, rapid response to corticosteroids"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-pancreatitis-fig1.webp",
+        "alt": "Cross-section of the upper abdomen. The pancreas is outlined and labelled diffuse swelling, sausage shape, a hypoattenuating rim, and loss of contour.",
+        "caption": "Type 1 autoimmune pancreatitis is this diffusely swollen, sausage-shaped gland with a capsule-like hypoattenuating rim. Illustration: StewardMD.",
+        "ar": 1.8349
       }
     }
   ],

@@ -9,23 +9,11 @@
       "tx": "**Squamous cell carcinoma** accounts for most tumours in the proximal and middle third of the thoracic oesophagus, strongly linked to tobacco smoke, heavy alcohol consumption, hot beverages, and micronutrient deficiencies. In contrast, **adenocarcinoma** predominates in the distal oesophagus and gastro-oesophageal junction, arising through the classical metaplasia-dysplasia sequence in long-standing Barrett mucosa.",
       "say": "Squamous cell carcinoma dominates the proximal and middle third of the thoracic oesophagus. It is strongly linked to tobacco, alcohol, hot beverage intake, and dietary micronutrient deficiencies. In contrast, adenocarcinoma predominates in the distal oesophagus and gastro-oesophageal junction, developing through the metaplasia-dysplasia sequence in chronic Barrett mucosa.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Squamous cell carcinoma",
-          "points": [
-            "Upper and middle third oesophagus",
-            "Tobacco, alcohol, hot liquids",
-            "Keratin pearls and intercellular bridges"
-          ]
-        },
-        "right": {
-          "title": "Adenocarcinoma",
-          "points": [
-            "Distal oesophagus and GEJ",
-            "Barrett metaplasia, obesity, GERD",
-            "Glandular architecture and mucin"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/oesophagus-and-stomach-pathology-fig1.webp",
+        "alt": "Cutaway of the oesophagus and stomach labelled Barrett intestinal metaplasia, oesophageal adenocarcinoma at the gastro-oesophageal junction, a punched-out peptic ulcer, Helicobacter pylori antral gastritis, linitis plastica, and signet-ring cells.",
+        "caption": "Distal adenocarcinoma arises in the Barrett mucosa this drawing labels at the junction. Proximal squamous cell carcinoma is not drawn. Illustration: StewardMD.",
+        "ar": 1.3333
       }
     },
     {
@@ -64,18 +52,11 @@
       "tx": "**Endoscopic submucosal dissection** (ESD) provides definitive organ-preserving resection for early superficial neoplastic lesions confined to the mucosa (T1a). When strict staging confirms absence of **lymphovascular invasion** and negative vertical margins, ESD achieves **en bloc resection** rates exceeding 90%, with negligible risk of regional lymph node metastases compared to deeper submucosal invasion.",
       "say": "Endoscopic submucosal dissection provides organ-preserving therapy for superficial oesophageal neoplasms confined strictly to the mucosa, designated as T1a. Provided there is no lymphovascular invasion and margins are clear, endoscopic submucosal dissection achieves en bloc resection rates greater than ninety percent with negligible lymph node metastasis risk.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Superficial mucosal neoplasm (cT1a)"},
-          {"id": "b", "label": "Endoscopic submucosal dissection (ESD)"},
-          {"id": "c", "label": "Histopathology: margins clear, no LVI"},
-          {"id": "d", "label": "Curative en bloc resection (> 90%)"}
-        ],
-        "edges": [
-          ["a", "b", "submucosal knife"],
-          ["b", "c", "confirms"],
-          ["c", "d", "achieves"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/diseases-of-esophagus-fig2.webp",
+        "alt": "Five-panel sequence from a normal oesophagus through reflux oesophagitis, Barrett oesophagus with salmon-pink tongues, dysplasia, and invasive adenocarcinoma invading the muscularis. Histology insets sit under each stage, and the dysplasia footer names radiofrequency ablation and endoscopic mucosal resection.",
+        "caption": "Superficial adenocarcinoma in this sequence is the lesion endoscopic submucosal dissection removes while it is still mucosal. The drawing names ablation and mucosal resection, not a dissection knife. Illustration: StewardMD.",
+        "ar": 1.3405
       }
     },
     {

@@ -80,25 +80,11 @@
       "tx": "**Fine-needle biopsy** (EUS-FNB) using advanced **Franseen needle** geometries (crown-tip with three symmetrical cutting edges) or fork-tip designs has revolutionized endosonographic tissue acquisition. Unlike standard cytology aspiration needles that yield only dissociated cells, FNB cores preserve contiguous histological tissue architecture, permitting immunohistochemistry, molecular profiling, and superior diagnostic adequacy for submucosal stromal tumours and pancreatic masses.",
       "say": "Endoscopic ultrasound-guided fine-needle biopsy using advanced Franseen needles has revolutionized diagnostic tissue sampling. By using three symmetrical cutting edges, Franseen needles obtain intact tissue cores rather than loose cytology aspirates. This architecture allows detailed immunohistochemistry and molecular profiling for pancreatic and stromal neoplasms.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "EUS-FNA (Aspiration)",
-          "points": [
-            "Standard beveled lancet needle",
-            "Aspirates cytology smears and cell clusters",
-            "Often requires rapid on-site evaluation (ROSE)",
-            "Limited architecture for immunohistochemistry"
-          ]
-        },
-        "right": {
-          "title": "EUS-FNB (Core Biopsy)",
-          "points": [
-            "Franseen (crown-tip) or fork-tip geometry",
-            "Acquires intact tissue core biopsies",
-            "High diagnostic yield without on-site pathologist",
-            "Enables comprehensive molecular profiling"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/lessons/media/sgi-endoscopy-procedures-fig1.webp",
+        "alt": "Line diagram of an EUS scope in the gut lumen, an ultrasound transducer, an FNA needle crossing the GI wall into a pancreatic mass, and a monitor showing the ultrasound image.",
+        "caption": "The needle drawn here is labelled fine-needle aspiration of a pancreatic mass. A Franseen fine-needle biopsy uses the same echoendoscope route to take a tissue core. Illustration: StewardMD.",
+        "ar": 1.8349
       }
     },
     {
@@ -133,18 +119,11 @@
       "tx": "**Percutaneous endoscopic gastrostomy** (PEG) provides safe, long-term **enteral nutrition access** for patients with functional gastrointestinal tracts who cannot maintain oral intake due to neurological dysphagia, head and neck cancers, or trauma. The procedure relies on direct endoscopic gastric transillumination and external 1:1 finger indentation against the anterior abdominal wall to confirm a safe gastropexy window before trocar insertion.",
       "say": "Percutaneous endoscopic gastrostomy establishes durable enteral feeding access for patients with intact intestinal function who cannot swallow safely. Placement relies on direct endoscopic transillumination and corresponding external finger indentation against the anterior abdominal wall to confirm an unobstructed gastropexy path before inserting the feeding tube.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "a", "label": "Upper endoscopy: full gastric insufflation"},
-          {"id": "b", "label": "Direct endoscopic transillumination through abdominal wall"},
-          {"id": "c", "label": "1:1 finger indentation confirms safe puncture site"},
-          {"id": "d", "label": "Trocar puncture, guidewire feed, and PEG tube pull placement"}
-        ],
-        "edges": [
-          ["a", "b", "localize"],
-          ["b", "c", "verifies"],
-          ["c", "d", "deploys"]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/gastrointestinal-endoscopy-fig1.webp",
+        "alt": "Upper endoscopy map from the mouth through the oesophagus, stomach, and duodenum. Round insets show the squamocolumnar junction with Barrett oesophagus, the fundus and cardia, the gastric body, the antrum and pylorus, a bleeding peptic ulcer, and the major duodenal papilla.",
+        "caption": "Pull gastrostomy starts with this upper endoscopy and a clear view of the gastric body. The insets also show Barrett mucosa, varices, an ulcer, and the ampulla, which are not part of tube placement. Illustration: StewardMD.",
+        "ar": 1.3405
       }
     }
   ],
