@@ -56,42 +56,14 @@
    "vis": null
   },
   {
-   "tx": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start **basal insulin** early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every few days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
-   "say": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start basal insulin early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every few days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
+   "tx": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start **basal insulin** early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every 2 to 3 days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
+   "say": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start basal insulin early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every 2 to 3 days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "HbA1c above 10 percent with symptoms"
-     },
-     {
-      "id": "b",
-      "label": "Start basal insulin about 10 units at bedtime"
-     },
-     {
-      "id": "c",
-      "label": "Titrate 2 to 4 units every 2 to 3 days or weekly"
-     },
-     {
-      "id": "d",
-      "label": "Fasting target reached"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/kb/media/insulin-types-regimens-dka-hypoglycaemia-fig1.webp",
+    "alt": "Light diagram with dark labels. The top panel draws rapid-acting, premixed, and basal insulin curves. The lower left pairs a flat basal line with meal spikes. The lower right shows meal spikes and no basal line. No names, dates, or side markers.",
+    "caption": "Schematic action curves, not measured levels. The flat line is basal insulin. The early peak is rapid-acting insulin. Premixed insulin combines a peak with a longer tail. The lower panels contrast basal-bolus doses with a sliding scale that has no basal line. This drawing is not the bedtime starting dose or the titration schedule in the sentence above. Credit: StewardMD.",
+    "ar": 1.8349
    }
   },
   {
