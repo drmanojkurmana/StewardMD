@@ -1,187 +1,156 @@
 {
- "v": 1,
- "module": "sne-coma-brain-death",
- "subject": "ss-neurology",
- "title": "Coma, brain death and disorders of consciousness",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Consciousness depends on the **ascending reticular activating system** in the brainstem reticular formation, which projects to the thalamus and cortex. Coma is a state of unarousable unresponsiveness lasting more than a few hours. Always check for reversible metabolic causes first, such as hypoglycaemia, hypoxia, opioids, and sepsis, because these can mimic structural lesions. Structural causes need urgent imaging.",
-   "say": "Consciousness depends on the ascending reticular activating system in the brainstem reticular formation, which projects to the thalamus and cortex. Coma is a state of unarousable unresponsiveness. Always check for reversible metabolic causes first, such as hypoglycaemia, hypoxia, opioids and sepsis, because these can mimic structural lesions. Structural causes need urgent imaging.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-coma-brain-death-fig1.webp",
-    "alt": "Diagram showing the ARAS pathway from brainstem reticular formation to thalamus and cortex, crucial for consciousness.",
-    "caption": "ARAS: Basis of consciousness. Image: Xiao-Yang Zhang, Jian-Jun Wang, and Jing-Ning Zhu, CC BY 4.0, Wikimedia Commons.",
-    "ar": 1.6467
-   }
-  },
-  {
-   "tx": "The **Glasgow Coma Scale** scores eye opening, verbal response and motor response, giving a total from 3 to 15. Pupils are not part of the GCS. Motor response carries the most prognostic weight in severe head injury. Assess after resuscitation, because hypoxia and hypotension depress scores independently. Use NT for untestable components rather than guessing a value.",
-   "say": "The Glasgow Coma Scale scores eye opening, verbal response and motor response, giving a total from 3 to 15. Pupils are not part of the scale. Motor response carries the most prognostic weight in severe head injury. Assess after resuscitation, because hypoxia and hypotension depress scores independently. Use NT for untestable components rather than guessing a value.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Motor component",
-     "Score",
-     "Response"
-    ],
-    "rows": [
-     [
-      "Obeys commands",
-      "6",
-      "Follows instructions"
-     ],
-     [
-      "Localises pain",
-      "5",
-      "Purposeful reach to stimulus"
-     ],
-     [
-      "Withdraws",
-      "4",
-      "Limb pulls away from pain"
-     ],
-     [
-      "Flexion",
-      "3",
-      "Decorticate posturing"
-     ],
-     [
-      "Extension",
-      "2",
-      "Decerebrate posturing"
-     ],
-     [
-      "No response",
-      "1",
-      "Flaccid, no movement"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Decorticate** posturing means arms flexed and legs extended, pointing to a lesion above the red nucleus with preserved brainstem function. **Decerebrate** posturing means arms extended, adducted and pronated, with legs extended, indicating a lesion at or below the red nucleus. Posturing from brainstem damage is generally a poor sign, though variable or intermittent posturing suggests a less severe injury.",
-   "say": "Decorticate posturing means arms flexed and legs extended, pointing to a lesion above the red nucleus. Decerebrate posturing means arms extended, adducted and pronated, with legs extended, indicating a lesion at or below the red nucleus. Variable or intermittent posturing suggests a less severe injury.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Decorticate",
-     "points": [
-      "Arms flexed",
-      "Legs extended",
-      "Lesion above red nucleus",
-      "Rubrospinal drive preserved"
-     ]
+  "v": 1,
+  "module": "sne-coma-brain-death",
+  "subject": "ss-neurology",
+  "title": "Coma, Encephalopathy and Brain Death Determination",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Coma** represents a profound state of unarousable, sustained unresponsiveness in which a patient exhibits complete absence of awareness and purposeful behavioural interaction with the surrounding environment. Neuroanatomically, maintaining normal wakefulness and alertness requires an intact, functioning **reticular activating system** located within the rostral brainstem tegmentum projecting diffusely to bilateral cerebral hemispheres. Structural brainstem destruction or widespread bilateral cerebral cortical failure represents the physiological substrate of comatose states.",
+      "say": "Coma is defined as a profound state of unarousable unresponsiveness lacking purposeful behavioural responses to internal or external stimuli. Normal wakefulness relies upon the ascending reticular activating system within the brainstem projecting diffusely to both cerebral hemispheres. Coma arises from structural lesions damaging the rostral brainstem tegmentum or extensive bilateral hemispheric dysfunction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sne-coma-brain-death-fig1.webp",
+        "alt": "Ascending reticular activating system projection pathways from brainstem to cerebral cortex.",
+        "caption": "Ascending reticular activating system: ascending tegmental projections sustaining consciousness",
+        "ar": 1.7778
+      }
     },
-    "right": {
-     "title": "Decerebrate",
-     "points": [
-      "Arms extended and pronated",
-      "Legs extended",
-      "Lesion at or below red nucleus",
-      "Vestibulospinal drive unopposed"
-     ]
+    {
+      "tx": "Standardized clinical bedside evaluation of acute conscious impairment employs structured behavioral scoring systems. The **Glasgow Coma Scale** objectively quantifies **impairment of consciousness** by evaluating Eye (**1-4**), Verbal (**1-5**), and Motor (**1-6**) responses, yielding scores ranging from 3 to 15. An aggregate score of 8 or lower formally designates severe coma requiring emergency endotracheal airway protection to prevent aspiration.",
+      "say": "The Glasgow Coma Scale provides an objective bedside assessment of consciousness impairment. It quantifies eye opening from one to four, verbal response from one to five, and motor response from one to six. Total scores range from three to fifteen, with scores of eight or less defining severe coma.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-cns-gcs.webp",
+        "alt": "Clinical Glasgow Coma Scale evaluation reference chart.",
+        "caption": "Glasgow Coma Scale: bedside evaluation of eye, verbal, and motor responses",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Stereotyped posturing patterns furnish critical neuroanatomical localization in deeply comatose patients. **Decorticate posturing** manifests with rigid flexion and adduction of the upper extremities alongside extension and internal rotation of the lower limbs. This stereotypic posture indicates severe bilateral cortical or diencephalic injury occurring above the level of the midbrain, with anatomical preservation of the **red nucleus** and rubrospinal tracts producing disinhibited upper limb flexion.",
+      "say": "Decorticate posturing indicates severe structural or metabolic dysfunction above the midbrain with anatomic preservation of the red nucleus. Patients have rigid flexion of the upper limbs and extension of the lower limbs. Disinhibited rubrospinal tract activity drives upper extremity flexion while corticospinal interruption produces lower limb extensor posturing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Decorticate Posturing (Flexor)",
+          "points": [
+            "Upper limb flexion and adduction with lower limb extension",
+            "Lesion level above midbrain (cortex or diencephalon)",
+            "Red nucleus and rubrospinal tract functionally preserved"
+          ]
+        },
+        "right": {
+          "title": "Decerebrate Posturing (Extensor)",
+          "points": [
+            "Upper limb extension and pronation with lower limb extension",
+            "Lesion level between red nucleus and vestibular nuclei",
+            "Unchecked vestibulospinal excitation carries poorer prognosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Caudal progression of brainstem compression produces severe extensor motor patterns. **Decerebrate posturing** exhibits rigid extension, adduction, and pronation of the arms accompanied by rigid **extensor posturing** of both legs with plantar flexion. This posturing pattern reflects destructive lesions affecting the midbrain and upper pons below the red nucleus, allowing unchecked excitatory output from intact lateral vestibulospinal tracts to dominate motor pathways, portending a worse prognosis.",
+      "say": "Decerebrate posturing reflects damage situated between the red nucleus in the midbrain and the vestibular nuclei in the lower pons. Patients present with rigid extension, adduction, and pronation of the upper extremities alongside lower limb extension. Unchecked activity from lateral vestibulospinal pathways drives this extensor posture and portends worse clinical outcomes.",
+      "vis": null
+    },
+    {
+      "tx": "Preconditions for **brain death** determination require establishing an irreversible proximate cause while ruling out confounders. Core body **temperature** must be maintained above 36 degrees Celsius, and systolic blood pressure maintained above 100 mmHg. Clinicians must meticulously exclude central nervous system depressant medications, therapeutic neuromuscular blockade, and severe uncorrected metabolic disturbances before testing.",
+      "say": "Pupillary light responses serve as an indispensable localizing sign in acute coma evaluations. An expanding uncal mass directly compresses the third cranial nerve, producing an ipsilateral fixed dilated pupil. Bilateral pinpoint reactive pupils indicate pontine hemorrhage or opioid toxicity, whereas bilateral fixed dilated pupils denote irreversible midbrain damage or brain death.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pupil Presentation",
+          "Anatomical Localization",
+          "Common Etiologies"
+        ],
+        "rows": [
+          [
+            "Unilateral fixed dilated pupil",
+            "Third nerve compression against tentorium",
+            "Uncal herniation, posterior communicating aneurysm"
+          ],
+          [
+            "Bilateral pinpoint reactive pupils",
+            "Central sympathetic tract disruption",
+            "Pontine tegmental hemorrhage, opioid overdose"
+          ],
+          [
+            "Bilateral fixed mid-position pupils",
+            "Midbrain tegmental destruction",
+            "Central transtentorial herniation, severe anoxia"
+          ],
+          [
+            "Bilateral fixed widely dilated pupils",
+            "Severe midbrain ischemia or uncal herniation",
+            "Terminal brainstem failure, anticholinergic toxicity"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Comprehensive clinical testing confirms the complete absence of all **brainstem reflexes**. Testing verifies absent pupillary light responses, absent corneal reflexes, absent oculocephalic doll-eye reflexes, absent **oculovestibular** cold calorics, and absent gag and cough reflexes. The formal apnea test provides physiological confirmation of absent medullary respiratory drive.",
+      "say": "Determining brain death requires proving irreversible cessation of all cerebral and brainstem activity. Before initiating testing, clinicians must confirm an irreversible etiology and exclude confounding factors. Core temperature must exceed thirty six degrees Celsius, systolic pressure must exceed one hundred millimeters of mercury, and all sedative drugs or paralytics must be fully cleared.",
+      "vis": null
+    },
+    {
+      "tx": "**Apnea testing** confirms brain death when pre-oxygenated patients demonstrate absent spontaneous breathing effort despite arterial **PaCO2** rising to 60 mmHg or greater (or at least 20 mmHg above baseline) alongside an arterial pH below **7.28**. If profound hypotension or cardiac arrhythmia develops during testing, the patient must be immediately reconnected to mechanical ventilation.",
+      "say": "Apnea testing confirms brain death when pre oxygenated patients show absent spontaneous breathing despite arterial carbon dioxide rising to sixty millimeters of mercury or higher with an arterial pH below seven point two eight. If hemodynamic instability emerges, mechanical ventilation must be resumed immediately.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Establish Prerequisites (Temp >36\u00b0C, MAP >65)"
+          },
+          {
+            "id": "b",
+            "label": "Document Absent Brainstem Reflexes"
+          },
+          {
+            "id": "c",
+            "label": "Apnea Test: PaCO2 >= 60 mmHg"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Clear sedatives"
+          ],
+          [
+            "b",
+            "c",
+            "Absence of breathing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ancillary confirmatory tests are indicated when apnea evaluation cannot be completed safely. Validated diagnostic modalities include four-vessel **cerebral angiography** demonstrating complete absence of intracranial arterial filling, and **transcranial Doppler** ultrasonography showing reverberating flow or systolic spikes. Radionuclide brain scintigraphy demonstrating the empty skull sign provides definitive corroboration.",
+      "say": "Ancillary confirmatory tests for brain death are indicated when clinical apnea testing cannot be completed. Four vessel cerebral angiography and transcranial Doppler ultrasound provide proof of intracranial circulatory arrest. Radionuclide perfusion imaging showing absent tracer uptake provides definitive corroboration.",
+      "vis": null
     }
-   }
-  },
-  {
-   "tx": "Central transtentorial herniation progresses through stages, moving from diencephalon to midbrain to pons to medulla. Decerebrate posturing marks midbrain and upper pons involvement. Absent **oculocephalic reflex** in a comatose patient suggests brainstem dysfunction. The **cold caloric test** is an alternative, where ice water in the ear produces slow conjugate eye deviation towards the stimulated side in an intact brainstem.",
-   "say": "Central transtentorial herniation progresses through stages. Decerebrate posturing marks midbrain and upper pons involvement. Absent oculocephalic reflex in a comatose patient suggests brainstem dysfunction. The cold caloric test is an alternative, where ice water in the ear produces slow conjugate eye deviation towards the stimulated side in an intact brainstem.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Diencephalon"
-     },
-     {
-      "id": "b",
-      "label": "Midbrain"
-     },
-     {
-      "id": "c",
-      "label": "Upper pons"
-     },
-     {
-      "id": "d",
-      "label": "Medulla"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Brain death requires coma with absent brainstem reflexes and a positive **apnoea test**, after excluding confounders such as sedatives, hypothermia and metabolic derangement. In India, certification follows the THOA guidelines, requiring two examinations by separate certifying doctors with an interval as specified. Spinal reflexes and posturing can persist after brain death, so they do not disprove the diagnosis.",
-   "say": "Brain death requires coma with absent brainstem reflexes and a positive apnoea test, after excluding confounders such as sedatives, hypothermia and metabolic derangement. In India, certification follows the THOA guidelines, requiring two examinations by separate certifying doctors. Spinal reflexes can persist after brain death, so they do not disprove the diagnosis.",
-   "vis": null
-  },
-  {
-   "tx": "Disorders of consciousness differ in awareness. A **persistent vegetative state** shows wakefulness without awareness, with sleep-wake cycles preserved. A **minimally conscious state** shows inconsistent but reproducible signs of awareness. Coma shows neither wakefulness nor awareness. Prognosis depends on the cause, duration, and early motor scores, and a motor score below 4 at one day after severe injury predicts very poor functional outcome.",
-   "say": "Disorders of consciousness differ in awareness. A persistent vegetative state shows wakefulness without awareness. A minimally conscious state shows inconsistent but reproducible signs of awareness. Coma shows neither. A motor score below 4 at one day after severe injury predicts very poor functional outcome.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "State",
-     "Wakefulness",
-     "Awareness"
-    ],
-    "rows": [
-     [
-      "Coma",
-      "Absent",
-      "Absent"
-     ],
-     [
-      "Vegetative state",
-      "Present",
-      "Absent"
-     ],
-     [
-      "Minimally conscious",
-      "Present",
-      "Fluctuating"
-     ]
-    ]
-   }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 17",
+    "AAN Brain Death Guidelines",
+    "Harrison 22e Ch. 317"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_21871241bc95",
-  "q_9357dadbf0ed",
-  "q_062cacc522fb"
- ],
- "src": [],
- "refs": [
-  "Advanced Trauma Life Support Student Course Manual (American College of Surgeons)",
-  "Guidelines for Certification of Brain Stem Death (Indian Government THOA guidelines)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 32
- }
 }

@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "sgi-lower-small-bowel-bleeding",
+ "subject": "ss-gastroenterology",
+ "title": "Lower GI and small bowel bleeding",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **Oakland score** is the decision tool for acute **lower GI bleeding**. A score of **8** or lower marks a low-risk patient who can be investigated as an outpatient and discharged, provided the bleeding has settled and the haemoglobin is safe. A higher score keeps the patient in hospital for the next bleed. It does not choose the cause. It only sorts who is safe to leave.",
+   "say": "The Oakland score sorts acute lower GI bleeding. A score of 8 or lower, once bleeding has settled, supports discharge and outpatient tests. A higher score keeps the patient in hospital. The score does not name the lesion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Acute lower GI bleeding"
+     },
+     {
+      "id": "n2",
+      "label": "Oakland score"
+     },
+     {
+      "id": "n3",
+      "label": "8 or lower: outpatient path"
+     },
+     {
+      "id": "n4",
+      "label": "Higher score: stay for rebleed risk"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diverticular bleeding** is the common cause of sudden large **lower GI bleeding**, about **30% to 50%** of massive cases. The vessel is an **arterial rupture** at the neck or the dome of a diverticulum, where the vasa recta are exposed. It stops on its own in **75% to 80%**. The drawing shows the outpouching and the vessel. Painless haematochezia in an older adult is the story. Do not assume diverticulitis, which is pain and inflammation, not brisk blood.",
+   "say": "Diverticular bleeding causes about 30 to 50 percent of massive lower GI bleeding. An arterial rupture at the neck or dome of a diverticulum is the source. It is self-limited in 75 to 80 percent. Pain and fever mean diverticulitis, which is a different illness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diverticular-disease-fig1.webp",
+    "alt": "Colonic mucosa herniating through muscle beside a penetrating vessel.",
+    "caption": "Pseudodiverticulum and the vessel that can rupture. StewardMD original."
+   }
+  },
+  {
+   "tx": "**CT angiography** is the first test when lower GI bleeding is unstable. It finds **active arterial extravasation** down to about **0.3** mL per minute. A positive blush maps the vessel for the radiologist. A negative scan does not forbid a later colonoscopy once the patient is stable. Do not send an unstable patient to a bowel prep as the first move.",
+   "say": "In unstable lower GI bleeding, CT angiography comes first and can show active arterial extravasation at about 0.3 millilitres per minute. A blush guides embolisation, and colonoscopy waits until the patient is stable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Unstable lower GI bleed"
+     },
+     {
+      "id": "n2",
+      "label": "CT angiography"
+     },
+     {
+      "id": "n3",
+      "label": "Extravasation: embolise"
+     },
+     {
+      "id": "n4",
+      "label": "No blush and now stable: colonoscopy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When the CT shows a blush, **arterial embolisation** is superselective. **Microcoils**, or a liquid embolic, close the bleeding branch and spare the rest of the bowel. Infarction of bowel is uncommon, under **5%**, when the catheter is truly selective. Surgery is the backup if embolisation is not possible or the patient becomes peritonitic. Do not embolise a vessel you have not seen bleeding.",
+   "say": "Superselective arterial embolisation uses microcoils or a liquid agent on the bleeding branch. Bowel infarction stays under 5 percent when the catheter is selective. Operate if embolisation fails or the abdomen becomes peritonitic.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Next move"
+    ],
+    "rows": [
+     [
+      "CT blush, unstable",
+      "Arterial embolisation with microcoils"
+     ],
+     [
+      "Infarction risk",
+      "Under 5% if superselective"
+     ],
+     [
+      "No target, or peritonitis",
+      "Surgery, not a blind embolisation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Small bowel bleeding**, the old obscure bleed, is **5% to 10%** of GI haemorrhage. In patients over **40**, vascular **angioectasias** dominate. Under 40, think Crohn disease or a Meckel diverticulum. The caecal drawing shows the cherry-red ectatic capillaries that also explain colonic angiodysplasia and Heyde lesions. Capsule and deep enteroscopy come after a negative gastroscopy and colonoscopy, not before.",
+   "say": "Small bowel bleeding accounts for 5 to 10 percent of GI haemorrhage. Over 40 years, angioectasias lead. Under 40, Crohn disease and Meckel diverticulum lead. Look in the small bowel only after upper endoscopy and colonoscopy are negative.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/angiodysplasia-fig1.webp",
+    "alt": "Caecum with dilated mucosal capillaries and a cherry-red endoscopic lesion.",
+    "caption": "Angioectasia: ectatic mucosal vessels. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Video capsule endoscopy** is the first test aimed at the small bowel once gastroscopy and colonoscopy are negative. In active bleeding the diagnostic yield reaches about **60%**. The patient must be able to swallow or have the capsule placed, and a stricture is a reason to pause, because a capsule can lodge. A positive capsule then guides **device-assisted enteroscopy**. A negative capsule during active bleeding is more reassuring than a negative capsule weeks later.",
+   "say": "Video capsule endoscopy is the first small-bowel test after a negative gastroscopy and colonoscopy. Yield reaches about 60 percent when bleeding is active. A stricture is excluded first so the capsule cannot stick. A positive study leads to device-assisted enteroscopy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Negative gastroscopy and colonoscopy"
+     },
+     {
+      "id": "n2",
+      "label": "No obstructing stricture"
+     },
+     {
+      "id": "n3",
+      "label": "Video capsule endoscopy"
+     },
+     {
+      "id": "n4",
+      "label": "Positive: device-assisted enteroscopy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Device-assisted enteroscopy** uses a single balloon, a double balloon, or a motorised spiral to reach jejunum and ileum. Therapy is the point: **argon plasma coagulation** for an angioectasia, or a clip on a visible vessel. It is slower and more invasive than a capsule, so it follows the capsule unless the patient is too unstable to wait. Tattoo the lesion if surgery may be needed later.",
+   "say": "Device-assisted enteroscopy, with one balloon, two balloons or a spiral, reaches the jejunum and ileum for treatment. Argon plasma coagulation or a clip can stop the lesion. It usually follows a capsule, unless bleeding will not wait.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "Job"
+    ],
+    "rows": [
+     [
+      "Video capsule endoscopy",
+      "Find the lesion, yield about 60% if bleeding"
+     ],
+     [
+      "Device-assisted enteroscopy",
+      "Treat with argon plasma coagulation or a clip"
+     ],
+     [
+      "CT angiography",
+      "Unstable patient, active arterial extravasation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Heyde syndrome** is three things together: severe calcific aortic stenosis, **acquired von Willebrand syndrome**, and bleeding angioectasias. High shear cleaves the large von Willebrand multimers through **ADAMTS13**, so the number 13 is in the enzyme name. Platelets cannot stick well to the ectatic vessels. Valve replacement can fix the multimer loss. Do not keep cauterising the bowel and forget the aortic valve.",
+   "say": "Heyde syndrome joins severe aortic stenosis, acquired von Willebrand syndrome and bleeding angioectasias. Shear makes ADAMTS13 cut the large multimers. Replacing the valve can restore them. Do not treat only the bowel.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heyde syndrome",
+     "points": [
+      "Severe aortic stenosis.",
+      "Acquired von Willebrand syndrome via ADAMTS13.",
+      "Bleeding angioectasias."
+     ]
+    },
+    "right": {
+     "title": "Ordinary diverticular bleeding",
+     "points": [
+      "Arterial rupture at a diverticulum.",
+      "Often stops, 75% to 80%.",
+      "No aortic valve link."
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "ss-c-gi-bleeding-ground"
+ ],
+ "refs": [
+  "Sleisenger and Fordtran 11e, gastrointestinal bleeding",
+  "Oakland score for acute lower GI bleeding"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}

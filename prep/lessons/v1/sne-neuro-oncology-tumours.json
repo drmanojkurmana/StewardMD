@@ -1,0 +1,155 @@
+{
+  "v": 1,
+  "module": "sne-neuro-oncology-tumours",
+  "subject": "ss-neurology",
+  "title": "Brain Tumours and Neuro-Oncology",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The WHO CNS5 classification integrates histopathology and molecular alterations to define primary central nervous system neoplasms. **Glioblastoma**, **IDH-wildtype** is classified as WHO grade 4, representing the most common and aggressive primary malignant brain tumor in adults. In adult diffuse astrocytic gliomas lacking IDH **1/2** mutations, molecular criteria for glioblastoma include TERT promoter mutation, EGFR gene amplification, or combined chromosome +7/-10 copy number alterations.",
+      "say": "The updated WHO classification of central nervous system tumours establishes molecular criteria for defining diffuse gliomas. Glioblastoma is designated as an IDH wildtype grade four neoplasm. Even in histologically lower grade astrocytomas, detecting wildtype IDH one or two along with TERT promoter mutations, EGFR amplification, or combined chromosome seven and ten alterations establishes glioblastoma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/brain-tumour-fig1.webp",
+        "alt": "Brain tumour neuroimaging demonstrating vasogenic edema, mass effect, and ring enhancement.",
+        "caption": "Brain tumour mass effect, vasogenic edema, and ring-enhancement patterns",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Standard therapeutic management for newly diagnosed glioblastoma follows the **Stupp** protocol. Patients undergo maximal safe surgical resection followed by concurrent radiotherapy delivering **60 Gy in 30 fractions** alongside daily oral **temozolomide 75 mg/m2** for 6 weeks. Following a 4-week break, patients receive 6 maintenance cycles of adjuvant **temozolomide** administered at 150 to 200 mg/m2 daily for 5 days of each 28-day cycle, improving median overall survival.",
+      "say": "The standard of care for newly diagnosed glioblastoma is the Stupp protocol, initiated with maximal safe surgical resection. Patients undergo concurrent radiation therapy to sixty Gray alongside daily oral temozolomide for six weeks. This is followed by six maintenance cycles of adjuvant temozolomide, which significantly prolongs progression free and overall survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Phase",
+          "Modality & Dosing",
+          "Duration",
+          "Clinical Goal"
+        ],
+        "rows": [
+          [
+            "Surgical",
+            "Maximal safe resection / debulking",
+            "Day 1",
+            "Reduce tumor burden and obtain molecular tissue"
+          ],
+          [
+            "Concurrent",
+            "Radiotherapy 60 Gy (30 fractions) + Temozolomide 75 mg/m2",
+            "6 weeks",
+            "Radiosensitization and local cytoreduction"
+          ],
+          [
+            "Adjuvant",
+            "Temozolomide 150-200 mg/m2 (days 1-5 q28d)",
+            "6 cycles",
+            "Systemic eradication of residual tumor cells"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Epigenetic silencing of DNA repair enzymes serves as a critical predictive biomarker in glioblastoma. Hypermethylation of the **MGMT** (O-6-methylguanine-DNA methyltransferase) **promoter methylation** silences the enzyme responsible for repairing DNA alkylation lesions produced by temozolomide. Glioblastoma patients harboring MGMT promoter methylation exhibit heightened sensitivity to alkylating chemotherapy and experience significantly longer progression-free and overall survival.",
+      "say": "Epigenetic silencing of the MGMT gene promoter represents the primary molecular predictor of chemosensitivity in glioblastoma. The MGMT enzyme repairs DNA damage induced by alkylating agents. Silencing this repair mechanism through promoter methylation prevents resistance, conferring superior response to temozolomide chemotherapy and extending survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MGMT Methylated",
+          "points": [
+            "Epigenetic silencing of O-6-alkylguanine DNA repair enzyme",
+            "Heightened cytotoxicity from temozolomide alkylation",
+            "Significantly superior overall and progression-free survival"
+          ]
+        },
+        "right": {
+          "title": "MGMT Unmethylated",
+          "points": [
+            "Active MGMT enzyme rapidly repairs DNA cross-links",
+            "Relative resistance to alkylating chemotherapy",
+            "Shorter median survival with standard temozolomide"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oligodendrogliomas exhibit distinct histological and cytogenetic characteristics conferring superior chemosensitivity. A definitive diagnosis of **oligodendroglioma** requires both a heterozygous mutation in IDH1 or IDH2 and complete, unbalanced **codeletion** of chromosomal arms **1p and 19q** (1p/19q codeletion). Histopathology displays uniform round cells with perinuclear halos, termed fried-egg appearance. Oligodendrogliomas show durable therapeutic responses to procarbazine, lomustine, and vincristine (PCV) chemotherapy.",
+      "say": "Under WHO criteria, diagnosing an oligodendroglioma mandates identifying both an IDH mutation and complete codeletion of chromosomal arms one p and nineteen q. Histologically, tumor cells have uniform round nuclei with clear perinuclear halos. These tumors demonstrate exceptional chemosensitivity and favourable long term survival when treated with alkylating regimens.",
+      "vis": null
+    },
+    {
+      "tx": "Benign glial neoplasms of childhood predominantly affect posterior fossa structures. **Pilocytic astrocytoma** is a circumscribed WHO grade 1 glioma typically arising within the cerebellar hemispheres of children. Brain MRI reveals a cystic mass with an intensely enhancing mural nodule. Histopathology demonstrates biphasic architecture with compact fibrillary zones containing corkscrew-shaped **Rosenthal fibers** and microcystic zones with eosinophilic granular bodies. Complete surgical resection is curative.",
+      "say": "Pilocytic astrocytoma represents a benign grade one glioma characteristically arising in the cerebellum of children. Neuroimaging shows a well demarcated cystic mass containing an intensely enhancing mural nodule. Characteristic histopathological features are bipolar piloid astrocytic cells with eosinophilic corkscrew Rosenthal fibers. Surgical resection alone is curative in the vast majority of cases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cerebellar Cystic Mass with Mural Nodule"
+          },
+          {
+            "id": "b",
+            "label": "Bipolar Piloid Astrocytes + Rosenthal Fibers"
+          },
+          {
+            "id": "c",
+            "label": "Complete Surgical Resection (Curative)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Histological biopsy"
+          ],
+          [
+            "b",
+            "c",
+            "Total excision"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Medulloblastoma** is the most common malignant primary pediatric brain tumor, classified as a WHO grade 4 embryonal **small round blue cell** neoplasm arising in the cerebellar vermis. Consensus molecular classification stratifies medulloblastoma into four distinct subgroups: WNT-activated (best prognosis, over 95% survival), SHH-activated, Group 3 (worst prognosis, high metastatic dissemination), and Group 4. Treatment combines maximal safe resection with craniospinal irradiation and chemotherapy.",
+      "say": "Medulloblastoma is an aggressive grade four embryonal cerebellar tumour of childhood composed of densely packed small round blue cells. Consensus molecular profiling divides medulloblastoma into four subgroups: WNT, Sonic Hedgehog, Group three, and Group four. The WNT activated subgroup carries an excellent prognosis, whereas Group three tumors carry the highest propensity for leptomeningeal metastasis.",
+      "vis": null
+    },
+    {
+      "tx": "Extra-axial intracranial neoplasms arise from meningeal coverings. **Meningiomas** arise from meningothelial arachnoid cap cells, representing the most common benign intracranial tumor in adults. Contrast-enhanced MRI demonstrates a sharply demarcated, vividly and homogeneously enhancing dural-based mass with a classic **dural tail** sign. The majority are classified as benign WHO grade 1 neoplasms; however, atypical (grade 2) and anaplastic (grade 3) variants exhibit higher rates of local recurrence.",
+      "say": "Meningiomas arise from arachnoid cap cells and represent the most prevalent extra axial brain tumors in adult patients. Contrast enhanced magnetic resonance imaging reveals a sharply defined, dural based mass demonstrating vivid homogeneous enhancement and a characteristic dural tail. Most are slow growing grade one neoplasms successfully treated with surgical excision.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cns-tumours-types-and-grading-fig1.webp",
+        "alt": "Meningioma histopathology and dural-based extra-axial tumor architecture.",
+        "caption": "Meningioma histopathology: whorled arachnoid architecture and dural-based extra-axial tumors",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Cerebellopontine angle neoplasms characteristically present with audiovestibular dysfunction. **Vestibular schwannoma** (acoustic neuroma) is a benign WHO grade 1 nerve sheath tumor arising from the superior or inferior vestibular branch of the eighth cranial nerve within the **internal auditory canal**. Patients present with progressive asymmetric sensorineural hearing loss, unilateral tinnitus, and dysequilibrium. Histopathology features Antoni A cellular zones and Antoni B hypocellular microcystic tissue.",
+      "say": "Vestibular schwannoma arises from the Schwann cells of the vestibular nerve at the internal auditory canal. Patients characteristically present with progressive asymmetric sensorineural hearing loss, tinnitus, and balance disturbances. Contrast enhanced magnetic resonance imaging of the internal auditory canal confirms the lesion, demonstrating characteristic Antoni A and B tissue patterns on histology.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 30",
+    "Harrison 22e Ch. 86",
+    "WHO CNS5 Classification"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

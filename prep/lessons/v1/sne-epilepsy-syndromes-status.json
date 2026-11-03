@@ -1,0 +1,156 @@
+{
+  "v": 1,
+  "module": "sne-epilepsy-syndromes-status",
+  "subject": "ss-neurology",
+  "title": "Epilepsy Syndromes and Status Epilepticus",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Juvenile myoclonic epilepsy** responds well to broad-spectrum agents such as **valproate**, levetiracetam, and lamotrigine, but may be exacerbated by sodium-channel blockers like carbamazepine and phenytoin. It presents in adolescence with bilateral shock-like myoclonic jerks upon awakening, generalized tonic-clonic convulsions, and fast 4 to 6 Hz polyspike-and-wave discharges on EEG.",
+      "say": "Juvenile myoclonic epilepsy is an inherited generalized syndrome presenting in adolescence with shock like jerks upon awakening. It responds well to broad spectrum agents such as valproate and levetiracetam, but sodium channel blockers can paradoxically worsen myoclonic seizures.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-paed-cns-febrile_seizure.webp",
+        "alt": "Clinical illustration of seizure semiology, classification, and emergency recovery positioning.",
+        "caption": "Seizure classification, semiology patterns, and emergency airway positioning",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "**Valproate** is teratogenic with significant risks of **neural tube defects** (such as spina bifida) and long-term neurodevelopmental delay, and is contraindicated in women of childbearing potential unless no suitable alternative exists. Levetiracetam and lamotrigine serve as preferred first-line alternatives in adolescent and adult females requiring chronic treatment.",
+      "say": "Valproate is teratogenic with significant risks of neural tube defects and neurodevelopmental delay, rendering it contraindicated in women of childbearing potential. Levetiracetam and lamotrigine serve as preferred alternatives in women requiring maintenance antiseizure therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Efficacious First-line Agents",
+          "points": [
+            "Valproate (gold standard efficacy across all seizure types)",
+            "Levetiracetam (preferred in women of childbearing age)",
+            "Lamotrigine and topiramate (broad-spectrum efficacy)"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated Drugs",
+          "points": [
+            "Carbamazepine and oxcarbazepine (exacerbate myoclonus)",
+            "Phenytoin (provokes severe myoclonic worsening)",
+            "Vigabatrin and tiagabine (induce absence status epilepticus)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Dravet syndrome** (severe myoclonic epilepsy of infancy) is caused by loss-of-function mutations in **SCN1A** encoding the voltage-gated sodium channel alpha subunit. Infants present with prolonged, febrile hemiclonic convulsions evolving into polymorphic seizures and cognitive decline. Sodium channel blockers like carbamazepine and lamotrigine are strictly contraindicated because they exacerbate seizures.",
+      "say": "Dravet syndrome is a severe developmental epileptic encephalopathy caused by loss of function mutations in the SCN1A sodium channel gene. Infants present with prolonged febrile convulsions and developmental arrest. Sodium channel blockers are strictly contraindicated because they worsen seizure frequency.",
+      "vis": null
+    },
+    {
+      "tx": "Mesial temporal lobe epilepsy with **hippocampal sclerosis** is the most common refractory focal epilepsy syndrome in adults, characterized clinically by an **epigastric aura**, psychic sensations, and automotor semeiologies. Cranial MRI demonstrates unilateral hippocampal atrophy with FLAIR hyperintensity. Anterior temporal lobectomy provides long-term seizure freedom in up to 70% of refractory cases.",
+      "say": "Mesial temporal lobe epilepsy with hippocampal sclerosis is the most common refractory focal epilepsy syndrome in adults. Patients typically describe an epigastric aura followed by focal impaired awareness and automotor behaviors. Anterior temporal lobectomy provides long term seizure freedom in up to seventy percent of cases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Mesial Temporal Epilepsy",
+          "Extratemporal (Frontal) Epilepsy"
+        ],
+        "rows": [
+          [
+            "Aura",
+            "Epigastric rising sensation, d\u00e9j\u00e0 vu, fear",
+            "Sensory, motor, or brief psychic sensation"
+          ],
+          [
+            "Semiology",
+            "Oroalimentary and manual automatisms",
+            "Hypermotor thrashing, brief nocturnal attacks"
+          ],
+          [
+            "MRI Finding",
+            "Hippocampal sclerosis and atrophy",
+            "Focal cortical dysplasia, cavernoma, or normal"
+          ],
+          [
+            "Surgical Cure",
+            "70-80% seizure freedom after lobectomy",
+            "Variable, depends on complete lesionectomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Status epilepticus** is defined by updated **ILAE** criteria at operational time point **T1** (5 minutes for convulsive status) when emergency treatment must be initiated, and time point **T2** (30 minutes) when neuronal injury accelerates. Rapid intervention blunts systemic metabolic acidosis, severe hyperthermia, rhabdomyolysis, and permanent hippocampal neuronal loss.",
+      "say": "Status epilepticus is defined by the International League Against Epilepsy at operational time point T1 at five minutes when treatment begins, and time point T2 at thirty minutes when neuronal injury accelerates. Rapid pharmacological intervention reduces systemic acidosis, hyperthermia, and permanent hippocampal damage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "0-5 min: Emergency assessment"
+          },
+          {
+            "id": "b",
+            "label": "5 min (t1): First-line benzodiazepine"
+          },
+          {
+            "id": "c",
+            "label": "30 min (t2): Permanent neuronal damage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Seizure persistence"
+          ],
+          [
+            "b",
+            "c",
+            "Refractory progression"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line therapy for convulsive status epilepticus is intravenous **lorazepam** (0.1 mg/kg, maximum 4 mg) or intramuscular **midazolam** (10 mg for patients over 40 kg), which must be administered promptly within the first 5 to 10 minutes. If seizures continue after 5 to 10 minutes, the dose may be repeated once before initiating second-line intravenous infusions.",
+      "say": "First line therapy for convulsive status epilepticus is intravenous lorazepam zero point one milligrams per kilogram or intramuscular midazolam ten milligrams. These rapid acting benzodiazepines must be administered promptly within the first five to ten minutes of persistent seizure activity.",
+      "vis": null
+    },
+    {
+      "tx": "Second-line intravenous antiepileptic drugs for established status epilepticus include **levetiracetam** (60 mg/kg, max 4500 mg), fosphenytoin (20 mg PE/kg), or sodium valproate (40 mg/kg). The landmark **ESETT** trial demonstrated equivalent therapeutic efficacy and safety among levetiracetam, fosphenytoin, and valproate for terminating status epilepticus unresponsive to benzodiazepines.",
+      "say": "Second line intravenous therapy for established status epilepticus includes levetiracetam at sixty milligrams per kilogram, fosphenytoin, or sodium valproate. The landmark ESETT trial demonstrated equivalent clinical efficacy and safety among these three intravenous medications.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-phenobarbitone.webp",
+        "alt": "Antiseizure pharmacology showing GABAergic hyperpolarization and receptor mechanisms.",
+        "caption": "GABA-A receptor pharmacology and antiseizure mechanisms in status epilepticus",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "**Refractory status epilepticus** is defined as persistence of seizures despite adequate doses of a benzodiazepine and a second-line antiepileptic drug. Treatment requires immediate tracheal intubation, intensive care admission, and continuous intravenous anesthetic infusions such as **propofol**, midazolam, or ketamine, titrated to achieve electroencephalographic burst suppression for 24 to 48 hours.",
+      "say": "Refractory status epilepticus is defined as persistence of seizures despite adequate doses of a benzodiazepine and a second line antiepileptic drug. Management requires immediate tracheal intubation and continuous intravenous anesthetic infusions such as propofol titrated to achieve electroencephalographic burst suppression.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 16",
+    "Harrison 22e Ch. 437",
+    "ILAE Status Epilepticus Guidelines"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

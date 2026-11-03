@@ -1,0 +1,198 @@
+{
+ "v": 1,
+ "module": "snp-calcium-phosphate-magnesium",
+ "title": "Disorders of calcium, phosphate and magnesium",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Emergency management of severe **hypercalcemia** exceeding **14** mg/dL (or **3.5** mmol/L) demands immediate intravascular resuscitation using **0.9%** **isotonic saline** at **200** to **300** mL/h to restore glomerular filtration and enhance calciuresis. Once volume replete, intravenous bisphosphonates such as **zoledronic acid** at a dose of **4** mg or the monoclonal RANK-ligand inhibitor **denosumab** provide sustained suppression of osteoclastic resorption.",
+   "say": "Emergency management of severe hypercalcemia exceeding 14 mg/dL or 3.5 mmol/L demands immediate intravascular resuscitation using 0.9% isotonic saline at 200 to 300 mL/h to restore glomerular filtration and enhance calciuresis. Once volume replete, intravenous bisphosphonates such as zoledronic acid at a dose of 4 mg or the monoclonal RANK-ligand inhibitor denosumab provide sustained suppression of osteoclastic resorption.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe hypercalcemia > 14 mg/dL"
+     },
+     {
+      "id": "b",
+      "label": "0.9% saline volume resuscitation"
+     },
+     {
+      "id": "c",
+      "label": "Zoledronic acid 4 mg or denosumab"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Osteocyte-derived **FGF23** binds its obligate co-receptor alpha-**Klotho** in the proximal convoluted tubule to downregulate apical **NaPi-2a** and NaPi-2c sodium-phosphate cotransporters, inducing robust **phosphaturia**. Concurrently, FGF23 suppresses renal **1**-alpha-hydroxylase (**23** and **2**) while upregulating 24-hydroxylase, diminishing circulating 1,25-dihydroxyvitamin D synthesis to protect against systemic phosphate overload.",
+   "say": "Osteocyte-derived FGF23 binds its obligate co-receptor alpha-Klotho in the proximal convoluted tubule to downregulate apical NaPi-2a and NaPi-2c sodium-phosphate cotransporters, inducing robust phosphaturia. Concurrently, FGF23 suppresses renal 1-alpha-hydroxylase while upregulating 24-hydroxylase, diminishing circulating 1,25-dihydroxyvitamin D synthesis to protect against systemic phosphate overload.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "FGF23 and Klotho Signalling",
+     "points": [
+      "Downregulates apical NaPi-2a cotransporters",
+      "Promotes proximal tubular phosphaturia",
+      "Suppresses 1-alpha-hydroxylase enzyme",
+      "Prevents vascular calcification cascade"
+     ]
+    },
+    "right": {
+     "title": "Parathyroid Hormone Actions",
+     "points": [
+      "Promotes proximal tubular phosphaturia",
+      "Stimulates 1-alpha-hydroxylase synthesis",
+      "Enhances distal tubular calcium reabsorption",
+      "Stimulates osteoclastic bone resorption"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe **hypophosphatemia** dropping below **1.0** mg/dL (or **0.3** mmol/L) during **refeeding syndrome** impairs cellular glycolysis and causes catastrophic depletion of intracellular **ATP** and 2,3-diphosphoglycerate. Clinical decompensation manifests acutely as diaphragmatic respiratory failure, acute **rhabdomyolysis**, tissue hypoxia, red blood cell hemolysis, and refractory cardiogenic shock requiring prompt parenteral phosphate replenishment.",
+   "say": "Severe hypophosphatemia dropping below 1.0 mg/dL or 0.3 mmol/L during refeeding syndrome impairs cellular glycolysis and causes catastrophic depletion of intracellular ATP and 2,3-diphosphoglycerate. Clinical decompensation manifests acutely as diaphragmatic respiratory failure, acute rhabdomyolysis, tissue hypoxia, red blood cell hemolysis, and refractory cardiogenic shock requiring prompt parenteral phosphate replenishment.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-staghorn-calculus.webp",
+    "alt": "Staghorn calculus: triple phosphate mineralization",
+    "caption": "Phosphate mineralization and struvite staghorn calculus pathology (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Profound **Hyperphosphatemia** developing in acute kidney injury or massive **tumor lysis syndrome** complexes rapidly with circulating ionized calcium, provoking metastatic extraosseous mineral precipitation. When the **calcium-phosphate product** exceeds **55** mg2/dL2, widespread microvascular occlusion, ocular calcification, acute nephrocalcinosis, and fatal conduction disturbances ensue, necessitating emergent non-calcium phosphate binders or dialysis.",
+   "say": "Profound Hyperphosphatemia developing in acute kidney injury or massive tumor lysis syndrome complexes rapidly with circulating ionized calcium, provoking metastatic extraosseous mineral precipitation. When the calcium-phosphate product exceeds 55 mg2/dL2, widespread microvascular occlusion, ocular calcification, acute nephrocalcinosis, and fatal conduction disturbances ensue, necessitating emergent non-calcium phosphate binders or dialysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Metastatic Calcification Risk",
+     "points": [
+      "Calcium-phosphate product > 55 mg2/dL2",
+      "Tumor lysis syndrome precipitation",
+      "Acute nephrocalcinosis and tubulopathy",
+      "Visceral and vascular calciphylaxis"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Interventions",
+     "points": [
+      "Strict dietary phosphate restriction",
+      "Non-calcium binders (sevelamer carbonate)",
+      "Vigorous volume expansion with saline",
+      "Prompt hemodialysis for refractory cases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe **Hypomagnesemia** directly blunts **parathyroid hormone** exocytosis from parathyroid chief cells while simultaneously inducing target organ end-organ resistance to circulating PTH. This dual defect generates profound, treatment-resistant hypocalcemia and **refractory hypokalemia** driven by uninhibited renal ROMK potassium secretion, abnormalities that prove utterly refractory to therapy until underlying magnesium deficits are fully repleted.",
+   "say": "Severe Hypomagnesemia directly blunts parathyroid hormone exocytosis from parathyroid chief cells while simultaneously inducing target organ end-organ resistance to circulating PTH. This dual defect generates profound, treatment-resistant hypocalcemia and refractory hypokalemia driven by uninhibited renal ROMK potassium secretion, abnormalities that prove utterly refractory to therapy until underlying magnesium deficits are fully repleted.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-magnesium-sulphate.webp",
+    "alt": "Magnesium physiology and membrane stabilization",
+    "caption": "Parenteral magnesium replacement and cellular membrane stabilization (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Prolonged therapy with a **proton pump inhibitor** frequently induces insidious hypomagnesemia by disrupting active intestinal magnesium absorption mediated by the apical channel **TRPM6**. Neutralization of luminal acidity within the small intestine impairs the gating and expression of transient receptor potential melastatin 6 (**TRPM6**), reducing transcellular uptake and precipitating secondary tetany or cardiac arrhythmias.",
+   "say": "Prolonged therapy with a proton pump inhibitor frequently induces insidious hypomagnesemia by disrupting active intestinal magnesium absorption mediated by the apical channel TRPM6. Neutralization of luminal acidity within the small intestine impairs the gating and expression of transient receptor potential melastatin 6, reducing transcellular uptake and precipitating secondary tetany or cardiac arrhythmias.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PPI-Induced Hypomagnesemia",
+     "points": [
+      "Downregulated apical TRPM6 channels",
+      "Impaired active intestinal absorption",
+      "Appropriate renal conservation (low FEMg)",
+      "Resolves following PPI cessation"
+     ]
+    },
+    "right": {
+     "title": "Renal Magnesium Wasting",
+     "points": [
+      "Loop or thiazide diuretic therapy",
+      "Inappropriate renal loss (high FEMg)",
+      "Disrupted paracellular reabsorption",
+      "Persistent urinary magnesium excretion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The hereditary tubulopathy **FHHNC** is an autosomal recessive disorder caused by inactivating mutations in the tight junction proteins **claudin-16** or **claudin-19**. Defective tight junction formation in the thick ascending limb disrupts the lumen-positive electrical gradient required for paracellular divalent cation reabsorption, precipitating profound hypercalciuria, nephrocalcinosis, ocular defects, and progressive renal insufficiency.",
+   "say": "The hereditary tubulopathy FHHNC is an autosomal recessive disorder caused by inactivating mutations in the tight junction proteins claudin-16 or claudin-19. Defective tight junction formation in the thick ascending limb disrupts the lumen-positive electrical gradient required for paracellular divalent cation reabsorption, precipitating profound hypercalciuria, nephrocalcinosis, ocular defects, and progressive renal insufficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Claudin-16 or claudin-19 mutation",
+      "Loss of lumen-positive voltage",
+      "Severe nephrocalcinosis and renal failure"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "paracellin-1"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Calculating the **Fractional excretion of magnesium** (**FEMg**) cleanly distinguishes inappropriate renal tubular loss from extrarenal gastrointestinal wasting in patients with hypomagnesemia. In the presence of hypomagnesemia, an elevated FEMg exceeding **4%** (or a **24** hour urine magnesium excretion greater than **24** mg) demonstrates pathologic renal wasting driven by tubular toxins or tubulopathies.",
+   "say": "Calculating the Fractional excretion of magnesium cleanly distinguishes inappropriate renal tubular loss from extrarenal gastrointestinal wasting in patients with hypomagnesemia. In the presence of hypomagnesemia, an elevated FEMg exceeding 4% demonstrates pathologic renal wasting driven by tubular toxins or tubulopathies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Metric",
+     "Renal Magnesium Wasting",
+     "Gastrointestinal Wasting"
+    ],
+    "rows": [
+     [
+      "Fractional excretion (FEMg)",
+      "> 4% in hypomagnesemia",
+      "< 2% demonstrating conservation"
+     ],
+     [
+      "24-hour urine magnesium",
+      "> 24 mg per day",
+      "< 12 to 24 mg per day"
+     ],
+     [
+      "Typical clinical causes",
+      "Diuretics, aminoglycosides, FHHNC",
+      "Malabsorption, chronic diarrhea, PPI use"
+     ],
+     [
+      "tubular wasting",
+      "Associated with tubular wasting",
+      "Associated with tubular wasting"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 10-12",
+  "Harrison Principles of Internal Medicine 22e Ch. 313",
+  "Brenner and Rector The Kidney 11e Ch. 18"
+ ]
+}

@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "module": "sne-headache-cranial-neuralgias",
+ "title": "Headache disorders and cranial neuralgias",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The International Classification of Headache Disorders establishes rigorous diagnostic standards. Under **ICHD-3** criteria, **Migraine** requires at least 5 attacks lasting 4 to 72 hours with unilateral pulsating quality, moderate to severe intensity, aggravation by routine physical activity, and accompanied by nausea or vomiting, or both photophobia and phonophobia.",
+   "say": "The International Classification of Headache Disorders establishes rigorous diagnostic standards. Under ICHD-3 criteria, Migraine requires at least 5 attacks lasting 4 to 72 hours with unilateral pulsating quality, moderate to severe intensity, aggravation by routine physical activity, and accompanied by nausea or vomiting, or both photophobia and phonophobia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/migraine-fig1.webp",
+    "alt": "Diagram illustrating cortical spreading depression and trigeminovascular pain pathways in migraine.",
+    "caption": "Cortical spreading depression and trigeminovascular activation in migraine (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Targeted receptor pharmacotherapy revolutionized acute migraine treatment. Novel small-molecule **Calcitonin gene-related peptide** receptor antagonists including rimegepant and ubrogepant, alongside the selective 5-HT1F receptor agonist **lasmiditan**, provide effective acute pain relief without inducing coronary or peripheral vasoconstriction, offering safe options for patients with vascular disease.",
+   "say": "Targeted receptor pharmacotherapy revolutionized acute migraine treatment. Novel small-molecule Calcitonin gene-related peptide receptor antagonists including rimegepant and ubrogepant, alongside the selective 5-HT1F receptor agonist lasmiditan, provide effective acute pain relief without inducing coronary or peripheral vasoconstriction, offering safe options for patients with vascular disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medication Class",
+     "Key Agents",
+     "Mechanism of Action",
+     "Cardiovascular Safety"
+    ],
+    "rows": [
+     [
+      "Gepants (CGRP blockers)",
+      "Rimegepant, Ubrogepant",
+      "Block CGRP receptor activation",
+      "No vasoconstriction, safe in CAD"
+     ],
+     [
+      "Ditans (5-HT1F agonists)",
+      "Lasmiditan",
+      "Inhibit trigeminal neurogenic firing",
+      "No 5-HT1B vasoconstriction, causes sedation"
+     ],
+     [
+      "Triptans (5-HT1B/1D)",
+      "Sumatriptan, Zolmitriptan",
+      "Direct vascular and neural constriction",
+      "Contraindicated in ischaemic heart disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trigeminal autonomic cephalalgias produce devastating unilateral cranial autonomic agony. **Cluster headache** is the prototypical **trigeminal autonomic cephalalgia**, characterized by strictly unilateral, severe periorbital or temporal pain lasting 15 to 180 minutes, associated with ipsilateral conjunctival injection, lacrimation, rhinorrhoea, and motor restlessness.",
+   "say": "Trigeminal autonomic cephalalgias produce devastating unilateral cranial autonomic agony. Cluster headache is the prototypical trigeminal autonomic cephalalgia, characterized by strictly unilateral, severe periorbital or temporal pain lasting 15 to 180 minutes, associated with ipsilateral conjunctival injection, lacrimation, rhinorrhoea, and motor restlessness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cluster Attack Features",
+     "points": [
+      "Strictly unilateral orbital and temporal pain",
+      "Duration 15 to 180 minutes untreated",
+      "Cadence 1 to 8 attacks daily during bouts",
+      "Marked physical pacing and restlessness"
+     ]
+    },
+    "right": {
+     "title": "Cranial Autonomic Signs",
+     "points": [
+      "Ipsilateral conjunctival injection and tears",
+      "Ipsilateral nasal congestion and rhinorrhoea",
+      "Eyelid oedema and partial Horner ptosis",
+      "Forehead and facial hyperhidrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute abortive and preventive interventions follow precise evidence-based guidelines. Acute cluster bouts respond rapidly to inhalation of 100% **oxygen** administered at 12 to 15 L/min via non-rebreather face mask, alongside subcutaneous **sumatriptan** at 6 mg, while oral verapamil serves as the first-line preventive pharmacological therapy.",
+   "say": "Acute abortive and preventive interventions follow precise evidence-based guidelines. Acute cluster bouts respond rapidly to inhalation of 100% oxygen administered at 12 to 15 L/min via non-rebreather face mask, alongside subcutaneous sumatriptan at 6 mg, while oral verapamil serves as the first-line preventive pharmacological therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute Cluster Paroxysm"
+     },
+     {
+      "id": "b",
+      "label": "100% High-Flow Oxygen"
+     },
+     {
+      "id": "c",
+      "label": "Subcutaneous Sumatriptan"
+     },
+     {
+      "id": "d",
+      "label": "Oral Verapamil Prophylaxis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "first-line abortive"
+     ],
+     [
+      "a",
+      "c",
+      "rapid vasoconstriction"
+     ],
+     [
+      "c",
+      "d",
+      "bout prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lancinating paroxysmal unilateral facial agony points to cranial root microvascular conflict. Classical **Trigeminal neuralgia** presents with excruciating electric shock-like paroxysms within V2 or V3 sensory divisions provoked by light touch, most frequently caused by mechanical neurovascular compression by the **superior cerebellar artery** at the root entry zone.",
+   "say": "Lancinating paroxysmal unilateral facial agony points to cranial root microvascular conflict. Classical Trigeminal neuralgia presents with excruciating electric shock-like paroxysms within V2 or V3 sensory divisions provoked by light touch, most frequently caused by mechanical neurovascular compression by the superior cerebellar artery at the root entry zone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/trigeminal-neuralgia-bell-s-palsy-fig1.webp",
+    "alt": "Diagram illustrating trigeminal root compression by superior cerebellar artery loop.",
+    "caption": "Trigeminal root entry zone neurovascular compression by arterial loop (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Medical and surgical strategies offer definitive control for trigeminal neuralgia. First-line pharmacotherapy utilizes sodium channel stabilization with **Carbamazepine** at 200 to 1200 mg daily or **oxcarbazepine**, while refractory cases with documented arterial loops benefit from open surgical microvascular decompression, known as the Jannetta procedure.",
+   "say": "Medical and surgical strategies offer definitive control for trigeminal neuralgia. First-line pharmacotherapy utilizes sodium channel stabilization with Carbamazepine at 200 to 1200 mg daily or oxcarbazepine, while refractory cases with documented arterial loops benefit from open surgical microvascular decompression, known as the Jannetta procedure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical Management",
+     "points": [
+      "Carbamazepine 200-1200 mg daily first-line",
+      "Oxcarbazepine preferred for better tolerability",
+      "Monitors sodium levels for hyponatraemia",
+      "Blocks voltage-gated sodium channels"
+     ]
+    },
+    "right": {
+     "title": "Surgical Decompression",
+     "points": [
+      "Microvascular decompression (Jannetta)",
+      "Teflon felt sponge interposition",
+      "Spares cranial sensory nerve function",
+      "Highest long-term pain-free cure rate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Disordered CSF resorption precipitates benign intracranial hypertension. Idiopathic **intracranial hypertension** typically affects overweight women of childbearing age, characterized by headaches, pulsatile tinnitus, transient visual obscurations, florid **papilledema**, sixth nerve palsies, and lumbar opening pressures exceeding 25 cmH2O on diagnostic spinal tap.",
+   "say": "Disordered CSF resorption precipitates benign intracranial hypertension. Idiopathic intracranial hypertension typically affects overweight women of childbearing age, characterized by headaches, pulsatile tinnitus, transient visual obscurations, florid papilledema, sixth nerve palsies, and lumbar opening pressures exceeding 25 cmH2O on diagnostic spinal tap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Domain",
+     "Modified Dandy Criterion",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Symptoms and Signs",
+      "Headache, papilloedema, CN VI palsy",
+      "Raised ICP without focal cortical signs"
+     ],
+     [
+      "Lumbar Puncture",
+      "Opening pressure > 25 cmH2O",
+      "Documented intracranial hypertension"
+     ],
+     [
+      "CSF Composition",
+      "Normal biochemistry and cytology",
+      "Excludes chronic meningeal inflammation"
+     ],
+     [
+      "Neuroimaging",
+      "Empty sella, flattened posterior sclera",
+      "Excludes hydrocephalus and mass lesions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cerebrospinal fluid leakage induces compensatory intracranial volume shifts. Spontaneous intracranial hypotension presents with posture-dependent **orthostatic headache** that worsens within 15 minutes of upright posture and resolves rapidly upon lying flat, displaying diffuse, non-nodular pachymeningeal enhancement and caudal brain sagging on contrast-enhanced **pachymeningeal enhancement** on brain MRI.",
+   "say": "Cerebrospinal fluid leakage induces compensatory intracranial volume shifts. Spontaneous intracranial hypotension presents with posture-dependent orthostatic headache that worsens within 15 minutes of upright posture and resolves rapidly upon lying flat, displaying diffuse, non-nodular pachymeningeal enhancement and caudal brain sagging on contrast-enhanced pachymeningeal enhancement on brain MRI.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Spinal Dural Tear"
+     },
+     {
+      "id": "b",
+      "label": "Persistent CSF Leakage"
+     },
+     {
+      "id": "c",
+      "label": "Venous Hyperaemia"
+     },
+     {
+      "id": "d",
+      "label": "Orthostatic Headache"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "CSF hypovolaemia"
+     ],
+     [
+      "b",
+      "c",
+      "Monro-Kellie compensation"
+     ],
+     [
+      "c",
+      "d",
+      "dural traction pain"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Adams and Victor Principles of Neurology 11e Ch. 10",
+  "Netter Neurology 2e Ch. 10"
+ ]
+}

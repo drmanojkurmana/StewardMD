@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "srd-cardiac-vascular",
+ "title": "Cardiac CT and MRI, aorta and great vessels",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Delayed gadolinium imaging provides non-invasive differentiation of ischaemic and non-ischaemic myocardiopathies. **Late gadolinium enhancement** in ischaemic cardiomyopathy demonstrates a subendocardial or transmural distribution conforming to a specific **coronary vascular territory**, contrasting with mid-wall enhancement in dilated cardiomyopathy and subepicardial enhancement in myocarditis.",
+   "say": "Delayed gadolinium imaging provides non-invasive differentiation of ischaemic and non-ischaemic myocardiopathies. Late gadolinium enhancement in ischaemic cardiomyopathy demonstrates a subendocardial or transmural distribution conforming to a specific coronary vascular territory, contrasting with mid-wall enhancement in dilated cardiomyopathy and subepicardial enhancement in myocarditis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acs-fig1.webp",
+    "alt": "Cross-sectional illustration showing atheromatous plaque rupture with occlusive coronary thrombus and myocardial infarction.",
+    "caption": "Ischaemic injury: coronary occlusion resulting in subendocardial to transmural necrosis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Cross-sectional evaluation of hypertrophic cardiomyopathy clarifies regional wall thickening and sudden death markers. **Hypertrophic cardiomyopathy** typically demonstrates asymmetric septal hypertrophy with a maximal end-diastolic wall thickness exceeding 15 mm (or septal-to-posterior wall ratio > 1.3), with late gadolinium enhancement characteristically localized to the **junction of the interventricular septum** and right ventricular free wall insertion points.",
+   "say": "Cross-sectional evaluation of hypertrophic cardiomyopathy clarifies regional wall thickening and sudden death markers. Hypertrophic cardiomyopathy typically demonstrates asymmetric septal hypertrophy with a maximal end-diastolic wall thickness exceeding 15 mm or septal-to-posterior wall ratio above 1.3, with late gadolinium enhancement characteristically localized to the junction of the interventricular septum and right ventricular free wall insertion points.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Criterion",
+     "Threshold Value",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Maximal wall thickness",
+      "Over 15 mm (or 13 mm familial)",
+      "Diagnostic of hypertrophic cardiomyopathy"
+     ],
+     [
+      "Septal-to-posterior ratio",
+      "Greater than 1.3",
+      "Asymmetric septal hypertrophy sign"
+     ],
+     [
+      "Right ventricular hinge LGE",
+      "Focal fibrotic enhancement",
+      "Mechanical stress / sudden death marker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coronary computed tomography angiography establishes accurate anatomical and functional coronary artery profiling. Coronary artery calcification on non-contrast CT is quantified using the Agatston score, where a **calcium score** of 0 carries a very low 5-year cardiovascular event risk (< 1%), whereas scores greater than **400** indicate extensive plaque burden and high risk of obstructive CAD.",
+   "say": "Coronary computed tomography angiography establishes accurate anatomical and functional coronary artery profiling. Coronary artery calcification on non-contrast CT is quantified using the Agatston score, where a calcium score of 0 carries a very low 5-year cardiovascular event risk under 1 percent, whereas scores greater than 400 indicate extensive plaque burden and high risk of obstructive CAD.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agatston Score",
+     "Plaque Burden",
+     "Cardiovascular Event Risk"
+    ],
+    "rows": [
+     [
+      "0",
+      "No identifiable calcification",
+      "Very low (< 1% 5-year risk)"
+     ],
+     [
+      "1 to 99",
+      "Mild calcified plaque",
+      "Low risk of obstructive events"
+     ],
+     [
+      "100 to 399",
+      "Moderate calcification",
+      "Moderate risk / intensive statin therapy"
+     ],
+     [
+      "400 and above",
+      "Extensive plaque burden",
+      "High risk of obstructive CAD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency aortic conditions require rapid cross-sectional separation for surgical planning. **Acute aortic dissection** classification separates Stanford type A (involving the ascending aorta, requiring urgent surgical repair) from **Stanford type B** (originating distal to the left subclavian artery, managed medically or with endovascular repair unless complicated by malperfusion).",
+   "say": "Emergency aortic conditions require rapid cross-sectional separation for surgical planning. Acute aortic dissection classification separates Stanford type A involving the ascending aorta, requiring urgent surgical repair from Stanford type B originating distal to the left subclavian artery, managed medically or with endovascular repair unless complicated by malperfusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stanford Type A",
+     "points": [
+      "Involves ascending aorta (+/- arch)",
+      "Emergency open surgical graft repair",
+      "High mortality from aortic rupture",
+      "Complications: haemopericardium, tamponade"
+     ]
+    },
+    "right": {
+     "title": "Stanford Type B",
+     "points": [
+      "Originates distal to left subclavian",
+      "Primary medical anti-impulse therapy",
+      "TEVAR for refractory pain or malperfusion",
+      "Spares the ascending aortic root"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Advanced contrast CT differentiates true lumen from false lumen in aortic emergencies. In aortic dissection, the **false lumen** is distinguished on CT angiography by the **beak sign** (acute angle between dissection flap and outer wall), cobweb sign (slender intraluminal filiform flaps), larger cross-sectional calibre, and slower, delayed contrast enhancement compared to the true lumen.",
+   "say": "Advanced contrast CT differentiates true lumen from false lumen in aortic emergencies. In aortic dissection, the false lumen is distinguished on CT angiography by the beak sign acute angle between dissection flap and outer wall, cobweb sign slender intraluminal filiform flaps, larger cross-sectional calibre, and slower, delayed contrast enhancement compared to the true lumen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ad1",
+      "label": "Intimal tear"
+     },
+     {
+      "id": "ad2",
+      "label": "Pressurized false lumen"
+     },
+     {
+      "id": "ad3",
+      "label": "Beak & cobweb signs"
+     },
+     {
+      "id": "ad4",
+      "label": "Delayed contrast filling"
+     }
+    ],
+    "edges": [
+     [
+      "ad1",
+      "ad2",
+      "blood entry"
+     ],
+     [
+      "ad2",
+      "ad3",
+      "cross-sectional signs"
+     ],
+     [
+      "ad3",
+      "ad4",
+      "slow flow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aortic wall emergencies encompass non-dissecting acute vascular pathologies. **Intramural haematoma** (IMH) is characterized by a crescentic hyperdense thickening of the aortic wall on unenhanced CT without an intimal flap, whereas **penetrating atherosclerotic ulcer** (PAU) demonstrates focal outpouching of contrast beyond the calcified aortic intima.",
+   "say": "Aortic wall emergencies encompass non-dissecting acute vascular pathologies. Intramural haematoma is characterized by a crescentic hyperdense thickening of the aortic wall on unenhanced CT without an intimal flap, whereas penetrating atherosclerotic ulcer demonstrates focal outpouching of contrast beyond the calcified aortic intima.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aaa-fig1.webp",
+    "alt": "Anatomical medical illustration showing ruptured abdominal aortic aneurysm with retroperitoneal hematoma and intramural thrombus.",
+    "caption": "Aortic wall pathology: intramural haematoma and mural disruption (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Long-term monitoring of abdominal aortic ectasia establishes critical intervention thresholds. **Abdominal aortic aneurysm** repair is indicated when maximum diameter reaches 5.5 cm in men (or 5.0 cm in women) or with **rapid expansion** exceeding 1.0 cm per year (or 0.5 cm in 6 months), with CT angiography evaluating infrarenal neck length (> 15 mm) for endovascular aneurysm repair (EVAR).",
+   "say": "Long-term monitoring of abdominal aortic ectasia establishes critical intervention thresholds. Abdominal aortic aneurysm repair is indicated when maximum diameter reaches 5 point 5 centimetres in men or 5 point 0 centimetres in women, or with rapid expansion exceeding 1 point 0 centimetre per year or 0 point 5 centimetre in 6 months, with CT angiography evaluating infrarenal neck length over 15 mm for endovascular aneurysm repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Threshold Metric",
+     "Surgical / EVAR Value",
+     "Clinical Directive"
+    ],
+    "rows": [
+     [
+      "Male diameter limit",
+      "5.5 cm",
+      "Elective repair threshold"
+     ],
+     [
+      "Female diameter limit",
+      "5.0 cm",
+      "Higher rupture risk at smaller size"
+     ],
+     [
+      "Annual growth rate",
+      "Over 1.0 cm per year",
+      "Rapid expansion; urgent intervention"
+     ],
+     [
+      "Infrarenal neck length",
+      "At least 15 mm",
+      "Suitable proximal landing zone for EVAR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital aortic arch narrowing produces specific thoracic vascular signatures. **Aortic coarctation** characteristically occurs at the aortic isthmus near the ligamentum arteriosum, producing the figure-of-3 sign on chest radiograph and **inferior rib notching** of the 3rd to 8th ribs due to dilated intercostal collateral arteries, sparing the 1st and 2nd ribs.",
+   "say": "Congenital aortic arch narrowing produces specific thoracic vascular signatures. Aortic coarctation characteristically occurs at the aortic isthmus near the ligamentum arteriosum, producing the figure-of-3 sign on chest radiograph and inferior rib notching of the 3rd to 8th ribs due to dilated intercostal collateral arteries, sparing the 1st and 2nd ribs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aortic Coarctation",
+     "points": [
+      "Stenosis at aortic isthmus",
+      "Figure-of-3 aortic contour sign",
+      "Inferior rib notching 3rd to 8th ribs",
+      "Sparing of 1st and 2nd ribs"
+     ]
+    },
+    "right": {
+     "title": "Pseudocoarctation",
+     "points": [
+      "Elongation and kinking of arch",
+      "Lacks hemodynamic pressure gradient",
+      "Absence of rib notching collaterals",
+      "Normal femoral arterial pulses"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_rad_cv_01",
+  "q_rad_cv_02",
+  "q_rad_cv_03"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Cardiac and Vascular (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11)"
+ ]
+}
