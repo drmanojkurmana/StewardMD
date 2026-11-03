@@ -1890,6 +1890,12 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 }
 
 
+/* iPad: .pn-body spans the screen; its children are centred by gutters on the scroller. */
+@media (min-width: 700px) {
+  .pn-root .pn-body { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .pn-root .pn-body > * { max-width: none; margin-left: 0; margin-right: 0; }
+}
+
 /* ---- Why option chips (free stored explanation) ---- */
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-why-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
@@ -2004,4 +2010,3 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pn-why-chip { transition: none; }
 }
-

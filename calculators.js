@@ -8485,6 +8485,7 @@
       ".mc-title{flex:1;text-align:center;font:800 16px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".mc-count{font-size:11px;background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:8px;padding:1px 7px;vertical-align:middle;font-weight:800}",
       ".mc-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:1100px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(48px + env(safe-area-inset-bottom))}",
+      "@media(min-width:700px){.mc-body{max-width:none;margin:0;width:auto;padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 1100px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 1100px)/2))}}",
       ".mc-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:11px;padding:11px 14px;font:500 14px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#1a1a1a);margin-bottom:11px}",
       ".mc-search:focus{outline:none;border-color:var(--teal,#0a9396)}",
       /* ONE swipeable row, not eleven stacked ones. There are 22 categories; wrapping them filled

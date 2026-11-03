@@ -271,6 +271,11 @@ html[data-appearance] #sbrefOverlay #sbrefBody .kblib-searchbox { --kl-sticky: v
 #sbrefOverlay:has(.kblib-discover) .sbref-shell, #sbrefOverlay:has(.kblib-tool-page) .sbref-shell { max-width: none; }
 #sbrefOverlay:has(.kblib-discover) .sbref-top, #sbrefOverlay:has(.kblib-tool-page) .sbref-top { padding-inline: max(18px, calc((100% - 800px) / 2)); }
 #sbrefOverlay #sbrefBody:has(.kblib-discover), #sbrefOverlay #sbrefBody.kblib-tool-page { max-width: 840px; min-width: 0; }
+/* iPad: #sbrefBody is the scroller, so it spans the screen (scrollbar at the edge); the column is centred by gutters. */
+@media (min-width: 700px) {
+  #sbrefOverlay #sbrefBody:has(.kblib-discover), #sbrefOverlay #sbrefBody.kblib-tool-page { max-width: none; min-width: 0; margin: 0; width: auto; padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  #sbrefOverlay:has(.kblib-discover) .sbref-top, #sbrefOverlay:has(.kblib-tool-page) .sbref-top { padding-inline: max(18px, calc((100% - 960px) / 2)); }
+}
 .kbp-searching .kbp-status-note { display: none; }
 
 /* Visual Decision Support sections in Knowledge Library Reader (.dx-reader) */
