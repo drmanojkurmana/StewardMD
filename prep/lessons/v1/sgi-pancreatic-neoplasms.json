@@ -1,0 +1,251 @@
+{
+  "v": 1,
+  "module": "sgi-pancreatic-neoplasms",
+  "subject": "ss-gastroenterology",
+  "title": "Pancreatic Cancer and Cystic Neoplasms",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Pancreatic ductal adenocarcinoma** accounts for over **90%** of all pancreatic malignancies, characterized by dense desmoplasia and early vascular invasion. Its molecular pathogenesis is initiated by activating **KRAS mutations** in codon 12, present in over **90%** of tumors. This is followed by sequential inactivating mutations in major tumor suppressor genes: CDKN2A/p**16** in over 90%, TP**53** in 70%, and SMAD**4**/DPC4 in 55%, driving progression from microscopic PanIN lesions to metastatic cancer.",
+      "say": "Pancreatic ductal adenocarcinoma accounts for over 90 percent of all pancreatic malignancies, characterized by dense desmoplasia and early vascular invasion. Its molecular pathogenesis is initiated by activating KRAS mutations in codon 12, present in over 90 percent of tumors. This is followed by sequential inactivating mutations in major tumor suppressor genes: CDKN2A/p16 in over 90 percent, TP53 in 70 percent, and SMAD4/DPC4 in 55 percent, driving progression from microscopic PanIN lesions to metastatic cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Activating KRAS mutation (> 90% in PanIN-1)"
+          },
+          {
+            "id": "b",
+            "label": "CDKN2A / p16 inactivation (PanIN-2)"
+          },
+          {
+            "id": "c",
+            "label": "TP53 and SMAD4 / DPC4 loss (PanIN-3)"
+          },
+          {
+            "id": "d",
+            "label": "Invasive pancreatic ductal adenocarcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "epithelial atypia"
+          ],
+          [
+            "b",
+            "c",
+            "severe architectural dysplasia"
+          ],
+          [
+            "c",
+            "d",
+            "stromal invasion and desmoplasia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Carbohydrate antigen **CA 19-9** is the primary validated serum biomarker for pancreatic ductal adenocarcinoma, widely utilized to assess therapeutic response and detect post-resection recurrence. However, CA 19-9 is a sialylated **Lewis blood group** antigen (sialyl Lewis-a). Approximately **5%** to **10%** of the general population are homozygous for the null Lewis phenotype (Le a-b-) due to inactivating mutations in the fucosyltransferase enzyme FUT**3**, rendering CA 19-9 synthesis biochemically impossible.",
+      "say": "Carbohydrate antigen CA 19-9 is the primary validated serum biomarker for pancreatic ductal adenocarcinoma, widely utilized to assess therapeutic response and detect post-resection recurrence. However, CA 19-9 is a sialylated Lewis blood group antigen, sialyl Lewis-a. Approximately 5 to 10 percent of the general population are homozygous for the null Lewis phenotype due to inactivating mutations in the fucosyltransferase enzyme FUT3, rendering CA 19-9 synthesis biochemically impossible.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "CA 19-9 Behavior",
+          "Diagnostic Interpretation"
+        ],
+        "rows": [
+          [
+            "Lewis negative (Le a-b-)",
+            "Undetectable (< 2 U/mL) despite large tumor",
+            "Falsely negative; alternative markers needed"
+          ],
+          [
+            "Obstructive jaundice / cholangitis",
+            "Markedly elevated (> 1000 U/mL)",
+            "Falsely elevated; recheck after biliary drainage"
+          ],
+          [
+            "Post-resection monitoring",
+            "Normalizes post-op, then rises",
+            "Indicates early local or distant recurrence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Intraductal papillary mucinous neoplasms** are mucin-producing cystic tumors that communicate directly with the pancreatic ductal system. Under the revised international **Fukuoka guidelines**, surgical resection is strongly indicated when high-risk stigmata are present. High-risk stigmata comprise clinical obstructive jaundice in a patient with a cystic lesion of the pancreatic head, an enhancing solid mural nodule measuring at least **5** mm, or a main pancreatic duct diameter of at least **10** mm.",
+      "say": "Intraductal papillary mucinous neoplasms, or IPMN, are mucin-producing cystic tumors that communicate directly with the pancreatic ductal system. Under the revised international Fukuoka guidelines, surgical resection is strongly indicated when high-risk stigmata are present. High-risk stigmata comprise clinical obstructive jaundice in a patient with a cystic lesion of the pancreatic head, an enhancing solid mural nodule measuring at least 5 mm, or a main pancreatic duct diameter of at least 10 mm.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ipmn-fig1.webp",
+        "alt": "Cutaway of the pancreas showing a dilated main duct, branch duct cysts, papillary projections, and mucin extruding from the ampulla.",
+        "caption": "Intraductal papillary mucinous neoplasm communicating with the pancreatic duct, with mucin at the ampulla. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Mucinous cystic neoplasms** occur almost exclusively in middle-aged perimenopausal women, located predominantly in the pancreatic body or tail (**90%** of cases). They do not communicate with the pancreatic ductal system. Pathognomonic histopathological confirmation requires identifying dense, cellular subepithelial **ovarian-type stroma** staining positive for estrogen and progesterone receptors. Cyst fluid aspiration characteristically demonstrates thick viscous mucin with markedly elevated CEA exceeding **192** ng/mL.",
+      "say": "Mucinous cystic neoplasms occur almost exclusively in middle-aged perimenopausal women, located predominantly in the pancreatic body or tail in 90 percent of cases. They do not communicate with the pancreatic ductal system. Pathognomonic histopathological confirmation requires identifying dense, cellular subepithelial ovarian-type stroma staining positive for estrogen and progesterone receptors. Cyst fluid aspiration characteristically demonstrates thick viscous mucin with markedly elevated CEA exceeding 192 ng/mL.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Mucinous Cystic Neoplasm (MCN)",
+          "Serous Cystadenoma (SCA)"
+        ],
+        "rows": [
+          [
+            "Demographics",
+            "Perimenopausal women (95%)",
+            "Females (60% to 70%), elderly"
+          ],
+          [
+            "Anatomical Location",
+            "Body and tail of pancreas (> 90%)",
+            "Diffuse or pancreatic head/body"
+          ],
+          [
+            "Cyst Fluid CEA",
+            "Markedly elevated (> 192 ng/mL)",
+            "Low (< 5 ng/mL)"
+          ],
+          [
+            "Pathognomonic Histology",
+            "Ovarian-type subepithelial stroma",
+            "Glycogen-rich cuboidal epithelium"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Serous cystadenomas** are entirely benign neoplasms that carry virtually no malignant potential. Cross-sectional imaging reveals a characteristic microcystic **honeycomb morphology** composed of myriad tiny cysts separated by thin fibrous septa, often coalescing around a central stellate calcified scar. Aspiration of thin, watery cyst fluid confirms an extremely low CEA level below **5** ng/mL and absent mucin. On biopsy, the cysts are lined by uniform, glycogen-rich cuboidal epithelial cells.",
+      "say": "Serous cystadenomas are entirely benign neoplasms that carry virtually no malignant potential. Cross-sectional imaging reveals a characteristic microcystic honeycomb morphology composed of myriad tiny cysts separated by thin fibrous septa, often coalescing around a central stellate calcified scar. Aspiration of thin, watery cyst fluid confirms an extremely low CEA level below 5 ng/mL and absent mucin. On biopsy, the cysts are lined by uniform, glycogen-rich cuboidal epithelial cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Microcystic honeycomb lesion with central stellate scar"
+          },
+          {
+            "id": "b",
+            "label": "EUS-FNA: thin, clear, non-viscous fluid"
+          },
+          {
+            "id": "c",
+            "label": "Cyst fluid analysis: CEA < 5 ng/mL and amylase low"
+          },
+          {
+            "id": "d",
+            "label": "Diagnosis: Benign Serous Cystadenoma (Conservative follow-up)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "typical cross-sectional CT/MRI"
+          ],
+          [
+            "b",
+            "c",
+            "fluid biomarker confirmation"
+          ],
+          [
+            "c",
+            "d",
+            "resection avoided unless symptomatic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Solid pseudopapillary neoplasm** is a distinctive low-grade malignant epithelial neoplasm occurring almost exclusively in young women in their second or third decade of life. Driven by activating mutations in the **beta-catenin** gene CTNNB**1**, tumors exhibit nuclear and cytoplasmic accumulation of beta-catenin with loss of membranous E-cadherin. Lesions are well-circumscribed mixed solid and cystic masses with areas of haemorrhage, and complete surgical resection is typically curative.",
+      "say": "Solid pseudopapillary neoplasm is a distinctive low-grade malignant epithelial neoplasm occurring almost exclusively in young women in their second or third decade of life. Driven by activating mutations in the beta-catenin gene CTNNB1, tumors exhibit nuclear and cytoplasmic accumulation of beta-catenin with loss of membranous E-cadherin. Lesions are well-circumscribed mixed solid and cystic masses with areas of haemorrhage, and complete surgical resection is typically curative.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Solid Pseudopapillary Neoplasm",
+          "points": [
+            "Demographic: Young women (mean age 25-30 years)",
+            "Genetics: Activating CTNNB1 (beta-catenin) mutations",
+            "Immunohistochemistry: Nuclear beta-catenin positive; CD10+",
+            "Prognosis: Excellent (> 95% 5-year survival with surgery)"
+          ]
+        },
+        "right": {
+          "title": "Pancreatic Ductal Adenocarcinoma",
+          "points": [
+            "Demographic: Elderly men and women (mean age 65-70)",
+            "Genetics: KRAS, TP53, CDKN2A, SMAD4 mutations",
+            "Immunohistochemistry: Membranous beta-catenin; CK19+",
+            "Prognosis: Poor (overall 5-year survival ~10%)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "About five to seven percent of pancreatic adenocarcinomas carry a germline BRCA**1** or BRCA**2** mutation, and homologous recombination repair then fails. In the phase III **POLO trial**, maintenance **olaparib** lengthened progression-free survival when metastatic pancreatic ductal adenocarcinoma had not grown on first-line platinum. The trial did not include neuroendocrine tumours or mutations found only in the tumour.",
+      "say": "About five to seven percent of pancreatic adenocarcinomas carry a germline BRCA1 or BRCA2 mutation, and homologous recombination repair then fails. In the phase III POLO trial, maintenance olaparib lengthened progression-free survival when metastatic pancreatic ductal adenocarcinoma had not grown on first-line platinum. The trial did not include neuroendocrine tumours or mutations found only in the tumour.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Germline BRCA1/2 mutation in pancreatic adenocarcinoma"
+          },
+          {
+            "id": "b",
+            "label": "First-line platinum chemotherapy, then no progression"
+          },
+          {
+            "id": "c",
+            "label": "Demonstrate disease stability without progression at 16 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Switch to maintenance PARP inhibitor Olaparib (POLO protocol)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "synthetic lethality vulnerability"
+          ],
+          [
+            "b",
+            "c",
+            "first-line disease control"
+          ],
+          [
+            "c",
+            "d",
+            "sustained progression-free survival benefit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Insulinoma** represents the most prevalent functioning pancreatic neuroendocrine tumor, characterized by autonomous insulin secretion that induces profound fasting neuroglycopenia. Diagnosis is suspected via **Whipple triad**: symptoms of hypoglycemia, documented plasma venous glucose below **55** mg/dL, and rapid symptom resolution following glucose administration. Confirmation requires a supervised **72**-hour inpatient fast demonstrating inappropriately elevated serum insulin, C-peptide, and proinsulin levels during hypoglycemia.",
+      "say": "Insulinoma represents the most prevalent functioning pancreatic neuroendocrine tumor, characterized by autonomous insulin secretion that induces profound fasting neuroglycopenia. Diagnosis is suspected via Whipple triad: symptoms of hypoglycemia, documented plasma venous glucose below 55 mg/dL, and rapid symptom resolution following glucose administration. Confirmation requires a supervised 72-hour inpatient fast demonstrating inappropriately elevated serum insulin, C-peptide, and proinsulin levels during hypoglycemia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/insulinoma-fig1.webp",
+        "alt": "Diagram of an insulinoma in the pancreas causing hypoglycaemia, neuroglycopenia, an adrenergic surge, and the Whipple triad, relieved by glucose.",
+        "caption": "Insulinoma: autonomous insulin secretion, the Whipple triad, and relief with glucose. Credit: StewardMD.",
+        "ar": 1.8349
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}
