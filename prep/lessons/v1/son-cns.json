@@ -1,172 +1,321 @@
 {
- "v": 1,
- "module": "son-cns",
- "subject": "ss-medical-oncology",
- "title": "Central nervous system tumours: key diagnostic and treatment points",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Diffuse gliomas are classified using **IDH status** first. IDH mutant tumours carry a better outlook than IDH wildtype tumours. The IDH mutation produces the oncometabolite 2-hydroxyglutarate, which can be detected on magnetic resonance spectroscopy. Under WHO CNS5, IDH wildtype diffuse astrocytic tumours with glioblastoma features are graded as glioblastoma even when histology looks lower grade.",
-   "say": "Diffuse gliomas are classified using IDH status first. IDH mutant tumours have a better outlook than IDH wildtype tumours. The IDH mutation produces the oncometabolite 2-hydroxyglutarate, which can be detected on magnetic resonance spectroscopy. Under WHO CNS5, IDH wildtype diffuse astrocytic tumours with glioblastoma features are graded as glioblastoma even when histology looks lower grade.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Diffuse glioma"
-     },
-     {
-      "id": "b",
-      "label": "IDH mutant"
-     },
-     {
-      "id": "c",
-      "label": "IDH wildtype"
-     },
-     {
-      "id": "d",
-      "label": "1p19q codeleted"
-     },
-     {
-      "id": "e",
-      "label": "Oligodendroglioma"
-     },
-     {
-      "id": "f",
-      "label": "Astrocytoma"
-     },
-     {
-      "id": "g",
-      "label": "Glioblastoma"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "a",
-      "c"
-     ],
-     [
-      "b",
-      "d"
-     ],
-     [
-      "b",
-      "f"
-     ],
-     [
-      "d",
-      "e"
-     ],
-     [
-      "c",
-      "g"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Oligodendroglioma is defined by an **IDH mutation** together with **1p/19q codeletion**. These tumours are often frontal and seizure-presenting, and they respond well to chemotherapy and radiotherapy. Vorasidenib, an IDH inhibitor, has shown benefit in the INDIGO trial for grade 2 IDH mutant gliomas, delaying progression. Subtotal debulking still helps seizure control and survival when complete resection is not possible.",
-   "say": "Oligodendroglioma is defined by an IDH mutation together with 1p/19q codeletion. These tumours are often frontal and present with seizures, and they respond well to chemotherapy and radiotherapy. Vorasidenib, an IDH inhibitor, has shown benefit in the INDIGO trial for grade 2 IDH mutant gliomas, delaying progression. Subtotal debulking still helps seizure control and survival when complete resection is not possible.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Oligodendroglioma",
-     "IDH mutant astrocytoma"
-    ],
-    "rows": [
-     [
-      "Molecular key",
-      "IDH mutant with 1p19q codeletion",
-      "IDH mutant, 1p19q intact"
-     ],
-     [
-      "Typical site",
-      "Frontal lobe",
-      "Frontal or temporal"
-     ],
-     [
-      "Prognosis",
-      "Better",
-      "Intermediate"
-     ],
-     [
-      "Imaging clue",
-      "Calcification",
-      "Diffuse infiltration"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "PCV is a three-drug chemotherapy combination used as an adjuvant option for anaplastic oligodendroglioma and 1p19q codeleted gliomas. Treatment usually runs for around six cycles, since **myelosuppression** accumulates over time, mainly causing low white cells and platelets. Clinicians should also recall that **radiation necrosis** is a late effect of cranial irradiation, so new enhancement after treatment may reflect injury rather than progression.",
-   "say": "PCV is a three-drug chemotherapy combination used as an adjuvant option for anaplastic oligodendroglioma and 1p19q codeleted gliomas. Treatment usually runs for around six cycles, since myelosuppression accumulates over time, mainly causing low white cells and platelets. Clinicians should also recall that radiation necrosis is a late effect of cranial irradiation, so new enhancement after treatment may reflect injury rather than progression.",
-   "vis": null
-  },
-  {
-   "tx": "**Medulloblastoma** is the most common malignant **posterior fossa tumour** in children and arises in the **cerebellum**. It often causes **raised intracranial pressure** and can seed through **cerebrospinal fluid**, so whole spine **MRI** is required at staging. Under **WHO CNS5**, it is classified by **molecular subgroup** (WNT, SHH, group 3 and group 4) rather than histology alone.",
-   "say": "Medulloblastoma is the most common malignant posterior fossa tumour in children and arises in the cerebellum. It often causes raised intracranial pressure and can seed through cerebrospinal fluid, so whole spine MRI is required at staging. Under WHO CNS5, it is classified by molecular subgroup, such as WNT, SHH, group 3 and group 4, rather than histology alone.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-cns-fig1.webp",
-    "alt": "Sagittal MRI of medulloblastoma in posterior fossa with hydrocephalus, alongside a diagram of its molecular subgroups (WNT, SHH, Group 3, Group 4).",
-    "caption": "Medulloblastoma: Posterior fossa tumour, CSF seeding, molecular subgroups",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Primary CNS lymphoma, mostly diffuse large B-cell type, is seen in immunocompetent and immunosuppressed patients. Steroids can kill lymphoma cells, so biopsy should be done before dexamethasone where possible. Brain metastases preferentially lodge at the **gray-white junction**, while meningiomas are dural-based with a dural tail and do not invade brain tissue.",
-   "say": "Primary CNS lymphoma, mostly diffuse large B-cell type, is seen in immunocompetent and immunosuppressed patients. Steroids can kill lymphoma cells, so biopsy should be done before dexamethasone where possible. Brain metastases preferentially lodge at the gray-white junction, while meningiomas are dural-based with a dural tail and do not invade brain tissue.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Meningioma",
-     "points": [
-      "Dural based",
-      "Dural tail",
-      "Does not invade brain",
-      "Small asymptomatic cases watched"
-     ]
+  "v": 1,
+  "module": "son-cns",
+  "subject": "ss-medical-oncology",
+  "title": "Central nervous system tumours: WHO classification, molecular diagnostics, maximal resection, chemoradiotherapy and recurrence therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The revised **WHO CNS5 classification** establishes that glioblastoma is molecularly defined by IDH-wildtype status in an infiltrative astrocytic glioma. Even in histologically lower-grade tumours lacking microvascular proliferation or necrosis, detecting TERT promoter mutations, EGFR gene amplification, or combined **chromosome 7 gain and 10 loss** is sufficient to definitively diagnose glioblastoma, WHO grade 4.",
+      "say": "The revised WHO CNS5 classification establishes that glioblastoma is molecularly defined by IDH-wildtype status in an infiltrative astrocytic glioma. Even in histologically lower-grade tumours lacking microvascular proliferation or necrosis, detecting TERT promoter mutations, EGFR gene amplification, or combined chromosome 7 gain and 10 loss is sufficient to definitively diagnose glioblastoma, WHO grade 4.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diff",
+            "label": "Diffuse Astrocytoma",
+            "level": 1
+          },
+          {
+            "id": "idh",
+            "label": "IDH-Wildtype Confirmed",
+            "level": 2
+          },
+          {
+            "id": "mol",
+            "label": "TERT / EGFR / +7/-10",
+            "level": 3
+          },
+          {
+            "id": "gbm",
+            "label": "Glioblastoma Grade 4",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "diff",
+            "idh"
+          ],
+          [
+            "idh",
+            "mol"
+          ],
+          [
+            "mol",
+            "gbm"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Brain metastasis",
-     "points": [
-      "Gray-white junction",
-      "Multiple lesions",
-      "Rim enhancement",
-      "Often from lung or breast"
-     ]
+    {
+      "tx": "Epigenetic hypermethylation of the **MGMT promoter** silences transcription of the DNA repair enzyme O6-methylguanine-DNA methyltransferase. Silencing MGMT prevents enzymatic removal of alkyl groups added by temozolomide, sensitizing tumour cells to cytotoxic replication arrest and apoptosis. In glioblastoma, MGMT promoter methylation serves as the strongest predictive biomarker for prolonged progression-free and overall survival following alkylating chemotherapy.",
+      "say": "Epigenetic hypermethylation of the MGMT promoter silences transcription of the DNA repair enzyme O6-methylguanine-DNA methyltransferase. Silencing MGMT prevents enzymatic removal of alkyl groups added by temozolomide, sensitizing tumour cells to cytotoxic replication arrest and apoptosis. In glioblastoma, MGMT promoter methylation serves as the strongest predictive biomarker for prolonged progression-free and overall survival following alkylating chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MGMT Methylated Promoter",
+          "points": [
+            "Epigenetic silencing of MGMT DNA repair enzyme",
+            "High sensitivity to temozolomide alkylation",
+            "Median overall survival: 22 to 26 months",
+            "Predicts marked survival benefit from adjuvant TMZ"
+          ]
+        },
+        "right": {
+          "title": "MGMT Unmethylated Promoter",
+          "points": [
+            "Active expression of MGMT repair protein",
+            "Rapid enzymatic removal of O6-methylguanine adducts",
+            "Median overall survival: 12 to 15 months",
+            "Limited therapeutic benefit from temozolomide"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The landmark **Stupp protocol** established the universal standard of care for newly diagnosed glioblastoma. Following maximal safe surgical resection, patients receive focal radiotherapy delivering 60 Gy in 30 fractions with concurrent daily **temozolomide** at 75 mg/m2 throughout radiation, followed by 6 cycles of adjuvant maintenance temozolomide at 150 to 200 mg/m2 daily for 5 days every 28 days.",
+      "say": "The landmark Stupp protocol established the universal standard of care for newly diagnosed glioblastoma. Following maximal safe surgical resection, patients receive focal radiotherapy delivering 60 Gy in 30 fractions with concurrent daily temozolomide at 75 mg/m2 throughout radiation, followed by 6 cycles of adjuvant maintenance temozolomide at 150 to 200 mg/m2 daily for 5 days every 28 days.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "surg",
+            "label": "Maximal Resection",
+            "level": 1
+          },
+          {
+            "id": "rt",
+            "label": "RT 60 Gy + Daily TMZ",
+            "level": 2
+          },
+          {
+            "id": "rest",
+            "label": "4-Week Recovery",
+            "level": 3
+          },
+          {
+            "id": "adj",
+            "label": "Adjuvant TMZ x 6 Cycles",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "surg",
+            "rt"
+          ],
+          [
+            "rt",
+            "rest"
+          ],
+          [
+            "rest",
+            "adj"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the randomized phase III **EF-14 trial**, adding **Tumour treating fields** TTFields to maintenance temozolomide significantly prolonged both progression-free survival and overall survival in glioblastoma. Delivering low-intensity, intermediate-frequency 200 kHz alternating electrical fields through non-invasive ceramic transducer arrays applied to the shaved scalp disrupts mitotic spindle microtubule assembly, arresting dividing glioma cells in metaphase.",
+      "say": "In the randomized phase III EF-14 trial, adding Tumour treating fields TTFields to maintenance temozolomide significantly prolonged both progression-free survival and overall survival in glioblastoma. Delivering low-intensity, intermediate-frequency 200 kHz alternating electrical fields through non-invasive ceramic transducer arrays applied to the shaved scalp disrupts mitotic spindle microtubule assembly, arresting dividing glioma cells in metaphase.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TTFields + Temozolomide",
+          "points": [
+            "EF-14 experimental combination arm",
+            "Median overall survival: 20.9 months",
+            "5-year overall survival rate: 13% vs 5%",
+            "Device worn at least 18 hours daily on scalp"
+          ]
+        },
+        "right": {
+          "title": "Temozolomide Alone",
+          "points": [
+            "Standard Stupp maintenance control",
+            "Median overall survival: 16.0 months",
+            "5-year overall survival rate: only 5%",
+            "Historical standard in adjuvant setting"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Adult diffuse **oligodendrogliomas** are strictly defined by co-occurrence of an IDH1 or IDH2 mutation and complete, unbalanced whole-arm **1p and 19q co-deletion**. This unique molecular profile confers marked chemosensitivity and favourable long-term prognosis. In RTOG 9402 and EORTC 26951, adding adjuvant **PCV chemotherapy** procarbazine, lomustine, and vincristine to radiotherapy dramatically doubled median overall survival beyond 14 years.",
+      "say": "Adult diffuse oligodendrogliomas are strictly defined by co-occurrence of an IDH1 or IDH2 mutation and complete, unbalanced whole-arm 1p and 19q co-deletion. This unique molecular profile confers marked chemosensitivity and favourable long-term prognosis. In RTOG 9402 and EORTC 26951, adding adjuvant PCV chemotherapy procarbazine, lomustine, and vincristine to radiotherapy dramatically doubled median overall survival beyond 14 years.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular Parameter",
+          "Oligodendroglioma",
+          "IDH-Mutant Astrocytoma"
+        ],
+        "rows": [
+          [
+            "IDH1 / IDH2 Status",
+            "Mutant (R132H predominant)",
+            "Mutant (R132H predominant)"
+          ],
+          [
+            "1p/19q Chromosome Status",
+            "Whole-arm co-deletion mandatory",
+            "Intact 1p and 19q chromosomes"
+          ],
+          [
+            "ATRX & TP53 Expression",
+            "Retained ATRX; wild-type TP53",
+            "Loss of nuclear ATRX; mutant p53"
+          ],
+          [
+            "Standard Chemotherapy",
+            "PCV regimen (dramatic OS gain)",
+            "Temozolomide or PCV chemotherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral dual mutant IDH1 and IDH2 inhibitor **Vorasidenib** was engineered specifically for high blood-brain barrier penetration. In the landmark phase III **INDIGO trial**, vorasidenib significantly prolonged progression-free survival and delayed time to next intervention in patients with residual or recurrent grade 2 IDH-mutant glioma. Vorasidenib establishes an effective targeted strategy that delays toxic radiation and chemotherapy in young adults.",
+      "say": "Oral dual mutant IDH1 and IDH2 inhibitor Vorasidenib was engineered specifically for high blood-brain barrier penetration. In the landmark phase III INDIGO trial, vorasidenib significantly prolonged progression-free survival and delayed time to next intervention in patients with residual or recurrent grade 2 IDH-mutant glioma. Vorasidenib establishes an effective targeted strategy that delays toxic radiation and chemotherapy in young adults.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "g2",
+            "label": "Grade 2 IDH-Mutant",
+            "level": 1
+          },
+          {
+            "id": "vora",
+            "label": "Vorasidenib 40 mg Daily",
+            "level": 2
+          },
+          {
+            "id": "d2hg",
+            "label": "Suppresses 2-HG Levels",
+            "level": 3
+          },
+          {
+            "id": "pfs",
+            "label": "PFS: 27.7 vs 11.1 Months",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "g2",
+            "vora"
+          ],
+          [
+            "vora",
+            "d2hg"
+          ],
+          [
+            "d2hg",
+            "pfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Medulloblastoma** is divided into 4 **molecular subgroups**: WNT associated with CTNNB1 mutations, SHH, Group 3 with MYC amplification, and Group 4. The WNT subgroup, defined by somatic CTNNB1 mutations or germline APC variants, carries an outstanding long-term prognosis with over 95% survival. Conversely, Group 3 tumours frequently harbour MYC amplification, exhibiting high rates of early leptomeningeal dissemination and poor overall survival.",
+      "say": "Medulloblastoma is divided into 4 molecular subgroups: WNT associated with CTNNB1 mutations, SHH, Group 3 with MYC amplification, and Group 4. The WNT subgroup, defined by somatic CTNNB1 mutations or germline APC variants, carries an outstanding long-term prognosis with over 95% survival. Conversely, Group 3 tumours frequently harbour MYC amplification, exhibiting high rates of early leptomeningeal dissemination and poor overall survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular Subgroup",
+          "Hallmark Genetic Alterations",
+          "Histology & Metastatic Risk",
+          "Prognosis"
+        ],
+        "rows": [
+          [
+            "WNT Subgroup",
+            "CTNNB1 mutations; monosomy 6",
+            "Classic histology; rare metastasis",
+            "Outstanding (> 95% cure)"
+          ],
+          [
+            "SHH Subgroup",
+            "PTCH1, SUFU, SMO, TP53 mutations",
+            "Desmoplastic / nodular histology",
+            "Intermediate (poor if TP53 mutant)"
+          ],
+          [
+            "Group 3",
+            "MYC amplification; isochromosome 17q",
+            "Large cell / anaplastic; high CSF seeding",
+            "Poor (< 50% survival)"
+          ],
+          [
+            "Group 4",
+            "PRDM6 activation; isochromosome 17q",
+            "Classic histology; intermediate metastases",
+            "Intermediate prognosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary CNS lymphoma is predominantly diffuse large B-cell lymphoma confined to the brain, leptomeninges, or vitreoretinal space. High-dose **methotrexate-based induction** regimens such as the **MATRix protocol** combining methotrexate, cytarabine, thiotepa, and rituximab achieve high complete remission rates. Consolidating remission with high-dose busulfan-thiotepa chemotherapy followed by autologous stem cell transplantation provides durable curative disease control without whole-brain radiation neurotoxicity.",
+      "say": "Primary CNS lymphoma is predominantly diffuse large B-cell lymphoma confined to the brain, leptomeninges, or vitreoretinal space. High-dose methotrexate-based induction regimens such as the MATRix protocol combining methotrexate, cytarabine, thiotepa, and rituximab achieve high complete remission rates. Consolidating remission with high-dose busulfan-thiotepa chemotherapy followed by autologous stem cell transplantation provides durable curative disease control without whole-brain radiation neurotoxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pcnsl",
+            "label": "Primary CNS Lymphoma",
+            "level": 1
+          },
+          {
+            "id": "matrix",
+            "label": "MATRix Induction x 4",
+            "level": 2
+          },
+          {
+            "id": "cr",
+            "label": "Complete Remission",
+            "level": 3
+          },
+          {
+            "id": "asct",
+            "label": "Autologous Stem Cell Rescue",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pcnsl",
+            "matrix"
+          ],
+          [
+            "matrix",
+            "cr"
+          ],
+          [
+            "cr",
+            "asct"
+          ]
+        ]
+      }
     }
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 65 (Central Nervous System Tumors)",
+    "WHO Classification of Tumours of the Central Nervous System (5th Edition, 2021)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_1de0fb9f099d",
-  "q_d445b83ce021",
-  "q_305388381e1d"
- ],
- "src": [],
- "refs": [
-  "WHO Classification of Tumours of the Central Nervous System, 5th edition (WHO CNS5)",
-  "Stupp R et al. Radiotherapy plus concomitant and adjuvant temozolomide for glioblastoma, NEJM 2005"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 45
- }
 }

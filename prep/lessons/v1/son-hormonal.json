@@ -1,130 +1,320 @@
 {
- "v": 1,
- "module": "son-hormonal",
- "subject": "ss-medical-oncology",
- "title": "Endocrine therapy in breast cancer: classes, mechanisms and safety",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Endocrine therapy targets **oestrogen receptor** signalling or oestrogen production in hormone receptor-positive breast cancer. **Selective oestrogen receptor modulators** such as tamoxifen block the receptor in breast tissue while acting as partial agonists in other tissues. **Pure oestrogen receptor degraders** such as fulvestrant reduce receptor levels inside the cell. **Aromatase inhibitors** lower oestrogen synthesis and are classed as steroidal or nonsteroidal agents.",
-   "say": "Endocrine therapy aims to block oestrogen receptor signalling or cut oestrogen production in hormone receptor-positive breast cancer. Selective oestrogen receptor modulators, such as tamoxifen, block the receptor in breast tissue but act as partial agonists elsewhere. Pure oestrogen receptor degraders, such as fulvestrant, lower receptor levels inside the cell. Aromatase inhibitors reduce oestrogen synthesis, and they come in steroidal and nonsteroidal forms with different binding behaviour.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Class",
-     "Example agents",
-     "Mechanism"
-    ],
-    "rows": [
-     [
-      "Selective oestrogen receptor modulator",
-      "Tamoxifen",
-      "Blocks receptor in breast tissue, partial agonist elsewhere"
-     ],
-     [
-      "Pure oestrogen receptor degrader",
-      "Fulvestrant",
-      "Promotes receptor breakdown inside the cell"
-     ],
-     [
-      "Steroidal aromatase inhibitor",
-      "Exemestane",
-      "Irreversibly inactivates aromatase"
-     ],
-     [
-      "Nonsteroidal aromatase inhibitors",
-      "Anastrozole, letrozole",
-      "Reversibly inhibit aromatase"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Tamoxifen is a **partial agonist** in the endometrium, so women need review for any abnormal uterine bleeding. It increases venous thromboembolism risk and can cause retinopathy. Aromatase inhibitors spare the endometrium but cause **arthralgia** and accelerated **bone loss**. Check bone density before starting an aromatase inhibitor, and consider calcium, vitamin D and bisphosphonates in high-risk patients.",
-   "say": "Tamoxifen is a partial agonist in the endometrium, so women need review for any abnormal uterine bleeding. It increases venous thromboembolism risk and can cause retinopathy. Aromatase inhibitors spare the endometrium but cause arthralgia and accelerated bone loss. Check bone density before starting an aromatase inhibitor, and consider calcium, vitamin D and bisphosphonates in high-risk patients.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Tamoxifen",
-     "points": [
-      "Endometrial growth risk",
-      "Venous thromboembolism",
-      "Retinopathy",
-      "Hot flushes and vaginal dryness"
-     ]
+  "v": 1,
+  "module": "son-hormonal",
+  "subject": "ss-medical-oncology",
+  "title": "Endocrine therapy in breast cancer: classes, mechanisms and safety",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Selective receptor modulation provides targeted antagonism in breast tissues while exerting distinct secondary effects. **Tamoxifen** is a selective **oestrogen receptor modulator** SERM competitively inhibiting oestrogen binding in breast tissue while acting as an agonist in endometrium and bone. In premenopausal hormone receptor-positive early breast cancer, 5 to 10 years of adjuvant tamoxifen significantly reduces recurrence and contralateral breast malignancy, though increasing risk of endometrial hyperplasia and thromboembolism.",
+      "say": "Selective receptor modulation provides targeted antagonism in breast tissues while exerting distinct secondary effects. Tamoxifen is a selective oestrogen receptor modulator SERM competitively inhibiting oestrogen binding in breast tissue while acting as an agonist in endometrium and bone. In premenopausal hormone receptor-positive breast cancer, adjuvant tamoxifen significantly reduces recurrence, though increasing risk of thromboembolism.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tamoxifen Antagonist Profile",
+          "points": [
+            "Mammary epithelial oestrogen receptor blockade",
+            "Arrests cell cycle at G1 restriction point",
+            "Reduces 15-year breast cancer mortality by ~30%",
+            "Standard adjuvant therapy for premenopausal women"
+          ]
+        },
+        "right": {
+          "title": "Tamoxifen Agonist Profile",
+          "points": [
+            "Stimulates endometrial epithelial proliferation",
+            "Preserves bone mineral density in postmenopausal women",
+            "Favourable lipid alteration (lowers serum LDL)",
+            "Elevates deep venous thrombosis and PE risk"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Aromatase inhibitors",
-     "points": [
-      "Arthralgia and myalgia",
-      "Bone loss and fractures",
-      "Baseline bone density scan",
-      "Raised cholesterol"
-     ]
+    {
+      "tx": "Suppression of peripheral oestrogen biosynthesis forms the cornerstone of postmenopausal endocrine management. **Aromatase inhibitors** **anastrozole**, **letrozole**, and **exemestane** block the peripheral conversion of androgens to estrogens, requiring postmenopausal status or concurrent **ovarian suppression** with GnRH agonists to prevent reflex pituitary gonadotropin elevation. Proven superior to tamoxifen in postmenopausal early breast cancer, aromatase inhibitors accelerate bone mineral density loss and induce arthralgias.",
+      "say": "Suppression of peripheral oestrogen biosynthesis forms the cornerstone of postmenopausal endocrine management. Aromatase inhibitors anastrozole, letrozole, and exemestane block the peripheral conversion of androgens to estrogens, requiring postmenopausal status or concurrent ovarian suppression with GnRH agonists. Proven superior to tamoxifen, aromatase inhibitors accelerate bone mineral loss and induce arthralgias.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adren",
+            "label": "Adrenal Androstenedione & Testosterone",
+            "level": 1
+          },
+          {
+            "id": "aroma",
+            "label": "CYP19A1 Aromatase in Adipose Tissue",
+            "level": 2
+          },
+          {
+            "id": "ai_block",
+            "label": "Anastrozole / Letrozole / Exemestane Inhibition",
+            "level": 3
+          },
+          {
+            "id": "suppr",
+            "label": ">98% Suppression of Circulating Oestrogen",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "adren",
+            "aroma"
+          ],
+          [
+            "aroma",
+            "ai_block"
+          ],
+          [
+            "ai_block",
+            "suppr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Selective down-regulation accomplishes pure oestrogen antagonism devoid of agonistic tissue effects. **Fulvestrant** is a pure selective oestrogen receptor down-regulator SERD binding ER-alpha with high affinity, impairing receptor dimerization, and triggering rapid proteasomal **receptor degradation**. Administered as monthly intramuscular injections, fulvestrant lacks any endometrial agonist activity, providing an effective backbone for second-line endocrine therapy in metastatic breast cancer.",
+      "say": "Selective down-regulation accomplishes pure oestrogen antagonism devoid of agonistic tissue effects. Fulvestrant is a pure selective oestrogen receptor down-regulator SERD binding ER-alpha with high affinity, impairing receptor dimerization, and triggering rapid proteasomal receptor degradation. Administered as monthly intramuscular injections, fulvestrant lacks endometrial agonist activity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endocrine Agent",
+          "Drug Classification",
+          "Molecular Mechanism",
+          "Endometrial Stimulation"
+        ],
+        "rows": [
+          [
+            "Tamoxifen",
+            "SERM (Receptor modulator)",
+            "Competitive ER antagonist in breast, agonist in uterus",
+            "Agonist: increased hyperplasia / carcinoma risk"
+          ],
+          [
+            "Fulvestrant",
+            "SERD (Receptor degrader)",
+            "Binds ER-alpha, blocks dimerization, induces proteasome breakdown",
+            "Pure antagonist: zero endometrial stimulation"
+          ],
+          [
+            "Elacestrant",
+            "Oral SERD",
+            "Degrades mutant and wild-type ER-alpha (ESR1)",
+            "Pure antagonist: approved for ESR1-mutated tumours"
+          ],
+          [
+            "Letrozole",
+            "Non-steroidal AI",
+            "Reversible competitive inhibitor of aromatase CYP19A1",
+            "Atrophic: profound systemic hypoestrogenism"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acquired endocrine resistance frequently emerges through ligand-independent conformational mutations in the receptor gene. **Elacestrant** is an oral SERD approved for metastatic ER-positive breast cancer harbouring activating **ESR1 mutations** following progression on prior endocrine therapy and CDK4/6 inhibitors. In the randomized EMERALD phase 3 trial, elacestrant significantly prolonged progression-free survival compared to standard of care endocrine monotherapy in patients with detectable ESR1-mutant circulating tumour DNA.",
+      "say": "Acquired endocrine resistance frequently emerges through ligand-independent conformational mutations in the receptor gene. Elacestrant is an oral SERD approved for metastatic ER-positive breast cancer harbouring activating ESR1 mutations following progression on prior endocrine therapy and CDK4/6 inhibitors. In clinical trials, elacestrant significantly prolonged progression-free survival in ESR1-mutant disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ai_tx",
+            "label": "Prior Aromatase Inhibitor Exposure",
+            "level": 1
+          },
+          {
+            "id": "esr1",
+            "label": "Emergence of Activating ESR1 Mutations",
+            "level": 2
+          },
+          {
+            "id": "constit",
+            "label": "Ligand-Independent ER Transcription",
+            "level": 3
+          },
+          {
+            "id": "elac",
+            "label": "Oral SERD Elacestrant Binds & Degrades ER",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ai_tx",
+            "esr1"
+          ],
+          [
+            "esr1",
+            "constit"
+          ],
+          [
+            "constit",
+            "elac"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cell cycle kinase inhibition synergizes with endocrine backbones to overcome hormone resistance. Adding **CDK4/6 inhibitors** **palbociclib**, **ribociclib**, or **abemaciclib** to aromatase inhibitors or fulvestrant significantly improves progression-free and overall survival in hormone receptor-positive, HER2-negative metastatic breast cancer. In randomized phase 3 trials, adding CDK4/6 inhibition doubled median progression-free survival compared to endocrine therapy alone, with neutropenia and diarrhoea being manageable class toxicities.",
+      "say": "Cell cycle kinase inhibition synergizes with endocrine backbones to overcome hormone resistance. Adding CDK4/6 inhibitors palbociclib, ribociclib, or abemaciclib to aromatase inhibitors or fulvestrant significantly improves progression-free and overall survival in hormone receptor-positive metastatic breast cancer. In randomized trials, adding CDK4/6 inhibition doubled median progression-free survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CDK4/6 Inhibitor",
+          "Pivotal Trials",
+          "Primary Toxicity Pattern",
+          "Clinical Monitoring"
+        ],
+        "rows": [
+          [
+            "Palbociclib",
+            "PALOMA-2 / PALOMA-3",
+            "Dose-dependent neutropenia",
+            "Fortnightly CBC for first 2 cycles"
+          ],
+          [
+            "Ribociclib",
+            "MONALEESA-2 / 3 / 7",
+            "Neutropenia, QTc prolongation, transaminitis",
+            "Serial ECG on days 1 and 14, liver panels"
+          ],
+          [
+            "Abemaciclib",
+            "MONARCH-2 / MONARCH-3",
+            "Early-onset diarrhoea (continuous dosing)",
+            "Prompt loperamide initiation, serum creatinine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Suppression of pituitary gonadotropin secretion induces castrate sex steroid levels. **GnRH agonists** **goserelin** and **leuprolide** produce an initial flare of luteinizing hormone and follicle-stimulating hormone before down-regulating GnRH receptors, achieving **medical castration** in prostate and premenopausal breast cancers. During initial administration in advanced prostate cancer, co-administration of an antiandrogen for 2 to 4 weeks is mandatory to prevent symptomatic disease flare from testosterone surge.",
+      "say": "Suppression of pituitary gonadotropin secretion induces castrate sex steroid levels. GnRH agonists goserelin and leuprolide produce an initial flare of luteinizing hormone before down-regulating receptors, achieving medical castration in prostate and premenopausal breast cancers. During initial therapy in prostate cancer, co-administration of an antiandrogen is mandatory to prevent symptomatic flare.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "agonist",
+            "label": "GnRH Agonist (Goserelin / Leuprolide)",
+            "level": 1
+          },
+          {
+            "id": "flare",
+            "label": "Initial LH / FSH Surge (Testosterone Flare)",
+            "level": 2
+          },
+          {
+            "id": "downreg",
+            "label": "Receptor Down-Regulation and Desensitization",
+            "level": 3
+          },
+          {
+            "id": "castr",
+            "label": "Medical Castration (Testosterone < 50 ng/dL)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "agonist",
+            "flare"
+          ],
+          [
+            "flare",
+            "downreg"
+          ],
+          [
+            "downreg",
+            "castr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Direct competitive blockade of pituitary receptors bypasses initial gonadotropin surges. **GnRH antagonists** **degarelix** and oral **relugolix** competitively block pituitary GnRH receptors, producing rapid **testosterone suppression** without an initial surge or clinical disease flare. In phase 3 trials in advanced prostate adenocarcinoma, oral relugolix demonstrated sustained castration rates exceeding 96% alongside a 54% lower risk of major adverse cardiovascular events compared to leuprolide.",
+      "say": "Direct competitive blockade of pituitary receptors bypasses initial gonadotropin surges. GnRH antagonists degarelix and oral relugolix competitively block pituitary GnRH receptors, producing rapid testosterone suppression without an initial surge or clinical disease flare. In phase 3 trials in advanced prostate cancer, oral relugolix achieved rapid castration with lower cardiovascular risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GnRH Agonists (Leuprolide)",
+          "points": [
+            "Initial testosterone flare (requires antiandrogen cover)",
+            "Delayed castration nadir (takes 3 to 4 weeks)",
+            "Monthly or depot subcutaneous / IM injections",
+            "Higher incidence of cardiovascular events"
+          ]
+        },
+        "right": {
+          "title": "GnRH Antagonists (Relugolix)",
+          "points": [
+            "Zero flare (immediate receptor competition)",
+            "Rapid testosterone suppression (< 50 ng/dL by Day 4)",
+            "Convenient once-daily oral administration",
+            "Lower incidence of major adverse cardiac events"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Next-generation androgen receptor axis inhibitors suppress castration-resistant prostate cancer through complementary mechanisms. **Abiraterone acetate** irreversibly inhibits CYP17A1 17-alpha-hydroxylase and C17,20-lyase in adrenal and testicular tissues, requiring concurrent prednisone to prevent **mineralocorticoid excess** hypertension and hypokalaemia. In parallel, second-generation **androgen receptor inhibitors** **enzalutamide**, **apalutamide**, and **darolutamide** directly block androgen binding, nuclear translocation, and co-activator recruitment, prolonging overall survival across metastatic and non-metastatic disease.",
+      "say": "Next-generation androgen receptor axis inhibitors suppress castration-resistant prostate cancer through complementary mechanisms. Abiraterone acetate irreversibly inhibits CYP17A1 in adrenal tissues, requiring concurrent prednisone to prevent mineralocorticoid excess hypertension and hypokalaemia. In parallel, androgen receptor inhibitors enzalutamide, apalutamide, and darolutamide directly block androgen binding and nuclear translocation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Androgen Pathway Inhibitor",
+          "Molecular Target",
+          "Steroid Requirement",
+          "Distinguishing Characteristic"
+        ],
+        "rows": [
+          [
+            "Abiraterone acetate",
+            "CYP17A1 (17-alpha-hydroxylase / C17,20-lyase)",
+            "Mandatory low-dose prednisone",
+            "Blocks adrenal androgen synthesis; monitor K+ and BP"
+          ],
+          [
+            "Enzalutamide",
+            "Direct androgen receptor antagonist",
+            "No steroid co-administration",
+            "Crosses blood-brain barrier; fatigue and seizure risk"
+          ],
+          [
+            "Apalutamide",
+            "Second-generation AR antagonist",
+            "No steroid co-administration",
+            "High rate of maculopapular rash and hypothyroidism"
+          ],
+          [
+            "Darolutamide",
+            "Distinct flexible AR antagonist",
+            "No steroid co-administration",
+            "Low BBB penetration, minimal fatigue and drug interactions"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Interactions matter most with tamoxifen, because it needs **CYP2D6** to form the active metabolite **endoxifen**. Strong CYP2D6 inhibitors, such as **paroxetine**, reduce endoxifen levels, so an alternative agent is usually preferred after specialist advice. **Enzyme inducers** speed tamoxifen breakdown and lower its exposure. Combining tamoxifen with an **aromatase inhibitor** offers no added benefit and is avoided.",
-   "say": "Interactions matter most with tamoxifen, because it needs CYP2D6 to form the active metabolite endoxifen. Strong CYP2D6 inhibitors, such as paroxetine, reduce endoxifen levels, so an alternative agent is usually preferred after specialist advice. Enzyme inducers speed tamoxifen breakdown and lower its exposure. Combining tamoxifen with an aromatase inhibitor offers no added benefit and is avoided.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Co-medication",
-     "Effect",
-     "Practical step"
-    ],
-    "rows": [
-     [
-      "Paroxetine",
-      "Blocks CYP2D6, lowers endoxifen",
-      "Choose an alternative antidepressant"
-     ],
-     [
-      "Strong enzyme inducers",
-      "Speed tamoxifen breakdown",
-      "Review and avoid where possible"
-     ],
-     [
-      "Tamoxifen plus aromatase inhibitor",
-      "Overlapping action, no added benefit",
-      "Avoid routine use"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Adjuvant endocrine therapy usually lasts about **five years**. Postmenopausal women may receive two to three years of tamoxifen, then switch to an aromatase inhibitor such as exemestane, for five years in total. Extended therapy is considered in higher-risk node-positive disease, and some guidance allows up to ten years of treatment. Breastfeeding is avoided during treatment and for a period afterwards.",
-   "say": "Adjuvant endocrine therapy usually lasts about five years. Postmenopausal women may receive two to three years of tamoxifen, then switch to an aromatase inhibitor such as exemestane, for five years in total. Extended therapy is considered in higher-risk node-positive disease, and some guidance allows up to ten years of treatment. Breastfeeding is avoided during treatment and for a period afterwards.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-hormonal-fig1.webp",
-    "alt": "Timeline diagram showing 5-year adjuvant endocrine therapy, with tamoxifen then aromatase inhibitor, and extended 10-year option.",
-    "caption": "Adjuvant endocrine therapy duration and sequencing",
-    "ar": 1.8349
-   }
+  ],
+  "quiz": [
+    "q_254d08ebbb3c",
+    "q_35506f78dad4",
+    "q_6de65989d91b"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 18 (Endocrine Therapy)",
+    "Francis PA et al. Tailoring adjuvant endocrine therapy for premenopausal breast cancer (SOFT/TEXT). NEJM 2018",
+    "Fizazi K et al. Abiraterone plus prednisone in metastatic, castration-sensitive prostate cancer (LATITUDE). NEJM 2017"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_254d08ebbb3c",
-  "q_35506f78dad4",
-  "q_6de65989d91b"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 37
- }
 }

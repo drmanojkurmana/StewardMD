@@ -1,0 +1,309 @@
+{
+  "v": 1,
+  "module": "son-melanoma",
+  "subject": "ss-medical-oncology",
+  "title": "Cutaneous and uveal melanoma: molecular drivers, targeted therapies and dual immunotherapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Constitutive activation of the mitogen-activated protein kinase signaling cascade drives the development of skin melanoma. Activating **BRAF V600 mutations**, particularly V600E and V600K substitutions at codon 600, occur in approximately 40% to 50% of **cutaneous melanomas**. Rapid automated molecular genotyping determines treatment eligibility for small-molecule targeted therapies versus immune checkpoint inhibitors.",
+      "say": "Constitutive activation of the mitogen-activated protein kinase signaling cascade drives the development of skin melanoma. Activating BRAF V600 mutations occur in approximately 40% to 50% of cutaneous melanomas. Rapid automated molecular genotyping determines treatment eligibility for small-molecule targeted therapies versus immune checkpoint inhibitors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "BRAF Alteration",
+          "Frequency",
+          "Codon Location",
+          "Targeted Regimen"
+        ],
+        "rows": [
+          [
+            "BRAF V600E",
+            "~80% of BRAF mutants",
+            "Codon 600 exon 15",
+            "Dabrafenib + Trametinib"
+          ],
+          [
+            "BRAF V600K",
+            "~15% to 20% of mutants",
+            "Codon 600 exon 15",
+            "Encorafenib + Binimetinib"
+          ],
+          [
+            "Wild-Type",
+            "Remaining 50% to 60%",
+            "Unmutated BRAF kinase",
+            "Immune Checkpoint Blockade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dual targeted therapy combining **BRAF and MEK inhibitors** prevents paradoxical MAPK pathway reactivation and delays acquired resistance. Approved combinations like **dabrafenib** plus **trametinib** or **encorafenib** plus **binimetinib** yield rapid **objective response rates** exceeding 65% in BRAF V600-mutant melanoma. Targeted combinations achieve prompt symptomatic relief in patients presenting with high disease burden or visceral symptoms.",
+      "say": "Dual targeted therapy combining BRAF and MEK inhibitors prevents paradoxical pathway reactivation and delays acquired resistance. Approved combinations like dabrafenib plus trametinib or encorafenib plus binimetinib yield rapid objective response rates exceeding 65% in BRAF-mutant melanoma. Targeted combinations achieve prompt symptomatic relief in patients with high disease burden.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "braf",
+            "label": "Mutant BRAF Kinase",
+            "level": 1
+          },
+          {
+            "id": "mek",
+            "label": "Downstream MEK Phosphorylation",
+            "level": 2
+          },
+          {
+            "id": "targ",
+            "label": "Dual BRAF + MEK Inhibition",
+            "level": 3
+          },
+          {
+            "id": "resp",
+            "label": "Rapid 65%+ Objective Response",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "braf",
+            "mek"
+          ],
+          [
+            "mek",
+            "targ"
+          ],
+          [
+            "targ",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dual immune checkpoint inhibition established unprecedented long-term survival plateaus in the landmark **CheckMate 067** trial. Combining the PD-1 inhibitor **nivolumab** with the CTLA-4 inhibitor **ipilimumab** achieved durable 5-year overall survival exceeding 50% in previously untreated **advanced melanoma**. This durable plateau persisted regardless of baseline BRAF mutation status, though high rates of immune-related toxicities require proactive recognition and corticosteroid management.",
+      "say": "Dual immune checkpoint inhibition established unprecedented long-term survival plateaus in the landmark CheckMate 067 trial. Combining the PD-1 inhibitor nivolumab with the CTLA-4 inhibitor ipilimumab achieved durable 5-year overall survival exceeding 50% in previously untreated advanced melanoma. This durable plateau persisted regardless of baseline BRAF mutation status.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nivolumab + Ipilimumab",
+          "points": [
+            "5-year overall survival exceeds 50%",
+            "Dual PD-1 and CTLA-4 synergy",
+            "Higher rate of grade 3-4 immune toxicities"
+          ]
+        },
+        "right": {
+          "title": "Anti-PD-1 Monotherapy",
+          "points": [
+            "5-year overall survival approximately 44%",
+            "Single-agent checkpoint blockade",
+            "Significantly lower severe toxicity profile"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Targeting alternative lymphocyte inhibitory receptors provides another milestone in immuno-oncology. In the phase 3 **RELATIVITY-047** trial, combining **nivolumab** with the novel anti-LAG-3 monoclonal antibody **relatlimab** significantly prolonged progression-free survival compared to nivolumab monotherapy in untreated metastatic melanoma. Dual blockade of PD-1 and LAG-3 reactivates exhausted effector T-cells while exhibiting a favourable toxicity profile compared to ipilimumab combinations.",
+      "say": "Targeting alternative lymphocyte inhibitory receptors provides another milestone in immuno-oncology. In the phase 3 RELATIVITY-047 trial, combining nivolumab with the novel anti-LAG-3 antibody relatlimab significantly prolonged progression-free survival compared to nivolumab monotherapy. Dual blockade of PD-1 and LAG-3 reactivates exhausted effector T-cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pd1",
+            "label": "PD-1 Inhibitory Receptor",
+            "level": 1
+          },
+          {
+            "id": "lag3",
+            "label": "LAG-3 Checkpoint Receptor",
+            "level": 2
+          },
+          {
+            "id": "relat",
+            "label": "Nivolumab + Relatlimab",
+            "level": 3
+          },
+          {
+            "id": "pfs",
+            "label": "Prolonged Progression-Free Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pd1",
+            "relat"
+          ],
+          [
+            "lag3",
+            "relat"
+          ],
+          [
+            "relat",
+            "pfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In resected high-risk melanoma, **Adjuvant anti-PD-1** monotherapy significantly reduces distant metastases and prolongs **recurrence-free survival**. One year of adjuvant **pembrolizumab** or **nivolumab** is established standard therapy for completely resected stage 2B, 2C, and stage 3 disease based on KEYNOTE-054, KEYNOTE-716, and CheckMate 238. For resected stage 3 BRAF-mutant melanoma, 12 months of adjuvant dabrafenib plus trametinib represents an effective oral alternative.",
+      "say": "In resected high-risk melanoma, Adjuvant anti-PD-1 monotherapy significantly reduces distant metastases and prolongs recurrence-free survival. One year of adjuvant pembrolizumab or nivolumab is established standard therapy for completely resected stage 2B, 2C, and stage 3 disease. For resected stage 3 BRAF-mutant melanoma, 12 months of adjuvant dabrafenib plus trametinib represents an effective alternative.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Setting",
+          "Approved Adjuvant Regimen",
+          "Duration",
+          "Primary Endpoint Benefit"
+        ],
+        "rows": [
+          [
+            "Resected Stage 2B/2C",
+            "Pembrolizumab monotherapy",
+            "1 year (every 3-6 wks)",
+            "Recurrence-free survival"
+          ],
+          [
+            "Resected Stage 3",
+            "Nivolumab or Pembrolizumab",
+            "1 year",
+            "Distant metastasis-free survival"
+          ],
+          [
+            "Stage 3 BRAF V600",
+            "Dabrafenib + Trametinib",
+            "1 year oral daily",
+            "Relapse-free survival"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Neoadjuvant systemic therapy optimizes anti-tumour immune priming prior to definitive surgical excision. In the phase 3 **NADINA trial**, **Neoadjuvant dual immunotherapy** with two cycles of **ipilimumab** plus **nivolumab** induced high pathological complete response rates in macroscopic stage 3 nodal disease. Patients achieving a complete pathological response experienced exceptional event-free survival, allowing safe omission of planned adjuvant systemic therapies.",
+      "say": "Neoadjuvant systemic therapy optimizes anti-tumour immune priming prior to definitive surgical excision. In the phase 3 NADINA trial, Neoadjuvant dual immunotherapy with two cycles of ipilimumab plus nivolumab induced high pathological complete response rates in macroscopic stage 3 disease. Patients achieving a complete pathological response experienced exceptional event-free survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "st3",
+            "label": "Macroscopic Stage 3 Disease",
+            "level": 1
+          },
+          {
+            "id": "neoi",
+            "label": "Neoadjuvant Nivo + Ipi (2 cycles)",
+            "level": 2
+          },
+          {
+            "id": "pcr",
+            "label": "Pathological Complete Response",
+            "level": 3
+          },
+          {
+            "id": "efs",
+            "label": "Superior Event-Free Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "st3",
+            "neoi"
+          ],
+          [
+            "neoi",
+            "pcr"
+          ],
+          [
+            "pcr",
+            "efs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary intraocular uveal melanoma is biologically distinct from cutaneous disease, driven by GNAQ and GNA11 mutations. **Tebentafusp** is a first-in-class bispecific gp100 peptide-HLA-A*02:01-directed T-cell receptor therapeutic. In a randomized phase 3 trial, tebentafusp significantly prolonged overall survival in HLA-A*02:01-positive patients with **metastatic uveal melanoma**, representing the first systemic agent to demonstrate a survival benefit in this disease.",
+      "say": "Primary intraocular uveal melanoma is biologically distinct from cutaneous disease, driven by GNAQ and GNA11 mutations. Tebentafusp is a first-in-class bispecific gp100 peptide-HLA-A*02:01-directed T-cell receptor therapeutic. In a randomized phase 3 trial, tebentafusp significantly prolonged overall survival in HLA-A*02:01-positive patients with metastatic uveal melanoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uveal Melanoma",
+          "points": [
+            "GNAQ / GNA11 activating mutations",
+            "BAP1 loss and monosomy 3 predict liver mets",
+            "Tebentafusp improves OS in HLA-A*02:01"
+          ]
+        },
+        "right": {
+          "title": "Cutaneous Melanoma",
+          "points": [
+            "High UV mutational signature, BRAF/NRAS",
+            "High tumour mutational burden",
+            "Exquisite response to PD-1 / CTLA-4 blockade"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Surgical assessment of the regional lymphatic basin dictates staging and systemic management in primary melanoma. **Sentinel lymph node biopsy** is standard staging procedure for patients presenting with a primary cutaneous lesion exhibiting **Breslow thickness** of 0.8 mm or greater, or thinner lesions with ulceration. Identifying microscopic occult nodal involvement provides essential prognostic stratification and directs decisions regarding adjuvant immunotherapy.",
+      "say": "Surgical assessment of the regional lymphatic basin dictates staging and systemic management in primary melanoma. Sentinel lymph node biopsy is the standard staging procedure for patients with primary cutaneous lesions measuring zero point eight millimetres or thicker, or thinner lesions with ulceration. Identifying occult nodal involvement provides essential prognostic stratification.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Breslow Thickness",
+          "Ulceration Status",
+          "SLNB Recommendation",
+          "Rationale"
+        ],
+        "rows": [
+          [
+            "< 0.8 mm",
+            "No ulceration",
+            "Not routinely recommended",
+            "Low risk of nodal involvement (<5%)"
+          ],
+          [
+            "< 0.8 mm",
+            "Present (ulcerated)",
+            "Recommend SLNB discussion",
+            "Increased nodal metastasis risk"
+          ],
+          [
+            "0.8 to 1.0 mm",
+            "With or without ulceration",
+            "Recommend SLNB",
+            "Nodal risk reaches 10% to 12%"
+          ],
+          [
+            "> 1.0 mm",
+            "Any ulceration status",
+            "Routinely perform SLNB",
+            "High nodal yield directs adjuvant therapy"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 87 (Melanoma)",
+    "CheckMate 067 Trial (NEJM)",
+    "RELATIVITY-047 Trial (NEJM)",
+    "NADINA Trial (NEJM 2024)",
+    "KEYNOTE-054 Trial (NEJM)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

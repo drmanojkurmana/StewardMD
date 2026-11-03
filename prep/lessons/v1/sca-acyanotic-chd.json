@@ -1,0 +1,293 @@
+{
+  "v": 1,
+  "module": "sca-acyanotic-chd",
+  "subject": "ss-cardiology",
+  "title": "Acyanotic Congenital Heart Disease in Adults",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Secundum atrial septal defect** is the most common adult congenital cardiac anomaly, located at the **fossa ovalis**, amenable to percutaneous transcatheter device closure if adequate margins of at least 5 mm exist around the defect. Left-to-right shunting produces right ventricular volume overload and wide, fixed splitting of the second heart sound.",
+      "say": "Secundum atrial septal defect is the most common adult congenital cardiac anomaly, located at the fossa ovalis, amenable to percutaneous transcatheter device closure if adequate margins of at least 5 mm exist around the defect. Left-to-right shunting produces right ventricular volume overload and wide, fixed splitting of the second heart sound.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ASD Anatomic Subtype",
+          "Frequency in Adults",
+          "Interventional Approach"
+        ],
+        "rows": [
+          [
+            "Secundum ASD",
+            "75% of adult ASDs",
+            "Percutaneous device closure preferred (Amplatzer)"
+          ],
+          [
+            "Primum ASD",
+            "15% of adult ASDs",
+            "Surgical patch closure + mitral cleft repair"
+          ],
+          [
+            "Sinus Venosus ASD",
+            "5% to 10% of ASDs",
+            "Surgical rerouting of anomalous veins (Warden)"
+          ],
+          [
+            "Coronary Sinus ASD",
+            "< 1% of adult ASDs",
+            "Surgical unroofed coronary sinus repair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Primum ASD** occurs in the inferior interatrial septum near AV valves as a component of partial AV septal defect, displaying marked **left axis deviation** on ECG and a cleft anterior mitral valve leaflet causing **mitral regurgitation**. Conduction system displacement predisposes to first-degree and advanced atrioventricular block.",
+      "say": "Primum ASD occurs in the inferior interatrial septum near AV valves as a component of partial AV septal defect, displaying marked left axis deviation on ECG and a cleft anterior mitral valve leaflet causing mitral regurgitation. Conduction system displacement predisposes to first-degree and advanced atrioventricular block.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primum ASD Features",
+          "points": [
+            "Defect located in inferior interatrial septum",
+            "Marked left axis deviation on 12-lead ECG",
+            "Associated with cleft anterior mitral leaflet",
+            "Requires surgical patch closure and valvuloplasty"
+          ]
+        },
+        "right": {
+          "title": "Secundum ASD Features",
+          "points": [
+            "Defect located in mid-septum at fossa ovalis",
+            "Right axis deviation and incomplete RBBB on ECG",
+            "Mitral valve apparatus is typically normal",
+            "Percutaneous catheter closure is treatment of choice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sinus venosus ASD** is situated near the SVC-RA junction and is strongly associated with **partial anomalous pulmonary venous return** of right upper pulmonary veins into the superior vena cava. Surgical patch repair reroutes anomalous pulmonary venous drainage into the left atrium while closing the interatrial communication.",
+      "say": "Sinus venosus ASD is situated near the SVC-RA junction and is strongly associated with partial anomalous pulmonary venous return of right upper pulmonary veins into the superior vena cava. Surgical patch repair reroutes anomalous pulmonary venous drainage into the left atrium while closing the interatrial communication.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sinus Venosus Defect Located at SVC-RA Junction"
+          },
+          {
+            "id": "b",
+            "label": "Partial Anomalous Pulmonary Venous Return of Right Upper Veins"
+          },
+          {
+            "id": "c",
+            "label": "Transesophageal Echo or Cardiac MRI Staging"
+          },
+          {
+            "id": "d",
+            "label": "Surgical Repair (Single/Double Patch or Warden Procedure)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Embryologic association"
+          ],
+          [
+            "b",
+            "c",
+            "Anatomic mapping"
+          ],
+          [
+            "c",
+            "d",
+            "Surgical baffle rerouting"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ventricular septal defect** classification comprises **perimembranous** accounting for **70%** to **80%**, muscular trabecular, inlet AV canal type, and outlet **supracristal** defects predisposing to aortic valve prolapse and aortic regurgitation. The Venturi effect from high-velocity supracristal jetting draws the right coronary cusp into the defect.",
+      "say": "Ventricular septal defect classification comprises perimembranous accounting for 70% to 80%, muscular trabecular, inlet AV canal type, and outlet supracristal defects predisposing to aortic valve prolapse and aortic regurgitation. The Venturi effect from high-velocity supracristal jetting draws the right coronary cusp into the defect.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "VSD Anatomic Subtype",
+          "Frequency",
+          "Distinctive Clinical Consideration"
+        ],
+        "rows": [
+          [
+            "Perimembranous",
+            "70% to 80%",
+            "Most common; adjacent to conduction tissue and septal TV leaflet"
+          ],
+          [
+            "Muscular (Trabecular)",
+            "15% to 20%",
+            "Entirely surrounded by muscle; high rate of spontaneous closure"
+          ],
+          [
+            "Inlet (AV Canal)",
+            "5%",
+            "Posterior beneath AV valves; common in trisomy 21"
+          ],
+          [
+            "Supracristal (Outlet)",
+            "5% to 10%",
+            "Beneath semilunar valves; triggers progressive aortic regurgitation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Significant **left-to-right shunt** warranting defect closure in ASD or VSD is defined by a pulmonary-to-systemic flow ratio **Qp/Qs** at least **1.5:1** with RV volume overload, provided pulmonary vascular resistance is < **3** to **5** Wood units. Severe irreversible pulmonary vascular remodeling with shunt reversal establishes Eisenmenger syndrome, precluding surgical closure.",
+      "say": "Significant left-to-right shunt warranting defect closure in ASD or VSD is defined by a pulmonary-to-systemic flow ratio Qp/Qs at least 1 point 5:1 with RV volume overload, provided pulmonary vascular resistance is less than 3 to 5 Wood units. Severe irreversible pulmonary vascular remodeling with shunt reversal establishes Eisenmenger syndrome, precluding surgical closure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Calculate Shunt Ratio via Oximetry Run: Qp/Qs"
+          },
+          {
+            "id": "b",
+            "label": "Qp/Qs >= 1.5:1 with RV Volume Overload"
+          },
+          {
+            "id": "c",
+            "label": "Evaluate Pulmonary Vascular Resistance (PVR)"
+          },
+          {
+            "id": "d",
+            "label": "PVR < 3 to 5 Wood Units -> Defect Closure Indicated"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Quantify hemodynamic shunt"
+          ],
+          [
+            "b",
+            "c",
+            "Invasive catheterisation"
+          ],
+          [
+            "c",
+            "d",
+            "Confirm operability"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Patent ductus arteriosus** connects the proximal descending aorta to the roof of the main pulmonary artery, presenting with a continuous **machinery murmur** at the left infraclavicular area and wide pulse pressure. Large shunts produce left atrial and left ventricular enlargement, managed with transcatheter coil or plug embolisation.",
+      "say": "Patent ductus arteriosus connects the proximal descending aorta to the roof of the main pulmonary artery, presenting with a continuous machinery murmur at the left infraclavicular area and wide pulse pressure. Large shunts produce left atrial and left ventricular enlargement, managed with transcatheter coil or plug embolisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Patent Ductus Arteriosus (PDA)",
+          "points": [
+            "Continuous machinery murmur peaking at S2",
+            "Produces left atrial and left ventricular volume overload",
+            "High bounding pulses with widened pulse pressure",
+            "Differential cyanosis when Eisenmenger syndrome occurs"
+          ]
+        },
+        "right": {
+          "title": "Atrial Septal Defect (ASD)",
+          "points": [
+            "Midsystolic pulmonary ejection murmur + fixed split S2",
+            "Produces right atrial and right ventricular volume overload",
+            "Normal pulse pressure and peripheral pulses",
+            "Generalized symmetric cyanosis with shunt reversal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Coarctation of the aorta** typically occurs near the insertion of the ligamentum arteriosum, manifesting with upper extremity hypertension, **radiofemoral pulse delay**, rib notching involving ribs **3** to **8**, and figure-3 sign on chest radiograph. Percutaneous balloon angioplasty with covered stent implantation represents the primary adult interventional therapy.",
+      "say": "Coarctation of the aorta typically occurs near the insertion of the ligamentum arteriosum, manifesting with upper extremity hypertension, radiofemoral pulse delay, rib notching involving ribs 3 to 8, and figure-3 sign on chest radiograph. Percutaneous balloon angioplasty with covered stent implantation represents the primary adult interventional therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical / Diagnostic Sign",
+          "Pathophysiological Basis",
+          "Diagnostic Value"
+        ],
+        "rows": [
+          [
+            "Radiofemoral Pulse Delay",
+            "Delayed systolic wave arrival distal to stenosis",
+            "Pathognomonic bedside examination sign"
+          ],
+          [
+            "Rib Notching (Roesler Sign)",
+            "Dilatation of intercostal collateral arteries",
+            "Seen along inferior borders of ribs 3 to 8"
+          ],
+          [
+            "Figure-3 Sign on CXR",
+            "Pre-stenotic dilation, coarctation indentation, post-stenotic dilation",
+            "Classic radiological appearance of aorta"
+          ],
+          [
+            "Bicuspid Aortic Valve",
+            "Associated congenital valvular anomaly in > 50%",
+            "Warrants echocardiographic surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cor triatriatum** sinistrum is a rare congenital anomaly where the left atrium is divided into **two** chambers by a **fibromuscular membrane**, mimicking mitral stenosis with pulmonary venous congestion. Surgical resection of the obstructing fibromuscular membrane relieves pulmonary hypertension and achieves complete cure.",
+      "say": "Cor triatriatum sinistrum is a rare congenital anomaly where the left atrium is divided into two chambers by a fibromuscular membrane, mimicking mitral stenosis with pulmonary venous congestion. Surgical resection of the obstructing fibromuscular membrane relieves pulmonary hypertension and achieves complete cure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Proximal Left Atrial Chamber Receives Pulmonary Veins"
+          },
+          {
+            "id": "b",
+            "label": "Obstructive Perforated Fibromuscular Membrane"
+          },
+          {
+            "id": "c",
+            "label": "Distal Chamber Connects to Mitral Valve & LAA"
+          },
+          {
+            "id": "d",
+            "label": "Surgical Membrane Excision Relieves Pulmonary Congestion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Venous return chamber"
+          ],
+          [
+            "b",
+            "c",
+            "Stenotic fenestration"
+          ],
+          [
+            "c",
+            "d",
+            "Complete anatomical repair"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

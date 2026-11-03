@@ -1,178 +1,320 @@
 {
- "v": 1,
- "module": "son-hallmarks",
- "subject": "ss-medical-oncology",
- "title": "Hallmarks of cancer and carcinogenesis",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Cancer arises when a cell acquires a set of **hallmark traits** through successive genetic and epigenetic changes. Most human cancers are driven mainly by environmental and lifestyle exposures, while inherited pathogenic variants account for only a small minority, usually under 10%. **Genomic instability** is an enabling characteristic: it does not itself drive growth but accelerates the acquisition of the other hallmarks by increasing mutation rates.",
-   "say": "Cancer arises when a cell acquires a set of hallmark traits through successive genetic and epigenetic changes. Most human cancers are driven mainly by environmental and lifestyle exposures, while inherited pathogenic variants account for only a small minority, usually under ten percent. Genomic instability is an enabling characteristic. It does not itself drive growth, but it speeds up the acquisition of the other hallmarks by raising the mutation rate.",
-   "vis": null
-  },
-  {
-   "tx": "Carcinogens are classified as chemical, physical, or **biological**. Chemical agents include polycyclic hydrocarbons, asbestos and tobacco products. Physical agents include ionising radiation. Biological agents include oncogenic viruses such as HPV, hepatitis B and hepatitis C, along with the bacterium Helicobacter pylori, which is linked to gastric carcinoma through chronic inflammation and nitric oxide generated DNA damage.",
-   "say": "Carcinogens are classified as chemical, physical, or biological. Chemical agents include polycyclic hydrocarbons, asbestos and tobacco products. Physical agents include ionising radiation. Biological agents include oncogenic viruses such as HPV, hepatitis B and hepatitis C, along with the bacterium Helicobacter pylori, which is linked to gastric carcinoma.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Category",
-     "Examples",
-     "Typical cancer link"
-    ],
-    "rows": [
-     [
-      "Chemical",
-      "Polycyclic hydrocarbons, asbestos",
-      "Lung, mesothelioma"
-     ],
-     [
-      "Physical",
-      "Ionising radiation",
-      "Leukaemia, skin"
-     ],
-     [
-      "Biological",
-      "HPV, HBV, HCV, H. pylori",
-      "Cervix, liver, stomach"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Endogenous DNA damage arises from within the cell. The **Fenton reaction** uses iron and hydrogen peroxide to generate highly damaging hydroxyl radicals. **Methyltransferase** enzymes use S-adenosylmethionine as the methyl donor, and aberrant methylation can silence tumour suppressor genes. When damage is irreparable, the cell is removed by apoptosis, and if apoptosis fails, the immune system acts as a third line of defence.",
-   "say": "Endogenous DNA damage arises from within the cell. The Fenton reaction uses iron and hydrogen peroxide to generate highly damaging hydroxyl radicals. Methyltransferase enzymes use S-adenosylmethionine as the methyl donor, and aberrant methylation can silence tumour suppressor genes. When damage is irreparable, the cell is removed by apoptosis, and if apoptosis fails, the immune system acts as a third line of defence.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "DNA damage"
-     },
-     {
-      "id": "b",
-      "label": "Repair"
-     },
-     {
-      "id": "c",
-      "label": "Apoptosis"
-     },
-     {
-      "id": "d",
-      "label": "Immune clearance"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b",
-      "fixable"
-     ],
-     [
-      "b",
-      "c",
-      "irreparable"
-     ],
-     [
-      "c",
-      "d",
-      "apoptosis fails"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Oncogenes are activated proto-oncogenes that drive growth, such as MYC and RAS. **Tumour suppressor genes** restrain growth or trigger apoptosis, and include TP53 on 17p13 and RB1. Knudson's **two-hit hypothesis** explains that both alleles of a tumour suppressor gene must be inactivated. In hereditary retinoblastoma, the germline mutation is the first hit and a somatic mutation of the second allele is the second hit.",
-   "say": "Oncogenes are activated proto-oncogenes that drive growth, such as MYC and RAS. Tumour suppressor genes restrain growth or trigger apoptosis, and include TP53 on 17p13 and RB1. Knudson's two-hit hypothesis explains that both alleles of a tumour suppressor gene must be inactivated. In hereditary retinoblastoma, the germline mutation is the first hit and a somatic mutation of the second allele is the second hit.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Oncogene",
-     "points": [
-      "Gain of function",
-      "Dominant at cell level",
-      "Example: MYC, RAS"
-     ]
+  "v": 1,
+  "module": "son-hallmarks",
+  "subject": "ss-medical-oncology",
+  "title": "Hallmarks of cancer and carcinogenesis: biological capabilities, genomic instability and metabolism",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The modern framework of malignancy is defined by distinct biological capabilities acquired during tumour development. **Hallmark traits** conceptualized by Hanahan and Weinberg include sustaining **proliferative signalling**, evading growth suppressors, resisting cell death, and enabling replicative immortality. Additional hallmarks comprise inducing angiogenesis, activating invasion and metastasis, reprogramming energy metabolism, and evading immune destruction, fundamentally governing oncogenesis.",
+      "say": "The modern framework of malignancy is defined by distinct biological capabilities acquired during tumour development. Hallmark traits conceptualized by Hanahan and Weinberg include sustaining proliferative signalling, evading growth suppressors, resisting cell death, and enabling replicative immortality. Additional hallmarks comprise inducing angiogenesis, activating invasion, reprogramming energy metabolism, and evading immune destruction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hallmark Category",
+          "Key Mechanism",
+          "Therapeutic Target"
+        ],
+        "rows": [
+          [
+            "Proliferative Signalling",
+            "Constitutive kinase activation",
+            "Tyrosine kinase inhibitors"
+          ],
+          [
+            "Evading Suppressors",
+            "Inactivation of RB1 and TP53",
+            "CDK4/6 inhibitors, MDM2 antagonists"
+          ],
+          [
+            "Resisting Death",
+            "BCL-2 overexpression",
+            "BH3 mimetics such as venetoclax"
+          ],
+          [
+            "Immune Evasion",
+            "PD-L1 upregulation on tumour",
+            "Immune checkpoint inhibitors"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Tumour suppressor",
-     "points": [
-      "Loss of function",
-      "Needs two hits (Knudson)",
-      "Example: TP53, RB1, APC"
-     ]
+    {
+      "tx": "Acquiring hallmark capabilities requires genome alteration through specialized underlying enabling characteristics. **Genomic instability** operates as a central enabling trait that dramatically accelerates the acquisition of cancer hallmarks by escalating **mutation rates**. Deficiencies in mismatch repair, base excision repair, or homologous recombination permit rapid accumulation of point mutations, chromosomal rearrangements, and copy number alterations that drive tumour evolution.",
+      "say": "Acquiring hallmark capabilities requires genome alteration through specialized underlying enabling characteristics. Genomic instability operates as a central enabling trait that dramatically accelerates the acquisition of cancer hallmarks by escalating mutation rates. Deficiencies in DNA repair pathways permit rapid accumulation of genetic defects that drive clonal diversification.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "repair",
+            "label": "Defective DNA Repair",
+            "level": 1
+          },
+          {
+            "id": "instab",
+            "label": "Genomic Instability",
+            "level": 2
+          },
+          {
+            "id": "muts",
+            "label": "Accelerated Mutation Rates",
+            "level": 3
+          },
+          {
+            "id": "clones",
+            "label": "Clonal Evolution and Selection",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "repair",
+            "instab"
+          ],
+          [
+            "instab",
+            "muts"
+          ],
+          [
+            "muts",
+            "clones"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The central guardian of cellular genomic stability is the tumour suppressor protein encoded by **TP53** located on **chromosome 17p**. In response to acute DNA strand breaks, oncogenic stress, or hypoxia, p53 coordinates cell cycle arrest via transcriptional upregulation of **p21** at the G1-S transition, promoting DNA repair or alternatively committing cells to irreversible apoptosis through BAX and PUMA activation.",
+      "say": "The central guardian of cellular genomic stability is the tumour suppressor protein encoded by TP53 located on chromosome 17p. In response to acute DNA strand breaks, oncogenic stress, or hypoxia, p53 coordinates cell cycle arrest via transcriptional upregulation of p21 at the G1-S transition, promoting DNA repair or committing cells to apoptosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intact p53 Function",
+          "points": [
+            "Activation by DNA damage and ATM/ATR",
+            "p21 induction enforces G1-S arrest",
+            "Homologous recombination repair allowed",
+            "Apoptotic induction via BAX and PUMA"
+          ]
+        },
+        "right": {
+          "title": "Loss of 17p / Mutant p53",
+          "points": [
+            "Unchecked cell cycle progression",
+            "Failure of DNA damage arrest",
+            "Propagation of chromosomal aberrations",
+            "Resistance to cytotoxic chemotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cellular entry into the DNA synthetic phase is tightly constrained by the retinoblastoma protein. Encoded by **RB1** on **chromosome 13q**, hypophosphorylated Rb regulates the restriction point by physically sequestering **E2F transcription factors**. Progressive phosphorylation of Rb by active cyclin D and CDK4/6 complexes relieves E2F inhibition, transcribing cyclin E and essential replisome genes required for G1 to S phase commitment.",
+      "say": "Cellular entry into the DNA synthetic phase is tightly constrained by the retinoblastoma protein. Encoded by RB1 on chromosome 13q, hypophosphorylated Rb regulates the restriction point by physically sequestering E2F transcription factors. Progressive phosphorylation of Rb by cyclin D and CDK4/6 complexes relieves E2F inhibition, driving progression into S phase.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cdk46",
+            "label": "Cyclin D - CDK4/6 Complex",
+            "level": 1
+          },
+          {
+            "id": "rb_p",
+            "label": "Phosphorylation of Rb1 (13q)",
+            "level": 2
+          },
+          {
+            "id": "e2f",
+            "label": "Release of E2F Factors",
+            "level": 3
+          },
+          {
+            "id": "sphase",
+            "label": "G1 to S Phase Entry",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cdk46",
+            "rb_p"
+          ],
+          [
+            "rb_p",
+            "e2f"
+          ],
+          [
+            "e2f",
+            "sphase"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Metabolic reprogramming is an established hallmark enabling rapid biomass synthesis. The **Warburg effect** describes **aerobic glycolysis**, wherein malignant cells preferentially convert glucose into lactate despite the presence of abundant ambient oxygen. This apparent bioenergetic inefficiency facilitates the shunting of glycolytic intermediates into the pentose phosphate pathway and hexosamine biosynthesis, generating ribose and NADPH for macromolecular assembly.",
+      "say": "Metabolic reprogramming is an established hallmark enabling rapid biomass synthesis. The Warburg effect describes aerobic glycolysis, wherein malignant cells preferentially convert glucose into lactate despite abundant ambient oxygen. This facilitates the shunting of glycolytic intermediates into biosynthetic pathways, generating NADPH and ribose for proliferation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Differentiated Tissues",
+          "points": [
+            "Oxidative phosphorylation in mitochondria",
+            "High ATP yield: 36 ATP per glucose",
+            "Complete oxidation to CO2 and water",
+            "Minimal lactate production in oxygen"
+          ]
+        },
+        "right": {
+          "title": "Warburg Aerobic Glycolysis",
+          "points": [
+            "Rapid glucose uptake via GLUT1/GLUT3",
+            "Low ATP efficiency: 2 ATP per glucose",
+            "Lactate fermentation even with oxygen",
+            "Intermediates diverted for biomass synthesis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Normal human somatic cells undergo senescence after a restricted number of cellular divisions. **Telomerase activation** or alternative lengthening of telomeres overrides this proliferative barrier, conferring cellular replicative immortality by maintaining hexanucleotide repeat lengths beyond the **Hayflick limit**. Upregulation of the catalytic subunit hTERT occurs in up to 90 percent of malignant human tumours, preventing telomere crisis.",
+      "say": "Normal human somatic cells undergo senescence after a restricted number of cellular divisions. Telomerase activation or alternative lengthening of telomeres overrides this proliferative barrier, conferring cellular replicative immortality by maintaining hexanucleotide repeat lengths beyond the Hayflick limit. Upregulation of hTERT occurs in most human cancers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "div",
+            "label": "Repeated Cell Divisions",
+            "level": 1
+          },
+          {
+            "id": "short",
+            "label": "Critical Telomere Shortening",
+            "level": 2
+          },
+          {
+            "id": "htert",
+            "label": "Telomerase (hTERT) Activation",
+            "level": 3
+          },
+          {
+            "id": "immort",
+            "label": "Replicative Immortality",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "div",
+            "short"
+          ],
+          [
+            "short",
+            "htert"
+          ],
+          [
+            "htert",
+            "immort"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The classical model of hereditary and sporadic oncogenesis requires sequential loss of protective alleles. The **Knudson two-hit hypothesis** dictates that functional inactivation of a **tumour suppressor gene** requires bi-allelic loss of function. While hereditary syndromes inherit one damaged germline allele, somatic silencing of the remaining wild-type allele commonly occurs through chromosomal point mutation, interstitial deletion, or epigenetic promoter methylation.",
+      "say": "The classical model of hereditary and sporadic oncogenesis requires sequential loss of protective alleles. The Knudson two-hit hypothesis dictates that functional inactivation of a tumour suppressor gene requires bi-allelic loss of function. In hereditary syndromes, an inherited germline defect is followed by somatic loss of the second wild-type allele.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hit Event",
+          "Hereditary Cancer",
+          "Sporadic Cancer"
+        ],
+        "rows": [
+          [
+            "First Hit (Allele 1)",
+            "Inherited germline mutation (all cells)",
+            "Acquired somatic mutation"
+          ],
+          [
+            "Second Hit (Allele 2)",
+            "Somatic mutation, LOH, or deletion",
+            "Acquired mutation or 13q/17p loss"
+          ],
+          [
+            "Tumour Phenotype",
+            "Early onset, multifocal or bilateral",
+            "Later onset, solitary focal tumour"
+          ],
+          [
+            "Classic Prototypes",
+            "Familial retinoblastoma, Li-Fraumeni",
+            "Sporadic retinoblastoma, sporadic CRC"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Solid tumour expansion beyond 2 millimetres requires recruitment of independent capillary blood supply. Induction of **angiogenesis** is primarily mediated by the **hypoxia-inducible factor** pathway. In hypoxic tissue niches, HIF-1-alpha avoids von Hippel-Lindau-mediated proteasomal degradation, translocating to the nucleus to induce transcription of vascular endothelial growth factor VEGF, promoting endothelial sprouting, lumen formation, and neovascular permeability.",
+      "say": "Solid tumour expansion beyond 2 millimetres requires recruitment of independent capillary blood supply. Induction of angiogenesis is primarily mediated by the hypoxia-inducible factor pathway. In hypoxic tissue niches, HIF-1-alpha avoids proteasomal degradation, inducing transcription of vascular endothelial growth factor to promote neo-vessel formation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypox",
+            "label": "Tissue Hypoxia in Growing Tumour",
+            "level": 1
+          },
+          {
+            "id": "hif",
+            "label": "HIF-1-alpha Stabilisation",
+            "level": 2
+          },
+          {
+            "id": "vegf",
+            "label": "VEGF Ligand Secretion",
+            "level": 3
+          },
+          {
+            "id": "angio",
+            "label": "Endothelial Sprouting and Angiogenesis",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hypox",
+            "hif"
+          ],
+          [
+            "hif",
+            "vegf"
+          ],
+          [
+            "vegf",
+            "angio"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "RB protein in its **hypophosphorylated** state binds and inhibits E2F transcription factors, blocking the G1 to S transition. Germline TP53 loss-of-function causes Li-Fraumeni syndrome, an autosomal dominant disorder with early breast cancer and sarcomas. BCL2 is anti-apoptotic, whereas p53 activates BAX to promote apoptosis. HPV E6 degrades p53 and E7 inactivates RB.",
-   "say": "RB protein in its hypophosphorylated state binds and inhibits E2F transcription factors, blocking the transition from G1 to S phase. Germline TP53 loss of function causes Li-Fraumeni syndrome, an autosomal dominant disorder with early breast cancer and sarcomas. BCL2 is anti-apoptotic, whereas p53 activates BAX to promote apoptosis. HPV E6 degrades p53 and E7 inactivates RB.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Protein",
-     "Normal role",
-     "Cancer effect when altered"
-    ],
-    "rows": [
-     [
-      "RB1",
-      "Holds E2F in check",
-      "Unchecked G1 to S progression"
-     ],
-     [
-      "TP53",
-      "Triggers repair or apoptosis",
-      "Genomic instability, Li-Fraumeni"
-     ],
-     [
-      "BCL2",
-      "Blocks apoptosis",
-      "Survival of damaged cells"
-     ],
-     [
-      "VEGF",
-      "Promotes angiogenesis",
-      "Tumour blood supply"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Cancer cells gain **sustained proliferation** and evade growth suppressors, resist apoptosis, and maintain replicative immortality through **telomerase** activity. They reprogram metabolism via the **Warburg effect**, favouring glycolysis even in oxygen, and secrete VEGF to induce angiogenesis. Activating invasion and metastasis is the final hallmark. Mutation accumulation in humans is estimated at roughly 13 to 44 mutations per genome per year.",
-   "say": "Cancer cells gain sustained proliferation and evade growth suppressors, resist apoptosis, and maintain replicative immortality through telomerase activity. They reprogram metabolism via the Warburg effect, favouring glycolysis even in the presence of oxygen, and secrete VEGF to induce angiogenesis. Activating invasion and metastasis is the final hallmark. Mutation accumulation in humans is estimated at roughly 13 to 44 mutations per genome per year.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-hallmarks-fig1.webp",
-    "alt": "Diagram illustrating the key hallmarks of cancer cells, including sustained proliferation, altered metabolism, angiogenesis, and metastasis.",
-    "caption": "Key hallmarks of cancer: proliferation, metabolism, angiogenesis, invasion, metastasis. Image: David Gems & João Pedro de Magalhães, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 0.6144
-   }
+  ],
+  "quiz": [
+    "q_5a758d8550fc",
+    "q_8a2e7a786474",
+    "q_0dd645028322"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 1 (Cancer Biology and Carcinogenesis)",
+    "Hanahan D, Weinberg RA. Hallmarks of cancer: the next generation. Cell 2011",
+    "Robbins & Cotran Pathologic Basis of Disease 10e Ch. 7 (Neoplasia)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_5a758d8550fc",
-  "q_8a2e7a786474",
-  "q_0dd645028322"
- ],
- "src": [],
- "refs": [
-  "Hanahan D, Weinberg RA. Hallmarks of Cancer: The Next Generation. Cell (2011)",
-  "Knudson AG. Mutation and cancer: statistical study of retinoblastoma. PNAS (1971)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 38
- }
 }

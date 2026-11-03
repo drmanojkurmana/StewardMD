@@ -1,0 +1,279 @@
+{
+  "v": 1,
+  "module": "son-testis",
+  "subject": "ss-medical-oncology",
+  "title": "Germ cell tumours: histology, staging, serum markers, risk stratification and cisplatin-based curative chemotherapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Testicular germ cell tumours are broadly classified into seminoma and nonseminomatous germ cell tumours **NSGCT**. Despite marked histopathological diversity encompassing embryonal carcinoma, yolk sac tumour, choriocarcinoma, and teratoma, all invasive germ cell tumours share a pathognomonic cytogenetic signature: gain of the short arm of chromosome 12, characteristically manifesting as **isochromosome 12p** or 12p amplification.",
+      "say": "Testicular germ cell tumours are broadly classified into seminoma and nonseminomatous germ cell tumours NSGCT. Despite marked histopathological diversity encompassing embryonal carcinoma, yolk sac tumour, choriocarcinoma, and teratoma, all invasive germ cell tumours share a pathognomonic cytogenetic signature: gain of the short arm of chromosome 12, characteristically manifesting as isochromosome 12p or 12p amplification.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Subtype",
+          "Key Pathological Feature",
+          "Characteristic Serum Marker"
+        ],
+        "rows": [
+          [
+            "Seminoma",
+            "Fried-egg clear cells, lymphocytic infiltrate",
+            "Normal AFP; mild beta-hCG elevation in < 15%"
+          ],
+          [
+            "Embryonal Carcinoma",
+            "Pleomorphic sheets, necrosis, vascular invasion",
+            "May elevate both beta-hCG and AFP"
+          ],
+          [
+            "Yolk Sac Tumour",
+            "Schiller-Duval bodies, reticular networks",
+            "Uniformly produces high alpha-fetoprotein (AFP)"
+          ],
+          [
+            "Choriocarcinoma",
+            "Syncytiotrophoblasts and cytotrophoblasts",
+            "Dramatically elevated beta-hCG; haematogenous spread"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accurate clinical staging mandates measuring three serum tumour markers: **alpha-fetoprotein**, **beta-hCG**, and lactate dehydrogenase LDH. Alpha-fetoprotein is synthesized by yolk sac and embryonal elements; crucially, alpha-fetoprotein is never produced by pure seminoma, meaning any elevation in AFP confirms a nonseminomatous component. Serum markers must be reassessed after inguinal orchiectomy to establish post-operative marker decline.",
+      "say": "Accurate clinical staging mandates measuring three serum tumour markers: alpha-fetoprotein, beta-hCG, and lactate dehydrogenase LDH. Alpha-fetoprotein is synthesized by yolk sac and embryonal elements; crucially, alpha-fetoprotein is never produced by pure seminoma, meaning any elevation in AFP confirms a nonseminomatous component. Serum markers must be reassessed after inguinal orchiectomy to establish post-operative marker decline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alpha-Fetoprotein (AFP)",
+          "points": [
+            "Serum half-life: 5 to 7 days",
+            "Produced by yolk sac and embryonal carcinoma",
+            "Never elevated in pure seminoma",
+            "Any elevation mandates treatment as nonseminoma"
+          ]
+        },
+        "right": {
+          "title": "Beta-hCG",
+          "points": [
+            "Serum half-life: 24 to 36 hours",
+            "Secreted by syncytiotrophoblastic cells",
+            "Elevated in choriocarcinoma, embryonal, and seminoma",
+            "Rapid decline confirms surgical clearance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The international **IGCCCG classification** system provides structured risk groupings for **metastatic GCT** into good, intermediate, and poor prognostic categories. Risk stratification incorporates histological subtype, primary anatomical site, presence of non-pulmonary visceral metastases, and post-orchiectomy serum tumour marker nadirs. Notably, seminoma patients are categorized only into good or intermediate prognosis, as poor-risk seminoma does not exist.",
+      "say": "The international IGCCCG classification system provides structured risk groupings for metastatic GCT into good, intermediate, and poor prognostic categories. Risk stratification incorporates histological subtype, primary anatomical site, presence of non-pulmonary visceral metastases, and post-orchiectomy serum tumour marker nadirs. Notably, seminoma patients are categorized only into good or intermediate prognosis, as poor-risk seminoma does not exist.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "IGCCCG Category",
+          "Nonseminoma Features",
+          "5-Year Overall Survival"
+        ],
+        "rows": [
+          [
+            "Good Risk",
+            "Testis/retroperitoneal primary; no non-pulmonary visceral mets; S1",
+            "95% 5-year overall survival"
+          ],
+          [
+            "Intermediate Risk",
+            "Testis/retroperitoneal primary; no non-pulmonary visceral mets; S2",
+            "88% 5-year overall survival"
+          ],
+          [
+            "Poor Risk",
+            "Mediastinal primary, or non-pulmonary visceral mets, or S3 markers",
+            "67% 5-year overall survival"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line curative chemotherapy for good-risk metastatic germ cell tumours comprises 3 cycles of **BEP** bleomycin, etoposide, and cisplatin administered every 21 days, or 4 cycles of **EP** etoposide and cisplatin. In clinical trials, 3 cycles of BEP achieved equivalent curative efficacy to 4 cycles while sparing patients from additional cumulative myelosuppressive and pulmonary toxicities, curing over 90% of good-risk individuals.",
+      "say": "First-line curative chemotherapy for good-risk metastatic germ cell tumours comprises 3 cycles of BEP bleomycin, etoposide, and cisplatin administered every 21 days, or 4 cycles of EP etoposide and cisplatin. In clinical trials, 3 cycles of BEP achieved equivalent curative efficacy to 4 cycles while sparing patients from additional cumulative myelosuppressive and pulmonary toxicities, curing over 90% of good-risk individuals.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "good",
+            "label": "IGCCCG Good Risk",
+            "level": 1
+          },
+          {
+            "id": "bep3",
+            "label": "3 Cycles BEP (or 4 EP)",
+            "level": 2
+          },
+          {
+            "id": "eval",
+            "label": "Restaging CT Scan",
+            "level": 3
+          },
+          {
+            "id": "cure",
+            "label": "> 90% Long-Term Cure",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "good",
+            "bep3"
+          ],
+          [
+            "bep3",
+            "eval"
+          ],
+          [
+            "eval",
+            "cure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients presenting with intermediate- or poor-risk metastatic disease require 4 cycles of **BEP chemotherapy**. Because cumulative bleomycin exposure elevates the risk of life-threatening pulmonary fibrosis, protocols mandate monitoring cumulative dose below 300 units, serial physical examinations, and baseline pulmonary function testing. Furthermore, patients receiving bleomycin must avoid high fractions of inspired oxygen during subsequent surgical anaesthesia.",
+      "say": "Patients presenting with intermediate- or poor-risk metastatic disease require 4 cycles of BEP chemotherapy. Because cumulative bleomycin exposure elevates the risk of life-threatening pulmonary fibrosis, protocols mandate monitoring cumulative dose below 300 units, serial physical examinations, and baseline pulmonary function testing. Furthermore, patients receiving bleomycin must avoid high fractions of inspired oxygen during subsequent surgical anaesthesia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bleomycin Pulmonary Toxicity",
+          "points": [
+            "Presents with dry cough, dyspnoea, and subcrepitant rales",
+            "Basilar interstitial pneumonitis on chest HRCT",
+            "Risk escalates above cumulative dose of 300 units",
+            "Requires immediate bleomycin discontinuation and steroids"
+          ]
+        },
+        "right": {
+          "title": "Anaesthesia Oxygen Restriction",
+          "points": [
+            "High FiO2 generates toxic free radical lung injury",
+            "Post-chemotherapy ARDS triggered by hyperoxia",
+            "Maintain lowest tolerable FiO2 during general surgery",
+            "Avoid excessive intraoperative crystalloid fluid loading"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following completion of chemotherapy for nonseminomatous germ cell tumours, residual retroperitoneal masses measuring **1 cm or larger** on restaging CT mandate nerve-sparing **retroperitoneal lymph node dissection** RPLND. Histopathological examination of resected masses reveals necrotic tissue in 40% to 50%, mature teratoma in 35% to 40%, and viable active germ cell malignancy in 10% to 15% of cases.",
+      "say": "Following completion of chemotherapy for nonseminomatous germ cell tumours, residual retroperitoneal masses measuring 1 cm or larger on restaging CT mandate nerve-sparing retroperitoneal lymph node dissection RPLND. Histopathological examination of resected masses reveals necrotic tissue in 40% to 50%, mature teratoma in 35% to 40%, and viable active germ cell malignancy in 10% to 15% of cases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ct",
+            "label": "Restaging CT Scan",
+            "level": 1
+          },
+          {
+            "id": "size",
+            "label": "Residual Mass >= 1 cm",
+            "level": 2
+          },
+          {
+            "id": "rplnd",
+            "label": "Nerve-Sparing RPLND",
+            "level": 3
+          },
+          {
+            "id": "path",
+            "label": "Teratoma / Necrosis / Viable",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ct",
+            "size"
+          ],
+          [
+            "size",
+            "rplnd"
+          ],
+          [
+            "rplnd",
+            "path"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical stage I seminoma following radical inguinal orchiectomy achieves cure rates approaching 99%. Because relapse risk is low, guidelines recommend **active surveillance** alone as the preferred management strategy. For patients unwilling or unable to pursue rigorous surveillance, adjuvant options comprise single-cycle **carboplatin** at area under the curve AUC 7 or adjuvant para-aortic strip external beam radiotherapy delivering 20 Gy in 10 fractions.",
+      "say": "Clinical stage I seminoma following radical inguinal orchiectomy achieves cure rates approaching 99%. Because relapse risk is low, guidelines recommend active surveillance alone as the preferred management strategy. For patients unwilling or unable to pursue rigorous surveillance, adjuvant options comprise single-cycle carboplatin at area under the curve AUC 7 or adjuvant para-aortic strip external beam radiotherapy delivering 20 Gy in 10 fractions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage I Seminoma Strategy",
+          "Recurrence Rate",
+          "Primary Trade-Off / Considerations"
+        ],
+        "rows": [
+          [
+            "Active Surveillance",
+            "15% to 20% relapse risk",
+            "Preferred; 100% cure with salvage BEP; avoids overtreatment"
+          ],
+          [
+            "Adjuvant Carboplatin AUC 7",
+            "Reduces relapse to approx. 4%",
+            "Single outpatient dose; low acute toxicity; long-term data limited"
+          ],
+          [
+            "Adjuvant Radiotherapy (20 Gy)",
+            "Reduces relapse to approx. 3%",
+            "Para-aortic field; small risk of secondary pelvic malignancies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Salvage chemotherapy** for relapsed germ cell tumours utilizes conventional-dose TIP combining **paclitaxel**, **ifosfamide**, and **cisplatin**. Alternatively, high-dose chemotherapy using carboplatin and etoposide followed by **autologous stem cell rescue** delivers curative outcomes in approximately 50% of relapsed patients, particularly in patients exhibiting intermediate- or high-risk relapse features.",
+      "say": "Salvage chemotherapy for relapsed germ cell tumours utilizes conventional-dose TIP combining paclitaxel, ifosfamide, and cisplatin. Alternatively, high-dose chemotherapy using carboplatin and etoposide followed by autologous stem cell rescue delivers curative outcomes in approximately 50% of relapsed patients, particularly in patients exhibiting intermediate- or high-risk relapse features.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conventional Salvage (TIP)",
+          "points": [
+            "Paclitaxel, Ifosfamide, Cisplatin x 4 cycles",
+            "Mesna uroprotection mandatory with ifosfamide",
+            "Curative in good-risk first relapse",
+            "Avoids intensive myeloablative stem cell transplant"
+          ]
+        },
+        "right": {
+          "title": "High-Dose Chemotherapy (HDCT)",
+          "points": [
+            "High-dose Carboplatin + Etoposide x 2-3 cycles",
+            "Autologous stem cell infusion after each cycle",
+            "Preferred in poor-risk relapse or subsequent salvage",
+            "Cures up to 50% of previously refractory patients"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 55 (Cancer of the Testis)",
+    "NCCN Testicular Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

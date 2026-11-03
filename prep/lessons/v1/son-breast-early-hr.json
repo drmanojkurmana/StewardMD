@@ -1,167 +1,292 @@
 {
- "v": 1,
- "module": "son-breast-early-hr",
- "subject": "ss-medical-oncology",
- "title": "Adjuvant endocrine and targeted therapy in early HR-positive, HER2-negative breast cancer",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Hormone receptor positive early breast cancer means the tumour carries **oestrogen receptors**, so oestrogen fuels its growth. Adjuvant endocrine therapy forms the backbone of treatment and considerably cuts the risk of recurrence. The two main options are **tamoxifen**, which blocks the receptor, and **aromatase inhibitors** such as anastrozole, letrozole and exemestane, which reduce peripheral oestrogen production. The right choice depends on menopausal status and whether ovarian suppression is needed.",
-   "say": "Hormone receptor positive early breast cancer means the tumour carries oestrogen receptors, so oestrogen fuels its growth. Adjuvant endocrine therapy forms the backbone of treatment and considerably cuts the risk of recurrence. The two main options are tamoxifen, which blocks the receptor, and aromatase inhibitors such as anastrozole, letrozole and exemestane, which reduce peripheral oestrogen production. The right choice depends on menopausal status and whether ovarian suppression is needed.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Agent",
-     "Mechanism",
-     "Key use"
-    ],
-    "rows": [
-     [
-      "Tamoxifen",
-      "Blocks oestrogen receptor, active metabolite via CYP2D6",
-      "Premenopausal or postmenopausal"
-     ],
-     [
-      "Aromatase inhibitor",
-      "Blocks peripheral oestrogen synthesis",
-      "Postmenopausal, or premenopausal with ovarian suppression"
-     ],
-     [
-      "Ovarian suppression",
-      "Stops ovarian oestrogen output",
-      "Premenopausal women given an aromatase inhibitor"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Aromatase inhibitors work only when ovarian oestrogen is suppressed, so in a **premenopausal** woman they must be paired with **ovarian function suppression**, usually a GnRH agonist such as goserelin. The SOFT and TEXT trials support this approach in high-risk premenopausal women. Tamoxifen alone is an alternative when AI use is not possible.",
-   "say": "Aromatase inhibitors work only when ovarian oestrogen is suppressed, so in a premenopausal woman they must be paired with ovarian function suppression, usually a GnRH agonist such as goserelin. The SOFT and TEXT trials support this approach in high-risk premenopausal women. Tamoxifen alone is an alternative when AI use is not possible.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Premenopausal"
-     },
-     {
-      "id": "b",
-      "label": "Ovarian suppression"
-     },
-     {
-      "id": "c",
-      "label": "Add aromatase inhibitor"
-     },
-     {
-      "id": "d",
-      "label": "Lower oestrogen"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Aromatase inhibitor **arthralgia** is common and a leading reason for stopping. Management includes exercise, acupuncture and duloxetine, and if symptoms persist a switch to another AI or to **tamoxifen** keeps endocrine benefit. Bone density must be checked, since AIs cause accelerated bone loss, and **bisphosphonates** may be added in postmenopausal women.",
-   "say": "Aromatase inhibitor arthralgia is common and a leading reason for stopping. Management includes exercise, acupuncture and duloxetine, and if symptoms persist a switch to another AI or to tamoxifen keeps endocrine benefit. Bone density must be checked, since AIs cause accelerated bone loss, and bisphosphonates may be added in postmenopausal women.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Symptom control",
-     "points": [
-      "Exercise and acupuncture",
-      "Duloxetine option",
-      "Calcium and vitamin D"
-     ]
+  "v": 1,
+  "module": "son-breast-early-hr",
+  "subject": "ss-medical-oncology",
+  "title": "Early hormone receptor-positive breast cancer: risk stratification, genomic assays, endocrine therapy and CDK4/6 inhibition",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Adjuvant endocrine therapy with the selective estrogen receptor modulator **tamoxifen** for 5 to 10 years significantly reduces invasive recurrence and breast cancer mortality in hormone receptor-positive disease. The landmark ATLAS and aTTom clinical trials demonstrated that extending tamoxifen to a total duration of 10 years further halves breast cancer recurrence and mortality during the second decade, establishing extended therapy for high-risk patients.",
+      "say": "Adjuvant endocrine therapy with the selective estrogen receptor modulator tamoxifen for 5 to 10 years significantly reduces invasive recurrence and breast cancer mortality in hormone receptor-positive disease. The landmark ATLAS and aTTom clinical trials demonstrated that extending tamoxifen to a total duration of 10 years further halves breast cancer recurrence and mortality during the second decade, establishing extended therapy for high-risk patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Duration of Tamoxifen",
+          "Recurrence Reduction",
+          "Key Long-Term Toxicities"
+        ],
+        "rows": [
+          [
+            "5 Years Standard",
+            "Approx. 40% reduction in recurrence",
+            "Hot flushes, mild thromboembolic risk"
+          ],
+          [
+            "10 Years Extended",
+            "Additional 25% reduction in recurrence (years 10-14)",
+            "Elevated endometrial cancer and DVT risks"
+          ],
+          [
+            "Premenopausal Women",
+            "Cornerstone of adjuvant therapy",
+            "Preserves bone mineral density in premenopause"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Switching strategy",
-     "points": [
-      "Switch to another AI",
-      "Or switch to tamoxifen",
-      "Keep endocrine therapy going"
-     ]
+    {
+      "tx": "In postmenopausal women, third-generation **aromatase inhibitors** anastrozole, letrozole, or exemestane block peripheral conversion of androgens to estrogens by the CYP19A1 aromatase enzyme. Large randomised phase III trials including ATAC and BIG 1-98 demonstrated that aromatase inhibitors provide superior disease-free survival over tamoxifen. Because aromatase inhibitors exhaust estrogen production, mandatory supportive care requires baseline bone mineral density monitoring and calcium-vitamin D supplementation.",
+      "say": "In postmenopausal women, third-generation aromatase inhibitors anastrozole, letrozole, or exemestane block peripheral conversion of androgens to estrogens by the CYP19A1 aromatase enzyme. Large randomised phase III trials including ATAC and BIG 1-98 demonstrated that aromatase inhibitors provide superior disease-free survival over tamoxifen. Because aromatase inhibitors exhaust estrogen production, mandatory supportive care requires baseline bone mineral density monitoring and calcium-vitamin D supplementation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aromatase Inhibitors (AIs)",
+          "points": [
+            "Anastrozole, letrozole, exemestane",
+            "Superior disease-free survival vs tamoxifen",
+            "Causes arthralgias, bone loss, and osteopenia",
+            "Ineffective with functioning ovaries (postmenopausal only)"
+          ]
+        },
+        "right": {
+          "title": "Tamoxifen (SERM)",
+          "points": [
+            "Competitive estrogen receptor antagonist in breast",
+            "Estrogen agonist in endometrium and bone",
+            "Maintains bone mineral density in postmenopause",
+            "Carries venous thromboembolism and endometrial cancer risks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For high-risk premenopausal women, the pivotal **SOFT and TEXT** randomized clinical trials proved that combining **ovarian function suppression** using GnRH agonists with exemestane or tamoxifen significantly improves disease-free survival compared to tamoxifen alone. Achieving therapeutic ovarian suppression using monthly goserelin or leuprolide eliminates ovarian estrogen production, allowing aromatase inhibitors to safely maximize endocrine suppression and prevent distant recurrence.",
+      "say": "For high-risk premenopausal women, the pivotal SOFT and TEXT randomized clinical trials proved that combining ovarian function suppression using GnRH agonists with exemestane or tamoxifen significantly improves disease-free survival compared to tamoxifen alone. Achieving therapeutic ovarian suppression using monthly goserelin or leuprolide eliminates ovarian estrogen production, allowing aromatase inhibitors to safely maximize endocrine suppression and prevent distant recurrence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pre",
+            "label": "High-Risk Premenopausal",
+            "level": 1
+          },
+          {
+            "id": "gnrh",
+            "label": "GnRH Agonist Suppression",
+            "level": 2
+          },
+          {
+            "id": "ai",
+            "label": "Exemestane / Tamoxifen",
+            "level": 3
+          },
+          {
+            "id": "dfs",
+            "label": "Superior DFS & OS",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pre",
+            "gnrh"
+          ],
+          [
+            "gnrh",
+            "ai"
+          ],
+          [
+            "ai",
+            "dfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the phase III **monarchE** trial, adding the oral CDK4/6 inhibitor **abemaciclib** at 150 mg twice daily for 2 years to standard adjuvant endocrine therapy significantly reduced invasive disease-free recurrence in node-positive, high-risk early HR+ breast cancer. High risk was defined by 4 or more positive axillary nodes, or 1 to 3 positive nodes with tumour size 5 cm or greater or histological grade 3.",
+      "say": "In the phase III monarchE trial, adding the oral CDK4/6 inhibitor abemaciclib at 150 mg twice daily for 2 years to standard adjuvant endocrine therapy significantly reduced invasive disease-free recurrence in node-positive, high-risk early HR+ breast cancer. High risk was defined by 4 or more positive axillary nodes, or 1 to 3 positive nodes with tumour size 5 cm or greater or histological grade 3.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial Cohort",
+          "Inclusion Criteria",
+          "monarchE 5-Year Invasive DFS Gain"
+        ],
+        "rows": [
+          [
+            "Cohort 1: High Nodal Burden",
+            "4 or more positive axillary lymph nodes",
+            "Absolute 7.6% improvement in invasive DFS"
+          ],
+          [
+            "Cohort 1: Moderate Nodal",
+            "1 to 3 nodes with grade 3 or size >= 5 cm",
+            "Sustained post-treatment carryover effect"
+          ],
+          [
+            "Cohort 2: High Ki-67",
+            "1 to 3 nodes with Ki-67 index >= 20%",
+            "Consistent benefit across all high-risk subgroups"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Expanding the adjuvant CDK4/6 paradigm, the phase III **NATALEE trial** evaluated **adjuvant ribociclib** at 400 mg daily for 3 years combined with a non-steroidal aromatase inhibitor. NATALEE enrolled both stage II and stage III HR-positive, HER2-negative early breast cancer, including node-negative patients with high genomic or clinical risk, demonstrating a statistically significant reduction in invasive recurrence.",
+      "say": "Expanding the adjuvant CDK4/6 paradigm, the phase III NATALEE trial evaluated adjuvant ribociclib at 400 mg daily for 3 years combined with a non-steroidal aromatase inhibitor. NATALEE enrolled both stage II and stage III HR-positive, HER2-negative early breast cancer, including node-negative patients with high genomic or clinical risk, demonstrating a statistically significant reduction in invasive recurrence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "NATALEE (Ribociclib)",
+          "points": [
+            "Dose: 400 mg daily (lower than metastatic 600 mg)",
+            "Duration: 3 years of therapy",
+            "Includes node-negative stage IIA patients",
+            "Invasive disease-free survival benefit confirmed"
+          ]
+        },
+        "right": {
+          "title": "monarchE (Abemaciclib)",
+          "points": [
+            "Dose: 150 mg twice daily continuously",
+            "Duration: 2 years of therapy",
+            "Restricted to node-positive high-risk patients",
+            "Proven long-term overall survival and IDFS benefit"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In patients harbouring germline BRCA1 or BRCA2 pathogenic variants with high-risk HER2-negative early breast cancer, the phase III **OlympiA trial** established **adjuvant olaparib** for 1 year. Administered following completion of definitive surgery and (neo)adjuvant chemotherapy, PARP inhibitor therapy produced statistically significant improvements in invasive disease-free survival and overall survival through synthetic lethality in homologous recombination-deficient cells.",
+      "say": "In patients harbouring germline BRCA1 or BRCA2 pathogenic variants with high-risk HER2-negative early breast cancer, the phase III OlympiA trial established adjuvant olaparib for 1 year. Administered following completion of definitive surgery and neoadjuvant or adjuvant chemotherapy, PARP inhibitor therapy produced statistically significant improvements in invasive disease-free survival and overall survival through synthetic lethality in homologous recombination-deficient cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gbrca",
+            "label": "Germline BRCA1/2",
+            "level": 1
+          },
+          {
+            "id": "chemo",
+            "label": "Standard Chemotherapy",
+            "level": 2
+          },
+          {
+            "id": "olap",
+            "label": "Olaparib 1 Year",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Prolonged OS Benefit",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "gbrca",
+            "chemo"
+          ],
+          [
+            "chemo",
+            "olap"
+          ],
+          [
+            "olap",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adjuvant **bisphosphonate therapy** with intravenous **zoledronic acid** or oral clodronate significantly reduces bone recurrence and breast cancer mortality in postmenopausal women. The Early Breast Cancer Trialists Collaborative Group meta-analysis confirmed that antiresorptive therapy modifies the bone marrow microenvironment, preventing disseminated tumour cell dormancy escape exclusively in postmenopausal or ovarian-suppressed women.",
+      "say": "Adjuvant bisphosphonate therapy with intravenous zoledronic acid or oral clodronate significantly reduces bone recurrence and breast cancer mortality in postmenopausal women. The Early Breast Cancer Trialists Collaborative Group meta-analysis confirmed that antiresorptive therapy modifies the bone marrow microenvironment, preventing disseminated tumour cell dormancy escape exclusively in postmenopausal or ovarian-suppressed women.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Bisphosphonate Regimen",
+          "Administration Schedule",
+          "Oncologic Outcome"
+        ],
+        "rows": [
+          [
+            "Zoledronic Acid IV",
+            "4 mg IV every 6 months for 3 to 5 years",
+            "Absolute 28% reduction in bone metastasis risk"
+          ],
+          [
+            "Clodronate Oral",
+            "1600 mg orally daily for 2 to 3 years",
+            "Significant reduction in breast cancer mortality"
+          ],
+          [
+            "Premenopausal Setting",
+            "No antineoplastic benefit without OFS",
+            "Anticancer effect strictly requires hypoestrogenic state"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Standard clinical guidelines recommend **Extended endocrine therapy** beyond 5 years up to 10 years for patients presenting with high-risk clinicopathological features, particularly node-positive disease. Validated multigene signatures including the Breast Cancer Index help predict which individual patients derive meaningful late recurrence reduction from extended endocrine therapy, sparing lower-risk individuals from cumulative musculoskeletal and cardiovascular toxicities.",
+      "say": "Standard clinical guidelines recommend Extended endocrine therapy beyond 5 years up to 10 years for patients presenting with high-risk clinicopathological features, particularly node-positive disease. Validated multigene signatures including the Breast Cancer Index help predict which individual patients derive meaningful late recurrence reduction from extended endocrine therapy, sparing lower-risk individuals from cumulative musculoskeletal and cardiovascular toxicities.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "five",
+            "label": "Year 5 Endocrine Check",
+            "level": 1
+          },
+          {
+            "id": "bci",
+            "label": "Breast Cancer Index Test",
+            "level": 2
+          },
+          {
+            "id": "high",
+            "label": "High Late Recurrence Risk",
+            "level": 3
+          },
+          {
+            "id": "ext",
+            "label": "Extend to 10 Years",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "five",
+            "bci"
+          ],
+          [
+            "bci",
+            "high"
+          ],
+          [
+            "high",
+            "ext"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Tamoxifen interacts with **CYP2D6**, which converts it into active endoxifen. Strong inhibitors such as paroxetine and fluoxetine reduce endoxifen levels, so venlafaxine or citalopram are preferred antidepressants. Extended therapy beyond 5 years, with an AI after tamoxifen, reduces late recurrence in higher-risk disease, though absolute gain is modest.",
-   "say": "Tamoxifen interacts with CYP2D6, which converts it into active endoxifen. Strong inhibitors such as paroxetine and fluoxetine reduce endoxifen levels, so venlafaxine or citalopram are preferred antidepressants. Extended therapy beyond 5 years, with an AI after tamoxifen, reduces late recurrence in higher-risk disease, though absolute gain is modest.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-breast-early-hr-fig1.webp",
-    "alt": "Diagram showing tamoxifen converted to active endoxifen by CYP2D6. Paroxetine and fluoxetine inhibit CYP2D6, while venlafaxine and citalopram are preferred antidepressants.",
-    "caption": "Tamoxifen metabolism and antidepressant interactions",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "CDK4/6 inhibitors added to adjuvant endocrine therapy improve **invasive disease-free survival** in high-risk node-positive disease. Abemaciclib for 2 years is used in patients with 4 or more positive nodes, or 1 to 3 nodes with grade 3 or tumour 5 cm or more, based on the monarchE trial. Diarrhoea is the key toxicity: start loperamide early and hold the drug if it persists.",
-   "say": "CDK4/6 inhibitors added to adjuvant endocrine therapy improve invasive disease-free survival in high-risk node-positive disease. Abemaciclib for 2 years is used in patients with 4 or more positive nodes, or 1 to 3 nodes with grade 3 or tumour 5 cm or more, based on the monarchE trial. Diarrhoea is the key toxicity: start loperamide early and hold the drug if it persists.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Detail"
-    ],
-    "rows": [
-     [
-      "Drug",
-      "Abemaciclib, 2 years"
-     ],
-     [
-      "Eligibility",
-      "4 or more nodes, or 1 to 3 nodes with high-risk features"
-     ],
-     [
-      "Key toxicity",
-      "Diarrhoea, start loperamide early"
-     ],
-     [
-      "Other trial",
-      "Ribociclib, NATALEE trial"
-     ]
-    ]
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 44 (Cancer of the Breast)",
+    "ASCO / ESMO Early Breast Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_23b7a02f3022",
-  "q_ac33925cbd09",
-  "q_06dcefec86d2"
- ],
- "src": [],
- "refs": [
-  "Early Breast Cancer: ESMO Clinical Practice Guideline",
-  "NICE Early and locally advanced breast cancer guideline NG101",
-  "monarchE trial publication",
-  "SOFT and TEXT trials publications"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 35
- }
 }

@@ -1,0 +1,261 @@
+{
+ "v": 1,
+ "module": "sca-dilated-restrictive-cardiomyopathy",
+ "subject": "ss-cardiology",
+ "title": "Dilated, restrictive and arrhythmogenic cardiomyopathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Dilated cardiomyopathy** is characterized by left ventricular enlargement accompanied by impaired **systolic dysfunction**, typically defined by an LVEF under 45% or fractional shortening under 25%. Diagnosis mandates excluding secondary causes including obstructive coronary artery disease, systemic hypertension, severe primary valvular abnormalities, and congenital structural defects.",
+   "say": "Dilated cardiomyopathy is characterized by left ventricular enlargement accompanied by impaired systolic dysfunction, typically defined by an LVEF under 45 percent or fractional shortening under 25 percent. Diagnosis mandates excluding secondary causes including obstructive coronary artery disease, systemic hypertension, severe primary valvular abnormalities, and congenital structural defects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Criterion",
+     "Threshold Value",
+     "Clinical Exclusion"
+    ],
+    "rows": [
+     [
+      "Ventricular chamber size",
+      "LVEDD > 2 standard deviations",
+      "No abnormal volume overload"
+     ],
+     [
+      "Contractile impairment",
+      "LVEF < 45% or FS < 25%",
+      "No coronary artery stenosis >= 50%"
+     ],
+     [
+      "Wall thickness",
+      "Normal or thinned myocardium",
+      "Excludes primary hypertrophy"
+     ],
+     [
+      "Secondary screening",
+      "Normal metabolic and toxic panel",
+      "Excludes alcohol, thyroid, or viral causes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Genetic discovery indicates that truncating variants in the **TTN gene**, termed **titin-truncating** variants or TTNtvs, represent the single most common inherited cause of familial dilated cardiomyopathy. TTNtvs account for approximately 15% to 25% of genetic DCM cases, disrupting giant sarcomeric structural scaffolding and rendering the myocardium vulnerable to environmental stressors like alcohol or pregnancy.",
+   "say": "Genetic discovery indicates that truncating variants in the TTN gene, termed titin-truncating variants or TTNtvs, represent the single most common inherited cause of familial dilated cardiomyopathy. TTNtvs account for approximately 15 to 25 percent of genetic DCM cases, disrupting giant sarcomeric structural scaffolding and rendering the myocardium vulnerable to environmental stressors like alcohol or pregnancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TTN gene variants",
+     "points": [
+      "15% to 25% of familial DCM",
+      "Encodes giant titin protein",
+      "Disrupts sarcomeric elasticity",
+      "May show clinical reverse remodeling"
+     ]
+    },
+    "right": {
+     "title": "Other sarcomeric DCM",
+     "points": [
+      "MYH7, TNNT2, and TPM1 mutations",
+      "Affect thin and thick filaments",
+      "Variable penetrance across families",
+      "Less frequent than titin truncations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Specific **LMNA mutations** encoding nuclear lamins A/C generate an aggressive dilated cardiomyopathy phenotype characterised by **progressive AV block**, atrial flutter or fibrillation, and high sudden cardiac death risk. Because life-threatening ventricular tachyarrhythmias frequently arise before profound systolic deterioration, international guidelines recommend early primary prevention ICD implantation in lamin mutation carriers.",
+   "say": "Specific LMNA mutations encoding nuclear lamins A/C generate an aggressive dilated cardiomyopathy phenotype characterised by progressive AV block, atrial flutter or fibrillation, and high sudden cardiac death risk. Because life-threatening ventricular tachyarrhythmias frequently arise before profound systolic deterioration, international guidelines recommend early primary prevention ICD implantation in lamin mutation carriers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mutation",
+      "label": "LMNA gene mutation carrier"
+     },
+     {
+      "id": "conduction",
+      "label": "Progressive AV conduction disease"
+     },
+     {
+      "id": "arrhythmia",
+      "label": "Malignant VT or VF episodes"
+     },
+     {
+      "id": "icd-action",
+      "label": "Early prophylactic ICD insertion"
+     }
+    ],
+    "edges": [
+     [
+      "mutation",
+      "conduction",
+      "nuclear envelope breakdown"
+     ],
+     [
+      "conduction",
+      "arrhythmia",
+      "interstitial myocardial fibrosis"
+     ],
+     [
+      "arrhythmia",
+      "icd-action",
+      "sudden cardiac death prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Arrhythmogenic right ventricular cardiomyopathy** is an inherited non-ischemic cardiomyopathy primarily caused by pathogenic variants in **desmosomal genes**, including PKP2, DSP, DSG2, DSC2, and JUP. Desmosomal mechanical uncoupling provokes fibrofatty replacement of right ventricular myocardium, creating electrophysiological instability, wall thinning, and ventricular arrhythmias.",
+   "say": "Arrhythmogenic right ventricular cardiomyopathy is an inherited non-ischemic cardiomyopathy primarily caused by pathogenic variants in desmosomal genes, including PKP2, DSP, DSG2, DSC2, and JUP. Desmosomal mechanical uncoupling provokes fibrofatty replacement of right ventricular myocardium, creating electrophysiological instability, wall thinning, and ventricular arrhythmias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Desmosomal Component",
+     "Encoding Gene",
+     "Structural Function"
+    ],
+    "rows": [
+     [
+      "Plakophilin-2",
+      "PKP2",
+      "Major armadillo-repeat bridging protein"
+     ],
+     [
+      "Desmoplakin",
+      "DSP",
+      "Anchors desmosome to intermediate desmin"
+     ],
+     [
+      "Desmoglein-2",
+      "DSG2",
+      "Transmembrane cadherin intercellular linker"
+     ],
+     [
+      "Plakoglobin",
+      "JUP",
+      "Interacts with cadherins and desmoplakin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic hallmarks of ARVC on a 12-lead ECG include distinctive **epsilon waves**, defined as sharp low-amplitude electrical deflections at the termination of the QRS complex in leads V1 to V3. In addition, persistent **inverted T waves** in right precordial leads V1 to V3 beyond age 14 indicate abnormal repolarisation and constitute a major 2010 Task Force criterion.",
+   "say": "Diagnostic hallmarks of ARVC on a 12-lead ECG include distinctive epsilon waves, defined as sharp low-amplitude electrical deflections at the termination of the QRS complex in leads V1 to V3. In addition, persistent inverted T waves in right precordial leads V1 to V3 beyond age 14 indicate abnormal repolarisation and constitute a major 2010 Task Force criterion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epsilon wave",
+     "points": [
+      "Terminal QRS deflection",
+      "Prominent in V1 to V3",
+      "Reflects delayed RV activation",
+      "Major diagnostic ECG criterion"
+     ]
+    },
+    "right": {
+     "title": "Precordial T wave inversion",
+     "points": [
+      "Extends across V1, V2, and V3",
+      "Pathologic beyond age 14 years",
+      "Represents altered repolarisation",
+      "Distinguishes from juvenile pattern"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiocutaneous syndrome **Naxos disease** is an autosomal recessive disorder combining arrhythmogenic right ventricular cardiomyopathy with characteristic curly **woolly hair** and thick palmoplantar keratoderma. It is caused by homozygous mutations in the junctional plakoglobin gene JUP, whereas Carvajal syndrome features similar skin findings with left-dominant dilated cardiomyopathy due to desmoplakin mutations.",
+   "say": "Cardiocutaneous syndrome Naxos disease is an autosomal recessive disorder combining arrhythmogenic right ventricular cardiomyopathy with characteristic curly woolly hair and thick palmoplantar keratoderma. It is caused by homozygous mutations in the junctional plakoglobin gene JUP, whereas Carvajal syndrome features similar skin findings with left-dominant dilated cardiomyopathy due to desmoplakin mutations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Causative Gene",
+     "Cardiac Phenotype",
+     "Cutaneous Features"
+    ],
+    "rows": [
+     [
+      "Naxos disease",
+      "JUP (plakoglobin)",
+      "Classic RV-dominant ARVC",
+      "Woolly hair, palmoplantar keratoderma"
+     ],
+     [
+      "Carvajal syndrome",
+      "DSP (desmoplakin)",
+      "Left-dominant DCM with early HF",
+      "Woolly hair, striate keratoderma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Restrictive cardiomyopathy** features stiff, noncompliant ventricular myocardium causing severe diastolic filling impedance while systolic chamber volume remains normal. Echocardiography demonstrates a severe **restrictive filling** pattern with mitral inflow E/A ratio above 2.0, shortened deceleration time under 160 ms, marked biatrial enlargement, and normal or mildly thickened ventricular walls.",
+   "say": "Restrictive cardiomyopathy features stiff, noncompliant ventricular myocardium causing severe diastolic filling impedance while systolic chamber volume remains normal. Echocardiography demonstrates a severe restrictive filling pattern with mitral inflow E/A ratio above 2.0, shortened deceleration time under 160 ms, marked biatrial enlargement, and normal or mildly thickened ventricular walls.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Echocardiographic Parameter",
+     "Restrictive Finding",
+     "Underlying Mechanism"
+    ],
+    "rows": [
+     [
+      "Mitral E/A velocity ratio",
+      "E/A ratio > 2.0",
+      "Abrupt early diastolic filling surge"
+     ],
+     [
+      "Mitral E deceleration time",
+      "< 160 ms",
+      "Rapid ventricular filling cessation"
+     ],
+     [
+      "Atrial chamber dimensions",
+      "Marked biatrial enlargement",
+      "Chronic elevated atrial filling pressures"
+     ],
+     [
+      "Tissue Doppler mitral e prime",
+      "Markedly depressed < 5 cm/s",
+      "Intrinsic myocardial compliance loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiating restrictive cardiomyopathy from **constrictive pericarditis** relies on assessing respiratory **ventricular interdependence** during invasive cardiac catheterisation. In constrictive pericarditis, the rigid pericardial sac confines the ventricles, yielding discordant right and left ventricular systolic pressure peaks during respiration, a hemodynamic phenomenon entirely absent in noncompliant restrictive myocardium.",
+   "say": "Differentiating restrictive cardiomyopathy from constrictive pericarditis relies on assessing respiratory ventricular interdependence during invasive cardiac catheterisation. In constrictive pericarditis, the rigid pericardial sac confines the ventricles, yielding discordant right and left ventricular systolic pressure peaks during respiration, a hemodynamic phenomenon entirely absent in noncompliant restrictive myocardium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Constrictive pericarditis",
+     "points": [
+      "Enhanced ventricular interdependence",
+      "Discordant LV and RV peak systolic pressures",
+      "Respiratory variation in mitral inflow > 25%",
+      "Normal or elevated tissue Doppler e prime"
+     ]
+    },
+    "right": {
+     "title": "Restrictive cardiomyopathy",
+     "points": [
+      "No ventricular interdependence",
+      "Concordant LV and RV peak systolic pressures",
+      "Minimal respiratory mitral variation < 10%",
+      "Severely reduced tissue Doppler e prime"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_3f0ae0959b5a",
+  "q_cf8b3deee4f2",
+  "q_15444b7f285c"
+ ],
+ "gen": "hand"
+}

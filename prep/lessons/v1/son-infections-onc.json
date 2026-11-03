@@ -1,0 +1,260 @@
+{
+  "v": 1,
+  "module": "son-infections-onc",
+  "subject": "ss-medical-oncology",
+  "title": "Infectious complications in oncology: neutropenic fever, opportunistic fungi, viral reactivation and vaccination principles",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Neutropenic fever** in cancer patients represents an acute medical emergency requiring emergent clinical evaluation. Paired blood cultures from all central venous line lumens and peripheral veins must be drawn prior to administering immediate empirical **broad-spectrum antibiotics** within 60 minutes of presentation to prevent lethal bacteremic shock and cardiovascular collapse.",
+      "say": "Neutropenic fever in cancer patients represents an acute medical emergency requiring emergent clinical evaluation. Paired blood cultures from all central venous line lumens and peripheral veins must be drawn prior to administering immediate empirical broad-spectrum antibiotics within 60 minutes of presentation to prevent lethal bacteremic shock and cardiovascular collapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fever",
+            "label": "T >= 38.3 C or >= 38.0 C x 1h (ANC < 500)"
+          },
+          {
+            "id": "cx",
+            "label": "Paired Blood Cultures (Central + Peripheral)"
+          },
+          {
+            "id": "abx",
+            "label": "Antipseudomonal Beta-Lactam within 60 min"
+          }
+        ],
+        "edges": [
+          [
+            "fever",
+            "cx"
+          ],
+          [
+            "cx",
+            "abx"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Invasive aspergillosis** is the leading lethal fungal killer in patients undergoing prolonged profound neutropenia and allogeneic stem cell transplantation. High-resolution chest computed tomography classically reveals early macronodules surrounded by ground-glass attenuation, termed **halo signs**, reflecting angioinvasive fungal ischemic infarction, progressing subsequently to late air-crescent cavitations during neutrophil recovery.",
+      "say": "Invasive aspergillosis is the leading lethal fungal killer in patients undergoing prolonged profound neutropenia and allogeneic stem cell transplantation. High-resolution chest computed tomography classically reveals early macronodules surrounded by ground-glass attenuation, termed halo signs, reflecting angioinvasive fungal ischemic infarction, progressing subsequently to late air-crescent cavitations during neutrophil recovery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early CT Halo Sign",
+          "points": [
+            "Dense pulmonary nodule with ground-glass halo",
+            "Reflects fungal angioinvasion and surrounding hemorrhage",
+            "Present during initial profound neutropenia",
+            "Mandates stat voriconazole or isavuconazole"
+          ]
+        },
+        "right": {
+          "title": "Late CT Air-Crescent Sign",
+          "points": [
+            "Crescentic gas pocket within necrotic sequestrum",
+            "Appears during marrow neutrophil reconstitution",
+            "Reflects inflammatory cavitation and tissue retraction",
+            "Confirms healing or ongoing fungal cavitation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Serum and **bronchoalveolar lavage** **galactomannan** antigen detection provides high sensitivity and specificity for the early diagnosis of invasive aspergillosis before definitive radiographic cavitation occurs. Serial optical density index monitoring enables preemptive antifungal therapy with voriconazole, significantly reducing mortality compared to empiric delayed approaches.",
+      "say": "Serum and bronchoalveolar lavage galactomannan antigen detection provides high sensitivity and specificity for the early diagnosis of invasive aspergillosis before definitive radiographic cavitation occurs. Serial optical density index monitoring enables preemptive antifungal therapy with voriconazole, significantly reducing mortality compared to empiric delayed approaches.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Specimen",
+          "Optical Density (OD) Cutoff",
+          "Clinical Utility"
+        ],
+        "rows": [
+          [
+            "Serum Galactomannan",
+            "Single OD >= 0.7 or two consecutive >= 0.5",
+            "Surveillance marker in profound prolonged neutropenia"
+          ],
+          [
+            "Bronchoalveolar Lavage (BAL)",
+            "Single OD >= 1.0",
+            "Direct local assessment of lower respiratory fungal load"
+          ],
+          [
+            "Beta-D-Glucan Assay",
+            "Positive at >= 80 pg/mL",
+            "Pan-fungal cell-wall marker; detects Candida and Aspergillus, negative in Mucor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Trimethoprim-sulfamethoxazole** **TMP-SMX** prophylaxis is mandatory for oncology patients receiving high-dose corticosteroids, fludarabine, or hyper-CVAD regimens to prevent lethal **Pneumocystis jirovecii** pneumonia. Standard dosing of one double-strength tablet three times weekly delivers complete alveolar protection, whereas atovaquone or inhaled pentamidine serve as validated alternatives for sulfa-allergic individuals.",
+      "say": "Trimethoprim-sulfamethoxazole TMP-SMX prophylaxis is mandatory for oncology patients receiving high-dose corticosteroids, fludarabine, or hyper-CVAD regimens to prevent lethal Pneumocystis jirovecii pneumonia. Standard dosing of one double-strength tablet three times weekly delivers complete alveolar protection, whereas atovaquone or inhaled pentamidine serve as validated alternatives for sulfa-allergic individuals.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Setting",
+          "PJP Prophylaxis Regimen",
+          "Target Mechanism"
+        ],
+        "rows": [
+          [
+            "High-Dose Dexamethasone / Prednisone (>20 mg x 4 wk)",
+            "TMP-SMX 1 DS tablet oral 3 times weekly",
+            "Blocks fungal folate synthesis pathway"
+          ],
+          [
+            "Purine Analogue (Fludarabine / Cladribine)",
+            "TMP-SMX continued until CD4+ count > 200/uL",
+            "Mitigates severe T-cell lymphopenia and opportunistic lung infection"
+          ],
+          [
+            "Sulfa Hypersensitivity / Allergy",
+            "Atovaquone 1500 mg daily or inhaled pentamidine 300 mg monthly",
+            "Alternative non-sulfa Pneumocystis prophylaxis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Universal **Hepatitis B virus** screening with surface antigen and total core antibody is mandatory prior to initiating rituximab, cytotoxic regimens, or stem cell transplantation. Administering prophylactic antiviral therapy with entecavir or tenofovir disoproxil prevents fatal fulminant **HBV reactivation** and catastrophic acute hepatic failure.",
+      "say": "Universal Hepatitis B virus screening with surface antigen and total core antibody is mandatory prior to initiating rituximab, cytotoxic regimens, or stem cell transplantation. Administering prophylactic antiviral therapy with entecavir or tenofovir disoproxil prevents fatal fulminant HBV reactivation and catastrophic acute hepatic failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "Pre-Chemo Screen (HBsAg + anti-HBc)"
+          },
+          {
+            "id": "pos",
+            "label": "HBsAg(+) or anti-HBc(+)"
+          },
+          {
+            "id": "rx",
+            "label": "Start Entecavir or Tenofovir Prophylaxis"
+          },
+          {
+            "id": "post",
+            "label": "Continue >= 12 Months Post-Rituximab"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "pos"
+          ],
+          [
+            "pos",
+            "rx"
+          ],
+          [
+            "rx",
+            "post"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cytomegalovirus** reactivation is monitored with serial quantitative real-time PCR following allogeneic stem cell transplantation. Implementing scheduled **preemptive therapy** with oral valganciclovir or intravenous ganciclovir upon reaching predefined viral load thresholds arrests active replication and successfully prevents tissue-invasive cytomegalovirus pneumonitis, enteritis, and retinitis.",
+      "say": "Cytomegalovirus reactivation is monitored with serial quantitative real-time PCR following allogeneic stem cell transplantation. Implementing scheduled preemptive therapy with oral valganciclovir or intravenous ganciclovir upon reaching predefined viral load thresholds arrests active replication and successfully prevents tissue-invasive cytomegalovirus pneumonitis, enteritis, and retinitis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Preemptive Antiviral Strategy",
+          "points": [
+            "Weekly quantitative PCR viral surveillance",
+            "Initiate valganciclovir 900 mg BID upon viral load trigger",
+            "Averts overt end-organ cytomegalovirus disease",
+            "Minimizes drug toxicity by targeting viremic patients"
+          ]
+        },
+        "right": {
+          "title": "Primary Prophylaxis (Letermovir)",
+          "points": [
+            "Letermovir viral terminase complex inhibitor",
+            "Dosed 480 mg daily from day 0 to day 100",
+            "Significantly reduces CMV reactivation without myelosuppression",
+            "Indicated in all CMV-seropositive allogeneic recipients"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mucormycosis** is an aggressive, fulminant angioinvasive fungal infection seen in diabetic, acidotic, or neutropenic patients, presenting with reverse halo signs, dark necrotic eschars, and orbital invasion. Immediate treatment demands emergency surgical debridement of necrotic tissues coupled with high-dose **liposomal amphotericin B** at 5 to 10 mg/kg daily to forestall rapid vascular occlusion and death.",
+      "say": "Mucormycosis is an aggressive, fulminant angioinvasive fungal infection seen in diabetic, acidotic, or neutropenic patients, presenting with reverse halo signs, dark necrotic eschars, and orbital invasion. Immediate treatment demands emergency surgical debridement of necrotic tissues coupled with high-dose liposomal amphotericin B at 5 to 10 mg/kg daily to forestall rapid vascular occlusion and death.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Invasive Mucormycosis",
+          "Invasive Aspergillosis"
+        ],
+        "rows": [
+          [
+            "Hyphal Morphology",
+            "Broad, non-septate or sparsely septate, right-angle (90 deg) branching",
+            "Narrow, septate, acute-angle (45 deg) branching"
+          ],
+          [
+            "Radiographic Sign",
+            "Reverse halo sign (central ground-glass with dense consolidation ring)",
+            "Classic halo sign (nodule with ground-glass rim)"
+          ],
+          [
+            "Primary Antifungal",
+            "Liposomal amphotericin B 5-10 mg/kg or isavuconazole",
+            "Voriconazole 6 mg/kg BID day 1, then 4 mg/kg BID"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Inactivated vaccines**, including recombinant seasonal influenza, conjugate pneumococcal, and recombinant zoster vaccines, are safe and recommended in oncology patients to bolster humoral immunity. Conversely, **live-attenuated** vaccines, such as measles-mumps-rubella, yellow fever, oral polio, and BCG, are strictly contraindicated during immunosuppressive chemotherapy due to fatal disseminated replication risks.",
+      "say": "Inactivated vaccines, including recombinant seasonal influenza, conjugate pneumococcal, and recombinant zoster vaccines, are safe and recommended in oncology patients to bolster humoral immunity. Conversely, live-attenuated vaccines, such as measles-mumps-rubella, yellow fever, oral polio, and BCG, are strictly contraindicated during immunosuppressive chemotherapy due to fatal disseminated replication risks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Safe Inactivated Vaccines",
+          "points": [
+            "Recombinant seasonal influenza injection",
+            "Pneumococcal conjugate PCV20 or PCV15",
+            "Recombinant zoster vaccine (Shingrix)",
+            "COVID-19 mRNA vaccines"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated Live Vaccines",
+          "points": [
+            "Measles-Mumps-Rubella (MMR)",
+            "Yellow fever and oral polio (OPV)",
+            "Varicella live-attenuated vaccine",
+            "Live BCG and oral typhoid vaccines"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 88 (Infectious Complications in Oncology)",
+    "IDSA Neutropenic Fever Guidelines",
+    "ECMM Global Mucormycosis Guidelines",
+    "ASCO / AASLD Hepatitis B Screening Guidelines"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

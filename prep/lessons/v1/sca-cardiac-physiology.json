@@ -1,175 +1,283 @@
 {
- "v": 1,
- "module": "sca-cardiac-physiology",
- "subject": "ss-cardiology",
- "title": "Cardiac physiology and haemodynamics: core principles for NEET-PG and INI-CET",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "The **Frank-Starling law** states that stroke volume rises as end-diastolic volume, the **preload**, increases, because stretched myocardial fibres contract more forcefully. Contractility shifts the whole curve upward, so the same preload gives greater output. **Afterload** is the resistance the ventricle must eject against; raising it reduces emptying, while lowering it shifts the performance curve upward, mimicking higher contractility.",
-   "say": "The Frank-Starling law states that stroke volume rises as end-diastolic volume, the preload, increases, because stretched myocardial fibres contract more forcefully. Increased contractility shifts the whole curve upward, so the same preload gives greater output. Afterload is the resistance the ventricle must eject against. Raising afterload reduces emptying, while lowering it shifts the performance curve upward, mimicking higher contractility.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Preload",
-     "points": [
-      "End-diastolic volume",
-      "Stretches fibres",
-      "Raises stroke volume on the curve"
-     ]
+  "v": 1,
+  "module": "sca-cardiac-physiology",
+  "subject": "ss-cardiology",
+  "title": "Cardiac Physiology and Haemodynamics",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **Frank-Starling law** governs the intrinsic autoregulatory capacity of the myocardium. It dictates that myocardial **stroke volume** increases in direct proportion to end-diastolic volume within physiological sarcomere lengths of **1.8** to **2.2** micrometres. Stretching the myocyte augments troponin C calcium sensitivity and optimizes actin-myosin overlap. Beyond 2.2 micrometres, excessive sarcomere stretching causes actin-myosin disengagement, precipitating rapid mechanical decompensation and progressive contractile failure.",
+      "say": "The Frank-Starling law governs the intrinsic autoregulatory capacity of the myocardium. It dictates that myocardial stroke volume increases in direct proportion to end-diastolic volume within physiological sarcomere lengths of 1 point 8 to 2 point 2 micrometres. Stretching the myocyte augments troponin C calcium sensitivity and optimizes actin-myosin overlap. Beyond 2 point 2 micrometres, excessive sarcomere stretching causes actin-myosin disengagement, precipitating rapid mechanical decompensation and progressive contractile failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sarcomere Length",
+          "Myocardial Ultrastructure",
+          "Contractile Consequence"
+        ],
+        "rows": [
+          [
+            "< 1.8 micrometres",
+            "Filament collision and steric hindrance",
+            "Submaximal cross-bridge formation"
+          ],
+          [
+            "1.8 to 2.2 micrometres",
+            "Optimal actin-myosin filament overlap",
+            "Peak cross-bridge recruitment (Frank-Starling zone)"
+          ],
+          [
+            "> 2.2 micrometres",
+            "Overstretching and cross-bridge detachment",
+            "Declining tension and ventricular dilatation"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Afterload",
-     "points": [
-      "Resistance to ejection",
-      "Raised by hypertension or aortic stenosis",
-      "Lowering it shifts the curve upward"
-     ]
+    {
+      "tx": "**Cardiac output** represents the total volume of oxygenated blood pumped into the systemic circulation per minute. It equals heart rate multiplied by stroke volume. Because metabolic demands vary with body habitus, resting output is standardized to body surface area as the **cardiac index**, with a normal resting range from **2.6** to **4.2** L/min/m2. A cardiac index falling below 2.2 L/min/m2 in the setting of elevated filling pressures indicates cardiogenic shock.",
+      "say": "Cardiac output represents the total volume of oxygenated blood pumped into the systemic circulation per minute. It equals heart rate multiplied by stroke volume. Because metabolic demands vary with body habitus, resting output is standardized to body surface area as the cardiac index, with a normal resting range from 2 point 6 to 4 point 2 litres per minute per square metre. A cardiac index falling below 2 point 2 in the setting of elevated filling pressures indicates cardiogenic shock.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stroke volume (EDV minus ESV)"
+          },
+          {
+            "id": "b",
+            "label": "Multiply by heart rate (beats/min)"
+          },
+          {
+            "id": "c",
+            "label": "Calculate Cardiac Output (4 to 8 L/min)"
+          },
+          {
+            "id": "d",
+            "label": "Divide by BSA: Cardiac Index (2.6 to 4.2 L/min/m2)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "ventricular volume ejected"
+          ],
+          [
+            "b",
+            "c",
+            "minute flow rate"
+          ],
+          [
+            "c",
+            "d",
+            "surface area normalisation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Myocardial oxygen consumption** is governed primarily by systolic ventricular wall stress, heart rate, and baseline inotropic state. Wall stress is mathematically quantified by the **Law of Laplace**, where mechanical wall tension equals intraventricular pressure multiplied by internal cavity radius divided by twice myocardial wall thickness. Consequently, ventricular dilatation or elevated afterload markedly increases wall stress and myocardial oxygen demand, whereas concentric hypertrophy acts compensatory to diminish systolic wall tension.",
+      "say": "Myocardial oxygen consumption is governed primarily by systolic ventricular wall stress, heart rate, and baseline inotropic state. Wall stress is mathematically quantified by the Law of Laplace, where mechanical wall tension equals intraventricular pressure multiplied by internal cavity radius divided by twice myocardial wall thickness. Consequently, ventricular dilatation or elevated afterload markedly increases wall stress and myocardial oxygen demand, whereas concentric hypertrophy acts compensatory to diminish systolic wall tension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Factors Increasing MVO2",
+          "points": [
+            "Systolic afterload elevation",
+            "Chamber dilatation (increased radius)",
+            "Tachycardia (shortened cycle length)",
+            "Sympathetic inotropic surges"
+          ]
+        },
+        "right": {
+          "title": "Compensatory Adaptations",
+          "points": [
+            "Concentric myocardial hypertrophy (increased thickness)",
+            "Reduces wall tension via Laplace denominator",
+            "Normalizes myocardial oxygen consumption per gram",
+            "Preserves global stroke volume under pressure load"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ventricular compliance** defines the physical distensibility of the relaxed ventricular chamber. In invasive hemodynamics, it is represented by the reciprocal slope of the end-diastolic **pressure-volume relationship**. In conditions characterized by pathological myocardial hypertrophy, storage disorders, or ischemic fibrosis, reduced compliance shifts the passive diastolic curve upwards and to the left. Consequently, small increments in end-diastolic filling volume produce disproportionately large surges in intracavitary filling pressure.",
+      "say": "Ventricular compliance defines the physical distensibility of the relaxed ventricular chamber. In invasive hemodynamics, it is represented by the reciprocal slope of the end-diastolic pressure-volume relationship. In conditions characterized by pathological myocardial hypertrophy, storage disorders, or ischemic fibrosis, reduced compliance shifts the passive diastolic curve upwards and to the left. Consequently, small increments in end-diastolic filling volume produce disproportionately large surges in intracavitary filling pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pathological ventricular remodelling"
+          },
+          {
+            "id": "b",
+            "label": "Decreased active relaxation and increased passive stiffness"
+          },
+          {
+            "id": "c",
+            "label": "Steep upward shift in EDPVR curve"
+          },
+          {
+            "id": "d",
+            "label": "Elevated LVEDP and pulmonary venous congestion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "amyloid, hypertrophy, or ischemia"
+          ],
+          [
+            "b",
+            "c",
+            "reduced chamber compliance"
+          ],
+          [
+            "c",
+            "d",
+            "diastolic filling failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The force-frequency relationship, clinically designated the **Bowditch staircase** or treppe phenomenon, describes an intrinsic enhancement of ventricular contractility provoked by physiological heart rate acceleration. At higher stimulation frequencies, the sodium-calcium exchanger operates with shortened diastolic extrusion intervals, promoting cumulative calcium loading within the **sarcoplasmic reticulum**. This augments calcium-induced calcium release via ryanodine receptors during successive systoles, boosting cross-bridge cycling.",
+      "say": "The force-frequency relationship, clinically designated the Bowditch staircase or treppe phenomenon, describes an intrinsic enhancement of ventricular contractility provoked by physiological heart rate acceleration. At higher stimulation frequencies, the sodium-calcium exchanger operates with shortened diastolic extrusion intervals, promoting cumulative calcium loading within the sarcoplasmic reticulum. This augments calcium-induced calcium release via ryanodine receptors during successive systoles, boosting cross-bridge cycling.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Physiological Bowditch Effect",
+          "points": [
+            "Normal positive inotropic staircase with tachycardia",
+            "Accelerated SERCA2a calcium reuptake",
+            "Progressive sarcoplasmic reticulum calcium accumulation",
+            "Amplified systolic calcium transients"
+          ]
+        },
+        "right": {
+          "title": "Failing Heart Derangement",
+          "points": [
+            "Negative or flat force-frequency relationship",
+            "Downregulated SERCA2a expression and activity",
+            "Sarcoplasmic reticulum calcium leakage via ryanodine receptors",
+            "Contractile decline at higher heart rates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Coronary blood flow** to the thick left ventricular myocardium displays unique phasic dynamics. Left coronary perfusion occurs predominantly during diastole. In ventricular systole, vigorous contraction raises **intramyocardial tissue pressure**, which compresses subendocardial microvessels and dramatically increases vascular resistance, halting forward capillary flow. During isovolumetric relaxation and diastole, tissue pressure drops precipitously, allowing aortic diastolic perfusion pressure to drive forward microvascular coronary flow.",
+      "say": "Coronary blood flow to the thick left ventricular myocardium displays unique phasic dynamics. Left coronary perfusion occurs predominantly during diastole. In ventricular systole, vigorous contraction raises intramyocardial tissue pressure, which compresses subendocardial microvessels and dramatically increases vascular resistance, halting forward capillary flow. During isovolumetric relaxation and diastole, tissue pressure drops precipitously, allowing aortic diastolic perfusion pressure to drive forward microvascular coronary flow.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cardiac Phase",
+          "Intramyocardial Pressure",
+          "Left Ventricular Perfusion"
+        ],
+        "rows": [
+          [
+            "Systole",
+            "High (exceeds aortic systolic pressure in subendocardium)",
+            "Flow arrested or transiently reversed in microcirculation"
+          ],
+          [
+            "Early Diastole",
+            "Rapidly drops to near zero",
+            "Peak coronary inflow velocity across subendocardium"
+          ],
+          [
+            "Late Diastole",
+            "Low resting diastolic filling pressure",
+            "Sustained forward coronary perfusion gradient"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Anrep effect** represents an intrinsic myocardial homeostatic mechanism that compensates for abrupt hemodynamic loading. When left ventricular **afterload** rises acutely, the myocardium undergoes an initial transient mechanical depression with decreased stroke volume and elevated end-diastolic pressure. Over the subsequent one to two minutes, intrinsic contractility steadily increases independently of autonomic tone, gradually restoring resting stroke volume and normalizing chamber dimensions.",
+      "say": "The Anrep effect represents an intrinsic myocardial homeostatic mechanism that compensates for abrupt hemodynamic loading. When left ventricular afterload rises acutely, the myocardium undergoes an initial transient mechanical depression with decreased stroke volume and elevated end-diastolic pressure. Over the subsequent one to two minutes, intrinsic contractility steadily increases independently of autonomic tone, gradually restoring resting stroke volume and normalizing chamber dimensions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute surge in aortic impedance / afterload"
+          },
+          {
+            "id": "b",
+            "label": "Transient reduction in stroke volume"
+          },
+          {
+            "id": "c",
+            "label": "Myocardial stretch triggers autocrine NHE1 activation"
+          },
+          {
+            "id": "d",
+            "label": "Sustained inotropic autoregulation (Anrep effect)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "immediate mechanical impediment"
+          ],
+          [
+            "b",
+            "c",
+            "intracellular sodium and calcium elevation"
+          ],
+          [
+            "c",
+            "d",
+            "delayed inotropic recovery over 1-2 minutes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Left ventricular systolic performance is routinely quantified by the **ejection fraction**, measured clinically through two-dimensional echocardiography or invasive contrast **ventriculography**. In healthy adults, the normal left ventricular ejection fraction ranges from **50%** to **70%**, representing the volumetric fraction of end-diastolic volume expelled during ventricular ejection. While ejection fraction reflects global pump performance, it is highly dependent on loading conditions, heart rate, and valvular competence.",
+      "say": "Left ventricular systolic performance is routinely quantified by the ejection fraction, measured clinically through two-dimensional echocardiography or invasive contrast ventriculography. In healthy adults, the normal left ventricular ejection fraction ranges from 50 to 70 percent, representing the volumetric fraction of end-diastolic volume expelled during ventricular ejection. While ejection fraction reflects global pump performance, it is highly dependent on loading conditions, heart rate, and valvular competence.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ejection Fraction Category",
+          "Volumetric Range",
+          "Clinical Classification"
+        ],
+        "rows": [
+          [
+            "Normal Systolic Function",
+            "50% to 70%",
+            "Normal global ejection performance"
+          ],
+          [
+            "Mildly Reduced (HFmrEF)",
+            "41% to 49%",
+            "Intermediate systolic dysfunction"
+          ],
+          [
+            "Reduced (HFrEF)",
+            "<= 40%",
+            "Significant systolic ventricular impairment"
+          ],
+          [
+            "Hyperdynamic Function",
+            "> 70%",
+            "Sepsis, thyrotoxicosis, or severe mitral regurgitation"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "In the **cardiac action potential**, phase 0 is rapid depolarisation from opening of voltage-gated sodium channels. Phase 2 is a plateau sustained by calcium entry balanced against potassium exit. Phase 4 in pacemaker cells is slow depolarisation from passive sodium influx, and the AV node acts as the secondary pacemaker at about 40 to 60 beats per minute. Calcium entry triggers **excitation-contraction coupling** by releasing calcium from the sarcoplasmic reticulum.",
-   "say": "In the cardiac action potential, phase 0 is rapid depolarisation from opening of voltage-gated sodium channels. Phase 2 is a plateau sustained by calcium entry balanced against potassium exit. Phase 4 in pacemaker cells is slow depolarisation from passive sodium influx. The AV node acts as the secondary pacemaker at about 40 to 60 beats per minute. Calcium entry triggers excitation-contraction coupling by releasing calcium from the sarcoplasmic reticulum.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Phase",
-     "Key event",
-     "Main ions"
-    ],
-    "rows": [
-     [
-      "0",
-      "Rapid upstroke",
-      "Sodium in"
-     ],
-     [
-      "2",
-      "Plateau",
-      "Calcium in, potassium out"
-     ],
-     [
-      "3",
-      "Repolarisation",
-      "Potassium out"
-     ],
-     [
-      "4",
-      "Pacemaker slope",
-      "Sodium in"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Jugular venous pulse (JVP) waves reflect right atrial activity. The **a wave** is atrial contraction, lost in **atrial fibrillation**. Cannon a waves signal atrioventricular dissociation, when the atrium contracts against a closed tricuspid valve. The **x descent** is atrial relaxation with ventricular systole, and the v wave is passive atrial filling. A **Kussmaul sign**, where JVP does not fall on inspiration, is classically seen in constrictive pericarditis.",
-   "say": "Jugular venous pulse waves reflect right atrial activity. The a wave is atrial contraction and is lost in atrial fibrillation. Cannon a waves signal atrioventricular dissociation, when the atrium contracts against a closed tricuspid valve. The x descent is atrial relaxation during ventricular systole, and the v wave is passive atrial filling. A Kussmaul sign, where the jugular pressure does not fall on inspiration, is classically seen in constrictive pericarditis.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Finding",
-     "Meaning",
-     "Classic setting"
-    ],
-    "rows": [
-     [
-      "Absent a wave",
-      "No atrial contraction",
-      "Atrial fibrillation"
-     ],
-     [
-      "Cannon a wave",
-      "Atrium against closed tricuspid",
-      "Complete heart block, ventricular rhythm"
-     ],
-     [
-      "Kussmaul sign",
-      "No fall on inspiration",
-      "Constrictive pericarditis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Pulsus paradoxus** is an inspiratory fall in systolic pressure greater than 10 mmHg, an exaggerated form of normal **interventricular dependence**. It is classic for **cardiac tamponade** but is unreliable in atrial fibrillation, marked tachycardia or tachypnoea. Total electrical alternans on the ECG is relatively specific for a large effusion. In tamponade, the rate of fluid accumulation matters more than the absolute volume, and hypotension demands urgent pericardiocentesis after fluid resuscitation.",
-   "say": "Pulsus paradoxus is an inspiratory fall in systolic pressure greater than 10 mmHg, an exaggerated form of normal interventricular dependence. It is classic for cardiac tamponade but is unreliable in atrial fibrillation, marked tachycardia or tachypnoea. Total electrical alternans on the ECG is relatively specific for a large effusion. In tamponade, the rate of fluid accumulation matters more than the absolute volume, and hypotension demands urgent pericardiocentesis after fluid resuscitation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspected tamponade"
-     },
-     {
-      "id": "b",
-      "label": "Hypotension"
-     },
-     {
-      "id": "c",
-      "label": "Fluid resuscitation"
-     },
-     {
-      "id": "d",
-      "label": "Urgent pericardiocentesis"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Myocardial oxygen demand** rises with heart rate, contractility and wall tension, so afterload and preload both increase it. **Coronary autoregulation** keeps flow steady across a range of perfusion pressures by adjusting arteriolar tone, and this is blunted when vessels are maximally dilated. Septal infarction can damage the **Bundle of His**, which runs through the interventricular septum, causing high-grade AV block.",
-   "say": "Myocardial oxygen demand rises with heart rate, contractility and wall tension, so afterload and preload both increase it. Coronary autoregulation keeps flow steady across a range of perfusion pressures by adjusting arteriolar tone. Septal infarction can damage the Bundle of His, which runs through the interventricular septum, causing high-grade AV block.",
-   "vis": null
-  },
-  {
-   "tx": "Heart sounds and murmurs are linked to haemodynamics. Standing from a squat reduces preload, so the click-murmur complex of mitral valve prolapse moves closer to S1. Fixed splitting of S2 that does not change with respiration is characteristic of a **secundum atrial septal defect**. Pulsus parvus et tardus, a weak and delayed carotid upstroke, points to severe aortic stenosis. Heavy carotid pressure can trigger carotid sinus hypersensitivity and syncope in older adults.",
-   "say": "Heart sounds and murmurs are linked to haemodynamics. Standing from a squat reduces preload, so the click-murmur complex of mitral valve prolapse moves closer to the first heart sound. Fixed splitting of the second heart sound that does not change with respiration is characteristic of a secundum atrial septal defect. Pulsus parvus et tardus, a weak and delayed carotid upstroke, points to severe aortic stenosis. Heavy carotid pressure can trigger carotid sinus hypersensitivity and syncope in older adults.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-cardiac-physiology-fig1.webp",
-    "alt": "Diagram showing heart sound timings for S2 splitting and mitral valve prolapse, alongside carotid pulse waveforms for aortic stenosis.",
-    "caption": "Key auscultatory and pulse findings in cardiac conditions",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_3f0ae0959b5a",
-  "q_cf8b3deee4f2",
-  "q_15444b7f285c"
- ],
- "src": [],
- "refs": [
-  "Guyton and Hall Textbook of Medical Physiology (Hall JE)",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 42
- }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }
