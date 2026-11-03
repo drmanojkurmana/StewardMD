@@ -1,122 +1,289 @@
 {
- "v": 1,
- "module": "son-molecular-dx",
- "subject": "ss-medical-oncology",
- "title": "Molecular diagnostics and predictive biomarkers: an overview for oncology exams",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Molecular diagnostics tests tumour DNA, RNA or protein to guide diagnosis, prognosis and **therapy selection**. Modern oncology relies on tissue and blood based assays rather than single serum markers alone. Biomarkers are rarely definitive on their own, so results must be read alongside histopathology and imaging.",
-   "say": "Molecular diagnostics tests tumour DNA, RNA or protein to guide diagnosis, prognosis and therapy selection. Modern oncology relies on tissue and blood based assays rather than single serum markers alone. Biomarkers are rarely definitive on their own, so results must be read alongside histopathology and imaging.",
-   "vis": null
-  },
-  {
-   "tx": "Predictive biomarkers tell you whether a patient is likely to respond to a specific drug, whereas prognostic markers describe the expected course of disease. Examples include **PD-L1 expression** for immune checkpoint inhibitors and **HER2 status** for anti-HER2 therapy. Keep the two concepts separate in exam answers.",
-   "say": "Predictive biomarkers tell you whether a patient is likely to respond to a specific drug, whereas prognostic markers describe the expected course of disease. Examples include PD-L1 expression for immune checkpoint inhibitors and HER2 status for anti-HER2 therapy. Keep the two concepts separate in exam answers.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "Main use",
-     "Typical sample"
-    ],
-    "rows": [
-     [
-      "NGS panel",
-      "Multiple genes at once",
-      "Tumour tissue"
-     ],
-     [
-      "FISH",
-      "Gene amplification or fusion",
-      "Tissue section"
-     ],
-     [
-      "PCR",
-      "Known point mutations",
-      "Tissue or blood"
-     ],
-     [
-      "ctDNA",
-      "Monitoring and minimal residual disease",
-      "Plasma"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Next generation sequencing screens many genes for mutations, copy number changes and fusions in one run. **Tumour mutational burden** and **microsatellite instability** are genome-wide measures derived from such panels. PCR and FISH remain useful when only one or two targets are needed, for example KRAS or HER2 amplification.",
-   "say": "Next generation sequencing screens many genes for mutations, copy number changes and fusions in one run. Tumour mutational burden and microsatellite instability are genome-wide measures derived from such panels. PCR and FISH remain useful when only one or two targets are needed, for example KRAS or HER2 amplification.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Tumour tissue"
-     },
-     {
-      "id": "b",
-      "label": "DNA extraction"
-     },
-     {
-      "id": "c",
-      "label": "NGS library"
-     },
-     {
-      "id": "d",
-      "label": "Variant report"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Liquid biopsy measures **circulating tumour DNA** in plasma and can detect residual disease after surgery or treatment, often called **minimal residual disease**. It is useful when tissue is scarce or when tumour heterogeneity matters. A negative result does not exclude disease, so tissue testing remains the reference when it is available.",
-   "say": "Liquid biopsy measures circulating tumour DNA in plasma and can detect residual disease after surgery or treatment, often called minimal residual disease. It is useful when tissue is scarce or when tumour heterogeneity matters. A negative result does not exclude disease, so tissue testing remains the reference when it is available.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-molecular-dx-fig1.webp",
-    "alt": "Diagram illustrating liquid biopsy, showing blood sample collection, plasma isolation, and detection of circulating tumour DNA (ctDNA) for minimal residual disease (MRD), especially when tissue is scarce.",
-    "caption": "Liquid biopsy: detecting circulating tumour DNA for minimal residual disease",
-    "ar": 1.8349
-   }
+  "v": 1,
+  "module": "son-molecular-dx",
+  "subject": "ss-medical-oncology",
+  "title": "Molecular diagnostics and predictive biomarkers: comprehensive genomic profiling, liquid biopsy and actionable targets",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "High-throughput **Next-generation sequencing** platforms enable comprehensive **genomic profiling** across solid tumours and haematological malignancies. By identifying actionable single-nucleotide variants, insertions, deletions, and structural fusions, sequencing directly directs precision targeted therapy selection. Multigene panels interrogate hundreds of cancer-related genes simultaneously to uncover clinically actionable therapeutic alterations.",
+      "say": "Next-generation sequencing enables comprehensive genomic profiling across solid tumours and haematological malignancies. By identifying actionable single-nucleotide variants, insertions, deletions, and structural fusions, sequencing directly directs precision targeted therapy selection. Multigene panels interrogate hundreds of cancer-related genes simultaneously to uncover clinically actionable therapeutic alterations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Variant Category",
+          "Example Biomarkers",
+          "Therapeutic Action"
+        ],
+        "rows": [
+          [
+            "Single Nucleotide Variants",
+            "BRAF V600E, KRAS G12C",
+            "Selects targeted kinase inhibitor therapy"
+          ],
+          [
+            "Insertions and Deletions",
+            "EGFR exon 19 del, ERBB2 ins",
+            "Directs precision receptor tyrosine kinase therapy"
+          ],
+          [
+            "Structural Gene Fusions",
+            "ALK, ROS1, RET, NTRK fusions",
+            "Predicts exquisite sensitivity to fusion-specific TKIs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Minimally invasive **Liquid biopsy** detects **circulating tumour DNA** shed into peripheral blood plasma from apoptotic tumour cells. This non-invasive blood assay facilitates serial longitudinal monitoring of minimal residual disease and early identification of emergent acquired resistance mutations. Detecting rising plasma variant allele frequencies allows proactive therapeutic switches prior to radiographic relapse.",
+      "say": "Liquid biopsy detects circulating tumour DNA shed into peripheral blood plasma from apoptotic tumour cells. This non-invasive blood assay facilitates serial longitudinal monitoring of minimal residual disease and early identification of emergent acquired resistance mutations. Detecting rising plasma variant allele frequencies allows proactive therapeutic switches prior to radiographic relapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "blood",
+            "label": "Blood Draw",
+            "level": 1
+          },
+          {
+            "id": "cfdna",
+            "label": "Plasma cfDNA",
+            "level": 2
+          },
+          {
+            "id": "ngs",
+            "label": "Targeted NGS",
+            "level": 3
+          },
+          {
+            "id": "mrd",
+            "label": "MRD Tracking",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "blood",
+            "cfdna"
+          ],
+          [
+            "cfdna",
+            "ngs"
+          ],
+          [
+            "ngs",
+            "mrd"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Quantitative **Tumour mutational burden** assesses the overall frequency of somatic non-synonymous **mutations per megabase** across the sequenced cancer genome. A high mutational burden generates abundant neoantigens, with 10 or more mutations per megabase supporting pembrolizumab monotherapy as a tissue-agnostic standard. Elevated neoantigen loads enhance endogenous host T-cell recognition and durable response.",
+      "say": "Tumour mutational burden assesses the overall frequency of somatic non-synonymous mutations per megabase across the sequenced cancer genome. A high mutational burden generates abundant neoantigens, with 10 or more mutations per megabase supporting pembrolizumab monotherapy as a tissue-agnostic standard. Elevated neoantigen loads enhance endogenous host T-cell recognition and durable response.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High TMB (TMB-H)",
+          "points": [
+            "Cutoff: 10 or more mut/Mb",
+            "High neoantigen density",
+            "Tissue-agnostic pembrolizumab"
+          ]
+        },
+        "right": {
+          "title": "Low TMB (TMB-L)",
+          "points": [
+            "Cutoff: under 10 mut/Mb",
+            "Low neoantigen generation",
+            "Lower response to PD-1 monotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Deficient mismatch repair leads to marked **Microsatellite instability** through replication slippage across repetitive microsatellite repeats. Diagnostic evaluation requires multiplex PCR for length variations or immunohistochemical staining confirming nuclear loss of mismatch repair proteins including **MLH1**, MSH2, MSH6, and PMS2. Mismatch-deficient neoplasms produce frameshift peptides that drive sensitivity to immune checkpoint blockade.",
+      "say": "Deficient mismatch repair leads to marked Microsatellite instability through replication slippage across repetitive microsatellite repeats. Diagnostic evaluation requires multiplex PCR for length variations or immunohistochemical staining confirming nuclear loss of mismatch repair proteins including MLH1, MSH2, MSH6, and PMS2. Mismatch-deficient neoplasms produce frameshift peptides that drive sensitivity to immune checkpoint blockade.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Protein Pair",
+          "Obligate Heterodimer",
+          "Loss Pattern"
+        ],
+        "rows": [
+          [
+            "MLH1 / PMS2",
+            "MutL-alpha complex",
+            "MLH1 promoter methylation or germline Lynch syndrome"
+          ],
+          [
+            "MSH2 / MSH6",
+            "MutS-alpha complex",
+            "MSH2 or EPCAM deletion causing dual protein loss"
+          ],
+          [
+            "Isolated PMS2 / MSH6",
+            "Secondary heterodimer components",
+            "Single gene point mutations or truncating variants"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immunohistochemical quantification of **PD-L1** expression guides checkpoint inhibitor indications across multiple solid organ malignancies. Clinical scoring methodologies calculate the **tumour proportion score** in non-small cell lung cancer or the combined positive score in gastric, urothelial, and cervical carcinomas. Each malignancy employs specific antibody clones and validated scoring thresholds to predict therapeutic benefit.",
+      "say": "Immunohistochemical quantification of PD-L1 expression guides checkpoint inhibitor indications across multiple solid organ malignancies. Clinical scoring methodologies calculate the tumour proportion score in non-small cell lung cancer or the combined positive score in gastric, urothelial, and cervical carcinomas. Each malignancy employs specific antibody clones and validated scoring thresholds to predict therapeutic benefit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tumour Proportion Score (TPS)",
+          "points": [
+            "Calculates viable PD-L1+ tumour cells",
+            "Excludes tumour-infiltrating immune cells",
+            "Standard biomarker in NSCLC"
+          ]
+        },
+        "right": {
+          "title": "Combined Positive Score (CPS)",
+          "points": [
+            "Includes tumour and immune cells",
+            "Divided by total viable tumour cells",
+            "Standard in gastric and cervical cancer"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Assessing **Homologous recombination deficiency** identifies defective double-strand break repair in ovarian, breast, and prostate carcinomas. Diagnostic algorithms combine deleterious BRCA1 or BRCA2 mutation detection with validated genomic instability scores measuring **loss of heterozygosity**, telomeric allelic imbalance, and large-scale state transitions. Tumours demonstrating homologous repair scars exhibit synthetic lethality to poly-ADP ribose polymerase inhibitors.",
+      "say": "Assessing Homologous recombination deficiency identifies defective double-strand break repair in ovarian, breast, and prostate carcinomas. Diagnostic algorithms combine deleterious BRCA1 or BRCA2 mutation detection with validated genomic instability scores measuring loss of heterozygosity, telomeric allelic imbalance, and large-scale state transitions. Tumours demonstrating homologous repair scars exhibit synthetic lethality to poly-ADP ribose polymerase inhibitors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "brca",
+            "label": "BRCA1/2 Testing",
+            "level": 1
+          },
+          {
+            "id": "gis",
+            "label": "Instability Score",
+            "level": 2
+          },
+          {
+            "id": "hrd",
+            "label": "HRD Positive",
+            "level": 3
+          },
+          {
+            "id": "parp",
+            "label": "PARP Inhibitor",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "brca",
+            "gis"
+          ],
+          [
+            "gis",
+            "hrd"
+          ],
+          [
+            "hrd",
+            "parp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Highly sensitive **Minimal residual disease** quantification tracks submicroscopic residual malignant clones during and following antineoplastic therapy. Standardised assays monitoring clonal leukaemia-specific immunoglobulin rearrangements or BCR-ABL fusion transcripts define the achievement of **deep remission** and guide consolidative allogeneic stem cell transplantation. Sustained molecular negativity strongly correlates with long-term relapse-free survival across haematological malignancies.",
+      "say": "Highly sensitive Minimal residual disease quantification tracks submicroscopic residual malignant clones during and following antineoplastic therapy. Standardised assays monitoring clonal leukaemia-specific immunoglobulin rearrangements or BCR-ABL fusion transcripts define the achievement of deep remission and guide consolidative allogeneic stem cell transplantation. Sustained molecular negativity strongly correlates with long-term relapse-free survival across haematological malignancies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Technology",
+          "Sensitivity Threshold",
+          "Clinical Utility"
+        ],
+        "rows": [
+          [
+            "Multiparameter Flow Cytometry",
+            "1 in 10,000 to 100,000 cells",
+            "Rapid post-induction response assessment in leukaemia"
+          ],
+          [
+            "Quantitative RT-PCR",
+            "1 in 100,000 cells",
+            "Serial BCR-ABL tracking in chronic myeloid leukaemia"
+          ],
+          [
+            "NGS ClonoSEQ",
+            "1 in 1,000,000 cells",
+            "Deep molecular remission assessment in myeloma and ALL"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The established **ESMO Scale** for **Clinical Actionability** of molecular Targets ESCAT provides a structured evidence-based ranking framework for genomic alterations. This tiered hierarchy classifies genomic findings from tier I alterations possessing proven clinical utility in prospective trials down to tier V purely investigational targets. Utilising ESCAT prevents inappropriate off-label administration of targeted therapies lacking meaningful clinical activity.",
+      "say": "The established ESMO Scale for Clinical Actionability of molecular Targets ESCAT provides a structured evidence-based ranking framework for genomic alterations. This tiered hierarchy classifies genomic findings from tier I alterations possessing proven clinical utility in prospective trials down to tier V purely investigational targets. Utilising ESCAT prevents inappropriate off-label administration of targeted therapies lacking meaningful clinical activity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Tier I: Standard",
+            "level": 1
+          },
+          {
+            "id": "t2",
+            "label": "Tier II: Investigational",
+            "level": 2
+          },
+          {
+            "id": "t3",
+            "label": "Tier III: Other Tumours",
+            "level": 3
+          },
+          {
+            "id": "t4",
+            "label": "Tier IV/V: Preclinical",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "t3"
+          ],
+          [
+            "t3",
+            "t4"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 11 (Molecular Diagnostics and Predictive Biomarkers)",
+    "ESMO Biomarkers Guidelines 2023",
+    "ESCAT Guidelines"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_6292e0370b95",
-  "q_5fec25403e0f",
-  "q_a330be0f580a"
- ],
- "src": [],
- "refs": [
-  "ESMO Scale for Clinical Actionability of Molecular Targets (ESCAT) framework"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 45
- }
 }

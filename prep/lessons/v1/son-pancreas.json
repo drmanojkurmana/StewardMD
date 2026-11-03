@@ -1,0 +1,283 @@
+{
+  "v": 1,
+  "module": "son-pancreas",
+  "subject": "ss-medical-oncology",
+  "title": "Pancreatic ductal adenocarcinoma: staging, resectability criteria, systemic chemotherapy and germline BRCA management",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Pancreatic ductal adenocarcinoma staging relies strictly upon high-resolution triphasic helical pancreatic CT to define vascular involvement and categorize tumours as **resectable**, borderline resectable, locally advanced unresectable, or metastatic. Resectable disease requires clear fat planes around the **celiac axis**, superior mesenteric artery, and common hepatic artery, without venous abutment or occlusion of the superior mesenteric and portal veins.",
+      "say": "Pancreatic ductal adenocarcinoma staging relies strictly upon high-resolution triphasic helical pancreatic CT to define vascular involvement and categorize tumours as resectable, borderline resectable, locally advanced unresectable, or metastatic. Resectable disease requires clear fat planes around the celiac axis, superior mesenteric artery, and common hepatic artery, without venous abutment or occlusion of the superior mesenteric and portal veins.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Resectability Status",
+          "Arterial Relationship (SMA/Celiac)",
+          "Venous Relationship (SMV/PV)"
+        ],
+        "rows": [
+          [
+            "Resectable",
+            "No contact or abutment",
+            "No contact, or < 180 degrees without vein contour irregularity"
+          ],
+          [
+            "Borderline Resectable",
+            "Solid abutment < 180 degrees",
+            "Abutment > 180 degrees or reconstructible occlusion"
+          ],
+          [
+            "Locally Advanced",
+            "Encasement > 180 degrees of SMA/celiac",
+            "Unreconstructible venous occlusion or thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients undergoing complete macroscopically clear R0 or R1 resection, the landmark **PRODIGE 24/CCTG PA.6** randomized trial established **adjuvant modified FOLFIRINOX** for 6 months as the global standard of care. Delivering oxaliplatin, irinotecan, and infusional fluorouracil achieved a remarkable median overall survival of 54 months compared to 35 months with gemcitabine monotherapy.",
+      "say": "In patients undergoing complete macroscopically clear R0 or R1 resection, the landmark PRODIGE 24/CCTG PA.6 randomized trial established adjuvant modified FOLFIRINOX for 6 months as the global standard of care. Delivering oxaliplatin, irinotecan, and infusional fluorouracil achieved a remarkable median overall survival of 54 months compared to 35 months with gemcitabine monotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modified FOLFIRINOX (PRODIGE 24)",
+          "points": [
+            "Oxaliplatin, irinotecan, infusional 5-FU/LV",
+            "Median overall survival: 54.4 months",
+            "3-year disease-free survival rate: 39.7%",
+            "Standard for medically fit patients (ECOG 0-1)"
+          ]
+        },
+        "right": {
+          "title": "Gemcitabine Monotherapy",
+          "points": [
+            "Weekly gemcitabine infusions x 6 cycles",
+            "Median overall survival: 35.0 months",
+            "Inferior disease-free and overall survival",
+            "Reserved for patients with borderline performance status"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In advanced metastatic pancreatic adenocarcinoma, first-line evidence-based systemic therapy comprises modified FOLFIRINOX or gemcitabine combined with **nab-paclitaxel**. In the pivotal **MPACT trial**, adding nanoparticle albumin-bound paclitaxel to gemcitabine significantly improved overall survival, progression-free survival, and objective response rates over gemcitabine monotherapy, providing an essential first-line option for patients ineligible for intensive triplet regimens.",
+      "say": "In advanced metastatic pancreatic adenocarcinoma, first-line evidence-based systemic therapy comprises modified FOLFIRINOX or gemcitabine combined with nab-paclitaxel. In the pivotal MPACT trial, adding nanoparticle albumin-bound paclitaxel to gemcitabine significantly improved overall survival, progression-free survival, and objective response rates over gemcitabine monotherapy, providing an essential first-line option for patients ineligible for intensive triplet regimens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "First-Line Regimen",
+          "Pivotal Trial",
+          "Median Overall Survival",
+          "Ideal Patient Profile"
+        ],
+        "rows": [
+          [
+            "Modified FOLFIRINOX",
+            "ACCORD 11 / PRODIGE 4",
+            "11.1 vs 6.8 months (vs gemcitabine)",
+            "Younger fit patients, ECOG 0-1, normal bilirubin"
+          ],
+          [
+            "Gemcitabine + Nab-Paclitaxel",
+            "MPACT Trial",
+            "8.5 vs 6.7 months (vs gemcitabine)",
+            "Acceptable in ECOG 0-2 and mild hyperbilirubinaemia"
+          ],
+          [
+            "Gemcitabine Monotherapy",
+            "Burris et al. Historical",
+            "5.6 to 6.0 months",
+            "Palliative frail patients, ECOG 2 or higher"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The randomized phase III **NAPOLI 3** trial evaluated first-line **NALIRIFOX**, combining liposomal irinotecan with 5-fluorouracil, leucovorin, and oxaliplatin in metastatic pancreatic ductal adenocarcinoma. NALIRIFOX demonstrated statistically significant improvements in both overall survival and progression-free survival over gemcitabine plus nab-paclitaxel, confirming liposomal irinotecan-based triplet chemotherapy as a premier front-line option for fit individuals.",
+      "say": "The randomized phase III NAPOLI 3 trial evaluated first-line NALIRIFOX, combining liposomal irinotecan with 5-fluorouracil, leucovorin, and oxaliplatin in metastatic pancreatic ductal adenocarcinoma. NALIRIFOX demonstrated statistically significant improvements in both overall survival and progression-free survival over gemcitabine plus nab-paclitaxel, confirming liposomal irinotecan-based triplet chemotherapy as a premier front-line option for fit individuals.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "meta",
+            "label": "Metastatic Pancreatic Cancer",
+            "level": 1
+          },
+          {
+            "id": "naliri",
+            "label": "NALIRIFOX Triplet",
+            "level": 2
+          },
+          {
+            "id": "pfs",
+            "label": "PFS: 7.4 vs 5.6 Months",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "OS: 11.1 vs 9.2 Months",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "meta",
+            "naliri"
+          ],
+          [
+            "naliri",
+            "pfs"
+          ],
+          [
+            "pfs",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients with metastatic pancreatic cancer harbouring pathogenic **germline BRCA1** or BRCA2 variants without progression on first-line platinum-based chemotherapy, the phase III **POLO trial** established maintenance therapy with the PARP inhibitor **olaparib**. Maintenance olaparib significantly doubled progression-free survival from 3.8 to 7.4 months compared to placebo, confirming synthetic lethality in homologous recombination repair-deficient pancreatic adenocarcinoma.",
+      "say": "In patients with metastatic pancreatic cancer harbouring pathogenic germline BRCA1 or BRCA2 variants without progression on first-line platinum-based chemotherapy, the phase III POLO trial established maintenance therapy with the PARP inhibitor olaparib. Maintenance olaparib significantly doubled progression-free survival from 3.8 to 7.4 months compared to placebo, confirming synthetic lethality in homologous recombination repair-deficient pancreatic adenocarcinoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "POLO Olaparib Maintenance",
+          "points": [
+            "Germline BRCA1/2 mutation confirmed",
+            "Minimum 16 weeks platinum chemotherapy response",
+            "Median PFS: 7.4 months vs 3.8 months (HR 0.53)",
+            "Durable chemotherapy-free disease control"
+          ]
+        },
+        "right": {
+          "title": "Placebo Maintenance",
+          "points": [
+            "Rapid disease progression off active therapy",
+            "Cumulative toxicities if chemotherapy continued",
+            "Inferior median progression-free survival",
+            "Standard chemotherapy resumption required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Activating **KRAS point mutations** represent the hallmark initiating genetic event occurring in over 90% of pancreatic ductal adenocarcinomas. The vast majority of alterations involve codon 12, predominantly **G12D**, G12V, and G12R substitutions, which lock the GTPase in an active GTP-bound conformation and drive downstream proliferative signalling through RAF-MEK-ERK and PI3K-Akt cascades.",
+      "say": "Activating KRAS point mutations represent the hallmark initiating genetic event occurring in over 90% of pancreatic ductal adenocarcinomas. The vast majority of alterations involve codon 12, predominantly G12D, G12V, and G12R substitutions, which lock the GTPase in an active GTP-bound conformation and drive downstream proliferative signalling through RAF-MEK-ERK and PI3K-Akt cascades.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "KRAS Codon 12 Mutation",
+          "Prevalence in Pancreas",
+          "Targeted Inhibitor Pipeline"
+        ],
+        "rows": [
+          [
+            "KRAS G12D",
+            "Approx. 40% to 45%",
+            "Investigational allele-specific inhibitors (MRTX1133)"
+          ],
+          [
+            "KRAS G12V",
+            "Approx. 30% to 35%",
+            "Novel pan-KRAS and GTPase switch-pocket inhibitors"
+          ],
+          [
+            "KRAS G12R",
+            "Approx. 15% to 20%",
+            "Distinctive biochemical properties; emerging small molecules"
+          ],
+          [
+            "KRAS G12C",
+            "Only 1% to 2%",
+            "Sotorasib and adagrasib approved for G12C-mutant subset"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For localized tumours situated in the head or uncinate process of the pancreas, surgical **Pancreaticoduodenectomy** Whipple procedure provides the only potentially curative therapy. The procedure requires en bloc resection of the pancreatic head, duodenum, proximal jejunum, gallbladder, distal bile duct, and partial gastrectomy, demanding microscopically clear **resection margins** R0 to achieve long-term survival.",
+      "say": "For localized tumours situated in the head or uncinate process of the pancreas, surgical Pancreaticoduodenectomy Whipple procedure provides the only potentially curative therapy. The procedure requires en bloc resection of the pancreatic head, duodenum, proximal jejunum, gallbladder, distal bile duct, and partial gastrectomy, demanding microscopically clear resection margins R0 to achieve long-term survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resect",
+            "label": "Whipple Resection",
+            "level": 1
+          },
+          {
+            "id": "margin",
+            "label": "R0 Margin Evaluation",
+            "level": 2
+          },
+          {
+            "id": "nodes",
+            "label": "Lymph Node Harvest",
+            "level": 3
+          },
+          {
+            "id": "recon",
+            "label": "Pancreaticojejunostomy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "resect",
+            "margin"
+          ],
+          [
+            "margin",
+            "nodes"
+          ],
+          [
+            "nodes",
+            "recon"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Baseline serum **CA 19-9** provides essential clinical staging value in localized pancreatic adenocarcinoma. An elevated serum CA 19-9 concentration above 1000 U/mL in patients presenting with anatomically resectable primary tumours strongly correlates with occult peritoneal or distant **micrometastatic disease**, warranting staging diagnostic laparoscopy prior to planned curative laparotomy.",
+      "say": "Baseline serum CA 19-9 provides essential clinical staging value in localized pancreatic adenocarcinoma. An elevated serum CA 19-9 concentration above 1000 U/mL in patients presenting with anatomically resectable primary tumours strongly correlates with occult peritoneal or distant micrometastatic disease, warranting staging diagnostic laparoscopy prior to planned curative laparotomy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CA 19-9 > 1,000 U/mL",
+          "points": [
+            "Strongly indicates occult distant metastases",
+            "High rate of early postoperative recurrence",
+            "Mandates staging diagnostic laparoscopy",
+            "Favors upfront neoadjuvant systemic chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "Lewis Antigen Negative",
+          "points": [
+            "FUT3 fucosyltransferase enzyme deficiency",
+            "Occurs in 5% to 10% of general population",
+            "Incapable of synthesizing sialylated CA 19-9",
+            "Serum CA 19-9 remains zero despite heavy tumour burden"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 48 (Pancreatic Cancer)",
+    "NCCN Pancreatic Adenocarcinoma Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

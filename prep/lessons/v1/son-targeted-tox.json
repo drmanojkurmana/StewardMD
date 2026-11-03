@@ -1,120 +1,293 @@
 {
- "v": 1,
- "module": "son-targeted-tox",
- "subject": "ss-medical-oncology",
- "title": "Toxicities of targeted agents and ADCs",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**EGFR inhibitors** cause an acneiform rash in roughly 60 to 80 percent of treated patients. Lesions are monomorphic papulopustules on the face, scalp and upper trunk. Rash often appears in the first weeks and tends to correlate with drug response. Management is prophylactic, with a daily moisturiser, sunscreen and a topical or oral tetracycline class antibiotic started early, and dose modification is reserved for severe grades.",
-   "say": "EGFR inhibitors cause an acneiform rash in roughly sixty to eighty percent of treated patients. The lesions are monomorphic papulopustules on the face, scalp and upper trunk. The rash often appears in the first few weeks. Management is prophylactic, with a daily moisturiser, sunscreen and an early tetracycline class antibiotic. Dose modification is reserved for severe grades.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "EGFR acneiform rash"
-    ],
-    "rows": [
-     [
-      "Incidence",
-      "About 60 to 80 percent"
-     ],
-     [
-      "Lesion type",
-      "Monomorphic papulopustules"
-     ],
-     [
-      "Typical site",
-      "Face, scalp, upper trunk"
-     ],
-     [
-      "Key prevention",
-      "Moisturiser, sunscreen, early antibiotic"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Paronychia** is inflammation of the nail fold, most often from Staphylococcus aureus in acute cases. Acute infection lasting under six weeks is usually managed with warm soaks, and a discrete abscess needs incision and drainage. Chronic paronychia is typically irritant or Candida driven and is managed with antifungals and avoidance of irritants. Nail dystrophy is the commonest major complication of chronic disease.",
-   "say": "Paronychia is inflammation of the nail fold, most often caused by Staphylococcus aureus in acute cases. Acute infection lasting under six weeks is usually managed with warm soaks. A discrete abscess needs incision and drainage. Chronic paronychia is typically irritant or Candida driven and is managed with antifungals and avoidance of irritants. Nail dystrophy is the commonest major complication of chronic disease.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-targeted-tox-fig1.webp",
-    "alt": "Illustration showing a finger with acute paronychia (red, swollen nail fold, possible pus) and chronic paronychia (subtle inflammation, nail dystrophy).",
-    "caption": "Paronychia: acute and chronic inflammation of the nail fold",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Hand foot skin reaction** is a palmoplantar erythema with pain and swelling, typical of multikinase and some targeted agents. Early recognition matters because grade 2 or higher reactions often need dose interruption. Emollients, urea creams and avoidance of friction and heat are first line. Topical steroids are added for symptomatic control, and the drug is restarted at a reduced dose once the reaction settles.",
-   "say": "Hand foot skin reaction is a palmoplantar erythema with pain and swelling, typical of multikinase and some targeted agents. Early recognition matters because higher grade reactions often need dose interruption. Emollients, urea creams and avoidance of friction and heat are first line. Topical steroids help symptoms. The drug is restarted at a reduced dose once the reaction settles.",
-   "vis": null
-  },
-  {
-   "tx": "**VEGF pathway inhibitors** commonly raise blood pressure and cause **proteinuria** through effects on renal endothelium. Blood pressure should be checked before every cycle and managed with standard **antihypertensive** therapy, typically an ACE inhibitor or a calcium channel blocker. Urine protein is tracked regularly, and nephrotic range loss usually prompts a temporary hold of the drug.",
-   "say": "VEGF pathway inhibitors often raise blood pressure and cause proteinuria, because they affect the renal endothelium. Check blood pressure before every cycle and treat it with standard antihypertensive drugs, usually an ACE inhibitor or a calcium channel blocker. Track urine protein regularly. If loss reaches the nephrotic range, the drug is usually held temporarily.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Check BP before each cycle"
-     },
-     {
-      "id": "b",
-      "label": "Treat hypertension"
-     },
-     {
-      "id": "c",
-      "label": "Monitor urine protein"
-     },
-     {
-      "id": "d",
-      "label": "Hold drug if nephrotic range"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Interstitial lung disease** is the key serious toxicity of a **HER2-directed antibody drug conjugate**. It can be fatal and may appear weeks to months after starting treatment. Any new cough, dyspnoea or falling oxygen saturation needs urgent chest imaging and interruption of the drug. **Corticosteroids** are started promptly once the diagnosis is suspected, and specialist respiratory input is sought early.",
-   "say": "The key serious toxicity of a HER2-directed antibody drug conjugate is interstitial lung disease. It can be fatal and may appear weeks to months after starting treatment. Any new cough, breathlessness or falling oxygen saturation needs urgent chest imaging and interruption of the drug. Corticosteroids are started promptly once the diagnosis is suspected, and specialist respiratory input is sought early.",
-   "vis": null
+  "v": 1,
+  "module": "son-targeted-tox",
+  "subject": "ss-medical-oncology",
+  "title": "Toxicities of targeted agents and antibody-drug conjugates: dermatologic, metabolic, pulmonary and neurologic complications",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Epidermal growth factor receptor inhibitors cause characteristic **acneiform papulopustular** skin eruptions on sebum-rich facial and trunk areas in up to 90% of treated patients. The proactive Lacouture protocol recommends prophylactic oral **doxycycline** or minocycline 100 mg twice daily alongside gentle alcohol-free moisturizers and topical hydrocortisone to minimize severity and prevent dose reductions.",
+      "say": "Epidermal growth factor receptor inhibitors cause characteristic acneiform papulopustular skin eruptions on sebum-rich facial and trunk areas in up to 90% of treated patients. The proactive Lacouture protocol recommends prophylactic oral doxycycline or minocycline 100 mg twice daily alongside gentle alcohol-free moisturizers and topical hydrocortisone to minimize severity and prevent dose reductions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "EGFR Rash Features",
+          "points": [
+            "Follicular papules and pustules without comedones",
+            "Predominates on face, scalp, and upper trunk",
+            "Appears within 1 to 2 weeks of initiation",
+            "Correlates positively with antitumour efficacy"
+          ]
+        },
+        "right": {
+          "title": "Prophylaxis and Care",
+          "points": [
+            "Oral doxycycline or minocycline 100 mg BID",
+            "Topical 1% hydrocortisone cream to face",
+            "Broad-spectrum SPF 30 sunscreen daily",
+            "Avoid alcohol-containing toners and acne washes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Paronychia** and pyogenic granuloma-like **periungual lesions** represent chronic, highly disabling cutaneous complications of long-term EGFR inhibitor therapy. Arising weeks to months after therapy initiation, lateral nail fold inflammation and exuberant granulation tissue produce excruciating digital pain, requiring potent topical corticosteroids, antimicrobial soaks, and partial nail avulsion.",
+      "say": "Paronychia and pyogenic granuloma-like periungual lesions represent chronic, highly disabling cutaneous complications of long-term EGFR inhibitor therapy. Arising weeks to months after therapy initiation, lateral nail fold inflammation and exuberant granulation tissue produce excruciating digital pain, requiring potent topical corticosteroids, antimicrobial soaks, and partial nail avulsion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Severity Grade",
+          "Clinical Manifestation",
+          "Recommended Management Strategy"
+        ],
+        "rows": [
+          [
+            "Grade 1 (Mild)",
+            "Nail fold erythema and localized edema",
+            "Vinegar or chlorhexidine soaks, topical clobetasol ointment"
+          ],
+          [
+            "Grade 2 (Moderate)",
+            "Nail fold disruption, discharge, severe tenderness",
+            "Add oral cephalexin or clindamycin for secondary bacterial infection"
+          ],
+          [
+            "Grade 3 (Severe)",
+            "Pyogenic granuloma formation, functional impairment",
+            "Dose interruption, chemical cauterization with silver nitrate, nail avulsion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hand-foot skin reaction** associated with multikinase VEGFR inhibitors sorafenib and regorafenib manifests as **hyperkeratotic** painful, tender blisters localized over mechanical friction and pressure points. Distinct from cytotoxic chemotherapy erythrodysesthesia, VEGFR hand-foot reaction requires preemptive hyperkeratotic callus debridement, topical urea creams, and cushioned footwear.",
+      "say": "Hand-foot skin reaction associated with multikinase VEGFR inhibitors sorafenib and regorafenib manifests as hyperkeratotic painful, tender blisters localized over mechanical friction pressure points. Distinct from cytotoxic chemotherapy erythrodysesthesia, VEGFR hand-foot reaction requires preemptive hyperkeratotic callus debridement, topical urea creams, and cushioned footwear.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "VEGFR Hand-Foot Reaction",
+          "points": [
+            "Driven by sorafenib, regorafenib, sunitinib",
+            "Hyperkeratotic, blistered, callused plaques",
+            "Confined to pressure and friction points",
+            "Managed with 10% to 20% urea cream and clobetasol"
+          ]
+        },
+        "right": {
+          "title": "Cytotoxic Hand-Foot Syndrome",
+          "points": [
+            "Driven by capecitabine, 5-FU, pegylated liposomal doxorubicin",
+            "Diffuse, symmetrical, desquamating erythema",
+            "Affects entire palmar and plantar surfaces",
+            "Managed with emollients and ice packs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Trastuzumab deruxtecan** carries a major boxed warning for drug-induced **interstitial lung disease** and non-infectious pneumonitis. Because pulmonary toxicity can progress rapidly to fatal fibrosis, oncologists mandate baseline chest computed tomography, serial monitoring for cough or exertional dyspnea, immediate treatment cessation at grade 1, and prompt high-dose corticosteroid administration.",
+      "say": "Trastuzumab deruxtecan carries a major boxed warning for drug-induced interstitial lung disease and non-infectious pneumonitis. Because pulmonary toxicity can progress rapidly to fatal fibrosis, oncologists mandate baseline chest computed tomography, serial monitoring for cough or exertional dyspnea, immediate treatment cessation at grade 1, and prompt high-dose corticosteroid administration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "T-DXd Therapy"
+          },
+          {
+            "id": "symptom",
+            "label": "Cough / Dyspnoea / Ground-Glass"
+          },
+          {
+            "id": "g1",
+            "label": "Grade 1: Hold Drug + Corticosteroids"
+          },
+          {
+            "id": "g2",
+            "label": "Grade 2+: Permanently Discontinue"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "symptom"
+          ],
+          [
+            "symptom",
+            "g1"
+          ],
+          [
+            "symptom",
+            "g2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Alpelisib**, an isoform-specific PI3K-alpha inhibitor, frequently induces severe grade 3 to 4 **hyperglycemia** in over 30% of treated oncology patients by disrupting insulin-stimulated cellular glucose uptake. Clinical guidelines require mandatory baseline fasting plasma glucose and glycated hemoglobin screening, accompanied by lifestyle optimization and early prophylactic metformin initiation.",
+      "say": "Alpelisib, an isoform-specific PI3K-alpha inhibitor, frequently induces severe grade 3 to 4 hyperglycemia in over 30% of treated oncology patients by disrupting insulin-stimulated cellular glucose uptake. Clinical guidelines require mandatory baseline fasting plasma glucose and glycated hemoglobin screening, accompanied by lifestyle optimization and early prophylactic metformin initiation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hyperglycemia Severity",
+          "Fasting Glucose Threshold",
+          "Recommended Therapeutic Action"
+        ],
+        "rows": [
+          [
+            "Grade 1 (Mild)",
+            "Fasting glucose >160 to 250 mg/dL",
+            "Initiate or escalate oral metformin 500 to 2000 mg daily"
+          ],
+          [
+            "Grade 2 (Moderate)",
+            "Fasting glucose >250 to 500 mg/dL",
+            "Add SGLT2 inhibitor or DPP-4 inhibitor; hold alpelisib if symptomatic"
+          ],
+          [
+            "Grade 3 or 4 (Severe)",
+            "Fasting glucose >500 mg/dL or ketoacidosis",
+            "Interrupt alpelisib; administer intravenous insulin infusion and rehydrate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**CDK4/6 inhibitors** palbociclib, ribociclib, and abemaciclib induce uncomplicated, rapidly reversible bone marrow **neutropenia** without the true apoptotic stromal depletion typical of traditional cytotoxic chemotherapy. By inducing cytostatic G1-phase cell-cycle arrest in hematopoietic progenitors rather than cytotoxic lineage destruction, blood counts rebound rapidly during scheduled rest intervals.",
+      "say": "CDK4/6 inhibitors palbociclib, ribociclib, and abemaciclib induce uncomplicated, rapidly reversible bone marrow neutropenia without the true apoptotic stromal depletion typical of traditional cytotoxic chemotherapy. By inducing cytostatic G1-phase cell-cycle arrest in hematopoietic progenitors rather than cytotoxic lineage destruction, blood counts rebound rapidly during scheduled rest intervals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CDK4/6 Inhibitor Neutropenia",
+          "points": [
+            "Cytostatic, reversible G1 cell cycle arrest",
+            "Preserves stem and progenitor cell viability",
+            "Febrile neutropenia risk under 2%",
+            "Rapid count recovery within 7 drug-free days"
+          ]
+        },
+        "right": {
+          "title": "Cytotoxic Chemotherapy Neutropenia",
+          "points": [
+            "Direct DNA damage and apoptotic progenitor lysis",
+            "Extensive depletion of bone marrow precursors",
+            "Febrile neutropenia risk frequently exceeds 10-20%",
+            "Prolonged marrow recovery requiring G-CSF support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lorlatinib**, a third-generation brain-penetrant ALK inhibitor, causes unique central nervous system neurocognitive, mood, and speech adverse effects alongside profound **hypercholesterolemia** and hypertriglyceridemia in over 80% of patients. Neuropsychiatric toxicities respond to dose reduction, whereas lipid abnormalities demand aggressive lipid-lowering therapy with rosuvastatin or pitavastatin.",
+      "say": "Lorlatinib, a third-generation brain-penetrant ALK inhibitor, causes unique central nervous system neurocognitive, mood, and speech adverse effects alongside profound hypercholesterolemia and hypertriglyceridemia in over 80% of patients. Neuropsychiatric toxicities respond to dose reduction, whereas lipid abnormalities demand aggressive lipid-lowering therapy with rosuvastatin or pitavastatin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Adverse Effect Domain",
+          "Specific Lorlatinib Manifestations",
+          "Clinical Monitoring and Interventions"
+        ],
+        "rows": [
+          [
+            "CNS Cognitive Effects",
+            "Memory lapses, confusion, slowed speech, word finding difficulty",
+            "Dose interrupt until resolution; reduce from 100 mg to 75 mg daily"
+          ],
+          [
+            "CNS Affective Effects",
+            "Irritability, mood swings, depression, sleep disruption",
+            "Monitor family observations; withhold and adjust dose appropriately"
+          ],
+          [
+            "Severe Hyperlipidemia",
+            "Hypercholesterolemia and hypertriglyceridemia exceeding 80%",
+            "Baseline lipid panel; initiate rosuvastatin or atorvastatin concurrently"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Antibody-drug conjugates** carrying monomethyl auristatin E or deruxtecan payloads require dedicated vigilance for signature toxicities including sensorimotor **peripheral neuropathy**, ocular keratitis, and alopecia. Payloads detach inside and outside target cells, and bystander cytotoxic effects cause distinct, payload-specific systemic organ toxicities that dictate rigorous dose-modification algorithms.",
+      "say": "Antibody-drug conjugates carrying monomethyl auristatin E or deruxtecan payloads require dedicated vigilance for signature toxicities including sensorimotor peripheral neuropathy, ocular keratitis, and alopecia. Payloads detach inside and outside target cells, and bystander cytotoxic effects cause distinct, payload-specific systemic organ toxicities that dictate rigorous dose-modification algorithms.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adc",
+            "label": "Antibody-Drug Conjugate (ADC)"
+          },
+          {
+            "id": "mmae",
+            "label": "MMAE Payload (e.g. Brentuximab)"
+          },
+          {
+            "id": "dxd",
+            "label": "Deruxtecan Payload (e.g. T-DXd)"
+          },
+          {
+            "id": "dm1",
+            "label": "DM1 Payload (e.g. T-DM1)"
+          },
+          {
+            "id": "tox_m",
+            "label": "Peripheral Neuropathy"
+          },
+          {
+            "id": "tox_d",
+            "label": "Interstitial Lung Disease"
+          },
+          {
+            "id": "tox_t",
+            "label": "Thrombocytopenia & Hepatic"
+          }
+        ],
+        "edges": [
+          [
+            "adc",
+            "mmae"
+          ],
+          [
+            "adc",
+            "dxd"
+          ],
+          [
+            "adc",
+            "dm1"
+          ],
+          [
+            "mmae",
+            "tox_m"
+          ],
+          [
+            "dxd",
+            "tox_d"
+          ],
+          [
+            "dm1",
+            "tox_t"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 14 (Toxicities and Monitoring of Targeted Therapies)",
+    "Lacouture et al. (ASCO Skin Toxicity Guidelines)",
+    "SOLAR-1 Trial (NEJM)",
+    "CROWN Trial (NEJM)",
+    "DESTINY-Breast Guidelines / Powell et al. (ESMO Open)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_13332ed9615a",
-  "q_4a20526d0ae6",
-  "q_5bdfdec2a1f3"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 41
- }
 }

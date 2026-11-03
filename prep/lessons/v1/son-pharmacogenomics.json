@@ -1,172 +1,301 @@
 {
- "v": 1,
- "module": "son-pharmacogenomics",
- "subject": "ss-medical-oncology",
- "title": "Pharmacogenomics and drug interactions in medical oncology",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Pharmacogenomics explains why the same **dose** can help one patient and harm another. Inherited variants in drug-handling **enzymes** change how a medicine is activated, cleared or broken down. Testing before treatment, for example for **DPYD** variants before fluoropyrimidines, allows dose adjustment and helps prevent serious toxicity. Clinicians should still check **renal** and **hepatic** function before dosing.",
-   "say": "Pharmacogenomics explains why the same dose can help one patient and harm another. Inherited variants in drug-handling enzymes change how a medicine is activated, cleared or broken down. Testing before treatment, for example for DPYD variants before fluoropyrimidines, allows dose adjustment and helps prevent serious toxicity. Clinicians should still check renal and hepatic function before dosing, because kidney or liver impairment can raise drug levels independently of genotype.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Gene",
-     "Drug affected",
-     "Main risk"
-    ],
-    "rows": [
-     [
-      "DPYD",
-      "Fluorouracil",
-      "Severe mucositis and neutropenia"
-     ],
-     [
-      "UGT1A1",
-      "Irinotecan",
-      "Neutropenia from SN-38 buildup"
-     ],
-     [
-      "TPMT",
-      "Azathioprine",
-      "Bone marrow suppression"
-     ],
-     [
-      "CYP2D6",
-      "Codeine",
-      "Poor analgesia in poor metabolisers, toxicity in ultrarapid metabolisers"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Dihydropyrimidine dehydrogenase**, encoded by DPYD, breaks down most of an administered fluorouracil dose. A **DPYD variant** lowers this enzyme's activity, so the active drug accumulates. Patients with reduced function develop severe mucositis, diarrhoea and neutropenia. CPIC advises genotype-guided starting doses, with carriers of a single reduced-function allele usually receiving about half the standard dose.",
-   "say": "Dihydropyrimidine dehydrogenase, encoded by DPYD, breaks down most of an administered fluorouracil dose. A DPYD variant lowers this enzyme's activity, so the active drug accumulates. Patients with reduced function develop severe mucositis, diarrhoea and neutropenia. CPIC advises genotype-guided starting doses, with carriers of a single reduced-function allele usually receiving about half the standard dose.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "DPYD variant"
-     },
-     {
-      "id": "n2",
-      "label": "Low DPD enzyme"
-     },
-     {
-      "id": "n3",
-      "label": "Fluorouracil builds up"
-     },
-     {
-      "id": "n4",
-      "label": "Severe toxicity"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ],
-     [
-      "n3",
-      "n4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**TPMT** inactivates thiopurine drugs such as azathioprine through methylation. When enzyme activity falls, more drug is channelled into active cytotoxic metabolites, raising the risk of severe **bone marrow suppression**. CPIC guidance advises genotype-guided dosing: intermediate metabolisers need a moderate dose reduction, whereas poor metabolisers need a marked reduction or an alternative agent, alongside frequent blood count checks.",
-   "say": "TPMT deactivates thiopurine drugs like azathioprine by adding a methyl group. When this enzyme is less active, more of the drug turns into harmful cytotoxic metabolites, so severe bone marrow suppression becomes a real danger. CPIC advises dosing guided by the patient's genotype. Intermediate metabolisers usually need a moderate cut, while poor metabolisers need a much larger reduction or a different drug, with blood counts checked often.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "TPMT status",
-     "Enzyme activity",
-     "Thiopurine action"
-    ],
-    "rows": [
-     [
-      "Normal",
-      "High",
-      "Standard dose"
-     ],
-     [
-      "Intermediate",
-      "Reduced",
-      "Moderate dose reduction"
-     ],
-     [
-      "Poor",
-      "Very low",
-      "Marked reduction or switch"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Proton pump inhibitors are moderate **CYP2C19** inhibitors. Omeprazole and esomeprazole reduce conversion of clopidogrel to its active form, so they should be avoided with it. Pantoprazole is the preferred agent in this setting. Acid suppression also lowers absorption of pH-dependent drugs such as erlotinib, which absorbs poorly at higher gastric pH.",
-   "say": "Proton pump inhibitors are moderate CYP2C19 inhibitors. Omeprazole and esomeprazole reduce conversion of clopidogrel to its active form, so they should be avoided with it. Pantoprazole is the preferred agent in this setting. Acid suppression also lowers absorption of pH-dependent drugs such as erlotinib, which absorbs poorly at higher gastric pH.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Omeprazole, esomeprazole",
-     "points": [
-      "Inhibit CYP2C19",
-      "Reduce clopidogrel activation",
-      "Avoid with clopidogrel"
-     ]
+  "v": 1,
+  "module": "son-pharmacogenomics",
+  "subject": "ss-medical-oncology",
+  "title": "Pharmacogenomics and drug interactions in oncology: genetic polymorphisms, dosing adjustments and supportive care",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Inherited **dihydropyrimidine dehydrogenase** deficiency and clinical **DPYD deficiency** dramatically impair the catabolism of fluoropyrimidines including fluorouracil and capecitabine. In homozygous or compound heterozygous DPYD deficient patients, standard antineoplastic doses provoke lethal myelosuppression, severe gastrointestinal mucositis, and neurotoxicity. Prospective genotyping for actionable DPYD variants such as DPYD*2A mandates significant upfront **dose reduction** or complete therapeutic avoidance.",
+      "say": "Inherited dihydropyrimidine dehydrogenase deficiency and clinical DPYD deficiency dramatically impair the catabolism of fluoropyrimidines including fluorouracil and capecitabine. In homozygous or compound heterozygous DPYD deficient patients, standard antineoplastic doses provoke lethal myelosuppression, severe gastrointestinal mucositis, and neurotoxicity. Prospective genotyping for actionable DPYD variants such as DPYD*2A mandates significant upfront dose reduction or complete therapeutic avoidance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "5fu",
+            "label": "5-FU / Capecitabine",
+            "level": 1
+          },
+          {
+            "id": "dpyd",
+            "label": "DPYD Enzyme Catabolism",
+            "level": 2
+          },
+          {
+            "id": "clear",
+            "label": "80% Inactive Metabolites",
+            "level": 3
+          },
+          {
+            "id": "tox",
+            "label": "Deficiency: Severe Toxicity",
+            "level": 3
+          }
+        ],
+        "edges": [
+          [
+            "5fu",
+            "dpyd"
+          ],
+          [
+            "dpyd",
+            "clear"
+          ],
+          [
+            "dpyd",
+            "tox"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Pantoprazole",
-     "points": [
-      "Weaker CYP2C19 effect",
-      "Preferred PPI with clopidogrel",
-      "Still check interactions"
-     ]
+    {
+      "tx": "The common **UGT1A1*28** promoter polymorphism carries homozygous seven TA tandem repeats instead of six wild-type repeats in the UGT1A1 promoter region. This genetic variant substantially reduces hepatic glucuronidation of SN-38, the active topoisomerase-inhibiting metabolite of irinotecan. Impaired biliary clearance provokes severe, dose-limiting neutropenia and delayed secretory **diarrhoea**, necessitating preemptive dose attenuation in homozygous individuals.",
+      "say": "The common UGT1A1*28 promoter polymorphism carries homozygous seven TA tandem repeats instead of six wild-type repeats in the UGT1A1 promoter region. This genetic variant substantially reduces hepatic glucuronidation of SN-38, the active topoisomerase-inhibiting metabolite of irinotecan. Impaired biliary clearance provokes severe, dose-limiting neutropenia and delayed secretory diarrhoea, necessitating preemptive dose attenuation in homozygous individuals.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genotype",
+          "UGT1A1 Transcription",
+          "SN-38 Clearance",
+          "Irinotecan Toxicity Risk"
+        ],
+        "rows": [
+          [
+            "*1/*1 (6/6 TA)",
+            "Normal baseline activity",
+            "Efficient hepatic glucuronidation",
+            "Standard expected toxicity"
+          ],
+          [
+            "*1/*28 (6/7 TA)",
+            "Intermediate activity",
+            "Mildly impaired clearance",
+            "Moderate increase in neutropenia"
+          ],
+          [
+            "*28/*28 (7/7 TA)",
+            "Severely reduced activity",
+            "Markedly delayed SN-38 clearance",
+            "Severe grade 4 neutropenia and diarrhoea"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Genetic polymorphisms in **thiopurine S-methyltransferase** TPMT and NUDT15 enzymes dramatically diminish the metabolic inactivation of thiopurine antimetabolites. In patients receiving 6-mercaptopurine for acute lymphoblastic leukaemia, carrying dual inactive alleles causes catastrophic accumulation of cytotoxic thioguanine nucleotides in haematopoietic stem cells. Clinical pharmacogenetic guidelines mandate substantial upfront dose reductions between 50% to 90% in homozygous deficient individuals.",
+      "say": "Genetic polymorphisms in thiopurine S-methyltransferase TPMT and NUDT15 enzymes produce marked loss of metabolic inactivation of thiopurine antimetabolites. In patients receiving 6-mercaptopurine for acute lymphoblastic leukaemia, carrying dual inactive alleles causes catastrophic accumulation of cytotoxic thioguanine nucleotides in haematopoietic stem cells. Clinical pharmacogenetic guidelines mandate substantial upfront dose reductions between 50% to 90% in homozygous deficient individuals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TPMT Polymorphism",
+          "points": [
+            "Frequent in European and African ancestries",
+            "Inactivates 6-mercaptopurine to 6-methylmercaptopurine",
+            "Deficiency drives toxic thioguanine accumulation",
+            "Requires 80% to 90% dose reduction if homozygous"
+          ]
+        },
+        "right": {
+          "title": "NUDT15 Polymorphism",
+          "points": [
+            "Highly prevalent in East Asian and Hispanic ancestries",
+            "Hydrolyses cytotoxic thioguanine triphosphates",
+            "Deficiency induces rapid early fatal myelosuppression",
+            "Mandatory testing in pediatric ALL protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hepatic cytochrome **CYP2D6** bioactivates the selective estrogen receptor modulator tamoxifen into 4-hydroxytamoxifen and active endoxifen. In patients who inherit poor metabolizer phenotypes, plasma endoxifen concentrations remain subtherapeutic, leading to diminished disease-free survival in early estrogen receptor-positive breast cancer. Clinicians must avoid concurrent administration of potent CYP2D6 inhibitor antidepressants like fluoxetine or paroxetine, preferentially selecting venlafaxine for hot flushes.",
+      "say": "Hepatic cytochrome CYP2D6 bioactivates the selective estrogen receptor modulator tamoxifen into 4-hydroxytamoxifen and active endoxifen. In patients who inherit poor metabolizer phenotypes, plasma endoxifen concentrations remain subtherapeutic, leading to diminished disease-free survival in early estrogen receptor-positive breast cancer. Clinicians must avoid concurrent administration of potent CYP2D6 inhibitor antidepressants like fluoxetine or paroxetine, preferentially selecting venlafaxine for hot flushes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tam",
+            "label": "Tamoxifen Prodrug",
+            "level": 1
+          },
+          {
+            "id": "cyp",
+            "label": "CYP2D6 & CYP3A4",
+            "level": 2
+          },
+          {
+            "id": "endo",
+            "label": "Active Endoxifen",
+            "level": 3
+          },
+          {
+            "id": "er",
+            "label": "ER Target Blockade",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "tam",
+            "cyp"
+          ],
+          [
+            "cyp",
+            "endo"
+          ],
+          [
+            "endo",
+            "er"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Most oral kinase inhibitors undergo extensive hepatic clearance mediated by cytochrome P450 3A4. Co-administering potent **CYP3A4 inhibitors** such as ketoconazole, itraconazole, or clarithromycin markedly impairs drug clearance, producing supratherapeutic systemic exposures of targeted TKIs and provoking severe toxicities. When clinical alternatives are unavailable, guidelines mandate preemptive empirical TKI dose reductions, accompanied by vigilant adverse effect surveillance.",
+      "say": "Most oral kinase inhibitors undergo extensive hepatic clearance mediated by cytochrome P450 3A4. Co-administering potent CYP3A4 inhibitors such as ketoconazole, itraconazole, or clarithromycin markedly impairs drug clearance, producing supratherapeutic systemic exposures of targeted TKIs and provoking severe toxicities. When clinical alternatives are unavailable, guidelines mandate preemptive empirical TKI dose reductions, accompanied by vigilant adverse effect surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Interaction Class",
+          "Offending Co-Medication",
+          "Pharmacokinetic Effect on TKIs"
+        ],
+        "rows": [
+          [
+            "Strong CYP3A4 Inhibitors",
+            "Ketoconazole, clarithromycin, voriconazole",
+            "Increases TKI AUC by 2-fold to 5-fold"
+          ],
+          [
+            "Strong CYP3A4 Inducers",
+            "Rifampicin, carbamazepine, St John wort",
+            "Decreases TKI AUC by 50% to 80% (treatment failure)"
+          ],
+          [
+            "Gastric Acid Reducers",
+            "Omeprazole, pantoprazole, famotidine",
+            "Drastically impairs TKI dissolution and oral absorption"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral bioavailability of multiple antineoplastic tyrosine kinase inhibitors depends strictly upon gastric acidity for dissolution. Concurrent therapy with **proton pump inhibitors** or H2-receptor antagonists suppresses acid secretion, raising intragastric pH and severely diminishing clinical absorption of erlotinib, dasatinib, and pazopanib. Oncologists should separate antacids by several hours or substitute acid suppressants to prevent unintended systemic drug underdosing.",
+      "say": "Oral bioavailability of multiple antineoplastic tyrosine kinase inhibitors depends strictly upon gastric acidity for dissolution. Concurrent therapy with proton pump inhibitors or H2-receptor antagonists suppresses acid secretion, raising intragastric pH and severely diminishing clinical absorption of erlotinib, dasatinib, and pazopanib. Oncologists should separate antacids by several hours or substitute acid suppressants to prevent unintended systemic drug underdosing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acid-Dependent TKIs",
+          "points": [
+            "Erlotinib, dasatinib, pazopanib, bosutinib",
+            "Require acidic pH for salt dissolution",
+            "PPIs reduce bioavailability by over 50%",
+            "Direct cause of unexpected treatment failure"
+          ]
+        },
+        "right": {
+          "title": "Clinical Solutions",
+          "points": [
+            "Discontinue non-essential proton pump inhibitors",
+            "Use short-acting antacids 2 hours before or after",
+            "Administer with acidic beverages (e.g. cola) when tested",
+            "Switch to acid-independent alternative targeted agents"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Drug-induced **QTc prolongation** represents a dangerous electrophysiological liability of multiple targeted kinase inhibitors and supportive antiemetics like ondansetron. Ventricular repolarisation delay elevates the risk of life-threatening polymorphic ventricular tachycardia, termed torsades de pointes. Baseline 12-lead electrocardiography, serial electrolyte repletion targeting potassium above 4.0 mEq/L and magnesium above 2.0 mg/dL, and avoiding redundant QTc-prolonging comedications remain essential.",
+      "say": "Drug-induced QTc prolongation represents a dangerous electrophysiological liability of multiple targeted kinase inhibitors and supportive antiemetics like ondansetron. Ventricular repolarisation delay elevates the risk of life-threatening polymorphic ventricular tachycardia, termed torsades de pointes. Baseline 12-lead electrocardiography, serial electrolyte repletion targeting potassium and magnesium, and avoiding redundant QTc-prolonging comedications remain essential.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ecg",
+            "label": "Baseline 12-Lead ECG",
+            "level": 1
+          },
+          {
+            "id": "qtc",
+            "label": "QTc > 500 ms Alert",
+            "level": 2
+          },
+          {
+            "id": "lytes",
+            "label": "Replete K+ & Mg2+",
+            "level": 3
+          },
+          {
+            "id": "hold",
+            "label": "Hold Offending TKI",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ecg",
+            "qtc"
+          ],
+          [
+            "qtc",
+            "lytes"
+          ],
+          [
+            "lytes",
+            "hold"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mandatory **renal dose adjustments** safeguard patients receiving antineoplastic agents eliminated primarily through the kidneys. Impaired glomerular filtration leads to drug accumulation, provoking excessive systemic toxicities with cisplatin, carboplatin, capecitabine, and bleomycin. Dosing protocols require calculating estimated creatinine clearance via the Cockcroft-Gault equation to adjust starting doses and avoid fatal nephrotoxicity or pulmonary toxicity.",
+      "say": "Mandatory renal dose adjustments safeguard patients receiving antineoplastic agents eliminated primarily through the kidneys. Impaired glomerular filtration leads to drug accumulation, provoking excessive systemic toxicities with cisplatin, carboplatin, capecitabine, and bleomycin. Dosing protocols require calculating estimated creatinine clearance via the Cockcroft-Gault equation to adjust starting doses and avoid fatal nephrotoxicity or pulmonary toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Renally Cleared Agent",
+          "Glomerular Cutoff",
+          "Dose Modification Strategy"
+        ],
+        "rows": [
+          [
+            "Cisplatin",
+            "CrCl < 60 mL/min",
+            "Switch to carboplatin or split daily dosing"
+          ],
+          [
+            "Carboplatin",
+            "Target AUC formula",
+            "Dose = AUC x (CrCl + 25) using Calvert equation"
+          ],
+          [
+            "Capecitabine",
+            "CrCl 30-50 mL/min",
+            "Reduce starting dose by 25%; contraindicated if < 30"
+          ],
+          [
+            "Bleomycin",
+            "CrCl < 50 mL/min",
+            "Reduce dose by 50% to prevent fatal pulmonary fibrosis"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Strong **CYP3A4** inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
-   "say": "Strong CYP3A4 inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-pharmacogenomics-fig1.webp",
-    "alt": "Diagram showing how CYP enzyme inhibitors affect substrate drug metabolism, leading to increased drug levels and toxicity, or reduced active metabolite levels and decreased efficacy.",
-    "caption": "CYP-mediated drug interactions: impact on drug levels and clinical outcomes",
-    "ar": 1.8349
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 24 (Pharmacogenomics and Supportive Therapeutics)",
+    "CPIC Guidelines for DPYD, TPMT, and NUDT15"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_81646637248f",
-  "q_b50e70b8b6df",
-  "q_cd808c697dab"
- ],
- "src": [],
- "refs": [
-  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for dihydropyrimidine dehydrogenase genotype and fluoropyrimidine dosing (Amstutz et al., Clinical Pharmacology and Therapeutics, 2018)",
-  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for UGT1A1 and irinotecan dosing (Gammal et al., Clinical Pharmacology and Therapeutics, 2016)",
-  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for thiopurine methyltransferase genotype and thiopurine dosing (Relling et al., Clinical Pharmacology and Therapeutics, 2019)",
-  "Clinical Pharmacogenetics Implementation Consortium (CPIC) guideline for CYP2D6 genotype and tamoxifen therapy (Goetz et al., Clinical Pharmacology and Therapeutics, 2018)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 12
- }
 }

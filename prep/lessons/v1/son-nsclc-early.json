@@ -1,143 +1,288 @@
 {
- "v": 1,
- "module": "son-nsclc-early",
- "subject": "ss-medical-oncology",
- "title": "Early stage and locally advanced NSCLC: surgery, chemoradiation and adjuvant or perioperative therapy",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Early stage and locally advanced **non-small cell lung cancer** (NSCLC) is usually treated with curative intent. Surgical resection is the cornerstone for resectable disease. **Lobectomy** with mediastinal nodal assessment is the standard operation, because it gives better local control than sublobar resection in most fit patients. Sublobar resection is reserved for patients with poor lung reserve or small peripheral tumours. Patient fitness and pulmonary function guide the choice.",
-   "say": "Early stage and locally advanced non-small cell lung cancer is usually treated with curative intent. Surgical resection is the cornerstone for resectable disease. Lobectomy with mediastinal nodal assessment is the standard operation, because it gives better local control than sublobar resection in most fit patients. Sublobar resection is reserved for patients with poor lung reserve or small peripheral tumours. Patient fitness and pulmonary function guide the choice.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Option",
-     "Typical use",
-     "Key limitation"
-    ],
-    "rows": [
-     [
-      "Lobectomy plus nodal dissection",
-      "Fit patients, standard care",
-      "Needs adequate reserve"
-     ],
-     [
-      "Sublobar resection",
-      "Poor reserve, small peripheral tumour",
-      "Higher local recurrence"
-     ],
-     [
-      "Pneumonectomy",
-      "Central tumours not amenable to lobectomy",
-      "Highest morbidity"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Surgical approach matters. **Video-assisted thoracoscopic surgery** (VATS) lobectomy is preferred for early disease when feasible. Tumours above about 6 cm, or with significant bronchial involvement, often need open thoracotomy. Uniportal and robotic approaches are alternatives in experienced centres. A utility incision should be under 8 cm and avoid rib spreading, as per standard VATS definitions. Indian practice often uses open surgery more widely because of resource constraints.",
-   "say": "Surgical approach matters. Video-assisted thoracoscopic surgery lobectomy is preferred for early disease when feasible. Tumours above about 6 cm, or with significant bronchial involvement, often need open thoracotomy. Uniportal and robotic approaches are alternatives in experienced centres. A utility incision should be under 8 cm and avoid rib spreading, as per standard definitions. Indian practice often uses open surgery more widely because of resource constraints.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Resectable NSCLC"
-     },
-     {
-      "id": "b",
-      "label": "Tumour under 6 cm, no major bronchial involvement"
-     },
-     {
-      "id": "c",
-      "label": "VATS lobectomy"
-     },
-     {
-      "id": "d",
-      "label": "Large or central tumour"
-     },
-     {
-      "id": "e",
-      "label": "Open thoracotomy"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "yes"
-     ],
-     [
-      "b",
-      "d",
-      "no"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Neoadjuvant and perioperative **immunotherapy** can be considered for resectable disease without **driver mutations**, typically stage II to IIIB. Pre-operative **platinum chemotherapy** combined with a PD-1 inhibitor improved pathological response and event-free outcomes. Pembrolizumab given both before and after surgery improved event-free and overall survival. Many guidelines now list these approaches, but cost limits access in India, so careful patient selection matters.",
-   "say": "Neoadjuvant and perioperative immunotherapy can be considered for resectable disease without driver mutations, typically stage two to three B. Pre-operative platinum chemotherapy combined with a PD-1 inhibitor improved pathological response and event-free outcomes. Pembrolizumab given both before and after surgery improved event-free and overall survival. Many guidelines now list these approaches, but cost limits access in India, so careful patient selection matters.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Neoadjuvant chemoimmunotherapy",
-     "points": [
-      "PD-1 inhibitor plus platinum before surgery",
-      "Better pathological response"
-     ]
+  "v": 1,
+  "module": "son-nsclc-early",
+  "subject": "ss-medical-oncology",
+  "title": "Early stage and locally advanced NSCLC: staging, neoadjuvant chemoimmunotherapy, surgical resection and adjuvant targeted therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Anatomical **lobectomy** accompanied by systematic hilar and mediastinal lymph node dissection represents the established surgical standard of care for medically operable clinical stage I and II non-small cell lung cancer. Complete resection requires harvesting at least three mediastinal nodal stations, including subcarinal node station 7. Complete nodal sampling provides rigorous pathological staging that dictates whether subsequent adjuvant systemic therapy is required.",
+      "say": "Anatomical lobectomy accompanied by systematic hilar and mediastinal lymph node dissection represents the established surgical standard of care for medically operable clinical stage I and II non-small cell lung cancer. Complete resection requires harvesting at least three mediastinal nodal stations, including subcarinal node station 7. Complete nodal sampling provides rigorous pathological staging that dictates whether subsequent adjuvant systemic therapy is required.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surgical Procedure",
+          "Indications",
+          "Oncologic Completeness"
+        ],
+        "rows": [
+          [
+            "Anatomical Lobectomy",
+            "Medically fit stage I-II tumours",
+            "Gold standard; lowest rate of local recurrence"
+          ],
+          [
+            "Segmentectomy / Wedge",
+            "Peripheral T1a lesions or poor pulmonary reserve",
+            "Acceptable compromise; higher margin recurrence risk"
+          ],
+          [
+            "Systematic Nodal Dissection",
+            "Mandatory in all curative resections",
+            "Harvest at least 3 mediastinal plus hilar stations"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Perioperative pembrolizumab",
-     "points": [
-      "Pembrolizumab before and after surgery",
-      "Better event-free and overall survival"
-     ]
+    {
+      "tx": "In completely resected stage IB to IIIA EGFR-mutated non-small cell lung cancer, the landmark **ADAURA trial** established **adjuvant osimertinib** for 3 years as standard therapy. Third-generation EGFR inhibition demonstrated a remarkable disease-free survival benefit and significantly prolonged overall survival compared to placebo. Adjuvant osimertinib profoundly suppressed distant metastatic recurrence, particularly reducing central nervous system relapse by over 80%.",
+      "say": "In completely resected stage IB to IIIA EGFR-mutated non-small cell lung cancer, the landmark ADAURA trial established adjuvant osimertinib for 3 years as standard therapy. Third-generation EGFR inhibition demonstrated a remarkable disease-free survival benefit and significantly prolonged overall survival compared to placebo. Adjuvant osimertinib profoundly suppressed distant metastatic recurrence, particularly reducing central nervous system relapse by over 80%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resect",
+            "label": "R0 Lobectomy",
+            "level": 1
+          },
+          {
+            "id": "egfr",
+            "label": "EGFR Exon 19/21",
+            "level": 2
+          },
+          {
+            "id": "chemo",
+            "label": "Adjuvant Platinum",
+            "level": 3
+          },
+          {
+            "id": "osi",
+            "label": "Osimertinib 3 Years",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "resect",
+            "egfr"
+          ],
+          [
+            "egfr",
+            "chemo"
+          ],
+          [
+            "chemo",
+            "osi"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The pivotal **CheckMate 816** trial revolutionized the neoadjuvant landscape by combining **neoadjuvant nivolumab** with platinum doublet chemotherapy for 3 cycles prior to surgical resection in resectable stage IB to IIIA NSCLC. This combination produced a dramatic rise in pathological complete response rates from 2% with chemotherapy alone to 24%, translating into statistically significant improvements in event-free survival without compromising surgical resection rates or safety.",
+      "say": "The pivotal CheckMate 816 trial revolutionized the neoadjuvant landscape by combining neoadjuvant nivolumab with platinum doublet chemotherapy for 3 cycles prior to surgical resection in resectable stage IB to IIIA NSCLC. This combination produced a dramatic rise in pathological complete response rates from 2% with chemotherapy alone to 24%, translating into statistically significant improvements in event-free survival without compromising surgical resection rates or safety.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neoadjuvant Chemo-IO (CheckMate 816)",
+          "points": [
+            "Nivolumab plus platinum doublet x 3 cycles",
+            "Pathological complete response rate: 24%",
+            "Significant event-free survival prolongation",
+            "Does not compromise curative surgical resection"
+          ]
+        },
+        "right": {
+          "title": "Chemotherapy Alone",
+          "points": [
+            "Platinum doublet chemotherapy x 3 cycles",
+            "Pathological complete response rate: only 2%",
+            "Higher rate of early metastatic relapse",
+            "Historically poor 5-year overall survival"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Broadening the perioperative approach, the **KEYNOTE-671** phase III trial evaluated **perioperative pembrolizumab** administered alongside neoadjuvant cisplatin doublet chemotherapy for 4 cycles, followed by surgical resection and adjuvant pembrolizumab for up to 1 year. The trial demonstrated statistically significant improvements in both event-free survival and definitive overall survival in resectable stage II to IIIB non-small cell lung cancer.",
+      "say": "Broadening the perioperative approach, the KEYNOTE-671 phase III trial evaluated perioperative pembrolizumab administered alongside neoadjuvant cisplatin doublet chemotherapy for 4 cycles, followed by surgical resection and adjuvant pembrolizumab for up to 1 year. The trial demonstrated statistically significant improvements in both event-free survival and definitive overall survival in resectable stage II to IIIB non-small cell lung cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "neo",
+            "label": "Neoadjuvant Pembrolizumab",
+            "level": 1
+          },
+          {
+            "id": "surg",
+            "label": "Curative Surgery",
+            "level": 2
+          },
+          {
+            "id": "adj",
+            "label": "Adjuvant Pembrolizumab",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Prolonged OS Benefit",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "neo",
+            "surg"
+          ],
+          [
+            "surg",
+            "adj"
+          ],
+          [
+            "adj",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In unresectable locally advanced stage III NSCLC without disease progression after definitive concurrent chemoradiotherapy, the landmark **PACIFIC trial** established **consolidation durvalumab** as the global standard of care. Administered every 2 weeks for up to 12 months, durvalumab immune checkpoint blockade significantly improved progression-free survival and achieved a durable overall survival benefit, raising 5-year survival rates to approximately 43%.",
+      "say": "In unresectable locally advanced stage III NSCLC without disease progression after definitive concurrent chemoradiotherapy, the landmark PACIFIC trial established consolidation durvalumab as the global standard of care. Administered every 2 weeks for up to 12 months, durvalumab immune checkpoint blockade significantly improved progression-free survival and achieved a durable overall survival benefit, raising 5-year survival rates to approximately 43%.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PACIFIC Durvalumab Arm",
+          "points": [
+            "12 months of consolidation PD-L1 blockade",
+            "Median overall survival: 47.5 months",
+            "5-year overall survival rate: 43%",
+            "Standard of care following concurrent CRT"
+          ]
+        },
+        "right": {
+          "title": "Placebo Arm (Historical)",
+          "points": [
+            "Observation following chemoradiation",
+            "Median overall survival: 29.1 months",
+            "5-year overall survival rate: 33%",
+            "Higher rate of systemic distant metastases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In completely resected stage IB to IIIA ALK-rearranged NSCLC, the phase III **ALINA** trial established **adjuvant alectinib** for up to 2 years as a superior alternative to platinum-based chemotherapy. Alectinib reduced the risk of disease recurrence or death by an unprecedented 76%, while demonstrating profound protection against central nervous system recurrence, firmly establishing targeted TKI therapy in early-stage ALK-positive disease.",
+      "say": "In completely resected stage IB to IIIA ALK-rearranged NSCLC, the phase III ALINA trial established adjuvant alectinib for up to 2 years as a superior alternative to platinum-based chemotherapy. Alectinib reduced the risk of disease recurrence or death by an unprecedented 76%, while demonstrating profound protection against central nervous system recurrence, firmly establishing targeted TKI therapy in early-stage ALK-positive disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resect",
+            "label": "Resected Stage IB-IIIA",
+            "level": 1
+          },
+          {
+            "id": "alk",
+            "label": "ALK Fusion Positive",
+            "level": 2
+          },
+          {
+            "id": "alec",
+            "label": "Alectinib 2 Years",
+            "level": 3
+          },
+          {
+            "id": "cns",
+            "label": "CNS Protection",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "resect",
+            "alk"
+          ],
+          [
+            "alk",
+            "alec"
+          ],
+          [
+            "alec",
+            "cns"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeted **Stereotactic body radiotherapy** delivers excellent **local control** exceeding 90% in medically inoperable stage I peripheral non-small cell lung cancer. Delivering biological effective doses exceeding 100 Gy across 3 to 5 fractions achieves definitive tumour ablation without requiring open surgical resection. Radiotherapy provides an outstanding curative option for patients with severe cardiopulmonary comorbidities.",
+      "say": "Targeted Stereotactic body radiotherapy delivers excellent local control exceeding 90% in medically inoperable stage I peripheral non-small cell lung cancer. Delivering biological effective doses exceeding 100 Gy across 3 to 5 fractions achieves definitive tumour ablation without requiring open surgical resection. Radiotherapy provides an outstanding curative option for patients with severe cardiopulmonary comorbidities.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour Location",
+          "SBRT Dose Fractionation",
+          "Critical Organs at Risk"
+        ],
+        "rows": [
+          [
+            "Peripheral Lesions",
+            "54 Gy in 3 fractions or 48 Gy in 4",
+            "Chest wall, ribs, peripheral lung parenchyma"
+          ],
+          [
+            "Central Lesions (within 2 cm tree)",
+            "60 Gy in 8 fractions or 50 Gy in 4",
+            "Proximal bronchial tree, pulmonary artery, esophagus"
+          ],
+          [
+            "Ultracentral Lesions",
+            "More prolonged fractionation required",
+            "Avoid fatal fatal haemoptysis or bronchial necrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive **concurrent chemoradiation** combining 60 to 66 Gy of thoracic radiation with platinum-based doublet chemotherapy represents the foundation of therapy for unresectable stage III NSCLC. Standard regimens incorporate cisplatin paired with either etoposide or pemetrexed for non-squamous histology. Concurrent administration provides superior overall survival compared with sequential treatment by maximizing radiosensitisation and controlling micrometastatic systemic disease.",
+      "say": "Definitive concurrent chemoradiation combining 60 to 66 Gy of thoracic radiation with platinum-based doublet chemotherapy represents the foundation of therapy for unresectable stage III NSCLC. Standard regimens incorporate cisplatin paired with either etoposide or pemetrexed for non-squamous histology. Concurrent administration provides superior overall survival compared with sequential treatment by maximizing radiosensitisation and controlling micrometastatic systemic disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Concurrent Chemoradiation",
+          "points": [
+            "Chemotherapy administered simultaneously with RT",
+            "Maximizes radiosensitisation of hypoxic tumour",
+            "Superior 5-year overall survival in trials",
+            "Higher incidence of acute radiation esophagitis"
+          ]
+        },
+        "right": {
+          "title": "Sequential Therapy",
+          "points": [
+            "Induction chemotherapy followed by RT",
+            "Lower acute toxicities and oesophagitis",
+            "Inferior locoregional and overall survival",
+            "Reserved exclusively for frail or borderline patients"
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "tx": "For unresectable stage III disease, **concurrent chemoradiation** is the standard approach, with radiotherapy delivered alongside platinum-based chemotherapy. In patients who have not progressed after chemoradiation, **consolidative anti-PD-L1 immunotherapy** for up to one year improved progression-free and overall survival in the PACIFIC trial. For medically inoperable stage I tumours, **stereotactic body radiotherapy** (SBRT) is the preferred ablative option, giving high local control in peripheral lesions.",
-   "say": "For unresectable stage three disease, concurrent chemoradiation is the standard approach, with radiotherapy delivered alongside platinum-based chemotherapy. In patients who have not progressed after chemoradiation, consolidative anti-PD-L1 immunotherapy for up to one year improved progression-free and overall survival in the PACIFIC trial. For medically inoperable stage one tumours, stereotactic body radiotherapy is the preferred ablative option, giving high local control in peripheral lesions.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-nsclc-early-fig1.webp",
-    "alt": "Flowchart showing treatment algorithms for unresectable Stage III NSCLC with chemoradiation and immunotherapy, and medically inoperable Stage I NSCLC with SBRT.",
-    "caption": "Treatment pathways for unresectable Stage III and medically inoperable Stage I NSCLC",
-    "ar": 1.8349
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 39 (Non-Small Cell Lung Cancer)",
+    "NCCN Non-Small Cell Lung Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_bdeb4a423cfe",
-  "q_4992f0ab4b27",
-  "q_6a6652f295c7"
- ],
- "src": [],
- "refs": [
-  "NCCN Guidelines: Non-Small Cell Lung Cancer"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 36
- }
 }

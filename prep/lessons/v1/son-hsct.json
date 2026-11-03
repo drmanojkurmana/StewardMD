@@ -1,188 +1,292 @@
 {
- "v": 1,
- "module": "son-hsct",
- "subject": "ss-medical-oncology",
- "title": "Haematopoietic stem cell transplantation: core principles for NEET-PG and INI-CET",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Haematopoietic stem cell transplantation replaces a diseased or deficient marrow with healthy stem cells. It is either **autologous**, using the patient's own cells, or **allogeneic**, using a donor's cells. Autologous transplant carries no graft versus host disease risk but offers no immune graft versus tumour effect, so relapse from contaminated reinfused cells is a concern. Allogeneic transplant offers a graft versus tumour effect but carries higher transplant-related mortality.",
-   "say": "Haematopoietic stem cell transplantation replaces a diseased or deficient marrow with healthy stem cells. It is either autologous, using the patient's own cells, or allogeneic, using a donor's cells. Autologous transplant carries no graft versus host disease risk but offers no immune graft versus tumour effect, so relapse from contaminated reinfused cells is a concern. Allogeneic transplant offers a graft versus tumour effect but carries higher transplant-related mortality.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Autologous",
-     "points": [
-      "Patient's own cells",
-      "No GVHD risk",
-      "No graft versus tumour effect",
-      "Relapse from contaminated product"
-     ]
+  "v": 1,
+  "module": "son-hsct",
+  "subject": "ss-medical-oncology",
+  "title": "Haematopoietic stem cell transplantation: autologous vs allogeneic, donor selection, conditioning regimens, graft-versus-host disease and infections",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "High-dose **Autologous haematopoietic stem cell transplantation** ASCT delivers supralethal myeloablative chemotherapy to eradicate chemosensitive malignancy, followed by re-infusion of the patient's own cryopreserved haematopoietic stem cells. ASCT serves as standard consolidation for fit patients with multiple myeloma and relapsed diffuse large B-cell or Hodgkin lymphoma, carrying negligible graft-versus-host disease risk and low treatment-related mortality.",
+      "say": "High-dose Autologous haematopoietic stem cell transplantation ASCT delivers supralethal myeloablative chemotherapy to eradicate chemosensitive malignancy, followed by re-infusion of the patient's own cryopreserved haematopoietic stem cells. ASCT serves as standard consolidation for fit patients with multiple myeloma and relapsed diffuse large B-cell or Hodgkin lymphoma, carrying negligible graft-versus-host disease risk and low treatment-related mortality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Autologous Transplant (ASCT)",
+          "points": [
+            "Source: Patient's own mobilised stem cells",
+            "Principle: Supralethal chemotherapy dose escalation",
+            "Zero risk of graft-versus-host disease",
+            "Standard in myeloma and chemosensitive relapsed lymphoma"
+          ]
+        },
+        "right": {
+          "title": "Allogeneic Transplant (Allo-HCT)",
+          "points": [
+            "Source: Matched related, unrelated, or haploidentical donor",
+            "Principle: Curative graft-versus-tumour immunologic effect",
+            "Carries substantial GVHD and graft failure risks",
+            "Standard in acute leukaemias and myelodysplastic syndrome"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Allogeneic",
-     "points": [
-      "Donor cells",
-      "Graft versus tumour effect",
-      "GVHD risk",
-      "Higher transplant-related mortality"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**HLA matching** governs donor selection. HLA genes lie on the short arm of chromosome 6. A matched sibling donor has a fifty percent chance of being identical for a given sibling. For unrelated donors, high-resolution typing of **HLA-A, HLA-B, HLA-C and HLA-DRB1** is preferred because mismatches at these loci worsen survival. **Haploidentical** donors, usually a parent or child, are now widely used, especially with post-transplant cyclophosphamide.",
-   "say": "HLA matching governs donor selection. HLA genes lie on the short arm of chromosome 6. A matched sibling donor has a fifty percent chance of being identical for a given sibling. For unrelated donors, high-resolution typing of HLA-A, HLA-B, HLA-C and HLA-DRB1 is preferred because mismatches at these loci worsen survival. Haploidentical donors, usually a parent or child, are now widely used, especially with post-transplant cyclophosphamide.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Donor type",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "Matched sibling",
-      "Fifty percent chance of identical sibling"
-     ],
-     [
-      "Unrelated",
-      "High-resolution HLA-A, B, C, DRB1 typing"
-     ],
-     [
-      "Haploidentical",
-      "Half-matched; post-transplant cyclophosphamide used"
-     ],
-     [
-      "Identical twin",
-      "No GVHD, but no graft versus tumour effect"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Conditioning** intensity is chosen by age, comorbidity and prior therapy. **Myeloablative conditioning** gives maximal tumour kill but higher transplant-related mortality. **Reduced-intensity conditioning** suits older patients or those with comorbidities, relying more on graft versus tumour effect. In severe aplastic anaemia an intact immune system must be suppressed, so conditioning is mandatory. In SCID, intrinsic immunodeficiency allows engraftment, so conditioning may be omitted.",
-   "say": "Conditioning intensity is chosen by age, comorbidity and prior therapy. Myeloablative conditioning gives maximal tumour kill but higher transplant-related mortality. Reduced-intensity conditioning suits older patients or those with comorbidities, relying more on graft versus tumour effect. In severe aplastic anaemia an intact immune system must be suppressed, so conditioning is mandatory. In SCID, intrinsic immunodeficiency allows engraftment, so conditioning may be omitted.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Myeloablative",
-     "points": [
-      "Maximal tumour kill",
-      "Higher transplant-related mortality",
-      "Fit, younger patients"
-     ]
+    {
+      "tx": "In contrast, **Allogeneic haematopoietic cell transplantation** allo-HCT replaces recipient haematopoiesis with healthy donor immune cells capable of exerting a potent, curative **graft-versus-leukaemia GVL** immunologic response. Donor alloreactive T-lymphocytes recognize minor histocompatibility antigens on recipient malignant clones, eradicating chemoresistant residual leukaemia stem cells and providing definitive long-term cure across high-risk acute leukaemias.",
+      "say": "In contrast, Allogeneic haematopoietic cell transplantation allo-HCT replaces recipient haematopoiesis with healthy donor immune cells capable of exerting a potent, curative graft-versus-leukaemia GVL immunologic response. Donor alloreactive T-lymphocytes recognize minor histocompatibility antigens on recipient malignant clones, eradicating chemoresistant residual leukaemia stem cells and providing definitive long-term cure across high-risk acute leukaemias.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cond",
+            "label": "Conditioning Regimen",
+            "level": 1
+          },
+          {
+            "id": "infus",
+            "label": "Donor Stem Cell Infusion",
+            "level": 2
+          },
+          {
+            "id": "engraft",
+            "label": "Donor Engraftment",
+            "level": 3
+          },
+          {
+            "id": "gvl",
+            "label": "Curative GVL Effect",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cond",
+            "infus"
+          ],
+          [
+            "infus",
+            "engraft"
+          ],
+          [
+            "engraft",
+            "gvl"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Reduced intensity",
-     "points": [
-      "Lower transplant-related mortality",
-      "Older or comorbid patients",
-      "Relies on graft versus tumour effect"
-     ]
+    {
+      "tx": "**Human leukocyte antigen** matching at 8 of 8 or 10 of 10 **high-resolution loci** HLA-A, B, C, DRB1, and DQB1 minimizes graft failure and graft-versus-host disease GVHD risk. Allelic mismatching at any locus significantly increases the incidence of primary graft rejection and transplant-related mortality.",
+      "say": "Human leukocyte antigen matching at 8 of 8 or 10 of 10 high-resolution loci HLA-A, B, C, DRB1, and DQB1 minimizes graft failure and graft-versus-host disease GVHD risk. Allelic mismatching at any locus significantly increases the incidence of primary graft rejection and transplant-related mortality.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "HLA Locus Typology",
+          "Matching Standard",
+          "Clinical Impact of Mismatch"
+        ],
+        "rows": [
+          [
+            "Class I Loci (A, B, C)",
+            "High-resolution 2-field DNA typing",
+            "Mismatches drive severe acute GVHD and graft rejection"
+          ],
+          [
+            "Class II Loci (DRB1, DQB1)",
+            "High-resolution molecular allele matching",
+            "Mismatches increase GVHD and transplant-related mortality"
+          ],
+          [
+            "10/10 Matched Donor",
+            "Identical across all 5 loci pairs",
+            "Optimal outcomes; lowest non-relapse mortality"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The widespread adoption of **post-transplant cyclophosphamide** PTCy on days +3 and +4 has transformed **haploidentical stem cell transplantation**. Administering high-dose cyclophosphamide selectively destroys rapidly proliferating, highly alloreactive donor T cells that cause hyperacute GVHD, while sparing non-proliferating memory T cells and haematopoietic stem cells through high intracellular aldehyde dehydrogenase expression.",
+      "say": "The widespread adoption of post-transplant cyclophosphamide PTCy on days +3 and +4 has transformed haploidentical stem cell transplantation. Administering high-dose cyclophosphamide selectively destroys rapidly proliferating, highly alloreactive donor T cells that cause hyperacute GVHD, while sparing non-proliferating memory T cells and haematopoietic stem cells through high intracellular aldehyde dehydrogenase expression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "haplo",
+            "label": "Haploidentical Infusion",
+            "level": 1
+          },
+          {
+            "id": "prolif",
+            "label": "Alloreactive T Proliferation",
+            "level": 2
+          },
+          {
+            "id": "ptcy",
+            "label": "PTCy on Days +3 & +4",
+            "level": 3
+          },
+          {
+            "id": "spared",
+            "label": "Stem Cells Spared (ALDH+)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "haplo",
+            "prolif"
+          ],
+          [
+            "prolif",
+            "ptcy"
+          ],
+          [
+            "ptcy",
+            "spared"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute **graft-versus-host disease** aGVHD classically manifests within the first 100 days following allogeneic transplantation, driven by donor T-cell mediated tissue damage. Diagnostic criteria evaluate three specific target organs: **skin maculopapular rash**, hepatic cholestasis with hyperbilirubinemia, and **gastrointestinal secretory diarrhoea**. First-line therapy for grade II to IV acute GVHD comprises high-dose systemic methylprednisolone.",
+      "say": "Acute graft-versus-host disease aGVHD classically manifests within the first 100 days following allogeneic transplantation, driven by donor T-cell mediated tissue damage. Diagnostic criteria evaluate three specific target organs: skin maculopapular rash, hepatic cholestasis with hyperbilirubinemia, and gastrointestinal secretory diarrhoea. First-line therapy for grade II to IV acute GVHD comprises high-dose systemic methylprednisolone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target Organ",
+          "Staging Metric (Stage 1 to 4)",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Cutaneous Involvement",
+            "Maculopapular rash < 25% up to erythroderma",
+            "Pruritic erythematous morbilliform eruption"
+          ],
+          [
+            "Hepatic Involvement",
+            "Serum total bilirubin 2.0 to > 15.0 mg/dL",
+            "Cholestatic jaundice with alkaline phosphatase rise"
+          ],
+          [
+            "Gastrointestinal",
+            "Stool volume 500 mL/day to > 1500 mL/day",
+            "Green secretory diarrhoea, crampy pain, mucosal sloughing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ruxolitinib** oral JAK1 and JAK2 inhibitor significantly improves overall response rates and survival in acute and chronic **steroid-refractory GVHD** in the REACH2 and REACH3 trials. Inhibiting Janus kinase signalling suppresses downstream inflammatory cytokine transduction, producing rapid resolution of mucosal and cutaneous graft-versus-host manifestations.",
+      "say": "Ruxolitinib oral JAK1 and JAK2 inhibitor significantly improves overall response rates and survival in acute and chronic steroid-refractory GVHD in the REACH2 and REACH3 trials. Inhibiting Janus kinase signalling suppresses downstream inflammatory cytokine transduction, producing rapid resolution of mucosal and cutaneous graft-versus-host manifestations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "REACH2 (Steroid-Refractory aGVHD)",
+          "points": [
+            "Overall response rate: 62% vs 39% (p<0.001)",
+            "Durable complete response rate significantly higher",
+            "Failure-free survival: 5.0 vs 1.0 months",
+            "FDA-approved standard for steroid-refractory aGVHD"
+          ]
+        },
+        "right": {
+          "title": "REACH3 (Steroid-Refractory cGVHD)",
+          "points": [
+            "Overall response rate: 50% vs 26% (p<0.001)",
+            "Superior symptom reduction on Lee Symptom Scale",
+            "Significantly prolonged failure-free survival",
+            "Addresses fibrotic and inflammatory manifestations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hepatic **sinusoidal obstruction syndrome** SOS, formerly termed veno-occlusive disease VOD, is a life-threatening endothelial complication of myeloablative conditioning regimens containing busulfan or cyclophosphamide. Presenting with the classical triad of painful hepatomegaly, jaundice, and rapid ascites with fluid retention, severe cases carry high mortality and respond to the oligonucleotide **defibrotide**.",
+      "say": "Hepatic sinusoidal obstruction syndrome SOS, formerly termed veno-occlusive disease VOD, is a life-threatening endothelial complication of myeloablative conditioning regimens containing busulfan or cyclophosphamide. Presenting with the classical triad of painful hepatomegaly, jaundice, and rapid ascites with fluid retention, severe cases carry high mortality and respond to the oligonucleotide defibrotide.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tox",
+            "label": "Sinusoidal Endothelial Injury",
+            "level": 1
+          },
+          {
+            "id": "sos",
+            "label": "Triad: Jaundice, Ascites, Pain",
+            "level": 2
+          },
+          {
+            "id": "defib",
+            "label": "Defibrotide IV Therapy",
+            "level": 3
+          },
+          {
+            "id": "resolv",
+            "label": "Endothelial Stabilization",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "tox",
+            "sos"
+          ],
+          [
+            "sos",
+            "defib"
+          ],
+          [
+            "defib",
+            "resolv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Reactivation of latent **Cytomegalovirus** CMV poses a formidable risk of life-threatening pneumonia and enteritis following allogeneic transplantation. Standard protocols mandate routine surveillance utilizing serial quantitative blood PCR. Early rising viral loads trigger preemptive therapy with intravenous **ganciclovir** or oral valganciclovir. Alternatively, letermovir CMV terminase complex prophylaxis provides effective primary prevention in seropositive recipients.",
+      "say": "Reactivation of latent Cytomegalovirus CMV poses a formidable risk of life-threatening pneumonia and enteritis following allogeneic transplantation. Standard protocols mandate routine surveillance utilizing serial quantitative blood PCR. Early rising viral loads trigger preemptive therapy with intravenous ganciclovir or oral valganciclovir. Alternatively, letermovir CMV terminase complex prophylaxis provides effective primary prevention in seropositive recipients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CMV Management Strategy",
+          "Drug of Choice",
+          "Mechanism & Clinical Setting"
+        ],
+        "rows": [
+          [
+            "Primary Prophylaxis",
+            "Letermovir (oral or IV)",
+            "Inhibits viral terminase complex; CMV-seropositive recipients"
+          ],
+          [
+            "Preemptive Therapy",
+            "Ganciclovir or Valganciclovir",
+            "Initiated on asymptomatic rising PCR to prevent tissue disease"
+          ],
+          [
+            "Second-Line Preemptive",
+            "Foscarnet or Cidofovir",
+            "Reserved for cytopenias or ganciclovir-resistant UL97 mutations"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Graft versus host disease** is managed with systemic **corticosteroids** added to calcineurin inhibitor therapy as first-line treatment for acute GVHD. Suspected gut GVHD must be confirmed by endoscopy with biopsy after excluding infection such as Clostridioides difficile. **Ruxolitinib**, a JAK inhibitor, is an important option for steroid-refractory disease. Mild GVHD after transplant is associated with a lower relapse risk because it reflects donor immunity against malignant cells.",
-   "say": "Graft versus host disease is managed with systemic corticosteroids added to calcineurin inhibitor therapy as first-line treatment for acute GVHD. Suspected gut GVHD must be confirmed by endoscopy with biopsy after excluding infection such as Clostridioides difficile. Ruxolitinib, a JAK inhibitor, is an important option for steroid-refractory disease. Mild GVHD after transplant is associated with a lower relapse risk because it reflects donor immunity against malignant cells.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspected acute GVHD"
-     },
-     {
-      "id": "b",
-      "label": "Exclude infection"
-     },
-     {
-      "id": "c",
-      "label": "Steroids plus calcineurin inhibitor"
-     },
-     {
-      "id": "d",
-      "label": "Steroid refractory: ruxolitinib"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d",
-      "No response"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Sinusoidal obstruction syndrome** usually appears within the first month after conditioning, with tender hepatomegaly, jaundice and fluid retention. The injury centres on hepatic sinusoidal endothelium. **Defibrotide** is the principal disease-directed treatment for severe disease. For **CMV** in seropositive allogeneic recipients, **antiviral prophylaxis** reduces clinically significant infection, and the choice of agent is guided by marrow toxicity and local protocol.",
-   "say": "Sinusoidal obstruction syndrome usually appears within the first month after conditioning, with tender hepatomegaly, jaundice and fluid retention. The injury centres on hepatic sinusoidal endothelium. Defibrotide is the principal disease-directed treatment for severe disease. For CMV in seropositive allogeneic recipients, antiviral prophylaxis reduces clinically significant infection, and the choice of agent is guided by marrow toxicity and local protocol.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-hsct-fig1.webp",
-    "alt": "Diagram showing liver sinusoidal obstruction syndrome (SOS) with damaged endothelium, obstruction, hepatomegaly, jaundice, and fluid retention.",
-    "caption": "Sinusoidal obstruction syndrome: injury, obstruction, and clinical signs",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Immune recovery** is slow after transplant. Innate immunity returns first, while adaptive T- and B-cell function may take one to two years to recover fully. For stem cell mobilisation, **G-CSF** is the standard agent, and **plerixafor**, a CXCR4 antagonist, is added for poor mobilisers. Autologous engraftment is reliable with at least 2.5 million CD34 positive cells per kilogram. Peripheral blood cells engraft about five days faster than marrow.",
-   "say": "Immune recovery is slow after transplant. Innate immunity returns first, while adaptive T- and B-cell function may take one to two years to recover fully. For stem cell mobilisation, G-CSF is the standard agent, and plerixafor, a CXCR4 antagonist, is added for poor mobilisers. Autologous engraftment is reliable with at least 2.5 million CD34 positive cells per kilogram. Peripheral blood cells engraft about five days faster than marrow.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "Innate immunity",
-      "Recovers first"
-     ],
-     [
-      "T and B cells",
-      "Take one to two years"
-     ],
-     [
-      "Mobilisation",
-      "G-CSF, plus plerixafor if poor"
-     ],
-     [
-      "CD34 target",
-      "At least 2.5 million per kilogram"
-     ]
-    ]
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 21 (Hematopoietic Cell Transplantation)",
+    "EBMT-ASTCT GVHD Management Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_fbe5867c3e57",
-  "q_197247b3771b",
-  "q_4736955a8898"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 39
- }
 }
