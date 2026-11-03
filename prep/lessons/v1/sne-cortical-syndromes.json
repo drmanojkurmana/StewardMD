@@ -1,78 +1,172 @@
 {
- "v": 1,
- "module": "sne-cortical-syndromes",
- "subject": "ss-neurology",
- "title": "Higher mental functions and cortical syndromes: language and parietal syndromes",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**Conduction aphasia** shows fluent speech, good comprehension, but poor repetition with phonemic paraphasias, reflecting disruption of the **arcuate fasciculus**. **Transcortical aphasias** spare repetition, so repetition is relatively preserved while spontaneous speech and comprehension are impaired, depending on whether the frontal or temporal side is involved. Remember that Wernicke aphasia patients typically lack insight into their errors, which helps distinguish them from other fluent aphasias.",
-   "say": "Conduction aphasia shows fluent speech, good comprehension, but poor repetition with phonemic paraphasias, reflecting disruption of the arcuate fasciculus. Transcortical aphasias spare repetition, so repetition is relatively preserved while spontaneous speech and comprehension are impaired, depending on whether the frontal or temporal side is involved. Patients with Wernicke aphasia typically lack insight into their errors, which helps distinguish them from other fluent aphasias.",
-   "vis": null
-  },
-  {
-   "tx": "**Gerstmann syndrome** comprises finger agnosia, right-left disorientation, acalculia and agraphia, and is linked to a dominant **angular gyrus** lesion in the parietal lobe. **Hemineglect** follows right parietal damage and causes failure to attend to the left side of space, despite intact primary sensation. **Apraxia** is a failure of purposeful skilled movement not explained by weakness or sensory loss; ideomotor apraxia is the commonest form and is typically left hemisphere.",
-   "say": "Gerstmann syndrome comprises finger agnosia, right-left disorientation, acalculia and agraphia, and is linked to a dominant angular gyrus lesion in the parietal lobe. Hemineglect follows right parietal damage and causes failure to attend to the left side of space, despite intact primary sensation. Apraxia is a failure of purposeful skilled movement not explained by weakness or sensory loss; ideomotor apraxia is the commonest form and is typically left hemisphere.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-cortical-syndromes-fig1.webp",
-    "alt": "Lateral view of the human brain, highlighting the parietal lobe. The dominant angular gyrus is indicated as the site for Gerstmann syndrome, and the right parietal lobe for hemineglect.",
-    "caption": "Parietal lobe lesions cause Gerstmann syndrome and hemineglect",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Balint syndrome** results from bilateral parieto-occipital damage and includes optic ataxia, simultanagnosia and oculomotor apraxia. **Prosopagnosia** is impaired face recognition, usually from bilateral or right occipitotemporal lesions. **Anton syndrome** is cortical blindness with denial of blindness, caused by bilateral occipital damage. **Alien hand** and **frontal release signs** such as grasp and suck reflexes point to frontal or callosal pathology, while **callosal disconnection** can cause left hand apraxia.",
-   "say": "Balint syndrome results from bilateral parieto-occipital damage and includes optic ataxia, simultanagnosia and oculomotor apraxia. Prosopagnosia is impaired face recognition, usually from bilateral or right occipitotemporal lesions. Anton syndrome is cortical blindness with denial of blindness, caused by bilateral occipital damage. Alien hand and frontal release signs such as grasp and suck reflexes point to frontal or callosal pathology, while callosal disconnection can cause left hand apraxia.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Parietal syndromes",
-     "points": [
-      "Gerstmann: finger agnosia, acalculia",
-      "Hemineglect: right parietal, left neglect",
-      "Balint: bilateral, optic ataxia"
-     ]
+  "v": 1,
+  "module": "sne-cortical-syndromes",
+  "subject": "ss-neurology",
+  "title": "Higher Cortical Functions, Aphasia and Apraxia",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Broca aphasia** (expressive, motor aphasia) localizes to the posterior inferior frontal gyrus (**Brodmann** areas 44 and 45), producing non-fluent, effortful, agrammatic speech with intact auditory comprehension but impaired repetition. Patients exhibit prominent frustration and awareness of language deficits due to intact self-monitoring capabilities.",
+      "say": "Broca aphasia results from damage involving the posterior inferior frontal gyrus of the dominant cerebral hemisphere. Spoken language is non fluent, sparse, effortful, and telegraphic with omitted grammatical words. Auditory language comprehension remains relatively intact, whereas verbal repetition is significantly impaired.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-brain-gross.webp",
+        "alt": "Gross neuroanatomy of cerebral hemispheres showing language and parietal cortical lobes.",
+        "caption": "Gross cerebral anatomy: frontal, temporal, and parietal cortical localization",
+        "ar": 1.7778
+      }
     },
-    "right": {
-     "title": "Occipital and frontal syndromes",
-     "points": [
-      "Anton: denial of blindness",
-      "Prosopagnosia: face recognition loss",
-      "Alien hand: frontal or callosal"
-     ]
+    {
+      "tx": "**Wernicke aphasia** (receptive, sensory aphasia) localizes to the posterior superior **temporal gyrus** (Brodmann area 22), presenting with fluent, paraphasic speech, profound comprehension loss, and severely impaired repetition. Patients exhibit prominent anosognosia, completely unaware of their severe conversational communication breakdown and neologistic errors.",
+      "say": "Wernicke aphasia arises from lesions situated in the posterior superior temporal gyrus of the dominant hemisphere. Patients produce fluent, melodic speech that is riddled with neologisms and paraphasic errors, rendering output completely incomprehensible. Both auditory comprehension and verbal repetition are profoundly defective, and patients typically demonstrate complete lack of awareness of their deficit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Broca Aphasia (Motor)",
+          "points": [
+            "Non-fluent, agrammatic, telegraphic speech output",
+            "Relatively preserved auditory comprehension",
+            "Impaired repetition, high patient frustration"
+          ]
+        },
+        "right": {
+          "title": "Wernicke Aphasia (Sensory)",
+          "points": [
+            "Fluent, melodic, paraphasic empty speech (word salad)",
+            "Severely defective auditory language comprehension",
+            "Impaired repetition with prominent anosognosia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Disconnection between anterior and posterior language centers produces isolated repetition failure. **Conduction aphasia** is caused by lesions damaging the **arcuate fasciculus** or supramarginal gyrus. Patients demonstrate normal fluency and preserved auditory language comprehension, but exhibit disproportionately severe impairment in verbal **repetition** with prominent phonemic paraphasias. Patients repeatedly attempt to self-correct their pronunciation errors, termed conduit d'approche.",
+      "say": "Conduction aphasia is a classic disconnection syndrome caused by lesions disrupting the arcuate fasciculus within the dominant hemisphere. Spontaneous conversational speech is fluent and auditory language comprehension is preserved. However, patients have severe impairment in repetition alongside prominent phonemic paraphasias and recurrent attempts at self correction.",
+      "vis": null
+    },
+    {
+      "tx": "**Kl\u00fcver-Bucy syndrome** results from bilateral anterior temporal lobe damage involving the **amygdalae**, producing hyperorality, hypersexuality, psychic blindness (visual agnosia), docility, and dietary alterations. This contrasts with global aphasia, which damages the entire dominant middle cerebral artery perisylvian language territory, obliterating all language modalities.",
+      "say": "Kl\u00fcver Bucy syndrome arises from bilateral anterior temporal lobe destruction involving the amygdalae. Patients exhibit psychic blindness, hyperorality, hypersexuality, and marked emotional docility.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Aphasia Syndrome",
+          "Speech Fluency",
+          "Auditory Comprehension",
+          "Spoken Repetition"
+        ],
+        "rows": [
+          [
+            "Broca Aphasia",
+            "Non-fluent",
+            "Preserved",
+            "Impaired"
+          ],
+          [
+            "Wernicke Aphasia",
+            "Fluent (empty)",
+            "Impaired",
+            "Impaired"
+          ],
+          [
+            "Conduction Aphasia",
+            "Fluent",
+            "Preserved",
+            "Impaired (marked)"
+          ],
+          [
+            "Global Aphasia",
+            "Non-fluent",
+            "Impaired",
+            "Impaired"
+          ],
+          [
+            "Transcortical Motor",
+            "Non-fluent",
+            "Preserved",
+            "Preserved"
+          ],
+          [
+            "Transcortical Sensory",
+            "Fluent",
+            "Impaired",
+            "Preserved"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Parietal association cortex damage generates distinctive neuropsychological syndromes. **Gerstmann syndrome** is a classic tetrad localizing to the **angular gyrus** of the dominant parietal lobe. It consists of **finger agnosia** (inability to identify fingers), right-left disorientation, **agraphia** (inability to write), and **acalculia** (inability to perform mathematical calculations), occurring in the absence of generalized dementia.",
+      "say": "Gerstmann syndrome localizes to the angular gyrus of the dominant parietal lobe. It is characterized clinically by a tetrad of findings: finger agnosia, right left disorientation, agraphia, and acalculia. Recognizing this distinct symptom cluster allows precise anatomical localization to the dominant inferior parietal lobule.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sne-cortical-syndromes-fig1.webp",
+        "alt": "Parietal lobe neuroanatomy, angular gyrus localization, and Gerstmann syndrome components.",
+        "caption": "Dominant angular gyrus localization: the tetrad of Gerstmann syndrome",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "**Hemispatial neglect** syndrome (inattention) characteristically occurs following acute destructive lesions of the non-dominant right **inferior parietal lobule** or temporoparietal junction. Patients fail to respond or orient to stimuli presented in the left hemispace, frequently exhibiting anosognosia and asomatognosia regarding their paralyzed limbs.",
+      "say": "Lesions involving the non dominant right parietal lobe impair spatial attention and body schema perception. Affected individuals exhibit contralateral spatial hemineglect, ignoring visual, auditory, and tactile stimuli in the left hemispace. Patients frequently display anosognosia, vehemently denying their dense left hemiplegia or disowning their paralyzed limbs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Right Parietal Lobule Lesion"
+          },
+          {
+            "id": "b",
+            "label": "Disrupted Contralateral Attention"
+          },
+          {
+            "id": "c",
+            "label": "Left Hemineglect & Anosognosia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Spatial map loss"
+          ],
+          [
+            "b",
+            "c",
+            "Neglect of left hemispace"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Balint syndrome** localizes to bilateral parieto-occipital cortical lesions, producing the clinical triad of optic ataxia (inability to reach visually guided targets), ocular apraxia (inability to direct voluntary saccades), and **simultanagnosia** (inability to perceive more than one visual item at once).",
+      "say": "B\u00e1lint syndrome is caused by bilateral parieto occipital border zone lesions. It consists of a triad comprising simultanagnosia, optic ataxia, and ocular apraxia. Patients have normal visual acuity but cannot perceive more than one object simultaneously, failing to comprehend complex visual scenes.",
+      "vis": null
+    },
+    {
+      "tx": "**Anton syndrome** (**visual anosognosia**) occurs with extensive bilateral striate occipital cortex infarction, where patients are cortically blind yet adamantly deny blindness and confabulate visual experiences. Ideomotor apraxia represents a separate disorder of learned motor planning caused by left parietal lesions.",
+      "say": "Anton syndrome represents visual anosognosia caused by bilateral occipital lobe infarction. Cortically blind individuals adamantly deny their loss of vision and confabulate detailed visual descriptions of their surroundings.",
+      "vis": null
     }
-   }
-  },
-  {
-   "tx": "Rehabilitation for post-stroke **Wernicke aphasia** relies chiefly on **speech and language therapy**, which is the mainstay of treatment. Simple communication strategies help, such as using **yes-or-no questions**, short sentences and visual cues. Recovery is often fastest in the early months and is partly driven by reorganisation, including recruitment of homotopic right hemisphere regions. Transcranial magnetic stimulation is a nonpharmacologic option under investigation, while drugs such as bromocriptine and levodopa remain research agents rather than routine care.",
-   "say": "Rehabilitation for post-stroke Wernicke aphasia relies chiefly on speech and language therapy, which is the mainstay of treatment. Simple communication strategies help, such as using yes-or-no questions, short sentences and visual cues. Recovery is often fastest in the early months and is partly driven by reorganisation, including recruitment of homotopic right hemisphere regions. Transcranial magnetic stimulation is a nonpharmacologic option under investigation, while drugs such as bromocriptine and levodopa remain research agents rather than routine care.",
-   "vis": null
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 22",
+    "Harrison 22e Ch. 35"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_2611baa9f2eb",
-  "q_fbbf4c027913",
-  "q_8ec68b30a710"
- ],
- "src": [],
- "refs": [
-  "Adams and Victor's Principles of Neurology (Editors: Ropper AH et al.)",
-  "Chapter on Aphasia in Bradley's Neurology in Clinical Practice (Editors: Daroff RB et al.)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 32
- }
 }
