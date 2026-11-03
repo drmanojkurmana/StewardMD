@@ -6,9 +6,10 @@ import { mkdtempSync, writeFileSync, readFileSync, mkdirSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
-const SCRIPT = new URL("../scripts/sanitize-sources.mjs", import.meta.url).pathname;
+const SCRIPT = fileURLToPath(new URL("../scripts/sanitize-sources.mjs", import.meta.url));
 const CARDIO = "Standard textbooks: Braunwald's Heart Disease; Hurst's The Heart; Oxford Handbook of Cardiology";
 const GEN = "Standard textbooks: Thompson & Thompson Genetics and Genomics in Medicine; Emery's Elements of Medical Genetics; Harper's Practical Genetic Counselling";
 

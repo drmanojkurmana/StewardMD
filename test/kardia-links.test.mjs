@@ -14,7 +14,9 @@ const LINKS = require("../kardia-links.js");
 const TEACH = require("../kardia-teach.js");
 const { build } = await import("../scripts/kardia-catalogue.mjs");
 
-const ROOT = new URL("../", import.meta.url).pathname;
+import { fileURLToPath } from "node:url";
+
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const readJSON = (p) => JSON.parse(readFileSync(ROOT + p, "utf8"));
 const DASH = /[—–]/;
 
