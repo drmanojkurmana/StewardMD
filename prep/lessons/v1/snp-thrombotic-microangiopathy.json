@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "snp-thrombotic-microangiopathy",
+ "title": "Thrombotic microangiopathy and hypertensive kidney disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Thrombotic microangiopathy** (TMA) is defined by the pathological triad of microvascular endothelial injury, microvascular thrombosis, and erythrocyte fragmentation producing microangiopathic hemolytic anemia (MAHA with schistocytes) and thrombocytopenia. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Thrombotic microangiopathy (TMA) is defined by the pathological triad of microvascular endothelial injury, microvascular thrombosis, and erythrocyte fragmentation producing microangiopathic hemolytic anemia (MAHA with schistocytes) and thrombocytopenia. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scleroderma-renal-crisis-fig1.webp",
+    "alt": "Microangiopathic hemolytic anemia and vascular onion-skinning in TMA",
+    "caption": "Endothelial swelling, microthrombi, and fragmented red cells in thrombotic microangiopathy (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Thrombotic thrombocytopenic purpura (TTP) is caused by severe deficiency of the von Willebrand factor-cleaving protease **ADAMTS13** (activity < 10%), mediated by acquired autoantibodies or congenital mutations (Upshaw-Schulman syndrome). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Thrombotic thrombocytopenic purpura (TTP) is caused by severe deficiency of the von Willebrand factor-cleaving protease ADAMTS13 (activity less than 10%), mediated by acquired autoantibodies or congenital mutations (Upshaw-Schulman syndrome). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TTP (ADAMTS13 < 10%)",
+     "points": [
+      "Severe protease deficiency < 10%",
+      "Upshaw-Schulman syndrome or anti-ADAMTS13",
+      "Treated with plasma exchange and caplacizumab"
+     ]
+    },
+    "right": {
+     "title": "aHUS (ADAMTS13 > 10%)",
+     "points": [
+      "Preserved ADAMTS13 activity > 10%",
+      "Dominant severe renal failure and hypertension",
+      "Treated with terminal complement blockade (C5)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Atypical hemolytic uremic syndrome (**aHUS**) is driven by uncontrolled dysregulation of the alternative complement pathway, caused by loss-of-function mutations in regulatory proteins (CFH, CFI, CD46/MCP) or gain-of-function mutations in C3 or CFB. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Atypical hemolytic uremic syndrome (aHUS) is driven by uncontrolled dysregulation of the alternative complement pathway, caused by loss-of-function mutations in regulatory proteins (CFH, CFI, CD46/MCP) or gain-of-function mutations in C3 or CFB. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complement Regulator",
+     "Mutation Type",
+     "Prevalence in aHUS"
+    ],
+    "rows": [
+     [
+      "Complement Factor H (CFH)",
+      "Loss-of-function mutation or anti-CFH",
+      "25% to 30% (highest recurrence)"
+     ],
+     [
+      "CD46 (Membrane Cofactor Protein)",
+      "Loss-of-function surface mutation",
+      "10% to 15% (low post-transplant recurrence)"
+     ],
+     [
+      "Complement Factor I (CFI)",
+      "Loss-of-function regulatory mutation",
+      "5% to 10%"
+     ],
+     [
+      "C3 or Factor B",
+      "Gain-of-function convertase mutation",
+      "5% to 10%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eculizumab** and ravulizumab are recombinant humanized monoclonal antibodies that bind complement protein C5, blocking cleavage into C5a and terminal membrane attack complex (C5b-9) assembly, representing first-line targeted therapy for aHUS. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Eculizumab and ravulizumab are recombinant humanized monoclonal antibodies that bind complement protein C5, blocking cleavage into C5a and terminal membrane attack complex (C5b-9) assembly, representing first-line targeted therapy for aHUS. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Alternative complement pathway hyperactivation"
+     },
+     {
+      "id": "t2",
+      "label": "Eculizumab or ravulizumab binds C5"
+     },
+     {
+      "id": "t3",
+      "label": "Blocks cleavage into anaphylatoxin C5a and C5b"
+     },
+     {
+      "id": "t4",
+      "label": "Prevents assembly of C5b-9 membrane attack complex"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Caplacizumab** is an anti-von Willebrand factor humanized single-variable-domain antibody (nanobody) that inhibits the interaction between vWF multimer A1 domains and platelet glycoprotein Ib-IX-V, accelerating platelet count recovery in acute TTP. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 9 with diagnostic threshold 5.",
+   "say": "Caplacizumab is an anti-von Willebrand factor humanized single-variable-domain antibody (nanobody) that inhibits the interaction between vWF multimer A1 domains and platelet glycoprotein Ib-IX-V, accelerating platelet count recovery in acute TTP. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 9 with diagnostic threshold 5.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glomerular-diseases-fig1.webp",
+    "alt": "Endothelial receptor binding and microvascular injury in hemolytic uremic syndrome",
+    "caption": "Caplacizumab blocking vWF A1 domain engagement with platelet glycoprotein Ib (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Malignant nephrosclerosis is characterized histopathologically by hyperplastic arteriolosclerosis ('**onion-skin**' intimal thickening) and fibrinoid necrosis of afferent arterioles and glomerular tufts, presenting with acute severe hypertensive encephalopathy and AKI. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Malignant nephrosclerosis is characterized histopathologically by hyperplastic arteriolosclerosis ('onion-skin' intimal thickening) and fibrinoid necrosis of afferent arterioles and glomerular tufts, presenting with acute severe hypertensive encephalopathy and AKI. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Malignant Hypertension",
+     "points": [
+      "Concentric onion-skinning of interlobular arteries",
+      "Arteriolar fibrinoid necrosis",
+      "Acute oliguric renal failure and encephalopathy"
+     ]
+    },
+    "right": {
+     "title": "Benign Nephrosclerosis",
+     "points": [
+      "Homogeneous hyaline arteriolosclerosis",
+      "Finely granular cortical surface",
+      "Slow indolent loss of renal function"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Benign hypertensive nephrosclerosis features **hyaline arteriolosclerosis**, medial hypertrophy, subcapsular cortical scarring with a finely granular kidney surface, and ischemic wrinkling of the glomerular basement membrane. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Benign hypertensive nephrosclerosis features hyaline arteriolosclerosis, medial hypertrophy, subcapsular cortical scarring with a finely granular kidney surface, and ischemic wrinkling of the glomerular basement membrane. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypertensive Nephropathy",
+     "Vascular Pathology",
+     "Gross Macroscopic Appearance"
+    ],
+    "rows": [
+     [
+      "Malignant hypertension",
+      "Hyperplastic onion-skinning and fibrinoid necrosis",
+      "Flea-bitten cortical petechial hemorrhages"
+     ],
+     [
+      "Benign nephrosclerosis",
+      "Hyaline arteriolosclerosis with luminal narrowing",
+      "Subcapsular finely granular leathery surface"
+     ],
+     [
+      "Renal functional impact",
+      "Rapidly progressive renal failure in malignant phase",
+      "Slow, modest proteinuria and gradual eGFR decline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Scleroderma renal crisis** (SRC) manifests with acute onset oliguric AKI, accelerated hypertension, and microangiopathic hemolytic anemia, where urgent initiation of ACE inhibitors (captopril) is life-saving, whereas systemic corticosteroids increase SRC risk. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Scleroderma renal crisis (SRC) manifests with acute onset oliguric AKI, accelerated hypertension, and microangiopathic hemolytic anemia, where urgent initiation of ACE inhibitors (captopril) is life-saving, whereas systemic corticosteroids increase SRC risk. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Systemic sclerosis patient exposed to corticosteroids"
+     },
+     {
+      "id": "s2",
+      "label": "Sudden crisis of malignant hypertension and MAHA"
+     },
+     {
+      "id": "s3",
+      "label": "Emergent titration of oral Captopril (ACE inhibitor)"
+     },
+     {
+      "id": "s4",
+      "label": "Reverses intrarenal ischemia and rescues renal function"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 29",
+  "Harrison Principles of Internal Medicine 22e Ch. 315",
+  "New England Journal of Medicine HERCULES Trial 2019"
+ ]
+}

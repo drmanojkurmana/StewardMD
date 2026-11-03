@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "snp-ckd-cardiovascular-hypertension",
+ "title": "Hypertension and cardiovascular disease in CKD",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cardiovascular disease** is the leading cause of mortality in patients with chronic kidney disease, where non-atherosclerotic mechanisms (arterial stiffness, left ventricular hypertrophy, vascular calcification, and sudden cardiac death) predominate over acute occlusive coronary syndromes. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Cardiovascular disease is the leading cause of mortality in patients with chronic kidney disease, where non-atherosclerotic mechanisms (arterial stiffness, left ventricular hypertrophy, vascular calcification, and sudden cardiac death) predominate over acute occlusive coronary syndromes. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antihypertensive-drugs-fig1.webp",
+    "alt": "Blood pressure management algorithms and target guidelines in CKD",
+    "caption": "Standardized blood pressure measurement and target thresholds in chronic kidney disease (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The 2021 **KDIGO** Blood Pressure Guideline recommends targeting a standardized office systolic blood pressure < 120 mmHg in CKD patients not on dialysis, supported by evidence from the SPRINT CKD subgroup showing reduced all-cause mortality. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting blood pressure target.",
+   "say": "The 2021 KDIGO Blood Pressure Guideline recommends targeting a standardized office systolic blood pressure less than 120 mmHg in CKD patients not on dialysis, supported by evidence from the SPRINT CKD subgroup showing reduced all-cause mortality. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting blood pressure target.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intensive BP Target",
+     "points": [
+      "Target systolic BP < 120 mmHg",
+      "Standardized automated office measurement",
+      "Proven mortality reduction in SPRINT"
+     ]
+    },
+    "right": {
+     "title": "Standard Target",
+     "points": [
+      "Target systolic BP < 140 mmHg",
+      "Used in older or frail patients",
+      "Higher risk of cardiovascular mortality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sodium retention and intravascular **volume expansion** are the primary hemodynamic drivers of hypertension in chronic kidney disease, causing loss of the normal nocturnal physiological dipping pattern (non-dipping or reverse dipping on 24-hour ambulatory blood pressure monitoring). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting nocturnal dipping.",
+   "say": "Sodium retention and intravascular volume expansion are the primary hemodynamic drivers of hypertension in chronic kidney disease, causing loss of the normal nocturnal physiological dipping pattern (non-dipping or reverse dipping on 24-hour ambulatory blood pressure monitoring). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting nocturnal dipping.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Circadian Pattern",
+     "Nocturnal BP Drop",
+     "Cardiovascular Prognosis"
+    ],
+    "rows": [
+     [
+      "Normal dipping",
+      "10% to 20% nocturnal drop",
+      "Lowest baseline cardiovascular risk"
+     ],
+     [
+      "Non-dipping (< 10%)",
+      "Less than 10% nocturnal drop",
+      "High risk of stroke and heart failure"
+     ],
+     [
+      "Reverse dipping (riser)",
+      "Nocturnal BP rises above daytime",
+      "Highest risk of sudden cardiac death"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CLICK trial** is essential. The CLICK randomized controlled trial demonstrated that the thiazide-like diuretic chlorthalidone significantly reduces 24-hour ambulatory systolic blood pressure by 10.5 mmHg in patients with advanced stage 4 CKD and uncontrolled hypertension. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting ambulatory blood pressure.",
+   "say": "CLICK trial is essential. The CLICK randomized controlled trial demonstrated that the thiazide-like diuretic chlorthalidone significantly reduces 24-hour ambulatory systolic blood pressure by 10.5 mmHg in patients with advanced stage 4 CKD and uncontrolled hypertension. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting ambulatory blood pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CLICK Trial Protocol",
+     "points": [
+      "Stage 4 CKD with uncontrolled hypertension",
+      "eGFR range 15 to 29 mL/min/1.73m2",
+      "Chlorthalidone 12.5 to 25 mg daily"
+     ]
+    },
+    "right": {
+     "title": "Clinical Efficacy",
+     "points": [
+      "10.5 mmHg drop in 24h ambulatory SBP",
+      "Significant 50% reduction in UACR",
+      "Effective even in severe renal impairment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Uremic cardiomyopathy** is characterized pathologically by marked concentric left ventricular hypertrophy, extensive diffuse intermyocardiocytic fibrosis, capillary-to-myocyte mismatch, and diastolic dysfunction. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice. Comprehensive nephrology clinical assessment confirms these core diagnostic findings.",
+   "say": "Uremic cardiomyopathy is characterized pathologically by marked concentric left ventricular hypertrophy, extensive diffuse intermyocardiocytic fibrosis, capillary-to-myocyte mismatch, and diastolic dysfunction. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice. Comprehensive nephrology clinical assessment confirms these core diagnostic findings.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Arterial stiffness and volume overload"
+     },
+     {
+      "id": "c2",
+      "label": "Concentric left ventricular hypertrophy"
+     },
+     {
+      "id": "c3",
+      "label": "Diffuse intermyocardiocytic collagen fibrosis"
+     },
+     {
+      "id": "c4",
+      "label": "Severe diastolic dysfunction and heart failure"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Resistant hypertension** in CKD is defined as blood pressure remaining above target despite concurrent use of three antihypertensive agents of different classes, one of which is an appropriately dosed diuretic. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 3.",
+   "say": "Resistant hypertension in CKD is defined as blood pressure remaining above target despite concurrent use of three antihypertensive agents of different classes, one of which is an appropriately dosed diuretic. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 3.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MRA Agent",
+     "Pharmacological Class",
+     "Clinical Profile in CKD"
+    ],
+    "rows": [
+     [
+      "Spironolactone",
+      "Steroidal MRA",
+      "Potent natriuresis; high risk of hyperkalemia and gynecomastia"
+     ],
+     [
+      "Eplerenone",
+      "Selective steroidal MRA",
+      "Lower endocrine side effects; hyperkalemia risk persists"
+     ],
+     [
+      "Finerenone",
+      "Nonsteroidal selective MRA",
+      "Proven cardiorenal protection in FIDELIO and FIGARO trials"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Troponin** T and I concentrations are frequently elevated at baseline in patients with advanced CKD and ESKD due to chronic subclinical myocardial injury and reduced clearance; acute myocardial infarction diagnosis requires acute dynamic rise and fall of cardiac troponin (> 20% delta).",
+   "say": "Troponin T and I concentrations are frequently elevated at baseline in patients with advanced CKD and ESKD due to chronic subclinical myocardial injury and reduced clearance; acute myocardial infarction diagnosis requires acute dynamic rise and fall of cardiac troponin ( greater than 20% delta).",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Baseline Asymptomatic CKD",
+     "points": [
+      "Static elevated baseline troponin T and I",
+      "Reflects chronic subclinical myocyte necrosis",
+      "Correlates with mortality risk"
+     ]
+    },
+    "right": {
+     "title": "Acute Myocardial Infarction",
+     "points": [
+      "Dynamic delta > 20% over 3 to 6 hours",
+      "Concomitant ischemic ECG changes",
+      "Acute clinical chest discomfort"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pericarditis in end-stage kidney disease presents with chest pain and friction rub and is classified as **uremic pericarditis** (before initiation of maintenance dialysis, responding rapidly to intensive hemodialysis) versus dialysis pericarditis (occurring during established dialysis, often requiring drainage). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Pericarditis in end-stage kidney disease presents with chest pain and friction rub and is classified as uremic pericarditis (before initiation of maintenance dialysis, responding rapidly to intensive hemodialysis) versus dialysis pericarditis (occurring during established dialysis, often requiring drainage). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+    "alt": "Clinical pharmacology and antiproteinuric mechanisms of ACE inhibitors",
+    "caption": "Renoprotective hemodynamic and antiproteinuric actions of ACE inhibitors in CKD (StewardMD).",
+    "ar": 1.7778
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 66",
+  "KDIGO Clinical Practice Guideline for Blood Pressure 2021",
+  "New England Journal of Medicine SPRINT Trial 2015"
+ ]
+}

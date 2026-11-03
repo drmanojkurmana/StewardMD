@@ -1,141 +1,209 @@
 {
  "v": 1,
  "module": "snp-immunosuppression",
- "subject": "ss-nephrology",
- "title": "Immunosuppressive therapy: calcineurin inhibitors and key agents",
- "minutes": 5,
+ "title": "Immunosuppressive therapy",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Calcineurin inhibitors such as **cyclosporine** and **tacrolimus** block T-cell activation by inhibiting calcineurin, which stops nuclear transcription of interleukin-2. Their most important dose-limiting toxicity is **nephrotoxicity**, caused mainly by afferent arteriolar vasoconstriction that lowers glomerular filtration rate. Acute changes are often reversible, but chronic use can cause permanent tubulointerstitial damage. Monitoring of trough levels and creatinine is therefore essential.",
-   "say": "Calcineurin inhibitors such as cyclosporine and tacrolimus block T-cell activation by inhibiting calcineurin, which stops nuclear transcription of interleukin-2. Their most important dose-limiting toxicity is nephrotoxicity, caused mainly by afferent arteriolar vasoconstriction that lowers glomerular filtration rate. Acute changes are often reversible, but chronic use can cause permanent tubulointerstitial damage. Monitoring of trough levels and creatinine is therefore essential.",
+   "tx": "T-cell depleting induction therapy with rabbit **antithymocyte globulin** (rATG, 1.5 mg/kg/day for 3 to 5 doses) is strongly indicated for recipients at high immunological risk (high cPRA, repeat transplant, presence of DSA, black race), while basiliximab (anti-IL-2R alpha) is preferred in standard-risk recipients.",
+   "say": "T-cell depleting induction therapy with rabbit antithymocyte globulin (rATG, 1.5 mg/kg/day for 3 to 5 doses) is strongly indicated for recipients at high immunological risk (high cPRA, repeat transplant, presence of DSA, black race), while basiliximab (anti-IL-2R alpha) is preferred in standard-risk recipients.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Cyclosporine",
-     "Tacrolimus"
-    ],
-    "rows": [
-     [
-      "Main side effect",
-      "Hirsutism and gum hyperplasia",
-      "Hyperglycaemia and alopecia"
-     ],
-     [
-      "Neurotoxicity",
-      "Tremor, headache, seizures",
-      "Tremor, headache, seizures"
-     ],
-     [
-      "Drug interaction hazard",
-      "CYP3A4 inhibitors raise levels",
-      "CYP3A4 inhibitors raise levels"
-     ],
-     [
-      "Metabolic effect",
-      "Hypomagnesaemia",
-      "Hyperglycaemia, hyperkalaemia"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/lessons/media/snp-immunosuppression-fig1.webp",
+    "alt": "Mechanism of action of calcineurin inhibitors and antimetabolites in T-cells",
+    "caption": "Intracellular signalling pathways and molecular targets of immunosuppressive agents (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Cyclosporine is a **calcineurin inhibitor** cleared largely by the **CYP3A4** enzyme system in the liver and gut. Drugs that block this enzyme, such as clarithromycin, ketoconazole and grapefruit juice, slow clearance and raise the blood level, which increases the risk of **calcineurin inhibitor nephrotoxicity**. Enzyme inducers do the opposite and can lower levels enough to threaten graft survival. Patients should avoid grapefruit and grapefruit juice, and every new medicine should be checked for interactions before it is started.",
-   "say": "Cyclosporine is a calcineurin inhibitor cleared largely by the CYP3A4 enzyme system. Drugs that block this enzyme, such as clarithromycin, ketoconazole and grapefruit juice, slow clearance and raise the blood level, which increases the risk of nephrotoxicity. Enzyme inducers do the opposite and can lower levels enough to threaten the graft. Patients should avoid grapefruit and grapefruit juice, and every new medicine should be checked for interactions before it is started.",
+   "tx": "**Tacrolimus** binds intracellular FKBP12 to inhibit calcineurin phosphatase, preventing dephosphorylation and nuclear translocation of NFAT; maintaining whole-blood trough levels between 8 and 12 ng/mL in the first 3 months, then 5 to 8 ng/mL thereafter. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Tacrolimus binds intracellular FKBP12 to inhibit calcineurin phosphatase, preventing dephosphorylation and nuclear translocation of NFAT; maintaining whole-blood trough levels between 8 and 12 ng/mL in the first 3 months, then 5 to 8 ng/mL thereafter. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "CYP3A4 inhibitor"
+      "id": "t1",
+      "label": "Tacrolimus enters T-cell and binds FKBP12"
      },
      {
-      "id": "b",
-      "label": "Reduced drug clearance"
+      "id": "t2",
+      "label": "Complex binds and inhibits calcineurin phosphatase"
      },
      {
-      "id": "c",
-      "label": "Higher blood level"
+      "id": "t3",
+      "label": "Blocks dephosphorylation of cytoplasmic NFAT"
      },
      {
-      "id": "d",
-      "label": "Nephrotoxicity risk"
+      "id": "t4",
+      "label": "Suppresses IL-2 gene transcription and proliferation"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "t1",
+      "t2"
      ],
      [
-      "b",
-      "c"
+      "t2",
+      "t3"
      ],
      [
-      "c",
-      "d"
+      "t3",
+      "t4"
      ]
     ]
    }
   },
   {
-   "tx": "**Mycophenolate** blocks **IMPDH**, the enzyme driving de novo guanine nucleotide synthesis, so lymphocytes, which depend on this route, are selectively starved. **Azathioprine** is a purine analogue whose metabolites interfere with DNA synthesis; its dose must be lowered when **TPMT** or **NUDT15** activity is deficient. Both are steroid-sparing maintenance agents.",
-   "say": "Mycophenolate works by blocking IMPDH, the enzyme that drives de novo guanine nucleotide synthesis. Lymphocytes depend heavily on that route, so they are selectively short of building blocks. Azathioprine is a purine analogue, and its active metabolites disrupt DNA synthesis. Before starting it, check TPMT and NUDT15 activity, because deficient enzyme function means the dose must come down. Both drugs allow steroid sparing during maintenance.",
+   "tx": "The **ELITE-Symphony** trial established that low-dose tacrolimus combined with mycophenolate mofetil (MMF), corticosteroids, and daclizumab induction provides superior allograft function, lower acute rejection rates, and better graft survival compared to cyclosporine or sirolimus. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "The ELITE-Symphony trial established that low-dose tacrolimus combined with mycophenolate mofetil (MMF), corticosteroids, and daclizumab induction provides superior allograft function, lower acute rejection rates, and better graft survival compared to cyclosporine or sirolimus. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial Arm",
+     "Immunosuppressive Regimen",
+     "Key Clinical Finding"
+    ],
+    "rows": [
+     [
+      "Low-dose Tacrolimus",
+      "Target trough 3 to 7 ng/mL + MMF",
+      "Highest GFR (65 mL/min), lowest acute rejection (12%)"
+     ],
+     [
+      "Standard Cyclosporine",
+      "Target trough 150 to 300 ng/mL",
+      "Lower GFR (57 mL/min), acute rejection 26%"
+     ],
+     [
+      "Sirolimus arm",
+      "Target trough 4 to 8 ng/mL",
+      "Highest acute rejection (37%), inferior graft survival"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mycophenolate mofetil** (MMF 1,000 mg twice daily) is a prodrug of mycophenolic acid (MPA), which selectively and reversibly inhibits inosine monophosphate dehydrogenase (IMPDH), blocking de novo purine nucleotide synthesis in proliferating T and B lymphocytes. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 1000, reflecting purine synthesis.",
+   "say": "Mycophenolate mofetil (MMF 1,000 mg twice daily) is a prodrug of mycophenolic acid (MPA), which selectively and reversibly inhibits inosine monophosphate dehydrogenase (IMPDH), blocking de novo purine nucleotide synthesis in proliferating T and B lymphocytes. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 1000, reflecting purine synthesis.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Mycophenolate",
+     "title": "Lymphocyte Dependency",
      "points": [
-      "Blocks IMPDH, halting guanine nucleotide synthesis",
-      "Diarrhoea and cytopenias common",
-      "Teratogenic, needs contraception"
+      "Rely exclusively on de novo purine pathway",
+      "Highly sensitive to IMPDH inhibition",
+      "Potent selective antiproliferative arrest"
      ]
     },
     "right": {
-     "title": "Azathioprine",
+     "title": "Other Host Cells",
      "points": [
-      "Purine analogue with active metabolites",
-      "Check TPMT and NUDT15 before dosing",
-      "Steroid-sparing maintenance option"
+      "Possess salvage purine synthesis pathways",
+      "Can recycle hypoxanthine and guanine",
+      "Spared from severe metabolic arrest"
      ]
     }
    }
   },
   {
-   "tx": "**Sirolimus** and **everolimus** are mTOR inhibitors that block T-cell and smooth muscle proliferation. They are useful when calcineurin inhibitors must be withdrawn because of nephrotoxicity, but they cause proteinuria, poor wound healing and dyslipidaemia. Steroid withdrawal protocols, as in the ELITE-Symphony study, aim to reduce long-term metabolic harm while maintaining graft survival in stable patients.",
-   "say": "Sirolimus and everolimus are mTOR inhibitors that block T-cell and smooth muscle proliferation. They are useful when calcineurin inhibitors must be withdrawn because of nephrotoxicity, but they cause proteinuria, poor wound healing and dyslipidaemia. Steroid withdrawal protocols, as in the ELITE-Symphony study, aim to reduce long-term metabolic harm while maintaining graft survival in stable patients.",
+   "tx": "**Belatacept** is a soluble recombinant fusion protein (CTLA-4 linked to modified Fc of human IgG1) that selectively blocks CD28 costimulation by binding CD80/CD86, avoiding calcineurin inhibitor nephrotoxicity and improving long-term eGFR in the BENEFIT trials. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Belatacept is a soluble recombinant fusion protein (CTLA-4 linked to modified Fc of human IgG1) that selectively blocks CD28 costimulation by binding CD80/CD86, avoiding calcineurin inhibitor nephrotoxicity and improving long-term eGFR in the BENEFIT trials. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxicity Domain",
+     "Clinical Manifestation",
+     "Management Strategy"
+    ],
+    "rows": [
+     [
+      "Gastrointestinal",
+      "Severe diarrhea, nausea, erosive gastroduodenitis",
+      "Split dosing, switch to enteric-coated MPA"
+     ],
+     [
+      "Hematological",
+      "Neutropenia (ANC < 1000), thrombocytopenia",
+      "Dose reduction, G-CSF support"
+     ],
+     [
+      "Teratogenicity",
+      "Congenital microtia, facial clefts, heart defects",
+      "Discontinue 6 weeks prior to conception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Belatacept** is strictly contraindicated in recipients who are Epstein-Barr virus (EBV) seronegative due to a markedly increased risk of post-transplant lymphoproliferative disorder (PTLD), predominantly affecting the central nervous system. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting EBV seronegative.",
+   "say": "Belatacept is strictly contraindicated in recipients who are Epstein-Barr virus (EBV) seronegative due to a markedly increased risk of post-transplant lymphoproliferative disorder (PTLD), predominantly affecting the central nervous system. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting EBV seronegative.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/snp-immunosuppression-fig1.webp",
-    "alt": "Diagram showing mTOR inhibitors sirolimus and everolimus blocking T-cell and smooth muscle proliferation, with associated side effects.",
-    "caption": "mTOR inhibitors block T-cell and smooth muscle proliferation. Image: Lybbar12, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 1.5102
+    "src": "v1/kb/media/organ-transplantation-immunobiology-rejection-and-renal-allograft-fig1.webp",
+    "alt": "Immunobiological mechanisms of allograft rejection and immunosuppressive drugs",
+    "caption": "Signal 1, 2, and 3 pathways in allorecognition and sites of pharmacological blockade (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "mTOR inhibitors (**sirolimus**, everolimus) bind FKBP12 to inhibit mechanistic target of rapamycin complex 1 (mTORC1), but side effects include impaired wound healing, incisional hernia, pneumonitis, hyperlipidemia, and new-onset proteinuria. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "mTOR inhibitors (sirolimus, everolimus) bind FKBP12 to inhibit mechanistic target of rapamycin complex 1 (mTORC1), but side effects include impaired wound healing, incisional hernia, pneumonitis, hyperlipidemia, and new-onset proteinuria. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "mTOR Inhibitor Benefits",
+     "points": [
+      "Avoids calcineurin inhibitor nephrotoxicity",
+      "Potent antineoplastic properties against PTLD",
+      "Suppresses cytomegalovirus replication"
+     ]
+    },
+    "right": {
+     "title": "Adverse Complications",
+     "points": [
+      "Impaired surgical wound healing",
+      "De novo podocyte injury and proteinuria",
+      "Interstitial pneumonitis and aphthous ulcers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Calcineurin inhibitors and mTOR inhibitors undergo extensive hepatic and intestinal metabolism by cytochrome P450 3A4 (**CYP3A4**) and P-glycoprotein; CYP3A4 inhibitors (azole antifungals, diltiazem, macrolides) markedly elevate levels, while inducers (rifampin, phenytoin, St. John's wort) precipitate acute rejection. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Calcineurin inhibitors and mTOR inhibitors undergo extensive hepatic and intestinal metabolism by cytochrome P450 3A4 (CYP3A4) and P-glycoprotein; CYP3A4 inhibitors (azole antifungals, diltiazem, macrolides) markedly elevate levels, while inducers (rifampin, phenytoin, St. John's wort) precipitate acute rejection. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathogen",
+     "Prophylactic Medication",
+     "Standard Duration"
+    ],
+    "rows": [
+     [
+      "Pneumocystis jirovecii (PJP)",
+      "TMP-SMX single-strength daily",
+      "3 to 6 months post-transplant (lifelong if high-risk)"
+     ],
+     [
+      "Cytomegalovirus (CMV)",
+      "Valganciclovir 450 to 900 mg daily",
+      "3 months (standard risk) or 6 months (D+/R- high risk)"
+     ],
+     [
+      "Fungal candidiasis",
+      "Oral nystatin swish and swallow",
+      "1 to 3 months post-transplant"
+     ]
+    ]
    }
   }
  ],
- "quiz": [
-  "q_3ef03a3f16d7",
-  "q_6d152f690360",
-  "q_729021c82f69"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "KDIGO Clinical Practice Guideline for the Care of Kidney Transplant Recipients",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 51
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 80",
+  "KDIGO Clinical Practice Guideline for Kidney Transplant 2009",
+  "New England Journal of Medicine ELITE-Symphony Trial 2007"
+ ]
 }

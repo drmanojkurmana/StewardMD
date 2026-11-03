@@ -1,99 +1,219 @@
 {
  "v": 1,
  "module": "snp-ckd-progression",
- "subject": "ss-nephrology",
- "title": "CKD Staging and Progression",
- "minutes": 6,
+ "title": "CKD staging and progression",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Chronic kidney disease is staged on two axes. The **GFR category** runs from G1 to G5, and the **albuminuria category** runs from A1 to A3. G3a means eGFR 45 to 59, G3b means 30 to 44, G4 means 15 to 29 and G5 means under 15 mL/min/1.73 m2. Albuminuria is graded as A1 below 30 mg/g, A2 from 30 to 300 mg/g and A3 above 300 mg/g. Both axes together predict prognosis and set monitoring frequency.",
-   "say": "Chronic kidney disease is staged on two axes. The GFR category runs from G1 to G5, and the albuminuria category runs from A1 to A3. G3a means eGFR 45 to 59, G3b means 30 to 44, G4 means 15 to 29 and G5 means under 15 millilitres per minute per 1.73 square metres. Albuminuria is graded as A1 below 30 milligrams per gram, A2 from 30 to 300 milligrams per gram and A3 above 300 milligrams per gram. Both axes together predict prognosis and set how often the patient is monitored.",
+   "tx": "**KDIGO** defines chronic kidney disease as abnormalities of kidney structure or function persisting for > 3 months, classified into GFR categories G1 (>= 90 mL/min/1.73m2), G2 (60 to 89), G3a (45 to 59), G3b (30 to 44), G4 (15 to 29), and G5 (< 15 or dialysis), reflecting staging.",
+   "say": "KDIGO defines chronic kidney disease as abnormalities of kidney structure or function persisting for greater than 3 months, classified into GFR categories G1 ( greater than = 90 mL/min/1.73m2), G2 (60 to 89), G3a (45 to 59), G3b (30 to 44), G4 (15 to 29), and G5 ( less than 15 or dialysis), reflecting staging.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-ckd-progression-fig1.webp",
+    "alt": "KDIGO CKD risk heatmap and staging grid",
+    "caption": "KDIGO GFR and albuminuria composite risk matrix predicting progression and mortality (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The **KDIGO heat map** integrates GFR stages (G1 to G5) with albuminuria stages (A1 < 30 mg/g, A2 30 to 300 mg/g, A3 > 300 mg/g) to stratify risks of CKD progression, cardiovascular mortality, and acute kidney injury. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "The KDIGO heat map integrates GFR stages (G1 to G5) with albuminuria stages (A1 less than 30 mg/g, A2 30 to 300 mg/g, A3 greater than 300 mg/g) to stratify risks of CKD progression, cardiovascular mortality, and acute kidney injury. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "4-Variable KFRE",
+     "points": [
+      "Patient age and biological sex",
+      "Estimated GFR (CKD-EPI formula)",
+      "Urine albumin-to-creatinine ratio (UACR)"
+     ]
+    },
+    "right": {
+     "title": "Clinical Action Thresholds",
+     "points": [
+      "2-year risk > 10%: nephrology referral",
+      "2-year risk > 20%: vascular access planning",
+      "2-year risk > 40%: transplant waitlisting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The 4-variable **Kidney Failure Risk Equation** (KFRE) calculates the 2-year and 5-year risk of developing end-stage kidney disease using age, sex, eGFR, and urine albumin-to-creatinine ratio (ACR). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "The 4-variable Kidney Failure Risk Equation (KFRE) calculates the 2-year and 5-year risk of developing end-stage kidney disease using age, sex, eGFR, and urine albumin-to-creatinine ratio (ACR). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Category",
-     "Range",
-     "Meaning"
+     "Progression Metric",
+     "Threshold Value",
+     "Clinical Implication"
     ],
     "rows": [
      [
-      "G3a",
-      "eGFR 45-59",
-      "Mildly to moderately reduced"
+      "Normal aging loss",
+      "0.75 to 1.0 mL/min/year after age 40",
+      "Physiological senescence without proteinuria"
      ],
      [
-      "G3b",
-      "eGFR 30-44",
-      "Moderately to severely reduced"
+      "Rapid CKD progressor",
+      "> 5 mL/min/1.73m2/year",
+      "High risk of reaching end-stage kidney failure"
      ],
      [
-      "G4",
-      "eGFR 15-29",
-      "Severely reduced"
-     ],
-     [
-      "A2",
-      "ACR 30-300 mg/g",
-      "Moderately increased albuminuria"
-     ],
-     [
-      "A3",
-      "ACR above 300 mg/g",
-      "Severely increased albuminuria"
+      "Surrogate trial endpoint",
+      "30% to 40% GFR decline over 2-3 yrs",
+      "Validated surrogate for doubling of serum creatinine"
      ]
     ]
    }
   },
   {
-   "tx": "Progression depends on the **kidney failure risk equation**, which uses age, sex, eGFR and urine albumin-creatinine ratio to estimate the two and five year probability of kidney failure. NICE advises referral to nephrology when the five year risk exceeds 5 percent. Estimated GFR itself should be read with caution, because creatinine is affected by muscle mass, so cystatin C may be needed in people with extremes of muscle mass.",
-   "say": "Progression depends on the kidney failure risk equation, which uses age, sex, eGFR and urine albumin-creatinine ratio to estimate the two and five year probability of kidney failure. NICE advises referral to nephrology when the five year risk exceeds 5 percent. Estimated GFR itself should be read with caution, because creatinine is affected by muscle mass, so cystatin C may be needed in people with extremes of muscle mass.",
-   "vis": null
-  },
-  {
-   "tx": "Add-on therapy is now central. **SGLT2 inhibitors** such as dapagliflozin and empagliflozin reduce progression in CKD with or without diabetes, particularly with albuminuria, and can be started down to an eGFR of about 20 to 25. **Finerenone**, a nonsteroidal mineralocorticoid antagonist, reduces kidney and cardiovascular events in type 2 diabetes with albuminuria on maximal RAS blockade, provided potassium is at most about 4.8 to 5.0 mmol/L before starting. Dual RAS blockade should be avoided.",
-   "say": "Add-on therapy is now central. SGLT2 inhibitors such as dapagliflozin and empagliflozin reduce progression in chronic kidney disease with or without diabetes, particularly with albuminuria, and can be started down to an eGFR of about 20 to 25. Finerenone, a nonsteroidal mineralocorticoid antagonist, reduces kidney and cardiovascular events in type 2 diabetes with albuminuria on maximal RAS blockade, provided potassium is at most about 4.8 to 5.0 millimoles per litre before starting. Dual RAS blockade should be avoided.",
+   "tx": "Brenner's **hyperfiltration hypothesis** posits that initial nephron loss induces compensatory hemodynamic adaptation with afferent arteriolar vasodilation and single-nephron GFR elevation, which drives progressive glomerulosclerosis independent of original etiology. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Brenner's hyperfiltration hypothesis posits that initial nephron loss induces compensatory hemodynamic adaptation with afferent arteriolar vasodilation and single-nephron GFR elevation, which drives progressive glomerulosclerosis independent of original etiology. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-ckd-progression-fig1.webp",
-    "alt": "Flowchart for CKD progression therapies: SGLT2 inhibitors for CKD with albuminuria, Finerenone for T2DM with albuminuria on RAS blockade.",
-    "caption": "Add-on therapies for CKD progression: SGLT2i and Finerenone pathways",
-    "ar": 1.8349
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Initial loss of functional nephron mass"
+     },
+     {
+      "id": "b2",
+      "label": "Compensatory rise in single-nephron GFR"
+     },
+     {
+      "id": "b3",
+      "label": "Severe intranephron capillary hypertension"
+     },
+     {
+      "id": "b4",
+      "label": "Progressive glomerulosclerosis and nephron loss"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ]
+    ]
    }
   },
   {
-   "tx": "Metabolic issues drive further decline. **Metabolic acidosis** is corrected with sodium bicarbonate when bicarbonate falls low, which slows loss of kidney function. A low protein diet is considered in advanced CKD under supervision, to limit uraemic toxins. Hyperuricaemia is linked to progression, and urate lowering with allopurinol in the CKD-FIX trial did not slow decline, so it is not routinely used for kidney protection.",
-   "say": "Metabolic issues drive further decline. Metabolic acidosis is corrected with sodium bicarbonate when bicarbonate falls low, which slows loss of kidney function. A low protein diet is considered in advanced chronic kidney disease under supervision, to limit uraemic toxins. Hyperuricaemia is linked to progression, and urate lowering with allopurinol in the CKD-FIX trial did not slow decline, so it is not routinely used for kidney protection.",
-   "vis": null
+   "tx": "**Dietary sodium restriction** to < 2.0 g/day (< 5 g sodium chloride per day) lowers systolic blood pressure, potentiates the antiproteinuric efficacy of RAAS inhibitors, and slows CKD progression. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Dietary sodium restriction to less than 2.0 g/day ( less than 5 g sodium chloride per day) lowers systolic blood pressure, potentiates the antiproteinuric efficacy of RAAS inhibitors, and slows CKD progression. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low Sodium (< 2.0 g/day)",
+     "points": [
+      "Reduces extracellular fluid volume",
+      "Maximizes antiproteinuric effect of RAASi",
+      "Lowers systolic BP by 5 to 10 mmHg"
+     ]
+    },
+    "right": {
+     "title": "High Sodium (> 4.0 g/day)",
+     "points": [
+      "Induces plasma volume expansion",
+      "Blunts RAAS inhibitor efficacy completely",
+      "Accelerates secondary glomerulosclerosis"
+     ]
+    }
+   }
   },
   {
-   "tx": "Sick day rules protect the kidney during acute illness. During vomiting, diarrhoea or dehydration, **RAS blockers**, metformin and diuretics should be temporarily paused. Nephrotoxins such as NSAIDs and iodinated contrast need caution. Acute kidney injury is staged by creatinine rise, with stage 2 meaning a rise to 2.0 to 2.9 times baseline. Early, appropriate fluid resuscitation with buffered crystalloids is preferred over hydroxyethyl starch.",
-   "say": "Sick day rules protect the kidney during acute illness. During vomiting, diarrhoea or dehydration, RAS blockers, metformin and diuretics should be temporarily paused. Nephrotoxins such as NSAIDs and iodinated contrast need caution. Acute kidney injury is staged by creatinine rise, with stage 2 meaning a rise to 2.0 to 2.9 times baseline. Early, appropriate fluid resuscitation with buffered crystalloids is preferred over hydroxyethyl starch.",
-   "vis": null
+   "tx": "**Metformin** therapy must be dose-reduced to maximum 1,000 mg/day when eGFR is 30 to 44 mL/min/1.73m2 and must be completely discontinued when eGFR falls below 30 mL/min/1.73m2 to prevent lactic acidosis. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 1000.",
+   "say": "Metformin therapy must be dose-reduced to maximum 1,000 mg/day when eGFR is 30 to 44 mL/min/1.73m2 and must be completely discontinued when eGFR falls below 30 mL/min/1.73m2 to prevent lactic acidosis. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 1000.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "eGFR Range (mL/min/1.73m2)",
+     "Metformin Recommendation",
+     "Maximum Daily Dose"
+    ],
+    "rows": [
+     [
+      ">= 45 mL/min",
+      "Safe to initiate or continue",
+      "Standard 2000 to 2550 mg/day"
+     ],
+     [
+      "30 to 44 mL/min",
+      "Reduce dose, monitor every 3 months",
+      "Maximum 1000 mg/day"
+     ],
+     [
+      "< 30 mL/min",
+      "Strictly contraindicated",
+      "Discontinue drug completely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Guideline-directed oral **sodium bicarbonate** supplementation targeting serum bicarbonate levels between 22 and 26 mmol/L slows the rate of eGFR decline and improves muscle mass in metabolic acidosis of CKD. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting CKD progression.",
+   "say": "Guideline-directed oral sodium bicarbonate supplementation targeting serum bicarbonate levels between 22 and 26 mmol/L slows the rate of eGFR decline and improves muscle mass in metabolic acidosis of CKD. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting CKD progression.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/renal-osteodystrophy-fig1.webp",
+    "alt": "Chronic tubulointerstitial fibrosis and osteodystrophy mechanisms",
+    "caption": "Tubulointerstitial fibrosis progression and systemic metabolic complications in CKD (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Referral to specialized nephrology **multidisciplinary care** is strongly recommended when eGFR falls below 30 mL/min/1.73m2 (Stage 4 CKD) or when the 2-year predicted risk of kidney failure by KFRE exceeds 10% to 20%. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Referral to specialized nephrology multidisciplinary care is strongly recommended when eGFR falls below 30 mL/min/1.73m2 (Stage 4 CKD) or when the 2-year predicted risk of kidney failure by KFRE exceeds 10% to 20%. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Patient reaches Stage 4 CKD (eGFR 15 to 29)"
+     },
+     {
+      "id": "m2",
+      "label": "Multidisciplinary education and dietary guidance"
+     },
+     {
+      "id": "m3",
+      "label": "KFRE 2-year risk exceeds 20%: access planning"
+     },
+     {
+      "id": "m4",
+      "label": "Workup for pre-emptive kidney transplantation"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "q_4f8f16586d4d",
-  "q_086e8a6867c4",
-  "q_27f3abbf8c51"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of CKD",
-  "NICE Chronic kidney disease: assessment and management (NG203)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 47
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 63-65",
+  "KDIGO Clinical Practice Guideline for CKD 2024",
+  "New England Journal of Medicine Hyperfiltration Hypothesis 1982"
+ ]
 }

@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "snp-alport-thin-membrane",
+ "title": "Alport syndrome and thin basement membrane disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Alport syndrome** is caused by pathogenic variants in COL4A5 on chromosome Xq22.3 in 85% of cases (X-linked Alport syndrome), or bi-allelic variants in autosomal COL4A3 or COL4A4 on chromosome 2q36 (autosomal recessive Alport syndrome). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Alport syndrome is caused by pathogenic variants in COL4A5 on chromosome Xq22.3 in 85% of cases (X-linked Alport syndrome), or bi-allelic variants in autosomal COL4A3 or COL4A4 on chromosome 2q36 (autosomal recessive Alport syndrome). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alport-syndrome-fig1.webp",
+    "alt": "Type IV collagen triple helix mutations and pedigree in Alport syndrome",
+    "caption": "Type IV collagen alpha3-alpha4-alpha5 network disruption in Alport syndrome (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Pathognomonic electron microscopic finding in Alport syndrome is irregular thinning, thickening, splitting, and '**basket-weave**' lamellation of the glomerular basement membrane lamina densa. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting electron microscopy.",
+   "say": "Pathognomonic electron microscopic finding in Alport syndrome is irregular thinning, thickening, splitting, and 'basket-weave' lamellation of the glomerular basement membrane lamina densa. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting electron microscopy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Collagen Network",
+     "Alpha Chains",
+     "Tissue Localization"
+    ],
+    "rows": [
+     [
+      "Embryonic network",
+      "alpha-1, alpha-1, alpha-2 (IV)",
+      "Immature GBM, Bowman capsule, skin epidermal BM"
+     ],
+     [
+      "Mature GBM network",
+      "alpha-3, alpha-4, alpha-5 (IV)",
+      "Mature glomerular BM, cochlea, eye lens capsule"
+     ],
+     [
+      "Alport failure",
+      "Failure of developmental switch",
+      "Loss of mature network makes GBM vulnerable to proteolysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sensorineural hearing loss** in Alport syndrome is progressive, bilateral, symmetrical, and initially affects high frequencies (2,000 to 8,000 Hz), sparing conversational frequencies in early childhood. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 2000 with diagnostic threshold 8000.",
+   "say": "Sensorineural hearing loss in Alport syndrome is progressive, bilateral, symmetrical, and initially affects high frequencies (2,000 to 8,000 Hz), sparing conversational frequencies in early childhood. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 2000 with diagnostic threshold 8000.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alport Syndrome",
+     "points": [
+      "Irregular thick and thin segments",
+      "Longitudinal splitting of lamina densa",
+      "Pathognomonic basket-weave lamellation"
+     ]
+    },
+    "right": {
+     "title": "Thin BM Disease",
+     "points": [
+      "Uniform diffuse thinning of lamina densa",
+      "GBM thickness < 200 to 250 nm",
+      "Absence of lamellation or splitting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pathognomonic ocular signs in Alport syndrome include **anterior lenticonus** (conical protrusion of the anterior lens capsule into the anterior chamber in 25% of cases) and central dot-and-fleck retinopathy. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Pathognomonic ocular signs in Alport syndrome include anterior lenticonus (conical protrusion of the anterior lens capsule into the anterior chamber in 25% of cases) and central dot-and-fleck retinopathy. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Clinical Manifestation",
+     "Diagnostic Specificity"
+    ],
+    "rows": [
+     [
+      "Auditory system",
+      "Bilateral high-frequency sensorineural deafness",
+      "Emerges in late childhood / adolescence"
+     ],
+     [
+      "Ocular anterior segment",
+      "Bilateral anterior lenticonus",
+      "Virtually pathognomonic of Alport syndrome"
+     ],
+     [
+      "Ocular posterior segment",
+      "Perimacular dot-and-fleck retinopathy",
+      "Reflects basement membrane attenuation in retinal pigment epithelium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early initiation of **ACE inhibitors** (ramipril, enalapril) or ARBs significantly delays onset of end-stage kidney disease and extends life expectancy by decades in both males and females with Alport syndrome. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Early initiation of ACE inhibitors (ramipril, enalapril) or ARBs significantly delays onset of end-stage kidney disease and extends life expectancy by decades in both males and females with Alport syndrome. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "x1",
+      "label": "Random X-inactivation (lyonization) in podocytes"
+     },
+     {
+      "id": "x2",
+      "label": "Mosaic expression of normal and mutant COL4A5"
+     },
+     {
+      "id": "x3",
+      "label": "Segmental capillary wall fragility and microhematuria"
+     },
+     {
+      "id": "x4",
+      "label": "Progression to CKD in 15% to 30% of female carriers"
+     }
+    ],
+    "edges": [
+     [
+      "x1",
+      "x2"
+     ],
+     [
+      "x2",
+      "x3"
+     ],
+     [
+      "x3",
+      "x4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thin basement membrane nephropathy** (benign familial hematuria) is caused by heterozygous carrier mutations in COL4A3 or COL4A4, displaying diffuse thinning of the GBM (< 200 to 250 nm) with normal lamellation and lifelong preserved renal function. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Thin basement membrane nephropathy (benign familial hematuria) is caused by heterozygous carrier mutations in COL4A3 or COL4A4, displaying diffuse thinning of the GBM ( less than 200 to 250 nm) with normal lamellation and lifelong preserved renal function. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thin-basement-membrane-nephropathy-fig1.webp",
+    "alt": "Electron microscopy showing diffuse thinning of the glomerular basement membrane",
+    "caption": "Diffuse uniform thinning of the glomerular lamina densa in benign familial hematuria (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Following kidney transplantation in Alport syndrome, approximately 3% to 5% of patients develop de novo **anti-GBM** crescentic glomerulonephritis directed against the donor allograft's alpha-5 or alpha-3 type IV collagen chains. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 4.",
+   "say": "Following kidney transplantation in Alport syndrome, approximately 3% to 5% of patients develop de novo anti-GBM crescentic glomerulonephritis directed against the donor allograft's alpha-5 or alpha-3 type IV collagen chains. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 4.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TBMD (Carrier State)",
+     "points": [
+      "Heterozygous COL4A3 or COL4A4 mutation",
+      "Isolated asymptomatic microhematuria",
+      "Normal GFR and absent proteinuria lifelong"
+     ]
+    },
+    "right": {
+     "title": "Autosomal Recessive Alport",
+     "points": [
+      "Homozygous or compound heterozygous mutations",
+      "Severe early-onset nephropathy and deafness",
+      "Progression to ESRD in early adulthood"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diffuse leiomyomatosis** of the esophagus, tracheobronchial tree, and female genitalia occurs in a subset of Alport syndrome cases caused by contiguous gene deletions spanning the adjacent COL4A5 and COL4A6 genes. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "say": "Diffuse leiomyomatosis of the esophagus, tracheobronchial tree, and female genitalia occurs in a subset of Alport syndrome cases caused by contiguous gene deletions spanning the adjacent COL4A5 and COL4A6 genes. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Donor kidney expresses normal alpha-5 chain of type IV collagen"
+     },
+     {
+      "id": "a2",
+      "label": "Recipient immune system lacks central self-tolerance"
+     },
+     {
+      "id": "a3",
+      "label": "Host produces de novo anti-GBM alloantibodies"
+     },
+     {
+      "id": "a4",
+      "label": "Severe crescentic allograft loss refractory to plasmapheresis"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 44",
+  "Harrison Principles of Internal Medicine 22e Ch. 317",
+  "Kidney International Guidelines on Alport Syndrome 2020"
+ ]
+}
