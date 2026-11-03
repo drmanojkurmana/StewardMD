@@ -97,7 +97,7 @@
         "kind": "compare",
         "left": {
           "title": "Larotrectinib",
-          "items": [
+          "points": [
             "Highly selective pan-TRK inhibitor (TRKA, TRKB, TRKC)",
             "Systemic ORR 75% to 79% in TRK-fusion cancers",
             "Approved across all ages including infants and children",
@@ -106,7 +106,7 @@
         },
         "right": {
           "title": "Entrectinib",
-          "items": [
+          "points": [
             "Potent inhibitor of TRKA/B/C, ROS1, and ALK",
             "High blood-brain barrier penetration with intracranial activity",
             "Approved for NTRK fusion-positive tumours and ROS1+ NSCLC",
@@ -207,7 +207,7 @@
         "kind": "compare",
         "left": {
           "title": "Selpercatinib (LOXO-292)",
-          "items": [
+          "points": [
             "Highly selective oral RET kinase inhibitor",
             "Tissue-agnostic approval for RET fusion-positive solid tumours",
             "Potent central nervous system penetration (> 80% intracranial ORR)",
@@ -216,7 +216,7 @@
         },
         "right": {
           "title": "Pralsetinib (BLU-667)",
-          "items": [
+          "points": [
             "Selective RET inhibitor targeting oncogenic RET fusions",
             "Approved in RET fusion-positive NSCLC and thyroid cancers",
             "High potency against multiple RET partner rearrangements",
@@ -279,6 +279,10 @@
           {
             "id": "e",
             "label": "ESCAT Tier IV / V (Preclinical or Inactionable)"
+          },
+          {
+            "id": "x",
+            "label": "Lower tiers (III to V)"
           }
         ],
         "edges": [
@@ -294,11 +298,16 @@
           ],
           [
             "a",
+            "x",
+            "Weaker or no clinical evidence"
+          ],
+          [
+            "x",
             "d",
             "Validated in other cancer histology"
           ],
           [
-            "a",
+            "x",
             "e",
             "Laboratory models or negative trials"
           ]
@@ -310,5 +319,6 @@
     "q_5c6f07b2a273",
     "q_1c74853c5b95",
     "q_3b837fde3f9e"
-  ]
+  ],
+  "gen": "AI"
 }
