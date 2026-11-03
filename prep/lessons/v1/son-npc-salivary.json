@@ -1,0 +1,297 @@
+{
+  "v": 1,
+  "module": "son-npc-salivary",
+  "subject": "ss-medical-oncology",
+  "title": "Nasopharyngeal and salivary gland cancers: viral pathogenesis, staging and systemic therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Nasopharyngeal carcinoma** is endemic across southern China and Southeast Asia, showing a pathogenetically distinct link with **Epstein-Barr virus** infection. The World Health Organization classifies the disease histologically into keratinizing squamous cell carcinoma, non-keratinizing differentiated carcinoma, and non-keratinizing undifferentiated carcinoma type 3. The non-keratinizing undifferentiated type represents the most common variant in endemic regions and demonstrates exquisite radiosensitivity and chemosensitivity.",
+      "say": "Nasopharyngeal carcinoma is endemic across southern China and Southeast Asia, showing a pathogenetically distinct link with Epstein-Barr virus infection. The World Health Organization classifies the disease histologically into three types. The non-keratinizing undifferentiated type 3 represents the most common variant in endemic regions and demonstrates exquisite radiosensitivity and chemosensitivity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "WHO Histology",
+          "EBV Association",
+          "Geographic Pattern",
+          "Radiosensitivity"
+        ],
+        "rows": [
+          [
+            "Type 1: Keratinizing",
+            "Weak / Sporadic",
+            "Non-endemic worldwide",
+            "Moderate"
+          ],
+          [
+            "Type 2: Non-keratinizing diff.",
+            "Strong association",
+            "Endemic regions",
+            "High"
+          ],
+          [
+            "Type 3: Non-keratinizing undiff.",
+            "Universal association",
+            "Endemic (SE Asia)",
+            "Exquisite"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Quantification of circulating cell-free **EBV DNA** provides a reliable liquid biopsy **biomarker** in clinical management. Pretreatment plasma EBV DNA copy number correlates directly with gross anatomical tumour burden and occult micrometastases. Measuring clearance kinetics of plasma EBV DNA following definitive radiotherapy identifies patients harboring residual disease who require intensified adjuvant systemic chemotherapy.",
+      "say": "Quantification of circulating cell-free EBV DNA provides a reliable liquid biopsy biomarker in clinical management. Pretreatment plasma EBV DNA copy number correlates directly with gross anatomical tumour burden and occult micrometastases. Measuring clearance kinetics of plasma EBV DNA following definitive radiotherapy identifies patients harboring residual disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ebv",
+            "label": "Plasma EBV DNA Level",
+            "level": 1
+          },
+          {
+            "id": "stag",
+            "label": "Baseline Prognostication",
+            "level": 2
+          },
+          {
+            "id": "rt",
+            "label": "Definitive Chemoradiation",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Surveillance & Recurrence",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ebv",
+            "stag"
+          ],
+          [
+            "stag",
+            "rt"
+          ],
+          [
+            "rt",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Locoregionally advanced disease requires combined-modality systemic and radiation therapy. In phase 3 randomized trials, **Induction gemcitabine** plus **cisplatin** followed by concurrent **chemoradiotherapy** significantly improved recurrence-free survival and overall survival compared to concurrent chemoradiotherapy alone. Delivering upfront induction chemotherapy effectively eradicates distant micrometastatic disease and shrinks gross primary tumour volume.",
+      "say": "Locoregionally advanced disease requires combined-modality systemic and radiation therapy. In phase 3 randomized trials, Induction gemcitabine plus cisplatin followed by concurrent chemoradiotherapy significantly improved recurrence-free survival and overall survival compared to chemoradiotherapy alone. Delivering upfront induction chemotherapy effectively eradicates distant micrometastases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Induction Chemo + Concurrent CRT",
+          "points": [
+            "Gemcitabine-cisplatin for 3 cycles upfront",
+            "Concurrent cisplatin during IMRT",
+            "Significantly improved overall survival"
+          ]
+        },
+        "right": {
+          "title": "Concurrent CRT Alone",
+          "points": [
+            "Weekly or 3-weekly cisplatin with IMRT",
+            "Higher rates of distant metastasis",
+            "Inferior systemic control in bulky stage 3-4"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Frontline treatment for metastatic disease incorporates cytotoxic chemotherapy alongside PD-1 checkpoint blockade. Adding **toripalimab** or **camrelizumab** to frontline **gemcitabine** and **cisplatin** chemotherapy significantly prolonged progression-free survival and overall survival in randomized phase 3 trials. This chemo-immunotherapy combination is now the established global standard of care for previously untreated metastatic nasopharyngeal carcinoma.",
+      "say": "Frontline treatment for metastatic disease incorporates cytotoxic chemotherapy alongside PD-1 checkpoint blockade. Adding toripalimab or camrelizumab to frontline gemcitabine and cisplatin chemotherapy significantly prolonged progression-free survival and overall survival in randomized trials. This combination represents the established global standard of care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chemo",
+            "label": "Gemcitabine + Cisplatin",
+            "level": 1
+          },
+          {
+            "id": "pd1",
+            "label": "Toripalimab / Camrelizumab",
+            "level": 2
+          },
+          {
+            "id": "combo",
+            "label": "Chemo-Immunotherapy Standard",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Superior Overall Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "chemo",
+            "combo"
+          ],
+          [
+            "pd1",
+            "combo"
+          ],
+          [
+            "combo",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Adenoid cystic carcinoma** is a distinctive salivary gland tumour characterized by the hallmark **MYB-NFIB** gene fusion. This fusion arises from the recurrent t(6;9) translocation and drives constitutive overexpression of the MYB oncoprotein. Clinically, the tumour exhibits an indolent natural history, prominent neurotropism with perineural invasion, and a relentless tendency for delayed pulmonary metastases occurring decades after initial surgical excision.",
+      "say": "Adenoid cystic carcinoma is a distinctive salivary gland tumour characterized by the hallmark MYB-NFIB gene fusion. This fusion arises from the recurrent translocation and drives constitutive overexpression of the MYB oncoprotein. Clinically, the tumour exhibits an indolent natural history, prominent perineural invasion, and a tendency for delayed pulmonary metastases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Description",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "Pathognomonic Fusion",
+            "MYB-NFIB t(6;9)",
+            "Drives oncogenic transcription"
+          ],
+          [
+            "Growth Pattern",
+            "Cribriform, tubular, solid",
+            "Solid variant indicates poor prognosis"
+          ],
+          [
+            "Perineural Spread",
+            "Invasion along cranial nerves",
+            "Requires wide surgical margins and RT"
+          ],
+          [
+            "Metastatic Course",
+            "Late pulmonary lesions",
+            "Slow progression over many years"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mucoepidermoid carcinoma** is the most common malignant salivary neoplasm in both adults and children. Diagnostic molecular testing reveals the characteristic reciprocal translocation between chromosomes 11 and 19, specifically t(11;19), which creates the **CRTC1-MAML2** fusion transcript. Fusion-positive tumours typically present as low or intermediate histological grade lesions and correlate with a substantially more favourable long-term clinical prognosis.",
+      "say": "Mucoepidermoid carcinoma is the most common malignant salivary neoplasm in both adults and children. Diagnostic molecular testing reveals the characteristic reciprocal translocation between chromosomes 11 and 19, creating the CRTC1-MAML2 fusion transcript. Fusion-positive tumours typically present as low or intermediate grade lesions and correlate with a favourable prognosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CRTC1-MAML2 Positive",
+          "points": [
+            "Carries t(11;19) translocation",
+            "Low to intermediate histological grade",
+            "Favourable prognosis, rare metastases"
+          ]
+        },
+        "right": {
+          "title": "Fusion Negative / High Grade",
+          "points": [
+            "Absence of CRTC1-MAML2 fusion",
+            "High mitotic count, extensive necrosis",
+            "Aggressive course, frequent regional spread"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Salivary duct carcinoma** represents an aggressive high-grade malignancy that histologically and molecularly mirrors invasive ductal carcinoma of the breast. Neoplastic cells demonstrate intense nuclear positivity for the **androgen receptor** in over 90% of cases and exhibit frequent HER2 gene amplification. Because of early lymph node metastases and systemic dissemination, comprehensive multidisciplinary staging and adjuvant therapy are essential.",
+      "say": "Salivary duct carcinoma represents an aggressive high-grade malignancy that histologically and molecularly mirrors invasive ductal carcinoma of the breast. Neoplastic cells are positive for the androgen receptor in over 90% of cases and exhibit frequent HER2 gene amplification. Comprehensive multidisciplinary staging and adjuvant therapy are essential.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sdc",
+            "label": "Salivary Duct Carcinoma",
+            "level": 1
+          },
+          {
+            "id": "ar",
+            "label": "Androgen Receptor Positivity",
+            "level": 2
+          },
+          {
+            "id": "her2",
+            "label": "HER2 Overexpression / Amp",
+            "level": 3
+          },
+          {
+            "id": "sys",
+            "label": "Biomarker-Driven Therapy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sdc",
+            "ar"
+          ],
+          [
+            "ar",
+            "her2"
+          ],
+          [
+            "her2",
+            "sys"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Biomarker-directed targeted systemic therapies provide substantial clinical benefit in advanced **salivary duct** carcinomas. Androgen receptor-positive tumours respond effectively to combined **anti-androgen therapy** utilizing **bicalutamide** or **enzalutamide** paired with GnRH agonists. Furthermore, tumours demonstrating HER2 overexpression achieve durable disease regressions with anti-HER2 regimens including **trastuzumab** combined with docetaxel or emtansine.",
+      "say": "Biomarker-directed targeted systemic therapies provide substantial clinical benefit in advanced salivary duct carcinomas. Androgen receptor-positive tumours respond effectively to combined anti-androgen therapy utilizing bicalutamide or enzalutamide paired with GnRH agonists. Furthermore, tumours demonstrating HER2 overexpression achieve durable disease regressions with anti-HER2 regimens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target",
+          "Diagnostic Assay",
+          "Targeted Regimen",
+          "Clinical Response"
+        ],
+        "rows": [
+          [
+            "Androgen Receptor",
+            "Nuclear IHC > 10%",
+            "Bicalutamide or Enzalutamide + LHRH",
+            "Meaningful clinical response"
+          ],
+          [
+            "HER2 Expression",
+            "IHC 3+ or FISH amplified",
+            "Trastuzumab + Docetaxel or T-DM1",
+            "High objective response rate"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 37 (Head and Neck Cancer)",
+    "NCCN Clinical Practice Guidelines in Oncology: Head and Neck Cancers",
+    "JUPITER-02 Trial (Nature Medicine)",
+    "CAPTAIN-1st Trial (Lancet Oncology)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

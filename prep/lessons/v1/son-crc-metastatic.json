@@ -1,0 +1,283 @@
+{
+  "v": 1,
+  "module": "son-crc-metastatic",
+  "subject": "ss-medical-oncology",
+  "title": "Metastatic colorectal cancer: molecular profiling, targeted biologics and surgical resection",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Comprehensive molecular profiling is critical before initiating targeted therapy for advanced bowel cancer. Testing for **Extended RAS** mutations across KRAS and NRAS exons 2, 3, and 4 alongside **BRAF V600E** mutations guides systemic treatment selection. Tumours harbouring activating mutations in either KRAS, NRAS, or BRAF demonstrate complete intrinsic resistance to monoclonal antibodies targeting EGFR, making molecular characterisation mandatory prior to prescribing anti-EGFR therapy.",
+      "say": "Comprehensive molecular profiling is critical before initiating targeted therapy for advanced bowel cancer. Testing for Extended RAS mutations across KRAS and NRAS exons 2, 3, and 4 alongside BRAF V600E mutations guides systemic treatment selection. Tumours harbouring activating mutations in either KRAS, NRAS, or BRAF demonstrate intrinsic resistance to anti-EGFR antibodies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biomarker",
+          "Exons Analyzed",
+          "Clinical Consequence"
+        ],
+        "rows": [
+          [
+            "KRAS Mutations",
+            "Exons 2, 3, and 4",
+            "Precludes anti-EGFR antibody efficacy"
+          ],
+          [
+            "NRAS Mutations",
+            "Exons 2, 3, and 4",
+            "Predicts lack of anti-EGFR benefit"
+          ],
+          [
+            "BRAF V600E",
+            "Exon 15 V600E",
+            "Indicates poor prognosis, needs BRAF TKI"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary **tumour sidedness** serves as a vital surrogate for biological heterogeneity and dictates frontline therapeutic efficacy. Patients with **left-sided** primary tumours arising from the splenic flexure to rectum derive substantial overall survival advantages when treated with anti-EGFR antibodies **cetuximab** or **panitumumab** combined with doublet chemotherapy. Conversely, right-sided RAS wild-type neoplasms show minimal responsiveness to anti-EGFR biologics in the frontline setting.",
+      "say": "Primary tumour sidedness serves as a vital surrogate for biological heterogeneity and dictates frontline therapeutic efficacy. Patients with left-sided primary tumours arising from the splenic flexure to rectum derive substantial overall survival advantages when treated with anti-EGFR antibodies cetuximab or panitumumab combined with doublet chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Left-Sided Tumours",
+          "points": [
+            "Splenic flexure, descending, sigmoid, rectum",
+            "Higher frequency of HER2 and EGFR sensitivity",
+            "Substantial benefit from cetuximab or panitumumab"
+          ]
+        },
+        "right": {
+          "title": "Right-Sided Tumours",
+          "points": [
+            "Caecum, ascending colon, hepatic flexure",
+            "Higher rates of BRAF and MSI-H alterations",
+            "Primary benefit derived from bevacizumab doublets"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For **Right-sided** metastatic colorectal cancer, frontline biological therapy primarily focuses on VEGF blockade. The vascular endothelial growth factor monoclonal antibody **bevacizumab** combined with **cytotoxic doublets** like FOLFOX or FOLFIRI, or triplet FOLFOXIRI, produces superior clinical outcomes compared to anti-EGFR regimens. Angiogenesis inhibition circumvents the EGFR resistance characteristic of right-sided embryological origin, delivering prolonged disease control.",
+      "say": "In patients with Right-sided metastatic colorectal cancer, frontline biological therapy targets VEGF-mediated tumour angiogenesis. The vascular endothelial growth factor monoclonal antibody bevacizumab combined with cytotoxic doublets like FOLFOX or FOLFIRI produces superior clinical outcomes compared to anti-EGFR regimens. Inhibition of tumour angiogenesis helps bypass intrinsic epidermal growth factor receptor resistance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rt",
+            "label": "Right-Sided Primary",
+            "level": 1
+          },
+          {
+            "id": "vegf",
+            "label": "VEGF Pathway Dependency",
+            "level": 2
+          },
+          {
+            "id": "bev",
+            "label": "Bevacizumab + Doublet",
+            "level": 3
+          },
+          {
+            "id": "ctrl",
+            "label": "Prolonged Disease Control",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "rt",
+            "vegf"
+          ],
+          [
+            "vegf",
+            "bev"
+          ],
+          [
+            "bev",
+            "ctrl"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **BEACON CRC** phase 3 trial established a dedicated targeted standard of care for pretreated **BRAF V600E** mutant metastatic colorectal cancer. Combining the oral BRAF inhibitor **encorafenib** with the anti-EGFR antibody **cetuximab** significantly prolonged overall survival compared to standard chemotherapy. Dual vertical blockade of both BRAF and EGFR prevents rapid feedback activation of the MAPK signaling cascade, yielding meaningful and durable tumour regressions.",
+      "say": "The BEACON CRC phase 3 trial established a dedicated targeted standard of care for pretreated BRAF V600E mutant metastatic colorectal cancer. Combining the oral BRAF inhibitor encorafenib with the anti-EGFR antibody cetuximab significantly prolonged overall survival compared to standard chemotherapy. Dual blockade prevents rapid feedback activation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Encorafenib + Cetuximab",
+          "points": [
+            "Dual vertical MAPK and EGFR inhibition",
+            "Significantly prolonged overall survival",
+            "Established standard in BEACON trial"
+          ]
+        },
+        "right": {
+          "title": "Standard Chemotherapy",
+          "points": [
+            "Cytotoxic doublet with irinotecan",
+            "Inferior objective response rate",
+            "Rapid disease progression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Microsatellite instability-high or mismatch repair-deficient colorectal tumours demonstrate marked sensitivity to immune checkpoint blockade. In the landmark **KEYNOTE-177** trial, frontline monotherapy with **pembrolizumab** demonstrated remarkable superiority in progression-free survival compared to standard chemotherapy doublets with targeted biologics. Patients treated with pembrolizumab achieved durable long-term responses and fewer treatment-related adverse events.",
+      "say": "Microsatellite instability-high or mismatch repair-deficient colorectal tumours demonstrate marked sensitivity to immune checkpoint blockade. In the landmark KEYNOTE-177 trial, frontline monotherapy with pembrolizumab demonstrated remarkable superiority in progression-free survival compared to standard chemotherapy doublets with targeted biologics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "msi",
+            "label": "MSI-High / dMMR Status",
+            "level": 1
+          },
+          {
+            "id": "pembro",
+            "label": "Pembrolizumab Monotherapy",
+            "level": 2
+          },
+          {
+            "id": "resp",
+            "label": "High Durable Response",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Superior Long-Term Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "msi",
+            "pembro"
+          ],
+          [
+            "pembro",
+            "resp"
+          ],
+          [
+            "resp",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In refractory metastatic disease following oxaliplatin and irinotecan failure, the **SUNLIGHT trial** introduced an effective combination regimen. Adding **bevacizumab** to **Trifluridine-tipiracil** produced statistically significant and clinically meaningful improvements in progression-free and overall survival compared to trifluridine-tipiracil monotherapy. The combination preserves performance status and exhibits a manageable safety profile dominated by reversible neutropenia.",
+      "say": "In refractory metastatic disease following oxaliplatin and irinotecan failure, the SUNLIGHT trial introduced an effective combination regimen. Adding bevacizumab to Trifluridine-tipiracil produced statistically significant and clinically meaningful improvements in progression-free and overall survival compared to trifluridine-tipiracil monotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Arm",
+          "Components",
+          "Median OS Advantage",
+          "Key Toxicities"
+        ],
+        "rows": [
+          [
+            "Combination",
+            "Trifluridine-tipiracil + Bevacizumab",
+            "10.8 months",
+            "Neutropenia, hypertension"
+          ],
+          [
+            "Monotherapy",
+            "Trifluridine-tipiracil alone",
+            "7.5 months",
+            "Myelosuppression, fatigue"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fruquintinib** is an oral, highly selective tyrosine kinase inhibitor of VEGFR 1, 2, and 3 that inhibits tumour neo-angiogenesis. In the international phase 3 **FRESCO-2** trial, fruquintinib significantly extended overall survival in heavily pretreated refractory metastatic colorectal cancer patients who had progressed on standard therapies. The drug provides a vital oral therapeutic option with hypertension and hand-foot skin reaction being manageable side effects.",
+      "say": "Fruquintinib is an oral, highly selective tyrosine kinase inhibitor of VEGFR 1, 2, and 3 that inhibits tumour neo-angiogenesis. In the international phase 3 FRESCO-2 trial, fruquintinib significantly extended overall survival in heavily pretreated refractory metastatic colorectal cancer patients who had progressed on standard therapies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ref",
+            "label": "Refractory Metastatic CRC",
+            "level": 1
+          },
+          {
+            "id": "vegfr",
+            "label": "VEGFR 1, 2, 3 Kinase Receptors",
+            "level": 2
+          },
+          {
+            "id": "fruq",
+            "label": "Oral Fruquintinib",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Extended Overall Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ref",
+            "vegfr"
+          ],
+          [
+            "vegfr",
+            "fruq"
+          ],
+          [
+            "fruq",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aggressive multidisciplinary surgical management plays a curative role in patients presenting with isolated colorectal **liver metastases**. Complete **surgical resection** or thermal ablation of resectable hepatic metastases achieves 5 year overall survival rates reaching 40% to 50% in properly selected candidates. Perioperative cytotoxic chemotherapy further consolidates long-term disease-free survival, converting initially unresectable lesions into candidates for curative surgical resection.",
+      "say": "Aggressive multidisciplinary surgical management plays a curative role in patients presenting with isolated colorectal liver metastases. Complete surgical resection or thermal ablation of resectable hepatic metastases achieves 5 year overall survival rates reaching 40% to 50% in properly selected candidates. Perioperative chemotherapy further consolidates survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resectable Liver Metastases",
+          "points": [
+            "Complete R0 surgical resection feasible",
+            "5 year overall survival 40% to 50%",
+            "Curative intent multidisciplinary strategy"
+          ]
+        },
+        "right": {
+          "title": "Unresectable Hepatic Burden",
+          "points": [
+            "Diffuse bilobar involvement without remnant",
+            "Conversion chemotherapy with doublet or triplet",
+            "Palliative systemic biologics if irresectable"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 39 (Cancer of the Colon and Rectum)",
+    "BEACON CRC Trial (NEJM)",
+    "KEYNOTE-177 Trial (NEJM)",
+    "SUNLIGHT Trial (NEJM)",
+    "FRESCO-2 Trial (Lancet)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

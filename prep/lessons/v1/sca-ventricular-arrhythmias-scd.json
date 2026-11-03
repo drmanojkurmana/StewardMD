@@ -1,0 +1,317 @@
+{
+ "v": 1,
+ "module": "sca-ventricular-arrhythmias-scd",
+ "subject": "ss-cardiology",
+ "title": "Ventricular arrhythmias and sudden cardiac death",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The validated **Brugada criteria** algorithm differentiates ventricular tachycardia from supraventricular tachycardia with aberrancy in wide complex tachycardia through 4 sequential steps. The algorithm checks for absence of an RS complex in all precordial leads, an RS interval greater than 100 ms in any lead, classic **AV dissociation**, and lead-specific morphology criteria in V1 and V6.",
+   "say": "The validated Brugada criteria algorithm differentiates ventricular tachycardia from supraventricular tachycardia with aberrancy in wide complex tachycardia through 4 sequential steps. The algorithm checks for absence of an RS complex in all precordial leads, an RS interval greater than 100 ms in any lead, classic AV dissociation, and lead-specific morphology criteria in V1 and V6.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "step1",
+      "label": "Absence of RS in V1-V6"
+     },
+     {
+      "id": "step2",
+      "label": "RS interval > 100 ms"
+     },
+     {
+      "id": "step3",
+      "label": "AV dissociation present"
+     },
+     {
+      "id": "step4",
+      "label": "Morphology criteria V1/V6"
+     },
+     {
+      "id": "vt-dx",
+      "label": "Ventricular tachycardia diagnosed"
+     }
+    ],
+    "edges": [
+     [
+      "step1",
+      "vt-dx",
+      "yes: concordant pattern"
+     ],
+     [
+      "step1",
+      "step2",
+      "no: check RS duration"
+     ],
+     [
+      "step2",
+      "vt-dx",
+      "yes: slow myocardial spread"
+     ],
+     [
+      "step2",
+      "step3",
+      "no: examine atrioventricular relationship"
+     ],
+     [
+      "step3",
+      "vt-dx",
+      "yes: independent P waves"
+     ],
+     [
+      "step3",
+      "step4",
+      "no: apply morphology rules"
+     ],
+     [
+      "step4",
+      "vt-dx",
+      "yes: classic VT shape"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rapid single-lead **Vereckei aVR** algorithm evaluates wide complex tachycardia solely utilizing **lead aVR**. VT is diagnosed when any of 4 features are present: an initial dominant R wave, an initial r or q wave width greater than 40 ms, a notch on the descending limb of a negative QRS, or a ventricular-to-atrial initial-to-terminal activation velocity ratio of 1 or less.",
+   "say": "The rapid single-lead Vereckei aVR algorithm evaluates wide complex tachycardia solely utilizing lead aVR. VT is diagnosed when any of 4 features are present: an initial dominant R wave, an initial r or q wave width greater than 40 ms, a notch on the descending limb of a negative QRS, or a ventricular-to-atrial initial-to-terminal activation velocity ratio of 1 or less.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vereckei Step in aVR",
+     "ECG Criterion",
+     "Physiological Basis"
+    ],
+    "rows": [
+     [
+      "Step 1: Initial R wave",
+      "Dominant positive R wave",
+      "Depolarisation originates in apical/inferior LV"
+     ],
+     [
+      "Step 2: Initial wave width",
+      "Initial r or q width > 40 ms",
+      "Slow initial intramyocardial cell-to-cell spread"
+     ],
+     [
+      "Step 3: Descending limb",
+      "Notch on descending limb of QS",
+      "Slow conduction through diseased myocardium"
+     ],
+     [
+      "Step 4: Velocity ratio (Vi/Vt)",
+      "Vi/Vt ratio <= 1",
+      "Initial velocity slower than terminal velocity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Idiopathic **RVOT VT** is a benign triggered arrhythmia arising from delayed afterdepolarizations in the right ventricular outflow tract, mediated by cAMP and sensitive to adenosine. The 12-lead ECG demonstrates a left bundle branch block morphology accompanied by a tall, positive **inferior axis** with prominent upright R waves in leads II, III, and aVF.",
+   "say": "Idiopathic RVOT VT is a benign triggered arrhythmia arising from delayed afterdepolarizations in the right ventricular outflow tract, mediated by cAMP and sensitive to adenosine. The 12-lead ECG demonstrates a left bundle branch block morphology accompanied by a tall, positive inferior axis with prominent upright R waves in leads II, III, and aVF.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RVOT VT features",
+     "points": [
+      "Origin: RV outflow tract",
+      "LBBB morphology with tall inferior R waves",
+      "Triggered activity (cAMP-mediated)",
+      "Terminated promptly by intravenous adenosine"
+     ]
+    },
+    "right": {
+     "title": "Aortic cusp / LVOT VT",
+     "points": [
+      "Origin: coronary cusps or summit",
+      "LBBB or RBBB with inferior axis",
+      "Early precordial R/S transition (V1-V2)",
+      "Broader R wave duration in V1"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Idiopathic left ventricular intrafascicular tachycardia, known as **Belhassen VT**, arises from a reentrant circuit incorporating the posterior fascicle and adjacent purkinje fibres. The ECG displays right bundle branch block morphology with superior left axis deviation. This unique arrhythmia is refractory to adenosine but exhibits exquisite therapeutic responsiveness to intravenous **verapamil**.",
+   "say": "Idiopathic left ventricular intrafascicular tachycardia, known as Belhassen VT, arises from a reentrant circuit incorporating the posterior fascicle and adjacent purkinje fibres. The ECG displays right bundle branch block morphology with superior left axis deviation. This unique arrhythmia is refractory to adenosine but exhibits exquisite therapeutic responsiveness to intravenous verapamil.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arrhythmia Feature",
+     "Belhassen VT (Fascicular)",
+     "RVOT VT (Outflow Tract)"
+    ],
+    "rows": [
+     [
+      "Circuit mechanism",
+      "Reentry within purkinje-fascicle network",
+      "Triggered activity / delayed afterdepolarizations"
+     ],
+     [
+      "QRS morphology",
+      "RBBB with superior left axis deviation",
+      "LBBB with tall inferior upright axis"
+     ],
+     [
+      "QRS duration",
+      "Relatively narrow (120 to 140 ms)",
+      "Broader (> 140 to 160 ms)"
+     ],
+     [
+      "Acute pharmacology",
+      "Terminated by verapamil (slow channel blocker)",
+      "Terminated by adenosine or beta-blockers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with ischemic heart disease, **Scar-related monomorphic VT** is sustained by stable macroreentry around dense collagenous myocardial infarction zones. Catheter ablation maps critical border-zone channels displaying abnormal electrograms with fractionated **late potentials**, allowing precise substrate modification and ablation during sinus rhythm without requiring prolonged arrhythmia induction.",
+   "say": "In patients with ischemic heart disease, Scar-related monomorphic VT is sustained by stable macroreentry around dense collagenous myocardial infarction zones. Catheter ablation maps critical border-zone channels displaying abnormal electrograms with fractionated late potentials, allowing precise substrate modification and ablation during sinus rhythm without requiring prolonged arrhythmia induction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "infarct",
+      "label": "Myocardial infarction scar formation"
+     },
+     {
+      "id": "border-zone",
+      "label": "Surviving border-zone myocyte bundles"
+     },
+     {
+      "id": "late-potential",
+      "label": "Fractionated isolated late potentials"
+     },
+     {
+      "id": "ablation",
+      "label": "Substrate-based catheter scar homogenization"
+     }
+    ],
+    "edges": [
+     [
+      "infarct",
+      "border-zone",
+      "collagen infiltration"
+     ],
+     [
+      "border-zone",
+      "late-potential",
+      "slow, tortuous conduction"
+     ],
+     [
+      "late-potential",
+      "ablation",
+      "targeted RF delivery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electrical storm** is an acute cardiac emergency defined by 3 or more distinct episodes of sustained ventricular tachycardia or ventricular fibrillation requiring defibrillation within a 24-hour window. Management incorporates deep sedation, endotracheal intubation, intravenous beta-blockade, amiodarone infusions, left **stellate ganglion block**, and emergent catheter ablation to suppress severe adrenergic overdrive.",
+   "say": "Electrical storm is an acute cardiac emergency defined by 3 or more distinct episodes of sustained ventricular tachycardia or ventricular fibrillation requiring defibrillation within a 24-hour window. Management incorporates deep sedation, endotracheal intubation, intravenous beta-blockade, amiodarone infusions, left stellate ganglion block, and emergent catheter ablation to suppress severe adrenergic overdrive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention Tier",
+     "Specific Modality",
+     "Target Mechanism"
+    ],
+    "rows": [
+     [
+      "Sedation / Intubation",
+      "Propofol, midazolam, remifentanil",
+      "Blunts central sympathetic surge"
+     ],
+     [
+      "Antiarrhythmic drugs",
+      "Intravenous propranolol, amiodarone",
+      "Suppresses triggers and automaticity"
+     ],
+     [
+      "Autonomic modulation",
+      "Percutaneous stellate ganglion block",
+      "Interrupts cardiac sympathetic outflow"
+     ],
+     [
+      "Invasive ablation",
+      "Urgent catheter mapping and RF ablation",
+      "Eliminates triggering PVC or reentrant isthmus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Torsades de pointes** is a polymorphic ventricular tachycardia occurring in the setting of acquired or congenital QT prolongation, featuring characteristic twisting of QRS apices around the isoelectric line. Emergency pharmacotherapy requires an immediate intravenous **magnesium sulfate** bolus of 2 g, correction of serum hypokalemia, and temporary transvenous overdrive pacing to shorten the repolarisation interval.",
+   "say": "Torsades de pointes is a polymorphic ventricular tachycardia occurring in the setting of acquired or congenital QT prolongation, featuring characteristic twisting of QRS apices around the isoelectric line. Emergency pharmacotherapy requires an immediate intravenous magnesium sulfate bolus of 2 g, correction of serum hypokalemia, and temporary transvenous overdrive pacing to shorten the repolarisation interval.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Torsades de pointes",
+     "points": [
+      "Polymorphic VT with prolonged baseline QTc",
+      "Classic undulating spindle-like QRS twist",
+      "Triggered by early afterdepolarizations (EADs)",
+      "Acutely treated with IV magnesium sulfate 2 g"
+     ]
+    },
+    "right": {
+     "title": "Monomorphic VT",
+     "points": [
+      "Uniform QRS morphology beat-to-beat",
+      "Normal or unchanged baseline QTc interval",
+      "Driven by fixed myocardial reentry circuits",
+      "Treated with cardioversion or amiodarone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An implantable cardioverter-defibrillator provides definitive mortality reduction in survivors of aborted sudden cardiac death. A **Secondary prevention ICD** is recommended for patients who have survived cardiac arrest due to VF or experienced sustained **hemodynamically unstable** ventricular tachycardia, provided the life-threatening arrhythmia did not occur within 48 hours of an acute transmural infarction or from an entirely reversible etiology.",
+   "say": "An implantable cardioverter-defibrillator provides definitive mortality reduction in survivors of aborted sudden cardiac death. A Secondary prevention ICD is recommended for patients who have survived cardiac arrest due to VF or experienced sustained hemodynamically unstable ventricular tachycardia, provided the life-threatening arrhythmia did not occur within 48 hours of an acute transmural infarction or from an entirely reversible etiology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "arrest-event",
+      "label": "Documented sustained VT or cardiac arrest"
+     },
+     {
+      "id": "reversible-cause",
+      "label": "Reversible etiology rule-out"
+     },
+     {
+      "id": "life-expectancy",
+      "label": "Meaningful survival > 1 year"
+     },
+     {
+      "id": "icd-implant",
+      "label": "Class I secondary prevention ICD"
+     }
+    ],
+    "edges": [
+     [
+      "arrest-event",
+      "reversible-cause",
+      "exclude acute ischemia < 48h or drug toxicity"
+     ],
+     [
+      "reversible-cause",
+      "life-expectancy",
+      "no transient reversible trigger"
+     ],
+     [
+      "life-expectancy",
+      "icd-implant",
+      "transvenous or subcutaneous ICD"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_3f0ae0959b5a",
+  "q_cf8b3deee4f2",
+  "q_15444b7f285c"
+ ],
+ "gen": "hand"
+}

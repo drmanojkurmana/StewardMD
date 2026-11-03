@@ -1,0 +1,305 @@
+{
+  "v": 1,
+  "module": "son-cml",
+  "subject": "ss-medical-oncology",
+  "title": "Chronic myeloid leukaemia: molecular pathogenesis, targeted TKIs and treatment-free remission",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Chronic myeloid leukaemia** is a clonal myeloproliferative neoplasm defined cytogenetically by the **Philadelphia chromosome**. This reciprocal translocation between chromosomes 9 and 22, designated t(9;22)(q34.1;q11.2), fuses the ABL1 proto-oncogene to the BCR gene. The resulting BCR-ABL1 chimeric oncoprotein exhibits constitutive tyrosine kinase activity, driving autonomous granulocyte expansion, defective marrow adhesion, and impaired apoptosis.",
+      "say": "Chronic myeloid leukaemia is a clonal myeloproliferative neoplasm defined cytogenetically by the Philadelphia chromosome. This reciprocal chromosomal translocation creates an oncogenic fusion between ABL1 and BCR. The resulting BCR-ABL1 chimeric oncoprotein exhibits constitutive tyrosine kinase activity, driving autonomous granulocyte expansion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t922",
+            "label": "t(9;22)(q34.1;q11.2)",
+            "level": 1
+          },
+          {
+            "id": "fus",
+            "label": "BCR-ABL1 Fusion Gene",
+            "level": 2
+          },
+          {
+            "id": "p210",
+            "label": "Constitutive Tyrosine Kinase",
+            "level": 3
+          },
+          {
+            "id": "cml",
+            "label": "Myeloid Proliferation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "t922",
+            "fus"
+          ],
+          [
+            "fus",
+            "p210"
+          ],
+          [
+            "p210",
+            "cml"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The introduction of the first-generation tyrosine kinase inhibitor **imatinib** 400 mg daily transformed the clinical landscape of chronic phase leukaemia. Long-term follow-up from the landmark **IRIS trial** established 10 year overall survival exceeding 85%, converting a historically fatal malignancy into a manageable chronic disease. The vast majority of deaths occurring in long-term imatinib-treated patients are unrelated to leukaemia progression.",
+      "say": "The introduction of the first-generation tyrosine kinase inhibitor imatinib 400 mg daily transformed the clinical landscape of chronic phase leukaemia. Long-term follow-up from the landmark IRIS trial established 10 year overall survival exceeding 85%, converting a fatal malignancy into a manageable chronic disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Therapeutic Agent",
+          "Daily Dose",
+          "10-Year Overall Survival"
+        ],
+        "rows": [
+          [
+            "IRIS Study",
+            "Imatinib mesylate",
+            "400 mg once daily",
+            "Exceeds 85%"
+          ],
+          [
+            "DASISION",
+            "Dasatinib",
+            "100 mg once daily",
+            "Rapid deep response"
+          ],
+          [
+            "ENESTnd",
+            "Nilotinib",
+            "300 mg twice daily",
+            "Accelerated MR4.5 rates"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Second-generation TKIs** including **dasatinib**, **nilotinib**, and **bosutinib** exhibit greater biochemical potency against BCR-ABL1 kinase than **imatinib**. In frontline randomized trials, these potent agents induce faster and significantly deeper **molecular responses**. Second-generation inhibitors are indicated for frontline therapy in high-risk patients based on Sokal or ELTS prognostic scores, and provide effective second-line therapy for imatinib resistance or intolerance.",
+      "say": "Second-generation TKIs including dasatinib, nilotinib, and bosutinib exhibit greater biochemical potency against BCR-ABL1 kinase than imatinib. In clinical trials, these potent agents produce faster and deeper molecular responses. Second-generation inhibitors provide effective treatment for patients with imatinib resistance or intolerance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Second-Generation TKIs",
+          "points": [
+            "Dasatinib, nilotinib, bosutinib",
+            "Higher rates of early MMR and MR4.5",
+            "Specific risks: pleural effusion, vascular events"
+          ]
+        },
+        "right": {
+          "title": "First-Generation Imatinib",
+          "points": [
+            "Standard initial therapy for two decades",
+            "Well-characterized long-term safety profile",
+            "Slower kinetics of molecular clearance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acquired point mutations in the kinase domain represent the principal mechanism of secondary resistance to tyrosine kinase inhibitors. The BCR-ABL1 **gatekeeper mutation** T315I substitutes isoleucine for threonine at codon 315, creating steric clash that blocks **imatinib**, **dasatinib**, **nilotinib**, and **bosutinib**. The third-generation oral inhibitor **ponatinib** was engineered to overcome this steric hindrance, serving as the essential targeted therapy for T315I-positive disease.",
+      "say": "Acquired point mutations in the kinase domain represent the principal mechanism of secondary resistance to tyrosine kinase inhibitors. The BCR-ABL1 gatekeeper mutation T315I creates a steric clash that blocks imatinib, dasatinib, nilotinib, and bosutinib. The third-generation oral inhibitor ponatinib is the essential targeted therapy for T315I-positive disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mut",
+            "label": "T315I Gatekeeper Mutation",
+            "level": 1
+          },
+          {
+            "id": "res",
+            "label": "Pan-Resistance to 1st/2nd Gen",
+            "level": 2
+          },
+          {
+            "id": "ponat",
+            "label": "Ponatinib 45 mg (Dose-Reduced)",
+            "level": 3
+          },
+          {
+            "id": "resp",
+            "label": "Durable Kinase Inhibition",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mut",
+            "res"
+          ],
+          [
+            "res",
+            "ponat"
+          ],
+          [
+            "ponat",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Asciminib** is a first-in-class allosteric inhibitor that binds Specifically Targeting the ABL Myristoyl Pocket, acting as a **STAMP inhibitor**. By locking the kinase into an inactive autoinhibited conformation, asciminib avoids competitive ATP-binding pocket resistance. In the phase 3 ASCEMBL and ASC4FIRST trials, asciminib demonstrated superior major molecular response rates and improved tolerability compared to **bosutinib** and standard TKIs in chronic phase disease.",
+      "say": "Asciminib is a first-in-class allosteric inhibitor that binds the myristoyl pocket, acting as a STAMP inhibitor. By locking the kinase into an inactive conformation, asciminib avoids ATP pocket resistance. In the phase 3 ASCEMBL and ASC4FIRST trials, asciminib demonstrated superior molecular response rates compared to bosutinib.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Asciminib Allosteric STAMP",
+          "points": [
+            "Binds BCR-ABL1 myristoyl pocket",
+            "Spares ATP binding site, overcomes pocket mutations",
+            "Superior MMR in ASCEMBL and ASC4FIRST"
+          ]
+        },
+        "right": {
+          "title": "Conventional ATP Competitors",
+          "points": [
+            "Bind catalytic ATP binding pocket",
+            "Vulnerable to ATP-site point mutations",
+            "Off-target kinase-mediated toxicities"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Standardized quantitative PCR tracking BCR-ABL1 transcripts on the International Scale provides strict therapeutic monitoring. **European LeukemiaNet** guidelines define **molecular response milestones**: BCR-ABL1 transcripts must reach 10% or less at 3 months, 1% or less at 6 months, and 0.1% or less at 12 months, denoting major molecular response (MMR). Missing these time-dependent milestones signals treatment failure, prompting mutational analysis and regimen modification.",
+      "say": "Standardized quantitative PCR tracking BCR-ABL1 transcripts on the International Scale provides strict therapeutic monitoring. European LeukemiaNet guidelines define molecular response milestones: BCR-ABL1 transcripts must reach ten percent or less at 3 months, one percent or less at 6 months, and zero point one percent or less at 12 months. Missing these milestones prompts treatment modification.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Timepoint",
+          "ELN Optimal Milestone",
+          "Transcript Reduction",
+          "Clinical Interpretation"
+        ],
+        "rows": [
+          [
+            "3 Months",
+            "BCR-ABL1 <= 10%",
+            "1-log reduction",
+            "Early molecular response"
+          ],
+          [
+            "6 Months",
+            "BCR-ABL1 <= 1%",
+            "2-log reduction",
+            "Optimal response trajectory"
+          ],
+          [
+            "12 Months",
+            "BCR-ABL1 <= 0.1%",
+            "3-log reduction (MMR)",
+            "Safe long-term plateau"
+          ],
+          [
+            "> 12 Months",
+            "BCR-ABL1 <= 0.01%",
+            "4-log reduction (MR4)",
+            "Deep molecular response"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Achieving prolonged deep molecular remission permits trial of drug cessation. **Treatment-free remission** is safe and feasible in patients maintaining **deep molecular response** of MR4 (BCR-ABL1 under 0.01%) or MR4.5 (under 0.0032%) for at least 2 consecutive years. Approximately 50% of qualifying patients maintain durable treatment-free remission without molecular relapse, while those who lose major molecular response regain remission upon restarting therapy.",
+      "say": "Achieving prolonged deep molecular remission permits trial of drug cessation. Treatment-free remission is safe and feasible in patients maintaining deep molecular response of MR4 or MR4 point 5 for at least 2 consecutive years. Approximately 50% of qualifying patients maintain durable remission without molecular relapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dmr",
+            "label": "MR4/MR4.5 for 2+ Years",
+            "level": 1
+          },
+          {
+            "id": "stop",
+            "label": "Supervised TKI Cessation",
+            "level": 2
+          },
+          {
+            "id": "mon",
+            "label": "Monthly PCR Surveillance",
+            "level": 3
+          },
+          {
+            "id": "succ",
+            "label": "50% Sustained TFR",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dmr",
+            "stop"
+          ],
+          [
+            "stop",
+            "mon"
+          ],
+          [
+            "mon",
+            "succ"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Blast phase CML** signifies biological transformation into acute leukaemia, defined by 20% or more blasts in the peripheral blood or bone marrow, or extramedullary blastic deposits. Immunophenotyping distinguishes **blast transformation** into myeloid phenotype in approximately 70% and lymphoid phenotype in 30% of cases. Management requires intensive combination chemotherapy with third-generation TKIs, bridged promptly to allogeneic haematopoietic stem cell transplantation.",
+      "say": "Blast phase CML signifies biological transformation into acute leukaemia, defined by 20% or more blasts in the peripheral blood or bone marrow. Immunophenotyping distinguishes blast transformation into myeloid phenotype in approximately 70% and lymphoid phenotype in 30% of cases. Management requires intensive chemotherapy paired with targeted TKIs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Myeloid Blast Phase (~70%)",
+          "Lymphoid Blast Phase (~30%)"
+        ],
+        "rows": [
+          [
+            "Blast Lineage",
+            "Myeloblasts expressing CD13, CD33, MPO",
+            "Lymphoblasts expressing CD10, CD19, TdT"
+          ],
+          [
+            "Induction Therapy",
+            "7+3 Cytarabine/Daunorubicin + TKI",
+            "Hyper-CVAD + TKI (Ponatinib/Dasatinib)"
+          ],
+          [
+            "Consolidation",
+            "Allogeneic HSCT in remission",
+            "Allogeneic HSCT in remission"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 98 (Chronic Myeloid Leukemia)",
+    "ELN 2020 Recommendations for CML (Leukemia 2020)",
+    "IRIS Trial (NEJM)",
+    "ASCEMBL Trial (Blood)",
+    "ASC4FIRST Trial (ASCO 2024)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

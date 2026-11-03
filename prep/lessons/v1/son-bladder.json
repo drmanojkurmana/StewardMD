@@ -1,0 +1,303 @@
+{
+  "v": 1,
+  "module": "son-bladder",
+  "subject": "ss-medical-oncology",
+  "title": "Urothelial carcinoma: staging, systemic immunotherapy and targeted antibody-drug conjugates",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Management of non-muscle invasive bladder cancer focuses on complete diagnostic eradication and preventing recurrence. High-quality **Transurethral resection** of bladder tumour with detrusor muscle in the specimen is the critical initial staging step. For high-risk non-muscle invasive lesions, intravesical **Bacillus Calmette-Guerin** immunotherapy following resection triggers an intense local mucosal immune reaction, reducing recurrences and preventing progression to muscle invasion.",
+      "say": "Management of non-muscle invasive bladder cancer focuses on complete diagnostic eradication and preventing recurrence. High-quality Transurethral resection of bladder tumour with detrusor muscle in the specimen is the critical initial staging step. For high-risk lesions, intravesical Bacillus Calmette-Guerin immunotherapy reduces recurrences.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "turbt",
+            "label": "Complete TURBT",
+            "level": 1
+          },
+          {
+            "id": "risk",
+            "label": "High-Risk Stratification",
+            "level": 2
+          },
+          {
+            "id": "bcg",
+            "label": "Intravesical BCG Induction",
+            "level": 3
+          },
+          {
+            "id": "maint",
+            "label": "Maintenance BCG 1-3 Years",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "turbt",
+            "risk"
+          ],
+          [
+            "risk",
+            "bcg"
+          ],
+          [
+            "bcg",
+            "maint"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Muscle-invasive bladder cancer requires aggressive multimodal therapy with curative intent. **Neoadjuvant cisplatin-based** combination chemotherapy with either **gemcitabine** plus **cisplatin** or dose-dense MVAC improves overall survival by approximately 5% to 8% compared with surgery alone. Following neoadjuvant chemotherapy, radical cystectomy with bilateral pelvic lymphadenectomy provides definitive local oncological control.",
+      "say": "Muscle-invasive bladder cancer requires aggressive multimodal therapy with curative intent. Neoadjuvant cisplatin-based combination chemotherapy with either gemcitabine plus cisplatin or dose-dense MVAC improves overall survival compared with surgery alone. Following chemotherapy, radical cystectomy provides definitive local oncological control.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neoadjuvant Chemo + Cystectomy",
+          "points": [
+            "Gemcitabine-cisplatin or ddMVAC",
+            "5% to 8% absolute 5-year OS benefit",
+            "Downstages primary bladder tumour"
+          ]
+        },
+        "right": {
+          "title": "Immediate Radical Cystectomy",
+          "points": [
+            "Surgical resection without systemic chemo",
+            "Higher rates of systemic micrometastases",
+            "Reserved for cisplatin-ineligible patients"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "First-line systemic therapy for advanced urothelial carcinoma has been redefined by the phase 3 **EV-302** trial. Combining the Nectin-4-directed antibody-drug conjugate **enfortumab vedotin** with the PD-1 inhibitor **pembrolizumab** doubled median progression-free and overall survival compared with standard platinum-based chemotherapy. This combination represents the new frontline standard of care irrespective of cisplatin eligibility or PD-L1 expression levels.",
+      "say": "First-line systemic therapy for advanced urothelial carcinoma has been redefined by the phase 3 EV-302 trial. Combining the antibody-drug conjugate enfortumab vedotin with the PD-1 inhibitor pembrolizumab doubled median progression-free and overall survival compared with standard platinum-based chemotherapy. This combination is the new frontline standard of care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ev",
+            "label": "Enfortumab Vedotin (Nectin-4)",
+            "level": 1
+          },
+          {
+            "id": "pembro",
+            "label": "Pembrolizumab (PD-1)",
+            "level": 2
+          },
+          {
+            "id": "ev302",
+            "label": "EV-302 Trial Standard",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Doubling of Median OS",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ev",
+            "ev302"
+          ],
+          [
+            "pembro",
+            "ev302"
+          ],
+          [
+            "ev302",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For patients treated with frontline platinum-based cytotoxic chemotherapy, switch maintenance immunotherapy provides significant survival benefits. In the **JAVELIN Bladder 100** trial, administering maintenance **avelumab** to patients whose disease had not progressed following 4 to 6 cycles of **gemcitabine** plus platinum prolonged overall survival significantly. Initiating avelumab maintenance immediately consolidates response and delays disease recurrence.",
+      "say": "For patients treated with frontline platinum-based cytotoxic chemotherapy, switch maintenance immunotherapy provides significant survival benefits. In the JAVELIN Bladder 100 trial, administering maintenance avelumab to patients whose disease had not progressed following gemcitabine plus platinum prolonged overall survival significantly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Arm",
+          "Intervention",
+          "Median Overall Survival",
+          "Safety"
+        ],
+        "rows": [
+          [
+            "Avelumab Maintenance",
+            "Avelumab + Best Supportive Care",
+            "23.8 months",
+            "Manageable immune-related events"
+          ],
+          [
+            "Control Arm",
+            "Best Supportive Care alone",
+            "15.0 months",
+            "Standard observation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Activating genomic alterations in fibroblast growth factor receptor 3 occur in approximately 15% to 20% of metastatic urothelial tumours. **Erdafitinib** is an oral pan-FGFR tyrosine kinase inhibitor approved for susceptible FGFR3 or FGFR2 genetic alterations. In the phase 3 **THOR trial**, erdafitinib significantly prolonged overall survival compared to single-agent chemotherapy in patients who had previously progressed on immune checkpoint inhibitor therapy.",
+      "say": "Activating genomic alterations in fibroblast growth factor receptor 3 occur in approximately 15% to 20% of metastatic urothelial tumours. Erdafitinib is an oral pan-FGFR tyrosine kinase inhibitor approved for susceptible FGFR3 alterations. In the phase 3 THOR trial, erdafitinib significantly prolonged overall survival compared to chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Erdafitinib Targeted TKI",
+          "points": [
+            "Selectively inhibits FGFR 1, 2, 3, 4",
+            "Prolonged OS in THOR phase 3 trial",
+            "Hyperphosphatemia and central retinopathy"
+          ]
+        },
+        "right": {
+          "title": "Cytotoxic Chemotherapy",
+          "points": [
+            "Docetaxel or vinflunine chemotherapy",
+            "Inferior response and survival",
+            "Myelosuppression and systemic fatigue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Adjuvant systemic immunotherapy provides an effective therapeutic option for patients with resected high-risk disease. In the **CheckMate 274** trial, **Adjuvant nivolumab** administered for 1 year significantly prolonged disease-free survival compared to placebo in patients with muscle-invasive bladder cancer following radical cystectomy. Benefit was particularly striking in patients displaying tumour cell PD-L1 expression of 1% or higher.",
+      "say": "Adjuvant systemic immunotherapy provides an effective therapeutic option for patients with resected high-risk disease. In the CheckMate 274 trial, Adjuvant nivolumab administered for 1 year significantly prolonged disease-free survival compared to placebo in patients with muscle-invasive bladder cancer following radical cystectomy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cyst",
+            "label": "Radical Cystectomy",
+            "level": 1
+          },
+          {
+            "id": "path",
+            "label": "pT3, pT4 or pN+ Status",
+            "level": 2
+          },
+          {
+            "id": "nivo",
+            "label": "Nivolumab for 1 Year",
+            "level": 3
+          },
+          {
+            "id": "dfs",
+            "label": "Extended Disease-Free Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cyst",
+            "path"
+          ],
+          [
+            "path",
+            "nivo"
+          ],
+          [
+            "nivo",
+            "dfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Upper tract urothelial carcinoma** involves the renal pelvis and ureter and exhibits a high association with hereditary Lynch syndrome. Standard surgical management consists of radical **nephroureterectomy** with an en-bloc excision of a bladder cuff. A single postoperative dose of intravesical chemotherapy within 2 to 10 days significantly reduces the incidence of secondary bladder tumour recurrences.",
+      "say": "Upper tract urothelial carcinoma involves the renal pelvis and ureter and exhibits a high association with hereditary Lynch syndrome. Standard surgical care requires radical nephroureterectomy with en-bloc excision of a bladder cuff. A single postoperative dose of intravesical chemotherapy reduces secondary bladder recurrences.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Upper Tract Urothelial Carcinoma",
+          "Lower Tract (Bladder)"
+        ],
+        "rows": [
+          [
+            "Anatomy",
+            "Renal pelvicalyceal system and ureter",
+            "Urinary bladder lumen"
+          ],
+          [
+            "Genetics",
+            "High Lynch syndrome association (MSH2)",
+            "Sporadic or chemical carcinogen exposure"
+          ],
+          [
+            "Standard Surgery",
+            "Radical nephroureterectomy + cuff",
+            "Transurethral resection or cystectomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For patients wishing to avoid cystectomy, **Trimodality bladder preservation** provides an established curative alternative. The approach combines maximal transurethral tumour resection with concurrent **chemoradiotherapy** utilizing radiosensitising cisplatin or 5-fluorouracil plus mitomycin C. Long-term oncological outcomes and cancer-specific survival rates compare favourably with primary radical cystectomy in carefully selected candidates with unifocal disease.",
+      "say": "For patients wishing to avoid cystectomy, Trimodality bladder preservation provides an established curative alternative. The approach combines maximal transurethral tumour resection with concurrent chemoradiotherapy utilizing radiosensitising cisplatin. Long-term oncological outcomes compare favourably with primary radical cystectomy in selected candidates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "crit",
+            "label": "Unifocal T2 Disease",
+            "level": 1
+          },
+          {
+            "id": "tur",
+            "label": "Maximal TURBT",
+            "level": 2
+          },
+          {
+            "id": "crt",
+            "label": "Concurrent Chemoradiotherapy",
+            "level": 3
+          },
+          {
+            "id": "pres",
+            "label": "Native Bladder Preserved",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "crit",
+            "tur"
+          ],
+          [
+            "tur",
+            "crt"
+          ],
+          [
+            "crt",
+            "pres"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 49 (Cancer of the Bladder, Ureter, and Renal Pelvis)",
+    "EV-302 Trial (NEJM 2024)",
+    "JAVELIN Bladder 100 Trial (NEJM)",
+    "THOR Trial (NEJM)",
+    "CheckMate 274 Trial (NEJM)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
