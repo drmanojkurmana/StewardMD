@@ -1,0 +1,288 @@
+{
+  "v": 1,
+  "module": "sgi-sibo-tropical-sprue",
+  "subject": "ss-gastroenterology",
+  "title": "Small Intestinal Bacterial Overgrowth and Tropical Sprue",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Small intestinal bacterial overgrowth results from abnormal bacterial colonization of the small intestine. The historical and scientific gold standard for diagnosis is **quantitative jejunal aspirate** culture demonstrating at least **1000** colony-forming units per milliliter (**10^3** CFU/mL) of bacteria. While older criteria required a cutoff of 10^5 CFU/mL, modern consensus recognizes that 10^3 CFU/mL of predominantly colonic-type species represents genuine pathological overgrowth in proximal intestinal fluid.",
+      "say": "Small intestinal bacterial overgrowth results from abnormal bacterial colonization of the small intestine. The historical and scientific gold standard for diagnosis is quantitative jejunal aspirate culture demonstrating at least 1000 colony-forming units per milliliter, or 10 to the power 3 CFU per mL of bacteria. While older criteria required a cutoff of 10 to the 5 CFU per mL, modern consensus recognizes that 10 to the 3 CFU per mL of predominantly colonic-type species represents genuine pathological overgrowth in proximal intestinal fluid.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Method",
+          "Diagnostic Threshold",
+          "Key Limitations"
+        ],
+        "rows": [
+          [
+            "Jejunal aspirate culture",
+            ">= 10^3 CFU/mL",
+            "Invasive, requires specialized sterile aspiration"
+          ],
+          [
+            "Glucose breath test",
+            "Rise in H2 >= 20 ppm by 90 min",
+            "Rapid transit false positives; missed distal SIBO"
+          ],
+          [
+            "Lactulose breath test",
+            "Rise in H2 >= 20 ppm by 90 min",
+            "High sensitivity, lower specificity due to colonic fermentation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-invasive diagnostic evaluation relies heavily on standardized **hydrogen and methane breath testing**. According to international consensus guidelines, a positive hydrogen breath test is defined by an increase in breath **hydrogen** of at least **20** parts per million (**ppm**) above baseline within **90** minutes following the ingestion of either glucose or lactulose. This early peak reflects premature bacterial fermentation of the carbohydrate substrate within the small intestinal lumen.",
+      "say": "Non-invasive diagnostic evaluation relies heavily on standardized hydrogen and methane breath testing. According to international consensus guidelines, a positive hydrogen breath test is defined by an increase in breath hydrogen of at least 20 parts per million above baseline within 90 minutes following the ingestion of either glucose or lactulose. This early peak reflects premature bacterial fermentation of the carbohydrate substrate within the small intestinal lumen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Baseline breath hydrogen measurement"
+          },
+          {
+            "id": "b",
+            "label": "Ingest substrate (glucose 75g or lactulose 10g)"
+          },
+          {
+            "id": "c",
+            "label": "Fermentation by luminal bacteria produces H2 gas"
+          },
+          {
+            "id": "d",
+            "label": "Breath H2 rises >= 20 ppm within 90 minutes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "standardized fasting prep"
+          ],
+          [
+            "b",
+            "c",
+            "early substrate contact"
+          ],
+          [
+            "c",
+            "d",
+            "positive diagnostic threshold"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Intestinal methanogen overgrowth** is a distinct physiological entity driven by colonization with archaea, predominantly **Methanobrevibacter smithii**. Unlike bacterial overgrowth which produces hydrogen, IMO is diagnosed on breath testing by a breath **methane** concentration of at least **10** parts per million (**ppm**) at any time point during the test. Methanogens utilize hydrogen to generate methane gas, which acts as a neuromuscular paralytic in the bowel wall, directly causing **chronic constipation**.",
+      "say": "Intestinal methanogen overgrowth is a distinct physiological entity driven by colonization with archaea, predominantly Methanobrevibacter smithii. Unlike bacterial overgrowth which produces hydrogen, IMO is diagnosed on breath testing by a breath methane concentration of at least 10 parts per million at any time point during the test. Methanogens utilize hydrogen to generate methane gas, which acts as a neuromuscular paralytic in the bowel wall, directly causing chronic constipation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hydrogen SIBO",
+          "points": [
+            "Microorganism: Colonic bacteria (E. coli, Klebsiella)",
+            "Gas produced: Hydrogen (H2 >= 20 ppm by 90 min)",
+            "Predominant symptom: Watery diarrhoea and bloating",
+            "First-line therapy: Rifaximin monotherapy (550 mg tid)"
+          ]
+        },
+        "right": {
+          "title": "Intestinal Methanogen Overgrowth (IMO)",
+          "points": [
+            "Microorganism: Archaea (Methanobrevibacter smithii)",
+            "Gas produced: Methane (CH4 >= 10 ppm at any point)",
+            "Predominant symptom: Severe chronic constipation",
+            "First-line therapy: Rifaximin plus Neomycin or Metronidazole"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The primary medical therapy for hydrogen-predominant small intestinal bacterial overgrowth is the non-absorbable rifamycin antibiotic **rifaximin**, prescribed at a dose of **550** mg three times daily for **14** days. For intestinal methanogen overgrowth, rifaximin monotherapy is ineffective because archaea have cell walls composed of pseudopeptidoglycan. Eradication of IMO requires **dual therapy combining rifaximin with neomycin** (500 mg twice daily) or metronidazole to achieve methane normalization and symptomatic relief.",
+      "say": "The primary medical therapy for hydrogen-predominant small intestinal bacterial overgrowth is the non-absorbable rifamycin antibiotic rifaximin, prescribed at a dose of 550 mg three times daily for 14 days. For intestinal methanogen overgrowth, rifaximin monotherapy is ineffective because archaea have cell walls composed of pseudopeptidoglycan. Eradication of IMO requires dual therapy combining rifaximin with neomycin at 500 mg twice daily, or metronidazole, to achieve methane normalization and symptomatic relief.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Presentation",
+          "First-Line Antibiotic Regimen",
+          "Regimen Duration"
+        ],
+        "rows": [
+          [
+            "Hydrogen-positive SIBO",
+            "Rifaximin 550 mg three times daily",
+            "14 days"
+          ],
+          [
+            "Methane-positive IMO",
+            "Rifaximin 550 mg tid + Neomycin 500 mg bid",
+            "14 days"
+          ],
+          [
+            "Alternative for IMO",
+            "Rifaximin 550 mg tid + Metronidazole 250 mg tid",
+            "14 days"
+          ],
+          [
+            "Recurrent overgrowth",
+            "Cyclic rotation or prokinetic maintenance (e.g. prucalopride)",
+            "Long-term secondary prevention"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The pathophysiology of small intestinal bacterial overgrowth produces a characteristic laboratory pattern of micronutrient malabsorption. Overgrowing anaerobic bacteria deconjugate bile acids and competitively consume intraluminal cobalamin, leading to clinical **vitamin B12 deficiency** with macrocytic megaloblastic anaemia. Conversely, these bacterial colonies synthesize endogenous folate precursors within the lumen, causing paradoxically elevated or **high serum folate** levels, an important diagnostic clue.",
+      "say": "The pathophysiology of small intestinal bacterial overgrowth produces a characteristic laboratory pattern of micronutrient malabsorption. Overgrowing anaerobic bacteria deconjugate bile acids and competitively consume intraluminal cobalamin, leading to clinical vitamin B12 deficiency with macrocytic megaloblastic anaemia. Conversely, these bacterial colonies synthesize endogenous folate precursors within the lumen, causing paradoxically elevated or high serum folate levels, an important diagnostic clue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Luminal bacterial overgrowth"
+          },
+          {
+            "id": "b",
+            "label": "Bacterial consumption of cobalamin and deconjugation of bile acids"
+          },
+          {
+            "id": "c",
+            "label": "De novo bacterial synthesis of folate precursors"
+          },
+          {
+            "id": "d",
+            "label": "Laboratory signature: Low B12 and High Folate"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "active nutrient scavenging"
+          ],
+          [
+            "a",
+            "c",
+            "bacterial metabolism"
+          ],
+          [
+            "b",
+            "d",
+            "macrocytic megaloblastic profile"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tropical sprue** is an acquired chronic malabsorptive syndrome occurring in residents of or travelers returning from endemic tropical zones, including South Asia and the Caribbean. The condition is characterized by progressive mucosal atrophy throughout the small intestine, leading to severe chronic diarrhoea, steatorrhoea, profound weight loss, and **megaloblastic anaemia** resulting from combined **folate and vitamin B12 deficiency** due to diffuse jejunal and ileal enterocyte injury.",
+      "say": "Tropical sprue is an acquired chronic malabsorptive syndrome occurring in residents of or travelers returning from endemic tropical zones, including South Asia and the Caribbean. The condition is characterized by progressive mucosal atrophy throughout the small intestine, leading to severe chronic diarrhoea, steatorrhoea, profound weight loss, and megaloblastic anaemia resulting from combined folate and vitamin B12 deficiency due to diffuse jejunal and ileal enterocyte injury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tropical Sprue",
+          "points": [
+            "Location: Diffuse involvement of both jejunum and ileum",
+            "Deficiencies: Combined folate AND vitamin B12 deficiency",
+            "Aetiology: Persistent coliform colonization and mucosal toxins",
+            "Management: Tetracycline plus high-dose folic acid"
+          ]
+        },
+        "right": {
+          "title": "Coeliac Disease",
+          "points": [
+            "Location: Predominantly proximal duodenum and jejunum",
+            "Deficiencies: Predominantly iron, folate, and calcium deficiency",
+            "Aetiology: Gluten-triggered autoimmune enteropathy",
+            "Management: Strict lifelong gluten-free diet"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Histopathological evaluation of duodenal or jejunal mucosal biopsies in tropical sprue reveals diffuse **villous blunting**, crypt hyperplasia, and dense **intraepithelial lymphocytosis**. While these structural features closely resemble coeliac sprue, tropical sprue typically affects the entirety of the small bowel rather than sparing the distal ileum, and patient serum is uniformly negative for coeliac-specific anti-tissue transglutaminase (anti-tTG) and anti-endomysial antibodies.",
+      "say": "Histopathological evaluation of duodenal or jejunal mucosal biopsies in tropical sprue reveals diffuse villous blunting, crypt hyperplasia, and dense intraepithelial lymphocytosis. While these structural features closely resemble coeliac sprue, tropical sprue typically affects the entirety of the small bowel rather than sparing the distal ileum, and patient serum is uniformly negative for coeliac-specific anti-tissue transglutaminase and anti-endomysial antibodies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Feature",
+          "Tropical Sprue",
+          "Coeliac Disease"
+        ],
+        "rows": [
+          [
+            "Villous architecture",
+            "Blunted to completely flat (diffuse)",
+            "Blunted to flat (Marsh III, proximal)"
+          ],
+          [
+            "Intraepithelial lymphocytes",
+            "Markedly elevated (> 25/100 enterocytes)",
+            "Markedly elevated (> 25/100 enterocytes)"
+          ],
+          [
+            "Ileal involvement",
+            "Commonly involved (causes low B12)",
+            "Typically spared (terminal ileum normal)"
+          ],
+          [
+            "Serology (anti-tTG IgA)",
+            "Negative",
+            "Positive (> 95% sensitivity)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive curative medical management of tropical sprue mandates prolonged antimicrobial and nutritional therapy. The established first-line treatment regimen combines oral **tetracycline** at a dose of **250** mg four times daily (or doxycycline 100 mg twice daily) with oral **folic acid** at **5** mg daily, administered continuously for **3** to **6** months. This dual therapeutic approach eradicates persistent toxigenic coliform enterobacteria and promotes complete mucosal architectural restitution.",
+      "say": "Definitive curative medical management of tropical sprue mandates prolonged antimicrobial and nutritional therapy. The established first-line treatment regimen combines oral tetracycline at a dose of 250 mg four times daily, or doxycycline 100 mg twice daily, with oral folic acid at 5 mg daily, administered continuously for 3 to 6 months. This dual therapeutic approach eradicates persistent toxigenic coliform enterobacteria and promotes complete mucosal architectural restitution.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initiate oral tetracycline (250 mg qid) for 3 to 6 months"
+          },
+          {
+            "id": "b",
+            "label": "Supplement oral folic acid (5 mg daily)"
+          },
+          {
+            "id": "c",
+            "label": "Eradicate persistent coliform colonization"
+          },
+          {
+            "id": "d",
+            "label": "Complete mucosal healing and reversal of megaloblastic anaemia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "simultaneous co-therapy"
+          ],
+          [
+            "a",
+            "c",
+            "antimicrobial suppression"
+          ],
+          [
+            "b",
+            "d",
+            "enterocyte DNA synthesis and regeneration"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

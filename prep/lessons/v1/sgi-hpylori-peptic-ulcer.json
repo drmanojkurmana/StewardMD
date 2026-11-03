@@ -1,0 +1,301 @@
+{
+  "v": 1,
+  "module": "sgi-hpylori-peptic-ulcer",
+  "subject": "ss-gastroenterology",
+  "title": "Helicobacter Pylori and Peptic Ulcer Disease",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **Maastricht VI** Florence consensus report provides updated guidelines for managing Helicobacter pylori infection. In regions with clarithromycin resistance exceeding **15%**, standard triple therapy is contraindicated. First-line empiric treatment requires a **14**-day course of **bismuth quadruple therapy** comprising a proton pump inhibitor, bismuth subcitrate or subsalicylate, tetracycline, and metronidazole. Alternatively, potassium-competitive acid blocker vonoprazan-based regimens provide superior acid suppression and eradication rates without requiring bismuth.",
+      "say": "The Maastricht VI Florence consensus report provides updated guidelines for managing Helicobacter pylori infection. In regions with clarithromycin resistance exceeding 15 percent, standard triple therapy is contraindicated. First-line empiric treatment requires a 14-day course of bismuth quadruple therapy comprising a proton pump inhibitor, bismuth subcitrate or subsalicylate, tetracycline, and metronidazole. Alternatively, potassium-competitive acid blocker vonoprazan-based regimens provide superior acid suppression and eradication rates without requiring bismuth.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regimen Component",
+          "Dosing Protocol",
+          "Duration"
+        ],
+        "rows": [
+          [
+            "Proton Pump Inhibitor (PPI)",
+            "Standard dose twice daily (e.g. esomeprazole 40 mg)",
+            "14 days"
+          ],
+          [
+            "Bismuth subcitrate / subsalicylate",
+            "120-300 mg four times daily",
+            "14 days"
+          ],
+          [
+            "Tetracycline hydrochloride",
+            "500 mg four times daily",
+            "14 days"
+          ],
+          [
+            "Metronidazole",
+            "400-500 mg three to four times daily",
+            "14 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accurate non-invasive confirmation of active infection relies on the **urea breath test** using carbon-**13** or carbon-**14** isotopes and the monoclonal **stool antigen test**. Both assays detect active bacterial urease activity and shedding rather than past exposure. To eliminate false-negative results caused by pharmacological suppression of bacterial density, clinicians must discontinue proton pump inhibitors for at least **14** days and withhold all antibiotics, bismuth compounds, or sucralfate for at least **28** days before testing.",
+      "say": "Accurate non-invasive confirmation of active infection relies on the urea breath test using carbon-13 or carbon-14 isotopes and the monoclonal stool antigen test. Both assays detect active bacterial urease activity and shedding rather than past exposure. To eliminate false-negative results caused by pharmacological suppression of bacterial density, clinicians must discontinue proton pump inhibitors for at least 14 days and withhold all antibiotics, bismuth compounds, or sucralfate for at least 28 days before testing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stop PPIs >= 14 days; stop antibiotics >= 28 days"
+          },
+          {
+            "id": "b",
+            "label": "Administer 13C or 14C labeled urea"
+          },
+          {
+            "id": "c",
+            "label": "Bacterial urease splits urea into 13CO2 and NH3"
+          },
+          {
+            "id": "d",
+            "label": "Exhaled 13CO2 measured by mass spectrometry"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "washout period completed"
+          ],
+          [
+            "b",
+            "c",
+            "gastric bacterial contact"
+          ],
+          [
+            "c",
+            "d",
+            "systemic circulation to lungs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Correa cascade** demonstrates the sequential histological progression from normal gastric mucosa to invasive intestinal-type gastric adenocarcinoma. Chronic infection triggers superficial active gastritis, progressing over decades to multifocal chronic atrophic gastritis with glandular loss. Subsequent replacement of specialized gastric epithelium by Goblet cells creates **intestinal metaplasia**, which evolves into low-grade and high-grade dysplasia. Eradicating Helicobacter pylori before the development of extensive intestinal metaplasia eliminates future cancer risk.",
+      "say": "The Correa cascade demonstrates the sequential histological progression from normal gastric mucosa to invasive intestinal-type gastric adenocarcinoma. Chronic infection triggers superficial active gastritis, progressing over decades to multifocal chronic atrophic gastritis with glandular loss. Subsequent replacement of specialized gastric epithelium by Goblet cells creates intestinal metaplasia, which evolves into low-grade and high-grade dysplasia. Eradicating Helicobacter pylori before the development of extensive intestinal metaplasia eliminates future cancer risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic superficial gastritis"
+          },
+          {
+            "id": "b",
+            "label": "Atrophic gastritis with gland loss"
+          },
+          {
+            "id": "c",
+            "label": "Intestinal metaplasia (enterocyte phenotype)"
+          },
+          {
+            "id": "d",
+            "label": "Gastric dysplasia and intestinal-type cancer"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "sustained H. pylori inflammation"
+          ],
+          [
+            "b",
+            "c",
+            "mucosal remodelling"
+          ],
+          [
+            "c",
+            "d",
+            "point of irreversible genetic damage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "While duodenal ulcers are almost universally benign and do not require routine repeat endoscopic visualization, **gastric ulcers** carry a significant risk of harboring underlying adenocarcinoma. Following initial diagnosis and biopsy of a gastric ulcer, clinicians must prescribe medical acid suppression for **6** to **8** weeks. A mandatory **surveillance endoscopy** with repeat quadrant biopsies must follow to document complete mucosal healing and rigorously exclude ulcerated malignancy masquerading as benign disease.",
+      "say": "While duodenal ulcers are almost universally benign and do not require routine repeat endoscopic visualization, gastric ulcers carry a significant risk of harboring underlying adenocarcinoma. Following initial diagnosis and biopsy of a gastric ulcer, clinicians must prescribe medical acid suppression for 6 to 8 weeks. A mandatory surveillance endoscopy with repeat quadrant biopsies must follow to document complete mucosal healing and rigorously exclude ulcerated malignancy masquerading as benign disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Duodenal Peptic Ulcers",
+          "points": [
+            "Location: First part of duodenum (bulb)",
+            "Malignancy risk: Virtually zero",
+            "Follow-up: No surveillance endoscopy needed if asymptomatic",
+            "Pathology: Acid hypersecretion driven by antral gastritis"
+          ]
+        },
+        "right": {
+          "title": "Gastric Peptic Ulcers",
+          "points": [
+            "Location: Lesser curvature, incisura angularis",
+            "Malignancy risk: Up to 5% harbor adenocarcinoma",
+            "Follow-up: Mandatory endoscopy at 6 to 8 weeks",
+            "Pathology: Mucosal barrier breakdown from pangastritis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**NSAID-induced ulcers** develop through dual mechanisms combining direct chemical irritation and systemic biochemical suppression. Systemic absorption of non-selective nonsteroidal anti-inflammatory drugs inhibits mucosal **cyclooxygenase-1**, preventing conversion of arachidonic acid into cytoprotective prostaglandins **1** and **2**, specifically PGE2 and PGI2. This prostaglandin depletion diminishes gastric mucosal blood flow, decreases mucus and bicarbonate production, and impairs cellular restitution, predisposing to silent mucosal ulceration and life-threatening haemorrhage.",
+      "say": "NSAID-induced ulcers develop through dual mechanisms combining direct chemical irritation and systemic biochemical suppression. Systemic absorption of non-selective nonsteroidal anti-inflammatory drugs inhibits mucosal cyclooxygenase-1, preventing conversion of arachidonic acid into cytoprotective prostaglandins 1 and 2, specifically PGE2 and PGI2. This prostaglandin depletion diminishes gastric mucosal blood flow, decreases mucus and bicarbonate production, and impairs cellular restitution, predisposing to silent mucosal ulceration and life-threatening haemorrhage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Systemic NSAID administration"
+          },
+          {
+            "id": "b",
+            "label": "Inhibition of COX-1 enzyme"
+          },
+          {
+            "id": "c",
+            "label": "Depletion of mucosal PGE2 and PGI2"
+          },
+          {
+            "id": "d",
+            "label": "Loss of mucus, bicarbonate, and perfusion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "circulating drug uptake"
+          ],
+          [
+            "b",
+            "c",
+            "blocked arachidonate conversion"
+          ],
+          [
+            "c",
+            "d",
+            "barrier failure and mucosal ulceration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Zollinger-Ellison syndrome** is characterized by severe refractory peptic ulceration and secretory diarrhoea resulting from an autonomous gastrinoma. Diagnosis is established by demonstrating a fasting serum gastrin exceeding **1000** pg/mL in the setting of gastric hyperacidity with a pH below **2**. In borderline cases where serum gastrin is mildly elevated, a **secretin stimulation test** is diagnostic: intravenous injection of secretin produces a paradoxical elevation in serum gastrin exceeding **120** pg/mL above baseline.",
+      "say": "Zollinger-Ellison syndrome is characterized by severe refractory peptic ulceration and secretory diarrhoea resulting from an autonomous gastrinoma. Diagnosis is established by demonstrating a fasting serum gastrin exceeding 1000 pg/mL in the setting of gastric hyperacidity with a pH below 2. In borderline cases where serum gastrin is mildly elevated, a secretin stimulation test is diagnostic: intravenous injection of secretin produces a paradoxical elevation in serum gastrin exceeding 120 pg/mL above baseline.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Zollinger-Ellison Syndrome",
+          "Normal Physiological State"
+        ],
+        "rows": [
+          [
+            "Fasting Serum Gastrin",
+            "> 1000 pg/mL (diagnostic)",
+            "< 100 pg/mL"
+          ],
+          [
+            "Basal Gastric Acid pH",
+            "pH < 2.0 (hyperchlorhydria)",
+            "pH 1.5 - 3.5"
+          ],
+          [
+            "Secretin Stimulation Test",
+            "Paradoxical rise > 120 pg/mL",
+            "Gastrin suppression or no change"
+          ],
+          [
+            "Common Locations",
+            "Gastrinoma triangle (Passaro)",
+            "Antral G cell regulation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gastric **MALT lymphoma** represents an extranodal marginal zone B-cell neoplasm arising in response to chronic Helicobacter pylori antigen stimulation. Up to **75%** to **80%** of patients with stage **1** localized gastric MALT lymphoma achieve complete and durable disease remission following successful **bacterial eradication** alone. Lesions bearing the t(11;18)(q21;q21) BIRC3-MALT1 chromosomal translocation, however, exhibit constitutive NF-kappaB activation and are notoriously unresponsive to antibiotic therapy, requiring systemic therapy or involved-site radiation.",
+      "say": "Gastric MALT lymphoma represents an extranodal marginal zone B-cell neoplasm arising in response to chronic Helicobacter pylori antigen stimulation. Up to 75 to 80 percent of patients with stage 1 localized gastric MALT lymphoma achieve complete and durable disease remission following successful bacterial eradication alone. Lesions bearing the t(11;18)(q21;q21) BIRC3-MALT1 chromosomal translocation, however, exhibit constitutive NF-kappaB activation and are notoriously unresponsive to antibiotic therapy, requiring systemic therapy or involved-site radiation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "t(11;18) Negative MALT Lymphoma",
+          "points": [
+            "Driven by chronic antigen presentation",
+            "Responds to H. pylori eradication in 75% to 80%",
+            "Requires 14-day quadruple eradication therapy",
+            "Monitored with serial endoscopy at 3-month intervals"
+          ]
+        },
+        "right": {
+          "title": "t(11;18) Translocation Positive",
+          "points": [
+            "BIRC3-MALT1 fusion oncogene present",
+            "Constitutive NF-kappaB signaling independent of antigen",
+            "Refractory to H. pylori antibiotic eradication",
+            "Requires involved-site radiotherapy or rituximab"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The clinical virulence of Helicobacter pylori is largely dictated by major strain-specific pathogenicity factors. The **CagA** cytotoxin-associated gene A is delivered into host gastric epithelial cells via a bacterial type IV secretion system, where it undergoes tyrosine phosphorylation by Src family kinases and disrupts intracellular signaling. Along with the pore-forming **VacA** vacuolating cytotoxin A, strains harboring CagA induce potent interleukin-8 production, severe pangastritis, and dramatically heightened rates of peptic ulceration and gastric adenocarcinoma.",
+      "say": "The clinical virulence of Helicobacter pylori is largely dictated by major strain-specific pathogenicity factors. The CagA cytotoxin-associated gene A is delivered into host gastric epithelial cells via a bacterial type IV secretion system, where it undergoes tyrosine phosphorylation by Src family kinases and disrupts intracellular signaling. Along with the pore-forming VacA vacuolating cytotoxin A, strains harboring CagA induce potent interleukin-8 production, severe pangastritis, and dramatically heightened rates of peptic ulceration and gastric adenocarcinoma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Type IV secretion system translocates CagA"
+          },
+          {
+            "id": "b",
+            "label": "CagA undergoes host Src kinase phosphorylation"
+          },
+          {
+            "id": "c",
+            "label": "SHP-2 phosphatase binding and hummingbird phenotype"
+          },
+          {
+            "id": "d",
+            "label": "VacA induces epithelial vacuolation and apoptosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "cellular delivery"
+          ],
+          [
+            "b",
+            "c",
+            "cytoskeletal derangement"
+          ],
+          [
+            "c",
+            "d",
+            "enhanced mucosal inflammation and oncogenesis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

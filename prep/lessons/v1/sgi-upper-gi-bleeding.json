@@ -1,0 +1,312 @@
+{
+  "v": 1,
+  "module": "sgi-upper-gi-bleeding",
+  "subject": "ss-gastroenterology",
+  "title": "Upper Gastrointestinal Bleeding and Hemostasis",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **Glasgow-Blatchford score** is the validated clinical risk-stratification tool recommended for evaluating patients presenting with acute upper gastrointestinal bleeding before endoscopy. Incorporating blood urea, hemoglobin, systolic blood pressure, pulse, presentation with melena or syncope, hepatic disease, and cardiac failure, a calculated score of **0** or **1** identifies very **low-risk patients** who can be safely triaged to outpatient management without admission or urgent intervention.",
+      "say": "The Glasgow-Blatchford score is the validated clinical risk-stratification tool recommended for evaluating patients presenting with acute upper gastrointestinal bleeding before endoscopy. Incorporating blood urea, hemoglobin, systolic blood pressure, pulse, presentation with melena or syncope, hepatic disease, and cardiac failure, a calculated score of 0 or 1 identifies very low-risk patients who can be safely triaged to outpatient management without admission or urgent intervention.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "GBS Parameter",
+          "Score Allocation",
+          "Clinical Threshold"
+        ],
+        "rows": [
+          [
+            "Blood Urea Nitrogen (BUN)",
+            "2 to 6 points",
+            "Elevated >= 6.5 mmol/L"
+          ],
+          [
+            "Hemoglobin (Men / Women)",
+            "1 to 6 points",
+            "< 130 g/L (men) or < 120 g/L (women)"
+          ],
+          [
+            "Systolic Blood Pressure",
+            "1 to 3 points",
+            "< 100 mmHg"
+          ],
+          [
+            "Clinical Pulse and Presentation",
+            "1 to 2 points each",
+            "Pulse >= 100, melena, or syncope"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endoscopic risk stratification for peptic ulcer bleeding relies on the validated **Forrest classification**. High-risk stigmata comprise active arterial spurting (Class Ia), active oozing (Class Ib), and a **visible vessel** (Class IIa), which exhibit a **40%** to **50%** rebleeding risk without treatment. These lesions require **endoscopic haemostasis**. In contrast, a flat pigmented spot (Class IIc) carries a seven percent risk and a clean ulcer base (Class III) carries less than three percent rebleeding risk.",
+      "say": "Endoscopic risk stratification for peptic ulcer bleeding relies on the validated Forrest classification. High-risk stigmata comprise active arterial spurting, classified as Forrest Ia, active oozing, classified as Forrest Ib, and a non-bleeding visible vessel, classified as Forrest IIa, which exhibit a 40 to 50 percent rebleeding risk without treatment. These lesions require dual endoscopic haemostasis. In contrast, a flat pigmented spot carries a seven percent risk and a clean ulcer base carries less than three percent rebleeding risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Forrest Class",
+          "Endoscopic Appearance",
+          "Rebleeding Risk",
+          "Endotherapy Mandated"
+        ],
+        "rows": [
+          [
+            "Class Ia",
+            "Active arterial spurting",
+            "90%",
+            "Yes (Dual modality)"
+          ],
+          [
+            "Class Ib",
+            "Active oozing bleeding",
+            "10% to 30%",
+            "Yes (Dual modality)"
+          ],
+          [
+            "Class IIa",
+            "Non-bleeding visible vessel",
+            "40% to 50%",
+            "Yes (Dual modality)"
+          ],
+          [
+            "Class IIb",
+            "Adherent overlying clot",
+            "20% to 30%",
+            "Targeted clot irrigation and treatment"
+          ],
+          [
+            "Class IIc / III",
+            "Flat spot / Clean ulcer base",
+            "< 7% / < 3%",
+            "No endotherapy indicated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For high-risk peptic ulcer bleeding stigmata, international consensus guidelines mandate combination **dual-modality endotherapy**. While dilute **epinephrine injection** at a **1**:10000 concentration provides temporary local vasoconstriction and tissue tamponade, it is insufficient as monotherapy due to high rebleeding rates. It must be paired with a second definitive mechanical or thermal modality, such as **through-the-scope clips** or bipolar electrocoagulation, to achieve durable vessel coaptation and thrombosis.",
+      "say": "For high-risk peptic ulcer bleeding stigmata, international consensus guidelines mandate combination dual-modality endotherapy. While dilute epinephrine injection at a 1 in 10000 concentration provides temporary local vasoconstriction and tissue tamponade, it is insufficient as monotherapy due to high rebleeding rates. It must be paired with a second definitive mechanical or thermal modality, such as through-the-scope clips or bipolar electrocoagulation, to achieve durable vessel coaptation and thrombosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify Forrest Ia, Ib, or IIa lesion"
+          },
+          {
+            "id": "b",
+            "label": "Inject dilute epinephrine (1:10000) around crater"
+          },
+          {
+            "id": "c",
+            "label": "Apply mechanical hemoclips or thermal contact probe"
+          },
+          {
+            "id": "d",
+            "label": "Verify durable cessation of bleeding"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "target visible vessel base"
+          ],
+          [
+            "b",
+            "c",
+            "temporary vasoconstrictive clearance"
+          ],
+          [
+            "c",
+            "d",
+            "permanent coaptive vessel thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Large refractory peptic ulcers located along the posterior duodenal bulb or the lesser curvature of the gastric body present major management challenges due to underlying arterial architecture. Posterior duodenal ulcers erode directly into the **gastroduodenal artery**, while high lesser curvature ulcers penetrate the left gastric artery. In cases of persistent or recurrent haemorrhage following endotherapy, transcatheter **angiographic embolization** using microcoils or liquid embolic agents is the primary rescue intervention.",
+      "say": "Large refractory peptic ulcers located along the posterior duodenal bulb or the lesser curvature of the gastric body present major management challenges due to underlying arterial architecture. Posterior duodenal ulcers erode directly into the gastroduodenal artery, while high lesser curvature ulcers penetrate the left gastric artery. In cases of persistent or recurrent haemorrhage following endotherapy, transcatheter angiographic embolization using microcoils or liquid embolic agents is the primary rescue intervention.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Posterior Duodenal Bulb Ulcer",
+          "points": [
+            "Culprit vessel: Gastroduodenal artery (GDA)",
+            "Haemodynamic consequence: Catastrophic exsanguinating arterial haemorrhage",
+            "Endoscopic challenge: Difficult tangent and fibrotic base",
+            "Rescue approach: Transcatheter coil embolization of GDA"
+          ]
+        },
+        "right": {
+          "title": "High Lesser Gastric Curvature Ulcer",
+          "points": [
+            "Culprit vessel: Left gastric artery branches",
+            "Haemodynamic consequence: High-volume arterial spurting",
+            "Endoscopic challenge: Angled position near gastroesophageal junction",
+            "Rescue approach: Selective left gastric catheter angiography"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prompt pharmacological intervention improves outcomes in acute acute **variceal bleeding**. Intravenous vasoactive agents, specifically **terlipressin** administered as an initial **2** mg bolus followed by 1 to 2 mg every 4 hours, or octreotide, must be initiated immediately upon suspected variceal rupture. Concurrently, short-term **antibiotic prophylaxis** with intravenous ceftriaxone at **1** g daily for up to 7 days reduces bacterial translocation, prevents spontaneous bacterial peritonitis, diminishes early rebleeding, and reduces all-cause mortality.",
+      "say": "Prompt pharmacological intervention improves outcomes in acute variceal bleeding. Intravenous vasoactive agents, specifically terlipressin administered as an initial 2 mg bolus followed by 1 to 2 mg every 4 hours, or octreotide, must be initiated immediately upon suspected variceal rupture. Concurrently, short-term antibiotic prophylaxis with intravenous ceftriaxone at 1 gram daily for up to 7 days reduces bacterial translocation, prevents spontaneous bacterial peritonitis, diminishes early rebleeding, and reduces all-cause mortality.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Agent",
+          "Dosing Protocol",
+          "Mechanism of Action",
+          "Primary Benefit"
+        ],
+        "rows": [
+          [
+            "Terlipressin",
+            "2 mg IV q4h initially, step down to 1 mg q4h",
+            "V1 receptor splanchnic vasoconstriction",
+            "Decreases portal venous inflow"
+          ],
+          [
+            "Octreotide",
+            "50 mcg IV bolus, then 50 mcg/hr infusion",
+            "Inhibits vasodilatory glucagon release",
+            "Selective splanchnic vasoconstriction"
+          ],
+          [
+            "Ceftriaxone",
+            "1 g IV once daily for up to 7 days",
+            "Broad-spectrum Gram-negative coverage",
+            "Reduces SBP, rebleeding, and mortality"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emergency **endoscopic variceal ligation** is the standard endoscopic intervention for active acute oesophageal variceal bleeding, performing superiorly to endoscopic sclerotherapy with lower complication rates. Utilizing a multi-band ligator attached to the gastroscope tip, the operator aspirates each variceal column into the barrel and deploys an elastic rubber **O-ring band** at the bleeding site and near the gastroesophageal junction, inducing mechanical strangulation, local thrombosis, and eventual sloughing.",
+      "say": "Emergency endoscopic variceal ligation is the standard endoscopic intervention for active acute oesophageal variceal bleeding, performing superiorly to endoscopic sclerotherapy with lower complication rates. Utilizing a multi-band ligator attached to the gastroscope tip, the operator aspirates each variceal column into the barrel and deploys an elastic rubber O-ring band at the bleeding site and near the gastroesophageal junction, inducing mechanical strangulation, local thrombosis, and eventual sloughing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Aspirate varix into ligation cylinder"
+          },
+          {
+            "id": "b",
+            "label": "Deploy elastic O-ring band around varix base"
+          },
+          {
+            "id": "c",
+            "label": "Immediate mechanical tamponade and thrombosis"
+          },
+          {
+            "id": "d",
+            "label": "Mucosal sloughing and fibrous tissue eradication"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "red-out sign visualized"
+          ],
+          [
+            "b",
+            "c",
+            "complete column strangulation"
+          ],
+          [
+            "c",
+            "d",
+            "tissue necrosis over 7-10 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bleeding isolated gastric varices (IGV1 or GOV2) are poorly controlled with band ligation and carry excessive rebleeding risks. The definitive endoscopic treatment is endoscopic cyanoacrylate **tissue glue injection**. Cyanoacrylate is injected directly into the variceal lumen, where it undergoes instantaneous polymerization upon contact with blood, forming a solid cast that obliterates the vessel. To prevent damage to the endoscope, the working channel must be pre-flushed with **Lipiodol** or water.",
+      "say": "Bleeding isolated gastric varices are poorly controlled with band ligation and carry excessive rebleeding risks. The definitive endoscopic treatment is endoscopic cyanoacrylate tissue glue injection. Cyanoacrylate is injected directly into the variceal lumen, where it undergoes instantaneous polymerization upon contact with blood, forming a solid cast that obliterates the vessel. To prevent damage to the endoscope, the working channel must be pre-flushed with Lipiodol or water.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Gastric Varix Subtype",
+          "Anatomical Distribution",
+          "Preferred Treatment Modality"
+        ],
+        "rows": [
+          [
+            "GOV1 (Type 1 Gastro-oesophageal)",
+            "Lesser curve continuation of esophageal varices",
+            "Endoscopic variceal ligation (EVL)"
+          ],
+          [
+            "GOV2 (Type 2 Gastro-oesophageal)",
+            "Extends into gastric fundus across cardia",
+            "Endoscopic cyanoacrylate glue injection / BRTO"
+          ],
+          [
+            "IGV1 (Isolated Gastric Type 1)",
+            "Gastric fundus in isolation",
+            "Cyanoacrylate tissue glue / BRTO / TIPS"
+          ],
+          [
+            "IGV2 (Isolated Gastric Type 2)",
+            "Ectopic (antrum, duodenum)",
+            "Cyanoacrylate glue or coil embolization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients presenting with acute variceal bleeding at high risk of treatment failure, early or pre-emptive **TIPS** transjugular intrahepatic portosystemic shunt placement within **72** hours (ideally within 24 to 48 hours) significantly improves survival. High-risk candidates are defined under Baveno criteria as patients with **Child-Pugh class C** cirrhosis (score 10 to 13) or **Child-Pugh class B** with active spurting or oozing at diagnostic endoscopy.",
+      "say": "In patients presenting with acute variceal bleeding at high risk of treatment failure, early or pre-emptive TIPS transjugular intrahepatic portosystemic shunt placement within 72 hours, ideally within 24 to 48 hours, significantly improves survival. High-risk candidates are defined under Baveno criteria as patients with Child-Pugh class C cirrhosis with score 10 to 13, or Child-Pugh class B with active spurting or oozing at diagnostic endoscopy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute variceal bleed stabilized initially"
+          },
+          {
+            "id": "b",
+            "label": "Stratify risk: Child C (<14) or Child B + active bleeding"
+          },
+          {
+            "id": "c",
+            "label": "Perform early pre-emptive TIPS within 72 hours"
+          },
+          {
+            "id": "d",
+            "label": "Significant reduction in rebleeding and 1-year mortality"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "initial EVL and terlipressin"
+          ],
+          [
+            "b",
+            "c",
+            "early candidate identification"
+          ],
+          [
+            "c",
+            "d",
+            "portal pressure gradient reduced < 12 mmHg"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

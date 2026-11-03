@@ -1,0 +1,288 @@
+{
+  "v": 1,
+  "module": "sgi-oesophageal-motility",
+  "subject": "ss-gastroenterology",
+  "title": "Oesophageal Motility Disorders and Achalasia",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "High-resolution manometry is the clinical gold standard for assessing motor dysfunction of the oesophagus. According to the **Chicago Classification** version **4.0**, primary achalasia requires an elevated median **integrated relaxation pressure** exceeding **15** mmHg with Sierra or Medtronic solid-state assemblies, or exceeding **28** mmHg with Diversatek systems. This elevated pressure must occur alongside **100%** failed peristalsis across all test swallows, establishing impaired relaxation of the lower oesophageal sphincter.",
+      "say": "High-resolution manometry is the clinical gold standard for assessing motor dysfunction of the oesophagus. According to the Chicago Classification version 4.0, primary achalasia requires an elevated median integrated relaxation pressure exceeding 15 mmHg with Sierra or Medtronic solid-state assemblies, or exceeding 28 mmHg with Diversatek systems. This elevated pressure must occur alongside 100 percent failed peristalsis across all test swallows, establishing impaired relaxation of the lower oesophageal sphincter.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Sierra / Medtronic Assembly",
+          "Diversatek Assembly"
+        ],
+        "rows": [
+          [
+            "Integrated Relaxation Pressure threshold",
+            "> 15 mmHg",
+            "> 28 mmHg"
+          ],
+          [
+            "Peristaltic integrity required",
+            "100% failed peristalsis",
+            "100% failed peristalsis"
+          ],
+          [
+            "Positioning protocol (CCv4.0)",
+            "10 supine plus 5 upright swallows",
+            "10 supine plus 5 upright swallows"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "High-resolution manometry separates achalasia into three distinct operational subtypes based on pressurization patterns. **Type I achalasia** or classic achalasia demonstrates **100%** failed peristalsis without significant esophageal pressurization. In contrast, **Type II achalasia** exhibits panesophageal pressurization in at least **20%** of swallows, generating compression between the upper and lower sphincters. **Type III achalasia** or spastic achalasia shows premature spastic contractions with reduced distal latency in at least **20%** of swallows.",
+      "say": "High-resolution manometry separates achalasia into three distinct operational subtypes based on pressurization patterns. Type I achalasia, also termed classic achalasia, demonstrates 100 percent failed peristalsis without significant esophageal pressurization. In contrast, Type II achalasia exhibits panesophageal pressurization in at least 20 percent of swallows, generating compression between the upper and lower sphincters. Type III achalasia, known as spastic achalasia, shows premature spastic contractions with reduced distal latency in at least 20 percent of swallows.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I and II Achalasia",
+          "points": [
+            "Type I: 100% failed peristalsis with aperistalsis",
+            "Type I: No panesophageal pressurization",
+            "Type II: Panesophageal pressurization in >= 20% swallows",
+            "Type II: Highest clinical response to balloon dilatation and myotomy"
+          ]
+        },
+        "right": {
+          "title": "Type III Spastic Achalasia",
+          "points": [
+            "Type III: Premature spastic contractions in >= 20% swallows",
+            "Distal latency < 4.5 seconds",
+            "Poor response to standard balloon dilatation",
+            "Requires extended length peroral endoscopic myotomy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Peroral endoscopic myotomy** has revolutionized definitive interventional management for all three **achalasia subtypes**. By creating a submucosal tunnel in the mid-oesophagus and dividing the inner circular muscle layer, POEM achieves high clinical success rates exceeding ninety percent. Crucially, POEM allows the operator to extend the myotomy proximally into the esophageal body. This tailored proximal extension is essential for managing **Type III achalasia**, where extensive spastic contractility fails to respond to standard distal disruption.",
+      "say": "Peroral endoscopic myotomy has revolutionized definitive interventional management for all three achalasia subtypes. By creating a submucosal tunnel in the mid-oesophagus and dividing the inner circular muscle layer, POEM achieves high clinical success rates exceeding ninety percent. Crucially, POEM allows the operator to extend the myotomy proximally into the esophageal body. This tailored proximal extension is essential for managing Type III achalasia, where extensive spastic contractility fails to respond to standard distal disruption.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Submucosal injection in mid-oesophagus"
+          },
+          {
+            "id": "b",
+            "label": "Mucosal entry and tunnel creation"
+          },
+          {
+            "id": "c",
+            "label": "Selective circular myotomy across LES"
+          },
+          {
+            "id": "d",
+            "label": "Clip closure of mucosal entry site"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "cushion formation"
+          ],
+          [
+            "b",
+            "c",
+            "dissection to 2 cm below cardia"
+          ],
+          [
+            "c",
+            "d",
+            "endoscopic clips"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pneumatic balloon dilatation** remains an established first-line non-surgical treatment for achalasia, particularly in Type II disease. The technique utilizes graded low-compliance Rigiflex polyethylene balloons measuring **30** mm, **35** mm, and **40** mm in diameter to mechanically tear circular muscle fibres of the **lower esophageal sphincter**. Dilatations proceed sequentially under fluoroscopic guidance, starting with the 30 mm balloon. The procedure carries an inherent **2%** to **3%** risk of transmural oesophageal perforation.",
+      "say": "Pneumatic balloon dilatation remains an established first-line non-surgical treatment for achalasia, particularly in Type II disease. The technique utilizes graded low-compliance Rigiflex polyethylene balloons measuring 30 mm, 35 mm, and 40 mm in diameter to mechanically tear circular muscle fibres of the lower esophageal sphincter. Dilatations proceed sequentially under fluoroscopic guidance, starting with the 30 mm balloon. The procedure carries an inherent 2 to 3 percent risk of transmural oesophageal perforation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Balloon Calibre",
+          "Clinical Role",
+          "Procedural Caveat"
+        ],
+        "rows": [
+          [
+            "30 mm balloon",
+            "Initial dilatation session",
+            "Pressure held for 15-60 seconds"
+          ],
+          [
+            "35 mm balloon",
+            "Step-up dilatation at 4-6 weeks",
+            "Employed if Eckardt score remains > 3"
+          ],
+          [
+            "40 mm balloon",
+            "Final step-up dilatation",
+            "Highest risk of mucosal disruption"
+          ],
+          [
+            "Complications",
+            "Oesophageal perforation in 2% to 3%",
+            "Requires emergency gastrografin contrast study"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Distal esophageal spasm** represents a severe hypermotility disorder defined under high-resolution manometry criteria. Diagnostic confirmation requires a normal integrated relaxation pressure combined with premature contractions in at least **20%** of test swallows. The key physiological metric is a shortened **distal latency** of less than **4.5** seconds from upper sphincter relaxation to the contractile deceleration point. Patients typically present with episodic retrosternal chest pain and dysphagia that mimic acute coronary syndromes.",
+      "say": "Distal esophageal spasm represents a severe hypermotility disorder defined under high-resolution manometry criteria. Diagnostic confirmation requires a normal integrated relaxation pressure combined with premature contractions in at least 20 percent of test swallows. The key physiological metric is a shortened distal latency of less than 4 point 5 seconds from upper sphincter relaxation to the contractile deceleration point. Patients typically present with episodic retrosternal chest pain and dysphagia that mimic acute coronary syndromes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Normal median IRP"
+          },
+          {
+            "id": "b",
+            "label": "Distal latency < 4.5 seconds"
+          },
+          {
+            "id": "c",
+            "label": "Premature contractions in >= 20% swallows"
+          },
+          {
+            "id": "d",
+            "label": "Diagnosis: Distal Esophageal Spasm"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "preserved LES relaxation"
+          ],
+          [
+            "b",
+            "c",
+            "early contractile wave front"
+          ],
+          [
+            "c",
+            "d",
+            "CCv4.0 criteria met"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Jackhammer esophagus** is a profound state of hypercontractility characterized by excessively vigorous smooth muscle peristalsis. The diagnosis is confirmed on high-resolution manometry when at least **20%** of test swallows exhibit a **distal contractile integral** exceeding **8000** mmHg-s-cm, in the presence of normal lower oesophageal sphincter relaxation. Repetitive prolonged multi-peaked contractions cause intermittent dysphagia and severe non-cardiac chest pain, reflecting extreme muscular hypertrophy of the tubular esophagus.",
+      "say": "Jackhammer esophagus is a profound state of hypercontractility characterized by excessively vigorous smooth muscle peristalsis. The diagnosis is confirmed on high-resolution manometry when at least 20 percent of test swallows exhibit a distal contractile integral exceeding 8000 mmHg-s-cm, in the presence of normal lower oesophageal sphincter relaxation. Repetitive prolonged multi-peaked contractions cause intermittent dysphagia and severe non-cardiac chest pain, reflecting extreme muscular hypertrophy of the tubular esophagus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Jackhammer Esophagus",
+          "Distal Esophageal Spasm"
+        ],
+        "rows": [
+          [
+            "Distal Contractile Integral (DCI)",
+            "> 8000 mmHg-s-cm in >= 20% swallows",
+            "Normal or mildly elevated (< 8000)"
+          ],
+          [
+            "Distal Latency",
+            "Normal (>= 4.5 seconds)",
+            "Shortened (< 4.5 seconds) in >= 20%"
+          ],
+          [
+            "LES Relaxation (IRP)",
+            "Normal median IRP",
+            "Normal median IRP"
+          ],
+          [
+            "Primary Symptom",
+            "Dysphagia and severe chest pain",
+            "Severe retrosternal non-cardiac pain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Esophagogastric junction outflow obstruction** is identified when high-resolution manometry reveals an elevated median integrated relaxation pressure alongside **preserved peristalsis** that fails to meet full criteria for achalasia. Because elevated junctional pressure can arise from mechanical compression, strictures, hiatal hernia, or early occult achalasia, diagnostic evaluation mandates barium esophagography and endoscopic ultrasound. Timed barium swallow confirms true functional delay before considering invasive lower sphincter interventions.",
+      "say": "Esophagogastric junction outflow obstruction is identified when high-resolution manometry reveals an elevated median integrated relaxation pressure alongside preserved peristalsis that fails to meet full criteria for achalasia. Because elevated junctional pressure can arise from mechanical compression, strictures, hiatal hernia, or early occult achalasia, diagnostic evaluation mandates barium esophagography and endoscopic ultrasound. Timed barium swallow confirms true functional delay before considering invasive lower sphincter interventions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Elevated median IRP on HRM"
+          },
+          {
+            "id": "b",
+            "label": "Preserved peristalsis (not achalasia)"
+          },
+          {
+            "id": "c",
+            "label": "Endoscopy and cross-sectional imaging"
+          },
+          {
+            "id": "d",
+            "label": "Rule out malignancy, stricture, or pseudoachalasia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "manometric finding"
+          ],
+          [
+            "b",
+            "c",
+            "exclude structural obstruction"
+          ],
+          [
+            "c",
+            "d",
+            "timed barium swallow verification"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Chagas disease** represents an endemic parasitic infection caused by Trypanosoma cruzi that serves as the classical infectious cause of secondary achalasia. Chronic infection leads to autoimmune, parasite-driven inflammatory destruction of postganglionic parasympathetic neurons in the intramural **Auerbach myenteric plexus**. Loss of inhibitory nitric oxide and VIP synthesis results in uninhibited basal sphincter tone, aperistalsis, severe megaesophagus, and concurrent megacolon, pathologically mimicking idiopathic achalasia.",
+      "say": "Chagas disease represents an endemic parasitic infection caused by Trypanosoma cruzi that serves as the classical infectious cause of secondary achalasia. Chronic infection leads to autoimmune, parasite-driven inflammatory destruction of postganglionic parasympathetic neurons in the intramural Auerbach myenteric plexus. Loss of inhibitory nitric oxide and VIP synthesis results in uninhibited basal sphincter tone, aperistalsis, severe megaesophagus, and concurrent megacolon, pathologically mimicking idiopathic achalasia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Idiopathic Achalasia",
+          "points": [
+            "Autoimmune destruction of myenteric inhibitory neurons",
+            "Isolated to oesophagus",
+            "Genetic HLA association (DQB1*0602)",
+            "No concurrent colonic or cardiac dilatation"
+          ]
+        },
+        "right": {
+          "title": "Chagasic Megaesophagus",
+          "points": [
+            "Trypanosoma cruzi infection (kissing bug vector)",
+            "Extensive Auerbach myenteric plexus lysis",
+            "Multisystem smooth muscle dilation",
+            "Associated megacolon and dilated cardiomyopathy"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

@@ -1,0 +1,275 @@
+{
+  "v": 1,
+  "module": "sgi-microscopic-colitis-anorectal",
+  "subject": "ss-gastroenterology",
+  "title": "Microscopic Colitis and Anorectal Disorders",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Microscopic colitis** is an established cause of chronic, watery non-bloody diarrhoea in middle-aged and elderly individuals, predominantly affecting females. It is classified into two primary histological subtypes: **collagenous colitis** and **lymphocytic colitis**. Colonoscopy characteristically reveals endoscopically **normal mucosal appearance** or mild non-specific erythema, emphasizing that definitive diagnosis requires systematic stepped colonoscopic biopsies across both the left and right colon.",
+      "say": "Microscopic colitis is an established cause of chronic, watery non-bloody diarrhoea in middle-aged and elderly individuals, predominantly affecting females. It is classified into two primary histological subtypes: collagenous colitis and lymphocytic colitis. Colonoscopy characteristically reveals endoscopically normal mucosal appearance or mild non-specific erythema, emphasizing that definitive diagnosis requires systematic stepped colonoscopic biopsies across both the left and right colon.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Collagenous Colitis",
+          "Lymphocytic Colitis"
+        ],
+        "rows": [
+          [
+            "Endoscopic Appearance",
+            "Normal or pale, glistening mucosa",
+            "Normal or mildly patchy mucosal erythema"
+          ],
+          [
+            "Subepithelial collagen band",
+            "Thickened subepithelial band >= 10 microns",
+            "Normal subepithelial thickness (< 5 microns)"
+          ],
+          [
+            "Intraepithelial lymphocytes",
+            "May be mildly elevated",
+            "Markedly elevated (>= 20 IELs per 100 enterocytes)"
+          ],
+          [
+            "Biopsy requirement",
+            "Stepped biopsies of right and left colon",
+            "Stepped biopsies of right and left colon"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The diagnostic histological criterion for **collagenous colitis** is the presence of a continuous thickened **subepithelial collagen band** measuring at least **10** micrometers (**microns**) in depth immediately beneath the surface enterocytes, visualized with Masson trichrome staining. In contrast, **lymphocytic colitis** is diagnosed by an intraepithelial lymphocyte count of at least **20** **intraepithelial lymphocytes** per **100** surface epithelial cells, accompanied by lamina propria chronic mononuclear infiltration.",
+      "say": "The diagnostic histological criterion for collagenous colitis is the presence of a continuous thickened subepithelial collagen band measuring at least 10 micrometers, or microns, in depth immediately beneath the surface enterocytes, visualized with Masson trichrome staining. In contrast, lymphocytic colitis is diagnosed by an intraepithelial lymphocyte count of at least 20 intraepithelial lymphocytes per 100 surface epithelial cells, accompanied by lamina propria chronic mononuclear infiltration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Collagenous Colitis Biopsy",
+          "points": [
+            "Masson trichrome stains collagen band blue/green",
+            "Subepithelial band >= 10 microns thickness",
+            "Surface epithelial sloughing (ragged appearance)",
+            "Preserved crypt architecture without architectural distortion"
+          ]
+        },
+        "right": {
+          "title": "Lymphocytic Colitis Biopsy",
+          "points": [
+            "Surface enterocyte intraepithelial lymphocytosis",
+            ">= 20 IELs per 100 surface epithelial cells",
+            "Dense lamina propria plasma cell infiltration",
+            "Collagen band remains thin (< 5 microns)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For both collagenous and lymphocytic colitis, oral **budesonide** is the established first-line evidence-based pharmacotherapy for inducing clinical remission. Administered at a dose of **9** mg once daily for an initial course of **8** weeks, budesonide achieves clinical response rates exceeding eighty percent. Its high efficacy and favorable safety profile stem from extensive hepatic first-pass metabolism exceeding ninety percent, which drastically limits systemic corticosteroid bioavailability and side effects.",
+      "say": "For both collagenous and lymphocytic colitis, oral budesonide is the established first-line evidence-based pharmacotherapy for inducing clinical remission. Administered at a dose of 9 mg once daily for an initial course of 8 weeks, budesonide achieves clinical response rates exceeding eighty percent. Its high efficacy and favorable safety profile stem from extensive hepatic first-pass metabolism exceeding ninety percent, which drastically limits systemic corticosteroid bioavailability and side effects.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Histological diagnosis of collagenous or lymphocytic colitis"
+          },
+          {
+            "id": "b",
+            "label": "Oral budesonide 9 mg once daily for 8 weeks"
+          },
+          {
+            "id": "c",
+            "label": "Taper by 3 mg increments every 2 to 4 weeks"
+          },
+          {
+            "id": "d",
+            "label": "Maintenance low-dose budesonide (3 to 6 mg daily) if relapse occurs"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "first-line therapy indicated"
+          ],
+          [
+            "b",
+            "c",
+            "complete clinical response"
+          ],
+          [
+            "c",
+            "d",
+            "recurrence upon cessation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A critical step in the clinical evaluation of microscopic colitis is identifying and discontinuing potential culprit medications. Well-established pharmacological triggers include **proton pump inhibitors** (such as lansoprazole and omeprazole), **nonsteroidal anti-inflammatory drugs**, selective serotonin reuptake inhibitors, and ranitidine. Eliminating these offending drugs can resolve chronic watery diarrhoea and induce histological normalization without requiring prolonged steroid therapy.",
+      "say": "A critical step in the clinical evaluation of microscopic colitis is identifying and discontinuing potential culprit medications. Well-established pharmacological triggers include proton pump inhibitors like lansoprazole and omeprazole, nonsteroidal anti-inflammatory drugs, selective serotonin reuptake inhibitors, and ranitidine. Eliminating these offending drugs can resolve chronic watery diarrhoea and induce histological normalization without requiring prolonged steroid therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Class",
+          "High-Risk Specific Agents",
+          "Mechanism of Injury"
+        ],
+        "rows": [
+          [
+            "Proton Pump Inhibitors (PPIs)",
+            "Lansoprazole, Omeprazole",
+            "Alters mucosal barrier permeability and tight junctions"
+          ],
+          [
+            "NSAIDs",
+            "Ibuprofen, Diclofenac, Naproxen",
+            "Mucosal prostaglandin depletion and epithelial injury"
+          ],
+          [
+            "SSRIs",
+            "Sertraline, Citalopram",
+            "Alters intestinal serotonin signaling and fluid secretion"
+          ],
+          [
+            "Others",
+            "Acarbose, Ticlopidine, Statins",
+            "Immune dysregulation in susceptible hosts"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute and chronic **anal fissures** are painful linear tears in the distal squamous anoderm extending below the **dentate line**. More than ninety percent of primary fissures occur strictly in the **posterior midline**, where the external anal sphincter provides poor muscular support and anoderm microvascular perfusion is poorest. An acute or chronic fissure occurring in an atypical off-midline lateral location must alert the clinician to search for secondary etiologies, including Crohn disease, tuberculosis, syphilis, or HIV.",
+      "say": "Acute and chronic anal fissures are painful linear tears in the distal squamous anoderm extending below the dentate line. More than ninety percent of primary fissures occur strictly in the posterior midline, where the external anal sphincter provides poor muscular support and anoderm microvascular perfusion is poorest. An acute or chronic fissure occurring in an atypical off-midline lateral location must alert the clinician to search for secondary etiologies, including Crohn disease, tuberculosis, syphilis, or HIV.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Anal Fissure",
+          "points": [
+            "Location: Posterior midline (> 90%) or anterior midline (10%)",
+            "Pathophysiology: Hard stool trauma and internal sphincter spasm",
+            "Ischaemia: Focal hypoperfusion at posterior midline anoderm",
+            "Management: Stool softeners, topical diltiazem/GTN"
+          ]
+        },
+        "right": {
+          "title": "Secondary Atypical Fissure",
+          "points": [
+            "Location: Lateral, multiple, or off-midline positions",
+            "Pathophysiology: Underlying systemic or infectious pathology",
+            "Etiologies: Crohn disease, tuberculosis, anal cancer, HIV",
+            "Management: Treat underlying systemic disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "First-line conservative medical therapy for chronic anal fissures aims to relieve internal anal sphincter hypertonicity and restore local anoderm blood flow, termed chemical sphincterotomy. This is achieved using topical vasodilators: **topical diltiazem** **2%** ointment or **topical glyceryl trinitrate** (GTN **0.2%** to **0.4%**) applied to the anal verge twice daily for **6** to **8** weeks. Diltiazem is frequently preferred due to a significantly lower incidence of limiting vascular headaches compared to nitrates.",
+      "say": "First-line conservative medical therapy for chronic anal fissures aims to relieve internal anal sphincter hypertonicity and restore local anoderm blood flow, termed chemical sphincterotomy. This is achieved using topical vasodilators: topical diltiazem 2 percent ointment or topical glyceryl trinitrate (GTN 0.2 to 0.4 percent) applied to the anal verge twice daily for 6 to 8 weeks. Diltiazem is frequently preferred due to a significantly lower incidence of limiting vascular headaches compared to nitrates.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological Agent",
+          "Dosing Protocol",
+          "Mechanism",
+          "Limiting Side Effect"
+        ],
+        "rows": [
+          [
+            "Topical Diltiazem 2%",
+            "Apply twice daily for 6 to 8 weeks",
+            "Blocks smooth muscle L-type calcium channels",
+            "Mild local perianal pruritus"
+          ],
+          [
+            "Topical GTN 0.2% - 0.4%",
+            "Apply twice daily for 6 to 8 weeks",
+            "Nitric oxide donor induces smooth muscle relaxation",
+            "Severe vascular headache (~30%)"
+          ],
+          [
+            "Botulinum Toxin Injection",
+            "20 to 50 units into internal sphincter",
+            "Inhibits presynaptic acetylcholine release",
+            "Transient flatus incontinence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For chronic anal fissures refractory to topical chemical sphincterotomy, **lateral internal sphincterotomy** remains the definitive surgical gold standard. By dividing the lower third to half of the hypertrophied internal anal sphincter muscle fibres, LIS permanently reduces resting anal canal pressures and achieves healing rates exceeding ninety-five percent. However, patients must be carefully counseled regarding the permanent risk of minor **flatus incontinence** or liquid stool soiling, which occurs in five to ten percent.",
+      "say": "For chronic anal fissures refractory to topical chemical sphincterotomy, lateral internal sphincterotomy remains the definitive surgical gold standard. By dividing the lower third to half of the hypertrophied internal anal sphincter muscle fibres, LIS permanently reduces resting anal canal pressures and achieves healing rates exceeding ninety-five percent. However, patients must be carefully counseled regarding the permanent risk of minor flatus incontinence or liquid stool soiling, which occurs in five to ten percent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic fissure fails 8-week topical diltiazem"
+          },
+          {
+            "id": "b",
+            "label": "Perform lateral internal sphincterotomy (open or closed)"
+          },
+          {
+            "id": "c",
+            "label": "Permanent reduction in resting hypertonicity and ischemia"
+          },
+          {
+            "id": "d",
+            "label": "Healing in > 95%; 5% to 10% minor flatus incontinence risk"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "refractory symptoms and spasm"
+          ],
+          [
+            "b",
+            "c",
+            "controlled division of internal sphincter"
+          ],
+          [
+            "c",
+            "d",
+            "durable fissure epithelialization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The anatomical trajectory of a cryptoglandular **anal fistula** can be accurately predicted using **Goodsall rule**. A transverse line is drawn bisecting the anal verge. Fistulae with external cutaneous openings located anterior to this transverse line track in a direct radial path straight into the anal canal. Conversely, fistulae with external openings located **posterior** to the transverse line follow a curved, arched trajectory to enter the anal canal at the posterior midline.",
+      "say": "The anatomical trajectory of a cryptoglandular anal fistula can be accurately predicted using Goodsall rule. A transverse line is drawn bisecting the anal verge. Fistulae with external cutaneous openings located anterior to this transverse line track in a direct radial path straight into the anal canal. Conversely, fistulae with external openings located posterior to the transverse line follow a curved, arched trajectory to enter the anal canal at the posterior midline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anterior External Openings",
+          "points": [
+            "Position: Anterior to the transverse bisecting line",
+            "Trajectory: Straight radial course into anal canal",
+            "Internal opening: Direct radial position at dentate line",
+            "Exception: Openings > 3 cm from verge curve to posterior midline"
+          ]
+        },
+        "right": {
+          "title": "Posterior External Openings",
+          "points": [
+            "Position: Posterior to the transverse bisecting line",
+            "Trajectory: Curved, horseshoe-like arched path",
+            "Internal opening: Enters anal canal at the posterior midline",
+            "Clinical relevance: Critical for fistulotomy and seton placement"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

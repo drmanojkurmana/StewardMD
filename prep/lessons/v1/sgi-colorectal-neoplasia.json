@@ -1,0 +1,303 @@
+{
+  "v": 1,
+  "module": "sgi-colorectal-neoplasia",
+  "subject": "ss-gastroenterology",
+  "title": "Colorectal Polyps, Hereditary Syndromes and Screening",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The classical adenoma-carcinoma sequence, or chromosomal instability pathway, causes approximately eighty percent of sporadic colorectal cancers. Driven by the orderly sequential accumulation of somatic mutations, the initiation event is the biallelic inactivation of the **adenomatous polyposis coli** tumor suppressor gene located on chromosome **5**q21. Loss of APC impairs beta-catenin degradation, leading to nuclear accumulation and constitutive activation of c-MYC and cyclin D1.",
+      "say": "The classical adenoma-carcinoma sequence, or chromosomal instability pathway, causes approximately eighty percent of sporadic colorectal cancers. Driven by the orderly sequential accumulation of somatic mutations, the initiation event is the biallelic inactivation of the adenomatous polyposis coli tumor suppressor gene located on chromosome 5q21. Loss of APC impairs beta-catenin degradation, leading to nuclear accumulation and constitutive activation of c-MYC and cyclin D1.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Biallelic APC mutation on 5q21 (adenoma initiation)"
+          },
+          {
+            "id": "b",
+            "label": "Activating KRAS mutation on 12p12 (polyp growth)"
+          },
+          {
+            "id": "c",
+            "label": "Loss of 18q SMAD4 / DPC4 (tubulovillous progression)"
+          },
+          {
+            "id": "d",
+            "label": "Inactivation of TP53 on 17p13 (invasive adenocarcinoma)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "early adenoma formation"
+          ],
+          [
+            "b",
+            "c",
+            "intermediate adenoma dysplasia"
+          ],
+          [
+            "c",
+            "d",
+            "malignant conversion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The serrated neoplasia pathway accounts for fifteen to twenty percent of colorectal cancers, originating from sessile serrated lesions predominantly located in the right colon. These lesions are characterized by early activating **BRAF** mutations, specifically the V600E substitution. Subsequent extensive aberrant hypermethylation of promoter CpG islands, designated the **CpG island methylator phenotype**, silences the DNA mismatch repair gene **MLH1**, precipitating high microsatellite instability (MSI-H) and rapid carcinogenesis.",
+      "say": "The serrated neoplasia pathway accounts for fifteen to twenty percent of colorectal cancers, originating from sessile serrated lesions predominantly located in the right colon. These lesions are characterized by early activating BRAF mutations, specifically the V600E substitution. Subsequent extensive aberrant hypermethylation of promoter CpG islands, designated the CpG island methylator phenotype, silences the DNA mismatch repair gene MLH1, precipitating high microsatellite instability and rapid carcinogenesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Activating BRAF V600E mutation"
+          },
+          {
+            "id": "b",
+            "label": "Sessile serrated lesion with boot-shaped crypts"
+          },
+          {
+            "id": "c",
+            "label": "CIMP hypermethylation silences MLH1 promoter"
+          },
+          {
+            "id": "d",
+            "label": "MSI-H serrated colorectal adenocarcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "serrated architectural remodelling"
+          ],
+          [
+            "b",
+            "c",
+            "epigenetic silencing"
+          ],
+          [
+            "c",
+            "d",
+            "loss of mismatch repair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Lynch syndrome**, or hereditary non-polyposis colorectal cancer, is an autosomal dominant condition caused by germline mutations in **DNA mismatch repair** genes. The primary genes involved include **MLH1**, **MSH2**, **MSH6**, and **PMS2**, as well as EPCAM deletions that cause epigenetic silencing of MSH2. Defective mismatch repair prevents the correction of replication slippage errors, causing high microsatellite instability and predisposing to right-sided colorectal, endometrial, ovarian, and gastric carcinomas.",
+      "say": "Lynch syndrome, or hereditary non-polyposis colorectal cancer, is an autosomal dominant condition caused by germline mutations in DNA mismatch repair genes. The primary genes involved include MLH1, MSH2, MSH6, and PMS2, as well as EPCAM deletions that cause epigenetic silencing of MSH2. Defective mismatch repair prevents the correction of replication slippage errors, causing high microsatellite instability and predisposing to right-sided colorectal, endometrial, ovarian, and gastric carcinomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "MMR Gene",
+          "Relative Prevalence",
+          "Associated Cancer Risks"
+        ],
+        "rows": [
+          [
+            "MLH1 / MSH2",
+            "~80% of Lynch syndrome",
+            "Highest lifetime risk of CRC (40% to 60%) and endometrial"
+          ],
+          [
+            "MSH6",
+            "~10% to 15%",
+            "Lower CRC risk; higher lifetime risk of endometrial cancer"
+          ],
+          [
+            "PMS2",
+            "~5%",
+            "Attenuated CRC penetrance (15% to 20% lifetime risk)"
+          ],
+          [
+            "EPCAM",
+            "~1% to 3%",
+            "Deletions cause hypermethylation silencing of adjacent MSH2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical identification of families with suspected Lynch syndrome uses the **Amsterdam II criteria**, encapsulated by the **3-2-1** rule: at least **3** relatives with histologically confirmed Lynch-associated cancers, spanning at least **2** successive generations, with at least **1** case diagnosed before age **50** years. Furthermore, one affected individual must be a first-degree relative of the other two, familial adenomatous polyposis must be ruled out, and tumors must be verified pathologically.",
+      "say": "Clinical identification of families with suspected Lynch syndrome uses the Amsterdam II criteria, encapsulated by the 3-2-1 rule: at least 3 relatives with histologically confirmed Lynch-associated cancers, spanning at least 2 successive generations, with at least 1 case diagnosed before age 50 years. Furthermore, one affected individual must be a first-degree relative of the other two, familial adenomatous polyposis must be ruled out, and tumors must be verified pathologically.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": ">= 3 relatives with Lynch-associated cancers"
+          },
+          {
+            "id": "b",
+            "label": "Spanning >= 2 successive generations"
+          },
+          {
+            "id": "c",
+            "label": ">= 1 relative diagnosed before age 50 years"
+          },
+          {
+            "id": "d",
+            "label": "Amsterdam II criteria met -> Germline genetic testing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "first-degree kinship link"
+          ],
+          [
+            "b",
+            "c",
+            "vertical generational transmission"
+          ],
+          [
+            "c",
+            "d",
+            "FAP excluded and verified"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classical **familial adenomatous polyposis** is an autosomal dominant syndrome resulting from germline mutations in the APC gene on chromosome 5q21. It is defined clinically by the development of hundreds to thousands of colorectal adenomatous polyps, traditionally exceeding a diagnostic threshold of at least **100** adenomas. Without prophylactic surgical intervention, the lifetime risk of developing invasive colorectal adenocarcinoma approaches **100%** by the fourth to fifth decade of life.",
+      "say": "Classical familial adenomatous polyposis is an autosomal dominant syndrome resulting from germline mutations in the APC gene on chromosome 5q21. It is defined clinically by the development of hundreds to thousands of colorectal adenomatous polyps, traditionally exceeding a diagnostic threshold of at least 100 adenomas. Without prophylactic surgical intervention, the lifetime risk of developing invasive colorectal adenocarcinoma approaches 100 percent by the fourth to fifth decade of life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical FAP",
+          "points": [
+            "Gene: Germline APC mutation (5q21)",
+            "Polyp burden: > 100 adenomatous polyps (often > 1000)",
+            "Onset: Second to third decade of life",
+            "Cancer penetrance: 100% by age 40 without colectomy"
+          ]
+        },
+        "right": {
+          "title": "Attenuated FAP (AFAP)",
+          "points": [
+            "Gene: APC mutations at 5' or 3' ends / MUTYH biallelic",
+            "Polyp burden: 10 to 99 adenomatous polyps",
+            "Onset: Later onset (fourth to fifth decade)",
+            "Cancer penetrance: Elevated (~70%), delayed presentation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Colorectal surveillance protocols in confirmed Lynch syndrome carriers mandate regular high-quality colonoscopy with targeted biopsies. High-level consensus guidelines recommend initiating screening colonoscopy between the ages of **20** and **25** years, or 2 to 5 years earlier than the youngest affected family member. Surveillance must be repeated at strict intervals of every **1** to **2** years due to accelerated adenoma-carcinoma dwell times driven by defective DNA mismatch repair.",
+      "say": "Colorectal surveillance protocols in confirmed Lynch syndrome carriers mandate regular high-quality colonoscopy with targeted biopsies. High-level consensus guidelines recommend initiating screening colonoscopy between the ages of 20 and 25 years, or 2 to 5 years earlier than the youngest affected family member. Surveillance must be repeated at strict intervals of every 1 to 2 years due to accelerated adenoma-carcinoma dwell times driven by defective DNA mismatch repair.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hereditary Syndrome",
+          "Surveillance Modality",
+          "Starting Age",
+          "Surveillance Interval"
+        ],
+        "rows": [
+          [
+            "Lynch Syndrome (MLH1/MSH2)",
+            "High-definition colonoscopy",
+            "Age 20 to 25 years",
+            "Every 1 to 2 years"
+          ],
+          [
+            "Lynch Syndrome (MSH6/PMS2)",
+            "High-definition colonoscopy",
+            "Age 30 to 35 years",
+            "Every 1 to 3 years"
+          ],
+          [
+            "Classical FAP",
+            "Flexible sigmoidoscopy / colonoscopy",
+            "Age 10 to 12 years",
+            "Every 1 year until colectomy"
+          ],
+          [
+            "Attenuated FAP",
+            "Complete colonoscopy",
+            "Age 18 to 20 years",
+            "Every 1 to 2 years"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Peutz-Jeghers syndrome is an autosomal dominant hamartomatous polyposis condition caused by germline inactivating mutations in the serine/threonine kinase gene **STK11** (also designated **LKB1**) located on chromosome 19p13.3. Patients develop distinctive mucocutaneous melanin pigmentation on the lips, buccal mucosa, and digits. Gastrointestinal polyps are **hamartomatous**, characterized histopathologically by arborizing smooth muscle proliferation extending into the mucosal lamina propria.",
+      "say": "Peutz-Jeghers syndrome is an autosomal dominant hamartomatous polyposis condition caused by germline inactivating mutations in the serine/threonine kinase gene STK11, also designated LKB1, located on chromosome 19p13.3. Patients develop distinctive mucocutaneous melanin pigmentation on the lips, buccal mucosa, and digits. Gastrointestinal polyps are hamartomatous, characterized histopathologically by arborizing smooth muscle proliferation extending into the mucosal lamina propria.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peutz-Jeghers Syndrome",
+          "points": [
+            "Gene: STK11 / LKB1 (19p13.3)",
+            "Polyp histology: Hamartomas with arborizing smooth muscle",
+            "Mucocutaneous: Hyperpigmented macules on lips and buccal mucosa",
+            "Associated malignancies: Breast, pancreas, GI, ovarian (SCTAT)"
+          ]
+        },
+        "right": {
+          "title": "Juvenile Polyposis Syndrome",
+          "points": [
+            "Gene: SMAD4 or BMPR1A (10q23)",
+            "Polyp histology: Dilated cystic glands with lamina propria edematous expansion",
+            "Mucocutaneous: None",
+            "Associated malignancies: Colorectal and gastric adenocarcinoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For average-risk asymptomatic populations, international guidelines recommend initiating routine **colorectal cancer screening** at age **45** years. The clinical gold standard is **colonoscopy** performed every **10** years. For screening programs utilizing non-invasive modalities, the fecal immunochemical test (**FIT**) is performed **annually**, detecting human globin to trigger diagnostic colonoscopy upon positive findings.",
+      "say": "For average-risk asymptomatic populations, international guidelines recommend initiating routine colorectal cancer screening at age 45 years. The clinical gold standard is colonoscopy performed every 10 years. For screening programs utilizing non-invasive modalities, the fecal immunochemical test is performed annually, detecting human globin to trigger diagnostic colonoscopy upon positive findings.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Screening Strategy",
+          "Testing Modality",
+          "Recommended Frequency",
+          "Action on Positive Test"
+        ],
+        "rows": [
+          [
+            "Structural / Visual",
+            "Colonoscopy",
+            "Every 10 years (starting age 45)",
+            "Polypectomy and surveillance"
+          ],
+          [
+            "Non-Invasive Stool Test",
+            "Fecal Immunochemical Test (FIT)",
+            "Annually",
+            "Mandatory diagnostic colonoscopy"
+          ],
+          [
+            "Stool DNA Co-testing",
+            "sDNA-FIT (multi-target)",
+            "Every 3 years",
+            "Mandatory diagnostic colonoscopy"
+          ],
+          [
+            "Structural Alternative",
+            "CT Colonography / Flex Sig",
+            "Every 5 years",
+            "Follow-up colonoscopy if lesion >= 6 mm"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}
