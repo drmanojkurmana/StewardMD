@@ -5870,6 +5870,7 @@
       kbSearchHTML("kblibQ", "kblib-search", "Search the library", "Disease, symptom or clinical detail", _libState.q) +
       '<div class="kblib-try" id="kblibTry"' + (_libState.q ? ' hidden' : '') + '><span>Try</span>' + ["Meningitis", "Sepsis", "Dengue", "DKA", "Heart failure"].map(function (q) { return '<button type="button" data-kbtry="' + q + '">' + q + '</button>'; }).join("") + '</div>' +
       kbPersonalHTML(entries) +
+      ((window.SMD_IMGLIB && window.SMD_IMGLIB.enabled()) ? '<button type="button" class="kblib-imglib" id="kblibImgLib"><span class="kblib-imglib-t">Image Library</span><small>Every captioned image in the app, by system</small></button>' : '') +
       '<div class="kblib-discovery" id="kblibDiscovery">' +
       '<div class="kblib-section-heading"><h2>Explore a branch</h2><span>' + branches.length + ' branches</span></div><div class="kblib-tiles">' + featured.map(tile).join("") + '</div>' +
       '<details class="kblib-all-branches"><summary>See all medical branches</summary><div class="kblib-tiles">' + branches.filter(function (b) { return featured.indexOf(b) < 0; }).map(tile).join("") + '</div></details></div>' +
@@ -5884,6 +5885,8 @@
         branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div></details>' +
       '<div class="kblib-count" id="kblibCount" role="status"></div><div class="kblib-grid" id="kblibGrid"></div><button type="button" id="kblibMore" class="kblib-more">Show more diseases</button>';
     kbWireLibrary();   // ensure the (delegated) handlers exist
+    var _iglBtn = document.getElementById("kblibImgLib");
+    if (_iglBtn) _iglBtn.addEventListener("click", function () { try { if (window.SMD_IMGLIB) window.SMD_IMGLIB.open({}); } catch (e) {} });
     kbPaintLibrary();  // fill the grid from current filters/search
     // No per-element addEventListener here: search/filter/card events are handled by ONE
     // delegated listener (kbWireLibrary) so they survive the modal re-rendering .sbref-sec.
