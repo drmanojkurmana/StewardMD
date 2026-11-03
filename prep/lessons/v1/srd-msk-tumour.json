@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "srd-msk-tumour",
+ "title": "Bone and soft-tissue tumours",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Benign cortical bone-forming lesions produce intense pain that typically worsens at night. An **osteoid osteoma** measures under 1.5 cm and displays a well-demarcated radiolucent **nidus** surrounded by exuberant fusiform reactive cortical sclerosis, showing dramatic clinical relief following prostaglandin inhibition with aspirin.",
+   "say": "Benign cortical bone-forming lesions produce intense pain that typically worsens at night. An osteoid osteoma measures under 1.5 centimetres and displays a well-demarcated radiolucent nidus surrounded by exuberant fusiform reactive cortical sclerosis, showing dramatic clinical relief following prostaglandin inhibition with aspirin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Osteoid Osteoma",
+     "points": [
+      "Nidus diameter under 1.5 cm",
+      "Exuberant reactive cortical sclerosis",
+      "Relieved dramatically by aspirin",
+      "Treated with CT-guided radiofrequency ablation"
+     ]
+    },
+    "right": {
+     "title": "Osteoblastoma",
+     "points": [
+      "Nidus diameter exceeds 2.0 cm",
+      "Less surrounding reactive bone sclerosis",
+      "Predilection for posterior spinal elements",
+      "Requires surgical curettage or resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Primary bone malignancies in adolescents arise characteristically at sites of rapid skeletal growth. Conventional intramedullary **osteosarcoma** arises in the metaphysis around the knee, exhibiting cloud-like osteoid matrix mineralization, aggressive bone destruction, and periosteal elevation forming **Codman triangle** and a sunburst pattern.",
+   "say": "Primary bone malignancies in adolescents arise characteristically at sites of rapid skeletal growth. Conventional intramedullary osteosarcoma arises in the metaphysis around the knee, exhibiting cloud-like osteoid matrix mineralization, aggressive bone destruction, and periosteal elevation forming Codman triangle and a sunburst pattern.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-osteosarcoma.webp",
+    "alt": "Radiograph of the distal femur showing aggressive osteosarcoma with cloud-like osteoid matrix and Codman triangle.",
+    "caption": "Osteosarcoma: dense osteoid matrix, cortical destruction, and Codman triangle (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Small round blue cell tumours present with aggressive bone destruction mimicking acute osteomyelitis. **Ewing sarcoma** develops in the diaphysis or metadiaphysis of long bones in children, demonstrating a permeative moth-eaten osteolytic pattern, multilayered **onion-skin** periosteal reaction, and a disproportionately large soft-tissue mass.",
+   "say": "Small round blue cell tumours present with aggressive bone destruction mimicking acute osteomyelitis. Ewing sarcoma develops in the diaphysis or metadiaphysis of long bones in children, demonstrating a permeative moth-eaten osteolytic pattern, multilayered onion-skin periosteal reaction, and a disproportionately large soft-tissue mass.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diaphyseal permeation"
+     },
+     {
+      "id": "b",
+      "label": "Subperiosteal tumour"
+     },
+     {
+      "id": "c",
+      "label": "Onion-skin lamellation"
+     },
+     {
+      "id": "d",
+      "label": "Large soft tissue mass"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "cortical breach"
+     ],
+     [
+      "b",
+      "c",
+      "periosteal stress"
+     ],
+     [
+      "c",
+      "d",
+      "extraosseous extension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Epiphyseal lesions in young adults aged 20 to 40 after growth plate fusion require careful differentiation. A **giant cell tumour** of bone presents as an eccentric, non-sclerotic purely osteolytic mass abutting the articular subchondral plate around the knee, displaying a **soap-bubble** appearance on plain radiography without matrix calcification.",
+   "say": "Epiphyseal lesions in young adults aged 20 to 40 after growth plate fusion require careful differentiation. A giant cell tumour of bone presents as an eccentric, non-sclerotic purely osteolytic mass abutting the articular subchondral plate around the knee, displaying a soap-bubble appearance on plain radiography without matrix calcification.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-osteoclastoma-giant-cell-tumour.webp",
+    "alt": "Radiograph showing an eccentric expansile soap-bubble lytic lesion in the distal femur abutting the articular cortex.",
+    "caption": "Giant cell tumour: subchondral epiphyseal lytic lesion with soap-bubble appearance (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Expansile pseudotumoural lesions in children contain multiple cavernous blood spaces. An **aneurysmal bone cyst** presents as an eccentric, expansile multiloculated osteolytic lesion with a paper-thin cortical shell, demonstrating characteristic multiple **fluid-fluid levels** on magnetic resonance imaging representing sedimented blood products.",
+   "say": "Expansile pseudotumoural lesions in children contain multiple cavernous blood spaces. An aneurysmal bone cyst presents as an eccentric, expansile multiloculated osteolytic lesion with a paper-thin cortical shell, demonstrating characteristic multiple fluid-fluid levels on magnetic resonance imaging representing sedimented blood products.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aneurysmal-bone-cyst-fig1.webp",
+    "alt": "Magnetic resonance imaging showing multilocular cystic lesion with characteristic fluid-fluid levels in an aneurysmal bone cyst.",
+    "caption": "Aneurysmal bone cyst: multilocular expansion with fluid-fluid sedimentation levels (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Hyaline cartilage lesions display diagnostic mineralization patterns. An **enchondroma** is a benign medullary hyaline cartilage tumour of tubular bones, characterised by well-circumscribed punctate or **rings-and-arcs** calcifications of chondroid matrix, absence of deep endosteal scalloping over 50%, and no soft-tissue mass on radiographs or computed tomography.",
+   "say": "Hyaline cartilage lesions display diagnostic mineralization patterns. An enchondroma is a benign medullary hyaline cartilage tumour of tubular bones, characterised by well-circumscribed punctate or rings-and-arcs calcifications of chondroid matrix, absence of deep endosteal scalloping over 50%, and no soft-tissue mass on radiographs or computed tomography.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Benign Enchondroma",
+     "Low-Grade Chondrosarcoma"
+    ],
+    "rows": [
+     [
+      "Pain",
+      "Asymptomatic (incidental)",
+      "Persistent dull achy pain"
+     ],
+     [
+      "Endosteal scalloping",
+      "Shallow (< two thirds cortical thickness)",
+      "Deep (> two thirds cortical thickness)"
+     ],
+     [
+      "Periosteal reaction",
+      "Absent",
+      "Cortical thickening / periosteal reaction"
+     ],
+     [
+      "Soft tissue mass",
+      "Absent",
+      "Extra-cortical soft tissue component"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing malignant cartilaginous lesions from enchondromas is vital in adult patients. A conventional **chondrosarcoma** exhibits aggressive features including deep **endosteal scalloping** exceeding two-thirds of the cortical thickness, cortical breakthrough, extensive periosteal reaction, and associated soft-tissue extension beyond the bony margins.",
+   "say": "Distinguishing malignant cartilaginous lesions from enchondromas is vital in adult patients. A conventional chondrosarcoma exhibits aggressive features including deep endosteal scalloping exceeding two-thirds of the cortical thickness, cortical breakthrough, extensive periosteal reaction, and associated soft-tissue extension beyond the bony margins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chondrosarcoma",
+     "points": [
+      "Deep endosteal scalloping > 2/3 cortex",
+      "Cortical breakthrough and soft-tissue mass",
+      "Pathological pain in adults",
+      "Extensive chondroid calcification"
+     ]
+    },
+    "right": {
+     "title": "Enchondroma",
+     "points": [
+      "Superficial or absent scalloping",
+      "Intact bone cortex without soft-tissue mass",
+      "Painless incidental finding",
+      "Confined to medullary cavity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Developmental fibrous cortical lesions are exceptionally common in paediatric patients. A **non-ossifying fibroma** is a benign, eccentric osteolytic lesion located in the metaphysis of growing long bones, featuring a sharply defined **scalloped sclerotic border** that progressively ossifies as skeletal maturity approaches.",
+   "say": "Developmental fibrous cortical lesions are exceptionally common in paediatric patients. A non-ossifying fibroma is a benign, eccentric osteolytic lesion located in the metaphysis of growing long bones, featuring a sharply defined scalloped sclerotic border that progressively ossifies as skeletal maturity approaches.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lesion Type",
+     "Size Cut-off",
+     "Location",
+     "Natural History"
+    ],
+    "rows": [
+     [
+      "Fibrous cortical defect",
+      "< 2.0 cm",
+      "Metaphyseal cortex (knee)",
+      "Spontaneous regression"
+     ],
+     [
+      "Non-ossifying fibroma",
+      "> 2.0 cm",
+      "Eccentric intramedullary",
+      "Progressive sclerosis from periphery"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Musculoskeletal Radiology (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 MSK Tumours)"
+ ]
+}
