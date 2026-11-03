@@ -9,34 +9,11 @@
    "tx": "The **Vaughan Williams** classification categorizes antiarrhythmics into four primary functional classes. Class 1 agents block voltage-gated sodium channels, subdivided into 1a, 1b, and 1c. Class 2 agents are beta-blockers that blunt sympathetic drive. Class 3 agents are **potassium channel blockers** that prolong repolarization. Class 4 agents are nondihydropyridine calcium channel blockers that depress sinoatrial and atrioventricular nodal conduction.",
    "say": "The Vaughan Williams classification categorizes antiarrhythmics into four primary functional classes. Class 1 agents block voltage-gated sodium channels and are subdivided into 1a, 1b, and 1c. Class 2 agents are beta-blockers that blunt sympathetic drive. Class 3 agents are potassium channel blockers that prolong cardiac repolarization. Class 4 agents are nondihydropyridine calcium channel blockers that depress sinoatrial and atrioventricular nodal conduction.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Class",
-     "Primary Target",
-     "Key Prototype Drugs"
-    ],
-    "rows": [
-     [
-      "Class 1",
-      "Sodium channels",
-      "Ia quinidine, Ib lidocaine, Ic flecainide"
-     ],
-     [
-      "Class 2",
-      "Beta-adrenergic receptors",
-      "Metoprolol, carvedilol, bisoprolol"
-     ],
-     [
-      "Class 3",
-      "Potassium channels",
-      "Amiodarone, sotalol, dofetilide"
-     ],
-     [
-      "Class 4",
-      "L-type calcium channels",
-      "Verapamil, diltiazem"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Comparison of a ventricular myocyte action potential and a sinoatrial pacemaker potential, with each phase labelled beside the ion current that produces it.",
+    "caption": "Phase 0 sodium current, phase 3 potassium current, and nodal calcium current are the targets of Class I, Class III, and Class IV drugs. Illustration: StewardMD.",
+    "ar": 1.3405
    }
   },
   {
@@ -120,8 +97,8 @@
    }
   },
   {
-   "tx": "**Sotalol** combines nonselective beta-blockade with Class 3 rapid delayed rectifier potassium current inhibition. Crucially, sotalol exhibits **reverse use-dependence**, where potassium channel blockade and action potential prolongation amplify at slower heart rates. Because bradycardia markedly accentuates QT prolongation and provokes torsades de pointes, sotalol mandates in-hospital telemetry initiation for at least 3 days with serial QTc tracking.",
-   "say": "Sotalol combines nonselective beta-blockade with Class 3 rapid delayed rectifier potassium current inhibition. Crucially, sotalol exhibits reverse use-dependence, where potassium channel blockade and action potential prolongation amplify at slower heart rates. Because bradycardia markedly accentuates QT prolongation and provokes torsades de pointes, sotalol mandates in-hospital telemetry initiation for at least 3 days with serial QTc tracking.",
+   "tx": "**Sotalol** combines nonselective beta-blockade with Class 3 rapid delayed rectifier potassium current inhibition. Sotalol has **reverse use-dependence**, so potassium channel blockade and action potential prolongation increase when the heart rate slows. Because bradycardia markedly accentuates QT prolongation and provokes torsades de pointes, sotalol mandates in-hospital telemetry initiation for at least 3 days with serial QTc tracking.",
+   "say": "Sotalol combines nonselective beta-blockade with Class 3 rapid delayed rectifier potassium current inhibition. Sotalol has reverse use-dependence, so potassium channel blockade and action potential prolongation increase when the heart rate slows. Because bradycardia markedly accentuates QT prolongation and provokes torsades de pointes, sotalol mandates in-hospital telemetry initiation for at least 3 days with serial QTc tracking.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -159,8 +136,8 @@
    }
   },
   {
-   "tx": "**Dofetilide** operates as a **pure selective IKr** blocker with negligible adrenergic or sodium channel activity. Because clearance is predominantly renal, dofetilide requires mandatory in-hospital telemetry for at least 72 hours with strict dosage titration based on creatinine clearance. Serial electrocardiograms must verify QTc intervals 2 to 3 hours after each dose. Dofetilide is safe in heart failure with reduced ejection fraction.",
-   "say": "Dofetilide operates as a pure selective IKr blocker with negligible adrenergic or sodium channel activity. Because clearance is predominantly renal, dofetilide requires mandatory in-hospital telemetry for at least 72 hours with strict dosage titration based on creatinine clearance. Serial electrocardiograms must verify QTc intervals 2 to 3 hours after each dose. Dofetilide is safe in heart failure with reduced ejection fraction.",
+   "tx": "**Dofetilide** operates as a **pure selective IKr** blocker with negligible adrenergic or sodium channel activity. Because clearance is predominantly renal, dofetilide requires mandatory in-hospital telemetry for at least 72 hours with strict dosage titration based on creatinine clearance. Check the QTc 2 to 3 hours after each dose, and reduce the dose if it rises more than 15 percent or passes 500 milliseconds. It remains safe in heart failure with reduced ejection fraction.",
+   "say": "Dofetilide operates as a pure selective IKr blocker with negligible adrenergic or sodium channel activity. Because clearance is predominantly renal, dofetilide requires mandatory in-hospital telemetry for at least 72 hours with strict dosage titration based on creatinine clearance. Check the QTc 2 to 3 hours after each dose, and reduce the dose if it rises more than 15 percent or passes 500 milliseconds. It remains safe in heart failure with reduced ejection fraction.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -182,12 +159,12 @@
      [
       "20 to 39 mL/min",
       "125 mcg twice daily",
-      "Reduce dose if QTc increases by more than 15%"
+      "Stop if QTc rises more than 15 percent from baseline"
      ],
      [
       "Less than 20 mL/min",
-      "Contraindicated",
-      "Discontinue if QTc exceeds 500 milliseconds"
+      "Do not start",
+      "Clearance is too low for any dose"
      ]
     ]
    }
@@ -235,23 +212,11 @@
    "tx": "**Ibutilide** is an intravenous **Class III agent** that prolongs myocardial action potential duration through a unique dual mechanism, activating slow inward sodium currents while blocking delayed rectifier potassium currents. Administered as a rapid infusion, ibutilide achieves rapid pharmacological cardioversion of recent-onset atrial flutter and atrial fibrillation. Continuous electrocardiographic monitoring for at least 4 hours after completion is essential to manage potential polymorphic ventricular tachycardia.",
    "say": "Ibutilide is an intravenous Class 3 agent that prolongs myocardial action potential duration through a unique dual mechanism, activating slow inward sodium currents while blocking delayed rectifier potassium currents. Administered as a rapid infusion, ibutilide achieves rapid pharmacological cardioversion of recent-onset atrial flutter and atrial fibrillation. Continuous electrocardiographic monitoring for at least 4 hours after completion is essential to manage potential polymorphic ventricular tachycardia.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Ibutilide Mechanism",
-     "points": [
-      "Activates slow inward sodium current",
-      "Blocks rapid delayed rectifier potassium current",
-      "Rapid IV conversion of atrial flutter"
-     ]
-    },
-    "right": {
-     "title": "Safety and Monitoring",
-     "points": [
-      "4-hour mandatory post-infusion telemetry",
-      "Requires serum potassium and magnesium correction",
-      "Risk of QT prolongation and torsades de pointes"
-     ]
-    }
+    "kind": "image",
+    "src": "v1/lessons/media/sca-antiarrhythmic-drugs-fig1.webp",
+    "alt": "Two ventricular action potential tracings. The dotted tracing stays depolarized for longer, which is prolonged repolarization.",
+    "caption": "Ibutilide prolongs repolarization, risking QT prolongation and torsades. Image: Ksheka, CC BY-SA 3.0, Wikimedia Commons.",
+    "ar": 1.8589
    }
   }
  ],
