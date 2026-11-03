@@ -4665,3 +4665,5 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | son-tissue-agnostic-gen1.webp (R2) | Model shows larotrectinib silencing an NTRK fusion kinase. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | son-trial-design-gen1.webp (R2) | Liver scans show target growth and a new lesion. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | son-tumour-markers-gen1.webp (R2) | Rising CEA aligns with lung and liver metastases. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sca-ventricular-arrhythmias-scd-gen1.webp (R2) | Twisting torsades after prolonged QTc, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| son-net-gen1.webp (R2) | Receptor avid primary with liver and bone spread, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
