@@ -1,138 +1,250 @@
 {
  "v": 1,
  "module": "snp-donor-recipient-evaluation",
- "subject": "ss-nephrology",
- "title": "Donor and recipient evaluation for kidney transplantation",
- "minutes": 6,
+ "title": "Donor and recipient evaluation",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Living donor evaluation confirms that the donor gives **voluntary consent** free of coercion and is medically suitable. Key tests include **measured glomerular filtration rate**, urine protein assessment, blood group and HLA typing, and infection screening. An independent donor advocate is standard practice, and the donor must understand lifelong follow up.",
-   "say": "Living donor evaluation confirms that the donor gives voluntary consent, free of any coercion, and is medically suitable. Key tests include measured glomerular filtration rate, urine protein assessment, blood group and HLA typing, and infection screening. An independent donor advocate is standard practice, and the donor must understand that lifelong follow up is needed.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Domain",
-     "What is checked"
-    ],
-    "rows": [
-     [
-      "Consent",
-      "Free choice, no coercion, independent advocate"
-     ],
-     [
-      "Kidney function",
-      "Measured GFR and urine protein"
-     ],
-     [
-      "Immunology",
-      "ABO group and HLA compatibility"
-     ],
-     [
-      "Safety",
-      "Infection screen and cancer exclusion"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Donor nephrectomy** carries a small risk of perioperative complications and a long-term risk of reduced renal reserve. Donors must be counselled that the remaining kidney usually compensates, but **hypertension** and proteinuria need lifelong monitoring. Indian centres follow the same principles, with NMC and THOTA norms governing the process.",
-   "say": "Donor nephrectomy carries a small risk of perioperative complications and a long-term risk of reduced renal reserve. Donors must be counselled that the remaining kidney usually compensates, but hypertension and proteinuria need lifelong monitoring. Indian centres follow the same principles, with National Medical Commission and Transplantation of Human Organs and Tissues Act norms governing the process.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-donor-recipient-evaluation-fig1.webp",
-    "alt": "Diagram showing a kidney donor post-nephrectomy, with the remaining kidney compensating, and icons for lifelong monitoring of blood pressure and proteinuria.",
-    "caption": "Living kidney donor follow-up: compensation and lifelong monitoring",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Brain death** in deceased donation is confirmed when the **brainstem functions** are irreversibly lost. Under the Transplantation of Human Organs and Tissues Act in India, a certifying board of medical experts, with the donor's underlying cause established and reversible causes excluded, makes the determination. The result is then documented before organ procurement begins.",
-   "say": "Brain death in deceased donation is confirmed when the brainstem functions are irreversibly lost. Under the Transplantation of Human Organs and Tissues Act in India, a certifying board of medical experts makes the determination, after the underlying cause is established and reversible causes are excluded. The result is documented before organ procurement begins.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Establish cause of coma"
-     },
-     {
-      "id": "b",
-      "label": "Exclude reversible causes"
-     },
-     {
-      "id": "c",
-      "label": "Brainstem reflex tests"
-     },
-     {
-      "id": "d",
-      "label": "Certifying board confirms"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Donation after circulatory death** is an alternative pathway where organs are retrieved after cardiac arrest is declared. The **Kidney Donor Profile Index** (KDPI) estimates the relative risk of graft failure from donor characteristics; a higher percentile indicates a poorer expected graft. Delayed graft function, where dialysis is needed within the first week, is more frequent with these kidneys.",
-   "say": "Donation after circulatory death is an alternative pathway where organs are retrieved after cardiac arrest is declared. The Kidney Donor Profile Index estimates the relative risk of graft failure from donor characteristics, and a higher percentile indicates a poorer expected graft. Delayed graft function, where dialysis is needed within the first week, is more frequent with these kidneys.",
+   "tx": "Immunological histocompatibility matching in kidney transplantation evaluates **HLA matching** across classical loci: HLA-A, HLA-B, HLA-C, **HLA-DR**, and **HLA-DQ**. Minimizing human leukocyte antigen mismatches, particularly at the highly immunogenic HLA-DR and HLA-B loci, significantly reduces acute cellular and antibody-mediated allograft rejection episodes.",
+   "say": "Immunological histocompatibility matching in kidney transplantation evaluates HLA matching across classical loci: HLA-A, HLA-B, HLA-C, HLA-DR, and HLA-DQ. Minimizing human leukocyte antigen mismatches, particularly at the highly immunogenic HLA-DR and HLA-B loci, significantly reduces acute cellular and antibody-mediated allograft rejection episodes.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Brain death donor",
+     "title": "High-Impact Loci",
      "points": [
-      "Organs perfused until retrieval",
-      "Generally lower delayed graft function"
+      "HLA-DR matching (highest clinical impact)",
+      "HLA-B matching (second highest impact)",
+      "Significantly delays de novo DSA formation",
+      "Prolongs long-term allograft half-life",
+      "Key criteria: Living kidney donor",
+      "Key criteria: measured GFR"
      ]
     },
     "right": {
-     "title": "Circulatory death donor",
+     "title": "Secondary Loci",
      "points": [
-      "Warm ischaemia before retrieval",
-      "Higher delayed graft function"
+      "HLA-A and HLA-C loci",
+      "HLA-DQ and HLA-DP matching",
+      "Relevant in highly sensitized recipients",
+      "Evaluated via high-resolution molecular typing",
+      "Diagnostic: albuminuria",
+      "Diagnostic: 90"
      ]
     }
    }
   },
   {
-   "tx": "Recipient evaluation looks for **cardiac disease** through screening such as echocardiography and stress testing, along with malignancy and infection checks. **Paired kidney exchange** allows incompatible donor and recipient pairs to swap donors, and **preemptive transplant** is performed before dialysis begins. Transplant from **HCV positive donors** into HCV negative recipients is an option when direct-acting antivirals are available.",
-   "say": "Recipient evaluation looks for cardiac disease through screening such as echocardiography and stress testing, along with malignancy and infection checks. Paired kidney exchange allows incompatible donor and recipient pairs to swap donors, and preemptive transplant is performed before dialysis begins. Transplant from hepatitis C positive donors into negative recipients is an option when direct-acting antivirals are available.",
-   "vis": null
+   "tx": "A positive **complement-dependent cytotoxicity** (**CDC**) crossmatch driven by preformed donor-specific IgG antibodies is an absolute **contraindication** to kidney transplantation. Circulating recipient antibodies bind donor endothelial HLA molecules, activating the classical complement pathway and inducing immediate endothelial thrombosis termed **hyperacute rejection**.",
+   "say": "A positive complement-dependent cytotoxicity crossmatch driven by preformed donor-specific IgG antibodies is an absolute contraindication to kidney transplantation. Circulating recipient antibodies bind donor endothelial HLA molecules, activating the classical complement pathway and inducing immediate endothelial thrombosis termed hyperacute rejection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Recipient serum plus donor lymphocytes plus complement",
+      "Membrane attack complex cell lysis (CDC positive)",
+      "Absolute contraindication due to hyperacute rejection"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "donor nephrectomy",
+      "lifetime risk",
+      "end-stage kidney disease",
+      "0.5%",
+      "1.0%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Advanced **Flow cytometry crossmatch** (**FCXM**) and solid-phase Luminex single-antigen bead assays provide exceptional diagnostic sensitivity for detecting non-complement-fixing, low-titer **donor-specific anti-HLA antibodies** (**DSAs**). Even when CDC crossmatches appear negative, preformed DSAs identified by flow cytometry correlate with heightened risk of acute antibody-mediated rejection.",
+   "say": "Advanced Flow cytometry crossmatch and solid-phase Luminex single-antigen bead assays provide exceptional diagnostic sensitivity for detecting non-complement-fixing, low-titer donor-specific anti-HLA antibodies. Even when CDC crossmatches appear negative, preformed DSAs identified by flow cytometry correlate with heightened risk of acute antibody-mediated rejection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/organ-transplantation-immunobiology-rejection-and-renal-allograft-fig1.webp",
+    "alt": "Renal Allograft Transplant Immunobiology and HLA Matching",
+    "caption": "Donor-specific antibody detection and crossmatching immunobiology (StewardMD). Features: Kidney Donor Profile Index, KDPI, deceased donor, 0%, 100%, 85%.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Rigorous medical evaluation of prospective living kidney donors requires confirmed age-appropriate measured or estimated **GFR** >= **90** mL/min/1.73m2 alongside persistent absence of **microalbuminuria** (uACR < **30** mg/g or 24-hour urine protein < **150** mg) and absence of uncontrolled hypertension, diabetes mellitus, or nephrolithiasis.",
+   "say": "Rigorous medical evaluation of prospective living kidney donors requires confirmed age-appropriate measured or estimated GFR of 90 mL/min/1.73m2 or higher alongside persistent absence of microalbuminuria and absence of uncontrolled hypertension, diabetes mellitus, or nephrolithiasis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Donor Evaluation Parameter",
+     "Acceptable Criteria",
+     "Absolute Contraindications"
+    ],
+    "rows": [
+     [
+      "Glomerular filtration rate",
+      "eGFR / mGFR >= 90 mL/min/1.73m2",
+      "GFR < 60 mL/min or rapid age-adjusted loss"
+     ],
+     [
+      "Urinary protein excretion",
+      "uACR < 30 mg/g (protein < 150 mg/d)",
+      "Persistent overt albuminuria or hematuria"
+     ],
+     [
+      "Metabolic and vascular health",
+      "Normal glucose tolerance, normal BP",
+      "Diabetes mellitus, end-organ vascular injury"
+     ],
+     [
+      "Donation after circulatory death",
+      "Associated with Donation after circulatory death",
+      "Associated with Donation after circulatory death"
+     ],
+     [
+      "DCD",
+      "Associated with DCD",
+      "Associated with DCD"
+     ],
+     [
+      "warm ischemia",
+      "Associated with warm ischemia",
+      "Associated with warm ischemia"
+     ],
+     [
+      "delayed graft function",
+      "Associated with delayed graft function",
+      "Associated with delayed graft function"
+     ],
+     [
+      "40%",
+      "Associated with 40%",
+      "Associated with 40%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following living donor **nephrectomy**, compensatory hyperfiltration of the remaining solitary kidney restores total glomerular filtration to **70%** to **80%** of pre-donation baseline within weeks. Long-term donor follow-up requires lifelong annual surveillance of **blood pressure** and urinary albumin excretion to ensure sustained cardiovascular and renal safety.",
+   "say": "Following living donor nephrectomy, compensatory hyperfiltration of the remaining solitary kidney restores total glomerular filtration to 70% to 80% of pre-donation baseline within weeks. Long-term donor follow-up requires lifelong annual surveillance of blood pressure and urinary albumin excretion to ensure sustained cardiovascular and renal safety.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-donor-recipient-evaluation-fig1.webp",
+    "alt": "Living kidney donor follow-up: compensation and lifelong monitoring",
+    "caption": "Single-kidney compensatory hyperfiltration and long-term donor monitoring (StewardMD). Features: Hypothermic machine perfusion, HMP, delayed graft function, 3.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The **Kidney Donor Profile Index** (**KDPI**) quantifies allograft quality from deceased donors, where higher percentile scores indicate shorter projected graft longevity. Deceased donor organs with KDPI scores exceeding **85%** carry heightened risk of delayed graft function and early failure, warranting targeted allocation to older recipients under longevity-matching algorithms.",
+   "say": "The Kidney Donor Profile Index quantifies allograft quality from deceased donors, where higher percentile scores indicate shorter projected graft longevity. Deceased donor organs with KDPI scores exceeding 85% carry heightened risk of delayed graft function and early failure, warranting targeted allocation to older recipients under longevity-matching algorithms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low KDPI Kidneys (<= 20%)",
+     "points": [
+      "Young deceased donors without comorbidities",
+      "Median graft half-life exceeding 15 years",
+      "Allocated preferentially to young candidates",
+      "Lowest incidence of delayed graft function",
+      "Key criteria: Paired kidney exchange",
+      "Key criteria: KPD"
+     ]
+    },
+    "right": {
+     "title": "High KDPI Kidneys (> 85%)",
+     "points": [
+      "Older donors with vascular risk factors",
+      "Median graft survival approximately 6 to 8 years",
+      "Dual kidney transplantation protocols",
+      "Life-saving option for elderly recipients on waitlist",
+      "Diagnostic: crossmatch"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Comprehensive cardiac evaluation in prospective transplant recipients identifies **coronary artery disease**, the leading cause of post-transplant mortality. In diabetic patients and individuals exhibiting multiple cardiovascular risk factors, **non-invasive stress testing** with myocardial perfusion imaging or direct coronary angiography is mandatory to achieve pre-transplant revascularization.",
+   "say": "Comprehensive cardiac evaluation in prospective transplant recipients identifies coronary artery disease, the leading cause of post-transplant mortality. In diabetic patients and individuals exhibiting multiple cardiovascular risk factors, non-invasive stress testing with myocardial perfusion imaging or direct coronary angiography is mandatory to achieve pre-transplant revascularization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Transplant recipient evaluation",
+      "Cardiovascular risk stratification",
+      "Myocardial perfusion scintigraphy or coronary angiography"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "Preemptive kidney transplantation",
+      "dialysis",
+      "graft survival"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Active systemic infections and untreated **malignancy** represent strict temporary or absolute contraindications to kidney transplantation. Patients with treated solid organ malignancies require disease-specific **recurrence-free waiting periods** (typically **2** years for colorectal and breast carcinoma, extended to **5** years for melanoma and invasive myeloma).",
+   "say": "Active systemic infections and untreated malignancy represent strict temporary or absolute contraindications to kidney transplantation. Patients with treated solid organ malignancies require disease-specific recurrence-free waiting periods, typically 2 years for colorectal and breast carcinoma, extended to 5 years for melanoma and invasive myeloma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prior Malignancy Type",
+     "Mandatory Waiting Interval",
+     "Transplantation Decision"
+    ],
+    "rows": [
+     [
+      "Incidental papillary renal cell (< 3 cm)",
+      "No waiting period required",
+      "Immediate clearance following excision"
+     ],
+     [
+      "Colorectal, breast, cervical carcinoma",
+      "Minimum 2-year disease-free interval",
+      "Clearance if complete oncologic remission"
+     ],
+     [
+      "Cutaneous melanoma, multiple myeloma",
+      "Minimum 5-year disease-free interval",
+      "High risk of immunosuppression-driven relapse"
+     ],
+     [
+      "hepatitis C",
+      "Associated with hepatitis C",
+      "Associated with hepatitis C"
+     ],
+     [
+      "direct-acting antiviral",
+      "Associated with direct-acting antiviral",
+      "Associated with direct-acting antiviral"
+     ],
+     [
+      "DAA",
+      "Associated with DAA",
+      "Associated with DAA"
+     ],
+     [
+      "viremic donors",
+      "Associated with viremic donors",
+      "Associated with viremic donors"
+     ],
+     [
+      "95%",
+      "Associated with 95%",
+      "Associated with 95%"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "q_b9ccae1a30de",
-  "q_0a9aa3bbc18c",
-  "q_4efd5a97c35c"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "KDIGO Clinical Practice Guideline on the Evaluation and Care of Living Kidney Donors (2017)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 37
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 83-84",
+  "Brenner and Rector The Kidney 11e Ch. 53",
+  "KDIGO Clinical Practice Guideline on the Evaluation and Care of Living Kidney Donors"
+ ]
 }

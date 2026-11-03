@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "snp-polycystic-kidney-disease",
+ "title": "Autosomal dominant polycystic kidney disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Autosomal dominant polycystic kidney disease (**ADPKD**) is caused by loss-of-function mutations in **PKD1** (encoding **polycystin-1**, chromosome 16p13.3) in approximately **78%** of families, or **PKD2** (encoding **polycystin-2**, chromosome 4q21) in **15%**. PKD1 mutations confer significantly earlier clinical onset and more rapid progression to ESKD (mean age **58** years versus **79** years in PKD2).",
+   "say": "Autosomal dominant polycystic kidney disease is caused by loss-of-function mutations in PKD1 encoding polycystin-1 in approximately 78% of families, or PKD2 encoding polycystin-2 in 15%. PKD1 mutations confer significantly earlier clinical onset and more rapid progression to ESKD, with a mean age of 58 years versus 79 years in PKD2.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PKD1 Mutation Characteristics",
+     "points": [
+      "Polycystin-1 mutation (chromosome 16p13.3)",
+      "Accounts for 78% of ADPKD pedigrees",
+      "Median age of ESKD onset 58 years",
+      "More rapid total kidney volume expansion"
+     ]
+    },
+    "right": {
+     "title": "PKD2 Mutation Characteristics",
+     "points": [
+      "Polycystin-2 mutation (chromosome 4q21)",
+      "Accounts for 15% of ADPKD pedigrees",
+      "Median age of ESKD onset 79 years",
+      "Milder clinical phenotype, slower growth"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The Unified **Pei-Ravine ultrasound criteria** establish definitive diagnosis in at-risk individuals with a positive family history: age **15** to **39** years requires >= **3** unilateral or bilateral cysts; age **40** to **59** requires >= **2** cysts in each kidney; and age >= **60** requires >= **4** cysts per kidney, with fewer than two cysts excluding disease in patients aged 40 and older.",
+   "say": "The Unified Pei-Ravine ultrasound criteria establish definitive diagnosis in at-risk individuals with a positive family history: age 15 to 39 years requires 3 or more unilateral or bilateral cysts; age 40 to 59 requires 2 or more cysts in each kidney; and age 60 and older requires 4 or more cysts per kidney, with fewer than two cysts excluding disease in patients aged 40 and older.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Age Group",
+     "Diagnostic Ultrasound Requirement",
+     "Exclusion Criteria"
+    ],
+    "rows": [
+     [
+      "15 to 39 years",
+      ">= 3 cysts (unilateral or bilateral)",
+      "Negative scan does not fully exclude"
+     ],
+     [
+      "40 to 59 years",
+      ">= 2 cysts in each kidney",
+      "< 2 cysts excludes disease (NPV 100%)"
+     ],
+     [
+      ">= 60 years",
+      ">= 4 cysts in each kidney",
+      "< 2 cysts completely excludes disease"
+     ],
+     [
+      "Ravine criteria",
+      "Associated with Ravine criteria",
+      "Associated with Ravine criteria"
+     ],
+     [
+      "kidney cysts",
+      "Associated with kidney cysts",
+      "Associated with kidney cysts"
+     ],
+     [
+      "ADPKD",
+      "Associated with ADPKD",
+      "Associated with ADPKD"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Mayo imaging classification** predicts renal disease progression by calculating height-adjusted **total kidney volume** (**htTKV**) and patient age to stratify patients into Classes 1A through 1E. Classes **1C**, 1D, and **1E** denote rapid progressors with estimated htTKV growth rates exceeding 3% per year, identifying candidates who derive substantial benefit from disease-modifying therapies.",
+   "say": "The Mayo imaging classification predicts renal disease progression by calculating height-adjusted total kidney volume and patient age to stratify patients into Classes 1A through 1E. Classes 1C, 1D, and 1E denote rapid progressors with estimated htTKV growth rates exceeding 3% per year, identifying candidates who derive substantial benefit from disease-modifying therapies.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-polycystic-kidney-disease.webp",
+    "alt": "Adult polycystic kidney disease (ADPKD) gross nephrectomy specimen",
+    "caption": "Massive bilateral renal enlargement and parenchymal cystic replacement in ADPKD (StewardMD). Features: tolvaptan, TEMPO 3:4, REPRISE, 4, 2.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The selective **vasopressin V2 receptor antagonist** **Tolvaptan** blocks basolateral V2 receptors on principal cells, suppressing intracellular **cAMP** and inhibiting protein kinase A-driven cyst epithelial cell proliferation and fluid secretion. In the pivotal **TEMPO 3:4** and REPRISE trials, tolvaptan significantly slowed htTKV growth and attenuated the annual rate of eGFR decline.",
+   "say": "The selective vasopressin V2 receptor antagonist Tolvaptan blocks basolateral V2 receptors on principal cells, suppressing intracellular cAMP and inhibiting protein kinase A-driven cyst epithelial cell proliferation and fluid secretion. In the pivotal TEMPO 3:4 and REPRISE trials, tolvaptan significantly slowed htTKV growth and attenuated the annual rate of eGFR decline.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adpkd-fig1.webp",
+    "alt": "ADPKD Renal and Extrarenal Manifestations",
+    "caption": "cAMP-mediated cyst fluid secretion and tolvaptan V2 receptor blockade (StewardMD). Features: Mayo Imaging Classification.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Intracranial **berry aneurysms** of the circle of Willis develop in approximately **10%** of unselected ADPKD patients, with prevalence rising to **20%** to **25%** among patients with a positive **family history** of intracranial aneurysm or subarachnoid hemorrhage. Presymptomatic screening using magnetic resonance angiography (**MRA**) without gadolinium is strongly recommended in high-risk pedigrees.",
+   "say": "Intracranial berry aneurysms of the circle of Willis develop in approximately 10% of unselected ADPKD patients, with prevalence rising to 20% to 25% among patients with a positive family history of intracranial aneurysm or subarachnoid hemorrhage. Presymptomatic screening using magnetic resonance angiography without gadolinium is strongly recommended in high-risk pedigrees.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "ADPKD with family history of aneurysm",
+      "Screening non-contrast MRA of circle of Willis",
+      "Neurosurgical coiling or surveillance if detected"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "MRA screening",
+      "9%",
+      "12%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most frequent extrarenal manifestation of ADPKD is **polycystic liver disease**, occurring in over 80% of affected adults. Severe hepatic involvement is markedly exacerbated by **female sex**, multiple past **pregnancies**, and exogenous **estrogen exposure**, driven by hepatic cyst cholangiocyte proliferation and local fluid secretion.",
+   "say": "The most frequent extrarenal manifestation of ADPKD is polycystic liver disease, occurring in over 80% of affected adults. Severe hepatic involvement is markedly exacerbated by female sex, multiple past pregnancies, and exogenous estrogen exposure, driven by hepatic cyst cholangiocyte proliferation and local fluid secretion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Polycystic Liver Features",
+     "points": [
+      "Present in > 80% of older adults",
+      "Massive hepatomegaly and compression",
+      "Exacerbated by estrogen and multiparity",
+      "Liver synthetic function remains preserved",
+      "Key criteria: Hepatic cysts",
+      "Key criteria: 35"
+     ]
+    },
+    "right": {
+     "title": "Other Extrarenal Manifestations",
+     "points": [
+      "Colonic diverticulosis and perforations",
+      "Mitral valve prolapse (up to 25%)",
+      "Abdominal wall and inguinal hernias",
+      "Seminal vesicle and arachnoid cysts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Differentiating an acute **infected renal cyst** from acute uncomplicated pyelonephritis requires meticulous imaging. While conventional ultrasound and CT often appear ambiguous, **FDG-PET/CT** exhibits high sensitivity and specificity by demonstrating intense focal metabolic tracer avidity within the inflamed cyst wall, guiding prolonged targeted lipid-soluble antimicrobial therapy.",
+   "say": "Differentiating an acute infected renal cyst from acute uncomplicated pyelonephritis requires meticulous imaging. While conventional ultrasound and CT often appear ambiguous, FDG-PET/CT exhibits high sensitivity and specificity by demonstrating intense focal metabolic tracer avidity within the inflamed cyst wall, guiding prolonged targeted lipid-soluble antimicrobial therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infected Renal Cyst",
+     "points": [
+      "Severe localized flank pain and fever",
+      "Often negative routine urine cultures",
+      "Focal tracer avidity on FDG-PET/CT",
+      "Requires lipid-soluble fluoroquinolones",
+      "Key criteria: Infected renal cysts",
+      "Key criteria: lipophilic"
+     ]
+    },
+    "right": {
+     "title": "Acute Intracystic Hemorrhage",
+     "points": [
+      "Sudden severe flank pain and hematuria",
+      "Absence of fever and septic markers",
+      "High attenuation (> 50 HU) on unenhanced CT",
+      "Managed with bed rest and analgesia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the landmark **HALT-PKD** clinical trial, intensive blood pressure control targeting **95/60** to **110/75** mmHg using an **ACE inhibitor** or ARB significantly slowed the rate of total kidney volume growth and produced greater reductions in left ventricular mass index compared to standard blood pressure targets (**120/70** to **130/80** mmHg).",
+   "say": "In the landmark HALT-PKD clinical trial, intensive blood pressure control targeting 95/60 to 110/75 mmHg using an ACE inhibitor or ARB significantly slowed the rate of total kidney volume growth and produced greater reductions in left ventricular mass index compared to standard blood pressure targets.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HALT-PKD intensive blood pressure target"
+     },
+     {
+      "id": "b",
+      "label": "95/60 to 110/75 mmHg via RAAS blockade"
+     },
+     {
+      "id": "c",
+      "label": "Slowed total kidney volume expansion rate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 45",
+  "Brenner and Rector The Kidney 11e Ch. 43",
+  "Harrison Principles of Internal Medicine 22e Ch. 317"
+ ]
+}
