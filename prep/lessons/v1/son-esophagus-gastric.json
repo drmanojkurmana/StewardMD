@@ -1,0 +1,296 @@
+{
+ "v": 1,
+ "module": "son-esophagus-gastric",
+ "subject": "ss-medical-oncology",
+ "title": "Oesophageal and gastric cancer",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Gastro-oesophageal malignancies display distinct anatomical distributions and histology. Adenocarcinoma predominates in the distal oesophagus and junction, driven by Barrett metaplasia, while squamous carcinoma associates with smoking and alcohol. The **Siewert classification** categorises adenocarcinoma of the gastro-oesophageal junction into type 1 distal oesophagus, type 2 true cardia, and type 3 subcardial gastric origin, dictating thoracic versus transhiatal surgical planning.",
+   "say": "Gastro-oesophageal malignancies display distinct anatomical distributions and histology. Adenocarcinoma predominates in the distal oesophagus and junction, driven by Barrett metaplasia, while squamous carcinoma associates with smoking and alcohol. The Siewert classification categorises adenocarcinoma of the gastro-oesophageal junction into type 1 distal oesophagus, type 2 true cardia, and type 3 subcardial gastric origin, dictating thoracic versus transhiatal surgical planning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Siewert Type",
+     "Epicentre Location",
+     "Primary Histology",
+     "Surgical Approach"
+    ],
+    "rows": [
+     [
+      "Type 1",
+      "+1 cm to +5 cm above junction",
+      "Adenocarcinoma (Barrett)",
+      "Subtotal esophagectomy (transthoracic)"
+     ],
+     [
+      "Type 2",
+      "-1 cm to +1 cm (true cardia)",
+      "Adenocarcinoma",
+      "Esophagectomy or extended gastrectomy"
+     ],
+     [
+      "Type 3",
+      "-1 cm to -5 cm below junction",
+      "Gastric adenocarcinoma",
+      "Total gastrectomy with transhiatal resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Locally advanced resectable oesophageal cancer benefits from multimodal neoadjuvant therapy. In the landmark **CROSS trial**, neoadjuvant chemoradiotherapy with carboplatin and paclitaxel plus 41.4 Gy radiation significantly improves overall survival in resectable oesophageal and GEJ cancer. The regimen achieved a pathological complete response rate of forty-nine percent in squamous cell carcinomas and twenty-three percent in adenocarcinomas, with manageable perioperative morbidity.",
+   "say": "Locally advanced resectable oesophageal cancer benefits from multimodal neoadjuvant therapy. In the landmark CROSS trial, neoadjuvant chemoradiotherapy with carboplatin and paclitaxel plus 41.4 Gy radiation significantly improves overall survival in resectable oesophageal and GEJ cancer. The regimen achieved a pathological complete response rate of forty-nine percent in squamous cell carcinomas and twenty-three percent in adenocarcinomas, with manageable perioperative morbidity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "T1b-T4a N0-N+ Oesophageal/GEJ"
+     },
+     {
+      "id": "b",
+      "label": "CROSS Neoadjuvant CRT (41.4 Gy)"
+     },
+     {
+      "id": "c",
+      "label": "Transthoracic Esophagectomy"
+     },
+     {
+      "id": "d",
+      "label": "Doubled Median Overall Survival"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "carboplatin/paclitaxel weekly x5"
+     ],
+     [
+      "b",
+      "c",
+      "surgery at 6 to 8 weeks"
+     ],
+     [
+      "c",
+      "d",
+      "49.4 vs 24.0 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients failing to achieve pathological complete response face high recurrence rates. In **CheckMate 577**, adjuvant nivolumab for 1 year significantly doubles disease-free survival in resected oesophageal or GEJ cancer with residual pathological disease after neoadjuvant chemoradiation. Median disease-free survival reached 22.4 months with nivolumab compared to 11.0 months with placebo, establishing adjuvant immunotherapy as the global post-operative standard.",
+   "say": "Patients failing to achieve pathological complete response face high recurrence rates. In CheckMate 577, adjuvant nivolumab for 1 year significantly doubles disease-free survival in resected oesophageal or GEJ cancer with residual pathological disease after neoadjuvant chemoradiation. Median disease-free survival reached 22.4 months with nivolumab compared to 11.0 months with placebo, establishing adjuvant immunotherapy as the global post-operative standard.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CheckMate 577 (Nivolumab Arm)",
+     "points": [
+      "Adjuvant nivolumab 240 mg q2w then 480 mg q4w",
+      "Duration: up to 1 year of therapy",
+      "Median DFS: 22.4 months",
+      "Consistent benefit across SCC and AC"
+     ]
+    },
+    "right": {
+     "title": "Placebo Control Arm",
+     "points": [
+      "Standard surveillance after resection",
+      "Median DFS: 11.0 months",
+      "Early distant and locoregional relapse",
+      "Hazard ratio for DFS: 0.69"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For gastric and gastro-oesophageal junction adenocarcinomas, perioperative chemotherapy optimizes curative-intent resection. In the German AIO **FLOT4** trial, perioperative FLOT fluorouracil, leucovorin, oxaliplatin, docetaxel 4 cycles pre- and post-operatively improves overall survival compared to ECF/ECX in gastric and GEJ adenocarcinoma. Median survival extended from 35 to 50 months, establishing triplet chemotherapy as the reference perioperative approach worldwide.",
+   "say": "For gastric and gastro-oesophageal junction adenocarcinomas, perioperative chemotherapy optimizes curative-intent resection. In the German AIO FLOT4 trial, perioperative FLOT fluorouracil, leucovorin, oxaliplatin, docetaxel 4 cycles pre- and post-operatively improves overall survival compared to ECF/ECX in gastric and GEJ adenocarcinoma. Median survival extended from 35 to 50 months, establishing triplet chemotherapy as the reference perioperative approach worldwide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "T2+ or N+ Gastric Adenocarcinoma"
+     },
+     {
+      "id": "b",
+      "label": "Pre-op FLOT (4 cycles)"
+     },
+     {
+      "id": "c",
+      "label": "D2 Gastrectomy"
+     },
+     {
+      "id": "d",
+      "label": "Post-op FLOT (4 cycles)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "every 2 weeks with G-CSF"
+     ],
+     [
+      "b",
+      "c",
+      "R0 resection with clear margins"
+     ],
+     [
+      "c",
+      "d",
+      "completes perioperative triplet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular biomarker evaluation dictates targeted therapy additions in unresectable advanced adenocarcinoma. In the **ToGA trial**, trastuzumab added to cisplatin and fluoropyrimidine significantly prolongs overall survival in untreated HER2-positive advanced gastric or gastro-oesophageal junction adenocarcinoma. Benefit was greatest in high-expressing tumours with immunohistochemistry 3-plus or IHC 2-plus with positive in situ hybridization, extending median overall survival to 16 months.",
+   "say": "Molecular biomarker evaluation dictates targeted therapy additions in unresectable advanced adenocarcinoma. In the ToGA trial, trastuzumab added to cisplatin and fluoropyrimidine significantly prolongs overall survival in untreated HER2-positive advanced gastric or gastro-oesophageal junction adenocarcinoma. Benefit was greatest in high-expressing tumours with immunohistochemistry 3-plus or IHC 2-plus with positive in situ hybridization, extending median overall survival to 16 months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HER2 Testing in Gastric Cancer",
+     "points": [
+      "Evaluates basolateral / U-shaped staining",
+      "Heterogeneity common (>30% of cases)",
+      "IHC 3+ or IHC 2+/FISH+ considered positive",
+      "Prevalence: 15% to 20% of gastric cancers"
+     ]
+    },
+    "right": {
+     "title": "ToGA Clinical Significance",
+     "points": [
+      "Trastuzumab + Cisplatin + 5-FU/Capecitabine",
+      "Significant OS improvement (HR 0.74)",
+      "High HER2 subgroup OS: 16.0 months",
+      "First targeted agent validated in gastric cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Claudin 18.2 represents a novel tight-junction target exposed upon malignant transformation of gastric mucosa. **Zolbetuximab**, a monoclonal antibody targeting Claudin 18.2, combined with chemotherapy significantly improves PFS and OS in Claudin 18.2-positive, HER2-negative advanced gastric adenocarcinoma in SPOTLIGHT. Eligibility requires moderate-to-strong membranous Claudin 18.2 expression in at least seventy-five percent of tumour cells.",
+   "say": "Claudin 18.2 represents a novel tight-junction target exposed upon malignant transformation of gastric mucosa. Zolbetuximab, a monoclonal antibody targeting Claudin 18.2, combined with chemotherapy significantly improves PFS and OS in Claudin 18.2-positive, HER2-negative advanced gastric adenocarcinoma in SPOTLIGHT. Eligibility requires moderate-to-strong membranous Claudin 18.2 expression in at least seventy-five percent of tumour cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HER2-negative Gastric Biopsy"
+     },
+     {
+      "id": "b",
+      "label": "Claudin 18.2 IHC testing"
+     },
+     {
+      "id": "c",
+      "label": ">=75% tumor cells moderate/strong"
+     },
+     {
+      "id": "d",
+      "label": "Zolbetuximab + mFOLFOX6 (SPOTLIGHT)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "reflex immunohistochemistry"
+     ],
+     [
+      "b",
+      "c",
+      "approx. 38% positivity rate"
+     ],
+     [
+      "c",
+      "d",
+      "ADCC and CDC mediated lysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune checkpoint blockade provides survival benefits in PD-L1 expressing advanced disease. In **CheckMate 649**, first-line nivolumab added to FOLFOX or CAPOX significantly prolongs overall survival in advanced gastric and GEJ cancer with PD-L1 combined positive score CPS 5 or higher. In CPS 5 or higher populations, median overall survival reached 14.4 months with nivolumab plus chemotherapy compared to 11.1 months with chemotherapy alone.",
+   "say": "Immune checkpoint blockade provides survival benefits in PD-L1 expressing advanced disease. In CheckMate 649, first-line nivolumab added to FOLFOX or CAPOX significantly prolongs overall survival in advanced gastric and GEJ cancer with PD-L1 combined positive score CPS 5 or higher. In CPS 5 or higher populations, median overall survival reached 14.4 months with nivolumab plus chemotherapy compared to 11.1 months with chemotherapy alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biomarker Status",
+     "Pivotal Trial",
+     "First-Line Standard Regimen",
+     "Primary Landmark"
+    ],
+    "rows": [
+     [
+      "HER2-positive",
+      "ToGA / KEYNOTE-811",
+      "Trastuzumab + Pembrolizumab + Chemo",
+      "OS and response rate improvement"
+     ],
+     [
+      "PD-L1 CPS >= 5",
+      "CheckMate 649",
+      "Nivolumab + FOLFOX / CAPOX",
+      "OS benefit (14.4 vs 11.1 months)"
+     ],
+     [
+      "Claudin 18.2+ / HER2-",
+      "SPOTLIGHT / GLOW",
+      "Zolbetuximab + mFOLFOX6 / CAPOX",
+      "PFS and OS improvement"
+     ],
+     [
+      "MSI-High / dMMR",
+      "KEYNOTE-062 / 158",
+      "Pembrolizumab +/- Chemotherapy",
+      "Durable long-term disease control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adequate surgical nodal clearance is critical to prevent locoregional recurrence and ensure accurate staging. **D2 lymphadenectomy** dissecting perigastric nodes and nodes along the celiac axis and branches is the gold-standard surgical oncological procedure for curative gastric cancer resection. It requires harvesting a minimum of sixteen, and preferably more than thirty lymph nodes, while preserving spleen and pancreatic tail.",
+   "say": "Adequate surgical nodal clearance is critical to prevent locoregional recurrence and ensure accurate staging. D2 lymphadenectomy dissecting perigastric nodes and nodes along the celiac axis and branches is the gold-standard surgical oncological procedure for curative gastric cancer resection. It requires harvesting a minimum of sixteen, and preferably more than thirty lymph nodes, while preserving spleen and pancreatic tail.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymph Node Tier",
+     "Anatomical Stations Included",
+     "Surgical Extent",
+     "Clinical Standard"
+    ],
+    "rows": [
+     [
+      "D1 dissection",
+      "Stations 1 to 6 (perigastric nodes)",
+      "Limited dissection along curvatures",
+      "Associated with higher locoregional recurrence"
+     ],
+     [
+      "D2 dissection",
+      "Stations 1 to 12a (celiac, hepatic, splenic, left gastric)",
+      "Extended lymphadenectomy along major branches",
+      "International standard of care in fit patients"
+     ],
+     [
+      "D3 dissection",
+      "Includes para-aortic stations 16a2, 16b1",
+      "Super-extended dissection (JCOG 9501)",
+      "No survival benefit; higher surgical morbidity"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

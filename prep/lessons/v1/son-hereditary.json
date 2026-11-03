@@ -1,0 +1,308 @@
+{
+ "v": 1,
+ "module": "son-hereditary",
+ "subject": "ss-medical-oncology",
+ "title": "Hereditary cancer syndromes and genetic counselling",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Hereditary cancer syndromes account for approximately five to ten percent of all malignancies. Recognition is essential for targeted screening and cascade testing. The classic tumour suppressor paradigm requires inactivation of both alleles. **BRCA1** on chromosome 17q and BRCA2 on chromosome 13q encode proteins crucial for homologous recombination DNA double-strand break repair.",
+   "say": "Hereditary cancer syndromes account for approximately five to ten percent of all malignancies. Recognition is essential for targeted screening and cascade testing. The classic tumour suppressor paradigm requires inactivation of both alleles. BRCA1 on chromosome 17q and BRCA2 on chromosome 13q encode proteins crucial for homologous recombination DNA double-strand break repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene",
+     "Chromosome",
+     "DNA Repair Pathway",
+     "Associated Cancers"
+    ],
+    "rows": [
+     [
+      "BRCA1",
+      "17q21",
+      "Homologous recombination",
+      "Breast, ovary, pancreas, prostate"
+     ],
+     [
+      "BRCA2",
+      "13q12",
+      "Homologous recombination",
+      "Breast (male and female), ovary, pancreas, prostate"
+     ],
+     [
+      "TP53",
+      "17p13",
+      "Cell cycle arrest and apoptosis",
+      "Sarcoma, breast, brain, adrenocortical"
+     ],
+     [
+      "PTEN",
+      "10q23",
+      "PI3K/AKT suppression",
+      "Breast, thyroid, endometrial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lynch syndrome**, or hereditary non-polyposis colorectal cancer, is the commonest inherited colorectal cancer predisposition. It is caused by germline mutations in mismatch repair genes including MLH1, MSH2, MSH6, and PMS2, or EPCAM deletions that silence MSH2. Affected individuals face markedly elevated risks of early-onset colorectal and endometrial carcinomas.",
+   "say": "Lynch syndrome, or hereditary non-polyposis colorectal cancer, is the commonest inherited colorectal cancer predisposition. It is caused by germline mutations in mismatch repair genes including MLH1, MSH2, MSH6, and PMS2, or EPCAM deletions that silence MSH2. Affected individuals face markedly elevated risks of early-onset colorectal and endometrial carcinomas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Germline MMR loss"
+     },
+     {
+      "id": "b",
+      "label": "Second-hit inactivation"
+     },
+     {
+      "id": "c",
+      "label": "Microsatellite instability"
+     },
+     {
+      "id": "d",
+      "label": "Colorectal and endometrial cancer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "somatic mutation or LOH"
+     ],
+     [
+      "b",
+      "c",
+      "replication error repair failure"
+     ],
+     [
+      "c",
+      "d",
+      "frame-shift mutations in key genes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Li-Fraumeni syndrome** arises from heterozygous germline TP53 mutations on chromosome 17p. This catastrophic predisposition syndrome leads to early-onset sarcomas, premenopausal breast cancer, adrenocortical carcinoma, leukaemia, and brain tumours. Radiation therapy should be stringently minimized in affected carriers due to an intense risk of inducing secondary radiation-associated malignancies.",
+   "say": "Li-Fraumeni syndrome arises from heterozygous germline TP53 mutations on chromosome 17p. This catastrophic predisposition syndrome leads to early-onset sarcomas, premenopausal breast cancer, adrenocortical carcinoma, leukaemia, and brain tumours. Radiation therapy should be stringently minimized in affected carriers due to an intense risk of inducing secondary radiation-associated malignancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Li-Fraumeni Syndrome",
+     "points": [
+      "Germline TP53 mutation",
+      "Soft tissue and osteosarcoma",
+      "Adrenocortical carcinoma",
+      "Avoid therapeutic radiation"
+     ]
+    },
+    "right": {
+     "title": "Cowden Syndrome",
+     "points": [
+      "Germline PTEN mutation",
+      "Mucocutaneous trichilemmomas",
+      "Follicular thyroid carcinoma",
+      "Endometrial and breast cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Familial adenomatous polyposis** results from autosomal dominant germline APC mutations on chromosome 5q21. Carriers develop hundreds to thousands of colorectal adenomatous polyps beginning in adolescence. Progression to colorectal adenocarcinoma reaches near 100% without prophylactic colectomy. Extracolonic manifestations include duodenal adenomas, desmoid tumours, osteomas, and congenital hypertrophy of retinal pigment epithelium.",
+   "say": "Familial adenomatous polyposis results from autosomal dominant germline APC mutations on chromosome 5q21. Carriers develop hundreds to thousands of colorectal adenomatous polyps beginning in adolescence. Progression to colorectal adenocarcinoma reaches near 100% without prophylactic colectomy. Extracolonic manifestations include duodenal adenomas, desmoid tumours, and osteomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Mutated Gene",
+     "Colorectal Polyps",
+     "Malignancy Risk"
+    ],
+    "rows": [
+     [
+      "Classical FAP",
+      "APC (5q21)",
+      ">100 to thousands of adenomas",
+      "100% CRC risk without colectomy"
+     ],
+     [
+      "Attenuated FAP",
+      "APC (5' or 3' ends)",
+      "10 to 99 adenomas",
+      "Elevated CRC risk, later onset"
+     ],
+     [
+      "MUTYH-associated polyposis",
+      "MUTYH (biallelic)",
+      "10 to a few hundred adenomas",
+      "High lifetime CRC risk"
+     ],
+     [
+      "Peutz-Jeghers syndrome",
+      "STK11 (19p13)",
+      "Hamartomatous polyps",
+      "Elevated GI and non-GI cancer risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cowden syndrome** is part of the PTEN hamartoma tumour syndrome family, caused by germline PTEN mutations on chromosome 10q23. Characteristic findings include pathognomonic mucocutaneous trichilemmomas, oral papillomas, and macrocephaly. Lifetime risks for female breast carcinoma reach up to eighty-five percent, alongside heightened incidence of follicular thyroid cancer and endometrial carcinoma.",
+   "say": "Cowden syndrome is part of the PTEN hamartoma tumour syndrome family, caused by germline PTEN mutations on chromosome 10q23. Characteristic findings include pathognomonic mucocutaneous trichilemmomas, oral papillomas, and macrocephaly. Lifetime risks for female breast carcinoma reach up to eighty-five percent, alongside heightened incidence of follicular thyroid cancer and endometrial carcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "PTEN mutation"
+     },
+     {
+      "id": "b",
+      "label": "Unchecked PI3K/AKT/mTOR"
+     },
+     {
+      "id": "c",
+      "label": "Mucocutaneous trichilemmomas"
+     },
+     {
+      "id": "d",
+      "label": "Breast, thyroid, endometrial cancer"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "loss of lipid phosphatase"
+     ],
+     [
+      "b",
+      "c",
+      "hamartomatous overgrowth"
+     ],
+     [
+      "b",
+      "d",
+      "proliferative malignant transformation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Peutz-Jeghers syndrome** is inherited in an autosomal dominant pattern due to germline STK11 mutations on chromosome 19p13. Patients manifest distinctive mucocutaneous melanin pigmentation on lips, buccal mucosa, and digits, alongside extensive hamartomatous gastrointestinal polyps. Extraintestinal cancer risks are substantial, including breast, pancreatic, sex cord stromal gonadal, and cervical adenoma malignum tumours.",
+   "say": "Peutz-Jeghers syndrome is inherited in an autosomal dominant pattern due to germline STK11 mutations on chromosome 19p13. Patients manifest distinctive mucocutaneous melanin pigmentation on lips, buccal mucosa, and digits, alongside extensive hamartomatous gastrointestinal polyps. Extraintestinal cancer risks are substantial, including breast, pancreatic, and gonadal tumours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peutz-Jeghers Syndrome",
+     "points": [
+      "STK11 serine/threonine kinase",
+      "Hamartomatous gastrointestinal polyps",
+      "Perioral melanin pigmentation",
+      "Pancreatic and breast cancer risk"
+     ]
+    },
+    "right": {
+     "title": "Lynch Syndrome",
+     "points": [
+      "MLH1, MSH2, MSH6, PMS2",
+      "Few adenomatous polyps",
+      "No mucocutaneous hyperpigmentation",
+      "Colorectal and endometrial cancer risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Von Hippel-Lindau disease** results from germline VHL mutations on chromosome 3p25. Loss of VHL protein impairs ubiquitin ligase degradation of hypoxia-inducible factors, mimicking continuous cellular hypoxia. Patients are predisposed to clear cell renal carcinoma, retinal angiomas, cerebellar and spinal hemangioblastomas, pheochromocytomas, and neuroendocrine pancreatic tumours. Surgeries are delayed until tumours exceed three centimetres.",
+   "say": "Von Hippel-Lindau disease results from germline VHL mutations on chromosome 3p25. Loss of VHL protein impairs ubiquitin ligase degradation of hypoxia-inducible factors, mimicking continuous cellular hypoxia. Patients are predisposed to clear cell renal carcinoma, retinal angiomas, cerebellar hemangioblastomas, and pheochromocytomas. Surgeries are delayed until lesions exceed three centimetres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "VHL Manifestation",
+     "Organ Involved",
+     "Diagnostic Modality",
+     "Clinical Management"
+    ],
+    "rows": [
+     [
+      "Clear cell renal carcinoma",
+      "Kidneys",
+      "Contrast abdominal MRI",
+      "Nephron-sparing surgery at 3 cm"
+     ],
+     [
+      "Hemangioblastoma",
+      "Cerebellum, spine, retina",
+      "Brain/spine MRI, fundoscopy",
+      "Resection or laser photocoagulation"
+     ],
+     [
+      "Pheochromocytoma",
+      "Adrenal medulla",
+      "Plasma free metanephrines",
+      "Pre-op alpha-blockade, adrenalectomy"
+     ],
+     [
+      "Pancreatic NET",
+      "Pancreas",
+      "Abdominal MRI / Ga-68 DOTATATE",
+      "Surveillance or enucleation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk-reducing surgical interventions dramatically lower cancer mortality in verified mutation carriers. Bilateral prophylactic mastectomy reduces breast cancer incidence by over ninety percent in BRCA carriers. **Salpingo-oophorectomy** is recommended for BRCA1 carriers between age 35 to 40 years, and for BRCA2 carriers between 40 to 45 years once childbearing is complete, protecting against high-grade serous ovarian cancer.",
+   "say": "Risk-reducing surgical interventions dramatically lower cancer mortality in verified mutation carriers. Bilateral prophylactic mastectomy reduces breast cancer incidence by over ninety percent in BRCA carriers. Salpingo-oophorectomy is recommended for BRCA1 carriers between age 35 to 40 years, and for BRCA2 carriers between 40 to 45 years once childbearing is complete, protecting against high-grade serous ovarian cancer.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "BRCA genetic testing"
+     },
+     {
+      "id": "b",
+      "label": "Intensive breast surveillance"
+     },
+     {
+      "id": "c",
+      "label": "Risk-reducing salpingo-oophorectomy"
+     },
+     {
+      "id": "d",
+      "label": "Survival gain"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "annual breast MRI from age 25"
+     ],
+     [
+      "a",
+      "c",
+      "age 35-40 in BRCA1; 40-45 in BRCA2"
+     ],
+     [
+      "c",
+      "d",
+      "reduces ovarian and all-cause mortality"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_d66a903dcbf7",
+  "q_10774e6dfda3",
+  "q_ac5cc0973a57"
+ ],
+ "gen": "hand"
+}
