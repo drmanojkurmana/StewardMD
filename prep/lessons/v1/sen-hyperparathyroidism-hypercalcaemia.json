@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "sen-hyperparathyroidism-hypercalcaemia",
+ "title": "Hypercalcaemia and primary hyperparathyroidism",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "When evaluating hypercalcaemia, clinicians must first calculate **corrected calcium** for serum albumin: add approximately **0.8** mg/dL to total calcium for each 1 g/dL that albumin falls below **4** g/dL. Next, concurrent intact **PTH** is interpreted. An elevated or inappropriately non-suppressed PTH confirms PTH-dependent hypercalcaemia (primary hyperparathyroidism or familial hypocalciuric hypercalcemia), whereas a suppressed PTH indicates PTH-independent etiologies such as malignancy or granulomatous disease.",
+   "say": "Serum calcium must be adjusted for albumin by adding zero point eight milligrams per decilitre for each gram per decilitre that albumin falls below four. An elevated or inappropriately normal parathyroid hormone indicates PTH-dependent hypercalcaemia, whereas a suppressed parathyroid hormone level points toward PTH-independent etiologies such as malignancy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/parathyroid-calcium-disorders-fig1.webp",
+    "alt": "Calcium Disorder Diagnosis",
+    "caption": "Diagnostic biochemical algorithm for hypercalcaemia and PTH interpretation. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "The underlying pathology of **primary hyperparathyroidism** is a solitary parathyroid **adenoma** in approximately **85**% of cases, four-gland parathyroid hyperplasia in 15%, and parathyroid carcinoma in under 1%. Parathyroid multiglandular hyperplasia is the characteristic presentation in hereditary syndromes like **MEN1** and MEN2A. Parathyroid carcinoma should be suspected preoperatively when serum calcium is markedly elevated (>14 mg/dL), a cervical neck mass is palpable, or intact PTH is ten-fold above normal.",
+   "say": "Primary hyperparathyroidism is caused by a single adenoma in eighty-five percent of cases, four-gland hyperplasia in fifteen percent, and rarely parathyroid cancer. Four-gland hyperplasia is characteristic of MEN1. Carcinoma should be suspected when calcium is very high, a neck mass is palpable, or parathyroid hormone is extreme.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Solitary Parathyroid Adenoma",
+     "points": [
+      "Responsible for 85% of sporadic primary HPT",
+      "Single enlarged vascular parathyroid gland",
+      "Remaining three glands are suppressed and atrophic",
+      "Cured by focused minimally invasive parathyroidectomy"
+     ]
+    },
+    "right": {
+     "title": "Four-Gland Hyperplasia / MEN1",
+     "points": [
+      "Multiglandular enlargement in 15% of cases",
+      "Typical histopathology in MEN1 and MEN2A",
+      "Requires subtotal (3.5 gland) resection or total excision",
+      "Higher risk of persistent or recurrent hypercalcaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical **parathyroidectomy** is indicated for symptomatic primary hyperparathyroidism (nephrolithiasis, fragility fractures) and for asymptomatic disease meeting consensus criteria: serum calcium >**1** mg/dL above normal, age under **50** years, estimated eGFR below **60** mL/min/1.73m2, a **T-score** of **-2.5** or lower at the spine, hip, or distal radius, asymptomatic vertebral fracture, or 24-hour urine calcium exceeding **400** mg/day with elevated lithogenic stone risk.",
+   "say": "Parathyroidectomy is recommended for symptomatic patients and for asymptomatic individuals meeting criteria: calcium more than one milligram per decilitre above normal, age under fifty, eGFR under sixty, T-score at or below minus two point five, vertebral fracture, or urine calcium exceeding four hundred milligrams daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Domain",
+     "Surgical Indication Threshold",
+     "Diagnostic Evaluation Modality"
+    ],
+    "rows": [
+     [
+      "Patient Age",
+      "Age younger than 50 years",
+      "Chronological age documentation"
+     ],
+     [
+      "Serum Calcium",
+      ">1.0 mg/dL (0.25 mmol/L) above normal",
+      "Repeated fasting total or ionized calcium"
+     ],
+     [
+      "Skeletal T-score",
+      "T-score <= -2.5 at spine, hip, or radius",
+      "Dual-energy X-ray absorptiometry (DEXA)"
+     ],
+     [
+      "Renal Status",
+      "eGFR <60 mL/min, stones, or >400 mg/day",
+      "24-hour urine chemistry and renal ultrasound"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parathyroid localization using neck **ultrasound** and Tc-99m **sestamibi** SPECT-CT or 4D-CT is strictly a preoperative surgical mapping tool performed only after the biochemical diagnosis is established and the decision to operate is finalized. A negative localization scan does not refute the diagnosis of primary hyperparathyroidism, nor does it preclude surgical exploration. Furthermore, imaging cannot reliably distinguish solitary adenomas from multiglandular hyperplasia.",
+   "say": "Preoperative localization with ultrasound or technetium sestamibi scans is performed only after the decision to operate is confirmed. Imaging is not a diagnostic test, and a negative scan never excludes hyperparathyroidism. Bilateral neck exploration is indicated when imaging fails to localize a solitary lesion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/parathyroid-calcium-disorders-fig2.webp",
+    "alt": "PTH Calcium Vitamin D Axis",
+    "caption": "Parathyroid hormone signaling in renal tubules and skeletal cortical bone. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Clinicians must differentiate primary hyperparathyroidism from benign **familial hypocalciuric hypercalcemia** (**FHH**), an autosomal dominant condition caused by heterozygous inactivating mutations in **CASR**. FHH produces lifelong mild hypercalcaemia with inappropriately normal or mildly high PTH and a 24-hour calcium-to-creatinine clearance ratio typically below **0.01**. Because the parathyroid setpoint is shifted, surgical parathyroidectomy is ineffective, does not cure the condition, and should never be performed.",
+   "say": "Familial hypocalciuric hypercalcemia is an autosomal dominant disorder caused by inactivating mutations in the calcium-sensing receptor gene. It produces lifelong mild hypercalcaemia with a low calcium-to-creatinine clearance ratio below zero point zero one. Parathyroidectomy does not cure the condition and is contraindicated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Familial Hypocalciuric Hypercalcemia",
+     "points": [
+      "Inactivating heterozygous CASR gene mutation",
+      "Calcium-creatinine clearance ratio <0.01",
+      "Autosomal dominant lifelong mild hypercalcaemia",
+      "Parathyroidectomy is contraindicated and ineffective"
+     ]
+    },
+    "right": {
+     "title": "Primary Hyperparathyroidism",
+     "points": [
+      "Solitary parathyroid adenoma or hyperplasia",
+      "Calcium-creatinine clearance ratio >0.02",
+      "Progressive osteopenia, nephrolithiasis, fractures",
+      "Curative resection via focused parathyroidectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hypercalcaemia of malignancy with suppressed intact PTH is most commonly humoral, driven by tumour-secreted **PTHrP** from squamous cell lung, head, neck, or renal carcinomas, osteolytic metastases in breast cancer and myeloma, or ectopic calcitriol from lymphoma. Initial emergency management requires vigorous intravenous **saline** hydration (200 to 300 mL/hour) to promote calciuresis, followed by potent intravenous bisphosphonates such as **zoledronic acid** (4 mg IV) or denosumab, using subcutaneous **calcitonin** as a short-acting bridge.",
+   "say": "Malignancy-associated hypercalcaemia with suppressed parathyroid hormone is usually mediated by PTHrP, bone metastases, or calcitriol. Emergency management prioritizes vigorous intravenous normal saline hydration, followed by intravenous bisphosphonates like zoledronic acid, utilizing calcitonin as a temporary short-acting bridge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Onset of Action",
+     "Mechanism of Hypocalcaemic Action",
+     "Duration of Response"
+    ],
+    "rows": [
+     [
+      "Intravenous 0.9% Saline",
+      "Immediate (hours)",
+      "Volume expansion and calciuresis",
+      "Maintained during infusion"
+     ],
+     [
+      "Subcutaneous Calcitonin",
+      "Rapid (2 to 4 hours)",
+      "Direct osteoclast inhibition",
+      "Tachyphylaxis after 48 hours"
+     ],
+     [
+      "Zoledronic Acid (4 mg IV)",
+      "Delayed (2 to 4 days)",
+      "Induces osteoclast apoptosis",
+      "Sustained for 2 to 4 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oral **glucocorticoid** therapy (prednisone 20 to 40 mg daily) lowers serum calcium specifically when hypercalcaemia is driven by excess **calcitriol** (1,25-dihydroxyvitamin D), as seen in sarcoidosis, tuberculosis, and Hodgkin lymphoma, by inhibiting intestinal calcium absorption and extrarenal 1-alpha-hydroxylase. Glucocorticoids are ineffective in primary hyperparathyroidism. In addition, excessive ingestion of calcium carbonate antacids produces **milk-alkali syndrome**, characterized by hypercalcaemia, metabolic alkalosis, and renal failure without elevated calcitriol.",
+   "say": "Glucocorticoids lower serum calcium when hypercalcaemia is caused by excess calcitriol production in lymphoma or granulomatous disease like sarcoidosis. They are ineffective in primary hyperparathyroidism. In contrast, milk-alkali syndrome from calcium carbonate excess produces hypercalcaemia, alkalosis, and renal failure without calcitriol elevation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Calcitriol-Mediated Hypercalcaemia",
+     "points": [
+      "Seen in sarcoidosis, tuberculosis, lymphoma",
+      "Macrophage 1-alpha-hydroxylase converts 25-OH to calcitriol",
+      "Marked intestinal hyperabsorption of calcium",
+      "Responds dramatically to oral glucocorticoid therapy"
+     ]
+    },
+    "right": {
+     "title": "Milk-Alkali Syndrome",
+     "points": [
+      "Excessive calcium carbonate ingestion with alkali",
+      "Triad of hypercalcaemia, metabolic alkalosis, renal failure",
+      "Suppressed PTH and low circulating calcitriol",
+      "Treated by discontinuing calcium antacids and hydration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following successful parathyroidectomy for severe primary hyperparathyroidism or parathyroid carcinoma with high preoperative bone turnover, patients are at risk of **hungry bone syndrome**. Characterized by profound, prolonged **hypocalcemia**, hypophosphataemia, and hypomagnesaemia, the syndrome results from rapid remineralization of demineralized skeletal matrix. Prevention and management require high-dose elemental calcium (2 to 4 grams daily) combined with active oral **calcitriol** (0.5 to 2.0 mcg daily) and magnesium repletion.",
+   "say": "Hungry bone syndrome is a severe postoperative complication characterized by profound hypocalcemia, hypophosphatemia, and hypomagnesemia due to rapid mineral deposition into depleted bone. Treatment requires high-dose oral calcium along with active calcitriol and magnesium replacement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndromic Feature",
+     "Biochemical Alteration",
+     "Pathophysiologic Mechanism",
+     "Therapeutic Replacement"
+    ],
+    "rows": [
+     [
+      "Serum Calcium",
+      "Severe prolonged hypocalcemia",
+      "Massive skeletal calcium uptake",
+      "High-dose oral calcium (2 to 4 g/day) + IV calcium"
+     ],
+     [
+      "Serum Phosphate",
+      "Marked hypophosphataemia",
+      "Skeletal hydroxyapatite deposition",
+      "Oral phosphate replacement if symptomatic"
+     ],
+     [
+      "Active Vitamin D",
+      "Subnormal active calcitriol",
+      "Loss of PTH stimulation of 1-hydroxylase",
+      "Oral calcitriol 0.5 to 2 mcg daily"
+     ]
+    ]
+   }
+  }
+ ]
+}

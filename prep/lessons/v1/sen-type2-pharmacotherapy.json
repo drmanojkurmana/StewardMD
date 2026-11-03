@@ -2,131 +2,187 @@
  "v": 1,
  "module": "sen-type2-pharmacotherapy",
  "subject": "ss-endocrinology",
- "title": "Pharmacotherapy of type 2 diabetes: choosing and sequencing agents",
- "minutes": 6,
+ "title": "Pharmacotherapy of type 2 diabetes",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Type 2 diabetes treatment is built around the individual, not just the HbA1c. **Metformin** remains the usual first-line drug unless there is a contraindication, and it works by reducing hepatic glucose output. Lifestyle measures run alongside every drug choice. For a patient with established cardiovascular disease or heart failure, or with chronic kidney disease, the choice of second agent should favour drugs with proven organ protection. Glycaemic targets should be individualised.",
-   "say": "Type 2 diabetes treatment is built around the individual, not just the HbA1c. Metformin remains the usual first line drug unless there is a contraindication, and it works by reducing hepatic glucose output. Lifestyle measures run alongside every drug choice. For a patient with established cardiovascular disease or heart failure, or with chronic kidney disease, the choice of second agent should favour drugs with proven organ protection. Glycaemic targets should be individualised.",
+   "tx": "**Metformin** is the usual first-line drug when the **eGFR** is at least 30 and the patient tolerates it. Many labels say it is not started if the eGFR is below 45, and it is stopped if the eGFR is below 30. Long-term use is linked with **vitamin B12** deficiency, so vitamin B12 is checked if anemia or neuropathy appears. The drawing maps organs, and it does not name a drug.",
+   "say": "Metformin is the usual first-line drug when the eGFR is at least 30 and the patient tolerates it. Many labels say it is not started if the eGFR is below 45, and it is stopped if the eGFR is below 30. Long-term use is linked with vitamin B12 deficiency, so vitamin B12 is checked if anemia or neuropathy appears. The drawing maps organs, and it does not name a drug.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/sen-type2-pharmacotherapy-fig1.webp",
-    "alt": "Flowchart showing initial type 2 diabetes treatment: lifestyle and metformin first, then SGLT2i or GLP-1 RA if cardiovascular, heart failure, or kidney disease is present.",
-    "caption": "Initial T2D pharmacotherapy based on comorbidities",
-    "ar": 1.8349
+    "src": "v1/kb/media/diabetes-mellitus-management-and-therapies-fig1.webp",
+    "alt": "Organ sites of glucose handling: liver gluconeogenesis, pancreatic insulin, muscle uptake, and renal glucose excretion.",
+    "caption": "Liver hepatic gluconeogenesis, pancreatic insulin secretion, muscle glucose uptake, and renal glucose excretion. No drug names are printed. This is not a treatment sequence, and it does not choose an SGLT2 inhibitor over a GLP-1 receptor agonist. Credit: StewardMD.",
+    "ar": 1.3333
    }
   },
   {
-   "tx": "Choose agents by comorbidity. **SGLT2 inhibitors** are preferred when there is heart failure or chronic kidney disease, even at low glucose levels, and they carry a risk of genital infection and euglycaemic ketoacidosis that must be taught. **GLP-1 receptor agonists** and **tirzepatide** suit patients needing weight reduction or cardiovascular protection. Avoid pioglitazone in heart failure because of fluid retention, and avoid GLP-1 agonists in personal or family history of medullary thyroid cancer or MEN2.",
-   "say": "Choose agents by comorbidity. SGLT2 inhibitors are preferred when there is heart failure or chronic kidney disease, even at low glucose levels, and they carry a risk of genital infection and euglycaemic ketoacidosis that must be taught. GLP-1 receptor agonists and tirzepatide suit patients needing weight reduction or cardiovascular protection. Avoid pioglitazone in heart failure because of fluid retention, and avoid GLP-1 agonists in personal or family history of medullary thyroid cancer or MEN2.",
+   "tx": "When atherosclerotic cardiovascular disease is present, an **SGLT2 inhibitor** or a **GLP-1 receptor agonist** with a proven outcome trial is added, and the choice does not wait for the HbA1c. **Heart failure**, and chronic kidney disease with albuminuria, are different. An SGLT2 inhibitor is the drug that reduces those outcomes, and a GLP-1 receptor agonist is not its equal for heart failure. Metformin alone is not enough risk reduction.",
+   "say": "When atherosclerotic cardiovascular disease is present, an SGLT2 inhibitor or a GLP-1 receptor agonist with a proven outcome trial is added, and the choice does not wait for the HbA1c. Heart failure, and chronic kidney disease with albuminuria, are different. An SGLT2 inhibitor is the drug that reduces those outcomes, and a GLP-1 receptor agonist is not its equal for heart failure. Metformin alone is not enough risk reduction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atherosclerotic disease",
+     "points": [
+      "Add an SGLT2 inhibitor or a GLP-1 receptor agonist",
+      "The agent needs a proven outcome trial",
+      "Do not wait on the HbA1c"
+     ]
+    },
+    "right": {
+     "title": "Heart failure or albuminuric kidney disease",
+     "points": [
+      "An SGLT2 inhibitor is the outcome drug",
+      "A GLP-1 receptor agonist is not the equal choice for heart failure",
+      "Metformin alone is not enough"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An **SGLT2 inhibitor** can cause genital mycotic infection, volume depletion, and **euglycemic ketoacidosis**. It is held when the patient is acutely ill or is not eating, and it is stopped about 3 days before planned surgery. A near-normal glucose does not exclude ketoacidosis on these drugs. The acidosis is the emergency, and the glucose can look deceptively safe.",
+   "say": "An SGLT2 inhibitor can cause genital mycotic infection, volume depletion, and euglycemic ketoacidosis. It is held when the patient is acutely ill or is not eating, and it is stopped about 3 days before planned surgery. A near-normal glucose does not exclude ketoacidosis on these drugs. The acidosis is the emergency, and the glucose can look deceptively safe.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Clinical situation",
-     "Preferred choice",
-     "Key caution"
+     "Harm",
+     "What to do"
     ],
     "rows": [
      [
-      "Heart failure",
-      "SGLT2 inhibitor",
-      "Genital infection, ketoacidosis"
+      "Genital mycotic infection",
+      "Expect it and treat it"
      ],
      [
-      "Chronic kidney disease",
-      "SGLT2 inhibitor",
-      "Monitor eGFR"
+      "Volume depletion",
+      "Hold the drug in acute illness"
      ],
      [
-      "Established cardiovascular disease",
-      "GLP-1 receptor agonist or SGLT2 inhibitor",
-      "Avoid GLP-1 if medullary thyroid cancer"
+      "Euglycemic ketoacidosis",
+      "A near-normal glucose does not exclude it"
      ],
      [
-      "Heart failure with pioglitazone",
-      "Avoid pioglitazone",
-      "Fluid retention"
+      "Planned surgery",
+      "Stop about 3 days before"
      ]
     ]
    }
   },
   {
-   "tx": "Sulfonylureas and DPP-4 inhibitors are cheaper options but work less well for cardio-renal protection. **Sulfonylureas** stimulate insulin release by closing ATP-sensitive potassium channels on beta cells, so they carry hypoglycaemia and weight gain. **DPP-4 inhibitors** prolong incretin action and are weight neutral. Glimepiride is often preferred to glibenclamide in patients with ischaemic heart disease, and tirzepatide should never be combined with a DPP-4 inhibitor.",
-   "say": "Sulfonylureas and DPP-4 inhibitors are cheaper options but work less well for cardio-renal protection. Sulfonylureas stimulate insulin release by closing ATP-sensitive potassium channels on beta cells, so they carry hypoglycaemia and weight gain. DPP-4 inhibitors prolong incretin action and are weight neutral. Glimepiride is often preferred to glibenclamide in patients with ischaemic heart disease, and tirzepatide should never be combined with a DPP-4 inhibitor.",
-   "vis": null
-  },
-  {
-   "tx": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start **basal insulin** early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every few days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
-   "say": "When HbA1c is very high, typically above 10 percent with symptoms such as weight loss, polyuria or polydipsia, start basal insulin early. A usual starting dose is 10 units at bedtime or about 0.1 to 0.2 units per kg. Titrate by 2 to 4 units every few days or weekly until the fasting target is reached. Avoid delaying insulin when glucose toxicity is evident, since clinical inertia prolongs poor control.",
+   "tx": "A **GLP-1 receptor agonist** lowers glucose and weight and can cause nausea. It carries a boxed warning for **medullary thyroid carcinoma** based on rodent C-cell tumors, so it is avoided in MEN2 and in personal medullary carcinoma. Do not combine it with a **DPP-4 inhibitor**. Both classes act on the incretin pathway, and the combination adds little.",
+   "say": "A GLP-1 receptor agonist lowers glucose and weight and can cause nausea. It carries a boxed warning for medullary thyroid carcinoma based on rodent C-cell tumors, so it is avoided in MEN2 and in personal medullary carcinoma. Do not combine it with a DPP-4 inhibitor. Both classes act on the incretin pathway, and the combination adds little.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "HbA1c above 10 percent with symptoms"
-     },
-     {
-      "id": "b",
-      "label": "Start basal insulin about 10 units at bedtime"
-     },
-     {
-      "id": "c",
-      "label": "Titrate 2 to 4 units every 2 to 3 days or weekly"
-     },
-     {
-      "id": "d",
-      "label": "Fasting target reached"
-     }
+    "kind": "compare",
+    "left": {
+     "title": "GLP-1 receptor agonist",
+     "points": [
+      "Lowers glucose and weight",
+      "Nausea is common",
+      "Avoided in MEN2 and personal medullary thyroid carcinoma"
+     ]
+    },
+    "right": {
+     "title": "Do not combine",
+     "points": [
+      "A DPP-4 inhibitor hits the same pathway",
+      "Little is gained by using both",
+      "The boxed warning is from rodent C-cell tumors"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **sulfonylurea** lowers glucose but causes hypoglycemia and weight gain. **Glyburide** is a poor choice when the eGFR is low, because active metabolites accumulate. A DPP-4 inhibitor is weight neutral and does not cause hypoglycemia by itself. **Saxagliptin** was linked to heart failure hospitalization in SAVOR-TIMI 53 and is avoided in heart failure.",
+   "say": "A sulfonylurea lowers glucose but causes hypoglycemia and weight gain. Glyburide is a poor choice when the eGFR is low, because active metabolites accumulate. A DPP-4 inhibitor is weight neutral and does not cause hypoglycemia by itself. Saxagliptin was linked to heart failure hospitalization in SAVOR-TIMI 53 and is avoided in heart failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Problem"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "Sulfonylurea",
+      "Hypoglycemia and weight gain"
      ],
      [
-      "b",
-      "c"
+      "Glyburide",
+      "Active metabolites accumulate when eGFR is low"
      ],
      [
-      "c",
-      "d"
+      "DPP-4 inhibitor",
+      "Weight neutral, no hypoglycemia alone"
+     ],
+     [
+      "Saxagliptin",
+      "Heart failure hospitalization in SAVOR-TIMI 53"
      ]
     ]
    }
   },
   {
-   "tx": "Evidence from the large trials shapes these choices. **UKPDS** showed that tight early control gives a legacy benefit that persists after the trial. **ACCORD** found that intensive glucose lowering to very low HbA1c increased mortality, so targets must not be pushed too hard in older or high-risk patients. **ADVANCE** and **VADT** confirmed modest microvascular and cardiovascular gains from intensive control, with less benefit in long-standing disease.",
-   "say": "Evidence from the large trials shapes these choices. UKPDS showed that tight early control gives a legacy benefit that persists after the trial. ACCORD found that intensive glucose lowering to very low HbA1c increased mortality, so targets must not be pushed too hard in older or high-risk patients. ADVANCE and VADT confirmed modest microvascular and cardiovascular gains from intensive control, with less benefit in long-standing disease.",
-   "vis": null
+   "tx": "**Pioglitazone** improves insulin resistance but causes fluid retention and is contraindicated in **heart failure**. It also raises **fracture** risk. It is not a drug for a patient who is already edematous. Fluid retention is the reason to choose another class, even when the glucose would have fallen.",
+   "say": "Pioglitazone improves insulin resistance but causes fluid retention and is contraindicated in heart failure. It also raises fracture risk. It is not a drug for a patient who is already edematous. Fluid retention is the reason to choose another class, even when the glucose would have fallen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pioglitazone can help",
+     "points": [
+      "Insulin resistance improves",
+      "Glucose can fall"
+     ]
+    },
+    "right": {
+     "title": "Do not use",
+     "points": [
+      "Heart failure, where it is contraindicated",
+      "A patient who is already edematous",
+      "High fracture risk is the other cost"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The usual **HbA1c** target is below 7 percent for most nonpregnant adults. A tighter target below 6 point 5 percent is only for a patient who can reach it without hypoglycemia. A target near 8 percent is appropriate when life expectancy is limited or the hypoglycemia risk is high. The **ACCORD** trial pushed HbA1c below 6 percent in longstanding type 2 diabetes with high cardiovascular risk and increased mortality.",
+   "say": "The usual HbA1c target is below 7 percent for most nonpregnant adults. A tighter target below 6 point 5 percent is only for a patient who can reach it without hypoglycemia. A target near 8 percent is appropriate when life expectancy is limited or the hypoglycemia risk is high. The ACCORD trial pushed HbA1c below 6 percent in longstanding type 2 diabetes with high cardiovascular risk and increased mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Who"
+    ],
+    "rows": [
+     [
+      "Below 7 percent",
+      "Most nonpregnant adults"
+     ],
+     [
+      "Below 6.5 percent",
+      "Only if it is reached without hypoglycemia"
+     ],
+     [
+      "Near 8 percent",
+      "Limited life expectancy or high hypoglycemia risk"
+     ],
+     [
+      "ACCORD below 6 percent",
+      "Mortality increased in high-risk longstanding disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Start **basal insulin** when the patient is catabolic, when the HbA1c is very high with symptoms, or when oral therapy that includes a GLP-1 receptor agonist is not enough. A common start is 10 units or 0 point 1 to 0 point 2 units per kg at bedtime, titrated to the fasting glucose. The **UKPDS** legacy effect is that early glycemic control still matters years later.",
+   "say": "Start basal insulin when the patient is catabolic, when the HbA1c is very high with symptoms, or when oral therapy that includes a GLP-1 receptor agonist is not enough. A common start is 10 units or 0 point 1 to 0 point 2 units per kg at bedtime, titrated to the fasting glucose. The UKPDS legacy effect is that early glycemic control still matters years later.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/insulin-types-regimens-dka-hypoglycaemia-fig1.webp",
+    "alt": "Insulin curves: basal rises then plateaus, rapid-acting peaks early, premixed has a peak and a tail, and basal-bolus is contrasted with sliding scale.",
+    "caption": "Basal insulin rises and then plateaus. Rapid-acting insulin peaks early. Premixed insulin has a peak and a tail. The lower panels contrast basal-bolus, which keeps a basal line, with sliding scale meal boluses and no basal line. A common start is 10 units or 0.1 to 0.2 units/kg at bedtime. Credit: StewardMD.",
+    "ar": 1.8349
+   }
   }
- ],
- "quiz": [
-  "q_5a4cfd51d336",
-  "q_2e3028602faf",
-  "q_6b9d78779387"
- ],
- "src": [],
- "refs": [
-  "ADA EASD consensus report on management of hyperglycaemia in type 2 diabetes",
-  "NICE NG28 Type 2 diabetes in adults: management",
-  "UKPDS Group, UK Prospective Diabetes Study",
-  "ACCORD Study Group, ACCORD trial",
-  "ADVANCE Collaborative Group, ADVANCE trial",
-  "VADT Investigators, Veterans Affairs Diabetes Trial"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 48
- }
+ ]
 }

@@ -1913,3 +1913,7 @@ integrated into the app, reminding us what to read, what to practise". Decision:
 - **Tests:** `test/prep-rewise.test.mjs` (planner, reminders, PDF structure: offsets, lengths, footers, wrapping);
   `test/run-prep-tools-ui.mjs` ReWise section (phone and iPad column, home plan, block progress, Error review run, PDF
   read back with pdftotext when installed, v1 switch, rest day, past exam date).
+
+## Image Library (2026-11-04)
+
+Every PrepNucleus subject screen shows an "Image Library" button next to the atlases (`prep-imglearn.js`, act `il-imglib`), opening the shared central image bank ([[Image Library]], flag `smd_imglib` default ON) filtered to the subject system where one maps. Lesson images (`vis.kind "image"`) and the ECG atlas tracings are part of the bank.

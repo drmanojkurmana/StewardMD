@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "module": "sen-diabetes-pregnancy",
+ "title": "Diabetes in pregnancy",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "International guidelines establish differing diagnostic thresholds for **gestational diabetes**. The National Institute for Health and Care Excellence (**NICE**) diagnoses gestational diabetes when fasting plasma glucose is at least 5.6 mmol/L (100 mg/dL) or 2-hour 75 g OGTT glucose is at least 7.8 mmol/L (140 mg/dL). Conversely, **IADPSG** criteria derived from the **HAPO** study diagnose GDM if any single threshold is met: fasting >=92, 1-hour >=180, or 2-hour >=153 mg/dL.",
+   "say": "Diagnostic criteria for gestational diabetes differ across international bodies. NICE guidelines diagnose gestational diabetes with fasting glucose at or above 5.6 mmol/L or two-hour OGTT glucose at or above 7 point 8 mmol/L. In contrast, IADPSG criteria from the HAPO trial diagnose diabetes if any single threshold is exceeded: fasting 92, one-hour 180, or two-hour 153 mg/dL.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "Gestational Diabetes Fetal Pathophysiology",
+    "caption": "Maternal hyperglycaemia, placental transfer, and fetal hyperinsulinism complications. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "The Diabetes in Pregnancy Study Group India (**DIPSI**) protocol represents the single-step national programme screening test utilized across India. In the DIPSI procedure, a non-fasting oral challenge of 75 grams of anhydrous glucose is administered to the pregnant woman regardless of the timing of her last meal. A 2-hour venous plasma glucose of **140 mg/dL** or higher establishes the diagnosis of **gestational diabetes** in routine primary healthcare settings.",
+   "say": "The DIPSI protocol is the non-fasting Indian national screening test for gestational diabetes. A seventy-five gram oral glucose load is administered regardless of prior meal timing, and a two-hour venous plasma glucose at or above 140 mg/dL confirms gestational diabetes in resource-appropriate clinical settings.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DIPSI Single-Step Test",
+     "points": [
+      "Non-fasting 75 g oral glucose load administered",
+      "Single blood draw at 2 hours post-load",
+      "Diagnostic threshold: >=140 mg/dL (7.8 mmol/L)",
+      "High compliance in ambulatory Indian antenatal clinics"
+     ]
+    },
+    "right": {
+     "title": "IADPSG / WHO Two-Hour OGTT",
+     "points": [
+      "Requires mandatory overnight 8 to 10 hour fast",
+      "Three blood draws: fasting, 1 hour, and 2 hours",
+      "Thresholds: 92 mg/dL fasting, 180 at 1 hr, 153 at 2 hr",
+      "Higher sensitivity but requires multiple timed phlebotomies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When nutritional and lifestyle modifications fail to maintain target glycaemia in gestational diabetes within 1 to 2 weeks, pharmacological intervention is indicated. Under **NICE** guidance, oral **metformin** may be offered as initial medical therapy, adding **insulin** if glycemic targets are not attained or if metformin is not tolerated. In contrast, American Diabetes Association guidelines recommend insulin as the preferred first-line agent, noting that metformin readily crosses the placenta.",
+   "say": "When medical nutrition therapy fails to achieve glycemic control in gestational diabetes, pharmacotherapy is required. NICE guidelines permit starting oral metformin before adding insulin. Conversely, the American Diabetes Association prefers insulin as first-line therapy because metformin crosses the human placenta.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Guideline Authority",
+     "First-Line Pharmacological Agent",
+     "Placental Transfer Considerations",
+     "Role of Oral Agents"
+    ],
+    "rows": [
+     [
+      "NICE (UK Guidelines)",
+      "Metformin initial; add insulin",
+      "Metformin crosses placenta freely",
+      "Approved as first-line oral medical option"
+     ],
+     [
+      "ADA (US Guidelines)",
+      "Insulin is preferred first-line",
+      "Insulin does not cross placenta",
+      "Metformin reserved if insulin is unfeasible"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rigorous self-monitoring of blood glucose is essential throughout **pregnancy**. American Diabetes Association consensus establishes strict glycaemic targets for gestational diabetes and preexisting diabetes: **fasting glucose** strictly below 95 mg/dL (5.3 mmol/L), 1-hour postprandial glucose below 140 mg/dL (7.8 mmol/L), and 2-hour postprandial glucose below 120 mg/dL (6.7 mmol/L). Doses of prandial and basal insulin are systematically titrated to meet these targets.",
+   "say": "Self-monitoring targets during pregnancy require tight control to minimize adverse neonatal outcomes. The American Diabetes Association recommends maintaining fasting glucose below 95 mg/dL, one-hour postprandial glucose below 140 mg/dL, and two-hour postprandial glucose below 120 mg/dL throughout gestation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glycaemic Assessment Timepoint",
+     "ADA Pregnancy Target",
+     "NICE Pregnancy Target",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Fasting Plasma Glucose",
+      "<95 mg/dL (5.3 mmol/L)",
+      "<95 mg/dL (5.3 mmol/L)",
+      "Prevents nocturnal fetal hyperinsulinism"
+     ],
+     [
+      "1-Hour Postprandial",
+      "<140 mg/dL (7.8 mmol/L)",
+      "<140 mg/dL (7.8 mmol/L)",
+      "Limits acute fetal glucose surges"
+     ],
+     [
+      "2-Hour Postprandial",
+      "<120 mg/dL (6.7 mmol/L)",
+      "<115 mg/dL (6.4 mmol/L)",
+      "Prevents excess fetal fat accretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preconception care for women with **pregestational diabetes** targets an HbA1c as close to 6.5% as feasible without severe hypoglycemia, high-dose folic acid (5 mg daily), and immediate cessation of teratogenic **ACE inhibitors**, receptor blockers, and statins. Uncontrolled first-trimester hyperglycaemia markedly elevates the risk of major congenital malformations, most characteristically **caudal regression** syndrome (sacral agenesis), ventricular septal defects, transposition of the great arteries, and neural tube defects.",
+   "say": "Preconception counseling in pregestational diabetes emphasizes achieving an HbA1c below 6.5% and stopping teratogenic medications such as ACE inhibitors and statins. Early first-trimester hyperglycemia significantly increases the risk of severe congenital anomalies, classically caudal regression syndrome and cardiac structural defects.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-thyroid-fig1.webp",
+    "alt": "Maternal-Fetal Endocrine Physiology",
+    "caption": "Maternal-fetal placental hormone transfer and organogenesis risks. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Persistent maternal hyperglycemia during the second and third trimesters delivers excess glucose across the placenta into fetal circulation, stimulating fetal pancreatic hypertrophy and massive insulin hypersecretion. Fetal hyperinsulinemia acts as a potent growth factor, producing asymmetric fetal **macrosomia** with shoulder dystocia, fetal polycythaemia from tissue hypoxia, organomegaly, and severe **neonatal hypoglycemia** within the first hours of birth as maternal glucose supply is abruptly severed.",
+   "say": "Maternal hyperglycemia in the second and third trimesters stimulates fetal hyperinsulinemia. Fetal insulin acts as a powerful anabolic growth hormone, leading to macrosomia, shoulder dystocia, and severe neonatal hypoglycemia immediately following umbilical cord clamping.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maternal-Fetal Exchange",
+     "points": [
+      "Maternal glucose traverses placenta via GLUT-1",
+      "Maternal insulin cannot traverse placenta",
+      "Unchecked fetal hyperglycaemic exposure",
+      "Hypertrophy of fetal pancreatic islet beta cells"
+     ]
+    },
+    "right": {
+     "title": "Neonatal Complications",
+     "points": [
+      "Macrosomia (birth weight >4000 to 4500 g)",
+      "Birth trauma and shoulder dystocia",
+      "Profound rebound neonatal hypoglycemia",
+      "Neonatal polycythemia, jaundice, respiratory distress"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following delivery, placental expulsion causes an abrupt collapse of human placental lactogen and progesterone levels, resulting in rapid restoration of maternal insulin sensitivity. Women diagnosed with gestational diabetes must undergo a definitive 75 g 2-hour **OGTT** at 4 to 12 weeks **postpartum** to screen for persistent dysglycemia. Even if postpartum testing is normal, these women carry a 50% lifetime risk of developing type 2 diabetes.",
+   "say": "After delivery, insulin resistance is cleared rapidly with expulsion of the placenta. Women with gestational diabetes should undergo a seventy-five gram oral glucose tolerance test four to twelve weeks postpartum to assess for persistent diabetes, followed by lifelong regular screening given their high risk of developing type 2 diabetes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gdm",
+      "label": "Gestational Diabetes Pregnancy"
+     },
+     {
+      "id": "delivery",
+      "label": "Placental Expulsion & Insulin Drop"
+     },
+     {
+      "id": "ogtt",
+      "label": "75g OGTT at 4 to 12 Weeks"
+     },
+     {
+      "id": "screen",
+      "label": "Lifelong Annual Glycemic Screening"
+     }
+    ],
+    "edges": [
+     [
+      "gdm",
+      "delivery",
+      "parturition"
+     ],
+     [
+      "delivery",
+      "ogtt",
+      "postpartum reclassification"
+     ],
+     [
+      "ogtt",
+      "screen",
+      "high lifetime risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The multicenter randomized **CONCEPTT** trial demonstrated that incorporating real-time **continuous glucose monitoring** in pregnant women with **type 1 diabetes** significantly improved neonatal outcomes compared with standard capillary glucose monitoring. Pregnant women utilizing CGM spent significantly more time in pregnancy-specific target range (63 to 140 mg/dL), which directly translated into reduced rates of large-for-gestational-age infants, fewer neonatal intensive care admissions, and reduced neonatal hypoglycemia.",
+   "say": "The CONCEPTT trial demonstrated that real-time continuous glucose monitoring in pregnant women with type 1 diabetes significantly improves neonatal outcomes. Mothers utilizing CGM spent more time in the tight pregnancy target range, resulting in fewer large-for-gestational-age infants and reduced neonatal intensive care admissions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Capillary Self-Monitoring",
+     "points": [
+      "Intermittent fingerstick capillary checks (4 to 7 daily)",
+      "Misses asymptomatic nocturnal hypoglycemic events",
+      "Lower total maternal time in target range",
+      "Higher rate of large-for-gestational-age infants"
+     ]
+    },
+    "right": {
+     "title": "CONCEPTT Real-Time CGM",
+     "points": [
+      "Continuous 24-hour sensor glucose monitoring",
+      "Pregnancy target range: 63 to 140 mg/dL (3.5 to 7.8 mmol/L)",
+      "Significant absolute reduction in neonatal hypoglycemia",
+      "Reduces neonatal intensive care length of stay"
+     ]
+    }
+   }
+  }
+ ]
+}

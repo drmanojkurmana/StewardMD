@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "sen-hypocalcaemia-hypoparathyroidism",
+ "subject": "ss-endocrinology",
+ "title": "Hypocalcaemia and hypoparathyroidism",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Hypocalcemia** causes neuromuscular irritability, a **prolonged QT** interval, and, when it is severe, seizures or laryngospasm. **Trousseau sign** is more specific than Chvostek sign. The ECG is checked before calcium is given intravenously. A cuff that reproduces carpal spasm is Trousseau sign.",
+   "say": "Hypocalcemia causes neuromuscular irritability, a prolonged QT interval, and, when it is severe, seizures or laryngospasm. Trousseau sign is more specific than Chvostek sign. The ECG is checked before calcium is given intravenously. A cuff that reproduces carpal spasm is Trousseau sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypoparathyroidism-fig1.webp",
+    "alt": "Hypoparathyroidism with deficient parathyroid tissue, neuromuscular hyperexcitability, and carpal spasm during a blood-pressure cuff.",
+    "caption": "Deficient parathyroid tissue, neuromuscular hyperexcitability, and carpal tetany while a cuff is inflated. That cuff test is Trousseau sign. The ECG is still checked before intravenous calcium. Credit: StewardMD.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "A low calcium with a low or inappropriately normal **PTH** is **hypoparathyroidism**. A low calcium with a high PTH is secondary hyperparathyroidism from **vitamin D deficiency**, malabsorption, or chronic kidney disease, or it is PTH resistance. The PTH result decides which branch you are on. Do not replace vitamin D alone when the PTH is already low.",
+   "say": "A low calcium with a low or inappropriately normal PTH is hypoparathyroidism. A low calcium with a high PTH is secondary hyperparathyroidism from vitamin D deficiency, malabsorption, or chronic kidney disease, or it is PTH resistance. The PTH result decides which branch you are on. Do not replace vitamin D alone when the PTH is already low.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low calcium, low or normal PTH",
+     "points": [
+      "Hypoparathyroidism",
+      "PTH is missing or inappropriately quiet",
+      "Neck surgery is the common acquired cause"
+     ]
+    },
+    "right": {
+     "title": "Low calcium, high PTH",
+     "points": [
+      "Vitamin D deficiency, malabsorption, or chronic kidney disease",
+      "Or PTH resistance",
+      "The glands are responding, not absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The common acquired cause is **neck surgery**. **Magnesium** deficiency causes functional hypoparathyroidism and must be corrected, or the calcium will not stay up. Autoimmune hypoparathyroidism is part of **APS-1** when candidiasis and adrenal insufficiency are also present. Magnesium is checked before a calcium infusion is blamed for failing.",
+   "say": "The common acquired cause is neck surgery. Magnesium deficiency causes functional hypoparathyroidism and must be corrected, or the calcium will not stay up. Autoimmune hypoparathyroidism is part of APS-1 when candidiasis and adrenal insufficiency are also present. Magnesium is checked before a calcium infusion is blamed for failing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/autoimmune-polyendocrine-syndrome-type-1-fig1.webp",
+    "alt": "APS-1 from AIRE loss, with candidiasis, hypoparathyroidism, and Addison disease as the Whitaker triad.",
+    "caption": "Loss of AIRE with failed negative selection. The triad drawn is chronic mucocutaneous candidiasis, hypoparathyroidism, and Addison disease, plus vitiligo and alopecia. Antibodies listed include anti-NALP5 and anti-21-hydroxylase. This is the autoimmune setting of hypoparathyroidism. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**Pseudohypoparathyroidism** type 1a, from a maternal **GNAS** variant, has **Albright hereditary osteodystrophy** plus resistance to PTH, so PTH is high, calcium is low, and phosphate is high. TSH resistance is common. Paternal inheritance of the same skeleton without hormone resistance is pseudopseudohypoparathyroidism. Hormone resistance follows the maternal allele because GNAS is imprinted.",
+   "say": "Pseudohypoparathyroidism type 1a, from a maternal GNAS variant, has Albright hereditary osteodystrophy plus resistance to PTH, so PTH is high, calcium is low, and phosphate is high. TSH resistance is common. Paternal inheritance of the same skeleton without hormone resistance is pseudopseudohypoparathyroidism. Hormone resistance follows the maternal allele because GNAS is imprinted.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inheritance",
+     "Skeleton",
+     "Hormones"
+    ],
+    "rows": [
+     [
+      "Maternal GNAS",
+      "Albright hereditary osteodystrophy",
+      "PTH resistance, often TSH resistance"
+     ],
+     [
+      "Paternal GNAS",
+      "Same skeleton",
+      "No hormone resistance"
+     ],
+     [
+      "Name of the paternal picture",
+      "Pseudopseudohypoparathyroidism",
+      "Calcium and PTH stay normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute symptomatic hypocalcemia is treated with intravenous **calcium gluconate** on a cardiac monitor, after magnesium is checked. Give 1 to 2 g of calcium gluconate and repeat it as needed. Do not put calcium into a line that contains bicarbonate, because the calcium precipitates. The monitor is watched while the infusion runs.",
+   "say": "Acute symptomatic hypocalcemia is treated with intravenous calcium gluconate on a cardiac monitor, after magnesium is checked. Give 1 to 2 g of calcium gluconate and repeat it as needed. Do not put calcium into a line that contains bicarbonate, because the calcium precipitates. The monitor is watched while the infusion runs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Acute step",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Before the infusion",
+      "Check magnesium and the ECG"
+     ],
+     [
+      "Dose",
+      "1 to 2 g calcium gluconate"
+     ],
+     [
+      "Line",
+      "No bicarbonate in the same line"
+     ],
+     [
+      "Monitor",
+      "Cardiac monitor while it runs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic hypoparathyroidism is treated with calcium and **calcitriol**, and the aim is a low-normal serum calcium so that urine calcium does not stay high. Thiazides can reduce **hypercalciuria**. **Recombinant PTH** is reserved for patients who cannot be controlled without hypercalciuria or who need very large doses. A high urine calcium is a reason to lower the serum target.",
+   "say": "Chronic hypoparathyroidism is treated with calcium and calcitriol, and the aim is a low-normal serum calcium so that urine calcium does not stay high. Thiazides can reduce hypercalciuria. Recombinant PTH is reserved for patients who cannot be controlled without hypercalciuria or who need very large doses. A high urine calcium is a reason to lower the serum target.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Usual chronic plan",
+     "points": [
+      "Oral calcium plus calcitriol",
+      "Target a low-normal serum calcium",
+      "Thiazide if urine calcium is high"
+     ]
+    },
+    "right": {
+     "title": "Recombinant PTH",
+     "points": [
+      "Reserved, not first-line",
+      "Used when control needs hypercalciuria",
+      "Or when doses of calcium and calcitriol are very large"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Activating **CASR** variants cause **autosomal dominant hypocalcemia**, with a low PTH and a tendency to hypercalciuria. Pushing the serum calcium into the normal range with calcitriol can cause **nephrocalcinosis**, so the target is a little below normal. The kidney wastes calcium even while the serum calcium is low. Do not chase a mid-normal calcium in this disease.",
+   "say": "Activating CASR variants cause autosomal dominant hypocalcemia, with a low PTH and a tendency to hypercalciuria. Pushing the serum calcium into the normal range with calcitriol can cause nephrocalcinosis, so the target is a little below normal. The kidney wastes calcium even while the serum calcium is low. Do not chase a mid-normal calcium in this disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autosomal dominant hypocalcemia",
+     "points": [
+      "Activating CASR",
+      "Low PTH and hypercalciuria",
+      "Target a little below normal"
+     ]
+    },
+    "right": {
+     "title": "Ordinary hypoparathyroidism",
+     "points": [
+      "PTH is low after surgery or autoimmunity",
+      "Calcitriol aims at low-normal calcium",
+      "Nephrocalcinosis is still a risk if urine calcium stays high"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pseudohypoparathyroidism** is not treated by removing parathyroid tissue. The glands are responding correctly to a receptor defect. Give calcium and **calcitriol**, and replace the other resistant axes, especially **TSH**. An operation removes a hormone the body is already failing to hear.",
+   "say": "Pseudohypoparathyroidism is not treated by removing parathyroid tissue. The glands are responding correctly to a receptor defect. Give calcium and calcitriol, and replace the other resistant axes, especially TSH. An operation removes a hormone the body is already failing to hear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Remove the parathyroids?",
+      "No"
+     ],
+     [
+      "Why not",
+      "The receptor is the defect, not the gland"
+     ],
+     [
+      "Give",
+      "Calcium and calcitriol"
+     ],
+     [
+      "Also replace",
+      "TSH, which is often resistant"
+     ]
+    ]
+   }
+  }
+ ]
+}

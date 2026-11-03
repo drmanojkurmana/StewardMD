@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "sen-thyroid-nodules-cancer",
+ "subject": "ss-endocrinology",
+ "title": "Thyroid nodules and thyroid cancer",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Measure **TSH** first in a thyroid nodule. If the TSH is low, do a **radionuclide scan**. A hot autonomous nodule is rarely malignant and is not biopsied. A cold or warm nodule, or any nodule when the TSH is not suppressed, is considered for **fine-needle aspiration** based on sonographic risk and size.",
+   "say": "Measure TSH first in a thyroid nodule. If the TSH is low, do a radionuclide scan. A hot autonomous nodule is rarely malignant and is not biopsied. A cold or warm nodule, or any nodule when the TSH is not suppressed, is considered for fine-needle aspiration based on sonographic risk and size.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-nodule-fig1.webp",
+    "alt": "Thyroid nodule pathway starting at TSH, with a hot nodule and a cold nodule, ultrasound features of microcalcifications and a taller-than-wide shape, then FNA.",
+    "caption": "TSH sits at the top. One branch shows a hot nodule and a cold nodule on a radionuclide scan. Another shows microcalcifications and a taller-than-wide shape, then FNA. The arrows do not state that only a low TSH needs the scan. Credit: StewardMD.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "**Bethesda** categories run from I nondiagnostic and II benign through III atypia of undetermined significance, IV follicular neoplasm, V suspicious for malignancy, and VI malignant. A **follicular carcinoma** cannot be diagnosed on cytology because capsular or vascular invasion is a histologic finding. Bethesda IV is a surgical diagnosis, not a finished cancer label.",
+   "say": "Bethesda categories run from I nondiagnostic and II benign through III atypia of undetermined significance, IV follicular neoplasm, V suspicious for malignancy, and VI malignant. A follicular carcinoma cannot be diagnosed on cytology because capsular or vascular invasion is a histologic finding. Bethesda IV is a surgical diagnosis, not a finished cancer label.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bethesda",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "I",
+      "Nondiagnostic"
+     ],
+     [
+      "II",
+      "Benign"
+     ],
+     [
+      "III",
+      "Atypia of undetermined significance"
+     ],
+     [
+      "IV",
+      "Follicular neoplasm, invasion not seen on cytology"
+     ],
+     [
+      "V",
+      "Suspicious for malignancy"
+     ],
+     [
+      "VI",
+      "Malignant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Papillary thyroid carcinoma** is the common differentiated cancer. Nuclear grooves, orphan Annie nuclei, and **psammoma bodies** are the classic histology, spread is usually lymphatic, and **BRAF V600E** is the common driver. Prognosis is excellent for intrathyroidal disease in a young adult. Childhood radiation is a classic risk for this tumour.",
+   "say": "Papillary thyroid carcinoma is the common differentiated cancer. Nuclear grooves, orphan Annie nuclei, and psammoma bodies are the classic histology, spread is usually lymphatic, and BRAF V600E is the common driver. Prognosis is excellent for intrathyroidal disease in a young adult. Childhood radiation is a classic risk for this tumour.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-carcinoma-and-bethesda-classification-fig1.webp",
+    "alt": "Four thyroid carcinoma panels: papillary with orphan Annie nuclei and psammoma bodies, follicular with capsular invasion, medullary with amyloid, and anaplastic with necrosis.",
+    "caption": "This is histology, not a Bethesda chart, despite the file name. Papillary carcinoma shows orphan Annie nuclei, grooves, and psammoma bodies, with BRAF V600E listed. Follicular carcinoma shows capsular and vascular invasion. Medullary carcinoma shows C cells, calcitonin, and Congo red amyloid. Anaplastic carcinoma shows necrosis and giant cells. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**Follicular thyroid carcinoma** spreads by blood to bone and lung rather than to nodes. **Hurthle cell carcinoma** is the oncocytic variant and takes up radioiodine less reliably. Cytology cannot prove either tumour, because invasion is seen only on the resected specimen. A solitary bone metastasis in an older adult can be the first sign of follicular carcinoma.",
+   "say": "Follicular thyroid carcinoma spreads by blood to bone and lung rather than to nodes. Hurthle cell carcinoma is the oncocytic variant and takes up radioiodine less reliably. Cytology cannot prove either tumour, because invasion is seen only on the resected specimen. A solitary bone metastasis in an older adult can be the first sign of follicular carcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Papillary carcinoma",
+     "points": [
+      "Lymphatic spread to nodes",
+      "Psammoma bodies and nuclear grooves",
+      "BRAF V600E is common",
+      "Radioiodine is often useful"
+     ]
+    },
+    "right": {
+     "title": "Follicular carcinoma",
+     "points": [
+      "Blood spread to bone and lung",
+      "Invasion is histologic, not cytologic",
+      "Hurthle cell variant takes up iodine less well",
+      "Nodes are not the usual first site"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Medullary thyroid carcinoma** arises from C cells, secretes **calcitonin** and **CEA**, and shows amyloid that stains with Congo red. It does not concentrate radioiodine. Measure metanephrines before thyroidectomy because it may be the first sign of **MEN2**, and a pheochromocytoma must be treated first. Family screening follows if a germline RET variant is found.",
+   "say": "Medullary thyroid carcinoma arises from C cells, secretes calcitonin and CEA, and shows amyloid that stains with Congo red. It does not concentrate radioiodine. Measure metanephrines before thyroidectomy because it may be the first sign of MEN2, and a pheochromocytoma must be treated first. Family screening follows if a germline RET variant is found.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medullary carcinoma",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Marker",
+      "Calcitonin and CEA"
+     ],
+     [
+      "Stain",
+      "Congo red amyloid"
+     ],
+     [
+      "Before surgery",
+      "Exclude pheochromocytoma in MEN2"
+     ],
+     [
+      "Radioiodine",
+      "Not taken up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ATA does not recommend a serum **calcitonin** on every **thyroid nodule**. Calcitonin is measured when medullary carcinoma is suspected, when cytology is suggestive, or when a family history of MEN2 is present. A routine calcitonin on every nodule produces false alarms. Use it when the pre-test probability is real.",
+   "say": "The ATA does not recommend a serum calcitonin on every thyroid nodule. Calcitonin is measured when medullary carcinoma is suspected, when cytology is suggestive, or when a family history of MEN2 is present. A routine calcitonin on every nodule produces false alarms. Use it when the pre-test probability is real.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Measure calcitonin",
+     "points": [
+      "Cytology suggests medullary carcinoma",
+      "Family history of MEN2",
+      "A nodule with diarrhoea or flushing that fits medullary disease",
+      "Before surgery once the diagnosis is likely"
+     ]
+    },
+    "right": {
+     "title": "Do not measure on every nodule",
+     "points": [
+      "ATA does not recommend a universal screen",
+      "False alarms are common",
+      "Ultrasound risk still guides FNA",
+      "TSH remains the first blood test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anaplastic thyroid carcinoma** is a disease of older adults, with a rapidly enlarging hard mass and airway compromise. Test for **BRAF V600E**, because a BRAF-directed combination can change an otherwise very poor course. It is staged as stage IV at diagnosis. Airway protection comes before the molecular result, but the result should not be forgotten.",
+   "say": "Anaplastic thyroid carcinoma is a disease of older adults, with a rapidly enlarging hard mass and airway compromise. Test for BRAF V600E, because a BRAF-directed combination can change an otherwise very poor course. It is staged as stage IV at diagnosis. Airway protection comes before the molecular result, but the result should not be forgotten.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Anaplastic carcinoma"
+    ],
+    "rows": [
+     [
+      "Who",
+      "Older adults"
+     ],
+     [
+      "Course",
+      "Rapid hard mass, airway risk"
+     ],
+     [
+      "Stage",
+      "Stage IV at diagnosis"
+     ],
+     [
+      "BRAF V600E",
+      "Can open a directed combination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After treatment of differentiated thyroid cancer, follow **thyroglobulin** and thyroglobulin antibody, not TSH alone. **Radioiodine remnant ablation** is not mandatory for low-risk intrathyroidal papillary carcinoma. **TSH suppression** is tighter for high-risk disease than for low-risk disease that is in remission. A rising antibody can hide a recurrence when the thyroglobulin looks low.",
+   "say": "After treatment of differentiated thyroid cancer, follow thyroglobulin and thyroglobulin antibody, not TSH alone. Radioiodine remnant ablation is not mandatory for low-risk intrathyroidal papillary carcinoma. TSH suppression is tighter for high-risk disease than for low-risk disease that is in remission. A rising antibody can hide a recurrence when the thyroglobulin looks low.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low-risk remission",
+     "points": [
+      "Intrathyroidal papillary carcinoma",
+      "Remnant ablation is not mandatory",
+      "TSH suppression can be relaxed",
+      "Thyroglobulin and antibody are still followed"
+     ]
+    },
+    "right": {
+     "title": "High-risk disease",
+     "points": [
+      "Tighter TSH suppression",
+      "Thyroglobulin trend matters more",
+      "Antibody can mask the number",
+      "Imaging follows a rising marker"
+     ]
+    }
+   }
+  }
+ ]
+}
