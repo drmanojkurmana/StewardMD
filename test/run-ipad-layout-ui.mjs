@@ -39,16 +39,16 @@ const SCREENS = [
   ["surgx", ACT("surgx"), ".sgx-scroll", ".sgx-scroll", "grid"],
   ["wardsynq", ACT("wardsynq"), "#smdWard", "#smdWard", "grid"],
   ["opd-queue", ACT("queue"), "#smdQueue", "#smdQueue", "grid"],
-  ["followcare", ACT("followcare"), ".fc-bd,.fc-ov", ".fc-sheet", "text"],
+  ["followcare", ACT("followcare"), ".fc-bd,.fc-ov", ".fc-bd", "text"],
   ["calculators", "window.MEDCALC&&MEDCALC.openList&&MEDCALC.openList()", ".mc-body", ".mc-body", "grid"],
   ["drug-index", "window.MEDDB&&MEDDB.openList&&MEDDB.openList()", "#dbOverlay .db-body,#dbOverlay", "#dbOverlay", "grid"],
   ["settings", "window.SMD_openSettings&&SMD_openSettings()", ".sbr-set-body,.hv-sheet", ".sbr-set-body,.hv-sheet-wrap", "text"],
   ["paywall", "window.SMD_PRO&&SMD_PRO.openPaywall&&SMD_PRO.openPaywall()", "#proPay > div", "#proPay > div", "dialog"],
   ["specialty-kits", ACT("speckit"), "#smdKitHost", "#smdKitHost", "grid"],
-  ["icd", ACT("icdsearch"), "#icdOverlay", "#icdOverlay", "text"],
+  ["icd", ACT("icdsearch"), ".icd-body", ".icd-body", "text"],
   ["thorex", ACT("thorex"), "#thorexRoot", "#thorexRoot", "grid"],
   ["sknx", ACT("sknx"), "#sknxRoot", "#sknxRoot", "grid"],
-  ["pglog", ACT("pglog"), ".pgl-scroll", ".pgl-scroll", "text"],
+  ["pglog", ACT("pglog"), ".pgl-scroll", ".pgl-wrap", "text"],
 ];
 const only = (process.argv[2] || "").split(",").filter(Boolean);
 const screens = only.length ? SCREENS.filter(([n]) => only.includes(n)) : SCREENS;
@@ -70,9 +70,10 @@ async function boot() {
 const MEASURE = (scrollerSel, colSel) => `(()=>{const W=innerWidth;
   const pick=s=>{for(const el of document.querySelectorAll(s)){const b=el.getBoundingClientRect(),st=getComputedStyle(el);if(b.width>40&&b.height>40&&st.display!=='none'&&st.visibility!=='hidden')return el}return null};
   const sc=pick(${JSON.stringify(scrollerSel)}), col=pick(${JSON.stringify(colSel)});
-  const clipped=[];document.querySelectorAll('body *').forEach(n=>{const b=n.getBoundingClientRect(),st=getComputedStyle(n);if(!b.width||st.display==='none'||st.visibility==='hidden'||b.right<=W+1||b.bottom<0||b.top>innerHeight*2)return;let p=n.parentElement;while(p&&p!==document.body){const s=getComputedStyle(p);if(/auto|scroll/.test(s.overflowX)&&p.scrollWidth>p.clientWidth&&p.getBoundingClientRect().right<=W+1)return;p=p.parentElement}clipped.push(n.tagName+'.'+String(n.className.baseVal??n.className).slice(0,28)+'@'+Math.round(b.right))});
+  const clipped=[];document.querySelectorAll('body *').forEach(n=>{const b=n.getBoundingClientRect(),st=getComputedStyle(n);if(!b.width||st.display==='none'||st.visibility==='hidden'||b.right<=W+1||b.left>=W-1||b.bottom<0||b.top>innerHeight*2)return;let p=n.parentElement,off=false;while(p&&p!==document.body){const s=getComputedStyle(p),pr=p.getBoundingClientRect();if(p.getAttribute('aria-hidden')==='true'||p.hasAttribute('inert')||s.visibility==='hidden'||pr.left>=W-1){off=true;break}if(/auto|scroll/.test(s.overflowX)&&p.scrollWidth>p.clientWidth&&pr.right<=W+1)return;p=p.parentElement}if(off)return;clipped.push(n.tagName+'.'+String(n.className.baseVal??n.className).slice(0,28)+'@'+Math.round(b.right))});
   const sb=sc?sc.getBoundingClientRect():null, cb=col?col.getBoundingClientRect():null;
-  return JSON.stringify({W,page:document.documentElement.scrollWidth<=W+1,scW:sb?Math.round(sb.width):0,scL:sb?Math.round(sb.left):-1,scR:sb?Math.round(W-sb.right):-1,colW:cb?Math.round(cb.width):0,colL:cb?Math.round(cb.left):-1,colR:cb?Math.round(W-cb.right):-1,clipped:clipped.slice(0,5),nClipped:clipped.length,hasSc:!!sc,hasCol:!!col})})()`;
+  const cst=col?getComputedStyle(col):null, colTextW=cb?Math.round(cb.width-(parseFloat(cst.paddingLeft)||0)-(parseFloat(cst.paddingRight)||0)):0;
+  return JSON.stringify({W,page:document.documentElement.scrollWidth<=W+1,scW:sb?Math.round(sb.width):0,scL:sb?Math.round(sb.left):-1,scR:sb?Math.round(W-sb.right):-1,colW:cb?Math.round(cb.width):0,colTextW,colL:cb?Math.round(cb.left):-1,colR:cb?Math.round(W-cb.right):-1,clipped:clipped.slice(0,5),nClipped:clipped.length,hasSc:!!sc,hasCol:!!col})})()`;
 
 try {
   let version; for (let i = 0; i < 60; i++) { try { version = await (await fetch(`http://localhost:${CDP}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -94,10 +95,10 @@ try {
       if (!raw) { console.log(`SKIP ${tag}: measure failed`); skips++; results.push({ name, w, h, skip: true }); continue; }
       const m = JSON.parse(raw);
       if (!m.hasSc) { console.log(`SKIP ${tag}: scroller ${scrollerSel} not open`); skips++; results.push({ name, w, h, skip: true, ...m }); await shot(`${name}-${w}x${h}`); continue; }
-      ok(m.scW >= w - 2 && m.scL <= 2 && m.scR <= 2, `${tag}: scroller spans viewport (${m.scW}px, L${m.scL} R${m.scR})`);
+      if (kind !== "dialog") ok(m.scW >= w - 2 && m.scL <= 2 && m.scR <= 2, `${tag}: scroller spans viewport (${m.scW}px, L${m.scL} R${m.scR})`);
       ok(m.page, `${tag}: no horizontal page scroll`);
       ok(m.nClipped === 0, `${tag}: nothing clipped past right edge ${m.nClipped ? JSON.stringify(m.clipped) : ""}`);
-      if (m.hasCol && kind === "text") ok(m.colW >= 600 && m.colW <= 1100, `${tag}: text column 600-1100px (${m.colW}px)`);
+      if (m.hasCol && kind === "text") ok(m.colTextW >= 600 && m.colTextW <= 1100, `${tag}: text column 600-1100px (${m.colTextW}px)`);
       else if (m.hasCol && kind === "grid") ok(m.colW >= 600, `${tag}: grid column at least 600px (${m.colW}px, not a phone box)`);
       else if (m.hasCol && kind === "dialog") ok(m.colW <= 700, `${tag}: dialog stays a dialog (${m.colW}px)`);
       results.push({ name, w, h, ...m });

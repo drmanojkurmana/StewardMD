@@ -405,8 +405,8 @@ html body:is(.dark,.v3-dark) .settings-detail{
   padding-top: 0;
 }
 
-/* iPad: settings text column widens to 960px, centred the same way as its head. */
+/* iPad: scroller spans the screen, readable column centred by gutters. */
 @media (min-width: 700px) {
-  .sbr-set-ov[data-settings-ui] .sbr-set-head { padding-inline: max(28px, calc((100% - 960px) / 2)); }
-  .sbr-set-ov[data-settings-ui] .sbr-set-body { max-width: 960px; }
+  .sbr-set-ov[data-settings-ui] .sbr-set-head { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .sbr-set-ov[data-settings-ui] .sbr-set-body { max-width: none; padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
 }

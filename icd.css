@@ -13,6 +13,7 @@ body.icd-lock{overflow:hidden}
 .icd-top-sp{width:64px;flex:0 0 auto}
 
 .icd-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:860px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}
+@media(min-width:700px){.icd-body{max-width:none;margin:0;padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 960px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 960px)/2))}.icd-top{padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 960px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 960px)/2))}}
 .icd-ico{width:16px;height:16px;flex:0 0 auto;vertical-align:-3px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 
 .icd-searchbar{position:relative;margin-bottom:10px}
