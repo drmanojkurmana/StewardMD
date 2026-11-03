@@ -1,0 +1,293 @@
+{
+  "v": 1,
+  "module": "son-breast-special",
+  "subject": "ss-medical-oncology",
+  "title": "Special situations in breast cancer: biology, risk assessment and tailored management",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Male breast cancer** is an uncommon malignancy that accounts for under 1% of all breast cancers diagnosed worldwide. The vast majority of male tumours present as estrogen receptor-positive invasive ductal carcinoma. Strong predisposing risk factors include Klinefelter syndrome, severe hepatic dysfunction, and particularly germline **BRCA2 mutations**. Systemic management follows postmenopausal female guidelines, with tamoxifen serving as the cornerstone of adjuvant and palliative endocrine therapy.",
+      "say": "Male breast cancer is an uncommon malignancy that accounts for under 1% of all breast cancers diagnosed worldwide. The vast majority of male tumours present as estrogen receptor-positive invasive ductal carcinoma. Strong predisposing risk factors include Klinefelter syndrome, severe hepatic dysfunction, and particularly germline BRCA2 mutations. Systemic management follows postmenopausal female guidelines.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Male Breast Cancer",
+          "Clinical Practice"
+        ],
+        "rows": [
+          [
+            "Frequency",
+            "Under 1% of all cases",
+            "High index of suspicion needed"
+          ],
+          [
+            "Receptor Profile",
+            "High ER and PR expression",
+            "Tamoxifen is preferred endocrine agent"
+          ],
+          [
+            "Genetics",
+            "BRCA2 germline alterations",
+            "Offer comprehensive genetic counselling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Breast cancer in pregnancy** requires balanced multidisciplinary management that safeguards fetal development while providing maternal cure. When systemic therapy is needed, anthracycline-based **systemic chemotherapy** regimens can be safely administered during the second and third trimesters. In contrast, systemic cytotoxic chemotherapy during the first trimester causes excessive teratogenicity. Radiotherapy and endocrine agents are strictly contraindicated during active gestation and remain deferred until the postpartum period.",
+      "say": "Breast cancer in pregnancy requires balanced multidisciplinary management that safeguards fetal development while providing maternal cure. When systemic therapy is needed, anthracycline-based systemic chemotherapy regimens can be safely administered during the second and third trimesters. In contrast, chemotherapy during the first trimester causes excessive teratogenicity. Radiotherapy and endocrine therapy remain deferred until delivery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gest",
+            "label": "Gestational Age",
+            "level": 1
+          },
+          {
+            "id": "t1",
+            "label": "First Trimester Surgery",
+            "level": 2
+          },
+          {
+            "id": "t2",
+            "label": "Second/Third Trimester Chemo",
+            "level": 3
+          },
+          {
+            "id": "post",
+            "label": "Postpartum RT and Hormones",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "gest",
+            "t1"
+          ],
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "post"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Inflammatory breast cancer** is a highly lethal variant presenting with rapid breast enlargement, erythema, and marked skin edema termed **peau d'orange**. Pathological skin punch biopsy typically reveals dermal lymphatic tumour emboli. This presentation designates the tumour as clinical stage T4, specifically T4d. Standard care demands primary neoadjuvant systemic anthracycline and taxane chemotherapy, followed by modified radical mastectomy and comprehensive adjuvant chest wall radiotherapy.",
+      "say": "Inflammatory breast cancer is a highly lethal variant presenting with rapid breast enlargement, erythema, and marked skin edema termed peau d'orange. Pathological skin punch biopsy typically demonstrates dermal lymphatic tumour emboli. This presentation designates the tumour as clinical stage T4. Standard clinical care requires primary neoadjuvant systemic anthracycline and taxane chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inflammatory Breast Cancer",
+          "points": [
+            "Rapid onset, erythema, peau d'orange",
+            "Dermal lymphatic emboli, stage T4d",
+            "Neoadjuvant systemic chemo mandatory"
+          ]
+        },
+        "right": {
+          "title": "Non-Inflammatory Locally Advanced",
+          "points": [
+            "Discrete dominant breast mass",
+            "Absence of diffuse peau d'orange",
+            "Staged by anatomical tumour size"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Phyllodes tumours** represent distinctive **fibroepithelial neoplasms** composed of monoclonal stromal proliferation and benign epithelial elements. Histological criteria divide them into benign, borderline, and malignant grades based on stromal cellularity, cellular atypia, stromal overgrowth, and mitotic rate. Wide local surgical excision with clear negative histological margins of at least one centimetre represents primary treatment. Lymph node dissection is rarely required because malignant spread occurs haematogenously.",
+      "say": "Phyllodes tumours are distinctive fibroepithelial neoplasms composed of monoclonal stromal proliferation and benign epithelial elements. Histological criteria divide them into benign, borderline, and malignant grades based on stromal cellularity, stromal overgrowth, and mitotic rate. Wide local surgical excision with clear margins provides primary treatment. Lymph node dissection is rarely required.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Grade",
+          "Stromal Atypia",
+          "Mitoses per 10 HPF",
+          "Management"
+        ],
+        "rows": [
+          [
+            "Benign",
+            "Mild or absent",
+            "< 5",
+            "Wide surgical margin"
+          ],
+          [
+            "Borderline",
+            "Moderate",
+            "5 to 9",
+            "Wide clear excision margin"
+          ],
+          [
+            "Malignant",
+            "Severe with overgrowth",
+            "10 or more",
+            "Wide margin or mastectomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Preinvasive **ductal carcinoma in situ** is commonly managed with breast-conserving surgery followed by adjuvant whole-breast radiotherapy to optimise local control. In hormone receptor-positive disease, adjuvant endocrine therapy with 5 years of daily oral **tamoxifen** significantly reduces the subsequent risk of both ipsilateral and contralateral invasive breast cancer events. For postmenopausal patients, an aromatase inhibitor provides an effective alternative to tamoxifen depending on vascular and bone health.",
+      "say": "Preinvasive ductal carcinoma in situ is commonly managed with breast-conserving surgery followed by adjuvant whole-breast radiotherapy to optimise local control. In hormone receptor-positive disease, adjuvant endocrine therapy with 5 years of daily oral tamoxifen significantly reduces the subsequent risk of invasive cancer events. For postmenopausal patients, an aromatase inhibitor provides an effective alternative.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dcis",
+            "label": "DCIS Diagnosis",
+            "level": 1
+          },
+          {
+            "id": "surg",
+            "label": "Conserving Surgery",
+            "level": 2
+          },
+          {
+            "id": "rt",
+            "label": "Adjuvant Radiotherapy",
+            "level": 3
+          },
+          {
+            "id": "tam",
+            "label": "5 Years Tamoxifen",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dcis",
+            "surg"
+          ],
+          [
+            "surg",
+            "rt"
+          ],
+          [
+            "rt",
+            "tam"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Paget disease** of the nipple presents clinically as a chronic, eczematoid erythematous nipple-areolar eruption with surface scaling or crusting. Microscopic inspection demonstrates infiltration of the nipple epidermis by malignant **intraepidermal Paget cells** displaying large pale cytoplasm and prominent nucleoli. The vast majority of cases harbor an underlying ductal carcinoma in situ or invasive ductal adenocarcinoma, necessitating thorough bilateral diagnostic mammography and breast magnetic resonance imaging.",
+      "say": "Paget disease of the nipple presents clinically as a chronic, eczematoid erythematous nipple eruption with surface scaling or crusting. Microscopic inspection demonstrates infiltration of the nipple epidermis by malignant intraepidermal Paget cells displaying large pale cytoplasm. The vast majority of cases harbor an underlying ductal carcinoma in situ or invasive ductal adenocarcinoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mammary Paget Disease",
+          "points": [
+            "Malignant intraepidermal Paget cells",
+            "Underlying DCIS or invasive cancer",
+            "Persistent unilateral eczematoid lesion"
+          ]
+        },
+        "right": {
+          "title": "Benign Nipple Eczema",
+          "points": [
+            "Spongiosis without atypical cells",
+            "No underlying parenchymal malignancy",
+            "Bilateral and responsive to topical steroids"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Optimal management of older adults requires objective **geriatric assessment** rather than chronological age alone. Validated instruments such as the **CARG toxicity** risk calculator accurately predict severe grade 3 to 5 chemotherapy toxicities. Evaluating functional status, cognitive reserve, comorbidities, and polypharmacy helps clinicians tailor treatment intensity, deciding between full-dose cytotoxic regimens, dose modifications, single-agent options, or primary endocrine therapy.",
+      "say": "Optimal management of older adults requires objective geriatric assessment rather than chronological age alone. Validated instruments such as the CARG toxicity risk calculator accurately predict severe grade 3 to 5 chemotherapy toxicities. Evaluating functional status, cognitive reserve, comorbidities, and polypharmacy helps clinicians tailor treatment intensity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Domain",
+          "Assessment Tool",
+          "Clinical Application"
+        ],
+        "rows": [
+          [
+            "Functional Status",
+            "ADL and IADL scores",
+            "Estimates physical independence"
+          ],
+          [
+            "Toxicity Risk",
+            "CARG calculator",
+            "Predicts severe grade 3 to 5 events"
+          ],
+          [
+            "Comorbidity",
+            "Charlson Comorbidity Index",
+            "Guides life expectancy estimation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Oligometastatic breast cancer** describes an intermediate biological state with limited metastatic spread, typically five or fewer detectable distant lesions. In carefully selected patients with controlled primary disease, delivering definitive local ablative therapies such as **stereotactic radiotherapy** or surgical metastasectomy alongside systemic therapy can prolong disease-free survival. Multidisciplinary tumor board review ensures aggressive local consolidation is applied only when widespread micrometastatic progression remains unlikely.",
+      "say": "Oligometastatic breast cancer describes an intermediate biological state with limited metastatic spread, typically five or fewer detectable distant lesions. In carefully selected patients with controlled primary disease, delivering definitive local ablative therapies such as stereotactic radiotherapy or surgical metastasectomy alongside systemic therapy can prolong disease-free survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oligo",
+            "label": "Oligometastatic Disease",
+            "level": 1
+          },
+          {
+            "id": "sys",
+            "label": "Systemic Control",
+            "level": 2
+          },
+          {
+            "id": "sbrt",
+            "label": "Stereotactic RT / Surgery",
+            "level": 3
+          },
+          {
+            "id": "pfs",
+            "label": "Prolonged Progression-Free State",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "oligo",
+            "sys"
+          ],
+          [
+            "sys",
+            "sbrt"
+          ],
+          [
+            "sbrt",
+            "pfs"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 44 (Diseases of the Breast)",
+    "NCCN Clinical Practice Guidelines in Oncology: Breast Cancer",
+    "CARG Toxicity Tool (JCO)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

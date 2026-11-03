@@ -1,0 +1,314 @@
+{
+  "v": 1,
+  "module": "son-hodgkin",
+  "subject": "ss-medical-oncology",
+  "title": "Hodgkin lymphoma: pathology, PET-adapted therapy and targeted antibody-drug conjugates",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Classical Hodgkin lymphoma is pathologically characterized by giant diagnostic neoplastic cells embedded within an abundant reactive inflammatory background. Multinucleated **Reed-Sternberg cells** and mononuclear Hodgkin variants show strong and uniform immunopositivity for **CD30** and CD15. In contrast, neoplastic cells typically lack the B-cell marker **CD20** and the pan-hematopoietic marker CD45, aiding immunohistochemical distinction from non-Hodgkin lymphomas.",
+      "say": "Classical Hodgkin lymphoma is pathologically characterized by giant diagnostic neoplastic cells embedded within an abundant reactive inflammatory background. Multinucleated Reed-Sternberg cells show strong and uniform immunopositivity for CD30 and CD15. In contrast, neoplastic cells typically lack CD20 and CD45, aiding distinction from non-Hodgkin lymphomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Classical Hodgkin Lymphoma",
+          "NLPHL Subtype"
+        ],
+        "rows": [
+          [
+            "CD30",
+            "Strongly positive (>95%)",
+            "Negative"
+          ],
+          [
+            "CD15",
+            "Positive (membrane & dot Golgi)",
+            "Negative"
+          ],
+          [
+            "CD20",
+            "Negative or weak/heterogeneous",
+            "Strongly positive"
+          ],
+          [
+            "CD45 (LCA)",
+            "Negative",
+            "Positive"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For decades, frontline treatment for **classical Hodgkin lymphoma** standardly comprised four to six cycles of the cytotoxic combination **ABVD**. This outpatient regimen combines **doxorubicin**, **bleomycin**, **vinblastine**, and **dacarbazine** administered on days 1 and 15 of every 28-day cycle. ABVD achieves durable cures in over 80% of patients with early-stage disease and 70% to 75% in advanced-stage presentations.",
+      "say": "For decades, frontline treatment for classical Hodgkin lymphoma standardly comprised cycles of the cytotoxic combination ABVD. This outpatient regimen combines doxorubicin, bleomycin, vinblastine, and dacarbazine administered every two weeks. ABVD produces durable cures in over 80% of patients with early-stage disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "abvd",
+            "label": "ABVD Regimen",
+            "level": 1
+          },
+          {
+            "id": "dox",
+            "label": "Doxorubicin + Vinblastine",
+            "level": 2
+          },
+          {
+            "id": "dac",
+            "label": "Dacarbazine + Bleomycin",
+            "level": 3
+          },
+          {
+            "id": "cure",
+            "label": "High Curative Efficacy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "abvd",
+            "dox"
+          ],
+          [
+            "abvd",
+            "dac"
+          ],
+          [
+            "dox",
+            "cure"
+          ],
+          [
+            "dac",
+            "cure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Interim metabolic assessment allows personalized risk-adapted modification of therapy. In the randomized **RATHL trial**, interim PET-CT was conducted following 2 cycles of ABVD. Patients achieving metabolic remission defined by Deauville scores 1, 2, or 3 underwent safe **omission of bleomycin** from subsequent cycles. Omitting **bleomycin** completely eliminated life-threatening pulmonary toxicity without compromising progression-free survival or overall disease control.",
+      "say": "Interim metabolic assessment allows personalized risk-adapted modification of therapy. In the randomized RATHL trial, interim PET-CT was conducted following 2 cycles of ABVD. Patients achieving metabolic remission underwent safe omission of bleomycin from subsequent cycles. Omitting bleomycin completely eliminated pulmonary toxicity without compromising survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PET-Negative: AVD",
+          "points": [
+            "Deauville score 1 to 3 after 2 cycles",
+            "Bleomycin omitted from cycles 3 to 6",
+            "Zero pulmonary toxicity, identical 3-year PFS"
+          ]
+        },
+        "right": {
+          "title": "PET-Positive: Escalation",
+          "points": [
+            "Deauville score 4 or 5 after 2 cycles",
+            "Escalated to BEACOPP chemotherapy",
+            "Overcomes primary chemorefraction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Antibody-drug conjugates directed against CD30 enhance curative potential in advanced disease. **Brentuximab vedotin** couples an anti-CD30 monoclonal antibody to the microtubule disruptor monomethyl auristatin E. In the randomized phase 3 **ECHELON-1** trial, brentuximab vedotin combined with AVD significantly improved overall survival compared to standard ABVD in stage 3 or 4 disease, establishing BV-AVD as a frontline benchmark.",
+      "say": "Antibody-drug conjugates directed against CD30 enhance curative potential in advanced disease. Brentuximab vedotin links an anti-CD30 antibody directly to a microtubule disruptor. In the randomized phase 3 ECHELON-1 trial, brentuximab vedotin combined with AVD significantly improved overall survival compared to standard ABVD in advanced disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cd30",
+            "label": "CD30 Surface Target",
+            "level": 1
+          },
+          {
+            "id": "bv",
+            "label": "Brentuximab Vedotin ADC",
+            "level": 2
+          },
+          {
+            "id": "echel",
+            "label": "ECHELON-1 Trial Protocol",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Statistically Superior OS",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cd30",
+            "bv"
+          ],
+          [
+            "bv",
+            "echel"
+          ],
+          [
+            "echel",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immune checkpoint inhibition integrated into frontline chemotherapy has produced historic breakthroughs. In the phase 3 **SWOG S1826** trial, **Nivolumab plus AVD** demonstrated statistically significant superiority in progression-free survival compared to brentuximab vedotin plus AVD in patients aged 12 years and older with advanced stage classical Hodgkin lymphoma. Nivolumab-AVD also caused significantly less peripheral neuropathy and neutropenic fever.",
+      "say": "Immune checkpoint inhibition integrated into frontline chemotherapy has produced historic breakthroughs. In the phase 3 SWOG S1826 trial, Nivolumab plus AVD demonstrated statistically significant superiority in progression-free survival compared to brentuximab vedotin plus AVD. Nivolumab-AVD also caused significantly less peripheral neuropathy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nivolumab + AVD (SWOG S1826)",
+          "points": [
+            "PD-1 inhibitor paired with AVD",
+            "Superior 2-year progression-free survival",
+            "Lower rates of severe peripheral neuropathy"
+          ]
+        },
+        "right": {
+          "title": "Brentuximab Vedotin + AVD",
+          "points": [
+            "CD30-targeted ADC paired with AVD",
+            "Proven overall survival benefit in ECHELON-1",
+            "Higher rates of sensory neuropathy and G-CSF need"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nodular **lymphocyte predominant** Hodgkin lymphoma represents an indolent variant biologically distinct from classical Hodgkin lymphoma. Histological examination reveals characteristic multinucleated popcorn cells that express **CD20**, CD79a, and B-cell transcription factors while lacking CD30 and CD15. Early-stage disease is effectively cured with involved-site radiotherapy alone or observation, while advanced disease responds well to rituximab-based regimens.",
+      "say": "Nodular lymphocyte predominant Hodgkin lymphoma is an indolent variant biologically distinct from classical Hodgkin lymphoma. Histological examination reveals characteristic popcorn cells that express CD20 and B-cell markers while lacking CD30 and CD15. Early-stage disease is cured with involved-site radiotherapy alone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Classical Hodgkin Lymphoma",
+          "Nodular Lymphocyte Predominant"
+        ],
+        "rows": [
+          [
+            "Diagnostic Cell",
+            "Reed-Sternberg cell (multinucleated)",
+            "Popcorn cell (LP cell)"
+          ],
+          [
+            "Immunophenotype",
+            "CD30+, CD15+, CD20-, CD45-",
+            "CD20+, CD79a+, CD45+, CD30-"
+          ],
+          [
+            "Clinical Course",
+            "Aggressive if untreated",
+            "Indolent, late recurrent course"
+          ],
+          [
+            "First-Line Therapy",
+            "ABVD, BV-AVD, or N-AVD",
+            "Involved-site RT or Rituximab"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Modern radiation therapy techniques are designed for long-term normal tissue preservation. **Involved-site radiotherapy** delivers conformal treatment volumes restricted strictly to initially involved lymph nodes, replacing obsolete extended-field or mantle irradiation fields. This targeted approach markedly lowers radiation exposure to the heart, carotid arteries, lung parenchyma, and breasts, significantly reducing late **secondary malignancy** and cardiovascular mortality.",
+      "say": "Modern radiation therapy techniques are designed for long-term normal tissue preservation. Involved-site radiotherapy delivers conformal treatment volumes restricted strictly to initially involved lymph nodes. This targeted approach markedly lowers radiation exposure to adjacent normal organs, reducing late secondary malignancy and cardiovascular mortality.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pet",
+            "label": "Pre-Chemo PET-CT Mapping",
+            "level": 1
+          },
+          {
+            "id": "isrt",
+            "label": "Involved-Site Conformal RT",
+            "level": 2
+          },
+          {
+            "id": "sparing",
+            "label": "Heart & Breast Tissue Sparing",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Reduced Secondary Neoplasms",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pet",
+            "isrt"
+          ],
+          [
+            "isrt",
+            "sparing"
+          ],
+          [
+            "sparing",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because the vast majority of Hodgkin lymphoma patients achieve long-term cure at a young age, managing **Late survivorship** complications is paramount. Accelerated **coronary artery disease**, valvular dysfunction, and congestive cardiomyopathy can emerge 10 to 20 years following mediastinal radiotherapy and anthracyclines. Secondary breast cancers and thyroid carcinomas require structured annual screening beginning 8 to 10 years following treatment.",
+      "say": "Because the vast majority of Hodgkin lymphoma patients achieve cure at a young age, managing Late survivorship complications is paramount. Accelerated coronary artery disease, valvular dysfunction, and heart failure can emerge decades following treatment. Secondary breast and thyroid malignancies require structured surveillance protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Late Complication",
+          "Etiological Trigger",
+          "Latency",
+          "Surveillance Protocol"
+        ],
+        "rows": [
+          [
+            "Coronary Artery Disease",
+            "Mediastinal radiotherapy",
+            "10 to 20 years",
+            "Lipid panel, stress testing"
+          ],
+          [
+            "Secondary Breast Cancer",
+            "Mantle / mediastinal radiation",
+            "8 to 10 years",
+            "Annual breast MRI + mammography"
+          ],
+          [
+            "Thyroid Carcinoma",
+            "Neck irradiation",
+            "5 to 15 years",
+            "Annual thyroid palpation and TSH"
+          ],
+          [
+            "Cardiomyopathy",
+            "Anthracycline doxorubicin",
+            "Cumulative dose-dependent",
+            "Periodic echocardiography"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 100 (Hodgkin Lymphoma)",
+    "RATHL Trial (NEJM)",
+    "ECHELON-1 Trial (NEJM)",
+    "SWOG S1826 Trial (NEJM 2024)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
