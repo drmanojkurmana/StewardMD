@@ -499,6 +499,16 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; 
 }
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body > * { min-width: 0; }
 
+/* Centre the reading column and create real outer gutters.
+   Without this, each section card stretches edge-to-edge on tablet screens. */
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+  width: 100%;
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 22px 24px 30px;
+  box-sizing: border-box;
+}
 /* At-a-glance summary: a quiet, clearly bounded card with a slim accent. */
 #dxOverlay #dxMgmt.dx-reader .dx-reader-glance > p {
   margin: 0 0 14px;
