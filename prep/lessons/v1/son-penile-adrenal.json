@@ -2,288 +2,287 @@
   "v": 1,
   "module": "son-penile-adrenal",
   "subject": "ss-medical-oncology",
-  "title": "Penile and adrenal cancers: viral aetiology, lymph node dissection and adrenocortical management",
+  "title": "Penile and Adrenal Cancers: High-Yield Essentials",
   "minutes": 5,
   "steps": [
     {
-      "tx": "Epithelial penile malignancy arises via two distinct pathogeneses. Up to 50% of **penile squamous cell carcinoma** cases are driven by high-risk **human papillomavirus** infections, predominantly genotypes 16 and 18, characterized by diffuse p16INK4a overexpression. Non-HPV-related carcinomas arise against a background of chronic foreskin inflammation, lichen sclerosus, and phimosis, demonstrating frequent somatic mutations in TP53 and NOTCH1.",
-      "say": "Epithelial penile malignancy arises via two distinct pathogeneses. Up to 50% of penile squamous cell carcinoma cases are driven by high-risk human papillomavirus infections, predominantly genotypes 16 and 18, characterized by p16INK4a overexpression. Non-HPV-related tumours arise from chronic inflammation, lichen sclerosus, and phimosis, showing frequent TP53 mutations.",
+      "tx": "Penile epithelial malignancy arises via two distinct pathogeneses and viral associations. **Penile squamous cell carcinoma** is associated with human papillomavirus HPV infection in 40% to 50% of cases, primarily spreading sequentially to superficial and deep **inguinal lymph nodes**. Non-HPV-associated carcinomas develop from chronic inflammatory conditions including lichen sclerosus, showing high rates of somatic TP53 alterations and p16INK4a negativity.",
+      "say": "Penile epithelial malignancy arises via two distinct pathogeneses and viral associations. Penile squamous cell carcinoma is associated with human papillomavirus HPV infection in 40% to 50% of cases, primarily spreading sequentially to superficial and deep inguinal lymph nodes. Non-HPV carcinomas develop from chronic inflammation, showing somatic TP53 alterations.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "HPV-Related Penile Carcinoma",
+          "title": "HPV-Positive Penile Cancer",
           "points": [
             "Driven by high-risk genotypes (HPV 16, 18)",
-            "Strong diffuse p16INK4a IHC positivity",
+            "Strong, diffuse p16INK4a IHC positivity",
             "Warty and basaloid histological variants",
-            "Favourable radiosensitivity and survival"
+            "Favourable response to chemoradiation"
           ]
         },
         "right": {
-          "title": "Non-HPV Penile Carcinoma",
+          "title": "HPV-Negative Penile Cancer",
           "points": [
             "Associated with phimosis and lichen sclerosus",
-            "Negative or patchy p16 staining",
-            "Classical keratinizing squamous histology",
+            "Negative or patchy p16INK4a staining",
+            "Typical keratinizing squamous cell carcinoma",
             "Frequent TP53 mutations and poorer prognosis"
           ]
         }
       }
     },
     {
-      "tx": "Lymphatic dissemination in penile carcinoma follows an orderly anatomic hierarchy without skip lesions. Tumour emboli drain first to superficial inguinal nodes, then deep inguinal nodes, and finally external iliac pelvic nodes. Regional nodal metastasis is the single strongest determinant of disease-specific survival; bilateral **inguinal lymph node dissection** provides critical diagnostic staging and curative cytoreduction in men with intermediate-risk or high-risk invasive primary tumours.",
-      "say": "Lymphatic dissemination in penile carcinoma follows an orderly anatomic hierarchy without skip lesions. Tumour emboli drain first to superficial inguinal nodes, then deep inguinal nodes, and finally pelvic nodes. Nodal metastasis is the strongest determinant of survival; bilateral inguinal lymph node dissection provides critical staging and curative cytoreduction in invasive tumours.",
+      "tx": "Accurate nodal staging determines long-term curability in invasive penile malignancy. Dynamic **sentinel lymph node biopsy** or modified bilateral **inguinal lymphadenectomy** is indicated for intermediate- and high-risk invasive primary tumours (T1G2 or higher) to detect occult micrometastases. Because lymphatic drainage follows an orderly progression from superficial to deep inguinal nodes, radical inguinal lymphadenectomy provides decisive regional staging and curative disease control.",
+      "say": "Accurate nodal staging determines long-term curability in invasive penile malignancy. Dynamic sentinel lymph node biopsy or modified bilateral inguinal lymphadenectomy is indicated for intermediate- and high-risk invasive primary tumours to detect occult micrometastases. Because lymphatic drainage follows an orderly progression, radical lymphadenectomy provides decisive staging and curative disease control.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "shaft",
-            "label": "Primary Shaft / Glans Tumour",
+            "id": "inv",
+            "label": "Invasive Primary Tumour (T1G2 or Higher)",
             "level": 1
           },
           {
-            "id": "superf",
-            "label": "Superficial Inguinal Lymph Nodes",
+            "id": "sent",
+            "label": "Dynamic Sentinel Lymph Node Biopsy",
             "level": 2
           },
           {
-            "id": "deep",
-            "label": "Deep Inguinal Nodes (Fossa Ovalis)",
+            "id": "pos",
+            "label": "Confirmed Nodal Micrometastasis",
             "level": 3
           },
           {
-            "id": "pelvic",
-            "label": "Pelvic / Iliac Nodes (Requires Dissection)",
+            "id": "rad",
+            "label": "Bilateral Radical Inguinal Lymphadenectomy",
             "level": 4
           }
         ],
         "edges": [
           [
-            "shaft",
-            "superf"
+            "inv",
+            "sent"
           ],
           [
-            "superf",
-            "deep"
+            "sent",
+            "pos"
           ],
           [
-            "deep",
-            "pelvic"
+            "pos",
+            "rad"
           ]
         ]
       }
     },
     {
-      "tx": "Locally advanced fixed or bulky nodal metastases require multimodality downstaging. Neoadjuvant chemotherapy utilizing the **TIP regimen** combines paclitaxel, **ifosfamide**, and **cisplatin**. Administered for 4 cycles prior to planned surgical consolidation, TIP neoadjuvant chemotherapy achieves objective response rates of 50% to 55%, converting unresectable, fixed inguinal adenopathy into completely resectable surgical specimens and dramatically improving long-term overall survival.",
-      "say": "Locally advanced fixed or bulky nodal metastases require multimodality downstaging. Neoadjuvant chemotherapy utilizing the TIP regimen combines paclitaxel, ifosfamide, and cisplatin. Administered for 4 cycles prior to planned surgery, TIP neoadjuvant chemotherapy achieves response rates of 50% to 55%, converting unresectable inguinal adenopathy into resectable surgical specimens.",
+      "tx": "Bulky or fixed inguinal nodal disease requires multimodality downstaging prior to extirpative surgery. **Neoadjuvant combination chemotherapy** with **TIP** combining **paclitaxel**, **ifosfamide**, and **cisplatin** achieves objective response rates of 50% to 55% in fixed, unresectable inguinal adenopathy. Delivering 4 cycles of neoadjuvant TIP induces significant tumour cytoreduction, converting inoperable fixed nodal masses into completely resectable specimens with clear surgical margins.",
+      "say": "Bulky or fixed inguinal nodal disease requires multimodality downstaging prior to extirpative surgery. Neoadjuvant combination chemotherapy with TIP combining paclitaxel, ifosfamide, and cisplatin achieves response rates of 50% to 55% in fixed inguinal adenopathy. Delivering 4 cycles of TIP induces significant cytoreduction, converting inoperable masses into completely resectable specimens.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Chemotherapy Agent",
-          "Dosing Mechanism",
-          "Mandatory Supportive Measure"
+          "Regimen Drug",
+          "Chemotherapy Class",
+          "Dose-Limiting Toxicity",
+          "Essential Supportive Measure"
         ],
         "rows": [
           [
-            "Paclitaxel (Taxane)",
-            "Microtubule stabilization and mitotic arrest",
+            "Paclitaxel",
+            "Taxane (Microtubule stabilizer)",
+            "Peripheral neuropathy, hypersensitivity",
             "Dexamethasone + H1/H2 blocker premedication"
           ],
           [
-            "Ifosfamide (Alkylator)",
-            "DNA cross-linking via chloroethyl metabolites",
-            "Mesna uroprotection + Methylene blue standby"
+            "Ifosfamide",
+            "Alkylating agent",
+            "Haemorrhagic cystitis, neurotoxicity",
+            "Intravenous mesna uroprotection, hydration"
           ],
           [
-            "Cisplatin (Platinum)",
-            "Intrastrand platinum-DNA cross-links",
-            "Vigorous pre- and post-saline hydration"
+            "Cisplatin",
+            "Platinum coordinating complex",
+            "Nephrotoxicity, severe emesis",
+            "Pre- and post-hydration with isotonic saline"
           ],
           [
-            "G-CSF Support (Filgrastim)",
-            "Accelerates neutrophil recovery",
-            "Mandatory primary prophylaxis (high febrile risk)"
+            "Filgrastim (G-CSF)",
+            "Myeloid growth factor",
+            "Bone pain",
+            "Mandatory primary prophylaxis against neutropenia"
           ]
         ]
       }
     },
     {
-      "tx": "Adrenocortical carcinoma is a highly aggressive endocrine malignancy presenting with hormone excess or abdominal mass effects. Functional hormonal hypersecretion occurs in over 60% of cases, commonly manifesting as rapid-onset **Cushing syndrome** from autonomous glucocorticoid release or virilisation from excessive adrenal androgen synthesis, characterized by elevated dehydroepiandrosterone sulfate DHEAS and 17-hydroxyprogesterone requiring formal endocrine biochemical workup.",
-      "say": "Adrenocortical carcinoma is a highly aggressive endocrine malignancy presenting with hormone excess or abdominal mass effects. Functional hypersecretion occurs in over 60% of cases, commonly manifesting as rapid-onset Cushing syndrome from glucocorticoid release or virilisation from excessive adrenal androgens, showing elevated DHEAS requiring biochemical workup.",
+      "tx": "Endocrine cortical neoplasms display distinctive autonomous hormone excess syndromes. **Adrenocortical carcinoma** is an aggressive endocrine malignancy presenting with functional hormone excess in **60%** of patients, most frequently manifesting as rapid-onset **Cushing syndrome** or virilisation from excessive adrenal androgen secretion. Autonomous hypercortisolemia is accompanied by elevated serum DHEAS, 17-hydroxyprogesterone, and loss of normal diurnal cortisol rhythm requiring formal biochemical evaluation.",
+      "say": "Endocrine cortical neoplasms display distinctive autonomous hormone excess syndromes. Adrenocortical carcinoma is an aggressive endocrine malignancy presenting with functional hormone excess in 60% of patients, most frequently manifesting as rapid-onset Cushing syndrome or virilisation from excessive androgen secretion. Autonomous hypercortisolemia is accompanied by elevated serum DHEAS.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Hormone Secretion Spectrum",
+          "title": "Hormone-Secreting ACC (60%)",
           "points": [
-            "Cortisol excess in 50-60% (Cushing syndrome)",
-            "Androgen excess in 20-30% (virilisation)",
-            "Elevated 24h urine free cortisol & DHEAS",
-            "Mixed hypersecretion strongly suggests malignancy"
+            "Cushing syndrome (rapid-onset cortisol excess)",
+            "Virilisation (elevated DHEAS, androstenedione)",
+            "Feminisation (oestrogen excess in men)",
+            "Hypokalaemic hypertension (mineralocorticoids)"
           ]
         },
         "right": {
-          "title": "Non-Functional Presentations",
+          "title": "Non-Functional ACC (40%)",
           "points": [
-            "Flank pain, fullness, and early satiety",
-            "Retroperitoneal mass on cross-sectional CT/MRI",
-            "Intratumoural necrosis and calcifications",
-            "Unenhanced CT attenuation > 10 Hounsfield units"
+            "Abdominal fullness and flank discomfort",
+            "Large retroperitoneal mass on imaging",
+            "Heterogeneous enhancement with central necrosis",
+            "CT unenhanced attenuation > 10 Hounsfield units"
           ]
         }
       }
     },
     {
-      "tx": "Pathological distinction between benign adrenocortical adenomas and invasive carcinomas requires multiparameter scoring. The **Weiss score** evaluates nine distinct microscopic criteria, including high mitotic rate exceeding 5 per 50 high-power fields, atypical mitotic figures, venous invasion, sinusoidal invasion, capsular invasion, low clear cell architecture under 25%, necrosis, and nuclear pleomorphism. A Weiss score of **3 or greater** establishes the definitive histological diagnosis of adrenocortical carcinoma.",
-      "say": "Pathological distinction between benign adrenocortical adenomas and invasive carcinomas requires multiparameter scoring. The Weiss score evaluates nine distinct microscopic criteria, including high mitotic rate, atypical mitoses, venous invasion, sinusoidal invasion, capsular invasion, and necrosis. A Weiss score of 3 or greater establishes the diagnosis of adrenocortical carcinoma.",
+      "tx": "Histological distinction between benign adenomas and malignant carcinomas requires multiparameter scoring. The **Weiss histopathological score** predicts malignancy in **adrenocortical neoplasms** by evaluating nine distinct microscopic criteria. Features include mitotic rate greater than 5 per 50 high-power fields, atypical mitotic figures, venous invasion, sinusoidal invasion, capsular invasion, necrosis, nuclear pleomorphism, and low clear cell architecture. A Weiss score of **3** or greater establishes the definitive diagnosis of carcinoma.",
+      "say": "Histological distinction between benign adenomas and malignant carcinomas requires multiparameter scoring. The Weiss histopathological score predicts malignancy in adrenocortical neoplasms by evaluating nine distinct microscopic criteria. Features include high mitotic rate, atypical mitoses, venous invasion, sinusoidal invasion, capsular invasion, and necrosis. A Weiss score of 3 or greater establishes the diagnosis of carcinoma.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Weiss Criteria Category",
-          "Specific Histological Feature",
+          "Weiss Histological Parameter",
+          "Microscopic Definition",
           "Diagnostic Threshold"
         ],
         "rows": [
           [
-            "Tumour Structure",
-            "Clear cells <= 25% of tumour cytoplasm",
-            "Points assigned per feature"
-          ],
-          [
-            "Tumour Structure",
-            "Diffuse architecture > 33% of tumour",
-            "Points assigned per feature"
-          ],
-          [
-            "Cytology",
-            "High nuclear grade (Fuhrman III/IV)",
-            "Points assigned per feature"
-          ],
-          [
-            "Mitotic Activity",
-            "Mitotic rate > 5 per 50 HPF",
+            "High Mitotic Rate",
+            "> 5 mitoses per 50 high-power fields (HPF)",
             "Major malignant predictor"
           ],
           [
-            "Mitotic Activity",
-            "Atypical mitotic figures present",
+            "Atypical Mitoses",
+            "Abnormal multipolar or asymmetrical figures",
             "Major malignant predictor"
           ],
           [
-            "Invasion Features",
-            "Capsular, venous, or sinusoidal invasion",
+            "Vascular Invasion",
+            "Tumour cells invading venous or sinusoidal walls",
             "Major malignant predictor"
           ],
           [
-            "Diagnostic Threshold",
-            "Total score sum of positive features",
-            "Weiss score >= 3 defines carcinoma"
+            "Architectural Pattern",
+            "Clear cells <= 25% of tumour volume",
+            "Characteristic of carcinoma"
+          ],
+          [
+            "Diagnostic Cutoff",
+            "Sum of positive criteria >= 3 features",
+            "Definitive adrenocortical carcinoma"
           ]
         ]
       }
     },
     {
-      "tx": "Adjuvant medical therapy following complete surgical resection aims to prevent locoregional and distant recurrence. **Mitotane** o,p-DDD is an oral adrenolytic agent that selectively destroys adrenocortical cells by inhibiting mitochondrial sterol synthesis enzymes. In high-risk stage III disease or Weiss score greater than 6, adjuvant mitotane therapy for at least 2 years significantly prolongs recurrence-free survival, requiring structured monitoring to maintain therapeutic serum levels between **14 and 20 mg/L**.",
-      "say": "Adjuvant medical therapy following complete surgical resection aims to prevent locoregional and distant recurrence. Mitotane is an oral adrenolytic agent that selectively destroys adrenocortical cells by inhibiting mitochondrial enzymes. In high-risk disease, adjuvant mitotane therapy for at least 2 years prolongs recurrence-free survival, maintaining serum levels between 14 and 20 mg/L.",
+      "tx": "Targeted adrenocortical adrenolysis forms the foundation of adjuvant medical management. **Mitotane** is an **adrenolytic agent** used in adjuvant and metastatic adrenocortical carcinoma, requiring plasma concentration monitoring to maintain therapeutic levels between 14 and 20 mg/L. Because mitotane selectively destroys adrenal cortical mitochondria while strongly inducing hepatic CYP3A4, concurrent high-dose replacement hydrocortisone is mandatory to prevent acute adrenal crisis.",
+      "say": "Targeted adrenocortical adrenolysis forms the foundation of adjuvant medical management. Mitotane is an adrenolytic agent used in adjuvant and metastatic adrenocortical carcinoma, requiring plasma concentration monitoring to maintain therapeutic levels between 14 and 20 mg/L. Because mitotane destroys adrenal cortex, concurrent replacement hydrocortisone is mandatory.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "resect",
-            "label": "Complete Adrenalectomy (R0 Margin)",
+            "id": "surg",
+            "label": "Complete Resection of High-Risk ACC",
             "level": 1
           },
           {
             "id": "mito",
-            "label": "Adjuvant Mitotane Dose Titration",
+            "label": "Adjuvant Oral Mitotane Initiation",
             "level": 2
           },
           {
-            "id": "level",
-            "label": "Target Serum Level 14 to 20 mg/L",
+            "id": "target",
+            "label": "Maintain Serum Level Between 14 and 20 mg/L",
             "level": 3
           },
           {
-            "id": "suppl",
-            "label": "Mandatory Hydrocortisone Replacement",
+            "id": "steroid",
+            "label": "Mandatory High-Dose Hydrocortisone Support",
             "level": 4
           }
         ],
         "edges": [
           [
-            "resect",
+            "surg",
             "mito"
           ],
           [
             "mito",
-            "level"
+            "target"
           ],
           [
-            "level",
-            "suppl"
+            "target",
+            "steroid"
           ]
         ]
       }
     },
     {
-      "tx": "Metastatic or unresectable adrenocortical carcinoma mandates intensive combination systemic chemo-adrenolytic therapy. In the randomized international **FIRM-ACT trial**, the **EDP-M regimen** combining etoposide, doxorubicin, and cisplatin paired with oral mitotane demonstrated statistically superior response rates and progression-free survival compared to streptozocin plus mitotane. Concomitant high-dose hydrocortisone replacement is essential because mitotane induces CYP3A4, markedly accelerating steroid clearance.",
-      "say": "Metastatic or unresectable adrenocortical carcinoma mandates intensive combination systemic chemo-adrenolytic therapy. In the randomized international FIRM-ACT trial, the EDP-M regimen combining etoposide, doxorubicin, cisplatin, and oral mitotane demonstrated superior response rates and progression-free survival. Concomitant hydrocortisone replacement is essential because mitotane induces CYP3A4, accelerating steroid clearance.",
+      "tx": "Metastatic adrenocortical carcinoma demands aggressive combination cytotoxic therapy paired with oral adrenolytics. The international FIRM-ACT trial established **EDP-mitotane** combining **etoposide**, **doxorubicin**, and **cisplatin** with mitotane as the global first-line standard for advanced adrenocortical carcinoma, demonstrating superior response rates and progression-free survival compared to streptozocin regimens. Mitotane-mediated CYP3A4 induction requires escalated doses of replacement corticosteroids throughout cytotoxic administration.",
+      "say": "Metastatic adrenocortical carcinoma demands aggressive combination cytotoxic therapy paired with oral adrenolytics. The international FIRM-ACT trial established EDP-mitotane combining etoposide, doxorubicin, and cisplatin with mitotane as the first-line standard for advanced adrenocortical carcinoma, demonstrating superior response rates and progression-free survival compared to streptozocin regimens.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "EDP-M Regimen (FIRM-ACT Standard)",
+          "title": "EDP-Mitotane (FIRM-ACT Standard)",
           "points": [
-            "Etoposide + Doxorubicin + Cisplatin + Mitotane",
-            "Response rate 23.2% vs 9.2% for streptozocin",
-            "Median PFS 5.0 months vs 2.1 months",
-            "First-line standard for metastatic ACC"
+            "Etoposide, doxorubicin, cisplatin + oral mitotane",
+            "Objective response rate 23.2% vs 9.2% for streptozocin",
+            "Median PFS 5.0 months vs 2.1 months (HR 0.55)",
+            "Established first-line global standard of care"
           ]
         },
         "right": {
-          "title": "Supportive Endocrinology Care",
+          "title": "Endocrine Supportive Measures",
           "points": [
             "Mitotane strongly induces hepatic CYP3A4",
-            "Dexamethasone and hydrocortisone rapidly cleared",
-            "Requires 2-3x standard steroid replacement doses",
-            "Monitor free urinary cortisol and ACTH levels"
+            "Accelerates clearance of hydrocortisone and dexamethasone",
+            "Requires 2 to 3 times standard replacement steroid doses",
+            "Monitor urinary free cortisol and ACTH levels"
           ]
         }
       }
     },
     {
-      "tx": "Pediatric and young adult adrenocortical carcinomas frequently occur as index presentations of hereditary syndromes. Germline **TP53 mutations** underlying **Li-Fraumeni syndrome** account for over 50% of pediatric adrenocortical tumours globally and more than 90% in southern Brazil due to the founder R337H mutation. Additional hereditary drivers include Beckwith-Wiedemann syndrome with 11p15 uniparental disomy and Lynch syndrome, mandating comprehensive germline genetic counseling.",
-      "say": "Pediatric and young adult adrenocortical carcinomas frequently occur as index presentations of hereditary syndromes. Germline TP53 mutations underlying Li-Fraumeni syndrome account for over 50% of pediatric adrenocortical tumours globally and over 90% in southern Brazil due to the founder R337H mutation. Additional drivers include Beckwith-Wiedemann syndrome and Lynch syndrome, mandating genetic testing.",
+      "tx": "Neural crest chromaffin tissue malignancies display genetic predispositions to metastatic dissemination. **Malignant pheochromocytomas** and paragangliomas are defined by metastatic spread to non-chromaffin sites like bone and liver, strongly associated with germline **SDHB mutations** in succinate dehydrogenase subunit B. Loss of succinate dehydrogenase activity leads to intracellular succinate accumulation, inhibiting prolyl hydroxylases and pseudo-hypoxic HIF-1-alpha stabilization that drives metastatic vascular spread.",
+      "say": "Neural crest chromaffin tissue malignancies display genetic predispositions to metastatic dissemination. Malignant pheochromocytomas and paragangliomas are defined by metastatic spread to non-chromaffin sites like bone and liver, strongly associated with germline SDHB mutations in succinate dehydrogenase subunit B. Loss of SDH activity leads to succinate accumulation and pseudo-hypoxic HIF stabilization.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Genetic Syndrome",
-          "Germline Gene Defect",
-          "Chromosomal Locus",
-          "Associated Malignancies"
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sdhb",
+            "label": "Germline SDHB Subunit Mutation",
+            "level": 1
+          },
+          {
+            "id": "succ",
+            "label": "Accumulation of Intracellular Succinate",
+            "level": 2
+          },
+          {
+            "id": "hif",
+            "label": "Pseudo-Hypoxic HIF-1-Alpha Stabilization",
+            "level": 3
+          },
+          {
+            "id": "mets",
+            "label": "Malignant Dissemination to Bone and Liver",
+            "level": 4
+          }
         ],
-        "rows": [
+        "edges": [
           [
-            "Li-Fraumeni Syndrome",
-            "TP53 (e.g., Brazilian R337H)",
-            "17p13.1",
-            "Sarcomas, Breast, Brain, Adrenocortical, Leukaemia"
+            "sdhb",
+            "succ"
           ],
           [
-            "Beckwith-Wiedemann",
-            "IGF2 / H19 / CDKN1C imprinting",
-            "11p15.5",
-            "Wilms tumour, Hepatoblastoma, Adrenocortical"
+            "succ",
+            "hif"
           ],
           [
-            "Lynch Syndrome",
-            "MSH2, MLH1, MSH6, PMS2",
-            "Multiple",
-            "Colorectal, Endometrial, Ovarian, Adrenocortical"
-          ],
-          [
-            "MEN1 Syndrome",
-            "MEN1 (Menin tumour suppressor)",
-            "11q13",
-            "Parathyroid, Pancreatic neuroendocrine, Pituitary"
+            "hif",
+            "mets"
           ]
         ]
       }

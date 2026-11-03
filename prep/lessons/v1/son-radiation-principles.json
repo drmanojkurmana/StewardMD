@@ -2,291 +2,304 @@
   "v": 1,
   "module": "son-radiation-principles",
   "subject": "ss-medical-oncology",
-  "title": "Radiation oncology for the medical oncologist: radiobiology, fractionation and combined-modality interactions",
+  "title": "Radiation oncology essentials for the medical oncologist",
   "minutes": 5,
   "steps": [
     {
-      "tx": "Classical radiobiology explains tissue response to ionizing radiation through the fundamental **four Rs of radiobiology**. These comprise **repair** of sub-lethal cellular DNA damage between fractions, **repopulation** of surviving tumour and normal stem cells, **re-assortment** of cycling cells into radiosensitive G2-M cell cycle phases, and **re-oxygenation** of previously hypoxic radioresistant tumour cores. Fractionation optimizes normal tissue repair while exploiting tumour redistribution and reoxygenation.",
-      "say": "Classical radiobiology explains tissue response to ionizing radiation through the fundamental four Rs of radiobiology. These comprise repair of sub-lethal cellular DNA damage between fractions, repopulation of surviving cells, re-assortment of cycling cells into radiosensitive G2-M phases, and re-oxygenation of hypoxic radioresistant tumour cores. Fractionation optimizes normal tissue repair while targeting tumours.",
+      "tx": "The biophysical model describing radiation clonogenic survival relies on quadratic equation mathematics. The **linear-quadratic model** quantifies radiation **cell kill**, where the linear alpha parameter reflects lethal double-strand DNA breaks from single electron tracks, and the quadratic beta parameter represents accumulated sub-lethal breaks from independent tracks. This fundamental relationship governs modern fractionation schedules and equivalent dose calculations in clinical radiation oncology.",
+      "say": "The biophysical model describing radiation clonogenic survival relies on quadratic equation mathematics. The linear-quadratic model quantifies radiation cell kill, where the linear alpha parameter reflects lethal double-strand DNA breaks from single electron tracks, and the quadratic beta parameter represents sub-lethal breaks from independent tracks. This relationship governs modern fractionation schedules.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "The R Factor",
-          "Biological Process",
-          "Clinical Implication of Fractionation"
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ion",
+            "label": "Ionizing Radiation Track Ionization",
+            "level": 1
+          },
+          {
+            "id": "alpha",
+            "label": "Alpha Component (Linear Single-Hit DNA Lethality)",
+            "level": 2
+          },
+          {
+            "id": "beta",
+            "label": "Beta Component (Quadratic Two-Hit Sub-Lethal Damage)",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Logarithmic Clonogenic Cell Survival Curve",
+            "level": 4
+          }
         ],
-        "rows": [
+        "edges": [
           [
-            "Repair",
-            "Enzymatic repair of sub-lethal single-strand breaks",
-            "Spares late-responding normal tissues (requires >6h)"
+            "ion",
+            "alpha"
           ],
           [
-            "Re-assortment",
-            "Cells cycle out of resistant S phase into G2-M",
-            "Increases tumour vulnerability to subsequent doses"
+            "ion",
+            "beta"
           ],
           [
-            "Repopulation",
-            "Stem cell division accelerates late during therapy",
-            "Prolonging overall treatment time decreases cure rates"
+            "alpha",
+            "surv"
           ],
           [
-            "Re-oxygenation",
-            "Shrinking tumour improves capillary perfusion",
-            "Alleviates hypoxia, enhancing free radical DNA fixation"
+            "beta",
+            "surv"
           ]
         ]
       }
     },
     {
-      "tx": "The biophysical model describing cellular radiation survival is the linear-quadratic formulation. The **alpha-beta ratio** reflects fractionation sensitivity, where alpha represents single-track lethal events and beta represents multi-track repairable lesions. Early-responding tissues and fast-growing tumours have a high alpha-beta ratio near 10 Gy, whereas late-responding normal organs like spinal cord, brain, and kidneys possess a **low alpha-beta ratio** of 2 to 3 Gy, making them exceptionally sensitive to fraction size.",
-      "say": "The biophysical model describing cellular radiation survival is the linear-quadratic formulation. The alpha-beta ratio reflects fractionation sensitivity, where alpha represents single-track lethal events and beta represents repairable lesions. Fast-growing tumours have a high alpha-beta ratio near 10 Gy, whereas late-responding normal organs possess a low alpha-beta ratio of 2 to 3 Gy, making them sensitive to fraction size.",
+      "tx": "Differential tissue responses to altered fraction sizes depend upon the target tissue repair capacity. The **alpha to beta ratio** describes tissue **fractionation sensitivity**, with acutely responding tissues and most carcinomas having a high ratio around 10 Gy, while late-responding tissues like spinal cord and kidneys have a low ratio of 2 to 3 Gy. Large fraction sizes selectively spare early-responding tissues while disproportionately increasing late-tissue necrosis.",
+      "say": "Differential tissue responses to altered fraction sizes depend upon the target tissue repair capacity. The alpha to beta ratio describes tissue fractionation sensitivity, with acutely responding tissues and most carcinomas having a high ratio around 10 Gy, while late-responding tissues like spinal cord and kidneys have a low ratio of 2 to 3 Gy. Large fraction sizes selectively damage late-responding tissues.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "High Alpha/Beta (~10 Gy)",
           "points": [
             "Early-responding tissues (mucosa, skin, bone marrow)",
-            "Most carcinomas and lymphomas",
-            "Linear survival curve dominating at low doses",
-            "Sensitivity driven by overall treatment time"
+            "Most epithelial carcinomas and high-grade lymphomas",
+            "Linear curve dominates at conventional low doses",
+            "Fractionation size has relatively minimal impact"
           ]
         },
         "right": {
           "title": "Low Alpha/Beta (2 to 3 Gy)",
           "points": [
-            "Late-responding tissues (spinal cord, lung, kidney)",
-            "Prostate adenocarcinoma and melanoma exceptions",
-            "Marked shoulder / curvature on survival curve",
-            "Highly vulnerable to large fraction sizes (>2 Gy)"
+            "Late-responding tissues (spinal cord, lung, kidney, brain)",
+            "Prostate adenocarcinoma and malignant melanoma",
+            "Prominent shoulder on cell survival curve",
+            "Highly sensitive to fraction size changes (> 2 Gy)"
           ]
         }
       }
     },
     {
-      "tx": "Radiosensitivity is fundamentally governed by intracellular oxygen tension. The **oxygen enhancement ratio** OER demonstrates that ionizing radiation is 2.5 to 3.0 times more cytotoxic in well-oxygenated tissues compared to severe **hypoxia**. Molecular oxygen permanently reacts with radiation-induced DNA free radicals, a critical chemical phenomenon termed the oxygen fixation hypothesis. In hypoxic microenvironments, free radicals are chemically reduced by endogenous sulfhydryl compounds, repairing DNA breaks.",
-      "say": "Radiosensitivity is fundamentally governed by intracellular oxygen tension. The oxygen enhancement ratio OER demonstrates that ionizing radiation is 2.5 to 3.0 times more cytotoxic in well-oxygenated tissues compared to severe hypoxia. Molecular oxygen permanently fixes radiation-induced DNA free radicals. In hypoxic microenvironments, free radicals are chemically reduced, repairing DNA breaks.",
+      "tx": "Classical radiobiology explains the clinical efficacy of fractionated therapeutic radiation through cellular dynamics. The **four Rs of radiobiology** comprise **repair** of sub-lethal DNA damage, repopulation of surviving clonogens, redistribution into sensitive cell cycle phases, and reoxygenation of hypoxic tumour cells. Fractionating treatment into daily 1.8 to 2.0 Gy fractions allows normal tissues to repair sub-lethal damage while selectively sensitizing tumour cells through reoxygenation and cell cycle redistribution.",
+      "say": "Classical radiobiology explains the clinical efficacy of fractionated therapeutic radiation through cellular dynamics. The four Rs of radiobiology comprise repair of sub-lethal DNA damage, repopulation of surviving clonogens, redistribution into sensitive cell cycle phases, and reoxygenation of hypoxic tumour cells. Fractionation allows normal tissues to repair damage while sensitizing tumours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiobiological R",
+          "Cellular Phenomenon",
+          "Clinical Relevance of Fractionation"
+        ],
+        "rows": [
+          [
+            "Repair",
+            "Enzymatic repair of sub-lethal DNA breaks",
+            "Spares late-responding normal tissues (requires > 6 hours)"
+          ],
+          [
+            "Redistribution",
+            "Cells cycle out of resistant S phase into G2-M",
+            "Synchronizes tumour cells into radiosensitive phases"
+          ],
+          [
+            "Repopulation",
+            "Surviving stem cells accelerate proliferation",
+            "Prolonging overall treatment time reduces local control"
+          ],
+          [
+            "Reoxygenation",
+            "Hypoxic cells gain access to capillary blood",
+            "Alleviates hypoxia, enhancing oxygen-mediated DNA fixation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Localized ionizing radiation can unexpectedly trigger out-of-field systemic antitumor immunity. The **abscopal effect** describes regression of distant, non-irradiated metastatic tumour lesions following localized radiotherapy, mediated by **systemic immune activation**. Radiation-induced cell death exposes tumour neoantigens and releases damage-associated molecular patterns, stimulating dendritic cells to cross-prime tumor-specific CD8+ cytotoxic T-lymphocytes.",
+      "say": "Localized ionizing radiation can unexpectedly trigger out-of-field systemic antitumor immunity. The abscopal effect describes regression of distant, non-irradiated metastatic tumour lesions following localized radiotherapy, mediated by systemic immune activation. Radiation-induced cell death exposes neoantigens and stimulates dendritic cells to cross-prime cytotoxic T-lymphocytes.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "rad",
-            "label": "Ionizing Radiation Generates DNA Radicals",
+            "id": "sbrt",
+            "label": "Ablative Radiotherapy to Focal Index Lesion",
             "level": 1
           },
           {
-            "id": "o2",
-            "label": "Molecular Oxygen (O2) Present in Tissue",
+            "id": "icd",
+            "label": "Immunogenic Cell Death & Neoantigen Release",
             "level": 2
           },
           {
-            "id": "fix",
-            "label": "Chemical Oxygen Fixation (Peroxyl Radicals)",
+            "id": "tcell",
+            "label": "Cross-Priming of Systemic CD8+ T-Lymphocytes",
             "level": 3
           },
           {
-            "id": "lethal",
-            "label": "Permanent Double-Strand Breaks (OER 2.5-3.0)",
+            "id": "abscopal",
+            "label": "Abscopal Regression of Distant Non-Target Lesions",
             "level": 4
           }
         ],
         "edges": [
           [
-            "rad",
-            "o2"
+            "sbrt",
+            "icd"
           ],
           [
-            "o2",
-            "fix"
+            "icd",
+            "tcell"
           ],
           [
-            "fix",
-            "lethal"
+            "tcell",
+            "abscopal"
           ]
         ]
       }
     },
     {
-      "tx": "Concurrent chemotherapy enhances ionizing radiation through radiosensitization and micro-metastatic eradication. Concurrent **cisplatin** functions as an established **radiosensitizer** in definitive chemoradiotherapy protocols for cervical, head and neck, and locally advanced non-small cell lung carcinomas. Cisplatin forms platinum-DNA intrastrand adducts, inhibits sub-lethal radiation damage repair, and synchronizes tumour cells at the radiosensitive G2-M cell cycle transition, significantly extending locoregional control.",
-      "say": "Concurrent chemotherapy enhances ionizing radiation through radiosensitization and micro-metastatic eradication. Concurrent cisplatin functions as an established radiosensitizer in definitive protocols for cervical, head and neck, and lung carcinomas. Cisplatin forms DNA adducts, blocks radiation repair, and synchronizes cells at the radiosensitive G2-M transition, improving locoregional control.",
+      "tx": "Combining systemic cytotoxics with localized radiation produces synergistic locoregional tumor control. **Concurrent chemoradiation** utilizes **radiosensitizing** cytotoxic agents, predominantly **cisplatin** or **fluorouracil**, to inhibit the repair of sub-lethal radiation damage and synchronize tumour cells at the radiosensitive G2-M cell cycle transition. This combined modality approach represents the definitive standard of care for locally advanced head and neck, cervical, and gastrointestinal carcinomas.",
+      "say": "Combining systemic cytotoxics with localized radiation produces synergistic locoregional tumor control. Concurrent chemoradiation utilizes radiosensitizing cytotoxic agents, predominantly cisplatin or fluorouracil, to inhibit the repair of sub-lethal radiation damage and synchronize tumour cells at the radiosensitive G2-M transition. This represents standard care for cervical and head and neck cancers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Radiosensitization Mechanisms",
+          "points": [
+            "Inhibition of sub-lethal radiation DNA repair",
+            "Synchronisation at G2-M cell cycle checkpoint",
+            "Depletion of endogenous intracellular radioprotective thiols",
+            "Additive direct cytotoxic tumour eradication"
+          ]
+        },
+        "right": {
+          "title": "Clinical Indications for Concurrent Cisplatin",
+          "points": [
+            "Locally advanced cervical carcinoma (FIGO IB3 to IVA)",
+            "Definitive locally advanced squamous head and neck cancer",
+            "Unresectable stage III non-small cell lung cancer",
+            "Locally advanced thoracic oesophageal carcinoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prior radiation exposure permanently alters microvascular bed architecture, predisposing to localized recall toxicities. **Radiation recall** dermatitis presents as acute inflammatory skin **erythema** at a previously irradiated site triggered by subsequent administration of taxanes, anthracyclines, or **gemcitabine**. Manifesting as erythema, desquamation, and vesicular ulceration weeks to months post-radiation, management mandates chemotherapy suspension and topical or systemic corticosteroids.",
+      "say": "Prior radiation exposure permanently alters microvascular bed architecture, predisposing to localized recall toxicities. Radiation recall dermatitis presents as acute inflammatory skin erythema at a previously irradiated site triggered by subsequent administration of taxanes, anthracyclines, or gemcitabine. Manifesting as erythema and desquamation, management mandates chemotherapy suspension and corticosteroids.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sbrt",
+            "label": "Ablative Radiotherapy to Focal Index Lesion",
+            "level": 1
+          },
+          {
+            "id": "icd",
+            "label": "Immunogenic Cell Death & Neoantigen Release",
+            "level": 2
+          },
+          {
+            "id": "tcell",
+            "label": "Cross-Priming of Systemic CD8+ T-Lymphocytes",
+            "level": 3
+          },
+          {
+            "id": "abscopal",
+            "label": "Abscopal Regression of Distant Non-Target Lesions",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sbrt",
+            "icd"
+          ],
+          [
+            "icd",
+            "tcell"
+          ],
+          [
+            "tcell",
+            "abscopal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Direct intracavitary or interstitial radiation placement achieves highly localized conformality. **Brachytherapy** places sealed **radioisotopes** directly within or immediately adjacent to tumour tissue, delivering exceptionally high radiation doses to target neoplastic cells while exploiting the inverse-square law of radiation physics to achieve rapid dose fall-off, sparing adjacent critical normal organs in cervical, prostate, and breast carcinomas.",
+      "say": "Direct intracavitary or interstitial radiation placement achieves highly localized conformality. Brachytherapy places sealed radioisotopes directly within or immediately adjacent to tumour tissue, delivering exceptionally high radiation doses to target neoplastic cells while exploiting the inverse-square law to achieve rapid dose fall-off, sparing adjacent critical organs in cervical and prostate cancers.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Chemotherapy Agent",
-          "Radiosensitization Mechanism",
-          "Primary Clinical Setting"
+          "Radioisotope",
+          "Radiation Emission",
+          "Half-Life",
+          "Primary Clinical Application"
         ],
         "rows": [
           [
-            "Cisplatin",
-            "Inhibits DNA repair, G2-M cell cycle arrest",
-            "Cervical cancer, Head & neck, Oesophageal"
+            "Iridium-192",
+            "Gamma emitter (high energy)",
+            "73.8 days",
+            "High-dose-rate (HDR) brachytherapy in cervix and breast"
           ],
           [
-            "5-Fluorouracil",
-            "Thymidylate synthase inhibition, S-phase radiosensitization",
-            "Rectal cancer, Anal squamous, Pancreatic"
+            "Iodine-125",
+            "Low-energy gamma (photons)",
+            "59.4 days",
+            "Permanent interstitial seed implant for prostate carcinoma"
           ],
           [
-            "Temozolomide",
-            "O6-methylguanine adducts, impairs BER",
-            "Glioblastoma multiforme (Stupp protocol)"
+            "Caesium-137",
+            "Gamma emitter",
+            "30.1 years",
+            "Historical low-dose-rate intracavitary cervical implants"
           ],
           [
-            "Gemcitabine",
-            "Depletes dNTP pools, misincorporation into DNA",
-            "Pancreatic cancer (narrow therapeutic index)"
+            "Ruthenium-106",
+            "Beta emitter",
+            "373.6 days",
+            "Episcleral eye plaques for uveal melanoma"
           ]
         ]
       }
     },
     {
-      "tx": "High-precision ablative radiation delivers destructive hypofractionated doses with steep dose gradients. **Stereotactic body radiotherapy** SBRT delivers large ablative doses, typically 8 to 20 Gy per fraction over 1 to 5 fractions, to discrete extracranial targets including early-stage inoperable non-small cell lung cancer, liver metastases, and **oligometastatic disease**. By utilizing sophisticated multi-beam planning and image guidance, SBRT achieves local tumour control rates exceeding 90%.",
-      "say": "High-precision ablative radiation delivers destructive hypofractionated doses with steep dose gradients. Stereotactic body radiotherapy SBRT delivers large ablative doses, typically 8 to 20 Gy per fraction over 1 to 5 fractions, to discrete targets including early inoperable lung cancer and oligometastatic disease. Utilizing image guidance, SBRT achieves local control rates exceeding 90%.",
+      "tx": "Patients with limited metastatic dissemination represent a unique clinical entity amenable to local ablation. **Oligometastatic cancer** defined as 1 to 5 discrete metastases benefits from aggressive local therapy, where **consolidative radiotherapy** using stereotactic body radiotherapy SBRT significantly improves progression-free and overall survival in randomized phase 2 trials such as SABR-COMET. Delivering ablative biological doses over 1 to 5 fractions achieves long-term disease control in oligometastatic prostate, breast, and lung carcinomas.",
+      "say": "Patients with limited metastatic dissemination represent a unique clinical entity amenable to local ablation. Oligometastatic cancer defined as 1 to 5 discrete metastases benefits from aggressive local therapy, where consolidative radiotherapy using stereotactic body radiotherapy SBRT significantly improves survival in randomized clinical trials. Delivering ablative doses over 1 to 5 fractions achieves durable control.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
             "id": "oligo",
-            "label": "Oligometastatic Disease (1 to 5 Lesions)",
+            "label": "Oligometastatic Disease (1 to 5 Metastases)",
             "level": 1
           },
           {
-            "id": "plan",
-            "label": "Stereotactic Image-Guided Planning",
+            "id": "sbrt",
+            "label": "Stereotactic Body Radiotherapy (SBRT / SABR)",
             "level": 2
           },
           {
-            "id": "sbrt",
-            "label": "Ablative High Dose (8 to 20 Gy per Fraction)",
+            "id": "ablative",
+            "label": "Ablative Biological Effective Dose (BED > 100 Gy)",
             "level": 3
           },
           {
-            "id": "ctrl",
-            "label": ">90% Local Tumour Ablation and Control",
+            "id": "os_gain",
+            "label": "Significant Progression-Free & Overall Survival Gain",
             "level": 4
           }
         ],
         "edges": [
           [
             "oligo",
-            "plan"
-          ],
-          [
-            "plan",
             "sbrt"
           ],
           [
             "sbrt",
-            "ctrl"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Prior radiation exposure permanently alters normal vascular bed architecture, predisposing to localized toxicities. **Radiation recall** dermatitis is an acute inflammatory reaction erupting within previously irradiated tissue fields provoked by subsequent administration of cytotoxic agents, most notably **doxorubicin**, dactinomycin, paclitaxel, or gemcitabine. Manifesting as erythema, desquamation, and vesicular ulceration weeks to months post-radiation, management mandates chemotherapy suspension and topical or systemic corticosteroids.",
-      "say": "Prior radiation exposure permanently alters normal vascular bed architecture, predisposing to localized toxicities. Radiation recall dermatitis is an acute inflammatory reaction erupting within previously irradiated fields provoked by subsequent cytotoxic agents, most notably doxorubicin, paclitaxel, or gemcitabine. Manifesting as erythema and desquamation, management mandates chemotherapy suspension and corticosteroids.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Radiation Recall Reaction",
-          "points": [
-            "Erupts strictly within prior radiation portal",
-            "Triggered weeks to months later by chemotherapy",
-            "Common triggers: doxorubicin, taxanes, gemcitabine",
-            "Responds to drug cessation and corticosteroids"
-          ]
-        },
-        "right": {
-          "title": "Radiation Enhancement (Radiosensitization)",
-          "points": [
-            "Occurs concurrently during active radiation therapy",
-            "Synergistic toxicity from overlapping mechanisms",
-            "Expected acute mucosal and skin toxicity",
-            "Managed with supportive care and dose adjustments"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Normal central nervous system tissues exhibit strict lifelong cumulative radiation tolerance thresholds. The **spinal cord tolerance** is approximately 45 to 50 Gy in conventional 1.8 to 2.0 Gy daily fractions. Exceeding this critical dose ceiling provokes devastating chronic **radiation myelopathy**, characterized by microvascular thrombosis, oligodendrocyte necrosis, and progressive spastic paraplegia. Modern stereotactic contouring enforces meticulous spinal cord constraints to prevent irreversible radiation injury.",
-      "say": "Normal central nervous system tissues exhibit strict lifelong cumulative radiation tolerance thresholds. The spinal cord tolerance is approximately 45 to 50 Gy in conventional 2 Gy daily fractions. Exceeding this critical dose ceiling provokes devastating chronic radiation myelopathy, characterized by microvascular thrombosis, oligodendrocyte necrosis, and spastic paraplegia.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Critical Organ at Risk",
-          "Tolerance Dose (TD 5/5)",
-          "Dose-Limiting Clinical End-Point"
-        ],
-        "rows": [
-          [
-            "Spinal Cord",
-            "45 to 50 Gy (conventional fractions)",
-            "Radiation myelopathy and irreversible paraplegia"
+            "ablative"
           ],
           [
-            "Optic Chiasm / Nerve",
-            "54 Gy",
-            "Radiation-induced optic neuropathy and blindness"
-          ],
-          [
-            "Brainstem",
-            "54 Gy (focal up to 60 Gy)",
-            "Cranial neuropathy, necrosis, and respiratory arrest"
-          ],
-          [
-            "Whole Lung (Mean Dose)",
-            "20 Gy (V20 < 30% to 35%)",
-            "Radiation pneumonitis and pulmonary fibrosis"
-          ],
-          [
-            "Kidneys (Bilateral)",
-            "18 to 20 Gy",
-            "Radiation nephritis and chronic renal failure"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Localized ionizing radiation can unexpectedly trigger systemic anti-neoplastic responses outside the target volume. The **abscopal effect** refers to the immune-mediated regression of untreated distant non-irradiated metastatic lesions following localized radiation therapy. Radiation-induced immunogenic cell death releases tumour neoantigens, calreticulin, and damage-associated molecular patterns, activating dendritic cells. Combining stereotactic radiation with **immune checkpoint inhibitors** like anti-PD-1 substantially boosts abscopal response frequencies.",
-      "say": "Localized ionizing radiation can unexpectedly trigger systemic anti-neoplastic responses outside the target volume. The abscopal effect refers to the immune-mediated regression of untreated distant metastatic lesions following localized radiation therapy. Combining stereotactic radiation with immune checkpoint inhibitors substantially boosts abscopal response frequencies.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "rad_les",
-            "label": "Ablative SBRT to Single Metastatic Site",
-            "level": 1
-          },
-          {
-            "id": "antigen",
-            "label": "Release of Neoantigens & Damage Patterns",
-            "level": 2
-          },
-          {
-            "id": "tcell",
-            "label": "Systemic Priming of CD8+ Cytotoxic T-Cells",
-            "level": 3
-          },
-          {
-            "id": "abscopal",
-            "label": "Regression of Distant Non-Irradiated Tumours",
-            "level": 4
-          }
-        ],
-        "edges": [
-          [
-            "rad_les",
-            "antigen"
-          ],
-          [
-            "antigen",
-            "tcell"
-          ],
-          [
-            "tcell",
-            "abscopal"
+            "ablative",
+            "os_gain"
           ]
         ]
       }

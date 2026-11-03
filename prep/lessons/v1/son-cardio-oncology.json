@@ -2,135 +2,126 @@
   "v": 1,
   "module": "son-cardio-oncology",
   "subject": "ss-medical-oncology",
-  "title": "Cardio-oncology: cardiotoxicity patterns, strain echocardiography and surveillance algorithms",
+  "title": "Cardio-oncology: Cardiotoxicity Patterns and Surveillance",
   "minutes": 5,
   "steps": [
     {
-      "tx": "Chemotherapy-induced cardiac injury is categorized into two distinct mechanistic paradigms. **Type I cardiotoxicity** exemplified by anthracyclines doxorubicin and daunorubicin is dose-dependent, irreversible, and characterized by myocyte vacuolization and myofibrillar dropout. In contrast, **Type II cardiotoxicity** caused by anti-HER2 monoclonal antibodies like trastuzumab is dose-independent, reversible, and devoid of ultrastructural myocyte death, manifesting as stunning of intact contractile elements.",
-      "say": "Chemotherapy-induced cardiac injury is categorized into two distinct mechanistic paradigms. Type I cardiotoxicity exemplified by anthracyclines is dose-dependent, irreversible, and characterized by myocyte vacuolization and myofibrillar dropout. In contrast, Type II cardiotoxicity caused by anti-HER2 antibodies like trastuzumab is dose-independent, reversible, and devoid of ultrastructural myocyte death.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Type I (Anthracyclines)",
-          "points": [
-            "Cumulative lifetime threshold dependent",
-            "Topoisomerase II-beta DNA break induction",
-            "Permanent myocyte death and fibrotic replacement",
-            "High risk of progressive congestive heart failure"
-          ]
-        },
-        "right": {
-          "title": "Type II (Trastuzumab)",
-          "points": [
-            "Dose-independent (idiosyncratic loss of HER2 survival)",
-            "Absence of myocyte necrosis on biopsy",
-            "High rate of LVEF recovery upon drug cessation",
-            "Re-challenge often safe after ACE-inhibitor recovery"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Anthracycline cardiomyopathy risk escalates exponentially beyond established cumulative exposure ceilings. For **doxorubicin**, the incidence of clinical congestive heart failure rises sharply above a **cumulative dose** of 450 to 550 mg/m2. Prior mediastinal radiotherapy, pre-existing hypertension, or concurrent cyclophosphamide lowers this safety threshold, necessitating early screening and strict lifetime cumulative dose accounting across all treatment lines.",
-      "say": "Anthracycline cardiomyopathy risk escalates exponentially beyond established cumulative exposure ceilings. For doxorubicin, the incidence of clinical heart failure rises sharply above a cumulative dose of 450 to 550 mg/m2. Prior mediastinal radiotherapy or hypertension lowers this safety threshold, necessitating early screening and strict lifetime dose accounting.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Cumulative Doxorubicin Dose",
-          "Heart Failure Incidence",
-          "Recommended Clinical Action"
-        ],
-        "rows": [
-          [
-            "< 400 mg/m2",
-            "Approximately 3% to 5%",
-            "Routine baseline and end-of-treatment echo"
-          ],
-          [
-            "450 to 500 mg/m2",
-            "Sharp rise to 7% to 10%",
-            "Consider cardioprotection or switch to liposomal"
-          ],
-          [
-            "550 mg/m2 (Classic Ceiling)",
-            "Exceeds 15% to 26%",
-            "Absolute lifetime ceiling; cardioprotection mandatory"
-          ],
-          [
-            "> 700 mg/m2",
-            "Exceeds 30% to 48%",
-            "Avoided except in extreme salvage circumstances"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Primary cardioprotection during necessary high-dose anthracycline exposure uses targeted catalytic inhibitors. **Dexrazoxane** is an intracellular iron-chelating bisdioxopiperazine that competitively inhibits **topoisomerase II-beta**, preventing anthracycline-induced double-strand DNA breaks and reactive oxygen species generation. Indicated for metastatic breast cancer patients receiving cumulative doxorubicin exceeding 300 mg/m2 who require continuation, dexrazoxane significantly reduces cardiac events without compromising tumour response rates.",
-      "say": "Primary cardioprotection during necessary high-dose anthracycline exposure uses targeted catalytic inhibitors. Dexrazoxane is an intracellular iron chelator that competitively inhibits topoisomerase II-beta, preventing anthracycline-induced double-strand DNA breaks and reactive oxygen species generation. Indicated when cumulative doxorubicin exceeds 300 mg/m2, it reduces cardiac events without blunting tumour response.",
+      "tx": "Anthracycline cytotoxic therapy carries cumulative risk of irreversible cellular damage. **Anthracycline-induced cardiotoxicity** type **1** is cumulative, dose-dependent, and associated with permanent **myocardial ultrastructural** damage and myocyte loss. Binding of doxorubicin to topoisomerase II-beta triggers persistent double-strand DNA breaks and iron-dependent reactive oxygen species generation, producing myocyte vacuolization and progressive dilated cardiomyopathy.",
+      "say": "Anthracycline cytotoxic therapy carries cumulative risk of irreversible cellular damage. Anthracycline-induced cardiotoxicity type 1 is cumulative, dose-dependent, and associated with permanent myocardial ultrastructural damage and myocyte loss. Binding of doxorubicin to topoisomerase II-beta triggers DNA breaks and free radical generation, producing dilated cardiomyopathy.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "dox",
-            "label": "Doxorubicin Binds Topoisomerase II-Beta",
+            "id": "anthra",
+            "label": "Anthracycline Cumulative Exposure",
             "level": 1
           },
           {
-            "id": "dex",
-            "label": "IV Dexrazoxane Pre-Treatment (10:1 Ratio)",
+            "id": "topo",
+            "label": "Binds Topoisomerase II-Beta in Myocytes",
             "level": 2
           },
           {
-            "id": "block",
-            "label": "Competitive Inhibition of Topo II-Beta & Iron Chelation",
+            "id": "ros",
+            "label": "Reactive Oxygen Species & DNA Strand Breaks",
             "level": 3
           },
           {
-            "id": "spare",
-            "label": ">50% Reduction in Clinical Heart Failure",
+            "id": "necrosis",
+            "label": "Permanent Myocyte Loss & Dilated Cardiomyopathy",
             "level": 4
           }
         ],
         "edges": [
           [
-            "dox",
-            "dex"
+            "anthra",
+            "topo"
           ],
           [
-            "dex",
-            "block"
+            "topo",
+            "ros"
           ],
           [
-            "block",
-            "spare"
+            "ros",
+            "necrosis"
           ]
         ]
       }
     },
     {
-      "tx": "Advanced echocardiography detects subclinical myocardial deformation long before ejection fraction deterioration. Two-dimensional speckle-tracking echocardiography evaluates **global longitudinal strain** GLS. A relative reduction in **GLS reduction** greater than 15% from pre-treatment baseline defines early subclinical myocardial dysfunction, directly predicting subsequent left ventricular ejection fraction LVEF drop, triggering prompt initiation of cardioprotective beta-blockers and angiotensin-converting enzyme inhibitors.",
-      "say": "Advanced echocardiography detects subclinical myocardial deformation long before ejection fraction deterioration. Two-dimensional speckle-tracking echocardiography evaluates global longitudinal strain GLS. A relative reduction in GLS greater than 15% from pre-treatment baseline defines early subclinical myocardial dysfunction, predicting subsequent ejection fraction drop and prompting early neurohormonal therapy.",
+      "tx": "Catalytic topoisomerase inhibition provides targeted cardioprotection during necessary anthracycline administration. **Dexrazoxane** is an intracellular iron-chelating agent that prevents free radical generation, approved as a **cardioprotective agent** for cumulative **doxorubicin** doses exceeding **300** mg/m2. Administered intravenously immediately prior to doxorubicin infusion, dexrazoxane significantly reduces clinical heart failure without reducing antitumor response or overall survival.",
+      "say": "Catalytic topoisomerase inhibition provides targeted cardioprotection during necessary anthracycline administration. Dexrazoxane is an intracellular iron-chelating agent that prevents free radical generation, approved as a cardioprotective agent for cumulative doxorubicin doses exceeding 300 mg/m2. Administered prior to doxorubicin, it significantly reduces clinical heart failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dexrazoxane Cardioprotection",
+          "points": [
+            "Indicated when cumulative doxorubicin > 300 mg/m2",
+            "Bisdioxopiperazine intracellular iron chelator",
+            "Competitively inhibits topoisomerase II-beta",
+            "Reduces clinical heart failure risk by >50%"
+          ]
+        },
+        "right": {
+          "title": "Administration Protocol",
+          "points": [
+            "Dosed at 10:1 ratio relative to doxorubicin dose",
+            "Infused intravenously 15-30 minutes before chemo",
+            "Does not impair chemotherapy response rates",
+            "Safe and approved in metastatic breast cancer"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Targeting human epidermal growth factor receptor 2 can impair cardiac contractile recovery. **Trastuzumab cardiotoxicity** type **2** is not dose-dependent, characteristically non-structural and reversible upon drug interruption and initiation of **ACE inhibitors** and beta-blockers. In contrast to anthracyclines, anti-HER2 monoclonal antibody cardiotoxicity does not cause myocyte death on endomyocardial biopsy, and patients frequently tolerate successful re-challenge following left ventricular ejection fraction normalization.",
+      "say": "Targeting human epidermal growth factor receptor 2 can impair cardiac contractile recovery. Trastuzumab cardiotoxicity type 2 is not dose-dependent, characteristically non-structural and reversible upon drug interruption and initiation of ACE inhibitors and beta-blockers. Trastuzumab cardiotoxicity does not cause myocyte necrosis, permitting safe re-challenge after ejection fraction normalization.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 1 (Anthracyclines)",
+          "points": [
+            "Cumulative lifetime dose-dependent",
+            "Ultrastructural myocyte death and vacuolization",
+            "Irreversible permanent myocardial scarring",
+            "Poor ejection fraction recovery despite therapy"
+          ]
+        },
+        "right": {
+          "title": "Type 2 (Trastuzumab)",
+          "points": [
+            "Dose-independent (idiosyncratic)",
+            "Absence of myocyte necrosis on biopsy",
+            "High rate of LVEF recovery upon withholding",
+            "Responds well to ACE inhibitors and beta-blockers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Subclinical myocardial deformation imaging detects cardiotoxicity prior to ejection fraction decline. Echocardiographic **global longitudinal strain** GLS detects early **subclinical myocardial dysfunction**; a relative reduction greater than **15%** from baseline predicts subsequent left ventricular ejection fraction decline. Routine surveillance with speckle-tracking echocardiography allows early detection, triggering immediate initiation of cardioprotective neurohormonal therapies with enalapril and carvedilol.",
+      "say": "Subclinical myocardial deformation imaging detects cardiotoxicity prior to ejection fraction decline. Echocardiographic global longitudinal strain GLS detects early subclinical myocardial dysfunction; a relative reduction greater than 15% from baseline predicts subsequent left ventricular ejection fraction decline. Speckle-tracking echocardiography allows early neurohormonal therapy initiation.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
             "id": "base",
-            "label": "Baseline Speckle-Tracking GLS Assessment",
+            "label": "Baseline 2D Speckle-Tracking GLS Echo",
             "level": 1
           },
           {
             "id": "drop",
-            "label": "Relative GLS Drop > 15% During Therapy",
+            "label": "Relative GLS Drop > 15% During Chemotherapy",
             "level": 2
           },
           {
             "id": "subclin",
-            "label": "Subclinical Myocardial Injury Confirmed",
+            "label": "Subclinical Myocardial Dysfunction Confirmed",
             "level": 3
           },
           {
             "id": "meds",
-            "label": "Early Beta-Blocker and ACE-Inhibitor Initiation",
+            "label": "Prompt Initiation of ACE Inhibitors & Beta-Blockers",
             "level": 4
           }
         ],
@@ -151,98 +142,98 @@
       }
     },
     {
-      "tx": "Unchecked immune checkpoint activation can unleash fulminant autoimmune lymphocytic myocarditis. **Checkpoint inhibitor-associated myocarditis** is a medical emergency with mortality approaching 50%, typically emerging within the first 6 to 12 weeks of anti-PD-1 or anti-CTLA-4 therapy. Characterized by elevated high-sensitivity troponin and conduction blocks, management mandates immediate permanent immunotherapy cessation, telemetry admission, and emergency **methylprednisolone** at 1,000 mg intravenously daily.",
-      "say": "Unchecked immune checkpoint activation can unleash fulminant autoimmune lymphocytic myocarditis. Checkpoint inhibitor-associated myocarditis is a medical emergency with mortality approaching 50%, typically emerging within the first 6 to 12 weeks of therapy. Characterized by elevated high-sensitivity troponin and conduction blocks, management mandates immediate immunotherapy cessation and high-dose methylprednisolone 1,000 mg daily.",
+      "tx": "Immune checkpoint activation can precipitate fulminant lymphocytic myocarditis. Immune **checkpoint inhibitor-associated myocarditis** is a fulminant, life-threatening complication with mortality approaching **50%**, requiring immediate high-dose intravenous **methylprednisolone** **1000** mg daily. Presenting early with troponin elevation and heart block, treatment requires immediate permanent immunotherapy cessation, telemetry admission, and consideration of secondary immunosuppression with abatacept.",
+      "say": "Immune checkpoint activation can precipitate fulminant lymphocytic myocarditis. Immune checkpoint inhibitor-associated myocarditis is a fulminant, life-threatening complication with mortality approaching 50%, requiring immediate high-dose intravenous methylprednisolone 1000 mg daily. Presenting early with troponin elevation and heart block, treatment requires immediate permanent immunotherapy cessation.",
       "vis": {
         "kind": "table",
         "cols": [
           "Clinical Parameter",
-          "Immune Myocarditis Feature",
-          "Diagnostic / Management Action"
+          "Diagnostic Finding",
+          "Mandatory Emergency Action"
         ],
         "rows": [
           [
-            "Peak Onset Time",
+            "Timing of Onset",
             "First 3 to 12 weeks of ICI therapy",
-            "Early surveillance with baseline & serial troponins"
+            "Baseline and serial high-sensitivity troponin monitoring"
           ],
           [
-            "Conduction Defects",
-            "High-grade AV block, ventricular arrhythmias",
-            "Immediate inpatient continuous telemetry admission"
+            "Cardiac Conduction",
+            "High-grade AV block, ventricular tachycardia",
+            "Immediate inpatient continuous telemetry bed"
           ],
           [
-            "Initial Immunosuppression",
-            "High-dose IV methylprednisolone (1 g/day)",
-            "Initiate immediately upon clinical suspicion"
+            "Initial Steroid Dose",
+            "Fulminant myocardial inflammation",
+            "IV methylprednisolone 1,000 mg daily for 3 days"
           ],
           [
-            "Refractory Therapy",
-            "Abatacept (CTLA-4-Ig) or infliximab / ruxolitinib",
-            "Deploy if no troponin decline within 48 to 72 hours"
+            "Refractory Disease",
+            "Persistent troponin rise at 48 hours",
+            "Deploy secondary immunosuppression: abatacept or infliximab"
           ]
         ]
       }
     },
     {
-      "tx": "Fluoropyrimidine antimetabolites exert acute coronary vasomotor toxicity independent of underlying atherosclerosis. **Fluoropyrimidines** 5-fluorouracil and oral capecitabine induce direct vascular endothelial injury and severe **coronary vasospasm**, causing resting angina, ischemic ECG changes, or cardiogenic shock during continuous infusional schedules. Management requires immediate infusion termination, sublingual nitrates, and intravenous calcium channel blockers, with secondary re-challenge generally contraindicated.",
-      "say": "Fluoropyrimidine antimetabolites exert acute coronary vasomotor toxicity independent of underlying atherosclerosis. Fluoropyrimidines 5-fluorouracil and oral capecitabine induce direct vascular endothelial injury and severe coronary vasospasm, causing resting angina, ECG changes, or shock during infusions. Management requires immediate infusion termination, nitrates, and calcium channel blockers.",
+      "tx": "Fluoropyrimidine antimetabolites exert acute coronary vasomotor toxicity independent of underlying plaque. **Fluoropyrimidines** 5-FU **fluorouracil** and **capecitabine** can trigger **coronary vasospasm** and myocardial ischemia, managed by immediate drug cessation, nitrates, and calcium channel blockers. Most commonly manifesting during 46-hour continuous infusional regimens, severe vasospasm can cause ventricular arrhythmias or cardiogenic shock, and drug re-challenge is generally contraindicated.",
+      "say": "Fluoropyrimidine antimetabolites exert acute coronary vasomotor toxicity independent of underlying plaque. Fluoropyrimidines 5-FU fluorouracil and capecitabine can trigger coronary vasospasm and myocardial ischemia, managed by immediate drug cessation, nitrates, and calcium channel blockers. Severe vasospasm can cause shock during continuous infusional regimens, and re-challenge is generally contraindicated.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "5-FU Vasospasm Presentation",
+          "title": "Fluoropyrimidine Vasospasm",
           "points": [
-            "Resting angina during or immediately post-infusion",
-            "ST-segment elevation or T-wave inversion",
-            "Peak incidence with 46-hour continuous infusional 5-FU",
-            "Associated with transient coronary endothelial dysfunction"
+            "Resting retrosternal chest tightness during infusion",
+            "Transient ST-segment elevation on continuous ECG",
+            "Driven by vascular endothelial nitric oxide depletion",
+            "Peak incidence during continuous 5-FU infusions"
           ]
         },
         "right": {
-          "title": "Acute Clinical Management",
+          "title": "Emergency Management",
           "points": [
-            "Immediate and permanent 5-FU infusion cessation",
-            "Sublingual or IV nitroglycerin vasodilators",
-            "Calcium channel blockers (diltiazem, verapamil)",
-            "Re-challenge carries high mortality risk (~10%)"
+            "Immediate permanent cessation of fluoropyrimidine",
+            "Sublingual or intravenous nitroglycerin vasodilators",
+            "Oral calcium channel blockers (diltiazem, amlodipine)",
+            "Re-challenge carries high mortality (~10% fatality)"
           ]
         }
       }
     },
     {
-      "tx": "Vascular endothelial growth factor inhibition regularly triggers systemic endothelial dysfunction. **VEGF inhibitors** bevacizumab, ramucirumab, and multikinase inhibitors like sunitinib and lenvatinib cause de novo **arterial hypertension** in up to 80% of patients. Driven by decreased endothelial nitric oxide synthase activity and capillary rarefaction, effective blood pressure control utilizing ACE inhibitors, dihydropyridine calcium channel blockers, or ARBs is mandatory to avoid hypertensive encephalopathy or intracranial haemorrhage.",
-      "say": "Vascular endothelial growth factor inhibition regularly triggers systemic endothelial dysfunction. VEGF inhibitors bevacizumab, ramucirumab, and multikinase inhibitors cause de novo arterial hypertension in up to 80% of patients. Driven by decreased nitric oxide synthase and capillary rarefaction, effective blood pressure control with ACE inhibitors or calcium channel blockers is mandatory.",
+      "tx": "Vascular endothelial growth factor pathway inhibition regularly provokes systemic vascular dysfunction. **VEGF inhibitors** **bevacizumab**, **sunitinib**, and **axitinib** frequently induce systemic **arterial hypertension** in up to **80%** of patients through endothelial nitric oxide reduction and capillary rarefaction. Prompt blood pressure monitoring and aggressive management with ACE inhibitors, ARBs, or dihydropyridine calcium channel blockers prevents target organ hypertensive complications.",
+      "say": "Vascular endothelial growth factor pathway inhibition regularly provokes systemic vascular dysfunction. VEGF inhibitors bevacizumab, sunitinib, and axitinib frequently induce systemic arterial hypertension in up to 80% of patients through endothelial nitric oxide reduction and capillary rarefaction. Prompt blood pressure monitoring and management with ACE inhibitors or calcium channel blockers prevents complications.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "vegf_i",
-            "label": "VEGF / VEGFR Pathway Blockade",
+            "id": "vegf",
+            "label": "VEGF Pathway Inhibition (Bevacizumab/Axitinib)",
             "level": 1
           },
           {
-            "id": "no_drop",
-            "label": "Endothelial Nitric Oxide & Prostacyclin Drop",
+            "id": "no",
+            "label": "Decreased Endothelial Nitric Oxide Synthesis",
             "level": 2
           },
           {
             "id": "rarefact",
-            "label": "Microvascular Capillary Rarefaction",
+            "label": "Microvascular Rarefaction & Vasoconstriction",
             "level": 3
           },
           {
             "id": "htn",
-            "label": "Systemic Hypertension (Managed via ACEi / CCB)",
+            "label": "Systemic Arterial Hypertension (in up to 80%)",
             "level": 4
           }
         ],
         "edges": [
           [
-            "vegf_i",
-            "no_drop"
+            "vegf",
+            "no"
           ],
           [
-            "no_drop",
+            "no",
             "rarefact"
           ],
           [
@@ -253,40 +244,40 @@
       }
     },
     {
-      "tx": "Electrophysiological repolarization abnormalities require proactive baseline and on-treatment vigilance. Serial **QTc interval** electrocardiographic monitoring is mandatory for targeted small-molecule tyrosine kinase inhibitors and CDK4/6 inhibitors such as **ribociclib**, sunitinib, and vandetanib. Corrected QT prolongation exceeding 500 ms or increasing by more than 60 ms from baseline demands immediate drug withholding, correction of serum potassium and magnesium, and discontinuation of concurrent QT-prolonging antiemetics.",
-      "say": "Electrophysiological repolarization abnormalities require proactive baseline and on-treatment vigilance. Serial QTc interval monitoring is mandatory for targeted tyrosine kinase inhibitors and CDK4/6 inhibitors like ribociclib, sunitinib, and vandetanib. Corrected QT prolongation exceeding 500 ms demands immediate drug withholding, electrolyte correction, and avoidance of QT-prolonging antiemetics.",
+      "tx": "Serial electrocardiographic vigilance is essential for small-molecule tyrosine kinase inhibitors. Baseline and serial **QTc interval** monitoring is mandatory for patients receiving targeted tyrosine kinase inhibitors like **ribociclib**, **sunitinib**, or **vandetanib**, intervening when QTc exceeds **500** ms. Prolongation beyond 500 ms or an increase greater than 60 ms requires dose interruption, electrolyte correction of potassium and magnesium, and avoidance of QT-prolonging antiemetics.",
+      "say": "Serial electrocardiographic vigilance is essential for small-molecule tyrosine kinase inhibitors. Baseline and serial QTc interval monitoring is mandatory for patients receiving targeted tyrosine kinase inhibitors like ribociclib, sunitinib, or vandetanib, intervening when QTc exceeds 500 ms. Prolongation beyond 500 ms requires dose interruption, electrolyte correction, and avoidance of QT-prolonging antiemetics.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Oncology Drug",
+          "Oncological Agent",
           "Target Axis",
-          "QTc Risk Magnitude",
-          "Recommended Threshold for Action"
+          "QTc Prolongation Magnitude",
+          "Mandatory Action Threshold"
         ],
         "rows": [
           [
-            "Ribociclib (CDK4/6i)",
-            "Cyclin D1-CDK4/6",
-            "High (dose-dependent in ~9%)",
-            "Hold if QTc > 500 ms or delta > 60 ms"
+            "Ribociclib",
+            "Cyclin D1-CDK4/6 inhibitor",
+            "High risk (~9% grade 3/4 prolongation)",
+            "Interrupt if QTc > 500 ms; serial ECG on days 1 & 14"
           ],
           [
-            "Vandetanib (RET/VEGFR)",
-            "Multi-kinase / hERG",
-            "High (boxed warning)",
-            "Maintain QTc < 450 ms; check K+ and Mg2+"
+            "Vandetanib",
+            "RET / VEGFR2 tyrosine kinase inhibitor",
+            "High risk (Boxed warning for torsades)",
+            "Keep QTc < 450 ms; regular serum K+ and Mg2+ checks"
           ],
           [
-            "Sunitinib / Lenvatinib",
-            "VEGFR / PDGFR / KIT",
-            "Moderate",
-            "Correct hypomagnesaemia and hypokalaemia"
+            "Sunitinib",
+            "Multikinase VEGFR/PDGFR inhibitor",
+            "Moderate risk of repolarization delay",
+            "Correct electrolyte deficits prior to each cycle"
           ],
           [
-            "Arsenic trioxide (ATO)",
-            "PML-RARA degradation",
-            "Very High (torsades de pointes)",
-            "Keep K+ > 4.0 mEq/L and Mg2+ > 2.0 mg/dL"
+            "Arsenic trioxide",
+            "PML-RARA degradation agent",
+            "Extremely high risk of ventricular arrhythmia",
+            "Maintain potassium > 4.0 mEq/L and magnesium > 2.0 mg/dL"
           ]
         ]
       }

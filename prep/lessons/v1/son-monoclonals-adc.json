@@ -2,247 +2,246 @@
   "v": 1,
   "module": "son-monoclonals-adc",
   "subject": "ss-medical-oncology",
-  "title": "Monoclonal antibodies and antibody-drug conjugates: mechanisms of action, payload kinetics and targeted delivery",
+  "title": "Monoclonal antibodies and antibody drug conjugates",
   "minutes": 5,
   "steps": [
     {
-      "tx": "Naked therapeutic monoclonal antibodies exert anti-neoplastic activity through complex immunological and receptor-blocking mechanisms. Functional mechanisms comprise direct receptor antagonism, complement-dependent cytotoxicity CDC, and antibody-dependent cellular phagocytosis ADCP. Crucially, **antibody-dependent cellular cytotoxicity** ADCC is mediated when the antibody Fc region binds to **CD16 receptors** on circulating natural killer cells, triggering targeted exocytosis of perforin and granzymes directly into malignant cells.",
-      "say": "Naked therapeutic monoclonal antibodies exert anti-neoplastic activity through complex immunological and receptor-blocking mechanisms. Functional mechanisms comprise direct receptor antagonism, complement-dependent cytotoxicity, and phagocytosis. Crucially, antibody-dependent cellular cytotoxicity ADCC is mediated when the antibody Fc region binds to CD16 receptors on natural killer cells, triggering exocytosis of perforin and granzymes.",
+      "tx": "Therapeutic monoclonal antibodies exert antitumor effects through direct receptor inhibition and host immune recruitment. **Trastuzumab** is a humanised IgG1 monoclonal antibody binding subdomain IV of HER2, blocking downstream MAPK and PI3K signaling and activating antibody-dependent **cellular cytotoxicity**. By engaging Fc receptors on natural killer cells, trastuzumab stimulates targeted exocytosis of perforins and granzymes to lyse HER2-overexpressing tumour cells.",
+      "say": "Therapeutic monoclonal antibodies exert antitumor effects through direct receptor inhibition and host immune recruitment. Trastuzumab is a humanised IgG1 monoclonal antibody binding subdomain IV of HER2, blocking downstream MAPK and PI3K signaling and activating antibody-dependent cellular cytotoxicity. By engaging Fc receptors on natural killer cells, trastuzumab stimulates targeted lysis of tumour cells.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "fab",
-            "label": "Fab Binds Tumour Surface Antigen",
+            "id": "her2",
+            "label": "HER2 Extracellular Subdomain IV",
             "level": 1
           },
           {
-            "id": "fc",
-            "label": "Fc Domain Engages CD16 on NK Cells",
+            "id": "trast",
+            "label": "Trastuzumab Fab Domain Binding",
             "level": 2
           },
           {
-            "id": "nk",
-            "label": "NK Cell Activation and Degranulation",
+            "id": "fc",
+            "label": "Fc Domain Recruits NK Cells (CD16)",
             "level": 3
           },
           {
-            "id": "lysis",
-            "label": "Perforin-Mediated Target Cell Lysis",
+            "id": "adcc",
+            "label": "Antibody-Dependent Cellular Cytotoxicity",
             "level": 4
           }
         ],
         "edges": [
           [
-            "fab",
+            "her2",
+            "trast"
+          ],
+          [
+            "trast",
             "fc"
           ],
           [
             "fc",
-            "nk"
-          ],
-          [
-            "nk",
-            "lysis"
+            "adcc"
           ]
         ]
       }
     },
     {
-      "tx": "Antibody-drug conjugates represent tripartite molecular therapeutics engineered for selective cytotoxic payload delivery. An **antibody-drug conjugate** ADC consists of a high-affinity humanized monoclonal antibody, a stable synthetic chemical linker, and a potent cytotoxic **small molecule payload**. Typical payloads include auristatin or maytansinoid microtubule disruptors and camptothecin topoisomerase I inhibitors, which are far too toxic for unencapsulated systemic intravenous administration.",
-      "say": "Antibody-drug conjugates represent tripartite molecular therapeutics engineered for selective cytotoxic payload delivery. An antibody-drug conjugate ADC consists of a high-affinity monoclonal antibody, a stable synthetic chemical linker, and a potent cytotoxic small molecule payload. Typical payloads include microtubule disruptors and topoisomerase I inhibitors that are too toxic for systemic administration.",
+      "tx": "Steric blockade of human epidermal growth factor receptor dimerization prevents lateral cross-activation. **Pertuzumab** binds extracellular domain II of HER2, sterically preventing ligand-dependent **heterodimerization** with HER3 and enhancing HER2 pathway suppression. When combined with trastuzumab, dual epitope blockade provides comprehensive inhibition of HER2 signaling, significantly improving survival in early and metastatic HER2-positive breast carcinoma.",
+      "say": "Steric blockade of human epidermal growth factor receptor dimerization prevents lateral cross-activation. Pertuzumab binds extracellular domain II of HER2, sterically preventing ligand-dependent heterodimerization with HER3 and enhancing HER2 pathway suppression. Combined with trastuzumab, dual epitope blockade provides comprehensive inhibition of HER2 signaling, improving survival.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "ADC Tripartite Architecture",
+          "title": "Trastuzumab Mechanism",
           "points": [
-            "Humanized IgG1 monoclonal antibody backbone",
-            "Cleavable (protease/acid) or non-cleavable linker",
-            "Potent payload (IC50 in picomolar range)",
-            "Drug-to-antibody ratio DAR typically 4 to 8"
+            "Binds extracellular subdomain IV",
+            "Blocks ligand-independent homodimerization",
+            "Inhibits shedding of HER2 extracellular domain",
+            "Activates immune-mediated ADCC"
           ]
         },
         "right": {
-          "title": "Naked Monoclonal Antibody",
+          "title": "Pertuzumab Mechanism",
           "points": [
-            "Lacks chemical conjugated payload",
-            "Relies on receptor blockade and host immunity",
-            "Lower inherent non-specific systemic toxicity",
-            "Resistance via alternative downstream pathway bypass"
+            "Binds extracellular subdomain II (dimerization arm)",
+            "Prevents ligand-induced HER2-HER3 heterodimerization",
+            "Shuts down downstream PI3K-Akt pathway",
+            "Acts synergistically with trastuzumab"
           ]
         }
       }
     },
     {
-      "tx": "Intracellular cytotoxic delivery occurs through receptor-mediated endocytosis followed by endolysosomal routing. Binding of the conjugate to its cell-surface antigen promotes clathrin-dependent **endocytosis and lysosomal** trafficking. Within the acidic, protease-rich lysosome, proteolytic cleavage of valine-citrulline linkers by **cathepsin B** or complete lysosomal degradation of non-cleavable linkers liberates free active cytotoxic payload directly into the target cytosol, inducing irreversible mitotic arrest or DNA damage.",
-      "say": "Intracellular cytotoxic delivery occurs through receptor-mediated endocytosis followed by endolysosomal routing. Binding of the conjugate to its cell-surface antigen promotes clathrin-dependent endocytosis and lysosomal trafficking. Within the lysosome, proteolytic cleavage of linkers by cathepsin B liberates free active cytotoxic payload directly into the cytosol, inducing mitotic arrest or DNA damage.",
+      "tx": "Tumour neovascularization is sustained by circulating endothelial growth factors. **Bevacizumab** is an **anti-VEGF-A** humanised monoclonal antibody that inhibits endothelial cell proliferation, vessel sprouting, and vascular permeability. By sequestering circulating VEGF-A ligands, bevacizumab normalises aberrant tumour vasculature, lowers interstitial fluid pressure to enhance chemotherapy delivery, and suppresses neo-angiogenesis in metastatic colorectal, renal, and non-small cell lung carcinomas.",
+      "say": "Tumour neovascularization is sustained by circulating endothelial growth factors. Bevacizumab is an anti-VEGF-A humanised monoclonal antibody that inhibits endothelial cell proliferation, vessel sprouting, and vascular permeability. By sequestering VEGF-A, bevacizumab normalises aberrant tumour vasculature, lowers interstitial pressure, and suppresses neo-angiogenesis.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
-            "id": "bind",
-            "label": "Antigen Binding on Cell Surface",
+            "id": "vegf",
+            "label": "Tumour Secretion of VEGF-A",
             "level": 1
           },
           {
-            "id": "endo",
-            "label": "Clathrin-Coated Endocytosis",
+            "id": "beva",
+            "label": "Circulating Bevacizumab Neutralization",
             "level": 2
           },
           {
-            "id": "lyso",
-            "label": "Cathepsin B Cleavage in Lysosome",
+            "id": "endoth",
+            "label": "Blockade of VEGFR-2 Phosphorylation",
             "level": 3
           },
           {
-            "id": "kill",
-            "label": "Free Payload Triggers Apoptosis",
+            "id": "reduct",
+            "label": "Vessel Regression & Permeability Normalisation",
             "level": 4
           }
         ],
         "edges": [
           [
-            "bind",
-            "endo"
+            "vegf",
+            "beva"
           ],
           [
-            "endo",
-            "lyso"
+            "beva",
+            "endoth"
           ],
           [
-            "lyso",
-            "kill"
+            "endoth",
+            "reduct"
           ]
         ]
       }
     },
     {
-      "tx": "ADC potency across heterogeneous solid tumours is greatly augmented by the diffusion of released cytotoxic molecules. The **bystander effect** occurs when membrane-permeable, uncharged released payloads diffuse across cell membranes out of antigen-positive cells to eradicate adjacent **antigen-negative tumour cells**. This critical pharmacodynamic property overcomes intratumoural target heterogeneity, as demonstrated by the profound efficacy of trastuzumab deruxtecan in HER2-low metastatic breast malignancies.",
-      "say": "ADC potency across heterogeneous solid tumours is greatly augmented by the diffusion of released cytotoxic molecules. The bystander effect occurs when membrane-permeable payloads diffuse out of antigen-positive cells to eradicate adjacent antigen-negative tumour cells. This property overcomes intratumoural target heterogeneity, explaining the clinical efficacy of trastuzumab deruxtecan in HER2-low breast cancer.",
+      "tx": "Epidermal growth factor receptor blockade requires an unmutated downstream signaling cascade. **Cetuximab** and **panitumumab** bind EGFR to block ligand-induced activation, demonstrating efficacy exclusively in RAS and BRAF **wild-type** colorectal carcinomas. In tumours harbouring activating KRAS, NRAS, or BRAF V600E mutations, autonomous downstream MAPK signaling bypasses receptor-level blockade, rendering monoclonal anti-EGFR therapy ineffective while causing unnecessary skin rash and hypomagnesaemia.",
+      "say": "Epidermal growth factor receptor blockade requires an unmutated downstream signaling cascade. Cetuximab and panitumumab bind EGFR to block ligand-induced activation, demonstrating efficacy exclusively in RAS and BRAF wild-type colorectal carcinomas. In tumours harbouring KRAS or BRAF mutations, autonomous downstream signaling bypasses receptor blockade, rendering therapy ineffective.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Colorectal Genotype",
+          "Anti-EGFR Therapy Response",
+          "Mechanism of Sensitivity or Resistance"
+        ],
+        "rows": [
+          [
+            "RAS Wild-Type (KRAS/NRAS WT)",
+            "Sensitive to cetuximab / panitumumab",
+            "EGFR blockade successfully arrests downstream MAPK"
+          ],
+          [
+            "KRAS Exon 2, 3, 4 Mutated",
+            "Completely resistant (avoid therapy)",
+            "Constitutive GTP-bound KRAS drives autonomous growth"
+          ],
+          [
+            "NRAS Exon 2, 3, 4 Mutated",
+            "Completely resistant (avoid therapy)",
+            "Autonomous GTPase signaling bypasses receptor block"
+          ],
+          [
+            "BRAF V600E Mutated",
+            "Resistant to monotherapy anti-EGFR",
+            "Requires triplet: encorafenib + cetuximab + chemo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Next-generation antibody-drug conjugates deliver potent topoisomerase inhibitors at high stoichiometric ratios. **Trastuzumab deruxtecan** T-DXd is an **antibody-drug conjugate** with a cleavable tetrapeptide linker carrying a topoisomerase I inhibitor payload with a drug-to-antibody ratio of 8. This exceptionally high payload-to-antibody ratio of 8 delivers maximal intracellular cytotoxic concentrations into HER2-expressing solid tumours following receptor-mediated endocytosis and lysosomal protease cleavage.",
+      "say": "Next-generation antibody-drug conjugates deliver potent topoisomerase inhibitors at high stoichiometric ratios. Trastuzumab deruxtecan T-DXd is an antibody-drug conjugate with a cleavable tetrapeptide linker carrying a topoisomerase I inhibitor payload with a drug-to-antibody ratio of 8. This exceptionally high payload ratio delivers maximal cytotoxic concentrations into HER2-expressing solid tumours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adc",
+            "label": "Trastuzumab Deruxtecan (T-DXd)",
+            "level": 1
+          },
+          {
+            "id": "dar8",
+            "label": "High Drug-to-Antibody Ratio (DAR 8:1)",
+            "level": 2
+          },
+          {
+            "id": "lyso",
+            "label": "Cathepsin Cleavable Tetrapeptide Linker",
+            "level": 3
+          },
+          {
+            "id": "topo1",
+            "label": "Exatecan Derivative Topoisomerase I Poison",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "adc",
+            "dar8"
+          ],
+          [
+            "dar8",
+            "lyso"
+          ],
+          [
+            "lyso",
+            "topo1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diffusible payloads overcome intratumoral target heterogeneity in solid neoplasms. The **bystander effect** of T-DXd occurs when membrane-permeable topoisomerase I payload diffuses across cell membranes to kill adjacent tumour cells lacking **HER2 expression**. Because the released deruxtecan payload is lipophilic and uncharged, it exits antigen-positive cells to eradicate neighbouring antigen-negative clones, explaining superior efficacy across heterogeneous HER2-low malignancies.",
+      "say": "Diffusible payloads overcome intratumoral target heterogeneity in solid neoplasms. The bystander effect of T-DXd occurs when membrane-permeable topoisomerase I payload diffuses across cell membranes to kill adjacent tumour cells lacking HER2 expression. Because the released deruxtecan payload is lipophilic and uncharged, it exits antigen-positive cells to eradicate neighbouring antigen-negative clones.",
       "vis": {
         "kind": "compare",
         "left": {
-          "title": "Cleavable Linker (Bystander +)",
+          "title": "Bystander-Competent ADC (T-DXd)",
           "points": [
-            "Examples: T-DXd, Sacituzumab govitecan",
-            "Lipophilic uncharged released payload",
-            "Diffuses to kill adjacent antigen-negative cells",
-            "Highly effective in heterogeneous tumours"
+            "Cathepsin-cleavable tetrapeptide linker",
+            "Lipophilic, uncharged, membrane-permeable payload",
+            "Diffuses into neighbouring antigen-negative tumour cells",
+            "Active in heterogeneous and HER2-low cancers"
           ]
         },
         "right": {
-          "title": "Non-Cleavable Linker (Bystander -)",
+          "title": "Non-Bystander ADC (T-DM1)",
           "points": [
-            "Example: Trastuzumab emtansine (T-DM1)",
-            "Charged lysine-MCC-payload remnant",
-            "Trapped inside the antigen-positive cell",
-            "Limited efficacy against antigen-negative clones"
+            "Non-cleavable thioether linker",
+            "Polar, charged lysine-linker-payload complex",
+            "Trapped within lysosomes of target cell only",
+            "Ineffective if HER2 target expression is heterogeneous"
           ]
         }
       }
     },
     {
-      "tx": "Targeting CD30 in classical lymphoid malignancies validates the ADC therapeutic paradigm. **Brentuximab vedotin** couples a chimeric anti-CD30 IgG1 monoclonal antibody to the synthetic tubulin-disrupting toxin **monomethyl auristatin E** MMAE via a protease-cleavable valine-citrulline dipeptide linker. Approved for classical Hodgkin lymphoma and systemic anaplastic large cell lymphoma, its most frequent dose-limiting toxicities are peripheral sensory neuropathy and neutropenia.",
-      "say": "Targeting CD30 in classical lymphoid malignancies validates the ADC therapeutic paradigm. Brentuximab vedotin couples a chimeric anti-CD30 IgG1 monoclonal antibody to the synthetic tubulin-disrupting toxin monomethyl auristatin E MMAE via a protease-cleavable dipeptide linker. Approved for classical Hodgkin lymphoma and anaplastic large cell lymphoma, its dose-limiting toxicities are neuropathy and neutropenia.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "ADC Agent",
-          "Target Antigen",
-          "Conjugated Payload",
-          "Key Clinical Indication"
-        ],
-        "rows": [
-          [
-            "Brentuximab vedotin",
-            "CD30",
-            "MMAE (microtubule inhibitor)",
-            "Classical Hodgkin lymphoma, ALCL"
-          ],
-          [
-            "Trastuzumab emtansine (T-DM1)",
-            "HER2",
-            "DM1 (maytansinoid microtubule)",
-            "Adjuvant residual HER2+ breast cancer"
-          ],
-          [
-            "Trastuzumab deruxtecan (T-DXd)",
-            "HER2",
-            "DXd (topoisomerase I inhibitor)",
-            "Metastatic HER2+ and HER2-low breast cancer"
-          ],
-          [
-            "Enfortumab vedotin",
-            "Nectin-4",
-            "MMAE (microtubule inhibitor)",
-            "Locally advanced / metastatic urothelial cancer"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Evolution of anti-HER2 ADCs represents a major clinical and pharmacological breakthrough in solid oncology. **Trastuzumab deruxtecan** T-DXd features a topoisomerase I inhibitor exatecan derivative payload with an exceptionally high **drug-to-antibody ratio** DAR of approximately 8:1. Coupling this potent payload via a cleavable tetrapeptide linker generates powerful bystander tumour killing, revolutionizing outcomes in DESTINY-Breast03 and DESTINY-Breast04 trials for both HER2-positive and HER2-low cancers.",
-      "say": "Evolution of anti-HER2 ADCs represents a major clinical and pharmacological breakthrough in solid oncology. Trastuzumab deruxtecan T-DXd features a topoisomerase I inhibitor payload with an exceptionally high drug-to-antibody ratio DAR of 8:1. Coupling this payload via a cleavable tetrapeptide linker generates powerful bystander tumour killing, transforming outcomes in HER2-positive and HER2-low breast cancer.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Parameter",
-          "Trastuzumab Emtansine (T-DM1)",
-          "Trastuzumab Deruxtecan (T-DXd)"
-        ],
-        "rows": [
-          [
-            "Cytotoxic Payload",
-            "DM1 (Microtubule poison)",
-            "DXd (Topoisomerase I inhibitor)"
-          ],
-          [
-            "Linker Type",
-            "Non-cleavable thioether linker",
-            "Cathepsin-cleavable tetrapeptide"
-          ],
-          [
-            "Drug-to-Antibody Ratio",
-            "Average 3.5:1",
-            "High ratio 8:1"
-          ],
-          [
-            "Bystander Killing",
-            "Absent (hydrophilic payload)",
-            "Potent (cell-permeable lipophilic payload)"
-          ],
-          [
-            "Black Box Toxicity",
-            "Hepatotoxicity, thrombocytopenia",
-            "Interstitial lung disease / pneumonitis"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Trophoblast cell-surface antigen 2 directed therapy addresses refractory epithelial cancers. **Sacituzumab govitecan** is an ADC directing the active irinotecan metabolite **SN-38** against TROP-2 via a proprietary hydrolysable pH-sensitive linker. Demonstrating substantial overall survival gains in the ASCENT and TROPiCS-02 randomized clinical trials, sacituzumab govitecan is approved for pre-treated metastatic triple-negative breast cancer and hormone receptor-positive HER2-negative metastatic breast carcinoma.",
-      "say": "Trophoblast cell-surface antigen 2 directed therapy addresses refractory epithelial cancers. Sacituzumab govitecan is an ADC directing the active irinotecan metabolite SN-38 against TROP-2 via a proprietary hydrolysable pH-sensitive linker. Demonstrating substantial survival gains in randomized trials, it is approved for metastatic triple-negative and hormone receptor-positive breast cancers.",
+      "tx": "Trophoblast cell surface antigen 2 provides a broad epithelial target for conjugated cytotoxics. **Sacituzumab govitecan** targets **Trop-2** delivering SN-38 payload via a hydrolysable linker, approved for pretreated metastatic triple-negative and HR+ breast cancers. In the ASCENT and TROPiCS-02 clinical trials, sacituzumab govitecan demonstrated significant improvements in progression-free and overall survival in patients with heavily pretreated metastatic epithelial carcinomas.",
+      "say": "Trophoblast cell surface antigen 2 provides a broad epithelial target for conjugated cytotoxics. Sacituzumab govitecan targets Trop-2 delivering SN-38 payload via a hydrolysable linker, approved for pretreated metastatic triple-negative and HR+ breast cancers. In randomized clinical trials, sacituzumab govitecan demonstrated significant improvements in survival in pretreated metastatic disease.",
       "vis": {
         "kind": "flow",
         "nodes": [
           {
             "id": "trop2",
-            "label": "TROP-2 Antigen Overexpressed on Tumour",
+            "label": "Trop-2 Antigen on Epithelial Tumour",
             "level": 1
           },
           {
             "id": "sg",
-            "label": "Sacituzumab Govitecan Infusion",
+            "label": "Sacituzumab Govitecan Internalization",
             "level": 2
           },
           {
-            "id": "sn38",
-            "label": "Hydrolytic Release of Active SN-38",
+            "id": "hydro",
+            "label": "Hydrolysable pH-Sensitive Linker Cleavage",
             "level": 3
           },
           {
-            "id": "death",
-            "label": "Topoisomerase I Inhibition and Double-Strand Breaks",
+            "id": "sn38",
+            "label": "Active SN-38 Topoisomerase I Inhibition",
             "level": 4
           }
         ],
@@ -253,38 +252,52 @@
           ],
           [
             "sg",
-            "sn38"
+            "hydro"
           ],
           [
-            "sn38",
-            "death"
+            "hydro",
+            "sn38"
           ]
         ]
       }
     },
     {
-      "tx": "Advanced urothelial carcinoma displays near-universal cell-surface expression of adhesion molecules. **Enfortumab vedotin** targets **Nectin-4**, an immunoglobulin-like adhesion protein abundant in bladder carcinoma, delivering monomethyl auristatin E. When combined with the PD-1 inhibitor pembrolizumab in the EV-302 phase 3 trial, enfortumab vedotin doubled overall survival compared to platinum-based chemotherapy, establishing a new first-line global standard of care in metastatic urothelial cancer.",
-      "say": "Advanced urothelial carcinoma displays near-universal cell-surface expression of adhesion molecules. Enfortumab vedotin targets Nectin-4, an adhesion protein abundant in bladder carcinoma, delivering monomethyl auristatin E. When combined with pembrolizumab in the EV-302 trial, enfortumab vedotin doubled overall survival compared to platinum chemotherapy, establishing a new first-line standard in metastatic urothelial cancer.",
+      "tx": "Urothelial cell adhesion molecule targeting achieves profound response rates in metastatic disease. **Enfortumab vedotin** targets **Nectin-4**, delivering the microtubule-disrupting monomethyl auristatin E payload, transforming treatment paradigms in advanced urothelial carcinoma. When combined with pembrolizumab in the landmark EV-302 trial, enfortumab vedotin doubled median overall survival compared to standard gemcitabine and platinum chemotherapy, establishing a new first-line global standard of care.",
+      "say": "Urothelial cell adhesion molecule targeting achieves profound response rates in metastatic disease. Enfortumab vedotin targets Nectin-4, delivering the microtubule-disrupting monomethyl auristatin E payload, transforming treatment paradigms in advanced urothelial carcinoma. When combined with pembrolizumab in clinical trials, enfortumab vedotin doubled median overall survival compared to platinum chemotherapy.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Enfortumab Vedotin + Pembrolizumab",
-          "points": [
-            "EV-302 trial first-line metastatic urothelial CA",
-            "Median OS: 31.5 months (nearly double chemo)",
-            "Overall response rate 68%, CR rate ~30%",
-            "Combines ADC cytotoxicity with PD-1 activation"
+        "kind": "table",
+        "cols": [
+          "ADC Agent",
+          "Target Antigen",
+          "Linker Chemistry",
+          "Cytotoxic Payload"
+        ],
+        "rows": [
+          [
+            "Enfortumab vedotin",
+            "Nectin-4 (Adhesion molecule)",
+            "Valine-citrulline cleavable",
+            "Monomethyl auristatin E (MMAE)"
+          ],
+          [
+            "Sacituzumab govitecan",
+            "Trop-2 (Epithelial glycoprotein)",
+            "Hydrolysable pH-sensitive",
+            "SN-38 (Active irinotecan metabolite)"
+          ],
+          [
+            "Trastuzumab deruxtecan",
+            "HER2 (ErbB2 receptor)",
+            "Cleavable tetrapeptide",
+            "Deruxtecan (Topoisomerase I poison)"
+          ],
+          [
+            "Brentuximab vedotin",
+            "CD30 (Lymphoid antigen)",
+            "Valine-citrulline cleavable",
+            "Monomethyl auristatin E (MMAE)"
           ]
-        },
-        "right": {
-          "title": "Standard Gemcitabine + Platinum",
-          "points": [
-            "Historical first-line comparator regimen",
-            "Median OS: approximately 16 months",
-            "Overall response rate ~44%, CR rate ~12%",
-            "High rate of platinum-induced renal toxicity"
-          ]
-        }
+        ]
       }
     }
   ],
