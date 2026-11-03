@@ -481,3 +481,50 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; 
 .il-tag { font-style:normal; font-size:11px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--slate-soft,#646b77); }
 .il-empty { padding:24px 0; color:var(--slate-soft,#646b77); font-size:14px; }
 @media (prefers-reduced-motion:reduce) { .il-card:active { transform:none; } }
+
+
+/* Knowledge Library disease reader: high-contrast reading surface over the existing ambient backdrop.
+   Fix 3 structure with restrained Fix 1 translucency. Clinical text remains unchanged. */
+#dxOverlay #dxMgmt.dx-reader {
+  background: transparent;
+}
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,.82);
+  border-radius: 22px;
+  background: rgba(255,255,255,.94);
+  -webkit-backdrop-filter: blur(18px) saturate(1.12);
+  backdrop-filter: blur(18px) saturate(1.12);
+  box-shadow: 0 12px 36px rgba(28,38,58,.08), 0 2px 8px rgba(28,38,58,.035);
+}
+#dxOverlay #dxMgmt.dx-reader .dx-mgmt-body > * {
+  min-width: 0;
+}
+body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+  border-color: rgba(255,255,255,.12);
+  background: rgba(18,24,34,.96);
+  box-shadow: 0 12px 36px rgba(0,0,0,.24), 0 2px 8px rgba(0,0,0,.16);
+}
+@media (max-width: 600px) {
+  #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+    padding: 18px;
+    border-radius: 18px;
+  }
+}
+@media (max-width: 420px) {
+  #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+    padding: 16px;
+    border-radius: 16px;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: #fff;
+  }
+  body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+    background: #121822;
+  }
+}
