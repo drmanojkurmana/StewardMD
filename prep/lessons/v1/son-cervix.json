@@ -1,0 +1,315 @@
+{
+  "v": 1,
+  "module": "son-cervix",
+  "subject": "ss-medical-oncology",
+  "title": "Cervical cancer: staging, definitive chemoradiotherapy, systemic immunotherapy, bevacizumab and antibody-drug conjugates",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Persistent infection with **high-risk human papillomavirus** genotypes 16 and 18 causes over 70% of invasive cervical cancers worldwide. Integration of viral DNA into the host genome produces continuous expression of oncoproteins E6 and E7. Viral E6 binds ubiquitin ligase E6AP to degrade tumour suppressor **p53**, while viral E7 binds and inactivates retinoblastoma protein **pRb**, deregulating cell cycle checkpoints.",
+      "say": "Persistent infection with high-risk human papillomavirus genotypes 16 and 18 causes over 70% of invasive cervical cancers worldwide. Integration of viral DNA into the host genome produces continuous expression of oncoproteins E6 and E7. Viral E6 binds ubiquitin ligase E6AP to degrade tumour suppressor p53, while viral E7 binds and inactivates retinoblastoma protein pRb, deregulating cell cycle checkpoints.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hpv",
+            "label": "HPV 16 / 18",
+            "level": 1
+          },
+          {
+            "id": "e6e7",
+            "label": "E6 & E7 Oncoproteins",
+            "level": 2
+          },
+          {
+            "id": "p53",
+            "label": "Degrades p53 & pRb",
+            "level": 3
+          },
+          {
+            "id": "can",
+            "label": "Malignant Progression",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hpv",
+            "e6e7"
+          ],
+          [
+            "e6e7",
+            "p53"
+          ],
+          [
+            "p53",
+            "can"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The revised **FIGO 2018 staging** system incorporates modern cross-sectional imaging and pathological assessment into clinical cervical cancer staging. Stage IB is subdivided by maximum tumour dimension into stage **IB1** under 2 cm, stage **IB2** measuring 2 to 3.9 cm, and stage **IB3** measuring 4 cm or larger. Furthermore, detecting pelvic or para-aortic lymph node metastases automatically assigns stage IIIC.",
+      "say": "The revised FIGO 2018 staging system incorporates modern cross-sectional imaging and pathological assessment into clinical cervical cancer staging. Stage IB is subdivided by maximum tumour dimension into stage IB1 under 2 cm, stage IB2 measuring 2 to 3.9 cm, and stage IB3 measuring 4 cm or larger. Furthermore, detecting pelvic or para-aortic lymph node metastases automatically assigns stage IIIC.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FIGO 2018 Stage",
+          "Tumour Dimension / Extent",
+          "Recommended Management Strategy"
+        ],
+        "rows": [
+          [
+            "Stage IB1",
+            "Invasive carcinoma < 2 cm",
+            "Radical hysterectomy or fertility-sparing trachelectomy"
+          ],
+          [
+            "Stage IB2",
+            "Invasive carcinoma 2 to 3.9 cm",
+            "Radical hysterectomy with bilateral pelvic lymphadenectomy"
+          ],
+          [
+            "Stage IB3",
+            "Invasive carcinoma >= 4 cm",
+            "Definitive concurrent chemoradiotherapy with brachytherapy"
+          ],
+          [
+            "Stage IIIC",
+            "Pelvic (IIIC1) or para-aortic (IIIC2) nodes",
+            "Extended-field chemoradiotherapy with brachytherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In locally advanced cervical cancer stage IB3 to IVA, standard curative therapy comprises external beam radiotherapy delivering 45 to 50 Gy with concurrent weekly **cisplatin** at 40 mg/m2, followed by high-dose-rate intracavitary **brachytherapy**. Image-guided adaptive brachytherapy delivers concentrated conformal doses to the high-risk clinical target volume while sparing the rectum, sigmoid colon, and urinary bladder.",
+      "say": "In locally advanced cervical cancer stage IB3 to IVA, standard curative therapy comprises external beam radiotherapy delivering 45 to 50 Gy with concurrent weekly cisplatin at 40 mg/m2, followed by high-dose-rate intracavitary brachytherapy. Image-guided adaptive brachytherapy delivers concentrated conformal doses to the high-risk clinical target volume while sparing the rectum, sigmoid colon, and urinary bladder.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ebrt",
+            "label": "EBRT 45-50 Gy",
+            "level": 1
+          },
+          {
+            "id": "cis",
+            "label": "Weekly Cisplatin",
+            "level": 2
+          },
+          {
+            "id": "mri",
+            "label": "MRI Target Volume",
+            "level": 3
+          },
+          {
+            "id": "bt",
+            "label": "HDR Brachytherapy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ebrt",
+            "cis"
+          ],
+          [
+            "cis",
+            "mri"
+          ],
+          [
+            "mri",
+            "bt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In newly diagnosed locally advanced cervical cancer, the landmark phase III **KEYNOTE-A18** trial established adding **pembrolizumab** to standard concurrent chemoradiotherapy. Pembrolizumab administered concurrently with chemoradiotherapy and continued as maintenance therapy for up to 2 years significantly improved progression-free survival and overall survival, establishing immune checkpoint blockade in high-risk locally advanced disease.",
+      "say": "In newly diagnosed locally advanced cervical cancer, the landmark phase III KEYNOTE-A18 trial established adding pembrolizumab to standard concurrent chemoradiotherapy. Pembrolizumab administered concurrently with chemoradiotherapy and continued as maintenance therapy for up to 2 years significantly improved progression-free survival and overall survival, establishing immune checkpoint blockade in high-risk locally advanced disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "KEYNOTE-A18 Pembrolizumab Arm",
+          "points": [
+            "Concurrent chemoradiation + Pembrolizumab",
+            "Maintenance pembrolizumab for up to 2 years",
+            "Statistically significant OS improvement (p=0.004)",
+            "Standard for high-risk stage III-IVA and node-positive"
+          ]
+        },
+        "right": {
+          "title": "Chemoradiation Alone (Control)",
+          "points": [
+            "Standard cisplatin-based chemoradiotherapy",
+            "Brachytherapy completed in 7 to 8 weeks",
+            "Higher rate of distant metastatic failure",
+            "Historical standard superseded by chemo-IO"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In persistent, recurrent, or metastatic cervical cancer expressing a **combined positive score** of 1 or higher, the phase III **KEYNOTE-826** trial proved that adding **pembrolizumab** to chemotherapy with or without **bevacizumab** significantly prolongs overall survival. Chemoimmunotherapy achieved a dramatic survival benefit over chemotherapy alone, establishing this combination as first-line standard.",
+      "say": "In persistent, recurrent, or metastatic cervical cancer expressing a combined positive score of 1 or higher, the phase III KEYNOTE-826 trial proved that adding pembrolizumab to chemotherapy with or without bevacizumab significantly prolongs overall survival. Chemoimmunotherapy achieved a dramatic survival benefit over chemotherapy alone, establishing this combination as first-line standard.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pivotal Trial Cohort",
+          "Regimen Details",
+          "Median OS Gain",
+          "Hazard Ratio & Significance"
+        ],
+        "rows": [
+          [
+            "All Patients",
+            "Platinum + Paclitaxel + Pembrolizumab",
+            "26.4 vs 16.8 months",
+            "HR 0.63 (p<0.001)"
+          ],
+          [
+            "PD-L1 CPS >= 1",
+            "Chemo + Pembrolizumab +/- Bevacizumab",
+            "28.6 vs 16.5 months",
+            "HR 0.60 (p<0.001)"
+          ],
+          [
+            "PD-L1 CPS >= 10",
+            "High PD-L1 expressing cohort",
+            "29.6 vs 16.6 months",
+            "HR 0.58 (p<0.001)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The landmark **GOG 240 trial** established that adding anti-VEGF monoclonal antibody **bevacizumab** at 15 mg/kg to cisplatin-paclitaxel or topotecan-paclitaxel doublet chemotherapy significantly prolongs overall survival in advanced cervical cancer. Adding bevacizumab improved median overall survival from 13.3 to 16.8 months, although clinicians must remain vigilant for hypertension, thromboembolism, and gastrointestinal-vaginal fistulae.",
+      "say": "The landmark GOG 240 trial established that adding anti-VEGF monoclonal antibody bevacizumab at 15 mg/kg to cisplatin-paclitaxel or topotecan-paclitaxel doublet chemotherapy significantly prolongs overall survival in advanced cervical cancer. Adding bevacizumab improved median overall survival from 13.3 to 16.8 months, although clinicians must remain vigilant for hypertension, thromboembolism, and gastrointestinal-vaginal fistulae.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chemotherapy + Bevacizumab",
+          "points": [
+            "Pivotal GOG 240 regimen",
+            "Median OS: 16.8 months vs 13.3 months (HR 0.77)",
+            "Higher objective response rate (48% vs 36%)",
+            "Indicated in recurrent, persistent, or metastatic disease"
+          ]
+        },
+        "right": {
+          "title": "Vascular Adverse Events",
+          "points": [
+            "Grade 3/4 hypertension requiring antihypertensives",
+            "Gastrointestinal-vaginal or vesicovaginal fistulae (8%)",
+            "Thromboembolic events and proteinuria",
+            "Strict caution in patients with prior pelvic irradiation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tisotumab vedotin** is a novel **tissue factor-directed** antibody-drug conjugate approved for recurrent or metastatic cervical cancer progressing after chemotherapy. In the phase III **innovaTV 301** trial, tisotumab vedotin significantly improved overall survival compared to investigator-choice single-agent chemotherapy. Routine ocular mitigation protocols comprising vasoconstrictor and lubricating eye drops prevent class-specific ocular surface adverse events.",
+      "say": "Tisotumab vedotin is a novel tissue factor-directed antibody-drug conjugate approved for recurrent or metastatic cervical cancer progressing after chemotherapy. In the phase III innovaTV 301 trial, tisotumab vedotin significantly improved overall survival compared to investigator-choice single-agent chemotherapy. Routine ocular mitigation protocols comprising vasoconstrictor and lubricating eye drops prevent class-specific ocular surface adverse events.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tf",
+            "label": "Tissue Factor Binding",
+            "level": 1
+          },
+          {
+            "id": "adc",
+            "label": "Receptor Internalization",
+            "level": 2
+          },
+          {
+            "id": "mmae",
+            "label": "MMAE Payload Release",
+            "level": 3
+          },
+          {
+            "id": "lysis",
+            "label": "Microtubule Disruption",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "tf",
+            "adc"
+          ],
+          [
+            "adc",
+            "mmae"
+          ],
+          [
+            "mmae",
+            "lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The randomized phase III **INTERLACE trial** demonstrated that delivering 6 weeks of **induction chemotherapy** with carboplatin and paclitaxel immediately prior to definitive chemoradiation significantly improves progression-free and overall survival in locally advanced cervical cancer. Five-year overall survival rose from 72% with standard chemoradiation to 80% with induction chemotherapy, establishing a new therapeutic option.",
+      "say": "The randomized phase III INTERLACE trial demonstrated that delivering 6 weeks of induction chemotherapy with carboplatin and paclitaxel immediately prior to definitive chemoradiation significantly improves progression-free and overall survival in locally advanced cervical cancer. Five-year overall survival rose from 72% with standard chemoradiation to 80% with induction chemotherapy, establishing a new therapeutic option.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dx",
+            "label": "Locally Advanced Stage",
+            "level": 1
+          },
+          {
+            "id": "ind",
+            "label": "6 Weeks Carbo / Paclitaxel",
+            "level": 2
+          },
+          {
+            "id": "crt",
+            "label": "Standard Cisplatin CRT",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "80% 5-Year Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dx",
+            "ind"
+          ],
+          [
+            "ind",
+            "crt"
+          ],
+          [
+            "crt",
+            "os"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 60 (Cervical Cancer)",
+    "NCCN Cervical Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

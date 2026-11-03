@@ -1,0 +1,296 @@
+{
+  "v": 1,
+  "module": "son-sarcoma",
+  "subject": "ss-medical-oncology",
+  "title": "Soft tissue sarcomas: histological subtypes, staging, multidisciplinary resection, anthracycline chemotherapy and targeted agents",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Well-differentiated and dedifferentiated liposarcomas are cytogenetically defined by supernumerary ring and giant marker chromosomes carrying high-level **12q13-15 amplification**. This amplicon contains oncogenes **MDM2** and **CDK4**, which inhibit p53 and phosphorylate RB1, respectively. Detecting nuclear MDM2 overexpression via immunohistochemistry or gene amplification by FISH provides the diagnostic gold standard distinguishing liposarcoma from benign lipomas.",
+      "say": "Well-differentiated and dedifferentiated liposarcomas are cytogenetically defined by supernumerary ring and giant marker chromosomes carrying high-level 12q13-15 amplification. This amplicon contains oncogenes MDM2 and CDK4, which inhibit p53 and phosphorylate RB1, respectively. Detecting nuclear MDM2 overexpression via immunohistochemistry or gene amplification by FISH provides the diagnostic gold standard distinguishing liposarcoma from benign lipomas.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "amp",
+            "label": "12q13-15 Amplicon",
+            "level": 1
+          },
+          {
+            "id": "mdm2",
+            "label": "MDM2 & CDK4 Overexpression",
+            "level": 2
+          },
+          {
+            "id": "inact",
+            "label": "Inactivates p53 & RB1",
+            "level": 3
+          },
+          {
+            "id": "lipo",
+            "label": "Liposarcoma Genesis",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "amp",
+            "mdm2"
+          ],
+          [
+            "mdm2",
+            "inact"
+          ],
+          [
+            "inact",
+            "lipo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synovial sarcoma represents a distinctive morphologically biphasic or monophasic soft tissue sarcoma driven by a pathognomonic reciprocal chromosomal translocation **t(X;18)(p11.2;q11.2)**. This structural translocation produces a fusion between the SS18 gene on chromosome 18 and SSX genes on the X chromosome. The chimeric **SS18-SSX** fusion oncoprotein disrupts BAF chromatin remodeling complexes, aberrantly driving oncogenic transcriptional programmes.",
+      "say": "Synovial sarcoma provides a distinctive morphologically biphasic soft tissue sarcoma driven by a pathognomonic reciprocal chromosomal translocation t(X;18)(p11.2;q11.2). This structural translocation produces a fusion between the SS18 gene on chromosome 18 and SSX genes on the X chromosome. The chimeric SS18-SSX fusion oncoprotein disrupts BAF chromatin remodeling complexes, aberrantly driving oncogenic transcriptional programmes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Synovial Sarcoma Genetics",
+          "points": [
+            "t(X;18)(p11.2;q11.2) reciprocal translocation",
+            "SS18-SSX1 / SSX2 fusion transcripts",
+            "Pathognomonic in > 95% of confirmed cases",
+            "Sensitive to ifosfamide-based chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "Histopathological Patterns",
+          "points": [
+            "Biphasic: Epithelial glands plus spindle cells",
+            "Monophasic: Uniform fascicles of spindle cells",
+            "TLE1 diffuse nuclear immunohistochemical positivity",
+            "Frequent in young adults around large joints"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In advanced metastatic soft tissue sarcomas, first-line systemic chemotherapy relies upon **doxorubicin monotherapy** or combination **doxorubicin plus ifosfamide**. While combining doxorubicin with ifosfamide in the EORTC 62012 trial significantly increased objective response rates from 14% to 26% and prolonged progression-free survival, it did not prolong overall survival, reserving doublet therapy for fit patients needing urgent cytoreduction.",
+      "say": "In advanced metastatic soft tissue sarcomas, first-line systemic chemotherapy relies upon doxorubicin monotherapy or combination doxorubicin plus ifosfamide. While combining doxorubicin with ifosfamide in the EORTC 62012 trial significantly increased objective response rates from 14% to 26% and prolonged progression-free survival, it did not prolong overall survival, reserving doublet therapy for fit patients needing urgent cytoreduction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "First-Line Regimen",
+          "Objective Response Rate",
+          "Key Advantages",
+          "Primary Toxicity Concern"
+        ],
+        "rows": [
+          [
+            "Doxorubicin Monotherapy",
+            "12% to 14%",
+            "Standard palliative option; well tolerated",
+            "Cumulative cardiotoxicity (lifetime dose < 450 mg/m2)"
+          ],
+          [
+            "Doxorubicin + Ifosfamide (AI)",
+            "26%",
+            "Maximizes cytoreduction for symptomatic relief",
+            "Severe myelosuppression, encephalopathy, cystitis"
+          ],
+          [
+            "Gemcitabine + Docetaxel",
+            "15% to 20%",
+            "Active in leiomyosarcoma and pleomorphic sarcoma",
+            "Neutropenia, peripheral oedema, fatigue"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Marine-derived tetrahydroisoquinoline alkaloid **Trabectedin** binds the minor groove of DNA, alkylating guanine residues and bending the DNA helix toward the major groove. Trabectedin interferes with transcription-coupled nucleotide excision repair and selectively depletes tumour-associated macrophages. Demonstrating substantial antineoplastic efficacy in pretreated advanced **liposarcomas** and **leiomyosarcomas**, trabectedin provides durable disease control with manageable transaminitis.",
+      "say": "Marine-derived tetrahydroisoquinoline alkaloid Trabectedin binds the minor groove of DNA, alkylating guanine residues and bending the DNA helix toward the major groove. Trabectedin interferes with transcription-coupled nucleotide excision repair and selectively depletes tumour-associated macrophages. Demonstrating substantial antineoplastic efficacy in pretreated advanced liposarcomas and leiomyosarcomas, trabectedin provides durable disease control with manageable transaminitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bind",
+            "label": "DNA Minor Groove",
+            "level": 1
+          },
+          {
+            "id": "tcr",
+            "label": "Inhibits TC-NER",
+            "level": 2
+          },
+          {
+            "id": "tam",
+            "label": "Depletes Macrophages",
+            "level": 3
+          },
+          {
+            "id": "ctrl",
+            "label": "Liposarcoma Control",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "bind",
+            "tcr"
+          ],
+          [
+            "tcr",
+            "tam"
+          ],
+          [
+            "tam",
+            "ctrl"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Novel microtubule inhibitor **Eribulin mesylate** significantly improves overall survival compared to **dacarbazine** in advanced or metastatic pretreated liposarcoma. Demonstrating distinct tubulin-sequestering mechanisms that trigger irreversible mitotic block in G2/M phase, eribulin provides prolonged disease control in patients progressing through prior anthracyclines.",
+      "say": "Novel microtubule inhibitor Eribulin mesylate significantly improves overall survival compared to dacarbazine in advanced or metastatic pretreated liposarcoma. Demonstrating distinct tubulin-sequestering mechanisms that trigger irreversible mitotic block in G2/M phase, eribulin provides prolonged disease control in patients progressing through prior anthracyclines.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eribulin in Liposarcoma",
+          "points": [
+            "Pivotal phase III overall survival trial",
+            "Median OS: 15.6 months vs 8.4 months (HR 0.51)",
+            "Non-taxane microtubule inhibitor",
+            "Specific survival benefit confirmed in liposarcoma"
+          ]
+        },
+        "right": {
+          "title": "Dacarbazine Control",
+          "points": [
+            "Alkylating agent control comparator",
+            "Inferior median overall survival in trial",
+            "Limited response rates in pretreated disease",
+            "Traditional historical comparator in sarcoma trials"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oral multi-targeted tyrosine kinase inhibitor **Pazopanib** inhibits VEGFR1-3, PDGFR-alpha/beta, and KIT receptors to suppress tumour angiogenesis. In the pivotal phase III **PALETTE trial**, pazopanib significantly prolonged progression-free survival compared to placebo in patients with advanced **non-adipocytic soft tissue sarcomas** progressing after prior anthracycline chemotherapy, establishing an effective oral targeted option for leiomyosarcomas, synovial sarcomas, and vascular tumours.",
+      "say": "Oral multi-targeted tyrosine kinase inhibitor Pazopanib inhibits VEGFR1-3, PDGFR-alpha/beta, and KIT receptors to suppress tumour angiogenesis. In the pivotal phase III PALETTE trial, pazopanib significantly prolonged progression-free survival compared to placebo in patients with advanced non-adipocytic soft tissue sarcomas progressing after prior anthracycline chemotherapy, establishing an effective oral targeted option for leiomyosarcomas, synovial sarcomas, and vascular tumours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PALETTE Parameter",
+          "Pazopanib Arm",
+          "Placebo Arm",
+          "Clinical Interpretation"
+        ],
+        "rows": [
+          [
+            "Progression-Free Survival",
+            "4.6 months",
+            "1.6 months (HR 0.31)",
+            "Statistically significant 3-month PFS prolongation"
+          ],
+          [
+            "Tumour Types Included",
+            "Leiomyosarcoma, synovial, pleomorphic",
+            "Liposarcomas explicitly excluded",
+            "Approved for non-adipocytic histological types"
+          ],
+          [
+            "Common Toxicities",
+            "Hypertension, fatigue, diarrhoea, hair depigmentation",
+            "Standard placebo rates",
+            "Manageable with dose titrations and antihypertensives"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Desmoid tumours** aggressive fibromatosis represent clonal fibroblastic proliferations characterized by infiltrative local tissue destruction without distant metastatic potential. Molecularly driven by somatic **CTNNB1 beta-catenin** point mutations or germline APC mutations in Gardner syndrome, initial management prioritizes active surveillance. Symptomatic or progressive tumours respond to sorafenib or the novel oral gamma-secretase inhibitor **nirogacestat**.",
+      "say": "Desmoid tumours aggressive fibromatosis represent clonal fibroblastic proliferations characterized by infiltrative local tissue destruction without distant metastatic potential. Molecularly driven by somatic CTNNB1 beta-catenin point mutations or germline APC mutations in Gardner syndrome, initial management prioritizes active surveillance. Progressive desmoid tumours demonstrate substantial disease control when treated with oral sorafenib or the gamma-secretase inhibitor nirogacestat.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dx",
+            "label": "Desmoid Diagnosis",
+            "level": 1
+          },
+          {
+            "id": "obs",
+            "label": "Active Surveillance",
+            "level": 2
+          },
+          {
+            "id": "prog",
+            "label": "Progression / Pain",
+            "level": 3
+          },
+          {
+            "id": "niro",
+            "label": "Nirogacestat / Sorafenib",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dx",
+            "obs"
+          ],
+          [
+            "obs",
+            "prog"
+          ],
+          [
+            "prog",
+            "niro"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cutaneous **angiosarcoma** is an aggressive vascular endothelial malignancy presenting spontaneously on the scalp of elderly patients or secondary to prior radiation or chronic lymphedema in **Stewart-Treves syndrome**. Characterized by malignant endothelial cells forming anastomosing vascular channels, angiosarcomas exhibit exquisite sensitivity to weekly metronomic infusions of **paclitaxel**, achieving rapid objective tumour regression and palliation.",
+      "say": "Cutaneous angiosarcoma is an aggressive vascular endothelial malignancy presenting spontaneously on the scalp of elderly patients or secondary to prior radiation or chronic lymphedema in Stewart-Treves syndrome. Characterized by malignant endothelial cells forming anastomosing vascular channels, angiosarcomas exhibit exquisite sensitivity to weekly metronomic infusions of paclitaxel, achieving rapid objective tumour regression and palliation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stewart-Treves Syndrome",
+          "points": [
+            "Angiosarcoma arising in chronic lymphedema",
+            "Classic complication of radical mastectomy",
+            "Typically manifests 5 to 10 years post-operatively",
+            "Aggressive course requiring systemic therapy"
+          ]
+        },
+        "right": {
+          "title": "Weekly Paclitaxel Efficacy",
+          "points": [
+            "Weekly 80 mg/m2 schedule",
+            "Anti-angiogenic and cytotoxic activity",
+            "Objective response rates exceeding 50%",
+            "Well tolerated in elderly patients with scalp lesions"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 69 (Soft Tissue Sarcomas)",
+    "NCCN Soft Tissue Sarcoma Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

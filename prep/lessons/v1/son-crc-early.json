@@ -1,0 +1,306 @@
+{
+  "v": 1,
+  "module": "son-crc-early",
+  "subject": "ss-medical-oncology",
+  "title": "Localized colon and rectal cancer: staging, total neoadjuvant therapy, adjuvant chemotherapy and mismatch repair status",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "In completely resected stage III colon cancer, adjuvant fluoropyrimidine plus oxaliplatin combinations **FOLFOX** or **CAPOX** significantly reduce recurrence risk and improve overall survival. The landmark **MOSAIC trial** established that adding oxaliplatin to infusional fluorouracil achieves a durable 3-year disease-free survival benefit and a sustained 10-year overall survival advantage across resected node-positive cohorts.",
+      "say": "In completely resected stage III colon cancer, adjuvant fluoropyrimidine plus oxaliplatin combinations FOLFOX or CAPOX significantly reduce recurrence risk and improve overall survival. The landmark MOSAIC trial established that adding oxaliplatin to infusional fluorouracil achieves a durable 3-year disease-free survival benefit and a sustained 10-year overall survival advantage across resected node-positive cohorts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "FOLFOX / CAPOX",
+          "points": [
+            "Oxaliplatin combined with fluoropyrimidines",
+            "Statistically significant OS improvement in MOSAIC",
+            "Cumulative peripheral sensory neurotoxicity risk",
+            "Global standard of care for stage III disease"
+          ]
+        },
+        "right": {
+          "title": "5-FU / LV Monotherapy",
+          "points": [
+            "Infusional fluorouracil with leucovorin",
+            "Provides baseline recurrence reduction",
+            "Reserved for patients unfit for oxaliplatin",
+            "Inferior disease-free survival in node-positive colon"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The international **IDEA trial** pooled data from six randomized phase III studies enrolling over 12,000 patients to evaluate adjuvant duration. In low-risk stage III colon cancer classified as **T1-3, N1**, 3 months of adjuvant CAPOX demonstrated non-inferiority to 6 months of therapy. Abbreviating therapy to 3 months dramatically reduced grade 3 or higher persistent peripheral sensory neuropathy from 16% down to 3%.",
+      "say": "The international IDEA trial pooled data from six randomized phase III studies enrolling over 12,000 patients to evaluate adjuvant duration. In low-risk stage III colon cancer classified as T1-3, N1, 3 months of adjuvant CAPOX demonstrated non-inferiority to 6 months of therapy. Abbreviating therapy to 3 months dramatically reduced grade 3 or higher persistent peripheral sensory neuropathy from 16% down to 3%.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk Tier",
+          "Anatomical Staging",
+          "Preferred Regimen & Duration",
+          "IDEA Trial Outcome"
+        ],
+        "rows": [
+          [
+            "Low-Risk Stage III",
+            "T1-3, N1",
+            "CAPOX for 3 months",
+            "Non-inferior to 6 months; reduces neurotoxicity"
+          ],
+          [
+            "High-Risk Stage III",
+            "T4 or N2",
+            "FOLFOX for 6 months or CAPOX",
+            "6 months duration achieves superior DFS"
+          ],
+          [
+            "Elderly / Neuropathy Risk",
+            "T1-3, N1",
+            "Single-agent fluoropyrimidine",
+            "Option if oxaliplatin is contraindicated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Universal testing for **mismatch repair deficiency** dMMR or high microsatellite instability **MSI-H** provides vital prognostic and predictive stratification in stage II colon cancer. Patients harbouring dMMR tumours demonstrate a superior natural prognosis with lower baseline recurrence rates. However, retrospective analyses confirm that dMMR stage II tumours derive no therapeutic benefit from single-agent fluoropyrimidine adjuvant chemotherapy, justifying clinical observation alone.",
+      "say": "Universal testing for mismatch repair deficiency dMMR or high microsatellite instability MSI-H provides vital prognostic and predictive stratification in stage II colon cancer. Patients harbouring dMMR tumours demonstrate a superior natural prognosis with lower baseline recurrence rates. However, retrospective analyses confirm that dMMR stage II tumours derive no therapeutic benefit from single-agent fluoropyrimidine adjuvant chemotherapy, justifying clinical observation alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "st2",
+            "label": "Stage II Colon Resection",
+            "level": 1
+          },
+          {
+            "id": "mmr",
+            "label": "MMR / MSI Testing",
+            "level": 2
+          },
+          {
+            "id": "dmmr",
+            "label": "dMMR (Favourable)",
+            "level": 3
+          },
+          {
+            "id": "obs",
+            "label": "Omit 5-FU Chemotherapy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "st2",
+            "mmr"
+          ],
+          [
+            "mmr",
+            "dmmr"
+          ],
+          [
+            "dmmr",
+            "obs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In mismatch repair-proficient stage II colon cancer, adjuvant chemotherapy decisions depend strictly upon high-risk clinicopathological features. Key high-risk indicators encompass **T4 primary tumour** invading visceral peritoneum, presentation with acute bowel obstruction or perforation, poorly differentiated histology, prominent lymphovascular or perineural invasion, and inadequate surgical lymph node evaluation examining **fewer than 12 sampled lymph nodes**.",
+      "say": "In mismatch repair-proficient stage II colon cancer, adjuvant chemotherapy decisions depend strictly upon high-risk clinicopathological features. Key high-risk indicators encompass T4 primary tumour invading visceral peritoneum, presentation with acute bowel obstruction or perforation, poorly differentiated histology, prominent lymphovascular or perineural invasion, and inadequate surgical lymph node evaluation examining fewer than 12 sampled lymph nodes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Feature",
+          "High-Risk Definition",
+          "Adjuvant Recommendation"
+        ],
+        "rows": [
+          [
+            "Tumour Invasion Depth",
+            "T4 stage (visceral peritoneum / adjacent organs)",
+            "Offer FOLFOX or CAPOX combination"
+          ],
+          [
+            "Surgical Presentation",
+            "Emergency bowel obstruction or perforation",
+            "Strong consideration for adjuvant chemotherapy"
+          ],
+          [
+            "Histological Grading",
+            "High-grade, signet ring, or undifferentiated",
+            "Risk factor supporting adjuvant therapy"
+          ],
+          [
+            "Nodal Sampling Adequacy",
+            "Fewer than 12 regional nodes examined",
+            "Understaging risk; consider adjuvant fluoropyrimidine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Modern multimodal management of locally advanced rectal cancer utilizes **Total neoadjuvant therapy** TNT. In the landmark phase III **RAPIDO trial**, delivering short-course radiotherapy 5 x 5 Gy followed by consolidation CAPOX or FOLFOX prior to total mesorectal excision significantly halved disease-related treatment failure and reduced distant metastases compared with standard preoperative chemoradiotherapy.",
+      "say": "Modern multimodal management of locally advanced rectal cancer utilizes Total neoadjuvant therapy TNT. In the landmark phase III RAPIDO trial, delivering short-course radiotherapy 5 x 5 Gy followed by consolidation CAPOX or FOLFOX prior to total mesorectal excision significantly halved disease-related treatment failure and reduced distant metastases compared with standard preoperative chemoradiotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "scrt",
+            "label": "Short-Course RT (5x5 Gy)",
+            "level": 1
+          },
+          {
+            "id": "consol",
+            "label": "Consolidation CAPOX",
+            "level": 2
+          },
+          {
+            "id": "tme",
+            "label": "Total Mesorectal Excision",
+            "level": 3
+          },
+          {
+            "id": "dm",
+            "label": "Reduced Distant Mets",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "scrt",
+            "consol"
+          ],
+          [
+            "consol",
+            "tme"
+          ],
+          [
+            "tme",
+            "dm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Complementing the consolidation strategy, the phase III **PRODIGE 23** trial evaluated induction chemotherapy in locally advanced rectal cancer. Administering neoadjuvant modified **mFOLFIRINOX** for 6 cycles prior to concurrent chemoradiotherapy and total mesorectal excision produced significantly higher pathological complete response rates and prolonged 7-year overall survival and disease-free survival over standard preoperative chemoradiation alone.",
+      "say": "Complementing the consolidation strategy, the phase III PRODIGE 23 trial evaluated induction chemotherapy in locally advanced rectal cancer. Administering neoadjuvant modified mFOLFIRINOX for 6 cycles prior to concurrent chemoradiotherapy and total mesorectal excision produced significantly higher pathological complete response rates and prolonged 7-year overall survival and disease-free survival over standard preoperative chemoradiation alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PRODIGE 23 Induction TNT",
+          "points": [
+            "Induction mFOLFIRINOX x 6 cycles upfront",
+            "Followed by capecitabine-based chemoradiation",
+            "Significantly improves 7-year overall survival",
+            "Pathological complete response rate: 28%"
+          ]
+        },
+        "right": {
+          "title": "Standard Preoperative CRT",
+          "points": [
+            "Concurrent chemoradiation alone upfront",
+            "Immediate surgery followed by adjuvant therapy",
+            "Poor compliance with postoperative chemotherapy",
+            "Pathological complete response rate: 12%"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In mismatch repair-deficient locally advanced rectal cancer, single-agent PD-1 inhibitor **Dostarlimab** monotherapy for 6 months achieved a historic clinical breakthrough. In a prospective phase II study, neoadjuvant dostarlimab produced an unprecedented **100% clinical complete response rate** across all treated patients, completely avoiding surgical resection, pelvic radiation therapy, and cytotoxic chemotherapy while preserving rectal organ function.",
+      "say": "In mismatch repair-deficient locally advanced rectal cancer, single-agent PD-1 inhibitor Dostarlimab monotherapy for 6 months achieved a historic clinical breakthrough. In a prospective phase II study, neoadjuvant dostarlimab produced an unprecedented 100% clinical complete response rate across all treated patients, completely avoiding surgical resection, pelvic radiation therapy, and cytotoxic chemotherapy while preserving rectal organ function.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dmmr",
+            "label": "dMMR Rectal Cancer",
+            "level": 1
+          },
+          {
+            "id": "dost",
+            "label": "Dostarlimab x 6 Months",
+            "level": 2
+          },
+          {
+            "id": "ccr",
+            "label": "100% Complete Response",
+            "level": 3
+          },
+          {
+            "id": "organ",
+            "label": "Complete Organ Preservation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dmmr",
+            "dost"
+          ],
+          [
+            "dost",
+            "ccr"
+          ],
+          [
+            "ccr",
+            "organ"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A non-operative **Watch-and-wait** organ preservation strategy is now an evidence-based management pathway for rectal cancer patients achieving a confirmed **clinical complete response** following total neoadjuvant therapy. Rigorous surveillance requires digital rectal examination, flexible sigmoidoscopy, and high-resolution pelvic MRI every 3 to 4 months for 2 years, with prompt surgical salvage if endoluminal tumour regrowth occurs.",
+      "say": "A non-operative Watch-and-wait organ preservation strategy is now an evidence-based management pathway for rectal cancer patients achieving a confirmed clinical complete response following total neoadjuvant therapy. Rigorous surveillance requires digital rectal examination, flexible sigmoidoscopy, and high-resolution pelvic MRI every 3 to 4 months for 2 years, with prompt surgical salvage if endoluminal tumour regrowth occurs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surveillance Modality",
+          "Frequency in Years 1-2",
+          "Clinical Complete Response Criteria"
+        ],
+        "rows": [
+          [
+            "Digital Rectal Exam",
+            "Every 3 to 4 months",
+            "Complete normalisation of rectal wall palpation"
+          ],
+          [
+            "Flexible Sigmoidoscopy",
+            "Every 3 to 4 months",
+            "White scar, telangiectasias; no residual ulcer or nodule"
+          ],
+          [
+            "High-Resolution Pelvic MRI",
+            "Every 3 to 6 months",
+            "Dark T2 scar (mrTRG 1); no residual nodal enlargement"
+          ],
+          [
+            "Chest / Abdominal CT",
+            "Every 6 months",
+            "Surveillance for occult systemic distant metastases"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 47 (Cancer of the Colon and Rectum)",
+    "NCCN Colon and Rectal Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

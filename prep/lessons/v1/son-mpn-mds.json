@@ -1,0 +1,320 @@
+{
+  "v": 1,
+  "module": "son-mpn-mds",
+  "subject": "ss-medical-oncology",
+  "title": "Myeloproliferative neoplasms and myelodysplastic syndromes: driver mutations, IPSS-M stratification, hypomethylating agents and JAK inhibition",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Classical BCR-ABL1-negative myeloproliferative neoplasms **polycythaemia vera** PV, **essential thrombocythaemia** ET, and **primary myelofibrosis** PMF arise from clonal haematopoietic stem cells. These disorders are driven by mutually exclusive somatic mutations in **JAK2**, **CALR**, or **MPL**, which induce constitutive cytokine-independent downstream JAK-STAT pathway activation and hyperproliferation.",
+      "say": "Classical BCR-ABL1-negative myeloproliferative neoplasms polycythaemia vera PV, essential thrombocythaemia ET, and primary myelofibrosis PMF arise from clonal haematopoietic stem cells. These disorders are driven by mutually exclusive somatic mutations in JAK2, CALR, or MPL, which induce constitutive cytokine-independent downstream JAK-STAT pathway activation and hyperproliferation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Myeloproliferative Neoplasm",
+          "JAK2 Mutation Frequency",
+          "CALR Mutation Frequency",
+          "MPL Mutation Frequency"
+        ],
+        "rows": [
+          [
+            "Polycythaemia Vera (PV)",
+            "> 95% (JAK2 V617F or exon 12)",
+            "0% (mutually exclusive)",
+            "0%"
+          ],
+          [
+            "Essential Thrombocythaemia (ET)",
+            "50% to 60%",
+            "20% to 25% (insertion/deletion)",
+            "3% to 5%"
+          ],
+          [
+            "Primary Myelofibrosis (PMF)",
+            "55% to 65%",
+            "20% to 25%",
+            "5% to 8% (triple-negative in 10%)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The pathognomonic **JAK2 V617F** point mutation in exon 14 disrupts the regulatory pseudokinase JH2 domain, abolishing autoinhibition and causing constitutive tyrosine kinase activation. Present in over 95% of patients with **polycythaemia vera** and approximately 50% to 60% of individuals with essential thrombocythaemia and primary myelofibrosis, high mutant allele burden correlates with elevated thrombotic risk and fibrotic transformation.",
+      "say": "The pathognomonic JAK2 V617F point mutation in exon 14 disrupts the regulatory pseudokinase JH2 domain, abolishing autoinhibition and causing constitutive tyrosine kinase activation. Present in over 95% of patients with polycythaemia vera and approximately 50% to 60% of individuals with essential thrombocythaemia and primary myelofibrosis, high mutant allele burden correlates with elevated thrombotic risk and fibrotic transformation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "v617f",
+            "label": "JAK2 V617F Exon 14",
+            "level": 1
+          },
+          {
+            "id": "jh2",
+            "label": "Loss of JH2 Autoinhibition",
+            "level": 2
+          },
+          {
+            "id": "stat",
+            "label": "Constitutive STAT Phosphorylation",
+            "level": 3
+          },
+          {
+            "id": "mpn",
+            "label": "Erythroid / Megakaryocytic Proliferation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "v617f",
+            "jh2"
+          ],
+          [
+            "jh2",
+            "stat"
+          ],
+          [
+            "stat",
+            "mpn"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnostic criteria for **polycythaemia vera** mandate fulfilling all three major criteria, or the first two major criteria plus the minor criterion. Major criteria require elevated haemoglobin **over 16.5 g/dL in men** or **16.0 g/dL in women**, bone marrow trilineage panmyelosis, and presence of a JAK2 mutation. The minor criterion is a subnormal serum erythropoietin concentration.",
+      "say": "Diagnostic criteria for polycythaemia vera mandate fulfilling all three major criteria, or the first two major criteria plus the minor criterion. Major criteria require elevated haemoglobin over sixteen and a half grams in men or sixteen grams in women, bone marrow trilineage panmyelosis, and presence of a JAK2 mutation. The minor criterion is a subnormal serum erythropoietin concentration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "WHO Major Criteria for PV",
+          "points": [
+            "Hb > 16.5 g/dL (men) or > 16.0 g/dL (women), or Hct > 49% / 48%",
+            "Bone marrow biopsy showing panmyelosis",
+            "Presence of JAK2 V617F or JAK2 exon 12 mutation",
+            "All 3 major criteria confirm diagnosis"
+          ]
+        },
+        "right": {
+          "title": "Minor Criterion & Secondary Mimics",
+          "points": [
+            "Subnormal serum erythropoietin (EPO) level",
+            "Secondary polycythaemia: elevated serum EPO",
+            "Causes: Hypoxia, sleep apnoea, smoking, renal tumours",
+            "Normal bone marrow morphology in secondary erythrocytosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In the landmark **CYTO-PV trial**, therapeutic **phlebotomy** maintaining hematocrit strictly **below 45%** combined with daily low-dose aspirin significantly reduced cardiovascular death and major arterial and venous thrombotic events by fourfold. In high-risk polycythaemia vera defined by age 60 years or older or prior thrombosis, adding cytoreductive therapy with hydroxyurea or ropeginterferon alfa-2b is mandatory.",
+      "say": "In the landmark CYTO-PV trial, therapeutic phlebotomy maintaining hematocrit strictly below 45% combined with daily low-dose aspirin significantly reduced cardiovascular death and major arterial and venous thrombotic events by fourfold. In high-risk polycythaemia vera defined by age 60 years or older or prior thrombosis, adding cytoreductive therapy with hydroxyurea or ropeginterferon alfa-2b is mandatory.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pv",
+            "label": "Polycythaemia Vera",
+            "level": 1
+          },
+          {
+            "id": "hct",
+            "label": "Phlebotomy: Hct < 45%",
+            "level": 2
+          },
+          {
+            "id": "asp",
+            "label": "Low-Dose Aspirin",
+            "level": 3
+          },
+          {
+            "id": "thromb",
+            "label": "Fourfold Thrombosis Drop",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pv",
+            "hct"
+          ],
+          [
+            "hct",
+            "asp"
+          ],
+          [
+            "asp",
+            "thromb"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral JAK1/JAK2 inhibitor **Ruxolitinib** dramatically improves clinical outcomes in intermediate- and high-risk myelofibrosis. In the pivotal randomized **COMFORT-I and COMFORT-II** clinical trials, ruxolitinib significantly reduced massive **splenomegaly**, alleviated debilitating constitutional symptoms including severe night sweats, pruritus, and fatigue, and significantly prolonged overall survival compared to placebo or best available therapy.",
+      "say": "Oral JAK1/JAK2 inhibitor Ruxolitinib dramatically improves clinical outcomes in intermediate- and high-risk myelofibrosis. In the pivotal randomized COMFORT-I and COMFORT-II clinical trials, ruxolitinib significantly reduced massive splenomegaly, alleviated debilitating constitutional symptoms including severe night sweats, pruritus, and fatigue, and significantly prolonged overall survival compared to placebo or best available therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "COMFORT Trial Outcome",
+          "Ruxolitinib Therapy",
+          "Control / Best Available",
+          "P-Value & Significance"
+        ],
+        "rows": [
+          [
+            ">= 35% Spleen Volume Reduction",
+            "41.9% of patients",
+            "0.7% with placebo",
+            "p < 0.001 (rapid splenic shrinkage)"
+          ],
+          [
+            ">= 50% Symptom Score Reduction",
+            "45.9% of patients",
+            "5.3% with placebo",
+            "p < 0.001 (improves performance status)"
+          ],
+          [
+            "Overall Survival Benefit",
+            "Statistically significant OS gain",
+            "Inferior survival",
+            "Durable survival advantage confirmed"
+          ],
+          [
+            "Key Adverse Events",
+            "Dose-dependent anaemia & thrombocytopenia",
+            "Disease-related cytopenias",
+            "Manage with dose titration; rarely fatal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Heterogeneous clonal stem cell disorders **Myelodysplastic syndromes** MDS are characterized by ineffective haematopoiesis, peripheral blood cytopenias, dysplastic marrow morphology, and elevated risk of transformation into **acute myeloid leukaemia**. Bone marrow biopsy establishes the diagnosis by demonstrating dysplasia in 10% or more cells of one or more myeloid lineages, ring sideroblasts, or elevated myeloblasts under 20%.",
+      "say": "Heterogeneous clonal stem cell disorders Myelodysplastic syndromes MDS are characterized by ineffective haematopoiesis, peripheral blood cytopenias, dysplastic marrow morphology, and elevated risk of transformation into acute myeloid leukaemia. Bone marrow biopsy establishes the diagnosis by demonstrating dysplasia in 10% or more cells of one or more myeloid lineages, ring sideroblasts, or elevated myeloblasts under 20%.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lower-Risk MDS",
+          "points": [
+            "IPSS-R very low, low, and intermediate <= 3.5",
+            "Low blast percentage (< 5% marrow blasts)",
+            "Primary goal: Alleviate cytopenias & transfusion burden",
+            "Managed with ESAs, luspatercept, lenalidomide"
+          ]
+        },
+        "right": {
+          "title": "Higher-Risk MDS",
+          "points": [
+            "IPSS-R high and very high (> 3.5)",
+            "Excess marrow blasts (5% to 19%)",
+            "High risk of rapid AML transformation",
+            "Managed with azacitidine and allogeneic transplant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The updated **Molecular International Prognostic Scoring System** IPSS-M integrates multi-gene somatic mutations across 31 genes with cytogenetic abnormalities and blast counts to refine risk stratification in MDS. Profiling adverse mutations such as **TP53**, ASXL1, RUNX1, and EZH2 reclassifies patients into more precise prognostic categories, identifying candidates who derive survival benefit from early allogeneic haematopoietic stem cell transplantation.",
+      "say": "The updated Molecular International Prognostic Scoring System IPSS-M integrates multi-gene somatic mutations across 31 genes with cytogenetic abnormalities and blast counts to refine risk stratification in MDS. Profiling adverse mutations such as TP53, ASXL1, RUNX1, and EZH2 reclassifies patients into more precise prognostic categories, identifying candidates who derive survival benefit from early allogeneic haematopoietic stem cell transplantation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ipssr",
+            "label": "Standard IPSS-R",
+            "level": 1
+          },
+          {
+            "id": "ngs",
+            "label": "31-Gene NGS Panel",
+            "level": 2
+          },
+          {
+            "id": "ipssm",
+            "label": "IPSS-M Score",
+            "level": 3
+          },
+          {
+            "id": "trans",
+            "label": "Transplant Stratification",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ipssr",
+            "ngs"
+          ],
+          [
+            "ngs",
+            "ipssm"
+          ],
+          [
+            "ipssm",
+            "trans"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients with lower-risk MDS harbouring the **isolated del(5q)** chromosomal abnormality, the immunomodulatory agent **Lenalidomide** induces rapid red blood cell transfusion independence in over 65% of patients. Furthermore, lenalidomide induces complete cytogenetic remissions by selectively degrading casein kinase 1A1 encoded within the 5q deleted chromosomal region, promoting apoptosis of the malignant clone.",
+      "say": "In patients with lower-risk MDS harbouring the isolated del(5q) chromosomal abnormality, the immunomodulatory agent Lenalidomide induces rapid red blood cell transfusion independence in over 65% of patients. Furthermore, lenalidomide induces complete cytogenetic remissions by selectively degrading casein kinase 1A1 encoded within the 5q deleted chromosomal region, promoting apoptosis of the malignant clone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "del5q",
+            "label": "Isolated del(5q) MDS",
+            "level": 1
+          },
+          {
+            "id": "lena",
+            "label": "Lenalidomide 10 mg Daily",
+            "level": 2
+          },
+          {
+            "id": "ck1",
+            "label": "Degrades Casein Kinase 1A1",
+            "level": 3
+          },
+          {
+            "id": "ti",
+            "label": "Transfusion Independence",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "del5q",
+            "lena"
+          ],
+          [
+            "lena",
+            "ck1"
+          ],
+          [
+            "ck1",
+            "ti"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 94 & 95 (Myeloproliferative Neoplasms and Myelodysplastic Syndromes)",
+    "NCCN MPN and MDS Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

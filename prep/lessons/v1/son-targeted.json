@@ -1,125 +1,296 @@
 {
- "v": 1,
- "module": "son-targeted",
- "subject": "ss-medical-oncology",
- "title": "Small molecule targeted therapy: kinase inhibitors, resistance and toxicity",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Receptor tyrosine kinases (RTKs) are transmembrane receptors. Ligand binding causes **dimerisation**, then cross-phosphorylation of the cytoplasmic kinase domains. SH2 domains recognise these phosphotyrosine sites and recruit downstream signalling. Signal termination relies on **Cbl ubiquitin ligase**, which tags activated RTKs for endocytosis and lysosomal degradation. Negative feedback through juxtamembrane threonine phosphorylation by PKC and MAPK lowers EGFR ligand affinity.",
-   "say": "Receptor tyrosine kinases are transmembrane receptors. Ligand binding causes dimerisation, then cross phosphorylation of the cytoplasmic kinase domains. SH2 domains recognise these phosphotyrosine sites and recruit downstream signalling. Signal termination relies on Cbl ubiquitin ligase, which tags activated receptors for endocytosis and lysosomal degradation. Negative feedback through juxtamembrane threonine phosphorylation by PKC and MAPK lowers EGFR ligand affinity.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Ligand binds"
-     },
-     {
-      "id": "b",
-      "label": "Dimerisation"
-     },
-     {
-      "id": "c",
-      "label": "Autophosphorylation"
-     },
-     {
-      "id": "d",
-      "label": "SH2 recruitment"
-     },
-     {
-      "id": "e",
-      "label": "Cbl ubiquitination"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "c",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "On-target toxicity reflects effective inhibition, not overdosing. EGFR inhibitors such as erlotinib and afatinib impair epidermal differentiation, causing rash and painful skin erosions, and they also impair corneal healing, causing **keratitis**. Osimertinib keratitis occurs in about 0.7 percent of patients, while EGFR-TKIs are the most frequent cause of TKI keratitis. Refractory cases may need TKI interruption, and corneal perforation is a severe complication needing urgent review.",
-   "say": "On-target toxicity reflects effective inhibition, not overdosing. EGFR inhibitors such as erlotinib and afatinib impair epidermal differentiation, causing rash and painful skin erosions, and they also impair corneal healing, causing keratitis. Osimertinib keratitis occurs in about 0.7 percent of patients, while EGFR inhibitors are the most frequent cause of TKI keratitis. Refractory cases may need interruption of the drug, and corneal perforation is a severe complication needing urgent review.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug class",
-     "Typical toxicity",
-     "Mechanism"
-    ],
-    "rows": [
-     [
-      "EGFR-TKI",
-      "Rash, keratitis",
-      "Impaired epidermal and corneal healing"
-     ],
-     [
-      "VEGFR-TKI",
-      "Hypertension, bleeding",
-      "Reduced nitric oxide, endothelial injury"
-     ],
-     [
-      "Osimertinib",
-      "Keratitis about 0.7%",
-      "EGFR inhibition on ocular surface"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "VEGFR inhibitors cause **hypertension** because reduced nitric oxide raises systemic vascular resistance, and anti-VEGF therapy can weaken vessels, raising haemorrhage risk. Prolonged QTc is a specific risk: patients at high risk should be offered an alternative agent where possible. Reproductive counselling matters, since TKIs are potentially teratogenic, so effective contraception is needed during therapy and for several weeks afterwards.",
-   "say": "VEGFR inhibitors cause hypertension because reduced nitric oxide raises systemic vascular resistance, and anti VEGF therapy can weaken vessels, raising haemorrhage risk. Prolonged QTc is a specific risk, and patients at high risk should be offered an alternative agent where possible. Reproductive counselling matters, since TKIs are potentially teratogenic, so effective contraception is needed during therapy and for several weeks afterwards.",
-   "vis": null
-  },
-  {
-   "tx": "Acquired resistance is suspected when a patient improves initially and then progresses. The next step is **genetic testing** for resistance mutations, rather than simply escalating the dose or switching to cytotoxic chemotherapy. Interindividual variation in ABC transporter genes affects absorption and elimination, so it can guide dosing. Targeted small molecules also show synthetic lethality in PARP inhibitor settings, a principle worth remembering for BRCA-deficient tumours.",
-   "say": "Acquired resistance is suspected when a patient improves initially and then progresses. The next step is genetic testing for resistance mutations, rather than simply escalating the dose or switching to cytotoxic chemotherapy. Interindividual variation in ABC transporter genes affects absorption and elimination, so it can guide dosing. Targeted small molecules also show synthetic lethality in PARP inhibitor settings, a principle worth remembering for BRCA deficient tumours.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-targeted-fig1.webp",
-    "alt": "Diagram showing initial patient improvement followed by disease progression, necessitating genetic testing for resistance mutations or ABC transporter variation.",
-    "caption": "Acquired resistance requires genetic testing for mutations or ABC transporter variation",
-    "ar": 1.8349
-   }
+  "v": 1,
+  "module": "son-targeted",
+  "subject": "ss-medical-oncology",
+  "title": "Small molecule targeted therapy: kinase inhibitors, synthetic lethality, resistance mechanisms and bypass pathways",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "First-generation reversible EGFR **tyrosine kinase inhibitors** erlotinib and gefitinib competitively bind the intracellular ATP-binding pocket of EGFR. These agents demonstrate marked efficacy against classical activating EGFR mutations, specifically **exon 19 deletion** and the exon 21 L858R point substitution in non-small cell lung cancer. Suppressing downstream MAPK and PI3K/Akt survival signalling cascades induces profound tumour regression in oncogene-addicted adenocarcinomas.",
+      "say": "First-generation reversible EGFR tyrosine kinase inhibitors erlotinib and gefitinib competitively bind the intracellular ATP-binding pocket of EGFR. These agents demonstrate marked efficacy against classical activating EGFR mutations, specifically exon 19 deletion and the exon 21 L858R point substitution in non-small cell lung cancer. Suppressing downstream MAPK and PI3K/Akt survival signalling cascades induces profound tumour regression in oncogene-addicted adenocarcinomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "EGFR TKI Generation",
+          "Key Compounds",
+          "Mechanism & Binding"
+        ],
+        "rows": [
+          [
+            "First Generation",
+            "Erlotinib, Gefitinib",
+            "Reversible competitive ATP-binding site inhibition"
+          ],
+          [
+            "Second Generation",
+            "Afatinib, Dacomitinib",
+            "Irreversible pan-HER covalent kinase inhibition"
+          ],
+          [
+            "Third Generation",
+            "Osimertinib",
+            "Irreversible mutant-selective covalent inhibition sparing wild-type"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Third-generation irreversible mutant-selective TKI **Osimertinib** forms a stable covalent bond with cysteine-797 within the ATP-binding cleft. Osimertinib selectively overcomes the secondary T790M resistance **gatekeeper mutation** while demonstrating negligible binding affinity against wild-type EGFR, substantially minimizing cutaneous and gastrointestinal adverse effects. Furthermore, osimertinib penetrates the blood-brain barrier effectively, providing excellent intracranial disease control in advanced NSCLC.",
+      "say": "Third-generation irreversible mutant-selective TKI Osimertinib forms a stable covalent bond with cysteine-797 within the ATP-binding cleft. Osimertinib selectively overcomes the secondary T790M resistance gatekeeper mutation while demonstrating negligible binding affinity against wild-type EGFR, substantially minimizing cutaneous and gastrointestinal adverse effects. Furthermore, osimertinib penetrates the blood-brain barrier effectively, providing excellent intracranial disease control in advanced NSCLC.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t790m",
+            "label": "T790M Mutation",
+            "level": 1
+          },
+          {
+            "id": "osi",
+            "label": "Osimertinib Binding",
+            "level": 2
+          },
+          {
+            "id": "cys",
+            "label": "Cys-797 Covalent Bond",
+            "level": 3
+          },
+          {
+            "id": "cns",
+            "label": "CNS Disease Control",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "t790m",
+            "osi"
+          ],
+          [
+            "osi",
+            "cys"
+          ],
+          [
+            "cys",
+            "cns"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In oncogene-addicted **ALK-rearranged** lung cancer, second-generation ALK inhibitors **alectinib** and brigatinib deliver dramatic clinical superiority over first-generation crizotinib. In the landmark ALEX trial, alectinib demonstrated superior progression-free survival and profoundly reduced central nervous system progression. Alectinib exhibits potent systemic potency against common crizotinib-resistant secondary ALK mutations and achieves high cerebrospinal fluid concentrations without requiring efflux transporter evasion.",
+      "say": "In oncogene-addicted ALK-rearranged lung cancer, second-generation ALK inhibitors alectinib and brigatinib deliver dramatic clinical superiority over first-generation crizotinib. In the landmark ALEX trial, alectinib demonstrated superior progression-free survival and profoundly reduced central nervous system progression. Alectinib exhibits potent systemic potency against common crizotinib-resistant secondary ALK mutations and achieves high cerebrospinal fluid concentrations without requiring efflux transporter evasion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alectinib / Brigatinib",
+          "points": [
+            "Potent second-generation ALK inhibition",
+            "High blood-brain barrier penetration",
+            "Overcomes crizotinib gatekeeper mutations",
+            "Superior first-line progression-free survival"
+          ]
+        },
+        "right": {
+          "title": "Crizotinib",
+          "points": [
+            "First-generation multi-targeted inhibitor (ALK/ROS1/MET)",
+            "Substrate for P-glycoprotein efflux pump",
+            "High rate of central nervous system recurrence",
+            "Replaced by next-generation inhibitors in front-line"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Constitutively active **BRAF V600E** kinase mutations drive uncontrolled proliferative signalling in metastatic melanoma, colorectal, and thyroid cancers. Administering combination therapy with BRAF inhibitor dabrafenib and MEK inhibitor trametinib achieves rapid tumour shrinkage while suppressing paradoxical **MAPK reactivation**. Concurrent MEK blockade prevents RAF dimerisation in BRAF wild-type keratinocytes, dramatically lowering the incidence of secondary cutaneous squamous cell carcinomas.",
+      "say": "Constitutively active BRAF V600E kinase mutations drive uncontrolled proliferative signalling in metastatic melanoma, colorectal, and thyroid cancers. Administering combination therapy with BRAF inhibitor dabrafenib and MEK inhibitor trametinib achieves rapid tumour shrinkage while suppressing paradoxical MAPK reactivation. Concurrent MEK blockade prevents RAF dimerisation in BRAF wild-type keratinocytes, dramatically lowering the incidence of secondary cutaneous squamous cell carcinomas.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "braf",
+            "label": "BRAF V600E",
+            "level": 1
+          },
+          {
+            "id": "dab",
+            "label": "Dabrafenib",
+            "level": 2
+          },
+          {
+            "id": "tram",
+            "label": "Trametinib",
+            "level": 3
+          },
+          {
+            "id": "block",
+            "label": "Dual MAPK Blockade",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "braf",
+            "dab"
+          ],
+          [
+            "dab",
+            "tram"
+          ],
+          [
+            "tram",
+            "block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeted **PARP inhibitors** olaparib, rucaparib, and talazoparib selectively kill tumour cells deficient in homologous recombination DNA repair through **synthetic lethality**. PARP inhibitors trap PARP1 and PARP2 enzymes on damaged DNA single-strand breaks, stalling replication forks that collapse into double-strand breaks. In BRCA1 or BRCA2 deficient cells unable to repair double-strand breaks via homologous recombination, catastrophic genomic instability triggers rapid apoptosis.",
+      "say": "Targeted PARP inhibitors olaparib, rucaparib, and talazoparib selectively kill tumour cells deficient in homologous recombination DNA repair through synthetic lethality. PARP inhibitors trap PARP1 and PARP2 enzymes on damaged DNA single-strand breaks, stalling replication forks that collapse into double-strand breaks. In BRCA1 or BRCA2 deficient cells unable to repair double-strand breaks via homologous recombination, catastrophic genomic instability triggers rapid apoptosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biological Status",
+          "Single-Strand Repair",
+          "Double-Strand Repair",
+          "Outcome Under PARP-i"
+        ],
+        "rows": [
+          [
+            "BRCA Wild-Type",
+            "Inhibited by PARP-i",
+            "Intact via Homologous Recombination",
+            "Normal cell survival"
+          ],
+          [
+            "BRCA Deficient (HRD)",
+            "Inhibited by PARP-i",
+            "Defective homologous repair",
+            "Synthetic lethality & apoptosis"
+          ],
+          [
+            "Reversion Mutation",
+            "Inhibited by PARP-i",
+            "Restored open reading frame",
+            "Secondary acquired resistance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral **CDK4/6 inhibitors** palbociclib, ribociclib, and abemaciclib block cyclin D-dependent phosphorylation of retinoblastoma protein RB1. Blocking RB1 phosphorylation prevents release of E2F transcription factors, enforcing cell cycle arrest at the restriction checkpoint in **G1 phase**. Combining CDK4/6 inhibitors with endocrine therapy doubles progression-free survival in advanced estrogen receptor-positive, HER2-negative breast cancer.",
+      "say": "Oral CDK4/6 inhibitors palbociclib, ribociclib, and abemaciclib block cyclin D-dependent phosphorylation of retinoblastoma protein RB1. Blocking RB1 phosphorylation prevents release of E2F transcription factors, enforcing cell cycle arrest at the restriction checkpoint in G1 phase. Combining CDK4/6 inhibitors with endocrine therapy doubles progression-free survival in advanced estrogen receptor-positive, HER2-negative breast cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cdk",
+            "label": "CDK4/6 Inhibitor",
+            "level": 1
+          },
+          {
+            "id": "rb",
+            "label": "Unphosphorylated RB1",
+            "level": 2
+          },
+          {
+            "id": "e2f",
+            "label": "E2F Sequestration",
+            "level": 3
+          },
+          {
+            "id": "g1",
+            "label": "G1 Phase Arrest",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cdk",
+            "rb"
+          ],
+          [
+            "rb",
+            "e2f"
+          ],
+          [
+            "e2f",
+            "g1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Small molecule **VEGFR TKIs** lenvatinib, cabozantinib, and sorafenib disrupt pathological tumour **angiogenesis** by blocking vascular endothelial growth factor receptor phosphorylation. In addition to VEGFR1, VEGFR2, and VEGFR3, these multikinase agents inhibit RET, MET, KIT, and FGFR receptors, starving solid tumours of oxygen and nutrients. Common class-related toxicities include systemic hypertension, hand-foot skin reaction, proteinuria, and fatigue.",
+      "say": "Small molecule VEGFR TKIs lenvatinib, cabozantinib, and sorafenib disrupt pathological tumour angiogenesis by blocking vascular endothelial growth factor receptor phosphorylation. In addition to VEGFR1, VEGFR2, and VEGFR3, these multikinase agents inhibit RET, MET, KIT, and FGFR receptors, starving solid tumours of oxygen and nutrients. Common class-related toxicities include systemic hypertension, hand-foot skin reaction, proteinuria, and fatigue.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Kinase Inhibitor",
+          "Target Receptors",
+          "Key Approved Indications"
+        ],
+        "rows": [
+          [
+            "Lenvatinib",
+            "VEGFR1-3, FGFR1-4, RET, KIT",
+            "Hepatocellular, thyroid, and endometrial carcinoma"
+          ],
+          [
+            "Cabozantinib",
+            "VEGFR2, MET, AXL, RET",
+            "Renal cell carcinoma and hepatocellular carcinoma"
+          ],
+          [
+            "Sorafenib",
+            "VEGFR1-3, PDGFRB, RAF, KIT",
+            "Hepatocellular and advanced thyroid carcinoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary **TKI resistance** inexorably evolves through on-target secondary point mutations or activation of parallel compensatory signalling cascades. Common biological resistance mechanisms include target gene amplification, emergent gatekeeper variants, and **bypass pathway** signalling such as MET amplification, HER2 amplification, or histologic transformation to small cell neuroendocrine carcinoma. Overcoming resistance requires repeat tissue or liquid biopsy genomic profiling to direct next-line salvage therapies.",
+      "say": "Secondary TKI resistance inexorably evolves through on-target secondary point mutations or activation of parallel compensatory signalling cascades. Common biological resistance mechanisms include target gene amplification, emergent gatekeeper variants, and bypass pathway signalling such as MET amplification, HER2 amplification, or histologic transformation to small cell neuroendocrine carcinoma. Overcoming resistance requires repeat tissue or liquid biopsy genomic profiling to direct next-line salvage therapies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "On-Target Resistance",
+          "points": [
+            "Secondary ATP-pocket point mutations (e.g. C797S)",
+            "Kinase target gene amplification",
+            "Steric hindrance blocking drug binding",
+            "Managed by next-generation kinase inhibitors"
+          ]
+        },
+        "right": {
+          "title": "Off-Target Bypass Resistance",
+          "points": [
+            "MET or HER2 gene amplification",
+            "BRAF or KRAS downstream activation",
+            "Phenotypic transformation to small cell lung cancer",
+            "Requires rational multi-agent targeted combinations"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 19 (Small Molecule Kinase Inhibitors and Targeted Therapeutics)",
+    "NCCN Molecular Targets Guidelines"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_dfbc9af20905",
-  "q_09c1107a8873",
-  "q_06ad5b1f650f"
- ],
- "src": [],
- "refs": [
-  "Goodman and Gilman's The Pharmacological Basis of Therapeutics (Brunton, Hilal-Dandan, Knollmann, editors)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 43
- }
 }
