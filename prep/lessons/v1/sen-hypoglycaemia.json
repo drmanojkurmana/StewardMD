@@ -1,0 +1,188 @@
+{
+ "v": 1,
+ "module": "sen-hypoglycaemia",
+ "subject": "ss-endocrinology",
+ "title": "Hypoglycaemia",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Whipple triad** is symptoms of hypoglycemia, a low measured plasma glucose, and relief when that glucose is raised. A fingerstick alone, without the triad, does not diagnose an **insulinoma**. The plasma glucose is the number that counts, and the symptoms must improve when it is corrected. A dizzy spell with only a capillary reading is not the diagnosis.",
+   "say": "Whipple triad is symptoms of hypoglycemia, a low measured plasma glucose, and relief when that glucose is raised. A fingerstick alone, without the triad, does not diagnose an insulinoma. The plasma glucose is the number that counts, and the symptoms must improve when it is corrected. A dizzy spell with only a capillary reading is not the diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/insulinoma-fig1.webp",
+    "alt": "Insulinoma loop with autonomous insulin, hypoglycemia, neuroglycopenia, an adrenergic surge, and the Whipple triad.",
+    "caption": "Autonomous insulin, hypoglycemia, neuroglycopenia, and an adrenergic surge, closed by glucose intake. Whipple triad is marked. A fingerstick without that triad does not diagnose the tumour. Credit: StewardMD.",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "ADA level 1 **hypoglycemia** is a glucose below 70 mg/dL, level 2 is below 54 mg/dL, and level 3 is severe hypoglycemia that needs assistance regardless of the number. A conscious adult is treated with 15 g of fast carbohydrate and is rechecked in 15 minutes, which is the **rule of 15**. If the glucose is still low, the 15 g is repeated.",
+   "say": "ADA level 1 hypoglycemia is a glucose below 70 mg/dL, level 2 is below 54 mg/dL, and level 3 is severe hypoglycemia that needs assistance regardless of the number. A conscious adult is treated with 15 g of fast carbohydrate and is rechecked in 15 minutes, which is the rule of 15. If the glucose is still low, the 15 g is repeated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Definition",
+     "First action if conscious"
+    ],
+    "rows": [
+     [
+      "Level 1",
+      "Below 70 mg/dL",
+      "15 g carbohydrate, recheck in 15 minutes"
+     ],
+     [
+      "Level 2",
+      "Below 54 mg/dL",
+      "Same rule of 15, and find the cause"
+     ],
+     [
+      "Level 3",
+      "Needs assistance, any number",
+      "Glucagon or intravenous dextrose if they cannot swallow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glucagon**, 1 mg by injection or 3 mg intranasal, is the rescue drug when the patient cannot swallow. It works poorly when liver glycogen is gone, as in prolonged starvation or advanced liver disease, because the liver has nothing to release. Give intravenous **dextrose** in that setting. A patient who has not eaten for days will not respond to glucagon.",
+   "say": "Glucagon, 1 mg by injection or 3 mg intranasal, is the rescue drug when the patient cannot swallow. It works poorly when liver glycogen is gone, as in prolonged starvation or advanced liver disease, because the liver has nothing to release. Give intravenous dextrose in that setting. A patient who has not eaten for days will not respond to glucagon.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypoglycemia-fig1.webp",
+    "alt": "Counter-regulatory response: low glucose, pancreatic glucagon, adrenal adrenaline, hepatic glycogenolysis, neuroglycopenia, and tremor.",
+    "caption": "Low glucose drives glucagon from the pancreas and adrenaline from the adrenals, then hepatic glycogenolysis. Neuroglycopenia and autonomic tremor are marked. Glucagon rescue fails when that hepatic glycogen is already gone. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "A supervised **72-hour fast** is the test for **insulinoma**, and it is ended when the plasma glucose is below 55 mg/dL with symptoms. Endogenous hyperinsulinism then has insulin at least 3 microunits per mL, **C-peptide** at least 0 point 6 ng/mL, and **proinsulin** at least 5 pmol/L, with a negative sulfonylurea screen. The fast is supervised because the glucose can fall quickly.",
+   "say": "A supervised 72-hour fast is the test for insulinoma, and it is ended when the plasma glucose is below 55 mg/dL with symptoms. Endogenous hyperinsulinism then has insulin at least 3 microunits per mL, C-peptide at least 0 point 6 ng/mL, and proinsulin at least 5 pmol/L, with a negative sulfonylurea screen. The fast is supervised because the glucose can fall quickly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "At glucose below 55 mg/dL with symptoms",
+     "Endogenous hyperinsulinism"
+    ],
+    "rows": [
+     [
+      "Insulin",
+      "At least 3 microunits per mL"
+     ],
+     [
+      "C-peptide",
+      "At least 0.6 ng/mL"
+     ],
+     [
+      "Proinsulin",
+      "At least 5 pmol/L"
+     ],
+     [
+      "Sulfonylurea screen",
+      "Negative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Factitious hypoglycemia** from insulin has a high insulin and a suppressed **C-peptide**. A **sulfonylurea** causes a high insulin and a high C-peptide, and the drug screen is positive. Both patterns imitate insulinoma until the C-peptide and the screen are done. The screen is what separates a secret sulfonylurea from a real insulinoma.",
+   "say": "Factitious hypoglycemia from insulin has a high insulin and a suppressed C-peptide. A sulfonylurea causes a high insulin and a high C-peptide, and the drug screen is positive. Both patterns imitate insulinoma until the C-peptide and the screen are done. The screen is what separates a secret sulfonylurea from a real insulinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Factitious insulin",
+     "points": [
+      "High insulin",
+      "Suppressed C-peptide",
+      "Screen is negative for sulfonylurea"
+     ]
+    },
+    "right": {
+     "title": "Sulfonylurea",
+     "points": [
+      "High insulin",
+      "High C-peptide",
+      "Drug screen is positive",
+      "Imitates insulinoma until the screen is done"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nonislet-cell tumor hypoglycemia** is driven by incompletely processed **IGF-2**. Insulin, C-peptide, and IGF-1 are low, and a large mesenchymal or hepatic tumor is the usual source. Glucose must be given until the tumor is removed. The low insulin is the clue that this is not an insulinoma.",
+   "say": "Nonislet-cell tumor hypoglycemia is driven by incompletely processed IGF-2. Insulin, C-peptide, and IGF-1 are low, and a large mesenchymal or hepatic tumor is the usual source. Glucose must be given until the tumor is removed. The low insulin is the clue that this is not an insulinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nonislet-cell tumor hypoglycemia",
+     "points": [
+      "Incompletely processed IGF-2",
+      "Insulin, C-peptide, and IGF-1 are low",
+      "Large mesenchymal or hepatic tumor",
+      "Glucose until the tumor is removed"
+     ]
+    },
+    "right": {
+     "title": "Insulinoma",
+     "points": [
+      "Insulin and C-peptide are high",
+      "Usually a small pancreatic tumor",
+      "72-hour fast is the biochemical test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Impaired awareness of hypoglycemia** follows recurrent lows and raises the risk of severe episodes. A period of 2 to 3 weeks with strict avoidance of glucose below 70 mg/dL can partly restore awareness. Automated insulin delivery is used when awareness is lost. The patient who no longer feels the warning signs is the patient who needs that protection.",
+   "say": "Impaired awareness of hypoglycemia follows recurrent lows and raises the risk of severe episodes. A period of 2 to 3 weeks with strict avoidance of glucose below 70 mg/dL can partly restore awareness. Automated insulin delivery is used when awareness is lost. The patient who no longer feels the warning signs is the patient who needs that protection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Impaired awareness of hypoglycemia",
+      "Follows recurrent lows"
+     ],
+     [
+      "Restore warning signs",
+      "2 to 3 weeks avoiding glucose below 70 mg/dL"
+     ],
+     [
+      "Awareness already lost",
+      "Automated insulin delivery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post-bariatric hypoglycemia** occurs 1 to 3 hours after a meal, with a high insulin from an exaggerated **GLP-1** response. Diet is first-line, and **acarbose** can blunt the glucose spike. An insulinoma is unlikely if the fasting glucose is normal. The timing after food is the clue that separates this from a fasting insulinoma.",
+   "say": "Post-bariatric hypoglycemia occurs 1 to 3 hours after a meal, with a high insulin from an exaggerated GLP-1 response. Diet is first-line, and acarbose can blunt the glucose spike. An insulinoma is unlikely if the fasting glucose is normal. The timing after food is the clue that separates this from a fasting insulinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Post-bariatric hypoglycemia",
+     "points": [
+      "1 to 3 hours after a meal",
+      "Exaggerated GLP-1 and high insulin",
+      "Diet first, acarbose can blunt the spike",
+      "Fasting glucose is usually normal"
+     ]
+    },
+    "right": {
+     "title": "Insulinoma",
+     "points": [
+      "Fasting hypoglycemia",
+      "Whipple triad on a plasma glucose",
+      "Normal fasting glucose makes it unlikely"
+     ]
+    }
+   }
+  }
+ ]
+}
