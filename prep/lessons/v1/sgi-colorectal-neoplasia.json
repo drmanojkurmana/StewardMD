@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "sgi-colorectal-neoplasia",
+  "subject": "ss-gastroenterology",
+  "title": "Colorectal Polyps, Hereditary Syndromes and Screening",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **adenoma detection rate** is the colonoscopy **quality benchmark**: at least 25% of screening examinations should find an adenoma, 30% in men and 20% in women. Each 1% increase in that rate lowers interval colorectal cancer by about 3%. The lesion a low rate leaves behind is the right-sided mass or apple-core stricture in the figure, grown along the adenoma-carcinoma sequence after APC is lost.",
+      "say": "The adenoma detection rate is the colonoscopy quality benchmark: at least 25% of screening examinations should find an adenoma, 30% in men and 20% in women. Each 1% increase in that rate lowers interval colorectal cancer by about 3%. The lesion a low rate leaves behind is the right-sided mass or apple-core stricture in the figure, grown along the adenoma-carcinoma sequence after APC is lost.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/colorectal-cancer-fig1.webp",
+        "alt": "Diagram of the colon showing a right sided caecal mass and a left sided apple core narrowing of the descending colon.",
+        "caption": "Right sided colonic mass and left sided apple core narrowing. Credit: StewardMD.",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "The serrated neoplasia pathway accounts for fifteen to twenty percent of colorectal cancers, originating from sessile serrated lesions predominantly located in the right colon. These lesions are characterized by early activating **BRAF** mutations, specifically the V600E substitution. Subsequent extensive aberrant hypermethylation of promoter CpG islands, designated the **CpG island methylator phenotype**, silences the DNA mismatch repair gene **MLH1**, precipitating high microsatellite instability (MSI-H) and rapid carcinogenesis.",
+      "say": "The serrated neoplasia pathway accounts for fifteen to twenty percent of colorectal cancers, originating from sessile serrated lesions predominantly located in the right colon. These lesions are characterized by early activating BRAF mutations, specifically the V600E substitution. Subsequent extensive aberrant hypermethylation of promoter CpG islands, designated the CpG island methylator phenotype, silences the DNA mismatch repair gene MLH1, precipitating high microsatellite instability and rapid carcinogenesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Activating BRAF V600E mutation"
+          },
+          {
+            "id": "b",
+            "label": "Sessile serrated lesion with boot-shaped crypts"
+          },
+          {
+            "id": "c",
+            "label": "CIMP hypermethylation silences MLH1 promoter"
+          },
+          {
+            "id": "d",
+            "label": "MSI-H serrated colorectal adenocarcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "serrated architectural remodelling"
+          ],
+          [
+            "b",
+            "c",
+            "epigenetic silencing"
+          ],
+          [
+            "c",
+            "d",
+            "loss of mismatch repair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sessile serrated lesions**, mostly in the right colon, carry a **BRAF V600E** mutation and CpG-island methylation that silences MLH1, so the cancer that follows is often microsatellite unstable. Metastatic deficient mismatch repair disease is treated first line with **pembrolizumab**. **Dostarlimab**, another PD-1 antibody, is used in dMMR tumours that have already progressed, not as the first-line colorectal standard. Boot-shaped crypt bases mark this serrated path.",
+      "say": "Sessile serrated lesions, mostly in the right colon, carry a BRAF V600E mutation and CpG-island methylation that silences MLH1, so the cancer that follows is often microsatellite unstable. Metastatic deficient mismatch repair disease is treated first line with pembrolizumab. Dostarlimab, another PD-1 antibody, is used in dMMR tumours that have already progressed, not as the first-line colorectal standard. Boot-shaped crypt bases mark this serrated path.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "MMR Gene",
+          "Relative Prevalence",
+          "Associated Cancer Risks"
+        ],
+        "rows": [
+          [
+            "MLH1 / MSH2",
+            "~80% of Lynch syndrome",
+            "Highest lifetime risk of CRC (40% to 60%) and endometrial"
+          ],
+          [
+            "MSH6",
+            "~10% to 15%",
+            "Lower CRC risk; higher lifetime risk of endometrial cancer"
+          ],
+          [
+            "PMS2",
+            "~5%",
+            "Attenuated CRC penetrance (15% to 20% lifetime risk)"
+          ],
+          [
+            "EPCAM",
+            "~1% to 3%",
+            "Deletions cause hypermethylation silencing of adjacent MSH2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical identification of families with suspected Lynch syndrome uses the **Amsterdam II criteria**, encapsulated by the **3-2-1** rule: at least **3** relatives with histologically confirmed Lynch-associated cancers, spanning at least **2** successive generations, with at least **1** case diagnosed before age **50** years. Furthermore, one affected individual must be a first-degree relative of the other two, familial adenomatous polyposis must be ruled out, and tumors must be verified pathologically.",
+      "say": "Clinical identification of families with suspected Lynch syndrome uses the Amsterdam II criteria, encapsulated by the 3-2-1 rule: at least 3 relatives with histologically confirmed Lynch-associated cancers, spanning at least 2 successive generations, with at least 1 case diagnosed before age 50 years. Furthermore, one affected individual must be a first-degree relative of the other two, familial adenomatous polyposis must be ruled out, and tumors must be verified pathologically.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": ">= 3 relatives with Lynch-associated cancers"
+          },
+          {
+            "id": "b",
+            "label": "Spanning >= 2 successive generations"
+          },
+          {
+            "id": "c",
+            "label": ">= 1 relative diagnosed before age 50 years"
+          },
+          {
+            "id": "d",
+            "label": "Amsterdam II criteria met -> Germline genetic testing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "first-degree kinship link"
+          ],
+          [
+            "b",
+            "c",
+            "vertical generational transmission"
+          ],
+          [
+            "c",
+            "d",
+            "FAP excluded and verified"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classical **familial adenomatous polyposis** is an autosomal dominant syndrome resulting from germline mutations in the APC gene on chromosome 5q21. It is defined clinically by the development of hundreds to thousands of colorectal adenomatous polyps, traditionally exceeding a diagnostic threshold of at least **100** adenomas. Without prophylactic surgical intervention, the lifetime risk of developing invasive colorectal adenocarcinoma approaches **100%** by the fourth to fifth decade of life.",
+      "say": "Classical familial adenomatous polyposis is an autosomal dominant syndrome resulting from germline mutations in the APC gene on chromosome 5q21. It is defined clinically by the development of hundreds to thousands of colorectal adenomatous polyps, traditionally exceeding a diagnostic threshold of at least 100 adenomas. Without prophylactic surgical intervention, the lifetime risk of developing invasive colorectal adenocarcinoma approaches 100 percent by the fourth to fifth decade of life.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-adenomatous-polyposis-fig1.webp",
+        "alt": "Panel of familial adenomatous polyposis findings: carpeted colorectal polyps, duodenal and gastric polyps, an adenoma histology field, CHRPE, an osteoma, and a desmoid.",
+        "caption": "Familial adenomatous polyposis: colorectal carpet, duodenal adenomas, CHRPE, osteoma, and desmoid. Credit: StewardMD.",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Colorectal surveillance protocols in confirmed Lynch syndrome carriers mandate regular high-quality colonoscopy with targeted biopsies. High-level consensus guidelines recommend initiating screening colonoscopy between the ages of **20** and **25** years, or 2 to 5 years earlier than the youngest affected family member. Surveillance must be repeated at strict intervals of every **1** to **2** years due to accelerated adenoma-carcinoma dwell times driven by defective DNA mismatch repair.",
+      "say": "Colorectal surveillance protocols in confirmed Lynch syndrome carriers mandate regular high-quality colonoscopy with targeted biopsies. High-level consensus guidelines recommend initiating screening colonoscopy between the ages of 20 and 25 years, or 2 to 5 years earlier than the youngest affected family member. Surveillance must be repeated at strict intervals of every 1 to 2 years due to accelerated adenoma-carcinoma dwell times driven by defective DNA mismatch repair.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hereditary Syndrome",
+          "Surveillance Modality",
+          "Starting Age",
+          "Surveillance Interval"
+        ],
+        "rows": [
+          [
+            "Lynch Syndrome (MLH1/MSH2)",
+            "High-definition colonoscopy",
+            "Age 20 to 25 years",
+            "Every 1 to 2 years"
+          ],
+          [
+            "Lynch Syndrome (MSH6/PMS2)",
+            "High-definition colonoscopy",
+            "Age 30 to 35 years",
+            "Every 1 to 3 years"
+          ],
+          [
+            "Classical FAP",
+            "Flexible sigmoidoscopy / colonoscopy",
+            "Age 10 to 12 years",
+            "Every 1 year until colectomy"
+          ],
+          [
+            "Attenuated FAP",
+            "Complete colonoscopy",
+            "Age 18 to 20 years",
+            "Every 1 to 2 years"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Peutz-Jeghers syndrome** is an autosomal dominant hamartomatous polyposis caused by germline **STK11 mutations** (also called LKB1) on chromosome 19p13.3. Patients have mucocutaneous melanin spots on the lips, buccal mucosa, and digits. The polyps are hamartomas with a branching smooth-muscle tree in the lamina propria, and they can bleed or intussuscept.",
+      "say": "Peutz-Jeghers syndrome is an autosomal dominant hamartomatous polyposis caused by germline STK11 mutations (also called LKB1) on chromosome 19p13.3. Patients have mucocutaneous melanin spots on the lips, buccal mucosa, and digits. The polyps are hamartomas with a branching smooth-muscle tree in the lamina propria, and they can bleed or intussuscept.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peutz-Jeghers Syndrome",
+          "points": [
+            "Gene: STK11 / LKB1 (19p13.3)",
+            "Polyp histology: Hamartomas with arborizing smooth muscle",
+            "Mucocutaneous: Hyperpigmented macules on lips and buccal mucosa",
+            "Associated malignancies: Breast, pancreas, GI, ovarian (SCTAT)"
+          ]
+        },
+        "right": {
+          "title": "Juvenile Polyposis Syndrome",
+          "points": [
+            "Gene: SMAD4 or BMPR1A (10q23)",
+            "Polyp histology: Dilated cystic glands with lamina propria edematous expansion",
+            "Mucocutaneous: None",
+            "Associated malignancies: Colorectal and gastric adenocarcinoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Post-polypectomy surveillance** is set at 3 years when the index colonoscopy found 3 or more adenomas, any adenoma of 10 mm or larger, **tubulovillous histology**, or high-grade dysplasia. One or two small tubular adenomas can wait 7 to 10 years. The clock starts only after a complete examination with a good bowel preparation.",
+      "say": "Post-polypectomy surveillance is set at 3 years when the index colonoscopy found 3 or more adenomas, any adenoma of 10 mm or larger, tubulovillous histology, or high-grade dysplasia. One or two small tubular adenomas can wait 7 to 10 years. The clock starts only after a complete examination with a good bowel preparation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Index finding",
+          "Next colonoscopy",
+          "Exam point"
+        ],
+        "rows": [
+          [
+            "3 or more adenomas",
+            "3 years",
+            "Count every adenoma removed"
+          ],
+          [
+            "Adenoma 10 mm or larger",
+            "3 years",
+            "Size is the polypectomy size"
+          ],
+          [
+            "Tubulovillous histology or high-grade dysplasia",
+            "3 years",
+            "Villous change shortens the interval"
+          ],
+          [
+            "1 or 2 small tubular adenomas",
+            "7 to 10 years",
+            "Only after a complete, clean examination"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}
