@@ -1,0 +1,311 @@
+{
+ "v": 1,
+ "module": "son-cup",
+ "subject": "ss-medical-oncology",
+ "title": "Cancer of unknown primary",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Cancer of unknown primary** CUP accounts for 2% to 5% of all cancer diagnoses, defined as biopsy-proven metastatic malignancy without an identifiable anatomical primary site after standardized workup. Standard diagnostic evaluation entails comprehensive history, physical examination, high-resolution computed tomography of chest, abdomen, and pelvis, dedicated mammography in women, and serum tumour markers. Approximately eighty percent represent adenocarcinomas or poorly differentiated carcinomas.",
+   "say": "Cancer of unknown primary CUP accounts for 2% to 5% of all cancer diagnoses, defined as biopsy-proven metastatic malignancy without an identifiable anatomical primary site after standardized workup. Standard diagnostic evaluation entails comprehensive history, physical examination, high-resolution computed tomography of chest, abdomen, and pelvis, dedicated mammography in women, and serum tumour markers. Approximately eighty percent represent adenocarcinomas or poorly differentiated carcinomas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Biopsy of metastatic lesion"
+     },
+     {
+      "id": "b",
+      "label": "Contrast CT chest/abdomen/pelvis + Exam"
+     },
+     {
+      "id": "c",
+      "label": "No primary anatomical site identified"
+     },
+     {
+      "id": "d",
+      "label": "Cancer of unknown primary (CUP)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "confirm malignancy on core biopsy"
+     ],
+     [
+      "b",
+      "c",
+      "standard baseline evaluation"
+     ],
+     [
+      "c",
+      "d",
+      "2% to 5% of all cancer presentations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immunohistochemical profiling represents the essential cornerstone of diagnostic pathological assessment. Initial diagnostic immunohistochemical algorithm utilizes **cytokeratin 7** CK7 and cytokeratin 20 CK20 staining patterns to narrow down likely anatomical origins. A CK7-positive and CK20-negative profile suggests lung, breast, thyroid, or ovarian origin, while CK7-negative and CK20-positive strongly points toward colorectal adenocarcinoma.",
+   "say": "Immunohistochemical profiling represents the essential cornerstone of diagnostic pathological assessment. Initial diagnostic immunohistochemical algorithm utilizes cytokeratin 7 CK7 and cytokeratin 20 CK20 staining patterns to narrow down likely anatomical origins. A CK7-positive and CK20-negative profile suggests lung, breast, thyroid, or ovarian origin, while CK7-negative and CK20-positive strongly points toward colorectal adenocarcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CK7 Status",
+     "CK20 Status",
+     "Probable Primary Sites",
+     "Secondary IHC Markers"
+    ],
+    "rows": [
+     [
+      "CK7 positive",
+      "CK20 negative",
+      "Lung, breast, ovary, endometrium, thyroid",
+      "TTF-1, GATA3, WT1, PAX8"
+     ],
+     [
+      "CK7 negative",
+      "CK20 positive",
+      "Colorectal adenocarcinoma, Merkel cell",
+      "CDX2, SATB2"
+     ],
+     [
+      "CK7 positive",
+      "CK20 positive",
+      "Pancreaticobiliary, gastric, urothelial",
+      "GATA3, p40, CA 19-9"
+     ],
+     [
+      "CK7 negative",
+      "CK20 negative",
+      "Hepatocellular, renal, prostate, melanoma",
+      "Arginase-1, PAX8, PSA, SOX10"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prognostic classification dictates whether intent is palliative or curative. **Favourable CUP** subsets comprise 15% to 20% of cases, demonstrating specific clinicopathological presentations that respond to site-directed curative-intent therapies. These entities behave identically to recognized organ-specific malignancies and achieve long-term disease-free survival when managed according to established guidelines for their putative primary site.",
+   "say": "Prognostic classification dictates whether intent is palliative or curative. Favourable CUP subsets comprise 15% to 20% of cases, demonstrating specific clinicopathological presentations that respond to site-directed curative-intent therapies. These entities behave identically to recognized organ-specific malignancies and achieve long-term disease-free survival when managed according to established guidelines for their putative primary site.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Favourable CUP Subset",
+     "Clinical Presentation",
+     "Putative Primary Equivalent",
+     "Curative Treatment Paradigm"
+    ],
+    "rows": [
+     [
+      "Axillary adenocarcinoma (women)",
+      "Isolated axillary lymphadenopathy",
+      "Occult breast cancer (stage II)",
+      "Axillary dissection + systemic therapy + breast RT"
+     ],
+     [
+      "Peritoneal papillary serous (women)",
+      "Omental cake, ascites, CA 125 elevated",
+      "Stage III epithelial ovarian cancer",
+      "Cytoreductive surgery + carboplatin/paclitaxel"
+     ],
+     [
+      "Cervical squamous lymph nodes",
+      "Upper/mid jugular lymphadenopathy",
+      "Head and neck SCC (oropharynx)",
+      "Neck dissection / definitive chemoradiotherapy"
+     ],
+     [
+      "Midline poorly differentiated",
+      "Mediastinal / retroperitoneal masses",
+      "Extragonadal germ cell tumour",
+      "Platinum-based BEP combination chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Isolated regional nodal presentations in women mirror primary mammary carcinomas. Women presenting with **isolated axillary lymph node** adenocarcinoma are treated according to stage II breast cancer guidelines with axillary dissection, systemic therapy, and breast irradiation. Dynamic contrast-enhanced breast MRI detects occult primary breast lesions in over two-thirds of cases where bilateral digital mammography and ultrasound are negative.",
+   "say": "Isolated regional nodal presentations in women mirror primary mammary carcinomas. Women presenting with isolated axillary lymph node adenocarcinoma are treated according to stage II breast cancer guidelines with axillary dissection, systemic therapy, and breast irradiation. Dynamic contrast-enhanced breast MRI detects occult primary breast lesions in over two-thirds of cases where bilateral digital mammography and ultrasound are negative.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Isolated axillary adenocarcinoma in female"
+     },
+     {
+      "id": "b",
+      "label": "Breast MRI + ER/PR/HER2 IHC"
+     },
+     {
+      "id": "c",
+      "label": "Complete axillary lymph node dissection"
+     },
+     {
+      "id": "d",
+      "label": "Adjuvant systemic therapy + Whole-breast radiotherapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "identify occult primary"
+     ],
+     [
+      "b",
+      "c",
+      "surgical staging"
+     ],
+     [
+      "c",
+      "d",
+      "treated as stage II breast cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extensive peritoneal carcinomatosis in women with normal ovaries mirrors serous ovarian disease. Women presenting with **peritoneal carcinomatosis** of papillary serous adenocarcinoma histology are managed identically to stage III epithelial ovarian carcinoma with cytoreduction and platinum chemotherapy. Patients undergo upfront or interval debulking surgery and receive carboplatin plus paclitaxel chemotherapy, demonstrating equivalent chemosensitivity, BRCA alterations, and PARP inhibitor responsiveness.",
+   "say": "Extensive peritoneal carcinomatosis in women with normal ovaries mirrors serous ovarian disease. Women presenting with peritoneal carcinomatosis of papillary serous adenocarcinoma histology are managed identically to stage III epithelial ovarian carcinoma with cytoreduction and platinum chemotherapy. Patients undergo upfront or interval debulking surgery and receive carboplatin plus paclitaxel chemotherapy, demonstrating equivalent chemosensitivity, BRCA alterations, and PARP inhibitor responsiveness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Peritoneal Carcinoma (CUP)",
+     "points": [
+      "Diffuse peritoneal involvement with normal-sized ovaries",
+      "Papillary serous histology, positive WT1 and PAX8",
+      "Managed with primary or interval cytoreduction",
+      "Carboplatin + Paclitaxel +/- Bevacizumab / PARP"
+     ]
+    },
+    "right": {
+     "title": "Stage III Epithelial Ovarian Cancer",
+     "points": [
+      "Dominant ovarian masses (>5 cm)",
+      "Identical biological behavior and gene expression",
+      "Same surgical cytoreduction R0 target",
+      "Identical frontline and maintenance systemic therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Midline presentations in young men mandate urgent serological and histological workup for curative potential. Young men with midline mediastinal or retroperitoneal poorly differentiated carcinoma represent the **germ cell syndrome**, curable with platinum-based BEP regimens. Serum markers alpha-fetoprotein AFP and beta-hCG must be drawn immediately before initiating therapy. Elevated markers or i(12p) chromosomal isochromosome confirms germ cell lineage.",
+   "say": "Midline presentations in young men mandate urgent serological and histological workup for curative potential. Young men with midline mediastinal or retroperitoneal poorly differentiated carcinoma represent the germ cell syndrome, curable with platinum-based BEP regimens. Serum markers alpha-fetoprotein AFP and beta-hCG must be drawn immediately before initiating therapy. Elevated markers or i(12p) chromosomal isochromosome confirms germ cell lineage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Young male (<50) with midline mass"
+     },
+     {
+      "id": "b",
+      "label": "Serum AFP, beta-hCG, testicular ultrasound"
+     },
+     {
+      "id": "c",
+      "label": "Biopsy shows poorly differentiated carcinoma"
+     },
+     {
+      "id": "d",
+      "label": "Curative BEP chemotherapy (4 cycles)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "rapid diagnostic workup"
+     ],
+     [
+      "b",
+      "c",
+      "evaluate germ cell features / i(12p)"
+     ],
+     [
+      "c",
+      "d",
+      "bleomycin, etoposide, cisplatin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cervical lymphadenopathy without an overt mucosal lesion frequently conceals an occult oropharyngeal primary. Squamous cell carcinoma in **cervical upper neck** lymph nodes is evaluated with PET-CT, panendoscopy, and bilateral palatine and lingual tonsillectomy to identify occult HPV-driven primary tumours. In p16-positive squamous neck metastases, deep lingual tonsillectomy detects small subepithelial primary carcinomas in over fifty percent of previously occult cases.",
+   "say": "Cervical lymphadenopathy without an overt mucosal lesion frequently conceals an occult oropharyngeal primary. Squamous cell carcinoma in cervical upper neck lymph nodes is evaluated with PET-CT, panendoscopy, and bilateral palatine and lingual tonsillectomy to identify occult HPV-driven primary tumours. In p16-positive squamous neck metastases, deep lingual tonsillectomy detects small subepithelial primary carcinomas in over fifty percent of previously occult cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cervical lymphadenopathy (level II/III SCC)"
+     },
+     {
+      "id": "b",
+      "label": "FDG PET-CT scan"
+     },
+     {
+      "id": "c",
+      "label": "Panendoscopy + bilateral tonsillectomies"
+     },
+     {
+      "id": "d",
+      "label": "Identifies occult primary or guides definitive CRT"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "FNA confirms squamous cell (test p16/HPV)"
+     ],
+     [
+      "b",
+      "c",
+      "direct mucosal inspection and palpatory exam"
+     ],
+     [
+      "c",
+      "d",
+      "resect or irradiate bilateral neck and mucosa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The majority of CUP cases present with widespread visceral dissemination lacking favourable features. **Unfavourable CUP** subsets lacking actionable drivers are empirically treated with platinum-based doublets such as carboplatin plus paclitaxel or gemcitabine. Comprehensive genomic profiling via next-generation sequencing identifies actionable driver alterations such as MSI-high, BRAF V600E, RET fusions, or high tumour mutational burden in up to thirty percent of patients.",
+   "say": "The majority of CUP cases present with widespread visceral dissemination lacking favourable features. Unfavourable CUP subsets lacking actionable drivers are empirically treated with platinum-based doublets such as carboplatin plus paclitaxel or gemcitabine. Comprehensive genomic profiling via next-generation sequencing identifies actionable driver alterations such as MSI-high, BRAF V600E, RET fusions, or high tumour mutational burden in up to thirty percent of patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Empiric Cytotoxic Doublet",
+     "points": [
+      "Carboplatin AUC 5-6 + Paclitaxel 175-200 mg/m2",
+      "Alternative: Gemcitabine + Cisplatin/Carboplatin",
+      "Modest response rate (15% to 25%)",
+      "Median overall survival: 6 to 9 months"
+     ]
+    },
+    "right": {
+     "title": "Comprehensive Genomic Profiling",
+     "points": [
+      "Broad NGS gene panel on tissue core / ctDNA",
+      "Identifies TMB-high, MSI-H, NTRK, BRAF, RET",
+      "Enables tissue-agnostic targeted therapies",
+      "Significantly prolongs PFS in matched responders"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}
