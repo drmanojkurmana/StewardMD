@@ -1,160 +1,311 @@
 {
- "v": 1,
- "module": "son-tumour-markers",
- "subject": "ss-medical-oncology",
- "title": "Tumour markers: CA125, CEA, AFP, beta-hCG, PSA and the rest",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "A **tumour marker** is a substance made by tumour cells or by the body in response to cancer, measured in blood or tissue. Markers help with diagnosis, prognosis, monitoring treatment and detecting recurrence, but none is diagnostic alone. Always interpret a value against the clinical picture and the assay used.",
-   "say": "A tumour marker is a substance made by tumour cells or by the body in response to cancer, measured in blood or tissue. Markers help with diagnosis, prognosis, monitoring treatment and detecting recurrence, but none is diagnostic alone. Always interpret a value against the clinical picture and the assay used.",
-   "vis": null
-  },
-  {
-   "tx": "Several markers track specific tumours. **Calcitonin** signals medullary thyroid carcinoma, while **thyroglobulin** follows differentiated thyroid cancer after surgery. **Chromogranin A** is raised in neuroendocrine tumours, and **LDH** is a non-specific marker of tissue turnover. **PSA** tracks prostate cancer but also rises with benign prostatic enlargement.",
-   "say": "Several markers track specific tumours. Calcitonin signals medullary thyroid carcinoma, while thyroglobulin follows differentiated thyroid cancer after surgery. Chromogranin A is raised in neuroendocrine tumours, and LDH is a non-specific marker of tissue turnover. PSA tracks prostate cancer but also rises with benign prostatic enlargement.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Marker",
-     "Tumour linked",
-     "Clinical point"
-    ],
-    "rows": [
-     [
-      "Calcitonin",
-      "Medullary thyroid carcinoma",
-      "Also raised in C cell hyperplasia"
-     ],
-     [
-      "Thyroglobulin",
-      "Differentiated thyroid cancer",
-      "Used to monitor after thyroidectomy"
-     ],
-     [
-      "Chromogranin A",
-      "Neuroendocrine tumours",
-      "Can be raised by proton pump inhibitors"
-     ],
-     [
-      "LDH",
-      "Many tumours, non-specific",
-      "Reflects general tissue breakdown"
-     ],
-     [
-      "PSA",
-      "Prostate cancer",
-      "Raised in benign prostatic enlargement"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Timing matters for **CA125**. Surgery and tissue trauma can cause falsely high values, so a sample is best taken at least two weeks after an operation. Compare post-treatment values with the **pre-treatment baseline**, since a falling trend suggests clearance, and interpret a single early value with caution.",
-   "say": "Timing matters for CA125. Surgery and tissue trauma can cause falsely high values, so a sample is best taken at least two weeks after an operation. Compare post-treatment values with the pre-treatment baseline, since a falling trend suggests clearance, and interpret a single early value with caution.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "s",
-      "label": "Surgery"
-     },
-     {
-      "id": "w",
-      "label": "Wait 2 weeks"
-     },
-     {
-      "id": "d",
-      "label": "Draw CA125"
-     },
-     {
-      "id": "c",
-      "label": "Compare baseline"
-     }
-    ],
-    "edges": [
-     [
-      "s",
-      "w"
-     ],
-     [
-      "w",
-      "d"
-     ],
-     [
-      "d",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**False positive** results have several causes. Benign conditions such as endometriosis, pelvic inflammatory disease and pregnancy raise CA125. Heterophile or **human anti-mouse antibody (HAMA)** interference can create spurious values in immunoassays, and adding non-immune mouse serum to the sample can block this. Confirm unexpected results with a second assay.",
-   "say": "False positive results have several causes. Benign conditions such as endometriosis, pelvic inflammatory disease and pregnancy raise CA125. Heterophile or human anti-mouse antibody interference can create spurious values in immunoassays, and adding non-immune mouse serum to the sample can block this. Confirm unexpected results with a second assay.",
-   "vis": null
-  },
-  {
-   "tx": "Use **CA125** prognostically with care. A **preoperative** level above about 65 U/mL has been linked to a markedly higher risk of death in **ovarian cancer**. Around 10 to 20 percent of advanced tumours do not raise **CA125**, so a normal value does not exclude disease. Recurrence often shows a rise in **CA125** before clinical signs appear.",
-   "say": "Use CA125 prognostically with care. A preoperative level above about 65 units per millilitre has been linked to a markedly higher risk of death in ovarian cancer. Around 10 to 20 percent of advanced tumours do not raise CA125, so a normal value does not exclude disease. Recurrence often shows a rise in CA125 before clinical signs appear.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Raised CA125",
-     "points": [
-      "Higher preoperative risk",
-      "Suggests residual disease",
-      "Rise can precede recurrence"
-     ]
+  "v": 1,
+  "module": "son-tumour-markers",
+  "subject": "ss-medical-oncology",
+  "title": "Tumour markers in clinical oncology: oncofetal proteins, glycoproteins and surveillance principles",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Oncofetal antigens represent embryonic proteins aberrantly re-expressed by transformed tissues. **Carcinoembryonic antigen** CEA is an oncofetal glycoprotein primarily monitored during post-surgical surveillance of **colorectal cancer** recurrence. Circulating with an elimination half-life of 2 to 8 days, sustained post-resection elevation heralds liver or pulmonary metastases, though transient benign increases accompany cigarette smoking, diverticulitis, or biliary obstruction.",
+      "say": "Oncofetal antigens represent embryonic proteins aberrantly re-expressed by transformed tissues. Carcinoembryonic antigen CEA is an oncofetal glycoprotein primarily monitored during post-surgical surveillance of colorectal cancer recurrence. Circulating with a half-life of 2 to 8 days, sustained post-resection elevation heralds liver or pulmonary metastases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "crc",
+            "label": "Colorectal Cancer Resection",
+            "level": 1
+          },
+          {
+            "id": "cea",
+            "label": "Serial CEA Every 3 to 6 Months",
+            "level": 2
+          },
+          {
+            "id": "rise",
+            "label": "Sustained Rise Above Baseline",
+            "level": 3
+          },
+          {
+            "id": "scan",
+            "label": "Contrast CT Imaging for Recurrence",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "crc",
+            "cea"
+          ],
+          [
+            "cea",
+            "rise"
+          ],
+          [
+            "rise",
+            "scan"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Normal CA125",
-     "points": [
-      "Does not exclude cancer",
-      "Common in early stage",
-      "Needs imaging if doubt remains"
-     ]
+    {
+      "tx": "High-molecular-weight mucins serve as valuable diagnostic surrogates in gynaecologic malignancies. **CA 125** is an **ovarian epithelial tumour** marker widely expressed in high-grade serous carcinoma, reflecting tumour burden and platinum responsiveness. However, diagnostic specificity is compromised by non-malignant mesothelial irritation, causing false-positive elevations in pelvic inflammatory disease, liver cirrhosis, endometriosis, pregnancy, and acute peritonitis.",
+      "say": "High-molecular-weight mucins serve as valuable diagnostic surrogates in gynaecologic malignancies. CA 125 is an ovarian epithelial tumour marker widely expressed in high-grade serous carcinoma, reflecting tumour burden and platinum responsiveness. However, diagnostic specificity is compromised by non-malignant irritation, causing false-positive elevations in cirrhosis, endometriosis, and pelvic inflammation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CA 125 in Ovarian Cancer",
+          "points": [
+            "Markedly elevated in serous histology",
+            "Monitors response to carboplatin/paclitaxel",
+            "Doubling from nadir signals recurrence",
+            "Rustin criteria define marker progression"
+          ]
+        },
+        "right": {
+          "title": "Benign Causes of CA 125 Elevation",
+          "points": [
+            "Endometriosis and adenomyosis",
+            "Pelvic inflammatory disease",
+            "Hepatic cirrhosis with ascites",
+            "Pleural or pericardial effusions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sialylated carbohydrate epitopes aid pancreaticobiliary diagnosis when correctly interpreted against patient genetics. **CA 19-9** is elevated in **pancreatic** ductal adenocarcinoma and advanced cholangiocarcinoma, correlating with unresectability and metastatic burden. Importantly, CA 19-9 synthesis requires the Lewis blood group fucosyltransferase enzyme; approximately 5% to 10% of individuals who are Lewis antigen negative cannot synthesize CA 19-9.",
+      "say": "Sialylated carbohydrate epitopes aid pancreaticobiliary diagnosis when correctly interpreted against patient genetics. CA 19-9 is elevated in pancreatic ductal adenocarcinoma and advanced cholangiocarcinoma, correlating with unresectability and metastatic burden. Importantly, individuals who are Lewis antigen negative lack the fucosyltransferase required to synthesize CA 19-9.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "CA 19-9 Utility",
+          "Diagnostic Caveat"
+        ],
+        "rows": [
+          [
+            "Pancreatic Resection",
+            "Post-op decline predicts survival",
+            "Pre-op levels above 1000 U/mL suggest mets"
+          ],
+          [
+            "Biliary Obstruction",
+            "Can be markedly elevated (>1000)",
+            "Must re-evaluate after biliary decompression"
+          ],
+          [
+            "Lewis-Negative Genotype",
+            "Falsely normal (<1 U/mL)",
+            "Uninformative marker; relies entirely on CT/MRI"
+          ],
+          [
+            "Gastric / Colorectal CA",
+            "Elevated in second-line subset",
+            "Inferior to CEA for routine surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hepatocellular transformation and nonseminomatous germ cell lineages produce fetal serum globulins. **Alpha-fetoprotein** AFP is elevated in **hepatocellular carcinoma** and nonseminomatous germ cell tumours containing yolk sac elements. Possessing a clearance half-life of 5 to 7 days, persistent elevation following primary testicular orchiectomy demonstrates residual systemic micrometastatic disease, mandating aggressive platinum-based systemic induction chemotherapy.",
+      "say": "Hepatocellular transformation and nonseminomatous germ cell lineages produce fetal serum globulins. Alpha-fetoprotein AFP is elevated in hepatocellular carcinoma and nonseminomatous germ cell tumours containing yolk sac elements. Possessing a half-life of 5 to 7 days, persistent elevation following primary orchiectomy demonstrates residual metastatic disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nsgct",
+            "label": "Yolk Sac Tumour / HCC",
+            "level": 1
+          },
+          {
+            "id": "afp",
+            "label": "Alpha-Fetoprotein Secretion",
+            "level": 2
+          },
+          {
+            "id": "orchi",
+            "label": "Primary Surgical Resection",
+            "level": 3
+          },
+          {
+            "id": "halflife",
+            "label": "Decay Checked (5 to 7 Day Half-Life)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "nsgct",
+            "afp"
+          ],
+          [
+            "afp",
+            "orchi"
+          ],
+          [
+            "orchi",
+            "halflife"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Placental syncytiotrophoblastic differentiation leads to high-level gonadotropin expression. **Beta-hCG** is secreted by **syncytiotrophoblasts** in gestational trophoblastic disease, choriocarcinoma, and mixed nonseminomatous testicular neoplasms. With an elimination plasma half-life of 24 to 36 hours, rapid marker decay confirms curative cytoreduction, whereas plateauing or rising titers establish chemoresistance or disease progression requiring salvage regimens.",
+      "say": "Placental syncytiotrophoblastic differentiation leads to high-level gonadotropin expression. Beta-hCG is secreted by syncytiotrophoblasts in gestational trophoblastic disease, choriocarcinoma, and mixed nonseminomatous testicular neoplasms. With an elimination half-life of 24 to 36 hours, rapid marker decay confirms curative cytoreduction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour Marker",
+          "Secreting Histology",
+          "Normal Plasma Half-Life"
+        ],
+        "rows": [
+          [
+            "Alpha-Fetoprotein (AFP)",
+            "Yolk sac tumour, HCC",
+            "5 to 7 days"
+          ],
+          [
+            "Beta-hCG",
+            "Choriocarcinoma, Seminoma (syncytio)",
+            "24 to 36 hours"
+          ],
+          [
+            "Lactate Dehydrogenase (LDH)",
+            "Bulky seminoma, Lymphoma",
+            "Reflects cellular turnover"
+          ],
+          [
+            "Carcinoembryonic Antigen (CEA)",
+            "Colorectal, Medullary thyroid",
+            "2 to 8 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prostatic luminal epithelial differentiation produces tissue-specific kallikrein proteases. **Prostate-specific antigen** PSA is a kallikrein-related **serine protease** produced exclusively by prostatic epithelium to liquefy seminal coagulum. Serial serum PSA monitors biochemical recurrence following radical prostatectomy or definitive radiation therapy. Post-prostatectomy PSA persistence above 0.2 ng/mL defines biochemical relapse, prompting salvage radiation with androgen deprivation.",
+      "say": "Prostatic luminal epithelial differentiation produces tissue-specific kallikrein proteases. Prostate-specific antigen PSA is a serine protease produced by prostatic epithelium to liquefy seminal coagulum. Serial serum PSA monitors biochemical recurrence following prostatectomy or radiation. Post-prostatectomy levels above 0.2 ng/mL indicate biochemical relapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rp",
+            "label": "Radical Prostatectomy",
+            "level": 1
+          },
+          {
+            "id": "nadir",
+            "label": "Undetectable PSA (<0.1 ng/mL)",
+            "level": 2
+          },
+          {
+            "id": "relapse",
+            "label": "Confirmed PSA >= 0.2 ng/mL",
+            "level": 3
+          },
+          {
+            "id": "salvage",
+            "label": "Salvage Bed Radiation +/- ADT",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "rp",
+            "nadir"
+          ],
+          [
+            "nadir",
+            "relapse"
+          ],
+          [
+            "relapse",
+            "salvage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Neuroendocrine and specialized thyroid neoplasms release peptide hormone biomarkers. **Calcitonin** is synthesised and secreted by thyroid parafollicular C cells, serving as the essential diagnostic and prognostic marker for **medullary thyroid cancer**. Serum calcitonin doubling times under 6 months correlate with aggressive metastatic dissemination and poor disease-specific survival, guiding systemic tyrosine kinase inhibitor therapy with selpercatinib or cabozantinib.",
+      "say": "Neuroendocrine and specialized thyroid neoplasms release peptide hormone biomarkers. Calcitonin is synthesised and secreted by thyroid parafollicular C cells, serving as the essential diagnostic and prognostic marker for medullary thyroid cancer. Serum calcitonin doubling times under 6 months correlate with aggressive metastatic dissemination and poor survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calcitonin in Medullary Thyroid",
+          "points": [
+            "Secreted by parafollicular C cells",
+            "Screening tool in RET mutation carriers",
+            "Post-thyroidectomy nadir predicts cure",
+            "Doubling time < 6 months indicates high risk"
+          ]
+        },
+        "right": {
+          "title": "Thyroglobulin in Differentiated Thyroid",
+          "points": [
+            "Secreted by follicular thyroid cells",
+            "Monitors papillary and follicular cancers",
+            "Checked with anti-thyroglobulin antibodies",
+            "Stimulated by TSH or recombinant human TSH"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Glycolytic turnover and bulky tumour necrosis release intracellular metabolic enzymes into circulation. **Lactate dehydrogenase** LDH serves as an indispensable **prognostic marker** in systemic lymphomas, germ cell tumours, and metastatic melanoma. In the international prognostic index for aggressive non-Hodgkin lymphomas and AJCC staging for stage IV melanoma, serum LDH elevation directly downstages prognostic risk groups, reflecting hypoxia, tumour burden, and glycolytic flux.",
+      "say": "Glycolytic turnover and bulky tumour necrosis release intracellular metabolic enzymes into circulation. Lactate dehydrogenase LDH serves as an indispensable prognostic marker in systemic lymphomas, germ cell tumours, and metastatic melanoma. Serum LDH elevation directly downstages prognostic risk groups, reflecting hypoxia, tumour burden, and glycolytic flux.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Malignancy",
+          "Staging System Role",
+          "Prognostic Implication"
+        ],
+        "rows": [
+          [
+            "Diffuse Large B-cell Lymphoma",
+            "International Prognostic Index (IPI)",
+            "Elevated LDH scores 1 risk point"
+          ],
+          [
+            "Testicular Germ Cell Tumour",
+            "IGCCC Risk Classification",
+            "S1 to S3 stage defines intermediate/poor risk"
+          ],
+          [
+            "Cutaneous Melanoma",
+            "AJCC 8th Edition Stage IV M1c/M1d",
+            "Elevated LDH upstages to M1c or M1d tier"
+          ],
+          [
+            "Ewing Sarcoma",
+            "Baseline Risk Stratification",
+            "High LDH correlates with metastatic burden"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Other markers have specific roles. **PSA** guides prostate cancer follow-up, and **LDH** reflects tumour burden in germ cell and lymphoma. **Calcitonin** is the marker of medullary thyroid cancer, while **thyroglobulin** follows differentiated thyroid cancer. **Chromogranin A** supports neuroendocrine tumours, and **beta2 microglobulin** is used in myeloma staging.",
-   "say": "Other markers have specific roles. PSA guides prostate cancer follow-up, and LDH reflects tumour burden in germ cell and lymphoma. Calcitonin is the marker of medullary thyroid cancer, while thyroglobulin follows differentiated thyroid cancer. Chromogranin A supports neuroendocrine tumours, and beta2 microglobulin is used in myeloma staging.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-tumour-markers-fig1.webp",
-    "alt": "Table summarizing common tumour markers like PSA, Calcitonin, Thyroglobulin, Chromogranin A, and their specific associated cancers or clinical uses for diagnosis and follow-up.",
-    "caption": "Key tumour markers and their associated cancers/uses",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Remember **marker half-life** when following levels. A marker should fall in line with its half-life after complete resection, and a plateau or rise suggests residual or recurrent disease. The **ROMA index** combines CA125 with HE4 to estimate ovarian malignancy risk before surgery, helping triage referral.",
-   "say": "Remember marker half-life when following levels. A marker should fall in line with its half-life after complete resection, and a plateau or rise suggests residual or recurrent disease. The ROMA index combines CA125 with HE4 to estimate ovarian malignancy risk before surgery, helping triage referral.",
-   "vis": null
+  ],
+  "quiz": [
+    "q_52521ba66cd8",
+    "q_b7eeac472996",
+    "q_114bde465c10"
+  ],
+  "refs": [
+    "Harrison 22e Ch. 73 (Approach to the Patient with Cancer & Tumour Markers)",
+    "DeVita 12e Ch. 49 (Ovarian Cancer) & Ch. 36 (Hepatocellular Carcinoma)",
+    "NCCN Guidelines for Colorectal, Ovarian, and Testicular Cancers"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_52521ba66cd8",
-  "q_b7eeac472996",
-  "q_114bde465c10"
- ],
- "src": [],
- "refs": [
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 7
- }
 }

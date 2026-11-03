@@ -1,0 +1,313 @@
+{
+  "v": 1,
+  "module": "son-paraneoplastic",
+  "subject": "ss-medical-oncology",
+  "title": "Paraneoplastic syndromes: endocrine, neurological and dermatological manifestations",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The syndrome of inappropriate **antidiuretic hormone** secretion presents with **euvolemic hyponatremia**, inappropriate urinary concentration, and elevated urinary sodium. Ectopic secretion of arginine vasopressin by malignant cells arises most frequently in small cell lung cancer. Initial medical management requires strict free-water restriction, hypertonic saline for severe acute neurological symptoms, and vasopressin receptor antagonists like tolvaptan in refractory cases.",
+      "say": "The syndrome of inappropriate antidiuretic hormone secretion presents with euvolemic hyponatremia and concentrated urine. Ectopic secretion of arginine vasopressin by malignant cells arises most frequently in small cell lung cancer. Initial medical management requires strict free-water restriction and hypertonic saline for severe symptoms.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sclc",
+            "label": "Small Cell Lung Cancer",
+            "level": 1
+          },
+          {
+            "id": "adh",
+            "label": "Ectopic ADH Secretion",
+            "level": 2
+          },
+          {
+            "id": "renal",
+            "label": "Renal Water Retention",
+            "level": 3
+          },
+          {
+            "id": "hypon",
+            "label": "Euvolemic Hyponatremia",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sclc",
+            "adh"
+          ],
+          [
+            "adh",
+            "renal"
+          ],
+          [
+            "renal",
+            "hypon"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ectopic ACTH** syndrome results from autonomous secretion of adrenocorticotropic hormone or corticotropin-releasing hormone by neuroendocrine neoplasms or small cell lung carcinomas. Unlike classical pituitary Cushing disease, patients present precipitously with hypokalemic **metabolic alkalosis**, severe arterial hypertension, hyperglycemia, and profound proximal muscle weakness without classical cushingoid striae. Adrenal steroidogenesis inhibitors like ketoconazole or metyrapone provide rapid symptomatic stabilization.",
+      "say": "Ectopic ACTH syndrome results from autonomous secretion of adrenocorticotropic hormone by neuroendocrine neoplasms or small cell lung carcinomas. Patients present precipitously with hypokalemic metabolic alkalosis, severe arterial hypertension, and profound proximal muscle weakness. Adrenal steroidogenesis inhibitors provide rapid symptomatic stabilization.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ectopic ACTH Syndrome",
+          "points": [
+            "Neuroendocrine / small cell lung cancer",
+            "Severe hypokalemic metabolic alkalosis",
+            "Rapid onset, hyperpigmentation, myopathy"
+          ]
+        },
+        "right": {
+          "title": "Pituitary Cushing Disease",
+          "points": [
+            "Pituitary corticotroph microadenoma",
+            "Insidious centripetal obesity and striae",
+            "Suppresses on high-dose dexamethasone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lambert-Eaton** myasthenic syndrome is an autoimmune disorder of the neuromuscular junction strongly associated with small cell lung cancer. Pathogenesis involves circulating autoantibodies targeting presynaptic P/Q-type **voltage-gated calcium** channels, impairing acetylcholine exocytosis. Patients experience proximal lower extremity weakness that characteristically improves following repetitive muscle contraction, dry mouth, and hyporeflexia with post-exercise reflex facilitation.",
+      "say": "Lambert-Eaton myasthenic syndrome is an autoimmune disorder of the neuromuscular junction strongly associated with small cell lung cancer. Pathogenesis involves autoantibodies targeting presynaptic voltage-gated calcium channels. Patients experience proximal lower extremity weakness that improves following repetitive muscle contraction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Lambert-Eaton Syndrome (LEMS)",
+          "Myasthenia Gravis (MG)"
+        ],
+        "rows": [
+          [
+            "Antibody Target",
+            "Presynaptic P/Q-type VGCC",
+            "Postsynaptic AChR receptor"
+          ],
+          [
+            "Underlying Cancer",
+            "Small cell lung cancer (50-60%)",
+            "Thymoma (10-15%)"
+          ],
+          [
+            "Effect of Exercise",
+            "Power improves with repetition",
+            "Weakness worsens with repetition"
+          ],
+          [
+            "Autonomic Features",
+            "Dry mouth, erectile dysfunction",
+            "Autonomic symptoms absent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Subacute paraneoplastic **cerebellar degeneration** manifests as rapidly progressive bilateral limb ataxia, dysarthria, and oscillopsia. The syndrome is driven by cytotoxic T-cells and cross-reacting onconeural antibodies, classically **anti-Yo** (PCA-1) in ovarian and breast carcinomas, or anti-Hu in small cell lung cancer. Because neuronal destruction is irreversible once established, immediate tumour identification and prompt resection or systemic therapy provide the only opportunity to arrest neurological progression.",
+      "say": "Subacute paraneoplastic cerebellar degeneration causes rapidly progressive bilateral limb ataxia, dysarthria, and oscillopsia. The syndrome is driven by cytotoxic T-cells and cross-reacting onconeural antibodies, classically anti-Yo in ovarian and breast carcinomas. Immediate tumour identification and prompt treatment provide the only opportunity to arrest progression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tum",
+            "label": "Ovarian / Breast Neoplasm",
+            "level": 1
+          },
+          {
+            "id": "yo",
+            "label": "Anti-Yo (PCA-1) Antibodies",
+            "level": 2
+          },
+          {
+            "id": "purk",
+            "label": "Purkinje Cell Destruction",
+            "level": 3
+          },
+          {
+            "id": "atax",
+            "label": "Severe Truncal & Limb Ataxia",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "tum",
+            "yo"
+          ],
+          [
+            "yo",
+            "purk"
+          ],
+          [
+            "purk",
+            "atax"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adult-onset **dermatomyositis** represents a distinctive paraneoplastic autoimmune myopathy that warrants exhaustive oncological screening. Cutaneous hallmarks include a violaceous heliotrope periorbital rash and pathognomonic **Gottron papules** over the dorsal metacarpophalangeal and interphalangeal joints. Underlying malignancies, most commonly ovarian, pulmonary, gastric, and breast carcinomas, occur in 20% to 30% of adult patients, with successful tumour resection often improving cutaneous and muscular inflammation.",
+      "say": "Adult-onset dermatomyositis represents a distinctive paraneoplastic autoimmune myopathy that warrants exhaustive oncological screening. Key cutaneous signs are a violaceous heliotrope periorbital rash and pathognomonic Gottron papules over the finger joints. Underlying malignancies occur in 20% to 30% of adult patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Sign",
+          "Anatomical Distribution",
+          "Diagnostic Value"
+        ],
+        "rows": [
+          [
+            "Gottron Papules",
+            "Interphalangeal joint dorsum",
+            "Pathognomonic for dermatomyositis"
+          ],
+          [
+            "Heliotrope Rash",
+            "Periorbital violaceous edema",
+            "Highly specific cutaneous sign"
+          ],
+          [
+            "Shawl Sign",
+            "Posterior neck and upper shoulders",
+            "Photosensitive inflammatory rash"
+          ],
+          [
+            "Proximal Myopathy",
+            "Shoulder and pelvic girdles",
+            "Elevated creatine kinase and aldolase"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hypertrophic osteoarthropathy** (Pierre Marie-Bamberger syndrome) comprises a classical triad: bilateral **digital clubbing**, symmetrical subperiosteal ossification of long tubular bones, and non-inflammatory arthritis. It is most frequently secondary to non-small cell lung cancer, particularly pulmonary adenocarcinoma. Excessive circulating platelet-derived growth factor and vascular endothelial growth factor bypassing pulmonary capillary filtration drive distal vascular proliferation and periosteal bone formation.",
+      "say": "Hypertrophic osteoarthropathy comprises a classical triad: bilateral digital clubbing, symmetrical subperiosteal ossification of long tubular bones, and non-inflammatory arthritis. It is most frequently secondary to non-small cell lung cancer. Excessive circulating growth factors drive distal vascular proliferation and periosteal bone formation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nsclc",
+            "label": "Pulmonary Adenocarcinoma",
+            "level": 1
+          },
+          {
+            "id": "vegf",
+            "label": "Elevated PDGF and VEGF",
+            "level": 2
+          },
+          {
+            "id": "peri",
+            "label": "Subperiosteal New Bone",
+            "level": 3
+          },
+          {
+            "id": "hoa",
+            "label": "Digital Clubbing & Arthralgia",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "nsclc",
+            "vegf"
+          ],
+          [
+            "vegf",
+            "peri"
+          ],
+          [
+            "peri",
+            "hoa"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Trousseau syndrome** presents as recurrent, migratory superficial **thrombophlebitis** affecting unconventional venous distributions in the upper and lower extremities. Tumour-derived mucins interact directly with selectins and platelets, stimulating tissue factor expression and initiating systemic microvascular coagulation. The emergence of migratory thrombophlebitis classically heralds an occult visceral mucin-producing adenocarcinoma, most notably pancreatic, gastric, or lung carcinoma.",
+      "say": "Trousseau syndrome presents as recurrent, migratory superficial thrombophlebitis affecting unconventional venous distributions. Tumour-derived mucins interact directly with selectins and platelets, stimulating systemic coagulation. The emergence of migratory thrombophlebitis classically indicates an occult visceral adenocarcinoma, most notably pancreatic carcinoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trousseau Syndrome",
+          "points": [
+            "Migratory superficial venous thrombosis",
+            "Occult pancreatic or gastric mucinous cancer",
+            "Requires therapeutic low molecular weight heparin"
+          ]
+        },
+        "right": {
+          "title": "Benign Superficial Phlebitis",
+          "points": [
+            "Isolated saphenous or tributary vein",
+            "Associated with local varicosities or trauma",
+            "Managed with conservative local anti-inflammatories"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anti-NMDA receptor** encephalitis is a severe autoimmune encephalitis mediated by IgG autoantibodies targeting the GluN1 subunit of neuronal NMDA receptors. It typically manifests in young females with rapid-onset psychosis, memory deficits, seizures, movement disorders, and autonomic instability. The syndrome is strongly linked to underlying benign or malignant **ovarian teratomas**, where surgical excision of the teratoma combined with immunotherapy achieves neurological recovery.",
+      "say": "Anti-NMDA receptor encephalitis is a severe autoimmune encephalitis mediated by antibodies targeting neuronal NMDA receptors. Patients present with acute psychosis, seizures, and autonomic instability. The syndrome is strongly linked to underlying ovarian teratomas, where surgical excision combined with immunotherapy achieves recovery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ter",
+            "label": "Ovarian Teratoma (Neural Elements)",
+            "level": 1
+          },
+          {
+            "id": "ab",
+            "label": "Anti-NMDA (GluN1) Antibodies",
+            "level": 2
+          },
+          {
+            "id": "cns",
+            "label": "Psychosis, Seizures, Autonomic Storm",
+            "level": 3
+          },
+          {
+            "id": "cure",
+            "label": "Teratoma Resection + Immunotherapy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ter",
+            "ab"
+          ],
+          [
+            "ab",
+            "cns"
+          ],
+          [
+            "cns",
+            "cure"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 116 (Paraneoplastic Syndromes)",
+    "Harrison 22e Ch. 94 (Paraneoplastic Neurologic Syndromes)",
+    "Graus F et al. A clinical approach to diagnosis of autoimmune encephalitis. Lancet Neurol 2016"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

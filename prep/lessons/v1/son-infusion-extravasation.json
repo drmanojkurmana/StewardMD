@@ -1,183 +1,325 @@
 {
- "v": 1,
- "module": "son-infusion-extravasation",
- "subject": "ss-medical-oncology",
- "title": "Infusion reactions, hypersensitivity and extravasation",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Platinum agents, especially **carboplatin**, cause **hypersensitivity** that typically appears after about six cycles, reflecting sensitisation with cumulative exposure. Risk rises with a treatment-free interval longer than 12 months, because the immune system is primed again on re-exposure. Cross-reactivity with other platinum agents is common, so switching to cisplatin or oxaliplatin is not a reliable escape route.",
-   "say": "Platinum agents, especially carboplatin, cause hypersensitivity that typically appears after about six cycles. This reflects sensitisation with cumulative exposure. Risk rises when the treatment-free interval is longer than 12 months, because the immune system is primed again on re-exposure. Cross-reactivity with other platinum agents is common, so switching to cisplatin or oxaliplatin is not a reliable escape route.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Carboplatin pattern"
-    ],
-    "rows": [
-     [
-      "Typical onset",
-      "About cycle six"
-     ],
-     [
-      "Key risk factor",
-      "Interval over 12 months"
-     ],
-     [
-      "Overall incidence",
-      "About 15 to 20 percent"
-     ],
-     [
-      "Mechanism",
-      "Type I IgE mediated"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Reactions are classified by timing and severity, and the **immunopathology** is mainly **type I IgE-mediated**, with platinum-specific IgE found in a large share of moderate to severe cases. Skin testing has a poor negative predictive value, so diagnosis remains largely clinical. Serum tryptase is useful only as supportive evidence during an acute event.",
-   "say": "Reactions are classified by timing and severity. The immunopathology is mainly type I IgE mediated, with platinum-specific IgE found in a large share of moderate to severe cases. Skin testing has a poor negative predictive value, so diagnosis remains largely clinical. Serum tryptase is useful only as supportive evidence during an acute event.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-infusion-extravasation-fig1.webp",
-    "alt": "Diagram illustrating platinum agent binding to IgE on mast cells, causing mediator release and hypersensitivity symptoms.",
-    "caption": "Platinum hypersensitivity: Type I IgE-mediated immunopathology",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "When a sensitised patient must continue platinum, the standard approach is a **rapid desensitisation protocol** given under close observation, often in a day-care setting. Protocols use graded, shorter dosing increments so tolerance is built steadily. Premedication with antihistamines and steroids, and slower infusion rates, form part of routine mitigation alongside observation for recurrence.",
-   "say": "When a sensitised patient must continue platinum, the standard approach is a rapid desensitisation protocol given under close observation, often in a day-care setting. Protocols use graded, shorter dosing increments so tolerance is built steadily. Premedication and slower infusion rates form part of routine mitigation, alongside observation for recurrence.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspected reaction"
-     },
-     {
-      "id": "b",
-      "label": "Stop infusion"
-     },
-     {
-      "id": "c",
-      "label": "Treat acute event"
-     },
-     {
-      "id": "d",
-      "label": "Graded desensitisation"
-     },
-     {
-      "id": "e",
-      "label": "Continue under observation"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Oxaliplatin causes **acute cold-induced dysaesthesia** in roughly 90 percent of patients, likely from altered sodium channel conductance after calcium binding. Cumulative sensory neuropathy is the dose-limiting problem for platinum and taxane neurotoxicity. Cisplatin additionally causes **ototoxicity** through reactive oxygen species and glutathione depletion in cochlear hair cells, and accumulates in proximal tubular cells.",
-   "say": "Oxaliplatin causes acute cold-induced dysaesthesia in roughly 90 percent of patients, likely from altered sodium channel conductance after calcium binding. Cumulative sensory neuropathy is the dose-limiting problem for platinum and taxane neurotoxicity. Cisplatin additionally causes ototoxicity through reactive oxygen species and glutathione depletion in cochlear hair cells, and it accumulates in proximal tubular cells.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Oxaliplatin",
-     "points": [
-      "Acute cold dysaesthesia about 90 percent",
-      "Calcium binding alters sodium channels",
-      "Cumulative sensory neuropathy later"
-     ]
+  "v": 1,
+  "module": "son-infusion-extravasation",
+  "subject": "ss-medical-oncology",
+  "title": "Infusion reactions, hypersensitivity and extravasation: mechanisms, premedication and specific antidotes",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Formulation excipients in cytotoxic taxane preparations trigger acute pseudo-allergic infusion events. Taxane paclitaxel **hypersensitivity reactions** are classic Type I IgE-independent anaphylactoid reactions driven by massive complement activation from the lipid vehicle solvent **Cremophor EL**. Mandatory standard premedication comprising intravenous **dexamethasone**, H1-antihistamines diphenhydramine, and H2-blockers ranitidine administered 30 to 60 minutes prior to paclitaxel infusion reduces severe anaphylactoid reaction rates from 30% to under 2%.",
+      "say": "Formulation excipients in cytotoxic taxane preparations trigger acute pseudo-allergic infusion events. Taxane paclitaxel hypersensitivity reactions are classic Type I IgE-independent anaphylactoid reactions driven by massive complement activation from the solvent Cremophor EL. Mandatory premedication with dexamethasone, diphenhydramine, and H2-blockers administered prior to infusion reduces severe anaphylactoid reactions to under 2%.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Paclitaxel (Cremophor EL)",
+          "points": [
+            "IgE-independent complement-mediated pseudo-allergy",
+            "Peak onset during first or second cycle (first 10 min)",
+            "Mandatory dexamethasone + H1/H2 blocker premedication",
+            "Slow initial infusion rate (titrated over 3 hours)"
+          ]
+        },
+        "right": {
+          "title": "Nab-Paclitaxel (Abraxane)",
+          "points": [
+            "Albumin-bound nanoparticle formulation",
+            "Completely devoid of Cremophor EL or polyoxyethylated castor oil",
+            "Zero steroid or antihistamine premedication required",
+            "Rapid 30-minute infusion without hypersensitivity risk"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Cisplatin",
-     "points": [
-      "Ototoxicity via reactive oxygen species",
-      "Proximal tubular accumulation",
-      "Nephrotoxicity needs hydration"
-     ]
+    {
+      "tx": "Repeated exposure to heavy metal coordination complexes promotes classical immunological sensitization. Platinum carboplatin and oxaliplatin hypersensitivity reactions represent true **Type I IgE-mediated** allergic responses that typically emerge after 6 or more treatment cycles following cumulative antigen sensitization. For patients with high-risk clinical needs who cannot substitute the platin backbone, successful re-treatment is accomplished via standardized multi-bag intravenous **desensitization** protocols in an intensive care setting.",
+      "say": "Repeated exposure to heavy metal coordination complexes promotes classical immunological sensitization. Platinum carboplatin and oxaliplatin hypersensitivity reactions represent true Type I IgE-mediated allergic responses emerging after 6 or more treatment cycles. For patients requiring platinum therapy, successful re-treatment is accomplished via standardized multi-bag intravenous desensitization protocols in an intensive care unit.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cycles",
+            "label": "Multiple Prior Platinum Cycles (>= 6 Cycles)",
+            "level": 1
+          },
+          {
+            "id": "ige",
+            "label": "Specific IgE Formation against Platinum Adducts",
+            "level": 2
+          },
+          {
+            "id": "allergy",
+            "label": "Acute Bronchospasm, Flushing, & Hypotension",
+            "level": 3
+          },
+          {
+            "id": "desens",
+            "label": "12-Step ICU Desensitization Protocol (Castells)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cycles",
+            "ige"
+          ],
+          [
+            "ige",
+            "allergy"
+          ],
+          [
+            "allergy",
+            "desens"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Accidental subcutaneous infiltration of intravenous cytotoxics carries severe prognostic consequences based on drug class. Cytotoxic **extravasation injuries** are categorized as **vesicants**, which cause cellular death, blister formation, and progressive severe tissue necrosis; irritants, which provoke burning discomfort and superficial phlebitis without deep necrosis; and non-vesicants, which cause neither ulceration nor tissue necrosis. Extravasation of DNA-binding vesicants like anthracyclines leads to unremitting, deepening ulceration.",
+      "say": "Accidental subcutaneous infiltration of intravenous cytotoxics carries severe prognostic consequences based on drug class. Cytotoxic extravasation injuries are categorized as vesicants, which cause cellular death and severe tissue necrosis; irritants, which provoke burning without necrosis; and non-vesicants, which produce no ulceration. Extravasation of DNA-binding vesicants leads to unremitting, deepening ulceration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification Category",
+          "Pathological Tissue Effect",
+          "Representative Chemotherapy Agents"
+        ],
+        "rows": [
+          [
+            "Vesicant (DNA-Binding)",
+            "Cell death, retained in tissues, deepening necrosis",
+            "Doxorubicin, Daunorubicin, Epirubicin, Dactinomycin"
+          ],
+          [
+            "Vesicant (Non-DNA)",
+            "Mitotic arrest, localized ulceration, metabolized",
+            "Vincristine, Vinblastine, Vinorelbine, Paclitaxel"
+          ],
+          [
+            "Irritant with Vesicant Potential",
+            "Severe venous inflammation, necrosis if high volume",
+            "Carboplatin, Cisplatin, Oxaliplatin, Dacarbazine"
+          ],
+          [
+            "Non-Vesicant",
+            "Harmless infiltration, transient erythema",
+            "Cyclophosphamide, Methotrexate, 5-Fluorouracil, Bleomycin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anthracycline tissue infiltration represents the most destructive chemotherapy extravasation emergency. Inadvertent **Anthracycline** doxorubicin extravasation mandates immediate cold pack application to induce localized vasoconstriction, followed by intravenous infusion of the specific antidote **dexrazoxane**. Administered over 3 consecutive days within 6 hours of extravasation, dexrazoxane enters affected tissues, binds topoisomerase II, chelates iron, and prevents free radical-induced soft tissue sloughing, reducing surgical debridement rates by over 95%.",
+      "say": "Anthracycline tissue infiltration represents the most destructive chemotherapy extravasation emergency. Inadvertent Anthracycline doxorubicin extravasation mandates immediate cold pack application to induce vasoconstriction, followed by intravenous infusion of the antidote dexrazoxane. Administered over 3 consecutive days within 6 hours of extravasation, dexrazoxane prevents tissue sloughing, reducing surgical debridement by over 95%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "leak",
+            "label": "Anthracycline (Doxorubicin) Extravasation",
+            "level": 1
+          },
+          {
+            "id": "cold",
+            "label": "Immediate Cold Dry Compress (Vasoconstriction)",
+            "level": 2
+          },
+          {
+            "id": "dexra",
+            "label": "IV Dexrazoxane Day 1 (1000 mg/m2), Day 2 & 3",
+            "level": 3
+          },
+          {
+            "id": "heal",
+            "label": ">95% Prevention of Severe Ulceration / Surgery",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "leak",
+            "cold"
+          ],
+          [
+            "cold",
+            "dexra"
+          ],
+          [
+            "dexra",
+            "heal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extravasation of plant alkaloid mitotic inhibitors requires diametrically opposite physical thermal management. Inadvertent **Vinca alkaloid** vincristine or vinblastine extravasation requires dry warm compress application to promote local vasodilation and drug dispersal away from the injection site. This is immediately accompanied by localized subcutaneous infiltration of **hyaluronidase**, which enzymatically breaks down intercellular hyaluronic acid in the extracellular matrix, facilitating rapid tissue reabsorption and systemic clearance.",
+      "say": "Extravasation of plant alkaloid mitotic inhibitors requires diametrically opposite physical thermal management. Inadvertent Vinca alkaloid vincristine or vinblastine extravasation requires dry warm compress application to promote local vasodilation and drug dispersal. This is accompanied by subcutaneous infiltration of hyaluronidase, which enzymatically breaks down hyaluronic acid to facilitate rapid tissue reabsorption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anthracycline Extravasation",
+          "points": [
+            "Cold dry packs applied (induces vasoconstriction)",
+            "Localizes drug and minimizes cellular uptake",
+            "Antidote: Intravenous dexrazoxane over 3 days",
+            "Avoid warm compresses (worsens tissue sloughing)"
+          ]
+        },
+        "right": {
+          "title": "Vinca Alkaloid Extravasation",
+          "points": [
+            "Warm dry compresses applied (promotes vasodilation)",
+            "Dilutes and disperses cytotoxic molecules",
+            "Antidote: Subcutaneous hyaluronidase injection",
+            "Avoid cold packs (causes drug retention and ulceration)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Alkylating nitrogen mustard extravasation produces rapid dermal blistering and microvascular thrombosis. Extravasation of **Mechlorethamine** mustine is neutralized by emergency local subcutaneous injection of 1/6th molar **sodium thiosulfate**. Thiosulfate provides an excess of highly reactive nucleophilic substrate, rapidly reacting with the highly unstable aziridinium ion alkylating intermediates to chemically inactivate the vesicant before irreversible cross-linking of dermal and endothelial cellular macromolecules can take place.",
+      "say": "Alkylating nitrogen mustard extravasation produces rapid dermal blistering and microvascular thrombosis. Extravasation of Mechlorethamine mustine is neutralized by emergency local subcutaneous injection of 1/6th molar sodium thiosulfate. Thiosulfate provides an excess of nucleophilic substrate, rapidly reacting with aziridinium intermediates to chemically inactivate the vesicant before irreversible tissue damage occurs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "must",
+            "label": "Mechlorethamine / Cisplatin High-Volume Leak",
+            "level": 1
+          },
+          {
+            "id": "thiosulf",
+            "label": "Subcutaneous Infiltration of Sodium Thiosulfate",
+            "level": 2
+          },
+          {
+            "id": "chem",
+            "label": "Nucleophilic Substitution Inactivates Alkyl Groups",
+            "level": 3
+          },
+          {
+            "id": "protect",
+            "label": "Prevention of Dermal Sloughing and Ulceration",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "must",
+            "thiosulf"
+          ],
+          [
+            "thiosulf",
+            "chem"
+          ],
+          [
+            "chem",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Central venous access devices protect peripheral arm veins from caustic vesicant damage. **Totally implantable venous access ports** TIVAP significantly decrease peripheral extravasation hazards, but require strict aseptic Huber needle cannulation, routine post-infusion **heparin flushing**, and regular verification of brisk blood return before beginning any cytotoxic infusion. If resistance to aspiration occurs, contrast portography is mandatory to exclude catheter tip fracture, fibrin sheath formation, or port-catheter disconnect.",
+      "say": "Central venous access devices protect peripheral arm veins from caustic vesicant damage. Totally implantable venous access ports TIVAP significantly decrease peripheral extravasation hazards, but require strict aseptic Huber needle cannulation, routine post-infusion heparin flushing, and verification of brisk blood return before infusions. Resistance to aspiration requires contrast portography to exclude catheter problems.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Port Complication",
+          "Clinical Presentation",
+          "Diagnostic Evaluation",
+          "Corrective Action"
+        ],
+        "rows": [
+          [
+            "Fibrin Sheath Formation",
+            "Can infuse fluids freely but unable to aspirate blood",
+            "Contrast fluoroscopic portography",
+            "Intraluminal alteplase (tPA) dwell"
+          ],
+          [
+            "Pinch-Off Syndrome",
+            "Intermittent postural infusion resistance at clavicle",
+            "Chest radiograph (look at subclavicular angle)",
+            "Emergency surgical explantation"
+          ],
+          [
+            "Catheter Extravasation",
+            "Neck or chest wall swelling during infusion",
+            "Immediate chest CT with portogram",
+            "Stop infusion, surgical removal"
+          ],
+          [
+            "Catheter Thrombosis",
+            "Arm edema, dilated collateral chest wall veins",
+            "Venous duplex ultrasound",
+            "Anticoagulation with LMWH or DOAC"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monoclonal antibody administration is complicated by target-mediated systemic immune activation. **Infusion-related reactions** during initial rituximab, obinutuzumab, or daratumumab infusions are driven by acute **cytokine release** of TNF-alpha, IL-6, and interferon-gamma from opsonized circulating lymphocytes. Clinical management requires temporary infusion interruption, slow re-escalation, and intravenous diphenhydramine, intravenous hydrocortisone, and oral paracetamol premedication, with severe bronchospasm or refractory hypotension treated as life-threatening anaphylaxis with intramuscular adrenaline.",
+      "say": "Monoclonal antibody administration is complicated by target-mediated systemic immune activation. Infusion-related reactions during initial rituximab or daratumumab infusions are driven by acute cytokine release of TNF-alpha and IL-6 from opsonized lymphocytes. Management requires temporary infusion interruption, slow re-escalation, and premedication with diphenhydramine, hydrocortisone, and paracetamol.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mab",
+            "label": "Rituximab / Daratumumab Infusion Starts",
+            "level": 1
+          },
+          {
+            "id": "cytok",
+            "label": "Massive Cytokine Release (TNF, IL-6, IFN)",
+            "level": 2
+          },
+          {
+            "id": "stop",
+            "label": "Immediate Infusion Interruption & Antihistamines",
+            "level": 3
+          },
+          {
+            "id": "resume",
+            "label": "Resume at 50% Speed Once Symptoms Resolve",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mab",
+            "cytok"
+          ],
+          [
+            "cytok",
+            "stop"
+          ],
+          [
+            "stop",
+            "resume"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Extravasation of a **vesicant** drug is an emergency because tissue injury can progress even after the infusion seems fine. Stop the infusion immediately, leave the **cannula** in situ, and **aspirate** residual drug from the line. Follow the local protocol for the specific agent, which determines whether a **cold** or **warm** compress is applied and whether a specific antidote is needed. Document the site and inform the prescriber promptly.",
-   "say": "Extravasation of a vesicant drug is an emergency, because tissue injury can progress even after the infusion seems fine. Stop the infusion immediately, leave the cannula in place, and aspirate residual drug from the line. Then follow the local protocol for the specific agent, which decides whether a cold or warm compress is applied and whether a specific antidote is needed. Document the site and inform the prescriber promptly.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Action",
-     "Priority",
-     "Note"
-    ],
-    "rows": [
-     [
-      "Stop infusion",
-      "Immediate",
-      "Do not flush through the site"
-     ],
-     [
-      "Aspirate line",
-      "Immediate",
-      "Remove residual drug"
-     ],
-     [
-      "Leave cannula",
-      "Immediate",
-      "Allows access for treatment"
-     ],
-     [
-      "Choose compress",
-      "Per protocol",
-      "Cold or warm depending on agent"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Monoclonal antibody **infusion reactions** are most frequent during the first infusion and often ease with slower rates and **premedication**. Clinicians should watch for fever, rigors, flushing and bronchospasm, and pause the infusion at the first sign. Keep **resuscitation equipment** available, because severe **anaphylaxis** can occur at any cycle.",
-   "say": "Monoclonal antibody infusion reactions are most frequent during the first infusion and often ease with slower rates and premedication. Clinicians should watch for fever, rigors, flushing and bronchospasm, and pause the infusion at the first sign. Keep resuscitation equipment available, because severe anaphylaxis can occur at any cycle.",
-   "vis": null
+  ],
+  "quiz": [
+    "q_32d1792f8b3e",
+    "q_77ee7dfd28fa",
+    "q_95ba29ff4b28"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 6 (Hypersensitivity Reactions and Extravasation Management)",
+    "ESMO Clinical Practice Guidelines: Management of chemotherapy extravasation. Annals of Oncology",
+    "ONS Guidelines for Cancer Chemotherapy Extravasation"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_32d1792f8b3e",
-  "q_77ee7dfd28fa",
-  "q_95ba29ff4b28"
- ],
- "src": [],
- "refs": [
-  "Dexrazoxane prescribing information, US FDA labelling",
-  "Chapter 96 in Principles and Practice of Oncology (DeVita, Hellman and Rosenberg)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 19
- }
 }

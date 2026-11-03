@@ -1,0 +1,296 @@
+{
+  "v": 1,
+  "module": "son-net",
+  "subject": "ss-medical-oncology",
+  "title": "Neuroendocrine neoplasms: grading, functional syndromes and targeted radionuclide therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Gastroenteropancreatic **neuroendocrine tumours** (NETs) are categorized by mitotic count and **Ki-67 proliferation** index. The World Health Organization system recognizes well-differentiated grade 1 tumours with Ki-67 under 3%, grade 2 tumours with Ki-67 between 3% to 20%, and grade 3 tumours with Ki-67 over 20%. These well-differentiated neoplasms remain biologically distinct from poorly differentiated **neuroendocrine carcinomas** which display diffuse severe atypia.",
+      "say": "Gastroenteropancreatic neuroendocrine tumours are categorized by mitotic count and Ki-67 proliferation index. The World Health Organization system recognizes well-differentiated grade 1 tumours with Ki-67 under 3%, grade 2 tumours with Ki-67 between 3% to 20%, and grade 3 tumours with Ki-67 over 20%. These remain biologically distinct from poorly differentiated neuroendocrine carcinomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Grade",
+          "Differentiation",
+          "Ki-67 Index",
+          "Mitotic Count"
+        ],
+        "rows": [
+          [
+            "Grade 1 (G1)",
+            "Well differentiated",
+            "Under 3%",
+            "< 2 per 2 mm²"
+          ],
+          [
+            "Grade 2 (G2)",
+            "Well differentiated",
+            "3% to 20%",
+            "2 to 20 per 2 mm²"
+          ],
+          [
+            "Grade 3 (G3)",
+            "Well differentiated",
+            "Over 20%",
+            "> 20 per 2 mm²"
+          ],
+          [
+            "Carcinoma (NEC)",
+            "Poorly differentiated",
+            "Over 20% (often >50%)",
+            "> 20 per 2 mm²"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Malignant **carcinoid syndrome** occurs when circulating vasoactive humors bypass first-pass hepatic inactivation, predominantly following liver metastases. Systemic release of **serotonin**, histamine, kallikrein, and prostaglandins triggers episodic cutaneous flushing, secretory watery diarrhoea, and bronchospasm. Over time, high circulating serotonin levels induce fibrotic tricuspid regurgitation and pulmonary stenosis, causing debilitating right-sided carcinoid heart disease.",
+      "say": "Malignant carcinoid syndrome occurs when circulating vasoactive humors bypass first-pass hepatic inactivation, predominantly following liver metastases. Systemic release of serotonin, histamine, and prostaglandins triggers episodic cutaneous flushing, secretory watery diarrhoea, and bronchospasm. Chronic serotonin exposure causes debilitating right-sided carcinoid heart disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mets",
+            "label": "Hepatic Metastases",
+            "level": 1
+          },
+          {
+            "id": "ser",
+            "label": "Systemic Serotonin Release",
+            "level": 2
+          },
+          {
+            "id": "symp",
+            "label": "Flushing & Secretory Diarrhoea",
+            "level": 3
+          },
+          {
+            "id": "hd",
+            "label": "Carcinoid Heart Disease",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mets",
+            "ser"
+          ],
+          [
+            "ser",
+            "symp"
+          ],
+          [
+            "symp",
+            "hd"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Biochemical confirmation of carcinoid syndrome relies on measuring breakdown products of endogenous monoamines. Quantitative urinary 24-hour **5-hydroxyindoleacetic acid** (**5-HIAA**) is the principal diagnostic test. Patients must maintain dietary serotonin restriction for at least 3 days prior to urine collection, avoiding bananas, walnuts, pineapples, and avocados to eliminate false-positive test elevations.",
+      "say": "Biochemical confirmation of carcinoid syndrome relies on measuring breakdown products of endogenous monoamines. Quantitative urinary 24-hour 5-hydroxyindoleacetic acid or 5-HIAA is the principal diagnostic test. Patients must maintain dietary serotonin restriction for at least 3 days prior to urine collection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biomarker",
+          "Sample Source",
+          "Diagnostic Role",
+          "Key Precautions"
+        ],
+        "rows": [
+          [
+            "24-hour 5-HIAA",
+            "24-hour urine collection",
+            "Confirms carcinoid syndrome",
+            "Strict dietary restriction"
+          ],
+          [
+            "Chromogranin A",
+            "Serum sample",
+            "General NET tumour burden",
+            "Proton pump inhibitors elevate levels"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Molecular functional imaging exploiting cell-surface somatostatin receptors provides sensitive tumour staging. Positron emission tomography using gallium-68 **DOTATATE** or DOTATOC binds **somatostatin receptor** subtype 2 with high nanomolar affinity. Gallium-68 DOTATATE PET-CT displays superior detection sensitivity compared to conventional octreoscan or anatomical computed tomography, successfully identifying occult primary tumours and distant bony metastases.",
+      "say": "Molecular functional imaging exploiting cell-surface somatostatin receptors provides sensitive tumour staging. Positron emission tomography using gallium-68 DOTATATE binds somatostatin receptor subtype 2 with high affinity. Gallium-68 DOTATATE PET-CT displays superior detection sensitivity compared to conventional octreoscan.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sstr2",
+            "label": "SSTR2 Receptor Expression",
+            "level": 1
+          },
+          {
+            "id": "ga68",
+            "label": "Gallium-68 DOTATATE",
+            "level": 2
+          },
+          {
+            "id": "pet",
+            "label": "High-Resolution PET Imaging",
+            "level": 3
+          },
+          {
+            "id": "stag",
+            "label": "Precise Molecular Staging",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sstr2",
+            "ga68"
+          ],
+          [
+            "ga68",
+            "pet"
+          ],
+          [
+            "pet",
+            "stag"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synthetic **somatostatin analogues** provide dual therapeutic benefits by controlling hormone hypersecretion and arresting tumour growth. Depot formulations of **octreotide** LAR and **lanreotide** autogel demonstrated significant antiproliferative prolongation of progression-free survival in the landmark PROMID and CLARINET randomized trials. These subcutaneous or intramuscular analogues serve as first-line maintenance monotherapy for stable or slowly progressive gastrointestinal and pancreatic NETs.",
+      "say": "Synthetic somatostatin analogues provide dual therapeutic benefits by controlling hormone hypersecretion and arresting tumour growth. Depot formulations of octreotide and lanreotide demonstrated significant prolongation of progression-free survival in randomized trials. These analogues serve as first-line maintenance monotherapy for stable gastrointestinal and pancreatic NETs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Octreotide LAR",
+          "points": [
+            "Long-acting release intramuscular depot",
+            "Prolongs PFS in midgut NETs (PROMID)",
+            "Controls flushing and secretory diarrhoea"
+          ]
+        },
+        "right": {
+          "title": "Lanreotide Autogel",
+          "points": [
+            "Deep subcutaneous monthly injection",
+            "Demonstrates PFS benefit in CLARINET",
+            "Broad antiproliferative pancreatic activity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Peptide receptor radionuclide** therapy represents an established targeted approach for advanced somatostatin receptor-positive neoplasms. The phase 3 **NETTER-1** trial evaluated beta-emitting lutetium-177 dotatate in progressive midgut neuroendocrine tumours. Lutetium-177 dotatate achieved a marked 79% reduction in the risk of disease progression or death alongside significant overall survival benefit, establishing PRRT as standard second-line therapy.",
+      "say": "Peptide receptor radionuclide therapy represents an established targeted approach for advanced somatostatin receptor-positive neoplasms. The phase 3 NETTER-1 trial evaluated beta-emitting lutetium-177 dotatate in progressive midgut neuroendocrine tumours. Lutetium-177 dotatate achieved a marked reduction in disease progression or death.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prog",
+            "label": "Progressive Midgut NET",
+            "level": 1
+          },
+          {
+            "id": "prrt",
+            "label": "Lutetium-177 Dotatate PRRT",
+            "level": 2
+          },
+          {
+            "id": "netter",
+            "label": "NETTER-1 Trial Regimen",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Prolonged Overall Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "prog",
+            "prrt"
+          ],
+          [
+            "prrt",
+            "netter"
+          ],
+          [
+            "netter",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Molecular pathways regulating cellular growth and metabolism provide alternative therapeutic targets in progressive neoplasms. **Everolimus** is an oral **mTOR inhibitor** approved for progressive, well-differentiated non-functional gastrointestinal and pulmonary NETs based on the RADIANT-4 trial. By blocking downstream mammalian target of rapamycin signalling, daily everolimus provides meaningful delay in tumour progression with manageable side effects including aphthous stomatitis and rash.",
+      "say": "Molecular pathways regulating cellular growth and metabolism provide alternative therapeutic targets in progressive neoplasms. Everolimus is an oral mTOR inhibitor approved for progressive, well-differentiated non-functional gastrointestinal and pulmonary NETs based on the RADIANT-4 trial. Daily everolimus provides meaningful delay in tumour progression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Agent & Target",
+          "Patient Population",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "RADIANT-4",
+            "Everolimus (mTOR)",
+            "GI and lung well-differentiated NET",
+            "Significant PFS advantage"
+          ],
+          [
+            "NETTER-1",
+            "Lutetium-177 (PRRT)",
+            "Midgut SSTR-positive progressive NET",
+            "Prolonged OS and PFS"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Poorly differentiated **neuroendocrine carcinoma** represents a distinct clinicopathological entity characterized by rapid progression and visceral crises. Tumour cells display marked pleomorphism, extensive necrosis, and a Ki-67 proliferation index exceeding 50%, driven by underlying TP53 and RB1 genomic alterations. Systemic treatment requires urgent frontline **platinum-etoposide** cytotoxic chemotherapy, mirroring regimens employed in small cell lung cancer.",
+      "say": "Poorly differentiated neuroendocrine carcinoma represents a distinct clinicopathological entity characterized by rapid progression and visceral crises. Tumour cells display marked pleomorphism, extensive necrosis, and a Ki-67 proliferation index exceeding 50%. Systemic treatment requires urgent frontline platinum-etoposide cytotoxic chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Poorly Differentiated NEC",
+          "points": [
+            "Ki-67 exceeding 50%, high mitoses",
+            "Biallelic TP53 and RB1 mutations",
+            "Frontline platinum-etoposide chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "Well-Differentiated G3 NET",
+          "points": [
+            "Ki-67 > 20% with preserved architecture",
+            "DAXX, ATRX, or MEN1 mutations",
+            "Treated with temozolomide or PRRT"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 43 (Neuroendocrine Tumors)",
+    "NETTER-1 Trial (NEJM)",
+    "CLARINET Trial (NEJM)",
+    "RADIANT-4 Trial (Lancet)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
