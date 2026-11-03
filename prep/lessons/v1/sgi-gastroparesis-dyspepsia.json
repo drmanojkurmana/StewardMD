@@ -1,0 +1,154 @@
+{
+  "v": 1,
+  "module": "sgi-gastroparesis-dyspepsia",
+  "subject": "ss-gastroenterology",
+  "title": "Functional dyspepsia and gastroparesis: diagnosis and therapy",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The **Rome IV criteria** classify functional dyspepsia into two clinical subtypes. The first is **postprandial distress syndrome** (PDS), which causes bothersome fullness and early satiation after a normal meal. The second is **epigastric pain syndrome** (EPS), which manifests as burning pain in the epigastrium that is not meal-induced. Symptoms persist several days per week over months.",
+      "say": "The Rome IV criteria separate functional dyspepsia into two clinical groups. Postprandial distress syndrome produces uncomfortable postprandial fullness and early satiation after eating ordinary meal portions. Epigastric pain syndrome presents with epigastric burning pain that occurs independently of meals. These symptoms remain active for several days each week across months.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Postprandial Distress Syndrome",
+          "points": [
+            "Bothersome postprandial fullness",
+            "Early satiation preventing meal completion",
+            "Triggered directly by food intake",
+            "Treated with prokinetics or buspirone"
+          ]
+        },
+        "right": {
+          "title": "Epigastric Pain Syndrome",
+          "points": [
+            "Bothersome epigastric pain or burning",
+            "Occurs independently of meal timing",
+            "Can happen during fasting periods",
+            "Treated with acid suppression and TCAs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diagnostic confirmation of **delayed emptying** in gastroparesis relies on **gastric emptying scintigraphy** using a radiolabeled 99mTc solid meal. Standard diagnostic thresholds require meal retention exceeding 60% at 2 hours or retention greater than 10% at 4 hours. Mechanical gastric outlet obstruction must be excluded by endoscopy prior to scintigraphic testing.",
+      "say": "Diagnostic confirmation of delayed gastric transit in gastroparesis relies on gastric emptying scintigraphy using a radiolabeled technetium-99m solid meal. Standard criteria require gastric retention exceeding sixty percent at two hours or retention greater than ten percent at four hours. Mechanical obstruction must be ruled out by endoscopy first.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Scintigraphy Timepoint", "Diagnostic Retention Threshold", "Clinical Significance"],
+        "rows": [
+          ["2 hours", "Retention greater than 60%", "Early indicator of delayed gastric emptying"],
+          ["4 hours", "Retention greater than 10%", "Definitive gold standard diagnostic criterion"]
+        ]
+      }
+    },
+    {
+      "tx": "**Diabetic gastroparesis** develops from autonomic diabetic neuropathy affecting the vagus nerve, progressive loss of pacemaker interstitial cells of Cajal, and downregulation of **neuronal nitric oxide synthase** (nNOS). Loss of inhibitory nitrergic neurotransmission impairs pyloric and antral relaxation, generating severe postprandial nausea, intractable vomiting, and erratic glycemic swings.",
+      "say": "Diabetic gastroparesis develops from autonomic neuropathy of the vagus nerve, loss of pacemaker interstitial cells of Cajal, and downregulation of neuronal nitric oxide synthase. Loss of inhibitory nitrergic transmission impairs antral and pyloric relaxation, resulting in postprandial nausea, vomiting, and erratic glycemic fluctuations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Chronic hyperglycemia and oxidative stress"},
+          {"id": "b", "label": "Autonomic neuropathy and vagal degeneration"},
+          {"id": "c", "label": "Loss of interstitial cells of Cajal and nNOS"},
+          {"id": "d", "label": "Impaired antral motility and delayed emptying"}
+        ],
+        "edges": [
+          ["a", "b", "induces"],
+          ["b", "c", "leads to"],
+          ["c", "d", "results in"]
+        ]
+      }
+    },
+    {
+      "tx": "**Metoclopramide** is the primary prokinetic agent acting as a central and peripheral dopamine D2 antagonist to stimulate gastroduodenal coordination. However, regulatory agencies issue a boxed warning regarding **tardive dyskinesia**, an involuntary and potentially irreversible movement disorder whose incidence escalates sharply when therapy extends beyond 12 weeks of continuous administration.",
+      "say": "Metoclopramide is a prokinetic dopamine D2 antagonist that accelerates gastric emptying. However, it carries a boxed warning for irreversible tardive dyskinesia. This neurological extrapyramidal risk increases sharply when treatment duration extends beyond twelve continuous weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Parameter", "Metoclopramide Profile", "Clinical Recommendation"],
+        "rows": [
+          ["Mechanism", "Dopamine D2 antagonist", "Increases antral contractions and LES tone"],
+          ["Dosing duration", "Strictly limited to under 12 weeks", "Avoid continuous long-term maintenance therapy"],
+          ["Adverse risk", "Tardive dyskinesia and dystonia", "Monitor closely for involuntary facial movements"]
+        ]
+      }
+    },
+    {
+      "tx": "**G-POEM** (gastric peroral endoscopic myotomy) is a minimally invasive endoscopic procedure designed for severe refractory gastroparesis. An endoscopic submucosal tunnel is created in the distal antrum, followed by full-thickness selective division of the **pyloric circular muscle** bundle, effectively relieving pylorospasm and accelerating solid-phase gastric transit without necessitating surgical gastrectomy.",
+      "say": "Gastric peroral endoscopic myotomy, known as G-POEM, is an endoscopic procedure for refractory gastroparesis. The endoscopist creates a submucosal tunnel through the antrum and selectively divides the circular muscle of the pylorus. This relieves pylorospasm and accelerates gastric transit without requiring surgical resection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Mucosal entry incision in gastric antrum"},
+          {"id": "b", "label": "Submucosal tunneling towards pyloric ring"},
+          {"id": "c", "label": "Myotomy of pyloric circular muscle bundle"},
+          {"id": "d", "label": "Endoclip closure of mucosal entry site"}
+        ],
+        "edges": [
+          ["a", "b", "submucosal knife"],
+          ["b", "c", "selective division"],
+          ["c", "d", "closure clips"]
+        ]
+      }
+    },
+    {
+      "tx": "**Cyclic vomiting syndrome** is a disorder of gut-brain interaction featuring stereotypic episodes of acute, intractable nausea and vomiting lasting hours to days, separated by entirely symptom-free inter-episodic intervals. The syndrome demonstrates strong pathophysiological links to **migraine headaches**, with attacks often provoked by psychological stress, infection, or sleep deprivation, responding well to prophylactic tricyclic antidepressants.",
+      "say": "Cyclic vomiting syndrome is characterized by stereotypic episodes of acute intractable vomiting lasting hours or days, separated by symptom-free intervals. It shares a strong pathophysiological link with migraine headaches. Episodes are frequently triggered by stress or infection, and prophylactic tricyclic antidepressants significantly reduce recurrence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cyclic Vomiting Syndrome (CVS)",
+          "points": [
+            "Episodic, predictable stereotypic paroxysms",
+            "Complete symptom-free inter-episodic phases",
+            "Personal or family history of migraines",
+            "Prophylaxis with tricyclic antidepressants"
+          ]
+        },
+        "right": {
+          "title": "Gastroparesis",
+          "points": [
+            "Chronic, persistent daily nausea",
+            "Postprandial fullness and early satiety",
+            "Objective delayed emptying on scintigraphy",
+            "Prokinetics and dietary modification"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cannabinoid hyperemesis syndrome** (CHS) presents in individuals with chronic, heavy daily cannabis consumption, characterized by cyclical paroxysms of intractable nausea, projectile vomiting, and diffuse colicky abdominal discomfort. A pathognomonic behavioral hallmark is compulsive **hot-water bathing**, which transiently alleviates distress through thermal stimulation of cutaneous TRPV1 receptors, while definitive cure requires complete cannabis cessation.",
+      "say": "Cannabinoid hyperemesis syndrome occurs in chronic daily cannabis consumers. Patients develop cyclical episodes of severe nausea, vomiting, and abdominal pain. A pathognomonic behavioral hallmark is compulsive hot-water bathing, which temporarily relieves symptoms by stimulating cutaneous TRPV1 receptors. Complete cannabis cessation is the only definitive cure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Chronic daily cannabis exposure"},
+          {"id": "b", "label": "Downregulation of enteric CB1 receptors and hypothalamic dysregulation"},
+          {"id": "c", "label": "Cyclical vomiting and compulsive hot-water bathing"},
+          {"id": "d", "label": "Symptom resolution following cannabis cessation"}
+        ],
+        "edges": [
+          ["a", "b", "causes"],
+          ["b", "c", "triggers"],
+          ["c", "d", "sustained abstinence"]
+        ]
+      }
+    },
+    {
+      "tx": "**Rumination syndrome** is an under-recognized functional behavioral disorder characterized by effortless, involuntary repetitive regurgitation of recently swallowed food back into the oral cavity within minutes of meal ingestion. The regurgitated material is uncurdled and pleasant-tasting, devoid of preceding nausea or retching. First-line behavioral therapy relies on **diaphragmatic breathing** techniques practiced immediately following meals to suppress abdominal wall contractions.",
+      "say": "Rumination syndrome is an involuntary functional disorder characterized by effortless repetitive regurgitation of recently ingested food into the mouth. It occurs within minutes of eating, without preceding nausea or retching. The first-line therapy is behavioral retraining using diaphragmatic breathing exercises practiced immediately after meals to abort thoracic and abdominal wall contractions.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Rumination Syndrome", "Gastroesophageal Reflux / Gastroparesis"],
+        "rows": [
+          ["Timing of regurgitation", "Minutes after eating (during or post-meal)", "Hours after eating or nocturnal"],
+          ["Effort / Sensations", "Effortless, no nausea, pleasant or neutral taste", "Effortful retching, sour/acid taste, burning"],
+          ["Mechanism", "Involuntary rectus abdominis contraction", "LES incompetence or delayed gastric emptying"],
+          ["First-line therapy", "Postprandial diaphragmatic breathing exercises", "Acid suppression, prokinetics, dietary modification"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}

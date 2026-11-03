@@ -1,0 +1,154 @@
+{
+  "v": 1,
+  "module": "sgi-oesophageal-cancer",
+  "subject": "ss-gastroenterology",
+  "title": "Oesophageal cancer: histology, staging, trials and therapeutics",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Squamous cell carcinoma** accounts for most tumours in the proximal and middle third of the thoracic oesophagus, strongly linked to tobacco smoke, heavy alcohol consumption, hot beverages, and micronutrient deficiencies. In contrast, **adenocarcinoma** predominates in the distal oesophagus and gastro-oesophageal junction, arising through the classical metaplasia-dysplasia sequence in long-standing Barrett mucosa.",
+      "say": "Squamous cell carcinoma dominates the proximal and middle third of the thoracic oesophagus. It is strongly linked to tobacco, alcohol, hot beverage intake, and dietary micronutrient deficiencies. In contrast, adenocarcinoma predominates in the distal oesophagus and gastro-oesophageal junction, developing through the metaplasia-dysplasia sequence in chronic Barrett mucosa.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Squamous cell carcinoma",
+          "points": [
+            "Upper and middle third oesophagus",
+            "Tobacco, alcohol, hot liquids",
+            "Keratin pearls and intercellular bridges"
+          ]
+        },
+        "right": {
+          "title": "Adenocarcinoma",
+          "points": [
+            "Distal oesophagus and GEJ",
+            "Barrett metaplasia, obesity, GERD",
+            "Glandular architecture and mucin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The landmark **CROSS trial** established **neoadjuvant chemoradiotherapy** as the global standard of care for locally advanced, resectable thoracic oesophageal and junctional cancer. The protocol delivers weekly carboplatin and paclitaxel with concurrent 41.4 Gy external beam radiation over five weeks prior to planned surgical resection, demonstrating significant overall survival benefit across squamous and adenocarcinoma cohorts.",
+      "say": "The landmark CROSS trial established neoadjuvant chemoradiotherapy followed by radical surgery as the standard of care for locally advanced resectable oesophageal cancer. The protocol delivers weekly carboplatin and paclitaxel alongside forty-one point four Gray of radiation prior to resection, demonstrating superior survival over surgery alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Locally advanced cT2-4 or N+ resectable tumour"},
+          {"id": "b", "label": "Weekly carboplatin plus paclitaxel"},
+          {"id": "c", "label": "Concurrent 41.4 Gy radiotherapy"},
+          {"id": "d", "label": "Transthoracic or transhiatal oesophagectomy"}
+        ],
+        "edges": [
+          ["a", "b", "CROSS regimen"],
+          ["b", "c", "combined with"],
+          ["c", "d", "followed by"]
+        ]
+      }
+    },
+    {
+      "tx": "The phase III **CheckMate 577** trial established adjuvant immunotherapy with **nivolumab** (anti-PD-1) as the standard of care for patients with residual pathological disease (non-pCR) following neoadjuvant chemoradiotherapy and complete surgical resection. Adjuvant nivolumab for one year significantly doubled median disease-free survival from 11.0 months with placebo to 22.4 months, regardless of histological subtype or PD-L1 status.",
+      "say": "The CheckMate 577 trial established adjuvant nivolumab as standard therapy for patients who have residual pathological disease following neoadjuvant chemoradiation and surgery. Administering the anti-PD-1 antibody nivolumab for up to one year doubled median disease-free survival compared with placebo, benefiting both adenocarcinoma and squamous cell carcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": ["CheckMate 577 Parameter", "Control / Placebo", "Adjuvant Nivolumab"],
+        "rows": [
+          ["Inclusion criterion", "Resected residual tumour (non-pCR)", "Resected residual tumour (non-pCR)"],
+          ["Target mechanism", "Observation", "Anti-PD-1 checkpoint inhibition"],
+          ["Median disease-free survival", "11.0 months", "22.4 months (doubled)"],
+          ["Duration of therapy", "None", "Up to 1 year"]
+        ]
+      }
+    },
+    {
+      "tx": "**Endoscopic submucosal dissection** (ESD) provides definitive organ-preserving resection for early superficial neoplastic lesions confined to the mucosa (T1a). When strict staging confirms absence of **lymphovascular invasion** and negative vertical margins, ESD achieves **en bloc resection** rates exceeding 90%, with negligible risk of regional lymph node metastases compared to deeper submucosal invasion.",
+      "say": "Endoscopic submucosal dissection provides organ-preserving therapy for superficial oesophageal neoplasms confined strictly to the mucosa, designated as T1a. Provided there is no lymphovascular invasion and margins are clear, endoscopic submucosal dissection achieves en bloc resection rates greater than ninety percent with negligible lymph node metastasis risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Superficial mucosal neoplasm (cT1a)"},
+          {"id": "b", "label": "Endoscopic submucosal dissection (ESD)"},
+          {"id": "c", "label": "Histopathology: margins clear, no LVI"},
+          {"id": "d", "label": "Curative en bloc resection (> 90%)"}
+        ],
+        "edges": [
+          ["a", "b", "submucosal knife"],
+          ["b", "c", "confirms"],
+          ["c", "d", "achieves"]
+        ]
+      }
+    },
+    {
+      "tx": "**Endoscopic ultrasound** (EUS) is the most accurate modality for **T-staging** (approaching 90% accuracy) and locoregional N-staging of oesophageal carcinoma. The distinct five-layer sonographic wall architecture differentiates mucosal from muscularis propria invasion. High-frequency radial and linear echoendoscopes permit targeted fine-needle aspiration of suspicious peri-oesophageal or celiac lymph nodes.",
+      "say": "Endoscopic ultrasound is the premier diagnostic modality for local staging of oesophageal tumours. It achieves ninety percent accuracy for T-staging by resolving the five distinct sonographic layers of the gut wall. Linear echoendoscopes also allow real-time fine-needle aspiration of suspicious mediastinal and celiac lymph nodes to confirm regional metastasis.",
+      "vis": {
+        "kind": "table",
+        "cols": ["EUS Layer", "Histological Correlate", "T-Stage Relevance"],
+        "rows": [
+          ["Layer 1 & 2", "Mucosa & muscularis mucosae", "T1a (Mucosal, ESD candidate)"],
+          ["Layer 3", "Submucosa", "T1b (Submucosal invasion)"],
+          ["Layer 4", "Muscularis propria", "T2 (Invasion into muscle)"],
+          ["Layer 5", "Adventitia", "T3 (Adventitial penetration)"]
+        ]
+      }
+    },
+    {
+      "tx": "**Self-expanding metal stents** (SEMS), specifically fully covered or partially covered designs, provide rapid and effective **palliation of dysphagia** in unresectable or metastatic obstructing oesophageal cancer. Stent deployment rapidly re-establishes luminal patency and seals malignant tracheo-oesophageal fistulae, while uncovered wire ends in partially covered models reduce distal migration.",
+      "say": "Self-expanding metal stents provide prompt and durable palliation of dysphagia in advanced unresectable oesophageal cancer. Covered or partially covered stent designs rapidly restore luminal patency and seal malignant tracheo-oesophageal fistulae. The uncovered flared ends on partially covered models anchor into the tumour to lower migration rates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fully Covered SEMS",
+          "points": [
+            "Entire length covered by membrane",
+            "Completely seals malignant fistulae",
+            "Higher rate of stent migration",
+            "Removable if repositioning needed"
+          ]
+        },
+        "right": {
+          "title": "Partially Covered SEMS",
+          "points": [
+            "Bare wire mesh at proximal and distal ends",
+            "Tissue embedment prevents migration",
+            "Central silicone membrane prevents ingrowth",
+            "Difficult to remove once embedded"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Howel-Evans syndrome** (tylosis with oesophageal cancer) is an autosomal dominant genodermatosis caused by germline **RHBDF2 mutations** on chromosome 17q25. Affected individuals present with late-onset, non-epidermolytic focal palmoplantar keratoderma and carry a lifetime risk of oesophageal squamous cell carcinoma approaching 95%, mandating regular endoscopic surveillance from age 20 onwards.",
+      "say": "Howel-Evans syndrome, or tylosis with oesophageal cancer, is an autosomal dominant condition caused by germline RHBDF2 mutations. It is characterized by thick focal palmoplantar keratoderma on the hands and feet. Affected individuals face an extraordinary lifetime risk of oesophageal squamous cell carcinoma of up to ninety-five percent, requiring lifelong endoscopic surveillance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "RHBDF2 mutation (17q25, AD)"},
+          {"id": "b", "label": "Focal palmoplantar keratoderma"},
+          {"id": "c", "label": "Altered EGFR signaling and mucosal hyperproliferation"},
+          {"id": "d", "label": "Esophageal SCC risk up to 95%"}
+        ],
+        "edges": [
+          ["a", "b", "manifests as"],
+          ["a", "c", "causes"],
+          ["c", "d", "results in"]
+        ]
+      }
+    },
+    {
+      "tx": "**Plummer-Vinson syndrome** (Paterson-Kelly syndrome) presents with the classical triad of microcytic iron deficiency anaemia, postcricoid dysphagia secondary to thin cervical **esophageal webs**, and koilonychia. The syndrome predominantly affects middle-aged women and carries a distinct premalignant predisposition, with up to 10% developing squamous cell carcinoma of the hypopharynx or upper oesophagus.",
+      "say": "Plummer-Vinson syndrome, also termed Paterson-Kelly syndrome, features the classic triad of iron deficiency anaemia, postcricoid dysphagia from cervical oesophageal webs, and spoon-shaped nails termed koilonychia. It carries a recognized premalignant risk, with up to ten percent of affected individuals developing squamous cell carcinoma of the upper oesophagus or hypopharynx.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Triad Feature", "Clinical Manifestation", "Pathophysiological Mechanism"],
+        "rows": [
+          ["Anaemia", "Microcytic hypochromic, koilonychia", "Chronic iron deficiency"],
+          ["Dysphagia", "Painless postcricoid food sticking", "Cervical anterior esophageal webs"],
+          ["Premalignancy", "Upper oesophageal & hypopharyngeal SCC", "Mucosal atrophy and oxidative stress"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}

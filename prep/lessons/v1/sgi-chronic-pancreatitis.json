@@ -1,0 +1,151 @@
+{
+  "v": 1,
+  "module": "sgi-chronic-pancreatitis",
+  "subject": "ss-gastroenterology",
+  "title": "Chronic pancreatitis: genetics, functional decline and surgery",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Chronic pancreatitis** is defined pathologically by progressive, irreversible **fibro-inflammatory injury** of the pancreatic parenchyma. Chronic acinar cell necrosis and persistent perilobular fibrosis culminate in ductal stricturing, intraductal stone precipitation, chronic intractable abdominal pain, and progressive loss of both exocrine digestive and endocrine metabolic functions.",
+      "say": "Chronic pancreatitis is defined pathologically by progressive irreversible fibro-inflammatory injury of the pancreatic parenchyma. Persistent acinar necrosis and perilobular fibrosis lead to ductal strictures, stone precipitation, severe chronic pain, and progressive destruction of exocrine and endocrine functions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Repetitive acinar injury (alcohol, smoking, genetic)"},
+          {"id": "b", "label": "Pancreatic stellate cell activation & dense fibrosis"},
+          {"id": "c", "label": "Main duct stricturing, protein plugs & calcification"},
+          {"id": "d", "label": "Exocrine steatorrhoea & pancreatogenic diabetes"}
+        ],
+        "edges": [
+          ["a", "b", "triggers"],
+          ["b", "c", "leads to"],
+          ["c", "d", "results in"]
+        ]
+      }
+    },
+    {
+      "tx": "Genetic susceptibility drives both early-onset and recurrent pancreatitis. Gain-of-function mutations in **PRSS1** (encoding cationic trypsinogen) impede autolytic trypsin inactivation, causing hereditary pancreatitis with severe early-onset calcification. Modifier mutations include **SPINK1 mutations** (pancreatic secretory trypsin inhibitor) and CFTR variants that impair ductal bicarbonate secretion.",
+      "say": "Genetic mutations cause higher pancreatitis risk. Gain-of-function mutations in PRSS1 encoding cationic trypsinogen prevent autolytic enzyme inactivation, causing hereditary pancreatitis. Modifier defects involve SPINK1 mutations in the trypsin inhibitor gene and CFTR variants that disrupt ductal bicarbonate hydration.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Gene", "Encoded Protein", "Functional Pathomechanism"],
+        "rows": [
+          ["PRSS1", "Cationic trypsinogen", "Gain-of-function: premature trypsinogen activation & resistance to autolysis"],
+          ["SPINK1", "Pancreatic secretory trypsin inhibitor", "Loss-of-function: inadequate inhibition of prematurely active trypsin"],
+          ["CFTR", "Cystic fibrosis conductance regulator", "Impaired ductal chloride/bicarbonate secretion, yielding thick viscous secretions"]
+        ]
+      }
+    },
+    {
+      "tx": "**Fecal elastase-1** measurement is the premier non-invasive diagnostic modality for evaluating **pancreatic exocrine insufficiency**. Chymotrypsin-like elastase-1 passes through the human intestine without degradation. A fecal concentration under 200 ug/g confirms exocrine deficiency, while concentrations below 100 ug/g indicate severe insufficiency, distinguishing pancreatic maldigestion from mucosal coeliac enteropathy.",
+      "say": "Fecal elastase-1 measurement is the primary non-invasive test for assessing pancreatic exocrine insufficiency. Because elastase-1 traverses the gut without degradation, a fecal concentration below two hundred micrograms per gram confirms exocrine deficiency, and values under one hundred indicate severe deficiency.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Fecal Elastase-1 Concentration", "Diagnostic Interpretation", "Clinical Management"],
+        "rows": [
+          ["> 200 ug/g", "Normal exocrine pancreatic function", "Exocrine insufficiency unlikely"],
+          ["100 to 200 ug/g", "Mild-to-moderate exocrine insufficiency", "Consider trial of enzyme replacement therapy"],
+          ["< 100 ug/g", "Severe pancreatic exocrine insufficiency", "Mandatory high-dose enzyme replacement and fat-soluble vitamins"]
+        ]
+      }
+    },
+    {
+      "tx": "**Pancreatic enzyme replacement** therapy (PERT) is initiated when exocrine secretion falls below 10% of normal capacity. Formulated as enteric-coated mini-microspheres to resist gastric acid degradation, dosing delivers at least 40000 to 50000 USP units of **lipase per meal** taken during feeding. Adequate enzyme substitution abolishes clinical steatorrhoea, restores fat-soluble vitamin absorption, and prevents skeletal bone demineralization.",
+      "say": "Pancreatic enzyme replacement therapy is initiated when functional exocrine output falls below ten percent of normal. Administered as enteric-coated mini-microspheres, dosing delivers forty thousand to fifty thousand units of lipase per meal taken with food. Adequate substitution eliminates steatorrhoea and restores fat-soluble vitamin uptake.",
+      "vis": {
+        "kind": "table",
+        "cols": ["PERT Parameter", "Clinical Recommendation", "Therapeutic Objective"],
+        "rows": [
+          ["Lipase dose per main meal", "40,000 to 50,000 USP units", "Abolishes steatorrhoea and hydrolyzes fat"],
+          ["Lipase dose per snack", "20,000 to 25,000 USP units (half-dose)", "Maintains continuous intraluminal digestion"],
+          ["Formulation timing", "Swallowed intact during meal (not before)", "Ensures synchronous transit with food chyme"],
+          ["Adjunctive agent", "PPI or H2RA if incomplete response", "Neutralizes gastric acid to preserve lipase stability"]
+        ]
+      }
+    },
+    {
+      "tx": "**Type 3c diabetes** mellitus, termed **pancreatogenic diabetes**, complicates advanced chronic pancreatitis due to progressive destruction of islet architecture. Unlike Type 1 or Type 2 diabetes, destruction simultaneously eliminates insulin-secreting beta cells and glucagon-secreting alpha cells. This combined endocrine loss generates brittle glycemic control characterized by extreme vulnerability to severe hypoglycaemia.",
+      "say": "Type 3c diabetes mellitus, termed pancreatogenic diabetes, develops in advanced chronic pancreatitis from structural islet destruction. The disease destroys insulin-producing beta cells and glucagon-producing alpha cells simultaneously. This dual hormonal loss creates brittle glycemic control with high susceptibility to severe hypoglycaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 3c Pancreatogenic Diabetes",
+          "points": [
+            "Concomitant loss of beta cells and alpha cells",
+            "Marked deficiency of both insulin and glucagon",
+            "Severe brittle hypoglycaemic vulnerability",
+            "Exocrine insufficiency present"
+          ]
+        },
+        "right": {
+          "title": "Type 2 Diabetes Mellitus",
+          "points": [
+            "Peripheral insulin resistance with hyperinsulinaemia",
+            "Glucagon suppression is impaired (relative excess)",
+            "Ketoacidosis and brittle hypoglycaemia are rare",
+            "Exocrine function remains preserved"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Extracorporeal shock wave lithotripsy** (ESWL) is the established intervention for large, obstructing, radiopaque **pancreatic duct stones** exceeding 5 mm in diameter lodged within the main pancreatic duct. ESWL pulverizes calcified stones into fragments under 3 mm, facilitating subsequent endoscopic retrieval with extraction baskets, clearance of ductal obstruction, and therapeutic decompression.",
+      "say": "Extracorporeal shock wave lithotripsy is the primary intervention for large radiopaque pancreatic duct stones exceeding five millimetres in diameter. Focused shock waves fragment intraductal stones into small pieces, facilitating subsequent endoscopic retrieval and restoring pancreatic drainage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Main pancreatic duct stone > 5 mm with upstream dilatation"},
+          {"id": "b", "label": "Extracorporeal shock wave lithotripsy (ESWL)"},
+          {"id": "c", "label": "Fragmentation of stones into debris < 3 mm"},
+          {"id": "d", "label": "ERCP with balloon/basket extraction and ductal stenting"}
+        ],
+        "edges": [
+          ["a", "b", "indicated for"],
+          ["b", "c", "pulverizes"],
+          ["c", "d", "followed by"]
+        ]
+      }
+    },
+    {
+      "tx": "Surgical management of chronic pancreatitis addresses intractable pain and structural complications. The **Frey procedure** combines local core resection of the diseased pancreatic head with a longitudinal **pancreaticojejunostomy** along the dilated main pancreatic duct. The Beger procedure preserves the duodenum while achieving subtotal resection of the pancreatic head.",
+      "say": "Surgeons perform operations for chronic pancreatitis to relieve intractable pain and ductal hypertension. The Frey procedure combines coring resection of the pancreatic head with a longitudinal pancreaticojejunostomy along the opened main duct. The Beger procedure achieves duodenum-preserving total resection of the pancreatic head.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Frey Procedure",
+          "points": [
+            "Local coring resection of pancreatic head",
+            "Longitudinal duct incision (pancreaticojejunostomy)",
+            "Hybrid resection plus drainage",
+            "Preserves duodenum and posterior pancreatic capsule"
+          ]
+        },
+        "right": {
+          "title": "Beger Procedure",
+          "points": [
+            "Subtotal resection of the pancreatic head",
+            "Transection of the pancreas over portal vein",
+            "Duodenum-preserving pancreatic head resection",
+            "Two pancreatico-enteric anastomoses required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Type 1 **autoimmune pancreatitis** (AIP) is the pancreatic manifestation of systemic IgG4-related disease. Cross-sectional imaging demonstrates diffuse, painless **sausage-like enlargement** of the pancreas with loss of lobular architecture and a capsule-like halo of delayed enhancement. Serum IgG4 levels are elevated, and the disorder exhibits dramatic clinical and radiographic response to oral corticosteroids.",
+      "say": "Type one autoimmune pancreatitis represents the pancreatic manifestation of systemic IgG4-related disease. Imaging reveals diffuse sausage-like enlargement of the pancreas with loss of normal lobulations and a capsule-like peripancreatic halo. Serum IgG4 levels are elevated, and the disorder shows dramatic response to oral corticosteroids.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Type 1 Autoimmune Pancreatitis (IgG4-Related)", "Type 2 Autoimmune Pancreatitis (GEL)"],
+        "rows": [
+          ["Systemic involvement", "Systemic IgG4 disease (cholangitis, nephritis)", "Strictly pancreas-isolated; associated with IBD"],
+          ["Serum IgG4 level", "Significantly elevated (> 2x upper limit)", "Normal serum IgG4 levels"],
+          ["Histopathology", "Lymphoplasmacytic sclerosing pancreatitis (LPSP)", "Granulocytic epithelial lesions (GEL) with duct destruction"],
+          ["Response to steroids", "Dramatic, rapid clinical and imaging resolution", "Dramatic, rapid response to corticosteroids"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}

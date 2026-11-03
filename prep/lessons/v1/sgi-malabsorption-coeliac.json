@@ -1,0 +1,155 @@
+{
+  "v": 1,
+  "module": "sgi-malabsorption-coeliac",
+  "subject": "ss-gastroenterology",
+  "title": "Malabsorption and coeliac disease: serology, staging and complications",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Serological screening for coeliac disease begins with IgA **anti-tissue transglutaminase** (anti-tTG IgA) paired with measurement of total serum IgA. This mandatory pairing identifies **selective IgA deficiency**, which occurs in up to 3% of coeliac patients. When total IgA falls below detectable thresholds, IgG-based serology using deamidated gliadin peptide (DGP IgG) or tTG IgG serves as the diagnostic alternative.",
+      "say": "Serological testing for coeliac disease begins with IgA anti-tissue transglutaminase paired with total serum IgA measurement. This pairing is essential to detect selective IgA deficiency, which affects two to three percent of coeliac patients. When total IgA is deficient, IgG deamidated gliadin peptide testing provides accurate diagnostic assessment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Suspected coeliac disease: anti-tTG IgA + total IgA"},
+          {"id": "b", "label": "Normal total IgA level"},
+          {"id": "c", "label": "Selective IgA deficiency identified"},
+          {"id": "d", "label": "Interpret anti-tTG IgA titre"},
+          {"id": "e", "label": "Order DGP IgG or tTG IgG"}
+        ],
+        "edges": [
+          ["a", "b", "screen"],
+          ["a", "c", "deficiency"],
+          ["b", "d", "proceed"],
+          ["c", "e", "reflex"]
+        ]
+      }
+    },
+    {
+      "tx": "Genetic susceptibility resides in the class II human leukocyte antigen complex. More than 99% of coeliac individuals express **HLA-DQ2** (encoded by DQA1*05:01 and DQB1*02:01) or HLA-DQ8 (DQA1*03:01 and DQB1*03:02). The absence of both heterodimers confers a **negative predictive value** exceeding 99%, making HLA testing invaluable to rule out coeliac disease in patients already adhering to a gluten-free diet.",
+      "say": "Genetic susceptibility to coeliac disease involves class two human leukocyte antigen molecules. Over ninety-nine percent of affected patients express HLA-DQ2 or HLA-DQ8 heterodimers. The absence of both alleles carries an extraordinary negative predictive value exceeding ninety-nine percent, effectively ruling out coeliac disease in individuals already maintaining a gluten-free diet.",
+      "vis": {
+        "kind": "table",
+        "cols": ["HLA Allele", "Heterodimer Molecular Code", "Prevalence in Coeliac Disease"],
+        "rows": [
+          ["HLA-DQ2.5", "DQA1*05:01 and DQB1*02:01", "Approx. 90% of cases"],
+          ["HLA-DQ2.2", "DQA1*02:01 and DQB1*02:02", "Approx. 5% of cases"],
+          ["HLA-DQ8", "DQA1*03:01 and DQB1*03:02", "Approx. 5% to 10% of cases"],
+          ["Absence of DQ2 & DQ8", "Neither allele present", "< 1% (NPV > 99% to exclude)"]
+        ]
+      }
+    },
+    {
+      "tx": "The **Marsh-Oberhuber** classification grades duodenal enteropathy on mucosal biopsies. Marsh 1 exhibits intraepithelial lymphocytosis exceeding 25 lymphocytes per 100 enterocytes with normal mucosal architecture. Marsh 2 adds crypt hyperplasia. Marsh 3 demonstrates progressive **villous atrophy**, stratified into partial (3a), subtotal (3b), and total (3c) blunting, accompanied by mucosal flattening.",
+      "say": "The Marsh-Oberhuber histological system classifies duodenal enteropathy from mucosal biopsies. Marsh one shows intraepithelial lymphocytosis exceeding twenty-five lymphocytes per one hundred enterocytes with preserved villi. Marsh two develops distinct crypt hyperplasia. Marsh three exhibits progressive villous atrophy, categorized into partial, subtotal, and total mucosal flattening.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Marsh Stage", "IEL Count (> 25/100)", "Crypt Architecture", "Villous Architecture"],
+        "rows": [
+          ["Marsh 0 (Pre-infiltrative)", "Normal (< 25)", "Normal", "Normal villi"],
+          ["Marsh 1 (Infiltrative)", "Increased (> 25)", "Normal", "Normal villi"],
+          ["Marsh 2 (Hyperplastic)", "Increased (> 25)", "Hyperplastic", "Normal villi"],
+          ["Marsh 3a-c (Destructive)", "Increased (> 25)", "Hyperplastic", "Partial to total villous atrophy"]
+        ]
+      }
+    },
+    {
+      "tx": "**Dermatitis herpetiformis** represents the pathognomonic cutaneous manifestation of gluten-sensitive enteropathy. Patients present with symmetrically distributed, severely excoriated papulovesicular eruptions over extensor surfaces, including elbows, knees, buttocks, and scalp. Direct immunofluorescence of perilesional skin reveals pathognomonic **granular IgA** deposition concentrated within dermal papillae.",
+      "say": "Dermatitis herpetiformis is the pathognomonic skin manifestation of coeliac disease. It produces intensely pruritic grouped papulovesicular eruptions distributed symmetrically over extensor surfaces like elbows and buttocks. Direct immunofluorescence of unaffected perilesional skin reveals pathognomonic granular IgA deposits concentrated along the dermal papillae.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dermatitis Herpetiformis",
+          "points": [
+            "Extensor elbows, knees, buttocks, scalp",
+            "Granular IgA deposits in dermal papillae",
+            "Pathognomonic for coeliac disease",
+            "Responds to dapsone and gluten-free diet"
+          ]
+        },
+        "right": {
+          "title": "Linear IgA Bullous Dermatosis",
+          "points": [
+            "Flexural, trunk, or perioral blisters",
+            "Linear IgA along basement membrane",
+            "Not gluten-dependent",
+            "Drug-induced or autoimmune"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Refractory coeliac disease** (RCD) denotes persistent or recurrent malabsorption and villous atrophy despite 12 months of verified adherence to a gluten-free diet. Type 1 RCD displays normal polyclonal intraepithelial lymphocytes. In contrast, Type 2 RCD harbors **aberrant intraepithelial T cells** exhibiting clonal expansion, with downregulation of surface CD3 and CD8 co-receptors despite retained intracellular CD3 epsilon.",
+      "say": "Refractory coeliac disease is defined by persistent malabsorption and villous atrophy despite twelve months of confirmed strict adherence to a gluten-free diet. Type one demonstrates normal polyclonal T cells. Type two contains clonal aberrant intraepithelial lymphocytes that lose surface CD3 and CD8 markers while retaining intracellular CD3 epsilon.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Parameter", "Type 1 Refractory Coeliac", "Type 2 Refractory Coeliac"],
+        "rows": [
+          ["T-cell receptor clonality", "Polyclonal TCR rearrangement", "Monoclonal TCR gamma gene rearrangement"],
+          ["IEL immunophenotype", "Normal (surface CD3+ / CD8+)", "Aberrant (loss of surface CD3/CD8)"],
+          ["EATL transformation risk", "Low (< 5%)", "High (up to 50% within 5 years)"],
+          ["First-line therapy", "Systemic steroids", "Cladribine or autologous HSCT"]
+        ]
+      }
+    },
+    {
+      "tx": "**Enteropathy-associated T-cell lymphoma** (EATL) is an aggressive, high-grade intestinal non-Hodgkin lymphoma arising primarily from the clonal intraepithelial population in Type 2 refractory coeliac disease. Most common in the jejunum and ileum, **EATL** presents with multifocal ulcerative lesions, small bowel obstruction, acute perforation, and severe cachexia, carrying poor five-year overall survival.",
+      "say": "Enteropathy-associated T-cell lymphoma, known as EATL, is a high-grade lymphoma arising directly from aberrant intraepithelial T cells in Type two refractory coeliac disease. It typically involves the jejunum and ileum, presenting with multifocal ulcerations, obstruction, intestinal perforation, and severe cachexia, carrying an aggressive clinical course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Coeliac disease with chronic gluten exposure"},
+          {"id": "b", "label": "Type 2 refractory coeliac disease (clonal aberrant IELs)"},
+          {"id": "c", "label": "Acquisition of somatic mutations (JAK1, STAT3)"},
+          {"id": "d", "label": "Enteropathy-associated T-cell lymphoma (EATL)"}
+        ],
+        "edges": [
+          ["a", "b", "transformation"],
+          ["b", "c", "oncogenesis"],
+          ["c", "d", "progression"]
+        ]
+      }
+    },
+    {
+      "tx": "The **D-xylose absorption test** assesses proximal small intestinal mucosal absorptive surface area. Following oral ingestion of a 25 g dose of D-xylose, normal five-hour urinary excretion of at least 4 g reflects intact mucosal transport. In contrast, normal excretion occurs in **pancreatic insufficiency** because D-xylose is a simple pentose passively absorbed across enterocytes without requiring pancreatic enzymes.",
+      "say": "The D-xylose absorption test evaluates the functional integrity of the proximal small intestinal mucosa. Following an oral twenty-five gram dose, normal urinary excretion of at least four grams over five hours indicates preserved mucosal transport. Excretion remains normal in pancreatic insufficiency because D-xylose is absorbed passively without needing pancreatic enzymes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mucosal Malabsorption (e.g. Coeliac)",
+          "points": [
+            "Low 5-hour urinary D-xylose (< 4 g)",
+            "Enterocyte loss and villous blunting",
+            "Impaired passive monosaccharide absorption",
+            "Abnormal duodenal histology"
+          ]
+        },
+        "right": {
+          "title": "Pancreatic Exocrine Insufficiency",
+          "points": [
+            "Normal 5-hour urinary D-xylose (>= 4 g)",
+            "Mucosal brush border remains intact",
+            "Defect is intraluminal digestive hydrolysis",
+            "Low fecal elastase-1 (< 200 ug/g)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bile acid diarrhoea** results from unabsorbed bile salts entering the colon and stimulating mucosal water secretion. Diagnosis utilizes **SeHCAT retention** scintigraphy, where 7-day retention below 10% confirms malabsorption (under 5% signifies severe disease). Alternatively, elevated serum 7-alpha-hydroxy-4-cholesten-3-one (C4) confirms hepatic synthesis, and therapy relies on **colestyramine**.",
+      "say": "Bile acid diarrhoea occurs when excess unabsorbed bile salts enter the colon and stimulate chloride and water secretion. Diagnosis relies on selenium-75 SeHCAT retention scintigraphy, where seven-day retention below ten percent confirms malabsorption, and retention below five percent indicates severe deficiency. Oral colestyramine provides effective symptomatic control.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Severity Category", "7-Day SeHCAT Retention", "Therapeutic Response to Colestyramine"],
+        "rows": [
+          ["Normal retention", "> 15% retention at 7 days", "Bile acid malabsorption excluded"],
+          ["Mild malabsorption", "10% to 15% retention", "Variable response to bile acid binder"],
+          ["Moderate malabsorption", "5% to 10% retention", "Prompt clinical response to colestyramine"],
+          ["Severe malabsorption", "< 5% retention", "Excellent response to colestyramine"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}
