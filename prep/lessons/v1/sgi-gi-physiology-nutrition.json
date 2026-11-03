@@ -9,76 +9,22 @@
       "tx": "**Gastrin** is a peptide hormone synthesized and secreted by antral G cells in response to intraluminal amino acids, gastric distension, and vagal gastrin-releasing peptide stimulation. Gastrin drives gastric acid secretion via two synergistic mechanisms: directly binding CCKB receptors on oxyntic parietal cells, and predominantly stimulating **enterochromaffin-like cells** to release histamine. Histamine then acts paracrine on parietal cell H2 receptors, activating adenylyl cyclase and the H+/K+ ATPase pump.",
       "say": "Gastrin is a peptide hormone synthesized and secreted by antral G cells in response to intraluminal amino acids, gastric distension, and vagal gastrin-releasing peptide stimulation. Gastrin drives gastric acid secretion via two synergistic mechanisms: directly binding CCKB receptors on oxyntic parietal cells, and predominantly stimulating enterochromaffin-like cells to release histamine. Histamine then acts paracrine on parietal cell H2 receptors, activating adenylyl cyclase and the H+/K+ ATPase pump.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Antral G cells secrete gastrin"
-          },
-          {
-            "id": "b",
-            "label": "Gastrin binds CCKB receptors on ECL cells"
-          },
-          {
-            "id": "c",
-            "label": "ECL cells release histamine"
-          },
-          {
-            "id": "d",
-            "label": "Parietal cell H2 activation drives H+/K+ ATPase pump"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "humoral circulation"
-          ],
-          [
-            "b",
-            "c",
-            "intracellular calcium surge"
-          ],
-          [
-            "c",
-            "d",
-            "paracrine acid secretion"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/gastric-acid-secretion-and-parietal-cells-fig1.webp",
+        "alt": "Diagram of a parietal cell showing gastrin from antral G cells, histamine from enterochromaffin-like cells, and the apical proton pump.",
+        "caption": "Parietal cell acid secretion, with gastrin and histamine driving the proton pump. Credit: StewardMD.",
+        "ar": 1.3405
       }
     },
     {
       "tx": "**Secretin** is a 27-amino acid peptide hormone produced and released by **duodenal S cells** situated within the crypts of Lieberkuhn. It is secreted primarily when acidic gastric chyme enters the duodenal bulb, triggered by an intraluminal pH falling below **4.5**. Circulating secretin stimulates pancreatic ductal epithelial cells to generate copious watery **bicarbonate secretion** through CFTR-dependent channels, while simultaneously suppressing parietal cell gastric acid secretion to optimize intraluminal digestive enzyme activity.",
       "say": "Secretin is a 27-amino acid peptide hormone produced and released by duodenal S cells situated within the crypts of Lieberkuhn. It is secreted primarily when acidic gastric chyme enters the duodenal bulb, triggered by an intraluminal pH falling below 4.5. Circulating secretin stimulates pancreatic ductal epithelial cells to generate copious watery bicarbonate secretion through CFTR-dependent channels, while simultaneously suppressing parietal cell gastric acid secretion to optimize intraluminal digestive enzyme activity.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Physiological Parameter",
-          "Secretin",
-          "Gastrin"
-        ],
-        "rows": [
-          [
-            "Site of Origin",
-            "Duodenal S cells",
-            "Antral G cells"
-          ],
-          [
-            "Primary Trigger",
-            "Intraluminal duodenal pH < 4.5",
-            "Peptides, amino acids, distension"
-          ],
-          [
-            "Target Organ",
-            "Pancreatic ductal epithelium",
-            "Parietal cells and ECL cells"
-          ],
-          [
-            "Primary Biological Action",
-            "Bicarbonate-rich water secretion",
-            "Hydrochloric acid secretion"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/lessons/media/sgi-gi-physiology-nutrition-fig1.webp",
+        "alt": "Diagram illustrating secretin release from duodenal S cells, stimulating pancreatic duct cells to secrete bicarbonate and water, neutralizing duodenal acid.",
+        "caption": "Secretin pathway: acid sensing, pancreatic bicarbonate secretion, and pH neutralization. Credit: StewardMD.",
+        "ar": 1.8349
       }
     },
     {

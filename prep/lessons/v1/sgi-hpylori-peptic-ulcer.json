@@ -85,42 +85,11 @@
       "tx": "The **Correa cascade** demonstrates the sequential histological progression from normal gastric mucosa to invasive intestinal-type gastric adenocarcinoma. Chronic infection triggers superficial active gastritis, progressing over decades to multifocal chronic atrophic gastritis with glandular loss. Subsequent replacement of specialized gastric epithelium by Goblet cells creates **intestinal metaplasia**, which evolves into low-grade and high-grade dysplasia. Eradicating Helicobacter pylori before the development of extensive intestinal metaplasia eliminates future cancer risk.",
       "say": "The Correa cascade demonstrates the sequential histological progression from normal gastric mucosa to invasive intestinal-type gastric adenocarcinoma. Chronic infection triggers superficial active gastritis, progressing over decades to multifocal chronic atrophic gastritis with glandular loss. Subsequent replacement of specialized gastric epithelium by Goblet cells creates intestinal metaplasia, which evolves into low-grade and high-grade dysplasia. Eradicating Helicobacter pylori before the development of extensive intestinal metaplasia eliminates future cancer risk.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Chronic superficial gastritis"
-          },
-          {
-            "id": "b",
-            "label": "Atrophic gastritis with gland loss"
-          },
-          {
-            "id": "c",
-            "label": "Intestinal metaplasia (enterocyte phenotype)"
-          },
-          {
-            "id": "d",
-            "label": "Gastric dysplasia and intestinal-type cancer"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "sustained H. pylori inflammation"
-          ],
-          [
-            "b",
-            "c",
-            "mucosal remodelling"
-          ],
-          [
-            "c",
-            "d",
-            "point of irreversible genetic damage"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/helicobacter-pylori-infection-fig1.webp",
+        "alt": "Diagram of Helicobacter pylori attaching to gastric epithelium and leading to chronic gastritis, peptic ulcer, gastric cancer, and MALT lymphoma.",
+        "caption": "Helicobacter pylori outcomes: chronic gastritis, peptic ulcer, gastric cancer, and MALT lymphoma. Credit: StewardMD.",
+        "ar": 1.8349
       }
     },
     {
@@ -152,42 +121,11 @@
       "tx": "**NSAID-induced ulcers** develop through dual mechanisms combining direct chemical irritation and systemic biochemical suppression. Systemic absorption of non-selective nonsteroidal anti-inflammatory drugs inhibits mucosal **cyclooxygenase-1**, preventing conversion of arachidonic acid into cytoprotective prostaglandins **1** and **2**, specifically PGE2 and PGI2. This prostaglandin depletion diminishes gastric mucosal blood flow, decreases mucus and bicarbonate production, and impairs cellular restitution, predisposing to silent mucosal ulceration and life-threatening haemorrhage.",
       "say": "NSAID-induced ulcers develop through dual mechanisms combining direct chemical irritation and systemic biochemical suppression. Systemic absorption of non-selective nonsteroidal anti-inflammatory drugs inhibits mucosal cyclooxygenase-1, preventing conversion of arachidonic acid into cytoprotective prostaglandins 1 and 2, specifically PGE2 and PGI2. This prostaglandin depletion diminishes gastric mucosal blood flow, decreases mucus and bicarbonate production, and impairs cellular restitution, predisposing to silent mucosal ulceration and life-threatening haemorrhage.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Systemic NSAID administration"
-          },
-          {
-            "id": "b",
-            "label": "Inhibition of COX-1 enzyme"
-          },
-          {
-            "id": "c",
-            "label": "Depletion of mucosal PGE2 and PGI2"
-          },
-          {
-            "id": "d",
-            "label": "Loss of mucus, bicarbonate, and perfusion"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "circulating drug uptake"
-          ],
-          [
-            "b",
-            "c",
-            "blocked arachidonate conversion"
-          ],
-          [
-            "c",
-            "d",
-            "barrier failure and mucosal ulceration"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-fig2.webp",
+        "alt": "Diagram of an ulcer crater with Helicobacter pylori injury on one side and NSAID injury of the mucus barrier on the other, plus the parietal cell proton pump.",
+        "caption": "How Helicobacter pylori and NSAIDs break the mucus barrier and drive acid through the parietal cell pump. Credit: StewardMD.",
+        "ar": 1.3405
       }
     },
     {

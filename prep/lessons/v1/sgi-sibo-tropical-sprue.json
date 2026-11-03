@@ -38,42 +38,11 @@
       "tx": "Non-invasive diagnostic evaluation relies heavily on standardized **hydrogen and methane breath testing**. According to international consensus guidelines, a positive hydrogen breath test is defined by an increase in breath **hydrogen** of at least **20** parts per million (**ppm**) above baseline within **90** minutes following the ingestion of either glucose or lactulose. This early peak reflects premature bacterial fermentation of the carbohydrate substrate within the small intestinal lumen.",
       "say": "Non-invasive diagnostic evaluation relies heavily on standardized hydrogen and methane breath testing. According to international consensus guidelines, a positive hydrogen breath test is defined by an increase in breath hydrogen of at least 20 parts per million above baseline within 90 minutes following the ingestion of either glucose or lactulose. This early peak reflects premature bacterial fermentation of the carbohydrate substrate within the small intestinal lumen.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Baseline breath hydrogen measurement"
-          },
-          {
-            "id": "b",
-            "label": "Ingest substrate (glucose 75g or lactulose 10g)"
-          },
-          {
-            "id": "c",
-            "label": "Fermentation by luminal bacteria produces H2 gas"
-          },
-          {
-            "id": "d",
-            "label": "Breath H2 rises >= 20 ppm within 90 minutes"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "standardized fasting prep"
-          ],
-          [
-            "b",
-            "c",
-            "early substrate contact"
-          ],
-          [
-            "c",
-            "d",
-            "positive diagnostic threshold"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/small-intestinal-bacterial-overgrowth-fig1.webp",
+        "alt": "Diagram of small intestinal bacterial overgrowth showing stasis, bile salt deconjugation, vitamin B12 use, and a hydrogen breath test curve.",
+        "caption": "Small intestinal bacterial overgrowth: stasis, bile salt deconjugation, and breath testing. Credit: StewardMD.",
+        "ar": 1.3405
       }
     },
     {
@@ -206,34 +175,11 @@
       "tx": "Histopathological evaluation of duodenal or jejunal mucosal biopsies in tropical sprue reveals diffuse **villous blunting**, crypt hyperplasia, and dense **intraepithelial lymphocytosis**. While these structural features closely resemble coeliac sprue, tropical sprue typically affects the entirety of the small bowel rather than sparing the distal ileum, and patient serum is uniformly negative for coeliac-specific anti-tissue transglutaminase (anti-tTG) and anti-endomysial antibodies.",
       "say": "Histopathological evaluation of duodenal or jejunal mucosal biopsies in tropical sprue reveals diffuse villous blunting, crypt hyperplasia, and dense intraepithelial lymphocytosis. While these structural features closely resemble coeliac sprue, tropical sprue typically affects the entirety of the small bowel rather than sparing the distal ileum, and patient serum is uniformly negative for coeliac-specific anti-tissue transglutaminase and anti-endomysial antibodies.",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Histological Feature",
-          "Tropical Sprue",
-          "Coeliac Disease"
-        ],
-        "rows": [
-          [
-            "Villous architecture",
-            "Blunted to completely flat (diffuse)",
-            "Blunted to flat (Marsh III, proximal)"
-          ],
-          [
-            "Intraepithelial lymphocytes",
-            "Markedly elevated (> 25/100 enterocytes)",
-            "Markedly elevated (> 25/100 enterocytes)"
-          ],
-          [
-            "Ileal involvement",
-            "Commonly involved (causes low B12)",
-            "Typically spared (terminal ileum normal)"
-          ],
-          [
-            "Serology (anti-tTG IgA)",
-            "Negative",
-            "Positive (> 95% sensitivity)"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/tropical-sprue-fig1.webp",
+        "alt": "Side by side drawings of normal small bowel villi and the shortened villi with crypt changes of tropical sprue.",
+        "caption": "Tropical sprue mucosa compared with normal villi, showing partial villous atrophy. Credit: StewardMD.",
+        "ar": 1.8349
       }
     },
     {

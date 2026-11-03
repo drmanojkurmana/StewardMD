@@ -38,25 +38,11 @@
       "tx": "High-resolution manometry separates achalasia into three distinct operational subtypes based on pressurization patterns. **Type I achalasia** or classic achalasia demonstrates **100%** failed peristalsis without significant esophageal pressurization. In contrast, **Type II achalasia** exhibits panesophageal pressurization in at least **20%** of swallows, generating compression between the upper and lower sphincters. **Type III achalasia** or spastic achalasia shows premature spastic contractions with reduced distal latency in at least **20%** of swallows.",
       "say": "High-resolution manometry separates achalasia into three distinct operational subtypes based on pressurization patterns. Type I achalasia, also termed classic achalasia, demonstrates 100 percent failed peristalsis without significant esophageal pressurization. In contrast, Type II achalasia exhibits panesophageal pressurization in at least 20 percent of swallows, generating compression between the upper and lower sphincters. Type III achalasia, known as spastic achalasia, shows premature spastic contractions with reduced distal latency in at least 20 percent of swallows.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Type I and II Achalasia",
-          "points": [
-            "Type I: 100% failed peristalsis with aperistalsis",
-            "Type I: No panesophageal pressurization",
-            "Type II: Panesophageal pressurization in >= 20% swallows",
-            "Type II: Highest clinical response to balloon dilatation and myotomy"
-          ]
-        },
-        "right": {
-          "title": "Type III Spastic Achalasia",
-          "points": [
-            "Type III: Premature spastic contractions in >= 20% swallows",
-            "Distal latency < 4.5 seconds",
-            "Poor response to standard balloon dilatation",
-            "Requires extended length peroral endoscopic myotomy"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/achalasia-fig1.webp",
+        "alt": "Barium swallow showing a dilated oesophagus that tapers to a bird beak at the lower oesophageal sphincter, the radiographic sign of achalasia.",
+        "caption": "Bird beak of achalasia on a barium swallow. Credit: Farnoosh Farrokhi and Michael F. Vaezi, CC BY 2.0, via Wikimedia Commons.",
+        "ar": 0.5333
       }
     },
     {
@@ -139,42 +125,11 @@
       "tx": "**Distal esophageal spasm** represents a severe hypermotility disorder defined under high-resolution manometry criteria. Diagnostic confirmation requires a normal integrated relaxation pressure combined with premature contractions in at least **20%** of test swallows. The key physiological metric is a shortened **distal latency** of less than **4.5** seconds from upper sphincter relaxation to the contractile deceleration point. Patients typically present with episodic retrosternal chest pain and dysphagia that mimic acute coronary syndromes.",
       "say": "Distal esophageal spasm represents a severe hypermotility disorder defined under high-resolution manometry criteria. Diagnostic confirmation requires a normal integrated relaxation pressure combined with premature contractions in at least 20 percent of test swallows. The key physiological metric is a shortened distal latency of less than 4 point 5 seconds from upper sphincter relaxation to the contractile deceleration point. Patients typically present with episodic retrosternal chest pain and dysphagia that mimic acute coronary syndromes.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Normal median IRP"
-          },
-          {
-            "id": "b",
-            "label": "Distal latency < 4.5 seconds"
-          },
-          {
-            "id": "c",
-            "label": "Premature contractions in >= 20% swallows"
-          },
-          {
-            "id": "d",
-            "label": "Diagnosis: Distal Esophageal Spasm"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "preserved LES relaxation"
-          ],
-          [
-            "b",
-            "c",
-            "early contractile wave front"
-          ],
-          [
-            "c",
-            "d",
-            "CCv4.0 criteria met"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/esophageal-motility-gerd-and-esophagectomy-fig1.webp",
+        "alt": "Illustration of a corkscrew oesophagus beside a sliding hiatus hernia with acid reflux and columnar metaplasia.",
+        "caption": "Corkscrew oesophagus, the barium pattern of distal oesophageal spasm, shown next to reflux anatomy. Credit: StewardMD.",
+        "ar": 1.3333
       }
     },
     {

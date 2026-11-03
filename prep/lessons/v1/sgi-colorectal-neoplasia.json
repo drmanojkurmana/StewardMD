@@ -9,42 +9,11 @@
       "tx": "The classical adenoma-carcinoma sequence, or chromosomal instability pathway, causes approximately eighty percent of sporadic colorectal cancers. Driven by the orderly sequential accumulation of somatic mutations, the initiation event is the biallelic inactivation of the **adenomatous polyposis coli** tumor suppressor gene located on chromosome **5**q21. Loss of APC impairs beta-catenin degradation, leading to nuclear accumulation and constitutive activation of c-MYC and cyclin D1.",
       "say": "The classical adenoma-carcinoma sequence, or chromosomal instability pathway, causes approximately eighty percent of sporadic colorectal cancers. Driven by the orderly sequential accumulation of somatic mutations, the initiation event is the biallelic inactivation of the adenomatous polyposis coli tumor suppressor gene located on chromosome 5q21. Loss of APC impairs beta-catenin degradation, leading to nuclear accumulation and constitutive activation of c-MYC and cyclin D1.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Biallelic APC mutation on 5q21 (adenoma initiation)"
-          },
-          {
-            "id": "b",
-            "label": "Activating KRAS mutation on 12p12 (polyp growth)"
-          },
-          {
-            "id": "c",
-            "label": "Loss of 18q SMAD4 / DPC4 (tubulovillous progression)"
-          },
-          {
-            "id": "d",
-            "label": "Inactivation of TP53 on 17p13 (invasive adenocarcinoma)"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "early adenoma formation"
-          ],
-          [
-            "b",
-            "c",
-            "intermediate adenoma dysplasia"
-          ],
-          [
-            "c",
-            "d",
-            "malignant conversion"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/colorectal-cancer-fig1.webp",
+        "alt": "Diagram of the colon showing a right sided caecal mass and a left sided apple core narrowing of the descending colon.",
+        "caption": "Right sided colonic mass and left sided apple core narrowing. Credit: StewardMD.",
+        "ar": 1.8349
       }
     },
     {
@@ -169,25 +138,11 @@
       "tx": "Classical **familial adenomatous polyposis** is an autosomal dominant syndrome resulting from germline mutations in the APC gene on chromosome 5q21. It is defined clinically by the development of hundreds to thousands of colorectal adenomatous polyps, traditionally exceeding a diagnostic threshold of at least **100** adenomas. Without prophylactic surgical intervention, the lifetime risk of developing invasive colorectal adenocarcinoma approaches **100%** by the fourth to fifth decade of life.",
       "say": "Classical familial adenomatous polyposis is an autosomal dominant syndrome resulting from germline mutations in the APC gene on chromosome 5q21. It is defined clinically by the development of hundreds to thousands of colorectal adenomatous polyps, traditionally exceeding a diagnostic threshold of at least 100 adenomas. Without prophylactic surgical intervention, the lifetime risk of developing invasive colorectal adenocarcinoma approaches 100 percent by the fourth to fifth decade of life.",
       "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Classical FAP",
-          "points": [
-            "Gene: Germline APC mutation (5q21)",
-            "Polyp burden: > 100 adenomatous polyps (often > 1000)",
-            "Onset: Second to third decade of life",
-            "Cancer penetrance: 100% by age 40 without colectomy"
-          ]
-        },
-        "right": {
-          "title": "Attenuated FAP (AFAP)",
-          "points": [
-            "Gene: APC mutations at 5' or 3' ends / MUTYH biallelic",
-            "Polyp burden: 10 to 99 adenomatous polyps",
-            "Onset: Later onset (fourth to fifth decade)",
-            "Cancer penetrance: Elevated (~70%), delayed presentation"
-          ]
-        }
+        "kind": "image",
+        "src": "v1/kb/media/familial-adenomatous-polyposis-fig1.webp",
+        "alt": "Panel of familial adenomatous polyposis findings: carpeted colorectal polyps, duodenal and gastric polyps, an adenoma histology field, CHRPE, an osteoma, and a desmoid.",
+        "caption": "Familial adenomatous polyposis: colorectal carpet, duodenal adenomas, CHRPE, osteoma, and desmoid. Credit: StewardMD.",
+        "ar": 1.8349
       }
     },
     {
