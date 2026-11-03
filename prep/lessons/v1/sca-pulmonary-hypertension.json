@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "sca-pulmonary-hypertension",
+ "subject": "ss-cardiology",
+ "title": "Pulmonary hypertension: classification, invasive hemodynamics and targeted pathway therapies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Pulmonary hypertension** is defined invasively by right heart catheterization as a mean pulmonary arterial pressure > 20 mmHg at rest, lowered from the historical 25 mmHg threshold. Clinical classification stratifies patients into 5 clinical groups to guide distinct diagnostic and therapeutic pathways.",
+   "say": "Pulmonary hypertension is defined invasively by right heart catheterization as a resting mean pulmonary arterial pressure greater than twenty millimetres of mercury. The World Health Organization clinical classification stratifies patients into five distinct groups to direct specific diagnostic and therapeutic strategies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Group",
+     "Etiological Category",
+     "Targeted Medical Therapy"
+    ],
+    "rows": [
+     [
+      "Group 1",
+      "Pulmonary arterial hypertension (PAH)",
+      "Approved targeted pulmonary vasodilators"
+     ],
+     [
+      "Group 2",
+      "PH due to left heart disease (HFpEF/HFrEF/valves)",
+      "Treat underlying left heart disease; vasodilators harm"
+     ],
+     [
+      "Group 3",
+      "PH due to lung diseases and hypoxia (COPD/ILD)",
+      "Oxygen and pulmonary optimization; vasodilators harm"
+     ],
+     [
+      "Group 4",
+      "Chronic thromboembolic pulmonary hypertension",
+      "Pulmonary endarterectomy, balloon angioplasty, riociguat"
+     ],
+     [
+      "Group 5",
+      "PH with unclear or multifactorial mechanisms",
+      "Individualized therapy directed at primary disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pre-capillary pulmonary hypertension** (including Group 1 PAH, Group 3 lung disease, and Group 4 CTEPH) requires mean PAP > 20 mmHg, pulmonary capillary wedge pressure <= 15 mmHg, and pulmonary vascular resistance > 2 Wood units on resting right heart catheterization, confirming isolated pulmonary vascular remodeling without left heart congestion.",
+   "say": "Pre-capillary pulmonary hypertension, encompassing pulmonary arterial hypertension and chronic thromboembolic disease, requires a resting mean pulmonary pressure over 20 millimetres of mercury, a pulmonary capillary wedge pressure up to 15, and pulmonary vascular resistance exceeding two Wood units. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hemodynamic Variable",
+     "Invasive Cutoff",
+     "Pathophysiologic Meaning"
+    ],
+    "rows": [
+     [
+      "Mean pulmonary artery pressure (mPAP)",
+      "> 20 mmHg",
+      "Defines the presence of pulmonary hypertension"
+     ],
+     [
+      "Pulmonary capillary wedge pressure (PCWP)",
+      "<= 15 mmHg",
+      "Excludes left ventricular elevated filling pressure"
+     ],
+     [
+      "Pulmonary vascular resistance (PVR)",
+      "> 2 Wood units",
+      "Confirms precapillary pulmonary arteriolar remodeling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Post-capillary pulmonary hypertension** due to left heart disease (Group 2) requires mean PAP > 20 mmHg and PCWP > 15 mmHg. It is subclassified into isolated post-capillary (IpcPH with PVR <= 2 Wood units) and combined post- and pre-capillary (CpcPH with PVR > 2 Wood units), reflecting secondary precapillary remodeling.",
+   "say": "Post-capillary pulmonary hypertension due to left heart disease requires mean pulmonary pressure over 20 millimetres of mercury with a wedge pressure exceeding 15. It is divided into isolated post-capillary with resistance up to two Wood units, and combined post- and pre-capillary when resistance exceeds two Wood units.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isolated Post-Capillary (IpcPH)",
+     "points": [
+      "PCWP > 15 mmHg, PVR <= 2 Wood units; passive retrograde transmission of elevated left atrial pressure alone."
+     ]
+    },
+    "right": {
+     "title": "Combined Post- and Pre-Capillary (CpcPH)",
+     "points": [
+      "PCWP > 15 mmHg, PVR > 2 Wood units; chronic retrograde venous hypertension triggers reactive arteriolar remodeling."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Endothelin receptor antagonists** (bosentan, ambrisentan, macitentan) block endothelin-1-mediated vasoconstriction, cellular proliferation, and vascular remodeling in pulmonary arterial hypertension. Ambrisentan selectively blocks ETA receptors, while bosentan and macitentan provide dual ETA and ETB receptor antagonism. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Endothelin receptor antagonists, including ambrisentan, bosentan, and macitentan, block endothelin-1-mediated vasoconstriction and vascular remodeling in pulmonary arterial hypertension. Ambrisentan selectively blocks ETA receptors, while bosentan and macitentan antagonize both ETA and ETB receptors. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Receptor Selectivity",
+     "Monitoring & Adverse Effects"
+    ],
+    "rows": [
+     [
+      "Ambrisentan",
+      "Selective ETA receptor antagonist",
+      "Peripheral edema, nasal congestion; low hepatotoxicity"
+     ],
+     [
+      "Bosentan",
+      "Dual ETA/ETB receptor antagonist",
+      "Monthly liver transaminase monitoring mandatory"
+     ],
+     [
+      "Macitentan",
+      "Dual ETA/ETB with high tissue penetration",
+      "Anemia, headache; no monthly liver monitoring required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phosphodiesterase-5 inhibitors** (sildenafil, tadalafil) and soluble guanylate cyclase stimulators (riociguat) enhance nitric oxide-cGMP vasodilation in PAH. Co-administration of PDE-5 inhibitors and riociguat is strictly contraindicated due to synergistic cGMP accumulation causing profound refractory systemic hypotension and syncope. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Phosphodiesterase-5 inhibitors such as sildenafil and tadalafil, along with the soluble guanylate cyclase stimulator riociguat, enhance nitric oxide-mediated cyclic GMP vasodilation in pulmonary arterial hypertension. Co-administration of PDE-5 inhibitors with riociguat is strictly contraindicated due to lethal hypotension. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PDE-5 Inhibitors",
+     "points": [
+      "Sildenafil and tadalafil prevent cyclic GMP degradation by vascular smooth muscle phosphodiesterase type 5."
+     ]
+    },
+    "right": {
+     "title": "Strict Contraindication",
+     "points": [
+      "Concomitant use of riociguat with PDE-5 inhibitors is contraindicated due to catastrophic systemic hypotension."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prostacyclin pathway agonists, including continuous intravenous **epoprostenol**, treprostinil, and the oral IP receptor agonist **selexipag**, induce direct pulmonary vasodilation and platelet anti-aggregation. Continuous intravenous epoprostenol remains the gold standard Class I therapy proven to improve survival in high-risk NYHA functional class IV PAH.",
+   "say": "Prostacyclin pathway agonists, including intravenous epoprostenol and the oral selective IP receptor agonist selexipag, induce potent pulmonary vasodilation and inhibit platelet aggregation. Continuous intravenous epoprostenol remains the only medical therapy proven to improve survival in high-risk class IV PAH. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Prostacyclin (PGI2) Deficiency"
+     },
+     {
+      "id": "n2",
+      "label": "IP Receptor Agonism"
+     },
+     {
+      "id": "n3",
+      "label": "Adenylate Cyclase / cAMP"
+     },
+     {
+      "id": "n4",
+      "label": "Vasodilation & Survival"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sotatercept** represents a first-in-class activin signaling inhibitor engineered as an activin receptor type IIA-Fc fusion protein. In the STELLAR trial, sotatercept restored biological balance between pro-proliferative activin and growth differentiation factors and antiproliferative BMPR2 signaling, substantially reducing pulmonary vascular resistance and improving exercise capacity.",
+   "say": "Sotatercept is a first-in-class activin signaling inhibitor engineered as an activin receptor type IIA-Fc fusion protein. Evaluated in the STELLAR trial, sotatercept rebalances pro-proliferative activin and antiproliferative BMPR2 signaling, significantly reducing pulmonary vascular resistance in PAH. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sotatercept Mechanism",
+     "points": [
+      "Traps activin A and growth factors; reverses pulmonary arteriolar hyperproliferation and vascular wall thickening."
+     ]
+    },
+    "right": {
+     "title": "STELLAR Trial Benefit",
+     "points": [
+      "Significant 6-minute walk distance increase, marked PVR reduction, and 84% reduction in death or clinical worsening."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chronic thromboembolic pulmonary hypertension** (CTEPH, Group 4) is diagnosed by ventilation-perfusion (V/Q) scintigraphy demonstrating mismatched segmental perfusion defects. Surgical **pulmonary endarterectomy** (PEA) under deep hypothermic circulatory arrest represents the potentially curative treatment of choice for surgically accessible proximal thromboembolic disease.",
+   "say": "Chronic thromboembolic pulmonary hypertension is diagnosed with ventilation-perfusion scanning demonstrating mismatched segmental perfusion defects. Surgical pulmonary endarterectomy under deep hypothermic circulatory arrest represents the potentially curative treatment of choice for accessible thromboembolic disease. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "V/Q Perfusion Mismatch"
+     },
+     {
+      "id": "n2",
+      "label": "Catheter Angiography"
+     },
+     {
+      "id": "n3",
+      "label": "Surgical Endarterectomy"
+     },
+     {
+      "id": "n4",
+      "label": "BPA / Riociguat (Inoperable)"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}
