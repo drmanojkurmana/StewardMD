@@ -4739,7 +4739,8 @@
 
     el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">' + backLabel + '</button>' +
         '<div class="dx-reader-brand"><strong>Knowledge Library</strong><span>Clinical disease reference</span></div><span class="dx-reader-spacer" aria-hidden="true"></span></div>' +
-      '<div class="dx-mgmt-body">' +
+      '<div class="kbr-sheet" aria-hidden="true"></div>' +
+      '<div class="dx-mgmt-body"><div class="kbr-read">' +
         '<section class="dx-reader-hero">' + kbBannerHTML() +
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         '<div class="dx-mgmt-sys">' + (system ? esc(system) + ' · ' : '') + (inf ? "Infective" : "Non-infective") + '</div></section>' +
@@ -4747,7 +4748,7 @@
         (window.SMD_BULLETINS ? SMD_BULLETINS.html(id) : '') +   // signed practice updates (bulletins.js; flag smd_kb_bulletins, default off)
         rd.glance + kbFigRow(name, rdMgmt, rd.body) +
         '<div class="dx-reader-content">' + (rd.body || '<p class="dx-sel-empty">No reference loaded for this disease.</p>') + '</div>' +
-      '</div>';
+      '</div></div>';
     kbDedupeReader(el);
     try { el.querySelectorAll("[data-act='fig-open']").forEach(function (b) { b.addEventListener("click", function () { if (window.SMD_FIG) window.SMD_FIG.openFig(b.getAttribute("data-f"), b.getAttribute("data-q"), b); }); }); } catch (e) {}
     try { kbWireJump(el); } catch (e) {}   // the chips are a convenience; never let them block the page
