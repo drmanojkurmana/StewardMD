@@ -74,7 +74,7 @@
         "kind": "compare",
         "left": {
           "title": "MASCC Score >= 21 (Low Risk)",
-          "items": [
+          "points": [
             "Low risk of severe medical complications (< 5%)",
             "Eligible for outpatient care after 4 hours of observation",
             "Oral ciprofloxacin (500 mg Q12H) + amoxicillin-clavulanate",
@@ -83,7 +83,7 @@
         },
         "right": {
           "title": "MASCC Score < 21 (High Risk)",
-          "items": [
+          "points": [
             "High risk of complications (septic shock, ICU transfer, death)",
             "Mandatory inpatient admission for intravenous antibiotics",
             "Inpatient monitoring for anticipated neutropenia duration > 7 days",
@@ -127,7 +127,7 @@
       }
     },
     {
-      "tx": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an **antipseudomonal beta-lactam** such as **piperacillin-tazobactam**, cefepime, or meropenem within 1 hour. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
+      "tx": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an **antipseudomonal beta-lactam** such as **piperacillin-tazobactam**, cefepime, or meropenem within 1 hour of presentation. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
       "say": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an antipseudomonal beta-lactam such as piperacillin-tazobactam, cefepime, or meropenem within 1 hour. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
       "vis": {
         "kind": "table",
@@ -218,7 +218,7 @@
         "kind": "compare",
         "left": {
           "title": "Posaconazole Prophylaxis (Delayed-Release)",
-          "items": [
+          "points": [
             "300 mg daily oral delayed-release tablets",
             "Broad mold coverage including Aspergillus and Mucorales",
             "Statistically significant reduction in all-cause mortality (p=0.04)",
@@ -227,7 +227,7 @@
         },
         "right": {
           "title": "Fluconazole Prophylaxis",
-          "items": [
+          "points": [
             "400 mg daily oral or intravenous administration",
             "Active only against Candida species (lacks Aspergillus activity)",
             "Ineffective in preventing invasive mould infections",
@@ -309,5 +309,6 @@
     "q_8e36b1f4380b",
     "q_3ab7ed6f9256",
     "q_0a2741014277"
-  ]
+  ],
+  "gen": "AI"
 }
