@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "snp-mpgn-c3-glomerulopathy",
+ "title": "MPGN and C3 glomerulopathy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Membranoproliferative** glomerulonephritis (MPGN) is a light microscopic histological pattern characterized by mesangial hypercellularity, endocapillary proliferation, and glomerular capillary wall remodeling showing duplication and 'tram-track' double contours. The image is histopathological features of membranoproliferative glomerulonephritis. The double contour is a new basement membrane under the endothelium.",
+   "say": "Membranoproliferative glomerulonephritis (MPGN) is a light microscopic histological pattern characterized by mesangial hypercellularity, endocapillary proliferation, and glomerular capillary wall remodeling showing duplication and 'tram-track' double contours. The image is histopathological features of membranoproliferative glomerulonephritis. The double contour is a new basement membrane under the endothelium.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/membranoproliferative-glomerulonephritis-fig1.webp",
+    "alt": "Histopathological features of membranoproliferative glomerulonephritis",
+    "caption": "Lobular architectural accentuation and mesangial hypercellularity in MPGN (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The modern immunofluorescence-based classification divides MPGN into **immune-complex** mediated MPGN (significant immunoglobulin and complement staining) versus complement-mediated MPGN (C3 dominant staining with absent or trace immunoglobulins). One side is C3 Glomerulopathy, and the other side is Immune-Complex MPGN. A key point is C3 intensity >= 2 orders above immunoglobulins.",
+   "say": "The modern immunofluorescence-based classification divides MPGN into immune-complex mediated MPGN (significant immunoglobulin and complement staining) versus complement-mediated MPGN (C3 dominant staining with absent or trace immunoglobulins). One side is C3 Glomerulopathy, and the other side is Immune-Complex MPGN. A key point is C3 intensity at least 2 orders above immunoglobulins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "C3 Glomerulopathy",
+     "points": [
+      "C3 intensity >= 2 orders above immunoglobulins",
+      "Absence of significant IgG, IgM, IgA",
+      "Alternative pathway complement hyperactivation"
+     ]
+    },
+    "right": {
+     "title": "Immune-Complex MPGN",
+     "points": [
+      "Prominent immunoglobulin staining",
+      "Equimolar or co-dominant C3 and C1q",
+      "Driven by chronic infections or autoimmune disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**C3 glomerulopathy** (C3G) is defined by immunofluorescence showing C3 intensity at least two orders of magnitude greater than any immunoglobulin staining (C3 intensity >= 2+ on a 0-to-3+ scale with negative or trace Ig). The image is electron microscopy of dense deposit disease showing ribbon-like intramembranous deposits.",
+   "say": "C3 glomerulopathy (C3G) is defined by immunofluorescence showing C3 intensity at least two orders of magnitude greater than any immunoglobulin staining (C3 intensity at least 2+ on a 0-to-3+ scale with negative or trace Ig). The image is electron microscopy of dense deposit disease showing ribbon-like intramembranous deposits.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/c3-glomerulopathy-fig1.webp",
+    "alt": "Electron microscopy of dense deposit disease showing ribbon-like intramembranous deposits",
+    "caption": "Continuous ribbon-like dense transformation of the lamina densa in dense deposit disease (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Dense deposit disease** (DDD) is distinguished from C3 glomerulonephritis (C3GN) by electron microscopy showing highly electron-dense, continuous ribbon-like osmiophilic transformation within the lamina densa of the glomerular basement membrane. The first step is C3NeF autoantibody binds C3bBb convertase. The next step is Inhibits factor H-mediated decay.",
+   "say": "Dense deposit disease (DDD) is distinguished from C3 glomerulonephritis (C3GN) by electron microscopy showing highly electron-dense, continuous ribbon-like osmiophilic transformation within the lamina densa of the glomerular basement membrane. The first step is C3NeF autoantibody binds C3bBb convertase. The next step is Inhibits factor H-mediated decay.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "C3NeF autoantibody binds C3bBb convertase"
+     },
+     {
+      "id": "f2",
+      "label": "Inhibits factor H-mediated decay"
+     },
+     {
+      "id": "f3",
+      "label": "Convertase enzyme half-life markedly prolonged"
+     },
+     {
+      "id": "f4",
+      "label": "Unchecked fluid-phase C3 cleavage and depletion"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f3",
+      "f4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**C3 nephritic factor** (C3NeF) is an IgG autoantibody directed against the alternative complement pathway C3 convertase (C3bBb), binding to and stabilizing the convertase against decay to produce continuous, uncontrolled fluid-phase C3 consumption. The paired value for Retinal drusen is Bruch membrane of retina.",
+   "say": "C3 nephritic factor (C3NeF) is an IgG autoantibody directed against the alternative complement pathway C3 convertase (C3bBb), binding to and stabilizing the convertase against decay to produce continuous, uncontrolled fluid-phase C3 consumption. The paired value for Retinal drusen is Bruch membrane of retina.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Extra-renal Manifestation",
+     "Anatomical Site",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Retinal drusen",
+      "Bruch membrane of retina",
+      "Subretinal neovascularization and vision loss"
+     ],
+     [
+      "Partial lipodystrophy",
+      "Facial and upper trunk adipose",
+      "Adipocyte lysis mediated by adipsin and C3NeF"
+     ],
+     [
+      "Low serum C3",
+      "Systemic circulation",
+      "Increased susceptibility to encapsulated bacteremia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune complex-mediated MPGN in adults requires rigorous clinical exclusion of chronic viral hepatitis (**hepatitis C** with or without type II mixed cryoglobulinemia), monoclonal gammopathy (MGRS), and systemic autoimmune diseases. The first step is Adult diagnosed with immune-complex MPGN. The next step is Screen HCV RNA, cryoglobulins, and serum free light chains.",
+   "say": "Immune complex-mediated MPGN in adults requires rigorous clinical exclusion of chronic viral hepatitis (hepatitis C with or without type II mixed cryoglobulinemia), monoclonal gammopathy (MGRS), and systemic autoimmune diseases. The first step is Adult diagnosed with immune-complex MPGN. The next step is Screen HCV RNA, cryoglobulins, and serum free light chains.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Adult diagnosed with immune-complex MPGN"
+     },
+     {
+      "id": "p2",
+      "label": "Screen HCV RNA, cryoglobulins, and serum free light chains"
+     },
+     {
+      "id": "p3",
+      "label": "Bone marrow biopsy to identify clonal dyscrasia"
+     },
+     {
+      "id": "p4",
+      "label": "Targeted clone-directed chemotherapy initiated"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acquired partial lipodystrophy (**Barraquer-Simons syndrome**) and bilateral retinal drusen are strong clinical extrarenal phenotypic associations specifically seen in patients with dense deposit disease. One side is Double Contours, and the other side is Underlying Triggers. Facial fat loss plus retinal drusen is the bedside clue to dense deposit disease.",
+   "say": "Acquired partial lipodystrophy (Barraquer-Simons syndrome) and bilateral retinal drusen are strong clinical extrarenal phenotypic associations specifically seen in patients with dense deposit disease. One side is Double Contours, and the other side is Underlying Triggers. Facial fat loss plus retinal drusen is the bedside clue to dense deposit disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Double Contours",
+     "points": [
+      "Visualized on Jones silver stain",
+      "Subendothelial extension of mesangial matrix",
+      "Neomembrane formation under endothelial cells"
+     ]
+    },
+    "right": {
+     "title": "Underlying Triggers",
+     "points": [
+      "Chronic endothelial cell injury",
+      "Chronic immune complex deposition",
+      "Thrombotic microangiopathy remodeling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Iptacopan**, an oral small-molecule factor B inhibitor targeting the alternative complement pathway, demonstrated significant reduction in proteinuria in patients with C3 glomerulopathy in the pivotal APPEAR-C3G clinical trial. One side is Terminal Blockade (Eculizumab), and the other side is Factor B Inhibition (Iptacopan).",
+   "say": "Iptacopan, an oral small-molecule factor B inhibitor targeting the alternative complement pathway, demonstrated significant reduction in proteinuria in patients with C3 glomerulopathy in the pivotal APPEAR-C3G clinical trial. One side is Terminal Blockade (Eculizumab), and the other side is Factor B Inhibition (Iptacopan).",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Terminal Blockade (Eculizumab)",
+     "points": [
+      "Inhibits C5 cleavage to C5b",
+      "Blocks membrane attack complex (C5b-9)",
+      "Variable and incomplete renal response"
+     ]
+    },
+    "right": {
+     "title": "Factor B Inhibition (Iptacopan)",
+     "points": [
+      "Blocks proximal alternative convertase",
+      "Proven efficacy in APPEAR-C3G trial",
+      "Robust proteinuria reduction and GFR stabilization"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 24",
+  "KDIGO Glomerular Diseases Guideline 2021",
+  "Kidney International Consensus Report on C3G 2013"
+ ]
+}

@@ -4980,3 +4980,5 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | son-tumour-markers-gen1.webp (R2) | Rising CEA aligns with lung and liver metastases. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | sca-ventricular-arrhythmias-scd-gen1.webp (R2) | Twisting torsades after prolonged QTc, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | son-net-gen1.webp (R2) | Receptor avid primary with liver and bone spread, Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sgi-eosinophilic-infectious-oesophagitis-gen1.webp (R2) | White Candida plaques on raw friable oesophageal lining. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| sgi-eosinophilic-infectious-oesophagitis-gen2.webp (R2) | Discrete yellow volcaniform ulcers with raised red edges. Illustration: StewardMD original. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |

@@ -1,211 +1,213 @@
 {
  "v": 1,
  "module": "snp-renal-physiology",
- "subject": "ss-nephrology",
- "title": "Renal physiology: filtration, feedback and tubular handling of sodium",
- "minutes": 7,
+ "title": "Renal physiology",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "The **glomerular filtration rate** (GFR) is the volume of plasma filtered per minute across the glomerular capillaries. Filtration is driven by Starling forces: capillary hydrostatic pressure favours filtration, while capillary oncotic pressure and Bowman space hydrostatic pressure oppose it. Filtration is restricted by size and by charge, the negatively charged glomerular basement membrane repelling anionic proteins such as albumin. In healthy adults the glomerular capillary hydrostatic pressure is about 55 mm Hg, which is the main driving force.",
-   "say": "The glomerular filtration rate is the volume of plasma filtered per minute across the glomerular capillaries. Filtration is driven by Starling forces. Capillary hydrostatic pressure favours filtration, while capillary oncotic pressure and Bowman space hydrostatic pressure oppose it. Filtration is restricted by size and by charge, because the negatively charged glomerular basement membrane repels anionic proteins such as albumin. In healthy adults the glomerular capillary hydrostatic pressure is about 55 mm Hg, which is the main driving force.",
+   "tx": "**Glomerular filtration rate** is determined by Starling forces across glomerular capillaries, where normal net ultrafiltration pressure of approximately 10 to 15 mmHg is driven by glomerular capillary hydrostatic pressure opposing plasma oncotic pressure and Bowman space hydrostatic pressure. The image is glomerular filtration barrier and Starling forces diagram.",
+   "say": "Glomerular filtration rate is determined by Starling forces across glomerular capillaries, where normal net ultrafiltration pressure of approximately 10 to 15 mmHg is driven by glomerular capillary hydrostatic pressure opposing plasma oncotic pressure and Bowman space hydrostatic pressure. The image is glomerular filtration barrier and Starling forces diagram.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-renal-physiology-fig1.webp",
+    "alt": "Glomerular filtration barrier and Starling forces diagram",
+    "caption": "Glomerular capillary Starling forces and filtration dynamics (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Tubuloglomerular feedback** operates via macula densa cells sensing sodium chloride delivery through apical NKCC2 cotransporters, releasing adenosine to constrict afferent arterioles and decrease GFR when distal tubular flow rises. The first step is Increased distal NaCl delivery. The next step is Macula densa NKCC2 sensing.",
+   "say": "Tubuloglomerular feedback operates via macula densa cells sensing sodium chloride delivery through apical NKCC2 cotransporters, releasing adenosine to constrict afferent arterioles and decrease GFR when distal tubular flow rises. The first step is Increased distal NaCl delivery. The next step is Macula densa NKCC2 sensing.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Hydrostatic pressure",
-      "sub": "about 55 mm Hg, favours filtration"
+      "id": "n1",
+      "label": "Increased distal NaCl delivery"
      },
      {
-      "id": "b",
-      "label": "Oncotic pressure",
-      "sub": "opposes filtration"
+      "id": "n2",
+      "label": "Macula densa NKCC2 sensing"
      },
      {
-      "id": "c",
-      "label": "Bowman hydrostatic",
-      "sub": "opposes filtration"
+      "id": "n3",
+      "label": "Adenosine release constricts afferent arteriole"
      },
      {
-      "id": "d",
-      "label": "Net filtration"
+      "id": "n4",
+      "label": "Glomerular filtration rate stabilizes"
      }
     ],
     "edges": [
      [
-      "a",
-      "d"
+      "n1",
+      "n2"
      ],
      [
-      "b",
-      "d",
-      "minus"
+      "n2",
+      "n3"
      ],
      [
-      "c",
-      "d",
-      "minus"
+      "n3",
+      "n4"
      ]
     ]
    }
   },
   {
-   "tx": "Renal blood flow is kept steady by **autoregulation**. The **myogenic response** is an intrinsic reaction of the afferent arteriole to stretch. The **tubuloglomerular feedback** (TGF) works through the macula densa, which senses sodium chloride delivered to the thick ascending limb. High delivery constricts the afferent arteriole and lowers GFR. Loop diuretics block NKCC2 and therefore blunt this feedback, a point often tested in exams.",
-   "say": "Renal blood flow is kept steady by autoregulation. The myogenic response is an intrinsic reaction of the afferent arteriole to stretch. Tubuloglomerular feedback works through the macula densa, which senses sodium chloride delivered to the thick ascending limb. High delivery constricts the afferent arteriole and lowers the glomerular filtration rate. Loop diuretics block the NKCC2 transporter and therefore blunt this feedback, a point often tested in exams.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "High NaCl at macula densa"
-     },
-     {
-      "id": "b",
-      "label": "Afferent arteriole constricts"
-     },
-     {
-      "id": "c",
-      "label": "GFR falls"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **renin-angiotensin-aldosterone system** (RAAS) starts when juxtaglomerular cells release renin in response to low renal perfusion pressure, macula densa signalling and sympathetic beta-1 stimulation. Renin cleaves angiotensinogen to angiotensin I. **ACE** removes two C-terminal amino acids to form angiotensin II. Angiotensin II constricts the efferent arteriole, stimulates aldosterone, and acts centrally to raise sympathetic drive. Circulating renin has a half-life of about 10 to 15 minutes.",
-   "say": "The renin angiotensin aldosterone system starts when juxtaglomerular cells release renin in response to low renal perfusion pressure, macula densa signalling and sympathetic beta-1 stimulation. Renin cleaves angiotensinogen to angiotensin I. ACE removes two C-terminal amino acids to form angiotensin II. Angiotensin II constricts the efferent arteriole, stimulates aldosterone, and acts centrally to raise sympathetic drive. Circulating renin has a half-life of about 10 to 15 minutes.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Step",
-     "Enzyme or agent",
-     "Product effect"
-    ],
-    "rows": [
-     [
-      "Renin release",
-      "Juxtaglomerular cells",
-      "Starts cascade"
-     ],
-     [
-      "Angiotensinogen cleavage",
-      "Renin",
-      "Angiotensin I"
-     ],
-     [
-      "C-terminal trimming",
-      "ACE",
-      "Angiotensin II"
-     ],
-     [
-      "Adrenal action",
-      "Angiotensin II",
-      "Aldosterone release"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Aldosterone** acts on principal cells of the collecting duct. It raises the apical abundance of the epithelial sodium channel (**ENaC**) and the basolateral Na/K ATPase, so sodium is retained and potassium is lost. In primary hyperaldosteronism, aldosterone is autonomous, so renin is suppressed. Resistant hypertension, defined as poor control on three drugs including a diuretic, is a formal indication to screen for primary hyperaldosteronism.",
-   "say": "Aldosterone acts on principal cells of the collecting duct. It raises the apical abundance of the epithelial sodium channel, called ENaC, and the basolateral Na/K ATPase, so sodium is retained and potassium is lost. In primary hyperaldosteronism, aldosterone is autonomous, so renin is suppressed. Resistant hypertension, defined as poor control on three drugs including a diuretic, is a formal indication to screen for primary hyperaldosteronism.",
+   "tx": "**Renal autoregulation** maintains renal blood flow and GFR relatively constant across mean arterial pressures ranging from 80 to 180 mmHg via myogenic tone and tubuloglomerular feedback. One side is Autoregulatory Range, and the other side is Outside Range. A key point is Mean arterial pressure 80 to 180 mmHg.",
+   "say": "Renal autoregulation maintains renal blood flow and GFR relatively constant across mean arterial pressures ranging from 80 to 180 mmHg via myogenic tone and tubuloglomerular feedback. One side is Autoregulatory Range, and the other side is Outside Range. A key point is Mean arterial pressure 80 to 180 mmHg.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Aldosterone effects",
+     "title": "Autoregulatory Range",
      "points": [
-      "Raises apical ENaC",
-      "Boosts basolateral Na/K ATPase",
-      "Sodium retained",
-      "Potassium lost"
+      "Mean arterial pressure 80 to 180 mmHg",
+      "Myogenic arteriolar stretch response",
+      "Maintains constant capillary flow"
      ]
     },
     "right": {
-     "title": "Primary hyperaldosteronism",
+     "title": "Outside Range",
      "points": [
-      "Renin suppressed",
-      "Aldosterone high",
-      "Screen if resistant hypertension"
+      "MAP below 80 leads to prerenal ischemia",
+      "MAP above 180 causes barotrauma",
+      "Loss of autoregulatory protection"
      ]
     }
    }
   },
   {
-   "tx": "The **countercurrent multiplier** builds the medullary osmotic gradient. The thick ascending limb pumps out sodium, potassium and chloride through NKCC2, leaving the interstitium hypertonic while the fluid stays dilute. The descending limb is permeable to water through aquaporins, allowing concentration. NCC in the distal convoluted tubule handles thiazide-sensitive sodium reabsorption. Proximal tubule reabsorbs about 65 percent of filtered sodium and water.",
-   "say": "The countercurrent multiplier builds the medullary osmotic gradient. The thick ascending limb pumps out sodium, potassium and chloride through NKCC2, leaving the interstitium hypertonic while the fluid stays dilute. The descending limb is permeable to water through aquaporins, allowing concentration. NCC in the distal convoluted tubule handles thiazide-sensitive sodium reabsorption. The proximal tubule reabsorbs about 65 percent of filtered sodium and water.",
+   "tx": "The **proximal convoluted tubule** reabsorbs approximately 65% to 70% of filtered sodium and water, primarily coupled to sodium-hydrogen antiporter 3 (NHE3) and apical sodium-glucose cotransporter 2 (SGLT2). The paired value for Proximal tubule is NHE3 and SGLT2 cotransporter. The paired value for Thick ascending limb is NKCC2 symporter.",
+   "say": "The proximal convoluted tubule reabsorbs approximately 65% to 70% of filtered sodium and water, primarily coupled to sodium-hydrogen antiporter 3 (NHE3) and apical sodium-glucose cotransporter 2 (SGLT2). The paired value for Proximal tubule is NHE3 and SGLT2 cotransporter. The paired value for Thick ascending limb is NKCC2 symporter.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Segment",
-     "Key transporter",
-     "Handling"
+     "Tubular Segment",
+     "Key Transporter",
+     "Reabsorption Share"
     ],
     "rows": [
      [
       "Proximal tubule",
-      "Na/H exchanger",
-      "About 65 percent reabsorbed"
-     ],
-     [
-      "Descending limb",
-      "Aquaporins",
-      "Water leaves"
+      "NHE3 and SGLT2 cotransporter",
+      "65% to 70% Na and water"
      ],
      [
       "Thick ascending limb",
-      "NKCC2",
-      "Sodium, potassium, chloride out"
+      "NKCC2 symporter",
+      "20% to 25% filtered Na"
      ],
      [
       "Distal convoluted tubule",
-      "NCC",
-      "Thiazide-sensitive sodium"
+      "NCC cotransporter",
+      "5% to 7% filtered Na"
      ]
     ]
    }
   },
   {
-   "tx": "Renal clearance quantifies handling. Clearance equals urine concentration times urine flow divided by plasma concentration. **Fractional excretion** compares the clearance of a solute with that of creatinine, and a clearance ratio above 1 against inulin signals net secretion. Creatinine is a practical GFR marker because it is produced steadily but is slightly secreted. Free water clearance estimates the excess water excreted beyond osmolar clearance, guiding dilution and concentration.",
-   "say": "Renal clearance quantifies handling. Clearance equals urine concentration times urine flow divided by plasma concentration. Fractional excretion compares the clearance of a solute with that of creatinine. A clearance ratio above 1 against inulin signals net tubular secretion. Creatinine is a practical marker of glomerular filtration rate because it is produced steadily but is slightly secreted. Free water clearance estimates the excess water excreted beyond osmolar clearance, guiding dilution and concentration.",
+   "tx": "The **thick ascending limb** of Henle generates the medullary hyperosmolar gradient via the apical NKCC2 cotransporter without water reabsorption, establishing the countercurrent multiplier mechanism. The image is renal countercurrent multiplier mechanism in the loop of Henle. The lumen stays dilute because this segment is impermeable to water.",
+   "say": "The thick ascending limb of Henle generates the medullary hyperosmolar gradient via the apical NKCC2 cotransporter without water reabsorption, establishing the countercurrent multiplier mechanism. The image is renal countercurrent multiplier mechanism in the loop of Henle. The lumen stays dilute because this segment is impermeable to water.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/snp-renal-physiology-fig1.webp",
-    "alt": "Diagram showing formulas for renal clearance, glomerular filtration rate (GFR), and fractional excretion, highlighting creatinine as a GFR marker.",
-    "caption": "Renal clearance formulas for GFR, fractional excretion, and creatinine",
-    "ar": 1.8349
+    "src": "v1/kb/media/renal-countercurrent-multiplier-and-adh-fig1.webp",
+    "alt": "Renal countercurrent multiplier mechanism in the loop of Henle",
+    "caption": "Medullary hyperosmolar gradient generation by the countercurrent multiplier (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The early **distal convoluted tubule** reabsorbs 5% to 7% of filtered sodium via the thiazide-sensitive sodium-chloride cotransporter NCC, while remaining impermeable to water. One side is Early Distal Tubule, and the other side is Physiological Consequence. Thiazides act here, so they waste sodium while the urine can still be concentrated.",
+   "say": "The early distal convoluted tubule reabsorbs 5% to 7% of filtered sodium via the thiazide-sensitive sodium-chloride cotransporter NCC, while remaining impermeable to water. One side is Early Distal Tubule, and the other side is Physiological Consequence. Thiazides act here, so they waste sodium while the urine can still be concentrated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Distal Tubule",
+     "points": [
+      "NCC cotransporter active",
+      "5% to 7% sodium reabsorbed",
+      "Strictly water impermeable"
+     ]
+    },
+    "right": {
+     "title": "Physiological Consequence",
+     "points": [
+      "Cortical diluting segment",
+      "Generates hypotonic tubular fluid",
+      "Inhibited by thiazide diuretics"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cortical** collecting duct principal cells mediate electrogenic sodium reabsorption via epithelial sodium channels (ENaC) stimulated by aldosterone, creating a lumen-negative potential driving potassium and proton secretion. The first step is Aldosterone binds mineralocorticoid receptor. The next step is ENaC channels insert into apical membrane.",
+   "say": "Cortical collecting duct principal cells mediate electrogenic sodium reabsorption via epithelial sodium channels (ENaC) stimulated by aldosterone, creating a lumen-negative potential driving potassium and proton secretion. The first step is Aldosterone binds mineralocorticoid receptor. The next step is ENaC channels insert into apical membrane.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Aldosterone binds mineralocorticoid receptor"
+     },
+     {
+      "id": "c2",
+      "label": "ENaC channels insert into apical membrane"
+     },
+     {
+      "id": "c3",
+      "label": "Electrogenic sodium influx occurs"
+     },
+     {
+      "id": "c4",
+      "label": "Lumen-negative voltage drives potassium excretion"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Free water clearance** is positive in diuresis when urine osmolality is lower than plasma osmolality, and negative during antidiuresis mediated by arginine vasopressin-induced aquaporin-2 translocation to principal cell apical membranes. One side is Water Diuresis, and the other side is Antidiuresis.",
+   "say": "Free water clearance is positive in diuresis when urine osmolality is lower than plasma osmolality, and negative during antidiuresis mediated by arginine vasopressin-induced aquaporin-2 translocation to principal cell apical membranes. One side is Water Diuresis, and the other side is Antidiuresis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Water Diuresis",
+     "points": [
+      "Low circulating vasopressin",
+      "Aquaporin-2 stored in vesicles",
+      "Positive free water clearance"
+     ]
+    },
+    "right": {
+     "title": "Antidiuresis",
+     "points": [
+      "Elevated vasopressin stimulation",
+      "Apical aquaporin-2 translocation",
+      "Negative free water clearance"
+     ]
+    }
    }
   }
  ],
- "quiz": [
-  "q_04e23acfc4f0",
-  "q_86aa15c8d363",
-  "q_5bd517458038"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Guyton and Hall Textbook of Medical Physiology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 50
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 1-3",
+  "Brenner and Rector The Kidney 11e Ch. 4-6",
+  "Harrison Principles of Internal Medicine 22e Ch. 310"
+ ]
 }
