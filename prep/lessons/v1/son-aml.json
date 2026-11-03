@@ -1,0 +1,307 @@
+{
+  "v": 1,
+  "module": "son-aml",
+  "subject": "ss-medical-oncology",
+  "title": "Acute myeloid leukaemia: diagnostic classification, targeted induction and consolidative transplant",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Establishing a definitive diagnosis of acute myeloid leukaemia relies on multiparameter bone marrow and peripheral blood examination. The established **Diagnostic cutoff** requires 20% or more **myeloblasts** in the aspirate or circulating blood. However, this blast percentage threshold is waived when recurring cytogenetic abnormalities are present, including core-binding factor translocations t(8;21), inv(16), or the promyelocytic fusion PML-RARA.",
+      "say": "Establishing a definitive diagnosis of acute myeloid leukaemia relies on multiparameter bone marrow and peripheral blood examination. The established Diagnostic cutoff requires 20% or more myeloblasts in the aspirate or circulating blood. However, this blast percentage threshold is waived when recurring cytogenetic abnormalities are present, including t(8;21), inv(16), or PML-RARA.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Standard Requirement",
+          "Exception to Rule"
+        ],
+        "rows": [
+          [
+            "Myeloblast Count",
+            "20% or more in marrow/blood",
+            "Waived if recurring genetics present"
+          ],
+          [
+            "Core Binding Factor",
+            "t(8;21)(q22;q22) RUNX1-RUNX1T1",
+            "AML diagnosed regardless of blast %"
+          ],
+          [
+            "Inv(16) / t(16;16)",
+            "CBFB-MYH11 rearrangement",
+            "AML diagnosed regardless of blast %"
+          ],
+          [
+            "APL Translocation",
+            "t(15;17)(q24.1;q21.2) PML-RARA",
+            "Medical emergency, immediate ATRA"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The European LeukemiaNet (**ELN 2022**) risk stratification categorizes disease into favourable, intermediate, and adverse risk tiers. The favourable category comprises **RUNX1-RUNX1T1**, CBFB-MYH11, mutated NPM1 without FLT3-ITD, and in-frame bZIP CEBPA mutations. The adverse category includes adverse cytogenetic abnormalities, mutated **TP53**, ASXL1, BCOR, EZH2, SF3B1, SRSF2, STAG2, U2AF1, ZRSR2, and RUNX1.",
+      "say": "The European LeukemiaNet ELN 2022 risk stratification categorizes disease into favourable, intermediate, and adverse risk tiers. The favourable category comprises RUNX1-RUNX1T1, CBFB-MYH11, mutated NPM1 without FLT3-ITD, and in-frame bZIP CEBPA mutations. The adverse category includes complex cytogenetics, mutated TP53, and secondary-type mutations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ELN 2022 Favourable Risk",
+          "points": [
+            "t(8;21) and inv(16) core-binding factor",
+            "NPM1-mutated without FLT3-ITD",
+            "bZIP in-frame CEBPA mutations",
+            "Chemotherapy consolidation sufficient"
+          ]
+        },
+        "right": {
+          "title": "ELN 2022 Adverse Risk",
+          "points": [
+            "TP53 mutations and complex karyotypes",
+            "Myelodysplasia-related gene mutations",
+            "Adverse translocations: inv(3), t(6;9)",
+            "Allogeneic transplant in CR1 indicated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For fit patients, standard **intensive induction** therapy follows the classical 7+3 regimen. Continuous infusion **cytarabine** at 100 to 200 mg/m2 daily is administered for 7 days, paired with an anthracycline, typically intravenous **daunorubicin** at 60 to 90 mg/m2 or **idarubicin** at 12 mg/m2 daily for the first 3 days. This intensive regimen achieves morphological complete remission in 60% to 80% of younger adults.",
+      "say": "For fit patients, standard intensive induction therapy follows the classical 7+3 regimen. Continuous infusion cytarabine at 100 to 200 mg/m2 daily is administered for 7 days, paired with an anthracycline, typically daunorubicin at 60 to 90 mg/m2 or idarubicin for the first 3 days. This intensive regimen produces complete remission in 60% to 80% of younger adults.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cyta",
+            "label": "Cytarabine (Days 1 to 7)",
+            "level": 1
+          },
+          {
+            "id": "anth",
+            "label": "Daunorubicin (Days 1 to 3)",
+            "level": 2
+          },
+          {
+            "id": "ind",
+            "label": "7+3 Intensive Induction",
+            "level": 3
+          },
+          {
+            "id": "cr",
+            "label": "Morphologic Complete Remission",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cyta",
+            "ind"
+          ],
+          [
+            "anth",
+            "ind"
+          ],
+          [
+            "ind",
+            "cr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Incorporating molecularly targeted agents during induction enhances curative potential in selected subsets. In the randomized **RATIFY trial**, adding the oral multi-kinase FLT3 inhibitor **Midostaurin** to standard 7+3 chemotherapy containing **cytarabine** and **daunorubicin** significantly prolonged overall survival in newly diagnosed FLT3-mutated AML. Midostaurin is administered on days 8 through 21 following completion of induction chemotherapy.",
+      "say": "Incorporating molecularly targeted agents during induction enhances curative potential in selected subsets. In the randomized RATIFY trial, adding the oral multi-kinase FLT3 inhibitor Midostaurin to standard 7+3 chemotherapy containing cytarabine and daunorubicin significantly prolonged overall survival in newly diagnosed FLT3-mutated disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Investigational Agent",
+          "Genomic Target",
+          "Survival Outcome"
+        ],
+        "rows": [
+          [
+            "RATIFY",
+            "Midostaurin + 7+3 Chemo",
+            "FLT3-ITD and FLT3-TKD",
+            "Significantly prolonged OS and EFS"
+          ],
+          [
+            "ALFA-0701",
+            "Gemtuzumab ozogamicin",
+            "CD33 positive blasts",
+            "Improved event-free survival in CBF"
+          ],
+          [
+            "VIALE-A",
+            "Venetoclax + Azacitidine",
+            "BCL-2 anti-apoptotic protein",
+            "Superior OS in older/unfit patients"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For patients experiencing relapsed or refractory disease harbouring FLT3 alterations, selective second-generation inhibitors offer meaningful salvage. **Gilteritinib** is an oral, highly selective inhibitor of both FLT3 internal tandem duplications and tyrosine kinase domain mutations. In the phase 3 **ADMIRAL** trial, gilteritinib monotherapy significantly improved objective response rates and overall survival compared to salvage cytotoxic chemotherapy.",
+      "say": "For patients experiencing relapsed or refractory disease harbouring FLT3 alterations, selective second-generation inhibitors offer meaningful salvage. Gilteritinib is an oral, highly selective inhibitor of both FLT3 internal tandem duplications and tyrosine kinase domain mutations. In the phase 3 ADMIRAL trial, gilteritinib monotherapy significantly improved objective response rates and overall survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral Gilteritinib",
+          "points": [
+            "Potent inhibitor of FLT3-ITD and TKD",
+            "Median OS 9.3 months in ADMIRAL",
+            "Outpatient oral daily administration"
+          ]
+        },
+        "right": {
+          "title": "Salvage Cytotoxic Chemo",
+          "points": [
+            "MEC or FLAG-IDA intensive salvage",
+            "Median OS 5.6 months in ADMIRAL",
+            "Prolonged hospitalization and severe sepsis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For older adults or individuals unfit for intensive induction, BCL-2 pathway inhibition is a transformative standard. In the landmark **VIALE-A** trial, combining the selective BCL-2 inhibitor **Venetoclax** with the hypomethylating agent **azacitidine** produced a complete remission rate of 66% and significantly prolonged overall survival compared to azacitidine monotherapy. Careful dose ramp-up and antimicrobial prophylaxis mitigate tumour lysis and prolonged myelosuppression.",
+      "say": "For older adults or individuals unfit for intensive induction, BCL-2 pathway inhibition is a transformative standard. In the landmark VIALE-A trial, combining the selective BCL-2 inhibitor Venetoclax with the hypomethylating agent azacitidine produced a complete remission rate of 66% and significantly prolonged overall survival compared to azacitidine alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bcl2",
+            "label": "Mitochondrial BCL-2 Dependency",
+            "level": 1
+          },
+          {
+            "id": "ven",
+            "label": "Oral Venetoclax (Ramp-up)",
+            "level": 2
+          },
+          {
+            "id": "aza",
+            "label": "Subcutaneous Azacitidine (Days 1-7)",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Superior Overall Survival (VIALE-A)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "bcl2",
+            "ven"
+          ],
+          [
+            "ven",
+            "os"
+          ],
+          [
+            "aza",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary leukaemia and myelodysplasia-related neoplasms display intrinsic chemoresistance mediated by efflux pumps. **CPX-351** is a dual-drug liposomal encapsulation of **cytarabine** and **daunorubicin** fixed at a **synergistic** 5:1 molar ratio. In randomized phase 3 testing, CPX-351 significantly improved overall survival and complete remission rates compared to standard 7+3 chemotherapy in patients aged 60 to 75 years with secondary or therapy-related AML.",
+      "say": "Secondary leukaemia and myelodysplasia-related neoplasms display intrinsic chemoresistance mediated by efflux pumps. CPX-351 is a dual-drug liposomal encapsulation of cytarabine and daunorubicin fixed at a synergistic 5:1 molar ratio. In randomized phase 3 testing, CPX-351 significantly improved overall survival compared to standard 7+3 chemotherapy in secondary disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "CPX-351 Liposomal",
+          "Standard 7+3 Infusion"
+        ],
+        "rows": [
+          [
+            "Formulation",
+            "Nano-scale liposome delivery",
+            "Free intravenous infusion"
+          ],
+          [
+            "Drug Ratio",
+            "Fixed 5:1 cytarabine:daunorubicin",
+            "Independent dosing schedules"
+          ],
+          [
+            "Target Indication",
+            "Therapy-related AML / AML-MRC",
+            "De novo acute myeloid leukaemia"
+          ],
+          [
+            "Transplant Rate",
+            "Higher bridge-to-transplant rate",
+            "Lower successful bridge rate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Consolidation strategy is determined by baseline cytogenetic and molecular risk categorization. Allogeneic **haematopoietic stem cell transplantation** performed in first **complete remission** is the consolidative standard of care for patients with intermediate-risk or adverse-risk disease. In contrast, patients with favourable-risk core-binding factor AML are managed with repetitive cycles of high-dose cytarabine consolidation, reserving transplantation for disease recurrence.",
+      "say": "Consolidation strategy is determined by baseline cytogenetic and molecular risk categorization. Allogeneic haematopoietic stem cell transplantation performed in first complete remission is the consolidative standard of care for intermediate-risk or adverse-risk disease. In contrast, patients with favourable-risk disease receive high-dose cytarabine consolidation, reserving transplant for relapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cr1",
+            "label": "Complete Remission 1",
+            "level": 1
+          },
+          {
+            "id": "risk",
+            "label": "ELN Risk Stratification",
+            "level": 2
+          },
+          {
+            "id": "allo",
+            "label": "Allogeneic HSCT in CR1",
+            "level": 3
+          },
+          {
+            "id": "cure",
+            "label": "Durable Graft-versus-Leukaemia",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cr1",
+            "risk"
+          ],
+          [
+            "risk",
+            "allo"
+          ],
+          [
+            "allo",
+            "cure"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 97 (Acute Myeloid Leukemia in Adults)",
+    "ELN 2022 Guidelines for AML (Blood 2022)",
+    "RATIFY Trial (NEJM)",
+    "VIALE-A Trial (NEJM)",
+    "ADMIRAL Trial (NEJM)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

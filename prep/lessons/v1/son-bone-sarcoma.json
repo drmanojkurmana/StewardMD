@@ -1,163 +1,307 @@
 {
- "v": 1,
- "module": "son-bone-sarcoma",
- "subject": "ss-medical-oncology",
- "title": "Bone sarcomas: osteosarcoma, Ewing sarcoma and chondrosarcoma",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Bone sarcomas are malignant mesenchymal tumours of bone. The three commonest in the exam are **osteosarcoma**, **Ewing sarcoma** and **chondrosarcoma**. Osteosarcoma favours the metaphysis of long bones in adolescents, while Ewing sarcoma favours the diaphysis and flat bones, such as the pelvis and ribs. Chondrosarcoma is an adult tumour with cartilage matrix and is generally chemoresistant, so surgery is the main treatment.",
-   "say": "Bone sarcomas are malignant mesenchymal tumours of bone. The three commonest in the exam are osteosarcoma, Ewing sarcoma and chondrosarcoma. Osteosarcoma favours the metaphysis of long bones in adolescents, while Ewing sarcoma favours the diaphysis and flat bones, such as the pelvis and ribs. Chondrosarcoma is an adult tumour with cartilage matrix and is generally chemoresistant, so surgery is the main treatment.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Osteosarcoma",
-     "Ewing sarcoma",
-     "Chondrosarcoma"
-    ],
-    "rows": [
-     [
-      "Typical age",
-      "Adolescents",
-      "Children and young adults",
-      "Adults"
-     ],
-     [
-      "Site",
-      "Metaphysis of long bones",
-      "Diaphysis, pelvis, ribs",
-      "Pelvis, long bones, ribs"
-     ],
-     [
-      "Key feature",
-      "Codman triangle, sunburst",
-      "Onion-skin periosteal reaction",
-      "Cartilage matrix, chemoresistant"
-     ],
-     [
-      "Main treatment",
-      "Neoadjuvant chemotherapy and surgery",
-      "Chemotherapy, local control, radiotherapy",
-      "Wide surgical resection"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Ewing sarcoma shows small round blue cells with diffuse membranous **CD99** positivity, but CD99 is non-specific. Definitive diagnosis needs molecular confirmation of the **t(11;22)(q24;q12)** translocation, which fuses EWSR1 with FLI1 to form the EWS-FLI1 fusion. The fusion protein acts as an aberrant transcription factor. Roughly 85 percent of cases carry this translocation.",
-   "say": "Ewing sarcoma shows small round blue cells with diffuse membranous CD99 positivity, but CD99 is non-specific. Definitive diagnosis needs molecular confirmation of the t(11;22) translocation at q24 and q12, which fuses EWSR1 with FLI1 to form the EWS-FLI1 fusion. The fusion protein acts as an aberrant transcription factor. Roughly 85 percent of cases carry this translocation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Small round blue cells"
-     },
-     {
-      "id": "b",
-      "label": "CD99 positive"
-     },
-     {
-      "id": "c",
-      "label": "Molecular test"
-     },
-     {
-      "id": "d",
-      "label": "t(11;22) confirmed"
-     },
-     {
-      "id": "e",
-      "label": "EWS-FLI1 transcription factor"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Osteosarcoma classically shows a **Codman triangle**, where the lifted periosteum is bridged by new bone at its edges, and a sunburst periosteal reaction. Ewing sarcoma instead shows an **onion-skin** periosteal reaction from layered new bone. Both tumours are aggressive and destructive, so imaging must be read alongside histology before treatment begins.",
-   "say": "Osteosarcoma classically shows a Codman triangle, where the lifted periosteum is bridged by new bone at its edges, and a sunburst periosteal reaction. Ewing sarcoma instead shows an onion-skin periosteal reaction from layered new bone. Both tumours are aggressive and destructive, so imaging must be read alongside histology before treatment begins.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-bone-sarcoma-fig1.webp",
-    "alt": "Two X-rays showing classic bone sarcoma periosteal reactions: sunburst and Codman triangle for osteosarcoma, and onion-skin for Ewing sarcoma.",
-    "caption": "Classic periosteal reactions in osteosarcoma and Ewing sarcoma",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Osteosarcoma is treated with **neoadjuvant chemotherapy** before **limb-salvage surgery**, followed by **adjuvant chemotherapy** where indicated. The response is judged on the resected specimen. The degree of **tumour necrosis** is the strongest prognostic factor. Less than 90 percent necrosis indicates a poor response, whereas 90 percent or more necrosis indicates a good response and helps guide further treatment decisions.",
-   "say": "Osteosarcoma is treated with neoadjuvant chemotherapy before limb-salvage surgery, followed by adjuvant chemotherapy where indicated. The response is judged on the resected specimen. The degree of tumour necrosis is the strongest prognostic factor. Less than 90 percent necrosis indicates a poor response, whereas 90 percent or more necrosis indicates a good response and helps guide further treatment decisions.",
-   "vis": null
-  },
-  {
-   "tx": "Ewing sarcoma treatment uses the **VDC/IE** alternating regimen: vincristine, doxorubicin and cyclophosphamide alternate with ifosfamide and etoposide. Local control can be by surgery or radiotherapy. Surgery is preferred for expendable bones such as the ribs or fibula to avoid growth and secondary cancer problems. Serum LDH is measured at diagnosis for prognosis.",
-   "say": "Ewing sarcoma treatment uses the VDC/IE alternating regimen: vincristine, doxorubicin and cyclophosphamide alternate with ifosfamide and etoposide. Local control can be by surgery or radiotherapy. Surgery is preferred for expendable bones such as the ribs or fibula to avoid growth and secondary cancer problems. Serum LDH is measured at diagnosis for prognosis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Ewing sarcoma local control",
-     "points": [
-      "Surgery for ribs or fibula",
-      "Radiotherapy where surgery is unsafe",
-      "Avoids growth and secondary cancer issues"
-     ]
+  "v": 1,
+  "module": "son-bone-sarcoma",
+  "subject": "ss-medical-oncology",
+  "title": "Bone sarcomas: osteosarcoma, Ewing sarcoma and chondrosarcoma",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Primary bone malignancy displays distinctive anatomical predispositions and biological behaviors. **Osteosarcoma** typically arises in the metaphysis of adolescent long bones, defined histologically by malignant mesenchymal spindle cells producing immature osteoid matrix. Classical radiological hallmarks include periosteal elevation forming **Codman triangle**, aggressive cortical breakthrough, and extensive cloud-like osteoblastic mineralisation with sunburst periosteal reaction extending into adjacent soft tissues.",
+      "say": "Primary bone malignancy displays distinctive anatomical predispositions and biological behaviors. Osteosarcoma typically arises in the metaphysis of adolescent long bones, defined histologically by malignant spindle cells producing immature osteoid matrix. Classical radiological hallmarks include periosteal elevation forming Codman triangle and sunburst periosteal reaction extending into adjacent soft tissues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Osteosarcoma Features",
+          "points": [
+            "Bimodal incidence: 10-20 yrs and >60 yrs (Paget)",
+            "Metaphyseal predilection (distal femur, proximal tibia)",
+            "Malignant osteoid production is diagnostic sine qua non",
+            "Codman triangle and sunburst periosteal reaction"
+          ]
+        },
+        "right": {
+          "title": "Ewing Sarcoma Features",
+          "points": [
+            "Peak incidence in children and young teens (5-15 yrs)",
+            "Diaphyseal or metadiaphyseal flat and long bones",
+            "Small round blue cell histology without matrix",
+            "Onion-skin lamellated multilayered periosteal reaction"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Ewing prognosis",
-     "points": [
-      "Around 20 percent metastatic at diagnosis",
-      "Metastatic 5-year survival near 30 percent",
-      "Raised LDH is a poor marker"
-     ]
+    {
+      "tx": "Neoadjuvant multi-agent systemic chemotherapy followed by definitive surgical resection forms the foundation of modern osteosarcoma management. Standard curative therapy for localized osteosarcoma is neoadjuvant and adjuvant **MAP chemotherapy** high-dose methotrexate with **leucovorin** rescue, doxorubicin, and cisplatin combined with limb-sparing surgical resection. Pathological tumour necrosis of 90% or greater in the resected specimen defines a **good histological response**.",
+      "say": "Neoadjuvant multi-agent systemic chemotherapy followed by definitive surgical resection forms the foundation of modern osteosarcoma management. Standard curative therapy for localized osteosarcoma is neoadjuvant and adjuvant MAP chemotherapy high-dose methotrexate with leucovorin rescue, doxorubicin, and cisplatin combined with limb-sparing surgical resection. Histological necrosis defines response.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biop",
+            "label": "Biopsy Confirmation of High-Grade Osteosarcoma",
+            "level": 1
+          },
+          {
+            "id": "neoadj",
+            "label": "Neoadjuvant MAP Chemotherapy (10 Weeks)",
+            "level": 2
+          },
+          {
+            "id": "surg",
+            "label": "Limb-Sparing En Bloc Resection with Clear Margins",
+            "level": 3
+          },
+          {
+            "id": "necrosis",
+            "label": "Histological Assessment: Good Response >= 90% Necrosis",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "biop",
+            "neoadj"
+          ],
+          [
+            "neoadj",
+            "surg"
+          ],
+          [
+            "surg",
+            "necrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Specific pathognomonic chromosomal translocations drive gene dysregulation in primitive neuroectodermal bone tumours. **Ewing sarcoma** is characterized by the reciprocal translocation **t(11;22)**(q24;q12) in approximately 85% to 90% of cases, creating the aberrantly functioning EWSR1-FLI1 chimeric transcription factor. On histological examination, tumour sheets comprise uniform small round blue cells with diastase-sensitive cytoplasmic glycogen demonstrating intense membranous CD99 MIC2 positivity.",
+      "say": "Specific pathognomonic chromosomal translocations drive gene dysregulation in primitive neuroectodermal bone tumours. Ewing sarcoma is characterized by the reciprocal translocation t(11;22) in approximately 85% to 90% of cases, creating the aberrantly functioning EWSR1-FLI1 chimeric transcription factor. Histological examination reveals uniform small round blue cells with intense membranous CD99 positivity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular Parameter",
+          "Ewing Sarcoma Characteristic",
+          "Diagnostic Utility"
+        ],
+        "rows": [
+          [
+            "Primary Translocation",
+            "t(11;22)(q24;q12) EWSR1-FLI1 fusion",
+            "Diagnostic confirmation via FISH or RT-PCR"
+          ],
+          [
+            "Variant Translocation",
+            "t(21;22)(q22;q12) EWSR1-ERG fusion",
+            "Occurs in approximately 10% of atypical cases"
+          ],
+          [
+            "Immunohistochemistry",
+            "Intense, diffuse membranous CD99 (MIC2)",
+            "Highly sensitive cell surface marker"
+          ],
+          [
+            "Histochemical Staining",
+            "Periodic acid-Schiff (PAS) positive",
+            "Demonstrates abundant intracytoplasmic glycogen"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intensifying chemotherapy delivery intervals improves curative outcomes in localized Ewing family tumours. The five-drug alternating **VDC/IE regimen** combines **vincristine**, **doxorubicin**, and **cyclophosphamide** alternating with **ifosfamide** and **etoposide**. In the randomized prospective AEWS0031 trial, administering chemotherapy every 2 weeks using **interval compression** with filgrastim support significantly improved event-free and overall survival compared to standard 3-week cycles without increasing cumulative toxicities.",
+      "say": "Intensifying chemotherapy delivery intervals improves curative outcomes in localized Ewing family tumours. The five-drug alternating VDC/IE regimen combines vincristine, doxorubicin, and cyclophosphamide alternating with ifosfamide and etoposide. In clinical trials, administering chemotherapy every 2 weeks using interval compression with filgrastim support significantly improved event-free and overall survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vdc",
+            "label": "Cycle A: Vincristine + Doxorubicin + Cyclophosphamide",
+            "level": 1
+          },
+          {
+            "id": "gcsf",
+            "label": "Filgrastim G-CSF Accelerated Hematologic Recovery",
+            "level": 2
+          },
+          {
+            "id": "compress",
+            "label": "Interval Compression to 2-Week Alternating Cycles",
+            "level": 3
+          },
+          {
+            "id": "ie",
+            "label": "Cycle B: Ifosfamide + Etoposide Alternate Infusion",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "vdc",
+            "gcsf"
+          ],
+          [
+            "gcsf",
+            "compress"
+          ],
+          [
+            "compress",
+            "ie"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cartilage-forming malignancies display intrinsic insensitivity to standard medical oncology modalities. **Chondrosarcoma** is an intrinsically chemoresistant and radioresistant malignancy characterized by abundant avascular extracellular matrix, slow replication kinetics, and expression of multidrug-resistance transport pumps. Wide **surgical excision** with negative margins remains the sole curative modality for localized conventional and dedifferentiated chondrosarcomas, as cytotoxic chemotherapy and photon radiotherapy fail to alter survival.",
+      "say": "Cartilage-forming malignancies display intrinsic insensitivity to standard medical oncology modalities. Chondrosarcoma is an intrinsically chemoresistant and radioresistant malignancy characterized by abundant avascular extracellular matrix, slow replication kinetics, and expression of multidrug-resistance transport pumps. Wide surgical excision with negative margins remains the sole curative modality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conventional Chondrosarcoma",
+          "points": [
+            "Dense, avascular hyaline chondroid extracellular matrix",
+            "Intrinsically chemoresistant and radioresistant",
+            "Overexpresses multidrug resistance transport proteins",
+            "Cure achieved exclusively through complete R0 resection"
+          ]
+        },
+        "right": {
+          "title": "Dedifferentiated / Mesenchymal",
+          "points": [
+            "High-grade bimorphic histology with spindle cell component",
+            "Mesenchymal variant displays HEY1-NCOA2 gene fusion",
+            "Mesenchymal component shows modest chemo responsiveness",
+            "Early haematogenous dissemination to pulmonary parenchyma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Metabolic oncogenic driver alterations represent novel therapeutic targets in central cartilaginous neoplasms. Somatic mutations in **IDH1 and IDH2** occur in up to 50% of central chondrosarcomas, producing the oncometabolite **2-hydroxyglutarate** 2-HG from alpha-ketoglutarate. Accumulation of 2-HG inhibits alpha-ketoglutarate-dependent histone demethylases and TET methylcytosine dioxygenases, leading to genome-wide DNA hypermethylation and impaired cellular differentiation, an actionable target for selective IDH inhibitors.",
+      "say": "Metabolic oncogenic driver alterations represent novel therapeutic targets in central cartilaginous neoplasms. Somatic mutations in IDH1 and IDH2 occur in up to 50% of central chondrosarcomas, producing the oncometabolite 2-hydroxyglutarate 2-HG from alpha-ketoglutarate. Accumulation of 2-HG inhibits histone demethylases, leading to DNA hypermethylation, an actionable target for selective IDH inhibitors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mut",
+            "label": "Somatic IDH1 / IDH2 Gain-of-Function Mutation",
+            "level": 1
+          },
+          {
+            "id": "neo",
+            "label": "Neomorphic Conversion of Alpha-KG to 2-HG",
+            "level": 2
+          },
+          {
+            "id": "tets",
+            "label": "Inhibition of TET Enzymes & Histone Demethylases",
+            "level": 3
+          },
+          {
+            "id": "hyper",
+            "label": "DNA Hypermethylation & Blocked Chondrocyte Maturation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mut",
+            "neo"
+          ],
+          [
+            "neo",
+            "tets"
+          ],
+          [
+            "tets",
+            "hyper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Isolated pulmonary recurrence represents a unique potentially curable oligometastatic state in sarcomas. **Pulmonary metastasectomy** achieved via complete surgical resection of isolated pulmonary metastases yields 5-year **post-relapse survival** rates of 30% to 40% in selected osteosarcoma patients. When all pulmonary nodules are anatomically resectable with adequate post-surgical respiratory reserve, repeated surgical thoracotomies or stereotactic ablative radiotherapy provide meaningful long-term disease-free intervals.",
+      "say": "Isolated pulmonary recurrence represents a unique potentially curable oligometastatic state in sarcomas. Pulmonary metastasectomy achieved via complete surgical resection of isolated pulmonary metastases yields 5-year post-relapse survival rates of 30% to 40% in selected osteosarcoma patients. When all nodules are anatomically resectable, repeated resections provide meaningful long-term disease-free intervals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favourable Metastasectomy Candidates",
+          "points": [
+            "Unilateral or limited bilateral discrete nodules",
+            "Prolonged disease-free interval (> 12 to 18 months)",
+            "Complete anatomical resectability confirmed on chest CT",
+            "Adequate baseline pulmonary spirometry reserve"
+          ]
+        },
+        "right": {
+          "title": "Unfavourable Relapse Characteristics",
+          "points": [
+            "Early relapse occurring during adjuvant MAP chemotherapy",
+            "Concomitant unresectable extrapulmonary or bone metastases",
+            "Extensive diffuse bilateral pleural or parenchymal seeding",
+            "Rapid tumour doubling kinetics indicating chemoresistance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Osteoclastic bone resorption driving osteolytic bone destruction is treatable with targeted monoclonal antibodies. **Giant cell tumour** of bone is characterized by neoplastic mononuclear stromal cells overexpressing **RANKL**, which recruits numerous reactive osteoclast-like multinucleated giant cells causing extensive bone lysis. Targeted therapy with **denosumab**, a human monoclonal antibody against RANKL, halts osteoclastogenesis, promotes dense bone remineralisation, and reduces tumour volume.",
+      "say": "Osteoclastic bone resorption driving osteolytic bone destruction is treatable with targeted monoclonal antibodies. Giant cell tumour of bone is characterized by neoplastic mononuclear stromal cells overexpressing RANKL, which recruits reactive osteoclast-like giant cells causing bone lysis. Targeted therapy with denosumab, a monoclonal antibody against RANKL, halts osteoclastogenesis and promotes bone remineralisation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Bone Sarcoma / Tumour",
+          "Target Axis",
+          "Therapeutic Agent",
+          "Clinical Impact"
+        ],
+        "rows": [
+          [
+            "Giant Cell Tumour of Bone",
+            "RANKL ligand neutralization",
+            "Denosumab (Subcutaneous)",
+            "Ablation of osteoclasts, cortical re-ossification"
+          ],
+          [
+            "High-Grade Osteosarcoma",
+            "Primary cytotoxic neoadjuvant",
+            "MAP (Methotrexate, Doxorubicin, Cisplatin)",
+            "90% necrosis threshold predicts survival"
+          ],
+          [
+            "Ewing Sarcoma",
+            "Interval-compressed cytotoxic",
+            "VDC/IE alternating 5-drug regimen",
+            "Improves event-free survival in localized disease"
+          ],
+          [
+            "Advanced Chondrosarcoma",
+            "Isocitrate dehydrogenase mutation",
+            "Ivosidenib (Targeted IDH1 inhibitor)",
+            "Disease stabilization in mutant central chondrosarcomas"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Giant cell tumour of bone is a **benign but locally aggressive** tumour that usually arises at the end of long bones near the knee. **Surgical curettage** with adjuvant local treatment is the mainstay, aiming to prevent recurrence. Imaging typically shows an eccentric lytic lesion reaching the subchondral bone. Malignant transformation is uncommon but recognised, particularly after radiotherapy. **Chondrosarcoma**, by contrast, is generally managed with **wide surgical excision**, as it responds poorly to chemotherapy and radiotherapy.",
-   "say": "Giant cell tumour of bone is a benign but locally aggressive tumour, usually found at the end of long bones near the knee. Surgical curettage with adjuvant local treatment is the mainstay, aiming to prevent recurrence. Imaging typically shows an eccentric lytic lesion reaching the subchondral bone. Malignant transformation is uncommon but recognised, particularly after radiotherapy. Chondrosarcoma, by contrast, is generally managed with wide surgical excision, because it responds poorly to chemotherapy and radiotherapy.",
-   "vis": null
+  ],
+  "quiz": [
+    "q_4982a94a7090",
+    "q_aef97a581b4c",
+    "q_7f7a44736fe2"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 87 (Sarcomas of Bone)",
+    "Bielack SS et al. Methotrexate, Doxorubicin, and Cisplatin (MAP) Plus Ifosfamide and Etoposide in Osteosarcoma (EURAMOS-1). JCO",
+    "Womer RB et al. Randomized controlled trial of interval-compressed chemotherapy for Ewing sarcoma (AEWS0031). JCO"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_4982a94a7090",
-  "q_aef97a581b4c",
-  "q_7f7a44736fe2"
- ],
- "src": [],
- "refs": [
-  "ESMO Clinical Practice Guidelines for bone sarcomas"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 33
- }
 }

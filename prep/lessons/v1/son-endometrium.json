@@ -1,0 +1,299 @@
+{
+  "v": 1,
+  "module": "son-endometrium",
+  "subject": "ss-medical-oncology",
+  "title": "Endometrial cancer: molecular classification, systemic immunotherapy and targeted therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The **TCGA molecular classification** revolutionized endometrial oncology by replacing purely morphological subtypes with four prognostic genomic subgroups. These four categories are **POLE ultramutated**, mismatch repair-deficient (dMMR), p53-abnormal (p53abn), and no specific molecular profile (NSMP). Incorporating this genomic classification into routine pathology reporting refines risk assessment, guiding adjuvant therapy escalation or de-escalation.",
+      "say": "The TCGA molecular classification revolutionized endometrial oncology by replacing purely morphological subtypes with four prognostic genomic subgroups. These four categories are POLE ultramutated, mismatch repair-deficient, p53-abnormal, and no specific molecular profile. Incorporating this classification refines risk assessment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subgroup",
+          "Defining Molecular Feature",
+          "Prognosis",
+          "Therapeutic Implication"
+        ],
+        "rows": [
+          [
+            "POLE ultramutated",
+            "POLE exonuclease domain mutation",
+            "Excellent",
+            "Omit adjuvant chemo/radiotherapy"
+          ],
+          [
+            "dMMR / MSI-H",
+            "MLH1/MSH2/MSH6/PMS2 loss",
+            "Intermediate",
+            "High sensitivity to anti-PD-1 agents"
+          ],
+          [
+            "p53-abnormal",
+            "TP53 missense/null mutation",
+            "Poor",
+            "Requires aggressive adjuvant chemo/RT"
+          ],
+          [
+            "NSMP",
+            "ER positive, no specific driver",
+            "Intermediate",
+            "Responsive to endocrine therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **POLE ultramutated** subgroup is characterized by pathogenic mutations within the **exonuclease domain** of DNA polymerase epsilon. These alterations disable enzymatic proofreading, generating an exceptionally elevated somatic mutational burden exceeding 100 mutations per megabase. Despite displaying high-grade histological architecture and vascular invasion, POLE-mutated tumours demonstrate an exceptionally favourable clinical prognosis with rare recurrence.",
+      "say": "The POLE ultramutated subgroup is characterized by pathogenic mutations within the exonuclease domain of DNA polymerase epsilon. These alterations disable enzymatic proofreading, generating an exceptionally elevated somatic mutational burden. Despite displaying high-grade histological architecture, POLE-mutated tumours demonstrate an exceptionally favourable clinical prognosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pole",
+            "label": "POLE Exonuclease Mutation",
+            "level": 1
+          },
+          {
+            "id": "tmb",
+            "label": "High Tumour Mutational Burden",
+            "level": 2
+          },
+          {
+            "id": "neo",
+            "label": "Abundant Immunogenic Neoantigens",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Excellent Progression-Free Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pole",
+            "tmb"
+          ],
+          [
+            "tmb",
+            "neo"
+          ],
+          [
+            "neo",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Frontline immunotherapy has yielded breakthrough results in advanced mismatch repair-deficient uterine cancer. In the phase 3 **RUBY trial**, adding the PD-1 inhibitor **dostarlimab** to systemic **carboplatin** and **paclitaxel** resulted in a 72% reduction in the risk of progression or death in dMMR/MSI-H advanced or recurrent endometrial cancer. The remarkable durability of response establishes chemo-immunotherapy as the standard first-line treatment regimen.",
+      "say": "Frontline immunotherapy has yielded breakthrough results in advanced mismatch repair-deficient uterine cancer. In the phase 3 RUBY trial, adding the PD-1 inhibitor dostarlimab to systemic carboplatin and paclitaxel resulted in a 72% reduction in progression or death in advanced disease. The durability of response makes chemo-immunotherapy the standard treatment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dostarlimab + Carboplatin-Paclitaxel",
+          "points": [
+            "72% reduction in progression or death in RUBY",
+            "Profound durable disease control in dMMR",
+            "New standard frontline regimen"
+          ]
+        },
+        "right": {
+          "title": "Carboplatin-Paclitaxel Alone",
+          "points": [
+            "Traditional cytotoxic chemotherapy doublet",
+            "Median PFS significantly shorter",
+            "Inferior long-term plateau on survival curve"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For patients with advanced **mismatch repair-proficient** (pMMR) tumours, targeted combination therapy provides proven survival prolongation. In the phase 3 **KEYNOTE-775** trial, combining the multi-kinase inhibitor **lenvatinib** with the PD-1 inhibitor **pembrolizumab** significantly improved progression-free and overall survival compared to chemotherapy. This combination represents the standard of care for pretreated pMMR advanced endometrial cancer.",
+      "say": "For patients with advanced mismatch repair-proficient tumours, targeted combination therapy provides proven survival prolongation. In the phase 3 KEYNOTE-775 trial, combining the multi-kinase inhibitor lenvatinib with the PD-1 inhibitor pembrolizumab significantly improved progression-free and overall survival compared to chemotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Arm",
+          "Regimen",
+          "Median Overall Survival",
+          "Key Toxicities"
+        ],
+        "rows": [
+          [
+            "Targeted doublet",
+            "Pembrolizumab + Lenvatinib",
+            "17.4 months",
+            "Hypertension, diarrhoea, fatigue"
+          ],
+          [
+            "Chemotherapy",
+            "Doxorubicin or Paclitaxel",
+            "12.0 months",
+            "Myelosuppression, alopecia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The established cytotoxic chemotherapy backbone for advanced **endometrial carcinoma** was defined by the **GOG-0209** phase 3 randomized non-inferiority trial. Systemic combination therapy with **carboplatin** target area under curve AUC 5 plus **paclitaxel** 175 mg/m2 infused intravenously every 3 weeks proved non-inferior in overall survival to three-drug TAP chemotherapy while causing substantially less neurotoxicity.",
+      "say": "The established cytotoxic chemotherapy backbone for advanced endometrial carcinoma was defined by the GOG-0209 phase 3 trial. Systemic combination therapy with carboplatin target area under curve 5 plus paclitaxel 175 mg/m2 infused every 3 weeks proved non-inferior in overall survival to three-drug TAP chemotherapy while causing substantially less toxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "reg",
+            "label": "Carboplatin AUC 5 + Paclitaxel 175",
+            "level": 1
+          },
+          {
+            "id": "gog",
+            "label": "GOG-0209 Protocol (3-weekly)",
+            "level": 2
+          },
+          {
+            "id": "resp",
+            "label": "Equivalent Efficacy to TAP",
+            "level": 3
+          },
+          {
+            "id": "tox",
+            "label": "Reduced Neurologic Toxicity",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "reg",
+            "gog"
+          ],
+          [
+            "gog",
+            "resp"
+          ],
+          [
+            "resp",
+            "tox"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adjuvant treatment for stage 3 or high-risk endometrial cancer balances local pelvis control against distant metastatic prevention. In the randomized **PORTEC-3** trial, combined adjuvant **chemoradiotherapy** consisting of external beam pelvic radiation with concurrent cisplatin followed by adjuvant carboplatin-paclitaxel significantly improved overall and failure-free survival compared to pelvic radiation therapy alone.",
+      "say": "Adjuvant treatment for high-risk endometrial cancer balances local pelvis control against distant metastatic prevention. In the randomized PORTEC-3 trial, combined adjuvant chemoradiotherapy consisting of pelvic radiation with concurrent chemotherapy significantly improved overall and failure-free survival compared to radiation therapy alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Combined Chemoradiotherapy (PORTEC-3)",
+          "points": [
+            "Pelvic radiation + concurrent and adjuvant chemo",
+            "Statistically significant OS benefit in stage 3",
+            "Reduces distant systemic recurrence"
+          ]
+        },
+        "right": {
+          "title": "Pelvic Radiotherapy Alone",
+          "points": [
+            "External beam radiotherapy to pelvis",
+            "Controls pelvic locoregional recurrence",
+            "Fails to address distant micrometastases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Uterine serous carcinoma** represents an aggressive subtype exhibiting ubiquitous somatic **TP53** alterations and high rates of recurrence. Approximately 30% of serous tumours display **HER2 amplification** or overexpression. Adding trastuzumab to standard carboplatin and paclitaxel chemotherapy yields a significant progression-free and overall survival benefit in advanced HER2-positive uterine serous carcinoma, making routine HER2 testing mandatory.",
+      "say": "Uterine serous carcinoma represents an aggressive subtype exhibiting ubiquitous somatic TP53 alterations and high rates of recurrence. Approximately 30% of serous tumours demonstrate marked HER2 amplification. Adding trastuzumab to standard carboplatin and paclitaxel chemotherapy yields a significant survival benefit in advanced HER2-positive disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Uterine Serous Carcinoma",
+          "Endometrioid Carcinoma"
+        ],
+        "rows": [
+          [
+            "Genetics",
+            "TP53 mutations (>90%), HER2+ (30%)",
+            "PTEN, ARID1A, PIK3CA mutations"
+          ],
+          [
+            "Behavior",
+            "Early peritoneal dissemination",
+            "Myometrial invasion, lymphatics"
+          ],
+          [
+            "Therapy",
+            "Chemotherapy +/- Trastuzumab",
+            "Hormonal therapy, chemo if high risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Uterine carcinosarcoma**, previously designated as malignant mixed **Mullerian tumour**, is a true biphasic metaplastic carcinoma with sarcomatous differentiation. Because the sarcomatous elements derive clonally from the epithelial carcinoma component, management follows high-grade epithelial carcinoma paradigms. Treatment consists of surgical staging followed by systemic **carboplatin** plus **paclitaxel** chemotherapy rather than soft tissue sarcoma regimens.",
+      "say": "Uterine carcinosarcoma, previously designated as malignant mixed Mullerian tumour, is a true biphasic metaplastic carcinoma with sarcomatous differentiation. Because the sarcomatous elements derive clonally from the epithelial carcinoma component, management follows high-grade epithelial carcinoma paradigms. Treatment consists of surgical staging followed by systemic chemotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "met",
+            "label": "Epithelial Metaplasia",
+            "level": 1
+          },
+          {
+            "id": "biph",
+            "label": "Biphasic Carcinosarcoma",
+            "level": 2
+          },
+          {
+            "id": "surg",
+            "label": "Complete Surgical Staging",
+            "level": 3
+          },
+          {
+            "id": "chemo",
+            "label": "Carboplatin-Paclitaxel",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "met",
+            "biph"
+          ],
+          [
+            "biph",
+            "surg"
+          ],
+          [
+            "surg",
+            "chemo"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 55 (Endometrial Cancer)",
+    "RUBY Trial (NEJM 2023)",
+    "KEYNOTE-775 Trial (NEJM)",
+    "PORTEC-3 Trial (Lancet Oncology)",
+    "GOG-0209 Trial (JCO)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

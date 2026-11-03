@@ -1,123 +1,330 @@
 {
- "v": 1,
- "module": "son-antimetabolites",
- "subject": "ss-medical-oncology",
- "title": "Antimetabolites: Rescue, Toxicity and Key Interactions",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Leucovorin is a reduced folate, and it **potentiates fluorouracil** by stabilising the ternary complex formed by **thymidylate synthase**, FdUMP and the folate cofactor. This prolongs enzyme inhibition and blocks DNA thymidine synthesis. **Levoleucovorin** is the active L-isomer, so its dose is roughly half that of racemic leucovorin, for example 50 mg for 100 mg racemic. Oral leucovorin absorption saturates at higher doses, so intravenous dosing is preferred when vomiting is present.",
-   "say": "Leucovorin is a reduced folate that potentiates fluorouracil. It stabilises the ternary complex formed by thymidylate synthase, FdUMP and the folate cofactor, which prolongs enzyme inhibition and blocks thymidine synthesis. Levoleucovorin is the active L-isomer, so its dose is roughly half that of racemic leucovorin. For example, 100 mg of racemic leucovorin corresponds to about 50 mg of levoleucovorin. Oral absorption saturates at higher doses, so intravenous dosing is preferred when a patient is vomiting.",
-   "vis": null
-  },
-  {
-   "tx": "In high-dose **methotrexate** therapy, leucovorin rescues normal cells from toxicity. Delayed clearance with renal impairment requires **glucarpidase**, which rapidly hydrolyses methotrexate. Leucovorin is itself a glucarpidase substrate, so it must be withheld for at least 2 hours after the enzyme dose. Only then should rescue resume. Serial methotrexate levels guide how long rescue must continue.",
-   "say": "In high-dose methotrexate therapy, leucovorin rescues normal cells from toxicity. When clearance is delayed and renal function is impaired, glucarpidase is given to rapidly break down methotrexate. Leucovorin is itself a substrate of this enzyme, so it must be withheld for at least two hours after the glucarpidase dose. Only then should leucovorin rescue be restarted. Serial methotrexate levels guide how long rescue must continue.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "High-dose methotrexate"
-     },
-     {
-      "id": "b",
-      "label": "Delayed clearance or renal injury"
-     },
-     {
-      "id": "c",
-      "label": "Glucarpidase given"
-     },
-     {
-      "id": "d",
-      "label": "Wait at least 2 hours"
-     },
-     {
-      "id": "e",
-      "label": "Resume leucovorin rescue"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Cytarabine** toxicities are dose dependent and predictable. **Cytarabine syndrome** causes fever, rash and myalgia within hours of infusion and responds to corticosteroids. High-dose regimens cause **corneal toxicity**, so steroid eye drops are used for prophylaxis. **Cerebellar toxicity** presents as ataxia, dysarthria and sometimes seizures, and it requires stopping the drug and reviewing renal function.",
-   "say": "Cytarabine toxicities are dose dependent and predictable. Cytarabine syndrome causes fever, rash and myalgia within hours of infusion and responds to corticosteroids. High-dose regimens cause corneal toxicity, so steroid eye drops are used for prophylaxis. Cerebellar toxicity presents as ataxia, slurred speech and sometimes seizures. It requires stopping the drug and reviewing renal function before any further dosing.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Toxicity",
-     "Clinical clue",
-     "Practical response"
-    ],
-    "rows": [
-     [
-      "Cytarabine syndrome",
-      "Fever, rash, myalgia within hours",
-      "Corticosteroids"
-     ],
-     [
-      "Corneal toxicity",
-      "Irritation, punctate keratitis",
-      "Steroid eye drops"
-     ],
-     [
-      "Cerebellar toxicity",
-      "Ataxia, dysarthria, seizures",
-      "Stop drug, review renal function"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Fluorouracil** toxicity is largely determined by **dihydropyrimidine dehydrogenase** (DPD) activity. Patients with DPD deficiency need genotype or phenotype testing before treatment, and full dosing can be fatal. Severe diarrhoea requires withholding until it resolves, then dose reduction. Hand-foot syndrome is managed by grade, with dose reduction after recovery. Regular blood counts are mandatory during treatment.",
-   "say": "Fluorouracil toxicity is largely determined by dihydropyrimidine dehydrogenase activity. Patients with DPD deficiency should be tested before treatment, because full dosing can be fatal. Severe diarrhoea requires withholding fluorouracil until it resolves, followed by dose reduction. Hand-foot syndrome is managed by grade, with dose reduction after recovery. Regular blood counts are mandatory throughout treatment to detect myelosuppression early.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-antimetabolites-fig1.webp",
-    "alt": "Diagram illustrating how dihydropyrimidine dehydrogenase deficiency leads to severe fluorouracil toxicities like diarrhea and hand-foot syndrome.",
-    "caption": "DPD deficiency: a critical determinant of fluorouracil toxicity",
-    "ar": 1.8349
-   }
+  "v": 1,
+  "module": "son-antimetabolites",
+  "subject": "ss-medical-oncology",
+  "title": "Antimetabolites in clinical oncology: folate antagonists, pyrimidine analogues and toxicity rescue",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Folate analogues block single-carbon transfer reactions indispensable for de novo purine and thymidylate biosynthesis. **Methotrexate** competitively inhibits **dihydrofolate reductase** DHFR, depleting intracellular tetrahydrofolate and arresting cellular proliferation. High-dose methotrexate infusions require vigorous sodium bicarbonate urinary alkalinisation to maintain pH at or above 7.0, preventing tubular crystal precipitation.",
+      "say": "Folate analogues block single-carbon transfer reactions indispensable for de novo purine and thymidylate biosynthesis. Methotrexate competitively inhibits dihydrofolate reductase DHFR, depleting intracellular tetrahydrofolate and arresting cellular proliferation. High-dose methotrexate infusions require sodium bicarbonate alkalinisation to maintain pH above 7.0, preventing renal crystal precipitation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mtx",
+            "label": "Methotrexate Entry via RFC-1",
+            "level": 1
+          },
+          {
+            "id": "dhfr",
+            "label": "Inhibition of Dihydrofolate Reductase",
+            "level": 2
+          },
+          {
+            "id": "thf",
+            "label": "Depletion of Tetrahydrofolate (THF)",
+            "level": 3
+          },
+          {
+            "id": "arrest",
+            "label": "Purine and Thymidylate Synthesis Arrest",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mtx",
+            "dhfr"
+          ],
+          [
+            "dhfr",
+            "thf"
+          ],
+          [
+            "thf",
+            "arrest"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic mucosal and marrow rescue is achieved by direct pharmacological bypass of dihydrofolate reductase. **Leucovorin** calcium **folinic acid** bypasses dihydrofolate reductase inhibition, supplying reduced tetrahydrofolate directly to normal host tissues. Administered every 6 hours following high-dose methotrexate, leucovorin rescues non-malignant marrow and mucosal tissues until serum methotrexate falls safely below 0.05 micromolar.",
+      "say": "Systemic mucosal and marrow rescue is achieved by direct pharmacological bypass of dihydrofolate reductase. Leucovorin calcium folinic acid bypasses dihydrofolate reductase inhibition, supplying reduced tetrahydrofolate directly to normal host tissues. Administered every 6 hours following high-dose methotrexate, leucovorin rescues non-malignant marrow and mucosal tissues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leucovorin Rescue",
+          "points": [
+            "Bypasses inhibited dihydrofolate reductase",
+            "Enters cells via reduced folate carrier",
+            "Rescues normal marrow and gastrointestinal mucosa",
+            "Dosed by serum methotrexate nomogram"
+          ]
+        },
+        "right": {
+          "title": "Folic Acid Ineffectiveness",
+          "points": [
+            "Requires DHFR reduction to enter active folate pool",
+            "Completely blocked by circulating methotrexate",
+            "Ineffective as acute rescue agent",
+            "Used only for routine nutritional maintenance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pyrimidine synthesis inhibition requires specific intracellular metabolic activation. **5-Fluorouracil** is converted to FdUMP, which forms an inactive ternary complex with **thymidylate synthase** and 5,10-methylene-tetrahydrofolate. This stable ternary complex blocks deoxythymidine monophosphate production, arresting DNA replication. Concurrent administration of leucovorin stabilises this complex, significantly augmenting 5-fluorouracil cytotoxic efficacy in gastrointestinal malignancies.",
+      "say": "Pyrimidine synthesis inhibition requires specific intracellular metabolic activation. 5-Fluorouracil is converted to FdUMP, which forms an inactive ternary complex with thymidylate synthase and methylene-tetrahydrofolate. This stable ternary complex blocks deoxythymidine monophosphate production, arresting DNA replication. Leucovorin stabilises this complex, augmenting 5-fluorouracil cytotoxic efficacy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fu",
+            "label": "5-Fluorouracil Bioactivation",
+            "level": 1
+          },
+          {
+            "id": "fdump",
+            "label": "Formation of Active FdUMP",
+            "level": 2
+          },
+          {
+            "id": "ternary",
+            "label": "Ternary Complex with Thymidylate Synthase",
+            "level": 3
+          },
+          {
+            "id": "block",
+            "label": "Inhibition of Thymidine Synthesis & Cell Death",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "fu",
+            "fdump"
+          ],
+          [
+            "fdump",
+            "ternary"
+          ],
+          [
+            "ternary",
+            "block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral fluoropyrimidine prodrugs exploit differential tumour enzyme expression for selective activation. **Capecitabine** is an orally absorbed fluoropyrimidine carbamate converted into 5-FU sequentially by hepatic carboxylesterase, cytidine deaminase, and intratumoral **thymidine phosphorylase**. Because thymidine phosphorylase is overexpressed in neoplastic tissues, capecitabine generates higher active fluorouracil concentrations inside solid tumours compared to adjacent healthy tissues.",
+      "say": "Oral fluoropyrimidine prodrugs exploit differential tumour enzyme expression for selective activation. Capecitabine is an orally absorbed fluoropyrimidine carbamate converted into 5-FU sequentially by hepatic carboxylesterase, cytidine deaminase, and intratumoral thymidine phosphorylase. Because thymidine phosphorylase is overexpressed in neoplastic tissues, capecitabine generates higher 5-FU concentrations inside tumours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Metabolic Step",
+          "Enzymatic Catalyst",
+          "Primary Tissue Locus",
+          "Resulting Metabolite"
+        ],
+        "rows": [
+          [
+            "Step 1",
+            "Hepatic Carboxylesterase",
+            "Liver parenchyma",
+            "5-Deoxy-5-fluorocytidine (5-DFCR)"
+          ],
+          [
+            "Step 2",
+            "Cytidine Deaminase",
+            "Liver and tumour tissue",
+            "5-Deoxy-5-fluorouridine (5-DFUR)"
+          ],
+          [
+            "Step 3",
+            "Thymidine Phosphorylase",
+            "Solid tumour bed",
+            "Active cytotoxic 5-Fluorouracil (5-FU)"
+          ],
+          [
+            "Downstream",
+            "Dihydropyrimidine Dehydrogenase",
+            "Liver (catabolism)",
+            "Inactive DHFU excreted in urine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nucleoside analogues disrupt nucleic acid chain elongation and pool maintenance. **Gemcitabine** is a deoxycytidine analogue that undergoes intracellular phosphorylation to diphosphate and triphosphate forms, inhibiting **ribonucleotide reductase** and incorporating into replicating DNA. Ribonucleotide reductase inhibition depletes endogenous deoxyribonucleotide pools, which self-potentiates gemcitabine triphosphate incorporation into DNA, terminating nascent chain synthesis.",
+      "say": "Nucleoside analogues disrupt nucleic acid chain elongation and pool maintenance. Gemcitabine is a deoxycytidine analogue that undergoes intracellular phosphorylation to diphosphate and triphosphate forms, inhibiting ribonucleotide reductase and incorporating into replicating DNA. Ribonucleotide reductase inhibition depletes endogenous deoxyribonucleotide pools, terminating nascent chain synthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gem",
+            "label": "Gemcitabine Intracellular Entry",
+            "level": 1
+          },
+          {
+            "id": "dck",
+            "label": "Deoxycytidine Kinase Phosphorylation",
+            "level": 2
+          },
+          {
+            "id": "rnr",
+            "label": "dFdCDP Inhibits Ribonucleotide Reductase",
+            "level": 3
+          },
+          {
+            "id": "mask",
+            "label": "dFdCTP Incorporated (Masked Chain Termination)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "gem",
+            "dck"
+          ],
+          [
+            "dck",
+            "rnr"
+          ],
+          [
+            "rnr",
+            "mask"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Multitargeted antifolates inhibit multiple sequential enzymes across one-carbon metabolic pathways. **Pemetrexed** is a multi-targeted **antifolate** that potently inhibits thymidylate synthase, dihydrofolate reductase, and glycinamide ribonucleotide formyltransferase. Clinical administration mandates mandatory pre-treatment supplementation with daily oral folic acid and intramuscular vitamin B12 to prevent life-threatening haematologic and cutaneous toxicity in non-squamous non-small cell lung cancer.",
+      "say": "Multitargeted antifolates inhibit multiple sequential enzymes across one-carbon metabolic pathways. Pemetrexed is a multi-targeted antifolate that potently inhibits thymidylate synthase, dihydrofolate reductase, and glycinamide ribonucleotide formyltransferase. Clinical administration mandates mandatory supplementation with folic acid and vitamin B12 to prevent life-threatening haematologic and cutaneous toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pemetrexed Target Profile",
+          "points": [
+            "Inhibits thymidylate synthase (TS)",
+            "Inhibits dihydrofolate reductase (DHFR)",
+            "Inhibits GAR formyltransferase (GARFT)",
+            "Active in non-squamous NSCLC and mesothelioma"
+          ]
+        },
+        "right": {
+          "title": "Mandatory Pre-Medication",
+          "points": [
+            "Oral folic acid (350 to 1000 mcg daily)",
+            "Intramuscular vitamin B12 (1000 mcg q9w)",
+            "Oral dexamethasone for rash prophylaxis",
+            "Reduces severe neutropenia and mucositis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Deoxycytidine analogues require vigilant neurological surveillance during high-dose induction regimens. **Cytarabine** ara-C is incorporated into DNA as an antimetabolite, terminating chain elongation during S phase. High-dose cytarabine regimens exceed clearance capacity of cytidine deaminase in the central nervous system; high-dose therapy requires serial neurological examinations to detect irreversible **cerebellar toxicity**, manifesting as dysarthria, nystagmus, and dysmetria.",
+      "say": "Deoxycytidine analogues require vigilant neurological surveillance during high-dose induction regimens. Cytarabine ara-C is incorporated into DNA as an antimetabolite, terminating chain elongation during S phase. High-dose cytarabine regimens exceed clearance capacity of cytidine deaminase in the central nervous system, requiring serial neurological examinations to detect cerebellar toxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hdac",
+            "label": "High-Dose Cytarabine (>1 g/m2)",
+            "level": 1
+          },
+          {
+            "id": "cns",
+            "label": "Penetrates Blood-Brain Barrier",
+            "level": 2
+          },
+          {
+            "id": "purk",
+            "label": "Purkinje Cell Deposition in Cerebellum",
+            "level": 3
+          },
+          {
+            "id": "neuro",
+            "label": "Cerebellar Toxicity (Ataxia, Dysarthria)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hdac",
+            "cns"
+          ],
+          [
+            "cns",
+            "purk"
+          ],
+          [
+            "purk",
+            "neuro"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Halogenated purine analogues induce profound immune suppression through lymphocyte ablation. **Fludarabine** and **cladribine** are **purine nucleoside** analogues causing profound, protracted **CD4 T-lymphocyte** depletion that persists for months to years post-treatment. This profound lymphopenia creates high susceptibility to opportunistic pathogens, requiring routine trimethoprim-sulfamethoxazole prophylaxis against Pneumocystis jirovecii pneumonia and irradiated blood products to prevent fatal transfusion-associated graft-versus-host disease.",
+      "say": "Halogenated purine analogues induce profound immune suppression through lymphocyte ablation. Fludarabine and cladribine are purine nucleoside analogues causing profound, protracted CD4 T-lymphocyte depletion that persists for months to years post-treatment. This profound lymphopenia creates susceptibility to opportunistic pathogens, requiring routine prophylaxis against Pneumocystis jirovecii pneumonia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Purine Analogue",
+          "Mechanism of Action",
+          "Immunological Impact",
+          "Mandatory Prophylaxis"
+        ],
+        "rows": [
+          [
+            "Fludarabine",
+            "Inhibits DNA polymerase and ribonucleotide reductase",
+            "Severe CD4+ T-cell nadir (<200/uL)",
+            "TMP-SMX (PCP) + Acyclovir (VZV) + Irradiated blood"
+          ],
+          [
+            "Cladribine (2-CdA)",
+            "Resistant to adenosine deaminase, breaks DNA",
+            "Prolonged pan-lymphopenia",
+            "TMP-SMX prophylaxis until CD4 recovery"
+          ],
+          [
+            "Clofarabine",
+            "Inhibits DNA polymerase alpha and RNR",
+            "Profound myelo- and lymphosuppression",
+            "Broad antimicrobial and PCP prophylaxis"
+          ],
+          [
+            "Pentostatin",
+            "Potent transition-state inhibitor of ADA",
+            "Long-lasting immunosuppression",
+            "TMP-SMX and antiviral coverage"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_03861a8f5549",
+    "q_07b53c75e075",
+    "q_353c657c0624"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 12 (Antimetabolites)",
+    "Harrison 22e Ch. 74 (Principles of Cancer Treatment: Antimetabolites)",
+    "CPIC Guidelines for DPYD and TPMT/NUDT15"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_03861a8f5549",
-  "q_07b53c75e075",
-  "q_353c657c0624"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 26
- }
 }

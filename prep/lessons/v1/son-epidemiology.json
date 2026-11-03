@@ -1,184 +1,301 @@
 {
- "v": 1,
- "module": "son-epidemiology",
- "subject": "ss-medical-oncology",
- "title": "Cancer epidemiology, prevention and screening: a high-yield primer",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Cancer epidemiology** describes how often cancers occur and who gets them. Global estimates come from **GLOBOCAN**, which the International Agency for Research on Cancer publishes, while India relies on the **National Cancer Registry Programme** for population-based incidence data. Tobacco remains the single largest preventable cause of cancer, linked to lung, oral, laryngeal, oesophageal, bladder and pancreatic cancers. Know which data source answers which exam question.",
-   "say": "Cancer epidemiology describes how often cancers occur and who gets them. Global estimates come from GLOBOCAN, which the International Agency for Research on Cancer publishes, while India relies on the National Cancer Registry Programme for population based incidence data. Tobacco remains the single largest preventable cause of cancer, linked to lung, oral, laryngeal, oesophageal, bladder and pancreatic cancers. Know which data source answers which exam question.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Data source",
-     "What it gives",
-     "Exam cue"
-    ],
-    "rows": [
-     [
-      "GLOBOCAN",
-      "Worldwide incidence and mortality estimates",
-      "Global comparison"
-     ],
-     [
-      "National Cancer Registry Programme",
-      "Population based registry data for India",
-      "Indian incidence"
-     ],
-     [
-      "Tobacco exposure",
-      "Largest preventable risk factor",
-      "Smoking and smokeless forms"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Cervical cancer is caused by persistent infection with **high-risk HPV**, which accounts for over 99 percent of cases. The E6 oncoprotein degrades p53, while E7 inactivates retinoblastoma protein, removing key brakes on cell division. HPV types 16 and 18 cause most cancers. Types 6 and 11 are low-risk strains that cause anogenital warts rather than cancer. Squamous cell carcinoma is the commonest histological subtype.",
-   "say": "Cervical cancer is caused by persistent infection with high risk HPV, which accounts for over 99 percent of cases. The E6 oncoprotein degrades p53, while E7 inactivates retinoblastoma protein, removing key brakes on cell division. HPV types 16 and 18 cause most cancers. Types 6 and 11 are low risk strains that cause anogenital warts rather than cancer. Squamous cell carcinoma is the commonest histological subtype.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "High-risk HPV",
-     "points": [
-      "Types 16 and 18 dominate",
-      "E6 degrades p53",
-      "E7 inactivates pRB",
-      "Causes over 99 percent of cases"
-     ]
+  "v": 1,
+  "module": "son-epidemiology",
+  "subject": "ss-medical-oncology",
+  "title": "Cancer epidemiology, prevention and screening: national registries, viral oncogenesis and evidence-based screening",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "National population-based registries delineate the distinct geographic burden of malignant disease in India. Current **GLOBOCAN** and **National Cancer Registry** Programme reports demonstrate that breast adenocarcinoma is the leading cancer diagnosis among Indian women, followed by cervical and oral cavity cancers. In urban metros, breast cancer accounts for over 30% of female malignancies, whereas rural registries maintain a persistently high incidence of advanced cervical carcinoma.",
+      "say": "National population-based registries delineate the distinct geographic burden of malignant disease in India. Current GLOBOCAN and National Cancer Registry Programme reports demonstrate that breast adenocarcinoma is the leading cancer diagnosis among Indian women, followed by cervical and oral cavity cancers. In urban centres, breast cancer accounts for over 30% of female malignancies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Rank Order",
+          "Female Malignancies (India)",
+          "Male Malignancies (India)"
+        ],
+        "rows": [
+          [
+            "Rank 1",
+            "Breast adenocarcinoma (leading urban burden)",
+            "Oral cavity / Lip squamous carcinoma"
+          ],
+          [
+            "Rank 2",
+            "Cervical carcinoma (high rural burden)",
+            "Lung and bronchus carcinoma"
+          ],
+          [
+            "Rank 3",
+            "Oral cavity squamous carcinoma",
+            "Stomach / Oesophageal carcinoma"
+          ],
+          [
+            "Rank 4",
+            "Colorectal / Ovarian carcinoma",
+            "Colorectal carcinoma"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Low-risk HPV",
-     "points": [
-      "Types 6 and 11",
-      "Causes anogenital warts",
-      "Rarely causes cancer"
-     ]
+    {
+      "tx": "Carcinogen exposure patterns explain the dramatic predominance of aerodigestive tract malignancies across South Asia. **Tobacco consumption** in both smoked and **smokeless** forms such as gutka, khaini, and betel quid with areca nut is responsible for over 40% of all cancers in Indian men. Smokeless tobacco delivers massive nitrosamine concentrations directly to buccal mucosa, producing severe oral leukoplakia, submucous fibrosis, and invasive gingivobuccal sulcus carcinomas.",
+      "say": "Carcinogen exposure patterns explain the dramatic predominance of aerodigestive tract malignancies across South Asia. Tobacco consumption in both smoked and smokeless forms such as gutka and betel quid is responsible for over 40% of all cancers in Indian men. Smokeless tobacco delivers tobacco-specific nitrosamines directly to buccal mucosa, causing aggressive oral cancers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Smokeless Tobacco / Areca Nut",
+          "points": [
+            "Arecoline and tobacco nitrosamines (NNN/NNK)",
+            "Causes oral submucous fibrosis (premalignant)",
+            "Gingivobuccal sulcus carcinoma predominance",
+            "Frequent TP53 and NOTCH1 mutations"
+          ]
+        },
+        "right": {
+          "title": "Smoked Tobacco (Bidi / Cigarette)",
+          "points": [
+            "Polycyclic aromatic hydrocarbons and benzopyrenes",
+            "Squamous cell carcinoma and small cell lung cancer",
+            "Urinary bladder urothelial carcinoma",
+            "Synergistic oncogenic interaction with alcohol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Secondary prevention through population-based screening aims to identify high-grade cervical dysplasia prior to invasive transformation. **Cervical cancer screening** guidelines from the World Health Organization recommend primary **HPV DNA testing** every 5 years for women aged 30 to 49 years. In low-resource public healthcare infrastructure lacking molecular diagnostic facilities, visual inspection with acetic acid VIA provides an accessible point-of-care screening alternative.",
+      "say": "Secondary prevention through population-based screening aims to identify high-grade cervical dysplasia prior to invasive transformation. Cervical cancer screening guidelines from the World Health Organization recommend primary HPV DNA testing every 5 years for women aged 30 to 49 years. In resource-constrained settings, visual inspection with acetic acid VIA provides an accessible alternative.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "age30",
+            "label": "Women Aged 30 to 49 Years",
+            "level": 1
+          },
+          {
+            "id": "hpv",
+            "label": "Primary High-Risk HPV DNA Test",
+            "level": 2
+          },
+          {
+            "id": "pos",
+            "label": "HPV Positive Genotypes (16/18)",
+            "level": 3
+          },
+          {
+            "id": "colpo",
+            "label": "Colposcopy and Directed Biopsy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "age30",
+            "hpv"
+          ],
+          [
+            "hpv",
+            "pos"
+          ],
+          [
+            "pos",
+            "colpo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Routine radiological screening for breast malignancy substantially lowers stage at initial presentation. Screening **mammography** produces a proven 20% to 30% reduction in disease-specific mortality and is recommended biennially for **average-risk women** aged 50 to 74 years. For high-risk women with germline BRCA mutations or lifetime risk exceeding 20%, annual contrast-enhanced breast MRI screening begins at age 25 to 30 years alongside annual mammography.",
+      "say": "Routine radiological screening for breast malignancy substantially lowers stage at initial presentation. Screening mammography produces a proven 20% to 30% reduction in disease-specific mortality and is recommended biennially for average-risk women aged 50 to 74 years. For high-risk women with BRCA mutations, annual contrast-enhanced breast MRI begins at age 25 to 30 years.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Average-Risk Population",
+          "points": [
+            "Biennial screening mammography",
+            "Recommended ages 50 to 74 years",
+            "Two-view digital mammogram or tomosynthesis",
+            "Reduces breast cancer mortality by ~20%"
+          ]
+        },
+        "right": {
+          "title": "High-Risk (BRCA1/2 / Lifetime >20%)",
+          "points": [
+            "Annual breast contrast MRI starting age 25-30",
+            "Alternating with annual digital mammography",
+            "Screening initiated 10 years before earliest family case",
+            "High sensitivity overcomes dense fibroglandular tissue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Lung cancer screening using low-radiation tomographic imaging detects early, resectable peripheral pulmonary nodules. Annual **low-dose helical CT** screening in asymptomatic heavy smokers aged 50 to 80 years with at least a 20 pack-year history significantly reduces lung cancer mortality by 20% to 24%. These findings were definitively established in the landmark **NLST** and European NELSON randomized prospective screening trials.",
+      "say": "Lung cancer screening using low-radiation tomographic imaging detects early, resectable peripheral pulmonary nodules. Annual low-dose helical CT screening in asymptomatic heavy smokers aged 50 to 80 years with at least a 20 pack-year history significantly reduces lung cancer mortality by 20% to 24%. These benefits were proven in the landmark NLST and NELSON trials.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Study Population",
+          "Primary Screening Arm",
+          "Relative Mortality Reduction"
+        ],
+        "rows": [
+          [
+            "NLST Trial (US)",
+            "55-74 yrs, >=30 pack-years",
+            "Annual low-dose helical CT vs Chest X-ray",
+            "20% reduction in lung cancer deaths"
+          ],
+          [
+            "NELSON Trial (Europe)",
+            "50-74 yrs, >=15 cig/day x 25 yrs",
+            "Volume CT at increasing intervals",
+            "24% reduction in male lung cancer deaths"
+          ],
+          [
+            "USPSTF 2021 Update",
+            "50-80 yrs, >=20 pack-years",
+            "Annual low-dose CT until quit >15 yrs",
+            "Broadened eligibility for women and minorities"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Early detection of adenomatous polyps interrupts the classical adenoma-carcinoma sequence. Population-level **colorectal cancer screening** utilizing screening colonoscopy every 10 years or annual high-sensitivity **fecal immunochemical testing** FIT starting at age 45 years significantly reduces both cancer incidence and mortality. Detection of occult globin by FIT triggers definitive optical colonoscopy to resect dysplastic adenomas before malignant invasion occurs.",
+      "say": "Early detection of adenomatous polyps interrupts the classical adenoma-carcinoma sequence. Population-level colorectal cancer screening utilizing screening colonoscopy every 10 years or annual high-sensitivity fecal immunochemical testing FIT starting at age 45 years significantly reduces both cancer incidence and mortality. Positive FIT triggers optical colonoscopy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "age45",
+            "label": "Average Risk Adult Aged 45+",
+            "level": 1
+          },
+          {
+            "id": "fit",
+            "label": "Annual Fecal Immunochemical Test (FIT)",
+            "level": 2
+          },
+          {
+            "id": "pos",
+            "label": "Positive Occult Blood (>20 ug/g)",
+            "level": 3
+          },
+          {
+            "id": "colo",
+            "label": "Diagnostic Colonoscopy and Polypectomy",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "age45",
+            "fit"
+          ],
+          [
+            "fit",
+            "pos"
+          ],
+          [
+            "pos",
+            "colo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary prevention through immunization against oncogenic viruses eliminates virus-induced cellular transformation. Routine **HPV vaccination** targeting high-risk genotypes 16 and 18 provides robust **primary prevention** against cervical, anal, vulvovaginal, and oropharyngeal carcinomas. Administered as a single-dose or two-dose schedule in adolescent girls aged 9 to 14 years before sexual debut, vaccine efficacy against vaccine-type persistent HPV infection exceeds 95%.",
+      "say": "Primary prevention through immunization against oncogenic viruses eliminates virus-induced cellular transformation. Routine HPV vaccination targeting high-risk genotypes 16 and 18 provides robust primary prevention against cervical, anal, vulvovaginal, and oropharyngeal carcinomas. Administered to adolescent girls aged 9 to 14 years, vaccine efficacy against persistent infection exceeds 95%.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bivalent / Quadrivalent Vaccine",
+          "points": [
+            "Targets oncogenic HPV 16 and 18",
+            "Quadrivalent adds HPV 6 and 11 (genital warts)",
+            "Prevents ~70% of invasive cervical cancers",
+            "WHO endorses single-dose in 9-14 age cohort"
+          ]
+        },
+        "right": {
+          "title": "Nonavalent Vaccine (Gardasil-9)",
+          "points": [
+            "Adds high-risk types 31, 33, 45, 52, and 58",
+            "Expands coverage to ~90% of cervical cancers",
+            "Indicated for females and males aged 9 to 45",
+            "Cross-protective against anogenital intraepithelial neoplasia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic necroinflammation driven by viral persistence is an entirely preventable cause of primary liver malignancy. Universal infant **hepatitis B vaccination** blocks chronic hepatitis B virus infection, directly decreasing childhood and adult **hepatocellular carcinoma** incidence by over 75%. In parallel, curative direct-acting antiviral therapy against hepatitis C virus achieves sustained virological response exceeding 95%, sharply reducing downstream cirrhosis and malignant transformation.",
+      "say": "Chronic necroinflammation driven by viral persistence is an entirely preventable cause of primary liver malignancy. Universal infant hepatitis B vaccination blocks chronic hepatitis B virus infection, directly decreasing childhood and adult hepatocellular carcinoma incidence by over 75%. Curative direct-acting antivirals for hepatitis C achieve similar long-term protective effects.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hbv",
+            "label": "Neonatal Hepatitis B Vaccination",
+            "level": 1
+          },
+          {
+            "id": "antivir",
+            "label": "Direct-Acting Antivirals for HCV",
+            "level": 2
+          },
+          {
+            "id": "inflam",
+            "label": "Prevention of Chronic Necroinflammation",
+            "level": 3
+          },
+          {
+            "id": "hcc_drop",
+            "label": ">75% Reduction in HCC Incidence",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hbv",
+            "inflam"
+          ],
+          [
+            "antivir",
+            "inflam"
+          ],
+          [
+            "inflam",
+            "hcc_drop"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Cervical screening aims to find **precancerous lesions** before they become invasive. High-risk **HPV DNA testing** is a sensitive primary test where laboratory capacity exists, while **cytology** remains an established option in many high-income settings. The Indian national programme uses a low-cost **visual inspection** approach for women aged 30 to 65, with HPV testing added where available. **HPV vaccination** before sexual debut gives the strongest primary prevention.",
-   "say": "Cervical screening aims to find precancerous lesions before they become invasive. High-risk HPV DNA testing is a sensitive primary test where laboratory capacity exists, while cytology remains an established option in many high-income settings. The Indian national programme uses a low cost visual inspection approach for women aged 30 to 65, with HPV testing added where available. HPV vaccination before sexual debut gives the strongest primary prevention.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "Setting",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "Cytology",
-      "Established in many high-income settings",
-      "Cell-based screening at intervals"
-     ],
-     [
-      "HPV DNA",
-      "Where laboratory capacity exists",
-      "High-risk types, sensitive primary test"
-     ],
-     [
-      "Visual inspection",
-      "Indian national programme",
-      "Low-cost, women aged 30 to 65"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Mammography** screens women for breast cancer, and **low-dose CT** screens high-risk smokers for lung cancer. The NLST trial showed that low-dose CT reduced lung cancer mortality compared with chest radiography, and the NELSON trial supported this in Europe. For colorectal cancer, **colonoscopy** is the reference test that also allows polypectomy. **PSA screening** remains controversial because it causes overdiagnosis, so shared decision making is advised.",
-   "say": "Mammography screens women for breast cancer, and low dose CT screens high risk smokers for lung cancer. The NLST trial showed that low dose CT reduced lung cancer mortality compared with chest radiography, and the NELSON trial supported this in Europe. For colorectal cancer, colonoscopy is the reference test that also allows polypectomy. PSA screening remains controversial because it causes overdiagnosis, so shared decision making is advised.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Screening test",
-     "Target cancer",
-     "Key evidence"
-    ],
-    "rows": [
-     [
-      "Mammography",
-      "Breast",
-      "Reduces breast cancer mortality"
-     ],
-     [
-      "Low-dose CT",
-      "Lung, heavy smokers",
-      "NLST and NELSON trials"
-     ],
-     [
-      "Colonoscopy",
-      "Colorectum",
-      "Allows polypectomy"
-     ],
-     [
-      "PSA",
-      "Prostate",
-      "Overdiagnosis concerns"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Prevention also includes vaccination. **HPV vaccination** prevents infection with the high-risk types that cause most cervical cancers, and is best given before sexual debut. **Hepatitis B vaccination** prevents infection that can progress to **hepatocellular carcinoma**, so vaccinating at-risk groups reduces liver cancer over time. Together with tobacco control, these measures form the core of primary cancer prevention.",
-   "say": "Prevention also includes vaccination. HPV vaccination prevents infection with the high risk types that cause most cervical cancers, and is best given before sexual debut. Hepatitis B vaccination prevents infection that can progress to hepatocellular carcinoma, so vaccinating at risk groups reduces liver cancer over time. Together with tobacco control, these measures form the core of primary cancer prevention.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Vaccinate early"
-     },
-     {
-      "id": "b",
-      "label": "Prevent viral infection"
-     },
-     {
-      "id": "c",
-      "label": "Fewer cancers"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
+  ],
+  "quiz": [
+    "q_7e3eb709265b",
+    "q_babec8432929",
+    "q_180352f668df"
+  ],
+  "refs": [
+    "GLOBOCAN 2022 / National Cancer Registry Programme (NCRP) India",
+    "NLST Research Team. Reduced lung-cancer mortality with low-dose computed tomographic screening. NEJM 2011",
+    "WHO Guidelines for Screening and Treatment of Cervical Pre-cancer Lesions"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_7e3eb709265b",
-  "q_babec8432929",
-  "q_180352f668df"
- ],
- "src": [],
- "refs": [
-  "USPSTF Cervical Cancer Screening Recommendation",
-  "NLST trial, New England Journal of Medicine",
-  "NELSON trial, European lung screening study",
-  "GLOBOCAN, International Agency for Research on Cancer",
-  "National Cancer Registry Programme, India"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 37
- }
 }

@@ -1,0 +1,310 @@
+{
+  "v": 1,
+  "module": "son-tcell",
+  "subject": "ss-medical-oncology",
+  "title": "T cell and NK cell lymphomas: biology, histology and targeted systemic therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Peripheral T-cell lymphomas** comprise a heterogeneous group of aggressive lymphoid malignancies arising from mature **post-thymic** T-lymphocytes or natural killer cells. Neoplastic T-cells characteristically express pan-T-cell differentiation markers including CD2, CD3, CD5, and CD7, though frequent loss of one or more antigen markers aids diagnostic confirmation. Clonal T-cell receptor beta or gamma gene rearrangements confirm monoclonality in challenging cases.",
+      "say": "Peripheral T-cell lymphomas comprise a heterogeneous group of aggressive lymphoid malignancies arising from mature post-thymic T-lymphocytes or natural killer cells. Neoplastic T-cells characteristically express pan-T-cell markers including CD2, CD3, CD5, and CD7. Clonal T-cell receptor gene rearrangements confirm monoclonality in challenging cases.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Origin",
+          "Immunophenotype",
+          "Clinical Course"
+        ],
+        "rows": [
+          [
+            "PTCL-NOS",
+            "Mature post-thymic T-cell",
+            "CD2+, CD3+, CD4+ or CD8+",
+            "Aggressive, poor 5-year OS"
+          ],
+          [
+            "ALCL (ALK+)",
+            "Large lymphoid T-cell",
+            "CD30+, ALK protein+",
+            "Favourable with chemotherapy"
+          ],
+          [
+            "AITL",
+            "T-follicular helper cell",
+            "CD4+, PD-1+, CXCL13+, ICOS+",
+            "Autoimmune features, rash"
+          ],
+          [
+            "ENKTL (Nasal)",
+            "Natural killer / cytotoxic T",
+            "CD56+, cytotoxic granules, EBV+",
+            "Destructive midfacial necrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic **Anaplastic large cell** lymphoma is pathologically divided into ALK-positive and ALK-negative subtypes based on expression of the anaplastic lymphoma kinase. ALK-positive disease is driven by the recurrent t(2;5)(p23;q35) translocation fusing nucleophosmin to ALK, producing the oncogenic **NPM1-ALK** chimeric protein. ALK-positive patients present at a younger age and experience significantly superior five-year survival compared to ALK-negative individuals.",
+      "say": "Systemic Anaplastic large cell lymphoma is pathologically divided into ALK-positive and ALK-negative subtypes based on expression of anaplastic lymphoma kinase. ALK-positive disease is driven by the recurrent translocation producing the oncogenic NPM1-ALK protein. ALK-positive patients present at a younger age and experience superior five-year survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ALK-Positive ALCL",
+          "points": [
+            "t(2;5)(p23;q35) NPM1-ALK fusion",
+            "Younger patients (peak 2nd-3rd decade)",
+            "Favourable 5-year overall survival (70-80%)"
+          ]
+        },
+        "right": {
+          "title": "ALK-Negative ALCL",
+          "points": [
+            "Lacks ALK translocation; DUSP22/TP63 fusions",
+            "Older patient population (5th-6th decade)",
+            "Inferior 5-year survival requiring consolidation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Targeted antibody-drug conjugate therapy has transformed frontline management for CD30-expressing mature T-cell malignancies. In the landmark **ECHELON-2** trial, adding **Brentuximab vedotin** to cyclophosphamide, doxorubicin, and **prednisone** significantly prolonged progression-free and overall survival compared to traditional CHOP. This established BV-CHP as the preferred global standard of care for CD30-positive peripheral T-cell lymphomas and anaplastic large cell lymphomas.",
+      "say": "Targeted antibody-drug conjugate therapy has transformed frontline management for CD30-expressing mature T-cell malignancies. In the landmark ECHELON-2 trial, adding Brentuximab vedotin to cyclophosphamide, doxorubicin, and prednisone significantly prolonged progression-free and overall survival compared to CHOP. This established BV-CHP as the preferred global standard of care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cd30",
+            "label": "CD30 Expression >= 10%",
+            "level": 1
+          },
+          {
+            "id": "bvchp",
+            "label": "Brentuximab Vedotin + CHP",
+            "level": 2
+          },
+          {
+            "id": "echel2",
+            "label": "ECHELON-2 Trial Standard",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Significant OS Advantage",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cd30",
+            "bvchp"
+          ],
+          [
+            "bvchp",
+            "echel2"
+          ],
+          [
+            "echel2",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Angioimmunoblastic T-cell** lymphoma represents a distinct entity derived from neoplastic **follicular helper T cells**. Typical clinical hallmarks include generalized lymphadenopathy, constitutional B symptoms, pruritic morbilliform cutaneous rashes, polyclonal hypergammaglobulinemia, and autoimmune phenomena. Molecular sequencing uncovers recurrent somatic mutations in epigenetic and signaling genes including RHOA G17V, TET2, DNMT3A, and IDH2, providing biological rationale for hypomethylating agents.",
+      "say": "Angioimmunoblastic T-cell lymphoma represents a distinct entity derived from neoplastic follicular helper T cells. Typical clinical hallmarks include generalized lymphadenopathy, B symptoms, morbilliform rashes, polyclonal hypergammaglobulinemia, and autoimmune phenomena. Molecular sequencing uncovers recurrent somatic mutations in epigenetic regulators.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Angioimmunoblastic T-Cell Lymphoma",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Cell of Origin",
+            "T-follicular helper (TFH) lymphocyte",
+            "Expresses PD-1, CXCL13, CD10, BCL-6"
+          ],
+          [
+            "Clinical Signs",
+            "Lymphadenopathy, hepatosplenomegaly",
+            "Autoimmune hemolytic anemia common"
+          ],
+          [
+            "Laboratory",
+            "Polyclonal hypergammaglobulinemia",
+            "Positive direct Coombs test"
+          ],
+          [
+            "Genetics",
+            "RHOA G17V, TET2, DNMT3A mutations",
+            "High sensitivity to epigenetic therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Extranodal NK/T-cell** lymphoma, nasal type, is an aggressive, destructive malignancy predominantly localized to the midfacial upper aerodigestive tract. Pathogenesis is universally driven by clonal **Epstein-Barr virus** infection. Neoplastic cells express high levels of P-glycoprotein, causing intrinsic resistance to anthracyclines. Modern therapeutic regimens overcome multidrug resistance by incorporating L-**asparaginase** or pegaspargase alongside non-cross-resistant platinum agents and radiotherapy.",
+      "say": "Extranodal NK/T-cell lymphoma, nasal type, is an aggressive, destructive malignancy localized to the midfacial upper aerodigestive tract. Pathogenesis is universally driven by clonal Epstein-Barr virus infection. Neoplastic cells express high levels of P-glycoprotein. Modern therapeutic regimens overcome resistance by incorporating L-asparaginase alongside non-cross-resistant chemotherapy and radiotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ebv",
+            "label": "EBV-Driven Pathogenesis",
+            "level": 1
+          },
+          {
+            "id": "pgp",
+            "label": "P-Glycoprotein Expression",
+            "level": 2
+          },
+          {
+            "id": "aspar",
+            "label": "L-Asparaginase Regimens",
+            "level": 3
+          },
+          {
+            "id": "cure",
+            "label": "Durable Midfacial Remission",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ebv",
+            "pgp"
+          ],
+          [
+            "pgp",
+            "aspar"
+          ],
+          [
+            "aspar",
+            "cure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mycosis fungoides** represents the most prevalent primary cutaneous T-cell lymphoma, characterized by indolent evolution across cutaneous patches, indurated plaques, and eventual exophytic tumours. Histopathological examination demonstrates atypical epidermotropic T-lymphocytes lining the basal epidermis and forming intraepidermal clusters known as **Pautrier microabscesses**. Early patch-stage disease responds favourably to skin-directed therapies including topical corticosteroids, phototherapy, and localized radiation.",
+      "say": "Mycosis fungoides represents the most prevalent primary cutaneous T-cell lymphoma, characterized by indolent evolution across cutaneous patches, indurated plaques, and tumours. Histopathological examination demonstrates atypical epidermotropic T-lymphocytes forming intraepidermal clusters known as Pautrier microabscesses. Early disease responds favourably to skin-directed therapies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Mycosis Fungoides",
+          "points": [
+            "Patches and plaques confined to skin",
+            "Pautrier intraepidermal microabscesses",
+            "Managed with topical steroids and phototherapy"
+          ]
+        },
+        "right": {
+          "title": "Advanced / Transformed MF",
+          "points": [
+            "Exophytic tumour nodules and ulceration",
+            "Large cell transformation (CD30+)",
+            "Requires systemic therapy (Brentuximab/HDAC)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sezary syndrome** is the aggressive, leukemic variant of cutaneous T-cell lymphoma defined by a classic clinical triad: generalized pruritic erythroderma, diffuse peripheral lymphadenopathy, and circulating neoplastic T-lymphocytes. These circulating atypical mononuclear cells with highly folded, cerebriform nuclei are designated **Sezary cells**. Immunophenotypic flow cytometry demonstrates a characteristic CD4-predominant phenotype with frequent loss of CD7 and CD26 surface markers.",
+      "say": "Sezary syndrome is the aggressive, leukemic variant of cutaneous T-cell lymphoma defined by a classic clinical triad: generalized pruritic erythroderma, diffuse peripheral lymphadenopathy, and circulating neoplastic T-lymphocytes. These circulating atypical cells with highly folded cerebriform nuclei are designated Sezary cells. Immunophenotyping shows CD4 predominance with loss of CD7.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Diagnostic Criteria",
+          "Clinical Management"
+        ],
+        "rows": [
+          [
+            "Erythroderma",
+            "Confluent erythema >80% body surface",
+            "Extracorporeal photopheresis (ECP)"
+          ],
+          [
+            "Sezary Cell Count",
+            "Absolute count >= 1000/uL",
+            "Mogamulizumab (anti-CCR4 antibody)"
+          ],
+          [
+            "Flow Cytometry",
+            "CD4+/CD8+ ratio >= 10, CD7/CD26 loss",
+            "HDAC inhibitors (Romidepsin, Vorinostat)"
+          ],
+          [
+            "Clonality",
+            "T-cell receptor rearrangement in blood",
+            "Allogeneic stem cell transplantation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Adult T-cell leukemia**-lymphoma is a distinct peripheral T-cell neoplasm etiologically caused by the human T-cell lymphotropic virus type 1 (**HTLV-1**). Endemic in southwestern Japan, the Caribbean basin, and parts of sub-Saharan Africa, acute ATLL presents aggressively with rapid-onset lymphocytosis, widespread lymphadenopathy, lytic bone lesions, and severe refractory hypercalcaemia. Antiviral therapy combining zidovudine and interferon-alpha produces clinical responses in leukemic subtypes.",
+      "say": "Adult T-cell leukemia-lymphoma is a distinct peripheral T-cell neoplasm etiologically caused by the human T-cell lymphotropic virus type 1 or HTLV-1. Acute ATLL presents aggressively with rapid-onset lymphocytosis, widespread lymphadenopathy, lytic bone lesions, and severe refractory hypercalcaemia. Antiviral therapy combining zidovudine and interferon-alpha produces clinical responses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "htlv",
+            "label": "HTLV-1 Viral Infection",
+            "level": 1
+          },
+          {
+            "id": "tax",
+            "label": "Tax/HBZ Viral Oncoproteins",
+            "level": 2
+          },
+          {
+            "id": "atll",
+            "label": "Acute ATLL Transformation",
+            "level": 3
+          },
+          {
+            "id": "symp",
+            "label": "Lytic Bone Lesions & Hypercalcemia",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "htlv",
+            "tax"
+          ],
+          [
+            "tax",
+            "atll"
+          ],
+          [
+            "atll",
+            "symp"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 101 (Non-Hodgkin Lymphomas)",
+    "ECHELON-2 Trial (Lancet)",
+    "WHO Classification of Haematolymphoid Tumours (5th Edition)",
+    "NCCN Clinical Practice Guidelines in Oncology: T-Cell Lymphomas"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
