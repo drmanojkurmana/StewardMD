@@ -37,8 +37,8 @@
    }
   },
   {
-   "tx": "**Amiodarone** carries a piece of all 4 Vaughan Williams classes, which is why it can hold sinus rhythm when other drugs fail, including in heart failure with reduced ejection fraction. The cost is cumulative organ injury: **pulmonary fibrosis**, thyroid disease, corneal deposits, hepatitis and slate grey skin. Thyrotoxicosis splits into type 1, iodine driven and hypervascular, and type 2, a destructive thyroiditis. Check thyroid, liver, lungs and eyes, and the QT, for as long as the drug continues.",
-   "say": "Amiodarone carries a piece of all four Vaughan Williams classes and can be continued in heart failure with reduced ejection fraction. The cost is cumulative injury to lung, thyroid, liver, cornea and skin. Thyrotoxicosis is either an iodine driven hypervascular gland or a destructive thyroiditis. Surveillance continues for as long as the patient takes the drug.",
+   "tx": "**Amiodarone** carries electrophysiologic properties of all 4 Vaughan Williams classes, which is why it can hold sinus rhythm when other drugs fail, including in heart failure with reduced ejection fraction. The cost is multi-organ toxicity: **pulmonary fibrosis**, thyroid dysfunction (hypothyroidism and hyperthyroidism), corneal deposits, hepatitis and slate grey skin. Thyrotoxicosis splits into type 1, iodine driven, and type 2 destructive thyroiditis. Serial monitoring of lungs, thyroid, liver and eyes is essential.",
+   "say": "Amiodarone carries properties of all four Vaughan Williams classes and is safe in heart failure with reduced ejection fraction. Its trade-off is multi-organ toxicity affecting lungs, thyroid, liver, eyes and skin. Both hypothyroidism and hyperthyroidism occur, with thyrotoxicosis divided into type 1 iodine driven and type 2 destructive thyroiditis.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/amiodarone-induced-thyrotoxicosis-fig1.webp",
@@ -68,8 +68,8 @@
    }
   },
   {
-   "tx": "**Sotalol** is a nonselective beta blocker that also blocks the rapid delayed rectifier, IKr, so it is both class 2 and class 3. **Reverse use dependence** means that potassium block, and QT lengthening, grows as the rate falls, which is the opposite of class 1 use dependence. Start it in hospital on telemetry. Stop it, and check potassium and magnesium, if the QTc stretches or if polymorphic ventricular tachycardia appears. A twisting wide complex rhythm is torsades until proved otherwise.",
-   "say": "Sotalol is a nonselective beta blocker that also blocks the rapid delayed rectifier potassium current, so it is both class 2 and class 3. Reverse use dependence means the QT effect grows as the heart rate falls. Start it in hospital on telemetry, and treat a polymorphic wide complex rhythm as torsades until proved otherwise.",
+   "tx": "**Sotalol** is a nonselective beta blocker with class 3 rapid delayed rectifier, IKr, blocking activity. **Reverse use dependence** means potassium block and QT prolongation grow more pronounced at slower heart rates, heightening torsades risk during bradycardia. Start it in hospital under continuous telemetry. Discontinue therapy or reduce the dose if the QTc interval stretches excessively, and replete potassium and magnesium immediately.",
+   "say": "Sotalol combines nonselective beta blockade with class 3 rapid delayed rectifier potassium current inhibition. Reverse use dependence causes greater action potential prolongation at slower heart rates, which raises torsades de pointes risk. You should initiate therapy in hospital with continuous telemetry, monitor serial intervals closely, and stop the drug if torsades appears.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
@@ -93,7 +93,7 @@
       "Sotalol",
       "IKr plus beta block",
       "Inpatient telemetry",
-      "Careful. Reverse use dependence and QT risk"
+      "Avoid in HFrEF (negative inotrope, torsades risk)"
      ],
      [
       "Dofetilide",
@@ -111,26 +111,26 @@
    }
   },
   {
-   "tx": "**Adenosine** binds **A1 adenosine receptors** on the atrioventricular node. A G protein then opens an inward rectifier potassium current, the node hyperpolarises, and a circuit that needs the node stops at once. The half life is under 10 seconds, so the effect is gone before most infusions finish. It is the drug for atrioventricular nodal re entry. It does not terminate ventricular tachycardia, and in pre excited atrial fibrillation it can speed conduction down an accessory path.",
-   "say": "Adenosine binds A1 adenosine receptors on the atrioventricular node, opens a potassium current, and hyperpolarises the node so a circuit that needs the node stops. The half life is under 10 seconds. It terminates atrioventricular nodal re entry. It does not treat ventricular tachycardia, and it is dangerous in pre excited atrial fibrillation.",
+   "tx": "**Adenosine** binds **A1 adenosine receptors** on the atrioventricular node. A G protein opens inward rectifier potassium channels (IKAch) causing hyperpolarisation, which abruptly terminates **AV nodal-dependent reentrant tachycardias** (AVNRT and orthodromic AVRT). Its half life is under 10 seconds. It can also terminate cAMP-mediated triggered outflow tract ventricular tachycardia, but not scar reentrant VT. In pre-excited atrial fibrillation, it is contraindicated because rapid accessory conduction can provoke ventricular fibrillation.",
+   "say": "Adenosine binds A1 adenosine receptors on the atrioventricular node, opens inward rectifier potassium channels, and hyperpolarises the node so AV nodal-dependent reentrant tachycardias abruptly stop. The half life is under 10 seconds. It terminates triggered outflow tract ventricular tachycardia, but not scar reentrant circuits, and it is contraindicated in pre-excited atrial fibrillation.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "n1",
-      "label": "Regular narrow tachycardia"
+      "label": "Regular narrow complex tachycardia"
      },
      {
       "id": "n2",
-      "label": "Adenosine bolus"
+      "label": "Rapid IV adenosine bolus"
      },
      {
       "id": "n3",
-      "label": "Stops: nodal re entry"
+      "label": "Terminates: AVNRT or AVRT"
      },
      {
       "id": "n4",
-      "label": "Continues: atrial tachycardia or flutter"
+      "label": "Transient AV block: unmasks flutter or AT"
      }
     ],
     "edges": [
@@ -146,7 +146,7 @@
      [
       "n2",
       "n4",
-      "persists"
+      "unmasks"
      ]
     ]
    }

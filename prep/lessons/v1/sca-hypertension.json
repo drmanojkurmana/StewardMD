@@ -49,14 +49,14 @@
    }
   },
   {
-   "tx": "**Hypertensive emergency** is a severe reading, above 180/120 mmHg, together with acute **organ damage**: encephalopathy, pulmonary oedema, acute coronary ischaemia, dissection or acute kidney injury. A high number alone, without damage, is urgency and is not a reason for an intravenous drip. In a true emergency, intravenous labetalol, nicardipine or nitroprusside is titrated so that **MAP** falls by no more than 20% to 25% in the first 1 hour. Aortic dissection, acute ischaemic stroke and phaeochromocytoma do not follow that same first hour rule.",
-   "say": "Hypertensive emergency is a pressure above 180 over 120 together with acute organ damage. A high number without damage is urgency and does not need an intravenous drip. In a true emergency, labetalol, nicardipine or nitroprusside is titrated so mean arterial pressure falls by no more than 20 to 25 percent in the first hour. Dissection, acute ischaemic stroke and phaeochromocytoma use different targets.",
+   "tx": "**Hypertensive emergency** is severe blood pressure elevation, above 180/120 mmHg, with acute hypertension-mediated **organ damage**: encephalopathy, pulmonary oedema, acute coronary ischaemia, dissection or acute kidney injury. In general emergencies, intravenous labetalol, nicardipine or nitroprusside is titrated so that **MAP** falls by 20% to 25% in the first hour. Crucially, aortic dissection requires immediate systolic reduction to 100 to 120 mmHg within 20 minutes, whereas acute ischaemic stroke tolerates permissive hypertension.",
+   "say": "Hypertensive emergency is blood pressure above 180 over 120 together with acute hypertension-mediated organ damage. In general emergencies, intravenous labetalol, nicardipine or nitroprusside reduces mean arterial pressure by 20 to 25 percent in the first hour. Aortic dissection is an exception requiring immediate reduction of systolic pressure to 100 to 120 millimetres of mercury.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "n1",
-      "label": "Severe hypertension"
+      "label": "BP > 180/120 mmHg"
      },
      {
       "id": "n2",
@@ -64,11 +64,11 @@
      },
      {
       "id": "n3",
-      "label": "Emergency: IV drug, cut MAP 20% to 25%"
+      "label": "Emergency: check for aortic dissection"
      },
      {
       "id": "n4",
-      "label": "Urgency: oral drugs, outpatient review"
+      "label": "General emergency: cut MAP 20% to 25% in 1 hr"
      }
     ],
     "edges": [
@@ -82,16 +82,16 @@
       "yes"
      ],
      [
-      "n2",
+      "n3",
       "n4",
-      "no"
+      "standard target"
      ]
     ]
    }
   },
   {
-   "tx": "**Resistant hypertension** means the pressure is still above target on **three antihypertensive agents** of different classes, at doses the patient actually takes, and one of them is a diuretic. Confirm adherence, home or ambulatory readings, salt intake and interfering drugs before you add a fourth tablet. The standard trio is a renin angiotensin blocker, a dihydropyridine calcium channel blocker and a thiazide like diuretic. Each acts at a different site: heart, vessels, the renin axis and the renal tubule.",
-   "say": "Resistant hypertension means the pressure stays above target on three antihypertensive agents of different classes at full tolerated doses, one of them a diuretic. Confirm that the tablets are being taken and that out of office readings are truly high before you add another drug. The usual trio is a renin angiotensin blocker, a calcium channel blocker and a thiazide like diuretic.",
+   "tx": "**Resistant hypertension** is defined as blood pressure remaining above target despite concurrent use of **three antihypertensive agents** of different classes (including a diuretic, RAAS blocker, and CCB) at maximal tolerated doses. Confirm true resistance by verifying medication adherence and obtaining 24 hour ambulatory blood pressure monitoring. These three complementary classes target vascular smooth muscle, the renin angiotensin system, and renal tubular sodium handling to achieve blood pressure control.",
+   "say": "Resistant hypertension is defined as blood pressure remaining above target despite concurrent use of three antihypertensive agents of different classes at maximal tolerated doses, including a diuretic, RAAS blocker, and calcium channel blocker. Confirm medication adherence and exclude white coat effect with ambulatory monitoring before adding further therapy.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/antihypertensive-drugs-fig1.webp",
