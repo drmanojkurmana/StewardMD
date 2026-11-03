@@ -3,99 +3,120 @@
  "module": "sen-cardiorenal-outcome-trials",
  "subject": "ss-endocrinology",
  "title": "Cardiovascular and renal outcome trials in diabetes",
- "minutes": 5,
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Regulators now expect **cardiovascular safety** evidence before approving any new glucose-lowering drug. Outcome trials check whether an agent lowers **major adverse cardiovascular events**, a composite of cardiovascular death, non-fatal myocardial infarction and non-fatal stroke. Two classes have stood out: **SGLT2 inhibitors** and **GLP-1 receptor agonists**. Both delivered cardiovascular benefit beyond glucose control, so they are favoured in people with established atherosclerotic disease, heart failure or chronic kidney disease.",
-   "say": "Regulators now expect cardiovascular safety evidence before approving any new glucose-lowering drug. Outcome trials check whether an agent lowers major adverse cardiovascular events, a composite of cardiovascular death, non-fatal myocardial infarction and non-fatal stroke. Two classes have stood out: SGLT2 inhibitors and GLP-1 receptor agonists. Both delivered cardiovascular benefit beyond glucose control, so they are favoured in people with established atherosclerotic disease, heart failure or chronic kidney disease.",
+   "tx": "**EMPA-REG OUTCOME** tested empagliflozin in type 2 diabetes with established cardiovascular disease. It reduced 3-point major adverse cardiovascular events, cardiovascular death, and hospitalisation for heart failure. The mechanism drawing shows gut incretin beside a beta cell and a blocked tubular glucose cotransporter. No event curve and no FLOW result are on that figure.",
+   "say": "EMPA-REG OUTCOME tested empagliflozin in type 2 diabetes with established cardiovascular disease. It reduced 3-point major adverse cardiovascular events, cardiovascular death, and hospitalisation for heart failure. The mechanism drawing shows gut incretin beside a beta cell and a blocked tubular glucose cotransporter. No event curve and no FLOW result are on that figure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/oral-antidiabetics-incretins-sglt2-glycemic-fig1.webp",
+    "alt": "Intestinal incretin beside a pancreatic beta cell, and a proximal renal tubule with the glucose cotransporter blocked.",
+    "caption": "Incretin from the gut is drawn beside the pancreatic beta cell. The proximal tubule is drawn with the glucose cotransporter blocked. No event curve and no FLOW result are on this figure (StewardMD)."
+   }
+  },
+  {
+   "tx": "**CANVAS showed** that canagliflozin reduced major adverse cardiovascular events. An amputation signal was reported, and it is not treated as a class effect, but the feet are still examined before and during treatment. A patient with an active foot ulcer needs a foot plan before canagliflozin is started. The signal does not cancel the cardiovascular result.",
+   "say": "CANVAS showed that canagliflozin reduced major adverse cardiovascular events. An amputation signal was reported, and it is not treated as a class effect, but the feet are still examined before and during treatment. A patient with an active foot ulcer needs a foot plan before canagliflozin is started. The signal does not cancel the cardiovascular result.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Trial",
-     "Drug class",
-     "Main cardiovascular finding"
+     "Trial point",
+     "What to remember"
     ],
     "rows": [
      [
-      "EMPA-REG OUTCOME",
-      "SGLT2 inhibitor",
-      "Lower cardiovascular death"
+      "Drug",
+      "Canagliflozin"
      ],
      [
-      "CANVAS",
-      "SGLT2 inhibitor",
-      "Fewer major adverse events, signal for amputation"
+      "Cardiovascular result",
+      "Fewer major adverse events"
      ],
      [
-      "DECLARE-TIMI 58",
-      "SGLT2 inhibitor",
-      "Reduced heart failure hospitalisation"
+      "Amputation signal",
+      "Not a class effect"
      ],
      [
-      "LEADER",
-      "GLP-1 agonist",
-      "Lower all-cause and cardiovascular death"
-     ],
-     [
-      "SUSTAIN-6",
-      "GLP-1 agonist",
-      "Fewer non-fatal stroke and infarction"
+      "Feet",
+      "Still examine them"
      ]
     ]
    }
   },
   {
-   "tx": "**SGLT2 inhibitors** and GLP-1 receptor agonists are the two classes that reduced cardiovascular events. The drawing is the site of action, not the trial. Gut **incretin** acts on the pancreatic beta cell, which is the GLP-1 pathway. SGLT2 inhibitors block the glucose cotransporter in the proximal tubule, so glucose leaves in the urine. The drawing has those two sites. It does not have a major adverse event curve, and it does not have the FLOW kidney result.",
-   "say": "SGLT2 inhibitors and GLP-1 receptor agonists are the two classes that reduced cardiovascular events. The drawing is the site of action, not the trial. Gut incretin acts on the pancreatic beta cell, which is the GLP-1 pathway. SGLT2 inhibitors block the glucose cotransporter in the proximal tubule, so glucose leaves in the urine. The drawing has those two sites. It does not have a major adverse event curve, and it does not have the FLOW kidney result.",
+   "tx": "**DECLARE-TIMI** 58 tested dapagliflozin. It was noninferior for major adverse cardiovascular events, and it reduced hospitalisation for heart failure. Many participants had no prior cardiovascular disease, so the heart-failure result is not limited to secondary prevention. This population is different from EMPA-REG OUTCOME.",
+   "say": "DECLARE-TIMI 58 tested dapagliflozin. It was noninferior for major adverse cardiovascular events, and it reduced hospitalisation for heart failure. Many participants had no prior cardiovascular disease, so the heart-failure result is not limited to secondary prevention. This population is different from EMPA-REG OUTCOME.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/oral-antidiabetics-incretins-sglt2-glycemic-fig1.webp",
-    "alt": "Intestinal incretin beside a pancreatic beta cell, and a proximal renal tubule with the glucose cotransporter blocked.",
-    "caption": "Incretin from the gut is drawn beside the pancreatic beta cell. The proximal tubule is drawn with the glucose cotransporter blocked. No event curve and no FLOW result are on this figure (StewardMD).",
-    "ar": 1.3333
+    "kind": "compare",
+    "left": {
+     "title": "EMPA-REG OUTCOME",
+     "points": [
+      "Empagliflozin",
+      "Established cardiovascular disease",
+      "Cardiovascular death and heart failure fell"
+     ]
+    },
+    "right": {
+     "title": "DECLARE-TIMI 58",
+     "points": [
+      "Dapagliflozin",
+      "Many had no prior cardiovascular disease",
+      "Noninferior for major events, fewer heart-failure admissions"
+     ]
+    }
    }
   },
   {
-   "tx": "Regulators introduced a **cardiovascular safety mandate**, requiring new glucose-lowering drugs to show they did not add excess cardiovascular risk. Trials built for this purpose were usually designed as **non-inferiority** comparisons against placebo, with **major adverse cardiovascular events** as the primary endpoint. **REWIND** enrolled a broader population, including people without prior cardiovascular disease, and still reported fewer major events with a once-weekly GLP-1 receptor agonist. **SELECT** took a different route, studying semaglutide in people with obesity and established cardiovascular disease but without diabetes.",
-   "say": "Regulators brought in a cardiovascular safety mandate, so new glucose-lowering drugs had to prove they did not add cardiovascular risk. These trials were usually built as non-inferiority comparisons against placebo, with major adverse cardiovascular events as the main endpoint. REWIND recruited a wider group, including people with no earlier heart or vascular disease, and still recorded fewer major events with a once-weekly GLP-1 receptor agonist. SELECT looked at a different question, testing semaglutide in people with obesity and established cardiovascular disease who did not have diabetes.",
-   "vis": null
-  },
-  {
-   "tx": "**FLOW** tested semaglutide in patients with type 2 diabetes and chronic kidney disease, and it reduced major kidney events. **SOUL** tested oral semaglutide and showed fewer major adverse cardiovascular events. Read these trials as extensions of the class effect, not as proof that every agent behaves the same. Newer trial data may change the order of preference, so check the current Indian and international guidance before prescribing.",
-   "say": "FLOW tested semaglutide in patients with type 2 diabetes and chronic kidney disease, and it reduced major kidney events. SOUL tested oral semaglutide and showed fewer major adverse cardiovascular events. Read these trials as extensions of the class effect, not as proof that every agent behaves the same. Newer trial data may change the order of preference, so check the current Indian and international guidance before prescribing.",
+   "tx": "**LEADER showed** that liraglutide reduced 3-point major adverse cardiovascular events. SUSTAIN-6 showed that injectable semaglutide also reduced those events, and a retinopathy signal was reported. A rapid fall in glucose is watched when advanced eye disease is present. Name the drug and the trial, because the class is not one result.",
+   "say": "LEADER showed that liraglutide reduced 3-point major adverse cardiovascular events. SUSTAIN-6 showed that injectable semaglutide also reduced those events, and a retinopathy signal was reported. A rapid fall in glucose is watched when advanced eye disease is present. Name the drug and the trial, because the class is not one result.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sen-cardiorenal-outcome-trials-fig1.webp",
-    "alt": "Class-effects drawing. SGLT2 inhibitors are marked with reduced major kidney events and a cardiovascular benefit. GLP-1 receptor agonists are marked only with fewer major adverse cardiovascular events. FLOW is not named on the drawing.",
-    "caption": "As drawn, SGLT2 inhibitors cover kidney events and cardiovascular benefit, and GLP-1 receptor agonists cover major cardiovascular events only. The FLOW kidney result for semaglutide is in the text and is not on this drawing.",
-    "ar": 1.8349
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Drug",
+     "Extra point"
+    ],
+    "rows": [
+     [
+      "LEADER",
+      "Liraglutide",
+      "3-point major events fell"
+     ],
+     [
+      "SUSTAIN-6",
+      "Injectable semaglutide",
+      "Major events fell, retinopathy signal"
+     ],
+     [
+      "Eye disease",
+      "Either GLP-1 agonist",
+      "Watch a rapid fall in glucose"
+     ]
+    ]
    }
   },
   {
-   "tx": "In practice, an exam answer depends on the scenario. A patient with heart failure or albuminuric kidney disease favours an **SGLT2 inhibitor**. A patient with established atherosclerotic disease favours a **GLP-1 receptor agonist** with proven cardiovascular benefit. Metformin remains a low-cost first-line drug. Avoid choosing a drug only because it lowers HbA1c, because the outcome trials answer a different question about organ protection.",
-   "say": "In practice, an exam answer depends on the scenario. A patient with heart failure or albuminuric kidney disease favours an SGLT2 inhibitor. A patient with established atherosclerotic disease favours a GLP-1 receptor agonist with proven cardiovascular benefit. Metformin remains a low-cost first-line drug. Avoid choosing a drug only because it lowers HbA1c, because the outcome trials answer a different question about organ protection.",
+   "tx": "**REWIND showed** that dulaglutide reduced major adverse cardiovascular events. Most participants did not have established cardiovascular disease, which is the point that separates this trial from a secondary-prevention-only study. A once-weekly GLP-1 receptor agonist can be the cardiovascular choice in that broader group. Glucose lowering is not the endpoint that carried the result.",
+   "say": "REWIND showed that dulaglutide reduced major adverse cardiovascular events. Most participants did not have established cardiovascular disease, which is the point that separates this trial from a secondary-prevention-only study. A once-weekly GLP-1 receptor agonist can be the cardiovascular choice in that broader group. Glucose lowering is not the endpoint that carried the result.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Type 2 diabetes with CVD or CKD"
+      "label": "REWIND, dulaglutide weekly"
      },
      {
       "id": "b",
-      "label": "Heart failure or albuminuric CKD?"
+      "label": "Most had no established cardiovascular disease"
      },
      {
       "id": "c",
-      "label": "SGLT2 inhibitor"
+      "label": "Major adverse cardiovascular events fell"
      },
      {
       "id": "d",
-      "label": "Atherosclerotic disease?"
-     },
-     {
-      "id": "e",
-      "label": "GLP-1 receptor agonist"
+      "label": "The result is not glucose lowering alone"
      }
     ],
     "edges": [
@@ -105,20 +126,75 @@
      ],
      [
       "b",
+      "c"
+     ],
+     [
       "c",
-      "Yes"
-     ],
-     [
-      "b",
-      "d",
-      "No"
-     ],
-     [
-      "d",
-      "e",
-      "Yes"
+      "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "**CREDENCE showed** that canagliflozin reduced kidney failure and cardiovascular events in albuminuric chronic kidney disease with type 2 diabetes. DAPA-CKD and EMPA-KIDNEY extended the kidney benefit to people with or without diabetes. The class-effects drawing marks kidney events and cardiovascular benefit for SGLT2 inhibitors, and only major cardiovascular events for GLP-1 receptor agonists.",
+   "say": "CREDENCE showed that canagliflozin reduced kidney failure and cardiovascular events in albuminuric chronic kidney disease with type 2 diabetes. DAPA-CKD and EMPA-KIDNEY extended the kidney benefit to people with or without diabetes. The class-effects drawing marks kidney events and cardiovascular benefit for SGLT2 inhibitors, and only major cardiovascular events for GLP-1 receptor agonists.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sen-cardiorenal-outcome-trials-fig1.webp",
+    "alt": "Class-effects drawing. SGLT2 inhibitors are marked with reduced major kidney events and a cardiovascular benefit. GLP-1 receptor agonists are marked only with fewer major adverse cardiovascular events. FLOW is not named on the drawing.",
+    "caption": "As drawn, SGLT2 inhibitors cover kidney events and cardiovascular benefit, and GLP-1 receptor agonists cover major cardiovascular events only. The FLOW kidney result for semaglutide is in the text and is not on this drawing."
+   }
+  },
+  {
+   "tx": "**FIDELIO** showed that finerenone reduced a kidney composite in patients already on RAS blockade. FIGARO-DKD showed a reduction in cardiovascular events. Hyperkalemia is the main hazard, and the potassium is checked. Finerenone is not an SGLT2 inhibitor, and it is considered when albuminuria persists on a RAS blocker.",
+   "say": "FIDELIO showed that finerenone reduced a kidney composite in patients already on RAS blockade. FIGARO-DKD showed a reduction in cardiovascular events. Hyperkalemia is the main hazard, and the potassium is checked. Finerenone is not an SGLT2 inhibitor, and it is considered when albuminuria persists on a RAS blocker.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "What finerenone showed"
+    ],
+    "rows": [
+     [
+      "FIDELIO-DKD",
+      "Kidney composite fell on RAS blockade"
+     ],
+     [
+      "FIGARO-DKD",
+      "Cardiovascular events fell"
+     ],
+     [
+      "Hazard",
+      "Hyperkalemia, so check potassium"
+     ],
+     [
+      "Class",
+      "Not an SGLT2 inhibitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**SELECT showed** that semaglutide 2.4 mg reduced major adverse cardiovascular events in people with overweight or obesity and cardiovascular disease who did not have diabetes. FLOW showed that semaglutide slowed kidney progression in type 2 diabetes with chronic kidney disease. FLOW is in the text, and it is not named on the class-effects drawing.",
+   "say": "SELECT showed that semaglutide 2.4 mg reduced major adverse cardiovascular events in people with overweight or obesity and cardiovascular disease who did not have diabetes. FLOW showed that semaglutide slowed kidney progression in type 2 diabetes with chronic kidney disease. FLOW is in the text, and it is not named on the class-effects drawing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SELECT",
+     "points": [
+      "Semaglutide 2.4 mg",
+      "Overweight or obesity with cardiovascular disease",
+      "No diabetes was required"
+     ]
+    },
+    "right": {
+     "title": "FLOW",
+     "points": [
+      "Semaglutide in type 2 diabetes with kidney disease",
+      "Kidney progression slowed",
+      "Not printed on the class-effects drawing"
+     ]
+    }
    }
   }
  ],
@@ -127,24 +203,5 @@
   "q_04029c955c02",
   "q_0e79dc3659b0"
  ],
- "src": [],
- "refs": [
-  "American Diabetes Association Standards of Care in Diabetes",
-  "US Food and Drug Administration guidance on cardiovascular safety evaluation of diabetes drugs"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 33
- }
+ "gen": "AI"
 }
