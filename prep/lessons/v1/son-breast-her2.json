@@ -3,7 +3,7 @@
   "module": "son-breast-her2",
   "subject": "ss-medical-oncology",
   "title": "HER2-positive breast cancer: targeted therapy and cardiac safety",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "The definitive first-line standard of care for **metastatic HER2-positive** breast cancer is **docetaxel**, **trastuzumab**, and **pertuzumab**, which established median overall survival of nearly 5 years in the **CLEOPATRA trial**. This triplet combination achieved an extraordinary median overall survival exceeding 57 months, establishing persistent dual-HER2 blockade as the worldwide standard. Following docetaxel completion, dual monoclonal antibody maintenance is continued until objective disease progression.",
@@ -196,6 +196,17 @@
             "Historical standard arm superseded by T-DXd"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Antibodies latch onto surface **HER2 receptors**, then the membrane folds inward and carries the cargo inside by **receptor intake**. Lysosomal enzymes snip the linker and free the **toxic payload**, a topoisomerase blocker that shreds DNA in the nucleus. Because the freed drug can leak outward, nearby **neighbour cells** die too, which explains the strong effect even when receptor levels vary across the tumour.",
+      "say": "The antibody binds HER2 on the cell surface and the cell draws the complex inward. Inside the lysosome the linker is cut and the topoisomerase blocking payload is released to fragment DNA and kill the cell. Freed payload also diffuses to adjacent cells, giving a bystander effect that helps when neighbouring cells carry fewer receptors. This design underpins the strong benefit seen over older conjugates.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-breast-her2-gen1.webp",
+        "alt": "Antibodies binding surface receptors are drawn inside the cell where released payload damages DNA and nearby cells.",
+        "caption": "Rendering traces antibody binding, intake, payload release and neighbour killing. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

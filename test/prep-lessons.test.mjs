@@ -129,7 +129,14 @@ test("gate: no 12-word copy, no dash, only cleared images", () => {
   assert.match(G.gateStep(copy12, GROUND).join(), /copies 12/);
   assert.match(G.gateStep(step({ say: "Short — dashed" }), GROUND).join(), /dash/);
   assert.match(G.gateStep(step({ vis: { kind: "image", src: "assets/kardiox-learn/x.png", alt: "a", caption: "c" } }), GROUND).join(), /not cleared/);
+  assert.match(G.gateStep(step({ vis: { kind: "image", src: "https://stewardmd.in/api/prep/bank/v1/kb/media/achalasia-fig1.webp", alt: "a", caption: "c" } }), GROUND).join(), /not cleared/);
   assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src: "prep/lessons/media/breast-t-size.svg", alt: "a", caption: "c" } }), GROUND), []);
+  for (const src of [
+    "v1/kb/media/achalasia-fig1.webp",
+    "v1/lessons/media/sgi-gi-physiology-nutrition-fig1.webp",
+    "clinix/media/practicals/surg-tub-minnesota-tube.webp",
+    "clinix/media/skills/skill-ix-surg-dysphagia_workup.webp",
+  ]) assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src, alt: "a", caption: "c" } }), GROUND), [], src);
 });
 test("gate: narration must be full natural sentences, rejecting telegraphic chains", () => {
   const good = "Monosaccharides cannot be hydrolysed into simpler sugars. They are classed as aldoses or ketoses by their carbonyl group.";

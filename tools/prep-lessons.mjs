@@ -192,7 +192,15 @@ export function toStep(r) {
 }
 
 // ---- gates -------------------------------------------------------------------------------------------------------
-export const CLEARED_MEDIA = [/^prep\/lessons\/media\/[a-z0-9-]+\.(?:svg|webp|png)$/, /^tokos\/media\/(?:fetal-planes|hc-biometry)\/[a-z0-9-]+\.(?:webp|png)$/];
+/* In-app files, plus the R2 bank paths the lesson client already loads (prep-lessons.js lessonImgUrl:
+   any src matching /^v\d{1,3}\//). KB and existing lesson figures use v1/kb/media and v1/lessons/media.
+   CliniX practicals and skills are copied into the web root by scripts/build-www.sh. */
+export const CLEARED_MEDIA = [
+  /^prep\/lessons\/media\/[a-z0-9-]+\.(?:svg|webp|png)$/,
+  /^tokos\/media\/(?:fetal-planes|hc-biometry)\/[a-z0-9-]+\.(?:webp|png)$/,
+  /^v1\/(?:kb|lessons)\/media\/[a-z0-9_-]+\.webp$/,
+  /^clinix\/media\/(?:practicals|skills)\/[a-z0-9_-]+\.webp$/,
+];
 function visStrings(v) { return v ? LP.visText(v).split(/\s*\n\s*/).filter(Boolean) : []; }
 
 const NARR_VERBS = new Set([

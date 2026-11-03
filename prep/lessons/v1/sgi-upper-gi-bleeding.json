@@ -1,0 +1,258 @@
+{
+  "v": 1,
+  "module": "sgi-upper-gi-bleeding",
+  "subject": "ss-gastroenterology",
+  "title": "Upper Gastrointestinal Bleeding and Hemostasis",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **Glasgow-Blatchford score** is the validated clinical risk-stratification tool recommended for evaluating patients presenting with acute upper GI bleeding before endoscopy. Incorporating blood urea, hemoglobin, systolic blood pressure, pulse, presentation with melena or syncope, hepatic disease, and cardiac failure, a calculated score of **0** or **1** identifies very **low-risk patients** who can be safely triaged to outpatient management without admission or urgent intervention.",
+      "say": "The Glasgow-Blatchford score is the validated clinical risk-stratification tool recommended for evaluating patients presenting with acute upper GI bleeding before endoscopy. Incorporating blood urea, hemoglobin, systolic blood pressure, pulse, presentation with melena or syncope, hepatic disease, and cardiac failure, a calculated score of 0 or 1 identifies very low-risk patients who can be safely triaged to outpatient management without admission or urgent intervention.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "GBS Parameter",
+          "Score Allocation",
+          "Clinical Threshold"
+        ],
+        "rows": [
+          [
+            "Blood Urea Nitrogen (BUN)",
+            "2 to 6 points",
+            "Elevated >= 6.5 mmol/L"
+          ],
+          [
+            "Hemoglobin (Men / Women)",
+            "1 to 6 points",
+            "< 130 g/L (men) or < 120 g/L (women)"
+          ],
+          [
+            "Systolic Blood Pressure",
+            "1 to 3 points",
+            "< 100 mmHg"
+          ],
+          [
+            "Clinical Pulse and Presentation",
+            "1 to 2 points each",
+            "Pulse >= 100, melena, or syncope"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endoscopic risk stratification for peptic ulcer bleeding relies on the validated **Forrest classification**. High-risk stigmata comprise active arterial spurting (Class Ia), active oozing (Class Ib), and a **visible vessel** (Class IIa), which exhibit a **40%** to **50%** rebleeding risk without treatment. These lesions require **endoscopic haemostasis**. In contrast, a flat pigmented spot (Class IIc) carries a seven percent risk and a clean ulcer base (Class III) carries less than three percent rebleeding risk.",
+      "say": "Endoscopic risk stratification for peptic ulcer bleeding relies on the validated Forrest classification. High-risk stigmata comprise active arterial spurting, classified as Forrest Ia, active oozing, classified as Forrest Ib, and a non-bleeding visible vessel, classified as Forrest IIa, which exhibit a 40 to 50 percent rebleeding risk without treatment. These lesions require dual endoscopic haemostasis. In contrast, a flat pigmented spot carries a seven percent risk and a clean ulcer base carries less than three percent rebleeding risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Forrest Class",
+          "Endoscopic Appearance",
+          "Rebleeding Risk",
+          "Endotherapy Mandated"
+        ],
+        "rows": [
+          [
+            "Class Ia",
+            "Active arterial spurting",
+            "90%",
+            "Yes (Dual modality)"
+          ],
+          [
+            "Class Ib",
+            "Active oozing bleeding",
+            "10% to 30%",
+            "Yes (Dual modality)"
+          ],
+          [
+            "Class IIa",
+            "Non-bleeding visible vessel",
+            "40% to 50%",
+            "Yes (Dual modality)"
+          ],
+          [
+            "Class IIb",
+            "Adherent overlying clot",
+            "20% to 30%",
+            "Targeted clot irrigation and treatment"
+          ],
+          [
+            "Class IIc / III",
+            "Flat spot / Clean ulcer base",
+            "< 7% / < 3%",
+            "No endotherapy indicated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For high-risk peptic ulcer bleeding stigmata, international consensus guidelines mandate combination **dual-modality endotherapy**. While dilute **epinephrine injection** at a **1**:10000 concentration provides temporary local vasoconstriction and tissue tamponade, it is insufficient as monotherapy due to high rebleeding rates. It must be paired with a second definitive mechanical or thermal modality, such as **through-the-scope clips** or bipolar electrocoagulation, to achieve durable vessel coaptation and thrombosis.",
+      "say": "For high-risk peptic ulcer bleeding stigmata, international consensus guidelines mandate combination dual-modality endotherapy. While dilute epinephrine injection at a 1 in 10000 concentration provides temporary local vasoconstriction and tissue tamponade, it is insufficient as monotherapy due to high rebleeding rates. It must be paired with a second definitive mechanical or thermal modality, such as through-the-scope clips or bipolar electrocoagulation, to achieve durable vessel coaptation and thrombosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify Forrest Ia, Ib, or IIa lesion"
+          },
+          {
+            "id": "b",
+            "label": "Inject dilute epinephrine (1:10000) around crater"
+          },
+          {
+            "id": "c",
+            "label": "Apply mechanical hemoclips or thermal contact probe"
+          },
+          {
+            "id": "d",
+            "label": "Verify durable cessation of bleeding"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "target visible vessel base"
+          ],
+          [
+            "b",
+            "c",
+            "temporary vasoconstrictive clearance"
+          ],
+          [
+            "c",
+            "d",
+            "permanent coaptive vessel thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Once the ulcer in the figure has been treated, use a **restrictive transfusion** policy. The **haemoglobin target** is 7 to 9 g/dL, which causes less death and less rebleeding than a liberal trigger. Then run high-dose **intravenous PPI**, an 80 mg bolus followed by 8 mg per hour for 72 hours, to hold **intragastric pH** above 6.0 and keep the clot on the vessel stable.",
+      "say": "Once the ulcer in the figure has been treated, use a restrictive transfusion policy. The haemoglobin target is 7 to 9 g/dL, which causes less death and less rebleeding than a liberal trigger. Then run high-dose intravenous PPI, an 80 mg bolus followed by 8 mg per hour for 72 hours, to hold intragastric pH above 6.0 and keep the clot on the vessel stable.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-fig1.webp",
+        "alt": "Cutaway of a posterior duodenal ulcer eroding into the gastroduodenal artery with arterial spurting into the lumen.",
+        "caption": "Posterior duodenal ulcer bleeding from the gastroduodenal artery. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "A **Dieulafoy lesion** is a **caliber-persistent submucosal artery** that punches through proximal lesser-curve mucosa with no ulcer around it. **Over-the-scope clips** stop **recurrent bleeding** from that artery, and from a large fibrotic ulcer, more reliably than a through-the-scope clip. The clip is deployed only when the whole vessel mouth is inside the cap.",
+      "say": "A Dieulafoy lesion is a caliber-persistent submucosal artery that punches through proximal lesser-curve mucosa with no ulcer around it. Over-the-scope clips stop recurrent bleeding from that artery, and from a large fibrotic ulcer, more reliably than a through-the-scope clip. The clip is deployed only when the whole vessel mouth is inside the cap.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Finding",
+          "What you see",
+          "What to do"
+        ],
+        "rows": [
+          [
+            "Dieulafoy lesion",
+            "caliber-persistent submucosal artery on the proximal lesser curve, no ulcer",
+            "Clip the vessel mouth"
+          ],
+          [
+            "Over-the-scope clips",
+            "Large cap clip for recurrent bleeding",
+            "Prefer when the fibrotic ulcer exceeds 1.5 cm"
+          ],
+          [
+            "Through-the-scope clip",
+            "Smaller bite, used with epinephrine",
+            "First dual therapy for Forrest Ia to IIa"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emergency **endoscopic variceal ligation** is the standard endoscopic intervention for active acute oesophageal variceal bleeding, performing superiorly to endoscopic sclerotherapy with lower complication rates. Utilizing a multi-band ligator attached to the gastroscope tip, the operator aspirates each variceal column into the barrel and deploys an elastic rubber **O-ring band** at the bleeding site and near the gastroesophageal junction, inducing mechanical strangulation, local thrombosis, and eventual sloughing.",
+      "say": "Emergency endoscopic variceal ligation is the standard endoscopic intervention for active acute oesophageal variceal bleeding, performing superiorly to endoscopic sclerotherapy with lower complication rates. Utilizing a multi-band ligator attached to the gastroscope tip, the operator aspirates each variceal column into the barrel and deploys an elastic rubber O-ring band at the bleeding site and near the gastroesophageal junction, inducing mechanical strangulation, local thrombosis, and eventual sloughing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/variceal-bleed-fig1.webp",
+        "alt": "Diagram of a cirrhotic liver, portal vein, ruptured oesophageal varix, and an endoscopic view of band ligation.",
+        "caption": "Oesophageal variceal rupture and endoscopic band ligation. Credit: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "The **HALT-IT trial** gave high-dose **tranexamic acid** to people with gastrointestinal bleeding and showed no fall in death from the bleed. Venous thromboembolism and seizures both increased, so the drug is not part of upper GI bleeding treatment. Endoscopy, a proton pump inhibitor, and restrictive transfusion are used instead.",
+      "say": "The HALT-IT trial gave high-dose tranexamic acid to people with gastrointestinal bleeding and showed no fall in death from the bleed. Venous thromboembolism and seizures both increased, so the drug is not part of upper GI bleeding treatment. Endoscopy, a proton pump inhibitor, and restrictive transfusion are used instead.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "HALT-IT outcome",
+          "What tranexamic acid did",
+          "Decision"
+        ],
+        "rows": [
+          [
+            "Death from the bleed",
+            "No reduction",
+            "Do not use it as haemostatic therapy"
+          ],
+          [
+            "Venous thromboembolism",
+            "Increased",
+            "Avoid when clot risk is already high"
+          ],
+          [
+            "Seizures",
+            "Increased",
+            "A second reason to withhold the drug"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients presenting with acute variceal bleeding at high risk of treatment failure, early or pre-emptive **TIPS** transjugular intrahepatic portosystemic shunt placement within **72** hours (ideally within 24 to 48 hours) significantly improves survival. High-risk candidates are defined under Baveno criteria as patients with **Child-Pugh class C** cirrhosis (score 10 to 13) or **Child-Pugh class B** with active spurting or oozing at diagnostic endoscopy.",
+      "say": "In patients presenting with acute variceal bleeding at high risk of treatment failure, early or pre-emptive TIPS transjugular intrahepatic portosystemic shunt placement within 72 hours, ideally within 24 to 48 hours, significantly improves survival. High-risk candidates are defined under Baveno criteria as patients with Child-Pugh class C cirrhosis with score 10 to 13, or Child-Pugh class B with active spurting or oozing at diagnostic endoscopy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute variceal bleed stabilized initially"
+          },
+          {
+            "id": "b",
+            "label": "Stratify risk: Child C (<14) or Child B + active bleeding"
+          },
+          {
+            "id": "c",
+            "label": "Perform early pre-emptive TIPS within 72 hours"
+          },
+          {
+            "id": "d",
+            "label": "Significant reduction in rebleeding and 1-year mortality"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "initial EVL and terlipressin"
+          ],
+          [
+            "b",
+            "c",
+            "early candidate identification"
+          ],
+          [
+            "c",
+            "d",
+            "portal pressure gradient reduced < 12 mmHg"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

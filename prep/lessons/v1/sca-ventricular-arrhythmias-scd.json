@@ -3,7 +3,7 @@
  "module": "sca-ventricular-arrhythmias-scd",
  "subject": "ss-cardiology",
  "title": "Ventricular arrhythmias and sudden cardiac death",
- "minutes": 8,
+ "minutes": 9,
  "steps": [
   {
    "tx": "The validated **Brugada criteria** algorithm differentiates ventricular tachycardia from supraventricular tachycardia with aberrancy in wide complex tachycardia through 4 sequential steps. The algorithm checks for absence of an RS complex in all precordial leads, an RS interval greater than 100 ms in any lead, classic **AV dissociation**, and lead-specific morphology criteria in V1 and V6.",
@@ -263,6 +263,17 @@
       "Treated with cardioversion or amiodarone"
      ]
     }
+   }
+  },
+  {
+   "tx": "The image shows a 12 lead ECG that begins with sinus beats with a long QTc interval marked on limb leads. It then breaks into a rapid polymorphic rhythm in the precordial leads where QRS complexes change size and direction around the baseline. This **twisting QRS** pattern defines **torsades de pointes** in the setting of **QT prolongation**. Recognizing the long baseline QT warns of early afterdepolarizations and guides urgent magnesium treatment with potassium correction and overdrive pacing.",
+   "say": "This tracing starts with beats that show a long QTc interval and then suddenly changes into a fast irregular wide complex rhythm. The QRS complexes grow and shrink and point up and then down as they twist around the baseline. That twisting pattern in a patient with a long QT interval means torsades de pointes. The long repolarization allows early afterdepolarizations to trigger the arrhythmia, so management focuses on magnesium with potassium correction and overdrive pacing to shorten repolarization.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sca-ventricular-arrhythmias-scd-gen1.webp",
+    "alt": "Twelve lead ECG showing marked QTc prolongation followed by twisting polymorphic ventricular tachycardia.",
+    "caption": "Twisting torsades after prolonged QTc, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

@@ -3,7 +3,7 @@
   "module": "sca-stemi",
   "subject": "ss-cardiology",
   "title": "ST Elevation Myocardial Infarction Management",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "Diagnostic **ST-segment elevation** requires new elevation at the J-point in two **contiguous leads** of at least **1** mm in all leads except V2-V3, where thresholds are at least **2.5** mm in men under **40**, at least **2.0** mm in men **40** and older, and at least **1.5** mm in women. These age- and sex-adjusted cutoffs prevent overdiagnosis of benign early repolarization while ensuring timely identification of acute transmural infarction.",
@@ -19,24 +19,35 @@
           [
             "Leads V2-V3",
             "Men under 40 years",
-            "\u2265  2.5 mm"
+            "≥  2.5 mm"
           ],
           [
             "Leads V2-V3",
             "Men 40 years and older",
-            "\u2265  2.0 mm"
+            "≥  2.0 mm"
           ],
           [
             "Leads V2-V3",
             "Women of any age",
-            "\u2265  1.5 mm"
+            "≥  1.5 mm"
           ],
           [
             "All other contiguous leads",
             "All men and women",
-            "\u2265  1.0 mm"
+            "≥  1.0 mm"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The 12 lead tracing shows **ST segment elevation** at the J point in **contiguous leads** across the anterior chest with a broad **hyperacute T wave**. The magnified V2 and V3 complexes make the early takeoff and tall peaked wave easy to see. Recognizing this pattern matters because it marks acute transmural infarction that needs rapid reperfusion assessment rather than dismissal as benign early repolarization.",
+      "say": "This tracing shows an anterior ST elevation heart attack. The ST segment lifts off the J point in neighboring chest leads, especially V2 and V3, and the T wave looks tall and peaked. Spotting these changes matters because they signal a sudden blocked artery. Rapid recognition leads to fast reopening of the vessel and more saved heart muscle.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-stemi-gen1.webp",
+        "alt": "A 12 lead ECG shows ST elevation at the J point in neighboring anterior leads with a tall hyperacute T wave magnified over leads V2 and V3.",
+        "caption": "Anterior ECG showing J point elevation with hyperacute T waves Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -195,17 +206,17 @@
         "rows": [
           [
             "Concordant ST Elevation",
-            "\u2265  1 mm in leads with positive QRS",
+            "≥  1 mm in leads with positive QRS",
             "5 points (Highly specific for occlusion)"
           ],
           [
             "Concordant ST Depression",
-            "\u2265  1 mm in precordial leads V1, V2, or V3",
+            "≥  1 mm in precordial leads V1, V2, or V3",
             "3 points (Indicates anterior ischemia)"
           ],
           [
             "Proportional Discordance",
-            "ST/S ratio \u2264  -0.25 in excessively discordant leads",
+            "ST/S ratio ≤  -0.25 in excessively discordant leads",
             "Replaces older absolute 5 mm discordance rule"
           ]
         ]
