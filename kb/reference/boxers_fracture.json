@@ -161,13 +161,55 @@
       "kind": "diagnostic",
       "title": "Imaging and examination for boxer fracture",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Anteroposterior, lateral and oblique hand radiographs", "cells": [{"text": "Fracture of the fifth metacarpal neck with apex-dorsal angulation"}], "cite": "c1"},
-        {"parameter": "Degree of neck angulation on the lateral view", "cells": [{"text": "Angulation that guides closed reduction or fixation"}], "cite": "c1"},
-        {"parameter": "Finger cascade during active flexion", "cells": [{"text": "Rotational malalignment, seen as finger scissoring or overlap"}], "cite": "c1"},
-        {"parameter": "Wound inspection", "cells": [{"text": "Fight-bite breach of the metacarpophalangeal joint"}], "cite": "c1"},
-        {"parameter": "CT", "cells": [{"text": "Intra-articular extension, when suspected"}], "cite": "c1"}
+        {
+          "parameter": "Anteroposterior, lateral and oblique hand radiographs",
+          "cells": [
+            {
+              "text": "Fracture of the fifth metacarpal neck with apex-dorsal angulation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Degree of neck angulation on the lateral view",
+          "cells": [
+            {
+              "text": "Angulation that guides closed reduction or fixation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Finger cascade during active flexion",
+          "cells": [
+            {
+              "text": "Rotational malalignment, seen as finger scissoring or overlap"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Wound inspection",
+          "cells": [
+            {
+              "text": "Fight-bite breach of the metacarpophalangeal joint"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "CT",
+          "cells": [
+            {
+              "text": "Intra-articular extension, when suspected"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -175,15 +217,95 @@
       "kind": "treatment",
       "title": "Management options for boxer fracture",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Conservative management", "cells": [{"text": "Buddy strapping or ulnar gutter splint with early mobilisation"}, {"text": "Most fractures"}], "cite": "c1"},
-        {"parameter": "Rotational correction", "cells": [{"text": "Assess and correct rotational malalignment seen as finger scissoring"}, {"text": "Rotation is not tolerated"}], "cite": "c1"},
-        {"parameter": "Closed reduction", "cells": [{"text": "For markedly angulated fractures"}, {"text": "Moderate apex-dorsal angulation is accepted"}], "cite": "c1"},
-        {"parameter": "Operative fixation", "cells": [{"text": "For unstable, malrotated or multiple fractures"}, {"text": "Surgical stabilisation"}], "cite": "c1"},
-        {"parameter": "Fight-bite wound", "cells": [{"text": "Urgent wound exploration, irrigation and antibiotics"}, {"text": "High risk of septic arthritis"}], "cite": "c1"},
-        {"parameter": "Hand therapy", "cells": [{"text": "Restore grip strength and range of movement"}, {"text": "After fixation or immobilisation"}], "cite": "c1"},
-        {"parameter": "Analgesia and elevation", "cells": [{"text": "Analgesia and elevation for oedema control"}, {"text": "Early symptom control"}], "cite": "c1"}
+        {
+          "parameter": "Conservative management",
+          "cells": [
+            {
+              "text": "Buddy strapping or ulnar gutter splint with early mobilisation"
+            },
+            {
+              "text": "Most fractures"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Rotational correction",
+          "cells": [
+            {
+              "text": "Assess and correct rotational malalignment seen as finger scissoring"
+            },
+            {
+              "text": "Rotation is not tolerated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Closed reduction",
+          "cells": [
+            {
+              "text": "For markedly angulated fractures"
+            },
+            {
+              "text": "Moderate apex-dorsal angulation is accepted"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Operative fixation",
+          "cells": [
+            {
+              "text": "For unstable, malrotated or multiple fractures"
+            },
+            {
+              "text": "Surgical stabilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fight-bite wound",
+          "cells": [
+            {
+              "text": "Urgent wound exploration, irrigation and antibiotics"
+            },
+            {
+              "text": "High risk of septic arthritis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hand therapy",
+          "cells": [
+            {
+              "text": "Restore grip strength and range of movement"
+            },
+            {
+              "text": "After fixation or immobilisation"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Analgesia and elevation",
+          "cells": [
+            {
+              "text": "Analgesia and elevation for oedema control"
+            },
+            {
+              "text": "Early symptom control"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     }
   ],
@@ -193,30 +315,135 @@
       "title": "Diagnosis and management of boxer fracture",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Ulnar-sided hand pain and swelling after striking a hard object with a clenched fist", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: overlying wound (fight bite), finger scissoring on flexion, or signs of joint infection?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: wound exploration, irrigation and antibiotics; correct rotation", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Radiographs (AP, lateral, oblique); measure neck angulation", "cite": "c1"},
-        {"id": "n5", "type": "action", "text": "Check rotation with the finger cascade during active flexion", "cite": "c1"},
-        {"id": "n6", "type": "decision", "text": "Malrotation present, or fracture unstable?", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Closed reduction or operative fixation to correct rotation", "cite": "c1"},
-        {"id": "n8", "type": "action", "text": "Buddy strapping or ulnar gutter splint with early mobilisation", "cite": "c1"},
-        {"id": "n9", "type": "action", "text": "Hand therapy to restore grip and movement", "cite": "c1"},
-        {"id": "n10", "type": "outcome", "text": "Good function; malrotation and infection are the main causes of poor outcome", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Ulnar-sided hand pain and swelling after striking a hard object with a clenched fist",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: overlying wound (fight bite), finger scissoring on flexion, or signs of joint infection?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: wound exploration, irrigation and antibiotics; correct rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Radiographs (AP, lateral, oblique); measure neck angulation",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "action",
+          "text": "Check rotation with the finger cascade during active flexion",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "decision",
+          "text": "Malrotation present, or fracture unstable?",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Closed reduction or operative fixation to correct rotation",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Buddy strapping or ulnar gutter splint with early mobilisation",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "action",
+          "text": "Hand therapy to restore grip and movement",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Good function; malrotation and infection are the main causes of poor outcome",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n5", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Next"},
-        {"from": "n6", "to": "n7", "label": "Yes"},
-        {"from": "n6", "to": "n8", "label": "No"},
-        {"from": "n7", "to": "n9", "label": "Next"},
-        {"from": "n8", "to": "n9", "label": "Next"},
-        {"from": "n9", "to": "n10", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Next"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Yes"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "No"
+        },
+        {
+          "from": "n7",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Next"
+        }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "boxers-fracture-fig1",
+      "type": "image",
+      "title": "Boxer Fifth Metacarpal Fracture",
+      "src": "v1/kb/media/boxers-fracture-fig1.webp",
+      "alt": "AP and lateral hand radiographs showing fifth metacarpal neck fracture with volar angulation.",
+      "caption": "Radiographs of fifth metacarpal neck fracture with volar angulation. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }

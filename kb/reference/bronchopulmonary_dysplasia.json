@@ -163,13 +163,55 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in bronchopulmonary dysplasia",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Chest radiograph", "cells": [{"text": "Hyperinflation, cystic or coarse interstitial changes"}], "cite": "c1"},
-        {"parameter": "Pulse oximetry and blood gas analysis", "cells": [{"text": "Oxygenation and gas exchange, where indicated"}], "cite": "c1"},
-        {"parameter": "Echocardiography", "cells": [{"text": "Screens for pulmonary hypertension"}], "cite": "c1"},
-        {"parameter": "Growth and nutritional assessment", "cells": [{"text": "Nutritional status"}], "cite": "c1"},
-        {"parameter": "Chest CT or bronchoscopy", "cells": [{"text": "Airway evaluation in selected infants"}], "cite": "c1"}
+        {
+          "parameter": "Chest radiograph",
+          "cells": [
+            {
+              "text": "Hyperinflation, cystic or coarse interstitial changes"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulse oximetry and blood gas analysis",
+          "cells": [
+            {
+              "text": "Oxygenation and gas exchange, where indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography",
+          "cells": [
+            {
+              "text": "Screens for pulmonary hypertension"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Growth and nutritional assessment",
+          "cells": [
+            {
+              "text": "Nutritional status"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Chest CT or bronchoscopy",
+          "cells": [
+            {
+              "text": "Airway evaluation in selected infants"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -177,16 +219,107 @@
       "kind": "treatment",
       "title": "Management options in bronchopulmonary dysplasia",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Lung-protective respiratory support", "cells": [{"text": "Early CPAP, gentle ventilation and judicious oxygen saturation targeting; wean as tolerated"}, {"text": "Prevents and manages disease"}], "cite": "c1"},
-        {"parameter": "Nutrition", "cells": [{"text": "Adequate calories to support lung growth"}, {"text": "Core measure"}], "cite": "c1"},
-        {"parameter": "Fluid balance", "cells": [{"text": "Careful fluid balance to avoid pulmonary oedema"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Caffeine", "cells": [{"text": "For apnoea of prematurity; associated with a lower rate of bronchopulmonary dysplasia"}, {"text": "Preterm infants"}], "cite": "c1"},
-        {"parameter": "Corticosteroids", "cells": [{"text": "May facilitate extubation; neurodevelopmental risks, so use is weighed carefully and generally limited"}, {"text": "Restricted use"}], "cite": "c1"},
-        {"parameter": "Pulmonary hypertension", "cells": [{"text": "Identify on echocardiography and treat when present"}, {"text": "Screening"}], "cite": "c1"},
-        {"parameter": "Infection prevention", "cells": [{"text": "RSV prophylaxis and immunisation"}, {"text": "Affected infants are prone to infection"}], "cite": "c1"},
-        {"parameter": "Follow-up", "cells": [{"text": "Multidisciplinary monitoring of growth, neurodevelopment and respiratory status into childhood"}, {"text": "Ongoing"}], "cite": "c1"}
+        {
+          "parameter": "Lung-protective respiratory support",
+          "cells": [
+            {
+              "text": "Early CPAP, gentle ventilation and judicious oxygen saturation targeting; wean as tolerated"
+            },
+            {
+              "text": "Prevents and manages disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Nutrition",
+          "cells": [
+            {
+              "text": "Adequate calories to support lung growth"
+            },
+            {
+              "text": "Core measure"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Fluid balance",
+          "cells": [
+            {
+              "text": "Careful fluid balance to avoid pulmonary oedema"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Caffeine",
+          "cells": [
+            {
+              "text": "For apnoea of prematurity; associated with a lower rate of bronchopulmonary dysplasia"
+            },
+            {
+              "text": "Preterm infants"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Corticosteroids",
+          "cells": [
+            {
+              "text": "May facilitate extubation; neurodevelopmental risks, so use is weighed carefully and generally limited"
+            },
+            {
+              "text": "Restricted use"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pulmonary hypertension",
+          "cells": [
+            {
+              "text": "Identify on echocardiography and treat when present"
+            },
+            {
+              "text": "Screening"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Infection prevention",
+          "cells": [
+            {
+              "text": "RSV prophylaxis and immunisation"
+            },
+            {
+              "text": "Affected infants are prone to infection"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up",
+          "cells": [
+            {
+              "text": "Multidisciplinary monitoring of growth, neurodevelopment and respiratory status into childhood"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     }
   ],
@@ -196,25 +329,101 @@
       "title": "Diagnosis and management of bronchopulmonary dysplasia",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Persisting oxygen or respiratory support need at about 36 weeks postmenstrual age in a very preterm infant", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: escalating oxygen or ventilatory need, signs of pulmonary hypertension, or failure to gain weight?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: echocardiography for pulmonary hypertension; intensify respiratory support and nutrition review", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Chest radiograph, oximetry or blood gas, growth and nutrition assessment", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Pulmonary hypertension present?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Treat pulmonary hypertension; monitor oxygen need", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Lung-protective support, adequate calories, careful fluid balance, weaning as tolerated; RSV prophylaxis", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "Gradual improvement as the lung grows, with ongoing respiratory morbidity; severe disease carries higher risk", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Persisting oxygen or respiratory support need at about 36 weeks postmenstrual age in a very preterm infant",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: escalating oxygen or ventilatory need, signs of pulmonary hypertension, or failure to gain weight?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: echocardiography for pulmonary hypertension; intensify respiratory support and nutrition review",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Chest radiograph, oximetry or blood gas, growth and nutrition assessment",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Pulmonary hypertension present?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Treat pulmonary hypertension; monitor oxygen need",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Lung-protective support, adequate calories, careful fluid balance, weaning as tolerated; RSV prophylaxis",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Gradual improvement as the lung grows, with ongoing respiratory morbidity; severe disease carries higher risk",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n7", "label": "Next"},
-        {"from": "n7", "to": "n8", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n7",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        }
       ]
     }
   ],
@@ -227,6 +436,15 @@
       "alt": "Diagram comparing normal lung alveoli with those affected by Bronchopulmonary Dysplasia (BPD), illustrating arrested alveolar and pulmonary vascular development.",
       "caption": "Normal vs. BPD lung showing arrested alveolar and pulmonary vascular development. Illustration: StewardMD original.",
       "ar": 1.8349
+    },
+    {
+      "id": "bronchopulmonary-dysplasia-fig2",
+      "type": "image",
+      "title": "Bronchopulmonary Dysplasia Chest Radiograph",
+      "src": "v1/kb/media/bronchopulmonary-dysplasia-fig2.webp",
+      "alt": "Frontal neonatal chest X ray with coarse bubbly cystic markings, hyperinflation and fibrotic bands labeled.",
+      "caption": "Frontal chest radiograph showing hyperinflation, cystic interstitial markings and fibrosis. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }
