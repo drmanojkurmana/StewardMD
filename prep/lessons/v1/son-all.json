@@ -3,7 +3,7 @@
   "module": "son-all",
   "subject": "ss-medical-oncology",
   "title": "Acute lymphoblastic leukaemia: lineage classification, Philadelphia chromosome management, MRD monitoring and targeted immunotherapies",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Acute lymphoblastic leukaemia is immunophenotypically classified into B-cell lineage **B-ALL** and T-cell lineage **T-ALL**. B-ALL blasts express surface antigens **CD19**, **CD22**, CD79a, and nuclear terminal deoxynucleotidyl transferase **TdT**. In contrast, T-ALL blasts express cytoplasmic **CD3** and **CD7**, frequently presenting in young males with high circulating leukocyte counts and bulky anterior mediastinal masses.",
@@ -184,6 +184,17 @@
             "efs"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The image shows an engineered **CAR T** lymphocyte locking onto a **CD19 positive** B lymphoblast through a chimeric receptor synapse. Binding activates internal costimulatory and zeta signaling domains that drive the killer cell to release toxic granules. This living drug seeks residual **lymphoblasts** after relapse and can clear **minimal residual disease** where standard salvage chemotherapy often fails.",
+      "say": "Look at the junction between the two cells. The CAR T cell on the left uses an artificial receptor to grip CD19 on the leukemic B lymphoblast on the right. That contact, called a synapse, switches on signaling chains inside the CAR T cell and triggers release of granules that kill the target. This is the principle behind tisagenlecleucel for relapsed B ALL in children and young adults, where one infusion can produce deep clearance of hidden leukemia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-all-gen1.webp",
+        "alt": "An engineered CAR T cell forms a receptor synapse with a CD19 positive leukemic B lymphoblast.",
+        "caption": "CAR T cell grips a leukemic lymphoblast at the immune synapse. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

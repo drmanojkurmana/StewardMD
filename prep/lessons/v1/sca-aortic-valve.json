@@ -3,7 +3,7 @@
   "module": "sca-aortic-valve",
   "subject": "ss-cardiology",
   "title": "Aortic Valve Disease: Stenosis and Regurgitation",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "**Severe aortic stenosis** is defined by peak aortic **jet velocity** at least **4.0** m/s, mean transvalvular gradient at least **40** mmHg, and aortic valve area at most **1.0** cm2 or indexed AVA at most **0.6** cm2/m2. Once severe stenosis becomes symptomatic with angina, syncope, or heart failure, prompt valve replacement is required.",
@@ -21,27 +21,38 @@
             "Peak Jet Velocity",
             "< 3.0 m/s",
             "3.0 to 3.9 m/s",
-            "\u2265  4.0 m/s (or \u2265  5.0 for very severe)"
+            "≥  4.0 m/s (or ≥  5.0 for very severe)"
           ],
           [
             "Mean Transvalvular Gradient",
             "< 20 mmHg",
             "20 to 39 mmHg",
-            "\u2265  40 mmHg"
+            "≥  40 mmHg"
           ],
           [
             "Aortic Valve Area",
             "> 1.5 cm2",
             "1.0 to 1.5 cm2",
-            "\u2264  1.0 cm2"
+            "≤  1.0 cm2"
           ],
           [
             "Indexed Valve Area",
             "> 0.85 cm2/m2",
             "0.60 to 0.85 cm2/m2",
-            "\u2264  0.60 cm2/m2"
+            "≤  0.60 cm2/m2"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Left panel shows a bright calcified aortic valve with thickened left ventricular walls suggesting chronic pressure load. Right panel traces a dense high velocity jet through the narrowed orifice. Together they illustrate **severe** **stenosis** physiology from the lesson where velocity and gradient rise as **area** falls, prompting valve replacement once symptoms appear.",
+      "say": "The echo shows a calcified aortic valve and a thickened left ventricle while Doppler records a fast systolic jet. That pairing reflects outflow obstruction with compensatory hypertrophy. In the lesson this pattern marks severe stenosis and explains angina syncope or failure when output cannot rise. Link the still image to the tracing so valve shape and flow speed tell one story.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-aortic-valve-gen1.webp",
+        "alt": "Echo shows calcified aortic valve with hypertrophy beside Doppler of a high velocity stenotic jet.",
+        "caption": "Echo and Doppler show calcified valve with severe outflow jet. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -187,7 +198,7 @@
             "Regurgitant Volume",
             "< 30 mL/beat",
             "30 to 59 mL/beat",
-            "\u2265  60 mL/beat"
+            "≥  60 mL/beat"
           ],
           [
             "Pressure Half-Time",

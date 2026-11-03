@@ -3,7 +3,7 @@
   "module": "son-trial-design",
   "subject": "ss-medical-oncology",
   "title": "Clinical trial design in oncology: trial phases, endpoints, statistical models and novel master protocols",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Early clinical evaluation in **Phase I oncology** studies seeks to establish the **maximum tolerated dose** and characterize dose-limiting toxicities. Historically, investigators utilized the classical rule-based 3+3 design, which escalates dose levels in cohorts of 3 patients until dose-limiting toxicities occur in at least 2 individuals. Modern phase I designs increasingly incorporate model-based continual reassessment methods to optimize therapeutic dose selection.",
@@ -140,6 +140,17 @@
             "Objective disease progression defining event"
           ]
         ]
+      }
+    },
+    {
+      "tx": "These paired liver scans show a target lesion growing from nadir while a separate **new lesion** appears. Together the size increase and the new focus meet **RECIST progression** criteria for **progressive disease**. Such an event ends **progression free survival** at that date, giving trials an earlier readout than waiting for survival.",
+      "say": "Progression free survival counts time from randomization until scans show growth or the patient dies. This pair shows both triggers at once, an enlarging liver target plus a fresh lesion elsewhere. Meeting progression criteria on restaging stops the clock for that participant. Using such scan events lets studies report efficacy sooner than overall survival allows.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-trial-design-gen1.webp",
+        "alt": "Paired liver CT scans show target growth plus a new lesion marking progression.",
+        "caption": "Liver scans show target growth and a new lesion. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
