@@ -3,7 +3,7 @@
   "module": "son-tissue-agnostic",
   "subject": "ss-medical-oncology",
   "title": "Tissue agnostic and precision oncology",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "**NTRK gene fusions** involving NTRK1, NTRK2, NTRK3 encode oncogenic chimeric TRK kinases sensitive to selective **TRK inhibitors** larotrectinib and entrectinib across all histologies. These genomic rearrangements fuse the 3-prime kinase domain of NTRK with 5-prime upstream partners, resulting in ligand-independent constitutive tyrosine kinase signalling driving cellular proliferation and survival across diverse paediatric and adult solid malignancies.",
@@ -54,6 +54,17 @@
             "High objective response rate (> 40%)"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The model shows a chimeric **TRK kinase** created by an **NTRK fusion** firing without normal ligand control. **Larotrectinib** occupies the kinase domain and denies ATP entry. That single blockade silences **downstream signaling** through growth and survival cascades, which is why one drug works across many tumour types sharing the fusion.",
+      "say": "Some cancers are driven by NTRK gene fusions that join a partner gene to the TRK kinase, leaving it permanently switched on. Larotrectinib fits into the kinase pocket and blocks energy use, so growth signals stop. This diagram shows the drug in place with downstream paths turned off. Because the target is the fusion itself, benefit applies regardless of where the tumour started.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-tissue-agnostic-gen1.webp",
+        "alt": "Molecular model shows larotrectinib bound in an active NTRK fusion kinase with downstream signaling switched off.",
+        "caption": "Model shows larotrectinib silencing an NTRK fusion kinase. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

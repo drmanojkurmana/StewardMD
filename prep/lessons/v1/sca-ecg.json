@@ -3,7 +3,7 @@
   "module": "sca-ecg",
   "subject": "ss-cardiology",
   "title": "Electrocardiography in Clinical Cardiology",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "The **PR interval** reflects total conduction time through the atria, **atrioventricular node**, and the His-Purkinje network. Normal values range from **120** to **200** ms. A prolonged interval exceeding 200 ms confirms first-degree block, typically arising within the AV node itself. Shortening under 120 ms suggests accelerated conduction, pre-excitation, or ectopic junctional pacemakers.",
@@ -189,6 +189,17 @@
             "Stress testing is strictly contraindicated"
           ]
         }
+      }
+    },
+    {
+      "tx": "This tracing was recorded during a **pain free** interval and shows **Wellens type B** morphology with deep symmetric inverted **T waves** across the anterior chest leads and preserved R waves without pathologic Q waves. The pattern signals critical stenosis of the proximal **left anterior descending artery** after spontaneous reperfusion. Recognize it promptly because extensive anterior infarction may follow and urgent invasive catheterisation is required.",
+      "say": "This electrocardiogram was recorded when chest discomfort had settled. Look at the deep symmetric inverted T waves in the anterior chest leads with preserved R waves and no pathologic Q waves. This is the type B pattern of Wellens syndrome, which points to critical narrowing of the proximal left anterior descending artery. It warns of impending extensive anterior infarction, so arrange urgent invasive coronary assessment and avoid stress testing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-ecg-gen1.webp",
+        "alt": "Twelve lead electrocardiogram recorded during a pain free interval showing deep symmetric T wave inversion in the anterior chest leads with preserved R waves.",
+        "caption": "Pain free tracing showing Wellens type B morphology Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

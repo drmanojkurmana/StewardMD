@@ -3,7 +3,7 @@
   "module": "son-chemo-principles",
   "subject": "ss-medical-oncology",
   "title": "Principles of cytotoxic chemotherapy",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "The theoretical foundation of cancer chemotherapy rests on mathematical models of malignant cell growth and reduction. The Skipper **log-kill hypothesis** postulates that a given dose of **cytotoxic chemotherapy** kills a constant fractional proportion of tumour cells rather than a constant absolute number. Consequently, multiple cycles of treatment with consistent intensity are required to reduce tumour burden below the threshold of immunological clearance.",
@@ -327,6 +327,17 @@
             "Resistance in gastrointestinal and breast neoplasms"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The membrane view shows **P glycoprotein** anchored in the lipid bilayer using energy from ATP breakdown to push drug molecules outward. Orange anthracycline shapes plus taxane and vinca molecules stream out through the open channel instead of staying inside. This **efflux pump** encoded by ABCB1 lowers drug levels inside tumor cells below lethal thresholds. The result is **multidrug resistance** across unrelated drug classes at once.",
+      "say": "The illustration shows a P glycoprotein pump sitting in the cell membrane. It burns ATP for energy and forces anthracycline, taxane and vinca molecules out of the tumor cell. Because the drugs are expelled, their concentration inside the cell falls below the level needed to kill it. This single mechanism creates resistance to several unrelated chemotherapy classes at the same time, which is why transporter upregulation causes broad treatment failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-chemo-principles-gen1.webp",
+        "alt": "The rendering shows a membrane pump expelling glowing drug molecules outward while ATP converts to ADP below.",
+        "caption": "Membrane pump pushes chemotherapy drugs out of the cell. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     }
   ],
