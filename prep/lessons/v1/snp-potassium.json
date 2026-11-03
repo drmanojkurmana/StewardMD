@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "snp-potassium",
+ "title": "Disorders of potassium",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Immediate administration of intravenous **10%** **calcium gluconate** at a dosage of **10** to **20** mL infused over **2** to **5** minutes rapidly stabilizes the excitable **myocardial membrane** potential against severe **hyperkalemia**. Calcium directly restores the threshold potential without reducing circulating serum potassium concentrations, providing transient cardioprotection while definitive kaliuretic interventions are mobilized.",
+   "say": "Immediate administration of intravenous 10% calcium gluconate at a dosage of 10 to 20 mL infused over 2 to 5 minutes rapidly stabilizes the excitable myocardial membrane potential against severe hyperkalemia. Calcium directly restores the threshold potential without reducing circulating serum potassium concentrations, providing transient cardioprotection while definitive kaliuretic interventions are mobilized.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Hyperkalaemia Cardiac Electrophysiology",
+    "caption": "Myocardial resting membrane potential stabilization by calcium salts (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Electrocardiographic progression in severe **Hyperkalemia** follows an orderly electrophysiological sequence: tall, narrow, **peaked T waves** at levels above **5.5** mmol/L, progressing to PR prolongation and flattened P waves above **6.5** mmol/L. Severe widening of the QRS complex occurs above **7.0** mmol/L, ultimately deteriorating into a lethal **sine-wave pattern** and ventricular fibrillation.",
+   "say": "Electrocardiographic progression in severe Hyperkalemia follows an orderly electrophysiological sequence: tall, narrow, peaked T waves at levels above 5.5 mmol/L, progressing to PR prolongation and flattened P waves above 6.5 mmol/L. Severe widening of the QRS complex occurs above 7.0 mmol/L, ultimately deteriorating into a lethal sine-wave pattern and ventricular fibrillation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig2.webp",
+    "alt": "Hyperkalemia ECG Changes and Management",
+    "caption": "Sequential electrocardiographic evolution in progressive hyperkalemia (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Intravenous **Insulin** administered as **10** units of regular insulin alongside **50** mL of **50%** **dextrose** actively drives potassium from the extracellular fluid into skeletal myocytes within **15** to **30** minutes. Stimulating cell surface **sodium-potassium ATPase** pumps temporarily lowers systemic serum potassium concentrations by **0.5** to **1.2** mmol/L, buying vital time for total-body potassium elimination.",
+   "say": "Intravenous Insulin administered as 10 units of regular insulin alongside 50 mL of 50% dextrose actively drives potassium from the extracellular fluid into skeletal myocytes within 15 to 30 minutes. Stimulating cell surface sodium-potassium ATPase pumps temporarily lowers systemic serum potassium concentrations by 0.5 to 1.2 mmol/L, buying vital time for total-body potassium elimination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Insulin-Glucose Shift Protocol",
+     "points": [
+      "10 units soluble regular insulin IV",
+      "Co-administer 50 mL 50% dextrose",
+      "Onset of action 15 to 30 minutes",
+      "Lowers potassium by 0.5 to 1.2 mmol/L"
+     ]
+    },
+    "right": {
+     "title": "Inhaled Beta-2 Agonist Shift",
+     "points": [
+      "Nebulized salbutamol 10 to 20 mg",
+      "Direct cyclic AMP driven uptake",
+      "Additive efficacy with insulin",
+      "Blunted response in beta-blocker therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Orally administered **Sodium zirconium cyclosilicate** (**SZC**) is a non-absorbed crystalline inorganic **cation exchanger** that selectively entraps monovalent potassium ions in exchange for sodium and hydrogen throughout the gastrointestinal lumen. Formulated with microporous channels mimicking physiological potassium pores, SZC exhibits a rapid therapeutic onset, initiating significant serum potassium reduction within **1** hour of ingestion.",
+   "say": "Orally administered Sodium zirconium cyclosilicate is a non-absorbed crystalline inorganic cation exchanger that selectively entraps monovalent potassium ions in exchange for sodium and hydrogen throughout the gastrointestinal lumen. Formulated with microporous channels mimicking physiological potassium pores, SZC exhibits a rapid therapeutic onset, initiating significant serum potassium reduction within 1 hour of ingestion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Oral SZC administration"
+     },
+     {
+      "id": "b",
+      "label": "Selective inorganic ion trapping"
+     },
+     {
+      "id": "c",
+      "label": "Potassium excretion within 1 hour"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The organic polymer **Patiromer** binds potassium in the distal colon through **calcium-potassium exchange**, increasing fecal potassium excretion without delivering excess systemic sodium loads. By sustaining normokalemia, patiromer allows long-term optimization and continuation of essential **RAAS inhibitor** therapy in patients suffering from advanced chronic kidney disease, diabetic nephropathy, and symptomatic heart failure.",
+   "say": "The organic polymer Patiromer binds potassium in the distal colon through calcium-potassium exchange, increasing fecal potassium excretion without delivering excess systemic sodium loads. By sustaining normokalemia, patiromer allows long-term optimization and continuation of essential RAAS inhibitor therapy in patients suffering from advanced chronic kidney disease, diabetic nephropathy, and symptomatic heart failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Patiromer Properties",
+     "points": [
+      "Non-absorbed spherical organic polymer",
+      "Exchanges calcium for luminal potassium",
+      "Primary site of action in distal colon",
+      "Enables sustained RAAS inhibitor therapy"
+     ]
+    },
+    "right": {
+     "title": "Sodium Polystyrene Sulfonate",
+     "points": [
+      "Legacy sodium-potassium exchange resin",
+      "Risk of bowel necrosis with sorbitol",
+      "Unpredictable gastrointestinal tolerance",
+      "Superseded by newer selective binders"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Calculating the spot urine **potassium-to-creatinine ratio** rapidly identifies whether **hypokalemia** stems from renal wasting or gastrointestinal losses. A urinary ratio less than **1.5** to **2.0** mmol/mmol (or **15** to **20** mEq/g creatinine) confirms preserved renal conservation and **extrarenal wasting**, pointing towards profuse secretory diarrhea, laxative abuse, or transcellular shifts.",
+   "say": "Calculating the spot urine potassium-to-creatinine ratio rapidly identifies whether hypokalemia stems from renal wasting or gastrointestinal losses. A urinary ratio less than 1.5 to 2.0 mmol/mmol confirms preserved renal conservation and extrarenal wasting, pointing towards profuse secretory diarrhea, laxative abuse, or transcellular shifts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Metric",
+     "Renal Potassium Loss",
+     "Extrarenal Potassium Loss"
+    ],
+    "rows": [
+     [
+      "Urine K / Cr ratio",
+      "> 2.0 mmol/mmol (> 20 mEq/g)",
+      "< 1.5 to 2.0 mmol/mmol (< 15 to 20 mEq/g)"
+     ],
+     [
+      "Transtubular gradient",
+      "TTKG > 4 in hypokalemia",
+      "TTKG < 2 indicating aldosterone shutdown"
+     ],
+     [
+      "Common aetiologies",
+      "Diuretics, Gitelman, Bartter",
+      "Diarrhea, VIPoma, transcellular shifts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Channelopathic **Hypokalemic periodic paralysis** presents with recurrent episodes of generalized flaccid muscular weakness triggered by carbohydrate-rich meals or strenuous physical exertion. Hereditary variants arise from point mutations affecting skeletal muscle voltage-gated calcium channels (**CACNA1S**) or sodium channels (**SCN4A**), whereas acquired cases in young males frequently accompany severe thyrotoxicosis.",
+   "say": "Channelopathic Hypokalemic periodic paralysis presents with recurrent episodes of generalized flaccid muscular weakness triggered by carbohydrate-rich meals or strenuous physical exertion. Hereditary variants arise from point mutations affecting skeletal muscle voltage-gated calcium channels or sodium channels, whereas acquired cases in young males frequently accompany severe thyrotoxicosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Familial Channelopathy",
+     "points": [
+      "Autosomal dominant inheritance",
+      "CACNA1S and SCN4A gene mutations",
+      "Provoked by carbohydrate ingestion",
+      "Treated with oral potassium and acetazolamide"
+     ]
+    },
+    "right": {
+     "title": "Thyrotoxic Periodic Paralysis",
+     "points": [
+      "Acquired episodic channelopathy",
+      "Profound intracellular potassium shift",
+      "Strong male predominance in Asia",
+      "Cured definitively by restoring euthyroidism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Spurious **Pseudohyperkalemia** reflects in vitro potassium liberation occurring after venepuncture due to mechanical **hemolysis**, extreme **thrombocytosis** exceeding **500000** platelets per microliter, or massive leukocytosis above **50000** cells per microliter. Comparing elevated serum potassium against a normal heparinized plasma potassium specimen collected without fist clenching readily establishes the diagnosis and prevents harmful interventions.",
+   "say": "Spurious Pseudohyperkalemia reflects in vitro potassium liberation occurring after venepuncture due to mechanical hemolysis, extreme thrombocytosis exceeding 500000 platelets per microliter, or massive leukocytosis above 50000 cells per microliter. Comparing elevated serum potassium against a normal heparinized plasma potassium specimen collected without fist clenching readily establishes the diagnosis and prevents harmful interventions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe thrombocytosis or leukocytosis"
+     },
+     {
+      "id": "b",
+      "label": "In vitro clot release of potassium"
+     },
+     {
+      "id": "c",
+      "label": "Normal plasma confirms pseudohyperkalemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 9",
+  "Harrison Principles of Internal Medicine 22e Ch. 312",
+  "Brenner and Rector The Kidney 11e Ch. 17"
+ ]
+}

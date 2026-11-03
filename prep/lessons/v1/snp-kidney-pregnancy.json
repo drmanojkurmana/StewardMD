@@ -1,188 +1,203 @@
 {
  "v": 1,
  "module": "snp-kidney-pregnancy",
- "subject": "ss-nephrology",
- "title": "Kidney disease in pregnancy: physiology, preeclampsia, HELLP and renal risks",
- "minutes": 5,
+ "title": "Kidney disease in pregnancy",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "During pregnancy the **glomerular filtration rate** rises early on, and **renal plasma flow** increases too. Because clearance is higher, **serum creatinine** normally falls compared with the non-pregnant value. The collecting system often dilates, more often on the right, so mild **hydronephrosis** may be a normal finding. A creatinine that fails to fall as expected, or one that climbs, should prompt review rather than reassurance.",
-   "say": "During pregnancy, the glomerular filtration rate rises early on, and renal plasma flow increases too. Because clearance is higher, serum creatinine normally drops compared with the non-pregnant value. The collecting system often dilates, more often on the right side, so mild hydronephrosis may be a normal finding. A creatinine that fails to fall as expected, or one that climbs, should prompt review rather than reassurance.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Parameter",
-     "Change in pregnancy",
-     "Clinical meaning"
-    ],
-    "rows": [
-     [
-      "GFR",
-      "Rises early in pregnancy",
-      "Clearance is higher than usual"
-     ],
-     [
-      "Serum creatinine",
-      "Normally falls",
-      "A value that does not fall as expected needs review"
-     ],
-     [
-      "Renal plasma flow",
-      "Increases",
-      "Supports the higher clearance"
-     ],
-     [
-      "Collecting system",
-      "Dilates, mostly on the right",
-      "Mild dilatation can be physiological"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "This figure contrasts normal **renal adaptations** of pregnancy, led by the GFR rise and creatinine fall, with the **pre-eclampsia** pathway of defective remodelling, hypertension, proteinuria and HELLP. Trace which column each finding belongs in before judging a result. Look for the drug safety column and the **hydronephrosis** note that keeps a normal finding from triggering alarm.",
-   "say": "Sort every change into expected adaptation or warning sign. Rising clearance with falling creatinine belongs on the normal side, while new hypertension with proteinuria or organ injury belongs on the disease side. Then learn the HELLP triad and the drug column so management choices stay with the right diagnosis.",
+   "tx": "Normal physiological gestational adaptation produces a **40%** to **50%** expansion in renal plasma flow and glomerular filtration rate mediated by corpus luteum-derived **relaxin** stimulating endothelial nitric oxide synthesis. Consequently, normal healthy pregnancy features lower baseline **serum creatinine** values spanning **0.4** to **0.6** mg/dL, such that values > 0.8 mg/dL indicate genuine renal impairment.",
+   "say": "Normal physiological gestational adaptation produces a 40 percent to 50 percent expansion in renal plasma flow and glomerular filtration rate mediated by corpus luteum-derived relaxin stimulating endothelial nitric oxide synthesis. Consequently, normal healthy pregnancy features lower baseline serum creatinine values spanning 0.4 to 0.6 milligrams per deciliter, such that values above 0.8 indicate genuine renal impairment.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/snp-kidney-pregnancy-fig1.webp",
-    "alt": "Pregnancy renal vasodilation with raised GFR, pre-eclampsia defective spiral artery remodelling with hypertension, proteinuria and HELLP, and safe versus contraindicated drugs.",
-    "caption": "Renal adaptations in pregnancy and pre-eclampsia pathway",
-    "ar": 1.3393
+    "alt": "Renal adaptations in pregnancy and pre-eclampsia pathway",
+    "caption": "Gestational renal hyperfiltration and preeclampsia pathophysiology (StewardMD). Features: gestational renal physiology.",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Preeclampsia is diagnosed when **new hypertension** appears after 20 weeks, with a blood pressure of at least 140/90 mmHg on two readings taken at least 4 hours apart. Proteinuria or another organ involvement, such as low platelets or abnormal liver function, must also be present. Without **proteinuria or organ dysfunction**, the diagnosis is gestational hypertension. Chronic kidney disease can coexist, making the picture harder to read.",
-   "say": "Preeclampsia is diagnosed when new hypertension appears after 20 weeks of gestation. The blood pressure must be at least 140 over 90 millimetres of mercury on two readings taken at least 4 hours apart. Proteinuria or involvement of another organ, such as low platelets or abnormal liver function, must also be present. Without proteinuria or organ dysfunction, the diagnosis is gestational hypertension instead. Chronic kidney disease can coexist, which makes the picture harder to interpret.",
+   "tx": "Clinical consensus criteria define **Preeclampsia** as new-onset systolic blood pressure >= **140/90** mmHg occurring after **20** weeks of gestation, accompanied by new **proteinuria** exceeding **300** mg per **24** hours (or spot protein-creatinine ratio >= **0.3** mg/mg) or evidence of maternal acute kidney injury, thrombocytopenia, or cerebral visual disturbances.",
+   "say": "Clinical consensus criteria define Preeclampsia as new-onset systolic blood pressure 140/90 mmHg or higher occurring after 20 weeks of gestation, accompanied by new proteinuria exceeding 300 mg per 24 hours or spot protein-creatinine ratio 0.3 mg/mg or higher, or evidence of maternal acute kidney injury, thrombocytopenia, or cerebral visual disturbances.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Criteria",
+     "points": [
+      "Blood pressure >= 140/90 after 20 weeks",
+      "Proteinuria >= 300 mg/24h or PCR >= 0.3",
+      "Serum creatinine elevation > 1.1 mg/dL",
+      "Platelet count falling < 100,000/mcL"
+     ]
+    },
+    "right": {
+     "title": "Gestational Hypertension",
+     "points": [
+      "New-onset hypertension after 20 weeks",
+      "Complete absence of proteinuria",
+      "Normal platelet count and liver enzymes",
+      "Normalizes completely within postpartum period"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective endovascular trophoblastic invasion of uterine spiral arteries provokes chronic placental ischemia and hypoxia, triggering massive syncytiotrophoblast secretion of antiangiogenic factors. Circulating **soluble fms-like tyrosine kinase-1** (**sFlt-1**) and **soluble endoglin** neutralize maternal VEGF and TGF-beta, causing widespread maternal endothelial dysfunction and capillary leak.",
+   "say": "Defective endovascular trophoblastic invasion of uterine spiral arteries provokes chronic placental ischemia and hypoxia, triggering massive syncytiotrophoblast secretion of antiangiogenic factors. Circulating soluble fms-like tyrosine kinase-1 and soluble endoglin neutralize maternal VEGF and TGF-beta, causing widespread maternal endothelial dysfunction and capillary leak.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "n1",
-      "label": "BP 140/90 or more after 20 weeks"
+      "id": "a",
+      "label": "Shallow spiral artery invasion"
      },
      {
-      "id": "n2",
-      "label": "Repeat reading at least 4 hours later"
+      "id": "b",
+      "label": "Placental hypoxia and sFlt-1 secretion"
      },
      {
-      "id": "n3",
-      "label": "Proteinuria or organ dysfunction?"
-     },
-     {
-      "id": "n4",
-      "label": "Preeclampsia"
-     },
-     {
-      "id": "n5",
-      "label": "Gestational hypertension"
+      "id": "c",
+      "label": "Systemic endothelial injury and hypertension"
      }
     ],
     "edges": [
      [
-      "n1",
-      "n2"
+      "a",
+      "b"
      ],
      [
-      "n2",
-      "n3"
-     ],
-     [
-      "n3",
-      "n4",
-      "Yes"
-     ],
-     [
-      "n3",
-      "n5",
-      "No"
+      "b",
+      "c"
      ]
     ]
    }
   },
   {
-   "tx": "Preeclampsia with **severe features** is diagnosed when blood pressure reaches the severe range, around 160/110 mmHg or higher, or when there is a falling **platelet count**, a rising serum creatinine, raised liver enzymes, or new neurological or visual symptoms. Severe-range pressure needs treatment within about an hour, using IV labetalol or oral nifedipine if cannula access is unavailable. **Magnesium sulfate** is given for seizure prophylaxis, and levetiracetam is the alternative when magnesium cannot be used.",
-   "say": "Preeclampsia with severe features is diagnosed when blood pressure reaches the severe range, around 160 over 110 millimetres of mercury or higher, or when there is a falling platelet count, a rising serum creatinine, raised liver enzymes, or new neurological or visual symptoms. Severe-range pressure needs treatment within about an hour, using intravenous labetalol, or oral nifedipine if there is no cannula access. Magnesium sulfate is given for seizure prophylaxis, and levetiracetam is the alternative when magnesium cannot be used.",
+   "tx": "The circulating serum **sFlt-1/PlGF ratio** functions as a highly accurate biomarker for ruling out suspected preeclampsia. In women presenting between 24 and 37 weeks gestation with clinical suspicion, a validated cutoff ratio <= **38** exhibits a **99%** negative predictive value, reliably ruling out preeclampsia development for **1** to **4** weeks.",
+   "say": "The circulating serum sFlt-1 to PlGF ratio functions as a highly accurate biomarker for ruling out suspected preeclampsia. In women presenting between 24 and 37 weeks gestation with clinical suspicion, a validated cutoff ratio of 38 or less exhibits a 99% negative predictive value, reliably ruling out preeclampsia development for 1 to 4 weeks.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Severe feature",
-     "Clinical sign"
+     "sFlt-1 / PlGF Ratio",
+     "Clinical Risk Category",
+     "Management Strategy"
     ],
     "rows": [
      [
-      "Blood pressure",
-      "Severe range, around 160/110 mmHg or higher"
+      "Ratio <= 38",
+      "Preeclampsia ruled out (NPV 99%)",
+      "Outpatient surveillance, avoid hospitalization"
      ],
      [
-      "Platelets",
-      "Falling count"
+      "Ratio 38 to 85 (or 110)",
+      "Intermediate elevated risk",
+      "Close ambulatory monitoring within 1 to 2 weeks"
      ],
      [
-      "Serum creatinine",
-      "Rising, new renal impairment"
+      "Ratio > 85 (or > 110)",
+      "High probability of imminent disease",
+      "Admit for intensive maternal-fetal surveillance"
      ],
      [
-      "Liver enzymes",
-      "Raised"
-     ],
-     [
-      "Neurological or visual",
-      "New headache or visual disturbance"
+      "placental growth factor",
+      "Associated with placental growth factor",
+      "Associated with placental growth factor"
      ]
     ]
    }
   },
   {
-   "tx": "**HELLP syndrome** combines microangiopathic **haemolysis**, raised liver enzymes and a low platelet count. It can occur without hypertension or proteinuria, so a normal blood pressure does not exclude it. Renal involvement is common, and delivery after maternal stabilisation is the definitive treatment. **Renal cortical necrosis** is a rarer cause of acute kidney injury, linked to placental abruption, septic abortion, postpartum haemorrhage and DIC, presenting with flank pain or anuria.",
-   "say": "HELLP syndrome combines microangiopathic haemolysis, raised liver enzymes and a low platelet count. It can occur without hypertension or proteinuria, so a normal blood pressure does not exclude it. Renal involvement is common, and delivery after maternal stabilisation is the definitive treatment. Renal cortical necrosis is a rarer cause of acute kidney injury. It is linked to placental abruption, septic abortion, postpartum haemorrhage and disseminated intravascular coagulation, and it presents with flank pain or anuria.",
+   "tx": "Renal histopathology in severe preeclampsia demonstrates pathognomonic **glomerular endotheliosis**. Light and electron microscopy reveal markedly swollen, vacuolated glomerular **endothelial cells** that obliterate capillary lumens, accompanied by loss of endothelial fenestrations, subendothelial fibrinoid deposits, and complete absence of immune complex deposits.",
+   "say": "Renal histopathology in severe preeclampsia demonstrates pathognomonic glomerular endotheliosis. Light and electron microscopy reveal markedly swollen, vacuolated glomerular endothelial cells that obliterate capillary lumens, accompanied by loss of endothelial fenestrations, subendothelial fibrinoid deposits, and complete absence of immune complex deposits.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "HELLP syndrome",
+     "title": "Glomerular Endotheliosis",
      "points": [
-      "Haemolysis on blood film",
-      "Raised liver enzymes",
-      "Low platelet count",
-      "Can occur without hypertension",
-      "Delivery is definitive treatment"
+      "Marked swelling of endothelial cytoplasm",
+      "Severe occlusion of capillary lumens",
+      "Loss of regular endothelial fenestrations",
+      "Resolves completely following delivery"
      ]
     },
     "right": {
-     "title": "Renal cortical necrosis",
+     "title": "Lupus Nephritis Flare",
      "points": [
-      "Linked to placental abruption",
-      "Linked to septic abortion",
-      "Linked to postpartum haemorrhage",
-      "Linked to DIC",
-      "Flank pain or anuria"
+      "Abundant subendothelial immune complexes",
+      "Prominent mesangial proliferation",
+      "Positive full-house immunofluorescence",
+      "Requires immediate cytotoxic immunosuppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Safe first-line pharmacotherapies for chronic hypertension or preeclampsia during pregnancy encompass oral **labetalol**, extended-release **nifedipine**, and oral **methyldopa**. Conversely, **ACE inhibitors**, angiotensin receptor blockers (**ARBs**), direct renin inhibitors, and mineralocorticoid receptor antagonists are strictly **contraindicated** due to lethal fetal oligohydramnios, renal tubular dysgenesis, and skull hypoplasia.",
+   "say": "Safe first-line pharmacotherapies for chronic hypertension or preeclampsia during pregnancy encompass oral labetalol, extended-release nifedipine, and oral methyldopa. Conversely, ACE inhibitors, angiotensin receptor blockers, direct renin inhibitors, and mineralocorticoid receptor antagonists are strictly contraindicated due to lethal fetal oligohydramnios, renal tubular dysgenesis, and skull hypoplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antihypertensive Class",
+     "Specific Drugs",
+     "Safety and Toxicity Profile"
+    ],
+    "rows": [
+     [
+      "Safe first-line agents",
+      "Labetalol, nifedipine, methyldopa",
+      "Extensive clinical safety profile, no teratogenicity"
+     ],
+     [
+      "Safe second-line agents",
+      "Hydralazine, oral prazosin",
+      "Used for acute severe hypertensive crises"
+     ],
+     [
+      "Strictly contraindicated",
+      "ACE inhibitors, ARBs, spironolactone",
+      "Fetotoxicity, renal dysgenesis, skull hypoplasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe complications including **HELLP syndrome** (hemolysis, elevated liver enzymes, low platelets) occur in **10%** to **20%** of severe preeclampsia cases. Emergency management mandates seizure prophylaxis using intravenous **magnesium sulfate**, tight hemodynamic stabilization, and urgent planned **delivery** of the fetus regardless of gestational age once stabilized.",
+   "say": "Severe complications including HELLP syndrome occur in 10% to 20% of severe preeclampsia cases. Emergency management mandates seizure prophylaxis using intravenous magnesium sulfate, tight hemodynamic stabilization, and urgent planned delivery of the fetus regardless of gestational age once stabilized.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-magnesium-sulphate.webp",
+    "alt": "Eclampsia prophylaxis and acute seizure prevention in pregnancy",
+    "caption": "Magnesium sulfate seizure prophylaxis and eclampsia management (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Maintenance hemodialysis in pregnant end-stage kidney disease patients requires intensive **nocturnal or daily dialysis** protocols delivering >= **36** to **48** hours per week. Rigorous clearance targeting a predialysis blood urea nitrogen (**BUN**) < **35** to **45** mg/dL prevents polyhydramnios and maternal uremia, dramatically elevating **live birth** rates above **85%** to **90%**.",
+   "say": "Maintenance hemodialysis in pregnant end-stage kidney disease patients requires intensive nocturnal or daily dialysis protocols delivering 36 to 48 hours per week or more. Rigorous clearance targeting a predialysis blood urea nitrogen below 35 to 45 mg/dL prevents polyhydramnios and maternal uremia, dramatically elevating live birth rates above 85% to 90%.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Intensify dialysis to >= 36 to 48 hours/week",
+      "Maintain predialysis BUN < 35 to 45 mg/dL",
+      "Achieves > 85% to 90% live birth rates"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "pregnancy",
+      "intensified dialysis"
      ]
     }
    }
   }
  ],
- "quiz": [
-  "q_b98ef7f11ea1",
-  "q_143696574085",
-  "q_38df8a089b5f"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "NICE guideline NG133: Hypertension in pregnancy",
-  "ACOG Practice Bulletin 222: Gestational Hypertension and Preeclampsia"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 35
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 42",
+  "Brenner and Rector The Kidney 11e Ch. 47",
+  "ACOG Practice Bulletin No. 222: Gestational Hypertension and Preeclampsia"
+ ]
 }

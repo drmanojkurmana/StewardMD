@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "snp-acute-tubular-injury",
+ "title": "Acute tubular necrosis and rhabdomyolysis",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Ischemic acute tubular necrosis selectively injures the metabolically vulnerable **S3 segment** of the proximal tubule situated in the **outer stripe** of the outer medulla, alongside the medullary thick ascending limb. These nephron segments operate under precarious baseline tissue oxygen tensions, rendering them exquisitely vulnerable to cellular ATP exhaustion and microvascular hypoperfusion.",
+   "say": "Ischemic acute tubular necrosis selectively injures the metabolically vulnerable S3 segment of the proximal tubule situated in the outer stripe of the outer medulla, alongside the medullary thick ascending limb. These nephron segments operate under precarious baseline tissue oxygen tensions, rendering them exquisitely vulnerable to cellular ATP exhaustion and microvascular hypoperfusion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/heat-related-illnesses-fig1.webp",
+    "alt": "Systemic thermal injury and acute tubular necrosis pathways",
+    "caption": "Outer medullary hypoxia and ischemic acute tubular necrosis pathways (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Ischemia rapidly disrupts proximal tubular epithelial cell polarity, triggering severe **mislocalization** of basolateral **Na+-K+-ATPase** pumps to the apical microvillar membrane. Loss of polarized transport cripples transcellular sodium reabsorption, dramatically increasing sodium chloride delivery to the macula densa and activating profound **tubuloglomerular feedback** vasoconstriction of afferent arterioles that sustains GFR depression.",
+   "say": "Ischemia rapidly disrupts proximal tubular epithelial cell polarity, triggering severe mislocalization of basolateral Na+-K+-ATPase pumps to the apical microvillar membrane. Loss of polarized transport cripples transcellular sodium reabsorption, dramatically increasing sodium chloride delivery to the macula densa and activating profound tubuloglomerular feedback vasoconstriction of afferent arterioles that sustains GFR depression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Polarized Epithelium",
+     "points": [
+      "Basolateral Na+-K+-ATPase localization",
+      "Apical brush border with intact NHE3",
+      "Efficient proximal sodium reabsorption",
+      "Physiological macula densa perfusion"
+     ]
+    },
+    "right": {
+     "title": "Ischemic Dedifferentiation",
+     "points": [
+      "Apical relocation of ATPase pumps",
+      "Shedding of brush border microvilli",
+      "Distal salt delivery activates TGF",
+      "Sustained afferent arteriolar spasm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Myoglobinuric renal injury in severe **Rhabdomyolysis** stems from a destructive pathophysiologic triad: intense renal vasoconstriction, direct heme protein proximal tubular cytotoxicity, and intratubular **cast formation**. In the setting of an acidic urine pH below **5.6**, filtered myoglobin precipitates rapidly with secreted **Tamm-Horsfall protein**, forming obstructive pigmented casts that block distal tubular lumens.",
+   "say": "Myoglobinuric renal injury in severe Rhabdomyolysis stems from a destructive pathophysiologic triad: intense renal vasoconstriction, direct heme protein proximal tubular cytotoxicity, and intratubular cast formation. In the setting of an acidic urine pH below 5.6, filtered myoglobin precipitates rapidly with secreted Tamm-Horsfall protein, forming obstructive pigmented casts that block distal tubular lumens.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/exertional-rhabdomyolysis-fig1.webp",
+    "alt": "Exertional Rhabdomyolysis and Renal Pathophysiology",
+    "caption": "Myocyte breakdown, myoglobin cast precipitation, and tubular necrosis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "In traumatic or exertional rhabdomyolysis, marked elevations in serum **creatine kinase** exceeding **5,000** U/L correlate directly with high risk of acute kidney injury. Massive myocyte lysis releases cellular constituents into the bloodstream, precipitating life-threatening hyperkalemia, severe hyperphosphatemia, hyperuricemia, and early profound **hypocalcemia** driven by calcium deposition into traumatized necrotic muscle tissue.",
+   "say": "In traumatic or exertional rhabdomyolysis, marked elevations in serum creatine kinase exceeding 5,000 U/L correlate directly with high risk of acute kidney injury. Massive myocyte lysis releases cellular constituents into the bloodstream, precipitating life-threatening hyperkalemia, severe hyperphosphatemia, hyperuricemia, and early profound hypocalcemia driven by calcium deposition into traumatized necrotic muscle tissue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Rhabdomyolysis Labs",
+     "points": [
+      "Creatine kinase > 5,000 U/L",
+      "Severe early hyperkalemia",
+      "Marked hyperphosphatemia and urate",
+      "Profound early hypocalcemia",
+      "Key criteria: 5000"
+     ]
+    },
+    "right": {
+     "title": "Late Recovery Phase Labs",
+     "points": [
+      "Gradual normalization of muscle enzymes",
+      "Rebound hypercalcemia from mobilization",
+      "Restoration of urine flow and clearance",
+      "Resolution of metabolic acidemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immediate therapy of acute rhabdomyolysis requires aggressive intravenous resuscitation with **isotonic crystalloids** targeting a vigorous **urine output** of **200** to **300** mL/h to dilute luminal heme pigments. Adjuvant urinary alkalinization using intravenous **sodium bicarbonate** is considered only when hypocalcemia is absent and urine pH remains below **6.5**.",
+   "say": "Immediate therapy of acute rhabdomyolysis requires aggressive intravenous resuscitation with isotonic crystalloids targeting a vigorous urine output of 200 to 300 mL/h to dilute luminal heme pigments. Adjuvant urinary alkalinization using intravenous sodium bicarbonate is considered only when hypocalcemia is absent and urine pH remains below 6.5.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Volume resuscitation with crystalloids"
+     },
+     {
+      "id": "b",
+      "label": "Target urine output 200 to 300 mL/h"
+     },
+     {
+      "id": "c",
+      "label": "Bicarbonate only if pH < 6.5 and normocalcemic"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contemporary pathophysiology demonstrates that **Sepsis-associated AKI** is driven primarily by intrarenal **microvascular shunting**, severe endothelial injury, and degradation of the protective **glycocalyx** layer. Tubular epithelial cells undergo profound metabolic reprogramming and mitochondrial hibernation to survive inflammatory stress, contrasting sharply with historical assumptions of global renal hypoperfusion or widespread ischemic necrosis.",
+   "say": "Contemporary pathophysiology demonstrates that Sepsis-associated AKI is driven primarily by intrarenal microvascular shunting, severe endothelial injury, and degradation of the protective glycocalyx layer. Tubular epithelial cells undergo profound metabolic reprogramming and mitochondrial hibernation to survive inflammatory stress, contrasting sharply with historical assumptions of global renal hypoperfusion or widespread ischemic necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sepsis-Induced Renal Injury",
+     "points": [
+      "Severe microvascular flow redistribution",
+      "Endothelial glycocalyx shedding",
+      "Cellular mitochondrial hibernation",
+      "Minimal morphological cell death"
+     ]
+    },
+    "right": {
+     "title": "Pure Ischemic Shock ATN",
+     "points": [
+      "Profound macrovascular hypotension",
+      "Extensive outer medullary necrosis",
+      "Widespread tubular basement membrane denudation",
+      "Classic tubular epithelial sloughing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Urinalysis in acute rhabdomyolysis or severe intravascular hemolysis displays a characteristic diagnostic dissociation: urine dipstick testing is strongly positive for **orthotolidine** blood while microscopic examination reveals **negative urine dipstick microscopic** red blood cells. Centrifugation of the urine specimen yields a supernatant packed with classic dark brown **granular casts** representing precipitated myoglobin.",
+   "say": "Urinalysis in acute rhabdomyolysis or severe intravascular hemolysis displays a characteristic diagnostic dissociation: urine dipstick testing is strongly positive for orthotolidine blood while microscopic examination reveals negative urine dipstick microscopic red blood cells. Centrifugation of the urine specimen yields a supernatant packed with classic dark brown granular casts representing precipitated myoglobin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urinalysis Parameter",
+     "Myoglobinuria / Hemoglobinuria",
+     "True Hematuria"
+    ],
+    "rows": [
+     [
+      "Dipstick occult blood",
+      "Strongly positive (pseudoperoxidase)",
+      "Strongly positive (intact RBCs)"
+     ],
+     [
+      "Microscopic sediment",
+      "0 to 2 RBCs per high-power field",
+      "Packed red blood cells and RBC casts"
+     ],
+     [
+      "Centrifuged supernatant",
+      "Persistently pigmented red-brown",
+      "Clears completely following centrifugation"
+     ],
+     [
+      "pigment cast",
+      "Associated with pigment cast",
+      "Associated with pigment cast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During the diuretic recovery phase of severe rhabdomyolysis, paradoxical **Late hypercalcemia** frequently emerges as damaged skeletal muscle tissue regenerates. Granulomatous and myolytic **calcium phosphate** precipitates that were sequestered in necrotic muscle fibers during the acute phase mobilize back into the extracellular space alongside autonomous parathyroid recovery, requiring close biochemical monitoring.",
+   "say": "During the diuretic recovery phase of severe rhabdomyolysis, paradoxical Late hypercalcemia frequently emerges as damaged skeletal muscle tissue regenerates. Granulomatous and myolytic calcium phosphate precipitates that were sequestered in necrotic muscle fibers during the acute phase mobilize back into the extracellular space alongside autonomous parathyroid recovery, requiring close biochemical monitoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute muscle injury sequesters calcium"
+     },
+     {
+      "id": "b",
+      "label": "Diuretic tubular recovery phase"
+     },
+     {
+      "id": "c",
+      "label": "Mobilization produces late hypercalcemia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 63",
+  "Harrison Principles of Internal Medicine 22e Ch. 314",
+  "Brenner and Rector The Kidney 11e Ch. 28"
+ ]
+}

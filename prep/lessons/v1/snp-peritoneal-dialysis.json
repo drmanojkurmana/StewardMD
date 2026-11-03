@@ -1,144 +1,208 @@
 {
  "v": 1,
  "module": "snp-peritoneal-dialysis",
- "subject": "ss-nephrology",
- "title": "Peritoneal dialysis: membrane, adequacy and complications",
- "minutes": 5,
+ "title": "Peritoneal dialysis",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Peritoneal dialysis uses the **peritoneum** as a semipermeable membrane. Solute moves by **diffusion** down concentration gradients and water moves by **ultrafiltration** driven by the osmotic gradient of hypertonic glucose dialysate. The three pore model explains transport: small pores of 4 to 6 nm handle urea and most small solutes, while ultrasmall pores under 0.8 nm allow water movement through aquaporins. Large pores of 20 to 40 nm allow protein loss. Patients are classified by their peritoneal equilibration test as high, high average, low average or low transporters.",
-   "say": "Peritoneal dialysis uses the peritoneum as a semipermeable membrane. Solute moves by diffusion down concentration gradients, and water moves by ultrafiltration, driven by the osmotic gradient of hypertonic glucose dialysate. In the three pore model, small pores of 4 to 6 nanometres handle urea and most small solutes. Ultrasmall pores under 0.8 nanometres allow water movement through aquaporins. Large pores of 20 to 40 nanometres allow protein loss. Patients are classified by their peritoneal equilibration test as high, high average, low average or low transporters.",
+   "tx": "Rippe's **three-pore model** of peritoneal membrane permeability describes three distinct functional pore sizes: ultrasmall transcellular **aquaporin-1** pores (radius < **0.5** nm, mediating water-only transport without solute), small interendothelial pores (radius **4** to **5** nm, mediating small-solute diffusion), and large venular pores (radius > **20** nm, mediating macromolecular protein leak).",
+   "say": "Rippe's three-pore model of peritoneal membrane permeability describes three distinct functional pore sizes: ultrasmall transcellular aquaporin-1 pores, small interendothelial pores mediating small-solute diffusion, and large venular pores mediating macromolecular protein leak.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Transport type",
-     "Key feature",
-     "Prescription implication"
+     "Pore Category",
+     "Effective Radius",
+     "Primary Transport Function"
     ],
     "rows": [
      [
-      "High transporter",
-      "Rapid glucose equilibration",
-      "Short dwells, icodextrin for long dwell"
+      "Ultrasmall (Aquaporin-1)",
+      "< 0.5 nm radius",
+      "Solute-free water transport (50% of dwell ultrafiltration)"
      ],
      [
-      "Low transporter",
-      "Slow solute clearance",
-      "Longer dwells, larger fill volumes"
+      "Small pores (Clefts)",
+      "4 to 5 nm radius",
+      "Diffusive and convective transport of small solutes"
      ],
      [
-      "Ultrafiltration failure",
-      "Lost osmotic gradient",
-      "Review transport status and fluid intake"
+      "Large pores (Venular gaps)",
+      "> 20 nm radius",
+      "Transudation of serum albumin and macromolecules"
+     ],
+     [
+      "ultrasmall pores",
+      "Associated with ultrasmall pores",
+      "Associated with ultrasmall pores"
      ]
     ]
    }
   },
   {
-   "tx": "**Peritonitis** is diagnosed by two of three features: abdominal pain or cloudy effluent, effluent leucocytes above 100 per microlitre with more than 50 percent neutrophils, and a positive culture. Start empirical intraperitoneal antibiotics covering Gram-positive and Gram-negative organisms as soon as cultures are sent. Clinical improvement is expected within 48 to 72 hours. Persistent cloudy effluent after 5 days of appropriate therapy is **refractory peritonitis**, and Pseudomonas, S. aureus and fungi predict treatment failure and permanent haemodialysis.",
-   "say": "Peritonitis is diagnosed by two of three features: abdominal pain or cloudy effluent, effluent leucocytes above 100 per microlitre with more than 50 percent neutrophils, and a positive culture. Start empirical intraperitoneal antibiotics covering Gram-positive and Gram-negative organisms as soon as cultures are sent. Clinical improvement is expected within 48 to 72 hours. Persistent cloudy effluent after 5 days of appropriate therapy is refractory peritonitis. Pseudomonas, S. aureus and fungi predict treatment failure and permanent haemodialysis.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Cloudy effluent or pain"
-     },
-     {
-      "id": "b",
-      "label": "Cell count and culture"
-     },
-     {
-      "id": "c",
-      "label": "Empirical intraperitoneal antibiotics"
-     },
-     {
-      "id": "d",
-      "label": "Review at 48 to 72 hours"
-     },
-     {
-      "id": "e",
-      "label": "Refractory at 5 days: remove catheter"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e",
-      "No clearance"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Encapsulating peritoneal sclerosis** (EPS) is a rare, serious complication of long-term PD. Risk rises after about 5 years of treatment and with recurrent peritonitis. Glucose degradation products form advanced glycation end products that drive inflammation, fibrin deposition and a fibrocollagenous cocoon around bowel loops. Presentation is recurrent obstruction, weight loss and ultrafiltration failure. CT is the key diagnostic imaging test. Management includes stopping PD, nutritional support, steroids or tamoxifen, and surgery in selected cases.",
-   "say": "Encapsulating peritoneal sclerosis is a rare, serious complication of long-term peritoneal dialysis. Risk rises after about 5 years of treatment and with recurrent peritonitis. Glucose degradation products form advanced glycation end products that drive inflammation, fibrin deposition and a fibrocollagenous cocoon around bowel loops. Presentation includes recurrent obstruction, weight loss and ultrafiltration failure. CT is the key imaging test. Management includes stopping peritoneal dialysis, nutritional support, steroids or tamoxifen, and surgery in selected cases.",
+   "tx": "The standard **Peritoneal Equilibration Test** (**PET**) stratifies peritoneal membrane transport characteristics using a **4**-hour **2.27%** dextrose dwell into four validated transport categories based on the **dialysate-to-plasma creatinine ratio**: **high** (> **0.81**), **high-average** (**0.65** to 0.81), low-average (0.50 to 0.64), and **low** (< **0.50**).",
+   "say": "The standard Peritoneal Equilibration Test stratifies peritoneal membrane transport characteristics using a 4-hour 2.27% dextrose dwell into four validated transport categories based on the dialysate-to-plasma creatinine ratio: high above 0.81, high-average 0.65 to 0.81, low-average 0.50 to 0.64, and low below 0.50.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/snp-peritoneal-dialysis-fig1.webp",
-    "alt": "A CT scan or diagram showing thickened peritoneum forming a fibrocollagenous cocoon around bowel loops, leading to obstruction. This illustrates encapsulating peritoneal sclerosis, a complication of long-term peritoneal dialysis.",
-    "caption": "Encapsulating peritoneal sclerosis: fibrocollagenous cocoon encasing bowel, causing obstruction and ultrafiltration failure",
-    "ar": 1.8349
+    "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+    "alt": "Peritoneal Dialysis Principles and Catheter Exchange",
+    "caption": "Peritoneal membrane equilibration and dialysate kinetics (StewardMD). Features: D/P Cr, 2.5%.",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "In India, peritoneal dialysis is used widely with **automated peritoneal dialysis** (APD) and continuous ambulatory peritoneal dialysis (CAPD). Each CAPD exchange takes about 30 to 40 minutes. For high transporters, short automated dwells with **icodextrin** for the long dwell maintain ultrafiltration for 8 to 16 hours, because it is a colloid osmotic agent. Low transporters benefit from longer dwells and larger fill volumes. Dialysate leak is suspected when ultrafiltration falls and weight rises.",
-   "say": "In India, peritoneal dialysis is used widely with automated peritoneal dialysis and continuous ambulatory peritoneal dialysis. Each CAPD exchange takes about 30 to 40 minutes. For high transporters, short automated dwells with icodextrin for the long dwell maintain ultrafiltration for 8 to 16 hours, because icodextrin is a colloid osmotic agent. Low transporters benefit from longer dwells and larger fill volumes. Dialysate leak is suspected when ultrafiltration falls and weight rises.",
+   "tx": "Patients exhibiting a **high peritoneal transporter** phenotype rapidly dissipate the transperitoneal osmotic glucose gradient, resulting in premature fluid reabsorption and poor ultrafiltration on continuous ambulatory peritoneal dialysis (**CAPD**). These individuals achieve optimal ultrafiltration using **automated peritoneal dialysis** (**APD**) featuring rapid nocturnal cycles and long daytime **icodextrin** dwells.",
+   "say": "Patients exhibiting a high peritoneal transporter phenotype rapidly dissipate the transperitoneal osmotic glucose gradient, resulting in premature fluid reabsorption and poor ultrafiltration on continuous ambulatory peritoneal dialysis. These individuals achieve optimal ultrafiltration using automated peritoneal dialysis featuring rapid nocturnal cycles and long daytime icodextrin dwells.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "High transporter",
+     "title": "High Transporters",
      "points": [
-      "Rapid glucose equilibration",
-      "Short automated dwells",
-      "Icodextrin for long dwell"
+      "Rapid glucose absorption from dialysate",
+      "Early loss of osmotic ultrafiltration gradient",
+      "Prone to daytime fluid retention on CAPD",
+      "Optimal on short-dwell nocturnal APD"
      ]
     },
     "right": {
-     "title": "Low transporter",
+     "title": "Low Transporters",
      "points": [
-      "Slow solute clearance",
-      "Longer dwells",
-      "Larger fill volumes"
+      "Slow, sustained glucose absorption",
+      "Persistent osmotic gradient throughout dwell",
+      "Excellent ultrafiltration on long dwells",
+      "Requires higher fill volumes for clearance"
      ]
     }
    }
+  },
+  {
+   "tx": "The high-molecular-weight glucose polymer **Icodextrin** (molecular weight **13,000** to **19,000** Da) generates sustained **colloid osmosis** across small interendothelial pores during extended daytime or overnight dwells. Because icodextrin is absorbed slowly via lymphatic channels, it maintains steady ultrafiltration without hyperglycemic spikes or metabolic **ultrafiltration failure**.",
+   "say": "The high-molecular-weight glucose polymer Icodextrin generates sustained colloid osmosis across small interendothelial pores during extended daytime or overnight dwells. Because icodextrin is absorbed slowly via lymphatic channels, it maintains steady ultrafiltration without hyperglycemic spikes or metabolic ultrafiltration failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Icodextrin instillate in peritoneal cavity",
+      "Sustained oncotic gradient across small pores",
+      "Steady ultrafiltration during 8 to 16 hour dwells"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "13000",
+      "19000"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Contemporary international **ISPD guideline adequacy** recommendations prioritize holistic clinical symptom control, maintenance of euvolemia, and nutritional status over rigid numerical clearance metrics. While historically targeting a **total Kt/V** >= **1.7** per week, modern guidelines emphasize preservation of residual renal function and individualized fluid management.",
+   "say": "Contemporary international ISPD guideline adequacy recommendations prioritize holistic clinical symptom control, maintenance of euvolemia, and nutritional status over rigid numerical clearance metrics. While historically targeting a total Kt/V of 1.7 or more per week, modern guidelines emphasize preservation of residual renal function and individualized fluid management.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modern Holistic Paradigm",
+     "points": [
+      "Individualized clinical symptom control",
+      "Strict euvolemia and blood pressure control",
+      "Preservation of residual renal function",
+      "Patient-reported quality of life metrics",
+      "Key criteria: peritoneal dialysis"
+     ]
+    },
+    "right": {
+     "title": "Historical Numerical Target",
+     "points": [
+      "Rigid total Kt/V target >= 1.7 per week",
+      "Forced volume escalations causing burnout",
+      "Overemphasis on small-solute urea clearance",
+      "Neglect of clinical fluid overload status"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The diagnostic criteria for **peritoneal dialysis peritonitis** require at least two of the following: clinical symptoms of peritonitis (abdominal pain or cloudy effluent); dialysate effluent leukocyte count > **100** white blood cells/mcL with >= **50%** polymorphonuclear neutrophils (**PMNs**); and positive dialysate effluent microbiological culture.",
+   "say": "The diagnostic criteria for peritoneal dialysis peritonitis require at least two of the following: clinical symptoms of peritonitis such as abdominal pain or cloudy effluent; dialysate effluent leukocyte count greater than 100 white blood cells per microliter with 50% or more polymorphonuclear neutrophils; and positive dialysate effluent microbiological culture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ISPD Diagnostic Criteria",
+     "Threshold Requirement",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Peritoneal signs / symptoms",
+      "Abdominal pain, rebound, or cloudy effluent",
+      "Initial bedside clinical suspicion"
+     ],
+     [
+      "Dialysate white blood cell count",
+      "> 100 WBCs/mcL with >= 50% neutrophils",
+      "Rapid confirmatory diagnostic hallmark"
+     ],
+     [
+      "Microbiological culture",
+      "Gram stain or positive automated culture",
+      "Guides targeted antimicrobial de-escalation"
+     ],
+     [
+      "residual kidney function",
+      "Associated with residual kidney function",
+      "Associated with residual kidney function"
+     ],
+     [
+      "RKF",
+      "Associated with RKF",
+      "Associated with RKF"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Empirical antimicrobial therapy for suspected PD peritonitis must cover both Gram-positive and Gram-negative organisms simultaneously via **intraperitoneal** administration. Standard empirical regimens combine a first-generation cephalosporin (such as **cefazolin**) or vancomycin together with a third-generation cephalosporin (such as **ceftazidime**) or an aminoglycoside.",
+   "say": "Empirical antimicrobial therapy for suspected PD peritonitis must cover both Gram-positive and Gram-negative organisms simultaneously via intraperitoneal administration. Standard empirical regimens combine a first-generation cephalosporin such as cefazolin or vancomycin together with a third-generation cephalosporin such as ceftazidime or an aminoglycoside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Cloudy peritoneal dialysate effluent",
+      "Intraperitoneal cefazolin plus ceftazidime",
+      "De-escalate based on 48-hour culture results"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "Sodium sieving",
+      "aquaporin-1",
+      "free water transport",
+      "60",
+      "90"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Catastrophic **Encapsulating peritoneal sclerosis** (**EPS**) is an uncommon, life-threatening complication associated with prolonged peritoneal dialysis duration (typically exceeding **5** years) and recurrent severe peritonitis. A dense **fibrocollagenous cocoon** encases the small bowel, producing severe recurrent mechanical bowel obstruction, weight loss, and catastrophic ultrafiltration failure.",
+   "say": "Catastrophic Encapsulating peritoneal sclerosis is an uncommon, life-threatening complication associated with prolonged peritoneal dialysis duration, typically exceeding 5 years, and recurrent severe peritonitis. A dense fibrocollagenous cocoon encases the small bowel, producing severe recurrent mechanical bowel obstruction, weight loss, and catastrophic ultrafiltration failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-peritoneal-dialysis-fig1.webp",
+    "alt": "Encapsulating peritoneal sclerosis: fibrocollagenous cocoon encasing bowel, causing obstruction and ultrafiltration failure",
+    "caption": "Dense fibrocollagenous encapsulation of bowel loops in encapsulating peritoneal sclerosis (StewardMD). Features: intestinal cocooning.",
+    "ar": 1.7778
+   }
   }
  ],
- "quiz": [
-  "q_b386686aa5a0",
-  "q_e1b2703c716c",
-  "q_2e69d979abf5"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "ISPD Guidelines for Peritoneal Dialysis-Related Infections (Figueiredo et al.)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 45
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 81",
+  "Brenner and Rector The Kidney 11e Ch. 51",
+  "ISPD Peritonitis Guideline Recommendations: 2022 Update"
+ ]
 }

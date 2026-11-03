@@ -1,35 +1,214 @@
 {
  "v": 1,
  "module": "snp-genetic-kidney-disorders",
- "subject": "ss-nephrology",
- "title": "ADTKD-UMOD: uromodulin kidney disease",
- "minutes": 5,
+ "title": "Other genetic and congenital kidney disorders",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "The misfolded protein triggers **endoplasmic reticulum stress** in tubular cells. Thick ascending limb transport is disturbed, causing mild salt wasting and volume contraction. This raises proximal urate reabsorption, so the **fractional excretion of urate** is low and early hyperuricaemia with gout appears. Over years, tubular stress drives interstitial fibrosis and tubular atrophy.",
-   "say": "The misfolded protein triggers endoplasmic reticulum stress in tubular cells. Thick ascending limb transport is disturbed, causing mild salt wasting and volume contraction. This raises proximal urate reabsorption, so the fractional excretion of urate is low and early hyperuricaemia with gout appears. Over years, tubular stress drives interstitial fibrosis and tubular atrophy.",
+   "tx": "Classic **X-linked Alport syndrome** is caused by pathogenic mutations in **COL4A5** on the X chromosome, accounting for approximately **85%** of all Alport pedigrees. Disruption of alpha-5(IV) collagen chain synthesis prevents normal assembly of the **alpha3.alpha4.alpha5(IV)** heterotrimer, leading to progressive sensorineural hearing loss, ocular lenticonus, and renal failure in hemizygous males.",
+   "say": "Classic X-linked Alport syndrome is caused by pathogenic mutations in COL4A5 on the X chromosome, accounting for approximately 85% of all Alport pedigrees. Disruption of alpha-5(IV) collagen chain synthesis prevents normal assembly of the heterotrimer, leading to progressive sensorineural hearing loss, ocular lenticonus, and renal failure in hemizygous males.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alport-syndrome-fig1.webp",
+    "alt": "Alport Syndrome Organ Pathology",
+    "caption": "Sensorineural, ocular, and glomerular basement membrane pathology in Alport syndrome (StewardMD). Features: ARPKD, PKHD1, fibrocystin, congenital hepatic fibrosis, 6, 12.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Ultrastructural examination of the glomerular basement membrane by transmission electron microscopy establishes the definitive hallmark of Alport syndrome: irregular alternating areas of thinning and marked thickening with a pathognomonic **basket-weave splitting** and lamellation of the **lamina densa**. This structural disruption contrasts sharply with uniform diffuse thinning seen in benign thin basement membrane nephropathy.",
+   "say": "Ultrastructural examination of the glomerular basement membrane by transmission electron microscopy establishes the definitive hallmark of Alport syndrome: irregular alternating areas of thinning and marked thickening with a pathognomonic basket-weave splitting and lamellation of the lamina densa. This structural disruption contrasts sharply with uniform diffuse thinning seen in benign thin basement membrane nephropathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alport Syndrome Ultrastructure",
+     "points": [
+      "Basket-weave splitting of lamina densa",
+      "Alternating thick and thinned segments",
+      "Progressive lamellation and lucencies",
+      "Loss of alpha-3/4/5(IV) collagen network",
+      "Key criteria: ADTKD",
+      "Key criteria: UMOD"
+     ]
+    },
+    "right": {
+     "title": "Thin Basement Membrane Disease",
+     "points": [
+      "Uniform diffuse thinning of the GBM",
+      "Normal preservation of lamina densa",
+      "Absence of lamellation or splitting",
+      "Non-progressive benign familial hematuria",
+      "Diagnostic: MUC1",
+      "Diagnostic: hyperuricemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "X-linked **Fabry disease** is a lysosomal storage disorder caused by deficient activity of **alpha-galactosidase A** (**GLA** gene), causing progressive lysosomal accumulation of **globotriaosylceramide** (**Gb3**). Multiorgan manifestations encompass burning acroparesthesias, **angiokeratomas**, hypohidrosis, left ventricular hypertrophy, and vacuolated podocytes packed with pathognomonic zebra bodies on electron microscopy.",
+   "say": "X-linked Fabry disease is a lysosomal storage disorder caused by deficient activity of alpha-galactosidase A, causing progressive lysosomal accumulation of globotriaosylceramide. Multiorgan manifestations encompass burning acroparesthesias, angiokeratomas, hypohidrosis, left ventricular hypertrophy, and vacuolated podocytes packed with pathognomonic zebra bodies on electron microscopy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fabry Disease Manifestations",
+     "points": [
+      "Burning neuropathic acroparesthesias",
+      "Bathing-trunk angiokeratomas",
+      "Concentric left ventricular hypertrophy",
+      "Podocyte zebra bodies on electron microscopy",
+      "Key criteria: Nephronophthisis",
+      "Key criteria: NPHP"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Strategies",
+     "points": [
+      "Recombinant enzyme replacement therapy",
+      "Agalsidase alfa or beta infusions",
+      "Oral chaperone therapy (migalastat)",
+      "Concomitant RAAS blockade for proteinuria",
+      "Diagnostic: NPHP1",
+      "Diagnostic: ciliopathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Autosomal dominant tubulointerstitial kidney disease (**ADTKD**) is characterized by bland urinary sediment, slowly progressive chronic kidney disease, and autosomal dominant inheritance without significant proteinuria. The most common subtype is **ADTKD-UMOD**, caused by heterozygous mutations in the **uromodulin** gene, typically presenting with early-onset severe **hyperuricemia** and juvenile **gout**.",
+   "say": "Autosomal dominant tubulointerstitial kidney disease is characterized by bland urinary sediment, slowly progressive chronic kidney disease, and autosomal dominant inheritance without significant proteinuria. The most common subtype is ADTKD-UMOD, caused by heterozygous mutations in the uromodulin gene, typically presenting with early-onset severe hyperuricemia and juvenile gout.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-genetic-kidney-disorders-fig1.webp",
+    "alt": "ADTKD-UMOD management: CKD care, RRT, transplantation, and cascade genetic testing",
+    "caption": "ADTKD genetic cascade, interstitial fibrosis, and management pathways (StewardMD). Features: Fabry disease, alpha-galactosidase A, globotriaosylceramide, Gb3, 3.",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "A second major subtype, **ADTKD-MUC1**, is caused by a unique cytosine insertion within a GC-rich variable number tandem repeat (**VNTR**) domain of the **mucin-1** gene. This frameshift generates a toxic mutant frameshift protein (**MUC1-fs**) that accumulates within the endoplasmic reticulum of tubular epithelial cells, necessitating specialized mass spectrometry or targeted sequencing.",
+   "say": "A second major subtype, ADTKD-MUC1, is caused by a unique cytosine insertion within a GC-rich variable number tandem repeat domain of the mucin-1 gene. This frameshift generates a toxic mutant frameshift protein that accumulates within the endoplasmic reticulum of tubular epithelial cells, necessitating specialized mass spectrometry or targeted sequencing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Cytosine insertion in MUC1 VNTR",
+      "Toxic MUC1-fs protein aggregation",
+      "Tubular cell apoptosis and progressive CKD"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "zebra bodies",
+      "Fabry disease",
+      "agalsidase beta",
+      "migalastat"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe **Cystinosis** is an autosomal recessive lysosomal storage disease caused by mutations in **CTNS** (encoding **cystinosin**), leading to intralysosomal cystine crystal precipitation. Infantile nephropathic cystinosis represents the most frequent cause of inherited **renal Fanconi syndrome**, presenting with severe proximal tubular wasting, rickets, growth retardation, and diagnostic pathognomonic **corneal cystine crystals**.",
+   "say": "Severe Cystinosis is an autosomal recessive lysosomal storage disease caused by mutations in CTNS encoding cystinosin, leading to intralysosomal cystine crystal precipitation. Infantile nephropathic cystinosis represents the most frequent cause of inherited renal Fanconi syndrome, presenting with severe proximal tubular wasting, rickets, growth retardation, and diagnostic pathognomonic corneal cystine crystals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infantile Nephropathic Cystinosis",
+     "points": [
+      "Biallelic CTNS gene mutations",
+      "Profound renal Fanconi syndrome",
+      "Pathognomonic corneal crystal deposits",
+      "Treated with oral and topical cysteamine",
+      "Key criteria: Tuberous sclerosis",
+      "Key criteria: angiomyolipomas"
+     ]
+    },
+    "right": {
+     "title": "Classic Cystinuria",
+     "points": [
+      "SLC3A1 or SLC7A9 mutations",
+      "Impaired dibasic amino acid transporter",
+      "Recurrent hexagonal cystine calculi",
+      "Treated with urine alkalinization and tiopronin",
+      "Diagnostic: everolimus",
+      "Diagnostic: mTOR inhibitors"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The multi-organ ciliopathy **Bardet-Biedl syndrome** is an autosomal recessive disorder caused by mutations in **BBS genes** encoding the **BBSome** complex required for primary ciliary trafficking. Diagnostic clinical criteria comprise rod-cone **retinal dystrophy**, postaxial polydactyly, central obesity, hypogonadism, developmental delay, and structural renal dysmorphism with calyceal cysts.",
+   "say": "The multi-organ ciliopathy Bardet-Biedl syndrome is an autosomal recessive disorder caused by mutations in BBS genes encoding the BBSome complex required for primary ciliary trafficking. Diagnostic clinical criteria comprise rod-cone retinal dystrophy, postaxial polydactyly, central obesity, hypogonadism, developmental delay, and structural renal dysmorphism with calyceal cysts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Major Phenotypic Feature",
+     "Clinical Manifestation",
+     "Pathophysiologic Basis"
+    ],
+    "rows": [
+     [
+      "Visual impairment",
+      "Progressive rod-cone dystrophy",
+      "Defective ciliary transport in photoreceptors"
+     ],
+     [
+      "Musculoskeletal anomaly",
+      "Postaxial hexadactyly",
+      "Disrupted developmental Hedgehog signalling"
+     ],
+     [
+      "Renal structural anomaly",
+      "Calyceal clubbing, cysts, CKD",
+      "Impaired renal tubular primary ciliary sensing"
+     ],
+     [
+      "Von Hippel-Lindau",
+      "Associated with Von Hippel-Lindau",
+      "Associated with Von Hippel-Lindau"
+     ],
+     [
+      "VHL",
+      "Associated with VHL",
+      "Associated with VHL"
+     ],
+     [
+      "clear cell renal cell carcinoma",
+      "Associated with clear cell renal cell carcinoma",
+      "Associated with clear cell renal cell carcinoma"
+     ],
+     [
+      "HIF-2alpha",
+      "Associated with HIF-2alpha",
+      "Associated with HIF-2alpha"
+     ],
+     [
+      "1",
+      "Associated with 1",
+      "Associated with 1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Heterozygous mutations in the transcription factor **HNF1B** cause the autosomal dominant syndrome of **renal cysts and diabetes** (**RCAD**). Renal involvement features hyperechogenic enlarged kidneys, multiple bilateral cortical cysts, and congenital hypoplastic kidneys, associated with mature-onset diabetes of the young (**MODY5**), severe hypomagnesemia, and asymptomatic hyperuricemia.",
+   "say": "Heterozygous mutations in the transcription factor HNF1B cause the autosomal dominant syndrome of renal cysts and diabetes. Renal involvement features hyperechogenic enlarged kidneys, multiple bilateral cortical cysts, and congenital hypoplastic kidneys, associated with mature-onset diabetes of the young, severe hypomagnesemia, and asymptomatic hyperuricemia.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "UMOD variant"
+      "label": "HNF1B transcription factor mutation"
      },
      {
       "id": "b",
-      "label": "Misfolding in ER"
+      "label": "Abnormal renal cystogenesis and pancreas hypoplasia"
      },
      {
       "id": "c",
-      "label": "Low urate excretion"
-     },
-     {
-      "id": "d",
-      "label": "Gout"
-     },
-     {
-      "id": "e",
-      "label": "Fibrosis and CKD"
+      "label": "Renal cysts, MODY5 diabetes, and hypomagnesemia"
      }
     ],
     "edges": [
@@ -40,105 +219,15 @@
      [
       "b",
       "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "b",
-      "e"
      ]
     ]
-   }
-  },
-  {
-   "tx": "Suspect this disease in a patient with **gout in adolescence or early adulthood** and a family history of kidney failure, especially with a bland urinary sediment. Key early tests are serum urate with fractional excretion of urate, renal ultrasound for kidney size and cysts, and quantification of proteinuria. Do not label the case as simple primary gout without looking for hereditary kidney disease.",
-   "say": "Suspect this disease in a patient with gout in adolescence or early adulthood and a family history of kidney failure, especially with a bland urinary sediment. Key early tests are serum urate with fractional excretion of urate, renal ultrasound for kidney size and cysts, and quantification of proteinuria. Do not label the case as simple primary gout without looking for hereditary kidney disease.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "Purpose"
-    ],
-    "rows": [
-     [
-      "Serum urate with FEurate",
-      "Low urate excretion"
-     ],
-     [
-      "Renal ultrasound",
-      "Kidney size and cysts"
-     ],
-     [
-      "Urinalysis and proteinuria",
-      "Quantify kidney damage"
-     ],
-     [
-      "Targeted UMOD or ADTKD panel",
-      "Confirm the diagnosis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Confirm the diagnosis with **targeted UMOD sequencing** or a dedicated ADTKD gene panel, since other ADTKD genes such as MUC1 and REN can look similar. Renal biopsy with uromodulin staining showing endoplasmic reticulum retention is supportive only when biopsy is done. Offer genetic counselling and refer to nephrology with clinical genetics input.",
-   "say": "Confirm the diagnosis with targeted UMOD sequencing or a dedicated ADTKD gene panel, since other ADTKD genes such as MUC1 and REN can look similar. Renal biopsy with uromodulin staining showing endoplasmic reticulum retention is supportive only when biopsy is done. Offer genetic counselling and refer to nephrology with clinical genetics input.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Genetic confirmation",
-     "points": [
-      "UMOD sequencing first",
-      "ADTKD panel if unclear",
-      "Rule out MUC1 and REN",
-      "Biopsy is supportive only"
-     ]
-    },
-    "right": {
-     "title": "Differential diagnoses",
-     "points": [
-      "Primary gout with urate nephropathy",
-      "ADPKD on ultrasound",
-      "Other ADTKD subtypes"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Management is general chronic kidney disease care, including **blood pressure control**, avoidance of nephrotoxins and cardiovascular risk management. Plan renal replacement therapy as disease advances. **Kidney transplantation** is the preferred option because the disease does not recur in the allograft. Because inheritance is autosomal dominant, offer cascade UMOD testing to at-risk relatives.",
-   "say": "Management is general chronic kidney disease care, including blood pressure control, avoidance of nephrotoxins and cardiovascular risk management. Plan renal replacement therapy as disease advances. Kidney transplantation is the preferred option because the disease does not recur in the allograft. Because inheritance is autosomal dominant, offer cascade UMOD testing to at-risk relatives.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-genetic-kidney-disorders-fig1.webp",
-    "alt": "Diagram illustrating ADTKD-UMOD management, including general CKD care, renal replacement therapy, kidney transplantation, and autosomal dominant cascade genetic testing for family members.",
-    "caption": "ADTKD-UMOD management: CKD care, RRT, transplantation, and cascade genetic testing",
-    "ar": 1.8349
    }
   }
  ],
- "quiz": [
-  "q_27c76904bed1",
-  "q_cd8c4adefb08",
-  "q_285f1d8301c4"
- ],
- "src": [
-  "kb-reference-adtkd-uromodulin"
- ],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 646,
-  "itemN": 14
- }
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 46-47",
+  "Brenner and Rector The Kidney 11e Ch. 44",
+  "Harrison Principles of Internal Medicine 22e Ch. 317"
+ ]
 }
