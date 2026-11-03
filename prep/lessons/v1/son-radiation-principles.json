@@ -1,190 +1,329 @@
 {
- "v": 1,
- "module": "son-radiation-principles",
- "subject": "ss-medical-oncology",
- "title": "Radiation oncology essentials for the medical oncologist",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Radiotherapy works mainly by causing **double strand DNA breaks**, and the total dose is split into **fractions**. Conventional fractionation delivers about 2 Gy per fraction, once daily on weekdays, so normal tissue can repair between doses more effectively than tumour. The **4Rs** of radiobiology (repair, redistribution, repopulation and reoxygenation) explain why fractionation works and why treatment breaks can reduce control.",
-   "say": "Radiotherapy works mainly by causing double strand DNA breaks, and the total dose is split into fractions. Conventional fractionation delivers about 2 Gy per fraction, once daily on weekdays, so normal tissue can repair between doses more effectively than tumour. The 4Rs of radiobiology, which are repair, redistribution, repopulation and reoxygenation, explain why fractionation works and why treatment breaks can reduce control.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Process",
-     "Effect on response"
-    ],
-    "rows": [
-     [
-      "Repair",
-      "Normal tissue recovers between fractions"
-     ],
-     [
-      "Redistribution",
-      "Cells move into more sensitive phases"
-     ],
-     [
-      "Repopulation",
-      "Tumour cells may regrow during treatment"
-     ],
-     [
-      "Reoxygenation",
-      "Hypoxic cells gain oxygen over time"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "This figure follows a beam from the **linear accelerator** through cell kill to tissue effects. Shaped photon fields strike the tumour while the gantry rotates, and killing works directly on DNA and indirectly through free radicals, with oxygen sharpening the effect. Small daily **fractions** let normal tissue repair between doses. The four Rs explain the schedule, and acute injury is set against late fibrosis, necrosis and second malignancy.",
-   "say": "Start at the machine and describe how the beam is shaped and aimed. Then explain the two routes of cell killing and why oxygen matters. State why the dose is split into small daily fractions and what each of the four Rs contributes. End by contrasting early reversible injury with late permanent damage and the small lifelong risk the figure names.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-radiation-principles-fig1.webp",
-    "alt": "Linear accelerator beam on a tumour, a daily fractionation chart sparing normal tissue, the four Rs of radiobiology and acute and late effects.",
-    "caption": "Radiotherapy principles: LINAC, fractionation and the four Rs.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "The **linear quadratic model** predicts cell survival from dose using an alpha term for single hit killing and a beta term for two hit killing. The **alpha to beta ratio** describes how a tissue responds to fraction size. Most tumours have a high ratio near 10 Gy, so fraction size matters less, whereas late responding normal tissues such as spinal cord and lung have a ratio near 3 Gy and are more sensitive to large fractions.",
-   "say": "The linear quadratic model predicts cell survival from dose using an alpha term for single hit killing and a beta term for two hit killing. The alpha to beta ratio describes how a tissue responds to fraction size. Most tumours have a high ratio near 10 Gy, so fraction size matters less, whereas late responding normal tissues such as spinal cord and lung have a ratio near 3 Gy and are more sensitive to large fractions.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Tissue type",
-     "Typical alpha to beta",
-     "Response to large fractions"
-    ],
-    "rows": [
-     [
-      "Most tumours",
-      "About 10 Gy",
-      "Smaller penalty for hypofractionation"
-     ],
-     [
-      "Late responding normal tissue",
-      "About 3 Gy",
-      "Greater risk of late injury"
-     ],
-     [
-      "Early responding tissue",
-      "About 10 Gy",
-      "Behaves similarly to tumour"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Concurrent chemoradiation** gives a systemic **radiosensitising agent** alongside radiotherapy, aiming for better **local control** in head and neck, cervical and lung cancers. The schedule should follow the trial evidence for each tumour type. Expect additive **mucositis**, **nephrotoxicity** and **myelosuppression**, and adjust treatment to the patient's fitness and renal function.",
-   "say": "Concurrent chemoradiation gives a systemic radiosensitising agent alongside radiotherapy, aiming for better local control in head and neck, cervical and lung cancers. The schedule should follow the trial evidence for each tumour type. Expect additive mucositis, nephrotoxicity and myelosuppression, and adjust treatment to the patient's fitness and renal function.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Radiotherapy alone"
-     },
-     {
-      "id": "b",
-      "label": "Add radiosensitising agent"
-     },
-     {
-      "id": "c",
-      "label": "Better local control"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Stereotactic body radiotherapy** delivers very high doses per fraction in one to five sessions, using image guidance and steep dose fall off. It is established for early lung cancer and selected metastases. In **oligometastatic disease**, a small number of metastases treated ablatively alongside systemic therapy may prolong control. The **abscopal effect**, regression of untreated distant lesions, is rare and should not be assumed in planning.",
-   "say": "Stereotactic body radiotherapy delivers very high doses per fraction in one to five sessions, using image guidance and steep dose fall off. It is established for early lung cancer and selected metastases. In oligometastatic disease, a small number of metastases treated ablatively alongside systemic therapy may prolong control. The abscopal effect, regression of untreated distant lesions, is rare and should not be assumed in planning.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Conventional radiotherapy",
-     "points": [
-      "Many small fractions",
-      "Several weeks of treatment",
-      "Broader treatment fields"
-     ]
+  "v": 1,
+  "module": "son-radiation-principles",
+  "subject": "ss-medical-oncology",
+  "title": "Radiation oncology essentials for the medical oncologist",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The biophysical model describing radiation clonogenic survival relies on quadratic equation mathematics. The **linear-quadratic model** quantifies radiation **cell kill**, where the linear alpha parameter reflects lethal double-strand DNA breaks from single electron tracks, and the quadratic beta parameter represents accumulated sub-lethal breaks from independent tracks. This fundamental relationship governs modern fractionation schedules and equivalent dose calculations in clinical radiation oncology.",
+      "say": "The biophysical model describing radiation clonogenic survival relies on quadratic equation mathematics. The linear-quadratic model quantifies radiation cell kill, where the linear alpha parameter reflects lethal double-strand DNA breaks from single electron tracks, and the quadratic beta parameter represents sub-lethal breaks from independent tracks. This relationship governs modern fractionation schedules.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ion",
+            "label": "Ionizing Radiation Track Ionization",
+            "level": 1
+          },
+          {
+            "id": "alpha",
+            "label": "Alpha Component (Linear Single-Hit DNA Lethality)",
+            "level": 2
+          },
+          {
+            "id": "beta",
+            "label": "Beta Component (Quadratic Two-Hit Sub-Lethal Damage)",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Logarithmic Clonogenic Cell Survival Curve",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ion",
+            "alpha"
+          ],
+          [
+            "ion",
+            "beta"
+          ],
+          [
+            "alpha",
+            "surv"
+          ],
+          [
+            "beta",
+            "surv"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Stereotactic body radiotherapy",
-     "points": [
-      "One to five large fractions",
-      "Image guided and precise",
-      "Suited to small lesions"
-     ]
+    {
+      "tx": "Differential tissue responses to altered fraction sizes depend upon the target tissue repair capacity. The **alpha to beta ratio** describes tissue **fractionation sensitivity**, with acutely responding tissues and most carcinomas having a high ratio around 10 Gy, while late-responding tissues like spinal cord and kidneys have a low ratio of 2 to 3 Gy. Large fraction sizes selectively spare early-responding tissues while disproportionately increasing late-tissue necrosis.",
+      "say": "Differential tissue responses to altered fraction sizes depend upon the target tissue repair capacity. The alpha to beta ratio describes tissue fractionation sensitivity, with acutely responding tissues and most carcinomas having a high ratio around 10 Gy, while late-responding tissues like spinal cord and kidneys have a low ratio of 2 to 3 Gy. Large fraction sizes selectively damage late-responding tissues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High Alpha/Beta (~10 Gy)",
+          "points": [
+            "Early-responding tissues (mucosa, skin, bone marrow)",
+            "Most epithelial carcinomas and high-grade lymphomas",
+            "Linear curve dominates at conventional low doses",
+            "Fractionation size has relatively minimal impact"
+          ]
+        },
+        "right": {
+          "title": "Low Alpha/Beta (2 to 3 Gy)",
+          "points": [
+            "Late-responding tissues (spinal cord, lung, kidney, brain)",
+            "Prostate adenocarcinoma and malignant melanoma",
+            "Prominent shoulder on cell survival curve",
+            "Highly sensitive to fraction size changes (> 2 Gy)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Classical radiobiology explains the clinical efficacy of fractionated therapeutic radiation through cellular dynamics. The **four Rs of radiobiology** comprise **repair** of sub-lethal DNA damage, repopulation of surviving clonogens, redistribution into sensitive cell cycle phases, and reoxygenation of hypoxic tumour cells. Fractionating treatment into daily 1.8 to 2.0 Gy fractions allows normal tissues to repair sub-lethal damage while selectively sensitizing tumour cells through reoxygenation and cell cycle redistribution.",
+      "say": "Classical radiobiology explains the clinical efficacy of fractionated therapeutic radiation through cellular dynamics. The four Rs of radiobiology comprise repair of sub-lethal DNA damage, repopulation of surviving clonogens, redistribution into sensitive cell cycle phases, and reoxygenation of hypoxic tumour cells. Fractionation allows normal tissues to repair damage while sensitizing tumours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiobiological R",
+          "Cellular Phenomenon",
+          "Clinical Relevance of Fractionation"
+        ],
+        "rows": [
+          [
+            "Repair",
+            "Enzymatic repair of sub-lethal DNA breaks",
+            "Spares late-responding normal tissues (requires > 6 hours)"
+          ],
+          [
+            "Redistribution",
+            "Cells cycle out of resistant S phase into G2-M",
+            "Synchronizes tumour cells into radiosensitive phases"
+          ],
+          [
+            "Repopulation",
+            "Surviving stem cells accelerate proliferation",
+            "Prolonging overall treatment time reduces local control"
+          ],
+          [
+            "Reoxygenation",
+            "Hypoxic cells gain access to capillary blood",
+            "Alleviates hypoxia, enhancing oxygen-mediated DNA fixation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Localized ionizing radiation can unexpectedly trigger out-of-field systemic antitumor immunity. The **abscopal effect** describes regression of distant, non-irradiated metastatic tumour lesions following localized radiotherapy, mediated by **systemic immune activation**. Radiation-induced cell death exposes tumour neoantigens and releases damage-associated molecular patterns, stimulating dendritic cells to cross-prime tumor-specific CD8+ cytotoxic T-lymphocytes.",
+      "say": "Localized ionizing radiation can unexpectedly trigger out-of-field systemic antitumor immunity. The abscopal effect describes regression of distant, non-irradiated metastatic tumour lesions following localized radiotherapy, mediated by systemic immune activation. Radiation-induced cell death exposes neoantigens and stimulates dendritic cells to cross-prime cytotoxic T-lymphocytes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sbrt",
+            "label": "Ablative Radiotherapy to Focal Index Lesion",
+            "level": 1
+          },
+          {
+            "id": "icd",
+            "label": "Immunogenic Cell Death & Neoantigen Release",
+            "level": 2
+          },
+          {
+            "id": "tcell",
+            "label": "Cross-Priming of Systemic CD8+ T-Lymphocytes",
+            "level": 3
+          },
+          {
+            "id": "abscopal",
+            "label": "Abscopal Regression of Distant Non-Target Lesions",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sbrt",
+            "icd"
+          ],
+          [
+            "icd",
+            "tcell"
+          ],
+          [
+            "tcell",
+            "abscopal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Combining systemic cytotoxics with localized radiation produces synergistic locoregional tumor control. **Concurrent chemoradiation** utilizes **radiosensitizing** cytotoxic agents, predominantly **cisplatin** or **fluorouracil**, to inhibit the repair of sub-lethal radiation damage and synchronize tumour cells at the radiosensitive G2-M cell cycle transition. This combined modality approach represents the definitive standard of care for locally advanced head and neck, cervical, and gastrointestinal carcinomas.",
+      "say": "Combining systemic cytotoxics with localized radiation produces synergistic locoregional tumor control. Concurrent chemoradiation utilizes radiosensitizing cytotoxic agents, predominantly cisplatin or fluorouracil, to inhibit the repair of sub-lethal radiation damage and synchronize tumour cells at the radiosensitive G2-M transition. This represents standard care for cervical and head and neck cancers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Radiosensitization Mechanisms",
+          "points": [
+            "Inhibition of sub-lethal radiation DNA repair",
+            "Synchronisation at G2-M cell cycle checkpoint",
+            "Depletion of endogenous intracellular radioprotective thiols",
+            "Additive direct cytotoxic tumour eradication"
+          ]
+        },
+        "right": {
+          "title": "Clinical Indications for Concurrent Cisplatin",
+          "points": [
+            "Locally advanced cervical carcinoma (FIGO IB3 to IVA)",
+            "Definitive locally advanced squamous head and neck cancer",
+            "Unresectable stage III non-small cell lung cancer",
+            "Locally advanced thoracic oesophageal carcinoma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prior radiation exposure permanently alters microvascular bed architecture, predisposing to localized recall toxicities. **Radiation recall** dermatitis presents as acute inflammatory skin **erythema** at a previously irradiated site triggered by subsequent administration of taxanes, anthracyclines, or **gemcitabine**. Manifesting as erythema, desquamation, and vesicular ulceration weeks to months post-radiation, management mandates chemotherapy suspension and topical or systemic corticosteroids.",
+      "say": "Prior radiation exposure permanently alters microvascular bed architecture, predisposing to localized recall toxicities. Radiation recall dermatitis presents as acute inflammatory skin erythema at a previously irradiated site triggered by subsequent administration of taxanes, anthracyclines, or gemcitabine. Manifesting as erythema and desquamation, management mandates chemotherapy suspension and corticosteroids.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sbrt",
+            "label": "Ablative Radiotherapy to Focal Index Lesion",
+            "level": 1
+          },
+          {
+            "id": "icd",
+            "label": "Immunogenic Cell Death & Neoantigen Release",
+            "level": 2
+          },
+          {
+            "id": "tcell",
+            "label": "Cross-Priming of Systemic CD8+ T-Lymphocytes",
+            "level": 3
+          },
+          {
+            "id": "abscopal",
+            "label": "Abscopal Regression of Distant Non-Target Lesions",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sbrt",
+            "icd"
+          ],
+          [
+            "icd",
+            "tcell"
+          ],
+          [
+            "tcell",
+            "abscopal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Direct intracavitary or interstitial radiation placement achieves highly localized conformality. **Brachytherapy** places sealed **radioisotopes** directly within or immediately adjacent to tumour tissue, delivering exceptionally high radiation doses to target neoplastic cells while exploiting the inverse-square law of radiation physics to achieve rapid dose fall-off, sparing adjacent critical normal organs in cervical, prostate, and breast carcinomas.",
+      "say": "Direct intracavitary or interstitial radiation placement achieves highly localized conformality. Brachytherapy places sealed radioisotopes directly within or immediately adjacent to tumour tissue, delivering exceptionally high radiation doses to target neoplastic cells while exploiting the inverse-square law to achieve rapid dose fall-off, sparing adjacent critical organs in cervical and prostate cancers.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radioisotope",
+          "Radiation Emission",
+          "Half-Life",
+          "Primary Clinical Application"
+        ],
+        "rows": [
+          [
+            "Iridium-192",
+            "Gamma emitter (high energy)",
+            "73.8 days",
+            "High-dose-rate (HDR) brachytherapy in cervix and breast"
+          ],
+          [
+            "Iodine-125",
+            "Low-energy gamma (photons)",
+            "59.4 days",
+            "Permanent interstitial seed implant for prostate carcinoma"
+          ],
+          [
+            "Caesium-137",
+            "Gamma emitter",
+            "30.1 years",
+            "Historical low-dose-rate intracavitary cervical implants"
+          ],
+          [
+            "Ruthenium-106",
+            "Beta emitter",
+            "373.6 days",
+            "Episcleral eye plaques for uveal melanoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients with limited metastatic dissemination represent a unique clinical entity amenable to local ablation. **Oligometastatic cancer** defined as 1 to 5 discrete metastases benefits from aggressive local therapy, where **consolidative radiotherapy** using stereotactic body radiotherapy SBRT significantly improves progression-free and overall survival in randomized phase 2 trials such as SABR-COMET. Delivering ablative biological doses over 1 to 5 fractions achieves long-term disease control in oligometastatic prostate, breast, and lung carcinomas.",
+      "say": "Patients with limited metastatic dissemination represent a unique clinical entity amenable to local ablation. Oligometastatic cancer defined as 1 to 5 discrete metastases benefits from aggressive local therapy, where consolidative radiotherapy using stereotactic body radiotherapy SBRT significantly improves survival in randomized clinical trials. Delivering ablative doses over 1 to 5 fractions achieves durable control.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oligo",
+            "label": "Oligometastatic Disease (1 to 5 Metastases)",
+            "level": 1
+          },
+          {
+            "id": "sbrt",
+            "label": "Stereotactic Body Radiotherapy (SBRT / SABR)",
+            "level": 2
+          },
+          {
+            "id": "ablative",
+            "label": "Ablative Biological Effective Dose (BED > 100 Gy)",
+            "level": 3
+          },
+          {
+            "id": "os_gain",
+            "label": "Significant Progression-Free & Overall Survival Gain",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "oligo",
+            "sbrt"
+          ],
+          [
+            "sbrt",
+            "ablative"
+          ],
+          [
+            "ablative",
+            "os_gain"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Radiation pneumonitis** is a dose dependent lung injury that usually appears within the first few months after thoracic radiotherapy, and its risk rises with concurrent chemotherapy and pre existing lung disease. **Radiation recall** is an inflammatory reaction confined to previously irradiated tissue, triggered by a newly introduced systemic agent, and it can appear weeks after that drug is started. Corticosteroids are the usual treatment for both, and the offending agent should be reconsidered before rechallenge.",
-   "say": "Think of radiation pneumonitis as lung injury that depends on dose and usually shows up in the first few months after treatment, with more risk when chemotherapy is given at the same time or when the lungs were already diseased. Radiation recall is also inflammatory, but it only affects tissue that was irradiated earlier, and it is set off by a new systemic drug, often weeks after that drug is started. Steroids are the mainstay for both, and the new agent should be reviewed before it is given again.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Radiation pneumonitis",
-     "Radiation recall"
-    ],
-    "rows": [
-     [
-      "Site",
-      "Irradiated lung",
-      "Previously irradiated tissue"
-     ],
-     [
-      "Timing",
-      "First few months after radiotherapy",
-      "Weeks after a new systemic agent"
-     ],
-     [
-      "Trigger",
-      "Radiation dose, concurrent chemotherapy, lung disease",
-      "A newly introduced systemic agent"
-     ],
-     [
-      "Treatment",
-      "Corticosteroids",
-      "Corticosteroids, reconsider the agent"
-     ]
-    ]
-   }
+  ],
+  "quiz": [
+    "q_05e404c10bab",
+    "q_3abd4fbc1ca8",
+    "q_826bc49b5366"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 15 (Principles of Radiation Oncology)",
+    "Hall EJ, Giaccia AJ. Radiobiology for the Radiologist 8e",
+    "Emami B et al. Tolerance of normal tissue to therapeutic irradiation. IJROBP"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_05e404c10bab",
-  "q_3abd4fbc1ca8",
-  "q_826bc49b5366"
- ],
- "src": [],
- "refs": [
-  "Radiobiology for the Radiologist (Hall EJ, Giaccia AJ)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 11
- }
 }

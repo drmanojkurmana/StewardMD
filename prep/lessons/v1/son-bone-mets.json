@@ -1,0 +1,309 @@
+{
+  "v": 1,
+  "module": "son-bone-mets",
+  "subject": "ss-medical-oncology",
+  "title": "Bone metastases: pathophysiology, antiresorptive agents and multidisciplinary management",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The skeletal system is one of the most frequent sites of distant metastatic spread in advanced solid malignancies. **Bone metastases** are categorized into **osteolytic** lesions driven by tumour-stimulated osteoclast recruitment, typical of breast cancer, multiple myeloma, and non-small cell lung cancer, and osteoblastic lesions characterized by aberrant new bone formation in prostate cancer. Both varieties disrupt normal bone architecture, predisposing patients to disabling bone pain, spinal cord compression, and hypercalcaemia.",
+      "say": "The skeletal system is one of the most frequent sites of distant metastatic spread in advanced solid malignancies. Bone metastases are categorized into osteolytic lesions driven by osteoclast recruitment in breast cancer and myeloma, and osteoblastic lesions in prostate cancer. Both varieties impair normal bone architecture and cause severe fracture risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Dominant Pathophysiology",
+          "Typical Malignancies",
+          "Imaging Hallmark"
+        ],
+        "rows": [
+          [
+            "Osteolytic",
+            "Osteoclast-mediated bone destruction",
+            "Breast, myeloma, lung, renal",
+            "Cortical bone loss / punch-out"
+          ],
+          [
+            "Osteoblastic",
+            "Wnt and BMP-driven bone sclerosis",
+            "Prostate cancer, carcinoid",
+            "Dense ivory sclerotic patches"
+          ],
+          [
+            "Mixed",
+            "Combined lytic and sclerotic elements",
+            "Breast, gastrointestinal tumours",
+            "Mottled bone density on CT"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Potent nitrogen-containing bisphosphonates bind mineralized hydroxyapatite and induce osteoclast apoptosis, preventing tumour-induced osteolysis. Intravenous **zoledronic acid** 4 mg infused over at least 15 minutes every 3 to 4 weeks significantly reduces debilitating **skeletal-related events** (SREs). Serum creatinine monitoring is essential prior to each infusion, and dose adjustments or interval extensions to 12 weeks are recommended based on renal function.",
+      "say": "Potent nitrogen-containing bisphosphonates bind mineralized hydroxyapatite and induce osteoclast apoptosis, preventing tumour-induced osteolysis. Intravenous zoledronic acid 4 mg infused over at least 15 minutes every 3 to 4 weeks significantly reduces skeletal-related events. Serum creatinine monitoring is essential prior to each infusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mets",
+            "label": "Bone Metastases",
+            "level": 1
+          },
+          {
+            "id": "za",
+            "label": "Zoledronic Acid 4 mg IV",
+            "level": 2
+          },
+          {
+            "id": "ost",
+            "label": "Osteoclast Apoptosis",
+            "level": 3
+          },
+          {
+            "id": "sre",
+            "label": "Reduced Skeletal-Related Events",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mets",
+            "za"
+          ],
+          [
+            "za",
+            "ost"
+          ],
+          [
+            "ost",
+            "sre"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Denosumab** is a fully human monoclonal antibody directed against receptor activator of nuclear factor-kappa B ligand, acting as an **anti-RANKL** biologic. Administered as a subcutaneous injection of 120 mg every 4 weeks, denosumab demonstrated statistically superior prevention and delay of skeletal-related events compared to intravenous **zoledronic acid** in randomized trials across solid tumours. Furthermore, denosumab requires no dose adjustments for mild or moderate renal impairment.",
+      "say": "Denosumab is a fully human monoclonal antibody directed against receptor activator of nuclear factor-kappa B ligand, acting as an anti-RANKL biologic. Administered subcutaneously at 120 mg every 4 weeks, denosumab demonstrated superior prevention of skeletal-related events compared to zoledronic acid. Denosumab requires no dose adjustments for renal impairment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Denosumab (Anti-RANKL)",
+          "points": [
+            "Subcutaneous 120 mg every 4 weeks",
+            "Superior time to first SRE in trials",
+            "Safe in renal dysfunction; high hypocalcemia risk"
+          ]
+        },
+        "right": {
+          "title": "Zoledronic Acid",
+          "points": [
+            "Intravenous 4 mg over 15+ minutes",
+            "Established antiresorptive standard",
+            "Dose-dependent nephrotoxicity requiring monitoring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Medication-related **osteonecrosis of the jaw** (**MRONJ**) is a serious adverse effect linked to potent antiresorptive and anti-angiogenic agents. Defined as exposed, necrotic bone in the maxillofacial region persisting beyond 8 weeks without history of radiation therapy, MRONJ is triggered primarily by invasive dentoalveolar procedures. A mandatory preventive dental examination and completion of required extractions prior to starting bone-modifying therapy significantly reduces MRONJ incidence.",
+      "say": "Medication-related osteonecrosis of the jaw is a serious adverse effect linked to potent antiresorptive agents. Defined as exposed necrotic bone persisting beyond 8 weeks without radiation history, it is triggered primarily by dental extractions. A mandatory dental examination prior to therapy reduces its incidence.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk Factor",
+          "Pathophysiological Mechanism",
+          "Preventive Recommendation"
+        ],
+        "rows": [
+          [
+            "Invasive Dental Surgery",
+            "Disrupts mucosal barrier over bone",
+            "Complete dental work prior to therapy"
+          ],
+          [
+            "Cumulative Drug Dose",
+            "Prolonged suppression of bone turnover",
+            "Consider extended 12-week dosing"
+          ],
+          [
+            "Poor Oral Hygiene",
+            "Bacterial colonization of alveolar bone",
+            "Regular chlorhexidine oral rinses"
+          ],
+          [
+            "Concomitant Steroids",
+            "Impaired soft tissue wound healing",
+            "Minimize systemic corticosteroid exposure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Evaluating pathological fracture risk in long bones requires standardized clinical scoring. The **Mirels scoring system** grades long bone metastases from 1 to 3 across four variables: anatomical site, pain severity, radiographic lesion nature, and cortical diameter involvement. A cumulative Mirels score of 9 or higher indicates imminent **pathological fracture**, serving as an urgent indication for prophylactic surgical stabilization prior to radiation therapy.",
+      "say": "Evaluating pathological fracture risk in long bones requires standardized clinical scoring. The Mirels scoring system grades long bone metastases across four variables: anatomical site, pain severity, radiographic appearance, and size. A cumulative score of 9 or higher indicates imminent pathological fracture, requiring prophylactic surgical fixation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Score Variable",
+          "1 Point",
+          "2 Points",
+          "3 Points"
+        ],
+        "rows": [
+          [
+            "Site",
+            "Upper limb",
+            "Lower limb",
+            "Peritrochanteric region"
+          ],
+          [
+            "Pain",
+            "Mild",
+            "Moderate",
+            "Functional (weight-bearing)"
+          ],
+          [
+            "Radiographic Nature",
+            "Blastic",
+            "Mixed",
+            "Lytic"
+          ],
+          [
+            "Cortical Size",
+            "< 1/3 bone diameter",
+            "1/3 to 2/3 diameter",
+            "> 2/3 cortical diameter"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Palliative radiation therapy delivers rapid and durable analgesia for localized painful skeletal metastases. In multiple international randomized trials, **Single-fraction** external beam **radiotherapy** delivering 8 Gy in 1 fraction provided equivalent pain relief compared to multifraction regimens delivering 30 Gy in 10 fractions. Single-fraction treatment maximizes patient convenience and optimizes resource utilization while preserving the option for localized re-irradiation if pain recurs.",
+      "say": "Palliative radiation therapy delivers rapid and durable analgesia for localized painful skeletal metastases. In randomized trials, Single-fraction radiotherapy delivering 8 Gy in 1 fraction provided equivalent pain relief compared to multifraction regimens of 30 Gy in 10 fractions. Single-fraction treatment maximizes patient convenience and comfort.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Single-Fraction 8 Gy",
+          "points": [
+            "8 Gy in 1 single radiation fraction",
+            "Equal overall pain relief (approx. 60-70%)",
+            "Convenient, ideal for poor performance status"
+          ]
+        },
+        "right": {
+          "title": "Multi-Fraction 30 Gy",
+          "points": [
+            "30 Gy delivered in 10 daily fractions",
+            "Lower retreatment rate for recurrent pain",
+            "Requires 2 weeks of daily hospital visits"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic bone-seeking radionuclide therapy targets widespread osteoblastic metastases in castration-resistant prostate cancer. **Radium-223** is a targeted **alpha-emitting** calcium mimetic that selectively incorporates into areas of active osteoblastic turnover. In the phase 3 ALSYMPCA trial, radium-223 significantly prolonged overall survival and delayed time to first symptomatic skeletal event while causing minimal myelosuppression due to the ultra-short microscopic path length of alpha particles.",
+      "say": "Systemic bone-seeking radionuclide therapy targets widespread osteoblastic metastases in castration-resistant prostate cancer. Radium-223 is a targeted alpha-emitting calcium mimetic that selectively incorporates into areas of active bone turnover. In the ALSYMPCA trial, radium-223 significantly prolonged overall survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "crpc",
+            "label": "mCRPC Bone Metastases",
+            "level": 1
+          },
+          {
+            "id": "ra223",
+            "label": "Radium-223 IV (Calcium Mimetic)",
+            "level": 2
+          },
+          {
+            "id": "alpha",
+            "label": "High-LET Alpha Irradiation",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Prolonged Overall Survival (ALSYMPCA)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "crpc",
+            "ra223"
+          ],
+          [
+            "ra223",
+            "alpha"
+          ],
+          [
+            "alpha",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Profound antiresorptive therapy carries a substantial risk of sudden metabolic derangements. Severe **hypocalcaemia** is a common and potentially life-threatening complication of denosumab and zoledronic acid, especially in patients with vitamin D deficiency or renal impairment. Baseline serum calcium and 25-hydroxyvitamin D must be checked prior to initiation, and all patients must receive daily prophylactic calcium and activated vitamin D (**calcitriol**).",
+      "say": "Profound antiresorptive therapy carries a substantial risk of sudden metabolic derangements. Severe hypocalcaemia is a common complication of denosumab and zoledronic acid, especially in patients with vitamin D deficiency. Baseline calcium and vitamin D must be checked, and patients must receive daily calcium and calcitriol.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline Ca & Vit D Check",
+            "level": 1
+          },
+          {
+            "id": "supp",
+            "label": "Daily Calcium + Calcitriol",
+            "level": 2
+          },
+          {
+            "id": "anti",
+            "label": "Denosumab or Bisphosphonate",
+            "level": 3
+          },
+          {
+            "id": "safe",
+            "label": "Normocalcemia Maintained",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "supp"
+          ],
+          [
+            "supp",
+            "anti"
+          ],
+          [
+            "anti",
+            "safe"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 118 (Metastatic Bone Disease)",
+    "ALSYMPCA Trial (NEJM)",
+    "Mirels H. Metastatic disease in long bones. Clin Orthop Relat Res 1989",
+    "ASCO-OH (CCO) Guideline on Bone-Modifying Agents in Metastatic Breast Cancer"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

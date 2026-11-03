@@ -1,0 +1,310 @@
+{
+  "v": 1,
+  "module": "son-hcc",
+  "subject": "ss-medical-oncology",
+  "title": "Hepatocellular carcinoma: screening, staging and multidisciplinary systemic management",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The **Barcelona Clinic Liver Cancer** (BCLC) staging schema integrates tumour burden, baseline liver reserve evaluated by **Child-Pugh** classification, and performance status. Spanning from stage 0 very early disease to stage D terminal liver failure, BCLC directly links prognosis to evidence-based treatment interventions. Preserving underlying background hepatic function remains as critical as treating the tumour itself during every treatment decision.",
+      "say": "The Barcelona Clinic Liver Cancer staging schema integrates tumour burden, baseline liver reserve evaluated by Child-Pugh classification, and performance status. Spanning from stage 0 very early disease to stage D terminal liver failure, BCLC directly links prognosis to evidence-based treatment interventions. Preserving background hepatic function remains critical.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "BCLC Stage",
+          "Tumour Burden",
+          "Child-Pugh Score",
+          "Primary Therapy"
+        ],
+        "rows": [
+          [
+            "Stage 0 (Very early)",
+            "Single nodule < 2 cm",
+            "Class A",
+            "Ablation or resection"
+          ],
+          [
+            "Stage A (Early)",
+            "Up to 3 nodules < 3 cm",
+            "Class A or B",
+            "Resection, ablation, or transplant"
+          ],
+          [
+            "Stage B (Intermediate)",
+            "Multinodular, no invasion",
+            "Class A or B",
+            "TACE or systemic therapy"
+          ],
+          [
+            "Stage C (Advanced)",
+            "Macrovascular invasion",
+            "Class A or B",
+            "Atezolizumab + Bevacizumab"
+          ],
+          [
+            "Stage D (Terminal)",
+            "Decompensated liver",
+            "Class C",
+            "Best supportive care"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-invasive radiological diagnosis of hepatocellular carcinoma follows strict **LI-RADS** computed tomography and magnetic resonance imaging criteria. In cirrhotic patients, hallmark diagnostic criteria include intense **arterial phase hyperenhancement** followed by delayed venous phase washout and an enhancing capsule. When classical imaging hallmarks are present on multiphasic contrast examinations, histological tissue confirmation by invasive biopsy is unnecessary.",
+      "say": "Non-invasive radiological diagnosis of hepatocellular carcinoma follows strict LI-RADS computed tomography and magnetic resonance imaging criteria. In cirrhotic patients, hallmark diagnostic criteria include intense arterial phase hyperenhancement followed by delayed venous phase washout and an enhancing capsule. Biopsy is unnecessary when these features are present.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cirr",
+            "label": "Cirrhotic Patient",
+            "level": 1
+          },
+          {
+            "id": "art",
+            "label": "Arterial Phase Hyperenhancement",
+            "level": 2
+          },
+          {
+            "id": "wash",
+            "label": "Venous Washout & Capsule",
+            "level": 3
+          },
+          {
+            "id": "lirads",
+            "label": "LI-RADS 5 Definitive HCC",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cirr",
+            "art"
+          ],
+          [
+            "art",
+            "wash"
+          ],
+          [
+            "wash",
+            "lirads"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line systemic therapy for **unresectable hepatocellular carcinoma** was revolutionized by the phase 3 **IMbrave150** trial. Combining the programmed death-ligand 1 inhibitor **atezolizumab** with the vascular endothelial growth factor inhibitor **bevacizumab** significantly prolonged overall survival and progression-free survival compared to **sorafenib**. Upper gastrointestinal endoscopy to evaluate and manage esophageal varices is mandatory prior to initiating bevacizumab to avert fatal variceal hemorrhage.",
+      "say": "First-line systemic therapy for unresectable hepatocellular carcinoma was revolutionized by the phase 3 IMbrave150 trial. Combining the programmed death-ligand 1 inhibitor atezolizumab with the vascular endothelial growth factor inhibitor bevacizumab significantly prolonged overall survival compared to sorafenib. Endoscopy to manage esophageal varices is mandatory prior to treatment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atezolizumab + Bevacizumab",
+          "points": [
+            "Dual PD-L1 and VEGF inhibition",
+            "Superior overall survival in IMbrave150",
+            "Requires pre-treatment variceal screening"
+          ]
+        },
+        "right": {
+          "title": "Sorafenib Monotherapy",
+          "points": [
+            "Multi-kinase inhibitor pioneer",
+            "Median survival 10 to 12 months",
+            "Frequent hand-foot skin reactions and fatigue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dual immune checkpoint inhibition provides an additional front-line therapeutic milestone in the **HIMALAYA trial**. The **STRIDE regimen** incorporates a single priming dose of the CTLA-4 inhibitor **tremelimumab** followed by regular interval **durvalumab** every 4 weeks. This innovative combination demonstrated statistically significant overall survival superiority over **sorafenib**, offering a valuable alternative for patients with contraindications to VEGF-targeted agents.",
+      "say": "Dual immune checkpoint inhibition provides an additional front-line therapeutic milestone in the HIMALAYA trial. The STRIDE regimen incorporates a single priming dose of the CTLA-4 inhibitor tremelimumab followed by regular interval durvalumab every 4 weeks. This combination demonstrated overall survival superiority over sorafenib.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prim",
+            "label": "Single Tremelimumab Priming",
+            "level": 1
+          },
+          {
+            "id": "reg",
+            "label": "Regular Durvalumab Every 4 Weeks",
+            "level": 2
+          },
+          {
+            "id": "hima",
+            "label": "HIMALAYA Trial Protocol",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Superior Overall Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "prim",
+            "reg"
+          ],
+          [
+            "reg",
+            "hima"
+          ],
+          [
+            "hima",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral multi-targeted tyrosine kinase inhibitors remain key components of the therapeutic armamentarium. In the **REFLECT trial**, **lenvatinib** proved non-inferior in overall survival to **sorafenib** while yielding significantly higher **objective response rate** and progression-free survival. Lenvatinib inhibits VEGFR 1 through 3, FGFR 1 through 4, RET, and KIT, making it particularly effective in patients displaying high tumour burden or portal vein branch thrombosis.",
+      "say": "Oral multi-targeted tyrosine kinase inhibitors remain key components of the therapeutic armamentarium. In the REFLECT trial, lenvatinib proved non-inferior in overall survival to sorafenib while yielding significantly higher objective response rate and progression-free survival. Lenvatinib inhibits VEGFR, FGFR, and RET receptors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "REFLECT Outcome",
+          "Response Rate",
+          "Specific Toxicities"
+        ],
+        "rows": [
+          [
+            "Lenvatinib",
+            "Non-inferior OS vs sorafenib",
+            "24.1%",
+            "Hypertension, proteinuria, anorexia"
+          ],
+          [
+            "Sorafenib",
+            "Reference control standard",
+            "9.2%",
+            "Hand-foot skin reaction, diarrhoea"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Transarterial **chemoembolization** (TACE) represents the benchmark locoregional therapy for intermediate stage **BCLC-B** disease. In patients with preserved liver function and absent macrovascular invasion, selective embolization of tumour feeding arterioles with cytotoxic emulsions induces profound ischemic necrosis. Careful patient selection prevents post-embolization liver failure, and sequential transition to systemic therapy is warranted upon TACE refractoriness.",
+      "say": "Transarterial chemoembolization serves as benchmark locoregional therapy for intermediate stage BCLC-B disease. In patients with preserved liver function and absent macrovascular invasion, selective embolization of tumour feeding arterioles induces profound ischemic necrosis. Careful patient selection prevents post-embolization liver failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bclcb",
+            "label": "Intermediate BCLC-B",
+            "level": 1
+          },
+          {
+            "id": "tace",
+            "label": "Selective Chemoembolization",
+            "level": 2
+          },
+          {
+            "id": "isch",
+            "label": "Tumour Ischemia & Necrosis",
+            "level": 3
+          },
+          {
+            "id": "eval",
+            "label": "Monitor Response & Reserve",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "bclcb",
+            "tace"
+          ],
+          [
+            "tace",
+            "isch"
+          ],
+          [
+            "isch",
+            "eval"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Orthotopic **liver transplantation** offers the unique advantage of eliminating both the malignancy and underlying cirrhotic parenchymal disease. The **Milan criteria** establish eligibility for deceased-donor transplantation: a single nodule 5 cm or smaller, or up to 3 nodules each 3 cm or smaller, without macrovascular invasion or extrahepatic spread. Meeting these criteria achieves excellent post-transplant five-year survival exceeding seventy percent.",
+      "say": "Orthotopic liver transplantation offers the unique advantage of eliminating both the malignancy and underlying cirrhotic parenchymal disease. The Milan criteria establish eligibility: a single nodule 5 cm or smaller, or up to 3 nodules each 3 cm or smaller, without macrovascular invasion or extrahepatic spread. Meeting these criteria achieves excellent five-year survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Criterion",
+          "Milan Threshold",
+          "Outcome"
+        ],
+        "rows": [
+          [
+            "Single lesion",
+            "Maximum diameter 5 cm or less",
+            "Eligible for transplant"
+          ],
+          [
+            "Multiple lesions",
+            "Up to 3 nodules, each 3 cm or less",
+            "Eligible for transplant"
+          ],
+          [
+            "Vascular invasion",
+            "Must be completely absent",
+            "Absolute contraindication"
+          ],
+          [
+            "Extrahepatic spread",
+            "Must be completely absent",
+            "Absolute contraindication"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Serum **alpha-fetoprotein** serves as a vital prognostic biomarker and surveillance tool in liver oncology. In a known **cirrhotic patient** presenting with a new hypervascular liver nodule, an AFP concentration of 400 ng/mL or higher provides strong diagnostic confirmation of hepatocellular carcinoma. Post-treatment serial measurements of alpha-fetoprotein detect early disease recurrence prior to obvious radiological tumour progression.",
+      "say": "Serum alpha-fetoprotein serves as a vital prognostic biomarker and surveillance tool in liver oncology. In a known cirrhotic patient presenting with a new hypervascular liver nodule, an AFP concentration of 400 ng/mL or higher provides strong diagnostic confirmation of hepatocellular carcinoma. Serial post-treatment monitoring identifies early disease recurrence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AFP >= 400 ng/mL",
+          "points": [
+            "Highly specific for hepatocellular carcinoma",
+            "Strongly supports non-invasive diagnosis",
+            "Correlates with microvascular invasion"
+          ]
+        },
+        "right": {
+          "title": "Normal or Mild Elevation",
+          "points": [
+            "Can occur in early small HCC lesions",
+            "Seen in chronic hepatitis or cirrhosis flares",
+            "Relies strictly on multiphasic MRI imaging"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 41 (Hepatocellular Carcinoma)",
+    "IMbrave150 Trial (NEJM)",
+    "HIMALAYA Trial (NEJM Evidence)",
+    "REFLECT Trial (Lancet)",
+    "EASL Clinical Practice Guidelines: Management of hepatocellular carcinoma"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

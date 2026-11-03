@@ -1,0 +1,299 @@
+{
+  "v": 1,
+  "module": "son-mesothelioma-thymic",
+  "subject": "ss-medical-oncology",
+  "title": "Mesothelioma and thymic tumours: diagnosis, staging and multimodal therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Malignant **pleural mesothelioma** is an aggressive neoplasm arising from mesothelial surfaces, strongly linked to prior occupational or environmental **asbestos exposure**. The disease typically manifests after a prolonged latency period of 30 to 50 years following asbestos inhalation. Most affected patients present with insidious chest wall pain, shortness of breath, and recurrent unilateral pleural effusions, highlighting the critical importance of a thorough occupational history during initial clinical evaluation.",
+      "say": "Malignant pleural mesothelioma is an aggressive neoplasm arising from mesothelial surfaces, strongly linked to prior occupational or environmental asbestos exposure. The disease typically manifests after a prolonged latency period of 30 to 50 years following asbestos inhalation. Most affected patients present with insidious chest wall pain, shortness of breath, and recurrent unilateral pleural effusions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Description",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Etiology",
+            "Asbestos mineral fibers",
+            "Occupational exposure history essential"
+          ],
+          [
+            "Latency",
+            "30 to 50 years",
+            "Presents in elderly individuals"
+          ],
+          [
+            "Presentation",
+            "Chest pain and dyspnea",
+            "Unilateral pleural effusion common"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive tissue diagnosis requires immunohistochemical confirmation to distinguish mesothelioma from pleural metastases of adenocarcinoma. Typical positive mesothelial markers are **calretinin**, WT1, cytokeratin 5/6, and podoplanin D2-40. Furthermore, diagnostic genomic testing reveals somatic BRCA1-associated protein 1 or **BAP1 loss** by immunohistochemistry in over fifty percent of cases, alongside homozygous deletion of CDKN2A on chromosome 9p21 detected via fluorescence in situ hybridization.",
+      "say": "Definitive tissue diagnosis requires immunohistochemical confirmation to distinguish mesothelioma from pleural metastases of adenocarcinoma. Typical positive mesothelial markers are calretinin, WT1, cytokeratin 5/6, and podoplanin. Furthermore, diagnostic genomic testing reveals somatic BAP1 loss by immunohistochemistry in over fifty percent of cases, alongside homozygous deletion of CDKN2A.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biop",
+            "label": "Pleural Biopsy",
+            "level": 1
+          },
+          {
+            "id": "ihc",
+            "label": "Calretinin / CK 5/6",
+            "level": 2
+          },
+          {
+            "id": "gen",
+            "label": "BAP1 Nuclear Loss",
+            "level": 3
+          },
+          {
+            "id": "dx",
+            "label": "Confirmed Mesothelioma",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "biop",
+            "ihc"
+          ],
+          [
+            "ihc",
+            "gen"
+          ],
+          [
+            "gen",
+            "dx"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line dual immune checkpoint inhibition has transformed systemic therapy for unresectable malignant **pleural mesothelioma**. In the phase 3 **CheckMate 743** trial, combining **nivolumab** with **ipilimumab** yielded significant improvements in overall survival compared to standard platinum doublet chemotherapy containing **pemetrexed**. The clinical benefit proved especially pronounced in non-epithelioid histological subtypes, establishing dual checkpoint blockade as the preferred global standard of care for sarcomatoid and biphasic disease.",
+      "say": "First-line dual immune checkpoint inhibition has transformed systemic therapy for unresectable malignant pleural mesothelioma. In the phase 3 CheckMate 743 trial, combining nivolumab with ipilimumab yielded significant improvements in overall survival compared to standard platinum doublet chemotherapy containing pemetrexed. The clinical benefit proved especially pronounced in non-epithelioid histological subtypes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nivolumab plus Ipilimumab",
+          "points": [
+            "Dual immune checkpoint blockade",
+            "CheckMate 743 survival advantage",
+            "Substantial benefit in non-epithelioid histology"
+          ]
+        },
+        "right": {
+          "title": "Cisplatin plus Pemetrexed",
+          "points": [
+            "Antifolate cytotoxic doublet",
+            "Traditional cytotoxic benchmark",
+            "Lower durable response rate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For patients eligible for chemotherapy or displaying epithelioid histology, systemic doublet therapy combines **cisplatin** and **pemetrexed** with folic acid and vitamin B12 supplementation to reduce toxicity. In fit patients, adding the vascular endothelial growth factor inhibitor **bevacizumab** produces a further survival advantage according to the MAPS trial. Maintenance pemetrexed or subsequent rechallenge may be considered in carefully selected individuals retaining adequate renal and pulmonary functional reserve.",
+      "say": "For patients eligible for chemotherapy or displaying epithelioid histology, systemic doublet therapy combines cisplatin and pemetrexed with vitamin supplementation. In fit patients, adding the vascular endothelial growth factor inhibitor bevacizumab produces a further survival advantage according to the MAPS trial. Treatment selection depends on patient performance status.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regimen",
+          "Components",
+          "Indication",
+          "Key Advantage"
+        ],
+        "rows": [
+          [
+            "Chemo doublet",
+            "Cisplatin + Pemetrexed",
+            "Epithelioid histology",
+            "High response rate"
+          ],
+          [
+            "Triplet regimen",
+            "Doublet + Bevacizumab",
+            "Fit patients without bleeding",
+            "Improved survival in MAPS"
+          ],
+          [
+            "Immunotherapy",
+            "Nivolumab + Ipilimumab",
+            "Non-epithelioid or epithelioid",
+            "Long-term durable survival"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Thymic epithelial tumours originate in the anterior mediastinum and are staged pathologically by the modified **Masaoka-Koga** system. **Thymomas** range from stage 1 encapsulated lesions completely amenable to surgical excision, to invasive stage 4 tumours with pleural implants, pericardial dissemination, or lymphogenous metastases. The World Health Organization classifies thymomas histologically into types A, AB, B1, B2, and B3 based on the proportion of neoplastic epithelial cells versus non-neoplastic lymphocytes.",
+      "say": "Thymic epithelial tumours originate in the anterior mediastinum and are staged pathologically by the modified Masaoka-Koga system. Thymomas range from stage 1 encapsulated lesions completely amenable to surgical excision, to invasive stage 4 tumours with pleural implants or lymphogenous metastases. The WHO classifies thymomas histologically based on epithelial and lymphocytic components.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Masaoka Stage",
+          "Anatomical Extent",
+          "Surgical Approach"
+        ],
+        "rows": [
+          [
+            "Stage 1",
+            "Completely encapsulated",
+            "Total thymectomy alone"
+          ],
+          [
+            "Stage 2",
+            "Microscopic capsular invasion",
+            "Complete resection +/- adjuvant RT"
+          ],
+          [
+            "Stage 3",
+            "Macroscopic invasion of organs",
+            "Neoadjuvant therapy and surgery"
+          ],
+          [
+            "Stage 4",
+            "Pleural or distant metastases",
+            "Systemic chemotherapy primary"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Myasthenia gravis** is the most frequent autoimmune paraneoplastic disorder encountered in anterior mediastinal disease, occurring in approximately 30% to 40% of patients with thymoma. Circulating autoantibodies targeting nicotinic **acetylcholine receptor** complexes at the neuromuscular junction mediate fluctuating skeletal muscle weakness, ptosis, and diplopia. All patients diagnosed with an anterior mediastinal mass require baseline acetylcholine receptor antibody testing, and perioperative plasmapheresis may be indicated to prevent myasthenic crisis.",
+      "say": "Myasthenia gravis is the most frequent autoimmune paraneoplastic disorder encountered in anterior mediastinal disease, occurring in approximately 30% to 40% of patients with thymoma. Circulating autoantibodies targeting nicotinic acetylcholine receptor complexes at the neuromuscular junction mediate fluctuating skeletal muscle weakness, ptosis, and diplopia. All patients require baseline antibody testing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "thym",
+            "label": "Thymic Cortical Tumour",
+            "level": 1
+          },
+          {
+            "id": "ab",
+            "label": "Anti-AChR Antibodies",
+            "level": 2
+          },
+          {
+            "id": "nmj",
+            "label": "Neuromuscular Impairment",
+            "level": 3
+          },
+          {
+            "id": "clin",
+            "label": "Myasthenia Gravis Signs",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "thym",
+            "ab"
+          ],
+          [
+            "ab",
+            "nmj"
+          ],
+          [
+            "nmj",
+            "clin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Thymic carcinoma** represents an overtly malignant subtype characterized by severe **cytological atypia**, absence of immature T-lymphocytes, and high rates of capsular and vascular invasion. Immunohistochemical markers reveal strong positivity for CD5 and CD117 or KIT in thymic carcinoma, readily differentiating it from benign or low-grade thymomas. Because of aggressive biological behaviour, advanced presentations and early lymphatic or hematogenous metastases are commonplace at the time of initial clinical evaluation.",
+      "say": "Thymic carcinoma represents an overtly malignant subtype characterized by severe cytological atypia, absence of immature T-lymphocytes, and high rates of capsular invasion. Immunohistochemical markers reveal strong positivity for CD5 and CD117 in thymic carcinoma, differentiating it from benign thymomas. Advanced presentations and early metastases are commonplace at initial evaluation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thymic Carcinoma",
+          "points": [
+            "Marked cytological atypia",
+            "CD5 positive, CD117 / c-KIT positive",
+            "High metastatic potential, aggressive"
+          ]
+        },
+        "right": {
+          "title": "Type B Thymoma",
+          "points": [
+            "Organotypic thymic architecture",
+            "CD5 negative, CD117 negative",
+            "Abundant immature T-lymphocyte infiltrate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For unresectable or metastatic thymic carcinoma, platinum-based **systemic therapy** forms the backbone of palliative treatment. Regimens incorporating **carboplatin plus paclitaxel** or cisplatin, doxorubicin, and cyclophosphamide achieve meaningful objective tumour responses. In patients whose tumours possess specific KIT alterations, selective tyrosine kinase inhibitors provide clinical efficacy. Dual immunotherapy or pembrolizumab may provide salvage options, requiring vigilant monitoring for immune-mediated myocarditis.",
+      "say": "For unresectable or metastatic thymic carcinoma, platinum-based systemic therapy forms the backbone of palliative treatment. Regimens incorporating carboplatin plus paclitaxel achieve meaningful objective tumour responses. In patients whose tumours possess specific KIT alterations, selective tyrosine kinase inhibitors provide clinical efficacy. Careful monitoring for autoimmune adverse events remains imperative.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eval",
+            "label": "Advanced Disease",
+            "level": 1
+          },
+          {
+            "id": "chemo",
+            "label": "Carboplatin + Paclitaxel",
+            "level": 2
+          },
+          {
+            "id": "kit",
+            "label": "KIT Mutation / Targeted TKI",
+            "level": 3
+          },
+          {
+            "id": "resp",
+            "label": "Disease Stabilization",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "eval",
+            "chemo"
+          ],
+          [
+            "chemo",
+            "kit"
+          ],
+          [
+            "kit",
+            "resp"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 34 (Malignant Mesothelioma)",
+    "CheckMate 743 Trial (Lancet)",
+    "Masaoka-Koga Thymic Staging System",
+    "NCCN Clinical Practice Guidelines in Oncology: Thymomas and Thymic Carcinomas"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
