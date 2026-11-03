@@ -1,174 +1,170 @@
 {
  "v": 1,
  "module": "srd-neuro-tumour",
- "subject": "ss-radiology",
- "title": "Brain tumours and the posterior fossa: high-yield essentials",
- "minutes": 6,
+ "title": "Brain tumours and the posterior fossa",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Brain tumours announce themselves in two broad ways. **Generalised** symptoms reflect raised intracranial pressure or hydrocephalus, including a dull headache, sickness, slowed thinking and unsteady walking. **Focal** symptoms, such as limb weakness, language disturbance or a visual field defect, point towards the tumour's location. **Seizures** are common with low-grade gliomas, and every tumour-related fit begins focally. Morning headaches are less typical than many students expect.",
-   "say": "Brain tumours announce themselves in two broad ways. Generalised symptoms reflect raised intracranial pressure or hydrocephalus, including a dull headache, sickness, slowed thinking and unsteady walking. Focal symptoms, such as limb weakness, language disturbance or a visual field defect, point towards the location of the tumour. Seizures are common with low-grade gliomas, and every tumour-related fit begins focally. Morning headaches are less typical than many students expect.",
+   "tx": "Cross-sectional evaluation of high-grade neuroepithelial malignancy highlights specific physiological parameters. **Glioblastoma** IDH-wildtype classically demonstrates a thick, irregular, peripherally ring-enhancing necrotic mass with elevated choline-to-creatine ratio and pronounced lipid-lactate resonance peaks on **MR spectroscopy**, reflecting accelerated cell membrane turnover and anaerobic cellular breakdown.",
+   "say": "Cross-sectional evaluation of high-grade neuroepithelial malignancy highlights specific physiological parameters. Glioblastoma IDH-wildtype classically demonstrates a thick, irregular, peripherally ring-enhancing necrotic mass with elevated choline-to-creatine ratio and pronounced lipid-lactate resonance peaks on MR spectroscopy, reflecting accelerated cell membrane turnover and anaerobic cellular breakdown.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glioblastoma-fig1.webp",
+    "alt": "Axial post-contrast T1-weighted MRI of the brain demonstrating a ring-enhancing glioblastoma with central necrosis and surrounding vasogenic oedema.",
+    "caption": "Glioblastoma IDH-wildtype: thick irregular ring enhancement and necrotic core (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Frontal lobe hemispheric neoplasms exhibit pathognomonic radiological signs linked to molecular status. **Oligodendroglioma** IDH-mutant and 1p/19q-codeleted characteristically arises in the frontal lobe cortical-subcortical white matter and shows coarse intratumoural **calcifications** in up to 90% of cases on CT, accompanied by cortical expansion and mild homogeneous or patchy enhancement.",
+   "say": "Frontal lobe hemispheric neoplasms exhibit pathognomonic radiological signs linked to molecular status. Oligodendroglioma IDH-mutant and 1p 19q codeleted characteristically arises in the frontal lobe cortical-subcortical white matter and shows coarse intratumoural calcifications in up to 90 percent of cases on CT, accompanied by cortical expansion and mild homogeneous or patchy enhancement.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Symptom type",
-     "Typical examples",
-     "What it suggests"
+     "Feature",
+     "Oligodendroglioma",
+     "Astrocytoma IDH-Mutant"
     ],
     "rows": [
      [
-      "Generalised",
-      "Dull headache, sickness, slowed thinking, unsteady gait",
-      "Raised intracranial pressure or hydrocephalus"
+      "Location",
+      "Frontal cortical-subcortical white matter",
+      "Diffuse hemispheric white matter"
      ],
      [
-      "Focal",
-      "Limb weakness, aphasia, visual field defect",
-      "Lesion location in the brain"
+      "Calcification Rate",
+      "Coarse, present in up to 90%",
+      "Uncommon (less than 20%)"
      ],
      [
-      "Seizure",
-      "Fits in low-grade glioma or metastasis",
-      "Focal onset, even if not obvious"
+      "Genetics",
+      "IDH mutant, 1p/19q codeleted",
+      "IDH mutant, ATRX loss, TP53"
      ]
     ]
    }
   },
   {
-   "tx": "**Gadolinium-enhanced MRI** is the preferred study for any suspected brain tumour; CT is reserved for patients who cannot have MRI. Malignant tumours usually enhance, while low-grade gliomas often do not and are best seen on **FLAIR**. Meningiomas are extra-axial, dural-based lesions with a dural tail that compress but do not invade brain. Perfusion MRI, spectroscopy and PET help separate tumour progression from treatment necrosis.",
-   "say": "Gadolinium-enhanced MRI is the preferred study for any suspected brain tumour; CT is reserved for patients who cannot have MRI. Malignant tumours usually enhance, while low-grade gliomas often do not and are best seen on FLAIR. Meningiomas are extra-axial, dural-based lesions with a dural tail that compress but do not invade brain. Perfusion MRI, spectroscopy and PET help separate tumour progression from treatment necrosis.",
+   "tx": "Paediatric posterior fossa neoplasms demonstrate distinct structural morphology upon presentation. **Pilocytic astrocytoma** typically arises in the cerebellum of children as a cystic lesion with an intensely enhancing **mural nodule**, classically classified as WHO grade 1, exhibiting low mitotic activity and excellent long-term post-surgical curative potential.",
+   "say": "Paediatric posterior fossa neoplasms present with distinct structural morphology in childhood. Pilocytic astrocytoma typically arises in the cerebellum of children as a cystic lesion with an intensely enhancing mural nodule, classically classified as WHO grade 1, exhibiting low mitotic activity and excellent long-term post-surgical curative potential.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Malignant or high-grade",
+     "title": "Pilocytic Astrocytoma",
      "points": [
-      "Usually enhances with gadolinium",
-      "Central necrosis and white-matter oedema",
-      "Restricted diffusion in many cases"
+      "WHO grade 1 benign neoplasm",
+      "Cerebellar hemisphere dominant",
+      "Cyst with vascular mural nodule",
+      "Negligible diffusion restriction"
      ]
     },
     "right": {
-     "title": "Low-grade glioma",
+     "title": "Medulloblastoma",
      "points": [
-      "Usually does not enhance",
-      "Best seen as raised FLAIR signal",
-      "Can present with seizures"
+      "WHO grade 4 malignant embryonal",
+      "Midline fourth ventricle roof",
+      "Solid densely packed blue cells",
+      "Marked DWI diffusion restriction"
      ]
     }
    }
   },
   {
-   "tx": "Diffuse gliomas are sorted by molecular profile as well as histology, and this shapes both prognosis and treatment choice. **IDH-mutant astrocytomas** keep 1p and 19q intact, whereas **oligodendrogliomas** carry co-deletion of 1p and 19q. **IDH wild-type glioblastoma** sits at the aggressive end of the spectrum, typically as a ring-like enhancing mass with a necrotic centre and possible butterfly extension across the corpus callosum. An **unmethylated MGMT promoter** signals weaker response to temozolomide.",
-   "say": "Diffuse gliomas are sorted by molecular profile as well as histology, and that shapes both prognosis and treatment choice. IDH-mutant astrocytomas keep 1p and 19q intact, whereas oligodendrogliomas carry co-deletion of both. IDH wild-type glioblastoma is the aggressive end of the spectrum, often appearing as a ring-like enhancing mass with a necrotic centre and sometimes extending across the midline. An unmethylated MGMT promoter suggests a weaker response to temozolomide.",
+   "tx": "Embryonal posterior fossa malignancies present with dense cellular architecture. **Medulloblastoma** arises from the inferior medullary velum into the **fourth ventricle**, showing hyperdensity on unenhanced CT and marked restricted diffusion on DWI reflecting high cellularity and small round blue cells, with a high propensity for leptomeningeal CSF drop metastases.",
+   "say": "Embryonal posterior fossa malignancies present with dense cellular architecture. Medulloblastoma arises from the inferior medullary velum into the fourth ventricle, showing hyperdensity on unenhanced CT and marked restricted diffusion on DWI reflecting high cellularity and small round blue cells, with a high propensity for leptomeningeal CSF drop metastases.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Entity",
-     "Key molecular feature",
-     "Typical survival"
-    ],
-    "rows": [
-     [
-      "IDH-mutant astrocytoma (grade 2)",
-      "IDH mutated, 1p/19q intact",
-      "Around 10 years"
-     ],
-     [
-      "Oligodendroglioma",
-      "IDH mutated, 1p/19q co-deleted",
-      "Over 10 years"
-     ],
-     [
-      "Glioblastoma",
-      "IDH wild-type",
-      "About 15 to 18 months"
-     ],
-     [
-      "H3 K27-altered midline glioma",
-      "H3 K27 alteration",
-      "About 1 year"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/kb/media/medulloblastoma-fig1.webp",
+    "alt": "Diagram and neuroimaging showing medulloblastoma arising in the fourth ventricle with leptomeningeal CSF drop metastases.",
+    "caption": "Medulloblastoma: fourth ventricle embryonal tumour and subarachnoid seedling spread (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Brain metastases lodge at the **grey-white junction** in watershed territory, so about 85% are supratentorial and about 15% lie in the posterior fossa. Lung and breast are the commonest sources, while melanoma has the greatest propensity to seed the brain. Metastasis is about three times more common than primary brain tumours in adults, according to Harrison, though Merck quotes about ten times. A solitary lesion in a cancer patient still needs systemic staging.",
-   "say": "Brain metastases lodge at the grey-white junction in watershed territory, so about 85 percent are supratentorial and about 15 percent lie in the posterior fossa. Lung and breast are the commonest sources, while melanoma has the greatest propensity to seed the brain. Metastasis is about three times more common than primary brain tumours in adults, according to Harrison, though Merck quotes about ten times. A solitary lesion in a cancer patient still needs systemic staging.",
+   "tx": "Intraventricular glial neoplasms demonstrate unique physical deformability along CSF pathways. **Ependymoma** characteristically originates from the floor of the fourth ventricle and plasticity allows extrusion through the **foramina of Luschka** and Magendie into the prepontine cistern, commonly displaying punctate calcification, necrosis, and heterogeneous contrast enhancement.",
+   "say": "Intraventricular glial neoplasms present with unique physical deformability along fluid spaces. Ependymoma characteristically originates from the floor of the fourth ventricle and plasticity allows extrusion through the foramina of Luschka and Magendie into the prepontine cistern, commonly displaying punctate calcification, necrosis, and heterogeneous contrast enhancement.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Haematogenous spread"
+      "id": "ep1",
+      "label": "Floor of 4th ventricle"
      },
      {
-      "id": "b",
-      "label": "Lodges at grey-white junction"
+      "id": "ep2",
+      "label": "Plastic extension"
      },
      {
-      "id": "c",
-      "label": "About 85% supratentorial"
+      "id": "ep3",
+      "label": "Foramen of Luschka"
      },
      {
-      "id": "d",
-      "label": "About 15% posterior fossa"
+      "id": "ep4",
+      "label": "Prepontine cistern"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "ep1",
+      "ep2",
+      "slow growth"
      ],
      [
-      "b",
-      "c"
+      "ep2",
+      "ep3",
+      "lateral exit"
      ],
      [
-      "b",
-      "d"
+      "ep3",
+      "ep4",
+      "encasement"
      ]
     ]
    }
   },
   {
-   "tx": "Prognosis in neuro-oncology depends on the **tumour grade** and **molecular profile**. Surgically removed meningiomas and schwannomas are often curable. Brain metastases given only **whole-brain radiotherapy** survive a few months, but **stereotactic radiosurgery** controls the lesion in most patients and occasionally cures it. Leptomeningeal spread is treated with palliative intent. Medulloblastoma reaches long-term survival in roughly seven in ten, and the **WNT subgroup** carries the best outlook.",
-   "say": "Prognosis in brain tumours depends on the tumour grade and molecular profile. Meningiomas and schwannomas that are fully removed by surgery can often be cured. When brain metastases are treated with whole brain radiotherapy alone, median survival is only around four to six months. Stereotactic radiosurgery, by contrast, controls the lesion locally in roughly 80 to 90 per cent of cases and sometimes cures it. Leptomeningeal spread is managed with palliative intent. Medulloblastoma achieves long term survival in about seven in ten patients, with the WNT subgroup having the best outlook.",
+   "tx": "Cerebellopontine angle lesions require accurate anatomical identification. **Vestibular schwannoma** arises from the inferior vestibular nerve within the **internal auditory canal**, widening the porus acusticus and producing an ice-cream cone configuration within the cerebellopontine angle with intense contrast enhancement and occasional microcystic degeneration.",
+   "say": "Cerebellopontine angle lesions require accurate anatomical identification. Vestibular schwannoma arises from the inferior vestibular nerve within the internal auditory canal, widening the porus acusticus and producing an ice-cream cone configuration within the cerebellopontine angle with intense contrast enhancement and occasional microcystic degeneration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acoustic-neuroma-fig1.webp",
+    "alt": "Anatomical illustration showing a vestibular schwannoma occupying the internal auditory canal and cerebellopontine angle.",
+    "caption": "Vestibular schwannoma: ice-cream cone mass extending from the internal auditory canal (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Extra-axial cranial masses exhibit distinct dural attachments and bony interactions. **Meningioma** displays homogeneous intense contrast enhancement, a broad **dural tail**, and hyperostosis of adjacent calvarial bone, frequently exhibiting elevated perfusion with prolonged MTT and elevated CBV due to absent blood-brain barrier vascular supply from the middle meningeal artery.",
+   "say": "Extra-axial cranial masses present with distinct dural attachments and bony interactions. Meningioma displays homogeneous intense contrast enhancement, a broad dural tail, and hyperostosis of adjacent calvarial bone, frequently exhibiting elevated perfusion with prolonged MTT and elevated CBV due to absent blood-brain barrier vascular supply from the middle meningeal artery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cns-tumours-types-and-grading-fig1.webp",
+    "alt": "Histopathological and imaging features of intracranial meningioma showing psammoma bodies and syncytial whorled pattern.",
+    "caption": "Meningioma: extra-axial dural attachment, psammoma bodies, and hyperostosis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Sellar and suprasellar pathology encompasses specific epithelial remnants. **Craniopharyngioma** **adamantinomatous** type follows the 90% rule with 90% cystic component, 90% peripheral rim calcification, and 90% vivid contrast enhancement of the cyst wall and solid nodule, containing machinery oil fluid rich in cholesterol crystals.",
+   "say": "Sellar and suprasellar masses have distinctive histology originating from Rathke pouch remnants. Craniopharyngioma adamantinomatous type follows the 90 percent rule with 90 percent cystic component, 90 percent peripheral rim calcification, and 90 percent vivid contrast enhancement of the cyst wall and solid nodule, containing machinery oil fluid rich in cholesterol crystals.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/srd-neuro-tumour-fig1.webp",
-    "alt": "Kaplan-Meier survival curves illustrating prognosis for various brain tumour types and treatment modalities, including meningioma, schwannoma, medulloblastoma, and brain metastases with different therapies.",
-    "caption": "Survival curves for common brain tumours and treatments",
-    "ar": 1.8349
+    "alt": "Kaplan-Meier survival curves illustrating prognosis for various brain tumour types and treatment modalities, including meningioma, schwannoma, medulloblastoma, and brain metastases.",
+    "caption": "Survival curves for common brain tumours and treatments (StewardMD preserved figure).",
+    "ar": 1.7778
    }
   }
  ],
  "quiz": [
-  "ct-df6a8794e11c",
-  "rad-st-gbm",
-  "ct-25c736093483"
+  "q_rad_nt_01",
+  "q_rad_nt_02",
+  "q_rad_nt_03"
  ],
- "src": [
-  "kb-reference-primary-and-metastatic-tumors-of",
-  "kb-reference-glioblastoma",
-  "kb-diseases-brain-tumour"
- ],
+ "src": [],
  "refs": [
-  "Harrison's Principles of Internal Medicine",
-  "Merck Manual"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 2498,
-  "itemN": 60
- }
+  "Crack the Core Exam Neuroradiology (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Brain Tumours)"
+ ]
 }

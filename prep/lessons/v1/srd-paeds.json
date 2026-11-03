@@ -1,127 +1,202 @@
 {
  "v": 1,
  "module": "srd-paeds",
- "subject": "ss-radiology",
- "title": "Paediatric radiology: high-yield essentials for NEET-PG and INI-CET",
- "minutes": 5,
+ "title": "Paediatric body and neuroimaging",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Malrotation with **midgut volvulus** is a surgical emergency. Normal embryological rotation fails, so the duodenojejunal junction lies to the right of the midline and the caecum is abnormally placed. The bowel can twist around the **superior mesenteric artery**, causing obstruction and ischaemia. Bilious vomiting in a newborn is the classic presentation. A single bubble with distal gas on plain film prompts an upper GI series, where a corkscrew pattern of duodenum and jejunum confirms volvulus.",
-   "say": "Malrotation with midgut volvulus is a surgical emergency. Normal embryological rotation fails, so the duodenojejunal junction lies to the right of the midline and the caecum is abnormally placed. The bowel can twist around the superior mesenteric artery, causing obstruction and ischaemia. Bilious vomiting in a newborn is the classic presentation. A single bubble with distal gas on plain film prompts an upper GI series, where a corkscrew pattern of duodenum and jejunum confirms volvulus.",
+   "tx": "Neonatal gastrointestinal emergencies require standardized ultrasonographic assessment. **Hypertrophic pyloric stenosis** is diagnosed on ultrasound by a **pyloric muscle thickness** >= 3.0 mm (single wall) and pyloric canal length >= 14 mm in infants presenting with non-bilious projectile vomiting between 2 and 8 weeks of age.",
+   "say": "Neonatal gastrointestinal emergencies require standardized ultrasonographic assessment. Hypertrophic pyloric stenosis is diagnosed on ultrasound by a pyloric muscle thickness at least 3.0 mm single wall and pyloric canal length at least 14 mm in infants presenting with non-bilious projectile vomiting between 2 and 8 weeks of age.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Parameter",
+     "Normal Neonate",
+     "Hypertrophic Pyloric Stenosis"
+    ],
+    "rows": [
+     [
+      "Single wall muscle thickness",
+      "Less than 2.0 mm",
+      "At least 3.0 mm (diagnostic cutoff)"
+     ],
+     [
+      "Pyloric channel length",
+      "Less than 10 mm",
+      "At least 14 mm"
+     ],
+     [
+      "Gastric peristalsis",
+      "Normal gastric emptying",
+      "Hyperperistalsis with failure of opening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute paediatric bowel invaginations demonstrate classic ultrasonographic patterns. **Intussusception** in infants typically presents with the target sign or **doughnut sign** in transverse ultrasound and the pseudokidney sign in longitudinal plane, successfully reduced in over 80% to 90% by air or hydrostatic contrast enema under fluoroscopic or sonographic guidance.",
+   "say": "Acute paediatric bowel invaginations present with classic ultrasonographic patterns. Intussusception in infants typically presents with the target sign or doughnut sign in transverse ultrasound and the pseudokidney sign in longitudinal plane, successfully reduced in over 80 to 90 percent by air or hydrostatic contrast enema under fluoroscopic or sonographic guidance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intussusception-fig1.webp",
+    "alt": "Diagram of bowel invagination and transverse ultrasound demonstrating target sign and pseudokidney sign.",
+    "caption": "Intussusception: concentric rings and doughnut sign on transverse ultrasound (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Embryonic midgut rotation abnormalities present as catastrophic surgical emergencies. **Midgut volvulus** secondary to intestinal malrotation classically produces the **corkscrew sign** of the redundant twisted duodenum and proximal jejunum on upper GI contrast series, with color Doppler demonstrating the whirlpool sign (clockwise wrapping of SMV around SMA).",
+   "say": "Embryonic midgut rotation abnormalities present as catastrophic surgical emergencies. Midgut volvulus secondary to intestinal malrotation classically produces the corkscrew sign of the redundant twisted duodenum and proximal jejunum on upper GI contrast series, with color Doppler demonstrating the whirlpool sign clockwise wrapping of SMV around SMA.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Failed rotation"
+      "id": "mv1",
+      "label": "Embryonic malrotation"
      },
      {
-      "id": "b",
-      "label": "Bowel twists on SMA"
+      "id": "mv2",
+      "label": "Narrow mesenteric base"
      },
      {
-      "id": "c",
-      "label": "Bilious vomiting"
+      "id": "mv3",
+      "label": "Clockwise twisting"
      },
      {
-      "id": "d",
-      "label": "Upper GI series"
-     },
-     {
-      "id": "e",
-      "label": "Corkscrew sign: surgery"
+      "id": "mv4",
+      "label": "Corkscrew sign & ischaemia"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "mv1",
+      "mv2",
+      "Ladd bands"
      ],
      [
-      "b",
-      "c"
+      "mv2",
+      "mv3",
+      "volvulus"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
+      "mv3",
+      "mv4",
+      "strangulation"
      ]
     ]
    }
   },
   {
-   "tx": "**Intussusception** is the commonest cause of intestinal obstruction in infants aged roughly 6 to 36 months. Ultrasound shows a **target sign** on transverse views, and a lead point such as a Meckel diverticulum or duplication cyst should be sought in older children. Ultrasound-guided hydrostatic or pneumatic reduction is first-line when the child is stable. Surgical exploration is reserved for failed reduction, peritonitis or suspected lead point.",
-   "say": "Intussusception is the commonest cause of intestinal obstruction in infants aged roughly six to thirty six months. Ultrasound shows a target sign on transverse views, and a lead point such as a Meckel diverticulum or duplication cyst should be sought in older children. Ultrasound guided hydrostatic or pneumatic reduction is first line when the child is stable. Surgical exploration is reserved for failed reduction, peritonitis or a suspected lead point.",
+   "tx": "Premature neonatal gastrointestinal distress requires close radiologic surveillance in intensive care nurseries. **Necrotizing enterocolitis** (NEC) on abdominal radiographs demonstrates **pneumatosis intestinalis** (pathognomonic intramural gas), portal venous gas (branching tubular gas extending to the liver periphery), and pneumoperitoneum indicating intestinal perforation.",
+   "say": "Premature neonatal gastrointestinal distress requires close radiologic surveillance in intensive care nurseries. Necrotizing enterocolitis NEC on abdominal radiographs shows the finding of pneumatosis intestinalis with pathognomonic intramural gas, portal venous gas branching tubular gas extending to the liver periphery, and pneumoperitoneum indicating intestinal perforation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Necrotizing Enterocolitis",
+     "points": [
+      "Pneumatosis intestinalis (intramural bubbles)",
+      "Portal venous branching gas to liver edge",
+      "Pneumoperitoneum (Rigler / football sign)",
+      "Fixed, dilated intestinal loop"
+     ]
+    },
+    "right": {
+     "title": "Neonatal Meconium Ileus",
+     "points": [
+      "Microcolon on contrast enema",
+      "Neuhauser soap-bubble sign in RLQ",
+      "Absence of pneumoperitoneum or portal gas",
+      "Associated with cystic fibrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Paediatric abdominal masses require accurate cross-sectional origin determination. **Wilms tumour** (nephroblastoma) is an intrarenal solid mass that expands within the renal parenchyma, distorting the pyelocaliceal system and producing the **claw sign** of splayed normal renal parenchyma, typically presenting between 2 and 5 years of age.",
+   "say": "Paediatric abdominal masses require accurate cross-sectional origin determination. Wilms tumour nephroblastoma is an intrarenal solid mass that expands within the renal parenchyma, distorting the pyelocaliceal system and producing the claw sign of splayed normal renal parenchyma, typically presenting between 2 and 5 years of age.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/srd-paeds-fig1.webp",
+    "alt": "Axial CT image of a child abdomen showing a large, heterogeneous mass arising from and largely replacing the left kidney.",
+    "caption": "Wilms tumour: large intrarenal parenchymal mass with surrounding claw sign (StewardMD preserved figure).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Neural crest malignancies exhibit distinctive invasive calcifying behaviours. **Neuroblastoma** arises from the adrenal medulla or sympathetic chain, characteristically demonstrating coarse intratumoural calcifications (90% on CT), **encasing great vessels** (aorta, IVC, celiac axis) without vascular invasion, and displacing the kidney inferolaterally.",
+   "say": "Neural crest malignancies exhibit distinctive invasive calcifying behaviours. Neuroblastoma arises from the adrenal medulla or sympathetic chain, characteristically demonstrating coarse intratumoural calcifications 90 percent on CT, encasing great vessels aorta, IVC, celiac axis without vascular invasion, and displacing the kidney inferolaterally.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuroblastoma-fig1.webp",
+    "alt": "Anatomical diagrams showing neuroblastoma encasing the abdominal aorta, orbital ecchymosis, and catecholamine pathway.",
+    "caption": "Neuroblastoma: adrenal primary encasing great vessels with extensive calcifications (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Congenital diaphragmatic malformations manifest with thoracic herniation of abdominal organs. **Congenital diaphragmatic hernia** most frequently occurs through the posterolateral **foramen of Bochdalek** (85% on the left), presenting on chest radiograph with multiple air-filled loops of bowel in the hemithorax, mediastinal shift, and a scaphoid abdomen.",
+   "say": "Congenital diaphragmatic malformations present with thoracic herniation of abdominal organs. Congenital diaphragmatic hernia most frequently occurs through the posterolateral foramen of Bochdalek 85 percent on the left, presenting on chest radiograph with multiple air-filled loops of bowel in the hemithorax, mediastinal shift, and a scaphoid abdomen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bochdalek Hernia",
+     "points": [
+      "Posterolateral diaphragmatic defect",
+      "85% occur on left hemithorax",
+      "Herniation of stomach and bowel",
+      "Associated with severe pulmonary hypoplasia"
+     ]
+    },
+    "right": {
+     "title": "Morgagni Hernia",
+     "points": [
+      "Anterior retrosternal parasternal defect",
+      "90% occur on right side",
+      "Herniation of omentum and transverse colon",
+      "Often diagnosed incidentally in older children"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Congenital posterior fossa malformations display characteristic cerebellar vermian dysgenesis. **Dandy-Walker malformation** is characterized by the triad of complete or partial **agenesis of the cerebellar vermis**, cystic dilatation of the fourth ventricle filling the posterior fossa, and an elevated tentorium with high torcula (torcular-lambdoid inversion).",
+   "say": "Congenital posterior fossa malformations appear with characteristic cerebellar vermian dysgenesis. Dandy-Walker malformation is characterized by the triad of complete or partial agenesis of the cerebellar vermis, cystic dilatation of the fourth ventricle filling the posterior fossa, and an elevated tentorium with high torcula torcular-lambdoid inversion.",
    "vis": {
     "kind": "table",
     "cols": [
      "Feature",
-     "Key point"
+     "Dandy-Walker Malformation",
+     "Mega Cisterna Magna"
     ],
     "rows": [
      [
-      "Age peak",
-      "Infants, about 6 to 36 months"
+      "Cerebellar Vermis",
+      "Agenesis or severe hypoplasia",
+      "Completely normal vermian morphology"
      ],
      [
-      "Ultrasound sign",
-      "Target sign, transverse view"
+      "Fourth Ventricle",
+      "Huge cyst directly continuous with 4th ventricle",
+      "Normal 4th ventricle configuration"
      ],
      [
-      "Older child",
-      "Look for a lead point"
-     ],
-     [
-      "Reduction",
-      "Hydrostatic or pneumatic, if stable"
-     ],
-     [
-      "Failed reduction",
-      "Proceed to surgery"
+      "Tentorial Insertion",
+      "Elevated tentorium, torcular-lambdoid inversion",
+      "Normal anatomical torcular insertion"
      ]
     ]
    }
-  },
-  {
-   "tx": "**Wilms tumour** is the commonest renal malignancy of childhood, usually presenting between 1 and 5 years. It is typically a large, heterogeneous renal mass. **Nephroblastomatosis** is a precursor state with multiple nephrogenic rests and is seen as homogeneous, rind-like lesions that enhance less than normal kidney. Multilocular cystic nephroma, sometimes called the Michael Jackson tumour, shows non-communicating cysts with septal enhancement.",
-   "say": "Wilms tumour is the commonest renal malignancy of childhood, usually presenting between one and five years. It is typically a large, heterogeneous renal mass. Nephroblastomatosis is a precursor state with multiple nephrogenic rests, seen as homogeneous, rind like lesions that enhance less than normal kidney. Multilocular cystic nephroma, sometimes called the Michael Jackson tumour, shows non communicating cysts with septal enhancement.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srd-paeds-fig1.webp",
-    "alt": "Axial CT image of a child's abdomen showing a large, irregularly shaped, heterogeneous mass arising from and largely replacing the left kidney, characteristic of a Wilms tumour.",
-    "caption": "CT scan showing a large, heterogeneous renal mass (Wilms tumour)",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Tuberous sclerosis** is an autosomal dominant disorder with cortical tubers, subependymal nodules and renal angiomyolipomas. Angiomyolipomas contain fat, so they are identified on CT or MRI by fat density or signal. Cardiac rhabdomyomas are common in infancy. Non-accidental injury should be considered in any child with multiple fractures of differing ages, and a skeletal survey is the first imaging step, with CT or MRI of the head where indicated.",
-   "say": "Tuberous sclerosis is an autosomal dominant disorder with cortical tubers, subependymal nodules and renal angiomyolipomas. Angiomyolipomas contain fat, so they are identified on CT or MRI by fat density or signal. Cardiac rhabdomyomas are common in infancy. Non accidental injury should be considered in any child with multiple fractures of differing ages, and a skeletal survey is the first imaging step.",
-   "vis": null
   }
  ],
  "quiz": [
-  "rad-midgut-volvulus",
-  "ct-18866ef987ec",
-  "ct-22b69f2a0970"
+  "q_rad_pd_01",
+  "q_rad_pd_02",
+  "q_rad_pd_03"
  ],
  "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 176
- }
+ "refs": [
+  "Crack the Core Exam Pediatric (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Paediatrics)"
+ ]
 }

@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "srd-anat-body",
+ "title": "Chest, heart, abdomen and pelvis anatomy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Thoracic cross-sectional imaging requires detailed segmental bronchial and vascular localization. **Bronchopulmonary segment** anatomy divides the right lung into 10 segments (3 upper, 2 middle, 5 lower lobe) and the left lung into 8 to 10 segments (apicoposterior, anterior, superior/inferior **lingula**, anteromedial basal, lateral basal, posterior basal), bounded by intersegmental veins.",
+   "say": "Thoracic cross-sectional imaging requires detailed segmental bronchial and vascular localization. Bronchopulmonary segment anatomy divides the right lung into 10 segments 3 upper, 2 middle, 5 lower lobe and the left lung into 8 to 10 segments apicoposterior, anterior, superior or inferior lingula, anteromedial basal, lateral basal, posterior basal, bounded by intersegmental veins.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tracheobronchial-anatomy-and-airway-foreign-body-fig1.webp",
+    "alt": "Diagram showing bronchopulmonary segments, tracheobronchial tree branching, and foreign body lodgement sites.",
+    "caption": "Bronchopulmonary segment architecture: 10 right and 8 to 10 left segmental bronchi (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Hepatic cross-sectional anatomy and surgical resection planning depend upon independent vascular supply. **Couinaud hepatic segmentation** is based on independent portal triads (portal vein, hepatic artery, bile duct) into 8 functional segments, where the **middle hepatic vein** separates the right lobe (segments 5 to 8) from the left lobe (segments 2 to 4).",
+   "say": "Hepatic cross-sectional anatomy and surgical resection planning depend upon independent vascular supply. Couinaud hepatic segmentation is based on independent portal triads portal vein, hepatic artery, bile duct into 8 functional segments, where the middle hepatic vein separates the right lobe segments 5 to 8 from the left lobe segments 2 to 4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hepatic Scissura / Boundary",
+     "Vascular Landmark",
+     "Segments Divided"
+    ],
+    "rows": [
+     [
+      "Main lobar fissure",
+      "Middle hepatic vein",
+      "Right lobe (5-8) from left lobe (2-4)"
+     ],
+     [
+      "Right intersegmental fissure",
+      "Right hepatic vein",
+      "Anterior (5, 8) from posterior (6, 7)"
+     ],
+     [
+      "Left intersegmental fissure",
+      "Left hepatic vein / falciform",
+      "Medial (4a, 4b) from lateral (2, 3)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The posterosuperior aspect of the liver exhibits unique hemodynamics. **Caudate lobe** of the liver represents Couinaud segment 1, receiving independent portal venous branches and direct venous drainage into the retrohepatic inferior vena cava, sparing it and leading to compensatory hypertrophy in **Budd-Chiari syndrome**.",
+   "say": "The posterosuperior aspect of the liver has unique hemodynamics. Caudate lobe of the liver represents Couinaud segment 1, receiving independent portal venous branches and direct venous drainage into the retrohepatic inferior vena cava, sparing it and leading to compensatory hypertrophy in Budd-Chiari syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caudate Lobe (Segment 1)",
+     "points": [
+      "Couinaud segment 1 posterior location",
+      "Dual portal supply from right and left branches",
+      "Direct drainage to retrohepatic IVC",
+      "Hypertrophies in hepatic vein thrombosis"
+     ]
+    },
+    "right": {
+     "title": "Peripheral Hepatic Segments",
+     "points": [
+      "Segments 2 through 8",
+      "Drain into major 3 hepatic veins",
+      "Subject to severe venous outflow congestion",
+      "Atrophies in Budd-Chiari syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anatomical variation of cardiac arterial distribution determines regional myocardial ischemia patterns. **Coronary artery dominance** is determined by the vessel that gives rise to the **posterior descending artery** (PDA) and posterolateral branch: right coronary dominance occurs in approximately 85% of hearts, left dominance in 10%, and codominance in 5%.",
+   "say": "Anatomical variation of cardiac arterial distribution is important for clinical practice. Coronary artery dominance is determined by the vessel that gives rise to the posterior descending artery PDA and posterolateral branch, where right coronary dominance occurs in approximately 85 percent of hearts, left dominance in 10 percent, and codominance in 5 percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dominance Pattern",
+     "Origin of Posterior Descending Artery",
+     "Population Frequency"
+    ],
+    "rows": [
+     [
+      "Right Dominant",
+      "Right coronary artery (terminal continuation)",
+      "85% of individuals"
+     ],
+     [
+      "Left Dominant",
+      "Left circumflex coronary artery",
+      "10% of individuals"
+     ],
+     [
+      "Codominant (Balanced)",
+      "Both RCA and LCx give branches to posterior sulcus",
+      "5% of individuals"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cross-sectional angiography maps visceral branches of the abdominal aorta and common anatomical variants. **Coeliac trunk** classically trifurcates into the left gastric artery, common hepatic artery, and splenic artery, where **replaced right hepatic artery** from the superior mesenteric artery occurs in 10% to 15% (Michels type 6).",
+   "say": "Cross-sectional angiography maps visceral branches of the abdominal aorta and common anatomical variants. Coeliac trunk classically trifurcates into the left gastric artery, common hepatic artery, and splenic artery, where replaced right hepatic artery from the superior mesenteric artery occurs in 10 to 15 percent Michels type 6.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ct1",
+      "label": "Abdominal aorta"
+     },
+     {
+      "id": "ct2",
+      "label": "Coeliac trunk trifurcation"
+     },
+     {
+      "id": "ct3",
+      "label": "L gastric / C hepatic / Splenic"
+     },
+     {
+      "id": "ct4",
+      "label": "SMA origin (replaced RHA 10-15%)"
+     }
+    ],
+    "edges": [
+     [
+      "ct1",
+      "ct2",
+      "T12 level"
+     ],
+     [
+      "ct2",
+      "ct3",
+      "standard anatomy"
+     ],
+     [
+      "ct1",
+      "ct4",
+      "L1 level variant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pancreatobiliary ductal confluence exhibits predictable anatomical drainage arrangements. Pancreatic ductal anatomy demonstrates the main pancreatic **duct of Wirsung** draining via the major duodenal papilla with the common bile duct, whereas the accessory **duct of Santorini** drains via the minor papilla located anterosuperiorly.",
+   "say": "Pancreatobiliary ductal confluence has predictable anatomical drainage arrangements. Pancreatic ductal anatomy demonstrates the main pancreatic duct of Wirsung draining via the major duodenal papilla with the common bile duct, whereas the accessory duct of Santorini drains via the minor papilla located anterosuperiorly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Duct of Wirsung (Major)",
+     "points": [
+      "Ventral pancreatic duct embryonic origin",
+      "Traverses head to join distal common bile duct",
+      "Empties at major duodenal papilla (ampulla)",
+      "Controlled by sphincter of Oddi"
+     ]
+    },
+    "right": {
+     "title": "Duct of Santorini (Minor)",
+     "points": [
+      "Dorsal pancreatic duct embryonic remnant",
+      "Drains anterosuperior aspect of pancreatic head",
+      "Empties at accessory minor papilla",
+      "Variable patency in normal adults"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Embryological ductal anomalies predispose to recurrent idiopathic pancreatitis in children and adults. **Pancreas divisum** is the most common congenital pancreatic ductal anomaly (5% to 10%), resulting from failure of fusion of dorsal and ventral pancreatic buds such that the bulk of the pancreas drains through the smaller **minor papilla**.",
+   "say": "Embryological ductal anomalies cause recurrent idiopathic pancreatitis in children and adults. Pancreas divisum is the most common congenital pancreatic ductal anomaly 5 to 10 percent, resulting from failure of fusion of dorsal and ventral pancreatic buds such that the bulk of the pancreas drains through the smaller minor papilla.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pancreas-divisum-fig1.webp",
+    "alt": "Anatomical illustration showing dorsal duct draining via minor papilla and MRCP demonstration of pancreas divisum.",
+    "caption": "Pancreas divisum: dominant dorsal pancreatic duct emptying through minor papilla (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The retroperitoneal spaces are partitioned by multilayered fibroconnective fascial envelopes across the abdomen. Retroperitoneal compartments defined by the renal fascia (**Gerota** and Zuckerkandl) comprise the anterior pararenal space (pancreas, ascending/descending colon, duodenum), **perirenal space** (kidneys, adrenals), and posterior pararenal space (fat only).",
+   "say": "The retroperitoneal spaces are partitioned by multilayered fibroconnective fascial envelopes across the abdomen. Retroperitoneal compartments defined by the renal fascia Gerota and Zuckerkandl comprise the anterior pararenal space pancreas, ascending descending colon, duodenum, perirenal space kidneys, adrenals, and posterior pararenal space fat only.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Compartment",
+     "Fascial Boundaries",
+     "Visceral Contents"
+    ],
+    "rows": [
+     [
+      "Anterior Pararenal",
+      "Posterior parietal peritoneum to Gerota",
+      "Pancreas, duodenal loop, ascending/descending colon"
+     ],
+     [
+      "Perirenal Space",
+      "Enclosed by Gerota (anterior) and Zuckerkandl (posterior)",
+      "Kidneys, adrenal glands, renal vessels, bridging septa"
+     ],
+     [
+      "Posterior Pararenal",
+      "Zuckerkandl fascia to transversalis fascia",
+      "Retroperitoneal fat only (no visceral organs)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_rad_ab_01",
+  "q_rad_ab_02",
+  "q_rad_ab_03"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Anatomy (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Body Anatomy)"
+ ]
+}
