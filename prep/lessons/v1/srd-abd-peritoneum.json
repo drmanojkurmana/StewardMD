@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "module": "srd-abd-peritoneum",
+ "title": "Mesentery, omentum, peritoneum and retroperitoneum",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Plain abdominal radiography identifies distinct gas patterns during visceral perforation. **Pneumoperitoneum** on plain radiography demonstrates the **Rigler sign** (visualisation of both the mucosal and serosal sides of the bowel wall outlined by air), the continuous diaphragm sign, and the football sign (large oval gas lucency outlining the falciform ligament in supine infants).",
+   "say": "Plain abdominal radiography identifies distinct gas patterns during visceral perforation. Pneumoperitoneum on plain radiography demonstrates the Rigler sign visualisation of both the mucosal and serosal sides of the bowel wall outlined by air, the continuous diaphragm sign, and the football sign large oval gas lucency outlining the falciform ligament in supine infants.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pneumoperitoneum-gas-under-diaphragm.webp",
+    "alt": "Plain erect chest radiograph displaying a distinct, thin crescent of radiolucent free air immediately beneath the right hemidiaphragmatic dome over the liver shadow.",
+    "caption": "Pneumoperitoneum: subdiaphragmatic crescent of free intraperitoneal air (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Bowel wall gas identifies catastrophic transmural injury across cross-sectional studies. **Pneumatosis intestinalis** denotes gas within the bowel wall, benign when associated with pulmonary disease or steroids, but indicating **acute mesenteric ischaemia** and impending bowel necrosis when accompanied by portomesenteric venous gas, bowel wall thickening, or non-enhancing enteric wall mucosa.",
+   "say": "Bowel wall gas identifies catastrophic transmural injury across cross-sectional studies. The sign of pneumatosis intestinalis indicates gas within the bowel wall, benign when associated with pulmonary disease or steroids, but indicating acute mesenteric ischaemia and impending bowel necrosis when accompanied by portomesenteric venous gas, bowel wall thickening, or non-enhancing enteric wall mucosa.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ischaemic Pneumatosis",
+     "points": [
+      "Linear or curvilinear parietal gas",
+      "Portomesenteric venous gas present",
+      "Absent or hypoenhancing wall",
+      "High lactic acidosis and mortality"
+     ]
+    },
+    "right": {
+     "title": "Benign Pneumatosis Cystoides",
+     "points": [
+      "Submucosal cluster of circular blebs",
+      "No portomesenteric gas",
+      "Normal bowel wall enhancement",
+      "Asymptomatic / steroid therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cross-sectional analysis of mesenteric fatty architecture reveals specific reactive inflammatory disorders. **Mesenteric panniculitis** characteristically demonstrates a solitary, well-defined fibrofatty mass in the root of the small bowel mesentery with the **misty mesentery** sign (increased attenuation > -40 HU), fat halo sign (preserved fat ring around mesenteric vessels), and a pseudocapsule, without vascular invasion.",
+   "say": "Cross-sectional analysis of mesenteric fatty architecture reveals specific reactive inflammatory disorders. Mesenteric panniculitis characteristically demonstrates a solitary, well-defined fibrofatty mass in the root of the small bowel mesentery with the misty mesentery sign increased attenuation above minus 40 Hounsfield units, fat halo sign preserved fat ring around mesenteric vessels, and a pseudocapsule, without vascular invasion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Sign",
+     "Mesenteric Panniculitis",
+     "Mesenteric Carcinoid / Lymphoma"
+    ],
+    "rows": [
+     [
+      "Misty Mesentery",
+      "Fat attenuation increased (-40 to -60 HU)",
+      "Replaced by dense confluent soft tissue mass"
+     ],
+     [
+      "Fat Halo Sign",
+      "Preserved lucent fat collar around vessels",
+      "Encasement, narrowing or vascular invasion"
+     ],
+     [
+      "Tumour Pseudocapsule",
+      "Thin peripheral soft tissue rim present",
+      "Infiltrative spiculated radiating margins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Advanced peritoneal mucinous dissemination demonstrates unique cross-sectional features. **Pseudomyxoma peritonei** typically originates from a ruptured low-grade appendiceal mucinous neoplasm (LAMN), producing gelatinous ascites that causes characteristic **scalloping of the visceral margins** of the liver and spleen without frank parenchymal invasion, accompanied by omental caking.",
+   "say": "Advanced peritoneal mucinous dissemination demonstrates unique cross-sectional features. Pseudomyxoma peritonei typically originates from a ruptured low-grade appendiceal mucinous neoplasm LAMN, producing gelatinous ascites that causes characteristic scalloping of the visceral margins of the liver and spleen without frank parenchymal invasion, accompanied by omental caking.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pmp1",
+      "label": "Appendiceal LAMN"
+     },
+     {
+      "id": "pmp2",
+      "label": "Mucinous rupture"
+     },
+     {
+      "id": "pmp3",
+      "label": "Gelatinous ascites"
+     },
+     {
+      "id": "pmp4",
+      "label": "Hepatic scalloping"
+     }
+    ],
+    "edges": [
+     [
+      "pmp1",
+      "pmp2",
+      "mucocoele pressure"
+     ],
+     [
+      "pmp2",
+      "pmp3",
+      "peritoneal seeding"
+     ],
+     [
+      "pmp3",
+      "pmp4",
+      "visceral mass effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peritoneal implants exhibit distinct spatial predilections governed by fluid dynamics. **Peritoneal carcinomatosis** predominantly implants at sites of physiological peritoneal fluid pooling: the **greater omentum** (omental cake), pouch of Douglas, right paracolic gutter, and ileocaecal junction, most commonly originating from ovarian, gastric, or colorectal adenocarcinoma.",
+   "say": "Peritoneal implants exhibit distinct spatial predilections governed by fluid dynamics. Peritoneal carcinomatosis predominantly implants at sites of physiological peritoneal fluid pooling: the greater omentum omental cake, pouch of Douglas, right paracolic gutter, and ileocaecal junction, most commonly originating from ovarian, gastric, or colorectal adenocarcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peritoneal Compartment",
+     "Fluid Dynamics Pathway",
+     "Implant Manifestation"
+    ],
+    "rows": [
+     [
+      "Greater omentum",
+      "Subdiaphragmatic suction & circulation",
+      "Omental caking / soft-tissue rind"
+     ],
+     [
+      "Pouch of Douglas",
+      "Gravity-dependent pelvic collection",
+      "Nodular rectal shelf masses"
+     ],
+     [
+      "Right paracolic gutter",
+      "Ascending ascites flow corridor",
+      "Peritoneal thickening and nodules"
+     ],
+     [
+      "Ileocaecal mesentery",
+      "Mesenteric root arrest point",
+      "Tethered bowel loops and angulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Retroperitoneal soft-tissue masses require precise histopathological differentiation. **Retroperitoneal liposarcoma** is the most common primary retroperitoneal malignancy, characterized by large size (> 10 cm), macroscopic fat density on CT, and thick irregular non-lipomatous soft-tissue septa (> 2 mm), with **dedifferentiated liposarcoma** showing abrupt transitions to high-grade non-lipomatous solid components.",
+   "say": "Retroperitoneal soft-tissue masses require precise histopathological differentiation. Retroperitoneal liposarcoma is the most common primary retroperitoneal malignancy, characterized by large size over 10 cm, macroscopic fat density on CT, and thick irregular non-lipomatous soft-tissue septa over 2 mm, with dedifferentiated liposarcoma showing abrupt transitions to high-grade non-lipomatous solid components.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-pelvic-and-retroperitoneal-trauma-fig1.webp",
+    "alt": "Coronal anatomical diagram of retroperitoneal compartments, visceral relationships, and tissue spaces.",
+    "caption": "Retroperitoneal anatomy: compartments, tissue spaces, and boundaries (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Fibro-inflammatory retroperitoneal processes can encase critical retroperitoneal tubes. **Retroperitoneal fibrosis** (Ormond disease) presents as a plaque-like confluent soft-tissue mass centered at the aortic bifurcation (L4-L5), characteristically drawing the **ureters medially** with resultant hydronephrosis, associated with elevated serum IgG4 levels in 50% of cases.",
+   "say": "Fibro-inflammatory retroperitoneal processes can encase critical retroperitoneal tubes. Retroperitoneal fibrosis Ormond disease presents as a plaque-like confluent soft-tissue mass centered at the aortic bifurcation L4 to L5, characteristically drawing the ureters medially with resultant hydronephrosis, associated with elevated serum IgG4 levels in 50 percent of cases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Retroperitoneal Fibrosis",
+     "points": [
+      "Centered at L4-L5 aortic bifurcation",
+      "Medial deviation of middle ureters",
+      "Preserves posterior aortic wall position",
+      "IgG4-related sclerosing spectrum"
+     ]
+    },
+    "right": {
+     "title": "Retroperitoneal Lymphoma",
+     "points": [
+      "Lobulated confluent lymphadenopathy",
+      "Lateral displacement of ureters",
+      "Lifts aorta anteriorly off spine",
+      "Extends above renal hilum level"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Postoperative peritoneal defects predispose to potentially strangulating bowel herniations. **Internal hernia** through the **mesenteric defect** following Roux-en-Y gastric bypass typically produces the swirl sign (rotation of the superior mesenteric vessels and mesentery) and mushroom sign (herniated loops mushrooming between the mesenteric root and colon).",
+   "say": "Postoperative peritoneal defects predispose to potentially strangulating bowel herniations. Internal hernia through the mesenteric defect following Roux-en-Y gastric bypass typically produces the swirl sign rotation of the superior mesenteric vessels and mesentery and mushroom sign herniated loops mushrooming between the mesenteric root and colon.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-peritonitis-damage-control-and-compartment-syndrome-fig1.webp",
+    "alt": "Medical illustrations and diagrams showing acute peritonitis, bowel ischaemia, and abdominal compartment syndrome.",
+    "caption": "Peritoneal complications: internal herniation, closed loop obstruction, and ischemia (StewardMD).",
+    "ar": 1.7778
+   }
+  }
+ ],
+ "quiz": [
+  "q_rad_ap_01",
+  "q_rad_ap_02",
+  "q_rad_ap_03"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Gastrointestinal (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Abdomen)"
+ ]
+}
