@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "snp-bk-polyomavirus",
+ "title": "BK polyomavirus nephropathy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**BK polyomavirus** is a double-stranded circular DNA virus that resides latently in recipient and donor renal tubular epithelial and urothelial cells, reactivating under potent immunosuppression (particularly tacrolimus and MMF regimens). The image is decoy cells on urine cytology and BK virus nuclear inclusions.",
+   "say": "BK polyomavirus is a double-stranded circular DNA virus that resides latently in recipient and donor renal tubular epithelial and urothelial cells, reactivating under potent immunosuppression (particularly tacrolimus and MMF regimens). The image is decoy cells on urine cytology and BK virus nuclear inclusions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bk-virus-nephropathy-fig1.webp",
+    "alt": "Decoy cells on urine cytology and BK virus nuclear inclusions",
+    "caption": "Cytological decoy cells and progressive stages of BK polyomavirus reactivation (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Decoy cells** are urothelial cells with characteristic ground-glass, enlarged basophilic intranuclear viral inclusion bodies, detectable in urine cytology during early BK viruria. One side is Decoy Cells (Urine), and the other side is Plasma BK PCR (> 10^4). Decoy cells are a sign of viruria, but plasma PCR is what guides the cut in immunosuppression.",
+   "say": "Decoy cells are urothelial cells with characteristic ground-glass, enlarged basophilic intranuclear viral inclusion bodies, detectable in urine cytology during early BK viruria. One side is Decoy Cells (Urine), and the other side is Plasma BK PCR ( greater than 10^4). Decoy cells are a sign of viruria, but plasma PCR is what guides the cut in immunosuppression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Decoy Cells (Urine)",
+     "points": [
+      "Enlarged nuclei with basophilic inclusions",
+      "High negative predictive value (> 95%)",
+      "Poor positive predictive value (~15%)"
+     ]
+    },
+    "right": {
+     "title": "Plasma BK PCR (> 10^4)",
+     "points": [
+      "Reflects invasive vascular replication",
+      "High positive predictive value (~60%)",
+      "Correlates directly with tissue injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**KDIGO** guidelines recommend routine screening for BK virus replication with plasma quantitative PCR monthly for the first 3 to 6 months post-transplant, then every 3 months until 12 months, and whenever serum creatinine unexplainedly rises. The paired value for Months 1 to 6 post-transplant is Plasma BK PCR monthly.",
+   "say": "KDIGO guidelines recommend routine screening for BK virus replication with plasma quantitative PCR monthly for the first 3 to 6 months post-transplant, then every 3 months until 12 months, and whenever serum creatinine unexplainedly rises. The paired value for Months 1 to 6 post-transplant is Plasma BK PCR monthly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surveillance Interval",
+     "Diagnostic Modality",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Months 1 to 6 post-transplant",
+      "Plasma BK PCR monthly",
+      "Detect early viremia during peak immunosuppression"
+     ],
+     [
+      "Months 7 to 12 post-transplant",
+      "Plasma BK PCR every 3 months",
+      "Detect delayed viremia during maintenance phase"
+     ],
+     [
+      "Unexplained rise in creatinine",
+      "Immediate plasma BK PCR and biopsy",
+      "Distinguish viral nephropathy from acute rejection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Presumptive BK** polyomavirus nephropathy is diagnosed when plasma PCR threshold remains persistently >= 10^4 copies/mL (or >= 4.0 log10 copies/mL) for at least 3 weeks. The first step is Surveillance plasma BK PCR surveillance. The next step is Sustained viral load > 10,000 copies/mL (4.0 log10).",
+   "say": "Presumptive BK polyomavirus nephropathy is diagnosed when plasma PCR threshold remains persistently at least 10^4 copies/mL (or at least 4 point 0 log10 copies/mL) for at least 3 weeks. The first step is Surveillance plasma BK PCR surveillance. The next step is Sustained viral load greater than 10,000 copies/mL (4 point 0 log10).",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Surveillance plasma BK PCR surveillance"
+     },
+     {
+      "id": "p2",
+      "label": "Sustained viral load > 10,000 copies/mL (4.0 log10)"
+     },
+     {
+      "id": "p3",
+      "label": "Presumptive BK polyomavirus nephropathy confirmed"
+     },
+     {
+      "id": "p4",
+      "label": "Immediate step-down of maintenance immunosuppression"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnosis of BK polyomavirus nephropathy (**BKPyVN**) requires allograft biopsy demonstrating intranuclear viral inclusions, tubulitis, interstitial inflammation, and positive immunohistochemical nuclear staining for SV40 large T antigen. The image is renal allograft biopsy showing SV40 positive intranuclear staining. A positive SV40 stain is what proves the inflammation is BK nephropathy.",
+   "say": "Definitive diagnosis of BK polyomavirus nephropathy (BKPyVN) requires allograft biopsy demonstrating intranuclear viral inclusions, tubulitis, interstitial inflammation, and positive immunohistochemical nuclear staining for SV40 large T antigen. The image is renal allograft biopsy showing SV40 positive intranuclear staining. A positive SV40 stain is what proves the inflammation is BK nephropathy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-transplant-rejection-fig1.webp",
+    "alt": "Renal allograft biopsy showing SV40 positive intranuclear staining",
+    "caption": "Immunohistochemical nuclear SV40 large T antigen positivity in viral tubulitis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Primary** cornerstone of therapy for BKPyVN is stepwise reduction of immunosuppression (reducing MMF by 50% or stopping it completely, followed by lowering calcineurin inhibitor trough targets by 25% to 50%). The first step is Presumptive or biopsy-proven BK nephropathy. The next step is Step 1: Reduce MMF dose by 50% or stop.",
+   "say": "Primary cornerstone of therapy for BKPyVN is stepwise reduction of immunosuppression (reducing MMF by 50% or stopping it completely, followed by lowering calcineurin inhibitor trough targets by 25% to 50%). The first step is Presumptive or biopsy-proven BK nephropathy. The next step is Step 1: Reduce MMF dose by 50% or stop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Presumptive or biopsy-proven BK nephropathy"
+     },
+     {
+      "id": "r2",
+      "label": "Step 1: Reduce MMF dose by 50% or stop"
+     },
+     {
+      "id": "r3",
+      "label": "Step 2: Lower CNI trough target by 25% to 50%"
+     },
+     {
+      "id": "r4",
+      "label": "Restores anti-BK CD4 and CD8 T-cell immunity"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ],
+     [
+      "r3",
+      "r4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adjunctive second-line therapies evaluated for refractory BK viremia include **leflunomide** (an active metabolite inhibitor of pyrimidine synthesis with antiviral properties), intravenous immunoglobulin (IVIG), and cidofovir. The paired value for Leflunomide is Inhibits pyrimidine synthesis and viral capsid assembly. The paired value for Intravenous immunoglobulin (IVIG) is Pooled donor neutralizing anti-BK antibodies.",
+   "say": "Adjunctive second-line therapies evaluated for refractory BK viremia include leflunomide (an active metabolite inhibitor of pyrimidine synthesis with antiviral properties), intravenous immunoglobulin (IVIG), and cidofovir. The paired value for Leflunomide is Inhibits pyrimidine synthesis and viral capsid assembly. The paired value for Intravenous immunoglobulin (IVIG) is Pooled donor neutralizing anti-BK antibodies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Second-Line Agent",
+     "Antiviral Mechanism",
+     "Clinical Caveat"
+    ],
+    "rows": [
+     [
+      "Leflunomide",
+      "Inhibits pyrimidine synthesis and viral capsid assembly",
+      "Monitor plasma teriflunomide levels"
+     ],
+     [
+      "Intravenous immunoglobulin (IVIG)",
+      "Pooled donor neutralizing anti-BK antibodies",
+      "Well tolerated, expensive, non-nephrotoxic"
+     ],
+     [
+      "Cidofovir",
+      "Viral DNA polymerase inhibition",
+      "Significant acute tubular necrosis risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Late complications of BK virus replication in the urinary tract include **ureteric stenosis**, ulceration, and obstruction secondary to dense viral-induced inflammation and scarring, as well as hemorrhagic cystitis. The first step is BK virus replication in donor ureteric epithelium. The next step is Transmural necrotic inflammation and ulceration.",
+   "say": "Late complications of BK virus replication in the urinary tract include ureteric stenosis, ulceration, and obstruction secondary to dense viral-induced inflammation and scarring, as well as hemorrhagic cystitis. The first step is BK virus replication in donor ureteric epithelium. The next step is Transmural necrotic inflammation and ulceration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "BK virus replication in donor ureteric epithelium"
+     },
+     {
+      "id": "u2",
+      "label": "Transmural necrotic inflammation and ulceration"
+     },
+     {
+      "id": "u3",
+      "label": "Fibroblastic scarring induces ureteric stenosis"
+     },
+     {
+      "id": "u4",
+      "label": "Hydronephrosis requiring percutaneous nephrostomy or stenting"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ],
+     [
+      "u3",
+      "u4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 81",
+  "Transplantation Guidelines on BK Polyomavirus 2019",
+  "Brenner and Rector The Kidney 11e Ch. 72"
+ ]
+}

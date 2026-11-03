@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "snp-diuretics",
+ "title": "Diuretics and diuretic resistance",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Loop diuretics** (furosemide, bumetanide, torsemide) reversibly inhibit the apical Na+-K+-2Cl- cotransporter (NKCC2) in the thick ascending limb of Henle, eliminating the lumen-positive potential and promoting excretion of Na+, Cl-, K+, Ca2+, and Mg2+. The image is nephron transport mechanisms and site of action of major diuretic classes.",
+   "say": "Loop diuretics (furosemide, bumetanide, torsemide) reversibly inhibit the apical Na+-K+-2Cl- cotransporter (NKCC2) in the thick ascending limb of Henle, eliminating the lumen-positive potential and promoting excretion of Na+, Cl-, K+, Ca2+, and Mg2+. The image is nephron transport mechanisms and site of action of major diuretic classes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/renal-tubular-transport-and-diuretics-fig1.webp",
+    "alt": "Nephron transport mechanisms and site of action of major diuretic classes",
+    "caption": "Tubular transporter sites and pharmacodynamics of loop, thiazide, and K-sparing diuretics (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The oral bioavailability of **furosemide** is highly erratic (10% to 90%, averaging 50%), whereas bumetanide and torsemide exhibit predictable oral bioavailability exceeding 80% to 90%. The paired value for Furosemide is 50% (erratic 10% to 90%). The paired value for Torsemide is 80% to 90% (stable).",
+   "say": "The oral bioavailability of furosemide is highly erratic (10% to 90%, averaging 50%), whereas bumetanide and torsemide exhibit predictable oral bioavailability exceeding 80% to 90%. The paired value for Furosemide is 50% (erratic 10% to 90%). The paired value for Torsemide is 80% to 90% (stable).",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diuretic Agent",
+     "Oral Bioavailability",
+     "Equipotent Dose"
+    ],
+    "rows": [
+     [
+      "Furosemide",
+      "50% (erratic 10% to 90%)",
+      "40 mg oral / 20 mg IV"
+     ],
+     [
+      "Torsemide",
+      "80% to 90% (stable)",
+      "20 mg oral or IV"
+     ],
+     [
+      "Bumetanide",
+      "80% to 100% (rapid)",
+      "1 mg oral or IV"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sequential nephron blockade** combines a loop diuretic with a thiazide or thiazide-like diuretic (metolazone, chlorthalidone, intravenous chlorothiazide) to overcome distal tubular hypertrophy and sodium avid reabsorption in refractory diuretic resistance. The first step is Loop diuretic bound to albumin in plasma.",
+   "say": "Sequential nephron blockade is a loop diuretic plus a thiazide or thiazide-like diuretic (metolazone, chlorthalidone, or intravenous chlorothiazide). It is used when distal tubular hypertrophy causes avid sodium reabsorption and the loop alone fails. The first step is Loop diuretic bound to albumin in plasma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Loop diuretic bound to albumin in plasma"
+     },
+     {
+      "id": "d2",
+      "label": "Uptake via basolateral OAT1 and OAT3"
+     },
+     {
+      "id": "d3",
+      "label": "Active secretion into proximal tubular lumen"
+     },
+     {
+      "id": "d4",
+      "label": "Luminal binding to NKCC2 in thick ascending limb"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2"
+     ],
+     [
+      "d2",
+      "d3"
+     ],
+     [
+      "d3",
+      "d4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **CLICK trial** established that the thiazide-like diuretic chlorthalidone significantly reduces 24-hour ambulatory systolic blood pressure and urinary albumin excretion in patients with advanced stage 4 CKD (eGFR 15 to 29 mL/min/1.73m2). One side is CLICK Trial Protocol, and the other side is Clinical Efficacy.",
+   "say": "The CLICK trial established that the thiazide-like diuretic chlorthalidone significantly reduces 24-hour ambulatory systolic blood pressure and urinary albumin excretion in patients with advanced stage 4 CKD (eGFR 15 to 29 mL/min/1 point 73m2). One side is CLICK Trial Protocol, and the other side is Clinical Efficacy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CLICK Trial Protocol",
+     "points": [
+      "Stage 4 CKD with uncontrolled hypertension",
+      "eGFR range 15 to 29 mL/min/1.73m2",
+      "Chlorthalidone 12.5 to 25 mg daily"
+     ]
+    },
+    "right": {
+     "title": "Clinical Efficacy",
+     "points": [
+      "10.5 mmHg drop in 24h ambulatory SBP",
+      "Significant 50% reduction in UACR",
+      "Effective even in severe renal impairment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acetazolamide** selectively inhibits luminal membrane carbonic anhydrase IV and cytoplasmic carbonic anhydrase II in the proximal tubule, blocking sodium bicarbonate reabsorption and inducing alkaline diuresis. The image is clinical pharmacology and formulation of diuretic agents. Alkaline urine is the bedside sign that carbonic anhydrase is blocked.",
+   "say": "Acetazolamide selectively inhibits luminal membrane carbonic anhydrase IV and cytoplasmic carbonic anhydrase II in the proximal tubule, blocking sodium bicarbonate reabsorption and inducing alkaline diuresis. The image is clinical pharmacology and formulation of diuretic agents. Alkaline urine is the bedside sign that carbonic anhydrase is blocked.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-diuretics.webp",
+    "alt": "Clinical pharmacology and formulation of diuretic agents",
+    "caption": "Mechanisms and formulations of loop and thiazide diuretics in clinical practice (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The diuretic **braking phenomenon** describes the progressive reduction in natriuretic response following chronic loop diuretic administration, driven by volume depletion, RAAS and sympathetic activation, and distal tubular epithelial remodeling. One side is Initial Response, and the other side is Braking Phenomenon.",
+   "say": "The diuretic braking phenomenon describes the progressive reduction in natriuretic response following chronic loop diuretic administration, driven by volume depletion, RAAS and sympathetic activation, and distal tubular epithelial remodeling. One side is Initial Response, and the other side is Braking Phenomenon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Initial Response",
+     "points": [
+      "Robust loop diuresis and natriuresis",
+      "High solute delivery to distal tubule",
+      "Net negative sodium balance achieved"
+     ]
+    },
+    "right": {
+     "title": "Braking Phenomenon",
+     "points": [
+      "Distal nephron hypertrophy develops",
+      "NCC cotransporter upregulation",
+      "Avid distal sodium retention"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Natriuresis-guided spot **urinary sodium** assessment after a loop diuretic dose (guideline target spot urine sodium > 50 to 70 mmol/L at 2 hours) serves as a rapid biomarker of diuretic adequacy to guide urgent dose escalation. The first step is Administer IV loop diuretic dose.",
+   "say": "Natriuresis-guided spot urinary sodium assessment after a loop diuretic dose (guideline target spot urine sodium greater than 50 to 70 mmol/L at 2 hours) serves as a rapid biomarker of diuretic adequacy to guide urgent dose escalation. The first step is Administer IV loop diuretic dose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "Administer IV loop diuretic dose"
+     },
+     {
+      "id": "u2",
+      "label": "Measure spot urine sodium at 2 hours"
+     },
+     {
+      "id": "u3",
+      "label": "Urinary sodium > 50 to 70 mEq/L indicates success"
+     },
+     {
+      "id": "u4",
+      "label": "Urinary sodium < 50 triggers immediate dose doubling"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ],
+     [
+      "u3",
+      "u4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amiloride** and triamterene block apical epithelial sodium channels (ENaC) in the cortical collecting duct independently of aldosterone, sparing potassium while causing mild natriuresis and metabolic acidosis. One side is ENaC Blockers (Amiloride), and the other side is Aldosterone Antagonists. A key point is Direct channel pore blockade.",
+   "say": "Amiloride and triamterene block apical epithelial sodium channels (ENaC) in the cortical collecting duct independently of aldosterone, sparing potassium while causing mild natriuresis and metabolic acidosis. One side is ENaC Blockers (Amiloride), and the other side is Aldosterone Antagonists. A key point is Direct channel pore blockade.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ENaC Blockers (Amiloride)",
+     "points": [
+      "Direct channel pore blockade",
+      "Immediate onset of action",
+      "Independent of aldosterone levels"
+     ]
+    },
+    "right": {
+     "title": "Aldosterone Antagonists",
+     "points": [
+      "Mineralocorticoid receptor binding",
+      "Transcriptional down-regulation",
+      "Delayed onset over 24 to 48 hours"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 15",
+  "New England Journal of Medicine CLICK Trial 2021",
+  "New England Journal of Medicine ADVOR Trial 2022"
+ ]
+}
