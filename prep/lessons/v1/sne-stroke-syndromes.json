@@ -1,188 +1,238 @@
 {
  "v": 1,
  "module": "sne-stroke-syndromes",
- "subject": "ss-neurology",
- "title": "Ischaemic stroke mechanisms and vascular syndromes",
- "minutes": 7,
+ "title": "Ischaemic stroke syndromes and vascular territories",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Ischaemic stroke is classified by mechanism using the **TOAST** system: large artery atherosclerosis, cardioembolism, small vessel (lacunar) disease, other determined causes, and undetermined or cryptogenic causes. Identifying the mechanism guides secondary prevention. Carotid stenosis of about 70 percent points to large artery disease, while atrial fibrillation is the commonest cardioembolic source. Patent foramen ovale is present in about 15 percent of people and is often incidental, so it should not be assumed causal without a full work-up.",
-   "say": "Ischaemic stroke is classified by mechanism using the TOAST system. The five groups are large artery atherosclerosis, cardioembolism, small vessel or lacunar disease, other determined causes, and undetermined or cryptogenic causes. Identifying the mechanism guides secondary prevention. Carotid stenosis of about 70 percent points to large artery disease, while atrial fibrillation is the commonest cardioembolic source. Patent foramen ovale is present in about 15 percent of people and is often incidental, so it should not be assumed to be causal without a full work-up.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "TOAST group",
-     "Typical clue",
-     "Example"
-    ],
-    "rows": [
-     [
-      "Large artery atherosclerosis",
-      "Significant stenosis of a major vessel",
-      "70 percent ICA stenosis"
-     ],
-     [
-      "Cardioembolism",
-      "Cardiac source of clot",
-      "Atrial fibrillation"
-     ],
-     [
-      "Small vessel",
-      "Deep, small infarct",
-      "Lacune"
-     ],
-     [
-      "Other determined",
-      "Rare identified cause",
-      "Arterial dissection"
-     ],
-     [
-      "Undetermined",
-      "Work-up incomplete or equivocal",
-      "Cryptogenic"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **ischaemic penumbra** is the reversibly dysfunctional tissue surrounding the non-viable infarct core. It is the target of reperfusion therapy. Blood pressure should not be lowered aggressively in the acute phase, because pressure-dependent collateral flow feeds the penumbra. Blood glucose above 200 mg/dL worsens secondary ischaemic injury, so glucose must be checked early with a finger-stick test before thrombolysis.",
-   "say": "The ischaemic penumbra is the reversibly dysfunctional tissue surrounding the non-viable infarct core. It is the target of reperfusion therapy. Blood pressure should not be lowered aggressively in the acute phase, because pressure-dependent collateral flow feeds the penumbra. Blood glucose above 200 mg/dL worsens secondary ischaemic injury, so glucose must be checked early with a finger-stick test before thrombolysis.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Occlusion"
-     },
-     {
-      "id": "b",
-      "label": "Infarct core"
-     },
-     {
-      "id": "c",
-      "label": "Penumbra"
-     },
-     {
-      "id": "d",
-      "label": "Reperfusion"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "a",
-      "c"
-     ],
-     [
-      "c",
-      "d",
-      "Salvage"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Posterior circulation** is supplied by the vertebrobasilar system. The posterior cerebral artery usually arises from the basilar artery and supplies the occipital lobe, inferomedial temporal lobe and inferior thalamus. Occipital infarcts usually spare the macula because of dual MCA and PCA supply. A **top of basilar** occlusion can cause bilateral paramedian thalamic and midbrain infarcts, presenting with hypersomnolence and amnesia. Non-contrast CT is insensitive in the posterior fossa, so DWI-MRI is preferred.",
-   "say": "Posterior circulation is supplied by the vertebrobasilar system. The posterior cerebral artery usually arises from the basilar artery and supplies the occipital lobe, inferomedial temporal lobe and inferior thalamus. Occipital infarcts usually spare the macula because of dual supply from the MCA and PCA. A top of basilar occlusion can cause bilateral paramedian thalamic and midbrain infarcts, presenting with hypersomnolence and amnesia. Non-contrast CT is insensitive in the posterior fossa, so DWI-MRI is preferred.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-stroke-syndromes-fig1.webp",
-    "alt": "Diagram of the vertebrobasilar arterial system, showing the posterior cerebral artery and its supply to the occipital lobe, thalamus, and midbrain.",
-    "caption": "Posterior circulation anatomy and common infarct territories. Image: OpenStax College, CC BY 3.0, Wikimedia Commons.",
-    "ar": 1.6991
-   }
-  },
-  {
-   "tx": "Lateral medullary, or **Wallenberg**, syndrome is usually due to PICA or vertebral artery occlusion. It causes vertigo, hoarseness, dysphagia and ataxia, with ipsilateral facial sensory loss and contralateral pain and temperature loss. Medial medullary syndrome, from paramedian branches, gives contralateral hemiparesis with ipsilateral tongue deviation. Foville syndrome involves the caudal pons and produces ipsilateral CN VI and VII palsy with contralateral hemiparesis. Dejerine-Roussy syndrome is chronic central pain after a thalamic infarct.",
-   "say": "Lateral medullary, or Wallenberg, syndrome is usually due to PICA or vertebral artery occlusion. It causes vertigo, hoarseness, dysphagia and ataxia, with ipsilateral facial sensory loss and contralateral pain and temperature loss. Medial medullary syndrome, from paramedian branches, gives contralateral hemiparesis with ipsilateral tongue deviation. Foville syndrome involves the caudal pons and produces ipsilateral abducens and facial palsy with contralateral hemiparesis. Dejerine-Roussy syndrome is chronic central pain after a thalamic infarct.",
+   "tx": "Lateral medullary syndrome, historically known as **Wallenberg syndrome**, results from acute thrombotic or embolic occlusion of the **posterior inferior cerebellar artery** or the vertebral artery. Patients characteristically present with ipsilateral facial pain and temperature sensation loss, ipsilateral Horner syndrome, cerebellar ataxia, and contralateral loss of pain and temperature sensibility across the trunk and limbs.",
+   "say": "Lateral medullary syndrome historically known as Wallenberg syndrome results from acute thrombotic or embolic occlusion of the posterior inferior cerebellar artery or the vertebral artery. Patients characteristically present with ipsilateral facial pain and temperature sensation loss, ipsilateral Horner syndrome, cerebellar ataxia, and contralateral loss of pain and temperature sensibility across the trunk and limbs.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Lateral medullary",
+     "title": "Ipsilateral Signs",
      "points": [
-      "PICA or vertebral origin",
-      "Vertigo and dysphagia",
-      "Ipsilateral facial sensory loss",
-      "Contralateral pain loss"
+      "Facial sensory loss from trigeminal tract",
+      "Horner syndrome from oculosympathetic fibres",
+      "Limb ataxia from restiform body",
+      "Dysphagia and hoarseness from nucleus ambiguus"
      ]
     },
     "right": {
-     "title": "Medial medullary",
+     "title": "Contralateral Signs",
      "points": [
-      "Paramedian branches",
-      "Contralateral hemiparesis",
-      "Ipsilateral tongue deviation",
-      "Preserved facial sensation"
+      "Trunk and limb pain loss",
+      "Impaired spinothalamic temperature sensation",
+      "Motor power completely preserved",
+      "Sparing of posterior column proprioception"
      ]
     }
    }
   },
   {
-   "tx": "Cortical syndromes follow territory. In **MCA** infarcts, contralateral face and arm weakness dominate. **ACA** infarcts cause leg weakness and urinary incontinence. In **PCA** infarcts, contralateral homonymous hemianopia with macular sparing is typical. Right PCA lesions cause prosopagnosia, while left temporal lesions cause amnestic aphasia with preserved repetition. Anton syndrome is denial of cortical blindness after bilateral occipital infarction.",
-   "say": "Cortical syndromes follow territory. In MCA infarcts, contralateral face and arm weakness dominate. ACA infarcts cause leg weakness and urinary incontinence. In PCA infarcts, contralateral homonymous hemianopia with macular sparing is typical. Right PCA lesions cause prosopagnosia, while left temporal lesions cause amnestic aphasia with preserved repetition. Anton syndrome is denial of cortical blindness after bilateral occipital infarction.",
+   "tx": "Medial medullary syndrome, or **Dejerine syndrome**, arises from occlusion of paramedian branches of the **anterior spinal artery** or the distal vertebral artery. The classical clinical triad combines ipsilateral hypoglossal nerve palsy with tongue protrusion deviation toward the lesion side, contralateral spastic hemiplegia sparing the face, and contralateral impairment of proprioception and vibratory sensation.",
+   "say": "Medial medullary syndrome or Dejerine syndrome arises from occlusion of paramedian branches of the anterior spinal artery or the distal vertebral artery. The classical clinical triad combines ipsilateral hypoglossal nerve palsy with tongue protrusion deviation toward the lesion side, contralateral spastic hemiplegia sparing the face, and contralateral impairment of proprioception and vibratory sensation.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Territory",
-     "Key feature",
-     "Clue"
+     "Involved Structure",
+     "Anatomical Pathway",
+     "Clinical Manifestation"
     ],
     "rows": [
      [
-      "MCA",
-      "Face and arm weakness",
-      "Aphasia if dominant"
+      "Hypoglossal nucleus",
+      "CN XII motor fibres",
+      "Ipsilateral tongue deviation"
      ],
      [
-      "ACA",
-      "Leg weakness",
-      "Urinary incontinence"
+      "Pyramidal tract",
+      "Corticospinal fibres",
+      "Contralateral spastic hemiplegia"
      ],
      [
-      "PCA",
-      "Hemianopia with macular sparing",
-      "Prosopagnosia if right"
-     ],
-     [
-      "Basilar",
-      "Coma or locked-in",
-      "Top of basilar thalamic"
+      "Medial lemniscus",
+      "Dorsal column pathway",
+      "Contralateral vibration loss"
      ]
     ]
    }
   },
   {
-   "tx": "A **transient ischaemic attack** is a brief focal deficit without acute infarction on imaging. The **ABCD2 score** stratifies early stroke risk using age, blood pressure, clinical features, duration and diabetes. Mimics such as hypoglycaemia must be excluded in any suspected stroke. Thrombolysis requires finger-stick glucose and brain imaging before treatment, and aspirin is delayed 24 hours after intravenous thrombolysis. Aggressive blood pressure lowering is avoided in the acute phase.",
-   "say": "A transient ischaemic attack is a brief focal deficit without acute infarction on imaging. The ABCD2 score stratifies early stroke risk using age, blood pressure, clinical features, duration and diabetes. Mimics such as hypoglycaemia must be excluded in any suspected stroke. Thrombolysis requires finger-stick glucose and brain imaging before treatment, and aspirin is delayed 24 hours after intravenous thrombolysis. Aggressive blood pressure lowering is avoided in the acute phase.",
-   "vis": null
+   "tx": "Midbrain ischaemic syndromes reflect discrete territorial disruptions of penetrating posterior cerebral circulation branches. **Weber syndrome** involves the ventral midbrain base due to paramedian branch occlusion of the posterior cerebral artery, presenting with ipsilateral **oculomotor** third nerve fascicular palsy and contralateral spastic hemiparesis. Acute evaluation mandates urgent neurovascular imaging to exclude expanding aneurysms.",
+   "say": "Midbrain ischaemic syndromes reflect discrete territorial disruptions of penetrating posterior cerebral circulation branches. Weber syndrome involves the ventral midbrain base due to paramedian branch occlusion of the posterior cerebral artery, presenting with ipsilateral oculomotor third nerve fascicular palsy and contralateral spastic hemiparesis. Acute evaluation mandates urgent neurovascular imaging to exclude expanding aneurysms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ischemic-stroke-fig1.webp",
+    "alt": "Cerebral ischaemic infarction diagram showing focal vascular territory occlusion.",
+    "caption": "Ischaemic stroke territory infarction and penumbra distribution (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Midbrain tegmental infarctions produce distinctive alternating movement syndromes. **Claude syndrome** combines ipsilateral oculomotor fascicular palsy with contralateral cerebellar ataxia and postural tremor caused by an isolated lesion selectively affecting the **red nucleus** and superior cerebellar peduncle. In contrast, extensive tegmental damage produces more profound contralateral involuntary kinetic disorders.",
+   "say": "Midbrain tegmental infarctions produce distinctive alternating movement syndromes. Claude syndrome combines ipsilateral oculomotor fascicular palsy with contralateral cerebellar ataxia and postural tremor caused by an isolated lesion selectively affecting the red nucleus and superior cerebellar peduncle. In contrast, extensive tegmental damage produces more profound contralateral involuntary kinetic disorders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tegmental Infarct"
+     },
+     {
+      "id": "b",
+      "label": "Red Nucleus Lesion"
+     },
+     {
+      "id": "c",
+      "label": "Third Nerve Fascicle"
+     },
+     {
+      "id": "d",
+      "label": "Ataxia and CN III Palsy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "ischaemia"
+     ],
+     [
+      "a",
+      "c",
+      "compression"
+     ],
+     [
+      "b",
+      "d",
+      "ataxia"
+     ],
+     [
+      "c",
+      "d",
+      "palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "More expansive ventral and tegmental midbrain damage produces **Benedikt syndrome**, which involves the third nerve fascicle, the red nucleus, and adjacent traversing **corticospinal tract** fibres. The resulting constellation comprises ipsilateral oculomotor palsy accompanied by contralateral hemiparesis, hyperkinetic chorea, and coarse slow intention tremor that markedly impairs coordinated limb utility during clinical testing.",
+   "say": "More expansive ventral and tegmental midbrain damage produces Benedikt syndrome, which involves the third nerve fascicle, the red nucleus, and adjacent traversing corticospinal tract fibres. The resulting constellation comprises ipsilateral oculomotor palsy accompanied by contralateral hemiparesis, hyperkinetic chorea, and coarse slow intention tremor that markedly impairs coordinated limb utility during clinical testing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Claude Syndrome",
+     "points": [
+      "Confined to red nucleus and tegmentum",
+      "Ipsilateral third nerve palsy",
+      "Contralateral cerebellar ataxia",
+      "Corticospinal motor tract spared"
+     ]
+    },
+    "right": {
+     "title": "Benedikt Syndrome",
+     "points": [
+      "Involves tegmentum plus pyramidal tract",
+      "Ipsilateral third nerve palsy",
+      "Contralateral spastic hemiparesis",
+      "Contralateral chorea and tremor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Caudal pontine infarctions yield classic ventral brainstem presentations. **Millard-Gubler syndrome** localizes to the ventral caudal pons, combining ipsilateral sixth and seventh cranial nerve palsies with contralateral hemiplegia due to simultaneous ischaemic injury of the abducens fascicle, the facial motor nerve, and the adjacent descending **pyramidal tract** fibres.",
+   "say": "Caudal pontine infarctions yield classic ventral brainstem presentations. Millard-Gubler syndrome localizes to the ventral caudal pons, combining ipsilateral sixth and seventh cranial nerve palsies with contralateral hemiplegia due to simultaneous ischaemic injury of the abducens fascicle, the facial motor nerve, and the adjacent descending pyramidal tract fibres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brainstem Level",
+     "Syndrome Name",
+     "Key Diagnostic Features"
+    ],
+    "rows": [
+     [
+      "Ventral Midbrain",
+      "Weber syndrome",
+      "Ipsilateral CN III with contralateral hemiplegia"
+     ],
+     [
+      "Ventral Caudal Pons",
+      "Millard-Gubler",
+      "Ipsilateral CN VI and VII with hemiplegia"
+     ],
+     [
+      "Pontine Tegmentum",
+      "Foville syndrome",
+      "Ipsilateral horizontal gaze palsy with CN VII"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pontine tegmental strokes involving horizontal conjugate gaze centres produce **Foville syndrome**. Ischaemia damages the abducens nucleus and the neighbouring paramedian pontine reticular formation, known as the **PPRF**, alongside the facial nerve fascicle and corticospinal pathway. Patients present with conjugate gaze palsy towards the lesion side, peripheral facial palsy, and contralateral motor hemiplegia.",
+   "say": "Pontine tegmental strokes involving horizontal conjugate gaze centres produce Foville syndrome. Ischaemia damages the abducens nucleus and the neighbouring paramedian pontine reticular formation known as the PPRF, alongside the facial nerve fascicle and corticospinal pathway. Patients present with conjugate gaze palsy towards the lesion side, peripheral facial palsy, and contralateral motor hemiplegia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pontine Tegmentum Infarct"
+     },
+     {
+      "id": "b",
+      "label": "PPRF and CN VI Damage"
+     },
+     {
+      "id": "c",
+      "label": "Facial Motor Fascicle"
+     },
+     {
+      "id": "d",
+      "label": "Gaze and Facial Palsy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "ischaemia"
+     ],
+     [
+      "a",
+      "c",
+      "infarction"
+     ],
+     [
+      "b",
+      "d",
+      "conjugate palsy"
+     ],
+     [
+      "c",
+      "d",
+      "facial weakness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Occlusion at the bifurcation of the **basilar artery** leads to the top of the basilar syndrome, producing catastrophic rostral midbrain, thalamic, and occipital ischaemia. Hallmark neurological manifestations encompass complex bilateral visual deficits, profound impairment of **vertical gaze**, pupillary light-near dissociation, visual hallucinations, and acute lethargy with florid behavioural abnormalities.",
+   "say": "Occlusion at the bifurcation of the basilar artery leads to the top of the basilar syndrome producing catastrophic rostral midbrain, thalamic, and occipital ischaemia. Hallmark neurological manifestations encompass complex bilateral visual deficits, profound impairment of vertical gaze, pupillary light-near dissociation, visual hallucinations, and acute lethargy with florid behavioural abnormalities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ischemic-stroke-fig2.webp",
+    "alt": "Diagram illustrating cerebral arterial territories and acute perfusion deficits.",
+    "caption": "Basilar bifurcation and posterior circulation territorial distribution (StewardMD).",
+    "ar": 1.7778
+   }
   }
  ],
- "quiz": [
-  "q_fd538b600e2b",
-  "q_473cc05798d5",
-  "q_4f64940ffd9f"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Adams HP et al. Classification of subtype of acute ischemic stroke. Definitions for use in a multicenter clinical trial (TOAST). Stroke 1993",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 38
- }
+  "Adams and Victor Principles of Neurology 11e Ch. 34",
+  "Netter Neurology 2e Ch. 12"
+ ]
 }

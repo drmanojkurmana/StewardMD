@@ -1,145 +1,229 @@
 {
  "v": 1,
  "module": "sne-pupil-visual-pathway",
- "subject": "ss-neurology",
- "title": "Pupil and Visual Pathway Disorders",
- "minutes": 6,
+ "title": "Neuro-ophthalmology, pupils and cranial neuropathies",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "The **pupillary light reflex** uses afferent input from the retina and optic nerve, and efferent output through the Edinger-Westphal nucleus. A **relative afferent pupillary defect** appears when the affected eye sends weaker input. On the swinging flashlight test, moving the light from the normal eye to the affected eye makes both pupils dilate paradoxically. It is a sign of optic nerve or severe retinal disease, and it can be present even when visual acuity looks only mildly reduced.",
-   "say": "The pupillary light reflex uses afferent input from the retina and optic nerve, and efferent output through the Edinger-Westphal nucleus. A relative afferent pupillary defect appears when the affected eye sends weaker input. On the swinging flashlight test, moving the light from the normal eye to the affected eye makes both pupils dilate paradoxically. It signals optic nerve or severe retinal disease, and it can be present even when visual acuity looks only mildly reduced.",
+   "tx": "Asymmetric anterior visual pathway lesions alter pupillary reactivity during dynamic light testing. A relative afferent **pupillary defect**, historically known as a **Marcus Gunn** pupil, is elicited by the swinging flashlight test when paradoxical dilatation occurs as light swings from the unaffected eye to the diseased optic nerve.",
+   "say": "Asymmetric anterior visual pathway lesions alter pupillary reactivity during dynamic light testing. A relative afferent pupillary defect historically known as a Marcus Gunn pupil, is elicited by the swinging flashlight test when paradoxical dilatation occurs as light swings from the unaffected eye to the diseased optic nerve.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/sne-pupil-visual-pathway-fig1.webp",
-    "alt": "Diagram of the pupillary light reflex pathway and the swinging flashlight test demonstrating a relative afferent pupillary defect.",
-    "caption": "Pupillary light reflex and RAPD. Image: Angusng, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 0.7601
+    "src": "v1/kb/media/optic-neuritis-fig1.webp",
+    "alt": "Diagram illustrating optic nerve inflammation, disc swelling, and afferent pupillary defect.",
+    "caption": "Optic neuritis pathology, fundoscopy, and relative afferent pupillary defect (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Several pupil patterns help localise the cause. A **Marcus Gunn pupil** is an RAPD found with **optic neuritis** and some amblyopic eyes. **Macular disease** usually gives poor acuity without an RAPD. **Horner syndrome** gives a small pupil with ptosis and anhidrosis. An **Adie tonic pupil** is a large, slowly reacting pupil, often with **light-near dissociation**, where near response is better than light response.",
-   "say": "Several pupil patterns help localise the cause. A Marcus Gunn pupil is an RAPD found with optic neuritis and some amblyopic eyes. Macular disease usually gives poor acuity without an RAPD. Horner syndrome gives a small pupil with ptosis and anhidrosis. An Adie tonic pupil is a large, slowly reacting pupil, often with light-near dissociation, where the near response is better than the light response.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Condition",
-     "Pupil clue",
-     "Exam point"
-    ],
-    "rows": [
-     [
-      "Optic neuritis",
-      "RAPD usually present",
-      "Marcus Gunn pupil pattern"
-     ],
-     [
-      "Macular disease",
-      "RAPD usually absent",
-      "Poor acuity, normal reflex"
-     ],
-     [
-      "Horner syndrome",
-      "Small pupil, ptosis",
-      "Anhidrosis on same side"
-     ],
-     [
-      "Adie tonic pupil",
-      "Large, slow reaction",
-      "Light-near dissociation"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In **Horner syndrome**, the **sympathetic pathway** is interrupted, so the dilator muscle of the iris loses its supply. Anisocoria is usually more obvious in dim light, when the normal pupil dilates fully. A **dilute topical alpha agonist** test can help when the signs are unclear: the denervated dilator becomes supersensitive, so the affected pupil dilates more than the normal one. Pharmacological testing is an adjunct, not a first-line bedside check.",
-   "say": "In Horner syndrome, the sympathetic pathway is interrupted, so the dilator muscle of the iris loses its supply. Anisocoria is usually more obvious in dim light, when the normal pupil dilates fully. A dilute topical alpha agonist test can help when the signs are unclear: the denervated dilator becomes supersensitive, so the affected pupil dilates more than the normal one. Pharmacological testing is an adjunct, not a first-line bedside check.",
-   "vis": null
-  },
-  {
-   "tx": "Visual field patterns depend on where the lesion sits. A **chiasmal lesion**, such as a pituitary adenoma, causes **bitemporal hemianopia**, and an anterior lesion can cause a **junctional scotoma** with a central field loss in one eye. A **retrochiasmal lesion** causes a **homonymous hemianopia**, which is congruous and affects the same side of both eyes.",
-   "say": "Visual field patterns depend on where the lesion sits. A chiasmal lesion, such as a pituitary adenoma, causes bitemporal hemianopia, and an anterior lesion can cause a junctional scotoma with a central field loss in one eye. A retrochiasmal lesion causes a homonymous hemianopia, which is congruous and affects the same side of both eyes.",
+   "tx": "Sympathetic pathway interruptions produce characteristic oculosympathetic paresis in clinical neurology. **Horner syndrome** results from disruption of the three-neuron oculosympathetic tract, displaying the classic ipsilateral triad of pupillary **miosis**, mild superior eyelid ptosis and lower lid elevation from sympathetic denervation, and facial anhidrosis.",
+   "say": "Sympathetic pathway interruptions produce characteristic oculosympathetic paresis in clinical neurology. Horner syndrome results from disruption of the three-neuron oculosympathetic tract, displaying the classic ipsilateral triad of pupillary miosis, mild superior eyelid ptosis and lower lid elevation from sympathetic denervation, and facial anhidrosis.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Chiasmal lesion",
+     "title": "Horner Syndrome Triad",
      "points": [
-      "Bitemporal hemianopia",
-      "Pituitary adenoma common",
-      "Junctional scotoma if anterior"
+      "Pupillary miosis due to dilator paresis",
+      "Partial ptosis from Müller muscle weakness",
+      "Apparent enophthalmos due to narrowed fissure",
+      "Anhidrosis depending on anatomical lesion level"
      ]
     },
     "right": {
-     "title": "Retrochiasmal lesion",
+     "title": "Pharmacological Testing",
      "points": [
-      "Homonymous hemianopia",
-      "Congruous field loss",
-      "Same side of both eyes"
+      "Apraclonidine (0.5%) reverses anisocoria",
+      "Cocaine (10%) fails to dilate affected pupil",
+      "Hydroxyamphetamine (1%) localises third-order",
+      "Normal pupil dilates, Horner pupil stays small"
      ]
     }
    }
   },
   {
-   "tx": "Within retrochiasmal lesions, **macular sparing** occurs because the occipital pole has a dual blood supply, so central vision survives. A lesion in the temporal lobe can damage **Meyer loop**, causing a contralateral upper quadrant defect. Bilateral occipital damage causes **cortical blindness**, yet the pupils stay normal because the light reflex pathway is intact.",
-   "say": "Within retrochiasmal lesions, macular sparing occurs because the occipital pole has a dual blood supply, so central vision survives. A lesion in the temporal lobe can damage Meyer loop, causing a contralateral upper quadrant defect. Bilateral occipital damage causes cortical blindness, yet the pupils stay normal because the light reflex pathway is intact.",
+   "tx": "Anatomical localization along the oculosympathetic chain dictates sweat gland involvement. First-order central neuron pathways traverse from the posterior hypothalamus down the brainstem to the **ciliospinal center** of Budge at C8-T2, while third-order postganglionic fibres distal to the superior cervical ganglion travel along the internal carotid artery, sparing facial sweating along the external carotid territory of the **oculosympathetic** pathway.",
+   "say": "Anatomical localization along the oculosympathetic chain dictates sweat gland involvement. First-order central neuron pathways traverse from the posterior hypothalamus down the brainstem to the ciliospinal center of Budge at C8-T2, while third-order postganglionic fibres distal to the superior cervical ganglion travel along the internal carotid artery, sparing facial sweating along the external carotid territory of the oculosympathetic pathway.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Optic tract"
+      "label": "Hypothalamic Centre"
      },
      {
       "id": "b",
-      "label": "Lateral geniculate"
+      "label": "Ciliospinal Centre (C8-T2)"
      },
      {
       "id": "c",
-      "label": "Optic radiation"
+      "label": "Superior Cervical Ganglion"
      },
      {
       "id": "d",
-      "label": "Visual cortex"
+      "label": "Pupillary Dilator Pathway"
      }
     ],
     "edges": [
      [
       "a",
-      "b"
+      "b",
+      "first-order axon"
      ],
      [
       "b",
-      "c"
+      "c",
+      "second-order preganglionic"
      ],
      [
       "c",
-      "d"
+      "d",
+      "third-order postganglionic"
      ]
     ]
    }
+  },
+  {
+   "tx": "Parasympathetic postganglionic denervation causes persistent internal ophthalmoplegia. An **Adie tonic pupil** arises from inflammatory degeneration of the ciliary ganglion, producing an enlarged, poorly reactive pupil with near-light dissociation and marked denervation supersensitivity manifesting as brisk constriction to dilute **pilocarpine** at 0.125% concentration.",
+   "say": "Parasympathetic postganglionic denervation causes persistent internal ophthalmoplegia. An Adie tonic pupil arises from inflammatory degeneration of the ciliary ganglion, producing an enlarged, poorly reactive pupil with near-light dissociation and marked denervation supersensitivity manifesting as brisk constriction to dilute pilocarpine at 0.125% concentration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adie-tonic-pupil-fig1.webp",
+    "alt": "Clinical photograph and orbital diagram showing Adie tonic pupil and ciliary ganglion denervation.",
+    "caption": "Adie tonic pupil pathophysiology, pupillomotor testing, and pilocarpine response (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Specific midbrain tegmental neurosyphilitic lesions produce pathognomonic bilateral pupillary changes. **Argyll Robertson** pupils present as small, irregular, bilateral pupils that do not react to direct or consensual light stimulation but constrict briskly to accommodation, establishing classic **light-near dissociation** in central nervous system neurosyphilis.",
+   "say": "Specific midbrain tegmental neurosyphilitic lesions produce pathognomonic bilateral pupillary changes. Argyll Robertson pupils present as small, irregular, bilateral pupils that do not react to direct or consensual light stimulation but constrict briskly to accommodation, establishing classic light-near dissociation in central nervous system neurosyphilis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Argyll Robertson Pupil",
+     "points": [
+      "Bilateral small, irregular pupils",
+      "Absent response to light stimulation",
+      "Brisk, intact response to near accommodation",
+      "Associated with tabes dorsalis and neurosyphilis"
+     ]
+    },
+    "right": {
+     "title": "Adie Tonic Pupil",
+     "points": [
+      "Unilateral dilated pupil in young females",
+      "Tonic delayed slow redilation after near effort",
+      "Segmental vermiform pupillary border palsy",
+      "Constricts to 0.125% dilute pilocarpine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extrinsic compression of midline visual pathways produces pathognomonic visual field amputations. Complete **Bitemporal hemianopia** results from mechanical compression of decussating nasal retinal crossing fibres at the central **optic chiasm**, most frequently precipitated by expanding pituitary macroadenomas, tuberculum sellae meningiomas, or craniopharyngiomas.",
+   "say": "Extrinsic compression of midline visual pathways produces pathognomonic visual field amputations. Complete Bitemporal hemianopia results from mechanical compression of decussating nasal retinal crossing fibres at the central optic chiasm, most frequently precipitated by expanding pituitary macroadenomas, tuberculum sellae meningiomas, or craniopharyngiomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Visual Pathway Level",
+     "Visual Field Defect",
+     "Classic Pathology"
+    ],
+    "rows": [
+     [
+      "Optic Nerve",
+      "Ipsilateral monocular scotoma / blindness",
+      "Optic neuritis, anterior ischaemic neuropathy"
+     ],
+     [
+      "Optic Chiasm",
+      "Bitemporal hemianopia",
+      "Pituitary macroadenoma, craniopharyngioma"
+     ],
+     [
+      "Optic Tract",
+      "Contralateral incongruous homonymous hemianopia",
+      "Anterior choroidal artery stroke, tumour"
+     ],
+     [
+      "Meyer Loop",
+      "Contralateral superior quadrantanopia",
+      "Temporal lobectomy, MCA inferior division stroke"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Temporal lobe pathway disruptions selectively sacrifice superior visual quadrants. An incongruous or congruous homonymous superior **quadrantanopia**, colloquially termed a pie-in-the-sky defect, is caused by contralateral temporal lobe lesions disrupting the anteriorly sweeping **Meyer loop** fibres as they loop around the temporal ventricular horn.",
+   "say": "Temporal lobe pathway disruptions selectively sacrifice superior visual quadrants. An incongruous or congruous homonymous superior quadrantanopia colloquially termed a pie-in-the-sky defect, is caused by contralateral temporal lobe lesions disrupting the anteriorly sweeping Meyer loop fibres as they loop around the temporal ventricular horn.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Temporal Lobectomy"
+     },
+     {
+      "id": "b",
+      "label": "Meyer Loop Interruption"
+     },
+     {
+      "id": "c",
+      "label": "Inferior Retinal Loss"
+     },
+     {
+      "id": "d",
+      "label": "Superior Quadrantanopia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "white matter transection"
+     ],
+     [
+      "b",
+      "c",
+      "geniculo-calcarine deficit"
+     ],
+     [
+      "c",
+      "d",
+      "pie-in-the-sky field loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute oculomotor nerve dysfunction demands rigorous emergent vascular exclusion. An **Oculomotor** third nerve palsy presenting with complete pupillary dilatation and unresponsiveness signals external mechanical compression, mandating emergency exclusion of an expanding **posterior communicating artery** saccular aneurysm prior to fatal subarachnoid rupture.",
+   "say": "Acute oculomotor nerve dysfunction demands rigorous emergent vascular exclusion. An Oculomotor third nerve palsy presenting with complete pupillary dilatation and unresponsiveness signals external mechanical compression, mandating emergency exclusion of an expanding posterior communicating artery saccular aneurysm prior to fatal subarachnoid rupture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compressive Third Nerve Palsy",
+     "points": [
+      "Dilated non-reactive blown pupil",
+      "Superficial dorsomedial parasympathetics crushed",
+      "Expanding PCOM aneurysm until proven otherwise",
+      "Mandatory urgent CTA or digital subtraction angiogram"
+     ]
+    },
+    "right": {
+     "title": "Microvascular Ischaemic Palsy",
+     "points": [
+      "Pupil completely spared and briskly reactive",
+      "Ischaemia of central core nerve trunk",
+      "Diabetic or hypertensive microangiopathy",
+      "Spontaneous recovery within 6 to 12 weeks"
+     ]
+    }
+   }
   }
  ],
- "quiz": [
-  "q_f9d3a0bda934",
-  "q_48e70d62d701",
-  "q_ba8166544836"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Walsh and Hoyt's Clinical Neuro-Ophthalmology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 12
- }
+  "Adams and Victor Principles of Neurology 11e Ch. 13",
+  "Netter Neurology 2e Ch. 8"
+ ]
 }

@@ -1,143 +1,233 @@
 {
  "v": 1,
  "module": "sne-eeg",
- "subject": "ss-neurology",
- "title": "EEG Patterns in Encephalopathy and Epilepsy",
- "minutes": 5,
+ "title": "EEG patterns in epilepsy and encephalopathy",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Electroencephalography records **cortical electrical activity** through scalp electrodes. The normal awake adult shows a **posterior dominant alpha rhythm**, best seen with eyes closed and attenuating on eye opening. **Beta** activity is faster and appears with active thinking, whereas **theta** and **delta** are slower and normally dominate drowsiness, young children and deep sleep. Recognising this normal background comes first, before calling any abnormality.",
-   "say": "Electroencephalography records cortical electrical activity through scalp electrodes. The normal awake adult shows a posterior dominant alpha rhythm, best seen with eyes closed and attenuating on eye opening. Beta activity is faster and appears with active thinking, whereas theta and delta are slower and normally dominate drowsiness, young children and deep sleep. Recognising this normal background comes first, before calling any abnormality.",
+   "tx": "Clinical electroencephalography evaluates paroxysmal cerebral dysfunction with millisecond temporal resolution. Childhood **absence epilepsy** shows classic generalized, symmetrical 3 Hz **spike-and-wave** discharges with sudden onset and offset on EEG, precipitated characteristically by hyperventilation and photic stimulation, correlating clinically with brief staring spells.",
+   "say": "Clinical electroencephalography evaluates paroxysmal cerebral dysfunction with millisecond temporal resolution. Childhood absence epilepsy shows classic generalized, symmetrical 3 Hz spike-and-wave discharges with sudden onset and offset on EEG, precipitated characteristically by hyperventilation and photic stimulation, correlating clinically with brief staring spells.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/seizures-and-epilepsy-fig1.webp",
+    "alt": "Electroencephalogram showing generalized epileptiform spike-and-wave discharges.",
+    "caption": "Generalized 3 Hz spike-and-wave epileptiform discharges on EEG (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "In older children, refractory secondary generalized epilepsy manifests as **Lennox-Gastaut syndrome**. It is characterized by the classic clinical triad of multiple intractable seizure types including atonic and tonic drops, cognitive impairment, and slow **spike-and-wave** complexes occurring at frequencies less than 2.5 Hz on baseline electroencephalography.",
+   "say": "In older children, refractory secondary generalized epilepsy manifests as Lennox-Gastaut syndrome. It is characterized by the classic clinical triad of multiple intractable seizure types including atonic and tonic drops, cognitive impairment, and slow spike-and-wave complexes occurring at frequencies less than 2.5 Hz on baseline electroencephalography.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Rhythm",
-     "Relative speed",
-     "Typical state"
+     "Epilepsy Syndrome",
+     "Discharge Frequency",
+     "Clinical Correlation"
     ],
     "rows": [
      [
-      "Alpha",
-      "Mid-range, posterior",
-      "Awake, eyes closed"
+      "Absence Epilepsy",
+      "Classic 3 Hz spike-wave",
+      "Brief staring spells, hyperventilation triggered"
      ],
      [
-      "Beta",
-      "Faster than alpha",
-      "Active thinking"
+      "Lennox-Gastaut",
+      "Slow < 2.5 Hz spike-wave",
+      "Atonic, tonic seizures, cognitive decline"
      ],
      [
-      "Theta",
-      "Slower than alpha",
-      "Drowsiness, young children"
-     ],
-     [
-      "Delta",
-      "Slowest band",
-      "Deep sleep, pathology"
+      "Juvenile Myoclonic",
+      "Fast 4 to 6 Hz polyspike-wave",
+      "Morning myoclonic jerks on awakening"
      ]
     ]
    }
   },
   {
-   "tx": "**3 Hz spike and wave** discharges are the hallmark of **absence seizures** in children. They appear as generalised, synchronous, symmetrical bursts with a regular frequency close to 3 per second, usually triggered by hyperventilation. Clinically the child stares and pauses briefly, with rapid return to normal afterwards.",
-   "say": "Three hertz spike and wave discharges are the hallmark of absence seizures in children. They appear as generalised, synchronous, symmetrical bursts with a regular frequency close to three per second, usually triggered by hyperventilation. Clinically the child stares and pauses briefly, with rapid return to normal afterwards.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Hyperventilation"
-     },
-     {
-      "id": "b",
-      "label": "3 Hz spike wave"
-     },
-     {
-      "id": "c",
-      "label": "Brief staring pause"
-     },
-     {
-      "id": "d",
-      "label": "Rapid recovery"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Hypsarrhythmia** is a chaotic, high-amplitude, disorganised background with multifocal spikes, typical of **infantile spasms** (West syndrome). **Burst suppression** shows alternating high-voltage bursts and flat periods, seen in deep anaesthesia, hypoxic injury and severe encephalopathy. Both carry a poor prognosis when persistent.",
-   "say": "Hypsarrhythmia is a chaotic, high-amplitude, disorganised background with multifocal spikes, typical of infantile spasms, also called West syndrome. Burst suppression shows alternating high-voltage bursts and flat periods, seen in deep anaesthesia, hypoxic injury and severe encephalopathy. Both carry a poor prognosis when persistent.",
+   "tx": "Severe infantile epileptic encephalopathy manifests distinct disorganized background rhythms. **West syndrome** features infantile epileptic spasms and developmental arrest, demonstrating **hypsarrhythmia** on EEG, characterized by continuous, high-voltage, chaotic, disorganized background activity with multifocal spikes, treated first-line with ACTH or vigabatrin. Early diagnostic confirmation is paramount to prevent profound long-term neurocognitive impairment.",
+   "say": "Severe infantile epileptic encephalopathy manifests distinct disorganized background rhythms. West syndrome features infantile epileptic spasms and developmental arrest, demonstrating hypsarrhythmia on EEG, characterized by continuous, high-voltage, chaotic, disorganized background activity with multifocal spikes, treated first-line with ACTH or vigabatrin. Early diagnostic confirmation is paramount to prevent profound long-term neurocognitive impairment.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Hypsarrhythmia",
+     "title": "West Syndrome Triad",
      "points": [
-      "Chaotic high amplitude",
-      "Multifocal spikes",
-      "Infantile spasms"
+      "Infantile epileptic spasms",
+      "Developmental regression or plateau",
+      "Chaotic hypsarrhythmia on EEG",
+      "First-line therapy ACTH or vigabatrin"
      ]
     },
     "right": {
-     "title": "Burst suppression",
+     "title": "EEG Distinctions",
      "points": [
-      "Alternating bursts and flat periods",
-      "Deep anaesthesia or hypoxia",
-      "Poor prognosis if persistent"
+      "Loss of all background architecture",
+      "Random multi-focal sharp transients",
+      "High voltage exceeding 300 microvolts",
+      "Electrodecremental seizure events"
      ]
     }
    }
   },
   {
-   "tx": "**Periodic lateralised epileptiform discharges** (PLEDs) and **generalised periodic discharges** (GPDs) are repeating complexes seen in acute brain injury and encephalopathy. They may reflect ongoing subclinical seizures, so **video EEG monitoring** is used to detect non-convulsive status. **Centrotemporal spikes** in children are benign rolandic discharges and need no treatment.",
-   "say": "Periodic lateralised epileptiform discharges and generalised periodic discharges are repeating complexes seen in acute brain injury and encephalopathy. They may reflect ongoing subclinical seizures, so video EEG monitoring is used to detect non-convulsive status. Centrotemporal spikes in children are benign rolandic discharges and need no treatment.",
+   "tx": "Periodic lateralized **epileptiform discharges**, designated as PLEDs or LPDs, reflect acute destructive structural lesions. They are most commonly associated with acute focal structural cerebral insults, particularly **herpes simplex encephalitis** targeting temporal lobes and acute territorial cortical ischaemic infarction. Prompt identification mandates immediate initiation of empiric antiviral therapy and continuous neurocritical seizure monitoring.",
+   "say": "Periodic lateralized epileptiform discharges designated as PLEDs or LPDs, reflect acute destructive structural lesions. They are most commonly associated with acute focal structural cerebral insults, particularly herpes simplex encephalitis targeting temporal lobes and acute territorial cortical ischaemic infarction.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-eeg-fig1.webp",
-    "alt": "An EEG tracing displaying examples of Periodic Lateralised Epileptiform Discharges, Generalised Periodic Discharges, and benign Centrotemporal Spikes.",
-    "caption": "Key periodic and focal EEG patterns in encephalopathy and epilepsy",
-    "ar": 1.8349
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acute Focal Cortical Insult"
+     },
+     {
+      "id": "b",
+      "label": "Herpes Simplex Encephalitis"
+     },
+     {
+      "id": "c",
+      "label": "Periodic Lateralized Discharges"
+     },
+     {
+      "id": "d",
+      "label": "Focal Clinical Seizures"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "viral necrosis"
+     ],
+     [
+      "b",
+      "c",
+      "cortical irritability"
+     ],
+     [
+      "c",
+      "d",
+      "ictal transition"
+     ]
+    ]
    }
   },
   {
-   "tx": "**Photic stimulation** and **hyperventilation** are standard activation procedures during routine EEG. Photic stimulation can provoke photoparoxysmal responses in photosensitive epilepsy. Sleep deprivation is another activator that raises yield. Activation should be done carefully, with monitoring, because it can trigger seizures.",
-   "say": "Photic stimulation and hyperventilation are standard activation procedures during routine EEG. Photic stimulation can provoke photoparoxysmal responses in photosensitive epilepsy. Sleep deprivation is another activator that raises yield. Activation should be done carefully, with monitoring, because it can trigger seizures.",
-   "vis": null
+   "tx": "Generalized **periodic discharges**, or GPDs, occurring at 1 to 2 second intervals in an encephalopathic patient with rapid dementia and startle myoclonus are highly characteristic of sporadic **Creutzfeldt-Jakob disease**, repeating synchronously across both hemispheres upon a severely attenuated background. These stereotypic periodic discharges typically disappear in terminal stages as electrocerebral silence develops.",
+   "say": "Generalized periodic discharges or GPDs, occurring at 1 to 2 second intervals in an encephalopathic patient with rapid dementia and startle myoclonus are highly characteristic of sporadic Creutzfeldt-Jakob disease, repeating synchronously across both hemispheres upon a severely attenuated background.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prion Scrapie Conversion"
+     },
+     {
+      "id": "b",
+      "label": "Synchronous 1-2s Discharges"
+     },
+     {
+      "id": "c",
+      "label": "Startle Myoclonus"
+     },
+     {
+      "id": "d",
+      "label": "Akinetic Mutism"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "cortical synchronization"
+     ],
+     [
+      "b",
+      "c",
+      "motor jerks"
+     ],
+     [
+      "c",
+      "d",
+      "terminal progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Metabolic and toxic **encephalopathies** produce stereotypic rhythmic electrographic configurations during acute illness. **Triphasic waves** on EEG are frontally dominant, generalized, synchronous waveforms characteristically seen in metabolic encephalopathies including hepatic, uremic, and toxic states, reflecting diffuse cerebral metabolic compromise. Resolution of these electrographic abnormalities directly mirrors clinical metabolic recovery.",
+   "say": "Metabolic and toxic encephalopathies produce stereotypic rhythmic electrographic configurations during acute illness. Triphasic waves on EEG are frontally dominant, generalized, synchronous waveforms characteristically seen in metabolic encephalopathies including hepatic, uremic, and toxic states, reflecting diffuse cerebral metabolic compromise. Resolution of these electrographic abnormalities directly mirrors clinical metabolic recovery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Triphasic Wave Morphology",
+     "points": [
+      "Initial small negative deflection",
+      "Prominent steep positive phase",
+      "Broad final negative wave",
+      "Anterior-to-posterior time lag"
+     ]
+    },
+    "right": {
+     "title": "Aetiological Associations",
+     "points": [
+      "Hepatic encephalopathy and hyperammonaemia",
+      "Uraemic encephalopathy in renal failure",
+      "Severe sepsis-associated encephalopathy",
+      "Non-convulsive status epilepticus mimic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Benign childhood focal seizures exhibit striking sleep-potentiated patterns. Benign epilepsy with centrotemporal spikes, widely known as **Rolandic epilepsy**, features high-voltage **centrotemporal spikes** with broad horizontal dipoles that characteristically increase markedly during non-REM sleep, resolving spontaneously by adolescence. Reassurance regarding excellent long-term cognitive and developmental prognosis is standard management.",
+   "say": "Benign childhood focal seizures exhibit striking sleep-potentiated patterns. Benign epilepsy with centrotemporal spikes widely known as Rolandic epilepsy, features high-voltage centrotemporal spikes with broad horizontal dipoles that characteristically increase markedly during non-REM sleep, resolving spontaneously by adolescence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Rolandic Epilepsy",
+     "Structural Focal Epilepsy"
+    ],
+    "rows": [
+     [
+      "Age of Onset",
+      "3 to 12 years (peak 7-8)",
+      "Any age depending on lesion"
+     ],
+     [
+      "Seizure Timing",
+      "Nocturnal sensorimotor seizures",
+      "Random daytime and nocturnal"
+     ],
+     [
+      "EEG Spikes",
+      "Centrotemporal dipoles in non-REM",
+      "Persistent focal spikes and slowing"
+     ],
+     [
+      "Outcome",
+      "Spontaneous pubertal remission",
+      "Often requires long-term anticonvulsants"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Idiopathic generalized epilepsy presenting in adolescents displays characteristic fast rhythms. **Juvenile myoclonic epilepsy** demonstrates generalized 4 to 6 Hz **polyspike-and-wave** complexes on EEG, with myoclonic jerks and generalized tonic-clonic seizures occurring predominantly within one to two hours of waking. Lifelong broad-spectrum antiepileptic therapy like levetiracetam or valproate is typically required.",
+   "say": "Idiopathic generalized epilepsy presenting in adolescents displays characteristic fast rhythms. Juvenile myoclonic epilepsy demonstrates generalized 4 to 6 Hz polyspike-and-wave complexes on EEG, with myoclonic jerks and generalized tonic-clonic seizures occurring predominantly within one to two hours of waking. Lifelong broad-spectrum antiepileptic therapy like levetiracetam or valproate is typically required.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/status-epilepticus-fig1.webp",
+    "alt": "Flowchart and EEG tracing illustrating refractory status epilepticus and burst suppression targets.",
+    "caption": "Status epilepticus monitoring and burst suppression titration algorithm (StewardMD).",
+    "ar": 1.7778
+   }
   }
  ],
- "quiz": [
-  "q_acaa85fe2e64",
-  "q_717cc866fefd",
-  "q_5aa7e4e61229"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 7
- }
+ "quiz": [],
+ "refs": [
+  "Adams and Victor Principles of Neurology 11e Ch. 2",
+  "Netter Neurology 2e Ch. 6"
+ ]
 }

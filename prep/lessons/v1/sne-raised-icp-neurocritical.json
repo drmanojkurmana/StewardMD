@@ -1,177 +1,241 @@
 {
  "v": 1,
  "module": "sne-raised-icp-neurocritical",
- "subject": "ss-neurology",
- "title": "Raised intracranial pressure and neurocritical care",
- "minutes": 6,
+ "title": "Raised intracranial pressure and brain herniation",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "The **Monro-Kellie doctrine** states that the rigid skull contains brain, blood and cerebrospinal fluid, and their total volume stays constant. If one component grows, another must shrink or intracranial pressure rises. Compliance is the reserve that buffers small volume changes, and once it is exhausted, small additions produce steep pressure rises.",
-   "say": "The Monro-Kellie doctrine states that the rigid skull contains brain, blood and cerebrospinal fluid, and their total volume stays constant. If one component grows, another must shrink or intracranial pressure rises. Compliance is the reserve that buffers small volume changes. Once that reserve is used up, even small additions produce steep pressure rises.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Component",
-     "Typical role in raised ICP"
-    ],
-    "rows": [
-     [
-      "Brain tissue",
-      "Oedema or mass expands volume"
-     ],
-     [
-      "Blood",
-      "Venous congestion increases cerebral blood volume"
-     ],
-     [
-      "CSF",
-      "Can be drained to create room"
-     ],
-     [
-      "Skull",
-      "Fixed, so no space to expand"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Cerebral perfusion pressure** equals mean arterial pressure minus intracranial pressure. Indian and international severe TBI guidance targets a CPP of about 60 to 70 mm Hg, avoiding values below 60. Autoregulation holds cerebral blood flow steady across a mean arterial pressure range of roughly 50 to 150 mm Hg by changing vascular tone.",
-   "say": "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. Guidance for severe traumatic brain injury targets a CPP of about 60 to 70 mm Hg and avoids values below 60. Autoregulation keeps cerebral blood flow steady across a mean arterial pressure range of roughly 50 to 150 mm Hg by changing vascular tone.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-raised-icp-neurocritical-fig1.webp",
-    "alt": "A graph showing cerebral blood flow (y-axis) versus mean arterial pressure (x-axis), illustrating the autoregulation plateau between 50 and 150 mm Hg.",
-    "caption": "Cerebral autoregulation maintains constant blood flow across MAP range",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Cushing triad** is hypertension with bradycardia and irregular respiration. It signals impending herniation and brainstem compromise. Indications for ICP monitoring include a GCS of 8 or less after severe TBI. Intubation is indicated at the same GCS threshold or when herniation signs appear.",
-   "say": "Cushing triad is hypertension with bradycardia and irregular respiration. It signals impending herniation and brainstem compromise. ICP monitoring is indicated after severe traumatic brain injury with a GCS of 8 or less. Intubation is indicated at the same threshold or when signs of herniation appear.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Rising ICP"
-     },
-     {
-      "id": "b",
-      "label": "Falling CPP"
-     },
-     {
-      "id": "c",
-      "label": "Hypertension"
-     },
-     {
-      "id": "d",
-      "label": "Bradycardia"
-     },
-     {
-      "id": "e",
-      "label": "Irregular breathing"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "An **external ventricular drain** is the gold standard for ICP monitoring because it measures pressure accurately and allows therapeutic CSF drainage. Lumbar puncture is contraindicated when imaging shows midline shift, mass effect or obstruction, because pressure changes can trigger herniation. Optic nerve sheath diameter on ultrasound is measured 3 mm behind the globe as a bedside screen.",
-   "say": "An external ventricular drain is the gold standard for ICP monitoring because it measures pressure accurately and allows therapeutic CSF drainage. Lumbar puncture is contraindicated when imaging shows midline shift, mass effect or obstruction, because pressure changes can trigger herniation. Optic nerve sheath diameter on ultrasound is measured 3 mm behind the globe as a bedside screen.",
+   "tx": "Rigid calvarial confines govern intracranial dynamics under the Monro-Kellie hypothesis. Normal **intracranial pressure** in resting supine adults measures between 5 and 15 mmHg. Sustained intracranial pressure measurements exceeding 20 to 22 mmHg compromise parenchymal perfusion, mandating urgent neurocritical tiered medical and surgical **interventions** to prevent secondary brain injury.",
+   "say": "Rigid calvarial confines govern intracranial dynamics under the Monro-Kellie hypothesis. Normal intracranial pressure in resting supine adults measures between 5 and 15 mmHg. Sustained intracranial pressure measurements exceeding 20 to 22 mmHg compromise parenchymal perfusion, mandating urgent neurocritical tiered medical and surgical interventions to prevent secondary brain injury.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Invasive monitoring",
+     "title": "Normal Pressures",
      "points": [
-      "Ventricular drain gives accurate readings",
-      "Allows therapeutic CSF drainage",
-      "Parenchymal probes are alternatives"
+      "Resting range 5 to 15 mmHg",
+      "Equilibrium of brain, blood, and CSF",
+      "Autoregulation preserves capillary flow",
+      "Compliant subarachnoid cisterns"
      ]
     },
     "right": {
-     "title": "Safety before lumbar puncture",
+     "title": "Pathological ICP",
      "points": [
-      "Avoid if midline shift is present",
-      "Image first to exclude mass effect",
-      "Risk of downward herniation"
+      "Sustained values above 20 to 22 mmHg",
+      "Exhaustion of CSF spatial reserve",
+      "Venous compression and capillary collapse",
+      "Immediate tier 1 neurocritical intervention"
      ]
     }
    }
   },
   {
-   "tx": "**Osmotherapy** lowers ICP by drawing water out of brain tissue. **Mannitol** is effective, but serum osmolality above 320 mOsm raises the risk of renal injury and dehydration. **Hypertonic saline** avoids rebound oedema, though serum sodium must be monitored closely. Corticosteroids suit vasogenic oedema from tumours or abscesses, while acetazolamide reduces CSF production in idiopathic intracranial hypertension.",
-   "say": "Osmotherapy lowers intracranial pressure by drawing water out of brain tissue. Mannitol is effective, but serum osmolality above 320 mOsm raises the risk of renal injury and dehydration. Hypertonic saline avoids rebound oedema, though serum sodium must be monitored closely. Corticosteroids suit vasogenic oedema from tumours or abscesses, while acetazolamide reduces CSF production in idiopathic intracranial hypertension.",
+   "tx": "Adequate capillary nutrient delivery requires maintaining cerebral perfusion pressure, designated as **Cerebral perfusion pressure**. This parameter is calculated mathematically as **Mean Arterial Pressure** minus intracranial pressure. Neurocritical clinical consensus guidelines recommend maintaining cerebral perfusion pressure strictly between 60 and 70 mmHg, avoiding ischaemia.",
+   "say": "Adequate capillary nutrient delivery requires maintaining cerebral perfusion pressure, designated as Cerebral perfusion pressure. This parameter is calculated mathematically as Mean Arterial Pressure minus intracranial pressure. Neurocritical clinical consensus guidelines recommend maintaining cerebral perfusion pressure strictly between 60 and 70 mmHg, avoiding ischaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mean Arterial Pressure"
+     },
+     {
+      "id": "b",
+      "label": "Intracranial Pressure"
+     },
+     {
+      "id": "c",
+      "label": "Formula: CPP = MAP - ICP"
+     },
+     {
+      "id": "d",
+      "label": "Target 60-70 mmHg"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "c",
+      "perfusion head"
+     ],
+     [
+      "b",
+      "c",
+      "opposing force"
+     ],
+     [
+      "c",
+      "d",
+      "optimal titration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathological progression of lateral mass lesions triggers distinct displacement vectors. Lateral expanding supratentorial lesions cause **Uncal herniation**, where the medial temporal uncus squeezes across the tentorial incisura. This mechanically compresses the ipsilateral **oculomotor** third nerve and posterior cerebral artery, producing sluggish pupillary reactivity and contralateral hemiparesis.",
+   "say": "Pathological progression of lateral mass lesions triggers distinct displacement vectors. Lateral expanding supratentorial lesions cause Uncal herniation, where the medial temporal uncus squeezes across the tentorial incisura. This mechanically compresses the ipsilateral oculomotor third nerve and posterior cerebral artery, producing sluggish pupillary reactivity and contralateral hemiparesis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/traumatic-brain-injury-hematomas-and-icp-fig1.webp",
+    "alt": "Diagram illustrating intracranial compartments, mass effect, and uncal herniation vectors.",
+    "caption": "Raised intracranial pressure dynamics and uncal herniation anatomy (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Paradoxical motor localisation can occur during severe lateral brain displacement. The **Kernohan notch** phenomenon describes paradoxical ipsilateral hemiparesis occurring when expanding **uncal herniation** pushes the midbrain across against the opposite rigid tentorial edge, notching the contralateral cerebral peduncle and generating a deceptive clinical false localiser.",
+   "say": "Paradoxical motor localisation can occur during severe lateral brain displacement. The Kernohan notch phenomenon describes paradoxical ipsilateral hemiparesis occurring when expanding uncal herniation pushes the midbrain across against the opposite rigid tentorial edge, notching the contralateral cerebral peduncle and generating a deceptive clinical false localiser.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Localising Hemiparesis",
+     "points": [
+      "Direct cerebral peduncle compression",
+      "Opposite side of motor weakness",
+      "Contralateral to primary mass lesion",
+      "Predictable corticospinal decussation"
+     ]
+    },
+    "right": {
+     "title": "Kernohan Notch Phenomenon",
+     "points": [
+      "Midbrain crushed against opposite tentorium",
+      "Contralateral cerebral peduncle notched",
+      "Ipsilateral hemiparesis to primary mass",
+      "Classic neurosurgical false localiser"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Medial supratentorial displacement produces distinct vascular complications. **Subfalcine herniation** involves displacement of the medial **cingulate gyrus** beneath the rigid falx cerebri, potentially causing mechanical compression of the ipsilateral or bilateral anterior cerebral arteries, culminating in secondary frontal lobe infarction and contralateral lower limb paresis.",
+   "say": "Medial supratentorial displacement produces distinct vascular complications. Subfalcine herniation involves displacement of the medial cingulate gyrus beneath the rigid falx cerebri, potentially causing mechanical compression of the ipsilateral or bilateral anterior cerebral arteries, culminating in secondary frontal lobe infarction and contralateral lower limb paresis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Supratentorial Mass Shift"
+     },
+     {
+      "id": "b",
+      "label": "Cingulate Gyrus Displacement"
+     },
+     {
+      "id": "c",
+      "label": "Anterior Cerebral Compression"
+     },
+     {
+      "id": "d",
+      "label": "Leg Monoparesis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "subfalcine vector"
+     ],
+     [
+      "b",
+      "c",
+      "vascular impingement"
+     ],
+     [
+      "c",
+      "d",
+      "frontal infarction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Life-threatening posterior fossa mass lesions cause **Tonsillar herniation**, forcing the cerebellar tonsils downward through the **foramen magnum**. The displaced tonsils mechanically crush the cardiorespiratory control centres within the medulla oblongata, rapidly precipitating sudden respiratory arrest, flaccid quadriplegia, and cardiovascular collapse.",
+   "say": "Life-threatening posterior fossa mass lesions cause Tonsillar herniation, forcing the cerebellar tonsils downward through the foramen magnum. The displaced tonsils mechanically crush the cardiorespiratory control centres within the medulla oblongata, rapidly precipitating sudden respiratory arrest, flaccid quadriplegia, and cardiovascular collapse.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/traumatic-brain-injury-fig1.webp",
+    "alt": "Diagram of traumatic brain injury pathology and osmotic fluid compartments.",
+    "caption": "Traumatic mass effect, brain swelling, and hyperosmolar management (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "First-tier medical therapies for elevated intracranial pressure include head elevation to 30 degrees, analgesia, light sedation, and osmotic agents like **hypertonic saline** at 3% or 23.4% boluses, or intravenous **mannitol** administered at 0.5 to 1 g/kg, which rapidly draws water from parenchymal tissue into the intravascular space.",
+   "say": "First-tier medical therapies for elevated intracranial pressure include head elevation to 30 degrees, analgesia, light sedation, and osmotic agents like hypertonic saline at 3% or 23.4% boluses, or intravenous mannitol administered at 0.5 to 1 g/kg, which rapidly draws water from parenchymal tissue into the intravascular space.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Agent",
-     "Key point",
-     "Main caution"
+     "Tier Level",
+     "Therapeutic Modality",
+     "Physiological Target"
     ],
     "rows": [
      [
-      "Mannitol",
-      "Osmotic diuretic",
-      "Osmolality above 320 mOsm, renal injury"
+      "Tier 1",
+      "Head elevation 30 degrees and osmotherapy",
+      "Venous drainage and osmotic dehydration"
      ],
      [
-      "Hypertonic saline",
-      "No rebound oedema",
-      "Hypernatraemia, monitor sodium"
+      "Tier 2",
+      "Neuromuscular blockade and CSF drainage",
+      "Prevention of spikes and volume reduction"
      ],
      [
-      "Corticosteroids",
-      "Vasogenic oedema from tumour",
-      "Not first line for trauma"
+      "Tier 3",
+      "Barbiturate coma and decompressive surgery",
+      "Metabolic suppression and spatial release"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Cushing triad** is a late sign of critical intracranial hypertension and impending terminal brainstem herniation. It is characterized by progressive systemic arterial hypertension with widened pulse pressure, marked reflex **bradycardia**, and irregular respirations, signaling urgent surgical decompression before cardiorespiratory arrest ensues.",
+   "say": "The Cushing triad is a late sign of critical intracranial hypertension and impending terminal brainstem herniation. It is characterized by progressive systemic arterial hypertension with widened pulse pressure, marked reflex bradycardia, and irregular respirations, signaling urgent surgical decompression before cardiorespiratory arrest ensues.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Critical ICP Rise"
+     },
+     {
+      "id": "b",
+      "label": "Medullary Hypoperfusion"
+     },
+     {
+      "id": "c",
+      "label": "Sympathetic Surge and Hypertension"
+     },
+     {
+      "id": "d",
+      "label": "Baroreceptor Reflex Bradycardia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "ischaemic trigger"
      ],
      [
-      "Acetazolamide",
-      "Reduces CSF production",
-      "Used in idiopathic intracranial hypertension"
+      "b",
+      "c",
+      "vasomotor activation"
+     ],
+     [
+      "c",
+      "d",
+      "vagal compensation"
      ]
     ]
    }
   }
  ],
- "quiz": [
-  "q_3d01684b5da1",
-  "q_7d4c3c7108f5",
-  "q_e29e666d3527"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Brain Trauma Foundation Guidelines for the Management of Severe Traumatic Brain Injury"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 47
- }
+  "Adams and Victor Principles of Neurology 11e Ch. 17",
+  "Marino The ICU Book 5e Ch. 38"
+ ]
 }
