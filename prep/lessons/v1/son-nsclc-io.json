@@ -1,148 +1,323 @@
 {
- "v": 1,
- "module": "son-nsclc-io",
- "subject": "ss-medical-oncology",
- "title": "Immunotherapy-based therapy in advanced NSCLC",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Immunotherapy in advanced non-small cell lung cancer is chosen largely by **PD-L1 tumour proportion score** (TPS). Pembrolizumab alone is the first-line choice when TPS is high and no targetable driver mutation is present. When PD-L1 expression is lower, **pembrolizumab added to platinum doublet chemotherapy** is preferred, including for squamous disease. **Nivolumab with ipilimumab** plus chemotherapy is another option for selected patients.",
-   "say": "Immunotherapy in advanced non-small cell lung cancer is chosen largely by PD-L1 tumour proportion score. Pembrolizumab alone is the first-line choice when the score is high and no targetable driver mutation is present. When PD-L1 expression is lower, pembrolizumab added to platinum doublet chemotherapy is preferred, including for squamous disease. Nivolumab with ipilimumab plus chemotherapy is another option for selected patients.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Setting",
-     "Preferred option",
-     "Pivotal evidence"
-    ],
-    "rows": [
-     [
-      "High PD-L1 TPS, no driver mutation",
-      "Pembrolizumab alone",
-      "Pivotal monotherapy study"
-     ],
-     [
-      "Lower PD-L1, non-squamous",
-      "Pembrolizumab with platinum and pemetrexed",
-      "Pivotal chemotherapy combination study"
-     ],
-     [
-      "Squamous histology",
-      "Pembrolizumab with carboplatin and paclitaxel",
-      "Pivotal squamous study"
-     ],
-     [
-      "Chemotherapy add-on, dual checkpoint",
-      "Nivolumab with ipilimumab and chemotherapy",
-      "Dual checkpoint study"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Pembrolizumab in the platinum-based regimens is given as induction for **four cycles**, each every 21 days, followed by maintenance. Maintenance pembrolizumab is continued for up to **35 cycles** in total, which is roughly two years of treatment. Pemetrexed maintenance is started after a non-progressing induction with a non-squamous regimen, and bevacizumab can be added to platinum doublets in selected patients without squamous histology. Indian practice follows these schedules in line with the same trial protocols.",
-   "say": "Pembrolizumab in the platinum-based regimens is given as induction for four cycles, each every 21 days, followed by maintenance. Maintenance pembrolizumab continues for up to 35 cycles in total, which is roughly two years of treatment. Pemetrexed maintenance starts after a non-progressing induction with a non-squamous regimen, and bevacizumab can be added to platinum doublets in selected patients without squamous histology. Indian practice follows these schedules in line with the same trial protocols.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Induction",
-      "sub": "4 cycles, every 21 days"
-     },
-     {
-      "id": "b",
-      "label": "Non-progression"
-     },
-     {
-      "id": "c",
-      "label": "Maintenance",
-      "sub": "Up to 35 cycles total"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Immune-related adverse events are managed by grade. Grade 2 or higher events usually need the checkpoint inhibitor **held** and systemic **corticosteroids** started, with a slow taper. Grade 3 or 4 pneumonitis, myocarditis, hepatitis or colitis usually leads to **permanent discontinuation**. Myocarditis is especially dangerous and needs permanent stopping even at lower grades in many protocols. Rechallenge is generally avoided after severe events. Pneumonitis involving a large lung fraction, such as 60 percent, is treated as grade 3 or 4.",
-   "say": "Immune-related adverse events are managed by grade. Grade 2 or higher events usually need the checkpoint inhibitor held and systemic corticosteroids started, with a slow taper. Grade 3 or 4 pneumonitis, myocarditis, hepatitis or colitis usually leads to permanent discontinuation. Myocarditis is especially dangerous and needs permanent stopping in many protocols. Rechallenge is generally avoided after severe events. Pneumonitis involving a large lung fraction is treated as grade 3 or 4.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Grade",
-     "Immunotherapy action",
-     "Steroid use"
-    ],
-    "rows": [
-     [
-      "Grade 1",
-      "Continue and monitor",
-      "Not usually needed"
-     ],
-     [
-      "Grade 2",
-      "Hold the drug",
-      "Start steroids and taper slowly"
-     ],
-     [
-      "Grade 3 or 4",
-      "Stop permanently",
-      "Start high-dose steroids"
-     ],
-     [
-      "Myocarditis, any severe grade",
-      "Stop permanently",
-      "Urgent specialist input"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Atezolizumab is given intravenously, with the first infusion over **60 minutes** for safety monitoring. Where it is given with chemotherapy on the same day, the atezolizumab infusion comes first, before chemotherapy and bevacizumab, which is the sequence used in the IMpower and IMbrave trials. A subcutaneous formulation combines atezolizumab with hyaluronidase and is given in the thigh over about **7 minutes** every 3 weeks. Infusion reactions are managed by interrupting, slowing or stopping the infusion depending on severity.",
-   "say": "Atezolizumab is given intravenously, with the first infusion over 60 minutes for safety monitoring. Where it is given with chemotherapy on the same day, the atezolizumab infusion comes first, before chemotherapy and bevacizumab, as used in the IMpower and IMbrave trials. A subcutaneous formulation combines atezolizumab with hyaluronidase and is given in the thigh over about 7 minutes every 3 weeks. Infusion reactions are managed by interrupting, slowing or stopping the infusion depending on severity.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-nsclc-io-fig1.webp",
-    "alt": "Diagram showing intravenous atezolizumab infusion and subcutaneous injection in the thigh, with a timeline indicating atezolizumab before chemotherapy and bevacizumab.",
-    "caption": "Atezolizumab administration: intravenous and subcutaneous routes, and sequencing with other therapies",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_0321d22aa64a",
-  "q_3481db19247c",
-  "q_408a31873b13"
- ],
- "src": [],
- "refs": [
-  "KEYNOTE-024 trial (Reck M et al., New England Journal of Medicine, 2016)",
-  "KEYNOTE-189 trial (Gandhi L et al., New England Journal of Medicine, 2018)",
-  "KEYNOTE-407 trial (Paz-Ares L et al., New England Journal of Medicine, 2018)",
-  "CheckMate 9LA trial (Paz-Ares L et al., Lancet, 2021)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 4,
-  "kbWords": 0,
-  "itemN": 35
- }
+  "v": 1,
+  "module": "son-nsclc-io",
+  "subject": "ss-medical-oncology",
+  "title": "Immunotherapy-based therapy in advanced NSCLC",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Pembrolizumab monotherapy** is the established first-line standard for metastatic NSCLC without driver mutations having PD-L1 tumour proportion score TPS 50% or higher based on **KEYNOTE-024**. In this landmark phase III trial, pembrolizumab achieved a median overall survival exceeding 26 months compared to 13 months with platinum chemotherapy, with 5-year survival rates exceeding 30%.",
+      "say": "Pembrolizumab monotherapy is the established first-line standard for metastatic NSCLC without driver mutations having PD-L1 tumour proportion score TPS 50% or higher based on KEYNOTE-024. In this landmark phase III trial, pembrolizumab achieved a median overall survival exceeding 26 months compared to 13 months with platinum chemotherapy, with 5-year survival rates exceeding 30%.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Patient Cohort",
+          "Regimen Tested",
+          "Key Clinical Efficacy Outcome"
+        ],
+        "rows": [
+          [
+            "KEYNOTE-024",
+            "Advanced NSCLC, PD-L1 TPS >= 50%",
+            "Pembrolizumab 200 mg Q3W vs Platinum Doublet",
+            "Median OS 26.3 vs 13.4 months; 5-year OS 31.9%"
+          ],
+          [
+            "KEYNOTE-042",
+            "Advanced NSCLC, PD-L1 TPS >= 1%",
+            "Pembrolizumab vs Platinum Doublet",
+            "Significant OS benefit driven primarily by TPS >= 50% subset"
+          ],
+          [
+            "IMpower110",
+            "Advanced NSCLC, PD-L1 TC3/IC3 (High)",
+            "Atezolizumab monotherapy vs Chemotherapy",
+            "Superior overall survival in high PD-L1 subgroup (OS 20.2 mo)"
+          ],
+          [
+            "EMPOWER-Lung 1",
+            "Advanced NSCLC, PD-L1 TPS >= 50%",
+            "Cemiplimab monotherapy vs Chemotherapy",
+            "Significant progression-free and overall survival advantage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pembrolizumab** plus platinum-pemetrexed significantly improved overall survival over chemotherapy alone in untreated metastatic non-squamous NSCLC regardless of PD-L1 expression in **KEYNOTE-189**. This chemo-immunotherapy doublet established a dramatic overall survival advantage with a hazard ratio of 0.56, while maintenance pemetrexed and pembrolizumab provided sustained antitumour disease control.",
+      "say": "Pembrolizumab plus platinum-pemetrexed significantly improved overall survival over chemotherapy alone in untreated metastatic non-squamous NSCLC regardless of PD-L1 expression in KEYNOTE-189. This chemo-immunotherapy doublet established a dramatic overall survival advantage with a hazard ratio of 0.56, while maintenance pemetrexed and pembrolizumab provided sustained antitumour disease control.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "KEYNOTE-189 (Non-Squamous NSCLC)",
+          "items": [
+            "Pembrolizumab + Pemetrexed + Carboplatin/Cisplatin",
+            "Followed by maintenance Pembrolizumab + Pemetrexed",
+            "Statistically significant OS benefit across all PD-L1 strata",
+            "Hazard ratio for death 0.56 in intention-to-treat cohort"
+          ]
+        },
+        "right": {
+          "title": "KEYNOTE-407 (Squamous NSCLC)",
+          "items": [
+            "Pembrolizumab + Carboplatin + Paclitaxel/Nab-Paclitaxel",
+            "Followed by maintenance Pembrolizumab monotherapy",
+            "Statistically significant OS and PFS across all PD-L1 strata",
+            "Median OS improved from 11.3 to 17.1 months (HR 0.71)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In metastatic **squamous NSCLC**, pembrolizumab combined with carboplatin and paclitaxel or nab-paclitaxel established an overall survival benefit across all PD-L1 tiers in **KEYNOTE-407**. Adding anti-PD-1 checkpoint inhibition reduced the risk of death by 29%, demonstrating that cytotoxic antigen release synergizes with immune disinhibition across aggressive central squamous histology.",
+      "say": "In metastatic squamous NSCLC, pembrolizumab combined with carboplatin and paclitaxel or nab-paclitaxel established an overall survival benefit across all PD-L1 tiers in KEYNOTE-407. Adding anti-PD-1 checkpoint inhibition reduced the risk of death by 29%, demonstrating that cytotoxic antigen release synergizes with immune disinhibition across aggressive central squamous histology.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Metastatic Squamous Cell Carcinoma of Lung"
+          },
+          {
+            "id": "b",
+            "label": "Confirmation: Lacks EGFR / ALK Alterations"
+          },
+          {
+            "id": "c",
+            "label": "Carboplatin + Paclitaxel/Nab-Paclitaxel + Pembro (4 Cycles)"
+          },
+          {
+            "id": "d",
+            "label": "Evaluation of Response by RECIST 1.1"
+          },
+          {
+            "id": "e",
+            "label": "Maintenance Pembrolizumab for Up to 2 Years"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Reflex molecular testing"
+          ],
+          [
+            "b",
+            "c",
+            "Upfront chemo-immunotherapy"
+          ],
+          [
+            "c",
+            "d",
+            "Cross-sectional imaging at 6-9 weeks"
+          ],
+          [
+            "d",
+            "e",
+            "Stable or responding disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**CheckMate 9LA** proved that dual immunotherapy with **nivolumab and ipilimumab** combined with only two cycles of chemotherapy improves overall survival in advanced NSCLC. Delivering two initial cycles of platinum doublet prevents early progression while intermittent anti-CTLA-4 ipilimumab provides durable T-cell priming, generating a long-term survival plateau irrespective of PD-L1 status.",
+      "say": "CheckMate 9LA proved that dual immunotherapy with nivolumab and ipilimumab combined with only two cycles of chemotherapy improves overall survival in advanced NSCLC. Delivering two initial cycles of platinum doublet prevents early progression while intermittent anti-CTLA-4 ipilimumab provides durable T-cell priming, generating a long-term survival plateau irrespective of PD-L1 status.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Component",
+          "Dosage & Schedule",
+          "Mechanistic Rationale"
+        ],
+        "rows": [
+          [
+            "Nivolumab",
+            "360 mg IV every 3 weeks",
+            "Sustained peripheral PD-1 blockade reversing T-cell exhaustion"
+          ],
+          [
+            "Ipilimumab",
+            "1 mg/kg IV every 6 weeks",
+            "Intermittent CTLA-4 blockade promoting naive T-cell priming in nodes"
+          ],
+          [
+            "Platinum Doublet",
+            "2 cycles only (chemo completed in 6 weeks)",
+            "Rapid debulking, antigen release, and prevention of early progression"
+          ],
+          [
+            "Long-Term Benefit",
+            "Durable tail of survival curve",
+            "Particularly advantageous in PD-L1 negative and squamous disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Consolidation **durvalumab** for 12 months significantly prolongs overall survival following concurrent chemoradiation in unresectable stage III NSCLC in the **PACIFIC trial**. Updated five-year analysis confirmed a median overall survival of 47.5 months with durvalumab versus 29.1 months with placebo, establishing post-chemoradiation checkpoint inhibition as the curative standard of care.",
+      "say": "Consolidation durvalumab for 12 months significantly prolongs overall survival following concurrent chemoradiation in unresectable stage III NSCLC in the PACIFIC trial. Updated five-year analysis confirmed a median overall survival of 47.5 months with durvalumab versus 29.1 months with placebo, establishing post-chemoradiation checkpoint inhibition as the curative standard of care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Unresectable Stage III NSCLC"
+          },
+          {
+            "id": "b",
+            "label": "Concurrent Chemoradiotherapy (cCRT to 60-66 Gy)"
+          },
+          {
+            "id": "c",
+            "label": "Absence of Disease Progression on Restaging CT"
+          },
+          {
+            "id": "d",
+            "label": "Initiate Durvalumab within 1 to 42 Days of cCRT"
+          },
+          {
+            "id": "e",
+            "label": "Complete 12 Months of Consolidation Durvalumab"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Definitive curative intent"
+          ],
+          [
+            "b",
+            "c",
+            "Rule out rapid metastatic progression"
+          ],
+          [
+            "c",
+            "d",
+            "Prompt initiation optimizes radiation synergy"
+          ],
+          [
+            "d",
+            "e",
+            "5-year OS exceeds 42%"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Maintenance pemetrexed** following four cycles of platinum doublet chemotherapy in non-squamous NSCLC significantly prolonged overall survival in the **PARAMOUNT** trial. Continuation maintenance with single-agent pemetrexed 500 mg/m2 every three weeks was well-tolerated with vitamin B12 and folic acid supplementation, suppressing residual occult micrometastases.",
+      "say": "Maintenance pemetrexed following four cycles of platinum doublet chemotherapy in non-squamous NSCLC significantly prolonged overall survival in the PARAMOUNT trial. Continuation maintenance with single-agent pemetrexed 500 mg/m2 every three weeks was well-tolerated with vitamin B12 and folic acid supplementation, suppressing residual occult micrometastases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neoadjuvant Chemo-Immunotherapy (CheckMate-816)",
+          "items": [
+            "Nivolumab + Platinum Doublet for 3 cycles prior to surgery",
+            "Pathological complete response (pCR) rate 24.0% vs 2.2%",
+            "Major pathological response (MPR <= 10% viable cells) 36.9%",
+            "Higher rate of minimally invasive surgery and complete R0 resections"
+          ]
+        },
+        "right": {
+          "title": "Neoadjuvant Chemotherapy Alone",
+          "items": [
+            "Platinum doublet chemotherapy alone for 3 cycles",
+            "Pathological complete response rate only 2.2%",
+            "Event-free survival significantly inferior (HR 0.63 for nivolumab addition)",
+            "Lacks sustained systemic immunological priming against micrometastases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bevacizumab** addition to carboplatin and paclitaxel improves progression-free and overall survival in advanced non-squamous NSCLC, but is contraindicated in squamous histology due to fatal **haemoptysis**. In the ECOG 4599 trial, anti-VEGF monoclonal antibody bevacizumab combined with carboplatin-paclitaxel demonstrated significant survival benefit in non-squamous lung cancer lacking central cavitary lesions.",
+      "say": "Bevacizumab addition to carboplatin and paclitaxel improves progression-free and overall survival in advanced non-squamous NSCLC, but is contraindicated in squamous histology due to fatal haemoptysis. In the ECOG 4599 trial, anti-VEGF monoclonal antibody bevacizumab combined with carboplatin-paclitaxel demonstrated significant survival benefit in non-squamous lung cancer lacking central cavitary lesions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Patient Population",
+          "Adjuvant Protocol",
+          "Clinical Endpoint & Benefit"
+        ],
+        "rows": [
+          [
+            "IMpower010",
+            "Resected Stage II-IIIA NSCLC post-chemo",
+            "Atezolizumab 1200 mg Q3W for up to 1 year",
+            "Disease-free survival HR 0.66 in PD-L1 TC >= 1%; HR 0.43 in TC >= 50%"
+          ],
+          [
+            "KEYNOTE-091 (PEARLS)",
+            "Resected Stage IB-IIIA NSCLC post-chemo",
+            "Pembrolizumab 200 mg Q3W for up to 1 year",
+            "Significant DFS improvement across overall intention-to-treat population"
+          ],
+          [
+            "ADAURA (Targeted Counterpart)",
+            "Resected Stage IB-IIIA EGFR-mutant NSCLC",
+            "Osimertinib daily for 3 years",
+            "Significant DFS and OS superiority; IO not recommended in EGFR-mutant"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Second-line **docetaxel** with or without the VEGFR2 antagonist **ramucirumab** is the standard salvage regimen following progression on frontline platinum doublet and immunotherapy. In the REVEL phase III trial, adding ramucirumab to docetaxel significantly prolonged overall survival and objective response in patients with advanced NSCLC refractory to prior platinum regimens.",
+      "say": "Second-line docetaxel with or without the VEGFR2 antagonist ramucirumab is the standard salvage regimen following progression on frontline platinum doublet and immunotherapy. In the REVEL phase III trial, adding ramucirumab to docetaxel significantly prolonged overall survival and objective response in patients with advanced NSCLC refractory to prior platinum regimens.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "STK11 (LKB1) / KEAP1 Genomic Inactivation"
+          },
+          {
+            "id": "b",
+            "label": "Suppression of STING & Type I IFN Pathway"
+          },
+          {
+            "id": "c",
+            "label": "Deficient CXCL9 / CXCL10 Chemokine Release"
+          },
+          {
+            "id": "d",
+            "label": "Exclusion of CD8+ T Cells from Tumour"
+          },
+          {
+            "id": "e",
+            "label": "Primary Resistance to Checkpoint Monotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Loss of AMPK kinase regulation"
+          ],
+          [
+            "b",
+            "c",
+            "Impaired innate immune sensing"
+          ],
+          [
+            "c",
+            "d",
+            "Failure of T-cell homing and infiltration"
+          ],
+          [
+            "d",
+            "e",
+            "Refractory to single-agent anti-PD-1/PD-L1"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_0321d22aa64a",
+    "q_3481db19247c",
+    "q_408a31873b13"
+  ]
 }

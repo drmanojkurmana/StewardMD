@@ -1,84 +1,337 @@
 {
- "v": 1,
- "module": "son-mucositis-skin",
- "subject": "ss-medical-oncology",
- "title": "Mucositis, Dermatological and Gonadal Toxicity in Oncology",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Mucositis is inflammation and ulceration of mucosal surfaces, most often the oral cavity, after **chemotherapy** or head and neck **radiotherapy**. Its pathogenesis runs in five stages: initiation, signalling and amplification, then ulceration and healing. Grading uses CTCAE: grade 2 means moderate pain with a modified diet, while grade 3 means severe pain that interferes with oral intake.",
-   "say": "Mucositis is inflammation and ulceration of mucosal surfaces, most often the oral cavity, after chemotherapy or head and neck radiotherapy. Its pathogenesis runs in five stages: initiation, signalling and amplification, then ulceration and healing. Grading uses the CTCAE scale. Grade 2 means moderate pain with a modified diet, while grade 3 means severe pain that interferes with oral intake.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "CTCAE grade",
-     "Oral intake",
-     "Pain"
-    ],
-    "rows": [
-     [
-      "Grade 1",
-      "Normal intake",
-      "Minimal or none"
-     ],
-     [
-      "Grade 2",
-      "Modified diet needed",
-      "Moderate"
-     ],
-     [
-      "Grade 3",
-      "Intake interfered with",
-      "Severe"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "For prevention, MASCC/ISOO guidance supports several measures. **Oral cryotherapy** with ice chips is given for about 30 minutes around bolus 5-fluorouracil. **Low-level laser therapy** is recommended in haematopoietic stem cell transplantation. Benzydamine mouthwash is used in head and neck radiotherapy below 50 Gy. Systemic zinc is no longer recommended.",
-   "say": "For prevention, MASCC and ISOO guidance supports several measures. Oral cryotherapy with ice chips is given for about 30 minutes around bolus 5-fluorouracil. Low-level laser therapy is recommended in haematopoietic stem cell transplantation. Benzydamine mouthwash is used in head and neck radiotherapy below 50 Gy. Systemic zinc is no longer recommended.",
-   "vis": null
-  },
-  {
-   "tx": "Palifermin is a **keratinocyte growth factor** that reduces severe oral mucositis in patients undergoing autologous haematopoietic stem cell transplantation for haematological malignancy. Topical morphine 0.2 percent rinse helps relieve severe pain and reduces systemic analgesic use compared with magic mouthwash. Low-level laser therapy should be used cautiously in active oral squamous cell carcinoma because of theoretical pro-tumorigenic signalling.",
-   "say": "Palifermin is a keratinocyte growth factor that reduces severe oral mucositis in patients undergoing autologous haematopoietic stem cell transplantation for haematological malignancy. Topical morphine 0.2 percent rinse helps relieve severe pain and reduces systemic analgesic use compared with magic mouthwash. Low-level laser therapy should be used cautiously in active oral squamous cell carcinoma because of theoretical pro-tumorigenic signalling.",
-   "vis": null
-  },
-  {
-   "tx": "Gonadal damage risk depends largely on the **drug class** rather than a single agent, with **alkylating agents** posing the greatest threat, particularly at higher cumulative doses. In women, **premature ovarian insufficiency** typically presents as amenorrhoea before age 40 alongside raised FSH. Ovarian protection with GnRH agonists may be considered. Men should be offered **sperm banking** before treatment begins, because azoospermia can persist.",
-   "say": "Gonadal damage risk depends largely on the drug class, not one single agent, and alkylating agents pose the greatest threat, particularly at higher cumulative doses. In women, premature ovarian insufficiency usually shows as amenorrhoea before age 40 alongside raised FSH. GnRH agonists may be considered to help protect ovarian function. Men should be offered sperm banking before treatment starts, as azoospermia may persist long term.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-mucositis-skin-fig1.webp",
-    "alt": "Diagram illustrating how GnRH agonists suppress ovarian function to protect follicles during chemotherapy.",
-    "caption": "GnRH agonists protect ovaries from chemotherapy damage",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_4e75cbcf1f95",
-  "q_65dc185f3595",
-  "q_0e81a4fa665c"
- ],
- "src": [],
- "refs": [
-  "MASCC/ISOO guidelines for prevention of oral mucositis",
-  "Common Terminology Criteria for Adverse Events (CTCAE)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 4,
-  "kbWords": 0,
-  "itemN": 13
- }
+  "v": 1,
+  "module": "son-mucositis-skin",
+  "subject": "ss-medical-oncology",
+  "title": "Mucositis, dermatological and gonadal toxicity",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Cytotoxic antineoplastic therapy damages rapidly dividing mucosal epithelium through complex biological cascades. **Oral mucositis** is initiated by **reactive oxygen species** ROS and NF-kappaB activation damaging submucosal vascularity and overlying epithelium following cytotoxic chemotherapy or head/neck irradiation. The five-phase pathogenesis involves initiation with DNA strand breaks, primary damage response signalling, amplification with pro-inflammatory cytokines TNF-alpha and IL-1beta, ulceration with bacterial colonisation, and spontaneous healing.",
+      "say": "Cytotoxic antineoplastic therapy damages rapidly dividing mucosal epithelium through complex biological cascades. Oral mucositis is initiated by reactive oxygen species ROS and NF-kappaB activation damaging submucosal vascularity and overlying epithelium following cytotoxic chemotherapy or head and neck irradiation. The five-phase pathogenesis involves initiation with DNA strand breaks, primary damage response signalling, amplification with pro-inflammatory cytokines TNF-alpha and IL-1beta, ulceration with bacterial colonisation, and spontaneous healing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chemotherapy / Radiotherapy Exposure"
+          },
+          {
+            "id": "b",
+            "label": "ROS Generation & NF-kappaB Activation"
+          },
+          {
+            "id": "c",
+            "label": "Upregulation of TNF-alpha, IL-1beta, IL-6"
+          },
+          {
+            "id": "d",
+            "label": "Submucosal Apoptosis & Epithelial Atrophy"
+          },
+          {
+            "id": "e",
+            "label": "Painful Ulceration with Bacterial Translocation"
+          },
+          {
+            "id": "f",
+            "label": "Spontaneous Epithelial Proliferation & Healing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Phase 1: Initiation"
+          ],
+          [
+            "b",
+            "c",
+            "Phase 2: Primary damage response"
+          ],
+          [
+            "c",
+            "d",
+            "Phase 3: Signal amplification"
+          ],
+          [
+            "d",
+            "e",
+            "Phase 4: Ulcerative phase (peak neutropenia)"
+          ],
+          [
+            "e",
+            "f",
+            "Phase 5: Granulation and tissue repair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Recombinant growth factors promoting epithelial proliferation protect mucosal barriers during high-dose conditioning. **Palifermin** recombinant human **keratinocyte growth factor** KGF reduces the incidence, duration, and severity of severe oral mucositis in autologous stem cell transplantation for hematologic malignancies. Palifermin binds the fibroblast growth factor receptor 2b on mucosal keratinocytes, stimulating epithelial proliferation, migration, and protective detoxifying enzyme expression.",
+      "say": "Recombinant growth factors promoting epithelial proliferation protect mucosal barriers during high-dose conditioning. Palifermin recombinant human keratinocyte growth factor KGF reduces the incidence, duration, and severity of severe oral mucositis in autologous stem cell transplantation for hematologic malignancies. Palifermin binds the fibroblast growth factor receptor 2b on mucosal keratinocytes, stimulating epithelial proliferation, migration, and protective detoxifying enzyme expression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Parameter",
+          "Clinical Protocol",
+          "Mechanistic Benefit (Palifermin)"
+        ],
+        "rows": [
+          [
+            "Dosing & Timing",
+            "60 mcg/kg/day IV for 3 days pre-conditioning and 3 days post-ASCT",
+            "Stimulates basal keratinocyte stem cell proliferation"
+          ],
+          [
+            "Mucositis Impact",
+            "Reduces WHO Grade 3/4 mucositis from 98% to 63%",
+            "Shortens duration of severe mucositis from 9 to 3 days"
+          ],
+          [
+            "Opioid Requirement",
+            "Significantly reduces parenteral opioid consumption",
+            "Lowers requirement for total parenteral nutrition (TPN)"
+          ],
+          [
+            "Approved Indication",
+            "High-dose conditioning with TBI for autologous SCT in leukaemia/lymphoma",
+            "Contraindicated in solid tumours due to FGFR2b expression"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Simple physical cooling during short-lived bolus cytotoxic drug delivery significantly diminishes mucosal injury. **Oral cryotherapy** holding ice chips in the mouth during bolus 5-fluorouracil or high-dose melphalan induces local **vasoconstriction**, significantly reducing oral mucositis. Cryotherapy begins five to ten minutes prior to intravenous bolus infusion and continues for thirty to sixty minutes, reducing peak drug delivery to oral mucosal microvessels.",
+      "say": "Simple physical cooling during short-lived bolus cytotoxic drug delivery significantly diminishes mucosal injury. Oral cryotherapy holding ice chips in the mouth during bolus 5-fluorouracil or high-dose melphalan induces local vasoconstriction, significantly reducing oral mucositis. Cryotherapy begins five to ten minutes prior to intravenous bolus infusion and continues for thirty to sixty minutes, reducing peak drug delivery to oral mucosal microvessels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Oral Ice Chips 10 min Pre-Infusion"
+          },
+          {
+            "id": "b",
+            "label": "Local Mucosal Microvascular Vasoconstriction"
+          },
+          {
+            "id": "c",
+            "label": "Bolus Intravenous Cytotoxic Delivery (5-FU / Melphalan)"
+          },
+          {
+            "id": "d",
+            "label": "Reduced Intracellular Drug Exposure to Keratinocytes"
+          },
+          {
+            "id": "e",
+            "label": "Significant Reduction in Grade 3-4 Oral Ulceration"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Physical hypothermia mechanism"
+          ],
+          [
+            "b",
+            "c",
+            "Transient decrease in mucosal blood perfusion"
+          ],
+          [
+            "c",
+            "d",
+            "Limits cytotoxic drug concentration during peak plasma levels"
+          ],
+          [
+            "d",
+            "e",
+            "MASCC/ISOO guideline recommended standard"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Preventing chemotherapy-induced alopecia preserves emotional well-being and psychological quality of life during curative treatment. **Scalp cooling** hypothermia devices induce vasoconstriction of scalp microvessels, reducing follicular cytotoxic drug uptake and preventing **chemotherapy-induced alopecia**. Scalp hypothermia also reduces hair follicle cellular metabolism and slows biochemical enzymatic uptake of taxanes and anthracyclines, achieving hair preservation in over fifty percent of treated patients.",
+      "say": "Preventing chemotherapy-induced alopecia preserves emotional well-being and psychological quality of life during curative treatment. Scalp cooling hypothermia devices induce vasoconstriction of scalp microvessels, reducing follicular cytotoxic drug uptake and preventing chemotherapy-induced alopecia. Scalp hypothermia also reduces hair follicle cellular metabolism and slows biochemical enzymatic uptake of taxanes and anthracyclines, achieving hair preservation in over fifty percent of treated patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mechanism / Stage",
+          "Physiological Effect",
+          "Clinical Efficacy (SCALP / Scalp Cooling Studies)"
+        ],
+        "rows": [
+          [
+            "Microvascular Vasoconstriction",
+            "Reduces blood flow to hair follicles by 20% to 40%",
+            "Limits circulating cytotoxic agent delivery"
+          ],
+          [
+            "Reduced Metabolic Turnover",
+            "Slows follicular cell division and endocytosis",
+            "Protects hair matrix keratinocytes from apoptosis"
+          ],
+          [
+            "Cap Temperature",
+            "Maintained at 18 to 22 deg C scalp skin temperature",
+            "Pre-cooling 30 min, during infusion, and 90 min post-infusion"
+          ],
+          [
+            "Clinical Hair Preservation",
+            "50% to 65% hair preservation in taxane regimens",
+            "Contraindicated in haematological malignancies or scalp metastases"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fluoropyrimidine antimetabolites cause dose-limiting cutaneous toxicity localized to palms and soles. Capecitabine and continuous-infusion 5-FU **hand-foot syndrome** palmar-plantar **erythrodysesthesia** presents with progressive painful erythema, swelling, and desquamation, responsive to topical urea creams and dose reduction. Hand-foot syndrome is mediated by accumulation of cytotoxic metabolites and COX-2 upregulation in microvessels subjected to mechanical friction, managed by topical emollients and dose attenuation.",
+      "say": "Fluoropyrimidine antimetabolites cause dose-limiting cutaneous toxicity localized to palms and soles. Capecitabine and continuous-infusion 5-FU hand-foot syndrome palmar-plantar erythrodysesthesia presents with progressive painful erythema, swelling, and desquamation, responsive to topical urea creams and dose reduction. Hand-foot syndrome is mediated by accumulation of cytotoxic metabolites and COX-2 upregulation in microvessels subjected to mechanical friction, managed by topical emollients and dose attenuation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Toxicity Grade",
+          "Clinical Presentation (Palmar-Plantar Erythrodysesthesia)",
+          "Management Action"
+        ],
+        "rows": [
+          [
+            "Grade 1",
+            "Minimal skin changes or erythema with numbness / dysaesthesia",
+            "Maintain dose; apply 10% topical urea cream BID"
+          ],
+          [
+            "Grade 2",
+            "Painful erythema and swelling affecting ADLs (holding cups, walking)",
+            "Hold until Grade 0-1; resume at 75% capecitabine dose"
+          ],
+          [
+            "Grade 3",
+            "Severe moist desquamation, blistering, bleeding, severe pain",
+            "Hold until resolved; resume at 50% dose or discontinue"
+          ],
+          [
+            "Prophylaxis",
+            "Avoid hot water, tight footwear, repetitive pressure/friction",
+            "Daily prophylactic urea-based keratolytic cream"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ovarian vulnerability to cytotoxic damage correlates directly with patient age and alkylating agent exposure. Chemotherapy-induced **premature ovarian insufficiency** POI is age- and dose-dependent, highest with alkylating agents **cyclophosphamide**, causing amenorrhoea and early menopause. Primordial follicles undergo accelerated atresia and direct apoptotic destruction, with women over forty facing an eighty percent risk of permanent amenorrhoea compared to twenty percent in women under thirty.",
+      "say": "Ovarian vulnerability to cytotoxic damage correlates directly with patient age and alkylating agent exposure. Chemotherapy-induced premature ovarian insufficiency POI is age- and dose-dependent, highest with alkylating agents cyclophosphamide, causing amenorrhoea and early menopause. Primordial follicles undergo accelerated atresia and direct apoptotic destruction, with women over forty facing an eighty percent risk of permanent amenorrhoea compared to twenty percent in women under thirty.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High Risk of POI (> 70%)",
+          "items": [
+            "Cumulative cyclophosphamide dose > 5 g/m2",
+            "Age > 40 years at time of chemotherapy",
+            "Conditioning regimens for haematopoietic stem cell transplantation",
+            "CMF or intensive AC-T regimens in older premenopausal women"
+          ]
+        },
+        "right": {
+          "title": "Low / Intermediate Risk (< 30%)",
+          "items": [
+            "Age < 30 years at treatment initiation",
+            "ABVD regimen for Hodgkin lymphoma (non-alkylating)",
+            "Methotrexate, 5-FU, or vinca alkaloid regimens",
+            "Concurrent GnRH agonist administration for ovarian suppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Male reproductive toxicity following cytotoxic therapy reflects the heightened susceptibility of actively dividing spermatogonia. Alkylating agents cause permanent testicular **germinal epithelial atrophy** and **azoospermia** with preservation of Leydig cell testosterone production. Spermatogonial stem cells undergo profound apoptotic depletion, leading to elevated follicle-stimulating hormone FSH and absent sperm counts, whereas relatively radioresistant Leydig cells maintain normal masculine secondary characteristics.",
+      "say": "Male reproductive toxicity following cytotoxic therapy reflects the heightened susceptibility of actively dividing spermatogonia. Alkylating agents cause permanent testicular germinal epithelial atrophy and azoospermia with preservation of Leydig cell testosterone production. Spermatogonial stem cells undergo profound apoptotic depletion, leading to elevated follicle-stimulating hormone FSH and absent sperm counts, whereas relatively radioresistant Leydig cells maintain normal masculine secondary characteristics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cytotoxic Alkylating Agent Exposure (Procarbazine / Cyclophosphamide)"
+          },
+          {
+            "id": "b",
+            "label": "DNA Cross-Linking in Rapidly Dividing Spermatogonia"
+          },
+          {
+            "id": "c",
+            "label": "Permanent Depletion of Seminiferous Germinal Epithelium"
+          },
+          {
+            "id": "d",
+            "label": "Azoospermia with Markedly Elevated Serum FSH"
+          },
+          {
+            "id": "e",
+            "label": "Radio-Resistant Leydig Cells Maintain Normal Testosterone"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Selective targeting of high mitotic index"
+          ],
+          [
+            "b",
+            "c",
+            "Loss of germ cell renewal"
+          ],
+          [
+            "c",
+            "d",
+            "Loss of inhibin B negative feedback"
+          ],
+          [
+            "a",
+            "e",
+            "Preservation of erectile function and libido"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microtubule-stabilizing taxanes produce distinctive nail matrix toxicities requiring protective cryotherapy. Taxane-induced **nail changes** include subungual haemorrhage, **onycholysis**, Beau lines, and painful subungual abscesses, partially prevented by frozen glove application during infusions. Weekly paclitaxel or docetaxel disrupts the actively dividing nail bed epithelium and matrix capillaries, predisposing to secondary bacterial infection with Staphylococcus aureus or Pseudomonas aeruginosa.",
+      "say": "Microtubule-stabilizing taxanes produce distinctive nail matrix toxicities requiring protective cryotherapy. Taxane-induced nail changes include subungual haemorrhage, onycholysis, Beau lines, and painful subungual abscesses, partially prevented by frozen glove application during infusions. Weekly paclitaxel or docetaxel disrupts the actively dividing nail bed epithelium and matrix capillaries, predisposing to secondary bacterial infection with Staphylococcus aureus or Pseudomonas aeruginosa.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Taxane Nail Manifestation",
+          "Clinical Pathology",
+          "Preventive / Therapeutic Strategy"
+        ],
+        "rows": [
+          [
+            "Onycholysis",
+            "Separation of nail plate from underlying vascular nail bed",
+            "Frozen gloves / slippers worn 15 min pre and post infusion"
+          ],
+          [
+            "Subungual Haemorrhage",
+            "Splinter haemorrhages from fragile capillary disruption",
+            "Keep nails clipped short; avoid tight footwear and trauma"
+          ],
+          [
+            "Beau Lines",
+            "Transverse depressions reflecting temporary matrix arrest",
+            "Resolves spontaneously with outward nail plate growth"
+          ],
+          [
+            "Secondary Paronychia",
+            "Bacterial or fungal superinfection around lateral nail folds",
+            "Topical antiseptics, oral cephalexin or ciprofloxacin"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_4e75cbcf1f95",
+    "q_65dc185f3595",
+    "q_0e81a4fa665c"
+  ]
 }

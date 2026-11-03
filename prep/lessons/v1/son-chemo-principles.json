@@ -1,136 +1,327 @@
 {
- "v": 1,
- "module": "son-chemo-principles",
- "subject": "ss-medical-oncology",
- "title": "Principles of cytotoxic chemotherapy",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Cytotoxic drugs kill **dividing cells** and are most effective when the cell cycle is considered. Antimetabolites such as methotrexate and 5-fluorouracil act in the S phase, whereas vinca alkaloids and taxanes act on M-phase microtubules. Alkylating agents and bleomycin are largely cell cycle non-specific. Because only a fraction of cells is in a vulnerable phase at any moment, drugs are given as repeated cycles.",
-   "say": "Cytotoxic drugs kill dividing cells and work best when the cell cycle is taken into account. Antimetabolites such as methotrexate and 5-fluorouracil act in the S phase. Vinca alkaloids and taxanes act on M-phase microtubules. Alkylating agents and bleomycin are largely cell cycle non-specific. Because only a fraction of cells is vulnerable at any moment, drugs are given as repeated cycles.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug class",
-     "Phase of action",
-     "Example"
-    ],
-    "rows": [
-     [
-      "Antimetabolite",
-      "S phase",
-      "Methotrexate"
-     ],
-     [
-      "Vinca alkaloid",
-      "M phase",
-      "Vincristine"
-     ],
-     [
-      "Taxane",
-      "M phase",
-      "Docetaxel"
-     ],
-     [
-      "Alkylating agent",
-      "Non-specific",
-      "Cyclophosphamide"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **Skipper log kill hypothesis** states that a standard dose kills a constant fraction of tumour cells, not a fixed number. Thus the absolute number of cells destroyed depends on the starting burden, and a small residual population is the target of adjuvant therapy. The **Goldie-Coldman hypothesis** proposes that drug-resistant clones arise spontaneously as tumours grow, so combining non-cross-resistant agents at full doses improves cure rates.",
-   "say": "The Skipper log kill hypothesis states that a standard dose kills a constant fraction of tumour cells, not a fixed number. So the absolute number destroyed depends on the starting burden. The Goldie-Coldman hypothesis proposes that drug resistant clones arise spontaneously as tumours grow. Combining non cross resistant agents at full doses therefore improves cure rates.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-chemo-principles-fig1.webp",
-    "alt": "A graph illustrating the Skipper log kill hypothesis with exponential tumor cell reduction and the Goldie-Coldman hypothesis showing the emergence of drug-resistant clones over time.",
-    "caption": "Log kill and resistance: core principles of cytotoxic chemotherapy",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Dose intensity** describes how much drug a patient receives per unit of time, so delays and dose reductions lower it. **Dose density** shortens the interval between cycles while keeping each dose at full strength, aiming to limit regrowth of tumour cells between treatments. Most systemic agents are prescribed using **body surface area**, usually estimated with a formula such as Mosteller, rather than weight alone.",
-   "say": "Dose intensity is how much drug a patient receives per unit of time, so delays and dose reductions lower it. Dose density shortens the gap between cycles while keeping each dose full, which tries to limit regrowth of tumour cells between treatments. Most systemic agents are dosed by body surface area, usually estimated with the Mosteller formula, rather than by weight alone.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Concept",
-     "Core idea",
-     "Practical point"
-    ],
-    "rows": [
-     [
-      "Dose intensity",
-      "Drug amount delivered per unit time",
-      "Delays and dose cuts reduce it"
-     ],
-     [
-      "Dose density",
-      "Shorter interval between cycles",
-      "Full doses given on a tighter schedule"
-     ],
-     [
-      "Body surface area",
-      "Size-based dosing",
-      "Mosteller is a commonly used formula"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**P-glycoprotein** is an ATP-dependent efflux pump encoded by the MDR1 gene that actively expels drugs such as anthracyclines, vinca alkaloids and taxanes from the cell. Its overexpression causes **multidrug resistance**. Drugs that inhibit or are metabolised by CYP3A4 can also alter levels of docetaxel and other agents, and phenytoin, a CYP inducer, may lower chemotherapy exposure.",
-   "say": "P-glycoprotein is an ATP dependent efflux pump encoded by the MDR1 gene. It expels drugs such as anthracyclines, vinca alkaloids and taxanes, causing multidrug resistance when overexpressed. Docetaxel is cleared by CYP3A4 and CYP3A5. Phenytoin, a strong CYP inducer, may lower the levels of chemotherapy agents it affects.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Mechanism of resistance",
-     "points": [
-      "Efflux of drug out of cell",
-      "Reduced intracellular concentration",
-      "Affects anthracyclines and taxanes"
-     ]
+  "v": 1,
+  "module": "son-chemo-principles",
+  "subject": "ss-medical-oncology",
+  "title": "Principles of cytotoxic chemotherapy",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The theoretical foundation of cancer chemotherapy rests on mathematical models of malignant cell growth and reduction. The Skipper **log-kill hypothesis** postulates that a given dose of **cytotoxic chemotherapy** kills a constant fractional proportion of tumour cells rather than a constant absolute number. Consequently, multiple cycles of treatment with consistent intensity are required to reduce tumour burden below the threshold of immunological clearance.",
+      "say": "The theoretical foundation of cancer chemotherapy rests on mathematical models of malignant cell growth and reduction. The Skipper log-kill hypothesis postulates that a given dose of cytotoxic chemotherapy kills a constant fractional proportion of tumour cells rather than a constant absolute number. Consequently, multiple cycles of treatment with consistent intensity are required to reduce tumour burden below the threshold of immunological clearance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tumour Burden 10^12 Cells (1 kg)"
+          },
+          {
+            "id": "b",
+            "label": "Cycle 1 Chemotherapy (3-log kill)"
+          },
+          {
+            "id": "c",
+            "label": "Residual Burden 10^9 Cells (1 g)"
+          },
+          {
+            "id": "d",
+            "label": "Cycle 2 Chemotherapy (3-log kill)"
+          },
+          {
+            "id": "e",
+            "label": "Residual Burden 10^6 Cells (Subclinical)"
+          },
+          {
+            "id": "f",
+            "label": "Host Immune Clearance or Cure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Lethal systemic burden"
+          ],
+          [
+            "b",
+            "c",
+            "Constant fractional reduction 99.9%"
+          ],
+          [
+            "c",
+            "d",
+            "Recovery interval with cell regrowth"
+          ],
+          [
+            "d",
+            "e",
+            "Further 99.9% fractional clearance"
+          ],
+          [
+            "e",
+            "f",
+            "Eradication below 10^4 cells"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Interaction concerns",
-     "points": [
-      "CYP3A4/5 clears docetaxel",
-      "Phenytoin induces CYP enzymes",
-      "Lowers exposure to substrates"
-     ]
+    {
+      "tx": "Drug resistance frequently emerges during cancer treatment as a consequence of underlying somatic genetic instability. The **Goldie-Coldman hypothesis** predicts that spontaneous drug-resistant malignant clones arise early with tumour expansion, necessitating upfront **combination chemotherapy**. Administering non-cross-resistant cytotoxic agents concurrently maximizes initial tumour cell destruction and prevents the selective overgrowth of resistant subclonal populations.",
+      "say": "Drug resistance frequently emerges during cancer treatment as a consequence of underlying somatic genetic instability. The Goldie-Coldman hypothesis predicts that spontaneous drug-resistant malignant clones arise early with tumour expansion, necessitating upfront combination chemotherapy. Administering non-cross-resistant cytotoxic agents concurrently maximizes initial tumour cell destruction and prevents the selective overgrowth of resistant subclonal populations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Single-Agent Sequential Model",
+          "items": [
+            "Spontaneous mutations occur at rate alpha per cell division",
+            "Single drug eliminates sensitive clones but selects resistant clones",
+            "Subsequent cross-resistant tumour recurrence occurs rapidly",
+            "Probability of zero resistant cells drops sharply as tumour size increases"
+          ]
+        },
+        "right": {
+          "title": "Upfront Combination Chemotherapy",
+          "items": [
+            "Combines agents with independent cellular mechanisms of action",
+            "Non-overlapping clinical organ toxicities allow optimal dosing",
+            "Dramatically reduces probability of dual-resistant subclone emergence",
+            "Established curative standard in lymphomas, testicular germ cell tumours"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Optimizing dosing schedules is vital to maximize antineoplastic efficacy while managing haematological toxicity. **Dose intensity** represents drug delivered per unit time, while **dose density** compresses intervals between cycles with haematopoietic colony-stimulating factor support. Dose-dense regimens minimize the inter-cycle interval during which residual surviving tumour cells undergo rapid exponential regrowth, improving disease-free and overall survival in high-risk breast cancer.",
+      "say": "Optimizing dosing schedules is vital to maximize antineoplastic efficacy while managing haematological toxicity. Dose intensity represents drug delivered per unit time, while dose density compresses intervals between cycles with haematopoietic colony-stimulating factor support. Dose-dense regimens minimize the inter-cycle interval during which residual surviving tumour cells undergo rapid exponential regrowth, improving disease-free and overall survival in high-risk breast cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dosing Strategy",
+          "Definition & Schedule",
+          "Clinical Evidence & Indications"
+        ],
+        "rows": [
+          [
+            "Standard Interval",
+            "Full-dose delivery every 3 weeks (Q3W)",
+            "Allows spontaneous haematological bone marrow recovery"
+          ],
+          [
+            "Dose-Dense Schedule",
+            "Shortened interval to every 2 weeks (Q2W)",
+            "G-CSF support required; proven benefit in early breast cancer"
+          ],
+          [
+            "Dose Intensity",
+            "Milligrams per square metre per week delivered",
+            "Directly correlates with complete response rate in lymphoma"
+          ],
+          [
+            "Dose Escalation",
+            "Administering supranormal doses per cycle",
+            "Limited by non-haematological organ toxicities without benefit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renally cleared antineoplastic agents require precision dosing based on glomerular filtration capacity to avoid severe toxicity. The **Calvert formula** calculates total carboplatin dose in milligrams as **target AUC** multiplied by the sum of glomerular filtration rate plus 25. Total Dose = AUC x (GFR + 25), with GFR calculated by the Cockcroft-Gault equation and capped at 125 mL/min to prevent overdosage in hyperfiltering individuals.",
+      "say": "Renally cleared antineoplastic agents require precision dosing based on glomerular filtration capacity to avoid severe toxicity. The Calvert formula calculates total carboplatin dose in milligrams as target AUC multiplied by the sum of glomerular filtration rate plus 25. Total Dose equals AUC multiplied by GFR plus 25, with GFR calculated by the Cockcroft-Gault equation and capped at 125 mL per minute to prevent overdosage in hyperfiltering individuals.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Serum Creatinine Measurement"
+          },
+          {
+            "id": "b",
+            "label": "Calculate CrCl via Cockcroft-Gault"
+          },
+          {
+            "id": "c",
+            "label": "Cap Estimated GFR at 125 mL/min"
+          },
+          {
+            "id": "d",
+            "label": "Select Target AUC (e.g. 5 or 6)"
+          },
+          {
+            "id": "e",
+            "label": "Carboplatin Dose = AUC x (GFR + 25)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Standardised lab assay"
+          ],
+          [
+            "b",
+            "c",
+            "Apply FDA safety cap"
+          ],
+          [
+            "c",
+            "d",
+            "Definitive vs palliative protocol"
+          ],
+          [
+            "d",
+            "e",
+            "Compute milligram dose"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Administering systemic therapy prior to definitive local intervention serves both anatomical and biological objectives. **Neoadjuvant systemic therapy** downsizes primary tumours to facilitate **organ preservation** and provides in vivo assessment of treatment response. Achieving pathological complete response (pCR) at subsequent surgical resection serves as a powerful surrogate biomarker for prolonged disease-free survival in aggressive breast and rectal cancers.",
+      "say": "Administering systemic therapy prior to definitive local intervention serves both anatomical and biological objectives. Neoadjuvant systemic therapy downsizes primary tumours to facilitate organ preservation and provides in vivo assessment of treatment response. Achieving pathological complete response at subsequent surgical resection serves as a powerful surrogate biomarker for prolonged disease-free survival in aggressive breast and rectal cancers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neoadjuvant Systemic Therapy",
+          "items": [
+            "Downstages locally advanced primary tumours and regional nodes",
+            "Permits breast-conserving surgery or sphincter-saving resection",
+            "Direct in vivo evaluation of tumour chemotherapy sensitivity",
+            "Pathological complete response predicts excellent long-term survival"
+          ]
+        },
+        "right": {
+          "title": "Adjuvant Chemotherapy",
+          "items": [
+            "Delivered after complete surgical resection of primary disease",
+            "Targets unmeasurable occult micrometastatic deposits",
+            "Efficacy determined by disease-free and overall survival rates",
+            "Cannot measure in vivo histological response in the resected bed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following curative-intent surgical resection, occult residual disease remains the primary cause of eventual distant relapse. **Adjuvant chemotherapy** eradicates occult **micrometastatic disease** following curative-intent surgical resection, reducing long-term relapse risk. The clinical benefit is proportional to the baseline risk of recurrence, proving indispensable in node-positive colon carcinoma, resected high-risk non-small cell lung cancer, and invasive breast carcinoma.",
+      "say": "Following curative-intent surgical resection, occult residual disease remains the primary cause of eventual distant relapse. Adjuvant chemotherapy eradicates occult micrometastatic disease following curative-intent surgical resection, reducing long-term relapse risk. The clinical benefit is proportional to the baseline risk of recurrence, proving indispensable in node-positive colon carcinoma, resected high-risk non-small cell lung cancer, and invasive breast carcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour Site",
+          "High-Risk Feature for Adjuvant Chemotherapy",
+          "Standard Adjuvant Regimen"
+        ],
+        "rows": [
+          [
+            "Stage III Colon",
+            "Regional lymph node metastases (N1/N2)",
+            "FOLFOX or CAPOX for 3 to 6 months"
+          ],
+          [
+            "Stage II/III NSCLC",
+            "Tumour size > 4 cm or positive regional nodes",
+            "Cisplatin-based doublet for 4 cycles"
+          ],
+          [
+            "Early Breast Cancer",
+            "Node-positive, HER2-positive, or high genomic score",
+            "Anthracycline-taxane or TC regimens"
+          ],
+          [
+            "Epithelial Ovarian",
+            "High-grade serous histology or Stage IC-IV",
+            "Carboplatin plus paclitaxel for 6 cycles"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Alternative dosing modalities exploit vascular and immunological pathways to combat refractory or indolent malignant states. **Metronomic chemotherapy** administers frequent, low-dose cytotoxic agents without extended rest periods, primarily exerting **anti-angiogenic** and immunomodulatory effects. By continually exposing endothelial cells to cytotoxic drugs, metronomic dosing suppresses circulating endothelial progenitor cells and selectively depletes immunosuppressive regulatory T cells.",
+      "say": "Alternative dosing modalities exploit vascular and immunological pathways to combat refractory or indolent malignant states. Metronomic chemotherapy administers frequent, low-dose cytotoxic agents without extended rest periods, primarily exerting anti-angiogenic and immunomodulatory effects. By continually exposing endothelial cells to cytotoxic drugs, metronomic dosing suppresses circulating endothelial progenitor cells and selectively depletes immunosuppressive regulatory T cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Low-Dose Continuous Chemotherapy"
+          },
+          {
+            "id": "b",
+            "label": "Sustained Endothelial Cell Apoptosis"
+          },
+          {
+            "id": "c",
+            "label": "Inhibition of Tumour Angiogenesis"
+          },
+          {
+            "id": "d",
+            "label": "Depletion of CD4+ FoxP3+ Tregs"
+          },
+          {
+            "id": "e",
+            "label": "Restoration of Host Antitumour Immunity"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Daily oral cyclophosphamide / methotrexate"
+          ],
+          [
+            "b",
+            "c",
+            "Suppression of VEGF and bFGF signalling"
+          ],
+          [
+            "a",
+            "d",
+            "Selective sensitivity of regulatory T cells"
+          ],
+          [
+            "d",
+            "e",
+            "Dendritic and effector T-cell activation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Efflux transporter upregulation represents a classic mechanism of acquired broad-spectrum chemotherapy failure. Multidrug resistance 1 gene ABCB1 encodes **P-glycoprotein**, an ATP-dependent **efflux pump** that extrudes anthracyclines, taxanes, and vinca alkaloids from tumour cells. Active transport reduces intracellular drug concentration below lethal thresholds, resulting in cross-resistance across structurally unrelated antineoplastic classes.",
+      "say": "Efflux transporter upregulation represents a classic mechanism of acquired broad-spectrum chemotherapy failure. Multidrug resistance 1 gene ABCB1 encodes P-glycoprotein, an ATP-dependent efflux pump that extrudes anthracyclines, taxanes, and vinca alkaloids from tumour cells. Active transport reduces intracellular drug concentration below lethal thresholds, resulting in cross-resistance across structurally unrelated antineoplastic classes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Efflux Transporter",
+          "Gene",
+          "Substrate Chemotherapeutic Classes",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "P-glycoprotein (P-gp)",
+            "ABCB1 (MDR1)",
+            "Anthracyclines, taxanes, vinca alkaloids, etoposide",
+            "Multidrug resistance in AML, myeloma, lymphomas"
+          ],
+          [
+            "MRP1",
+            "ABCC1",
+            "Anthracyclines, methotrexate, vincristine, camptothecins",
+            "Efflux of organic anion drug conjugates"
+          ],
+          [
+            "BCRP",
+            "ABCG2",
+            "Topotecan, irinotecan, mitoxantrone, methotrexate",
+            "Resistance in gastrointestinal and breast neoplasms"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Chemotherapy is also sequenced by timing. **Neoadjuvant** therapy is given before surgery or radiotherapy to shrink tumours and test response, while **adjuvant** therapy follows primary treatment to eradicate occult residual disease. **Metronomic** chemotherapy uses frequent low doses without long drug-free breaks, aiming at antiangiogenic effects and reduced toxicity. Extravasation of vesicants such as doxorubicin should be managed by stopping the infusion and aspirating residual drug.",
-   "say": "Chemotherapy is also sequenced by timing. Neoadjuvant therapy is given before surgery to shrink tumours. Adjuvant therapy follows primary treatment to eradicate occult residual disease. Metronomic chemotherapy uses frequent low doses without long breaks, aiming at antiangiogenic effects. For extravasation of doxorubicin, stop the infusion and aspirate residual drug.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_4e0ec3e26d0d",
-  "q_89e0cbc03179",
-  "q_07c7cf161341"
- ],
- "src": [],
- "refs": [
-  "Goodman and Gilman's The Pharmacological Basis of Therapeutics",
-  "DeVita, Hellman and Rosenberg's Cancer: Principles and Practice of Oncology (DeVita V T, Lawrence T S, Rosenberg S A)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 33
- }
+  ],
+  "quiz": [
+    "q_4e0ec3e26d0d",
+    "q_89e0cbc03179",
+    "q_07c7cf161341"
+  ]
 }

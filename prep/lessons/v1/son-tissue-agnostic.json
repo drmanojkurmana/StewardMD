@@ -1,130 +1,314 @@
 {
- "v": 1,
- "module": "son-tissue-agnostic",
- "subject": "ss-medical-oncology",
- "title": "Tissue agnostic and precision oncology",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Tissue agnostic therapy means a drug is approved for a **biomarker** rather than for the organ where the tumour began. Early approvals rested on single-arm trials across many cancer types, so the evidence is usually weaker than for randomised trials. In India, molecular testing is concentrated at tertiary centres, so **companion diagnostic** confirmation of the biomarker must come before treatment.",
-   "say": "Tissue agnostic therapy means a drug is approved for a biomarker rather than for the organ where the tumour began. Early approvals rested on single-arm trials across many cancer types, so the evidence is usually weaker than for randomised trials. In India, molecular testing is concentrated at tertiary centres, so companion diagnostic confirmation of the biomarker must come before treatment.",
-   "vis": null
-  },
-  {
-   "tx": "Some **biomarkers** predict benefit regardless of where the cancer started, so treatment follows the **molecular alteration** rather than the organ. Examples include **NTRK fusions**, **mismatch repair deficiency**, and **RET fusions**. Results are usually reviewed at a **molecular tumour board**, which weighs the test result, the patient's prior treatment, and available trials before a plan is chosen.",
-   "say": "Some biomarkers predict benefit regardless of where the cancer started, so treatment follows the molecular alteration rather than the organ. Examples include NTRK fusions, mismatch repair deficiency, and RET fusions. Results are usually reviewed at a molecular tumour board, which weighs the test result, the patient's prior treatment, and available trials before a plan is chosen.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Tumour sequencing"
-     },
-     {
-      "id": "n2",
-      "label": "Actionable biomarker found"
-     },
-     {
-      "id": "n3",
-      "label": "Matched tissue-agnostic therapy"
-     },
-     {
-      "id": "n4",
-      "label": "Molecular tumour board review"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ],
-     [
-      "n3",
-      "n4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "NTRK gene fusions are uncommon across tumour types, yet they can be **actionable** because a single **tropomyosin receptor kinase** pathway drives growth. Matching a **targeted therapy** to the fusion, rather than to the organ of origin, is the core idea of tissue agnostic practice. Mismatch repair deficiency and high **microsatellite instability** signal a different route, where **immune checkpoint inhibitors** are often considered early.",
-   "say": "NTRK gene fusions are uncommon across tumour types, yet they can be actionable because a single tropomyosin receptor kinase pathway drives growth. Matching a targeted therapy to the fusion, rather than to the organ of origin, is the core idea of tissue agnostic practice. Mismatch repair deficiency and high microsatellite instability signal a different route, where immune checkpoint inhibitors are often considered early.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-tissue-agnostic-fig1.webp",
-    "alt": "Diagram illustrating tissue-agnostic therapy where different cancers with the same biomarker (NTRK fusion) receive the same targeted treatment, and MMRd leads to immunotherapy.",
-    "caption": "Tissue-agnostic therapy: biomarker dictates treatment, not organ of origin",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "HER2 testing is not confined to breast and gastric cancer. Tumours of many tissue types can show strong HER2 protein expression on **immunohistochemistry**, and such patients may become eligible for an **antibody-drug conjugate** once standard options have been exhausted. The **molecular tumour board** brings together pathology, genomics and oncology to confirm the result before treatment is chosen.",
-   "say": "HER2 testing is not confined to breast and gastric cancer. Tumours of many tissue types can show strong HER2 protein expression on immunohistochemistry, and these patients may become eligible for an antibody-drug conjugate once standard options have been used up. The molecular tumour board brings together pathology, genomics and oncology to confirm the result before a treatment is chosen.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Tissue or liquid biopsy"
-     },
-     {
-      "id": "n2",
-      "label": "Immunohistochemistry or NGS report"
-     },
-     {
-      "id": "n3",
-      "label": "Molecular tumour board"
-     },
-     {
-      "id": "n4",
-      "label": "Matched therapy decision"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ],
-     [
-      "n3",
-      "n4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A **molecular tumour board** is a multidisciplinary meeting that interprets genomic results and matches them with therapy. Board decisions are especially important when a biomarker is rare or evidence is limited. In India, where access to some agents is restricted by cost and availability, the board also helps prioritise options and manage expectations.",
-   "say": "A molecular tumour board is a multidisciplinary meeting that interprets genomic results and matches them with therapy. Board decisions are especially important when a biomarker is rare or evidence is limited. In India, where access to some agents is restricted by cost and availability, the board also helps prioritise options and manage expectations.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_5c6f07b2a273",
-  "q_1c74853c5b95",
-  "q_3b837fde3f9e"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 8
- }
+  "v": 1,
+  "module": "son-tissue-agnostic",
+  "subject": "ss-medical-oncology",
+  "title": "Tissue agnostic and precision oncology",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**NTRK gene fusions** involving NTRK1, NTRK2, NTRK3 encode oncogenic chimeric TRK kinases sensitive to selective **TRK inhibitors** larotrectinib and entrectinib across all histologies. These genomic rearrangements fuse the 3-prime kinase domain of NTRK with 5-prime upstream partners, resulting in ligand-independent constitutive tyrosine kinase signalling driving cellular proliferation and survival across diverse paediatric and adult solid malignancies.",
+      "say": "NTRK gene fusions involving NTRK1, NTRK2, NTRK3 encode oncogenic chimeric TRK kinases sensitive to selective TRK inhibitors larotrectinib and entrectinib across all histologies. These genomic rearrangements fuse the 3-prime kinase domain of NTRK with 5-prime upstream partners, resulting in ligand-independent constitutive tyrosine kinase signalling driving cellular proliferation and survival across diverse paediatric and adult solid malignancies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Loss of MMR (MLH1, MSH2, MSH6, PMS2)"
+          },
+          {
+            "id": "b",
+            "label": "Accumulation of Frameshift Mutations"
+          },
+          {
+            "id": "c",
+            "label": "High Neoantigen Load & Dense TILs"
+          },
+          {
+            "id": "d",
+            "label": "Anti-PD-1 Pembrolizumab Therapy"
+          },
+          {
+            "id": "e",
+            "label": "Durable Tissue-Agnostic Response"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Replication slippage in microsatellites"
+          ],
+          [
+            "b",
+            "c",
+            "Novel immunogenic peptides generated"
+          ],
+          [
+            "c",
+            "d",
+            "Tumour evasion via PD-1 pathway"
+          ],
+          [
+            "d",
+            "e",
+            "High objective response rate (> 40%)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "MSI-H and **mismatch repair-deficient** dMMR solid tumours demonstrate profound, durable responsiveness to immune **checkpoint inhibitors** regardless of anatomical origin. Defective mismatch repair genes MLH1, MSH2, MSH6, and PMS2 lead to thousands of somatic frameshift mutations, producing immunogenic neoantigens that induce robust cytotoxic T-cell recruitment and programmed death-1 axis vulnerability.",
+      "say": "MSI-H and mismatch repair-deficient dMMR solid tumours demonstrate profound, durable responsiveness to immune checkpoint inhibitors regardless of anatomical origin. Defective mismatch repair genes MLH1, MSH2, MSH6, and PMS2 lead to thousands of somatic frameshift mutations, producing immunogenic neoantigens that induce robust cytotoxic T-cell recruitment and programmed death-1 axis vulnerability.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genomic Parameter",
+          "Threshold & Definition",
+          "Clinical Validation (KEYNOTE-158)"
+        ],
+        "rows": [
+          [
+            "TMB Cut-Off",
+            ">= 10 mutations / megabase (mut/Mb)",
+            "Validated by FoundationOne CDx NGS assay"
+          ],
+          [
+            "Objective Response Rate",
+            "29% in TMB-High vs 6% in non-TMB-High",
+            "Statistically significant benefit across diverse histologies"
+          ],
+          [
+            "Duration of Response",
+            "Median DOR not reached (>= 24 months)",
+            "Durable responses in anal, biliary, cervical, and vulvar cancers"
+          ],
+          [
+            "Caveat Histologies",
+            "Gliomas and uveal melanoma show poor response",
+            "Low baseline TIL infiltration despite high mutational burden"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "High **tumour mutational burden** defined as 10 or more mutations per megabase serves as a tumour-agnostic **predictive biomarker** for pembrolizumab monotherapy. In the KEYNOTE-158 trial, patients with TMB-high status achieved an objective response rate of 29% compared to 6% in non-TMB-high tumours, reflecting heightened neoantigen display that triggers potent endogenous antitumour T-lymphocyte immunity.",
+      "say": "High tumour mutational burden defined as 10 or more mutations per megabase serves as a tumour-agnostic predictive biomarker for pembrolizumab monotherapy. In the KEYNOTE-158 trial, patients with TMB-high status achieved an objective response rate of 29% compared to 6% in non-TMB-high tumours, reflecting heightened neoantigen display that triggers potent endogenous antitumour T-lymphocyte immunity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Larotrectinib",
+          "items": [
+            "Highly selective pan-TRK inhibitor (TRKA, TRKB, TRKC)",
+            "Systemic ORR 75% to 79% in TRK-fusion cancers",
+            "Approved across all ages including infants and children",
+            "Adverse effects: fatigue, elevated AST/ALT, neurotoxicity"
+          ]
+        },
+        "right": {
+          "title": "Entrectinib",
+          "items": [
+            "Potent inhibitor of TRKA/B/C, ROS1, and ALK",
+            "High blood-brain barrier penetration with intracranial activity",
+            "Approved for NTRK fusion-positive tumours and ROS1+ NSCLC",
+            "Adverse effects: dysgeusia, weight gain, cognitive changes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**BRAF V600E** mutation combination therapy with dabrafenib and trametinib carries **tissue-agnostic** approval for all advanced solid tumours lacking satisfactory alternative options. BRAF V600E causes constitutive monomeric activation of downstream MEK and ERK kinases, and dual pathway blockade with dabrafenib and trametinib prevents paradoxical MAPK reactivation and delays emergence of acquired resistance.",
+      "say": "BRAF V600E mutation combination therapy with dabrafenib and trametinib carries tissue-agnostic approval for all advanced solid tumours lacking satisfactory alternative options. BRAF V600E causes constitutive monomeric activation of downstream MEK and ERK kinases, and dual pathway blockade with dabrafenib and trametinib prevents paradoxical MAPK reactivation and delays emergence of acquired resistance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "First-Line TRK Inhibitor (Larotrectinib)"
+          },
+          {
+            "id": "b",
+            "label": "Selective Pressure on Kinase Domain"
+          },
+          {
+            "id": "c",
+            "label": "Solvent-Front Mutation (G595R / G623R)"
+          },
+          {
+            "id": "d",
+            "label": "Steric Clash & Loss of First-Line Binding"
+          },
+          {
+            "id": "e",
+            "label": "Second-Generation TRK Inhibitor (Repotrectinib)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Initial tumour regression"
+          ],
+          [
+            "b",
+            "c",
+            "Clonal emergence under drug pressure"
+          ],
+          [
+            "c",
+            "d",
+            "Secondary clinical progression"
+          ],
+          [
+            "d",
+            "e",
+            "Compact macrocyclic structure circumvents clash"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**RET gene fusions** and activating RET mutations across diverse solid tumours respond to highly **selective RET inhibitors** selpercatinib and pralsetinib. In the LIBRETTO-001 and ARROW trials, these ATP-competitive inhibitors demonstrated dramatic, durable objective responses exceeding 60% with marked intracranial central nervous system penetration, irrespective of whether the tumour originated in the lung, thyroid, colon, or breast.",
+      "say": "RET gene fusions and activating RET mutations across diverse solid tumours respond to highly selective RET inhibitors selpercatinib and pralsetinib. In the LIBRETTO-001 and ARROW trials, these ATP-competitive inhibitors demonstrated dramatic, durable objective responses exceeding 60% with marked intracranial central nervous system penetration, irrespective of whether the tumour originated in the lung, thyroid, colon, or breast.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour Site",
+          "BRAF V600E Frequency",
+          "Clinical Regimen & Trial Evidence"
+        ],
+        "rows": [
+          [
+            "Melanoma",
+            "~50% of cutaneous melanomas",
+            "Dabrafenib + Trametinib (COMBI-d/v studies)"
+          ],
+          [
+            "Anaplastic Thyroid Cancer",
+            "20-40% of aggressive cases",
+            "FDA approved upfront based on ROAR trial (ORR > 60%)"
+          ],
+          [
+            "Low-Grade / High-Grade Glioma",
+            "Variable frequency (60% pleomorphic XA)",
+            "ROAR trial cohort demonstrated durable responses"
+          ],
+          [
+            "Tissue-Agnostic Approval",
+            "Any solid tumour with V600E post-progression",
+            "FDA accelerated approval based on ROAR and NCI-MATCH"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "HER2-directed antibody-drug conjugate **trastuzumab deruxtecan** is approved tumour-agnostically for pretreated unresectable or metastatic **HER2 IHC 3+** solid tumours. Based on the pan-tumour DESTINY-PanTumor02 study, trastuzumab deruxtecan demonstrated confirmed objective response rates of 51% across biliary, bladder, cervical, endometrial, ovarian, and other pretreated HER2-positive non-breast malignancies.",
+      "say": "HER2-directed antibody-drug conjugate trastuzumab deruxtecan is approved tumour-agnostically for pretreated unresectable or metastatic HER2 IHC 3+ solid tumours. Based on the pan-tumour DESTINY-PanTumor02 study, trastuzumab deruxtecan demonstrated confirmed objective response rates of 51% across biliary, bladder, cervical, endometrial, ovarian, and other pretreated HER2-positive non-breast malignancies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Selpercatinib (LOXO-292)",
+          "items": [
+            "Highly selective oral RET kinase inhibitor",
+            "Tissue-agnostic approval for RET fusion-positive solid tumours",
+            "Potent central nervous system penetration (> 80% intracranial ORR)",
+            "Active against RET gatekeeper V804M/L resistance mutations"
+          ]
+        },
+        "right": {
+          "title": "Pralsetinib (BLU-667)",
+          "items": [
+            "Selective RET inhibitor targeting oncogenic RET fusions",
+            "Approved in RET fusion-positive NSCLC and thyroid cancers",
+            "High potency against multiple RET partner rearrangements",
+            "Adverse events include hypertension, neutropenia, pneumonitis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Molecular tumour boards** integrate comprehensive **genomic sequencing** data with clinical trials, evaluating variant pathogenicity according to AMP/ASCO/CAP tier criteria. Multidisciplinary discussion balances variant allele frequencies, co-occurring resistance alterations, and level of actionability, translating complex next-generation sequencing assays into actionable, off-label, or investigational basket trial matches for refractory cancer patients.",
+      "say": "Molecular tumour boards integrate comprehensive genomic sequencing data with clinical trials, evaluating variant pathogenicity according to AMP/ASCO/CAP tier criteria. Multidisciplinary discussion balances variant allele frequencies, co-occurring resistance alterations, and level of actionability, translating complex next-generation sequencing assays into actionable, off-label, or investigational basket trial matches for refractory cancer patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial Architecture",
+          "Design Principle",
+          "Exemplar Trial"
+        ],
+        "rows": [
+          [
+            "Basket Trial",
+            "Single targeted therapy tested across multiple distinct cancer histologies harboring the identical molecular alteration",
+            "VE-BASKET (vemurafenib in V600E); NAVIGATE (larotrectinib in TRK)"
+          ],
+          [
+            "Umbrella Trial",
+            "Multiple different targeted therapies evaluated within a single histology stratified by individual molecular sub-cohorts",
+            "BATTLE (NSCLC); ALCHEMIST (adjuvant NSCLC); FOCUS4 (colorectal)"
+          ],
+          [
+            "Platform / Master Protocol",
+            "Continuous rolling multi-arm design allowing entry and exit of therapies based on interim adaptive efficacy",
+            "NCI-MATCH; TAPUR; Lung-MAP"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clonal versus **subclonal** driver status determines durable **targeted efficacy**: subclonal alterations demonstrate lower response rates due to outgrowth of negative tumour clones. Truncal mutations present in all malignant cells provide uniform vulnerability, whereas subclonal mutations present only in branch subclones inevitably lead to rapid therapeutic failure as wild-type cells expand under selective pressure.",
+      "say": "Clonal versus subclonal driver status determines durable targeted efficacy: subclonal alterations demonstrate lower response rates due to outgrowth of negative tumour clones. Truncal mutations present in all malignant cells provide uniform vulnerability, whereas subclonal mutations present only in branch subclones inevitably lead to rapid therapeutic failure as wild-type cells expand under selective pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Comprehensive Genomic Profiling"
+          },
+          {
+            "id": "b",
+            "label": "ESCAT Tier I (Standard Clinical Target)"
+          },
+          {
+            "id": "c",
+            "label": "ESCAT Tier II (Investigational / Likely Target)"
+          },
+          {
+            "id": "d",
+            "label": "ESCAT Tier III (Hypothetical Benefit)"
+          },
+          {
+            "id": "e",
+            "label": "ESCAT Tier IV / V (Preclinical or Inactionable)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Randomised phase III trial evidence"
+          ],
+          [
+            "a",
+            "c",
+            "Phase II ORR without OS proof"
+          ],
+          [
+            "a",
+            "d",
+            "Validated in other cancer histology"
+          ],
+          [
+            "a",
+            "e",
+            "Laboratory models or negative trials"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_5c6f07b2a273",
+    "q_1c74853c5b95",
+    "q_3b837fde3f9e"
+  ]
 }

@@ -1,181 +1,344 @@
 {
- "v": 1,
- "module": "son-apl",
- "subject": "ss-medical-oncology",
- "title": "Acute promyelocytic leukaemia: recognition and emergency management",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Acute promyelocytic leukaemia is a **subtype of AML** driven by the **PML-RARA** fusion from t(15;17). Blasts often show heavy granules and classic faggot cells with bundles of Auer rods. Patients typically present with bleeding rather than infection, because the leukaemic promyelocytes release procoagulant material that triggers **disseminated intravascular coagulation**. Suspect APL whenever a patient with acute leukaemia has bleeding and a low fibrinogen.",
-   "say": "Acute promyelocytic leukaemia is a subtype of acute myeloid leukaemia driven by the PML-RARA fusion from the translocation between chromosomes 15 and 17. Blasts often show heavy granules and classic faggot cells, which are bundles of Auer rods. Patients typically present with bleeding rather than infection, because the leukaemic promyelocytes release procoagulant material that triggers disseminated intravascular coagulation. Suspect APL whenever a patient with acute leukaemia has bleeding and a low fibrinogen.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-apl-fig1.webp",
-    "alt": "Diagram showing a promyelocyte with heavy granules and a faggot cell containing bundled Auer rods. An inset illustrates the t(15;17) translocation forming the PML-RARA fusion.",
-    "caption": "APL: PML-RARA fusion from t(15;17), characteristic faggot cells with Auer rods. Image: The Armed Forces Institute of Pathology (AFIP), CC0/PD, Wikimedia Commons.",
-    "ar": 1.4102
-   }
-  },
-  {
-   "tx": "Treat as an emergency before the genetic result returns. Start **all-trans retinoic acid (ATRA)** as soon as APL is suspected, without waiting for FISH or PML-RARA confirmation. Give supportive care with platelets, cryoprecipitate and fresh frozen plasma to keep fibrinogen and platelets at safe levels. Early haemorrhagic death is the main threat in the first days, so delay in starting ATRA is dangerous.",
-   "say": "Treat this as an emergency before the genetic result returns. Start all-trans retinoic acid as soon as APL is suspected, without waiting for FISH or PML-RARA confirmation. Give supportive care with platelets, cryoprecipitate and fresh frozen plasma to keep fibrinogen and platelets at safe levels. Early haemorrhagic death is the main threat in the first days, so any delay in starting ATRA is dangerous.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspect APL"
-     },
-     {
-      "id": "b",
-      "label": "Start ATRA"
-     },
-     {
-      "id": "c",
-      "label": "Support DIC"
-     },
-     {
-      "id": "d",
-      "label": "Confirm PML-RARA"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "For low and intermediate risk disease, many centres now induce remission with **all-trans retinoic acid** plus **arsenic trioxide**, and selected patients avoid conventional anthracycline chemotherapy. Arsenic trioxide targets the **PML-RARA** fusion protein, while ATRA drives maturation of promyelocytes. Consolidation follows once remission is achieved, and **QT prolongation** requires regular electrocardiogram monitoring.",
-   "say": "For low and intermediate risk disease, many centres now induce remission with all-trans retinoic acid plus arsenic trioxide, and selected patients avoid conventional anthracycline chemotherapy. Arsenic trioxide breaks down the abnormal fusion protein, while retinoic acid pushes promyelocytes to mature. Consolidation follows once remission is achieved. Regular electrocardiogram monitoring is essential because arsenic can prolong the QT interval.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug",
-     "Role",
-     "Key toxicity"
-    ],
-    "rows": [
-     [
-      "ATRA",
-      "Drives maturation of promyelocytes",
-      "Differentiation syndrome"
-     ],
-     [
-      "Arsenic trioxide",
-      "Degrades PML-RARA protein",
-      "QT prolongation"
-     ],
-     [
-      "Anthracycline",
-      "Added for high risk disease",
-      "Cardiotoxicity"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Differentiation syndrome** is the key complication of **ATRA** and **arsenic trioxide**. Look for fever, breathlessness, lung infiltrates, rapid weight gain, pleural or pericardial effusions and hypotension. Treatment is prompt corticosteroid therapy and temporary interruption of the causative drug when severe. Because arsenic also causes **QTc prolongation**, serial electrocardiograms are essential, and interacting medicines should be reviewed.",
-   "say": "Differentiation syndrome is the key complication of all-trans retinoic acid and arsenic trioxide. Watch for fever, breathlessness, lung infiltrates, rapid weight gain, effusions and low blood pressure. Treat promptly with corticosteroids and pause the causative drug if the syndrome is severe. Arsenic also prolongs the QTc interval, so serial electrocardiograms are essential and interacting medicines should be reviewed.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspect differentiation syndrome"
-     },
-     {
-      "id": "b",
-      "label": "Start corticosteroids"
-     },
-     {
-      "id": "c",
-      "label": "Pause ATRA or arsenic if severe"
-     },
-     {
-      "id": "d",
-      "label": "Serial ECG for QTc"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "a",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **Sanz score** sorts **acute promyelocytic leukaemia** into risk groups at diagnosis, mainly using the **white cell count** and the **platelet count**. Low risk patients have a modest white count and relatively preserved platelets. Intermediate risk shows a modest white count with lower platelets, while high risk means a raised white count whatever the platelet level. High risk patients also receive an **anthracycline** alongside **ATRA** during induction, so the white count is the key feature to recall.",
-   "say": "The Sanz score sorts acute promyelocytic leukaemia into risk groups at diagnosis, mainly using the white cell count and the platelet count. Low risk patients have a modest white count and relatively preserved platelets. Intermediate risk shows a modest white count with lower platelets, while high risk means a raised white count whatever the platelet level. High risk patients also receive an anthracycline alongside ATRA during induction, so the white count is the key feature to recall.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Sanz group",
-     "White cell count",
-     "Platelet count"
-    ],
-    "rows": [
-     [
-      "Low",
-      "Modest",
-      "Relatively preserved"
-     ],
-     [
-      "Intermediate",
-      "Modest",
-      "Lower"
-     ],
-     [
-      "High",
-      "Raised",
-      "Any level"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "q_0e1f9f828acd",
-  "q_5cae54fdd0e7",
-  "q_6c3962a142ea"
- ],
- "src": [],
- "refs": [
-  "Sanz MA et al. Acute promyelocytic leukemia: ELN recommendations (Blood, 2019)",
-  "ELN 2022 recommendations for diagnosis and management of AML (Döhner H et al.)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 40
- }
+  "v": 1,
+  "module": "son-apl",
+  "subject": "ss-medical-oncology",
+  "title": "Acute promyelocytic leukaemia",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Acute promyelocytic leukaemia is a distinct clinical and biological subtype of acute myeloid leukaemia characterized by life-threatening coagulopathy. APL is cytogenetically defined by the balanced translocation **t(15;17)(q22;q21)**, creating the oncogenic **PML-RARA fusion** transcript that blocks promyelocytic differentiation. Promyelocytes accumulate in the marrow with characteristic heavy azurophilic granules and bundles of Auer rods termed faggot cells.",
+      "say": "Acute promyelocytic leukaemia is a distinct clinical and biological subtype of acute myeloid leukaemia characterized by life-threatening coagulopathy. APL is cytogenetically defined by the balanced translocation t(15;17)(q22;q21), creating the oncogenic PML-RARA fusion transcript that blocks promyelocytic differentiation. Promyelocytes accumulate in the marrow with characteristic heavy azurophilic granules and bundles of Auer rods termed faggot cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chromosomes 15q22 and 17q21"
+          },
+          {
+            "id": "b",
+            "label": "Reciprocal Balanced Translocation t(15;17)"
+          },
+          {
+            "id": "c",
+            "label": "PML::RARA Chimeric Oncoprotein"
+          },
+          {
+            "id": "d",
+            "label": "Recruitment of HDAC Corepressor Complex"
+          },
+          {
+            "id": "e",
+            "label": "Arrest at Promyelocyte Differentiation Stage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Somatic genomic rearrangement"
+          ],
+          [
+            "b",
+            "c",
+            "Fusion of PML zinc-finger to retinoic acid receptor alpha"
+          ],
+          [
+            "c",
+            "d",
+            "Constitutive transcriptional repression of target genes"
+          ],
+          [
+            "d",
+            "e",
+            "Marrow packed with hypergranular promyelocytes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Consumptive coagulopathy driven by promyelocyte annexin II and tissue factor expression causes catastrophic early haemorrhagic mortality. Severe **disseminated intravascular coagulation** DIC with hyperfibrinolysis presents with profound hypofibrinogenaemia and elevated D-dimer, mandating aggressive transfusion to maintain **fibrinogen 150 mg/dL or higher** and platelets over 50,000/mcL. Early haemorrhage, particularly fatal intracranial or pulmonary bleeding, remains the primary cause of induction failure.",
+      "say": "Consumptive coagulopathy driven by promyelocyte annexin II and tissue factor expression causes catastrophic early haemorrhagic mortality. Severe disseminated intravascular coagulation DIC with hyperfibrinolysis presents with profound hypofibrinogenaemia and elevated D-dimer, mandating aggressive transfusion to maintain fibrinogen 150 mg/dL or higher and platelets over 50,000/mcL. Early haemorrhage, particularly fatal intracranial or pulmonary bleeding, remains the primary cause of induction failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Haemostatic Parameter",
+          "Target Threshold in Active APL",
+          "Transfusion Support Strategy"
+        ],
+        "rows": [
+          [
+            "Fibrinogen Level",
+            ">= 150 mg/dL (1.5 g/L)",
+            "Cryoprecipitate (10 units per pool) or fibrinogen concentrate"
+          ],
+          [
+            "Platelet Count",
+            ">= 50 x 10^9/L (50,000/mcL)",
+            "Prophylactic platelet concentrates Q8-12H as needed"
+          ],
+          [
+            "Prothrombin Time / INR",
+            "INR <= 1.5",
+            "Fresh frozen plasma (FFP) infusion"
+          ],
+          [
+            "Invasive Procedures",
+            "Strictly contra-indicated until DIC resolved",
+            "Avoid lumbar puncture, central lines, arterial lines"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Immediate administration** of oral all-trans retinoic acid ATRA (**tretinoin**) must never be delayed for cytogenetic or molecular confirmation when acute promyelocytic leukaemia is suspected. Prompt **tretinoin** therapy rapidly halts promyelocyte procoagulant release and down-regulates tissue factor expression, dramatically reducing fatal early intracranial and pulmonary haemorrhages during diagnostic workup.",
+      "say": "Immediate administration of oral all-trans retinoic acid ATRA tretinoin must never be delayed for cytogenetic or molecular confirmation when acute promyelocytic leukaemia is suspected. Prompt tretinoin therapy rapidly halts promyelocyte procoagulant release and down-regulates tissue factor expression, dramatically reducing fatal early intracranial and pulmonary haemorrhages during diagnostic workup.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Morphological Suspicion of APL on Peripheral Smear"
+          },
+          {
+            "id": "b",
+            "label": "Administer Oral ATRA 45 mg/m2/day Immediately"
+          },
+          {
+            "id": "c",
+            "label": "Send Urgent Bone Marrow for FISH & RT-PCR"
+          },
+          {
+            "id": "d",
+            "label": "Rapid Dissociation of HDAC Corepressors"
+          },
+          {
+            "id": "e",
+            "label": "Resolution of Coagulopathy within 48 Hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Medical emergency: do not wait for lab confirmation"
+          ],
+          [
+            "b",
+            "c",
+            "Parallel genetic confirmation"
+          ],
+          [
+            "b",
+            "d",
+            "Pharmacological retinoic acid signaling"
+          ],
+          [
+            "d",
+            "e",
+            "Dramatically reduces fatal early haemorrhage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Spanish PETHEMA / **Sanz risk score** stratifies APL into low, intermediate, and high risk based on presenting **white blood cell count** and platelet levels. Patients presenting with a **white blood cell count** exceeding **10 x 10^9/L** are classified as high risk under the Sanz score, identifying individuals with heightened risk of differentiation syndrome and fatal early coagulopathy.",
+      "say": "The Spanish PETHEMA / Sanz risk score stratifies APL into low, intermediate, and high risk based on presenting white blood cell count and platelet levels. Patients presenting with a white blood cell count exceeding 10 x 10^9/L are classified as high risk under the Sanz score, identifying individuals with heightened risk of differentiation syndrome and fatal early coagulopathy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sanz Risk Group",
+          "WBC Threshold",
+          "Platelet Count Threshold",
+          "Recommended Induction Strategy"
+        ],
+        "rows": [
+          [
+            "Low Risk",
+            "<= 10 x 10^9/L",
+            "> 40 x 10^9/L",
+            "Chemo-free ATRA + Arsenic trioxide (ATO)"
+          ],
+          [
+            "Intermediate Risk",
+            "<= 10 x 10^9/L",
+            "<= 40 x 10^9/L",
+            "Chemo-free ATRA + Arsenic trioxide (ATO)"
+          ],
+          [
+            "High Risk",
+            "> 10 x 10^9/L",
+            "Any platelet count",
+            "ATRA + ATO + upfront Cytoreduction (Idarubicin / Gemtuzumab)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**All-trans retinoic acid ATRA** (**tretinoin**) plus arsenic trioxide ATO combination achieves complete remission in near **100%** and event-free survival exceeding **95%** in standard-risk APL in APL0406. This chemo-free regimen directly degrades the PML-RARA oncoprotein via dual ligand-induced proteasomal mechanisms, curing standard-risk patients while completely eliminating secondary myelodysplasia risk.",
+      "say": "All-trans retinoic acid ATRA tretinoin plus arsenic trioxide ATO combination achieves complete remission in near 100% and event-free survival exceeding 95% in standard-risk APL in APL0406. This chemo-free regimen directly degrades the PML-RARA oncoprotein via dual ligand-induced proteasomal mechanisms, curing standard-risk patients while completely eliminating secondary myelodysplasia risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ATRA + Arsenic Trioxide (APL0406)",
+          "items": [
+            "Oral ATRA 45 mg/m2 + IV ATO 0.15 mg/kg daily",
+            "Dual-targeted degradation of PML and RARA domains",
+            "2-year event-free survival 97% vs 86% with chemo",
+            "Zero secondary myelodysplasia or therapy-related AML"
+          ]
+        },
+        "right": {
+          "title": "ATRA + Anthracycline Chemotherapy",
+          "items": [
+            "Oral ATRA combined with idarubicin or daunorubicin",
+            "Higher rate of prolonged neutropenia and life-threatening sepsis",
+            "Cumulative cardiotoxicity risk from anthracyclines",
+            "Risk of late secondary leukaemia or myelodysplastic syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cytokine release during rapid promyelocyte differentiation triggers an acute inflammatory capillary leak syndrome. **Differentiation syndrome** manifests with unexplained fever, weight gain, dyspnea, pleural and pericardial effusions, and pulmonary infiltrates, managed promptly with intravenous **dexamethasone 10 mg twice daily**. Therapy with dexamethasone must be initiated immediately at the first clinical sign, without waiting for radiographic progression or interrupting differentiation agents unless severe organ failure occurs.",
+      "say": "Cytokine release during rapid promyelocyte differentiation triggers an acute inflammatory capillary leak syndrome. Differentiation syndrome manifests with unexplained fever, weight gain, dyspnea, pleural and pericardial effusions, and pulmonary infiltrates, managed promptly with intravenous dexamethasone 10 mg twice daily. Therapy with dexamethasone must be initiated immediately at the first clinical sign, without waiting for radiographic progression or interrupting differentiation agents unless severe organ failure occurs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "ATRA / ATO-Induced Promyelocyte Maturation"
+          },
+          {
+            "id": "b",
+            "label": "Massive Chemokine (IL-1beta, IL-8, TNF) Release"
+          },
+          {
+            "id": "c",
+            "label": "Endothelial Activation & Systemic Capillary Leak"
+          },
+          {
+            "id": "d",
+            "label": "Fever, Weight Gain, Pulmonary Infiltrates, Effusions"
+          },
+          {
+            "id": "e",
+            "label": "Prompt IV Dexamethasone 10 mg Q12H for >= 3 Days"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Upregulation of CD11b and ICAM-1 adhesion molecules"
+          ],
+          [
+            "b",
+            "c",
+            "Transmigration into pulmonary parenchyma"
+          ],
+          [
+            "c",
+            "d",
+            "Acute clinical differentiation syndrome"
+          ],
+          [
+            "d",
+            "e",
+            "Rapid suppression of inflammatory cascade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**High-risk APL** presenting with WBC exceeding 10 x 10^9/L requires upfront cytoreduction with an anthracycline or **gemtuzumab ozogamicin** added to ATRA (**tretinoin**) and ATO to prevent fatal early differentiation and coagulopathy. Gemtuzumab ozogamicin is an anti-CD33 calicheamicin conjugate providing targeted cytoreduction without protracted non-haematological toxicity.",
+      "say": "High-risk APL presenting with WBC exceeding 10 x 10^9/L requires upfront cytoreduction with an anthracycline or gemtuzumab ozogamicin added to ATRA tretinoin and ATO to prevent fatal early differentiation and coagulopathy. Gemtuzumab ozogamicin is an anti-CD33 calicheamicin conjugate providing targeted cytoreduction without protracted non-haematological toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Safety Parameter",
+          "Mandatory Target Threshold",
+          "Corrective Action if Threshold Exceeded"
+        ],
+        "rows": [
+          [
+            "Serum Potassium",
+            ">= 4.0 mEq/L",
+            "IV potassium chloride supplementation before each infusion"
+          ],
+          [
+            "Serum Magnesium",
+            ">= 2.0 mg/dL (1.0 mmol/L)",
+            "IV magnesium sulfate replacement"
+          ],
+          [
+            "ECG QTc Interval",
+            "< 500 ms (Fridericia formula)",
+            "Hold ATO if QTc > 500 ms; correct electrolytes; resume at 50% dose when QTc < 460 ms"
+          ],
+          [
+            "Concomitant Drugs",
+            "Avoid azoles, fluoroquinolones, ondansetron",
+            "Switch to granisetron or non-QT prolonging alternatives"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Arsenic trioxide ATO induces targeted degradation of the PML moiety and promotes apoptosis; serial ECG monitoring is mandatory to prevent fatal **Torsades de Pointes** from **QTc prolongation**. Serum potassium must be maintained at 4.0 mEq/L or higher and magnesium at 2.0 mg/dL or higher throughout ATO administration to ensure ventricular electrophysiological stability.",
+      "say": "Arsenic trioxide ATO induces targeted degradation of the PML moiety and promotes apoptosis; serial ECG monitoring is mandatory to prevent fatal Torsades de Pointes from QTc prolongation. Serum potassium must be maintained at 4.0 mEq/L or higher and magnesium at 2.0 mg/dL or higher throughout ATO administration to ensure ventricular electrophysiological stability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Completion of Induction & Consolidation"
+          },
+          {
+            "id": "b",
+            "label": "Bone Marrow Aspirate for RT-qPCR PML::RARA"
+          },
+          {
+            "id": "c",
+            "label": "Negative Transcript Assay (Sensitivity 10^-5)"
+          },
+          {
+            "id": "d",
+            "label": "Confirm Molecular Complete Remission (CRm)"
+          },
+          {
+            "id": "e",
+            "label": "Curative Tail: Long-Term Relapse-Free Survival"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Standard protocol milestone"
+          ],
+          [
+            "b",
+            "c",
+            "Quantitative TaqMan probe assay"
+          ],
+          [
+            "c",
+            "d",
+            "Molecular remission established"
+          ],
+          [
+            "d",
+            "e",
+            "Relapse rate < 3% in standard-risk"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_0e1f9f828acd",
+    "q_5cae54fdd0e7",
+    "q_6c3962a142ea"
+  ]
 }

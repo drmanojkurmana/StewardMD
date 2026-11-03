@@ -1,191 +1,302 @@
 {
- "v": 1,
- "module": "son-myelosuppression",
- "subject": "ss-medical-oncology",
- "title": "Management of Febrile Neutropenia",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Febrile neutropenia is a medical emergency. It is defined as a fever of 38.3°C or higher, or 38.0°C sustained for one hour, with an **absolute neutrophil count** below 500 cells/mm3. Do not wait for lab results; start empirical antibiotics within one hour of triage.",
-   "say": "Febrile neutropenia is an emergency. It is identified by a fever of thirty eight point three degrees Celsius or higher, or thirty eight point zero degrees Celsius sustained for one hour, alongside an absolute neutrophil count below five hundred cells per cubic millimetre. Do not delay treatment for lab results; administer antibiotics within one hour.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-myelosuppression-fig1.webp",
-    "alt": "Flowchart illustrating initial management of febrile neutropenia, from diagnosis to risk-stratified therapy (outpatient vs. inpatient).",
-    "caption": "Initial management of febrile neutropenia, emphasizing rapid assessment and risk stratification",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Risk stratification is essential using the **MASCC score**. A score of 21 or higher identifies low-risk patients who may be eligible for oral outpatient therapy. High-risk patients, or those with a score below 21, require inpatient management and intravenous antibiotics.",
-   "say": "Risk stratification relies on the MASCC score. Patients scoring twenty one or more are low risk and may qualify for oral outpatient care. Those with lower scores are high risk and require admission for intravenous antibiotic therapy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Risk Status",
-     "Setting",
-     "Therapy"
-    ],
-    "rows": [
-     [
-      "MASCC 21+",
-      "Low Risk",
-      "Outpatient",
-      "Oral"
-     ],
-     [
-      "MASCC <21",
-      "High Risk",
-      "Inpatient",
-      "IV Antibiotics"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "For high-risk febrile neutropenia, initiate **empirical monotherapy** using anti-pseudomonal beta-lactams like **piperacillin-tazobactam** or **cefepime**. Reserve **vancomycin** strictly for clinical indications such as haemodynamic instability, suspected catheter-related infection, pneumonia, or severe mucositis in patients on fluoroquinolone prophylaxis. Avoid routine glycopeptide use, as it should be discontinued within 72 hours if no gram-positive organism is identified. Always ensure adequate anaerobic coverage if the patient presents with abdominal symptoms or perianal infection.",
-   "say": "For high-risk febrile neutropenia, initiate empirical monotherapy using anti-pseudomonal beta-lactams like piperacillin-tazobactam or cefepime. Reserve vancomycin strictly for clinical indications such as haemodynamic instability, suspected catheter-related infection, pneumonia, or severe mucositis in patients on fluoroquinolone prophylaxis. Avoid routine glycopeptide use, as it should be discontinued within 72 hours if no gram-positive organism is identified. Always ensure adequate anaerobic coverage if the patient presents with abdominal symptoms or perianal infection.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Clinical Scenario",
-     "Primary Therapy",
-     "Anaerobic Cover",
-     "Vancomycin Use"
-    ],
-    "rows": [
-     [
-      "High-risk inpatient",
-      "Pip-Tazo or Cefepime",
-      "Add Metronidazole",
-      "Specific indications only"
-     ],
-     [
-      "Septic shock",
-      "Carbapenem",
-      "Included",
-      "Specific indications only"
-     ],
-     [
-      "Abdominal pain",
-      "Pip-Tazo or Carbapenem",
-      "Included",
-      "Specific indications only"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In high-risk patients with **persistent fever** after 4 to 7 days, perform a chest CT and check **serum galactomannan**. If neutropenia is expected to last beyond 7 days, initiate **antifungal therapy** such as caspofungin or liposomal amphotericin B. Do not alter antibacterial treatment based solely on fever if the patient remains stable. Instead, focus on identifying documented organisms or clinical deterioration to guide changes in management.",
-   "say": "In high-risk patients with persistent fever after four to seven days, perform a chest CT and check serum galactomannan. If neutropenia is expected to last beyond seven days, initiate antifungal therapy such as caspofungin or liposomal amphotericin B. Do not alter antibacterial treatment based solely on fever if the patient remains stable. Instead, focus on identifying documented organisms or clinical deterioration to guide changes in management.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Investigation",
-     "Clinical Context",
-     "Action",
-     "Duration"
-    ],
-    "rows": [
-     [
-      "Chest CT",
-      "Fever 4-7 days",
-      "Fungal screen",
-      "High risk"
-     ],
-     [
-      "Galactomannan",
-      "Fever 4-7 days",
-      "Fungal screen",
-      "High risk"
-     ],
-     [
-      "Antifungals",
-      "Neutropenia >7d",
-      "Start therapy",
-      "High risk"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Establishing the risk of **febrile neutropenia** is essential for management. Clinical assessment identifies patients requiring urgent intervention. **MASCC scoring** helps determine if a patient is suitable for outpatient care. High-risk individuals require immediate hospital admission and **empirical antibiotics**. Always avoid delaying treatment while waiting for laboratory results. Prophylactic measures should be tailored to the specific chemotherapy regimen and patient status to balance clinical benefits against potential risks.",
-   "say": "Establishing the risk of febrile neutropenia is essential for management. Clinical assessment identifies patients requiring urgent intervention. MASCC scoring helps determine if a patient is suitable for outpatient care. High-risk individuals require immediate hospital admission and empirical antibiotics. Always avoid delaying treatment while waiting for laboratory results. Prophylactic measures should be tailored to the specific chemotherapy regimen and patient status to balance clinical benefits against potential risks.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Category",
-     "High Risk",
-     "Low Risk",
-     "Management"
-    ],
-    "rows": [
-     [
-      "MASCC Score",
-      "< 21",
-      ">= 21",
-      "Triage"
-     ],
-     [
-      "Neutropenia",
-      "Profound",
-      "Mild",
-      "Assessment"
-     ],
-     [
-      "Setting",
-      "Inpatient",
-      "Outpatient",
-      "Admission"
-     ],
-     [
-      "Therapy",
-      "IV Beta-lactam",
-      "Oral Antibiotics",
-      "Treatment"
-     ],
-     [
-      "Monitoring",
-      "Frequent",
-      "Daily Review",
-      "Follow-up"
-     ],
-     [
-      "Comorbidity",
-      "Present",
-      "Absent",
-      "Risk Stratify"
-     ],
-     [
-      "Duration",
-      "Extended",
-      "Short",
-      "Outcome"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "q_8e36b1f4380b",
-  "q_3ab7ed6f9256",
-  "q_0a2741014277"
- ],
- "src": [
-  "kb-febrile-neutropenia"
- ],
- "gen": "AI",
- "run": "lessons-202610060812",
- "model": "gemini-3.1-flash-lite",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "selfCheck": true,
-  "redone": 3,
-  "dropped": 0,
-  "bank": "v2"
- }
+  "v": 1,
+  "module": "son-myelosuppression",
+  "subject": "ss-medical-oncology",
+  "title": "Myelosuppression and febrile neutropenia",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Chemotherapy-induced suppression of bone marrow haematopoiesis represents an acute oncological emergency predisposed to rapid fatal septicaemia. **Febrile neutropenia** is an oncologic emergency defined as oral temperature 38.3 deg C or higher once or 38.0 deg C sustained for 1 hour with absolute neutrophil count **ANC under 500/mcL** or expected to fall under 500/mcL within 48 hours. Rapid bacterial invasion occurs across damaged mucosal barriers without local inflammatory signs.",
+      "say": "Chemotherapy-induced suppression of bone marrow haematopoiesis represents an acute oncological emergency predisposed to rapid fatal septicaemia. Febrile neutropenia is an oncologic emergency defined as oral temperature 38.3 deg C or higher once or 38.0 deg C sustained for 1 hour with absolute neutrophil count ANC under 500/mcL or expected to fall under 500/mcL within 48 hours. Rapid bacterial invasion occurs across damaged mucosal barriers without local inflammatory signs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Oral Temperature >= 38.3 deg C (or >= 38.0 for 1 hr)"
+          },
+          {
+            "id": "b",
+            "label": "Severe Neutropenia (ANC < 500 / mcL)"
+          },
+          {
+            "id": "c",
+            "label": "Loss of Normal Inflammatory Pus Formation"
+          },
+          {
+            "id": "d",
+            "label": "Rapid Translocation of Endogenous Mucosal Flora"
+          },
+          {
+            "id": "e",
+            "label": "Mandatory Empiric Broad-Spectrum IV Antibiotics in < 1 hr"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Emergency room presentation"
+          ],
+          [
+            "b",
+            "c",
+            "Absence of swelling or erythema"
+          ],
+          [
+            "c",
+            "d",
+            "Gut or oral mucosal breakdown"
+          ],
+          [
+            "d",
+            "e",
+            "Golden hour resuscitation prevents septic shock"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Multinational Association for Supportive Care in Cancer **MASCC index** identifies **low-risk febrile** neutropenia eligible for outpatient oral antibiotic therapy with a score of 21 or higher. A score of 21 or higher indicates a low risk of serious medical complications, permitting outpatient oral therapy with ciprofloxacin plus amoxicillin-clavulanate in reliable patients with close monitoring.",
+      "say": "The Multinational Association for Supportive Care in Cancer MASCC index identifies low-risk febrile neutropenia eligible for outpatient oral antibiotic therapy with a score of 21 or higher. A score of 21 or higher indicates a low risk of serious medical complications, permitting outpatient oral therapy with ciprofloxacin plus amoxicillin-clavulanate in reliable patients with close monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MASCC Score >= 21 (Low Risk)",
+          "items": [
+            "Low risk of severe medical complications (< 5%)",
+            "Eligible for outpatient care after 4 hours of observation",
+            "Oral ciprofloxacin (500 mg Q12H) + amoxicillin-clavulanate",
+            "Daily telephone follow-up and 24-hour return precautions"
+          ]
+        },
+        "right": {
+          "title": "MASCC Score < 21 (High Risk)",
+          "items": [
+            "High risk of complications (septic shock, ICU transfer, death)",
+            "Mandatory inpatient admission for intravenous antibiotics",
+            "Inpatient monitoring for anticipated neutropenia duration > 7 days",
+            "Associated with severe comorbidities or haematologic malignancy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The Clinical Index of Stable Febrile Neutropenia **CISNE score** specifically stratifies **solid tumour** patients presenting with febrile neutropenia to identify candidates for outpatient care. The CISNE scoring model excludes unstable patients, utilizing performance status, chronic obstructive pulmonary disease, cardiovascular disease, stress-induced hyperglycaemia, and mucositis to identify genuinely low-risk outpatients.",
+      "say": "The Clinical Index of Stable Febrile Neutropenia CISNE score specifically stratifies solid tumour patients presenting with febrile neutropenia to identify candidates for outpatient care. The CISNE scoring model excludes unstable patients, utilizing performance status, chronic obstructive pulmonary disease, cardiovascular disease, stress-induced hyperglycaemia, and mucositis to identify genuinely low-risk outpatients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antibiotic Agent",
+          "Dosing Schedule",
+          "Antimicrobial Spectrum & Clinical Role"
+        ],
+        "rows": [
+          [
+            "Piperacillin-Tazobactam",
+            "4.5 g IV every 6 hours",
+            "First-line antipseudomonal + anaerobic coverage"
+          ],
+          [
+            "Cefepime",
+            "2 g IV every 8 hours",
+            "First-line 4th generation antipseudomonal cephalosporin"
+          ],
+          [
+            "Meropenem",
+            "1 g IV every 8 hours",
+            "Carbapenem of choice for ESBL risk or septic shock"
+          ],
+          [
+            "Vancomycin (Adjuvant)",
+            "15-20 mg/kg IV every 8-12 hours",
+            "Add for MRSA risk, central line sepsis, or severe mucositis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an **antipseudomonal beta-lactam** such as **piperacillin-tazobactam**, cefepime, or meropenem within 1 hour. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
+      "say": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an antipseudomonal beta-lactam such as piperacillin-tazobactam, cefepime, or meropenem within 1 hour. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Growth Factor Agent",
+          "Pharmacokinetics & Dosing",
+          "Administration Timing & Caveat"
+        ],
+        "rows": [
+          [
+            "Filgrastim (G-CSF)",
+            "5 mcg/kg/day SC daily until ANC > 2000-3000",
+            "Start 24-72 hours post-chemo; continue 7-14 days"
+          ],
+          [
+            "Pegfilgrastim",
+            "Fixed 6 mg SC single dose per chemotherapy cycle",
+            "Administer strictly 24 hours post-chemo; avoids daily injections"
+          ],
+          [
+            "Secondary Prophylaxis",
+            "Indicated after prior cycle febrile neutropenia",
+            "Maintains full planned dose intensity and schedule"
+          ],
+          [
+            "Adverse Effects",
+            "Bone pain (medullary expansion), splenic enlargement",
+            "Manage with NSAIDs or loratadine antihistamine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Primary prophylaxis** with **granulocyte colony-stimulating** factors G-CSF filgrastim or pegfilgrastim is recommended when the anticipated regimen risk of febrile neutropenia is 20% or higher. Prophylactic myeloid growth factor support reduces the incidence of febrile neutropenia, shortens hospitalization, and maintains planned chemotherapy dose intensity across curative-intent regimens.",
+      "say": "Primary prophylaxis with granulocyte colony-stimulating factors G-CSF filgrastim or pegfilgrastim is recommended when the anticipated regimen risk of febrile neutropenia is 20% or higher. Prophylactic myeloid growth factor support reduces the incidence of febrile neutropenia, shortens hospitalization, and maintains planned chemotherapy dose intensity across curative-intent regimens.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Persistent Neutropenic Fever at Day 4 to 7"
+          },
+          {
+            "id": "b",
+            "label": "High-Resolution Chest CT & Serum Galactomannan"
+          },
+          {
+            "id": "c",
+            "label": "Assess Mould vs Yeast Risk Factors"
+          },
+          {
+            "id": "d",
+            "label": "Initiate Caspofungin or Liposomal Amphotericin B"
+          },
+          {
+            "id": "e",
+            "label": "Voriconazole if Pulmonary Halo Sign Identified"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Diagnostic workup for invasive fungal disease"
+          ],
+          [
+            "b",
+            "c",
+            "Look for angioinvasive macronodules"
+          ],
+          [
+            "c",
+            "d",
+            "Empiric antifungal coverage"
+          ],
+          [
+            "d",
+            "e",
+            "Targeted therapy for confirmed Aspergillus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prolonged remission induction in acute leukaemias creates sustained profound neutropenia requiring mold-active prophylaxis. **Posaconazole prophylaxis** significantly reduces proven or probable **invasive aspergillosis** and all-cause mortality in neutropenic patients undergoing remission induction for AML or MDS. In a pivotal randomized trial, posaconazole delayed-release tablets or oral suspension demonstrated superior fungal prophylaxis compared to fluconazole or itraconazole.",
+      "say": "Prolonged remission induction in acute leukaemias creates sustained profound neutropenia requiring mold-active prophylaxis. Posaconazole prophylaxis significantly reduces proven or probable invasive aspergillosis and all-cause mortality in neutropenic patients undergoing remission induction for AML or MDS. In a pivotal randomized trial, posaconazole delayed-release tablets or oral suspension demonstrated superior fungal prophylaxis compared to fluconazole or itraconazole.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Posaconazole Prophylaxis (Delayed-Release)",
+          "items": [
+            "300 mg daily oral delayed-release tablets",
+            "Broad mold coverage including Aspergillus and Mucorales",
+            "Statistically significant reduction in all-cause mortality (p=0.04)",
+            "Mandated standard in AML/MDS intensive induction chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "Fluconazole Prophylaxis",
+          "items": [
+            "400 mg daily oral or intravenous administration",
+            "Active only against Candida species (lacks Aspergillus activity)",
+            "Ineffective in preventing invasive mould infections",
+            "Reserved for low-risk solid tumour or autologous transplant settings"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Growth factors stimulating erythrocyte production carry oncological risks requiring strict restriction to palliative settings. **Erythropoiesis-stimulating agents** ESAs are indicated only for palliative **chemotherapy-induced anaemia** with haemoglobin under 10 g/dL, avoiding use when cure is the anticipated outcome. Meta-analyses demonstrated that ESAs stimulate erythropoietin receptors on tumour cells, shortening overall survival and increasing thromboembolic vascular events in curative-intent cancer regimens.",
+      "say": "Growth factors stimulating erythrocyte production carry oncological risks requiring strict restriction to palliative settings. Erythropoiesis-stimulating agents ESAs are indicated only for palliative chemotherapy-induced anaemia with haemoglobin under 10 g/dL, avoiding use when cure is the anticipated outcome. Meta-analyses demonstrated that ESAs stimulate erythropoietin receptors on tumour cells, shortening overall survival and increasing thromboembolic vascular events in curative-intent cancer regimens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ESA Clinical Principle",
+          "Guideline Threshold (ASCO / NCCN)",
+          "Safety Black Box Warning"
+        ],
+        "rows": [
+          [
+            "Treatment Initiation",
+            "Haemoglobin < 10 g/dL during active palliative chemo",
+            "Do not administer if chemotherapy has ended"
+          ],
+          [
+            "Target Haemoglobin Ceiling",
+            "Maintain lowest Hb level needed to avoid transfusion (<= 10-12 g/dL)",
+            "Targeting Hb > 12 g/dL increases stroke and mortality"
+          ],
+          [
+            "Curative Setting Prohibition",
+            "Strictly contra-indicated in curative-intent breast, lung, HNSCC",
+            "Decreases progression-free and overall survival"
+          ],
+          [
+            "Thrombotic Risk",
+            "Venous thromboembolism (VTE) incidence increased by 50%",
+            "Assess baseline thrombosis risk prior to initiation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prophylactic platelet transfusions prevent fatal spontaneous haemorrhage during chemotherapy-induced marrow hypoplasia. **Platelet transfusions** are indicated prophylactically at a threshold of **10 x 10^9/L or lower** in stable **hypoproliferative thrombocytopenia**, and at 20 x 10^9/L in the presence of fever or bleeding. A single apheresis platelet unit or pooled random donor platelets provides approximately 30,000 to 50,000/mcL platelet increment, preventing spontaneous microvascular bleeding.",
+      "say": "Platelet transfusions prevent fatal spontaneous haemorrhage during chemotherapy-induced marrow hypoplasia. Platelet transfusions are indicated prophylactically at a threshold of 10 x 10^9/L or lower in stable hypoproliferative thrombocytopenia, and at 20 x 10^9/L in the presence of fever or bleeding. A single apheresis platelet unit or pooled random donor platelets provides approximately 30,000 to 50,000/mcL platelet increment, preventing spontaneous microvascular bleeding.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "Platelet Transfusion Trigger Threshold",
+          "Rationale & Transfusion Strategy"
+        ],
+        "rows": [
+          [
+            "Stable Outpatient / Inpatient",
+            "<= 10 x 10^9/L (10,000/mcL)",
+            "Prophylactic prevention of spontaneous major bleeding"
+          ],
+          [
+            "Fever, Sepsis, or Mucositis",
+            "<= 20 x 10^9/L (20,000/mcL)",
+            "Accelerated platelet consumption and vascular fragility"
+          ],
+          [
+            "Minor Bedside Procedures (LP)",
+            "<= 50 x 10^9/L (50,000/mcL)",
+            "Lumbar puncture, liver biopsy, bronchoscopy safety"
+          ],
+          [
+            "Major Surgery / Neurosurgery",
+            "<= 100 x 10^9/L (100,000/mcL)",
+            "Craniotomy or major visceral surgery haemostasis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_8e36b1f4380b",
+    "q_3ab7ed6f9256",
+    "q_0a2741014277"
+  ]
 }

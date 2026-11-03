@@ -1,122 +1,304 @@
 {
- "v": 1,
- "module": "son-immunotherapy",
- "subject": "ss-medical-oncology",
- "title": "Immune checkpoint inhibitors: mechanisms, key agents and toxicity",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Checkpoint inhibitors remove inhibitory signals that tumours exploit to dampen **T cells**. **PD-1** blockers such as nivolumab and pembrolizumab act on activated T cells within the tumour microenvironment, interrupting signals received from **PD-L1** on tumour cells. **CTLA-4** blockade with ipilimumab works earlier, during **T-cell priming** in lymph nodes. Knowing which axis is targeted helps explain both response patterns and **immune-related adverse events**.",
-   "say": "Checkpoint inhibitors remove inhibitory signals that tumours exploit to dampen T cells. PD-1 blockers such as nivolumab and pembrolizumab act on activated T cells within the tumour microenvironment, interrupting signals received from PD-L1 on tumour cells. CTLA-4 blockade with ipilimumab works earlier, during T-cell priming in lymph nodes. Knowing which axis is targeted helps explain both response patterns and immune-related adverse events.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "PD-1 axis",
-     "points": [
-      "Acts mainly in the tumour microenvironment",
-      "Nivolumab and pembrolizumab are examples",
-      "Blocks signal from PD-L1 on tumour cells"
-     ]
+  "v": 1,
+  "module": "son-immunotherapy",
+  "subject": "ss-medical-oncology",
+  "title": "Immune checkpoint inhibitors",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Cancer cells exploit co-inhibitory receptor signalling pathways to evade physiological immune-mediated destruction. **PD-1 inhibitors** nivolumab and pembrolizumab block PD-1 interactions with PD-L1 and PD-L2, reversing T-cell exhaustion and restoring **cytotoxic T-lymphocyte** antitumor immunity. Disruption of PD-1 signalling disinhibits effector T cells within the tumour microenvironment, promoting cytolytic granule release, interferon-gamma production, and durable objective tumour regression.",
+      "say": "Cancer cells exploit co-inhibitory receptor signalling pathways to evade physiological immune-mediated destruction. PD-1 inhibitors nivolumab and pembrolizumab block PD-1 interactions with PD-L1 and PD-L2, reversing T-cell exhaustion and restoring cytotoxic T-lymphocyte antitumor immunity. Disruption of PD-1 signalling disinhibits effector T cells within the tumour microenvironment, promoting cytolytic granule release, interferon-gamma production, and durable objective tumour regression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Exhausted CD8+ T Cell (PD-1+)"
+          },
+          {
+            "id": "b",
+            "label": "Tumour Microenvironment (PD-L1+)"
+          },
+          {
+            "id": "c",
+            "label": "Anti-PD-1 Antibody Infusion (Pembrolizumab)"
+          },
+          {
+            "id": "d",
+            "label": "Disruption of PD-1/PD-L1 Engagement"
+          },
+          {
+            "id": "e",
+            "label": "Effector T-Cell Reactivation & Lysis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Inhibitory checkpoint engagement"
+          ],
+          [
+            "c",
+            "d",
+            "Steric blockade of receptor"
+          ],
+          [
+            "d",
+            "e",
+            "Reversal of functional exhaustion"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "CTLA-4 axis",
-     "points": [
-      "Acts mainly in lymph nodes during priming",
-      "Ipilimumab is the example",
-      "Often combined with PD-1 blockade"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Ipilimumab was the first immune checkpoint inhibitor approved, for advanced melanoma in 2011. It is given as an intravenous infusion over **30 to 90 minutes** using a low-protein-binding filter. Before the first dose, check baseline thyroid function, liver tests, adrenal axis, renal clearance and pregnancy status in women of childbearing potential. Monitor these parameters before each dose.",
-   "say": "Ipilimumab was the first immune checkpoint inhibitor approved, for advanced melanoma in 2011. It is given as an intravenous infusion over 30 to 90 minutes using a low-protein-binding filter. Before the first dose, check baseline thyroid function, liver tests, adrenal axis, renal clearance and pregnancy status in women of childbearing potential. Monitor these parameters before each dose.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-immunotherapy-fig1.webp",
-    "alt": "Infographic outlining essential baseline tests for ipilimumab: thyroid, liver, adrenal, renal function, and pregnancy status.",
-    "caption": "Key baseline monitoring parameters before starting ipilimumab therapy",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Immune-related adverse events are distinct from chemotherapy toxicity. They typically have a **delayed onset** and can persist long after drug withdrawal. Endocrine toxicity tends to appear between about 9 weeks and 9 months, with hypophysitis classically around 6 to 12 weeks on anti-CTLA-4 therapy. Pre-existing thyroid autoantibodies, including anti-TPO, raise the risk of endocrine events. Keep a high index of suspicion throughout this window.",
-   "say": "Immune-related adverse events are distinct from chemotherapy toxicity. They typically have a delayed onset and can persist long after drug withdrawal. Endocrine toxicity tends to appear between about 9 weeks and 9 months, with hypophysitis classically around 6 to 12 weeks on anti-CTLA-4 therapy. Pre-existing thyroid autoantibodies, including anti-TPO, raise the risk of endocrine events. Keep a high index of suspicion throughout this window.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Endocrinopathy",
-     "Typical timing",
-     "Key clue"
-    ],
-    "rows": [
-     [
-      "Hypophysitis",
-      "6 to 12 weeks",
-      "Secondary adrenal insufficiency, older men on ipilimumab"
-     ],
-     [
-      "Thyroiditis",
-      "Early, often transient",
-      "Thyrotoxicosis then hypothyroidism"
-     ],
-     [
-      "Autoimmune diabetes",
-      "Within months",
-      "Severe hyperglycaemia with ketosis"
-     ],
-     [
-      "Primary adrenalitis",
-      "Variable",
-      "Raised ACTH, mineralocorticoid loss"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Pseudoprogression is an apparent growth on imaging caused by immune cell infiltration, and it can occur in patients who are actually responding. **Hyperprogression** is a rapid acceleration of tumour growth after starting therapy and is a genuine concern. Response assessment should therefore consider clinical status and repeat imaging before changing treatment. Biomarkers include PD-L1 expression, tumour mutational burden and mismatch repair status.",
-   "say": "Pseudoprogression is an apparent growth on imaging caused by immune cell infiltration, and it can occur in patients who are actually responding. Hyperprogression is a rapid acceleration of tumour growth after starting therapy and is a genuine concern. Response assessment should therefore consider clinical status and repeat imaging before changing treatment. Biomarkers include PD-L1 expression, tumour mutational burden and mismatch repair status.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Pseudoprogression",
-     "points": [
-      "Imaging growth from immune infiltrate",
-      "Patient often clinically stable",
-      "Confirm with repeat scan"
-     ]
+    {
+      "tx": "Targeting the ligand rather than the receptor preserves alternative physiological regulatory interactions. **PD-L1 inhibitors** atezolizumab, durvalumab, and avelumab prevent PD-L1 from engaging PD-1 and B7.1, leaving the PD-L2/PD-1 **regulatory axis** intact. Spared PD-L2 signalling helps prevent excessive immune-mediated pulmonary toxicity, distinguishing PD-L1 antibodies biologically from monoclonal antibodies targeting the PD-1 receptor directly.",
+      "say": "Targeting the ligand rather than the receptor preserves alternative physiological regulatory interactions. PD-L1 inhibitors atezolizumab, durvalumab, and avelumab prevent PD-L1 from engaging PD-1 and B7.1, leaving the PD-L2/PD-1 regulatory axis intact. Spared PD-L2 signalling helps prevent excessive immune-mediated pulmonary toxicity, distinguishing PD-L1 antibodies biologically from monoclonal antibodies targeting the PD-1 receptor directly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PD-1 Inhibitors (Nivolumab, Pembrolizumab)",
+          "items": [
+            "Directly bind PD-1 receptor on activated T lymphocytes",
+            "Block both PD-L1 and PD-L2 binding to PD-1",
+            "Higher rate of immune-mediated pneumonitis observed clinically",
+            "Effective across broad solid and haematological malignancies"
+          ]
+        },
+        "right": {
+          "title": "PD-L1 Inhibitors (Atezolizumab, Durvalumab)",
+          "items": [
+            "Bind PD-L1 on tumour cells and antigen-presenting cells",
+            "Block PD-L1 binding to PD-1 and B7.1 (CD80)",
+            "Leave PD-L2/PD-1 interaction functionally intact",
+            "Standard in SCLC, NSCLC, urothelial, and hepatocellular carcinoma"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Hyperprogression",
-     "points": [
-      "Rapid genuine tumour acceleration",
-      "Worse outcome on therapy",
-      "Clinical deterioration expected"
-     ]
+    {
+      "tx": "Co-stimulatory inhibition during initial antigen presentation operates through a distinct biological mechanism. **CTLA-4 inhibitor** ipilimumab blocks CTLA-4 outcompeting CD28 for B7 costimulatory molecules during initial **T-cell priming** in secondary lymphoid organs. Because CTLA-4 possesses greater binding affinity for CD80 and CD86 than CD28, therapeutic blockade disinhibits naive T-cell priming and promotes clonal expansion within draining regional lymph nodes.",
+      "say": "Co-stimulatory inhibition during initial antigen presentation operates through a distinct biological mechanism. CTLA-4 inhibitor ipilimumab blocks CTLA-4 outcompeting CD28 for B7 costimulatory molecules during initial T-cell priming in secondary lymphoid organs. Because CTLA-4 possesses greater binding affinity for CD80 and CD86 than CD28, therapeutic blockade disinhibits naive T-cell priming and promotes clonal expansion within draining regional lymph nodes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Antigen Presenting Cell (B7-1 / B7-2)"
+          },
+          {
+            "id": "b",
+            "label": "Naive T Cell Expressing CTLA-4 & CD28"
+          },
+          {
+            "id": "c",
+            "label": "Ipilimumab Blocks Inhibitory CTLA-4"
+          },
+          {
+            "id": "d",
+            "label": "Unimpeded CD28 Co-stimulation"
+          },
+          {
+            "id": "e",
+            "label": "Robust T-Cell Proliferation & Priming"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Secondary lymphoid organ interface"
+          ],
+          [
+            "c",
+            "b",
+            "Selective monoclonal antibody binding"
+          ],
+          [
+            "d",
+            "e",
+            "Lowers activation threshold"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Simultaneous targeting of central priming and peripheral exhaustion pathways achieves clinical synergy. Dual immune **checkpoint inhibition** combining nivolumab and ipilimumab provides **synergistic** responses in metastatic melanoma, renal cell carcinoma, and MSI-H colorectal cancer. In the CheckMate-067 trial, dual checkpoint blockade yielded unprecedented long-term overall survival exceeding 50% at 7.5 years, albeit with high rates of grade 3-4 immune-related adverse events.",
+      "say": "Simultaneous targeting of central priming and peripheral exhaustion pathways achieves clinical synergy. Dual immune checkpoint inhibition combining nivolumab and ipilimumab provides synergistic responses in metastatic melanoma, renal cell carcinoma, and MSI-H colorectal cancer. In the CheckMate-067 trial, dual checkpoint blockade yielded unprecedented long-term overall survival exceeding 50% at 7.5 years, albeit with high rates of grade 3-4 immune-related adverse events.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Indication",
+          "Pivotal Trial",
+          "Dual Checkpoint Regimen",
+          "Clinical Outcome"
+        ],
+        "rows": [
+          [
+            "Metastatic Melanoma",
+            "CheckMate-067",
+            "Nivolumab 1 mg/kg + Ipilimumab 3 mg/kg Q3W",
+            "Median OS > 72 months; 5-yr OS 52%"
+          ],
+          [
+            "Advanced RCC (Poor/Int)",
+            "CheckMate-214",
+            "Nivolumab 3 mg/kg + Ipilimumab 1 mg/kg Q3W",
+            "Superior OS and ORR compared to sunitinib"
+          ],
+          [
+            "MSI-H/dMMR mCRC",
+            "CheckMate-142",
+            "Nivolumab + Ipilimumab",
+            "ORR > 65% with durable disease control"
+          ],
+          [
+            "Advanced Malignant Mesothelioma",
+            "CheckMate-743",
+            "Nivolumab 3 mg/kg Q2W + Ipi 1 mg/kg Q6W",
+            "Superior OS vs platinum-pemetrexed doublet"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Next-generation checkpoint inhibitors overcome secondary resistance by targeting non-redundant inhibitory pathways. **Relatlimab** is an inhibitory antibody targeting LAG-3, combining with nivolumab to overcome adaptive resistance in untreated metastatic melanoma. **LAG-3** binds stable MHC class II molecules on antigen-presenting cells with higher affinity than CD4, transmitting negative signals that arrest T-cell expansion; co-blockade with nivolumab demonstrated superior progression-free survival in the RELATIVITY-047 study.",
+      "say": "Next-generation checkpoint inhibitors overcome secondary resistance by targeting non-redundant inhibitory pathways. Relatlimab is an inhibitory antibody targeting LAG-3, combining with nivolumab to overcome adaptive resistance in untreated metastatic melanoma. LAG-3 binds stable MHC class II molecules on antigen-presenting cells with higher affinity than CD4, transmitting negative signals that arrest T-cell expansion; co-blockade with nivolumab demonstrated superior progression-free survival in the RELATIVITY-047 study.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "T-Cell Expressing PD-1 and LAG-3"
+          },
+          {
+            "id": "b",
+            "label": "MHC Class II / PD-L1 Co-Engagement"
+          },
+          {
+            "id": "c",
+            "label": "Relatlimab + Nivolumab Fixed-Dose Infusion"
+          },
+          {
+            "id": "d",
+            "label": "Dual Receptor De-repression"
+          },
+          {
+            "id": "e",
+            "label": "Enhanced IFN-gamma & TNF-alpha Secretion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Cooperative inhibitory signaling"
+          ],
+          [
+            "c",
+            "a",
+            "Simultaneous monoclonal blockade"
+          ],
+          [
+            "d",
+            "e",
+            "Restored effector antitumour cytotoxicity"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hyperprogression represents an alarming accelerated pattern of tumour growth seen in up to 10% of patients treated with immune **checkpoint inhibitors**, correlated with MDM2 amplification. **Hyperprogressive disease** denotes dramatic acceleration of tumour growth rate exceeding a twofold increase during early therapy. The biological etiology involves pre-existing tumour-infiltrating Fc receptor-bearing macrophages cross-linking anti-PD-1 antibodies or expanding immunosuppressive regulatory T cells.",
+      "say": "Hyperprogression represents an alarming accelerated pattern of tumour growth seen in up to 10% of patients treated with immune checkpoint inhibitors, correlated with MDM2 amplification. Hyperprogressive disease denotes dramatic acceleration of tumour growth rate exceeding a twofold increase during early therapy. The biological etiology involves pre-existing tumour-infiltrating Fc receptor-bearing macrophages cross-linking anti-PD-1 antibodies or expanding immunosuppressive regulatory T cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pseudoprogression",
+          "items": [
+            "Transient radiological enlargement followed by shrinkage",
+            "Driven by intensive cytotoxic T-cell tumour infiltration and edema",
+            "Patient remains clinically stable or shows symptom improvement",
+            "Observed in 2% to 8% of solid tumours treated with IO"
+          ]
+        },
+        "right": {
+          "title": "Hyperprogressive Disease (HPD)",
+          "items": [
+            "Rapid tumour acceleration with > 2-fold growth rate (TGIR > 2)",
+            "Accompanied by rapid clinical performance status deterioration",
+            "Associated with MDM2/MDM4 amplification or EGFR mutations",
+            "Mandates immediate discontinuation of immunotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pembrolizumab** received the first FDA **tissue-agnostic** approval for any solid tumour exhibiting mismatch repair deficiency or **microsatellite instability-high** status. High tumour-infiltrating lymphocytes correlate with improved response rates and survival across solid tumours treated with checkpoint inhibitors. Tumours are classified immunologically as inflamed hot tumours exhibiting dense CD8+ T-cell infiltration, or cold tumours lacking intratumoural T cells.",
+      "say": "Pembrolizumab received the first FDA tissue-agnostic approval for any solid tumour exhibiting mismatch repair deficiency or microsatellite instability-high status. High tumour-infiltrating lymphocytes correlate with improved response rates and survival across solid tumours treated with checkpoint inhibitors. Tumours are classified immunologically as inflamed hot tumours exhibiting dense CD8+ T-cell infiltration, or cold tumours lacking intratumoural T cells.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Immune Phenotype",
+          "Histopathological Features",
+          "Checkpoint Inhibitor Responsiveness"
+        ],
+        "rows": [
+          [
+            "Immune-Inflamed (Hot)",
+            "Abundant CD8+ TILs within tumour parenchyma, high PD-L1",
+            "High objective response rate (40-60%); durable responses"
+          ],
+          [
+            "Immune-Excluded",
+            "T cells accumulated in peritumoural stroma, cannot penetrate",
+            "Intermediate responsiveness; requires stroma-modifying agents"
+          ],
+          [
+            "Immune-Desert (Cold)",
+            "Complete absence of CD8+ T cells in tumour and stroma",
+            "Poor responsiveness (< 10%); requires priming vaccines/radiation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Predictive biomarkers guide patient selection for immune checkpoint inhibition across multiple organ sites. **PD-L1 immunohistochemistry** reporting includes tumour proportion score TPS and **combined positive score** CPS to predict checkpoint inhibitor responsiveness. In gastric, cervical, and head and neck carcinomas, CPS incorporates PD-L1-staining tumour cells, lymphocytes, and macrophages relative to viable tumour cells, establishing actionable therapeutic cut-offs.",
+      "say": "Predictive biomarkers guide patient selection for immune checkpoint inhibition across multiple organ sites. PD-L1 immunohistochemistry reporting includes tumour proportion score TPS and combined positive score CPS to predict checkpoint inhibitor responsiveness. In gastric, cervical, and head and neck carcinomas, CPS incorporates PD-L1-staining tumour cells, lymphocytes, and macrophages relative to viable tumour cells, establishing actionable therapeutic cut-offs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biomarker Score",
+          "Mathematical Definition",
+          "Key Approved Indications & Cut-Offs"
+        ],
+        "rows": [
+          [
+            "Tumour Proportion Score (TPS)",
+            "(PD-L1+ tumour cells / Total tumour cells) x 100",
+            "NSCLC monotherapy: >= 50% (first-line); >= 1% (second-line)"
+          ],
+          [
+            "Combined Positive Score (CPS)",
+            "(PD-L1+ tumour, lymphocytes, macrophages / Total tumour cells) x 100",
+            "Gastric cancer: CPS >= 5; Cervical: CPS >= 1; HNSCC: CPS >= 1 or 20"
+          ],
+          [
+            "Immune Cell (IC) Score",
+            "% of tumour area occupied by PD-L1+ immune cells",
+            "Atezolizumab in urothelial and TNBC: IC >= 1% or 5%"
+          ],
+          [
+            "Tumour Mutational Burden (TMB)",
+            "Total non-synonymous somatic mutations per megabase",
+            "TMB-High >= 10 mut/Mb (tissue-agnostic pembrolizumab)"
+          ]
+        ]
+      }
     }
-   }
-  }
- ],
- "quiz": [
-  "q_8f5a0f3386ad",
-  "q_bdabb7cf1d16",
-  "q_df551256b976"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 33
- }
+  ],
+  "quiz": [
+    "q_8f5a0f3386ad",
+    "q_bdabb7cf1d16",
+    "q_df551256b976"
+  ]
 }
