@@ -3,142 +3,245 @@
  "module": "sca-cardiac-imaging",
  "subject": "ss-cardiology",
  "title": "Echocardiography and cardiac imaging: choosing and reading the key tests",
- "minutes": 6,
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Transthoracic **echocardiography** is the first-line imaging test for cardiac structure and function. It gives **ejection fraction**, regional wall motion, valve severity and estimated pulmonary pressure. In chronic coronary syndrome it is done at rest to look for LV dysfunction and valve disease, especially aortic stenosis, before any stress test is chosen.",
-   "say": "Transthoracic echocardiography is the first line imaging test for cardiac structure and function. It gives ejection fraction, regional wall motion, valve severity and estimated pulmonary pressure. In chronic coronary syndrome it is done at rest to look for left ventricular dysfunction and valve disease, especially aortic stenosis, before any stress test is chosen.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-cardiac-imaging-fig1.webp",
-    "alt": "An apical 4-chamber view from a transthoracic echocardiogram, illustrating the heart's chambers and valves for initial cardiac assessment.",
-    "caption": "Transthoracic echocardiography (TTE): First-line cardiac imaging for structure and function. Image: Balaji.md au, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.3333
-   }
-  },
-  {
-   "tx": "Ejection fraction is calculated from end-diastolic and end-systolic volumes. **LVEF** is (EDV minus ESV) divided by EDV, multiplied by 100. The biplane method of disks, a modified Simpson's rule, is the current standard 2D method. M-mode assumes global symmetry, so it fails after a regional aneurysm.",
-   "say": "Ejection fraction is calculated from end diastolic and end systolic volumes. LVEF is end diastolic volume minus end systolic volume, divided by end diastolic volume, multiplied by 100. The biplane method of disks, a modified Simpson's rule, is the current standard two dimensional method. M mode assumes global symmetry, so it fails after a regional aneurysm.",
+   "tx": "The **E/e ratio** measured by tissue Doppler imaging provides a noninvasive estimate of left ventricular filling pressure. Mitral inflow E velocity reflects early diastolic pressure gradient, while mitral annular e prime velocity reflects early myocardial relaxation. An average E/e ratio greater than 14 reliably indicates elevated left atrial pressure.",
+   "say": "The E to e prime ratio measured by tissue Doppler imaging provides a reliable noninvasive estimate of left ventricular filling pressure. Mitral inflow E velocity reflects the early diastolic transmitral pressure gradient, while mitral annular e prime velocity quantifies early myocardial relaxation. An average E to e prime ratio greater than 14 strongly indicates elevated left atrial pressure.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Method",
-     "Use",
-     "Limitation"
+     "Doppler Parameter",
+     "Normal Cutoff",
+     "Clinical Significance"
     ],
     "rows": [
      [
-      "Biplane disks",
-      "Standard 2D quantification",
-      "Needs good endocardial views"
+      "Average E/e ratio",
+      "< 8 normal, > 14 elevated",
+      "Surrogate for elevated LAP and PCWP"
      ],
      [
-      "M-mode",
-      "Quick bedside estimate",
-      "Assumes symmetric LV"
+      "Septal e prime velocity",
+      ">= 7 cm/s",
+      "Impaired active LV relaxation if reduced"
      ],
      [
-      "3D echo",
-      "Accurate volumes",
-      "Needs adequate imaging"
+      "Lateral e prime velocity",
+      ">= 10 cm/s",
+      "Higher velocity than septal in normal hearts"
      ]
     ]
    }
   },
   {
-   "tx": "Aortic stenosis severity uses Doppler. Peak velocity of 3.0 m/s or more indicates at least moderate disease, and above 4.0 m/s is usually severe. The **continuity equation** gives valve area, where area below 1.0 cm2 is severe and below 0.6 cm2 is critical. Gradients underestimate severity when LV function is poor, so valve area is preferred.",
-   "say": "Aortic stenosis severity uses Doppler. Peak velocity of 3.0 metres per second or more indicates at least moderate disease, and above 4.0 metres per second is usually severe. The continuity equation gives valve area, where area below 1.0 square centimetre is severe and below 0.6 is critical. Gradients underestimate severity when left ventricular function is poor, so valve area is preferred.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Vmax 3.0 m/s"
-     },
-     {
-      "id": "b",
-      "label": "Vmax 4.0 m/s or more"
-     },
-     {
-      "id": "c",
-      "label": "AVA below 1.0 cm2"
-     },
-     {
-      "id": "d",
-      "label": "Severe AS"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Low-flow, low-gradient aortic stenosis with reduced EF can be **pseudo-severe**. **Dobutamine stress echo** raises flow: in true severe disease the gradient rises above 40 mmHg with a small valve area, while in pseudo-severe disease the area enlarges. Diastolic dysfunction is judged by E/e prime, LA volume and TR velocity.",
-   "say": "Low flow, low gradient aortic stenosis with reduced ejection fraction can be pseudo severe. Dobutamine stress echo raises flow. In true severe disease the gradient rises above 40 mmHg with a small valve area, while in pseudo severe disease the area enlarges. Diastolic dysfunction is judged by E over e prime, left atrial volume and tricuspid regurgitant velocity.",
+   "tx": "**Global longitudinal strain** assessed via speckle-tracking echocardiography detects subtle subclinical myocardial dysfunction long before left ventricular ejection fraction declines. Normal values are more negative than -18% to -20%. Impairment precedes overt cardiotoxicity during anthracycline chemotherapy and highlights apical sparing in cardiac amyloidosis.",
+   "say": "Global longitudinal strain assessed through speckle tracking echocardiography detects subtle subclinical myocardial dysfunction before left ventricular ejection fraction declines. Healthy reference values are typically more negative than minus 18 percent to minus 20 percent. Impairment precedes overt cardiotoxicity and demonstrates apical sparing in cardiac amyloidosis.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "True severe AS",
+     "title": "Normal Strain",
      "points": [
-      "Gradient rises above 40 mmHg",
-      "Valve area stays small",
-      "Stroke volume rises with dobutamine"
+      "GLS more negative than -18% to -20% indicates preserved long-axis systolic shortening across all segments."
      ]
     },
     "right": {
-     "title": "Pseudo-severe AS",
+     "title": "Subclinical Dysfunction",
      "points": [
-      "Gradient stays low",
-      "Valve area increases",
-      "Often small stroke volume"
+      "GLS blunted to -14% or worse signals early injury despite normal 2D ejection fraction."
      ]
     }
    }
   },
   {
-   "tx": "Stress imaging is used when pre-test likelihood is moderate. **Stress echo**, SPECT or PET perfusion, and stress CMR assess ischaemia. High-risk findings include ischaemia of 10% or more of the LV, or 3 or more of 16 segments on stress echo. Beta-blockers are withheld before stress echo because they blunt the heart rate response and cause false negatives.",
-   "say": "Stress imaging is used when pre-test likelihood is moderate. Stress echo, SPECT or PET perfusion, and stress CMR assess ischaemia. High-risk findings include ischaemia of 10 percent or more of the left ventricle, or 3 or more of 16 segments on stress echo. Beta blockers are withheld before stress echo because they blunt the heart rate response and can cause false negatives.",
-   "vis": null
+   "tx": "The **Agatston** coronary artery calcium score measured on noncontrast cardiac CT quantifies calcified atherosclerotic plaque burden. Scores reflect area multiplied by peak density weighting. A score of zero denotes very low short-term cardiovascular risk, whereas a coronary artery calcium score exceeding 400 denotes high cardiovascular risk requiring intensive primary prevention.",
+   "say": "The Agatston coronary artery calcium score measured on noncontrast cardiac computed tomography quantifies calcified atherosclerotic plaque burden. Scores combine plaque area with peak attenuation weighting. A score of zero indicates very low near term risk, whereas a score over 400 denotes high cardiovascular risk requiring intensive statin therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agatston Score Range",
+     "Atherosclerotic Burden",
+     "Cardiovascular Risk"
+    ],
+    "rows": [
+     [
+      "0",
+      "No identifiable calcification",
+      "Very low 10-year risk"
+     ],
+     [
+      "1 to 99",
+      "Mild calcified plaque",
+      "Mildly elevated risk"
+     ],
+     [
+      "100 to 399",
+      "Moderate plaque burden",
+      "Moderate risk; statin indicated"
+     ],
+     [
+      ">= 400",
+      "Extensive plaque burden",
+      "High risk; intensive risk reduction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac magnetic resonance with **late gadolinium enhancement** differentiates ischemic transmural infarction from nonischemic cardiomyopathies. Gadolinium washes out slowly from expanded fibrotic extracellular spaces. Subendocardial or transmural scar conforming to a coronary artery distribution confirms myocardial infarction, whereas midwall or subepicardial patterns characterize myocarditis and sarcoidosis.",
+   "say": "Cardiac magnetic resonance with late gadolinium enhancement differentiates ischemic transmural infarction from nonischemic myocardial diseases. Gadolinium clears slowly from expanded fibrotic extracellular compartments. Subendocardial or transmural enhancement in a coronary territory confirms prior infarction, while midwall or subepicardial enhancement denotes nonischemic inflammation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ischemic LGE Pattern",
+     "points": [
+      "Subendocardial origin extending outward toward epicardium, strictly respecting coronary vascular territories."
+     ]
+    },
+    "right": {
+     "title": "Nonischemic LGE Pattern",
+     "points": [
+      "Midwall striae or patchy subepicardial enhancement sparing the subendocardium, non-coronary distribution."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Myocardial **extracellular volume fraction** derived from cardiac MRI T1 mapping quantifies microscopic interstitial fibrosis. Native and post-contrast T1 relaxation times are combined with blood hematocrit. Normal extracellular volume is 25% to 30%, exceeds 30% in diffuse interstitial fibrosis, and characteristically rises above 40% in severe cardiac amyloidosis.",
+   "say": "Myocardial extracellular volume fraction derived from cardiac magnetic resonance T1 mapping provides precise quantification of microscopic interstitial expansion. Normal extracellular volume fraction ranges from 25 to 30 percent, exceeds 30 percent in diffuse reactive fibrosis, and typically rises above 40 percent in extensive cardiac amyloidosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "T1 Mapping"
+     },
+     {
+      "id": "n2",
+      "label": "Native & Post T1"
+     },
+     {
+      "id": "n3",
+      "label": "ECV Calculation"
+     },
+     {
+      "id": "n4",
+      "label": "Tissue Diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Continuity equation** in transthoracic echocardiography calculates aortic valve area by applying conservation of mass. Stroke volume displaced through the left ventricular outflow tract equals flow across the narrowed orifice. Aortic valve area equals LVOT area multiplied by LVOT velocity time integral, divided by aortic valve jet velocity time integral.",
+   "say": "The continuity equation in echocardiography calculates aortic valve area based on conservation of mass. Stroke volume passing through the left ventricular outflow tract must equal flow traversing the stenotic aortic orifice. The valve area equals outflow tract cross sectional area multiplied by outflow velocity time integral, divided by aortic jet velocity time integral.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "LVOT Diameter"
+     },
+     {
+      "id": "n2",
+      "label": "LVOT VTI"
+     },
+     {
+      "id": "n3",
+      "label": "Aortic Jet VTI"
+     },
+     {
+      "id": "n4",
+      "label": "Aortic Valve Area"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n4"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **PISA method** utilizes flow convergence to quantify severe valvular regurgitation. Flow accelerates toward a regurgitant orifice in concentric hemispheric shells of equal velocity. Regurgitant flow equals 2 times pi times alias radius squared multiplied by alias velocity. Dividing peak flow by peak jet velocity yields effective regurgitant orifice area.",
+   "say": "The proximal isovelocity surface area method utilizes flow convergence principles to quantify valvular regurgitant severity. Flow accelerates toward the regurgitant aperture in concentric hemispheric shells of uniform velocity. Multiplying hemisphere surface area by the aliasing velocity yields instantaneous regurgitant flow, from which regurgitant orifice area is computed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PISA Measure",
+     "Mild Regurgitation",
+     "Severe Regurgitation"
+    ],
+    "rows": [
+     [
+      "Effective Regurgitant Orifice Area",
+      "< 0.20 cm2",
+      ">= 0.40 cm2"
+     ],
+     [
+      "Regurgitant Volume",
+      "< 30 mL/beat",
+      ">= 60 mL/beat"
+     ],
+     [
+      "Color Doppler Vena Contracta",
+      "< 0.3 cm",
+      ">= 0.7 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coronary computed tomography angiography provides exceptionally high **negative predictive value** between 97% and 99% for excluding obstructive coronary artery disease. Normal coronary arteries on CCTA effectively rule out acute coronary syndromes in low-to-intermediate risk chest pain cohorts, allowing safe and rapid discharge without unnecessary invasive coronary angiography.",
+   "say": "Coronary computed tomography angiography provides an exceptionally high negative predictive value between 97 percent and 99 percent for ruling out obstructive coronary artery disease. Demonstrating normal coronary arteries effectively excludes acute coronary syndromes in low to intermediate risk emergency presentations, avoiding unnecessary invasive catheterization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CCTA Rule-Out",
+     "points": [
+      "97% to 99% negative predictive value reliably excludes obstructive stenosis in low-to-intermediate pretest probability."
+     ]
+    },
+    "right": {
+     "title": "Invasive Coronary Angio",
+     "points": [
+      "Gold standard for defining anatomy and guiding revascularization in high pretest risk or unstable presentations."
+     ]
+    }
+   }
   }
  ],
- "quiz": [
-  "q_6e5d74ea62c7",
-  "q_03de267bace7",
-  "q_24c54c2026f5"
- ],
- "src": [
-  "kb-clinical-protocols-chronic-coronary-syndrome",
-  "kb-diseases-aortic-stenosis"
- ],
- "refs": [
-  "ESC Guidelines for the management of chronic coronary syndromes (2024)",
-  "Harrison's Principles of Internal Medicine, 22nd edition"
- ],
  "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 1606,
-  "itemN": 43
- }
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
 }

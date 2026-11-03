@@ -1,0 +1,257 @@
+{
+ "v": 1,
+ "module": "sca-svt-preexcitation",
+ "subject": "ss-cardiology",
+ "title": "Supraventricular tachycardias and preexcitation: mechanism, pharmacotherapy and ablation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**AV nodal reentrant tachycardia** represents the most common regular supraventricular tachycardia, sustained by dual AV nodal physiology. Typical slow-fast AVNRT involves antegrade conduction down the slow pathway and retrograde conduction up the fast pathway, producing simultaneous atrial and ventricular activation with pseudo-r prime in V1 and pseudo-S in inferior leads.",
+   "say": "Atrioventricular nodal reentrant tachycardia is the most frequent regular supraventricular tachycardia, sustained by functional dual atrioventricular nodal pathways. Typical slow-fast AVNRT utilizes the slow pathway for antegrade conduction and the fast pathway for retrograde conduction, showing pseudo r prime in lead V1.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Atrial PAC"
+     },
+     {
+      "id": "n2",
+      "label": "Antegrade Slow Pathway"
+     },
+     {
+      "id": "n3",
+      "label": "Retrograde Fast Pathway"
+     },
+     {
+      "id": "n4",
+      "label": "Reentrant SVT Circuit"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intravenous **adenosine** is the first-line pharmacologic therapy for terminating acute regular narrow-complex supraventricular tachycardias. Given as a rapid 6 mg IV bolus followed by 12 mg if required, adenosine activates A1 adenosine receptors, opening inward potassium channels and producing transient complete AV nodal conduction block to interrupt the reentrant circuit.",
+   "say": "Intravenous adenosine is the first line pharmacologic agent for terminating acute regular narrow complex supraventricular tachycardia. Administered as a rapid six milligram intravenous bolus followed by twelve milligrams if needed, adenosine stimulates A1 receptors to cause transient atrioventricular nodal block.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dose Step",
+     "Route and Administration",
+     "Expected Response"
+    ],
+    "rows": [
+     [
+      "Initial bolus",
+      "6 mg rapid IV push + 20 mL saline flush",
+      "Terminates > 70% of AVNRT/AVRT within 30s"
+     ],
+     [
+      "Second bolus",
+      "12 mg rapid IV push if no termination in 2 min",
+      "Terminates remaining responsive nodal reentrant SVTs"
+     ],
+     [
+      "Cautions",
+      "Asthma, dipyridamole, heart transplant",
+      "Severe bronchospasm; transplant requires 50% dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Wolff-Parkinson-White syndrome features ventricular **preexcitation** on baseline ECG, characterized by a short PR interval < 120 ms, slurred QRS upstroke (delta wave), and widened QRS duration > 120 ms, reflecting antegrade conduction over an accessory pathway bypassing the physiologic delay of the AV node.",
+   "say": "Wolff Parkinson White syndrome displays ventricular preexcitation on the resting electrocardiogram, characterized by a short PR interval under 120 milliseconds, a slurred initial QRS upstroke known as a delta wave, and widened QRS duration reflecting antegrade conduction across an anomalous accessory pathway.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ECG Feature",
+     "Normal Value",
+     "WPW Preexcitation Finding"
+    ],
+    "rows": [
+     [
+      "PR interval",
+      "120 to 200 ms",
+      "< 120 ms (shortened)"
+     ],
+     [
+      "Initial QRS upstroke",
+      "Sharp, rapid depolarization",
+      "Slurred delta wave"
+     ],
+     [
+      "Total QRS duration",
+      "< 100 ms",
+      "> 120 ms (widened fusion complex)"
+     ],
+     [
+      "Secondary ST-T changes",
+      "Concordant with QRS axis",
+      "Opposite in direction to delta wave"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Orthodromic AVRT** conducts antegrade down the normal AV node and His-Purkinje system and retrograde up the accessory pathway, producing a narrow-complex tachycardia. Conversely, antidromic AVRT conducts antegrade down the accessory pathway and retrograde up the AV node, producing a wide-complex fully preexcited tachycardia mimicking ventricular tachycardia.",
+   "say": "Orthodromic atrioventricular reentrant tachycardia conducts antegrade down the normal AV node and retrograde up the accessory pathway, generating a narrow complex tachycardia. Antidromic AVRT conducts antegrade down the accessory pathway and retrograde up the AV node, producing a wide complex tachycardia mimicking ventricular tachycardia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Orthodromic AVRT",
+     "points": [
+      "Antegrade AV node, retrograde accessory pathway; narrow QRS complex (< 120 ms), accounts for 90% of AVRT."
+     ]
+    },
+    "right": {
+     "title": "Antidromic AVRT",
+     "points": [
+      "Antegrade accessory pathway, retrograde AV node; wide regular QRS complex (>= 120 ms), accounts for < 10% of AVRT."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**procainamide**: Preexcited atrial fibrillation in WPW presents with an irregular, wide-complex tachycardia with bizarre variable QRS morphology and ventricular rates exceeding 250 to 300 bpm. Rapid antegrade conduction down the accessory pathway can trigger ventricular fibrillation and sudden cardiac death.",
+   "say": "Preexcited atrial fibrillation in Wolff Parkinson White syndrome manifests as an irregularly irregular, wide complex tachycardia with polymorphic QRS complexes and ventricular rates exceeding 250 to 300 beats per minute. Rapid accessory pathway conduction can degenerate into fatal ventricular fibrillation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Atrial Fibrillation in WPW"
+     },
+     {
+      "id": "n2",
+      "label": "Short Pathway Refractory Period"
+     },
+     {
+      "id": "n3",
+      "label": "Ventricular Rate > 250-300 bpm"
+     },
+     {
+      "id": "n4",
+      "label": "Ventricular Fibrillation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In preexcited atrial fibrillation, **AV nodal blocking agents are strictly contraindicated**, including adenosine, beta-blockers, non-dihydropyridine calcium channel blockers, and digitalis. Blocking the AV node preferentially shunts fibrillatory impulses down the rapidly conducting accessory pathway, precipitating ventricular fibrillation and cardiac arrest.",
+   "say": "In preexcited atrial fibrillation, atrioventricular nodal blocking drugs, including adenosine, beta blockers, verapamil, and digoxin, are strictly contraindicated. Blocking AV nodal conduction accelerates conduction down the accessory pathway, directly precipitating ventricular fibrillation. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contraindicated Drugs",
+     "points": [
+      "Adenosine, verapamil, diltiazem, beta-blockers, digoxin; accelerate pathway conduction toward ventricular fibrillation."
+     ]
+    },
+    "right": {
+     "title": "Indicated Management",
+     "points": [
+      "Direct current electrical cardioversion if hemodynamically unstable; intravenous procainamide or ibutilide if stable."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Antidromic AVRT**: Definitive curative therapy for recurrent AVNRT or WPW with accessory pathways is catheter ablation. Slow pathway modification in the inferior triangle of Koch cures AVNRT with > 95% success and < 1% risk of complete AV block, while accessory pathway ablation eliminates preexcitation and abolishes sudden death risk.",
+   "say": "Definitive curative therapy for recurrent atrioventricular nodal reentrant tachycardia and accessory pathways is radiofrequency catheter ablation. Slow pathway modification in the triangle of Koch cures AVNRT with over 95 percent success, while accessory pathway ablation permanently abolishes sudden death risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arrhythmia Substrate",
+     "Ablation Anatomical Target",
+     "Curative Success Rate"
+    ],
+    "rows": [
+     [
+      "AVNRT (slow pathway)",
+      "Inferior triangle of Koch (coronary sinus os to tricuspid annulus)",
+      "> 95%"
+     ],
+     [
+      "Left-sided accessory pathway",
+      "Mitral annulus (transseptal or retrograde aortic approach)",
+      "> 95%"
+     ],
+     [
+      "Right-sided accessory pathway",
+      "Tricuspid annulus",
+      "90% to 95%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**High-risk accessory pathways** in asymptomatic WPW are identified during electrophysiology study by an accessory pathway effective refractory period <= 250 ms or shortest preexcited RR interval in AF <= 250 ms. These markers identify high risk of sudden cardiac death and constitute a Class I indication for catheter ablation.",
+   "say": "High risk accessory pathways in Wolff Parkinson White syndrome are identified during electrophysiologic testing by an accessory pathway effective refractory period of 250 milliseconds or less, or a shortest preexcited RR interval in atrial fibrillation of 250 milliseconds or less, mandating catheter ablation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Electrophysiologic Marker",
+     "High-Risk Threshold",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Shortest preexcited RR interval (SPERRI)",
+      "<= 250 ms in AF",
+      "Class I indication for catheter ablation"
+     ],
+     [
+      "Accessory pathway ERP (APERP)",
+      "<= 250 ms at baseline",
+      "High risk of rapid conduction into VF"
+     ],
+     [
+      "Multiple accessory pathways",
+      "Presence of > 1 pathway",
+      "Independent predictor of sudden death"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

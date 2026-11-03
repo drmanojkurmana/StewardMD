@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "sca-pericardial-disease",
+ "subject": "ss-cardiology",
+ "title": "Pericardial disease: acute pericarditis, tamponade and constrictive physiology",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Acute pericarditis diagnosis requires meeting at least 2 of 4 diagnostic criteria: typical pleuritic chest pain improved by sitting upright, **pericardial friction rub**, new widespread concave ST-segment elevation with PR-segment depression, and new or worsening pericardial effusion. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Acute pericarditis diagnosis requires meeting at least two of four clinical criteria. First, typical pleuritic chest pain that improves when sitting forward. Second, a three-component pericardial friction rub. Third, new widespread concave ST-segment elevation with PR-segment depression. Fourth, pericardial effusion on imaging.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Criteria (>= 2 Required)",
+     "Clinical Finding",
+     "Diagnostic Value"
+    ],
+    "rows": [
+     [
+      "Pleuritic chest pain",
+      "Sharp, retrosternal, relieved leaning forward",
+      "Present in > 85% of acute cases"
+     ],
+     [
+      "Pericardial friction rub",
+      "Superficial scratchy 3-phase sound on left border",
+      "100% specific physical sign"
+     ],
+     [
+      "Electrocardiogram",
+      "Widespread concave ST elevation with PR depression",
+      "Four temporal ECG stages"
+     ],
+     [
+      "Echocardiogram",
+      "Pericardial effusion",
+      "Present in 60%, rules out tamponade"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First-line pharmacotherapy for acute pericarditis comprises high-dose **aspirin** (750 to 1000 mg every 8 hours) or ibuprofen (600 mg every 8 hours) combined with **colchicine** (0.5 mg daily or twice daily adjusted for body weight) for 3 months to accelerate symptom resolution and reduce recurrence rates by 50%.",
+   "say": "First-line medical therapy for acute pericarditis consists of high-dose aspirin or ibuprofen combined with colchicine for three months. Colchicine inhibits microtubule polymerization in granulocytes, accelerating clinical remission and cutting recurrence rates in half. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medication",
+     "Dose and Frequency",
+     "Treatment Duration"
+    ],
+    "rows": [
+     [
+      "Aspirin / Ibuprofen",
+      "Aspirin 750-1000 mg q8h or Ibuprofen 600 mg q8h",
+      "1 to 2 weeks until symptom-free, then taper"
+     ],
+     [
+      "Colchicine",
+      "0.5 mg daily (< 70 kg) or 0.5 mg bid (>= 70 kg)",
+      "3 months (first episode); 6 months (recurrent)"
+     ],
+     [
+      "Gastric protection",
+      "Proton pump inhibitor (e.g., omeprazole)",
+      "Mandatory co-prescription with high-dose NSAIDs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathognomonic physical examination sign of cardiac tamponade is **pulsus paradoxus**, defined as an inspiratory systolic blood pressure drop > 10 mmHg during normal quiet breathing. Enhanced ventricular interdependence within a fixed pericardial volume causes inspiratory RV expansion to bulge the interventricular septum, compromising left ventricular filling.",
+   "say": "The pathognomonic physical examination sign of cardiac tamponade is pulsus paradoxus, defined as an inspiratory systolic blood pressure drop greater than ten millimetres of mercury during quiet respiration. Enhanced ventricular interdependence causes right ventricular expansion to impinge upon left ventricular filling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Physiology",
+     "points": [
+      "Inspiratory systolic pressure decreases <= 10 mmHg due to venous pooling in the pulmonary vascular bed."
+     ]
+    },
+    "right": {
+     "title": "Pulsus Paradoxus (> 10 mmHg)",
+     "points": [
+      "Fixed pericardial constraint forces RV expansion to shift the interventricular septum into the LV, reducing stroke volume."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Beck triad of cardiac tamponade comprises **hypotension**, elevated jugular venous pressure, and muffled or distant heart sounds, indicating critical intrapericardial pressure elevation. Right heart catheterization demonstrates equalization of end-diastolic pressures across right atrium, right ventricle, pulmonary artery diastole, and pulmonary capillary wedge pressure.",
+   "say": "Beck triad of acute cardiac tamponade consists of arterial hypotension, jugular venous distension, and muffled heart sounds, reflecting acute intrapericardial pressure elevation. Catheterization confirms hemodynamic equalization of end-diastolic pressures across all cardiac chambers. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Beck Triad Component",
+     "Clinical Finding",
+     "Pathophysiologic Basis"
+    ],
+    "rows": [
+     [
+      "Arterial pressure",
+      "Hypotension with narrow pulse pressure",
+      "Severely reduced stroke volume and cardiac output"
+     ],
+     [
+      "Venous pressure",
+      "Elevated JVP with blunted y descent",
+      "Impaired diastolic filling of right heart"
+     ],
+     [
+      "Heart sounds",
+      "Muffled, distant cardiac tones",
+      "Acoustic damping by surrounding pericardial fluid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**right ventricular diastolic collapse**: Echocardiographic hallmarks of cardiac tamponade include early diastolic collapse of the right ventricular free wall and late diastolic collapse of the right atrium (> 33% of the cardiac cycle). Hepatic vein Doppler demonstrates blunting or reversal of diastolic forward flow with prominent systolic forward flow, reflecting severe diastolic impairment.",
+   "say": "Key echocardiographic hallmarks of cardiac tamponade include early diastolic collapse of the right ventricular free wall and late diastolic right atrial collapse exceeding one-third of the cardiac cycle. Hepatic vein Doppler demonstrates absent or reversed diastolic forward flow. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Pericardial Fluid Accumulation"
+     },
+     {
+      "id": "n2",
+      "label": "Pericardial Pressure > Chamber Pressure"
+     },
+     {
+      "id": "n3",
+      "label": "Diastolic RV / RA Inversion"
+     },
+     {
+      "id": "n4",
+      "label": "Severe Preload Depletion"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Constrictive pericarditis is characterized hemodynamically by enhanced ventricular interdependence and dissociation of intrathoracic and intracardiac pressures. Catheterization demonstrates the pathognomonic **dip-and-plateau** (square root sign) in ventricular diastolic pressure tracings and prominent y descents in the right atrial pressure waveform. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Constrictive pericarditis is characterized hemodynamically by enhanced ventricular interdependence and dissociation between intrathoracic and intracardiac pressures. Cardiac catheterization reveals the pathognomonic dip-and-plateau or square root sign in ventricular diastolic pressure waveforms. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hemodynamic Tracing",
+     "Constrictive Waveform",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Ventricular diastolic contour",
+      "Dip-and-plateau (square root sign)",
+      "Rapid early filling abruptly halted by rigid shell"
+     ],
+     [
+      "Right atrial waveform",
+      "Prominent, steep y descent",
+      "Unimpeded early diastolic ventricular suction"
+     ],
+     [
+      "Respiratory dynamics",
+      "Ventricular discordance",
+      "Inspiratory LV pressure drop with RV pressure rise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ventricular discordance** on simultaneous biventricular pressure recording differentiates constrictive pericarditis from restrictive cardiomyopathy. During inspiration, LV peak systolic pressure decreases while RV peak systolic pressure increases, proving enhanced interdependence; in restrictive cardiomyopathy, both chamber pressures decrease concordantly with inspiration. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Ventricular discordance during simultaneous biventricular pressure recording definitively differentiates constrictive pericarditis from restrictive cardiomyopathy. On inspiration, left ventricular systolic pressure falls while right ventricular pressure rises, proving enhanced mechanical interdependence. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Constrictive Pericarditis",
+     "points": [
+      "Discordant systolic pressure changes: inspiratory LV pressure falls while RV pressure rises (> 100% systolic area ratio)."
+     ]
+    },
+    "right": {
+     "title": "Restrictive Cardiomyopathy",
+     "points": [
+      "Concordant systolic pressure changes: both LV and RV pressures decrease together on inspiration, following pleural pressure."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Definitive curative therapy for chronic constrictive pericarditis with persistent symptoms is surgical **pericardiectomy**. Resection of both visceral and parietal pericardium between the phrenic nerves restores diastolic compliance. Perioperative mortality is 5% to 10%, with earlier intervention before advanced myocardial atrophy yielding superior long-term survival.",
+   "say": "Definitive curative therapy for chronic constrictive pericarditis is radical surgical pericardiectomy. Complete decortication of both visceral and parietal pericardium restores ventricular filling compliance. Earlier operative intervention prior to irreversible myocardial atrophy yields superior long-term survival. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pericardiectomy Parameter",
+     "Surgical Target",
+     "Prognostic Factor"
+    ],
+    "rows": [
+     [
+      "Extent of resection",
+      "Phrenic-to-phrenic decortication",
+      "Complete liberation of both ventricles"
+     ],
+     [
+      "Visceral peeling (epicardiectomy)",
+      "Excision of fibrotic epicardial peel",
+      "Relieves residual intrinsic constriction"
+     ],
+     [
+      "Operative risk",
+      "5% to 10% surgical mortality",
+      "Higher in radiation-induced and calcified shells"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

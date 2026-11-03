@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "sca-cyanotic-adult-chd",
+ "subject": "ss-cardiology",
+ "title": "Cyanotic and adult congenital heart disease: anatomy, repaired physiology and late complications",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Tetralogy of Fallot** consists of 4 classic anatomical components resulting from anterior and cephalad deviation of the infundibular septum: large malaligned perimembranous VSD, right ventricular outflow tract obstruction (infundibular and valvular pulmonic stenosis), overriding aorta (< 50%), and concentric right ventricular hypertrophy.",
+   "say": "Tetralogy of Fallot consists of four anatomical components resulting from anterocephalad deviation of the outlet septum: a large malaligned ventricular septal defect, right ventricular outflow tract obstruction, an overriding aorta, and concentric right ventricular hypertrophy. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Component",
+     "Pathophysiologic Basis",
+     "Clinical Finding"
+    ],
+    "rows": [
+     [
+      "RV outflow tract obstruction",
+      "Infundibular and valvular pulmonic stenosis",
+      "Determines the direction and degree of shunt"
+     ],
+     [
+      "Large malaligned VSD",
+      "Anterior deviation of infundibular septum",
+      "Equalizes biventricular systolic pressures"
+     ],
+     [
+      "Overriding aorta",
+      "< 50% override above septal defect",
+      "Directly receives mixed systemic and venous blood"
+     ],
+     [
+      "Right ventricular hypertrophy",
+      "Concentric pressure overload response",
+      "Secondary to chronic RV outflow obstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Late complications in repaired adult TOF are driven by chronic severe **pulmonary regurgitation** following transannular patch repair. Guidelines recommend **pulmonary valve replacement** prior to irreversible RV damage when RV end-diastolic volume index exceeds 160 mL/m2 or end-systolic volume index exceeds 80 mL/m2 on cardiac MRI.",
+   "say": "Late complications in repaired adult Tetralogy of Fallot are dominated by chronic pulmonary regurgitation. Guidelines recommend timely pulmonary valve replacement before irreversible dysfunction develops, indicated when right ventricular end-diastolic volume index exceeds 160 millilitres per square metre. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cardiac MRI Indication",
+     "Volumetric Cutoff",
+     "Clinical Goal"
+    ],
+    "rows": [
+     [
+      "RV end-diastolic volume index",
+      "> 160 mL/m2",
+      "Prevents irreversible RV remodeling and failure"
+     ],
+     [
+      "RV end-systolic volume index",
+      "> 80 mL/m2",
+      "Threshold for postoperative RV functional recovery"
+     ],
+     [
+      "Progressive tricuspid regurgitation",
+      "Moderate to severe TR",
+      "Relieves annular dilatation from RV enlargement"
+     ],
+     [
+      "Exercise intolerance / Arrhythmia",
+      "Objective functional decline",
+      "Suppresses sustained ventricular tachyarrhythmias"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eisenmenger syndrome** represents the irreversible end-stage consequence of uncorrected congenital systemic-to-pulmonary shunts (VSD, PDA, ASD). Progressive pulmonary arteriolar plexiform remodeling elevates pulmonary vascular resistance above systemic resistance, causing **shunt reversal** to right-to-left, central cyanosis, and secondary erythrocytosis. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Eisenmenger syndrome represents the irreversible progression of uncorrected congenital left-to-right shunts into severe plexiform pulmonary arteriopathy. Pulmonary vascular resistance rises above systemic vascular resistance, precipitating shunt reversal to right-to-left and central cyanosis. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Congenital Left-to-Right Shunt"
+     },
+     {
+      "id": "n2",
+      "label": "Pulmonary Arteriolar Remodeling"
+     },
+     {
+      "id": "n3",
+      "label": "PVR Exceeds SVR"
+     },
+     {
+      "id": "n4",
+      "label": "Reversed Right-to-Left Shunt"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Differential cyanosis**, with pink upper extremities and cyanotic clubbed lower extremities, is pathognomonic of patent ductus arteriosus complicated by Eisenmenger physiology. Deoxygenated blood shunting right-to-left from the pulmonary artery traverses the ductus into the descending aorta distal to the left subclavian artery take-off.",
+   "say": "Differential cyanosis, characterized by normal pink upper extremities and cyanotic clubbed toes, is pathognomonic of patent ductus arteriosus with Eisenmenger physiology. Deoxygenated blood enters the descending aorta distal to the left subclavian artery, sparing the cerebral and upper extremity circulations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Extremities",
+     "points": [
+      "Pink fingernails, normal oxygen saturation; perfusing blood originates from aortic arch proximal to ductal insertion."
+     ]
+    },
+    "right": {
+     "title": "Lower Extremities",
+     "points": [
+      "Cyanotic, clubbed toes, reduced oxygen saturation; perfusing blood receives right-to-left deoxygenated ductal shunt."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transposition of the great arteries** (d-TGA) features ventriculoarterial discordance, where the aorta arises from the morphological right ventricle and the pulmonary artery from the morphological left ventricle. The neonatal surgical anatomical repair of choice is the **arterial switch** operation (Jatene procedure) with coronary button reimplantation.",
+   "say": "D-transposition of the great arteries features ventriculoarterial discordance with parallel circulations. The aorta arises from the right ventricle and the pulmonary artery from the left ventricle. The neonatal surgical repair of choice is the arterial switch operation with coronary reimplantation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Repair",
+     "Procedure Name",
+     "Anatomical Mechanism"
+    ],
+    "rows": [
+     [
+      "Arterial switch (Current)",
+      "Jatene procedure",
+      "Translocates great vessels and coronaries; restores LV as systemic pump"
+     ],
+     [
+      "Atrial switch (Historical)",
+      "Mustard / Senning",
+      "Baffles caval and pulmonary flow; leaves RV as systemic ventricle"
+     ],
+     [
+      "Late atrial switch issues",
+      "Systemic RV failure, TR, baffles",
+      "High incidence of late arrhythmias and RV failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenitally corrected transposition of the great arteries (l-TGA) is defined by **double discordance**: atrioventricular discordance and ventriculoarterial discordance. Systemic venous blood reaches the lungs while pulmonary venous blood reaches the aorta, but the morphological RV serves as the **systemic RV failure** chamber, prone to complete AV block.",
+   "say": "Congenitally corrected transposition of the great arteries features double discordance, combining atrioventricular and ventriculoarterial discordance. Because the morphological right ventricle supports the systemic circulation, long-term complications include systemic right ventricular failure and high-grade AV block. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Double Discordance",
+     "points": [
+      "RA to morphological LV to PA; LA to morphological RV to Aorta; hemodynamically physiologically corrected circulation."
+     ]
+    },
+    "right": {
+     "title": "Long-Term Failure",
+     "points": [
+      "Morphological systemic RV lacks three-layered architecture, developing progressive systolic failure and systemic tricuspid regurgitation."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Fontan procedure** provides palliation for single-ventricle anatomies by routing systemic venous blood directly to the pulmonary arteries without a subpulmonary pump. Chronic nonpulsatile pulmonary flow causes elevated central venous pressure, leading to late multiorgan complications including **protein-losing enteropathy**, plastic bronchitis, and cirrhosis.",
+   "say": "The Fontan procedure provides palliation for single ventricle anatomies by routing systemic venous blood directly into the pulmonary arteries. Chronic absence of a subpulmonary pump leads to elevated venous pressures, predisposing to protein-losing enteropathy, plastic bronchitis, and Fontan-associated liver disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fontan Complication",
+     "Clinical Presentation",
+     "Pathophysiologic Hallmark"
+    ],
+    "rows": [
+     [
+      "Protein-losing enteropathy",
+      "Severe anasarca, hypogammaglobulinemia",
+      "Enteric albumin loss; elevated fecal alpha-1-antitrypsin"
+     ],
+     [
+      "Plastic bronchitis",
+      "Expectorated bronchial branching casts",
+      "Lymphatic congestion weeping into bronchial tree"
+     ],
+     [
+      "Fontan-associated liver disease",
+      "Cirrhosis, portal hypertension, HCC",
+      "Chronic sinusoidal congestion and parenchymal fibrosis"
+     ],
+     [
+      "Arrhythmias",
+      "Atrial flutter, IART, sinus node failure",
+      "Right atrial surgical scarring and stretch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Secondary erythrocytosis** in cyanotic CHD is a physiologic compensation for chronic tissue hypoxemia, maintaining tissue oxygen delivery. Therapeutic phlebotomy is indicated only for acute symptomatic **hyperviscosity** when hematocrit > 65% in the absence of dehydration, accompanied by equal-volume crystalloid replacement to avoid microvascular stroke.",
+   "say": "Secondary erythrocytosis in cyanotic heart disease represents a compensatory response to chronic hypoxemia. Therapeutic phlebotomy is indicated strictly for symptomatic hyperviscosity when hematocrit exceeds 65 percent in the absence of dehydration, accompanied by equal volume crystalloid repletion. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compensated Erythrocytosis",
+     "points": [
+      "High hematocrit, normal microcytosis, asymptomatic; maintains essential peripheral tissue oxygen delivery."
+     ]
+    },
+    "right": {
+     "title": "Decompensated Hyperviscosity",
+     "points": [
+      "Hematocrit > 65%, headache, visual blurring, fatigue; requires gentle phlebotomy with concurrent volume replacement."
+     ]
+    }
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}
