@@ -1,0 +1,187 @@
+{
+ "v": 1,
+ "module": "sen-male-hypogonadism",
+ "subject": "ss-endocrinology",
+ "title": "Male hypogonadism and gynaecomastia",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Diagnose hypogonadism with two morning fasting total **testosterone** measurements, ideally before 10 am, and then measure **LH** and FSH. A single afternoon level is not enough. If the total testosterone is borderline and **SHBG** is likely abnormal, free testosterone is measured. The morning sample is repeated before a man is committed to replacement.",
+   "say": "Diagnose hypogonadism with two morning fasting total testosterone measurements, ideally before 10 am, and then measure LH and FSH. A single afternoon level is not enough. If the total testosterone is borderline and SHBG is likely abnormal, free testosterone is measured. The morning sample is repeated before a man is committed to replacement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/androgen-deficiency-aging-male-fig1.webp",
+    "alt": "Workup of low testosterone: two morning samples, then LH and FSH, primary versus secondary, with treatment cautions.",
+    "caption": "Two morning fasting total testosterone values, then LH and FSH if they are low. Primary disease has high LH and FSH. Secondary disease has low or normal LH and FSH, then prolactin and pituitary MRI. A numeric cutoff is printed on the figure. This lesson uses the two morning values, not that single cutoff. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "Primary hypogonadism has a high LH. **Klinefelter syndrome**, **47,XXY**, is the common genetic cause, with small firm testes, azoospermia, tall stature, and gynecomastia. Secondary hypogonadism has a low or inappropriately normal LH. **Kallmann syndrome** adds anosmia because GnRH neurons fail to migrate.",
+   "say": "Primary hypogonadism has a high LH. Klinefelter syndrome, 47,XXY, is the common genetic cause, with small firm testes, azoospermia, tall stature, and gynecomastia. Secondary hypogonadism has a low or inappropriately normal LH. Kallmann syndrome adds anosmia because GnRH neurons fail to migrate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypogonadism-male-fig1.webp",
+    "alt": "Anterior pituitary arrows toward an atrophic testis with seminiferous-tubule fibrosis and Leydig cells.",
+    "caption": "Anterior pituitary arrows point at an atrophic testis with seminiferous-tubule fibrosis and Leydig cells. The drawing does not label whether LH is high or low. Klinefelter syndrome is primary, so LH is high. Kallmann syndrome is secondary, so LH is low or inappropriately normal. Credit: StewardMD.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Testosterone therapy** is for men with symptoms and a consistently low testosterone. It suppresses **spermatogenesis**, so it is the wrong drug when fertility is the goal. Use **hCG** when the couple wants a pregnancy, and add FSH if spermatogenesis does not start. Testosterone is paused when a pregnancy is being planned.",
+   "say": "Testosterone therapy is for men with symptoms and a consistently low testosterone. It suppresses spermatogenesis, so it is the wrong drug when fertility is the goal. Use hCG when the couple wants a pregnancy, and add FSH if spermatogenesis does not start. Testosterone is paused when a pregnancy is being planned.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Testosterone therapy",
+     "points": [
+      "For symptoms plus a confirmed low testosterone",
+      "Suppresses spermatogenesis",
+      "Wrong drug when fertility is the goal"
+     ]
+    },
+    "right": {
+     "title": "Fertility goal",
+     "points": [
+      "hCG is used instead",
+      "FSH is added if spermatogenesis does not start",
+      "Testosterone is paused"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Do not start **testosterone** in **prostate cancer**, male breast cancer, a hematocrit that is already high, or untreated severe obstructive sleep apnea, or when a baby is planned in the near term. The hematocrit is rechecked because **erythrocytosis** is the common adverse effect. A haematocrit above 50 percent is marked on the pathway figure as a reason to hold treatment. Near-term fertility is a contraindication even when the testosterone is low.",
+   "say": "Do not start testosterone in prostate cancer, male breast cancer, a hematocrit that is already high, or untreated severe obstructive sleep apnea, or when a baby is planned in the near term. The hematocrit is rechecked because erythrocytosis is the common adverse effect. A haematocrit above 50 percent is marked on the pathway figure as a reason to hold treatment. Near-term fertility is a contraindication even when the testosterone is low.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Do not start",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Prostate cancer or male breast cancer",
+      "Androgen can feed the tumour"
+     ],
+     [
+      "Hematocrit already high",
+      "Erythrocytosis is the common adverse effect"
+     ],
+     [
+      "Untreated severe sleep apnea",
+      "Androgen can worsen it"
+     ],
+     [
+      "Baby planned soon",
+      "Spermatogenesis is suppressed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **TRAVERSE** trial found that testosterone gel was noninferior to placebo for **major adverse cardiovascular events** in middle-aged and older hypogonadal men with cardiovascular risk. That result does not make testosterone a treatment for aging in a man with a normal testosterone. Symptoms plus a confirmed low value are still required. A normal morning testosterone is not an indication.",
+   "say": "The TRAVERSE trial found that testosterone gel was noninferior to placebo for major adverse cardiovascular events in middle-aged and older hypogonadal men with cardiovascular risk. That result does not make testosterone a treatment for aging in a man with a normal testosterone. Symptoms plus a confirmed low value are still required. A normal morning testosterone is not an indication.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What TRAVERSE showed",
+     "points": [
+      "Testosterone gel was noninferior to placebo",
+      "The outcome was major adverse cardiovascular events",
+      "The men were hypogonadal and had cardiovascular risk"
+     ]
+    },
+    "right": {
+     "title": "What it did not show",
+     "points": [
+      "It is not a treatment for normal aging",
+      "A normal testosterone is not an indication",
+      "Symptoms and two low morning values are still required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anabolic steroid** misuse suppresses LH and FSH, shrinks the testes, lowers **HDL cholesterol**, and raises the hematocrit. **Infertility** can persist for months after the drugs are stopped. The testosterone may be high or low depending on when the last injection was given. A suppressed LH with a high hematocrit is the pattern that suggests recent androgen misuse.",
+   "say": "Anabolic steroid misuse suppresses LH and FSH, shrinks the testes, lowers HDL cholesterol, and raises the hematocrit. Infertility can persist for months after the drugs are stopped. The testosterone may be high or low depending on when the last injection was given. A suppressed LH with a high hematocrit is the pattern that suggests recent androgen misuse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding on anabolic steroids",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "LH and FSH",
+      "Suppressed"
+     ],
+     [
+      "Testes",
+      "Small"
+     ],
+     [
+      "HDL cholesterol",
+      "Lower"
+     ],
+     [
+      "Hematocrit",
+      "Higher"
+     ],
+     [
+      "Fertility",
+      "Infertility can last for months after stopping"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Gynecomastia** is glandular breast tissue in a man. Physiologic puberty, **spironolactone**, ketoconazole, cirrhosis, hyperthyroidism, prolactin excess, and Klinefelter syndrome are the usual causes. A hard eccentric mass, skin tethering, or bloody nipple discharge needs exclusion of **breast cancer**. Soft concentric tissue under the areola is the typical glandular pattern.",
+   "say": "Gynecomastia is glandular breast tissue in a man. Physiologic puberty, spironolactone, ketoconazole, cirrhosis, hyperthyroidism, prolactin excess, and Klinefelter syndrome are the usual causes. A hard eccentric mass, skin tethering, or bloody nipple discharge needs exclusion of breast cancer. Soft concentric tissue under the areola is the typical glandular pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gynecomastia",
+     "points": [
+      "Glandular tissue under the areola",
+      "Puberty, spironolactone, ketoconazole, cirrhosis",
+      "Also hyperthyroidism, prolactin, Klinefelter syndrome"
+     ]
+    },
+    "right": {
+     "title": "Breast cancer until proved otherwise",
+     "points": [
+      "Hard eccentric mass",
+      "Skin tethering",
+      "Bloody nipple discharge"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Obesity** lowers **SHBG**, so total testosterone falls while **free testosterone** may stay normal. Weight loss is the first treatment of that pattern. Testosterone is not a weight-loss drug for a eugonadal man. Free testosterone is measured before a low total value in an obese man is treated.",
+   "say": "Obesity lowers SHBG, so total testosterone falls while free testosterone may stay normal. Weight loss is the first treatment of that pattern. Testosterone is not a weight-loss drug for a eugonadal man. Free testosterone is measured before a low total value in an obese man is treated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obesity and SHBG",
+     "points": [
+      "SHBG falls, so total testosterone falls",
+      "Free testosterone may be normal",
+      "Weight loss is first-line"
+     ]
+    },
+    "right": {
+     "title": "True hypogonadism",
+     "points": [
+      "Symptoms plus repeated low morning testosterone",
+      "Free testosterone is low when SHBG confuses the total",
+      "Testosterone is not a weight-loss drug"
+     ]
+    }
+   }
+  }
+ ]
+}

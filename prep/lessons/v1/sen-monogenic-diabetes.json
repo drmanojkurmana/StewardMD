@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "sen-monogenic-diabetes",
+ "subject": "ss-endocrinology",
+ "title": "Monogenic and secondary diabetes",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Suspect **monogenic diabetes** when diabetes presents before 6 months of age, when a young lean adult has a strong autosomal dominant family history and negative **islet antibodies**, or when diabetes travels with renal cysts, deafness, or a syndromic picture. Do not label every antibody-negative young adult as type 2 diabetes. The antibody result and the family pattern are what open this diagnosis.",
+   "say": "Suspect monogenic diabetes when diabetes presents before 6 months of age, when a young lean adult has a strong autosomal dominant family history and negative islet antibodies, or when diabetes travels with renal cysts, deafness, or a syndromic picture. Do not label every antibody-negative young adult as type 2 diabetes. The antibody result and the family pattern are what open this diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Think monogenic",
+     "points": [
+      "Diabetes before 6 months",
+      "Lean young adult, autosomal dominant family, negative islet antibodies",
+      "Diabetes with renal cysts, deafness, or a syndrome"
+     ]
+    },
+    "right": {
+     "title": "Do not assume type 2",
+     "points": [
+      "Antibody-negative is not the same as type 2",
+      "A syndromic partner changes the gene",
+      "Treatment can be a sulfonylurea or no drug at all"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**GCK-MODY** causes stable mild **fasting hyperglycemia**, often 100 to 144 mg/dL, that does not progress like type 2 diabetes and usually needs no treatment outside pregnancy. HbA1c remains near the top of the nondiabetic range for life. The glucokinase sensor is set high, so insulin is released at a higher glucose. Pregnancy is the situation that can change the no-treatment plan.",
+   "say": "GCK-MODY causes stable mild fasting hyperglycemia, often 100 to 144 mg/dL, that does not progress like type 2 diabetes and usually needs no treatment outside pregnancy. HbA1c remains near the top of the nondiabetic range for life. The glucokinase sensor is set high, so insulin is released at a higher glucose. Pregnancy is the situation that can change the no-treatment plan.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mody-fig1.webp",
+    "alt": "Beta cell with a glucose transporter, glucokinase as the glucose sensor, a nuclear transcription factor, and insulin granules.",
+    "caption": "A beta cell with its glucose transporter, glucokinase as the sensor, a nuclear transcription factor, and insulin secretory granules. GCK-MODY is the sensor set high. HNF1A-MODY is the transcription-factor side of the same drawing. Credit: StewardMD.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**HNF1A-MODY** is sensitive to a low-dose **sulfonylurea**, which is first-line drug therapy, and the diabetes progresses, unlike GCK-MODY. HNF4A-MODY is similar and also causes fetal macrosomia and neonatal hypoglycemia. **HNF1B** disease is diabetes plus renal cysts, genital malformations, and **hypomagnesemia**. The renal cysts are the clue that this is not HNF1A-MODY.",
+   "say": "HNF1A-MODY is sensitive to a low-dose sulfonylurea, which is first-line drug therapy, and the diabetes progresses, unlike GCK-MODY. HNF4A-MODY is similar and also causes fetal macrosomia and neonatal hypoglycemia. HNF1B disease is diabetes plus renal cysts, genital malformations, and hypomagnesemia. The renal cysts are the clue that this is not HNF1A-MODY.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gene",
+     "Treatment clue",
+     "Extra finding"
+    ],
+    "rows": [
+     [
+      "HNF1A-MODY",
+      "Low-dose sulfonylurea is first-line",
+      "It progresses, unlike GCK-MODY"
+     ],
+     [
+      "HNF4A-MODY",
+      "Also sulfonylurea sensitive",
+      "Fetal macrosomia and neonatal hypoglycemia"
+     ],
+     [
+      "HNF1B",
+      "Not a simple sulfonylurea story",
+      "Renal cysts, genital malformations, hypomagnesemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neonatal diabetes** that is diagnosed before 6 months is often a **KCNJ11** or **ABCC8** variant in the KATP channel. Many of these infants can be transferred from insulin to a **sulfonylurea**. Diabetes that starts after 6 to 12 months is much more often type 1. A sulfonylurea is considered after the channel gene is known, not for every infant on insulin.",
+   "say": "Neonatal diabetes that is diagnosed before 6 months is often a KCNJ11 or ABCC8 variant in the KATP channel. Many of these infants can be transferred from insulin to a sulfonylurea. Diabetes that starts after 6 to 12 months is much more often type 1. A sulfonylurea is considered after the channel gene is known, not for every infant on insulin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before 6 months",
+     "points": [
+      "Often KCNJ11 or ABCC8",
+      "Many infants move from insulin to a sulfonylurea",
+      "This is neonatal diabetes, not routine type 1"
+     ]
+    },
+    "right": {
+     "title": "After 6 to 12 months",
+     "points": [
+      "Much more often type 1",
+      "Islet antibodies matter",
+      "Do not promise a sulfonylurea switch"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Maternally inherited diabetes and deafness** is the mitochondrial variant m.3243A-G. **Metformin** is used cautiously because of the lactic acidosis risk in mitochondrial disease. Inheritance is maternal, so an affected father does not transmit it. Deafness plus diabetes on the mother's side is the pattern that should trigger this test.",
+   "say": "Maternally inherited diabetes and deafness is the mitochondrial variant m.3243A-G. Metformin is used cautiously because of the lactic acidosis risk in mitochondrial disease. Inheritance is maternal, so an affected father does not transmit it. Deafness plus diabetes on the mother's side is the pattern that should trigger this test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "m.3243A>G"
+    ],
+    "rows": [
+     [
+      "Name",
+      "Maternally inherited diabetes and deafness"
+     ],
+     [
+      "Metformin",
+      "Used cautiously, lactic acidosis risk"
+     ],
+     [
+      "Father affected",
+      "Does not transmit it"
+     ],
+     [
+      "Clue",
+      "Diabetes plus deafness on the mother's side"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Wolfram syndrome**, also called **DIDMOAD**, is diabetes insipidus, diabetes mellitus, **optic atrophy**, and deafness, from WFS1. Optic atrophy in a child with diabetes is not ordinary retinopathy. The optic disc is pale, which is a different finding from background retinal spots. Diabetes insipidus in the same child is part of the syndrome.",
+   "say": "Wolfram syndrome, also called DIDMOAD, is diabetes insipidus, diabetes mellitus, optic atrophy, and deafness, from WFS1. Optic atrophy in a child with diabetes is not ordinary retinopathy. The optic disc is pale, which is a different finding from background retinal spots. Diabetes insipidus in the same child is part of the syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wolfram syndrome",
+     "points": [
+      "DIDMOAD from WFS1",
+      "Optic atrophy, not ordinary retinopathy",
+      "Diabetes insipidus can be part of it"
+     ]
+    },
+    "right": {
+     "title": "Ordinary diabetic retinopathy",
+     "points": [
+      "Retinal vascular disease",
+      "Does not pale the disc as the first finding",
+      "Does not bring diabetes insipidus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Generalized **lipodystrophy** causes severe insulin resistance, low **leptin**, and hypertriglyceridemia. **Metreleptin** is replacement for generalized lipodystrophy. Finding almost no subcutaneous fat changes the treatment away from ordinary type 2 drugs. The drawing is acquired generalised lipodystrophy, and it does not show an injection of metreleptin.",
+   "say": "Generalized lipodystrophy causes severe insulin resistance, low leptin, and hypertriglyceridemia. Metreleptin is replacement for generalized lipodystrophy. Finding almost no subcutaneous fat changes the treatment away from ordinary type 2 drugs. The drawing is acquired generalised lipodystrophy, and it does not show an injection of metreleptin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acquired-generalized-lipodystrophy-fig1.webp",
+    "alt": "Acquired generalised lipodystrophy with subcutaneous fat loss, muscular prominence, acanthosis nigricans, and hepatic steatosis.",
+    "caption": "Acquired generalised lipodystrophy, spelled that way on the figure: subcutaneous fat loss, muscular prominence, acanthosis nigricans, and hepatic steatosis. Metreleptin is not drawn. Low leptin is the reason replacement is used in generalized lipodystrophy. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "New diabetes in an older thin adult can be the first sign of **pancreatic cancer**. Steroid hyperglycemia and post-transplant diabetes are secondary. **Cystic fibrosis-related diabetes** is treated with **insulin**, and screening is an annual OGTT from about age 10, not HbA1c alone. Weight loss with new diabetes is a reason to think of the pancreas.",
+   "say": "New diabetes in an older thin adult can be the first sign of pancreatic cancer. Steroid hyperglycemia and post-transplant diabetes are secondary. Cystic fibrosis-related diabetes is treated with insulin, and screening is an annual OGTT from about age 10, not HbA1c alone. Weight loss with new diabetes is a reason to think of the pancreas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "What to do"
+    ],
+    "rows": [
+     [
+      "Older thin adult, new diabetes",
+      "Consider pancreatic cancer"
+     ],
+     [
+      "Steroid or post-transplant diabetes",
+      "Secondary hyperglycemia"
+     ],
+     [
+      "Cystic fibrosis-related diabetes",
+      "Treat with insulin"
+     ],
+     [
+      "Screening in cystic fibrosis",
+      "Annual OGTT from about age 10, not HbA1c alone"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "sen-acromegaly",
+ "subject": "ss-endocrinology",
+ "title": "Acromegaly and gigantism",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Screen for acromegaly with an age-adjusted **IGF-1**. A random growth hormone does not diagnose or exclude the disease, because secretion is pulsatile. Confirm with an oral glucose tolerance test. Failure of the **growth hormone nadir** to fall below 1 mcg/L supports the diagnosis. A normal IGF-1 makes active acromegaly unlikely.",
+   "say": "Screen for acromegaly with an age-adjusted IGF-1. A random growth hormone does not diagnose or exclude the disease, because secretion is pulsatile. Confirm with an oral glucose tolerance test. Failure of the growth hormone nadir to fall below 1 mcg/L supports the diagnosis. A normal IGF-1 makes active acromegaly unlikely.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acromegaly-fig2.webp",
+    "alt": "Acromegaly diagram with a pituitary macroadenoma, IGF-1 from the liver, drug sites, and clinical features including colonic polyps.",
+    "caption": "The drawing states that failure to suppress growth hormone below 1 ng/mL on a glucose tolerance test supports the diagnosis, and that IGF-1 is the screening test. Some sensitive assays use a nadir below 0.4 mcg/L, which this drawing does not print. It also marks octreotide, lanreotide, and pegvisomant. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**Transsphenoidal surgery** is first-line treatment for most resectable somatotroph adenomas. A biochemical cure is a normal age-adjusted IGF-1 and a random growth hormone below 1 mcg/L. Tumour size on the scan is not the definition of cure. Headache and a change in ring or shoe size are clinical clues, but the laboratory defines remission.",
+   "say": "Transsphenoidal surgery is first-line treatment for most resectable somatotroph adenomas. A biochemical cure is a normal age-adjusted IGF-1 and a random growth hormone below 1 mcg/L. Tumour size on the scan is not the definition of cure. Headache and a change in ring or shoe size are clinical clues, but the laboratory defines remission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "After surgery",
+     "What counts as cure"
+    ],
+    "rows": [
+     [
+      "IGF-1",
+      "Normal for age"
+     ],
+     [
+      "Growth hormone",
+      "Random value below 1 mcg/L"
+     ],
+     [
+      "Not sufficient alone",
+      "A smaller tumour on MRI"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-acting somatostatin analogues, **octreotide** LAR and **lanreotide**, are used when surgery does not cure the disease. **Pasireotide** can control residual disease but often worsens hyperglycaemia. **Pegvisomant**, a growth hormone receptor antagonist, lowers IGF-1 by blocking the hepatic receptor and does not shrink the tumour the way a somatostatin analogue can.",
+   "say": "Long-acting somatostatin analogues, octreotide LAR and lanreotide, are used when surgery does not cure the disease. Pasireotide can control residual disease but often worsens hyperglycaemia. Pegvisomant, a growth hormone receptor antagonist, lowers IGF-1 by blocking the hepatic receptor and does not shrink the tumour the way a somatostatin analogue can.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Somatostatin analogues",
+     "points": [
+      "Octreotide LAR and lanreotide after failed surgery",
+      "Pasireotide can worsen hyperglycaemia",
+      "They act on the pituitary tumour",
+      "Tumour shrinkage is possible"
+     ]
+    },
+    "right": {
+     "title": "Pegvisomant",
+     "points": [
+      "Growth hormone receptor antagonist",
+      "Lowers IGF-1 from the liver",
+      "Does not rely on tumour shrinkage",
+      "Used when analogues do not control IGF-1"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acromegaly causes **cardiomyopathy**, **sleep apnea**, insulin resistance, carpal tunnel syndrome, and colonic neoplasia. **Colonoscopy** is indicated at diagnosis because the risk of colonic neoplasia is higher. Blood pressure and glucose are part of the same visit. Treating the hormone excess is what slows these complications.",
+   "say": "Acromegaly causes cardiomyopathy, sleep apnea, insulin resistance, carpal tunnel syndrome, and colonic neoplasia. Colonoscopy is indicated at diagnosis because the risk of colonic neoplasia is higher. Blood pressure and glucose are part of the same visit. Treating the hormone excess is what slows these complications.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acromegaly-fig1.webp",
+    "alt": "Pituitary adenoma with frontal bossing, mandibular prognathism, and an enlarged hand. The hand label is cut off at the edge.",
+    "caption": "Clinical face of acromegaly: frontal bossing, mandibular prognathism, and an enlarged hand beside a pituitary adenoma. The label on the hand is cut off at the edge, so it is not read as a complete caption. Credit: StewardMD.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Gigantism** is growth hormone excess before the epiphyses close, so linear height still increases. Very early childhood gigantism suggests **X-linked acrogigantism** from GPR101 duplication. Familial isolated pituitary adenoma often involves **AIP**, and those tumours present younger and are often larger and more resistant to treatment than sporadic adenomas.",
+   "say": "Gigantism is growth hormone excess before the epiphyses close, so linear height still increases. Very early childhood gigantism suggests X-linked acrogigantism from GPR101 duplication. Familial isolated pituitary adenoma often involves AIP, and those tumours present younger and are often larger and more resistant to treatment than sporadic adenomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pattern",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Gigantism",
+      "Growth hormone excess before the epiphyses close"
+     ],
+     [
+      "X-linked acrogigantism",
+      "Very early childhood, GPR101 duplication"
+     ],
+     [
+      "AIP",
+      "Familial adenoma, younger and harder to control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**McCune-Albright syndrome** and **Carney complex** are syndromic causes of growth hormone excess. Carney complex includes spotty skin pigmentation, cardiac myxomas, and primary pigmented nodular adrenocortical disease, with **PRKAR1A** variants. McCune-Albright syndrome is a mosaic GNAS disease with fibrous dysplasia and cafe-au-lait macules. Ask about both when acromegaly is not a simple sporadic adenoma.",
+   "say": "McCune-Albright syndrome and Carney complex are syndromic causes of growth hormone excess. Carney complex includes spotty skin pigmentation, cardiac myxomas, and primary pigmented nodular adrenocortical disease, with PRKAR1A variants. McCune-Albright syndrome is a mosaic GNAS disease with fibrous dysplasia and cafe-au-lait macules. Ask about both when acromegaly is not a simple sporadic adenoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "McCune-Albright syndrome",
+     "points": [
+      "Mosaic GNAS activation",
+      "Fibrous dysplasia",
+      "Cafe-au-lait macules",
+      "Autonomous endocrine hyperfunction"
+     ]
+    },
+    "right": {
+     "title": "Carney complex",
+     "points": [
+      "PRKAR1A variants",
+      "Spotty skin pigmentation",
+      "Cardiac myxomas",
+      "Pigmented nodular adrenal disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Headache, sweating, enlarging hands and feet, and a change in ring or shoe size are the clinical clues to **acromegaly**. A normal IGF-1 makes active disease unlikely and is the right test when the question is whether a suggestive face is the disease. Do not order a random growth hormone as that screen. Photograph the face only after the laboratory plan is clear.",
+   "say": "Headache, sweating, enlarging hands and feet, and a change in ring or shoe size are the clinical clues to acromegaly. A normal IGF-1 makes active disease unlikely and is the right test when the question is whether a suggestive face is the disease. Do not order a random growth hormone as that screen. Photograph the face only after the laboratory plan is clear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Question",
+     "Right test"
+    ],
+    "rows": [
+     [
+      "Is this face active acromegaly?",
+      "Age-adjusted IGF-1"
+     ],
+     [
+      "Random growth hormone",
+      "Does not screen and does not exclude"
+     ],
+     [
+      "If IGF-1 is high",
+      "Glucose tolerance test for the nadir"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diabetes** or hypertension that is hard to control in a patient with acral enlargement should trigger an IGF-1, not a random growth hormone. Residual disease after surgery is tracked with IGF-1, not with tumour size alone. A normal IGF-1 with a visible remnant can still be biochemical remission. Glucose often improves when IGF-1 falls, but the metabolic drugs still need their own review.",
+   "say": "Diabetes or hypertension that is hard to control in a patient with acral enlargement should trigger an IGF-1, not a random growth hormone. Residual disease after surgery is tracked with IGF-1, not with tumour size alone. A normal IGF-1 with a visible remnant can still be biochemical remission. Glucose often improves when IGF-1 falls, but the metabolic drugs still need their own review.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Track residual disease",
+     "points": [
+      "Age-adjusted IGF-1 is the marker",
+      "Tumour size alone does not define control",
+      "Growth hormone nadir is used at diagnosis",
+      "Diabetes may ease when IGF-1 falls"
+     ]
+    },
+    "right": {
+     "title": "Do not use",
+     "points": [
+      "A single random growth hormone as the screen",
+      "Imaging before a high IGF-1 is confirmed",
+      "Shoe size as a laboratory endpoint",
+      "HbA1c in place of IGF-1"
+     ]
+    }
+   }
+  }
+ ]
+}
