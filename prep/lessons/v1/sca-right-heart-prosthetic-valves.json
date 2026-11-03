@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "sca-right-heart-prosthetic-valves",
+ "subject": "ss-cardiology",
+ "title": "Tricuspid, pulmonary and prosthetic valve disease: hemodynamics, thrombosis and reintervention",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Severe **tricuspid regurgitation** is defined on echocardiography by a color Doppler vena contracta width >= 7 mm, effective regurgitant orifice area >= 40 mm2 (0.40 cm2), dense triangular continuous-wave Doppler jet with early peaking, and pathognomonic systolic flow reversal in the hepatic veins.",
+   "say": "Severe tricuspid regurgitation is defined by a color Doppler vena contracta width of at least seven millimetres, an effective regurgitant orifice area of forty square millimetres or greater, and systolic flow reversal in the hepatic veins on pulsed wave Doppler.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Echocardiographic Parameter",
+     "Mild TR",
+     "Severe TR"
+    ],
+    "rows": [
+     [
+      "Vena contracta width",
+      "< 3 mm",
+      ">= 7 mm"
+     ],
+     [
+      "Effective regurgitant orifice area",
+      "< 20 mm2",
+      ">= 40 mm2 (0.40 cm2)"
+     ],
+     [
+      "Hepatic vein flow pattern",
+      "Systolic forward flow",
+      "Systolic flow reversal"
+     ],
+     [
+      "Continuous-wave Doppler jet",
+      "Faint, parabolic envelope",
+      "Dense, early-peaking triangular contour"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Guideline-directed management of **severe secondary tricuspid regurgitation** mandates concomitant tricuspid valve surgery at the time of left-sided valve surgery when tricuspid annular diameter exceeds 40 mm (or > 21 mm/m2) even in the absence of severe regurgitation, to prevent progressive late annular dilation and right ventricular failure.",
+   "say": "Guidelines recommend concomitant tricuspid valve annuloplasty at the time of left-sided valve surgery when tricuspid annular diameter exceeds forty millimetres or twenty-one millimetres per square metre, even in the presence of mild or moderate regurgitation, to prevent late right ventricular failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Annular Dilatation >= 40 mm",
+     "points": [
+      "Concomitant tricuspid annuloplasty indicated during left-sided surgery to halt progressive RV decompensation."
+     ]
+    },
+    "right": {
+     "title": "Severe Symptomatic TR",
+     "points": [
+      "Isolated tricuspid surgery recommended before the onset of irreversible right ventricular systolic dysfunction."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mechanical prosthetic heart valves** require lifelong systemic anticoagulation with vitamin K antagonists (warfarin). Target international normalized ratio is 2.5 (range 2.0 to 3.0) for bileaflet aortic valves without risk factors, and 3.0 (range 2.5 to 3.5) for mechanical mitral valves or aortic valves with thromboembolic risk factors. Direct oral anticoagulants are strictly contraindicated.",
+   "say": "Mechanical prosthetic heart valves require lifelong oral anticoagulation with vitamin K antagonists. The target international normalized ratio is 2.5 for bileaflet aortic prostheses without risk factors, and 3.0 for mechanical mitral valves. Direct oral anticoagulants are strictly contraindicated. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prosthetic Position",
+     "Prosthesis Type",
+     "Target INR Range"
+    ],
+    "rows": [
+     [
+      "Aortic position",
+      "Bileaflet / modern tilting-disc",
+      "INR 2.5 (range 2.0 to 3.0)"
+     ],
+     [
+      "Aortic position",
+      "Older generation / caged-ball",
+      "INR 3.0 (range 2.5 to 3.5)"
+     ],
+     [
+      "Mitral position",
+      "Any mechanical valve",
+      "INR 3.0 (range 2.5 to 3.5)"
+     ],
+     [
+      "Mitral / Aortic",
+      "With AF, prior stroke, or thrombus",
+      "INR 3.0 (range 2.5 to 3.5) + low-dose aspirin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the landmark **RE-ALIGN trial**, the direct thrombin inhibitor dabigatran was compared with warfarin in mechanical heart valves. Dabigatran was associated with increased thromboembolic events, prosthetic valve thrombosis, and major bleeding, demonstrating that direct oral anticoagulants are strictly contraindicated in all mechanical valves.",
+   "say": "In the landmark RE-ALIGN trial, dabigatran was compared directly with warfarin in patients with mechanical heart valves. Dabigatran was associated with excess thromboembolic stroke, valve thrombosis, and major bleeding, establishing that direct oral anticoagulants are strictly contraindicated in all mechanical valves.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Warfarin (VKA)",
+     "points": [
+      "Inhibits factors II, VII, IX, X and proteins C/S; reliably suppresses contact pathway thrombosis on foreign titanium/carbon surfaces."
+     ]
+    },
+    "right": {
+     "title": "DOACs (Dabigatran, FXa-i)",
+     "points": [
+      "Strictly contraindicated; fail to suppress artificial surface contact-activated thrombin burst, causing fatal prosthetic thrombosis."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Obstructive **prosthetic valve thrombosis** presents with acute heart failure and muffled clicks. Transesophageal echocardiography and cinefluoroscopy differentiate thrombus (soft mass, mobility, low attenuation) from pannus (dense, immobile periannular ingrowth). In critically ill, hemodynamically unstable patients, emergency slow-infusion low-dose fibrinolysis or surgical redo is indicated.",
+   "say": "Obstructive prosthetic valve thrombosis manifests with acute pulmonary edema and loss of normal prosthetic clicks. Transesophageal echocardiography and fluoroscopy differentiate acute soft thrombus from fibrous pannus ingrowth. In critically ill unstable patients, emergency low-dose fibrinolysis or redo surgery is lifesaving.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Prosthetic Thrombus",
+     "Prosthetic Pannus"
+    ],
+    "rows": [
+     [
+      "Onset of symptoms",
+      "Acute, rapid decompensation",
+      "Indolent, gradual worsening"
+     ],
+     [
+      "INR at presentation",
+      "Frequently subtherapeutic",
+      "Typically therapeutic"
+     ],
+     [
+      "Ultrasound density",
+      "Soft, mobile, echoes < valve ring",
+      "Dense, highly reflective, immobile"
+     ],
+     [
+      "Primary therapy",
+      "Fibrinolysis or surgical thrombectomy",
+      "Surgical reoperation mandatory"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Patient-prosthesis mismatch** occurs when the effective orifice area of an inserted prosthetic valve is too small relative to the patient body size. Severe mismatch, defined as indexed effective orifice area <= 0.65 cm2/m2 in the aortic position or <= 0.90 cm2/m2 in the mitral position, causes elevated transprosthetic gradients and increases late mortality.",
+   "say": "Patient prosthesis mismatch occurs when the effective orifice area of an implanted valve is excessively small relative to patient body surface area. Severe aortic mismatch, defined as an indexed orifice area of 0.65 square centimetres per square metre or less, elevates gradients and increases late mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity Grade",
+     "Aortic Indexed EOA",
+     "Mitral Indexed EOA"
+    ],
+    "rows": [
+     [
+      "No mismatch",
+      "> 0.85 cm2/m2",
+      "> 1.20 cm2/m2"
+     ],
+     [
+      "Moderate mismatch",
+      "0.66 to 0.85 cm2/m2",
+      "0.91 to 1.20 cm2/m2"
+     ],
+     [
+      "Severe mismatch",
+      "<= 0.65 cm2/m2",
+      "<= 0.90 cm2/m2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bioprosthetic structural valve deterioration** develops over 10 to 15 years through progressive leaflet calcification, tearing, and stenosis. Management options for failed surgical bioprostheses include redo surgical valve replacement or transcatheter valve-in-valve implantation, which requires assessing coronary ostial height to prevent acute coronary obstruction.",
+   "say": "Bioprosthetic structural valve deterioration develops over ten to fifteen years secondary to progressive leaflet calcification and cusp tears. Therapeutic options for degenerated bioprostheses include reoperative surgery or percutaneous valve in valve implantation, with coronary height assessment to avoid obstruction. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Bioprosthetic Failure"
+     },
+     {
+      "id": "n2",
+      "label": "Coronary Height CT"
+     },
+     {
+      "id": "n3",
+      "label": "Low Risk: TAVR-in-Surg"
+     },
+     {
+      "id": "n4",
+      "label": "High Risk: Redo Surgery"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically significant **paravalvular leak** presents with progressive hemolytic anemia and heart failure due to high-shear erythrocyte mechanical trauma. Laboratory hallmarks include elevated serum LDH, undetectable haptoglobin, and schistocytes on peripheral blood smear. Transcatheter percutaneous plug closure or surgical reoperation is indicated for refractory hemolysis.",
+   "say": "Clinically significant paravalvular regurgitation presents with refractory hemolytic anemia and heart failure secondary to high shear erythrocyte disruption. Diagnostic laboratory findings include markedly elevated lactate dehydrogenase, undetectable haptoglobin, and abundant schistocytes on blood smear. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Marker",
+     "Diagnostic Finding",
+     "Pathophysiologic Basis"
+    ],
+    "rows": [
+     [
+      "Lactate dehydrogenase (LDH)",
+      "Markedly elevated (> 1000 IU/L)",
+      "Intravascular red cell lysis"
+     ],
+     [
+      "Serum haptoglobin",
+      "Undetectable (< 10 mg/dL)",
+      "Binding of free hemoglobin in plasma"
+     ],
+     [
+      "Peripheral blood smear",
+      "Schistocytes (helmet cells)",
+      "Mechanical shearing across paravalvular jet"
+     ],
+     [
+      "Urine hemosiderin",
+      "Positive hemosiderinuria",
+      "Chronic tubular iron deposition"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

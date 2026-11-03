@@ -1,101 +1,314 @@
 {
- "v": 1,
- "module": "sca-hfpef",
- "subject": "ss-cardiology",
- "title": "Heart failure with preserved ejection fraction: diagnosis, phenotypes and therapy",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**HFpEF** is heart failure with a left ventricular ejection fraction of 50% or more, with symptoms and signs plus objective evidence of raised filling pressures. It accounts for roughly half of all heart failure cases. Diagnosis rests on **transthoracic echocardiography**, which assesses diastolic function and structure. **Natriuretic peptides** support the diagnosis, but a normal level at rest does not exclude it, since exertional filling pressures may rise first. Exclude mimics such as valvular disease, especially aortic stenosis, and constrictive pericarditis.",
-   "say": "HFpEF is heart failure with a left ventricular ejection fraction of 50 percent or more, with symptoms and signs plus objective evidence of raised filling pressures. It accounts for roughly half of all heart failure cases. Diagnosis rests on transthoracic echocardiography, which assesses diastolic function and structure. Natriuretic peptides support the diagnosis, but a normal level at rest does not exclude it, since exertional filling pressures may rise first. Exclude mimics such as valvular disease, especially aortic stenosis, and constrictive pericarditis.",
-   "vis": null
-  },
-  {
-   "tx": "Obesity drives a distinct **obesity phenotype** of HFpEF, with systemic inflammation, microvascular dysfunction and right ventricular involvement that is more marked than in lean patients. Hypertension, older age, female sex and atrial fibrillation are also common. In African American and Hispanic patients, obesity and hypertension carry a disproportionate burden. Exercise haemodynamics can unmask early disease, with rising pulmonary capillary wedge pressure during exertion despite normal rest values.",
-   "say": "Obesity drives a distinct obesity phenotype of HFpEF, with systemic inflammation, microvascular dysfunction and right ventricular involvement that is more marked than in lean patients. Hypertension, older age, female sex and atrial fibrillation are also common. In African American and Hispanic patients, obesity and hypertension carry a disproportionate burden. Exercise haemodynamics can unmask early disease, with rising pulmonary capillary wedge pressure during exertion despite normal rest values.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Obesity phenotype",
-     "points": [
-      "Inflammation and microvascular dysfunction",
-      "Marked right ventricular involvement",
-      "Strong link with diabetes"
-     ]
+  "v": 1,
+  "module": "sca-hfpef",
+  "subject": "ss-cardiology",
+  "title": "Heart Failure with Preserved Ejection Fraction",
+  "minutes": 9,
+  "steps": [
+    {
+      "tx": "**HFpEF** represents a heterogeneous clinical syndrome manifesting with typical signs and symptoms of congestive heart failure in the presence of a **near-normal left ventricular** ejection fraction of at least **50%**. Diagnostic confirmation requires objective demonstration of elevated left ventricular filling pressures, elevated circulating natriuretic peptides, or structural remodeling including left ventricular hypertrophy and left atrial volume enlargement.",
+      "say": "HFpEF represents a heterogeneous clinical syndrome manifesting with typical signs and symptoms of congestive heart failure in the presence of a near-normal left ventricular ejection fraction of at least 50 percent. Diagnostic confirmation requires objective demonstration of elevated left ventricular filling pressures, elevated circulating natriuretic peptides, or structural remodeling including left ventricular hypertrophy and left atrial volume enlargement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Core Diagnostic Criterion",
+          "Clinical Metric",
+          "Diagnostic Threshold"
+        ],
+        "rows": [
+          [
+            "Left Ventricular Ejection Fraction",
+            "LVEF by echocardiography",
+            ">= 50% (preserved spectrum)"
+          ],
+          [
+            "Natriuretic Peptides (Sinus Rhythm)",
+            "Serum NT-proBNP / BNP",
+            "NT-proBNP >= 125 pg/mL or BNP >= 35 pg/mL"
+          ],
+          [
+            "Left Atrial Volume Index (LAVI)",
+            "2D transthoracic echocardiography",
+            "> 34 mL/m2 in sinus rhythm"
+          ],
+          [
+            "Left Ventricular Mass Index",
+            "Concentric LV hypertrophy",
+            ">= 115 g/m2 (men) or >= 95 g/m2 (women)"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Other HFpEF features",
-     "points": [
-      "Hypertension and older age",
-      "Female sex",
-      "Atrial fibrillation"
-     ]
+    {
+      "tx": "The validated **H2FPEF score** assists clinicians in calculating the pre-test probability of HFpEF among patients presenting with unexplained exertional dyspnea. The score incorporates **6** **clinical variables**: Heavy (BMI > **30** kg/m2, 2 points), Hypertensive (taking >= **2** antihypertensives, 1 point), Atrial Fibrillation (3 points), Pulmonary Hypertension (PASP > **35** mmHg, 1 point), Elder (age > **60** years, 1 point), and elevated Filling pressure (echocardiographic E/e' ratio > **9**, 1 point).",
+      "say": "The validated H2FPEF score assists clinicians in calculating the pre-test probability of HFpEF among patients presenting with unexplained exertional dyspnea. The score incorporates 6 clinical variables: Heavy with BMI over 30, Hypertensive on at least 2 medications, Atrial Fibrillation, Pulmonary Hypertension with pulmonary systolic pressure over 35, Elder age over 60 years, and elevated Filling pressure with E over e-prime ratio over 9.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "H2FPEF Variable",
+          "Clinical Definition",
+          "Points Allocated"
+        ],
+        "rows": [
+          [
+            "Heavy (Obesity)",
+            "Body Mass Index > 30 kg/m2",
+            "2 points"
+          ],
+          [
+            "Hypertensive",
+            "Treated with >= 2 antihypertensive medications",
+            "1 point"
+          ],
+          [
+            "Atrial Fibrillation",
+            "Paroxysmal or persistent AF history",
+            "3 points"
+          ],
+          [
+            "Pulmonary Hypertension",
+            "Echocardiographic PASP > 35 mmHg",
+            "1 point"
+          ],
+          [
+            "Elder",
+            "Age > 60 years",
+            "1 point"
+          ],
+          [
+            "Filling Pressure",
+            "Doppler E/e' ratio > 9",
+            "1 point"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Heart Failure Association consensus created the comprehensive **HFA-PEFF** **diagnostic algorithm** to standardize HFpEF diagnosis across clinical practice. The stepwise algorithm progresses through **4** structured stages: Step 1 Pre-test assessment in ambulatory clinic; Step 2 Comprehensive echocardiographic and biomarker functional scoring; Step 3 Functional testing via exercise stress echocardiography or invasive hemodynamics; and Step 4 Final etiological work-up to identify specific secondary causes.",
+      "say": "The Heart Failure Association consensus created the comprehensive HFA-PEFF diagnostic algorithm to standardize HFpEF diagnosis across clinical practice. The stepwise algorithm progresses through 4 structured stages: Step 1 Pre-test assessment in ambulatory clinic; Step 2 Comprehensive echocardiographic and biomarker functional scoring; Step 3 Functional testing via exercise stress echocardiography or invasive hemodynamics; and Step 4 Final etiological work-up to identify specific secondary causes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Step 1: Clinical assessment and initial signs"
+          },
+          {
+            "id": "b",
+            "label": "Step 2: Echo and biomarker score (>= 5 diagnostic)"
+          },
+          {
+            "id": "c",
+            "label": "Step 3: Functional exercise testing (if score 2-4)"
+          },
+          {
+            "id": "d",
+            "label": "Step 4: Etiological workup (amyloid, HCM, sarcoid)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "rule out alternative causes"
+          ],
+          [
+            "b",
+            "c",
+            "intermediate score evaluation"
+          ],
+          [
+            "c",
+            "d",
+            "confirmed HFpEF subtyping"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients with ambiguous non-invasive testing, invasive **exercise hemodynamics** represents the definitive diagnostic gold standard. Hemodynamic confirmation of HFpEF is definitively established during right heart catheterization when **PCWP** is at least **15** mmHg at rest, or surges to at least **25** mmHg during standardized supine cycle ergometry exercise. This profound exercise-induced wedge pressure escalation unmasks severe diastolic reserve exhaustion.",
+      "say": "In patients with ambiguous non-invasive testing, invasive exercise hemodynamics represents the definitive diagnostic gold standard. Hemodynamic confirmation of HFpEF is definitively established during right heart catheterization when PCWP is at least 15 mmHg at rest, or surges to at least 25 mmHg during standardized supine cycle ergometry exercise. This profound exercise-induced wedge pressure escalation unmasks severe diastolic reserve exhaustion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Hemodynamic Exercise Response",
+          "points": [
+            "Resting PCWP 6 to 12 mmHg",
+            "Exercise PCWP remains < 20 to 25 mmHg",
+            "Compliant left atrium accommodates increased return",
+            "Steep rise in stroke volume without pulmonary congestion"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic HFpEF Response",
+          "points": [
+            "Resting PCWP >= 15 mmHg (resting diagnostic)",
+            "Exercise PCWP >= 25 mmHg (exercise diagnostic)",
+            "Steep pressure rise due to non-compliant LV and LA",
+            "Triggers acute exertional dyspnea and alveolar transudate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sodium-glucose cotransporter-2 inhibitors provide a foundational breakthrough in the pharmacotherapy of HFpEF. Large randomized trials, including **EMPEROR-Preserved** evaluating **empagliflozin** and DELIVER evaluating dapagliflozin, demonstrated a significant twenty percent relative risk reduction in the primary composite endpoint of cardiovascular death or heart failure hospitalization across the preserved spectrum, making SGLT2 inhibitors the first guideline-directed Class I medical therapy for HFpEF.",
+      "say": "Sodium-glucose cotransporter-2 inhibitors provide a foundational breakthrough in the pharmacotherapy of HFpEF. Large randomized trials, including EMPEROR-Preserved evaluating empagliflozin and DELIVER evaluating dapagliflozin, demonstrated a significant twenty percent relative risk reduction in the primary composite endpoint of cardiovascular death or heart failure hospitalization across the preserved spectrum, making SGLT2 inhibitors the first guideline-directed Class I medical therapy for HFpEF.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Preserved LVEF heart failure diagnosed"
+          },
+          {
+            "id": "b",
+            "label": "Initiate Empagliflozin 10 mg or Dapagliflozin 10 mg daily"
+          },
+          {
+            "id": "c",
+            "label": "Promote osmotic diuresis, reduce epicardial adipose, improve energetics"
+          },
+          {
+            "id": "d",
+            "label": "20% reduction in cardiovascular death and HF hospitalization"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Class I guideline recommendation"
+          ],
+          [
+            "b",
+            "c",
+            "myocardial metabolic remodelling"
+          ],
+          [
+            "c",
+            "d",
+            "proven randomized clinical trial benefit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The mineralocorticoid receptor antagonist **spironolactone** plays a key role in selected patients with HFpEF. In the randomized multicentre **TOPCAT trial**, while overall global results were neutral, pre-specified regional subgroup analyses revealed that patients enrolled in the Americas experienced a significant reduction in heart failure hospitalizations and cardiovascular mortality. Spironolactone blunts aldosterone-mediated myocardial fibrosis and systemic vascular stiffness, improving diastolic left ventricular distensibility.",
+      "say": "The mineralocorticoid receptor antagonist spironolactone plays a key role in selected patients with HFpEF. In the randomized multicentre TOPCAT trial, while overall global results were neutral, pre-specified regional subgroup analyses revealed that patients enrolled in the Americas experienced a significant reduction in heart failure hospitalizations and cardiovascular mortality. Spironolactone blunts aldosterone-mediated myocardial fibrosis and systemic vascular stiffness, improving diastolic left ventricular distensibility.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TOPCAT Americas Subgroup",
+          "points": [
+            "Validated enrollment with true elevated natriuretic peptides",
+            "Spironolactone significantly reduced HF hospitalization",
+            "Hazard ratio 0.82 for primary composite endpoint",
+            "Supports Class IIb guideline recommendation"
+          ]
+        },
+        "right": {
+          "title": "TOPCAT Eastern Europe Subgroup",
+          "points": [
+            "Disproportionate clinical enrollment without elevated peptides",
+            "Undetectable drug metabolites in serum testing",
+            "Unusually low event rate resembling non-HF cohorts",
+            "Diluted global statistical power of the main trial"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Weight reduction is now a treatment target in **obese HFpEF**. Incretin-based agents, including **GLP-1 receptor agonists** and newer dual **GIP and GLP-1** agonists, have trial data showing better symptoms, exercise capacity and fewer heart failure events in this group. Their benefit may relate to weight loss and reduced inflammation. Loop **diuretics** remain the first choice for congestion, with **torsemide** often preferred for its more predictable oral absorption.",
+      "say": "Weight reduction is now a treatment target in obese HFpEF. Incretin-based agents, including GLP-1 receptor agonists and newer dual GIP and GLP-1 agonists, have trial data showing better symptoms, exercise capacity and fewer heart failure events in this group. Their benefit may relate to weight loss and reduced inflammation. Loop diuretics remain the first choice for congestion, with torsemide often preferred for its more predictable oral absorption.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-hfpef-fig1.webp",
+        "alt": "Diagram showing treatment for obese HFpEF, including weight reduction, incretin-based agents for weight loss and reduced inflammation, and loop diuretics for congestion.",
+        "caption": "Therapeutic approach for obese HFpEF: weight reduction, incretin-based agents, and diuretics for congestion",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Angiotensin receptor-neprilysin inhibitors provide therapeutic benefit in specific subcategories of preserved heart failure. In the landmark **PARAGON-HF** trial, the combination of **sacubitril/valsartan** narrowly missed overall statistical significance for the primary endpoint across the entire cohort. However, pre-specified subgroup analyses revealed significant therapeutic benefit with substantial reductions in heart failure hospitalizations among patients with left ventricular ejection fraction below **57%** and in female patients.",
+      "say": "Angiotensin receptor-neprilysin inhibitors provide therapeutic benefit in specific subcategories of preserved heart failure. In the landmark PARAGON-HF trial, the combination of sacubitril/valsartan narrowly missed overall statistical significance for the primary endpoint across the entire cohort. However, pre-specified subgroup analyses revealed significant therapeutic benefit with substantial reductions in heart failure hospitalizations among patients with left ventricular ejection fraction below 57 percent and in female patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify HFpEF patient with LVEF < 57% or female sex"
+          },
+          {
+            "id": "b",
+            "label": "Initiate Sacubitril / Valsartan therapy"
+          },
+          {
+            "id": "c",
+            "label": "Simultaneous neprilysin inhibition and AT1 receptor blockade"
+          },
+          {
+            "id": "d",
+            "label": "Decreased LV wall stress and reduction in HF hospitalizations"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "target responsive PARAGON-HF subgroup"
+          ],
+          [
+            "b",
+            "c",
+            "augments active natriuretic peptides"
+          ],
+          [
+            "c",
+            "d",
+            "alleviates diastolic congestion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Comorbidity management** represents the cornerstone of comprehensive clinical care in HFpEF. Effective management requires strict blood pressure normalization, cautious loop diuretic titration, and rhythm or rate control of atrial fibrillation. Furthermore, clinicians must maintain high clinical vigilance for specific HFpEF mimickers, especially wild-type or hereditary transthyretin **cardiac amyloidosis**, which can be definitively diagnosed non-invasively via bone scintigraphy and effectively treated with tafamidis.",
+      "say": "Comorbidity management provides the cornerstone of comprehensive clinical care in HFpEF. Effective management requires strict blood pressure normalization, cautious loop diuretic titration, and rhythm or rate control of atrial fibrillation. Furthermore, clinicians must maintain high clinical vigilance for specific HFpEF mimickers, especially wild-type or hereditary transthyretin cardiac amyloidosis, which can be definitively diagnosed non-invasively via bone scintigraphy and effectively treated with tafamidis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Target Comorbidity / Etiology",
+          "Pathophysiological Impact",
+          "Clinical Intervention"
+        ],
+        "rows": [
+          [
+            "Hypertension & Arterial Stiffness",
+            "Exaggerates systolic afterload and LV stiffness",
+            "SGLT2i, ARNI, ACEi/ARB, and MRA"
+          ],
+          [
+            "Atrial Fibrillation",
+            "Loss of atrial booster pump; rapid ventricular rates",
+            "Rate control, rhythm restoration, anticoagulation"
+          ],
+          [
+            "Obesity & SDB",
+            "Systemic microvascular inflammation and volume expansion",
+            "Lifestyle weight loss, GLP-1 receptor agonists, CPAP"
+          ],
+          [
+            "Cardiac Amyloidosis",
+            "Extracellular amyloid fibril infiltration",
+            "99mTc-PYP scintigraphy; Tafamidis therapy"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Start an **SGLT2 inhibitor** such as empagliflozin, which reduced heart failure hospitalisation in EMPEROR-Preserved and slowed renal decline. **Sacubitril-valsartan** in PARAGON-HF showed only a trend, so its benefit is less certain. Aim for a clinic systolic pressure below 130 mm Hg. For atrial fibrillation, use **rate control**, choosing diltiazem where a nondihydropyridine agent suits the patient.",
-   "say": "Start a sodium-glucose cotransporter two inhibitor such as empagliflozin, which reduced heart failure hospitalisation in EMPEROR-Preserved and slowed renal decline. Sacubitril-valsartan in PARAGON-HF showed only a trend, so its benefit is less certain. Aim for a clinic systolic pressure below 130 millimetres of mercury. For atrial fibrillation, use rate control, choosing diltiazem where a nondihydropyridine agent suits the patient.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Agent",
-     "Trial or use",
-     "Key message"
-    ],
-    "rows": [
-     [
-      "Empagliflozin",
-      "EMPEROR-Preserved",
-      "Fewer hospitalisations, slower renal decline"
-     ],
-     [
-      "Sacubitril-valsartan",
-      "PARAGON-HF",
-      "Trend only, less certain"
-     ],
-     [
-      "Diltiazem",
-      "Rate control in AF",
-      "Nondihydropyridine option"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Weight reduction is now a treatment target in **obese HFpEF**. Incretin-based agents, including **GLP-1 receptor agonists** and newer dual **GIP and GLP-1** agonists, have trial data showing better symptoms, exercise capacity and fewer heart failure events in this group. Their benefit may relate to weight loss and reduced inflammation. Loop **diuretics** remain the first choice for congestion, with **torsemide** often preferred for its more predictable oral absorption.",
-   "say": "Weight reduction is now a treatment target in obese HFpEF. Incretin-based agents, including GLP-1 receptor agonists and newer dual GIP and GLP-1 agonists, have trial data showing better symptoms, exercise capacity and fewer heart failure events in this group. Their benefit may relate to weight loss and reduced inflammation. Loop diuretics remain the first choice for congestion, with torsemide often preferred for its more predictable oral absorption.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-hfpef-fig1.webp",
-    "alt": "Diagram showing treatment for obese HFpEF, including weight reduction, incretin-based agents for weight loss and reduced inflammation, and loop diuretics for congestion.",
-    "caption": "Therapeutic approach for obese HFpEF: weight reduction, incretin-based agents, and diuretics for congestion",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_1df2318be841",
-  "q_c8094fdd3a70",
-  "q_7fb1e985b356"
- ],
- "src": [],
- "refs": [
-  "Heidenreich PA et al. 2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 41
- }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }

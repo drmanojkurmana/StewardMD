@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "sca-hfref-therapy",
+ "subject": "ss-cardiology",
+ "title": "Heart failure with reduced ejection fraction: four guideline pillars and advanced device therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The four foundational pillars of **guideline-directed medical therapy** for heart failure with reduced ejection fraction comprise ARNI or ACEi, evidence-based beta-blockers, mineralocorticoid receptor antagonists, and SGLT2 inhibitors. Initiated concurrently at low doses and titrated rapidly within 4 to 6 weeks, quadruple therapy significantly reduces cardiovascular death and all-cause mortality.",
+   "say": "The four foundational pillars of guideline directed medical therapy for heart failure with reduced ejection fraction comprise an angiotensin receptor neprilysin inhibitor, an evidence based beta blocker, a mineralocorticoid receptor antagonist, and a sodium glucose cotransporter 2 inhibitor. Early initiation reduces cardiovascular mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pillar Class",
+     "Target Agents",
+     "Mortality Reduction"
+    ],
+    "rows": [
+     [
+      "ARNI / ACEi",
+      "Sacubitril-valsartan",
+      "PARADIGM-HF 20% relative risk reduction"
+     ],
+     [
+      "Beta-blocker",
+      "Carvedilol, metoprolol succinate, bisoprolol",
+      "34% relative mortality reduction"
+     ],
+     [
+      "MRA",
+      "Spironolactone, eplerenone",
+      "30% mortality reduction in RALES and EMPHASIS-HF"
+     ],
+     [
+      "SGLT2 inhibitor",
+      "Dapagliflozin, empagliflozin",
+      "DAPA-HF and EMPEROR-Reduced mortality benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sacubitril/valsartan** proved superior to enalapril in the landmark PARADIGM-HF trial, demonstrating a 20% relative risk reduction in the primary composite endpoint of cardiovascular death or heart failure hospitalization. Switching from an ACE inhibitor to sacubitril/valsartan requires a mandatory 36-hour washout period to prevent bradykinin-mediated life-threatening angioedema.",
+   "say": "Sacubitril valsartan demonstrated a twenty percent relative risk reduction in cardiovascular death or heart failure hospitalization compared to enalapril in the PARADIGM-HF trial. When transitioning from an angiotensin converting enzyme inhibitor to sacubitril valsartan, a mandatory thirty-six hour washout period is strictly required to avert life-threatening angioedema.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sacubitril/Valsartan",
+     "points": [
+      "Dual neprilysin inhibitor and ARB; augments natriuretic peptides while blocking AT1 receptors, 20% death/HF reduction."
+     ]
+    },
+    "right": {
+     "title": "ACE Inhibitor Washout",
+     "points": [
+      "Mandatory 36-hour gap between stopping ACEi and starting ARNI to avoid catastrophic angioedema from dual breakdown block."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**SGLT2 inhibitors**, dapagliflozin and empagliflozin, reduce heart failure hospitalizations and cardiovascular mortality in heart failure with reduced ejection fraction regardless of the presence of type 2 diabetes mellitus. Cardiorenal protective benefits stem from osmotic diuresis, reduction of ventricular preload and afterload, enhanced cardiac energetics, and preservation of glomerular filtration.",
+   "say": "Sodium glucose cotransporter 2 inhibitors, specifically dapagliflozin and empagliflozin, substantially reduce heart failure hospitalizations and cardiovascular mortality in reduced ejection fraction heart failure irrespective of diabetic status. Benefits arise from osmotic diuresis, preload and afterload reduction, and improved myocardial energetics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "SGLT2 Inhibition"
+     },
+     {
+      "id": "n2",
+      "label": "Natriuresis & Diuresis"
+     },
+     {
+      "id": "n3",
+      "label": "Preload & Afterload Drop"
+     },
+     {
+      "id": "n4",
+      "label": "Reduced Mortality"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mineralocorticoid receptor antagonists**, spironolactone and eplerenone, confer substantial survival benefit in HFrEF with LVEF <= 35% and NYHA class II to IV symptoms. Prescribing criteria require baseline serum potassium < 5.0 mEq/L and estimated glomerular filtration rate > 30 mL/min/1.73 m2, accompanied by rigorous biochemical monitoring to prevent life-threatening hyperkalemia.",
+   "say": "Mineralocorticoid receptor antagonists, including spironolactone and eplerenone, confer mortality reduction in reduced ejection fraction heart failure with ejection fraction up to 35 percent. Safe initiation requires baseline serum potassium below 5.0 milliequivalents per litre and estimated glomerular filtration rate exceeding 30 millilitres per minute.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Safety Threshold",
+     "Cutoff Value",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Baseline Serum Potassium",
+      "< 5.0 mEq/L",
+      "Excludes preexisting hyperkalemia prior to MRA"
+     ],
+     [
+      "Estimated GFR",
+      "> 30 mL/min/1.73m2",
+      "Avoids drug accumulation and severe renal impairment"
+     ],
+     [
+      "Post-initiation Check",
+      "At 1, 4, and 12 weeks",
+      "Monitors potassium and creatinine rises"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cardiac resynchronization therapy** is indicated as a Class I recommendation for patients with symptomatic heart failure in sinus rhythm, LVEF <= 35% despite optimal medical therapy, and complete left bundle branch block with QRS duration >= 150 ms. Biventricular pacing restores mechanical dyssynchrony, reverses left ventricular remodeling, and significantly prolongs survival.",
+   "say": "Cardiac resynchronization therapy is indicated as a Class I recommendation for symptomatic heart failure patients in sinus rhythm with left ventricular ejection fraction up to 35 percent despite medical therapy, who display complete left bundle branch block with QRS duration of at least 150 milliseconds. Biventricular pacing improves survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Class I CRT Indication",
+     "points": [
+      "Sinus rhythm, LVEF <= 35%, NYHA II-IV, complete LBBB morphology with QRS duration >= 150 ms."
+     ]
+    },
+    "right": {
+     "title": "Non-LBBB Morphology",
+     "points": [
+      "Class IIa/IIb indication; lower response rate and benefit observed compared to classical LBBB dyssynchrony."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An **implantable cardioverter-defibrillator** is indicated for primary prevention of sudden cardiac death in ischemic cardiomyopathy with LVEF <= 35% at least 40 days post-MI and after 90 days of optimal medical therapy, or in nonischemic cardiomyopathy after 90 days of medical therapy with functional class NYHA II or III.",
+   "say": "An implantable cardioverter defibrillator is indicated for primary prevention of sudden cardiac death in ischemic cardiomyopathy with ejection fraction up to 35 percent, at least 40 days following myocardial infarction and after 90 days of medical therapy, or in nonischemic cardiomyopathy after 90 days of medical therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiology",
+     "Timing Restriction",
+     "Class of Recommendation"
+    ],
+    "rows": [
+     [
+      "Ischemic Cardiomyopathy",
+      ">= 40 days post-MI, >= 90 days on GDMT",
+      "Class I, LVEF <= 35%"
+     ],
+     [
+      "Nonischemic Dilated CM",
+      ">= 90 days on guideline medical therapy",
+      "Class I, LVEF <= 35%"
+     ],
+     [
+      "Secondary Prevention",
+      "Prior sustained VT/VF arrest",
+      "Class I, regardless of LVEF"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vericiguat** functions as an oral soluble guanylate cyclase stimulator that directly augments cyclic guanosine monophosphate synthesis independently of endogenous nitric oxide. In the VICTORIA trial of worsening high-risk HFrEF with recent hospitalization, vericiguat reduced cardiovascular death or heart failure hospitalization without precipitating severe renal failure.",
+   "say": "Vericiguat functions as an oral soluble guanylate cyclase stimulator that directly enhances cyclic guanosine monophosphate production independently of endogenous nitric oxide availability. Evaluated in the VICTORIA trial among worsening heart failure patients with recent decompensation, vericiguat reduced cardiovascular death and rehospitalization.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "NO Deficiency in HF"
+     },
+     {
+      "id": "n2",
+      "label": "Soluble Guanylate Cyclase"
+     },
+     {
+      "id": "n3",
+      "label": "cGMP Generation"
+     },
+     {
+      "id": "n4",
+      "label": "Myocardial Relaxation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iron deficiency in heart failure, defined as **ferritin < 100 ng/mL** or ferritin 100 to 299 ng/mL with transferrin saturation < 20%, causes severe skeletal muscle bioenergetic impairment. Intravenous ferric carboxymaltose or ferric derisomaltose significantly improves functional capacity, quality of life, and reduces recurrent hospitalizations, whereas oral iron is entirely ineffective.",
+   "say": "Iron deficiency in heart failure, defined as serum ferritin below 100 nanograms per millilitre or ferritin between 100 and 299 with transferrin saturation below 20 percent, impairs cellular bioenergetics. Intravenous iron repletion with ferric carboxymaltose significantly improves exercise capacity and decreases hospital admissions, whereas oral iron is ineffective.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intravenous Iron Formulations",
+     "points": [
+      "Ferric carboxymaltose / derisomaltose bypasses hepcidin-blocked gut absorption, replenishing stores and improving symptoms."
+     ]
+    },
+    "right": {
+     "title": "Oral Iron Therapy",
+     "points": [
+      "Ineffective in chronic heart failure due to chronic systemic inflammation, elevated circulating hepcidin, and poor mucosal uptake."
+     ]
+    }
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

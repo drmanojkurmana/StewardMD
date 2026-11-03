@@ -3,7 +3,7 @@
   "module": "son-pharmacogenomics",
   "subject": "ss-medical-oncology",
   "title": "Pharmacogenomics and drug interactions in oncology: genetic polymorphisms, dosing adjustments and supportive care",
-  "minutes": 5,
+  "minutes": 9,
   "steps": [
     {
       "tx": "Inherited **dihydropyrimidine dehydrogenase** deficiency and clinical **DPYD deficiency** dramatically impair the catabolism of fluoropyrimidines including fluorouracil and capecitabine. In homozygous or compound heterozygous DPYD deficient patients, standard antineoplastic doses provoke lethal myelosuppression, severe gastrointestinal mucositis, and neurotoxicity. Prospective genotyping for actionable DPYD variants such as DPYD*2A mandates significant upfront **dose reduction** or complete therapeutic avoidance.",
@@ -147,6 +147,17 @@
             "er"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Strong **CYP3A4** inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
+      "say": "Strong CYP3A4 inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-pharmacogenomics-fig1.webp",
+        "alt": "Diagram showing how CYP enzyme inhibitors affect substrate drug metabolism, leading to increased drug levels and toxicity, or reduced active metabolite levels and decreased efficacy.",
+        "caption": "CYP-mediated drug interactions: impact on drug levels and clinical outcomes",
+        "ar": 1.8349
       }
     },
     {

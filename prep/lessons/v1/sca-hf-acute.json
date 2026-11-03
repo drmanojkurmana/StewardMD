@@ -1,173 +1,277 @@
 {
- "v": 1,
- "module": "sca-hf-acute",
- "subject": "ss-cardiology",
- "title": "Management of Acute Decompensated Heart Failure",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Acute heart failure requires immediate assessment of **perfusion** and **congestion**. Clinicians classify patients into four profiles using clinical signs like JVP, orthopnoea, and cold peripheries. The warm-wet profile is the most common presentation. Determining these profiles is critical as they dictate the initial management strategy, including the use of diuretics, vasodilators, or inotropes.",
-   "say": "Clinicians assess perfusion and congestion to classify heart failure patients into four clinical profiles. The warm and wet profile is most frequent. This classification is vital for deciding on the use of diuretics, vasodilators, or inotropes.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Profile",
-     "Perfusion",
-     "Congestion",
-     "Treatment"
-    ],
-    "rows": [
-     [
-      "Warm-Wet",
-      "Warm",
-      "Wet",
-      "Diuretic/Vasodilator"
-     ],
-     [
-      "Warm-Dry",
-      "Warm",
-      "Dry",
-      "Adjust oral meds"
-     ],
-     [
-      "Cold-Wet",
-      "Cold",
-      "Wet",
-      "Inotrope/Diuretic"
-     ],
-     [
-      "Cold-Dry",
-      "Cold",
-      "Dry",
-      "Fluid challenge"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Initial management focuses on stabilisation. Use non-invasive ventilation for respiratory distress to reduce the need for intubation. Administer IV loop diuretics promptly for congestion, using a dose one to two times the patient's total daily oral dose. For patients with a systolic blood pressure above 110 mmHg, IV **nitrates** serve as effective vasodilators.",
-   "say": "Stabilisation involves using non-invasive ventilation for respiratory distress to prevent intubation. Give intravenous loop diuretics for congestion at one to two times the daily oral dose. Use intravenous nitrates for patients with a systolic blood pressure over one hundred and ten.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-hf-acute-fig1.webp",
-    "alt": "Flowchart showing initial management of acute heart failure, including non-invasive ventilation, IV loop diuretics, and IV nitrates.",
-    "caption": "Initial stabilization for acute decompensated heart failure",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Natriuretic peptides are essential diagnostic tools. Levels of **BNP** below 100 pg/mL or NT-proBNP below 300 pg/mL make acute heart failure unlikely. Conversely, values may be elevated due to age, chronic kidney disease, or atrial fibrillation. Obesity typically results in lower peptide concentrations.",
-   "say": "Natriuretic peptides help rule out heart failure. BNP below one hundred or NT-proBNP below three hundred makes the diagnosis unlikely. Remember that age, kidney disease, and atrial fibrillation increase these levels, while obesity decreases them.",
-   "vis": null
-  },
-  {
-   "tx": "Effective decongestion requires monitoring the response to loop diuretics. Inadequate response is marked by low urine output or low spot urine sodium. If congestion persists, clinicians should employ **sequential nephron blockade** by adding acetazolamide or a thiazide. A slight rise in creatinine during successful decongestion is acceptable and should not lead to stopping diuretic therapy.",
-   "say": "Monitor diuretic response using urine output and sodium levels. If response is poor, add acetazolamide or thiazides for sequential nephron blockade. Do not stop diuretics for a mild rise in creatinine if the patient is still congested.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "1",
-      "label": "Initial IV Diuretic"
-     },
-     {
-      "id": "2",
-      "label": "Assess Response"
-     },
-     {
-      "id": "3",
-      "label": "Escalate Dose"
-     },
-     {
-      "id": "4",
-      "label": "Sequential Blockade"
-     }
-    ],
-    "edges": [
-     [
-      "1",
-      "2"
-     ],
-     [
-      "2",
-      "3",
-      "Poor response"
-     ],
-     [
-      "3",
-      "4",
-      "Persistent congestion"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Use **inotropes** only for patients presenting with hypotension and hypoperfusion. Administer the lowest effective dose for the briefest period. Avoid these agents in normotensive individuals. For refractory cases, add **noradrenaline** as the preferred vasopressor. Ensure patients receive **intensive care** and monitoring when requiring these interventions for **cardiogenic shock**.",
-   "say": "Use inotropes only for patients presenting with hypotension and hypoperfusion. Administer the lowest effective dose for the briefest period. Avoid these agents in normotensive individuals. For refractory cases, add noradrenaline as the preferred vasopressor. Ensure patients receive intensive care and monitoring when requiring these interventions for cardiogenic shock.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "1",
-      "label": "Hypotension + Hypoperfusion"
-     },
-     {
-      "id": "2",
-      "label": "Inotrope"
-     },
-     {
-      "id": "3",
-      "label": "Refractory Hypotension"
-     },
-     {
-      "id": "4",
-      "label": "Noradrenaline"
-     }
-    ],
-    "edges": [
-     [
-      "1",
-      "2",
-      "start"
-     ],
-     [
-      "2",
-      "3",
-      "if persistent"
-     ],
-     [
-      "3",
-      "4",
-      "add"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Before discharge, patients must be euvolaemic and stable on oral medication for at least 24 hours. A key aspect of care is the initiation and rapid titration of **foundational therapy**, including SGLT2 inhibitors, beta-blockers, and MRAs. Reviewing the patient within one to two weeks post-discharge is vital to ensure long-term stability and prevent readmission.",
-   "say": "Discharge patients only when euvolaemic and stable on oral drugs for twenty-four hours. Initiate foundational therapies like SGLT2 inhibitors and beta-blockers quickly. Schedule a follow-up review within two weeks of discharge to maintain stability.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_740ee84fe6bb",
-  "q_8390da83e2f2",
-  "q_13d82549baeb"
- ],
- "src": [
-  "kb-acute-heart-failure"
- ],
- "gen": "AI",
- "run": "lessons-202610060812",
- "model": "gemini-3.1-flash-lite",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "selfCheck": true,
-  "redone": 1,
-  "dropped": 0,
-  "bank": "v2"
- }
+  "v": 1,
+  "module": "sca-hf-acute",
+  "subject": "ss-cardiology",
+  "title": "Acute Decompensated Heart Failure and Cardiogenic Shock",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **Universal Definition** of Heart Failure classifies patients based on ejection fraction into **HFrEF** with LVEF at most **40%**, **HFmrEF** with LVEF **41%** to **49%**, and **HFpEF** with LVEF at least **50%**. This standardized phenotypic stratification determines evidence-based medical therapy and identifies unique pathophysiological mechanisms.",
+      "say": "The Universal Definition of Heart Failure classifies patients based on ejection fraction into HFrEF with LVEF at most 40%, HFmrEF with LVEF 41% to 49%, and HFpEF with LVEF at least 50%. This standardized phenotypic stratification determines evidence-based medical therapy and identifies unique pathophysiological mechanisms.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "HF Phenotype Category",
+          "LVEF Diagnostic Range",
+          "Evidence-Based Management"
+        ],
+        "rows": [
+          [
+            "HFrEF (Reduced EF)",
+            "≤  40%",
+            "Four foundational pillars (ARNI, BB, MRA, SGLT2i)"
+          ],
+          [
+            "HFmrEF (Mildly Reduced)",
+            "41% to 49%",
+            "SGLT2 inhibitors and neurohormonal antagonists"
+          ],
+          [
+            "HFpEF (Preserved EF)",
+            "≥  50%",
+            "SGLT2 inhibitors, diuretics, treat comorbidities"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Nohria-Stevenson** clinical classification categorizes acute decompensated heart failure into **4** hemodynamic profiles: Warm-Dry, **Warm-Wet**, Cold-Dry, and **Cold-Wet**. The Warm-Wet presentation represents well-perfused congestion, whereas the Cold-Wet profile reflects profound systemic hypoperfusion combined with elevated pulmonary capillary wedge pressure requiring urgent vasoactive support.",
+      "say": "The Nohria-Stevenson clinical classification categorizes acute decompensated heart failure into 4 hemodynamic profiles: Warm-Dry, Warm-Wet, Cold-Dry, and Cold-Wet. The Warm-Wet presentation represents well-perfused congestion, whereas the Cold-Wet profile reflects profound systemic hypoperfusion combined with elevated pulmonary capillary wedge pressure requiring urgent vasoactive support.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Warm-Wet Profile (Congested / Well-Perfused)",
+          "points": [
+            "Accounts for > 70% of acute heart failure admissions",
+            "Elevated JVP, orthopnea, bilateral pulmonary crackles",
+            "Warm extremities with normal capillary refill time",
+            "Managed with IV loop diuretics and vasodilators"
+          ]
+        },
+        "right": {
+          "title": "Cold-Wet Profile (Congested / Hypoperfused)",
+          "points": [
+            "Severe cardiogenic decompensation and shock risk",
+            "Cool extremities, narrow pulse pressure, elevated lactate",
+            "Elevated filling pressures with low cardiac output",
+            "Requires inotropes, vasopressors, or mechanical support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "B-type **natriuretic peptide** cutoff < **100** pg/mL and **NT-proBNP** cutoff < **300** pg/mL have a negative predictive value > **95%** for excluding acute decompensated heart failure in dyspneic emergency patients. Markedly elevated natriuretic peptides reflect ventricular wall stretch, guiding urgent clinical diagnosis.",
+      "say": "B-type natriuretic peptide cutoff less than 100 pg/mL and NT-proBNP cutoff less than 300 pg/mL have a negative predictive value greater than 95% for excluding acute decompensated heart failure in dyspneic emergency patients. Markedly elevated natriuretic peptides reflect ventricular wall stretch, guiding urgent clinical diagnosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biomarker Assay",
+          "Rule-Out Cutoff (< Value)",
+          "Age-Stratified Rule-In Cutoffs for Acute HF"
+        ],
+        "rows": [
+          [
+            "BNP",
+            "< 100 pg/mL",
+            "≥  400 pg/mL (all adult ages)"
+          ],
+          [
+            "NT-proBNP (< 50 years)",
+            "< 300 pg/mL",
+            "≥  450 pg/mL"
+          ],
+          [
+            "NT-proBNP (50-75 years)",
+            "< 300 pg/mL",
+            "≥  900 pg/mL"
+          ],
+          [
+            "NT-proBNP (> 75 years)",
+            "< 300 pg/mL",
+            "≥  1800 pg/mL"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intravenous **loop diuretics** such as **furosemide** in acute decompensated heart failure are administered at **1** to **2.5** times the daily oral home dose to achieve effective decongestion as established in the DOSE trial. Early natriuretic assessment at two hours directs subsequent diuretic dose doubling in resistant states.",
+      "say": "Intravenous loop diuretics such as furosemide in acute decompensated heart failure are administered at 1 to 2 point 5 times the daily oral home dose to achieve effective decongestion as established in the DOSE trial. Early natriuretic assessment at two hours directs subsequent diuretic dose doubling in resistant states.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute Heart Failure Presentation with Volume Overload"
+          },
+          {
+            "id": "b",
+            "label": "Administer IV Furosemide at 1 to 2.5 Times Home Oral Dose"
+          },
+          {
+            "id": "c",
+            "label": "Check 2-Hour Spot Urine Sodium (Target > 50-70 mEq/L)"
+          },
+          {
+            "id": "d",
+            "label": "If Suboptimal: Double IV Diuretic Dose or Add Thiazide"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Initial bolus dosing"
+          ],
+          [
+            "b",
+            "c",
+            "Early response assessment"
+          ],
+          [
+            "c",
+            "d",
+            "Overcome diuretic resistance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Initial management focuses on stabilisation. Use non-invasive ventilation for respiratory distress to reduce the need for intubation. Administer IV loop diuretics promptly for congestion, using a dose one to two times the patient's total daily oral dose. For patients with a systolic blood pressure above 110 mmHg, IV **nitrates** serve as effective vasodilators.",
+      "say": "Stabilisation involves using non-invasive ventilation for respiratory distress to prevent intubation. Give intravenous loop diuretics for congestion at one to two times the daily oral dose. Use intravenous nitrates for patients with a systolic blood pressure over one hundred and ten.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-hf-acute-fig1.webp",
+        "alt": "Flowchart showing initial management of acute heart failure, including non-invasive ventilation, IV loop diuretics, and IV nitrates.",
+        "caption": "Initial stabilization for acute decompensated heart failure",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Inotropic therapy in cardiogenic shock utilizes **dobutamine** which stimulates beta-**1** adrenergic receptors, or **milrinone** which inhibits phosphodiesterase-**3**, augmenting contractility at the expense of higher myocardial oxygen demand. Milrinone provides balanced peripheral vasodilation, proving advantageous in patients receiving chronic beta-blocker therapy. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Inotropic therapy in cardiogenic shock utilizes dobutamine which stimulates beta-1 adrenergic receptors, or milrinone which inhibits phosphodiesterase-3, augmenting contractility at the expense of higher myocardial oxygen demand. Milrinone provides balanced peripheral vasodilation, proving advantageous in patients receiving chronic beta-blocker therapy. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dobutamine Inotrope",
+          "points": [
+            "Beta-1 and beta-2 adrenergic receptor agonist",
+            "Rapid onset and short 2-minute half-life",
+            "May provoke sinus tachycardia and ventricular ectopy",
+            "Hepatic clearance (safe in renal dysfunction)"
+          ]
+        },
+        "right": {
+          "title": "Milrinone Inodilator",
+          "points": [
+            "Phosphodiesterase-3 intracellular enzyme inhibitor",
+            "Bypasses down-regulated beta-adrenergic receptors",
+            "Reduces pulmonary vascular resistance and afterload",
+            "Eliminated by kidneys; requires dose adjustment in CKD"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intravenous vasodilators including **nitroglycerin** and sodium **nitroprusside** rapidly reduce preload and afterload in acute hypertensive pulmonary edema, lowering left ventricular filling pressures without compromising renal filtration. Nitroglycerin acts predominantly as a venodilator at low doses, while nitroprusside achieves balanced arterial and venous vasodilation.",
+      "say": "Intravenous vasodilators including nitroglycerin and sodium nitroprusside rapidly reduce preload and afterload in acute hypertensive pulmonary edema, lowering left ventricular filling pressures without compromising renal filtration. Nitroglycerin acts predominantly as a venodilator at low doses, while nitroprusside achieves balanced arterial and venous vasodilation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intravenous Nitroglycerin",
+          "points": [
+            "Predominant venodilation reducing preload and PCWP",
+            "Coronary vasodilation relieves myocardial ischemia",
+            "Rapid titration with short duration of action",
+            "Tachyphylaxis develops with infusions exceeding 24-48 hours"
+          ]
+        },
+        "right": {
+          "title": "Sodium Nitroprusside",
+          "points": [
+            "Equipotent arterial and venous vasodilation",
+            "Dramatically reduces afterload in severe hypertension",
+            "Light-sensitive; risk of thiocyanate and cyanide toxicity",
+            "Requires continuous arterial line blood pressure monitoring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cardiorenal syndrome** type **1** describes acute kidney injury resulting directly from acute cardiac decompensation, driven predominantly by renal **venous congestion** and high central venous pressure rather than reduced forward arterial output. Elevated renal venous pressure compresses intrarenal parenchymal vessels, impeding glomerular filtration.",
+      "say": "Cardiorenal syndrome type 1 describes acute kidney injury resulting directly from acute cardiac decompensation, driven predominantly by renal venous congestion and high central venous pressure rather than reduced forward arterial output. Elevated renal venous pressure compresses intrarenal parenchymal vessels, impeding glomerular filtration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute Right and Left Heart Decompensation"
+          },
+          {
+            "id": "b",
+            "label": "Severe Elevation in Central Venous and Renal Venous Pressure"
+          },
+          {
+            "id": "c",
+            "label": "Renal Parenchymal Congestion and Reduced Transglomerular Gradient"
+          },
+          {
+            "id": "d",
+            "label": "Type 1 Cardiorenal Syndrome: Decongestion Restores GFR"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Retrograde transmission of filling pressure"
+          ],
+          [
+            "b",
+            "c",
+            "Renal tamponade physiology"
+          ],
+          [
+            "c",
+            "d",
+            "Relieve congestion with loop diuretics"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Levosimendan** is a calcium-sensitizing inodilator that enhances cardiac myofilament **calcium sensitization** through binding troponin C and opens vascular ATP-sensitive potassium channels, producing inotropy and vasodilation without increasing myocardial oxygen consumption or intracellular calcium overload. It represents a non-arrhythmogenic inotropic alternative in decompensated states.",
+      "say": "Levosimendan is a calcium-sensitizing inodilator that enhances cardiac myofilament calcium sensitization through binding troponin C and opens vascular ATP-sensitive potassium channels, producing inotropy and vasodilation without increasing myocardial oxygen consumption or intracellular calcium overload. It represents a non-arrhythmogenic inotropic alternative in decompensated states.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mechanism of Action",
+          "Physiological Target",
+          "Hemodynamic Consequence"
+        ],
+        "rows": [
+          [
+            "Calcium Sensitization",
+            "Binds troponin C during systole",
+            "Augments myocyte contractility without calcium surge"
+          ],
+          [
+            "K-ATP Channel Opening",
+            "Vascular smooth muscle K-ATP channels",
+            "Pulmonary, systemic, and coronary vasodilation"
+          ],
+          [
+            "Mitochondrial Protection",
+            "Mitochondrial K-ATP channels",
+            "Protects against ischemia-reperfusion apoptosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }

@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "sca-mi-complications",
+ "subject": "ss-cardiology",
+ "title": "Mechanical, electrical and hemodynamic complications of myocardial infarction",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Mechanical rupture complications of acute myocardial infarction peak 3 to 5 days following presentation, driven by neutrophilic degradation of necrotic myocardium. Catastrophic rupture presentations comprise ventricular **free wall rupture**, ventricular septal rupture, and papillary muscle rupture presenting with sudden cardiogenic shock, pulmonary edema, or electromechanical dissociation.",
+   "say": "Mechanical rupture complications of acute myocardial infarction typically peak three to five days post infarction due to intense neutrophilic infiltration and matrix degradation. The three catastrophic entities include ventricular free wall rupture, ventricular septal rupture, and papillary muscle rupture causing abrupt hemodynamic collapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanical Rupture",
+     "Typical Onset",
+     "Clinical Hallmark"
+    ],
+    "rows": [
+     [
+      "Free wall rupture",
+      "3 to 5 days",
+      "Sudden PEA arrest and acute cardiac tamponade"
+     ],
+     [
+      "Ventricular septal rupture",
+      "3 to 5 days",
+      "Harsh holosystolic murmur with thrill, L-to-R shunt"
+     ],
+     [
+      "Papillary muscle rupture",
+      "3 to 5 days",
+      "Acute severe MR with pulmonary edema and normal LV size"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Papillary muscle rupture** involves the posteromedial papillary muscle in over 75% of cases because it receives solitary blood supply from the posterior descending coronary artery. In contrast, the anterolateral papillary muscle receives dual blood supply from the left anterior descending and circumflex arteries. Rupture triggers torrential acute mitral regurgitation and cardiogenic shock.",
+   "say": "Papillary muscle rupture involves the posteromedial papillary muscle in more than 75 percent of cases because of its solitary blood supply from the posterior descending artery. The anterolateral papillary muscle is protected by dual perfusion from the anterior descending and circumflex arteries. Rupture causes torrential acute mitral regurgitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Posteromedial Muscle",
+     "points": [
+      "Single perfusion from posterior descending artery (RCA or LCx); highly vulnerable to inferior MI necrosis."
+     ]
+    },
+    "right": {
+     "title": "Anterolateral Muscle",
+     "points": [
+      "Dual perfusion from LAD diagonals and LCx marginals; resistant to single-vessel ischemic rupture."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acquired **ventricular septal rupture** complicates transmural infarctions, creating a high-volume left-to-right intracardiac shunt. Diagnosis is established at right heart catheterization by demonstrating an oxygen saturation step-up >= 8% to 10% from the right atrium to the right ventricle, accompanied by a loud holosystolic murmur and a palpable thrill.",
+   "say": "Acquired ventricular septal rupture complicates transmural infarctions, producing a high volume left to right intracardiac shunt. Diagnosis is confirmed during pulmonary artery catheterization by demonstrating an oxygen saturation step up greater than or equal to eight to ten percent from the right atrium to the right ventricle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Transmural MI"
+     },
+     {
+      "id": "n2",
+      "label": "Septal Necrosis"
+     },
+     {
+      "id": "n3",
+      "label": "O2 Step-Up >= 8-10%"
+     },
+     {
+      "id": "n4",
+      "label": "Surgical Repair"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Right ventricular infarction complicates up to 40% of inferior ST-elevation myocardial infarctions caused by proximal right coronary artery occlusion. The pathognomonic clinical triad comprises **hypotension**, clear lung fields on auscultation, and elevated jugular venous pressure. Right-sided ECG lead V4R demonstrating ST-elevation >= 1 mm confirms the diagnosis.",
+   "say": "Right ventricular infarction complicates up to 40 percent of inferior myocardial infarctions caused by occlusion of the proximal right coronary artery. The pathognomonic clinical triad consists of systemic hypotension, clear lung fields, and elevated jugular venous pressure. ST elevation of one millimetre or more in lead V4R confirms the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Finding",
+     "Mechanism"
+    ],
+    "rows": [
+     [
+      "Systemic blood pressure",
+      "Hypotension",
+      "Loss of RV stroke volume impairing LV preload"
+     ],
+     [
+      "Pulmonary auscultation",
+      "Clear lung fields",
+      "Absence of pulmonary capillary congestion"
+     ],
+     [
+      "Jugular venous pressure",
+      "Elevated with Kussmaul sign",
+      "Impaired RV diastolic compliance and filling"
+     ],
+     [
+      "Lead V4R ECG",
+      "ST-elevation >= 1 mm",
+      "Direct transmural RV free-wall ischemic injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Right ventricular myocardial infarction mandates maintenance of high right-sided filling pressures through volume loading with normal saline to optimize cardiac output. **Nitrates are strictly contraindicated**, as well as diuretics and opioids, because venodilation abruptly diminishes right ventricular preload, triggering catastrophic systemic hypotension and cardiovascular collapse.",
+   "say": "Right ventricular myocardial infarction mandates maintaining elevated right sided filling pressures through intravenous crystalloid loading to preserve cardiac output. Nitrates, diuretics, and opioids are strictly contraindicated because sudden venodilation precipitates precipitous loss of right ventricular preload and catastrophic systemic collapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Required Interventions",
+     "points": [
+      "Intravenous isotonic fluid loading, early coronary reperfusion, inotropic support with dobutamine."
+     ]
+    },
+    "right": {
+     "title": "Strictly Contraindicated",
+     "points": [
+      "Nitroglycerin, loop diuretics, and morphine due to abrupt loss of preload and fatal hypotension."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ventricular pseudoaneurysm** represents a contained cardiac free-wall rupture where myocardial discontinuity is bridged solely by adherent pericardium and organized thrombus. Pseudoaneurysms possess a narrow neck connecting to the ventricular cavity with high risk of catastrophic rupture, mandating emergency surgical repair, unlike chronic true aneurysms.",
+   "say": "Ventricular pseudoaneurysm represents a contained cardiac rupture where myocardial discontinuity is bridged solely by adherent pericardium and organized thrombus. Because pseudoaneurysms possess a narrow neck with a high risk of catastrophic rupture, prompt surgical intervention is mandatory, distinguishing them from true aneurysms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudoaneurysm",
+     "points": [
+      "Narrow neck, wall composed exclusively of pericardium and thrombus, extremely high rupture risk, emergency surgery."
+     ]
+    },
+    "right": {
+     "title": "True Aneurysm",
+     "points": [
+      "Wide neck, wall composed of thinned scarred myocardium, low rupture risk, managed with medical therapy."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Post-cardiac injury syndrome**, including Dressler syndrome, occurs 1 to 6 weeks following acute myocardial infarction as an autoimmune pleuropericarditis triggered by released cardiac antigens. Patients present with pleuritic chest pain, pericardial friction rub, fever, and ESR elevation. First-line therapy consists of high-dose aspirin or NSAIDs combined with colchicine.",
+   "say": "Post cardiac injury syndrome, historically termed Dressler syndrome, develops one to six weeks after myocardial infarction as an autoimmune pericarditis triggered by immune sensitization to cardiac antigens. Patients present with pleuritic chest pain and fever. First line management comprises high dose aspirin combined with colchicine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Myocardial Necrosis"
+     },
+     {
+      "id": "n2",
+      "label": "Autoantigen Exposure"
+     },
+     {
+      "id": "n3",
+      "label": "Immune Pericarditis"
+     },
+     {
+      "id": "n4",
+      "label": "Aspirin + Colchicine"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Left ventricular **mural thrombus** develops in up to 15% of anterior ST-elevation myocardial infarctions involving apical akinesis or dyskinesis. Mural thrombus presents high systemic embolic risk. Guideline-directed management requires therapeutic systemic anticoagulation with warfarin or direct oral anticoagulants for a minimum duration of 3 to 6 months.",
+   "say": "Left ventricular mural thrombus develops in up to 15 percent of anterior ST elevation myocardial infarctions associated with severe apical akinesis or aneurysm formation. To prevent systemic thromboembolism, guidelines mandate systemic anticoagulation with warfarin or direct oral anticoagulants for at least three to six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Risk Factor / Value",
+     "Recommendation"
+    ],
+    "rows": [
+     [
+      "Incidence in anterior STEMI",
+      "Up to 15%",
+      "Routine echocardiographic apical screening"
+     ],
+     [
+      "High-risk features",
+      "Apical akinesis, large LVEF < 40%",
+      "High systemic stroke and embolic rate"
+     ],
+     [
+      "Anticoagulation duration",
+      "3 to 6 months",
+      "Warfarin (INR 2-3) or DOAC with repeat imaging"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

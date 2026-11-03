@@ -1,118 +1,277 @@
 {
- "v": 1,
- "module": "sca-revascularisation",
- "subject": "ss-cardiology",
- "title": "Percutaneous and surgical revascularisation: key principles for NEET-PG",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Older lesions, typically beyond 12 months, are more likely to be **fibrocalcific** and hard, with few neovascular channels. The **J-CTO score** predicts the chance of successful crossing. A **blunt proximal cap** is one of its independent adverse factors, along with lesion length, calcification, and vessel bend. Higher scores indicate harder crossing and a need for specialised techniques.",
-   "say": "Older lesions, typically beyond twelve months, are more likely to be fibrocalcific and hard, with few neovascular channels. The J-CTO score predicts the chance of successful crossing. A blunt proximal cap is one of its independent adverse factors, along with lesion length, calcification, and vessel bend. Higher scores indicate harder crossing and a need for specialised techniques.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-revascularisation-fig1.webp",
-    "alt": "Diagram illustrating J-CTO score factors for chronic total occlusions: blunt proximal cap, calcification, lesion length, and vessel bend.",
-    "caption": "J-CTO score factors: blunt cap, calcification, length, and vessel bend",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "CTO revascularisation is mainly aimed at relieving angina and improving **quality of life**, with a reduction in repeat revascularisation. It has not been shown to reduce myocardial infarction or mortality in general. Patients with **three-vessel disease** and insulin-dependent diabetes generally benefit from **coronary artery bypass grafting**, as guidelines favour surgery in this group, particularly where complex anatomy is present.",
-   "say": "CTO revascularisation is mainly aimed at relieving angina and improving quality of life, with a reduction in repeat revascularisation. It has not been shown to reduce myocardial infarction or mortality in general. Patients with three-vessel disease and insulin-dependent diabetes generally benefit from coronary artery bypass grafting, as guidelines favour surgery in this group, particularly where complex anatomy is present.",
-   "vis": null
-  },
-  {
-   "tx": "Stent generation determines the **drug-eluting stent** design. Second-generation stents use a thin-strut **cobalt-chromium** scaffold with an everolimus or zotarolimus coating, and have better outcomes than first-generation devices. Thinner struts of about 70 micrometres reduce restenosis compared with 140 micrometre designs. Long stents raise the risk of fracture, and small vessels below about 2.5 to 3 mm need careful selection.",
-   "say": "Stent generation determines the drug-eluting stent design. Second-generation stents use a thin-strut cobalt-chromium scaffold with an everolimus or zotarolimus coating, and have better outcomes than first-generation devices. Thinner struts of about seventy micrometres reduce restenosis compared with one hundred and forty micrometre designs. Long stents raise the risk of fracture, and small vessels below about two and a half to three millimetres need careful selection.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "First-generation DES",
-     "points": [
-      "Stainless steel or early platforms",
-      "Sirolimus or paclitaxel",
-      "Permanent polymer",
-      "Higher late thrombosis risk"
-     ]
+  "v": 1,
+  "module": "sca-revascularisation",
+  "subject": "ss-cardiology",
+  "title": "Percutaneous and Surgical Revascularisation",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "**Coronary artery bypass grafting** provides superior long-term survival and freedom from repeat revascularization compared to percutaneous coronary intervention in complex anatomical subsets. Large randomized multicentre trials, including SYNTAX and FREEDOM, establish that CABG confers a clear mortality benefit in patients with multivessel disease and diabetes mellitus, complex left main bifurcation lesions, or an anatomical **SYNTAX score** exceeding **32**.",
+      "say": "Coronary artery bypass grafting provides superior long-term survival and freedom from repeat revascularization compared to percutaneous coronary intervention in complex anatomical subsets. Large randomized multicentre trials, including SYNTAX and FREEDOM, establish that CABG confers a clear mortality benefit in patients with multivessel disease and diabetes mellitus, complex left main bifurcation lesions, or an anatomical SYNTAX score exceeding 32.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indications Favoring CABG",
+          "points": [
+            "Multivessel disease with concomitant Diabetes Mellitus",
+            "High SYNTAX score > 32",
+            "Complex Left Main distal bifurcation bifurcation disease",
+            "Severely reduced LV function with extensive viability"
+          ]
+        },
+        "right": {
+          "title": "Indications Favoring PCI",
+          "points": [
+            "Single or double vessel disease without LAD involvement",
+            "Low SYNTAX score 0 to 22",
+            "Severe surgical co-morbidities (high STS score)",
+            "Acute ST-elevation myocardial infarction"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Second-generation DES",
-     "points": [
-      "Cobalt-chromium thin struts",
-      "Everolimus or zotarolimus",
-      "Biocompatible polymers",
-      "Lower restenosis and thrombosis"
-     ]
+    {
+      "tx": "The **internal mammary artery** bypassed to the left anterior descending coronary artery represents the foundation of modern surgical revascularization. Due to continuous basal nitric oxide release, smooth internal elastic lamina, and resistance to atherosclerosis, the left internal mammary artery conduit achieves an unmatched **10**-year **patency rate** exceeding **90%**. This durable patency provides prolonged survival, reduces secondary myocardial infarction, and prevents late recurrent angina.",
+      "say": "The internal mammary artery bypassed to the left anterior descending coronary artery represents the foundation of modern surgical revascularization. Due to continuous basal nitric oxide release, smooth internal elastic lamina, and resistance to atherosclerosis, the left internal mammary artery conduit achieves an unmatched 10-year patency rate exceeding 90 percent. This durable patency provides prolonged survival, reduces secondary myocardial infarction, and prevents late recurrent angina.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Bypass Conduit",
+          "10-Year Patency Rate",
+          "Biological Characteristics"
+        ],
+        "rows": [
+          [
+            "Left Internal Mammary Artery (LIMA)",
+            "> 90% at 10 years",
+            "Endothelial nitric oxide release, resistance to intimal hyperplasia"
+          ],
+          [
+            "Radial Artery (RA)",
+            "80% to 85% at 10 years",
+            "Muscular artery, prone to spasm; requires severe native stenosis"
+          ],
+          [
+            "Saphenous Vein Graft (SVG)",
+            "50% to 60% at 10 years",
+            "Venous valves, prone to accelerated vein graft atheroma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Radial artery bypass** conduits demonstrate superior long-term patency compared to **saphenous vein** grafts when harvested meticulously. Multi-centre trials confirm improved **5**-year and **10**-year angiographic patency with the radial artery. However, because the radial artery is a muscular conduit susceptible to competitive native blood flow, it must be grafted exclusively to coronary target vessels with severe native stenosis of at least **70%** to **90%** to avoid graft atrophy and string sign narrowing.",
+      "say": "Radial artery bypass conduits demonstrate superior long-term patency compared to saphenous vein grafts when harvested meticulously. Multi-centre trials confirm improved 5-year and 10-year angiographic patency with the radial artery. However, because the radial artery is a muscular conduit susceptible to competitive native blood flow, it must be grafted exclusively to coronary target vessels with severe native stenosis of at least 70 to 90 percent to avoid graft atrophy and string sign narrowing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Evaluate target coronary vessel stenosis"
+          },
+          {
+            "id": "b",
+            "label": "Verify severe native stenosis (70% to 90%)"
+          },
+          {
+            "id": "c",
+            "label": "Perform Allen test to confirm dual palmar arch supply"
+          },
+          {
+            "id": "d",
+            "label": "Deploy radial artery graft with calcium blocker spasm prophylaxis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "rule out competitive flow"
+          ],
+          [
+            "b",
+            "c",
+            "ensure hand safety"
+          ],
+          [
+            "c",
+            "d",
+            "achieve superior 10-year patency"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Contemporary percutaneous coronary intervention relies on second-generation **drug-eluting stents** that release antiproliferative limus agents such as everolimus or zotarolimus from thin biocompatible or biodegradable polymers. These advanced stents promote rapid, uniform endothelial healing while suppressing smooth muscle proliferation, thereby dramatically decreasing both in-stent restenosis and acute or late **stent thrombosis** compared to early first-generation drug-eluting stents and bare-metal platforms.",
+      "say": "Contemporary percutaneous coronary intervention relies on second-generation drug-eluting stents that release antiproliferative limus agents such as everolimus or zotarolimus from thin biocompatible or biodegradable polymers. These advanced stents promote rapid, uniform endothelial healing while suppressing smooth muscle proliferation, thereby dramatically decreasing both in-stent restenosis and acute or late stent thrombosis compared to early first-generation drug-eluting stents and bare-metal platforms.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Second-Generation DES",
+          "points": [
+            "Strut thickness: Ultrathin (60 to 80 micrometres)",
+            "Drug: Everolimus, Zotarolimus, Sirolimus",
+            "Polymer: Biocompatible fluoropolymer or biodegradable",
+            "Very late stent thrombosis rate: < 0.2% per year"
+          ]
+        },
+        "right": {
+          "title": "First-Generation DES / BMS",
+          "points": [
+            "Strut thickness: Thick (130 to 140 micrometres)",
+            "Drug: Paclitaxel, early Sirolimus",
+            "Polymer: Durable thick polymers causing chronic hypersensitivity",
+            "Restenosis rate: BMS > 20% due to neointimal hyperplasia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Stent thrombosis** is a catastrophic complication presenting with transmural myocardial infarction or sudden cardiac death. The Academic Research Consortium categorizes stent thrombosis by chronological timing: acute occurring within **24** hours of deployment, subacute between 24 hours and **30** days, late from 30 days to **1** year, and very late occurring beyond 1 year. The dominant clinical trigger is premature **antiplatelet cessation**, compounded by stent underexpansion or edge dissection.",
+      "say": "Stent thrombosis is a catastrophic complication presenting with transmural myocardial infarction or sudden cardiac death. The Academic Research Consortium categorizes stent thrombosis by chronological timing: acute occurring within 24 hours of deployment, subacute between 24 hours and 30 days, late from 30 days to 1 year, and very late occurring beyond 1 year. The dominant clinical trigger is premature antiplatelet cessation, compounded by stent underexpansion or edge dissection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification",
+          "Post-PCI Timeframe",
+          "Predominant Mechanism"
+        ],
+        "rows": [
+          [
+            "Acute Stent Thrombosis",
+            "< 24 hours post-implantation",
+            "Unrecognized edge dissection, severe underexpansion"
+          ],
+          [
+            "Subacute Stent Thrombosis",
+            "24 hours to 30 days",
+            "Premature dual antiplatelet discontinuation, clopidogrel resistance"
+          ],
+          [
+            "Late Stent Thrombosis",
+            "30 days to 1 year",
+            "Delayed endothelialization, malapposed stent struts"
+          ],
+          [
+            "Very Late Stent Thrombosis",
+            "> 1 year",
+            "Neoatherosclerosis with in-stent necrotic core rupture"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The angiographic **SYNTAX score** is an algorithmic grading system that objectively characterizes the anatomical complexity of coronary artery disease. Points are assigned based on lesion number, location, bifurcation involvement, calcification, and total occlusions. Scores stratify disease into three clinical tiers: low complexity (**0-22**), intermediate complexity (**23-32**), and high complexity at **33** and above, directly guiding optimal **revascularization choice** between PCI and CABG.",
+      "say": "The angiographic SYNTAX score is an algorithmic grading system that objectively characterizes the anatomical complexity of coronary artery disease. Points are assigned based on lesion number, location, bifurcation involvement, calcification, and total occlusions. Scores stratify disease into three clinical tiers: low complexity from 0 to 22, intermediate complexity from 23 to 32, and high complexity at 33 and above, directly guiding optimal revascularization choice between PCI and CABG.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "SYNTAX Score Tier",
+          "Numerical Range",
+          "Guideline Recommendation (Multivessel CAD)"
+        ],
+        "rows": [
+          [
+            "Low Complexity",
+            "0 to 22",
+            "PCI and CABG confer equivalent survival (PCI favored)"
+          ],
+          [
+            "Intermediate Complexity",
+            "23 to 32",
+            "CABG demonstrates lower repeat revascularization"
+          ],
+          [
+            "High Complexity",
+            ">= 33",
+            "CABG confers significant survival advantage over PCI"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Older lesions, typically beyond 12 months, are more likely to be **fibrocalcific** and hard, with few neovascular channels. The **J-CTO score** predicts the chance of successful crossing. A **blunt proximal cap** is one of its independent adverse factors, along with lesion length, calcification, and vessel bend. Higher scores indicate harder crossing and a need for specialised techniques.",
+      "say": "Older lesions, typically beyond twelve months, are more likely to be fibrocalcific and hard, with few neovascular channels. The J-CTO score predicts the chance of successful crossing. A blunt proximal cap is one of its independent adverse factors, along with lesion length, calcification, and vessel bend. Higher scores indicate harder crossing and a need for specialised techniques.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-revascularisation-fig1.webp",
+        "alt": "Diagram illustrating J-CTO score factors for chronic total occlusions: blunt proximal cap, calcification, lesion length, and vessel bend.",
+        "caption": "J-CTO score factors: blunt cap, calcification, length, and vessel bend",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Heavy vascular calcification poses major technical hurdles for stent crossing, expansion, and apposition. **Intravascular lithotripsy** is a novel transcatheter calcium modification technology. Delivered via a semi-compliant balloon, miniaturized lithotripsy emitters generate localized pulsatile **acoustic shockwaves** that safely penetrate the vessel wall. These sonic waves selectively fracture both superficial and deep circumferential calcium plates without causing soft tissue dissection or distal microvascular embolization.",
+      "say": "Heavy vascular calcification poses major technical hurdles for stent crossing, expansion, and apposition. Intravascular lithotripsy is a novel transcatheter calcium modification technology. Delivered via a semi-compliant balloon, miniaturized lithotripsy emitters generate localized pulsatile acoustic shockwaves that safely penetrate the vessel wall. These sonic waves selectively fracture both superficial and deep circumferential calcium plates without causing soft tissue dissection or distal microvascular embolization.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Advance IVL balloon across calcified target lesion"
+          },
+          {
+            "id": "b",
+            "label": "Inflate balloon to 4 atm for tissue apposition"
+          },
+          {
+            "id": "c",
+            "label": "Deliver localized sonic acoustic shockwaves"
+          },
+          {
+            "id": "d",
+            "label": "Fracture deep and superficial calcium, expanding compliance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "fluoroscopic positioning"
+          ],
+          [
+            "b",
+            "c",
+            "emitters triggered at 1 Hz"
+          ],
+          [
+            "c",
+            "d",
+            "enables full stent expansion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For heavily calcified uncrossable or undilatable coronary stenoses, **rotational atherectomy** provides mechanical debulking of rigid atherosclerotic plaque. The device utilizes a front-cutting, **diamond-coated burr** rotating at high speeds between **140000** and **180000** rpm over a dedicated guidewire. Based on differential cutting principles, the rotating burr selectively ablates inelastic calcified tissue into microparticulate debris smaller than red blood cells, while deflecting harmlessly off elastic normal vessel wall.",
+      "say": "For heavily calcified uncrossable or undilatable coronary stenoses, rotational atherectomy provides mechanical debulking of rigid atherosclerotic plaque. The device utilizes a front-cutting, diamond-coated burr rotating at high speeds between 140000 and 180000 rpm over a dedicated guidewire. Based on differential cutting principles, the rotating burr selectively ablates inelastic calcified tissue into microparticulate debris smaller than red blood cells, while deflecting harmlessly off elastic normal vessel wall.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rotational Atherectomy (Rotablator)",
+          "points": [
+            "Mechanism: High-speed mechanical diamond burr ablation (140,000 - 180,000 rpm)",
+            "Target: Rigid, superficial, uncrossable sheet calcium",
+            "Limitation: Does not modify deep or eccentric medial calcium",
+            "Complications: Slow-flow, coronary perforation, burr entrapment"
+          ]
+        },
+        "right": {
+          "title": "Intravascular Lithotripsy (IVL)",
+          "points": [
+            "Mechanism: Pulsatile sonic acoustic pressure waves",
+            "Target: Both superficial and deep circumferential concentric calcium",
+            "Limitation: Requires balloon delivery across the lesion",
+            "Complications: Extremely low perforation risk; no slow-flow"
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "tx": "**Stent thrombosis** is classified by timing: early within 30 days, late from 30 days to 1 year, and very late beyond 1 year. Causes include delayed reendothelialisation, **stent malapposition**, and under-expansion. In-stent restenosis, a more than 50 percent narrowing within the stent, is driven by neointimal hyperplasia, and diabetes and multivessel disease raise its risk. Under-expansion is the most preventable procedural cause.",
-   "say": "Stent thrombosis is classified by timing: early within thirty days, late from thirty days to one year, and very late beyond one year. Causes include delayed reendothelialisation, stent malapposition, and under-expansion. In-stent restenosis, a more than fifty percent narrowing within the stent, is driven by neointimal hyperplasia, and diabetes and multivessel disease raise its risk. Under-expansion is the most preventable procedural cause.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Stent placed"
-     },
-     {
-      "id": "b",
-      "label": "Delayed healing or malapposition"
-     },
-     {
-      "id": "c",
-      "label": "Thrombus forms"
-     },
-     {
-      "id": "d",
-      "label": "Early, late or very late thrombosis"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Choose revascularisation by anatomy and risk. For **left main disease** and complex three-vessel disease, the **SYNTAX score** grades lesion complexity; higher scores favour **CABG** over PCI in trials. Arterial grafts such as the left internal thoracic artery to the LAD improve long-term patency. For diabetics with multivessel disease, the FREEDOM trial showed lower death and myocardial infarction with CABG than with PCI.",
-   "say": "Choose revascularisation by anatomy and risk. For left main disease and complex three-vessel disease, the SYNTAX score grades lesion complexity; higher scores favour CABG over PCI in trials. Arterial grafts such as the left internal thoracic artery to the LAD improve long-term patency. For diabetics with multivessel disease, the FREEDOM trial showed lower death and myocardial infarction with CABG than with PCI.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_f1bd4639b70b",
-  "q_533ce1181d3c",
-  "q_99154a94ba6f"
- ],
- "src": [],
- "refs": [
-  "Guidelines for Myocardial Revascularisation: European Society of Cardiology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 31
- }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }

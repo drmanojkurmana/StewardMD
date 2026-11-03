@@ -1,86 +1,299 @@
 {
- "v": 1,
- "module": "sca-cath-haemodynamics",
- "subject": "ss-cardiology",
- "title": "Cardiac catheterisation and invasive haemodynamics: the essentials for NEET-PG and INI-CET",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Right heart catheterisation (RHC) measures pressures in the right heart and pulmonary circulation. Access is usually through the **internal jugular**, **femoral** or **antecubital** vein, using an introducer sheath. The catheter is advanced about 20 cm to reach the right atrium. Before recording, the transducer is zeroed to atmospheric pressure at the level of the heart, which is the reference point for every reading.",
-   "say": "Right heart catheterisation measures pressures in the right heart and the pulmonary circulation. Access is usually through the internal jugular, femoral or antecubital vein, using an introducer sheath. The catheter is advanced about 20 centimetres to reach the right atrium. Before recording, the transducer is zeroed to atmospheric pressure at the level of the heart, which is the reference point for every reading that follows.",
-   "vis": null
-  },
-  {
-   "tx": "Know the normal pressures. The **right atrial mean pressure** is low, around 2 to 6 mmHg. Right ventricular diastolic pressure should be below 5 mmHg in a healthy heart. The **pulmonary capillary wedge pressure** (PCWP) is taken as a surrogate for left atrial pressure and lies between 4 and 12 mmHg. A PCWP above 15 mmHg with a cardiac index below 2.2 L/min/m squared signals cardiogenic shock.",
-   "say": "Know the normal pressures. The right atrial mean pressure is low, around 2 to 6 mmHg. Right ventricular diastolic pressure should be below 5 mmHg in a healthy heart. The pulmonary capillary wedge pressure, taken as a surrogate for left atrial pressure, lies between 4 and 12 mmHg. A wedge pressure above 15 mmHg together with a cardiac index below 2.2 litres per minute per square metre points towards cardiogenic shock.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Site",
-     "Typical value"
-    ],
-    "rows": [
-     [
-      "Right atrium mean",
-      "2 to 6 mmHg"
-     ],
-     [
-      "Right ventricle diastolic",
-      "Below 5 mmHg"
-     ],
-     [
-      "Pulmonary capillary wedge",
-      "4 to 12 mmHg"
-     ],
-     [
-      "Cardiac index",
-      "2.5 to 4 L/min/m2"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Shunts and valves are quantified with formulas. The **Qp/Qs ratio** compares pulmonary flow with systemic flow and is calculated from oxygen saturations taken from the systemic arterial, mixed venous, pulmonary venous and pulmonary arterial samples. When this ratio is clearly above unity, the left-to-right shunt is considered significant and closure is often discussed. The **Gorlin formula** estimates valve area from cardiac output, heart rate, systolic ejection period and the square root of the mean gradient, scaled by an empirical constant.",
-   "say": "Shunts and valves are measured with formulas. The Qp over Qs ratio compares pulmonary flow with systemic flow, worked out from oxygen saturations taken from the systemic arterial, mixed venous, pulmonary venous and pulmonary arterial samples. When that ratio is clearly above unity, the left to right shunt is significant and closure is often discussed. The Gorlin formula estimates valve area from cardiac output, heart rate, systolic ejection period and the square root of the mean gradient, scaled by an empirical constant.",
-   "vis": null
-  },
-  {
-   "tx": "Pressure patterns reveal pericardial disease. In **cardiac tamponade**, diastolic pressures equalise and the y descent is lost. In **constrictive pericarditis**, the **square root sign** and **ventricular interdependence** appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy shows concordant pressure changes instead, with ventricular pressures rising and falling together.",
-   "say": "Pressure patterns reveal pericardial disease. In cardiac tamponade, diastolic pressures equalise and the y descent is lost. In constrictive pericarditis, the square root sign and ventricular interdependence appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy instead shows concordant pressure changes, with both ventricles moving together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-cath-haemodynamics-fig1.webp",
-    "alt": "Pressure waveforms illustrating cardiac tamponade, constrictive pericarditis, and restrictive cardiomyopathy.",
-    "caption": "Pericardial disease pressure patterns",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Coronary physiology guides stenting decisions. **Fractional flow reserve** (FFR) is measured during maximal hyperaemia, and a value below the conventional threshold flags a lesion that limits myocardial blood flow. The **instantaneous wave-free ratio** (iFR) reaches a similar conclusion at rest, avoiding the need for a hyperaemic agent. **Intravascular ultrasound** (IVUS) and **optical coherence tomography** (OCT) image the vessel wall in fine detail. Angiography carries risks such as access bleeding, dissection and stroke.",
-   "say": "Coronary physiology guides stenting decisions. Fractional flow reserve is measured during maximal hyperaemia, and a value below the conventional threshold flags a lesion that limits blood flow to the heart muscle. The instantaneous wave-free ratio reaches a similar conclusion at rest, so no hyperaemic agent is needed. Intravascular ultrasound and optical coherence tomography image the vessel wall in fine detail. Angiography carries risks such as access bleeding, dissection and stroke.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_250f83be08d5",
-  "q_ca91531570be",
-  "q_b7ac18141102"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 29
- }
+  "v": 1,
+  "module": "sca-cath-haemodynamics",
+  "subject": "ss-cardiology",
+  "title": "Cardiac Catheterisation and Invasive Haemodynamics",
+  "minutes": 10,
+  "steps": [
+    {
+      "tx": "The classical gold standard for calculating cardiac output in invasive hemodynamics is the **Fick principle**. Based on mass conservation, total pulmonary blood flow equals whole-body resting **oxygen consumption** divided by the arteriovenous oxygen content difference between arterial blood and mixed venous blood sampled from the pulmonary artery. Direct Fick measurements require real-time spirometric oxygen uptake analysis, whereas assumed Fick equations use estimated baseline oxygen consumption.",
+      "say": "The classical gold standard for calculating cardiac output in invasive hemodynamics is the Fick principle. Based on mass conservation, total pulmonary blood flow equals whole-body resting oxygen consumption divided by the arteriovenous oxygen content difference between arterial blood and mixed venous blood sampled from the pulmonary artery. Direct Fick measurements require real-time spirometric oxygen uptake analysis, whereas assumed Fick equations use estimated baseline oxygen consumption.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Measure oxygen consumption VO2 via spirometry"
+          },
+          {
+            "id": "b",
+            "label": "Sample mixed venous blood from pulmonary artery"
+          },
+          {
+            "id": "c",
+            "label": "Sample arterial blood from femoral or radial line"
+          },
+          {
+            "id": "d",
+            "label": "Calculate Cardiac Output: VO2 / (Arterial O2 minus Mixed Venous O2)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "d",
+            "numerator: metabolic oxygen uptake"
+          ],
+          [
+            "b",
+            "d",
+            "denominator component 1"
+          ],
+          [
+            "c",
+            "d",
+            "denominator component 2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In intensive care and catheterization laboratory settings, the **thermodilution technique** provides rapid bedside cardiac output determination via a flow-directed **pulmonary artery catheter**. A known volume of cold saline is injected into the right atrium through the proximal catheter port. A downstream thermistor located at the catheter tip in the main pulmonary artery continuously records temperature fluctuations, constructing a time-temperature wash-out curve whose area is inversely proportional to cardiac output.",
+      "say": "In intensive care and catheterization laboratory settings, the thermodilution technique provides rapid bedside cardiac output determination via a flow-directed pulmonary artery catheter. A known volume of cold saline is injected into the right atrium through the proximal catheter port. A downstream thermistor located at the catheter tip in the main pulmonary artery continuously records temperature fluctuations, constructing a time-temperature wash-out curve whose area is inversely proportional to cardiac output.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thermodilution Advantages",
+          "points": [
+            "Rapid bedside calculation without blood gas sampling",
+            "Does not require metabolic cart or oxygen consumption hoods",
+            "Reproducible with automated computer integration",
+            "Permits continuous core body temperature monitoring"
+          ]
+        },
+        "right": {
+          "title": "Technical Limitations",
+          "points": [
+            "Falsely inaccurate in severe tricuspid regurgitation",
+            "Invalidated by intracardiac left-to-right or right-to-left shunts",
+            "Susceptible to user injection temperature variability",
+            "Requires stable baseline pulmonary blood flow"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Measurement of the **pulmonary capillary wedge pressure** provides vital assessment of left-sided filling dynamics. Obtained by advancing a balloon-tipped catheter into a distal pulmonary artery branch until the inflated balloon occludes forward flow, normal mean wedge pressure ranges between **6** and **12** mmHg. In the absence of pulmonary veno-occlusive disease or mitral stenosis, wedge pressure serves as a direct clinical surrogate for **left atrial pressure** and end-diastolic ventricular pressure.",
+      "say": "Measurement of the pulmonary capillary wedge pressure provides vital assessment of left-sided filling dynamics. Obtained by advancing a balloon-tipped catheter into a distal pulmonary artery branch until the inflated balloon occludes forward flow, normal mean wedge pressure ranges between 6 and 12 mmHg. In the absence of pulmonary veno-occlusive disease or mitral stenosis, wedge pressure serves as a direct clinical surrogate for left atrial pressure and end-diastolic ventricular pressure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Haemodynamic Variable",
+          "Normal Pressure Range",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Mean Right Atrial Pressure",
+            "2 to 6 mmHg",
+            "Right ventricular preload and systemic venous return"
+          ],
+          [
+            "Pulmonary Artery Pressure",
+            "15-25 / 8-15 mmHg (mean < 20)",
+            "Pulmonary vascular resistance and overload"
+          ],
+          [
+            "Pulmonary Capillary Wedge Pressure",
+            "6 to 12 mmHg",
+            "Left atrial and LV end-diastolic filling pressure"
+          ],
+          [
+            "Left Ventricular End-Diastolic",
+            "8 to 12 mmHg",
+            "True left ventricular diastolic preload"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pressure patterns reveal pericardial disease. In **cardiac tamponade**, diastolic pressures equalise and the y descent is lost. In **constrictive pericarditis**, the **square root sign** and **ventricular interdependence** appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy shows concordant pressure changes instead, with ventricular pressures rising and falling together.",
+      "say": "Pressure patterns reveal pericardial disease. In cardiac tamponade, diastolic pressures equalise and the y descent is lost. In constrictive pericarditis, the square root sign and ventricular interdependence appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy instead shows concordant pressure changes, with both ventricles moving together.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-cath-haemodynamics-fig1.webp",
+        "alt": "Pressure waveforms illustrating cardiac tamponade, constrictive pericarditis, and restrictive cardiomyopathy.",
+        "caption": "Pericardial disease pressure patterns",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "Invasive hemodynamic quantification of stenotic heart valves relies upon the classical **Gorlin formula**. Derived from Torricelli hydraulic orifice principles, valve area is calculated by dividing total transvalvular volume flow rate by the product of an empirical discharge coefficient and the square root of the mean **transvalvular pressure gradient**. Simultaneous high-fidelity micromanometer catheter recordings across the stenotic valve are mandatory to eliminate pulse-transmission phase delays.",
+      "say": "Invasive hemodynamic quantification of stenotic heart valves relies upon the classical Gorlin formula. Derived from Torricelli hydraulic orifice principles, valve area is calculated by dividing total transvalvular volume flow rate by the product of an empirical discharge coefficient and the square root of the mean transvalvular pressure gradient. Simultaneous high-fidelity micromanometer catheter recordings across the stenotic valve are mandatory to eliminate pulse-transmission phase delays.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Record simultaneous left ventricular and aortic pressures"
+          },
+          {
+            "id": "b",
+            "label": "Integrate area between tracings to determine mean gradient"
+          },
+          {
+            "id": "c",
+            "label": "Measure cardiac output and systolic ejection period"
+          },
+          {
+            "id": "d",
+            "label": "Gorlin formula yields calculated aortic valve area in cm2"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "transvalvular pressure gradient"
+          ],
+          [
+            "b",
+            "c",
+            "hemodynamic flow parameters"
+          ],
+          [
+            "c",
+            "d",
+            "flow divided by constant times square root of gradient"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fractional flow reserve** is the established physiology tool for interrogating intermediate coronary stenoses in the cardiac catheterization laboratory. FFR evaluates lesion-specific ischemia by dividing distal coronary pressure by aortic pressure during steady-state maximal **adenosine hyperemia**. A calculated FFR value of **0.80** or less indicates hemodynamically significant, ischemia-inducing epicardial stenosis, identifying lesions that derive proven symptomatic and event-free survival benefits from percutaneous coronary revascularization.",
+      "say": "Fractional flow reserve is the established physiology tool for interrogating intermediate coronary stenoses in the cardiac catheterization laboratory. FFR evaluates lesion-specific ischemia by dividing distal coronary pressure by aortic pressure during steady-state maximal adenosine hyperemia. A calculated FFR value of 0 point 80 or less indicates hemodynamically significant, ischemia-inducing epicardial stenosis, identifying lesions that derive proven symptomatic and event-free survival benefits from percutaneous coronary revascularization.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fractional Flow Reserve (FFR <= 0.80)",
+          "points": [
+            "Indicates physiologically significant myocardial ischemia",
+            "Measured during intravenous adenosine infusion (140 mcg/kg/min)",
+            "Revascularization (PCI or CABG) is strongly indicated",
+            "FAME trials establish improved clinical outcomes"
+          ]
+        },
+        "right": {
+          "title": "Non-Ischemic FFR (> 0.80)",
+          "points": [
+            "Lesion does not cause physiologically limiting ischemia",
+            "Safely deferred without percutaneous stenting",
+            "Managed medically with optimal pharmacotherapy",
+            "Avoids unnecessary stent thrombosis and restenosis risks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **instantaneous wave-free ratio** provides a validated resting physiological assessment of coronary stenosis severity without requiring pharmacologically induced hyperemia. Calibrated specifically during the mid-to-late diastolic **wave-free period**, when intracoronary microvascular resistance is naturally minimal and constant, an iFR threshold of **0.89** or less demonstrates non-inferiority to adenosine-based FFR for guiding revascularization decisions while eliminating adenosine-related chest discomfort, flushing, and bronchospasm.",
+      "say": "The instantaneous wave-free ratio provides a validated resting physiological assessment of coronary stenosis severity without requiring pharmacologically induced hyperemia. Calibrated specifically during the mid-to-late diastolic wave-free period, when intracoronary microvascular resistance is naturally minimal and constant, an iFR threshold of 0 point 89 or less demonstrates non-inferiority to adenosine-based FFR for guiding revascularization decisions while eliminating adenosine-related chest discomfort, flushing, and bronchospasm.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Instantaneous Wave-Free Ratio (iFR)",
+          "Fractional Flow Reserve (FFR)"
+        ],
+        "rows": [
+          [
+            "Hyperemic Agent Required",
+            "None (resting evaluation)",
+            "Intravenous Adenosine (140 mcg/kg/min)"
+          ],
+          [
+            "Diagnostic Ischemic Threshold",
+            "<= 0.89 (DEF-PEFER and iFR-SWEDEHEART)",
+            "<= 0.80 (FAME and DEFER trials)"
+          ],
+          [
+            "Measurement Window",
+            "Diastolic wave-free period only",
+            "Entire cardiac cycle during maximal hyperemia"
+          ],
+          [
+            "Patient Tolerability",
+            "Immediate, no side effects",
+            "Flushing, dyspnea, and transient AV block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Intravascular ultrasound** provides high-resolution cross-sectional tomographic imaging of coronary arterial lumen and vessel wall architecture. In patients with intermediate left main coronary artery disease, the **minimum lumen area** is the critical determinant of hemodynamic significance. An IVUS MLA threshold of **4.5** to **6.0** mm2 identifies hemodynamically significant left main disease, where an MLA below 4.5 mm2 strongly mandates revascularization to prevent catastrophic acute occlusion.",
+      "say": "Intravascular ultrasound provides high-resolution cross-sectional tomographic imaging of coronary arterial lumen and vessel wall architecture. In patients with intermediate left main coronary artery disease, the minimum lumen area is the critical determinant of hemodynamic significance. An IVUS MLA threshold of 4 point 5 to 6 point 0 square millimetres identifies hemodynamically significant left main disease, where an MLA below 4 point 5 strongly mandates revascularization to prevent catastrophic acute occlusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Perform IVUS pull-back across left main trunk"
+          },
+          {
+            "id": "b",
+            "label": "Calculate minimum lumen area (MLA)"
+          },
+          {
+            "id": "c",
+            "label": "Assess threshold: MLA < 4.5 to 6.0 mm2"
+          },
+          {
+            "id": "d",
+            "label": "Determine revascularization (CABG or Left Main PCI)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "transducer calibration"
+          ],
+          [
+            "b",
+            "c",
+            "volumetric cross-sectional area"
+          ],
+          [
+            "c",
+            "d",
+            "proven prognostic safety cut-off"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Optical coherence tomography** utilizes near-infrared light interferometry to generate intracoronary microscopic cross-sectional images with exceptional spatial resolution of **10** to **15** micrometres. This ten-fold higher resolution compared to ultrasound makes OCT uniquely suited for assessing endoluminal surface details, stent strut apposition, and neoatherosclerosis. Crucially, OCT accurately measures fibrous cap thickness in thin-cap **fibroatheroma**, identifying vulnerable plaques at high risk of sudden rupture.",
+      "say": "Optical coherence tomography utilizes near-infrared light interferometry to generate intracoronary microscopic cross-sectional images with exceptional spatial resolution of 10 to 15 micrometres. This ten-fold higher resolution compared to ultrasound makes OCT uniquely suited for assessing endoluminal surface details, stent strut apposition, and neoatherosclerosis. Crucially, OCT accurately measures fibrous cap thickness in thin-cap fibroatheroma, identifying vulnerable plaques at high risk of sudden rupture.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging Modality",
+          "Spatial Axial Resolution",
+          "Primary Clinical Strengths"
+        ],
+        "rows": [
+          [
+            "Optical Coherence Tomography (OCT)",
+            "10 to 15 micrometres",
+            "Fibrous cap thickness, thrombus, stent strut malapposition"
+          ],
+          [
+            "Intravascular Ultrasound (IVUS)",
+            "100 to 150 micrometres",
+            "Deep vessel penetration, vessel sizing, ostial left main lesions"
+          ],
+          [
+            "Coronary Angiography (Luminography)",
+            "200 to 300 micrometres",
+            "2D shadow lumen view; poor vessel wall visualization"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }

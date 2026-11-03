@@ -1,138 +1,272 @@
 {
- "v": 1,
- "module": "sca-ecg",
- "subject": "ss-cardiology",
- "title": "Electrocardiography: Key High-Yield Patterns",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "**Left bundle branch block** widens the QRS to 120 ms or more, with broad notched R waves in I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The **Sgarbossa criteria** help detect acute MI in LBBB, and a score of 3 or more confirms it.",
-   "say": "Left bundle branch block widens the QRS to 120 milliseconds or more, with broad notched R waves in leads I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The Sgarbossa criteria help detect acute myocardial infarction in LBBB, and a score of 3 or more confirms it.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-ecg-fig1.webp",
-    "alt": "An ECG showing Left Bundle Branch Block with broad, notched R waves in leads I, aVL, V5, V6, and QRS duration over 120 ms.",
-    "caption": "Typical Left Bundle Branch Block (LBBB) ECG pattern. Image: me, CC0/PD, Wikimedia Commons.",
-    "ar": 1.4436
-   }
-  },
-  {
-   "tx": "**Left ventricular hypertrophy** is usually judged by voltage. Sokolow-Lyon uses the S wave in V1 plus the R wave in V5 or V6 exceeding 35 mm. The Cornell voltage uses the S in V3 plus the R in aVL, with thresholds of 28 mm in men and 20 mm in women. Strain pattern adds ST depression and asymmetric T inversion in lateral leads. The **Cornell** and **Sokolow-Lyon** criteria are both widely used in examinations.",
-   "say": "Left ventricular hypertrophy is usually judged by voltage. Sokolow-Lyon uses the S wave in V1 plus the R wave in V5 or V6, with a total exceeding 35 millimetres. The Cornell voltage uses the S in V3 plus the R in aVL, with thresholds of 28 millimetres in men and 20 millimetres in women. Strain pattern adds ST depression and asymmetric T inversion in lateral leads. The Cornell and Sokolow-Lyon criteria are both widely used in examinations.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Sokolow-Lyon",
-     "points": [
-      "S in V1 plus R in V5 or V6",
-      "Total above 35 mm"
-     ]
+  "v": 1,
+  "module": "sca-ecg",
+  "subject": "ss-cardiology",
+  "title": "Electrocardiography in Clinical Cardiology",
+  "minutes": 9,
+  "steps": [
+    {
+      "tx": "The **PR interval** reflects total conduction time through the atria, **atrioventricular node**, and the His-Purkinje network. Normal values range from **120** to **200** ms. A prolonged interval exceeding 200 ms confirms first-degree block, typically arising within the AV node itself. Shortening under 120 ms suggests accelerated conduction, pre-excitation, or ectopic junctional pacemakers.",
+      "say": "The PR interval reflects total conduction time through the atria, atrioventricular node, and the His-Purkinje network. Normal values range from 120 to 200 ms. A prolonged interval exceeding 200 ms confirms first-degree block, typically arising within the AV node itself. Shortening under 120 ms suggests accelerated conduction, pre-excitation, or ectopic junctional pacemakers.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Interval / Wave",
+          "Normal Duration",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "PR Interval",
+            "120 to 200 ms",
+            "Reflects AV nodal and His-Purkinje transit time"
+          ],
+          [
+            "QRS Complex",
+            "Under 120 ms",
+            "Ventricular depolarisation duration"
+          ],
+          [
+            "QTc Interval",
+            "Under 450 to 460 ms",
+            "Rate-corrected ventricular repolarisation"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Cornell voltage",
-     "points": [
-      "S in V3 plus R in aVL",
-      "Above 28 mm men, 20 mm women"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**Wellens syndrome** signals a critical proximal LAD stenosis in a pain-free patient with normal enzymes. Type A shows biphasic T waves in V2 and V3, while type B shows deep symmetric T inversion. Type A is seen in about 25 percent and type B in about 75 percent of cases. Type A often evolves into type B, so the patient needs urgent catheterisation rather than stress testing. The **de Winter pattern** of upsloping ST depression with tall T waves is a STEMI equivalent needing emergent reperfusion.",
-   "say": "Wellens syndrome signals a critical proximal LAD stenosis in a pain-free patient with normal enzymes. Type A shows biphasic T waves in V2 and V3, while type B shows deep symmetric T inversion. Type A is seen in about 25 percent and type B in about 75 percent of cases. Type A often evolves into type B, so the patient needs urgent catheterisation rather than stress testing. The de Winter pattern of upsloping ST depression with tall T waves is a STEMI equivalent needing emergent reperfusion.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Wellens type A",
-     "points": [
-      "Biphasic T in V2 and V3",
-      "About 25 percent of cases"
-     ]
+    {
+      "tx": "A normal **QRS duration** remains strictly under **120** ms. Widening beyond 120 ms signifies substantial intraventricular conduction delay or classic **bundle branch block**. Complete left bundle branch block features broad, notched R waves across lateral leads with secondary ST depressions, causing profound mechanical dyssynchrony. Right bundle branch block displays rsR prime patterns in V1.",
+      "say": "A normal QRS duration remains strictly under 120 ms. Widening beyond 120 ms signifies substantial intraventricular conduction delay or classic bundle branch block. Complete left bundle branch block features broad, notched R waves across lateral leads with secondary ST depressions, causing profound mechanical dyssynchrony. Right bundle branch block displays rsR prime patterns in V1.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Left Bundle Branch Block",
+          "points": [
+            "QRS duration 120 ms or greater",
+            "Broad notched R waves in I, aVL, V5-V6",
+            "Absence of septal Q waves in lateral leads",
+            "Associated with structural myocardial disease"
+          ]
+        },
+        "right": {
+          "title": "Right Bundle Branch Block",
+          "points": [
+            "QRS duration 120 ms or greater",
+            "Terminal rsR prime in lead V1",
+            "Slurred wide S wave in lateral leads",
+            "Frequently seen in pulmonary hypertension"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Wellens type B",
-     "points": [
-      "Deep symmetric T inversion",
-      "About 75 percent, evolves from A"
-     ]
+    {
+      "tx": "**Left bundle branch block** widens the QRS to 120 ms or more, with broad notched R waves in I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The **Sgarbossa criteria** help detect acute MI in LBBB, and a score of 3 or more confirms it.",
+      "say": "Left bundle branch block widens the QRS to 120 milliseconds or more, with broad notched R waves in leads I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The Sgarbossa criteria help detect acute myocardial infarction in LBBB, and a score of 3 or more confirms it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-ecg-fig1.webp",
+        "alt": "An ECG showing Left Bundle Branch Block with broad, notched R waves in leads I, aVL, V5, V6, and QRS duration over 120 ms.",
+        "caption": "Typical Left Bundle Branch Block (LBBB) ECG pattern. Image: me, CC0/PD, Wikimedia Commons.",
+        "ar": 1.4436
+      }
+    },
+    {
+      "tx": "The rate-corrected **QTc** calculated by the **Bazett formula** is prolonged when exceeding **450** ms in adult men and **460** ms in adult women. Bazett calculation divides measured QT by the square root of the preceding RR interval. Values surpassing 500 ms confer extreme risk of torsades de pointes and sudden arrhythmic death, mandating immediate electrolyte repletion.",
+      "say": "The rate-corrected QTc calculated by the Bazett formula is prolonged when exceeding 450 ms in adult men and 460 ms in adult women. Bazett calculation divides measured QT by the square root of the preceding RR interval. Values surpassing 500 ms confer extreme risk of torsades de pointes and sudden arrhythmic death, mandating immediate electrolyte repletion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Measure Raw QT Interval & Preceding RR"
+          },
+          {
+            "id": "b",
+            "label": "Apply Bazett Formula (QT / sqrt(RR))"
+          },
+          {
+            "id": "c",
+            "label": "Prolonged if > 450 ms (Men) or > 460 ms (Women)"
+          },
+          {
+            "id": "d",
+            "label": "Critical Threshold > 500 ms: High Torsades Risk"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Record standard lead II or V5"
+          ],
+          [
+            "b",
+            "c",
+            "Calculate QTc"
+          ],
+          [
+            "c",
+            "d",
+            "Risk stratification"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The classic **Sokolow-Lyon index** for **left ventricular hypertrophy** requires the sum of the S wave depth in lead V1 and the R wave amplitude in V5 or V6 to exceed **35** mm. Additional corroborating signs include left atrial enlargement, left axis deviation, and asymmetric lateral ST-segment depression with inverted T waves reflecting left ventricular systolic overload.",
+      "say": "The classic Sokolow-Lyon index for left ventricular hypertrophy requires the sum of the S wave depth in lead V1 and the R wave amplitude in V5 or V6 to exceed 35 mm. Additional corroborating signs include left atrial enlargement, left axis deviation, and asymmetric lateral ST-segment depression with inverted T waves reflecting left ventricular systolic overload.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Criteria",
+          "ECG Threshold",
+          "Performance Characteristic"
+        ],
+        "rows": [
+          [
+            "Sokolow-Lyon Index",
+            "S in V1 + R in V5/V6 > 35 mm",
+            "High specificity, modest sensitivity"
+          ],
+          [
+            "Cornell Voltage",
+            "R in aVL + S in V3 > 28 mm (M) / 20 mm (F)",
+            "Higher sensitivity across body habitus"
+          ],
+          [
+            "Cornell Product",
+            "Cornell voltage x QRS > 2440 mm*ms",
+            "Integrates duration and voltage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Cornell voltage** criteria defines left ventricular hypertrophy when the R wave in lead **aVL** plus the S wave in lead V3 exceeds **28** mm in men or **20** mm in women. This criterion demonstrates superior diagnostic sensitivity compared with Sokolow-Lyon, particularly among female patients and obese individuals whose thoracic wall thickness dampens precordial voltages.",
+      "say": "The Cornell voltage criteria defines left ventricular hypertrophy when the R wave in lead aVL plus the S wave in lead V3 exceeds 28 mm in men or 20 mm in women. This criterion demonstrates superior diagnostic sensitivity compared with Sokolow-Lyon, particularly among female patients and obese individuals whose thoracic wall thickness dampens precordial voltages.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Men Cornell Threshold",
+          "points": [
+            "R wave in aVL + S wave in V3 > 28 mm",
+            "Adjusts for larger average male myocardial mass",
+            "Correlates with increased cardiovascular mortality",
+            "Indicates regression when blood pressure is controlled"
+          ]
+        },
+        "right": {
+          "title": "Women Cornell Threshold",
+          "points": [
+            "R wave in aVL + S wave in V3 > 20 mm",
+            "Accounts for lower average female chest wall voltage",
+            "Identifies subclinical hypertensive target organ damage",
+            "Predicts heart failure development with preserved EF"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Wellens syndrome** signals critical stenosis of the proximal left anterior descending coronary artery. Type A demonstrates **biphasic T waves** in leads V2 and V3, while type B demonstrates deep, symmetric inverted T waves. These pathognomonic waveforms typically manifest during pain-free intervals following spontaneous reperfusion. Immediate invasive coronary catheterisation is essential to avert extensive anterior infarction.",
+      "say": "Wellens syndrome signals critical stenosis of the proximal left anterior descending coronary artery. Type A demonstrates biphasic T waves in leads V2 and V3, while type B demonstrates deep, symmetric inverted T waves. These pathognomonic waveforms typically manifest during pain-free intervals following spontaneous reperfusion. Immediate invasive coronary catheterisation is essential to avert extensive anterior infarction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wellens Type A Pattern",
+          "points": [
+            "Biphasic T waves in precordial leads V2 and V3",
+            "Accounts for approximately 25% of cases",
+            "Occurs during pain-free post-ischemic state",
+            "Normal or minimally elevated cardiac biomarkers"
+          ]
+        },
+        "right": {
+          "title": "Wellens Type B Pattern",
+          "points": [
+            "Deep symmetric T wave inversions in V2 to V4",
+            "Accounts for approximately 75% of cases",
+            "Indicates impending complete LAD thrombosis",
+            "Stress testing is strictly contraindicated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **De Winter pattern** is an acute STEMI equivalent demonstrating upsloping ST-segment depression at the **J-point** in precordial leads with tall, prominent, symmetric T waves. Arising in roughly 2% of acute proximal left anterior descending occlusions, this morphology lacks traditional ST elevation yet signifies complete coronary cutoff requiring emergency percutaneous coronary revascularisation without delay.",
+      "say": "The De Winter pattern is an acute STEMI equivalent demonstrating upsloping ST-segment depression at the J-point in precordial leads with tall, prominent, symmetric T waves. Arising in roughly 2% of acute proximal left anterior descending occlusions, this morphology lacks traditional ST elevation yet signifies complete coronary cutoff requiring emergency percutaneous coronary revascularisation without delay.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute Proximal LAD Thrombotic Occlusion"
+          },
+          {
+            "id": "b",
+            "label": "J-Point Upsloping ST Depression in V1-V4"
+          },
+          {
+            "id": "c",
+            "label": "Tall Symmetric Hyperacute Precordial T Waves"
+          },
+          {
+            "id": "d",
+            "label": "Direct Transfer for Emergency Primary PCI"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Static ischemic cellular injury"
+          ],
+          [
+            "b",
+            "c",
+            "Characteristic De Winter morphology"
+          ],
+          [
+            "c",
+            "d",
+            "Bypass thrombolysis requirement"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The diagnostic **Brugada type 1** electrocardiographic pattern features **coved ST-segment** elevation of **2** mm or greater in right precordial leads followed by a negative T wave. This channelopathy arises from loss-of-function SCN5A mutations. Type 1 findings can be unmasked by fever or sodium channel blockers and indicate high risk for polymorphic ventricular tachycardia.",
+      "say": "The diagnostic Brugada type 1 electrocardiographic pattern features coved ST-segment elevation of 2 mm or greater in right precordial leads followed by a negative T wave. This channelopathy arises from loss-of-function SCN5A mutations. Type 1 findings can be unmasked by fever or sodium channel blockers and indicate high risk for polymorphic ventricular tachycardia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Brugada ECG Type",
+          "Morphology in V1-V2",
+          "Diagnostic Threshold"
+        ],
+        "rows": [
+          [
+            "Type 1 (Diagnostic)",
+            "Coved ST elevation ≥  2 mm followed by negative T",
+            "Definitive diagnostic pattern"
+          ],
+          [
+            "Type 2 (Saddleback)",
+            "Saddleback ST elevation ≥  2 mm with positive T",
+            "Requires drug provocation challenge"
+          ],
+          [
+            "Type 3 (Equivocal)",
+            "Saddleback or coved ST elevation < 1 mm",
+            "Inconclusive without provocation"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Hyperkalaemia** progresses from peaked T waves to PR prolongation, P wave loss, QRS widening and a sine-wave pattern. Immediate first-line treatment is intravenous calcium gluconate, which stabilises the myocardium without lowering potassium. Insulin with dextrose and nebulised salbutamol then shift potassium into cells, and dialysis or resins remove it. In **Brugada pattern**, a coved ST elevation of 2 mm or more in V1 and V2 signals SCN5A-related risk, and fever or sodium channel blockers can unmask it.",
-   "say": "Hyperkalaemia progresses from peaked T waves to PR prolongation, P wave loss, QRS widening and a sine-wave pattern. Immediate first-line treatment is intravenous calcium gluconate, which stabilises the myocardium without lowering potassium. Insulin with dextrose and nebulised salbutamol then shift potassium into cells, and dialysis or resins remove it. In Brugada pattern, a coved ST elevation of 2 mm or more in V1 and V2 signals SCN5A related risk, and fever or sodium channel blockers can unmask it.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Peaked T waves"
-     },
-     {
-      "id": "b",
-      "label": "PR prolongation"
-     },
-     {
-      "id": "c",
-      "label": "P wave loss"
-     },
-     {
-      "id": "d",
-      "label": "QRS widening"
-     },
-     {
-      "id": "e",
-      "label": "Sine wave"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **QT interval** is measured from the start of QRS to the end of the T wave and corrected for heart rate, with the Bazett formula common in practice. Prolonged QTc above 500 ms raises the risk of torsades de pointes, and drugs such as class III antiarrhythmics and macrolides can prolong it. **Epsilon waves** of arrhythmogenic right ventricular cardiomyopathy appear as small late potentials at the end of the QRS. Electrical alternans, a beat-to-beat change in QRS amplitude, suggests large pericardial effusion or tamponade.",
-   "say": "The QT interval is measured from the start of QRS to the end of the T wave and corrected for heart rate, with the Bazett formula common in practice. Prolonged QTc above 500 milliseconds raises the risk of torsades de pointes, and drugs such as class III antiarrhythmics and macrolides can prolong it. Epsilon waves of arrhythmogenic right ventricular cardiomyopathy appear as small late potentials at the end of the QRS. Electrical alternans, a beat to beat change in QRS amplitude, suggests large pericardial effusion or tamponade.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_473bac1d85b2",
-  "q_f71944cee4ee",
-  "q_06add88e2b47"
- ],
- "src": [],
- "refs": [
-  "Thygesen K et al. Fourth Universal Definition of Myocardial Infarction (Circulation)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 121
- }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }
