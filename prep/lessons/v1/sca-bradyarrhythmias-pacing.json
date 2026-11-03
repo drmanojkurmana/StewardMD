@@ -1,0 +1,292 @@
+{
+  "v": 1,
+  "module": "sca-bradyarrhythmias-pacing",
+  "subject": "ss-cardiology",
+  "title": "Bradyarrhythmias, Conduction Disease and Cardiac Pacing",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Sick sinus syndrome** encompasses sinus bradycardia, sinus arrest, sinoatrial exit block, and tachycardia-bradycardia syndrome, where symptomatic **chronotropic incompetence** is a primary indication for permanent pacing. Inability to increase heart rate appropriately with physical exertion produces severe fatigue, presyncope, and exertional dyspnea. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Sick sinus syndrome encompasses sinus bradycardia, sinus arrest, sinoatrial exit block, and tachycardia-bradycardia syndrome, where symptomatic chronotropic incompetence is a primary indication for permanent pacing. Inability to increase heart rate appropriately with physical exertion produces severe fatigue, presyncope, and exertional dyspnea. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "SND Manifestation",
+          "Electrocardiographic Hallmark",
+          "Clinical Indication for Pacing"
+        ],
+        "rows": [
+          [
+            "Sinus Pause / Arrest",
+            "Absence of P wave > 3 seconds (awake)",
+            "Symptomatic syncope or documented presyncope"
+          ],
+          [
+            "Sinoatrial Exit Block",
+            "P-P interval is exact multiple of normal cycle",
+            "Symptomatic pauses causing cerebral hypoperfusion"
+          ],
+          [
+            "Tachy-Brady Syndrome",
+            "Paroxysmal AF followed by long sinus pause",
+            "Facilitates initiation of antiarrhythmic medications"
+          ],
+          [
+            "Chronotropic Incompetence",
+            "Failure to reach 80% age-predicted max HR",
+            "Severe exercise intolerance during daily activities"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mobitz type I** **Wenckebach** second-degree AV block exhibits progressive PR interval prolongation ending in a non-conducted P wave, localizing within the atrioventricular node in over 70% of cases, typically carrying a benign prognosis. Type **1** block often improves with exercise or atropine.",
+      "say": "Mobitz type I Wenckebach second-degree AV block exhibits progressive PR interval prolongation ending in a non-conducted P wave, localizing within the atrioventricular node in over 70% of cases, typically carrying a benign prognosis. Type 1 block often improves with exercise or atropine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mobitz Type I (Wenckebach)",
+          "points": [
+            "Progressive PR prolongation prior to blocked P wave",
+            "Progressive shortening of R-R intervals before pause",
+            "Conduction delay localizes to AV node in > 70%",
+            "Benign; rarely progresses to complete AV block"
+          ]
+        },
+        "right": {
+          "title": "Mobitz Type II Block",
+          "points": [
+            "Constant PR intervals before sudden non-conducted P wave",
+            "Usually accompanied by wide QRS bundle branch block",
+            "Conduction block localizes to infranodal His-Purkinje",
+            "High risk of sudden complete heart block and syncope"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mobitz type II** second-degree AV block is characterized by constant PR intervals before unexpected non-conducted P waves, almost invariably localizing to the **infranodal** His-Purkinje system, carrying high risk of progression to complete heart block. Type **2** block represents a Class I pacemaker indication.",
+      "say": "Mobitz type II second-degree AV block is characterized by constant PR intervals before unexpected non-conducted P waves, almost invariably localizing to the infranodal His-Purkinje system, carrying high risk of progression to complete heart block. Type 2 block represents a Class I pacemaker indication.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Documented Mobitz Type II Second-Degree AV Block"
+          },
+          {
+            "id": "b",
+            "label": "Conduction Delay Localised Below AV Node (His-Purkinje)"
+          },
+          {
+            "id": "c",
+            "label": "High Risk of Stokes-Adams Syncope or Complete Block"
+          },
+          {
+            "id": "d",
+            "label": "Class I Indication for Permanent Pacemaker Implantation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Fixed PR before dropped P wave"
+          ],
+          [
+            "b",
+            "c",
+            "Infranodal structural disease"
+          ],
+          [
+            "c",
+            "d",
+            "Mandatory definitive therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Third-degree or **complete AV block** demonstrates complete **atrioventricular dissociation** where atrial rate exceeds ventricular rate, requiring permanent pacemaker implantation to prevent fatal asystolic pauses. Advanced block originating in infranodal tissue produces an unstable wide-complex escape rhythm at **3**0 beats per minute. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Third-degree or complete AV block demonstrates complete atrioventricular dissociation where atrial rate exceeds ventricular rate, requiring permanent pacemaker implantation to prevent fatal asystolic pauses. Advanced block originating in infranodal tissue produces an unstable wide-complex escape rhythm at 30 beats per minute. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Escape Rhythm Origin",
+          "Intrinsic Heart Rate",
+          "QRS Complex Morphology",
+          "Clinical Stability"
+        ],
+        "rows": [
+          [
+            "Junctional Escape (AV Node)",
+            "40 to 60 beats/min",
+            "Narrow QRS (< 120 ms)",
+            "Relatively stable; responds to atropine"
+          ],
+          [
+            "Ventricular Escape (Purkinje)",
+            "20 to 40 beats/min",
+            "Wide bizarre QRS (\u2265  120 ms)",
+            "Unstable; prone to syncope and arrest"
+          ],
+          [
+            "Idioventricular Escape (Myocardium)",
+            "< 20 beats/min",
+            "Very wide QRS (> 160 ms)",
+            "Immediate cardiovascular collapse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Physiological pacing** via **conduction system pacing** utilizes **His bundle pacing** or left bundle branch area pacing to preserve normal ventricular activation sequence and prevent pacing-induced cardiomyopathy. Direct capture of the specialized His-Purkinje system maintains narrow physiological QRS complexes and synchronous ventricular contraction.",
+      "say": "Physiological pacing via conduction system pacing utilizes His bundle pacing or left bundle branch area pacing to preserve normal ventricular activation sequence and prevent pacing-induced cardiomyopathy. Direct capture of the specialized His-Purkinje system maintains narrow physiological QRS complexes and synchronous ventricular contraction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conduction System Pacing (CSP)",
+          "points": [
+            "Captures native His-Purkinje conduction tissue",
+            "Preserves normal narrow physiological QRS complex",
+            "Maintains left ventricular mechanical synchrony",
+            "Prevents pacing-induced cardiomyopathy in RV-dependent pacing"
+          ]
+        },
+        "right": {
+          "title": "Right Ventricular Apical Pacing",
+          "points": [
+            "Produces broad, abnormal LBBB-like QRS complex",
+            "Causes profound interventricular mechanical dyssynchrony",
+            "Leads to left ventricular adverse remodeling over time",
+            "Associated with increased heart failure and AF incidence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pacemaker syndrome** occurs during single-chamber ventricular pacing when ventricular contraction occurs without preceding atrial systole, causing retrograde ventriculoatrial conduction, **cannon A waves**, fatigue, and hypotension, which resolves upon upgrading to dual-chamber pacing. Atrial contraction against closed AV valves causes jugular pulsation. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Pacemaker syndrome occurs during single-chamber ventricular pacing when ventricular contraction occurs without preceding atrial systole, causing retrograde ventriculoatrial conduction, cannon A waves, fatigue, and hypotension, which resolves upon upgrading to dual-chamber pacing. Atrial contraction against closed AV valves causes jugular pulsation. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "VVI Single-Chamber Ventricular Pacing Active"
+          },
+          {
+            "id": "b",
+            "label": "Retrograde VA Conduction & Atrial Contraction Against Closed TV"
+          },
+          {
+            "id": "c",
+            "label": "Cannon A Waves, JVP Pulsation, 25% Cardiac Output Loss"
+          },
+          {
+            "id": "d",
+            "label": "Upgrade to Dual-Chamber DDD Pacemaker Restores AV Synchrony"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Ventricular pacing without sensing atria"
+          ],
+          [
+            "b",
+            "c",
+            "Elevated atrial filling pressure"
+          ],
+          [
+            "c",
+            "d",
+            "Physiological synchronization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Leadless pacemakers** including **Micra** and Aveir are self-contained intracardiac capsules deployed transcatheterly into the right ventricle, eliminating pocket infections, lead fractures, and vascular occlusions. Transcatheter delivery through the femoral vein significantly reduces long-term lead-related infections, preserving central venous patency and avoiding upper extremity vascular complications.",
+      "say": "Leadless pacemakers including Micra and Aveir are self-contained intracardiac capsules deployed transcatheterly into the right ventricle, eliminating pocket infections, lead fractures, and vascular occlusions. Transcatheter delivery through the femoral vein significantly reduces long-term lead-related infections, preserving central venous patency and avoiding upper extremity vascular complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pacemaker Characteristic",
+          "Traditional Transvenous Pacemaker",
+          "Transcatheter Leadless Pacemaker"
+        ],
+        "rows": [
+          [
+            "Generator Location",
+            "Subcutaneous pectoral surgical pocket",
+            "Endocardial right ventricular apex / septum"
+          ],
+          [
+            "Lead Complications",
+            "Lead fracture, insulation defect, venous occlusion",
+            "Zero transvenous lead or vascular complications"
+          ],
+          [
+            "Pocket Infections",
+            "1% to 2% risk of generator pocket erosion",
+            "Zero surgical pocket; low systemic infection risk"
+          ],
+          [
+            "Implantation Route",
+            "Cephalic or axillary vein surgical cutdown",
+            "Femoral venous transcatheter delivery system"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Trifascicular block** on ECG is defined by complete RBBB with left anterior or posterior fascicular block and **alternating bundle branch block** or first-degree AV block, carrying a high risk of sudden progression to complete AV block. Alternating bundle branch block represents a Class **1** indication for permanent pacemaker implantation.",
+      "say": "Trifascicular block on ECG is defined by complete RBBB with left anterior or posterior fascicular block and alternating bundle branch block or first-degree AV block, carrying a high risk of sudden progression to complete AV block. Alternating bundle branch block represents a Class 1 indication for permanent pacemaker implantation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bifascicular Block (RBBB + LAFB or LPFB)"
+          },
+          {
+            "id": "b",
+            "label": "Alternating Bundle Branch Block (RBBB Alternating with LBBB)"
+          },
+          {
+            "id": "c",
+            "label": "Severe Bilateral His-Purkinje Degeneration"
+          },
+          {
+            "id": "d",
+            "label": "Class 1 Indication for Permanent Dual-Chamber Pacemaker"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Progressive conduction decay"
+          ],
+          [
+            "b",
+            "c",
+            "Impending complete heart block"
+          ],
+          [
+            "c",
+            "d",
+            "Mandatory prophylactic pacing"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

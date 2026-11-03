@@ -1,0 +1,262 @@
+{
+  "v": 1,
+  "module": "sca-syncope",
+  "subject": "ss-cardiology",
+  "title": "Syncope: Risk Stratification and Diagnostic Evaluation",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Syncope is defined as a **transient loss of consciousness** secondary to transient global **cerebral hypoperfusion**, characterized by rapid onset, short duration, and spontaneous complete recovery. Differentiating syncope from non-syncopal conditions including epileptic seizures, psychogenic pseudosyncope, and metabolic coma is essential. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Syncope is defined as a transient loss of consciousness secondary to transient global cerebral hypoperfusion, characterized by rapid onset, short duration, and spontaneous complete recovery. Differentiating syncope from non-syncopal conditions including epileptic seizures, psychogenic pseudosyncope, and metabolic coma is essential. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syncope Category",
+          "Underlying Mechanism",
+          "Clinical Prognosis"
+        ],
+        "rows": [
+          [
+            "Reflex (Neurally Mediated)",
+            "Inappropriate cardioinhibition and/or vasodepression",
+            "Benign long-term prognosis, zero excess mortality"
+          ],
+          [
+            "Orthostatic Hypotension",
+            "Autonomic failure or intravascular volume depletion",
+            "Moderate risk, associated with cardiovascular disease"
+          ],
+          [
+            "Cardiac Syncope",
+            "Structural heart disease or primary cardiac arrhythmia",
+            "High risk, 1-year mortality approaches 20% to 30%"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Vasovagal syncope** represents the most common form of **reflex syncope**, mediated by cardioinhibitory bradycardia, vasodepressor hypotension, or mixed responses. Emotional stress, severe pain, or prolonged standing in warm environments trigger paradoxical sympathetic withdrawal and profound vagal overactivity resulting in cerebral hypoperfusion. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Vasovagal syncope represents the most common form of reflex syncope, mediated by cardioinhibitory bradycardia, vasodepressor hypotension, or mixed responses. Emotional stress, severe pain, or prolonged standing in warm environments trigger paradoxical sympathetic withdrawal and profound vagal overactivity resulting in cerebral hypoperfusion. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vasovagal Reflex Syncope",
+          "points": [
+            "Triggered by fear, pain, instrumentation, prolonged standing",
+            "Prominent prodrome: diaphoresis, pallor, nausea, yawning",
+            "Rapid recovery upon adopting the supine posture",
+            "Zero structural cardiac pathology"
+          ]
+        },
+        "right": {
+          "title": "Carotid Sinus Syndrome",
+          "points": [
+            "Triggered by head turning, tight collar, shaving",
+            "Exaggerated response to carotid baroreceptor stimulation",
+            "Common in elderly males with vascular calcification",
+            "Evaluated via bedside carotid sinus massage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Carotid sinus massage** is diagnostic when inducing **ventricular asystole** at least **3** seconds or a fall in systolic blood pressure at least **50** mmHg with reproduction of symptoms, contraindicated in patients with carotid bruits or prior stroke. Testing requires continuous electrocardiographic and blood pressure monitoring.",
+      "say": "Carotid sinus massage is diagnostic when inducing ventricular asystole at least 3 seconds or a fall in systolic blood pressure at least 50 mmHg with reproduction of symptoms, contraindicated in patients with carotid bruits or prior stroke. Testing requires continuous electrocardiographic and blood pressure monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardioinhibitory Response",
+          "points": [
+            "Ventricular asystole duration >= 3 seconds",
+            "Driven by exaggerated vagal efferent discharge",
+            "Heart rate drops precipitously during massage",
+            "Responsive to dual-chamber permanent cardiac pacing"
+          ]
+        },
+        "right": {
+          "title": "Vasodepressor Response",
+          "points": [
+            "Systolic blood pressure drop >= 50 mmHg",
+            "Driven by reflex sympathetic withdrawal and vasodilation",
+            "Heart rate may remain unchanged during hypotension",
+            "Unresponsive to pacing; requires midodrine or fludrocortisone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Orthostatic hypotension** is defined by a sustained drop in systolic BP at least **20** mmHg or diastolic BP at least **10** mmHg within **3** minutes of standing or **head-up tilt** testing, evaluating autonomic failure or volume depletion. Failure of heart rate to rise indicates neurogenic baroreflex failure.",
+      "say": "Orthostatic hypotension is defined by a sustained drop in systolic BP at least 20 mmHg or diastolic BP at least 10 mmHg within 3 minutes of standing or head-up tilt testing, evaluating autonomic failure or volume depletion. Failure of heart rate to rise indicates neurogenic baroreflex failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Measure Supine Blood Pressure and Heart Rate (5 min Rest)"
+          },
+          {
+            "id": "b",
+            "label": "Measure Standing BP and Heart Rate at 1 and 3 Minutes"
+          },
+          {
+            "id": "c",
+            "label": "Sustained SBP Drop >= 20 mmHg or DBP Drop >= 10 mmHg Confirms OH"
+          },
+          {
+            "id": "d",
+            "label": "Heart Rate Rise < 10 bpm Indicates Neurogenic Autonomic Failure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Active standing protocol"
+          ],
+          [
+            "b",
+            "c",
+            "Hemodynamic diagnostic threshold"
+          ],
+          [
+            "c",
+            "d",
+            "Baroreflex impairment assessment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cardiac syncope** includes mechanical structural heart disease and primary arrhythmias, characterized by sudden loss of consciousness without prodrome, syncope in the supine position, or **syncope during exertion**. Exertional syncope strongly suggests critical aortic stenosis, hypertrophic obstructive cardiomyopathy, or inherited arrhythmogenic channelopathies. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Cardiac syncope includes mechanical structural heart disease and primary arrhythmias, characterized by sudden loss of consciousness without prodrome, syncope in the supine position, or syncope during exertion. Exertional syncope strongly suggests critical aortic stenosis, hypertrophic obstructive cardiomyopathy, or inherited arrhythmogenic channelopathies. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High-Risk Cardiac Syncope",
+          "points": [
+            "Occurs during active physical exertion",
+            "Occurs while supine or in bed",
+            "Sudden onset without warning autonomic prodrome",
+            "Associated with chest pain, palpitations, or known structural disease"
+          ]
+        },
+        "right": {
+          "title": "Low-Risk Neurally Mediated Syncope",
+          "points": [
+            "Occurs after standing for prolonged periods",
+            "Occurs post-micturition, post-cough, or post-defecation",
+            "Preceded by classic pallor, lightheadedness, nausea",
+            "Absence of personal or family structural heart disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Implantable loop recorders** provide continuous **subcutaneous ECG** monitoring for up to **3** to **4** years, representing the highest diagnostic yield test for recurrent unexplained syncope of suspected arrhythmic origin. Automatic activation algorithms capture bradycardic pauses, complete AV block, and ventricular tachycardias. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Implantable loop recorders provide continuous subcutaneous ECG monitoring for up to 3 to 4 years, representing the highest diagnostic yield test for recurrent unexplained syncope of suspected arrhythmic origin. Automatic activation algorithms capture bradycardic pauses, complete AV block, and ventricular tachycardias. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Recurrent Infrequent Unexplained Syncope"
+          },
+          {
+            "id": "b",
+            "label": "Initial Negative Workup: Normal Echo, Normal Baseline ECG"
+          },
+          {
+            "id": "c",
+            "label": "Subcutaneous Insertion of Implantable Loop Recorder (ILR)"
+          },
+          {
+            "id": "d",
+            "label": "Definitive Correlation of Recorded Arrhythmia with Syncope"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Absence of high-risk structural disease"
+          ],
+          [
+            "b",
+            "c",
+            "Minimally invasive 3-year monitoring"
+          ],
+          [
+            "c",
+            "d",
+            "Captures spontaneous bradycardia or VT"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An **Electrophysiology study** in syncope evaluation is indicated in patients with previous MI or structural heart disease where non-invasive testing is non-diagnostic, assessing **HV interval** abnormal if at least **70** ms and VT inducibility. Significant infranodal prolongation warrants permanent pacing. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "An Electrophysiology study in syncope evaluation is indicated in patients with previous MI or structural heart disease where non-invasive testing is non-diagnostic, assessing HV interval abnormal if at least 70 ms and VT inducibility. Significant infranodal prolongation warrants permanent pacing. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "EPS Finding",
+          "Diagnostic Criteria",
+          "Specific Therapeutic Intervention"
+        ],
+        "rows": [
+          [
+            "Infranodal Conduction Block",
+            "Baseline HV interval ≥  70 ms (or block with pacing)",
+            "Permanent dual-chamber pacemaker (Class I)"
+          ],
+          [
+            "Inducible Monomorphic VT",
+            "Sustained VT induced with programmed stimulation",
+            "Implantable cardioverter-defibrillator (ICD)"
+          ],
+          [
+            "Sinus Node Dysfunction",
+            "Corrected SNRT > 525 ms or SACT > 140 ms",
+            "Permanent pacemaker if symptomatic"
+          ],
+          [
+            "Normal Study",
+            "No inducible arrhythmia and normal HV interval",
+            "Proceed to implantable loop recorder"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pharmacotherapy for refractory neurogenic orthostatic hypotension includes **Midodrine**, a selective alpha-**1** adrenergic agonist, and **fludrocortisone**, a synthetic mineralocorticoid promoting renal sodium retention and plasma volume expansion. Non-pharmacologic physical counter-maneuvers, adequate hydration, salt supplementation, and abdominal binders form the essential therapeutic foundation.",
+      "say": "Pharmacotherapy for refractory neurogenic orthostatic hypotension includes Midodrine, a selective alpha-1 adrenergic agonist, and fludrocortisone, a synthetic mineralocorticoid promoting renal sodium retention and plasma volume expansion. Non-pharmacologic physical counter-maneuvers, adequate hydration, salt supplementation, and abdominal binders form the essential therapeutic foundation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Midodrine (Alpha-1 Agonist)",
+          "points": [
+            "Direct arteriolar and venous vasoconstriction",
+            "Increases systemic vascular resistance and venous return",
+            "Dosed 2.5 to 10 mg three times daily before upright activity",
+            "Avoid dosing within 4 hours of bedtime to prevent supine hypertension"
+          ]
+        },
+        "right": {
+          "title": "Fludrocortisone (Mineralocorticoid)",
+          "points": [
+            "Enhances renal distal tubular sodium and water reabsorption",
+            "Sensitizes vascular alpha-adrenergic receptors",
+            "Dosed 0.1 to 0.2 mg daily with dietary sodium supplementation",
+            "Requires monitoring for hypokalemia and peripheral edema"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

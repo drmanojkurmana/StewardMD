@@ -1,0 +1,283 @@
+{
+  "v": 1,
+  "module": "sca-hf-devices-transplant",
+  "subject": "ss-cardiology",
+  "title": "Device Therapy, Mechanical Support and Transplantation",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Cardiac resynchronization therapy** is indicated for symptomatic heart failure despite medical therapy with LVEF at most **35%**, sinus rhythm, and **left bundle branch block** with QRS duration at least **150** ms as a Class I recommendation. Biventricular pacing coordinates ventricular contraction, reversing progressive adverse chamber remodeling and reducing hospitalizations.",
+      "say": "Cardiac resynchronization therapy is indicated for symptomatic heart failure despite medical therapy with LVEF at most 35%, sinus rhythm, and left bundle branch block with QRS duration at least 150 ms as a Class I recommendation. Biventricular pacing coordinates ventricular contraction, reversing progressive adverse chamber remodeling and reducing hospitalizations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "QRS Morphology",
+          "QRS Duration",
+          "Guideline Recommendation Class"
+        ],
+        "rows": [
+          [
+            "LBBB Morphology",
+            "\u2265  150 ms",
+            "Class I (Strongest clinical evidence)"
+          ],
+          [
+            "LBBB Morphology",
+            "120 to 149 ms",
+            "Class IIa (Moderate benefit)"
+          ],
+          [
+            "Non-LBBB Morphology",
+            "\u2265  150 ms",
+            "Class IIb (Weak benefit)"
+          ],
+          [
+            "Any Morphology",
+            "< 120 ms",
+            "Class III: Harm (Contraindicated)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An **Implantable cardioverter-defibrillator** is indicated for **primary prevention** in ischemic cardiomyopathy with LVEF at most **35%** at least **40** days post-MI and after 90 days of revascularisation, or non-ischemic cardiomyopathy after **3** months of optimal therapy. Prophylactic ICD deployment protects against fatal ventricular tachyarrhythmias.",
+      "say": "An Implantable cardioverter-defibrillator is indicated for primary prevention in ischemic cardiomyopathy with LVEF under 35% at least 40 days post-MI and after 90 days of revascularisation, or non-ischemic cardiomyopathy after 3 months of optimal therapy. Prophylactic ICD deployment protects vulnerable patients against fatal ventricular tachyarrhythmias and helps prevent sudden cardiac death.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Documented LVEF <= 35% on Optimal Medical Therapy"
+          },
+          {
+            "id": "b",
+            "label": "Wait >= 40 Days Post-MI or >= 3 Months of GDMT"
+          },
+          {
+            "id": "c",
+            "label": "Reassess LVEF to Exclude Myocardial Recovery"
+          },
+          {
+            "id": "d",
+            "label": "Proceed with Transvenous or Subcutaneous ICD"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Mandatory waiting period"
+          ],
+          [
+            "b",
+            "c",
+            "Echocardiography or CMR"
+          ],
+          [
+            "c",
+            "d",
+            "Persistent severe LV dysfunction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **Subcutaneous ICD** eliminates intravascular and **transvenous lead** complications, proving ideal for patients lacking bradycardia pacing requirements or antitachycardia pacing needs. Transvenous lead extraction complications and endovascular lead endocarditis are completely avoided with an entirely extravascular pulse generator and subcutaneous parasternal electrode.",
+      "say": "The Subcutaneous ICD eliminates intravascular and transvenous lead complications, proving ideal for patients lacking bradycardia pacing requirements or antitachycardia pacing needs. Transvenous lead extraction complications and endovascular lead endocarditis are completely avoided with an entirely extravascular pulse generator and subcutaneous parasternal electrode.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Subcutaneous ICD (S-ICD)",
+          "points": [
+            "Entirely subcutaneous pulse generator and lead",
+            "Zero risk of vascular occlusion or systemic lead sepsis",
+            "Cannot provide bradycardia pacing (except post-shock)",
+            "Cannot deliver antitachycardia pacing (ATP) for VT"
+          ]
+        },
+        "right": {
+          "title": "Transvenous ICD",
+          "points": [
+            "Endovascular lead traversed through subclavian vein into RV",
+            "Provides anti-bradycardia and anti-tachycardia pacing",
+            "Risk of pneumothorax, cardiac perforation, lead fracture",
+            "Lead extraction carries significant morbidity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Intra-aortic balloon pump** provides diastolic **counterpulsation** by inflating during early diastole at the dicrotic notch to augment coronary blood flow, and deflating immediately before systole to reduce left ventricular afterload. Counterpulsation unloads the failing left ventricle, though routine deployment in post-MI shock lacks mortality reduction.",
+      "say": "The Intra-aortic balloon pump provides diastolic counterpulsation by inflating during early diastole at the dicrotic notch to augment coronary blood flow, and deflating immediately before systole to reduce left ventricular afterload. Counterpulsation unloads the failing left ventricle, though routine deployment in post-MI shock lacks mortality reduction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diastolic Balloon Inflation",
+          "points": [
+            "Inflates immediately at dicrotic notch",
+            "Augments central aortic diastolic pressure",
+            "Enhances coronary and cerebral arterial perfusion",
+            "Increases systemic oxygen delivery"
+          ]
+        },
+        "right": {
+          "title": "Presystolic Balloon Deflation",
+          "points": [
+            "Deflates immediately before aortic valve opening",
+            "Creates vacuum effect reducing LV afterload",
+            "Decreases left ventricular end-systolic wall stress",
+            "Lowers myocardial oxygen consumption"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Impella** is a percutaneous transvalvular **microaxial** flow pump delivering up to **2.5** to **5.5** L/min of forward blood flow directly from left ventricle to ascending aorta, unloading the ventricle and reducing myocardial oxygen consumption. It directly draws blood across the aortic valve, decreasing end-diastolic wall tension.",
+      "say": "Impella is a percutaneous transvalvular microaxial flow pump delivering up to 2 point 5 to 5 point 5 L/min of forward blood flow directly from left ventricle to ascending aorta, unloading the ventricle and reducing myocardial oxygen consumption. It directly draws blood across the aortic valve, decreasing end-diastolic wall tension.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Impella Device Model",
+          "Sheath Size",
+          "Maximum Forward Flow",
+          "Vascular Access Route"
+        ],
+        "rows": [
+          [
+            "Impella 2.5",
+            "12 French",
+            "2.5 L/min",
+            "Percutaneous femoral artery"
+          ],
+          [
+            "Impella CP",
+            "14 French",
+            "3.5 to 4.0 L/min",
+            "Percutaneous femoral artery"
+          ],
+          [
+            "Impella 5.0 / 5.5",
+            "21 French",
+            "5.0 to 5.5 L/min",
+            "Surgical axillary or cutdown"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Venoarterial **extracorporeal membrane oxygenation** provides biventricular support but elevates left ventricular afterload, prompting deployment of combined **ECPELLA** using Impella for active left ventricular venting to prevent hydrostatic pulmonary edema. Unvented retrograde aortic perfusion elevates intracavitary pressures, precipitating stasis and thrombosis. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Venoarterial extracorporeal membrane oxygenation provides biventricular support but elevates left ventricular afterload, prompting deployment of combined ECPELLA using Impella for active left ventricular venting to prevent hydrostatic pulmonary edema. Unvented retrograde aortic perfusion elevates intracavitary pressures, precipitating stasis and thrombosis. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "VA-ECMO Delivers Retrograde Pressurized Arterial Flow"
+          },
+          {
+            "id": "b",
+            "label": "Marked Elevation of Left Ventricular Afterload"
+          },
+          {
+            "id": "c",
+            "label": "LV Distension, Severe PCWP Rise, Alveolar Flooding"
+          },
+          {
+            "id": "d",
+            "label": "Deploy Active Venting via Impella: The ECPELLA Strategy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Aortic root pressure elevation"
+          ],
+          [
+            "b",
+            "c",
+            "Aortic valve fails to open"
+          ],
+          [
+            "c",
+            "d",
+            "Active intracavitary unloading"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Durable continuous-flow **left ventricular assist devices** like **HeartMate 3** utilize full magnetically levitated centrifugal continuous-flow technology with an artificial pulse, virtually eliminating pump thrombosis and reducing stroke compared to mechanical bearing devices. Frictionless rotor levitation minimizes shear stress, significantly decreasing device malfunction across long-term support.",
+      "say": "Durable continuous-flow left ventricular assist devices like HeartMate 3 utilize full magnetically levitated centrifugal continuous-flow technology with an artificial pulse, virtually eliminating pump thrombosis and reducing stroke compared to mechanical bearing devices. Frictionless rotor levitation minimizes shear stress, significantly decreasing device malfunction across long-term support.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HeartMate 3 MagLev Pump",
+          "points": [
+            "Frictionless magnetic rotor levitation",
+            "Artificial pulse feature (9000 to 6000 rpm q2s)",
+            "Zero pump thrombosis in MOMENTUM 3 trial",
+            "Significantly reduced reoperation and stroke"
+          ]
+        },
+        "right": {
+          "title": "HeartMate II Mechanical Bearing",
+          "points": [
+            "Axial flow design with mechanical contact cup bearings",
+            "Higher shear stress and heat generation",
+            "10% to 12% incidence of pump thrombosis",
+            "Higher hemolysis and acquired vWF deficiency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Orthotopic **cardiac transplantation** is the gold-standard definitive therapy for refractory end-stage heart failure, yielding a median post-transplant survival of approximately **12** to **14** years with maintenance **calcineurin-inhibitor** immunosuppression. Calcineurin inhibition with tacrolimus or cyclosporine paired with mycophenolate mofetil suppresses T-cell mediated graft rejection.",
+      "say": "Orthotopic cardiac transplantation is the gold-standard definitive therapy for refractory end-stage heart failure, yielding a median post-transplant survival of approximately 12 to 14 years with maintenance calcineurin-inhibitor immunosuppression. Calcineurin inhibition with tacrolimus or cyclosporine paired with mycophenolate mofetil suppresses T-cell mediated graft rejection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cardiopulmonary Exercise Testing (CPET)"
+          },
+          {
+            "id": "b",
+            "label": "Peak VO2 <= 12 mL/kg/min (or <= 14 on Beta-Blocker)"
+          },
+          {
+            "id": "c",
+            "label": "Orthotopic Heart Transplantation Listing"
+          },
+          {
+            "id": "d",
+            "label": "Triple Immunosuppression: Calcineurin Inhibitor + MMF + Steroid"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Severe aerobic exercise limitation"
+          ],
+          [
+            "b",
+            "c",
+            "Meets ISHLT listing criteria"
+          ],
+          [
+            "c",
+            "d",
+            "Median survival 12 to 14 years"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}
