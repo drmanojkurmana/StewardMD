@@ -3,7 +3,7 @@
  * list, thumbnail grid, search, filters, full-screen viewer with next/previous and
  * back, 390px with nothing wider than the screen, light and dark, flag off, and no
  * uncaught error.
- * USAGE: node test/run-image-library-ui.mjs   (CHROME=<path>; SHOTS=<dir>; IMGLIB_LIGHT=1) */
+ * USAGE: node test/run-image-library-ui.mjs   (CHROME=<path>; SHOTS=<dir>; IMGLIB_LIGHT=1; IMGLIB_W=820 for iPad) */
 import { spawn } from "node:child_process";
 import { freePort } from "./free-port.mjs";
 import { setTimeout as sleep } from "node:timers/promises";
@@ -35,7 +35,7 @@ const shot = async (name) => {
   if (!process.env.SHOTS) return;
   await sleep(320);
   const r = await call("Page.captureScreenshot", { format: "png" });
-  if (r.result) fs.writeFileSync(join(process.env.SHOTS, "imglib-" + (process.env.IMGLIB_LIGHT ? "light-" : "dark-") + name + ".png"), Buffer.from(r.result.data, "base64"));
+  if (r.result) fs.writeFileSync(join(process.env.SHOTS, "imglib-" + (process.env.IMGLIB_LIGHT ? "light-" : "dark-") + (process.env.IMGLIB_W ? process.env.IMGLIB_W + "-" : "") + name + ".png"), Buffer.from(r.result.data, "base64"));
 };
 try {
   let ver, t = 0; while (t++ < 300) { try { ver = await (await fetch(`http://localhost:${PORT}/json/version`)).json(); break; } catch { await sleep(200); } }
@@ -49,7 +49,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
-  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await call("Emulation.setDeviceMetricsOverride", { width: +process.env.IMGLIB_W || 390, height: +process.env.IMGLIB_W > 600 ? 1180 : 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.addScriptToEvaluateOnNewDocument", { source: `window.SMD_PREP_ONBOARD=false; window.confirm=function(){return true;};` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
   await call("Page.navigate", { url: BASE }); await until(`return !!window.SMD_IMGLIB;`, 30000); await ev(clean);
@@ -63,12 +63,14 @@ try {
   ok(await until(`return !!document.querySelector('#smdImgLib .igl-sys');`, 20000), "entry opens the system list with counts and samples");
   ok(await ev(`return document.querySelectorAll('#smdImgLib .igl-sys').length>=20;`) === true, "systems list has 20+ systems");
   ok(await ev(`return /images/.test(document.querySelector('#smdImgLib .igl-count').textContent);`) === true, "header carries the total image count");
+  ok(await until(`var im=[].slice.call(document.querySelectorAll('#smdImgLib .igl-sysimg img'),0,4); return im.length===4 && im.every(function(i){return i.complete && i.naturalWidth>0;});`, 20000), "system sample thumbnails load");
   await shot("systems");
 
   /* System grid, search, viewer */
   await click('#smdImgLib .igl-sys[data-v="cardiology"]');
   ok(await until(`return document.querySelectorAll('#smdImgLib .igl-card').length>=10;`, 20000), "Cardiology opens a lazy thumbnail grid");
   ok(await ev(`return !!document.querySelector('#smdImgLib .igl-chips');`) === true, "source and kind filters show");
+  await sleep(1500); await shot("grid");
   const before = await ev(`return document.querySelectorAll('#smdImgLib .igl-card').length;`);
   await ev(`var q=document.querySelector('#smdImgLib .igl-q'); q.value='zzzznothing'; q.dispatchEvent(new Event('input',{bubbles:true})); return 1;`);
   ok(await until(`return !!document.querySelector('#smdImgLib .igl-empty');`, 8000), "search with no match shows the empty state");
@@ -87,7 +89,8 @@ try {
   ok(await until(`return document.querySelector('#smdImgLib .igl-viewer').hidden;`, 5000), "viewer close returns to the grid");
   await click('#smdImgLib [data-igl="back"]');
   ok(await until(`return !!document.querySelector('#smdImgLib .igl-sys');`, 5000), "back returns to the system list");
-  ok(await ev(`return document.querySelector('#smdImgLib').scrollWidth<=innerWidth+1;`) === true, "390px: nothing wider than the screen");
+  const wide = await ev(`var r=document.querySelector('#smdImgLib'), out=[]; if (r.scrollWidth>innerWidth+1) r.querySelectorAll('*').forEach(function(e){ var b=e.getBoundingClientRect(); if (b.right>innerWidth+1 && out.length<5) out.push((e.className||e.tagName)+' '+Math.round(b.right)); }); return out.join(' | ');`);
+  ok(!wide, "390px: nothing wider than the screen" + (wide ? " (" + wide + ")" : ""));
   await click('#smdImgLib [data-igl="back"]');
   ok(await until(`return document.querySelector('#smdImgLib').hidden;`, 5000), "back from systems closes the library");
 
