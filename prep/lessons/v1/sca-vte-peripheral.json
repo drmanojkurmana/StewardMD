@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sca-vte-peripheral",
+ "subject": "ss-cardiology",
+ "title": "Pulmonary embolism and peripheral arterial disease",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A **High-risk pulmonary embolism**, historically termed massive PE, is defined by overt hemodynamic instability, specifically sustained systemic hypotension with SBP under 90 mmHg, vasopressor requirement, or cardiac arrest. This life-threatening presentation mandates immediate **systemic thrombolytic therapy** utilizing recombinant tPA administered as a 100 mg infusion over 2 hours unless absolute surgical contraindications exist.",
+   "say": "A High-risk pulmonary embolism, historically termed massive PE, is defined by overt hemodynamic instability, specifically sustained systemic hypotension with SBP under 90 mmHg, vasopressor requirement, or cardiac arrest. This life-threatening presentation mandates immediate systemic thrombolytic therapy utilizing recombinant tPA administered as a 100 mg infusion over 2 hours unless absolute surgical contraindications exist.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PE Risk Category",
+     "Hemodynamic State",
+     "Right Ventricular Strain",
+     "Initial Treatment"
+    ],
+    "rows": [
+     [
+      "High risk (massive)",
+      "Hypotension SBP < 90 mmHg / shock",
+      "Severe RV dilation and failure",
+      "Systemic thrombolysis with IV tPA"
+     ],
+     [
+      "Intermediate-high risk",
+      "Normotensive, stable SBP",
+      "Both echo RV strain and elevated troponin",
+      "Therapeutic anticoagulation, close ICU monitor"
+     ],
+     [
+      "Intermediate-low risk",
+      "Normotensive, stable SBP",
+      "Either RV strain OR elevated troponin (not both)",
+      "Standard inpatient anticoagulation"
+     ],
+     [
+      "Low risk",
+      "Normotensive, stable SBP",
+      "Normal RV size and negative troponin",
+      "Early discharge on oral anticoagulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hemodynamically stable patients are stratified into the **Intermediate-high risk** category when they manifest both right ventricular dysfunction on imaging and positive myocardial injury biomarkers. Imaging criteria require echocardiographic RV overload or computed tomography showing an **RV/LV ratio** of 1.0 or greater, accompanied by elevated cardiac troponin or NT-proBNP.",
+   "say": "Hemodynamically stable patients are stratified into the Intermediate-high risk category when they manifest both right ventricular dysfunction on imaging and positive myocardial injury biomarkers. Imaging criteria require echocardiographic RV overload or computed tomography showing an RV/LV ratio of 1.0 or greater, accompanied by elevated cardiac troponin or NT-proBNP.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RV dysfunction markers",
+     "points": [
+      "CT pulmonary angiogram RV/LV ratio >= 1.0",
+      "Echocardiographic RV dilation / hypokinesis",
+      "McConnell sign (apical sparing)",
+      "Tricuspid annular plane TAPSE < 16 mm"
+     ]
+    },
+    "right": {
+     "title": "Biomarker injury markers",
+     "points": [
+      "Elevated high-sensitivity cardiac troponin",
+      "Elevated NT-proBNP or BNP levels",
+      "Reflects acute RV myocardial microinfarction",
+      "Identifies decompensation risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical decision rules predict 30-day all-cause mortality to select patients suitable for outpatient management. The comprehensive **Pulmonary Embolism Severity Index** and its simplified counterpart **sPESI** evaluate age, vital signs, and comorbidities; an sPESI score of exactly 0 identifies low-risk patients who can be safely treated at home with direct oral anticoagulants.",
+   "say": "Clinical decision rules predict 30-day all-cause mortality to select patients suitable for outpatient management. The comprehensive Pulmonary Embolism Severity Index and its simplified counterpart sPESI evaluate age, vital signs, and comorbidities. An sPESI score of exactly 0 identifies low-risk patients who can be safely treated at home with direct oral anticoagulants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "sPESI Variable",
+     "Definition Threshold",
+     "Score Assignment"
+    ],
+    "rows": [
+     [
+      "Age threshold",
+      "Age > 80 years",
+      "1 point"
+     ],
+     [
+      "Active cancer",
+      "Current malignancy diagnosis",
+      "1 point"
+     ],
+     [
+      "Chronic cardiopulmonary disease",
+      "Heart failure or chronic lung disease",
+      "1 point"
+     ],
+     [
+      "Pulse rate",
+      "Heart rate >= 110 beats/min",
+      "1 point"
+     ],
+     [
+      "Systolic blood pressure",
+      "Systolic BP < 100 mmHg",
+      "1 point"
+     ],
+     [
+      "Arterial oxygen saturation",
+      "SaO2 < 90% on room air",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For intermediate-high risk PE patients who exhibit secondary hemodynamic deterioration, or high-risk patients with contraindications to systemic lytic therapy, percutaneous interventions offer rapid clot resolution. Ultrasound-assisted **Catheter-directed thrombolysis** delivers low-dose local fibrinolytic infusions, while large-bore **mechanical thrombectomy** aspirates large central emboli without exposing the patient to systemic bleeding hazards.",
+   "say": "For intermediate-high risk PE patients who exhibit secondary hemodynamic deterioration, or high-risk patients with contraindications to systemic lytic therapy, percutaneous interventions offer rapid clot resolution. Ultrasound-assisted Catheter-directed thrombolysis delivers low-dose local fibrinolytic infusions, while large-bore mechanical thrombectomy aspirates large central emboli without exposing the patient to systemic bleeding hazards.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Catheter-directed thrombolysis (CDT)",
+     "points": [
+      "Local pulmonary artery infusion",
+      "Low-dose tPA (e.g. 10 to 20 mg)",
+      "Ultrasound-assisted acoustic streaming",
+      "Markedly lower major bleeding rate"
+     ]
+    },
+    "right": {
+     "title": "Percutaneous mechanical thrombectomy",
+     "points": [
+      "Large-bore catheter aspiration (e.g. FlowTriever)",
+      "Mechanical clot extraction",
+      "Zero systemic thrombolytic drug exposure",
+      "Immediate reduction in pulmonary artery pressure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The resting **Ankle-brachial index** serves as the initial non-invasive screening and diagnostic modality for lower extremity peripheral artery disease. An ABI value of 0.90 or less confirms significant obstructive arterial disease, whereas an abnormally elevated ABI exceeding 1.40 reflects **noncompressible calcified vessels** typical of medial calcinosis or Mönckeberg arteriosclerosis, mandating toe-brachial index testing.",
+   "say": "The resting Ankle-brachial index serves as the initial non-invasive screening and diagnostic modality for lower extremity peripheral artery disease. An ABI value of 0.90 or less confirms significant obstructive arterial disease, whereas an abnormally elevated ABI exceeding 1.40 reflects noncompressible calcified vessels typical of medial calcinosis or Mönckeberg arteriosclerosis, mandating toe-brachial index testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ABI Value Range",
+     "Clinical Interpretation",
+     "Recommended Next Action"
+    ],
+    "rows": [
+     [
+      "> 1.40",
+      "Noncompressible, heavily calcified arteries",
+      "Perform toe-brachial index (TBI) and pulse volume"
+     ],
+     [
+      "1.00 to 1.40",
+      "Normal physiological peripheral arterial perfusion",
+      "No active arterial intervention required"
+     ],
+     [
+      "0.91 to 0.99",
+      "Borderline equivocal arterial perfusion",
+      "Consider post-exercise ABI testing"
+     ],
+     [
+      "0.41 to 0.90",
+      "Mild to moderate peripheral artery disease",
+      "Medical therapy, exercise, risk factor control"
+     ],
+     [
+      "<= 0.40",
+      "Severe ischemia, high risk of limb loss",
+      "Urgent imaging and vascular revascularisation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chronic limb-threatening ischemia** represents the end-stage manifestation of peripheral arterial disease, classified as Rutherford categories 4, 5, and 6, or **Fontaine stages** III and IV. CLTI is defined by chronic ischemic rest pain, nonhealing digital ulcerations, or established tissue gangrene lasting over 2 weeks, requiring emergency revascularisation to prevent major limb amputation.",
+   "say": "Chronic limb-threatening ischemia represents the end-stage manifestation of peripheral arterial disease, classified as Rutherford categories 4, 5, and 6, or Fontaine stages III and IV. CLTI is defined by chronic ischemic rest pain, nonhealing digital ulcerations, or established tissue gangrene lasting over 2 weeks, requiring emergency revascularisation to prevent major limb amputation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fontaine Stage",
+     "Rutherford Category",
+     "Clinical Presentation",
+     "Severity Status"
+    ],
+    "rows": [
+     [
+      "Stage I",
+      "Category 0",
+      "Asymptomatic disease",
+      "Subclinical atherosclerosis"
+     ],
+     [
+      "Stage IIa / IIb",
+      "Category 1 / 2 / 3",
+      "Mild to severe intermittent claudication",
+      "Exertional muscle ischemia"
+     ],
+     [
+      "Stage III",
+      "Category 4",
+      "Ischemic rest pain (forefoot)",
+      "Severe resting hypoperfusion (CLTI)"
+     ],
+     [
+      "Stage IV",
+      "Category 5 / 6",
+      "Minor tissue loss (5) to gangrene (6)",
+      "Established tissue necrosis (CLTI)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The modern Society for Vascular Surgery **WIfI classification** system stratifies 1-year major **amputation risk** and expected revascularisation benefit in patients with CLTI. WIfI scores three independent parameters from grades 0 to 3 each: Wound extent, Ischemia severity determined by absolute toe pressure or ABI, and the presence and extent of deep Foot Infection.",
+   "say": "The modern Society for Vascular Surgery WIfI classification system stratifies 1-year major amputation risk and expected revascularisation benefit in patients with CLTI. WIfI scores three independent parameters from grades 0 to 3 each: Wound extent, Ischemia severity determined by absolute toe pressure or ABI, and the presence and extent of deep Foot Infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wifi-start",
+      "label": "CLTI presentation evaluation"
+     },
+     {
+      "id": "wound-grade",
+      "label": "Wound (W) graded 0 to 3"
+     },
+     {
+      "id": "ischemia-grade",
+      "label": "Ischemia (I) graded 0 to 3 via ABI/TBI"
+     },
+     {
+      "id": "infection-grade",
+      "label": "Foot Infection (fI) graded 0 to 3"
+     },
+     {
+      "id": "composite-stage",
+      "label": "Composite 1-year amputation risk stage"
+     }
+    ],
+    "edges": [
+     [
+      "wifi-start",
+      "wound-grade",
+      "ulcer depth and size"
+     ],
+     [
+      "wifi-start",
+      "ischemia-grade",
+      "perfusion pressure"
+     ],
+     [
+      "wifi-start",
+      "infection-grade",
+      "systemic signs"
+     ],
+     [
+      "wound-grade",
+      "composite-stage",
+      "matrix integration"
+     ],
+     [
+      "ischemia-grade",
+      "composite-stage",
+      "matrix integration"
+     ],
+     [
+      "infection-grade",
+      "composite-stage",
+      "matrix integration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oral **Cilostazol** is a potent phosphodiesterase-3 inhibitor possessing both direct vasodilatory and antiplatelet properties. Administered at 100 mg twice daily, cilostazol significantly improves both pain-free and maximal walking distance in patients with disabling **intermittent claudication**. Because PDE-3 inhibition raises intracellular cAMP, cilostazol is strictly contraindicated in patients with heart failure of any severity.",
+   "say": "Oral Cilostazol is a potent phosphodiesterase-3 inhibitor possessing both direct vasodilatory and antiplatelet properties. Administered at 100 mg twice daily, cilostazol significantly improves both pain-free and maximal walking distance in patients with disabling intermittent claudication. Because PDE-3 inhibition raises intracellular cAMP, cilostazol is strictly contraindicated in patients with heart failure of any severity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cilostazol indication and benefits",
+     "points": [
+      "Selective PDE-3 enzyme inhibitor",
+      "Increases intracellular cAMP",
+      "Promotes arterial vasodilation",
+      "Improves claudication walking distance"
+     ]
+    },
+    "right": {
+     "title": "Heart failure contraindication",
+     "points": [
+      "Boxed warning against heart failure",
+      "Contraindicated in NYHA Class I to IV HF",
+      "cAMP elevation mimics inotropes (milrinone)",
+      "Associated with increased ventricular arrhythmias"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_3f0ae0959b5a",
+  "q_cf8b3deee4f2",
+  "q_15444b7f285c"
+ ],
+ "gen": "hand"
+}
