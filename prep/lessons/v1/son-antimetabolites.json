@@ -1,123 +1,330 @@
 {
- "v": 1,
- "module": "son-antimetabolites",
- "subject": "ss-medical-oncology",
- "title": "Antimetabolites: Rescue, Toxicity and Key Interactions",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Leucovorin is a reduced folate, and it **potentiates fluorouracil** by stabilising the ternary complex formed by **thymidylate synthase**, FdUMP and the folate cofactor. This prolongs enzyme inhibition and blocks DNA thymidine synthesis. **Levoleucovorin** is the active L-isomer, so its dose is roughly half that of racemic leucovorin, for example 50 mg for 100 mg racemic. Oral leucovorin absorption saturates at higher doses, so intravenous dosing is preferred when vomiting is present.",
-   "say": "Leucovorin is a reduced folate that potentiates fluorouracil. It stabilises the ternary complex formed by thymidylate synthase, FdUMP and the folate cofactor, which prolongs enzyme inhibition and blocks thymidine synthesis. Levoleucovorin is the active L-isomer, so its dose is roughly half that of racemic leucovorin. For example, 100 mg of racemic leucovorin corresponds to about 50 mg of levoleucovorin. Oral absorption saturates at higher doses, so intravenous dosing is preferred when a patient is vomiting.",
-   "vis": null
-  },
-  {
-   "tx": "In high-dose **methotrexate** therapy, leucovorin rescues normal cells from toxicity. Delayed clearance with renal impairment requires **glucarpidase**, which rapidly hydrolyses methotrexate. Leucovorin is itself a glucarpidase substrate, so it must be withheld for at least 2 hours after the enzyme dose. Only then should rescue resume. Serial methotrexate levels guide how long rescue must continue.",
-   "say": "In high-dose methotrexate therapy, leucovorin rescues normal cells from toxicity. When clearance is delayed and renal function is impaired, glucarpidase is given to rapidly break down methotrexate. Leucovorin is itself a substrate of this enzyme, so it must be withheld for at least two hours after the glucarpidase dose. Only then should leucovorin rescue be restarted. Serial methotrexate levels guide how long rescue must continue.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "High-dose methotrexate"
-     },
-     {
-      "id": "b",
-      "label": "Delayed clearance or renal injury"
-     },
-     {
-      "id": "c",
-      "label": "Glucarpidase given"
-     },
-     {
-      "id": "d",
-      "label": "Wait at least 2 hours"
-     },
-     {
-      "id": "e",
-      "label": "Resume leucovorin rescue"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Cytarabine** toxicities are dose dependent and predictable. **Cytarabine syndrome** causes fever, rash and myalgia within hours of infusion and responds to corticosteroids. High-dose regimens cause **corneal toxicity**, so steroid eye drops are used for prophylaxis. **Cerebellar toxicity** presents as ataxia, dysarthria and sometimes seizures, and it requires stopping the drug and reviewing renal function.",
-   "say": "Cytarabine toxicities are dose dependent and predictable. Cytarabine syndrome causes fever, rash and myalgia within hours of infusion and responds to corticosteroids. High-dose regimens cause corneal toxicity, so steroid eye drops are used for prophylaxis. Cerebellar toxicity presents as ataxia, slurred speech and sometimes seizures. It requires stopping the drug and reviewing renal function before any further dosing.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Toxicity",
-     "Clinical clue",
-     "Practical response"
-    ],
-    "rows": [
-     [
-      "Cytarabine syndrome",
-      "Fever, rash, myalgia within hours",
-      "Corticosteroids"
-     ],
-     [
-      "Corneal toxicity",
-      "Irritation, punctate keratitis",
-      "Steroid eye drops"
-     ],
-     [
-      "Cerebellar toxicity",
-      "Ataxia, dysarthria, seizures",
-      "Stop drug, review renal function"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Fluorouracil** toxicity is largely determined by **dihydropyrimidine dehydrogenase** (DPD) activity. Patients with DPD deficiency need genotype or phenotype testing before treatment, and full dosing can be fatal. Severe diarrhoea requires withholding until it resolves, then dose reduction. Hand-foot syndrome is managed by grade, with dose reduction after recovery. Regular blood counts are mandatory during treatment.",
-   "say": "Fluorouracil toxicity is largely determined by dihydropyrimidine dehydrogenase activity. Patients with DPD deficiency should be tested before treatment, because full dosing can be fatal. Severe diarrhoea requires withholding fluorouracil until it resolves, followed by dose reduction. Hand-foot syndrome is managed by grade, with dose reduction after recovery. Regular blood counts are mandatory throughout treatment to detect myelosuppression early.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-antimetabolites-fig1.webp",
-    "alt": "Diagram illustrating how dihydropyrimidine dehydrogenase deficiency leads to severe fluorouracil toxicities like diarrhea and hand-foot syndrome.",
-    "caption": "DPD deficiency: a critical determinant of fluorouracil toxicity",
-    "ar": 1.8349
-   }
+  "v": 1,
+  "module": "son-antimetabolites",
+  "subject": "ss-medical-oncology",
+  "title": "Antimetabolites in clinical oncology: folate antagonists, pyrimidine analogues and toxicity rescue",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Folate analogues block single-carbon transfer reactions indispensable for de novo purine and thymidylate biosynthesis. **High-dose methotrexate** at doses exceeding 1 g/m2 competitively inhibits **dihydrofolate reductase** DHFR, causing acute depletion of intracellular reduced folates. Safe administration strictly requires intensive intravenous sodium bicarbonate hydration maintaining urinary pH at or above 7.0 to prevent tubular precipitation of methotrexate and its insoluble metabolite 7-hydroxymethotrexate.",
+      "say": "Folate analogues block single-carbon transfer reactions indispensable for de novo purine and thymidylate biosynthesis. High-dose methotrexate at doses exceeding 1 g/m2 competitively inhibits dihydrofolate reductase DHFR, causing acute depletion of reduced folates. Safe administration strictly requires intensive intravenous hydration maintaining urinary pH at 7.0 or above to prevent renal tubular precipitation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hdmtx",
+            "label": "High-Dose Methotrexate (>1 g/m2)",
+            "level": 1
+          },
+          {
+            "id": "dhfr",
+            "label": "Inhibition of DHFR Enzyme",
+            "level": 2
+          },
+          {
+            "id": "alk",
+            "label": "Urine Alkalinisation (pH >= 7.0)",
+            "level": 3
+          },
+          {
+            "id": "clear",
+            "label": "Soluble Renal Clearance Without AKI",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hdmtx",
+            "dhfr"
+          ],
+          [
+            "hdmtx",
+            "alk"
+          ],
+          [
+            "alk",
+            "clear"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic toxicity from methotrexate is averted by pharmacological bypass of the blocked enzymatic step. **Leucovorin calcium** folinic acid serves as the standard **pharmacological rescue** agent following high-dose methotrexate infusions. Administered every 6 hours starting 24 to 36 hours post-infusion, leucovorin provides reduced tetrahydrofolate directly to normal host tissues without requiring DHFR, continuing until serum methotrexate levels fall safely below 0.05 to 0.1 micromolar.",
+      "say": "Systemic toxicity from methotrexate is averted by pharmacological bypass of the blocked enzymatic step. Leucovorin calcium folinic acid serves as the standard pharmacological rescue agent following high-dose methotrexate infusions. Administered every 6 hours starting 24 to 36 hours post-infusion, leucovorin provides reduced folates directly to normal host tissues, bypassing DHFR.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leucovorin Rescue Mechanism",
+          "points": [
+            "Supplies 5-formyl tetrahydrofolate directly",
+            "Bypasses inhibited dihydrofolate reductase",
+            "Rescues bone marrow and gastrointestinal mucosa",
+            "Dosed according to serum methotrexate clearance nomogram"
+          ]
+        },
+        "right": {
+          "title": "Folic Acid vs Leucovorin",
+          "points": [
+            "Folic acid requires DHFR reduction (inactive during MTX)",
+            "Leucovorin does not require DHFR activation",
+            "Delayed leucovorin >42h causes irreversible mucosal necrosis",
+            "Competitive entry via reduced folate carrier RFC"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Severe delayed methotrexate elimination in the setting of acute oliguric renal failure represents an oncologic emergency. **Glucarpidase** recombinant carboxypeptidase G2 functions as an enzymatic **antidote** for delayed clearance. Administered intravenously, glucarpidase rapidly cleaves extracellular methotrexate into inactive DAMPA within 15 minutes, lowering circulating methotrexate by over 95%. Importantly, leucovorin must be separated from glucarpidase by 2 hours because glucarpidase also hydrolyses leucovorin.",
+      "say": "Severe delayed methotrexate elimination in the setting of acute oliguric renal failure represents an oncologic emergency. Glucarpidase recombinant carboxypeptidase G2 functions as an enzymatic antidote for delayed clearance. Administered intravenously, glucarpidase rapidly cleaves extracellular methotrexate into inactive DAMPA within 15 minutes, lowering circulating drug levels by over 95%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "aki",
+            "label": "Methotrexate AKI with Delayed Clearance",
+            "level": 1
+          },
+          {
+            "id": "gluc",
+            "label": "IV Glucarpidase (50 Units/kg)",
+            "level": 2
+          },
+          {
+            "id": "dampa",
+            "label": "Extracellular Cleavage to Inactive DAMPA",
+            "level": 3
+          },
+          {
+            "id": "drop",
+            "label": ">95% Rapid Drop in Active MTX Levels",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "aki",
+            "gluc"
+          ],
+          [
+            "gluc",
+            "dampa"
+          ],
+          [
+            "dampa",
+            "drop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fluoropyrimidine antineoplastic activity depends on differential intracellular metabolism and enzyme inhibition. **5-Fluorouracil** is converted into 5-FdUMP, which forms a stable covalent ternary complex with **thymidylate synthase** and reduced folates. In contrast to methotrexate rescue, the administration of exogenous leucovorin dramatically enhances 5-FU cytotoxicity by stabilising this inhibitory ternary complex, significantly increasing response rates in colorectal and gastrointestinal adenocarcinomas.",
+      "say": "Fluoropyrimidine antineoplastic activity depends on differential intracellular metabolism and enzyme inhibition. 5-Fluorouracil is converted into 5-FdUMP, which forms a stable covalent ternary complex with thymidylate synthase and reduced folates. In contrast to methotrexate rescue, exogenous leucovorin enhances 5-FU cytotoxicity by stabilising this ternary complex.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Interaction",
+          "Target Enzyme",
+          "Role of Leucovorin",
+          "Clinical Outcome"
+        ],
+        "rows": [
+          [
+            "Methotrexate + Leucovorin",
+            "Dihydrofolate reductase (DHFR)",
+            "Toxicity rescue (antidote)",
+            "Restores folate pool, prevents mucosal death"
+          ],
+          [
+            "5-Fluorouracil + Leucovorin",
+            "Thymidylate synthase (TS)",
+            "Biochemical modulation (enhancer)",
+            "Stabilises TS-FdUMP ternary complex, boosts kill"
+          ],
+          [
+            "Pemetrexed + Folic Acid",
+            "TS, DHFR, and GARFT",
+            "Toxicity prophylaxis",
+            "Pre-treatment reduces severe myelosuppression"
+          ],
+          [
+            "Capecitabine (Oral Prodrug)",
+            "Thymidine phosphorylase",
+            "Tumour selective conversion",
+            "Releases 5-FU preferentially in tumour tissue"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Inherited pharmacogenetic defects in fluoropyrimidine catabolism precipitate catastrophic systemic toxicities. **Dihydropyrimidine dehydrogenase** DPD, encoded by the DPYD gene, catabolizes over 80% of administered 5-FU. Inherited **DPYD mutations**, particularly the splice variant DPYD*2A, cause complete or partial DPD deficiency, exposing patients to lethal neutropenic sepsis, enteritis, and neurotoxicity upon standard dosing. Pre-treatment DPYD genotyping directs vital upfront dose reductions.",
+      "say": "Inherited pharmacogenetic defects in fluoropyrimidine catabolism precipitate catastrophic systemic toxicities. Dihydropyrimidine dehydrogenase DPD, encoded by DPYD, catabolizes over 80% of administered 5-FU. Inherited DPYD mutations, particularly DPYD*2A, cause severe enzyme deficiency, exposing patients to lethal neutropenic sepsis, enteritis, and neurotoxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal DPYD Function",
+          "points": [
+            "Over 80% of 5-FU rapidly degraded in liver",
+            "Produces inactive DHFU metabolite",
+            "Standard full-dose infusional 5-FU tolerated",
+            "Routine clearance kinetics"
+          ]
+        },
+        "right": {
+          "title": "DPYD Variant Alleles (e.g., *2A)",
+          "points": [
+            "Marked reduction in 5-FU clearance",
+            "Massive accumulation of active metabolites",
+            "Early grade 4-5 neutropenia and mucositis",
+            "Mandates 50% dose cut or drug avoidance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Accidental fluoropyrimidine overdose or life-threatening early-onset toxicity is treatable with an approved oral antidote. **Uridine triacetate** acts as an effective competitive **toxicity rescue** agent against lethal 5-fluorouracil or capecitabine toxicities. Administered orally within 96 hours of drug exposure, uridine triacetate floods host cells with uridine triphosphate, competitively outcompeting toxic fluorouridine triphosphate for incorporation into RNA and rescuing mucosal and haematopoietic tissues.",
+      "say": "Accidental fluoropyrimidine overdose or life-threatening early-onset toxicity is treatable with an approved oral antidote. Uridine triacetate acts as an effective competitive rescue agent against lethal 5-fluorouracil or capecitabine toxicities. Administered orally within 96 hours of exposure, it floods host cells with uridine, competitively blocking toxic RNA incorporation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "od",
+            "label": "5-FU Overdose or Early Severe Toxicity",
+            "level": 1
+          },
+          {
+            "id": "ut",
+            "label": "Oral Uridine Triacetate within 96 Hours",
+            "level": 2
+          },
+          {
+            "id": "comp",
+            "label": "UTP Competes with FUTP in Host RNA",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": ">95% Survival in Life-Threatening Overdose",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "od",
+            "ut"
+          ],
+          [
+            "ut",
+            "comp"
+          ],
+          [
+            "comp",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Novel multitargeted antifolates inhibit multiple distinct enzymes across the folate metabolic network. **Pemetrexed** is a pyrrolopyrimidine antifolate that inhibits thymidylate synthase, DHFR, and glycinamide ribonucleotide formyltransferase. Approved for non-squamous non-small cell lung cancer and malignant pleural mesothelioma, clinical administration mandates prophylactic **folic acid** and vitamin B12 supplementation starting 1 week prior to therapy to suppress severe life-threatening haematologic and gastrointestinal toxicities.",
+      "say": "Novel multitargeted antifolates inhibit multiple distinct enzymes across the folate metabolic network. Pemetrexed is a pyrrolopyrimidine antifolate that inhibits thymidylate synthase, DHFR, and glycinamide ribonucleotide formyltransferase. Clinical administration mandates prophylactic folic acid and vitamin B12 supplementation starting 1 week prior to therapy to suppress toxicities.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Primary Target Enzymes",
+          "Mandatory Co-Medication",
+          "Approved Indication"
+        ],
+        "rows": [
+          [
+            "Pemetrexed",
+            "TS, DHFR, GARFT",
+            "Folic acid + Vitamin B12 + Dexamethasone",
+            "Non-squamous NSCLC, Mesothelioma"
+          ],
+          [
+            "Methotrexate",
+            "DHFR, TYMS (polyglutamated)",
+            "Leucovorin rescue + Sodium bicarbonate",
+            "ALL, Osteosarcoma, Primary CNS lymphoma"
+          ],
+          [
+            "Pralatrexate",
+            "DHFR (high affinity via RFC-1)",
+            "Folic acid + Vitamin B12",
+            "Relapsed peripheral T-cell lymphoma"
+          ],
+          [
+            "5-Fluorouracil",
+            "Thymidylate synthase (TS)",
+            "Leucovorin (synergistic enhancer)",
+            "Colorectal, Gastric, Breast, Head & Neck"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Thiopurine antimetabolites are pro-drugs requiring intricate enzymatic activation and catabolism. **6-Mercaptopurine** 6-MP and **azathioprine** are converted to cytotoxic thioguanine nucleotides that incorporate into replicating DNA. Co-administration of the xanthine oxidase inhibitor **allopurinol** blocks the primary catabolic pathway into 6-thiouric acid, increasing circulating active metabolites four- to five-fold and provoking fatal bone marrow suppression unless thiopurine doses are pre-emptively reduced by 75%.",
+      "say": "Thiopurine antimetabolites are pro-drugs requiring intricate enzymatic activation and catabolism. 6-Mercaptopurine 6-MP and azathioprine are converted to cytotoxic thioguanine nucleotides that incorporate into replicating DNA. Co-administration of the xanthine oxidase inhibitor allopurinol blocks primary catabolism, increasing active metabolites five-fold and provoking fatal marrow suppression unless doses are reduced by 75%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prodrug",
+            "label": "Azathioprine / 6-Mercaptopurine",
+            "level": 1
+          },
+          {
+            "id": "xo",
+            "label": "Catabolism via Xanthine Oxidase",
+            "level": 2
+          },
+          {
+            "id": "allo_block",
+            "label": "Allopurinol Inhibits Xanthine Oxidase",
+            "level": 3
+          },
+          {
+            "id": "dose_cut",
+            "label": "Mandatory 75% Thiopurine Dose Reduction",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "prodrug",
+            "xo"
+          ],
+          [
+            "xo",
+            "allo_block"
+          ],
+          [
+            "allo_block",
+            "dose_cut"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_03861a8f5549",
+    "q_07b53c75e075",
+    "q_353c657c0624"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 12 (Antimetabolites)",
+    "Harrison 22e Ch. 74 (Principles of Cancer Treatment: Antimetabolites)",
+    "CPIC Guidelines for DPYD and TPMT/NUDT15"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_03861a8f5549",
-  "q_07b53c75e075",
-  "q_353c657c0624"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 26
- }
 }

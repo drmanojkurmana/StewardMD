@@ -1,84 +1,301 @@
 {
- "v": 1,
- "module": "son-breast-her2",
- "subject": "ss-medical-oncology",
- "title": "HER2-positive breast cancer: targeted therapy and cardiac safety",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "HER2 (human epidermal growth factor receptor 2) is a growth receptor that, when present in excess, pushes breast tumours towards more aggressive behaviour. **Trastuzumab** is a monoclonal antibody aimed at HER2 and forms the core of treatment. Its chief dose-limiting adverse effect is **cardiotoxicity**, so heart function, usually tracked through **left ventricular ejection fraction** (LVEF) monitoring, must be followed throughout therapy. **Pertuzumab** adds a second layer of HER2 blockade on top of trastuzumab.",
-   "say": "HER2 is a growth receptor that, when present in excess, pushes breast tumours towards more aggressive behaviour. Trastuzumab is a monoclonal antibody aimed at HER2 and forms the core of treatment. Its chief dose-limiting adverse effect is cardiotoxicity, so heart function, usually tracked by measuring left ventricular ejection fraction, must be followed throughout therapy. Pertuzumab adds a second layer of HER2 blockade on top of trastuzumab.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-breast-her2-fig1.webp",
-    "alt": "Diagram of Trastuzumab blocking HER2 receptors on a cancer cell, with an icon representing cardiac monitoring for cardiotoxicity.",
-    "caption": "Trastuzumab blocks HER2 signaling; cardiac safety is paramount. Image: Sandrine Richard , Frédéric Selle, Jean-Pierre Lotz , Ahmed Khalil , J, CC BY 4.0, Wikimedia Commons.",
-    "ar": 2.0064
-   }
-  },
-  {
-   "tx": "Cardiac surveillance is central to anti-HER2 therapy. Assess **LVEF** (left ventricular ejection fraction) by echocardiography or MUGA before starting, then repeat it at regular intervals, typically every 3 months during treatment for dual blockade and trastuzumab-based regimens. A fall in LVEF below the protocol threshold requires holding the drug and reassessing. Indian practice follows the same principle, so monitoring should not be skipped in resource-limited centres.",
-   "say": "Cardiac surveillance is central to anti-HER2 therapy. Assess left ventricular ejection fraction by echocardiography or MUGA before starting, then repeat it at regular intervals, typically every 3 months during dual blockade and trastuzumab-based regimens. A fall below the protocol threshold requires holding the drug and reassessing cardiac function.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Time point",
-     "Assessment",
-     "Action"
-    ],
-    "rows": [
-     [
-      "Before treatment",
-      "Baseline LVEF",
-      "Record as reference"
-     ],
-     [
-      "Every 3 months",
-      "Repeat LVEF",
-      "Continue if stable"
-     ],
-     [
-      "LVEF falls",
-      "Repeat imaging",
-      "Hold and reassess"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Trastuzumab emtansine (T-DM1), studied in **KATHERINE**, is an antibody-drug conjugate used as adjuvant therapy in patients with residual invasive disease after neoadjuvant taxane and trastuzumab. Thrombocytopenia is a key haematologic toxicity. For grade 3 or 4 platelet falls, hold the drug until recovery to grade 1 or better, then resume according to protocol dose modification. Hepatotoxicity also needs regular liver function monitoring.",
-   "say": "Trastuzumab emtansine, studied in KATHERINE, is an antibody-drug conjugate used as adjuvant therapy in patients with residual invasive disease after neoadjuvant taxane and trastuzumab. Thrombocytopenia is a key haematologic toxicity. For grade 3 or 4 platelet falls, hold the drug until recovery to grade 1 or better, then resume per protocol dose modification.",
-   "vis": null
-  },
-  {
-   "tx": "Neoadjuvant therapy aims for a **pathological complete response** (pCR), meaning no invasive cancer left in breast or nodes. pCR predicts better survival, especially in HER2-positive and triple-negative disease. The APHINITY trial showed that adding pertuzumab to adjuvant trastuzumab improved invasive disease-free survival in early HER2-positive breast cancer. Residual disease after neoadjuvant therapy identifies patients who need intensified adjuvant treatment.",
-   "say": "Neoadjuvant therapy aims for a pathological complete response, meaning no invasive cancer left in the breast or nodes. pCR predicts better survival, especially in HER2-positive and triple-negative disease. The APHINITY trial showed that adding pertuzumab to adjuvant trastuzumab improved invasive disease-free survival in early HER2-positive breast cancer. Residual disease identifies patients needing intensified adjuvant treatment.",
-   "vis": null
+  "v": 1,
+  "module": "son-breast-her2",
+  "subject": "ss-medical-oncology",
+  "title": "HER2-positive breast cancer: receptor testing, targeted antibody backbones and cardiac safety",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Accurate pathological assessment of human epidermal growth factor receptor 2 dictates systemic therapy eligibility. According to updated **ASCO/CAP guidelines**, immunohistochemistry **IHC 3+** defined as intense circumferential membrane staining in greater than 10% of invasive tumour cells establishes HER2 positivity. Equivocal IHC 2+ cases mandate reflex **in situ hybridization** ISH; positivity requires a HER2-to-CEP17 copy number ratio of 2.0 or higher, or an absolute HER2 gene copy number of 6.0 or greater per cell.",
+      "say": "Accurate pathological assessment of human epidermal growth factor receptor 2 dictates systemic therapy eligibility. According to updated ASCO/CAP guidelines, immunohistochemistry IHC 3+ defined as intense circumferential membrane staining in over 10% of tumour cells establishes positivity. Equivocal IHC 2+ cases require reflex in situ hybridization, where a ratio of 2.0 or higher confirms amplification.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ihc",
+            "label": "Invasive Breast Carcinoma Biopsy",
+            "level": 1
+          },
+          {
+            "id": "score",
+            "label": "IHC Staining (0, 1+, 2+, 3+)",
+            "level": 2
+          },
+          {
+            "id": "reflex",
+            "label": "IHC 2+ Reflex to Dual-Probe ISH",
+            "level": 3
+          },
+          {
+            "id": "pos",
+            "label": "HER2/CEP17 >= 2.0 Confirms Amplification",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ihc",
+            "score"
+          ],
+          [
+            "score",
+            "reflex"
+          ],
+          [
+            "reflex",
+            "pos"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extending dual-epitope receptor blockade to the neoadjuvant setting substantially increases complete response rates. Neoadjuvant chemotherapy combining a taxane with dual anti-HER2 monoclonal antibodies **trastuzumab** and **pertuzumab** constitutes standard care for stage II and III HER2-positive breast cancer. Trastuzumab binds extracellular subdomain IV preventing receptor cleavage, while pertuzumab binds subdomain II blocking **HER2-HER3 dimerization**, producing pathologically complete remission rates approaching 60% to 70%.",
+      "say": "Extending dual-epitope receptor blockade to the neoadjuvant setting substantially increases complete response rates. Neoadjuvant chemotherapy combining a taxane with dual antibodies trastuzumab and pertuzumab constitutes standard care for early HER2-positive breast cancer. Trastuzumab binds subdomain IV, while pertuzumab binds subdomain II blocking HER2-HER3 dimerization, achieving complete response rates up to 70%.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trastuzumab (Herceptin)",
+          "points": [
+            "Binds extracellular subdomain IV of HER2",
+            "Inhibits ligand-independent HER2 homodimers",
+            "Promotes endocytic degradation and ADCC",
+            "Prevents shedding of extracellular domain (p95)"
+          ]
+        },
+        "right": {
+          "title": "Pertuzumab (Perjeta)",
+          "points": [
+            "Binds extracellular subdomain II (dimerization loop)",
+            "Sterically blocks HER2-HER3 heterodimerization",
+            "Potently shuts down PI3K-AKT survival signalling",
+            "Synergistic when paired with trastuzumab"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Residual invasive disease identified at definitive surgical resection heralds a heightened risk of metastatic recurrence. In the randomized phase 3 **KATHERINE trial**, patients with residual invasive breast carcinoma following neoadjuvant taxane and trastuzumab-based chemotherapy were switched to adjuvant **trastuzumab emtansine** T-DM1 for 14 cycles. Adjuvant T-DM1 produced a 50% reduction in invasive disease recurrence or death compared to continuing standard trastuzumab monotherapy.",
+      "say": "Residual invasive disease identified at definitive surgical resection heralds a heightened risk of metastatic recurrence. In the randomized phase 3 KATHERINE trial, patients with residual invasive disease following neoadjuvant chemotherapy were switched to adjuvant trastuzumab emtansine T-DM1 for 14 cycles. Adjuvant T-DM1 produced a 50% reduction in invasive recurrence compared to trastuzumab.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "neoadj",
+            "label": "Neoadjuvant Chemo + Trastuzumab/Pertuzumab",
+            "level": 1
+          },
+          {
+            "id": "surg",
+            "label": "Surgical Resection and Pathology",
+            "level": 2
+          },
+          {
+            "id": "resid",
+            "label": "Residual Invasive Disease (non-pCR)",
+            "level": 3
+          },
+          {
+            "id": "tdm1",
+            "label": "Adjuvant T-DM1 x 14 Cycles (KATHERINE)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "neoadj",
+            "surg"
+          ],
+          [
+            "surg",
+            "resid"
+          ],
+          [
+            "resid",
+            "tdm1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The definitive first-line standard for metastatic HER2-positive disease combines dual antibody blockade with taxane chemotherapy. Established by the landmark **CLEOPATRA trial**, first-line therapy comprises docetaxel, trastuzumab, and pertuzumab. This triplet combination achieved an extraordinary median overall survival exceeding 57 months, establishing persistent dual-HER2 blockade as the worldwide standard. Following docetaxel completion, dual monoclonal antibody maintenance is continued until objective disease progression.",
+      "say": "The definitive first-line standard for metastatic HER2-positive disease combines dual antibody blockade with taxane chemotherapy. Established by the landmark CLEOPATRA trial, first-line therapy comprises docetaxel, trastuzumab, and pertuzumab. This triplet combination achieved a median overall survival exceeding 57 months. Following chemotherapy, dual antibody maintenance is continued until disease progression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regimen Arm",
+          "Progression-Free Survival",
+          "Median Overall Survival",
+          "Long-Term Impact"
+        ],
+        "rows": [
+          [
+            "Docetaxel + Trastuzumab + Pertuzumab (THP)",
+            "18.7 months",
+            "57.1 months",
+            "Pivotal standard of care (CLEOPATRA)"
+          ],
+          [
+            "Docetaxel + Trastuzumab + Placebo",
+            "12.4 months",
+            "40.8 months",
+            "Historical comparator arm"
+          ],
+          [
+            "Survival Gain with Pertuzumab Addition",
+            "+6.3 months PFS gain",
+            "+16.3 months OS gain",
+            "Hazard ratio for death 0.69 (p < 0.001)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Second-line therapy for metastatic disease has been fundamentally redefined by next-generation antibody-drug conjugates. In the head-to-head randomized **DESTINY-Breast03 trial**, **trastuzumab deruxtecan** T-DXd demonstrated unequivocal superiority over trastuzumab emtansine T-DM1 in patients with progressive metastatic HER2-positive disease. T-DXd reduced the risk of disease progression or death by 72%, establishing T-DXd as the undisputed global second-line standard.",
+      "say": "Second-line therapy for metastatic disease has been fundamentally redefined by next-generation antibody-drug conjugates. In the head-to-head randomized DESTINY-Breast03 trial, trastuzumab deruxtecan T-DXd demonstrated unequivocal superiority over trastuzumab emtansine T-DM1 in progressive metastatic HER2-positive disease. T-DXd reduced progression or death risk by 72%, becoming the second-line standard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trastuzumab Deruxtecan (DESTINY-B03)",
+          "points": [
+            "Topoisomerase I inhibitor payload (DXd)",
+            "High drug-to-antibody ratio (8:1)",
+            "Median PFS: 28.8 months",
+            "Requires active surveillance for pneumonitis"
+          ]
+        },
+        "right": {
+          "title": "Trastuzumab Emtansine (Prior Standard)",
+          "points": [
+            "Maytansinoid tubulin payload (DM1)",
+            "Moderate drug-to-antibody ratio (3.5:1)",
+            "Median PFS: 6.8 months",
+            "Lower rate of interstitial lung disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Small-molecule tyrosine kinase inhibitors penetrate the blood-brain barrier to treat active brain metastases. In the randomized **HER2CLIMB trial**, adding the selective HER2 oral tyrosine kinase inhibitor **tucatinib** to trastuzumab and capecitabine significantly prolonged progression-free and overall survival in patients with pre-treated metastatic disease. Uniquely, this survival benefit was confirmed in patients with active, progressive, or untreated brain metastases, a patient population historically excluded from clinical trials.",
+      "say": "Small-molecule tyrosine kinase inhibitors penetrate the blood-brain barrier to treat active brain metastases. In the randomized HER2CLIMB trial, adding the selective HER2 tyrosine kinase inhibitor tucatinib to trastuzumab and capecitabine significantly prolonged survival in pre-treated metastatic disease. Uniquely, this benefit extended to patients with active brain metastases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cns",
+            "label": "HER2+ Metastases with Active Brain Lesions",
+            "level": 1
+          },
+          {
+            "id": "tuca",
+            "label": "Oral Tucatinib (Potent CNS Penetration)",
+            "level": 2
+          },
+          {
+            "id": "combo",
+            "label": "Paired with Capecitabine and Trastuzumab",
+            "level": 3
+          },
+          {
+            "id": "os_gain",
+            "label": "52% Reduction in CNS Progression or Death",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cns",
+            "tuca"
+          ],
+          [
+            "tuca",
+            "combo"
+          ],
+          [
+            "combo",
+            "os_gain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Receptor expression below classical amplification thresholds now represents a therapeutically targetable entity. The seminal **DESTINY-Breast04 trial** proved that **trastuzumab deruxtecan** produces statistically significant progression-free and overall survival improvements in metastatic **HER2-low** breast cancer, defined as IHC 1+ or IHC 2+ with negative ISH. T-DXd bystander cytotoxicity effectively eradicates tumours lacking gene amplification, demolishing the classical binary classification of HER2 status.",
+      "say": "Receptor expression below classical amplification thresholds now represents a therapeutically targetable entity. The seminal DESTINY-Breast04 trial proved that trastuzumab deruxtecan produces significant survival improvements in metastatic HER2-low breast cancer, defined as IHC 1+ or IHC 2+ with negative ISH. T-DXd bystander cytotoxicity eradicates tumours lacking classical gene amplification.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "HER2 Category",
+          "IHC / ISH Criteria",
+          "Targeted Therapy Indication"
+        ],
+        "rows": [
+          [
+            "HER2-Positive",
+            "IHC 3+ or IHC 2+ with ISH positive",
+            "Trastuzumab, Pertuzumab, T-DXd, T-DM1, Tucatinib"
+          ],
+          [
+            "HER2-Low",
+            "IHC 1+ or IHC 2+ with ISH negative",
+            "Trastuzumab deruxtecan (DESTINY-Breast04)"
+          ],
+          [
+            "HER2-Zero",
+            "IHC 0 (no membranous staining)",
+            "Endocrine + CDK4/6i (if HR+) or sacituzumab govitecan"
+          ],
+          [
+            "HER2-Ultra-low",
+            "Membrane staining in <= 10% cells",
+            "Investigational T-DXd sensitivity (DESTINY-Breast06)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeting HER2 carries class-specific cardiovascular toxicity requiring structured surveillance. **Trastuzumab cardiotoxicity** presents as Type II cardiotoxicity, defined by asymptomatic left ventricular ejection fraction LVEF decline that is typically reversible, not dose-dependent, and devoid of ultrastructural myocyte necrosis on biopsy. Serial echocardiographic **LVEF monitoring** is mandatory every 3 months during adjuvant therapy, holding treatment if LVEF drops below 50% or by at least 10% from baseline.",
+      "say": "Targeting HER2 carries class-specific cardiovascular toxicity requiring structured surveillance. Trastuzumab cardiotoxicity presents as Type II cardiotoxicity, defined by asymptomatic left ventricular ejection fraction decline that is typically reversible, not dose-dependent, and devoid of myocyte necrosis on biopsy. Serial echocardiographic monitoring is mandatory every 3 months during therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I (Anthracyclines)",
+          "points": [
+            "Myocyte vacuolization and myofibrillar loss",
+            "Irreversible cellular apoptosis and death",
+            "Strictly cumulative dose-dependent",
+            "High risk of permanent clinical heart failure"
+          ]
+        },
+        "right": {
+          "title": "Type II (Trastuzumab)",
+          "points": [
+            "Loss of HER2-mediated cardiac survival signals",
+            "Absence of structural myocyte necrosis",
+            "Reversible upon drug withholding and ACE-inhibitors",
+            "LVEF monitoring required every 3 months"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    "q_1e285a356b61",
+    "q_9ebf74454b24",
+    "q_0c2091b3b00d"
+  ],
+  "refs": [
+    "Wolff AC et al. Human Epidermal Growth Factor Receptor 2 Testing in Breast Cancer (ASCO/CAP Focused Update)",
+    "Swain SM et al. Pertuzumab, trastuzumab, and docetaxel in HER2-positive metastatic breast cancer (CLEOPATRA). NEJM",
+    "Cortés J et al. Trastuzumab deruxtecan versus trastuzumab emtansine for breast cancer (DESTINY-Breast03). NEJM"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_1e285a356b61",
-  "q_9ebf74454b24",
-  "q_0c2091b3b00d"
- ],
- "src": [],
- "refs": [
-  "NICE guideline on early and locally advanced breast cancer (NG101)",
-  "ESMO Clinical Practice Guidelines for early breast cancer"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 70
- }
 }

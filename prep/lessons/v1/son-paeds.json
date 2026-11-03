@@ -1,130 +1,312 @@
 {
- "v": 1,
- "module": "son-paeds",
- "subject": "ss-medical-oncology",
- "title": "Paediatric solid tumours: neuroblastoma, Wilms, retinoblastoma and beyond",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Neuroblastoma** is the most common extracranial solid tumour of childhood and arises from neural crest cells of the sympathetic nervous system. Most tumours secrete **catecholamines**, so urinary VMA and HVA are elevated. **MYCN amplification** is the major adverse biological marker and demands intensified therapy. Opsoclonus-myoclonus, or dancing eyes-dancing feet syndrome, is a classic paraneoplastic feature.",
-   "say": "Neuroblastoma is the most common extracranial solid tumour of childhood. It arises from neural crest cells of the sympathetic nervous system. Most tumours secrete catecholamines, so urinary VMA and HVA are raised. MYCN amplification is the major adverse biological marker and calls for intensified therapy. Opsoclonus-myoclonus, also called dancing eyes-dancing feet syndrome, is a classic paraneoplastic feature.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "Origin",
-      "Sympathetic neural crest"
-     ],
-     [
-      "Biochemistry",
-      "Raised urinary VMA and HVA"
-     ],
-     [
-      "Adverse marker",
-      "MYCN amplification"
-     ],
-     [
-      "Paraneoplastic",
-      "Opsoclonus-myoclonus"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Wilms tumour** is the most common primary renal malignancy of childhood and usually presents as an asymptomatic abdominal mass. Abdominal pain is the commonest symptom, and hypertension is often seen. Blood pressure typically normalises after nephrectomy. Histology is classed as **favourable** or **anaplastic**; the triphasic pattern of blastema, epithelium and stroma is favourable, while diffuse anaplasia carries roughly 50% recurrence risk.",
-   "say": "Wilms tumour is the most common primary renal malignancy of childhood. It usually presents as an asymptomatic abdominal mass, and abdominal pain is the commonest symptom. Hypertension is often seen, and blood pressure typically normalises after nephrectomy. Histology is classed as favourable or anaplastic. The triphasic pattern of blastema, epithelium and stroma is favourable, whereas diffuse anaplasia carries a recurrence risk of about 50 percent.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-paeds-fig1.webp",
-    "alt": "Gross pathology of Wilms tumor as an abdominal mass, with microscopic view of triphasic histology.",
-    "caption": "Wilms tumor: abdominal mass and characteristic triphasic histology. Image: The Armed Forces Institute of Pathology, CC0/PD, Wikimedia Commons.",
-    "ar": 1.5156
-   }
-  },
-  {
-   "tx": "Genetic markers guide Wilms risk. Alterations in **WT1**, CTNNB1 and WTX occur in roughly one-third of tumours. Loss of **1p and 16q** is an adverse finding even when histology is favourable. **Perilobar nephrogenic rests** in infants under one year carry a raised risk of contralateral disease. Bilateral involvement at diagnosis defines Stage V, while tumour spillage during surgery defines Stage III.",
-   "say": "Genetic markers guide Wilms risk. Alterations in WT1, CTNNB1 and WTX occur in roughly one third of tumours. Loss of 1p and 16q is adverse even with favourable histology. Perilobar nephrogenic rests in infants under one year raise the risk of contralateral disease. Bilateral involvement at diagnosis defines Stage V, while tumour spillage during surgery defines Stage III.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Adverse features",
-     "points": [
-      "Loss of 1p and 16q",
-      "Anaplastic histology",
-      "Perilobar nephrogenic rests in infants"
-     ]
+  "v": 1,
+  "module": "son-paeds",
+  "subject": "ss-medical-oncology",
+  "title": "Paediatric solid tumours: neuroblastoma, Wilms tumour, retinoblastoma and rhabdomyosarcoma",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Sympathetic neural crest lineage malignancies exhibit diverse clinical and biological behaviors. **Neuroblastoma** commonly arises in the adrenal medulla or paraspinal sympathetic ganglia. Genomic amplification of **MYCN** on chromosome 2p occurs in approximately 20% of cases, defining high-risk disease irrespective of age or clinical stage, mandating ultra-intensive multimodal induction, tandem autologous stem cell transplantation, radiation therapy, and anti-GD2 monoclonal antibody immunotherapy.",
+      "say": "Sympathetic neural crest lineage malignancies exhibit diverse clinical and biological behaviors. Neuroblastoma commonly arises in the adrenal medulla or paraspinal sympathetic ganglia. Genomic amplification of MYCN on chromosome 2p occurs in approximately 20% of cases, defining high-risk disease irrespective of age or stage, mandating intensive chemotherapy, autologous transplant, and anti-GD2 immunotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MYCN-Amplified Neuroblastoma",
+          "points": [
+            "Chromosomal region 2p24 amplification (>10 copies)",
+            "Rapid tumour proliferation and early metastasis",
+            "High-risk classification across all patient ages",
+            "Mandates tandem autologous HSCT and dinutuximab"
+          ]
+        },
+        "right": {
+          "title": "Favourable Biological Features",
+          "points": [
+            "Hyperdiploidy / near-triploidy without structural defects",
+            "Infant age (<18 months) at initial diagnosis",
+            "Stage MS (4S) spontaneous regression phenotype",
+            "High TrkA neurotrophin receptor expression"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Staging cues",
-     "points": [
-      "Spillage at surgery: Stage III",
-      "Bilateral disease: Stage V",
-      "Lungs: commonest metastatic site"
-     ]
+    {
+      "tx": "Infants with metastatic neural crest tumours possess an extraordinary capacity for spontaneous differentiation. Neuroblastoma **stage MS** formerly termed stage 4S occurs in infants younger than 18 months presenting with small localized primary tumours and metastases confined strictly to liver, skin, or minimal bone marrow involvement without cortical bone lesions. These tumours frequently undergo complete **spontaneous regression** or maturation into benign ganglioneuromas, managed primarily with watchful supportive observation.",
+      "say": "Infants with metastatic neural crest tumours possess an extraordinary capacity for spontaneous differentiation. Neuroblastoma stage MS occurs in infants younger than 18 months with small primary tumours and metastases confined to liver, skin, or minimal bone marrow. These tumours frequently undergo spontaneous regression or maturation, managed primarily with watchful supportive observation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "infant",
+            "label": "Infant Age Under 18 Months",
+            "level": 1
+          },
+          {
+            "id": "spread",
+            "label": "Metastases Limited to Liver, Skin, Marrow",
+            "level": 2
+          },
+          {
+            "id": "mycn_neg",
+            "label": "Non-Amplified MYCN Confirmed",
+            "level": 3
+          },
+          {
+            "id": "regress",
+            "label": "Spontaneous Regression / Minimal Supportive Chemo",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "infant",
+            "spread"
+          ],
+          [
+            "spread",
+            "mycn_neg"
+          ],
+          [
+            "mycn_neg",
+            "regress"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Embryonal renal neoplasms display classic triphasic histology mimicking developing metanephric blastema. **Wilms tumour** nephroblastoma comprises blastemal, epithelial, and stromal mesenchymal elements. In North American COG protocols, upfront radical nephrectomy guides surgical staging, whereas European SIOP protocols administer **preoperative chemotherapy** with vincristine and dactinomycin to shrink the tumour, induce a fibrous pseudocapsule, and prevent intraoperative capsule rupture and peritoneal spill.",
+      "say": "Embryonal renal neoplasms display classic triphasic histology mimicking developing metanephric blastema. Wilms tumour nephroblastoma comprises blastemal, epithelial, and stromal elements. In North American COG protocols, upfront radical nephrectomy guides surgical staging, whereas European SIOP protocols administer preoperative chemotherapy with vincristine and dactinomycin to prevent intraoperative rupture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "COG Paradigm (North America)",
+          "points": [
+            "Upfront radical nephrectomy with lymph node sampling",
+            "Accurate untouched pathological and molecular staging",
+            "Loss of heterozygosity at 1p and 16q directs therapy",
+            "Avoids overtreating benign cystic nephromas"
+          ]
+        },
+        "right": {
+          "title": "SIOP Paradigm (Europe / Global)",
+          "points": [
+            "Preoperative vincristine and dactinomycin",
+            "Shrinks primary tumour and forms firm pseudocapsule",
+            "Significantly reduces intraoperative tumour rupture",
+            "Post-chemotherapy histology assesses blastemal viability"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cellular pleomorphism and abnormal mitotic figures define adverse histological subtypes in nephroblastoma. Diffuse **anaplasia** characterized by markedly enlarged multipolar mitotic figures and hyperchromatic pleomorphic nuclei accounts for only 5% of Wilms tumour cases but drives over 50% of disease recurrences. Driven by underlying somatic **TP53 mutations**, anaplastic nephroblastoma displays intrinsic resistance to standard two-drug actinomycin and vincristine protocols, requiring intensive doxorubicin, cyclophosphamide, and etoposide regimens.",
+      "say": "Cellular pleomorphism and abnormal mitotic figures define adverse histological subtypes in nephroblastoma. Diffuse anaplasia characterized by markedly enlarged multipolar mitotic figures and hyperchromatic nuclei accounts for 5% of Wilms tumour cases but drives half of recurrences. Driven by underlying somatic TP53 mutations, anaplastic tumours require intensive multi-agent chemotherapy regimens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Category",
+          "Key Microscopic Criteria",
+          "Genetic Driver",
+          "Therapeutic Approach"
+        ],
+        "rows": [
+          [
+            "Favourable Histology",
+            "Triphasic: blastemal, stromal, epithelial",
+            "WT1, CTNNB1, WTX alterations",
+            "Vincristine + Dactinomycin +/- Doxorubicin"
+          ],
+          [
+            "Focal Anaplasia",
+            "Atypical mitoses restricted to single locus",
+            "Somatic TP53 wild-type generally",
+            "Curable with intermediate chemotherapy"
+          ],
+          [
+            "Diffuse Anaplasia",
+            "Non-localized atypical multipolar mitoses",
+            "Somatic TP53 loss of function",
+            "Intensive multi-agent regimens + Radiotherapy"
+          ],
+          [
+            "Blastemal-Predominant",
+            "High blastemal viability post-SIOP chemo",
+            "MicroRNA processing mutations",
+            "Treated as high-risk chemotherapy arm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Malignant transformation of developing neuroretinal tissue produces characteristic ocular abnormalities. **Retinoblastoma** typically presents with white pupillary reflex **leukocoria** and strabismus in early childhood. Inherited bilateral retinoblastoma results from germline inactivation of the RB1 tumour suppressor gene on chromosome 13q14. Intra-arterial chemotherapy via direct microcatheter infusion of **melphalan** into the ophthalmic artery achieves high globe preservation rates, avoiding external beam radiation.",
+      "say": "Malignant transformation of developing neuroretinal tissue produces characteristic ocular abnormalities. Retinoblastoma typically presents with white pupillary reflex leukocoria and strabismus in early childhood. Inherited bilateral retinoblastoma results from germline inactivation of the RB1 gene on chromosome 13q14. Intra-arterial chemotherapy via direct ophthalmic artery infusion of melphalan achieves high globe salvage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "leuko",
+            "label": "Childhood Leukocoria (Cat Eye Reflex)",
+            "level": 1
+          },
+          {
+            "id": "rb1",
+            "label": "Biallelic RB1 Inactivation (13q14)",
+            "level": 2
+          },
+          {
+            "id": "iac",
+            "label": "Ophthalmic Artery Chemotherapy (Melphalan)",
+            "level": 3
+          },
+          {
+            "id": "globe",
+            "label": ">80% Eye Preservation Without Enucleation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "leuko",
+            "rb1"
+          ],
+          [
+            "rb1",
+            "iac"
+          ],
+          [
+            "iac",
+            "globe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pediatric myogenic soft tissue sarcomas segregate into distinct histological and molecular subtypes. **Rhabdomyosarcoma** is categorized into embryonal and alveolar subtypes. **Embryonal rhabdomyosarcoma** ERMS is the most common variant, characterized by loss of heterozygosity at chromosome 11p15, occurring primarily in orbit and genitourinary sites in young children, displaying superior sensitivity to multi-agent chemotherapy with vincristine, dactinomycin, and cyclophosphamide VAC.",
+      "say": "Pediatric myogenic soft tissue sarcomas segregate into distinct histological and molecular subtypes. Rhabdomyosarcoma is categorized into embryonal and alveolar subtypes. Embryonal rhabdomyosarcoma ERMS is the most common variant, characterized by loss of heterozygosity at chromosome 11p15, occurring in orbit and genitourinary sites in young children, displaying favourable prognosis with VAC chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Embryonal Rhabdomyosarcoma (ERMS)",
+          "points": [
+            "Loss of heterozygosity at chromosome 11p15",
+            "Infants and young children (<5 years)",
+            "Favourable sites: orbit, head/neck (non-parameningeal), GU",
+            "Overall 5-year survival 75% to 80%"
+          ]
+        },
+        "right": {
+          "title": "Alveolar Rhabdomyosarcoma (ARMS)",
+          "points": [
+            "Reciprocal translocations: PAX3-FOXO1 or PAX7-FOXO1",
+            "Adolescents and older children",
+            "Unfavourable sites: extremity and trunk musculature",
+            "Aggressive course with early bone marrow metastasis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Aggressive rhabdomyosarcoma histologies harbour recurrent pathognomonic gene fusions. **Alveolar rhabdomyosarcoma** is defined by chromosomal translocations **t(2;13)(q35;q14)** or t(1;13)(p36;q14), fusing PAX3 or PAX7 with FOXO1. These chimeric transcription factors potently transactivate myogenic oncogenes, driving rapid metastasis to bone marrow and meninges. Modern risk stratification assigns all fusion-positive rhabdomyosarcomas to high-risk intensive multi-agent therapy regardless of primary anatomical location.",
+      "say": "Aggressive rhabdomyosarcoma histologies harbour recurrent pathognomonic gene fusions. Alveolar rhabdomyosarcoma is defined by chromosomal translocations t(2;13) or t(1;13), fusing PAX3 or PAX7 with FOXO1. These chimeric transcription factors transactivate myogenic oncogenes, driving rapid metastasis to marrow and meninges. Fusion-positive tumours receive intensive therapy regardless of anatomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Molecular Fusion",
+          "Chromosomal Breakpoints",
+          "Prevalence",
+          "Prognostic Significance"
+        ],
+        "rows": [
+          [
+            "PAX3-FOXO1",
+            "t(2;13)(q35;q14)",
+            "~60% of alveolar RMS",
+            "Unfavourable; high rate of systemic relapse"
+          ],
+          [
+            "PAX7-FOXO1",
+            "t(1;13)(p36;q14)",
+            "~20% of alveolar RMS",
+            "Slightly superior survival compared to PAX3"
+          ],
+          [
+            "Fusion-Negative",
+            "Complex structural variants",
+            "~20% of alveolar RMS",
+            "Behaves biologically like embryonal RMS"
+          ],
+          [
+            "MYOD1 Mutation",
+            "Somatic point mutation (L122R)",
+            "Spindle / sclerosing RMS",
+            "Highly aggressive refractory course"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic immunotherapy directed against ganglioside antigens eliminates microscopic residual neuroblastoma. **Dinutuximab** is a chimeric human-murine monoclonal antibody targeting **disialoganglioside GD2**, expressed on neuroblastoma cells and peripheral sensory nerve fibres. Added to alternating subcutaneous GM-CSF, intravenous IL-2, and oral isotretinoin maintenance in high-risk neuroblastoma, dinutuximab produced a 20% absolute improvement in 2-year event-free survival, requiring continuous opioid analgesia to suppress intense neuropathic pain.",
+      "say": "Systemic immunotherapy directed against ganglioside antigens eliminates microscopic residual neuroblastoma. Dinutuximab is a chimeric monoclonal antibody targeting disialoganglioside GD2, expressed on neuroectodermal cells and pain fibres. Added to GM-CSF, IL-2, and isotretinoin maintenance in high-risk neuroblastoma, dinutuximab produced a 20% improvement in event-free survival, requiring opioid analgesia for neuropathic pain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "remiss",
+            "label": "Post-Transplant Minimal Residual Disease",
+            "level": 1
+          },
+          {
+            "id": "dinu",
+            "label": "Anti-GD2 Dinutuximab Immunotherapy",
+            "level": 2
+          },
+          {
+            "id": "cytok",
+            "label": "Combined with GM-CSF and Interleukin-2",
+            "level": 3
+          },
+          {
+            "id": "efs_boost",
+            "label": "20% Gain in Event-Free Survival (ANBL0032)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "remiss",
+            "dinu"
+          ],
+          [
+            "dinu",
+            "cytok"
+          ],
+          [
+            "cytok",
+            "efs_boost"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Retinoblastoma** is the commonest primary intraocular malignancy of childhood and is caused by biallelic loss of the **RB1** gene at 13q14. Leukocoria is the usual presentation. Knudson's two-hit model explains sporadic unilateral disease, which forms about 55% of cases. Examination under anaesthesia remains the gold standard for diagnosis, and MRI is used to assess optic nerve invasion.",
-   "say": "Retinoblastoma is the commonest primary intraocular malignancy of childhood. It is caused by biallelic loss of the RB1 gene at 13q14. Leukocoria is the usual presentation. Knudson's two-hit model explains sporadic unilateral disease, which forms about 55 percent of cases. Examination under anaesthesia remains the gold standard for diagnosis, and MRI is used to assess optic nerve invasion.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Exam point"
-    ],
-    "rows": [
-     [
-      "Gene locus",
-      "RB1 at 13q14"
-     ],
-     [
-      "Sporadic unilateral",
-      "About 55% of cases"
-     ],
-     [
-      "Diagnosis",
-      "Examination under anaesthesia"
-     ],
-     [
-      "Imaging",
-      "MRI for optic nerve"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Hereditary **RB1** germline carriers face a lifelong risk of **osteosarcoma** and other non-ocular cancers, and external beam radiotherapy raises secondary malignancy risk substantially. Rarely, **MYCN amplification** drives disease without RB1 mutation. Group C tumours are treated with **chemoreduction**, while group E tumours usually need enucleation. Children of an affected carrier have a 50% inheritance risk.",
-   "say": "Hereditary RB1 germline carriers face a lifelong risk of osteosarcoma and other non-ocular cancers. External beam radiotherapy raises secondary malignancy risk substantially. Rarely, MYCN amplification drives disease without an RB1 mutation. Group C tumours are treated with chemoreduction, while group E tumours usually need enucleation. Children of an affected carrier have a 50 percent inheritance risk.",
-   "vis": null
+  ],
+  "quiz": [
+    "q_cfecfab36a12",
+    "q_214975910e54",
+    "q_34f49a0ce46a"
+  ],
+  "refs": [
+    "DeVita 12e Ch. 89 (Pediatric Solid Tumors)",
+    "Yu AL et al. Anti-GD2 antibody with GM-CSF, interleukin-2, and isotretinoin for neuroblastoma (ANBL0032). NEJM 2010",
+    "Nelson Textbook of Pediatrics 22e Ch. 520-524"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_cfecfab36a12",
-  "q_214975910e54",
-  "q_34f49a0ce46a"
- ],
- "src": [],
- "refs": [
-  "Chapter 13 in Nelson Textbook of Pediatrics (Editors)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 35
- }
 }
