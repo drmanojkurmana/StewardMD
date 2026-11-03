@@ -37,47 +37,11 @@
    "tx": "Ventilator-associated pneumonia, or **VAP**, is a separate threat that often coexists in long ICU stays. Pathogens reach the lower airway mainly by microaspiration of colonised secretions around the endotracheal cuff. Diagnosis needs new or progressive radiographic infiltrate plus clinical features such as fever, leukocytosis and purulent secretions. Prevention bundles, including head-of-bed elevation and daily oral care, reduce its incidence.",
    "say": "Ventilator-associated pneumonia, or VAP, is a separate threat that often coexists in long ICU stays. Pathogens reach the lower airway mainly by microaspiration of colonised secretions around the endotracheal cuff. Diagnosis needs new or progressive radiographic infiltrate plus clinical features such as fever, leukocytosis and purulent secretions. Prevention bundles, including head-of-bed elevation and daily oral care, reduce its incidence.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Intubation"
-     },
-     {
-      "id": "b",
-      "label": "Secretion pooling"
-     },
-     {
-      "id": "c",
-      "label": "Microaspiration"
-     },
-     {
-      "id": "d",
-      "label": "New infiltrate"
-     },
-     {
-      "id": "e",
-      "label": "Culture and treat"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/kb/media/vap-fig1.webp",
+    "alt": "Intubated airway with subglottic secretions, cuff microaspiration, luminal biofilm, purulent bronchitis and alveolar consolidation.",
+    "caption": "Cuff microaspiration, luminal biofilm and alveolar consolidation in ventilator-associated pneumonia (StewardMD).",
+    "ar": 1.3405
    }
   },
   {
