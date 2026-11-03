@@ -2,75 +2,30 @@
  "v": 1,
  "module": "sca-hypertension",
  "subject": "ss-cardiology",
- "title": "Systemic hypertension: diagnosis, targets and resistant hypertension",
- "minutes": 6,
+ "title": "Systemic Hypertension Evaluation and Management",
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Hypertension is confirmed when repeated **office blood pressure** readings remain above the diagnostic threshold set by current guidelines. Readings well above that level, often termed severe, need urgent assessment for **target organ damage**. Always measure after the patient has rested, use a cuff of the correct size, and repeat any abnormal reading before labelling. Screening should be opportunistic at every adult encounter, because many patients are unaware of their diagnosis.",
-   "say": "Hypertension is confirmed when repeated office blood pressure readings remain above the diagnostic threshold set by current guidelines. Readings well above that level, often termed severe, need urgent assessment for target organ damage. Always measure after the patient has rested, use a cuff of the correct size, and repeat any abnormal reading before labelling. Screening should be opportunistic at every adult encounter, because many patients are unaware of their diagnosis.",
-   "vis": null
-  },
-  {
-   "tx": "Use **ambulatory blood pressure monitoring** and **home blood pressure monitoring** to separate true disease from **white coat hypertension**. White coat hypertension has raised office but normal daytime readings and needs no drugs. **Masked hypertension** is the reverse: normal office readings but raised daytime ambulatory or home readings, and it carries real cardiovascular risk and needs treatment.",
-   "say": "Use ambulatory blood pressure monitoring and home blood pressure monitoring to separate true disease from white coat hypertension. White coat hypertension has raised office but normal daytime readings and needs no drugs. Masked hypertension is the reverse: normal office readings but raised daytime ambulatory or home readings, and it carries real cardiovascular risk and needs treatment.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "White coat hypertension",
-     "points": [
-      "Raised office readings",
-      "Normal daytime ambulatory or home readings",
-      "No drug treatment needed",
-      "Monitor periodically"
-     ]
-    },
-    "right": {
-     "title": "Masked hypertension",
-     "points": [
-      "Normal office readings",
-      "Raised daytime ambulatory or home readings",
-      "Carries cardiovascular risk",
-      "Treat as true hypertension"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "For SPRINT-based targets, guidance in adults at high cardiovascular risk favours a systolic target of about **120 mmHg** when tolerated, measured in a standardised way. The SPRINT trial showed fewer cardiovascular events and deaths with intensive lowering. In patients with diabetes, a general target below 130/80 mmHg applies, and frail or elderly patients need individualised, cautious lowering with orthostatic checks.",
-   "say": "For SPRINT-based targets, guidance in adults at high cardiovascular risk favours a systolic target of about 120 millimetres of mercury when tolerated, measured in a standardised way. The SPRINT trial showed fewer cardiovascular events and deaths with intensive lowering. In patients with diabetes, a general target below 130 over 80 applies, and frail or elderly patients need individualised, cautious lowering with orthostatic checks.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-hypertension-fig1.webp",
-    "alt": "A diagram illustrating different blood pressure targets for high cardiovascular risk, diabetes, and frail/elderly patients.",
-    "caption": "Blood pressure targets vary by patient group and risk",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "In **resistant hypertension**, blood pressure stays above target despite three drugs at adequate doses, one of which is a **diuretic**. First confirm **adherence** without confrontation and exclude **secondary causes**. The **PATHWAY-2** trial showed **spironolactone** is the preferred fourth agent, with potassium and renal function monitored closely. **Renal denervation** is an option for selected patients who remain uncontrolled.",
-   "say": "In resistant hypertension, blood pressure stays above target despite three drugs at adequate doses, one of which is a diuretic. First confirm adherence without confrontation and exclude secondary causes. The PATHWAY-2 trial showed spironolactone is the preferred fourth agent, with potassium and renal function monitored closely. Renal denervation is an option for selected patients who remain uncontrolled.",
+   "tx": "**Primary aldosteronism** represents the most frequent secondary etiology of systemic hypertension, accounting for **5%** to **10%** of all diagnosed hypertensive individuals. Screening relies on an elevated plasma **aldosterone-to-renin ratio** exceeding **20** to **30** with an elevated plasma aldosterone concentration. Diagnostic confirmation requires demonstrative failure of aldosterone suppression during oral sodium loading, intravenous saline infusion, or fludrocortisone suppression testing.",
+   "say": "Primary aldosteronism represents the most frequent secondary etiology of systemic hypertension, accounting for 5% to 10% of all diagnosed hypertensive individuals. Screening relies on an elevated plasma aldosterone-to-renin ratio exceeding 20 to 30 with an elevated plasma aldosterone concentration. Diagnostic confirmation requires demonstrative failure of aldosterone suppression during oral sodium loading, intravenous saline infusion, or fludrocortisone suppression testing.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Confirm adherence"
+      "label": "Screening: Aldosterone-to-Renin Ratio > 20 to 30"
      },
      {
       "id": "b",
-      "label": "Exclude secondary causes"
+      "label": "Confirmatory Testing: High-Sodium Oral or IV Saline Load"
      },
      {
       "id": "c",
-      "label": "Optimise three drugs including a diuretic"
+      "label": "Adrenal CT Imaging for Adenoma vs Hyperplasia"
      },
      {
       "id": "d",
-      "label": "Add spironolactone"
-     },
-     {
-      "id": "e",
-      "label": "Consider renal denervation"
+      "label": "Adrenal Venous Sampling for Surgical Candidates"
      }
     ],
     "edges": [
@@ -85,18 +40,235 @@
      [
       "c",
       "d"
-     ],
-     [
-      "d",
-      "e"
      ]
     ]
    }
   },
   {
-   "tx": "**Hypertensive emergency** means severe blood pressure with acute target organ damage, needing controlled IV lowering in a monitored setting, not a rapid oral dose. Also screen for **secondary hypertension** in young patients, resistant cases, or sudden onset. In pregnancy, ACE inhibitors and ARBs must be stopped before conception, with labetalol or nifedipine as safer options.",
-   "say": "Hypertensive emergency means severe blood pressure with acute target organ damage, needing controlled intravenous lowering in a monitored setting, not a rapid oral dose. Also screen for secondary hypertension in young patients, resistant cases, or sudden onset. In pregnancy, ACE inhibitors and ARBs must be stopped before conception, with labetalol or nifedipine as safer options.",
-   "vis": null
+   "tx": "Renovascular hypertension stems from luminal narrowing of one or both renal arteries, typically due to atherosclerosis or **fibromuscular dysplasia**. Atherosclerosis predominantly affects older smokers at the renal artery ostium, whereas fibromuscular dysplasia targets young females, classically involving the middle and distal arterial segments. Catheter angiography demonstrates a diagnostic **string-of-beads** contour reflecting alternating stenotic webs and mural aneurysms, which responds well to balloon angioplasty without stenting.",
+   "say": "Renovascular hypertension stems from luminal narrowing of one or both renal arteries, typically due to atherosclerosis or fibromuscular dysplasia. Atherosclerosis predominantly affects older smokers at the renal artery ostium, whereas fibromuscular dysplasia targets young females, classically involving the middle and distal arterial segments. Catheter angiography demonstrates a diagnostic string-of-beads contour reflecting alternating stenotic webs and mural aneurysms, which responds well to balloon angioplasty without stenting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atherosclerotic Renal Stenosis",
+     "points": [
+      "Older adults with diffuse vascular disease",
+      "Involves ostium and proximal third of renal artery",
+      "High restenosis after balloon alone, requires stenting"
+     ]
+    },
+    "right": {
+     "title": "Fibromuscular Dysplasia",
+     "points": [
+      "Young females under 50 years",
+      "Involves mid and distal artery with string-of-beads",
+      "Excellent outcomes with plain balloon angioplasty"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **hypertensive emergency** is characterized by severe blood pressure elevation above **180**/**120** mmHg complicated by acute progressive hypertension-mediated **organ damage**. Critical presentations require intravenous titration tailored to the specific target organ injury. For acute pulmonary edema, intravenous nitroglycerin or clevidipine is preferred while beta-blockers are avoided. In acute aortic dissection, beta-blockade precedes vasodilators to curb shear stress.",
+   "say": "A hypertensive emergency is characterized by severe blood pressure elevation above 180/120 mmHg complicated by acute progressive hypertension-mediated organ damage. Critical presentations require intravenous titration tailored to the specific target organ injury. For acute pulmonary edema, intravenous nitroglycerin or clevidipine is preferred while beta-blockers are avoided. In acute aortic dissection, beta-blockade precedes vasodilators to curb shear stress.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target Organ Presentation",
+     "Preferred Intravenous Regimen",
+     "Key Therapeutic Nuance"
+    ],
+    "rows": [
+     [
+      "Aortic dissection",
+      "Esmolol plus clevidipine or nitroprusside",
+      "Rapid systolic reduction < 120 mmHg within 20 minutes"
+     ],
+     [
+      "Acute pulmonary edema",
+      "Nitroglycerin or clevidipine plus loop diuretic",
+      "Avoid beta-blockers in acute decompensated failure"
+     ],
+     [
+      "Acute coronary syndrome",
+      "Nitroglycerin or labetalol",
+      "Avoid hydralazine due to reflex tachycardia"
+     ],
+     [
+      "Hypertensive encephalopathy",
+      "Nicardipine or labetalol",
+      "Avoid nitroprusside to prevent raised intracranial pressure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The therapeutic **target blood pressure** lowering in most hypertensive emergencies requires lowering mean arterial pressure, abbreviated as **MAP**, by **20%** to **25%** within the **1**st hour of treatment. Overly rapid blood pressure reduction risks profound cerebral, myocardial, or renal hypoperfusion. Aortic dissection is an exception requiring immediate systolic reduction below 120 mmHg within 20 minutes, while pre-eclampsia targets systolic levels around 140 mmHg.",
+   "say": "The therapeutic target blood pressure lowering in most hypertensive emergencies requires lowering mean arterial pressure, abbreviated as MAP, by 20% to 25% within the 1st hour of treatment. Overly rapid blood pressure reduction risks profound cerebral, myocardial, or renal hypoperfusion. Aortic dissection is an exception requiring immediate systolic reduction below 120 mmHg within 20 minutes, while pre-eclampsia targets systolic levels around 140 mmHg.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Confirm Acute Target Organ Damage and Severe BP Elevation"
+     },
+     {
+      "id": "b",
+      "label": "Initiate Tailored Continuous IV Infusion in ICU"
+     },
+     {
+      "id": "c",
+      "label": "Reduce MAP by 20% to 25% Within the 1st Hour"
+     },
+     {
+      "id": "d",
+      "label": "Gradual Reduction Toward 160/100 Over Next 2 to 6 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Resistant hypertension** is formally diagnosed when clinic blood pressure remains persistently elevated despite the concurrent prescription of **three antihypertensive agents** from different drug classes at maximum tolerated dosages. True regimen resistance mandates inclusion of a long-acting thiazide-like diuretic, a renin-angiotensin blocker, and a dihydropyridine calcium channel blocker. Pseudoresistance caused by medication nonadherence, improper cuff sizing, and white-coat hypertension must be excluded.",
+   "say": "Resistant hypertension is formally diagnosed when clinic blood pressure remains persistently elevated despite the concurrent prescription of three antihypertensive agents from different drug classes at maximum tolerated dosages. True regimen resistance mandates inclusion of a long-acting thiazide-like diuretic, a renin-angiotensin blocker, and a dihydropyridine calcium channel blocker. Pseudoresistance caused by medication nonadherence, improper cuff sizing, and white-coat hypertension must be excluded.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Component",
+     "Recommended Drug Class",
+     "Representative Pharmacologic Agent"
+    ],
+    "rows": [
+     [
+      "Drug 1",
+      "Renin-angiotensin system inhibitor",
+      "ACE inhibitor or angiotensin receptor blocker"
+     ],
+     [
+      "Drug 2",
+      "Calcium channel blocker",
+      "Amlodipine or nifedipine gastrointestinal system"
+     ],
+     [
+      "Drug 3",
+      "Thiazide-like diuretic",
+      "Chlorthalidone or indapamide"
+     ],
+     [
+      "Exclusion step",
+      "24-hour ambulatory monitoring",
+      "Rule out white-coat effect and confirm true adherence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The landmark **PATHWAY-2** randomized trial demonstrated that the mineralocorticoid receptor antagonist spironolactone administered at **25** to **50** mg daily represents the most effective **fourth-line agent** for treating resistant hypertension. In this double-blind crossover study, spironolactone was vastly superior to doxazosin, bisoprolol, and placebo, establishing that occult sodium retention underpins treatment-refractory essential hypertension.",
+   "say": "The landmark PATHWAY-2 randomized trial demonstrated that the mineralocorticoid receptor antagonist spironolactone administered at 25 to 50 mg daily represents the most effective fourth-line agent for treating resistant hypertension. In this double-blind crossover study, spironolactone was vastly superior to doxazosin, bisoprolol, and placebo, establishing that occult sodium retention underpins treatment-refractory essential hypertension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spironolactone 25 to 50 mg",
+     "points": [
+      "Superior systolic reduction in PATHWAY-2",
+      "Directly targets excess volume and sodium retention",
+      "Monitored with serial potassium and creatinine"
+     ]
+    },
+    "right": {
+     "title": "Alternative 4th-Line Options",
+     "points": [
+      "Doxazosin alpha-1 blocker provides lesser reduction",
+      "Bisoprolol beta-blocker less potent for volume control",
+      "Amiloride serves as alternative if gynecomastia occurs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Catheter-based **renal sympathetic denervation** provides an interventional therapy for uncontrolled and resistant hypertension. The procedure delivers targeted **radiofrequency energy** or focused endovascular ultrasound across renal arteries to ablate hyperactive renal sympathetic efferent and afferent nerve fibers. Sham-controlled clinical trials, including SPYRAL and RADIANCE programs, demonstrate significant ambulatory blood pressure reductions across treated cohorts.",
+   "say": "Catheter-based renal sympathetic denervation provides an interventional therapy for uncontrolled and resistant hypertension. The procedure delivers targeted radiofrequency energy or focused endovascular ultrasound across renal arteries to ablate hyperactive renal sympathetic efferent and afferent nerve fibers. Sham-controlled clinical trials, including SPYRAL and RADIANCE programs, demonstrate significant ambulatory blood pressure reductions across treated cohorts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Femoral Arterial Access and Guide Catheter Placement"
+     },
+     {
+      "id": "b",
+      "label": "Renal Angiography to Map Main and Branch Vessels"
+     },
+     {
+      "id": "c",
+      "label": "Circumferential Radiofrequency Energy Delivery"
+     },
+     {
+      "id": "d",
+      "label": "Ablation of Afferent and Efferent Sympathetic Fibres"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pheochromocytoma** and functional sympathetic paraganglioma are rare neuroendocrine neoplasms that synthesize and secrete excess catecholamines. Patients typically present with severe paroxysmal hypertension accompanied by the classic triad of pounding headaches, diaphoresis, and tachycardia. Initial biochemical diagnosis requires measurement of **24**-hour urinary or plasma free **fractionated metanephrines**, followed by cross-sectional imaging and preoperative alpha-blockade with phenoxybenzamine.",
+   "say": "Pheochromocytoma and functional sympathetic paraganglioma are rare neuroendocrine neoplasms that synthesize and secrete excess catecholamines. Patients typically present with severe paroxysmal hypertension accompanied by the classic triad of pounding headaches, diaphoresis, and tachycardia. Initial biochemical diagnosis requires measurement of 24-hour urinary or plasma free fractionated metanephrines, followed by cross-sectional imaging and preoperative alpha-blockade with phenoxybenzamine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Step",
+     "Preferred Modality",
+     "Key Clinical Caveat"
+    ],
+    "rows": [
+     [
+      "Biochemical screening",
+      "Plasma or 24-hour urine fractionated metanephrines",
+      "High sensitivity; avoid stress and interfering drugs"
+     ],
+     [
+      "Anatomical localization",
+      "Contrast-enhanced CT or MRI abdomen/pelvis",
+      "Identify adrenal mass or extra-adrenal paraganglioma"
+     ],
+     [
+      "Functional imaging",
+      "123-I-MIBG or 68-Ga-DOTATATE PET scan",
+      "Detects multifocal, recurrent, or metastatic disease"
+     ],
+     [
+      "Preoperative preparation",
+      "Alpha-blockade followed by beta-blockade",
+      "Never initiate beta-blocker first to prevent crisis"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [
@@ -104,24 +276,8 @@
   "q_29be1060e877",
   "q_4d5af8eddb3a"
  ],
- "src": [],
- "refs": [
-  "NICE NG136 Hypertension in adults: diagnosis and management",
-  "ESC/ESH Guidelines for the management of arterial hypertension 2024"
- ],
+ "src": null,
+ "refs": null,
  "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 38
- }
+ "checks": null
 }

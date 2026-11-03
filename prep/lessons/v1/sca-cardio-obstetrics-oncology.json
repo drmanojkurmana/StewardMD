@@ -2,75 +2,261 @@
  "v": 1,
  "module": "sca-cardio-obstetrics-oncology",
  "subject": "ss-cardiology",
- "title": "Peripartum cardiomyopathy: diagnosis and early management",
- "minutes": 5,
+ "title": "Cardiovascular Disease in Pregnancy and Cardio-Oncology",
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Peripartum cardiomyopathy (PPCM) is heart failure caused by **left ventricular systolic dysfunction** that appears in the last month of pregnancy or within about five months after delivery. The **ejection fraction** must be below 45 percent, and no other cause should be found. **Pre-eclampsia** and viral myocarditis must be excluded before the label is applied.",
-   "say": "Peripartum cardiomyopathy, or PPCM, is heart failure caused by left ventricular systolic dysfunction. It appears in the last month of pregnancy or within about five months after delivery. The ejection fraction must be below 45 percent, and no other cause should be found. Pre-eclampsia and viral myocarditis must be excluded before the label is applied. Typical symptoms include breathlessness on exertion, orthopnoea and leg swelling.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-cardio-obstetrics-oncology-fig1.webp",
-    "alt": "Flowchart showing diagnostic steps for Peripartum Cardiomyopathy, including EF < 45% and exclusion of other causes.",
-    "caption": "PPCM diagnostic criteria flowchart",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Transthoracic echocardiography is the key test because it measures the **ejection fraction** and chamber size. Other tests are used only when the picture is unclear or the cause is still in doubt. Biopsy is kept for atypical or refractory cases, not for routine confirmation.",
-   "say": "Transthoracic echocardiography is the key test, because it measures the ejection fraction and the size of the heart chambers. Cardiac magnetic resonance is used when the echo result is unclear. Coronary angiography is reserved for patients in whom an ischaemic cause is suspected. Endomyocardial biopsy is kept for atypical or refractory cases rather than routine confirmation.",
+   "tx": "The **mWHO risk classification** system integrates maternal cardiac conditions to stratify risk across five categories, predicting **maternal cardiovascular risk** and adverse cardiac event rates. Class 1 carries lowest risk (**2.5%** to **5%** event rate) where pregnancy is safe. Risk escalates to Class 4 (**40%** to **100%** major event rate) representing extreme hazard where pregnancy is strictly contraindicated. Multidisciplinary pregnancy heart team evaluation is paramount.",
+   "say": "The mWHO risk classification system integrates maternal cardiac conditions to stratify risk across five categories, predicting maternal cardiovascular risk and adverse cardiac event rates. Class 1 carries lowest risk, with a 2 point 5% to 5% event rate, where pregnancy is safe. Risk escalates to Class 4, with a 40% to 100% major event rate, representing extreme hazard where pregnancy is strictly contraindicated. Multidisciplinary pregnancy heart team evaluation is paramount.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Test",
-     "Role in PPCM"
+     "mWHO Class",
+     "Maternal Cardiovascular Risk",
+     "Clinical Counseling Guidance"
     ],
     "rows": [
      [
-      "Echocardiography",
-      "Measures ejection fraction and confirms diagnosis"
+      "Class 1",
+      "Very low risk (2.5% to 5%)",
+      "Manage at local hospital with routine obstetric follow-up"
      ],
      [
-      "Cardiac MRI",
-      "Used when echo is unclear"
+      "Class 2",
+      "Low to moderate risk (5.7% to 10.5%)",
+      "Follow at local hospital with cardiology consultation"
      ],
      [
-      "Coronary angiography",
-      "Excludes ischaemic cause if suspected"
+      "Class 3",
+      "High risk (19% to 27%)",
+      "Manage at tertiary center by dedicated multidisciplinary team"
      ],
      [
-      "Endomyocardial biopsy",
-      "Reserved for atypical or refractory cases"
+      "Class 4",
+      "Extremely high risk (40% to 100%)",
+      "Pregnancy strictly contraindicated; discuss termination if pregnant"
      ]
     ]
    }
   },
   {
-   "tx": "Management of **heart failure** in pregnancy centres on agents with a reassuring safety profile. Selected **beta-blockers** are often continued, and **loop diuretics** relieve congestion when fluid builds up. **ACE inhibitors** and **angiotensin receptor blockers** are generally stopped before conception or once pregnancy is recognised, because of fetal toxicity. The same caution applies to combined sacubitril-containing products.",
-   "say": "Management of heart failure in pregnancy relies on medicines with a reassuring safety profile. Certain beta-blockers are often continued, and loop diuretics relieve congestion when fluid builds up. ACE inhibitors and angiotensin receptor blockers are generally stopped before conception or as soon as pregnancy is recognised, because they can harm the fetus. The same caution applies to combined sacubitril-containing products.",
+   "tx": "Under European and international guidelines, **mWHO Class IV** conditions represent extreme hazard where pregnancy is **contraindicated**. Key pathologies include pulmonary arterial hypertension of any etiology, severe systemic ventricular dysfunction with left ventricular ejection fraction under **30%** or NYHA Class 3 to 4, severe symptomatic aortic stenosis, severe native mitral stenosis, and vascular Ehlers-Danlos syndrome. Pre-pregnancy counseling and termination discussion are essential.",
+   "say": "Under European and international guidelines, mWHO Class 4 conditions represent extreme hazard where pregnancy is contraindicated. Key pathologies include pulmonary arterial hypertension of any etiology, severe systemic ventricular dysfunction with left ventricular ejection fraction under 30% or NYHA Class 3 to 4, severe symptomatic aortic stenosis, severe native mitral stenosis, and vascular Ehlers-Danlos syndrome. Pre-pregnancy counseling and termination discussion are essential.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Generally compatible in pregnancy",
+     "title": "mWHO Class 4 Conditions",
      "points": [
-      "Selected beta-blockers",
-      "Loop diuretics for congestion"
+      "Pulmonary arterial hypertension of any etiology",
+      "Severe ventricular dysfunction with LVEF < 30%",
+      "Severe native mitral or symptomatic aortic stenosis"
      ]
     },
     "right": {
-     "title": "Generally avoided in pregnancy",
+     "title": "Clinical Guidance",
      "points": [
-      "ACE inhibitors",
-      "Angiotensin receptor blockers",
-      "Combined sacubitril-containing products"
+      "Pregnancy strictly contraindicated",
+      "Pre-pregnancy counseling on maternal mortality",
+      "Discuss early termination options if conception occurs"
      ]
     }
    }
   },
   {
-   "tx": "Anticoagulation is considered for pregnant women with markedly impaired **left ventricular systolic function** or a **left ventricular thrombus** on imaging. **Injectable agents** that do not cross the placenta are the usual choice in the first trimester, because certain oral agents carry a risk of **fetal harm**. Specialist **obstetric cardiology** input should guide timing and the peripartum switch plan.",
-   "say": "Anticoagulation is considered for pregnant women with markedly impaired left ventricular systolic function, or when a left ventricular thrombus is seen on imaging. Injectable agents that do not cross the placenta are the usual choice in the first trimester, because certain oral agents carry a risk of fetal harm. Specialist obstetric cardiology input should guide the timing and the plan for switching around delivery.",
-   "vis": null
+   "tx": "Anticoagulation for pregnant patients with **mechanical prosthetic heart valves** requires delicate balance. Warfarin carries dose-dependent teratogenicity; low-dose warfarin at **5** mg daily or less during the **1**st trimester confers embryopathy rates below **3%** with superior maternal valve thrombosis prevention. Alternatively, therapeutic dose-adjusted low-molecular-weight heparin with rigorous peak **anti-Xa monitoring** targeting **0.8** to **1.2** IU/mL may be employed.",
+   "say": "Anticoagulation for pregnant patients with mechanical prosthetic heart valves requires delicate balance. Warfarin carries dose-dependent teratogenicity; low-dose warfarin at 5 mg daily or less during the 1st trimester confers embryopathy rates below 3% with superior maternal valve thrombosis prevention. Alternatively, therapeutic dose-adjusted low-molecular-weight heparin with rigorous peak anti-Xa monitoring targeting 0.8 to 1.2 IU/mL may be employed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Evaluate Warfarin Daily Dose at Conception"
+     },
+     {
+      "id": "b",
+      "label": "Warfarin <= 5 mg/day: Continue Warfarin or Switch to LMWH"
+     },
+     {
+      "id": "c",
+      "label": "Warfarin > 5 mg/day: Switch to LMWH in 1st Trimester"
+     },
+     {
+      "id": "d",
+      "label": "Maintain Peak Anti-Xa 0.8 to 1.2 IU/mL with Weekly Checks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "a",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Peripartum cardiomyopathy** presents as heart failure with reduced left ventricular ejection fraction under **45%** in late pregnancy or postpartum without identifiable cause. Vascular prolactin cleavage produces a **16**-kDa angiostatic fragment that induces microvascular damage. Beyond standard heart failure therapy, adding the dopamine D**2** receptor agonist **bromocriptine** suppresses prolactin release and significantly promotes left ventricular functional recovery in clinical investigations.",
+   "say": "Peripartum cardiomyopathy presents as heart failure with reduced left ventricular ejection fraction under 45% in late pregnancy or postpartum without identifiable cause. Vascular prolactin cleavage produces a 16-kDa angiostatic fragment that induces microvascular damage. Beyond standard heart failure therapy, adding the dopamine D2 receptor agonist bromocriptine suppresses prolactin release and significantly promotes left ventricular functional recovery in clinical investigations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PPCM Pathophysiology",
+     "points": [
+      "Late gestational oxidative stress triggers cathepsin D",
+      "Cleavage of 23-kDa prolactin into 16-kDa fragment",
+      "Endothelial apoptosis, capillary rarefaction, heart failure"
+     ]
+    },
+    "right": {
+     "title": "Targeted Pharmacotherapy",
+     "points": [
+      "Bromocriptine D2 agonist blocks pituitary prolactin",
+      "Prevents production of vasculotoxic 16-kDa fragment",
+      "Improves LVEF recovery, paired with anticoagulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anthracycline cardiotoxicity** induced by doxorubicin causes dose-dependent, irreversible type **1** myocardial injury through **topoisomerase II-beta** poisoning and oxidative stress. This triggers double-strand DNA breaks and cardiomyocyte death. Clinical heart failure risk rises sharply beyond cumulative lifetime doxorubicin exposure of **400** to **550** mg/m**2**, establishing strict cumulative dosage ceilings and surveillance standards across oncology protocols.",
+   "say": "Anthracycline cardiotoxicity induced by doxorubicin causes dose-dependent, irreversible type 1 myocardial injury through topoisomerase II-beta poisoning and oxidative stress. This triggers double-strand DNA breaks and cardiomyocyte death. Clinical heart failure risk rises sharply beyond cumulative lifetime doxorubicin exposure of 400 to 550 mg/m2, establishing strict cumulative dosage ceilings and surveillance standards across oncology protocols.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Doxorubicin Cumulative Dose",
+     "Estimated Heart Failure Incidence",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "Under 400 mg/m2",
+      "Less than 5%",
+      "Routine baseline and post-treatment echocardiography"
+     ],
+     [
+      "400 to 550 mg/m2",
+      "Rises from 5% to over 25%",
+      "Initiate cardioprotection and serial strain monitoring"
+     ],
+     [
+      "Over 550 mg/m2",
+      "Exceeds 25% to 30%",
+      "Avoid exceeding this ceiling unless vital to oncologic survival"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dexrazoxane** is an intracellular iron chelator and catalytic **topoisomerase II inhibitor** that provides proven cardioprotection against anthracycline cardiotoxicity. By binding topoisomerase **2**-beta before doxorubicin exposure, dexrazoxane prevents anthracycline binding and reactive radical generation without compromising oncologic antitumour efficacy. It is indicated for patients requiring high-dose anthracyclines.",
+   "say": "Dexrazoxane is an intracellular iron chelator and catalytic topoisomerase II inhibitor that provides proven cardioprotection against anthracycline cardiotoxicity. By binding topoisomerase 2-beta before doxorubicin exposure, dexrazoxane prevents anthracycline binding and reactive radical generation without compromising oncologic antitumour efficacy. It is indicated for patients requiring high-dose anthracyclines.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Administer IV Dexrazoxane 30 Minutes Pre-Chemotherapy"
+     },
+     {
+      "id": "b",
+      "label": "Catalytic Inhibition of Topoisomerase 2-Beta"
+     },
+     {
+      "id": "c",
+      "label": "Prevention of Anthracycline-DNA Cleavable Complexes"
+     },
+     {
+      "id": "d",
+      "label": "Preservation of Myocyte Viability and Ejection Fraction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trastuzumab cardiotoxicity** exemplifies dose-independent **type II myocardial dysfunction** arising from HER**2** receptor blockade on adult cardiomyocytes. Unlike anthracyclines, trastuzumab impairs cytoprotective ErbB2 signaling without causing ultrastructural damage or myocyte necrosis. Manifesting primarily as an asymptomatic left ventricular ejection fraction decline, the cardiomyopathy is typically fully reversible upon temporary drug interruption and medical therapy.",
+   "say": "Trastuzumab cardiotoxicity exemplifies dose-independent type II myocardial dysfunction arising from HER2 receptor blockade on adult cardiomyocytes. Unlike anthracyclines, trastuzumab impairs cytoprotective ErbB2 signaling without causing ultrastructural damage or myocyte necrosis. Manifesting primarily as an asymptomatic left ventricular ejection fraction decline, the cardiomyopathy is typically fully reversible upon temporary drug interruption and medical therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1: Anthracyclines",
+     "points": [
+      "Dose-dependent cumulative myocardial damage",
+      "Cardiomyocyte apoptosis and ultrastructural loss",
+      "Irreversible myocardial injury and scarring"
+     ]
+    },
+    "right": {
+     "title": "Type 2: Trastuzumab",
+     "points": [
+      "Dose-independent reversible functional stunning",
+      "No ultrastructural loss or myocyte apoptosis",
+      "High likelihood of complete recovery upon cessation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cancer therapy-related **cardiac dysfunction** is formally monitored by serial echocardiography. The diagnostic criteria encompass a relative decline in **global longitudinal strain** exceeding **15%** from baseline, or an absolute reduction in left ventricular ejection fraction of **10** or more percentage points to an absolute value below **50%**. Detecting strain impairment allows early cardioprotective pharmacotherapy before permanent functional impairment ensues.",
+   "say": "Cancer therapy-related cardiac dysfunction is formally monitored by serial echocardiography. The diagnostic criteria encompass a relative decline in global longitudinal strain exceeding 15% from baseline, or an absolute reduction in left ventricular ejection fraction of 10 or more percentage points to an absolute value below 50%. Detecting strain impairment allows early cardioprotective pharmacotherapy before permanent functional impairment ensues.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Baseline Echocardiography Measuring LVEF and GLS"
+     },
+     {
+      "id": "b",
+      "label": "Surveillance Echo During Active Chemotherapy Cycles"
+     },
+     {
+      "id": "c",
+      "label": "Detect Relative GLS Decline > 15% or LVEF Drop >= 10% to < 50%"
+     },
+     {
+      "id": "d",
+      "label": "Initiate Neurohormonal Blockade with ACEI and Beta-Blocker"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [
@@ -78,23 +264,8 @@
   "q_aad0c996d72f",
   "q_0b01dab61513"
  ],
- "src": [],
- "refs": [
-  "2018 ESC Guidelines for the management of cardiovascular diseases during pregnancy"
- ],
+ "src": null,
+ "refs": null,
  "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 13
- }
+ "checks": null
 }

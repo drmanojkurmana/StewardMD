@@ -2,68 +2,144 @@
  "v": 1,
  "module": "sca-antiarrhythmic-drugs",
  "subject": "ss-cardiology",
- "title": "Antiarrhythmic Drugs: Classification, Class III Agents and Torsades",
- "minutes": 5,
+ "title": "Antiarrhythmic Drugs and Electrophysiology",
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Antiarrhythmic drugs are classified by the **Vaughan Williams** scheme, which sorts agents by their main electrophysiological effect. Class I drugs block sodium channels, class II drugs block beta receptors, class III drugs block potassium channels and prolong repolarisation, and class IV drugs block calcium channels. Class III agents carry the greatest risk of **torsades de pointes**, so QT interval monitoring matters.",
-   "say": "Antiarrhythmic drugs are classified by the Vaughan Williams scheme, which sorts agents by their main electrophysiological effect. Class I drugs block sodium channels, class II drugs block beta receptors, class III drugs block potassium channels and prolong repolarisation, and class IV drugs block calcium channels. Class III agents carry the greatest risk of torsades de pointes, so QT interval monitoring matters.",
+   "tx": "The **Vaughan Williams** classification categorizes antiarrhythmics into four primary functional classes. Class 1 agents block voltage-gated sodium channels, subdivided into 1a, 1b, and 1c. Class 2 agents are beta-blockers that blunt sympathetic drive. Class 3 agents are **potassium channel blockers** that prolong repolarization. Class 4 agents are nondihydropyridine calcium channel blockers that depress sinoatrial and atrioventricular nodal conduction.",
+   "say": "The Vaughan Williams classification categorizes antiarrhythmics into four primary functional classes. Class 1 agents block voltage-gated sodium channels and are subdivided into 1a, 1b, and 1c. Class 2 agents are beta-blockers that blunt sympathetic drive. Class 3 agents are potassium channel blockers that prolong cardiac repolarization. Class 4 agents are nondihydropyridine calcium channel blockers that depress sinoatrial and atrioventricular nodal conduction.",
    "vis": {
     "kind": "table",
     "cols": [
      "Class",
-     "Typical agents",
-     "Main action"
+     "Primary Target",
+     "Key Prototype Drugs"
     ],
     "rows": [
      [
-      "I",
-      "Flecainide, propafenone",
-      "Block sodium channels"
+      "Class 1",
+      "Sodium channels",
+      "Ia quinidine, Ib lidocaine, Ic flecainide"
      ],
      [
-      "II",
-      "Metoprolol",
-      "Block beta receptors"
+      "Class 2",
+      "Beta-adrenergic receptors",
+      "Metoprolol, carvedilol, bisoprolol"
      ],
      [
-      "III",
-      "Dofetilide, sotalol, amiodarone",
-      "Block potassium channels"
+      "Class 3",
+      "Potassium channels",
+      "Amiodarone, sotalol, dofetilide"
      ],
      [
-      "IV",
-      "Verapamil",
-      "Block calcium channels"
+      "Class 4",
+      "L-type calcium channels",
+      "Verapamil, diltiazem"
      ]
     ]
    }
   },
   {
-   "tx": "Acquired QT prolongation with **torsades de pointes** is managed step by step. Start with intravenous magnesium sulfate, usually 2 grams. If the rhythm persists or the heart rate is low, use overdrive pacing or isoproterenol to raise the rate and shorten the QT interval. Defibrillate if the patient is unstable, and stop the offending drug.",
-   "say": "Acquired QT prolongation with torsades de pointes is managed step by step. Start with intravenous magnesium sulfate, usually 2 grams. If the rhythm persists or the heart rate is low, use overdrive pacing or isoproterenol to raise the rate and shorten the QT interval. Defibrillate if the patient is unstable, and stop the offending drug.",
+   "tx": "The landmark **CAST trial** evaluated premature ventricular suppression after myocardial infarction and yielded practice-changing findings. Enrolling post-infarction patients with ventricular ectopy, the trial demonstrated that Class 1c sodium channel blockers flecainide and encainide significantly increased arrhythmic mortality compared with placebo. Consequently, in patients with **structural heart disease** or prior infarction, Class 1c agents remain contraindicated due to lethal proarrhythmia.",
+   "say": "The landmark CAST trial evaluated premature ventricular suppression after myocardial infarction and yielded practice-changing findings. Enrolling post-infarction patients with ventricular ectopy, the trial demonstrated that Class 1c sodium channel blockers flecainide and encainide significantly increased arrhythmic mortality compared with placebo. Consequently, in patients with structural heart disease or prior infarction, Class 1c agents remain contraindicated due to lethal proarrhythmia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intact Structural Heart",
+     "points": [
+      "Class 1c agents effective for rhythm control",
+      "Low risk of ventricular proarrhythmia",
+      "Permissible for pill-in-the-pocket strategy"
+     ]
+    },
+    "right": {
+     "title": "Structural Heart Disease",
+     "points": [
+      "CAST trial demonstrated excess mortality",
+      "Marked proarrhythmia and ventricular tachycardia",
+      "Strictly contraindicated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Amiodarone** exhibits electrophysiological properties across all 4 Vaughan Williams classes, establishing broad clinical antiarrhythmic efficacy. It slows conduction, blunts adrenergic tone, blocks potassium currents, and inhibits calcium influx. While safe in heart failure with reduced ejection fraction, long-term administration requires vigilance for multi-organ adverse effects including **pulmonary fibrosis**, thyroid dysfunction, elevated hepatic transaminases, and asymptomatic corneal microdeposits.",
+   "say": "Amiodarone exhibits electrophysiological properties across all 4 Vaughan Williams classes, establishing broad clinical antiarrhythmic efficacy. It slows conduction, blunts adrenergic tone, blocks potassium currents, and inhibits calcium influx. While safe in heart failure with reduced ejection fraction, long-term administration requires vigilance for multi-organ adverse effects including pulmonary fibrosis, thyroid dysfunction, elevated hepatic transaminases, and asymptomatic corneal microdeposits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target Organ",
+     "Pathology and Manifestation",
+     "Recommended Surveillance"
+    ],
+    "rows": [
+     [
+      "Lungs",
+      "Pulmonary fibrosis and pneumonitis",
+      "Baseline chest radiograph, repeat for symptoms"
+     ],
+     [
+      "Thyroid",
+      "Hypothyroidism or thyrotoxicosis",
+      "Serum TSH every 6 months"
+     ],
+     [
+      "Liver",
+      "Hepatotoxicity and transaminitis",
+      "Liver biochemical profiles every 6 months"
+     ],
+     [
+      "Cornea and skin",
+      "Corneal microdeposits and slate-blue skin",
+      "Slit-lamp examination if visual symptoms arise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dronedarone** is a non-iodinated amiodarone analogue developed to reduce thyroid and tissue accumulation risks. However, dronedarone carries critical black-box warnings. In the **ANDROMEDA** trial of acute decompensated heart failure, dronedarone doubled mortality. Furthermore, the PALLAS trial in permanent atrial fibrillation was terminated prematurely due to excess cardiovascular death, stroke, and heart failure hospitalizations, strictly restricting its use to paroxysmal or persistent AF in sinus rhythm.",
+   "say": "Dronedarone is a non-iodinated amiodarone analogue developed to reduce thyroid and tissue accumulation risks. However, dronedarone carries critical black-box warnings. In the ANDROMEDA trial of acute decompensated heart failure, dronedarone doubled mortality. Furthermore, the PALLAS trial in permanent atrial fibrillation was terminated prematurely due to excess cardiovascular death, stroke, and heart failure hospitalizations, strictly restricting its use to paroxysmal or persistent AF in sinus rhythm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dronedarone Profile",
+     "points": [
+      "Non-iodinated benzofuran derivative",
+      "Lacks iodine-induced thyroid dysfunction",
+      "Shorter half-life without tissue accumulation"
+     ]
+    },
+    "right": {
+     "title": "Contraindications",
+     "points": [
+      "ANDROMEDA trial showed excess heart failure deaths",
+      "PALLAS trial confirmed excess stroke and deaths",
+      "Strictly contraindicated in decompensated HF and permanent AF"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sotalol** combines nonselective beta-blockade with Class 3 rapid delayed rectifier potassium current inhibition. Crucially, sotalol exhibits **reverse use-dependence**, where potassium channel blockade and action potential prolongation amplify at slower heart rates. Because bradycardia markedly accentuates QT prolongation and provokes torsades de pointes, sotalol mandates in-hospital telemetry initiation for at least 3 days with serial QTc tracking.",
+   "say": "Sotalol combines nonselective beta-blockade with Class 3 rapid delayed rectifier potassium current inhibition. Crucially, sotalol exhibits reverse use-dependence, where potassium channel blockade and action potential prolongation amplify at slower heart rates. Because bradycardia markedly accentuates QT prolongation and provokes torsades de pointes, sotalol mandates in-hospital telemetry initiation for at least 3 days with serial QTc tracking.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Torsades"
+      "label": "Inpatient Admission for Sotalol Initiation"
      },
      {
       "id": "b",
-      "label": "IV magnesium 2 g"
+      "label": "Baseline Assessment of Renal Function and QTc"
      },
      {
       "id": "c",
-      "label": "Persists or slow rate?"
+      "label": "Administer Dose Under Continuous Telemetry"
      },
      {
       "id": "d",
-      "label": "Overdrive pacing or isoproterenol"
-     },
-     {
-      "id": "e",
-      "label": "Defibrillate if unstable"
+      "label": "Monitor QTc at 2 to 4 Hours Post-Dose"
      }
     ],
     "edges": [
@@ -78,44 +154,102 @@
      [
       "c",
       "d"
-     ],
-     [
-      "d",
-      "e"
      ]
     ]
    }
   },
   {
-   "tx": "**Ibutilide** is a class III agent given intravenously to convert recent atrial fibrillation or flutter to sinus rhythm. It prolongs the action potential by slowing the late inward sodium current and blocking IKr. Structural heart disease is a contraindication. Monitor the ECG for 4 hours after infusion. No specific antidote exists, so treat toxicity with magnesium and supportive resuscitation.",
-   "say": "Ibutilide is a class III agent given intravenously to convert recent atrial fibrillation or flutter to sinus rhythm. It prolongs the action potential by slowing the late inward sodium current and blocking IKr. Structural heart disease is a contraindication. Monitor the ECG for 4 hours after infusion. No specific antidote exists, so treat toxicity with magnesium and supportive resuscitation.",
+   "tx": "**Dofetilide** operates as a **pure selective IKr** blocker with negligible adrenergic or sodium channel activity. Because clearance is predominantly renal, dofetilide requires mandatory in-hospital telemetry for at least 72 hours with strict dosage titration based on creatinine clearance. Serial electrocardiograms must verify QTc intervals 2 to 3 hours after each dose. Dofetilide is safe in heart failure with reduced ejection fraction.",
+   "say": "Dofetilide operates as a pure selective IKr blocker with negligible adrenergic or sodium channel activity. Because clearance is predominantly renal, dofetilide requires mandatory in-hospital telemetry for at least 72 hours with strict dosage titration based on creatinine clearance. Serial electrocardiograms must verify QTc intervals 2 to 3 hours after each dose. Dofetilide is safe in heart failure with reduced ejection fraction.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-antiarrhythmic-drugs-fig1.webp",
-    "alt": "Diagram of cardiac action potential showing Ibutilide's IKr and late Na+ current block, prolonging repolarization, with ECG examples of QT prolongation and Torsades.",
-    "caption": "Ibutilide prolongs repolarization, risking QT prolongation and Torsades. Image: Ksheka, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 1.8589
+    "kind": "table",
+    "cols": [
+     "Creatinine Clearance",
+     "Starting Dose",
+     "Mandatory Monitoring Protocol"
+    ],
+    "rows": [
+     [
+      "Greater than 60 mL/min",
+      "500 mcg twice daily",
+      "Continuous telemetry for at least 72 hours"
+     ],
+     [
+      "40 to 60 mL/min",
+      "250 mcg twice daily",
+      "Measure QTc at baseline and 2 to 3 hours post-dose"
+     ],
+     [
+      "20 to 39 mL/min",
+      "125 mcg twice daily",
+      "Reduce dose if QTc increases by more than 15%"
+     ],
+     [
+      "Less than 20 mL/min",
+      "Contraindicated",
+      "Discontinue if QTc exceeds 500 milliseconds"
+     ]
+    ]
    }
   },
   {
-   "tx": "**Use dependence** means a drug blocks channels more at faster heart rates, which is typical of class I agents such as flecainide. **Reverse use dependence** is the opposite: block increases at slow rates. This explains why bradycardia raises the risk of torsades with class III drugs such as sotalol and dofetilide, so sotalol is started in hospital with QT checks.",
-   "say": "Use dependence means a drug blocks channels more at faster heart rates, which is typical of class I agents such as flecainide. Reverse use dependence is the opposite: block increases at slow rates. This explains why bradycardia raises the risk of torsades with class III drugs such as sotalol and dofetilide, so sotalol is started in hospital with QT checks.",
+   "tx": "**Adenosine** binds to cardiac **A1 adenosine receptors** on sinoatrial and atrioventricular nodal tissue to trigger Gi-mediated opening of inward rectifier potassium channels. The resulting hyperpolarization and blunted cyclic AMP transiently halt atrioventricular conduction with an ultra-short half-life under 10 seconds. Adenosine rapidly terminates reentrant supraventricular tachycardias dependent on the atrioventricular node when delivered via rapid intravenous push.",
+   "say": "Adenosine binds to cardiac A1 adenosine receptors on sinoatrial and atrioventricular nodal tissue to trigger G protein opening of inward rectifier potassium channels. The resulting hyperpolarization and blunted cyclic AMP transiently halt atrioventricular conduction with an ultra-short half-life under 10 seconds. Adenosine rapidly terminates reentrant supraventricular tachycardias dependent on the atrioventricular node when delivered via rapid intravenous push.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rapid IV Bolus of Adenosine with Saline Flush"
+     },
+     {
+      "id": "b",
+      "label": "A1 Adenosine Receptor Activation on AV Node"
+     },
+     {
+      "id": "c",
+      "label": "Opening of Inward Rectifier Potassium Channels"
+     },
+     {
+      "id": "d",
+      "label": "Nodal Hyperpolarization and Conduction Blockade"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ibutilide** is an intravenous **Class III agent** that prolongs myocardial action potential duration through a unique dual mechanism, activating slow inward sodium currents while blocking delayed rectifier potassium currents. Administered as a rapid infusion, ibutilide achieves rapid pharmacological cardioversion of recent-onset atrial flutter and atrial fibrillation. Continuous electrocardiographic monitoring for at least 4 hours after completion is essential to manage potential polymorphic ventricular tachycardia.",
+   "say": "Ibutilide is an intravenous Class 3 agent that prolongs myocardial action potential duration through a unique dual mechanism, activating slow inward sodium currents while blocking delayed rectifier potassium currents. Administered as a rapid infusion, ibutilide achieves rapid pharmacological cardioversion of recent-onset atrial flutter and atrial fibrillation. Continuous electrocardiographic monitoring for at least 4 hours after completion is essential to manage potential polymorphic ventricular tachycardia.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Use dependence",
+     "title": "Ibutilide Mechanism",
      "points": [
-      "Block grows at faster rates",
-      "Typical of class I agents",
-      "Suits tachycardia control"
+      "Activates slow inward sodium current",
+      "Blocks rapid delayed rectifier potassium current",
+      "Rapid IV conversion of atrial flutter"
      ]
     },
     "right": {
-     "title": "Reverse use dependence",
+     "title": "Safety and Monitoring",
      "points": [
-      "Block grows at slow rates",
-      "Typical of class III agents",
-      "Raises torsades risk in bradycardia"
+      "4-hour mandatory post-infusion telemetry",
+      "Requires serum potassium and magnesium correction",
+      "Risk of QT prolongation and torsades de pointes"
      ]
     }
    }
@@ -126,23 +260,8 @@
   "q_03714a7eb45e",
   "q_126f1ca79054"
  ],
- "src": [],
- "refs": [
-  "Katzung's Basic and Clinical Pharmacology (Katzung BG, Trevor AJ)"
- ],
+ "src": null,
+ "refs": null,
  "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 24
- }
+ "checks": null
 }
