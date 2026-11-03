@@ -4668,8 +4668,21 @@
         if (l < row.scrollLeft + 8) row.scrollLeft = Math.max(0, l - 16);
         else if (r > row.scrollLeft + row.clientWidth - 8) row.scrollLeft = r - row.clientWidth + 16;
       }
+      coverPartial();
+    }
+    // A chip that crosses the row edge would show half a label. Cover that slice so only whole chips show.
+    function coverPartial() {
+      if (!row || !nav) return;
+      var edge = row.getBoundingClientRect().right - 1, z = 1, cover = 0, i;
+      try { z = parseFloat(getComputedStyle(document.documentElement).zoom) || 1; } catch (eZ) {}
+      for (i = 0; i < chips.length; i++) {
+        var cb = chips[i].getBoundingClientRect();
+        if (cb.left < edge && cb.right > edge + 2) { cover = Math.ceil((edge - cb.left) / z); break; }
+      }
+      nav.style.setProperty("--kbr-chip-cover", cover + "px");
     }
     body.addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(mark); }, { passive: true });
+    if (row) row.addEventListener("scroll", function () { if (!row.__kbrRaf) row.__kbrRaf = requestAnimationFrame(function () { row.__kbrRaf = 0; coverPartial(); }); }, { passive: true });
     mark();
   }
   function openDiseaseRef(id, opts) {

@@ -672,36 +672,54 @@ body.ui-v2 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-back,
   z-index: 3;
   margin: 2px 0 12px;
   padding: 6px 0 8px;
-  max-width: none;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   background: #fff;
   border-bottom: 1px solid var(--kbr-line);
 }
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 1px;
+  width: var(--kbr-chip-cover, 0px);
+  background: #fff;
+  pointer-events: none;
+  z-index: 2;
+}
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump-in {
-  justify-content: safe center;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   gap: 8px;
-  padding: 0 1px 2px;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: 2px 20px 4px 2px;
   overflow-x: auto;
+  overflow-y: hidden;
   overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   scroll-snap-type: x proximity;
+  scroll-padding-inline: 8px;
 }
-#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-chip { scroll-snap-align: start; }
-@media (min-width: 700px) {
-  #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump-in {
-    flex-wrap: wrap;
-    justify-content: center;
-    overflow: visible;
-    scroll-snap-type: none;
-  }
-}
+#dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump-in::-webkit-scrollbar { display: none; width: 0; height: 0; }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-chip {
+  flex: 0 0 auto;
   min-height: 44px;
+  max-width: none;
   padding: 0 14px;
   border: 1px solid #d5dae3;
   border-radius: 999px;
   background: #fff;
   color: #1c1f27;
   font: 600 14px/1 -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  white-space: nowrap;
+  scroll-snap-align: start;
 }
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-chip[aria-current="true"] {
   border-color: #d4cef0;
@@ -747,6 +765,7 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-sheet {
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.45), 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-brand strong { color: #f4f5f7; }
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump::after { background: #1c1e26; }
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-jump,
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-chip,
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .kbr-figchip,
