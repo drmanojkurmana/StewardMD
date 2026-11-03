@@ -35,8 +35,8 @@
       }
     },
     {
-      "tx": "Non-invasive diagnostic evaluation relies heavily on standardized **hydrogen and methane breath testing**. According to international consensus guidelines, a positive hydrogen breath test is defined by an increase in breath **hydrogen** of at least **20** parts per million (**ppm**) above baseline within **90** minutes following the ingestion of either glucose or lactulose. This early peak reflects premature bacterial fermentation of the carbohydrate substrate within the small intestinal lumen.",
-      "say": "Non-invasive diagnostic evaluation relies heavily on standardized hydrogen and methane breath testing. According to international consensus guidelines, a positive hydrogen breath test is defined by an increase in breath hydrogen of at least 20 parts per million above baseline within 90 minutes following the ingestion of either glucose or lactulose. This early peak reflects premature bacterial fermentation of the carbohydrate substrate within the small intestinal lumen.",
+      "tx": "Glucose and lactulose **hydrogen breath tests** are positive when hydrogen rises by at least 20 **parts per million** within 90 minutes of the sugar drink. That early rise means fermentation occurred in the small bowel rather than the colon. Record methane on the same tracing, because archaea can consume hydrogen and hide the peak.",
+      "say": "Glucose and lactulose hydrogen breath tests are positive when hydrogen rises by at least 20 parts per million within 90 minutes of the sugar drink. That early rise means fermentation occurred in the small bowel rather than the colon. Record methane on the same tracing, because archaea can consume hydrogen and hide the peak.",
       "vis": {
         "kind": "image",
         "src": "v1/kb/media/small-intestinal-bacterial-overgrowth-fig1.webp",
@@ -71,8 +71,8 @@
       }
     },
     {
-      "tx": "The primary medical therapy for hydrogen-predominant small intestinal bacterial overgrowth is the non-absorbable rifamycin antibiotic **rifaximin**, prescribed at a dose of **550** mg three times daily for **14** days. For intestinal methanogen overgrowth, rifaximin monotherapy is ineffective because archaea have cell walls composed of pseudopeptidoglycan. Eradication of IMO requires **dual therapy combining rifaximin with neomycin** (500 mg twice daily) or metronidazole to achieve methane normalization and symptomatic relief.",
-      "say": "The primary medical therapy for hydrogen-predominant small intestinal bacterial overgrowth is the non-absorbable rifamycin antibiotic rifaximin, prescribed at a dose of 550 mg three times daily for 14 days. For intestinal methanogen overgrowth, rifaximin monotherapy is ineffective because archaea have cell walls composed of pseudopeptidoglycan. Eradication of IMO requires dual therapy combining rifaximin with neomycin at 500 mg twice daily, or metronidazole, to achieve methane normalization and symptomatic relief.",
+      "tx": "The primary medical therapy for hydrogen-predominant small intestinal bacterial overgrowth is **Rifaximin**, a **non-absorbed antibiotic**, at **550** mg 3 times daily for **14** days. For intestinal methanogen overgrowth, rifaximin monotherapy is ineffective because archaea have cell walls composed of pseudopeptidoglycan. Eradication of IMO requires **dual therapy combining rifaximin with neomycin** (500 mg twice daily) or metronidazole to achieve methane normalization and symptomatic relief.",
+      "say": "The primary medical therapy for hydrogen-predominant small intestinal bacterial overgrowth is Rifaximin, a non-absorbed antibiotic, at 550 mg 3 times daily for 14 days. For intestinal methanogen overgrowth, rifaximin monotherapy is ineffective because archaea have cell walls composed of pseudopeptidoglycan. Eradication of IMO requires dual therapy combining rifaximin with neomycin (500 mg twice daily) or metronidazole to achieve methane normalization and symptomatic relief.",
       "vis": {
         "kind": "table",
         "cols": [
@@ -105,45 +105,26 @@
       }
     },
     {
-      "tx": "The pathophysiology of small intestinal bacterial overgrowth produces a characteristic laboratory pattern of micronutrient malabsorption. Overgrowing anaerobic bacteria deconjugate bile acids and competitively consume intraluminal cobalamin, leading to clinical **vitamin B12 deficiency** with macrocytic megaloblastic anaemia. Conversely, these bacterial colonies synthesize endogenous folate precursors within the lumen, causing paradoxically elevated or **high serum folate** levels, an important diagnostic clue.",
-      "say": "The pathophysiology of small intestinal bacterial overgrowth produces a characteristic laboratory pattern of micronutrient malabsorption. Overgrowing anaerobic bacteria deconjugate bile acids and competitively consume intraluminal cobalamin, leading to clinical vitamin B12 deficiency with macrocytic megaloblastic anaemia. Conversely, these bacterial colonies synthesize endogenous folate precursors within the lumen, causing paradoxically elevated or high serum folate levels, an important diagnostic clue.",
+      "tx": "Overgrowth produces **fat malabsorption** by **deconjugation of bile salts**, leaving bile acids that cannot build micelles, and it also consumes B12 while making folate. **Whipple disease**, caused by **Tropheryma whipplei**, mimics that diarrhoea but adds fever, joint pain, or neurologic signs. Biopsy shows PAS-positive macrophages in the lamina propria, and PCR confirms the bacillus before a long course of antibiotics.",
+      "say": "Overgrowth produces fat malabsorption by deconjugation of bile salts, leaving bile acids that cannot build micelles, and it also consumes B12 while making folate. Whipple disease, caused by Tropheryma whipplei, mimics that diarrhoea but adds fever, joint pain, or neurologic signs. Biopsy shows PAS-positive macrophages in the lamina propria, and PCR confirms the bacillus before a long course of antibiotics.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Luminal bacterial overgrowth"
-          },
-          {
-            "id": "b",
-            "label": "Bacterial consumption of cobalamin and deconjugation of bile acids"
-          },
-          {
-            "id": "c",
-            "label": "De novo bacterial synthesis of folate precursors"
-          },
-          {
-            "id": "d",
-            "label": "Laboratory signature: Low B12 and High Folate"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b",
-            "active nutrient scavenging"
-          ],
-          [
-            "a",
-            "c",
-            "bacterial metabolism"
-          ],
-          [
-            "b",
-            "d",
-            "macrocytic megaloblastic profile"
+        "kind": "compare",
+        "left": {
+          "title": "Bacterial overgrowth",
+          "points": [
+            "Deconjugation of bile salts",
+            "Fat malabsorption when micelles fail",
+            "Low B12 with a normal or high folate"
           ]
-        ]
+        },
+        "right": {
+          "title": "Whipple disease",
+          "points": [
+            "Tropheryma whipplei in the mucosa",
+            "PAS-positive macrophages in the lamina propria",
+            "Diarrhoea plus fever, joints, or neurology"
+          ]
+        }
       }
     },
     {

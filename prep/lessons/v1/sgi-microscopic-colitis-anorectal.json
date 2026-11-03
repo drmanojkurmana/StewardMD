@@ -51,8 +51,8 @@
       }
     },
     {
-      "tx": "For both collagenous and lymphocytic colitis, oral **budesonide** is the established first-line evidence-based pharmacotherapy for inducing clinical remission. Administered at a dose of **9** mg once daily for an initial course of **8** weeks, budesonide achieves clinical response rates exceeding eighty percent. Its high efficacy and favorable safety profile stem from extensive hepatic first-pass metabolism exceeding ninety percent, which drastically limits systemic corticosteroid bioavailability and side effects.",
-      "say": "For both collagenous and lymphocytic colitis, oral budesonide is the established first-line evidence-based pharmacotherapy for inducing clinical remission. Administered at a dose of 9 mg once daily for an initial course of 8 weeks, budesonide achieves clinical response rates exceeding eighty percent. Its high efficacy and favorable safety profile stem from extensive hepatic first-pass metabolism exceeding ninety percent, which drastically limits systemic corticosteroid bioavailability and side effects.",
+      "tx": "For both collagenous and lymphocytic colitis, oral **budesonide** is the established first-line evidence-based pharmacotherapy for inducing clinical remission. Administered at a dose of **9** mg once daily for an initial course of **8** weeks, budesonide achieves clinical remission in more than 80%. Its high efficacy and favorable safety profile stem from extensive hepatic first-pass metabolism exceeding ninety percent, which drastically limits systemic corticosteroid bioavailability and side effects.",
+      "say": "For both collagenous and lymphocytic colitis, oral budesonide is the established first-line evidence-based pharmacotherapy for inducing clinical remission. Administered at a dose of 9 mg once daily for an initial course of 8 weeks, budesonide achieves clinical remission in more than 80%. Its high efficacy and favorable safety profile stem from extensive hepatic first-pass metabolism exceeding ninety percent, which drastically limits systemic corticosteroid bioavailability and side effects.",
       "vis": {
         "kind": "flow",
         "nodes": [
@@ -93,35 +93,35 @@
       }
     },
     {
-      "tx": "A critical step in the clinical evaluation of microscopic colitis is identifying and discontinuing potential culprit medications. Well-established pharmacological triggers include **proton pump inhibitors** (such as lansoprazole and omeprazole), **nonsteroidal anti-inflammatory drugs**, selective serotonin reuptake inhibitors, and ranitidine. Eliminating these offending drugs can resolve chronic watery diarrhoea and induce histological normalization without requiring prolonged steroid therapy.",
-      "say": "A critical step in the clinical evaluation of microscopic colitis is identifying and discontinuing potential culprit medications. Well-established pharmacological triggers include proton pump inhibitors like lansoprazole and omeprazole, nonsteroidal anti-inflammatory drugs, selective serotonin reuptake inhibitors, and ranitidine. Eliminating these offending drugs can resolve chronic watery diarrhoea and induce histological normalization without requiring prolonged steroid therapy.",
+      "tx": "Acute colonic pseudo-obstruction, called **Ogilvie syndrome**, is massive caecal dilatation without a mechanical block. When the caecum exceeds 12 cm despite nil by mouth and nasogastric drainage, give intravenous **neostigmine** 2 mg slowly over 5 minutes on a cardiac monitor. Do not give it if the colon has perforated or a true mechanical obstruction is present.",
+      "say": "Acute colonic pseudo-obstruction, called Ogilvie syndrome, is massive caecal dilatation without a mechanical block. When the caecum exceeds 12 cm despite nil by mouth and nasogastric drainage, give intravenous neostigmine 2 mg slowly over 5 minutes on a cardiac monitor. Do not give it if the colon has perforated or a true mechanical obstruction is present.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Drug Class",
-          "High-Risk Specific Agents",
-          "Mechanism of Injury"
+          "Check before neostigmine",
+          "Give 2 mg over 5 minutes",
+          "Hold the drug"
         ],
         "rows": [
           [
-            "Proton Pump Inhibitors (PPIs)",
-            "Lansoprazole, Omeprazole",
-            "Alters mucosal barrier permeability and tight junctions"
+            "Caecal diameter",
+            "Greater than 12 cm and still rising",
+            "Under 12 cm: supportive care first"
           ],
           [
-            "NSAIDs",
-            "Ibuprofen, Diclofenac, Naproxen",
-            "Mucosal prostaglandin depletion and epithelial injury"
+            "Mechanical block",
+            "CT shows no transition point",
+            "A true obstruction is present"
           ],
           [
-            "SSRIs",
-            "Sertraline, Citalopram",
-            "Alters intestinal serotonin signaling and fluid secretion"
+            "Perforation",
+            "No free air and no peritonism",
+            "Free air or peritonitis"
           ],
           [
-            "Others",
-            "Acarbose, Ticlopidine, Statins",
-            "Immune dysregulation in susceptible hosts"
+            "Heart",
+            "Monitor on, atropine ready",
+            "Ischaemia or bradycardia without a plan"
           ]
         ]
       }
@@ -138,76 +138,64 @@
       }
     },
     {
-      "tx": "First-line conservative medical therapy for chronic anal fissures aims to relieve internal anal sphincter hypertonicity and restore local anoderm blood flow, termed chemical sphincterotomy. This is achieved using topical vasodilators: **topical diltiazem** **2%** ointment or **topical glyceryl trinitrate** (GTN **0.2%** to **0.4%**) applied to the anal verge twice daily for **6** to **8** weeks. Diltiazem is frequently preferred due to a significantly lower incidence of limiting vascular headaches compared to nitrates.",
-      "say": "First-line conservative medical therapy for chronic anal fissures aims to relieve internal anal sphincter hypertonicity and restore local anoderm blood flow, termed chemical sphincterotomy. This is achieved using topical vasodilators: topical diltiazem 2 percent ointment or topical glyceryl trinitrate (GTN 0.2 to 0.4 percent) applied to the anal verge twice daily for 6 to 8 weeks. Diltiazem is frequently preferred due to a significantly lower incidence of limiting vascular headaches compared to nitrates.",
+      "tx": "**Internal hemorrhoids** are graded only by **prolapse severity**, not by the amount of bleeding. Grade 1 does not prolapse, grade 2 prolapses and reduces itself, grade 3 needs a finger to reduce it, and grade 4 stays out. Banding is enough for grades 1 and 2, while grades 3 and 4 more often need an operation.",
+      "say": "Internal hemorrhoids are graded only by prolapse severity, not by the amount of bleeding. Grade 1 does not prolapse, grade 2 prolapses and reduces itself, grade 3 needs a finger to reduce it, and grade 4 stays out. Banding is enough for grades 1 and 2, while grades 3 and 4 more often need an operation.",
       "vis": {
         "kind": "table",
         "cols": [
-          "Pharmacological Agent",
-          "Dosing Protocol",
-          "Mechanism",
-          "Limiting Side Effect"
+          "Grade",
+          "Prolapse severity",
+          "Usual treatment"
         ],
         "rows": [
           [
-            "Topical Diltiazem 2%",
-            "Apply twice daily for 6 to 8 weeks",
-            "Blocks smooth muscle L-type calcium channels",
-            "Mild local perianal pruritus"
+            "Grade 1",
+            "No prolapse",
+            "Fibre and topical care"
           ],
           [
-            "Topical GTN 0.2% - 0.4%",
-            "Apply twice daily for 6 to 8 weeks",
-            "Nitric oxide donor induces smooth muscle relaxation",
-            "Severe vascular headache (~30%)"
+            "Grade 2",
+            "Prolapse that reduces itself",
+            "Rubber band ligation"
           ],
           [
-            "Botulinum Toxin Injection",
-            "20 to 50 units into internal sphincter",
-            "Inhibits presynaptic acetylcholine release",
-            "Transient flatus incontinence"
+            "Grade 3",
+            "Needs manual reduction",
+            "Banding or haemorrhoidectomy"
+          ],
+          [
+            "Grade 4",
+            "Irreducible prolapse",
+            "Haemorrhoidectomy"
           ]
         ]
       }
     },
     {
-      "tx": "For chronic anal fissures refractory to topical chemical sphincterotomy, **lateral internal sphincterotomy** remains the definitive surgical gold standard. By dividing the lower third to half of the hypertrophied internal anal sphincter muscle fibres, LIS permanently reduces resting anal canal pressures and achieves healing rates exceeding ninety-five percent. However, patients must be carefully counseled regarding the permanent risk of minor **flatus incontinence** or liquid stool soiling, which occurs in five to ten percent.",
-      "say": "For chronic anal fissures refractory to topical chemical sphincterotomy, lateral internal sphincterotomy remains the definitive surgical gold standard. By dividing the lower third to half of the hypertrophied internal anal sphincter muscle fibres, LIS permanently reduces resting anal canal pressures and achieves healing rates exceeding ninety-five percent. However, patients must be carefully counseled regarding the permanent risk of minor flatus incontinence or liquid stool soiling, which occurs in five to ten percent.",
+      "tx": "**Solitary rectal ulcer syndrome** is a straining disorder. The biopsy shows **fibromuscular obliteration** of the lamina propria, with smooth muscle growing up between the glands. **Radiation proctopathy** is a separate cause of rectal bleeding, with telangiectasia months after pelvic radiotherapy, and it is treated with **argon plasma coagulation** or a short application of formalin.",
+      "say": "Solitary rectal ulcer syndrome is a straining disorder. The biopsy shows fibromuscular obliteration of the lamina propria, with smooth muscle growing up between the glands. Radiation proctopathy is a separate cause of rectal bleeding, with telangiectasia months after pelvic radiotherapy, and it is treated with argon plasma coagulation or a short application of formalin.",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Chronic fissure fails 8-week topical diltiazem"
-          },
-          {
-            "id": "b",
-            "label": "Perform lateral internal sphincterotomy (open or closed)"
-          },
-          {
-            "id": "c",
-            "label": "Permanent reduction in resting hypertonicity and ischemia"
-          },
-          {
-            "id": "d",
-            "label": "Healing in > 95%; 5% to 10% minor flatus incontinence risk"
-          }
+        "kind": "table",
+        "cols": [
+          "Disorder",
+          "Key finding",
+          "Treatment"
         ],
-        "edges": [
+        "rows": [
           [
-            "a",
-            "b",
-            "refractory symptoms and spasm"
+            "Solitary rectal ulcer syndrome",
+            "Fibromuscular obliteration of the lamina propria",
+            "Retrain defecation and the pelvic floor"
           ],
           [
-            "b",
-            "c",
-            "controlled division of internal sphincter"
+            "Radiation proctopathy",
+            "Telangiectasia after pelvic radiotherapy",
+            "Argon plasma coagulation or topical formalin"
           ],
           [
-            "c",
-            "d",
-            "durable fissure epithelialization"
+            "Chronic anal fissure",
+            "Posterior midline tear, not telangiectasia",
+            "Topical sphincterotomy, not coagulation"
           ]
         ]
       }
