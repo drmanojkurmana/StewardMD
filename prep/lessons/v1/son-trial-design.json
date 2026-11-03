@@ -1,148 +1,292 @@
 {
- "v": 1,
- "module": "son-trial-design",
- "subject": "ss-medical-oncology",
- "title": "Clinical trial design and evidence in oncology",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Phase I trials find the **maximum tolerated dose** (MTD) using a 3+3 design. Three patients are treated per dose level. If none has a dose-limiting toxicity, the dose is escalated. If one of three has a toxicity, three more are added. If at most one of six has a toxicity, that level is the MTD; two or more toxicities among six means the level is too toxic. Phase I is about safety, not efficacy.",
-   "say": "Phase I trials find the maximum tolerated dose, or MTD, using a 3+3 design. Three patients are treated per dose level. If none has a dose-limiting toxicity, the dose is escalated. If one of three has a toxicity, three more are added. If at most one of six has a toxicity, that level is the MTD. Two or more toxicities among six means the level is too toxic. Phase I is about safety, not efficacy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Toxicities in cohort",
-     "Action"
-    ],
-    "rows": [
-     [
-      "0 of 3",
-      "Escalate to next level"
-     ],
-     [
-      "1 of 3",
-      "Expand cohort to six"
-     ],
-     [
-      "1 of 6",
-      "That level is the MTD"
-     ],
-     [
-      "2 or more of 6",
-      "Level too toxic; go one lower"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Phase III trials compare a new treatment with a control arm. **Overall survival** (OS) is time from randomisation to death from any cause and is the most direct clinical endpoint. **Progression-free survival** (PFS) also counts progression, so it is reached sooner and more often. The **hazard ratio** (HR) compares event rates over time; a value below one favours the experimental arm.",
-   "say": "Phase three trials compare a new treatment with a control arm. Overall survival is the time from randomisation to death from any cause, and it is the most direct clinical endpoint. Progression-free survival also counts progression, so it is reached sooner and more often. The hazard ratio compares event rates over time. A value below one favours the experimental arm.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Overall survival",
-     "points": [
-      "Time to death from any cause",
-      "Most direct clinical endpoint",
-      "Needs longer follow-up"
-     ]
+  "v": 1,
+  "module": "son-trial-design",
+  "subject": "ss-medical-oncology",
+  "title": "Clinical trial design in oncology: trial phases, endpoints, statistical models and novel master protocols",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Early clinical evaluation in **Phase I oncology** studies seeks to establish the **maximum tolerated dose** and characterize dose-limiting toxicities. Historically, investigators utilized the classical rule-based 3+3 design, which escalates dose levels in cohorts of 3 patients until dose-limiting toxicities occur in at least 2 individuals. Modern phase I designs increasingly incorporate model-based continual reassessment methods to optimize therapeutic dose selection.",
+      "say": "Early clinical evaluation in Phase I oncology studies seeks to establish the maximum tolerated dose and characterize dose-limiting toxicities. Historically, investigators utilized the classical rule-based 3+3 design, which escalates dose levels in cohorts of 3 patients until dose-limiting toxicities occur in at least 2 individuals. Modern phase I designs increasingly incorporate model-based continual reassessment methods to optimize therapeutic dose selection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Cohort of 3",
+            "level": 1
+          },
+          {
+            "id": "tox",
+            "label": "Toxicity Check",
+            "level": 2
+          },
+          {
+            "id": "esc",
+            "label": "Escalate Dose",
+            "level": 3
+          },
+          {
+            "id": "mtd",
+            "label": "Establish MTD",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "tox"
+          ],
+          [
+            "tox",
+            "esc"
+          ],
+          [
+            "esc",
+            "mtd"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Progression-free survival",
-     "points": [
-      "Counts progression or death",
-      "Observed earlier",
-      "Surrogate, may not predict OS"
-     ]
+    {
+      "tx": "Subsequent **Phase II trials** focus on confirming proof-of-concept **antitumor activity** and defining objective response rates within specific disease cohorts. Investigators frequently utilize Simon two-stage optimal or minimax designs to permit early trial termination if inadequate antitumor activity is observed during the initial stage. Demonstrating sufficient activity justifies moving the investigational regimen into larger randomized Phase III comparative registration trials.",
+      "say": "Subsequent Phase II trials focus on confirming proof-of-concept antitumor activity and defining objective response rates within specific disease cohorts. Investigators frequently utilize Simon two-stage optimal or minimax designs to permit early trial termination if inadequate antitumor activity is observed during the initial stage. Demonstrating sufficient activity justifies moving the investigational regimen into larger randomized Phase III comparative registration trials.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Design Component",
+          "Stage 1 Rule",
+          "Stage 2 Decision"
+        ],
+        "rows": [
+          [
+            "Simon Two-Stage",
+            "Enroll n1 patients; assess responses",
+            "Proceed only if responses exceed threshold r1"
+          ],
+          [
+            "Primary Endpoint",
+            "Objective Response Rate (ORR)",
+            "Calculates complete plus partial response rates"
+          ],
+          [
+            "Go / No-Go Gate",
+            "Terminate early for futility",
+            "Expand cohort to confirm target response rate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Confirmatory **Phase III** randomized clinical trials compare experimental antineoplastic regimens against the prevailing standard of care in large patient cohorts. The primary definitive endpoint remains **overall survival**, defined as the exact time from initial randomisation to death from any cause. Overall survival remains completely unambiguous, clinically meaningful, and unaffected by subjective investigator bias or variable radiographic assessment intervals.",
+      "say": "Confirmatory Phase III randomized clinical trials compare experimental antineoplastic regimens against the prevailing standard of care in large patient cohorts. The primary definitive endpoint remains overall survival, defined as the exact time from initial randomisation to death from any cause. Overall survival remains completely unambiguous, clinically meaningful, and unaffected by subjective investigator bias or variable radiographic assessment intervals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Overall Survival (OS)",
+          "points": [
+            "Definitive gold-standard endpoint",
+            "Completely objective and clinically meaningful",
+            "Unaffected by crossover or assessment frequency",
+            "Requires prolonged follow-up duration"
+          ]
+        },
+        "right": {
+          "title": "Surrogate Endpoints (PFS/DFS)",
+          "points": [
+            "Earlier readout of antineoplastic efficacy",
+            "Not diluted by subsequent salvage therapies",
+            "Reflects true tumour growth biology",
+            "May not always translate into longer survival"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In advanced solid tumours, **Progression-free survival** serves as a widely accepted **surrogate endpoint** that measures time from randomisation to objective progression or death. Utilizing validated RECIST criteria, progression-free survival provides an earlier efficacy readout than overall survival without being confounded by crossover to effective subsequent therapy lines. Consequently, regulatory agencies frequently grant accelerated or regular drug approvals based on robust progression-free survival gains.",
+      "say": "In advanced solid tumours, Progression-free survival serves as a widely accepted surrogate endpoint that measures time from randomisation to objective progression or death. Utilizing validated RECIST criteria, progression-free survival provides an earlier efficacy readout than overall survival without being confounded by crossover to effective subsequent therapy lines. Consequently, regulatory agencies frequently grant accelerated or regular drug approvals based on robust progression-free survival gains.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "RECIST 1.1 Category",
+          "Quantitative Change",
+          "Clinical Interpretation"
+        ],
+        "rows": [
+          [
+            "Complete Response (CR)",
+            "Disappearance of all target lesions",
+            "Complete radiographic clearance of disease"
+          ],
+          [
+            "Partial Response (PR)",
+            "30% or greater decrease in target sum",
+            "Significant tumour regression under therapy"
+          ],
+          [
+            "Progressive Disease (PD)",
+            "20% or greater increase in target sum",
+            "Objective disease progression defining event"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Survival analysis routinely relies on calculating the **Hazard ratio** under the standard **Cox proportional hazards** statistical model. The hazard ratio quantifies the relative risk of an event occurring in the experimental arm compared to the control arm across total follow-up. A hazard ratio below one indicates a significant reduction in event hazard, while non-overlapping confidence intervals confirm statistical significance.",
+      "say": "Survival analysis routinely relies on calculating the Hazard ratio under the standard Cox proportional hazards statistical model. The hazard ratio quantifies the relative risk of an event occurring in the experimental arm compared to the control arm across total follow-up. A hazard ratio below one indicates a significant reduction in event hazard, while non-overlapping confidence intervals confirm statistical significance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cox",
+            "label": "Cox Model",
+            "level": 1
+          },
+          {
+            "id": "hr",
+            "label": "Hazard Ratio",
+            "level": 2
+          },
+          {
+            "id": "ci",
+            "label": "95% Confidence",
+            "level": 3
+          },
+          {
+            "id": "p",
+            "label": "P-Value Cutoff",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cox",
+            "hr"
+          ],
+          [
+            "hr",
+            "ci"
+          ],
+          [
+            "ci",
+            "p"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Master protocol designs have transformed precision oncology research. Innovative **Basket trials** evaluate a specific **targeted therapy** matching an identified genomic alteration across multiple distinct histological cancer types. Classic examples include testing TRK inhibitors across any solid tumour harbouring NTRK fusions or BRAF inhibitors in diverse non-melanoma malignancies. This histology-agnostic paradigm accelerates drug development for rare molecular sub-populations.",
+      "say": "Master protocol designs have transformed precision oncology research. Innovative Basket trials evaluate a specific targeted therapy matching an identified genomic alteration across multiple distinct histological cancer types. Classic examples include testing TRK inhibitors across any solid tumour harbouring NTRK fusions or BRAF inhibitors in diverse non-melanoma malignancies. This histology-agnostic paradigm accelerates drug development for rare molecular sub-populations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Basket Trial Architecture",
+          "points": [
+            "One molecular alteration (e.g. BRAF V600E)",
+            "Multiple distinct histological tumour types",
+            "Single matched targeted agent evaluated",
+            "Tests histology-independent target dependence"
+          ]
+        },
+        "right": {
+          "title": "Umbrella Trial Architecture",
+          "points": [
+            "Single histological tumour type (e.g. NSCLC)",
+            "Multiple diverse actionable biomarkers screened",
+            "Multiple parallel targeted drug cohorts",
+            "Centralized molecular profiling platform"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Conversely, specialized **Umbrella trials** evaluate multiple investigational targeted therapies matched to diverse **actionable biomarkers** within a single histological cancer type. Patients with a specific malignancy undergo multiplex molecular screening and are allocated to parallel biomarker-matched therapeutic arms, such as the lung cancer BATTLE and ALCHEMIST master protocols. This modular design maximizes screening efficiency and allows rapid addition of promising novel treatment cohorts.",
+      "say": "Conversely, specialized Umbrella trials evaluate multiple investigational targeted therapies matched to diverse actionable biomarkers within a single histological cancer type. Patients with a specific malignancy undergo multiplex molecular screening and are allocated to parallel biomarker-matched therapeutic arms, such as the lung cancer BATTLE and ALCHEMIST master protocols. This modular design maximizes screening efficiency and allows rapid addition of promising novel treatment cohorts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "single",
+            "label": "Single Histology",
+            "level": 1
+          },
+          {
+            "id": "screen",
+            "label": "Multiplex NGS",
+            "level": 2
+          },
+          {
+            "id": "arm_a",
+            "label": "Arm A: Target 1",
+            "level": 3
+          },
+          {
+            "id": "arm_b",
+            "label": "Arm B: Target 2",
+            "level": 3
+          }
+        ],
+        "edges": [
+          [
+            "single",
+            "screen"
+          ],
+          [
+            "screen",
+            "arm_a"
+          ],
+          [
+            "screen",
+            "arm_b"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The validated **ESMO** framework calculates the **Magnitude of Clinical Benefit** Scale to distinguish transformative antineoplastic therapies from marginal statistical improvements. Grading clinical benefit from grade 1 up to grade 5 in non-curative settings and A, B, or C in curative settings, the scale incorporates survival gains, quality of life, and toxicity profiles. This standardised scoring assists health authorities in value-based reimbursement prioritisation.",
+      "say": "The validated ESMO framework calculates the Magnitude of Clinical Benefit Scale to distinguish transformative antineoplastic therapies from marginal statistical improvements. Grading clinical benefit from grade 1 up to grade 5 in non-curative settings and A, B, or C in curative settings, the scale incorporates survival gains, quality of life, and toxicity profiles. This standardised scoring assists health authorities in value-based reimbursement prioritisation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Setting",
+          "Highest Grades",
+          "Key Evaluation Criteria"
+        ],
+        "rows": [
+          [
+            "Curative Setting",
+            "Grade A and Grade B",
+            "Substantial improvement in disease-free or overall survival"
+          ],
+          [
+            "Non-Curative Setting",
+            "Grade 5 and Grade 4",
+            "Marked survival gain with maintained or improved quality of life"
+          ],
+          [
+            "Lower Benefit Tiers",
+            "Grade 1 and Grade 2",
+            "Marginal progression gains without proven survival or quality benefits"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is **intention-to-treat** (ITT), which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. **Rank-preserving structural failure time** models are sensitivity methods that estimate the effect of treatment actually received.",
-   "say": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is intention to treat, which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. Rank-preserving structural failure time models are sensitivity methods that estimate the effect of the treatment actually received.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-trial-design-fig1.webp",
-    "alt": "Flowchart comparing intention-to-treat (ITT) and per-protocol analyses in a clinical trial, showing patients crossing over from the control arm to the experimental arm.",
-    "caption": "Intention-to-treat analysis preserves randomization despite crossover",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "A **surrogate endpoint** such as PFS is valid only when it reliably predicts overall survival in that disease. An adverse or immature OS trend must be reviewed, and benefit on PFS alone may be provisional. Group sequential designs use an **O'Brien-Fleming** boundary, which is very strict at early looks, so an interim p of 0.02 usually does not justify stopping for efficacy. Single-arm phase II designs use a Simon two-stage design: stop at stage one if too few responses occur.",
-   "say": "A surrogate endpoint such as progression-free survival is valid only when it reliably predicts overall survival in that disease. An adverse or immature overall survival trend must be reviewed, and benefit on progression-free survival alone may be provisional. Group sequential designs use an O'Brien-Fleming boundary, which is very strict at early looks, so an interim p value of 0.02 usually does not justify stopping for efficacy. Single-arm phase II designs use a Simon two-stage design, stopping at stage one if too few responses occur.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Simon stage 1"
-     },
-     {
-      "id": "b",
-      "label": "Responses at or below threshold"
-     },
-     {
-      "id": "c",
-      "label": "Stop for futility"
-     },
-     {
-      "id": "d",
-      "label": "Responses above threshold"
-     },
-     {
-      "id": "e",
-      "label": "Enrol stage 2"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "a",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Dose selection after phase I should not rest on the MTD alone. For targeted or immune agents, efficacy can plateau below toxicity limits, so randomised phase II dose-optimisation compares two doses on efficacy, safety and exposure. Accelerated approval may rest on a surrogate such as response rate, but a **noninferiority** trial must show the upper confidence bound stays below a prespecified margin, and confirmatory randomised trials are required.",
-   "say": "Dose selection after phase one should not rest on the maximum tolerated dose alone. For targeted or immune agents, efficacy can plateau below toxicity limits, so randomised phase two dose optimisation compares two doses on efficacy, safety and exposure. Accelerated approval may rest on a surrogate such as response rate, but a noninferiority trial must show that the upper confidence bound stays below a prespecified margin. Confirmatory randomised trials are required.",
-   "vis": null
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 12 (Design and Analysis of Clinical Trials)",
+    "ESMO-MCBS Guidelines v1.1"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "mk-0825c0b1d172",
-  "mk-e7bfbefe91e2",
-  "mk-ee67c143af75"
- ],
- "src": [],
- "refs": [
-  "Simon R. Optimal two-stage designs for phase II clinical trials. Controlled Clinical Trials. 1989"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 26
- }
 }

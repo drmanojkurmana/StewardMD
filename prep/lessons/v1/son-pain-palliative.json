@@ -1,142 +1,278 @@
 {
- "v": 1,
- "module": "son-pain-palliative",
- "subject": "ss-medical-oncology",
- "title": "Cancer pain and palliative care: the essentials",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Cancer pain is often **nociceptive** (somatic or visceral) and sometimes **neuropathic**. Assess intensity with a validated scale and treat the whole person. The WHO analgesic ladder guides therapy: step 1 uses non-opioids such as paracetamol or NSAIDs, step 2 adds a weak opioid, and step 3 uses a strong opioid such as morphine. Adjuvants like steroids or gabapentinoids can be added at any step. Opioids should be given by the clock, not only when needed, to keep steady levels.",
-   "say": "Cancer pain is often nociceptive, meaning somatic or visceral, and sometimes neuropathic. Assess intensity with a validated scale and treat the whole person. The WHO analgesic ladder guides therapy. Step one uses non-opioids such as paracetamol or NSAIDs. Step two adds a weak opioid. Step three uses a strong opioid such as morphine. Adjuvants like steroids or gabapentinoids can be added at any step. Opioids should be given around the clock, not only when needed, to keep steady levels.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Ladder step",
-     "Typical agents"
-    ],
-    "rows": [
-     [
-      "Step 1",
-      "Paracetamol or NSAID"
-     ],
-     [
-      "Step 2",
-      "Weak opioid plus non-opioid"
-     ],
-     [
-      "Step 3",
-      "Strong opioid such as morphine"
-     ],
-     [
-      "Adjuvant",
-      "Steroid, gabapentinoid, antidepressant"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Start opioids low in older or frail patients, and titrate slowly because of reduced renal reserve and heightened sensitivity. Calculate **oral morphine equivalence** when switching agents. When changing to a long-acting morphine formulation, give roughly 50 to 75 percent of the total daily short-acting dose. In **opioid rotation**, the aim is better analgesia and fewer side effects when one opioid fails despite escalation.",
-   "say": "Start opioids low in older or frail patients and titrate slowly, because of reduced renal reserve and heightened sensitivity. Calculate oral morphine equivalence when switching agents. When changing to a long-acting morphine formulation, give roughly 50 to 75 percent of the total daily short-acting dose. In opioid rotation, the aim is better analgesia and fewer side effects when one opioid fails despite escalation.",
-   "vis": null
-  },
-  {
-   "tx": "Opioid toxicity presents with excessive sedation, myoclonus and pinpoint pupils. The priority is an urgent dose review. Renal impairment causes accumulation of **morphine-3 and 6-glucuronide**, which can trigger myoclonus and seizures. For suspected overdose, naloxone 0.4 to 1 mg IV is standard in adults, and it may be repeated after 3 to 8 minutes. Sedation usually comes before respiratory depression, so it is a key early warning sign. Fentanyl suits ventilated patients who are haemodynamically unstable.",
-   "say": "Opioid toxicity presents with excessive sedation, myoclonus and pinpoint pupils. The priority is an urgent dose review. Renal impairment causes accumulation of morphine-3 and 6-glucuronide, which can trigger myoclonus and seizures. For suspected overdose, naloxone 0.4 to 1 mg intravenously is standard in adults, and it may be repeated after 3 to 8 minutes. Sedation usually comes before respiratory depression, so it is a key early warning sign. Fentanyl suits ventilated patients who are haemodynamically unstable.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Sedation or myoclonus"
-     },
-     {
-      "id": "b",
-      "label": "Urgent opioid dose review"
-     },
-     {
-      "id": "c",
-      "label": "Naloxone 0.4 to 1 mg IV"
-     },
-     {
-      "id": "d",
-      "label": "Repeat after 3 to 8 min if needed"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "New, changing or thoracic back pain in a patient with cancer needs prompt imaging to exclude **malignant spinal cord compression**. Neuropathic pain, such as burning or shooting pain, is treated with adjuvants. Pregabalin treats neuropathic bone pain but needs dose reduction in renal impairment. In India, methadone is used by specialists, but it prolongs the QT interval, so avoid it where cardiac risk is high. Pain that worsens after an opioid dose cut may reflect withdrawal rather than progression.",
-   "say": "New, changing or thoracic back pain in a patient with cancer needs prompt imaging to exclude malignant spinal cord compression. Neuropathic pain, such as burning or shooting pain, is treated with adjuvants. Pregabalin treats neuropathic bone pain but needs dose reduction in renal impairment. Methadone prolongs the QT interval, so avoid it where cardiac risk is high. Pain that worsens after an opioid dose cut may reflect withdrawal rather than progression.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-pain-palliative-fig1.webp",
-    "alt": "Sagittal MRI of spine with vertebral metastasis compressing the spinal cord, indicating malignant spinal cord compression.",
-    "caption": "MRI: Malignant spinal cord compression from vertebral metastasis",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Total pain**, described by Cicely Saunders, includes physical, emotional, social and spiritual components. Early palliative care, as shown in the Temel trial, improves quality of life and can aid survival. **Palliative sedation** is reserved for refractory suffering near death, not for mild anxiety. Indian (ICMR and NMC) and US practice both support this principle, while NICE guidance on opioid use in cancer should be followed where it applies.",
-   "say": "Total pain, described by Cicely Saunders, includes physical, emotional, social and spiritual components. Early palliative care, as shown in the Temel trial, improves quality of life and can aid survival. Palliative sedation is reserved for refractory suffering near death, not for mild anxiety. Indian and US practice both support this principle, while NICE guidance on opioid use in cancer should be followed where it applies.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Total pain domains",
-     "points": [
-      "Physical",
-      "Emotional",
-      "Social",
-      "Spiritual"
-     ]
+  "v": 1,
+  "module": "son-pain-palliative",
+  "subject": "ss-medical-oncology",
+  "title": "Cancer pain and palliative care: WHO ladder, opioid pharmacology, rotation and comprehensive symptom management",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The **WHO** **analgesic ladder** directs evidence-based oncologic pain management by progressively escalating from non-opioids at Step 1, to weak opioids at Step 2, up to potent strong opioids at Step 3 for moderate-to-severe cancer pain. Systematic numerical assessment and structured round-the-clock dosing regimens ensure dependable background analgesia while mitigating sudden breakthrough episodes.",
+      "say": "The WHO analgesic ladder directs evidence-based oncologic pain management by progressively escalating from non-opioids at Step 1, to weak opioids at Step 2, up to potent strong opioids at Step 3 for moderate-to-severe cancer pain. Systematic numerical assessment and structured round-the-clock dosing regimens ensure dependable background analgesia while mitigating sudden breakthrough episodes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Step 1: Non-Opioid (Paracetamol / NSAID)"
+          },
+          {
+            "id": "s2",
+            "label": "Step 2: Weak Opioid (Codeine / Tramadol)"
+          },
+          {
+            "id": "s3",
+            "label": "Step 3: Strong Opioid (Morphine / Oxycodone)"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2"
+          ],
+          [
+            "s2",
+            "s3"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Palliative sedation",
-     "points": [
-      "Refractory suffering",
-      "Impending death",
-      "Not for mild anxiety"
-     ]
+    {
+      "tx": "**Morphine** serves as the gold-standard reference strong opioid for managing severe cancer pain across international guidelines. Because extensive hepatic **first-pass metabolism** and glucuronidation reduce systemic availability, oral morphine formulations are approximately one-third as potent as parenteral intravenous or subcutaneous routes, requiring a 3 to 1 oral-to-parenteral dose ratio.",
+      "say": "Morphine serves as the gold-standard reference strong opioid for managing severe cancer pain across international guidelines. Because extensive hepatic first-pass metabolism and glucuronidation reduce systemic availability, oral morphine formulations are approximately one-third as potent as parenteral intravenous or subcutaneous routes, requiring a 3 to 1 oral-to-parenteral dose ratio.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Administration Route",
+          "Equianalgesic Dose Ratio",
+          "Pharmacokinetic Features"
+        ],
+        "rows": [
+          [
+            "Oral (PO)",
+            "30 mg oral morphine",
+            "Extensive hepatic glucuronidation to active M6G and neurotoxic M3G"
+          ],
+          [
+            "Intravenous / Subcutaneous",
+            "10 mg parenteral morphine",
+            "Rapid peak concentration within 15 to 30 minutes; bypasses first-pass effect"
+          ],
+          [
+            "Transdermal Fentanyl",
+            "25 mcg/hr patch ~ 60 mg oral morphine/day",
+            "Lipophilic depot; avoids active renal metabolites; ideal for stable swallowing deficits"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Equianalgesic opioid rotation** to an alternative pure agonist is clinically indicated when patients experience refractory neurotoxic adverse effects, such as **hyperalgesia**, myoclonus, delirium, or intolerable sedation despite escalating analgesics. Switching opioids clears neurotoxic metabolites like morphine-3-glucuronide and leverages incomplete receptor cross-tolerance to restore pain control at lower equivalent doses.",
+      "say": "Equianalgesic opioid rotation to an alternative pure agonist is clinically indicated when patients experience refractory neurotoxic adverse effects, such as hyperalgesia, myoclonus, delirium, or intolerable sedation despite escalating analgesics. Switching opioids clears neurotoxic metabolites like morphine-3-glucuronide and leverages incomplete receptor cross-tolerance to restore pain control at lower equivalent doses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fail",
+            "label": "Toxicity / Refractory Pain"
+          },
+          {
+            "id": "calc",
+            "label": "Calculate Total 24h Oral Morphine"
+          },
+          {
+            "id": "cross",
+            "label": "Reduce 25-50% for Cross-Tolerance"
+          },
+          {
+            "id": "switch",
+            "label": "Rotate to Oxycodone / Fentanyl / Methadone"
+          }
+        ],
+        "edges": [
+          [
+            "fail",
+            "calc"
+          ],
+          [
+            "calc",
+            "cross"
+          ],
+          [
+            "cross",
+            "switch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neuropathic cancer pain**, caused by tumour compression or invasion of peripheral nerves, plexuses, or spinal roots, requires co-analgesic adjuvant therapy alongside opioids. Clinical guidelines mandate incorporating voltage-gated calcium channel blockers **gabapentin** or pregabalin, serotonin-norepinephrine reuptake inhibitors duloxetine, or tricyclic antidepressants to alleviate lancinating, burning discomfort.",
+      "say": "Neuropathic cancer pain, caused by tumour compression or invasion of peripheral nerves, plexuses, or spinal roots, requires co-analgesic adjuvant therapy alongside opioids. Clinical guidelines mandate incorporating voltage-gated calcium channel blockers gabapentin or pregabalin, serotonin-norepinephrine reuptake inhibitors duloxetine, or tricyclic antidepressants to alleviate lancinating, burning discomfort.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Adjuvant Drug Class",
+          "Representative Agent",
+          "Mechanism and Titration"
+        ],
+        "rows": [
+          [
+            "Alpha-2-delta ligand",
+            "Gabapentin 300 to 1800 mg/day",
+            "Blocks voltage-gated calcium channels; titrate slowly to avoid somnolence"
+          ],
+          [
+            "Alpha-2-delta ligand",
+            "Pregabalin 75 to 300 mg/day",
+            "Predictable linear absorption; adjust dose downward in renal insufficiency"
+          ],
+          [
+            "SNRI",
+            "Duloxetine 30 to 60 mg/day",
+            "Inhibits serotonin and norepinephrine reuptake; optimal for chemotherapy neuropathy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Breakthrough cancer pain** is managed with rapid-onset transmucosal **fentanyl** formulations or immediate-release oral opioids dosed at approximately 10% to 15% of the total 24-hour baseline opioid dose. Because breakthrough pain paroxysms peak within minutes, transmucosal sublingual or buccal fentanyl bypasses gastrointestinal absorption, matching rapid analgesic onset to fleeting pain spikes.",
+      "say": "Breakthrough cancer pain is managed with rapid-onset transmucosal fentanyl formulations or immediate-release oral opioids dosed at approximately 10% to 15% of the total 24-hour baseline opioid dose. Because breakthrough pain paroxysms peak within minutes, transmucosal sublingual or buccal fentanyl bypasses gastrointestinal absorption, matching rapid analgesic onset to fleeting pain spikes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immediate-Release Oral Opioid",
+          "points": [
+            "Oral morphine or oxycodone liquid/tablet",
+            "Onset of analgesia: 30 to 45 minutes",
+            "Duration of analgesia: 3 to 4 hours",
+            "Dosed at 10% to 15% of 24-hour baseline"
+          ]
+        },
+        "right": {
+          "title": "Transmucosal Fentanyl Formulations",
+          "points": [
+            "Sublingual tablets, buccal lozenges, nasal spray",
+            "Onset of analgesia: 5 to 15 minutes",
+            "High lipophilicity crosses vascular oral mucosa",
+            "Indicated specifically for opioid-tolerant episodic flares"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Early integrated palliative** care introduced concurrently with standard oncology care within 8 weeks of an advanced cancer diagnosis significantly improves quality of life, mood, and overall survival in the landmark **Temel trial**. Proactive symptom management and early advance care planning mitigate physical suffering and lower futile end-of-life intensive care interventions.",
+      "say": "Early integrated palliative care introduced concurrently with standard oncology care within 8 weeks of an advanced cancer diagnosis significantly improves quality of life, mood, and overall survival in the landmark Temel trial. Proactive symptom management and early advance care planning mitigate physical suffering and lower futile end-of-life intensive care interventions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Outcome",
+          "Standard Oncology Care Alone",
+          "Early Integrated Palliative Care"
+        ],
+        "rows": [
+          [
+            "Median Overall Survival",
+            "8.9 months",
+            "11.6 months (significant survival prolongation)"
+          ],
+          [
+            "Quality of Life (TOI Score)",
+            "Progressive decline over 12 weeks",
+            "Sustained improvement in functional well-being"
+          ],
+          [
+            "Depressive Symptoms (HADS)",
+            "38% documented depressive symptoms",
+            "16% documented depressive symptoms"
+          ],
+          [
+            "End-of-Life Aggressive Care",
+            "54% received resuscitation or late chemo",
+            "33% received aggressive interventions near death"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dame **Cicely Saunders** formulated the profound **total pain** concept, emphasizing that suffering encompasses physical nociceptive input, emotional anxiety, social isolation, and existential spiritual distress. Comprehensive palliative medicine integrates interdisciplinary clinicians, psychologists, and social workers to deconstruct and relieve multidimensional suffering beyond isolated pharmacologic analgesia.",
+      "say": "Dame Cicely Saunders formulated the profound total pain concept, emphasizing that suffering encompasses physical nociceptive input, emotional anxiety, social isolation, and existential spiritual distress. Comprehensive palliative medicine integrates interdisciplinary clinicians, psychologists, and social workers to deconstruct and relieve multidimensional suffering beyond isolated pharmacologic analgesia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Suffering Domain",
+          "Clinical Manifestations",
+          "Palliative Intervention"
+        ],
+        "rows": [
+          [
+            "Physical Domain",
+            "Nociceptive and neuropathic tissue injury pain",
+            "Opioids, non-opioids, and targeted co-analgesics"
+          ],
+          [
+            "Psychological Domain",
+            "Anxiety, depression, helplessness, and panic",
+            "Cognitive therapy, supportive counseling, and anxiolytics"
+          ],
+          [
+            "Social Domain",
+            "Financial distress, role reversal, and caregiver strain",
+            "Medical social work, family conferences, and community support"
+          ],
+          [
+            "Spiritual Domain",
+            "Existential dread, loss of meaning, and guilt",
+            "Chaplaincy, existential psychotherapy, and dignified presence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Palliative proportional sedation** utilizing continuous infusion **midazolam** is ethically indicated for refractory suffering and intractable physical distress in the terminal last days of life. Titrated strictly to relieve refractory distress rather than hasten death, proportional sedation upholds the rule of double effect while preserving palliative comfort.",
+      "say": "Palliative proportional sedation utilizing continuous infusion midazolam is ethically indicated for refractory suffering and intractable physical distress in the terminal last days of life. Titrated strictly to relieve refractory distress rather than hasten death, proportional sedation upholds the rule of double effect while preserving palliative comfort.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ethical Dimension",
+          "Palliative Sedation Standard",
+          "Distinction from Euthanasia"
+        ],
+        "rows": [
+          [
+            "Primary Intention",
+            "Relieve refractory physical or existential suffering",
+            "Aim is symptom control; never to terminate patient life"
+          ],
+          [
+            "Sedative Titration",
+            "Proportional continuous infusion midazolam",
+            "Dosed to lowest effective sedative depth required"
+          ],
+          [
+            "Clinical Criterion",
+            "Presence of intractable symptoms in last days of life",
+            "Multidisciplinary consensus confirming all remedies exhausted"
+          ]
+        ]
+      }
     }
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 98 & 103 (Cancer Pain and Palliative Medicine)",
+    "WHO Guidelines for Cancer Pain",
+    "Temel et al. (NEJM 2010)",
+    "EAPC Framework on Palliative Sedation"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_75ee63efbfec",
-  "q_9681427ca255",
-  "q_f48afe332b9a"
- ],
- "src": [],
- "refs": [
-  "WHO Guidelines for the Pharmacological and Radiotherapeutic Management of Cancer Pain in Adults and Adolescents",
-  "Oxford Textbook of Palliative Medicine (Bennett, Hanks, Kaasa)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 32
- }
 }

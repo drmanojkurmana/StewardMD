@@ -1,139 +1,296 @@
 {
- "v": 1,
- "module": "son-breast-metastatic-hr",
- "subject": "ss-medical-oncology",
- "title": "Metastatic hormone receptor positive breast cancer: targeted and endocrine options",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "In **hormone receptor positive** metastatic disease, the usual first line approach pairs an **endocrine agent** with a **CDK4/6 inhibitor** such as palbociclib, unless the patient has life threatening visceral involvement needing faster control. The endocrine partner is selected according to menopausal state and previous treatment. Premenopausal women also need **ovarian function suppression** so that the endocrine drug acts effectively.",
-   "say": "In hormone receptor positive metastatic disease, the usual first line approach pairs an endocrine agent with a CDK4/6 inhibitor such as palbociclib, unless the patient has life threatening visceral involvement needing faster control. The endocrine partner is selected according to menopausal state and previous treatment. Premenopausal women also need ovarian function suppression so that the endocrine drug acts effectively.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Strategy",
-     "Typical agents",
-     "Setting"
-    ],
-    "rows": [
-     [
-      "Endocrine backbone",
-      "Aromatase inhibitor or fulvestrant",
-      "Postmenopausal, or premenopausal with ovarian suppression"
-     ],
-     [
-      "Cell cycle brake",
-      "Palbociclib",
-      "Added to endocrine therapy"
-     ],
-     [
-      "Visceral crisis",
-      "Chemotherapy first",
-      "Rapid symptomatic progression"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Fulvestrant** is a **selective estrogen receptor degrader**, acting as a pure antagonist with no agonist activity. It binds the receptor and marks it for breakdown, lowering nuclear ER alpha levels. The standard dose is 500 mg by intramuscular injection on days 1, 15 and 29, then monthly. Injection site pain and hot flushes are common, and platelet counts matter because the injection is intramuscular.",
-   "say": "Fulvestrant is a selective estrogen receptor degrader, acting as a pure antagonist with no agonist activity. It binds the receptor and marks it for breakdown, lowering nuclear ER alpha levels. The standard dose is 500 mg by intramuscular injection on days 1, 15 and 29, then monthly. Injection site pain and hot flushes are common, and platelet counts matter because the injection is intramuscular.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Binds ER alpha"
-     },
-     {
-      "id": "n2",
-      "label": "Receptor marked for breakdown"
-     },
-     {
-      "id": "n3",
-      "label": "Less estrogen signalling"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**CDK4 and CDK6 inhibitors** added to endocrine therapy improve progression free survival in first line disease. **Palbociclib** is given at 125 mg daily for three weeks, then one week off. Other agents in this class follow their own schedules, so check the product information. **Neutropenia** is the main limiting toxicity, so counts are monitored and doses are held or reduced when needed. Diarrhoea and fatigue also occur.",
-   "say": "CDK4 and CDK6 inhibitors added to endocrine therapy improve progression free survival in first line disease. Palbociclib is given at 125 mg daily for three weeks, then one week off. Other agents in this class follow their own schedules, so check the product information. Neutropenia is the main limiting toxicity, so counts are monitored and doses are held or reduced when needed. Diarrhoea and fatigue also occur.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Agent",
-     "Schedule",
-     "Key toxicity"
-    ],
-    "rows": [
-     [
-      "Palbociclib",
-      "125 mg daily, 3 weeks on, 1 week off",
-      "Neutropenia"
-     ],
-     [
-      "Other CDK4/6 inhibitors",
-      "Per product information",
-      "Neutropenia, diarrhoea"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Resistance to endocrine therapy often arises through **ESR1 mutations**, which can be detected on **circulating tumour DNA**. After endocrine and CDK4/6 failure, an **oral SERD** is an option for ESR1 mutated disease. **PI3K pathway** alterations can be targeted by a **PI3K inhibitor** given with fulvestrant. **Capivasertib** with fulvestrant covers PIK3CA, AKT1 or PTEN alterations. Both PI3K and AKT drugs cause **hyperglycaemia**, so glucose is monitored.",
-   "say": "Resistance to endocrine therapy often arises through ESR1 mutations, which can be detected on circulating tumour DNA. After endocrine and CDK4/6 failure, an oral SERD is an option for ESR1 mutated disease. PI3K pathway alterations can be targeted by a PI3K inhibitor given with fulvestrant. Capivasertib with fulvestrant covers PIK3CA, AKT1 or PTEN alterations. Both PI3K and AKT drugs cause hyperglycaemia, so glucose is monitored.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "ESR1 mutated",
-     "points": [
-      "Oral SERD after endocrine and CDK4/6 failure",
-      "Detected on circulating tumour DNA"
-     ]
+  "v": 1,
+  "module": "son-breast-metastatic-hr",
+  "subject": "ss-medical-oncology",
+  "title": "Metastatic hormone receptor-positive breast cancer: endocrine combinations, ESR1 and PIK3CA alterations and antibody-drug conjugates",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "First-line systemic therapy for metastatic hormone receptor-positive breast cancer provides combined treatment with an aromatase inhibitor and CDK4/6 inhibitors **palbociclib**, **ribociclib**, or **abemaciclib**. Landmark randomized phase III trials PALOMA-2, MONALEESA-2, and MONARCH-3 demonstrated that CDK4/6 inhibition dramatically prolongs median progression-free survival beyond 2 years, establishing endocrine combination regimens as the undisputed first-line standard.",
+      "say": "First-line systemic therapy for metastatic hormone receptor-positive breast cancer provides combined treatment with an aromatase inhibitor and CDK4/6 inhibitors palbociclib, ribociclib, or abemaciclib. Landmark randomized phase III trials PALOMA-2, MONALEESA-2, and MONARCH-3 demonstrated that CDK4/6 inhibition dramatically prolongs median progression-free survival beyond 2 years, establishing endocrine combination regimens as the undisputed first-line standard.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CDK4/6 Inhibitor",
+          "Pivotal First-Line Trial",
+          "Median PFS Gain",
+          "Key Distinguishing Toxicity"
+        ],
+        "rows": [
+          [
+            "Ribociclib",
+            "MONALEESA-2",
+            "25.3 vs 16.0 months (proven OS)",
+            "Neutropenia, QTc prolongation, transaminitis"
+          ],
+          [
+            "Abemaciclib",
+            "MONARCH-3",
+            "28.2 vs 14.8 months",
+            "Diarrhea, venous thromboembolism, fatigue"
+          ],
+          [
+            "Palbociclib",
+            "PALOMA-2",
+            "24.8 vs 14.5 months",
+            "Reversible uncomplicated neutropenia"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "PI3K or AKT altered",
-     "points": [
-      "PI3K inhibitor with fulvestrant for PIK3CA",
-      "Capivasertib with fulvestrant for PIK3CA, AKT1 or PTEN",
-      "Monitor glucose for hyperglycaemia"
-     ]
+    {
+      "tx": "Among CDK4/6 inhibitors, **Ribociclib** combined with endocrine therapy is the first agent to establish a statistically significant **overall survival** benefit in advanced HR-positive breast cancer. In MONALEESA-2, ribociclib plus letrozole prolonged median overall survival to 63.9 months compared to 51.4 months with placebo, demonstrating an absolute 12.5-month overall survival prolongation that persisted across premenopausal cohorts in MONALEESA-7.",
+      "say": "Among CDK4/6 inhibitors, Ribociclib combined with endocrine therapy is the first agent to establish a statistically significant overall survival benefit in advanced HR-positive breast cancer. In MONALEESA-2, ribociclib plus letrozole prolonged median overall survival to 63.9 months compared to 51.4 months with placebo, demonstrating an absolute 12.5-month overall survival prolongation that persisted across premenopausal cohorts in MONALEESA-7.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MONALEESA-2 Ribociclib OS",
+          "points": [
+            "Median OS: 63.9 months vs 51.4 months",
+            "Statistically significant HR 0.76 (p=0.008)",
+            "Durable 12.5-month survival prolongation",
+            "Demonstrated across MONALEESA-2, 3, and 7"
+          ]
+        },
+        "right": {
+          "title": "Endocrine Monotherapy",
+          "points": [
+            "Aromatase inhibitor monotherapy arm",
+            "Inferior median progression-free survival",
+            "Earlier requirement for cytotoxic chemotherapy",
+            "Higher rate of early endocrine failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intramuscular **Fulvestrant** combined with abemaciclib, ribociclib, or palbociclib represents the established **standard of care** for second-line metastatic HR+ breast cancer progressing on aromatase inhibitors. In randomized phase III trials PALOMA-3, MONALEESA-3, and MONARCH-2, combining fulvestrant with CDK4/6 inhibitors significantly prolonged progression-free survival and overall survival compared to endocrine monotherapy.",
+      "say": "Intramuscular Fulvestrant combined with abemaciclib, ribociclib, or palbociclib represents the established standard of care for second-line metastatic HR+ breast cancer progressing on aromatase inhibitors. In randomized phase III trials PALOMA-3, MONALEESA-3, and MONARCH-2, combining fulvestrant with CDK4/6 inhibitors significantly prolonged progression-free survival and overall survival compared to endocrine monotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ai_prog",
+            "label": "AI Progression",
+            "level": 1
+          },
+          {
+            "id": "fulv",
+            "label": "Fulvestrant 500 mg IM",
+            "level": 2
+          },
+          {
+            "id": "cdk",
+            "label": "CDK4/6 Inhibitor",
+            "level": 3
+          },
+          {
+            "id": "pfs",
+            "label": "Prolonged Second-Line PFS",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ai_prog",
+            "fulv"
+          ],
+          [
+            "fulv",
+            "cdk"
+          ],
+          [
+            "cdk",
+            "pfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acquired point mutations in the **ESR1** ligand-binding domain, such as Y537S and D538G, constitutively activate estrogen receptor transcription independently of circulating estrogens, conferring resistance to aromatase inhibitors. In the phase III **EMERALD** trial, the oral selective estrogen receptor degrader **elacestrant** significantly improved progression-free survival over standard endocrine therapy in patients harbouring detectable ESR1 mutations.",
+      "say": "Acquired point mutations in the ESR1 ligand-binding domain, such as Y537S and D538G, constitutively activate estrogen receptor transcription independently of circulating estrogens, conferring resistance to aromatase inhibitors. In the phase III EMERALD trial, the oral selective estrogen receptor degrader elacestrant significantly improved progression-free survival over standard endocrine therapy in patients harbouring detectable ESR1 mutations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ESR1 Mutant Biology",
+          "points": [
+            "Ligand-independent constitutive ER activation",
+            "Emerges under selective pressure of aromatase inhibitors",
+            "Refractory to letrozole, anastrozole, exemestane",
+            "Detected non-invasively via plasma ctDNA"
+          ]
+        },
+        "right": {
+          "title": "Elacestrant Oral SERD",
+          "points": [
+            "Binds mutant ER; promotes receptor degradation",
+            "First oral SERD approved for ESR1-mutated cancer",
+            "Superior PFS in EMERALD vs fulvestrant or AI",
+            "Oral daily administration without depot injections"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Activating mutations in the alpha-catalytic subunit of PI3K encoded by **PIK3CA** occur in approximately 40% of HR-positive advanced breast cancers. In the phase III **SOLAR-1 trial**, adding the alpha-specific PI3K inhibitor **alpelisib** to fulvestrant doubled progression-free survival in PIK3CA-mutated disease from 5.7 months to 11.0 months. Key treatment-emergent adverse events include severe hyperglycaemia, maculopapular rash requiring prophylactic antihistamines, and gastrointestinal diarrhoea.",
+      "say": "Activating mutations in the alpha-catalytic subunit of PI3K encoded by PIK3CA occur in approximately 40% of HR-positive advanced breast cancers. In the phase III SOLAR-1 trial, adding the alpha-specific PI3K inhibitor alpelisib to fulvestrant doubled progression-free survival in PIK3CA-mutated disease from 5.7 months to 11.0 months. Key treatment-emergent adverse events include severe hyperglycaemia, maculopapular rash requiring prophylactic antihistamines, and gastrointestinal diarrhoea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pik3ca",
+            "label": "PIK3CA Mutation",
+            "level": 1
+          },
+          {
+            "id": "alpel",
+            "label": "Alpelisib + Fulvestrant",
+            "level": 2
+          },
+          {
+            "id": "hyper",
+            "label": "Monitor Hyperglycaemia",
+            "level": 3
+          },
+          {
+            "id": "pfs",
+            "label": "PFS: 11.0 vs 5.7 Months",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pik3ca",
+            "alpel"
+          ],
+          [
+            "alpel",
+            "hyper"
+          ],
+          [
+            "hyper",
+            "pfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeting the downstream AKT node, the phase III **CAPItello-291** trial evaluated the potent pan-AKT kinase inhibitor **capivasertib** combined with fulvestrant. In patients harboring one or more alterations in **PIK3CA**, AKT1, or PTEN, capivasertib plus fulvestrant significantly prolonged progression-free survival from 3.1 to 7.3 months, establishing an effective targeted option for patients progressing through CDK4/6 inhibitors.",
+      "say": "Targeting the downstream AKT node, the phase III CAPItello-291 trial evaluated the potent pan-AKT kinase inhibitor capivasertib combined with fulvestrant. In patients harboring one or more alterations in PIK3CA, AKT1, or PTEN, capivasertib plus fulvestrant significantly prolonged progression-free survival from 3.1 to 7.3 months, establishing an effective targeted option for patients progressing through CDK4/6 inhibitors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Targeted Pathway Inhibitor",
+          "Biomarker Requirement",
+          "Pivotal Trial",
+          "Median PFS Gain"
+        ],
+        "rows": [
+          [
+            "Capivasertib + Fulvestrant",
+            "PIK3CA, AKT1, or PTEN alteration",
+            "CAPItello-291",
+            "7.3 vs 3.1 months (HR 0.50)"
+          ],
+          [
+            "Alpelisib + Fulvestrant",
+            "PIK3CA exon 9 or 20 mutations",
+            "SOLAR-1",
+            "11.0 vs 5.7 months (HR 0.65)"
+          ],
+          [
+            "Everolimus + Exemestane",
+            "No biomarker required (broad activity)",
+            "BOLERO-2",
+            "7.8 vs 3.2 months (HR 0.45)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The landmark phase III **DESTINY-Breast04** trial fundamentally redefined therapy by establishing the antibody-drug conjugate **Trastuzumab deruxtecan** in **HER2-low** metastatic breast cancer. Defined by immunohistochemistry as IHC 1+ or IHC 2+ with negative FISH, HER2-low tumours treated with trastuzumab deruxtecan demonstrated dramatic, unprecedented improvements in both progression-free survival and overall survival compared to physician-choice chemotherapy.",
+      "say": "The landmark phase III DESTINY-Breast04 trial fundamentally redefined therapy by establishing the antibody-drug conjugate Trastuzumab deruxtecan in HER2-low metastatic breast cancer. Defined by immunohistochemistry as IHC 1+ or IHC 2+ with negative FISH, HER2-low tumours treated with trastuzumab deruxtecan demonstrated dramatic, unprecedented improvements in both progression-free survival and overall survival compared to physician-choice chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trastuzumab Deruxtecan (T-DXd)",
+          "points": [
+            "Humanized anti-HER2 IgG1 antibody",
+            "Topoisomerase I inhibitor exatecan derivative payload",
+            "High drug-to-antibody ratio of 8:1 with cleavable linker",
+            "Bystander antitumor killing effect on adjacent cells"
+          ]
+        },
+        "right": {
+          "title": "Clinical Efficacy (DESTINY-Breast04)",
+          "points": [
+            "Median PFS: 10.1 months vs 5.4 months (HR 0.51)",
+            "Median OS: 23.9 months vs 17.5 months (HR 0.64)",
+            "Transforms standard after endocrine therapy",
+            "Requires vigilance for interstitial lung disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oral mTORC1 inhibitor **Everolimus** inhibits the downstream serine/threonine kinase mammalian target of rapamycin. In the phase III **BOLERO-2** trial, adding everolimus to the steroidal aromatase inhibitor exemestane more than doubled progression-free survival in patients with endocrine-refractory metastatic breast cancer. Class-specific adverse effects include aphthous stomatitis, non-infectious pneumonitis, hyperglycaemia, and hyperlipidaemia requiring active supportive management.",
+      "say": "Oral mTORC1 inhibitor Everolimus inhibits the downstream serine/threonine kinase mammalian target of rapamycin. In the phase III BOLERO-2 trial, adding everolimus to the steroidal aromatase inhibitor exemestane more than doubled progression-free survival in patients with endocrine-refractory metastatic breast cancer. Class-specific adverse effects include aphthous stomatitis, non-infectious pneumonitis, hyperglycaemia, and hyperlipidaemia requiring active supportive management.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pi3k",
+            "label": "PI3K / Akt Pathway",
+            "level": 1
+          },
+          {
+            "id": "mtor",
+            "label": "mTORC1 Activation",
+            "level": 2
+          },
+          {
+            "id": "evero",
+            "label": "Everolimus Blockade",
+            "level": 3
+          },
+          {
+            "id": "resp",
+            "label": "Overcomes Resistance",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pi3k",
+            "mtor"
+          ],
+          [
+            "mtor",
+            "evero"
+          ],
+          [
+            "evero",
+            "resp"
+          ]
+        ]
+      }
     }
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 44 (Cancer of the Breast)",
+    "ESMO Metastatic Breast Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_fe2a2b185b29",
-  "q_760a23d6b7d9",
-  "q_84e45c05307d"
- ],
- "src": [],
- "refs": [
-  "NCCN Clinical Practice Guidelines in Oncology: Breast Cancer"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 46
- }
 }

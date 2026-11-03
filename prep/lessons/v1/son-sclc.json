@@ -1,0 +1,292 @@
+{
+  "v": 1,
+  "module": "son-sclc",
+  "subject": "ss-medical-oncology",
+  "title": "Small cell lung cancer: staging classification, chemoimmunotherapy, thoracic irradiation and prophylactic cranial irradiation",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Small cell lung cancer SCLC is clinically staged using the Veterans Administration Lung Cancer Study Group classification into limited-stage and extensive-stage disease. **Limited-stage SCLC** is defined as disease anatomically confined to the ipsilateral hemithorax, mediastinum, and supraclavicular nodes that can be safely encompassed within a tolerable single radiation therapy field. Conversely, extensive-stage disease produces distant metastases, malignant pleural effusions, or contralateral hilar adenopathy.",
+      "say": "Small cell lung cancer SCLC is clinically staged using the Veterans Administration Lung Cancer Study Group classification into limited-stage and extensive-stage disease. Limited-stage SCLC is defined as disease anatomically confined to the ipsilateral hemithorax, mediastinum, and supraclavicular nodes that can be safely encompassed within a tolerable single radiation therapy field. Conversely, extensive-stage disease produces distant metastases, malignant pleural effusions, or contralateral hilar adenopathy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Limited-Stage SCLC (LS-SCLC)",
+          "points": [
+            "Confined to one hemithorax and regional nodes",
+            "Encompassed within a single radiation port",
+            "Curative intent with concurrent chemoradiotherapy",
+            "Median survival: 25 to 30 months"
+          ]
+        },
+        "right": {
+          "title": "Extensive-Stage SCLC (ES-SCLC)",
+          "points": [
+            "Distant metastases or malignant effusions",
+            "Exceeds tolerable radiation portal boundaries",
+            "Palliative intent with systemic chemo-immunotherapy",
+            "Median survival: 12 to 14 months"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For limited-stage disease, the established standard of care comprises concurrent **accelerated hyperfractionated** thoracic radiation paired with 4 cycles of cisplatin and etoposide. Thoracic radiation delivers 45 Gy across 30 twice-daily fractions of 150 cGy over 3 weeks, beginning early during cycle 1 or 2 of chemotherapy. Accelerated delivery counters rapid neuroendocrine tumour cell repopulation, providing superior long-term local control and overall survival over once-daily radiation.",
+      "say": "For limited-stage disease, the established standard of care comprises concurrent accelerated hyperfractionated thoracic radiation paired with 4 cycles of cisplatin and etoposide. Thoracic radiation delivers 45 Gy across 30 twice-daily fractions of 150 cGy over 3 weeks, beginning early during cycle 1 or 2 of chemotherapy. Accelerated delivery counters rapid neuroendocrine tumour cell repopulation, providing superior long-term local control and overall survival over once-daily radiation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dx",
+            "label": "Limited Stage SCLC",
+            "level": 1
+          },
+          {
+            "id": "ep",
+            "label": "Cisplatin + Etoposide",
+            "level": 2
+          },
+          {
+            "id": "hyper",
+            "label": "45 Gy Twice Daily",
+            "level": 3
+          },
+          {
+            "id": "pci",
+            "label": "Prophylactic Cranial RT",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dx",
+            "ep"
+          ],
+          [
+            "ep",
+            "hyper"
+          ],
+          [
+            "hyper",
+            "pci"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In newly diagnosed **extensive-stage SCLC**, front-line systemic therapy requires combining platinum and etoposide with **PD-L1 inhibitors** such as atezolizumab or durvalumab. Landmark phase III trials IMpower133 with **atezolizumab** and CASPIAN with **durvalumab** demonstrated statistically significant improvements in overall survival over chemotherapy alone. Chemoimmunotherapy for 4 cycles followed by maintenance PD-L1 inhibitor monotherapy represents the universal standard of care.",
+      "say": "In newly diagnosed extensive-stage SCLC, front-line systemic therapy requires combining platinum and etoposide with PD-L1 inhibitors such as atezolizumab or durvalumab. Landmark phase III trials IMpower133 with atezolizumab and CASPIAN with durvalumab demonstrated statistically significant improvements in overall survival over chemotherapy alone. Chemoimmunotherapy for 4 cycles followed by maintenance PD-L1 inhibitor monotherapy represents the universal standard of care.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pivotal Trial",
+          "Experimental Regimen",
+          "Median Overall Survival",
+          "Hazard Ratio"
+        ],
+        "rows": [
+          [
+            "IMpower133",
+            "Carboplatin + Etoposide + Atezolizumab",
+            "12.3 months vs 10.3 months",
+            "HR 0.70 (p=0.007)"
+          ],
+          [
+            "CASPIAN",
+            "Cisplatin/Carbo + Etoposide + Durvalumab",
+            "12.9 months vs 10.5 months",
+            "HR 0.71 (p=0.003)"
+          ],
+          [
+            "KEYNOTE-604",
+            "Platinum + Etoposide + Pembrolizumab",
+            "10.8 months vs 9.7 months",
+            "HR 0.80 (p=0.016)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In limited-stage small cell lung cancer, the landmark **ADRIATIC trial** established a major survival paradigm shift. Patients with limited-stage disease without progression after definitive concurrent chemoradiotherapy received consolidation **durvalumab** for up to 2 years. Durvalumab consolidation demonstrated dramatic, statistically significant improvements in both progression-free survival and overall survival, establishing consolidation immunotherapy in curative-intent limited SCLC.",
+      "say": "In limited-stage small cell lung cancer, the landmark ADRIATIC trial established a major survival paradigm shift. Patients with limited-stage disease without progression after definitive concurrent chemoradiotherapy received consolidation durvalumab for up to 2 years. Durvalumab consolidation demonstrated dramatic, statistically significant improvements in both progression-free survival and overall survival, establishing consolidation immunotherapy in curative-intent limited SCLC.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "crt",
+            "label": "Concurrent CRT (45 Gy)",
+            "level": 1
+          },
+          {
+            "id": "resp",
+            "label": "No Disease Progression",
+            "level": 2
+          },
+          {
+            "id": "durva",
+            "label": "Durvalumab Consolidation",
+            "level": 3
+          },
+          {
+            "id": "surv",
+            "label": "Unprecedented OS Gain",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "crt",
+            "resp"
+          ],
+          [
+            "resp",
+            "durva"
+          ],
+          [
+            "durva",
+            "surv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because small cell lung cancer exhibits high neurotropism, **Prophylactic cranial irradiation** PCI to 25 Gy in 10 fractions significantly reduces brain metastasis incidence and improves overall survival. In limited-stage patients achieving complete or good partial response, PCI reduces symptomatic brain relapse by more than 50%. In extensive-stage disease, serial surveillance brain MRI provides an evidence-based alternative to upfront PCI to avoid neurocognitive decline.",
+      "say": "Because small cell lung cancer exhibits high neurotropism, Prophylactic cranial irradiation PCI to 25 Gy in 10 fractions significantly reduces brain metastasis incidence and improves overall survival. In limited-stage patients achieving complete or good partial response, PCI reduces symptomatic brain relapse by more than 50%. In extensive-stage disease, serial surveillance brain MRI provides an evidence-based alternative to upfront PCI to avoid neurocognitive decline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PCI Indications & Benefits",
+          "points": [
+            "Indicated in LS-SCLC after good response to CRT",
+            "Reduces cumulative brain metastases from 60% to 30%",
+            "Improves 3-year overall survival by approx. 5%",
+            "Standard dose: 25 Gy in 10 daily fractions"
+          ]
+        },
+        "right": {
+          "title": "Neurocognitive Risks & Alternatives",
+          "points": [
+            "Delayed cognitive slowing and memory decline",
+            "Hippocampal-avoidance IMRT techniques reduce toxicity",
+            "Memantine co-administration preserves neurocognition",
+            "MRI surveillance every 3 months in extensive-stage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bispecific antibody **Tarlatamab** represents an innovative DLL3-directed **bispecific T-cell engager** BiTE approved for pretreated extensive-stage SCLC. Delta-like ligand 3 DLL3 is aberrantly expressed on the cell surface of over 85% of small cell lung cancers while absent on normal adult tissues. By crosslinking DLL3 on tumour cells with CD3 on cytotoxic T cells, tarlatamab induces targeted perforin-mediated neuroendocrine tumour cell lysis.",
+      "say": "Bispecific antibody Tarlatamab represents an innovative DLL3-directed bispecific T-cell engager BiTE approved for pretreated extensive-stage SCLC. Delta-like ligand 3 DLL3 is aberrantly expressed on the cell surface of over 85% of small cell lung cancers while absent on normal adult tissues. By crosslinking DLL3 on tumour cells with CD3 on cytotoxic T cells, tarlatamab induces targeted perforin-mediated neuroendocrine tumour cell lysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dll3",
+            "label": "DLL3 Target on SCLC",
+            "level": 1
+          },
+          {
+            "id": "tarla",
+            "label": "Tarlatamab Binding",
+            "level": 2
+          },
+          {
+            "id": "cd3",
+            "label": "CD3+ T-Cell Recruitment",
+            "level": 3
+          },
+          {
+            "id": "lysis",
+            "label": "Perforin Tumour Lysis",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dll3",
+            "tarla"
+          ],
+          [
+            "tarla",
+            "cd3"
+          ],
+          [
+            "cd3",
+            "lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synthetic tetrahydronaphthyridine alkaloid **Lurbinectedin** selectively binds DNA minor groove guanine residues, bending DNA and inhibiting **RNA polymerase II** elongation during active oncogenic transcription. Lurbinectedin is approved for second-line extensive-stage SCLC progressing after front-line platinum chemotherapy. In addition to direct tumour cell apoptosis, lurbinectedin inhibits tumour-associated macrophages, suppressing vascular endothelial growth factor production in the tumour microenvironment.",
+      "say": "Synthetic tetrahydronaphthyridine alkaloid Lurbinectedin selectively binds DNA minor groove guanine residues, bending DNA and inhibiting RNA polymerase II elongation during active oncogenic transcription. Lurbinectedin is approved for second-line extensive-stage SCLC progressing after front-line platinum chemotherapy. In addition to direct tumour cell apoptosis, lurbinectedin inhibits tumour-associated macrophages, suppressing vascular endothelial growth factor production in the tumour microenvironment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Second-Line Agent",
+          "Mechanism of Action",
+          "Primary Toxicities"
+        ],
+        "rows": [
+          [
+            "Lurbinectedin",
+            "Selective RNA polymerase II and transcription inhibitor",
+            "Neutropenia, thrombocytopenia, transaminitis"
+          ],
+          [
+            "Topotecan",
+            "Topoisomerase I inhibitor; DNA single-strand breaks",
+            "Severe myelosuppression, fatigue, diarrhoea"
+          ],
+          [
+            "Amrubicin",
+            "Third-generation synthetic anthracycline (topoisomerase II)",
+            "Grade 4 neutropenia; active in refractory disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Small cell lung cancer produces severe paraneoplastic neurological and endocrine syndromes due to aberrant neuroendocrine polypeptide secretion. The **syndrome of inappropriate antidiuretic hormone** SIADH presents with euvolemic hyponatraemia driven by ectopic vasopressin, treated with fluid restriction and vasopressin V2-receptor antagonists. In contrast, **Lambert-Eaton myasthenic syndrome** results from autoantibodies against presynaptic voltage-gated calcium channels, causing proximal muscle weakness that improves with exercise.",
+      "say": "Small cell lung cancer produces severe paraneoplastic neurological and endocrine syndromes due to aberrant neuroendocrine polypeptide secretion. The syndrome of inappropriate antidiuretic hormone SIADH presents with euvolemic hyponatraemia driven by ectopic vasopressin, treated with fluid restriction and vasopressin V2-receptor antagonists. In contrast, Lambert-Eaton myasthenic syndrome results from autoantibodies against presynaptic voltage-gated calcium channels, causing proximal muscle weakness that improves with exercise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SIADH Paraneoplastic",
+          "points": [
+            "Ectopic arginine vasopressin secretion",
+            "Euvolemic, hypotonic hyponatraemia",
+            "Urine sodium > 30 mEq/L with concentrated urine",
+            "Treated with fluid restriction or tolvaptan"
+          ]
+        },
+        "right": {
+          "title": "Lambert-Eaton (LEMS)",
+          "points": [
+            "Antibodies against P/Q-type calcium channels",
+            "Proximal leg weakness and autonomic dysfunction",
+            "Characteristic post-exercise muscle facilitation",
+            "Responsive to 3,4-diaminopyridine and tumour therapy"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 40 (Small Cell Lung Cancer)",
+    "NCCN Small Cell Lung Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
