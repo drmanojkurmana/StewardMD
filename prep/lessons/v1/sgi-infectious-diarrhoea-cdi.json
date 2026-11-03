@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "module": "sgi-infectious-diarrhoea-cdi",
+  "subject": "ss-gastroenterology",
+  "title": "Infectious diarrhoea and Clostridioides difficile: diagnosis and therapy",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Clostridioides difficile** infection (CDI) requires clinical diarrhoea, defined by passing at least 3 unformed liquid stools within 24 hours, alongside microbiological confirmation. Diagnostic algorithms utilize a two-step testing protocol combining sensitive enzyme immunoassay for glutamate dehydrogenase (GDH) with specific **toxin testing** for toxins A and B, using nucleic acid amplification testing (NAAT) to resolve discrepant specimens.",
+      "say": "Clostridioides difficile infection requires clinical diarrhoea, defined as passing three or more unformed stools within twenty-four hours, combined with microbiological confirmation. Laboratory algorithms employ a two-step protocol that pairs sensitive glutamate dehydrogenase testing with specific toxin detection assays.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/c-diff-fig1.webp",
+        "alt": "Diagram of Clostridioides difficile colitis with antibiotic dysbiosis, toxins A and B, a volcano-like pseudomembrane, colonoscopy plaques that are yellowish white, and a two-step test box listing GDH or NAAT followed by free toxin A/B enzyme immunoassay.",
+        "caption": "Diagnosis needs diarrhoea plus this two-step toxin pathway. A treatment note at the lower edge is cut off, so do not read a drug ranking from the drawing. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "First-line bactericidal therapy for initial and recurrent CDI prioritizes oral **fidaxomicin** (200 mg twice daily for 10 days). Fidaxomicin is a narrow-spectrum macrocyclic RNA polymerase inhibitor that preserves much of the native colonic flora, especially Bacteroidetes. Compared to **oral vancomycin**, fidaxomicin achieves equivalent initial clinical cure while demonstrating significantly lower subsequent recurrence rates.",
+      "say": "First-line bactericidal therapy for initial and recurrent Clostridioides difficile infection relies on oral fidaxomicin given at two hundred milligrams twice daily for ten days. Fidaxomicin selectively inhibits RNA polymerase while sparing commensal anaerobic flora, achieving significantly lower recurrence rates than oral vancomycin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral Fidaxomicin",
+          "points": [
+            "200 mg orally twice daily for 10 days",
+            "Narrow spectrum, spares commensal anaerobes",
+            "Bactericidal against C. difficile",
+            "Significantly lower 30-day recurrence rate"
+          ]
+        },
+        "right": {
+          "title": "Oral Vancomycin",
+          "points": [
+            "125 mg orally four times daily for 10 days",
+            "Broad intraluminal anaerobic destruction",
+            "Bacteriostatic against C. difficile",
+            "Higher post-treatment recurrence rate (approx. 20-25%)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fulminant CDI** is a life-threatening presentation defined by severe systemic hypotension, circulatory shock, paralytic ileus, or impending **toxic megacolon**. Emergency management mandates high-dose oral vancomycin (500 mg four times daily) administered through a nasogastric tube, supplemented with retention enemas of rectal vancomycin and concurrent intravenous metronidazole, alongside immediate surgical evaluation.",
+      "say": "Fulminant Clostridioides difficile infection is a life-threatening presentation characterized by shock, hypotension, paralytic ileus, or toxic megacolon. Management requires high-dose oral vancomycin at five hundred milligrams four times daily, combined with rectal vancomycin enemas and intravenous metronidazole, alongside surgical consultation.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Therapeutic Route", "Drug Regimen in Fulminant CDI", "Mechanism & Rationale"],
+        "rows": [
+          ["Enteral (oral / NG)", "Vancomycin 500 mg four times daily", "Maximizes intraluminal bactericidal drug concentrations"],
+          ["Rectal enema", "Vancomycin 500 mg in 100 mL saline q6h", "Delivers drug retrogradely past an adynamic ileus"],
+          ["Intravenous", "Metronidazole 500 mg every 8 hours", "Reaches ischemic colonic mucosa via tissue perfusion"],
+          ["Surgical consult", "Subtotal colectomy with end ileostomy", "Indicated for perforation, peritonitis, or refractory shock"]
+        ]
+      }
+    },
+    {
+      "tx": "**Fecal microbiota transplantation** (FMT) and next-generation oral fecal microbiota products restore a diverse, resilient colonic microenvironment. In patients suffering from multiply **recurrent CDI** that fails pulsed or tapered antibiotic courses, FMT achieves cure rates exceeding 80%. Donor microbial consortia re-establish secondary bile acid synthesis, which inhibits vegetative outgrowth from dormant C. difficile spores.",
+      "say": "Fecal microbiota transplantation provides a diverse healthy colonic microenvironment. In patients with multiply recurrent infection who fail pulsed antibiotic tapers, fecal microbiota transfer achieves cure rates exceeding eighty percent by restoring secondary bile acids that inhibit spore germination.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Multiply recurrent CDI after >= 2 recurrences"},
+          {"id": "b", "label": "Screened donor stool processing or oral spore capsule"},
+          {"id": "c", "label": "Engraftment of Bacteroidetes and Clostridial cluster XIVa"},
+          {"id": "d", "label": "Restoration of secondary bile acids & > 80% clinical cure"}
+        ],
+        "edges": [
+          ["a", "b", "indication"],
+          ["b", "c", "administration"],
+          ["c", "d", "restores"]
+        ]
+      }
+    },
+    {
+      "tx": "**Bezlotoxumab** is a fully humanized IgG1 monoclonal antibody designed as passive adjunctive immunotherapy. The antibody binds directly to **toxin B** with high affinity, neutralizing its enterotoxic cytopathic activity. Administered as a single intravenous infusion alongside standard antibacterial therapy, bezlotoxumab significantly reduces recurrence risk in vulnerable hosts aged over 65 or immunocompromised.",
+      "say": "Bezlotoxumab is a fully human monoclonal antibody designed for passive adjunctive immunotherapy. The antibody binds directly to Clostridioides difficile toxin B with high affinity, neutralizing its cytopathic effects. Given as a single intravenous infusion with antibiotics, it substantially lowers recurrence rates in high-risk patients.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Bezlotoxumab Profile", "Clinical Context"],
+        "rows": [
+          ["Molecular target", "C. difficile Toxin B (neutralizing epitope)", "Prevents epithelial cell necrosis and mucosal loss"],
+          ["Antibody class", "Fully human IgG1 monoclonal antibody", "Half-life of approximately 19 days"],
+          ["Dosing regimen", "Single IV infusion (10 mg/kg)", "Administered concurrently with standard oral antibiotics"],
+          ["Safety precaution", "Caution in congestive heart failure", "Increased heart failure events reported in clinical trials"]
+        ]
+      }
+    },
+    {
+      "tx": "**Amoebic colitis** results from mucosal tissue invasion by the protozoan Entamoeba histolytica following ingestion of infective quadrinucleate cysts. Colonoscopy classically reveals discrete, punched-out **flask-shaped ulcerations** with extensive undermining of the submucosa beneath normal-appearing intervening mucosa. Definitive treatment requires systemic tissue amoebicides like metronidazole, followed by oral paromomycin to eliminate persistent luminal cysts.",
+      "say": "Amoebic colitis results from mucosal invasion by Entamoeba histolytica after cyst ingestion. Endoscopy reveals punched-out flask-shaped ulcerations that undermine the submucosa, separated by normal intervening mucosa. Definitive treatment requires metronidazole to eradicate tissue trophozoites, followed by paromomycin to clear luminal cysts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amoebiasis-fig2.webp",
+        "alt": "Three panels of Entamoeba histolytica: a life cycle from a quadrinucleate cyst to a trophozoite with metronidazole and paromomycin labelled, a flask-shaped colonic ulcer with a narrow neck and a broad submucosal base, and a solitary right-lobe liver abscess.",
+        "caption": "Flask-shaped ulcers are the colonic lesion of amoebic colitis. Tissue metronidazole is followed by luminal paromomycin, which the left panel labels. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "**Cholera** is an acute, life-threatening diarrhoeal illness caused by Vibrio cholerae serogroups O1 or O139. Cholera enterotoxin catalyzes irreversible ADP-ribosylation of the G-alpha-s regulatory protein, stimulating continuous adenylate cyclase activation and crypt chloride secretion. This generates voluminous **rice-water diarrhoea**, leading to rapid hypovolemic shock unless corrected by vigorous isotonic oral or intravenous rehydration.",
+      "say": "Cholera is a severe secretory diarrhoeal infection caused by toxigenic Vibrio cholerae. Cholera enterotoxin permanently activates adenylate cyclase through ADP-ribosylation, driving massive chloride and water secretion. This produces characteristic rice-water diarrhoea that induces rapid dehydration and shock unless corrected by isotonic fluid resuscitation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Cholera toxin B subunit binds GM1 ganglioside"},
+          {"id": "b", "label": "Active A subunit enters enterocyte"},
+          {"id": "c", "label": "ADP-ribosylation of G-alpha-s & permanent adenylate cyclase activation"},
+          {"id": "d", "label": "Profuse secretory rice-water diarrhoea (up to 1 L/h)"}
+        ],
+        "edges": [
+          ["a", "b", "endocytosis"],
+          ["b", "c", "enzymatic action"],
+          ["c", "d", "chloride secretion"]
+        ]
+      }
+    },
+    {
+      "tx": "**Shiga toxin-producing E. coli** (STEC), notably serotype O157:H7, causes acute hemorrhagic enterocolitis accompanied by intense abdominal cramping. Antibiotic therapy is strictly contraindicated in confirmed or suspected STEC infection because antimicrobial-induced bacterial lysis triggers massive systemic release of Stx1 and Stx2 toxins, substantially escalating the risk of **hemolytic uremic syndrome** (HUS).",
+      "say": "Shiga toxin-producing Escherichia coli, particularly serotype O157:H7, causes severe bloody diarrhoea. Antibiotic administration is strictly avoided in suspected cases because drug-induced bacterial lysis triggers massive release of Shiga toxins. This surge damages renal endothelial cells and substantially increases the risk of hemolytic uremic syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "STEC Colitis (O157:H7)",
+          "points": [
+            "Severe bloody diarrhoea with cramping",
+            "Antibiotics are strictly contraindicated",
+            "Shiga toxin release provokes HUS risk",
+            "Management is supportive fluid therapy"
+          ]
+        },
+        "right": {
+          "title": "Invasive Bacterial Dysentery (Shigella / Campylobacter)",
+          "points": [
+            "Fever, tenesmus, fecal leucocytes",
+            "Antibiotic therapy shortens illness",
+            "Fluoroquinolones or azithromycin indicated",
+            "Reduces person-to-person transmission"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}
