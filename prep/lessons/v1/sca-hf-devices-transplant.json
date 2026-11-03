@@ -3,7 +3,7 @@
   "module": "sca-hf-devices-transplant",
   "subject": "ss-cardiology",
   "title": "Device Therapy, Mechanical Support and Transplantation",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "**Cardiac resynchronization therapy** is indicated for symptomatic heart failure despite medical therapy with LVEF at most **35%**, sinus rhythm, and **left bundle branch block** with QRS duration at least **150** ms as a Class I recommendation. Biventricular pacing coordinates ventricular contraction, reversing progressive adverse chamber remodeling and reducing hospitalizations.",
@@ -18,7 +18,7 @@
         "rows": [
           [
             "LBBB Morphology",
-            "\u2265  150 ms",
+            "≥  150 ms",
             "Class I (Strongest clinical evidence)"
           ],
           [
@@ -28,7 +28,7 @@
           ],
           [
             "Non-LBBB Morphology",
-            "\u2265  150 ms",
+            "≥  150 ms",
             "Class IIb (Weak benefit)"
           ],
           [
@@ -37,6 +37,17 @@
             "Class III: Harm (Contraindicated)"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The radiograph shows a left sided **pulse generator** connected to three transvenous leads that pace both ventricles and provide backup **defibrillation**. The thin **right atrial** lead rests in the atrial appendage, the thick coil bearing lead sits at the **right ventricular** apex, and the third lead courses through the coronary sinus to the lateral left ventricular wall. This arrangement restores coordinated contraction in suitable symptomatic patients despite medical therapy.",
+      "say": "This chest radiograph shows a pulse generator below the left collarbone with three leads. One thin lead ends in the right atrium, one thick lead with a shock coil ends at the right ventricular apex, and one lead passes through the coronary sinus to pace the lateral wall of the left ventricle. Together they deliver coordinated biventricular pacing with defibrillator backup for selected patients who remain symptomatic despite medical therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-hf-devices-transplant-gen1.webp",
+        "alt": "Frontal chest radiograph showing a left sided pulse generator with right atrial, right ventricular apical and coronary sinus left ventricular leads.",
+        "caption": "Radiograph showing three lead resynchronization defibrillator system Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

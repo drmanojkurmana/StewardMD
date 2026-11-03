@@ -3,7 +3,7 @@
   "module": "son-alkylators-platinum",
   "subject": "ss-medical-oncology",
   "title": "Alkylating agents and platinum compounds: mechanisms, clinical pharmacology, toxicities and resistance",
-  "minutes": 5,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Oxazaphosphorine alkylators **Cyclophosphamide** and ifosfamide represent hepatic prodrugs requiring CYP2B6 bioactivation to active 4-hydroxy metabolites. Intracellular cleavage liberates phosphoramide mustard alongside acrolein, a toxic urothelial metabolite directly responsible for chemical **haemorrhagic cystitis**. Ifosfamide generates substantially greater acrolein and chloroacetaldehyde quantities than cyclophosphamide, creating elevated risks of severe haemorrhagic cystitis and central encephalopathy.",
@@ -103,6 +103,17 @@
       }
     },
     {
+      "tx": "The render shows a platinum core bridging neighboring guanine bases in DNA after intracellular **aquation** of **cisplatin**. The intrastrand link sharply bends the double helix away from the straight shape seen in the inset. This bulky distortion blocks normal reading of the strand and triggers cell death through **p53 dependent** **apoptosis**. The picture explains why platinum drugs kill dividing tumour cells effectively.",
+      "say": "This picture shows how cisplatin works once inside a tumour cell. After activation by water, the platinum core binds two neighboring guanine bases on the same DNA strand. The link bends the helix sharply, unlike the straight normal DNA in the inset. The distortion prevents the cell from reading its genetic code and pushes it toward programmed death. Remember this bent helix picture when recalling why platinum drugs are potent but also damage kidneys, hearing and the vomiting center.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-alkylators-platinum-gen1.webp",
+        "alt": "A bent DNA double helix with a central platinum core crosslinking guanine bases beside an inset of straight normal DNA.",
+        "caption": "Bent helix shows platinum guanine crosslink blocking cell division. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "Second-generation platinum analog **Carboplatin** possesses a cyclobutanedicarboxylate leaving group that slows aquation kinetics compared to cisplatin. While carboplatin produces equivalent cytotoxic platinum-DNA crosslinks, it features substantially lower nephrotoxic, ototoxic, and emetogenic liabilities. However, carboplatin produces significantly greater myelosuppressive **thrombocytopenia**, requiring precise dosing using the Calvert formula based on target area under the concentration-time curve and creatinine clearance.",
       "say": "Second-generation platinum analog Carboplatin possesses a cyclobutanedicarboxylate leaving group that slows aquation kinetics compared to cisplatin. While carboplatin produces equivalent cytotoxic platinum-DNA crosslinks, it features substantially lower nephrotoxic, ototoxic, and emetogenic liabilities. However, carboplatin produces significantly greater myelosuppressive thrombocytopenia, requiring precise dosing using the Calvert formula based on target area under the concentration-time curve and creatinine clearance.",
       "vis": {
@@ -143,6 +154,17 @@
             "dose"
           ]
         ]
+      }
+    },
+    {
+      "tx": "**Oxaliplatin** avoids CYP450 metabolism and is cleared non-enzymatically. Renal impairment matters: for creatinine clearance below 30 mL/min a reduced starting dose of 65 mg/m2 is advised. Calcium and magnesium infusions may reduce neurotoxicity. Extravasation requires stopping the infusion and removing the line without flushing.",
+      "say": "Oxaliplatin avoids CYP450 metabolism and is cleared non-enzymatically. Renal impairment matters: for creatinine clearance below 30 millilitres per minute a reduced starting dose of 65 milligrams per square metre is advised. Calcium and magnesium infusions may reduce neurotoxicity. Extravasation requires stopping the infusion and removing the line without flushing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-alkylators-platinum-fig1.webp",
+        "alt": "Diagram illustrating oxaliplatin extravasation management, neurotoxicity prevention with Ca/Mg, and renal dose adjustment.",
+        "caption": "Oxaliplatin: key toxicities and management",
+        "ar": 1.8349
       }
     },
     {

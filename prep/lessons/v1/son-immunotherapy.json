@@ -3,7 +3,7 @@
   "module": "son-immunotherapy",
   "subject": "ss-medical-oncology",
   "title": "Immune checkpoint inhibitors",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Cancer cells exploit co-inhibitory receptor signalling pathways to evade physiological immune-mediated destruction. **PD-1 inhibitors** nivolumab and pembrolizumab block PD-1 interactions with PD-L1 and PD-L2, reversing T-cell exhaustion and restoring **cytotoxic T-lymphocyte** antitumor immunity. Disruption of PD-1 signalling disinhibits effector T cells within the tumour microenvironment, promoting cytolytic granule release, interferon-gamma production, and durable objective tumour regression.",
@@ -52,13 +52,24 @@
       }
     },
     {
+      "tx": "The graphic shows an anti **PD 1** antibody wedged between T cell and tumour so the off signal cannot engage, freeing the **cytotoxic T cell** to fire granules through its antigen receptor contact. Renewed release of lytic packets and interferon drives visible **tumour regression**. Linking blocked checkpoint to restored killing explains durable responses seen with nivolumab and pembrolizumab therapy.",
+      "say": "An antibody sits on the brake receptor of a T cell so the tumour cannot switch it off. With the brake blocked, the T cell stays active through its antigen sensor and pours out granules plus interferon that burst the tumour cell. This rescue from exhaustion is how PD 1 blockade restores immune killing and produces lasting shrinkage across many cancers.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-immunotherapy-gen1.webp",
+        "alt": "The graphic shows an antibody blocking the T cell brake so the reawakened cell bursts a tumour cell with granules.",
+        "caption": "Checkpoint blockade restores T cell tumour killing. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "Targeting the ligand rather than the receptor preserves alternative physiological regulatory interactions. **PD-L1 inhibitors** atezolizumab, durvalumab, and avelumab prevent PD-L1 from engaging PD-1 and B7.1, leaving the PD-L2/PD-1 **regulatory axis** intact. Spared PD-L2 signalling helps prevent excessive immune-mediated pulmonary toxicity, distinguishing PD-L1 antibodies biologically from monoclonal antibodies targeting the PD-1 receptor directly.",
       "say": "Targeting the ligand rather than the receptor preserves alternative physiological regulatory interactions. PD-L1 inhibitors atezolizumab, durvalumab, and avelumab prevent PD-L1 from engaging PD-1 and B7.1, leaving the PD-L2/PD-1 regulatory axis intact. Spared PD-L2 signalling helps prevent excessive immune-mediated pulmonary toxicity, distinguishing PD-L1 antibodies biologically from monoclonal antibodies targeting the PD-1 receptor directly.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "PD-1 Inhibitors (Nivolumab, Pembrolizumab)",
-          "items": [
+          "points": [
             "Directly bind PD-1 receptor on activated T lymphocytes",
             "Block both PD-L1 and PD-L2 binding to PD-1",
             "Higher rate of immune-mediated pneumonitis observed clinically",
@@ -67,7 +78,7 @@
         },
         "right": {
           "title": "PD-L1 Inhibitors (Atezolizumab, Durvalumab)",
-          "items": [
+          "points": [
             "Bind PD-L1 on tumour cells and antigen-presenting cells",
             "Block PD-L1 binding to PD-1 and B7.1 (CD80)",
             "Leave PD-L2/PD-1 interaction functionally intact",
@@ -162,6 +173,17 @@
       }
     },
     {
+      "tx": "Ipilimumab was the first immune checkpoint inhibitor approved, for advanced melanoma in 2011. It is given as an intravenous infusion over **30 to 90 minutes** using a low-protein-binding filter. Before the first dose, check baseline thyroid function, liver tests, adrenal axis, renal clearance and pregnancy status in women of childbearing potential. Monitor these parameters before each dose.",
+      "say": "Ipilimumab was the first immune checkpoint inhibitor approved, for advanced melanoma in 2011. It is given as an intravenous infusion over 30 to 90 minutes using a low-protein-binding filter. Before the first dose, check baseline thyroid function, liver tests, adrenal axis, renal clearance and pregnancy status in women of childbearing potential. Monitor these parameters before each dose.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-immunotherapy-fig1.webp",
+        "alt": "Infographic outlining essential baseline tests for ipilimumab: thyroid, liver, adrenal, renal function, and pregnancy status.",
+        "caption": "Key baseline monitoring parameters before starting ipilimumab therapy",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "Next-generation checkpoint inhibitors overcome secondary resistance by targeting non-redundant inhibitory pathways. **Relatlimab** is an inhibitory antibody targeting LAG-3, combining with nivolumab to overcome adaptive resistance in untreated metastatic melanoma. **LAG-3** binds stable MHC class II molecules on antigen-presenting cells with higher affinity than CD4, transmitting negative signals that arrest T-cell expansion; co-blockade with nivolumab demonstrated superior progression-free survival in the RELATIVITY-047 study.",
       "say": "Next-generation checkpoint inhibitors overcome secondary resistance by targeting non-redundant inhibitory pathways. Relatlimab is an inhibitory antibody targeting LAG-3, combining with nivolumab to overcome adaptive resistance in untreated metastatic melanoma. LAG-3 binds stable MHC class II molecules on antigen-presenting cells with higher affinity than CD4, transmitting negative signals that arrest T-cell expansion; co-blockade with nivolumab demonstrated superior progression-free survival in the RELATIVITY-047 study.",
       "vis": {
@@ -214,7 +236,7 @@
         "kind": "compare",
         "left": {
           "title": "Pseudoprogression",
-          "items": [
+          "points": [
             "Transient radiological enlargement followed by shrinkage",
             "Driven by intensive cytotoxic T-cell tumour infiltration and edema",
             "Patient remains clinically stable or shows symptom improvement",
@@ -223,7 +245,7 @@
         },
         "right": {
           "title": "Hyperprogressive Disease (HPD)",
-          "items": [
+          "points": [
             "Rapid tumour acceleration with > 2-fold growth rate (TGIR > 2)",
             "Accompanied by rapid clinical performance status deterioration",
             "Associated with MDM2/MDM4 amplification or EGFR mutations",
@@ -300,5 +322,6 @@
     "q_8f5a0f3386ad",
     "q_bdabb7cf1d16",
     "q_df551256b976"
-  ]
+  ],
+  "gen": "AI"
 }

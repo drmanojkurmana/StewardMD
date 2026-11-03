@@ -1,0 +1,151 @@
+{
+  "v": 1,
+  "module": "sgi-gerd-barrett",
+  "subject": "ss-gastroenterology",
+  "title": "GERD, Barrett oesophagus, and endoscopic eradication therapy",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**GERD** [gastro-oesophageal reflux disease] is confirmed as conclusive by the **Lyon Consensus 2.0** when any of the following objective markers are present: LA grade C or D oesophagitis, **Barrett oesophagus** of at least 1 cm above the GEJ [gastro-oesophageal junction], peptic stricture, or **acid exposure time** (AET) exceeding 6.0% of the monitoring period.",
+      "say": "Gastro-oesophageal reflux disease is classified as conclusive by the Lyon Consensus 2.0 when objective markers confirm it. These markers include LA grade C or D oesophagitis, Barrett oesophagus of at least one centimetre, a peptic stricture, or an acid exposure time above six-point-zero percent of the monitoring period. Any one of these findings confirms the diagnosis without further testing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gerd-chest-fig1.webp",
+        "alt": "Cutaway of the lower oesophagus and stomach. Labels mark the oesophageal sphincter, a hiatus hernia, acid reflux, mucosal erosion on the oesophagus and in the stomach, Barrett metaplasia, and the gastric fundus.",
+        "caption": "Conclusive reflux disease includes the mucosal injury drawn here, with Barrett metaplasia above the junction. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "**Prague C & M criteria** standardise Barrett oesophagus reporting. The **C** value records the length of circumferential Barrett mucosa in centimetres above the GEJ. The **M** value records the maximum extent of the longest tongue in centimetres. A segment with 2 cm circumference and a 4 cm tongue is documented as C2M4. Recording both values is mandatory at every endoscopy.",
+      "say": "The Prague C and M criteria standardise how Barrett oesophagus is documented. The C value measures the circumferential extent of Barrett mucosa in centimetres from the gastro-oesophageal junction upward. The M value measures the maximum length of the longest tongue in centimetres. A patient with a two centimetre circumference and a four centimetre tongue is documented as C2M4. Both values are required in every endoscopy report.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diseases-of-esophagus-fig2.webp",
+        "alt": "Five-panel sequence from a normal oesophagus through reflux oesophagitis, Barrett oesophagus with salmon-pink tongues and goblet cells, low-grade to high-grade dysplasia, and invasive adenocarcinoma. Each panel has an endoscopy or histology inset.",
+        "caption": "Prague C and M measure the circumferential length and the longest salmon-pink tongue drawn in the Barrett panel. The figure does not print those centimetre lengths. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "The **Seattle biopsy protocol** requires four-quadrant biopsies at every 1 to 2 cm interval throughout the entire Barrett segment, plus targeted biopsies from any raised or suspicious area. Adherence is critical because **dysplasia** in Barrett mucosa is often invisible at standard white-light endoscopy. Only histological assessment reliably detects early malignant change.",
+      "say": "The Seattle protocol requires four-quadrant biopsies at every one to two centimetre interval throughout the full Barrett segment. Any raised or suspicious area receives a targeted biopsy as well. Adherence is critical because dysplastic changes in Barrett mucosa are often invisible at standard white-light endoscopy. Histological assessment is the only reliable way to detect early malignant change.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Document Barrett segment (Prague C and M)"},
+          {"id": "b", "label": "4-quadrant biopsies at 1-2 cm intervals"},
+          {"id": "c", "label": "Targeted biopsies from visible lesions"},
+          {"id": "d", "label": "Histopathology: grade dysplasia"}
+        ],
+        "edges": [
+          ["a", "b", "then"],
+          ["b", "c", "plus"],
+          ["c", "d", "sent for"]
+        ]
+      }
+    },
+    {
+      "tx": "**EET** [endoscopic eradication therapy] is the standard treatment for **HGD** [high-grade dysplasia] or **intramucosal adenocarcinoma** arising in Barrett oesophagus. **EMR** [endoscopic mucosal resection] removes any visible or raised lesion first and provides histological staging. **RFA** [radiofrequency ablation] then ablates the remaining flat Barrett epithelium, targeting complete eradication of dysplasia and intestinal metaplasia.",
+      "say": "Endoscopic eradication therapy is the standard management for high-grade dysplasia or intramucosal adenocarcinoma in Barrett oesophagus. The first step is endoscopic mucosal resection to remove any visible or raised lesion, which also provides histological staging. Radiofrequency ablation then treats the remaining flat Barrett epithelium. The overall aim is complete eradication of both dysplasia and intestinal metaplasia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "HGD or intramucosal adenocarcinoma"},
+          {"id": "b", "label": "EMR: resect visible lesion, stage tissue"},
+          {"id": "c", "label": "RFA: ablate remaining flat Barrett"},
+          {"id": "d", "label": "Surveillance: confirm complete eradication"}
+        ],
+        "edges": [
+          ["a", "b", "step 1"],
+          ["b", "c", "step 2"],
+          ["c", "d", "follow-up"]
+        ]
+      }
+    },
+    {
+      "tx": "**Vonoprazan** is a **P-CAB** [potassium-competitive acid blocker] that binds the proton pump reversibly at the potassium-competitive site without requiring acid activation. Unlike **PPIs** [proton pump inhibitors], vonoprazan is active at any gastric pH, achieves peak acid suppression after the first dose, and provides faster and more durable acid suppression. It is used in patients with nocturnal breakthrough and for Barrett regression after RFA.",
+      "say": "Vonoprazan is a potassium-competitive acid blocker that binds the proton pump reversibly at the potassium-competitive site. Unlike proton pump inhibitors, it does not require acid activation and is active at any gastric pH. Vonoprazan achieves peak acid suppression after the first dose, providing faster and more durable control than conventional PPIs. It is helpful for patients with nocturnal acid breakthrough and for supporting Barrett regression after ablation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PPIs",
+          "points": [
+            "Require acid activation",
+            "Irreversible covalent binding",
+            "Variable nocturnal control",
+            "Slower onset of action"
+          ]
+        },
+        "right": {
+          "title": "Vonoprazan (P-CAB)",
+          "points": [
+            "No acid activation needed",
+            "Reversible potassium-competitive binding",
+            "Active at any gastric pH",
+            "Peak suppression after first dose"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Anti-reflux surgery for confirmed GERD requires documented abnormal AET on ambulatory pH monitoring and adequate oesophageal peristalsis on manometry. The **LINX device** places a ring of magnetic beads laparoscopically around the lower oesophageal sphincter. **Laparoscopic Nissen fundoplication** creates a gastric wrap around the oesophagus. Weak peristalsis is a relative contraindication due to post-operative dysphagia risk.",
+      "say": "Anti-reflux surgery requires confirmed abnormal acid exposure time on ambulatory pH monitoring and adequate peristalsis on oesophageal manometry. The LINX device consists of a ring of magnetic beads implanted laparoscopically around the lower oesophageal sphincter. Laparoscopic Nissen fundoplication forms a gastric wrap around the lower oesophagus. Weak oesophageal peristalsis is a relative contraindication because it raises the risk of significant dysphagia after the procedure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "LINX Device",
+          "points": [
+            "Magnetic bead ring at LES",
+            "Preserves belching and vomiting",
+            "Requires normal peristalsis"
+          ]
+        },
+        "right": {
+          "title": "Nissen Fundoplication",
+          "points": [
+            "Gastric wrap around oesophagus",
+            "Higher dysphagia rate post-op",
+            "Requires normal peristalsis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Reflux hypersensitivity** (Rome IV): typical heartburn with AET below 4.0%, but with a positive **symptom-reflux correlation**: **SI** [symptom index] above 50% or **SAP** [symptom association probability] above 95%. Physiological reflux events provoke symptoms in a sensitised oesophagus. Neuromodulators targeting visceral hypersensitivity outperform escalating acid suppression in these patients.",
+      "say": "Reflux hypersensitivity, as defined by Rome IV, involves typical heartburn with acid exposure time below four percent, but with a positive symptom-reflux correlation. The symptom index must exceed fifty percent or the symptom association probability must exceed ninety-five percent for the correlation to be considered positive. Oesophageal sensitisation is the underlying mechanism, allowing physiological reflux to trigger symptoms. Neuromodulators that target visceral hypersensitivity are more effective than further acid suppression.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Reflux Hypersensitivity", "Functional Heartburn"],
+        "rows": [
+          ["AET", "Below 4.0%", "Below 4.0%"],
+          ["Symptom-reflux correlation", "Positive (SI > 50% or SAP > 95%)", "Negative"],
+          ["Endoscopy", "Normal", "Normal"],
+          ["Best treatment", "Neuromodulators", "Neuromodulators"]
+        ]
+      }
+    },
+    {
+      "tx": "**Functional heartburn** (Rome IV) features heartburn refractory to PPIs, normal endoscopy, AET below 4.0%, and a negative symptom-reflux association. No causal link to reflux exists. Treatment uses **neuromodulators** targeting central sensitisation. Low-dose tricyclic antidepressants such as amitriptyline are preferred, while SSRIs [selective serotonin reuptake inhibitors] such as paroxetine are generally less effective in functional heartburn.",
+      "say": "Functional heartburn is a Rome IV diagnosis defined by heartburn refractory to proton pump inhibitors, normal endoscopy, acid exposure time below four percent, and a negative symptom-reflux association. There is no causal link to actual reflux. Treatment targets central sensitisation with neuromodulators. Low-dose tricyclic antidepressants such as amitriptyline are preferred, while SSRIs such as paroxetine are generally less effective for functional heartburn.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Refractory heartburn on PPI"},
+          {"id": "b", "label": "Normal endoscopy, AET below 4.0%"},
+          {"id": "c", "label": "Symptom-reflux correlation?"},
+          {"id": "d", "label": "Reflux hypersensitivity"},
+          {"id": "e", "label": "Functional heartburn"}
+        ],
+        "edges": [
+          ["a", "b", "confirm"],
+          ["b", "c", "assess"],
+          ["c", "d", "Positive"],
+          ["c", "e", "Negative"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}

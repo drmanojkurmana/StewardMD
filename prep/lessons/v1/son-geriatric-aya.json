@@ -3,7 +3,7 @@
   "module": "son-geriatric-aya",
   "subject": "ss-medical-oncology",
   "title": "Geriatric oncology, AYA and cancer in pregnancy",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "**Comprehensive Geriatric Assessment** CGA evaluates functional status, comorbidities, cognition, nutritional state, polypharmacy, and social support, identifying hidden **vulnerabilities** missed by routine ECOG performance status. Multi-domain CGA scoring unmasks frailty and physiological vulnerability, guiding tailored antineoplastic dose attenuations and targeted supportive interventions to prevent treatment-related institutionalisation.",
@@ -51,7 +51,7 @@
         "kind": "compare",
         "left": {
           "title": "CARG Toxicity Score (0 to 23 Points)",
-          "items": [
+          "points": [
             "Low risk (0-5 pts): 24% risk of grade 3-5 toxicity",
             "Medium risk (6-9 pts): 52% risk of grade 3-5 toxicity",
             "High risk (10-23 pts): 83% risk of grade 3-5 toxicity",
@@ -60,7 +60,7 @@
         },
         "right": {
           "title": "CRASH Score (Chemotherapy Risk Assessment)",
-          "items": [
+          "points": [
             "Stratifies risk into haematological and non-haematological toxicity",
             "Haematological predictors: lymphocytes, IADL, LDH, diastolic BP",
             "Non-haematological predictors: ECOG, cognition, MNA nutrition",
@@ -76,7 +76,7 @@
         "kind": "compare",
         "left": {
           "title": "Paediatric-Inspired AYA Protocols (e.g. CALGB 10403)",
-          "items": [
+          "points": [
             "Substantially higher cumulative doses of PEG-asparaginase",
             "Intensive weekly vincristine and high-dose dexamethasone pulses",
             "Aggressive intrathecal CNS prophylaxis without cranial irradiation",
@@ -85,7 +85,7 @@
         },
         "right": {
           "title": "Historical Adult ALL Protocols (e.g. Hyper-CVAD)",
-          "items": [
+          "points": [
             "Heavy reliance on cyclical anthracyclines and cyclophosphamide",
             "Lower cumulative asparaginase exposure due to adult toxicity fears",
             "Higher myelosuppression and infectious treatment-related mortality",
@@ -155,6 +155,17 @@
       }
     },
     {
+      "tx": "Adolescents and young adults, usually defined as aged **15 to 39 years**, do better on **paediatric-inspired regimens** for acute lymphoblastic leukaemia than on adult-type regimens. Fitness, organ function and risk features still guide intensity. Fertility should be discussed at diagnosis, and sperm banking should not delay induction chemotherapy. Early referral to a specialist AYA service supports safe delivery.",
+      "say": "Adolescents and young adults, usually defined as aged 15 to 39 years, do better on paediatric-inspired regimens for acute lymphoblastic leukaemia than on adult-type regimens. Fitness, organ function and risk features still guide intensity. Fertility should be discussed at diagnosis, and sperm banking should not delay induction chemotherapy. Early referral to a specialist service supports safe delivery.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-geriatric-aya-fig1.webp",
+        "alt": "Diagram illustrating AYA oncology care, highlighting the 15-39 age range, preference for paediatric-inspired ALL regimens, fertility discussion, and specialist service referral.",
+        "caption": "AYA cancer care: age-specific regimens and supportive services",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "**Fertility preservation** counseling is mandatory prior to initiating gonadotoxic chemotherapy, offering sperm **cryopreservation** for postpubertal males and oocyte or embryo **cryopreservation** for females. Controlled ovarian hyperstimulation using random-start antagonist protocols with letrozole allows rapid oocyte retrieval within two weeks without causing treatment delays in hormone receptor-positive early breast cancer.",
       "say": "Fertility preservation counseling is mandatory prior to initiating gonadotoxic chemotherapy, offering sperm cryopreservation for postpubertal males and oocyte or embryo cryopreservation for females. Controlled ovarian hyperstimulation using random-start antagonist protocols with letrozole allows rapid oocyte retrieval within two weeks without causing treatment delays in hormone receptor-positive early breast cancer.",
       "vis": {
@@ -186,6 +197,17 @@
             "Does not compromise disease-free or overall survival"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The diagram traces **fertility preservation** before gonadotoxic chemotherapy through **ovarian stimulation** with gonadotropins, ultrasound guided transvaginal oocyte retrieval, and rapid **vitrification** of oocytes or embryos in liquid nitrogen. Acting before treatment matters because alkylating drugs can cause lasting ovarian failure, while this planned sequence secures future reproductive options without delaying cancer care.",
+      "say": "This diagram shows the oncofertility workflow for a young female patient before gonadotoxic chemotherapy. Random start ovarian stimulation grows multiple follicles, then transvaginal ultrasound guided retrieval collects oocytes, followed by ultra rapid freezing of oocytes or embryos. Counseling about this path before treatment preserves future fertility and allows cancer therapy to start on time.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-geriatric-aya-gen1.webp",
+        "alt": "The diagram shows ovarian stimulation followed by transvaginal oocyte retrieval and embryo freezing in nitrogen.",
+        "caption": "Oncofertility workflow preserves oocytes before gonadotoxic treatment. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -229,7 +251,7 @@
         "kind": "compare",
         "left": {
           "title": "Contraindicated in Pregnancy",
-          "items": [
+          "points": [
             "Methotrexate: severe craniofacial, skeletal, CNS malformations",
             "Trastuzumab: profound oligohydramnios, pulmonary hypoplasia, renal failure",
             "Tamoxifen: Goldenhar syndrome, ambiguous genitalia, fetal demise",
@@ -238,7 +260,7 @@
         },
         "right": {
           "title": "Permissible in 2nd / 3rd Trimester",
-          "items": [
+          "points": [
             "Doxorubicin / Epirubicin: extensive placental clearance, safe cardiac profile",
             "Cyclophosphamide: standard component of FAC/AC regimens",
             "Paclitaxel: acceptable if clinically indicated for breast cancer",
@@ -303,5 +325,6 @@
     "mk-e1d9ac76968e",
     "mk-676446a4b012",
     "mk-0b5b24a2847b"
-  ]
+  ],
+  "gen": "AI"
 }

@@ -26,7 +26,7 @@ const SCREENS = [
   ["home", null, ".hv-main", ".hv-stack", "grid"],
   ["maik", ACT("askai"), ".maik-body", ".maik-body", "text"],
   ["kb-library", "window.SMD_KB&&SMD_KB.open&&SMD_KB.open()", "#sbrefBody", "#sbrefBody", "grid"],
-  ["kb-reader", "DX.openRef('MENINGITIS',{from:'knowledge-library'})", "#dxMgmt .dx-mgmt-body", "#dxMgmt .dx-reader-hero", "text"],
+  ["kb-reader", "DX.openRef('MENINGITIS',{from:'knowledge-library'})", "#dxMgmt", "#dxMgmt .dx-reader-hero", "text"],
   ["kb-protocols", ACT("guidelines"), "#sbrefBody", "#sbrefBody", "grid"],
   ["clinix", ACT("clinix"), ".cx-scroll", ".cx-scroll", "grid"],
   ["prep-home", "window.PREP&&PREP.open&&PREP.open()", ".pn-body", ".pn-body", "grid"],

@@ -3,7 +3,7 @@
   "module": "son-staging-response",
   "subject": "ss-medical-oncology",
   "title": "Staging, performance status and response assessment",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Cancer staging defines the anatomical extent of malignancy, providing a standardised framework for prognosis and treatment selection. The **AJCC/UICC 8th Edition TNM staging** system incorporates anatomical tumour extent, regional nodal involvement, distant metastases, and prognostic molecular biomarkers. Incorporating biological drivers into anatomical staging refines prognostic groupings across breast, prostate, and head and neck cancers.",
@@ -79,13 +79,24 @@
       }
     },
     {
+      "tx": "**Performance status** describes how well a patient manages daily life and predicts how well they will tolerate treatment. The **ECOG** scale runs from zero, fully active, to four, completely bedbound. The **Karnofsky** score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
+      "say": "Performance status describes how well a patient manages daily life and predicts how well they will tolerate treatment. The ECOG scale runs from zero, fully active, to four, completely bedbound. The Karnofsky score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-staging-response-fig1.webp",
+        "alt": "Visual comparison of ECOG and Karnofsky performance status scales, showing patient functional levels.",
+        "caption": "ECOG and Karnofsky performance status scales",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "Objective assessment of solid tumour response under cytotoxic therapy relies on standardised radiological criteria. **RECIST 1.1** defines partial response as at least a 30% decrease and progressive disease as at least a 20% increase in the sum of longest diameters of target lesions. Progressive disease additionally requires an absolute increase of at least 5 mm in the sum, or the appearance of new malignant lesions.",
       "say": "Objective assessment of solid tumour response under cytotoxic therapy relies on standardised radiological criteria. RECIST 1.1 defines partial response as at least a 30% decrease and progressive disease as at least a 20% increase in the sum of longest diameters of target lesions. Progressive disease additionally requires an absolute increase of at least 5 mm in the sum, or the appearance of new malignant lesions.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "Complete and Partial Response",
-          "items": [
+          "points": [
             "Complete response: disappearance of all target and non-target lesions",
             "Pathological lymph nodes must decrease to short axis < 10 mm",
             "Partial response: at least 30% decrease in target sum of diameters",
@@ -94,7 +105,7 @@
         },
         "right": {
           "title": "Stable and Progressive Disease",
-          "items": [
+          "points": [
             "Progressive disease: at least 20% increase in target sum of diameters",
             "Absolute minimum increase of 5 mm above smallest nadir sum",
             "Appearance of one or more unequivocal new lesions signifies progression",
@@ -198,6 +209,17 @@
       }
     },
     {
+      "tx": "The paired whole body scans compare intense chest uptake at baseline with a much fainter residual focus after treatment measured against liver background. This is a **partial metabolic response** by **PERCIST criteria**, which use **SULpeak change** rather than size to judge benefit. A clear fall in tracer avidity signals real tumour kill before masses shrink. Read function first when anatomy lags behind response.",
+      "say": "This image compares baseline and follow up FDG PET scans of the same patient. At baseline the chest lesion glows intensely above liver background, while on follow up the same site shows markedly reduced uptake. That pattern meets partial metabolic response, defined by a substantial decline in peak uptake values. Metabolic change matters because it reveals treatment benefit earlier than size change, guiding whether to continue or switch systemic therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-staging-response-gen1.webp",
+        "alt": "Paired whole body PET scans show markedly reduced chest uptake on follow up imaging.",
+        "caption": "PET comparison shows partial metabolic response after therapy. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "Lymphoma staging and post-treatment assessment require tailored criteria integrating metabolic imaging. The **Lugano classification** evaluates lymphoma response using PET-CT and the **Deauville 5-point scale**, where scores 1 to 3 indicate complete metabolic remission. A Deauville score of 1 represents no uptake above background, score 2 represents uptake equal to mediastinum, and score 3 represents uptake between mediastinum and liver.",
       "say": "Lymphoma staging and post-treatment assessment require tailored criteria integrating metabolic imaging. The Lugano classification evaluates lymphoma response using PET-CT and the Deauville 5-point scale, where scores 1 to 3 indicate complete metabolic remission. A Deauville score of 1 represents no uptake above background, score 2 represents uptake equal to mediastinum, and score 3 represents uptake between mediastinum and liver.",
       "vis": {
@@ -243,7 +265,7 @@
         "kind": "compare",
         "left": {
           "title": "RANO Complete & Partial Response",
-          "items": [
+          "points": [
             "Complete response: complete disappearance of all enhancing tumour",
             "Stable or improved non-enhancing T2/FLAIR hyperintensity",
             "Complete cessation of corticosteroids (physiological replacement allowed)",
@@ -252,7 +274,7 @@
         },
         "right": {
           "title": "RANO Progression Criteria",
-          "items": [
+          "points": [
             ">= 25% increase in sum of perpendicular enhancing products",
             "Significant increase in non-enhancing T2/FLAIR infiltration",
             "Appearance of any unequivocal new intracranial lesion",
@@ -317,5 +339,6 @@
     "q_9e05384bd2f6",
     "q_fbe999d2fd8d",
     "q_73a71bb61cf1"
-  ]
+  ],
+  "gen": "AI"
 }

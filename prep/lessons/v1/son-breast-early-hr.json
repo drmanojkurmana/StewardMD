@@ -3,7 +3,7 @@
   "module": "son-breast-early-hr",
   "subject": "ss-medical-oncology",
   "title": "Early hormone receptor-positive breast cancer: risk stratification, genomic assays, endocrine therapy and CDK4/6 inhibition",
-  "minutes": 5,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Adjuvant endocrine therapy with the selective estrogen receptor modulator **tamoxifen** for 5 to 10 years significantly reduces invasive recurrence and breast cancer mortality in hormone receptor-positive disease. The landmark ATLAS and aTTom clinical trials demonstrated that extending tamoxifen to a total duration of 10 years further halves breast cancer recurrence and mortality during the second decade, establishing extended therapy for high-risk patients.",
@@ -32,6 +32,17 @@
             "Preserves bone mineral density in premenopause"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Tamoxifen interacts with **CYP2D6**, which converts it into active endoxifen. Strong inhibitors such as paroxetine and fluoxetine reduce endoxifen levels, so venlafaxine or citalopram are preferred antidepressants. Extended therapy beyond 5 years, with an AI after tamoxifen, reduces late recurrence in higher-risk disease, though absolute gain is modest.",
+      "say": "Tamoxifen interacts with CYP2D6, which converts it into active endoxifen. Strong inhibitors such as paroxetine and fluoxetine reduce endoxifen levels, so venlafaxine or citalopram are preferred antidepressants. Extended therapy beyond 5 years, with an AI after tamoxifen, reduces late recurrence in higher-risk disease, though absolute gain is modest.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-breast-early-hr-fig1.webp",
+        "alt": "Diagram showing tamoxifen converted to active endoxifen by CYP2D6. Paroxetine and fluoxetine inhibit CYP2D6, while venlafaxine and citalopram are preferred antidepressants.",
+        "caption": "Tamoxifen metabolism and antidepressant interactions",
+        "ar": 1.8349
       }
     },
     {
@@ -129,6 +140,17 @@
             "Consistent benefit across all high-risk subgroups"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The model shows **abemaciclib docked** inside the **CDK4 plus 6 pocket** beside cyclin D, physically blocking the phosphate tags that would activate cell division. Without those tags, **Rb protein** stays unphosphorylated and traps **E2F signals**, so genes for DNA copying never switch on. The cell halts before S phase, which is why adding this drug to hormone therapy lowers recurrence in high risk node positive cancer.",
+      "say": "Abemaciclib sits in the CDK4 plus 6 pocket with cyclin D and blocks the phosphorylation step that normally releases E2F. With Rb left unphosphorylated, E2F stays trapped and the cell cannot move from G1 into DNA synthesis, so growth arrests. In high risk hormone sensitive early cancer with involved nodes, adding this blockade to hormone therapy meaningfully cuts invasive recurrence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-breast-early-hr-gen1.webp",
+        "alt": "A molecular model shows drug bound to the cell cycle complex with blocked signaling and arrested cell division.",
+        "caption": "Model shows cell cycle blockade trapping growth signals before division. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

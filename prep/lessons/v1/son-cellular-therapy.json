@@ -3,7 +3,7 @@
   "module": "son-cellular-therapy",
   "subject": "ss-medical-oncology",
   "title": "Cellular therapy and bispecific antibodies: CAR-T design, cytokine release syndrome, ICANS and clinical indications",
-  "minutes": 5,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Autologous **CAR-T cell therapy** genetically reprograms patient T lymphocytes using retroviral or lentiviral vectors to express synthetic chimeric antigen receptors. Chimeric receptors incorporate single-chain variable fragments targeting cell surface antigens such as **CD19** in B-cell malignancies or BCMA in multiple myeloma, paired with intracellular CD3-zeta and costimulatory domains 4-1BB or CD28. This synthetic architecture allows potent cytotoxic tumour lysis independently of major histocompatibility complex presentation.",
@@ -46,6 +46,17 @@
             "cd3"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The left cell is a reprogrammed **hunter lymphocyte** whose surface hook, the **binding arm**, grips CD19 on the tumour cell at right. Locking on fires inner **signal tails** built from costimulatory and zeta chains, waking the killer program. The hunter then dumps pore forming granules that punch holes in the target, so **tumour lysis** follows through perforin and granzyme attack without needing normal antigen presentation.",
+      "say": "The engineered lymphocyte carries a synthetic surface hook that grips CD19 on the malignant cell. Binding triggers internal signal tails that activate the killer program independently of normal antigen presentation. The activated cell releases pore forming proteins and enzymes that rupture the tumour membrane and complete the kill. This direct lysis design explains potent responses in B lineage cancers carrying the target.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-cellular-therapy-gen1.webp",
+        "alt": "An engineered lymphocyte grips its tumour target while internal signals trigger granule release that ruptures the cell.",
+        "caption": "Cells show surface gripping, signal firing and granule lysis of the target. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -105,6 +116,17 @@
             "May blunt long-term CAR-T expansion if prolonged"
           ]
         }
+      }
+    },
+    {
+      "tx": "**Tocilizumab** is an IL-6 receptor antagonist and the first-line agent for CRS that is severe or life-threatening, given for adults and children. For severe CRS the usual dose is 8 mg/kg, and up to three further doses may be given at intervals of at least 8 hours if there is no improvement. Dexamethasone is added for steroid-refractory cases. Tocilizumab does not treat ICANS well, so neurological toxicity needs separate management.",
+      "say": "Tocilizumab is an interleukin 6 receptor antagonist and the first-line agent for cytokine release syndrome that is severe or life-threatening, given to adults and children. For severe cases the usual dose is 8 mg/kg, and up to three further doses may be given at intervals of at least 8 hours if there is no improvement. Dexamethasone is added for steroid refractory cases. Tocilizumab does not treat neurotoxicity well, so neurological toxicity needs separate management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-cellular-therapy-fig1.webp",
+        "alt": "Diagram illustrating tocilizumab's mechanism: blocking IL-6 from binding to its receptor, thereby reducing inflammation in cytokine release syndrome.",
+        "caption": "Tocilizumab blocks IL-6 receptor, mitigating cytokine release syndrome",
+        "ar": 1.8349
       }
     },
     {

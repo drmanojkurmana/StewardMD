@@ -3,7 +3,7 @@
   "module": "son-apl",
   "subject": "ss-medical-oncology",
   "title": "Acute promyelocytic leukaemia",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Acute promyelocytic leukaemia is a distinct clinical and biological subtype of acute myeloid leukaemia characterized by life-threatening coagulopathy. APL is cytogenetically defined by the balanced translocation **t(15;17)(q22;q21)**, creating the oncogenic **PML-RARA fusion** transcript that blocks promyelocytic differentiation. Promyelocytes accumulate in the marrow with characteristic heavy azurophilic granules and bundles of Auer rods termed faggot cells.",
@@ -54,6 +54,28 @@
             "Marrow packed with hypergranular promyelocytes"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The smear shows abnormal **promyelocytes** packed with heavy purple granules and cells stuffed with rod bundles called **faggot cells**. These bundles are clustered **Auer rods** and point to acute **promyelocytic leukaemia** driven by the PML RARA fusion. Recognizing this picture matters because bleeding from clotting failure can kill quickly unless treatment starts at once.",
+      "say": "Look for promyelocytes crowded with dark granules and the dramatic cells crammed with bundles of rods. Those rod bundles are faggot cells, almost specific for acute promyelocytic leukaemia with the PML RARA fusion. This leukemia often causes severe bleeding from consumptive clotting failure. If you suspect it on a smear, give all trans retinoic acid immediately and do not wait for genetic confirmation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-apl-gen1.webp",
+        "alt": "A smear shows hypergranular promyelocytes and faggot cells packed with Auer rod bundles.",
+        "caption": "Faggot cells with rod bundles flag acute promyelocytic leukaemia. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Acute promyelocytic leukaemia is a **subtype of AML** driven by the **PML-RARA** fusion from t(15;17). Blasts often show heavy granules and classic faggot cells with bundles of Auer rods. Patients typically present with bleeding rather than infection, because the leukaemic promyelocytes release procoagulant material that triggers **disseminated intravascular coagulation**. Suspect APL whenever a patient with acute leukaemia has bleeding and a low fibrinogen.",
+      "say": "Acute promyelocytic leukaemia is a subtype of acute myeloid leukaemia driven by the PML-RARA fusion from the translocation between chromosomes 15 and 17. Blasts often show heavy granules and classic faggot cells, which are bundles of Auer rods. Patients typically present with bleeding rather than infection, because the leukaemic promyelocytes release procoagulant material that triggers disseminated intravascular coagulation. Suspect APL whenever a patient with acute leukaemia has bleeding and a low fibrinogen.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-apl-fig1.webp",
+        "alt": "Diagram showing a promyelocyte with heavy granules and a faggot cell containing bundled Auer rods. An inset illustrates the t(15;17) translocation forming the PML-RARA fusion.",
+        "caption": "APL: PML-RARA fusion from t(15;17), characteristic faggot cells with Auer rods. Image: The Armed Forces Institute of Pathology (AFIP), CC0/PD, Wikimedia Commons.",
+        "ar": 1.4102
       }
     },
     {
@@ -181,7 +203,7 @@
         "kind": "compare",
         "left": {
           "title": "ATRA + Arsenic Trioxide (APL0406)",
-          "items": [
+          "points": [
             "Oral ATRA 45 mg/m2 + IV ATO 0.15 mg/kg daily",
             "Dual-targeted degradation of PML and RARA domains",
             "2-year event-free survival 97% vs 86% with chemo",
@@ -190,7 +212,7 @@
         },
         "right": {
           "title": "ATRA + Anthracycline Chemotherapy",
-          "items": [
+          "points": [
             "Oral ATRA combined with idarubicin or daunorubicin",
             "Higher rate of prolonged neutropenia and life-threatening sepsis",
             "Cumulative cardiotoxicity risk from anthracyclines",
@@ -340,5 +362,6 @@
     "q_0e1f9f828acd",
     "q_5cae54fdd0e7",
     "q_6c3962a142ea"
-  ]
+  ],
+  "gen": "AI"
 }

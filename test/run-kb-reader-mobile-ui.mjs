@@ -20,7 +20,7 @@ const PORT = Number(process.env.PORT || 9034), CDP = Number(process.env.CDP_PORT
 const SHOTS = process.env.SHOTS || "/tmp/stewardmd-kb-reader";
 const DISEASES = (process.env.DISEASES || "MENINGITIS,CAP,gout,sickle_cell_disease,adult_jaundice,stable_angina,atrial_fib").split(",");
 const ORDER = ["kbr-glance", "kbr-causes", "kbr-patho", "kbr-dx", "kbr-ddx", "kbr-mgmt", "kbr-prog", "kbr-pearls", "kbr-refs", "kbr-related"];
-const HOME = { diagnostic: "kbr-dx", ddx: "kbr-ddx", treatment: "kbr-mgmt", flowchart: "kbr-mgmt", "flowchart-dx": "kbr-dx", foot: "kbr-refs" };
+const HOME = { diagnostic: "kbr-dx", figures: "kbr-dx", ddx: "kbr-ddx", treatment: "kbr-mgmt", flowchart: "kbr-mgmt", "flowchart-dx": "kbr-dx", foot: "kbr-refs" };
 
 const server = spawn("node", [repo + "test/serve.mjs", repo, String(PORT)], { stdio: "ignore" });
 const chrome = spawn(process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -88,9 +88,10 @@ try {
       await open(d);
       const fit = JSON.parse(await ev(FIT));
       ok(fit.page && fit.body && fit.n === 0, `${d} @${w}: fits ${fit.n ? JSON.stringify(fit.clipped) : ""}`);
-      const g = JSON.parse(await ev(`(()=>{const b=document.querySelector('#dxMgmt .dx-mgmt-body').getBoundingClientRect(),c=document.querySelector('#dxMgmt .dx-reader-hero').getBoundingClientRect();return JSON.stringify({bw:b.width,cl:c.left,cr:innerWidth-c.right,cw:c.width})})()`));
-      ok(g.bw >= w - 2, `${d} @${w}: the scroller spans the screen (${Math.round(g.bw)}px)`);
-      ok(g.cw <= 961 && Math.abs(g.cl - g.cr) <= 2, `${d} @${w}: reading column centred, ${Math.round(g.cw)}px wide`);
+      const g = JSON.parse(await ev(`(()=>{const z=parseFloat(getComputedStyle(document.documentElement).zoom)||1,panel=document.querySelector('#dxMgmt').getBoundingClientRect(),sheet=document.querySelector('#dxMgmt .kbr-sheet').getBoundingClientRect(),c=document.querySelector('#dxMgmt .dx-reader-hero').getBoundingClientRect();return JSON.stringify({pw:panel.width,sw:sheet.width/z,sl:sheet.left,sr:innerWidth-sheet.right,cl:c.left,cr:innerWidth-c.right,cw:c.width/z})})()`));
+      ok(g.pw >= w - 2, `${d} @${w}: the reader spans the screen (${Math.round(g.pw)}px)`);
+      ok(g.sw <= 961 && g.sw <= w - 20 && Math.abs(g.sl - g.sr) <= 3, `${d} @${w}: the card is inset and centred (${Math.round(g.sw)}px)`);
+      ok(g.cw <= 961 && Math.abs(g.cl - g.cr) <= 3, `${d} @${w}: reading column centred, ${Math.round(g.cw)}px wide`);
       if (d === "atrial_myxoma") ok(await ev(`!/endocarditis|Mitral stenosis|immune drugs/i.test((document.querySelector('#dxMgmt .kbr-figrow')||{}).textContent||'')`), `${d} @${w}: no figures for diseases named only as differentials`);
       await ev(`document.querySelector('#dxMgmt .dx-mgmt-body').scrollTop=0`); await shot(`ipad-${w}-${d}`);
     }

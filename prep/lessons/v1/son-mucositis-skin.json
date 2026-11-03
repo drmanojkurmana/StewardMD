@@ -3,7 +3,7 @@
   "module": "son-mucositis-skin",
   "subject": "ss-medical-oncology",
   "title": "Mucositis, dermatological and gonadal toxicity",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Cytotoxic antineoplastic therapy damages rapidly dividing mucosal epithelium through complex biological cascades. **Oral mucositis** is initiated by **reactive oxygen species** ROS and NF-kappaB activation damaging submucosal vascularity and overlying epithelium following cytotoxic chemotherapy or head/neck irradiation. The five-phase pathogenesis involves initiation with DNA strand breaks, primary damage response signalling, amplification with pro-inflammatory cytokines TNF-alpha and IL-1beta, ulceration with bacterial colonisation, and spontaneous healing.",
@@ -219,13 +219,24 @@
       }
     },
     {
+      "tx": "Photos show symmetrical **palmar erythema** with swelling of both hands and severe **plantar desquamation** with blistering of both soles. This painful **hand foot syndrome** follows capecitabine or infused fluorouracil. Friction and metabolite buildup in small vessels drive it, and care uses emollients plus dose pause or reduction.",
+      "say": "Both palms are red and swollen and both soles show peeling skin with blisters in a mirror image pattern. This is palmar plantar erythrodysesthesia from capecitabine or continuous fluorouracil, where metabolites collect in vessels stressed by pressure and friction. Exams link painful redness then peeling and blistering on hands and feet to fluoropyrimidines, managed with urea creams and treatment pause with lower dosing on return.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-mucositis-skin-gen1.webp",
+        "alt": "Photos show symmetrical red swollen palms and peeling blistered soles.",
+        "caption": "Symmetrical palm and sole peeling shows hand foot toxicity. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "Ovarian vulnerability to cytotoxic damage correlates directly with patient age and alkylating agent exposure. Chemotherapy-induced **premature ovarian insufficiency** POI is age- and dose-dependent, highest with alkylating agents **cyclophosphamide**, causing amenorrhoea and early menopause. Primordial follicles undergo accelerated atresia and direct apoptotic destruction, with women over forty facing an eighty percent risk of permanent amenorrhoea compared to twenty percent in women under thirty.",
       "say": "Ovarian vulnerability to cytotoxic damage correlates directly with patient age and alkylating agent exposure. Chemotherapy-induced premature ovarian insufficiency POI is age- and dose-dependent, highest with alkylating agents cyclophosphamide, causing amenorrhoea and early menopause. Primordial follicles undergo accelerated atresia and direct apoptotic destruction, with women over forty facing an eighty percent risk of permanent amenorrhoea compared to twenty percent in women under thirty.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "High Risk of POI (> 70%)",
-          "items": [
+          "points": [
             "Cumulative cyclophosphamide dose > 5 g/m2",
             "Age > 40 years at time of chemotherapy",
             "Conditioning regimens for haematopoietic stem cell transplantation",
@@ -234,13 +245,24 @@
         },
         "right": {
           "title": "Low / Intermediate Risk (< 30%)",
-          "items": [
+          "points": [
             "Age < 30 years at treatment initiation",
             "ABVD regimen for Hodgkin lymphoma (non-alkylating)",
             "Methotrexate, 5-FU, or vinca alkaloid regimens",
             "Concurrent GnRH agonist administration for ovarian suppression"
           ]
         }
+      }
+    },
+    {
+      "tx": "Gonadal damage risk depends largely on the **drug class** rather than a single agent, with **alkylating agents** posing the greatest threat, particularly at higher cumulative doses. In women, **premature ovarian insufficiency** typically presents as amenorrhoea before age 40 alongside raised FSH. Ovarian protection with GnRH agonists may be considered. Men should be offered **sperm banking** before treatment begins, because azoospermia can persist.",
+      "say": "Gonadal damage risk depends largely on the drug class, not one single agent, and alkylating agents pose the greatest threat, particularly at higher cumulative doses. In women, premature ovarian insufficiency usually shows as amenorrhoea before age 40 alongside raised FSH. GnRH agonists may be considered to help protect ovarian function. Men should be offered sperm banking before treatment starts, as azoospermia may persist long term.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-mucositis-skin-fig1.webp",
+        "alt": "Diagram illustrating how GnRH agonists suppress ovarian function to protect follicles during chemotherapy.",
+        "caption": "GnRH agonists protect ovaries from chemotherapy damage",
+        "ar": 1.8349
       }
     },
     {
@@ -333,5 +355,6 @@
     "q_4e75cbcf1f95",
     "q_65dc185f3595",
     "q_0e81a4fa665c"
-  ]
+  ],
+  "gen": "AI"
 }

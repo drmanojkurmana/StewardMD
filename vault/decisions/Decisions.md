@@ -12098,3 +12098,12 @@ Owner: make Ni-Key read and write work on the iPhone (follow-up to the "iPhone N
 - Today's plan, the widget snapshot, smart nudges and the daily reminder all take the day's line from ReWise. No
   invented numbers: reasons are the student's own accuracy and counts.
 - v1 timetables keep working until the student opens ReWise and saves. Flag unchanged (`smd_prep_tt`).
+
+## OTA builds: keep only the last 10 published in R2 (owner, 2026-11-03)
+R2 held 1,579 OTA manifests and 124 GB of build files (591 published versions). The owner ruled that only the
+last 10 published builds stay available; older ones are deleted automatically. `scripts/ota-prune.mjs` keeps the
+manifests of the 10 newest versions in `ota/history.json` plus the live channel and the staged candidate, rewrites
+`ota/known-hashes.json` to the kept set FIRST (staging skips known hashes, so a stale entry would ship a broken
+build), then deletes unreferenced `ota/files/*` and old `ota/manifests/*`, and fails if the live build is missing a
+file. `.github/workflows/ota-prune.yml` runs it after every successful "OTA — publish live", in the `ota-stage`
+concurrency group. Consequence: rollback is possible only to the last 10 published versions.

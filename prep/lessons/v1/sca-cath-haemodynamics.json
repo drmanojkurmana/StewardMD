@@ -3,7 +3,7 @@
   "module": "sca-cath-haemodynamics",
   "subject": "ss-cardiology",
   "title": "Cardiac Catheterisation and Invasive Haemodynamics",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "The classical gold standard for calculating cardiac output in invasive hemodynamics is the **Fick principle**. Based on mass conservation, total pulmonary blood flow equals whole-body resting **oxygen consumption** divided by the arteriovenous oxygen content difference between arterial blood and mixed venous blood sampled from the pulmonary artery. Direct Fick measurements require real-time spirometric oxygen uptake analysis, whereas assumed Fick equations use estimated baseline oxygen consumption.",
@@ -107,6 +107,17 @@
       }
     },
     {
+      "tx": "Pressure patterns reveal pericardial disease. In **cardiac tamponade**, diastolic pressures equalise and the y descent is lost. In **constrictive pericarditis**, the **square root sign** and **ventricular interdependence** appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy shows concordant pressure changes instead, with ventricular pressures rising and falling together.",
+      "say": "Pressure patterns reveal pericardial disease. In cardiac tamponade, diastolic pressures equalise and the y descent is lost. In constrictive pericarditis, the square root sign and ventricular interdependence appear, where right ventricular pressure falls while left ventricular pressure rises during inspiration. Restrictive cardiomyopathy instead shows concordant pressure changes, with both ventricles moving together.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-cath-haemodynamics-fig1.webp",
+        "alt": "Pressure waveforms illustrating cardiac tamponade, constrictive pericarditis, and restrictive cardiomyopathy.",
+        "caption": "Pericardial disease pressure patterns",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "Invasive hemodynamic quantification of stenotic heart valves relies upon the classical **Gorlin formula**. Derived from Torricelli hydraulic orifice principles, valve area is calculated by dividing total transvalvular volume flow rate by the product of an empirical discharge coefficient and the square root of the mean **transvalvular pressure gradient**. Simultaneous high-fidelity micromanometer catheter recordings across the stenotic valve are mandatory to eliminate pulse-transmission phase delays.",
       "say": "Invasive hemodynamic quantification of stenotic heart valves relies upon the classical Gorlin formula. Derived from Torricelli hydraulic orifice principles, valve area is calculated by dividing total transvalvular volume flow rate by the product of an empirical discharge coefficient and the square root of the mean transvalvular pressure gradient. Simultaneous high-fidelity micromanometer catheter recordings across the stenotic valve are mandatory to eliminate pulse-transmission phase delays.",
       "vis": {
@@ -171,6 +182,17 @@
             "Avoids unnecessary stent thrombosis and restenosis risks"
           ]
         }
+      }
+    },
+    {
+      "tx": "The left panel shows an **intermediate LAD stenosis** with a **pressure wire** sensor positioned beyond the narrowing in the distal vessel. The right panel shows aortic pressure tracing above distal coronary pressure tracing with calculated **fractional flow reserve** of 0.74. Because the lesson threshold defines 0.80 or less as **ischaemia producing**, this lesion is haemodynamically significant and revascularization is strongly indicated for symptom and outcome benefit.",
+      "say": "The image pairs a coronary angiogram showing intermediate LAD narrowing with a pressure wire beyond it, alongside aortic and distal pressure tracings giving an FFR of 0.74. Since values of 0.80 or less mark haemodynamically significant ischaemia, this result identifies a lesion that limits flow and supports revascularization for symptom relief and better outcomes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-cath-haemodynamics-gen1.webp",
+        "alt": "Coronary angiogram of intermediate LAD stenosis with pressure wire and pressure tracings showing an ischaemic FFR value.",
+        "caption": "FFR assessment of LAD stenosis, Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

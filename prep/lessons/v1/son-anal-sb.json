@@ -3,7 +3,7 @@
   "module": "son-anal-sb",
   "subject": "ss-medical-oncology",
   "title": "Anal canal, small bowel and appendiceal cancers",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Anal canal squamous cell carcinoma is predominantly driven by high-risk human papillomavirus HPV infection, particularly genotypes **16** and **18**. HPV oncoproteins E6 and E7 inactivate tumour suppressors p53 and retinoblastoma protein respectively, leading to chromosomal instability, high p16INK4a overexpression, and exquisite sensitivity to definitive radiation and DNA-damaging cytotoxic agents.",
@@ -63,7 +63,7 @@
         "kind": "compare",
         "left": {
           "title": "Complete Clinical Response",
-          "items": [
+          "points": [
             "Complete disappearance of palpable and visible mass by 26 weeks",
             "Normal digital rectal examination and anoscopy",
             "Resolution of metabolic activity on PET-CT scan",
@@ -72,7 +72,7 @@
         },
         "right": {
           "title": "Persistent / Recurrent Disease",
-          "items": [
+          "points": [
             "Biopsy-proven invasive squamous carcinoma at >= 26 weeks",
             "Mandates radical salvage abdominoperineal resection (APR)",
             "En-bloc resection of rectum, anus, and sphincter complex",
@@ -206,7 +206,7 @@
         "kind": "compare",
         "left": {
           "title": "Low-Grade Appendiceal Mucinous Neoplasm (LAMN)",
-          "items": [
+          "points": [
             "Pushing, non-infiltrative growth with mucin extrusion",
             "Slow progression with voluminous acellular mucin production",
             "Forms classic indolent pseudomyxoma peritonei (PMP)",
@@ -215,13 +215,24 @@
         },
         "right": {
           "title": "High-Grade Appendiceal Adenocarcinoma",
-          "items": [
+          "points": [
             "Destructive infiltrative invasion with signet-ring cells",
             "High propensity for nodal and haematogenous distant spread",
             "Forms aggressive peritoneal carcinomatosis with high PCI",
             "Requires systemic chemotherapy in addition to cytoreduction"
           ]
         }
+      }
+    },
+    {
+      "tx": "The scan shows thick **gelatinous ascites** filling the abdomen after a ruptured appendiceal **mucinous neoplasm**. The mucin indents the liver edge, called scalloping, and cakes the greater **omentum**. This pattern defines **pseudomyxoma peritonei**, which spreads across the peritoneal surface rather than through blood or lymph nodes.",
+      "say": "This CT shows jelly like fluid throughout the belly from a burst mucin producing appendix tumour. The heavy mucin presses on the liver surface so the edge looks scalloped, and it thickens the omentum into a cake. That combination is typical of pseudomyxoma peritonei, a condition that coats the abdominal cavity but seldom travels outside it. Complete surgical clearance plus heated chemotherapy inside the abdomen is the curative plan.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-anal-sb-gen1.webp",
+        "alt": "An abdominal CT shows gelatinous ascites scalloping the liver with omental caking.",
+        "caption": "Mucinous ascites with liver scalloping marks peritoneal spread. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -317,11 +328,23 @@
           ]
         ]
       }
+    },
+    {
+      "tx": "Ampullary carcinoma arises at the ampulla of Vater and often presents early with **obstructive jaundice**, which can allow earlier detection than pancreatic head tumours. Surgical resection, usually pancreaticoduodenectomy, is the main curative option. Adjuvant therapy is considered based on stage and histology.",
+      "say": "Ampullary carcinoma arises at the ampulla of Vater and often presents early with obstructive jaundice. This can allow earlier detection than pancreatic head tumours. Surgical resection, usually pancreaticoduodenectomy, is the main curative option. Adjuvant therapy is considered based on stage and histology.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-anal-sb-fig1.webp",
+        "alt": "Anatomical diagram showing ampullary carcinoma at the ampulla of Vater, illustrating its location at the junction of bile and pancreatic ducts in the duodenum.",
+        "caption": "Ampullary carcinoma arises at the ampulla of Vater, causing early obstructive jaundice. Image: Dennis M DePace, PhD, CC BY-SA 4.0, Wikimedia Commons.",
+        "ar": 1.6818
+      }
     }
   ],
   "quiz": [
     "q_3f43634b049a",
     "q_507b893c916c",
     "q_6f7344ab8837"
-  ]
+  ],
+  "gen": "AI"
 }

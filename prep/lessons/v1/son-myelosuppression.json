@@ -3,7 +3,7 @@
   "module": "son-myelosuppression",
   "subject": "ss-medical-oncology",
   "title": "Myelosuppression and febrile neutropenia",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Chemotherapy-induced suppression of bone marrow haematopoiesis represents an acute oncological emergency predisposed to rapid fatal septicaemia. **Febrile neutropenia** is an oncologic emergency defined as oral temperature 38.3 deg C or higher once or 38.0 deg C sustained for 1 hour with absolute neutrophil count **ANC under 500/mcL** or expected to fall under 500/mcL within 48 hours. Rapid bacterial invasion occurs across damaged mucosal barriers without local inflammatory signs.",
@@ -57,13 +57,24 @@
       }
     },
     {
+      "tx": "Febrile neutropenia is a medical emergency. It is defined as a fever of 38.3°C or higher, or 38.0°C sustained for one hour, with an **absolute neutrophil count** below 500 cells/mm3. Do not wait for lab results; start empirical antibiotics within one hour of triage.",
+      "say": "Febrile neutropenia is an emergency. It is identified by a fever of thirty eight point three degrees Celsius or higher, or thirty eight point zero degrees Celsius sustained for one hour, alongside an absolute neutrophil count below five hundred cells per cubic millimetre. Do not delay treatment for lab results; administer antibiotics within one hour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-myelosuppression-fig1.webp",
+        "alt": "Flowchart illustrating initial management of febrile neutropenia, from diagnosis to risk-stratified therapy (outpatient vs. inpatient).",
+        "caption": "Initial management of febrile neutropenia, emphasizing rapid assessment and risk stratification",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "The Multinational Association for Supportive Care in Cancer **MASCC index** identifies **low-risk febrile** neutropenia eligible for outpatient oral antibiotic therapy with a score of 21 or higher. A score of 21 or higher indicates a low risk of serious medical complications, permitting outpatient oral therapy with ciprofloxacin plus amoxicillin-clavulanate in reliable patients with close monitoring.",
       "say": "The Multinational Association for Supportive Care in Cancer MASCC index identifies low-risk febrile neutropenia eligible for outpatient oral antibiotic therapy with a score of 21 or higher. A score of 21 or higher indicates a low risk of serious medical complications, permitting outpatient oral therapy with ciprofloxacin plus amoxicillin-clavulanate in reliable patients with close monitoring.",
       "vis": {
         "kind": "compare",
         "left": {
           "title": "MASCC Score >= 21 (Low Risk)",
-          "items": [
+          "points": [
             "Low risk of severe medical complications (< 5%)",
             "Eligible for outpatient care after 4 hours of observation",
             "Oral ciprofloxacin (500 mg Q12H) + amoxicillin-clavulanate",
@@ -72,7 +83,7 @@
         },
         "right": {
           "title": "MASCC Score < 21 (High Risk)",
-          "items": [
+          "points": [
             "High risk of complications (septic shock, ICU transfer, death)",
             "Mandatory inpatient admission for intravenous antibiotics",
             "Inpatient monitoring for anticipated neutropenia duration > 7 days",
@@ -116,7 +127,7 @@
       }
     },
     {
-      "tx": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an **antipseudomonal beta-lactam** such as **piperacillin-tazobactam**, cefepime, or meropenem within 1 hour. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
+      "tx": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an **antipseudomonal beta-lactam** such as **piperacillin-tazobactam**, cefepime, or meropenem within 1 hour of presentation. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
       "say": "High-risk febrile neutropenia mandates immediate inpatient empirical monotherapy with an antipseudomonal beta-lactam such as piperacillin-tazobactam, cefepime, or meropenem within 1 hour. Delay in antimicrobial administration beyond 60 minutes significantly elevates 28-day mortality from Gram-negative sepsis, particularly Pseudomonas aeruginosa bacteraemia.",
       "vis": {
         "kind": "table",
@@ -207,7 +218,7 @@
         "kind": "compare",
         "left": {
           "title": "Posaconazole Prophylaxis (Delayed-Release)",
-          "items": [
+          "points": [
             "300 mg daily oral delayed-release tablets",
             "Broad mold coverage including Aspergillus and Mucorales",
             "Statistically significant reduction in all-cause mortality (p=0.04)",
@@ -216,13 +227,24 @@
         },
         "right": {
           "title": "Fluconazole Prophylaxis",
-          "items": [
+          "points": [
             "400 mg daily oral or intravenous administration",
             "Active only against Candida species (lacks Aspergillus activity)",
             "Ineffective in preventing invasive mould infections",
             "Reserved for low-risk solid tumour or autologous transplant settings"
           ]
         }
+      }
+    },
+    {
+      "tx": "Chest scan shows a dense **pulmonary macronodule** ringed by hazy **ground glass** opacity, the classic halo sign. In prolonged **neutropenia** after leukemia induction this pattern signals invasive aspergillosis from vessel invading mold. Early recognition prompts mold active therapy and urgent workup rather than waiting for culture growth.",
+      "say": "The lung window shows a solid nodule in the right lung with a soft gray halo of surrounding haze. During extended neutropenia after induction for acute leukemia or myelodysplastic syndromes, this halo points to invasive aspergillosis where fungal threads invade small vessels. The image teaches that new nodules with halos in this setting need rapid fungal assessment and mold active treatment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-myelosuppression-gen1.webp",
+        "alt": "Chest scan shows a lung macronodule ringed by a hazy halo.",
+        "caption": "Nodule with halo marks mold infection in neutropenia. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -298,5 +320,6 @@
     "q_8e36b1f4380b",
     "q_3ab7ed6f9256",
     "q_0a2741014277"
-  ]
+  ],
+  "gen": "AI"
 }

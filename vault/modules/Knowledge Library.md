@@ -101,6 +101,10 @@ choice (Research only when `smd_maik_research` is on). The button is not rendere
 MaiK can also reach these pages by name: "pneumonia" or "open pneumonia" in MaiK gives a card listing the
 pneumonia pages (see [[StewardMD Edge]]). Headless check: `test/run-kb-nav-askmaik-ui.mjs`.
 
+## Disease reader card (2026-11-03)
+
+The reading text sits on one raised white sheet (solid fill, 1px border, contact shadow plus a diffuse shadow, faint top edge). The page behind it, including the header, keeps a soft mint-to-lavender wash. The Library control is an outlined pill. Section chips stay white, with the active chip in soft lavender. Presentation only: search, filters, chips, save, Ask MaiK, red flags, figures and the reader body are unchanged.
+
 ## Disease reader: phone fit and textbook order (2026-10-09, branch kb-reader-mobile-flow)
 
 - **Overflow root cause:** `.dx-mgmt-body` is a grid with an implicit `auto` column and grid items at

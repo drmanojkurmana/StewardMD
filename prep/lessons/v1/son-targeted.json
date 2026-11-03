@@ -3,7 +3,7 @@
   "module": "son-targeted",
   "subject": "ss-medical-oncology",
   "title": "Small molecule targeted therapy: kinase inhibitors, synthetic lethality, resistance mechanisms and bypass pathways",
-  "minutes": 5,
+  "minutes": 10,
   "steps": [
     {
       "tx": "First-generation reversible EGFR **tyrosine kinase inhibitors** erlotinib and gefitinib competitively bind the intracellular ATP-binding pocket of EGFR. These agents demonstrate marked efficacy against classical activating EGFR mutations, specifically **exon 19 deletion** and the exon 21 L858R point substitution in non-small cell lung cancer. Suppressing downstream MAPK and PI3K/Akt survival signalling cascades induces profound tumour regression in oncogene-addicted adenocarcinomas.",
@@ -32,6 +32,17 @@
             "Irreversible mutant-selective covalent inhibition sparing wild-type"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The diagram shows an **EGFR dimer** on a lung adenocarcinoma cell with **erlotinib** seated inside the intracellular ATP pocket. Occupying that pocket prevents phosphorylation and shuts off **MAPK signaling** and **PI3K signaling**. Blocking both outputs explains the deep regression seen in tumours driven by activating EGFR mutations.",
+      "say": "Erlotinib is a reversible EGFR blocker that sits in the intracellular ATP pocket of the receptor. By occupying that space it stops phosphorylation and turns off downstream MAPK and PI3K survival signals. This picture makes the mechanism visual. Tumours addicted to activating EGFR mutations lose their growth drive and shrink.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-targeted-gen1.webp",
+        "alt": "Molecular diagram shows erlotinib occupying the EGFR ATP pocket and blocking downstream MAPK and PI3K signaling.",
+        "caption": "Erlotinib blocks EGFR signaling at the ATP pocket. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -176,6 +187,17 @@
             "Secondary acquired resistance"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Acquired resistance is suspected when a patient improves initially and then progresses. The next step is **genetic testing** for resistance mutations, rather than simply escalating the dose or switching to cytotoxic chemotherapy. Interindividual variation in ABC transporter genes affects absorption and elimination, so it can guide dosing. Targeted small molecules also show synthetic lethality in PARP inhibitor settings, a principle worth remembering for BRCA-deficient tumours.",
+      "say": "Acquired resistance is suspected when a patient improves initially and then progresses. The next step is genetic testing for resistance mutations, rather than simply escalating the dose or switching to cytotoxic chemotherapy. Interindividual variation in ABC transporter genes affects absorption and elimination, so it can guide dosing. Targeted small molecules also show synthetic lethality in PARP inhibitor settings, a principle worth remembering for BRCA deficient tumours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-targeted-fig1.webp",
+        "alt": "Diagram showing initial patient improvement followed by disease progression, necessitating genetic testing for resistance mutations or ABC transporter variation.",
+        "caption": "Acquired resistance requires genetic testing for mutations or ABC transporter variation",
+        "ar": 1.8349
       }
     },
     {

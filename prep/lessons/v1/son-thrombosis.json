@@ -3,7 +3,7 @@
   "module": "son-thrombosis",
   "subject": "ss-medical-oncology",
   "title": "Cancer associated thrombosis",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Malignancy induces a prothrombotic state via tumour cell procoagulants, inflammatory cytokines, and vascular stasis. The **Khorana risk score** stratifies **venous thromboembolism** VTE risk in ambulatory cancer patients initiating chemotherapy based on cancer site, platelet, leukocyte, and haemoglobin counts, and BMI. Very high-risk cancer sites (stomach, pancreas) receive 2 points, while high-risk sites (lung, lymphoma, gynaecologic, bladder, testicular) receive 1 point.",
@@ -56,7 +56,7 @@
         "kind": "compare",
         "left": {
           "title": "Low Molecular Weight Heparin (Dalteparin)",
-          "items": [
+          "points": [
             "CLOT trial: 52% relative risk reduction in recurrent VTE (p=0.002)",
             "Predictable weight-based subcutaneous pharmacokinetics",
             "Zero interference from nausea, vomiting, or malabsorption",
@@ -65,7 +65,7 @@
         },
         "right": {
           "title": "Vitamin K Antagonists (Warfarin)",
-          "items": [
+          "points": [
             "Narrow therapeutic window (INR 2.0 to 3.0)",
             "Unpredictable fluctuations due to liver disease and chemotherapy interactions",
             "High rates of both subtherapeutic thrombosis and fatal bleeding",
@@ -114,7 +114,7 @@
         "kind": "compare",
         "left": {
           "title": "Indications Preferring LMWH",
-          "items": [
+          "points": [
             "Unresected luminal upper GI malignancies (oesophageal, gastric, pancreatic)",
             "Active gastrointestinal ulcerations or mucosal lesions",
             "Unresected urothelial carcinomas at risk of gross haematuria",
@@ -124,7 +124,7 @@
         },
         "right": {
           "title": "Indications Suitable for DOACs",
-          "items": [
+          "points": [
             "Solid tumours without intact luminal GI ulceration (breast, lung, prostate)",
             "Resected gastrointestinal cancers with no residual mucosal primary",
             "Haematologic malignancies (lymphoma, myeloma) without mucosal lesions",
@@ -194,6 +194,17 @@
       }
     },
     {
+      "tx": "**Primary thromboprophylaxis** is reserved for hospitalised or ambulatory cancer patients at high risk, with bleeding risk assessed first. Mechanical prophylaxis is used when anticoagulation is contraindicated, such as active bleeding or platelets below 50,000/mcL. After major abdominal or pelvic cancer surgery, prophylaxis may be extended up to four weeks. Watch for the fall in platelets with heparin, which needs review.",
+      "say": "Primary thromboprophylaxis is reserved for hospitalised or ambulatory cancer patients at high risk, after bleeding risk is assessed. Mechanical prophylaxis is used when anticoagulation is contraindicated, such as active bleeding or platelets below 50,000 per microlitre. After major abdominal or pelvic cancer surgery, prophylaxis may be extended for up to four weeks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-thrombosis-fig1.webp",
+        "alt": "Flowchart for primary thromboprophylaxis in cancer patients, detailing risk assessment, mechanical prophylaxis, and post-surgical considerations.",
+        "caption": "Primary thromboprophylaxis in cancer patients",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "Central venous access devices are frequent sites of thrombosis managed without routine line sacrifice. **Catheter-related thrombosis** is managed with **therapeutic anticoagulation** without mandatory catheter removal if the line remains well-positioned, functional, and non-infected. Anticoagulation with LMWH or DOAC is continued for at least three months and as long as the catheter remains in situ; removal is reserved for catheter infection, line malfunction, or progressive clot despite anticoagulation.",
       "say": "Central venous access devices are frequent sites of thrombosis managed without routine line sacrifice. Catheter-related thrombosis is managed with therapeutic anticoagulation without mandatory catheter removal if the line remains well-positioned, functional, and non-infected. Anticoagulation with LMWH or DOAC is continued for at least three months and as long as the catheter remains in situ; removal is reserved for catheter infection, line malfunction, or progressive clot despite anticoagulation.",
       "vis": {
@@ -251,7 +262,7 @@
         "kind": "compare",
         "left": {
           "title": "Incidental Asymptomatic Pulmonary Embolism",
-          "items": [
+          "points": [
             "Detected unexpectedly on routine contrast-enhanced restaging CT",
             "Present in up to 5% of all contrast-enhanced staging examinations",
             "Affects segmental, lobar, or main pulmonary arteries",
@@ -260,13 +271,24 @@
         },
         "right": {
           "title": "Symptomatic Acute Pulmonary Embolism",
-          "items": [
+          "points": [
             "Presents with acute dyspnoea, pleuritic chest pain, or tachycardia",
             "Investigated intentionally with dedicated CT pulmonary angiography",
             "Risk of acute right ventricular strain and obstructive shock",
             "Requires therapeutic anticoagulation and hemodynamic resuscitation"
           ]
         }
+      }
+    },
+    {
+      "tx": "The scan shows an **incidental embolus** as a dark filling defect in a segmental **pulmonary artery** found on routine restaging. Registries show silent emboli carry the same recurrence and fatality risk as symptomatic **pulmonary embolism**. So incidental disease demands identical full dose **therapeutic anticoagulation** rather than watchful waiting.",
+      "say": "Cancer patients often have clots found by chance on restaging scans. This image shows a segmental pulmonary embolism seen only as an intraluminal filling defect. Outcome data match symptomatic disease, so management is the same. Guidelines call for full dose therapeutic anticoagulation with either a direct oral agent or low molecular weight heparin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-thrombosis-gen1.webp",
+        "alt": "Contrast chest CT shows a segmental pulmonary artery filling defect of incidental embolism.",
+        "caption": "Restaging scan reveals a silent embolus needing full treatment. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
@@ -325,5 +347,6 @@
     "q_110b8d6dd976",
     "q_2ddeba1f098f",
     "q_a6510b227f5a"
-  ]
+  ],
+  "gen": "AI"
 }

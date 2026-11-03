@@ -3,7 +3,7 @@
   "module": "son-molecular-dx",
   "subject": "ss-medical-oncology",
   "title": "Molecular diagnostics and predictive biomarkers: comprehensive genomic profiling, liquid biopsy and actionable targets",
-  "minutes": 5,
+  "minutes": 10,
   "steps": [
     {
       "tx": "High-throughput **Next-generation sequencing** platforms enable comprehensive **genomic profiling** across solid tumours and haematological malignancies. By identifying actionable single-nucleotide variants, insertions, deletions, and structural fusions, sequencing directly directs precision targeted therapy selection. Multigene panels interrogate hundreds of cancer-related genes simultaneously to uncover clinically actionable therapeutic alterations.",
@@ -78,6 +78,17 @@
       }
     },
     {
+      "tx": "Liquid biopsy measures **circulating tumour DNA** in plasma and can detect residual disease after surgery or treatment, often called **minimal residual disease**. It is useful when tissue is scarce or when tumour heterogeneity matters. A negative result does not exclude disease, so tissue testing remains the reference when it is available.",
+      "say": "Liquid biopsy measures circulating tumour DNA in plasma and can detect residual disease after surgery or treatment, often called minimal residual disease. It is useful when tissue is scarce or when tumour heterogeneity matters. A negative result does not exclude disease, so tissue testing remains the reference when it is available.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-molecular-dx-fig1.webp",
+        "alt": "Diagram illustrating liquid biopsy, showing blood sample collection, plasma isolation, and detection of circulating tumour DNA (ctDNA) for minimal residual disease (MRD), especially when tissue is scarce.",
+        "caption": "Liquid biopsy: detecting circulating tumour DNA for minimal residual disease",
+        "ar": 1.8349
+      }
+    },
+    {
       "tx": "Quantitative **Tumour mutational burden** assesses the overall frequency of somatic non-synonymous **mutations per megabase** across the sequenced cancer genome. A high mutational burden generates abundant neoantigens, with 10 or more mutations per megabase supporting pembrolizumab monotherapy as a tissue-agnostic standard. Elevated neoantigen loads enhance endogenous host T-cell recognition and durable response.",
       "say": "Tumour mutational burden assesses the overall frequency of somatic non-synonymous mutations per megabase across the sequenced cancer genome. A high mutational burden generates abundant neoantigens, with 10 or more mutations per megabase supporting pembrolizumab monotherapy as a tissue-agnostic standard. Elevated neoantigen loads enhance endogenous host T-cell recognition and durable response.",
       "vis": {
@@ -127,6 +138,17 @@
             "Single gene point mutations or truncating variants"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Four panels show tumor glands with loss of **MLH1** and **PMS2** staining while MSH2 and MSH6 remain positive, with stromal cells as internal control. This paired loss signals **deficient mismatch repair** in colorectal cancer. Such tumors accumulate frameshift peptides and often respond to immune checkpoint blockade, so accurate IHC reading directly guides therapy choice.",
+      "say": "The four panels compare tumor glands with nearby normal stromal cells that stain as internal controls. MLH1 and PMS2 are lost in tumor nuclei while MSH2 and MSH6 are retained. This paired pattern means deficient mismatch repair with microsatellite instability in colorectal carcinoma. These cancers carry many frameshift peptides and are often sensitive to checkpoint blockade, making correct staining interpretation central to treatment planning.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-molecular-dx-gen1.webp",
+        "alt": "Four microscopy panels show loss of MLH1 and PMS2 with retained MSH2 and MSH6 in tumor glands.",
+        "caption": "Paired MLH1 PMS2 loss defines mismatch repair deficiency. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

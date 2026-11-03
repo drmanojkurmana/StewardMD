@@ -3,7 +3,7 @@
   "module": "sca-ecg",
   "subject": "ss-cardiology",
   "title": "Electrocardiography in Clinical Cardiology",
-  "minutes": 8,
+  "minutes": 10,
   "steps": [
     {
       "tx": "The **PR interval** reflects total conduction time through the atria, **atrioventricular node**, and the His-Purkinje network. Normal values range from **120** to **200** ms. A prolonged interval exceeding 200 ms confirms first-degree block, typically arising within the AV node itself. Shortening under 120 ms suggests accelerated conduction, pre-excitation, or ectopic junctional pacemakers.",
@@ -57,6 +57,17 @@
             "Frequently seen in pulmonary hypertension"
           ]
         }
+      }
+    },
+    {
+      "tx": "**Left bundle branch block** widens the QRS to 120 ms or more, with broad notched R waves in I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The **Sgarbossa criteria** help detect acute MI in LBBB, and a score of 3 or more confirms it.",
+      "say": "Left bundle branch block widens the QRS to 120 milliseconds or more, with broad notched R waves in leads I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The Sgarbossa criteria help detect acute myocardial infarction in LBBB, and a score of 3 or more confirms it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-ecg-fig1.webp",
+        "alt": "An ECG showing Left Bundle Branch Block with broad, notched R waves in leads I, aVL, V5, V6, and QRS duration over 120 ms.",
+        "caption": "Typical Left Bundle Branch Block (LBBB) ECG pattern. Image: me, CC0/PD, Wikimedia Commons.",
+        "ar": 1.4436
       }
     },
     {
@@ -178,6 +189,17 @@
             "Stress testing is strictly contraindicated"
           ]
         }
+      }
+    },
+    {
+      "tx": "This tracing was recorded during a **pain free** interval and shows **Wellens type B** morphology with deep symmetric inverted **T waves** across the anterior chest leads and preserved R waves without pathologic Q waves. The pattern signals critical stenosis of the proximal **left anterior descending artery** after spontaneous reperfusion. Recognize it promptly because extensive anterior infarction may follow and urgent invasive catheterisation is required.",
+      "say": "This electrocardiogram was recorded when chest discomfort had settled. Look at the deep symmetric inverted T waves in the anterior chest leads with preserved R waves and no pathologic Q waves. This is the type B pattern of Wellens syndrome, which points to critical narrowing of the proximal left anterior descending artery. It warns of impending extensive anterior infarction, so arrange urgent invasive coronary assessment and avoid stress testing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-ecg-gen1.webp",
+        "alt": "Twelve lead electrocardiogram recorded during a pain free interval showing deep symmetric T wave inversion in the anterior chest leads with preserved R waves.",
+        "caption": "Pain free tracing showing Wellens type B morphology Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

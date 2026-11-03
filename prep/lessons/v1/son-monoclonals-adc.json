@@ -3,7 +3,7 @@
   "module": "son-monoclonals-adc",
   "subject": "ss-medical-oncology",
   "title": "Monoclonal antibodies and antibody drug conjugates",
-  "minutes": 5,
+  "minutes": 9,
   "steps": [
     {
       "tx": "Therapeutic monoclonal antibodies exert antitumor effects through direct receptor inhibition and host immune recruitment. **Trastuzumab** is a humanised IgG1 monoclonal antibody binding subdomain IV of HER2, blocking downstream MAPK and PI3K signaling and activating antibody-dependent **cellular cytotoxicity**. By engaging Fc receptors on natural killer cells, trastuzumab stimulates targeted exocytosis of perforins and granzymes to lyse HER2-overexpressing tumour cells.",
@@ -46,6 +46,28 @@
             "adcc"
           ]
         ]
+      }
+    },
+    {
+      "tx": "Illustration shows **trastuzumab** Fab bound to HER2 subdomain IV on a breast cancer cell while its Fc tail engages CD16 on a **natural killer** cell. The bridge triggers release of perforin and granzyme onto the tumor. This **cellular cytotoxicity** explains how receptor blockade plus immune recruitment combine to destroy HER2 overexpressing cells.",
+      "say": "Trastuzumab attaches to part IV of HER2 on the breast cancer surface while its other end binds CD16 on a nearby natural killer cell. This physical link activates the killer cell to release perforin and granzyme that lyse the tumor. The image captures both actions of the antibody at once, namely blocking growth signals and recruiting immune killing, which underpins its value in HER2 positive disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-monoclonals-adc-gen1.webp",
+        "alt": "Illustration shows trastuzumab linking a HER2 positive cancer cell to a natural killer cell releasing cytotoxic granules.",
+        "caption": "Antibody bridge recruits killer cell to HER2 positive tumor. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Antibody names carry a **nomenclature stem** that signals their origin. **Chimeric** antibodies keep murine variable regions fused to human constant regions, as with cetuximab. **Humanised** antibodies, such as trastuzumab and bevacizumab, retain only the mouse complementarity-determining regions grafted onto a human framework. Because greater murine content drives **anti-drug antibody** formation, a more human sequence is generally less immunogenic.",
+      "say": "Antibody names carry a nomenclature stem that signals their origin. Chimeric antibodies keep mouse variable regions joined to human constant regions, as seen with cetuximab. Humanised antibodies, such as trastuzumab and bevacizumab, keep only the mouse complementarity-determining regions grafted onto a human framework. Since more murine content drives anti-drug antibody formation, a more human sequence is generally less immunogenic.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-monoclonals-adc-fig1.webp",
+        "alt": "Diagram comparing chimeric and humanized monoclonal antibodies, highlighting murine variable regions or CDRs grafted onto human antibody frameworks.",
+        "caption": "Chimeric and humanized antibody structures show murine and human components",
+        "ar": 1.8349
       }
     },
     {

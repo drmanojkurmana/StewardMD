@@ -3,7 +3,7 @@
  "module": "son-nsclc-dx",
  "subject": "ss-medical-oncology",
  "title": "NSCLC diagnosis, pathology and staging",
- "minutes": 8,
+ "minutes": 9,
  "steps": [
   {
    "tx": "Non-small cell lung cancer accounts for over eighty percent of all primary pulmonary malignancies. Accurate histologic subtyping into adenocarcinoma or squamous cell carcinoma is essential for predictive biomarker selection and therapeutic safety. **Adenocarcinoma** demonstrates glandular differentiation with immunohistochemical positivity for TTF-1 and napsin A, whereas squamous cell carcinoma shows keratinization with robust positivity for p40 and p63.",
@@ -42,6 +42,17 @@
       "High Ki-67 index, neuroendocrine features"
      ]
     ]
+   }
+  },
+  {
+   "tx": "Four panels contrast gland forming lung cancer with keratinizing squamous cancer under brown nuclear stains. **Adenocarcinoma** lights up with **TTF1** and napsin A, while squamous tumours instead show p40 and **p63** with keratin pearls. Getting this split right matters because it selects molecular testing and guards against unsafe drugs like pemetrexed in squamous disease.",
+   "say": "Use this panel to fix the adenocarcinoma versus squamous split. Glandular tumours stain for TTF1 and napsin A, while squamous tumours stain for p40 and p63 and may form pink keratin pearls. The lesson ties this distinction to treatment safety, since pemetrexed and bevacizumab are avoided in squamous disease and adenocarcinoma mandates full molecular profiling. For exams, pair each marker set with its histology.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-nsclc-dx-gen1.webp",
+    "alt": "Four stain panels contrast TTF1 and napsin A positive adenocarcinoma with p40 and p63 positive squamous carcinoma.",
+    "caption": "Stains separate lung adenocarcinoma from squamous carcinoma. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

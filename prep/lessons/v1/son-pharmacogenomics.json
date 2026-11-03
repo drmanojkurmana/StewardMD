@@ -3,7 +3,7 @@
   "module": "son-pharmacogenomics",
   "subject": "ss-medical-oncology",
   "title": "Pharmacogenomics and drug interactions in oncology: genetic polymorphisms, dosing adjustments and supportive care",
-  "minutes": 5,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Inherited **dihydropyrimidine dehydrogenase** deficiency and clinical **DPYD deficiency** dramatically impair the catabolism of fluoropyrimidines including fluorouracil and capecitabine. In homozygous or compound heterozygous DPYD deficient patients, standard antineoplastic doses provoke lethal myelosuppression, severe gastrointestinal mucositis, and neurotoxicity. Prospective genotyping for actionable DPYD variants such as DPYD*2A mandates significant upfront **dose reduction** or complete therapeutic avoidance.",
@@ -147,6 +147,28 @@
             "er"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The diagram traces tamoxifen from liver to breast cancer cell. Hepatic **CYP2D6 activation** converts the prodrug into potent **endoxifen**, which travels in blood to bind the **estrogen receptor** and halt tumour transcription. Poor metabolizer variants or blocking drugs lower active endoxifen and weaken protection. Remember this chain when choosing supportive medicines so strong enzyme blockers do not blunt therapy.",
+      "say": "This diagram explains why tamoxifen needs liver activation to work. In the liver cell, CYP2D6 converts tamoxifen into endoxifen, a far stronger blocker of the estrogen receptor. Endoxifen travels through blood to the breast cancer cell, where it occupies the receptor and stops estrogen driven gene activity. Patients with weak CYP2D6 function or those taking potent blocking antidepressants make less endoxifen and gain less benefit. Choosing supportive drugs that spare this pathway preserves treatment effect.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-pharmacogenomics-gen1.webp",
+        "alt": "Diagram shows liver conversion of tamoxifen to endoxifen followed by receptor blockade in a breast cancer cell.",
+        "caption": "Diagram traces tamoxifen activation and estrogen receptor blockade. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Strong **CYP3A4** inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
+      "say": "Strong CYP3A4 inhibitors such as clarithromycin and ketoconazole can raise levels of tyrosine kinase inhibitors like imatinib, so they should be avoided or the dose reduced. Strong CYP2D6 inhibitors such as paroxetine and fluoxetine reduce endoxifen, the active form of tamoxifen, and are best avoided. Drugs that prolong the QT interval need baseline and follow-up ECG review. Adjust doses for hepatic impairment using Child-Pugh class and for renal impairment using creatinine clearance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-pharmacogenomics-fig1.webp",
+        "alt": "Diagram showing how CYP enzyme inhibitors affect substrate drug metabolism, leading to increased drug levels and toxicity, or reduced active metabolite levels and decreased efficacy.",
+        "caption": "CYP-mediated drug interactions: impact on drug levels and clinical outcomes",
+        "ar": 1.8349
       }
     },
     {
