@@ -1,140 +1,298 @@
 {
- "v": 1,
- "module": "son-all",
- "subject": "ss-medical-oncology",
- "title": "Acute lymphoblastic leukaemia: classification, Ph-positive treatment and key toxicities",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "The **Philadelphia chromosome** t(9;22)(q34;q11.2) creates the BCR::ABL1 fusion. It is detected by karyotype, interphase FISH or RT-PCR. Ph-positive ALL mandates a tyrosine kinase inhibitor (TKI) from induction. Dasatinib 140 mg daily or ponatinib 30 mg daily, with blinatumomab, is preferred for adults under 65 without major comorbidity. Ponatinib is reduced to 15 mg daily once a complete molecular response is reached.",
-   "say": "The Philadelphia chromosome, t(9;22)(q34;q11.2), creates the BCR::ABL1 fusion. It is detected by karyotype, interphase FISH or RT-PCR. Ph-positive ALL mandates a tyrosine kinase inhibitor from induction. Dasatinib 140 mg daily or ponatinib 30 mg daily, with blinatumomab, is preferred for adults under 65 without major comorbidity. Ponatinib is reduced to 15 mg daily once a complete molecular response is reached.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Ph-positive B-ALL"
-     },
-     {
-      "id": "b",
-      "label": "TKI from induction"
-     },
-     {
-      "id": "c",
-      "label": "Dasatinib or ponatinib plus blinatumomab"
-     },
-     {
-      "id": "d",
-      "label": "Ponatinib cut to 15 mg at complete molecular response"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Chemotherapy backbones differ by age. Adults under 65 without comorbidity may receive **hyper-CVAD** (cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine) plus a TKI. Adults 65 or older, or those with substantial comorbidity, receive dose-attenuated mini-hyper-CVD, or inotuzumab-based therapy. Adolescents and young adults aged 15 to 39 do better with paediatric-style regimens including high-dose asparaginase.",
-   "say": "Chemotherapy backbones differ by age. Adults under 65 without comorbidity may receive hyper-CVAD, which is cyclophosphamide, vincristine, doxorubicin, dexamethasone alternating with high-dose methotrexate and cytarabine, plus a TKI. Adults 65 or older, or those with substantial comorbidity, receive dose-attenuated mini-hyper-CVD, or inotuzumab-based therapy. Adolescents and young adults aged 15 to 39 do better with paediatric-style regimens including high-dose asparaginase.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Younger adults and AYA",
-     "points": [
-      "Hyper-CVAD with TKI for adults under 65",
-      "Paediatric-style regimens for ages 15 to 39",
-      "High-dose asparaginase in AYA protocols"
-     ]
+  "v": 1,
+  "module": "son-all",
+  "subject": "ss-medical-oncology",
+  "title": "Acute lymphoblastic leukaemia: lineage classification, Philadelphia chromosome management, MRD monitoring and targeted immunotherapies",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Acute lymphoblastic leukaemia is immunophenotypically classified into B-cell lineage **B-ALL** and T-cell lineage **T-ALL**. B-ALL blasts express surface antigens **CD19**, **CD22**, CD79a, and nuclear terminal deoxynucleotidyl transferase **TdT**. In contrast, T-ALL blasts express cytoplasmic **CD3** and **CD7**, frequently presenting in young males with high circulating leukocyte counts and bulky anterior mediastinal masses.",
+      "say": "Acute lymphoblastic leukaemia is immunophenotypically classified into B-cell lineage B-ALL and T-cell lineage T-ALL. B-ALL blasts express surface antigens CD19, CD22, CD79a, and nuclear terminal deoxynucleotidyl transferase TdT. In contrast, T-ALL blasts express cytoplasmic CD3 and CD7, frequently presenting in young males with high circulating leukocyte counts and bulky anterior mediastinal masses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "B-Lineage ALL (B-ALL)",
+          "points": [
+            "Accounts for 75% to 80% of adult ALL",
+            "Expresses CD19, CD22, CD79a, and TdT",
+            "Common cytogenetics: t(9;22), t(v;11q23), hypodiploidy",
+            "Targetable with blinatumomab, inotuzumab, CAR-T"
+          ]
+        },
+        "right": {
+          "title": "T-Lineage ALL (T-ALL)",
+          "points": [
+            "Accounts for 20% to 25% of adult ALL",
+            "Expresses cytoplasmic CD3, CD7, and CD5",
+            "Bulky anterior mediastinal masses, pleural effusions",
+            "Early T-precursor (ETP) subtype has poor prognosis"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Older or frail adults",
-     "points": [
-      "Mini-hyper-CVD with TKI",
-      "Inotuzumab-based therapy",
-      "Low-intensity TKI with blinatumomab or steroids"
-     ]
+    {
+      "tx": "Philadelphia chromosome-positive **Ph+ ALL** harbouring the reciprocal translocation **t(9;22)** BCR-ABL1 historically carried an extremely poor prognosis. Incorporating potent BCR-ABL **tyrosine kinase inhibitors** such as **dasatinib** or **ponatinib** into front-line chemotherapy produces complete haematological remission in over 95% of patients, transforming long-term survival and allowing chemotherapy de-intensification.",
+      "say": "Philadelphia chromosome-positive Ph+ ALL harbouring the reciprocal translocation t(9;22) BCR-ABL1 historically carried an extremely poor prognosis. Incorporating potent BCR-ABL tyrosine kinase inhibitors such as dasatinib or ponatinib into front-line chemotherapy produces complete haematological remission in over 95% of patients, transforming long-term survival and allowing chemotherapy de-intensification.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t922",
+            "label": "t(9;22) BCR-ABL1",
+            "level": 1
+          },
+          {
+            "id": "tki",
+            "label": "Dasatinib / Ponatinib",
+            "level": 2
+          },
+          {
+            "id": "blin",
+            "label": "Blinatumomab Chemo-Free",
+            "level": 3
+          },
+          {
+            "id": "mrd",
+            "label": "Deep Molecular Remission",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "t922",
+            "tki"
+          ],
+          [
+            "tki",
+            "blin"
+          ],
+          [
+            "blin",
+            "mrd"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bispecific CD19/CD3 T-cell engager **Blinatumomab** redirects host CD3-positive cytotoxic T lymphocytes against CD19-positive lymphoblasts. In the landmark phase III **TOWER trial**, blinatumomab achieved significantly higher complete remission rates, deeper **minimal residual disease** MRD clearance, and prolonged overall survival compared to standard intensive salvage chemotherapy in relapsed or refractory B-ALL.",
+      "say": "Bispecific CD19/CD3 T-cell engager Blinatumomab provides targeted redirection of host CD3-positive cytotoxic T lymphocytes against CD19-positive lymphoblasts. In the landmark phase III TOWER trial, blinatumomab achieved significantly higher complete remission rates, deeper minimal residual disease MRD clearance, and prolonged overall survival compared to standard intensive salvage chemotherapy in relapsed or refractory B-ALL.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blinatumomab Arm (TOWER)",
+          "points": [
+            "Complete remission rate: 44% vs 25%",
+            "Median overall survival: 7.7 vs 4.0 months (HR 0.71)",
+            "High rate of molecular MRD clearance",
+            "Administered as 28-day continuous IV infusion"
+          ]
+        },
+        "right": {
+          "title": "Standard Salvage Chemotherapy",
+          "points": [
+            "High-dose multi-agent cytotoxic regimens",
+            "Severe myelosuppression and febrile neutropenia",
+            "High treatment-related early mortality",
+            "Lower rates of bridge to curative allogeneic transplant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "CD22-directed antibody-drug conjugate **Inotuzumab ozogamicin** delivers a potent cytotoxic calicheamicin payload directly into malignant B-lymphoblasts. In the pivotal randomized phase III **INO-VATE trial**, inotuzumab ozogamicin produced significantly higher complete remission rates and MRD negativity compared to standard salvage chemotherapy, enabling more patients to undergo curative allogeneic stem cell transplantation.",
+      "say": "CD22-directed antibody-drug conjugate Inotuzumab ozogamicin delivers a potent cytotoxic calicheamicin payload directly into malignant B-lymphoblasts. In the pivotal randomized phase III INO-VATE trial, inotuzumab ozogamicin produced significantly higher complete remission rates and MRD negativity compared to standard salvage chemotherapy, enabling more patients to undergo curative allogeneic stem cell transplantation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "INO-VATE Trial Parameter",
+          "Inotuzumab Ozogamicin",
+          "Standard Chemotherapy Control"
+        ],
+        "rows": [
+          [
+            "Complete Remission Rate",
+            "80.7% confirmed CR/CRi",
+            "29.4% complete remission rate (p<0.001)"
+          ],
+          [
+            "MRD Negativity Rate",
+            "78.4% among remitters",
+            "28.1% among remitters (p<0.001)"
+          ],
+          [
+            "Bridge to Allogeneic Transplant",
+            "41% proceeded to SCT",
+            "11% proceeded to SCT"
+          ],
+          [
+            "Key Safety Precaution",
+            "Sinusoidal obstruction syndrome (VOD)",
+            "Avoid dual-alkylator conditioning post-transplant"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autologous anti-CD19 chimeric antigen receptor CAR-T cell therapy **Tisagenlecleucel** delivers durable remissions in relapsed or refractory pediatric and young adult B-ALL. In the pivotal **ELIANA trial**, a single infusion produced an 81% overall remission rate, with 100% of responding patients achieving deep flow-cytometric MRD negativity and durable multi-year event-free survival.",
+      "say": "Autologous anti-CD19 chimeric antigen receptor CAR-T cell therapy Tisagenlecleucel delivers durable remissions in relapsed or refractory pediatric and young adult B-ALL. In the pivotal ELIANA trial, a single infusion produced an 81% overall remission rate, with 100% of responding patients achieving deep flow-cytometric MRD negativity and durable multi-year event-free survival.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "aph",
+            "label": "Patient Apheresis",
+            "level": 1
+          },
+          {
+            "id": "tisa",
+            "label": "Tisagenlecleucel Infusion",
+            "level": 2
+          },
+          {
+            "id": "mrd",
+            "label": "100% MRD Negativity",
+            "level": 3
+          },
+          {
+            "id": "efs",
+            "label": "Durable Remissions",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "aph",
+            "tisa"
+          ],
+          [
+            "tisa",
+            "mrd"
+          ],
+          [
+            "mrd",
+            "efs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Serial quantitative **Minimal residual disease** MRD evaluation represents the most powerful independent prognostic predictor in ALL. Assessed by high-sensitivity multiparameter flow cytometry or NGS-based immunoglobulin heavy chain rearrangement assays with sensitivity reaching 1 in 1,000,000 cells, persistent post-induction MRD positivity dictates immediate treatment intensification or consolidative allogeneic stem cell transplantation.",
+      "say": "Serial quantitative Minimal residual disease MRD evaluation provides the most powerful independent prognostic predictor in ALL. Assessed by high-sensitivity multiparameter flow cytometry or NGS-based immunoglobulin heavy chain rearrangement assays with sensitivity reaching 1 in 1,000,000 cells, persistent post-induction MRD positivity dictates immediate treatment intensification or consolidative allogeneic stem cell transplantation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MRD Negative (< 0.01% / 10^-4)",
+          "points": [
+            "Deep morphological and immunophenotypic clearance",
+            "5-year relapse-free survival exceeding 75%",
+            "Standard consolidation without upfront transplant in good-risk",
+            "Monitored longitudinally every 3 months"
+          ]
+        },
+        "right": {
+          "title": "MRD Positive (>= 0.01%)",
+          "points": [
+            "Presence of persistent submicroscopic leukemia clones",
+            "High relapse risk exceeding 70% within 2 years",
+            "Mandates blinatumomab immunotherapy to convert to negative",
+            "Definitive indication for allogeneic stem cell transplantation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Routine **CNS prophylaxis** is mandatory for all ALL patients to prevent leptomeningeal relapse. Standard regimens deliver **intrathecal methotrexate**, cytarabine, and hydrocortisone triple intrathecal therapy through serial lumbar punctures during induction and consolidation, reducing central nervous system recurrence from over 30% down to under 5%.",
+      "say": "Routine CNS prophylaxis is mandatory for all ALL patients to prevent leptomeningeal relapse. Standard regimens deliver intrathecal methotrexate, cytarabine, and hydrocortisone triple intrathecal therapy through serial lumbar punctures during induction and consolidation, reducing central nervous system recurrence from over 30% down to under 5%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diag",
+            "label": "ALL Diagnosis",
+            "level": 1
+          },
+          {
+            "id": "lp",
+            "label": "Diagnostic Lumbar Puncture",
+            "level": 2
+          },
+          {
+            "id": "tit",
+            "label": "Triple Intrathecal Therapy",
+            "level": 3
+          },
+          {
+            "id": "cns",
+            "label": "< 5% CNS Relapse Rate",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "diag",
+            "lp"
+          ],
+          [
+            "lp",
+            "tit"
+          ],
+          [
+            "tit",
+            "cns"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Therapeutic **L-asparaginase** depletes extracellular asparagine, starving leukemic blasts unable to synthesize this amino acid. Clinical monitoring mandates active surveillance for acute chemical **pancreatitis**, severe **hyperammonemia**, hepatic transaminitis with coagulopathy, and life-threatening thrombosis secondary to acute **antithrombin III depletion**, requiring antithrombin repletion and therapeutic anticoagulation.",
+      "say": "Therapeutic L-asparaginase depletes extracellular asparagine, starving leukemic blasts unable to synthesize this amino acid. Clinical monitoring mandates active surveillance for acute chemical pancreatitis, severe hyperammonemia, hepatic transaminitis with coagulopathy, and life-threatening thrombosis secondary to acute antithrombin III depletion, requiring antithrombin repletion and therapeutic anticoagulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Asparaginase Toxicity",
+          "Biochemical Mechanism",
+          "Clinical Action / Management"
+        ],
+        "rows": [
+          [
+            "Acute Pancreatitis",
+            "Pancreatic acinar enzyme leakage",
+            "Discontinue drug permanently; avoid re-challenge"
+          ],
+          [
+            "Antithrombin III Depletion",
+            "Impaired hepatic protein synthesis",
+            "Thrombosis risk; monitor levels; replete antithrombin"
+          ],
+          [
+            "Hyperammonemia",
+            "Asparagine deamidation producing ammonia",
+            "Hydration; lactulose; hold therapy if symptomatic"
+          ],
+          [
+            "Anaphylaxis / Silent Inactivation",
+            "Neutralizing anti-asparaginase antibodies",
+            "Switch from E. coli to Erwinia chrysanthemi preparation"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Minimal residual disease** (MRD) is the strongest prognostic factor. A molecular complete remission after induction predicts disease-free survival near 70 percent, versus under 40 percent if MRD is positive. Blinatumomab, a bispecific T-cell engager given as a continuous infusion over 28 days, improves survival when added to consolidation in MRD-negative patients and converts MRD-positive patients. Monitor for cytokine release syndrome and neurotoxicity.",
-   "say": "Minimal residual disease is the strongest prognostic factor. A molecular complete remission after induction predicts disease-free survival near 70 percent, versus under 40 percent if MRD is positive. Blinatumomab, a bispecific T-cell engager given as a continuous infusion over 28 days, improves survival when added to consolidation in MRD-negative patients and converts MRD-positive patients. Monitor for cytokine release syndrome and neurotoxicity.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-all-fig1.webp",
-    "alt": "Kaplan-Meier curve showing superior disease-free survival for MRD-negative ALL patients (approx. 70%) versus MRD-positive patients (under 40%) after induction.",
-    "caption": "MRD status after induction predicts ALL disease-free survival",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "For relapsed disease, **CD19** targeting uses blinatumomab or tisagenlecleucel CAR T-cell therapy, while **CD22** targeting uses inotuzumab ozogamicin. Inotuzumab carries a risk of sinusoidal obstruction syndrome, so ursodiol is given and dual-alkylator conditioning is avoided before transplant. Allogeneic transplant is reserved for high-risk or MRD-positive patients. Before any lumbar puncture, check platelets; raise them above 20 x 10^9/L if needed.",
-   "say": "For relapsed disease, CD19 targeting uses blinatumomab or tisagenlecleucel CAR T-cell therapy, while CD22 targeting uses inotuzumab ozogamicin. Inotuzumab carries a risk of sinusoidal obstruction syndrome, so ursodiol is given and dual-alkylator conditioning is avoided before transplant. Allogeneic transplant is reserved for high-risk or MRD-positive patients. Before any lumbar puncture, check platelets and raise them above 20 x 10^9/L if needed.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Target",
-     "Agent",
-     "Key caution"
-    ],
-    "rows": [
-     [
-      "CD19",
-      "Blinatumomab or tisagenlecleucel",
-      "Cytokine release and neurotoxicity"
-     ],
-     [
-      "CD22",
-      "Inotuzumab ozogamicin",
-      "Sinusoidal obstruction syndrome"
-     ],
-     [
-      "Ph-positive",
-      "Ponatinib with blinatumomab",
-      "Arterial occlusive events"
-     ]
-    ]
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 96 (Acute Lymphoblastic Leukemia in Adults)",
+    "NCCN Acute Lymphoblastic Leukemia Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_01ac4167a672",
-  "q_dacd7e00d226",
-  "q_0dfecdd62983"
- ],
- "src": [
-  "kb-oncotree-all",
-  "kb-reference-acute-lymphoid-leukemia",
-  "kb-oncotree-cml",
-  "kb-oncotree-pediatric-all"
- ],
- "refs": [
-  "NCCN Guidelines Acute Lymphoblastic Leukemia Version 2.2026"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 2498,
-  "itemN": 42
- }
 }

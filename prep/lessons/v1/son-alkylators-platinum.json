@@ -1,135 +1,292 @@
 {
- "v": 1,
- "module": "son-alkylators-platinum",
- "subject": "ss-medical-oncology",
- "title": "Alkylating agents and platinum compounds: core high-yield principles",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**Alkylating agents** add alkyl groups to DNA, forming cross-links and strand breaks that kill dividing cells. In this lesson the key agents are **cyclophosphamide** and **ifosfamide**, whose metabolite **acrolein** injures the bladder, and the **nitrosoureas**, which cross the blood-brain barrier. Each drug has a signature toxicity, so pairing it with its protective agent is a frequent exam point.",
-   "say": "Alkylating agents add alkyl groups to DNA, forming cross-links and strand breaks that kill dividing cells. In this lesson the key agents are cyclophosphamide and ifosfamide, whose metabolite acrolein injures the bladder, and the nitrosoureas, which cross the blood-brain barrier. Each drug has a signature toxicity, so pairing it with its protective agent is a frequent exam point.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug",
-     "Signature toxicity",
-     "Protective or exam point"
-    ],
-    "rows": [
-     [
-      "Cyclophosphamide",
-      "Haemorrhagic cystitis",
-      "Uroprotection with mesna"
-     ],
-     [
-      "Ifosfamide",
-      "Haemorrhagic cystitis, encephalopathy",
-      "Mesna, renal dose check"
-     ],
-     [
-      "Nitrosoureas",
-      "Delayed myelosuppression, pulmonary fibrosis",
-      "Lipophilic, cross the blood-brain barrier"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Mesna** is a thiol that binds and inactivates **acrolein**, the urotoxic metabolite of ifosfamide and cyclophosphamide, within the bladder. It is not a haemostatic agent, so it does not treat bleeding from thrombocytopenia. Oral and IV routes are both used, and the total daily mesna dose is commonly set at 60 percent of the ifosfamide dose, with IV dilution to 20 mg/mL.",
-   "say": "Mesna is a thiol that binds and inactivates acrolein, the urotoxic metabolite of ifosfamide and cyclophosphamide, within the bladder. It is not a haemostatic agent, so it does not treat bleeding from thrombocytopenia. Oral and IV routes are both used, and the total daily mesna dose is commonly set at 60 percent of the ifosfamide dose, with IV dilution to 20 mg per millilitre.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Ifosfamide"
-     },
-     {
-      "id": "b",
-      "label": "Acrolein in bladder"
-     },
-     {
-      "id": "c",
-      "label": "Mesna binds acrolein"
-     },
-     {
-      "id": "d",
-      "label": "Inactive complex excreted"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Ifosfamide** is largely renally excreted, so creatinine clearance must be assessed before dosing. For a clearance of 31 to 45 mL/min the dose is commonly reduced to 75 percent. Encephalopathy can occur within a day, and **methylene blue** is the agent used for treatment and prevention. Fanconi syndrome, with phosphate wasting and metabolic acidosis, is another ifosfamide hallmark.",
-   "say": "Ifosfamide is largely renally excreted, so creatinine clearance must be assessed before dosing. For a clearance of 31 to 45 millilitres per minute the dose is commonly reduced to 75 percent. Encephalopathy can occur within a day, and methylene blue is the agent used for treatment and prevention. Fanconi syndrome, with phosphate wasting and metabolic acidosis, is another ifosfamide hallmark.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Ifosfamide toxicities",
-     "points": [
-      "Haemorrhagic cystitis",
-      "Encephalopathy",
-      "Fanconi syndrome",
-      "Myelosuppression nadir 8 to 13 days"
-     ]
+  "v": 1,
+  "module": "son-alkylators-platinum",
+  "subject": "ss-medical-oncology",
+  "title": "Alkylating agents and platinum compounds: mechanisms, clinical pharmacology, toxicities and resistance",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Oxazaphosphorine alkylators **Cyclophosphamide** and ifosfamide represent hepatic prodrugs requiring CYP2B6 bioactivation to active 4-hydroxy metabolites. Intracellular cleavage liberates phosphoramide mustard alongside acrolein, a toxic urothelial metabolite directly responsible for chemical **haemorrhagic cystitis**. Ifosfamide generates substantially greater acrolein and chloroacetaldehyde quantities than cyclophosphamide, creating elevated risks of severe haemorrhagic cystitis and central encephalopathy.",
+      "say": "Oxazaphosphorine alkylators Cyclophosphamide and ifosfamide represent hepatic prodrugs requiring CYP2B6 bioactivation to active 4-hydroxy metabolites. Intracellular cleavage liberates phosphoramide mustard alongside acrolein, a toxic urothelial metabolite directly responsible for chemical haemorrhagic cystitis. Ifosfamide generates substantially greater acrolein and chloroacetaldehyde quantities than cyclophosphamide, creating elevated risks of severe haemorrhagic cystitis and central encephalopathy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prodrug",
+            "label": "Prodrug",
+            "level": 1
+          },
+          {
+            "id": "cyp",
+            "label": "CYP2B6 Oxidation",
+            "level": 2
+          },
+          {
+            "id": "active",
+            "label": "Phosphoramide Mustard",
+            "level": 3
+          },
+          {
+            "id": "acrolein",
+            "label": "Acrolein Toxicity",
+            "level": 3
+          }
+        ],
+        "edges": [
+          [
+            "prodrug",
+            "cyp"
+          ],
+          [
+            "cyp",
+            "active"
+          ],
+          [
+            "cyp",
+            "acrolein"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Protective steps",
-     "points": [
-      "Mesna co-administration",
-      "Renal dose adjustment",
-      "Methylene blue for neurotoxicity",
-      "Hydration"
-     ]
+    {
+      "tx": "Uroprotective **Mesna** sodium 2-mercaptoethanesulfonate specifically prevents bladder toxicity caused by oxazaphosphorine therapy. Following administration, free thiol groups on mesna bind directly to urotoxic **acrolein** within the urinary tract, synthesizing a non-toxic, stable thioether conjugate that is safely excreted. Co-administration of mesna alongside vigorous intravenous hydration is mandatory during ifosfamide therapy and high-dose cyclophosphamide conditioning regimens.",
+      "say": "Uroprotective Mesna sodium 2-mercaptoethanesulfonate specifically prevents bladder toxicity caused by oxazaphosphorine therapy. Following administration, free thiol groups on mesna bind directly to urotoxic acrolein within the urinary tract, synthesizing a non-toxic, stable thioether conjugate that is safely excreted. Co-administration of mesna alongside vigorous intravenous hydration is mandatory during ifosfamide therapy and high-dose cyclophosphamide conditioning regimens.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acrolein Pathogenesis",
+          "points": [
+            "Direct contact urothelial mucosal sloughing",
+            "Severe ulceration and bladder haemorrhage",
+            "Elevated risk of chronic bladder fibrosis",
+            "Not prevented by standard diuretics alone"
+          ]
+        },
+        "right": {
+          "title": "Mesna Neutralization",
+          "points": [
+            "Free sulfhydryl group binds acrolein",
+            "Forms stable, inert thioether conjugate",
+            "Concentrates exclusively in urinary collecting system",
+            "Mandatory with ifosfamide regimens"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Inorganic coordination complex **Cisplatin** enters tumour cells and undergoes intracellular aquation, reacting with nucleophilic DNA bases. Cisplatin covalently links DNA to form intrastrand guanine-guanine adducts that distort the double helix, inducing **DNA double-strand breaks** and triggering p53-dependent apoptotic death. Key dose-limiting toxicities encompass cumulative nephrotoxicity, high emetogenicity, and bilateral high-frequency sensorineural ototoxicity.",
+      "say": "Inorganic coordination complex Cisplatin enters tumour cells and undergoes intracellular aquation, reacting with nucleophilic DNA bases. Cisplatin covalently links DNA to form intrastrand guanine-guanine adducts that distort the double helix, inducing DNA double-strand breaks and triggering p53-dependent apoptotic death. Key dose-limiting toxicities encompass cumulative nephrotoxicity, high emetogenicity, and bilateral high-frequency sensorineural ototoxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Platinum Drug",
+          "Dose-Limiting Toxicity",
+          "Hydration Requirement"
+        ],
+        "rows": [
+          [
+            "Cisplatin",
+            "Nephrotoxicity and ototoxicity",
+            "Aggressive pre- and post-hydration with mannitol"
+          ],
+          [
+            "Carboplatin",
+            "Myelosuppressive thrombocytopenia",
+            "Standard outpatient hydration without forced diuresis"
+          ],
+          [
+            "Oxaliplatin",
+            "Cold-induced peripheral neuropathy",
+            "Avoid cold exposure; no extensive forced diuresis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Second-generation platinum analog **Carboplatin** possesses a cyclobutanedicarboxylate leaving group that slows aquation kinetics compared to cisplatin. While carboplatin produces equivalent cytotoxic platinum-DNA crosslinks, it features substantially lower nephrotoxic, ototoxic, and emetogenic liabilities. However, carboplatin produces significantly greater myelosuppressive **thrombocytopenia**, requiring precise dosing using the Calvert formula based on target area under the concentration-time curve and creatinine clearance.",
+      "say": "Second-generation platinum analog Carboplatin possesses a cyclobutanedicarboxylate leaving group that slows aquation kinetics compared to cisplatin. While carboplatin produces equivalent cytotoxic platinum-DNA crosslinks, it features substantially lower nephrotoxic, ototoxic, and emetogenic liabilities. However, carboplatin produces significantly greater myelosuppressive thrombocytopenia, requiring precise dosing using the Calvert formula based on target area under the concentration-time curve and creatinine clearance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "auc",
+            "label": "Target AUC (4-6)",
+            "level": 1
+          },
+          {
+            "id": "gfr",
+            "label": "GFR Assessment",
+            "level": 2
+          },
+          {
+            "id": "calvert",
+            "label": "Calvert Formula",
+            "level": 3
+          },
+          {
+            "id": "dose",
+            "label": "Total mg Dose",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "auc",
+            "calvert"
+          ],
+          [
+            "gfr",
+            "calvert"
+          ],
+          [
+            "calvert",
+            "dose"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Third-generation platinum agent **Oxaliplatin** features a bulky 1,2-diaminocyclohexane DACH carrier ligand that forms unique platinum-DNA adducts. These bulky lesions effectively evade cellular mismatch repair recognition, preserving activity in mismatch-deficient colorectal tumours. Oxaliplatin uniquely produces an acute, cold-triggered **peripheral sensory neuropathy** manifesting as pharyngolaryngeal dysaesthesia, as well as cumulative sensory axonal polyneuropathy with persistent treatment cycles.",
+      "say": "Third-generation platinum agent Oxaliplatin features a bulky 1,2-diaminocyclohexane DACH carrier ligand that forms unique platinum-DNA adducts. These bulky lesions effectively evade cellular mismatch repair recognition, preserving activity in mismatch-deficient colorectal tumours. Oxaliplatin uniquely produces an acute, cold-triggered peripheral sensory neuropathy manifesting as pharyngolaryngeal dysaesthesia, as well as cumulative sensory axonal polyneuropathy with persistent treatment cycles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Neuropathy",
+          "points": [
+            "Onset within hours of oxaliplatin infusion",
+            "Triggered by cold temperatures or cold drinks",
+            "Transient pharyngolaryngeal dysaesthesia",
+            "Resolves completely over several days"
+          ]
+        },
+        "right": {
+          "title": "Cumulative Neuropathy",
+          "points": [
+            "Develops after cumulative dose > 540-800 mg/m2",
+            "Stocking-glove sensory axonal loss",
+            "Sensory ataxia and functional impairment",
+            "May persist or coast after drug cessation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oral imidazotetrazine **Temozolomide** undergoes spontaneous non-enzymatic physiological hydrolysis at neutral blood pH to active MTIC. Demonstrating outstanding oral bioavailability, temozolomide crosses the **blood-brain barrier** efficiently, establishing itself as the worldwide standard chemotherapy alongside radiotherapy for newly diagnosed high-grade gliomas. Tumour resistance is mediated by O6-methylguanine-DNA methyltransferase MGMT, where promoter hypermethylation predicts superior temozolomide chemosensitivity.",
+      "say": "Oral imidazotetrazine Temozolomide undergoes spontaneous non-enzymatic physiological hydrolysis at neutral blood pH to active MTIC. Demonstrating outstanding oral bioavailability, temozolomide crosses the blood-brain barrier efficiently, establishing itself as the worldwide standard chemotherapy alongside radiotherapy for newly diagnosed high-grade gliomas. Tumour resistance is mediated by O6-methylguanine-DNA methyltransferase MGMT, where promoter hypermethylation predicts superior temozolomide chemosensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oral",
+            "label": "Oral Ingestion",
+            "level": 1
+          },
+          {
+            "id": "mtic",
+            "label": "Spontaneous MTIC",
+            "level": 2
+          },
+          {
+            "id": "bbb",
+            "label": "Crosses BBB",
+            "level": 3
+          },
+          {
+            "id": "dna",
+            "label": "O6-Guanine Methylation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "oral",
+            "mtic"
+          ],
+          [
+            "mtic",
+            "bbb"
+          ],
+          [
+            "bbb",
+            "dna"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bifunctional alkyl sulfonate **Busulfan** covalently crosslinks guanine bases in DNA, exerting potent myeloablative effects on primitive haematopoietic stem cells. Because of this property, busulfan serves as a cornerstone of **conditioning regimens** prior to allogeneic haematopoietic cell transplantation. Critical dose-limiting complications include hepatic sinusoidal obstruction syndrome veno-occlusive disease, seizure activity requiring antiepileptic prophylaxis, and progressive pulmonary interstitial fibrosis.",
+      "say": "Bifunctional alkyl sulfonate Busulfan covalently crosslinks guanine bases in DNA, exerting potent myeloablative effects on primitive haematopoietic stem cells. Because of this property, busulfan serves as a cornerstone of conditioning regimens prior to allogeneic haematopoietic cell transplantation. Critical dose-limiting complications include hepatic sinusoidal obstruction syndrome veno-occlusive disease, seizure activity requiring antiepileptic prophylaxis, and progressive pulmonary interstitial fibrosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Toxicity Target",
+          "Pathology",
+          "Management / Prevention"
+        ],
+        "rows": [
+          [
+            "Hepatic Sinusoids",
+            "Sinusoidal obstruction syndrome (VOD)",
+            "Pharmacokinetic monitoring; defibrotide for treatment"
+          ],
+          [
+            "Central Nervous System",
+            "Myoclonic or generalized tonic-clonic seizures",
+            "Mandatory prophylaxis with levetiracetam or clonazepam"
+          ],
+          [
+            "Pulmonary Interstitium",
+            "Busulfan lung / progressive interstitial fibrosis",
+            "Discontinue drug; high-dose systemic corticosteroid therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Late leukaemogenic risks represent a severe delayed complication of **alkylating agents**. Therapy-related myeloid neoplasms characteristically manifest after a latency of 5 to 7 years following exposure to classical alkylating regimens. These therapy-related leukemias typically present with refractory cytopenias, myelodysplastic pre-phases, complex unbalanced karyotypes, and distinctive deletions involving **chromosome 5 or 7**, demonstrating marked resistance to standard induction chemotherapy.",
+      "say": "Late leukaemogenic risks represent a severe delayed complication of alkylating agents. Therapy-related myeloid neoplasms characteristically manifest after a latency of 5 to 7 years following exposure to classical alkylating regimens. These therapy-related leukemias typically present with refractory cytopenias, myelodysplastic pre-phases, complex unbalanced karyotypes, and distinctive deletions involving chromosome 5 or 7, demonstrating marked resistance to standard induction chemotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Etiologic Drug Class",
+          "Characteristic Latency",
+          "Cytogenetic Profile"
+        ],
+        "rows": [
+          [
+            "Alkylating Agents",
+            "5 to 7 years",
+            "Complex karyotypes; del(5q), -5, del(7q), -7"
+          ],
+          [
+            "Topoisomerase II Inhibitors",
+            "1 to 3 years",
+            "Balanced translocations; 11q23 MLL rearrangements"
+          ],
+          [
+            "Platinum Compounds",
+            "3 to 5 years",
+            "Intermediate risk; multi-chromosome structural aberrations"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Oxaliplatin** avoids CYP450 metabolism and is cleared non-enzymatically. Renal impairment matters: for creatinine clearance below 30 mL/min a reduced starting dose of 65 mg/m2 is advised. Calcium and magnesium infusions may reduce neurotoxicity. Extravasation requires stopping the infusion and removing the line without flushing.",
-   "say": "Oxaliplatin avoids CYP450 metabolism and is cleared non-enzymatically. Renal impairment matters: for creatinine clearance below 30 millilitres per minute a reduced starting dose of 65 milligrams per square metre is advised. Calcium and magnesium infusions may reduce neurotoxicity. Extravasation requires stopping the infusion and removing the line without flushing.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-alkylators-platinum-fig1.webp",
-    "alt": "Diagram illustrating oxaliplatin extravasation management, neurotoxicity prevention with Ca/Mg, and renal dose adjustment.",
-    "caption": "Oxaliplatin: key toxicities and management",
-    "ar": 1.8349
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 17 (Alkylating Agents and Platinum Antitumor Compounds)",
+    "NCCN Pharmacology Guidelines"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_f704c44c8964",
-  "q_1ec6585488e8",
-  "q_5f26bdd8e2ea"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 4,
-  "kbWords": 0,
-  "itemN": 33
- }
 }

@@ -1,138 +1,297 @@
 {
- "v": 1,
- "module": "son-survivorship",
- "subject": "ss-medical-oncology",
- "title": "Survivorship and late effects after cancer treatment",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Survivorship care covers the physical, psychological and financial problems that persist or appear after cancer therapy. Late effects arise months to years after treatment, and **second malignant neoplasms** and **therapy related acute myeloid leukaemia** are key examples. Follow-up should be planned around the specific exposures each patient received, such as radiation fields and alkylating agents or topoisomerase inhibitors, because these determine the risk profile.",
-   "say": "Survivorship care covers the physical, psychological and financial problems that persist or appear after cancer therapy. Late effects arise months to years after treatment. Second malignant neoplasms and therapy related acute myeloid leukaemia are key examples. Follow-up should be planned around the specific exposures each patient received, such as radiation fields and alkylating agents or topoisomerase inhibitors, because these determine the risk profile.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Late effect",
-     "Typical exposure",
-     "Surveillance focus"
-    ],
-    "rows": [
-     [
-      "Second malignancy",
-      "Radiation and alkylators",
-      "Site specific screening"
-     ],
-     [
-      "Therapy related AML",
-      "Alkylators, topoisomerase II inhibitors",
-      "Blood counts and marrow review if cytopenias"
-     ],
-     [
-      "Infertility",
-      "Gonadotoxic chemotherapy, pelvic radiation",
-      "Fertility counselling before treatment"
-     ],
-     [
-      "Cardiotoxicity",
-      "Anthracyclines, chest radiation",
-      "Echocardiography and lipid review"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Radiation effects are classed by timing. **Acute** toxicity hits rapidly renewing intermitotic cells such as skin and mucosa within weeks. **Late** effects appear months to years later and include **radiation induced fibrosis**, which reflects fibroblast activation and vascular damage. Fraction size is the dominant determinant of late injury, so hypofractionation is judged carefully against normal tissue tolerance.",
-   "say": "Radiation effects are classed by timing. Acute toxicity hits rapidly renewing intermitotic cells such as skin and mucosa within weeks. Late effects appear months to years later and include radiation induced fibrosis, which reflects fibroblast activation and vascular damage. Fraction size is the dominant determinant of late injury, so hypofractionation is judged carefully against normal tissue tolerance.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Radiation dose"
-     },
-     {
-      "id": "b",
-      "label": "Acute: weeks"
-     },
-     {
-      "id": "c",
-      "label": "Late: months to years"
-     },
-     {
-      "id": "d",
-      "label": "Fibrosis and vascular injury"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "a",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Several organ specific late effects are high yield. **Radiation pneumonitis** typically appears within months and responds to systemic steroids once infection and progression are excluded. Long-term **cardiotoxicity** after chest radiation, including coronary stenosis, emerges years later. Radiation myelopathy and **radiation necrosis** of the brain are assessed with imaging, and PET helps separate necrosis from recurrence.",
-   "say": "Several organ specific late effects are high yield. Radiation pneumonitis typically appears within months and responds to systemic steroids once infection and progression are excluded. Long-term cardiotoxicity after chest radiation, including coronary stenosis, emerges years later. Radiation myelopathy and radiation necrosis of the brain are assessed with imaging, and PET helps separate necrosis from recurrence.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Early pneumonitis",
-     "points": [
-      "Months after thoracic radiation",
-      "Exclude infection and progression",
-      "Systemic steroids with taper"
-     ]
+  "v": 1,
+  "module": "son-survivorship",
+  "subject": "ss-medical-oncology",
+  "title": "Cancer survivorship and late effects: cardiovascular morbidity, secondary malignancies, bone health, endocrine deficits and surveillance guidelines",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Development of **Second malignant neoplasms** SMN represents a devastating late non-relapse complication among long-term cancer survivors. Driven by prior exposure to ionizing radiation therapy and DNA-damaging **alkylating chemotherapy**, secondary cancers typically manifest with a prolonged latency of 5 to 15 years, requiring lifelong risk-adapted cancer screening and surveillance.",
+      "say": "Development of Second malignant neoplasms SMN represents a devastating late non-relapse complication among long-term cancer survivors. Driven by prior exposure to ionizing radiation therapy and DNA-damaging alkylating chemotherapy, secondary cancers typically manifest with a prolonged latency of 5 to 15 years, requiring lifelong risk-adapted cancer screening and surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prior Oncologic Therapy",
+          "Secondary Cancer Risk",
+          "Characteristic Latency Period"
+        ],
+        "rows": [
+          [
+            "Mantle / Chest Radiotherapy",
+            "Secondary female breast cancer, lung cancer",
+            "10 to 25 years post-irradiation"
+          ],
+          [
+            "Alkylating Agents (MOPP/Cyclo)",
+            "Therapy-related MDS and AML (5q/7q deletions)",
+            "5 to 7 years post-chemotherapy"
+          ],
+          [
+            "Topoisomerase II Inhibitors",
+            "t-AML with balanced 11q23 MLL fusions",
+            "1 to 3 years post-chemotherapy"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Late cardiac injury",
-     "points": [
-      "Years after chest radiation",
-      "Coronary artery stenosis",
-      "Periodic cardiac review"
-     ]
+    {
+      "tx": "Therapy-related acute myeloid leukaemia **t-AML** following **topoisomerase II inhibitors** such as **etoposide** or anthracyclines exhibits distinct clinical and biological characteristics. Manifesting after a short latency of **1 to 3 years** without an antecedent myelodysplastic phase, these leukemias are molecularly characterized by balanced translocations involving the **11q23 MLL** KMT2A gene locus.",
+      "say": "Therapy-related acute myeloid leukaemia t-AML following topoisomerase II inhibitors such as etoposide or anthracyclines exhibits distinct clinical and biological characteristics. Manifesting after a short latency of 1 to 3 years without an antecedent myelodysplastic phase, these leukemias are molecularly characterized by balanced translocations involving the 11q23 MLL KMT2A gene locus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Topo-II Inhibitor t-AML",
+          "points": [
+            "Etiology: Etoposide, doxorubicin, mitoxantrone",
+            "Short latency: 1 to 3 years",
+            "Balanced translocations: 11q23 MLL (KMT2A)",
+            "Presents acutely without prior myelodysplasia"
+          ]
+        },
+        "right": {
+          "title": "Alkylating Agent t-AML",
+          "points": [
+            "Etiology: Cyclophosphamide, melphalan, busulfan",
+            "Longer latency: 5 to 7 years",
+            "Unbalanced deletions: -5/del(5q), -7/del(7q)",
+            "Preceded by prominent refractory myelodysplastic phase"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Female cancer survivors treated with **chest irradiation** before age 30 carry an elevated breast cancer risk comparable to BRCA carriers. International guidelines mandate initiating annual **screening MRI** starting at age 25 or 8 years after radiation completion, detecting early asymptomatic malignancies when curative breast conservation remains viable.",
+      "say": "Female cancer survivors treated with chest irradiation before age 30 carry an elevated breast cancer risk comparable to BRCA carriers. International guidelines mandate initiating annual screening MRI starting at age 25 or 8 years after radiation completion, detecting early asymptomatic malignancies when curative breast conservation remains viable.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rt",
+            "label": "Chest RT < Age 30",
+            "level": 1
+          },
+          {
+            "id": "risk",
+            "label": "High Breast Cancer Risk",
+            "level": 2
+          },
+          {
+            "id": "mri",
+            "label": "Annual Breast MRI at 25",
+            "level": 3
+          },
+          {
+            "id": "early",
+            "label": "Early Curative Detection",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "rt",
+            "risk"
+          ],
+          [
+            "risk",
+            "mri"
+          ],
+          [
+            "mri",
+            "early"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chemotherapy-related cognitive impairment **CRCI**, colloquially termed chemo brain, affects long-term survivors with persistent executive dysfunction, memory deficits, and reduced information processing speed. Clinical management incorporates cognitive rehabilitation therapy, physical exercise, and validated compensatory strategies, while screening for confounding depression, sleep disturbances, and thyroid dysfunction.",
+      "say": "Chemotherapy-related cognitive impairment CRCI, colloquially termed chemo brain, affects long-term survivors with persistent executive dysfunction, memory deficits, and reduced information processing speed. Clinical management incorporates cognitive rehabilitation therapy, physical exercise, and validated compensatory strategies, while screening for confounding depression, sleep disturbances, and thyroid dysfunction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cognitive Domain",
+          "Clinical Deficit in CRCI",
+          "Evidence-Based Intervention"
+        ],
+        "rows": [
+          [
+            "Executive Function",
+            "Impaired multitasking, planning, and mental flexibility",
+            "Cognitive behavioural rehabilitation strategies"
+          ],
+          [
+            "Working Memory",
+            "Difficulty recalling instructions and recent numbers",
+            "Memory compensation apps, structured notes"
+          ],
+          [
+            "Processing Speed",
+            "Sluggish response times during demanding tasks",
+            "Structured aerobic exercise and sleep optimisation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Radiation-induced fibrosis **RIF** is a chronic progressive adverse consequence of radiation therapy driven by persistent TGF-beta signalling, microvascular endarteritis, and excessive extracellular matrix deposition. Characterized by painful subcutaneous induration, joint contractures, and lymphedema, combination therapy with **pentoxifylline** and **vitamin E** partially ameliorates fibrotic stiffness through antioxidant and haemorheological actions.",
+      "say": "Radiation-induced fibrosis RIF is a chronic progressive adverse consequence of radiation therapy driven by persistent TGF-beta signalling, microvascular endarteritis, and excessive extracellular matrix deposition. Characterized by painful subcutaneous induration, joint contractures, and lymphedema, combination therapy with pentoxifylline and vitamin E partially ameliorates fibrotic stiffness through antioxidant and haemorheological actions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rt",
+            "label": "Prior Radiotherapy",
+            "level": 1
+          },
+          {
+            "id": "tgf",
+            "label": "Chronic TGF-beta Drive",
+            "level": 2
+          },
+          {
+            "id": "fib",
+            "label": "Extracellular Matrix Fibrosis",
+            "level": 3
+          },
+          {
+            "id": "pe",
+            "label": "Pentoxifylline + Vitamin E",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "rt",
+            "tgf"
+          ],
+          [
+            "tgf",
+            "fib"
+          ],
+          [
+            "fib",
+            "pe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Structured **exercise oncology** interventions incorporating moderate aerobic activity and resistance training provide substantial physical and psychological benefits for cancer survivors. Regular exercise significantly alleviates cancer-related fatigue, enhances cardiovascular fitness, preserves lean muscle mass, reduces recurrence risk in breast and colon cancers, and substantially improves overall health-related quality of life.",
+      "say": "Structured exercise oncology interventions incorporating moderate aerobic activity and resistance training provide substantial physical and psychological benefits for cancer survivors. Regular exercise significantly alleviates cancer-related fatigue, enhances cardiovascular fitness, preserves lean muscle mass, reduces recurrence risk in breast and colon cancers, and substantially improves overall health-related quality of life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exercise Oncology Benefits",
+          "points": [
+            "Reduces cancer-related fatigue by over 30%",
+            "Improves cardiorespiratory fitness (VO2 max)",
+            "Preserves muscle mass during androgen deprivation",
+            "Decreases recurrence rates in breast and colon cancer"
+          ]
+        },
+        "right": {
+          "title": "Prescription Guidelines",
+          "points": [
+            "150 minutes of moderate aerobic activity weekly",
+            "Two sessions of progressive resistance training",
+            "Pre-exercise evaluation for bone metastases or neuropathy",
+            "Supervised community or home-based programmes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The burden of **financial toxicity** in modern oncology encompasses objective out-of-pocket medical expenditures and subjective psychological distress resulting from cancer therapy. Severe financial toxicity independently correlates with medication non-adherence, delayed surveillance visits, impaired health-related quality of life, and statistically inferior **overall survival**, demanding proactive financial navigation services.",
+      "say": "The burden of financial toxicity in modern oncology encompasses objective out-of-pocket medical expenditures and subjective psychological distress resulting from cancer therapy. Severe financial toxicity independently correlates with medication non-adherence, delayed surveillance visits, impaired health-related quality of life, and statistically inferior overall survival, demanding proactive financial navigation services.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cost",
+            "label": "High Cancer Costs",
+            "level": 1
+          },
+          {
+            "id": "debt",
+            "label": "Financial Depletion",
+            "level": 2
+          },
+          {
+            "id": "nonadh",
+            "label": "Treatment Non-Adherence",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Inferior Overall Survival",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "cost",
+            "debt"
+          ],
+          [
+            "debt",
+            "nonadh"
+          ],
+          [
+            "nonadh",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Delivering comprehensive individualized **survivorship care plans** ensures a coordinated and seamless transition from active tertiary oncology to primary care. Each care plan systematically summarizes prior antineoplastic treatments, potential late organ sequelae, and detailed **surveillance schedules** for recurrence and secondary malignancies, optimizing long-term preventive health.",
+      "say": "Delivering comprehensive individualized survivorship care plans ensures a coordinated and seamless transition from active tertiary oncology to primary care. Each care plan systematically summarizes prior antineoplastic treatments, potential late organ sequelae, and detailed surveillance schedules for recurrence and secondary malignancies, optimizing long-term preventive health.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Survivorship Care Plan Element",
+          "Core Content Included",
+          "Primary Clinical Purpose"
+        ],
+        "rows": [
+          [
+            "Treatment Summary",
+            "Chemotherapy cumulative doses, radiation fields, surgeries",
+            "Identifies organ toxicities and surveillance needs"
+          ],
+          [
+            "Late Effects Surveillance",
+            "Echocardiograms, DXA scans, pulmonary testing",
+            "Enables early detection of cardiotoxicity and osteopenia"
+          ],
+          [
+            "Cancer Screening Schedule",
+            "Mammography, colonoscopy, skin examinations",
+            "Systematic screening for secondary primary cancers"
+          ],
+          [
+            "Health Promotion Guidance",
+            "Diet, exercise, smoking cessation, vaccinations",
+            "Optimizes cardiometabolic health and functional longevity"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Cognitive and quality of life issues need attention. **Chemotherapy related cognitive impairment** affects memory and attention, and structured neuropsychological assessment guides support. Psychosocial distress should be screened at each visit, and **financial toxicity**, such as lost income and treatment costs, is a recognised driver of non-adherence to follow-up. Exercise oncology improves fatigue and functional capacity and is recommended where safe.",
-   "say": "Cognitive and quality of life issues need attention. Chemotherapy related cognitive impairment affects memory and attention, and structured neuropsychological assessment guides support. Psychosocial distress should be screened at each visit. Financial toxicity, such as lost income and treatment costs, is a recognised driver of non-adherence to follow-up. Exercise oncology improves fatigue and functional capacity and is recommended where safe.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-survivorship-fig1.webp",
-    "alt": "Diagram showing cognitive impairment, psychosocial distress, financial toxicity, and exercise oncology as key aspects of cancer survivorship care.",
-    "caption": "Key quality of life and cognitive issues in cancer survivorship",
-    "ar": 1.8349
-   }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 110 (Cancer Survivorship)",
+    "ASCO / NCCN Cancer Survivorship Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_0f2093e9a100",
-  "q_628feb4ea865",
-  "q_90fed664b22c"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 18
- }
 }

@@ -1,0 +1,302 @@
+{
+  "v": 1,
+  "module": "son-prostate-advanced",
+  "subject": "ss-medical-oncology",
+  "title": "Advanced prostate cancer: metastatic castration-sensitive disease, castration-resistant progression, androgen receptor inhibitors and radioligand therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "First-line systemic therapy for metastatic hormone-sensitive prostate cancer **mHSPC** mandates intensifying androgen deprivation therapy with either doublet or triplet combination regimens. Landmark trials demonstrated that adding docetaxel chemotherapy or novel androgen receptor pathway inhibitors **abiraterone**, **enzalutamide**, or **apalutamide** produces dramatic, statistically significant improvements in radiographic progression-free survival and overall survival over ADT monotherapy.",
+      "say": "First-line systemic therapy for metastatic hormone-sensitive prostate cancer mHSPC mandates intensifying androgen deprivation therapy with either doublet or triplet combination regimens. Landmark trials demonstrated that adding docetaxel chemotherapy or novel androgen receptor pathway inhibitors abiraterone, enzalutamide, or apalutamide produces dramatic, statistically significant improvements in radiographic progression-free survival and overall survival over ADT monotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Doublet Partner to ADT",
+          "Landmark Trial",
+          "Hazard Ratio for OS",
+          "Toxicity Considerations"
+        ],
+        "rows": [
+          [
+            "Docetaxel Chemotherapy",
+            "CHAARTED / STAMPEDE",
+            "HR 0.72 in high-volume",
+            "Neutropenia, neuropathy, alopecia; 6 cycles"
+          ],
+          [
+            "Abiraterone Acetate + Pred",
+            "LATITUDE / STAMPEDE",
+            "HR 0.62 in high-risk",
+            "Mineralocorticoid excess, hypertension, transaminitis"
+          ],
+          [
+            "Enzalutamide",
+            "ARCHES / ENZAMET",
+            "HR 0.67 across cohorts",
+            "Fatigue, hypertension, falls, rare seizure risk"
+          ],
+          [
+            "Apalutamide",
+            "TITAN",
+            "HR 0.65 across cohorts",
+            "Skin rash, hypothyroidism, fracture risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients with high-volume mHSPC, the randomized phase III **ARASENS** and **PEACE-1** trials proved that systemic triplet therapy significantly prolongs overall survival. Combining ADT and 6 cycles of docetaxel with novel androgen receptor pathway inhibitors **darolutamide** or abiraterone reduced the hazard of death by over 25%, establishing triplet therapy as the preferred standard of care for fit patients with de novo high-volume metastatic disease.",
+      "say": "In patients with high-volume mHSPC, the randomized phase III ARASENS and PEACE-1 trials proved that systemic triplet therapy significantly prolongs overall survival. Combining ADT and 6 cycles of docetaxel with novel androgen receptor pathway inhibitors darolutamide or abiraterone reduced the hazard of death by over 25%, establishing triplet therapy as the preferred standard of care for fit patients with de novo high-volume metastatic disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ARASENS Triplet",
+          "points": [
+            "ADT + Docetaxel (6 cycles) + Darolutamide",
+            "32% reduction in risk of death (HR 0.68)",
+            "Low blood-brain barrier penetration",
+            "Minimal central nervous system adverse events"
+          ]
+        },
+        "right": {
+          "title": "PEACE-1 Triplet",
+          "points": [
+            "ADT + Docetaxel + Abiraterone + Prednisone",
+            "Statistically significant OS gain in high-volume",
+            "Evaluated prostate radiotherapy in low-volume",
+            "Proves efficacy of dual hormonal and cytotoxic upfront block"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Targeted radioligand therapy with **Lutetium-177-PSMA-617** delivers beta-emitting radiation specifically to prostate-specific membrane antigen-expressing tumour lesions. In the landmark phase III **VISION trial**, adding Lutetium-177-PSMA-617 to standard care in pretreated PSMA-positive metastatic castration-resistant prostate cancer **mCRPC** significantly improved both progression-free survival and overall survival, establishing theranostics in advanced prostate cancer.",
+      "say": "Targeted radioligand therapy with Lutetium-177-PSMA-617 delivers beta-emitting radiation specifically to prostate-specific membrane antigen-expressing tumour lesions. In the landmark phase III VISION trial, adding Lutetium-177-PSMA-617 to standard care in pretreated PSMA-positive metastatic castration-resistant prostate cancer mCRPC significantly improved both progression-free survival and overall survival, establishing theranostics in advanced prostate cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pet",
+            "label": "Ga-68 PSMA-11 PET",
+            "level": 1
+          },
+          {
+            "id": "avid",
+            "label": "PSMA-Avid Lesions",
+            "level": 2
+          },
+          {
+            "id": "lu",
+            "label": "Lu-177-PSMA-617 IV",
+            "level": 3
+          },
+          {
+            "id": "beta",
+            "label": "Beta Radiation Lysis",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "pet",
+            "avid"
+          ],
+          [
+            "avid",
+            "lu"
+          ],
+          [
+            "lu",
+            "beta"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In metastatic castration-resistant prostate cancer harbouring deleterious alterations in homologous recombination repair genes, the phase III **PROfound trial** established the PARP inhibitor **olaparib**. In cohort A, comprising patients with **BRCA1**, **BRCA2**, or **ATM** alterations progressing on enzalutamide or abiraterone, olaparib produced a statistically significant overall survival benefit, proving synthetic lethality in DNA damage-deficient prostate cancer.",
+      "say": "In metastatic castration-resistant prostate cancer harbouring deleterious alterations in homologous recombination repair genes, the phase III PROfound trial established the PARP inhibitor olaparib. In cohort A, comprising patients with BRCA1, BRCA2, or ATM alterations progressing on enzalutamide or abiraterone, olaparib produced a statistically significant overall survival benefit, proving synthetic lethality in DNA damage-deficient prostate cancer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PROfound Cohort A (BRCA/ATM)",
+          "points": [
+            "Patients with BRCA1, BRCA2, or ATM alterations",
+            "Median OS: 19.1 months vs 14.7 months (HR 0.69)",
+            "Radiographic PFS: 7.4 vs 3.6 months",
+            "Establishes mandatory HRR biomarker testing"
+          ]
+        },
+        "right": {
+          "title": "Control Arm (Enzalutamide/Abiraterone)",
+          "points": [
+            "Re-challenge with alternative AR pathway inhibitor",
+            "Minimal response due to cross-resistance",
+            "Rapid disease progression without survival gain",
+            "Reinforces ineffectiveness of sequential ARPI monotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Targeted bone-seeking alpha-emitting radiopharmaceutical **Radium-223** mimics calcium, forming complexes with hydroxyapatite in areas of high osteoblastic bone turnover. In the phase III ALSYMPCA trial, radium-223 significantly prolonged overall survival and delayed symptomatic skeletal-related events in **mCRPC with symptomatic bone metastases** without visceral disease, delivering high-energy linear radiation that induces lethal double-strand DNA breaks.",
+      "say": "Targeted bone-seeking alpha-emitting radiopharmaceutical Radium-223 mimics calcium, forming complexes with hydroxyapatite in areas of high osteoblastic bone turnover. In the phase III ALSYMPCA trial, radium-223 significantly prolonged overall survival and delayed symptomatic skeletal-related events in mCRPC with symptomatic bone metastases without visceral disease, delivering high-energy linear radiation that induces lethal double-strand DNA breaks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bone",
+            "label": "Bone Turnover Site",
+            "level": 1
+          },
+          {
+            "id": "ra",
+            "label": "Radium-223 Uptake",
+            "level": 2
+          },
+          {
+            "id": "alpha",
+            "label": "Alpha Particle Emission",
+            "level": 3
+          },
+          {
+            "id": "marrow",
+            "label": "Low Marrow Toxicity",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "bone",
+            "ra"
+          ],
+          [
+            "ra",
+            "alpha"
+          ],
+          [
+            "alpha",
+            "marrow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Second-generation semi-synthetic taxane **Cabazitaxel** was engineered with diminished affinity for the P-glycoprotein multidrug resistance efflux pump, effectively overcoming docetaxel resistance. In the landmark **CARD trial**, cabazitaxel significantly doubled overall survival and radiographic progression-free survival compared to a second androgen receptor pathway inhibitor in patients with mCRPC previously treated with docetaxel and experiencing progression within 12 months.",
+      "say": "Second-generation semi-synthetic taxane Cabazitaxel was engineered with diminished affinity for the P-glycoprotein multidrug resistance efflux pump, effectively overcoming docetaxel resistance. In the landmark CARD trial, cabazitaxel significantly doubled overall survival and radiographic progression-free survival compared to a second androgen receptor pathway inhibitor in patients with mCRPC previously treated with docetaxel and experiencing progression within 12 months.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CARD Trial Arm",
+          "Median Overall Survival",
+          "Radiographic PFS",
+          "Pivotal Conclusion"
+        ],
+        "rows": [
+          [
+            "Cabazitaxel 25 mg/m2 + G-CSF",
+            "13.6 months",
+            "8.0 months",
+            "Significantly superior survival and pain response"
+          ],
+          [
+            "Alternative ARPI (Abi / Enza)",
+            "11.0 months",
+            "3.7 months",
+            "Severe cross-resistance; minimal clinical efficacy"
+          ],
+          [
+            "Hazard Ratio & Significance",
+            "HR 0.64 (p=0.008)",
+            "HR 0.54 (p<0.001)",
+            "Cabazitaxel preferred over sequential ARPI post-docetaxel"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Biologically, **Castration-resistant prostate cancer** is formally defined as objective disease progression occurring despite castrate levels of circulating serum testosterone **below 50 ng/dL** or 1.7 nmol/L. Progression manifests as three consecutive rising serum PSA values measured at least 1 week apart resulting in two 50% increases over nadir, or objective radiographic appearance of two or more new bone lesions on scintigraphy.",
+      "say": "Biologically, Castration-resistant prostate cancer is formally defined as objective disease progression occurring despite castrate levels of circulating serum testosterone below 50 ng/dL or 1.7 nmol/L. Progression manifests as three consecutive rising serum PSA values measured at least 1 week apart resulting in two 50% increases over nadir, or objective radiographic appearance of two or more new bone lesions on scintigraphy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Castrate Serum Testosterone",
+          "points": [
+            "Testosterone < 50 ng/dL (< 1.7 nmol/L)",
+            "Mandates continuation of GnRH agonist or antagonist",
+            "Prevents testicular testosterone rebound",
+            "Maintained indefinitely throughout all CRPC therapies"
+          ]
+        },
+        "right": {
+          "title": "Criteria for Progression",
+          "points": [
+            "PSA rise: 3 consecutive increases > 50% over nadir",
+            "Radiographic: 2 or more new bone scan lesions",
+            "Soft tissue progression: RECIST 1.1 progression",
+            "Any combination defines castration resistance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Aggressive **treatment-emergent neuroendocrine prostate cancer** **t-NEPC** arises via **lineage plasticity** under intense androgen receptor pressure. Characterized by rapid visceral metastases, lytic bone lesions, and disproportionately low serum PSA, this aggressive variant is molecularly driven by TP53 and RB1 co-loss. Systemic management requires prompt initiation of platinum and etoposide chemotherapy regimens identical to small cell neuroendocrine protocols.",
+      "say": "Aggressive treatment-emergent neuroendocrine prostate cancer t-NEPC arises via lineage plasticity under intense androgen receptor pressure. Characterized by rapid visceral metastases, lytic bone lesions, and disproportionately low serum PSA, this aggressive variant is molecularly driven by TP53 and RB1 co-loss. Systemic management requires prompt initiation of platinum and etoposide chemotherapy regimens identical to small cell neuroendocrine protocols.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "arpi",
+            "label": "Intense AR Inhibition",
+            "level": 1
+          },
+          {
+            "id": "loss",
+            "label": "TP53 & RB1 Loss",
+            "level": 2
+          },
+          {
+            "id": "t_nepc",
+            "label": "Neuroendocrine Switch",
+            "level": 3
+          },
+          {
+            "id": "ep",
+            "label": "Cisplatin + Etoposide",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "arpi",
+            "loss"
+          ],
+          [
+            "loss",
+            "t_nepc"
+          ],
+          [
+            "t_nepc",
+            "ep"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 53 (Cancer of the Prostate)",
+    "NCCN Prostate Cancer Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

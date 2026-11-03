@@ -1,0 +1,288 @@
+{
+  "v": 1,
+  "module": "son-head-neck",
+  "subject": "ss-medical-oncology",
+  "title": "Head and neck squamous cell carcinoma: HPV pathogenesis, multimodal therapy, organ preservation and systemic immunotherapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "**Head and neck squamous** cell carcinomas arise from mucosal surfaces, with tobacco and alcohol driving oral cavity cancers and high-risk HPV16 driving **oropharyngeal cancers**. Keratinizing oral cavity lesions exhibit extensive TP53 mutations, whereas transcriptionally active HPV16 infection drives non-keratinizing oropharyngeal carcinomas arising within lymphoid crypts of the palatine and lingual tonsils.",
+      "say": "Head and neck squamous cell carcinomas arise from mucosal surfaces, with tobacco and alcohol driving oral cavity cancers and high-risk HPV16 driving oropharyngeal cancers. Keratinizing oral cavity lesions exhibit extensive TP53 mutations, whereas transcriptionally active HPV16 infection drives non-keratinizing oropharyngeal carcinomas arising within lymphoid crypts of the palatine and lingual tonsils.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HPV-Negative HNSCC",
+          "points": [
+            "Etiology: Heavy tobacco and alcohol use",
+            "Anatomical sites: Oral cavity, larynx, hypopharynx",
+            "Genetics: TP53 mutations, CDKN2A inactivation",
+            "Poorer response to radiation and chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "HPV-Positive Oropharynx",
+          "points": [
+            "Etiology: High-risk HPV (predominantly type 16)",
+            "Anatomical sites: Tonsil, base of tongue",
+            "Genetics: Wild-type p53; viral E6/E7 oncoproteins",
+            "Exquisite radiosensitivity and superior survival"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "HPV-positive oropharyngeal cancer requires confirmation by strong, diffuse **p16 immunohistochemical** staining. In the **AJCC 8th edition** staging system, p16-positive oropharyngeal carcinoma carries a significantly more favourable prognosis than HPV-negative disease. Patients presenting with multiple cystic cervical lymph nodes maintain early stage designations and superior survival.",
+      "say": "HPV-positive oropharyngeal cancer requires confirmation by strong, diffuse p16 immunohistochemical staining. In the AJCC 8th edition staging system, p16-positive oropharyngeal carcinoma carries a significantly more favourable prognosis than HPV-negative disease. Patients presenting with multiple cystic cervical lymph nodes maintain early stage designations and superior survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "AJCC 8th Staging Parameter",
+          "HPV-Positive (p16+) Oropharynx",
+          "HPV-Negative HNSCC"
+        ],
+        "rows": [
+          [
+            "Stage I Definition",
+            "T1-T2, N0-N1 (ipsilateral nodes <= 6 cm)",
+            "T1, N0, M0 strictly localized"
+          ],
+          [
+            "Stage II Definition",
+            "T1-T2, N2 (contralateral/bilateral <= 6 cm); T3",
+            "T2, N0 or T1-T2 with N1 node"
+          ],
+          [
+            "Stage III Definition",
+            "T4 primary tumour, or node > 6 cm",
+            "T3, N0-N1 or T1-T3 with N2 nodes"
+          ],
+          [
+            "Stage IV Definition",
+            "Distant metastatic disease exclusively (M1)",
+            "Locally advanced T4b or N3 nodal disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive **concurrent chemoradiotherapy** utilizing high-dose **cisplatin at 100 mg/m2** administered every 3 weeks for 3 cycles represents the evidence-based standard of care for organ preservation in locally advanced laryngeal and pharyngeal cancers. High-dose cisplatin acts as a potent radiosensitizer, delivering superior locoregional control and overall survival compared to radiation therapy alone.",
+      "say": "Definitive concurrent chemoradiotherapy utilizing high-dose cisplatin at 100 mg/m2 administered every 3 weeks for 3 cycles represents the evidence-based standard of care for organ preservation in locally advanced laryngeal and pharyngeal cancers. High-dose cisplatin acts as a potent radiosensitizer, delivering superior locoregional control and overall survival compared to radiation therapy alone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "loc",
+            "label": "Locally Advanced Stage",
+            "level": 1
+          },
+          {
+            "id": "imrt",
+            "label": "IMRT 70 Gy Total",
+            "level": 2
+          },
+          {
+            "id": "cis",
+            "label": "Cisplatin 100 mg/m2 q3w",
+            "level": 3
+          },
+          {
+            "id": "pres",
+            "label": "Laryngeal Preservation",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "loc",
+            "imrt"
+          ],
+          [
+            "imrt",
+            "cis"
+          ],
+          [
+            "cis",
+            "pres"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In locally advanced head and neck cancers requiring cytoreduction, induction **TPF chemotherapy** combining docetaxel, cisplatin, and continuous infusional 5-FU provides substantial tumour shrinkage. Delivering 3 cycles of induction TPF prior to definitive chemoradiation significantly enhances larynx preservation rates in advanced laryngeal cancer and reduces distant metastatic failure in locally advanced disease.",
+      "say": "In locally advanced head and neck cancers requiring cytoreduction, induction TPF chemotherapy combining docetaxel, cisplatin, and continuous infusional 5-FU provides substantial tumour shrinkage. Delivering 3 cycles of induction TPF prior to definitive chemoradiation significantly enhances larynx preservation rates in advanced laryngeal cancer and reduces distant metastatic failure in locally advanced disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Induction TPF Protocol",
+          "points": [
+            "Docetaxel 75 mg/m2 day 1",
+            "Cisplatin 75 mg/m2 day 1",
+            "5-Fluorouracil 750 mg/m2/day continuous (days 1-5)",
+            "G-CSF primary prophylaxis mandatory"
+          ]
+        },
+        "right": {
+          "title": "Clinical Efficacy & Risks",
+          "points": [
+            "High objective response rate (> 70%)",
+            "Significantly improves larynx preservation",
+            "Reduces distant metastatic recurrence",
+            "High risk of severe febrile neutropenia and mucositis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In recurrent or metastatic head and neck cancer, the phase III **KEYNOTE-048** trial established **pembrolizumab** as standard first-line therapy. For tumours expressing a **combined positive score** of 1 or higher, pembrolizumab monotherapy significantly prolonged overall survival. Across total cohorts, combining pembrolizumab with platinum and fluorouracil chemotherapy produced statistically superior survival over standard chemotherapy.",
+      "say": "In recurrent or metastatic head and neck cancer, the phase III KEYNOTE-048 trial established pembrolizumab as standard first-line therapy. For tumours expressing a combined positive score of 1 or higher, pembrolizumab monotherapy significantly prolonged overall survival. Across total cohorts, combining pembrolizumab with platinum and fluorouracil chemotherapy produced statistically superior survival over standard chemotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Population",
+          "KEYNOTE-048 Regimen",
+          "Median Overall Survival",
+          "Hazard Ratio & Significance"
+        ],
+        "rows": [
+          [
+            "PD-L1 CPS >= 1",
+            "Pembrolizumab Monotherapy",
+            "12.3 vs 10.3 months",
+            "HR 0.78 (p=0.008)"
+          ],
+          [
+            "PD-L1 CPS >= 20",
+            "Pembrolizumab Monotherapy",
+            "14.9 vs 10.7 months",
+            "HR 0.61 (p=0.0007)"
+          ],
+          [
+            "Total Cohort",
+            "Pembrolizumab + Platinum + 5-FU",
+            "13.0 vs 10.7 months",
+            "HR 0.77 (p=0.003)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients with locally advanced HNSCC who are medically unfit for high-dose cisplatin, the **Bonner regimen** combining definitive radiotherapy with the anti-EGFR antibody **cetuximab** represents a validated alternative. Cetuximab bio-radiotherapy significantly improves locoregional control and overall survival over radiotherapy alone without aggravating cytotoxic renal toxicity or ototoxicity, although acneiform skin rash is common.",
+      "say": "In patients with locally advanced HNSCC who are medically unfit for high-dose cisplatin, the Bonner regimen combining definitive radiotherapy with the anti-EGFR antibody cetuximab represents a validated alternative. Cetuximab bio-radiotherapy significantly improves locoregional control and overall survival over radiotherapy alone without aggravating cytotoxic renal toxicity or ototoxicity, although acneiform skin rash is common.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "unfit",
+            "label": "Cisplatin Ineligible",
+            "level": 1
+          },
+          {
+            "id": "cetux",
+            "label": "Cetuximab Loading",
+            "level": 2
+          },
+          {
+            "id": "rt",
+            "label": "Definitive IMRT",
+            "level": 3
+          },
+          {
+            "id": "os",
+            "label": "Superior OS vs RT",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "unfit",
+            "cetux"
+          ],
+          [
+            "cetux",
+            "rt"
+          ],
+          [
+            "rt",
+            "os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Addressing global accessibility, a landmark Indian randomized phase III trial proved that **low-dose nivolumab** at a flat dose of 20 mg every 3 weeks combined with triple metronomic oral chemotherapy significantly prolonged overall survival in recurrent or metastatic head and neck cancer. Adding low-dose nivolumab to oral methotrexate, celecoxib, and erlotinib doubled median overall survival, establishing a groundbreaking cost-effective immunotherapy strategy.",
+      "say": "Addressing global accessibility, a landmark Indian randomized phase III trial proved that low-dose nivolumab at a flat dose of 20 mg every 3 weeks combined with triple metronomic oral chemotherapy significantly prolonged overall survival in recurrent or metastatic head and neck cancer. Adding low-dose nivolumab to oral methotrexate, celecoxib, and erlotinib doubled median overall survival, establishing a groundbreaking cost-effective immunotherapy strategy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low-Dose Nivolumab + Metronomic",
+          "points": [
+            "Flat-dose nivolumab 20 mg IV every 3 weeks",
+            "Oral methotrexate, celecoxib, and erlotinib",
+            "1-year overall survival rate: 43.4% vs 16.3%",
+            "Over 90% reduction in immunotherapy cost"
+          ]
+        },
+        "right": {
+          "title": "Metronomic Chemotherapy Alone",
+          "points": [
+            "Triple oral metronomic chemotherapy control",
+            "Median overall survival: 6.7 months",
+            "Lower durable disease control rate",
+            "Standard palliative oral option in low-resource care"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following primary surgical resection for advanced oral cavity or laryngeal cancer, **postoperative concurrent chemoradiation** is indicated for high-risk adverse features. Landmark collaborative phase III trials **EORTC 22931** and **RTOG 9501** proved that microscopic positive surgical margins and extracapsular nodal extension represent the two definitive indications where adding concurrent cisplatin to postoperative radiation significantly improves locoregional control and overall survival.",
+      "say": "Following primary surgical resection for advanced oral cavity or laryngeal cancer, postoperative concurrent chemoradiation is indicated for high-risk adverse features. Landmark collaborative phase III trials EORTC 22931 and RTOG 9501 proved that microscopic positive surgical margins and extracapsular nodal extension represent the two definitive indications where adding concurrent cisplatin to postoperative radiation significantly improves locoregional control and overall survival.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Feature",
+          "High-Risk Classification",
+          "Adjuvant Treatment Mandate"
+        ],
+        "rows": [
+          [
+            "Positive Surgical Margin",
+            "Tumour present at inked specimen edge",
+            "Postoperative radiation 66 Gy + Cisplatin 100 mg/m2"
+          ],
+          [
+            "Extranodal Extension (ENE)",
+            "Tumour breach through lymph node capsule",
+            "Postoperative radiation 66 Gy + Cisplatin 100 mg/m2"
+          ],
+          [
+            "Close Margins (< 5 mm)",
+            "Intermediate risk feature",
+            "Postoperative radiotherapy alone (60 Gy)"
+          ],
+          [
+            "Perineural / Lymphovascular",
+            "Intermediate risk features",
+            "Postoperative radiotherapy alone (60 Gy)"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 41 (Head and Neck Cancer)",
+    "NCCN Head and Neck Cancers Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

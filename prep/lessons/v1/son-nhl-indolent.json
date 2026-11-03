@@ -1,0 +1,304 @@
+{
+  "v": 1,
+  "module": "son-nhl-indolent",
+  "subject": "ss-medical-oncology",
+  "title": "Indolent B cell lymphomas: follicular lymphoma, marginal zone lymphoma, grading, staging, watchful waiting and chemoimmunotherapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Follicular lymphoma is the most common indolent non-Hodgkin lymphoma, cytogenetically defined by the hallmark reciprocal translocation **t(14;18)(q32;q21)**. This translocation places the **BCL2** proto-oncogene under the transcriptional control of the immunoglobulin heavy chain IGH enhancer, causing constitutive overexpression of anti-apoptotic BCL2 protein that protects germinal centre B cells from physiological apoptosis.",
+      "say": "Follicular lymphoma is the most common indolent non-Hodgkin lymphoma, cytogenetically defined by the hallmark reciprocal translocation t(14;18)(q32;q21). This translocation places the BCL2 proto-oncogene under the transcriptional control of the immunoglobulin heavy chain IGH enhancer, causing constitutive overexpression of anti-apoptotic BCL2 protein that protects germinal centre B cells from physiological apoptosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1418",
+            "label": "t(14;18) Translocation",
+            "level": 1
+          },
+          {
+            "id": "igh",
+            "label": "IGH Enhancer Juxtaposition",
+            "level": 2
+          },
+          {
+            "id": "bcl2",
+            "label": "BCL2 Overexpression",
+            "level": 3
+          },
+          {
+            "id": "apop",
+            "label": "Apoptosis Resistance",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "t1418",
+            "igh"
+          ],
+          [
+            "igh",
+            "bcl2"
+          ],
+          [
+            "bcl2",
+            "apop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The validated **Follicular Lymphoma International Prognostic Index** FLIPI stratifies patients into low, intermediate, and high risk tiers based on 5 independent adverse clinical variables: age over 60 years, Ann Arbor stage III or IV, haemoglobin **under 12 g/dL**, involvement of **more than 4 nodal areas**, and elevated baseline serum lactate dehydrogenase **LDH**.",
+      "say": "The validated Follicular Lymphoma International Prognostic Index FLIPI stratifies patients into low, intermediate, and high risk tiers based on 5 independent adverse clinical variables: age over 60 years, Ann Arbor stage III or IV, haemoglobin under 12 g/dL, involvement of more than 4 nodal areas, and elevated baseline serum lactate dehydrogenase LDH.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FLIPI Risk Category",
+          "Number of Risk Factors",
+          "10-Year Overall Survival",
+          "Management Implication"
+        ],
+        "rows": [
+          [
+            "Low Risk",
+            "0 or 1 factor",
+            "Approx. 71% 10-year OS",
+            "Excellent prognosis; watch-and-wait if asymptomatic"
+          ],
+          [
+            "Intermediate Risk",
+            "2 factors",
+            "Approx. 51% 10-year OS",
+            "Careful surveillance; treat when symptomatic"
+          ],
+          [
+            "High Risk",
+            "3 or more factors",
+            "Approx. 36% 10-year OS",
+            "Upfront chemoimmunotherapy indicated when GELF met"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients presenting with asymptomatic, low tumour burden follicular lymphoma, an initial **watch-and-wait** surveillance strategy represents the established standard of care. Multiple randomized trials demonstrated that immediate intervention with chemotherapy or immunotherapy does not improve overall survival compared to delaying therapy until symptomatic progression, sparing patients from unnecessary treatment-related toxicities.",
+      "say": "In patients presenting with asymptomatic, low tumour burden follicular lymphoma, an initial watch-and-wait surveillance strategy represents the established standard of care. Multiple randomized trials demonstrated that immediate intervention with chemotherapy or immunotherapy does not improve overall survival compared to delaying therapy until symptomatic progression, sparing patients from unnecessary treatment-related toxicities.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Watch-and-Wait Strategy",
+          "points": [
+            "Indicated in low tumour burden without GELF criteria",
+            "Routine clinical and imaging surveillance every 3-6 months",
+            "Identical long-term overall survival vs immediate treatment",
+            "Completely preserves quality of life and immune health"
+          ]
+        },
+        "right": {
+          "title": "GELF Criteria for Treatment",
+          "points": [
+            "Any nodal mass >= 7 cm or 3 nodes >= 3 cm",
+            "Symptomatic splenomegaly or organ compression",
+            "Systemic B symptoms or malignant effusions",
+            "Cytopenias: Platelets < 100k or ANC < 1,000/uL"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For symptomatic advanced follicular lymphoma, first-line chemoimmunotherapy utilizes **bendamustine plus rituximab** BR or **R-CHOP**. In the landmark German **StiL trial**, bendamustine plus rituximab demonstrated significant progression-free survival superiority over R-CHOP, prolonging median PFS from 31 months to 69 months while exhibiting lower rates of alopecia, neurotoxicity, and infectious complications.",
+      "say": "For symptomatic advanced follicular lymphoma, first-line chemoimmunotherapy utilizes bendamustine plus rituximab BR or R-CHOP. In the landmark German StiL trial, bendamustine plus rituximab demonstrated significant progression-free survival superiority over R-CHOP, prolonging median PFS from 31 months to 69 months while exhibiting lower rates of alopecia, neurotoxicity, and infectious complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Chemoimmunotherapy Regimen",
+          "Median PFS in StiL",
+          "Key Advantages",
+          "Safety Considerations"
+        ],
+        "rows": [
+          [
+            "Bendamustine + Rituximab (BR)",
+            "69.5 months",
+            "Superior PFS; no alopecia or neuropathy",
+            "Lymphopenia; requires TMP-SMX for PJP"
+          ],
+          [
+            "R-CHOP",
+            "31.2 months",
+            "Active in high-grade / transformed disease",
+            "Alopecia, sensory neuropathy, cardiotoxicity"
+          ],
+          [
+            "R-CVP",
+            "Approx. 32 to 34 months",
+            "Avoids anthracyclines in elderly patients",
+            "Inferior progression-free survival compared to BR"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gastric mucosa-associated lymphoid tissue **MALT lymphoma** is an extranodal marginal zone lymphoma etiologically driven by chronic **Helicobacter pylori** infection. Chronic antigenic stimulation produces sustained clonal B-cell expansion. In early-stage disease without translocation alterations, antibiotic eradication therapy against Helicobacter pylori produces complete durable lymphoma remission in over 75% of patients.",
+      "say": "Gastric mucosa-associated lymphoid tissue MALT lymphoma is an extranodal marginal zone lymphoma etiologically driven by chronic Helicobacter pylori infection. Chronic antigenic stimulation produces sustained clonal B-cell expansion. In early-stage disease without translocation alterations, antibiotic eradication therapy against Helicobacter pylori produces complete durable lymphoma remission in over 75% of patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hp",
+            "label": "H. pylori Gastritis",
+            "level": 1
+          },
+          {
+            "id": "malt",
+            "label": "Gastric MALT Lymphoma",
+            "level": 2
+          },
+          {
+            "id": "abx",
+            "label": "Antibiotic Eradication",
+            "level": 3
+          },
+          {
+            "id": "rem",
+            "label": "> 75% Complete Remission",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hp",
+            "malt"
+          ],
+          [
+            "malt",
+            "abx"
+          ],
+          [
+            "abx",
+            "rem"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lymphoplasmacytic lymphoma **Waldenstrom macroglobulinemia** is characterized by bone marrow infiltration by neoplastic B cells and plasma cells producing monoclonal IgM paraprotein. Over 90% of cases carry the signature activating **MYD88 L265P** somatic mutation, which triggers constitutive downstream IRAK-TRAF6 and BTK signalling, making oral BTK inhibitors ibrutinib and zanubrutinib highly effective therapeutic agents.",
+      "say": "Lymphoplasmacytic lymphoma Waldenstrom macroglobulinemia is characterized by bone marrow infiltration by neoplastic B cells and plasma cells producing monoclonal IgM paraprotein. Over 90% of cases carry the signature activating MYD88 L265P somatic mutation, which triggers constitutive downstream IRAK-TRAF6 and BTK signalling, making oral BTK inhibitors ibrutinib and zanubrutinib highly effective therapeutic agents.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MYD88 L265P Mutation",
+          "points": [
+            "Present in > 90% of Waldenstrom cases",
+            "Drives TLR-dependent BTK activation",
+            "High objective response rates to ibrutinib",
+            "Essential diagnostic differentiator from IgM myeloma"
+          ]
+        },
+        "right": {
+          "title": "CXCR4 Mutations (WHIM-Like)",
+          "points": [
+            "Co-occurs with MYD88 in approx. 30% to 40%",
+            "Confers relative resistance to BTK inhibitors",
+            "Delayed time to major response under therapy",
+            "Higher risk of hyperviscosity syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Histological **transformation** of indolent follicular lymphoma into aggressive diffuse large B-cell lymphoma occurs at a rate of 2% to 3% per year. Transformation is clinically heralded by rapid localized lymph node enlargement, new B symptoms, hypercalcaemia, or soaring serum **LDH**. Confirmation requires an immediate excisional biopsy of the most FDG-avid lymph node on PET-CT scan.",
+      "say": "Histological transformation of indolent follicular lymphoma into aggressive diffuse large B-cell lymphoma occurs at a rate of 2% to 3% per year. Transformation is clinically heralded by rapid localized lymph node enlargement, new B symptoms, hypercalcaemia, or soaring serum LDH. Confirmation requires an immediate excisional biopsy of the most FDG-avid lymph node on PET-CT scan.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fl",
+            "label": "Indolent FL",
+            "level": 1
+          },
+          {
+            "id": "signs",
+            "label": "Rapid Growth & Soaring LDH",
+            "level": 2
+          },
+          {
+            "id": "pet",
+            "label": "FDG PET Guided Biopsy",
+            "level": 3
+          },
+          {
+            "id": "dlbcl",
+            "label": "Transformed DLBCL (R-CHOP)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "fl",
+            "signs"
+          ],
+          [
+            "signs",
+            "pet"
+          ],
+          [
+            "pet",
+            "dlbcl"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bispecific CD20/CD3 T-cell engaging antibody **Mosunetuzumab** redirects endogenous cytotoxic T cells to eliminate malignant B cells. Approved for relapsed or refractory follicular lymphoma after two or more prior systemic therapy lines, mosunetuzumab delivers fixed-duration therapy with complete response rates exceeding 60%, providing deep durable remissions without requiring complex cellular therapy manufacturing.",
+      "say": "Bispecific CD20/CD3 T-cell engaging antibody Mosunetuzumab redirects endogenous cytotoxic T cells to eliminate malignant B cells. Approved for relapsed or refractory follicular lymphoma after two or more prior systemic therapy lines, mosunetuzumab delivers fixed-duration therapy with complete response rates exceeding 60%, providing deep durable remissions without requiring complex cellular therapy manufacturing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Novel Immunotherapy",
+          "Target & Mechanism",
+          "Key Trial & Setting",
+          "Response Profile"
+        ],
+        "rows": [
+          [
+            "Mosunetuzumab",
+            "CD20 / CD3 bispecific antibody",
+            "Pivotal Phase II (>= 2 prior lines)",
+            "60% complete response rate; durable remissions"
+          ],
+          [
+            "Epcoritamab",
+            "Subcutaneous CD20/CD3 bispecific",
+            "EPCORE NHL-1 trial in R/R lymphoma",
+            "High overall response; low high-grade CRS"
+          ],
+          [
+            "Axicabtagene Ciloleucel",
+            "Autologous anti-CD19 CAR-T cell",
+            "ZUMA-5 trial in indolent lymphoma",
+            "79% complete response rate in relapsed FL"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 100 (Non-Hodgkin Lymphomas)",
+    "NCCN B-Cell Lymphomas Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

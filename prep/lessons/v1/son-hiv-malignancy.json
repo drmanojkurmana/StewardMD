@@ -1,0 +1,301 @@
+{
+  "v": 1,
+  "module": "son-hiv-malignancy",
+  "subject": "ss-medical-oncology",
+  "title": "HIV-associated malignancies: Kaposi sarcoma, non-Hodgkin lymphoma, cervical cancer and concurrent antiretroviral therapy",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The Centers for Disease Control formally designate three specific neoplasms as definitive **AIDS-defining malignancies**: **Kaposi sarcoma**, high-grade **non-Hodgkin lymphoma** encompassing diffuse large B-cell lymphoma and Burkitt lymphoma, and **invasive cervical cancer**. Developing any of these index malignancies in an HIV-seropositive individual establishes a clinical diagnosis of advanced HIV disease and mandates aggressive oncologic management.",
+      "say": "The Centers for Disease Control formally designate three specific neoplasms as definitive AIDS-defining malignancies: Kaposi sarcoma, high-grade non-Hodgkin lymphoma encompassing diffuse large B-cell lymphoma and Burkitt lymphoma, and invasive cervical cancer. Developing any of these index malignancies in an HIV-seropositive individual establishes a clinical diagnosis of advanced HIV disease and mandates aggressive oncologic management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "AIDS-Defining Malignancy",
+          "Associated Oncogenic Virus",
+          "Clinical Presentation"
+        ],
+        "rows": [
+          [
+            "Kaposi Sarcoma",
+            "Human herpesvirus 8 (HHV-8 / KSHV)",
+            "Violaceous skin, mucosal, and visceral vascular lesions"
+          ],
+          [
+            "Non-Hodgkin Lymphoma",
+            "Epstein-Barr virus (EBV) and HHV-8",
+            "Rapidly progressive extranodal systemic or CNS masses"
+          ],
+          [
+            "Invasive Cervical Cancer",
+            "High-risk HPV types 16 and 18",
+            "Accelerated dysplastic progression under immunosuppression"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endothelial neoplasm **Kaposi sarcoma** is etiologically caused by **human herpesvirus 8** HHV-8. Presenting characteristically with violaceous cutaneous, mucosal, or visceral spindle-cell lesions expressing endothelial marker CD31, definitive histopathology reveals uniform nuclear immunohistochemical positivity for **latency-associated nuclear antigen** **LANA**. Viral latency maintains sustained endothelial transformation and aberrant autocrine angiogenesis.",
+      "say": "Endothelial neoplasm Kaposi sarcoma is caused by human herpesvirus 8 HHV-8. Presenting with violaceous cutaneous, mucosal, or visceral spindle-cell lesions expressing endothelial marker CD31, histopathology reveals uniform nuclear immunohistochemical positivity for latency-associated nuclear antigen LANA. Viral latency maintains sustained endothelial transformation and aberrant autocrine angiogenesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hhv8",
+            "label": "HHV-8 Infection",
+            "level": 1
+          },
+          {
+            "id": "lana",
+            "label": "LANA Expression",
+            "level": 2
+          },
+          {
+            "id": "vegf",
+            "label": "VEGF & Angiogenesis",
+            "level": 3
+          },
+          {
+            "id": "ks",
+            "label": "Violaceous KS Plaques",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hhv8",
+            "lana"
+          ],
+          [
+            "lana",
+            "vegf"
+          ],
+          [
+            "vegf",
+            "ks"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In advanced symptomatic or visceral Kaposi sarcoma, first-line systemic chemotherapy is pegylated **liposomal doxorubicin** administered at 20 mg/m2 every 3 weeks. Liposomal encapsulation prolongs circulation time and targets leaky tumour vasculature while reducing cardiotoxicity. Chemotherapy must always be paired with immediate initiation of combination **antiretroviral therapy**, which restores CD4 immunity and clears oncogenic viremia.",
+      "say": "In advanced symptomatic or visceral Kaposi sarcoma, first-line systemic chemotherapy is pegylated liposomal doxorubicin administered at 20 mg/m2 every 3 weeks. Liposomal encapsulation prolongs circulation time and targets leaky tumour vasculature while reducing cardiotoxicity. Chemotherapy must always be paired with immediate initiation of combination antiretroviral therapy, which restores CD4 immunity and clears oncogenic viremia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Liposomal Doxorubicin",
+          "points": [
+            "First-line chemotherapy standard",
+            "High objective response rates (over 60%)",
+            "Favourable cardiotoxicity and alopecia profile",
+            "Delivered until symptomatic visceral resolution"
+          ]
+        },
+        "right": {
+          "title": "Antiretroviral Therapy (cART)",
+          "points": [
+            "Essential foundation of all HIV oncology care",
+            "Restores CD4+ T-cell immune surveillance",
+            "Suppresses systemic HIV-1 viral replication",
+            "Prevents opportunistic infections during chemotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Extremely rare and aggressive **Primary effusion lymphoma** PEL is an unconventional large B-cell neoplasm etiologically linked to **HHV-8** and frequently coinfected with Epstein-Barr virus EBV. Presenting characteristically as lymphomatous effusions within the pleural, peritoneal, or pericardial cavities without discrete lymphadenopathy or solid tumour masses, the neoplastic cells display plasmablastic morphology and carry a poor prognosis.",
+      "say": "Extremely rare and aggressive Primary effusion lymphoma PEL is an unconventional large B-cell neoplasm etiologically linked to HHV-8 and frequently coinfected with Epstein-Barr virus EBV. Presenting characteristically as lymphomatous effusions within the pleural, peritoneal, or pericardial cavities without discrete lymphadenopathy or solid tumour masses, the neoplastic cells display plasmablastic morphology and carry a poor prognosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Primary Effusion Lymphoma (PEL)",
+          "Standard Cavitary Effusions"
+        ],
+        "rows": [
+          [
+            "Viral Pathogenesis",
+            "Obligate HHV-8; frequent EBV coinfection",
+            "Non-viral or reactive etiology"
+          ],
+          [
+            "Anatomical Distribution",
+            "Liquid effusion without solid tumor masses",
+            "Solid serosal implants and pleural nodules"
+          ],
+          [
+            "Immunophenotypic Profile",
+            "CD45+, CD138+, MUM1+; negative for CD20",
+            "Standard B-cell or T-cell marker expression"
+          ],
+          [
+            "Clinical Prognosis",
+            "Highly aggressive; median survival < 6 months",
+            "Variable depending on primary pathology"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aggressive B-cell malignancy **Plasmablastic lymphoma** strongly associates with HIV infection and Epstein-Barr virus. Characteristically arising in the oral cavity, gastrointestinal tract, and lymph nodes, neoplastic cells demonstrate an immunophenotype resembling terminal plasma cells. They express plasma cell differentiation markers **CD138** and **MUM1** while lacking mature B-cell surface antigens CD20 and surface immunoglobulin, requiring intensive anthracycline-based chemotherapy.",
+      "say": "Aggressive B-cell malignancy Plasmablastic lymphoma strongly associates with HIV infection and Epstein-Barr virus. Characteristically arising in the oral cavity, gastrointestinal tract, and lymph nodes, neoplastic cells demonstrate an immunophenotype resembling terminal plasma cells. They express plasma cell differentiation markers CD138 and MUM1 while lacking mature B-cell surface antigens CD20 and surface immunoglobulin, requiring intensive anthracycline-based chemotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ebv",
+            "label": "EBV / HIV Drivers",
+            "level": 1
+          },
+          {
+            "id": "morph",
+            "label": "Plasmablastic Cytology",
+            "level": 2
+          },
+          {
+            "id": "ihc",
+            "label": "CD138+ / CD20- Negative",
+            "level": 3
+          },
+          {
+            "id": "epoch",
+            "label": "Dose-Adjusted EPOCH",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ebv",
+            "morph"
+          ],
+          [
+            "morph",
+            "ihc"
+          ],
+          [
+            "ihc",
+            "epoch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Curative immunochemotherapy for **HIV-associated** diffuse large B-cell lymphoma delivers dose-adjusted **EPOCH** incorporating **rituximab**, **cyclophosphamide**, **doxorubicin**, **vincristine**, **prednisone**, and **etoposide**. When administered alongside concurrent antiretroviral therapy and primary growth factor support, these intensive regimens achieve outstanding survival without prohibitive treatment-related mortality.",
+      "say": "Curative immunochemotherapy for HIV-associated diffuse large B-cell lymphoma delivers dose-adjusted EPOCH incorporating rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone, and etoposide. When administered alongside concurrent antiretroviral therapy and primary growth factor support, these intensive regimens achieve outstanding survival without prohibitive treatment-related mortality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dose-Adjusted EPOCH-R",
+          "points": [
+            "Etoposide, prednisone, vincristine, cyclophosphamide, doxorubicin",
+            "96-hour continuous infusion targeting steady blood levels",
+            "Superior outcomes in HIV-DLBCL and Burkitt lymphoma",
+            "Pharmacokinetic dose escalation based on nadir counts"
+          ]
+        },
+        "right": {
+          "title": "R-CHOP Chemotherapy",
+          "points": [
+            "Standard 21-day bolus chemotherapy cycle",
+            "Highly curative in immunocompetent DLBCL",
+            "Acceptable alternative when continuous infusion impractical",
+            "Requires mandatory G-CSF growth factor support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oncologists must actively manage complex drug interactions between antineoplastic agents and antiretrovirals. Pharmacokinetic boosters **ritonavir and cobicistat** are potent irreversible **CYP3A4 inhibitors** that dramatically decrease clearance of vinca alkaloids, taxanes, and kinase inhibitors, provoking neurotoxicity and profound myelosuppression. Preferred antiretroviral regimens during antineoplastic therapy utilize unboosted integrase strand transfer inhibitors like dolutegravir or bictegravir.",
+      "say": "Oncologists must actively manage complex drug interactions between antineoplastic agents and antiretrovirals. Pharmacokinetic boosters ritonavir and cobicistat are potent irreversible CYP3A4 inhibitors that dramatically decrease clearance of vinca alkaloids, taxanes, and kinase inhibitors, provoking neurotoxicity and profound myelosuppression. Preferred antiretroviral regimens during antineoplastic therapy utilize unboosted integrase strand transfer inhibitors like dolutegravir or bictegravir.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antiretroviral Class",
+          "Enzyme Effect",
+          "Interacting Chemotherapy",
+          "Clinical Management"
+        ],
+        "rows": [
+          [
+            "Ritonavir / Cobicistat",
+            "Potent CYP3A4 inhibition",
+            "Vincristine, paclitaxel, TKIs",
+            "Severe paralytic ileus; switch to integrase inhibitor"
+          ],
+          [
+            "Non-Nucleoside RTIs",
+            "CYP3A4 induction (efavirenz)",
+            "Irinotecan, methadone, TKIs",
+            "Subtherapeutic antineoplastic levels; monitor doses"
+          ],
+          [
+            "Integrase Inhibitors",
+            "Unboosted (dolutegravir/bictegravir)",
+            "No CYP3A4 interference",
+            "Preferred first-line cART backbone in cancer patients"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The incidence of HPV-driven **anal squamous cell carcinoma** is increased up to 80-fold among HIV-infected individuals, driven by persistent oncogenic HPV infection and impaired mucosal cell-mediated immunity. Clinical guidelines recommend routine digital anorectal examination and **high-resolution anoscopy** screening with biopsy of suspicious acetowhite lesions to detect and ablate high-grade squamous intraepithelial lesions before invasive carcinoma develops.",
+      "say": "The incidence of HPV-driven anal squamous cell carcinoma is increased up to 80-fold among HIV-infected individuals, driven by persistent oncogenic HPV infection and impaired mucosal cell-mediated immunity. Clinical guidelines recommend routine digital anorectal examination and high-resolution anoscopy screening with biopsy of suspicious acetowhite lesions to detect and ablate high-grade squamous intraepithelial lesions before invasive carcinoma develops.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hiv",
+            "label": "HIV Infection + HPV",
+            "level": 1
+          },
+          {
+            "id": "dare",
+            "label": "Digital Anorectal Exam",
+            "level": 2
+          },
+          {
+            "id": "hra",
+            "label": "High-Resolution Anoscopy",
+            "level": 3
+          },
+          {
+            "id": "ablat",
+            "label": "Ablate HSIL Lesions",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "hiv",
+            "dare"
+          ],
+          [
+            "dare",
+            "hra"
+          ],
+          [
+            "hra",
+            "ablat"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 87 (Cancer in the Immunocompromised Host and HIV-Associated Malignancies)",
+    "NCCN Cancer in People with HIV Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

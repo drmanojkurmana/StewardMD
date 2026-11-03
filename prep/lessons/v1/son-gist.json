@@ -1,0 +1,303 @@
+{
+  "v": 1,
+  "module": "son-gist",
+  "subject": "ss-medical-oncology",
+  "title": "Gastrointestinal stromal tumour: KIT and PDGFRA genomics, risk stratification, imatinib therapy and resistance management",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Gastrointestinal stromal tumours GIST represent the most common mesenchymal neoplasms of the digestive tract, arising from pacemaker **interstitial cells of Cajal**. Diagnosis is confirmed by uniform immunohistochemical positivity for receptor tyrosine kinase **KIT CD117** and **DOG1** anoctamin-1. True GIST tumours must be carefully distinguished histologically from smooth muscle leiomyomas, schwannomas, and solitary fibrous tumours.",
+      "say": "Gastrointestinal stromal tumours GIST represent the most common mesenchymal neoplasms of the digestive tract, arising from pacemaker interstitial cells of Cajal. Diagnosis is confirmed by uniform immunohistochemical positivity for receptor tyrosine kinase KIT CD117 and DOG1 anoctamin-1. True GIST tumours must be carefully distinguished histologically from smooth muscle leiomyomas, schwannomas, and solitary fibrous tumours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Immunohistochemical Marker",
+          "Sensitivity in GIST",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "KIT (CD117)",
+            "95% positive",
+            "Transmembrane receptor tyrosine kinase; diagnostic hallmark"
+          ],
+          [
+            "DOG1 (Anoctamin-1)",
+            "98% positive",
+            "Calcium-dependent chloride channel; positive in CD117-negative GIST"
+          ],
+          [
+            "CD34",
+            "60% to 70% positive",
+            "Mesenchymal progenitor marker; non-specific"
+          ],
+          [
+            "Desmin & S100",
+            "Rarely positive (< 2%)",
+            "Negative in classical GIST; rules out leiomyoma / schwannoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Activating **KIT exon 11** mutations involving in-frame deletions or point substitutions within the juxtamembrane domain represent the primary driver alteration in approximately 70% of GISTs. Tumours harbouring exon 11 mutations exhibit exquisite sensitivity to the competitive tyrosine kinase inhibitor **imatinib** mesylate at standard doses of 400 mg daily, achieving objective response rates exceeding 80%.",
+      "say": "Activating KIT exon 11 mutations involving in-frame deletions or point substitutions within the juxtamembrane domain represent the primary driver alteration in approximately 70% of GISTs. Tumours harbouring exon 11 mutations exhibit exquisite sensitivity to the competitive tyrosine kinase inhibitor imatinib mesylate at standard doses of 400 mg daily, achieving objective response rates exceeding 80%.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "exon11",
+            "label": "KIT Exon 11 Mutation",
+            "level": 1
+          },
+          {
+            "id": "ima",
+            "label": "Imatinib 400 mg Daily",
+            "level": 2
+          },
+          {
+            "id": "block",
+            "label": "ATP-Pocket Inhibition",
+            "level": 3
+          },
+          {
+            "id": "resp",
+            "label": "> 80% Response Rate",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "exon11",
+            "ima"
+          ],
+          [
+            "ima",
+            "block"
+          ],
+          [
+            "block",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast, activating **PDGFRA exon 18 D842V** point mutations confer primary intrinsic resistance to imatinib, sunitinib, and regorafenib. In the landmark phase I/II **NAVIGATOR trial**, the selective type I kinase inhibitor **avapritinib** produced an unprecedented 95% objective response rate in advanced D842V-mutant GIST, establishing avapritinib as the undisputed targeted standard of care for this unique genomic subset.",
+      "say": "In contrast, activating PDGFRA exon 18 D842V point mutations confer primary intrinsic resistance to imatinib, sunitinib, and regorafenib. In the landmark phase I/II NAVIGATOR trial, the selective type I kinase inhibitor avapritinib produced an unprecedented 95% objective response rate in advanced D842V-mutant GIST, establishing avapritinib as the undisputed targeted standard of care for this unique genomic subset.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PDGFRA D842V Mutation",
+          "points": [
+            "Steric hindrance in kinase activation loop",
+            "Complete clinical resistance to imatinib",
+            "Historically poor response to sunitinib/regorafenib",
+            "Frequently situated in gastric primary tumours"
+          ]
+        },
+        "right": {
+          "title": "Avapritinib Therapy (NAVIGATOR)",
+          "points": [
+            "Selective active-conformation kinase inhibitor",
+            "95% confirmed objective response rate in D842V",
+            "FDA-approved first-line for D842V GIST",
+            "Requires monitoring for cognitive impairment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In completely resected primary GIST exhibiting high-risk features, the landmark randomized phase III **SSGXVIII/AIO trial** proved that **adjuvant imatinib** for 3 years significantly improves both recurrence-free survival and overall survival compared to 1 year of treatment. Five-year overall survival rose from 82% with 1 year of imatinib to 92% with 3 years, establishing 36 months as the global standard.",
+      "say": "In completely resected primary GIST exhibiting high-risk features, the landmark randomized phase III SSGXVIII/AIO trial proved that adjuvant imatinib for 3 years significantly improves both recurrence-free survival and overall survival compared to 1 year of treatment. Five-year overall survival rose from 82% with 1 year of imatinib to 92% with 3 years, establishing 36 months as the global standard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "3 Years Adjuvant Imatinib",
+          "points": [
+            "SSGXVIII/AIO trial experimental arm",
+            "5-year recurrence-free survival: 65.6%",
+            "5-year overall survival: 92.0%",
+            "Standard of care for high-risk resected GIST"
+          ]
+        },
+        "right": {
+          "title": "1 Year Adjuvant Imatinib",
+          "points": [
+            "Historical control arm duration",
+            "5-year recurrence-free survival: 47.9%",
+            "5-year overall survival: 81.7%",
+            "Higher rate of early post-treatment relapse"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For patients developing secondary resistance or intolerance to imatinib, the oral multi-targeted tyrosine kinase inhibitor **Sunitinib** represents the established second-line standard of care. Sunitinib inhibits KIT, PDGFRA, and VEGFR receptors, demonstrating substantial clinical benefit against secondary mutations within the ATP-binding pocket encoded by KIT exons 13 and 14.",
+      "say": "For patients developing secondary resistance or intolerance to imatinib, the oral multi-targeted tyrosine kinase inhibitor Sunitinib represents the established second-line standard of care. Sunitinib inhibits KIT, PDGFRA, and VEGFR receptors, demonstrating substantial clinical benefit against secondary mutations within the ATP-binding pocket encoded by KIT exons 13 and 14.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prog",
+            "label": "Imatinib Failure",
+            "level": 1
+          },
+          {
+            "id": "suni",
+            "label": "Sunitinib 50 mg Daily",
+            "level": 2
+          },
+          {
+            "id": "sched",
+            "label": "4 Weeks On / 2 Off",
+            "level": 3
+          },
+          {
+            "id": "pfs",
+            "label": "Overcomes Exon 13/14",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "prog",
+            "suni"
+          ],
+          [
+            "suni",
+            "sched"
+          ],
+          [
+            "sched",
+            "pfs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Approved as fourth-line therapy in the pivotal **INVICTUS trial**, **Ripretinib** is a novel dual switch-pocket kinase inhibitor. Ripretinib binds both the kinase switch pocket and activation loop, locking the receptor in an inactive conformation. In advanced GIST refractory to imatinib, sunitinib, and regorafenib, ripretinib significantly prolonged progression-free survival while demonstrating a favourable safety profile.",
+      "say": "Approved as fourth-line therapy in the pivotal INVICTUS trial, Ripretinib is a novel dual switch-pocket kinase inhibitor. Ripretinib binds both the kinase switch pocket and activation loop, locking the receptor in an inactive conformation. In advanced GIST refractory to imatinib, sunitinib, and regorafenib, ripretinib significantly prolonged progression-free survival while demonstrating a favourable safety profile.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Line",
+          "Approved Targeted Agent",
+          "Target Spectrum / Mechanism",
+          "Key Tolerability Note"
+        ],
+        "rows": [
+          [
+            "First Line",
+            "Imatinib 400 mg daily",
+            "Type II competitive KIT/PDGFRA inhibitor",
+            "Periorbital oedema, nausea, muscle cramps"
+          ],
+          [
+            "Second Line",
+            "Sunitinib 50 mg daily (4/2)",
+            "Multi-targeted TKI (KIT/VEGFR)",
+            "Hypertension, hand-foot syndrome, fatigue"
+          ],
+          [
+            "Third Line",
+            "Regorafenib 160 mg daily (3/1)",
+            "Broad spectrum multi-kinase inhibitor",
+            "Hand-foot skin reaction, dysphonia, mucositis"
+          ],
+          [
+            "Fourth Line",
+            "Ripretinib 150 mg daily",
+            "Dual switch-pocket inhibitor (INVICTUS)",
+            "Alopecia, myalgia, fatigue; well tolerated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Risk stratification in localized GIST utilizes the **modified NIH consensus criteria** or Armed Forces Institute of Pathology Miettinen tables. Recurrence risk is calculated from three primary parameters: anatomical tumour site, tumour size, and **mitotic rate** per 5 mm2 or 50 high-power fields. Gastric GISTs produce substantially lower malignant potential than small bowel or rectal tumours of identical size and mitotic index.",
+      "say": "Risk stratification in localized GIST utilizes the modified NIH consensus criteria or Armed Forces Institute of Pathology Miettinen tables. Recurrence risk is calculated from three primary parameters: anatomical tumour site, tumour size, and mitotic rate per 5 mm2 or 50 high-power fields. Gastric GISTs produce substantially lower malignant potential than small bowel or rectal tumours of identical size and mitotic index.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low-Risk Criteria",
+          "points": [
+            "Gastric location with size < 5 cm",
+            "Mitotic index <= 5 per 50 HPFs",
+            "Very low risk of metastatic recurrence",
+            "Observation after R0 surgery without adjuvant TKI"
+          ]
+        },
+        "right": {
+          "title": "High-Risk Criteria",
+          "points": [
+            "Tumour size > 10 cm regardless of site",
+            "Mitotic index > 10 per 50 HPFs",
+            "Tumour rupture before or during surgery",
+            "Mandates 3 years of adjuvant imatinib"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Succinate dehydrogenase-deficient **SDH-deficient GIST** arises in young patients and characteristically lacks KIT or PDGFRA kinase mutations. Arising in familial Carney-Stratakis syndrome or non-hereditary **Carney triad**, tumours present with multinodular gastric involvement, prominent lymph node metastases, and immunohistochemical loss of **SDHB** expression, displaying inherent clinical resistance to standard imatinib therapy.",
+      "say": "Succinate dehydrogenase-deficient SDH-deficient GIST arises in young patients and characteristically lacks KIT or PDGFRA kinase mutations. Arising in familial Carney-Stratakis syndrome or non-hereditary Carney triad, tumours present with multinodular gastric involvement, prominent lymph node metastases, and immunohistochemical loss of SDHB expression, displaying inherent clinical resistance to standard imatinib therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sdh",
+            "label": "SDH Mutation / Loss",
+            "level": 1
+          },
+          {
+            "id": "sdhb",
+            "label": "Loss of SDHB Staining",
+            "level": 2
+          },
+          {
+            "id": "multi",
+            "label": "Multinodular Gastric",
+            "level": 3
+          },
+          {
+            "id": "res",
+            "label": "Imatinib Resistance",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "sdh",
+            "sdhb"
+          ],
+          [
+            "sdhb",
+            "multi"
+          ],
+          [
+            "multi",
+            "res"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 49 (Gastrointestinal Stromal Tumors)",
+    "NCCN Soft Tissue Sarcoma / GIST Guidelines 2024"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-c",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
