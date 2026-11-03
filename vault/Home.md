@@ -39,6 +39,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[RadioAnatome]] — cross-sectional CT/MRI atlas · [[RadioAnatome 3D]] — BodyParts3D 3D layer on the same ontology
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
+- [[Image Library]] — one central bank of every captioned image in the app (flag `smd_imglib`, default ON); opened from the Knowledge Library, PrepNucleus and Ophthalmós Learn
 - [[Ophthalmós]] — eye-imaging clinic trainer (OCT, disc, DR grading, ROP, case conference); flag
   `smd_ophthalmos` default ON (kill switch "0"): clinics, 3,035-question bank, notes, retinoscopy and neuro simulators, calculators; images on R2; content ai_drafted pending sign-off
 - [[Tokós]]: OBGYN CTG reading trainer (12 real CTU-UHB traces, FIGO checklist, calipers); flag `smd_tokos` default OFF; content ai_drafted pending obstetrician review

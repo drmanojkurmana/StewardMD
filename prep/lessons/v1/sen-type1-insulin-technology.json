@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "sen-type1-insulin-technology",
+ "title": "Type 1 diabetes, insulin therapy and technology",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Physiological intensive insulin replacement in type 1 diabetes requires a multiple daily injection regimen combining once-daily **basal insulin** with prandial **bolus insulin** before each meal. The typical total daily dose ranges between 0.4 and 1.0 units/kg/day. During acute intercurrent illness, patients must strictly adhere to sick-day management rules: basal insulin is never stopped, blood **ketones** are monitored frequently, and supplemental rapid-acting insulin is administered alongside fluid and electrolyte hydration.",
+   "say": "Physiological insulin management in type 1 diabetes provides basal insulin along with premeal prandial boluses. A typical starting total daily dose is zero point four to one unit per kilogram. During sick days, basal insulin must never be discontinued, blood ketones must be tracked closely, and supplemental corrective insulin should be administered.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-mellitus-fig2.webp",
+    "alt": "Diabetes Mellitus Insulin Pathophysiology",
+    "caption": "Autoimmune beta-cell destruction and metabolic insulin dependence. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "The landmark Diabetes Control and Complications Trial (**DCCT**) established that intensive insulin therapy significantly reduced the onset and progression of retinopathy, nephropathy, and neuropathy compared to conventional therapy in type 1 diabetes. Long-term follow-up in the Epidemiology of Diabetes Interventions and Complications (**EDIC**) study demonstrated persistent microvascular and cardiovascular benefits despite converging glycaemic control, termed the metabolic **legacy effect**.",
+   "say": "The DCCT proved that intensive glycemic control prevents microvascular complications in type 1 diabetes. Long-term follow-up in the EDIC trial revealed that these protective benefits persisted for decades despite converging HbA1c levels, establishing the clinical concept of metabolic legacy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DCCT Intensive Therapy",
+     "points": [
+      "Targeted HbA1c near 7% (53 mmol/mol)",
+      "76% reduction in diabetic retinopathy risk",
+      "54% reduction in microalbuminuria development",
+      "Three-fold higher rate of severe hypoglycemia"
+     ]
+    },
+    "right": {
+     "title": "EDIC Legacy Effect",
+     "points": [
+      "Follow-up cohort study over two decades",
+      "Persistent reduction in end-stage renal disease",
+      "Significant 57% reduction in nonfatal MI and stroke",
+      "Demonstrates early glycemic control pays long-term dividends"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Continuous glucose monitoring (**continuous glucose monitoring**) metrics provide standardized assessment of glycaemic control beyond glycated hemoglobin. For nonpregnant adults with type 1 diabetes, international consensus establishes key targets: **time in range** (70 to 180 mg/dL) greater than 70% of readings, time below 70 mg/dL under 4%, and severe hypoglycemia below 54 mg/dL under 1%, while time above 180 mg/dL should remain under 25%.",
+   "say": "Continuous glucose monitoring metrics guide precision insulin adjustments. In nonpregnant adults with type 1 diabetes, consensus guidelines recommend achieving time in range between 70 and 180 mg/dL for over seventy percent of readings, keeping time below 70 mg/dL under four percent, and time below 54 mg/dL under one percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CGM Metric Category",
+     "Glycaemic Glucose Range",
+     "Target Percentage",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Time in Range (TIR)",
+      "70 to 180 mg/dL (3.9 to 10.0 mmol/L)",
+      ">70% of day (>17 hours)",
+      "Prevents microvascular organ damage"
+     ],
+     [
+      "Time Below Range (TBR Level 1)",
+      "54 to 69 mg/dL (3.0 to 3.8 mmol/L)",
+      "<4% of day (<1 hour)",
+      "Minimizes biochemical hypoglycemia"
+     ],
+     [
+      "Time Below Range (TBR Level 2)",
+      "<54 mg/dL (<3.0 mmol/L)",
+      "<1% of day (<15 minutes)",
+      "Prevents neuroglycopenic coma & seizures"
+     ],
+     [
+      "Time Above Range (TAR)",
+      ">180 mg/dL (>10.0 mmol/L)",
+      "<25% of day (<6 hours)",
+      "Minimizes osmotic diuresis and fatigue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultra-long-acting **insulin degludec** forms soluble multi-hexamer chains upon subcutaneous injection, producing a flat, peakless pharmacokinetic profile with a half-life exceeding 25 hours and therapeutic duration beyond 42 hours. Once-weekly basal **insulin icodec** contains an albumin-binding fatty diacid modification evaluated in the ONWARDS trials. Rapid-acting prandial analogues such as **lispro**, aspart, and glulisine feature rapid monomeric dissociation, controlling postprandial glucose excursions.",
+   "say": "Ultra-long-acting insulin degludec forms soluble multi-hexamers providing peakless action exceeding forty-two hours. Once-weekly insulin icodec utilizes reversible albumin binding for sustained basal delivery. Rapid-acting analogues like insulin lispro dissociate instantly into monomers to cover postprandial glycemic excursions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/insulin-types-regimens-dka-hypoglycaemia-fig1.webp",
+    "alt": "Insulin Action and Regimens",
+    "caption": "Pharmacokinetic profiles of basal and rapid-acting insulin analogues. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Advanced **automated insulin delivery** systems link continuous glucose monitors with subcutaneous infusion pumps through predictive mathematical algorithms. These **hybrid closed loop** systems automatically modulate basal delivery and administer micro-boluses in real time to counteract nocturnal hypoglycemia and daytime excursions. However, because subcutaneous insulin absorption exhibits inherent lag, precise mealtime **carbohydrate counting** and meal announcements remain necessary in hybrid systems to prevent postprandial hyperglycaemia.",
+   "say": "Automated insulin delivery systems connect continuous glucose sensors to insulin pumps using intelligent predictive algorithms. These hybrid closed-loop systems automatically titrate basal insulin and mitigate hypoglycemia, though mealtime carbohydrate counting remains necessary to optimize postprandial glycemic excursions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Automated Closed-Loop",
+     "points": [
+      "Dynamic automated basal modulation every 5 minutes",
+      "Predictive low-glucose insulin suspension",
+      "Automated micro-bolus correction of hyperglycemia",
+      "Substantially increases overnight time in range"
+     ]
+    },
+    "right": {
+     "title": "User Meal Responsibilities",
+     "points": [
+      "Accurate prandial carbohydrate estimation",
+      "Manual bolus announcement 10 to 15 minutes before eating",
+      "Accounting for fat and protein content",
+      "Routine site maintenance and cannula changes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Shortly after diagnosis and metabolic stabilization in type 1 diabetes, many patients experience a transient **honeymoon phase** characterized by temporary recovery of endogenous beta-cell secretory capacity. During this period, exogenous insulin requirements decline significantly, occasionally below 0.2 to 0.5 units/kg/day. However, clinicians and families must be counselled that complete withdrawal of insulin during the honeymoon phase risks precipitating sudden **ketoacidosis**, and small maintenance doses should be continued.",
+   "say": "Following initial treatment of type 1 diabetes, a temporary honeymoon phase often occurs as residual beta cells transiently recover function. Insulin requirements drop markedly during this window. However, insulin must never be discontinued completely, as stopping therapy triggers rebound ketoacidosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diagnosis",
+      "label": "Initial Presentation & DKA"
+     },
+     {
+      "id": "restoration",
+      "label": "Glycemic Restoration & Rest"
+     },
+     {
+      "id": "honeymoon",
+      "label": "Honeymoon Phase (Low Dose)"
+     },
+     {
+      "id": "exhaustion",
+      "label": "Complete Beta-Cell Loss"
+     }
+    ],
+    "edges": [
+     [
+      "diagnosis",
+      "restoration",
+      "intensive insulin"
+     ],
+     [
+      "restoration",
+      "honeymoon",
+      "transient beta recovery"
+     ],
+     [
+      "honeymoon",
+      "exhaustion",
+      "autoimmune progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Allogeneic intraportal **islet transplantation** represents a validated therapeutic option for adult patients with brittle type 1 diabetes experiencing recurrent severe hypoglycemia and persistent **hypoglycemia unawareness** despite optimal technology. Successful transplantation restores physiological insulin secretion, improves glycaemic awareness, and eliminates severe hypoglycaemic episodes. However, because indefinite immunosuppressive therapy is mandatory, islet transplantation is reserved for refractory cases and patients undergoing kidney transplantation.",
+   "say": "Intraportal islet transplantation is an established option for adults with type 1 diabetes suffering from severe hypoglycemia unawareness despite advanced diabetes technology. Islet grafting restores endogenous insulin secretion and awareness, but mandates lifelong immunosuppression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Islet Cell Transplantation",
+     "points": [
+      "Purified donor islets infused into portal vein",
+      "Restores endogenous C-peptide and glucagon counter-regulation",
+      "Eliminates severe hypoglycemia unawareness",
+      "Requires lifelong systemic immunosuppression"
+     ]
+    },
+    "right": {
+     "title": "Advanced AID Pump Technology",
+     "points": [
+      "Subcutaneous infusion pump with CGM integration",
+      "Avoids surgical risks and immunosuppressant toxicity",
+      "Reduces nocturnal hypoglycemia by over 50%",
+      "May still fail in patients with profound hypoglycemia blindness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic injection into localized subcutaneous tissue causes localized **lipodystrophy**, presenting either as firm hypertrophic adipocyte swelling or disfiguring lipoatrophy. Repeatedly administering injections into hypertrophic nodules causes erratic, delayed insulin absorption, predisposing to unpredictable postprandial spikes alternating with unexplained late hypoglycemia. Patients must systematically rotate **injection sites** across the abdomen, outer thighs, buttocks, and arms to preserve consistent bioavailability.",
+   "say": "Injecting repeatedly into the same cutaneous site causes subcutaneous lipodystrophy, presenting as hypertrophic fatty lumps. Insulin injected into these areas is absorbed erratically, causing unpredictable glycemic fluctuations and unexplained hypoglycemia. Patients must systematically rotate their injection sites.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subcutaneous Complication",
+     "Underlying Pathophysiology",
+     "Effect on Insulin Absorption",
+     "Preventive Strategy"
+    ],
+    "rows": [
+     [
+      "Lipohypertrophy",
+      "Local lipogenic action of insulin on adipocytes",
+      "Erratic, delayed, and blunted absorption",
+      "Systematic rotation grid across anatomical sites"
+     ],
+     [
+      "Lipoatrophy",
+      "Immune complex-mediated adipocyte apoptosis",
+      "Rapid or erratic subcutaneous uptake",
+      "Switch to purified recombinant human analogues"
+     ]
+    ]
+   }
+  }
+ ]
+}

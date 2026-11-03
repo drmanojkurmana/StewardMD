@@ -245,3 +245,7 @@ every tag must carry the same `?v=oph14`). Do not edit them here. The iPad fixes
 "Skip patient" shows; centred answers and Next button in iPad portrait) live in `tablet-fit.css`; upstream them to the
 module repo, then drop the overrides.
 
+
+## Image Library (2026-11-04)
+
+The Learn home carries an "Image Library" row (`ophthalmos-learn.js` `imglibRow`, act `lnimglib`) opening the shared central image bank ([[Image Library]], flag `smd_imglib` default ON) filtered to Eye, including the Learn media library (`ophthalmos/learn/media/credits.json`) and the Eye atlas. StewardMD-side edit: the hash in `test/ophthalmos-sync.json` was regenerated; port the same change to the module repo before the next sync.

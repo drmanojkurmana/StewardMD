@@ -15,6 +15,7 @@
   /* ---------- Learn chrome, English and Hindi ---------- */
   var STR = {
     learn: { en: "Learn", hi: "सीखें" }, test: { en: "Test", hi: "टेस्ट" }, mode: { en: "Learn or test", hi: "सीखें या टेस्ट" },
+    imgLib: { en: "Image Library", hi: "Image Library" }, imgLibSub: { en: "Every eye image in the app, with its caption", hi: "ऐप की हर आँख की image, caption के साथ" },
     close: { en: "Close Ophthalmós", hi: "Ophthalmós बंद करें" }, back: { en: "Back", hi: "वापस" },
     homeSub: { en: "One idea at a time", hi: "एक समय में एक बात" },
     langSwitch: { en: "Switch to Hindi", hi: "अंग्रेज़ी में बदलें" }, language: { en: "Language", hi: "भाषा" },
@@ -306,7 +307,7 @@
       W.loading.then(function () { if (st.view === "hub" && st.prefs.tab === "learn") home(); });
     } else if (!W.ix) body = '<section class="oph-today"><p class="oph-today-line">' + s("ixErr") + '</p><button class="oph-btn pri" data-act="lnretryix">' + ico("refresh") + " " + s("retry") + "</button></section>";
     else if (!allIds().length) body = '<section class="oph-today"><p class="oph-today-line">' + s("none") + "</p></section>";
-    else body = startCard() + reviseRow() + unitsHtml();
+    else body = startCard() + reviseRow() + imglibRow() + unitsHtml();
     paint(markTop(s("homeSub")) +
       '<div class="oph-scroll oph-pad ln-home"><div class="ln-col">' + tabs("learn") + body + (O._explore ? O._explore.homeHtml() : "") + referenceHtml() +
       "</div></div>", focusSel);
@@ -330,6 +331,12 @@
       '<p class="ln-start-idea">' + esc(plain(l.idea)) + "</p>" +
       '<p class="oph-small">' + s("min", { n: l.minutes }) + (u ? " · " + tx(u.title) : "") + (res ? " " + badge("learn.resident") : "") + "</p>" +
       '<button class="oph-btn pri oph-wide" data-act="lesson" data-l="' + esc(nx.id) + '">' + ico("play") + " " + (anyDone ? s("cont") : s("startHere")) + "</button></div></section>";
+  }
+
+  /* Image Library (SMD_IMGLIB): the shared bank, filtered to Eye. Hidden when the flag is off. */
+  function imglibRow() {
+    try { if (!G.SMD_IMGLIB || !G.SMD_IMGLIB.enabled()) return ""; } catch (e) { return ""; }
+    return '<ul class="oph-clinics ln-imglib">' + row("lnimglib", "", tile("book"), s("imgLib"), s("imgLibSub"), "") + "</ul>";
   }
 
   function reviseRow() {
@@ -996,6 +1003,7 @@
   A.lnsetlang = function (b) { setPrefs("lang", b.getAttribute("data-l")); firstRun(); var f = G.document.querySelector('[data-act=lnsetlang][data-l="' + L() + '"]'); try { f.focus({ preventScroll: true }); } catch (e) {} };
   A.lnlang = function () { setPrefs("lang", L() === "hi" ? "en" : "hi"); if (W.again) W.again(".ln-lang"); };
   A.lnretryix = function () { load(); home(); };
+  A.lnimglib = function () { try { if (G.SMD_IMGLIB) G.SMD_IMGLIB.open({ system: "eye" }); } catch (e) {} };
   A.lesson = function (b) { openLesson(b.getAttribute("data-l") || b.getAttribute("data-k")); };
   A.lnexit = function () { I.leave(); O._renderHub(); };
   A.lnnext = function () { if (W.les && W.step < stepKeys(W.les).length - 1) renderStep(W.step + 1); };
