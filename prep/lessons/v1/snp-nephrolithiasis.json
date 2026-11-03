@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "snp-nephrolithiasis",
+ "title": "Nephrolithiasis and nephrocalcinosis",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Calcium** stones account for approximately 75% to 80% of all nephrolithiasis cases, most commonly composed of calcium oxalate (monohydrate whewellite or dihydrate weddellite) and calcium phosphate (apatite or brushite). The image is calcium oxalate and uric acid crystals and stone morphology.",
+   "say": "Calcium stones account for approximately 75% to 80% of all nephrolithiasis cases, most commonly composed of calcium oxalate (monohydrate whewellite or dihydrate weddellite) and calcium phosphate (apatite or brushite). The image is calcium oxalate and uric acid crystals and stone morphology.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nephrolithiasis-fig1.webp",
+    "alt": "Calcium oxalate and uric acid crystals and stone morphology",
+    "caption": "Randall plaque formation and calcium oxalate crystal growth in renal papillae (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Idiopathic hypercalciuria** (24-hour urine calcium > 250 mg in women, > 300 mg in men, or > 4 mg/kg/day) is the most prevalent metabolic risk factor for calcium nephrolithiasis, managed with dietary sodium restriction (< 2 g/day) and thiazide diuretics.",
+   "say": "Idiopathic hypercalciuria (24-hour urine calcium greater than 250 mg in women, greater than 300 mg in men, or greater than 4 mg/kg/day) is the most prevalent metabolic risk factor for calcium nephrolithiasis, managed with dietary sodium restriction ( less than 2 g/day) and thiazide diuretics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "24-Hour Urine Parameter",
+     "Normal Cutoff",
+     "Pathological Interpretation"
+    ],
+    "rows": [
+     [
+      "Urine volume",
+      "Greater than 2000 to 2500 mL/day",
+      "Low volume (< 2 L) drives solute supersaturation"
+     ],
+     [
+      "Urinary calcium",
+      "Less than 200 to 250 mg/day",
+      "Hypercalciuria treated with thiazides and sodium restriction"
+     ],
+     [
+      "Urinary citrate",
+      "Greater than 320 to 400 mg/day",
+      "Hypocitraturia treated with potassium citrate"
+     ],
+     [
+      "Urinary oxalate",
+      "Less than 40 to 45 mg/day",
+      "Hyperoxaluria from enteric malabsorption or dietary excess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dietary calcium** restriction paradoxically increases calcium oxalate stone formation by enhancing uncomplexed free oxalate absorption in the gut; patients are advised to maintain normal dietary calcium intake (1000 to 1200 mg/day) taken with meals. The first step is Thiazide inhibits NCC in distal convoluted tubule.",
+   "say": "Dietary calcium restriction paradoxically increases calcium oxalate stone formation by enhancing uncomplexed free oxalate absorption in the gut; patients are advised to maintain normal dietary calcium intake (1000 to 1200 mg/day) taken with meals. The first step is Thiazide inhibits NCC in distal convoluted tubule.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Thiazide inhibits NCC in distal convoluted tubule"
+     },
+     {
+      "id": "t2",
+      "label": "Mild extracellular volume contraction ensues"
+     },
+     {
+      "id": "t3",
+      "label": "Proximal tubular sodium and calcium reabsorption rises"
+     },
+     {
+      "id": "t4",
+      "label": "Marked reduction in urinary calcium excretion"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uric acid stones** form exclusively in persistently acidic urine (urine pH < 5.5) where insoluble un-ionized uric acid predominates, appearing radiolucent on conventional plain radiography but readily detectable on non-contrast CT (200 to 400 Hounsfield units). One side is Acidic Urine (pH < 5.5), and the other side is Alkaline Urine (pH 6.5 to 7.0).",
+   "say": "Uric acid stones form exclusively in persistently acidic urine (urine pH less than 5 point 5) where insoluble un-ionized uric acid predominates, appearing radiolucent on conventional plain radiography but readily detectable on non-contrast CT (200 to 400 Hounsfield units). One side is Acidic Urine (pH less than 5 point 5), and the other side is Alkaline Urine (pH 6 point 5 to 7 point 0).",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acidic Urine (pH < 5.5)",
+     "points": [
+      "Uric acid pKa is 5.35",
+      "Insoluble un-dissociated uric acid forms",
+      "Rapid crystallization and radiolucent stones"
+     ]
+    },
+    "right": {
+     "title": "Alkaline Urine (pH 6.5 to 7.0)",
+     "points": [
+      "Soluble ionized urate salt predominates",
+      "Solubility increases more than ten-fold",
+      "Successful chemical stone dissolution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Therapeutic urinary alkalinization with **potassium citrate** (targeting a urine pH of 6.5 to 7.0) is the cornerstone of uric acid stone chemolysis and prevention, while allopurinol or febuxostat is added if hyperuricosuria or hyperuricemia persists. The image is staghorn calculus in renal pelvis and percutaneous nephrolithotomy techniques.",
+   "say": "Therapeutic urinary alkalinization with potassium citrate (targeting a urine pH of 6 point 5 to 7 point 0) is the cornerstone of uric acid stone chemolysis and prevention, while allopurinol or febuxostat is added if hyperuricosuria or hyperuricemia persists. The image is staghorn calculus in renal pelvis and percutaneous nephrolithotomy techniques.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urinary-stones-eswl-urs-pcnl-fig1.webp",
+    "alt": "Staghorn calculus in renal pelvis and percutaneous nephrolithotomy techniques",
+    "caption": "Large struvite staghorn calculus occupying the pelvicalyceal system (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Struvite stones** (infection stones, magnesium ammonium phosphate and carbonate apatite) form in alkaline urine (pH > 7.2) infected by urease-producing organisms (Proteus mirabilis, Klebsiella, Pseudomonas), producing branched staghorn calculi. One side is Pathophysiology, and the other side is Diagnostic Findings.",
+   "say": "Struvite stones (infection stones, magnesium ammonium phosphate and carbonate apatite) form in alkaline urine (pH greater than 7 point 2) infected by urease-producing organisms (Proteus mirabilis, Klebsiella, Pseudomonas), producing branched staghorn calculi. One side is Pathophysiology, and the other side is Diagnostic Findings.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathophysiology",
+     "points": [
+      "Defective apical COLA transporter",
+      "Impaired tubular cystine reabsorption",
+      "Insoluble cystine disulphide precipitates"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Findings",
+     "points": [
+      "Pathognomonic hexagonal crystals in urine",
+      "Positive cyanide-nitroprusside reaction",
+      "Faintly radiopaque ground-glass calculi"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cystinuria** is an autosomal recessive defect in the dibasic amino acid transporter SLC3A1 (rBAT) or SLC7A9, presenting in young patients with pathognomonic flat hexagonal crystals in acidic urine, positive sodium cyanide-nitroprusside test, and radiopaque ground-glass stones. The first step is Cystine excretion exceeds solubility threshold.",
+   "say": "Cystinuria is an autosomal recessive defect in the dibasic amino acid transporter SLC3A1 (rBAT) or SLC7A9, presenting in young patients with pathognomonic flat hexagonal crystals in acidic urine, positive sodium cyanide-nitroprusside test, and radiopaque ground-glass stones. The first step is Cystine excretion exceeds solubility threshold.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Cystine excretion exceeds solubility threshold"
+     },
+     {
+      "id": "c2",
+      "label": "Intense urinary alkalinization targeting pH > 7.5"
+     },
+     {
+      "id": "c3",
+      "label": "Tiopronin cleaves cystine disulfide bond"
+     },
+     {
+      "id": "c4",
+      "label": "Forms highly soluble tiopronin-cysteine complex"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Medullary sponge kidney** is a congenital non-inherited malformation characterized by cystic dilatation of the collecting ducts in one or more renal pyramids, strongly predisposing to recurrent nephrolithiasis, distal RTA, and medullary nephrocalcinosis. The paired value for Medullary nephrocalcinosis is > 95% of cases.",
+   "say": "Medullary sponge kidney is a congenital non-inherited malformation characterized by cystic dilatation of the collecting ducts in one or more renal pyramids, strongly predisposing to recurrent nephrolithiasis, distal RTA, and medullary nephrocalcinosis. The paired value for Medullary nephrocalcinosis is greater than 95% of cases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nephrocalcinosis Type",
+     "Prevalence",
+     "Characteristic Etiologies"
+    ],
+    "rows": [
+     [
+      "Medullary nephrocalcinosis",
+      "> 95% of cases",
+      "Distal RTA (Type 1), primary hyperparathyroidism, medullary sponge kidney"
+     ],
+     [
+      "Cortical nephrocalcinosis",
+      "< 5% of cases",
+      "Severe acute cortical necrosis (sepsis, obstetric catastrophe, toxins)"
+     ],
+     [
+      "Radiological appearance",
+      "Echogenic pyramids on US",
+      "Tram-track cortical calcification on plain abdominal radiographs"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 58",
+  "Harrison Principles of Internal Medicine 22e Ch. 318",
+  "AUA/Endourological Society Guideline on Stones 2019"
+ ]
+}

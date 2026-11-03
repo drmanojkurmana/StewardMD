@@ -1,133 +1,208 @@
 {
  "v": 1,
  "module": "snp-kidney-replacement-aki",
- "subject": "ss-nephrology",
- "title": "Kidney Replacement Therapy in AKI: Timing, Modalities and CRRT Practice",
- "minutes": 5,
+ "title": "Kidney replacement therapy in AKI",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "CRRT is chosen for haemodynamically unstable patients. **CVVH** clears solutes by convection, **CVVHD** by diffusion, and **CVVHDF** combines both, giving broad clearance of small and middle molecules. SLED, or slow low efficiency dialysis, is a hybrid that suits unstable patients where continuous therapy is not available. Slow clearance limits rapid osmotic shifts, which matters in cerebral oedema.",
-   "say": "CRRT is chosen for haemodynamically unstable patients. CVVH clears solutes by convection, CVVHD by diffusion, and CVVHDF combines both, giving broad clearance of small and middle molecules. SLED, or slow low efficiency dialysis, is a hybrid that suits unstable patients where continuous therapy is not available. Slow clearance limits rapid osmotic shifts, which matters in cerebral oedema.",
+   "tx": "The **STARRT-AKI** and AKIKI randomized controlled trials established that an accelerated or early strategy for kidney replacement therapy in critically ill AKI does not reduce 90-day mortality compared with an expectant watch-and-wait strategy. The image is vascular access and modalities for continuous kidney replacement therapy.",
+   "say": "The STARRT-AKI and AKIKI randomized controlled trials established that an accelerated or early strategy for kidney replacement therapy in critically ill AKI does not reduce 90-day mortality compared with an expectant watch-and-wait strategy. The image is vascular access and modalities for continuous kidney replacement therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-kidney-replacement-aki-fig1.webp",
+    "alt": "Vascular access and modalities for continuous kidney replacement therapy",
+    "caption": "Dialysis vascular access sites and prescription modalities in acute kidney injury (StewardMD).",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Absolute **emergency indications** for initiating kidney replacement therapy in AKI comprise refractory severe hyperkalemia (> 6.5 mmol/L with ECG changes), intractable severe metabolic acidosis (pH < 7.15), refractory pulmonary edema, and overt uremic complications. The paired value for Severe hyperkalemia is K+ > 6.5 mmol/L with ECG abnormalities.",
+   "say": "Absolute emergency indications for initiating kidney replacement therapy in AKI comprise refractory severe hyperkalemia ( greater than 6 point 5 mmol/L with ECG changes), intractable severe metabolic acidosis (pH less than 7 point 15), refractory pulmonary edema, and overt uremic complications. The paired value for Severe hyperkalemia is K+ greater than 6 point 5 mmol/L with ECG abnormalities.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Modality",
-     "Main clearance",
-     "Typical use"
+     "Emergency Indication",
+     "Diagnostic Threshold",
+     "Clinical Urgency"
     ],
     "rows": [
      [
-      "CVVH",
-      "Convection",
-      "Middle molecules and fluid removal"
+      "Severe hyperkalemia",
+      "K+ > 6.5 mmol/L with ECG abnormalities",
+      "Immediate emergent hemodialysis"
      ],
      [
-      "CVVHD",
-      "Diffusion",
-      "Small solutes such as urea"
+      "Severe metabolic acidosis",
+      "Arterial pH < 7.15 despite bicarbonate",
+      "Emergent dialytic correction"
      ],
      [
-      "CVVHDF",
-      "Diffusion plus convection",
-      "Broad clearance, widely used"
+      "Refractory fluid overload",
+      "Pulmonary edema unresponsive to diuretics",
+      "Urgent ultrafiltration / KRT"
      ],
      [
-      "SLED",
-      "Hybrid, slow intermittent",
-      "Unstable patients, limited CRRT access"
+      "Uremic complications",
+      "Pericarditis, encephalopathy, bleeding diathesis",
+      "Urgent clearance to prevent tamponade"
      ]
     ]
    }
   },
   {
-   "tx": "Delivered **effluent dose** matters less than most students expect. The **RENAL trial** compared higher and lower effluent doses and found no difference in mortality, and the **ATN trial** reached the same conclusion. Guidelines therefore advise a modest delivered dose, with the prescribed dose raised to allow for **circuit downtime**. Over-dosing wastes fluid and drugs without clinical benefit.",
-   "say": "Delivered effluent dose matters less than most students expect. The RENAL trial compared higher and lower effluent doses and found no difference in mortality, and the ATN trial reached the same conclusion. Guidelines therefore advise a modest delivered dose, with the prescribed dose raised to allow for circuit downtime. Over-dosing wastes fluid and drugs without clinical benefit.",
-   "vis": null
+   "tx": "**Continuous renal replacement therapy** (CRRT) is strongly preferred over intermittent hemodialysis in hemodynamically unstable critically ill patients with septic shock, acute liver failure, or acute brain injury with elevated intracranial pressure. One side is Continuous RRT (CRRT), and the other side is Intermittent Hemodialysis.",
+   "say": "Continuous renal replacement therapy (CRRT) is strongly preferred over intermittent hemodialysis in hemodynamically unstable critically ill patients with septic shock, acute liver failure, or acute brain injury with elevated intracranial pressure. One side is Continuous RRT (CRRT), and the other side is Intermittent Hemodialysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continuous RRT (CRRT)",
+     "points": [
+      "Exceptional hemodynamic stability",
+      "Gradual solute and osmolar shifts",
+      "Preferred in cerebral edema and shock"
+     ]
+    },
+    "right": {
+     "title": "Intermittent Hemodialysis",
+     "points": [
+      "Rapid solute clearance in 3 to 4 hours",
+      "Provokes transient arterial hypotension",
+      "Risks intracranial pressure elevation"
+     ]
+    }
+   }
   },
   {
-   "tx": "**Regional citrate anticoagulation** is preferred for CRRT, as it prolongs filter life and reduces bleeding. Citrate chelates calcium in the circuit, and calcium is replaced separately because premixed fluids often lack it. Systemic **ionised calcium** must be monitored closely. Pre-dilution replacement fluid lowers haemoconcentration and reduces filter sludging.",
-   "say": "Regional citrate anticoagulation is preferred for CRRT, as it prolongs filter life and reduces bleeding. Citrate chelates calcium in the circuit, and calcium is replaced separately because premixed fluids often lack it. Systemic ionised calcium must be monitored closely. Pre-dilution replacement fluid lowers haemoconcentration and reduces filter sludging.",
+   "tx": "The guideline-recommended target **effluent delivery dose** for continuous renal replacement therapy in acute kidney injury is 20 to 25 mL/kg/h, which typically requires a prescribed dose of 25 to 30 mL/kg/h to account for interruptions. The paired value for Delivered effluent dose is 20 to 25 mL/kg/h.",
+   "say": "The guideline-recommended target effluent delivery dose for continuous renal replacement therapy in acute kidney injury is 20 to 25 mL/kg/h, which typically requires a prescribed dose of 25 to 30 mL/kg/h to account for interruptions. The paired value for Delivered effluent dose is 20 to 25 mL/kg/h.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dose Parameter",
+     "Target Flow Rate",
+     "Clinical Target"
+    ],
+    "rows": [
+     [
+      "Delivered effluent dose",
+      "20 to 25 mL/kg/h",
+      "Proven target based on ATN and RENAL trials"
+     ],
+     [
+      "Prescribed effluent dose",
+      "25 to 30 mL/kg/h",
+      "Compensates for circuit downtime and procedures"
+     ],
+     [
+      "High-dose CRRT (> 35)",
+      "35 to 45 mL/kg/h",
+      "No survival benefit, increases drug wasting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Regional citrate anticoagulation** (RCA) is recommended as the first-line circuit anticoagulation method for CRRT in patients without contraindications, providing longer circuit survival and lower bleeding complications compared with systemic heparin. The image is hemodialysis and CRRT circuits with regional citrate anticoagulation.",
+   "say": "Regional citrate anticoagulation (RCA) is recommended as the first-line circuit anticoagulation method for CRRT in patients without contraindications, providing longer circuit survival and lower bleeding complications compared with systemic heparin. The image is hemodialysis and CRRT circuits with regional citrate anticoagulation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+    "alt": "Hemodialysis and CRRT circuits with regional citrate anticoagulation",
+    "caption": "Regional citrate anticoagulation circuit showing pre-filter citrate and post-filter calcium (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Citrate accumulation** ('citrate toxicity') during CRRT is diagnosed by a total calcium to ionized calcium ratio > 2.5, worsening metabolic acidosis with an elevated anion gap, and sudden drop in systemic ionized calcium. One side is Normal Citrate Clearance, and the other side is Citrate Toxicity.",
+   "say": "Citrate accumulation ('citrate toxicity') during CRRT is diagnosed by a total calcium to ionized calcium ratio greater than 2 point 5, worsening metabolic acidosis with an elevated anion gap, and sudden drop in systemic ionized calcium. One side is Normal Citrate Clearance, and the other side is Citrate Toxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Citrate Clearance",
+     "points": [
+      "Total to ionized calcium ratio < 2.5",
+      "Normal systemic acid-base status",
+      "Citrate metabolized to bicarbonate in liver"
+     ]
+    },
+    "right": {
+     "title": "Citrate Toxicity",
+     "points": [
+      "Total to ionized calcium ratio > 2.5",
+      "Elevated anion gap metabolic acidosis",
+      "Severe refractory systemic hypocalcemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sustained low-efficiency dialysis** (SLED) combines the hemodynamic stability of continuous therapies with the operational flexibility and lower consumable cost of intermittent hemodialysis, running blood flows of 150 to 200 mL/min over 6 to 12 hours. The first step is Conventional hemodialysis machine utilized.",
+   "say": "Sustained low-efficiency dialysis (SLED) combines the hemodynamic stability of continuous therapies with the operational flexibility and lower consumable cost of intermittent hemodialysis, running blood flows of 150 to 200 mL/min over 6 to 12 hours. The first step is Conventional hemodialysis machine utilized.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Citrate infused pre-filter"
+      "id": "s1",
+      "label": "Conventional hemodialysis machine utilized"
      },
      {
-      "id": "b",
-      "label": "Calcium chelated in circuit"
+      "id": "s2",
+      "label": "Blood flow moderated to 150 to 200 mL/min"
      },
      {
-      "id": "c",
-      "label": "Filter life prolonged"
+      "id": "s3",
+      "label": "Extended duration of 6 to 12 hours per session"
      },
      {
-      "id": "d",
-      "label": "Calcium replaced separately"
-     },
-     {
-      "id": "e",
-      "label": "Ionised calcium monitored"
+      "id": "s4",
+      "label": "Excellent hemodynamic tolerance achieved"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "s1",
+      "s2"
      ],
      [
-      "b",
-      "c"
+      "s2",
+      "s3"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
+      "s3",
+      "s4"
      ]
     ]
    }
   },
   {
-   "tx": "Drug dosing in CRRT depends on **sieving coefficient**, protein binding and volume of distribution, so doses are adjusted rather than copied from intermittent dialysis. Vascular access for prolonged use is best with a tunnelled catheter, usually in the internal jugular vein, while subclavian sites are avoided because of later stenosis. Right internal jugular access is often preferred for better flow.",
-   "say": "Drug dosing in CRRT depends on sieving coefficient, protein binding and volume of distribution, so doses are adjusted rather than copied from intermittent dialysis. Vascular access for prolonged use is best with a tunnelled catheter, usually in the internal jugular vein, while subclavian sites are avoided because of later stenosis. Right internal jugular access is often preferred for better flow.",
+   "tx": "Criteria for attempting **discontinuation of KRT** in recovering AKI include spontaneous 24-hour urine output > 400 to 500 mL/day without diuretics (or > 1,000 mL/day with diuretics) and spontaneous clearance meeting metabolic demand. One side is Weaning Thresholds, and the other side is Clinical Readiness.",
+   "say": "Criteria for attempting discontinuation of KRT in recovering AKI include spontaneous 24-hour urine output greater than 400 to 500 mL/day without diuretics (or greater than 1,000 mL/day with diuretics) and spontaneous clearance meeting metabolic demand. One side is Weaning Thresholds, and the other side is Clinical Readiness.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-kidney-replacement-aki-fig1.webp",
-    "alt": "Diagram of a tunnelled catheter in the right internal jugular vein for CRRT, with drug dosing factors listed.",
-    "caption": "CRRT vascular access and drug dosing principles",
-    "ar": 1.8349
+    "kind": "compare",
+    "left": {
+     "title": "Weaning Thresholds",
+     "points": [
+      "Spontaneous urine > 400 to 500 mL/24h",
+      "With diuretics: urine > 1000 mL/24h",
+      "Resolution of hyperkalemia and acidosis"
+     ]
+    },
+    "right": {
+     "title": "Clinical Readiness",
+     "points": [
+      "Stable baseline hemodynamics",
+      "Serum creatinine stabilizes off KRT",
+      "Negative cumulative fluid balance"
+     ]
+    }
    }
   }
  ],
- "quiz": [
-  "q_e26bdde9a9a3",
-  "q_2a0bf2f43a1b",
-  "q_092258a3a291"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "KDIGO Clinical Practice Guideline for Acute Kidney Injury (2012)",
-  "STARRT-AKI Investigators, New England Journal of Medicine (2020)",
-  "AKIKI Study Group, New England Journal of Medicine (2016)",
-  "IDEAL-ICU Investigators, New England Journal of Medicine (2018)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 55
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 75",
+  "KDIGO Clinical Practice Guideline for AKI 2012",
+  "New England Journal of Medicine STARRT-AKI Trial 2020"
+ ]
 }
