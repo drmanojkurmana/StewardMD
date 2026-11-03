@@ -1,7 +1,33 @@
 {
   "id": "cardiac_haemochromatosis",
   "name": "cardiac haemochromatosis",
-  "hyTerms": ["HFE C282Y homozygosity","non-transferrin-bound iron","L-type and T-type calcium channels","reactive oxygen species","myocardial T2*","transferrin saturation","Serum ferritin","deferoxamine","deferasirox","deferiprone","therapeutic venesection","restrictive/diastolic phase","dilated phase","heart block","thalassaemia major","hypogonadism","HFE genotyping (C282Y, H63D)","myocardial T2* mapping","tissue Doppler assessment","liver iron quantification","guideline-directed heart-failure therapy","pacing for symptomatic heart block","replacement fibrosis","sinoatrial node","atrioventricular node"],
+  "hyTerms": [
+    "HFE C282Y homozygosity",
+    "non-transferrin-bound iron",
+    "L-type and T-type calcium channels",
+    "reactive oxygen species",
+    "myocardial T2*",
+    "transferrin saturation",
+    "Serum ferritin",
+    "deferoxamine",
+    "deferasirox",
+    "deferiprone",
+    "therapeutic venesection",
+    "restrictive/diastolic phase",
+    "dilated phase",
+    "heart block",
+    "thalassaemia major",
+    "hypogonadism",
+    "HFE genotyping (C282Y, H63D)",
+    "myocardial T2* mapping",
+    "tissue Doppler assessment",
+    "liver iron quantification",
+    "guideline-directed heart-failure therapy",
+    "pacing for symptomatic heart block",
+    "replacement fibrosis",
+    "sinoatrial node",
+    "atrioventricular node"
+  ],
   "aliases": [
     "iron-overload cardiomyopathy",
     "haemochromatotic heart disease"
@@ -167,15 +193,73 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in cardiac haemochromatosis",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Cardiac T2* magnetic resonance", "cells": [{"text": "Myocardial T2* below threshold identifies important iron loading before ejection fraction falls"}], "cite": "c1"},
-        {"parameter": "Serum ferritin and transferrin saturation", "cells": [{"text": "Total body iron; correlate poorly with myocardial iron"}], "cite": "c1"},
-        {"parameter": "HFE genotyping (C282Y, H63D)", "cells": [{"text": "Suspected hereditary disease"}], "cite": "c1"},
-        {"parameter": "Echocardiography with diastolic and tissue Doppler", "cells": [{"text": "Restrictive or dilated phase"}], "cite": "c1"},
-        {"parameter": "Ambulatory ECG monitoring", "cells": [{"text": "Arrhythmia and conduction disease"}], "cite": "c1"},
-        {"parameter": "Liver iron quantification and liver function tests", "cells": [{"text": "Hepatic iron burden"}], "cite": "c1"},
-        {"parameter": "Endocrine screen", "cells": [{"text": "Fasting glucose, thyroid and gonadal axes"}], "cite": "c1"}
+        {
+          "parameter": "Cardiac T2* magnetic resonance",
+          "cells": [
+            {
+              "text": "Myocardial T2* below threshold identifies important iron loading before ejection fraction falls"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Serum ferritin and transferrin saturation",
+          "cells": [
+            {
+              "text": "Total body iron; correlate poorly with myocardial iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "HFE genotyping (C282Y, H63D)",
+          "cells": [
+            {
+              "text": "Suspected hereditary disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Echocardiography with diastolic and tissue Doppler",
+          "cells": [
+            {
+              "text": "Restrictive or dilated phase"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Ambulatory ECG monitoring",
+          "cells": [
+            {
+              "text": "Arrhythmia and conduction disease"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Liver iron quantification and liver function tests",
+          "cells": [
+            {
+              "text": "Hepatic iron burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Endocrine screen",
+          "cells": [
+            {
+              "text": "Fasting glucose, thyroid and gonadal axes"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -183,16 +267,107 @@
       "kind": "treatment",
       "title": "Management options in cardiac haemochromatosis",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Iron chelation", "cells": [{"text": "Deferoxamine, deferasirox or deferiprone in transfusional overload"}, {"text": "Mainstay for myocardial iron burden"}], "cite": "c1"},
-        {"parameter": "Venesection", "cells": [{"text": "Therapeutic venesection in hereditary disease once anaemia allows"}, {"text": "Primary haemochromatosis"}], "cite": "c1"},
-        {"parameter": "Intensified or combined chelation", "cells": [{"text": "When cardiac iron loading is demonstrated; aims to reverse dysfunction before fibrosis"}, {"text": "Cardiac iron"}], "cite": "c1"},
-        {"parameter": "Heart failure therapy", "cells": [{"text": "Diuretics, beta-blockers and renin-angiotensin blockade for the dilated systolic phase"}, {"text": "Guideline-directed"}], "cite": "c1"},
-        {"parameter": "Arrhythmia and conduction", "cells": [{"text": "Pacing for symptomatic heart block; antiarrhythmic or device therapy as indicated"}, {"text": "As indicated"}], "cite": "c1"},
-        {"parameter": "Monitoring", "cells": [{"text": "Serial cardiac T2* MRI and echocardiography rather than serum ferritin alone"}, {"text": "Guides chelation intensity"}], "cite": "c1"},
-        {"parameter": "Advanced care", "cells": [{"text": "Advanced heart-failure options or transplantation in end-stage, iron-fixed disease"}, {"text": "End-stage"}], "cite": "c1"},
-        {"parameter": "Family screening", "cells": [{"text": "HFE genotyping and cascade screening in hereditary haemochromatosis"}, {"text": "Hereditary disease"}], "cite": "c1"}
+        {
+          "parameter": "Iron chelation",
+          "cells": [
+            {
+              "text": "Deferoxamine, deferasirox or deferiprone in transfusional overload"
+            },
+            {
+              "text": "Mainstay for myocardial iron burden"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Venesection",
+          "cells": [
+            {
+              "text": "Therapeutic venesection in hereditary disease once anaemia allows"
+            },
+            {
+              "text": "Primary haemochromatosis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Intensified or combined chelation",
+          "cells": [
+            {
+              "text": "When cardiac iron loading is demonstrated; aims to reverse dysfunction before fibrosis"
+            },
+            {
+              "text": "Cardiac iron"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Heart failure therapy",
+          "cells": [
+            {
+              "text": "Diuretics, beta-blockers and renin-angiotensin blockade for the dilated systolic phase"
+            },
+            {
+              "text": "Guideline-directed"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arrhythmia and conduction",
+          "cells": [
+            {
+              "text": "Pacing for symptomatic heart block; antiarrhythmic or device therapy as indicated"
+            },
+            {
+              "text": "As indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Monitoring",
+          "cells": [
+            {
+              "text": "Serial cardiac T2* MRI and echocardiography rather than serum ferritin alone"
+            },
+            {
+              "text": "Guides chelation intensity"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Advanced care",
+          "cells": [
+            {
+              "text": "Advanced heart-failure options or transplantation in end-stage, iron-fixed disease"
+            },
+            {
+              "text": "End-stage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Family screening",
+          "cells": [
+            {
+              "text": "HFE genotyping and cascade screening in hereditary haemochromatosis"
+            },
+            {
+              "text": "Hereditary disease"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     }
   ],
@@ -202,25 +377,108 @@
       "title": "Diagnosis and management of cardiac haemochromatosis",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Heart failure, arrhythmia or heart block in a patient with iron overload", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: high-grade heart block, sustained ventricular arrhythmia or syncope, or falling ejection fraction?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: urgent cardiology and haematology review; device assessment; heart-failure treatment", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Cardiac T2* MRI; serum ferritin and transferrin saturation; HFE genotyping; echocardiography", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Myocardial T2* below the accepted threshold?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Intensify chelation or venesection; treat heart failure and arrhythmia", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Assess other causes such as amyloidosis, sarcoidosis or Fabry cardiomyopathy", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "Reversible if chelation starts before end-stage fibrosis; lifelong monitoring", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Heart failure, arrhythmia or heart block in a patient with iron overload",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: high-grade heart block, sustained ventricular arrhythmia or syncope, or falling ejection fraction?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent cardiology and haematology review; device assessment; heart-failure treatment",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Cardiac T2* MRI; serum ferritin and transferrin saturation; HFE genotyping; echocardiography",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Myocardial T2* below the accepted threshold?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Intensify chelation or venesection; treat heart failure and arrhythmia",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Assess other causes such as amyloidosis, sarcoidosis or Fabry cardiomyopathy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Reversible if chelation starts before end-stage fibrosis; lifelong monitoring",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "cardiac-haemochromatosis-fig1",
+      "type": "image",
+      "title": "Cardiac Iron Overload Injury",
+      "src": "v1/kb/media/cardiac-haemochromatosis-fig1.webp",
+      "alt": "Diagram showing HFE mutation, systemic iron overload, cardiomyocyte iron entry, Fenton reaction, organelle injury, histology inset, and early and late cardiomyopathy hearts",
+      "caption": "Illustration of myocardial iron uptake, oxidative injury, and cardiomyopathy stages. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }
