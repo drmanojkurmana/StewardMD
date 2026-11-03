@@ -1,0 +1,305 @@
+{
+ "v": 1,
+ "module": "son-nsclc-dx",
+ "subject": "ss-medical-oncology",
+ "title": "NSCLC diagnosis, pathology and staging",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Non-small cell lung cancer accounts for over eighty percent of all primary pulmonary malignancies. Accurate histologic subtyping into adenocarcinoma or squamous cell carcinoma is essential for predictive biomarker selection and therapeutic safety. **Adenocarcinoma** demonstrates glandular differentiation with immunohistochemical positivity for TTF-1 and napsin A, whereas squamous cell carcinoma shows keratinization with robust positivity for p40 and p63.",
+   "say": "Non-small cell lung cancer accounts for over eighty percent of all primary pulmonary malignancies. Accurate histologic subtyping into adenocarcinoma or squamous cell carcinoma is essential for predictive biomarker selection and therapeutic safety. Adenocarcinoma demonstrates glandular differentiation with immunohistochemical positivity for TTF-1 and napsin A, whereas squamous cell carcinoma shows keratinization with robust positivity for p40 and p63.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histology",
+     "Positive Markers",
+     "Negative Markers",
+     "Therapeutic Caveat"
+    ],
+    "rows": [
+     [
+      "Adenocarcinoma",
+      "TTF-1, napsin A, CK7",
+      "p40, p63",
+      "Mandates comprehensive molecular profiling"
+     ],
+     [
+      "Squamous carcinoma",
+      "p40, p63, CK5/6",
+      "TTF-1, napsin A",
+      "Pemetrexed and bevacizumab contraindicated"
+     ],
+     [
+      "Large cell neuroendocrine",
+      "Synaptophysin, chromogranin",
+      "Variable TTF-1",
+      "Aggressive biology, treated like SCLC"
+     ],
+     [
+      "Small cell carcinoma",
+      "Synaptophysin, CD56, INSM1",
+      "p40",
+      "High Ki-67 index, neuroendocrine features"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate nodal staging determines eligibility for curative-intent surgery versus definitive chemoradiation. **EBUS-TBNA** represents the primary minimally invasive investigation of choice for mediastinal lymph node staging in NSCLC. Under real-time ultrasonic visualization, transbronchial needles sample station 2, 4, and 7 mediastinal nodes alongside station 10 and 11 hilar stations with diagnostic accuracy exceeding ninety percent.",
+   "say": "Accurate nodal staging determines eligibility for curative-intent surgery versus definitive chemoradiation. EBUS-TBNA represents the primary minimally invasive investigation of choice for mediastinal lymph node staging in NSCLC. Under real-time ultrasonic visualization, transbronchial needles sample station 2, 4, and 7 mediastinal nodes alongside station 10 and 11 hilar stations with diagnostic accuracy exceeding ninety percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Abnormal CT or PET node"
+     },
+     {
+      "id": "b",
+      "label": "EBUS-TBNA sampling"
+     },
+     {
+      "id": "c",
+      "label": "Cytology and rapid on-site eval"
+     },
+     {
+      "id": "d",
+      "label": "Staging confirmation (N1 vs N2/N3)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "transbronchial puncture"
+     ],
+     [
+      "b",
+      "c",
+      "stations 2, 4, 7, 10, 11"
+     ],
+     [
+      "c",
+      "d",
+      "guides multidisciplinary resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic staging must rule out distant metastasis prior to curative resection or thoracic radiotherapy. Whole-body 18F-FDG **PET-CT** and contrast-enhanced brain MRI are essential mandatory staging investigations for all candidate non-small cell lung cancer patients prior to radical curative therapy. Brain MRI identifies occult cerebral metastases in up to ten percent of neurologically asymptomatic individuals.",
+   "say": "Systemic staging must rule out distant metastasis prior to curative resection or thoracic radiotherapy. Whole-body 18F-FDG PET-CT and contrast-enhanced brain MRI are essential mandatory staging investigations for all candidate non-small cell lung cancer patients prior to radical curative therapy. Brain MRI identifies occult cerebral metastases in up to ten percent of neurologically asymptomatic individuals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "18F-FDG PET-CT",
+     "points": [
+      "Assesses thoracic and distant sites",
+      "High sensitivity for bone and adrenal",
+      "SUVmax quantifies metabolic avidity",
+      "Limited spatial resolution for brain"
+     ]
+    },
+    "right": {
+     "title": "Contrast-Enhanced Brain MRI",
+     "points": [
+      "Superior intracranial soft-tissue contrast",
+      "Detects sub-centimetre metastases",
+      "Mandatory before curative-intent therapy",
+      "Supersedes non-contrast brain CT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted therapies yield dramatically superior response rates compared with cytotoxic chemotherapy in oncogene-addicted tumours. **Reflex molecular biomarker** testing in advanced non-squamous NSCLC mandates evaluation of EGFR, ALK, ROS1, BRAF, RET, MET exon 14, KRAS G12C, NTRK, and PD-L1 TPS. Next-generation sequencing panels minimize tissue exhaustion from core biopsies and deliver complete genomic profiling.",
+   "say": "Targeted therapies yield dramatically superior response rates compared with cytotoxic chemotherapy in oncogene-addicted tumours. Reflex molecular biomarker testing in advanced non-squamous NSCLC mandates evaluation of EGFR, ALK, ROS1, BRAF, RET, MET exon 14, KRAS G12C, NTRK, and PD-L1 TPS. Next-generation sequencing panels minimize tissue exhaustion from core biopsies and deliver complete genomic profiling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target Alteration",
+     "Prevalence in Non-squamous",
+     "First-Line Targeted Agent",
+     "Key Clinical Landmark"
+    ],
+    "rows": [
+     [
+      "EGFR sensitising (ex19del, L858R)",
+      "15% Western, 40% Asian",
+      "Osimertinib",
+      "FLAURA trial"
+     ],
+     [
+      "ALK fusions (EML4-ALK)",
+      "5%",
+      "Alectinib, brigatinib, lorlatinib",
+      "ALEX and CROWN trials"
+     ],
+     [
+      "ROS1 rearrangements",
+      "1% to 2%",
+      "Crizotinib, entrectinib",
+      "High CNS metastasis propensity"
+     ],
+     [
+      "KRAS G12C mutation",
+      "12%",
+      "Sotorasib, adagrasib (2nd line)",
+      "CodeBreaK 200 trial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anatomical staging follows the **TNM 8th edition** lung cancer staging system. The classification classifies solitary tumour nodule 3 cm or less as T1, greater than 3 to 5 cm as T2, and separate tumour nodule in another ipsilateral lobe as T4. Involvement of the main bronchus without carinal invasion constitutes T2, while diaphragm, carina, or mediastinal organ invasion is staged as T4.",
+   "say": "Anatomical staging follows the TNM 8th edition lung cancer staging system. The classification classifies solitary tumour nodule 3 cm or less as T1, greater than 3 to 5 cm as T2, and separate tumour nodule in another ipsilateral lobe as T4. Involvement of the main bronchus without carinal invasion constitutes T2, while diaphragm, carina, or mediastinal organ invasion is staged as T4.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "T Descriptor",
+     "Size Cut-off",
+     "Invasion Features",
+     "Stage Grouping Context"
+    ],
+    "rows": [
+     [
+      "T1 (a, b, c)",
+      "<= 1 cm (T1a), >1-2 cm (T1b), >2-3 cm (T1c)",
+      "Surrounded by lung, no bronchus involvement",
+      "Stage IA1 to IA3 (N0M0)"
+     ],
+     [
+      "T2 (a, b)",
+      ">3 to 4 cm (T2a), >4 to 5 cm (T2b)",
+      "Main bronchus, visceral pleura, atelectasis",
+      "Stage IB to IIA (N0M0)"
+     ],
+     [
+      "T3",
+      ">5 to 7 cm",
+      "Chest wall, pericardium, satellite nodule same lobe",
+      "Stage IIB to IIIA"
+     ],
+     [
+      "T4",
+      ">7 cm",
+      "Mediastinum, heart, carina, ipsilateral other lobe",
+      "Stage IIIA to IIIB"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superior sulcus carcinomas arise at the pulmonary thoracic inlet. **Pancoast** tumours invade the lower trunk of the brachial plexus and cervical sympathetic ganglion, producing Horner syndrome consisting of ptosis, miosis, and anhidrosis. Patients typically present with severe shoulder and arm pain along the C8-T1 dermatome distribution before developing respiratory complaints.",
+   "say": "Superior sulcus carcinomas arise at the pulmonary thoracic inlet. Pancoast tumours invade the lower trunk of the brachial plexus and cervical sympathetic ganglion, producing Horner syndrome consisting of ptosis, miosis, and anhidrosis. Patients typically present with severe shoulder and arm pain along the C8-T1 dermatome distribution before developing respiratory complaints.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Apical lung tumour"
+     },
+     {
+      "id": "b",
+      "label": "Invasion of stellate ganglion"
+     },
+     {
+      "id": "c",
+      "label": "Loss of sympathetic tone"
+     },
+     {
+      "id": "d",
+      "label": "Horner syndrome (ptosis, miosis, anhidrosis)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "superior sulcus growth"
+     ],
+     [
+      "b",
+      "c",
+      "denervation"
+     ],
+     [
+      "c",
+      "d",
+      "unilateral facial presentation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asymptomatic round parenchymal lesions require standardized management. **Solitary pulmonary nodule** evaluation utilizes the Brock University risk calculator and Fleischner Society guidelines to stratify malignancy risk and determine CT surveillance intervals. Solid nodules exceeding 8 millimetres, spiculated borders, upper lobe location, and older patient age significantly increase the pre-test probability of bronchogenic carcinoma.",
+   "say": "Asymptomatic round parenchymal lesions require standardized management. Solitary pulmonary nodule evaluation utilizes the Brock University risk calculator and Fleischner Society guidelines to stratify malignancy risk and determine CT surveillance intervals. Solid nodules exceeding 8 millimetres, spiculated borders, upper lobe location, and older patient age significantly increase the pre-test probability of bronchogenic carcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low Malignancy Risk (<5%)",
+     "points": [
+      "Young patient, non-smoker",
+      "Nodule < 6 mm, smooth margin",
+      "Benign calcification (popcorn, concentric)",
+      "Follow-up CT at 12 months or optional"
+     ]
+    },
+    "right": {
+     "title": "High Malignancy Risk (>65%)",
+     "points": [
+      "Heavy smoker, older age",
+      "Nodule > 8 mm, spiculated margin",
+      "Stippled or eccentric calcification",
+      "PET-CT, tissue biopsy or surgical excision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical nodal evaluation remains the definitive reference standard when imaging is equivocal. Invasive mediastinal staging with cervical **mediastinoscopy** is indicated when EBUS is non-diagnostic or when PET shows central tumours without mediastinal nodal uptake. Mediastinoscopy allows direct surgical inspection and histological sampling of pretracheal station 2, 4, and subcarinal station 7 nodal stations.",
+   "say": "Surgical nodal evaluation remains the definitive reference standard when imaging is equivocal. Invasive mediastinal staging with cervical mediastinoscopy is indicated when EBUS is non-diagnostic or when PET shows central tumours without mediastinal nodal uptake. Mediastinoscopy allows direct surgical inspection and histological sampling of pretracheal station 2, 4, and subcarinal station 7 nodal stations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Staging Modality",
+     "Access Route",
+     "Accessible Stations",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "EBUS-TBNA",
+      "Transbronchial / needle",
+      "2R, 2L, 4R, 4L, 7, 10, 11",
+      "First-line minimally invasive staging"
+     ],
+     [
+      "EUS-FNA",
+      "Transoesophageal / needle",
+      "4L, 7, 8, 9, left adrenal",
+      "Complementary for posterior/inferior nodes"
+     ],
+     [
+      "Cervical mediastinoscopy",
+      "Pretracheal surgical incision",
+      "1, 2R, 2L, 4R, 4L, 7",
+      "Confirmatory if EBUS is negative or equivocal"
+     ],
+     [
+      "Anterior mediastinotomy (Chamberlain)",
+      "Left parasternal 2nd intercostal space",
+      "5 (subaortic), 6 (para-aortic)",
+      "Left upper lobe tumors with AP window nodes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_235ffe0af4cf",
+  "q_76905c80b3e9",
+  "q_79f0445a8bce"
+ ],
+ "gen": "hand"
+}

@@ -1,0 +1,294 @@
+{
+ "v": 1,
+ "module": "son-ovary",
+ "subject": "ss-medical-oncology",
+ "title": "Epithelial ovarian cancer",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Epithelial ovarian cancer is the most lethal gynaecological malignancy, commonly diagnosed at stage III or IV due to insidious peritoneal dissemination. **High-grade serous ovarian carcinoma** characteristically arises from the fimbriated end of the fallopian tube via serous tubal intraepithelial carcinoma STIC lesions with ubiquitous TP53 mutations. Precursor secretory cells detach from fimbriae and implant upon ovarian and pelvic peritoneal surfaces.",
+   "say": "Epithelial ovarian cancer is the most lethal gynaecological malignancy, commonly diagnosed at stage III or IV due to insidious peritoneal dissemination. High-grade serous ovarian carcinoma characteristically arises from the fimbriated end of the fallopian tube via serous tubal intraepithelial carcinoma STIC lesions with ubiquitous TP53 mutations. Precursor secretory cells detach from fimbriae and implant upon ovarian and pelvic peritoneal surfaces.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fallopian tube fimbriae"
+     },
+     {
+      "id": "b",
+      "label": "STIC precursor (TP53 signature)"
+     },
+     {
+      "id": "c",
+      "label": "Exfoliation onto ovary"
+     },
+     {
+      "id": "d",
+      "label": "High-grade serous carcinoma"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "DNA damage and TP53 mutation"
+     ],
+     [
+      "b",
+      "c",
+      "ovulation microtrauma seeding"
+     ],
+     [
+      "c",
+      "d",
+      "widespread peritoneal carcinomatosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maximal surgical cytoreduction serves as the cornerstone of upfront management. Primary **cytoreductive surgery** aims for complete macroscopic resection R0, which provides the most critical independent determinant of progression-free and overall survival. Surgical debulking encompasses total abdominal hysterectomy, bilateral salpingo-oophorectomy, total omentectomy, pelvic and para-aortic lymphadenectomy, and peritonectomy or bowel resections necessary to remove all visible deposits.",
+   "say": "Maximal surgical cytoreduction serves as the cornerstone of upfront management. Primary cytoreductive surgery aims for complete macroscopic resection R0, which provides the most critical independent determinant of progression-free and overall survival. Surgical debulking encompasses total abdominal hysterectomy, bilateral salpingo-oophorectomy, total omentectomy, pelvic and para-aortic lymphadenectomy, and peritonectomy or bowel resections necessary to remove all visible deposits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete Cytoreduction (R0)",
+     "points": [
+      "No macroscopic residual disease",
+      "Median overall survival exceeds 60-70 months",
+      "Goal of all primary debulking attempts",
+      "Significantly prolongs response to platinum"
+     ]
+    },
+    "right": {
+     "title": "Suboptimal Cytoreduction",
+     "points": [
+      "Residual nodules > 1 cm diameter",
+      "Median overall survival under 35-40 months",
+      "Higher rate of early platinum resistance",
+      "Candidate for neoadjuvant chemotherapy instead"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Standard frontline systemic chemotherapy combines platinum and taxane doublets. First-line systemic therapy for advanced ovarian cancer is **carboplatin AUC** 5 to 6 plus paclitaxel 175 mg/m2 every 3 weeks for 6 cycles, with or without bevacizumab in GOG-0218. In GOG-0218, adding concurrent and maintenance bevacizumab extended progression-free survival, particularly in suboptimally debulked stage IV disease.",
+   "say": "Standard frontline systemic chemotherapy combines platinum and taxane doublets. First-line systemic therapy for advanced ovarian cancer is carboplatin AUC 5 to 6 plus paclitaxel 175 mg/m2 every 3 weeks for 6 cycles, with or without bevacizumab in GOG-0218. In GOG-0218, adding concurrent and maintenance bevacizumab extended progression-free survival, particularly in suboptimally debulked stage IV disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen Component",
+     "Standard Dose / Route",
+     "Schedule",
+     "Key Landmark / Note"
+    ],
+    "rows": [
+     [
+      "Carboplatin",
+      "Target AUC 5 to 6 (Calvert formula)",
+      "Day 1 every 3 weeks for 6 cycles",
+      "Forms platinum-DNA intrastrand crosslinks"
+     ],
+     [
+      "Paclitaxel",
+      "175 mg/m2 over 3 hours",
+      "Day 1 every 3 weeks for 6 cycles",
+      "Spindle poison hyper-stabilising tubulin"
+     ],
+     [
+      "Bevacizumab (optional)",
+      "15 mg/kg IV",
+      "Cycles 2-6 + maintenance up to 22 cycles",
+      "GOG-0218 (PFS benefit in stage IV / sub-optimal)"
+     ],
+     [
+      "Dose-dense weekly paclitaxel",
+      "80 mg/m2 weekly + q3w carboplatin",
+      "Weekly days 1, 8, 15",
+      "JGOG 3016 (OS benefit in Asian cohort)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted maintenance therapy exploits homologous recombination deficiency. **Maintenance olaparib** for 2 years significantly prolongs progression-free survival in newly diagnosed advanced BRCA-mutated ovarian cancer, reducing progression risk by 70% in SOLO-1. Long-term seven-year follow-up demonstrated a median PFS of 56.0 months with olaparib compared to 13.8 months with placebo, solidifying PARP inhibition as upfront standard of care.",
+   "say": "Targeted maintenance therapy exploits homologous recombination deficiency. Maintenance olaparib for 2 years significantly prolongs progression-free survival in newly diagnosed advanced BRCA-mutated ovarian cancer, reducing progression risk by 70% in SOLO-1. Long-term seven-year follow-up demonstrated a median PFS of 56.0 months with olaparib compared to 13.8 months with placebo, solidifying PARP inhibition as upfront standard of care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Newly diagnosed advanced ovarian cancer"
+     },
+     {
+      "id": "b",
+      "label": "Complete/partial response to platinum"
+     },
+     {
+      "id": "c",
+      "label": "Germline or somatic BRCA1/2 mutation"
+     },
+     {
+      "id": "d",
+      "label": "Olaparib maintenance 300 mg bid x 2 years (SOLO-1)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "surgery + carboplatin/paclitaxel"
+     ],
+     [
+      "b",
+      "c",
+      "molecular biomarker testing"
+     ],
+     [
+      "c",
+      "d",
+      "70% reduction in disease progression risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "PARP maintenance indications have expanded across broader biomarker groups. Maintenance **niraparib** provides significant progression-free survival benefit across all advanced ovarian cancer patients responding to platinum, regardless of BRCA mutation or HRD status in PRIMA. Niraparib is dosed using individualized baseline platelet count and body weight to minimize grade 3/4 thrombocytopenia, offering substantial benefit in homologous recombination-deficient tumours.",
+   "say": "PARP maintenance indications have expanded across broader biomarker groups. Maintenance niraparib provides significant progression-free survival benefit across all advanced ovarian cancer patients responding to platinum, regardless of BRCA mutation or HRD status in PRIMA. Niraparib is dosed using individualized baseline platelet count and body weight to minimize grade 3/4 thrombocytopenia, offering substantial benefit in homologous recombination-deficient tumours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PRIMA (HRD-Positive Cohort)",
+     "points": [
+      "Median PFS: 21.9 vs 10.4 months",
+      "Hazard ratio: 0.43 (57% risk reduction)",
+      "High clinical magnitude of benefit",
+      "Strongest response in BRCA-mutant cases"
+     ]
+    },
+    "right": {
+     "title": "PRIMA (Overall Population / HR-Proficient)",
+     "points": [
+      "Median PFS: 13.8 vs 8.2 months overall",
+      "HR-proficient HR: 0.68",
+      "Statistically significant benefit regardless of HRD",
+      "Individualized starting dose (200 vs 300 mg)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Therapeutic decision-making in recurrent disease depends on treatment-free interval. **Platinum-sensitive** recurrence occurring 6 months or more after completing frontline platinum is retreated with platinum doublets and maintenance PARP inhibitors. Doublet regimens include carboplatin plus gemcitabine, pegylated liposomal doxorubicin, or paclitaxel. Conversely, platinum-resistant disease recurring within 6 months mandates non-platinum monotherapy.",
+   "say": "Therapeutic decision-making in recurrent disease depends on treatment-free interval. Platinum-sensitive recurrence occurring 6 months or more after completing frontline platinum is retreated with platinum doublets and maintenance PARP inhibitors. Doublet regimens include carboplatin plus gemcitabine, pegylated liposomal doxorubicin, or paclitaxel. Conversely, platinum-resistant disease recurring within 6 months mandates non-platinum monotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Recurrence Category",
+     "Platinum-Free Interval",
+     "Preferred Regimen",
+     "Maintenance Option"
+    ],
+    "rows": [
+     [
+      "Platinum-refractory",
+      "Progressing during primary therapy",
+      "Non-platinum single agent or clinical trial",
+      "None"
+     ],
+     [
+      "Platinum-resistant",
+      "< 6 months after completion",
+      "PLD, paclitaxel, topotecan, mirvetuximab",
+      "Bevacizumab"
+     ],
+     [
+      "Partially platinum-sensitive",
+      "6 to 12 months after completion",
+      "Carboplatin + PLD / Gemcitabine",
+      "PARP inhibitor if PARP-naive"
+     ],
+     [
+      "Fully platinum-sensitive",
+      "> 12 months after completion",
+      "Carboplatin doublet +/- Bevacizumab",
+      "Secondary cytoreduction or PARP / Bevacizumab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Folate receptor alpha targeted therapy overcomes cytotoxic resistance in recurrent disease. **Mirvetuximab soravtansine** is an antibody-drug conjugate targeting folate receptor alpha FRalpha, improving overall survival in platinum-resistant ovarian cancer in the MIRASOL trial. Mirvetuximab delivers the potent microtubule-disrupting maytansinoid DM4 to tumour cells demonstrating high FRalpha positivity on immunohistochemistry.",
+   "say": "Folate receptor alpha targeted therapy overcomes cytotoxic resistance in recurrent disease. Mirvetuximab soravtansine is an antibody-drug conjugate targeting folate receptor alpha FRalpha, improving overall survival in platinum-resistant ovarian cancer in the MIRASOL trial. Mirvetuximab delivers the potent microtubule-disrupting maytansinoid DM4 to tumour cells demonstrating high FRalpha positivity on immunohistochemistry.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Platinum-resistant recurrence"
+     },
+     {
+      "id": "b",
+      "label": "FRalpha IHC >= 75% cells (Ventana FOLR1)"
+     },
+     {
+      "id": "c",
+      "label": "Mirvetuximab soravtansine 6 mg/kg q3w"
+     },
+     {
+      "id": "d",
+      "label": "OS and ORR superior to standard chemotherapy (MIRASOL)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "biomarker testing"
+     ],
+     [
+      "b",
+      "c",
+      "cleavable disulfide linker with DM4"
+     ],
+     [
+      "c",
+      "d",
+      "improves median OS to 16.5 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct intraperitoneal delivery achieves high regional drug concentration with minimal systemic toxicity. Hyperthermic **intraperitoneal chemotherapy** HIPEC with cisplatin at interval cytoreductive surgery improves progression-free and overall survival in stage 3 ovarian cancer. Performed after three neoadjuvant chemotherapy cycles, cisplatin 100 mg/m2 circulated at 40 to 41 degrees Celsius for 90 minutes added significant survival benefit in the Dutch OVHIPEC-1 trial.",
+   "say": "Direct intraperitoneal delivery achieves high regional drug concentration with minimal systemic toxicity. Hyperthermic intraperitoneal chemotherapy HIPEC with cisplatin at interval cytoreductive surgery improves progression-free and overall survival in stage 3 ovarian cancer. Performed after three neoadjuvant chemotherapy cycles, cisplatin 100 mg/m2 circulated at 40 to 41 degrees Celsius for 90 minutes added significant survival benefit in the Dutch OVHIPEC-1 trial.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "OVHIPEC-1 Protocol",
+     "points": [
+      "Stage III disease after neoadjuvant chemotherapy",
+      "Complete or optimal interval debulking",
+      "Cisplatin 100 mg/m2 at 40-41 deg C for 90 min",
+      "Median OS improved from 33.9 to 45.7 months"
+     ]
+    },
+    "right": {
+     "title": "Intravenous Chemotherapy Alone",
+     "points": [
+      "Standard interval surgery without perfusion",
+      "Post-operative cycles 4 to 6 of IV chemo",
+      "Higher rate of peritoneal cavity recurrence",
+      "No hyperthermic pharmacokinetic enhancement"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

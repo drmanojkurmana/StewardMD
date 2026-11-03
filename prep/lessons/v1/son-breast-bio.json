@@ -1,105 +1,338 @@
 {
- "v": 1,
- "module": "son-breast-bio",
- "subject": "ss-medical-oncology",
- "title": "Breast cancer biology and staging: receptors, molecular subtypes and prognostic groups",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Breast cancer is classified first by **immunohistochemistry** (IHC) on core biopsy. Oestrogen receptor (ER) and progesterone receptor (PR) are tested routinely in every invasive cancer, as is **HER2** status. These three markers decide systemic therapy. ER or PR positivity predicts response to endocrine therapy, and HER2 amplification predicts response to anti-HER2 agents. Ki-67 is a proliferation marker that helps separate luminal A from luminal B tumours.",
-   "say": "Breast cancer is first classified by immunohistochemistry on the core biopsy. Oestrogen receptor and progesterone receptor are tested in every invasive cancer, as is HER2 status. These three markers decide systemic therapy. Receptor positivity predicts response to endocrine therapy, and HER2 amplification predicts response to anti-HER2 agents. Ki-67 is a proliferation marker that helps separate luminal A from luminal B tumours.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Marker",
-     "Clinical meaning",
-     "Drives therapy"
-    ],
-    "rows": [
-     [
-      "ER and PR",
-      "Hormone receptor status",
-      "Endocrine therapy"
-     ],
-     [
-      "HER2",
-      "Receptor tyrosine kinase amplification",
-      "Anti-HER2 agents"
-     ],
-     [
-      "Ki-67",
-      "Proliferation index",
-      "Luminal A versus B"
-     ],
-     [
-      "Triple negative",
-      "ER, PR and HER2 all absent",
-      "Chemotherapy focus"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Molecular subtypes combine these markers. **Luminal A** is ER or PR positive, HER2 negative and has low Ki-67. **Luminal B** is hormone receptor positive with either high Ki-67 or HER2 positivity. **HER2 enriched** tumours are HER2 positive with no hormone receptors. **Triple negative** tumours lack ER, PR and HER2, and carry a poorer short-term prognosis.",
-   "say": "Molecular subtypes combine these markers. Luminal A is receptor positive, HER2 negative and has low Ki-67. Luminal B is hormone receptor positive with either high Ki-67 or HER2 positivity. HER2 enriched tumours are HER2 positive with no hormone receptors. Triple negative tumours lack oestrogen receptor, progesterone receptor and HER2, and carry a poorer short-term prognosis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Luminal A and B",
-     "points": [
-      "Luminal A: ER or PR positive, HER2 negative, low Ki-67",
-      "Luminal B: hormone positive with high Ki-67 or HER2 positive"
-     ]
+  "v": 1,
+  "module": "son-breast-bio",
+  "subject": "ss-medical-oncology",
+  "title": "Breast cancer biology and staging",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Breast carcinoma is a heterogeneous spectrum of diseases categorized into intrinsic molecular subtypes by gene expression profiling. Intrinsic molecular classification categorizes invasive breast carcinoma into **Luminal A**, Luminal B, **HER2-enriched**, and basal-like subtypes. Luminal A tumours express high estrogen and progesterone receptor levels with low proliferative index Ki-67 under fourteen percent, carrying the most favourable prognosis.",
+      "say": "Breast carcinoma is a heterogeneous spectrum of diseases categorized into intrinsic molecular subtypes by gene expression profiling. Intrinsic molecular classification categorizes invasive breast carcinoma into Luminal A, Luminal B, HER2-enriched, and basal-like subtypes. Luminal A tumours express high estrogen and progesterone receptor levels with low proliferative index Ki-67 under fourteen percent, carrying the most favourable prognosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Intrinsic Subtype",
+          "Receptor Profile & Ki-67",
+          "Clinical Behaviour & Primary Therapy"
+        ],
+        "rows": [
+          [
+            "Luminal A",
+            "ER+ / PR high (>20%) / HER2- / Ki-67 low (<14%)",
+            "Indolent, excellent prognosis; endocrine monotherapy standard"
+          ],
+          [
+            "Luminal B (HER2-)",
+            "ER+ / PR low or negative / HER2- / Ki-67 high (>=20%)",
+            "Higher recurrence risk; often requires adjuvant chemotherapy + ET"
+          ],
+          [
+            "Luminal B (HER2+)",
+            "ER+ / any PR / HER2+ / any Ki-67",
+            "Aggressive; requires anti-HER2 targeted therapy + chemotherapy + ET"
+          ],
+          [
+            "HER2-Enriched",
+            "ER- / PR- / HER2+ / high proliferation",
+            "Highly proliferative; treated with dual HER2 blockade + taxane"
+          ],
+          [
+            "Basal-Like (TNBC)",
+            "ER- / PR- / HER2- / EGFR+ / Cytokeratin 5/6+",
+            "Aggressive, visceral/CNS tropism; chemo-immunotherapy sensitive"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "HER2 enriched and triple negative",
-     "points": [
-      "HER2 enriched: HER2 positive, hormone receptors absent",
-      "Triple negative: ER, PR and HER2 all absent"
-     ]
+    {
+      "tx": "Pathological assessment of steroid hormone receptor status dictates eligibility for targeted endocrine therapy. **Oestrogen receptor** and progesterone receptor positivity is defined by ASCO/CAP guidelines as **1% or more** of tumour cell nuclei demonstrating immunoreactivity. Tumours displaying one to ten percent nuclear positivity are designated ER-low-positive, a biologically heterogeneous cohort that often behaves similarly to hormone receptor-negative disease.",
+      "say": "Pathological assessment of steroid hormone receptor status dictates eligibility for targeted endocrine therapy. Oestrogen receptor and progesterone receptor positivity is defined by ASCO/CAP guidelines as 1% or more of tumour cell nuclei demonstrating immunoreactivity. Tumours displaying one to ten percent nuclear positivity are designated ER-low-positive, a biologically heterogeneous cohort that often behaves similarly to hormone receptor-negative disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hormone Receptor Positive (>= 10%)",
+          "items": [
+            "Robust nuclear staining in >= 10% of invasive cells",
+            "High endocrine responsiveness to tamoxifen or aromatase inhibitors",
+            "Favourable natural history with late recurrences beyond 5 years",
+            "Candidate for CDK4/6 inhibitor adjuvant or palliative combinations"
+          ]
+        },
+        "right": {
+          "title": "ER-Low-Positive (1% to 9%)",
+          "items": [
+            "Weak or focal nuclear staining in 1% to 9% of tumour cells",
+            "Biologically heterogeneous; frequently clusters with basal-like TNBC",
+            "Limited benefit from single-agent adjuvant endocrine therapy",
+            "Often requires systemic chemotherapy regimens similar to TNBC"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Human epidermal growth factor receptor 2 overexpression defines an aggressive biological phenotype responsive to receptor-targeted therapeutics. **HER2 testing by IHC** is scored as 3+ positive for intense complete circumferential membrane staining in more than ten percent of cells, while **equivocal 2+** requires reflex in situ hybridisation FISH. FISH amplification is defined as a HER2/CEP17 ratio of 2.0 or higher, or an average HER2 copy number of 6.0 or higher per nucleus.",
+      "say": "Human epidermal growth factor receptor 2 overexpression defines an aggressive biological phenotype responsive to receptor-targeted therapeutics. HER2 testing by IHC is scored as 3+ positive for intense complete circumferential membrane staining in more than ten percent of cells, while equivocal 2+ requires reflex in situ hybridisation FISH. FISH amplification is defined as a HER2/CEP17 ratio of 2.0 or higher, or an average HER2 copy number of 6.0 or higher per nucleus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Invasive Breast Carcinoma Tissue"
+          },
+          {
+            "id": "b",
+            "label": "HER2 Immunohistochemistry (IHC)"
+          },
+          {
+            "id": "c",
+            "label": "IHC 0 or 1+ (HER2-Negative / HER2-Low)"
+          },
+          {
+            "id": "d",
+            "label": "IHC 2+ (Equivocal)"
+          },
+          {
+            "id": "e",
+            "label": "IHC 3+ (HER2-Positive)"
+          },
+          {
+            "id": "f",
+            "label": "Reflex In Situ Hybridisation (FISH)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Standardised CAP-accredited processing"
+          ],
+          [
+            "b",
+            "c",
+            "No amplification; qualify for T-DXd if low"
+          ],
+          [
+            "b",
+            "d",
+            "Mandatory reflex testing"
+          ],
+          [
+            "b",
+            "e",
+            "Circumferential membrane staining > 10%"
+          ],
+          [
+            "d",
+            "f",
+            "Ratio >= 2.0 or copy number >= 6.0 defines positive"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The therapeutic paradigm for low-level receptor expression has been transformed by modern antibody-drug conjugates. **HER2-low breast cancer**, defined by IHC 1+ or IHC 2+ without gene amplification, is clinically targetable by **trastuzumab deruxtecan** in advanced disease based on DESTINY-Breast04. The cleavable tetrapeptide linker and potent membrane-permeable topoisomerase I inhibitor payload deliver a potent bystander effect to neighbouring malignant cells.",
+      "say": "The therapeutic paradigm for low-level receptor expression has been transformed by modern antibody-drug conjugates. HER2-low breast cancer, defined by IHC 1+ or IHC 2+ without gene amplification, is clinically targetable by trastuzumab deruxtecan in advanced disease based on DESTINY-Breast04. The cleavable tetrapeptide linker and potent membrane-permeable topoisomerase I inhibitor payload deliver a potent bystander effect to neighbouring malignant cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "HER2 IHC 1+ or IHC 2+ / FISH-Negative"
+          },
+          {
+            "id": "b",
+            "label": "Trastuzumab Deruxtecan (T-DXd) Infusion"
+          },
+          {
+            "id": "c",
+            "label": "Receptor Internalisation & Lysosomal Cleavage"
+          },
+          {
+            "id": "d",
+            "label": "Release of DXd Topoisomerase I Inhibitor"
+          },
+          {
+            "id": "e",
+            "label": "Bystander Cytotoxic Killing of Adjacent Cells"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Binds low-density HER2 receptors"
+          ],
+          [
+            "b",
+            "c",
+            "Cathepsin cleavage of peptide linker"
+          ],
+          [
+            "c",
+            "d",
+            "High drug-to-antibody ratio (8:1)"
+          ],
+          [
+            "d",
+            "e",
+            "Membrane-permeable payload diffusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Multigene expression assays provide individualized risk estimation, sparing low-risk patients unnecessary exposure to toxic adjuvant chemotherapy. The **21-gene recurrence score** Oncotype DX quantifies distant recurrence risk in HR-positive HER2-negative early breast cancer, sparing adjuvant chemotherapy in postmenopausal women with **RS under 26** in TAILORx. Patients aged 50 or younger with RS 16-25 derive modest chemotherapy benefit, potentially mediated by chemotherapy-induced ovarian suppression.",
+      "say": "Multigene expression assays provide individualized risk estimation, sparing low-risk patients unnecessary exposure to toxic adjuvant chemotherapy. The 21-gene recurrence score Oncotype DX quantifies distant recurrence risk in HR-positive HER2-negative early breast cancer, sparing adjuvant chemotherapy in postmenopausal women with RS under 26 in TAILORx. Patients aged 50 or younger with RS 16-25 derive modest chemotherapy benefit, potentially mediated by chemotherapy-induced ovarian suppression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Recurrence Score (RS)",
+          "Patient Age / Menopause",
+          "Chemotherapy Benefit (TAILORx / RxPONDER)"
+        ],
+        "rows": [
+          [
+            "RS 0 to 10",
+            "All ages, Node-negative",
+            "Chemotherapy provides no benefit; endocrine therapy alone"
+          ],
+          [
+            "RS 11 to 25",
+            "Postmenopausal, Node-negative",
+            "Endocrine therapy alone non-inferior to chemo-endocrine"
+          ],
+          [
+            "RS 16 to 25",
+            "Age <= 50 years, Node-negative",
+            "Small chemotherapy benefit (1.6% to 6.5% absolute DFS gain)"
+          ],
+          [
+            "RS 26 to 100",
+            "All ages, Node-negative",
+            "Substantial absolute chemotherapy benefit exceeding 10% to 15%"
+          ],
+          [
+            "RS 0 to 25",
+            "Postmenopausal, 1-3 positive nodes",
+            "RxPONDER trial: no chemotherapy benefit; ET alone safe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**MammaPrint** 70-gene signature categorises early breast cancer into low and high genomic risk, demonstrating that clinically high-risk patients with genomic low risk can safely omit adjuvant chemotherapy in **MINDACT**. In this landmark trial with **70** genes, 5-year distant metastasis-free survival was 95% without chemotherapy in the discordantly low genomic risk cohort.",
+      "say": "MammaPrint 70-gene signature categorises early breast cancer into low and high genomic risk, demonstrating that clinically high-risk patients with genomic low risk can safely omit adjuvant chemotherapy in MINDACT. In this landmark trial with 70 genes, 5-year distant metastasis-free survival was 95% without chemotherapy in the discordantly low genomic risk cohort.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical TNM Staging",
+          "items": [
+            "Based purely on primary tumour size (T1-T4)",
+            "Number and location of involved regional lymph nodes (N0-N3)",
+            "Absence or presence of distant metastases (M0-M1)",
+            "Identical stage assigned regardless of tumour differentiation or biology"
+          ]
+        },
+        "right": {
+          "title": "Prognostic Stage Grouping (8th Edition)",
+          "items": [
+            "Integrates histological grade (G1, G2, G3)",
+            "Incorporates ER and PR nuclear immunohistochemistry status",
+            "Incorporates HER2 amplification status",
+            "Incorporates 21-gene RS < 11 (automatically assigns Stage IA)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "AJCC 8th edition incorporates anatomical tumour size and nodal involvement with histologic grade, ER, PR, and HER2 to define Clinical and Pathological **Prognostic Stages**. Integrating biological drivers with anatomy refines risk stratification, effectively downstaging biologically favourable indolent tumours and upstaging poorly differentiated aggressive carcinomas into higher Prognostic Stages.",
+      "say": "AJCC 8th edition incorporates anatomical tumour size and nodal involvement with histologic grade, ER, PR, and HER2 to define Clinical and Pathological Prognostic Stages. Integrating biological drivers with anatomy refines risk stratification, effectively downstaging biologically favourable indolent tumours and upstaging poorly differentiated aggressive carcinomas into higher Prognostic Stages.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Feature",
+          "Invasive Ductal Carcinoma (NST)",
+          "Invasive Lobular Carcinoma (ILC)"
+        ],
+        "rows": [
+          [
+            "Architecture",
+            "Cohesive glandular sheets, tubules, or nests",
+            "Discohesive single-file infiltration (Indian filing)"
+          ],
+          [
+            "E-Cadherin (CDH1)",
+            "Positive membrane staining preserved",
+            "Loss of E-cadherin membrane expression"
+          ],
+          [
+            "Bilateral / Multifocal",
+            "Less frequent (~5% bilateral)",
+            "High incidence (up to 15-20% bilateral/multifocal)"
+          ],
+          [
+            "Metastatic Tropism",
+            "Lungs, pleura, liver, axial skeleton",
+            "Peritoneum, omentum, retroperitoneum, GI tract, ovaries"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ki-67 **proliferation index** serves as a crucial distinction between Luminal A-like and **Luminal B-like** breast carcinomas, with a 20% cut-off distinguishing high from low proliferative activity. Elevated **Ki-67** proliferation index indicates rapid cellular turnover, predicting higher relapse risk but concurrently heightened responsiveness to adjuvant taxane-containing chemotherapy regimens.",
+      "say": "Ki-67 proliferation index serves as a crucial distinction between Luminal A-like and Luminal B-like breast carcinomas, with a 20% cut-off distinguishing high from low proliferative activity. Elevated Ki-67 proliferation index indicates rapid cellular turnover, predicting higher relapse risk but concurrently heightened responsiveness to adjuvant taxane-containing chemotherapy regimens.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Screening Mammography (Microcalcifications)"
+          },
+          {
+            "id": "b",
+            "label": "Stereotactic Core Biopsy Confirms DCIS"
+          },
+          {
+            "id": "c",
+            "label": "Breast-Conserving Surgery with Clear Margins (>= 2 mm)"
+          },
+          {
+            "id": "d",
+            "label": "Adjuvant Whole-Breast Radiotherapy (50% Recurrence Drop)"
+          },
+          {
+            "id": "e",
+            "label": "Adjuvant Tamoxifen / AI for 5 Years if ER-Positive"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Linear or pleomorphic branching calcifications"
+          ],
+          [
+            "b",
+            "c",
+            "Absence of basement membrane invasion"
+          ],
+          [
+            "c",
+            "d",
+            "Halves ipsilateral breast recurrence risk"
+          ],
+          [
+            "d",
+            "e",
+            "Reduces invasive contralateral recurrence"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Genomic assays refine risk in early, node negative, hormone receptor positive disease. **Oncotype DX** gives a recurrence score; TAILORx showed that patients with low scores can safely omit chemotherapy. **MammaPrint**, tested in the MINDACT trial, classifies risk as high or low. RxPONDER later showed that chemotherapy benefit is limited in node positive patients with low recurrence scores. Only one assay should be used for a given patient.",
-   "say": "Genomic assays refine risk in early, node negative, hormone receptor positive disease. Oncotype DX gives a recurrence score, and the TAILORx trial showed that patients with low scores can safely omit chemotherapy. MammaPrint, tested in the MINDACT trial, classifies risk as high or low. RxPONDER later showed limited chemotherapy benefit in node positive patients with low recurrence scores. Only one assay should be used for a given patient.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-breast-bio-fig1.webp",
-    "alt": "Diagram showing how genomic assays like Oncotype DX stratify early, hormone receptor-positive breast cancer patients into low or high recurrence risk groups to guide chemotherapy decisions.",
-    "caption": "Genomic assays refine risk and guide therapy",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Germline testing matters for biology and counselling. **BRCA1** and **BRCA2** mutations carry a lifetime risk of invasive breast cancer of roughly 50 to 80 percent by age 80. First degree relatives of an affected woman have a two to three fold increased risk. Invasive lobular carcinoma loses E-cadherin expression and tends to be multifocal and bilateral, while medullary carcinoma is more common in BRCA carriers.",
-   "say": "Germline testing matters for biology and counselling. BRCA1 and BRCA2 mutations carry a lifetime risk of invasive breast cancer of roughly fifty to eighty percent by age eighty. First degree relatives of an affected woman have a two to three fold increased risk. Invasive lobular carcinoma loses E-cadherin expression and tends to be multifocal and bilateral, while medullary carcinoma is more common in BRCA carriers.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_68033b92edce",
-  "q_7f7d692cf381",
-  "q_8844d7cead42"
- ],
- "src": [],
- "refs": [
-  "TAILORx trial (Sparano et al., New England Journal of Medicine)",
-  "MINDACT trial (Cardoso et al., New England Journal of Medicine)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 38
- }
+  ],
+  "quiz": [
+    "q_68033b92edce",
+    "q_7f7d692cf381",
+    "q_8844d7cead42"
+  ]
 }

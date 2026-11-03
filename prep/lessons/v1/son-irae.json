@@ -1,0 +1,271 @@
+{
+ "v": 1,
+ "module": "son-irae",
+ "subject": "ss-medical-oncology",
+ "title": "Immune related adverse events",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Immune-related adverse events** irAEs arise from autoimmune breakdown of self-tolerance following CTLA-4, PD-1, or PD-L1 blockade, potentially affecting any organ system. CTLA-4 inhibitors like ipilimumab predominantly trigger enterocolitis and hypophysitis by disinhibiting early T-cell priming in lymph nodes, whereas PD-1 and PD-L1 inhibitors more frequently induce pneumonitis, thyroiditis, and vitiligo by reinvigorating exhausted effector T-cells in peripheral tissues.",
+   "say": "Immune-related adverse events irAEs arise from autoimmune breakdown of self-tolerance following CTLA-4, PD-1, or PD-L1 blockade, potentially affecting any organ system. CTLA-4 inhibitors like ipilimumab predominantly trigger enterocolitis and hypophysitis by disinhibiting early T-cell priming in lymph nodes, whereas PD-1 and PD-L1 inhibitors more frequently induce pneumonitis, thyroiditis, and vitiligo by reinvigorating exhausted effector T-cells in peripheral tissues.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-CTLA-4 Toxicity Profile",
+     "points": [
+      "Colitis and severe enteritis common (30-40%)",
+      "Hypophysitis / pituitary axis failure",
+      "Higher overall grade 3/4 toxicity rates",
+      "Onset typically within first 6 to 12 weeks"
+     ]
+    },
+    "right": {
+     "title": "Anti-PD-1 / PD-L1 Toxicity Profile",
+     "points": [
+      "Pneumonitis and interstitial lung opacities",
+      "Thyroiditis (hypothyroidism / transient hyperthyroidism)",
+      "Lower high-grade toxicity rates (<15%)",
+      "Can manifest months to years after initiation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gastrointestinal toxicity is among the commonest severe presentations requiring early intervention. **Checkpoint inhibitor colitis** presents with profuse watery diarrhoea and mucosal ulceration; grade 2 or higher colitis requires systemic corticosteroids with prednisone 1 to 2 mg/kg daily. Diarrhoea exceeding four stools over baseline represents grade 2, mandating checkpoint inhibitor interruption, infectious stool workup including Clostridioides difficile, and rapid immunosuppression.",
+   "say": "Gastrointestinal toxicity is among the commonest severe presentations requiring early intervention. Checkpoint inhibitor colitis presents with profuse watery diarrhoea and mucosal ulceration; grade 2 or higher colitis requires systemic corticosteroids with prednisone 1 to 2 mg/kg daily. Diarrhoea exceeding four stools over baseline represents grade 2, mandating checkpoint inhibitor interruption, infectious stool workup including Clostridioides difficile, and rapid immunosuppression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Watery diarrhoea on immunotherapy"
+     },
+     {
+      "id": "b",
+      "label": "Stool infectious panel + Flex sigmoidoscopy"
+     },
+     {
+      "id": "c",
+      "label": "Grade >= 2 (>=4 stools/day over baseline)"
+     },
+     {
+      "id": "d",
+      "label": "Hold IO + Prednisone 1 to 2 mg/kg daily"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "rule out C. diff, CMV"
+     ],
+     [
+      "b",
+      "c",
+      "mucosal ulceration confirms irAE"
+     ],
+     [
+      "c",
+      "d",
+      "taper over 4 to 6 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure to improve on corticosteroids within two to three days warrants prompt second-line biologic therapy. **Steroid-refractory** immune colitis failing systemic corticosteroids within 48 to 72 hours requires prompt escalation to anti-TNF antibody infliximab or gut-selective integrin inhibitor vedolizumab. Infliximab 5 mg/kg administered intravenously neutralizes mucosal TNF-alpha, while vedolizumab targets alpha-4-beta-7 integrin to block gut-homing T-lymphocyte trafficking.",
+   "say": "Failure to improve on corticosteroids within two to three days warrants prompt second-line biologic therapy. Steroid-refractory immune colitis failing systemic corticosteroids within 48 to 72 hours requires prompt escalation to anti-TNF antibody infliximab or gut-selective integrin inhibitor vedolizumab. Infliximab 5 mg/kg administered intravenously neutralizes mucosal TNF-alpha, while vedolizumab targets alpha-4-beta-7 integrin to block gut-homing T-lymphocyte trafficking.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infliximab (Anti-TNF)",
+     "points": [
+      "5 mg/kg IV at weeks 0, 2, and 6 as needed",
+      "Rapid clinical improvement within 24 to 48 hours",
+      "Screen for latent tuberculosis and hepatitis B",
+      "Contraindicated in concurrent immune hepatitis"
+     ]
+    },
+    "right": {
+     "title": "Vedolizumab (Anti-Integrin)",
+     "points": [
+      "300 mg IV infusion",
+      "Gut-selective alpha-4-beta-7 integrin blocker",
+      "No systemic immunosuppression or infection risk",
+      "Preferred if history of latent infections or cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pulmonary complications carry significant mortality if recognition is delayed. Immune checkpoint inhibitor **pneumonitis** manifests as dyspnoea, dry cough, and ground-glass opacities, requiring immediate drug interruption, high-dose steroids, and infectious bronchoscopy workup. Grade 2 pneumonitis with mild symptoms requires oral prednisone 1 to 2 mg/kg daily, whereas grade 3 or 4 hypoxia requires intravenous methylprednisolone 2 to 4 mg/kg daily.",
+   "say": "Pulmonary complications carry significant mortality if recognition is delayed. Immune checkpoint inhibitor pneumonitis manifests as dyspnoea, dry cough, and ground-glass opacities, requiring immediate drug interruption, high-dose steroids, and infectious bronchoscopy workup. Grade 2 pneumonitis with mild symptoms requires oral prednisone 1 to 2 mg/kg daily, whereas grade 3 or 4 hypoxia requires intravenous methylprednisolone 2 to 4 mg/kg daily.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity Grade",
+     "Clinical Symptoms",
+     "Radiological Pattern",
+     "Medical Management"
+    ],
+    "rows": [
+     [
+      "Grade 1 (Mild)",
+      "Asymptomatic",
+      "Radiographic findings only (<25% parenchyma)",
+      "Hold IO, monitor weekly CT chest"
+     ],
+     [
+      "Grade 2 (Moderate)",
+      "New symptoms, dyspnoea on exertion",
+      "Multifocal ground-glass opacities (25-50%)",
+      "Hold IO, Prednisone 1-2 mg/kg daily taper"
+     ],
+     [
+      "Grade 3/4 (Severe)",
+      "Hypoxia, resting dyspnoea, supplemental O2",
+      "Diffuse ground glass / consolidation (>50%)",
+      "IV methylprednisolone, infliximab or IVIG"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autoimmune endocrine toxicities damage hormone-producing glands and rarely recover endogenous production. Endocrine irAEs including **hypophysitis** and thyroiditis are typically irreversible, requiring long-term hormone replacement with levothyroxine or physiological hydrocortisone without discontinuing immunotherapy. Hypophysitis manifests with frontal headache and central secondary adrenal insufficiency with low ACTH, requiring urgent morning cortisol testing and hydrocortisone replacement.",
+   "say": "Autoimmune endocrine toxicities damage hormone-producing glands and rarely recover endogenous production. Endocrine irAEs including hypophysitis and thyroiditis are typically irreversible, requiring long-term hormone replacement with levothyroxine or physiological hydrocortisone without discontinuing immunotherapy. Hypophysitis manifests with frontal headache and central secondary adrenal insufficiency with low ACTH, requiring urgent morning cortisol testing and hydrocortisone replacement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immune Hypophysitis",
+     "points": [
+      "Predominant with anti-CTLA-4 (ipilimumab)",
+      "Headache, fatigue, anorexia, visual disturbances",
+      "Low ACTH, low TSH, low LH/FSH on endocrine panel",
+      "Long-term physiologic hydrocortisone and levothyroxine"
+     ]
+    },
+    "right": {
+     "title": "Immune Thyroiditis",
+     "points": [
+      "Predominant with anti-PD-1 (pembrolizumab, nivolumab)",
+      "Transient hyperthyroid phase followed by permanent hypothyroid",
+      "Elevated TSH with low free T4",
+      "Lifelong levothyroxine replacement; continue IO"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hepatic toxicity presents insidiously with laboratory transaminitis. Checkpoint inhibitor-associated hepatitis presents with asymptomatic AST/ALT elevations; steroid-refractory **immune hepatitis** is treated with oral mycophenolate mofetil rather than infliximab. Infliximab carries an FDA black-box warning for hepatotoxicity and is contraindicated. Oral mycophenolate mofetil 500 to 1000 mg twice daily suppresses hepatic T-cell infiltration, monitored until liver enzymes fall below grade 1.",
+   "say": "Hepatic toxicity presents insidiously with laboratory transaminitis. Checkpoint inhibitor-associated hepatitis presents with asymptomatic AST/ALT elevations; steroid-refractory immune hepatitis is treated with oral mycophenolate mofetil rather than infliximab. Infliximab carries an FDA black-box warning for hepatotoxicity and is contraindicated. Oral mycophenolate mofetil 500 to 1000 mg twice daily suppresses hepatic T-cell infiltration, monitored until liver enzymes fall below grade 1.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "AST/ALT > 5x ULN (Grade 3 hepatitis)"
+     },
+     {
+      "id": "b",
+      "label": "Rule out viral hepatitis, thrombosis, alcohol"
+     },
+     {
+      "id": "c",
+      "label": "Methylprednisolone 1 to 2 mg/kg IV"
+     },
+     {
+      "id": "d",
+      "label": "Steroid-refractory -> Add Mycophenolate mofetil (MMF)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "hepatic ultrasound + serologies"
+     ],
+     [
+      "b",
+      "c",
+      "hold immunotherapy"
+     ],
+     [
+      "c",
+      "d",
+      "contraindicated: infliximab (hepatic risk)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standardized oncological grading systems categorize severity and direct intervention urgency. **CTCAE**, or Common Terminology Criteria for Adverse Events, grades irAE severity from grade 1 mild asymptomatic to grade 4 life-threatening and grade 5 death. Grade 1 toxicities generally permit continuing checkpoint blockade under close clinical surveillance, whereas grade 2 mandates holding therapy, and grade 3 or 4 requires immediate hospital admission and high-dose immunosuppression.",
+   "say": "Standardized oncological grading systems categorize severity and direct intervention urgency. CTCAE, or Common Terminology Criteria for Adverse Events, grades irAE severity from grade 1 mild asymptomatic to grade 4 life-threatening and grade 5 death. Grade 1 toxicities generally permit continuing checkpoint blockade under close clinical surveillance, whereas grade 2 mandates holding therapy, and grade 3 or 4 requires immediate hospital admission and high-dose immunosuppression.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CTCAE Grade",
+     "Clinical Severity",
+     "Immunotherapy Action",
+     "Medical Intervention"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "Mild; asymptomatic or mild symptoms",
+      "Continue immunotherapy",
+      "Supportive care, close monitoring"
+     ],
+     [
+      "Grade 2",
+      "Moderate; minimal local intervention",
+      "Hold immunotherapy",
+      "Prednisone 0.5 to 1 mg/kg/day"
+     ],
+     [
+      "Grade 3",
+      "Severe or medically significant",
+      "Hold / permanently discontinue",
+      "High-dose steroids (1-2 mg/kg/day), admit"
+     ],
+     [
+      "Grade 4 / 5",
+      "Life-threatening consequences / Death",
+      "Permanently discontinue",
+      "Urgent ICU admission, multi-agent immunosuppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Decisions regarding resuming checkpoint blockade after resolution require careful risk-benefit evaluation. Immune checkpoint inhibitor **rechallenge** is generally safe for resolved low-grade toxicities but is permanently contraindicated following severe grade 4 irAEs, especially myocarditis and Stevens-Johnson syndrome. Myocarditis carries up to fifty percent mortality, presenting with elevated troponin, conduction blocks, and ventricular arrhythmias requiring immediate high-dose pulse methylprednisolone.",
+   "say": "Decisions regarding resuming checkpoint blockade after resolution require careful risk-benefit evaluation. Immune checkpoint inhibitor rechallenge is generally safe for resolved low-grade toxicities but is permanently contraindicated following severe grade 4 irAEs, especially myocarditis and Stevens-Johnson syndrome. Myocarditis carries up to fifty percent mortality, presenting with elevated troponin, conduction blocks, and ventricular arrhythmias requiring immediate high-dose pulse methylprednisolone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Permanent Contraindications to Rechallenge",
+     "points": [
+      "Immune-mediated myocarditis",
+      "Stevens-Johnson syndrome / TEN",
+      "Grade 4 neurological toxicities (myasthenia, encephalitis)",
+      "Grade 4 pneumonitis or bullous dermatitis"
+     ]
+    },
+    "right": {
+     "title": "Permissible Rechallenge Conditions",
+     "points": [
+      "Grade 1 or 2 toxicities fully resolved to grade <=1",
+      "Steroid taper completed (<10 mg prednisone daily)",
+      "Controlled endocrine deficiencies on replacement",
+      "Shared clinical decision-making with patient"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

@@ -1,0 +1,293 @@
+{
+ "v": 1,
+ "module": "son-nhl-aggressive",
+ "subject": "ss-medical-oncology",
+ "title": "Aggressive B cell lymphomas",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Diffuse large B-cell** lymphoma DLBCL is the most common non-Hodgkin lymphoma, divided by cell of origin into germinal centre B-cell-like GCB and activated B-cell-like ABC phenotypes. The Hans immunohistochemistry algorithm classifies cases using CD10, BCL6, and MUM1 expression. ABC or non-GCB subtype demonstrates constitutive NF-kappa-B pathway activation and historically poorer outcomes with standard anthracycline-based chemoimmunotherapy.",
+   "say": "Diffuse large B-cell lymphoma DLBCL is the most common non-Hodgkin lymphoma, divided by cell of origin into germinal centre B-cell-like GCB and activated B-cell-like ABC phenotypes. The Hans immunohistochemistry algorithm classifies cases using CD10, BCL6, and MUM1 expression. ABC or non-GCB subtype demonstrates constitutive NF-kappa-B pathway activation and historically poorer outcomes with standard anthracycline-based chemoimmunotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "DLBCL biopsy"
+     },
+     {
+      "id": "b",
+      "label": "Hans IHC panel (CD10, BCL6, MUM1)"
+     },
+     {
+      "id": "c",
+      "label": "GCB phenotype (CD10+ or BCL6+/MUM1-)"
+     },
+     {
+      "id": "d",
+      "label": "Non-GCB / ABC phenotype (MUM1+)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "evaluates cell of origin"
+     ],
+     [
+      "b",
+      "c",
+      "better prognosis with R-CHOP"
+     ],
+     [
+      "b",
+      "d",
+      "NF-kB dependent, Pola-R-CHP benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chemoimmunotherapy combinations established the curative foundation for aggressive lymphomas. Frontline **R-CHOP** rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone cures approximately 60% of patients with advanced diffuse large B-cell lymphoma. Six cycles administered every 21 days with growth factor support represents the standard regimen, monitoring left ventricular ejection fraction for anthracycline cardiotoxicity and managing tumour lysis syndrome risk.",
+   "say": "Chemoimmunotherapy combinations established the curative foundation for aggressive lymphomas. Frontline R-CHOP rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone cures approximately 60% of patients with advanced diffuse large B-cell lymphoma. Six cycles administered every 21 days with growth factor support represents the standard regimen, monitoring left ventricular ejection fraction for anthracycline cardiotoxicity and managing tumour lysis syndrome risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen Component",
+     "Drug Class / Target",
+     "Dose and Schedule",
+     "Major Toxicities"
+    ],
+    "rows": [
+     [
+      "Rituximab",
+      "Anti-CD20 monoclonal antibody",
+      "375 mg/m2 IV Day 1",
+      "Infusion reactions, HBV reactivation"
+     ],
+     [
+      "Cyclophosphamide",
+      "Alkylating agent",
+      "750 mg/m2 IV Day 1",
+      "Myelosuppression, cystitis"
+     ],
+     [
+      "Doxorubicin",
+      "Topoisomerase II / Intercalator",
+      "50 mg/m2 IV Day 1",
+      "Cardiomyopathy, alopecia, vesicant"
+     ],
+     [
+      "Vincristine",
+      "Tubulin spindle poison",
+      "1.4 mg/m2 (capped 2 mg) Day 1",
+      "Peripheral neuropathy, paralytic ileus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Antibody-drug conjugates targeting B-cell lineage markers improve frontline event-free survival. **Polatuzumab vedotin** anti-CD79b antibody-drug conjugate substituted for vincristine in Pola-R-CHP significantly improves progression-free survival over R-CHOP in previously untreated DLBCL in POLARIX. The addition of the monomethyl auristatin E MMAE conjugate reduced progression or death risk by twenty-seven percent in intermediate- and high-risk patients.",
+   "say": "Antibody-drug conjugates targeting B-cell lineage markers improve frontline event-free survival. Polatuzumab vedotin anti-CD79b antibody-drug conjugate substituted for vincristine in Pola-R-CHP significantly improves progression-free survival over R-CHOP in previously untreated DLBCL in POLARIX. The addition of the monomethyl auristatin E MMAE conjugate reduced progression or death risk by twenty-seven percent in intermediate- and high-risk patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pola-R-CHP (POLARIX Trial)",
+     "points": [
+      "Polatuzumab vedotin + Rituximab + CHP",
+      "Vincristine omitted (eliminates additive neuropathy)",
+      "Significant PFS advantage (HR 0.73)",
+      "Preferred frontline for IPI 2 to 5 DLBCL"
+     ]
+    },
+    "right": {
+     "title": "Standard R-CHOP",
+     "points": [
+      "Rituximab + CHOP",
+      "Includes vincristine (2 mg dose cap)",
+      "Curative in approx. 60% of patients overall",
+      "Standard of care in low-risk (IPI 0-1)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genomic translocations involving oncogenic drivers define refractory high-grade biology. High-grade B-cell lymphoma with MYC and **BCL2** and/or BCL6 rearrangements double-hit or triple-hit lymphoma exhibits an aggressive clinical course resistant to standard R-CHOP. Fluorescence in situ hybridization FISH for MYC, BCL2, and BCL6 translocations is mandatory in high-grade morphology, warranting dose-adjusted EPOCH-R instead of R-CHOP.",
+   "say": "Genomic translocations involving oncogenic drivers define refractory high-grade biology. High-grade B-cell lymphoma with MYC and BCL2 and/or BCL6 rearrangements double-hit or triple-hit lymphoma exhibits an aggressive clinical course resistant to standard R-CHOP. Fluorescence in situ hybridization FISH for MYC, BCL2, and BCL6 translocations is mandatory in high-grade morphology, warranting dose-adjusted EPOCH-R instead of R-CHOP.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Molecular Entity",
+     "Chromosomal Alterations",
+     "Protein Expression",
+     "Preferred Induction Regimen"
+    ],
+    "rows": [
+     [
+      "Double-hit lymphoma",
+      "MYC (8q24) + BCL2 (18q21) translocations",
+      "Dual rearrangement on FISH",
+      "Dose-adjusted EPOCH-R"
+     ],
+     [
+      "Triple-hit lymphoma",
+      "MYC + BCL2 + BCL6 (3q27) translocations",
+      "Triple rearrangement on FISH",
+      "Dose-adjusted EPOCH-R"
+     ],
+     [
+      "Double-expressor lymphoma",
+      "No translocations on FISH",
+      "Overexpression by IHC (MYC >=40%, BCL2 >=50%)",
+      "R-CHOP or Pola-R-CHP"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prognostic scoring models guide patient counseling and trial stratification. The **International Prognostic Index** IPI incorporates age over 60, stage III/IV, elevated LDH, ECOG performance status 2 or higher, and more than 1 extranodal site. Each adverse factor scores one point, categorizing patients into low risk (0-1), low-intermediate (2), high-intermediate (3), and high risk (4-5), with five-year overall survival ranging from eighty-three down to fifty percent.",
+   "say": "Prognostic scoring models guide patient counseling and trial stratification. The International Prognostic Index IPI incorporates age over 60, stage III/IV, elevated LDH, ECOG performance status 2 or higher, and more than 1 extranodal site. Each adverse factor scores one point, categorizing patients into low risk (0-1), low-intermediate (2), high-intermediate (3), and high risk (4-5), with five-year overall survival ranging from eighty-three down to fifty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IPI Factor",
+     "Adverse Criterion",
+     "Risk Stratification",
+     "5-Year Overall Survival"
+    ],
+    "rows": [
+     [
+      "Age",
+      "> 60 years",
+      "Low risk (0 to 1 point)",
+      "83%"
+     ],
+     [
+      "Stage",
+      "Ann Arbor Stage III or IV",
+      "Low-intermediate (2 points)",
+      "69%"
+     ],
+     [
+      "Serum LDH",
+      "> Upper limit of normal",
+      "High-intermediate (3 points)",
+      "53%"
+     ],
+     [
+      "Performance status & Extranodal",
+      "ECOG >= 2; > 1 extranodal site",
+      "High risk (4 to 5 points)",
+      "51%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extremely rapid cellular doubling necessitates urgent protocol-directed multidrug chemotherapy. **Burkitt lymphoma** is a high-grade B-cell malignancy with near 100% Ki-67 proliferation and hallmark MYC translocations t(8;14), exhibiting a characteristic starry-sky histological pattern. Translocation places MYC under immunoglobulin heavy-chain enhancer control. Intensive fractionated chemotherapy like CODOX-M/IVAC or DA-EPOCH-R with aggressive hydration and rasburicase cures over eighty percent.",
+   "say": "Extremely rapid cellular doubling necessitates urgent protocol-directed multidrug chemotherapy. Burkitt lymphoma is a high-grade B-cell malignancy with near 100% Ki-67 proliferation and hallmark MYC translocations t(8;14), exhibiting a characteristic starry-sky histological pattern. Translocation places MYC under immunoglobulin heavy-chain enhancer control. Intensive fractionated chemotherapy like CODOX-M/IVAC or DA-EPOCH-R with aggressive hydration and rasburicase cures over eighty percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Burkitt Lymphoma Features",
+     "points": [
+      "Ki-67 proliferation index approaching 100%",
+      "t(8;14) MYC-IGH in >85% of cases",
+      "Medium-sized cells, starry-sky pattern (tingible macrophages)",
+      "High risk of acute spontaneous tumor lysis syndrome"
+     ]
+    },
+    "right": {
+     "title": "Diffuse Large B-Cell Lymphoma",
+     "points": [
+      "Variable Ki-67 proliferation (40% to 90%)",
+      "Heterogeneous translocations (BCL2, BCL6, MYC)",
+      "Large transformed lymphoid cells",
+      "Treated primarily with R-CHOP or Pola-R-CHP"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Genetically modified autologous T-cells provide curative salvage in chemotherapy-refractory relapse. Autologous CAR-T cell therapy **axicabtagene ciloleucel** in ZUMA-7 and lisocabtagene maraleucel in TRANSFORM established significant event-free and overall survival superiority over salvage autologous transplant in early-relapsed DLBCL. Axi-cel quadrupled median event-free survival to 8.3 months compared to 2.0 months with second-line platinum-based chemoimmunotherapy.",
+   "say": "Genetically modified autologous T-cells provide curative salvage in chemotherapy-refractory relapse. Autologous CAR-T cell therapy axicabtagene ciloleucel in ZUMA-7 and lisocabtagene maraleucel in TRANSFORM established significant event-free and overall survival superiority over salvage autologous transplant in early-relapsed DLBCL. Axi-cel quadrupled median event-free survival to 8.3 months compared to 2.0 months with second-line platinum-based chemoimmunotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Primary refractory / early relapse <=12 mo"
+     },
+     {
+      "id": "b",
+      "label": "Lymphodepletion (Fludarabine/Cyclophosphamide)"
+     },
+     {
+      "id": "c",
+      "label": "Axicabtagene ciloleucel CAR-T infusion"
+     },
+     {
+      "id": "d",
+      "label": "Superior EFS & OS over salvage ASCT (ZUMA-7)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "CD19-directed CAR-T eligibility"
+     ],
+     [
+      "b",
+      "c",
+      "creates homeostatic expansion niche"
+     ],
+     [
+      "c",
+      "d",
+      "replaces platinum chemo + HDT-ASCT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mature B-cell lymphomas harboring characteristic cyclin alterations demonstrate distinct drug vulnerabilities. **Mantle cell lymphoma** MCL is defined by t(11;14)(q13;q32) producing cyclin D1 CCND1 nuclear overexpression, displaying high sensitivity to covalent BTK inhibitors ibrutinib and zanubrutinib. Younger fit patients receive cytarabine-containing induction followed by autologous stem cell transplantation and maintenance rituximab, while elderly patients receive bendamustine-rituximab followed by BTK targeted therapy.",
+   "say": "Mature B-cell lymphomas harboring characteristic cyclin alterations demonstrate distinct drug vulnerabilities. Mantle cell lymphoma MCL is defined by t(11;14)(q13;q32) producing cyclin D1 CCND1 nuclear overexpression, displaying high sensitivity to covalent BTK inhibitors ibrutinib and zanubrutinib. Younger fit patients receive cytarabine-containing induction followed by autologous stem cell transplantation and maintenance rituximab, while elderly patients receive bendamustine-rituximab followed by BTK targeted therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Setting",
+     "Patient Population",
+     "Standard Induction Regimen",
+     "Maintenance / Consolidation"
+    ],
+    "rows": [
+     [
+      "Young / Transplant-eligible",
+      "Age < 65, good performance status",
+      "Alternating R-CHOP / R-DHAP",
+      "High-dose BEAM + ASCT -> Rituximab maintenance"
+     ],
+     [
+      "Elderly / Unfit",
+      "Age >= 65 or comorbidities",
+      "Bendamustine + Rituximab (BR)",
+      "Maintenance rituximab for 2 to 3 years"
+     ],
+     [
+      "Relapsed / Refractory",
+      "Any age, post-chemotherapy",
+      "Zanubrutinib / Acalabrutinib / Pirtobrutinib",
+      "Brexucabtagene autoleucel CAR-T (ZUMA-2)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}
