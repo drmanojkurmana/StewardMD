@@ -18,15 +18,15 @@
 ## Progress Summary
 | Subject | Stage 1 (Blueprint & Taxonomy) | Stage 2 (Lessons Written) | Coverage Pass | Gates Pass | PR Link |
 |---|---|---|---|---|---|
-| ss-plastic-surgery | Done (48 modules, 389 facts) | In progress | Pending | Pending | - |
-| ss-urology | Pending | Pending | Pending | Pending | - |
-| ss-surgical-gastroenterology | Pending | Pending | Pending | Pending | - |
-| ss-neurosurgery | Pending | Pending | Pending | Pending | - |
-| ss-paediatric-surgery | Pending | Pending | Pending | Pending | - |
-| ss-ctvs | Pending | Pending | Pending | Pending | - |
-| ss-gynaecology-ss | Pending | Pending | Pending | Pending | - |
-| ss-reproductive-medicine | Pending | Pending | Pending | Pending | - |
-| ss-gynaecological-oncology | Pending | Pending | Pending | Pending | - |
+| ss-plastic-surgery | Done (48 modules, 389 facts) | In progress | Pending | Pending | #1889 |
+| ss-urology | Pending | Pending | Pending | Pending | #1889 |
+| ss-surgical-gastroenterology | Pending | Pending | Pending | Pending | #1889 |
+| ss-neurosurgery | Pending | Pending | Pending | Pending | #1889 |
+| ss-paediatric-surgery | Pending | Pending | Pending | Pending | #1889 |
+| ss-ctvs | Pending | Pending | Pending | Pending | #1889 |
+| ss-gynaecology-ss | Pending | Pending | Pending | Pending | #1889 |
+| ss-reproductive-medicine | Pending | Pending | Pending | Pending | #1889 |
+| ss-gynaecological-oncology | Pending | Pending | Pending | Pending | #1889 |
 
 ## Gates & Tooling Setup
 - [x] Initialise STATE.md
