@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "module": "sne-myopathies-muscular-dystrophies",
+ "title": "Myopathies, muscular dystrophies and motor neuron disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Amyotrophic lateral sclerosis** is characterized by concurrent upper motor neuron and lower motor neuron loss displaying diffuse **fasciculations**, muscle wasting, and progressive flaccid weakness without objective sensory involvement, driven by pathological TDP-43 aggregation. Electromyography confirms widespread active denervation and chronic reinnervation across multiple spinal regions.",
+   "say": "Amyotrophic lateral sclerosis is characterized by concurrent upper motor neuron and lower motor neuron loss displaying diffuse fasciculations, muscle wasting, and progressive flaccid weakness without objective sensory involvement, driven by pathological TDP-43 aggregation. Electromyography confirms widespread active denervation and chronic reinnervation across multiple spinal regions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amyotrophic-lateral-sclerosis-fig1.webp",
+    "alt": "Diagram illustrating upper and lower motor neuron degeneration in amyotrophic lateral sclerosis.",
+    "caption": "Upper and lower motor neuron degeneration patterns in ALS (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Duchenne muscular dystrophy** is an X-linked recessive disorder caused by out-of-frame mutations in the DMD gene leading to complete absence of **dystrophin**, manifesting with calf pseudohypertrophy, Gowers sign, and extreme creatine kinase elevation exceeding 10,000 U/L in affected young boys.",
+   "say": "Duchenne muscular dystrophy is an X-linked recessive disorder caused by out-of-frame mutations in the DMD gene leading to complete absence of dystrophin, manifesting with calf pseudohypertrophy, Gowers sign, and extreme creatine kinase elevation exceeding 10,000 U/L in affected young boys.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuropathy-myopathy-mg-lambert-duchenne-fig1.webp",
+    "alt": "Illustration of young boy demonstrating Gowers sign pushing off legs to stand.",
+    "caption": "Gowers sign and pelvic girdle weakness in Duchenne muscular dystrophy (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The reading-frame rule dictates the phenotypic disparity in dystrophinopathies. **Becker muscular dystrophy** results from in-frame mutations in DMD preserving partially functional truncated **dystrophin**, displaying a milder clinical course with later ambulatory loss beyond age 16. Regular echocardiographic surveillance remains mandatory due to the risk of disproportionate dilated cardiomyopathy.",
+   "say": "The reading-frame rule dictates the phenotypic disparity in dystrophinopathies. Becker muscular dystrophy results from in-frame mutations in DMD preserving partially functional truncated dystrophin, displaying a milder clinical course with later ambulatory loss beyond age 16. Regular echocardiographic surveillance remains mandatory due to the risk of disproportionate dilated cardiomyopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Duchenne Dystrophy",
+     "points": [
+      "Out-of-frame nonsense or frame-shift mutations",
+      "Complete absence of dystrophin (< 5% normal)",
+      "Loss of independent ambulation before age 12",
+      "Severe early dilated cardiomyopathy"
+     ]
+    },
+    "right": {
+     "title": "Becker Dystrophy",
+     "points": [
+      "In-frame deletion preserving reading frame",
+      "Abnormal molecular weight but partially functional",
+      "Independent ambulation preserved past age 16",
+      "Late-onset cardiomyopathy may predominate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Myotonic dystrophy** type 1, known as Steinert disease, is an autosomal dominant CTG trinucleotide repeat expansion exceeding 50 repeats in the **DMPK** gene on chromosome 19q13.3, manifesting with grip myotonia, frontal balding, cataracts, and cardiac conduction blocks. Annual electrocardiographic monitoring is essential to detect heart block and prevent sudden cardiac death.",
+   "say": "Myotonic dystrophy type 1, known as Steinert disease, is an autosomal dominant CTG trinucleotide repeat expansion exceeding 50 repeats in the DMPK gene on chromosome 19q13.3, manifesting with grip myotonia, frontal balding, cataracts, and cardiac conduction blocks. Annual electrocardiographic monitoring is essential to detect heart block and prevent sudden cardiac death.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "DMPK CTG Repeat Expansion"
+     },
+     {
+      "id": "b",
+      "label": "MBNL1 Splicing Sequestration"
+     },
+     {
+      "id": "c",
+      "label": "Chloride Channel Missplicing"
+     },
+     {
+      "id": "d",
+      "label": "Clinical Percussion Myotonia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "RNA toxicity"
+     ],
+     [
+      "b",
+      "c",
+      "CLCN1 defect"
+     ],
+     [
+      "c",
+      "d",
+      "membrane hyperexcitability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dermatomyositis** features proximal muscle weakness and pathognomonic cutaneous findings including **heliotrope rash**, Gottron papules, and shawl sign, showing perifascicular muscle fiber atrophy and perivascular B-cell infiltration on diagnostic muscle biopsy. Age-appropriate malignancy screening is mandatory given the substantially elevated risk of associated occult visceral adenocarcinoma.",
+   "say": "Dermatomyositis features proximal muscle weakness and pathognomonic cutaneous findings including heliotrope rash, Gottron papules, and shawl sign, showing perifascicular muscle fiber atrophy and perivascular B-cell infiltration on diagnostic muscle biopsy. Age-appropriate malignancy screening is mandatory given the substantially elevated risk of associated occult visceral adenocarcinoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dermatomyositis",
+     "points": [
+      "Complement C5b-9 microangiopathy",
+      "Perifascicular myofiber atrophy hallmark",
+      "Perivascular and epimysial CD4 B-cells",
+      "Cutaneous Gottron papules and heliotrope rash"
+     ]
+    },
+    "right": {
+     "title": "Polymyositis",
+     "points": [
+      "Antigen-directed CD8 cytotoxic T-cell injury",
+      "Endomysial invasion of healthy non-necrotic fibres",
+      "MHC-1 diffuse upregulation on myofibers",
+      "Lack of pathognomonic cutaneous manifestations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Inclusion body myositis** typically affects males over age 50, featuring asymmetrical weakness of the deep finger flexors and quadriceps, with **rimmed vacuoles** and intracellular amyloid inclusions on muscle biopsy, proving refractory to standard corticosteroid therapy. Long-term physical and occupational therapy plays the central role in maintaining functional mobility and independence.",
+   "say": "Inclusion body myositis typically affects males over age 50, featuring asymmetrical weakness of the deep finger flexors and quadriceps, with rimmed vacuoles and intracellular amyloid inclusions on muscle biopsy, proving refractory to standard corticosteroid therapy. Long-term physical and occupational therapy plays the central role in maintaining functional mobility and independence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Inclusion Body Myositis",
+     "Polymyositis"
+    ],
+    "rows": [
+     [
+      "Typical Age",
+      "Males over 50 years",
+      "Females 30 to 50 years"
+     ],
+     [
+      "Weakness Pattern",
+      "Deep finger flexors and quadriceps",
+      "Symmetric proximal shoulder and pelvic girdle"
+     ],
+     [
+      "Biopsy Features",
+      "Rimmed vacuoles, TDP-43 and amyloid",
+      "Endomysial inflammation, no vacuoles"
+     ],
+     [
+      "Steroid Response",
+      "Refractory to immunosuppression",
+      "Substantial improvement with corticosteroids"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spinal muscular atrophy** is an autosomal recessive motor neuron disease caused by homozygous SMN1 gene deletions, treated with SMN-upregulating targeted therapies like **nusinersen**, risdiplam, or onasemnogene abeparvovec to prevent lower motor neuron death. Early initiation before irreversible motor neuron loss occurs is paramount for optimal motor developmental outcomes.",
+   "say": "Spinal muscular atrophy is an autosomal recessive motor neuron disease caused by homozygous SMN1 gene deletions, treated with SMN-upregulating targeted therapies like nusinersen, risdiplam, or onasemnogene abeparvovec to prevent lower motor neuron death. Early initiation before irreversible motor neuron loss occurs is paramount for optimal motor developmental outcomes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "SMN1 Homozygous Deletion"
+     },
+     {
+      "id": "b",
+      "label": "SMN Protein Deficiency"
+     },
+     {
+      "id": "c",
+      "label": "Anterior Horn Cell Apoptosis"
+     },
+     {
+      "id": "d",
+      "label": "Nusinersen SMN2 Splicing Rescue"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "genetic defect"
+     ],
+     [
+      "b",
+      "c",
+      "motor neuron loss"
+     ],
+     [
+      "d",
+      "b",
+      "exon 7 inclusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Riluzole**, an inhibitor of presynaptic glutamate release, and **edaravone**, a free radical scavenger, are disease-modifying therapies that modestly prolong tracheostomy-free survival and slow functional decline in patients with amyotrophic lateral sclerosis. Multidisciplinary supportive care including non-invasive ventilation and timely gastrostomy placement optimizes patient quality of life.",
+   "say": "Riluzole, an inhibitor of presynaptic glutamate release, and edaravone, a free radical scavenger, are disease-modifying therapies that modestly prolong tracheostomy-free survival and slow functional decline in patients with amyotrophic lateral sclerosis. Multidisciplinary supportive care including non-invasive ventilation and timely gastrostomy placement optimizes patient quality of life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacotherapy",
+     "Mechanism of Action",
+     "Clinical Benefit"
+    ],
+    "rows": [
+     [
+      "Riluzole",
+      "Glutamate release inhibition and NMDA blockade",
+      "Prolongs survival by 2 to 3 months"
+     ],
+     [
+      "Edaravone",
+      "Free radical scavenger and antioxidant",
+      "Slows functional decline in early disease"
+     ],
+     [
+      "Tofersen",
+      "Antisense oligonucleotide targeting SOD1",
+      "Slows decline in SOD1 mutation carriers"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Adams and Victor Principles of Neurology 11e Ch. 48",
+  "Netter Neurology 2e Ch. 18"
+ ]
+}
