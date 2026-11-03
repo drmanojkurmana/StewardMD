@@ -1,0 +1,290 @@
+{
+  "v": 1,
+  "module": "sca-aortic-valve",
+  "subject": "ss-cardiology",
+  "title": "Aortic Valve Disease: Stenosis and Regurgitation",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Severe aortic stenosis** is defined by peak aortic **jet velocity** at least **4.0** m/s, mean transvalvular gradient at least **40** mmHg, and aortic valve area at most **1.0** cm2 or indexed AVA at most **0.6** cm2/m2. Once severe stenosis becomes symptomatic with angina, syncope, or heart failure, prompt valve replacement is required.",
+      "say": "Severe aortic stenosis is defined by peak aortic jet velocity of at least 4 point 0 m/s, mean transvalvular gradient of at least 40 mmHg, and aortic valve area of at most 1 point 0 cm2 or indexed AVA of at most 0 point 6 cm2/m2. Once severe stenosis becomes symptomatic with angina, syncope, or heart failure, prompt valve replacement is required.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hemodynamic Parameter",
+          "Mild Stenosis",
+          "Moderate Stenosis",
+          "Severe Stenosis"
+        ],
+        "rows": [
+          [
+            "Peak Jet Velocity",
+            "< 3.0 m/s",
+            "3.0 to 3.9 m/s",
+            "\u2265  4.0 m/s (or \u2265  5.0 for very severe)"
+          ],
+          [
+            "Mean Transvalvular Gradient",
+            "< 20 mmHg",
+            "20 to 39 mmHg",
+            "\u2265  40 mmHg"
+          ],
+          [
+            "Aortic Valve Area",
+            "> 1.5 cm2",
+            "1.0 to 1.5 cm2",
+            "\u2264  1.0 cm2"
+          ],
+          [
+            "Indexed Valve Area",
+            "> 0.85 cm2/m2",
+            "0.60 to 0.85 cm2/m2",
+            "\u2264  0.60 cm2/m2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Classical **low-flow**, low-gradient severe AS with reduced LVEF < **50%**, valve area at most **1.0** cm2, and mean gradient < **40** mmHg requires **dobutamine stress echocardiography** to distinguish true severe AS from pseudo-severe stenosis. In true severe stenosis, stroke volume increases while valve area remains fixed at most 1.0 cm2.",
+      "say": "Classical low-flow, low-gradient severe AS with reduced LVEF less than 50%, valve area at most 1 point 0 cm2, and mean gradient less than 40 mmHg requires dobutamine stress echocardiography to distinguish true severe AS from pseudo-severe stenosis. In true severe stenosis, stroke volume increases while valve area remains fixed at most 1 point 0 cm2.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Low-Flow Low-Gradient AS (AVA <= 1.0, Mean Grad < 40, EF < 50%)"
+          },
+          {
+            "id": "b",
+            "label": "Low-Dose Dobutamine Stress Echo (Up to 20 mcg/kg/min)"
+          },
+          {
+            "id": "c",
+            "label": "Contractile Reserve Present (Stroke Volume Increases >= 20%)"
+          },
+          {
+            "id": "d",
+            "label": "True Severe AS: AVA <= 1.0 & Mean Grad >= 40 mmHg -> Valve Replacement"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Protocol initiation"
+          ],
+          [
+            "b",
+            "c",
+            "Inotropic challenge"
+          ],
+          [
+            "c",
+            "d",
+            "Differentiate from pseudo-severe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Paradoxical low-flow**, low-gradient severe AS occurs with preserved LVEF at least **50%**, valve area at most **1.0** cm2, mean gradient < **40** mmHg, and reduced **stroke volume index** < **35** mL/m2, often seen in elderly hypertensive women with small, concentric hypertrophied left ventricles. Noncontrast CT calcium scoring confirms true stenosis severity.",
+      "say": "Paradoxical low-flow, low-gradient severe AS occurs with preserved LVEF at least 50%, valve area at most 1 point 0 cm2, mean gradient less than 40 mmHg, and reduced stroke volume index less than 35 mL/m2, often seen in elderly hypertensive women with small, concentric hypertrophied left ventricles. Noncontrast CT calcium scoring confirms true stenosis severity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical Low-Flow Low-Gradient AS",
+          "points": [
+            "Reduced LVEF (< 50%)",
+            "Primary myocardial contractile failure",
+            "Evaluated with dobutamine stress echocardiography",
+            "Assesses contractile reserve (SV increase >= 20%)"
+          ]
+        },
+        "right": {
+          "title": "Paradoxical Low-Flow Low-Gradient AS",
+          "points": [
+            "Preserved LVEF (>= 50%)",
+            "Severe concentric LVH with small ventricular cavity",
+            "Stroke volume index < 35 mL/m2 despite normal EF",
+            "Evaluated with noncontrast CT aortic valve calcium score"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Transcatheter aortic valve implantation** is preferred over surgical aortic valve replacement in patients aged **75** to **80** years or older or high surgical risk, whereas **SAVR** is favored in younger patients under 65 years. Dedicated Heart Team assessment balances vascular anatomical feasibility against long-term bioprosthetic durability.",
+      "say": "Transcatheter aortic valve implantation is preferred over surgical aortic valve replacement in patients aged 75 to 80 years or older or high surgical risk, whereas SAVR is favored in younger patients under 65 years. Dedicated Heart Team assessment balances vascular anatomical feasibility against long-term bioprosthetic durability.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TAVI Considerations",
+          "points": [
+            "Age 75 to 80 years or older",
+            "High surgical risk (STS score > 8%)",
+            "Favorable transfemoral vascular anatomy",
+            "Shorter hospital stay and rapid recovery"
+          ]
+        },
+        "right": {
+          "title": "SAVR Considerations",
+          "points": [
+            "Age under 65 years or life expectancy > 20 years",
+            "Low surgical risk (STS score < 4%)",
+            "Bicuspid valve with significant aortopathy (> 45 mm)",
+            "Concomitant multi-vessel CABG required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bicuspid aortic valve** is the most common congenital heart defect affecting **1%** to **2%** of the population, categorized by **Sievers classification** based on the number of raphes into type **0**, type **1**, and type **2**. Type 1 with fusion of the right and left coronary cusps is the most frequent morphological variant.",
+      "say": "Bicuspid aortic valve is the most common congenital heart defect affecting 1% to 2% of the population, categorized by Sievers classification based on the number of raphes into type 0, type 1, and type 2. Type 1 with fusion of the right and left coronary cusps is the most frequent morphological variant.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sievers Anatomic Type",
+          "Raphe Count",
+          "Prevalence & Cuspal Fusion"
+        ],
+        "rows": [
+          [
+            "Type 0",
+            "Zero raphes",
+            "7% of BAV (Pure bicuspid, true two cusps)"
+          ],
+          [
+            "Type 1",
+            "One raphe",
+            "88% of BAV (Most common: L-R coronary cusp fusion)"
+          ],
+          [
+            "Type 2",
+            "Two raphes",
+            "5% of BAV (Unicuspid-like appearance, rapid degeneration)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe **chronic aortic regurgitation** is defined by **vena contracta** width > **6** mm, regurgitant volume at least **60** mL/beat, regurgitant fraction at least 50%, or pressure half-time < **200** ms on Doppler echocardiography, with normal resting ejection fraction exceeding **65%**. Severe regurgitation produces marked progressive left ventricular volume overload.",
+      "say": "Severe chronic aortic regurgitation is defined by vena contracta width greater than 6 mm, regurgitant volume at least 60 mL/beat, regurgitant fraction at least 50%, or pressure half-time less than 200 ms on Doppler echocardiography, with normal resting ejection fraction exceeding 65%. Severe regurgitation produces marked progressive left ventricular volume overload.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Echocardiographic Parameter",
+          "Mild AR",
+          "Moderate AR",
+          "Severe Aortic Regurgitation"
+        ],
+        "rows": [
+          [
+            "Vena Contracta Width",
+            "< 3.0 mm",
+            "3.0 to 6.0 mm",
+            "> 6.0 mm"
+          ],
+          [
+            "Regurgitant Volume",
+            "< 30 mL/beat",
+            "30 to 59 mL/beat",
+            "\u2265  60 mL/beat"
+          ],
+          [
+            "Pressure Half-Time",
+            "> 500 ms",
+            "200 to 500 ms",
+            "< 200 ms"
+          ],
+          [
+            "Abdominal Aorta Flow",
+            "Absent",
+            "Early diastolic only",
+            "Holodiastolic flow reversal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Surgical aortic valve replacement is indicated for **asymptomatic severe aortic regurgitation** when resting left ventricular ejection fraction is at most **50%**, or **LV end-systolic dimension** exceeds **50** mm or **25** mm/m2. Intervening prior to irreversible myocardial fibrosis preserves long-term postoperative systolic function.",
+      "say": "Surgical aortic valve replacement is indicated for asymptomatic severe aortic regurgitation when resting left ventricular ejection fraction is at most 50%, or LV end-systolic dimension exceeds 50 mm or 25 mm/m2. Intervening prior to irreversible myocardial fibrosis preserves long-term postoperative systolic function.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Documented Severe Chronic Aortic Regurgitation"
+          },
+          {
+            "id": "b",
+            "label": "Are Symptoms Present (Dyspnea, Angina, Fatigue)?"
+          },
+          {
+            "id": "c",
+            "label": "YES: Proceed to Surgery (Class I Indication)"
+          },
+          {
+            "id": "d",
+            "label": "NO: Assess LV Function: LVEF <= 50% or LVESD > 50 mm -> Surgery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Clinical evaluation"
+          ],
+          [
+            "b",
+            "c",
+            "Symptomatic threshold"
+          ],
+          [
+            "b",
+            "d",
+            "Asymptomatic surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Peripheral signs of severe chronic aortic regurgitation include the **Corrigan water-hammer pulse** with bounding carotid upstroke and rapid collapse, and the **Quincke pulse** showing capillary pulsations in the nail bed. These classic physical manifestations reflect a widened pulse pressure driven by rapid diastolic runoff into the left ventricle.",
+      "say": "Peripheral signs of severe chronic aortic regurgitation include the Corrigan water-hammer pulse with bounding carotid upstroke and rapid collapse, and the Quincke pulse showing capillary pulsations in the nail bed. These classic physical manifestations reflect a widened pulse pressure driven by rapid diastolic runoff into the left ventricle.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Eponymous Sign",
+          "Physical Examination Finding",
+          "Underlying Mechanism"
+        ],
+        "rows": [
+          [
+            "Corrigan Water-Hammer Pulse",
+            "Bounding carotid upstroke with rapid collapse",
+            "Large stroke volume ejection followed by rapid runoff"
+          ],
+          [
+            "Quincke Pulse",
+            "Alternating capillary blanching of nail bed",
+            "Wide pulse pressure transmitted to microvasculature"
+          ],
+          [
+            "Duroziez Sign",
+            "To-and-fro systolic and diastolic femoral bruit",
+            "Forward and retrograde flow in large conduit arteries"
+          ],
+          [
+            "de Musset Sign",
+            "Rhythmic head nodding synchronous with heartbeat",
+            "High-volume systolic carotid distension"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

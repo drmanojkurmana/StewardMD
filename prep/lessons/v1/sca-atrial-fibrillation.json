@@ -1,133 +1,294 @@
 {
- "v": 1,
- "module": "sca-atrial-fibrillation",
- "subject": "ss-cardiology",
- "title": "Management of Atrial Fibrillation",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Atrial fibrillation is identified on ECG as an **irregularly irregular** rhythm lacking distinct P waves. It is classified based on duration as first-diagnosed, paroxysmal, persistent, or permanent. Clinicians must actively look for reversible triggers such as **thyrotoxicosis**, electrolyte imbalances, or rheumatic mitral valve disease, which is particularly relevant in India.",
-   "say": "Atrial fibrillation appears on an ECG as an irregularly irregular rhythm without clear P waves. We classify it by duration into first diagnosed, paroxysmal, persistent, or permanent. Always screen for triggers like thyroid issues, electrolyte disturbances, or rheumatic heart disease.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sca-atrial-fibrillation-fig1.webp",
-    "alt": "Electrocardiogram (ECG) strip demonstrating atrial fibrillation with an irregularly irregular rhythm and absent P waves.",
-    "caption": "ECG showing Atrial Fibrillation: irregularly irregular rhythm, no P waves. Image: me, CC0/PD, Wikimedia Commons.",
-    "ar": 1.4159
-   }
-  },
-  {
-   "tx": "For haemodynamically **unstable** patients, perform urgent synchronised DC cardioversion under sedation. In stable patients, the immediate goal is heart rate control, targeting a resting rate below 110 beats per minute. Select agents based on cardiac function; use beta-blockers, diltiazem, or verapamil when the LVEF is above 40 percent.",
-   "say": "If a patient is haemodynamically unstable, perform urgent synchronised DC cardioversion. For stable patients, prioritise heart rate control, aiming for a resting heart rate under 110 beats per minute. If the ejection fraction is above 40 percent, beta-blockers, diltiazem, or verapamil are appropriate choices.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Clinical State",
-     "Action",
-     "Rate Control",
-     "Avoid"
-    ],
-    "rows": [
-     [
-      "Unstable",
-      "DC Cardioversion",
-      "Amiodarone",
-      "None"
-     ],
-     [
-      "Stable LVEF >40",
-      "Rate Control",
-      "BB, Dilt, Verap",
-      "None"
-     ],
-     [
-      "Stable LVEF <=40",
-      "Rate Control",
-      "BB, Digoxin",
-      "Dilt, Verap"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Never cardiovert if the arrhythmia duration exceeds 24 hours or is unknown, unless the patient has received three weeks of effective anticoagulation or a transoesophageal echocardiogram has excluded a **left atrial thrombus**. This safety protocol prevents embolic events following the restoration of sinus rhythm.",
-   "say": "Do not attempt cardioversion if the rhythm has lasted longer than 24 hours or if the start time is unknown. You must first ensure three weeks of therapeutic anticoagulation or perform a transoesophageal echocardiogram to rule out a clot in the left atrium to prevent strokes.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "1",
-      "label": "AF >24h or Unknown"
-     },
-     {
-      "id": "2",
-      "label": "Anticoagulate 3w or TOE"
-     },
-     {
-      "id": "3",
-      "label": "Cardioversion"
-     }
-    ],
-    "edges": [
-     [
-      "1",
-      "2"
-     ],
-     [
-      "2",
-      "3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Stroke risk is assessed using the **CHA2DS2-VA** score. Anticoagulation is recommended for scores of two or higher. DOACs are generally preferred over VKAs, but VKAs remain mandatory for patients with mechanical heart valves or moderate to severe rheumatic mitral stenosis. Antiplatelets should not be used as a substitute for anticoagulants.",
-   "say": "Use the CHA2DS2-VA score to determine stroke risk. If the score is two or more, oral anticoagulation is recommended. Choose DOACs over VKAs, but remember that VKAs are strictly required for mechanical valves or rheumatic mitral stenosis. Never use aspirin alone instead of proper anticoagulation.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "DOACs",
-     "points": [
-      "Preferred for most",
-      "Do not use in valves",
-      "Avoid in severe CKD"
-     ]
+  "v": 1,
+  "module": "sca-atrial-fibrillation",
+  "subject": "ss-cardiology",
+  "title": "Atrial Fibrillation and Atrial Flutter Management",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The **CHA2DS2-VASc score** guides stroke prevention: **oral anticoagulation** is recommended (Class I) for men with score at least **2** and women with score at least **3**, and considered for men with score 1 and women with score 2. Systemic anticoagulation significantly prevents cardioembolic ischemic stroke.",
+      "say": "The CHA2DS2-VASc score guides stroke prevention: oral anticoagulation is recommended (Class I) for men with score at least 2 and women with score at least 3, and considered for men with score 1 and women with score 2. Systemic anticoagulation significantly prevents cardioembolic ischemic stroke.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk Factor Component",
+          "Acronym Letter",
+          "Assigned Point Value"
+        ],
+        "rows": [
+          [
+            "Congestive Heart Failure / LVEF ≤  40%",
+            "C",
+            "1 point"
+          ],
+          [
+            "Hypertension",
+            "H",
+            "1 point"
+          ],
+          [
+            "Age ≥  75 Years",
+            "A2",
+            "2 points"
+          ],
+          [
+            "Diabetes Mellitus",
+            "D",
+            "1 point"
+          ],
+          [
+            "Prior Stroke / TIA / Thromboembolism",
+            "S2",
+            "2 points"
+          ],
+          [
+            "Vascular Disease (Prior MI, PAD, Aortic Plaque)",
+            "V",
+            "1 point"
+          ],
+          [
+            "Age 65 to 74 Years",
+            "A",
+            "1 point"
+          ],
+          [
+            "Sex Category Female",
+            "Sc",
+            "1 point"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "VKAs",
-     "points": [
-      "Mechanical valves",
-      "Rheumatic MS",
-      "Target INR 2.0-3.0"
-     ]
+    {
+      "tx": "**Direct oral anticoagulants** including apixaban, rivaroxaban, edoxaban, and dabigatran are preferred over warfarin in non-valvular AF due to lower rates of **intracranial hemorrhage** and fatal bleeding with equivalent or superior stroke prevention. DOACs avoid routine international normalized ratio coagulation monitoring. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Direct oral anticoagulants including apixaban, rivaroxaban, edoxaban, and dabigatran are preferred over warfarin in non-valvular AF due to lower rates of intracranial hemorrhage and fatal bleeding with equivalent or superior stroke prevention. DOACs avoid routine international normalized ratio coagulation monitoring. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Direct Oral Anticoagulants (DOACs)",
+          "points": [
+            "Direct factor Xa or thrombin inhibition",
+            "50% reduction in intracranial hemorrhage vs warfarin",
+            "Fixed daily dosing without routine INR monitoring",
+            "Rapid onset and offset of anticoagulant effect"
+          ]
+        },
+        "right": {
+          "title": "Warfarin (Vitamin K Antagonist)",
+          "points": [
+            "Inhibits vitamin K epoxide reductase (factors II, VII, IX, X)",
+            "Mandatory in mechanical valves and moderate-to-severe MS",
+            "Requires frequent INR monitoring (target 2.0 to 3.0)",
+            "Multiple food and drug CYP interactions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Catheter ablation via **pulmonary vein isolation** utilizing radiofrequency or **cryoballoon** ablation targets all **4** pulmonary veins, representing the cornerstone interventional strategy for paroxysmal atrial fibrillation. Cryoballoon delivers single-shot freeze energy to establish circumferential transmural scar, electrically isolating arrhythmogenic triggers within the pulmonary veins.",
+      "say": "Catheter ablation via pulmonary vein isolation utilizing radiofrequency or cryoballoon ablation targets all 4 pulmonary veins, representing the cornerstone interventional strategy for paroxysmal atrial fibrillation. Cryoballoon delivers single-shot freeze energy to establish circumferential transmural scar, electrically isolating arrhythmogenic triggers within the pulmonary veins.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Transeptal Left Atrial Access for Catheter Placement"
+          },
+          {
+            "id": "b",
+            "label": "Deploy Cryoballoon or Point-by-Point RF Around Ostia"
+          },
+          {
+            "id": "c",
+            "label": "Complete Electrical Isolation of All 4 Pulmonary Veins"
+          },
+          {
+            "id": "d",
+            "label": "Superior Rhythm Freedom Compared to Antiarrhythmic Drugs"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Vascular cannulation"
+          ],
+          [
+            "b",
+            "c",
+            "Cryothermal or RF energy delivery"
+          ],
+          [
+            "c",
+            "d",
+            "Halt paroxysmal AF triggers"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pulsed field ablation** utilizes non-thermal **irreversible electroporation** to selectively ablate myocardial tissue while sparing adjacent critical structures including the esophagus and phrenic nerve. High-voltage microsecond electrical fields create nanoscale pores in cardiomyocyte sarcolemma, inducing rapid cell death without thermal denaturation. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Pulsed field ablation utilizes non-thermal irreversible electroporation to selectively ablate myocardial tissue while sparing adjacent critical structures including the esophagus and phrenic nerve. High-voltage microsecond electrical fields create nanoscale pores in cardiomyocyte sarcolemma, inducing rapid cell death without thermal denaturation. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pulsed Field Ablation (PFA)",
+          "points": [
+            "Non-thermal irreversible electroporation",
+            "Myocardial tissue selectivity avoids esophagus injury",
+            "Virtually zero risk of phrenic nerve injury or pulmonary vein stenosis",
+            "Ultra-rapid lesion delivery within seconds"
+          ]
+        },
+        "right": {
+          "title": "Thermal Ablation (RF & Cryo)",
+          "points": [
+            "Coagulative necrosis via heat or freezing",
+            "Risk of atrio-esophageal fistula formation",
+            "Requires esophageal temperature monitoring",
+            "Higher procedural time per isolation line"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Typical atrial flutter is a macroreentrant circuit utilizing the **cavotricuspid isthmus** as the critical zone of slow conduction, displaying **sawtooth flutter waves** in inferior leads II, III, and aVF at approximately 300 beats/min, cured with radiofrequency catheter ablation creating bidirectional conduction block.",
+      "say": "Typical atrial flutter is a macroreentrant circuit utilizing the cavotricuspid isthmus as the critical zone of slow conduction, displaying sawtooth flutter waves in inferior leads II, III, and aVF at approximately 300 beats/min, cured with radiofrequency catheter ablation creating bidirectional conduction block.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Macroreentrant Circuit Around Tricuspid Valve Annulus"
+          },
+          {
+            "id": "b",
+            "label": "Obligate Transit Through Cavotricuspid Isthmus (CTI)"
+          },
+          {
+            "id": "c",
+            "label": "Characteristic Negative Sawtooth F Waves in Leads II, III, aVF"
+          },
+          {
+            "id": "d",
+            "label": "Linear RF Ablation Across CTI Yields > 95% Cure Rate"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Right atrial anatomically constrained re-entry"
+          ],
+          [
+            "b",
+            "c",
+            "Classic ECG presentation"
+          ],
+          [
+            "c",
+            "d",
+            "Definitive bidirectional block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Rate control** targets a resting heart rate < **110** bpm based on **lenient rate control** validated in the RACE II trial, utilizing beta-blockers, non-dihydropyridine calcium channel blockers including diltiazem and verapamil, or digoxin. Strict rate control below 80 bpm provided no incremental clinical benefit in clinical trials.",
+      "say": "Rate control targets a resting heart rate less than 110 bpm based on lenient rate control validated in the RACE II trial, utilizing beta-blockers, non-dihydropyridine calcium channel blockers including diltiazem and verapamil, or digoxin. Strict rate control below 80 bpm provided no incremental clinical benefit in clinical trials.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Rate Control Strategy",
+          "Resting Heart Rate Target",
+          "Clinical Trial Evidence"
+        ],
+        "rows": [
+          [
+            "Lenient Rate Control (RACE II)",
+            "Resting HR < 110 beats/min",
+            "Non-inferior for mortality, heart failure, and stroke"
+          ],
+          [
+            "Strict Rate Control",
+            "Resting HR < 80 beats/min",
+            "No additional clinical benefit; higher drug bradycardia adverse effects"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Left atrial appendage occlusion** using the **Watchman** or Amulet device provides mechanical stroke prophylaxis in patients with high thromboembolic risk and absolute lifelong contraindications to oral anticoagulation. Percutaneous transcatheter placement excludes the trabeculated appendage where > 90% of thrombi originate. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Left atrial appendage occlusion using the Watchman or Amulet device provides mechanical stroke prophylaxis in patients with high thromboembolic risk and absolute lifelong contraindications to oral anticoagulation. Percutaneous transcatheter placement excludes the trabeculated appendage where greater than 90% of thrombi originate. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High Thromboembolic Risk AF (CHA2DS2-VASc >= 2)"
+          },
+          {
+            "id": "b",
+            "label": "Major Contraindication to Long-Term Oral Anticoagulation"
+          },
+          {
+            "id": "c",
+            "label": "Percutaneous Transeptal Delivery of Watchman Device"
+          },
+          {
+            "id": "d",
+            "label": "Complete LAA Sealing Eliminates 90% of Stroke Emboli"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Recurrent life-threatening bleeding"
+          ],
+          [
+            "b",
+            "c",
+            "Transcatheter mechanical alternative"
+          ],
+          [
+            "c",
+            "d",
+            "Endothelialization over 45 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cardioversion** of atrial fibrillation of at least **48** hours duration mandates continuous **therapeutic anticoagulation** for at least **3** weeks prior and at least **4** weeks post-procedure, or immediate transesophageal echocardiography to exclude left atrial thrombus. Resuming coordinated atrial mechanical function carries transient thromboembolic risk.",
+      "say": "Cardioversion of atrial fibrillation of at least 48 hours duration mandates continuous therapeutic anticoagulation for at least 3 weeks prior and at least 4 weeks post-procedure, or immediate transesophageal echocardiography to exclude left atrial thrombus. Resuming coordinated atrial mechanical function carries transient thromboembolic risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anticoagulation-Guided Pathway",
+          "points": [
+            "Continuous therapeutic anticoagulation for >= 3 weeks prior",
+            "Perform elective electrical or pharmacological cardioversion",
+            "Continue anticoagulation for at least 4 weeks post-procedure",
+            "Indefinite anticoagulation dictated by CHA2DS2-VASc score"
+          ]
+        },
+        "right": {
+          "title": "TEE-Guided Early Pathway",
+          "points": [
+            "Perform transesophageal echocardiogram before cardioversion",
+            "Rule out left atrial appendage thrombus and spontaneous echo contrast",
+            "Proceed immediately to cardioversion if TEE is negative",
+            "Mandates 4 weeks of post-cardioversion therapeutic anticoagulation"
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "tx": "Do not administer AV nodal blockers like diltiazem, verapamil, or digoxin to patients with pre-excited AF, such as those with **Wolff-Parkinson-White syndrome**. These agents can accelerate conduction through the accessory pathway, potentially leading to ventricular fibrillation. If the patient is unstable, perform DC cardioversion immediately.",
-   "say": "Avoid AV nodal blockers like diltiazem, verapamil, or digoxin in patients with pre-excited AF, such as those with Wolff-Parkinson-White syndrome. These medications can worsen the heart rate by speeding up the accessory pathway. If the patient is unstable, proceed directly to DC cardioversion.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_b000bc9d168d",
-  "q_3fab5a98e1c7",
-  "q_b4802e8df70d"
- ],
- "src": [
-  "kb-atrial-fibrillation"
- ],
- "gen": "AI",
- "run": "lessons-202610060812",
- "model": "gemini-3.1-flash-lite",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "selfCheck": true,
-  "redone": 0,
-  "dropped": 0,
-  "bank": "v2"
- }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
 }
