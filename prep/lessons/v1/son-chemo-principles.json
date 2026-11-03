@@ -3,7 +3,7 @@
   "module": "son-chemo-principles",
   "subject": "ss-medical-oncology",
   "title": "Principles of cytotoxic chemotherapy",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "The theoretical foundation of cancer chemotherapy rests on mathematical models of malignant cell growth and reduction. The Skipper **log-kill hypothesis** postulates that a given dose of **cytotoxic chemotherapy** kills a constant fractional proportion of tumour cells rather than a constant absolute number. Consequently, multiple cycles of treatment with consistent intensity are required to reduce tumour burden below the threshold of immunological clearance.",
@@ -63,6 +63,17 @@
             "Eradication below 10^4 cells"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The **Skipper log kill hypothesis** states that a standard dose kills a constant fraction of tumour cells, not a fixed number. Thus the absolute number of cells destroyed depends on the starting burden, and a small residual population is the target of adjuvant therapy. The **Goldie-Coldman hypothesis** proposes that drug-resistant clones arise spontaneously as tumours grow, so combining non-cross-resistant agents at full doses improves cure rates.",
+      "say": "The Skipper log kill hypothesis states that a standard dose kills a constant fraction of tumour cells, not a fixed number. So the absolute number destroyed depends on the starting burden. The Goldie-Coldman hypothesis proposes that drug resistant clones arise spontaneously as tumours grow. Combining non cross resistant agents at full doses therefore improves cure rates.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-chemo-principles-fig1.webp",
+        "alt": "A graph illustrating the Skipper log kill hypothesis with exponential tumor cell reduction and the Goldie-Coldman hypothesis showing the emergence of drug-resistant clones over time.",
+        "caption": "Log kill and resistance: core principles of cytotoxic chemotherapy",
+        "ar": 1.8349
       }
     },
     {

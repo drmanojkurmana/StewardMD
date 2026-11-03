@@ -3,7 +3,7 @@
   "module": "son-trial-design",
   "subject": "ss-medical-oncology",
   "title": "Clinical trial design in oncology: trial phases, endpoints, statistical models and novel master protocols",
-  "minutes": 5,
+  "minutes": 9,
   "steps": [
     {
       "tx": "Early clinical evaluation in **Phase I oncology** studies seeks to establish the **maximum tolerated dose** and characterize dose-limiting toxicities. Historically, investigators utilized the classical rule-based 3+3 design, which escalates dose levels in cohorts of 3 patients until dose-limiting toxicities occur in at least 2 individuals. Modern phase I designs increasingly incorporate model-based continual reassessment methods to optimize therapeutic dose selection.",
@@ -100,6 +100,17 @@
             "May not always translate into longer survival"
           ]
         }
+      }
+    },
+    {
+      "tx": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is **intention-to-treat** (ITT), which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. **Rank-preserving structural failure time** models are sensitivity methods that estimate the effect of treatment actually received.",
+      "say": "Crossover, where control patients receive the experimental drug at progression, dilutes the overall survival difference. The primary analysis is intention to treat, which keeps patients in their randomised group. Per-protocol analyses that drop crossover patients are prone to selection bias and are secondary at most. Rank-preserving structural failure time models are sensitivity methods that estimate the effect of the treatment actually received.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-trial-design-fig1.webp",
+        "alt": "Flowchart comparing intention-to-treat (ITT) and per-protocol analyses in a clinical trial, showing patients crossing over from the control arm to the experimental arm.",
+        "caption": "Intention-to-treat analysis preserves randomization despite crossover",
+        "ar": 1.8349
       }
     },
     {

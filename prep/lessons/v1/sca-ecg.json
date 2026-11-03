@@ -3,7 +3,7 @@
   "module": "sca-ecg",
   "subject": "ss-cardiology",
   "title": "Electrocardiography in Clinical Cardiology",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "The **PR interval** reflects total conduction time through the atria, **atrioventricular node**, and the His-Purkinje network. Normal values range from **120** to **200** ms. A prolonged interval exceeding 200 ms confirms first-degree block, typically arising within the AV node itself. Shortening under 120 ms suggests accelerated conduction, pre-excitation, or ectopic junctional pacemakers.",
@@ -57,6 +57,17 @@
             "Frequently seen in pulmonary hypertension"
           ]
         }
+      }
+    },
+    {
+      "tx": "**Left bundle branch block** widens the QRS to 120 ms or more, with broad notched R waves in I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The **Sgarbossa criteria** help detect acute MI in LBBB, and a score of 3 or more confirms it.",
+      "say": "Left bundle branch block widens the QRS to 120 milliseconds or more, with broad notched R waves in leads I, aVL, V5 and V6 and no Q waves in those leads. Newly seen LBBB in a patient with suspected structural disease needs a transthoracic echocardiogram. After TAVR, new LBBB needs continuous telemetry for 48 to 72 hours to detect high-grade AV block. The Sgarbossa criteria help detect acute myocardial infarction in LBBB, and a score of 3 or more confirms it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-ecg-fig1.webp",
+        "alt": "An ECG showing Left Bundle Branch Block with broad, notched R waves in leads I, aVL, V5, V6, and QRS duration over 120 ms.",
+        "caption": "Typical Left Bundle Branch Block (LBBB) ECG pattern. Image: me, CC0/PD, Wikimedia Commons.",
+        "ar": 1.4436
       }
     },
     {
