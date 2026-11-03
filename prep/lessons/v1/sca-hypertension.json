@@ -2,126 +2,201 @@
  "v": 1,
  "module": "sca-hypertension",
  "subject": "ss-cardiology",
- "title": "Systemic hypertension: diagnosis, targets and resistant hypertension",
- "minutes": 6,
+ "title": "Systemic hypertension: secondary causes, emergencies and resistant hypertension",
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Hypertension is confirmed when repeated **office blood pressure** readings remain above the diagnostic threshold set by current guidelines. Readings well above that level, often termed severe, need urgent assessment for **target organ damage**. Always measure after the patient has rested, use a cuff of the correct size, and repeat any abnormal reading before labelling. Screening should be opportunistic at every adult encounter, because many patients are unaware of their diagnosis.",
-   "say": "Hypertension is confirmed when repeated office blood pressure readings remain above the diagnostic threshold set by current guidelines. Readings well above that level, often termed severe, need urgent assessment for target organ damage. Always measure after the patient has rested, use a cuff of the correct size, and repeat any abnormal reading before labelling. Screening should be opportunistic at every adult encounter, because many patients are unaware of their diagnosis.",
-   "vis": null
+   "tx": "**Primary aldosteronism** is the secondary cause exams expect you to screen for, because it accounts for about 5% to 10% of hypertension and is easy to miss when the potassium is still normal. The screen is the plasma **aldosterone to renin ratio**. A ratio above 20 to 30, with a high aldosterone in the assay's own units, is a positive screen, not a diagnosis. Confirm with salt loading or a fludrocortisone suppression test. An aldosterone producing adenoma is the classic Conn lesion.",
+   "say": "Primary aldosteronism accounts for about 5 to 10 percent of hypertension and is worth screening for even when the potassium is normal. The screen is the plasma aldosterone to renin ratio. A ratio above 20 to 30 with a high aldosterone is only a screen. Confirm with salt loading or a fludrocortisone suppression test before you label the disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aldosterone-producing-adenoma-fig1.webp",
+    "alt": "Adrenal cortex with a yellow cortical adenoma, and a collecting duct reabsorbing sodium while excreting potassium.",
+    "caption": "Conn adenoma: aldosterone drives sodium retention and potassium loss. StewardMD original."
+   }
   },
   {
-   "tx": "Use **ambulatory blood pressure monitoring** and **home blood pressure monitoring** to separate true disease from **white coat hypertension**. White coat hypertension has raised office but normal daytime readings and needs no drugs. **Masked hypertension** is the reverse: normal office readings but raised daytime ambulatory or home readings, and it carries real cardiovascular risk and needs treatment.",
-   "say": "Use ambulatory blood pressure monitoring and home blood pressure monitoring to separate true disease from white coat hypertension. White coat hypertension has raised office but normal daytime readings and needs no drugs. Masked hypertension is the reverse: normal office readings but raised daytime ambulatory or home readings, and it carries real cardiovascular risk and needs treatment.",
+   "tx": "Renal artery stenosis raises renin from the affected kidney and so raises pressure. **Fibromuscular dysplasia** is the young woman's lesion, and the angiogram shows a **string of beads** in the mid or distal artery. Atherosclerotic stenosis sits at the ostium or the proximal artery of an older patient with other arterial disease. Not every stenosed kidney needs a stent. Revascularisation is for fibromuscular dysplasia with hypertension, or for atherosclerotic disease with flash pulmonary oedema, refractory heart failure, or a shrinking kidney.",
+   "say": "Renal artery stenosis raises renin and blood pressure. Fibromuscular dysplasia is the young woman's lesion, and the angiogram shows a string of beads. Atherosclerotic stenosis is found at the origin of the artery in an older patient. Stents are not routine. Revascularise fibromuscular disease with hypertension, or atherosclerotic disease when the kidney or the lungs are failing because of it.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "White coat hypertension",
+     "title": "Fibromuscular dysplasia",
      "points": [
-      "Raised office readings",
-      "Normal daytime ambulatory or home readings",
-      "No drug treatment needed",
-      "Monitor periodically"
+      "Younger women.",
+      "String of beads in the mid or distal renal artery.",
+      "Angioplasty often improves the pressure."
      ]
     },
     "right": {
-     "title": "Masked hypertension",
+     "title": "Atherosclerotic stenosis",
      "points": [
-      "Normal office readings",
-      "Raised daytime ambulatory or home readings",
-      "Carries cardiovascular risk",
-      "Treat as true hypertension"
+      "Older patients, ostial or proximal plaque.",
+      "Stent trials did not help stable hypertension.",
+      "Intervene for flash oedema, failing kidney, or refractory heart failure."
      ]
     }
    }
   },
   {
-   "tx": "For SPRINT-based targets, guidance in adults at high cardiovascular risk favours a systolic target of about **120 mmHg** when tolerated, measured in a standardised way. The SPRINT trial showed fewer cardiovascular events and deaths with intensive lowering. In patients with diabetes, a general target below 130/80 mmHg applies, and frail or elderly patients need individualised, cautious lowering with orthostatic checks.",
-   "say": "For SPRINT-based targets, guidance in adults at high cardiovascular risk favours a systolic target of about 120 millimetres of mercury when tolerated, measured in a standardised way. The SPRINT trial showed fewer cardiovascular events and deaths with intensive lowering. In patients with diabetes, a general target below 130 over 80 applies, and frail or elderly patients need individualised, cautious lowering with orthostatic checks.",
+   "tx": "**Target blood pressure** is not one number. In high cardiovascular risk, guidance that follows intensive treatment trials aims for a systolic pressure near 120 mmHg when the patient tolerates the dose and does not fall. In diabetes the working target is below 130/80 mmHg. Frail or elderly patients are lowered slowly, and standing readings are part of the visit, because orthostatic drops cause more harm than a slightly higher sitting number. Confirm the diagnosis with repeated or out of office readings before you chase a target.",
+   "say": "Target blood pressure is not one number. In high cardiovascular risk the systolic aim is near 120 millimetres of mercury when that is tolerated. In diabetes the working target is below 130 over 80. Frail patients are lowered slowly, and standing readings are checked, because a fall does more harm than a slightly higher sitting pressure.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/sca-hypertension-fig1.webp",
-    "alt": "A diagram illustrating different blood pressure targets for high cardiovascular risk, diabetes, and frail/elderly patients.",
-    "caption": "Blood pressure targets vary by patient group and risk",
-    "ar": 1.8349
+    "alt": "Three panels: high cardiovascular risk with a systolic target near 120 mmHg, diabetes below 130/80 mmHg, and frail patients with cautious lowering plus orthostatic checks.",
+    "caption": "Blood pressure targets vary by patient group and risk. StewardMD original."
    }
   },
   {
-   "tx": "In **resistant hypertension**, blood pressure stays above target despite three drugs at adequate doses, one of which is a **diuretic**. First confirm **adherence** without confrontation and exclude **secondary causes**. The **PATHWAY-2** trial showed **spironolactone** is the preferred fourth agent, with potassium and renal function monitored closely. **Renal denervation** is an option for selected patients who remain uncontrolled.",
-   "say": "In resistant hypertension, blood pressure stays above target despite three drugs at adequate doses, one of which is a diuretic. First confirm adherence without confrontation and exclude secondary causes. The PATHWAY-2 trial showed spironolactone is the preferred fourth agent, with potassium and renal function monitored closely. Renal denervation is an option for selected patients who remain uncontrolled.",
+   "tx": "**Hypertensive emergency** is severe blood pressure elevation, above 180/120 mmHg, with acute hypertension-mediated **organ damage**: encephalopathy, pulmonary oedema, acute coronary ischaemia, dissection or acute kidney injury. In general emergencies, intravenous labetalol, nicardipine or nitroprusside is titrated so that **MAP** falls by 20% to 25% in the first hour. Crucially, aortic dissection requires immediate systolic reduction to 100 to 120 mmHg within 20 minutes, whereas acute ischaemic stroke tolerates permissive hypertension.",
+   "say": "Hypertensive emergency is blood pressure above 180 over 120 together with acute hypertension-mediated organ damage. In general emergencies, intravenous labetalol, nicardipine or nitroprusside reduces mean arterial pressure by 20 to 25 percent in the first hour. Aortic dissection is an exception requiring immediate reduction of systolic pressure to 100 to 120 millimetres of mercury.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Confirm adherence"
+      "id": "n1",
+      "label": "BP > 180/120 mmHg"
      },
      {
-      "id": "b",
-      "label": "Exclude secondary causes"
+      "id": "n2",
+      "label": "Acute organ damage?"
      },
      {
-      "id": "c",
-      "label": "Optimise three drugs including a diuretic"
+      "id": "n3",
+      "label": "Emergency: check for aortic dissection"
      },
      {
-      "id": "d",
-      "label": "Add spironolactone"
-     },
-     {
-      "id": "e",
-      "label": "Consider renal denervation"
+      "id": "n4",
+      "label": "General emergency: cut MAP 20% to 25% in 1 hr"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "n1",
+      "n2"
      ],
      [
-      "b",
-      "c"
+      "n2",
+      "n3",
+      "yes"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
+      "n3",
+      "n4",
+      "standard target"
      ]
     ]
    }
   },
   {
-   "tx": "**Hypertensive emergency** means severe blood pressure with acute target organ damage, needing controlled IV lowering in a monitored setting, not a rapid oral dose. Also screen for **secondary hypertension** in young patients, resistant cases, or sudden onset. In pregnancy, ACE inhibitors and ARBs must be stopped before conception, with labetalol or nifedipine as safer options.",
-   "say": "Hypertensive emergency means severe blood pressure with acute target organ damage, needing controlled intravenous lowering in a monitored setting, not a rapid oral dose. Also screen for secondary hypertension in young patients, resistant cases, or sudden onset. In pregnancy, ACE inhibitors and ARBs must be stopped before conception, with labetalol or nifedipine as safer options.",
-   "vis": null
+   "tx": "**Resistant hypertension** is defined as blood pressure remaining above target despite concurrent use of **three antihypertensive agents** of different classes (including a diuretic, RAAS blocker, and CCB) at maximal tolerated doses. Confirm true resistance by verifying medication adherence and obtaining 24 hour ambulatory blood pressure monitoring. These three complementary classes target vascular smooth muscle, the renin angiotensin system, and renal tubular sodium handling to achieve blood pressure control.",
+   "say": "Resistant hypertension is defined as blood pressure remaining above target despite concurrent use of three antihypertensive agents of different classes at maximal tolerated doses, including a diuretic, RAAS blocker, and calcium channel blocker. Confirm medication adherence and exclude white coat effect with ambulatory monitoring before adding further therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antihypertensive-drugs-fig1.webp",
+    "alt": "Four sites of antihypertensive action: cardiac beta receptors, the renin angiotensin organs, vascular smooth muscle, and renal tubular sodium handling.",
+    "caption": "Resistant hypertension is treated by combining drugs that act at different sites. StewardMD original."
+   }
+  },
+  {
+   "tx": "When the trio fails, the **fourth line agent** in **PATHWAY-2** was spironolactone, and it lowered pressure more than the other add on drugs tested. The usual dose is 25 to 50 mg daily, which is drug 4 in the sequence. It works because many of these patients have mineralocorticoid excess and sodium retention even when the aldosterone to renin screen was borderline. Check potassium and creatinine after you start, and do not use it when the potassium is already high or filtration is very low.",
+   "say": "When three drugs fail, PATHWAY-2 found spironolactone the best fourth line agent. The usual dose is 25 to 50 milligrams daily. It is chosen because these patients retain sodium when mineralocorticoid tone is high. Check potassium and creatinine soon after you start, and avoid it when the potassium is already high or kidney function is poor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "What you add",
+     "Why"
+    ],
+    "rows": [
+     [
+      "1 to 3",
+      "RAS blocker, calcium blocker, thiazide like diuretic",
+      "Three antihypertensive agents, different sites"
+     ],
+     [
+      "Drug 4",
+      "Spironolactone 25 to 50 mg",
+      "PATHWAY-2. Fourth line agent"
+     ],
+     [
+      "Still high",
+      "Specialist review, consider denervation",
+      "Exclude a missed secondary cause again"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Renal sympathetic denervation** uses a catheter to deliver **radiofrequency energy**, or focused ultrasound, into the wall of the main renal arteries and their early branches. The aim is to interrupt afferent and efferent sympathetic nerves that keep the pressure high. It is not a substitute for tablets. Consider it only after resistant hypertension has been confirmed, salt and adherence have been addressed, and spironolactone has been tried or is unsafe. Blood pressure falls over months, not in the lab.",
+   "say": "Renal sympathetic denervation delivers radiofrequency energy or focused ultrasound into the renal artery wall to interrupt sympathetic nerves. It is considered only after resistant hypertension is confirmed and tablet therapy, including spironolactone when safe, has failed. The pressure falls over months, not on the table.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Confirmed resistant hypertension"
+     },
+     {
+      "id": "n2",
+      "label": "Optimise salt, adherence, spironolactone"
+     },
+     {
+      "id": "n3",
+      "label": "Still uncontrolled"
+     },
+     {
+      "id": "n4",
+      "label": "Denervation in a specialist centre"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pheochromocytoma** and paraganglioma secrete catecholamines and cause paroxysmal or sustained hypertension, headache, sweating and tachycardia. The diagnostic tests are plasma free **fractionated metanephrines** or a 24 hour urine collection for the same metabolites. Imaging comes after the biochemistry, not before. Never start a beta blocker first: block alpha receptors, replace volume, and only then add beta blockade if the heart rate needs it. A beta blocker alone can leave alpha constriction unopposed.",
+   "say": "Phaeochromocytoma causes paroxysmal hypertension with headache, sweating and tachycardia. Diagnose it with plasma free fractionated metanephrines or a 24 hour urine collection, and image only after the biochemistry is positive. Block alpha receptors and replace volume before any beta blocker, or the pressure can rise further.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pheochromocytoma-fig2.webp",
+    "alt": "Adrenal medullary tumour, the headache sweating palpitation triad, and the sequence of alpha blockade before beta blockade.",
+    "caption": "Phaeochromocytoma: catecholamine excess, metanephrines, alpha block before beta block. StewardMD original."
+   }
   }
  ],
- "quiz": [
-  "q_1c8148e3ef0a",
-  "q_29be1060e877",
-  "q_4d5af8eddb3a"
+ "quiz": [],
+ "src": [
+  "ss-c-hypertension-ground"
  ],
- "src": [],
  "refs": [
-  "NICE NG136 Hypertension in adults: diagnosis and management",
-  "ESC/ESH Guidelines for the management of arterial hypertension 2024"
+  "Braunwald 12e, systemic hypertension",
+  "ESC hypertension guideline 2024",
+  "PATHWAY-2, Lancet 2015",
+  "Endocrine Society primary aldosteronism guideline"
  ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
+ "gen": "hand",
  "checks": {
   "shape": true,
   "numbers": true,
   "drugs": true,
   "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 38
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
  }
 }
