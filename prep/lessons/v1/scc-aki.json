@@ -38,25 +38,11 @@
    "tx": "Classify the **cause** as prerenal, intrinsic or postrenal. Prerenal causes include hypovolaemia, sepsis, cardiorenal and hepatorenal states, NSAIDs and RAS blockers. Intrinsic causes include acute tubular injury, interstitial nephritis and glomerulonephritis. Postrenal causes are obstruction, excluded early by bladder scan and renal ultrasound. Urine sodium or **FeNa** below 1% supports prerenal states, but is unreliable after diuretics, in sepsis, contrast AKI and CKD.",
    "say": "Classify the cause as prerenal, intrinsic or postrenal. Prerenal causes include hypovolaemia, sepsis, cardiorenal and hepatorenal states, NSAIDs and RAS blockers. Intrinsic causes include acute tubular injury, interstitial nephritis and glomerulonephritis. Postrenal causes are obstruction, which is excluded early with a bladder scan and renal ultrasound. Urine sodium or FENa below 1 percent supports a prerenal state, but it is unreliable after diuretics, in sepsis, contrast AKI and CKD.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Prerenal",
-     "points": [
-      "Hypovolaemia or sepsis",
-      "Cardiorenal or hepatorenal",
-      "NSAIDs and RAS blockers",
-      "FeNa below 1 percent"
-     ]
-    },
-    "right": {
-     "title": "Intrinsic and postrenal",
-     "points": [
-      "Acute tubular injury",
-      "Interstitial nephritis or GN",
-      "Obstruction on ultrasound",
-      "FeNa unreliable in sepsis"
-     ]
-    }
+    "kind": "image",
+    "src": "v1/kb/media/aki-fig1.webp",
+    "alt": "Three panels: prerenal hypoperfusion, intrinsic injury with tubular necrosis and a cast, and postrenal obstruction with hydronephrosis.",
+    "caption": "Prerenal hypoperfusion, intrinsic tubular necrosis with a cast, and postrenal obstruction with hydronephrosis. FeNa is not drawn. Credit: StewardMD.",
+    "ar": 1.3405
    }
   },
   {
@@ -68,11 +54,25 @@
    "tx": "Use **loop diuretics** only for clinically significant volume overload, given as intermittent IV boluses. Diuretics and low-dose dopamine do not prevent or treat AKI itself. For severe metabolic acidosis with pH below 7.20 and no other urgent dialysis indication, IV sodium bicarbonate is suggested over dialysis, watching for volume overload and hypernatraemia. Start dialysis for life-threatening complications such as refractory pulmonary oedema, hyperkalaemia or dialysable toxins.",
    "say": "Use loop diuretics only for clinically significant volume overload, given as intermittent IV boluses. Diuretics and low-dose dopamine do not prevent or treat AKI itself. For severe metabolic acidosis with pH below 7.20 and no other urgent dialysis indication, IV sodium bicarbonate is suggested over dialysis, watching for volume overload and hypernatraemia. Start dialysis for life-threatening complications such as refractory pulmonary oedema, hyperkalaemia or dialysable toxins.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-aki-fig1.webp",
-    "alt": "Flow chart showing management of acute kidney injury complications, including use of diuretics for volume overload, bicarbonate for acidosis, and indications for dialysis.",
-    "caption": "Management of AKI complications: diuretics, bicarbonate, and dialysis indications",
-    "ar": 1.8349
+    "kind": "table",
+    "cols": [
+     "Action",
+     "When"
+    ],
+    "rows": [
+     [
+      "Loop diuretic",
+      "Volume overload only. It does not treat the injury."
+     ],
+     [
+      "Sodium bicarbonate",
+      "pH below 7.20, and no other urgent dialysis indication."
+     ],
+     [
+      "Dialysis",
+      "Refractory pulmonary oedema, hyperkalaemia, or a dialysable toxin."
+     ]
+    ]
    }
   }
  ],

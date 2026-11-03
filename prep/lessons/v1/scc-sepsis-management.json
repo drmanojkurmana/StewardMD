@@ -8,7 +8,13 @@
   {
    "tx": "Sepsis is life-threatening organ dysfunction caused by a **dysregulated host response** to infection. Septic shock is sepsis with vasopressor need to keep mean arterial pressure at 65 mmHg or more, plus lactate above 2 mmol/L despite adequate fluid. Recognise it early, because every hour of delay raises mortality. Use the qSOFA and SOFA scores to flag patients at risk.",
    "say": "Sepsis is life-threatening organ dysfunction caused by a dysregulated host response to infection. Septic shock is sepsis with a need for vasopressors to keep mean arterial pressure at 65 millimetres of mercury or more, plus a lactate above 2 millimoles per litre despite adequate fluid. Recognise it early, because every hour of delay raises mortality. Use the qSOFA and SOFA scores to flag patients at risk.",
-   "vis": null
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sepsis-fig2.webp",
+    "alt": "Sepsis pathophysiology: cytokine storm, endothelial glycocalyx loss, capillary leak, vasodilation and microvascular thrombi.",
+    "caption": "Cytokine storm, loss of the endothelial glycocalyx, capillary leak, vasodilation and microvascular thrombi. This is the dysregulated response. The hour-one bundle and de-escalation are not drawn. Credit: StewardMD.",
+    "ar": 1.3405
+   }
   },
   {
    "tx": "The **hour one bundle** is the core of early sepsis care and is designed to be completed within the first hour of recognition. Measure **lactate** and repeat it if the first value is raised, since this guides how urgently tissue hypoperfusion is being treated. Draw **blood cultures** before the first antibiotic dose, then give **broad-spectrum antibiotics** promptly when septic shock is probable. Start a **crystalloid** fluid bolus for hypotension or raised lactate, and add a **vasopressor** if hypotension persists during or after fluid.",
@@ -53,11 +59,25 @@
    "tx": "Early **antibiotics** and **source control** work together in septic shock. Treatment should begin within one hour of recognition, because each hour of delay is linked to higher mortality. Select empirical agents according to the likely infective source and local resistance patterns. Once **culture** results return, **de-escalate** to a narrower agent. Drain collections, remove infected catheters or devices, and relieve obstruction as soon as feasible.",
    "say": "Early antibiotics and source control work together in septic shock. Treatment should begin within one hour of recognition, because each hour of delay is linked to higher mortality. Select empirical agents according to the likely infective source and local resistance patterns. Once culture results return, de-escalate to a narrower agent. Drain collections, remove infected catheters or devices, and relieve obstruction as soon as feasible.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-sepsis-management-fig1.webp",
-    "alt": "Diagram showing a timeline of sepsis management, highlighting early broad-spectrum antibiotics and source control procedures within the first hour of recognition.",
-    "caption": "Early antibiotics and source control are critical within one hour of sepsis recognition",
-    "ar": 1.8349
+    "kind": "table",
+    "cols": [
+     "Action",
+     "When"
+    ],
+    "rows": [
+     [
+      "Broad-spectrum antibiotics",
+      "Within one hour of recognition"
+     ],
+     [
+      "De-escalation",
+      "After cultures return, not in the first hour"
+     ],
+     [
+      "Drain, remove a device, relieve obstruction",
+      "As soon as it is feasible"
+     ]
+    ]
    }
   },
   {

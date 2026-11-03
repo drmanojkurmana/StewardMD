@@ -58,34 +58,36 @@
    "tx": "Vascular access for CRRT usually uses a **non-tunnelled** dual-lumen catheter, placed under ultrasound guidance. The right internal jugular vein is preferred. Femoral catheters should be at least 24 cm long. Avoid subclavian lines where possible, because stenosis can block future arteriovenous fistula sites. Watch for low arterial pressure alarms, which often mean catheter inflow obstruction.",
    "say": "Vascular access for CRRT usually uses a non-tunnelled dual-lumen catheter, placed under ultrasound guidance. The right internal jugular vein is preferred. Femoral catheters should be at least twenty four centimetres long. Avoid subclavian lines where possible, because stenosis can block future fistula sites. A low arterial pressure alarm often means catheter inflow obstruction.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Preferred access",
-     "points": [
-      "Right internal jugular",
-      "Ultrasound guided",
-      "Dual lumen catheter"
-     ]
-    },
-    "right": {
-     "title": "Avoid or use with care",
-     "points": [
-      "Subclavian (stenosis risk)",
-      "Femoral at least 24 cm",
-      "Check for inflow obstruction"
-     ]
-    }
+    "kind": "image",
+    "src": "v1/kb/media/ckd-dialysis-transplant-long-case-fig1.webp",
+    "alt": "Atrophic native kidneys, a pelvic renal allograft, and a forearm arteriovenous fistula.",
+    "caption": "The forearm fistula is why a subclavian dialysis catheter is avoided. Atrophic kidneys and a pelvic allograft are chronic kidney disease, not this catheter. A 24 cm femoral line is not drawn. Credit: StewardMD.",
+    "ar": 1.3333
    }
   },
   {
    "tx": "Watch for **complications** during CRRT. **Hypotension** often reflects **ultrafiltration** removing fluid faster than plasma can refill from the tissues. Check **blood chemistry** and **acid-base status** frequently during the early phase, often every six to twelve hours. Monitor the **circuit** for **filter clotting**, which lowers delivered dose. Weaning is guided by **urine output** and recovering **renal function**.",
    "say": "Watch for complications during CRRT. Hypotension often reflects ultrafiltration removing fluid faster than plasma can refill from the tissues. Check blood chemistry and acid-base status frequently during the early phase, often every six to twelve hours. Monitor the circuit for filter clotting, which lowers delivered dose. Weaning is guided by urine output and recovering renal function.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-rrt-fig1.webp",
-    "alt": "Diagram illustrating CRRT complications: filter clotting, hypotension from ultrafiltration, and monitoring blood chemistry and urine output.",
-    "caption": "Key complications and monitoring in CRRT",
-    "ar": 1.8349
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "What it means"
+    ],
+    "rows": [
+     [
+      "Hypotension",
+      "Ultrafiltration faster than plasma can refill"
+     ],
+     [
+      "Filter clotting",
+      "Delivered dose falls"
+     ],
+     [
+      "Weaning",
+      "Guided by urine output and recovering function"
+     ]
+    ]
    }
   }
  ],
