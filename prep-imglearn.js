@@ -41,8 +41,15 @@
 
   // Subject screen: an atlas button in the actions block (under Practise) for ss-cardiology (ECG),
   // ophthalmology (Eye) and community-medicine (Charts).
+  var IMGLIB_SYS = { ophthalmology: "eye", "ss-cardiology": "cardiology", "community-medicine": "community-medicine" };
   function subjectButton(box, sid, topics, host) {
     if (!box) return;
+    /* Image Library (SMD_IMGLIB): one shared bank next to the atlases, on every subject screen. */
+    try {
+      if (G.SMD_IMGLIB && G.SMD_IMGLIB.enabled() && !box.querySelector('[data-act="il-imglib"]')) {
+        atlasBtn(box, sid, "il-imglib", "Image Library", "Every image in the app");
+      }
+    } catch (e) {}
     if (sid === "ss-cardiology") {
       var n = ecgEntries().length;
       if (!n) return;
@@ -173,6 +180,10 @@
   }
 
   function act(a, el, host) {
+    if (a === "il-imglib") {
+      try { if (G.SMD_IMGLIB) G.SMD_IMGLIB.open({ system: IMGLIB_SYS[el.getAttribute("data-s") || ""] || "" }); } catch (e) {}
+      return true;
+    }
     if (a === "il-ecg") { openAtlas(el.getAttribute("data-s") || "ss-cardiology", host, ""); return true; }
     if (a === "il-cat") { if (S) { S.cat = el.getAttribute("data-v") || ""; draw(host); } return true; }
     if (a === "il-kx") {

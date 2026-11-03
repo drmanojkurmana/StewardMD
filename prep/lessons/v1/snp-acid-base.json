@@ -1,174 +1,203 @@
 {
  "v": 1,
  "module": "snp-acid-base",
- "subject": "ss-nephrology",
- "title": "Acid-base disorders: a stepwise approach for exams",
- "minutes": 7,
+ "title": "Acid-base disorders",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Start every acid-base problem with the **pH** to decide whether the patient is **acidaemic** or **alkalaemic**. Next, look at **pCO2** and **HCO3** to name the primary disorder: respiratory disorders follow pCO2, while metabolic disorders follow bicarbonate. **Compensation** partly corrects the pH but never fully normalises it, so an overcorrected pH hints at a second, mixed disorder. Finish by calculating the **anion gap** to refine the diagnosis.",
-   "say": "Start every acid-base problem with the pH to decide whether the patient is acidaemic or alkalaemic. Next, look at pCO2 and bicarbonate to name the primary disorder. Respiratory disorders follow pCO2, while metabolic disorders follow bicarbonate. Compensation partly corrects the pH but never fully normalises it, so an overcorrected pH hints at a second, mixed disorder. Finish by calculating the anion gap to refine the diagnosis.",
+   "tx": "Serum **anion gap** is calculated as [Na+] - ([Cl-] + [HCO3-]), where the normal range of 8 to 12 mmol/L must be adjusted for hypoalbuminemia by adding 2.5 mmol/L for every 1.0 g/dL drop in serum albumin below 4.0 g/dL.",
+   "say": "Serum anion gap is calculated as [Na+] - ([Cl-] + [HCO3-]), where the normal range of 8 to 12 mmol/L must be adjusted for hypoalbuminemia by adding 2 point 5 mmol/L for every 1 point 0 g/dL drop in serum albumin below 4 point 0 g/dL.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Check pH"
-     },
-     {
-      "id": "b",
-      "label": "Acidaemia or alkalaemia"
-     },
-     {
-      "id": "c",
-      "label": "Primary: pCO2 or HCO3"
-     },
-     {
-      "id": "d",
-      "label": "Check compensation"
-     },
-     {
-      "id": "e",
-      "label": "Calculate anion gap"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/lessons/media/snp-acid-base-fig1.webp",
+    "alt": "Anion gap calculation and diagnostic approach in metabolic acidosis",
+    "caption": "Diagnostic categorization of metabolic acidosis based on serum anion gap (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "The **anion gap** equals sodium minus the sum of chloride and bicarbonate, normally about 8 to 12 mmol/L. A raised gap points to unmeasured anions such as lactate, ketones, uraemic acids or toxic alcohols, using the mnemonic MUDPILES. Use the **delta ratio**, which is change in gap divided by change in bicarbonate. A ratio below 1 suggests a coexisting normal gap acidosis, while above 2 suggests coexisting metabolic alkalosis.",
-   "say": "The anion gap equals sodium minus the sum of chloride and bicarbonate, normally about 8 to 12 millimoles per litre. A raised gap points to unmeasured anions such as lactate, ketones, uraemic acids or toxic alcohols. Use the delta ratio, which is the change in gap divided by the change in bicarbonate. A ratio below 1 suggests a coexisting normal gap acidosis, while a ratio above 2 suggests a coexisting metabolic alkalosis.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Delta ratio",
-     "Suggested mixed disorder"
-    ],
-    "rows": [
-     [
-      "Below 1",
-      "Normal gap acidosis added"
-     ],
-     [
-      "1 to 2",
-      "Pure high gap acidosis"
-     ],
-     [
-      "Above 2",
-      "Metabolic alkalosis or prior high bicarbonate"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The **Winter formula** predicts the expected pCO2 in metabolic acidosis from the serum **bicarbonate** level, with an accepted margin of plus or minus 2 mmHg. A measured pCO2 outside this range signals a concurrent **respiratory disorder**. Salicylate poisoning is a classic trap: early **respiratory alkalosis** arises from direct stimulation of the medullary chemoreceptors, and a **metabolic acidosis** follows as the drug accumulates. Acetazolamide should be avoided in these patients because it worsens the acidosis.",
-   "say": "The Winter formula predicts the expected pCO2 in metabolic acidosis from the serum bicarbonate level, with an accepted margin of plus or minus 2 millimetres of mercury. A measured pCO2 outside this range signals a concurrent respiratory disorder. Salicylate poisoning is a classic trap: early respiratory alkalosis comes from direct stimulation of the medullary chemoreceptors, and metabolic acidosis follows as the drug accumulates. Acetazolamide should be avoided in these patients because it worsens the acidosis.",
-   "vis": null
-  },
-  {
-   "tx": "Toxic alcohols raise the **osmolar gap**, the measured osmolality minus the calculated value. Methanol and ethylene glycol produce high anion gap acidosis from formic, glycolic and oxalic acids. Treat with **fomepizole** early, and use haemodialysis for severe acidosis, renal failure or high levels. Isopropanol causes ketosis and a raised osmolar gap but a normal anion gap, so management is largely supportive.",
-   "say": "Toxic alcohols raise the osmolar gap, which is the measured osmolality minus the calculated value. Methanol and ethylene glycol produce a high anion gap acidosis from formic, glycolic and oxalic acids. Treat early with fomepizole, and use haemodialysis for severe acidosis, renal failure or high levels. Isopropanol causes ketosis and a raised osmolar gap but a normal anion gap, so management is largely supportive.",
+   "tx": "**Winter formula** predicts compensatory arterial PCO2 in metabolic acidosis as (1.5 x [HCO3-]) + 8 +/- 2; a measured PCO2 higher indicates concomitant respiratory acidosis, while a lower value signifies concurrent respiratory alkalosis. One side is Winter Formula, and the other side is Mixed Disorders.",
+   "say": "Winter formula predicts compensatory arterial PCO2 in metabolic acidosis as (1 point 5 x [HCO3-]) + 8 +/- 2; a measured PCO2 higher indicates concomitant respiratory acidosis, while a lower value signifies concurrent respiratory alkalosis. One side is Winter Formula, and the other side is Mixed Disorders.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "High gap toxins",
+     "title": "Winter Formula",
      "points": [
-      "Methanol, ethylene glycol",
-      "Organic acids produced",
-      "Fomepizole first line",
-      "Haemodialysis if severe"
+      "Expected pCO2 = (1.5 x HCO3) + 8 +/- 2",
+      "Validates appropriate hyperventilation",
+      "Takes 12 to 24 hours to stabilize"
      ]
     },
     "right": {
-     "title": "Isopropanol",
+     "title": "Mixed Disorders",
      "points": [
-      "Ketones, no toxic acid",
-      "Normal anion gap",
-      "Supportive care"
+      "pCO2 higher than expected: respiratory acidosis",
+      "pCO2 lower than expected: respiratory alkalosis",
+      "Identifies hidden respiratory failure"
      ]
     }
    }
   },
   {
-   "tx": "Lactic acidosis is a common high gap cause, especially with **metformin** in renal impairment, where accumulation impairs mitochondrial function. In India, consider D-lactic acidosis in short bowel syndrome, which standard L-lactate assays miss. Normal anion gap acidosis arises from bicarbonate loss in diarrhoea or cholestyramine, and from chloride-rich fluids such as large volumes of normal saline, which causes **hyperchloraemic acidosis**.",
-   "say": "Lactic acidosis is a common high gap cause, especially with metformin in renal impairment, where accumulation impairs mitochondrial function. In India, consider D-lactic acidosis in short bowel syndrome, which standard L-lactate assays miss. Normal anion gap acidosis arises from bicarbonate loss in diarrhoea or cholestyramine, and from large volumes of normal saline, which causes hyperchloraemic acidosis.",
+   "tx": "The **delta-delta ratio** (delta AG / delta HCO3-) distinguishes mixed high anion gap and non-anion gap metabolic acidosis: a ratio < 0.8 indicates mixed HAGMA and NAGMA, while a ratio > 2.0 suggests concurrent metabolic alkalosis or pre-existing hyperbicarbonatemia. The paired value for Ratio 1.0 to 2.0 is Pure high anion gap metabolic acidosis (HAGMA).",
+   "say": "The delta-delta ratio (delta AG / delta HCO3-) distinguishes mixed high anion gap and non-anion gap metabolic acidosis: a ratio less than 0 point 8 indicates mixed HAGMA and NAGMA, while a ratio greater than 2 point 0 suggests concurrent metabolic alkalosis or pre-existing hyperbicarbonatemia. The paired value for Ratio 1 point 0 to 2 point 0 is Pure high anion gap metabolic acidosis (HAGMA).",
    "vis": {
     "kind": "table",
     "cols": [
-     "Cause",
-     "Mechanism"
+     "Delta Ratio Range",
+     "Interpretation",
+     "Typical Clinical Scenario"
     ],
     "rows": [
      [
-      "Metformin with renal failure",
-      "Impaired lactate clearance"
+      "Ratio 1.0 to 2.0",
+      "Pure high anion gap metabolic acidosis (HAGMA)",
+      "Diabetic ketoacidosis, uncomplicated lactic acidosis"
      ],
      [
-      "Short bowel D-lactate",
-      "Missed by standard assays"
+      "Ratio greater than 2.0",
+      "HAGMA with concurrent metabolic alkalosis",
+      "DKA with persistent vomiting or diuretic use"
      ],
      [
-      "Diarrhoea or cholestyramine",
-      "Bicarbonate loss"
-     ],
-     [
-      "Large saline volumes",
-      "Chloride load"
+      "Ratio less than 0.8",
+      "Mixed HAGMA and NAGMA",
+      "Sepsis with severe diarrhea or renal tubular acidosis"
      ]
     ]
    }
   },
   {
-   "tx": "In **metabolic alkalosis**, the **urine chloride** level helps sort the causes. **Chloride-responsive** states, such as vomiting and loop or thiazide diuretic use, produce a low urine chloride and improve with saline. **Chloride-resistant** states, such as primary hyperaldosteronism, keep urine chloride raised despite low serum chloride. Correcting the trigger and the volume status is the core treatment, with potassium repletion where needed.",
-   "say": "In metabolic alkalosis, the urine chloride level helps sort the causes. Chloride-responsive states, such as vomiting and loop or thiazide diuretic use, produce a low urine chloride and improve with saline. Chloride-resistant states, such as primary hyperaldosteronism, keep urine chloride raised despite low serum chloride. Correcting the trigger and the volume status is the core treatment, with potassium replacement where needed.",
+   "tx": "**Osmolar gap** exceeding 10 mOsm/kg H2O (calculated as Measured Osmolality minus [2 x Na + Glucose/18 + BUN/2.8]) strongly indicates ingestion of low-molecular-weight toxic alcohols including ethylene glycol, methanol, or isopropanol. The image is toxic alcohol metabolism and serum osmolal gap diagnostic algorithm.",
+   "say": "Osmolar gap exceeding 10 mOsm/kg H2O (calculated as Measured Osmolality minus [2 x Na + Glucose/18 + BUN/2 point 8]) strongly indicates ingestion of low-molecular-weight toxic alcohols including ethylene glycol, methanol, or isopropanol. The image is toxic alcohol metabolism and serum osmolal gap diagnostic algorithm.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/snp-acid-base-fig1.webp",
-    "alt": "A diagnostic flowchart for metabolic alkalosis, using urine chloride levels to distinguish between chloride-responsive and chloride-resistant causes.",
-    "caption": "Urine chloride guides diagnosis and treatment of metabolic alkalosis",
-    "ar": 1.8349
+    "src": "v1/kb/media/acid-base-disorders-and-anion-gap-fig1.webp",
+    "alt": "Toxic alcohol metabolism and serum osmolal gap diagnostic algorithm",
+    "caption": "Osmolal gap calculation and toxic alcohol metabolism pathways (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Urine anion gap** calculated as [Na+] + [K+] - [Cl-] differentiates normal anion gap metabolic acidosis: a negative value indicates appropriate renal ammonium excretion (gastrointestinal bicarbonate loss), whereas a positive value signifies impaired renal acidification. One side is Negative Urine Gap, and the other side is Positive Urine Gap.",
+   "say": "Urine anion gap calculated as [Na+] + [K+] - [Cl-] differentiates normal anion gap metabolic acidosis: a negative value indicates appropriate renal ammonium excretion (gastrointestinal bicarbonate loss), whereas a positive value signifies impaired renal acidification. One side is Negative Urine Gap, and the other side is Positive Urine Gap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negative Urine Gap",
+     "points": [
+      "Urine (Na + K - Cl) is negative",
+      "High ammonium excretion with chloride",
+      "Gastrointestinal loss (diarrhea)"
+     ]
+    },
+    "right": {
+     "title": "Positive Urine Gap",
+     "points": [
+      "Urine (Na + K - Cl) is positive",
+      "Impaired renal ammonium excretion",
+      "Distal renal tubular acidosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chloride-responsive** metabolic alkalosis exhibits urine chloride < 20 mmol/L and responds to intravenous 0.9% saline infusion (vomiting, nasogastric suction, prior diuretic use), whereas chloride-resistant alkalosis exhibits urine chloride > 20 mmol/L and persistent mineralocorticoid excess. The first step is Normal AG acidosis with alkaline urine.",
+   "say": "Chloride-responsive metabolic alkalosis exhibits urine chloride less than 20 mmol/L and responds to intravenous 0 point 9% saline infusion (vomiting, nasogastric suction, prior diuretic use), whereas chloride-resistant alkalosis exhibits urine chloride greater than 20 mmol/L and persistent mineralocorticoid excess. The first step is Normal AG acidosis with alkaline urine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Normal AG acidosis with alkaline urine"
+     },
+     {
+      "id": "a2",
+      "label": "Calculate urine osmolal gap"
+     },
+     {
+      "id": "a3",
+      "label": "Gap under 150 mOsm/kg detected"
+     },
+     {
+      "id": "a4",
+      "label": "Confirms defective distal ammonium excretion"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a3",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In acute **respiratory acidosis**, plasma bicarbonate rises by 1 mmol/L for every 10 mmHg elevation in PCO2, whereas in chronic respiratory acidosis renal compensation elevates bicarbonate by 3.5 to 4 mmol/L per 10 mmHg PCO2 increase. The paired value for Chloride-responsive is Under 20 to 25 mEq/L.",
+   "say": "In acute respiratory acidosis, plasma bicarbonate rises by 1 mmol/L for every 10 mmHg elevation in PCO2, whereas in chronic respiratory acidosis renal compensation elevates bicarbonate by 3 point 5 to 4 mmol/L per 10 mmHg PCO2 increase. The paired value for Chloride-responsive is Under 20 to 25 mEq/L.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Category",
+     "Urine Chloride",
+     "Underlying Mechanisms"
+    ],
+    "rows": [
+     [
+      "Chloride-responsive",
+      "Under 20 to 25 mEq/L",
+      "Vomiting, nasogastric suction, prior diuretic therapy"
+     ],
+     [
+      "Chloride-resistant",
+      "Over 25 mEq/L",
+      "Primary aldosteronism, Cushing syndrome, severe hypokalemia"
+     ],
+     [
+      "Normotensive resistant",
+      "Over 25 mEq/L",
+      "Bartter syndrome, Gitelman syndrome, active loop diuretic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stewart** approach evaluates acid-base balance via three independent variables: strong ion difference (SID), total weak non-volatile acids (ATOT), and partial pressure of carbon dioxide (PCO2). One side is Renal Compensation, and the other side is Stewart Physicochemical Model. A key point is Bicarbonate rises 3.5 mEq/L per 10 pCO2.",
+   "say": "Stewart approach evaluates acid-base balance via three independent variables: strong ion difference (SID), total weak non-volatile acids (ATOT), and partial pressure of carbon dioxide (PCO2). One side is Renal Compensation, and the other side is Stewart Physicochemical Model. A key point is Bicarbonate rises 3 point 5 mEq/L per 10 pCO2.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Renal Compensation",
+     "points": [
+      "Bicarbonate rises 3.5 mEq/L per 10 pCO2",
+      "Takes 3 to 5 days to reach steady state",
+      "Increased tubular proton secretion"
+     ]
+    },
+    "right": {
+     "title": "Stewart Physicochemical Model",
+     "points": [
+      "Governed by strong ion difference (SID)",
+      "Normal apparent SID is 40 to 42 mEq/L",
+      "Accounts for unmeasured weak acids"
+     ]
+    }
    }
   }
  ],
- "quiz": [
-  "q_30d4d6f758e1",
-  "q_ed62064b6d6b",
-  "q_42e82c677fc7"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Harrison's Principles of Internal Medicine (Fauci et al.)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 39
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 12-14",
+  "Harrison Principles of Internal Medicine 22e Ch. 53",
+  "Brenner and Rector The Kidney 11e Ch. 19"
+ ]
 }

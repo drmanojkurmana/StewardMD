@@ -1,133 +1,225 @@
 {
  "v": 1,
  "module": "snp-pd-peritonitis",
- "subject": "ss-nephrology",
- "title": "Peritoneal Dialysis Peritonitis and Catheter Infections",
- "minutes": 5,
+ "title": "Peritoneal dialysis peritonitis and catheter infections",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Peritonitis is diagnosed when **two of three criteria** are met: cloudy effluent or abdominal pain, a dialysate white cell count above 100 cells per microlitre with over 50 percent neutrophils after a dwell of at least 2 hours, or a positive culture. Always send effluent for cell count, Gram stain and culture before starting antibiotics. Culture-negative peritonitis needs a repeat look at sampling technique and the possibility of prior antibiotic exposure.",
-   "say": "Peritonitis is diagnosed when two of three criteria are met. The first is cloudy effluent or abdominal pain. The second is a dialysate white cell count above 100 cells per microlitre with over 50 percent neutrophils, after a dwell of at least 2 hours. The third is a positive culture. Always send effluent for cell count, Gram stain and culture before starting antibiotics. Culture-negative peritonitis needs a review of sampling technique and of any recent antibiotic exposure.",
+   "tx": "The 2022 **ISPD** guidelines define peritoneal dialysis peritonitis by the presence of at least two of three criteria: clinical features of peritonitis (cloudy effluent, abdominal pain); effluent leukocyte count > 100/mcL with > 50% polymorphonuclear cells; and positive effluent culture.",
+   "say": "The 2022 ISPD guidelines set peritoneal dialysis peritonitis as present when at least two of three criteria are found: clinical features of peritonitis (cloudy effluent or abdominal pain), effluent leukocyte count greater than 100 per microlitre with greater than 50% polymorphonuclear cells, and a positive effluent culture.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-pd-peritonitis-fig1.webp",
+    "alt": "Peritoneal dialysis effluent evaluation and peritonitis diagnostic criteria",
+    "caption": "Diagnostic algorithm for cloudy effluent and peritonitis in peritoneal dialysis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Empirical antimicrobial therapy must be initiated immediately upon diagnosing cloudy effluent, incorporating **intraperitoneal** coverage for both Gram-positive organisms (vancomycin or a first-generation cephalosporin like cefazolin) and Gram-negative organisms (ceftazidime or an aminoglycoside). The paired value for Gram-positive cocci is Cefazolin (or Vancomycin if MRSA prevalent).",
+   "say": "Empirical antimicrobial therapy must be initiated immediately upon diagnosing cloudy effluent, incorporating intraperitoneal coverage for both Gram-positive organisms (vancomycin or a first-generation cephalosporin like cefazolin) and Gram-negative organisms (ceftazidime or an aminoglycoside). The paired value for Gram-positive cocci is Cefazolin (or Vancomycin if MRSA prevalent).",
    "vis": {
     "kind": "table",
     "cols": [
-     "Criterion",
-     "Threshold"
+     "Pathogen Spectrum",
+     "Empirical Intraperitoneal Agent",
+     "Dosing Schedule"
     ],
     "rows": [
      [
-      "Symptoms",
-      "Cloudy effluent or abdominal pain"
+      "Gram-positive cocci",
+      "Cefazolin (or Vancomycin if MRSA prevalent)",
+      "Intermittent 15 to 20 mg/kg in long dwell bag"
      ],
      [
-      "Cell count",
-      "Above 100 per microlitre, over 50 percent neutrophils"
+      "Gram-negative bacilli",
+      "Ceftazidime (or Gentamicin / Tobramycin)",
+      "Intermittent 1 to 1.5 g in long dwell bag"
      ],
      [
-      "Culture",
-      "Organism grown from effluent"
+      "Severe sepsis",
+      "Combine IP therapy with IV antibiotics",
+      "Immediate systemic resuscitation"
      ]
     ]
    }
   },
   {
-   "tx": "Once **effluent** has been sent for culture, begin **empirical intraperitoneal antibiotics** without delay. Guidance from the **ISPD** generally supports cover for Gram-positive organisms, often with a first-generation cephalosporin or intraperitoneal vancomycin, plus agents active against Gram-negative bacteria and **Pseudomonas**. Reassess early and tailor therapy once the organism and its sensitivities are reported. Intravenous treatment is kept for severe illness or spread to the exit site.",
-   "say": "Begin empirical intraperitoneal antibiotics straight away, once the effluent sample has gone for culture, rather than waiting for results. ISPD guidance generally supports Gram-positive cover, often with a first-generation cephalosporin or intraperitoneal vancomycin, alongside agents that act against Gram-negative bacteria and Pseudomonas. Reassess early and tailor the regimen when the organism and its sensitivities are known. Reserve intravenous treatment for severe illness or spread to the exit site.",
+   "tx": "**Refractory peritonitis** is defined as failure of effluent clearing after 5 days of appropriate antibiotic therapy, mandating prompt PD catheter removal to preserve the peritoneal membrane and prevent sepsis and death. The first step is Culture-guided IP antibiotics commenced. The next step is Re-evaluate effluent cell count at day 5.",
+   "say": "Refractory peritonitis is defined as failure of effluent clearing after 5 days of appropriate antibiotic therapy, mandating prompt PD catheter removal to preserve the peritoneal membrane and prevent sepsis and death. The first step is Culture-guided IP antibiotics commenced. The next step is Re-evaluate effluent cell count at day 5.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Send effluent for culture"
+      "id": "p1",
+      "label": "Culture-guided IP antibiotics commenced"
      },
      {
-      "id": "b",
-      "label": "Empirical IP antibiotics"
+      "id": "p2",
+      "label": "Re-evaluate effluent cell count at day 5"
      },
      {
-      "id": "c",
-      "label": "Early clinical review"
+      "id": "p3",
+      "label": "Turbid effluent persists without clearing"
      },
      {
-      "id": "d",
-      "label": "Tailor to organism and sensitivities"
+      "id": "p4",
+      "label": "Immediate surgical catheter removal"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "p1",
+      "p2"
      ],
      [
-      "b",
-      "c"
+      "p2",
+      "p3"
      ],
      [
-      "c",
-      "d"
+      "p3",
+      "p4"
      ]
     ]
    }
   },
   {
-   "tx": "Classify recurrent episodes correctly. **Relapsing peritonitis** is a recurrence with the same organism within 4 weeks of finishing antibiotics. **Refractory peritonitis** means no improvement in effluent or cell count after 5 days of appropriate therapy. Recurrence with a different organism after 4 weeks is classed as a new episode. Relapses and refractory cases usually prompt catheter review.",
-   "say": "Classify recurrent episodes correctly. Relapsing peritonitis is a recurrence with the same organism within 4 weeks of finishing antibiotics. Refractory peritonitis means no improvement in the effluent or cell count after 5 days of appropriate therapy. A recurrence with a different organism after 4 weeks is classed as a new episode. Relapses and refractory cases usually prompt a review of the catheter.",
+   "tx": "**Relapsing peritonitis** is an episode occurring within 4 weeks of completing therapy for a prior episode with the same organism, whereas recurrent peritonitis occurs within 4 weeks with a different organism. The paired value for Relapsing peritonitis is Within 4 weeks of completion, same organism.",
+   "say": "Relapsing peritonitis is an episode occurring within 4 weeks of completing therapy for a prior episode with the same organism, whereas recurrent peritonitis occurs within 4 weeks with a different organism. The paired value for Relapsing peritonitis is Within 4 weeks of completion, same organism.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Type",
-     "Key feature"
+     "Recurrent Classification",
+     "Timing & Microbiology",
+     "Clinical Implication"
     ],
     "rows": [
      [
-      "Relapsing",
-      "Same organism within 4 weeks"
+      "Relapsing peritonitis",
+      "Within 4 weeks of completion, same organism",
+      "Intraluminal biofilm or colonized Dacron cuff"
      ],
      [
-      "Refractory",
-      "No response by day 5"
+      "Recurrent peritonitis",
+      "Within 4 weeks of completion, different organism",
+      "Bowel translocation or technique error"
      ],
      [
-      "New episode",
-      "Different organism or after 4 weeks"
+      "Repeat peritonitis",
+      "More than 4 weeks later, same organism",
+      "Chronic carrier state or repeat exposure"
      ]
     ]
    }
   },
   {
-   "tx": "**Fungal peritonitis** is a serious complication, often linked to prior antibiotic exposure, and usually requires prompt catheter removal along with antifungal therapy. Catheter removal is also advised for **sclerosing peritonitis** and for refractory or relapsing bacterial infection that fails medical treatment. Sclerosing peritonitis carries high morbidity and is not reversed by antibiotics.",
-   "say": "Fungal peritonitis is a serious complication, often linked to prior antibiotic exposure, and usually requires prompt catheter removal along with antifungal therapy. Catheter removal is also advised for sclerosing peritonitis and for refractory or relapsing bacterial infection that fails medical treatment. Sclerosing peritonitis carries high morbidity and is not reversed by antibiotics.",
+   "tx": "**Fungal peritonitis** (most frequently Candida albicans or Candida parapsilosis) mandates immediate, mandatory PD catheter removal alongside systemic antifungal therapy (amphotericin B, fluconazole, or echinocandins) due to biofilm colonization. The image is clinical signs and abdominal examination in acute severe peritonitis.",
+   "say": "Fungal peritonitis (most frequently Candida albicans or Candida parapsilosis) mandates immediate, mandatory PD catheter removal alongside systemic antifungal therapy (amphotericin B, fluconazole, or echinocandins) due to biofilm colonization. The image is clinical signs and abdominal examination in acute severe peritonitis.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/snp-pd-peritonitis-fig1.webp",
-    "alt": "Diagram showing conditions necessitating peritoneal dialysis catheter removal: fungal peritonitis, sclerosing peritonitis, and refractory or relapsing bacterial infections.",
-    "caption": "Severe peritonitis: Indications for PD catheter removal",
-    "ar": 1.7921
+    "src": "clinix/media/skills/skill-exam-surg-perforation_peritonitis.webp",
+    "alt": "Clinical signs and abdominal examination in acute severe peritonitis",
+    "caption": "Abdominal wall examination and rebound tenderness assessment in peritonitis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Enteric peritonitis yielding multiple enteric Gram-negative organisms (or mixed anaerobes and Gram-negatives) strongly raises suspicion for secondary **surgical peritonitis** from intra-abdominal pathology (diverticulitis, ischemic bowel, perforated viscus). The first step is Peritoneal effluent yields polymicrobial enteric flora. The next step is Emergency CT abdomen with contrast.",
+   "say": "Enteric peritonitis yielding multiple enteric Gram-negative organisms (or mixed anaerobes and Gram-negatives) strongly raises suspicion for secondary surgical peritonitis from intra-abdominal pathology (diverticulitis, ischemic bowel, perforated viscus). The first step is Peritoneal effluent yields polymicrobial enteric flora. The next step is Emergency CT abdomen with contrast.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Peritoneal effluent yields polymicrobial enteric flora"
+     },
+     {
+      "id": "s2",
+      "label": "Emergency CT abdomen with contrast"
+     },
+     {
+      "id": "s3",
+      "label": "Pneumoperitoneum confirms perforated viscus"
+     },
+     {
+      "id": "s4",
+      "label": "Urgent laparotomy and surgical catheter removal"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Catheter **exit-site infection** is diagnosed by purulent drainage at the skin-catheter interface; topical antibacterial prophylaxis with daily exit-site mupirocin cream or gentamicin cream significantly reduces exit-site infections and catheter-related peritonitis. The paired value for Exit-site infection is Purulent discharge and pericatheter erythema.",
+   "say": "Catheter exit-site infection is diagnosed by purulent drainage at the skin-catheter interface; topical antibacterial prophylaxis with daily exit-site mupirocin cream or gentamicin cream significantly reduces exit-site infections and catheter-related peritonitis. The paired value for Exit-site infection is Purulent discharge and pericatheter erythema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infection Site",
+     "Diagnostic Signs",
+     "Prophylaxis / Therapy"
+    ],
+    "rows": [
+     [
+      "Exit-site infection",
+      "Purulent discharge and pericatheter erythema",
+      "Oral antibiotics x 2-3 weeks; topical mupirocin daily"
+     ],
+     [
+      "Tunnel infection",
+      "Subcutaneous track swelling and induration",
+      "Oral or IP antibiotics x 3-4 weeks; cuff shaving"
+     ],
+     [
+      "Pseudomonas infection",
+      "Severe ulcerating biofilmed track",
+      "Combination antibiotics; often requires catheter removal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oral **antibiotic prophylaxis** with a single dose of amoxicillin-clavulanic acid or ampicillin with aminoglycoside is strongly recommended prior to invasive colonoscopic or gynecologic procedures in patients on peritoneal dialysis. One side is Gastrointestinal Procedures, and the other side is Dental and Gynecological.",
+   "say": "Oral antibiotic prophylaxis with a single dose of amoxicillin-clavulanic acid or ampicillin with aminoglycoside is strongly recommended prior to invasive colonoscopic or gynecologic procedures in patients on peritoneal dialysis. One side is Gastrointestinal Procedures, and the other side is Dental and Gynecological.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastrointestinal Procedures",
+     "points": [
+      "Colonoscopy or polypectomy",
+      "Empty peritoneal dialysate completely",
+      "Oral amoxicillin-clavulanic acid prior"
+     ]
+    },
+    "right": {
+     "title": "Dental and Gynecological",
+     "points": [
+      "Invasive mucosal manipulation",
+      "Bacterial seeding across peritoneum",
+      "Single-dose prophylactic antibiotic cover"
+     ]
+    }
    }
   }
  ],
- "quiz": [
-  "q_4be845e6f149",
-  "q_b9ade82fe8f6",
-  "q_5a2591952e36"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "ISPD Guidelines for the Diagnosis, Treatment and Prevention of Peritoneal Dialysis-Related Infections: 2022 update"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 30
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 79",
+  "ISPD Peritonitis Guideline Recommendations 2022",
+  "ISPD Catheter-Related Infection Recommendations 2017"
+ ]
 }

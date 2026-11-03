@@ -1,144 +1,221 @@
 {
  "v": 1,
  "module": "sen-men-syndromes",
- "subject": "ss-endocrinology",
  "title": "Multiple endocrine neoplasia and hereditary endocrine tumours",
- "minutes": 6,
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "**Multiple endocrine neoplasia** (MEN) syndromes are inherited tumour predisposition disorders with two or more endocrine tumours, usually following an **autosomal dominant** pattern. The three classic types are MEN1, MEN2A and MEN2B, with MEN4 as a rarer CDKN1B-related variant. Recognising the pattern of tumours and the causative gene drives screening, surgery and family testing. Exam questions usually test the gene, the classic tumour triad and the surgical timing.",
-   "say": "Multiple endocrine neoplasia syndromes are inherited tumour predisposition disorders with two or more endocrine tumours, usually following an autosomal dominant pattern. The three classic types are MEN1, MEN2A and MEN2B, with MEN4 as a rarer CDKN1B related variant. Recognising the pattern of tumours and the causative gene drives screening, surgery and family testing.",
+   "tx": "Multiple Endocrine Neoplasia type 1 (**MEN1**) is an autosomal dominant tumour syndrome caused by inactivating germline mutations in the **menin** tumour suppressor gene located on chromosome 11q13. The syndrome is clinically defined by tumours of the 3 Ps: **parathyroid** glands (hyperplasia or adenomas developing in over 90% of carriers by age 50), anterior pituitary adenomas (prolactinomas), and enteropancreatic neuroendocrine tumours, predominantly duodenal **gastrinoma** causing severe peptic ulceration.",
+   "say": "MEN1 is an autosomal dominant syndrome caused by germline mutations in the menin tumour suppressor gene on chromosome 11q. Over ninety percent of patients develop primary hyperparathyroidism from multiglandular parathyroid tumours, alongside anterior pituitary adenomas and enteropancreatic neuroendocrine tumours, classically duodenal gastrinomas.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/men1-fig1.webp",
+    "alt": "Multiple Endocrine Neoplasia Type 1",
+    "caption": "Anatomical distribution of parathyroid, enteropancreatic, and pituitary neoplasms in MEN1. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Multiple Endocrine Neoplasia type 2 is driven by heterozygous gain-of-function proto-oncogene mutations in **RET** on chromosome 10q11. **MEN2A** features **medullary thyroid carcinoma** (developing in nearly 100% of carriers), bilateral adrenal pheochromocytoma (50%), and primary hyperparathyroidism (20% to 30%). In contrast, **MEN2B** combines highly aggressive medullary thyroid carcinoma and **pheochromocytoma** with mucosal neuromas of the tongue and lips, intestinal ganglioneuromatosis, and a marfanoid habitus, lacking hyperparathyroidism.",
+   "say": "Multiple Endocrine Neoplasia type 2 is caused by activating germline mutations in the RET proto-oncogene. MEN2A presents with medullary thyroid carcinoma, pheochromocytoma, and hyperparathyroidism. MEN2B presents with aggressive early medullary thyroid cancer, pheochromocytoma, mucosal neuromas, and a marfanoid habitus, without parathyroid disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/men2-fig1.webp",
+    "alt": "Multiple Endocrine Neoplasia Type 2",
+    "caption": "Comparison of neoplastic patterns between MEN2A and MEN2B RET mutations. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "In families carrying pathogenic RET mutations, the timing of **prophylactic thyroidectomy** is determined by American Thyroid Association codon risk stratification. Carriers of the highest-risk codon mutation, **M918T**, causing MEN2B, must undergo total thyroidectomy with central neck dissection within the first year of life, often within the first months. Before performing neck surgery in any MEN2 patient, clinicians must biochemically exclude or resect co-existing **pheochromocytoma** to avert fatal intraoperative hypertensive crisis.",
+   "say": "Prophylactic thyroidectomy in MEN2 is guided by codon-specific risk stratification. In MEN2B harboring the highest-risk M918T codon mutation, total thyroidectomy should be performed in early infancy. Pheochromocytoma must always be ruled out and resected before thyroid surgery to avoid intraoperative adrenergic crisis.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Syndrome",
-     "Gene",
-     "Key tumours"
+     "ATA Codon Risk Category",
+     "Specific RET Codon Mutations",
+     "Prophylactic Thyroidectomy Timing",
+     "Associated MEN2 Variant"
     ],
     "rows": [
      [
-      "MEN1",
-      "MEN1 (menin, 11q13)",
-      "Parathyroid, pancreatic islet, pituitary"
+      "Highest Risk (HST)",
+      "Codon M918T",
+      "Within first year of life (months of age)",
+      "MEN2B syndrome"
      ],
      [
-      "MEN2A",
-      "RET",
-      "Medullary thyroid, phaeochromocytoma, parathyroid"
+      "High Risk (H)",
+      "Codons C634, A883F",
+      "At or before age 5 years",
+      "MEN2A syndrome"
      ],
      [
-      "MEN2B",
-      "RET",
-      "Medullary thyroid, phaeochromocytoma, mucosal neuromas"
-     ],
-     [
-      "MEN4",
-      "CDKN1B (p27)",
-      "Parathyroid, pituitary, others"
+      "Moderate Risk (MOD)",
+      "Codons 609, 611, 618, 620, 768",
+      "Childhood to early adulthood based on calcitonin",
+      "MEN2A / Familial MTC"
      ]
     ]
    }
   },
   {
-   "tx": "In **MEN2**, activating **RET** germline variants cause medullary thyroid carcinoma (MTC), which arises from parafollicular C cells. Before any thyroidectomy, **phaeochromocytoma must be excluded** biochemically, because tumour manipulation can trigger a fatal hypertensive crisis. Patients with MEN2B also show a marfanoid habitus and mucosal neuromas of the lips and tongue. Serum calcitonin and CEA are used to monitor MTC.",
-   "say": "In MEN2, activating RET germline variants cause medullary thyroid carcinoma, which arises from parafollicular C cells. Before any thyroidectomy, phaeochromocytoma must be excluded biochemically, because tumour manipulation can trigger a fatal hypertensive crisis. Patients with MEN2B also show a marfanoid habitus and mucosal neuromas of the lips and tongue. Serum calcitonin and CEA are used to monitor medullary thyroid carcinoma.",
-   "vis": null
+   "tx": "The rare syndrome **MEN4** is caused by heterozygous germline inactivating mutations in **CDKN1B**, which encodes the cyclin-dependent kinase inhibitor p27kip1. Phenotypically, MEN4 closely mirrors classic MEN1, presenting with parathyroid adenomas, anterior pituitary tumours, and neuroendocrine neoplasms. Clinicians should pursue CDKN1B testing in patients who fulfill clinical criteria for MEN1 but test negative for mutations in the **menin** gene.",
+   "say": "MEN4 is caused by inactivating mutations in CDKN1B, which encodes the cyclin-dependent kinase inhibitor p27. MEN4 closely imitates the MEN1 clinical phenotype with parathyroid and pituitary tumours, and should be investigated when genetic sequencing for menin mutations is negative.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic MEN1 Syndrome",
+     "points": [
+      "Inactivating mutation in menin gene on 11q13",
+      "Accounts for >90% of familial 3P cases",
+      "High penetrance of parathyroid disease (>90% by age 50)",
+      "Enteropancreatic gastrinomas and insulinomas common"
+     ]
+    },
+    "right": {
+     "title": "MEN4 Phenotype",
+     "points": [
+      "Inactivating mutation in CDKN1B gene on 12p13",
+      "Identified in 1% to 3% of menin-negative MEN1 cohorts",
+      "Parathyroid adenomas and neuroendocrine tumours",
+      "Additional association with gonadal, adrenal, and cervical tumours"
+     ]
+    }
+   }
   },
   {
-   "tx": "The **RET codon** involved determines both the risk and the timing of surgery. Under **ATA risk categories**, the highest-risk codons prompt **prophylactic thyroidectomy** in early childhood, whereas lower-risk codons allow surgery to be deferred with **calcitonin surveillance**. **Germline RET testing** is essential once **medullary thyroid carcinoma** is identified, so relatives can be offered cascade screening.",
-   "say": "The RET codon involved determines both the risk and the timing of surgery. Under ATA risk categories, which Indian centres commonly follow, the highest-risk codons prompt prophylactic thyroidectomy in early childhood. Lower-risk codons allow surgery to be deferred, with calcitonin surveillance in the meantime. Germline RET testing is essential once medullary thyroid carcinoma is identified, so relatives can be offered cascade screening.",
+   "tx": "The autosomal dominant hereditary cancer predisposition **von Hippel-Lindau** (**VHL**) disease is caused by germline mutations in the VHL tumour suppressor gene on chromosome 3p25. VHL is characterized by retinal and central nervous system **hemangioblastoma**, multicentric bilateral **clear-cell renal carcinoma**, pheochromocytomas, pancreatic neuroendocrine tumours, and endolymphatic sac tumours. VHL-related pheochromocytomas produce predominantly norepinephrine, reflecting absent phenylethanolamine N-methyltransferase.",
+   "say": "Von Hippel-Lindau disease is caused by mutations in the VHL tumour suppressor gene on chromosome 3p. It predisposes to retinal and central nervous system hemangioblastomas, clear-cell renal carcinomas, pheochromocytomas, and pancreatic neuroendocrine tumours, typically producing a purely noradrenergic biochemical profile.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Characteristic Neoplasm",
+     "Diagnostic Imaging",
+     "Endocrine Feature"
+    ],
+    "rows": [
+     [
+      "Central Nervous System",
+      "Retinal and cerebellar hemangioblastoma",
+      "Contrast brain and spine MRI",
+      "Erythropoietin secretion & polycythaemia"
+     ],
+     [
+      "Renal System",
+      "Bilateral clear-cell renal carcinoma",
+      "Abdominal contrast CT / MRI",
+      "Clear-cell histology; surgical partial nephrectomy"
+     ],
+     [
+      "Adrenal Gland",
+      "Adrenal pheochromocytoma",
+      "Plasma free normetanephrine",
+      "Purely noradrenergic; PNMT suppressed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rare autosomal dominant syndrome **Carney complex** is most frequently caused by inactivating mutations in **PRKAR1A**, which encodes the regulatory subunit type 1A of protein kinase A. Carney complex is clinically characterized by spotty facial cutaneous pigmentation (lentigines and blue nevi), **cardiac myxoma**, primary pigmented nodular adrenocortical disease (PPNAD) causing ACTH-independent Cushing syndrome, testicular large cell calcifying Sertoli cell tumours, and pituitary GH-producing somatotroph adenomas.",
+   "say": "Carney complex is driven by inactivating mutations in PRKAR1A, leading to constitutive protein kinase A activation. Clinical features include spotty cutaneous pigmentation, cardiac myxomas, ACTH-independent Cushing syndrome from pigmented nodular adrenocortical disease, and somatotroph pituitary adenomas.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carney Complex (PRKAR1A)",
+     "points": [
+      "Inactivating PRKAR1A mutation on 17q24",
+      "Primary pigmented nodular adrenocortical disease (PPNAD)",
+      "Cardiac, cutaneous, and mammary myxomas",
+      "Paradoxical increase in cortisol during Liddle test"
+     ]
+    },
+    "right": {
+     "title": "McCune-Albright (GNAS)",
+     "points": [
+      "Postzygotic somatic activating GNAS mutation",
+      "Macronodular adrenal hyperplasia / Cushing",
+      "Polyostotic fibrous dysplasia and cafe-au-lait spots",
+      "Autonomous ovarian cysts causing precocious puberty"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The hereditary syndrome **hyperparathyroidism-jaw tumor syndrome** is caused by inactivating germline mutations in **CDC73** (formerly HRPT2), which encodes the tumour suppressor parafibromin. The syndrome is characterized by ossifying fibromas of the mandible or maxilla, renal cysts, and primary hyperparathyroidism with an exceptionally high risk of **parathyroid carcinoma** approaching 15% to 20%, mandating aggressive en bloc surgical resection rather than simple adenomectomy.",
+   "say": "Hyperparathyroidism-jaw tumour syndrome is caused by CDC73 mutations encoding the tumour suppressor parafibromin. Patients develop fibro-osseous jaw tumours, renal cysts, and severe hyperparathyroidism with a high risk of parathyroid carcinoma approaching fifteen to twenty percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Domain",
+     "Pathological Manifestation",
+     "Associated Risk",
+     "Surgical Approach"
+    ],
+    "rows": [
+     [
+      "Parathyroid Glands",
+      "Multiglandular adenomas / carcinoma",
+      "15% to 20% parathyroid carcinoma",
+      "En bloc resection with ipsilateral thyroidectomy"
+     ],
+     [
+      "Craniofacial Bones",
+      "Ossifying fibromas of mandible/maxilla",
+      "Pathological fractures and facial deformity",
+      "Conservative surgical excision"
+     ],
+     [
+      "Renal Parenchyma",
+      "Bilateral renal cysts, hamartomas",
+      "Occasional Wilms tumour development",
+      "Surveillance renal ultrasonography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Whenever **medullary thyroid carcinoma** is newly diagnosed, comprehensive germline **genetic testing** for **RET** proto-oncogene mutations must be performed prior to thyroidectomy, regardless of patient age or absent family history. Demonstrating a germline RET mutation establishes hereditary MEN2, mandating preoperative screening for pheochromocytoma, informing surgical neck dissection extent, and enabling cascade predictive genetic testing across all first-degree at-risk family members.",
+   "say": "All patients diagnosed with medullary thyroid carcinoma must undergo germline RET genetic testing prior to surgery. Identifying a germline RET mutation establishes hereditary MEN2, mandates urgent screening for coexisting pheochromocytoma, and directs cascade genetic testing for family members.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "RET carrier found"
+      "id": "mtc",
+      "label": "Medullary Thyroid Carcinoma Diagnosed"
      },
      {
-      "id": "b",
-      "label": "Identify codon"
+      "id": "ret",
+      "label": "Germline RET Genetic Testing"
      },
      {
-      "id": "c",
-      "label": "Highest risk codon"
+      "id": "pheo",
+      "label": "Screen for Pheochromocytoma"
      },
      {
-      "id": "d",
-      "label": "Prophylactic thyroidectomy"
-     },
-     {
-      "id": "e",
-      "label": "Lower risk codon"
-     },
-     {
-      "id": "f",
-      "label": "Calcitonin surveillance"
+      "id": "cascade",
+      "label": "Cascade Screening of Family Relatives"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "mtc",
+      "ret",
+      "mandatory preop"
      ],
      [
-      "b",
-      "c"
+      "ret",
+      "pheo",
+      "exclude adrenergic crisis"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "b",
-      "e"
-     ],
-     [
-      "e",
-      "f"
+      "ret",
+      "cascade",
+      "identify at-risk carriers"
      ]
     ]
    }
-  },
-  {
-   "tx": "**MEN1** is caused by inactivating mutations in the MEN1 gene on chromosome 11q13, which encodes **menin**, a tumour suppressor. Its typical triad is parathyroid hyperplasia, pancreatic neuroendocrine tumours such as gastrinoma and insulinoma, and pituitary adenomas, notably prolactinomas. In MEN1 primary hyperparathyroidism is multiglandular, so subtotal or total parathyroidectomy is preferred over single adenoma removal.",
-   "say": "MEN1 is caused by inactivating mutations in the MEN1 gene on chromosome 11q13, which encodes menin, a tumour suppressor. Its typical triad is parathyroid hyperplasia, pancreatic neuroendocrine tumours such as gastrinoma and insulinoma, and pituitary adenomas, notably prolactinomas. In MEN1 primary hyperparathyroidism is multiglandular, so subtotal or total parathyroidectomy is preferred over single adenoma removal.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sen-men-syndromes-fig1.webp",
-    "alt": "Diagram showing the locations of pituitary, parathyroid, and pancreatic tumors in a human body, representing the classic triad of Multiple Endocrine Neoplasia type 1.",
-    "caption": "MEN1: The classic triad of pituitary, parathyroid, and pancreatic tumors",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Von Hippel-Lindau** disease, caused by VHL mutations, causes haemangioblastomas, renal cell carcinoma and phaeochromocytoma. **Carney complex**, linked to PRKAR1A, produces cardiac myxomas, skin pigmentation and endocrine overactivity. Genetic screening for these syndromes is guided by the family history and the specific tumour pattern, and it should be combined with counselling and cascade testing of first-degree relatives.",
-   "say": "Von Hippel-Lindau disease, caused by VHL mutations, causes haemangioblastomas, renal cell carcinoma and phaeochromocytoma. Carney complex, linked to PRKAR1A, produces cardiac myxomas, skin pigmentation and endocrine overactivity. Genetic screening for these syndromes is guided by the family history and the tumour pattern, and it should be combined with counselling and cascade testing of first-degree relatives.",
-   "vis": null
   }
- ],
- "quiz": [
-  "q_30398bbc0ac3",
-  "q_bec122ff1954",
-  "q_30e1010902a5"
- ],
- "src": [],
- "refs": [
-  "American Thyroid Association Guidelines for Medullary Thyroid Carcinoma (Wells et al.)",
-  "Williams Textbook of Endocrinology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 24
- }
+ ]
 }

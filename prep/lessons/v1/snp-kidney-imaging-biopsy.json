@@ -1,151 +1,219 @@
 {
  "v": 1,
  "module": "snp-kidney-imaging-biopsy",
- "subject": "ss-nephrology",
- "title": "Kidney imaging and biopsy: choosing the right test",
- "minutes": 6,
+ "title": "Kidney imaging and biopsy",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Renal **ultrasound** is the first-line test for most kidney patients. It shows kidney size, cortical thickness, **echogenicity** and obstruction, without radiation or contrast. Increased cortical echogenicity suggests chronic parenchymal disease. A raised **Doppler resistive index** suggests intrinsic or obstructive parenchymal disease, though it is not specific. Use it to judge perfusion and vascular status.",
-   "say": "Renal ultrasound is the first line test for most kidney patients. It shows kidney size, cortical thickness, echogenicity and obstruction, without radiation or contrast. Increased cortical echogenicity suggests chronic parenchymal disease. A raised Doppler resistive index suggests intrinsic or obstructive parenchymal disease, though it is not specific. Use it to judge perfusion and vascular status.",
+   "tx": "**Renal ultrasound** demonstrates normal bipolar renal length of 10 to 12 cm with cortical echogenicity normally equal to or less than adjacent liver parenchyma, while increased echogenicity signifies medical renal parenchymal disease. The image is renal ultrasound demonstrating cortical echogenicity and bipolar length.",
+   "say": "Renal ultrasound demonstrates normal bipolar renal length of 10 to 12 cm with cortical echogenicity normally equal to or less than adjacent liver parenchyma, while increased echogenicity signifies medical renal parenchymal disease. The image is renal ultrasound demonstrating cortical echogenicity and bipolar length.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-kidney-imaging-biopsy-fig1.webp",
+    "alt": "Renal ultrasound demonstrating cortical echogenicity and bipolar length",
+    "caption": "Ultrasonographic evaluation of bipolar renal length and parenchymal echogenicity (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Renal **resistive index** (RI) measured by spectral Doppler ultrasound is calculated as (peak systolic velocity - end diastolic velocity) / peak systolic velocity, where values exceeding 0.70 indicate elevated intrarenal vascular impedance. One side is Normal Resistive Index, and the other side is Elevated Resistive Index.",
+   "say": "Renal resistive index (RI) measured by spectral Doppler ultrasound is calculated as (peak systolic velocity - end diastolic velocity) / peak systolic velocity, where values exceeding 0 point 70 indicate elevated intrarenal vascular impedance. One side is Normal Resistive Index, and the other side is Elevated Resistive Index.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Resistive Index",
+     "points": [
+      "Resistive index 0.58 to 0.68",
+      "Robust forward diastolic flow",
+      "Preserved microvascular compliance"
+     ]
+    },
+    "right": {
+     "title": "Elevated Resistive Index",
+     "points": [
+      "Resistive index exceeding 0.70",
+      "Diminished end diastolic velocity",
+      "Tubulointerstitial fibrosis or rejection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Technetium-99m **DMSA** (dimercaptosuccinic acid) binds to proximal tubular cells and provides cortical imaging to detect renal scarring, while Tc-99m MAG3 is cleared by tubular secretion, optimal for dynamic renography in obstruction. The paired value for Tc-99m DMSA is Proximal tubular cell binding.",
+   "say": "Technetium-99m DMSA (dimercaptosuccinic acid) binds to proximal tubular cells and provides cortical imaging to detect renal scarring, while Tc-99m MAG3 is cleared by tubular secretion, optimal for dynamic renography in obstruction. The paired value for Tc-99m DMSA is Proximal tubular cell binding.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Finding",
-     "Likely meaning"
+     "Radiotracer",
+     "Mechanism of Clearance",
+     "Primary Indication"
     ],
     "rows": [
      [
-      "Small echogenic kidneys",
-      "Chronic kidney disease"
+      "Tc-99m DMSA",
+      "Proximal tubular cell binding",
+      "Cortical scar detection and split function"
      ],
      [
-      "Large kidneys",
-      "Polycystic disease, amyloid, diabetes"
+      "Tc-99m MAG3",
+      "Active tubular secretion (98%)",
+      "Dynamic renogram in hydronephrosis"
      ],
      [
-      "Hydronephrosis",
-      "Obstruction until proven otherwise"
-     ],
-     [
-      "High resistive index",
-      "Intrinsic or obstructive disease"
+      "Tc-99m DTPA",
+      "Pure glomerular filtration",
+      "True GFR measurement"
      ]
     ]
    }
   },
   {
-   "tx": "Renal scintigraphy answers functional questions. **MAG3 renogram** measures tubular secretion and drainage, and is preferred in renal impairment. **DTPA scan** is a glomerular filtration agent, used for GFR estimation and split function. **DMSA scan** binds proximal tubular cells and detects cortical scarring, especially after pyelonephritis in children.",
-   "say": "Renal scintigraphy answers functional questions. MAG3 renogram measures tubular secretion and drainage, and is preferred when renal function is impaired. DTPA is a glomerular filtration agent, used for estimating GFR and split function. DMSA binds proximal tubular cells and detects cortical scarring, especially after pyelonephritis in children.",
+   "tx": "**Gadolinium**-based contrast agents in patients with severe kidney disease (eGFR < 30 mL/min/1.73m2 or on dialysis) carry a risk of nephrogenic systemic fibrosis (NSF), highest with linear non-ionic chelate formulations. The image is contrast agent safety and nephrogenic systemic fibrosis risk factors.",
+   "say": "Gadolinium-based contrast agents in patients with severe kidney disease (eGFR less than 30 mL/min/1 point 73m2 or on dialysis) carry a risk of nephrogenic systemic fibrosis (NSF), highest with linear non-ionic chelate formulations. The image is contrast agent safety and nephrogenic systemic fibrosis risk factors.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Scan",
-     "Tests",
-     "Best use"
-    ],
-    "rows": [
-     [
-      "MAG3",
-      "Tubular secretion and drainage",
-      "Obstruction in reduced function"
-     ],
-     [
-      "DTPA",
-      "Glomerular filtration",
-      "GFR and split function"
-     ],
-     [
-      "DMSA",
-      "Proximal tubular cortex",
-      "Scarring after pyelonephritis"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/kb/media/contrast-safety-kidneys-allergy-fig1.webp",
+    "alt": "Contrast agent safety and nephrogenic systemic fibrosis risk factors",
+    "caption": "Screening algorithm for gadolinium-induced nephrogenic systemic fibrosis prevention (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Gadolinium-based contrast carries a risk of **nephrogenic systemic fibrosis** in patients with advanced kidney disease. Risk is greatest with less stable linear agents and with prolonged clearance. **Macrocyclic agents** bind gadolinium more tightly and carry a much lower risk, so they are preferred in stage 4 to 5 disease. NSF causes skin thickening, joint contractures and, in severe cases, pulmonary and cardiac involvement.",
-   "say": "Gadolinium based contrast carries a risk of nephrogenic systemic fibrosis in patients with advanced kidney disease. Risk is greatest with less stable linear agents and with prolonged clearance. Macrocyclic agents bind gadolinium more tightly and carry a much lower risk, so they are preferred in stage 4 to 5 disease. NSF causes skin thickening, joint contractures and, in severe cases, pulmonary and cardiac involvement.",
-   "vis": null
-  },
-  {
-   "tx": "Percutaneous **kidney biopsy** is indicated for unexplained nephrotic or nephritic syndrome, unexplained acute kidney injury, and suspected systemic disease such as lupus. Light microscopy, **immunofluorescence** and **electron microscopy** together give the diagnosis. Immunofluorescence shows immune deposits such as granular IgG in membranous nephropathy or IgA mesangial deposits in IgA nephropathy. Electron microscopy shows sub-epithelial or sub-endothelial deposits and foot process effacement.",
-   "say": "Percutaneous kidney biopsy is indicated for unexplained nephrotic or nephritic syndrome, unexplained acute kidney injury, and suspected systemic disease such as lupus. Light microscopy, immunofluorescence and electron microscopy together give the diagnosis. Immunofluorescence shows immune deposits, and electron microscopy shows the location of deposits and foot process effacement.",
+   "tx": "Absolute contraindications to **percutaneous native kidney biopsy** include uncorrected bleeding diathesis, severe refractory hypertension, solitary functioning native kidney (relative), and active renal or perinephric infection. The first step is Clinical indication for biopsy. The next step is Screen for bleeding diathesis and BP.",
+   "say": "Absolute contraindications to percutaneous native kidney biopsy include uncorrected bleeding diathesis, severe refractory hypertension, solitary functioning native kidney (relative), and active renal or perinephric infection. The first step is Clinical indication for biopsy. The next step is Screen for bleeding diathesis and BP.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Light microscopy"
+      "id": "p1",
+      "label": "Clinical indication for biopsy"
      },
      {
-      "id": "b",
-      "label": "Immunofluorescence"
+      "id": "p2",
+      "label": "Screen for bleeding diathesis and BP"
      },
      {
-      "id": "c",
-      "label": "Electron microscopy"
+      "id": "p3",
+      "label": "Confirm two kidneys on ultrasound"
      },
      {
-      "id": "d",
-      "label": "Diagnosis"
+      "id": "p4",
+      "label": "Proceed with real-time ultrasound guidance"
      }
     ],
     "edges": [
      [
-      "a",
-      "d"
+      "p1",
+      "p2"
      ],
      [
-      "b",
-      "d"
+      "p2",
+      "p3"
      ],
      [
-      "c",
-      "d"
+      "p3",
+      "p4"
      ]
     ]
    }
   },
   {
-   "tx": "Biopsy complications are mainly **bleeding**, including perinephric haematoma and gross haematuria. Arteriovenous fistula and pseudoaneurysm are rarer late complications. Check haemoglobin, platelet count and coagulation before the procedure, and observe the patient for several hours afterwards. Ultrasound guidance reduces the risk. Biopsy is relatively contraindicated in uncontrolled hypertension, bleeding diathesis and a solitary kidney.",
-   "say": "Biopsy complications are mainly bleeding, including perinephric haematoma and gross haematuria. Arteriovenous fistula and pseudoaneurysm are rarer late complications. Check haemoglobin, platelets and coagulation before the procedure, and observe the patient afterwards. Ultrasound guidance reduces the risk.",
-   "vis": null
+   "tx": "A diagnostically adequate percutaneous **renal biopsy** specimen requires at least 8 to 10 glomeruli for light microscopy and at least 1 to 2 glomeruli each for immunofluorescence and electron microscopy examination. The paired value for Light microscopy is Buffered formalin.",
+   "say": "A diagnostically adequate percutaneous renal biopsy specimen requires at least 8 to 10 glomeruli for light microscopy and at least 1 to 2 glomeruli each for immunofluorescence and electron microscopy examination. The paired value for Light microscopy is Buffered formalin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Microscopy Modality",
+     "Sample Fixative",
+     "Glomerular Requirement"
+    ],
+    "rows": [
+     [
+      "Light microscopy",
+      "Buffered formalin",
+      "At least 8 to 10 glomeruli"
+     ],
+     [
+      "Immunofluorescence",
+      "Michel transport medium",
+      "At least 1 to 2 glomeruli"
+     ],
+     [
+      "Electron microscopy",
+      "2.5% glutaraldehyde",
+      "At least 1 to 2 glomeruli"
+     ]
+    ]
+   }
   },
   {
-   "tx": "Remember the key distinction for **nephrogenic systemic fibrosis** (NSF). Skin changes begin on the distal limbs and move towards the trunk, reaching deep tissue such as fascia and muscle. Because no proven cure exists, **prevention** is the mainstay. Avoid unnecessary **gadolinium** in patients with severe kidney disease, and choose **macrocyclic agents** when contrast is essential.",
-   "say": "Remember the key distinction for nephrogenic systemic fibrosis. Skin changes begin on the distal limbs and spread towards the trunk, reaching deep tissue such as fascia and muscle. Because there is no proven cure, prevention is the mainstay. Avoid unnecessary gadolinium in patients with severe kidney disease, and choose macrocyclic agents when contrast is essential.",
+   "tx": "Post-biopsy **arteriovenous fistula**s develop in up to 10% of cases, diagnosed by high-velocity low-resistance turbulent jet on color Doppler, with the vast majority resolving spontaneously within 1 to 2 years. One side is Post-Biopsy AV Fistula, and the other side is Severe Complications.",
+   "say": "Post-biopsy arteriovenous fistulas develop in up to 10% of cases, diagnosed by high-velocity low-resistance turbulent jet on color Doppler, with the vast majority resolving spontaneously within 1 to 2 years. One side is Post-Biopsy AV Fistula, and the other side is Severe Complications.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-kidney-imaging-biopsy-fig1.webp",
-    "alt": "Diagram showing progression of skin thickening in nephrogenic systemic fibrosis from limbs to trunk, with text emphasizing prevention.",
-    "caption": "Nephrogenic systemic fibrosis: skin changes and prevention",
-    "ar": 1.8349
+    "kind": "compare",
+    "left": {
+     "title": "Post-Biopsy AV Fistula",
+     "points": [
+      "Occurs in up to 10% of biopsies",
+      "Turbulent high-velocity jet on Doppler",
+      "Spontaneous closure in 1 to 2 years"
+     ]
+    },
+    "right": {
+     "title": "Severe Complications",
+     "points": [
+      "Gross macroscopic hematuria",
+      "Expanding perinephric hematoma",
+      "Transcatheter embolization needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Electron microscopy** in renal biopsy is mandatory for evaluating glomerular basement membrane thickness, podocyte foot process effacement in minimal change disease, and ultrastructural subendothelial or subepithelial deposits. The first step is Glutaraldehyde core processing. The next step is Assess podocyte foot process effacement.",
+   "say": "Electron microscopy in renal biopsy is mandatory for evaluating glomerular basement membrane thickness, podocyte foot process effacement in minimal change disease, and ultrastructural subendothelial or subepithelial deposits. The first step is Glutaraldehyde core processing. The next step is Assess podocyte foot process effacement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Glutaraldehyde core processing"
+     },
+     {
+      "id": "e2",
+      "label": "Assess podocyte foot process effacement"
+     },
+     {
+      "id": "e3",
+      "label": "Measure glomerular basement membrane lamina densa"
+     },
+     {
+      "id": "e4",
+      "label": "Localize subepithelial or subendothelial deposits"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ]
+    ]
    }
   }
  ],
- "quiz": [
-  "q_01213418b894",
-  "q_052d45d0eefa",
-  "q_1dae72757cf4"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Chapter 42 in Brenner and Rector's The Kidney (Skorecki et al.)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 27
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 5",
+  "Harrison Principles of Internal Medicine 22e Ch. 312",
+  "Brenner and Rector The Kidney 11e Ch. 20"
+ ]
 }

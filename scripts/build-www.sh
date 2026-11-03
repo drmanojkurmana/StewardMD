@@ -165,6 +165,8 @@ done
 [ -d kb/ai ] && cp -R kb/ai/. "$WWW/kb/ai/"
 # Schema v2 disease tables and flowcharts: 64 on-demand buckets (kb/tools/build-kb-v2.mjs), read by kb-v2-loader.js.
 [ -d kb/dist/v2 ] && mkdir -p "$WWW/kb/dist/v2" && cp kb/dist/v2/*.json "$WWW/kb/dist/v2/"
+# Image Library index (tools/build-image-library.mjs): one small JSON per system, lazy loaded by image-library.js.
+[ -d kb/dist/imglib ] && mkdir -p "$WWW/kb/dist/imglib" && cp kb/dist/imglib/*.json "$WWW/kb/dist/imglib/"
 # Patient handouts: 64 on-demand buckets (kb/tools/build-handouts.mjs), plain JSON.
 [ -d kb/dist/handouts ] && mkdir -p "$WWW/kb/dist/handouts" && cp kb/dist/handouts/*.json "$WWW/kb/dist/handouts/"
 [ -d kb/treatments ] && cp -R kb/treatments/. "$WWW/kb/treatments/"
