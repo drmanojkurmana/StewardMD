@@ -1,126 +1,202 @@
 {
  "v": 1,
  "module": "srd-msk-joint",
- "subject": "ss-radiology",
- "title": "Spinal tuberculosis: high-yield imaging and classification essentials",
- "minutes": 5,
+ "title": "Joints, cartilage, arthropathy and soft tissue",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Spinal tuberculosis, also called **Pott spine**, is a granulomatous infection that usually starts in the anterior part of the vertebral body. It typically spreads from the subchondral region across the disc, so the **disc space is relatively preserved early** while the vertebral endplates are destroyed. Dorsal spine involvement is most common, and the lower thoracic region is most often affected.",
-   "say": "Spinal tuberculosis, also called Pott spine, is a granulomatous infection that usually starts in the anterior part of the vertebral body. It spreads from the subchondral region across the disc, so the disc space is relatively preserved early while the vertebral endplates are destroyed. The dorsal spine is most commonly involved, and the lower thoracic region is most often affected.",
+   "tx": "Shoulder magnetic resonance imaging provides definitive assessment of the myotendinous cuff. **Rotator cuff tears** most frequently involve the **supraspinatus tendon** near its footprint insertion on the greater tuberosity, with full-thickness tears demonstrating fluid signal traversing from articular to bursal surfaces on T2-weighted fat-suppressed sequences.",
+   "say": "Shoulder magnetic resonance imaging provides definitive assessment of the myotendinous cuff. Rotator cuff tears most frequently involve the supraspinatus tendon near its footprint insertion on the greater tuberosity, with full-thickness tears demonstrating fluid signal traversing from articular to bursal surfaces on T2-weighted fat-suppressed sequences.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/srd-msk-joint-fig1.webp",
-    "alt": "Sagittal diagram showing early spinal tuberculosis. A lesion begins in the anterior vertebral body, spreading subchondrally across the disc, destroying endplates while preserving disc height.",
-    "caption": "Typical early spread of spinal tuberculosis (Pott spine) in the thoracic spine",
-    "ar": 1.8349
+    "src": "v1/kb/media/adhesive-capsulitis-fig1.webp",
+    "alt": "Shoulder anatomy illustration showing glenohumeral joint capsule, rotator cuff interval, and surrounding muscles.",
+    "caption": "Glenohumeral joint anatomy: rotator interval, supraspinatus footprint, and capsule (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Radiographic features evolve in a predictable order. Early on, there is **endplate erosion and vertebral body destruction** with reduced disc height only later. Paravertebral soft tissue shadows, including a fusiform psoas abscess, are a key clue. Gibbus deformity and wedge collapse follow, and the **skip lesion** pattern points strongly away from pyogenic infection.",
-   "say": "Radiographic features evolve in a predictable order. Early on there is endplate erosion and vertebral body destruction, with reduced disc height appearing only later. Paravertebral soft tissue shadows, including a fusiform psoas abscess, are a key clue. Gibbus deformity and wedge collapse follow, and a skip lesion pattern points strongly away from pyogenic infection.",
+   "tx": "Magnetic resonance criteria differentiate internal fibrocartilaginous derangements of the knee. Knee **meniscal tear** diagnosis requires hyperintense fluid or linear intrameniscal signal unambiguously contacting an articular surface (superior, inferior, or free margin) on at least two consecutive slices, known as the **two-slice touch rule**, separating genuine tears from internal mucoid degeneration.",
+   "say": "Magnetic resonance criteria differentiate internal fibrocartilaginous derangements of the knee. Knee meniscal tear diagnosis requires hyperintense fluid or linear intrameniscal signal unambiguously contacting an articular surface superior, inferior, or free margin on at least two consecutive slices, known as the two-slice touch rule, separating genuine tears from internal mucoid degeneration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Criterion",
+     "True Meniscal Tear",
+     "Mucoid Degeneration"
+    ],
+    "rows": [
+     [
+      "Articular contact",
+      "Definite surface touch (superior or inferior)",
+      "Confined within intrameniscal substance"
+     ],
+     [
+      "Two-slice rule",
+      "Identified on 2 or more consecutive slices",
+      "Seen on single slice only or indeterminate"
+     ],
+     [
+      "Associated signs",
+      "Parameniscal cyst, truncated meniscal body",
+      "Intact smooth articular margins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Knee cruciate ligament trauma displays direct and secondary biomechanical indicators. **Anterior cruciate ligament** rupture presents with primary discontinuity, non-visualization, or abnormal horizontal orientation of fibers, accompanied by characteristic secondary signs including bone contusions in the **lateral femoral condyle** sulcus and posterior lateral tibial plateau.",
+   "say": "Knee cruciate ligament trauma presents with direct and secondary biomechanical indicators. Anterior cruciate ligament rupture presents with primary discontinuity, non-visualization, or abnormal horizontal orientation of fibers, accompanied by characteristic secondary signs including bone contusions in the lateral femoral condyle sulcus and posterior lateral tibial plateau.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acl-injury-fig1.webp",
+    "alt": "Anatomical schematic and sagittal MRI demonstrating intact versus torn anterior cruciate ligament and pivot-shift bone bruise pattern.",
+    "caption": "ACL rupture: fiber disruption and kissing lateral compartment bone contusions (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Cross-sectional arthrography defines pathology of the superior glenoid labrum. **SLAP tear** (superior labrum anterior-to-posterior) involves the anchor of the long head of the **biceps tendon**, distinguished from a normal sublabral sulcus on MR arthrography by lateral extension into the labral substance, width > 2 mm, or posterior extension.",
+   "say": "Cross-sectional arthrography defines pathology of the superior glenoid labrum. SLAP tear superior labrum anterior-to-posterior involves the anchor of the long head of the biceps tendon, distinguished from a normal sublabral sulcus on MR arthrography by lateral extension into the labral substance, width over 2 mm, or posterior extension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathological SLAP Tear",
+     "points": [
+      "Curvilinear high signal extending laterally",
+      "Gap width exceeding 2 mm",
+      "Extends posterior to 12 o clock anchor",
+      "High signal within biceps tendon origin"
+     ]
+    },
+    "right": {
+     "title": "Normal Sublabral Sulcus",
+     "points": [
+      "Smooth medial contrast cleft parallel to glenoid",
+      "Narrow cleft width under 2 mm",
+      "Strictly anterior to 12 o clock position",
+      "Underlying labral tissue remains uniform"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Plain radiographic changes establish diagnostic patterns across chronic arthropathies. **Rheumatoid arthritis** demonstrates bilateral symmetric marginal erosions, uniform joint space narrowing, periarticular osteopenia, and synovial pannus formation, characteristically targeting the **MCP joints** (especially 2nd and 3rd), PIP joints, and carpus while sparing DIP joints.",
+   "say": "Plain radiographic changes are diagnostic across various chronic inflammatory arthropathies. Rheumatoid arthritis demonstrates bilateral symmetric marginal erosions, uniform joint space narrowing, periarticular osteopenia, and synovial pannus formation, characteristically targeting the MCP joints especially 2nd and 3rd, PIP joints, and carpus while sparing DIP joints.",
    "vis": {
     "kind": "table",
     "cols": [
      "Feature",
-     "Spinal TB",
-     "Pyogenic spondylodiscitis"
+     "Rheumatoid Arthritis",
+     "Osteoarthritis"
     ],
     "rows": [
      [
-      "Disc space",
-      "Relatively preserved early",
-      "Narrowed early"
+      "Joint Distribution",
+      "MCP and PIP joints; spares DIP",
+      "DIP (Heberden) and PIP (Bouchard); spares MCP"
      ],
      [
-      "Lesion pattern",
-      "Skip lesions common",
-      "Usually contiguous"
+      "Joint Space Loss",
+      "Uniform, symmetric cartilage loss",
+      "Non-uniform, asymmetric loading loss"
      ],
      [
-      "Paravertebral abscess",
-      "Large, often calcified",
-      "Smaller, less calcified"
-     ],
-     [
-      "Typical site",
-      "Dorsal and lower thoracic",
-      "Lumbar more often"
+      "Bone Response",
+      "Marginal erosions, periarticular osteopenia",
+      "Subchondral sclerosis, osteophytes"
      ]
     ]
    }
   },
   {
-   "tx": "MRI is the modality of choice for early detection and staging. Look for **marrow oedema, paravertebral collection and epidural extension**, with contrast enhancement of the abscess wall. Gadolinium-enhanced sequences help distinguish an abscess from a solid mass. Indian practice commonly follows the same MRI approach used internationally, and CT adds value for calcification and bony detail.",
-   "say": "MRI is the modality of choice for early detection and staging. Look for marrow oedema, paravertebral collection and epidural extension, with contrast enhancement of the abscess wall. Gadolinium sequences help distinguish an abscess from a solid mass. CT adds value for calcification and bony detail.",
-   "vis": null
-  },
-  {
-   "tx": "Management in India follows national tuberculosis programme protocols, with **anti-tubercular chemotherapy** as the mainstay for most patients. Surgery is reserved for neurological deficit, progressive kyphosis, instability or abscesses unresponsive to drugs. Guidance on treatment duration should be checked against current NTEP documents, as regimens change.",
-   "say": "Management in India follows national tuberculosis programme protocols, with anti-tubercular chemotherapy as the mainstay for most patients. Surgery is reserved for neurological deficit, progressive kyphosis, instability or abscesses that do not respond to drugs. Check current national programme documents for treatment duration, as regimens change.",
+   "tx": "Microcrystalline inflammatory arthropathies display distinctive osseous remodelling signs on diagnostic radiographs. **Gouty arthritis** typically demonstrates well-defined, punched-out periarticular erosions with sclerotic borders and **overhanging cortical edges** (Martel sign), preserving joint space and bone mineralization until late stages, alongside hyperdense soft-tissue tophi.",
+   "say": "Microcrystalline inflammatory arthropathies display distinctive osseous remodelling signs on diagnostic radiographs. Gouty arthritis typically demonstrates well-defined, punched-out periarticular erosions with sclerotic borders and overhanging cortical edges Martel sign, preserving joint space and bone mineralization until late stages, alongside hyperdense soft-tissue tophi.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Suspected spinal TB"
+      "id": "gt1",
+      "label": "Hyperuricaemia"
      },
      {
-      "id": "b",
-      "label": "MRI staging"
+      "id": "gt2",
+      "label": "Monosodium urate tophus"
      },
      {
-      "id": "c",
-      "label": "Drug therapy"
+      "id": "gt3",
+      "label": "Punched-out erosion"
      },
      {
-      "id": "d",
-      "label": "Surgery if deficit or instability"
+      "id": "gt4",
+      "label": "Overhanging edge"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "gt1",
+      "gt2",
+      "tissue precipitation"
      ],
      [
-      "b",
-      "c"
+      "gt2",
+      "gt3",
+      "pressure resorption"
      ],
      [
-      "c",
-      "d",
-      "if failure"
+      "gt3",
+      "gt4",
+      "periosteal reaction"
      ]
     ]
    }
   },
   {
-   "tx": "Exam takeaway: remember that **disc preservation, skip lesions and a large calcified psoas abscess** point to tuberculosis, while early disc narrowing with contiguous endplate destruction points to pyogenic spondylodiscitis. Also recall that restricted diffusion on MRI favours malignant collapse, which is a separate differential.",
-   "say": "Exam takeaway: disc preservation, skip lesions and a large calcified psoas abscess point to tuberculosis, while early disc narrowing with contiguous endplate destruction points to pyogenic spondylodiscitis. Restricted diffusion on MRI favours malignant collapse, a separate differential.",
-   "vis": null
+   "tx": "Calcium pyrophosphate dihydrate crystal disease produces pathognomonic chondrocalcinosis in articular fibrocartilage across major peripheral joints. **CPPD arthropathy** manifests as linear or punctate calcification of hyaline cartilage and fibrocartilage (**chondrocalcinosis**), prominently affecting the knee menisci, wrist triangular fibrocartilage complex (TFCC), and pubic symphysis.",
+   "say": "Calcium pyrophosphate dihydrate crystal disease produces pathognomonic chondrocalcinosis in articular fibrocartilage across major peripheral joints. CPPD arthropathy manifests as linear or punctate calcification of hyaline cartilage and fibrocartilage chondrocalcinosis, prominently affecting the knee menisci, wrist triangular fibrocartilage complex TFCC, and pubic symphysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/srd-msk-joint-fig1.webp",
+    "alt": "Sagittal diagram showing spinal joint pathology and skeletal involvement in inflammatory and degenerative arthropathies.",
+    "caption": "Axial skeleton and joint involvement patterns (StewardMD preserved figure).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Focal subchondral ischemic events lead to fragment instability in adolescents and young adults. **Osteochondritis dissecans** (OCD) characteristically affects the non-weightbearing lateral aspect of the **medial femoral condyle** (75%), where high T2 signal fluid rim demarcating the progeny bone fragment on MRI indicates mechanical instability requiring surgical fixation.",
+   "say": "Focal subchondral ischemic events lead to fragment instability in adolescents and young adults. Osteochondritis dissecans OCD characteristically affects the non-weightbearing lateral aspect of the medial femoral condyle 75 percent, where high T2 signal fluid rim demarcating the progeny bone fragment on MRI indicates mechanical instability requiring surgical fixation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable Osteochondritis Fragment",
+     "points": [
+      "Intact overlying articular cartilage",
+      "Absence of surrounding high T2 fluid rim",
+      "No subchondral cyst formation",
+      "Managed conservatively with unweighting"
+     ]
+    },
+    "right": {
+     "title": "Unstable Osteochondritis Fragment",
+     "points": [
+      "Circumferential high T2 fluid undermining",
+      "Breach of articular cartilage on arthrography",
+      "Loose intra-articular osteochondral body",
+      "Indication for surgical debridement or pinning"
+     ]
+    }
+   }
   }
  ],
  "quiz": [
-  "rss-t163-1",
-  "ct-275f74115c98",
-  "ct-a41b675b0075"
+  "q_rad_mj_01",
+  "q_rad_mj_02",
+  "q_rad_mj_03"
  ],
  "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 136
- }
+ "refs": [
+  "Crack the Core Exam Musculoskeletal (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 MSK)"
+ ]
 }

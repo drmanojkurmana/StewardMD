@@ -1,0 +1,201 @@
+{
+ "v": 1,
+ "module": "sne-nmo-mogad",
+ "title": "Neuromyelitis optica spectrum disorder and MOGAD",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Neuromyelitis optica spectrum disorder** is an aggressive autoimmune **astrocytopathy** mediated by pathogenic immunoglobulin G autoantibodies directed against **aquaporin-4** water channels concentrated on astrocyte foot processes. Binding of autoantibodies activates the classic complement cascade, producing astrocytic lysis, secondary oligodendrocyte destruction, and severe demyelinating necrosis.",
+   "say": "Neuromyelitis optica spectrum disorder is an aggressive autoimmune astrocytopathy mediated by pathogenic immunoglobulin G autoantibodies directed against aquaporin-4 water channels concentrated on astrocyte foot processes. Binding of autoantibodies activates the classic complement cascade producing astrocytic lysis secondary oligodendrocyte destruction and severe demyelinating necrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuromyelitis-optica-spectrum-disorder-fig1.webp",
+    "alt": "Diagram showing aquaporin-4 autoantibodies targeting astrocytic end-feet in neuromyelitis optica spectrum disorder.",
+    "caption": "Aquaporin-4 autoantibody mediated astrocytopathy in NMOSD (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Longitudinally extensive **transverse myelitis** is defined on spinal cord magnetic resonance imaging by continuous T2 hyperintensity spanning **3** or more **contiguous vertebral** body segments, characteristic of **NMOSD**. These expansive lesions typically occupy central cord grey matter with marked swelling and central cord necrosis.",
+   "say": "Longitudinally extensive transverse myelitis is defined on spinal cord magnetic resonance imaging by continuous T2 hyperintensity spanning 3 or more contiguous vertebral body segments characteristic of NMOSD. These expansive lesions typically occupy central cord grey matter with marked swelling and central cord necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NMOSD Myelitis (LETM)",
+     "points": [
+      "Continuous spanning >=3 vertebral bodies",
+      "Predominantly central cord involvement",
+      "Severe complete paraplegia and sphincter loss",
+      "Frequent cord swelling and central necrosis"
+     ]
+    },
+    "right": {
+     "title": "Multiple Sclerosis Myelitis",
+     "points": [
+      "Short-segment (less than 2 vertebral levels)",
+      "Peripherally located in posterior or lateral columns",
+      "Mild to moderate sensory or motor impairment",
+      "Infrequent cord swelling or necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Area postrema** syndrome is a core clinical manifestation of **NMOSD**, producing **intractable hiccups**, nausea, and vomiting due to periventricular medullary inflammation in the dorsal brainstem. The area postrema lacks a tight blood-brain barrier, allowing circulating aquaporin-4 antibodies direct access to astrocytic targets within the emetic reflex centre.",
+   "say": "Area postrema syndrome is a core clinical manifestation of NMOSD producing intractable hiccups nausea and vomiting due to periventricular medullary inflammation in the dorsal brainstem. The area postrema lacks a tight blood-brain barrier allowing circulating aquaporin-4 antibodies direct access to astrocytic targets within the emetic reflex centre.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Hallmarks",
+     "points": [
+      "Intractable nausea and persistent vomiting",
+      "Incessant hiccups lasting days to weeks",
+      "Absence of gastrointestinal pathology",
+      "Frequent sentinel presentation of NMOSD"
+     ]
+    },
+    "right": {
+     "title": "Neuroanatomical Substrate",
+     "points": [
+      "Dorsal medulla oblongata at fourth ventricular floor",
+      "Fenestrated capillaries without blood-brain barrier",
+      "Dense concentration of aquaporin-4 water channels",
+      "High sensitivity to complement-mediated astrocytic lysis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted maintenance therapies approved for AQP4-IgG-positive NMOSD include the complement C5 inhibitors **eculizumab** and ravulizumab, the interleukin-6 receptor antagonist **satralizumab**, and the CD19-directed monoclonal antibody inebilizumab. These specialized monoclonal antibodies dramatically suppress clinical relapse rates and mitigate cumulative permanent disability.",
+   "say": "Targeted maintenance therapies approved for AQP4-IgG-positive NMOSD include the complement C5 inhibitors eculizumab and ravulizumab the interleukin-6 receptor antagonist satralizumab and the CD19-directed monoclonal antibody inebilizumab. These specialized monoclonal antibodies dramatically suppress clinical relapse rates and mitigate cumulative permanent disability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent",
+     "Target",
+     "Mechanism of Action",
+     "Key Benefit"
+    ],
+    "rows": [
+     [
+      "Eculizumab",
+      "Complement C5",
+      "Blocks membrane attack complex formation",
+      ">90% relapse reduction in PREVENT"
+     ],
+     [
+      "Satralizumab",
+      "IL-6 Receptor",
+      "Inhibits plasmablast survival and inflammation",
+      "Subcutaneous maintenance every 4 weeks"
+     ],
+     [
+      "Inebilizumab",
+      "CD19 B-cells",
+      "Broad depletion of B-cells and plasmablasts",
+      "Intravenous infusion every 6 months"
+     ],
+     [
+      "Rituximab",
+      "CD20 B-cells",
+      "Standard off-label B-cell depleting therapy",
+      "Suppresses circulating memory B-lymphocytes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standard multiple sclerosis disease-modifying agents such as **interferon-beta**, natalizumab, and fingolimod may exacerbate or trigger catastrophic relapses in **NMOSD** and are strictly contraindicated. Inappropriate administration of these multiple sclerosis therapies drives massive astrocytic inflammatory cascades and severe neurological worsening across the neuraxis.",
+   "say": "Standard multiple sclerosis disease-modifying agents such as interferon-beta natalizumab and fingolimod may exacerbate or trigger catastrophic relapses in NMOSD and are strictly contraindicated. Inappropriate administration of these multiple sclerosis therapies drives massive astrocytic inflammatory cascades and severe neurological worsening across the neuraxis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contraindicated in NMOSD",
+     "points": [
+      "Interferon-beta formulations",
+      "Fingolimod and S1P receptor modulators",
+      "Natalizumab (alpha-4 integrin blocker)",
+      "Alemtuzumab (anti-CD52 monoclonal)"
+     ]
+    },
+    "right": {
+     "title": "Approved / Effective in NMOSD",
+     "points": [
+      "Eculizumab and ravulizumab (C5 complement)",
+      "Satralizumab (IL-6 receptor antagonist)",
+      "Inebilizumab (anti-CD19 B-cell deplete)",
+      "Rituximab (anti-CD20) and mycophenolate mofetil"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Myelin **oligodendrocyte glycoprotein** antibody-associated disease (**MOGAD**) is an oligodendrogliopathy presenting with bilateral optic neuritis with marked optic disc swelling, LETM, or acute disseminated encephalomyelitis. Unlike NMOSD astrocytopathy, MOGAD causes primary inflammatory demyelination with relative preservation of underlying axons in clinical diagnostic evaluations.",
+   "say": "Myelin oligodendrocyte glycoprotein antibody-associated disease MOGAD is an oligodendrogliopathy presenting with bilateral optic neuritis with marked optic disc swelling LETM or acute disseminated encephalomyelitis. Unlike NMOSD astrocytopathy MOGAD causes primary inflammatory demyelination with relative preservation of underlying axons.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MOGAD Features",
+     "points": [
+      "Antibodies target myelin oligodendrocyte glycoprotein",
+      "Primary oligodendrogliopathy with myelin preservation",
+      "ADEM presentation prominent in young children",
+      "Frequent longitudinally extensive optic neuritis with disc edema"
+     ]
+    },
+    "right": {
+     "title": "NMOSD Features",
+     "points": [
+      "Antibodies target astrocytic aquaporin-4 channels",
+      "Primary astrocytopathy with secondary demyelination",
+      "Area postrema and brainstem syndromes prominent",
+      "Severe cumulative disability after acute attacks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Optic neuritis in MOGAD typically shows longitudinally extensive retrobulbar optic nerve and perineural **optic sheath** enhancement with sparing of the **optic chiasm**, distinguishing it from AQP4-NMOSD. Patients frequently develop prominent bilateral optic disc edema that improves rapidly with systemic high-dose pulse corticosteroids.",
+   "say": "Optic neuritis in MOGAD typically shows longitudinally extensive retrobulbar optic nerve and perineural optic sheath enhancement with sparing of the optic chiasm distinguishing it from AQP4-NMOSD. Patients frequently develop prominent bilateral optic disc edema that improves rapidly with systemic high-dose pulse corticosteroids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MOGAD Optic Neuritis",
+     "points": [
+      "Marked optic nerve head swelling and disc edema",
+      "Perineural optic sheath contrast enhancement",
+      "Sparing of intracranial optic chiasm",
+      "Rapid and dramatic steroid responsiveness"
+     ]
+    },
+    "right": {
+     "title": "AQP4-NMOSD Optic Neuritis",
+     "points": [
+      "Frequent posterior optic tract and chiasm lesions",
+      "Absence of marked anterior sheath enhancement",
+      "High risk of permanent complete visual loss",
+      "Frequent steroid-resistance requiring plasmapheresis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute disseminated **encephalomyelitis** presents in children with **post-infectious** encephalopathy and widespread multifocal, poorly marginated demyelinating white matter lesions on MRI, frequently associated with transient MOG-IgG positivity. Most pediatric patients achieve complete functional recovery following high-dose pulse corticosteroid therapy in specialized paediatric centres.",
+   "say": "Acute disseminated encephalomyelitis presents in children with post-infectious encephalopathy and widespread multifocal poorly marginated demyelinating white matter lesions on MRI frequently associated with transient MOG-IgG positivity. Most pediatric patients achieve complete functional recovery following high-dose pulse corticosteroid therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuromyelitis-optica-fig1.webp",
+    "alt": "MRI of spinal cord displaying longitudinally extensive transverse myelitis in neuromyelitis optica.",
+    "caption": "Diagnostic spinal neuroimaging and clinical differences in NMOSD (StewardMD).",
+    "ar": 1.7778
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Adams and Victor Principles of Neurology 11e Ch. 35",
+  "Harrison Principles of Internal Medicine 22e Ch. 436",
+  "Wingerchuk Criteria for NMOSD and International MOGAD Criteria"
+ ]
+}

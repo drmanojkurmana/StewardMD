@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "module": "sne-hyperkinetic-tremor-chorea",
+ "title": "Tremor, dystonia, chorea and ataxia",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Essential tremor** is an 8 to 12 Hz postural and kinetic action tremor predominantly involving the hands and head titubation that improves with alcohol and first-line medical therapy with **propranolol** or primidone, displaying autosomal dominant inheritance with variable penetrance in affected families.",
+   "say": "Essential tremor is an 8 to 12 Hz postural and kinetic action tremor predominantly involving the hands and head titubation that improves with alcohol and first-line medical therapy with propranolol or primidone, displaying autosomal dominant inheritance with variable penetrance in affected families.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/essential-tremor-fig1.webp",
+    "alt": "Diagram illustrating essential tremor postural oscillations and thalamic VIM deep brain stimulation target.",
+    "caption": "Essential tremor pathophysiology and ventral intermediate nucleus target (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Autosomal dominant neurodegeneration with motor hyperkinesia exemplifies trinucleotide repeat pathology. **Huntington disease** is an autosomal dominant neurodegenerative disorder caused by CAG trinucleotide repeat expansion exceeding 36 repeats in the HTT gene on chromosome 4p16.3, characterized by **caudate nucleus** atrophy and chorea.",
+   "say": "Autosomal dominant neurodegeneration with motor hyperkinesia exemplifies trinucleotide repeat pathology. Huntington disease is an autosomal dominant neurodegenerative disorder caused by CAG trinucleotide repeat expansion exceeding 36 repeats in the HTT gene on chromosome 4p16.3, characterized by caudate nucleus atrophy and chorea.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/huntington-disease-fig1.webp",
+    "alt": "Diagram showing caudate nucleus atrophy, boxcar ventricles, and striatal degeneration in Huntington disease.",
+    "caption": "Huntington disease striatal atrophy and boxcar lateral ventricles (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Medical therapy for Huntington chorea targets presynaptic dopaminergic packaging. Tetrabenazine and **deutetrabenazine** inhibit vesicular monoamine transporter 2, designated as **VMAT2**, to deplete presynaptic dopamine, serving as first-line therapy for Huntington chorea while monitoring for secondary depression and parkinsonism. Dosage titration must be conducted cautiously to avoid triggering acute worsening of underlying psychiatric symptoms.",
+   "say": "Medical therapy for Huntington chorea targets presynaptic dopaminergic packaging. Tetrabenazine and deutetrabenazine inhibit vesicular monoamine transporter 2, designated as VMAT2, to deplete presynaptic dopamine, serving as first-line therapy for Huntington chorea while monitoring for secondary depression and parkinsonism. Dosage titration must be conducted cautiously to avoid triggering acute worsening of underlying psychiatric symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "VMAT2 Inhibition",
+     "points": [
+      "Blocks monoamine uptake into synaptic vesicles",
+      "Depletes presynaptic dopamine stores",
+      "Deutetrabenazine has longer half-life",
+      "Suppresses involuntary choreic movements"
+     ]
+    },
+    "right": {
+     "title": "Adverse Effects",
+     "points": [
+      "Sedation and daytime somnolence",
+      "Depression and heightened suicidality",
+      "Secondary drug-induced parkinsonism",
+      "Akathisia and restlessness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Wilson disease** results from autosomal recessive ATP7B gene mutations, featuring low serum **ceruloplasmin**, elevated 24-hour urinary copper excretion, Kayser-Fleischer rings, and the face of the giant panda sign on midbrain MRI, demanding lifelong copper chelation therapy. Early initiation of penicillamine or trientine prevents irreversible basal ganglia destruction and hepatic cirrhosis.",
+   "say": "Wilson disease results from autosomal recessive ATP7B gene mutations, featuring low serum ceruloplasmin, elevated 24-hour urinary copper excretion, Kayser-Fleischer rings, and the face of the giant panda sign on midbrain MRI, demanding lifelong copper chelation therapy. Early initiation of penicillamine or trientine prevents irreversible basal ganglia destruction and hepatic cirrhosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Test",
+     "Expected Value in Wilson",
+     "Pathophysiological Basis"
+    ],
+    "rows": [
+     [
+      "Serum Ceruloplasmin",
+      "< 20 mg/dL (low)",
+      "Impaired copper incorporation into apoprotein"
+     ],
+     [
+      "24-Hour Urine Copper",
+      "> 100 mcg/24h (high)",
+      "Increased excretion of toxic free copper"
+     ],
+     [
+      "Slit-Lamp Exam",
+      "Kayser-Fleischer rings",
+      "Copper deposition in Descemet membrane"
+     ],
+     [
+      "Midbrain MRI",
+      "Giant panda face sign",
+      "High T2 signal in tegmentum with spared nuclei"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Focal craniocervical dystonias present with involuntary head rotation and posturing. **Cervical dystonia** is the most frequent focal dystonia, characterized by sensory tricks that temporarily alleviate abnormal head postures, treated first-line with **botulinum toxin** injections into hyperactive muscles. Periodic repeat injections every three to four months sustain clinical functional improvement and pain relief.",
+   "say": "Focal craniocervical dystonias present with involuntary head rotation and posturing. Cervical dystonia is the most frequent focal dystonia, characterized by sensory tricks that temporarily alleviate abnormal head postures, treated first-line with botulinum toxin injections into hyperactive muscles. Periodic repeat injections every three to four months sustain clinical functional improvement and pain relief.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cervical Dystonia"
+     },
+     {
+      "id": "b",
+      "label": "Sensory Trick (Geste)"
+     },
+     {
+      "id": "c",
+      "label": "Motor Plate Hyperactivity"
+     },
+     {
+      "id": "d",
+      "label": "Botulinum Toxin Blockade"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "tactile alleviation"
+     ],
+     [
+      "a",
+      "c",
+      "abnormal firing"
+     ],
+     [
+      "c",
+      "d",
+      "acetylcholine release arrest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dopa-responsive dystonia, historically known as **Segawa syndrome**, is an autosomal dominant disorder caused by mutations in **GCH1** encoding GTP cyclohydrolase 1, presenting with diurnal fluctuation of foot dystonia that responds exquisitely to low-dose levodopa without motor complications. Dramatic and sustained therapeutic response to low-dose levodopa serves as both diagnostic confirmation and lifelong therapy.",
+   "say": "Dopa-responsive dystonia, historically known as Segawa syndrome, is an autosomal dominant disorder caused by mutations in GCH1 encoding GTP cyclohydrolase 1, presenting with diurnal fluctuation of foot dystonia that responds exquisitely to low-dose levodopa without motor complications. Dramatic and sustained therapeutic response to low-dose levodopa serves as both diagnostic confirmation and lifelong therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Segawa Syndrome (DRD)",
+     "Early-Onset Parkinson Disease"
+    ],
+    "rows": [
+     [
+      "Gene Defect",
+      "GCH1 (GTP cyclohydrolase 1)",
+      "PRKN, PINK1, or SNCA"
+     ],
+     [
+      "Diurnal Fluctuation",
+      "Severe worsening in evening, normal morning",
+      "Fluctuations tied to medication timing"
+     ],
+     [
+      "Levodopa Response",
+      "Sustained complete remission without dyskinesia",
+      "Initial response with motor complications"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Friedreich ataxia** is an autosomal recessive spinocerebellar degeneration caused by GAA trinucleotide expansions in the FXN gene encoding **frataxin**, presenting with progressive sensory ataxia, absent deep tendon reflexes, hypertrophic cardiomyopathy, and diabetes mellitus in young adults. Cardiac arrhythmias and progressive congestive heart failure represent the leading causes of premature mortality.",
+   "say": "Friedreich ataxia is an autosomal recessive spinocerebellar degeneration caused by GAA trinucleotide expansions in the FXN gene encoding frataxin, presenting with progressive sensory ataxia, absent deep tendon reflexes, hypertrophic cardiomyopathy, and diabetes mellitus in young adults. Cardiac arrhythmias and progressive congestive heart failure represent the leading causes of premature mortality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neurological Features",
+     "points": [
+      "Progressive sensory and cerebellar ataxia",
+      "Areflexia with extensor plantar responses",
+      "Loss of vibration and proprioception",
+      "Dysarthria and optic atrophy"
+     ]
+    },
+    "right": {
+     "title": "Systemic Manifestations",
+     "points": [
+      "Hypertrophic concentric cardiomyopathy",
+      "Cardiac arrhythmias causing mortality",
+      "Diabetes mellitus in 10 to 20% of cases",
+      "Kyphoscoliosis and pes cavus deformities"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Spinocerebellar ataxias** represent autosomal dominant ataxias with progressive cerebellar atrophy, where SCA1, SCA2, SCA3 also known as **Machado-Joseph** disease, SCA6, and SCA7 are polyglutamine disorders caused by translated CAG trinucleotide repeat expansions. Genetic counselling and targeted molecular testing are crucial for confirming specific subtype inheritance.",
+   "say": "Spinocerebellar ataxias represent autosomal dominant ataxias with progressive cerebellar atrophy, where SCA1, SCA2, SCA3 also known as Machado-Joseph disease, SCA6, and SCA7 are polyglutamine disorders caused by translated CAG trinucleotide repeat expansions. Genetic counselling and targeted molecular testing are crucial for confirming specific subtype inheritance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CAG Repeat Expansion"
+     },
+     {
+      "id": "b",
+      "label": "Polyglutamine Protein Aggregates"
+     },
+     {
+      "id": "c",
+      "label": "Cerebellar and Brainstem Atrophy"
+     },
+     {
+      "id": "d",
+      "label": "Progressive Ataxia Syndromes"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "toxic gain of function"
+     ],
+     [
+      "b",
+      "c",
+      "Purkinje and pontine loss"
+     ],
+     [
+      "c",
+      "d",
+      "Machado-Joseph and SCAs"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Adams and Victor Principles of Neurology 11e Ch. 4",
+  "Netter Neurology 2e Ch. 13"
+ ]
+}

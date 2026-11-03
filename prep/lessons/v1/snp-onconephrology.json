@@ -1,102 +1,97 @@
 {
  "v": 1,
  "module": "snp-onconephrology",
- "subject": "ss-nephrology",
- "title": "Onconephrology: Tumour Lysis Syndrome and Drug Nephrotoxicity",
- "minutes": 6,
+ "title": "Onconephrology",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "**Tumour lysis syndrome** (TLS) occurs when rapid cell death releases intracellular potassium, phosphate, and nucleic acid breakdown products, mainly **uric acid**. Burkitt lymphoma and high-grade lymphoma and acute leukaemia, especially with a raised white cell count, carry the highest risk. Hyperkalaemia, hyperphosphataemia, hyperuricaemia and hypocalcaemia are the classic laboratory hallmarks. Uric acid crystals and calcium phosphate crystals deposit in distal tubules, causing obstructive acute kidney injury.",
-   "say": "Tumour lysis syndrome occurs when rapid cell death releases intracellular potassium, phosphate, and nucleic acid breakdown products, mainly uric acid. Burkitt lymphoma, high-grade lymphoma, and acute leukaemia with a raised white cell count carry the highest risk. The classic laboratory hallmarks are hyperkalaemia, hyperphosphataemia, hyperuricaemia, and hypocalcaemia. Uric acid and calcium phosphate crystals deposit in distal tubules, causing obstructive acute kidney injury.",
+   "tx": "The consensus **Cairo-Bishop diagnostic criteria** for laboratory **tumor lysis syndrome** (**TLS**) require two or more metabolic derangements within **3** to **7** days of initiating chemotherapy: serum **uric acid** >= **8.0** mg/dL, **potassium** >= **6.0** mmol/L, phosphorus >= **4.5** mg/dL, or **calcium** <= **7.0** mg/dL (or a **25%** change from baseline).",
+   "say": "The consensus Cairo-Bishop diagnostic criteria for laboratory tumor lysis syndrome require two or more metabolic derangements within 3 to 7 days of initiating chemotherapy: serum uric acid 8.0 mg/dL or higher, potassium 6.0 mmol/L or higher, phosphorus 4.5 mg/dL or higher, or calcium 7.0 mg/dL or lower.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Feature",
-     "Key point"
+     "Laboratory Parameter",
+     "Cairo-Bishop Diagnostic Cutoff",
+     "Clinical Consequence"
     ],
     "rows": [
      [
-      "Main released solutes",
-      "Potassium, phosphate, uric acid"
+      "Hyperuricemia",
+      "Uric acid >= 8.0 mg/dL (or 25% increase)",
+      "Acute intraluminal uric acid crystalluria"
      ],
      [
-      "Highest risk settings",
-      "Burkitt, high-grade lymphoma, acute leukaemia"
+      "Hyperkalemia",
+      "Potassium >= 6.0 mmol/L (or 25% increase)",
+      "Lethal ventricular cardiac arrhythmias"
      ],
      [
-      "Crystal types",
-      "Uric acid, calcium phosphate"
+      "Hyperphosphatemia",
+      "Phosphorus >= 4.5 mg/dL (or 25% increase)",
+      "Metastatic calcium-phosphate precipitation"
      ],
      [
-      "Main renal lesion",
-      "Distal tubular crystal obstruction"
+      "Hypocalcemia",
+      "Calcium <= 7.0 mg/dL (or 25% decrease)",
+      "Neuromuscular tetany and QT prolongation"
      ]
     ]
    }
   },
   {
-   "tx": "This figure walks the nephron from glomerulus to collecting duct, pinning each **nephrotoxic** drug class to the segment it injures. Pair the map with the **tumour lysis** panel of released solutes, crystal injury and prevention. Look for where hydration, **rasburicase** and monitoring sit in the sequence, and which setting carries the highest risk.",
-   "say": "Travel the nephron segment by segment and ask which therapy harms each stop. Then rehearse the lysis sequence from cell breakdown through crystal blockage to kidney injury, and place hydration and uric acid lowering at their preventive steps. Finish by naming the electrolyte pattern that should trigger action.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-onconephrology-fig1.webp",
-    "alt": "Anticancer drug nephrotoxicity mapped along the nephron from glomerulus to collecting duct, with tumour lysis syndrome electrolyte pattern and management.",
-    "caption": "Nephrotoxic anticancer drugs by nephron segment and tumour lysis",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Humans lack **urate oxidase**, so uric acid cannot be converted to soluble allantoin and accumulates. Xanthine oxidase converts xanthine to uric acid. **Allopurinol** inhibits xanthine oxidase and prevents new uric acid formation, but it has no uricolytic action, so it does not clear existing uric acid. **Rasburicase** is a recombinant urate oxidase that rapidly converts uric acid to allantoin and is preferred when uric acid is high or renal function is poor.",
-   "say": "Humans lack urate oxidase, so uric acid cannot be converted to soluble allantoin and it accumulates. Xanthine oxidase converts xanthine to uric acid. Allopurinol inhibits xanthine oxidase and prevents new uric acid formation, but it cannot clear uric acid already present. Rasburicase is a recombinant urate oxidase that rapidly converts uric acid to allantoin, and it is preferred when uric acid is high or renal function is poor.",
+   "tx": "Recombinant urate oxidase **Rasburicase** enzymatically degrades insoluble uric acid into highly soluble **allantoin** within hours. However, rasburicase is strictly **contraindicated** in patients with **glucose-6-phosphate dehydrogenase** (**G6PD**) deficiency because the hydrogen peroxide byproduct cannot be neutralized, precipitating catastrophic hemolytic anemia and severe methemoglobinemia.",
+   "say": "Recombinant urate oxidase Rasburicase enzymatically degrades insoluble uric acid into highly soluble allantoin within hours. However, rasburicase is strictly contraindicated in patients with glucose-6-phosphate dehydrogenase deficiency because the hydrogen peroxide byproduct cannot be neutralized, precipitating catastrophic hemolytic anemia and severe methemoglobinemia.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Allopurinol",
+     "title": "Rasburicase (Urate Oxidase)",
      "points": [
-      "Blocks xanthine oxidase",
-      "Prevents new uric acid formation",
-      "No effect on existing uric acid"
+      "Enzymatically cleaves uric acid to allantoin",
+      "Dose 0.15 to 0.20 mg/kg or 3 to 6 mg",
+      "Contraindicated in G6PD deficiency",
+      "Yields 5 to 10 times higher solubility"
      ]
     },
     "right": {
-     "title": "Rasburicase",
+     "title": "Allopurinol / Febuxostat",
      "points": [
-      "Recombinant urate oxidase",
-      "Converts uric acid to allantoin",
-      "Preferred if high risk or renal impairment"
+      "Allopurinol or febuxostat",
+      "Inhibits xanthine oxidase enzyme",
+      "Blocks new uric acid generation",
+      "Safe in G6PD deficiency"
      ]
     }
    }
   },
   {
-   "tx": "Tumour lysis syndrome prophylaxis starts with **intravenous hydration** given 48 hours before chemotherapy and continued for 48 hours afterwards. High-risk patients need **frequent monitoring** of renal function and **uric acid** every 4 to 6 hours once treatment begins. **Rasburicase** lowers uric acid but is avoided in **G6PD deficiency**, because it generates hydrogen peroxide that can cause haemolysis.",
-   "say": "Tumour lysis syndrome prophylaxis starts with intravenous hydration given 48 hours before chemotherapy and continued for 48 hours afterwards. High-risk patients need frequent monitoring of renal function and uric acid every 4 to 6 hours once treatment begins. Rasburicase lowers uric acid but is avoided in G6PD deficiency, because it generates hydrogen peroxide that can cause haemolysis.",
+   "tx": "Immune **checkpoint inhibitor-associated acute kidney injury** (**CPI-AKI**) occurs in **3%** to **5%** of treated cancer patients receiving monoclonal antibodies targeting **PD-1** (pembrolizumab, **nivolumab**) or **CTLA-4** (**ipilimumab**). Renal biopsy demonstrates classic immune-mediated **acute tubulointerstitial nephritis** with prominent interstitial lymphocytic and eosinophilic infiltration.",
+   "say": "Immune checkpoint inhibitor-associated acute kidney injury occurs in 3% to 5% of treated cancer patients receiving monoclonal antibodies targeting PD-1 or CTLA-4. Renal biopsy demonstrates classic immune-mediated acute tubulointerstitial nephritis with prominent interstitial lymphocytic and eosinophilic infiltration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/snp-onconephrology-fig1.webp",
+    "alt": "Nephrotoxic anticancer drugs by nephron segment and tumour lysis",
+    "caption": "Chemotherapy-induced tubular toxicity and onconephrology mechanisms (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Clinical management of grade **2** or higher checkpoint inhibitor-induced nephrotoxicity mandates prompt **withholding** of the offending immunotherapy agent and immediate initiation of oral **prednisone** at **0.5** to **1.0** mg/kg/day. Following complete renal recovery to baseline creatinine, cautious oncologic **rechallenge** may be considered in consultation with onconephrology.",
+   "say": "Clinical management of grade 2 or higher checkpoint inhibitor-induced nephrotoxicity mandates prompt withholding of the offending immunotherapy agent and immediate initiation of oral prednisone at 0.5 to 1.0 mg/kg/day. Following complete renal recovery to baseline creatinine, cautious oncologic rechallenge may be considered in consultation with onconephrology.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Hydrate 48 h before chemo"
+      "label": "Serum creatinine doubling (Grade 2+ CPI-AKI)"
      },
      {
       "id": "b",
-      "label": "Continue hydration 48 h after"
+      "label": "Withhold CPI and initiate prednisone 0.5 to 1 mg/kg/day"
      },
      {
       "id": "c",
-      "label": "Monitor renal function and uric acid every 4-6 h"
-     },
-     {
-      "id": "d",
-      "label": "High uric acid risk?"
-     },
-     {
-      "id": "e",
-      "label": "Check G6PD status"
-     },
-     {
-      "id": "f",
-      "label": "Give rasburicase if G6PD normal"
+      "label": "Slow taper over 4 to 6 weeks upon renal recovery"
      }
     ],
     "edges": [
@@ -107,113 +102,107 @@
      [
       "b",
       "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ],
-     [
-      "e",
-      "f"
      ]
     ]
    }
   },
   {
-   "tx": "**Ifosfamide** is an alkylating agent whose metabolite **acrolein** injures the bladder urothelium, causing **haemorrhagic cystitis**. **Mesna** is given alongside to bind acrolein in the urine and prevent this. Ifosfamide can also cause **Fanconi-type** proximal tubular injury, so **aggressive hydration** and monitoring of urine output are essential. Serial checks of creatinine, phosphate, glucose and urinalysis help detect tubular damage early.",
-   "say": "Ifosfamide is an alkylating agent whose metabolite acrolein injures the bladder lining and causes haemorrhagic cystitis. Mesna is given alongside to bind acrolein in the urine and prevent this. Ifosfamide can also cause Fanconi-type proximal tubular injury, so aggressive hydration and monitoring of urine output are essential. Regular checks of creatinine, phosphate, glucose and urinalysis help detect tubular damage early.",
+   "tx": "Chemotherapeutic agents selectively targeting the **VEGF pathway** (**bevacizumab**, sunitinib, axitinib) disrupt physiological podocyte-endothelial paracrine signaling. Neutralization of podocyte-derived **VEGF-A** removes tonic survival signals from glomerular endothelial VEGFR2 receptors, precipitating acute worsening of systemic **hypertension**, heavy nephrotic-range proteinuria, and secondary renal-limited **thrombotic microangiopathy**.",
+   "say": "Chemotherapeutic agents targeting the VEGF pathway disrupt podocyte-endothelial paracrine signaling. Neutralization of podocyte-derived VEGF-A removes tonic survival signals from glomerular endothelial VEGFR2 receptors, precipitating acute worsening of hypertension, heavy proteinuria, and renal-limited thrombotic microangiopathy.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Problem",
-     "Mechanism",
-     "Preventive step"
+    "kind": "compare",
+    "left": {
+     "title": "VEGF Inhibitor Microangiopathy",
+     "points": [
+      "Disrupts podocyte-to-endothelial VEGF signaling",
+      "Glomerular capillary endothelial cell swelling",
+      "Subendothelial fibrinoid deposition and microthrombi",
+      "Severe hypertension and heavy proteinuria"
+     ]
+    },
+    "right": {
+     "title": "Systemic TTP / HUS",
+     "points": [
+      "Profound systemic microangiopathic hemolytic anemia",
+      "Severe consumption thrombocytopenia",
+      "ADAMTS13 deficiency or complement mutation",
+      "Requires plasmapheresis or eculizumab"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-dose **methotrexate** exceeding **500** mg/m2 undergoes extensive filtration and precipitation as insoluble **crystals** within acidic distal tubular lumens, causing obstructive crystalline nephropathy. Standard clinical prophylaxis requires aggressive intravenous volume expansion with isotonic sodium bicarbonate to maintain a high urine output and achieve a **urinary alkalinization** target pH >= **7.0**.",
+   "say": "High-dose methotrexate exceeding 500 mg/m2 undergoes extensive filtration and precipitation as insoluble crystals within acidic distal tubular lumens, causing obstructive crystalline nephropathy. Standard clinical prophylaxis requires aggressive intravenous volume expansion with isotonic sodium bicarbonate to maintain a high urine output and achieve a urinary alkalinization target pH of 7.0 or higher.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High-dose methotrexate infusion (> 500 mg/m2)"
+     },
+     {
+      "id": "b",
+      "label": "IV bicarbonate hydration to maintain urine pH >= 7.0"
+     },
+     {
+      "id": "c",
+      "label": "Prevents intratubular methotrexate crystallization"
+     }
     ],
-    "rows": [
+    "edges": [
      [
-      "Haemorrhagic cystitis",
-      "Acrolein irritates the urothelium",
-      "Mesna and hydration"
+      "a",
+      "b"
      ],
      [
-      "Fanconi-type injury",
-      "Proximal tubular damage",
-      "Hydration and electrolyte checks"
-     ],
-     [
-      "Phosphate and glucose wasting",
-      "Proximal tubular dysfunction",
-      "Serial urinalysis and bloods"
+      "b",
+      "c"
      ]
     ]
    }
   },
   {
-   "tx": "Several modern cancer treatments injure the kidney through different mechanisms. **VEGF inhibitors** commonly cause **proteinuria**, so urine protein should be monitored during treatment. **Immune checkpoint inhibitors** can trigger immune-mediated **acute interstitial nephritis**, which may need steroid treatment. **CAR-T** therapy can cause **acute kidney injury**, often linked to cytokine release. **Sinusoidal obstruction syndrome** after stem cell transplant can compromise renal perfusion. **Nephrectomy** for renal cell carcinoma lowers filtration reserve and raises the risk of **chronic kidney disease**.",
-   "say": "Several modern cancer treatments can injure the kidney through different mechanisms. VEGF inhibitors often cause proteinuria, so urine protein should be checked during treatment. Immune checkpoint inhibitors can trigger immune-mediated interstitial nephritis, which may need steroids. CAR-T therapy can cause acute kidney injury, often linked to cytokine release. Sinusoidal obstruction syndrome after stem cell transplant can compromise renal perfusion. Nephrectomy for renal cell carcinoma lowers filtration reserve and raises the risk of chronic kidney disease.",
+   "tx": "Emergency rescue in severe high-dose methotrexate toxicity complicated by acute renal failure utilizes intravenous **Glucarpidase** (**carboxypeptidase G2**). This recombinant bacterial enzyme rapidly hydrolyzes extracellular methotrexate into non-toxic metabolites, **DAMPA** and glutamate, reducing circulating methotrexate concentrations by over **95%** within **15** minutes.",
+   "say": "Emergency rescue in severe high-dose methotrexate toxicity complicated by acute renal failure utilizes intravenous Glucarpidase. This recombinant bacterial enzyme rapidly hydrolyzes extracellular methotrexate into non-toxic metabolites, DAMPA and glutamate, reducing circulating methotrexate concentrations by over 95% within 15 minutes.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Therapy",
-     "Kidney injury",
-     "Typical pattern"
-    ],
-    "rows": [
-     [
-      "VEGF inhibitors",
-      "Proteinuria",
-      "Glomerular injury with protein leak"
-     ],
-     [
-      "Immune checkpoint inhibitors",
-      "Acute interstitial nephritis",
-      "Immune-mediated tubulointerstitial injury"
-     ],
-     [
-      "CAR-T therapy",
-      "Acute kidney injury",
-      "Linked to cytokine release"
-     ],
-     [
-      "Stem cell transplant",
-      "Sinusoidal obstruction syndrome",
-      "Reduced renal perfusion"
-     ],
-     [
-      "Nephrectomy for renal cell carcinoma",
-      "Reduced filtration",
-      "Risk of chronic kidney disease"
+    "kind": "compare",
+    "left": {
+     "title": "Glucarpidase Rescue",
+     "points": [
+      "Recombinant bacterial carboxypeptidase G2",
+      "Cleaves circulating extracellular methotrexate",
+      "95% reduction in plasma methotrexate in 15 min",
+      "Indicated in severe delayed methotrexate clearance"
      ]
-    ]
+    },
+    "right": {
+     "title": "Leucovorin (Folinic Acid)",
+     "points": [
+      "Competes with methotrexate for cellular transport",
+      "Bypasses dihydrofolate reductase inhibition",
+      "Rescues normal host bone marrow and GI cells",
+      "Does not reduce circulating plasma methotrexate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emerging cellular therapies including **CAR T-cell therapy** can precipitate severe **cytokine release syndrome** (**CRS**) driven by massive supraphysiological release of interleukin-6 (**IL-6**). Systemic capillary hyperpermeability and vasodilation provoke profound hypotension and acute kidney injury, which is effectively reversed by the monoclonal anti-IL-6 receptor antibody **tocilizumab**.",
+   "say": "Emerging cellular therapies including CAR T-cell therapy can precipitate severe cytokine release syndrome driven by massive supraphysiological release of interleukin-6. Systemic capillary hyperpermeability and vasodilation provoke profound hypotension and acute kidney injury, which is effectively reversed by the monoclonal anti-IL-6 receptor antibody tocilizumab.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myeloma-fig1.webp",
+    "alt": "Multiple Myeloma Pathophysiology and Cast Nephropathy",
+    "caption": "Malignancy-associated cytokine release, paraproteinemia, and renal damage (StewardMD).",
+    "ar": 1.7778
    }
   }
  ],
- "quiz": [
-  "q_ec3e587058cc",
-  "q_c4e5dca0788c",
-  "q_04e12a50ed33"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Cairo MS, Bishop M. Tumour lysis syndrome: new therapeutic strategies and classification. Br J Haematol 2004"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 38
- }
+  "Comprehensive Clinical Nephrology 7e Ch. 66",
+  "Harrison Principles of Internal Medicine 22e Ch. 314",
+  "Brenner and Rector The Kidney 11e Ch. 42"
+ ]
 }

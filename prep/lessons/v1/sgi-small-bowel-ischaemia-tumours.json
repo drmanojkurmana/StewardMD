@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "module": "sgi-small-bowel-ischaemia-tumours",
+ "subject": "ss-gastroenterology",
+ "title": "Mesenteric ischaemia and small bowel neoplasms",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Acute mesenteric ischaemia** is most often a superior mesenteric artery embolus, about **50%** of cases. The pain is severe and periumbilical, and it is **pain out of proportion** to a soft abdomen. The drawing shows the embolus and the dark bowel. Atrial fibrillation is the usual source. Do not wait for peritonitis. That means the bowel has already infarcted. Lactate rises late.",
+   "say": "Acute mesenteric ischaemia is usually a superior mesenteric artery embolus, about 50 percent of cases. Pain is severe and out of proportion to a soft abdomen. Atrial fibrillation is the typical source. Peritonitis and a high lactate mean the bowel is already dead.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mesenteric-ischemia-fig1.webp",
+    "alt": "Embolus in the superior mesenteric artery with dark ischaemic small bowel and mucosal necrosis.",
+    "caption": "Acute mesenteric ischaemia from an embolus. StewardMD original."
+   }
+  },
+  {
+   "tx": "Biphasic contrast **CT angiography** is the test. Ask for arterial and portal phases, not a plain scan. It shows the filling defect, bowel-wall thinning, mesenteric stranding, and **pneumatosis intestinalis** when gas has entered the wall. Pneumatosis with portal venous gas is a late, grave sign. A normal lactate does not cancel a convincing scan. Call surgery and interventional radiology together.",
+   "say": "Contrast CT angiography in two phases is the test for acute mesenteric ischaemia. It shows the filling defect, thin bowel wall, stranding and pneumatosis intestinalis. Gas in the portal vein is a late sign. Do not be reassured by a normal lactate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CT angiography sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "SMA filling defect",
+      "Embolus or thrombus"
+     ],
+     [
+      "Wall thinning and stranding",
+      "Ischaemic bowel"
+     ],
+     [
+      "Pneumatosis intestinalis",
+      "Gas in the wall, often late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Non-occlusive mesenteric ischaemia** is vasoconstriction, not a clot. It follows shock, heart failure, or high-dose vasopressors. The arteries are open and in spasm. Treatment is to restore cardiac output and stop the vasopressor if you can. A catheter **papaverine infusion** into the mesenteric artery is the classic vasodilator step. Do not rush to embolectomy when there is no embolus.",
+   "say": "Non-occlusive mesenteric ischaemia is spasm from shock or vasopressors, not a clot. Restore the circulation and reduce the pressor. Intra-arterial papaverine infusion is the vasodilator used in the angiography suite. Embolectomy is the wrong operation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Embolic occlusion",
+     "points": [
+      "Clot in the superior mesenteric artery.",
+      "About 50% of acute cases.",
+      "Embolectomy or thrombectomy."
+     ]
+    },
+    "right": {
+     "title": "Non-occlusive mesenteric ischaemia",
+     "points": [
+      "Open arteries in spasm.",
+      "Shock or vasopressors.",
+      "Papaverine infusion after resuscitation."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Chronic mesenteric ischaemia** is called **intestinal angina**. Pain starts about **30** minutes after food, so the patient eats less and loses weight. Fear of food is the phrase. You need a tight atherosclerotic stenosis of at least **2 of the 3** mesenteric arteries, because collaterals protect a single narrowing. Duplex or CT angiography shows the stenoses. Revascularise the symptomatic patient. Do not stent a narrow artery found by accident in someone who eats normally.",
+   "say": "Chronic mesenteric ischaemia, or intestinal angina, causes pain about 30 minutes after meals and then weight loss. At least 2 of the 3 mesenteric arteries are tightly narrowed. A single stenosis is hidden by collaterals. Revascularisation is reserved for the patient who fears food.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Food fear and weight loss"
+     },
+     {
+      "id": "n2",
+      "label": "Pain about 30 minutes after meals"
+     },
+     {
+      "id": "n3",
+      "label": "Imaging: at least 2 of 3 arteries tight"
+     },
+     {
+      "id": "n4",
+      "label": "Revascularise if symptoms match"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Small-bowel **neuroendocrine tumours** used to be called carcinoids. They favour the terminal ileum and come from enterochromaffin cells. A **desmoplastic mesenteric retraction** kinks the bowel, obstructs it, and can ischaemise it. The drawing shows the ileal mass, the fibrotic mesentery and liver deposits. The primary can be tiny while the nodal mass is large. Do not call every ileal mass an adenocarcinoma.",
+   "say": "Small bowel neuroendocrine tumours arise in the terminal ileum from enterochromaffin cells. Desmoplastic mesenteric retraction kinks and ischaemises the bowel. The node and the liver deposits are often larger than the primary.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gastrointestinal-neuroendocrine-tumors-fig1.webp",
+    "alt": "Ileal submucosal tumour, mesenteric fibrosis, liver deposits and nested cells.",
+    "caption": "Ileal neuroendocrine tumour with mesenteric fibrosis. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Carcinoid syndrome** is flushing, watery secretory diarrhoea, bronchospasm and tricuspid regurgitation. It happens only when mediators escape **hepatic first-pass metabolism**, through liver metastases or retroperitoneal shunts. A small ileal primary with a clean liver does not cause the syndrome. The right heart is the valve side that fails. Look at the liver before you blame the bowel mass for the flush.",
+   "say": "Carcinoid syndrome is flushing, secretory diarrhoea, bronchospasm and tricuspid regurgitation. It needs liver metastases or a shunt so mediators skip hepatic first-pass metabolism. A primary alone, with a normal liver, does not cause it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Ileal neuroendocrine tumour"
+     },
+     {
+      "id": "n2",
+      "label": "Mediators enter the portal vein"
+     },
+     {
+      "id": "n3",
+      "label": "Liver clears them: no syndrome"
+     },
+     {
+      "id": "n4",
+      "label": "Liver metastases: carcinoid syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Small bowel adenocarcinoma** is mostly duodenal, about **50%**, and then proximal jejunum. It is strongly linked to Lynch syndrome, familial adenomatous polyposis, **Peutz-Jeghers** syndrome and long-standing coeliac disease. Iron deficiency and a small-bowel obstruction in a patient with coeliac disease that was meant to be quiet should make you look. Capsule or enteroscopy finds it. It is not treated like a neuroendocrine tumour.",
+   "say": "Small bowel adenocarcinoma is most often found in the duodenum, about 50 percent, then the proximal jejunum. Lynch syndrome, familial adenomatous polyposis, Peutz-Jeghers syndrome and long-standing coeliac disease are the links. A quiet coeliac patient who obstructs needs a look.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour",
+     "Usual site",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Small bowel adenocarcinoma",
+      "Duodenum, about 50%",
+      "Peutz-Jeghers, Lynch, FAP, coeliac"
+     ],
+     [
+      "Neuroendocrine tumour",
+      "Terminal ileum",
+      "Desmoplastic mesenteric retraction"
+     ],
+     [
+      "GIST",
+      "Anywhere along the bowel",
+      "KIT stain, not an adenocarcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**68Ga-DOTATATE PET-CT** is somatostatin receptor imaging. Sensitivity is over **90%** for well-differentiated neuroendocrine tumours that express **somatostatin receptor** subtype 2, written SSTR2. The digit 2 is that subtype. Poorly differentiated carcinomas lose the receptor and light up on FDG instead. Use DOTATATE PET-CT to stage the well-differentiated tumour and to decide whether peptide receptor therapy is rational.",
+   "say": "68Ga-DOTATATE PET-CT is the scan for somatostatin receptor subtype 2. Sensitivity is over 90 percent for well-differentiated neuroendocrine tumours. Poorly differentiated tumours lose the receptor, and a positive scan also supports peptide receptor therapy later.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scan",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "68Ga-DOTATATE PET-CT",
+      "Well-differentiated NET, SSTR2, over 90%"
+     ],
+     [
+      "FDG PET",
+      "Poorly differentiated, receptor lost"
+     ],
+     [
+      "CT angiography",
+      "Acute mesenteric ischaemia, not staging a NET"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "ss-c-ischaemia-sbtumour-ground"
+ ],
+ "refs": [
+  "Sleisenger and Fordtran 11e, mesenteric ischaemia and small bowel tumours"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}

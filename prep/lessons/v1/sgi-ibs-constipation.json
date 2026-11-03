@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "sgi-ibs-constipation",
+ "subject": "ss-gastroenterology",
+ "title": "Irritable bowel syndrome and chronic constipation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Rome IV criteria** define irritable bowel syndrome as **recurrent abdominal pain**, on average at least **1** day a week in the last **3** months, with at least **2** of these links: pain related to defecation, a change in stool frequency, or a change in stool form. The criteria are version **4**. Symptoms should have started at least 6 months earlier. Alarm features such as bleeding, anaemia, or onset in later life are not part of IBS. The drawing shows the gut-brain loop that underlies the pain.",
+   "say": "Rome IV criteria require recurrent abdominal pain at least 1 day a week for the last 3 months, plus at least 2 of defecation, frequency or form. That is version 4, and symptoms began at least 6 months earlier. Bleeding or anaemia is not IBS.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ibs-fig1.webp",
+    "alt": "Brain and bowel linked by nerves, with visceral hypersensitivity and altered motility.",
+    "caption": "Gut-brain signalling in irritable bowel syndrome. StewardMD original."
+   }
+  },
+  {
+   "tx": "The **Bristol Stool Form Scale** runs from **Type 1**, separate hard lumps, to **Type 7**, watery stool with no solid pieces. **IBS subtypes** follow the usual form: IBS-C is constipation, IBS-D is diarrhoea, IBS-M is mixed, and IBS-U is unclassified. Ask the patient to point at the picture, because the words hard and loose are unreliable. The subtype chooses the drug. A secretagogue is wrong for watery IBS-D.",
+   "say": "The Bristol Stool Form Scale runs from Type 1 hard lumps to Type 7 watery stool. IBS subtypes are IBS-C, IBS-D, IBS-M and IBS-U. Let the patient match a picture. The subtype decides the drug.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bristol type",
+     "Form",
+     "Subtype clue"
+    ],
+    "rows": [
+     [
+      "Type 1",
+      "Separate hard lumps",
+      "IBS-C side"
+     ],
+     [
+      "Types in the middle",
+      "Formed to mushy",
+      "IBS-M or IBS-U"
+     ],
+     [
+      "Type 7",
+      "Watery, no solids",
+      "IBS-D side"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Linaclotide** and plecanatide are **guanylate cyclase-C agonists**. They raise cyclic GMP inside the enterocyte, open the CFTR chloride channel, and pull fluid into the lumen. Transit speeds up. They are drugs for IBS-C, not for diarrhoea. Diarrhoea is the adverse effect that makes people stop. They also reduce visceral pain, which is why they suit IBS-C better than a plain laxative.",
+   "say": "Linaclotide and plecanatide are guanylate cyclase-C agonists for IBS-C. Cyclic GMP activates CFTR, fluid enters the lumen, and transit speeds up. Diarrhoea is the reason patients stop, and they also ease visceral pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Guanylate cyclase-C agonists",
+     "points": [
+      "Linaclotide and plecanatide.",
+      "More fluid through CFTR.",
+      "IBS-C, and they ease pain."
+     ]
+    },
+    "right": {
+     "title": "Stool softener alone",
+     "points": [
+      "Does not target the pain pathway.",
+      "No CFTR opening.",
+      "Not the exam drug for IBS-C."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lubiprostone** is an oral bicyclic fatty acid that opens **type 2 chloride channels**, called ClC-2, on the apical membrane. Chloride and water enter the lumen. Electrolyte balance is not the thing it disturbs. It is used in constipation, including IBS-C in women in several licences. Nausea is common. It is not a guanylate cyclase-C agonist, and it is not a 5-HT4 drug.",
+   "say": "Lubiprostone activates type 2 chloride channels on the enterocyte, so chloride and water enter the lumen. Nausea is common. It is not linaclotide and it is not prucalopride.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Secretagogue",
+     "Channel",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Lubiprostone",
+      "Type 2 chloride channels",
+      "Nausea is common"
+     ],
+     [
+      "Linaclotide",
+      "CFTR via guanylate cyclase-C",
+      "Also reduces pain"
+     ],
+     [
+      "Prucalopride",
+      "5-HT4 receptor agonist",
+      "A prokinetic, not a secretagogue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prucalopride** is a selective **5-HT4 receptor agonist**. It triggers colonic high-amplitude propagating contractions and is used for chronic idiopathic constipation when laxatives have failed. The digits are 5 and 4 in the receptor name. Older non-selective serotonin drugs were withdrawn for cardiac reasons. Prucalopride was designed to avoid that. It does not treat diarrhoea-predominant IBS.",
+   "say": "Prucalopride is a selective 5-HT4 receptor agonist. It starts high-amplitude colonic contractions and treats chronic idiopathic constipation after laxatives fail. It is not a drug for IBS-D. Older dirty serotonin drugs had cardiac problems. This one was built to avoid them.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Chronic idiopathic constipation"
+     },
+     {
+      "id": "n2",
+      "label": "Laxatives have failed"
+     },
+     {
+      "id": "n3",
+      "label": "Prucalopride, a 5-HT4 receptor agonist"
+     },
+     {
+      "id": "n4",
+      "label": "High-amplitude propagating contractions"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Eluxadoline** is a mixed mu and kappa opioid agonist and a delta opioid antagonist, used for IBS-D. It is strictly contraindicated if the gallbladder has been removed, because of **sphincter of Oddi spasm** and pancreatitis. Do not prescribe it after a cholecystectomy. It is also a poor choice with heavy alcohol use or a prior pancreatitis. It is the opposite of linaclotide: it slows the loose bowel rather than wetting a hard one.",
+   "say": "Eluxadoline treats IBS-D. It is banned after cholecystectomy because of sphincter of Oddi spasm and pancreatitis. It is avoided with heavy alcohol use or previous pancreatitis. It is not a drug for constipation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Eluxadoline",
+     "points": [
+      "For IBS-D.",
+      "Sphincter of Oddi spasm if no gallbladder.",
+      "Do not use after cholecystectomy."
+     ]
+    },
+    "right": {
+     "title": "Linaclotide",
+     "points": [
+      "For IBS-C.",
+      "Adds fluid via guanylate cyclase-C.",
+      "Diarrhoea, not pancreatitis, is the stop reason."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dyssynergic defecation** is a pelvic floor that tightens when it should relax. Diagnose it with high-resolution anorectal manometry and a failed **balloon expulsion test**: the patient cannot expel a **50** mL water-filled balloon within **1** minute. The drawing shows the puborectalis staying tight. Biofeedback is the treatment that works. Another laxative does not retrain the muscle. Do not label this IBS-C and stop.",
+   "say": "Dyssynergic defecation is diagnosed by anorectal manometry and a failed balloon expulsion test. The patient cannot pass a 50 millilitre balloon within 1 minute. Biofeedback is the treatment that retrains the pelvic floor. More laxatives do not.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anismus-fig1.webp",
+    "alt": "Puborectalis stays contracted so the anorectal angle stays closed and stool does not pass.",
+    "caption": "Dyssynergic defecation, also called anismus. StewardMD original."
+   }
+  },
+  {
+   "tx": "A **Low-FODMAP diet** cuts **fermentable oligosaccharides**, disaccharides, monosaccharides and polyols. Less fermentation means less gas and less stretch, and symptom relief is reported in up to **70%** of IBS patients. It is a trial of several weeks, then foods are put back. It is not a lifelong ban, and it is not a substitute for looking when alarm features are present. A dietitian should supervise it so the diet does not become deficient.",
+   "say": "A Low-FODMAP diet is a restriction of fermentable oligosaccharides, disaccharides, monosaccharides and polyols. Up to 70 percent of IBS patients improve. Reintroduce foods afterwards. It is a trial, not a permanent rule, and alarm symptoms still need investigation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "IBS without alarm features"
+     },
+     {
+      "id": "n2",
+      "label": "Low-FODMAP diet for a few weeks"
+     },
+     {
+      "id": "n3",
+      "label": "Relief in up to 70%"
+     },
+     {
+      "id": "n4",
+      "label": "Reintroduce foods one at a time"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "ss-c-ibs-constipation-ground"
+ ],
+ "refs": [
+  "Sleisenger and Fordtran 11e, irritable bowel syndrome and constipation",
+  "Rome IV criteria"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}

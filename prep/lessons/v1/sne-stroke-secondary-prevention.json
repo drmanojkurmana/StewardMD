@@ -1,125 +1,209 @@
 {
  "v": 1,
  "module": "sne-stroke-secondary-prevention",
- "subject": "ss-neurology",
- "title": "Secondary prevention of stroke",
- "minutes": 6,
+ "title": "Secondary prevention and aetiological evaluation of stroke",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Early after a minor ischaemic stroke or a high-risk TIA, **dual antiplatelet therapy** can reduce early recurrence. CHANCE gave aspirin with clopidogrel for a short initial period, then clopidogrel alone. POINT tested a longer combination course in a similar group. Because **bleeding risk** rises with two antiplatelet agents, the duration and timing of treatment matter.",
-   "say": "Early after a minor ischaemic stroke or a high-risk TIA, dual antiplatelet therapy can reduce the chance of recurrence. In the CHANCE trial, aspirin and clopidogrel were given for a short initial period, then clopidogrel alone. POINT tested a longer combination course in a similar group of patients. Because bleeding risk rises with two antiplatelet agents, the duration and timing of treatment matter.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Trial",
-     "Eligible patients",
-     "Regimen"
-    ],
-    "rows": [
-     [
-      "CHANCE",
-      "Minor stroke or high-risk TIA, treated early",
-      "Aspirin plus clopidogrel initially, then clopidogrel alone"
-     ],
-     [
-      "POINT",
-      "Minor stroke or high-risk TIA, treated early",
-      "Aspirin plus clopidogrel for a longer course"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Statin therapy is a cornerstone after ischaemic stroke. In SPARCL, patients with a recent stroke or TIA and no known coronary disease received **atorvastatin 80 mg** daily or placebo, and recurrent stroke fell. The trade-off is a small rise in **haemorrhagic stroke**, so overall benefit still favours treatment in most patients. Review adherence and lipid control at every follow-up visit.",
-   "say": "Statin therapy is a cornerstone after ischaemic stroke. In the SPARCL trial, patients with a recent stroke or TIA and no known coronary disease received atorvastatin 80 milligrams daily or placebo, and recurrent stroke fell. The trade-off is a small rise in haemorrhagic stroke, so the overall benefit still favours treatment in most patients. Review adherence and lipid control at every follow-up visit.",
-   "vis": null
-  },
-  {
-   "tx": "For cryptogenic stroke, a search for other causes comes first. In younger patients with a high-risk **patent foramen ovale** and no other source, device closure plus antiplatelet therapy reduced recurrence in RESPECT and CLOSE. In NAVIGATE ESUS, rivaroxaban 20 mg daily did not beat aspirin for embolic stroke of undetermined source, and bleeding was higher, so anticoagulation is not routine here.",
-   "say": "For cryptogenic stroke, a search for other causes comes first. In younger patients with a high-risk patent foramen ovale and no other source, device closure plus antiplatelet therapy reduced recurrence in the RESPECT and CLOSE trials. In NAVIGATE ESUS, rivaroxaban 20 milligrams daily did not beat aspirin for embolic stroke of undetermined source, and bleeding was higher, so anticoagulation is not routine here.",
+   "tx": "Dual antiplatelet therapy combining **aspirin and clopidogrel** is indicated for **21** days following minor non-cardioembolic ischemic stroke with an NIHSS score of **3** or less, or high-risk transient ischemic attack with an ABCD2 score of **4** or greater. Multicentre randomized clinical trials, specifically CHANCE and POINT, demonstrated that early initiation within 24 hours provides maximum protection against early recurrence while minimizing cumulative long-term haemorrhage hazards.",
+   "say": "Dual antiplatelet therapy combining aspirin and clopidogrel is indicated for 21 days following minor non-cardioembolic ischemic stroke with an NIHSS score of 3 or less or high-risk transient ischemic attack with an ABCD2 score of 4 or greater. Multicentre randomized clinical trials specifically CHANCE and POINT demonstrated that early initiation within 24 hours provides maximum protection against early recurrence while minimizing cumulative long-term haemorrhage hazards.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "PFO closure",
+     "title": "CHANCE / POINT Dual Regimen",
      "points": [
-      "Usually younger patients",
-      "High-risk patent foramen ovale",
-      "No other cause found",
-      "Benefit in RESPECT and CLOSE"
+      "Aspirin plus clopidogrel combination",
+      "Duration strictly limited to 21 days",
+      "Minor stroke with NIHSS score 3 or less",
+      "High-risk TIA with ABCD2 score 4 or greater"
      ]
     },
     "right": {
-     "title": "ESUS rivaroxaban",
+     "title": "Monotherapy Transition",
      "points": [
-      "NAVIGATE ESUS trial",
-      "Rivaroxaban 20 mg daily",
-      "No overall gain over aspirin",
-      "Higher bleeding"
+      "Lifelong single antiplatelet agent after day 21",
+      "Clopidogrel 75 mg or aspirin monotherapy",
+      "Prevents cumulative long-term bleeding hazards",
+      "Standard therapy for routine non-cardioembolic stroke"
      ]
     }
    }
   },
   {
-   "tx": "Symptomatic intracranial stenosis carries a high early recurrence risk. SAMMPRIS compared **stenting** with intensive medical care for severe stenosis and stopped early because stenting caused more early stroke or death. WASID found **warfarin** no better than aspirin and more prone to haemorrhage. Aggressive medical management, including antiplatelet therapy and risk factor control, remains the standard approach.",
-   "say": "Symptomatic intracranial stenosis carries a high early recurrence risk. The SAMMPRIS trial compared stenting with intensive medical care for severe stenosis and stopped early, because stenting caused more early stroke or death. The WASID trial found warfarin no better than aspirin and more prone to haemorrhage. Aggressive medical management, including antiplatelet therapy and risk factor control, remains the standard approach.",
+   "tx": "Prompt **carotid endarterectomy** provides substantial clinical benefit for symptomatic **carotid artery stenosis** of **70%** to **99%** when performed within **14** days of transient ischemic attack or non-disabling ischemic stroke. Immediate operative intervention rapidly stabilizes vascular supply and drastically eliminates the high early risk of ipsilateral recurrent territorial infarction.",
+   "say": "Prompt carotid endarterectomy provides substantial clinical benefit for symptomatic carotid artery stenosis of 70% to 99% when performed within 14 days of transient ischemic attack or non-disabling ischemic stroke. Immediate operative intervention rapidly stabilizes vascular supply and drastically eliminates the high early risk of ipsilateral recurrent territorial infarction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abdominal-aortic-aneurysms-evar-and-carotid-endarterectomy-fig1.webp",
+    "alt": "Diagram illustrating surgical carotid endarterectomy and vascular plaque excision.",
+    "caption": "Carotid endarterectomy for severe symptomatic internal carotid artery stenosis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "For secondary stroke prevention in non-valvular atrial fibrillation, non-vitamin K antagonist oral anticoagulants, including **apixaban**, rivaroxaban, and **dabigatran**, are superior or non-inferior to warfarin. Direct oral anticoagulants achieve reliable target anticoagulation without international normalized ratio monitoring and carry significantly reduced risks of fatal intracerebral haemorrhage.",
+   "say": "For secondary stroke prevention in non-valvular atrial fibrillation non-vitamin K antagonist oral anticoagulants including apixaban rivaroxaban and dabigatran are superior or non-inferior to warfarin. Direct oral anticoagulants achieve reliable target anticoagulation without international normalized ratio monitoring and carry significantly reduced risks of fatal intracerebral haemorrhage.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Trial",
-     "Comparison",
-     "Key lesson"
+     "Agent Class",
+     "Target Factor",
+     "Clinical Advantages",
+     "Dosing Considerations"
     ],
     "rows": [
      [
-      "SAMMPRIS",
-      "Stenting versus intensive medical care",
-      "Stenting caused more early stroke or death"
+      "Factor Xa inhibitors",
+      "Activated factor Xa",
+      "Apixaban and rivaroxaban lower intracranial bleeding",
+      "Dose adjustment for renal impairment"
      ],
      [
-      "WASID",
-      "Warfarin versus aspirin",
-      "Warfarin gave no gain and more bleeding"
+      "Thrombin inhibitors",
+      "Thrombin (Factor IIa)",
+      "Dabigatran with specific reversal idarucizumab",
+      "Twice daily administration schedule"
+     ],
+     [
+      "Vitamin K antagonists",
+      "Factors II, VII, IX, X",
+      "Warfarin mandatory for mechanical prosthetic valves",
+      "Target INR 2.0 to 3.0 maintenance"
      ]
     ]
    }
   },
   {
-   "tx": "Blood pressure lowering is one of the most effective **modifiable risk factor** interventions after stroke. The PROGRESS trial tested a **combined blood pressure regimen** and found fewer recurrent strokes, with benefit extending to people without known hypertension. Most current guidance aims for a target below 130/80 mmHg, although exact thresholds differ between guidelines, so check the version your exam follows.",
-   "say": "Blood pressure lowering is one of the most effective modifiable risk factor interventions after stroke. The PROGRESS trial tested a combined blood pressure regimen and found fewer recurrent strokes, with benefit extending to people without known hypertension. Most current guidance aims for a target below 130 over 80 millimetres of mercury, although exact thresholds differ between guidelines, so check the version your exam follows.",
+   "tx": "High-intensity statin therapy utilizing **atorvastatin** at **80** mg daily significantly reduces recurrent ischemic stroke and cardiovascular events according to the landmark **SPARCL** clinical trial. Aggressive lipid lowering promotes fibrous cap thickening, suppresses vascular inflammation, and prevents atheromatous plaque rupture in large artery cervicocranial beds.",
+   "say": "High-intensity statin therapy utilizing atorvastatin at 80 mg daily significantly reduces recurrent ischemic stroke and cardiovascular events according to the landmark SPARCL clinical trial. Aggressive lipid lowering promotes fibrous cap thickening suppresses vascular inflammation and prevents atheromatous plaque rupture in large artery cervicocranial beds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SPARCL Protocol",
+     "points": [
+      "Atorvastatin 80 mg daily high-intensity dosing",
+      "Targeting LDL reduction below 70 mg/dL",
+      "Significant reduction in fatal or non-fatal stroke",
+      "Demonstrated benefit in atherosclerotic stroke cohorts"
+     ]
+    },
+    "right": {
+     "title": "Plaque Stabilization",
+     "points": [
+      "Inhibition of HMG-CoA reductase pathway",
+      "Thickening of atheromatous fibrous cap",
+      "Suppression of vascular macrophage inflammation",
+      "Pleiotropic neuroprotective endothelial effects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transcatheter closure of a **patent foramen ovale** combined with **antiplatelet therapy** is indicated in cryptogenic ischemic stroke patients aged **18** to **60** years with high-risk anatomical features such as an atrial septal aneurysm. Percutaneous device implantation physically closes the interatrial communication and prevents paradoxical venous thromboembolism into cerebral circulation.",
+   "say": "Transcatheter closure of a patent foramen ovale combined with antiplatelet therapy is indicated in cryptogenic ischemic stroke patients aged 18 to 60 years with high-risk anatomical features such as an atrial septal aneurysm. Percutaneous device implantation physically closes the interatrial communication and prevents paradoxical venous thromboembolism into cerebral circulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PFO Closure Indications",
+     "points": [
+      "Patient age 18 to 60 years",
+      "Confirmed cryptogenic embolic stroke",
+      "Associated atrial septal aneurysm",
+      "Large right-to-left interatrial shunt"
+     ]
+    },
+    "right": {
+     "title": "Procedural Benefits",
+     "points": [
+      "Eliminates paradoxical embolism pathway",
+      "Adjunctive antiplatelet therapy continued",
+      "Superior to medical antiplatelet therapy alone",
+      "Verified in CLOSE and REDUCE clinical trials"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rigorous long-term **blood pressure** control targeting a systolic level below **130** mmHg significantly lowers the incidence of **recurrent stroke** across diverse populations. Sustained blood pressure control attenuates lipohyalinosis, prevents deep cerebral microbleeds, and slows progressive microvascular leukoaraiosis in both normotensive and hypertensive individuals through dedicated therapeutic lifestyle and pharmacological interventions.",
+   "say": "Rigorous long-term blood pressure control targeting a systolic level below 130 mmHg significantly lowers the incidence of recurrent stroke across diverse populations. Sustained blood pressure control attenuates lipohyalinosis prevents deep cerebral microbleeds and slows progressive microvascular leukoaraiosis in both normotensive and hypertensive individuals through dedicated therapeutic lifestyle and pharmacological interventions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intensive Pressure Target",
+     "points": [
+      "Systolic target strictly below 130 mmHg",
+      "First-line ACE inhibitors or ARBs plus thiazides",
+      "Mitigates progressive deep white matter disease",
+      "Significant reduction in secondary stroke recurrence"
+     ]
+    },
+    "right": {
+     "title": "Microvascular Protection",
+     "points": [
+      "Attenuates arteriolosclerosis and lipohyalinosis",
+      "Prevents cortical and subcortical microbleeds",
+      "Halts enlargement of perivascular spaces",
+      "Preserves long-term cognitive functionality"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Initiation of a direct **oral anticoagulant** after acute **cardioembolic stroke** is guided by the empirical **1-3-6-12** day rule reflecting clinical infarct severity. Anticoagulation begins on day 1 for transient ischemic attack, day 3 for small non-disabling infarction, day 6 for moderate territorial stroke, and day 12 for extensive large territorial infarction once follow-up neuroimaging excludes secondary haemorrhage.",
+   "say": "Initiation of a direct oral anticoagulant after acute cardioembolic stroke is guided by the empirical 1-3-6-12 day rule reflecting clinical infarct severity. Anticoagulation begins on day 1 for transient ischemic attack day 3 for small non-disabling infarction day 6 for moderate territorial stroke and day 12 for extensive large territorial infarction once follow-up neuroimaging excludes secondary haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Infarct Size",
+     "Initiation Timing",
+     "Neurological Status",
+     "Neuroimaging Check"
+    ],
+    "rows": [
+     [
+      "Transient Ischaemic Attack",
+      "Day 1",
+      "Rapid symptom resolution without infarct",
+      "Baseline neuroimaging clear"
+     ],
+     [
+      "Small Infarction",
+      "Day 3",
+      "Mild deficit with small cortical lesion",
+      "Confirm absence of petechial haemorrhage"
+     ],
+     [
+      "Moderate Infarction",
+      "Day 6",
+      "Stable focal deficit in single branch",
+      "Repeat CT or MRI prior to starting"
+     ],
+     [
+      "Severe Large Infarct",
+      "Day 12",
+      "Extensive territorial cortical stroke",
+      "Strict exclusion of haemorrhagic transformation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with **cerebral amyloid angiopathy** presenting with lobar **intracerebral haemorrhage**, therapeutic anticoagulation is strictly contraindicated due to catastrophic bleeding risks. The profound fragility of cortical amyloid-laden microvessels creates an unacceptable risk of recurrent fatal haematomas that far exceeds any potential thromboembolic stroke prevention benefit in clinical management protocols.",
+   "say": "In patients with cerebral amyloid angiopathy presenting with lobar intracerebral haemorrhage therapeutic anticoagulation is strictly contraindicated due to catastrophic bleeding risks. The profound fragility of cortical amyloid-laden microvessels creates an unacceptable risk of recurrent fatal haematomas that far exceeds any potential thromboembolic stroke prevention benefit in clinical management protocols.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/sne-stroke-secondary-prevention-fig1.webp",
-    "alt": "Diagram showing a blood pressure cuff, target BP <130/80 mmHg, and icons for medication and lifestyle, illustrating stroke prevention.",
-    "caption": "Blood pressure control: a cornerstone of stroke prevention",
-    "ar": 1.8349
+    "src": "v1/kb/media/ischemic-stroke-fig1.webp",
+    "alt": "Diagram illustrating cerebral arterial territories and thromboembolic infarction risks.",
+    "caption": "Ischaemic stroke vascular territories and secondary preventive considerations (StewardMD).",
+    "ar": 1.7778
    }
   }
  ],
- "quiz": [
-  "q_d9604a5de53a",
-  "q_607c67819067",
-  "q_750e3ef24d86"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "SPARCL trial, Amarenco et al, New England Journal of Medicine (2006)",
-  "CHANCE trial, Wang et al, New England Journal of Medicine (2013)",
-  "ELAN trial, Fischer et al, New England Journal of Medicine (2023)",
-  "PROGRESS Collaborative Group, The Lancet (2001)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 48
- }
+  "Adams and Victor Principles of Neurology 11e Ch. 34",
+  "Harrison Principles of Internal Medicine 22e Ch. 434",
+  "CHANCE, POINT, and SPARCL Trials"
+ ]
 }

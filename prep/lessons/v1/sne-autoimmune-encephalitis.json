@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "sne-autoimmune-encephalitis",
+ "title": "Autoimmune encephalitis and paraneoplastic syndromes",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Autoimmune limbic encephalitis represents a fulminant inflammatory syndrome targeting mesial temporal structures. Clinical presentation encompasses subacute progressive **memory loss**, psychiatric symptoms, and temporal lobe seizures. Magnetic resonance imaging classically demonstrates bilateral T2 and FLAIR hyperintensity confined to the **hippocampus** and amygdala.",
+   "say": "Autoimmune limbic encephalitis represents a fulminant inflammatory syndrome targeting mesial temporal structures. Clinical presentation encompasses subacute progressive memory loss, psychiatric symptoms, and temporal lobe seizures. Magnetic resonance imaging classically demonstrates bilateral T2 and FLAIR hyperintensity confined to the hippocampus and amygdala.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/limbic-encephalitis-fig1.webp",
+    "alt": "Axial MRI showing bilateral mesial temporal FLAIR hyperintensity in limbic encephalitis.",
+    "caption": "Bilateral medial temporal hyperintensity in autoimmune limbic encephalitis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Synaptic cell-surface encephalitis frequently affects young women with occult neoplasms. **Anti-NMDA receptor** encephalitis typically affects young females, presenting with psychiatric symptoms, cognitive decline, seizures, movement disorders with stereotypical **orofacial dyskinesias**, and autonomic instability, strongly associated with underlying mature **ovarian teratomas**.",
+   "say": "Synaptic cell-surface encephalitis frequently affects young women with occult neoplasms. Anti-NMDA receptor encephalitis typically affects young females, presenting with psychiatric symptoms, cognitive decline, seizures, movement disorders with stereotypical orofacial dyskinesias, and autonomic instability, strongly associated with underlying mature ovarian teratomas.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anti-nmda-receptor-encephalitis-fig1.webp",
+    "alt": "Medical illustration of anti-NMDA receptor antibody binding and ovarian teratoma pathogenesis.",
+    "caption": "Anti-NMDA receptor encephalitis mechanism and teratoma association (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Distinct electrographic phenomena provide bedside diagnostic specificity in anti-NMDA encephalitis. **Extreme delta brush** is a unique EEG pattern pathognomonic for anti-NMDA receptor encephalitis, consisting of continuous **rhythmic delta** activity at 1 to 3 Hz with superimposed bursts of fast beta activity riding on the waveform.",
+   "say": "Distinct electrographic phenomena provide bedside diagnostic specificity in anti-NMDA encephalitis. Extreme delta brush is a unique EEG pattern pathognomonic for anti-NMDA receptor encephalitis, consisting of continuous rhythmic delta activity at 1 to 3 Hz with superimposed bursts of fast beta activity riding on the waveform.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "NR1 Subunit Autoantibodies"
+     },
+     {
+      "id": "b",
+      "label": "Receptor Crosslinking and Loss"
+     },
+     {
+      "id": "c",
+      "label": "Rhythmic Delta Activity"
+     },
+     {
+      "id": "d",
+      "label": "Extreme Delta Brush"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "internalisation"
+     ],
+     [
+      "b",
+      "c",
+      "thalamocortical disruption"
+     ],
+     [
+      "c",
+      "d",
+      "superimposed beta"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Voltage-gated potassium channel complex autoimmunity produces dramatic focal movements. **Anti-LGI1** encephalitis produces **faciobrachial dystonic seizures** characterized by brief, frequent unilateral facial grimacing and arm posturing, responding dramatically to early immunotherapy before progressive memory decline and hyponatraemia ensue. Prompt recognition prevents progression to irreversible hippocampal atrophy and refractory cognitive deficits.",
+   "say": "Voltage-gated potassium channel complex autoimmunity produces dramatic focal movements. Anti-LGI1 encephalitis produces faciobrachial dystonic seizures characterized by brief, frequent unilateral facial grimacing and arm posturing, responding dramatically to early immunotherapy before progressive memory decline and hyponatraemia ensue. Prompt recognition prevents progression to irreversible hippocampal atrophy and refractory cognitive deficits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-LGI1 Encephalitis",
+     "points": [
+      "Faciobrachial dystonic seizures (FBDS)",
+      "Prominent hyponatraemia in > 60%",
+      "Subacute limbic memory loss",
+      "Exquisite response to corticosteroids"
+     ]
+    },
+    "right": {
+     "title": "Anti-CASPR2 Encephalitis",
+     "points": [
+      "Peripheral nerve hyperexcitability",
+      "Morvan syndrome with severe insomnia",
+      "Neuropathic pain and autonomic instability",
+      "Associated with underlying thymoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Related juxtaparanodal autoimmunity induces widespread central and peripheral hyperexcitability. Anti-CASPR2 encephalitis presents with **Morvan syndrome**, a clinical triad of **neuromyotonia** with continuous muscle fiber activity, autonomic hyperactivity, and severe insomnia with neuropsychiatric encephalopathy, often linked to underlying thymic tumours. Comprehensive thoracic computed tomography imaging is mandatory to exclude mediastinal thymoma.",
+   "say": "Related juxtaparanodal autoimmunity induces widespread central and peripheral hyperexcitability. Anti-CASPR2 encephalitis presents with Morvan syndrome, a clinical triad of neuromyotonia with continuous muscle fiber activity, autonomic hyperactivity, and severe insomnia with neuropsychiatric encephalopathy, often linked to underlying thymic tumours. Comprehensive thoracic computed tomography imaging is mandatory to exclude mediastinal thymoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "CASPR2 Autoimmunity"
+     },
+     {
+      "id": "b",
+      "label": "Voltage-Gated K Channel Loss"
+     },
+     {
+      "id": "c",
+      "label": "Peripheral Neuromyotonia"
+     },
+     {
+      "id": "d",
+      "label": "Morvan Syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "juxtaparanodal target"
+     ],
+     [
+      "b",
+      "c",
+      "nerve hyperexcitability"
+     ],
+     [
+      "c",
+      "d",
+      "insomnia and autonomic flux"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classic paraneoplastic neurological syndromes involve cytotoxic T-cell immunity against intracellular onconeural antigens. **Anti-Hu** antibodies target intracellular neuronal antigens, strongly associated with **small cell lung cancer** and manifesting as paraneoplastic subacute sensory neuronopathy or encephalomyelitis. Underlying small cell carcinoma must be aggressively pursued with fluorodeoxyglucose positron emission tomography.",
+   "say": "Classic paraneoplastic neurological syndromes involve cytotoxic T-cell immunity against intracellular onconeural antigens. Anti-Hu antibodies target intracellular neuronal antigens, strongly associated with small cell lung cancer and manifesting as paraneoplastic subacute sensory neuronopathy or encephalomyelitis. Underlying small cell carcinoma must be aggressively pursued with fluorodeoxyglucose positron emission tomography.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Onconeural Antibody",
+     "Target Antigen",
+     "Associated Malignancy",
+     "Primary Syndrome"
+    ],
+    "rows": [
+     [
+      "Anti-Hu (ANNA-1)",
+      "Intracellular RNA-binding protein",
+      "Small cell lung cancer",
+      "Sensory neuronopathy, limbic encephalitis"
+     ],
+     [
+      "Anti-Yo (PCA-1)",
+      "Purkinje cell cytoplasmic CDR2",
+      "Ovarian and breast carcinoma",
+      "Subacute cerebellar degeneration"
+     ],
+     [
+      "Anti-Ri (ANNA-2)",
+      "Neuronal RNA-binding Nova protein",
+      "Breast and lung carcinoma",
+      "Opsoclonus-myoclonus-ataxia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Subacute pancerebellar ataxia in adult females demands urgent onconeural investigation. **Anti-Yo** antibodies occur in females with breast or ovarian malignancies, mediating subacute cerebellar degeneration through rapid autoimmune destruction of cerebellar **Purkinje cells**, leading to irreversible pancerebellar ataxia. Urgent pelvic and breast imaging facilitates early tumor detection and surgical resection.",
+   "say": "Subacute pancerebellar ataxia in adult females demands urgent onconeural investigation. Anti-Yo antibodies occur in females with breast or ovarian malignancies, mediating subacute cerebellar degeneration through rapid autoimmune destruction of cerebellar Purkinje cells, leading to irreversible pancerebellar ataxia. Urgent pelvic and breast imaging facilitates early tumor detection and surgical resection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-Yo Purkinje Loss",
+     "points": [
+      "Cytotoxic CD8 T-cell mediated destruction",
+      "Complete loss of cerebellar Purkinje layer",
+      "Relentless progressive truncal ataxia",
+      "Poor response to late immunotherapy"
+     ]
+    },
+    "right": {
+     "title": "Oncological Workup",
+     "points": [
+      "High-titre PCA-1 serum and CSF antibodies",
+      "Pelvic MRI and CT chest/abdomen/pelvis",
+      "Whole-body FDG-PET imaging for occult tumour",
+      "Immediate surgical resection of malignancy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Early aggressive anti-inflammatory intervention prevents irreversible neuronal loss. First-line immunotherapy for autoimmune encephalitis comprises intravenous **methylprednisolone** at 1 g daily for 5 days, intravenous **immunoglobulin** at 2 g/kg, or therapeutic plasma exchange, followed by rituximab for refractory cases. Escalation to second-line immunosuppressive agents is indicated if clinical improvement is incomplete after two weeks.",
+   "say": "Early aggressive anti-inflammatory intervention prevents irreversible neuronal loss. First-line immunotherapy for autoimmune encephalitis comprises intravenous methylprednisolone at 1 g daily for 5 days, intravenous immunoglobulin at 2 g/kg, or therapeutic plasma exchange, followed by rituximab for refractory cases. Escalation to second-line immunosuppressive agents is indicated if clinical improvement is incomplete after two weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tier Level",
+     "Therapeutic Protocol",
+     "Clinical Target"
+    ],
+    "rows": [
+     [
+      "First-Line",
+      "IV Methylprednisolone 1g daily x 5d + IVIG 2g/kg",
+      "Rapid humoral and T-cell suppression"
+     ],
+     [
+      "First-Line Alt",
+      "Therapeutic Plasma Exchange (5-7 sessions)",
+      "Rapid removal of circulating autoantibodies"
+     ],
+     [
+      "Second-Line",
+      "Rituximab (anti-CD20) or Cyclophosphamide",
+      "Depletion of antibody-producing B-cell clones"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Adams and Victor Principles of Neurology 11e Ch. 31",
+  "Netter Neurology 2e Ch. 15"
+ ]
+}

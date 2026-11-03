@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "sgi-ibd-therapeutics",
+ "subject": "ss-gastroenterology",
+ "title": "Therapeutics and monitoring in inflammatory bowel disease",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Anti-TNF antibodies**, notably infliximab and adalimumab, are the cornerstone biologics for moderate to severe inflammatory bowel disease. Adding a thiopurine, usually **azathioprine**, cuts anti-drug antibody formation and improves mucosal healing. The drawing contrasts continuous mucosal colitis with skip transmural disease, which is the pair these drugs are used for. Combination is not for a mild proctitis that topical mesalazine still controls.",
+   "say": "Anti-TNF antibodies such as infliximab and adalimumab are used for moderate to severe inflammatory bowel disease. Azathioprine beside them cuts anti-drug antibodies and helps mucosal healing. Mild proctitis does not need this combination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/inflammatory-bowel-disease-fig1.webp",
+    "alt": "Continuous mucosal colitis from the rectum, contrasted with skip transmural small-bowel disease.",
+    "caption": "Ulcerative colitis versus Crohn disease, the illnesses these drugs treat. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Vedolizumab** is a gut-selective antibody to **alpha-4-beta-7 integrin** on memory T cells. Those cells then cannot bind mucosal addressin, **MAdCAM-1**. The digits in the integrin are 4, 7 and 1. Because the block is in the gut, systemic infection risk is lower than with anti-TNF antibodies. It is slow to start. It is a fair choice when infection or cancer risk makes anti-TNF antibodies less attractive.",
+   "say": "Vedolizumab blocks alpha-4-beta-7 integrin so lymphocytes cannot bind MAdCAM-1 in the gut. Infection risk outside the bowel is lower than with anti-TNF antibodies. Onset is slow. Use it when a systemic antibody is a worry.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Target",
+     "Practical point"
+    ],
+    "rows": [
+     [
+      "Vedolizumab",
+      "alpha-4-beta-7 integrin",
+      "Gut-selective, binds away from MAdCAM-1"
+     ],
+     [
+      "Infliximab",
+      "TNF",
+      "Faster, more systemic infection risk"
+     ],
+     [
+      "Azathioprine",
+      "Thiopurine partner",
+      "Cuts antibodies to Anti-TNF antibodies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ustekinumab** is an antibody to the shared **p40 subunit** of interleukin-12 and interleukin-23. Blocking p40 stops both cytokines meeting the interleukin-12 receptor beta-1 chain. The numbers in that sentence are 40, 12, 23 and 1. It is used after anti-TNF antibodies fail, in Crohn disease and in ulcerative colitis. It is not a JAK inhibitor and it is not a gut-selective integrin blocker.",
+   "say": "Ustekinumab binds the p40 subunit shared by interleukin-12 and interleukin-23, so they cannot meet the beta-1 receptor chain. It is an option after anti-TNF antibodies fail. It is neither a JAK inhibitor nor vedolizumab.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ustekinumab",
+     "points": [
+      "Targets the p40 subunit.",
+      "Blocks interleukin-12 and interleukin-23.",
+      "Used after anti-TNF failure."
+     ]
+    },
+    "right": {
+     "title": "Vedolizumab",
+     "points": [
+      "Targets alpha-4-beta-7 integrin.",
+      "Blocks MAdCAM-1 adhesion.",
+      "Gut-selective, slower onset."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Selective interleukin-23 **p19** blockers leave interleukin-12 alone. **Risankizumab** is the one used in Crohn disease. **Mirikizumab** and guselkumab are the ones used in ulcerative colitis. The cytokine number is 23 and the subunit number is 19. Remission rates, clinical and endoscopic, are high, and serious infection is less of a theme than with broader antibodies. They do not replace surgery for a fibrotic stricture.",
+   "say": "p19 inhibitors block interleukin-23 only, and risankizumab is used in Crohn disease. Mirikizumab and guselkumab are used in ulcerative colitis. Endoscopic remission is common and infection risk is favourable. A fixed stricture still needs surgery or dilation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "p19 drug",
+     "Disease in the blueprint",
+     "What is blocked"
+    ],
+    "rows": [
+     [
+      "Risankizumab",
+      "Crohn disease",
+      "Interleukin-23, subunit p19"
+     ],
+     [
+      "Mirikizumab",
+      "Ulcerative colitis",
+      "Interleukin-23, not interleukin-12"
+     ],
+     [
+      "Guselkumab",
+      "Ulcerative colitis",
+      "Same p19 target"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tofacitinib** inhibits several JAK enzymes. **Upadacitinib** is selective for JAK1. Both are oral drugs for moderate to severe ulcerative colitis, and symptoms can ease within **1 to 3** days. The drawing marks where JAK inhibitors and purine antimetabolites sit on the T cell. They are not first-line in a patient with a high clot risk, and shingles vaccination is part of the plan. They are tablets, which is the point when infusions are failing.",
+   "say": "Tofacitinib is a broad JAK inhibitor and upadacitinib is selective for JAK1. Both are oral options in ulcerative colitis, and symptoms can ease within 1 to 3 days. Clot risk and shingles are the cautions. They are tablets, not infusions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/immunosuppressants-calcineurin-biologics-jak-fig1.webp",
+    "alt": "T cell diagram marking JAK inhibitors and purine antimetabolites.",
+    "caption": "Where JAK inhibitors and thiopurines act on the T cell. StewardMD original."
+   }
+  },
+  {
+   "tx": "Before azathioprine or **6-mercaptopurine**, test **TPMT genotype** and **NUDT15**. Low activity lets toxic **6-TGN** pile up and the marrow fails. NUDT15 matters especially in Asian patients, where TPMT alone misses the risk. The digit 6 is in 6-mercaptopurine and 6-TGN. The digit 15 is in NUDT15. Do not start the thiopurine and check the genotype afterwards.",
+   "say": "You should test TPMT genotype and NUDT15 before azathioprine or 6-mercaptopurine. Poor metabolisers accumulate toxic 6-TGN and the marrow fails. NUDT15 testing is essential in many Asian patients. Genotype comes first, and then you prescribe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Plan a thiopurine"
+     },
+     {
+      "id": "n2",
+      "label": "TPMT genotype and NUDT15"
+     },
+     {
+      "id": "n3",
+      "label": "Normal: start azathioprine or 6-mercaptopurine"
+     },
+     {
+      "id": "n4",
+      "label": "Low activity: avoid, marrow risk from 6-TGN"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Therapeutic drug monitoring** measures the biologic trough and **anti-drug antibodies** when response is lost. A low trough without antibodies means raise the dose. Antibodies mean switch the drug. Cited trough aims are infliximab above **5** micrograms per mL and adalimumab above **7.5**. Do not escalate forever in a fibrotic stricture. That is a mechanical problem, not a low trough.",
+   "say": "Therapeutic drug monitoring checks the trough and anti-drug antibodies after secondary loss of response. No antibodies and a low trough means increase the dose. Antibodies mean change drug. Aims cited are infliximab above 5 and adalimumab above 7.5 micrograms per millilitre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trough result",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Infliximab under 5, no antibody",
+      "Escalate the dose"
+     ],
+     [
+      "Adalimumab under 7.5, no antibody",
+      "Escalate the dose"
+     ],
+     [
+      "Anti-drug antibodies present",
+      "Switch the biologic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**STRIDE-II** is the treat-to-target consensus, and the digit 2 is the second version. Immediate target: symptoms better. Intermediate target: **fecal calprotectin** under **150 to 250** micrograms per gram, and CRP under **5** mg per litre. Long-term target: endoscopic mucosal healing. Symptoms alone are not enough, because the bowel can look angry while the patient feels well. Do not chase a normal calprotectin with ever more drugs if the endoscope is already healed.",
+   "say": "STRIDE-II sets targets in order. Symptoms first, then fecal calprotectin under 150 to 250 and CRP under 5, then endoscopic healing. Feeling well with an angry mucosa is not the long-term target. A healed endoscope does not need another drug just for the stool test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Start treatment"
+     },
+     {
+      "id": "n2",
+      "label": "Symptom relief now"
+     },
+     {
+      "id": "n3",
+      "label": "Calprotectin 150 to 250 and CRP under 5"
+     },
+     {
+      "id": "n4",
+      "label": "Endoscopic mucosal healing"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "ss-c-ibd-therapeutics-ground"
+ ],
+ "refs": [
+  "Sleisenger and Fordtran 11e, IBD therapy",
+  "STRIDE-II treat-to-target consensus"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}

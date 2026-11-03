@@ -1,150 +1,220 @@
 {
  "v": 1,
  "module": "srd-hn-skullbase",
- "subject": "ss-radiology",
- "title": "Skull base and temporal bone: high-yield imaging essentials",
- "minutes": 6,
+ "title": "Skull base and temporal bone",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "The **scutum** is a shield-like bony spur of the lateral tympanic wall. Its erosion is a key landmark of acquired **cholesteatoma**, which spreads into Prussak's space. The lateral semicircular canal is the most frequent site of labyrinthine fistula in this setting. Air within the semicircular canal, called pneumolabyrinth, is definitive evidence of a fistula.",
-   "say": "The scutum is a shield-like bony spur of the lateral tympanic wall. Its erosion is a key landmark of acquired cholesteatoma, which spreads into Prussak's space. The lateral semicircular canal is the most frequent site of labyrinthine fistula in this setting. Air within the semicircular canal, called pneumolabyrinth, is definitive evidence of a fistula.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srd-hn-skullbase-fig1.webp",
-    "alt": "Axial CT shows scutum erosion and air in the lateral semicircular canal, indicating cholesteatoma and labyrinthine fistula.",
-    "caption": "Cholesteatoma: scutum erosion, pneumolabyrinth",
-    "ar": 1.7921
-   }
-  },
-  {
-   "tx": "**Otosclerosis** causes demineralisation around the oval window in fenestral disease and around the cochlear capsule in retrofenestral disease. Fenestral otosclerosis gives pure conductive hearing loss, while cochlear involvement can add a sensorineural component. Typical patients are young adult women. Think of it when a young woman has progressive conductive loss with normal drum.",
-   "say": "Otosclerosis causes demineralisation around the oval window in fenestral disease and around the cochlear capsule in retrofenestral disease. Fenestral otosclerosis gives pure conductive hearing loss, while cochlear involvement can add a sensorineural component. Typical patients are young adult women. Think of it when a young woman has progressive conductive loss with a normal drum.",
+   "tx": "Paragangliomas of the posterior skull base exhibit aggressive bony remodelling. A **Glomus jugulare** paraganglioma causes permeative moth-eaten bone destruction centered on the **jugular foramen**, displaying a characteristic salt-and-pepper pattern on magnetic resonance imaging from subacute haemorrhage and high-velocity flow voids.",
+   "say": "Paragangliomas of the posterior skull base exhibit aggressive bony remodelling. A Glomus jugulare paraganglioma causes permeative moth-eaten bone destruction centered on the jugular foramen, displaying a characteristic salt-and-pepper pattern on magnetic resonance imaging from subacute haemorrhage and high-velocity flow voids.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Fenestral",
+     "title": "Glomus Jugulare",
      "points": [
-      "Oval window demineralisation",
-      "Pure conductive loss"
+      "Permeative moth-eaten bone destruction",
+      "Superolateral jugular bulb expansion",
+      "Salt-and-pepper appearance on MRI",
+      "Intense arterial enhancement"
      ]
     },
     "right": {
-     "title": "Retrofenestral",
+     "title": "Jugular Schwannoma",
      "points": [
-      "Cochlear capsule involvement",
-      "Mixed or sensorineural component"
+      "Smooth, scalloped cortical expansion",
+      "Preserves jugular spine cortication",
+      "Target sign on T2 sequences",
+      "Lacks prominent high-flow serpiginous voids"
      ]
     }
    }
   },
   {
-   "tx": "**Paragangliomas** of the temporal bone, such as glomus tympanicum and glomus jugulare, cause pulsatile tinnitus and a vascular retrotympanic mass. A key mimic is an aberrant internal carotid artery, which connects to the horizontal carotid canal. Familial paraganglioma type 1 is linked to SDHD mutations. Chordoma and chondrosarcoma arise from the clivus and midline skull base.",
-   "say": "Paragangliomas of the temporal bone, such as glomus tympanicum and glomus jugulare, cause pulsatile tinnitus and a vascular retrotympanic mass. A key mimic is an aberrant internal carotid artery, which connects to the horizontal carotid canal. Familial paraganglioma type 1 is linked to SDHD mutations. Chordoma and chondrosarcoma arise from the clivus and midline skull base.",
+   "tx": "Acquired middle ear keratomas present with persistent purulent otorrhea and progressive ossicular erosion. An acquired **cholesteatoma** originates classically within the epitympanic **Prussak space**, blunts the adjacent bony scutum, and exhibits pathognomonic restricted diffusion on non-echo planar diffusion-weighted magnetic resonance sequences.",
+   "say": "Acquired middle ear keratomas present with persistent purulent otorrhea and progressive ossicular erosion. An acquired cholesteatoma originates classically within the epitympanic Prussak space, blunts the adjacent bony scutum, and exhibits pathognomonic restricted diffusion on non-echo planar diffusion-weighted magnetic resonance sequences.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/srd-hn-skullbase-fig1.webp",
+    "alt": "Axial CT shows scutum erosion and air in the lateral semicircular canal, indicating cholesteatoma and labyrinthine fistula.",
+    "caption": "Cholesteatoma: scutum erosion, pneumolabyrinth (StewardMD).",
+    "ar": 1.7921
+   }
+  },
+  {
+   "tx": "Otic capsule dysplasias manifest with conductive or mixed auditory decline. Fenestral **otosclerosis** features focal bone demineralisation and radiolucency immediately anterior to the oval window at the **fissula ante fenestram** on high-resolution temporal bone computed tomography, leading to progressive stapedial footplate fixation.",
+   "say": "Otic capsule dysplasias manifest with conductive or mixed auditory decline. Fenestral otosclerosis features focal bone demineralisation and radiolucency immediately anterior to the oval window at the fissula ante fenestram on high-resolution temporal bone computed tomography, leading to progressive stapedial footplate fixation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Otosclerosis Phase",
+     "CT Appearance",
+     "Clinical Correlation"
+    ],
+    "rows": [
+     [
+      "Active spongiotic phase",
+      "Lucent demineralisation at fissula ante fenestram",
+      "Conductive hearing loss"
+     ],
+     [
+      "Inactive sclerotic phase",
+      "Dense sclerosis and heaping over oval window",
+      "Permanent stapes fixation"
+     ],
+     [
+      "Retrofenestral disease",
+      "Pericochlear halo of demineralisation",
+      "Sensorineural hearing loss component"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asymmetric auditory decline demands targeted neuroimaging of the cerebellopontine angle. Significant **sensorineural hearing loss** of retrocochlear etiology most frequently results from a benign **vestibular schwannoma**, which causes trumpet-like flaring of the porus acusticus, widening of the internal auditory canal, and intense contrast enhancement on magnetic resonance imaging.",
+   "say": "Asymmetric auditory decline demands targeted neuroimaging of the cerebellopontine angle. Significant sensorineural hearing loss of retrocochlear etiology most frequently results from a benign vestibular schwannoma, which causes trumpet-like flaring of the porus acusticus, widening of the internal auditory canal, and intense contrast enhancement on magnetic resonance imaging.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ear-and-cpa-tumours-fig1.webp",
+    "alt": "Axial contrast-enhanced MRI demonstrating an ice-cream cone shaped vestibular schwannoma within the cerebellopontine angle.",
+    "caption": "Vestibular schwannoma: cerebellopontine angle mass with internal auditory canal expansion (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Midline cranial base neoplasms present unique imaging characteristics reflecting their primitive embryological origins. A skull base **chordoma** arises from embryonic notochord remnants, classically centered within the midline **clivus**, displaying profound T2 hyperintensity, destructive bone lysis, and lobulated honeycomb contrast enhancement.",
+   "say": "Midline cranial base neoplasms present unique imaging characteristics reflecting their primitive embryological origins. A skull base chordoma arises from embryonic notochord remnants, classically centered within the midline clivus, displaying profound T2 hyperintensity, destructive bone lysis, and lobulated honeycomb contrast enhancement.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Pulsatile tinnitus"
+      "label": "Notochord remanant"
      },
      {
       "id": "b",
-      "label": "Retrotympanic vascular mass"
+      "label": "Midline clival epicenter"
      },
      {
       "id": "c",
-      "label": "Check carotid canal link"
+      "label": "Marked T2 hyperintensity"
      },
      {
       "id": "d",
-      "label": "Aberrant ICA excluded"
-     },
-     {
-      "id": "e",
-      "label": "Paraganglioma likely"
+      "label": "Chordoma diagnosis"
      }
     ],
     "edges": [
      [
       "a",
-      "b"
+      "b",
+      "embryology"
      ],
      [
       "b",
-      "c"
+      "c",
+      "myxoid tissue"
      ],
      [
       "c",
       "d",
-      "Connected"
-     ],
-     [
-      "c",
-      "e",
-      "Not connected"
+      "imaging confirmation"
      ]
     ]
    }
   },
   {
-   "tx": "**Petrous apex lesions** are a key exam topic. A **cholesterol granuloma** is T1 and T2 bright and does not restrict diffusion, whereas a **congenital cholesteatoma** restricts diffusion. Petrous apex **cephaloceles** arise from herniation of Meckel's cave and appear as smooth cystic expansions. Cholesteatoma, petrous apex and skull base lesions should be reported with diffusion data.",
-   "say": "Petrous apex lesions are a key exam topic. A cholesterol granuloma is T1 and T2 bright and does not restrict diffusion, whereas a congenital cholesteatoma restricts diffusion. Petrous apex cephaloceles arise from herniation of Meckel's cave and appear as smooth cystic expansions. Report these lesions with diffusion data.",
+   "tx": "Cartilaginous neoplasms of the skull base arise laterally compared to midline chordomas. A skull base **chondrosarcoma** originates off-midline along the **petroclival synchondrosis**, characteristically displaying rings-and-arcs chondroid matrix calcifications on computed tomography and bright lobulated T2 hyperintensity on magnetic resonance imaging.",
+   "say": "Cartilaginous neoplasms of the skull base arise laterally compared to midline chordomas. A skull base chondrosarcoma originates off-midline along the petroclival synchondrosis, characteristically displaying rings-and-arcs chondroid matrix calcifications on computed tomography and bright lobulated T2 hyperintensity on magnetic resonance imaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Petroclival Chondrosarcoma",
+     "points": [
+      "Off-midline epicenter",
+      "Arises at petroclival synchondrosis",
+      "Rings-and-arcs chondroid calcifications",
+      "T2 hyperintense cartilaginous matrix"
+     ]
+    },
+    "right": {
+     "title": "Clival Chordoma",
+     "points": [
+      "Strictly midline clival epicenter",
+      "Arises from primitive notochord",
+      "Irregular amorphous sequestration",
+      "Physaliferous cell histology"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extension of acute middle ear inflammation into pneumatic cell tracts leads to severe cranial nerve morbidity. Unchecked **petrous apicitis** generates **Gradenigo syndrome**, presenting the classic clinical triad of retro-orbital pain, ipsilateral abducens nerve palsy, and continuous purulent otorrhea from adjacent suppurative mastoiditis.",
+   "say": "Extension of acute middle ear inflammation into pneumatic cell tracts leads to severe cranial nerve morbidity. Unchecked petrous apicitis generates Gradenigo syndrome, presenting the classic clinical triad of retro-orbital pain, ipsilateral abducens nerve palsy, and continuous purulent otorrhea from adjacent suppurative mastoiditis.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Lesion",
-     "T1",
-     "T2",
-     "Diffusion"
+     "Triad Element",
+     "Anatomical Substrate",
+     "Imaging Finding"
     ],
     "rows": [
      [
-      "Cholesterol granuloma",
-      "Bright",
-      "Bright",
-      "No restriction"
+      "Retro-orbital pain",
+      "Trigeminal ganglion in Meckel cave",
+      "T1 post-contrast dural enhancement"
      ],
      [
-      "Congenital cholesteatoma",
-      "Low to intermediate",
-      "Bright",
-      "Restricts"
+      "Abducens nerve palsy",
+      "CN VI in Dorello canal",
+      "Petrous apex osteomyelitis / oedema"
      ],
      [
-      "Petrous cephalocele",
-      "CSF-like",
-      "CSF-like",
-      "Not restricted"
+      "Otorrhea",
+      "Suppurative mastoiditis / middle ear",
+      "Fluid opacification and cortical erosion"
      ]
     ]
    }
   },
   {
-   "tx": "**Gradenigo syndrome** combines otitis media or petrositis with ipsilateral lateral rectus palsy and retro-orbital pain, from abducens involvement in Dorello's canal. **Otomastoiditis** and **apical petrositis** may spread to the carotid canal, causing ICA vasospasm. Subdural empyema and sinus thrombosis are other intracranial complications. Recognise the triad to avoid delay in treatment.",
-   "say": "Gradenigo syndrome combines otitis media or petrositis with ipsilateral lateral rectus palsy and retro-orbital pain, from abducens involvement in Dorello's canal. Otomastoiditis and apical petrositis may spread to the carotid canal, causing ICA vasospasm. Subdural empyema and sinus thrombosis are other intracranial complications. Recognise the triad to avoid delay in treatment.",
-   "vis": null
+   "tx": "Cutaneous and salivary malignancies frequently spread along neural highways without primary mass enlargement. High-resolution magnetic resonance imaging detects **perineural tumour spread** along the fifth and seventh **cranial nerves**, recognised by abnormal nerve thickening, intense perineural enhancement, and obliteration of normal neural foramen fat pads.",
+   "say": "Cutaneous and salivary malignancies frequently spread along neural highways without primary mass enlargement. High-resolution magnetic resonance imaging detects perineural tumour spread along the fifth and seventh cranial nerves, recognised by abnormal nerve thickening, intense perineural enhancement, and obliteration of normal neural foramen fat pads.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cranial Nerve",
+     "Target Foramen",
+     "Imaging Marker of Spread"
+    ],
+    "rows": [
+     [
+      "Maxillary nerve (V2)",
+      "Foramen rotundum",
+      "Loss of retroantral fat pad, foramen widening"
+     ],
+     [
+      "Mandibular nerve (V3)",
+      "Foramen ovale",
+      "Replacement of ovale fat, pterygoid atrophy"
+     ],
+     [
+      "Facial nerve (CN VII)",
+      "Stylomastoid foramen",
+      "Asymmetric thickening, mastoid canal enhancement"
+     ]
+    ]
+   }
   }
  ],
  "quiz": [
-  "ct-f0cc20311ced",
-  "ct-0bf167f1901b",
-  "ct-5617839109c3"
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
  ],
  "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 38
- }
+ "refs": [
+  "Crack the Core Exam Head and Neck Imaging (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Skull Base)"
+ ]
 }

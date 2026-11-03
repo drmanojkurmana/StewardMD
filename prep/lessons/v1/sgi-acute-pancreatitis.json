@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "sgi-acute-pancreatitis",
+ "subject": "ss-gastroenterology",
+ "title": "Acute pancreatitis: severity, fluids and necrosis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **Revised Atlanta classification** says acute pancreatitis is present when at least **2 of 3** findings are there: typical epigastric pain, **serum lipase** or amylase at least **3** times the upper limit, and imaging that looks like pancreatitis. Lipase is the enzyme to quote. You do not need a CT to make the diagnosis when pain and the enzyme already agree. Early CT is for diagnostic doubt, not for every patient on day one.",
+   "say": "Revised Atlanta classification needs 2 of 3: typical pain, serum lipase or amylase at least 3 times normal, and characteristic imaging. Lipase is the enzyme to remember. Skip an early CT when pain and the blood test already agree.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Epigastric pain"
+     },
+     {
+      "id": "n2",
+      "label": "Lipase or amylase at least 3 times normal?"
+     },
+     {
+      "id": "n3",
+      "label": "Two of three: acute pancreatitis"
+     },
+     {
+      "id": "n4",
+      "label": "Uncertain diagnosis: image"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severity uses organ failure, not the old Ranson list. Mild disease has no organ failure and no local complication. **Moderately severe** disease is transient organ failure that resolves within **48** hours, or a local complication without persistent failure. Severe disease is **persistent organ failure** beyond 48 hours. The drawing shows necrosis and a walled collection, which are local complications, not by themselves the definition of severe disease.",
+   "say": "Mild pancreatitis has no organ failure. Moderately severe disease is transient organ failure that settles within 48 hours, or a local complication. Severe disease is persistent organ failure past 48 hours. A collection alone does not equal severe disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-pancreatitis-and-pancreaticoduodenectomy-fig1.webp",
+    "alt": "Necrotic pancreas, fat saponification, and a fibrous capsule around a collection.",
+    "caption": "Necrosis and a walled collection in acute pancreatitis. StewardMD original."
+   }
+  },
+  {
+   "tx": "The **Modified Marshall scoring** system is how **organ failure** is counted. It scores **3** systems: respiratory gas exchange, renal function from the creatinine, and cardiovascular function from the blood pressure and the need for inotropes. A score of 2 or more in a system is failure. I will not load the full point table here. Remember the three systems and that failure must last if you are going to call the attack severe.",
+   "say": "Modified Marshall scoring grades organ failure in 3 systems: breathing, kidney and circulation. Failure in a system is what Atlanta uses. Persistent failure past 48 hours is severe disease. A single bad blood pressure that recovers is not.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "What is scored"
+    ],
+    "rows": [
+     [
+      "Respiratory",
+      "Gas exchange"
+     ],
+     [
+      "Renal",
+      "Creatinine"
+     ],
+     [
+      "Cardiovascular",
+      "Blood pressure and inotropes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **WATERFALL trial** tested aggressive intravenous fluid against a moderate goal-directed rate. Aggressive fluid increased **fluid overload** and heart failure and did not speed recovery. Moderate replacement, aimed at normal perfusion, is the safer plan. Do not reflexively give a huge bolus to every patient with pancreatitis. The trial is the reason the old 'flood them' habit has gone.",
+   "say": "The WATERFALL trial showed that aggressive fluid increases fluid overload and heart failure without faster recovery. Use a moderate, goal-directed rate. Do not flood every patient with pancreatitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aggressive fluids",
+     "points": [
+      "More fluid overload.",
+      "More heart failure.",
+      "No better recovery in WATERFALL."
+     ]
+    },
+    "right": {
+     "title": "Moderate goal-directed fluids",
+     "points": [
+      "Perfusion without flooding.",
+      "Preferred after WATERFALL.",
+      "Still treat shock if it is present."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Early oral refeeding** with a low-fat solid diet, or **enteral nutrition** by tube if the patient cannot eat, beats fasting and parenteral nutrition. Feeding the gut keeps the mucosal barrier and cuts infections. Do not wait for the pain to vanish and the enzymes to normalise before you offer food. A hungry patient who is not vomiting can eat. Reserve the tube for the patient who truly cannot.",
+   "say": "Early oral refeeding or enteral nutrition is better than fasting and parenteral nutrition. The gut barrier stays intact and infections fall. Offer food once vomiting has settled. Do not wait for a normal lipase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Pancreatitis, not vomiting"
+     },
+     {
+      "id": "n2",
+      "label": "Offer low-fat oral food"
+     },
+     {
+      "id": "n3",
+      "label": "Cannot eat: enteral tube"
+     },
+     {
+      "id": "n4",
+      "label": "Parenteral nutrition is the last resort"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infected necrosis is treated by the **step-up approach** from the PANTER trial. Start with percutaneous or endoscopic catheter drainage of **infected pancreatic necrosis**. Move to minimally invasive retroperitoneal necrosectomy only if the patient does not improve. Open necrosectomy is not the first operation. The drawing shows a transgastric stent into the cavity, which is one way to drain. Drain when infection is clear, not the moment the CT first shows necrosis.",
+   "say": "The step-up approach starts with catheter drainage of infected pancreatic necrosis. Necrosectomy comes only if drainage fails. Open surgery is not the first move. Do not drain sterile necrosis just because the CT looks ugly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/walled-off-pancreatic-necrosis-fig1.webp",
+    "alt": "A transgastric stent draining necrotic debris from a walled collection into the stomach.",
+    "caption": "Endoscopic drainage of walled-off pancreatic necrosis. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Walled-off necrosis** is a mature capsule of necrosis in and around the pancreas. A defined **inflammatory wall** has formed, and this takes at least **4** weeks from the start of necrotising pancreatitis. Before that wall exists, the collection is an acute necrotic collection, and endoscopic stents sit badly. Wait for the wall if the patient is stable. Infection or deterioration is what forces an earlier drain, not the calendar alone.",
+   "say": "Walled-off necrosis needs an inflammatory wall, which takes at least 4 weeks. Before that, call it an acute necrotic collection and do not rush a stent. Drain earlier only if infection makes the patient worse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Collection",
+     "Timing",
+     "Wall"
+    ],
+    "rows": [
+     [
+      "Acute necrotic collection",
+      "Early weeks",
+      "No mature wall"
+     ],
+     [
+      "Walled-off necrosis",
+      "At least 4 weeks",
+      "Inflammatory wall present"
+     ],
+     [
+      "Drain now",
+      "Infection or deterioration",
+      "Do not wait on the calendar"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rectal indomethacin** or diclofenac, **100** mg around the procedure, cuts **post-ERCP pancreatitis** by over **50%**. Give the suppository immediately before or after ERCP. It is prophylaxis, not treatment of a pancreas that is already necrotic. It does not replace a wire-guided cannulation or a pancreatic stent in a high-risk duct. Both drugs are non-steroidal anti-inflammatory suppositories. Oral tablets are not the regimen the trials used.",
+   "say": "Rectal indomethacin or diclofenac, 100 milligrams around the procedure, cuts post-ERCP pancreatitis by over 50 percent. It is prevention. It does not treat established necrosis, and it does not replace careful cannulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prevention",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Rectal indomethacin",
+      "100 mg around ERCP"
+     ],
+     [
+      "Diclofenac suppository",
+      "Same idea, same timing"
+     ],
+     [
+      "Effect",
+      "Post-ERCP pancreatitis falls by over 50%"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "ss-c-acute-pancreatitis-ground"
+ ],
+ "refs": [
+  "Sleisenger and Fordtran 11e, acute pancreatitis",
+  "Revised Atlanta classification",
+  "WATERFALL trial",
+  "PANTER trial of the step-up approach"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}
