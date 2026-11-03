@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "sen-thyroid-eye-disease",
+ "title": "Thyroid eye disease",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The autoimmune condition **thyroid eye disease** is an inflammatory orbitopathy of Graves disease driven by shared antigen reactivity against both the TSH receptor and the **IGF-1 receptor** co-expressed on orbital fibroblasts. Tobacco **smoking** represents the most potent modifiable environmental risk factor, conferring a multi-fold increase in orbitopathy incidence and refractory progression. Strict smoking cessation is mandatory in all patients.",
+   "say": "Thyroid eye disease is an autoimmune orbitopathy driven by shared antibodies directed against TSH and IGF-1 receptors on orbital fibroblasts. Tobacco smoking is the most important modifiable risk factor, multiplying the risk of severe disease. Complete cessation of smoking is mandatory.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/orbital-disease-proptosis-thyroid-fig1.webp",
+    "alt": "Thyroid Eye Disease Orbital Pathology",
+    "caption": "Orbital CT and pathology demonstrating retro-orbital expansion in Graves orbitopathy. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Disease activity is systematically assessed using the 7-item **clinical activity score** (**CAS**), where a score of 3 or higher indicates active inflammatory disease eligible for immunosuppression. Severity is categorized as mild, moderate-to-severe, or sight-threatening. Sight-threatening disease is defined by compressive **dysthyroid optic neuropathy** or corneal breakdown with ulceration, requiring emergent inpatient hospitalization and immediate intervention.",
+   "say": "Disease activity is graded using the clinical activity score, where a score of three or higher defines active inflammatory orbitopathy. Severity is classified into mild, moderate-to-severe, or sight-threatening stages. Sight-threatening disease presents as dysthyroid optic neuropathy or corneal breakdown requiring emergency admission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity Category",
+     "Clinical Hallmark Signs",
+     "Clinical Activity Score",
+     "Immediate Management"
+    ],
+    "rows": [
+     [
+      "Mild Disease",
+      "Minor lid retraction (<2 mm), mild soft-tissue signs",
+      "CAS variable (<3 or >=3)",
+      "Local measures, lubricants, selenium"
+     ],
+     [
+      "Moderate-to-Severe",
+      "Lid retraction >=2 mm, proptosis >=3 mm, diplopia",
+      "CAS >=3 indicates active phase",
+      "Intravenous methylprednisolone, teprotumumab"
+     ],
+     [
+      "Sight-Threatening",
+      "Dysthyroid optic neuropathy or corneal ulceration",
+      "Urgent sight threat",
+      "High-dose IV steroids, emergency orbital decompression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Eyelid retraction producing **lid lag** and stare can occur in any thyrotoxicosis due to heightened sympathetic stimulation of Muller muscle. In contrast, true extrathyroidal **proptosis**, restrictive diplopia, and chemosis are specific to thyroid eye disease itself. Pathological enlargement of extraocular muscles follows a predictable pattern, with the **inferior rectus** being the muscle most frequently involved, followed by the medial rectus.",
+   "say": "Sympathetic overactivity causes lid lag and stare in any thyrotoxic state. In contrast, true proptosis and restrictive strabismus are specific to thyroid eye disease. The inferior rectus muscle is most commonly involved, followed by the medial and superior rectus muscles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sympathetic Thyrotoxic Signs",
+     "points": [
+      "Upper eyelid retraction and lid lag",
+      "Caused by adrenergic hyperstimulation of Muller muscle",
+      "Present in any form of severe thyrotoxicosis",
+      "Rapidly resolves with beta-blockers or euthyroidism"
+     ]
+    },
+    "right": {
+     "title": "Specific Orbitopathy Signs",
+     "points": [
+      "True proptosis (exophthalmos) measured by Hertel",
+      "Restricted ocular motility with diplopia",
+      "Inferior rectus is most commonly enlarged muscle",
+      "Driven by autoimmune glycosaminoglycan accumulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "For patients with mild active thyroid eye disease, oral **selenium** supplementation at a dose of **100** mcg twice daily for **6** months significantly improves ocular quality of life and delays disease progression in selenium-insufficient populations. This nutritional intervention is combined with artificial tear lubricants, ocular ointments, sunglasses, and absolute smoking cessation to maintain corneal epithelial integrity and prevent exposure keratitis.",
+   "say": "In mild active thyroid eye disease, oral selenium at one hundred micrograms twice daily for six months improves outcomes and reduces progression in selenium-deficient populations. This is combined with ocular lubricants, eye protection, and smoking cessation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Component",
+     "Dosage and Schedule",
+     "Target Clinical Goal",
+     "Target Population"
+    ],
+    "rows": [
+     [
+      "Oral Selenium Supplement",
+      "100 mcg orally twice daily for 6 months",
+      "Improves CAS and slows progression",
+      "Mild active disease in selenium-deficient areas"
+     ],
+     [
+      "Topical Ocular Lubricants",
+      "Preservative-free tears four times daily",
+      "Prevents corneal exposure keratopathy",
+      "All patients with lagophthalmos"
+     ],
+     [
+      "Smoking Cessation",
+      "Complete cessation of tobacco",
+      "Removes primary inflammatory stimulus",
+      "Mandatory across all disease stages"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For moderate-to-severe active disease, the evidence-based first-line regimen utilizes intravenous **methylprednisolone** pulses: **500** mg weekly for **6** weeks, followed by **250** mg weekly for **6** weeks, delivering a cumulative total of 4.5 grams. Clinicians must strictly ensure that the cumulative glucocorticoid dose stays below **8** grams, because higher doses substantially increase the risk of acute hepatic necrosis and liver failure.",
+   "say": "Moderate-to-severe active disease is treated with intravenous methylprednisolone pulses of five hundred milligrams weekly for six weeks, followed by two hundred and fifty milligrams weekly for six weeks. The total cumulative steroid dose must remain under eight grams to prevent severe acute hepatic injury.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EUGOGO Pulse Regimen",
+     "points": [
+      "500 mg IV weekly for first 6 weeks",
+      "250 mg IV weekly for subsequent 6 weeks",
+      "Total cumulative dose: 4.5 grams methylprednisolone",
+      "Significantly superior to oral daily prednisolone"
+     ]
+    },
+    "right": {
+     "title": "Glucocorticoid Safety Gate",
+     "points": [
+      "Strict cumulative upper ceiling of 8 grams",
+      "Doses >8 g linked to fulminant hepatic necrosis",
+      "Baseline screening for viral hepatitis B and C",
+      "Monitor liver transaminases and serum glucose weekly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The monoclonal antibody **teprotumumab** binds specifically to the **IGF-1 receptor**, blocking its physical cross-talk with the TSH receptor. In randomized clinical trials in active moderate-to-severe thyroid eye disease, teprotumumab produced dramatic improvements, reducing **proptosis** by more than 2 to 3 mm and resolving diplopia. Clinicians must carefully monitor patients for **hyperglycemia**, especially in those with pre-existing diabetes, alongside audiometric screening for hearing loss.",
+   "say": "Teprotumumab is a targeted monoclonal antibody against the IGF-1 receptor that significantly reduces proptosis and diplopia in moderate-to-severe thyroid eye disease. Serum glucose must be monitored closely because hyperglycemia is a frequent adverse effect, especially in patients with diabetes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-orbitopathy-fig1.webp",
+    "alt": "Thyroid Eye Disease Features",
+    "caption": "Orbital fibroblast activation, extraocular muscle enlargement, and proptosis. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Sight-threatening **dysthyroid optic neuropathy** is caused by mechanical apical compression of the optic nerve by enlarged extraocular muscle bellies. Emergency treatment begins with immediate high-dose intravenous glucocorticoid pulses (500 to 1000 mg methylprednisolone daily for 3 days). If visual acuity or colour vision fails to improve within 1 to 2 weeks, urgent surgical **orbital decompression** is mandatory to avert permanent optic atrophy and blindness.",
+   "say": "Dysthyroid optic neuropathy represents an emergency caused by apical optic nerve compression. Management begins with immediate high-dose intravenous methylprednisolone. If vision does not improve within one to two weeks, urgent surgical orbital decompression is required to prevent permanent blindness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Apical Compressive Neuropathy",
+     "points": [
+      "Crowding of orbital apex by muscle bellies",
+      "Impaired colour vision, visual field defects",
+      "Relative afferent pupillary defect (RAPD)",
+      "Optic disc swelling or early pallor"
+     ]
+    },
+    "right": {
+     "title": "Urgent Decompression Protocol",
+     "points": [
+      "Initial pulse IV methylprednisolone (0.5 to 1 g/day)",
+      "Re-evaluate visual acuity within 1 to 2 weeks",
+      "Urgent medial and floor bony decompression if refractory",
+      "Emergency intervention rather than delayed clinic review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Administration of **radioiodine** can worsen active thyroid eye disease by releasing thyroidal antigens and exacerbating autoimmune reactivity. Achieving and maintaining stable **euthyroidism** is paramount, because both hypothyroidism and persistent hyperthyroidism worsen orbital inflammation. When radioiodine is administered to patients with mild pre-existing orbitopathy or high-risk features like smoking, concomitant oral glucocorticoid prophylaxis with prednisolone (0.3 to 0.5 mg/kg) is mandatory.",
+   "say": "Radioactive iodine therapy can aggravate active thyroid eye disease by releasing autoantigens. Maintaining stable euthyroidism is critical because both hyperthyroidism and hypothyroidism worsen orbitopathy. Prophylactic oral glucocorticoid cover should be given whenever radioiodine is administered to patients at risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Scenario",
+     "Radioiodine Risk",
+     "Steroid Prophylaxis Strategy",
+     "Metabolic Target"
+    ],
+    "rows": [
+     [
+      "Active Moderate Orbitopathy",
+      "High risk of severe exacerbation",
+      "Radioiodine is contraindicated; choose ATD or surgery",
+      "Rapid achievement of stable euthyroidism"
+     ],
+     [
+      "Mild Inactive Orbitopathy",
+      "Moderate risk of reactivation",
+      "Oral prednisolone (0.3 to 0.5 mg/kg) tapered over 3 months",
+      "Avoid post-radioiodine hypothyroidism with prompt thyroxine"
+     ],
+     [
+      "No Orbitopathy (Smoker)",
+      "Elevated de novo risk",
+      "Consider low-dose steroid prophylaxis",
+      "Intensive smoking cessation counseling"
+     ]
+    ]
+   }
+  }
+ ]
+}

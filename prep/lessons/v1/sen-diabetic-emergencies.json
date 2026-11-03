@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "sen-diabetic-emergencies",
+ "title": "Diabetic ketoacidosis and hyperosmolar state",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The diagnostic criteria for **diabetic ketoacidosis** (**DKA**) combine hyperglycaemia (plasma glucose typically exceeding 250 mg/dL), arterial pH below 7.30, serum bicarbonate below 18 mmol/L, and a high **anion gap** metabolic acidosis exceeding 10 to 12 mEq/L. Direct quantitative measurement of serum **beta-hydroxybutyrate** represents the diagnostic gold standard, whereas traditional urinary acetoacetate nitroprusside dipsticks significantly underestimate circulating ketoacidosis during early resuscitation.",
+   "say": "Diabetic ketoacidosis is characterized by hyperglycemia, arterial pH below 7.30, serum bicarbonate under 18 mmol/L, and an increased anion gap. Measuring circulating beta-hydroxybutyrate is the gold standard for diagnosis and monitoring, as traditional urine dipsticks miss beta-hydroxybutyrate and falsely underestimate ketoacidosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dka-fig1.webp",
+    "alt": "Diabetic Ketoacidosis Pathophysiology",
+    "caption": "Insulin deficiency, uninhibited lipolysis, and ketogenesis pathways in DKA. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Resuscitation in acute ketoacidosis prioritizes aggressive isotonic fluid expansion before starting intravenous **insulin**. Regular insulin is infused at 0.1 units/kg/hour (or 0.14 units/kg/hour without a bolus) only after serum **potassium** is verified to be at least 3.3 mmol/L. If initial serum potassium is below 3.3 mmol/L, insulin must be strictly withheld and vigorous potassium chloride replacement initiated immediately to avert fatal cardiac arrhythmias.",
+   "say": "Intravenous fluid resuscitation must come before insulin therapy in diabetic ketoacidosis. Regular insulin is infused at zero point one units per kilogram per hour only after serum potassium is confirmed to be at or above 3.3 mmol/L. If potassium is below 3.3, insulin must be withheld until hypokalaemia is corrected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Potassium <3.3 mmol/L",
+     "points": [
+      "Withhold all intravenous insulin infusions immediately",
+      "Administer IV potassium chloride 20 to 40 mEq/hour",
+      "Prevents fatal cardiac arrest and ventricular dysrhythmias",
+      "Resume insulin only when potassium >=3.3 mmol/L"
+     ]
+    },
+    "right": {
+     "title": "Potassium 3.3 to 5.2 mmol/L",
+     "points": [
+      "Start regular insulin infusion at 0.1 units/kg/hour",
+      "Add 20 to 30 mEq potassium per litre of IV fluids",
+      "Maintains normal serum potassium during cellular shift",
+      "Target serum potassium between 4.0 and 5.0 mmol/L"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When plasma glucose reaches approximately 200 mg/dL in DKA, intravenous **dextrose** (5% to 10%) must be added to crystalloid fluids while insulin infusion continues. Adding dextrose permits sustained insulin delivery necessary to suppress lipolysis, clear circulating ketoacids, and close the **anion gap** without provoking iatrogenic hypoglycemia. Give potassium in fluids when serum potassium is between 3.3 and **5.2** mmol/L. Intravenous **bicarbonate** is reserved strictly for severe acidemia with arterial pH below 6.90.",
+   "say": "When plasma glucose drops to around 200 mg/dL, intravenous dextrose must be added to fluid bags while maintaining the insulin infusion. This prevents hypoglycemia while allowing sufficient insulin delivery to clear ketones and close the anion gap. Potassium is added when serum levels are between 3.3 and 5.2 mmol/L. Bicarbonate is reserved strictly for severe acidemia with pH below 6.90.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Therapeutic Threshold",
+     "Intervention Action",
+     "Physiological Objective"
+    ],
+    "rows": [
+     [
+      "Plasma Glucose",
+      "Falls to <=200 mg/dL",
+      "Add 5% or 10% dextrose to IV fluids",
+      "Allows continued insulin to close anion gap"
+     ],
+     [
+      "Arterial pH",
+      "Severe acidemia (<6.90)",
+      "Isotonic sodium bicarbonate infusion",
+      "Prevents acidotic myocardial depression"
+     ],
+     [
+      "Serum Potassium",
+      "Between 3.3 and 5.2 mmol/L",
+      "Add 20 to 30 mEq KCl per litre fluid",
+      "Prevents transcellular hypokalemic drop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Formal criteria for DKA resolution require normalized plasma glucose (<200 mg/dL) plus two of: serum bicarbonate of at least 18 mmol/L, venous pH above 7.30, and a closed **anion gap** (<=12 mEq/L). Once resolved and the patient tolerates oral feeding, **subcutaneous insulin** must be administered 1 to 2 hours before discontinuing intravenous insulin. Stopping the intravenous infusion without subcutaneous basal coverage triggers rapid rebound ketoacidosis within hours.",
+   "say": "Resolution of DKA requires a closed anion gap, bicarbonate of at least 18 mmol/L, venous pH over seven point thirty, and the ability to eat. Subcutaneous basal insulin must be given one to two hours before turning off the intravenous insulin infusion to avoid rapid rebound ketoacidosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DKA Resolution Criteria",
+     "points": [
+      "Serum anion gap closed (<=12 mEq/L)",
+      "Serum bicarbonate >=18 mmol/L and pH >7.30",
+      "Plasma glucose below 200 mg/dL",
+      "Patient clinically alert and tolerating oral diet"
+     ]
+    },
+    "right": {
+     "title": "Subcutaneous Transition Rule",
+     "points": [
+      "Administer subcutaneous basal insulin dose",
+      "Overlap infusion by 1 to 2 hours before stopping",
+      "Prevents acute insulin deficiency in circulation",
+      "Eliminates risk of rebound hyperglycaemia and ketosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Symptomatic **cerebral edema** represents the most lethal complication of DKA resuscitation in pediatric and adolescent patients, typically manifesting with sudden headache, lethargy, bradycardia, and acute neurological deterioration. Pathogenesis involves rapid osmolality shifts and intracellular water movement. Immediate emergency management requires prompt administration of intravenous **mannitol** (0.5 to 1.0 g/kg) or 3% hypertonic saline, elevation of the bed head, and immediate reduction of fluid infusion rates.",
+   "say": "Cerebral edema is a dangerous complication of DKA resuscitation in children, triggered by rapid drops in serum osmolality. Warning signs include headache, lethargy, and bradycardia. Treatment mandates immediate infusion of intravenous mannitol or three percent hypertonic saline and slowing the rate of fluid rehydration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Diagnostic Observation",
+     "Pathophysiologic Process",
+     "Immediate Management"
+    ],
+    "rows": [
+     [
+      "Early Warning Signs",
+      "Severe headache, vomiting, lethargy",
+      "Rapid decline in effective serum osmolality",
+      "Slow IV fluid rate by 50%"
+     ],
+     [
+      "Advanced Signs",
+      "Cushing triad: bradycardia, hypertension",
+      "Raised intracranial pressure & brainstem herniation",
+      "Infuse IV mannitol (0.5 to 1.0 g/kg)"
+     ],
+     [
+      "Alternative Osmotherapy",
+      "3% Hypertonic saline (3 to 5 mL/kg)",
+      "Draws water from swollen astrocytes into plasma",
+      "Elevate head of bed to 30 degrees"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **hyperosmolar hyperglycemic state** (**HHS**) characteristically presents in older adults with type 2 diabetes, distinguished by profound hyperglycemia (glucose often >600 mg/dL), severe hypertonicity with **effective osmolality** exceeding 320 mOsm/kg, and marked dehydration without significant ketoacidosis. The fluid deficit is larger than in DKA. Insulin is initiated after fluid resuscitation, often at a reduced rate of **0.05** units/kg/hour if glucose is already falling with saline alone.",
+   "say": "Hyperosmolar hyperglycemic state presents with profound hyperglycemia often exceeding 600 mg/dL and effective serum osmolality over 320 mOsm per kilogram, without marked ketoacidosis. The fluid deficit is massive. Insulin is started after fluid resuscitation, often at zero point zero five units per kilogram per hour if saline hydration alone is lowering glucose.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dka-fig2.webp",
+    "alt": "DKA and HHS Metabolic Spectrum",
+    "caption": "Comparison of insulin deficiency depth and hyperosmolar dehydration. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "In hyperosmolar hyperglycemic state, hypertonicity is formally quantified using calculated **effective osmolality**, calculated as 2 times sodium plus glucose in mg/dL divided by 18, which strictly excludes **urea** because urea crosses cell membranes freely and does not create effective osmotic gradients. Average water deficits in adult HHS are profound, typically between 8 and 12 litres, requiring cautious, gradual volume replacement over 24 to 48 hours to avoid pontine myelinolysis.",
+   "say": "Serum hypertonicity in hyperosmolar state is evaluated by effective osmolality, which omits urea because urea diffuses freely across cell membranes without causing transcellular fluid shifts. Adult fluid deficits typically reach eight to twelve litres, necessitating careful gradual rehydration over twenty-four to forty-eight hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Effective Serum Osmolality",
+     "points": [
+      "Formula: 2 * Na + (Glucose / 18)",
+      "Strictly reflects effective impermeant extracellular solutes",
+      "Diagnostic threshold: >320 mOsm/kg",
+      "Directly drives intracellular neuronal dehydration and coma"
+     ]
+    },
+    "right": {
+     "title": "Total Serum Osmolality",
+     "points": [
+      "Formula: 2 * Na + (Glucose / 18) + (BUN / 2.8)",
+      "Includes urea nitrogen as an unmeasured osmolyte",
+      "Urea equilibrates freely across lipid cell membranes",
+      "Does not cause osmotic brain cell volume shifts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A critical diagnostic trap is **euglycemic ketoacidosis**, increasingly encountered with sodium-glucose cotransporter-2 (**SGLT2 inhibitor**) therapy (dapagliflozin, empagliflozin). SGLT2 inhibitors promote renal glucosuria, lowering plasma glucose often below 200 to 250 mg/dL while reducing endogenous insulin secretion and stimulating glucagon. Patients develop severe anion-gap ketoacidosis without marked hyperglycaemia, delaying clinical recognition. SGLT2 inhibitors must be withheld prior to elective surgery.",
+   "say": "Euglycemic diabetic ketoacidosis is an important complication of SGLT2 inhibitor therapy. Enhanced urinary glucose excretion keeps plasma glucose below 200 mg/dL while promoting glucagon-driven ketogenesis. Patients present with high anion gap metabolic acidosis without marked hyperglycemia, which can critically delay diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Classic Hyperglycemic DKA",
+     "Euglycemic SGLT2-Induced DKA"
+    ],
+    "rows": [
+     [
+      "Plasma Glucose",
+      "Markedly elevated (>250 to 500 mg/dL)",
+      "Near-normal or mildly elevated (<200 mg/dL)"
+     ],
+     [
+      "Arterial pH & Bicarbonate",
+      "Acidemic (pH <7.30, HCO3 <18)",
+      "Severe acidemia (pH <7.30, HCO3 <18)"
+     ],
+     [
+      "Serum Beta-Hydroxybutyrate",
+      "Markedly elevated (>3.0 mmol/L)",
+      "Markedly elevated (>3.0 mmol/L)"
+     ],
+     [
+      "Management Protocol",
+      "Standard fluids and insulin infusion",
+      "Intravenous dextrose plus insulin infusion"
+     ]
+    ]
+   }
+  }
+ ]
+}

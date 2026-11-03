@@ -1,170 +1,194 @@
 {
  "v": 1,
  "module": "sen-hormone-action",
- "subject": "ss-endocrinology",
- "title": "Hormone synthesis, receptors and signalling: core principles for NEET-PG",
- "minutes": 6,
+ "title": "Hormone synthesis, receptors and signalling",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Hormones act through **receptors**, and where the receptor sits decides the speed and mechanism of action. Peptide hormones bind **G protein coupled receptors** on the cell surface, triggering second messengers such as cyclic AMP. Steroid and thyroid hormones are lipophilic and cross the membrane to bind intracellular **nuclear receptors**, which alter gene transcription. Ligand binding is the initiating event for every GPCR cascade, and the heterotrimeric G protein links the receptor to downstream effectors.",
-   "say": "Hormones act through receptors, and where the receptor sits decides the speed and mechanism of action. Peptide hormones bind G protein coupled receptors on the cell surface, triggering second messengers such as cyclic AMP. Steroid and thyroid hormones are lipophilic and cross the membrane to bind intracellular nuclear receptors, which alter gene transcription. Ligand binding is the initiating event for every GPCR cascade, and the heterotrimeric G protein links the receptor to downstream effectors.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Peptide hormone",
-     "Steroid or thyroid hormone"
-    ],
-    "rows": [
-     [
-      "Receptor site",
-      "Cell surface",
-      "Intracellular"
-     ],
-     [
-      "Typical signal",
-      "Second messenger",
-      "Gene transcription"
-     ],
-     [
-      "Onset",
-      "Rapid",
-      "Slower, hours to days"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Thyroid hormone synthesis starts with iodide trapping by the **sodium-iodide symporter**. **Thyroid peroxidase** then oxidises iodide and organifies it onto tyrosyl residues of thyroglobulin, forming MIT and DIT, which couple into T3 and T4. Peripheral conversion of T4 to the active T3 is done by **deiodinases** type I and II, so low free T3 with normal free T4 points towards peripheral conversion problems. Type III deiodinase inactivates hormone instead.",
-   "say": "Thyroid hormone synthesis starts with iodide trapping by the sodium-iodide symporter. Thyroid peroxidase then oxidises iodide and organifies it onto tyrosyl residues of thyroglobulin, forming MIT and DIT, which couple into T3 and T4. Peripheral conversion of T4 to the active T3 is done by deiodinases type I and II, so low free T3 with normal free T4 points towards peripheral conversion problems. Type III deiodinase inactivates hormone instead.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Iodide trapping"
-     },
-     {
-      "id": "n2",
-      "label": "Oxidation and organification"
-     },
-     {
-      "id": "n3",
-      "label": "Coupling to T3 and T4"
-     },
-     {
-      "id": "n4",
-      "label": "Peripheral deiodination"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2",
-      "symporter then TPO"
-     ],
-     [
-      "n2",
-      "n3",
-      "MIT and DIT"
-     ],
-     [
-      "n3",
-      "n4",
-      "T4 to T3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Thyroid hormone receptors are nuclear receptors. When **T3** binds, the receptor changes shape, releases **co-repressors** and recruits **co-activators**, which switches gene transcription on. Pituitary negative feedback is mainly mediated by the TR beta2 isoform, which suppresses TRH and TSH. TSH itself acts on a Gs-coupled receptor, raising cAMP in follicular cells. Feedback failure at the hypothalamus or pituitary gives a central defect in the axis.",
-   "say": "Thyroid hormone receptors are nuclear receptors. When T3 binds, the receptor changes shape, releases co-repressors and recruits co-activators, which switches gene transcription on. Pituitary negative feedback is mainly mediated by the TR beta2 isoform, which suppresses TRH and TSH. TSH itself acts on a Gs-coupled receptor, raising cAMP in follicular cells. Feedback failure at the hypothalamus or pituitary gives a central defect in the axis.",
+   "tx": "Hydrophilic **peptide hormones** such as insulin, adrenocorticotropic hormone, and parathyroid hormone act through cell-surface receptors linked to second messenger cascades like cyclic adenosine monophosphate or phospholipase C. In contrast, lipophilic steroid hormones and thyroid hormone traverse the plasma membrane to activate **nuclear receptors** that function directly as ligand-dependent transcription factors. Cellular uptake of thyroid hormone requires specific transmembrane monocarboxylate transporters such as **MCT8**.",
+   "say": "Hydrophilic peptide hormones like insulin and parathyroid hormone bind cell surface receptors linked to second messenger cascades. Lipophilic steroid hormones and thyroid hormone cross the membrane to activate nuclear receptors that regulate gene transcription. Cellular uptake of thyroid hormone depends on specialized plasma membrane transporters such as MCT8.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/sen-hormone-action-fig1.webp",
-    "alt": "Diagram showing T3 binding to nuclear receptors to alter gene transcription, and TSH binding to a Gs-coupled receptor to raise cAMP.",
-    "caption": "Thyroid hormone receptor action and TSH signaling. Image: Boghog2, CC0/PD, Wikimedia Commons.",
-    "ar": 1.3333
+    "src": "v1/kb/media/pituitary-gh-desmopressin-oxytocin-dopamine-fig1.webp",
+    "alt": "Pituitary Hormones and Receptor Pharmacology",
+    "caption": "Pituitary hormones and cell-surface receptor signaling pathways. [Credit: StewardMD]"
    }
   },
   {
-   "tx": "Binding protein and assay issues can mislead thyroid interpretation. In **thyroxine-binding globulin** deficiency, total T4 is low while free T4 stays normal, so the correct response is observation, not replacement. High-dose **biotin** interferes with many immunoassays, causing falsely low TSH and falsely high T4 and T3 in a euthyroid patient. Always check for biotin before diagnosing hyperthyroidism.",
-   "say": "Binding protein and assay issues can mislead thyroid interpretation. In thyroxine-binding globulin deficiency, total T4 is low while free T4 stays normal, so the correct response is observation, not replacement. High-dose biotin interferes with many immunoassays, causing falsely low TSH and falsely high T4 and T3 in a euthyroid patient. Always check for biotin before diagnosing hyperthyroidism.",
+   "tx": "An activating somatic mutation in the **GNAS** gene encoding the stimulatory G-protein alpha subunit causes **McCune-Albright syndrome**, characterized by the triad of polyostotic fibrous dysplasia, cafe-au-lait macules with jagged borders, and autonomous endocrine hyperfunction. Conversely, maternal inheritance of an inactivating GNAS variant results in **pseudohypoparathyroidism** type 1a with Albright hereditary osteodystrophy and end-organ resistance to parathyroid hormone. Paternal inheritance produces pseudopseudohypoparathyroidism with identical skeletal features but normal hormone sensitivity due to tissue-specific genomic imprinting.",
+   "say": "Activating GNAS mutations cause McCune-Albright syndrome with fibrous dysplasia and autonomous endocrine hyperfunction. Maternally inherited inactivating GNAS mutations cause pseudohypoparathyroidism type 1a with Albright hereditary osteodystrophy and parathyroid hormone resistance. Paternal inheritance leads to pseudopseudohypoparathyroidism with Albright skeletal features but preserved endocrine sensitivity due to tissue imprinting.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Genuine hyperthyroidism",
+     "title": "Maternal GNAS Inactivation",
      "points": [
-      "TSH suppressed",
-      "Free T4 and T3 raised",
-      "Clinical features present",
-      "Thyroid uptake often raised"
+      "Pseudohypoparathyroidism type 1a phenotype",
+      "Albright hereditary osteodystrophy habitus",
+      "End-organ resistance to PTH and TSH",
+      "Hypocalcaemia and hyperphosphataemia"
      ]
     },
     "right": {
-     "title": "Biotin interference",
+     "title": "Paternal GNAS Inactivation",
      "points": [
-      "TSH falsely low",
-      "Free T4 and T3 falsely high",
-      "Patient euthyroid clinically",
-      "Stop biotin and repeat assay"
+      "Pseudopseudohypoparathyroidism phenotype",
+      "Albright hereditary osteodystrophy habitus",
+      "Preserved renal response to PTH",
+      "Normal serum calcium and phosphate"
      ]
     }
    }
   },
   {
-   "tx": "In G protein signalling, a **GPCR** activates a Gs or Gi alpha subunit, which changes adenylyl cyclase activity and cAMP levels. Protein kinase A is the main effector of cAMP. Disturbances of this pathway cause disease: activating **GNAS** mutations produce McCune-Albright syndrome, and GNAS loss of function produces pseudohypoparathyroidism. PDE4D and PRKAR1A variants produce acrodysostosis, where PKA signalling is disturbed downstream of the receptor.",
-   "say": "In G protein signalling, a GPCR activates a Gs or Gi alpha subunit, which changes adenylyl cyclase activity and cAMP levels. Protein kinase A is the main effector of cAMP. Disturbances of this pathway cause disease: activating GNAS mutations produce McCune-Albright syndrome, and GNAS loss of function produces pseudohypoparathyroidism. PDE4D and PRKAR1A variants produce acrodysostosis, where PKA signalling is disturbed downstream of the receptor.",
+   "tx": "Hypothalamic secretion of **pulsatile GnRH** is physiologically essential to stimulate pituitary synthesis and pulsatile release of luteinizing hormone and follicle-stimulating hormone. Sustained and continuous exposure to a **GnRH agonist** produces profound down-regulation and desensitization of pituitary gonadotroph receptors. Consequently, while pulsatile subcutaneous GnRH delivery restores fertility in hypothalamic hypogonadism, long-acting continuous GnRH agonist depots achieve medical castration in prostate cancer, precocious puberty, and endometriosis.",
+   "say": "Pulsatile gonadotropin-releasing hormone stimulates the anterior pituitary to secrete luteinizing hormone and follicle-stimulating hormone. Continuous stimulation with a GnRH agonist desensitizes gonadotroph receptors and shuts down gonadotropin secretion. Pulsatile administration restores ovulatory cycles, whereas depot agonists produce effective therapeutic suppression in hormone-sensitive tumours.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Disorder",
-     "Gene",
-     "Mechanism"
+     "Administration Mode",
+     "Pituitary Receptor State",
+     "Gonadotropin Response",
+     "Clinical Indication"
     ],
     "rows": [
      [
-      "McCune-Albright",
-      "GNAS activating",
-      "Constant cAMP"
+      "Pulsatile GnRH",
+      "Sensitized receptor signaling",
+      "Stimulated LH and FSH secretion",
+      "Induction of ovulation and fertility"
      ],
      [
-      "Pseudohypoparathyroidism 1a",
-      "GNAS loss",
-      "Reduced Gs signalling"
+      "Continuous GnRH agonist",
+      "Down-regulated and internalised",
+      "Suppressed LH and FSH release",
+      "Prostate cancer and central precocious puberty"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Circulating cortisol demonstrates an endogenous circadian **diurnal rhythm**, with peak concentrations occurring in the early morning between 06:00 and 08:00 and nadir levels occurring near midnight. Disruption and loss of this physiologic diurnal variation represents the earliest and most sensitive biochemical clue to Cushing syndrome. Consequently, late-night **midnight salivary cortisol** measurement reliably identifies autonomous hypercortisolemia, whereas random afternoon serum cortisol measurements possess no diagnostic utility.",
+   "say": "Cortisol displays a strict circadian diurnal rhythm with morning peaks and midnight nadirs. Disruption of this circadian rhythm is the hallmark of Cushing syndrome. Measuring late-night salivary cortisol or midnight sleeping serum cortisol provides excellent diagnostic sensitivity, whereas random afternoon cortisol levels are non-diagnostic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Diurnal Rhythm",
+     "points": [
+      "Early morning cortisol surge at 08:00",
+      "Gradual nadir reached around midnight",
+      "Salivary cortisol suppressed at night",
+      "Preserved central hypothalamic feedback"
+     ]
+    },
+    "right": {
+     "title": "Autonomous Cushing Syndrome",
+     "points": [
+      "Loss of physiologic circadian nadir",
+      "Elevated late-night salivary cortisol",
+      "Elevated midnight sleeping serum cortisol",
+      "Random afternoon cortisol is non-diagnostic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In clinical endocrine physiology, only the unbound **free hormone** fraction is biologically active and capable of diffusing across endothelial barriers to engage cellular receptors. High circulating concentrations of estrogen during pregnancy or oral contraceptive therapy stimulate hepatic synthesis of **thyroid-binding globulin** and **sex hormone-binding globulin**, elevating total thyroxine and total testosterone measurements while free fractions remain normal. Conversely, exogenous androgens and nephrotic syndrome lower binding proteins.",
+   "say": "Only the unbound free hormone fraction is biologically active at target tissues. Elevated estrogen levels during pregnancy or contraceptive use increase hepatic synthesis of thyroid-binding globulin and sex hormone-binding globulin. Total hormone levels increase proportionately while free thyroxine remains tightly regulated and normal.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-hcg.webp",
+    "alt": "Hormone Receptor Signaling",
+    "caption": "Receptor signaling and steroidogenic hormone regulation. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "The rare X-linked neurodevelopmental disorder known as **Allan-Herndon-Dudley syndrome** results from loss-of-function pathogenic variants in the solute carrier transporter **MCT8**. Defective MCT8 transporter function severely impairs cellular entry of active triiodothyronine into developing cerebral neurons. Affected young males present with hypotonia, progressive spastic paraplegia, severe intellectual disability, and a characteristic endocrine profile demonstrating markedly elevated serum **T3**, reduced or borderline low total T4, and normal or slightly elevated TSH.",
+   "say": "Allan-Herndon-Dudley syndrome is caused by mutations in the neuronal monocarboxylate transporter MCT8. Because triiodothyronine cannot enter cerebral neurons, affected boys develop severe psychomotor retardation and spastic quadriparesis. Laboratory testing characteristically reveals elevated circulating T3 with low or normal T4 and normal TSH.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Parameter",
+     "Serum Concentration",
+     "Pathophysiologic Mechanism"
+    ],
+    "rows": [
+     [
+      "Serum T3 (Triiodothyronine)",
+      "Markedly elevated",
+      "Impaired neuronal clearance and uptake"
      ],
      [
-      "Acrodysostosis",
-      "PDE4D or PRKAR1A",
-      "Disturbed PKA signalling"
+      "Serum T4 (Thyroxine)",
+      "Low to borderline normal",
+      "Increased peripheral deiodination"
+     ],
+     [
+      "Serum TSH",
+      "Normal or slightly high",
+      "Altered central pituitary feedback setpoint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The congenital or acquired state of **apparent mineralocorticoid excess** arises when renal tubular **11-beta-hydroxysteroid dehydrogenase** type 2 is deficient or inhibited. Under physiologic conditions, this microsomal enzyme rapidly converts active cortisol to inactive cortisone in aldosterone-sensitive distal nephrons. Enzyme inactivation permits high ambient cortisol to illicitly bind and stimulate mineralocorticoid receptors, producing severe hypokalaemic hypertension, metabolic alkalosis, and suppressed renin and aldosterone. Chronic consumption of natural **licorice** containing glycyrrhizic acid causes an identical acquired syndrome.",
+   "say": "Apparent mineralocorticoid excess occurs when eleven-beta-hydroxysteroid dehydrogenase type 2 fails to convert cortisol to inactive cortisone in the kidney. Cortisol saturates mineralocorticoid receptors, resulting in low-renin hypertension, hypokalaemia, and metabolic alkalosis. Ingestion of natural licorice produces an identical acquired clinical syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiologic Protection",
+     "points": [
+      "Active 11-beta-HSD2 in distal nephron",
+      "Rapid conversion of cortisol to cortisone",
+      "Cortisone cannot bind mineralocorticoid receptor",
+      "Aldosterone selectively regulates sodium reabsorption"
+     ]
+    },
+    "right": {
+     "title": "Apparent Excess / Licorice",
+     "points": [
+      "Genetic deficiency or glycyrrhizic acid inhibition",
+      "Cortisol accumulates at renal tubules",
+      "Illicit activation of mineralocorticoid receptors",
+      "Hypokalaemic hypertension with suppressed aldosterone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The concept of **spare receptors** describes endocrine target tissues where maximal cellular biological response is elicited at ligand concentrations that occupy only a small fraction of available receptors. In tissues with abundant spare receptors, a modest reduction in receptor density shifts the dose-response curve to the right, increasing the hormone concentration required for half-maximal stimulation without reducing maximum velocity. This classic shift explains the early compensation observed in moderate peripheral **insulin resistance**.",
+   "say": "Spare receptors allow a tissue to achieve maximal biological effect when only a minority of receptors are bound by hormone. When receptor density falls, the dose-response curve shifts rightward, necessitating higher hormone levels to achieve the same effect. This receptor reserve explains metabolic compensation in early insulin resistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Receptor Density State",
+     "Dose-Response Curve",
+     "Half-Maximal Concentration",
+     "Maximum Biological Response"
+    ],
+    "rows": [
+     [
+      "Abundant spare receptors",
+      "Normal baseline position",
+      "Low hormone concentration required",
+      "100% maximal tissue response"
+     ],
+     [
+      "Moderate receptor loss",
+      "Parallel rightward shift",
+      "Increased hormone concentration required",
+      "Preserved 100% maximal tissue response"
+     ],
+     [
+      "Severe receptor depletion",
+      "Rightward and downward shift",
+      "Markedly increased requirement",
+      "Attenuated submaximal plateau"
      ]
     ]
    }
   }
- ],
- "quiz": [
-  "q_20f2a18f38a2",
-  "q_a3be08fa6a4a",
-  "q_bc296a8d1616"
- ],
- "src": [],
- "refs": [
-  "Williams Textbook of Endocrinology (Melmed et al.)",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 35
- }
+ ]
 }
