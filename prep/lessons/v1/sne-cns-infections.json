@@ -1,0 +1,162 @@
+{
+  "v": 1,
+  "module": "sne-cns-infections",
+  "subject": "ss-neurology",
+  "title": "Bacterial, Viral and Fungal CNS Infections",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Empiric antimicrobial therapy for acute bacterial meningitis in adults aged **18** to 50 comprises intravenous **ceftriaxone 2 g** every 12 hours plus intravenous **vancomycin** (15-20 mg/kg every **8-12** hours). Intravenous ampicillin 2 g every 4 hours is added for adults over 50 to cover Listeria monocytogenes. Streptococcus pneumoniae and Neisseria meningitidis represent the most frequent causative pathogens in immunocompetent adults, requiring bactericidal therapy that rapidly achieves high cerebrospinal fluid concentrations.",
+      "say": "Empiric antimicrobial therapy for acute bacterial meningitis in adults aged eighteen to fifty comprises intravenous ceftriaxone two grams every twelve hours combined with vancomycin fifteen to twenty milligrams per kilogram every eight to twelve hours. Intravenous ampicillin is added in adults over fifty to cover Listeria monocytogenes. Streptococcus pneumoniae and Neisseria meningitidis represent the leading pathogens in adults, requiring rapid bactericidal CSF penetration.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-ceftriaxone.webp",
+        "alt": "Antibiotic pharmacology of ceftriaxone crossing blood-brain barrier for bacterial meningitis.",
+        "caption": "Ceftriaxone pharmacology: blood-brain barrier penetration in bacterial meningitis",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Adjunctive anti-inflammatory corticosteroid therapy significantly improves clinical outcomes in bacterial meningitis. Intravenous **dexamethasone** (10 mg every 6 hours for **4** days) initiated before or with the first antibiotic dose significantly reduces mortality and sensorineural hearing loss in **Streptococcus pneumoniae** meningitis. Dexamethasone attenuates subarachnoid space inflammation and cerebral edema triggered by rapid bactericidal lysis. It should be discontinued if cultures identify an organism other than Streptococcus pneumoniae.",
+      "say": "Adjunctive intravenous dexamethasone at ten milligrams every six hours for four days initiated before or with the first antibiotic dose significantly reduces mortality and hearing loss in Streptococcus pneumoniae meningitis. Dexamethasone attenuates subarachnoid space inflammation and cerebral edema triggered by bactericidal cell wall lysis. Therapy should be stopped if another pathogen is confirmed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dexamethasone Prior to Antibiotics",
+          "points": [
+            "Blocks cytokine cascade triggered by bactericidal cell wall lysis",
+            "Reduces cerebral edema, intracranial pressure, and hearing loss",
+            "Proven mortality reduction in Streptococcus pneumoniae meningitis"
+          ]
+        },
+        "right": {
+          "title": "Delayed Dexamethasone",
+          "points": [
+            "Administering steroids after antibiotics fails to blunt cytokine storm",
+            "No proven clinical benefit if started >4 hours after antibiotics",
+            "Must be discontinued if non-pneumococcal etiology is confirmed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Herpes simplex virus** encephalitis (HSV-1) characteristically causes acute focal necrotizing encephalitis of the medial temporal and inferior frontal lobes. Clinical features include fever, altered sensorium, focal seizures, and dysphasia. Diagnosis is established by CSF HSV PCR. Urgent empiric therapy with intravenous **acyclovir** (10 mg/kg every 8 hours for **14** to **21** days) must be started immediately upon clinical suspicion to prevent irreversible parenchymal necrosis and death.",
+      "say": "Herpes simplex virus encephalitis characteristically causes focal necrotizing encephalitis of the temporal and inferior frontal lobes. Patients present with fever, cognitive confusion, focal seizures, and aphasia. Cerebrospinal fluid polymerase chain reaction confirms the diagnosis. Urgent treatment with intravenous acyclovir ten milligrams per kilogram every eight hours for fourteen to twenty one days is lifesaving.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Acute Bacterial Meningitis",
+          "HSV-1 Viral Encephalitis"
+        ],
+        "rows": [
+          [
+            "Primary Site",
+            "Subarachnoid space and leptomeninges",
+            "Brain parenchyma (medial temporal lobes)"
+          ],
+          [
+            "CSF Pleocytosis",
+            "Neutrophilic (>1000 cells/uL)",
+            "Lymphocytic (50-500 cells/uL) with RBCs"
+          ],
+          [
+            "CSF Glucose Ratio",
+            "Markedly reduced (<0.4)",
+            "Normal (>0.6)"
+          ],
+          [
+            "First-line Therapy",
+            "Ceftriaxone + Vancomycin + Dexamethasone",
+            "Intravenous Acyclovir (10 mg/kg q8h)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tuberculous meningitis** typically produces thick, gelatinous **basilar meningeal** exudate encasing cranial nerves and Circle of Willis arteries. Frequent clinical complications include cranial neuropathies (especially CN III and VI), communicating or obstructive hydrocephalus, and obliterative endarteritis leading to basal ganglia lacunar infarctions in the tubercular zone. Cerebrospinal fluid reveals marked lymphocytic pleocytosis, elevated protein exceeding 150 mg/dL, and profoundly depressed CSF glucose.",
+      "say": "Tuberculous meningitis typically produces thick, gelatinous basilar meningeal exudate encasing cranial nerves and Circle of Willis vessels. Frequent complications include cranial nerve palsies, obstructive hydrocephalus, and obliterative endarteritis precipitating basal ganglia lacunar infarctions. Cerebrospinal fluid analysis demonstrates lymphocytic pleocytosis, very high protein, and profoundly depressed glucose.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cns-infections-meningitis-encephalitis-long-case-fig1.webp",
+        "alt": "Pathology and neuroimaging of tuberculous meningitis and infectious encephalitis.",
+        "caption": "Tuberculous meningitis: basilar meningeal enhancement and vasculitic infarctions",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "**Cryptococcal meningitis** in immunocompromised patients presents with headache, fever, and high opening CSF pressure (>250 mmH2O). Diagnosis is confirmed by positive CSF India ink staining demonstrating encapsulated budding yeasts and positive cryptococcal antigen. Gold standard induction therapy requires intravenous liposomal **amphotericin B** (3-4 mg/kg/day) plus oral flucytosine (100 mg/kg/day) for 2 weeks, followed by oral fluconazole consolidation. Serial lumbar punctures relieve severe intracranial hypertension.",
+      "say": "Cryptococcal meningitis in immunocompromised individuals presents with subacute headache, fever, and elevated cerebrospinal fluid opening pressure. Diagnostic confirmation is established by positive India ink microscopy and cryptococcal antigen testing. Standard induction therapy comprises liposomal amphotericin B combined with oral flucytosine for two weeks, followed by oral fluconazole consolidation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Induction: Liposomal Ampho B + Flucytosine (2 wks)"
+          },
+          {
+            "id": "b",
+            "label": "Consolidation: Fluconazole 400-800 mg (8 wks)"
+          },
+          {
+            "id": "c",
+            "label": "Maintenance: Fluconazole 200 mg daily"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Sterilize CSF"
+          ],
+          [
+            "b",
+            "c",
+            "Secondary prevention"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neurocysticercosis** caused by Taenia solium larval stages represents the leading cause of acquired epilepsy in developing nations. Neuroimaging demonstrates parenchymal lesions ranging from non-viable calcified granulomas to active viable cysticerci with mural nodules representing the invaginated **scolex**, generating the pathognomonic hole-with-dot sign on CT and MRI. Anthelmintic therapy with albendazole and praziquantel must be co-administered with corticosteroids to prevent severe neuroinflammation.",
+      "say": "Neurocysticercosis caused by Taenia solium larval encystment represents a major cause of acquired epilepsy worldwide. Neuroimaging reveals lesions ranging from calcified granulomas to viable active cysticerci with mural nodules representing the invaginated scolex. This creates the classic hole with dot sign on neuroimaging. Anthelmintic therapy with albendazole requires concurrent corticosteroids.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-proc-csf-disease.webp",
+        "alt": "Spinal fluid analysis in meningitis types showing CSF chemistry, cell counts, and differential diagnosis.",
+        "caption": "Spinal fluid patterns: CSF opening pressure, protein, glucose, and pleocytosis across meningitis types",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "CNS **toxoplasmosis** in HIV-infected patients with CD4 counts below 100 cells/microliter characteristically presents with fever, headache, and focal neurological deficits. Brain MRI demonstrates multiple ring-enhancing subcortical and basal ganglia lesions with marked surrounding vasogenic edema and mass effect. First-line antimicrobial therapy comprises oral **pyrimethamine**, oral sulfadiazine, and oral leucovorin (folinic acid) for 6 weeks, with clinical and radiological improvement expected within 14 days.",
+      "say": "Central nervous system toxoplasmosis in advanced HIV infection manifests with fever, headache, and focal neurological signs. Neuroimaging demonstrates multiple ring enhancing subcortical lesions surrounded by marked vasogenic edema. First line treatment consists of pyrimethamine, sulfadiazine, and leucovorin for six weeks, with radiographic resolution expected within two weeks.",
+      "vis": null
+    },
+    {
+      "tx": "**Brain abscesses** arise from direct contiguous spread from paranasal sinuses or mastoids, or via hematogenous seeding. On diffusion-weighted MRI, abscesses demonstrate a smooth, thin rim of contrast enhancement with marked central **restriction of diffusion** within the necrotic purulent core. This hyperintense diffusion signal reflects high cellularity and viscous purulent debris, reliably distinguishing bacterial abscesses from cystic or necrotic high-grade glioblastomas and metastases.",
+      "say": "Brain abscesses manifest on magnetic resonance imaging as smooth ring enhancing lesions with prominent central restriction of diffusion within the necrotic purulent core. The intense restriction of diffusion reflects viscous purulent fluid and high cellularity, reliably differentiating pyogenic brain abscesses from necrotic glioblastomas or metastases.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 32",
+    "Harrison 22e Ch. 133",
+    "IDSA Bacterial Meningitis Guidelines"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

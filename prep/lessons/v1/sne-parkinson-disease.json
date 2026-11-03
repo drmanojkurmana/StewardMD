@@ -1,0 +1,156 @@
+{
+  "v": 1,
+  "module": "sne-parkinson-disease",
+  "subject": "ss-neurology",
+  "title": "Parkinson Disease and Motor Fluctuations",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "MDS clinical diagnostic criteria require **parkinsonism** defined by **bradykinesia** combined with at least one of **resting tremor** (4-6 Hz pill-rolling) or **cogwheel rigidity**. Slowness and decremental amplitude during repetitive finger or foot tapping establish bradykinesia. Asymmetric symptom onset and persistent unilateral predominance give strong support to idiopathic Parkinson disease.",
+      "say": "Parkinson disease is an idiopathic neurodegenerative synucleinopathy characterized clinically by resting tremor, cogwheel rigidity, and prominent bradykinesia. Slowness and decremental amplitude during repetitive finger tapping or foot tapping establish the presence of bradykinesia. Asymmetric symptom onset and persistent unilateral predominance give strong support to idiopathic Parkinson disease over atypical parkinsonian syndromes.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-cns-cerebellar-vs-extrapyramidal.webp",
+        "alt": "Clinical diagrams contrasting cerebellar intention tremor and ataxia with extrapyramidal resting tremor and rigidity.",
+        "caption": "Extrapyramidal signs: resting tremor and cogwheel rigidity versus cerebellar tremor",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "The pathological hallmark of Parkinson disease is progressive loss of dopaminergic neurons in the **substantia nigra** pars compacta with intraneuronal Lewy bodies containing misfolded **alpha-synuclein**. Central **anticholinergic** agents like **trihexyphenidyl** help tremor in younger patients, but are contraindicated in the elderly due to severe cognitive impairment, confusion, and urinary retention.",
+      "say": "Central anticholinergic agents like trihexyphenidyl are effective for prominent resting tremor in younger patients with Parkinson disease. However, they are contraindicated in older adults because of severe confusion, memory deficits, urinary retention, and dry mouth.",
+      "vis": null
+    },
+    {
+      "tx": "**Progressive supranuclear palsy** (PSP) is a progressive neurodegenerative tauopathy distinguished from Parkinson disease by early unprovoked postural falls, symmetrical akinesia, axial rigidity, and a supranuclear **vertical gaze** palsy (downward before upward). Midbrain atrophy on sagittal cranial MRI produces the pathognomonic hummingbird or king penguin sign, whereas levodopa responsiveness remains exceptionally poor.",
+      "say": "Progressive supranuclear palsy is an atypical parkinsonian tauopathy characterized by early falls, axial rigidity, and supranuclear vertical gaze palsy. Sagittal magnetic resonance imaging demonstrates midbrain atrophy with preservation of the pons, creating the classic hummingbird sign.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levodopa / Carbidopa",
+          "points": [
+            "Gold standard symptomatic motor efficacy",
+            "Dopa-decarboxylase inhibition reduces peripheral emesis",
+            "Carries higher long-term risk of dyskinesias"
+          ]
+        },
+        "right": {
+          "title": "Dopamine Agonists",
+          "points": [
+            "Pramipexole and ropinirole directly stimulate D2/D3",
+            "Lower initial rate of motor fluctuations",
+            "High risk of impulse control disorders and somnolence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Non-ergot dopamine agonists like **pramipexole** and ropinirole directly stimulate striatal D2 and D3 receptors, carrying lower initial risk of motor fluctuations than levodopa, but frequently cause **impulse control disorders** (pathological gambling, hypersexuality, compulsive shopping) and excessive daytime sleepiness. These behavioural complications mandate close clinical surveillance and prompt dose reduction when identified.",
+      "say": "Non ergot dopamine agonists like pramipexole and ropinirole directly stimulate striatal dopamine receptors. They are often employed as initial monotherapy in younger patients to postpone levodopa induced motor complications. However, clinicians must vigilantly monitor for impulse control disorders including pathological gambling, hypersexuality, and compulsive shopping driven by ventral striatal stimulation.",
+      "vis": null
+    },
+    {
+      "tx": "**Entacapone** is a selective peripheral catechol-O-methyltransferase (COMT) inhibitor that extends levodopa plasma half-life and reduces daily off-time in patients experiencing motor fluctuations and **wearing-off**. It must be administered concurrently with each oral levodopa dose, occasionally causing benign orange-brown urine discoloration and transient dopaminergic diarrhea.",
+      "say": "After several years of therapy, patients frequently develop motor fluctuations characterized by the wearing off phenomenon. The duration of symptomatic benefit from each levodopa dose shortens as presynaptic dopaminergic terminals lose their storage capacity. Adding a catechol O methyltransferase inhibitor like entacapone or a monoamine oxidase B inhibitor helps smooth out plasma drug fluctuations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Presynaptic terminal loss"
+          },
+          {
+            "id": "b",
+            "label": "Shortened plasma half-life"
+          },
+          {
+            "id": "c",
+            "label": "Wearing-off & motor fluctuations"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Reduced dopamine storage"
+          ],
+          [
+            "b",
+            "c",
+            "Pulsatile striatal stimulation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Peak-dose **dyskinesias** are involuntary choreic, athetoid, or ballistic movements occurring when levodopa concentrations reach maximum brain levels. They arise from non-physiological, pulsatile stimulation of denervated striatal dopamine receptors. **Amantadine**, an NMDA glutamate receptor antagonist and dopamine reuptake inhibitor, is the only established oral agent that selectively suppresses levodopa-induced dyskinesias without worsening underlying parkinsonian motor deficits.",
+      "say": "Peak dose dyskinesias represent choreic involuntary movements that emerge when brain dopamine concentrations reach maximum levels. They develop from intermittent pulsatile stimulation of sensitized striatal receptors. Amantadine acts as an uncompetitive N methyl D aspartate receptor antagonist and represents the primary oral medication that reduces dyskinesias without compromising motor control.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Motor Complication",
+          "Clinical Manifestation",
+          "First-line Adjustment Strategy"
+        ],
+        "rows": [
+          [
+            "Wearing-off",
+            "End-of-dose akinesia and rigidity",
+            "Add entacapone, rasagiline, or increase dose frequency"
+          ],
+          [
+            "Peak-dose dyskinesia",
+            "Choreiform movements at peak drug levels",
+            "Reduce individual levodopa doses and add amantadine"
+          ],
+          [
+            "Off-period dystonia",
+            "Painful early morning foot inversion",
+            "Add bedtime controlled-release levodopa or rotigotine patch"
+          ],
+          [
+            "Freezing of gait",
+            "Sudden transient inability to step forward",
+            "Visual cueing, physiotherapy, adjust dopaminergic dose"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "REM **sleep behaviour disorder** (RBD), **anosmia**, and chronic constipation frequently precede clinical motor manifestations of Parkinson disease by a decade or more. Freezing of gait causes sudden episodic arrests of forward movement in advanced disease, improving with visual cues and sensory metronomes.",
+      "say": "Rapid eye movement sleep behaviour disorder, anosmia, and constipation occur years before Parkinson motor symptoms emerge clinically. Freezing of gait presents with sudden arrests of stepping in advanced stages. External visual cueing techniques provide effective assistance to overcome motor blocks.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-paed-cns-gait_movement.webp",
+        "alt": "Clinical illustration of gait examination, balance testing, and abnormal movement patterns.",
+        "caption": "Gait assessment: gait initiation, festination, and balance evaluation in extrapyramidal disease",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Advanced Parkinson disease with severe motor fluctuations refractory to medical optimization warrants evaluation for surgical neuromodulation. **Deep brain stimulation** of the **subthalamic nucleus** (STN) or **globus pallidus internus** (GPi) provides profound reductions in off-time, dyskinesias, and medication requirements. Candidates must exhibit robust levodopa responsiveness, absence of severe cognitive dementia, and medically managed psychiatric disease before undergoing stereotactic lead implantation.",
+      "say": "Deep brain stimulation is an effective surgical intervention for patients with severe motor fluctuations and dyskinesias refractory to medical therapy. High frequency electrical stimulation of the subthalamic nucleus or globus pallidus internus markedly reduces off periods and permits substantial medication reductions. Favourable levodopa responsiveness and preserved cognitive function are mandatory selection criteria.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 39",
+    "Harrison 22e Ch. 438",
+    "MDS Clinical Diagnostic Criteria"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
