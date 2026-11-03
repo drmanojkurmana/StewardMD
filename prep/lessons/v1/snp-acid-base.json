@@ -6,8 +6,8 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "Serum **anion gap** is calculated as [Na+] - ([Cl-] + [HCO3-]), where the normal range of 8 to 12 mmol/L must be adjusted for hypoalbuminemia by adding 2.5 mmol/L for every 1.0 g/dL drop in serum albumin below 4.0 g/dL. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Serum anion gap is calculated as [Na+] - ([Cl-] + [HCO3-]), where the normal range of 8 to 12 mmol/L must be adjusted for hypoalbuminemia by adding 2.5 mmol/L for every 1.0 g/dL drop in serum albumin below 4.0 g/dL. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "Serum **anion gap** is calculated as [Na+] - ([Cl-] + [HCO3-]), where the normal range of 8 to 12 mmol/L must be adjusted for hypoalbuminemia by adding 2.5 mmol/L for every 1.0 g/dL drop in serum albumin below 4.0 g/dL.",
+   "say": "Serum anion gap is calculated as [Na+] - ([Cl-] + [HCO3-]), where the normal range of 8 to 12 mmol/L must be adjusted for hypoalbuminemia by adding 2 point 5 mmol/L for every 1 point 0 g/dL drop in serum albumin below 4 point 0 g/dL.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/snp-acid-base-fig1.webp",
@@ -17,8 +17,8 @@
    }
   },
   {
-   "tx": "**Winter formula** predicts compensatory arterial PCO2 in metabolic acidosis as (1.5 x [HCO3-]) + 8 +/- 2; a measured PCO2 higher indicates concomitant respiratory acidosis, while a lower value signifies concurrent respiratory alkalosis. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Winter formula predicts compensatory arterial PCO2 in metabolic acidosis as (1.5 x [HCO3-]) + 8 +/- 2; a measured PCO2 higher indicates concomitant respiratory acidosis, while a lower value signifies concurrent respiratory alkalosis. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "**Winter formula** predicts compensatory arterial PCO2 in metabolic acidosis as (1.5 x [HCO3-]) + 8 +/- 2; a measured PCO2 higher indicates concomitant respiratory acidosis, while a lower value signifies concurrent respiratory alkalosis. One side is Winter Formula, and the other side is Mixed Disorders.",
+   "say": "Winter formula predicts compensatory arterial PCO2 in metabolic acidosis as (1 point 5 x [HCO3-]) + 8 +/- 2; a measured PCO2 higher indicates concomitant respiratory acidosis, while a lower value signifies concurrent respiratory alkalosis. One side is Winter Formula, and the other side is Mixed Disorders.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -40,8 +40,8 @@
    }
   },
   {
-   "tx": "The **delta-delta ratio** (delta AG / delta HCO3-) distinguishes mixed high anion gap and non-anion gap metabolic acidosis: a ratio < 0.8 indicates mixed HAGMA and NAGMA, while a ratio > 2.0 suggests concurrent metabolic alkalosis or pre-existing hyperbicarbonatemia. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "The delta-delta ratio (delta AG / delta HCO3-) distinguishes mixed high anion gap and non-anion gap metabolic acidosis: a ratio less than 0.8 indicates mixed HAGMA and NAGMA, while a ratio greater than 2.0 suggests concurrent metabolic alkalosis or pre-existing hyperbicarbonatemia. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "The **delta-delta ratio** (delta AG / delta HCO3-) distinguishes mixed high anion gap and non-anion gap metabolic acidosis: a ratio < 0.8 indicates mixed HAGMA and NAGMA, while a ratio > 2.0 suggests concurrent metabolic alkalosis or pre-existing hyperbicarbonatemia. The paired value for Ratio 1.0 to 2.0 is Pure high anion gap metabolic acidosis (HAGMA).",
+   "say": "The delta-delta ratio (delta AG / delta HCO3-) distinguishes mixed high anion gap and non-anion gap metabolic acidosis: a ratio less than 0 point 8 indicates mixed HAGMA and NAGMA, while a ratio greater than 2 point 0 suggests concurrent metabolic alkalosis or pre-existing hyperbicarbonatemia. The paired value for Ratio 1 point 0 to 2 point 0 is Pure high anion gap metabolic acidosis (HAGMA).",
    "vis": {
     "kind": "table",
     "cols": [
@@ -69,8 +69,8 @@
    }
   },
   {
-   "tx": "**Osmolar gap** exceeding 10 mOsm/kg H2O (calculated as Measured Osmolality minus [2 x Na + Glucose/18 + BUN/2.8]) strongly indicates ingestion of low-molecular-weight toxic alcohols including ethylene glycol, methanol, or isopropanol. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Osmolar gap exceeding 10 mOsm/kg H2O (calculated as Measured Osmolality minus [2 x Na + Glucose/18 + BUN/2.8]) strongly indicates ingestion of low-molecular-weight toxic alcohols including ethylene glycol, methanol, or isopropanol. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "**Osmolar gap** exceeding 10 mOsm/kg H2O (calculated as Measured Osmolality minus [2 x Na + Glucose/18 + BUN/2.8]) strongly indicates ingestion of low-molecular-weight toxic alcohols including ethylene glycol, methanol, or isopropanol. The image is toxic alcohol metabolism and serum osmolal gap diagnostic algorithm.",
+   "say": "Osmolar gap exceeding 10 mOsm/kg H2O (calculated as Measured Osmolality minus [2 x Na + Glucose/18 + BUN/2 point 8]) strongly indicates ingestion of low-molecular-weight toxic alcohols including ethylene glycol, methanol, or isopropanol. The image is toxic alcohol metabolism and serum osmolal gap diagnostic algorithm.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/acid-base-disorders-and-anion-gap-fig1.webp",
@@ -80,8 +80,8 @@
    }
   },
   {
-   "tx": "**Urine anion gap** calculated as [Na+] + [K+] - [Cl-] differentiates normal anion gap metabolic acidosis: a negative value indicates appropriate renal ammonium excretion (gastrointestinal bicarbonate loss), whereas a positive value signifies impaired renal acidification. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting NAGMA.",
-   "say": "Urine anion gap calculated as [Na+] + [K+] - [Cl-] differentiates normal anion gap metabolic acidosis: a negative value indicates appropriate renal ammonium excretion (gastrointestinal bicarbonate loss), whereas a positive value signifies impaired renal acidification. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting NAGMA.",
+   "tx": "**Urine anion gap** calculated as [Na+] + [K+] - [Cl-] differentiates normal anion gap metabolic acidosis: a negative value indicates appropriate renal ammonium excretion (gastrointestinal bicarbonate loss), whereas a positive value signifies impaired renal acidification. One side is Negative Urine Gap, and the other side is Positive Urine Gap.",
+   "say": "Urine anion gap calculated as [Na+] + [K+] - [Cl-] differentiates normal anion gap metabolic acidosis: a negative value indicates appropriate renal ammonium excretion (gastrointestinal bicarbonate loss), whereas a positive value signifies impaired renal acidification. One side is Negative Urine Gap, and the other side is Positive Urine Gap.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -103,8 +103,8 @@
    }
   },
   {
-   "tx": "**Chloride-responsive** metabolic alkalosis exhibits urine chloride < 20 mmol/L and responds to intravenous 0.9% saline infusion (vomiting, nasogastric suction, prior diuretic use), whereas chloride-resistant alkalosis exhibits urine chloride > 20 mmol/L and persistent mineralocorticoid excess. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Chloride-responsive metabolic alkalosis exhibits urine chloride less than 20 mmol/L and responds to intravenous 0.9% saline infusion (vomiting, nasogastric suction, prior diuretic use), whereas chloride-resistant alkalosis exhibits urine chloride greater than 20 mmol/L and persistent mineralocorticoid excess. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "**Chloride-responsive** metabolic alkalosis exhibits urine chloride < 20 mmol/L and responds to intravenous 0.9% saline infusion (vomiting, nasogastric suction, prior diuretic use), whereas chloride-resistant alkalosis exhibits urine chloride > 20 mmol/L and persistent mineralocorticoid excess. The first step is Normal AG acidosis with alkaline urine.",
+   "say": "Chloride-responsive metabolic alkalosis exhibits urine chloride less than 20 mmol/L and responds to intravenous 0 point 9% saline infusion (vomiting, nasogastric suction, prior diuretic use), whereas chloride-resistant alkalosis exhibits urine chloride greater than 20 mmol/L and persistent mineralocorticoid excess. The first step is Normal AG acidosis with alkaline urine.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -142,8 +142,8 @@
    }
   },
   {
-   "tx": "In acute **respiratory acidosis**, plasma bicarbonate rises by 1 mmol/L for every 10 mmHg elevation in PCO2, whereas in chronic respiratory acidosis renal compensation elevates bicarbonate by 3.5 to 4 mmol/L per 10 mmHg PCO2 increase. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "In acute respiratory acidosis, plasma bicarbonate rises by 1 mmol/L for every 10 mmHg elevation in PCO2, whereas in chronic respiratory acidosis renal compensation elevates bicarbonate by 3.5 to 4 mmol/L per 10 mmHg PCO2 increase. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "In acute **respiratory acidosis**, plasma bicarbonate rises by 1 mmol/L for every 10 mmHg elevation in PCO2, whereas in chronic respiratory acidosis renal compensation elevates bicarbonate by 3.5 to 4 mmol/L per 10 mmHg PCO2 increase. The paired value for Chloride-responsive is Under 20 to 25 mEq/L.",
+   "say": "In acute respiratory acidosis, plasma bicarbonate rises by 1 mmol/L for every 10 mmHg elevation in PCO2, whereas in chronic respiratory acidosis renal compensation elevates bicarbonate by 3 point 5 to 4 mmol/L per 10 mmHg PCO2 increase. The paired value for Chloride-responsive is Under 20 to 25 mEq/L.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -171,8 +171,8 @@
    }
   },
   {
-   "tx": "**Stewart approach** is essential. Stewart physicochemical approach evaluates acid-base balance via three independent variables: strong ion difference (SID), total weak non-volatile acids (ATOT), and partial pressure of carbon dioxide (PCO2). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Stewart approach is essential. Stewart physicochemical approach evaluates acid-base balance via three independent variables: strong ion difference (SID), total weak non-volatile acids (ATOT), and partial pressure of carbon dioxide (PCO2). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "**Stewart** approach evaluates acid-base balance via three independent variables: strong ion difference (SID), total weak non-volatile acids (ATOT), and partial pressure of carbon dioxide (PCO2). One side is Renal Compensation, and the other side is Stewart Physicochemical Model. A key point is Bicarbonate rises 3.5 mEq/L per 10 pCO2.",
+   "say": "Stewart approach evaluates acid-base balance via three independent variables: strong ion difference (SID), total weak non-volatile acids (ATOT), and partial pressure of carbon dioxide (PCO2). One side is Renal Compensation, and the other side is Stewart Physicochemical Model. A key point is Bicarbonate rises 3 point 5 mEq/L per 10 pCO2.",
    "vis": {
     "kind": "compare",
     "left": {

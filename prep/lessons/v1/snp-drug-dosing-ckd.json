@@ -6,8 +6,8 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Kidney clearance** of drugs depends on glomerular filtration, tubular secretion (via OCT, OAT, P-glycoprotein), and tubular reabsorption, requiring dosing adjustment based on estimated GFR or creatinine clearance. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Kidney clearance of drugs depends on glomerular filtration, tubular secretion (via OCT, OAT, P-glycoprotein), and tubular reabsorption, requiring dosing adjustment based on estimated GFR or creatinine clearance. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "**Kidney clearance** of drugs depends on glomerular filtration, tubular secretion (via OCT, OAT, P-glycoprotein), and tubular reabsorption, requiring dosing adjustment based on estimated GFR or creatinine clearance. The image is equations and pharmacokinetic adjustments for drug dosing in renal impairment.",
+   "say": "Kidney clearance of drugs depends on glomerular filtration, tubular secretion (via OCT, OAT, P-glycoprotein), and tubular reabsorption, requiring dosing adjustment based on estimated GFR or creatinine clearance. The image is equations and pharmacokinetic adjustments for drug dosing in renal impairment.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/snp-drug-dosing-ckd-fig1.webp",
@@ -17,8 +17,8 @@
    }
   },
   {
-   "tx": "The **loading dose** of a drug depends exclusively on the apparent volume of distribution (Vd) and target plasma concentration, remaining identical in CKD and AKI compared with normal kidney function regardless of clearance. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting target concentration.",
-   "say": "The loading dose of a drug depends exclusively on the apparent volume of distribution (Vd) and target plasma concentration, remaining identical in CKD and AKI compared with normal kidney function regardless of clearance. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice, reflecting target concentration.",
+   "tx": "The **loading dose** equals the target concentration times the volume of distribution, so clearance does not set it. It is unchanged in CKD when the volume of distribution is unchanged, but it must be reduced when that volume shrinks. Digoxin is the exam example: its volume of distribution falls by about 30% to 50% in advanced CKD, so the load is smaller.",
+   "say": "The loading dose equals the target concentration times the volume of distribution, so clearance does not set it. It is unchanged in CKD when the volume of distribution is unchanged, but it must be reduced when that volume shrinks. Digoxin is the exam example: its volume of distribution falls by about 30% to 50% in advanced CKD, so the load is smaller.",
    "vis": {
     "kind": "compare",
     "left": {
@@ -26,7 +26,7 @@
      "points": [
       "Determined by volume of distribution (Vd)",
       "Target concentration x Vd",
-      "Never reduced based on low GFR"
+      "Reduce the load when Vd shrinks, as with digoxin"
      ]
     },
     "right": {
@@ -40,8 +40,8 @@
    }
   },
   {
-   "tx": "**Maintenance dose** adjustments in renal impairment utilize either dose reduction (maintaining normal dosing interval, optimal for time-dependent antibiotics like beta-lactams) or interval extension (maintaining normal dose, preferred for concentration-dependent antibiotics like aminoglycosides). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Maintenance dose adjustments in renal impairment utilize either dose reduction (maintaining normal dosing interval, optimal for time-dependent antibiotics like beta-lactams) or interval extension (maintaining normal dose, preferred for concentration-dependent antibiotics like aminoglycosides). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "**Maintenance dose** adjustments in renal impairment utilize either dose reduction (maintaining normal dosing interval, optimal for time-dependent antibiotics like beta-lactams) or interval extension (maintaining normal dose, preferred for concentration-dependent antibiotics like aminoglycosides). The paired value for Dose reduction is Lower dose, constant dosing interval.",
+   "say": "Maintenance dose adjustments in renal impairment utilize either dose reduction (maintaining normal dosing interval, optimal for time-dependent antibiotics like beta-lactams) or interval extension (maintaining normal dose, preferred for concentration-dependent antibiotics like aminoglycosides). The paired value for Dose reduction is Lower dose, constant dosing interval.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -69,8 +69,8 @@
    }
   },
   {
-   "tx": "Direct oral anticoagulants (**DOACs**) clearance varies significantly by renal route: dabigatran has 80% renal excretion (contraindicated if CrCl < 30 mL/min), edoxaban 50%, rivaroxaban 33%, and apixaban 27% (lowest renal dependence). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Direct oral anticoagulants (DOACs) clearance varies significantly by renal route: dabigatran has 80% renal excretion (contraindicated if CrCl less than 30 mL/min), edoxaban 50%, rivaroxaban 33%, and apixaban 27% (lowest renal dependence). This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "Direct oral anticoagulants (**DOACs**) clearance varies significantly by renal route: dabigatran has 80% renal excretion (contraindicated if CrCl < 30 mL/min), edoxaban 50%, rivaroxaban 33%, and apixaban 27% (lowest renal dependence). The first step is Uremic toxins accumulate in advanced CKD.",
+   "say": "Direct oral anticoagulants (DOACs) clearance varies significantly by renal route: dabigatran has 80% renal excretion (contraindicated if CrCl less than 30 mL/min), edoxaban 50%, rivaroxaban 33%, and apixaban 27% (lowest renal dependence). The first step is Uremic toxins accumulate in advanced CKD.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -108,8 +108,8 @@
    }
   },
   {
-   "tx": "Drug **dialyzability** during hemodialysis is governed by low molecular weight (< 500 to 1,000 Da), low plasma protein binding (< 80%), small volume of distribution (< 1 L/kg), and high water solubility. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 1000.",
-   "say": "Drug dialyzability during hemodialysis is governed by low molecular weight ( less than 500 to 1,000 Da), low plasma protein binding ( less than 80%), small volume of distribution ( less than 1 L/kg), and high water solubility. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice with diagnostic threshold 1000.",
+   "tx": "Drug **dialyzability** during hemodialysis is governed by low molecular weight (< 500 to 1000 Da), low plasma protein binding (< 80%), small volume of distribution (< 1 L/kg), and high water solubility. The image is renal handling of analgesic metabolites and neurotoxicity risk.",
+   "say": "Drug dialyzability during hemodialysis is governed by low molecular weight ( less than 500 to 1000 Da), low plasma protein binding ( less than 80%), small volume of distribution ( less than 1 L/kg), and high water solubility. The image is renal handling of analgesic metabolites and neurotoxicity risk.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/analgesic-nephropathy-fig1.webp",
@@ -119,8 +119,8 @@
    }
   },
   {
-   "tx": "Low-molecular-weight heparins (**enoxaparin**) depend on renal elimination and accumulate in severe kidney disease (eGFR < 30 mL/min/1.73m2), necessitating dose reduction by 50% or substitution with unfractionated heparin with anti-Xa monitoring. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Low-molecular-weight heparins (enoxaparin) depend on renal elimination and accumulate in severe kidney disease (eGFR less than 30 mL/min/1.73m2), necessitating dose reduction by 50% or substitution with unfractionated heparin with anti-Xa monitoring. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "Low-molecular-weight heparins (**enoxaparin**) depend on renal elimination and accumulate in severe kidney disease (eGFR < 30 mL/min/1.73m2), necessitating dose reduction by 50% or substitution with unfractionated heparin with anti-Xa monitoring. The paired value for Enoxaparin (LMWH) is Renal filtration and excretion.",
+   "say": "Low-molecular-weight heparins (enoxaparin) depend on renal elimination and accumulate in severe kidney disease (eGFR less than 30 mL/min/1 point 73m2), necessitating dose reduction by 50% or substitution with unfractionated heparin with anti-Xa monitoring. The paired value for Enoxaparin (LMWH) is Renal filtration and excretion.",
    "vis": {
     "kind": "table",
     "cols": [
@@ -148,8 +148,8 @@
    }
   },
   {
-   "tx": "**Cefepime neurotoxicity** occurs in unadjusted renal impairment, characterized by altered mental status, myoclonus, choreoathetosis, and non-convulsive status epilepticus with triphasic waves on EEG. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice. Comprehensive nephrology clinical assessment confirms these core diagnostic findings.",
-   "say": "Cefepime neurotoxicity occurs in unadjusted renal impairment, characterized by altered mental status, myoclonus, choreoathetosis, and non-convulsive status epilepticus with triphasic waves on EEG. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice. Comprehensive nephrology clinical assessment confirms these core diagnostic findings.",
+   "tx": "**Cefepime neurotoxicity** occurs in unadjusted renal impairment, characterized by altered mental status, myoclonus, choreoathetosis, and non-convulsive status epilepticus with triphasic waves on EEG. The first step is Cefepime accumulation in declining GFR. Triphasic waves on the EEG are the clue that the drug has accumulated.",
+   "say": "Cefepime neurotoxicity occurs in unadjusted renal impairment, characterized by altered mental status, myoclonus, choreoathetosis, and non-convulsive status epilepticus with triphasic waves on EEG. The first step is Cefepime accumulation in declining GFR. Triphasic waves on the EEG are the clue that the drug has accumulated.",
    "vis": {
     "kind": "flow",
     "nodes": [
@@ -187,8 +187,8 @@
    }
   },
   {
-   "tx": "Morphine and meperidine undergo hepatic metabolism into neurotoxic and sedating active metabolites (**morphine-6-glucuronide** and normeperidine) that accumulate in renal failure; fentanyl and hydromorphone are preferred opioids in CKD. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
-   "say": "Morphine and meperidine undergo hepatic metabolism into neurotoxic and sedating active metabolites (morphine-6-glucuronide and normeperidine) that accumulate in renal failure; fentanyl and hydromorphone are preferred opioids in CKD. This established clinical parameter guides diagnostic evaluation, risk stratification, and evidence-based therapeutic management in specialized nephrology practice.",
+   "tx": "Morphine and meperidine undergo hepatic metabolism into neurotoxic and sedating active metabolites (**morphine-6-glucuronide** and normeperidine) that accumulate in renal failure; fentanyl and hydromorphone are preferred opioids in CKD. The paired value for Dabigatran is 80% renal excretion. The paired value for Rivaroxaban is 33% active renal excretion.",
+   "say": "Morphine and meperidine undergo hepatic metabolism into neurotoxic and sedating active metabolites (morphine-6-glucuronide and normeperidine) that accumulate in renal failure; fentanyl and hydromorphone are preferred opioids in CKD. The paired value for Dabigatran is 80% renal excretion. The paired value for Rivaroxaban is 33% active renal excretion.",
    "vis": {
     "kind": "table",
     "cols": [
