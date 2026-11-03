@@ -1,41 +1,41 @@
-# Lane B State: Super-Speciality Lessons
+# Lane A State: Super-Speciality Lessons
 
-- **Lane**: B
+- **Lane**: A
 - **Session Started**: 2026-11-03
-- **Current Subject**: Plastic Surgery (`ss-plastic-surgery`)
+- **Current Subject**: Medical Oncology (`ss-medical-oncology`)
 - **Current Stage**: Stage 1 (Blueprint & Taxonomy)
 - **Subject Order**:
-  1. Plastic Surgery (`ss-plastic-surgery`)
-  2. Urology (`ss-urology`)
-  3. Surgical Gastroenterology (`ss-surgical-gastroenterology`, NEW subject, MCh GI surgery, NEET-SS surgical group)
-  4. Neurosurgery (`ss-neurosurgery`)
-  5. Paediatric Surgery (`ss-paediatric-surgery`)
-  6. CTVS (`ss-ctvs`)
-  7. OBG/Gynaecology SS (`ss-gynaecology-ss`, NEW subject, NEET-SS OBG group paper)
-  8. Reproductive Medicine (`ss-reproductive-medicine`)
-  9. Gynaecological Oncology (`ss-gynaecological-oncology`)
+  1. Medical Oncology (`ss-medical-oncology`)
+  2. Cardiology (`ss-cardiology`)
+  3. Gastroenterology (`ss-gastroenterology`)
+  4. Radiology (`ss-radiology` — ~670 radbook/ctcbook lessons exist, map to blueprint first and fill gaps)
+  5. Neurology (`ss-neurology`)
+  6. Nephrology (`ss-nephrology`)
+  7. Endocrinology (`ss-endocrinology`)
+  8. Critical Care (`ss-critical-care`)
+  9. Rheumatology + Clinical Immunology (`ss-rheumatology-immunology`)
 
 ## Progress Summary
 | Subject | Stage 1 (Blueprint & Taxonomy) | Stage 2 (Lessons Written) | Coverage Pass | Gates Pass | PR Link |
 |---|---|---|---|---|---|
-| ss-plastic-surgery | In progress | Pending | Pending | Pending | - |
-| ss-urology | Pending | Pending | Pending | Pending | - |
-| ss-surgical-gastroenterology | Pending | Pending | Pending | Pending | - |
-| ss-neurosurgery | Pending | Pending | Pending | Pending | - |
-| ss-paediatric-surgery | Pending | Pending | Pending | Pending | - |
-| ss-ctvs | Pending | Pending | Pending | Pending | - |
-| ss-gynaecology-ss | Pending | Pending | Pending | Pending | - |
-| ss-reproductive-medicine | Pending | Pending | Pending | Pending | - |
-| ss-gynaecological-oncology | Pending | Pending | Pending | Pending | - |
+| ss-medical-oncology | In progress | Pending | Pending | Pending | - |
+| ss-cardiology | Pending | Pending | Pending | Pending | - |
+| ss-gastroenterology | Pending | Pending | Pending | Pending | - |
+| ss-radiology | Pending | Pending | Pending | Pending | - |
+| ss-neurology | Pending | Pending | Pending | Pending | - |
+| ss-nephrology | Pending | Pending | Pending | Pending | - |
+| ss-endocrinology | Pending | Pending | Pending | Pending | - |
+| ss-critical-care | Pending | Pending | Pending | Pending | - |
+| ss-rheumatology-immunology | Pending | Pending | Pending | Pending | - |
 
-## Gates & Tooling Setup
-- [x] Initialise STATE.md
-- [ ] Implement `checkNarration` gate in `tools/prep-lessons.mjs` & test in `test/prep-lessons.test.mjs` (Gate 3)
-- [ ] Scan existing lessons and log to `.fleet-reports/LESSONS-GARBLED.md`
-- [ ] Implement `tools/prep-lesson-coverage.mjs` & test in `test/prep-lesson-coverage.test.mjs` (Gate 2)
+## Initial Gates & Tooling Setup
+- [x] Initial Dark-Mode Lesson Card Bug Fix (`prep-pearl.css:21`, follow `body.dark`) -> PR #1890 opened
+- [x] Cherry-pick Gate 2 & Gate 3 tools from Lane B (`commit a5d765940`)
+- [x] Initialise Lane A `STATE.md`
 
-## Next Immediate Steps
-1. Add `checkNarration` to `tools/prep-lessons.mjs` and wire into `gateStep`.
-2. Generate `.fleet-reports/LESSONS-GARBLED.md`.
-3. Create `tools/prep-lesson-coverage.mjs` and `test/prep-lesson-coverage.test.mjs`.
-4. Author Plastic Surgery blueprint `prep/blueprints/ss/ss-plastic-surgery.json` and expand taxonomy.
+## Next Immediate Steps (Medical Oncology)
+1. Examine book sources for Medical Oncology: DeVita, Harrison Oncology, precision-oncology / pharmacology reviews, ESMO / NCCN guidelines.
+2. Check existing Medical Oncology taxonomy in `prep/taxonomy/` / `taxonomy.json` / `taxonomy-extra.json` and MCQ bank counts.
+3. Write `prep/blueprints/ss/ss-medical-oncology.json` (40-120 high-yield topics, 8-15 mustKnow facts per topic with citations).
+4. Update taxonomy so modules match the blueprint (never rename/delete existing module IDs).
+5. Open Stage 1 PR (Blueprint & Taxonomy) for review.
