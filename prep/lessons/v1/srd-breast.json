@@ -1,151 +1,230 @@
 {
  "v": 1,
  "module": "srd-breast",
- "subject": "ss-radiology",
- "title": "Breast imaging: hamartoma, fibroadenoma and phyllodes tumour",
- "minutes": 6,
+ "title": "Breast imaging",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "A **breast hamartoma** is a benign, developmental, tumour-like malformation rather than a true neoplasm. Ducts, lobules, fibrous stroma and mature fat are arranged haphazardly inside a thin **pseudocapsule**. Because the tissue is cytologically normal, it grows slowly and stays well defined.",
-   "say": "A breast hamartoma is a benign, developmental, tumour-like malformation rather than a true neoplasm. Ducts, lobules, fibrous stroma and mature fat are arranged haphazardly inside a thin pseudocapsule. Because the tissue is cytologically normal, it grows slowly and stays well defined.",
-   "vis": null
+   "tx": "Standardised mammographic classification directs diagnostic and interventional workflows. The **BI-RADS** assessment categories span from 0 for incomplete evaluations requiring further imaging, to 1 for negative exams, through to 6 for confirmed biopsy-proven **malignancy** undergoing definitive management in clinical oncology practice.",
+   "say": "Standardised mammographic classification directs diagnostic and interventional workflows. The BI-RADS assessment categories span from 0 for incomplete evaluations requiring further imaging, to 1 for negative exams, through to 6 for confirmed biopsy-proven malignancy undergoing definitive management in clinical oncology practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "BI-RADS Category",
+     "Assessment",
+     "Management Recommendation"
+    ],
+    "rows": [
+     [
+      "BI-RADS 0",
+      "Incomplete",
+      "Additional imaging or prior film comparison"
+     ],
+     [
+      "BI-RADS 1",
+      "Negative (0% risk)",
+      "Routine screening"
+     ],
+     [
+      "BI-RADS 2",
+      "Benign finding (0% risk)",
+      "Routine screening"
+     ],
+     [
+      "BI-RADS 3",
+      "Probably benign (< 2% risk)",
+      "Short-interval follow-up at 6 months"
+     ]
+    ]
+   }
   },
   {
-   "tx": "On mammography, the hallmark is an encapsulated lesion with both fat and soft-tissue density, called the **breast within a breast** sign. Fat alone would suggest a lipoma, so the mixed density is the key clue. Ultrasound shows a heterogeneous, circumscribed mass.",
-   "say": "On mammography, the hallmark is an encapsulated lesion with both fat and soft-tissue density, called the breast within a breast sign. Fat alone would suggest a lipoma, so the mixed density is the key clue. Ultrasound shows a heterogeneous, circumscribed mass.",
+   "tx": "Category 4 lesions warrant histological evaluation due to intermediate malignancy risk. The **BI-RADS 4** category encompasses suspicious findings with risk spanning from 2% to 95%, subdivided into 4A with low suspicion (2% to 10%), 4B with intermediate suspicion (10% to 50%), and 4C with high suspicion of **malignancy** (50% to 95%).",
+   "say": "Category 4 lesions warrant histological evaluation due to intermediate malignancy risk. The BI-RADS 4 category encompasses suspicious findings with risk spanning from 2% to 95%, subdivided into 4A with low suspicion from 2% to 10%, 4B with intermediate suspicion from 10% to 50%, and 4C with high suspicion of malignancy from 50% to 95%.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Hamartoma",
+     "title": "Subcategory 4A",
      "points": [
-      "Mixed fat and glandular density",
-      "Encapsulated, breast within a breast",
-      "Slow, well-defined growth"
+      "Low suspicion of malignancy",
+      "Risk range > 2% to 10%",
+      "Partially circumscribed complicated cyst",
+      "Biopsy required for tissue diagnosis"
      ]
     },
     "right": {
-     "title": "Lipoma",
+     "title": "Subcategories 4B and 4C",
      "points": [
-      "Fat density only",
-      "Encapsulated and well defined",
-      "Usually no glandular elements"
+      "Intermediate to high suspicion",
+      "Risk range 4B (10% to 50%), 4C (50% to 95%)",
+      "Amorphous or fine pleomorphic calcifications",
+      "Urgent core needle biopsy indicated"
      ]
     }
    }
   },
   {
-   "tx": "Because a hamartoma contains normal breast elements, a **core needle biopsy** can look deceptively normal. Always correlate the radiology with the pathology. A benign biopsy that conflicts with a suspicious image needs further action, such as repeat biopsy or excision.",
-   "say": "Because a hamartoma contains normal breast elements, a core needle biopsy can look deceptively normal. Always correlate the radiology with the pathology. A benign biopsy that conflicts with a suspicious image needs further action, such as repeat biopsy or excision.",
-   "vis": null
-  },
-  {
-   "tx": "Management depends on the picture. Typical lesions get reassurance and **interval imaging** to confirm stability. Excision is reserved for uncertain diagnoses or symptomatic lesions. Breast MRI helps large or atypical cases. Hamartomas carry an excellent prognosis, and malignancy arising within them is rare.",
-   "say": "Management depends on the picture. Typical lesions get reassurance and interval imaging to confirm stability. Excision is reserved for uncertain diagnoses or symptomatic lesions. Breast MRI helps large or atypical cases. Hamartomas carry an excellent prognosis, and malignancy arising within them is rare.",
+   "tx": "Morphological patterns of mineral deposits reflect benign secretion versus aggressive intraductal necrosis. High-risk suspicious **microcalcifications** indicative of **ductal carcinoma in situ** include fine linear, branching, and fine pleomorphic calcifications distributed in a linear or segmental ductal distribution across the breast parenchyma.",
+   "say": "Morphological patterns of mineral deposits reflect benign secretion versus aggressive intraductal necrosis. High-risk suspicious microcalcifications indicative of ductal carcinoma in situ include fine linear, branching, and fine pleomorphic calcifications distributed in a linear or segmental ductal distribution across the breast parenchyma.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Mixed density lesion"
+      "label": "Ductal carcinoma in situ"
      },
      {
       "id": "b",
-      "label": "Core biopsy with correlation"
+      "label": "Comedonecrosis in duct"
      },
      {
       "id": "c",
-      "label": "Concordant benign"
+      "label": "Fine linear branching"
      },
      {
       "id": "d",
-      "label": "Interval imaging"
-     },
-     {
-      "id": "e",
-      "label": "Discordant: excise"
+      "label": "Segmental distribution"
      }
     ],
     "edges": [
      [
       "a",
-      "b"
+      "b",
+      "necrosis"
      ],
      [
       "b",
-      "c"
-     ],
-     [
-      "b",
-      "e"
+      "c",
+      "mineralisation"
      ],
      [
       "c",
-      "d"
+      "d",
+      "ductal casting"
      ]
     ]
    }
   },
   {
-   "tx": "A **fibroadenoma** is the commonest benign solid breast lump in young women. It is a smooth, firm, mobile, well-defined mass, nicknamed the breast mouse. Ultrasound is first-line in younger women and shows an oval, circumscribed, hypoechoic lesion. Mammography is added in older patients.",
-   "say": "A fibroadenoma is the commonest benign solid breast lump in young women. It is a smooth, firm, mobile, well-defined mass, nicknamed the breast mouse. Ultrasound is first-line in younger women and shows an oval, circumscribed, hypoechoic lesion. Mammography is added in older patients.",
+   "tx": "Malignant epithelial neoplasms disrupt normal Cooper ligaments and surrounding parenchymal architecture. Classical **invasive ductal carcinoma** presents on screening mammography as a high-attenuation, irregular mass with radiating **spiculated margins**, appearing taller than wide with architectural distortion and retraction in the affected symptomatic breast.",
+   "say": "Malignant epithelial neoplasms disrupt normal Cooper ligaments and surrounding parenchymal architecture. Classical invasive ductal carcinoma presents on screening mammography as a high-attenuation, irregular mass with radiating spiculated margins, appearing taller than wide with architectural distortion and retraction in the affected symptomatic breast.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Invasive Ductal Carcinoma",
+     "points": [
+      "High-attenuation dense central mass",
+      "Radiating spiculated margins",
+      "Architectural distortion and retraction",
+      "Acoustic shadowing on ultrasound"
+     ]
+    },
+    "right": {
+     "title": "Fat Necrosis",
+     "points": [
+      "Central lipid radiolucency",
+      "Coarse or rim-like calcifications",
+      "History of prior trauma or surgery",
+      "Hyperechoic mobile mural nodule"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Loss of E-cadherin expression permits infiltrative growth without creating discrete tissue borders. Consequently, **invasive lobular carcinoma** is characteristically subtle on mammography due to its single-file infiltrative architecture, often presenting only as subtle **architectural distortion** or shrinking breast sign without a discrete central mass.",
+   "say": "Loss of E-cadherin expression permits infiltrative growth without creating discrete tissue borders. Consequently, invasive lobular carcinoma is characteristically subtle on mammography due to its single-file infiltrative architecture, often presenting only as subtle architectural distortion or shrinking breast sign without a discrete central mass.",
    "vis": {
     "kind": "table",
     "cols": [
      "Feature",
-     "Young women",
-     "Older women"
+     "Invasive Lobular Carcinoma",
+     "Invasive Ductal Carcinoma"
     ],
     "rows": [
      [
-      "First-line imaging",
-      "Ultrasound",
-      "Mammography added"
+      "Cellular architecture",
+      "Single-file diffuse stromal infiltration",
+      "Cohesive glandular nest formation"
      ],
      [
-      "Typical sonographic look",
-      "Oval, hypoechoic, circumscribed",
-      "Same features, check for carcinoma"
+      "Mammographic presentation",
+      "Subtle architectural distortion, often occult",
+      "Dense spiculated radio-opaque mass"
      ],
      [
-      "Tissue diagnosis",
-      "Core biopsy",
-      "Core biopsy"
+      "Multifocality / Bilaterality",
+      "High frequency (up to 30% bilateral)",
+      "Less frequently bilateral"
+     ],
+     [
+      "MRI Sensitivity",
+      "Superior detection of true disease extent",
+      "Readily depicted on MRI and mammography"
      ]
     ]
    }
   },
   {
-   "tx": "A **phyllodes tumour** is a fibroepithelial neoplasm with stromal hypercellularity. It grows faster than a fibroadenoma and can be benign, borderline or malignant. Core biopsy cannot reliably separate it from a cellular fibroadenoma, so a rapidly enlarging or giant lesion needs excision. Axillary dissection is not indicated because spread is haematogenous.",
-   "say": "A phyllodes tumour is a fibroepithelial neoplasm with stromal hypercellularity. It grows faster than a fibroadenoma and can be benign, borderline or malignant. Core biopsy cannot reliably separate it from a cellular fibroadenoma, so a rapidly enlarging or giant lesion needs excision. Axillary dissection is not indicated because spread is haematogenous.",
+   "tx": "Benign fibroepithelial neoplasms dominate in young reproductive-aged females. On ultrasound examination, a **fibroadenoma** appears as an oval or gently macrolobulated, well-circumscribed hypoechoic mass with a wider-than-tall orientation and uniform internal echoes, showing low **resistance index** on Doppler evaluation during examination.",
+   "say": "Benign fibroepithelial neoplasms dominate in young reproductive-aged females. On ultrasound examination, a fibroadenoma appears as an oval or gently macrolobulated, well-circumscribed hypoechoic mass with a wider-than-tall orientation and uniform internal echoes, showing low resistance index on Doppler evaluation during examination.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-fibroadenoma-breast.webp",
+    "alt": "Gross pathology specimen showing a well-circumscribed, encapsulated, lobulated fibroadenoma of the breast.",
+    "caption": "Fibroadenoma: well-circumscribed encapsulated fibroepithelial neoplasm (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Rapidly enlarging fibroepithelial neoplasms in women aged over 40 require histological differentiation from simple fibroadenomas. A **phyllodes tumour** appears as a large, rapidly growing mass resembling a fibroadenoma on imaging, distinguished histopathologically by cystic clefts and marked **stromal hypercellularity** on tissue biopsy specimens in adult patients.",
+   "say": "Rapidly enlarging fibroepithelial neoplasms in women aged over 40 require histological differentiation from simple fibroadenomas. A phyllodes tumour appears as a large, rapidly growing mass resembling a fibroadenoma on imaging, distinguished histopathologically by cystic clefts and marked stromal hypercellularity on tissue biopsy specimens in adult patients.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/srd-breast-fig1.webp",
     "alt": "Histological comparison of phyllodes tumour and cellular fibroadenoma, highlighting stromal hypercellularity and leaf-like projections.",
-    "caption": "Phyllodes tumour histology shows stromal hypercellularity. Image: Nephron, CC BY-SA 3.0, Wikimedia Commons.",
+    "caption": "Phyllodes tumour histology shows stromal hypercellularity (StewardMD).",
     "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Dynamic contrast-enhanced breast MRI evaluates tumour neoangiogenesis. Kinetic analysis classifies curves into Type 1 progressive persistent enhancement (typically benign), Type 2 plateau kinetics (intermediate), and Type 3 rapid wash-in with fast **wash-out kinetics**, strongly indicative of **malignancy** on dynamic sequences.",
+   "say": "Dynamic contrast-enhanced breast MRI evaluates tumour neoangiogenesis. Kinetic analysis classifies curves into Type 1 progressive persistent enhancement typically benign, Type 2 plateau kinetics intermediate, and Type 3 rapid wash-in with fast wash-out kinetics, strongly indicative of malignancy on dynamic sequences.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Kinetic Curve",
+     "Enhancement Pattern",
+     "Malignancy Likelihood"
+    ],
+    "rows": [
+     [
+      "Type 1 (Persistent)",
+      "Continuous signal rise over time",
+      "Benign (fibroadenoma, benign parenchyma)"
+     ],
+     [
+      "Type 2 (Plateau)",
+      "Initial signal rise flattening in delayed phase",
+      "Intermediate suspicion (60% malignant)"
+     ],
+     [
+      "Type 3 (Wash-out)",
+      "Rapid initial peak followed by sharp signal drop",
+      "High suspicion (> 85% malignant)"
+     ]
+    ]
    }
   }
  ],
- "quiz": [],
- "src": [
-  "kb-reference-breast-hamartoma",
-  "kb-reference-breast-fibroadenoma",
-  "kb-reference-phyllodes-tumour"
+ "quiz": [
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
  ],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 1879,
-  "itemN": 0
- }
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Breast Imaging (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Breast)"
+ ]
 }

@@ -1,209 +1,218 @@
 {
  "v": 1,
  "module": "srd-chest-focal",
- "subject": "ss-radiology",
- "title": "Pulmonary tuberculosis: pathogenesis, forms and diagnosis",
- "minutes": 7,
+ "title": "Nodules, masses, infection and congenital lesions",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "**Mycobacterium tuberculosis** is an aerobic **acid-fast bacillus** whose waxy, mycolic-acid-rich wall resists staining and limits drug entry. Transmission occurs through airborne droplet nuclei from a person with infectious pulmonary or laryngeal disease. Cavitary cases are the most infectious, shedding very high bacillary loads into sputum.",
-   "say": "Mycobacterium tuberculosis is an aerobic acid-fast bacillus. Its waxy, mycolic-acid-rich wall resists staining and limits drug entry. Transmission occurs through airborne droplet nuclei from a person with infectious pulmonary or laryngeal disease. Cavitary cases are the most infectious, shedding very high bacillary loads into sputum.",
+   "tx": "Standardised surveillance protocols avoid unnecessary radiation exposure while capturing early malignancy. Under the **Fleischner Society** 2017 guidelines, incidental solid **pulmonary nodules** measuring under 6 mm in low-risk individuals aged 35 years or older require no routine computed tomography follow-up examination.",
+   "say": "Standardised surveillance protocols avoid unnecessary radiation exposure while capturing early malignancy. Under the Fleischner Society 2017 guidelines, incidental solid pulmonary nodules measuring under 6 millimetres in low risk individuals aged 35 years or older require no routine computed tomography follow-up examination.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srd-chest-focal-fig1.webp",
-    "alt": "Diagram showing a rod-shaped Mycobacterium tuberculosis with a thick cell wall, and airborne droplet transmission from an infectious person.",
-    "caption": "M. tuberculosis: bacillus structure and airborne transmission",
-    "ar": 1.8349
+    "kind": "table",
+    "cols": [
+     "Nodule Size",
+     "Low Clinical Risk",
+     "High Clinical Risk"
+    ],
+    "rows": [
+     [
+      "< 6 mm (solid)",
+      "No routine follow-up CT recommended",
+      "Optional CT at 12 months"
+     ],
+     [
+      "6 to 8 mm (solid)",
+      "Follow-up CT at 6 to 12 months",
+      "Follow-up CT at 6 to 12 months, then 18 to 24"
+     ],
+     [
+      "> 8 mm (solid)",
+      "CT at 3 months, PET-CT, or biopsy",
+      "CT at 3 months, PET-CT, or biopsy"
+     ]
+    ]
    }
   },
   {
-   "tx": "Inhaled bacilli are engulfed by **alveolar macrophages**, which fail to fuse the phagosome with lysosomes, so the organism replicates. Around two to four weeks, **cell-mediated immunity** (CD4 T cells releasing interferon-gamma) forms granulomas with central caseous necrosis. Only about 10 percent of immunocompetent infected people develop active disease in their lifetime.",
-   "say": "Inhaled bacilli are engulfed by alveolar macrophages, which fail to fuse the phagosome with lysosomes, so the organism replicates. Around two to four weeks, cell-mediated immunity, driven by CD4 T cells releasing interferon-gamma, forms granulomas with central caseous necrosis. Only about 10 percent of immunocompetent infected people develop active disease in their lifetime.",
+   "tx": "Severely immunocompromised patients with profound neutropenia are highly vulnerable to opportunistic fungal invasion. In this population, **angioinvasive aspergillosis** classically manifests as a focal consolidation surrounded by a rim of ground-glass attenuation known as the **CT halo sign**, reflecting ischaemic alveolar haemorrhage.",
+   "say": "Severely immunocompromised patients with profound neutropenia are highly vulnerable to opportunistic fungal invasion. In this population, angioinvasive aspergillosis classically manifests as a focal consolidation surrounded by a rim of ground-glass attenuation known as the CT halo sign, reflecting ischaemic alveolar haemorrhage.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Inhaled bacilli"
+      "label": "Vascular fungal invasion"
      },
      {
       "id": "b",
-      "label": "Alveolar macrophage"
+      "label": "Ischaemic infarction core"
      },
      {
       "id": "c",
-      "label": "Granuloma"
+      "label": "Surrounding haemorrhage"
      },
      {
       "id": "d",
-      "label": "Caseous necrosis"
-     },
-     {
-      "id": "e",
-      "label": "Cavitation if immunity weak"
+      "label": "CT halo sign"
      }
     ],
     "edges": [
      [
       "a",
-      "b"
+      "b",
+      "angioinvasion"
      ],
      [
       "b",
-      "c"
+      "c",
+      "tissue necrosis"
      ],
      [
       "c",
-      "d"
-     ],
-     [
       "d",
-      "e"
+      "ground glass rim"
      ]
     ]
    }
   },
   {
-   "tx": "Pulmonary TB is split into **primary** disease, seen in middle or lower zones and common in children, and **postprimary (adult-type)** disease, typically apical or posterior upper-lobe cavitation. In HIV with CD4 below 200 per microlitre, the picture shifts to a primary-like pattern with diffuse infiltrates, little cavitation, effusion and intrathoracic adenopathy.",
-   "say": "Pulmonary TB is split into primary disease, seen in middle or lower zones and common in children, and postprimary adult-type disease, typically apical or posterior upper-lobe cavitation. In HIV with CD4 below 200 per microlitre, the picture shifts to a primary-like pattern with diffuse infiltrates, little cavitation, effusion and intrathoracic adenopathy.",
+   "tx": "Pre-existing structural lung cavities provide a nidus for fungal colonization. Colonization by Aspergillus species generates an **aspergilloma**, which presents as a mobile intracavitary fungal ball capped by air on computed tomography, displaying the classic **Monod sign** or air crescent sign that shifts position on decubitus views.",
+   "say": "Pre-existing structural lung cavities provide a nidus for fungal colonization. Colonization by Aspergillus species generates an aspergilloma, which presents as a mobile intracavitary fungal ball capped by air on computed tomography, displaying the classic Monod sign or air crescent sign that shifts position on decubitus views.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Postprimary",
-     "Primary or low CD4 HIV"
-    ],
-    "rows": [
-     [
-      "Site",
-      "Upper lobes",
-      "Middle or lower zones"
-     ],
-     [
-      "Cavitation",
-      "Common",
-      "Little or none"
-     ],
-     [
-      "Nodes",
-      "Usually absent",
-      "Intrathoracic adenopathy"
-     ],
-     [
-      "Typical group",
-      "Adults, immunocompetent",
-      "Children, advanced HIV"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/lessons/media/srd-chest-focal-fig1.webp",
+    "alt": "Diagram showing Mycobacterium tuberculosis infection and cavity formation predisposing to secondary fungal colonization.",
+    "caption": "Cavitary pulmonary disease predisposing to secondary fungal colonization (StewardMD).",
+    "ar": 1.8349
    }
   },
   {
-   "tx": "Confirm before treating. **Xpert MTB/RIF** is the WHO first-line test: it detects **Mycobacterium tuberculosis** and **rifampicin** resistance in under two hours, with about 85 percent pulmonary sensitivity and 98 percent specificity. **Sputum smear microscopy** alone cannot tell tuberculosis apart from other mycobacteria, so empirical **antitubercular therapy** should usually wait for microbiological proof.",
-   "say": "Confirm before treating. The Xpert MTB/RIF test, the WHO first-line option, identifies Mycobacterium tuberculosis and rifampicin resistance in under two hours, with about 85 percent pulmonary sensitivity and 98 percent specificity. Sputum smear microscopy alone cannot tell tuberculosis apart from other mycobacteria, so empirical antitubercular therapy should usually wait for microbiological proof.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "Strength",
-     "Limitation"
-    ],
-    "rows": [
-     [
-      "Xpert MTB/RIF",
-      "Rapid, also detects rifampicin resistance",
-      "Lower sensitivity in smear-negative disease"
-     ],
-     [
-      "Sputum AFB smear",
-      "Quick and inexpensive",
-      "Cannot separate M. tuberculosis from other mycobacteria"
-     ],
-     [
-      "Culture",
-      "Confirms the organism",
-      "Slow turnaround time"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Tuberculin skin test and **interferon-gamma release assays** such as QuantiFERON or T-SPOT detect infection, not active disease, and cannot predict who will progress. Non-tuberculous mycobacteria, lung cancer and chronic aspergilloma mimic TB, so a persistent upper-lobe cavity should prompt bronchoscopy or biopsy and cultures before labelling it TB.",
-   "say": "Tuberculin skin test and interferon-gamma release assays such as QuantiFERON or T-SPOT detect infection, not active disease, and cannot predict who will progress. Non-tuberculous mycobacteria, lung cancer and chronic aspergilloma mimic TB, so a persistent upper-lobe cavity should prompt bronchoscopy or biopsy and cultures before labelling it TB.",
+   "tx": "Congenital bronchopulmonary malformations involve anomalous systemic arterialization of non-functioning lung tissue. An extralobar **pulmonary sequestration** is enveloped within its own independent visceral pleura, is supplied by an aberrant **systemic artery** from the aorta, and characteristically drains into the azygos or hemiazygos veins.",
+   "say": "Congenital bronchopulmonary malformations involve anomalous systemic arterialization of non-functioning lung tissue. An extralobar pulmonary sequestration is enveloped within its own independent visceral pleura, is supplied by an aberrant systemic artery from the aorta, and characteristically drains into the azygos or hemiazygos veins.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Tests for infection",
+     "title": "Extralobar Sequestration",
      "points": [
-      "Tuberculin skin test",
-      "IGRA QuantiFERON or T-SPOT",
-      "Cannot show active disease",
-      "Poor prediction of progression"
+      "Independent visceral pleural covering",
+      "Systemic arterial supply (aorta)",
+      "Systemic venous drainage (azygos vein)",
+      "Presents early in neonates"
      ]
     },
     "right": {
-     "title": "Mimics of TB",
+     "title": "Intralobar Sequestration",
      "points": [
-      "Non-tuberculous mycobacteria",
-      "Lung cancer",
-      "Chronic aspergilloma",
-      "Lung abscess"
+      "Shares native visceral pleura",
+      "Systemic arterial supply (thoracic aorta)",
+      "Pulmonary venous drainage",
+      "Presents later with recurrent infection"
      ]
     }
    }
   },
   {
-   "tx": "Classify resistance, because it changes the regimen. **MDR-TB** means resistance to at least isoniazid and the other core first-line agent. **Pre-XDR-TB** adds fluoroquinolone resistance, while **XDR-TB** adds resistance to another group A agent, for example bedaquiline or linezolid. Smear-positive cavitary disease is the most infectious form and needs prompt action.",
-   "say": "Classify resistance, because it changes the regimen. MDR-TB means resistance to at least isoniazid and the other core first-line agent. Pre-XDR-TB adds fluoroquinolone resistance, while XDR-TB adds resistance to another group A agent, for example bedaquiline or linezolid. Smear-positive cavitary disease is the most infectious form and needs prompt action.",
+   "tx": "In contrast to extralobar lesions, an **intralobar** **pulmonary sequestration** develops within the native pulmonary parenchyma. It is enveloped by the normal visceral pleura, occurs predominantly within the posterior basal segment of the left lower lobe in 65% of cases, and characteristically drains via pulmonary veins into the left atrium.",
+   "say": "In contrast to extralobar lesions, an intralobar pulmonary sequestration develops within the native pulmonary parenchyma. It is enveloped by the normal visceral pleura, occurs predominantly within the posterior basal segment of the left lower lobe in 65% of cases, and characteristically drains via pulmonary veins into the left atrium.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Category",
-     "Defining resistance"
+     "Feature",
+     "Intralobar Type",
+     "Extralobar Type"
     ],
     "rows": [
      [
-      "MDR-TB",
-      "Isoniazid plus the other core first-line agent"
+      "Pleural Envelope",
+      "Shared native visceral pleura",
+      "Separate dedicated visceral pleura"
      ],
      [
-      "Pre-XDR-TB",
-      "MDR plus fluoroquinolone resistance"
+      "Predominant Location",
+      "Posterior basal left lower lobe (65%)",
+      "Subdiaphragmatic / retrocardiac"
      ],
      [
-      "XDR-TB",
-      "Pre-XDR plus resistance to a group A agent"
+      "Venous Drainage",
+      "Pulmonary veins (left atrium)",
+      "Systemic veins (azygos / IVC)"
      ]
     ]
    }
   },
   {
-   "tx": "Untreated TB is often fatal, but timely drug-susceptible treatment cures most patients. Survivors may keep **post-TB lung disease**: airflow obstruction, bronchiectasis, pulmonary hypertension and residual cavities that can later host an aspergilloma. Ensure treatment completion and check for HIV, since antiretroviral timing and drug interactions matter.",
-   "say": "Untreated TB is often fatal, but timely drug-susceptible treatment cures most patients. Survivors may keep post-TB lung disease, with airflow obstruction, bronchiectasis, pulmonary hypertension and residual cavities that can later host an aspergilloma. Ensure treatment completion and check for HIV, since antiretroviral timing and drug interactions matter.",
-   "vis": null
+   "tx": "Anterior mediastinal compartment lesions follow distinct anatomical rules. A **thymoma** represents the most common anterior mediastinal mass in adults, typically manifesting on computed tomography as a well-demarcated, smooth or lobulated solid soft-tissue mass that is closely associated with **myasthenia gravis** in 30% to 50% of patients.",
+   "say": "Anterior mediastinal compartment lesions follow distinct anatomical rules. A thymoma represents the most common anterior mediastinal mass in adults, typically manifesting on computed tomography as a well-demarcated, smooth or lobulated solid soft-tissue mass that is closely associated with myasthenia gravis in 30% to 50% of patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thymoma",
+     "points": [
+      "Most common anterior mediastinal mass",
+      "Smooth or lobulated soft-tissue mass",
+      "Strong association with myasthenia gravis",
+      "Calcification present in one third"
+     ]
+    },
+    "right": {
+     "title": "Thymic Carcinoma",
+     "points": [
+      "Aggressive irregular infiltration",
+      "Invasion of great vessels and pleura",
+      "Frequent distant lymphadenopathy",
+      "Lacks association with myasthenia gravis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Asbestos exposure predisposes to diffuse pleural malignancy. Classical malignant **pleural mesothelioma** exhibits **circumferential**, nodular pleural thickening exceeding 1 cm that encases the hemithorax, preferentially involves the mediastinal pleura, and causes volume contraction of the affected 1 hemithorax on computed tomography.",
+   "say": "Asbestos exposure predisposes to diffuse pleural malignancy. Classical malignant pleural mesothelioma exhibits circumferential, nodular pleural thickening exceeding 1 centimetre that encases the hemithorax, preferentially involves the mediastinal pleura, and causes volume contraction of the affected 1 hemithorax on computed tomography.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-obstructive-pulmonary-disease-fig1.webp",
+    "alt": "Chest radiograph and thoracic CT demonstrating diffuse pleural thickening and pulmonary parenchymal changes.",
+    "caption": "Diffuse thoracic parenchymal and pleural pathology (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Subpleural parenchymal consolidation patterns yield valuable diagnostic clues in atypical pulmonary infections and organizing pneumonia. The **reversed halo sign**, or atoll sign, consists of a central zone of ground-glass attenuation encircled by a complete or crescentic rim of dense consolidation, classically seen in **cryptogenic organizing pneumonia**.",
+   "say": "Subpleural parenchymal consolidation patterns yield valuable diagnostic clues in atypical pulmonary infections and organizing pneumonia. The reversed halo sign, or atoll sign, consists of a central zone of ground-glass attenuation encircled by a complete or crescentic rim of dense consolidation, classically seen in cryptogenic organizing pneumonia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Central Zone",
+     "Peripheral Rim",
+     "Classic Etiology"
+    ],
+    "rows": [
+     [
+      "Reversed halo (atoll sign)",
+      "Ground-glass attenuation",
+      "Consolidation ring",
+      "Cryptogenic organizing pneumonia / mucor"
+     ],
+     [
+      "Halo sign",
+      "Focal consolidation / nodule",
+      "Ground-glass rim",
+      "Angioinvasive aspergillosis (haemorrhage)"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [],
- "src": [
-  "kb-diseases-pulmonary-tb"
+ "quiz": [
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
  ],
+ "src": [],
  "refs": [
-  "Harrison's Principles of Internal Medicine (Jameson et al.)",
-  "Indian national TB guidelines (RNTCP/NTEP)",
-  "WHO consolidated guidelines on tuberculosis"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 900,
-  "itemN": 0
- }
+  "Crack the Core Exam Thoracic Radiology (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Chest Focal)"
+ ]
 }
