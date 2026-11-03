@@ -130,6 +130,9 @@ test("gate: no 12-word copy, no dash, only cleared images", () => {
   assert.match(G.gateStep(step({ say: "Short — dashed" }), GROUND).join(), /dash/);
   assert.match(G.gateStep(step({ vis: { kind: "image", src: "assets/kardiox-learn/x.png", alt: "a", caption: "c" } }), GROUND).join(), /not cleared/);
   assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src: "prep/lessons/media/breast-t-size.svg", alt: "a", caption: "c" } }), GROUND), []);
+  assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src: "v1/kb/media/glioblastoma-fig1.webp", alt: "a", caption: "c" } }), GROUND), []);
+  assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src: "v1/lessons/media/son-all-fig1.webp", alt: "a", caption: "c" } }), GROUND), []);
+  assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src: "clinix/media/practicals/surg-xray-pneumoperitoneum.webp", alt: "a", caption: "c" } }), GROUND), []);
 });
 test("gate: narration must be full natural sentences, rejecting telegraphic chains", () => {
   const good = "Monosaccharides cannot be hydrolysed into simpler sugars. They are classed as aldoses or ketoses by their carbonyl group.";

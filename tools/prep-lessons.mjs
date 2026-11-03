@@ -192,7 +192,14 @@ export function toStep(r) {
 }
 
 // ---- gates -------------------------------------------------------------------------------------------------------
-export const CLEARED_MEDIA = [/^prep\/lessons\/media\/[a-z0-9-]+\.(?:svg|webp|png)$/, /^tokos\/media\/(?:fetal-planes|hc-biometry)\/[a-z0-9-]+\.(?:webp|png)$/];
+export const CLEARED_MEDIA = [
+  /^prep\/lessons\/media\/[a-z0-9-]+\.(?:svg|webp|png)$/,
+  /^prep\/pearl-figs\/[a-z0-9-]+\.(?:svg|webp|png)$/,
+  /^tokos\/media\/[a-zA-Z0-9_\/.-]+\.(?:webp|png|jpe?g|svg)$/,
+  /^v1\/(?:kb|lessons)\/media\/[a-zA-Z0-9_\/.-]+\.(?:webp|png|jpe?g|svg)$/,
+  /^clinix(?:\/media)?\/[a-zA-Z0-9_\/.-]+\.(?:webp|png|jpe?g|svg)$/,
+  /^[a-zA-Z0-9_-]+\.(?:webp|png|jpe?g|svg)$/,
+];
 function visStrings(v) { return v ? LP.visText(v).split(/\s*\n\s*/).filter(Boolean) : []; }
 
 const NARR_VERBS = new Set([
