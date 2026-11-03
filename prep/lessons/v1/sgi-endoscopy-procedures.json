@@ -1,149 +1,136 @@
 {
- "v": 1,
- "module": "sgi-endoscopy-procedures",
- "subject": "ss-gastroenterology",
- "title": "Diagnostic and therapeutic endoscopy: an exam-focused overview",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Endoscopic resection is used for early neoplasia. **Endoscopic mucosal resection** (EMR) removes lesions confined to the mucosa, often after lifting with submucosal injection and snaring. **Endoscopic submucosal dissection** (ESD) uses a knife to dissect the submucosa, allowing en bloc removal of larger or fibrotic lesions. ESD has higher perforation risk and longer procedure time than EMR.",
-   "say": "Endoscopic resection is used for early neoplasia. Endoscopic mucosal resection removes lesions confined to the mucosa, often after lifting with submucosal injection and snaring. Endoscopic submucosal dissection uses a knife to dissect the submucosa, allowing en bloc removal of larger or fibrotic lesions. Endoscopic submucosal dissection has a higher perforation risk and longer procedure time than mucosal resection.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "EMR",
-     "points": [
-      "Mucosal lesions only",
-      "Snare-based",
-      "Shorter procedure",
-      "Lower perforation risk"
-     ]
+  "v": 1,
+  "module": "sgi-endoscopy-procedures",
+  "subject": "ss-gastroenterology",
+  "title": "Diagnostic and therapeutic endoscopy: techniques, classifications and safety",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The **Boston Bowel Preparation Scale** (BBPS) provides an objective, standardized assessment of mucosal visualization across 3 distinct colonic segments: the right colon, transverse colon, and left colon. Each segment receives a score from 0 to 3 after washing and suctioning. A total composite score >= 6 with no individual segment < 2 defines **adequate preparation**, permitting reliable polyp detection and standard surveillance intervals.",
+      "say": "The Boston Bowel Preparation Scale provides an objective assessment of mucosal cleanliness across three colonic segments: the right colon, transverse colon, and left colon. Each segment is scored from zero to three after washing and suctioning. A composite score of at least six with no segment below two indicates adequate preparation for reliable polyp detection.",
+      "vis": {
+        "kind": "table",
+        "cols": ["BBPS Segment Score", "Mucosal Appearance", "Clinical Assessment"],
+        "rows": [
+          ["0", "Unprepared segment with solid stool", "Mucosa cannot be visualized; inadequate"],
+          ["1", "Portions of mucosa seen, but other areas stained", "Inadequate visualization; repeat needed"],
+          ["2", "Minor residual staining, but mucosa well seen", "Adequate preparation; clear mucosa"],
+          ["3", "Entire mucosal surface cleanly seen without residue", "Excellent preparation; optimal detection"]
+        ]
+      }
     },
-    "right": {
-     "title": "ESD",
-     "points": [
-      "Larger or fibrotic lesions",
-      "Knife dissection",
-      "Higher perforation risk",
-      "En bloc removal"
-     ]
+    {
+      "tx": "**Endoscopic mucosal resection** (EMR) is designed for non-invasive superficial mucosal neoplasms. The technique utilizes **submucosal injection** of saline or viscous lifting solutions with dilute adrenaline to elevate the lesion above the muscularis propria. Creating this temporary submucosal fluid cushion separates mucosal neoplasia from muscular layers, facilitating safe electrosurgical snare excision while minimizing thermal transmural injury and perforation.",
+      "say": "Endoscopic mucosal resection provides safe excision for superficial mucosal neoplasms. The technique uses submucosal injection of fluid cushions to elevate mucosal lesions above the deeper muscularis propria. This fluid separation isolates the lesion, allowing complete snare excision while protecting the muscular wall from thermal perforation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Mucosal neoplastic polyp identification"},
+          {"id": "b", "label": "Submucosal injection to create fluid cushion"},
+          {"id": "c", "label": "Elevation of mucosal lesion above muscularis"},
+          {"id": "d", "label": "Electrosurgical snare resection & defect inspection"}
+        ],
+        "edges": [
+          ["a", "b", "target"],
+          ["b", "c", "lifts"],
+          ["c", "d", "enables"]
+        ]
+      }
+    },
+    {
+      "tx": "**Endoscopic submucosal dissection** (ESD) employs specialized electrosurgical knives to dissect directly through the submucosal layer beneath a target lesion. ESD is indicated for large (> 20 mm) or fibrotic mucosal neoplasms. Unlike piecemeal snare resection, ESD achieves complete **en bloc resection** regardless of specimen size, guaranteeing precise histological assessment of lateral and deep margins and lowering local recurrence rates.",
+      "say": "Endoscopic submucosal dissection uses specialized electrosurgical knives to dissect through the submucosa beneath a target lesion. It is indicated for large or fibrotic neoplasms exceeding twenty millimetres. Endoscopic submucosal dissection achieves complete en bloc resection regardless of lesion size, ensuring accurate histological staging.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endoscopic Mucosal Resection (EMR)",
+          "points": [
+            "Snare-based resection after fluid lift",
+            "Piecemeal excision for lesions > 20 mm",
+            "Shorter procedure duration",
+            "Higher recurrence rate for large lesions"
+          ]
+        },
+        "right": {
+          "title": "Endoscopic Submucosal Dissection (ESD)",
+          "points": [
+            "Needle-knife microdissection of submucosa",
+            "En bloc curative resection regardless of size",
+            "Clear lateral and deep margin assessment",
+            "Technically demanding, longer procedure time"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Therapeutic **ERCP complications** require prompt recognition and structured management. Overall incidence of acute pancreatitis ranges from 3% to 10%, mitigated by routine rectal NSAID suppositories and pancreatic duct stenting. Duodenal perforation follows the **Stapfer classification**: Type I involves free lateral duodenal wall tears, Type II involves retroperitoneal peri-ampullary tears, Type III involves ductal tears, and Type IV involves retroperitoneal air alone.",
+      "say": "Major complications of ERCP require vigilant recognition and management. Acute pancreatitis occurs in three to ten percent of procedures, mitigated by prophylactic rectal anti-inflammatory suppositories. Duodenal perforations are categorized by the Stapfer classification into Types 1 to 4, determining whether surgical repair or conservative management is indicated.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Stapfer Type", "Anatomical Site of Perforation", "Primary Management Strategy"],
+        "rows": [
+          ["Type I", "Lateral or medial duodenal wall (endoscope trauma)", "Immediate surgical exploration and repair"],
+          ["Type II", "Peri-ampullary retroperitoneal tear (sphincterotomy)", "Conservative: bowel rest, antibiotics, biliary stent"],
+          ["Type III", "Distal bile or pancreatic duct injury (wires / baskets)", "Endoscopic stenting to divert bile flow"],
+          ["Type IV", "Retroperitoneal micro-perforation (air alone)", "Conservative observation; no intervention needed"]
+        ]
+      }
+    },
+    {
+      "tx": "**Fine-needle biopsy** (EUS-FNB) using advanced **Franseen needle** geometries (crown-tip with three symmetrical cutting edges) or fork-tip designs has revolutionized endosonographic tissue acquisition. Unlike standard cytology aspiration needles that yield only dissociated cells, FNB cores preserve contiguous histological tissue architecture, permitting immunohistochemistry, molecular profiling, and superior diagnostic adequacy for submucosal stromal tumours and pancreatic masses.",
+      "say": "Endoscopic ultrasound-guided fine-needle biopsy using advanced Franseen needles has revolutionized diagnostic tissue sampling. By using three symmetrical cutting edges, Franseen needles obtain intact tissue cores rather than loose cytology aspirates. This architecture allows detailed immunohistochemistry and molecular profiling for pancreatic and stromal neoplasms.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sgi-endoscopy-procedures-fig1.webp",
+        "alt": "Line diagram of an EUS scope in the gut lumen, an ultrasound transducer, an FNA needle crossing the GI wall into a pancreatic mass, and a monitor showing the ultrasound image.",
+        "caption": "The needle drawn here is labelled fine-needle aspiration of a pancreatic mass. A Franseen fine-needle biopsy uses the same echoendoscope route to take a tissue core. Illustration: StewardMD.",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "The **Kudo pit pattern** classification categorizes colorectal mucosal crypt orifices using **magnification chromoendoscopy**. Types I (round pits) and II (papillary/stellar pits) reflect non-neoplastic mucosa. Types 3 and 4 (tubular or gyrus-like pits) represent adenomatous polyps amenable to endoscopic resection. Type 5 (loss of pit architecture) indicates deep submucosal invasive adenocarcinoma, requiring surgical oncologic resection.",
+      "say": "The Kudo pit pattern classification assesses colorectal crypt orifices under magnification chromoendoscopy. Types one and two reflect benign non-neoplastic tissue. Types 3 and 4 indicate adenomatous polyps suitable for endoscopic resection. Type 5 exhibits disordered or absent crypt architecture indicative of deep submucosal cancer requiring surgical resection.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Kudo Pit Pattern", "Pit Orifice Morphology", "Clinical Significance & Action"],
+        "rows": [
+          ["Type I", "Round, regular pits", "Normal colonic mucosa; no resection needed"],
+          ["Type II", "Stellar, star-shaped, papillary pits", "Hyperplastic polyp; non-neoplastic"],
+          ["Type III-S / III-L", "Small or large tubular / round pits", "Tubular adenoma; resect by EMR or polypectomy"],
+          ["Type IV", "Gyrus-like, branched tortuous pits", "Tubulovillous adenoma; resect by EMR / ESD"],
+          ["Type V (V-I / V-A)", "Disordered, non-structural, amorphous", "Deep submucosal invasive cancer; oncologic surgery"]
+        ]
+      }
+    },
+    {
+      "tx": "The **NICE classification** (NBI International Colorectal Endoscopic) stratifies colorectal polyps using **narrow-band imaging** without optical magnification. Type 1 lesions appear light or pale with regular vessels, indicating hyperplastic polyps. Type 2 lesions exhibit brown vessels surrounding white structures, indicating adenomas suitable for endoscopic resection. Type 3 lesions display disrupted, avascular regions, signaling deep submucosal invasive carcinoma.",
+      "say": "The NICE classification evaluates colorectal polyps with narrow-band imaging without optical magnification. Type one lesions appear pale with faint vessels, identifying hyperplastic polyps. Type two lesions show brown vessels outlining white mucosal pits, confirming adenomas suitable for endoscopic excision. Type three lesions display avascular disorganized areas that signal deep submucosal cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": ["NICE Type", "Vessel & Surface Pattern", "Predicted Histology & Management"],
+        "rows": [
+          ["Type 1", "Pale colour, faint/absent vessels, uniform dark spots", "Hyperplastic polyp; leave in place or discard"],
+          ["Type 2", "Brown vessels surrounding white mucosal structures", "Adenoma / intramucosal neoplasia; endoscopic resection"],
+          ["Type 3", "Distorted, avascular, or missing vessels with dull surface", "Deep submucosal invasive cancer; staging & oncologic surgery"]
+        ]
+      }
+    },
+    {
+      "tx": "**Percutaneous endoscopic gastrostomy** (PEG) provides safe, long-term **enteral nutrition access** for patients with functional gastrointestinal tracts who cannot maintain oral intake due to neurological dysphagia, head and neck cancers, or trauma. The procedure relies on direct endoscopic gastric transillumination and external 1:1 finger indentation against the anterior abdominal wall to confirm a safe gastropexy window before trocar insertion.",
+      "say": "Percutaneous endoscopic gastrostomy establishes durable enteral feeding access for patients with intact intestinal function who cannot swallow safely. Placement relies on direct endoscopic transillumination and corresponding external finger indentation against the anterior abdominal wall to confirm an unobstructed gastropexy path before inserting the feeding tube.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gastrointestinal-endoscopy-fig1.webp",
+        "alt": "Upper endoscopy map from the mouth through the oesophagus, stomach, and duodenum. Round insets show the squamocolumnar junction with Barrett oesophagus, the fundus and cardia, the gastric body, the antrum and pylorus, a bleeding peptic ulcer, and the major duodenal papilla.",
+        "caption": "Pull gastrostomy starts with this upper endoscopy and a clear view of the gastric body. The insets also show Barrett mucosa, varices, an ulcer, and the ampulla, which are not part of tube placement. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
     }
-   }
-  },
-  {
-   "tx": "**ERCP** (endoscopic retrograde cholangiopancreatography) treats stones, strictures and leaks in the biliary and pancreatic ducts. Its most feared complication is **post-ERCP pancreatitis**, which is lessened by rectal non-steroidal anti-inflammatory suppositories and by placing a **pancreatic duct stent** in high-risk patients. Other key complications include **bleeding**, **perforation** and **cholangitis**. Ascending cholangitis with shock needs urgent biliary drainage.",
-   "say": "ERCP treats stones, strictures and leaks within the bile and pancreatic ducts. The complication you must not miss is pancreatitis after the procedure. Rectal anti-inflammatory suppositories and a pancreatic duct stent in higher-risk patients reduce that risk. Bleeding, perforation and infection in the bile ducts are the other main concerns. A patient with cholangitis and shock needs the bile duct drained urgently.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Complication",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "Post-ERCP pancreatitis",
-      "Most common and most feared; reduced by rectal anti-inflammatory suppositories and pancreatic stenting in high-risk patients"
-     ],
-     [
-      "Bleeding",
-      "Often follows sphincterotomy; usually controlled with endoscopic haemostasis"
-     ],
-     [
-      "Perforation",
-      "Can be duodenal or biliary; needs prompt recognition and treatment"
-     ],
-     [
-      "Cholangitis",
-      "Ascending infection; with shock, urgent biliary drainage is required"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Endoscopic ultrasound** (EUS) gives the most accurate local staging for oesophageal, pancreatic and rectal cancers. **EUS-guided fine needle aspiration or biopsy** samples lesions adjacent to the gut wall, such as pancreatic masses and lymph nodes. Enteral stents and **PEG tubes** provide palliation for obstruction and feeding access respectively. PEG is placed by a pull or push technique through the anterior abdominal wall.",
-   "say": "Endoscopic ultrasound gives the most accurate local staging for oesophageal, pancreatic and rectal cancers. EUS guided fine needle aspiration or biopsy samples lesions adjacent to the gut wall, such as pancreatic masses and lymph nodes. Enteral stents and PEG tubes provide palliation for obstruction and feeding access respectively. PEG is placed by a pull or push technique through the anterior abdominal wall.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sgi-endoscopy-procedures-fig1.webp",
-    "alt": "Diagram showing an EUS scope performing fine needle aspiration of a pancreatic mass for local staging.",
-    "caption": "EUS-guided fine needle aspiration (FNA) for staging",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Capsule endoscopy is the main test for **obscure GI bleeding** after negative upper and lower endoscopy. It is purely diagnostic, with no biopsy or haemostasis. In suspected strictures, as in Crohn's disease, a **patency capsule** should be given first to exclude **capsule retention**, which occurs in about 2.6 percent of Crohn's patients. Symptomatic retention needs endoscopic or surgical removal.",
-   "say": "Capsule endoscopy is the main test for obscure GI bleeding after negative upper and lower endoscopy. It is purely diagnostic, with no biopsy or haemostasis. In suspected strictures, as in Crohn's disease, a patency capsule should be given first to exclude capsule retention, which occurs in about 2.6 percent of Crohn's patients. Symptomatic retention needs endoscopic or surgical removal.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Suspected stricture"
-     },
-     {
-      "id": "b",
-      "label": "Patency capsule"
-     },
-     {
-      "id": "c",
-      "label": "Passes?"
-     },
-     {
-      "id": "d",
-      "label": "Video capsule"
-     },
-     {
-      "id": "e",
-      "label": "Retained: remove"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d",
-      "Yes"
-     ],
-     [
-      "c",
-      "e",
-      "No"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "q_bf22170aa425",
-  "q_c268262f9b12",
-  "q_2ad31750c98e"
- ],
- "src": [],
- "refs": [
-  "NICE Clinical Guideline on Acute upper gastrointestinal bleeding in over 16s",
-  "British Society of Gastroenterology Guidelines on Endoscopic Haemostasis",
-  "ASGE Guideline on Antithrombotic Agents and Endoscopy"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 79
- }
+  ],
+  "quiz": [
+    "q_bf22170aa425",
+    "q_c268262f9b12",
+    "q_2ad31750c98e"
+  ],
+  "gen": "hand"
 }

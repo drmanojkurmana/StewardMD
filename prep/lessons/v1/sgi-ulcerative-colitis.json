@@ -1,0 +1,134 @@
+{
+  "v": 1,
+  "module": "sgi-ulcerative-colitis",
+  "subject": "ss-gastroenterology",
+  "title": "Ulcerative colitis: extent, acute severe flare, rescue and surveillance",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Ulcerative colitis** is an inflammatory bowel disease defined by continuous, **confluent mucosal inflammation** that invariably begins in the rectum and spreads proximally without intervening skip lesions. The inflammatory process remains strictly confined to the mucosa and submucosa, distinguishing it from the transmural inflammation, fistulizing behavior, and non-caseating granulomas characteristic of Crohn disease.",
+      "say": "Ulcerative colitis is characterized by continuous confluent mucosal inflammation that starts in the rectum and extends proximally without skip lesions. The inflammatory damage remains restricted to mucosal and submucosal layers, differing from the transmural inflammation and granulomas that define Crohn disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/inflammatory-bowel-disease-fig1.webp",
+        "alt": "Side-by-side diagram. Ulcerative colitis is continuous mucosal inflammation from the rectum with crypt abscesses. Crohn disease has skip lesions, transmural inflammation, ileal disease, noncaseating granulomas, deep fissures, strictures, and fistulas.",
+        "caption": "Ulcerative colitis stays continuous and mucosal, and it starts in the rectum. The Crohn pattern beside it is transmural and skipped. Illustration: StewardMD.",
+        "ar": 1.8349
+      }
+    },
+    {
+      "tx": "The **Montreal classification** stratifies ulcerative colitis by anatomical **disease extent**: **E1** signifies ulcerative proctitis confined strictly to the rectum; **E2** denotes left-sided or distal colitis extending from the rectum up to the splenic flexure; and **E3** defines extensive colitis extending proximally beyond the splenic flexure to involve the transverse or ascending colon.",
+      "say": "The Montreal classification categorizes ulcerative colitis by anatomical disease extent. Category E1 indicates proctitis limited entirely to the rectum. Category E2 represents left-sided colitis extending up to the splenic flexure. Category E3 designates extensive colitis that progresses proximally beyond the splenic flexure.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Montreal Category", "Anatomical Distribution", "Clinical Characteristics"],
+        "rows": [
+          ["E1 (Proctitis)", "Confined strictly to rectum", "Tenesmus, urgency, rectal bleeding; no systemic signs"],
+          ["E2 (Left-sided)", "Distal to splenic flexure", "Bloody diarrhoea, left lower quadrant cramps"],
+          ["E3 (Extensive)", "Proximal to splenic flexure", "Frequent bloody stools, weight loss, higher cancer risk"]
+        ]
+      }
+    },
+    {
+      "tx": "The classical **Truelove and Witts** criteria identify patients with **acute severe ulcerative colitis** (ASUC). Formal diagnosis requires passing at least 6 bloody stools each day in combination with systemic toxicity: tachycardia with pulse > 90 bpm, fever > 37.8 C, anaemia with haemoglobin < 10.5 g/dL, or ESR > 30 mm/h. This severe flare necessitates urgent inpatient admission.",
+      "say": "The Truelove and Witts criteria identify acute severe ulcerative colitis. Diagnosis requires six or more bloody stools daily alongside systemic markers including pulse above ninety beats per minute, temperature above thirty-seven point eight degrees, haemoglobin below ten point five grams, or ESR above thirty millimetres per hour. This presentation requires urgent hospital admission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Severe bloody diarrhoea (>= 6 stools/day)"},
+          {"id": "b", "label": "Systemic toxicity: T > 37.8 C, HR > 90, Hb < 10.5, ESR > 30"},
+          {"id": "c", "label": "Inpatient admission & IV hydrocortisone or methylprednisolone"},
+          {"id": "d", "label": "Plain abdominal radiography to exclude toxic megacolon"}
+        ],
+        "edges": [
+          ["a", "b", "plus"],
+          ["b", "c", "mandates"],
+          ["c", "d", "accompanied by"]
+        ]
+      }
+    },
+    {
+      "tx": "The **Oxford criteria** evaluated on day 3 of intravenous corticosteroid therapy accurately predict **colectomy risk** in ASUC. Patients exhibiting more than 8 stools on day 3, or between 3 to 8 stools accompanied by a CRP > 45 mg/L, face an 85% probability of requiring colectomy during the index admission, demanding immediate initiation of second-line rescue medical therapy.",
+      "say": "The Oxford criteria assessed on day three of intravenous corticosteroid therapy identify patients at high risk of treatment failure. A stool frequency exceeding eight per day, or three to eight stools with C-reactive protein above forty-five milligrams per litre, carries an eighty-five percent risk of colectomy during the admission. Clinicians initiate prompt rescue therapy when this occurs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "ASUC receiving IV corticosteroids (Day 3 assessment)"},
+          {"id": "b", "label": "> 8 stools/day OR 3-8 stools with CRP > 45 mg/L"},
+          {"id": "c", "label": "85% predicted risk of inpatient colectomy"},
+          {"id": "d", "label": "Initiate medical rescue (infliximab or ciclosporin)"}
+        ],
+        "edges": [
+          ["a", "b", "assess"],
+          ["b", "c", "indicates"],
+          ["c", "d", "mandates"]
+        ]
+      }
+    },
+    {
+      "tx": "Second-line rescue therapy for steroid-refractory ASUC relies on either the TNF-alpha monoclonal antibody **infliximab** (5 to 10 mg/kg) or the calcineurin inhibitor **ciclosporin** (target trough blood level 150 to 250 ng/mL). The randomized CYCLO trial established equivalent 90-day colectomy-free survival between both agents, reserving emergency subtotal colectomy for patients failing medical rescue within five to seven days.",
+      "say": "Second-line medical rescue for steroid-refractory acute severe colitis relies on the monoclonal antibody infliximab or intravenous ciclosporin. The CYCLO trial proved equivalent ninety-day colectomy-free survival between infliximab and intravenous ciclosporin targeting blood levels between one hundred and fifty and two hundred and fifty nanograms per millilitre. Failure within seven days requires colectomy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Infliximab Rescue",
+          "points": [
+            "5 to 10 mg/kg intravenous infusion",
+            "Can serve as maintenance biologic therapy",
+            "Lower nephrotoxicity risk",
+            "Longer half-life if surgery becomes necessary"
+          ]
+        },
+        "right": {
+          "title": "Ciclosporin Rescue",
+          "points": [
+            "Continuous infusion targeting 150-250 ng/mL",
+            "Rapid onset with short half-life",
+            "Requires bridge to oral thiopurine maintenance",
+            "Risks hypertension, tremors, and nephrotoxicity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Toxic megacolon** is a life-threatening complication characterized by acute, non-obstructive **colonic dilatation** exceeding 6 cm in diameter on plain abdominal radiography, occurring against a background of severe systemic toxicity. Precipitating factors include hypokalaemia, anticholinergics, opioids, and barium enemas. Initial management includes aggressive intravenous fluid resuscitation, broad-spectrum antibiotics, and emergent surgical consultation.",
+      "say": "Toxic megacolon is a dangerous complication featuring acute non-obstructive colonic dilatation beyond six centimetres on abdominal radiograph, occurring with severe systemic toxicity. Precipitating triggers include hypokalaemia, anticholinergic medications, and narcotics. Treatment requires intravenous resuscitation, broad-spectrum antibiotics, and urgent surgical consultation.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Diagnostic Criteria", "Required Clinical Threshold", "Pathophysiological Implication"],
+        "rows": [
+          ["Radiographic dilatation", "Transverse colon diameter > 6 cm", "Loss of neuromuscular tone and thinning of muscularis"],
+          ["Systemic toxicity", "Fever > 38.6 C, HR > 120, leucocytosis", "Bacterial translocation and systemic cytokine release"],
+          ["Surgical indication", "Perforation, peritonitis, or worsening dilatation", "Emergency subtotal colectomy with end ileostomy"]
+        ]
+      }
+    },
+    {
+      "tx": "Pathological diagnosis of ulcerative colitis relies on key mucosal biopsy features. Hallmark changes comprise marked **crypt architectural distortion** with crypt branching and shortening, extensive **basal plasmacytosis** forming a dense band of plasma cells between crypt bases and muscularis mucosae, diffuse mucin depletion within goblet cells, and neutrophilic crypt abscesses strictly confined above the muscularis.",
+      "say": "Pathological study of mucosal biopsies demonstrates classic architectural alterations in ulcerative colitis. Hallmark features include architectural distortion with branched or shortened crypts, basal plasmacytosis forming a cellular infiltrate beneath crypt bases, goblet cell mucin depletion, and neutrophilic crypt abscesses confined to the mucosa.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ibd-flare-fig2.webp",
+        "alt": "Comparison poster. The ulcerative colitis side shows colon-only continuous disease from the rectum, a lead-pipe colon, friable mucosa and pseudopolyps, crypt abscesses, crypt architectural distortion, and inflammation limited to mucosa and submucosa.",
+        "caption": "Crypt abscesses and crypt architectural distortion are the biopsy changes drawn on the colitis side. Basal plasmacytosis is not labelled. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
+    },
+    {
+      "tx": "**Surveillance colonoscopy** with high-definition chromoendoscopy and targeted biopsies reduces colorectal cancer mortality in longstanding colitis. Surveillance begins 8 years following symptom onset in patients with extensive (E3) or left-sided (E2) disease. However, in patients with concurrent **primary sclerosing cholangitis** (PSC), surveillance begins immediately at diagnosis and continues annually thereafter due to accelerated carcinogenesis.",
+      "say": "Surveillance colonoscopy using high-definition chromoendoscopy reduces colorectal cancer mortality in longstanding ulcerative colitis. Screening begins eight years after symptom onset for extensive or left-sided disease. In contrast, patients with concomitant primary sclerosing cholangitis require annual colonoscopic surveillance beginning immediately upon diagnosis.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Clinical Cohort", "Onset of Surveillance", "Surveillance Interval"],
+        "rows": [
+          ["Extensive colitis (E3)", "8 years from initial symptom onset", "Every 1 to 3 years based on risk features"],
+          ["Left-sided colitis (E2)", "8 years from initial symptom onset", "Every 2 to 3 years based on risk features"],
+          ["Proctitis alone (E1)", "No routine dysplasia surveillance needed", "Standard population screening guidelines"],
+          ["Co-existing PSC", "Immediately upon diagnosis of PSC/UC", "Annual colonoscopy with chromoendoscopy"]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}
