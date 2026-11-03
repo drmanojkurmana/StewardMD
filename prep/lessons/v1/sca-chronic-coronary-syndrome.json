@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "sca-chronic-coronary-syndrome",
+ "subject": "ss-cardiology",
+ "title": "Chronic coronary syndromes: clinical evaluation, medical therapy and revascularization",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Typical angina** pectoris requires satisfying 3 diagnostic criteria: substernal chest discomfort of characteristic quality and duration, provoked by physical exertion or emotional stress, and relieved by rest or sublingual nitroglycerin within minutes. Atypical angina meets 2 criteria, while non-anginal chest pain meets only 1 or none.",
+   "say": "Typical angina pectoris requires satisfying three clinical criteria. First, substernal chest discomfort of characteristic quality and duration. Second, provocation by physical exertion or emotional stress. Third, prompt relief by rest or sublingual nitroglycerin within minutes. Meeting two criteria defines atypical angina, while meeting one or none defines nonanginal pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Classification",
+     "Criteria Met",
+     "Pretest Probability"
+    ],
+    "rows": [
+     [
+      "Typical angina",
+      "Meets all 3 criteria",
+      "High pretest probability"
+     ],
+     [
+      "Atypical angina",
+      "Meets 2 criteria",
+      "Intermediate probability"
+     ],
+     [
+      "Non-anginal chest pain",
+      "Meets 1 or 0 criteria",
+      "Low pretest probability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The landmark **ISCHEMIA trial** demonstrated that among patients with stable chronic coronary disease and moderate-to-severe ischemia on stress testing, routine invasive revascularization did not reduce all-cause mortality or major ischemic cardiovascular events compared to optimal medical therapy alone. Revascularization improved quality of life and angina frequency in symptomatic patients.",
+   "say": "The landmark ISCHEMIA trial demonstrated that in stable chronic coronary syndromes with moderate to severe stress ischemia, an initial invasive revascularization strategy did not reduce death or ischemic cardiovascular events compared to optimal medical therapy. Catheterization provided substantial symptom relief and quality of life benefits in patients with frequent angina.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Invasive Strategy",
+     "points": [
+      "Routine coronary angiography and revascularization with optimal medical therapy; superior angina relief."
+     ]
+    },
+    "right": {
+     "title": "Conservative Strategy",
+     "points": [
+      "Optimal medical therapy alone; invasive evaluation reserved strictly for refractory symptoms or acute syndromes."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**First-line antianginal** medical therapy comprises beta-blockers and nondihydropyridine calcium channel blockers to reduce myocardial oxygen consumption. Beta-blockers blunt resting and exercise heart rates, lower systemic arterial blood pressure, and depress contractility. Dihydropyridines such as amlodipine are combined when angina persists despite titrated beta-blocker dosing.",
+   "say": "First line antianginal pharmacotherapy comprises beta blockers and calcium channel blockers to decrease myocardial oxygen consumption. Beta blockers blunt resting and exercise heart rate, lower systemic blood pressure, and diminish myocardial contractility. Amlodipine is combined when symptoms persist despite target beta blocker dose titration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Titrate Beta-Blocker"
+     },
+     {
+      "id": "n2",
+      "label": "Add Dihydropyridine CCB"
+     },
+     {
+      "id": "n3",
+      "label": "Add Second-Line Agent"
+     },
+     {
+      "id": "n4",
+      "label": "Invasive Evaluation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ranolazine** provides antianginal efficacy without lowering heart rate or arterial blood pressure by selectively inhibiting the late inward sodium current in ischemic cardiomyocytes. Attenuating late sodium entry prevents intracellular sodium accumulation, reversing reverse-mode sodium-calcium exchange and reducing diastolic calcium overload to improve microvascular myocardial relaxation.",
+   "say": "Ranolazine provides antianginal efficacy without affecting heart rate or blood pressure by selectively inhibiting late inward sodium current in ischemic cardiomyocytes. Attenuating excess late sodium entry halts reverse mode sodium calcium exchange, preventing diastolic calcium overload and improving left ventricular relaxation and microvascular perfusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Ischemic Late INa"
+     },
+     {
+      "id": "n2",
+      "label": "Intracellular Na+ Rise"
+     },
+     {
+      "id": "n3",
+      "label": "Ca2+ Overload via NCX"
+     },
+     {
+      "id": "n4",
+      "label": "Diastolic Wall Tension"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nicorandil** exerts dual-mechanism coronary antianginal actions by combining nitrate-like organic venodilation with opening of ATP-sensitive potassium channels in resistance arterioles. Nitrate actions reduce ventricular preload, while vascular potassium channel opening Hyperpolarizes vascular smooth muscle membranes, inducing profound epicardial and microvascular coronary arterial dilation.",
+   "say": "Nicorandil exerts dual mechanism coronary antianginal actions by combining nitrate-like venodilation with opening of adenosine triphosphate sensitive potassium channels in resistance arterioles. Nitrate venodilation reduces preload, while potassium channel opening hyperpolarizes smooth muscle to promote systemic and coronary arterial vasodilation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Molecular Target",
+     "Hemodynamic Result"
+    ],
+    "rows": [
+     [
+      "Nitrate-like action",
+      "Guanylate cyclase / cGMP",
+      "Systemic venodilation and preload reduction"
+     ],
+     [
+      "K-ATP channel opening",
+      "ATP-sensitive K+ channels",
+      "Arteriolar vasodilation and afterload reduction"
+     ],
+     [
+      "Cardioprotection",
+      "Mitochondrial K-ATP channels",
+      "Ischemic preconditioning mimicry"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ivabradine** selectively inhibits hyperpolarization-activated cyclic nucleotide-gated channels carrying the funny current in the sinoatrial node. Slowing spontaneous diastolic depolarization decelerates heart rate in patients in normal sinus rhythm with baseline rate >= 70 bpm without depressing ventricular contractility, conduction velocity, or systemic vascular resistance.",
+   "say": "Ivabradine selectively inhibits hyperpolarization activated cyclic nucleotide gated channels that mediate the funny current in sinoatrial nodal pacemaker cells. Decelerating spontaneous diastolic depolarization lowers heart rate in patients in sinus rhythm without altering ventricular contractility, atrioventricular conduction, or arterial blood pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ivabradine Mechanism",
+     "points": [
+      "Pure If current blockade in SA node; heart rate reduction with zero negative inotropy or bronchospasm."
+     ]
+    },
+    "right": {
+     "title": "Beta-Blocker Mechanism",
+     "points": [
+      "Beta-1 adrenergic receptor blockade; reduces heart rate, contractility, blood pressure, and AV conduction."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**INOCA** encompasses ischemia with nonobstructive coronary arteries driven by coronary microvascular dysfunction and epicardial vasospasm. Diagnostic confirmation requires coronary reactivity testing in the catheterization laboratory. Intracoronary acetylcholine administration assesses endothelium-dependent microvascular dilation and reproduces vasospastic angina, while adenosine measures coronary flow reserve.",
+   "say": "Ischemia with nonobstructive coronary arteries, termed INOCA, comprises coronary microvascular dysfunction and epicardial vasospastic disorders. Invasive diagnostic confirmation requires coronary reactivity testing with intracoronary acetylcholine and adenosine to measure coronary flow reserve and document reproduction of ischemic symptoms and epicardial spasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Nonobstructive CAD"
+     },
+     {
+      "id": "n2",
+      "label": "Adenosine CFR Test"
+     },
+     {
+      "id": "n3",
+      "label": "Acetylcholine Spasm"
+     },
+     {
+      "id": "n4",
+      "label": "Targeted Therapy"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trimetazidine** acts as an antianginal metabolic modulator by selectively inhibiting mitochondrial 3-ketoacyl-CoA thiolase, the terminal enzyme of fatty acid beta-oxidation. Shifting myocardial energy metabolism away from oxygen-demanding fatty acid oxidation toward glucose oxidation preserves ATP generation and protects intracellular homeostasis during acute myocardial ischemia.",
+   "say": "Trimetazidine functions as a metabolic antianginal modulator by selectively inhibiting mitochondrial 3 ketoacyl coenzyme A thiolase, the final enzyme of fatty acid beta oxidation. Suppressing fatty acid oxidation shifts myocardial metabolism toward glucose oxidation, generating more adenosine triphosphate per mole of oxygen consumed during ischemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Substrate",
+     "Oxygen Consumption",
+     "Trimetazidine Impact"
+    ],
+    "rows": [
+     [
+      "Fatty acid beta-oxidation",
+      "High oxygen requirement per ATP",
+      "Inhibited via 3-ketoacyl-CoA thiolase"
+     ],
+     [
+      "Glucose oxidation",
+      "Low oxygen requirement per ATP",
+      "Stimulated and prioritized"
+     ],
+     [
+      "Myocardial ATP levels",
+      "Rapidly depleted in ischemia",
+      "Preserved with reduced acidosis"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

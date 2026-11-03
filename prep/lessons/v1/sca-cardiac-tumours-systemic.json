@@ -1,0 +1,288 @@
+{
+  "v": 1,
+  "module": "sca-cardiac-tumours-systemic",
+  "subject": "ss-cardiology",
+  "title": "Cardiac Tumours and Heart in Systemic Disease",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Cardiac myxoma** is the most common primary cardiac tumor in adults accounting for **50%** of cases, typically arising from the **fossa ovalis** border in the left atrium in **75%**, presenting with intracardiac obstruction, embolic phenomena, and constitutional symptoms. A mobile pedunculated mass prolapsing through the mitral valve produces an early diastolic tumor plop.",
+      "say": "Cardiac myxoma is the most common primary cardiac tumor in adults accounting for 50% of cases, typically arising from the fossa ovalis border in the left atrium in 75%, presenting with intracardiac obstruction, embolic phenomena, and constitutional symptoms. A mobile pedunculated mass prolapsing through the mitral valve produces an early diastolic tumor plop.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Myxoma Triad Symptom",
+          "Pathophysiological Mechanism",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Intracardiac Obstruction",
+            "Pedunculated tumor prolapses into mitral orifice",
+            "Positional dyspnea, syncope, tumor plop sound"
+          ],
+          [
+            "Systemic Embolization",
+            "Friable gelatinous fragments or surface thrombi detach",
+            "Ischemic stroke, retinal infarction, splenic infarcts"
+          ],
+          [
+            "Constitutional Symptoms",
+            "Tumor secretion of interleukin-6 (IL-6)",
+            "Fever, weight loss, arthralgia, elevated ESR and CRP"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Carney complex** is an autosomal dominant syndrome caused by **PRKAR1A** mutations on chromosome **1**, combining recurrent cardiac myxomas, spotty skin pigmentation (lentigines), and endocrine hyperactivity including primary pigmented nodular adrenocortical disease. Myxomas in Carney complex are frequently multicentric, atypical in location, and carry high recurrence rates.",
+      "say": "Carney complex is an autosomal dominant syndrome caused by PRKAR1A mutations on chromosome 1, combining recurrent cardiac myxomas, spotty skin pigmentation (lentigines), and endocrine hyperactivity including primary pigmented nodular adrenocortical disease. Myxomas in Carney complex are frequently multicentric, atypical in location, and carry high recurrence rates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sporadic Cardiac Myxoma",
+          "points": [
+            "Solitary left atrial mass (fossa ovalis)",
+            "Older females (5th to 6th decades)",
+            "Surgical recurrence rate under 2% to 3%",
+            "Absence of genetic mutations or syndrome features"
+          ]
+        },
+        "right": {
+          "title": "Carney Complex Myxoma",
+          "points": [
+            "Multiple, atypical chamber locations (ventricles)",
+            "Younger age of onset (median 20 years)",
+            "Surgical recurrence rate exceeds 20%",
+            "PRKAR1A mutation, spotty skin pigmentation, PPNAD"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Papillary fibroelastoma** is the most common primary tumor of **cardiac valves**, resembling a sea anemone on echocardiography with multiple papillary fronds and posing high embolic stroke risk requiring surgical excision. These avascular tumors typically arise on the downstream side of aortic and mitral valve leaflets.",
+      "say": "Papillary fibroelastoma is the most common primary tumor of cardiac valves, resembling a sea anemone on echocardiography with multiple papillary fronds and posing high embolic stroke risk requiring surgical excision. These avascular tumors typically arise on the downstream side of aortic and mitral valve leaflets.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumor Characteristic",
+          "Papillary Fibroelastoma",
+          "Infective Endocarditis Vegetation"
+        ],
+        "rows": [
+          [
+            "Anatomic Valve Side",
+            "Downstream or either side of valve leaflet",
+            "Upstream surface (atrial AV, ventricular semilunar)"
+          ],
+          [
+            "Echocardiographic Texture",
+            "Sea anemone fronds with shimmering border",
+            "Shaggy, mobile, amorphous mass with tissue destruction"
+          ],
+          [
+            "Valvular Function",
+            "Normal leaflet mobility; rarely causes regurgitation",
+            "Leaflet perforation, destruction, severe regurgitation"
+          ],
+          [
+            "Blood Cultures",
+            "Consistently negative",
+            "Positive in > 90% of cases"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cardiac rhabdomyoma** is the most frequent primary cardiac tumor in infants and children, strongly associated with **tuberous sclerosis** driven by mutations in TSC**1** or TSC**2**, characterized by spontaneous regression. These benign hamartomas arise within ventricular myocardium, managed conservatively unless severe outflow obstruction occurs.",
+      "say": "Cardiac rhabdomyoma is the most frequent primary cardiac tumor in infants and children, strongly associated with tuberous sclerosis driven by mutations in TSC1 or TSC2, characterized by spontaneous regression. These benign hamartomas arise within ventricular myocardium, managed conservatively unless severe outflow obstruction occurs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tuberous Sclerosis Complex: Mutations in TSC1 (Hamartin) or TSC2"
+          },
+          {
+            "id": "b",
+            "label": "mTOR Pathway Hyperactivation & Ventricular Hamartomas"
+          },
+          {
+            "id": "c",
+            "label": "Multiple Well-Circumscribed Intramyocardial Rhabdomyomas"
+          },
+          {
+            "id": "d",
+            "label": "Spontaneous Tumor Regression Across Early Childhood (or mTOR Inhibitor)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Loss of tumor suppression"
+          ],
+          [
+            "b",
+            "c",
+            "Cardiomyocyte proliferation"
+          ],
+          [
+            "c",
+            "d",
+            "Gradual involution over time"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cardiac angiosarcoma** is the most common primary **malignant cardiac tumor** in adults, typically located in the right atrium and pericardium with early hemorrhagic pericardial effusion, tamponade, and widespread metastases. Angiosarcomas exhibit aggressive local invasion of the vena cava, tricuspid valve, and coronary arteries.",
+      "say": "Cardiac angiosarcoma is the most common primary malignant cardiac tumor in adults, typically located in the right atrium and pericardium with early hemorrhagic pericardial effusion, tamponade, and widespread metastases. Angiosarcomas demonstrate rapid aggressive local invasion of the vena cava, tricuspid valve, and coronary arteries, and they invade surrounding tissues rapidly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Malignant Endothelial Neoplasm Arising in Right Atrium"
+          },
+          {
+            "id": "b",
+            "label": "Aggressive Transmural Infiltration into Pericardium"
+          },
+          {
+            "id": "c",
+            "label": "Recurrent Hemorrhagic Pericardial Effusion & Tamponade"
+          },
+          {
+            "id": "d",
+            "label": "Early Widespread Hematogenous Pulmonary Metastases"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Right atrial predilection"
+          ],
+          [
+            "b",
+            "c",
+            "Vascular channel rupture"
+          ],
+          [
+            "c",
+            "d",
+            "Dismal median survival < 9 to 12 months"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Metastatic tumors** to the heart are **20** to **40** times more frequent than primary cardiac tumors, most often originating from lung cancer, breast cancer, **melanoma** which has the highest propensity for myocardial metastasis, and lymphoma. Direct venous extension occurs via the inferior vena cava in renal cell carcinoma.",
+      "say": "Metastatic tumors to the heart are 20 to 40 times more frequent than primary cardiac tumors, most often originating from lung cancer, breast cancer, melanoma which has the highest propensity for myocardial metastasis, and lymphoma. Direct venous extension occurs via the inferior vena cava in renal cell carcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Primary Malignancy",
+          "Frequency / Propensity",
+          "Mode of Cardiac Spread"
+        ],
+        "rows": [
+          [
+            "Malignant Melanoma",
+            "Highest percentage propensity (> 50% autopsy)",
+            "Hematogenous dissemination to myocardium"
+          ],
+          [
+            "Lung Carcinoma",
+            "Most common in absolute numbers",
+            "Direct contiguous invasion or retrograde lymphatic"
+          ],
+          [
+            "Breast Carcinoma",
+            "Second most common absolute number",
+            "Lymphatic permeation and pericardial seeding"
+          ],
+          [
+            "Renal Cell Carcinoma",
+            "Classic intravascular growth",
+            "Direct intraluminal cavoatrial tumor thrombus up IVC"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Carcinoid heart disease** occurs in patients with neuroendocrine tumors and hepatic metastases due to circulating vasoactive **serotonin** **5**-HT, causing plaque-like fibrous thickening of tricuspid and pulmonic valves leading to severe tricuspid regurgitation. Left-sided valves are spared because serotonin is metabolized by pulmonary monoamine oxidases.",
+      "say": "Carcinoid heart disease occurs in patients with neuroendocrine tumors and hepatic metastases due to circulating vasoactive serotonin 5-HT, causing plaque-like fibrous thickening of tricuspid and pulmonic valves leading to severe tricuspid regurgitation. Left-sided valves are spared because serotonin is metabolized by pulmonary monoamine oxidases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Hepatic Metastases Bypass First-Pass Portal Clearance"
+          },
+          {
+            "id": "b",
+            "label": "Vasoactive Serotonin (5-HT) Released into Systemic Venous Circulation"
+          },
+          {
+            "id": "c",
+            "label": "Endocardial Fibroblast Proliferation & Plaque Deposition on TV/PV"
+          },
+          {
+            "id": "d",
+            "label": "Severe Tricuspid Regurgitation; Left Valves Spared by Pulmonary MAO"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Circulating amine overload"
+          ],
+          [
+            "b",
+            "c",
+            "Endocardial fibrogenesis"
+          ],
+          [
+            "c",
+            "d",
+            "Right heart valvular retraction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rheumatoid arthritis and **systemic lupus erythematosus** involve the heart through pericarditis, myocarditis, and **Libman-Sacks endocarditis** characterized by verrucous, nonbacterial valvular lesions on both surfaces of mitral and aortic leaflets. Libman-Sacks vegetations are strongly associated with antiphospholipid antibodies and carry embolic risk. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Rheumatoid arthritis and systemic lupus erythematosus involve the heart through pericarditis, myocarditis, and Libman-Sacks endocarditis characterized by verrucous, nonbacterial valvular lesions on both surfaces of mitral and aortic leaflets. Libman-Sacks vegetations are strongly associated with antiphospholipid antibodies and carry embolic risk. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Libman-Sacks Endocarditis (SLE/APS)",
+          "points": [
+            "Non-bacterial, verrucous sterile vegetations",
+            "Located on both surfaces of leaflets and commissures",
+            "Strongly correlated with antiphospholipid antibodies",
+            "Predisposes to arterial thromboembolism and secondary IE"
+          ]
+        },
+        "right": {
+          "title": "Rheumatic Endocarditis",
+          "points": [
+            "Small verrucae along lines of leaflet closure",
+            "Accompanied by commissural fusion and chordal shortening",
+            "Leads to progressive mitral stenosis over decades",
+            "Triggered by Group A Streptococcus molecular mimicry"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

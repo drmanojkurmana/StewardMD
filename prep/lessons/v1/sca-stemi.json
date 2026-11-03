@@ -1,0 +1,288 @@
+{
+  "v": 1,
+  "module": "sca-stemi",
+  "subject": "ss-cardiology",
+  "title": "ST Elevation Myocardial Infarction Management",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Diagnostic **ST-segment elevation** requires new elevation at the J-point in two **contiguous leads** of at least **1** mm in all leads except V2-V3, where thresholds are at least **2.5** mm in men under **40**, at least **2.0** mm in men **40** and older, and at least **1.5** mm in women. These age- and sex-adjusted cutoffs prevent overdiagnosis of benign early repolarization while ensuring timely identification of acute transmural infarction.",
+      "say": "Diagnostic ST-segment elevation requires new elevation at the J-point in two contiguous leads of at least 1 mm in all leads except V2-V3. In leads V2 and V3, the elevation threshold is at least 2 point 5 mm in men under 40, at least 2 point 0 mm in men 40 and older, and at least 1 point 5 mm in women. These age- and sex-adjusted cutoffs prevent overdiagnosis of benign early repolarization while ensuring timely identification of acute transmural infarction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ECG Leads",
+          "Patient Demographic Group",
+          "J-Point Elevation Threshold"
+        ],
+        "rows": [
+          [
+            "Leads V2-V3",
+            "Men under 40 years",
+            "\u2265  2.5 mm"
+          ],
+          [
+            "Leads V2-V3",
+            "Men 40 years and older",
+            "\u2265  2.0 mm"
+          ],
+          [
+            "Leads V2-V3",
+            "Women of any age",
+            "\u2265  1.5 mm"
+          ],
+          [
+            "All other contiguous leads",
+            "All men and women",
+            "\u2265  1.0 mm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Primary percutaneous coronary intervention** is the preferred **reperfusion strategy** if it can be performed within **120** minutes of STEMI diagnosis. Establishing immediate wire crossing restores antegrade epicardial coronary flow and improves myocardial salvage, significantly lowering recurrent reinfarction, intracranial hemorrhage, and mortality compared with pharmacological fibrinolytic therapy.",
+      "say": "Primary percutaneous coronary intervention is the preferred reperfusion strategy if it can be performed within 120 minutes of STEMI diagnosis. Establishing immediate wire crossing restores antegrade epicardial coronary flow and improves myocardial salvage, significantly lowering recurrent reinfarction, intracranial hemorrhage, and mortality compared with pharmacological fibrinolytic therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "STEMI Diagnosis Confirmed on 12-Lead ECG"
+          },
+          {
+            "id": "b",
+            "label": "Can Primary PCI Be Done Within 120 Minutes?"
+          },
+          {
+            "id": "c",
+            "label": "YES: Immediate Transfer for Primary PCI (Door-to-Balloon < 90 min)"
+          },
+          {
+            "id": "d",
+            "label": "NO: Administer IV Fibrinolytic Bolus Within 10 Minutes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Assess transport logistics"
+          ],
+          [
+            "b",
+            "c",
+            "Preferred pathway"
+          ],
+          [
+            "b",
+            "d",
+            "Fibrinolysis pathway"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "If PPCI cannot be achieved within **120** minutes, intravenous **fibrinolytic therapy** with **tenecteplase** must be administered within **10** minutes of STEMI diagnosis, followed by transfer for pharmacoinvasive assessment. Routine coronary angiography is subsequently performed within **2** to **24** hours after successful lysis, whereas failed reperfusion mandates immediate rescue PCI.",
+      "say": "If PPCI cannot be achieved within 120 minutes, intravenous fibrinolytic therapy with tenecteplase must be administered within 10 minutes of STEMI diagnosis, followed by transfer for pharmacoinvasive assessment. Routine coronary angiography is subsequently performed within 2 to 24 hours after successful lysis, whereas failed reperfusion mandates immediate rescue PCI.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Timing Parameter",
+          "Clinical Target",
+          "Intervention"
+        ],
+        "rows": [
+          [
+            "Fibrinolysis Bolus",
+            "Within 10 minutes of diagnosis",
+            "Weight-adjusted IV tenecteplase"
+          ],
+          [
+            "Reperfusion Assessment",
+            "60 to 90 minutes post-lytic",
+            "Check for > 50% ST resolution"
+          ],
+          [
+            "Rescue PCI",
+            "Immediate",
+            "Required if < 50% ST resolution"
+          ],
+          [
+            "Pharmacoinvasive Angiography",
+            "2 to 24 hours post-lytic",
+            "Routine PCI after successful lysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Posterior myocardial infarction** is diagnosed by ST depression at least **0.5** mm in leads V1-V3 with tall R waves and upright T waves, confirmed by ST elevation at least 0.5 mm in posterior **leads V7-V9**. True posterior wall ischemia arises from left circumflex or distal right coronary occlusion, presenting as mirror-image ST elevation on standard precordial leads.",
+      "say": "Posterior myocardial infarction is diagnosed by ST depression at least 0 point 5 mm in leads V1-V3 with tall R waves and upright T waves, confirmed by ST elevation at least 0 point 5 mm in posterior leads V7-V9. True posterior wall ischemia arises from left circumflex or distal right coronary occlusion, presenting as mirror-image ST elevation on standard precordial leads.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anterior Leads V1-V3 Mirror Signs",
+          "points": [
+            "Horizontal or downsloping ST depression >= 0.5 mm",
+            "Tall, broad R waves with R/S ratio > 1 in lead V2",
+            "Upright prominent terminal T waves",
+            "Represents electrical mirror image of posterior wall"
+          ]
+        },
+        "right": {
+          "title": "Posterior Leads V7-V9 Direct Signs",
+          "points": [
+            "Direct ST-segment elevation >= 0.5 mm",
+            "Lead V7 at posterior axillary line 5th space",
+            "Lead V8 at mid-scapular line 5th space",
+            "Lead V9 at left paraspinal border 5th space"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Right ventricular infarction** complicating inferior STEMI is identified by ST-segment elevation at least **1** mm in right-sided **lead V4R**, presenting with hypotension, clear lung fields, and elevated jugular venous pressure. Preload maintenance with intravenous saline is paramount; nitrates and diuretics are strictly avoided because they precipitate catastrophic right ventricular failure.",
+      "say": "Right ventricular infarction complicating inferior STEMI is identified by ST-segment elevation at least 1 mm in right-sided lead V4R, presenting with hypotension, clear lung fields, and elevated jugular venous pressure. Preload maintenance with intravenous saline is paramount; nitrates and diuretics are strictly avoided because they precipitate catastrophic right ventricular failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Inferior STEMI with Hypotension and Elevated JVP"
+          },
+          {
+            "id": "b",
+            "label": "Obtain Right Precordial ECG: Check Lead V4R"
+          },
+          {
+            "id": "c",
+            "label": "Confirm ST-Segment Elevation >= 1 mm in Lead V4R"
+          },
+          {
+            "id": "d",
+            "label": "Administer IV Saline & Strictly Withhold Nitrates/Diuretics"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Suspect RV extension"
+          ],
+          [
+            "b",
+            "c",
+            "Diagnostic right-sided lead"
+          ],
+          [
+            "c",
+            "d",
+            "Preload maintenance protocol"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Modified **Sgarbossa criteria** identify acute coronary occlusion in the presence of left bundle branch block or ventricular pacing: **concordant ST elevation** at least **1** mm, concordant ST depression at least 1 mm in V1-V3, or excessively discordant ST/S ratio at most **-0.25**. The Smith modification replacing absolute 5 mm discordance with the proportional ratio greatly enhances diagnostic accuracy.",
+      "say": "Modified Sgarbossa criteria identify acute coronary occlusion in the presence of left bundle branch block or ventricular pacing: concordant ST elevation at least 1 mm, concordant ST depression at least 1 mm in V1-V3, or excessively discordant ST/S ratio at most -0 point 25. The Smith modification replacing absolute 5 mm discordance with the proportional ratio greatly enhances diagnostic accuracy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Modified Sgarbossa Criterion",
+          "ECG Threshold",
+          "Diagnostic Score / Value"
+        ],
+        "rows": [
+          [
+            "Concordant ST Elevation",
+            "\u2265  1 mm in leads with positive QRS",
+            "5 points (Highly specific for occlusion)"
+          ],
+          [
+            "Concordant ST Depression",
+            "\u2265  1 mm in precordial leads V1, V2, or V3",
+            "3 points (Indicates anterior ischemia)"
+          ],
+          [
+            "Proportional Discordance",
+            "ST/S ratio \u2264  -0.25 in excessively discordant leads",
+            "Replaces older absolute 5 mm discordance rule"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Prasugrel** given as a **60** mg loading dose followed by **10** mg daily or **ticagrelor** given as a **180** mg loading dose followed by **90** mg twice daily is recommended over clopidogrel in primary PCI. Potent P2Y12 inhibition achieves rapid platelet suppression, significantly reducing ischemic recurrent infarctions and acute stent thrombosis.",
+      "say": "Prasugrel given as a 60 mg loading dose followed by 10 mg daily or ticagrelor given as a 180 mg loading dose followed by 90 mg twice daily is recommended over clopidogrel in primary PCI. Potent P2Y12 inhibition achieves rapid platelet suppression, significantly reducing ischemic recurrent infarctions and acute stent thrombosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prasugrel Regimen",
+          "points": [
+            "Loading dose 60 mg, maintenance 10 mg once daily",
+            "Dose reduction to 5 mg if weight < 60 kg or age >= 75",
+            "Contraindicated in prior stroke or TIA",
+            "Irreversible active thienopyridine metabolite"
+          ]
+        },
+        "right": {
+          "title": "Ticagrelor Regimen",
+          "points": [
+            "Loading dose 180 mg, maintenance 90 mg twice daily",
+            "No dose reduction required for elderly or low body weight",
+            "Safe in patients with prior ischemic cerebrovascular disease",
+            "Direct-acting cyclopentyltriazolopyrimidine antagonist"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complete revascularization** of non-infarct-related culprit arteries in hemodynamically stable STEMI multivessel disease reduces major adverse cardiac events as shown in the landmark **COMPLETE trial**. Staged or index procedure PCI of non-culprit lesions with significant stenosis lowers cardiovascular death and recurrent infarction compared with culprit-only PCI.",
+      "say": "Complete revascularization of non-infarct-related culprit arteries in hemodynamically stable STEMI multivessel disease reduces major adverse cardiac events as shown in the landmark COMPLETE trial. Staged or index procedure PCI of non-culprit lesions with significant stenosis lowers cardiovascular death and recurrent infarction compared with culprit-only PCI.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "STEMI Patient with Multivessel Coronary Disease Undergoing PPCI"
+          },
+          {
+            "id": "b",
+            "label": "Successful Primary PCI of Culprit Infarct-Related Artery"
+          },
+          {
+            "id": "c",
+            "label": "Perform Complete Revascularization of Non-Culprit Stenoses"
+          },
+          {
+            "id": "d",
+            "label": "Significant Reduction in Hard MACE and MI (COMPLETE Trial)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Primary culprit lesion stenting"
+          ],
+          [
+            "b",
+            "c",
+            "Staged during hospital admission or within 45 days"
+          ],
+          [
+            "c",
+            "d",
+            "Superiority over culprit-only strategy"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}

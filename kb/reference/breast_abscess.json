@@ -162,12 +162,46 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in breast abscess",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Breast ultrasound", "cells": [{"text": "Confirms the collection and guides aspiration"}], "cite": "c1"},
-        {"parameter": "Culture and sensitivity of aspirated pus or milk", "cells": [{"text": "Organism and antibiotic choice"}], "cite": "c1"},
-        {"parameter": "Mammography and core biopsy", "cells": [{"text": "Malignancy excluded in non-lactational or non-resolving cases"}], "cite": "c1"},
-        {"parameter": "Smoking status and diabetes assessment", "cells": [{"text": "Risk factors in recurrent non-lactational disease"}], "cite": "c1"}
+        {
+          "parameter": "Breast ultrasound",
+          "cells": [
+            {
+              "text": "Confirms the collection and guides aspiration"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture and sensitivity of aspirated pus or milk",
+          "cells": [
+            {
+              "text": "Organism and antibiotic choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Mammography and core biopsy",
+          "cells": [
+            {
+              "text": "Malignancy excluded in non-lactational or non-resolving cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking status and diabetes assessment",
+          "cells": [
+            {
+              "text": "Risk factors in recurrent non-lactational disease"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -175,10 +209,28 @@
       "kind": "ddx",
       "title": "Look-alike breast inflammation",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Inflammatory breast carcinoma", "cells": [{"text": "Non-resolving or recurrent inflammatory change in an older woman; requires biopsy"}], "cite": "c1"},
-        {"parameter": "Periductal mastitis", "cells": [{"text": "Strongly linked to smoking; periareolar, with mixed aerobic and anaerobic organisms and sometimes a mammary duct fistula"}], "cite": "c1"}
+        {
+          "parameter": "Inflammatory breast carcinoma",
+          "cells": [
+            {
+              "text": "Non-resolving or recurrent inflammatory change in an older woman; requires biopsy"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Periductal mastitis",
+          "cells": [
+            {
+              "text": "Strongly linked to smoking; periareolar, with mixed aerobic and anaerobic organisms and sometimes a mammary duct fistula"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -186,16 +238,107 @@
       "kind": "treatment",
       "title": "Management options in breast abscess",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Ultrasound-guided needle aspiration", "cells": [{"text": "Repeat as required for established abscess"}, {"text": "First-line drainage"}], "cite": "c1"},
-        {"parameter": "Incision and drainage", "cells": [{"text": "Large, multiloculated, or overlying-necrosis cases"}, {"text": "Reserved cases"}], "cite": "c1"},
-        {"parameter": "Antibiotics", "cells": [{"text": "Anti-staphylococcal cover for lactational disease; anaerobic cover for periareolar disease"}, {"text": "Given with drainage"}], "cite": "c1"},
-        {"parameter": "Culture-directed therapy", "cells": [{"text": "Culture and sensitivity of aspirated pus or milk"}, {"text": "Guides antibiotic choice"}], "cite": "c1"},
-        {"parameter": "Breastfeeding or expression", "cells": [{"text": "Continue from the affected side in lactational cases"}, {"text": "Relieves milk stasis"}], "cite": "c1"},
-        {"parameter": "Smoking cessation", "cells": [{"text": "Support in non-lactational periductal disease"}, {"text": "Reduces recurrence"}], "cite": "c1"},
-        {"parameter": "Malignancy exclusion", "cells": [{"text": "Mammography and core biopsy in non-resolving or non-lactational cases"}, {"text": "Diagnostic"}], "cite": "c1"},
-        {"parameter": "Duct excision", "cells": [{"text": "Recurrent periductal disease or established mammary duct fistula"}, {"text": "After inflammation settles"}], "cite": "c1"}
+        {
+          "parameter": "Ultrasound-guided needle aspiration",
+          "cells": [
+            {
+              "text": "Repeat as required for established abscess"
+            },
+            {
+              "text": "First-line drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Incision and drainage",
+          "cells": [
+            {
+              "text": "Large, multiloculated, or overlying-necrosis cases"
+            },
+            {
+              "text": "Reserved cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Antibiotics",
+          "cells": [
+            {
+              "text": "Anti-staphylococcal cover for lactational disease; anaerobic cover for periareolar disease"
+            },
+            {
+              "text": "Given with drainage"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Culture-directed therapy",
+          "cells": [
+            {
+              "text": "Culture and sensitivity of aspirated pus or milk"
+            },
+            {
+              "text": "Guides antibiotic choice"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Breastfeeding or expression",
+          "cells": [
+            {
+              "text": "Continue from the affected side in lactational cases"
+            },
+            {
+              "text": "Relieves milk stasis"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Smoking cessation",
+          "cells": [
+            {
+              "text": "Support in non-lactational periductal disease"
+            },
+            {
+              "text": "Reduces recurrence"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Malignancy exclusion",
+          "cells": [
+            {
+              "text": "Mammography and core biopsy in non-resolving or non-lactational cases"
+            },
+            {
+              "text": "Diagnostic"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Duct excision",
+          "cells": [
+            {
+              "text": "Recurrent periductal disease or established mammary duct fistula"
+            },
+            {
+              "text": "After inflammation settles"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     }
   ],
@@ -205,32 +348,146 @@
       "title": "Diagnosis and management of breast abscess",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Painful, hot, tender breast lump with erythema, fever and malaise", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: skin necrosis, spreading cellulitis with sepsis, or immunosuppression or diabetes with rapid progression?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: urgent antibiotics and surgical review for drainage", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Breast ultrasound to confirm collection; culture aspirate or milk", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Lactational disease?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "Continue breastfeeding or expression; anti-staphylococcal antibiotics", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Anaerobic cover; smoking cessation; mammography and core biopsy", "cite": "c1"},
-        {"id": "n8", "type": "action", "text": "Ultrasound-guided aspiration, repeated as needed; incision and drainage if large or multiloculated", "cite": "c1"},
-        {"id": "n9", "type": "decision", "text": "Non-resolving, recurrent, or inflammatory features persist?", "cite": "c1"},
-        {"id": "n10", "type": "outcome", "text": "Exclude inflammatory breast cancer; duct excision if mammary duct fistula recurs", "cite": "c1"},
-        {"id": "n11", "type": "outcome", "text": "Most resolve fully with timely drainage and antibiotics", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Painful, hot, tender breast lump with erythema, fever and malaise",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: skin necrosis, spreading cellulitis with sepsis, or immunosuppression or diabetes with rapid progression?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: urgent antibiotics and surgical review for drainage",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Breast ultrasound to confirm collection; culture aspirate or milk",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Lactational disease?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "Continue breastfeeding or expression; anti-staphylococcal antibiotics",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Anaerobic cover; smoking cessation; mammography and core biopsy",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "action",
+          "text": "Ultrasound-guided aspiration, repeated as needed; incision and drainage if large or multiloculated",
+          "cite": "c1"
+        },
+        {
+          "id": "n9",
+          "type": "decision",
+          "text": "Non-resolving, recurrent, or inflammatory features persist?",
+          "cite": "c1"
+        },
+        {
+          "id": "n10",
+          "type": "outcome",
+          "text": "Exclude inflammatory breast cancer; duct excision if mammary duct fistula recurs",
+          "cite": "c1"
+        },
+        {
+          "id": "n11",
+          "type": "outcome",
+          "text": "Most resolve fully with timely drainage and antibiotics",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Next"},
-        {"from": "n7", "to": "n8", "label": "Next"},
-        {"from": "n8", "to": "n9", "label": "Next"},
-        {"from": "n9", "to": "n10", "label": "Yes"},
-        {"from": "n9", "to": "n11", "label": "No"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n7",
+          "to": "n8",
+          "label": "Next"
+        },
+        {
+          "from": "n8",
+          "to": "n9",
+          "label": "Next"
+        },
+        {
+          "from": "n9",
+          "to": "n10",
+          "label": "Yes"
+        },
+        {
+          "from": "n9",
+          "to": "n11",
+          "label": "No"
+        }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "breast-abscess-fig1",
+      "type": "image",
+      "title": "Breast Abscess Ultrasound",
+      "src": "v1/kb/media/breast-abscess-fig1.webp",
+      "alt": "Breast ultrasound showing septated abscess cavity with enhancement and Doppler hyperaemic rim",
+      "caption": "Breast ultrasound of abscess with Doppler vascular rim. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }

@@ -1,0 +1,278 @@
+{
+  "v": 1,
+  "module": "sca-atherosclerosis-lipids",
+  "subject": "ss-cardiology",
+  "title": "Atherosclerosis, Lipids and Preventive Cardiology",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "**Atherogenesis** begins with endothelial dysfunction, subendothelial accumulation and oxidation of apolipoprotein B-containing lipoproteins, and recruitment of monocyte-derived macrophages forming **foam cells**. The subsequent secretion of platelet-derived growth factors stimulates vascular smooth muscle migration from media to intima, elaborating extracellular matrix that establishes the mature fibrous cap over a lipid core.",
+      "say": "Atherogenesis begins with endothelial dysfunction, subendothelial accumulation and oxidation of apolipoprotein B-containing lipoproteins, and recruitment of monocyte-derived macrophages forming foam cells. The subsequent secretion of platelet-derived growth factors stimulates vascular smooth muscle migration from media to intima, elaborating extracellular matrix that establishes the mature fibrous cap over a lipid core.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Endothelial Injury & ApoB Lipoprotein Trapping"
+          },
+          {
+            "id": "b",
+            "label": "Oxidative Modification of Entrapped Particles"
+          },
+          {
+            "id": "c",
+            "label": "Monocyte Infiltration & Scavenger Receptor Uptake"
+          },
+          {
+            "id": "d",
+            "label": "Foam Cell Formation & Fatty Streak Expansion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Subendothelial retention"
+          ],
+          [
+            "b",
+            "c",
+            "VCAM-1 and MCP-1 activation"
+          ],
+          [
+            "c",
+            "d",
+            "Unregulated lipid ingestion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Familial hypercholesterolemia** is predominantly caused by autosomal dominant mutations in the **LDLR gene**, followed by APOB and gain-of-function PCSK9 mutations. Impaired low-density lipoprotein clearance produces lifelong profound hypercholesterolemia, resulting in tendon xanthomas, arcus cornealis, and accelerated coronary atherogenesis before the fifth decade of life in heterozygous individuals.",
+      "say": "Familial hypercholesterolemia is predominantly caused by autosomal dominant mutations in the LDLR gene, followed by APOB and gain-of-function PCSK9 mutations. Impaired low-density lipoprotein clearance produces lifelong profound hypercholesterolemia, resulting in tendon xanthomas, arcus cornealis, and accelerated coronary atherogenesis before the fifth decade of life in heterozygous individuals.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genetic Defect",
+          "Inheritance Pattern",
+          "Pathophysiological Mechanism"
+        ],
+        "rows": [
+          [
+            "LDLR Mutations (85-90%)",
+            "Autosomal Dominant",
+            "Defective LDL receptor synthesis or binding"
+          ],
+          [
+            "APOB Mutations (5-10%)",
+            "Autosomal Dominant",
+            "Impaired ligand binding of ApoB-100 to receptor"
+          ],
+          [
+            "PCSK9 Gain-of-Function (<1%)",
+            "Autosomal Dominant",
+            "Excessive endosomal degradation of LDL receptors"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Very high risk ASCVD guidelines recommend lowering **LDL cholesterol** by at least **50%** from **baseline** and achieving an absolute LDL-C goal below **55** mg/dL. Reaching these ambitious therapeutic targets typically requires high-intensity statin therapy combining atorvastatin 80 mg or rosuvastatin 40 mg with synergistic non-statin lipid-lowering pharmacological agents.",
+      "say": "Very high risk ASCVD guidelines recommend lowering LDL cholesterol by at least 50% from baseline and achieving an absolute LDL-C goal below 55 mg/dL. Reaching these ambitious therapeutic targets typically requires high-intensity statin therapy combining atorvastatin 80 mg or rosuvastatin 40 mg with synergistic non-statin lipid-lowering pharmacological agents.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Very High Risk ASCVD Targets",
+          "points": [
+            "Achieve at least 50% LDL-C reduction from baseline",
+            "Reach absolute LDL-C target under 55 mg/dL",
+            "Non-HDL target under 85 mg/dL",
+            "Apolipoprotein B target under 65 mg/dL"
+          ]
+        },
+        "right": {
+          "title": "High Risk Primary Prevention",
+          "points": [
+            "Achieve at least 50% LDL-C reduction from baseline",
+            "Reach absolute LDL-C target under 70 mg/dL",
+            "Non-HDL target under 100 mg/dL",
+            "Apolipoprotein B target under 80 mg/dL"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ezetimibe** selectively inhibits the **NPC1L1** transporter in the jejunal brush border, reducing LDL-C by an additional **15%** to **20%** when added to statin therapy. By blocking dietary and biliary cholesterol reabsorption without interfering with fat-soluble vitamins, it promotes compensatory hepatic LDL receptor upregulation to clear atherogenic particles from plasma.",
+      "say": "Ezetimibe selectively inhibits the NPC1L1 transporter in the jejunal brush border, reducing LDL-C by an additional 15% to 20% when added to statin therapy. By blocking dietary and biliary cholesterol reabsorption without interfering with fat-soluble vitamins, it promotes compensatory hepatic LDL receptor upregulation to clear atherogenic particles from plasma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Step",
+          "Agent",
+          "Incremental LDL-C Reduction"
+        ],
+        "rows": [
+          [
+            "Step 1: Statin Monotherapy",
+            "Atorvastatin 80 mg or Rosuvastatin 40 mg",
+            "Approximately 50% reduction from baseline"
+          ],
+          [
+            "Step 2: Add Cholesterol Absorption Inhibitor",
+            "Ezetimibe 10 mg daily",
+            "Additional 15% to 20% LDL-C lowering"
+          ],
+          [
+            "Step 3: Add Monoclonal Antibody",
+            "Evolocumab 140 mg q2w or Alirocumab 75/150 mg",
+            "Additional 50% to 60% LDL-C lowering"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**PCSK9 monoclonal antibodies** including **evolocumab** and alirocumab prevent degradation of LDL receptors, achieving further **50%** to **60%** LDL-C reductions. By blocking circulating PCSK9 from escorting LDL receptors into hepatic lysosomes, these fully humanised antibodies maintain rapid receptor recycling back to the hepatocyte surface, dramatically depleting atherogenic particles in clinical trials.",
+      "say": "PCSK9 monoclonal antibodies including evolocumab and alirocumab prevent degradation of LDL receptors, achieving further 50% to 60% LDL-C reductions. By blocking circulating PCSK9 from escorting LDL receptors into hepatic lysosomes, these fully humanised antibodies maintain rapid receptor recycling back to the hepatocyte surface, dramatically depleting atherogenic particles in clinical trials.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "PCSK9 Monoclonal Antibody Binds Free PCSK9"
+          },
+          {
+            "id": "b",
+            "label": "Prevents PCSK9 Binding to Hepatic LDL Receptors"
+          },
+          {
+            "id": "c",
+            "label": "Spares Receptors From Endosomal Lysosomal Degradation"
+          },
+          {
+            "id": "d",
+            "label": "Receptors Recycle to Cell Surface Lowering Plasma LDL"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Neutralises protease"
+          ],
+          [
+            "b",
+            "c",
+            "Inhibits receptor complexing"
+          ],
+          [
+            "c",
+            "d",
+            "50% to 60% incremental reduction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Inclisiran** is a **small interfering RNA** directed against PCSK9 mRNA in hepatocytes that produces sustained LDL-C lowering with biannual dosing. Conjugated to triantennary N-acetylgalactosamine, it undergoes rapid receptor-mediated hepatic uptake, engaging the RNA-induced silencing complex to cleave PCSK9 mRNA and maintain sustained catalytic silencing across six-month dosing intervals.",
+      "say": "Inclisiran is a small interfering RNA directed against PCSK9 mRNA in hepatocytes that produces sustained LDL-C lowering with biannual dosing. Conjugated to triantennary N-acetylgalactosamine, it undergoes rapid receptor-mediated hepatic uptake, engaging the RNA-induced silencing complex to cleave PCSK9 mRNA and maintain sustained catalytic silencing across six-month dosing intervals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PCSK9 Monoclonal Antibodies",
+          "points": [
+            "Subcutaneous injection every 2 or 4 weeks",
+            "Binds and neutralises extracellular PCSK9 protein",
+            "Rapid peak effect within days of dosing",
+            "Requires strict cold-chain refrigeration storage"
+          ]
+        },
+        "right": {
+          "title": "Inclisiran siRNA",
+          "points": [
+            "Subcutaneous injection every 6 months",
+            "Cleaves intracellular hepatic PCSK9 mRNA transcript",
+            "Sustained catalytic suppression via RISC complex",
+            "Administered in-clinic ensuring high compliance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bempedoic acid** inhibits adenosine triphosphate-**citrate lyase** upstream of HMG-CoA reductase in the hepatic cholesterol synthesis pathway without causing muscular adverse effects. Because its obligate activating enzyme very long-chain acyl-CoA synthetase-1 is selectively expressed in liver tissue but entirely absent in skeletal muscle, it avoids statin-associated myalgia.",
+      "say": "Bempedoic acid inhibits adenosine triphosphate-citrate lyase upstream of HMG-CoA reductase in the hepatic cholesterol synthesis pathway without causing muscular adverse effects. Because its obligate activating enzyme very long-chain acyl-CoA synthetase-1 is selectively expressed in liver tissue but entirely absent in skeletal muscle, it avoids statin-associated myalgia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Hepatic Uptake of Prodrug Bempedoic Acid"
+          },
+          {
+            "id": "b",
+            "label": "Activation by Hepatic ACSVL1 Enzyme"
+          },
+          {
+            "id": "c",
+            "label": "Inhibition of ATP Citrate Lyase Upstream of HMGCR"
+          },
+          {
+            "id": "d",
+            "label": "Depletion of Intracellular Cholesterol & No Myopathy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Liver-specific activation"
+          ],
+          [
+            "b",
+            "c",
+            "Blockade of acetyl-CoA generation"
+          ],
+          [
+            "c",
+            "d",
+            "Absence of active drug in myocytes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Lipoprotein(a)** is an independent genetically determined causal risk factor for ASCVD and **calcific aortic stenosis** when serum concentrations exceed **50** mg/dL or **125** nmol/L. Its apolipoprotein(a) moiety shares structural homology with plasminogen, competing for fibrin binding while delivering pro-inflammatory oxidized phospholipids directly into arterial walls and valvular leaflets.",
+      "say": "Lipoprotein(a) is an independent genetically determined causal risk factor for ASCVD and calcific aortic stenosis when serum concentrations exceed 50 mg/dL or 125 nmol/L. Its apolipoprotein(a) moiety shares structural homology with plasminogen, competing for fibrin binding while delivering pro-inflammatory oxidized phospholipids directly into arterial walls and valvular leaflets.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Feature",
+          "Molecular Mechanism",
+          "Clinical Consequence"
+        ],
+        "rows": [
+          [
+            "Atherogenicity",
+            "Trapping of ApoB core carrying oxidized lipids",
+            "Accelerates premature coronary artery disease"
+          ],
+          [
+            "Thrombogenicity",
+            "Apo(a) structural mimicry of plasminogen",
+            "Inhibits endogenous tissue plasminogen activator"
+          ],
+          [
+            "Valvular Calcification",
+            "Direct delivery of autotaxin and oxidized phospholipids",
+            "Drives rapid progression of calcific aortic stenosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}
