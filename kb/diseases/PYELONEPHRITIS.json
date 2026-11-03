@@ -1,6 +1,7 @@
 {
   "id": "PYELONEPHRITIS",
   "name": "Acute Pyelonephritis",
+  "hyTerms": ["ascending infection","uropathogens","Staphylococcus aureus","Salmonella","bacteremia","focal renal abscesses","neurogenic bladder","benign prostatic hypertrophy","costovertebral angle pain","tissue-invasive disease","urosepsis","asymptomatic bacteriuria","Acute papillary necrosis","obstructive uropathy","ureteral stent","percutaneous nephrostomy","Emphysematous pyelonephritis","poorly controlled diabetes","perinephric abscess","renal cortical abscess","pyuria","xanthogranulomatous pyelonephritis","staghorn calculus","nephrectomy","leukocyte esterase","Enterobacterales","Acute prostatitis","Chlamydia trachomatis"],
   "class": "infective",
   "system": "Genitourinary",
   "coding": {
@@ -338,7 +339,7 @@
             {
               "text": ">38.0",
               "op": ">",
-              "value": 38.0
+              "value": 38
             },
             {
               "text": "{{hy:Fever separates pyelonephritis from simple cystitis}}; may be absent early or in frail or immunocompromised patients"
@@ -819,6 +820,17 @@
           "label": "Next"
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "pyelonephritis-fig1",
+      "type": "image",
+      "title": "Acute Pyelonephritis Renal Pathology",
+      "src": "v1/kb/media/pyelonephritis-fig1.webp",
+      "alt": "Medical illustration of kidney cross section showing acute pyelonephritis with ascending bacterial infection, wedge shaped inflammation, cortical microabscesses, and microscopic view of tubular necrosis with a white blood cell cast.",
+      "caption": "Diagram showing ascending renal infection, cortical microabscesses, wedge inflammation, and white cell cast. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }

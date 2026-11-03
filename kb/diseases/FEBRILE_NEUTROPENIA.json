@@ -1,6 +1,7 @@
 {
   "id": "FEBRILE_NEUTROPENIA",
   "name": "Febrile Neutropenia",
+  "hyTerms": ["polymorphonuclear neutrophils","circulating half-life of roughly 6-8 hours","ANC of 500/uL","below 200/uL","local inflammatory response is essentially absent","chemotherapy-induced mucosal barrier injury","translocation","below 1000/uL","absolute neutrophil count","neutrophil nadir","6-14 days","nitrosoureas","dacarbazine","temozolomide","procarbazine","delayed marrow toxicity","roughly 6 weeks","Ecthyma gangrenosum","Pseudomonas bacteremia","fever and hypotension","hemodynamic instability","neutropenic enterocolitis","typhlitis","bowel perforation","granulocytes below ~1500/uL","ANC <500/uL","ANC <200/uL","MASCC risk index","band forms plus mature neutrophils","Cross-sectional abdominal imaging"],
   "class": "infective",
   "system": "Systemic / Oncology",
   "coding": {
@@ -301,7 +302,7 @@
             {
               "text": ">=38.0 over 1 h",
               "op": ">=",
-              "value": 38.0
+              "value": 38
             },
             {
               "text": "Meets fever definition"
@@ -851,6 +852,17 @@
           "label": "Next"
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "febrile-neutropenia-fig1",
+      "type": "image",
+      "title": "Febrile Neutropenia Pathogenesis and Management",
+      "src": "v1/kb/media/febrile-neutropenia-fig1.webp",
+      "alt": "Medical diagram showing bone marrow myelosuppression leading to severe neutropenia, gut mucosal barrier breakdown causing bacterial translocation, causative bacterial and fungal pathogens, and empiric antibiotic management guidelines.",
+      "caption": "Diagram of chemotherapy mucosal barrier injury, myelosuppression, bacteremia, and empiric antibiotic therapy. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }

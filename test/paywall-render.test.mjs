@@ -24,14 +24,14 @@ const TIERS = {
 const plansWith = (tiers) => ({ plans: {
   monthly: { months: 1, amount: 59900 }, annual: { months: 12, amount: 599000 },
   tiers,
-  addons: { onco: { amount: 8900, label: "Physician Onco" }, clinic: { amount: 13900, label: "Extra clinic" } },
+  addons: { onco: { amount: 8900, label: "Physician Onco" }, clinic: { amount: 13900, label: "Extra clinic" }, prep: { label: "PrepNucleus", amount: 17900, regular: 49900, annual: 149900, annualRegular: 499900, launchUntil: 1806517740000, productId: "in.stewardmd.prep.annual", monthProductId: null } },
   tokens: { boost: { mt: 50000, amount: 4900 }, plus: { mt: 250000, amount: 19900, regular: 24500, popular: true }, power: { mt: 750000, amount: 49900, regular: 73500 } },
 } });
 const PLANS = plansWith(TIERS);
 
 /* Sandbox with just enough DOM to render AND to click: querySelectorAll("[data-pp]") parses the
  * captured HTML back into stub elements, so wire() can bind onclick and a test can tap a card. */
-function run(platform, plans) {
+function run(platform, plans, status) {
   let captured = "";
   // Memoised per render: wire() binds onclick on the objects it is handed, so tap() must get the
   // SAME objects back, not a fresh parse with onclick still null.
@@ -55,12 +55,12 @@ function run(platform, plans) {
   }
   const fetchImpl = async (url) => ({
     status: 200, url, clone() { return this; },
-    json: async () => (String(url).indexOf("/plans") > -1 ? (plans || PLANS) : { promo: false, pro: false }),
+    json: async () => (String(url).indexOf("/plans") > -1 ? (plans || PLANS) : (status || { promo: false, pro: false })),
   });
   const win = {
     SMD_PRO: {}, SMD_API_BASE: "", ICONS: { get: () => "" }, fetch: fetchImpl,
     SMD_AUTH: { currentUser: { getIdToken: () => Promise.resolve("tok") } },
-    Capacitor: platform === "ios" ? { getPlatform: () => "ios" } : undefined,
+    Capacitor: platform === "ios" || platform === "android" ? { getPlatform: () => platform } : undefined,
   };
   const doc = { createElement: () => node(), body: { style: {}, appendChild() {} }, addEventListener() {} };
   // SMD_AUTH is read as a bare global in the browser (the window.SMD_AUTH alias). Without it in the
@@ -77,9 +77,14 @@ function run(platform, plans) {
   return root;
 }
 const settle = () => new Promise((r) => setTimeout(r, 40));
-async function open(platform, plans) { const r = run(platform, plans); r.win.SMD_PRO.openPaywall(); await settle(); return r; }
+async function open(platform, plans, status) { const r = run(platform, plans, status); r.win.SMD_PRO.openPaywall(); await settle(); return r; }
 // the innerHTML of the card for one tier
 const card = (h, id) => (h.match(new RegExp('<button data-pp="tier" data-tier="' + id + '"[\\s\\S]*?</button>')) || [""])[0];
+// A tier's words live in ONE detail block shown for the selected tier, beside the two price cards.
+const tierBlock = (h, id) => (h.match(new RegExp('<div id="ppTier" data-detail="' + id + '"[\\s\\S]*?(?=<div style="height:18px">)')) || [""])[0];
+const cycles = (h) => (h.match(/<div role="group" aria-label="Billing period"[\s\S]*?(?=<div id="ppTier")/) || [""])[0];
+// what the doctor sees for one tier once it is chosen
+function see(r, id) { r.tap("tier", "data-tier", id); return tierBlock(r.html, id) + cycles(r.html); }
 
 test("three cards by default: Pro, Physician, Physician Pro — trainee tiers are not shown", async () => {
   const h = (await open("web")).html;
@@ -98,10 +103,10 @@ test("Physician is preselected and Annual is preselected", async () => {
 });
 
 test("badges: MOST POPULAR / BEST VALUE / BEST FOR CLINICS", async () => {
-  const h = (await open("web")).html;
-  assert.match(card(h, "pro"), /MOST POPULAR/);
-  assert.match(card(h, "physician"), /BEST VALUE/);
-  assert.match(card(h, "physicianpro"), /BEST FOR CLINICS/);
+  const r = await open("web");
+  assert.match(see(r, "pro"), /MOST POPULAR/);
+  assert.match(see(r, "physician"), /BEST VALUE/);
+  assert.match(see(r, "physicianpro"), /BEST FOR CLINICS/);
 });
 
 test("the quiet link reveals Trainee and Co-Resident, and every tier stays buyable", async () => {
@@ -119,15 +124,15 @@ test("the quiet link reveals Trainee and Co-Resident, and every tier stays buyab
 test("per-day hero line, both cycles, computed from the server price", async () => {
   const r = await open("web");
   // annual (the default): 749000 paise / 365 = ₹21 ; 599000 / 365 = ₹16
-  assert.match(card(r.html, "physician"), /₹21 a day\. Less than a samosa, and it runs your clinic\./);
-  assert.match(card(r.html, "pro"), /₹16 a day\. Less than a samosa\./);
+  assert.match(see(r, "physician"), /₹21 a day\. Less than a samosa, and it runs your clinic\./);
+  assert.match(see(r, "pro"), /₹16 a day\. Less than a samosa\./);
   r.tap("cycle", "data-cycle", "monthly");
   // monthly: 74900/100/30 = ₹25 ; 59900/100/30 = ₹20
-  assert.match(card(r.html, "physician"), /₹25 a day\. Less than a samosa, and it runs your clinic\./);
-  assert.match(card(r.html, "pro"), /₹20 a day\. Less than a samosa\./);
+  assert.match(see(r, "physician"), /₹25 a day\. Less than a samosa, and it runs your clinic\./);
+  assert.match(see(r, "pro"), /₹20 a day\. Less than a samosa\./);
   r.tap("showall");
-  assert.match(card(r.html, "student"), /₹7 a day\. Less than a cup of chai\./);
-  assert.match(card(r.html, "coresident"), /₹5 a day each\. Split with your co-resident\./, "2 seats: the figure is per doctor");
+  assert.match(see(r, "student"), /₹7 a day\. Less than a cup of chai\./);
+  assert.match(see(r, "coresident"), /₹5 a day each\. Split with your co-resident\./, "2 seats: the figure is per doctor");
 });
 
 test("a KV price override moves the number and leaves the comparison word alone", async () => {
@@ -135,27 +140,27 @@ test("a KV price override moves the number and leaves the comparison word alone"
   bumped.physician.amount = 119900;            // owner raises the monthly price in KV
   const r = await open("web", plansWith(bumped));
   r.tap("cycle", "data-cycle", "monthly");
-  assert.match(card(r.html, "physician"), /₹40 a day\. Less than a samosa, and it runs your clinic\./);
+  assert.match(see(r, "physician"), /₹40 a day\. Less than a samosa, and it runs your clinic\./);
 });
 
 test("SAVE% and the strike-through come from the server's `regular` only", async () => {
   const r = await open("web");
   // annual: regular 149900 x 12 = ₹17,988 struck; 1 - 7490/17988 = 58%
-  assert.match(card(r.html, "physician"), /SAVE 58%/);
-  assert.match(card(r.html, "physician"), /line-through">₹17,988/);
+  assert.match(see(r, "physician"), /SAVE 58%/);
+  assert.match(see(r, "physician"), /line-through">₹17,988/);
   r.tap("cycle", "data-cycle", "monthly");
-  assert.match(card(r.html, "physician"), /SAVE 50%/);       // 749 vs regular 1499
-  assert.match(card(r.html, "physician"), /line-through">₹1,499/);
+  assert.match(see(r, "physician"), /SAVE 50%/);       // 749 vs regular 1499
+  assert.match(see(r, "physician"), /line-through">₹1,499/);
 });
 
 test("no `regular` -> no strike-through and no SAVE pill (never invent a was-price)", async () => {
   const bare = JSON.parse(JSON.stringify(TIERS));
   for (const k of Object.keys(bare)) delete bare[k].regular;
   const r = await open("web", plansWith(bare));
-  const cards = () => ["pro", "physician", "physicianpro"].map((id) => card(r.html, id)).join("");
+  const cards = () => ["pro", "physician", "physicianpro"].map((id) => see(r, id)).join("");
   assert.ok(!/line-through/.test(cards()), "no struck price on any card");
   assert.ok(!/SAVE /.test(cards()), "no savings pill on any card");
-  assert.match(card(r.html, "physician"), /₹21 a day/, "the honest per-day line still renders");
+  assert.match(see(r, "physician"), /₹21 a day/, "the honest per-day line still renders");
   r.tap("cycle", "data-cycle", "monthly");
   assert.ok(!/line-through/.test(cards()) && !/SAVE /.test(cards()), "monthly too");
 });
@@ -188,9 +193,9 @@ test("every card carries its benefit line, and Physician carries the second line
   const r = await open("web");
   r.tap("showall");
   for (const id of Object.keys(BENEFIT)) {
-    assert.ok(text(card(r.html, id)).includes(BENEFIT[id]), "benefit line missing on " + id);
+    assert.ok(text(see(r, id)).includes(BENEFIT[id]), "benefit line missing on " + id);
   }
-  assert.ok(text(card(r.html, "physician")).includes("MaiK Voice Scribe writes the note, then offers the differentials worth considering."));
+  assert.ok(text(see(r, "physician")).includes("MaiK Voice Scribe writes the note, then offers the differentials worth considering."));
   // no clinical outcome claim and no invented statistic anywhere in the sheet
   assert.ok(!/readmission|mortality|complication rate|recovery rate|\d+% (more|fewer|better)/i.test(text(r.html)),
     "an outcome claim or a made-up statistic reached the sheet");
@@ -215,14 +220,14 @@ test("the everyday-spend line comes from the map and differs between yearly and 
   for (const cycle of ["annual", "monthly"]) {
     r.tap("cycle", "data-cycle", cycle);
     for (const id of Object.keys(SPEND[cycle])) {
-      const c = text(card(r.html, id));
+      const c = text(see(r, id));
       assert.ok(c.includes(SPEND[cycle][id]), cycle + "/" + id + " spend line missing: " + JSON.stringify(c.slice(0, 160)));
     }
   }
   for (const id of Object.keys(SPEND.annual)) {
     assert.notEqual(SPEND.annual[id], SPEND.monthly[id], id + ": the yearly and monthly lines must differ");
     // and the card really did change when the cycle did
-    assert.ok(!text(card(r.html, id)).includes(SPEND.annual[id]), id + ": the monthly card still shows the yearly line");
+    assert.ok(!text(see(r, id)).includes(SPEND.annual[id]), id + ": the monthly card still shows the yearly line");
   }
   // one sentence, no figure of its own: the only rupee amounts on a card are the server's
   for (const id of Object.keys(SPEND.annual)) {
@@ -236,11 +241,11 @@ test("a tier with no spend line renders nothing rather than borrowing one", asyn
   const extra = JSON.parse(JSON.stringify(TIERS));
   extra.founding = { amount: 39900, annual: 399000, label: "Founding Doctor" };
   const r = await open("web", plansWith(extra));
-  const c = text(card(r.html, "founding"));
+  const c = text(tierBlock(r.html, "founding"));
   for (const line of [...Object.values(SPEND.annual), ...Object.values(SPEND.monthly)]) {
     assert.ok(!c.includes(line), "an unmapped tier borrowed: " + line);
   }
-  assert.ok(text(card(r.html, "physician")).includes(SPEND.annual.physician), "mapped tiers unaffected");
+  assert.ok(text(see(r, "physician")).includes(SPEND.annual.physician), "mapped tiers unaffected");
 });
 
 test("no card shows a rupee figure that is not derived from the plans payload", async () => {
@@ -254,9 +259,10 @@ test("no card shows a rupee figure that is not derived from the plans payload", 
       const strike = t.regular > t.amount ? (annual ? t.regular * 12 : t.regular) : 0;
       const seats = t.seats || 1;
       const day = Math.round((price / 100) / seats / (annual ? 365 : 30));
-      const allowed = new Set([inr(price), "\u20b9" + day.toLocaleString("en-IN")]);
+      const allowed = new Set([inr(price), "\u20b9" + day.toLocaleString("en-IN"), inr(t.amount)]);
+      if (t.annual) { allowed.add(inr(t.annual)); allowed.add(inr(Math.round(t.annual / 12))); }
       if (strike) allowed.add(inr(strike));
-      const found = text(card(r.html, id)).match(/\u20b9[\d,]+/g) || [];
+      const found = text(see(r, id)).match(/\u20b9[\d,]+/g) || [];
       assert.ok(found.length, id + " shows no price at all");
       for (const f of found) assert.ok(allowed.has(f), id + "/" + cycle + ": " + f + " is not a server figure (allowed " + [...allowed] + ")");
     }
@@ -307,4 +313,104 @@ test("iOS hides the coupon field and offers the coming-soon CTA when StoreKit is
 test("no em-dash in any app-facing string", () => {
   const ui = SRC.split("\n").filter((l) => !/^\s*(\/\/|\*|\/\*)/.test(l)).join("\n");
   assert.ok(!ui.includes("—"), "em-dash found in app-facing text");
+});
+
+test("FIX 1: the headline says what the doctor gets, not a generic upgrade line", async () => {
+  const h = (await open("web")).html;
+  assert.ok(h.includes("MaiK writes your notes while you see patients."), "concrete headline");
+  assert.ok(!/Choose your plan|Go Pro|Unlock everything|Upgrade to Pro/.test(text(h)), "no generic upgrade headline left");
+});
+
+test("hero shows the habit (a streak grid of the plan's work) and icon benefits, no sparkle", async () => {
+  const h = (await open("web")).html;
+  assert.ok(h.includes('id="ppHero"'), "outcome hero renders");
+  for (const line of ["NOTES MAIK DRAFTED", "4 months ago", "Today"]) assert.ok(text(h).includes(line), "hero line missing: " + line);
+  assert.equal((h.match(/aspect-ratio:1\/1/g) || []).length, 120, "20 x 6 streak squares");
+  assert.ok(h.includes('id="ppBenefits"'), "benefit row renders");
+  for (const b of ["Voice scribe", "Smart OPD queue", "FollowCare recalls"]) assert.ok(text(h).includes(b), "benefit missing: " + b);
+  assert.ok(!/ppIco\("(spark|crown|star)"\)/.test(SRC), "no sparkle / crown / star icon is rendered by the sheet");
+  assert.ok(!/gradient|glow|blur\(/.test(h), "no gradient, glow or backdrop blur in the sheet");
+});
+
+test("the student button is a real button and takes the doctor straight to the Trainee price", async () => {
+  const r = await open("web");
+  assert.match(r.html, /<button data-pp="showall"[^>]*>[\s\S]*I\u2019m a student or resident[\s\S]*See your price/, "a full button, not a footnote link");
+  r.tap("showall");
+  assert.match(card(r.html, "student"), /aria-pressed="true"/, "Trainee is selected");
+  assert.ok(r.html.includes("Subscribe to Trainee \u00b7 \u20b91,990/year"), "CTA moved to the trainee price");
+  assert.match(r.html, /data-roll="annual" data-to="199000"/, "price carries its roll target");
+});
+
+test("the hero follows the plan: residents see antibiotic decisions, drugs and the antibiogram", async () => {
+  const r = await open("web");
+  r.tap("showall"); r.tap("tier", "data-tier", "student");
+  const t = text(r.html);
+  assert.ok(t.includes("Make residency the easy part."), "resident headline");
+  assert.ok(t.includes("YOUR LEARNING STREAK"), "a resident sees a learning habit");
+  for (const b of ["Antibiotic decisions", "Learn drugs", "Local antibiogram"]) assert.ok(t.includes(b), "benefit missing: " + b);
+  r.tap("tier", "data-tier", "physicianpro");
+  assert.ok(text(r.html).includes("Your whole clinic, hosted for you."));
+  assert.ok(r.html.includes('src="/logo.png"'), "StewardMD logo in the hero");
+});
+
+test("one clear plan: tier chips carry only the name; the two price cards carry the price", async () => {
+  const r = await open("web");
+  assert.ok(!/\u20b9/.test(card(r.html, "pro")), "a tier chip shows no price");
+  const c = cycles(r.html);
+  assert.match(c, /data-cycle="annual"[^>]*aria-pressed="true"/);
+  const flat = text(c).replace(/\s+/g, "");
+  assert.ok(flat.includes("\u20b97,490/yr") && flat.includes("\u20b9624/mo") && flat.includes("\u20b9749/mo"), flat);
+  // yearly vs twelve months, both current server prices: 1 - 7490/8988 = 17%
+  assert.match(c, /Save 17%/);
+});
+
+test("during the launch promo the CTA line states the real price afterwards and when", async () => {
+  const until = Date.UTC(2026, 5, 30, 12, 0, 0);
+  const dateTxt = new Date(until).toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" });
+  const r = await open("web", undefined, { promo: true, pro: false, promoUntil: until });
+  assert.ok(text(r.html).includes("then \u20b917,988/year from " + dateTxt + ". Cancel anytime."), text(r.html).slice(-400));
+  r.tap("cycle", "data-cycle", "monthly");
+  assert.match(r.html, /then \u20b91,499\/month from /);
+  const bare = JSON.parse(JSON.stringify(TIERS));
+  for (const k of Object.keys(bare)) delete bare[k].regular;
+  const r2 = await open("web", plansWith(bare), { promo: true, pro: false, promoUntil: until });
+  assert.match(r2.html, /then \u20b97,490\/year from /);
+  const r3 = await open("web");
+  assert.ok(!/then \u20b9/.test(r3.html), "afterwards line must not render outside the promo");
+});
+
+test("one accent: app tokens only, no borrowed lime/forest colours, no gold/green badges", async () => {
+  const h = (await open("web")).html;
+  assert.ok(!h.includes("--gold") && !h.includes("--green"), "no gold badge and no green pill/banner left");
+  assert.ok(!/d6ee8f|1f3a32/i.test(h), "no colour copied from the reference paywall");
+});
+
+test("the payment line names only the store of the build: Google Play on Android, none on web", async () => {
+  const a = (await open("android")).html;
+  assert.ok(text(a).includes("Secure payment via Google Play"), "android names Google Play");
+  const w = (await open("web")).html;
+  assert.ok(!/Secure payment via/.test(w), "web shows no payment-provider line");
+  assert.ok(!/PhonePe|netbanking/.test(a + w), "no PhonePe line anywhere");
+});
+
+test("PrepNucleus add-on: for students and residents, anyone can buy, server prices with the server's struck regular", async () => {
+  const r = await open("web");
+  const card = (r.html.match(/<div id="ppPrep"[\s\S]*?<\/button><\/div><\/div>/) || [""])[0];
+  const t = text(card).replace(/\s+/g, " ");
+  assert.ok(t.includes("PrepNucleus add-on") && t.includes("For students and residents. Anyone can add it."), t);
+  assert.match(card, /data-pp="prep" data-plan="month"/);
+  assert.match(card, /data-pp="prep" data-plan="year"/);
+  assert.ok(/\u20b9179/.test(t) && /line-through">\u20b9499</.test(card), "Rs 179 a month, Rs 499 struck");
+  assert.ok(/\u20b91,499/.test(t) && /line-through">\u20b94,999</.test(card), "Rs 1,499 a year, Rs 4,999 struck");
+  r.tap("showall"); r.tap("tier", "data-tier", "pro");
+  assert.match(r.html, /id="ppPrep"/, "offered on every plan, not only to trainees");
+  // no regular from the server -> nothing struck
+  const bare = plansWith(TIERS); delete bare.plans.addons.prep.regular; delete bare.plans.addons.prep.annualRegular;
+  const r2 = await open("web", bare);
+  assert.ok(!/line-through">\u20b9(499|4,999)</.test(r2.html), "never an invented was-price");
+});
+
+test("PrepNucleus monthly is hidden on iOS until its store product exists", async () => {
+  const h = (await open("ios")).html;
+  assert.ok(!/data-plan="month"/.test(h), "no monthly button on iOS without a monthly product id");
 });

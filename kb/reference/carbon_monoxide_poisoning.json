@@ -1,6 +1,7 @@
 {
   "id": "carbon_monoxide_poisoning",
   "name": "Carbon monoxide poisoning",
+  "hyTerms": ["carboxyhaemoglobin","200-250 times the affinity of oxygen","oxyhaemoglobin dissociation curve leftward","mitochondrial cytochrome oxidase","Delayed neuropsychiatric syndrome","cherry-red skin appearance","high-flow 100 percent oxygen","Hyperbaric oxygen therapy","co-oximeter","blood carboxyhaemoglobin level","pulse oximetry is misleading","smoke inhalation","cyanide poisoning","Metabolic acidosis with elevated lactate","basal ganglia changes","myocardial ischaemia","non-rebreather mask","CO alarms","normal arterial oxygen tension","Pregnancy"],
   "aliases": [
     "CO poisoning",
     "carbon monoxide toxicity",
@@ -161,13 +162,55 @@
       "kind": "diagnostic",
       "title": "Diagnostic investigations in carbon monoxide poisoning",
       "rowHeader": "Criterion",
-      "columns": ["What it shows"],
+      "columns": [
+        "What it shows"
+      ],
       "rows": [
-        {"parameter": "Blood carboxyhaemoglobin by co-oximetry", "cells": [{"text": "Confirms exposure; standard pulse oximetry cannot distinguish it"}], "cite": "c1"},
-        {"parameter": "Arterial blood gas and lactate", "cells": [{"text": "Metabolic acidosis and severe tissue hypoxia"}], "cite": "c1"},
-        {"parameter": "ECG and cardiac biomarkers", "cells": [{"text": "Myocardial ischaemia"}], "cite": "c1"},
-        {"parameter": "Neuroimaging", "cells": [{"text": "Basal ganglia changes in severe cases"}], "cite": "c1"},
-        {"parameter": "Pregnancy test", "cells": [{"text": "Fetal risk in women of childbearing age"}], "cite": "c1"}
+        {
+          "parameter": "Blood carboxyhaemoglobin by co-oximetry",
+          "cells": [
+            {
+              "text": "Confirms exposure; standard pulse oximetry cannot distinguish it"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Arterial blood gas and lactate",
+          "cells": [
+            {
+              "text": "Metabolic acidosis and severe tissue hypoxia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "ECG and cardiac biomarkers",
+          "cells": [
+            {
+              "text": "Myocardial ischaemia"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Neuroimaging",
+          "cells": [
+            {
+              "text": "Basal ganglia changes in severe cases"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy test",
+          "cells": [
+            {
+              "text": "Fetal risk in women of childbearing age"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -175,11 +218,37 @@
       "kind": "ddx",
       "title": "Look-alike causes of headache, nausea and confusion",
       "rowHeader": "Condition",
-      "columns": ["Key distinguishing feature"],
+      "columns": [
+        "Key distinguishing feature"
+      ],
       "rows": [
-        {"parameter": "Viral illness or gastroenteritis", "cells": [{"text": "Several household members affected at once points to a shared environmental source"}], "cite": "c1"},
-        {"parameter": "Cyanide poisoning", "cells": [{"text": "Concurrent toxicity in victims of smoke inhalation from enclosed-space fires"}], "cite": "c1"},
-        {"parameter": "Acute coronary syndrome", "cells": [{"text": "Chest pain, arrhythmia or ECG evidence of ischaemia; raised carboxyhaemoglobin confirms CO"}], "cite": "c1"}
+        {
+          "parameter": "Viral illness or gastroenteritis",
+          "cells": [
+            {
+              "text": "Several household members affected at once points to a shared environmental source"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cyanide poisoning",
+          "cells": [
+            {
+              "text": "Concurrent toxicity in victims of smoke inhalation from enclosed-space fires"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Acute coronary syndrome",
+          "cells": [
+            {
+              "text": "Chest pain, arrhythmia or ECG evidence of ischaemia; raised carboxyhaemoglobin confirms CO"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     },
     {
@@ -187,15 +256,95 @@
       "kind": "treatment",
       "title": "Management options in carbon monoxide poisoning",
       "rowHeader": "Option",
-      "columns": ["Step", "Notes"],
+      "columns": [
+        "Step",
+        "Notes"
+      ],
       "rows": [
-        {"parameter": "Removal from source and oxygen", "cells": [{"text": "High-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination"}, {"text": "Cornerstone"}], "cite": "c1"},
-        {"parameter": "Hyperbaric oxygen", "cells": [{"text": "Severe poisoning: loss of consciousness, neurological or cardiac involvement, pregnancy or very high levels"}, {"text": "Reduces delayed neurological sequelae"}], "cite": "c1"},
-        {"parameter": "Cardiac monitoring", "cells": [{"text": "ECG and cardiac biomarkers for myocardial ischaemia"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Carboxyhaemoglobin monitoring", "cells": [{"text": "Serial co-oximetry to guide the duration of oxygen therapy"}, {"text": "Ongoing"}], "cite": "c1"},
-        {"parameter": "Supportive care", "cells": [{"text": "Correction of metabolic acidosis; management of seizures"}, {"text": "As indicated"}], "cite": "c1"},
-        {"parameter": "Pregnancy", "cells": [{"text": "Prioritised; oxygen continued longer given fetal susceptibility"}, {"text": "Fetal risk"}], "cite": "c1"},
-        {"parameter": "Follow-up and prevention", "cells": [{"text": "Review for delayed neuropsychiatric sequelae; CO alarms and appliance servicing"}, {"text": "After discharge"}], "cite": "c1"}
+        {
+          "parameter": "Removal from source and oxygen",
+          "cells": [
+            {
+              "text": "High-flow 100 percent oxygen by non-rebreather mask to accelerate carboxyhaemoglobin elimination"
+            },
+            {
+              "text": "Cornerstone"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Hyperbaric oxygen",
+          "cells": [
+            {
+              "text": "Severe poisoning: loss of consciousness, neurological or cardiac involvement, pregnancy or very high levels"
+            },
+            {
+              "text": "Reduces delayed neurological sequelae"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Cardiac monitoring",
+          "cells": [
+            {
+              "text": "ECG and cardiac biomarkers for myocardial ischaemia"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Carboxyhaemoglobin monitoring",
+          "cells": [
+            {
+              "text": "Serial co-oximetry to guide the duration of oxygen therapy"
+            },
+            {
+              "text": "Ongoing"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Supportive care",
+          "cells": [
+            {
+              "text": "Correction of metabolic acidosis; management of seizures"
+            },
+            {
+              "text": "As indicated"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Pregnancy",
+          "cells": [
+            {
+              "text": "Prioritised; oxygen continued longer given fetal susceptibility"
+            },
+            {
+              "text": "Fetal risk"
+            }
+          ],
+          "cite": "c1"
+        },
+        {
+          "parameter": "Follow-up and prevention",
+          "cells": [
+            {
+              "text": "Review for delayed neuropsychiatric sequelae; CO alarms and appliance servicing"
+            },
+            {
+              "text": "After discharge"
+            }
+          ],
+          "cite": "c1"
+        }
       ]
     }
   ],
@@ -205,25 +354,108 @@
       "title": "Diagnosis and management of carbon monoxide poisoning",
       "start": "n1",
       "nodes": [
-        {"id": "n1", "type": "start", "text": "Headache, nausea, dizziness or confusion, with others in the same environment unwell", "cite": "c1"},
-        {"id": "n2", "type": "decision", "text": "Red flag: loss of consciousness, seizure, focal deficit, chest pain, or pregnancy?", "cite": "c1"},
-        {"id": "n3", "type": "action", "text": "Escalate: high-flow oxygen; urgent hyperbaric oxygen assessment; cardiac monitoring", "cite": "c1"},
-        {"id": "n4", "type": "action", "text": "Blood carboxyhaemoglobin by co-oximetry; blood gas and lactate; ECG; pregnancy test", "cite": "c1"},
-        {"id": "n5", "type": "decision", "text": "Carboxyhaemoglobin raised with a compatible exposure?", "cite": "c1"},
-        {"id": "n6", "type": "action", "text": "High-flow oxygen until carboxyhaemoglobin falls; remove from source", "cite": "c1"},
-        {"id": "n7", "type": "action", "text": "Consider viral illness, cyanide poisoning or acute coronary syndrome", "cite": "c1"},
-        {"id": "n8", "type": "outcome", "text": "Mild cases resolve; delayed neuropsychiatric sequelae may appear after recovery", "cite": "c1"}
+        {
+          "id": "n1",
+          "type": "start",
+          "text": "Headache, nausea, dizziness or confusion, with others in the same environment unwell",
+          "cite": "c1"
+        },
+        {
+          "id": "n2",
+          "type": "decision",
+          "text": "Red flag: loss of consciousness, seizure, focal deficit, chest pain, or pregnancy?",
+          "cite": "c1"
+        },
+        {
+          "id": "n3",
+          "type": "action",
+          "text": "Escalate: high-flow oxygen; urgent hyperbaric oxygen assessment; cardiac monitoring",
+          "cite": "c1"
+        },
+        {
+          "id": "n4",
+          "type": "action",
+          "text": "Blood carboxyhaemoglobin by co-oximetry; blood gas and lactate; ECG; pregnancy test",
+          "cite": "c1"
+        },
+        {
+          "id": "n5",
+          "type": "decision",
+          "text": "Carboxyhaemoglobin raised with a compatible exposure?",
+          "cite": "c1"
+        },
+        {
+          "id": "n6",
+          "type": "action",
+          "text": "High-flow oxygen until carboxyhaemoglobin falls; remove from source",
+          "cite": "c1"
+        },
+        {
+          "id": "n7",
+          "type": "action",
+          "text": "Consider viral illness, cyanide poisoning or acute coronary syndrome",
+          "cite": "c1"
+        },
+        {
+          "id": "n8",
+          "type": "outcome",
+          "text": "Mild cases resolve; delayed neuropsychiatric sequelae may appear after recovery",
+          "cite": "c1"
+        }
       ],
       "edges": [
-        {"from": "n1", "to": "n2", "label": "Next"},
-        {"from": "n2", "to": "n3", "label": "Yes"},
-        {"from": "n2", "to": "n4", "label": "No"},
-        {"from": "n3", "to": "n4", "label": "Next"},
-        {"from": "n4", "to": "n5", "label": "Next"},
-        {"from": "n5", "to": "n6", "label": "Yes"},
-        {"from": "n5", "to": "n7", "label": "No"},
-        {"from": "n6", "to": "n8", "label": "Next"}
+        {
+          "from": "n1",
+          "to": "n2",
+          "label": "Next"
+        },
+        {
+          "from": "n2",
+          "to": "n3",
+          "label": "Yes"
+        },
+        {
+          "from": "n2",
+          "to": "n4",
+          "label": "No"
+        },
+        {
+          "from": "n3",
+          "to": "n4",
+          "label": "Next"
+        },
+        {
+          "from": "n4",
+          "to": "n5",
+          "label": "Next"
+        },
+        {
+          "from": "n5",
+          "to": "n6",
+          "label": "Yes"
+        },
+        {
+          "from": "n5",
+          "to": "n7",
+          "label": "No"
+        },
+        {
+          "from": "n6",
+          "to": "n8",
+          "label": "Next"
+        }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "carbon-monoxide-poisoning-fig1",
+      "type": "image",
+      "title": "Carbon Monoxide Poisoning Mechanism",
+      "src": "v1/kb/media/carbon-monoxide-poisoning-fig1.webp",
+      "alt": "Inhaled CO binding haemoglobin as carboxyhaemoglobin, mitochondrial inhibition inset, left shifted dissociation curve, symptoms and oxygen therapy.",
+      "caption": "CO binding haemoglobin with left shifted dissociation curve. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }

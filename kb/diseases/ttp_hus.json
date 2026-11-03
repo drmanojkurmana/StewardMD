@@ -1,6 +1,7 @@
 {
   "id": "ttp_hus",
   "name": "Thrombotic microangiopathy (TTP/HUS)",
+  "hyTerms": ["von Willebrand factor","ultra-large multimers","platelet adhesion and aggregation","microvascular thrombi","Shiga toxin","E. coli O157:H7","complement alternative pathway","microangiopathic haemolytic anaemia","pentad","ADAMTS13 activity below 10%","anti-ADAMTS13 antibody","Coombs (direct antiglobulin) test is negative","Upshaw-Schulman","C3, CFB, CFH, CD46/MCP, CFI, THBD","anti-factor-H antibodies","Plasma exchange","Fluctuating neurologic abnormalities","Do not reflexively transfuse platelets","PT and aPTT are characteristically normal","DIC","atypical HUS","Cancer-associated HUS","anti-ADAMTS13 inhibitor/antibody assay","Direct antiglobulin (Coombs) test","peripheral smear for schistocytes","Reticulocyte count","Complement-regulatory gene testing","anti-factor-H antibody","Disseminated intravascular coagulation","Antiphospholipid antibody syndrome","Heparin-induced thrombocytopenia and thrombosis","Monoclonal cryoglobulinaemia","Malignant hypertension"],
   "class": "non_infective",
   "system": "Hematology",
   "coding": {
@@ -449,7 +450,7 @@
             {
               "text": "Under 2.0",
               "op": "<",
-              "value": 2.0
+              "value": 2
             },
             {
               "text": "1 point"
@@ -1156,6 +1157,17 @@
           "label": "No"
         }
       ]
+    }
+  ],
+  "figures": [
+    {
+      "id": "ttp-hus-fig1",
+      "type": "image",
+      "title": "Thrombotic Microangiopathies Pathophysiology",
+      "src": "v1/kb/media/ttp-hus-fig1.webp",
+      "alt": "Medical illustration comparing thrombotic thrombocytopenic purpura featuring uncleaved von Willebrand factor multimers and platelet-rich microthrombi, to haemolytic uraemic syndrome showing Shiga toxin-mediated glomerular capillary thrombosis and erythrocyte fragmentation into schistocytes.",
+      "caption": "Illustration comparing vWF multimer microthrombi in TTP to Shiga-toxin glomerular microthrombosis in HUS. Illustration: StewardMD original.",
+      "ar": 1.3405
     }
   ]
 }

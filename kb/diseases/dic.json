@@ -1,6 +1,7 @@
 {
   "id": "dic",
   "name": "Disseminated intravascular coagulation",
+  "hyTerms": ["uncontrolled thrombin generation","tissue factor expression","neutrophil extracellular trap formation","polyphosphates","thrombo-inflammation","microvascular occlusion","red cell fragmentation/hemolysis","secondary hyperfibrinolysis","Purpura fulminans","protein C pathway deficiency","ARDS","abruptio placentae","amniotic fluid embolism","acute promyelocytic leukemia","petechiae","ecchymoses","Chronic (low-grade, compensated) DIC","giant hemangioma","FDP/d-dimer","thrombocytopenia","ISTH overt-DIC score","d-Dimer assays","Platelets >100x10^9/L","non-overt/low-grade DIC","overt DIC","schistocytes","Fibrin degradation products","ADAMTS13","TTP","Vitamin K deficiency"],
   "class": "non_infective",
   "system": "Hematology",
   "coding": {
@@ -329,7 +330,7 @@
             {
               "text": "<1.0",
               "op": "<",
-              "value": 1.0
+              "value": 1
             },
             {
               "text": "1"
@@ -790,5 +791,25 @@
     "DIC",
     "consumptive coagulopathy",
     "defibrination syndrome"
+  ],
+  "figures": [
+    {
+      "id": "dic-fig1",
+      "type": "image",
+      "title": "Disseminated Intravascular Coagulation Mechanism",
+      "src": "v1/kb/media/dic-fig1.webp",
+      "alt": "Medical illustration of disseminated intravascular coagulation showing tissue factor triggering microvascular thrombi, shearing of erythrocytes into schistocytes, platelet and clotting factor consumption, and bleeding.",
+      "caption": "Illustration of microvascular thrombosis, schistocyte formation, and consumption coagulopathy bleeding. Illustration: StewardMD original.",
+      "ar": 1.3405
+    },
+    {
+      "id": "dic-fig2",
+      "type": "image",
+      "title": "Disseminated Intravascular Coagulation",
+      "src": "v1/kb/media/dic-fig2.webp",
+      "alt": "Vessel with fibrin microthrombi, schistocytes, multiorgan failure icons, bleeding skin block, coagulation consumption cascade, lab panel.",
+      "caption": "Microvascular fibrin thrombi, schistocytes, consumptive bleeding, laboratory profile. Illustration: StewardMD original.",
+      "ar": 1.3405
+    }
   ]
 }
