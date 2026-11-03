@@ -1,0 +1,305 @@
+{
+ "v": 1,
+ "module": "sca-infective-endocarditis",
+ "subject": "ss-cardiology",
+ "title": "Infective endocarditis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **Modified Duke Criteria** provide the diagnostic benchmark for infective endocarditis, classifying cases into definite, possible, or rejected categories. Major criteria require typical blood cultures drawn persistently positive or imaging demonstration of **endocardial involvement**, whereas minor criteria evaluate predispositions, fever >= 38 C, vascular phenomena, immunologic findings, and atypical microbiologic evidence.",
+   "say": "The Modified Duke Criteria provide the diagnostic benchmark for infective endocarditis, classifying cases into definite, possible, or rejected categories. Major criteria require typical blood cultures drawn persistently positive or imaging demonstration of endocardial involvement, whereas minor criteria evaluate predispositions, fever 38 degrees Celsius or higher, vascular phenomena, immunologic findings, and atypical microbiologic evidence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Category",
+     "Specific Criteria Components",
+     "Threshold Requirement"
+    ],
+    "rows": [
+     [
+      "Major microbiologic",
+      "Typical organism in 2 separate cultures",
+      "S. aureus, viridans, enterococci"
+     ],
+     [
+      "Major imaging",
+      "Vegetation, abscess, or dehiscence",
+      "TTE, TEE, or cardiac CT/PET"
+     ],
+     [
+      "Minor clinical",
+      "Predisposing heart disease or IVDU",
+      "Fever >= 38 C"
+     ],
+     [
+      "Minor vascular/immune",
+      "Janeway lesions, Osler nodes, Roth spots",
+      "Arterial emboli or glomerulonephritis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "While transthoracic echocardiography exhibits an initial sensitivity of 60% to 75%, **Transesophageal echocardiography** provides a superior diagnostic sensitivity of 90% to 100%. TEE represents the definitive imaging modality for detecting small vegetations under 5 mm, assessing mechanical prosthetic valve dehiscence, and unmasking invasive **perivalvular abscess** formation in the aortic root.",
+   "say": "While transthoracic echocardiography exhibits an initial sensitivity of 60 to 75 percent, Transesophageal echocardiography provides a superior diagnostic sensitivity of 90 to 100 percent. TEE represents the definitive imaging modality for detecting small vegetations under 5 mm, assessing mechanical prosthetic valve dehiscence, and unmasking invasive perivalvular abscess formation in the aortic root.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transthoracic echo (TTE)",
+     "points": [
+      "Sensitivity 60% to 75%",
+      "Non-invasive initial screening",
+      "Excellent for hemodynamic assessment",
+      "Suboptimal for prosthetic valves"
+     ]
+    },
+    "right": {
+     "title": "Transesophageal echo (TEE)",
+     "points": [
+      "Sensitivity 90% to 100%",
+      "Mandatory for high clinical suspicion",
+      "Superior spatial acoustic resolution",
+      "Essential for detecting annular abscess"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Worldwide epidemiologic surveys identify virulent **Staphylococcus aureus** as the leading cause of **native valve endocarditis**, surpassing viridans group streptococci. S. aureus endocarditis follows an acute destructive clinical course characterised by rapid valvular perforation, early severe regurgitation, aggressive myocardial invasion, high embolic stroke risk, and extensive metastatic abscess formation.",
+   "say": "Worldwide epidemiologic surveys identify virulent Staphylococcus aureus as the leading cause of native valve endocarditis, surpassing viridans group streptococci. S. aureus endocarditis follows an acute destructive clinical course characterised by rapid valvular perforation, early severe regurgitation, aggressive myocardial invasion, high embolic stroke risk, and extensive metastatic abscess formation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organism",
+     "Clinical Tempo",
+     "Valvular Destruction",
+     "Embolic Propensity"
+    ],
+    "rows": [
+     [
+      "Staphylococcus aureus",
+      "Acute, fulminant course",
+      "Rapid perforation and annular invasion",
+      "Very high (> 40%), septic emboli"
+     ],
+     [
+      "Viridans streptococci",
+      "Subacute indolent course",
+      "Gradual leaflet damage",
+      "Moderate, late embolisation"
+     ],
+     [
+      "Enterococcus faecalis",
+      "Subacute in elderly men",
+      "Calcific and degenerative valves",
+      "Moderate, recurrent bacteremia"
+     ],
+     [
+      "Coagulase-negative staph",
+      "Prosthetic valve early course",
+      "Prominent suture line disruption",
+      "High prosthetic failure risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Isolation of **Streptococcus gallolyticus**, previously classified as Streptococcus bovis, on blood cultures carries a notorious clinical association with occult GI tract pathology. The presence of S. gallolyticus bacteremia correlates strongly with underlying premalignant adenomatous polyps or invasive colorectal carcinoma, establishing mandatory diagnostic **colonoscopy** during the index hospitalization.",
+   "say": "Isolation of Streptococcus gallolyticus, previously classified as Streptococcus bovis, on blood cultures carries a notorious clinical association with occult GI tract pathology. The presence of S. gallolyticus bacteremia correlates strongly with underlying premalignant adenomatous polyps or invasive colorectal carcinoma, establishing mandatory diagnostic colonoscopy during the index hospitalization.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bacteremia",
+      "label": "Streptococcus gallolyticus in blood cultures"
+     },
+     {
+      "id": "endocarditis",
+      "label": "Confirmed infective endocarditis"
+     },
+     {
+      "id": "gastro",
+      "label": "Occult mucosal barrier breakdown"
+     },
+     {
+      "id": "colonoscopy",
+      "label": "Inpatient diagnostic full colonoscopy"
+     }
+    ],
+    "edges": [
+     [
+      "bacteremia",
+      "endocarditis",
+      "valvular seeding"
+     ],
+     [
+      "bacteremia",
+      "gastro",
+      "gastrointestinal origin"
+     ],
+     [
+      "gastro",
+      "colonoscopy",
+      "rule out colon adenocarcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Approximately 5% to 10% of clinical presentations present as **Culture-negative endocarditis**, defined by typical vegetation features on echocardiography despite standard sterile aerobic and anaerobic blood cultures. Leading etiologies include prior antimicrobial therapy, fastidious HACEK gram-negative bacilli, intracellular pathogens such as **Coxiella burnetii**, Bartonella henselae, and Tropheryma whipplei.",
+   "say": "Approximately 5 to 10 percent of clinical presentations present as Culture-negative endocarditis, defined by typical vegetation features on echocardiography despite standard sterile aerobic and anaerobic blood cultures. Leading etiologies include prior antimicrobial therapy, fastidious HACEK gram-negative bacilli, intracellular pathogens such as Coxiella burnetii, Bartonella henselae, and Tropheryma whipplei.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fastidious Pathogen",
+     "Epidemiologic Clue",
+     "Diagnostic Modality",
+     "Preferred Regimen"
+    ],
+    "rows": [
+     [
+      "Coxiella burnetii",
+      "Livestock, farm contact (Q fever)",
+      "Phase I IgG serology >= 1:800",
+      "Doxycycline plus hydroxychloroquine"
+     ],
+     [
+      "Bartonella quintana / henselae",
+      "Homelessness, cat scratch",
+      "Indirect immunofluorescence / PCR",
+      "Doxycycline plus gentamicin"
+     ],
+     [
+      "Tropheryma whipplei",
+      "Middle-aged men, arthralgias",
+      "Valvular PCR, PAS-positive biopsy",
+      "Ceftriaxone followed by TMP-SMX"
+     ],
+     [
+      "Brucella species",
+      "Unpasteurized dairy consumption",
+      "Standard agglutination titer >= 1:160",
+      "Doxycycline plus rifampin plus aminoglycoside"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients experiencing mechanical failure or uncontrolled bacteremia, **urgent early surgery** provides dramatic mortality reduction. Primary Class I operative indications comprise cardiogenic shock or acute heart failure from severe valvular regurgitation, persistent infection with locally uncontrolled abscess or fistula, and persistent **mobile vegetations** larger than 10 mm following systemic embolic events.",
+   "say": "In patients experiencing mechanical failure or uncontrolled bacteremia, urgent early surgery provides dramatic mortality reduction. Primary Class I operative indications comprise cardiogenic shock or acute heart failure from severe valvular regurgitation, persistent infection with locally uncontrolled abscess or fistula, and persistent mobile vegetations larger than 10 mm following systemic embolic events.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "endocarditis-eval",
+      "label": "Active infective endocarditis"
+     },
+     {
+      "id": "hf-indication",
+      "label": "Refractory acute heart failure"
+     },
+     {
+      "id": "local-spread",
+      "label": "Uncontrolled annular abscess or fistula"
+     },
+     {
+      "id": "embolic-risk",
+      "label": "Mobile vegetation > 10 mm with embolic event"
+     },
+     {
+      "id": "surgery",
+      "label": "Urgent open valve debridement and replacement"
+     }
+    ],
+    "edges": [
+     [
+      "endocarditis-eval",
+      "hf-indication",
+      "valvular destruction"
+     ],
+     [
+      "endocarditis-eval",
+      "local-spread",
+      "invasive extension"
+     ],
+     [
+      "endocarditis-eval",
+      "embolic-risk",
+      "high thromboembolic load"
+     ],
+     [
+      "hf-indication",
+      "surgery",
+      "Class I urgent indication"
+     ],
+     [
+      "local-spread",
+      "surgery",
+      "Class I urgent indication"
+     ],
+     [
+      "embolic-risk",
+      "surgery",
+      "Class I urgent indication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern practice restricts prophylactic **Antibiotic prophylaxis** exclusively to individuals at highest risk of fatal complications undergoing invasive **dental procedures** that involve gingival manipulation, mucosal perforation, or periapical tooth manipulation. Standard oral amoxicillin (2 g given 30 to 60 minutes pre-procedure) is administered to patients with prosthetic valves, repaired valves, previous endocarditis, or unrepaired cyanotic congenital heart disease.",
+   "say": "Modern practice restricts prophylactic Antibiotic prophylaxis exclusively to individuals at highest risk of fatal complications undergoing invasive dental procedures that involve gingival manipulation, mucosal perforation, or periapical tooth manipulation. Standard oral amoxicillin 2 g given 30 to 60 minutes pre-procedure is administered to patients with prosthetic valves, repaired valves, previous endocarditis, or unrepaired cyanotic congenital heart disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-risk prophylaxis candidates",
+     "points": [
+      "Prosthetic cardiac valve replacement",
+      "Prosthetic ring/material from valve repair",
+      "Previous verified infective endocarditis",
+      "Unrepaired cyanotic congenital heart defect"
+     ]
+    },
+    "right": {
+     "title": "Prophylaxis NOT recommended",
+     "points": [
+      "Bicuspid aortic valve without prosthesis",
+      "Mitral valve prolapse without repair",
+      "Rheumatic heart disease native valves",
+      "Atrial or ventricular septal defect patches"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nonbacterial thrombotic endocarditis**, historically called **marantic endocarditis**, is characterized by sterile, non-destructive platelet and fibrin vegetations along valve coaptation lines without underlying microorganisms. NBTE strongly associates with advanced mucin-producing adenocarcinomas and systemic lupus erythematosus or antiphospholipid syndrome (Libman-Sacks endocarditis), carrying extremely high embolic potential.",
+   "say": "Nonbacterial thrombotic endocarditis, historically called marantic endocarditis, is characterized by sterile, non-destructive platelet and fibrin vegetations along valve coaptation lines without underlying microorganisms. NBTE strongly associates with advanced mucin-producing adenocarcinomas and systemic lupus erythematosus or antiphospholipid syndrome, carrying extremely high embolic potential.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infective endocarditis (IE)",
+     "points": [
+      "Microbial colonization of endothelium",
+      "Leukocytic inflammatory reaction",
+      "Destructive valve leaflet ulceration",
+      "Requires targeted parenteral bactericidal antibiotics"
+     ]
+    },
+    "right": {
+     "title": "Marantic endocarditis (NBTE)",
+     "points": [
+      "Sterile platelet-fibrin thrombi",
+      "No cellular inflammatory infiltrate",
+      "Minimal underlying leaflet injury",
+      "Requires systemic anticoagulation and cancer therapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_3f0ae0959b5a",
+  "q_cf8b3deee4f2",
+  "q_15444b7f285c"
+ ],
+ "gen": "hand"
+}

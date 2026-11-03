@@ -1,0 +1,305 @@
+{
+ "v": 1,
+ "module": "sca-nste-acs",
+ "subject": "ss-cardiology",
+ "title": "Non-ST elevation acute coronary syndromes",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The Fourth **Universal Definition** of Myocardial Infarction defines acute myocardial necrosis as a rise and fall of cardiac troponin with at least one value exceeding the **99th percentile** upper reference limit. Clinical evidence of acute ischemia must accompany biomarker elevation, including ischemic symptoms, dynamic electrocardiographic changes, or imaging proof of new regional wall motion abnormalities.",
+   "say": "The Fourth Universal Definition of Myocardial Infarction defines acute myocardial necrosis as a rise and fall of cardiac troponin with at least one value exceeding the 99th percentile upper reference limit. Clinical evidence of acute ischemia must accompany biomarker elevation, including ischemic symptoms, dynamic electrocardiographic changes, or imaging proof of new regional wall motion abnormalities.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Criterion",
+     "Specific Requirement",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Biomarker rise",
+      "Cardiac troponin > 99th percentile",
+      "Defines acute myocardial necrosis"
+     ],
+     [
+      "Ischemic symptoms",
+      "Typical angina pectoris > 20 minutes",
+      "Differentiates acute MI from chronic injury"
+     ],
+     [
+      "ECG changes",
+      "New ST depression or T wave inversion",
+      "Identifies subendocardial ischemia"
+     ],
+     [
+      "Imaging evidence",
+      "Loss of viable myocardium on echo",
+      "Confirms regional vascular distribution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern emergency department triage relies on **High-sensitivity cardiac troponin** assays deployed via validated 0/1-hour and 0/2-hour **rule-out algorithms**. These diagnostic pathways integrate baseline troponin concentrations with absolute dynamic delta changes over 1 or 2 hours, allowing safe, rapid discharge of low-risk patients while promptly identifying high-risk individuals for early intervention.",
+   "say": "Modern emergency department triage relies on High-sensitivity cardiac troponin assays deployed via validated 0/1-hour and 0/2-hour rule-out algorithms. These diagnostic pathways integrate baseline troponin concentrations with absolute dynamic delta changes over 1 or 2 hours, allowing safe, rapid discharge of low-risk patients while promptly identifying high-risk individuals for early intervention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "triage-start",
+      "label": "Baseline hs-cTn sample"
+     },
+     {
+      "id": "delta-eval",
+      "label": "Serial delta at 1 or 2 hours"
+     },
+     {
+      "id": "rule-out",
+      "label": "Direct rule-out pathway"
+     },
+     {
+      "id": "rule-in",
+      "label": "Direct rule-in pathway"
+     }
+    ],
+    "edges": [
+     [
+      "triage-start",
+      "delta-eval",
+      "retest protocol"
+     ],
+     [
+      "delta-eval",
+      "rule-out",
+      "low baseline and delta"
+     ],
+     [
+      "delta-eval",
+      "rule-in",
+      "dynamic troponin rise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **TIMI risk score** for NSTE-ACS stratifies patient prognosis by calculating 7 independent baseline clinical predictors. Points are assigned for age >= 65, >= 3 documented **CAD risk factors**, known angiographic CAD with >= 50% stenosis, aspirin use within 7 days, severe angina, elevated serum cardiac biomarkers, and transient ST deviation >= 0.5 mm.",
+   "say": "The TIMI risk score for NSTE-ACS stratifies patient prognosis by calculating 7 independent baseline clinical predictors. Points are assigned for age 65 or older, 3 or more documented CAD risk factors, known angiographic CAD with 50 percent or greater stenosis, aspirin use within 7 days, severe angina, elevated serum cardiac biomarkers, and transient ST deviation 0.5 mm or greater.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TIMI Risk Factor",
+     "Threshold Value",
+     "Score Assignment"
+    ],
+    "rows": [
+     [
+      "Age threshold",
+      "Age >= 65 years",
+      "1 point"
+     ],
+     [
+      "Risk profile",
+      ">= 3 CAD risk factors",
+      "1 point"
+     ],
+     [
+      "Known coronary anatomy",
+      "Documented stenosis >= 50%",
+      "1 point"
+     ],
+     [
+      "Recent antiplatelet",
+      "Aspirin use within 7 days",
+      "1 point"
+     ],
+     [
+      "Anginal episodes",
+      ">= 2 rest angina events in 24h",
+      "1 point"
+     ],
+     [
+      "ECG abnormality",
+      "ST deviation >= 0.5 mm",
+      "1 point"
+     ],
+     [
+      "Serum biomarkers",
+      "Positive cardiac troponin",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **GRACE risk score** provides superior discrimination for in-hospital and 6-month mortality in acute coronary syndromes. Patients presenting with a high-risk GRACE score above 140 benefit substantially from an early invasive strategy, mandating formal **coronary angiography** within 24 hours of hospital admission to define anatomy and guide revascularisation.",
+   "say": "The GRACE risk score provides superior discrimination for in-hospital and 6-month mortality in acute coronary syndromes. Patients presenting with a high-risk GRACE score above 140 benefit substantially from an early invasive strategy, mandating formal coronary angiography within 24 hours of hospital admission to define anatomy and guide revascularisation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GRACE score > 140",
+     "points": [
+      "High clinical risk tier",
+      "Invasive angiography within 24 hours",
+      "Reduced ischemic recurrences",
+      "Superior long-term survival"
+     ]
+    },
+    "right": {
+     "title": "GRACE score <= 140",
+     "points": [
+      "Low to intermediate risk tier",
+      "Selective invasive pathway",
+      "Non-invasive ischemia evaluation",
+      "Outpatient anatomical testing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patients exhibiting **Very high risk** NSTE-ACS criteria require emergent resuscitation and an **immediate invasive** coronary angiographic approach within 2 hours. Key clinical triggers include cardiogenic shock, persistent hemodynamic instability, recurrent refractory chest pain despite maximal medical therapy, life-threatening ventricular arrhythmias, acute heart failure, or mechanical complications such as papillary muscle rupture.",
+   "say": "Patients exhibiting Very high risk NSTE-ACS criteria require emergent resuscitation and an immediate invasive coronary angiographic approach within 2 hours. Key clinical triggers include cardiogenic shock, persistent hemodynamic instability, recurrent refractory chest pain despite maximal medical therapy, life-threatening ventricular arrhythmias, acute heart failure, or mechanical complications such as papillary muscle rupture.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "High Risk Trigger",
+     "Clinical Presentation",
+     "Target Timeframe"
+    ],
+    "rows": [
+     [
+      "Cardiogenic shock",
+      "Tissue hypoperfusion with hypotension",
+      "Within 2 hours"
+     ],
+     [
+      "Refractory angina",
+      "Persistent pain despite nitrates",
+      "Within 2 hours"
+     ],
+     [
+      "Malignant arrhythmia",
+      "Sustained VT or ventricular fibrillation",
+      "Within 2 hours"
+     ],
+     [
+      "Mechanical defect",
+      "Acute severe MR or VSR",
+      "Within 2 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial medical management incorporates prompt parenteral anticoagulation alongside anti-ischemic therapy. Subcutaneous **enoxaparin** provides predictable weight-based anticoagulation during invasive pathways, whereas synthetic pentasaccharide **fondaparinux** represents the preferred agent during conservative strategies because it offers equivalent antithrombotic efficacy with a substantially lower risk of major bleeding complications.",
+   "say": "Initial medical management incorporates prompt parenteral anticoagulation alongside anti-ischemic therapy. Subcutaneous enoxaparin provides predictable weight-based anticoagulation during invasive pathways, whereas synthetic pentasaccharide fondaparinux represents the preferred agent during conservative strategies because it offers equivalent antithrombotic efficacy with a substantially lower risk of major bleeding complications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Enoxaparin",
+     "points": [
+      "Low molecular weight heparin",
+      "Preferred during invasive PCI pathways",
+      "Weight-based subcutaneous dosing",
+      "Requires dose reduction in renal failure"
+     ]
+    },
+    "right": {
+     "title": "Fondaparinux",
+     "points": [
+      "Selective factor Xa inhibitor",
+      "Preferred in conservative strategy",
+      "Significantly lower bleeding risk",
+      "Requires UFH bolus if PCI performed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long-term secondary prevention requires **Dual antiplatelet therapy** combining aspirin with a potent P2Y12 receptor antagonist, most commonly **ticagrelor** or prasugrel. DAPT is routinely continued for 12 months following NSTE-ACS to prevent stent thrombosis and recurrent atherothrombotic events, although high bleeding risk profiles warrant shortening the antiplatelet duration.",
+   "say": "Long-term secondary prevention requires Dual antiplatelet therapy combining aspirin with a potent P2Y12 receptor antagonist, most commonly ticagrelor or prasugrel. DAPT is routinely continued for 12 months following NSTE-ACS to prevent stent thrombosis and recurrent atherothrombotic events, although high bleeding risk profiles warrant shortening the antiplatelet duration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiplatelet Drug",
+     "Mechanism of Action",
+     "Standard Dosing",
+     "Duration"
+    ],
+    "rows": [
+     [
+      "Aspirin",
+      "Irreversible COX-1 inhibition",
+      "75 to 100 mg daily",
+      "Lifelong"
+     ],
+     [
+      "Ticagrelor",
+      "Reversible P2Y12 antagonist",
+      "90 mg twice daily",
+      "12 months"
+     ],
+     [
+      "Prasugrel",
+      "Irreversible P2Y12 prodrug",
+      "10 mg once daily",
+      "12 months"
+     ],
+     [
+      "Clopidogrel",
+      "Second-line P2Y12 prodrug",
+      "75 mg once daily",
+      "12 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In approximately 5% to 10% of presentations, patients meet MI criteria yet show **nonobstructive coronary arteries** on angiography, a condition termed **MINOCA**. Diagnosis requires establishing acute myocardial necrosis, confirming angiographic luminal stenosis under 50%, and performing cardiac magnetic resonance to systematically exclude myocarditis, takotsubo cardiomyopathy, or epicardial plaque disruption.",
+   "say": "In approximately 5 to 10 percent of presentations, patients meet MI criteria yet show nonobstructive coronary arteries on angiography, a condition termed MINOCA. Diagnosis requires establishing acute myocardial necrosis, confirming angiographic luminal stenosis under 50 percent, and performing cardiac magnetic resonance to systematically exclude myocarditis, takotsubo cardiomyopathy, or epicardial plaque disruption.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mi-criteria",
+      "label": "Positive MI criteria"
+     },
+     {
+      "id": "angiography",
+      "label": "Coronary angiography < 50%"
+     },
+     {
+      "id": "cmr-eval",
+      "label": "Cardiac MRI diagnostic study"
+     },
+     {
+      "id": "etiology",
+      "label": "Definitive clinical diagnosis"
+     }
+    ],
+    "edges": [
+     [
+      "mi-criteria",
+      "angiography",
+      "coronary catheterisation"
+     ],
+     [
+      "angiography",
+      "cmr-eval",
+      "tissue characterisation"
+     ],
+     [
+      "cmr-eval",
+      "etiology",
+      "exclude myocarditis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_3f0ae0959b5a",
+  "q_cf8b3deee4f2",
+  "q_15444b7f285c"
+ ],
+ "gen": "hand"
+}
