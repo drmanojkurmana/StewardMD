@@ -1,0 +1,294 @@
+{
+ "v": 1,
+ "module": "son-brain-mets",
+ "subject": "ss-medical-oncology",
+ "title": "Brain and leptomeningeal metastases",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Brain metastases** are the most common intracranial tumours in adults, originating primarily from lung cancer 50%, breast cancer 20%, and cutaneous melanoma 10%. Metastatic tumour emboli lodge at grey-white matter junctions and vascular watershed zones where calibre narrows abruptly. Thin-slice contrast-enhanced MRI represents the neuroimaging gold standard, detecting sub-centimetre lesions missed on non-contrast computed tomography.",
+   "say": "Brain metastases are the most common intracranial tumours in adults, originating primarily from lung cancer 50%, breast cancer 20%, and cutaneous melanoma 10%. Metastatic tumour emboli lodge at grey-white matter junctions and vascular watershed zones where calibre narrows abruptly. Thin-slice contrast-enhanced MRI represents the neuroimaging gold standard, detecting sub-centimetre lesions missed on non-contrast computed tomography.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary Malignancy",
+     "Proportion of Brain Mets",
+     "Propensity to Metastasize",
+     "Hemorrhagic Propensity"
+    ],
+    "rows": [
+     [
+      "Lung cancer (NSCLC & SCLC)",
+      "Approx. 50%",
+      "High (30% to 50% lifetime incidence)",
+      "Moderate"
+     ],
+     [
+      "Breast cancer (HER2+ / TNBC)",
+      "Approx. 20%",
+      "High in HER2-positive and triple-negative",
+      "Low to moderate"
+     ],
+     [
+      "Cutaneous melanoma",
+      "Approx. 10%",
+      "Highest per-capita incidence (>50%)",
+      "Marked (spontaneous intratumoral bleed)"
+     ],
+     [
+      "Renal cell carcinoma",
+      "Approx. 5% to 10%",
+      "Moderate (hypervascular clear cell)",
+      "Marked hemorrhagic tendency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ablative focal radiotherapy delivers high local control while sparing uninvolved cerebral parenchyma. **Stereotactic radiosurgery** SRS delivers highly focused, ablative radiation doses in a single fraction to 1 to 4 intact brain metastases, preserving neurocognitive function compared to whole-brain radiation. Randomized trials demonstrate equivalent overall survival and superior learning and memory preservation compared to upfront whole-brain radiotherapy.",
+   "say": "Stereotactic radiosurgery SRS delivers highly focused, ablative radiation doses in a single fraction to 1 to 4 intact brain metastases, preserving neurocognitive function compared to whole-brain radiation. Randomized trials demonstrate equivalent overall survival and superior learning and memory preservation compared to upfront whole-brain radiotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stereotactic Radiosurgery (SRS)",
+     "points": [
+      "1 to 4 (or up to 10) discrete lesions",
+      "High ablative dose (16 to 24 Gy in 1 fraction)",
+      "Spares surrounding normal brain architecture",
+      "Preserves executive memory and neurocognition"
+     ]
+    },
+    "right": {
+     "title": "Whole-Brain Radiotherapy (WBRT)",
+     "points": [
+      "Widespread diffuse metastases (>10 to 20)",
+      "Fractionated delivery (30 Gy in 10 fractions)",
+      "Accelerates cognitive and verbal decline",
+      "Reduced distant intracranial failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern whole-brain radiation techniques incorporate neuroprotective strategies to prevent intellectual decline. **Whole-brain radiotherapy** WBRT with hippocampal avoidance and memantine significantly reduces cognitive decline and executive memory deterioration in multiple brain metastases in NRG CC001. Sparing neural stem cells in the subgranular hippocampal dentate zone coupled with NMDA receptor blockade preserves executive memory function without compromising intracranial disease control.",
+   "say": "Modern whole-brain radiation techniques incorporate neuroprotective strategies to prevent intellectual decline. Whole-brain radiotherapy WBRT with hippocampal avoidance and memantine significantly reduces cognitive decline and executive memory deterioration in multiple brain metastases in NRG CC001. Sparing neural stem cells in the subgranular hippocampal dentate zone coupled with NMDA receptor blockade preserves executive memory function without compromising intracranial disease control.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Diffuse brain metastases (NRG CC001)"
+     },
+     {
+      "id": "b",
+      "label": "Intensity-modulated WBRT"
+     },
+     {
+      "id": "c",
+      "label": "Hippocampal contour avoidance"
+     },
+     {
+      "id": "d",
+      "label": "Memantine 20 mg daily x 24 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "30 Gy in 10 fractions"
+     ],
+     [
+      "b",
+      "c",
+      "spares neural stem cell niche"
+     ],
+     [
+      "c",
+      "d",
+      "prevents excitotoxic neuronal loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood-brain barrier-penetrating targeted therapies have superseded radiotherapy as initial therapy for oncogene-addicted lung cancers. Third-generation EGFR TKI **osimertinib** achieves high central nervous system penetration with intracranial response rates reaching 80% in EGFR-mutant NSCLC brain metastases. Intracranial progression-free survival exceeds fifteen months in FLAURA, often permitting deferral of cranial irradiation.",
+   "say": "Blood-brain barrier-penetrating targeted therapies have superseded radiotherapy as initial therapy for oncogene-addicted lung cancers. Third-generation EGFR TKI osimertinib achieves high central nervous system penetration with intracranial response rates reaching 80% in EGFR-mutant NSCLC brain metastases. Intracranial progression-free survival exceeds fifteen months in FLAURA, often permitting deferral of cranial irradiation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Osimertinib (3rd Gen EGFR TKI)",
+     "points": [
+      "High blood-brain barrier penetration",
+      "Intracranial ORR approx. 80%",
+      "Low P-glycoprotein efflux liability",
+      "First-line standard in EGFR-mutant NSCLC"
+     ]
+    },
+    "right": {
+     "title": "1st/2nd Gen EGFR TKIs (Gefitinib, Afatinib)",
+     "points": [
+      "Poor CNS penetration",
+      "Subject to P-gp and BCRP efflux pumps",
+      "Intracranial ORR under 50%",
+      "High rate of isolated CNS relapse"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted kinase inhibition shows remarkable intracranial activity in HER2-positive breast cancer. **Tucatinib** HER2-selective TKI combined with trastuzumab and capecitabine significantly reduces CNS disease progression and improves overall survival in HER2-positive breast cancer with brain metastases. In the HER2CLIMB trial, the triplet halved the risk of death in patients with active or stable brain metastases.",
+   "say": "Targeted kinase inhibition shows remarkable intracranial activity in HER2-positive breast cancer. Tucatinib HER2-selective TKI combined with trastuzumab and capecitabine significantly reduces CNS disease progression and improves overall survival in HER2-positive breast cancer with brain metastases. In the HER2CLIMB trial, the triplet halved the risk of death in patients with active or stable brain metastases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "HER2+ breast cancer with brain mets"
+     },
+     {
+      "id": "b",
+      "label": "Tucatinib + Trastuzumab + Capecitabine"
+     },
+     {
+      "id": "c",
+      "label": "HER2 kinase domain inhibition + 5-FU"
+     },
+     {
+      "id": "d",
+      "label": "52% reduction in risk of death (HER2CLIMB)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "active or treated brain lesions"
+     ],
+     [
+      "b",
+      "c",
+      "selective HER2 sparing EGFR (less rash/diarrhea)"
+     ],
+     [
+      "c",
+      "d",
+      "unprecedented OS survival gain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Subarachnoid tumour dissemination represents a devastating complication carrying grave neurological morbidity. **Leptomeningeal carcinomatosis** is diagnosed by positive cerebrospinal fluid cytology or linear leptomeningeal enhancement on contrast-enhanced spinal and cranial MRI. Clinical presentations feature multifocal neurological deficits, including cauda equina syndrome, cranial nerve palsies, radiculopathy, and communicating hydrocephalus.",
+   "say": "Subarachnoid tumour dissemination represents a devastating complication carrying grave neurological morbidity. Leptomeningeal carcinomatosis is diagnosed by positive cerebrospinal fluid cytology or linear leptomeningeal enhancement on contrast-enhanced spinal and cranial MRI. Clinical presentations feature multifocal neurological deficits, including cauda equina syndrome, cranial nerve palsies, radiculopathy, and communicating hydrocephalus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Key Findings",
+     "Sensitivity",
+     "Clinical Caveats"
+    ],
+    "rows": [
+     [
+      "Contrast MRI spine & brain",
+      "Nodular or sugar-coating leptomeningeal enhancement",
+      "70% to 80%",
+      "Mandatory complete neuro-axis evaluation"
+     ],
+     [
+      "CSF Cytology (1st LP)",
+      "Malignant cells, opening pressure >200 mmH2O",
+      "50% to 60%",
+      "Requires >=10 mL volume processed rapidly"
+     ],
+     [
+      "Serial CSF Cytology (3 LPs)",
+      "Re-sampling reaches >90% diagnostic yield",
+      "> 90%",
+      "Three high-volume taps maximize detection"
+     ],
+     [
+      "CSF Biochemical Profile",
+      "Elevated protein (>50 mg/dL), low glucose (<40 mg/dL)",
+      "Non-specific",
+      "Reflects blood-CSF barrier breakdown"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Direct intraventricular chemotherapy bypasses the physiological blood-cerebrospinal fluid barrier. **Intrathecal chemotherapy** using preservative-free methotrexate, cytarabine, or liposomal cytarabine via an implanted subcutaneous Ommaya reservoir treats leptomeningeal tumour seeding. Ommaya reservoirs ensure uniform drug distribution throughout ventricular and spinal subarachnoid compartments, avoiding repeated lumbar punctures.",
+   "say": "Direct intraventricular chemotherapy bypasses the physiological blood-cerebrospinal fluid barrier. Intrathecal chemotherapy using preservative-free methotrexate, cytarabine, or liposomal cytarabine via an implanted subcutaneous Ommaya reservoir treats leptomeningeal tumour seeding. Ommaya reservoirs ensure uniform drug distribution throughout ventricular and spinal subarachnoid compartments, avoiding repeated lumbar punctures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ommaya Intraventricular Delivery",
+     "points": [
+      "Subcutaneous reservoir with intraventricular catheter",
+      "Uniform, physiological CSF drug distribution",
+      "Painless access, reliable CSF sampling",
+      "Risk of reservoir infection or catheter malposition"
+     ]
+    },
+    "right": {
+     "title": "Lumbar Puncture Injections",
+     "points": [
+      "Repeated serial thecal punctures",
+      "Erratic ventricular drug concentrations (<10%)",
+      "Subdural or epidural extravasation risk",
+      "Post-dural puncture headache and patient discomfort"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid alleviation of raised intracranial pressure and peritumoural inflammation is essential. **Dexamethasone** is the primary initial medical therapy for peritumoural vasogenic cerebral oedema, restoring blood-brain barrier integrity and rapidly reversing neurological deficits. Dexamethasone reduces endothelial tight-junction permeability, starting with 4 to 8 mg daily in divided doses, or 16 mg daily in impending herniation with proton pump inhibitor gastroprotection.",
+   "say": "Rapid alleviation of raised intracranial pressure and peritumoural inflammation is essential. Dexamethasone is the primary initial medical therapy for peritumoural vasogenic cerebral oedema, restoring blood-brain barrier integrity and rapidly reversing neurological deficits. Dexamethasone reduces endothelial tight-junction permeability, starting with 4 to 8 mg daily in divided doses, or 16 mg daily in impending herniation with proton pump inhibitor gastroprotection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Brain metastasis VEGF secretion"
+     },
+     {
+      "id": "b",
+      "label": "Disrupted endothelial tight junctions"
+     },
+     {
+      "id": "c",
+      "label": "Vasogenic cerebral oedema"
+     },
+     {
+      "id": "d",
+      "label": "Dexamethasone restores barrier integrity & relieves symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "vascular hyperpermeability"
+     ],
+     [
+      "b",
+      "c",
+      "plasma ultrafiltrate leaks into white matter"
+     ],
+     [
+      "c",
+      "d",
+      "downregulates VEGF and seals tight junctions"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}
