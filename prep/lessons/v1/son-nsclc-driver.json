@@ -1,0 +1,296 @@
+{
+  "v": 1,
+  "module": "son-nsclc-driver",
+  "subject": "ss-medical-oncology",
+  "title": "Oncogene addicted NSCLC: molecular drivers and targeted therapies",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "Sensitising mutations in the epidermal growth factor receptor drive distinct subsets of lung adenocarcinoma. Classical activating alterations include **EGFR exon 19** in-frame deletions and exon 21 **L858R** point substitutions. Together, these two alterations form approximately 85% of all EGFR-mutant non-small cell lung cancers. Identifying these driver alterations dictates front-line treatment choice, because tumours harbouring sensitising mutations demonstrate high initial sensitivity to specific tyrosine kinase inhibitors.",
+      "say": "Sensitising mutations in the epidermal growth factor receptor drive distinct subsets of lung adenocarcinoma. Classical activating alterations include EGFR exon 19 in-frame deletions and exon 21 L858R point substitutions. Together, these two alterations form approximately 85% of all EGFR-mutant non-small cell lung cancers. Identifying these driver alterations dictates front-line treatment choice.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alteration",
+          "Location",
+          "Frequency",
+          "First-line Therapy"
+        ],
+        "rows": [
+          [
+            "Exon 19 Deletion",
+            "Exon 19",
+            "45% to 50%",
+            "Osimertinib"
+          ],
+          [
+            "L858R Mutation",
+            "Exon 21",
+            "35% to 40%",
+            "Osimertinib"
+          ],
+          [
+            "Exon 20 Insertion",
+            "Exon 20",
+            "5% to 10%",
+            "Amivantamab plus Chemotherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Third-generation tyrosine kinase inhibitors provide superior clinical outcomes over older generations. **Osimertinib monotherapy** represents the established standard of care for previously untreated EGFR-mutated advanced lung cancer based on the landmark **FLAURA trial**. Osimertinib prolonged progression-free survival and overall survival compared to first-generation agents. Furthermore, the drug crosses the blood-brain barrier effectively, providing intracranial disease control and delaying central nervous system recurrence.",
+      "say": "Third-generation tyrosine kinase inhibitors provide superior clinical outcomes over older generations. Osimertinib monotherapy represents the established standard of care for previously untreated EGFR-mutated advanced lung cancer based on the landmark FLAURA trial. Osimertinib prolonged progression-free survival and overall survival compared to first-generation agents. Furthermore, the drug crosses the blood-brain barrier effectively.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dx",
+            "label": "EGFR Mutation",
+            "level": 1
+          },
+          {
+            "id": "flaura",
+            "label": "FLAURA Standard",
+            "level": 2
+          },
+          {
+            "id": "osi",
+            "label": "Osimertinib Daily",
+            "level": 3
+          },
+          {
+            "id": "cns",
+            "label": "CNS Protection",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "dx",
+            "flaura"
+          ],
+          [
+            "flaura",
+            "osi"
+          ],
+          [
+            "osi",
+            "cns"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anaplastic lymphoma kinase gene rearrangements characterise three to five percent of non-small cell lung cancers. First-line **lorlatinib**, a third-generation ALK inhibitor, demonstrated unprecedented progression-free survival in the **CROWN trial**. The trial confirmed marked reduction in the risk of progression or death compared to crizotinib. Lorlatinib also displayed exceptional intracranial activity, preventing the emergence of brain metastases and treating existing intracranial lesions.",
+      "say": "Anaplastic lymphoma kinase gene rearrangements characterise three to five percent of non-small cell lung cancers. First-line lorlatinib, a third-generation ALK inhibitor, demonstrated unprecedented progression-free survival in the CROWN trial. The trial confirmed marked reduction in the risk of progression or death compared to crizotinib. Lorlatinib also displayed exceptional intracranial activity, preventing the emergence of brain metastases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First-Line Lorlatinib",
+          "points": [
+            "Third-generation macrocyclic ALK inhibitor",
+            "Marked progression-free survival in CROWN",
+            "Superior intracranial disease protection"
+          ]
+        },
+        "right": {
+          "title": "First-Generation Crizotinib",
+          "points": [
+            "First-generation multi-targeted inhibitor",
+            "Higher rate of central relapse",
+            "Superseded by next-generation agents"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oncogenic **ROS1 rearrangements** occur in one to two percent of lung adenocarcinomas and show clinical sensitivity to tyrosine kinase inhibition. Available targeted agents include **crizotinib**, **entrectinib**, and **repotrectinib**. Next-generation inhibitors such as entrectinib and repotrectinib overcome acquired solvent-front resistance mutations like G2032R. Crucially, newer agents achieve greater central nervous system penetration compared to crizotinib, conferring improved control over intracranial secondary deposits.",
+      "say": "Oncogenic ROS1 rearrangements occur in one to two percent of lung adenocarcinomas and show clinical sensitivity to tyrosine kinase inhibition. Available targeted agents include crizotinib, entrectinib, and repotrectinib. Next-generation inhibitors such as entrectinib and repotrectinib overcome acquired resistance mutations. Crucially, newer agents provide greater central nervous system penetration compared to crizotinib.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Generation",
+          "CNS Activity",
+          "Solvent-Front G2032R"
+        ],
+        "rows": [
+          [
+            "Crizotinib",
+            "First",
+            "Modest",
+            "Inactive"
+          ],
+          [
+            "Entrectinib",
+            "Next-gen",
+            "Substantial",
+            "Limited"
+          ],
+          [
+            "Repotrectinib",
+            "Next-gen",
+            "High",
+            "Active"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The classical GTPase driver mutation **KRAS G12C** causes nearly thirteen percent of non-small cell lung cancers. Direct covalent inhibitors target the inactive GDP-bound conformation within the switch II pocket. Two approved selective agents are **sotorasib** and **adagrasib**, both demonstrating durable responses in patients with previously treated metastatic disease. These oral targeted therapies provide meaningful clinical benefit and manageable safety profiles in this previously undruggable patient population.",
+      "say": "The classical GTPase driver mutation KRAS G12C causes nearly thirteen percent of non-small cell lung cancers. Direct covalent inhibitors target the inactive GDP-bound conformation within the switch II pocket. Two approved selective agents are sotorasib and adagrasib, both demonstrating durable responses in patients with previously treated metastatic disease. These oral targeted therapies provide meaningful clinical benefit.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "kras",
+            "label": "KRAS G12C",
+            "level": 1
+          },
+          {
+            "id": "pocket",
+            "label": "Switch II Pocket",
+            "level": 2
+          },
+          {
+            "id": "agents",
+            "label": "Sotorasib or Adagrasib",
+            "level": 3
+          },
+          {
+            "id": "gdp",
+            "label": "Locked GDP State",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "kras",
+            "pocket"
+          ],
+          [
+            "pocket",
+            "agents"
+          ],
+          [
+            "agents",
+            "gdp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oncogenic **MET exon 14** **skipping alterations** lead to loss of the CBL ubiquitin ligase binding domain, impairing receptor degradation and driving continuous proliferative signalling. Targeted oral MET inhibitors **capmatinib** and **tepotinib** produce robust and durable overall objective responses in advanced NSCLC harbouring MET exon 14 alterations. Both small-molecule agents provide activity in both treatment-naive and previously treated patient cohorts, along with notable intracranial response rates.",
+      "say": "Oncogenic MET exon 14 skipping alterations lead to loss of the ubiquitin ligase binding domain, impairing receptor degradation and driving continuous proliferative signalling. Targeted oral MET inhibitors capmatinib and tepotinib produce robust and durable overall objective responses in advanced disease harbouring these alterations. Both agents provide activity across treatment settings with notable intracranial response rates.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug",
+          "Mechanism",
+          "Target",
+          "Dosing Setting"
+        ],
+        "rows": [
+          [
+            "Capmatinib",
+            "Selective MET TKI",
+            "MET Exon 14 Skip",
+            "Naive and Pretreated"
+          ],
+          [
+            "Tepotinib",
+            "Selective MET TKI",
+            "MET Exon 14 Skip",
+            "Naive and Pretreated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targetable **RET gene fusions** arise in approximately one to two percent of lung adenocarcinomas, commonly pairing RET with partner genes such as KIF5B or CCDC6. Highly selective and brain-penetrant RET inhibitors **selpercatinib** and **pralsetinib** yield high objective response rates exceeding sixty percent in advanced RET-fusion-positive lung cancer. These agents cause significantly fewer off-target toxicities than older multi-kinase inhibitors like cabozantinib, ensuring prolonged treatment compliance.",
+      "say": "Targetable RET gene fusions arise in approximately one to two percent of lung adenocarcinomas, commonly pairing with partner genes such as KIF5B. Highly selective and brain-penetrant RET inhibitors selpercatinib and pralsetinib yield high objective response rates exceeding sixty percent in advanced disease. These agents cause significantly fewer off-target toxicities than older multi-kinase inhibitors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ret",
+            "label": "RET Fusion",
+            "level": 1
+          },
+          {
+            "id": "tissues",
+            "label": "KIF5B or CCDC6 Partner",
+            "level": 2
+          },
+          {
+            "id": "drugs",
+            "label": "Selpercatinib / Pralsetinib",
+            "level": 3
+          },
+          {
+            "id": "resp",
+            "label": "Durable Systemic Response",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "ret",
+            "tissues"
+          ],
+          [
+            "tissues",
+            "drugs"
+          ],
+          [
+            "drugs",
+            "resp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bispecific antibody engineering offers innovative mechanisms to combat epidermal growth factor receptor oncogenic dependency. **Amivantamab** is a fully human bispecific antibody targeting both EGFR and MET on tumour cell surfaces. In the **MARIPOSA trial**, combining amivantamab with the third-generation oral inhibitor lazertinib significantly prolonged progression-free survival compared with standard **osimertinib** monotherapy in the first-line treatment of EGFR-mutant advanced lung cancer.",
+      "say": "Bispecific antibody engineering offers innovative mechanisms to combat epidermal growth factor receptor oncogenic dependency. Amivantamab is a fully human bispecific antibody targeting both EGFR and MET on tumour cell surfaces. In the MARIPOSA trial, combining amivantamab with lazertinib significantly prolonged progression-free survival compared with standard osimertinib monotherapy in first-line treatment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amivantamab plus Lazertinib",
+          "points": [
+            "Bispecific EGFR-MET antibody combination",
+            "Improved progression-free survival in MARIPOSA",
+            "Dual receptor degradation and immune engagement"
+          ]
+        },
+        "right": {
+          "title": "Osimertinib Monotherapy",
+          "points": [
+            "Oral third-generation tyrosine kinase inhibitor",
+            "Longstanding standard from FLAURA study",
+            "Single-agent oral administration profile"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita, Hellman, and Rosenberg Cancer: Principles & Practice of Oncology 12th Edition",
+    "FLAURA Trial (NEJM)",
+    "CROWN Trial (JCO)",
+    "MARIPOSA Trial (NEJM)"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}

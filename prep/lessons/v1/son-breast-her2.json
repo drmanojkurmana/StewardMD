@@ -1,84 +1,300 @@
 {
- "v": 1,
- "module": "son-breast-her2",
- "subject": "ss-medical-oncology",
- "title": "HER2-positive breast cancer: targeted therapy and cardiac safety",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "HER2 (human epidermal growth factor receptor 2) is a growth receptor that, when present in excess, pushes breast tumours towards more aggressive behaviour. **Trastuzumab** is a monoclonal antibody aimed at HER2 and forms the core of treatment. Its chief dose-limiting adverse effect is **cardiotoxicity**, so heart function, usually tracked through **left ventricular ejection fraction** (LVEF) monitoring, must be followed throughout therapy. **Pertuzumab** adds a second layer of HER2 blockade on top of trastuzumab.",
-   "say": "HER2 is a growth receptor that, when present in excess, pushes breast tumours towards more aggressive behaviour. Trastuzumab is a monoclonal antibody aimed at HER2 and forms the core of treatment. Its chief dose-limiting adverse effect is cardiotoxicity, so heart function, usually tracked by measuring left ventricular ejection fraction, must be followed throughout therapy. Pertuzumab adds a second layer of HER2 blockade on top of trastuzumab.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-breast-her2-fig1.webp",
-    "alt": "Diagram of Trastuzumab blocking HER2 receptors on a cancer cell, with an icon representing cardiac monitoring for cardiotoxicity.",
-    "caption": "Trastuzumab blocks HER2 signaling; cardiac safety is paramount. Image: Sandrine Richard , Frédéric Selle, Jean-Pierre Lotz , Ahmed Khalil , J, CC BY 4.0, Wikimedia Commons.",
-    "ar": 2.0064
-   }
-  },
-  {
-   "tx": "Cardiac surveillance is central to anti-HER2 therapy. Assess **LVEF** (left ventricular ejection fraction) by echocardiography or MUGA before starting, then repeat it at regular intervals, typically every 3 months during treatment for dual blockade and trastuzumab-based regimens. A fall in LVEF below the protocol threshold requires holding the drug and reassessing. Indian practice follows the same principle, so monitoring should not be skipped in resource-limited centres.",
-   "say": "Cardiac surveillance is central to anti-HER2 therapy. Assess left ventricular ejection fraction by echocardiography or MUGA before starting, then repeat it at regular intervals, typically every 3 months during dual blockade and trastuzumab-based regimens. A fall below the protocol threshold requires holding the drug and reassessing cardiac function.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Time point",
-     "Assessment",
-     "Action"
-    ],
-    "rows": [
-     [
-      "Before treatment",
-      "Baseline LVEF",
-      "Record as reference"
-     ],
-     [
-      "Every 3 months",
-      "Repeat LVEF",
-      "Continue if stable"
-     ],
-     [
-      "LVEF falls",
-      "Repeat imaging",
-      "Hold and reassess"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Trastuzumab emtansine (T-DM1), studied in **KATHERINE**, is an antibody-drug conjugate used as adjuvant therapy in patients with residual invasive disease after neoadjuvant taxane and trastuzumab. Thrombocytopenia is a key haematologic toxicity. For grade 3 or 4 platelet falls, hold the drug until recovery to grade 1 or better, then resume according to protocol dose modification. Hepatotoxicity also needs regular liver function monitoring.",
-   "say": "Trastuzumab emtansine, studied in KATHERINE, is an antibody-drug conjugate used as adjuvant therapy in patients with residual invasive disease after neoadjuvant taxane and trastuzumab. Thrombocytopenia is a key haematologic toxicity. For grade 3 or 4 platelet falls, hold the drug until recovery to grade 1 or better, then resume per protocol dose modification.",
-   "vis": null
-  },
-  {
-   "tx": "Neoadjuvant therapy aims for a **pathological complete response** (pCR), meaning no invasive cancer left in breast or nodes. pCR predicts better survival, especially in HER2-positive and triple-negative disease. The APHINITY trial showed that adding pertuzumab to adjuvant trastuzumab improved invasive disease-free survival in early HER2-positive breast cancer. Residual disease after neoadjuvant therapy identifies patients who need intensified adjuvant treatment.",
-   "say": "Neoadjuvant therapy aims for a pathological complete response, meaning no invasive cancer left in the breast or nodes. pCR predicts better survival, especially in HER2-positive and triple-negative disease. The APHINITY trial showed that adding pertuzumab to adjuvant trastuzumab improved invasive disease-free survival in early HER2-positive breast cancer. Residual disease identifies patients needing intensified adjuvant treatment.",
-   "vis": null
+  "v": 1,
+  "module": "son-breast-her2",
+  "subject": "ss-medical-oncology",
+  "title": "HER2-positive breast cancer: targeted therapy and cardiac safety",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "The definitive first-line standard of care for **metastatic HER2-positive** breast cancer is **docetaxel**, **trastuzumab**, and **pertuzumab**, which established median overall survival of nearly 5 years in the **CLEOPATRA trial**. This triplet combination achieved an extraordinary median overall survival exceeding 57 months, establishing persistent dual-HER2 blockade as the worldwide standard. Following docetaxel completion, dual monoclonal antibody maintenance is continued until objective disease progression.",
+      "say": "The definitive first-line standard of care for metastatic HER2-positive breast cancer is docetaxel, trastuzumab, and pertuzumab, which established median overall survival of nearly 5 years in the CLEOPATRA trial. Following chemotherapy, dual antibody maintenance is continued until objective disease progression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regimen Arm",
+          "Progression-Free Survival",
+          "Median Overall Survival",
+          "Long-Term Impact"
+        ],
+        "rows": [
+          [
+            "Docetaxel + Trastuzumab + Pertuzumab",
+            "18.7 months",
+            "57.1 months",
+            "Pivotal standard of care (CLEOPATRA)"
+          ],
+          [
+            "Docetaxel + Trastuzumab + Placebo",
+            "12.4 months",
+            "40.8 months",
+            "Historical comparator arm"
+          ],
+          [
+            "Survival Gain with Pertuzumab Addition",
+            "+6.3 months PFS gain",
+            "+16.3 months OS gain",
+            "Hazard ratio for death 0.69 (p < 0.001)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adjuvant human epidermal growth factor receptor 2 blockade revolutionized breast cancer survival. One year of **adjuvant** **trastuzumab** combined with chemotherapy reduces recurrence risk by 50% and mortality by **33%** in early HER2-positive breast cancer. Established across landmark randomized prospective trials including HERA and NSABP B-31, 12 months of adjuvant trastuzumab remains the worldwide standard duration, whereas shorter durations of 6 months demonstrated inferior disease-free survival in non-inferiority trials.",
+      "say": "Adjuvant human epidermal growth factor receptor 2 blockade revolutionized breast cancer survival. One year of adjuvant trastuzumab combined with chemotherapy reduces recurrence risk by 50% and mortality by 33% in early HER2-positive breast cancer. Established across landmark randomized trials, 12 months of adjuvant trastuzumab remains the worldwide standard duration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Landmark Trial",
+          "Treatment Arms",
+          "Disease-Free Survival Gain",
+          "Mortality Reduction"
+        ],
+        "rows": [
+          [
+            "HERA Trial (Global)",
+            "Observation vs 1 Year vs 2 Years Trastuzumab",
+            "Significant DFS gain at 1 year (HR 0.54)",
+            "33% relative reduction in overall mortality"
+          ],
+          [
+            "NSABP B-31 / NCCTG N9831",
+            "Doxorubicin/Cyclophosphamide -> Paclitaxel +/- Trastuzumab",
+            "52% reduction in distant disease relapse",
+            "33% relative reduction in death (p < 0.0001)"
+          ],
+          [
+            "BCIRG 006 (Non-Anthracycline)",
+            "TCH (Docetaxel + Carboplatin + Trastuzumab) vs AC-TH",
+            "Equivalent DFS with substantially lower cardiotoxicity",
+            "Standard non-anthracycline adjuvant regimen"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dual antibody receptor inhibition further reduces recurrence in high-risk node-positive early disease. Dual HER2 blockade with **trastuzumab** and **pertuzumab** combined with chemotherapy significantly improves invasive disease-free survival in the **APHINITY** trial, particularly in node-positive patients. By simultaneously preventing receptor homodimerization and ligand-induced HER2-HER3 heterodimerization, dual antibody blockade prevents activation of downstream mitogenic signaling, generating substantial long-term protection against distant metastatic relapse.",
+      "say": "Dual antibody receptor inhibition further reduces recurrence in high-risk node-positive early disease. Dual HER2 blockade with trastuzumab and pertuzumab combined with chemotherapy significantly improves invasive disease-free survival in the APHINITY trial, particularly in node-positive patients. By preventing receptor homodimerization and heterodimerization, dual blockade provides long-term protection against distant relapse.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trastuzumab + Pertuzumab (APHINITY)",
+          "points": [
+            "Indicated for high-risk node-positive early cancer",
+            "Dual blockade: subdomains IV and II inhibited",
+            "Absolute 4.5% 8-year invasive DFS gain in node-positive",
+            "Continued for 1 year total adjuvant duration"
+          ]
+        },
+        "right": {
+          "title": "Trastuzumab Monotherapy Arm",
+          "points": [
+            "Standard comparator arm in APHINITY trial",
+            "Higher rate of late distant visceral recurrence",
+            "Sufficient for low-risk, node-negative T1b/T1c tumours",
+            "Lower incidence of mild grade 1-2 diarrhoea"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Preoperative systemic therapy provides a real-time in vivo biomarker of biological responsiveness. **Pathological complete response** pCR after neoadjuvant dual **anti-HER2 therapy** and taxane chemotherapy occurs in 60% of patients, strongly correlating with excellent long-term event-free survival. Eradication of all invasive tumour cells from breast parenchyma and axillary lymph nodes confirms chemosensitivity, whereas residual invasive disease directs adjuvant therapy escalation.",
+      "say": "Preoperative systemic therapy provides a real-time in vivo biomarker of biological responsiveness. Pathological complete response pCR after neoadjuvant dual anti-HER2 therapy and taxane chemotherapy occurs in 60% of patients, strongly correlating with excellent long-term event-free survival. Eradication of all invasive tumour cells from breast and axillary lymph nodes confirms chemosensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "neoadj",
+            "label": "Neoadjuvant Taxane + Trastuzumab + Pertuzumab",
+            "level": 1
+          },
+          {
+            "id": "surgery",
+            "label": "Definitive Surgical Resection & Axillary Staging",
+            "level": 2
+          },
+          {
+            "id": "pcr",
+            "label": "60% Achieve Pathological Complete Response (pCR)",
+            "level": 3
+          },
+          {
+            "id": "maint",
+            "label": "Complete 1 Year Maintenance Dual Monoclonal Antibodies",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "neoadj",
+            "surgery"
+          ],
+          [
+            "surgery",
+            "pcr"
+          ],
+          [
+            "pcr",
+            "maint"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeted payload delivery overcomes therapeutic resistance in patients failing neoadjuvant therapy. In the randomized phase 3 **KATHERINE** trial, adjuvant **trastuzumab emtansine** T-DM1 reduced the risk of invasive recurrence or death by **50%** compared with trastuzumab in patients with residual invasive disease after neoadjuvant therapy. Patients with non-pCR at surgery switch from naked trastuzumab to 14 cycles of intravenous T-DM1, establishing targeted antibody-drug conjugates as essential post-surgical therapy.",
+      "say": "Targeted payload delivery overcomes therapeutic resistance in patients failing neoadjuvant therapy. In the randomized phase 3 KATHERINE trial, adjuvant trastuzumab emtansine T-DM1 reduced the risk of invasive recurrence or death by 50% compared with trastuzumab in patients with residual invasive disease after neoadjuvant therapy. Patients with residual disease at surgery switch to 14 cycles of T-DM1.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adjuvant T-DM1 (KATHERINE)",
+          "points": [
+            "Indicated for residual invasive cancer (non-pCR)",
+            "Administered for 14 cycles (every 3 weeks)",
+            "50% reduction in invasive disease recurrence or death",
+            "Monitor platelet count and hepatic transaminases"
+          ]
+        },
+        "right": {
+          "title": "Standard Trastuzumab Arm",
+          "points": [
+            "Inferior disease-free survival in residual disease",
+            "Higher rate of distant metastatic dissemination",
+            "Reserved for patients achieving complete response (pCR)",
+            "Fewer thrombocytopenic events"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Next-generation antibody-drug conjugates have established new standards in metastatic second-line therapy. In the pivotal randomized **DESTINY-Breast03** trial, **trastuzumab deruxtecan** T-DXd carrying an exatecan derivative topoisomerase I inhibitor payload with a drug-to-antibody ratio of **8** significantly reduced progression or death risk compared to T-DM1. T-DXd demonstrated unequivocal superiority in median progression-free survival, becoming the undisputed preferred second-line global standard of care.",
+      "say": "Next-generation antibody-drug conjugates have established new standards in metastatic second-line therapy. In the pivotal randomized DESTINY-Breast03 trial, trastuzumab deruxtecan T-DXd carrying a topoisomerase I inhibitor payload with a drug-to-antibody ratio of 8 significantly reduced progression or death risk compared to T-DM1. T-DXd demonstrated superiority in progression-free survival, becoming the preferred second-line standard.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Trastuzumab Deruxtecan (T-DXd)",
+          "Trastuzumab Emtansine (T-DM1)"
+        ],
+        "rows": [
+          [
+            "Cytotoxic Payload",
+            "Exatecan derivative (Topoisomerase I poison)",
+            "DM1 maytansinoid (Microtubule inhibitor)"
+          ],
+          [
+            "Drug-to-Antibody Ratio",
+            "High DAR: 8 payload molecules per antibody",
+            "Moderate DAR: 3.5 molecules per antibody"
+          ],
+          [
+            "Cleavable Linker",
+            "Cathepsin-cleavable tetrapeptide (Bystander +)",
+            "Non-cleavable thioether linker (Bystander -)"
+          ],
+          [
+            "Trial Outcome (DESTINY-B03)",
+            "72% reduction in progression or death vs T-DM1",
+            "Historical standard arm superseded by T-DXd"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intracranial central nervous system disease requires small-molecule targeted therapies that penetrate the blood-brain barrier. **Tucatinib** is an oral, highly selective HER2 tyrosine kinase inhibitor that, when added to **trastuzumab** and **capecitabine** in the HER2CLIMB trial, significantly prolonged progression-free and overall survival in patients with pretreated HER2-positive metastatic disease and active **brain metastases**. Tucatinib combination therapy reduced the risk of death by one-third in patients with cerebral dissemination.",
+      "say": "Intracranial central nervous system disease requires small-molecule targeted therapies that penetrate the blood-brain barrier. Tucatinib is an oral, highly selective HER2 tyrosine kinase inhibitor that, when added to trastuzumab and capecitabine in the HER2CLIMB trial, significantly prolonged progression-free and overall survival in patients with active brain metastases. Tucatinib reduced mortality by one-third in cerebral disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "brain",
+            "label": "Active / Progressive Brain Metastases",
+            "level": 1
+          },
+          {
+            "id": "tuca",
+            "label": "Oral Tucatinib (Crosses Blood-Brain Barrier)",
+            "level": 2
+          },
+          {
+            "id": "combo",
+            "label": "Combined with Capecitabine and Trastuzumab",
+            "level": 3
+          },
+          {
+            "id": "cns_os",
+            "label": "52% Reduction in CNS Progression or Death (HER2CLIMB)",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "brain",
+            "tuca"
+          ],
+          [
+            "tuca",
+            "combo"
+          ],
+          [
+            "combo",
+            "cns_os"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cardiac safety surveillance remains mandatory throughout therapeutic anti-HER2 administration. **Trastuzumab cardiotoxicity** type II is not dose-dependent, characteristically non-structural, and typically reversible upon drug cessation. Regular monitoring of **left ventricular ejection fraction** LVEF via echocardiography is required every 3 months during therapy, holding treatment if LVEF drops below 50% or by at least **10%** from baseline to permit myocardial recovery and initiation of cardioprotective ACE inhibitors.",
+      "say": "Cardiac safety surveillance remains mandatory throughout therapeutic anti-HER2 administration. Trastuzumab cardiotoxicity type II is not dose-dependent, characteristically non-structural, and typically reversible upon drug cessation. Regular monitoring of left ventricular ejection fraction LVEF via echocardiography is required every 3 months, holding treatment if LVEF drops below 50% or by at least 10% from baseline.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Echocardiographic Finding",
+          "Action Regarding Trastuzumab",
+          "Medical Intervention"
+        ],
+        "rows": [
+          [
+            "LVEF >= 50% & Delta < 10%",
+            "Continue full-dose trastuzumab",
+            "Routine 3-monthly surveillance echo"
+          ],
+          [
+            "LVEF 40-49% & Delta < 10%",
+            "Continue therapy; repeat echo in 4-6 weeks",
+            "Cardiology consultation, lifestyle optimization"
+          ],
+          [
+            "LVEF < 40% or Delta >= 10%",
+            "Hold trastuzumab immediately",
+            "Initiate ACE inhibitors / beta-blockers; re-evaluate in 4 weeks"
+          ],
+          [
+            "LVEF Recovers to >= 50%",
+            "Resume trastuzumab therapy safely",
+            "Maintain concurrent ACE inhibitor / beta-blocker therapy"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_1e285a356b61",
+    "q_9ebf74454b24",
+    "q_0c2091b3b00d"
+  ],
+  "refs": [
+    "Wolff AC et al. Human Epidermal Growth Factor Receptor 2 Testing in Breast Cancer (ASCO/CAP Focused Update)",
+    "Swain SM et al. Pertuzumab, trastuzumab, and docetaxel in HER2-positive metastatic breast cancer (CLEOPATRA). NEJM",
+    "Cortés J et al. Trastuzumab deruxtecan versus trastuzumab emtansine for breast cancer (DESTINY-Breast03). NEJM"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_1e285a356b61",
-  "q_9ebf74454b24",
-  "q_0c2091b3b00d"
- ],
- "src": [],
- "refs": [
-  "NICE guideline on early and locally advanced breast cancer (NG101)",
-  "ESMO Clinical Practice Guidelines for early breast cancer"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 70
- }
 }

@@ -1,0 +1,297 @@
+{
+  "v": 1,
+  "module": "son-effusions-nutrition",
+  "subject": "ss-medical-oncology",
+  "title": "Malignant effusions and cancer cachexia: pathophysiology, drainage and nutritional support",
+  "minutes": 5,
+  "steps": [
+    {
+      "tx": "A **malignant pleural effusion** produces progressive exertional dyspnea, dry cough, and chest heaviness secondary to diaphragmatic inversion and impaired lung expansion. When the underlying lung successfully re-expands following complete therapeutic thoracentesis, definitive chemical **pleurodesis** using sterile talc poudrage via thoracoscopy or talc slurry via chest tube is recommended. Talc instillation triggers robust visceral-parietal pleural inflammation, creating permanent fibrous symphysis that prevents recurrent fluid accumulation.",
+      "say": "A malignant pleural effusion produces progressive exertional dyspnea, dry cough, and chest heaviness. When the underlying lung re-expands following therapeutic thoracentesis, definitive chemical pleurodesis using sterile talc is recommended. Talc instillation triggers robust pleural inflammation, creating permanent symphysis that prevents recurrent fluid accumulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mpe",
+            "label": "Malignant Pleural Effusion",
+            "level": 1
+          },
+          {
+            "id": "thor",
+            "label": "Complete Thoracentesis",
+            "level": 2
+          },
+          {
+            "id": "talc",
+            "label": "Talc Slurry / Poudrage",
+            "level": 3
+          },
+          {
+            "id": "symp",
+            "label": "Visceral-Parietal Symphysis",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mpe",
+            "thor"
+          ],
+          [
+            "thor",
+            "talc"
+          ],
+          [
+            "talc",
+            "symp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Indwelling pleural catheters** offer an outpatient alternative to chemical pleurodesis that affords equivalent dyspnea relief and reduces hospital stay. Tunneled silastic catheters enable patient-directed home drainage on an intermittent schedule. Crucially, indwelling pleural catheters represent the preferred intervention for patients presenting with non-expandable **trapped lung**, where thickened visceral tumour cortex prevents the pleural apposition necessary for successful talc symphysis.",
+      "say": "Indwelling pleural catheters offer an outpatient alternative to chemical pleurodesis that affords equivalent dyspnea relief and reduces hospital stay. Tunneled silastic catheters enable patient-directed home drainage. Crucially, indwelling pleural catheters represent the preferred intervention for patients presenting with non-expandable trapped lung.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indwelling Pleural Catheter",
+          "points": [
+            "Outpatient ambulatory insertion",
+            "Ideal for trapped non-expandable lung",
+            "Intermittent home drainage by patient"
+          ]
+        },
+        "right": {
+          "title": "Talc Chemical Pleurodesis",
+          "points": [
+            "Requires hospital admission and tube thoracostomy",
+            "Mandates complete lung re-expansion",
+            "Permanent symphysis eliminates foreign body"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Malignant ascites** develops from peritoneal carcinomatosis, impaired lymphatic resorption, and elevated microvascular permeability in advanced ovarian, gastrointestinal, and breast cancers. Patients experience early satiety, abdominal distension, and respiratory splinting. Palliative management centers on large-volume **therapeutic paracentesis** with intravenous albumin replacement when volumes exceed five litres. Tunneled peritoneal catheters provide effective ambulatory symptom control in refractory ascites.",
+      "say": "Malignant ascites develops from peritoneal carcinomatosis, impaired lymphatic resorption, and elevated microvascular permeability in advanced cancers. Patients develop early satiety, abdominal distension, and progressive respiratory compromise. Palliative management centers on large-volume therapeutic paracentesis with intravenous albumin replacement when volumes exceed five litres.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Malignant Ascites",
+          "Cirrhotic Portal Ascites"
+        ],
+        "rows": [
+          [
+            "Serum-Ascites Albumin Gradient",
+            "< 1.1 g/dL (Exudate)",
+            ">= 1.1 g/dL (Transudate)"
+          ],
+          [
+            "Cytology",
+            "Positive for malignant cells (60-90%)",
+            "Negative for malignant cells"
+          ],
+          [
+            "Total Protein",
+            "Elevated (>= 2.5 g/dL)",
+            "Low (< 2.5 g/dL)"
+          ],
+          [
+            "Response to Diuretics",
+            "Generally poor or resistant",
+            "Highly responsive to spironolactone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cancer cachexia** is a complex metabolic syndrome defined by involuntary progressive loss of skeletal muscle mass that cannot be reversed by conventional nutritional support alone. It is driven by tumour-host interactions causing profound **systemic inflammation**, with catabolic cytokines including tumor necrosis factor-alpha, interleukin-1, and interleukin-6 activating the ubiquitin-proteasome pathway, promoting proteolysis and hypermetabolism.",
+      "say": "Cancer cachexia is a complex metabolic syndrome defined by involuntary progressive loss of skeletal muscle mass. It is driven by tumour-host interactions causing profound systemic inflammation, with catabolic cytokines promoting proteolysis, adipose lipolysis, and severe hypermetabolism.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tum",
+            "label": "Tumour Cytokine Release",
+            "level": 1
+          },
+          {
+            "id": "il6",
+            "label": "IL-6 and TNF-alpha",
+            "level": 2
+          },
+          {
+            "id": "catab",
+            "label": "Ubiquitin-Proteasome Activation",
+            "level": 3
+          },
+          {
+            "id": "sarc",
+            "label": "Muscle Wasting & Cachexia",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "tum",
+            "il6"
+          ],
+          [
+            "il6",
+            "catab"
+          ],
+          [
+            "catab",
+            "sarc"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pharmacological approaches to cachexia aim to stimulate appetite and reverse metabolic wasting. **Anamorelin** is an orally active, selective ghrelin receptor agonist that mimics the appetite-stimulating effects of endogenous ghrelin. In the phase 3 **ROMANA trials**, anamorelin significantly increased appetite, total body weight, and lean body mass in patients with advanced non-small cell lung cancer cachexia, though it did not show significant improvement in handgrip muscle strength.",
+      "say": "Pharmacological approaches to cachexia aim to stimulate appetite and reverse metabolic wasting. Anamorelin is an orally active, selective ghrelin receptor agonist that mimics the effects of endogenous ghrelin. In the phase 3 ROMANA trials, anamorelin significantly increased appetite, body weight, and lean body mass in advanced lung cancer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anamorelin Ghrelin Agonist",
+          "points": [
+            "Oral selective ghrelin receptor agonist",
+            "Increases appetite and lean body mass",
+            "Demonstrated efficacy in ROMANA trials"
+          ]
+        },
+        "right": {
+          "title": "Progestins (Megestrol)",
+          "points": [
+            "Synthetic progesterone derivative",
+            "Increases appetite and adipose fat tissue",
+            "Significant risk of deep vein thrombosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Atypical antipsychotics provide valuable adjuvant benefit in refractory cancer anorexia and nausea. Low-dose **olanzapine** at 2.5 to 5 mg orally once daily significantly stimulates **appetite** and promotes weight gain in patients with advanced cancer receiving palliative care. Olanzapine antagonizes multiple serotonin and dopamine receptors, providing dual antiemetic and orexigenic benefits while improving patient sleep quality and reducing distress.",
+      "say": "Atypical antipsychotics provide valuable adjuvant benefit in refractory cancer anorexia and nausea. Low-dose olanzapine at 2.5 to 5 mg orally daily significantly stimulates appetite and promotes weight gain in patients with advanced cancer receiving palliative care. Olanzapine provides dual antiemetic and orexigenic benefits.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Orexigenic Agent",
+          "Mechanism",
+          "Target Dose",
+          "Key Adverse Effects"
+        ],
+        "rows": [
+          [
+            "Olanzapine",
+            "5-HT2C / D2 antagonism",
+            "2.5 to 5 mg daily at bedtime",
+            "Sedation, orthostatic dizziness"
+          ],
+          [
+            "Megestrol Acetate",
+            "Central NPY stimulation",
+            "400 to 800 mg daily",
+            "Thromboembolism, adrenal suppression"
+          ],
+          [
+            "Dexamethasone",
+            "Central appetite stimulation",
+            "2 to 4 mg daily (short course)",
+            "Myopathy, candidiasis, hyperglycemia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Malignant bowel obstruction** in advanced peritoneal carcinomatosis causes severe colicky abdominal pain, intractable vomiting, and abdominal distension. Initial medical management relies on nasogastric decompression and continuous subcutaneous infusions of the somatostatin analogue **octreotide** to suppress gastrointestinal secretions. Combining octreotide with haloperidol and **dexamethasone** resolves vomiting and colic in over 70% of patients without requiring emergency palliative laparotomy.",
+      "say": "Malignant bowel obstruction in advanced peritoneal carcinomatosis causes severe colicky pain, intractable vomiting, and abdominal distension. Initial medical management relies on continuous subcutaneous infusions of the somatostatin analogue octreotide to suppress secretions. Combining octreotide with dexamethasone resolves symptoms in most patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mbo",
+            "label": "Malignant Bowel Obstruction",
+            "level": 1
+          },
+          {
+            "id": "oct",
+            "label": "Octreotide Subcutaneous Infusion",
+            "level": 2
+          },
+          {
+            "id": "dex",
+            "label": "Dexamethasone + Haloperidol",
+            "level": 3
+          },
+          {
+            "id": "relief",
+            "label": "Secretory & Vomiting Relief",
+            "level": 4
+          }
+        ],
+        "edges": [
+          [
+            "mbo",
+            "oct"
+          ],
+          [
+            "mbo",
+            "dex"
+          ],
+          [
+            "oct",
+            "relief"
+          ],
+          [
+            "dex",
+            "relief"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intravenous nutritional support requires strict patient selection in advanced terminal malignancies. **Home parenteral nutrition** is reserved strictly for aphagic advanced cancer patients with mechanical gastrointestinal obstruction who possess an anticipated **functional survival** exceeding 2 to 3 months. In patients with terminal multi-organ failure or severe performance decline, parenteral nutrition does not prolong life and increases catheter-related sepsis.",
+      "say": "Intravenous nutritional support requires strict patient selection in advanced terminal malignancies. Home parenteral nutrition is reserved strictly for aphagic advanced cancer patients with mechanical gastrointestinal obstruction who possess an anticipated functional survival exceeding 2 to 3 months. In terminal failure, parenteral nutrition does not prolong life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Home Parenteral Nutrition Indicated",
+          "points": [
+            "Mechanical obstruction without diffuse visceral failure",
+            "Anticipated functional survival > 2 to 3 months",
+            "ECOG performance status 0 to 2"
+          ]
+        },
+        "right": {
+          "title": "Parenteral Nutrition Contraindicated",
+          "points": [
+            "End-stage multi-organ metastatic failure",
+            "Anticipated life expectancy < 1 to 2 months",
+            "Severe refractory sepsis and delirium"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "src": [],
+  "refs": [
+    "DeVita 12e Ch. 119 (Malignant Effusions)",
+    "ROMANA 1 and 2 Trials (Lancet Oncology)",
+    "ESMO Clinical Practice Guidelines: Cancer cachexia in adult patients",
+    "MASCC/ESMO Guideline on Malignant Bowel Obstruction"
+  ],
+  "gen": "AI",
+  "run": "ss-lessons-a",
+  "model": "gemini-3.8-flash-low",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
+  }
+}
