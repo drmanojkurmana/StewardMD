@@ -2,114 +2,184 @@
  "v": 1,
  "module": "sen-disorders-sex-development",
  "subject": "ss-endocrinology",
- "title": "Differences of sex development: a practical approach",
- "minutes": 6,
+ "title": "Differences of sex development",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Differences of sex development (DSD) describe congenital conditions where chromosomal, gonadal or anatomical sex is atypical. For NEET-PG and INI-CET, sort cases first by karyotype. A **46,XY DSD** means testes are present but androgen action or synthesis is impaired. A **46,XX DSD** usually reflects excess androgen exposure or, rarely, testis-determining material. Mixed and ovotesticular forms have their own rules. Always obtain a karyotype before assigning sex.",
-   "say": "Differences of sex development describe congenital conditions where chromosomal, gonadal or anatomical sex is atypical. For NEET-PG and INI-CET, sort cases first by karyotype. A 46,XY DSD means testes are present but androgen action or synthesis is impaired. A 46,XX DSD usually reflects excess androgen exposure or, rarely, testis-determining material. Mixed and ovotesticular forms have their own rules. Always obtain a karyotype before assigning sex.",
+   "tx": "A virilized or ambiguous newborn needs an urgent karyotype, serum electrolytes, and **17-hydroxyprogesterone**. Salt-wasting **21-hydroxylase deficiency** can cause hyponatremia, hyperkalemia, and shock in the first 1 to 4 weeks of life. **Ambiguous genitalia** is an emergency for the electrolytes, not a cosmetic emergency. The labs are drawn before any sex label is given to the family.",
+   "say": "A virilized or ambiguous newborn needs an urgent karyotype, serum electrolytes, and 17-hydroxyprogesterone. Salt-wasting 21-hydroxylase deficiency can cause hyponatremia, hyperkalemia, and shock in the first 1 to 4 weeks of life. Ambiguous genitalia is an emergency for the electrolytes, not a cosmetic emergency. The labs are drawn before any sex label is given to the family.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Karyotype",
-     "Typical condition",
-     "Key clue"
+     "First tests",
+     "Why"
     ],
     "rows": [
      [
-      "46,XY",
-      "Androgen insensitivity, 5-alpha reductase deficiency",
-      "Testes present, Mullerian regression"
+      "17-hydroxyprogesterone",
+      "Classic 21-hydroxylase deficiency"
      ],
      [
-      "46,XX",
-      "Congenital adrenal hyperplasia, ovotesticular DSD",
-      "Ovaries present, virilised genitalia"
+      "Electrolytes",
+      "Salt-wasting crisis in weeks 1 to 4"
      ],
      [
-      "45,X/46,XY",
-      "Mixed gonadal dysgenesis",
-      "Streak gonad on one side, tumour risk"
+      "Karyotype",
+      "Needed before sex assignment"
+     ],
+     [
+      "Not first",
+      "Cosmetic surgery, or a label from phallus size"
      ]
     ]
    }
   },
   {
-   "tx": "**Mixed gonadal dysgenesis** (45,X/46,XY) arises from a mosaic karyotype. The side with a **streak gonad** may retain Mullerian structures, while the side with testicular tissue shows Wolffian development. Y-bearing dysgenetic gonads carry a significant risk of **gonadoblastoma** and germ cell tumours, so gonadectomy is generally recommended. Turner-related features such as short stature may need growth hormone.",
-   "say": "Mixed gonadal dysgenesis arises from a 45,X and 46,XY mosaic karyotype. The side with a streak gonad may retain Mullerian structures, while the side with testicular tissue shows Wolffian development. Y-bearing dysgenetic gonads carry a significant risk of gonadoblastoma and germ cell tumours, so gonadectomy is generally recommended. Turner-related features such as short stature may need growth hormone.",
+   "tx": "The commonest **46,XX** difference of sex development is virilizing **congenital adrenal hyperplasia**. A uterus is present because there was no **anti-Mullerian hormone**. Androgen exposure was prenatal. The internal ducts are female because the gonad did not make anti-Mullerian hormone, even when the external genitalia look virilized.",
+   "say": "The commonest 46,XX difference of sex development is virilizing congenital adrenal hyperplasia. A uterus is present because there was no anti-Mullerian hormone. Androgen exposure was prenatal. The internal ducts are female because the gonad did not make anti-Mullerian hormone, even when the external genitalia look virilized.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "46,XX congenital adrenal hyperplasia",
+     "points": [
+      "Uterus is present",
+      "No anti-Mullerian hormone was made",
+      "Androgen exposure was prenatal"
+     ]
+    },
+    "right": {
+     "title": "A 46,XY undervirilized infant",
+     "points": [
+      "Anti-Mullerian hormone may have removed the uterus",
+      "The karyotype is the split",
+      "17-hydroxyprogesterone is still sent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Complete androgen insensitivity** is a **46,XY** difference. The testes produce **anti-Mullerian hormone**, so the uterus is absent, and testosterone is high but the receptor does not respond. At puberty there is breast development from aromatized androgen, a blind vaginal pouch, and sparse pubic hair. Breast development at puberty does not mean the karyotype is 46,XX.",
+   "say": "Complete androgen insensitivity is a 46,XY difference. The testes produce anti-Mullerian hormone, so the uterus is absent, and testosterone is high but the receptor does not respond. At puberty there is breast development from aromatized androgen, a blind vaginal pouch, and sparse pubic hair. Breast development at puberty does not mean the karyotype is 46,XX.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/androgen-insensitivity-syndrome-fig1.webp",
+    "alt": "Androgen insensitivity with inguinal testes, absent uterus, a blind vaginal pouch, and a mutated androgen receptor.",
+    "caption": "Inguinal testes, no uterus, and a blind vaginal pouch, with a mutated androgen receptor and aromatase conversion of androgen. The drawing does not print the karyotype. Complete androgen insensitivity is 46,XY, and breast development comes from aromatized androgen. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**5-alpha-reductase deficiency** raises the testosterone to **dihydrotestosterone** ratio. A 46,XY infant may look undervirilized and then virilize at puberty when testosterone rises. Breast development does not occur, which separates this enzyme from complete androgen insensitivity. Puberty virilization comes from testosterone itself, and that effect does not need dihydrotestosterone.",
+   "say": "5-alpha-reductase deficiency raises the testosterone to dihydrotestosterone ratio. A 46,XY infant may look undervirilized and then virilize at puberty when testosterone rises. Breast development does not occur, which separates this enzyme from complete androgen insensitivity. Puberty virilization comes from testosterone itself, and that effect does not need dihydrotestosterone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "5-alpha-reductase deficiency",
+     "points": [
+      "Testosterone to dihydrotestosterone ratio is high",
+      "Virilizes at puberty",
+      "No breast development"
+     ]
+    },
+    "right": {
+     "title": "Complete androgen insensitivity",
+     "points": [
+      "Testosterone is high but the receptor does not respond",
+      "Breast development at puberty",
+      "Uterus is absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**17-beta-hydroxysteroid dehydrogenase** type 3 deficiency also leaves a 46,XY fetus undervirilized. **Androstenedione** is high and testosterone is low, which is the opposite ratio from 5-alpha-reductase deficiency. Both conditions can virilize at puberty. The steroid pair is what separates them before puberty.",
+   "say": "17-beta-hydroxysteroid dehydrogenase type 3 deficiency also leaves a 46,XY fetus undervirilized. Androstenedione is high and testosterone is low, which is the opposite ratio from 5-alpha-reductase deficiency. Both conditions can virilize at puberty. The steroid pair is what separates them before puberty.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzyme",
+     "Androstenedione",
+     "Testosterone"
+    ],
+    "rows": [
+     [
+      "17-beta-hydroxysteroid dehydrogenase type 3",
+      "High",
+      "Low"
+     ],
+     [
+      "5-alpha-reductase deficiency",
+      "Not the marker",
+      "High relative to dihydrotestosterone"
+     ],
+     [
+      "Shared point",
+      "46,XY infant may look undervirilized",
+      "Puberty can bring virilization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sertoli cells** make anti-Mullerian hormone, which regresses the Mullerian ducts. **Leydig cells** make testosterone, which stabilizes the **Wolffian ducts**. Absence of a uterus means functional Sertoli cells were present in fetal life, even if the external genitalia look female. A streak on one side and a testis on the other is the mixed picture drawn here.",
+   "say": "Sertoli cells make anti-Mullerian hormone, which regresses the Mullerian ducts. Leydig cells make testosterone, which stabilizes the Wolffian ducts. Absence of a uterus means functional Sertoli cells were present in fetal life, even if the external genitalia look female. A streak on one side and a testis on the other is the mixed picture drawn here.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/sen-disorders-sex-development-fig1.webp",
-    "alt": "Diagram showing internal and external genitalia in mixed gonadal dysgenesis, with a streak gonad and Mullerian structures on one side, and a dysgenetic testis with Wolffian structures on the other. Ambiguous external genitalia are present.",
-    "caption": "Mixed gonadal dysgenesis (45,X/46,XY) with asymmetric internal duct development",
+    "alt": "Mixed gonadal dysgenesis, 45,X/46,XY, with a streak gonad and uterus on one side and a dysgenetic testis and vas on the other.",
+    "caption": "Mixed gonadal dysgenesis (45,X/46,XY) with asymmetric internal ducts: a streak gonad, fallopian tube, and uterus on one side, and a dysgenetic testis with a vas deferens on the other. Gonadoblastoma risk and ambiguous external genitalia are marked. Credit: StewardMD.",
     "ar": 1.8349
    }
   },
   {
-   "tx": "**Ovotesticular DSD** means ovarian and testicular tissue coexist in one person. Most cases are 46,XX, and the karyotype is the most common finding. Diagnosis needs **gonadal histology** showing both tissue types, not imaging alone. Management follows sex of rearing, gonadal function and malignancy risk. Gonadal segments with Y material or testicular tissue need removal or close surveillance.",
-   "say": "Ovotesticular DSD means ovarian and testicular tissue coexist in one person. Most cases are 46,XX, and the karyotype is the most common finding. Diagnosis needs gonadal histology showing both tissue types, not imaging alone. Management follows sex of rearing, gonadal function and malignancy risk. Gonadal segments with Y material or testicular tissue need removal or close surveillance.",
-   "vis": null
+   "tx": "A dysgenetic gonad that contains Y material has a risk of **gonadoblastoma**. Gonadectomy is individualized. In **complete androgen insensitivity** the gonads are often left through puberty so spontaneous breast development can occur, and the malignancy risk is then reassessed. The timing balances spontaneous puberty against the later tumour risk.",
+   "say": "A dysgenetic gonad that contains Y material has a risk of gonadoblastoma. Gonadectomy is individualized. In complete androgen insensitivity the gonads are often left through puberty so spontaneous breast development can occur, and the malignancy risk is then reassessed. The timing balances spontaneous puberty against the later tumour risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Y material in a dysgenetic gonad",
+     "points": [
+      "Gonadoblastoma risk",
+      "Gonadectomy is individualized",
+      "Not an automatic infant operation"
+     ]
+    },
+    "right": {
+     "title": "Complete androgen insensitivity",
+     "points": [
+      "Gonads often stay through puberty",
+      "So breast development can occur",
+      "Malignancy risk is reassessed after puberty"
+     ]
+    }
+   }
   },
   {
-   "tx": "Use a **hCG stimulation test** to measure testicular function where needed. Check serum testosterone, DHT and **anti-Mullerian hormone** alongside LH and FSH. Pelvic imaging confirms whether a uterus is present. Watch for red flags: an enlarging gonadal mass, salt loss suggesting congenital adrenal hyperplasia, or failure of puberty. Refer early to a specialist disorders-of-sex-development team.",
-   "say": "Use an hCG stimulation test to measure testicular function where needed. Check serum testosterone, DHT and anti-Mullerian hormone alongside LH and FSH. Pelvic imaging confirms whether a uterus is present. Watch for red flags: an enlarging gonadal mass, salt loss suggesting congenital adrenal hyperplasia, or failure of puberty. Refer early to a specialist disorders-of-sex-development team.",
+   "tx": "**Sex assignment** is a multidisciplinary decision that uses the **karyotype**, gonadal function, anatomy, and the family's informed choice. Phallus size alone does not decide it. Elective cosmetic surgery in infancy is not an emergency. The family is counselled with the anatomy, and one measurement of the phallus is not the decision.",
+   "say": "Sex assignment is a multidisciplinary decision that uses the karyotype, gonadal function, anatomy, and the family's informed choice. Phallus size alone does not decide it. Elective cosmetic surgery in infancy is not an emergency. The family is counselled with the anatomy, and one measurement of the phallus is not the decision.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Test",
-     "Purpose"
+     "Used in the decision",
+     "Not used alone"
     ],
     "rows": [
      [
       "Karyotype",
-      "Confirms 46,XY, 46,XX or mosaic"
+      "Phallus size"
      ],
      [
-      "hCG stimulation",
-      "Tests testicular function"
+      "Gonadal function and anatomy",
+      "Elective cosmetic surgery in infancy"
      ],
      [
-      "Testosterone to DHT ratio",
-      "Supports 5-alpha reductase deficiency"
-     ],
-     [
-      "Anti-Mullerian hormone",
-      "Reflects Sertoli cell function"
+      "Family's informed choice",
+      "A same-day sex label before labs"
      ]
     ]
    }
-  },
-  {
-   "tx": "Gender assignment and **gonadectomy timing** are decided by a multidisciplinary team. Early irreversible genital surgery before diagnosis is a common error. In 5-alpha reductase deficiency, many individuals raised female adopt a male identity at puberty, so counselling is essential. Defer elective genital procedures where possible and keep lifelong psychosocial support. Fertility is usually impaired.",
-   "say": "Gender assignment and gonadectomy timing are decided by a multidisciplinary team. Early irreversible genital surgery before diagnosis is a common error. In 5-alpha reductase deficiency, many individuals raised female adopt a male identity at puberty, so counselling is essential. Defer elective genital procedures where possible and keep lifelong psychosocial support. Fertility is usually impaired.",
-   "vis": null
   }
- ],
- "quiz": [
-  "q_6a5d10c24845",
-  "q_d61980f926a1",
-  "q_4a42c4183c83"
- ],
- "src": [
-  "kb-reference-5-alpha-reductase-deficiency-type-2",
-  "kb-reference-androgen-insensitivity-syndrome",
-  "kb-reference-mixed-gonadal-dysgenesis",
-  "kb-reference-ovotesticular-dsd"
- ],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 4,
-  "kbWords": 2498,
-  "itemN": 20
- }
+ ]
 }
