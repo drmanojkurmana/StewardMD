@@ -123,6 +123,22 @@ test("gate: no 12-word copy, no dash, only cleared images", () => {
   assert.match(G.gateStep(step({ vis: { kind: "image", src: "assets/kardiox-learn/x.png", alt: "a", caption: "c" } }), GROUND).join(), /not cleared/);
   assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src: "prep/lessons/media/breast-t-size.svg", alt: "a", caption: "c" } }), GROUND), []);
 });
+test("gate: narration must be full natural sentences, rejecting telegraphic chains", () => {
+  const good = "Monosaccharides cannot be hydrolysed into simpler sugars. They are classed as aldoses or ketoses by their carbonyl group.";
+  assert.deepEqual(G.checkNarration(good), []);
+
+  const shortAvg = "Small dogs bark. Cats run. Cows eat.";
+  assert.match(G.checkNarration(shortAvg).join(), /under 8 words/);
+
+  const museWonder = "Monitors rhythms causes teams is recognition: positions drop stops halt calls summon times stamp drills rehearse trolleys stock drugs draw airways plan records save defibrillators charge. Theatres arrest.";
+  assert.match(G.checkNarration(museWonder).join(), /plural-noun keyword chain/);
+
+  const museWonder2 = "BMIs feet neuros eyes is exam: kidneys swell skins mark DKAs breathe.";
+  assert.match(G.checkNarration(museWonder2).join(), /plural-noun keyword chain/);
+
+  const noVerb = "Standard preoperative risk stratification and comprehensive clinical assessment.";
+  assert.match(G.checkNarration(noVerb).join(), /no verb/);
+});
 test("grounding: citations and metadata are stripped", () => {
   assert.equal(G.stripCites("About 70% are 55 or older (Harrison 22e p.632)."), "About 70% are 55 or older.");
   assert.equal(G.stripCites("PMRT is mandatory (Standard Guidelines (NCCN), BINV-3; kb/oncotree/breast.json) here."), "PMRT is mandatory here.");
