@@ -3,7 +3,7 @@
   "module": "son-staging-response",
   "subject": "ss-medical-oncology",
   "title": "Staging, performance status and response assessment",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "Cancer staging defines the anatomical extent of malignancy, providing a standardised framework for prognosis and treatment selection. The **AJCC/UICC 8th Edition TNM staging** system incorporates anatomical tumour extent, regional nodal involvement, distant metastases, and prognostic molecular biomarkers. Incorporating biological drivers into anatomical staging refines prognostic groupings across breast, prostate, and head and neck cancers.",
@@ -76,6 +76,17 @@
             "Completely bedbound, totally confined, unable to self-care"
           ]
         ]
+      }
+    },
+    {
+      "tx": "**Performance status** describes how well a patient manages daily life and predicts how well they will tolerate treatment. The **ECOG** scale runs from zero, fully active, to four, completely bedbound. The **Karnofsky** score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
+      "say": "Performance status describes how well a patient manages daily life and predicts how well they will tolerate treatment. The ECOG scale runs from zero, fully active, to four, completely bedbound. The Karnofsky score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-staging-response-fig1.webp",
+        "alt": "Visual comparison of ECOG and Karnofsky performance status scales, showing patient functional levels.",
+        "caption": "ECOG and Karnofsky performance status scales",
+        "ar": 1.8349
       }
     },
     {

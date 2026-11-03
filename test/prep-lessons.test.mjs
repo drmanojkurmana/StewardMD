@@ -88,6 +88,14 @@ test("pickQuiz keeps the lesson's order and skips missing ids", () => {
   assert.deepEqual(P.pickQuiz([{ id: "a" }, { id: "b" }], ["b", "x", "a"]).map((x) => x.id), ["b", "a"]);
 });
 
+test("checkLesson: up to 10 steps (room for an image step beside 8 text steps), never 11", () => {
+  const step = SAMPLE.steps.find((s) => s.vis && s.vis.kind === "image");
+  const les = (n) => Object.assign({}, SAMPLE, { steps: Array.from({ length: n }, () => step) });
+  assert.deepEqual(P.checkLesson(les(10)), []);
+  assert.ok(P.checkLesson(les(11)).includes("a lesson has 4 to 10 steps"));
+  assert.ok(P.checkLesson(les(3)).includes("a lesson has 4 to 10 steps"));
+});
+
 /* ---------------- the committed sample ---------------- */
 test("sample lesson: drawable, hand-written, 3 quiz ids, every visual kind, in the index", () => {
   assert.deepEqual(P.checkLesson(SAMPLE), []);

@@ -35,7 +35,7 @@
   /* ================= pure ================= */
   var SPEEDS = [0.75, 1, 1.25, 1.5];
   var XP_STEP = 10;
-  var LIM = { steps: [4, 8], txWords: [40, 90], sayWords: 120, cols: [2, 5], rows: [2, 8], nodes: [3, 8], perLevel: 3, points: [1, 6] };
+  var LIM = { steps: [4, 10], txWords: [40, 90], sayWords: 120, cols: [2, 5], rows: [2, 8], nodes: [3, 8], perLevel: 3, points: [1, 6] };
   var FIG_RE = /^prep\/figures\/[a-z0-9-]{2,60}\.html$/;   // an interactive figure built with the Anima kit (prep/figures/<name>.html and <name>-light.html)
   var IMG_RE = /^(?!.*\.\.)[a-z0-9][a-z0-9_\/.-]*\.(?:webp|png|jpe?g|svg)$/i;
 
@@ -148,7 +148,7 @@
     var p = [];
     if (!l || l.v !== 1) return ["not a v1 lesson"];
     if (!nonEmpty(l.module) || !nonEmpty(l.title)) p.push("module and title are required");
-    if (!Array.isArray(l.steps) || !inRange(l.steps.length, LIM.steps)) p.push("a lesson has 4 to 8 steps");
+    if (!Array.isArray(l.steps) || !inRange(l.steps.length, LIM.steps)) p.push("a lesson has 4 to 10 steps");
     else l.steps.forEach(function (s, i) { checkStep(s).forEach(function (x) { p.push("step " + (i + 1) + ": " + x); }); });
     if (!Array.isArray(l.quiz)) p.push("quiz must be a list of bank item ids");
     if (l.gen !== "AI" && l.gen !== "hand") p.push('gen must be "AI" or "hand"');
