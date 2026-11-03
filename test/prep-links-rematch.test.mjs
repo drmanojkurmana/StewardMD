@@ -5,13 +5,14 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { mapPrompt, verifyPrompt, parseMapResponse, resolveTargets, parseVerifyResponse, lessonCatalog,
   kbAliasMap, unlinkedByModule } from "../tools/prep-links-rematch.mjs";
 import { applyRematch, SHOW } from "../tools/prep-links.mjs";
 
 // Hermetic: the repo under test plus committed fixtures. Live bank/out paths are dev-machine only and
 // never required: tests that need them skip with a reason instead of failing.
-const REPO = path.join(path.dirname(new URL(import.meta.url).pathname), "..");
+const REPO = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const FIX = path.join(REPO, "test/fixtures/prep-links-rematch");
 const DEV = { root: "/tmp/links100-wt", cache: "/tmp/links100-cache", out: "/tmp/links100-final", bank: "/Users/diwakarkumar/prep-work/StewardMD-prep/prep/bank/v5" };
 const devReady = () => [DEV.root, DEV.cache, DEV.out, DEV.bank].every((p) => { try { return fs.statSync(p).isDirectory(); } catch { return false; } })
