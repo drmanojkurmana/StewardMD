@@ -1,0 +1,278 @@
+{
+  "v": 1,
+  "module": "sca-myocarditis",
+  "subject": "ss-cardiology",
+  "title": "Myocarditis and Inflammatory Cardiomyopathy",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The historic **Dallas criteria** defines myocarditis by inflammatory cellular infiltrates with adjacent myocyte necrosis on **endomyocardial biopsy**, though sampling error is common due to patchy involvement. Biopsy remains the diagnostic reference standard, particularly in unexplained acute fulminant heart failure or refractory ventricular arrhythmias.",
+      "say": "The historic Dallas criteria defines myocarditis by inflammatory cellular infiltrates with adjacent myocyte necrosis on endomyocardial biopsy, though sampling error is common due to patchy involvement. Biopsy remains the diagnostic reference standard, particularly in unexplained acute fulminant heart failure or refractory ventricular arrhythmias.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dallas Diagnostic Category",
+          "Histological Features",
+          "Diagnostic Implication"
+        ],
+        "rows": [
+          [
+            "Active Myocarditis",
+            "Mononuclear infiltrate + myocyte necrosis",
+            "Confirms active acute myocarditis"
+          ],
+          [
+            "Borderline Myocarditis",
+            "Inflammatory infiltrate without definite necrosis",
+            "Requires repeat sampling or IHC/PCR"
+          ],
+          [
+            "Resolved Myocarditis",
+            "Absence of inflammation with reparative fibrosis",
+            "Healed post-inflammatory phase"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Updated **Lake Louise Criteria** for **cardiac MRI** diagnosis of myocarditis requires at least **1** T1-based criterion for myocardial injury and at least 1 T**2**-based criterion for myocardial edema. Meeting both criteria achieves high sensitivity and specificity, noninvasively confirming active myocardial inflammation. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Updated Lake Louise Criteria for cardiac MRI diagnosis of myocarditis requires at least 1 T1-based criterion for myocardial injury and at least 1 T2-based criterion for myocardial edema. Meeting both criteria achieves high sensitivity and specificity, noninvasively confirming active myocardial inflammation. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "T1-Based Criteria (Myocardial Injury)",
+          "points": [
+            "Elevated native myocardial T1 relaxation time",
+            "Increased extracellular volume (ECV) fraction",
+            "Subepicardial or mid-wall late gadolinium enhancement",
+            "Reflects active necrosis, hyperemia, or fibrosis"
+          ]
+        },
+        "right": {
+          "title": "T2-Based Criteria (Myocardial Edema)",
+          "points": [
+            "Elevated native myocardial T2 relaxation time",
+            "Regional or global hyperintensity on T2-weighted images",
+            "Elevated T2 signal intensity ratio vs skeletal muscle",
+            "Confirms active acute tissue inflammation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fulminant myocarditis** presents with rapid onset cardiogenic shock requiring inotropic support or temporary **mechanical circulatory support** such as VA-ECMO or Impella, yet carries excellent long-term recovery if patients survive the acute phase. In contrast, subacute myocarditis frequently progresses silently to dilated cardiomyopathy.",
+      "say": "Fulminant myocarditis presents with rapid onset cardiogenic shock requiring inotropic support or temporary mechanical circulatory support such as VA-ECMO or Impella, yet carries excellent long-term recovery if patients survive the acute phase. In contrast, subacute myocarditis frequently progresses silently to dilated cardiomyopathy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fulminant Myocarditis",
+          "points": [
+            "Sudden acute cardiovascular collapse within 2 weeks",
+            "Severe hemodynamic compromise requiring mechanical support",
+            "Severe systolic dysfunction with normal LV cavity size",
+            "Excellent long-term LV ejection fraction recovery (> 85%)"
+          ]
+        },
+        "right": {
+          "title": "Subacute / Chronic Myocarditis",
+          "points": [
+            "Insidious onset over months to years",
+            "Mild initial symptoms progressing gradually",
+            "Marked left ventricular chamber dilatation",
+            "Frequently progresses irreversibly to dilated cardiomyopathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Giant cell myocarditis** is a rapidly fatal autoimmune disorder characterized by widespread **multinucleated giant cells** and extensive cardiomyocyte necrosis, presenting with refractory ventricular tachycardia and heart block requiring urgent combined immunosuppression. Early histological recognition on endomyocardial biopsy is imperative to initiate high-dose steroids and calcineurin inhibitors.",
+      "say": "Giant cell myocarditis is a rapidly fatal autoimmune disorder characterized by widespread multinucleated giant cells and extensive cardiomyocyte necrosis, presenting with refractory ventricular tachycardia and heart block requiring urgent combined immunosuppression. Early histological recognition on endomyocardial biopsy is imperative to initiate high-dose steroids and calcineurin inhibitors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Young Patient with Rapid Shock, VT, or Complete Heart Block"
+          },
+          {
+            "id": "b",
+            "label": "Emergent Right Ventricular Endomyocardial Biopsy"
+          },
+          {
+            "id": "c",
+            "label": "Multinucleated Giant Cells + Myocyte Necrosis (No Granulomas)"
+          },
+          {
+            "id": "d",
+            "label": "Triple Immunosuppression: Steroids + Calcineurin Inhibitor + ATG"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Fulminant clinical course"
+          ],
+          [
+            "b",
+            "c",
+            "Definitive histopathology"
+          ],
+          [
+            "c",
+            "d",
+            "Halt rapid cardiomyocyte destruction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cardiac sarcoidosis** demonstrates patchy non-caseating granulomas with high affinity for the basal interventricular septum, diagnosed by **18F-FDG PET** and cardiac MRI, manifesting as high-grade AV block and ventricular arrhythmias. Focal hypermetabolic myocardial tracer uptake on **18**F-FDG PET differentiates active granulomatous inflammation from inactive scar tissue.",
+      "say": "Cardiac sarcoidosis demonstrates patchy non-caseating granulomas with high affinity for the basal interventricular septum, diagnosed by 18F-FDG PET and cardiac MRI, manifesting as high-grade AV block and ventricular arrhythmias. Focal hypermetabolic myocardial tracer uptake on 18F-FDG PET differentiates active granulomatous inflammation from inactive scar tissue.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging Modality",
+          "Characteristic Hallmark",
+          "Clinical Value"
+        ],
+        "rows": [
+          [
+            "18F-FDG PET",
+            "Focal or focal-on-diffuse hypermetabolic myocardial uptake",
+            "Identifies active inflammatory granulomatous disease"
+          ],
+          [
+            "Cardiac MRI",
+            "Mid-wall or subepicardial LGE in basal septum",
+            "Maps chronic fibrogranulomatous myocardial scar"
+          ],
+          [
+            "Endomyocardial Biopsy",
+            "Non-caseating epithelioid granulomas",
+            "Definitive histology (modest yield < 25% due to patchiness)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Immune checkpoint inhibitor** myocarditis carries mortality up to 50%, requiring immediate discontinuation of therapy and high-dose intravenous **methylprednisolone** at **1000** mg daily for **3** days followed by abatacept if refractory. Life-threatening conduction block can develop precipitously within the first **1** to 3 months of immunotherapy.",
+      "say": "Immune checkpoint inhibitor myocarditis carries mortality up to 50%, requiring immediate discontinuation of therapy and high-dose intravenous methylprednisolone at 1000 mg daily for 3 days followed by abatacept if refractory. Life-threatening conduction block can develop precipitously within the first 1 to 3 months of immunotherapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspected ICI Myocarditis: Elevated Troponin or New AV Block"
+          },
+          {
+            "id": "b",
+            "label": "Immediate Permanent Discontinuation of Immune Checkpoint Inhibitor"
+          },
+          {
+            "id": "c",
+            "label": "Pulse IV Methylprednisolone 1000 mg Daily for 3 Days"
+          },
+          {
+            "id": "d",
+            "label": "If Refractory at 48h: Add Abatacept (CTLA-4 Agonist) or Alemtuzumab"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Stop offending agent"
+          ],
+          [
+            "b",
+            "c",
+            "First-line immunosuppression"
+          ],
+          [
+            "c",
+            "d",
+            "Second-line rescue therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Eosinophilic myocarditis** includes hypersensitivity myocarditis and hypereosinophilic syndrome or **Loeffler endocarditis**, characterized by endomyocardial fibrosis and apical thrombus formation with restrictive cardiomyopathy. Eosinophil degranulation releases major basic protein and eosinophil cationic protein, directly damaging endocardial structures and adjacent microvasculature throughout both ventricles.",
+      "say": "Eosinophilic myocarditis includes hypersensitivity myocarditis and hypereosinophilic syndrome or Loeffler endocarditis, characterized by endomyocardial fibrosis and apical thrombus formation with restrictive cardiomyopathy. Eosinophil degranulation releases major basic protein and eosinophil cationic protein, directly damaging endocardial structures and adjacent microvasculature throughout both ventricles.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Loeffler Stage",
+          "Pathological Feature",
+          "Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Stage 1: Acute Necrotic",
+            "Intense eosinophilic infiltration and myocyte lysis",
+            "Chest pain, fever, acute heart failure"
+          ],
+          [
+            "Stage 2: Thrombotic",
+            "Endocardial thrombus layered along ventricular apex",
+            "High systemic arterial embolic risk"
+          ],
+          [
+            "Stage 3: Fibrotic",
+            "Dense endomyocardial fibrosis entrapping chordae",
+            "Severe restrictive cardiomyopathy and valve regurgitation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Takotsubo cardiomyopathy** is characterized by transient left ventricular **apical ballooning** triggered by intense emotional or physical stress with catecholamine surge, mimicking STEMI without obstructive coronary disease. Spontaneous recovery of left ventricular ejection fraction typically occurs over several weeks with supportive care. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "say": "Takotsubo cardiomyopathy is characterized by transient left ventricular apical ballooning triggered by intense emotional or physical stress with catecholamine surge, mimicking STEMI without obstructive coronary disease. Spontaneous recovery of left ventricular ejection fraction typically occurs over several weeks with supportive care. Comprehensive clinical evaluation requires careful correlation with serial electrocardiographic tracings and hemodynamic parameters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe Emotional or Physical Trigger with Catecholamine Surge"
+          },
+          {
+            "id": "b",
+            "label": "Myocardial Microvascular Spasm & Direct Catecholamine Toxicity"
+          },
+          {
+            "id": "c",
+            "label": "Transient LV Apical Ballooning & Basal Hyperkinesis"
+          },
+          {
+            "id": "d",
+            "label": "Complete Spontaneous Ejection Fraction Recovery in Weeks"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Sympathetic overdrive"
+          ],
+          [
+            "b",
+            "c",
+            "Ventriculography hallmark"
+          ],
+          [
+            "c",
+            "d",
+            "Reversible stress cardiomyopathy"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    "q_3f0ae0959b5a",
+    "q_cf8b3deee4f2",
+    "q_15444b7f285c"
+  ],
+  "gen": "AI"
+}
