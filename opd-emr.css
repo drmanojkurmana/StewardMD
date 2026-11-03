@@ -686,3 +686,7 @@ body.dark #smdOpdEmr .oe-notif .material-symbols-outlined { color: #f5c26b; }
 #smdOpdEmr .oe-canvas { overflow-x: hidden; overscroll-behavior-x: none; touch-action: pan-y; }
 #smdOpdEmr .oe-canvas > * { min-width: 0; max-width: 100%; }
 #smdOpdEmr .oe-tabs, #smdOpdEmr .oe-proto-branches, #smdOpdEmr .oe-onco-scroll { touch-action: pan-x pan-y; }
+/* iPad: .oe-canvas is the scroller, so it spans the screen; the form column is centred by gutters. */
+@media (min-width: 700px) {
+  #smdOpdEmr .oe-canvas { max-width: none; margin: 0; width: auto; padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+}

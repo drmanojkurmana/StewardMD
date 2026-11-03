@@ -1,141 +1,321 @@
 {
- "v": 1,
- "module": "son-staging-response",
- "subject": "ss-medical-oncology",
- "title": "Staging, performance status and response assessment in oncology",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Cancer **staging** describes how far a tumour has spread and guides treatment and prognosis. The TNM system, now in its eighth edition, scores the **primary tumour** (T), regional **lymph nodes** (N) and **distant metastasis** (M). Nodal category N1 means one to three regional nodes involved, while N2 means four or more in colorectal cancer. M1 denotes distant metastasis, and M0 means none detected.",
-   "say": "Cancer staging describes how far a tumour has spread and guides treatment and prognosis. The TNM system, now in its eighth edition, scores the primary tumour, regional lymph nodes and distant metastasis. For colorectal cancer, N1 means one to three regional nodes involved, while N2 means four or more. M1 denotes distant metastasis, and M0 means none detected.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Category",
-     "Meaning",
-     "Example"
-    ],
-    "rows": [
-     [
-      "T",
-      "Primary tumour extent",
-      "T4 breaches serosa or organs"
-     ],
-     [
-      "N",
-      "Regional nodes involved",
-      "N2 means four or more nodes"
-     ],
-     [
-      "M",
-      "Distant metastasis",
-      "M1 means spread present"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Performance status** describes how well a patient manages daily life and predicts how well they will tolerate treatment. The **ECOG** scale runs from zero, fully active, to four, completely bedbound. The **Karnofsky** score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
-   "say": "Performance status describes how well a patient manages daily life and predicts how well they will tolerate treatment. The ECOG scale runs from zero, fully active, to four, completely bedbound. The Karnofsky score is recorded in steps of ten, with higher scores meaning better function. Both tools are standard in Indian oncology trial and clinic practice.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-staging-response-fig1.webp",
-    "alt": "Visual comparison of ECOG and Karnofsky performance status scales, showing patient functional levels.",
-    "caption": "ECOG and Karnofsky performance status scales",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**RECIST 1.1** defines response in solid tumours using measurable lesions. A target lesion is measurable if it is at least 10 mm on CT or MRI, and lymph nodes are measurable if the short axis is at least 15 mm. **Complete response** means all target lesions vanish, **partial response** means a 30 percent fall in the sum of diameters, and **progressive disease** means a 20 percent rise plus an absolute increase of 5 mm.",
-   "say": "RECIST 1.1 defines response in solid tumours using measurable lesions. A target lesion is measurable if it is at least 10 millimetres on CT or MRI, and lymph nodes need a short axis of at least 15 millimetres. Complete response means all target lesions vanish. Partial response means a 30 percent fall in the sum of diameters. Progressive disease means a 20 percent rise plus an absolute increase of 5 millimetres.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Response",
-     "Criterion",
-     "Threshold"
-    ],
-    "rows": [
-     [
-      "Complete",
-      "Target lesions disappear",
-      "All gone"
-     ],
-     [
-      "Partial",
-      "Sum of diameters falls",
-      "At least 30 percent"
-     ],
-     [
-      "Progressive",
-      "Sum of diameters rises",
-      "At least 20 percent plus 5 mm"
-     ],
-     [
-      "Stable",
-      "Neither criterion met",
-      "Between the two"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Pseudoprogression** is an apparent enlargement of lesions or new lesions on immunotherapy that later regresses, most often in the first months. **iRECIST** adds rules so that a patient with unconfirmed progression continues treatment and is reimaged after about four to eight weeks. Confirmation on repeat scans is therefore required before stopping immunotherapy for progression.",
-   "say": "Pseudoprogression is an apparent enlargement of lesions or new lesions on immunotherapy that later regresses, most often in the first months. iRECIST adds rules so that a patient with unconfirmed progression continues treatment and is reimaged after about four to eight weeks. Confirmation on repeat scans is therefore needed before stopping immunotherapy for progression.",
-   "vis": null
-  },
-  {
-   "tx": "Metabolic response uses **PERCIST** with FDG PET, where a fall in standardised uptake value marks response. **Lugano classification** applies PET to lymphoma and uses the **Deauville five point score**, where scores 1 to 3 indicate a negative scan and 4 to 5 a positive one. In hepatocellular carcinoma, **mRECIST** measures enhancing viable tumour rather than total size, reflecting the response of the tumour to locoregional therapy.",
-   "say": "Metabolic response uses PERCIST with FDG PET, where a fall in standardised uptake value marks response. The Lugano classification applies PET to lymphoma and uses the Deauville five point score, where scores 1 to 3 indicate a negative scan and 4 to 5 a positive one. In hepatocellular carcinoma, mRECIST measures enhancing viable tumour rather than total size.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Deauville scoring",
-     "points": [
-      "Score 1 to 3 is negative",
-      "Score 4 to 5 is positive",
-      "Used in lymphoma"
-     ]
+  "v": 1,
+  "module": "son-staging-response",
+  "subject": "ss-medical-oncology",
+  "title": "Staging, performance status and response assessment",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Cancer staging defines the anatomical extent of malignancy, providing a standardised framework for prognosis and treatment selection. The **AJCC/UICC 8th Edition TNM staging** system incorporates anatomical tumour extent, regional nodal involvement, distant metastases, and prognostic molecular biomarkers. Incorporating biological drivers into anatomical staging refines prognostic groupings across breast, prostate, and head and neck cancers.",
+      "say": "Cancer staging defines the anatomical extent of malignancy, providing a standardised framework for prognosis and treatment selection. The AJCC/UICC 8th Edition TNM staging system incorporates anatomical tumour extent, regional nodal involvement, distant metastases, and prognostic molecular biomarkers. Incorporating biological drivers into anatomical staging refines prognostic groupings across breast, prostate, and head and neck cancers.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "TNM Parameter",
+          "Descriptor",
+          "Biological Integration"
+        ],
+        "rows": [
+          [
+            "T (Tumour)",
+            "Primary size and invasive depth",
+            "Incorporates depth of invasion (DOI)"
+          ],
+          [
+            "N (Node)",
+            "Number and nodal stations involved",
+            "Extranodal extension (ENE) included"
+          ],
+          [
+            "M (Metastasis)",
+            "Presence of distant metastatic sites",
+            "Site-specific oligometastatic subclassification"
+          ],
+          [
+            "Prognostic Stage",
+            "Combines TNM with biomarkers",
+            "ER, PR, HER2, grade in breast staging"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "mRECIST in liver cancer",
-     "points": [
-      "Measures enhancing viable tumour",
-      "Used after locoregional therapy",
-      "Applies to hepatocellular carcinoma"
-     ]
+    {
+      "tx": "Patient physiological fitness dictates the feasibility and safety of systemic antineoplastic therapy. The **ECOG performance status** scales functional reserve from 0 for fully active to 4 for completely bedbound, guiding systemic chemotherapy eligibility. Patients with performance status 0 or 1 generally tolerate multi-agent regimens, whereas status 3 or 4 indicates poor tolerance and heightened chemotherapy-related mortality.",
+      "say": "Patient physiological fitness dictates the feasibility and safety of systemic antineoplastic therapy. The ECOG performance status scales functional reserve from 0 for fully active to 4 for completely bedbound, guiding systemic chemotherapy eligibility. Patients with performance status 0 or 1 generally tolerate multi-agent regimens, whereas status 3 or 4 indicates poor tolerance and heightened chemotherapy-related mortality.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ECOG Grade",
+          "Karnofsky Score (%)",
+          "Clinical Functional State"
+        ],
+        "rows": [
+          [
+            "ECOG 0",
+            "90-100",
+            "Fully active, able to carry on all predisease activities"
+          ],
+          [
+            "ECOG 1",
+            "70-80",
+            "Restricted in strenuous activity, ambulatory and light work"
+          ],
+          [
+            "ECOG 2",
+            "50-60",
+            "Ambulatory, capable of self-care, up more than 50% of waking hours"
+          ],
+          [
+            "ECOG 3",
+            "30-40",
+            "Confined to bed or chair more than 50% of waking hours"
+          ],
+          [
+            "ECOG 4",
+            "10-20",
+            "Completely bedbound, totally confined, unable to self-care"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Objective assessment of solid tumour response under cytotoxic therapy relies on standardised radiological criteria. **RECIST 1.1** defines partial response as at least a 30% decrease and progressive disease as at least a 20% increase in the sum of longest diameters of target lesions. Progressive disease additionally requires an absolute increase of at least 5 mm in the sum, or the appearance of new malignant lesions.",
+      "say": "Objective assessment of solid tumour response under cytotoxic therapy relies on standardised radiological criteria. RECIST 1.1 defines partial response as at least a 30% decrease and progressive disease as at least a 20% increase in the sum of longest diameters of target lesions. Progressive disease additionally requires an absolute increase of at least 5 mm in the sum, or the appearance of new malignant lesions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complete and Partial Response",
+          "items": [
+            "Complete response: disappearance of all target and non-target lesions",
+            "Pathological lymph nodes must decrease to short axis < 10 mm",
+            "Partial response: at least 30% decrease in target sum of diameters",
+            "Requires baseline target lesion designation up to five total"
+          ]
+        },
+        "right": {
+          "title": "Stable and Progressive Disease",
+          "items": [
+            "Progressive disease: at least 20% increase in target sum of diameters",
+            "Absolute minimum increase of 5 mm above smallest nadir sum",
+            "Appearance of one or more unequivocal new lesions signifies progression",
+            "Stable disease: insufficient shrinkage for PR and insufficient increase for PD"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Immunotherapy introduces novel radiological patterns of response, including transient tumour flare followed by shrinkage. The **iRECIST** framework addresses immune-checkpoint **pseudoprogression** by requiring confirmation of disease progression 4 to 8 weeks after initial suspected tumour increase. The initial progression is termed unconfirmed progressive disease (iUPD), which transitions to confirmed progressive disease (iCPD) only if repeat scanning demonstrates further tumour growth.",
+      "say": "Immunotherapy introduces novel radiological patterns of response, including transient tumour flare followed by shrinkage. The iRECIST framework addresses immune-checkpoint pseudoprogression by requiring confirmation of disease progression 4 to 8 weeks after initial suspected tumour increase. The initial progression is termed unconfirmed progressive disease, which transitions to confirmed progressive disease only if repeat scanning demonstrates further tumour growth.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Baseline Target Lesion Measure"
+          },
+          {
+            "id": "b",
+            "label": "Initial 20% Increase or New Lesion"
+          },
+          {
+            "id": "c",
+            "label": "Assign iUPD (Unconfirmed Progression)"
+          },
+          {
+            "id": "d",
+            "label": "Continue IO if Clinically Stable"
+          },
+          {
+            "id": "e",
+            "label": "Repeat CT Scan 4 to 8 Weeks Later"
+          },
+          {
+            "id": "f",
+            "label": "Confirm iCPD vs Secondary Response"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Immunotherapy start"
+          ],
+          [
+            "b",
+            "c",
+            "T-cell infiltration or true growth"
+          ],
+          [
+            "c",
+            "d",
+            "Patient asymptomatic"
+          ],
+          [
+            "d",
+            "e",
+            "Mandated interval"
+          ],
+          [
+            "e",
+            "f",
+            "Definitive adjudication"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fluorodeoxyglucose uptake reflects glycolytic activity, providing earlier detection of therapeutic response than anatomical dimensional change. The **PERCIST** criteria evaluate **metabolic tumour response** using fluorine-18 fluorodeoxyglucose PET imaging based on SULpeak measurements in target tumour regions. Partial metabolic response is defined as at least a 30% decline in SULpeak, while progressive metabolic disease requires a 30% increase or new metabolic focus.",
+      "say": "Fluorodeoxyglucose uptake reflects glycolytic activity, providing earlier detection of therapeutic response than anatomical dimensional change. The PERCIST criteria evaluate metabolic tumour response using fluorine-18 fluorodeoxyglucose PET imaging based on SULpeak measurements in target tumour regions. Partial metabolic response is defined as at least a 30% decline in SULpeak, while progressive metabolic disease requires a 30% increase or new metabolic focus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "PERCIST Category",
+          "SULpeak Quantitative Threshold",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Complete Metabolic Response (CMR)",
+            "Complete resolution of FDG uptake to liver background",
+            "Total metabolic remission"
+          ],
+          [
+            "Partial Metabolic Response (PMR)",
+            ">= 30% and >= 0.8 SUL unit decrease in target SULpeak",
+            "Favourable antitumour response"
+          ],
+          [
+            "Stable Metabolic Disease (SMD)",
+            "Neither PMR nor PMD criteria met",
+            "Tumour metabolic stability"
+          ],
+          [
+            "Progressive Metabolic Disease (PMD)",
+            ">= 30% and >= 0.8 SUL unit increase, or new lesion",
+            "Treatment failure or resistance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lymphoma staging and post-treatment assessment require tailored criteria integrating metabolic imaging. The **Lugano classification** evaluates lymphoma response using PET-CT and the **Deauville 5-point scale**, where scores 1 to 3 indicate complete metabolic remission. A Deauville score of 1 represents no uptake above background, score 2 represents uptake equal to mediastinum, and score 3 represents uptake between mediastinum and liver.",
+      "say": "Lymphoma staging and post-treatment assessment require tailored criteria integrating metabolic imaging. The Lugano classification evaluates lymphoma response using PET-CT and the Deauville 5-point scale, where scores 1 to 3 indicate complete metabolic remission. A Deauville score of 1 represents no uptake above background, score 2 represents uptake equal to mediastinum, and score 3 represents uptake between mediastinum and liver.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Deauville Score",
+          "FDG Uptake Intensity Comparison",
+          "Lugano Metabolic Interpretation"
+        ],
+        "rows": [
+          [
+            "Score 1",
+            "No uptake above background",
+            "Complete metabolic response (CMR)"
+          ],
+          [
+            "Score 2",
+            "Uptake <= mediastinal blood pool",
+            "Complete metabolic response (CMR)"
+          ],
+          [
+            "Score 3",
+            "Uptake > mediastinum but <= liver",
+            "Complete metabolic response (CMR)"
+          ],
+          [
+            "Score 4",
+            "Uptake moderately higher than liver",
+            "Partial response or residual disease"
+          ],
+          [
+            "Score 5",
+            "Uptake markedly higher than liver or new lesion",
+            "Treatment failure or progressive disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intracranial neoplasms exhibit unique radiological features that confound standard dimensional response criteria. The **RANO criteria** assess response in **high-grade gliomas** by combining MRI contrast enhancement, T2/FLAIR non-enhancing infiltration, and clinical corticosteroid requirement. Pseudoprogression occurs within 3 months of completion of temozolomide chemoradiotherapy, characterized by increased enhancement that subsequently stabilizes without altering antitumour therapy.",
+      "say": "Intracranial neoplasms exhibit unique radiological features that confound standard dimensional response criteria. The RANO criteria assess response in high-grade gliomas by combining MRI contrast enhancement, T2/FLAIR non-enhancing infiltration, and clinical corticosteroid requirement. Pseudoprogression occurs within 3 months of completion of temozolomide chemoradiotherapy, characterized by increased enhancement that subsequently stabilizes without altering antitumour therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "RANO Complete & Partial Response",
+          "items": [
+            "Complete response: complete disappearance of all enhancing tumour",
+            "Stable or improved non-enhancing T2/FLAIR hyperintensity",
+            "Complete cessation of corticosteroids (physiological replacement allowed)",
+            "Partial response: >= 50% decrease in sum of enhancing products"
+          ]
+        },
+        "right": {
+          "title": "RANO Progression Criteria",
+          "items": [
+            ">= 25% increase in sum of perpendicular enhancing products",
+            "Significant increase in non-enhancing T2/FLAIR infiltration",
+            "Appearance of any unequivocal new intracranial lesion",
+            "Clinical neurological deterioration requiring increased corticosteroids"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hypervascular tumours treated with anti-angiogenic agents often exhibit necrosis without immediate dimensional shrinkage. The **mRECIST** criteria for hepatocellular carcinoma measure viable tumour demonstrating **arterial enhancement** rather than total lesion diameter on dynamic contrast CT or MRI. Viable tumour corresponds to tissue that absorbs contrast during the arterial phase and washes out during the portal venous phase.",
+      "say": "Hypervascular tumours treated with anti-angiogenic agents often exhibit necrosis without immediate dimensional shrinkage. The mRECIST criteria for hepatocellular carcinoma measure viable tumour demonstrating arterial enhancement rather than total lesion diameter on dynamic contrast CT or MRI. Viable tumour corresponds to tissue that absorbs contrast during the arterial phase and washes out during the portal venous phase.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Arterial Phase Contrast CT/MRI"
+          },
+          {
+            "id": "b",
+            "label": "Identify Arterially Enhancing Viable Core"
+          },
+          {
+            "id": "c",
+            "label": "Exclude Central Non-enhancing Necrosis"
+          },
+          {
+            "id": "d",
+            "label": "Measure Longest Diameter of Viable Tumour"
+          },
+          {
+            "id": "e",
+            "label": "Classify Response by mRECIST Criteria"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Dual-phase cross-sectional imaging"
+          ],
+          [
+            "b",
+            "c",
+            "Ablation or TKI-induced devascularisation"
+          ],
+          [
+            "c",
+            "d",
+            "Unidimensional target measurement"
+          ],
+          [
+            "d",
+            "e",
+            "CR, PR, SD, or PD assignment"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Response Assessment in Neuro-Oncology** (RANO) grades brain tumour response using contrast enhancement, **T2 or FLAIR** signal and clinical status. A **complete response** needs enhancement to vanish with steroids withdrawn and neurological function stable or better. Clinicians should remember **pseudoprogression** after chemoradiotherapy, where early enlargement or new enhancement can mislead, so repeat imaging is needed before progression is declared.",
-   "say": "Response Assessment in Neuro-Oncology, known as RANO, grades brain tumour response using contrast enhancement, T2 or FLAIR signal and clinical status. A complete response needs enhancement to vanish with steroids withdrawn and neurological function stable or better. Clinicians should remember pseudoprogression after chemoradiotherapy, where early enlargement or new enhancement can mislead, so repeat imaging is needed before progression is declared.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_9e05384bd2f6",
-  "q_fbe999d2fd8d",
-  "q_73a71bb61cf1"
- ],
- "src": [],
- "refs": [
-  "Amin MB et al. AJCC Cancer Staging Manual, Eighth Edition (American Joint Committee on Cancer)",
-  "Eisenhauer EA et al. New response evaluation criteria in solid tumours: revised RECIST guideline version 1.1 (European Journal of Cancer)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 41
- }
+  ],
+  "quiz": [
+    "q_9e05384bd2f6",
+    "q_fbe999d2fd8d",
+    "q_73a71bb61cf1"
+  ]
 }

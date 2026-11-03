@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "module": "son-natural-products",
+ "subject": "ss-medical-oncology",
+ "title": "Anthracyclines, microtubule and topoisomerase agents",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Anthracyclines and natural product cytotoxics form the foundation of systemic curative regimens in leukaemias, lymphomas, breast cancer, and sarcomas. **Doxorubicin** intercalates between DNA base pairs and inhibits topoisomerase II, producing cytotoxic double-strand DNA cleavage. Cumulative lifetime dose is strictly capped at 450 to 550 mg/m2 to mitigate irreversible dilated cardiomyopathy caused by iron-mediated free radical generation.",
+   "say": "Anthracyclines and natural product cytotoxics form the foundation of systemic curative regimens in leukaemias, lymphomas, breast cancer, and sarcomas. Doxorubicin intercalates between DNA base pairs and inhibits topoisomerase II, producing cytotoxic double-strand DNA cleavage. Cumulative lifetime dose is strictly capped at 450 to 550 mg/m2 to mitigate irreversible dilated cardiomyopathy caused by iron-mediated free radical generation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Mechanism",
+     "Key Toxicity",
+     "Cumulative Dose Ceiling"
+    ],
+    "rows": [
+     [
+      "Doxorubicin",
+      "Topoisomerase II inhibitor / intercalator",
+      "Dilated cardiomyopathy",
+      "450 to 550 mg/m2"
+     ],
+     [
+      "Bleomycin",
+      "Free-radical DNA strand breaks",
+      "Pulmonary fibrosis",
+      "400 units lifetime"
+     ],
+     [
+      "Vincristine",
+      "Tubulin depolymerisation inhibitor",
+      "Peripheral neuropathy, paralytic ileus",
+      "2 mg single dose cap"
+     ],
+     [
+      "Paclitaxel",
+      "Microtubule hyper-stabilisation",
+      "Peripheral neuropathy, hypersensitivity",
+      "No absolute lifetime cap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Formulation engineering alters cytotoxic pharmacokinetics and safety profiles. **Pegylated liposomal doxorubicin** encapsulates doxorubicin within stealth methoxypolyethylene glycol-coated liposomes. This prevents penetration through tight continuous myocardial junctions, drastically reducing cardiotoxicity. However, prolonged cutaneous circulation increases skin accumulation, resulting in dose-limiting palmar-plantar erythrodysesthesia hand-foot syndrome.",
+   "say": "Formulation engineering alters cytotoxic pharmacokinetics and safety profiles. Pegylated liposomal doxorubicin encapsulates doxorubicin within stealth methoxypolyethylene glycol-coated liposomes. This prevents penetration through tight continuous myocardial junctions, drastically reducing cardiotoxicity. However, prolonged cutaneous circulation increases skin accumulation, resulting in dose-limiting palmar-plantar erythrodysesthesia hand-foot syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conventional Doxorubicin",
+     "points": [
+      "Rapid systemic distribution",
+      "Penetrates myocardium freely",
+      "High peak-concentration cardiotoxicity",
+      "Severe vesicant on extravasation"
+     ]
+    },
+    "right": {
+     "title": "Pegylated Liposomal Doxorubicin",
+     "points": [
+      "Stealth liposome encapsulation",
+      "Spares cardiac endothelium",
+      "Markedly lower cardiotoxicity",
+      "Frequent palmar-plantar erythrodysesthesia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bleomycin** is an antitumor glycopeptide antibiotic that binds ferrous iron and oxygen to generate reactive oxygen radicals, cleaving DNA strands. Tissues lacking the hydrolytic enzyme bleomycin hydrolase, specifically the lungs and skin, suffer disproportionate toxic injury. A strict lifetime cumulative dose limit of 400 units is enforced to avert lethal pulmonary fibrosis. Supplemental oxygen must be stringently titrated.",
+   "say": "Bleomycin is an antitumor glycopeptide antibiotic that binds ferrous iron and oxygen to generate reactive oxygen radicals, cleaving DNA strands. Tissues lacking the hydrolytic enzyme bleomycin hydrolase, specifically the lungs and skin, suffer disproportionate toxic injury. A strict lifetime cumulative dose limit of 400 units is enforced to avert lethal pulmonary fibrosis. Supplemental oxygen must be stringently titrated.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Bleomycin + Fe(II) + O2"
+     },
+     {
+      "id": "b",
+      "label": "Oxygen free radicals"
+     },
+     {
+      "id": "c",
+      "label": "DNA strand cleavage"
+     },
+     {
+      "id": "d",
+      "label": "Low bleomycin hydrolase in lungs"
+     },
+     {
+      "id": "e",
+      "label": "Pulmonary fibrosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "redox cycle"
+     ],
+     [
+      "b",
+      "c",
+      "cytotoxicity"
+     ],
+     [
+      "b",
+      "d",
+      "tissue vulnerability"
+     ],
+     [
+      "d",
+      "e",
+      ">400 units or high FiO2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Taxanes act as spindle poisons that disrupt mitosis. **Paclitaxel** binds specifically to the beta-tubulin subunit, hyper-stabilises polymerized microtubules, and prevents normal mitotic spindle disassembly. This blocks dynamic chromosomal segregation and arrests malignant cells in the M-phase of the cell cycle. Standard solvent-based paclitaxel is formulated in polyoxyethylated castor oil Cremophor EL, necessitating pre-treatment prophylaxis.",
+   "say": "Taxanes act as spindle poisons that disrupt mitosis. Paclitaxel binds specifically to the beta-tubulin subunit, hyper-stabilises polymerized microtubules, and prevents normal mitotic spindle disassembly. This blocks dynamic chromosomal segregation and arrests malignant cells in the M-phase of the cell cycle. Standard solvent-based paclitaxel is formulated in polyoxyethylated castor oil Cremophor EL, necessitating pre-treatment prophylaxis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Taxanes (Paclitaxel, Docetaxel)",
+     "points": [
+      "Target beta-tubulin",
+      "Promote and hyper-stabilise assembly",
+      "Inhibit microtubule disassembly",
+      "M-phase cell cycle arrest"
+     ]
+    },
+    "right": {
+     "title": "Vinca Alkaloids (Vincristine, Vinblastine)",
+     "points": [
+      "Target tubulin heterodimers",
+      "Inhibit microtubule assembly",
+      "Induce microtubule depolymerisation",
+      "M-phase mitotic arrest"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nab-paclitaxel** utilizes 130 nm human serum albumin-bound nanoparticles to carry paclitaxel without synthetic emulsifiers. By eliminating Cremophor EL, it circumvents solvent-mediated complement activation and allergic hypersensitivity, avoiding mandatory corticosteroid and antihistamine premedication. Nanoparticle delivery exploits endothelial albumin receptor gp60 and SPARC tumour accumulation, permitting shorter infusion times.",
+   "say": "Nab-paclitaxel utilizes 130 nm human serum albumin-bound nanoparticles to carry paclitaxel without synthetic emulsifiers. By eliminating Cremophor EL, it circumvents solvent-mediated complement activation and allergic hypersensitivity, avoiding mandatory corticosteroid and antihistamine premedication. Nanoparticle delivery exploits endothelial albumin receptor gp60 and SPARC tumour accumulation, permitting shorter infusion times.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Solvent-based Paclitaxel",
+     "Nab-Paclitaxel"
+    ],
+    "rows": [
+     [
+      "Carrier vehicle",
+      "Cremophor EL / ethanol",
+      "130 nm human albumin nanoparticles"
+     ],
+     [
+      "Premedication",
+      "Mandatory dexamethasone + H1/H2 blockers",
+      "Not routinely required"
+     ],
+     [
+      "Infusion duration",
+      "3 hours with non-PVC tubing and filter",
+      "30 minutes without specialized tubing"
+     ],
+     [
+      "Hypersensitivity risk",
+      "Moderate to severe without premedication",
+      "Negligible formulation-related reactions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vinca alkaloids represent natural alkaloids derived from the periwinkle plant Catharanthus roseus. **Vincristine** binds tubulin dimers to inhibit microtubule assembly, triggering metaphase arrest. Peripheral sensorimotor neurotoxicity is dose-limiting, characterized by symmetrical paresthesias, loss of deep tendon reflexes, foot drop, and paralytic ileus. Single doses are strictly capped at 2 mg to avoid devastating neurological impairment.",
+   "say": "Vinca alkaloids represent natural alkaloids derived from the periwinkle plant Catharanthus roseus. Vincristine binds tubulin dimers to inhibit microtubule assembly, triggering metaphase arrest. Peripheral sensorimotor neurotoxicity is dose-limiting, characterized by symmetrical paresthesias, loss of deep tendon reflexes, foot drop, and paralytic ileus. Single doses are strictly capped at 2 mg to avoid devastating neurological impairment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vinca Alkaloid",
+     "Primary Dose-Limiting Toxicity",
+     "Dose Capping",
+     "Key Clinical Indication"
+    ],
+    "rows": [
+     [
+      "Vincristine",
+      "Neurotoxicity (paralytic ileus, neuropathy)",
+      "Capped at 2 mg per dose",
+      "ALL, lymphoma, pediatric solid tumours"
+     ],
+     [
+      "Vinblastine",
+      "Myelosuppression (neutropenia)",
+      "No absolute dose cap",
+      "Hodgkin lymphoma (ABVD), germ cell tumours"
+     ],
+     [
+      "Vinorelbine",
+      "Myelosuppression and mild neuropathy",
+      "No absolute dose cap",
+      "Advanced NSCLC, metastatic breast cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Epipodophyllotoxins are semi-synthetic derivatives of podophyllotoxin. **Etoposide** forms a cleavable ternary complex with topoisomerase II and DNA, locking the enzyme in an intermediate state and inducing irreparable double-strand breaks during the late S and G2 phases. It forms the backbone of curative chemotherapy for germ cell tumours, small cell lung cancer, and aggressive non-Hodgkin lymphomas.",
+   "say": "Epipodophyllotoxins are semi-synthetic derivatives of podophyllotoxin. Etoposide forms a cleavable ternary complex with topoisomerase II and DNA, locking the enzyme in an intermediate state and inducing irreparable double-strand breaks during the late S and G2 phases. It forms the backbone of curative chemotherapy for germ cell tumours, small cell lung cancer, and aggressive non-Hodgkin lymphomas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Topoisomerase II binds DNA"
+     },
+     {
+      "id": "b",
+      "label": "Etoposide locks cleavable complex"
+     },
+     {
+      "id": "c",
+      "label": "Unrepaired double-strand breaks"
+     },
+     {
+      "id": "d",
+      "label": "Late S and G2 checkpoint arrest"
+     },
+     {
+      "id": "e",
+      "label": "Apoptosis induction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "ternary complex formation"
+     ],
+     [
+      "b",
+      "c",
+      "prevents DNA re-ligation"
+     ],
+     [
+      "c",
+      "d",
+      "ATM/ATR activation"
+     ],
+     [
+      "d",
+      "e",
+      "mitotic catastrophe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Camptothecin analogs target nuclear topoisomerase I to generate single-strand breaks. **Irinotecan** is bioactivated by hepatic carboxylesterase to SN-38, an inhibitor of topoisomerase I with one thousand-fold higher potency. Irinotecan induces acute cholinergic diarrhoea manageable with intravenous atropine, and delayed secretory diarrhoea requiring high-dose oral loperamide. Inactivation occurs via polymorphic hepatic glucuronosyltransferase UGT1A1.",
+   "say": "Camptothecin analogs target nuclear topoisomerase I to generate single-strand breaks. Irinotecan is bioactivated by hepatic carboxylesterase to SN-38, an inhibitor of topoisomerase I with one thousand-fold higher potency. Irinotecan induces acute cholinergic diarrhoea manageable with intravenous atropine, and delayed secretory diarrhoea requiring high-dose oral loperamide. Inactivation occurs via polymorphic hepatic glucuronosyltransferase UGT1A1.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Irinotecan prodrug"
+     },
+     {
+      "id": "b",
+      "label": "SN-38 active metabolite"
+     },
+     {
+      "id": "c",
+      "label": "UGT1A1 glucuronidation"
+     },
+     {
+      "id": "d",
+      "label": "SN-38G biliary excretion"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "hepatic carboxylesterase"
+     ],
+     [
+      "b",
+      "c",
+      "polymorphic UGT1A1*28"
+     ],
+     [
+      "c",
+      "d",
+      "inactive metabolite"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_a31b715e36a4",
+  "q_8644e645009c",
+  "q_5518b04f2af8"
+ ],
+ "gen": "hand"
+}

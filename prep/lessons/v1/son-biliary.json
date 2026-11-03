@@ -1,0 +1,305 @@
+{
+ "v": 1,
+ "module": "son-biliary",
+ "subject": "ss-medical-oncology",
+ "title": "Biliary tract cancers",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Biliary tract malignancies arise from the epithelial lining of the intrahepatic and extrahepatic biliary drainage system. **Cholangiocarcinomas** are anatomically categorized into intrahepatic, perihilar Klatskin tumours, and distal extrahepatic subtypes, with distinct molecular profiles and surgical approaches. Perihilar tumours arise between second-order bile ducts and the cystic duct insertion, distal tumours originate below the cystic duct, and intrahepatic tumours develop within segmental parenchymal bile ductules.",
+   "say": "Biliary tract malignancies arise from the epithelial lining of the intrahepatic and extrahepatic biliary drainage system. Cholangiocarcinomas are anatomically categorized into intrahepatic, perihilar Klatskin tumours, and distal extrahepatic subtypes, with distinct molecular profiles and surgical approaches. Perihilar tumours arise between second-order bile ducts and the cystic duct insertion, distal tumours originate below the cystic duct, and intrahepatic tumours develop within segmental parenchymal bile ductules.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype",
+     "Anatomical Boundary",
+     "Distinct Molecular Targets",
+     "Primary Surgical Procedure"
+    ],
+    "rows": [
+     [
+      "Intrahepatic (iCCA)",
+      "Proximal to 2nd order bile ducts",
+      "FGFR2 fusions, IDH1/2, BAP1",
+      "Hepatectomy with lymphadenectomy"
+     ],
+     [
+      "Perihilar (pCCA, Klatskin)",
+      "Between 2nd order ducts and cystic duct",
+      "PRKACA/B fusions, KRAS, TP53",
+      "Hepatectomy + bile duct excision + caudate lobe"
+     ],
+     [
+      "Distal (dCCA)",
+      "Between cystic duct and ampulla of Vater",
+      "KRAS, TP53, SMAD4",
+      "Pancreaticoduodenectomy (Whipple)"
+     ],
+     [
+      "Gallbladder cancer",
+      "Gallbladder wall / cystic duct",
+      "HER2 amplification, EGFR, PIK3CA",
+      "Extended cholecystectomy + liver bed wedge"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic immunotherapy combined with cytotoxic doublets defines modern first-line therapy in unresectable or metastatic disease. In the landmark **TOPAZ-1** phase 3 trial, first-line durvalumab combined with gemcitabine and cisplatin significantly improves overall survival in advanced biliary tract cancer. The addition of durvalumab reduced the risk of death by twenty percent, elevating two-year overall survival to twenty-four percent.",
+   "say": "Systemic immunotherapy combined with cytotoxic doublets defines modern first-line therapy in unresectable or metastatic disease. In the landmark TOPAZ-1 phase 3 trial, first-line durvalumab combined with gemcitabine and cisplatin significantly improves overall survival in advanced biliary tract cancer. The addition of durvalumab reduced the risk of death by twenty percent, elevating two-year overall survival to twenty-four percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Advanced biliary tract cancer"
+     },
+     {
+      "id": "b",
+      "label": "Gemcitabine + Cisplatin + Durvalumab"
+     },
+     {
+      "id": "c",
+      "label": "Chemo 8 cycles + Durvalumab q4w"
+     },
+     {
+      "id": "d",
+      "label": "Significant OS advantage (TOPAZ-1)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "PS 0-1, adequate organ function"
+     ],
+     [
+      "b",
+      "c",
+      "continue durvalumab maintenance"
+     ],
+     [
+      "c",
+      "d",
+      "sustained immune response plateau"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The historical chemotherapy benchmark was defined by the British National Cancer Research Institute. **ABC-02** established gemcitabine and cisplatin as the first cytotoxic systemic standard of care for locally advanced or metastatic biliary tract carcinoma in the ABC-02 trial. Compared to gemcitabine monotherapy, the doublet extended median overall survival from 8.1 to 11.7 months without compromising quality of life.",
+   "say": "The historical chemotherapy benchmark was defined by the British National Cancer Research Institute. ABC-02 established gemcitabine and cisplatin as the first cytotoxic systemic standard of care for locally advanced or metastatic biliary tract carcinoma in the ABC-02 trial. Compared to gemcitabine monotherapy, the doublet extended median overall survival from 8.1 to 11.7 months without compromising quality of life.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gemcitabine + Cisplatin (ABC-02)",
+     "points": [
+      "Gemcitabine 1000 mg/m2 + Cisplatin 25 mg/m2",
+      "Administered days 1 and 8 every 3 weeks",
+      "Median OS: 11.7 months",
+      "Superior progression-free survival (HR 0.63)"
+     ]
+    },
+    "right": {
+     "title": "Gemcitabine Monotherapy",
+     "points": [
+      "Gemcitabine 1000 mg/m2 days 1, 8, 15 q4w",
+      "Median OS: 8.1 months",
+      "Inferior objective response rate",
+      "Historical comparator arm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following curative-intent surgical resection, patients face significant relapse risks necessitating adjuvant intervention. In the **BILCAP trial**, adjuvant capecitabine for 8 cycles following curative resection of biliary tract cancer and gallbladder cancer improves overall survival as demonstrated in the BILCAP trial. In the protocol-specified per-protocol analysis, median overall survival reached 53 months with capecitabine versus 36 months with observation alone.",
+   "say": "Following curative-intent surgical resection, patients face significant relapse risks necessitating adjuvant intervention. In the BILCAP trial, adjuvant capecitabine for 8 cycles following curative resection of biliary tract cancer and gallbladder cancer improves overall survival as demonstrated in the BILCAP trial. In the protocol-specified per-protocol analysis, median overall survival reached 53 months with capecitabine versus 36 months with observation alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Macroscopic R0 or R1 resection"
+     },
+     {
+      "id": "b",
+      "label": "Postoperative recovery (<=16 weeks)"
+     },
+     {
+      "id": "c",
+      "label": "Capecitabine (1250 mg/m2 bid d1-14 q3w)"
+     },
+     {
+      "id": "d",
+      "label": "8 cycles (approx. 6 months)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "pathology margin assessment"
+     ],
+     [
+      "b",
+      "c",
+      "oral fluoropyrimidine tolerance"
+     ],
+     [
+      "c",
+      "d",
+      "extends OS from 36 to 53 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Precision genomic sequencing in intrahepatic cholangiocarcinoma reveals targetable kinase fusions. **FGFR2 gene fusions** occur in 10% to 15% of intrahepatic cholangiocarcinomas, successfully targeted by selective FGFR kinase inhibitors pemigatinib and futibatinib. Pemigatinib binds FGFR1-3 and achieved a thirty-six percent objective response rate in the FIGHT-202 trial. Hyperphosphatemia represents an on-target class toxicity requiring dietary phosphate binders.",
+   "say": "Precision genomic sequencing in intrahepatic cholangiocarcinoma reveals targetable kinase fusions. FGFR2 gene fusions occur in 10% to 15% of intrahepatic cholangiocarcinomas, successfully targeted by selective FGFR kinase inhibitors pemigatinib and futibatinib. Pemigatinib binds FGFR1-3 and achieved a thirty-six percent objective response rate in the FIGHT-202 trial. Hyperphosphatemia represents an on-target class toxicity requiring dietary phosphate binders.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FGFR Inhibitor",
+     "Mechanism of Action",
+     "Pivotal Clinical Trial",
+     "Key Toxicities"
+    ],
+    "rows": [
+     [
+      "Pemigatinib",
+      "Reversible ATP-competitive FGFR1-3 inhibitor",
+      "FIGHT-202",
+      "Hyperphosphatemia, dry eyes, onycholysis"
+     ],
+     [
+      "Futibatinib",
+      "Irreversible covalent FGFR1-4 inhibitor",
+      "FOENIX-CCA2",
+      "Hyperphosphatemia, subretinal fluid, stomatitis"
+     ],
+     [
+      "Erdafitinib",
+      "Pan-FGFR tyrosine kinase inhibitor",
+      "LUC2001",
+      "Central serous retinopathy, nail dystrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Somatic metabolic enzyme mutations drive distinct epigenetic dysregulation. **IDH1** R132 mutations occur in up to 20% of intrahepatic cholangiocarcinomas, inhibited by oral mutant IDH1 inhibitor ivosidenib in ClarIDHy. Mutant IDH1 produces the oncometabolite 2-hydroxyglutarate D-2-HG, which competitively inhibits alpha-ketoglutarate-dependent histone and DNA demethylases. In ClarIDHy, ivosidenib significantly improved progression-free survival in pretreated refractory cholangiocarcinoma.",
+   "say": "Somatic metabolic enzyme mutations drive distinct epigenetic dysregulation. IDH1 R132 mutations occur in up to 20% of intrahepatic cholangiocarcinomas, inhibited by oral mutant IDH1 inhibitor ivosidenib in ClarIDHy. Mutant IDH1 produces the oncometabolite 2-hydroxyglutarate D-2-HG, which competitively inhibits alpha-ketoglutarate-dependent histone and DNA demethylases. In ClarIDHy, ivosidenib significantly improved progression-free survival in pretreated refractory cholangiocarcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "IDH1 R132 somatic mutation"
+     },
+     {
+      "id": "b",
+      "label": "Neomorphic 2-HG accumulation"
+     },
+     {
+      "id": "c",
+      "label": "Demethylase inhibition & hypermethylation"
+     },
+     {
+      "id": "d",
+      "label": "Ivosidenib oral inhibition (ClarIDHy)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "converts alpha-KG to D-2-HG"
+     ],
+     [
+      "b",
+      "c",
+      "epigenetic block of differentiation"
+     ],
+     [
+      "c",
+      "d",
+      "normalizes D-2-HG levels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gallbladder cancer displays marked geographic variation and female predominance. **Gallbladder carcinoma** is the most common biliary malignancy, highly prevalent in northern India, strongly linked to chronic cholelithiasis, porcelain gallbladder, and anomalous pancreaticobiliary duct junction. Calcification of the gallbladder wall in porcelain gallbladder carries a high malignancy risk, warranting prophylactic cholecystectomy. Early surgical resection with adjacent liver wedge clearance provides the only curative opportunity.",
+   "say": "Gallbladder cancer displays marked geographic variation and female predominance. Gallbladder carcinoma is the most common biliary malignancy, highly prevalent in northern India, strongly linked to chronic cholelithiasis, porcelain gallbladder, and anomalous pancreaticobiliary duct junction. Calcification of the gallbladder wall in porcelain gallbladder carries a high malignancy risk, warranting prophylactic cholecystectomy. Early surgical resection with adjacent liver wedge clearance provides the only curative opportunity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-Risk Features for Gallbladder Cancer",
+     "points": [
+      "Porcelain gallbladder (calcified wall)",
+      "Gallstones > 3 cm diameter",
+      "Anomalous pancreaticobiliary duct junction (APBDJ)",
+      "Endemic northern Indian Gangetic belt"
+     ]
+    },
+    "right": {
+     "title": "Oncological Resection Standard",
+     "points": [
+      "Simple cholecystectomy sufficient only for T1a",
+      "T1b and T2 require radical cholecystectomy",
+      "En bloc wedge resection of liver segments IVb and V",
+      "Formal regional lymphadenectomy (hepatoduodenal)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic biliary tract inflammation serves as a major premalignant trigger. **Primary sclerosing cholangitis** PSC is an inflammatory fibrostenotic hepatobiliary disorder conferring an annual 1% to 1.5% incidence of developing cholangiocarcinoma. Over seventy percent of patients have concurrent ulcerative colitis. Surveillance combines annual serum CA 19-9 measurements with magnetic resonance cholangiopancreatography MRCP to identify malignant strictures before incurable vascular invasion develops.",
+   "say": "Chronic biliary tract inflammation serves as a major premalignant trigger. Primary sclerosing cholangitis PSC is an inflammatory fibrostenotic hepatobiliary disorder conferring an annual 1% to 1.5% incidence of developing cholangiocarcinoma. Over seventy percent of patients have concurrent ulcerative colitis. Surveillance combines annual serum CA 19-9 measurements with magnetic resonance cholangiopancreatography MRCP to identify malignant strictures before incurable vascular invasion develops.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Primary sclerosing cholangitis"
+     },
+     {
+      "id": "b",
+      "label": "Fibrostenotic duct obliteration"
+     },
+     {
+      "id": "c",
+      "label": "Dominant stricture development"
+     },
+     {
+      "id": "d",
+      "label": "ERCP brush cytology + FISH analysis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "chronic immune cholestasis"
+     ],
+     [
+      "b",
+      "c",
+      "rapidly worsening jaundice"
+     ],
+     [
+      "c",
+      "d",
+      "differentiates benign vs cholangiocarcinoma"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

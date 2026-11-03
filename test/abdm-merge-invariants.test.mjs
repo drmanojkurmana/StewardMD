@@ -28,8 +28,9 @@ import { serializeNdhm } from "../functions/_connect/connectors/abdm/serialize.j
 import { MemoryRepository } from "../functions/_wardsynq/repository.js";
 import { immunizationRecord, invoiceRecord } from "./connect/abdm/fixtures/sccm-records.mjs";
 import { abhaDeskCan, ABHA_DESK_ROLES } from "../functions/_queue_roles.js";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("..", import.meta.url).pathname;
+const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const read = (rel) => readFileSync(join(ROOT, rel), "utf8");
 function jsFiles(dir) {
   const out = [];

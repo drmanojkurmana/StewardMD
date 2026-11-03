@@ -1,0 +1,282 @@
+{
+ "v": 1,
+ "module": "son-thyroid",
+ "subject": "ss-medical-oncology",
+ "title": "Thyroid cancer",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Papillary thyroid carcinoma** PTC is the most common endocrine malignancy, characterized cytologically by ground-glass Orphan Annie nuclei, nuclear pseudoinclusions, and psammoma bodies. PTC accounts for eighty-five percent of differentiated thyroid neoplasms. Fine-needle aspiration cytology classified under the Bethesda system guides surgical planning, with lobectomy or total thyroidectomy providing high long-term cure rates.",
+   "say": "Papillary thyroid carcinoma PTC is the most common endocrine malignancy, characterized cytologically by ground-glass Orphan Annie nuclei, nuclear pseudoinclusions, and psammoma bodies. PTC accounts for eighty-five percent of differentiated thyroid neoplasms. Fine-needle aspiration cytology classified under the Bethesda system guides surgical planning, with lobectomy or total thyroidectomy providing high long-term cure rates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Papillary Thyroid Carcinoma (PTC)",
+     "points": [
+      "Orphan Annie eyes, nuclear grooves",
+      "Psammoma bodies (concentric calcifications)",
+      "Lymphatic spread to cervical nodes",
+      "Excellent overall prognosis (>95% 10-yr OS)"
+     ]
+    },
+    "right": {
+     "title": "Follicular Thyroid Carcinoma (FTC)",
+     "points": [
+      "Microfollicular architecture, lacks PTC nuclei",
+      "Capsular or vascular invasion required for diagnosis",
+      "Hematogenous dissemination to lung/bone",
+      "Associated with RAS mutations and PAX8-PPARG"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Molecular alterations influence biological aggression and sodium-iodide symporter expression. **BRAF V600E** point mutations occur in approximately 60% of papillary thyroid carcinomas, associated with aggressive clinicopathological features and loss of radioiodine avidity. Constitutive MAPK pathway activation downregulates thyroid iodide-handling genes, predisposing tumours to extrathyroidal extension, nodal metastases, and radioiodine refractoriness.",
+   "say": "Molecular alterations influence biological aggression and sodium-iodide symporter expression. BRAF V600E point mutations occur in approximately 60% of papillary thyroid carcinomas, associated with aggressive clinicopathological features and loss of radioiodine avidity. Constitutive MAPK pathway activation downregulates thyroid iodide-handling genes, predisposing tumours to extrathyroidal extension, nodal metastases, and radioiodine refractoriness.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "BRAF V600E mutation (60%)"
+     },
+     {
+      "id": "b",
+      "label": "Hyperactive MAPK signaling"
+     },
+     {
+      "id": "c",
+      "label": "NIS symporter downregulation"
+     },
+     {
+      "id": "d",
+      "label": "Loss of radioiodine avidity (RAI-refractory)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "constitutive kinase activation"
+     ],
+     [
+      "b",
+      "c",
+      "transcriptional silencing"
+     ],
+     [
+      "c",
+      "d",
+      "necessitates systemic TKI therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Potent anti-angiogenic kinase inhibitors yield substantial disease control in progressive disease. **Lenvatinib** multi-targeted TKI significantly improves progression-free survival and objective response rate in radioactive iodine-refractory differentiated thyroid cancer in the SELECT trial. Median progression-free survival reached 18.3 months with lenvatinib versus 3.6 months with placebo, accompanied by an impressive sixty-five percent response rate.",
+   "say": "Potent anti-angiogenic kinase inhibitors yield substantial disease control in progressive disease. Lenvatinib multi-targeted TKI significantly improves progression-free survival and objective response rate in radioactive iodine-refractory differentiated thyroid cancer in the SELECT trial. Median progression-free survival reached 18.3 months with lenvatinib versus 3.6 months with placebo, accompanied by an impressive sixty-five percent response rate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lenvatinib (SELECT Trial)",
+     "points": [
+      "Inhibits VEGFR 1-3, FGFR 1-4, RET, KIT",
+      "Median PFS: 18.3 vs 3.6 months (HR 0.21)",
+      "High objective response rate: 64.8%",
+      "Primary first-line choice for RAI-refractory DTC"
+     ]
+    },
+    "right": {
+     "title": "Key Lenvatinib Toxicities",
+     "points": [
+      "Hypertension (monitor blood pressure closely)",
+      "Proteinuria and renal impairment",
+      "Palmar-plantar erythrodysesthesia",
+      "Weight loss, fatigue, gastrointestinal fistula"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Alternative multikinase inhibitors provide validated secondary or first-line treatment choices. **Sorafenib** multi-kinase inhibitor prolongs progression-free survival in radioactive iodine-refractory advanced differentiated thyroid carcinoma based on the randomized DECISION trial. Sorafenib inhibits VEGFR, PDGFR, and CRAF/BRAF kinases, improving median progression-free survival to 10.8 months compared to 5.8 months with placebo.",
+   "say": "Alternative multikinase inhibitors provide validated secondary or first-line treatment choices. Sorafenib multi-kinase inhibitor prolongs progression-free survival in radioactive iodine-refractory advanced differentiated thyroid carcinoma based on the randomized DECISION trial. Sorafenib inhibits VEGFR, PDGFR, and CRAF/BRAF kinases, improving median progression-free survival to 10.8 months compared to 5.8 months with placebo.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Targeted Agent",
+     "Trial Design",
+     "Median PFS",
+     "Primary Indication"
+    ],
+    "rows": [
+     [
+      "Lenvatinib",
+      "SELECT (Phase III RCT)",
+      "18.3 months vs 3.6 months",
+      "Preferred first-line for progressive RAI-refractory DTC"
+     ],
+     [
+      "Sorafenib",
+      "DECISION (Phase III RCT)",
+      "10.8 months vs 5.8 months",
+      "First approved TKI for RAI-refractory DTC"
+     ],
+     [
+      "Cabozantinib",
+      "COSMIC-311 (Phase III RCT)",
+      "11.0 months vs 1.9 months",
+      "Second-line after VEGFR-TKI progression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parafollicular C-cell neoplasms produce neuroendocrine markers rather than thyroglobulin. **Medullary thyroid carcinoma** MTC arises from calcitonin-secreting parafollicular C cells, strongly driven by germline or somatic activating RET proto-oncogene mutations. In MEN 2A and 2B, germline mutations in extracellular cysteine or intracellular kinase domains trigger ligand-independent RET dimerization, dictating age-specific prophylactic thyroidectomy in infancy or early childhood.",
+   "say": "Parafollicular C-cell neoplasms produce neuroendocrine markers rather than thyroglobulin. Medullary thyroid carcinoma MTC arises from calcitonin-secreting parafollicular C cells, strongly driven by germline or somatic activating RET proto-oncogene mutations. In MEN 2A and 2B, germline mutations in extracellular cysteine or intracellular kinase domains trigger ligand-independent RET dimerization, dictating age-specific prophylactic thyroidectomy in infancy or early childhood.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RET Codon Variant",
+     "Syndrome Classification",
+     "Risk Level",
+     "Prophylactic Thyroidectomy"
+    ],
+    "rows": [
+     [
+      "M918T (Exon 16)",
+      "MEN 2B",
+      "Highest risk",
+      "Within the first year of life"
+     ],
+     [
+      "C634 (Exon 11)",
+      "MEN 2A",
+      "High risk",
+      "Before age 5 years"
+     ],
+     [
+      "Exons 10, 13, 14, 15",
+      "MEN 2A / Familial MTC",
+      "Moderate risk",
+      "Childhood or early adult screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Next-generation selective kinase inhibitors surpass non-selective anti-angiogenic multikinase drugs. Highly selective RET inhibitors **selpercatinib** and pralsetinib demonstrate profound, durable antitumor activity in advanced RET-mutant medullary and RET-fusion thyroid carcinomas in LIBRETTO-001. Selpercatinib achieved an objective response rate of seventy percent in pretreated MTC, producing durable remissions with low rates of off-target toxicities.",
+   "say": "Next-generation selective kinase inhibitors surpass non-selective anti-angiogenic multikinase drugs. Highly selective RET inhibitors selpercatinib and pralsetinib demonstrate profound, durable antitumor activity in advanced RET-mutant medullary and RET-fusion thyroid carcinomas in LIBRETTO-001. Selpercatinib achieved an objective response rate of seventy percent in pretreated MTC, producing durable remissions with low rates of off-target toxicities.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Advanced MTC or Thyroid Carcinoma"
+     },
+     {
+      "id": "b",
+      "label": "Genomic profiling (RET mutation or RET fusion)"
+     },
+     {
+      "id": "c",
+      "label": "Selpercatinib / Pralsetinib targeted therapy"
+     },
+     {
+      "id": "d",
+      "label": "Profound antitumor response & CNS activity (LIBRETTO-001)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "universal testing"
+     ],
+     [
+      "b",
+      "c",
+      "selective ATP-binding pocket inhibition"
+     ],
+     [
+      "c",
+      "d",
+      "high objective response rate (~70%)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anaplastic thyroid carcinoma** ATC is an undifferentiated, highly lethal malignancy; BRAF V600E-mutant ATC responds rapidly to combination dabrafenib and trametinib targeted therapy. In the ROAR phase 2 basket trial, dabrafenib plus trametinib achieved a confirmed objective response rate of sixty-nine percent, converting fulminant inoperable tracheal invasion into resectable disease and extending one-year overall survival to eighty percent.",
+   "say": "Anaplastic thyroid carcinoma ATC is an undifferentiated, highly lethal malignancy; BRAF V600E-mutant ATC responds rapidly to combination dabrafenib and trametinib targeted therapy. In the ROAR phase 2 basket trial, dabrafenib plus trametinib achieved a confirmed objective response rate of sixty-nine percent, converting fulminant inoperable tracheal invasion into resectable disease and extending one-year overall survival to eighty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Anaplastic thyroid cancer presentation"
+     },
+     {
+      "id": "b",
+      "label": "Urgent core biopsy + BRAF V600E testing"
+     },
+     {
+      "id": "c",
+      "label": "Dabrafenib (BRAFi) + Trametinib (MEKi)"
+     },
+     {
+      "id": "d",
+      "label": "Rapid tumor shrinkage and airway decompression"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "airway and vocal cord assessment"
+     ],
+     [
+      "b",
+      "c",
+      "positive in ~40% of ATC"
+     ],
+     [
+      "c",
+      "d",
+      "converts inoperable to surgical candidate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biochemical monitoring tracks curative success and heralds occult tumour relapse. Serum **thyroglobulin** Tg measured under TSH stimulation is the primary surveillance biomarker for identifying persistent or recurrent disease after thyroidectomy and radioiodine remnant ablation. Concurrently measuring antithyroglobulin antibodies is mandatory to prevent false-negative thyroglobulin immunoassay results caused by circulating autoantibody interference.",
+   "say": "Biochemical monitoring tracks curative success and heralds occult tumour relapse. Serum thyroglobulin Tg measured under TSH stimulation is the primary surveillance biomarker for identifying persistent or recurrent disease after thyroidectomy and radioiodine remnant ablation. Concurrently measuring antithyroglobulin antibodies is mandatory to prevent false-negative thyroglobulin immunoassay results caused by circulating autoantibody interference.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stimulated Thyroglobulin Surveillance",
+     "points": [
+      "Stimulated via rhTSH or LT4 withdrawal (TSH > 30)",
+      "Stimulated Tg < 1 ng/mL indicates excellent response",
+      "Undetectable unstimulated Tg (<0.2 ng/mL) reassuring",
+      "Rising Tg triggers neck ultrasound and PET-CT"
+     ]
+    },
+    "right": {
+     "title": "Anti-Thyroglobulin Antibodies (anti-Tg)",
+     "points": [
+      "Present in 20% to 25% of thyroid cancer patients",
+      "Interferes with standard immunometric assays",
+      "Rising anti-Tg serves as surrogate marker of recurrence",
+      "Declining titers confirm biochemical cure"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

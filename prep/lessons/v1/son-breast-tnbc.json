@@ -1,0 +1,296 @@
+{
+ "v": 1,
+ "module": "son-breast-tnbc",
+ "subject": "ss-medical-oncology",
+ "title": "Triple negative breast cancer",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Triple-negative breast cancer lacks estrogen receptors, progesterone receptors, and HER2 overexpression. It exhibits an aggressive clinical course with an early propensity for visceral and central nervous system metastases. **KEYNOTE-522** established neoadjuvant pembrolizumab added to anthracycline, cyclophosphamide, and taxane-carboplatin chemotherapy. This regimen significantly increases pathological complete response and event-free survival, continuing adjuvant pembrolizumab for nine cycles.",
+   "say": "Triple-negative breast cancer lacks estrogen receptors, progesterone receptors, and HER2 overexpression. It exhibits an aggressive clinical course with an early propensity for visceral and central nervous system metastases. KEYNOTE-522 established neoadjuvant pembrolizumab added to anthracycline, cyclophosphamide, and taxane-carboplatin chemotherapy. This regimen significantly increases pathological complete response and event-free survival, continuing adjuvant pembrolizumab for nine cycles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "T1c+ or N+ TNBC"
+     },
+     {
+      "id": "b",
+      "label": "Neoadjuvant Chemo + Pembrolizumab"
+     },
+     {
+      "id": "c",
+      "label": "Definitive Breast Surgery"
+     },
+     {
+      "id": "d",
+      "label": "Adjuvant Pembrolizumab (9 cycles)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "Paclitaxel/Carbo then AC"
+     ],
+     [
+      "b",
+      "c",
+      "evaluates pCR"
+     ],
+     [
+      "c",
+      "d",
+      "completes 1 year total IO"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathological complete response after neoadjuvant therapy serves as a robust surrogate endpoint for long-term survival. Residual invasive disease in surgical specimens confers a high risk of systemic relapse. In the landmark **CREATE-X** trial, adjuvant capecitabine for 6 to 8 cycles improves disease-free and overall survival in triple-negative breast cancer patients with residual invasive disease after neoadjuvant chemotherapy.",
+   "say": "Pathological complete response after neoadjuvant therapy serves as a robust surrogate endpoint for long-term survival. Residual invasive disease in surgical specimens confers a high risk of systemic relapse. In the landmark CREATE-X trial, adjuvant capecitabine for 6 to 8 cycles improves disease-free and overall survival in triple-negative breast cancer patients with residual invasive disease after neoadjuvant chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathological Complete Response (pCR)",
+     "points": [
+      "No invasive disease in breast or nodes (ypT0/is ypN0)",
+      "Excellent 5-year event-free survival (>85-90%)",
+      "Complete scheduled adjuvant pembrolizumab",
+      "No role for post-op capecitabine"
+     ]
+    },
+    "right": {
+     "title": "Residual Invasive Disease (non-pCR)",
+     "points": [
+      "Persistent tumour cells in breast or axilla",
+      "High rate of early distant recurrence",
+      "Adjuvant capecitabine for 6 to 8 cycles (CREATE-X)",
+      "Consider adjuvant olaparib if germline BRCA"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Antibody-drug conjugates have revolutionized treatment options in refractory advanced disease. **Sacituzumab govitecan** is an anti-Trop-2 antibody-drug conjugate providing significant PFS and OS benefit over single-agent chemotherapy in pretreated metastatic TNBC in the ASCENT trial. It couples a humanized trophoblast cell-surface antigen 2 monoclonal antibody to SN-38 via a hydrolysable linker, delivering high intratumoural topoisomerase I inhibitor concentrations.",
+   "say": "Antibody-drug conjugates have revolutionized treatment options in refractory advanced disease. Sacituzumab govitecan is an anti-Trop-2 antibody-drug conjugate providing significant PFS and OS benefit over single-agent chemotherapy in pretreated metastatic TNBC in the ASCENT trial. It couples a humanized trophoblast cell-surface antigen 2 monoclonal antibody to SN-38 via a hydrolysable linker, delivering high intratumoural topoisomerase I inhibitor concentrations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ADC Agent",
+     "Target Antigen",
+     "Cytotoxic Payload",
+     "Pivotal Phase III Trial"
+    ],
+    "rows": [
+     [
+      "Sacituzumab govitecan",
+      "Trop-2",
+      "SN-38 (topoisomerase I inhibitor)",
+      "ASCENT trial"
+     ],
+     [
+      "Trastuzumab deruxtecan",
+      "HER2 (HER2-low)",
+      "Deruxtecan (DXd, topo I inhibitor)",
+      "DESTINY-Breast04"
+     ],
+     [
+      "Datopotamab deruxtecan",
+      "Trop-2",
+      "Deruxtecan (DXd, topo I inhibitor)",
+      "TROPION-Breast02"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In advanced disease, predictive biomarker evaluation guides first-line systemic selection. In **KEYNOTE-355**, first-line pembrolizumab combined with chemotherapy significantly improves progression-free and overall survival in metastatic TNBC with PD-L1 combined positive score CPS 10 or higher. Chemotherapy partners include nab-paclitaxel, solvent-based paclitaxel, or gemcitabine plus carboplatin. Tumours with CPS under 10 receive cytotoxic chemotherapy alone.",
+   "say": "In advanced disease, predictive biomarker evaluation guides first-line systemic selection. In KEYNOTE-355, first-line pembrolizumab combined with chemotherapy significantly improves progression-free and overall survival in metastatic TNBC with PD-L1 combined positive score CPS 10 or higher. Chemotherapy partners include nab-paclitaxel, solvent-based paclitaxel, or gemcitabine plus carboplatin. Tumours with CPS under 10 receive cytotoxic chemotherapy alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Metastatic TNBC biopsy"
+     },
+     {
+      "id": "b",
+      "label": "PD-L1 IHC (22C3 clone)"
+     },
+     {
+      "id": "c",
+      "label": "CPS >= 10 (approx. 40%)"
+     },
+     {
+      "id": "d",
+      "label": "Pembrolizumab + Chemotherapy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "pathology review"
+     ],
+     [
+      "b",
+      "c",
+      "calculate combined positive score"
+     ],
+     [
+      "c",
+      "d",
+      "significant OS advantage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Germline genetic alterations exploit synthetic lethality mechanisms in DNA repair-deficient malignancies. **PARP inhibitors** olaparib and talazoparib demonstrate superior progression-free survival compared to standard chemotherapy in metastatic HER2-negative breast cancer harbouring germline BRCA1 or BRCA2 mutations. Pharmacological trapping of PARP at single-strand breaks generates catastrophic double-strand breaks during replication, selectively destroying homologous recombination-deficient tumour cells.",
+   "say": "Germline genetic alterations exploit synthetic lethality mechanisms in DNA repair-deficient malignancies. PARP inhibitors olaparib and talazoparib demonstrate superior progression-free survival compared to standard chemotherapy in metastatic HER2-negative breast cancer harbouring germline BRCA1 or BRCA2 mutations. Pharmacological trapping of PARP at single-strand breaks generates catastrophic double-strand breaks during replication, selectively destroying homologous recombination-deficient tumour cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Homologous Recombination Competent",
+     "points": [
+      "Intact BRCA1/2 proteins",
+      "PARP inhibition blocks base excision repair",
+      "Homologous recombination repairs double-strand breaks",
+      "Cell viability preserved"
+     ]
+    },
+    "right": {
+     "title": "Germline BRCA1/2 Deficient (Synthetic Lethality)",
+     "points": [
+      "Loss of homologous recombination repair",
+      "PARP inhibitor locks replication fork",
+      "Unrepaired DNA double-strand breaks",
+      "Selective apoptotic cell death"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chemotherapy intensification improves downstaging and pathological response rates. **Platinum agents** carboplatin or cisplatin increase pathological complete response rates when incorporated into neoadjuvant regimens for early-stage triple-negative breast cancer. In the GeparSixto and CALGB 40603 trials, carboplatin addition boosted pCR by ten to fifteen percent, particularly in tumours with homologous recombination deficiency or basal-like features.",
+   "say": "Chemotherapy intensification improves downstaging and pathological response rates. Platinum agents carboplatin or cisplatin increase pathological complete response rates when incorporated into neoadjuvant regimens for early-stage triple-negative breast cancer. In the GeparSixto and CALGB 40603 trials, carboplatin addition boosted pCR by ten to fifteen percent, particularly in tumours with homologous recombination deficiency or basal-like features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial",
+     "Neoadjuvant Regimen",
+     "Platinum Arm pCR Rate",
+     "Control pCR Rate"
+    ],
+    "rows": [
+     [
+      "GeparSixto",
+      "Paclitaxel + liposomal doxorubicin +/- carboplatin",
+      "53%",
+      "37%"
+     ],
+     [
+      "CALGB 40603",
+      "Weekly paclitaxel -> dose-dense AC +/- carboplatin",
+      "54%",
+      "41%"
+     ],
+     [
+      "KEYNOTE-522",
+      "Carboplatin + paclitaxel -> AC/EC + pembrolizumab",
+      "65%",
+      "51% (placebo arm)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Next-generation antibody-drug conjugates broaden therapeutic options beyond conventional cytotoxics. **Datopotamab deruxtecan** is a TROP2-directed ADC demonstrating clinically meaningful activity in heavily pretreated inoperable or metastatic triple-negative breast cancer. In the pivotal TROPION-Breast02 trial, datopotamab deruxtecan showed superior survival compared to investigator choice chemotherapy, featuring an optimized plasma-stable linker and potent topoisomerase I payload.",
+   "say": "Next-generation antibody-drug conjugates broaden therapeutic options beyond conventional cytotoxics. Datopotamab deruxtecan is a TROP2-directed ADC demonstrating clinically meaningful activity in heavily pretreated inoperable or metastatic triple-negative breast cancer. In the pivotal TROPION-Breast02 trial, datopotamab deruxtecan showed superior survival compared to investigator choice chemotherapy, featuring an optimized plasma-stable linker and potent topoisomerase I payload.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "TROP2 surface expression"
+     },
+     {
+      "id": "b",
+      "label": "Dato-DXd internalization"
+     },
+     {
+      "id": "c",
+      "label": "Lysosomal linker cleavage"
+     },
+     {
+      "id": "d",
+      "label": "Topo I inhibition & bystander kill"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "high affinity binding"
+     ],
+     [
+      "b",
+      "c",
+      "receptor endocytosis"
+     ],
+     [
+      "c",
+      "d",
+      "membrane-permeable payload"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular heterogeneity explains differing chemotherapy sensitivities among clinical triple-negative cases. **Triple-negative breast cancer** comprises diverse transcriptomic subtypes including basal-like 1, basal-like 2, mesenchymal, and luminal androgen receptor LAR phenotypes. Basal-like 1 tumours are highly proliferative and DNA repair-deficient, showing the greatest chemotherapy sensitivity, whereas luminal androgen receptor tumours respond poorly to standard cytotoxics and may respond to anti-androgens.",
+   "say": "Molecular heterogeneity explains differing chemotherapy sensitivities among clinical triple-negative cases. Triple-negative breast cancer comprises diverse transcriptomic subtypes including basal-like 1, basal-like 2, mesenchymal, and luminal androgen receptor LAR phenotypes. Basal-like 1 tumours are highly proliferative and DNA repair-deficient, showing the greatest chemotherapy sensitivity, whereas luminal androgen receptor tumours respond poorly to standard cytotoxics and may respond to anti-androgens.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lehmann Subtype",
+     "Key Gene Pathways",
+     "Pathological Features",
+     "Therapeutic Sensitivity"
+    ],
+    "rows": [
+     [
+      "Basal-like 1 (BL1)",
+      "Cell cycle, DNA damage response (BRCA)",
+      "High Ki-67, TP53 mutations",
+      "High pCR to platinum and alkylators"
+     ],
+     [
+      "Basal-like 2 (BL2)",
+      "Growth factor signalling, glycolysis",
+      "EGFR, MET, IGF-1R active",
+      "Moderate chemotherapy response"
+     ],
+     [
+      "Mesenchymal (M)",
+      "Epithelial-mesenchymal transition, TGF-beta",
+      "Metaplastic histology, motility",
+      "Potential mTOR / SRC vulnerability"
+     ],
+     [
+      "Luminal androgen receptor (LAR)",
+      "Androgen receptor signalling, FOXA1",
+      "Apocrine histology, low Ki-67",
+      "Low pCR, sensitive to enzalutamide"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_95974ea24591",
+  "q_04368c2adba2",
+  "q_a969618ea72b"
+ ],
+ "gen": "hand"
+}

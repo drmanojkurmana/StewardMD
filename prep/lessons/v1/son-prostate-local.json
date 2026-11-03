@@ -1,123 +1,315 @@
 {
- "v": 1,
- "module": "son-prostate-local",
- "subject": "ss-medical-oncology",
- "title": "Localized and biochemically recurrent prostate cancer",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Nonmetastatic disease is stratified into **low, intermediate, high and very-high risk**. Low risk means organ-confined disease with PSA below 10 ng/mL and grade group 1. High risk includes extraprostatic extension, PSA above 20 ng/mL, or grade group 4 to 5. Very-high risk adds seminal vesicle T3b invasion, adjacent-organ T4 invasion, or multiple high-grade biopsy cores.",
-   "say": "Nonmetastatic disease is stratified into low, intermediate, high and very-high risk. Low risk means organ-confined disease with PSA below 10 nanograms per millilitre and grade group 1. High risk includes extraprostatic extension, PSA above 20, or grade group 4 to 5. Very-high risk adds seminal vesicle T3b invasion, adjacent-organ T4 invasion, or multiple high-grade biopsy cores.",
-   "vis": null
-  },
-  {
-   "tx": "Multiparametric MRI graded by **PI-RADS** is usually done before biopsy. PI-RADS 1 and 2 lesions can safely avoid biopsy, while PI-RADS 3 to 5 lesions receive targeted biopsy. This reduces detection of indolent grade group 1 tumours without missing clinically relevant cancers. PSA itself is prostate specific, not cancer specific, so prostatitis and BPH can also raise it.",
-   "say": "Multiparametric MRI graded by PI-RADS is usually done before biopsy. PI-RADS 1 and 2 lesions can safely avoid biopsy, while PI-RADS 3 to 5 lesions receive targeted biopsy. This reduces detection of indolent grade group 1 tumours without missing clinically relevant cancers. PSA itself is prostate specific, not cancer specific, so prostatitis and benign enlargement can also raise it.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "mpMRI PI-RADS"
-     },
-     {
-      "id": "b",
-      "label": "PI-RADS 1-2"
-     },
-     {
-      "id": "c",
-      "label": "PI-RADS 3-5"
-     },
-     {
-      "id": "d",
-      "label": "No biopsy"
-     },
-     {
-      "id": "e",
-      "label": "Targeted biopsy"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "a",
-      "c"
-     ],
-     [
-      "b",
-      "d"
-     ],
-     [
-      "c",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "For **low-risk** disease, **active surveillance** is preferred, with repeat biopsy reserved for discordance between imaging and biomarkers. For intermediate and high-risk disease, **radical prostatectomy** or radiotherapy is offered, with radiotherapy often combined with androgen deprivation for longer durations in high-risk patients. The ProtecT trial showed no 10-year survival disadvantage for active surveillance.",
-   "say": "For low-risk disease, active surveillance is preferred, with repeat biopsy reserved for discordance between imaging and biomarkers. For intermediate and high-risk disease, radical prostatectomy or radiotherapy is offered, with radiotherapy often combined with androgen deprivation for longer durations in high-risk patients. The ProtecT trial showed no 10-year survival disadvantage for active surveillance.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Active surveillance",
-     "points": [
-      "Low-risk disease",
-      "Repeat biopsy only if discordant",
-      "No survival penalty at 10 years (ProtecT)"
-     ]
+  "v": 1,
+  "module": "son-prostate-local",
+  "subject": "ss-medical-oncology",
+  "title": "Localized and biochemically recurrent prostate cancer",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Prostate cancer histological grading uses the International Society of Urological Pathology ISUP **Grade Groups** 1 to 5, which correlate more accurately with clinical outcomes than traditional **Gleason score** totals. Grade Group 1 corresponds to Gleason 3+3=6, Grade Group 2 to Gleason 3+4=7, Grade Group 3 to Gleason 4+3=7, Grade Group 4 to Gleason 8, and Grade Group 5 to Gleason 9-10.",
+      "say": "Prostate cancer histological grading uses the International Society of Urological Pathology ISUP Grade Groups 1 to 5, which correlate more accurately with clinical outcomes than traditional Gleason score totals. Grade Group 1 corresponds to Gleason 3+3=6, Grade Group 2 to Gleason 3+4=7, Grade Group 3 to Gleason 4+3=7, Grade Group 4 to Gleason 8, and Grade Group 5 to Gleason 9-10.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "NCCN Risk Category",
+          "Gleason Score / Grade Group",
+          "Clinical T Stage",
+          "Baseline PSA (ng/mL)"
+        ],
+        "rows": [
+          [
+            "Low Risk",
+            "Grade Group 1 (Gleason 3+3=6)",
+            "cT1 to cT2a",
+            "PSA < 10 ng/mL"
+          ],
+          [
+            "Favourable Intermediate",
+            "Grade Group 1 or 2 (Gleason 3+4=7)",
+            "cT2b to cT2c",
+            "PSA 10 to 20 ng/mL (< 50% positive cores)"
+          ],
+          [
+            "Unfavourable Intermediate",
+            "Grade Group 3 (Gleason 4+3=7)",
+            "cT2b to cT2c",
+            "PSA 10 to 20 ng/mL (>= 50% positive cores)"
+          ],
+          [
+            "High / Very-High Risk",
+            "Grade Group 4 or 5 (Gleason 8-10)",
+            "cT3a to cT4",
+            "PSA > 20 ng/mL or primary Gleason pattern 5"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Radical treatment",
-     "points": [
-      "Intermediate or high risk",
-      "Prostatectomy or radiotherapy",
-      "High risk: ADT up to three years with radiotherapy"
-     ]
+    {
+      "tx": "**Multiparametric MRI mpMRI** of the prostate evaluated by **PI-RADS** version **2.1** improves clinically significant cancer detection while reducing overdiagnosis of indolent tumours. Scores range from 1 for highly unlikely to 5 for highly likely clinically significant cancer, incorporating T2-weighted imaging for the transition zone and diffusion-weighted imaging DWI with apparent diffusion coefficient ADC mapping for the peripheral zone.",
+      "say": "Multiparametric MRI mpMRI of the prostate evaluated by PI-RADS version 2.1 improves clinically significant cancer detection while reducing overdiagnosis of indolent tumours. Scores range from 1 for highly unlikely to 5 for highly likely clinically significant cancer, incorporating T2-weighted imaging for the transition zone and diffusion-weighted imaging DWI with apparent diffusion coefficient ADC mapping for the peripheral zone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Low-Risk Prostate Cancer (GG1, PSA < 10)"
+          },
+          {
+            "id": "b",
+            "label": "PSA Every 6 Months & Annual DRE"
+          },
+          {
+            "id": "c",
+            "label": "Multiparametric Prostate MRI at 12 to 18 Months"
+          },
+          {
+            "id": "d",
+            "label": "Confirmatory & Surveillance Prostate Biopsy"
+          },
+          {
+            "id": "e",
+            "label": "Reclassification / Upgrade to Grade Group >= 2"
+          },
+          {
+            "id": "f",
+            "label": "Definitive Curative Surgery or Radiotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Enrolment in active surveillance"
+          ],
+          [
+            "b",
+            "c",
+            "Track PSA kinetics and suspicious lesions"
+          ],
+          [
+            "c",
+            "d",
+            "Targeted plus systematic core biopsy"
+          ],
+          [
+            "d",
+            "e",
+            "Histological progression identified"
+          ],
+          [
+            "e",
+            "f",
+            "Transition to definitive curative therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Radical prostatectomy with bilateral pelvic **lymphadenectomy** is a curative-intent surgical standard for intermediate and high-risk localized prostate cancer. Extended pelvic **lymphadenectomy** removes external iliac, obturator, and internal iliac nodal packets, providing accurate pathological nodal staging and identifying micrometastatic disease requiring early multimodal adjuvant or salvage intervention.",
+      "say": "Radical prostatectomy with bilateral pelvic lymphadenectomy is a curative-intent surgical standard for intermediate and high-risk localized prostate cancer. Extended pelvic lymphadenectomy removes external iliac, obturator, and internal iliac nodal packets, providing accurate pathological nodal staging and identifying micrometastatic disease requiring early multimodal adjuvant or salvage intervention.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Risk Category",
+          "External Beam Radiotherapy (EBRT)",
+          "Androgen Deprivation Therapy (ADT) Duration"
+        ],
+        "rows": [
+          [
+            "Favourable Intermediate",
+            "EBRT (78 Gy) alone or Brachytherapy boost",
+            "None or optional 4 months short-term ADT"
+          ],
+          [
+            "Unfavourable Intermediate",
+            "EBRT (78 Gy) or EBRT + Brachytherapy",
+            "4 to 6 months short-term ADT (LHRH agonist/antagonist)"
+          ],
+          [
+            "High Risk / Very-High Risk",
+            "EBRT to prostate and pelvic lymph nodes",
+            "18 to 36 months long-term ADT"
+          ],
+          [
+            "Very-High Risk (STAMPEDE)",
+            "EBRT + long-term ADT",
+            "Add 2 years of abiraterone acetate + prednisone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive **external beam radiation** therapy combined with 18 to 36 months of long-term androgen deprivation therapy is the standard nonsurgical curative treatment for high-risk localized prostate cancer. In randomized trials from RTOG and EORTC, adding long-term **androgen deprivation therapy** to high-dose external beam radiation significantly prolonged metastasis-free survival and overall survival compared to radiation alone.",
+      "say": "Definitive external beam radiation therapy combined with 18 to 36 months of long-term androgen deprivation therapy is the standard nonsurgical curative treatment for high-risk localized prostate cancer. In randomized trials from RTOG and EORTC, adding long-term androgen deprivation therapy to high-dose external beam radiation significantly prolonged metastasis-free survival and overall survival compared to radiation alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard ADT + Radiotherapy (STAMPEDE Control)",
+          "items": [
+            "EBRT plus 3 years of GnRH agonist/antagonist monotherapy",
+            "Targeted to prostate and elective whole-pelvis lymph nodes",
+            "6-year metastasis-free survival 69%",
+            "6-year overall survival 77%"
+          ]
+        },
+        "right": {
+          "title": "Abiraterone + Prednisone Intensification",
+          "items": [
+            "EBRT + 3 years ADT + 2 years Abiraterone (1000 mg) + Prednisone (5 mg)",
+            "Dual testicular and adrenal/intratumoural androgen suppression",
+            "6-year metastasis-free survival 82% (HR 0.53, p < 0.0001)",
+            "6-year overall survival 86% (HR 0.60, statistically superior)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **STAMPEDE trial** established that adding 2 years of **abiraterone acetate plus prednisolone** to long-term androgen deprivation therapy and radiotherapy in very-high-risk or node-positive localized prostate cancer significantly improves metastasis-free survival. In the **STAMPEDE trial**, 6-year metastasis-free survival improved from 69% to 82%, confirming the benefit of upfront next-generation hormonal intensification.",
+      "say": "The STAMPEDE trial established that adding 2 years of abiraterone acetate plus prednisolone to long-term androgen deprivation therapy and radiotherapy in very-high-risk or node-positive localized prostate cancer significantly improves metastasis-free survival. In the STAMPEDE trial, 6-year metastasis-free survival improved from 69% to 82%, confirming the benefit of upfront next-generation hormonal intensification.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Post-Radical Prostatectomy Recurrence",
+          "items": [
+            "Total surgical extirpation removes all healthy prostate epithelium",
+            "Expected post-operative PSA is undetectable (< 0.1 ng/mL)",
+            "Recurrence defined as PSA >= 0.2 ng/mL confirmed by second test",
+            "Early salvage radiotherapy is most effective at PSA < 0.5 ng/mL"
+          ]
+        },
+        "right": {
+          "title": "Post-Radiotherapy Recurrence (Phoenix Definition)",
+          "items": [
+            "Healthy irradiated prostate parenchyma remains in situ",
+            "Residual benign tissue produces baseline nadir PSA level",
+            "Recurrence defined as PSA nadir + 2.0 ng/mL",
+            "Date of failure marked at time nadir + 2 is documented"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Biochemical recurrence after radical prostatectomy is defined as PSA 0.2 ng/mL or higher, warranting early **salvage radiotherapy**, whereas after radiotherapy it is defined by the Phoenix criteria of **nadir plus 2 ng/mL**. Initiating **salvage radiotherapy** to the prostatic bed at PSA levels under 0.5 ng/mL optimizes cure rates while preventing distant metastatic progression.",
+      "say": "Biochemical recurrence after radical prostatectomy is defined as PSA 0.2 ng/mL or higher, warranting early salvage radiotherapy, whereas after radiotherapy it is defined by the Phoenix criteria of nadir plus 2 ng/mL. Initiating salvage radiotherapy to the prostatic bed at PSA levels under 0.5 ng/mL optimizes cure rates while preventing distant metastatic progression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Biochemical Recurrence (PSA >= 0.2 post-RP)"
+          },
+          {
+            "id": "b",
+            "label": "Conventional CT and Bone Scan (Negative if PSA < 2.0)"
+          },
+          {
+            "id": "c",
+            "label": "68Ga-PSMA-11 or 18F-DCFPyL PET/CT"
+          },
+          {
+            "id": "d",
+            "label": "Local Prostatic Bed Recurrence Only"
+          },
+          {
+            "id": "e",
+            "label": "Oligometastatic Nodal or Bone Disease"
+          },
+          {
+            "id": "f",
+            "label": "Targeted Salvage Radiation +/- SBRT"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Low diagnostic yield at low PSA"
+          ],
+          [
+            "a",
+            "c",
+            "High sensitivity even at PSA 0.2-0.5 ng/mL"
+          ],
+          [
+            "c",
+            "d",
+            "Enables focused salvage bed radiation"
+          ],
+          [
+            "c",
+            "e",
+            "Identifies distant targets for metastasis-directed therapy"
+          ],
+          [
+            "d",
+            "f",
+            "High curative potential before PSA rises further"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prostate-specific membrane antigen **PSMA PET-CT** provides superior diagnostic accuracy compared to conventional CT and bone scintigraphy in high-risk localized staging and biochemical recurrence in the **proPSMA** trial. In proPSMA, gallium-68 PSMA-11 PET-CT exhibited a 27% absolute improvement in accuracy over conventional imaging, detecting occult nodal and distant skeletal metastases at sub-nanogram PSA levels.",
+      "say": "Prostate-specific membrane antigen PSMA PET-CT provides superior diagnostic accuracy compared to conventional CT and bone scintigraphy in high-risk localized staging and biochemical recurrence in the proPSMA trial. In proPSMA, gallium-68 PSMA-11 PET-CT exhibited a 27% absolute improvement in accuracy over conventional imaging, detecting occult nodal and distant skeletal metastases at sub-nanogram PSA levels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Patient Cohort",
+          "Randomised Arms Compared",
+          "Primary Finding / Conclusion"
+        ],
+        "rows": [
+          [
+            "RADICALS-RT",
+            "Post-RP with adverse features (pT3, positive margins)",
+            "Adjuvant Radiotherapy vs Early Salvage RT",
+            "No difference in 5-year biochemical progression-free survival (85% vs 88%)"
+          ],
+          [
+            "RAVES",
+            "Post-RP with positive margins or pT3a/b",
+            "Immediate Adjuvant RT vs Salvage RT at PSA 0.2",
+            "Salvage RT non-inferior; 50% of patients spared radiation entirely"
+          ],
+          [
+            "GETUG-AFU 17",
+            "Post-RP with pT3 and positive margins",
+            "Adjuvant RT + ADT vs Salvage RT + ADT",
+            "Identical 5-year event-free survival; early salvage has lower genitourinary toxicity"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dynamic kinetics of serum prostate-specific antigen distinguish indolent local failure from aggressive distant metastatic progression. PSA kinetics guide systemic therapy in biochemical recurrence, where a rapid **PSA doubling time** of less than 9 months or velocity over 2 ng/mL/year strongly predicts distant **metastatic progression and cancer-specific death**. Patients with rapid PSA doubling times require early imaging with PSMA-PET and consideration of early systemic hormonal therapy.",
+      "say": "Dynamic kinetics of serum prostate-specific antigen distinguish indolent local failure from aggressive distant metastatic progression. PSA kinetics guide systemic therapy in biochemical recurrence, where a rapid PSA doubling time of less than 9 months or velocity over 2 ng/mL/year strongly predicts distant metastatic progression and cancer-specific death. Patients with rapid PSA doubling times require early imaging with PSMA-PET and consideration of early systemic hormonal therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indolent Biochemical Recurrence",
+          "items": [
+            "PSA doubling time > 12 months",
+            "Interval to recurrence > 3 years post-definitive treatment",
+            "Low Gleason score (Grade Group 1-2) at initial pathology",
+            "Consistent with isolated local anastomotic relapse"
+          ]
+        },
+        "right": {
+          "title": "Aggressive Biochemical Recurrence",
+          "items": [
+            "PSA doubling time < 9 months",
+            "Interval to recurrence < 12 months post-prostatectomy",
+            "High Gleason score (Grade Group 4-5) or seminal vesicle invasion",
+            "High risk of distant micrometastatic osseous dissemination"
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "tx": "After radical prostatectomy, PSA should become **undetectable within about 6 weeks**. Persistent measurable PSA suggests residual or recurrent disease. In recurrence, PSMA PET helps localise disease, but it cannot detect low-volume microscopic spread, so a negative scan does not exclude nodal involvement. Serial PSA monitoring follows the patient after treatment.",
-   "say": "After radical prostatectomy, PSA should become undetectable within about 6 weeks. Persistent measurable PSA suggests residual or recurrent disease. In recurrence, PSMA PET helps localise disease, but it cannot detect low-volume microscopic spread, so a negative scan does not exclude nodal involvement. Serial PSA monitoring follows the patient after treatment.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/son-prostate-local-fig1.webp",
-    "alt": "Diagram showing post-prostatectomy PSA monitoring, biochemical recurrence, and PSMA PET imaging to localize disease, noting its limitations.",
-    "caption": "PSMA PET for biochemical recurrence after prostatectomy",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_e79015576269",
-  "q_1395e19b9e6b",
-  "q_58d03eb2c872"
- ],
- "src": [
-  "kb-reference-prostate-cancer"
- ],
- "refs": [
-  "NICE Guideline NG131: Prostate cancer: diagnosis and management",
-  "ProtecT trial (Hamdy et al., NEJM 2016)",
-  "Campbell-Walsh-Wein Urology (Wein et al., editors)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 897,
-  "itemN": 45
- }
+  ],
+  "quiz": [
+    "q_e79015576269",
+    "q_1395e19b9e6b",
+    "q_58d03eb2c872"
+  ]
 }

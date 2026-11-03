@@ -1,0 +1,288 @@
+{
+ "v": 1,
+ "module": "son-nmsc",
+ "subject": "ss-medical-oncology",
+ "title": "Non-melanoma skin cancers",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Basal cell carcinoma** BCC is the most common human cancer, driven by aberrant constitutive activation of the Hedgehog signaling pathway through PTCH1 loss-of-function or SMO activating mutations. PTCH1 encodes a transmembrane receptor that normally represses smoothened SMO. Pathogenic inactivation of PTCH1 releases SMO from tonic inhibition, promoting GLI1 and GLI2 nuclear transcription factor translocation that orchestrates malignant basaloid proliferation.",
+   "say": "Basal cell carcinoma BCC is the most common human cancer, driven by aberrant constitutive activation of the Hedgehog signaling pathway through PTCH1 loss-of-function or SMO activating mutations. PTCH1 encodes a transmembrane receptor that normally represses smoothened SMO. Pathogenic inactivation of PTCH1 releases SMO from tonic inhibition, promoting GLI1 and GLI2 nuclear transcription factor translocation that orchestrates malignant basaloid proliferation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Loss of PTCH1 on 9q22"
+     },
+     {
+      "id": "b",
+      "label": "Loss of Smoothened (SMO) repression"
+     },
+     {
+      "id": "c",
+      "label": "GLI1 and GLI2 nuclear transactivation"
+     },
+     {
+      "id": "d",
+      "label": "Basal cell carcinoma growth"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "UV mutation or germline hit"
+     ],
+     [
+      "b",
+      "c",
+      "constitutive SMO activation"
+     ],
+     [
+      "c",
+      "d",
+      "cell cycle and anti-apoptotic targets"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oral targeted agents provide non-surgical options for locally invasive or metastatic lesions. **Hedgehog pathway inhibitors** vismodegib and sonidegib bind smoothened SMO to achieve high objective response rates in locally advanced or metastatic basal cell carcinoma. In the ERIVANCE trial, vismodegib demonstrated an objective response rate of forty-three percent in locally advanced disease, with class-related toxicities including muscle spasms, alopecia, dysgeusia, and weight loss.",
+   "say": "Oral targeted agents provide non-surgical options for locally invasive or metastatic lesions. Hedgehog pathway inhibitors vismodegib and sonidegib bind smoothened SMO to achieve high objective response rates in locally advanced or metastatic basal cell carcinoma. In the ERIVANCE trial, vismodegib demonstrated an objective response rate of forty-three percent in locally advanced disease, with class-related toxicities including muscle spasms, alopecia, dysgeusia, and weight loss.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vismodegib (ERIVANCE Trial)",
+     "points": [
+      "Binds SMO receptor drug-binding pocket",
+      "Approved for locally advanced and metastatic BCC",
+      "43% ORR in locally advanced, 30% in metastatic",
+      "Common toxicities: muscle spasms, dysgeusia, alopecia"
+     ]
+    },
+    "right": {
+     "title": "Sonidegib (BOLT Trial)",
+     "points": [
+      "Selective oral SMO antagonist",
+      "Approved specifically for locally advanced BCC",
+      "Tissue distribution with long half-life",
+      "Monitored for creatine kinase elevation and rhabdomyolysis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extensive cumulative ultraviolet solar damage induces substantial neoantigen loads in cutaneous tumours. **Cutaneous squamous cell** carcinoma cSCC carries high ultraviolet radiation mutational burden, responding robustly to anti-PD-1 monoclonal antibodies cemiplimab and pembrolizumab. In the EMPOWER-CSCC 1 trial, cemiplimab induced an objective response rate of forty-seven percent with prolonged durability in patients with locally advanced or metastatic cSCC ineligible for curative surgery or radiotherapy.",
+   "say": "Extensive cumulative ultraviolet solar damage induces substantial neoantigen loads in cutaneous tumours. Cutaneous squamous cell carcinoma cSCC carries high ultraviolet radiation mutational burden, responding robustly to anti-PD-1 monoclonal antibodies cemiplimab and pembrolizumab. In the EMPOWER-CSCC 1 trial, cemiplimab induced an objective response rate of forty-seven percent with prolonged durability in patients with locally advanced or metastatic cSCC ineligible for curative surgery or radiotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunotherapy Agent",
+     "Pivotal Trial",
+     "Target / Mechanism",
+     "Clinical Landmark"
+    ],
+    "rows": [
+     [
+      "Cemiplimab",
+      "EMPOWER-CSCC 1",
+      "Anti-PD-1 monoclonal IgG4 antibody",
+      "47% ORR; first FDA/EMA approval in advanced cSCC"
+     ],
+     [
+      "Pembrolizumab",
+      "KEYNOTE-629",
+      "Anti-PD-1 monoclonal IgG4 antibody",
+      "50% ORR in locally advanced, durable disease control"
+     ],
+     [
+      "Platinum chemotherapy",
+      "Historical cohorts",
+      "Cisplatin / carboplatin doublets",
+      "Transient responses, significant renal/neural toxicity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary cutaneous neuroendocrine carcinomas exhibit aggressive locoregional and distant spread. **Merkel cell carcinoma** MCC is an aggressive cutaneous neuroendocrine carcinoma driven by Merkel cell polyomavirus MCPyV integration in 80% of European/US cases or chronic UV damage. Tumours express characteristic paranuclear dot-like cytokeratin 20 CK20 and neuroendocrine markers chromogranin and synaptophysin, but lack thyroid transcription factor 1 TTF-1, distinguishing MCC from metastatic small cell lung cancer.",
+   "say": "Primary cutaneous neuroendocrine carcinomas exhibit aggressive locoregional and distant spread. Merkel cell carcinoma MCC is an aggressive cutaneous neuroendocrine carcinoma driven by Merkel cell polyomavirus MCPyV integration in 80% of European/US cases or chronic UV damage. Tumours express characteristic paranuclear dot-like cytokeratin 20 CK20 and neuroendocrine markers chromogranin and synaptophysin, but lack thyroid transcription factor 1 TTF-1, distinguishing MCC from metastatic small cell lung cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MCPyV-Positive Merkel Cell Carcinoma",
+     "points": [
+      "Clonal integration of Merkel cell polyomavirus",
+      "Expression of Small T and Large T antigens",
+      "Low somatic mutation burden",
+      "Commoner in European and North American populations"
+     ]
+    },
+    "right": {
+     "title": "UV-Driven Merkel Cell Carcinoma",
+     "points": [
+      "Virus-negative etiology",
+      "Extremely high ultraviolet mutational signature",
+      "Frequent TP53 and RB1 mutations",
+      "High tumor mutational burden and neoantigen load"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immune checkpoint blockade provides definitive durable disease control in metastatic cutaneous neuroendocrine tumours. **Avelumab** anti-PD-L1 antibody induces rapid, durable objective responses in chemotherapy-refractory and treatment-naive metastatic Merkel cell carcinoma in the JAVELIN Merkel 200 trial. Responses were durable, with over seventy percent of responses lasting twelve months or longer, establishing front-line anti-PD-L1 monotherapy over cytotoxic chemotherapy.",
+   "say": "Immune checkpoint blockade provides definitive durable disease control in metastatic cutaneous neuroendocrine tumours. Avelumab anti-PD-L1 antibody induces rapid, durable objective responses in chemotherapy-refractory and treatment-naive metastatic Merkel cell carcinoma in the JAVELIN Merkel 200 trial. Responses were durable, with over seventy percent of responses lasting twelve months or longer, establishing front-line anti-PD-L1 monotherapy over cytotoxic chemotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Metastatic Merkel cell carcinoma"
+     },
+     {
+      "id": "b",
+      "label": "Avelumab 10 mg/kg IV q2w (JAVELIN Merkel 200)"
+     },
+     {
+      "id": "c",
+      "label": "Anti-PD-L1 + Fc-mediated ADCC"
+     },
+     {
+      "id": "d",
+      "label": "Durable long-term survival plateau"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "first-line systemic selection"
+     ],
+     [
+      "b",
+      "c",
+      "dual mechanism of action"
+     ],
+     [
+      "c",
+      "d",
+      "supersedes cytotoxic chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital DNA repair defects dramatically accentuate ultraviolet skin carcinogenesis. **Xeroderma pigmentosum** XP is an autosomal recessive disorder caused by defective nucleotide excision repair NER, conferring a 10000-fold increased risk of developing skin malignancies. Inability to excise cyclobutane pyrimidine dimers and 6-4 photoproducts leads to multiple early basal cell carcinomas, squamous cell carcinomas, and melanomas in childhood, mandating strict UV avoidance.",
+   "say": "Congenital DNA repair defects dramatically accentuate ultraviolet skin carcinogenesis. Xeroderma pigmentosum XP is an autosomal recessive disorder caused by defective nucleotide excision repair NER, conferring a 10000-fold increased risk of developing skin malignancies. Inability to excise cyclobutane pyrimidine dimers and 6-4 photoproducts leads to multiple early basal cell carcinomas, squamous cell carcinomas, and melanomas in childhood, mandating strict UV avoidance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "UV light creates pyrimidine dimers"
+     },
+     {
+      "id": "b",
+      "label": "Defective NER proteins (XPA through XPG)"
+     },
+     {
+      "id": "c",
+      "label": "Unrepaired bulky DNA photoproducts"
+     },
+     {
+      "id": "d",
+      "label": "10,000-fold skin cancer risk in childhood"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "solar radiation exposure"
+     ],
+     [
+      "b",
+      "c",
+      "loss of damage recognition / excision"
+     ],
+     [
+      "c",
+      "d",
+      "UV-signature CC to TT transition mutations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Constitutive germline Hedgehog pathway aberrations manifest with multiorgan developmental and neoplastic lesions. **Gorlin syndrome** nevoid basal cell carcinoma syndrome is caused by germline PTCH1 mutations, predisposing to dozens or hundreds of basal cell carcinomas, odontogenic keratocysts, and medulloblastomas. Skeletal abnormalities include bifid ribs, calcification of the falx cerebri, and palmar and plantar pits. Therapeutic radiation must be strictly avoided.",
+   "say": "Constitutive germline Hedgehog pathway aberrations manifest with multiorgan developmental and neoplastic lesions. Gorlin syndrome nevoid basal cell carcinoma syndrome is caused by germline PTCH1 mutations, predisposing to dozens or hundreds of basal cell carcinomas, odontogenic keratocysts, and medulloblastomas. Skeletal abnormalities include bifid ribs, calcification of the falx cerebri, and palmar and plantar pits. Therapeutic radiation must be strictly avoided.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Organ / System Involved",
+     "Diagnostic Criterion",
+     "Management Consideration"
+    ],
+    "rows": [
+     [
+      "Multiple basal cell carcinomas",
+      "Cutaneous (face, trunk)",
+      "Major criterion (early onset)",
+      "Surgical excision, vismodegib, avoid radiotherapy"
+     ],
+     [
+      "Odontogenic keratocysts",
+      "Mandible and maxilla",
+      "Major criterion (histologically proven)",
+      "Enucleation and jaw surveillance"
+     ],
+     [
+      "Palmar and plantar pits",
+      "Hands and feet",
+      "Major criterion (>=3 pits)",
+      "Clinical inspection"
+     ],
+     [
+      "Medulloblastoma (desmoplastic)",
+      "Cerebellum",
+      "Minor criterion (infancy peak)",
+      "Surgical resection and chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Precise histological margin control guarantees maximal cosmetic preservation and cure. **Mohs micrographic surgery** provides the highest cure rates for high-risk facial basal cell and squamous cell carcinomas by microscopically examining 100% of surgical margins intraoperatively. Fresh tissue is excised, mapped, frozen, and sectioned horizontally, allowing complete visualization of peripheral and deep margins while sparing critical healthy periorbital, nasal, and labial architecture.",
+   "say": "Precise histological margin control guarantees maximal cosmetic preservation and cure. Mohs micrographic surgery provides the highest cure rates for high-risk facial basal cell and squamous cell carcinomas by microscopically examining 100% of surgical margins intraoperatively. Fresh tissue is excised, mapped, frozen, and sectioned horizontally, allowing complete visualization of peripheral and deep margins while sparing critical healthy periorbital, nasal, and labial architecture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mohs Micrographic Surgery",
+     "points": [
+      "Horizontal frozen sections inspect 100% of margin",
+      "Highest cure rate (>99% primary, 95% recurrent)",
+      "Preserves maximum normal functional tissue",
+      "Indicated for high-risk facial 'H-zone' tumors"
+     ]
+    },
+    "right": {
+     "title": "Standard Bread-Loafing Excision",
+     "points": [
+      "Vertical sections evaluate <1% to 2% of margin",
+      "Standard 4 to 6 mm surgical margins required",
+      "Potential for false-negative margin assessment",
+      "Suitable for low-risk trunk and extremity lesions"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

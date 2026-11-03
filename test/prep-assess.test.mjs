@@ -20,6 +20,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import { createRequire } from "node:module";
 import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
 const require = createRequire(import.meta.url);
 const A = require("../prep-assess.js");
@@ -28,7 +29,7 @@ const P = require("../prep.js");
 const ROOT = new URL("../", import.meta.url);
 
 test("prep-profiles.js is the up-to-date compile of prep/assess/profiles/*.json", () => {
-  const out = execFileSync(process.execPath, [new URL("../tools/prep-profiles-build.mjs", import.meta.url).pathname, "--check"], { encoding: "utf8" });
+  const out = execFileSync(process.execPath, [fileURLToPath(new URL("../tools/prep-profiles-build.mjs", import.meta.url)), "--check"], { encoding: "utf8" });
   assert.match(out, /up to date/);
   const files = fs.readdirSync(new URL("prep/assess/profiles/", ROOT)).filter((f) => f.endsWith(".json")).map((f) => f.slice(0, -5)).sort();
   assert.deepEqual(PP.ids.slice().sort(), files);

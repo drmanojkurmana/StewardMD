@@ -1,0 +1,296 @@
+{
+ "v": 1,
+ "module": "son-gtn-rare",
+ "subject": "ss-medical-oncology",
+ "title": "Gestational trophoblastic neoplasia and rare gynaecological cancers",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Complete hydatidiform moles** are diploid, androgenetic 46,XX or 46,XY conceptuses lacking embryonic fetal tissue, carrying a 15% to 20% risk of malignant gestational trophoblastic neoplasia. They result from fertilization of an enucleated ovum by a single sperm that duplicates its genome or by dispermy. In contrast, partial moles are triploid 69,XXX or 69,XXY gestations containing fetal parts with under five percent malignant transformation risk.",
+   "say": "Complete hydatidiform moles are diploid, androgenetic 46,XX or 46,XY conceptuses lacking embryonic fetal tissue, carrying a 15% to 20% risk of malignant gestational trophoblastic neoplasia. They result from fertilization of an enucleated ovum by a single sperm that duplicates its genome or by dispermy. In contrast, partial moles are triploid gestations containing fetal parts with under five percent malignant transformation risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete Hydatidiform Mole",
+     "points": [
+      "Diploid 46,XX (90%) or 46,XY (androgenetic)",
+      "Diffuse hydropic villi, severe trophoblast hyperplasia",
+      "No embryonic or fetal tissue present",
+      "15% to 20% malignant GTN risk"
+     ]
+    },
+    "right": {
+     "title": "Partial Hydatidiform Mole",
+     "points": [
+      "Triploid 69,XXX, 69,XXY, or 69,XYY (diandric)",
+      "Focal villous hydrops and trophoblastic scalloping",
+      "Embryo or fetal parts present",
+      "Under 5% malignant GTN risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Serial quantitative serum human chorionic gonadotropin monitoring is mandatory following uterine evacuation of a molar pregnancy. **Post-molar GTN** is diagnosed by serum beta-hCG plateaus over 4 consecutive values across 3 weeks, consecutive rises over 2 weeks, or histological choriocarcinoma. Persistently elevated hCG beyond six months post-evacuation also establishes the diagnosis, requiring formal anatomical staging and risk scoring.",
+   "say": "Serial quantitative serum human chorionic gonadotropin monitoring is mandatory following uterine evacuation of a molar pregnancy. Post-molar GTN is diagnosed by serum beta-hCG plateaus over 4 consecutive values across 3 weeks, consecutive rises over 2 weeks, or histological choriocarcinoma. Persistently elevated hCG beyond six months post-evacuation also establishes the diagnosis, requiring formal anatomical staging and risk scoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Molar suction evacuation"
+     },
+     {
+      "id": "b",
+      "label": "Weekly serum beta-hCG surveillance"
+     },
+     {
+      "id": "c",
+      "label": "Plateau (4 values / 3 wks) or Rise (3 values / 2 wks)"
+     },
+     {
+      "id": "d",
+      "label": "Diagnose post-molar GTN & Stage"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "baseline chest X-ray / exam"
+     ],
+     [
+      "b",
+      "c",
+      "FIGO diagnostic criteria"
+     ],
+     [
+      "c",
+      "d",
+      "pelvic ultrasound, chest CT, brain MRI"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anatomical staging is integrated with prognostic risk factors to guide therapy. The **FIGO/WHO** prognostic scoring system stratifies GTN into low-risk score 0 to 6 managed with single-agent chemotherapy and high-risk score 7 or higher requiring combination regimens. Variables scored from zero to four include age, antecedent pregnancy type, interval from pregnancy, baseline hCG, tumour size, metastatic sites, and prior failed chemotherapy.",
+   "say": "Anatomical staging is integrated with prognostic risk factors to guide therapy. The FIGO/WHO prognostic scoring system stratifies GTN into low-risk score 0 to 6 managed with single-agent chemotherapy and high-risk score 7 or higher requiring combination regimens. Variables scored from zero to four include age, antecedent pregnancy type, interval from pregnancy, baseline hCG, tumour size, metastatic sites, and prior failed chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk Category",
+     "FIGO/WHO Score",
+     "Primary Systemic Treatment",
+     "Cure Rate"
+    ],
+    "rows": [
+     [
+      "Low-risk GTN",
+      "Score 0 to 6",
+      "Single-agent methotrexate or actinomycin D",
+      "> 98% to 100%"
+     ],
+     [
+      "High-risk GTN",
+      "Score 7 or higher",
+      "Multi-agent EMA-CO regimen",
+      "> 85% to 90%"
+     ],
+     [
+      "Ultra-high risk GTN",
+      "Score >= 12 or brain/liver mets",
+      "Induction EP followed by EMA-CO / surgical resection",
+      "> 70% to 80%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Low-risk gestational** trophoblastic neoplasia is treated with single-agent intramuscular methotrexate with folinic acid rescue or pulsed intravenous actinomycin D. The standard eight-day methotrexate regimen delivers 1 mg/kg on days 1, 3, 5, and 7, accompanied by folinic acid 0.1 mg/kg on days 2, 4, 6, and 8 every 2 weeks. Consolidation therapy is continued for two to three cycles past the first normal hCG reading.",
+   "say": "Low-risk gestational trophoblastic neoplasia is treated with single-agent intramuscular methotrexate with folinic acid rescue or pulsed intravenous actinomycin D. The standard eight-day methotrexate regimen delivers 1 mg/kg on days 1, 3, 5, and 7, accompanied by folinic acid 0.1 mg/kg on days 2, 4, 6, and 8 every 2 weeks. Consolidation therapy is continued for two to three cycles past the first normal hCG reading.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Low-risk GTN (Score 0-6)"
+     },
+     {
+      "id": "b",
+      "label": "Methotrexate + Folinic acid"
+     },
+     {
+      "id": "c",
+      "label": "Biochemical remission (hCG normal)"
+     },
+     {
+      "id": "d",
+      "label": "Consolidation (2-3 additional cycles)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "cycles every 14 days"
+     ],
+     [
+      "b",
+      "c",
+      "serial weekly hCG monitoring"
+     ],
+     [
+      "c",
+      "d",
+      "prevents occult relapse"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-risk gestational trophoblastic neoplasia is treated with multi-agent **EMA-CO** etoposide, methotrexate, actinomycin D, cyclophosphamide, and vincristine, curing over 90% of patients. EMA-CO is administered on days 1, 2, and 8 every 2 weeks. In patients with massive tumour burden, low-dose induction etoposide and cisplatin avoids massive acute tumour lysis or fatal haemorrhage before initiating full EMA-CO.",
+   "say": "High-risk gestational trophoblastic neoplasia is treated with multi-agent EMA-CO etoposide, methotrexate, actinomycin D, cyclophosphamide, and vincristine, curing over 90% of patients. EMA-CO is administered on days 1, 2, and 8 every 2 weeks. In patients with massive tumour burden, low-dose induction etoposide and cisplatin avoids massive acute tumour lysis or fatal haemorrhage before initiating full EMA-CO.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "EMA-CO Phase",
+     "Administration Timing",
+     "Chemotherapy Drugs",
+     "Supportive Care"
+    ],
+    "rows": [
+     [
+      "Etoposide, Methotrexate, Actinomycin",
+      "Days 1 and 2",
+      "Etoposide 100 mg/m2, Dactinomycin 0.5 mg, MTX",
+      "Folinic acid rescue on Day 2"
+     ],
+     [
+      "Cyclophosphamide, Vincristine",
+      "Day 8",
+      "Cyclophosphamide 600 mg/m2, Vincristine 1 mg/m2",
+      "Hydration and antiemetics"
+     ],
+     [
+      "Rest and recovery",
+      "Days 9 to 14",
+      "Hematopoietic count recovery",
+      "G-CSF support as clinically indicated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Placental site trophoblastic** tumour PSTT arises from intermediate trophoblast, secretes human placental lactogen hPL with low beta-hCG, and is relatively chemoresistant requiring hysterectomy. Unlike syncytiotrophoblastic choriocarcinomas, PSTT grows slowly, invades myometrium deeply, and metastasizes late. If disease spreads beyond the pelvis, intensive platinum-etoposide regimens like EP-EMA are required.",
+   "say": "Placental site trophoblastic tumour PSTT arises from intermediate trophoblast, secretes human placental lactogen hPL with low beta-hCG, and is relatively chemoresistant requiring hysterectomy. Unlike syncytiotrophoblastic choriocarcinomas, PSTT grows slowly, invades myometrium deeply, and metastasizes late. If disease spreads beyond the pelvis, intensive platinum-etoposide regimens like EP-EMA are required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Choriocarcinoma",
+     "points": [
+      "Derived from villous trophoblast",
+      "High beta-hCG (>100,000 IU/L)",
+      "High vascularity, early hematogenous spread",
+      "Exquisitely chemoresponsive to EMA-CO"
+     ]
+    },
+    "right": {
+     "title": "Placental Site Trophoblastic Tumour",
+     "points": [
+      "Derived from extravillous intermediate trophoblast",
+      "Low beta-hCG, elevated hPL and CD146",
+      "Relative resistance to single/multi-agent chemo",
+      "Total hysterectomy is primary treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Invasive **vulvar squamous cell** carcinoma spreading to regional groin lymph nodes mandates inguinal femoral lymphadenectomy or sentinel node biopsy for depth over 1 mm. Unilateral or bilateral lymphadenectomy is performed depending on primary tumour distance from midline. Ipsilateral inguinal lymph node involvement serves as the strongest predictor of disease-specific mortality, indicating adjuvant pelvic and groin radiotherapy.",
+   "say": "Invasive vulvar squamous cell carcinoma spreading to regional groin lymph nodes mandates inguinal femoral lymphadenectomy or sentinel node biopsy for depth over 1 mm. Unilateral or bilateral lymphadenectomy is performed depending on primary tumour distance from midline. Ipsilateral inguinal lymph node involvement serves as the strongest predictor of disease-specific mortality, indicating adjuvant pelvic and groin radiotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Vulvar invasive SCC (>1 mm invasion)"
+     },
+     {
+      "id": "b",
+      "label": "Radical local excision with 1 cm margins"
+     },
+     {
+      "id": "c",
+      "label": "Inguinofemoral lymphadenectomy / SLNB"
+     },
+     {
+      "id": "d",
+      "label": "Adjuvant groin/pelvic radiotherapy if nodal mets"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "adequate surgical margins"
+     ],
+     [
+      "b",
+      "c",
+      "separate triple incision technique"
+     ],
+     [
+      "c",
+      "d",
+      "indicated for >=2 micromets or 1 macromet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant **ovarian germ cell** tumours dysgerminoma, endodermal sinus tumour are exquisitely chemosensitive, curable with fertility-sparing surgery and BEP chemotherapy. Regimens combine bleomycin, etoposide, and cisplatin for three to four cycles. Unilateral salpingo-oophorectomy with preservation of the contralateral ovary and uterus is standard even in advanced stages, safely retaining endocrine and reproductive potential.",
+   "say": "Malignant ovarian germ cell tumours dysgerminoma, endodermal sinus tumour are exquisitely chemosensitive, curable with fertility-sparing surgery and BEP chemotherapy. Regimens combine bleomycin, etoposide, and cisplatin for three to four cycles. Unilateral salpingo-oophorectomy with preservation of the contralateral ovary and uterus is standard even in advanced stages, safely retaining endocrine and reproductive potential.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological Type",
+     "Characteristic Tumour Marker",
+     "Microscopic Hallmark",
+     "Surgical Principle"
+    ],
+    "rows": [
+     [
+      "Dysgerminoma",
+      "LDH, beta-hCG (low)",
+      "Fried-egg cells, lymphocytic fibrous septa",
+      "Fertility-sparing unilateral USO"
+     ],
+     [
+      "Endodermal sinus (Yolk sac)",
+      "Alpha-fetoprotein (AFP)",
+      "Schiller-Duval bodies, hyaline globules",
+      "Fertility-sparing surgery + adjuvant BEP"
+     ],
+     [
+      "Immature teratoma",
+      "AFP (occasional), normal hCG",
+      "Immature neuroectodermal rosettes",
+      "Graded by neuroepithelium quantity"
+     ],
+     [
+      "Embryonal carcinoma",
+      "AFP and beta-hCG elevated",
+      "Pleomorphic sheets, necrosis, mitoses",
+      "Fertility-sparing surgery + BEP"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "q_e51ce13b67b3",
+  "q_38a8c145157a",
+  "q_0d175fd2bb34"
+ ],
+ "gen": "hand"
+}

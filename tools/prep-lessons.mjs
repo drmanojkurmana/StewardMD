@@ -194,10 +194,166 @@ export function toStep(r) {
 // ---- gates -------------------------------------------------------------------------------------------------------
 export const CLEARED_MEDIA = [/^prep\/lessons\/media\/[a-z0-9-]+\.(?:svg|webp|png)$/, /^tokos\/media\/(?:fetal-planes|hc-biometry)\/[a-z0-9-]+\.(?:webp|png)$/];
 function visStrings(v) { return v ? LP.visText(v).split(/\s*\n\s*/).filter(Boolean) : []; }
+
+const NARR_VERBS = new Set([
+  "is", "are", "was", "were", "be", "been", "being", "have", "has", "had", "having",
+  "do", "does", "did", "done", "doing", "can", "could", "shall", "should", "will", "would",
+  "may", "might", "must", "need", "needs", "needed", "ought", "dare",
+  "go", "goes", "went", "gone", "going", "see", "sees", "saw", "seen", "seeing",
+  "take", "takes", "took", "taken", "taking", "give", "gives", "gave", "given", "giving",
+  "make", "makes", "made", "making", "come", "comes", "came", "coming",
+  "know", "knows", "knew", "known", "knowing", "find", "finds", "found", "finding",
+  "keep", "keeps", "kept", "keeping", "tell", "tells", "told", "telling",
+  "write", "writes", "wrote", "written", "writing", "lead", "leads", "led", "leading",
+  "grow", "grows", "grew", "grown", "growing", "build", "builds", "built", "building",
+  "send", "sends", "sent", "sending", "fall", "falls", "fell", "fallen", "falling",
+  "run", "runs", "ran", "running", "hold", "holds", "held", "holding",
+  "rise", "rises", "rose", "risen", "rising", "stand", "stands", "stood", "standing",
+  "win", "wins", "won", "winning", "lose", "loses", "lost", "losing",
+  "leave", "leaves", "left", "leaving", "pay", "pays", "paid", "paying",
+  "break", "breaks", "broke", "broken", "breaking", "cut", "cuts", "cutting",
+  "put", "puts", "putting", "let", "lets", "letting", "set", "sets", "setting",
+  "spread", "spreads", "spreading", "read", "reads", "reading",
+  "follow", "follows", "followed", "following", "undergo", "undergoes", "underwent", "undergone", "undergoing",
+  "present", "presents", "presented", "presenting", "cause", "causes", "caused", "causing",
+  "result", "results", "resulted", "resulting", "occur", "occurs", "occurred", "occurring",
+  "diagnose", "diagnoses", "diagnosed", "diagnosing", "perform", "performs", "performed", "performing",
+  "indicate", "indicates", "indicated", "indicating", "require", "requires", "required", "requiring",
+  "involve", "involves", "involved", "involving", "provide", "provides", "provided", "providing",
+  "develop", "develops", "developed", "developing", "reduce", "reduces", "reduced", "reducing",
+  "increase", "increases", "increased", "increasing", "prevent", "prevents", "prevented", "preventing",
+  "produce", "produces", "produced", "producing", "form", "forms", "formed", "forming",
+  "bind", "binds", "bound", "binding", "act", "acts", "acted", "acting",
+  "affect", "affects", "affected", "affecting", "assess", "assesses", "assessed", "assessing",
+  "identify", "identifies", "identified", "identifying", "classify", "classifies", "classified", "classifying",
+  "synthesize", "synthesizes", "synthesized", "synthesizing", "synthesise", "synthesises", "synthesised", "synthesising",
+  "express", "expresses", "expressed", "expressing", "secrete", "secretes", "secreted", "secreting",
+  "absorb", "absorbs", "absorbed", "absorbing", "excrete", "excretes", "excreted", "excreting",
+  "metabolize", "metabolizes", "metabolized", "metabolizing", "metabolise", "metabolises", "metabolised", "metabolising",
+  "inhibit", "inhibits", "inhibited", "inhibiting", "activate", "activates", "activated", "activating",
+  "stimulate", "stimulates", "stimulated", "stimulating", "eliminate", "eliminates", "eliminated", "eliminating",
+  "mediate", "mediates", "mediated", "mediating", "drain", "drains", "drained", "draining",
+  "supply", "supplies", "supplied", "supplying", "innervate", "innervates", "innervated", "innervating",
+  "cross", "crosses", "crossed", "crossing", "arise", "arises", "arose", "arisen", "arising",
+  "extend", "extends", "extended", "extending", "insert", "inserts", "inserted", "inserting",
+  "fail", "fails", "failed", "failing", "improve", "improves", "improved", "improving",
+  "worsen", "worsens", "worsened", "worsening", "recur", "recurs", "recurred", "recurring",
+  "invade", "invades", "invaded", "invading", "compress", "compresses", "compressed", "compressing",
+  "occlude", "occludes", "occluded", "occluding", "rupture", "ruptures", "ruptured", "rupturing",
+  "perforate", "perforates", "perforated", "perforating", "bleed", "bleeds", "bled", "bleeding",
+  "clot", "clots", "clotted", "clotting", "heal", "heals", "healed", "healing",
+  "scar", "scars", "scarred", "scarring", "repair", "repairs", "repaired", "repairing",
+  "excise", "excises", "excised", "excising", "resect", "resects", "resected", "resecting",
+  "reconstruct", "reconstructs", "reconstructed", "reconstructing", "graft", "grafts", "grafted", "grafting",
+  "transplant", "transplants", "transplanted", "transplanting", "implant", "implants", "implanted", "implanting",
+  "dose", "doses", "dosed", "dosing", "administer", "administers", "administered", "administering",
+  "inject", "injects", "injected", "injecting", "infuse", "infuses", "infused", "infusing",
+  "target", "targets", "targeted", "targeting", "block", "blocks", "blocked", "blocking",
+  "test", "tests", "tested", "testing", "separate", "separates", "separated", "separating",
+  "differ", "differs", "differed", "differing", "explain", "explains", "explained", "explaining",
+  "measure", "measures", "measured", "measuring", "store", "stores", "stored", "storing",
+  "carry", "carries", "carried", "carrying", "attach", "attaches", "attached", "attaching",
+  "link", "links", "linked", "linking", "resist", "resists", "resisted", "resisting",
+  "rely", "relies", "relied", "relying", "suggest", "suggests", "suggested", "suggesting",
+  "appear", "appears", "appeared", "appearing", "remain", "remains", "remained", "remaining",
+  "allow", "allows", "allowed", "allowing", "help", "helps", "helped", "helping",
+  "serve", "serves", "served", "serving", "start", "starts", "started", "starting",
+  "pass", "passes", "passed", "passing", "look", "looks", "looked", "looking",
+  "seem", "seems", "seemed", "seeming", "feel", "feels", "felt", "feeling",
+  "double", "doubles", "doubled", "doubling", "triple", "triples", "tripled", "tripling",
+  "correlate", "correlates", "correlated", "correlating",
+  "characterise", "characterises", "characterised", "characterising",
+  "characterize", "characterizes", "characterized", "characterizing",
+  "calculate", "calculates", "calculated", "calculating",
+  "elevate", "elevates", "elevated", "elevating",
+  "guide", "guides", "guided", "guiding",
+  "support", "supports", "supported", "supporting",
+  "reflect", "reflects", "reflected", "reflecting",
+  "remove", "removes", "removed", "removing",
+  "check", "checks", "checked", "checking",
+  "control", "controls", "controlled", "controlling",
+  "refer", "refers", "referred", "referring",
+  "grade", "grades", "graded", "grading",
+  "reserve", "reserves", "reserved", "reserving",
+  "shift", "shifts", "shifted", "shifting",
+  "rehearse", "rehearses", "rehearsed", "rehearsing",
+  "depend", "depends", "depended", "depending",
+  "track", "tracks", "tracked", "tracking",
+  "range", "ranges", "ranged", "ranging",
+  "release", "releases", "released", "releasing",
+  "argue", "argues", "argued", "arguing",
+  "decide", "decides", "decided", "deciding",
+  "confirm", "confirms", "confirmed", "confirming",
+  "suspect", "suspects", "suspected", "suspecting",
+  "choose", "chooses", "chose", "chosen", "choosing",
+  "differentiate", "differentiates", "differentiated", "differentiating",
+  "distinguish", "distinguishes", "distinguished", "distinguishing",
+  "point", "points", "pointed", "pointing",
+  "rest", "rests", "rested", "resting"
+]);
+
+export function sentenceHasVerb(s) {
+  const words = String(s || "").toLowerCase().replace(/[^a-z\s]/g, " ").split(/\s+/).filter(Boolean);
+  for (const w of words) {
+    if (NARR_VERBS.has(w)) return true;
+    if (w.length > 5 && (w.endsWith("ing") || w.endsWith("ed") || w.endsWith("ises") || w.endsWith("izes") || w.endsWith("ised") || w.endsWith("ized") || w.endsWith("ates") || w.endsWith("ated") || w.endsWith("ating"))) return true;
+  }
+  return false;
+}
+
+export function checkNarration(say) {
+  if (!say || typeof say !== "string") return ["no narration"];
+  const t = say.trim();
+  if (!t) return ["no narration"];
+  const sents = t.split(/[.?!]+/).map((s) => s.trim()).filter(Boolean);
+  if (!sents.length) return ["narration has no complete sentences"];
+
+  const words = t.split(/\s+/).filter(Boolean);
+  const avgWords = words.length / sents.length;
+  if (avgWords < 8) return [`average sentence length under 8 words (${avgWords.toFixed(1)} words)`];
+
+  const PLUR = "(?:[A-Za-z0-9]+s|feet|teeth)";
+  const musePattern = new RegExp("(?:^|[.?!]\\s*)(?:" + PLUR + "\\s+){2,}" + PLUR + "?\\s+is\\s+[^:.]{2,30}:\\s*", "i");
+  if (musePattern.test(t)) {
+    return ["plural-noun keyword chain before colon (garbled telegraphic style)"];
+  }
+
+  const tokenList = t.split(/\s+/);
+  let pluralRun = 0;
+  for (const tok of tokenList) {
+    const raw = tok.replace(/^[^a-zA-Z0-9]+|[^a-zA-Z0-9]+$/g, "");
+    const clean = raw.toLowerCase();
+    const isExcluded = ["is", "was", "has", "this", "thus", "as", "yes", "always", "sometimes", "versus", "less", "loss", "focus", "status", "analysis", "synthesis", "stenosis", "fibrosis", "necrosis", "thrombosis", "cirrhosis", "metastasis", "prognosis", "diagnosis", "sclerosis"].includes(clean);
+    if (clean.length > 3 && (clean.endsWith("s") || clean.endsWith("es")) && !isExcluded && !tok.includes(",") && !tok.includes(";") && !tok.includes(":") && !tok.includes("(")) {
+      pluralRun++;
+      if (pluralRun >= 4) return ["plural-noun keyword chain (4 consecutive plural words without punctuation)"];
+    } else {
+      pluralRun = 0;
+    }
+  }
+
+  if (/\bis\s+[^:]+:\s*[^.]+\.\s+[A-Z][a-z]+\s+[a-z]+\.\s*$/.test(t)) {
+    return ["garbled telegraphic pseudo-sentences with clipped ending"];
+  }
+
+  for (const s of sents) {
+    const sw = s.split(/\s+/).filter(Boolean);
+    if (sw.length >= 5 && !sentenceHasVerb(s)) {
+      return [`sentence has no verb: "${s.slice(0, 50)}..."`];
+    }
+  }
+
+  return [];
+}
+
 /* gateStep(step, ground) -> [reasons]; [] = passes every code gate. */
-export function gateStep(step, ground) {
+export function gateStep(step, ground, opts = {}) {
   if (!step) return ["empty step"];
   const out = LP.checkStep(step).map((x) => "shape: " + x);
+  if (opts.narration) {
+    const narr = checkNarration(step.say);
+    if (narr.length) narr.forEach((r) => out.push("narration: " + r));
+  }
   const all = [LP.plain(step.tx), step.say].concat(visStrings(step.vis)).join("\n");
   const ck = TEACH.check(all, ground, LEX);
   if (ck.numbers.length) out.push("numbers not in the source: " + ck.numbers.join(", "));
@@ -393,7 +549,10 @@ export async function main(argv = process.argv.slice(2), deps = {}) {
   if (args.check) {
     const l = JSON.parse(fs.readFileSync(path.resolve(root, args.check), "utf8"));
     const g = groundingFor(ctx, l.module), problems = LP.checkLesson(l).map((x) => "lesson: " + x);
-    l.steps.forEach((s, i) => gateStep(s, g.text).forEach((x) => problems.push(`step ${i + 1}: ${x}`)));
+    l.steps.forEach((s, i) => {
+      gateStep(s, g.text).forEach((x) => problems.push(`step ${i + 1}: ${x}`));
+      checkNarration(s.say).forEach((x) => problems.push(`step ${i + 1}: narration: ${x}`));
+    });
     log(`${l.module}: grounding ${g.from} (${g.words} words: ${g.src.join(", ")})`);
     log(problems.length ? problems.map((p) => "  FAIL " + p).join("\n") : "  every gate passes");
     return { module: l.module, problems, src: g.src };

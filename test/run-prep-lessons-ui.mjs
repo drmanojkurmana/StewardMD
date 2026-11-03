@@ -103,6 +103,12 @@ try {
   ok(await step() === "Step 1 of 8", "bar reads Step 1 of 8");
   ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-lsn-prog i"); return i.length===8 && document.querySelectorAll("#smdPrep .pn-lsn-prog i.on").length===1;`) === true, "segmented progress: 8 segments, 1 filled");
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-lsn-tx b").length >= 3 && !/\\*\\*/.test(document.querySelector("#smdPrep .pn-lsn-tx").textContent);`) === true, "bold key terms drawn, no ** left");
+  const pearlBg = await ev(`var p = document.querySelector("#smdPrep .pn-pearl"); return p ? getComputedStyle(p).backgroundColor : "";`);
+  if (process.env.PN_LIGHT) {
+    ok(pearlBg === "rgb(255, 255, 255)", "light theme lesson card background is white (#fff, follows app theme)");
+  } else {
+    ok(pearlBg === "rgb(13, 29, 35)", "dark theme lesson card background is dark (#0D1D23, follows app theme body.dark, not OS media query)");
+  }
   ok(await ev(`return document.querySelectorAll("#smdPrep .pn-vtbl tbody tr").length===5 && document.querySelectorAll("#smdPrep .pn-vtbl thead th").length===2;`) === true, "the table is real HTML: 2 columns, 5 rows");
   ok(await ev(`return !!document.querySelector("#smdPrep [data-act=l-prev]").disabled;`) === true, "Previous is disabled on the first step");
   ok(await ev(`return !!document.querySelector("#smdPrep [data-act=l-ask]");`) === true, "Ask MaiK shows on the web too (owner 2026-10-09: the sheet says where it works)");

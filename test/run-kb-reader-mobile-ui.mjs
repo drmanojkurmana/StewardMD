@@ -79,6 +79,22 @@ try {
       }
     }
   }
+  // iPad (2026-11-02): the body scroller spans the screen (scrollbar at the edge, side margins scroll), the reading column
+  // is centred and at most 960px wide, and a disease named only as a differential does not add its figure.
+  for (const [w, h] of [[1024, 1366], [1366, 1024], [820, 1180]]) {
+    await call("Emulation.setDeviceMetricsOverride", { width: w, height: h, deviceScaleFactor: 2, mobile: true });
+    await boot("");
+    for (const d of ["atrial_myxoma", "MENINGITIS"]) {
+      await open(d);
+      const fit = JSON.parse(await ev(FIT));
+      ok(fit.page && fit.body && fit.n === 0, `${d} @${w}: fits ${fit.n ? JSON.stringify(fit.clipped) : ""}`);
+      const g = JSON.parse(await ev(`(()=>{const b=document.querySelector('#dxMgmt .dx-mgmt-body').getBoundingClientRect(),c=document.querySelector('#dxMgmt .dx-reader-hero').getBoundingClientRect();return JSON.stringify({bw:b.width,cl:c.left,cr:innerWidth-c.right,cw:c.width})})()`));
+      ok(g.bw >= w - 2, `${d} @${w}: the scroller spans the screen (${Math.round(g.bw)}px)`);
+      ok(g.cw <= 961 && Math.abs(g.cl - g.cr) <= 2, `${d} @${w}: reading column centred, ${Math.round(g.cw)}px wide`);
+      if (d === "atrial_myxoma") ok(await ev(`!/endocarditis|Mitral stenosis|immune drugs/i.test((document.querySelector('#dxMgmt .kbr-figrow')||{}).textContent||'')`), `${d} @${w}: no figures for diseases named only as differentials`);
+      await ev(`document.querySelector('#dxMgmt .dx-mgmt-body').scrollTop=0`); await shot(`ipad-${w}-${d}`);
+    }
+  }
   // links into existing features (390 wide), on an infective syndrome, an infective reference disease and a non-infective one
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await boot("");
