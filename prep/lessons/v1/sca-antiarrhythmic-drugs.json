@@ -2,147 +2,184 @@
  "v": 1,
  "module": "sca-antiarrhythmic-drugs",
  "subject": "ss-cardiology",
- "title": "Antiarrhythmic Drugs: Classification, Class III Agents and Torsades",
- "minutes": 5,
+ "title": "Antiarrhythmic drugs: classes, proarrhythmia and the agents exams ask about",
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Antiarrhythmic drugs are classified by the **Vaughan Williams** scheme, which sorts agents by their main electrophysiological effect. Class I drugs block sodium channels, class II drugs block beta receptors, class III drugs block potassium channels and prolong repolarisation, and class IV drugs block calcium channels. Class III agents carry the greatest risk of **torsades de pointes**, so QT interval monitoring matters.",
-   "say": "Antiarrhythmic drugs are classified by the Vaughan Williams scheme, which sorts agents by their main electrophysiological effect. Class I drugs block sodium channels, class II drugs block beta receptors, class III drugs block potassium channels and prolong repolarisation, and class IV drugs block calcium channels. Class III agents carry the greatest risk of torsades de pointes, so QT interval monitoring matters.",
+   "tx": "The **Vaughan Williams** scheme groups drugs by the current they block. Class 1 drugs block fast sodium entry: class 1a quinidine and procainamide, class 1b lidocaine and mexiletine, and class 1c flecainide and propafenone. Class 2 drugs are beta blockers. Class 3 drugs are **potassium channel blockers** such as amiodarone, sotalol and dofetilide. Class 4 drugs, verapamil and diltiazem, slow the L type calcium current. The ventricular action potential shows where those currents sit.",
+   "say": "The Vaughan Williams scheme groups antiarrhythmic drugs by the current they block. Class 1 drugs block fast sodium entry, class 2 drugs are beta blockers, class 3 drugs block potassium channels, and class 4 drugs slow the L type calcium current. The ventricular action potential diagram shows where those currents sit during the spike and during recovery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Diagram of a ventricular myocyte action potential beside a sinoatrial pacemaker potential, with sodium, calcium and potassium currents.",
+    "caption": "Cardiac action potential currents that Vaughan Williams classes block. StewardMD original."
+   }
+  },
+  {
+   "tx": "The **CAST trial** tested flecainide and encainide after myocardial infarction and found more deaths, not fewer. Class 1c sodium block binds tightly in scarred muscle, slows conduction, and lets re entry sustain. That is why class 1c drugs are avoided in **structural heart disease**, a prior infarct, or a reduced ejection fraction. They remain options only for selected patients with a normal heart and atrial fibrillation, after ischaemia has been excluded.",
+   "say": "The CAST trial tested flecainide and encainide after myocardial infarction and found more deaths, not fewer. Class 1c sodium block slows conduction inside scar and lets re entry continue. That is why these drugs are avoided in structural heart disease, a prior infarct, or a reduced ejection fraction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Class 1c, normal heart",
+     "points": [
+      "Flecainide or propafenone may be considered for atrial fibrillation when the ventricle and the coronaries are normal.",
+      "Still watch for atrial flutter with 1 to 1 conduction, and combine with a drug that slows the node."
+     ]
+    },
+    "right": {
+     "title": "Class 1c, scar or weak ventricle",
+     "points": [
+      "CAST showed higher mortality after infarction.",
+      "Do not use flecainide or propafenone in structural heart disease or heart failure."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Amiodarone** carries electrophysiologic properties of all 4 Vaughan Williams classes, which is why it can hold sinus rhythm when other drugs fail, including in heart failure with reduced ejection fraction. The cost is multi-organ toxicity: **pulmonary fibrosis**, thyroid dysfunction (hypothyroidism and hyperthyroidism), corneal deposits, hepatitis and slate grey skin. Thyrotoxicosis splits into type 1, iodine driven, and type 2 destructive thyroiditis. Serial monitoring of lungs, thyroid, liver and eyes is essential.",
+   "say": "Amiodarone carries properties of all four Vaughan Williams classes and is safe in heart failure with reduced ejection fraction. Its trade-off is multi-organ toxicity affecting lungs, thyroid, liver, eyes and skin. Both hypothyroidism and hyperthyroidism occur, with thyrotoxicosis divided into type 1 iodine driven and type 2 destructive thyroiditis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amiodarone-induced-thyrotoxicosis-fig1.webp",
+    "alt": "Two thyroid glands: a hypervascular goitre from iodine excess, and a destroyed gland with absent blood flow from amiodarone thyroiditis.",
+    "caption": "Amiodarone thyrotoxicosis, type 1 iodine excess versus type 2 destructive thyroiditis. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Dronedarone** was built as an amiodarone analogue without iodine, so thyroid and lung toxicity are less of the story. It is not a safer amiodarone for sick hearts. **ANDROMEDA** stopped early because deaths rose in decompensated heart failure, and PALLAS showed harm in permanent atrial fibrillation. Those two groups are strict contraindications. In a patient with paroxysmal atrial fibrillation and a stable ventricle, dronedarone is only one option among rhythm drugs, not the default in heart failure.",
+   "say": "Dronedarone was built as an amiodarone analogue without iodine, so thyroid and lung toxicity are less prominent. ANDROMEDA stopped early because deaths rose in decompensated heart failure, and PALLAS showed harm in permanent atrial fibrillation. Those two situations are strict contraindications.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amiodarone",
+     "points": [
+      "Iodinated. All 4 classes. Used in heart failure with reduced ejection fraction when a rhythm drug is required.",
+      "Lung, thyroid, liver, cornea and skin need a schedule of checks."
+     ]
+    },
+    "right": {
+     "title": "Dronedarone",
+     "points": [
+      "No iodine, so less thyroid and lung toxicity.",
+      "ANDROMEDA and PALLAS: do not use in decompensated heart failure or permanent atrial fibrillation."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sotalol** is a nonselective beta blocker with class 3 rapid delayed rectifier, IKr, blocking activity. **Reverse use dependence** means potassium block and QT prolongation grow more pronounced at slower heart rates, heightening torsades risk during bradycardia. Start it in hospital under continuous telemetry. Discontinue therapy or reduce the dose if the QTc interval stretches excessively, and replete potassium and magnesium immediately.",
+   "say": "Sotalol combines nonselective beta blockade with class 3 rapid delayed rectifier potassium current inhibition. Reverse use dependence causes greater action potential prolongation at slower heart rates, which raises torsades de pointes risk. You should initiate therapy in hospital with continuous telemetry, monitor serial intervals closely, and stop the drug if torsades appears.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
+    "alt": "Electrocardiogram of a rapid irregular wide complex rhythm whose QRS height changes from beat to beat.",
+    "caption": "Polymorphic ventricular tachycardia, the rhythm class 3 drugs can provoke. Image: Panthro, public domain, Wikimedia Commons."
+   }
+  },
+  {
+   "tx": "**Dofetilide** is a **pure selective IKr** blocker, without the beta blocking or sodium blocking baggage of sotalol or amiodarone. The kidney clears it, so the dose is chosen from creatinine clearance and then checked in hospital with serial QT measurements. Unlike class 1c drugs, it is accepted in patients with heart failure or a low ejection fraction, provided the QT and the potassium stay in range. Outpatient initiation is not appropriate.",
+   "say": "Dofetilide is a pure selective blocker of the rapid delayed rectifier potassium current, without clinically useful beta blockade. The kidney clears it, so the dose follows creatinine clearance and is started in hospital with serial QT checks. It may be used in heart failure when the QT and the potassium stay safe.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Class",
-     "Typical agents",
-     "Main action"
+     "Drug",
+     "Channel",
+     "Where it is started",
+     "Heart failure"
     ],
     "rows": [
      [
-      "I",
-      "Flecainide, propafenone",
-      "Block sodium channels"
+      "Sotalol",
+      "IKr plus beta block",
+      "Inpatient telemetry",
+      "Avoid in HFrEF (negative inotrope, torsades risk)"
      ],
      [
-      "II",
-      "Metoprolol",
-      "Block beta receptors"
+      "Dofetilide",
+      "Pure selective IKr",
+      "Inpatient, renal dose",
+      "Acceptable if QT and potassium are watched"
      ],
      [
-      "III",
-      "Dofetilide, sotalol, amiodarone",
-      "Block potassium channels"
-     ],
-     [
-      "IV",
-      "Verapamil",
-      "Block calcium channels"
+      "Flecainide",
+      "Sodium, class 1c",
+      "Selected outpatients",
+      "Avoid. CAST harm after infarction"
      ]
     ]
    }
   },
   {
-   "tx": "Acquired QT prolongation with **torsades de pointes** is managed step by step. Start with intravenous magnesium sulfate, usually 2 grams. If the rhythm persists or the heart rate is low, use overdrive pacing or isoproterenol to raise the rate and shorten the QT interval. Defibrillate if the patient is unstable, and stop the offending drug.",
-   "say": "Acquired QT prolongation with torsades de pointes is managed step by step. Start with intravenous magnesium sulfate, usually 2 grams. If the rhythm persists or the heart rate is low, use overdrive pacing or isoproterenol to raise the rate and shorten the QT interval. Defibrillate if the patient is unstable, and stop the offending drug.",
+   "tx": "**Adenosine** binds **A1 adenosine receptors** on the atrioventricular node. A G protein opens inward rectifier potassium channels (IKAch) causing hyperpolarisation, which abruptly terminates **AV nodal-dependent reentrant tachycardias** (AVNRT and orthodromic AVRT). Its half life is under 10 seconds. It can also terminate cAMP-mediated triggered outflow tract ventricular tachycardia, but not scar reentrant VT. In pre-excited atrial fibrillation, it is contraindicated because rapid accessory conduction can provoke ventricular fibrillation.",
+   "say": "Adenosine binds A1 adenosine receptors on the atrioventricular node, opens inward rectifier potassium channels, and hyperpolarises the node so AV nodal-dependent reentrant tachycardias abruptly stop. The half life is under 10 seconds. It terminates triggered outflow tract ventricular tachycardia, but not scar reentrant circuits, and it is contraindicated in pre-excited atrial fibrillation.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "a",
-      "label": "Torsades"
+      "id": "n1",
+      "label": "Regular narrow complex tachycardia"
      },
      {
-      "id": "b",
-      "label": "IV magnesium 2 g"
+      "id": "n2",
+      "label": "Rapid IV adenosine bolus"
      },
      {
-      "id": "c",
-      "label": "Persists or slow rate?"
+      "id": "n3",
+      "label": "Terminates: AVNRT or AVRT"
      },
      {
-      "id": "d",
-      "label": "Overdrive pacing or isoproterenol"
-     },
-     {
-      "id": "e",
-      "label": "Defibrillate if unstable"
+      "id": "n4",
+      "label": "Transient AV block: unmasks flutter or AT"
      }
     ],
     "edges": [
      [
-      "a",
-      "b"
+      "n1",
+      "n2"
      ],
      [
-      "b",
-      "c"
+      "n2",
+      "n3",
+      "terminates"
      ],
      [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
+      "n2",
+      "n4",
+      "unmasks"
      ]
     ]
    }
   },
   {
-   "tx": "**Ibutilide** is a class III agent given intravenously to convert recent atrial fibrillation or flutter to sinus rhythm. It prolongs the action potential by slowing the late inward sodium current and blocking IKr. Structural heart disease is a contraindication. Monitor the ECG for 4 hours after infusion. No specific antidote exists, so treat toxicity with magnesium and supportive resuscitation.",
-   "say": "Ibutilide is a class III agent given intravenously to convert recent atrial fibrillation or flutter to sinus rhythm. It prolongs the action potential by slowing the late inward sodium current and blocking IKr. Structural heart disease is a contraindication. Monitor the ECG for 4 hours after infusion. No specific antidote exists, so treat toxicity with magnesium and supportive resuscitation.",
+   "tx": "**Ibutilide** is an intravenous **Class III agent** used to stop atrial flutter or recent atrial fibrillation when a shock is not the first move. It increases a slow inward sodium current and blocks delayed rectifier potassium channels, so the action potential and the QT both lengthen. That is the same reason torsades follows a few percent of infusions. Give it where the rhythm can be defibrillated, keep potassium and magnesium normal, and watch the monitor for several hours after the dose.",
+   "say": "Ibutilide is an intravenous class 3 agent used to stop atrial flutter or recent atrial fibrillation. It promotes a slow inward sodium current and blocks potassium channels, so the action potential and the QT both lengthen. Give it where the rhythm can be defibrillated, and watch the monitor for torsades for several hours.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/sca-antiarrhythmic-drugs-fig1.webp",
-    "alt": "Diagram of cardiac action potential showing Ibutilide's IKr and late Na+ current block, prolonging repolarization, with ECG examples of QT prolongation and Torsades.",
-    "caption": "Ibutilide prolongs repolarization, risking QT prolongation and Torsades. Image: Ksheka, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 1.8589
-   }
-  },
-  {
-   "tx": "**Use dependence** means a drug blocks channels more at faster heart rates, which is typical of class I agents such as flecainide. **Reverse use dependence** is the opposite: block increases at slow rates. This explains why bradycardia raises the risk of torsades with class III drugs such as sotalol and dofetilide, so sotalol is started in hospital with QT checks.",
-   "say": "Use dependence means a drug blocks channels more at faster heart rates, which is typical of class I agents such as flecainide. Reverse use dependence is the opposite: block increases at slow rates. This explains why bradycardia raises the risk of torsades with class III drugs such as sotalol and dofetilide, so sotalol is started in hospital with QT checks.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Use dependence",
-     "points": [
-      "Block grows at faster rates",
-      "Typical of class I agents",
-      "Suits tachycardia control"
-     ]
-    },
-    "right": {
-     "title": "Reverse use dependence",
-     "points": [
-      "Block grows at slow rates",
-      "Typical of class III agents",
-      "Raises torsades risk in bradycardia"
-     ]
-    }
+    "alt": "Ventricular action potential. The dotted trace repolarises later than the solid trace, which is the effect of blocking the delayed potassium current.",
+    "caption": "Delayed repolarisation, the ibutilide effect that lengthens the QT. Image: Ksheka, CC BY-SA 3.0, Wikimedia Commons."
    }
   }
  ],
- "quiz": [
-  "q_999bcdb2ab00",
-  "q_03714a7eb45e",
-  "q_126f1ca79054"
+ "quiz": [],
+ "src": [
+  "ss-c-antiarrhythmic-ground"
  ],
- "src": [],
  "refs": [
-  "Katzung's Basic and Clinical Pharmacology (Katzung BG, Trevor AJ)"
+  "Braunwald 12e, therapy for cardiac arrhythmias",
+  "ESC 2020 atrial fibrillation guideline (drug safety sections)",
+  "CAST Investigators, N Engl J Med 1991"
  ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
+ "gen": "hand",
  "checks": {
   "shape": true,
   "numbers": true,
   "drugs": true,
   "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 24
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
  }
 }

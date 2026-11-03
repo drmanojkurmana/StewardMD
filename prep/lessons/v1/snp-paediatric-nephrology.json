@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "snp-paediatric-nephrology",
+ "title": "Paediatric nephrology essentials",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Primary idiopathic nephrotic syndrome in childhood is **steroid-sensitive** (**SSNS**) in over **85%** to **90%** of presentations, exhibiting dramatic proteinuria remission with oral glucocorticoids. Histopathologically, **minimal change disease** accounts for greater than **80%** of cases presenting between ages **1** and **6** years, presenting with heavy selective proteinuria and absence of macroscopic hematuria.",
+   "say": "Primary idiopathic nephrotic syndrome in childhood is steroid-sensitive in over 85% to 90% of presentations, exhibiting dramatic proteinuria remission with oral glucocorticoids. Histopathologically, minimal change disease accounts for greater than 80% of cases presenting between ages 1 and 6 years, presenting with heavy selective proteinuria and absence of macroscopic hematuria.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-nephrotic.webp",
+    "alt": "Pediatric Nephrotic Syndrome Tetrad and Pathophysiology",
+    "caption": "Clinical tetrad and podocyte foot process effacement in childhood nephrotic syndrome (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "In children presenting with primary **steroid-resistant nephrotic syndrome** (**SRNS**), monogenic mutations in essential podocyte architectural genes account for up to **30%** of cases. Genetic evaluation frequently uncovers mutations in **NPHS1** (encoding nephrin), **NPHS2** (encoding podocin), the Wilms tumor suppressor gene **WT1**, or the basement membrane laminin gene **LAMB2**.",
+   "say": "In children presenting with primary steroid-resistant nephrotic syndrome, monogenic mutations in essential podocyte architectural genes account for up to 30% of cases. Genetic evaluation frequently uncovers mutations in NPHS1 encoding nephrin, NPHS2 encoding podocin, the Wilms tumor suppressor gene WT1, or the basement membrane laminin gene LAMB2.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Genetic SRNS Podocytopathies",
+     "points": [
+      "NPHS1 (nephrin) and NPHS2 (podocin)",
+      "WT1 transcription factor mutations",
+      "Refractory to cytotoxic immunosuppression",
+      "Low risk of post-transplant FSGS recurrence"
+     ]
+    },
+    "right": {
+     "title": "Immunological Idiopathic SRNS",
+     "points": [
+      "Putative circulating permeability factors",
+      "May respond to calcineurin inhibitors",
+      "High risk of post-transplant recurrence (30-50%)",
+      "Managed with plasma exchange and rituximab"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infantile **Congenital nephrotic syndrome of the Finnish type** (**CNF**) is an autosomal recessive disorder caused by biallelic mutations in **NPHS1**, disrupting the slit diaphragm scaffold protein **nephrin**. Presenting with massive in utero proteinuria, an extraordinarily **huge placenta** exceeding **25%** of birth weight, and severe anasarca within the first **3** months of life.",
+   "say": "Infantile Congenital nephrotic syndrome of the Finnish type is an autosomal recessive disorder caused by biallelic mutations in NPHS1, disrupting the slit diaphragm scaffold protein nephrin. It presents with massive in utero proteinuria, an extraordinarily huge placenta exceeding 25% of birth weight, and severe anasarca within the first 3 months of life.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Biallelic NPHS1 mutations in nephrin"
+     },
+     {
+      "id": "b",
+      "label": "Placenta > 25% of birth weight, severe prenatal proteinuria"
+     },
+     {
+      "id": "c",
+      "label": "Refractory nephrotic syndrome requiring bilateral nephrectomy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dominant point mutations in the zinc-finger region of the **WT1 gene** involving exon **8** or **9** cause **Denys-Drash syndrome**. Clinical presentation is defined by the diagnostic triad of early-onset **diffuse mesangial sclerosis** (**DMS**), male pseudohermaphroditism with **XY disorder of sex development**, and an extremely high risk of embryonic **Wilms tumor**.",
+   "say": "Dominant point mutations in the zinc-finger region of the WT1 gene involving exon 8 or 9 cause Denys-Drash syndrome. Clinical presentation is defined by the diagnostic triad of early-onset diffuse mesangial sclerosis, male pseudohermaphroditism with XY disorder of sex development, and an extremely high risk of embryonic Wilms tumor.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-wagr.webp",
+    "alt": "WAGR syndrome and WT1 gene-associated renal dysgenesis",
+    "caption": "WT1 zinc-finger mutations, diffuse mesangial sclerosis, and Wilms tumor risk (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Alternative splice donor site mutations in intron **9** of the **WT1** gene produce **Frasier syndrome**, which characteristically presents with late-onset steroid-resistant nephrotic syndrome with **FSGS** histology. Affected individuals demonstrate complete male sex reversal (**46,XY females**) with streak gonads and high predisposition to developing malignant **gonadoblastoma**.",
+   "say": "Alternative splice donor site mutations in intron 9 of the WT1 gene produce Frasier syndrome, which characteristically presents with late-onset steroid-resistant nephrotic syndrome with FSGS histology. Affected individuals demonstrate complete male sex reversal with streak gonads and high predisposition to developing malignant gonadoblastoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Frasier Syndrome",
+     "points": [
+      "WT1 intron 9 splice-site donor mutation",
+      "FSGS histology with late-onset nephrotic syndrome",
+      "46,XY complete sex reversal (streak gonads)",
+      "High lifetime risk of gonadoblastoma"
+     ]
+    },
+    "right": {
+     "title": "Denys-Drash Syndrome",
+     "points": [
+      "WT1 exon 8 or 9 missense point mutation",
+      "Early-onset diffuse mesangial sclerosis (DMS)",
+      "Ambiguous genitalia / male pseudohermaphroditism",
+      "Extreme early risk of Wilms tumor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In male infants, **Posterior urethral valves** (**PUV**) represent the most frequent cause of severe congenital lower urinary tract obstruction. Classical antenatal sonographic features demonstrate bilateral **hydroureteronephrosis**, marked oligohydramnios, and a massively distended, thick-walled bladder with a dilated posterior urethra producing the pathognomonic **keyhole sign**.",
+   "say": "In male infants, Posterior urethral valves represent the most frequent cause of severe congenital lower urinary tract obstruction. Classical antenatal sonographic features demonstrate bilateral hydroureteronephrosis, marked oligohydramnios, and a massively distended, thick-walled bladder with a dilated posterior urethra producing the pathognomonic keyhole sign.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Congenital posterior urethral valve leaflets"
+     },
+     {
+      "id": "b",
+      "label": "Bladder dilation with pathognomonic keyhole sign"
+     },
+     {
+      "id": "c",
+      "label": "Urgent endoscopic transurethral valve ablation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pediatric hypertension is defined statistically by systolic or diastolic blood pressure >= **95th percentile** for child age, sex, and height on **3** or more separate visits. Unlike essential hypertension in adults, secondary hypertension accounts for over 85% of childhood cases, with underlying **reflux nephropathy** and glomerulonephritis representing the predominant etiologies.",
+   "say": "Pediatric hypertension is defined statistically by systolic or diastolic blood pressure at or above the 95th percentile for child age, sex, and height on 3 or more separate visits. Unlike essential hypertension in adults, secondary hypertension accounts for over 85% of childhood cases, with underlying reflux nephropathy and glomerulonephritis representing the predominant etiologies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood Pressure Category",
+     "Pediatric Percentile Definition",
+     "Recommended Clinical Action"
+    ],
+    "rows": [
+     [
+      "Normal blood pressure",
+      "< 90th percentile for age, sex, height",
+      "Routine annual surveillance screening"
+     ],
+     [
+      "Elevated blood pressure",
+      ">= 90th to < 95th percentile",
+      "Lifestyle interventions, recheck in 6 months"
+     ],
+     [
+      "Stage 1 Hypertension",
+      ">= 95th percentile to 95th + 12 mmHg",
+      "Investigate secondary etiologies, start therapy"
+     ],
+     [
+      "Childhood hypertension",
+      "Associated with Childhood hypertension",
+      "Associated with Childhood hypertension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary monosymptomatic **nocturnal enuresis** in children aged **5** years or older arises from nocturnal polyuria, bladder detrusor overactivity, and impaired arousal from sleep. Initial non-pharmacological management utilizes **enuresis alarm** conditioning, with oral **desmopressin** (melt formulation) serving as effective first-line medical therapy.",
+   "say": "Primary monosymptomatic nocturnal enuresis in children aged 5 years or older arises from nocturnal polyuria, bladder detrusor overactivity, and impaired arousal from sleep. Initial non-pharmacological management utilizes enuresis alarm conditioning, with oral desmopressin serving as effective first-line medical therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Nocturnal polyuria and high arousal threshold in child >= 5 years"
+     },
+     {
+      "id": "b",
+      "label": "First-line behavioral conditioning with enuresis alarm"
+     },
+     {
+      "id": "c",
+      "label": "Oral desmopressin melt formulation for rapid response"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 87",
+  "Nelson Textbook of Pediatrics 22e Ch. 552",
+  "Brenner and Rector The Kidney 11e Ch. 77"
+ ]
+}

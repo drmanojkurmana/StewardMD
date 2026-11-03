@@ -1,139 +1,155 @@
 {
- "v": 1,
- "module": "sne-acquired-neuropathies",
- "subject": "ss-neurology",
- "title": "Acquired, metabolic and toxic neuropathies: a high-yield overview",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Acquired neuropathies are often length-dependent, so they start in the longest nerves, usually the feet. **Distal symmetric polyneuropathy** is the commonest diabetic neuropathy and typically begins with distal sensory and autonomic fibres, then progresses proximally. About 10 to 20 percent of people already have neuropathy when type 2 diabetes is first diagnosed, so screening at diagnosis is important.",
-   "say": "Acquired neuropathies are often length dependent, so they start in the longest nerves, usually the feet. Distal symmetric polyneuropathy is the commonest diabetic neuropathy and typically begins with distal sensory and autonomic fibres, then progresses proximally. About 10 to 20 percent of people already have neuropathy when type 2 diabetes is first diagnosed, so screening at diagnosis is important.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Length-dependent polyneuropathy",
-     "Mononeuritis multiplex"
-    ],
-    "rows": [
-     [
-      "Pattern",
-      "Symmetric, distal to proximal",
-      "Asymmetric, named nerves"
-     ],
-     [
-      "Onset",
-      "Gradual",
-      "Sequential or simultaneous"
-     ],
-     [
-      "Typical cause",
-      "Diabetes, B12 lack, toxins",
-      "Vasculitis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Small fibre neuropathy** presents with burning pain and loss of pain and temperature sensation, while vibration and position sense remain intact. Nerve conduction studies are often normal, so the diagnosis rests on clinical assessment and **skin biopsy** showing reduced intraepidermal nerve fibre density. Sensory ganglionopathy, by contrast, causes profound proprioceptive loss with non-length-dependent distribution.",
-   "say": "Small fibre neuropathy presents with burning pain and loss of pain and temperature sensation, while vibration and position sense remain intact. Nerve conduction studies are often normal, so the diagnosis rests on clinical assessment and skin biopsy showing reduced intraepidermal nerve fibre density. Sensory ganglionopathy, by contrast, causes profound proprioceptive loss with a non length dependent distribution.",
-   "vis": null
-  },
-  {
-   "tx": "**Mononeuritis multiplex** is the hallmark of **vasculitic neuropathy**, caused by inflammation or occlusion of the vasa nervorum. Causing focal ischaemia and axonal loss, it demands prompt workup for systemic vasculitis. Standard initial treatment combines corticosteroids with cyclophosphamide or rituximab to prevent irreversible axonal damage, rather than waiting for the disease to declare itself.",
-   "say": "Mononeuritis multiplex is the hallmark of vasculitic neuropathy, caused by inflammation or occlusion of the vasa nervorum. Causing focal ischaemia and axonal loss, it demands prompt workup for systemic vasculitis. Standard initial treatment combines corticosteroids with cyclophosphamide or rituximab to prevent irreversible axonal damage, rather than waiting for the disease to declare itself.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Sequential nerve deficits"
-     },
-     {
-      "id": "b",
-      "label": "Urgent vasculitis workup"
-     },
-     {
-      "id": "c",
-      "label": "Steroids plus cyclophosphamide or rituximab"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Diabetic lumbosacral radiculoplexus neuropathy**, also called diabetic amyotrophy, causes acute severe thigh pain followed by proximal weakness and weight loss. It is thought to involve microvasculitis and ischaemia. It typically affects older patients with lower body mass index and better glycaemic control. Diagnosis is clinical, with EMG showing patchy involvement and fibrillation potentials. The course is self-limited, lasting months up to about two years.",
-   "say": "Diabetic lumbosacral radiculoplexus neuropathy, also called diabetic amyotrophy, causes acute severe thigh pain followed by proximal weakness and weight loss. It is thought to involve microvasculitis and ischaemia. It typically affects patients with lower body mass index and better glycaemic control. Diagnosis is clinical, with EMG showing patchy involvement and fibrillation potentials. The course is self limited, lasting months up to about two years.",
-   "vis": null
-  },
-  {
-   "tx": "**Vitamin B12 deficiency** neuropathy can occur without anaemia or macrocytosis, so a normal blood count does not exclude it. Treatment should begin early because at least half of patients keep permanent deficits despite replacement. Screen with B12 and metabolite testing, and check renal function, thyroid hormone and B12 levels in all diabetic neuropathy workups to exclude mimics.",
-   "say": "Vitamin B12 deficiency neuropathy can occur without anaemia or macrocytosis, so a normal blood count does not exclude it. Treatment should begin early because at least half of patients keep permanent deficits despite replacement. Screen with B12 and metabolite testing, and check renal function, thyroid hormone and B12 levels in all diabetic neuropathy workups to exclude mimics.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "Purpose"
-    ],
-    "rows": [
-     [
-      "Serum B12 and metabolites",
-      "Confirm deficiency"
-     ],
-     [
-      "Renal function, TSH",
-      "Exclude mimic causes"
-     ],
-     [
-      "Skin biopsy",
-      "Support small fibre diagnosis"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Entrapment neuropathies** such as **carpal tunnel syndrome** cause focal compression of the median nerve at the wrist, often in patients with diabetes. Hereditary liability to pressure palsies is linked to PMP22 deletion on chromosome 17. Foot drop from common peroneal compression is first managed with an ankle-foot orthosis and physiotherapy, with surgery reserved for failure or progressive deficit.",
-   "say": "Entrapment neuropathies such as carpal tunnel syndrome cause focal compression of the median nerve at the wrist, often in patients with diabetes. Hereditary liability to pressure palsies is linked to PMP22 deletion on chromosome 17. Foot drop from common peroneal compression is first managed with an ankle foot orthosis and physiotherapy, with surgery reserved for failure or progressive deficit.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-acquired-neuropathies-fig1.webp",
-    "alt": "Diagram showing median nerve compression at wrist (carpal tunnel) and common peroneal nerve compression at fibular head (foot drop).",
-    "caption": "Common sites of nerve entrapment, including carpal tunnel and common peroneal nerve",
-    "ar": 1.8349
-   }
+  "v": 1,
+  "module": "sne-acquired-neuropathies",
+  "subject": "ss-neurology",
+  "title": "Guillain-Barr\u00e9 Syndrome and Chronic Neuropathies",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Guillain-Barr\u00e9 syndrome** (GBS) classically manifests as an acute, ascending, symmetrical flaccid **quadriparesis** with generalized hyporeflexia or areflexia, reaching nadir within 4 weeks. Symptoms typically follow a gastrointestinal or respiratory illness, with Campylobacter jejuni being the most frequent antecedent pathogen provoking molecular mimicry.",
+      "say": "Guillain Barr\u00e9 syndrome is an acute post infectious polyradiculoneuropathy characterized by rapidly progressive symmetrical ascending flaccid weakness and areflexia. Symptoms typically develop within two to four weeks of a gastrointestinal or respiratory illness. Campylobacter jejuni infection serves as the most frequent antecedent trigger through ganglioside molecular mimicry.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sne-acquired-neuropathies-fig1.webp",
+        "alt": "Entrapment neuropathies and peripheral nerve compression sites.",
+        "caption": "Peripheral nerve anatomy: focal entrapment neuropathies and generalized polyneuropathies",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "**Charcot-Marie-Tooth** disease type 1A (CMT1A) is the most common hereditary neuropathy, caused by a **1.4** Mb duplication of the **PMP22** gene on chromosome 17p11.2, resulting in uniform nerve conduction slowing. This contrasts with acute motor axonal neuropathy (AMAN), which features anti-GD1a antibodies and rapid axolemmal injury.",
+      "say": "Charcot Marie Tooth disease type one A is the most common hereditary neuropathy, caused by duplication of the PMP22 gene on chromosome seventeen. This contrasts with acute motor axonal neuropathy, an acquired variant of Guillain Barr\u00e9 syndrome linked to anti ganglioside antibodies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AIDP (Demyelinating)",
+          "points": [
+            "T-cell mediated macrophage attack on Schwann cells",
+            "Conduction block, prolonged distal latencies, slow velocity",
+            "More common in Europe and North America"
+          ]
+        },
+        "right": {
+          "title": "AMAN (Axonal)",
+          "points": [
+            "Antibody-mediated attack on axolemma at nodes of Ranvier",
+            "Markedly reduced CMAP amplitudes with normal velocity",
+            "Linked to Campylobacter jejuni and anti-GM1/GD1a antibodies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The Miller Fisher syndrome is a distinct cranial variant of Guillain-Barr\u00e9 syndrome presenting with a classic clinical triad: **ophthalmoplegia**, **ataxia**, and **areflexia**, typically sparing limb motor power. Over 90% of patients with Miller Fisher syndrome demonstrate high titers of serum antibodies against the **GQ1b** ganglioside, which is enriched in the paranodal myelin of the oculomotor, trochlear, abducens, and primary sensory afferent nerves.",
+      "say": "Miller Fisher syndrome is a recognized cranial variant of Guillain Barr\u00e9 syndrome presenting with ophthalmoplegia, sensory ataxia, and generalized areflexia. Over ninety percent of affected patients test positive for circulating anti GQ1b IgG antibodies. The GQ1b ganglioside is densely expressed within ocular motor nerves and muscle spindle afferents.",
+      "vis": null
+    },
+    {
+      "tx": "**Albuminocytological dissociation** in **CSF**, defined as elevated protein with normal total leukocyte count (<50 cells/uL, typically <5 cells/uL), is typical in GBS, though CSF protein may be normal within the first week of symptoms. Protein levels rise progressively during subsequent weeks, peaking at two to three weeks.",
+      "say": "Lumbar puncture in Guillain Barr\u00e9 syndrome classically reveals albuminocytological dissociation, with elevated protein alongside a normal white blood cell count under five cells per microliter. Cerebrospinal fluid protein levels can remain normal during the first week of symptoms, characteristically rising to peak levels during the second and third weeks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Timing of LP",
+          "CSF Protein Level",
+          "CSF White Cell Count",
+          "Diagnostic Interpretation"
+        ],
+        "rows": [
+          [
+            "Week 1 (Days 1-7)",
+            "Often normal in up to 50%",
+            "<5 cells/microliter",
+            "Normal protein does not rule out acute GBS"
+          ],
+          [
+            "Week 2-3 (Days 8-21)",
+            "Markedly elevated (>100-300 mg/dL)",
+            "<5 cells/microliter",
+            "Classic albuminocytological dissociation"
+          ],
+          [
+            "Atypical Pleocytosis",
+            "Elevated protein",
+            ">50 cells/microliter",
+            "Consider HIV, Lyme disease, or sarcoidosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line disease-modifying immunotherapies for Guillain-Barr\u00e9 syndrome are intravenous **immunoglobulin** (IVIG 0.4 g/kg/day for 5 days) or **plasma exchange** (PLEX), which have proven equal clinical efficacy. Combining both immunotherapeutic modalities confers no additive benefit and significantly increases healthcare costs without accelerating functional recovery.",
+      "say": "Intravenous immunoglobulin administered at zero point four grams per kilogram daily for five days and therapeutic plasma exchange demonstrate equivalent clinical efficacy. Treatment should begin promptly in patients unable to walk unaided or with progressive autonomic or respiratory compromise. Combining both treatments confers no additive benefit, and systemic corticosteroids are ineffective.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peripheral-neuropathy-fig1.webp",
+        "alt": "Patterns of peripheral neuropathy and polyradiculoneuropathy distributions.",
+        "caption": "Peripheral neuropathy distribution patterns and polyradiculopathy mechanisms",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Systemic **corticosteroids** administered alone are ineffective in **Guillain-Barr\u00e9** syndrome and are not recommended for acute therapy. Bedside spirometry monitoring forced vital capacity is essential to guide elective endotracheal intubation when forced vital capacity falls below 20 mL/kg or negative inspiratory pressure weakens.",
+      "say": "Respiratory muscle paralysis is the most critical life threatening emergency in Guillain Barr\u00e9 syndrome. Clinicians must perform bedside spirometric monitoring of forced vital capacity every four to six hours. The twenty thirty forty rule provides a practical guide for elective intubation before acute respiratory arrest occurs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Serial Bedside Spirometry (q4-6h)"
+          },
+          {
+            "id": "b",
+            "label": "FVC <20 mL/kg or MIP <30 cmH2O"
+          },
+          {
+            "id": "c",
+            "label": "Elective Tracheal Intubation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Diaphragmatic fatigue"
+          ],
+          [
+            "b",
+            "c",
+            "Imminent respiratory failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic **inflammatory demyelinating polyneuropathy** (**CIDP**) is distinguished from acute Guillain-Barr\u00e9 syndrome by progressive or relapsing sensory and motor deficits continuing beyond 8 weeks, responding favourably to maintenance IVIG, plasma exchange, or oral corticosteroids. Corticosteroid responsiveness represents a fundamental clinical difference from acute post-infectious GBS.",
+      "say": "Chronic inflammatory demyelinating polyradiculoneuropathy presents with progressive or relapsing symmetrical weakness and sensory loss evolving over at least eight weeks. Unlike acute Guillain Barr\u00e9 syndrome, CIDP improves with systemic corticosteroid therapy as well as regular intravenous immunoglobulin infusions or plasma exchange.",
+      "vis": null
+    },
+    {
+      "tx": "**Multifocal motor neuropathy** (MMN) presents with asymmetric progressive distal upper limb motor weakness without sensory involvement, demonstrating persistent motor conduction block and high titers of **anti-GM1** IgM antibodies in over 50% of cases, responding selectively to IVIG while worsening with corticosteroid treatment.",
+      "say": "Multifocal motor neuropathy presents as an asymmetric, purely motor neuropathy characterized by upper limb weakness without sensory loss, mimicking lower motor neuron disease. Nerve conduction studies establish the diagnosis by demonstrating focal motor conduction block in non entrapment segments. High titers of anti GM1 IgM antibodies occur in over half of cases, and intravenous immunoglobulin represents the treatment of choice.",
+      "vis": null
+    }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 44",
+    "Harrison 22e Ch. 442",
+    "EFNS/PNS CIDP Guidelines"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_0a3a5e0432e3",
-  "q_494495fb96b9",
-  "q_bc3c2bbb4890"
- ],
- "src": [],
- "refs": [
-  "Dyck PJ, Thomas PK (Editors), Peripheral Neuropathy, Chapter Diabetic Neuropathy in Peripheral Neuropathy (Editors Dyck and Thomas)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 28
- }
 }

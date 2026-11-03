@@ -1,87 +1,210 @@
 {
  "v": 1,
  "module": "srd-chest-ild",
- "subject": "ss-radiology",
- "title": "Diffuse lung disease and HRCT: pattern recognition for the key ILDs",
- "minutes": 5,
+ "title": "Diffuse lung disease and HRCT",
+ "minutes": 8,
+ "gen": "hand",
  "steps": [
   {
-   "tx": "A patient with worsening breathlessness on exertion, fine crackles at the lung bases and no fever should raise suspicion of **interstitial lung disease** (ILD). This umbrella term covers well over two hundred varied disorders. Although the **interstitium** is the main target, damage to alveolar lining cells and vessel-lining cells also fuels fibrosis. Hearing **egophony** or **bronchial breathing** tends to point toward airspace filling, such as infection, rather than scarring. A **high-resolution CT** scan is now the first-line imaging test and may establish a **usual interstitial pneumonia** pattern without needing biopsy.",
-   "say": "A patient with worsening breathlessness on exertion, fine crackles at the lung bases and no fever should raise suspicion of interstitial lung disease. This umbrella term covers well over two hundred varied disorders. Although the interstitium is the main target, damage to alveolar lining cells and vessel-lining cells also fuels fibrosis. Hearing egophony or bronchial breathing tends to point toward airspace filling, such as infection, rather than scarring. A high-resolution CT scan is now the first-line imaging test and may establish a usual interstitial pneumonia pattern without needing biopsy.",
-   "vis": null
+   "tx": "The **Usual interstitial pneumonia** (UIP) HRCT pattern is characterized by basal and subpleural predominance with coarse reticular opacities, architectural distortion, and traction bronchiectasis. Pathognomonic **honeycombing**, presenting as clustered, thick-walled cystic spaces arranged in multiple layers beneath the pleura, confirms UIP without requiring surgical lung biopsy.",
+   "say": "The Usual interstitial pneumonia HRCT pattern is characterized by basal and subpleural predominance with coarse reticular opacities, architectural distortion, and traction bronchiectasis. Pathognomonic honeycombing, presenting as clustered, thick-walled cystic spaces arranged in multiple layers beneath the pleura, confirms UIP without requiring surgical lung biopsy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/srd-chest-ild-fig1.webp",
+    "alt": "High-resolution computed tomography demonstrating subpleural honeycombing and reticulation",
+    "caption": "Subpleural honeycombing and traction bronchiectasis in usual interstitial pneumonia",
+    "ar": 1.7778
+   }
   },
   {
-   "tx": "Interstitial lung diseases can first be sorted by whether a trigger is identified. **Known-cause** groups include occupational dust, medications, connective tissue disorders and granulomatous conditions such as **hypersensitivity pneumonitis**. When no trigger is found, the disease is labelled **unknown-cause**, and the **idiopathic interstitial pneumonias** make up the largest share. Consensus classification then places these into chronic fibrosing, smoking-related and acute or subacute patterns.",
-   "say": "Start by asking whether a cause can be identified. Known-cause groups include occupational dust, drugs, connective tissue disease and granulomatous disease such as hypersensitivity pneumonitis. If no trigger is found, the disease is unknown-cause, and the idiopathic interstitial pneumonias form the largest share. Under the consensus scheme these split into chronic fibrosing, smoking-related and acute or subacute groups. Rarer unknown-cause entities, including lymphangioleiomyomatosis, alveolar proteinosis, Langerhans cell histiocytosis and sarcoidosis, sit alongside them.",
+   "tx": "**Nonspecific interstitial pneumonia** (NSIP) presents on thoracic HRCT with bilateral, symmetrical ground-glass opacities accompanied by fine reticulation and lower-lobe traction bronchiectasis. Immediate **subpleural sparing** along the dorsal aspect of the lower lung zones is a classic discriminator differentiating cellular and fibrotic NSIP from the peripheral subpleural destruction of UIP.",
+   "say": "Nonspecific interstitial pneumonia presents on thoracic HRCT with bilateral, symmetrical ground-glass opacities accompanied by fine reticulation and lower-lobe traction bronchiectasis. Immediate subpleural sparing along the dorsal aspect of the lower lung zones is a classic discriminator differentiating cellular and fibrotic NSIP from the peripheral subpleural destruction of UIP.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Category",
-     "Entities"
+     "Feature",
+     "NSIP Characteristic",
+     "UIP Distinction"
     ],
     "rows": [
      [
-      "Chronic fibrosing",
-      "IPF, idiopathic NSIP"
+      "Distribution",
+      "Bilateral, symmetrical lower zones",
+      "Subpleural, heterogeneous basilar"
      ],
      [
-      "Smoking-related",
-      "RB-ILD, DIP"
+      "Predominant Finding",
+      "Ground-glass attenuation and fine lines",
+      "Coarse reticulation and honeycombing"
      ],
      [
-      "Acute or subacute",
-      "COP, acute interstitial pneumonia"
+      "Subpleural Interface",
+      "Subpleural sparing along dorsal bases",
+      "Immediate subpleural involvement"
      ],
      [
-      "Rarer unknown cause",
-      "LAM, PAP, PLCH, sarcoidosis"
+      "Prognosis",
+      "Steroid responsive, better outcome",
+      "Progressive decline, median survival 3-5 years"
      ]
     ]
    }
   },
   {
-   "tx": "**Hypersensitivity pneumonitis** (HP) is an immune reaction to inhaled antigens that reach distal airways and alveoli. It is now classified as nonfibrotic or fibrotic rather than acute, subacute or chronic. Chronic fibrotic HP can mirror IPF on imaging. Sarcoidosis shows hilar and mediastinal lymphadenopathy with peribronchovascular nodularity, and its nodules follow a perilymphatic distribution. Eosinophilia above 25% on BAL suggests chronic eosinophilic pneumonia.",
-   "say": "Hypersensitivity pneumonitis is an immune reaction to inhaled antigens that reach the distal airways and alveoli. It is now classified as nonfibrotic or fibrotic. Chronic fibrotic HP can mirror IPF on imaging. Sarcoidosis shows hilar and mediastinal lymphadenopathy with peribronchovascular nodularity, with nodules following a perilymphatic distribution. Eosinophilia above 25 percent on bronchoalveolar lavage suggests chronic eosinophilic pneumonia.",
+   "tx": "Chronic **hypersensitivity pneumonitis** predominantly involves the mid and upper lung zones with poorly defined centrilobular micronodules and mosaic attenuation. Expiratory HRCT demonstrates lobular air-trapping, producing the pathognomonic **three-density sign** (headcheese sign) characterized by adjacent normal attenuation, low-attenuation air-trapping, and high-attenuation ground-glass infiltrates.",
+   "say": "Chronic hypersensitivity pneumonitis predominantly involves the mid and upper lung zones with poorly defined centrilobular micronodules and mosaic attenuation. Expiratory HRCT demonstrates lobular air-trapping, producing the pathognomonic three-density sign, also called headcheese sign, characterized by adjacent normal attenuation, low-attenuation air-trapping, and high-attenuation ground-glass infiltrates.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srd-chest-ild-fig1.webp",
-    "alt": "Two HRCT images showing fibrotic hypersensitivity pneumonitis with ground glass and traction bronchiectasis, and sarcoidosis with perilymphatic nodules and lymphadenopathy.",
-    "caption": "HRCT patterns of fibrotic HP and sarcoidosis",
-    "ar": 1.8349
+    "kind": "compare",
+    "left": {
+     "title": "Three-Density Sign Components",
+     "points": [
+      "Normal lung parenchymal attenuation",
+      "High-attenuation ground-glass infiltrate",
+      "Low-attenuation lobular air-trapping",
+      "Accentuated on expiratory CT acquisition",
+      "Indicates mixed infiltrative and small-airway disease"
+     ]
+    },
+    "right": {
+     "title": "Etiological Triggers",
+     "points": [
+      "Avian antigens (pigeon breeder lung)",
+      "Thermophilic actinomycetes (farmer lung)",
+      "Fungal spores (humidifier lung)",
+      "Chemical isocyanates",
+      "Environmental domestic mould exposure"
+     ]
+    }
    }
   },
   {
-   "tx": "For management, HRCT, **transfer factor** (DLCO) and FVC form the core work-up, plus connective tissue and exposure screening. Severity depends on fibrosis extent, PFT decline and pulmonary hypertension. Refer progressive, treatment-refractory disease to a multidisciplinary ILD team and consider lung transplantation. Surgical lung biopsy is reserved for cases still unclear after multidisciplinary review. Acute exacerbations of fibrotic ILD carry mortality above 85 percent.",
-   "say": "For management, HRCT, transfer factor and FVC form the core work-up, plus connective tissue and exposure screening. Severity depends on fibrosis extent, lung function decline and pulmonary hypertension. Refer progressive, treatment-refractory disease to a multidisciplinary ILD team and consider lung transplantation. Surgical lung biopsy is reserved for cases still unclear after review. Acute exacerbations of fibrotic ILD carry mortality above 85 percent.",
-   "vis": null
+   "tx": "**Lymphangioleiomyomatosis** (LAM) occurs almost exclusively in women of reproductive age and patients with tuberous sclerosis complex. HRCT reveals diffusely distributed, round, uniform, thin-walled **lung cysts** surrounded by normal intervening lung parenchyma, typically accompanied by preserved or hyperinflated lung volumes, recurrent pneumothoraces, and chylous pleural effusions.",
+   "say": "Lymphangioleiomyomatosis occurs almost exclusively in women of reproductive age and patients with tuberous sclerosis complex. HRCT reveals diffusely distributed, round, uniform, thin-walled lung cysts surrounded by normal intervening lung parenchyma, typically accompanied by preserved or hyperinflated lung volumes, recurrent pneumothoraces, and chylous pleural effusions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lymphangioleiomyomatosis-fig1.webp",
+    "alt": "Computed tomography of the chest demonstrating round thin-walled uniform lung cysts in lymphangioleiomyomatosis",
+    "caption": "Thin-walled uniform round cysts with normal intervening lung in LAM",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Pulmonary **Langerhans cell histiocytosis** exhibits a profound predilection for young adults with a history of cigarette **smoking** exceeding 95% of cases. Early nodular inflammation centered on bronchioles cavitates into bizarre, irregularly shaped, bilobed or cloverleaf cysts that selectively involve the upper and mid lung zones while strictly sparing the lung bases.",
+   "say": "Pulmonary Langerhans cell histiocytosis exhibits a profound predilection for young adults with a history of cigarette smoking exceeding 95% of cases. Early nodular inflammation centered on bronchioles cavitates into bizarre, irregularly shaped, bilobed or cloverleaf cysts that selectively involve the upper and mid lung zones while strictly sparing the lung bases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PLCH Cyst Features",
+     "points": [
+      "Bizarre, bilobed, cloverleaf morphologies",
+      "Upper and mid lung predominance",
+      "Characteristically spares the lung bases",
+      "Evolves from centrilobular nodules to cysts",
+      "Over 95% associated with active smoking"
+     ]
+    },
+    "right": {
+     "title": "LAM Cyst Features",
+     "points": [
+      "Round, uniform, symmetrical shapes",
+      "Diffuse apicobasal distribution",
+      "Involves costophrenic angles and lung bases",
+      "Arises without antecedent nodular phase",
+      "Almost exclusively in females"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pulmonary alveolar proteinosis** is characterized by the accumulation of periodic acid-Schiff positive phospholipid surfactant within alveolar spaces. Thoracic CT demonstrates a pathognomonic **crazy-paving** pattern consisting of sharply demarcated, patchy ground-glass attenuation with superimposed smooth thickening of both interlobular and intralobular septa.",
+   "say": "Pulmonary alveolar proteinosis is characterized by the accumulation of periodic acid-Schiff positive phospholipid surfactant within alveolar spaces. Thoracic CT demonstrates a pathognomonic crazy-paving pattern consisting of sharply demarcated, patchy ground-glass attenuation with superimposed smooth thickening of both interlobular and intralobular septa.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hereditary-pulmonary-alveolar-proteinosis-fig1.webp",
+    "alt": "CT chest demonstrating geographic ground-glass attenuation with interlobular septal thickening",
+    "caption": "Classic crazy-paving pattern in pulmonary alveolar proteinosis",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Thoracic **Sarcoidosis** classically produces symmetric bilateral hilar and right paratracheal lymphadenopathy alongside a distinct **perilymphatic** micronodular distribution. Well-defined non-caseating granulomatous nodules cluster along bronchovascular bundles, subpleural surfaces, interlobar fissures, and interlobular septa, exhibiting mid-to-upper lung zone predominance with progressive perihilar fibrotic distortion.",
+   "say": "Thoracic Sarcoidosis classically produces symmetric bilateral hilar and right paratracheal lymphadenopathy alongside a distinct perilymphatic micronodular distribution. Well-defined non-caseating granulomatous nodules cluster along bronchovascular bundles, subpleural surfaces, interlobar fissures, and interlobular septa, exhibiting mid-to-upper lung zone predominance with progressive perihilar fibrotic distortion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perilymphatic Nodules",
+     "points": [
+      "Clustered along subpleural surfaces",
+      "Studding along major interlobar fissures",
+      "Accompanying bronchovascular bundles",
+      "Well-defined 2-4 mm non-caseating granulomas",
+      "Characteristic of sarcoidosis and silicosis"
+     ]
+    },
+    "right": {
+     "title": "Centrilobular Nodules",
+     "points": [
+      "Centered 5-10 mm from pleura",
+      "Spares immediate subpleural fissure surfaces",
+      "Branching tree-in-bud or ground-glass",
+      "Arises in respiratory bronchiolitis",
+      "Characteristic of infections and HP"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chronic **Silicosis** manifests as multiple small, sharply circumscribed nodular opacities with upper lobe and posterior segment predominance. These nodules may coalesce into progressive massive fibrosis, frequently accompanied by pathognomonic peripheral **eggshell calcification** outlining the capsules of enlarged hilar and mediastinal lymph nodes.",
+   "say": "Chronic Silicosis manifests as multiple small, sharply circumscribed nodular opacities with upper lobe and posterior segment predominance. These nodules may coalesce into progressive massive fibrosis, frequently accompanied by pathognomonic peripheral eggshell calcification outlining the capsules of enlarged hilar and mediastinal lymph nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Imaging Finding",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Nodule Distribution",
+      "Upper lobes and posterior segments",
+      "Inhaled crystalline silica dust deposition"
+     ],
+     [
+      "Progressive Massive Fibrosis",
+      "Large bilateral conglomerate masses",
+      "Severe restrictive defect and cavitary necrosis"
+     ],
+     [
+      "Lymph Node Findings",
+      "Peripheral eggshell calcification",
+      "Calcification of rim of enlarged mediastinal nodes"
+     ],
+     [
+      "Complications",
+      "Caplan syndrome and tuberculosis",
+      "Increased risk of mycobacterial co-infection (silicotuberculosis)"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "ct-1a8a60be8f93",
-  "ct-b5389c8d40d7",
-  "rad-lam"
- ],
+ "quiz": [],
  "src": [
-  "kb-diseases-ild",
-  "kb-reference-nonspecific-interstitial-pneumonia"
+  "Crack the Core Thoracic / RDN11 Diffuse Lung"
  ],
  "refs": [
-  "Harrison's Principles of Internal Medicine (Jameson et al.)",
-  "ATS/ERS consensus classification of idiopathic interstitial pneumonias"
+  "Crack the Core Exam (CTC)",
+  "RDN11 Chest Radiology",
+  "Fleischner Society Guidelines"
  ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
  "checks": {
   "shape": true,
   "numbers": true,
   "drugs": true,
   "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 1214,
-  "itemN": 24
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
  }
 }

@@ -1,135 +1,247 @@
 {
  "v": 1,
  "module": "srd-nuclear",
- "subject": "ss-radiology",
- "title": "Nuclear medicine and PET: core radiopharmaceuticals and patterns",
- "minutes": 5,
+ "title": "Nuclear medicine and PET",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Nuclear medicine images **radiopharmaceuticals** that show physiology rather than anatomy. Each tracer has a fixed biodistribution, and recognising that pattern is the key exam skill, especially for unlabelled studies. Tracers are chosen for the process they follow, such as blood flow, cell membrane transport, bone mineral turnover or glucose metabolism.",
-   "say": "Nuclear medicine images radiopharmaceuticals that show physiology rather than anatomy. Each tracer has a fixed biodistribution, and recognising that pattern is the key exam skill, especially for unlabelled studies. Tracers are chosen for the process they follow, such as blood flow, cell membrane transport, bone mineral turnover or glucose metabolism.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Tracer",
-     "Mechanism",
-     "Typical use"
-    ],
-    "rows": [
-     [
-      "Tc-99m MAA",
-      "Capillary blockade",
-      "Lung perfusion"
-     ],
-     [
-      "Tc-99m MDP",
-      "Adsorption to hydroxyapatite",
-      "Bone scan"
-     ],
-     [
-      "Tl-201",
-      "Na/K ATPase uptake",
-      "Myocardial perfusion"
-     ],
-     [
-      "Tc-99m MAG3",
-      "Tubular secretion",
-      "Renal plasma flow"
-     ],
-     [
-      "F-18 FDG",
-      "Glucose analogue trapping",
-      "PET metabolism"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Tc-99m **MAA** lodges in pulmonary capillaries by capillary blockade, which is why particle numbers must be reduced in pulmonary hypertension or a single lung. Ventilation imaging uses **Xenon-133** gas, which must be acquired before perfusion because of its low energy, or aerosol Tc-99m DTPA, which needs a mouthpiece and nose clamp. Gastric activity on DTPA images reflects swallowed tracer.",
-   "say": "Tc-99m MAA lodges in pulmonary capillaries by capillary blockade, which is why particle numbers must be reduced in pulmonary hypertension or a single lung. Ventilation imaging uses Xenon-133 gas, which must be acquired before perfusion because of its low energy, or aerosol Tc-99m DTPA, which needs a mouthpiece and nose clamp. Gastric activity on DTPA images reflects swallowed tracer.",
+   "tx": "Skeletal scintigraphy exploits osteoblastic remodelling to detect occult bony lesions. The radiopharmaceutical **Tc-99m MDP** (technetium-99m methylene diphosphonate) localises to bone via chemical **chemisorption** onto crystalline hydroxyapatite matrix, with uptake proportional to regional osteoblastic activity and skeletal blood flow across the skeleton.",
+   "say": "Skeletal scintigraphy exploits osteoblastic remodelling to detect occult bony lesions. The radiopharmaceutical Tc-99m MDP localises to bone via chemical chemisorption onto crystalline hydroxyapatite matrix, with uptake proportional to regional osteoblastic activity and skeletal blood flow across the skeleton.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
-      "id": "v",
-      "label": "Xenon-133 ventilation first"
+      "id": "a",
+      "label": "IV Tc-99m MDP injection"
      },
      {
-      "id": "p",
-      "label": "Tc-99m MAA perfusion"
+      "id": "b",
+      "label": "Skeletal blood flow"
      },
      {
-      "id": "q",
-      "label": "Quantify split function"
+      "id": "c",
+      "label": "Chemisorption to bone"
+     },
+     {
+      "id": "d",
+      "label": "Gamma camera imaging"
      }
     ],
     "edges": [
      [
-      "v",
-      "p"
+      "a",
+      "b",
+      "vascular delivery"
      ],
      [
-      "p",
-      "q"
+      "b",
+      "c",
+      "hydroxyapatite binding"
+     ],
+     [
+      "c",
+      "d",
+      "radiotracer capture"
      ]
     ]
    }
   },
   {
-   "tx": "Bone scintigraphy uses **Tc-99m MDP**, which adsorbs onto hydroxyapatite at the mineralisation front. Physiological uptake is seen at growth plates in children. Diffusely reduced skeletal uptake suggests free technetium or bisphosphonate therapy. A **superscan** shows intense, diffuse uptake with faint soft tissue activity. Metastatic superscans are heterogeneous and axial, while metabolic superscans, from hyperparathyroidism or renal osteodystrophy, are uniform and reach the distal limbs.",
-   "say": "Bone scintigraphy uses Tc-99m MDP, which adsorbs onto hydroxyapatite at the mineralisation front. Physiological uptake is seen at growth plates in children. Diffusely reduced skeletal uptake suggests free technetium or bisphosphonate therapy. A superscan shows intense, diffuse uptake with faint soft tissue activity. Metastatic superscans are heterogeneous and axial, while metabolic superscans, from hyperparathyroidism or renal osteodystrophy, are uniform and reach the distal limbs.",
+   "tx": "Widespread skeletal osteoblastic activity can completely divert radiotracer distribution away from normal clearing organs. A metabolic **superscan** on **bone scintigraphy** demonstrates intensely increased diffuse skeletal uptake with markedly diminished or absent renal and soft-tissue background excretion, caused by diffuse osteoblastic metastases.",
+   "say": "Widespread skeletal osteoblastic activity can completely divert radiotracer distribution away from normal clearing organs. A metabolic superscan on bone scintigraphy demonstrates intensely increased diffuse skeletal uptake with markedly diminished or absent renal and soft-tissue background excretion, caused by diffuse osteoblastic metastases.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Metastatic superscan",
+     "title": "Metabolic Superscan",
      "points": [
-      "Heterogeneous uptake",
-      "Axial and proximal predominance",
-      "Patchy lesions"
+      "Intensely increased diffuse skeletal uptake",
+      "Absent or faint renal and bladder excretion",
+      "Decreased soft tissue background activity",
+      "Caused by prostate metastases or hyperparathyroidism"
      ]
     },
     "right": {
-     "title": "Metabolic superscan",
+     "title": "Normal Bone Scintigraphy",
      "points": [
-      "Uniform uptake",
-      "Extends to distal limbs",
-      "Linked to high bone turnover"
+      "Symmetrical physiological skeletal uptake",
+      "Prominent bilateral renal visualization",
+      "Urinary bladder tracer accumulation",
+      "Moderate soft tissue background clearance"
      ]
     }
    }
   },
   {
-   "tx": "Cardiac viability is assessed with **FDG PET-CT** using a perfusion-metabolism mismatch, where hypoperfused but metabolically active myocardium is viable. Thallium-201 enters cells through the Na/K ATPase pump. In thyroid disease, Graves shows diffuse high uptake, while subacute thyroiditis shows low uptake despite similar hyperthyroid labs. Radioiodine therapy requires residual dose checks at one metre before discharge, and pregnancy should be avoided for a period after treatment.",
-   "say": "Cardiac viability is assessed with FDG PET-CT using a perfusion-metabolism mismatch, where hypoperfused but metabolically active myocardium is viable. Thallium-201 enters cells through the Na/K ATPase pump. In thyroid disease, Graves shows diffuse high uptake, while subacute thyroiditis shows low uptake despite similar hyperthyroid labs. Radioiodine therapy requires residual dose checks at one metre before discharge, and pregnancy should be avoided for a period after treatment.",
+   "tx": "Positron emission tomography interrogates accelerated neoplastic glycolysis in malignant tissue. The glucose analogue **fluorodeoxyglucose** (F-18 FDG) enters cells via GLUT-1 transporters and undergoes intracellular phosphorylation by **hexokinase** into FDG-6-phosphate, becoming trapped intracellularly as a non-metabolised substrate in active tumour cells.",
+   "say": "Positron emission tomography interrogates accelerated neoplastic glycolysis in malignant tissue. The glucose analogue fluorodeoxyglucose enters cells via GLUT-1 transporters and undergoes intracellular phosphorylation by hexokinase into FDG-6-phosphate, becoming trapped intracellularly as a non-metabolised substrate in active tumour cells.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cellular GLUT-1 uptake"
+     },
+     {
+      "id": "b",
+      "label": "Hexokinase phosphorylation"
+     },
+     {
+      "id": "c",
+      "label": "FDG-6-phosphate trapped"
+     },
+     {
+      "id": "d",
+      "label": "Positron emission detected"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "transporter entry"
+     ],
+     [
+      "b",
+      "c",
+      "phosphorylation"
+     ],
+     [
+      "c",
+      "d",
+      "trapping"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted radioligand imaging provides exceptional accuracy in prostate malignancy. Diagnostic **PSMA PET** with gallium-68 radiotracers demonstrates superior diagnostic sensitivity and specificity over conventional imaging for detecting early recurrent **prostate adenocarcinoma**, even at low serum PSA levels below 0.5 ng/mL in biochemically failing patients.",
+   "say": "Targeted radioligand imaging provides exceptional accuracy in prostate malignancy. Diagnostic PSMA PET with gallium-68 radiotracers demonstrates superior diagnostic sensitivity and specificity over conventional imaging for detecting early recurrent prostate adenocarcinoma, even at low serum PSA levels below 0.5 nanograms per millilitre in biochemically failing patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging Modality",
+     "Detection at PSA < 0.5",
+     "Diagnostic Specificity"
+    ],
+    "rows": [
+     [
+      "Gallium-68 PSMA PET-CT",
+      "High sensitivity (50% to 60%)",
+      "> 95% specificity for recurrence"
+     ],
+     [
+      "Conventional pelvic CT",
+      "Extremely poor (< 15%)",
+      "Non-specific nodal enlargement"
+     ],
+     [
+      "Tc-99m MDP bone scan",
+      "Low sensitivity (< 10%)",
+      "Cannot detect early marrow deposits"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Functional thyroid scintigraphy differentiates primary thyrotoxic etiologies based on trapping capacity. Diagnostic **thyroid scintigraphy** shows diffuse homogeneously elevated tracer uptake exceeding 4% in **Graves disease**, whereas subacute granulomatous thyroiditis exhibits severely suppressed tracer uptake under 1% across the thyroid gland.",
+   "say": "Functional thyroid scintigraphy differentiates primary thyrotoxic etiologies based on trapping capacity. Diagnostic thyroid scintigraphy shows diffuse homogeneously elevated tracer uptake exceeding 4% in Graves disease, whereas subacute granulomatous thyroiditis exhibits severely suppressed tracer uptake under 1% across the thyroid gland.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/srd-nuclear-fig1.webp",
     "alt": "Two thyroid scintigraphy images side-by-side. One shows diffuse high uptake (Graves), the other shows very low uptake (subacute thyroiditis).",
-    "caption": "Thyroid uptake patterns: Graves vs. subacute thyroiditis",
+    "caption": "Thyroid uptake patterns: Graves vs. subacute thyroiditis (StewardMD).",
     "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Renal scintigraphic tracers evaluate distinct physiological filtration and secretory processes. Functional **renal scintigraphy** using Tc-99m MAG3 assesses active proximal tubular secretion and effective renal plasma flow, whereas Tc-99m DTPA clearance directly measures the true **glomerular filtration rate** in clinical practice.",
+   "say": "Renal scintigraphic tracers evaluate distinct physiological filtration and secretory processes. Functional renal scintigraphy using Tc-99m MAG3 assesses active proximal tubular secretion and effective renal plasma flow, whereas Tc-99m DTPA clearance directly measures the true glomerular filtration rate in clinical practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radiopharmaceutical",
+     "Renal Clearance Mechanism",
+     "Primary Clinical Application"
+    ],
+    "rows": [
+     [
+      "Tc-99m MAG3",
+      "Tubular secretion (95%)",
+      "Obstructive uropathy, renal failure, transplant"
+     ],
+     [
+      "Tc-99m DTPA",
+      "Glomerular filtration (100%)",
+      "Precise GFR measurement"
+     ],
+     [
+      "Tc-99m DMSA",
+      "Proximal tubular binding (cortical)",
+      "Cortical scarring, pyelonephritis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radionuclide pulmonary imaging identifies ventilation-perfusion mismatch in acute thrombotic vascular occlusion. Diagnostic nuclear **scintigraphy** using inhaled Xe-133 gas or aerosol alongside intravenous Tc-99m albumin detects **pulmonary embolism** when one or more wedge-shaped segmental perfusion defects are identified with normal ventilation across both lungs.",
+   "say": "Radionuclide pulmonary imaging identifies ventilation-perfusion mismatch in acute thrombotic vascular occlusion. Diagnostic nuclear scintigraphy using inhaled Xe-133 gas or aerosol alongside intravenous Tc-99m albumin detects pulmonary embolism when one or more wedge-shaped segmental perfusion defects are identified with normal ventilation across both lungs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pe-fig1.webp",
+    "alt": "Diagram illustrating pulmonary embolism pathophysiology with occluded arterial branches and mismatched ventilation-perfusion defects.",
+    "caption": "Pulmonary embolism: arterial occlusion causing ventilation-perfusion mismatch (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Accurate calculation of decay factors and radiation dosimetry requires precise memorisation of radiotracer kinetics. The physical **half-life** of **Technetium-99m** is 6.0 hours, Fluorine-18 is 110 minutes, Iodine-131 is 8.0 days, and Gallium-68 is 68 minutes in everyday clinical radiological protocols.",
+   "say": "Accurate calculation of decay factors and radiation dosimetry requires precise memorisation of radiotracer kinetics. The physical half-life of Technetium-99m is 6.0 hours, Fluorine-18 is 110 minutes, Iodine-131 is 8.0 days, and Gallium-68 is 68 minutes in everyday clinical radiological protocols.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radionuclide",
+     "Physical Half-Life",
+     "Emission Type",
+     "Primary Clinical Role"
+    ],
+    "rows": [
+     [
+      "Technetium-99m",
+      "6.0 hours",
+      "Gamma (140 keV)",
+      "Diagnostic SPECT (bone, renal, cardiac)"
+     ],
+     [
+      "Fluorine-18",
+      "110 minutes",
+      "Positron (511 keV annihilation)",
+      "Diagnostic oncology PET-CT"
+     ],
+     [
+      "Iodine-131",
+      "8.0 days",
+      "Beta and gamma",
+      "Thyroid cancer / ablation therapy"
+     ],
+     [
+      "Gallium-68",
+      "68 minutes",
+      "Positron (generator produced)",
+      "PSMA and DOTATATE PET-CT"
+     ]
+    ]
    }
   }
  ],
  "quiz": [
-  "ct-8d4ebdb21008",
-  "ct-95d6137906a9",
-  "ct-06fedb41680f"
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
  ],
  "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 131
- }
+ "refs": [
+  "Crack the Core Exam Nuclear Medicine (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Nuclear Medicine)"
+ ]
 }

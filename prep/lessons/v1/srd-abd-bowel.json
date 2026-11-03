@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "srd-abd-bowel",
+ "title": "Bowel, peritoneum and acute abdomen",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Cross-sectional imaging delivers rapid localisation in acute abdominal obstruction. Mechanical **small bowel obstruction** is confirmed on computed tomography by dilated loops exceeding 2.5 cm that transition abruptly to collapsed distal bowel at an identifiable **transition point** or transition zone, most frequently caused by post-surgical adhesive bands.",
+   "say": "Cross-sectional imaging delivers rapid localisation in acute abdominal obstruction. Mechanical small bowel obstruction is confirmed on computed tomography by dilated loops exceeding 2.5 centimetres that transition abruptly to collapsed distal bowel at an identifiable transition point or transition zone, most frequently caused by post-surgical adhesive bands.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-small-bowel-obstruction.webp",
+    "alt": "Abdominal radiograph demonstrating multiple dilated small bowel loops with air-fluid levels and plicae circulares.",
+    "caption": "Mechanical small bowel obstruction: central dilated loops with valvulae conniventes (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Spontaneous cholecystoenteric fistulae permit the migration of large calcified calculi into the intestinal lumen. Subsequent **gallstone ileus** produces the pathognomonic **Rigler triad**, comprising mechanical small bowel obstruction, branching pneumobilia, and an ectopic radio-opaque calculus lodged within the ileum at the narrow ileocaecal valve.",
+   "say": "Spontaneous cholecystoenteric fistulae permit the migration of large calcified calculi into the intestinal lumen. Subsequent gallstone ileus produces the pathognomonic Rigler triad, comprising mechanical small bowel obstruction, branching pneumobilia, and an ectopic radio-opaque calculus lodged within the ileum at the narrow ileocaecal valve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triad Finding",
+     "Imaging Presentation",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Pneumobilia",
+      "Branching gas within central biliary ducts",
+      "Cholecystoduodenal fistulous communication"
+     ],
+     [
+      "Small bowel obstruction",
+      "Dilated jejunum / ileum with air-fluid levels",
+      "Mechanical impaction of migrated gallstone"
+     ],
+     [
+      "Ectopic gallstone",
+      "Calcified mass in right lower quadrant",
+      "Obstruction at narrow ileocaecal valve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular compression of the digestive tract occurs in profound weight loss. Compression of the transverse duodenum by the overlying **superior mesenteric artery** leads to acute proximal dilatation when the aortomesenteric angle narrows below 22 degrees or the aortomesenteric distance decreases below 8 mm, defining **SMA syndrome**.",
+   "say": "Vascular compression of the digestive tract occurs in profound weight loss. Compression of the transverse duodenum by the overlying superior mesenteric artery leads to acute proximal dilatation when the aortomesenteric angle narrows below 22 degrees or the aortomesenteric distance decreases below 8 millimetres, defining SMA syndrome.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mesenteric fat loss"
+     },
+     {
+      "id": "b",
+      "label": "Angle narrows < 22°"
+     },
+     {
+      "id": "c",
+      "label": "Duodenal entrapment"
+     },
+     {
+      "id": "d",
+      "label": "Gastric distension"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "vascular crowding"
+     ],
+     [
+      "b",
+      "c",
+      "compression"
+     ],
+     [
+      "c",
+      "d",
+      "proximal dilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute vascular compromise of the gastrointestinal tract rapidly precipitates transmural infarction. On contrast computed tomography, **acute mesenteric ischaemia** demonstrates absent mucosal enhancement, bowel wall thinning, mesenteric vascular occlusion, and late **pneumatosis intestinalis** indicative of irreversible transmural tissue necrosis in gangrenous intestinal loops.",
+   "say": "Acute vascular compromise of the gastrointestinal tract rapidly precipitates transmural infarction. On contrast computed tomography, acute mesenteric ischaemia demonstrates absent mucosal enhancement, bowel wall thinning, mesenteric vascular occlusion, and late pneumatosis intestinalis indicative of irreversible transmural tissue necrosis in gangrenous intestinal loops.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Ischaemia",
+     "points": [
+      "Mural hypoenhancement",
+      "Bowel wall thickening and oedema",
+      "Mesenteric vessel thrombus",
+      "Perivascular fat stranding"
+     ]
+    },
+    "right": {
+     "title": "Late Transmural Infarction",
+     "points": [
+      "Paper-thin non-enhancing wall",
+      "Pneumatosis intestinalis (mural gas)",
+      "Portomesenteric venous gas",
+      "Pneumoperitoneum from perforation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Computed tomography is the diagnostic gold standard for acute lower quadrant pain. **Acute appendicitis** is diagnosed when the inflamed appendix exceeds 6 mm in outer diameter with associated mural hyperenhancement, periappendiceal fat stranding, and an obstructing calcified **appendicolith** visible within the appendiceal lumen.",
+   "say": "Computed tomography is the diagnostic gold standard for acute lower quadrant pain. Acute appendicitis is diagnosed when the inflamed appendix exceeds 6 millimetres in outer diameter with associated mural hyperenhancement, periappendiceal fat stranding, and an obstructing calcified appendicolith visible within the appendiceal lumen.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-gangrenous-appendicitis.webp",
+    "alt": "Gross pathology specimen showing gangrenous appendicitis with luminal appendicolith obstruction and wall perforation.",
+    "caption": "Gangrenous appendicitis with obstructing appendicolith and mucosal ulceration (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Enterography visualises both luminal and extra-enteric inflammatory complications. Active **Crohn disease** characteristically displays transmural wall thickening, mucosal hyperenhancement, skip lesions, mesenteric vascular engorgement known as the **comb sign**, and fibrofatty proliferation of mesenteric fat termed creeping fat surrounding diseased intestinal segments.",
+   "say": "Enterography visualises both luminal and extra-enteric inflammatory complications. Active Crohn disease characteristically displays transmural wall thickening, mucosal hyperenhancement, skip lesions, mesenteric vascular engorgement known as the comb sign, and fibrofatty proliferation of mesenteric fat termed creeping fat surrounding diseased intestinal segments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Imaging Description",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Comb sign",
+      "Engorged vasa recta perpendicular to bowel",
+      "Active mesenteric inflammation"
+     ],
+     [
+      "Target sign",
+      "Mucosal hyperenhancement with submucosal oedema",
+      "Active transmural enteritis"
+     ],
+     [
+      "Creeping fat",
+      "Fibrofatty mesenteric proliferation separating loops",
+      "Chronic transmural Crohn disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Free intraperitoneal gas following visceral perforation exhibits distinctive plain film signs. On supine radiographs, **pneumoperitoneum** is heralded by the **Rigler sign**, in which free gas outlines both the inner luminal and outer serosal margins of the intestinal wall as distinct radiopaque lines across the abdomen.",
+   "say": "Free intraperitoneal gas following visceral perforation exhibits distinctive plain film signs. On supine radiographs, pneumoperitoneum is heralded by the Rigler sign, in which free gas outlines both the inner luminal and outer serosal margins of the intestinal wall as distinct radiopaque lines across the abdomen.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-large-bowel-obstruction.webp",
+    "alt": "Abdominal radiograph demonstrating marked large bowel dilatation and outlines of intestinal gas.",
+    "caption": "Abdominal radiograph demonstrating bowel gas distribution and serosal margins (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Self-limiting focal fat inflammation can clinically mimic surgical emergencies. On computed tomography, acute **epiploic appendagitis** manifests as an oval, fat-attenuation lesion under 5 cm with an inflamed **hyperdense peripheral rim** and a central dot sign from a thrombosed vein, abutting the antimesenteric serosa of the colon.",
+   "say": "Self-limiting focal fat inflammation can clinically mimic surgical emergencies. On computed tomography, acute epiploic appendagitis manifests as an oval, fat-attenuation lesion under 5 centimetres with an inflamed hyperdense peripheral rim and a central dot sign from a thrombosed vein, abutting the antimesenteric serosa of the colon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epiploic Appendagitis",
+     "points": [
+      "Oval fat-density mass under 5 cm",
+      "Hyperdense peripheral ring / halo",
+      "Central hyperdense venous dot",
+      "Normal adjacent colonic wall thickness"
+     ]
+    },
+    "right": {
+     "title": "Acute Diverticulitis",
+     "points": [
+      "Segmental colonic wall thickening",
+      "Fluid-filled or inflamed diverticula",
+      "Extensive diffuse pericolonic stranding",
+      "Potential abscess or free perforation"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Gastrointestinal Radiology (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Abdominal Bowel)"
+ ]
+}

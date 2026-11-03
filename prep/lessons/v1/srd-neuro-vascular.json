@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "srd-neuro-vascular",
+ "title": "Stroke, haemorrhage and cerebrovascular disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Non-contrast computed tomography remains the first-line imaging modality for suspected **acute ischaemic stroke**. The **hyperdense middle cerebral artery sign** indicates acute intraluminal thromboembolism within the horizontal M1 segment, demonstrating exceptional specificity for large vessel occlusion before parenchymal changes manifest on early brain scans.",
+   "say": "Non-contrast computed tomography remains the first line imaging modality for suspected acute ischaemic stroke. The hyperdense middle cerebral artery sign indicates acute intraluminal thromboembolism within the horizontal M1 segment, demonstrating exceptional specificity for large vessel occlusion before parenchymal changes manifest on early brain scans.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperdense MCA Sign",
+     "points": [
+      "Visualises acute intraluminal thrombus",
+      "Located within M1 segment",
+      "High attenuation on non-contrast CT",
+      "Specific for large vessel occlusion"
+     ]
+    },
+    "right": {
+     "title": "Parenchymal Changes",
+     "points": [
+      "Loss of insular ribbon",
+      "Lentiform nucleus obscuration",
+      "Cortical sulcal effacement",
+      "Hypoattenuation develops over hours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **ASPECTS** (Alberta Stroke Program Early CT Score) system quantifies early ischemic changes across the **middle cerebral artery** territory. Scoring starts at 10 points on baseline non-contrast CT, subtracting 1 point for each involved region among subcortical structures and cortical zones across defined axial slices.",
+   "say": "The ASPECTS system quantifies early ischemic changes across the middle cerebral artery territory. Scoring starts at 10 points on baseline non-contrast CT, subtracting 1 point for each involved region among subcortical structures and cortical zones across defined axial slices.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Territory",
+     "ASPECTS Zone",
+     "Deduction Value"
+    ],
+    "rows": [
+     [
+      "Subcortical",
+      "Caudate, Lentiform, Internal Capsule",
+      "1 point each (3 total)"
+     ],
+     [
+      "Ganglionic level cortex",
+      "Insular ribbon, M1, M2, M3",
+      "1 point each (4 total)"
+     ],
+     [
+      "Supraganglionic cortex",
+      "M4, M5, M6",
+      "1 point each (3 total)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On magnetic resonance imaging, acute cellular injury produces marked restriction of microscopic water movement. High **diffusion-weighted imaging** signal paired with low **apparent diffusion coefficient** values reflects acute **cytotoxic oedema** resulting from energetic failure of ATP-dependent sodium-potassium pumps in ischaemic neurons and glia.",
+   "say": "On magnetic resonance imaging, acute cellular injury produces marked restriction of microscopic water movement. High diffusion-weighted imaging signal paired with low apparent diffusion coefficient values reflects acute cytotoxic oedema resulting from energetic failure of ATP-dependent sodium-potassium pumps in ischaemic neurons and glia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Arterial occlusion"
+     },
+     {
+      "id": "b",
+      "label": "ATP pump failure"
+     },
+     {
+      "id": "c",
+      "label": "Cytotoxic oedema"
+     },
+     {
+      "id": "d",
+      "label": "DWI high / ADC low"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "ischaemia"
+     ],
+     [
+      "b",
+      "c",
+      "sodium influx"
+     ],
+     [
+      "c",
+      "d",
+      "restricted diffusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Advanced perfusion assessment identifies tissue salvageable by revascularisation therapy. A critical **CT perfusion mismatch** defines the **ischaemic penumbra**, characterised by delayed transit time (Tmax > 6 seconds or MTT > 145%) alongside preserved **cerebral blood volume** (CBV > 2.0 mL/100g) in viable hypoperfused tissue.",
+   "say": "Advanced perfusion assessment identifies tissue salvageable by revascularisation therapy. A critical CT perfusion mismatch defines the ischaemic penumbra, characterised by delayed transit time exceeding 6 seconds alongside preserved cerebral blood volume above 2.0 millilitres per 100 grams in viable hypoperfused tissue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Perfusion Metric",
+     "Infarct Core",
+     "Ischaemic Penumbra"
+    ],
+    "rows": [
+     [
+      "Mean Transit Time (MTT)",
+      "Markedly prolonged (> 145%)",
+      "Prolonged (> 145%)"
+     ],
+     [
+      "Time to Peak (Tmax)",
+      "Significantly delayed (> 6 s)",
+      "Delayed (> 6 s)"
+     ],
+     [
+      "Cerebral Blood Volume (CBV)",
+      "Severely decreased (< 2.0 mL/100g)",
+      "Preserved (> 2.0 mL/100g)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Non-contrast computed tomography promptly identifies acute intracranial extravasation. **Subarachnoid haemorrhage** manifests as hyperdense blood filling the basal cisterns and cerebral sulci, most frequently originating from the rupture of a saccular aneurysm situated at the **anterior communicating artery** complex in the anterior Circle of Willis.",
+   "say": "Non-contrast computed tomography promptly identifies acute intracranial extravasation. Subarachnoid haemorrhage manifests as hyperdense blood filling the basal cisterns and cerebral sulci, most frequently originating from the rupture of a saccular aneurysm situated at the anterior communicating artery complex in the anterior Circle of Willis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-aneurysm-fig1.webp",
+    "alt": "Medical diagram detailing cerebral aneurysm rupture and subsequent subarachnoid haemorrhage within the basal cisterns.",
+    "caption": "Saccular aneurysm rupture: basal cisternal subarachnoid haemorrhage distribution (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Intracranial microbleeds exhibit characteristic spatial patterns that separate chronic vasculopathies on gradient echo or susceptibility-weighted sequences. Chronic hypertension damages small perforating arterioles, producing punctate lesions confined to the **putamen**, thalamus, and pons, whereas **cerebral amyloid angiopathy** yields strictly lobar cortical-subcortical microbleeds.",
+   "say": "Intracranial microbleeds exhibit characteristic spatial patterns that separate chronic vasculopathies on gradient echo or susceptibility-weighted sequences. Chronic hypertension damages small perforating arterioles, producing punctate lesions confined to the putamen, thalamus, and pons, whereas cerebral amyloid angiopathy yields strictly lobar cortical-subcortical microbleeds.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-amyloid-angiopathy-fig1.webp",
+    "alt": "Histopathological and imaging illustration demonstrating cortical-subcortical microhaemorrhages in cerebral amyloid angiopathy.",
+    "caption": "Cerebral amyloid angiopathy: cortical-subcortical microhaemorrhages sparing deep basal nuclei (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Cervical arterial trauma or spontaneous shear forces create an intramural entry tear. Non-traumatic dissection of the **internal carotid artery** produces an eccentric crescent of hyperintense subacute **mural haematoma** surrounding an attenuated eccentric lumen, optimally visualised on fat-saturated T1-weighted axial magnetic resonance images.",
+   "say": "Cervical arterial trauma or spontaneous shear forces create an intramural entry tear. Non-traumatic dissection of the internal carotid artery produces an eccentric crescent of hyperintense subacute mural haematoma surrounding an attenuated eccentric lumen, optimally visualised on fat-saturated T1-weighted axial magnetic resonance images.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Internal Carotid Dissection",
+     "points": [
+      "Eccentric crescentic mural haematoma",
+      "High signal on fat-saturated T1",
+      "Narrowed eccentric vessel lumen",
+      "Often extends to carotid canal"
+     ]
+    },
+    "right": {
+     "title": "Atherosclerotic Stenosis",
+     "points": [
+      "Concentric or calcified plaque",
+      "Located at the carotid bifurcation",
+      "Heterogeneous mixed signal intensity",
+      "Lacks intramural crescentic dissection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thrombosis of the cerebral venous collector pathways presents with intracranial hypertension and atypical venous infarction. On contrast-enhanced computed tomography, **venous sinus thrombosis** classically produces the **empty delta sign**, characterised by a central non-enhancing triangular thrombus surrounded by vivid collateral enhancement of the engorged dural leaves.",
+   "say": "Thrombosis of the cerebral venous collector pathways presents with intracranial hypertension and atypical venous infarction. On contrast-enhanced computed tomography, venous sinus thrombosis classically produces the empty delta sign, characterised by a central non-enhancing triangular thrombus surrounded by vivid collateral enhancement of the engorged dural leaves.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-venous-thrombosis-fig1.webp",
+    "alt": "Contrast-enhanced computed tomography scan showing the empty delta sign within the superior sagittal sinus.",
+    "caption": "Empty delta sign in superior sagittal sinus thrombosis with enhancing dural collaterals (StewardMD).",
+    "ar": 1.7778
+   }
+  }
+ ],
+ "quiz": [
+  "q_d8c2384677a9",
+  "q_850cb86e4e8c",
+  "q_325056960b35"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Neuroradiology (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Neurovascular)"
+ ]
+}

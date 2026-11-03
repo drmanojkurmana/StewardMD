@@ -1,130 +1,202 @@
 {
  "v": 1,
  "module": "srd-hn-neck",
- "subject": "ss-radiology",
- "title": "Sinonasal, pharynx and neck spaces: high-yield imaging for NEET-PG and INI-CET",
- "minutes": 6,
+ "title": "Sinonasal, pharynx and neck spaces",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "The **sinonasal tract** is best assessed with CT for bone and MRI for soft tissue. Chronic sinonasal disease most often follows the **infundibular pattern**, which involves the ostiomeatal complex and the drainage pathway from the frontal, anterior ethmoid and maxillary sinuses. Recognised associations include cystic fibrosis and aspirin sensitivity. Frontal sinus mucoceles are less common than maxillary or ethmoidal ones.",
-   "say": "The sinonasal tract is best assessed with CT for bone and MRI for soft tissue. Chronic sinonasal disease most often follows the infundibular pattern, which involves the ostiomeatal complex and the drainage pathway from the frontal, anterior ethmoid and maxillary sinuses. Recognised associations include cystic fibrosis and aspirin sensitivity. Frontal sinus mucoceles are less common than maxillary or ethmoidal ones.",
+   "tx": "Vascular sinonasal masses present with distinctive clinical demographics and remodelling signs. **Juvenile nasopharyngeal angiofibroma** characteristically arises near the sphenopalatine foramen in adolescent males, causing anterior bowing of the posterior wall of the maxillary antrum, known as the **Holman-Miller sign**, on axial CT and MR imaging.",
+   "say": "Vascular sinonasal masses present with distinctive clinical demographics and remodelling signs. Juvenile nasopharyngeal angiofibroma characteristically arises near the sphenopalatine foramen in adolescent males, causing anterior bowing of the posterior wall of the maxillary antrum, known as the Holman-Miller sign, on axial CT and MR imaging.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/srd-hn-neck-fig1.webp",
-    "alt": "Coronal CT image of paranasal sinuses demonstrating obstruction of the ostiomeatal complex leading to the infundibular pattern of chronic sinusitis, affecting the maxillary and anterior ethmoid sinuses.",
-    "caption": "Coronal CT showing ostiomeatal complex obstruction and infundibular pattern chronic sinusitis. Image: Caylakli F, Yavuz H, Cagici AC, Ozluoglu LN, CC BY 2.0, Wikimedia Commons.",
-    "ar": 1.2955
+    "alt": "Coronal CT image of paranasal sinuses demonstrating obstruction of the ostiomeatal complex leading to chronic sinusitis.",
+    "caption": "Paranasal sinus anatomy: ostiomeatal complex and sinonasal drainage pathways (StewardMD preserved figure).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Fungal sinusitis has two key forms. **Allergic fungal sinusitis** shows hyperdense sinus contents on CT, often with bilateral ethmoid and maxillary involvement. **Acute invasive fungal sinusitis** is the dangerous form in immunocompromised or diabetic patients, and its hallmark is extension into the fat around the sinuses. A mucocele is an obstructed, airless sinus that expands circumferentially over time.",
-   "say": "Fungal sinusitis has two key forms. Allergic fungal sinusitis shows hyperdense sinus contents on CT, often with bilateral ethmoid and maxillary involvement. Acute invasive fungal sinusitis is the dangerous form in immunocompromised or diabetic patients, and its hallmark is extension into the fat around the sinuses. A mucocele is an obstructed, airless sinus that expands circumferentially over time.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Allergic fungal",
-     "Acute invasive"
-    ],
-    "rows": [
-     [
-      "Sinus content",
-      "Hyperdense",
-      "Variable, often soft tissue"
-     ],
-     [
-      "Pattern",
-      "Bilateral ethmoid and maxillary",
-      "Extension into orbit or fat"
-     ],
-     [
-      "Host",
-      "Atopic, immunocompetent",
-      "Immunocompromised, diabetic"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Lemierre syndrome** follows an oropharyngeal infection, often from Fusobacterium necrophorum, which causes internal jugular vein thrombophlebitis. Septic pulmonary emboli then appear on chest imaging. A **retropharyngeal abscess** is suggested on lateral neck X-ray by a widened prevertebral shadow, and an abscess that involves the danger space can track into the mediastinum.",
-   "say": "Lemierre syndrome follows an oropharyngeal infection, often from Fusobacterium necrophorum, which causes internal jugular vein thrombophlebitis. Septic pulmonary emboli then appear on chest imaging. A retropharyngeal abscess is suggested on lateral neck X-ray by a widened prevertebral shadow, and an abscess that involves the danger space can track into the mediastinum.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Oropharyngeal infection"
-     },
-     {
-      "id": "b",
-      "label": "IJV thrombophlebitis"
-     },
-     {
-      "id": "c",
-      "label": "Septic pulmonary emboli"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Neck spaces guide localisation. A **carotid body tumour** lies in the carotid space and displaces the parapharyngeal fat anteromedially, and its classic MRI pattern is salt and pepper. Level 2B nodes lie posterior to the internal jugular vein. In laryngeal cancer, **pre-epiglottic fat** matters for staging because it is rich in lymphatics, and paraglottic involvement makes a tumour T3.",
-   "say": "Neck spaces guide localisation. A carotid body tumour lies in the carotid space and displaces the parapharyngeal fat anteromedially, and its classic MRI pattern is salt and pepper. Level 2B nodes lie posterior to the internal jugular vein. In laryngeal cancer, pre-epiglottic fat matters for staging because it is rich in lymphatics, and paraglottic involvement makes a tumour T3.",
+   "tx": "Sinonasal infections in severely compromised patients can rapidly become life-threatening. Invasive fungal **rhinosinusitis** caused by Mucorales or Aspergillus presents in immunocompromised hosts with bone destruction, intrasinus soft tissue, and hypoenhancement indicating devascularized tissue, recognized as the **black turbinate sign** on contrast-enhanced MR studies.",
+   "say": "Sinonasal infections in severely compromised patients can rapidly become life-threatening. Invasive fungal rhinosinusitis caused by Mucorales or Aspergillus presents in immunocompromised hosts with bone destruction, intrasinus soft tissue, and hypoenhancement indicating devascularized tissue, recognized as the black turbinate sign on contrast-enhanced MR studies.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Carotid body tumour",
+     "title": "Invasive Fungal Rhinosinusitis",
      "points": [
-      "Carotid space",
-      "Anteromedial fat displacement",
-      "Salt and pepper on MRI"
+      "Immunocompromised diabetic ketoacidosis",
+      "Black turbinate sign from devascularisation",
+      "Aggressive osseous destruction",
+      "Rapid orbital and cavernous extension"
      ]
     },
     "right": {
-     "title": "Laryngeal staging",
+     "title": "Allergic Fungal Rhinosinusitis",
      "points": [
-      "Pre-epiglottic fat is lymphatic-rich",
-      "Paraglottic space defines T3",
-      "Cricoid invasion blocks conservation"
+      "Immunocompetent atopic patients",
+      "High attenuation mucin on unenhanced CT",
+      "Signal void on T2 MRI due to metals",
+      "Remodelling without frank tissue necrosis"
      ]
     }
    }
   },
   {
-   "tx": "For the **thyroid**, ultrasound is the first-line modality. A solid, hypoechoic nodule with central vascularity and microcalcifications has the highest suspicion for malignancy and should be prioritised for biopsy. The **Zuckerkandl tubercle** is a posterior thyroid extension that serves as a landmark for the recurrent laryngeal nerve, which lies medial to it. Thyroglossal duct cysts are midline, and branchial cleft cysts are lateral.",
-   "say": "For the thyroid, ultrasound is the first-line modality. A solid, hypoechoic nodule with central vascularity and microcalcifications has the highest suspicion for malignancy and should be prioritised for biopsy. The Zuckerkandl tubercle is a posterior thyroid extension that serves as a landmark for the recurrent laryngeal nerve, which lies medial to it. Thyroglossal duct cysts are midline, and branchial cleft cysts are lateral.",
-   "vis": null
+   "tx": "Epithelial neoplasms of the Schneiderian membrane show distinctive convolution patterns. **Inverted papilloma** originates on the lateral nasal wall near the middle turbinate, demonstrating a **cerebriform** convoluted columnar pattern on T2 and contrast-enhanced T1 MRI, with 10% harbouring synchronous or metachronous squamous cell carcinoma.",
+   "say": "Epithelial neoplasms of the Schneiderian membrane present with distinctive convolution patterns. Inverted papilloma originates on the lateral nasal wall near the middle turbinate, demonstrating a cerebriform convoluted columnar pattern on T2 and contrast-enhanced T1 MRI, with 10 percent harbouring synchronous or metachronous squamous cell carcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Inverted Papilloma",
+     "Sinonasal Squamous Carcinoma"
+    ],
+    "rows": [
+     [
+      "Primary Site",
+      "Middle turbinate / lateral nasal wall",
+      "Maxillary sinus antrum or nasal cavity"
+     ],
+     [
+      "MRI T2 Pattern",
+      "Cerebriform columnar striations",
+      "Heterogeneous solid mass"
+     ],
+     [
+      "Malignancy Risk",
+      "10% harbour squamous carcinoma",
+      "Primary aggressive malignant neoplasm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deep cervical spaces require systematic cross-sectional analysis using vector displacement. **Parapharyngeal space** tumours are localized by displacement patterns: deep **parotid** lobe lesions displace parapharyngeal fat anteromedially, whereas carotid space schwannomas displace fat anteriorly, and masticator space lesions displace it posteromedially.",
+   "say": "Deep cervical spaces require systematic cross-sectional analysis using vector displacement. Parapharyngeal space tumours are localized by displacement patterns: deep parotid lobe lesions displace parapharyngeal fat anteromedially, whereas carotid space schwannomas displace fat anteriorly, and masticator space lesions displace it posteromedially.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acinic-cell-carcinoma-fig1.webp",
+    "alt": "Anatomical schematic and imaging of parotid salivary space neoplasm showing deep lobe extension into the parapharyngeal space.",
+    "caption": "Deep parotid mass: anteromedial displacement of parapharyngeal fat (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Oropharyngeal sepsis can precipitate septic vascular complications in young individuals. **Lemierre syndrome** is septic thrombophlebitis of the **internal jugular vein** caused by Fusobacterium necrophorum, classically arising from an oropharyngeal or peritonsillar abscess with septic pulmonary emboli presenting as cavitating peripheral lung nodules.",
+   "say": "Oropharyngeal sepsis can precipitate septic vascular complications in young individuals. Lemierre syndrome is septic thrombophlebitis of the internal jugular vein caused by Fusobacterium necrophorum, classically arising from an oropharyngeal or peritonsillar abscess with septic pulmonary emboli presenting as cavitating peripheral lung nodules.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lem1",
+      "label": "Tonsillar / pharyngeal infection"
+     },
+     {
+      "id": "lem2",
+      "label": "Parapharyngeal space spread"
+     },
+     {
+      "id": "lem3",
+      "label": "Internal jugular thrombosis"
+     },
+     {
+      "id": "lem4",
+      "label": "Cavitating septic emboli"
+     }
+    ],
+    "edges": [
+     [
+      "lem1",
+      "lem2",
+      "Fusobacterium"
+     ],
+     [
+      "lem2",
+      "lem3",
+      "venous invasion"
+     ],
+     [
+      "lem3",
+      "lem4",
+      "haematogenous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate cross-sectional staging determines surgical resectability of mucosal malignancies in the head and neck. **Laryngeal squamous cell carcinoma** invading through **thyroid cartilage** or cricoid cartilage into extralaryngeal soft tissues upstages the tumour to T4a, precluding organ-preservation radiotherapy and requiring total laryngectomy with postoperative chemoradiation.",
+   "say": "Accurate cross-sectional staging determines surgical resectability of mucosal malignancies in the head and neck. Laryngeal squamous cell carcinoma invading through thyroid cartilage or cricoid cartilage into extralaryngeal soft tissues upstages the tumour to T4a, precluding organ-preservation radiotherapy and requiring total laryngectomy with postoperative chemoradiation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "T Stage",
+     "Anatomical Involvement",
+     "Management Pathway"
+    ],
+    "rows": [
+     [
+      "T1 to T2",
+      "Confined to vocal cords / supraglottis",
+      "Radiotherapy or transoral laser resection"
+     ],
+     [
+      "T3",
+      "Vocal cord fixation or paraglottic space",
+      "Concurrent chemoradiation protocol"
+     ],
+     [
+      "T4a",
+      "Erosion through thyroid cartilage cortex",
+      "Surgical total laryngectomy mandatory"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital lateral cervical anomalies demonstrate predictable spatial relationships. **Branchial cleft cyst** second type is the most common lateral neck cystic mass (95%), located anteromedial to the **sternocleidomastoid** muscle at the angle of the mandible, lateral to the carotid bifurcation and posterior to the submandibular gland.",
+   "say": "Congenital lateral cervical anomalies occur with predictable spatial relationships in young patients. Branchial cleft cyst second type is the most common lateral neck cystic mass 95 percent, located anteromedial to the sternocleidomastoid muscle at the angle of the mandible, lateral to the carotid bifurcation and posterior to the submandibular gland.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Second Branchial Cleft Cyst",
+     "points": [
+      "95% of branchial anomalies",
+      "Anteromedial to sternocleidomastoid",
+      "At level of carotid bifurcation",
+      "Beak sign between internal and external carotid"
+     ]
+    },
+    "right": {
+     "title": "Thyroglossal Duct Cyst",
+     "points": [
+      "Most common midline paediatric neck cyst",
+      "Located along course of thyroglossal tract",
+      "Embedded in or adjacent to hyoid bone",
+      "Elevates during tongue protrusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Midline congenital cervical anomalies arise along embryonic thyroid migratory corridors. **Thyroglossal duct cyst** represents a midline or paramedian unilocular cyst along the tract of thyroid descent between the **foramen cecum** and the base of the neck, moving upwards on tongue protrusion due to intimate hyoid bone attachments.",
+   "say": "Midline congenital cervical anomalies arise along embryonic thyroid migratory corridors. Thyroglossal duct cyst represents a midline or paramedian unilocular cyst along the tract of thyroid descent between the foramen cecum and the base of the neck, moving upwards on tongue protrusion due to intimate hyoid bone attachments.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-epiglottitis-fig1.webp",
+    "alt": "Lateral neck soft tissue radiography and anatomical structures of the supraglottic and midline hyoid region.",
+    "caption": "Midline neck anatomy: hyoid bone, epiglottis, and thyroglossal tract alignment (StewardMD).",
+    "ar": 1.7778
+   }
   }
  ],
  "quiz": [
-  "ct-147f2d25570a",
-  "ct-1ab994ee6e3f",
-  "ct-c75df87f9672"
+  "q_rad_hn_01",
+  "q_rad_hn_02",
+  "q_rad_hn_03"
  ],
  "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 64
- }
+ "refs": [
+  "Crack the Core Exam Head and Neck (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Neck Spaces)"
+ ]
 }

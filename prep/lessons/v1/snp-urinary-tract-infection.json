@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "snp-urinary-tract-infection",
+ "title": "Urinary tract infection and pyelonephritis",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Uropathogenic strains of **Uropathogenic Escherichia coli** (**UPEC**) account for **75%** to **85%** of all community-acquired uncomplicated urinary tract infections. UPEC expresses **type 1 fimbriae** that bind mannosylated uroplakin receptors on superficial bladder umbrella cells to facilitate colonization, alongside pyelonephritis-associated **P fimbriae** that mediate renal parenchymal tissue invasion.",
+   "say": "Uropathogenic strains of Uropathogenic Escherichia coli account for 75% to 85% of all community-acquired uncomplicated urinary tract infections. UPEC expresses type 1 fimbriae that bind mannosylated uroplakin receptors on superficial bladder umbrella cells to facilitate colonization, alongside pyelonephritis-associated P fimbriae that mediate renal parenchymal tissue invasion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 Fimbriae Actions",
+     "points": [
+      "Mannose-sensitive bacterial adhesins",
+      "Binds superficial umbrella cell uroplakin",
+      "Mediates bacterial bladder colonization",
+      "Facilitates intracellular bacterial biofilm"
+     ]
+    },
+    "right": {
+     "title": "P Fimbriae (Pap) Actions",
+     "points": [
+      "Mannose-resistant bacterial adhesins",
+      "Binds digalactoside on uroepithelium",
+      "Facilitates ascending pyelonephritis",
+      "Essential virulence factor for parenchymal invasion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Outpatient management of acute uncomplicated pyelonephritis incorporates oral **fluoroquinolones**, such as **ciprofloxacin** **500** mg twice daily for **7** days, provided local regional resistance remains below **10%**. Alternatively, an initial intravenous dose of **ceftriaxone** followed by oral **trimethoprim-sulfamethoxazole** for **14** days provides excellent antimicrobial eradication.",
+   "say": "Outpatient management of acute uncomplicated pyelonephritis incorporates oral fluoroquinolones, such as ciprofloxacin 500 mg twice daily for 7 days, provided local regional resistance remains below 10%. Alternatively, an initial intravenous dose of ceftriaxone followed by oral trimethoprim-sulfamethoxazole for 14 days provides excellent antimicrobial eradication.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Mild-to-moderate pyelonephritis"
+     },
+     {
+      "id": "b",
+      "label": "Ciprofloxacin 500 mg BID for 7 days if resistance < 10%"
+     },
+     {
+      "id": "c",
+      "label": "IV ceftriaxone plus TMP-SMX for 14 days as alternative"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The presence of **Asymptomatic bacteriuria**, defined by isolation of >= **10^5** CFU/mL of a single bacterial species in two consecutive clean-catch voids without urinary symptoms, requires antimicrobial eradication **ONLY** in pregnant individuals and patients undergoing invasive urological procedures breaching the urothelial mucosa, avoiding unnecessary resistance.",
+   "say": "The presence of Asymptomatic bacteriuria, defined by isolation of 10 to the fifth CFU/mL of a single bacterial species in two consecutive clean-catch voids without urinary symptoms, requires antimicrobial eradication ONLY in pregnant individuals and patients undergoing invasive urological procedures breaching the urothelial mucosa, avoiding unnecessary resistance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mandatory Treatment Indications",
+     "points": [
+      "Pregnant women (prevents pyelonephritis/preterm labor)",
+      "Prior to invasive urological surgeries",
+      "Procedures with anticipated mucosal bleeding",
+      "Screening recommended at 12 to 16 weeks gestation",
+      "Key criteria: pregnancy"
+     ]
+    },
+    "right": {
+     "title": "Do Not Treat Cohorts",
+     "points": [
+      "Elderly institutionalized individuals",
+      "Diabetic outpatients without symptoms",
+      "Long-term indwelling catheter carriage",
+      "Non-urologic surgical candidates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe **Emphysematous pyelonephritis** is a life-threatening, necrotizing gas-forming infection occurring almost exclusively in patients with poorly controlled diabetes mellitus. Microbial fermentation of high tissue glucose concentrations by gas-producing organisms, predominantly **E. coli** or **Klebsiella pneumoniae**, generates intraparenchymal carbon dioxide and hydrogen gas bubbles.",
+   "say": "Severe Emphysematous pyelonephritis is a life-threatening, necrotizing gas-forming infection occurring almost exclusively in patients with poorly controlled diabetes mellitus. Microbial fermentation of high tissue glucose concentrations by gas-producing organisms, predominantly E. coli or Klebsiella pneumoniae, generates intraparenchymal carbon dioxide and hydrogen gas bubbles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pyelonephritis-fig1.webp",
+    "alt": "Acute Pyelonephritis Renal Pathology",
+    "caption": "Suppurative renal parenchymal infection and microabscesses in pyelonephritis (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "The computed tomography **Huang and Tseng classification** stratifies emphysematous pyelonephritis to guide surgical intervention: **Class 1** exhibits gas confined to the collecting system; **Class 2** displays gas in the renal parenchyma; **Class 3A/3B** denotes extension into the perinephric or pararenal space; and **Class 4** indicates bilateral disease or infection in a solitary kidney.",
+   "say": "The computed tomography Huang and Tseng classification stratifies emphysematous pyelonephritis to guide surgical intervention: Class 1 exhibits gas confined to the collecting system; Class 2 displays gas in the renal parenchyma; Class 3A and 3B denotes extension into the perinephric or pararenal space; and Class 4 indicates bilateral disease or infection in a solitary kidney.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Huang-Tseng Class",
+     "Gas Distribution Pattern",
+     "Management Strategy"
+    ],
+    "rows": [
+     [
+      "Class 1",
+      "Gas confined strictly to collecting system",
+      "Intravenous antibiotics, catheter drainage"
+     ],
+     [
+      "Class 2",
+      "Gas within renal parenchyma alone",
+      "Percutaneous drainage and antibiotics"
+     ],
+     [
+      "Class 3A / 3B",
+      "Extension into perinephric/pararenal space",
+      "Percutaneous drainage; nephrectomy if failed"
+     ],
+     [
+      "Class 4",
+      "Bilateral involvement or solitary kidney",
+      "Aggressive bilateral percutaneous drainage"
+     ],
+     [
+      "CT classification",
+      "Associated with CT classification",
+      "Associated with CT classification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic destructive **Xanthogranulomatous pyelonephritis** (**XPN**) develops secondary to longstanding urinary obstruction and recurrent infection associated with a massive **staghorn calculus**. Histological analysis demonstrates extensive parenchymal replacement by sheets of lipid-laden **foamy macrophages** (xanthoma cells), frequently mimicking locally invasive renal cell carcinoma on cross-sectional imaging.",
+   "say": "Chronic destructive Xanthogranulomatous pyelonephritis develops secondary to longstanding urinary obstruction and recurrent infection associated with a massive staghorn calculus. Histological analysis demonstrates extensive parenchymal replacement by sheets of lipid-laden foamy macrophages, frequently mimicking locally invasive renal cell carcinoma on cross-sectional imaging.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tubulointerstitial-nephritis-pyelonephritis-cystic-fig1.webp",
+    "alt": "Tubulointerstitial Disease and Pyelonephritis Pathology",
+    "caption": "Granulomatous destruction and chronic pyelonephritis histopathology (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Ischemic **Renal papillary necrosis** manifests with sudden severe flank pain, gross hematuria, and sloughing of necrotic papillae causing acute ureteric obstruction. Predisposing clinical conditions are remembered by the classic mnemonic **POSTCARDS** (pyelonephritis, obstruction, **sickle cell disease**, tuberculosis, cirrhosis, **analgesics**, renal transplant, diabetes mellitus, and systemic vasculitis).",
+   "say": "Ischemic Renal papillary necrosis manifests with sudden severe flank pain, gross hematuria, and sloughing of necrotic papillae causing acute ureteric obstruction. Predisposing clinical conditions are remembered by the classic mnemonic POSTCARDS, incorporating pyelonephritis, obstruction, sickle cell disease, analgesics, and diabetes mellitus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "POSTCARDS Risk Factors",
+     "points": [
+      "Pyelonephritis and urinary obstruction",
+      "Sickle cell hemoglobinopathy",
+      "Chronic phenacetin/NSAID analgesic use",
+      "Poorly controlled diabetes mellitus",
+      "Key criteria: sloughed papillae"
+     ]
+    },
+    "right": {
+     "title": "Imaging Hallmarks",
+     "points": [
+      "Ring shadow sign on retrograde pyelogram",
+      "Medullary excavation and blunted calyces",
+      "Sloughed necrotic papilla in ureter",
+      "Triangular filling defects in calyces"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Urogenital infection by Mycobacterium tuberculosis produces classic **sterile pyuria** accompanied by persistent microscopic **hematuria** and acidic urine pH. Longstanding disease triggers progressive fibrotic scarring, manifesting on intravenous urography as infundibular strictures, calyceal amputation, and extensive dystrophic calcification termed a **putty kidney**.",
+   "say": "Urogenital infection by Mycobacterium tuberculosis produces classic sterile pyuria accompanied by persistent microscopic hematuria and acidic urine pH. Longstanding disease triggers progressive fibrotic scarring, manifesting on intravenous urography as infundibular strictures, calyceal amputation, and extensive dystrophic calcification termed a putty kidney.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Hematogenous renal cortical seeding",
+      "Sterile pyuria and caseating granulomas",
+      "Infundibular strictures and autonephrectomy (putty kidney)"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "Renal tuberculosis"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 53-54",
+  "Brenner and Rector The Kidney 11e Ch. 41",
+  "Harrison Principles of Internal Medicine 22e Ch. 130"
+ ]
+}

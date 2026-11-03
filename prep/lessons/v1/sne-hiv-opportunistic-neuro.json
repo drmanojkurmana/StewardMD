@@ -1,137 +1,215 @@
 {
  "v": 1,
  "module": "sne-hiv-opportunistic-neuro",
- "subject": "ss-neurology",
- "title": "HIV and opportunistic CNS infections: high-yield essentials",
- "minutes": 6,
+ "title": "HIV neurology and opportunistic neuro-infections",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Cryptococcal meningitis is the commonest fungal CNS infection in advanced **HIV**, usually when CD4 counts fall below 100 cells per microlitre. Patients often lack neck stiffness and present with subacute headache, confusion and personality change. The key diagnostic test is the **cryptococcal antigen** in serum or CSF, and **India ink** staining of CSF can show encapsulated yeasts. Serum antigen screening is advised for asymptomatic patients with CD4 counts below 200.",
-   "say": "Cryptococcal meningitis is the commonest fungal central nervous system infection in advanced HIV, usually when CD4 counts fall below one hundred cells per microlitre. Patients often lack neck stiffness and present with subacute headache, confusion and personality change. The key diagnostic test is the cryptococcal antigen in serum or CSF, and India ink staining of CSF can show encapsulated yeasts. Serum antigen screening is advised for asymptomatic patients with CD4 counts below two hundred.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "What it shows",
-     "Exam point"
-    ],
-    "rows": [
-     [
-      "CSF India ink",
-      "Encapsulated yeasts",
-      "Quick bedside stain"
-     ],
-     [
-      "Cryptococcal antigen",
-      "Capsular polysaccharide",
-      "Sensitive in serum and CSF"
-     ],
-     [
-      "Serum CrAg screen",
-      "Silent infection",
-      "Advised when CD4 below 200"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Induction therapy combines **amphotericin B** with **flucytosine** for the first two weeks, followed by fluconazole consolidation and then maintenance. Flucytosine causes marrow suppression, so complete blood counts are checked weekly during induction. Maintenance fluconazole is given at 200 mg daily until immune reconstitution is achieved. Under WHO 2022 guidance, a single high dose of liposomal amphotericin with flucytosine and fluconazole is the preferred induction option in HIV patients.",
-   "say": "Induction therapy combines amphotericin B with flucytosine for the first two weeks, followed by fluconazole consolidation and then maintenance. Flucytosine causes marrow suppression, so complete blood counts are checked weekly during induction. Maintenance fluconazole is given at two hundred milligrams daily until immune reconstitution is achieved. Under WHO 2022 guidance, a single high dose of liposomal amphotericin with flucytosine and fluconazole is the preferred induction option in HIV patients.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Induction",
-      "sub": "Amphotericin plus flucytosine"
-     },
-     {
-      "id": "b",
-      "label": "Consolidation",
-      "sub": "Fluconazole"
-     },
-     {
-      "id": "c",
-      "label": "Maintenance",
-      "sub": "Fluconazole 200 mg daily"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Raised intracranial pressure is a major cause of death and blindness in cryptococcal meningitis. Opening pressure is measured at lumbar puncture, and **therapeutic lumbar punctures** are repeated to bring pressure below 20 cmH2O or to half the baseline value. Acetazolamide and mannitol are not the mainstay, and steroids are avoided in cryptococcal disease because they impair fungal clearance and raise mortality. Shunting is reserved for refractory cases.",
-   "say": "Raised intracranial pressure is a major cause of death and blindness in cryptococcal meningitis. Opening pressure is measured at lumbar puncture, and therapeutic lumbar punctures are repeated to bring pressure below twenty centimetres of water or to half the baseline value. Acetazolamide and mannitol are not the mainstay, and steroids are avoided in cryptococcal disease because they impair fungal clearance and raise mortality. Shunting is reserved for refractory cases.",
+   "tx": "HIV-associated neurocognitive disorder encompasses asymptomatic neurocognitive impairment, mild neurocognitive disorder, and severe HIV-associated dementia, driven by productive viral infection of perivascular **macrophages** and **microglia** rather than direct neuronal infection. Activated microglia secrete neurotoxic cytokines, chemokines, and viral gp120 proteins that induce synaptodendritic injury and widespread neuronal apoptosis.",
+   "say": "HIV-associated neurocognitive disorder encompasses asymptomatic neurocognitive impairment mild neurocognitive disorder and severe HIV-associated dementia driven by productive viral infection of perivascular macrophages and microglia rather than direct neuronal infection. Activated microglia secrete neurotoxic cytokines chemokines and viral gp120 proteins that induce synaptodendritic injury and widespread neuronal apoptosis.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Pressure control",
+     "title": "Target Host Cells",
      "points": [
-      "Repeat therapeutic LPs",
-      "Target below 20 cmH2O or half baseline",
-      "Avoid routine steroids"
+      "Perivascular macrophages and brain microglia",
+      "Viral entry mediated by CD4 and CCR5 coreceptors",
+      "Release of neurotoxic viral proteins (gp120, Tat)",
+      "Absence of direct productive neuronal infection"
      ]
     },
     "right": {
-     "title": "Steroids in cryptococcosis",
+     "title": "Clinical Spectrum (HAND)",
      "points": [
-      "Impair fungal clearance",
-      "Linked with higher mortality",
-      "Reserved for IRIS only"
+      "Asymptomatic neurocognitive impairment (ANI)",
+      "Mild neurocognitive disorder (MND)",
+      "HIV-associated dementia (HAD) with subcortical psychomotor slowing",
+      "Substantial improvement following suppressive ART"
      ]
     }
    }
   },
   {
-   "tx": "Timing of **antiretroviral therapy** matters in **cryptococcal meningitis**. Starting it straight away, rather than waiting roughly four to six weeks after antifungal treatment begins, raises mortality and the chance of **IRIS**, or **immune reconstitution inflammatory syndrome**. In the CNS, IRIS shows a **CD8 lymphocyte-predominant pleocytosis** and can be life-threatening. Where it occurs, **prednisolone** at about 1 mg/kg daily for at least a week may be given once raised intracranial pressure has been controlled.",
-   "say": "Timing of antiretroviral therapy matters in cryptococcal meningitis. Starting it straight away, rather than waiting roughly four to six weeks after antifungal treatment begins, raises mortality and the chance of IRIS, or immune reconstitution inflammatory syndrome. In the central nervous system, IRIS shows a CD8 lymphocyte-predominant pleocytosis and can be life-threatening. Where it occurs, prednisolone at about one milligram per kilogram daily for at least a week may be given once raised intracranial pressure has been controlled.",
+   "tx": "**Progressive multifocal leukoencephalopathy** is caused by opportunistic **polyomavirus** reactivation in severe immunosuppression, producing demyelinating white matter lesions that selectively involve subcortical **U-fibers** without mass effect or contrast enhancement on brain magnetic resonance imaging. Lytic infection of oligodendrocytes causes widespread myelin loss and bizarre giant astrocytes.",
+   "say": "Progressive multifocal leukoencephalopathy is caused by opportunistic polyomavirus reactivation in severe immunosuppression producing demyelinating white matter lesions that selectively involve subcortical U-fibers without mass effect or contrast enhancement on brain magnetic resonance imaging. Lytic infection of oligodendrocytes causes widespread myelin loss and bizarre giant astrocytes.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/sne-hiv-opportunistic-neuro-fig1.webp",
-    "alt": "Diagram illustrating the critical timing of antiretroviral therapy initiation relative to antifungal treatment in HIV-associated cryptococcal meningitis, highlighting the risk of IRIS and increased mortality with early ART.",
-    "caption": "Optimal ART timing in cryptococcal meningitis prevents IRIS and reduces mortality",
-    "ar": 1.8349
+    "src": "v1/kb/media/progressive-multifocal-leukoencephalopathy-fig1.webp",
+    "alt": "MRI showing asymmetric white matter demyelination scalloping along subcortical U-fibres in PML.",
+    "caption": "Subcortical U-fibre demyelination in progressive multifocal leukoencephalopathy (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "HIV-associated neurocognitive disorder spans three grades: asymptomatic impairment, mild neurocognitive disorder and HIV-associated dementia. Asymptomatic impairment is now the most common form in the post-HAART era. Microglia are the main cells infected and act as the reservoir. Before labelling dementia, confounders such as stroke, malignancy and substance use must be excluded. **Progressive multifocal leukoencephalopathy** from JC virus and **CMV ventriculitis** are other opportunistic CNS causes to remember.",
-   "say": "HIV-associated neurocognitive disorder spans three grades: asymptomatic impairment, mild neurocognitive disorder and HIV-associated dementia. Asymptomatic impairment is now the most common form in the post-HAART era. Microglia are the main cells infected and act as the reservoir. Before labelling dementia, confounders such as stroke, malignancy and substance use must be excluded. Progressive multifocal leukoencephalopathy from JC virus and CMV ventriculitis are other opportunistic central nervous system causes to remember.",
-   "vis": null
+   "tx": "**Primary CNS lymphoma** in HIV is an aggressive **Epstein-Barr virus** driven diffuse large B-cell lymphoma that typically appears as dense periventricular or subependymal enhancing masses positive for Epstein-Barr virus DNA in cerebrospinal fluid by polymerase chain reaction. Tumor cells display intense perivascular cuffing and rapid response to high-dose methotrexate therapy.",
+   "say": "Primary CNS lymphoma in HIV is an aggressive Epstein-Barr virus driven diffuse large B-cell lymphoma that typically appears as dense periventricular or subependymal enhancing masses positive for Epstein-Barr virus DNA in cerebrospinal fluid by polymerase chain reaction. Tumor cells display intense perivascular cuffing and rapid response to high-dose methotrexate therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary CNS Lymphoma",
+     "points": [
+      "Driven by oncogenic Epstein-Barr virus infection",
+      "Periventricular, subependymal, and corpus callosum masses",
+      "Solid or thick rim enhancement with central necrosis",
+      "High CSF Epstein-Barr virus PCR diagnostic sensitivity"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Approaches",
+     "points": [
+      "Prompt initiation of combination antiretroviral therapy",
+      "High-dose intravenous methotrexate-based chemotherapy",
+      "Whole-brain radiation reserved for refractory disease",
+      "Avoidance of upfront corticosteroids prior to biopsy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thallium-**201** SPECT or FDG-PET imaging differentiates hypermetabolic primary central nervous system lymphoma from hypometabolic infectious cerebral **toxoplasmosis** lesions without vascular **thrombosis** in HIV patients presenting with intracranial ring-enhancing masses. Thallium uptake reflects high tumour cell membrane pump turnover and distinguishes lymphoma from infectious granulomatous lesions.",
+   "say": "Thallium-201 SPECT or FDG-PET imaging differentiates hypermetabolic primary central nervous system lymphoma from hypometabolic infectious cerebral toxoplasmosis lesions without vascular thrombosis in HIV patients presenting with intracranial ring-enhancing masses. Thallium uptake reflects high tumour cell membrane pump turnover and distinguishes lymphoma from infectious granulomatous lesions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Modality / Parameter",
+     "Primary CNS Lymphoma",
+     "Cerebral Toxoplasmosis",
+     "Diagnostic Interpretation"
+    ],
+    "rows": [
+     [
+      "Thallium-201 SPECT",
+      "Marked radiotracer uptake (hot)",
+      "Absent radiotracer uptake (cold)",
+      "Malignant active tumour vs necrotic infection"
+     ],
+     [
+      "FDG-PET Metabolism",
+      "Profound glucose hypermetabolism",
+      "Hypometabolic relative to cortex",
+      "Standard functional discrimination imaging"
+     ],
+     [
+      "Lesion Distribution",
+      "Periventricular single or few masses",
+      "Basal ganglia multiple scattered nodules",
+      "Anatomical clue on contrast-enhanced MRI"
+     ],
+     [
+      "Empirical Response",
+      "No shrinkage with antiparasitic therapy",
+      "Marked radiological shrinkage within 14 days",
+      "Pyrimethamine plus sulfadiazine trial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune **reconstitution inflammatory syndrome** occurs following rapid initiation of **antiretroviral therapy**, where paradoxical clinical deterioration is driven by vigorous recovery of pathogen-specific CD**4** T-cell mediated immune responses against pre-existing opportunistic antigens throughout the central nervous system architecture in severely immunocompromised individuals.",
+   "say": "Immune reconstitution inflammatory syndrome occurs following rapid initiation of antiretroviral therapy where paradoxical clinical deterioration is driven by vigorous recovery of pathogen-specific CD4 T-cell mediated immune responses against pre-existing opportunistic antigens throughout the central nervous system architecture in severely immunocompromised individuals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paradoxical IRIS",
+     "points": [
+      "Occurs during treatment of known infection",
+      "Worsening fever, lymphadenopathy, and CNS lesions",
+      "Driven by rapid antigen-specific CD4 T-cell surges",
+      "Managed with adjunctive oral corticosteroid pulses"
+     ]
+    },
+    "right": {
+     "title": "Unmasking IRIS",
+     "points": [
+      "Occurs with occult, previously unrecognised infection",
+      "Exuberant inflammatory reaction unmasks subclinical bug",
+      "Immediate pathogen-specific antimicrobial therapy",
+      "Temporary continuation of ART unless CNS life-threatening"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients presenting with HIV and acute **cryptococcal meningitis**, initiation of **antiretroviral therapy** is intentionally delayed for **2** to **6** weeks following induction antifungal therapy to avoid catastrophic intracranial immune reconstitution inflammatory syndrome. Premature antiretroviral initiation leads to severe cerebral oedema and high intracranial pressure mortality.",
+   "say": "In patients presenting with HIV and acute cryptococcal meningitis initiation of antiretroviral therapy is intentionally delayed for 2 to 6 weeks following induction antifungal therapy to avoid catastrophic intracranial immune reconstitution inflammatory syndrome. Premature antiretroviral initiation leads to severe cerebral oedema and high intracranial pressure mortality.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cryptococcosis-fig1.webp",
+    "alt": "India ink preparation showing encapsulated Cryptococcus neoformans yeast cells.",
+    "caption": "Encapsulated Cryptococcus neoformans in cerebrospinal fluid (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Cytomegalovirus** encephalitis in advanced AIDS patients with CD**4** counts below **50** cells/uL manifests as acute necrotizing ventriculoencephalitis with periventricular subependymal enhancement, managed urgently with intravenous **ganciclovir** and foscarnet. Patients present with rapidly progressive delirium, confusion, multiple cranial neuropathies, and prominent periventricular ependymal microglial nodules.",
+   "say": "Cytomegalovirus encephalitis in advanced AIDS patients with CD4 counts below 50 cells/uL manifests as acute necrotizing ventriculoencephalitis with periventricular subependymal enhancement managed urgently with intravenous ganciclovir and foscarnet. Patients present with rapidly progressive delirium confusion multiple cranial neuropathies and prominent periventricular ependymal microglial nodules.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical & Radiological Signs",
+     "points": [
+      "CD4 count severely depressed below 50 cells/uL",
+      "Acute delirium, confusion, and cranial neuropathies",
+      "Periventricular ependymal enhancement on MRI",
+      "Positive CMV DNA in CSF by PCR"
+     ]
+    },
+    "right": {
+     "title": "Urgent Antiviral Regimen",
+     "points": [
+      "Intravenous ganciclovir induction therapy",
+      "Synergistic combination with intravenous foscarnet",
+      "Maintenance therapy until CD4 counts rise above 100",
+      "Screening for concurrent cytomegalovirus retinitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "HIV distal **sensory polyneuropathy** is a symmetrical length-dependent axonal burning neuropathy that must be distinguished from toxic neuropathy caused by older nucleoside **reverse transcriptase inhibitors** like didanosine and stavudine, both characterized by severe distal burning paresthesias. Mitochondrial DNA toxicity drives nucleoside injury while macrophage neurotoxins mediate viral neuropathies.",
+   "say": "HIV distal sensory polyneuropathy is a symmetrical length-dependent axonal burning neuropathy that must be distinguished from toxic neuropathy caused by older nucleoside reverse transcriptase inhibitors like didanosine and stavudine both characterized by severe distal burning paresthesias. Mitochondrial DNA toxicity drives nucleoside injury while macrophage neurotoxins mediate viral neuropathies.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "HIV Distal Sensory Polyneuropathy",
+     "Antiretroviral Toxic Neuropathy",
+     "Management Approach"
+    ],
+    "rows": [
+     [
+      "Aetiology",
+      "Direct macrophage activation & cytokines",
+      "Mitochondrial DNA polymerase-gamma toxicity",
+      "Differentiate disease from drug adverse effect"
+     ],
+     [
+      "Culprit Drugs",
+      "Occurs independent of neurotoxic drugs",
+      "Stavudine (d4T), didanosine (ddI), zalcitabine",
+      "Immediate discontinuation of offending nucleoside"
+     ],
+     [
+      "Clinical Onset",
+      "Gradual insidious distal burning pain",
+      "Abrupt onset weeks after initiating drug",
+      "Symptomatic relief with gabapentinoids or duloxetine"
+     ],
+     [
+      "NCS Findings",
+      "Length-dependent sensory axonal loss",
+      "Length-dependent sensory axonal loss",
+      "Nerve conduction studies confirm axonal pattern"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "q_32da561e1d56",
-  "q_bfedddf04567",
-  "q_8fe50f3f1c23"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "WHO guidelines for diagnosing, preventing and managing cryptococcal disease among adults in the context of HIV (2022)",
-  "Frascati criteria for HIV-associated neurocognitive disorders",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 44
- }
+  "Adams and Victor Principles of Neurology 11e Ch. 33",
+  "Harrison Principles of Internal Medicine 22e Ch. 197, 438",
+  "CDC Guidelines for Opportunistic Infections in HIV"
+ ]
 }

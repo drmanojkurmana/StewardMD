@@ -1,107 +1,170 @@
 {
- "v": 1,
- "module": "sne-mechanical-thrombectomy",
- "subject": "ss-neurology",
- "title": "Endovascular Thrombectomy in Large Vessel Occlusion Stroke",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Endovascular thrombectomy is a **catheter-based procedure** that physically removes a clot blocking a large intracranial artery, usually the internal carotid or proximal middle cerebral artery. A **stent retriever** captures the clot, while **aspiration thrombectomy** sucks it out through a large catheter. The target population is patients with large vessel occlusion, confirmed by CT angiography. Treatment is most effective when started early, and the benefit is driven by restoring flow to salvageable brain tissue.",
-   "say": "Endovascular thrombectomy is a catheter based procedure that physically removes a clot blocking a large intracranial artery, usually the internal carotid or proximal middle cerebral artery. A stent retriever captures the clot, while aspiration thrombectomy sucks it out through a large catheter. The target population is patients with large vessel occlusion, confirmed by CT angiography. Treatment is most effective when started early, and the benefit comes from restoring flow to salvageable brain tissue.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sne-mechanical-thrombectomy-fig1.webp",
-    "alt": "Diagram showing endovascular thrombectomy. A stent retriever captures a clot, while an aspiration catheter suctions it from an occluded cerebral artery.",
-    "caption": "Endovascular thrombectomy: stent retriever and aspiration mechanisms",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Several landmark trials established this treatment, including **MR CLEAN**, **ESCAPE**, **SWIFT PRIME** and **DAWN**, each showing functional benefit in carefully selected patients. **DEFUSE 3** later extended the treatment window by using **perfusion imaging** to identify a **perfusion mismatch** between the infarct core and the salvageable penumbra. The key selection concept is that a small core with a large penumbra predicts benefit from reperfusion.",
-   "say": "Several landmark trials established this treatment, including MR CLEAN, ESCAPE, SWIFT PRIME and DAWN, each showing functional benefit in carefully selected patients. DEFUSE 3 later extended the treatment window by using perfusion imaging to identify a perfusion mismatch between the infarct core and the salvageable penumbra. The key selection concept is that a small core with a large penumbra predicts benefit from reperfusion.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Trial",
-     "Key selection idea",
-     "Window"
-    ],
-    "rows": [
-     [
-      "MR CLEAN",
-      "Anterior circulation large vessel occlusion",
-      "Early window"
-     ],
-     [
-      "ESCAPE",
-      "Imaging selected large vessel occlusion",
-      "Early window"
-     ],
-     [
-      "DAWN",
-      "Clinical and core infarct mismatch",
-      "Extended window"
-     ],
-     [
-      "DEFUSE 3",
-      "Perfusion mismatch with small core",
-      "Extended window"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Large core trials asked whether treatment still helps when the infarct is already big. **SELECT2** and **ANGEL-ASPECT** enrolled patients with larger cores, and both showed benefit when treatment was started within the window. Such patients need careful imaging, because core size, ASPECTS score and collateral status together determine eligibility. Indian practice should follow local protocols and available perfusion imaging.",
-   "say": "Large core trials asked whether treatment still helps when the infarct is already big. SELECT2 and ANGEL-ASPECT enrolled patients with larger cores, and both showed benefit when treatment was started within the window. Such patients need careful imaging, because core size, ASPECTS score and collateral status together determine eligibility. Indian practice should follow local protocols and available perfusion imaging.",
-   "vis": null
-  },
-  {
-   "tx": "Posterior circulation occlusion behaves differently. **Basilar artery occlusion** is rare, but it carries very high mortality without treatment. The **ATTENTION** and **BAOCHE** trials showed that thrombectomy improves functional outcome in basilar occlusion, with a wider time window than anterior circulation strokes. **Tandem occlusion**, where the carotid and intracranial segments are both blocked, usually needs treatment of the extracranial lesion too.",
-   "say": "Posterior circulation occlusion behaves differently. Basilar artery occlusion is rare, but it carries very high mortality without treatment. The ATTENTION and BAOCHE trials showed that thrombectomy improves functional outcome in basilar occlusion, with a wider time window than anterior circulation strokes. Tandem occlusion, where the carotid and intracranial segments are both blocked, usually needs treatment of the extracranial lesion too.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Anterior circulation",
-     "points": [
-      "Most common large vessel occlusion",
-      "Trials: MR CLEAN, ESCAPE, DAWN",
-      "Mismatch guides late window"
-     ]
+  "v": 1,
+  "module": "sne-mechanical-thrombectomy",
+  "subject": "ss-neurology",
+  "title": "Acute Reperfusion Therapy and Mechanical Thrombectomy",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Intravenous thrombolysis remains the primary medical reperfusion strategy in eligible patients presenting with **acute ischaemic stroke** within **4.5 hours** of symptom onset. Standard therapeutic regimens include intravenous **alteplase 0.9 mg/kg** with a maximum ceiling of 90 mg or intravenous **tenecteplase 0.25 mg/kg** administered as a rapid single bolus with a maximum of 25 mg. Tenecteplase offers significant pharmacological advantages including higher fibrin specificity, longer half-life, and superior rates of early arterial recanalization prior to endovascular intervention.",
+      "say": "Intravenous thrombolysis serves as the cornerstone of medical reperfusion for acute ischaemic stroke within four point five hours of onset. Prescribed regimens include tenecteplase zero point two five milligrams per kilogram bolus or alteplase zero point nine milligrams per kilogram infusion. Tenecteplase provides distinct operational advantages with rapid single bolus delivery and superior early arterial recanalization rates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tenecteplase 0.25 mg/kg",
+          "points": [
+            "Single rapid intravenous bolus over 5-10 seconds",
+            "Higher fibrin specificity and longer half-life",
+            "Higher rate of early large vessel recanalization"
+          ]
+        },
+        "right": {
+          "title": "Alteplase 0.9 mg/kg",
+          "points": [
+            "Initial 10% bolus given over 1 minute",
+            "Remaining 90% infused over 60 minutes",
+            "Traditional benchmark capped at 90 mg total"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Basilar artery",
-     "points": [
-      "Rare, about 1% of strokes",
-      "Trials: ATTENTION, BAOCHE",
-      "Wider window, high mortality untreated"
-     ]
+    {
+      "tx": "Strict blood pressure control is mandatory before initiating intravenous thrombolytic infusion. Prior to starting **thrombolysis**, arterial blood pressure must be reduced to a **systolic below 185 mmHg** and a **diastolic below 110 mmHg**. Preferred first-line intravenous antihypertensive agents include intravenous **labetalol** boluses, continuous intravenous nicardipine infusion, or clevidipine titration. Rapid uncontrolled pressure swings must be prevented during acute therapy to safeguard marginal cerebral perfusion while preventing vascular rupture.",
+      "say": "Strict hemodynamic targets must be secured before administering intravenous thrombolysis in acute ischaemic stroke. Systolic blood pressure must fall below one hundred eighty five millimeters of mercury and diastolic below one hundred ten millimeters of mercury. Intravenous labetalol boluses or continuous nicardipine infusions are the preferred first line options to achieve safe blood pressure levels.",
+      "vis": null
+    },
+    {
+      "tx": "Following reperfusion therapy, intensive hemodynamic monitoring is essential to prevent hemorrhagic complications. For the initial **24 hours** after intravenous thrombolysis or endovascular intervention, arterial blood pressure must be strictly maintained below **180/105 mmHg**. Sustained pressures exceeding this ceiling exponentially heighten the danger of symptomatic **intracerebral haemorrhage** within reperfused capillary beds. Neurological vital signs and automated cuff blood pressure recordings are documented every 15 minutes during the initial two hours of therapy.",
+      "say": "Following reperfusion therapy, arterial blood pressure must remain strictly below one hundred eighty over one hundred five millimeters of mercury for twenty four hours. Maintaining blood pressure below this threshold prevents symptomatic intracerebral haemorrhage into friable reperfused parenchyma. Frequent neurological evaluations and scheduled blood pressure measurements are vital throughout this high risk interval.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/neuroimaging-in-neurologic-disorders-fig1.webp",
+        "alt": "Patterns of intracranial neuroimaging in acute ischemic stroke core and penumbra.",
+        "caption": "Neuroimaging patterns in acute ischemic stroke and penumbra evaluation",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "Pre-procedural parenchymal evaluation relies on non-contrast cranial computed tomography scored by **ASPECTS** criteria. The **ASPECTS** rating system systematically examines **10** distinct anatomic zones in the middle cerebral artery territory, deducting one point for each region displaying early parenchymal hypoattenuation. Baseline scores **under 6** denote extensive irreversible **infarction** of the ischemic core. Conversely, scores of 6 to 10 confirm preserved tissue viability suitable for emergency revascularization.",
+      "say": "The Alberta Stroke Program Early CT Score evaluates ten predetermined anatomic regions across the middle cerebral artery territory on non contrast scans. Each territory displaying ischemic hypoattenuation loses one point from baseline. Scores under six designate extensive irreversible ischemic core infarction, whereas scores of six or higher reflect favourable parenchymal preservation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Zone Level",
+          "ASPECTS Cortical & Subcortical Regions",
+          "Clinical Value"
+        ],
+        "rows": [
+          [
+            "Ganglionic",
+            "Caudate, Lentiform, Internal Capsule, Insular ribbon, M1, M2, M3",
+            "1 point deducted per hypoattenuating zone"
+          ],
+          [
+            "Supraganglionic",
+            "Corona radiata, M4, M5, M6 cortical territories",
+            "Scores under 6 reflect extensive established core"
+          ],
+          [
+            "Total Score",
+            "Maximum 10 points on baseline non-contrast CT",
+            "Score 6 to 10 predicts favourable functional recovery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emergency **mechanical thrombectomy** represents the standard of care within **6** hours of symptom onset for patients with large vessel occlusion involving the intracranial internal carotid artery or proximal middle cerebral artery M1 segment. Candidates must present with an initial **ASPECTS** score of **6** or greater alongside functional independence prior to stroke onset. Urgent groin puncture and rapid intracranial catheter navigation directly restore microvascular perfusion and dramatically decrease long-term neurological disability.",
+      "say": "Emergency mechanical thrombectomy provides proven standard of care within six hours of onset for patients with large vessel occlusion. Eligible candidates present with internal carotid or proximal middle cerebral artery occlusion and an ASPECTS score of six or greater. Prompt endovascular retrieval of the occlusive thrombus provides substantial reductions in long term functional disability.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sne-mechanical-thrombectomy-fig1.webp",
+        "alt": "Endovascular thrombectomy device mechanics including stent retriever deployment and aspiration catheter positioning.",
+        "caption": "Endovascular thrombectomy: stent retriever deployment and aspiration mechanics in large vessel occlusion",
+        "ar": 1.7778
+      }
+    },
+    {
+      "tx": "The therapeutic window for **thrombectomy** extends successfully up to **24** hours from last known well in select patients demonstrating salvageable tissue. Large multicentre randomized investigations including the DAWN and **DEFUSE-3** trials validated advanced automated perfusion mismatch criteria. Patients presenting between 6 and 24 hours qualify when neuroimaging demonstrates a small established ischemic core coupled with a substantially larger volume of critically hypoperfused but viable ischemic penumbra.",
+      "say": "The treatment window for endovascular thrombectomy extends up to twenty four hours in selected patients based on advanced perfusion neuroimaging. Landmark trials including DAWN and DEFUSE three established clinical and automated volumetric mismatch criteria. Demonstrating a small ischemic core surrounded by an extensive hypoperfused penumbra reliably predicts significant functional benefit from late recanalization.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial",
+          "Window",
+          "Key Selection Criteria"
+        ],
+        "rows": [
+          [
+            "DAWN",
+            "6 to 24 hours",
+            "Clinical deficit disproportionate to infarct volume on MRI or CT"
+          ],
+          [
+            "DEFUSE-3",
+            "6 to 16 hours",
+            "Small ischemic core (<70 ml) and penumbra mismatch ratio >= 1.8"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Technical success during catheter-based revascularization is evaluated using the modified Treatment in Cerebral Ischemia scale. The **mTICI** classification grades angiographic perfusion following clot extraction, with grade 0 indicating no flow and grade 3 indicating complete normal distal vessel filling. Achieving an **mTICI** grade of **2b** or 3 defines successful angiographic **recanalization**, which correlates directly with clinical recovery, decreased mortality, and reduced cerebral edema.",
+      "say": "Angiographic reperfusion after mechanical thrombectomy is graded using the modified Treatment in Cerebral Ischemia scale. Grades range from zero representing absence of forward flow to three representing complete distal parenchymal reperfusion. Reaching a grade of two b or three establishes successful recanalization and serves as the primary technical benchmark of procedural success.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Baseline Occlusion"
+          },
+          {
+            "id": "b",
+            "label": "Catheter Retrieval"
+          },
+          {
+            "id": "c",
+            "label": "mTICI 2b-3 Recanalization"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b",
+            "Stent pass"
+          ],
+          [
+            "b",
+            "c",
+            "Reperfusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Post-thrombolytic pharmacology demands rigorous antiplatelet restriction to avoid life-threatening parenchymal hemorrhage. Oral antiplatelet agents including oral **aspirin** must be strictly withheld for **24** hours following intravenous **alteplase** or tenecteplase administration. Follow-up non-contrast cranial computed tomography performed at 24 hours must definitively exclude petechial hemorrhagic transformation or hematoma before initiating maintenance antiplatelet or anticoagulant regimens.",
+      "say": "All antiplatelet agents including aspirin must be completely withheld for twenty four hours after administering intravenous alteplase or tenecteplase. A mandatory non contrast cranial computed tomography scan at twenty four hours must confirm the absence of intracranial hemorrhage before commencing antiplatelet therapy. This scheduled imaging pause ensures maximal patient safety following thrombolytic reperfusion.",
+      "vis": null
     }
-   }
+  ],
+  "quiz": [
+    "q_44ccd2f7bc77",
+    "q_462e15f04399",
+    "q_5f90a1a84e38"
+  ],
+  "src": [],
+  "refs": [
+    "Adams & Victor 11e Ch. 34",
+    "Harrison 22e Ch. 434",
+    "AHA/ASA Stroke Guidelines"
+  ],
+  "gen": "AI",
+  "checks": {
+    "shape": true,
+    "numbers": true,
+    "drugs": true,
+    "verbatim": true,
+    "dashes": true,
+    "verify": true
   }
- ],
- "quiz": [
-  "q_44ccd2f7bc77",
-  "q_462e15f04399",
-  "q_5f90a1a84e38"
- ],
- "src": [],
- "refs": [
-  "Powers WJ et al. Guidelines for the Early Management of Patients With Acute Ischemic Stroke (AHA/ASA)",
-  "Goyal M et al. Endovascular thrombectomy in acute ischemic stroke trials (MR CLEAN, ESCAPE, DAWN, DEFUSE 3)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 23
- }
 }

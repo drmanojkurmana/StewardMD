@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "snp-anaemia-ckd",
+ "title": "Anaemia of CKD",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The central pathogenic driver of anemia in chronic kidney disease is relative **erythropoietin** (**EPO**) deficiency resulting from progressive loss of specialized peritubular interstitial fibroblastic cells. Termed **REP cells**, these oxygen-sensing interstitial fibroblasts transdifferentiate into non-secretory alpha-smooth muscle actin-positive myofibroblasts, blunting physiological erythropoietic hormone synthesis in response to tissue hypoxia.",
+   "say": "The central pathogenic driver of anemia in chronic kidney disease is relative erythropoietin deficiency resulting from progressive loss of specialized peritubular interstitial fibroblastic cells. Termed REP cells, these oxygen-sensing interstitial fibroblasts transdifferentiate into non-secretory myofibroblasts, blunting physiological erythropoietic hormone synthesis in response to tissue hypoxia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Peritubular interstitial REP cell loss"
+     },
+     {
+      "id": "b",
+      "label": "Blunted erythropoietin production"
+     },
+     {
+      "id": "c",
+      "label": "Normocytic normochromic anemia of CKD"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic inflammation in advanced CKD induces sustained hepatic synthesis of the acute-phase peptide **hepcidin**, triggering profound **functional iron deficiency**. Circulating hepcidin binds directly to the basolateral iron exporter **ferroportin** on duodenal enterocytes and reticuloendothelial macrophages, inducing its internalisation and lysosomal degradation to trap iron within storage pools.",
+   "say": "Systemic inflammation in advanced CKD induces sustained hepatic synthesis of the acute-phase peptide hepcidin, triggering profound functional iron deficiency. Circulating hepcidin binds directly to the basolateral iron exporter ferroportin on duodenal enterocytes and reticuloendothelial macrophages, inducing its internalisation and lysosomal degradation to trap iron within storage pools.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anemia-of-chronic-disease-fig1.webp",
+    "alt": "Anemia of Chronic Disease and Iron Dysregulation",
+    "caption": "Hepcidin-mediated ferroportin degradation and iron sequestration in CKD (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Under international **KDIGO** guidelines, iron deficiency in patients with chronic kidney disease is defined by a transferrin saturation (**TSAT**) <= **30%** accompanied by a serum **ferritin** <= **500** ng/mL. Intravenous or oral **iron supplementation** must be administered to replete iron stores prior to initiating or escalating erythropoiesis-stimulating agent therapy.",
+   "say": "Under international KDIGO guidelines, iron deficiency in patients with chronic kidney disease is defined by a transferrin saturation of 30% or less accompanied by a serum ferritin of 500 ng/mL or less. Intravenous or oral iron supplementation must be administered to replete iron stores prior to initiating or escalating erythropoiesis-stimulating agent therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-iron-supplements.webp",
+    "alt": "Therapeutic Iron Supplementation and Hematinic Response",
+    "caption": "Iron replenishment protocols and transferrin saturation targets in CKD anemia (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "Landmark randomized clinical trials including **CHOIR**, **CREATE**, and **TREAT** established that completely normalizing hemoglobin levels (> **13** g/dL) using high-dose ESAs significantly escalates risks of fatal and non-fatal **stroke**, severe cardiovascular events, venous thromboembolism, and vascular access thrombosis without improving survival.",
+   "say": "Landmark randomized clinical trials established that completely normalizing hemoglobin levels above 13 g/dL using high-dose ESAs significantly escalates risks of fatal and non-fatal stroke, severe cardiovascular events, venous thromboembolism, and vascular access thrombosis without improving survival.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Target Trials (> 13 g/dL)",
+     "points": [
+      "CHOIR, CREATE, and TREAT trials",
+      "High ESA exposure requirements",
+      "Increased risk of ischemic stroke and death",
+      "No demonstrated survival benefit",
+      "Key criteria: hemoglobin target"
+     ]
+    },
+    "right": {
+     "title": "Current Conservative Target",
+     "points": [
+      "Hemoglobin maintained 10.0 to 11.5 g/dL",
+      "Avoids levels exceeding 11.5 g/dL",
+      "Reduces red blood cell transfusion needs",
+      "Improves fatigue and functional capacity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Current clinical consensus guidelines recommend initiating **ESA therapy** (**epoetin alfa**, darbepoetin alfa, or methoxy polyethylene glycol-epoetin beta) only when hemoglobin falls below **10** g/dL. Clinical titration aims strictly to maintain circulating hemoglobin between **10.0** and **11.5** g/dL, while deliberately avoiding levels exceeding **11.5** to **12.0** g/dL.",
+   "say": "Current clinical consensus guidelines recommend initiating ESA therapy only when hemoglobin falls below 10 g/dL. Clinical titration aims strictly to maintain circulating hemoglobin between 10.0 and 11.5 g/dL, while deliberately avoiding levels exceeding 11.5 to 12.0 g/dL.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Sequence",
+     "points": [
+      "Hemoglobin < 10.0 g/dL and TSAT > 20%",
+      "Initiate low-dose ESA therapy",
+      "Maintain target hemoglobin 10.0 to 11.5 g/dL"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Features",
+     "points": [
+      "hemoglobin target"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Orally active **HIF-PHIs** (**roxadustat**, vadadustat, daprodustat) inhibit hypoxia-inducible factor prolyl hydroxylase enzymes, preventing the oxygen-dependent degradation of **HIF-alpha**. Stabilized HIF heterodimers translocate to the nucleus, simultaneously stimulating endogenous renal and hepatic erythropoietin production, enhancing intestinal iron absorption via DMT1, and actively suppressing circulating **hepcidin**.",
+   "say": "Orally active HIF-PHIs inhibit hypoxia-inducible factor prolyl hydroxylase enzymes, preventing the oxygen-dependent degradation of HIF-alpha. Stabilized HIF heterodimers translocate to the nucleus, simultaneously stimulating endogenous renal and hepatic erythropoietin production, enhancing intestinal iron absorption via DMT1, and actively suppressing circulating hepcidin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HIF-PHI Mechanism",
+     "points": [
+      "Inhibits prolyl hydroxylase enzymes",
+      "Stabilizes intracellular HIF-alpha subunits",
+      "Suppresses hepatic hepcidin synthesis",
+      "Enhances biological iron mobilization"
+     ]
+    },
+    "right": {
+     "title": "Recombinant ESA Injections",
+     "points": [
+      "Direct erythropoietin receptor agonist",
+      "Supraphysiological peak plasma concentrations",
+      "No direct regulatory effect on hepcidin",
+      "Requires parenteral subcutaneous delivery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acquired **Pure red cell aplasia** (**PRCA**) represents a rare immunological disaster caused by circulating neutralizing anti-erythropoietin antibodies targeting exogenous and endogenous EPO. Diagnosis is confirmed by sudden severe transfusion-dependent anemia, profound reticulocytopenia with an absolute reticulocyte count below **10,000**/mcL, and severe isolated absence of erythroblasts on **bone marrow** aspirate.",
+   "say": "Acquired Pure red cell aplasia represents a rare immunological disaster caused by circulating neutralizing anti-erythropoietin antibodies targeting exogenous and endogenous EPO. Diagnosis is confirmed by sudden severe transfusion-dependent anemia, profound reticulocytopenia with an absolute reticulocyte count below 10,000/mcL, and severe isolated absence of erythroblasts on bone marrow aspirate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anti-EPO PRCA Diagnostic Triad",
+     "points": [
+      "Severe sudden drop in hemoglobin",
+      "Absolute reticulocytes < 10,000/mcL",
+      "Marrow erythroblasts < 5% of nucleated cells",
+      "Circulating neutralizing anti-EPO antibodies",
+      "Key criteria: 10000"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Strategy",
+     "points": [
+      "Immediately discontinue all ESA formulations",
+      "Strictly avoid switching to other ESAs",
+      "Initiate immunosuppression (cyclosporine/prednisone)",
+      "Provide packed red blood cell transfusions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "True **Erythropoietin resistance** (hyporesponsiveness) is diagnosed when patients require persistently escalating ESA doses without achieving target hemoglobin concentrations. The most prevalent contributing clinical etiologies include undetected absolute **iron deficiency**, chronic occult **infection**, underlying hematologic malignancies, ongoing occult gastrointestinal blood loss, severe hyperparathyroidism, and inadequate hemodialysis clearance.",
+   "say": "True Erythropoietin resistance is diagnosed when patients require persistently escalating ESA doses without achieving target hemoglobin concentrations. The most prevalent contributing clinical etiologies include undetected absolute iron deficiency, chronic occult infection, underlying hematologic malignancies, ongoing occult gastrointestinal blood loss, severe hyperparathyroidism, and inadequate hemodialysis clearance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Failure to achieve target Hb despite high ESA"
+     },
+     {
+      "id": "b",
+      "label": "Screen for iron deficiency and occult inflammation"
+     },
+     {
+      "id": "c",
+      "label": "Correct underlying infection, bleeding, or hyperparathyroidism"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Comprehensive Clinical Nephrology 7e Ch. 73",
+  "KDIGO Clinical Practice Guideline for Anemia in CKD",
+  "Brenner and Rector The Kidney 11e Ch. 48"
+ ]
+}

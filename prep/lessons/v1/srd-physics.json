@@ -1,0 +1,261 @@
+{
+ "v": 1,
+ "module": "srd-physics",
+ "title": "Physics, contrast and radiation safety",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Computed tomography radiation dose estimation relies on standardized physical phantoms. Computed tomography radiation dose metrics include **CTDIvol** (measured in milligrays, reflecting absorbed dose per slice) and Dose-Length Product (**DLP**, in mGy-cm), from which patient **effective dose** in millisieverts is calculated using anatomical region-specific conversion coefficients (k-factors).",
+   "say": "Computed tomography radiation dose estimation relies on standardized physical phantoms. Computed tomography radiation dose metrics include CTDIvol measured in milligrays, reflecting absorbed dose per slice and Dose Length Product DLP, in mGy cm, from which patient effective dose in millisieverts is calculated using anatomical region specific conversion coefficients k-factors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metric",
+     "Unit",
+     "Physical Meaning"
+    ],
+    "rows": [
+     [
+      "CTDIw",
+      "mGy",
+      "Weighted average dose across phantom cross-section"
+     ],
+     [
+      "CTDIvol",
+      "mGy",
+      "CTDIw divided by pitch factor"
+     ],
+     [
+      "DLP",
+      "mGy*cm",
+      "CTDIvol multiplied by total scan length"
+     ],
+     [
+      "Effective Dose",
+      "mSv",
+      "DLP multiplied by tissue k-factor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fundamental magnetic resonance relaxation principles govern tissue contrast weighting. MRI T1 relaxation (spin-lattice or **longitudinal relaxation**) describes the exponential recovery of longitudinal magnetization along B0, whereas T2 relaxation (spin-spin or **transverse relaxation**) reflects the loss of phase coherence in the transverse plane due to spin interactions.",
+   "say": "Fundamental magnetic resonance relaxation principles govern tissue contrast weighting. MRI T1 relaxation spin-lattice or longitudinal relaxation describes the exponential recovery of longitudinal magnetization along B0, whereas T2 relaxation spin-spin or transverse relaxation reflects the loss of phase coherence in the transverse plane due to spin interactions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "T1 Longitudinal Relaxation",
+     "points": [
+      "Spin-lattice thermal energy transfer",
+      "Recovery of magnetization along B0",
+      "Water has long T1; fat has short T1",
+      "Determined by repetition time (TR)"
+     ]
+    },
+    "right": {
+     "title": "T2 Transverse Relaxation",
+     "points": [
+      "Spin-spin dephasing interaction",
+      "Decay of transverse magnetization Mxy",
+      "Always significantly shorter than T1",
+      "Determined by echo time (TE)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Resonance frequency differences between fat and water protons produce predictable boundary effects. **Chemical shift** artefact of the second type (in-phase and opposed-phase or Dixon imaging) occurs at 1.5 Tesla due to the 220 Hz difference in **precession** resonance frequency between lipid and water protons, causing cancellation (India ink artefact) at lipid-water boundaries at TE 2.2 ms.",
+   "say": "Resonance frequency differences between fat and water protons produce predictable boundary effects. Chemical shift artefact of the second type in-phase and opposed-phase or Dixon imaging occurs at 1.5 Tesla due to the 220 Hz difference in precession resonance frequency between lipid and water protons, causing cancellation India ink artefact at lipid-water boundaries at TE 2.2 ms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cs1",
+      "label": "Chemical shielding difference"
+     },
+     {
+      "id": "cs2",
+      "label": "220 Hz difference at 1.5 T"
+     },
+     {
+      "id": "cs3",
+      "label": "Phase opposition at 2.2 ms"
+     },
+     {
+      "id": "cs4",
+      "label": "India ink signal cancellation"
+     }
+    ],
+    "edges": [
+     [
+      "cs1",
+      "cs2",
+      "resonance frequency"
+     ],
+     [
+      "cs2",
+      "cs3",
+      "echo timing"
+     ],
+     [
+      "cs3",
+      "cs4",
+      "boundary black line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extracellular MR contrast administration requires strict renal function screening protocols. **Nephrogenic systemic fibrosis** (NSF) is a rare fibrosing condition associated with linear non-ionic **gadolinium**-based contrast agents in patients with severe renal dysfunction (eGFR < 30 mL/min/1.73m2), prevented by using macrocyclic agents with high kinetic stability.",
+   "say": "Extracellular MR contrast administration requires strict renal function screening protocols. Nephrogenic systemic fibrosis NSF is a rare fibrosing condition associated with linear non-ionic gadolinium-based contrast agents in patients with severe renal dysfunction eGFR under 30 mL/min/1.73m2, prevented by using macrocyclic agents with high kinetic stability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent Class",
+     "Chelate Molecular Structure",
+     "NSF Risk Level"
+    ],
+    "rows": [
+     [
+      "Group I (Linear non-ionic)",
+      "Omniscan (gadodiamide), Magnevist",
+      "Highest risk; contraindicated in eGFR < 30"
+     ],
+     [
+      "Group II (Macrocyclic)",
+      "Dotarem, Gadovist, ProHance",
+      "Extremely low to negligible risk"
+     ],
+     [
+      "Group III (Linear ionic)",
+      "Primovist / Eovist (hepatobiliary)",
+      "Low risk; limited diagnostic dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency management of iodinated contrast reactions mandates immediate clinical stratification. Acute adverse reactions to **iodinated contrast** media are categorized by ACR into mild (scattered urticaria, nausea), moderate (marked diffuse erythema, mild bronchospasm), and severe (severe laryngeal oedema, anaphylactic shock), treated immediately with intramuscular **adrenaline** (0.3 mg 1:1000).",
+   "say": "Acute adverse reactions to iodinated contrast media are categorized by ACR into mild urticaria, moderate bronchospasm, and severe anaphylactic shock. Emergency teams treat severe reactions immediately with intramuscular adrenaline using 0 point 3 milligrams of 1 to 1000 dilution.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rx1",
+      "label": "Severe contrast anaphylaxis"
+     },
+     {
+      "id": "rx2",
+      "label": "Call emergency resuscitation"
+     },
+     {
+      "id": "rx3",
+      "label": "IM adrenaline 0.3 mg (1:1000)"
+     },
+     {
+      "id": "rx4",
+      "label": "High-flow oxygen & IV fluids"
+     }
+    ],
+    "edges": [
+     [
+      "rx1",
+      "rx2",
+      "hypotension / stridor"
+     ],
+     [
+      "rx2",
+      "rx3",
+      "anterolateral thigh"
+     ],
+     [
+      "rx3",
+      "rx4",
+      "supportive care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic ultrasound safety is regulated through acoustic output bioeffect indices. Ultrasound **mechanical index** (MI) measures the potential for cavitation bioeffects in tissue, while **thermal index** (TI) estimates temperature elevation, with clinical diagnostic ultrasound regulated to MI < 1.9 to prevent acoustic microbubble collapse and tissue damage.",
+   "say": "Diagnostic ultrasound safety is regulated through acoustic output bioeffect indices. Ultrasound mechanical index MI measures the potential for cavitation bioeffects in tissue, while thermal index TI estimates temperature elevation, with clinical diagnostic ultrasound regulated to MI under 1.9 to prevent acoustic microbubble collapse and tissue damage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanical Index (MI)",
+     "points": [
+      "Peak negative acoustic pressure indicator",
+      "Risk of acoustic cavitation bioeffects",
+      "Regulated ceiling MI < 1.9",
+      "Critical during microbubble contrast studies"
+     ]
+    },
+    "right": {
+     "title": "Thermal Index (TI)",
+     "points": [
+      "Ratio of acoustic power to heat power",
+      "Estimates tissue temperature rise in deg C",
+      "Subtypes: TIS (soft tissue), TIB (bone)",
+      "Strict limits in obstetric imaging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Occupational radiation protection guidelines define strict cumulative safety standards. Annual occupational radiation **dose limits** established by ICRP and NCRP are 20 mSv per year averaged over 5 years (not to exceed 50 mSv in any single year) for whole-body **effective dose**, and 150 mSv for the lens of the eye.",
+   "say": "Occupational radiation protection guidelines have strict cumulative safety standards. Annual occupational radiation dose limits established by ICRP and NCRP are 20 mSv per year averaged over 5 years not to exceed 50 mSv in any single year for whole-body effective dose, and 150 mSv for the lens of the eye.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target Organ / Category",
+     "Occupational Dose Limit",
+     "Public Dose Limit"
+    ],
+    "rows": [
+     [
+      "Whole-body effective dose",
+      "20 mSv/yr (averaged over 5 yrs, max 50 mSv)",
+      "1 mSv per year"
+     ],
+     [
+      "Lens of the eye",
+      "150 mSv per year (ICRP: 20 mSv/yr)",
+      "15 mSv per year"
+     ],
+     [
+      "Skin, hands and feet",
+      "500 mSv per year",
+      "50 mSv per year"
+     ],
+     [
+      "Declared pregnant worker",
+      "1 mSv to fetus over gestation",
+      "1 mSv per year"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radiofrequency power deposition in magnetic resonance imaging is constrained by thermal dissipation limits. **Specific Absorption Rate** (SAR) in MRI quantifies **radiofrequency** energy deposition in patient tissues (watts per kilogram), where whole-body SAR is limited to 2 W/kg in Normal Operating Mode to prevent core body temperature elevation > 1.0 degree Celsius.",
+   "say": "Radiofrequency power deposition in magnetic resonance imaging is constrained by thermal dissipation limits. Specific Absorption Rate SAR in MRI quantifies radiofrequency energy deposition in patient tissues watts per kilogram, where whole-body SAR is limited to 2 W/kg in Normal Operating Mode to prevent core body temperature elevation over 1.0 degree Celsius.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/central-neurocytoma-fig1.webp",
+    "alt": "Coronal post-contrast T1 MRI and technical scan parameter interface demonstrating radiofrequency excitation.",
+    "caption": "MRI safety: radiofrequency pulses, SAR limits, and core thermal regulation (StewardMD).",
+    "ar": 1.7778
+   }
+  }
+ ],
+ "quiz": [
+  "q_rad_ph_01",
+  "q_rad_ph_02",
+  "q_rad_ph_03"
+ ],
+ "src": [],
+ "refs": [
+  "Crack the Core Exam Physics (Prometheus Lionshart)",
+  "Core Exam Radiodiagnosis Notes (RDN11 Physics)"
+ ]
+}

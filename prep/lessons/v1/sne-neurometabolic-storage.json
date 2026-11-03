@@ -1,140 +1,246 @@
 {
  "v": 1,
  "module": "sne-neurometabolic-storage",
- "subject": "ss-neurology",
- "title": "Neurometabolic and storage disorders: high-yield overview for NEET-PG",
- "minutes": 5,
+ "title": "Prion diseases and adult neurometabolic storage disorders",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "Neurometabolic and **lysosomal storage disorders** arise from enzyme or transporter defects that cause toxic substrate build-up in neurons. Many present in infancy with regression, hypotonia or seizures. Recognising a few signature signs, such as the **cherry-red spot** and **Kayser-Fleischer ring**, is often enough to name the disease in an exam.",
-   "say": "Neurometabolic and lysosomal storage disorders arise from enzyme or transporter defects that cause toxic substrate build-up in neurons. Many present in infancy with regression, hypotonia or seizures. Recognising a few signature signs, such as the cherry-red spot and the Kayser-Fleischer ring, is often enough to name the disease in an exam.",
+   "tx": "Sporadic **Creutzfeldt-Jakob disease** manifests with rapidly progressive dementia, **startle myoclonus**, ataxia, and visual abnormalities, leading to death typically within 6 to 12 months from symptom onset due to scrapie prion propagation. The relentless clinical course demands prompt diagnostic evaluation to exclude treatable autoimmune mimics.",
+   "say": "Sporadic Creutzfeldt-Jakob disease manifests with rapidly progressive dementia, startle myoclonus, ataxia, and visual abnormalities, leading to death typically within 6 to 12 months from symptom onset due to scrapie prion propagation. The relentless clinical course demands prompt diagnostic evaluation to exclude treatable autoimmune mimics.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/sne-neurometabolic-storage-fig1.webp",
-    "alt": "Two images: a fundus photo showing a cherry-red spot, and a slit-lamp image showing a Kayser-Fleischer ring. Key diagnostic signs.",
-    "caption": "Signature signs of neurometabolic disorders. Image: 18mlk7, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.3933
+    "src": "v1/kb/media/prion-diseases-fig1.webp",
+    "alt": "Diagram, MRI, and histology of prion protein transformation, cortical ribboning, and spongiform changes.",
+    "caption": "Prion conversion, cortical ribboning on MRI, and spongiform encephalopathy (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
-   "tx": "Tay-Sachs disease is caused by deficiency of **beta-hexosaminidase A**, leading to GM2 ganglioside accumulation. Infants show developmental regression and an exaggerated startle to sound. The **cherry-red spot** reflects ganglion cell swelling at the macula, with the pale fovea contrasting against the normal choroid. Hepatosplenomegaly is typically absent, which helps separate it from Niemann-Pick.",
-   "say": "Tay-Sachs disease is caused by deficiency of beta-hexosaminidase A, leading to GM2 ganglioside accumulation. Infants show developmental regression and an exaggerated startle to sound. The cherry-red spot reflects ganglion cell swelling at the macula, with the pale fovea contrasting against the normal choroid. Hepatosplenomegaly is typically absent, which helps separate it from Niemann-Pick.",
+   "tx": "Brain MRI in Creutzfeldt-Jakob disease demonstrates striking **cortical ribboning** on DWI along cerebral gyri, hyperintensity in the caudate and putamen, and the characteristic **hockey-stick sign** in the pulvinar and dorsomedial thalamic nuclei in variant CJD. Diffusion-weighted imaging remains the most sensitive imaging sequence for detecting early cortical and striatal abnormalities.",
+   "say": "Brain MRI in Creutzfeldt-Jakob disease demonstrates striking cortical ribboning on DWI along cerebral gyri, hyperintensity in the caudate and putamen, and the characteristic hockey-stick sign in the pulvinar and dorsomedial thalamic nuclei in variant CJD. Diffusion-weighted imaging remains the most sensitive imaging sequence for detecting early cortical and striatal abnormalities.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Feature",
-     "Tay-Sachs",
-     "Niemann-Pick C"
+     "Diagnostic Modality",
+     "Characteristic Finding",
+     "Sensitivity / Specificity"
     ],
     "rows": [
      [
-      "Enzyme or gene defect",
-      "Hex A deficiency",
-      "NPC1 or NPC2 defect"
+      "DWI / FLAIR MRI",
+      "Cortical ribboning and hockey-stick sign",
+      "> 90% sensitive and specific"
      ],
      [
-      "Cherry-red spot",
-      "Usual in infantile form",
-      "Uncommon"
+      "CSF RT-QuIC",
+      "Ultrasensitive prion seed amplification",
+      "> 95% sensitive, 100% specific"
      ],
      [
-      "Vertical gaze palsy",
-      "Not typical",
-      "Hallmark"
+      "CSF 14-3-3 Protein",
+      "Elevated surrogate neuronal damage marker",
+      "Sensitive but non-specific"
      ],
      [
-      "Hepatosplenomegaly",
-      "Absent",
-      "Present"
+      "Electroencephalogram",
+      "Periodic sharp wave complexes at 1 Hz",
+      "Classic late marker in 65%"
      ]
     ]
    }
   },
   {
-   "tx": "Niemann-Pick type C is a cholesterol trafficking disorder, with **vertical gaze palsy** as a key feature. Wilson disease, caused by **ATP7B** mutations, causes copper accumulation. Its **Kayser-Fleischer ring** at the corneal Descemet membrane is a slit-lamp clue. Both can present with young-onset extrapyramidal signs, so they must be separated.",
-   "say": "Niemann-Pick type C is a cholesterol trafficking disorder, with vertical gaze palsy as a key feature. Wilson disease, caused by ATP7B mutations, causes copper accumulation. Its Kayser-Fleischer ring at the corneal Descemet membrane is a slit-lamp clue. Both can present with young-onset extrapyramidal signs, so they must be separated.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Niemann-Pick C",
-     "points": [
-      "Cholesterol trafficking defect",
-      "Vertical gaze palsy",
-      "Hepatosplenomegaly",
-      "Cognitive decline"
-     ]
-    },
-    "right": {
-     "title": "Wilson disease",
-     "points": [
-      "ATP7B copper transporter defect",
-      "Kayser-Fleischer ring",
-      "Low serum ceruloplasmin",
-      "Hepatic and neuropsychiatric signs"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Neurodegeneration with brain iron accumulation includes **PKAN** and related disorders, which show the **eye of the tiger** sign on MRI. Kufor-Rakeb syndrome, due to **ATP13A2** variants, causes juvenile parkinsonism with supranuclear gaze palsy. Dyskinesias from levodopa may be treated with amantadine in these patients.",
-   "say": "Neurodegeneration with brain iron accumulation includes PKAN and related disorders, which show the eye of the tiger sign on MRI. Kufor-Rakeb syndrome, due to ATP13A2 variants, causes juvenile parkinsonism with supranuclear gaze palsy. Dyskinesias from levodopa may be treated with amantadine in these patients.",
+   "tx": "Real-time quaking-induced conversion, designated as **RT-QuIC** in CSF, provides definitive diagnosis of sporadic CJD with greater than 95% sensitivity and near 100% specificity by detecting pathologically misfolded scrapie **prion protein**. This revolutionary non-invasive assay has largely supplanted brain biopsy in suspected cases.",
+   "say": "Real-time quaking-induced conversion designated as RT-QuIC in CSF, provides definitive diagnosis of sporadic CJD with greater than 95% sensitivity and near 100% specificity by detecting pathologically misfolded scrapie prion protein.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Iron accumulates in basal ganglia"
+      "label": "CSF Prion Seeds"
      },
      {
       "id": "b",
-      "label": "Eye of the tiger on MRI"
+      "label": "Recombinant Substrate Quaking"
      },
      {
       "id": "c",
-      "label": "ATP13A2 testing for Kufor-Rakeb"
+      "label": "Thioflavin T Polymerization"
+     },
+     {
+      "id": "d",
+      "label": "Near 100% Specificity Confirmation"
      }
     ],
     "edges": [
      [
       "a",
-      "b"
+      "b",
+      "incubation"
      ],
      [
       "b",
-      "c"
+      "c",
+      "seeded aggregation"
+     ],
+     [
+      "c",
+      "d",
+      "fluorescent readout"
      ]
     ]
    }
   },
   {
-   "tx": "Neuronal ceroid lipofuscinosis, the **Batten disease** group, causes progressive myoclonic epilepsy, visual failure and regression. Lipofuscin accumulates in lysosomes. Gaucher disease results from **glucocerebrosidase** deficiency and is the commonest sphingolipidosis, with splenomegaly and bone involvement, and neuronopathic forms affecting the brain.",
-   "say": "Neuronal ceroid lipofuscinosis, the Batten disease group, causes progressive myoclonic epilepsy, visual failure and regression. Lipofuscin accumulates in lysosomes. Gaucher disease results from glucocerebrosidase deficiency and is the commonest sphingolipidosis, with splenomegaly and bone involvement, and neuronopathic forms affecting the brain.",
-   "vis": null
+   "tx": "Peroxisomal metabolic dysfunction causes childhood and adult demyelination. **Adrenoleukodystrophy** is caused by ABCD1 gene mutations impairing peroxisomal beta-oxidation, leading to accumulation of very long chain **fatty acids** with posterior white matter demyelination and adrenal insufficiency. Plasma very long chain fatty acid profiling provides rapid biochemical diagnostic confirmation.",
+   "say": "Peroxisomal metabolic dysfunction causes childhood and adult demyelination. Adrenoleukodystrophy is caused by ABCD1 gene mutations impairing peroxisomal beta-oxidation, leading to accumulation of very long chain fatty acids with posterior white matter demyelination and adrenal insufficiency. Plasma very long chain fatty acid profiling provides rapid biochemical diagnostic confirmation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adrenoleukodystrophy",
+     "points": [
+      "X-linked recessive ABCD1 mutation",
+      "Elevated very long chain fatty acids (VLCFAs)",
+      "Posterior parieto-occipital demyelination",
+      "Concurrent primary adrenal insufficiency"
+     ]
+    },
+    "right": {
+     "title": "Adult Phenotype (AMN)",
+     "points": [
+      "Adrenomyeloneuropathy in adult males",
+      "Progressive spastic paraparesis and ataxia",
+      "Distal sensorimotor polyneuropathy",
+      "Sphincter disturbances and baldness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Gaucher disease** type 1 is the most common lysosomal storage disease, caused by **glucocerebrosidase** deficiency, presenting with hepatosplenomegaly, bone crises, Erlenmeyer flask deformity, and lipid-laden Gaucher cells with crinkled paper appearance. Enzyme replacement therapy with imiglucerase substantially reverses organomegaly, cytopenias, and skeletal complications.",
+   "say": "Gaucher disease type 1 is the most common lysosomal storage disease, caused by glucocerebrosidase deficiency, presenting with hepatosplenomegaly, bone crises, Erlenmeyer flask deformity, and lipid-laden Gaucher cells with crinkled paper appearance. Enzyme replacement therapy with imiglucerase substantially reverses organomegaly, cytopenias, and skeletal complications.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/wilsons-disease-fig1.webp",
+    "alt": "Diagram of Kayser-Fleischer corneal ring, cirrhotic liver, and basal ganglia degeneration in Wilson disease.",
+    "caption": "Wilson disease copper accumulation, Kayser-Fleischer ring, and basal ganglia injury (StewardMD).",
+    "ar": 1.7778
+   }
+  },
+  {
+   "tx": "**Niemann-Pick** disease type C is a lysosomal lipid trafficking disorder caused by mutations in NPC1 or NPC2, presenting with progressive supranuclear **vertical gaze** palsy, cerebellar ataxia, cognitive decline, and gelastic cataplexy. Miglustat serves as disease-specific substrate reduction therapy that stabilizes neurological manifestations.",
+   "say": "Niemann-Pick disease type C is a lysosomal lipid trafficking disorder caused by mutations in NPC1 or NPC2, presenting with progressive supranuclear vertical gaze palsy, cerebellar ataxia, cognitive decline, and gelastic cataplexy. Miglustat serves as disease-specific substrate reduction therapy that stabilizes neurological manifestations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "NPC1 / NPC2 Mutation"
+     },
+     {
+      "id": "b",
+      "label": "Lysosomal Cholesterol Sequestration"
+     },
+     {
+      "id": "c",
+      "label": "Midbrain Rostral Interstitial Loss"
+     },
+     {
+      "id": "d",
+      "label": "Vertical Gaze Palsy and Ataxia"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "trafficking defect"
+     ],
+     [
+      "b",
+      "c",
+      "neuroaxonal dystrophy"
+     ],
+     [
+      "c",
+      "d",
+      "supranuclear ophthalmoplegia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tay-Sachs** disease results from hexosaminidase A deficiency with accumulation of GM2 ganglioside, featuring rapid neurodegeneration, hyperacusis, and a pathognomonic **cherry-red spot** at the macula without accompanying hepatosplenomegaly in affected infants. Progressive macrocephaly typically develops by two years of age due to exuberant reactive cerebral gliosis.",
+   "say": "Tay-Sachs disease results from hexosaminidase A deficiency with accumulation of GM2 ganglioside, featuring rapid neurodegeneration, hyperacusis, and a pathognomonic cherry-red spot at the macula without accompanying hepatosplenomegaly in affected infants. Progressive macrocephaly typically develops by two years of age due to exuberant reactive cerebral gliosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tay-Sachs Disease",
+     "points": [
+      "Hexosaminidase A deficiency (HEXA)",
+      "GM2 ganglioside accumulation",
+      "Macular cherry-red spot present",
+      "Hepatosplenomegaly completely absent"
+     ]
+    },
+    "right": {
+     "title": "Niemann-Pick Type A",
+     "points": [
+      "Acid sphingomyelinase deficiency (SMPD1)",
+      "Sphingomyelin lipid storage",
+      "Macular cherry-red spot in 50%",
+      "Massive hepatosplenomegaly hallmark"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Krabbe disease**, also called globoid cell leukodystrophy, results from **galactocerebrosidase** deficiency, producing severe white matter demyelination with accumulation of cytotoxic psychosine and globoid multinucleated macrophages on central nervous system histology. Hematopoietic stem cell transplantation before symptom onset offers the only proven strategy to arrest demyelination.",
+   "say": "Krabbe disease, also called globoid cell leukodystrophy, results from galactocerebrosidase deficiency, producing severe white matter demyelination with accumulation of cytotoxic psychosine and globoid multinucleated macrophages on central nervous system histology. Hematopoietic stem cell transplantation before symptom onset offers the only proven strategy to arrest demyelination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "GALC Gene Mutation"
+     },
+     {
+      "id": "b",
+      "label": "Galactocerebrosidase Deficiency"
+     },
+     {
+      "id": "c",
+      "label": "Toxic Psychosine Accumulation"
+     },
+     {
+      "id": "d",
+      "label": "Globoid Macrophage Leukodystrophy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b",
+      "enzyme loss"
+     ],
+     [
+      "b",
+      "c",
+      "galactolipid block"
+     ],
+     [
+      "c",
+      "d",
+      "oligodendrocyte apoptosis"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "q_8feacd690007",
-  "q_d7fb20f60661",
-  "q_dc75dc213208"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "Nelson Textbook of Pediatrics (Kliegman et al.)",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 14
- }
+  "Adams and Victor Principles of Neurology 11e Ch. 32",
+  "Netter Neurology 2e Ch. 14"
+ ]
 }
