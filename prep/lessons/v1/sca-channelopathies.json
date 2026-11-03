@@ -1,0 +1,257 @@
+{
+ "v": 1,
+ "module": "sca-channelopathies",
+ "subject": "ss-cardiology",
+ "title": "Inherited arrhythmia syndromes: channelopathies, risk stratification and sudden death prevention",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Congenital long QT syndrome** comprises 3 major genotypes accounting for > 90% of cases. LQT1 involves loss-of-function mutations in KCNQ1 impairing IKs, triggered by exercise and swimming. LQT2 involves KCNH2 mutations impairing IKr, triggered by auditory stimuli. LQT3 involves SCN5A gain-of-function mutations augmenting late INa, with events occurring during sleep.",
+   "say": "Congenital long QT syndrome comprises three primary genotypes. Long QT type 1 involves loss-of-function KCNQ1 mutations impairing IKs, triggered by exercise and swimming. Long QT type 2 involves KCNH2 mutations impairing IKr, triggered by auditory alarms. Long QT type 3 involves SCN5A gain-of-function mutations, causing events during sleep.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genotype",
+     "Mutated Gene / Current",
+     "Classic Trigger / T Wave Morphology"
+    ],
+    "rows": [
+     [
+      "LQT1",
+      "KCNQ1 / loss of IKs",
+      "Swimming, exertion; broad-based T waves"
+     ],
+     [
+      "LQT2",
+      "KCNH2 (HERG) / loss of IKr",
+      "Auditory stimuli (alarms); notched, low-amplitude T waves"
+     ],
+     [
+      "LQT3",
+      "SCN5A / gain of late INa",
+      "Rest, sleep, bradycardia; late-onset peaked T waves with long ST"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line pharmacotherapy** for long QT syndrome types 1 and 2 consists of nonselective beta-blockers, specifically nadolol or propranolol. Nonselective beta-blockers shorten the QT interval, suppress sympathetic triggers of early afterdepolarizations, and reduce sudden cardiac death by over 80%. Selective beta-1 blockers are significantly less effective.",
+   "say": "First line medical therapy for long QT syndrome types 1 and 2 consists of nonselective beta blockers, specifically nadolol or propranolol. Nonselective beta blockade suppresses sympathetic triggers of early afterdepolarizations and reduces sudden death risk by more than eighty percent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nonselective Beta-Blockers",
+     "points": [
+      "Nadolol and propranolol block both beta-1 and beta-2 receptors, providing superior QT shortening and SCD reduction."
+     ]
+    },
+    "right": {
+     "title": "Metoprolol (Selective Beta-1)",
+     "points": [
+      "Significantly higher cardiac event breakthrough rates; not recommended as first-line in congenital LQTS."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Brugada syndrome** exhibits autosomal dominant inheritance with loss-of-function mutations in **SCN5A** in up to 20% to 30% of genotyped probands. The diagnostic hallmark is the Type 1 Brugada ECG pattern, displaying coved-type ST-elevation >= 2 mm followed by negative T waves in >= 1 right precordial lead (V1-V2) positioned in the 2nd, 3rd, or 4th intercostal spaces.",
+   "say": "Brugada syndrome exhibits autosomal dominant inheritance, with loss-of-function mutations in SCN5A identified in up to thirty percent of probands. The diagnostic hallmark is the spontaneous or drug-induced Type 1 Brugada pattern, displaying coved ST elevation of two millimetres or greater in leads V1 or V2.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brugada ECG Pattern",
+     "ST-Segment Morphology",
+     "Diagnostic Status"
+    ],
+    "rows": [
+     [
+      "Type 1 (Coved)",
+      ">= 2 mm ST-elevation, coved slope, negative T wave",
+      "Definitive diagnostic pattern"
+     ],
+     [
+      "Type 2 (Saddleback)",
+      ">= 2 mm ST-elevation, trough >= 1 mm, positive T wave",
+      "Suspicious; requires provocative drug challenge"
+     ],
+     [
+      "High precordial leads",
+      "Recorded in 2nd and 3rd intercostal spaces",
+      "Increases sensitivity for Type 1 unmasking"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic Type 1 Brugada pattern can be unmasked or provoked pharmacologically by intravenous administration of **sodium channel blockers** such as ajmaline, flecainide, or procainamide. Augmenting ITo-mediated action potential notch disparity across the right ventricular outflow tract epicardium unmasks ST elevation and confirms diagnosis in suspected patients.",
+   "say": "The diagnostic Type 1 Brugada pattern can be unmasked pharmacologically by administering class 1c sodium channel blocking agents such as ajmaline, flecainide, or procainamide. Blocking inward sodium current accentuates epicardial repolarization gradients in the right ventricular outflow tract, unmasking coved ST elevation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Equivocal Type 2/3 ECG"
+     },
+     {
+      "id": "n2",
+      "label": "IV Ajmaline / Flecainide"
+     },
+     {
+      "id": "n3",
+      "label": "Sodium Current Depression"
+     },
+     {
+      "id": "n4",
+      "label": "Coved Type 1 Unmasking"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Quinidine** serves as the primary medical therapy for preventing recurrent ventricular fibrillation and electrical storms in Brugada syndrome. By inhibiting the transient outward potassium current (**ITo**), quinidine restores action potential dome morphology in the epicardium of the right ventricular outflow tract, abolishing Phase 2 reentry and suppressible arrhythmias.",
+   "say": "Quinidine serves as the primary antiarrhythmic agent for suppressing recurrent ventricular fibrillation and electrical storms in Brugada syndrome. By inhibiting the transient outward potassium current, ITo, quinidine restores epicardial action potential dome morphology and abolishes Phase 2 reentry. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Quinidine Mechanism",
+     "points": [
+      "Blocks transient outward potassium current (ITo); prevents premature epicardial repolarization and Phase 2 reentry."
+     ]
+    },
+    "right": {
+     "title": "Clinical Indications",
+     "points": [
+      "Frequent ICD shocks, electrical storm, or when ICD implantation is contraindicated or refused."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Catecholaminergic polymorphic ventricular tachycardia** (CPVT) is an inherited channelopathy caused by mutations in the cardiac ryanodine receptor gene (**RYR2**) in ~60% of cases. Intense physical exertion or emotional stress triggers adrenergic-mediated sarcoplasmic reticulum calcium leak, producing delayed afterdepolarizations, bidirectional VT, and polymorphic VT in children.",
+   "say": "Catecholaminergic polymorphic ventricular tachycardia is a life-threatening inherited channelopathy caused by mutations in the cardiac ryanodine receptor gene, RYR2, in sixty percent of cases. Exercise or emotional distress triggers sarcoplasmic reticulum calcium leak, producing bidirectional ventricular tachycardia. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Exercise / Emotion"
+     },
+     {
+      "id": "n2",
+      "label": "Beta-Adrenergic Surge"
+     },
+     {
+      "id": "n3",
+      "label": "Mutated RyR2 Ca2+ Leak"
+     },
+     {
+      "id": "n4",
+      "label": "Bidirectional / Polymorphic VT"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Flecainide** provides powerful antiarrhythmic efficacy in CPVT by directly inhibiting cardiac ryanodine receptor open state and blocking sodium channels to prevent delayed afterdepolarization-mediated triggered activity. Combined with high-dose nonselective beta-blockers, flecainide abolishes exercise-induced ventricular arrhythmias in refractory patients. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Flecainide provides potent therapeutic efficacy in catecholaminergic polymorphic ventricular tachycardia by directly inhibiting cardiac ryanodine receptor opening and blocking sodium channels to eliminate delayed afterdepolarizations. Added to beta blockers, flecainide suppresses exercise-induced arrhythmias. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacologic Agent",
+     "Action in CPVT",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "Nadolol / Propranolol",
+      "Nonselective beta-adrenergic blockade",
+      "First-line baseline therapy in all patients"
+     ],
+     [
+      "Flecainide",
+      "Direct RyR2 inhibition + Na+ channel block",
+      "Add-on therapy for persistent exercise PVCs/VT"
+     ],
+     [
+      "Left cardiac sympathetic denervation",
+      "Surgical sympathectomy (T1-T4)",
+      "Refractory VT or recurrent ICD shocks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Arrhythmogenic right ventricular cardiomyopathy** (ARVC) is caused by mutations in desmosomal genes, predominantly **PKP2** encoding plakophilin-2. Fibrofatty replacement of RV myocardium leads to right ventricular aneurysms, T-wave inversion in right precordial leads (V1-V3), epsilon waves, and ventricular tachycardia with left bundle branch block morphology.",
+   "say": "Arrhythmogenic right ventricular cardiomyopathy is caused by mutations in desmosomal genes, predominantly PKP2 encoding plakophilin-2. Progressive fibrofatty replacement of right ventricular myocardium produces right precordial T-wave inversions, epsilon waves, and ventricular tachycardia with left bundle branch block morphology. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Task Force Criteria",
+     "Diagnostic Finding",
+     "Pathophysiologic Basis"
+    ],
+    "rows": [
+     [
+      "Structural imaging",
+      "Severe RV dilation or regional RV akinesis",
+      "Fibrofatty replacement of RV wall"
+     ],
+     [
+      "Depolarization abnormality",
+      "Epsilon wave (terminal notch) in V1-V2",
+      "Delayed delayed intraventricular conduction"
+     ],
+     [
+      "Repolarization abnormality",
+      "T-wave inversion in V1, V2, V3",
+      "Transmural RV repolarization delay"
+     ],
+     [
+      "Arrhythmia morphology",
+      "VT with LBBB morphology and superior axis",
+      "Originating from RV free wall / apex / outflow"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

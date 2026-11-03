@@ -1,0 +1,237 @@
+{
+ "v": 1,
+ "module": "sca-hypertrophic-cardiomyopathy",
+ "subject": "ss-cardiology",
+ "title": "Hypertrophic cardiomyopathy: genetics, outflow gradients, medical therapy and myectomy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Hypertrophic cardiomyopathy is defined by unexplained left ventricular wall thickness >= 15 mm in any myocardial segment, or >= 13 mm in individuals with a confirmed first-degree family history. Sarcomeric gene mutations account for up to 60% of familial cases, predominantly displaying autosomal dominant inheritance involving **MYH7** and **MYBPC3**.",
+   "say": "Hypertrophic cardiomyopathy is defined clinically by unexplained left ventricular hypertrophy with maximal wall thickness of 15 millimetres or greater, or 13 millimetres in the presence of a positive family history. Sarcomeric gene mutations account for up to 60 percent of familial cases, most commonly affecting MYH7 and MYBPC3.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sarcomeric Gene",
+     "Encoded Protein",
+     "Relative Frequency"
+    ],
+    "rows": [
+     [
+      "MYBPC3",
+      "Cardiac myosin-binding protein C",
+      "40% to 45% of genotyped cases"
+     ],
+     [
+      "MYH7",
+      "Beta-myosin heavy chain",
+      "35% to 40% of genotyped cases"
+     ],
+     [
+      "TNNT2 / TNNI3",
+      "Cardiac troponin T and I",
+      "5% to 10%, high sudden death risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dynamic left ventricular outflow tract obstruction in hypertrophic cardiomyopathy results from systolic anterior motion of the mitral valve leaflets. Venturi forces and drag forces pull elongated leaflets toward the hypertrophied basal septum. A peak **outflow tract gradient** >= 30 mmHg defines obstruction, while a gradient >= 50 mmHg represents the threshold for invasive intervention.",
+   "say": "Dynamic left ventricular outflow tract obstruction in hypertrophic cardiomyopathy is driven by systolic anterior motion of the mitral valve. Flow drag forces pull elongated leaflets toward the hypertrophied basal septum. A peak instantaneous gradient of 30 millimetres of mercury defines obstruction, whereas 50 defines the threshold for septal reduction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Basal Septal Hypertrophy"
+     },
+     {
+      "id": "n2",
+      "label": "Ejection Acceleration"
+     },
+     {
+      "id": "n3",
+      "label": "Systolic Anterior Motion"
+     },
+     {
+      "id": "n4",
+      "label": "Dynamic LVOT Gradient"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line pharmacotherapy** for symptomatic obstructive hypertrophic cardiomyopathy consists of non-vasodilating beta-blockers titrated to a resting heart rate of 60 bpm. Nondihydropyridine calcium channel blockers such as verapamil serve as alternatives when beta-blockers are contraindicated. Both classes reduce inotropy, prolong diastole, and attenuate exercise-induced LVOT obstruction.",
+   "say": "First line medical therapy for symptomatic obstructive hypertrophic cardiomyopathy consists of nonvasodilating beta blockers titrated to a resting heart rate around 60 beats per minute. Verapamil represents an effective alternative. Both drug classes exert negative inotropic and chronotropic effects that attenuate dynamic outflow obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug Class",
+     "Representative Agent",
+     "Mechanism of Action"
+    ],
+    "rows": [
+     [
+      "Beta-blocker",
+      "Metoprolol, propranolol, nadolol",
+      "Blunts adrenergic inotropy and heart rate"
+     ],
+     [
+      "Nondihydropyridine CCB",
+      "Verapamil, diltiazem",
+      "Slows AV nodal conduction and blunts contractility"
+     ],
+     [
+      "Negative inotropic antiarrhythmic",
+      "Disopyramide",
+      "Potent sodium-channel negative inotrope"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mavacamten** represents a first-in-class cardiac myosin inhibitor that selectively and reversibly targets cardiac myosin ATPase. Inhibiting cross-bridge formation stabilizes myosin heads in the super-relaxed state, decreasing hypercontractility. In the EXPLORER-HCM and VALOR-HCM trials, mavacamten substantially reduced LVOT gradients, improved symptoms, and reduced the need for septal reduction therapy.",
+   "say": "Mavacamten is a first-in-class cardiac myosin inhibitor that reversibly inhibits cardiac myosin adenosine triphosphatase. Shifting myosin heads into a super relaxed state alleviates hypercontractility. In the EXPLORER-HCM trial, mavacamten markedly reduced outflow gradients and improved functional capacity in symptomatic obstructive patients.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mavacamten Action",
+     "points": [
+      "Direct, reversible allosteric inhibitor of beta-cardiac myosin; reduces excess actin-myosin cross-bridge formation."
+     ]
+    },
+    "right": {
+     "title": "Safety Requirement",
+     "points": [
+      "Requires periodic echocardiographic LVEF surveillance; hold therapy if LVEF drops below 50% to prevent systolic dysfunction."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients with obstructive hypertrophic cardiomyopathy, **dihydropyridine calcium channel blockers are contraindicated**, as well as nitrates, PDE-5 inhibitors, and digitalis. Peripheral vasodilation and volume depletion reduce left ventricular end-diastolic volume, while positive inotropes exaggerate hypercontractility, precipitating acute worsening of LVOT obstruction and hemodynamic collapse.",
+   "say": "In obstructive hypertrophic cardiomyopathy, dihydropyridine calcium channel blockers, organic nitrates, and positive inotropic drugs like digoxin are strictly contraindicated. Peripheral vasodilation diminishes left ventricular cavity size, while inotropic stimulation exacerbates systolic anterior motion, drastically worsening outflow obstruction. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contraindicated Drugs",
+     "points": [
+      "Amlodipine, nifedipine, nitroglycerin, isosorbide, digoxin, and aggressive loop diuretics."
+     ]
+    },
+    "right": {
+     "title": "Hemodynamic Consequence",
+     "points": [
+      "Reduced afterload and smaller cavity volume precipitate catastrophic increase in LVOT obstruction and syncope."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical **septal myectomy**, the Morrow procedure, remains the gold-standard septal reduction therapy for drug-refractory obstructive HCM with peak gradient >= 50 mmHg and severe symptoms. Alcohol septal ablation serves as an effective catheter-based alternative in high-surgical-risk patients possessing suitable septal perforator coronary artery anatomy.",
+   "say": "Surgical septal myectomy, known as the Morrow procedure, remains the gold standard septal reduction therapy for drug-refractory obstructive hypertrophic cardiomyopathy with peak gradients of 50 millimetres of mercury or greater. Alcohol septal ablation serves as an effective percutaneous alternative in patients with suitable coronary anatomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical Myectomy",
+     "points": [
+      "Transaortic resection of basal septal myocardium; addresses concomitant intrinsic mitral apparatus anomalies."
+     ]
+    },
+    "right": {
+     "title": "Alcohol Septal Ablation",
+     "points": [
+      "Catheter-directed infusion of 96-98% ethanol into first septal perforator; produces targeted therapeutic basal infarction."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Major clinical risk factors for **sudden cardiac death** in hypertrophic cardiomyopathy include maximum LV wall thickness >= 30 mm, unexplained recent syncope, family history of premature HCM sudden death, apical aneurysm, LVEF < 50%, and extensive late gadolinium enhancement involving >= 15% of LV mass, guiding primary prevention ICD implantation.",
+   "say": "Major risk factors for sudden cardiac death in hypertrophic cardiomyopathy include massive left ventricular hypertrophy with maximal wall thickness of 30 millimetres or greater, unexplained recent syncope, family history of sudden death, apical aneurysm, and extensive late gadolinium enhancement involving at least 15 percent of myocardium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Major Risk Factor",
+     "High-Risk Definition",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Massive hypertrophy",
+      "Maximal LV wall thickness >= 30 mm",
+      "Strong consideration for primary ICD"
+     ],
+     [
+      "Unexplained syncope",
+      "Within prior 6 months, not neurocardiogenic",
+      "Independent trigger for ICD assessment"
+     ],
+     [
+      "Family history",
+      "Premature sudden death in 1st degree relative",
+      "Increases lifetime arrhythmic hazard"
+     ],
+     [
+      "Extensive LGE",
+      ">= 15% of total LV myocardial mass",
+      "Reflects extensive replacement fibrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Apical hypertrophic cardiomyopathy**, Yamaguchi syndrome, predominantly involves the LV apex with giant negative T waves >= 10 mm in precordial leads V2 to V5. Left ventriculography and cardiac MRI demonstrate pathognomonic ace-of-spades systolic cavity configuration. Apical aneurysms may develop, carrying substantial thromboembolic and ventricular arrhythmic risks.",
+   "say": "Apical hypertrophic cardiomyopathy, described by Yamaguchi, is characterized by selective hypertrophy of the left ventricular apex accompanied by giant negative T waves of ten millimetres or greater in precordial leads. Cardiac magnetic resonance demonstrates a characteristic ace of spades systolic cavity contour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Apical HCM Hallmark",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "12-lead ECG",
+      "Giant inverted T waves (>= 10 mm, V2-V5)",
+      "Classic diagnostic electrocardiographic pattern"
+     ],
+     [
+      "Imaging morphology",
+      "Ace-of-spades configuration",
+      "Obliteration of apical cavity in systole"
+     ],
+     [
+      "Complications",
+      "Apical aneurysm formation",
+      "Requires anticoagulation and arrhythmia vigilance"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}

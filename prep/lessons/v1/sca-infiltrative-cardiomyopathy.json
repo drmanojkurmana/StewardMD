@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "sca-infiltrative-cardiomyopathy",
+ "subject": "ss-cardiology",
+ "title": "Cardiac amyloidosis and infiltrative disease: noninvasive diagnosis, typing and targeted therapies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Cardiac amyloidosis comprises two predominant subtypes: light-chain amyloidosis (**AL amyloidosis**) caused by clonal plasma cell dyscrasias producing toxic immunoglobulin light chains, and transthyretin amyloidosis (**ATTR amyloidosis**), occurring as wild-type or hereditary forms due to misfolded transthyretin tetramers. Clinical mastery requires rigorous recognition of these diagnostic thresholds and hemodynamic criteria.",
+   "say": "Cardiac amyloidosis comprises two predominant forms. Light chain or AL amyloidosis is caused by clonal plasma cell dyscrasias secreting misfolded light chains. Transthyretin or ATTR amyloidosis occurs as wild-type disease in elderly individuals or hereditary disease caused by mutations in the transthyretin gene.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "AL Amyloidosis",
+     "points": [
+      "Clonal plasma cell dyscrasia; free light chains; rapid clinical progression, acute cardiotoxicity, urgent chemotherapy."
+     ]
+    },
+    "right": {
+     "title": "ATTR Amyloidosis",
+     "points": [
+      "Wild-type (age-related) or variant (TTR gene mutations); slower progression, carpal tunnel, spinal stenosis, tafamidis."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The diagnostic hallmark of cardiac amyloidosis is **discordance between ECG voltage and echocardiographic wall thickness**. Echocardiography demonstrates symmetric pseudohypertrophy with thick ventricular walls, biatrial enlargement, and sparkling granular myocardial texture, yet the 12-lead ECG shows low QRS voltage (< 5 mm in limb leads) or pseudo-infarct Q waves.",
+   "say": "The classic diagnostic hallmark of cardiac amyloidosis is discordance between low electrocardiographic voltage and marked echocardiographic wall thickening. Echocardiography shows thick ventricular walls with small cavity dimensions, while the surface electrocardiogram displays inappropriately low QRS voltage. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Echocardiography",
+     "points": [
+      "Concentric biventricular wall thickening (>= 12 mm), biatrial enlargement, granular myocardial speckling."
+     ]
+    },
+    "right": {
+     "title": "Electrocardiogram",
+     "points": [
+      "Low QRS voltage (< 5 mm in all limb leads, < 10 mm in precordial) or anterior pseudo-infarct Q waves."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Speckle-tracking echocardiography reveals a pathognomonic **apical sparing** pattern of global longitudinal strain in cardiac amyloidosis. Longitudinal strain is severely blunted in basal and mid-ventricular segments while apical contraction remains preserved, generating a characteristic cherry-on-top appearance on bullseye strain maps with an apical-to-basal ratio > 1.0.",
+   "say": "Speckle tracking echocardiography reveals a pathognomonic apical sparing pattern of global longitudinal strain in cardiac amyloidosis. Longitudinal shortening is severely blunted in basal and mid ventricular segments while apex function is preserved, producing a cherry on top bullseye map. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Left Ventricular Level",
+     "Strain Value",
+     "Visual Pattern"
+    ],
+    "rows": [
+     [
+      "Basal segments",
+      "Severely reduced (-5% to -8%)",
+      "Dark blue / blunted shortening"
+     ],
+     [
+      "Mid-ventricular",
+      "Moderately reduced (-8% to -12%)",
+      "Intermediate dysfunction"
+     ],
+     [
+      "Apical segments",
+      "Preserved (-18% to -24%)",
+      "Bright red, preserved longitudinal strain"
+     ],
+     [
+      "Apex-to-base ratio",
+      "> 1.0",
+      "Highly sensitive and specific for amyloidosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Noninvasive diagnosis of ATTR cardiac amyloidosis is achieved with **technetium pyrophosphate scintigraphy** (99mTc-PYP, DPD, or HMDP). Demonstrating intense myocardial uptake (Perugini grade 2 or 3) in the strict absence of monoclonal free light chains in serum and urine establishes diagnosis with 100% positive predictive value without endomyocardial biopsy.",
+   "say": "Noninvasive diagnosis of transthyretin cardiac amyloidosis is achieved with technetium pyrophosphate scintigraphy. Demonstrating intense myocardial tracer uptake of grade two or three, combined with the rigorous exclusion of monoclonal light chains in serum and urine, confirms ATTR amyloidosis without endomyocardial biopsy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Thick LV Walls"
+     },
+     {
+      "id": "n2",
+      "label": "Serum/Urine Free Light Chains"
+     },
+     {
+      "id": "n3",
+      "label": "99mTc-PYP Scintigraphy"
+     },
+     {
+      "id": "n4",
+      "label": "Grade 2-3 Uptake: ATTR"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exclusion of monoclonal light chains** is mandatory before diagnosing ATTR cardiac amyloidosis noninvasively. Testing requires three concurrent assays: serum protein electrophoresis with immunofixation, urine protein electrophoresis with immunofixation, and serum free light chain assay. Any monoclonal abnormality mandates urgent hematologic evaluation and tissue biopsy.",
+   "say": "Rigorous exclusion of monoclonal light chains is mandatory prior to confirming transthyretin amyloidosis noninvasively. Evaluation requires serum and urine protein electrophoresis with immunofixation plus a serum free light chain assay. Any clonal abnormality mandates tissue biopsy to rule out light chain amyloidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Assay",
+     "Purpose",
+     "Abnormal Finding"
+    ],
+    "rows": [
+     [
+      "Serum immunofixation (sIFE)",
+      "Detects intact clonal paraprotein",
+      "Monoclonal band identified"
+     ],
+     [
+      "Urine immunofixation (uIFE)",
+      "Detects excreted Bence-Jones protein",
+      "Monoclonal light chain excretion"
+     ],
+     [
+      "Serum free light chain (sFLC)",
+      "Quantifies kappa and lambda chains",
+      "Abnormal kappa/lambda ratio (< 0.26 or > 1.65)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tafamidis** functions as a selective transthyretin kinetic stabilizer that binds to the thyroxine-binding sites of the tetramer. In the ATTR-ACT trial, tafamidis significantly reduced all-cause mortality by 30% and heart failure hospitalizations in wild-type and hereditary ATTR cardiomyopathy, representing the first approved targeted disease-modifying therapy.",
+   "say": "Tafamidis functions as a selective transthyretin stabilizer that binds the thyroxine binding sites of the transthyretin tetramer, preventing dissociation into amyloidogenic monomers. In the ATTR-ACT trial, tafamidis reduced all-cause mortality by thirty percent and decreased cardiovascular hospitalizations. Detailed mastery of these diagnostic thresholds and hemodynamic criteria is essential for clinical examination excellence.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "TTR Tetramer"
+     },
+     {
+      "id": "n2",
+      "label": "Tafamidis Binding"
+     },
+     {
+      "id": "n3",
+      "label": "Blocks Dissociation"
+     },
+     {
+      "id": "n4",
+      "label": "Halts Amyloid Deposition"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In cardiac amyloidosis, **digoxin is relatively contraindicated**, as well as nondihydropyridine calcium channel blockers and beta-blockers. Digoxin binds avidly to extracellular amyloid fibrils, provoking severe neurotoxicity and fatal arrhythmias at therapeutic serum levels. Calcium channel blockers precipitate profound negative inotropy and cardiovascular collapse.",
+   "say": "In cardiac amyloidosis, digoxin is relatively contraindicated, as are nondihydropyridine calcium channel blockers and high dose beta blockers. Digoxin binds avidly to amyloid fibrils, causing severe digitalis toxicity and lethal arrhythmias at therapeutic concentrations. Calcium channel blockers induce profound cardiovascular collapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Contraindicated Drugs",
+     "points": [
+      "Digoxin (fibril binding/toxicity), verapamil/diltiazem (severe negative inotropy/shock), high-dose beta-blockers."
+     ]
+    },
+    "right": {
+     "title": "Permitted Therapy",
+     "points": [
+      "Careful loop diuretic titration with MRAs for decongestion; tafamidis or TTR silencers for disease modification."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Extracardiac manifestations** of wild-type ATTR amyloidosis precede cardiomyopathy by 5 to 10 years and serve as critical diagnostic red flags. These include bilateral carpal tunnel syndrome, spontaneous biceps tendon rupture (Popeye sign), lumbar spinal stenosis, sensorimotor peripheral neuropathy, and autonomic orthostatic hypotension.",
+   "say": "Extracardiac manifestations of wild type ATTR amyloidosis typically precede heart failure diagnosis by five to ten years. Key red flags include bilateral carpal tunnel syndrome, spontaneous rupture of the biceps tendon, lumbar spinal stenosis, sensorimotor neuropathy, and autonomic orthostatic hypotension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Red Flag Sign",
+     "Clinical Presentation",
+     "Pathophysiologic Basis"
+    ],
+    "rows": [
+     [
+      "Bilateral carpal tunnel",
+      "Median nerve paresthesias years prior",
+      "Amyloid deposition in flexor retinaculum"
+     ],
+     [
+      "Popeye sign",
+      "Spontaneous biceps tendon rupture",
+      "Tendon infiltration and structural weakening"
+     ],
+     [
+      "Lumbar spinal stenosis",
+      "Neurogenic claudication in elderly",
+      "Ligamentum flavum amyloid hypertrophy"
+     ],
+     [
+      "Autonomic dysfunction",
+      "Orthostatic hypotension, postprandial syncope",
+      "Infiltration of autonomic ganglia and nerves"
+     ]
+    ]
+   }
+  }
+ ],
+ "gen": "AI",
+ "quiz": [
+  "q_cardio_01",
+  "q_cardio_02",
+  "q_cardio_03"
+ ],
+ "src": "Braunwald 12e / Harrison 22e",
+ "refs": [
+  "Braunwald 12e",
+  "ESC/ACC Guidelines"
+ ]
+}
