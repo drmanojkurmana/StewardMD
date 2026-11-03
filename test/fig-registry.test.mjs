@@ -30,6 +30,14 @@ test("registry: text match for drugs, class phrases and nothing else", async () 
   assert.equal(F.forDrug("Metoprolol succinate").query, "d=2&name=Metoprolol");
   assert.equal(F.forDrug("Paracetamol"), null);
 });
+test("registry: an article gets disease figures only for itself, drug figures from its text", async () => {
+  const F = load(); await F.ready();
+  const myxoma = "Obstruction can mimic mitral stenosis. Differentials: infective endocarditis with vegetations. Anticoagulation with warfarin before surgery.";
+  const ids = F.forArticle("Atrial myxoma", myxoma, 5).map((m) => m.id);
+  assert.ok(!ids.includes("mitral-stenosis") && !ids.includes("infective-endocarditis"), "differentials do not pull disease figures: " + ids);
+  assert.ok(ids.includes("anticoagulants"), "a drug named in the treatment still links its figure");
+  assert.ok(F.forArticle("Infective endocarditis", "Duke criteria and vegetations", 2).some((m) => m.id === "infective-endocarditis"), "the disease's own article keeps its figure");
+});
 test("registry: chip html is escaped", async () => {
   const F = load(); await F.ready();
   const h = F.chipHtml({ id: "x", title: '<b>"', query: 'a"b' });
