@@ -523,3 +523,9 @@ body.sp-lock { overflow: hidden; }
 @media (min-width: 720px) {
   .sp-root .sp-foot { padding-left: max(16px, calc((100% - 720px) / 2)); padding-right: max(16px, calc((100% - 720px) / 2)); }
 }
+/* iPad: .sp-scroll spans the screen; .sp-col is centred by gutters on the scroller. */
+@media (min-width: 700px) {
+  .sp-root .sp-scroll.sp-pad { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  .sp-root .sp-col { max-width: none; margin: 0; }
+  .sp-root .sp-foot { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+}

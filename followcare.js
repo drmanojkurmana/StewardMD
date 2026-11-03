@@ -281,6 +281,7 @@
       ".fc-sheet.fcui2 .fc-hd-title small{display:block;margin-top:2px;color:var(--rds-muted);font-size:10.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
       ".fc-sheet.fcui2 .fc-hd .fc-x{grid-column:3;width:40px;height:40px;border-radius:50%;background:var(--rds-surface-2);color:var(--rds-ink);font-size:22px}",
       ".fc-sheet.fcui2 .fc-bd{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;touch-action:pan-y;padding:20px 18px calc(24px + env(safe-area-inset-bottom));background:var(--rds-bg)}",
+      "@media(min-width:700px){.fc-sheet.fcui2{max-width:none}.fc-sheet.fcui2 .fc-bd{padding-left:max(28px,env(safe-area-inset-left,0px),calc((100vw - 960px)/2));padding-right:max(28px,env(safe-area-inset-right,0px),calc((100vw - 960px)/2))}}",
       ".fc-q-intro{margin:4px 0 18px}",
       ".fc-q-eyebrow{display:block;color:var(--rds-muted);font-size:11px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}",
       ".fc-q-intro h2{margin:0;color:var(--rds-ink);font-size:29px;line-height:1.12;letter-spacing:-.045em;font-weight:760}",

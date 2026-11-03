@@ -542,3 +542,5 @@ html.sgx-lock .abg { z-index: 1300; }
 
 /* iPad pass (2026-10-16): the "Ask the senior surgeon" box had no styling (171 px, monospace, browser border). */
 #surgxRoot #sgxMentorQ { display: block; width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; padding: 10px 12px; border: 1px solid var(--line, #d7dee3); border-radius: 10px; margin: 8px 0; background: var(--panel, #fff); color: inherit; }
+/* iPad: .sgx-scroll spans the screen; the wrap column widens to 960px. */
+@media (min-width: 700px) { #surgxRoot .sgx-wrap { max-width: 960px; } }

@@ -69,3 +69,10 @@ html.smd-refined body > :not(#homeV2) #smdClinic .pc-empty[data-smd-empty] { max
    in the document only because the Start Case wizard borrows the engine's output area and the About box reads the
    acknowledgements from it (home.js ackHTML). Owner 2026-10-30: "I don't want to see that old long page ... delete". */
 .shell, .shell.visible { display: none !important; }
+
+/* Ophthalmós reading columns on iPad (its CSS is synced from the module repo, so the widening lives here):
+   .oph-scroll already spans the screen; Learn widened to 960px, notes articles to 720px. */
+@media (min-width: 700px) {
+  .ln-col { max-width: 960px; }
+  .oph-article { max-width: 720px; }
+}

@@ -520,3 +520,9 @@ body.ui-v2 #pglogRoot .pgl-btn.ghost { color: var(--pgl-ink) !important; }
 #pglogRoot .pgl-datepick.on { background: var(--pgl-ink-hue); border-color: var(--pgl-ink-hue); color: #fff; }
 #pglogRoot .pgl-datepick { font: 600 13px var(--pgl-sans); }
 #pglogRoot .pgl-qsec .pgl-datepick, #pglogRoot .pgl-datepick span { font-size: 13px; font-weight: 600; }
+
+/* iPad: scroller spans the screen, readable column centred by gutters. */
+@media (min-width: 700px) {
+  #pglogRoot .pgl-scroll { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 960px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 960px) / 2)); }
+  #pglogRoot .pgl-wrap { max-width: none; }
+}

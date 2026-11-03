@@ -534,10 +534,17 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
       f.rx.lastIndex = 0;
       var m, hits = 0, first = "";
       while ((m = f.rx.exec(t))) { var nm = String(m[1]).toLowerCase(); if (f.weak[nm] && f.ctx && !f.ctx.test(t)) continue; hits++; if (!first && f.drugs[nm]) first = f.drugs[nm] + "&name=" + encodeURIComponent(nm.charAt(0).toUpperCase() + nm.slice(1)); if (hits > 50) break; }
-      if (hits) out.push({ id: f.id, title: f.title, blurb: f.blurb, hits: hits, query: first });
+      if (hits) out.push({ id: f.id, title: f.title, blurb: f.blurb, hits: hits, query: first, drug: Object.keys(f.drugs).length > 0 });
     });
     out.sort(function (a, b) { return b.hits - a.hits; });
     return out.slice(0, max || 1);
+  }
+  /* forArticle(name, text, max) -> figures for a Knowledge Library article. A drug figure may match anywhere in the text (the
+     treatment names the drug); a disease figure only when the article itself is that disease, never because the disease is
+     named as a differential or mimic (atrial myxoma showed endocarditis and mitral stenosis). */
+  function forArticle(name, text, max) {
+    var own = matchText(name, 5).map(function (m) { return m.id; });
+    return matchText(String(name || "") + " " + String(text || ""), 8).filter(function (m) { return m.drug || own.indexOf(m.id) >= 0; }).slice(0, max || 1);
   }
   /* forDrugs(name) -> every figure that names this drug (the generic's first word), each with its preset query; [] when none. */
   function forDrugs(name) {
@@ -555,6 +562,6 @@ cell:'<ellipse class="a" cx="32" cy="32" rx="28" ry="22"/><ellipse class="b" cx=
     if (!m) return "";
     return '<button type="button" class="' + esc(cls || "smdfig-chip") + '" data-act="' + (act || "fig-open") + '" data-f="' + esc(m.id) + '" data-q="' + esc(m.query || "") + '"><span aria-hidden="true">&#9654;</span> <b>' + esc(m.title) + "</b></button>";
   }
-  G.SMD_FIG = { mastery: function (id) { return (MS || {})[id] || null; }, masteryReady: msReady, list: list, open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forDrug: forDrug, forDrugs: forDrugs, openFig: openFig, chipHtml: chipHtml, _build: build };
+  G.SMD_FIG = { mastery: function (id) { return (MS || {})[id] || null; }, masteryReady: msReady, list: list, open: open, close: close, isOpen: function () { return !!cur; }, _re: FIG_RE, ready: ready, matchText: matchText, forArticle: forArticle, forDrug: forDrug, forDrugs: forDrugs, openFig: openFig, chipHtml: chipHtml, _build: build };
   ready();
 })(typeof window !== "undefined" ? window : this);

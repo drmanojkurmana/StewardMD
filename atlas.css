@@ -400,8 +400,9 @@ body.atlas-lock { overflow: hidden; }
 }
 
 /* iPad / Tablet layout expansions */
-@media (min-width: 768px) {
-  .atlas-app { max-width: 820px; margin: 0 auto; }
+@media (min-width: 700px) {
+  .atlas-app { max-width: none; margin: 0; }
+  .atlas-scroll { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 1200px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 1200px) / 2)); }
 }
 
 /* ---------- search ---------- */
@@ -540,5 +541,5 @@ body.atlas-lock { overflow: hidden; }
   .atlas-sheet.side .atlas-sheet-hd { padding-top: 10px; }
 }
 @media (min-width: 1024px) {
-  .atlas-app { max-width: 960px; }
+  .atlas-app { max-width: none; }
 }
