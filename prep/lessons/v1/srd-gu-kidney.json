@@ -1,188 +1,293 @@
 {
  "v": 1,
  "module": "srd-gu-kidney",
- "subject": "ss-radiology",
- "title": "Renal masses: Bosniak, angiomyolipoma and renal cell carcinoma essentials",
- "minutes": 5,
+ "title": "Kidney, adrenal and urinary tract",
+ "minutes": 8,
+ "gen": "hand",
  "steps": [
   {
-   "tx": "**Angiomyolipoma** is a benign renal tumour made of fat, smooth muscle and vessels. Its key discriminator from **renal cell carcinoma** is macroscopic fat with no calcification. Calcification within a solid renal mass points toward malignancy. Large angiomyolipomas can bleed, and they are strongly linked to tuberous sclerosis.",
-   "say": "Angiomyolipoma is a benign renal tumour made of fat, smooth muscle and blood vessels. Its key feature that separates it from renal cell carcinoma is macroscopic fat without calcification. Calcification within a solid renal mass points towards malignancy. Large angiomyolipomas can bleed, and they are strongly linked to tuberous sclerosis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Angiomyolipoma",
-     "points": [
-      "Macroscopic fat present",
-      "No internal calcification",
-      "Benign",
-      "Linked to tuberous sclerosis"
-     ]
-    },
-    "right": {
-     "title": "Renal cell carcinoma",
-     "points": [
-      "Fat usually absent",
-      "Calcification may be present",
-      "Malignant",
-      "Solid enhancing mass"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "This figure ranks **cystic renal masses** by Bosniak category, from simple fluid lesions to complex masses with thickened walls, septa and solid nodules. Compare each panel with the discriminator from the first panel: **angiomyolipoma** carries macroscopic fat without calcification, while calcification in a solid mass favours **renal cell carcinoma**. Note which categories look safe to watch and which need biopsy or resection.",
-   "say": "Look at the figure panel by panel. Simple cysts sit at the benign end of the Bosniak order and complex solid nodules sit at the concerning end. Keep the angiomyolipoma rule beside it. Fat without calcification points to angiomyolipoma, often linked with tuberous sclerosis. Calcification in a solid mass points toward malignancy, and enhancement pattern decides biopsy or resection.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srd-gu-kidney-fig1.webp",
-    "alt": "CT panels of Bosniak category I, II, IIF, III and IV cystic renal masses with descriptors, plus angiomyolipoma and renal cell carcinoma features and management.",
-    "caption": "Bosniak I to IV cystic renal masses, angiomyolipoma and renal cell carcinoma",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "**Clear cell renal cell carcinoma** is the commonest renal cell carcinoma and shows avid arterial enhancement with heterogeneous necrosis. Papillary renal cell carcinoma is often hypovascular and T2 dark. The Bosniak system and enhancement pattern guide whether a mass needs biopsy or resection. In the exam, look for arterial-phase hypervascularity first.",
-   "say": "Clear cell renal cell carcinoma is the commonest type and shows avid arterial enhancement with heterogeneous necrosis. Papillary renal cell carcinoma is often hypovascular and appears dark on T2 weighted MRI. The enhancement pattern and the Bosniak system guide whether a mass needs biopsy or resection. In the exam, look for arterial phase hypervascularity first.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Solid renal mass"
-     },
-     {
-      "id": "b",
-      "label": "Fat present?"
-     },
-     {
-      "id": "c",
-      "label": "Angiomyolipoma"
-     },
-     {
-      "id": "d",
-      "label": "Arterial enhancement?"
-     },
-     {
-      "id": "e",
-      "label": "Clear cell RCC"
-     },
-     {
-      "id": "f",
-      "label": "Hypovascular, T2 dark: consider papillary RCC"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "yes"
-     ],
-     [
-      "b",
-      "d",
-      "no"
-     ],
-     [
-      "d",
-      "e",
-      "yes"
-     ],
-     [
-      "d",
-      "f",
-      "no"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Adrenal adenoma** is usually benign and lipid-rich, so it loses signal on out-of-phase MRI and shows rapid contrast washout on delayed CT. **Adrenocortical carcinoma** is larger, more heterogeneous and shows slow washout. **Pheochromocytoma** is a catecholamine-secreting tumour that is bright on T2 and needs biochemical exclusion before any intervention.",
-   "say": "Adrenal adenoma is usually benign and lipid rich, so it loses signal on out of phase MRI and shows rapid contrast washout on delayed CT. Adrenocortical carcinoma is larger, more heterogeneous and shows slow washout. Pheochromocytoma secretes catecholamines and is bright on T2 weighted images, and it must be biochemically excluded before any intervention.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Adenoma",
-     "points": [
-      "Lipid rich",
-      "Rapid washout on delayed CT",
-      "Benign",
-      "Small and homogeneous"
-     ]
-    },
-    "right": {
-     "title": "Adrenocortical carcinoma",
-     "points": [
-      "Large and heterogeneous",
-      "Slow or absent washout",
-      "Malignant",
-      "Often invasive"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**Emphysematous pyelonephritis** is a life-threatening necrotising infection of the kidney with gas in the parenchyma, most often in diabetic patients. Management is urgent antibiotics with drainage or nephrectomy. **Xanthogranulomatous pyelonephritis** is a chronic granulomatous inflammation with a bear's paw sign, and it is usually managed with nephrectomy.",
-   "say": "Emphysematous pyelonephritis is a life threatening necrotising infection of the kidney with gas in the parenchyma, most often in diabetic patients. Management is urgent antibiotics with drainage or nephrectomy. Xanthogranulomatous pyelonephritis is a chronic granulomatous inflammation that shows a bear's paw sign, and it is usually managed with nephrectomy.",
+   "tx": "The **Bosniak classification** 2019 categorizes cystic **renal masses** into five progressive risk strata: Bosniak I (simple cyst), II (minimally complicated benign), IIF (minimally complex requiring follow-up), III (indeterminate, approximately 50% malignant), and IV (clearly malignant cystic mass with enhancing solid nodules requiring prompt surgical intervention).",
+   "say": "The Bosniak classification 2019 categorizes cystic renal masses into five progressive risk strata: Bosniak I simple cyst, II minimally complicated benign, IIF minimally complex requiring follow-up, III indeterminate with approximately 50% malignant, and IV clearly malignant cystic mass with enhancing solid nodules requiring prompt surgical intervention.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Feature",
-     "Emphysematous",
-     "Xanthogranulomatous"
+     "Bosniak Category",
+     "Imaging Criteria",
+     "Malignancy Risk & Action"
     ],
     "rows": [
      [
-      "Gas in parenchyma",
-      "Present",
-      "Absent"
+      "Bosniak I",
+      "Hairline thin wall, water attenuation, no enhancement",
+      "< 1% (Benign, no follow-up)"
      ],
      [
-      "Typical patient",
-      "Diabetic, sepsis",
-      "Chronic infection, stones"
+      "Bosniak II",
+      "Hairline septa, fine calcification, hyperdense < 3 cm",
+      "< 1% (Benign, no follow-up)"
      ],
      [
-      "Key sign",
-      "Gas in renal tissue",
-      "Bear's paw sign"
+      "Bosniak IIF",
+      "Minimally thickened smooth septa, hyperdense >= 3 cm",
+      "~25% (Follow-up imaging surveillance)"
      ],
      [
-      "Usual management",
-      "Antibiotics, drainage or nephrectomy",
-      "Nephrectomy"
+      "Bosniak III",
+      "Thick, irregular, enhancing walls or septa",
+      "~50% (Surgical resection or ablation)"
+     ],
+     [
+      "Bosniak IV",
+      "Clearly enhancing soft-tissue nodular components",
+      "~90% (Surgical resection)"
+     ]
+    ]
+   },
+   "img": {
+    "src": "v1/lessons/media/srd-gu-kidney-fig1.webp",
+    "alt": "Computed tomography of cystic renal mass illustrating the Bosniak classification criteria",
+    "caption": "Bosniak classification criteria for complex renal cystic masses"
+   }
+  },
+  {
+   "tx": "**Clear cell renal cell carcinoma** comprises approximately 70% of RCC cases, demonstrating intense, heterogeneous hypervascular enhancement on corticomedullary CT acquisitions. Microscopic intracellular lipid produces characteristic signal dropout on out-of-phase **chemical shift** MRI sequences compared with in-phase imaging, reflecting abundant clear cytoplasm filled with cholesterol and neutral lipids.",
+   "say": "Clear cell renal cell carcinoma comprises approximately 70% of RCC cases, demonstrating intense, heterogeneous hypervascular enhancement on corticomedullary CT acquisitions. Microscopic intracellular lipid produces characteristic signal dropout on out-of-phase chemical shift MRI sequences compared with in-phase imaging, reflecting abundant clear cytoplasm filled with cholesterol and neutral lipids.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clear Cell RCC (70%)",
+     "points": [
+      "Marked avid corticomedullary enhancement (> 100 HU)",
+      "Intracellular lipid signal drop on chemical shift MRI",
+      "Heterogeneous necrosis, cystic change, calcification",
+      "Propensity for renal vein and IVC tumour thrombus",
+      "Associated with von Hippel-Lindau disease"
+     ]
+    },
+    "right": {
+     "title": "Papillary RCC (15%)",
+     "points": [
+      "Hypovascular, progressive subtle enhancement",
+      "T2 hypointense appearance on MRI",
+      "Homogeneous appearance when small",
+      "Frequently multifocal and bilateral",
+      "Associated with MET oncogene mutations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Renal **angiomyolipoma** classic type contains abundant **macroscopic fat** demonstrating attenuation values below negative 20 Hounsfield units on non-contrast CT scans. Composed of abnormal dysplastic blood vessels, smooth muscle, and mature adipose tissue, AML is strongly associated with tuberous sclerosis complex when multiple and bilateral.",
+   "say": "Renal angiomyolipoma classic type contains abundant macroscopic fat demonstrating attenuation values below negative 20 Hounsfield units on non-contrast CT scans. Composed of abnormal dysplastic blood vessels, smooth muscle, and mature adipose tissue, AML is strongly associated with tuberous sclerosis complex when multiple and bilateral.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue Component",
+     "CT / MRI Characteristic",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Macroscopic Fat",
+      "Attenuation below negative 20 HU, chemical shift drop",
+      "Diagnostic hallmark on non-contrast CT"
+     ],
+     [
+      "Dysplastic Vessels",
+      "Aneurysmal dilatation without internal elastic lamina",
+      "Risk of rupture and Wunderlich syndrome"
+     ],
+     [
+      "Smooth Muscle",
+      "Soft tissue attenuation and solid enhancement",
+      "Predominates in lipid-poor AML variants"
+     ],
+     [
+      "Size Threshold",
+      "Lesion diameter exceeding 4 cm",
+      "Threshold for elective preventative embolization"
      ]
     ]
    }
+  },
+  {
+   "tx": "**Emphysematous pyelonephritis** is a life-threatening necrotizing gas-forming bacterial infection occurring in diabetics, characterized by gas within the **renal parenchyma** on CT. Imaging distinguishes type 1 (dry parenchymal necrosis with streaky gas) from type 2 (bubbly gas with fluid collections and abscesses).",
+   "say": "Emphysematous pyelonephritis is a life-threatening necrotizing gas-forming bacterial infection occurring in diabetics, characterized by gas within the renal parenchyma on CT. Imaging distinguishes type 1, which has dry parenchymal necrosis with streaky gas, from type 2, which has bubbly gas with fluid collections and abscesses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 Emphysematous Pyelonephritis",
+     "points": [
+      "Parenchymal destruction with streaky radial gas",
+      "Absence of purulent fluid collections (dry necrosis)",
+      "Fulminant clinical course with high mortality (40%)",
+      "Impaired vascular supply in uncontrolled diabetes",
+      "Requires emergent nephrectomy or aggressive drainage"
+     ]
+    },
+    "right": {
+     "title": "Type 2 Emphysematous Pyelonephritis",
+     "points": [
+      "Bubbly gas within loculated fluid collections",
+      "Presence of perirenal or subcapsular abscesses",
+      "Gas within renal collecting system (emphysematous pyelitis)",
+      "Better host response with lower mortality (15%)",
+      "Amenable to percutaneous catheter drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Xanthogranulomatous pyelonephritis** can manifest as chronic destructive granulomatous parenchymal infection triggered by chronic pelvi-ureteric bacterial obstruction. Contrast-enhanced CT characteristically demonstrates the pathognomonic **bear paw sign**, featuring multiple rounded low-attenuation caliceal fluid collections radiating outward from an obstructing central staghorn calculus.",
+   "say": "Xanthogranulomatous pyelonephritis can manifest as chronic destructive granulomatous parenchymal infection triggered by chronic pelvi-ureteric bacterial obstruction. Contrast-enhanced CT characteristically demonstrates the pathognomonic bear paw sign, featuring multiple rounded low-attenuation caliceal fluid collections radiating outward from an obstructing central staghorn calculus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathology Feature",
+     "Imaging Appearance",
+     "Pathophysiological Substrate"
+    ],
+    "rows": [
+     [
+      "Central Obstruction",
+      "Staghorn calculus in renal pelvis",
+      "Chronic pelvi-ureteric junction bacterial obstruction"
+     ],
+     [
+      "Bear Paw Sign",
+      "Dilated calyces filled with xanthoma pus",
+      "Lipid-laden foamy macrophages destroying parenchyma"
+     ],
+     [
+      "Renal Function",
+      "Enlarged non-functioning kidney",
+      "Complete loss of excretory function on delayed phases"
+     ],
+     [
+      "Extra-renal Spread",
+      "Perinephric fat stranding and psoas fistulae",
+      "Aggressive chronic trans-capsular inflammatory extension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On unenhanced CT, benign **Adrenal adenoma** demonstrates attenuation of 10 Hounsfield units or less due to intracytoplasmic lipid. On dynamic contrast washout CT, adenomas display rapid clearance with an absolute **percentage washout** of 60% or more, or relative percentage washout of 40% or more at 15 minutes.",
+   "say": "On unenhanced CT, benign Adrenal adenoma demonstrates attenuation of 10 Hounsfield units or less due to intracytoplasmic lipid. On dynamic contrast washout CT, adenomas will display rapid clearance with an absolute percentage washout of 60% or more, or relative percentage washout of 40% or more at 15 minutes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adenoma Washout Criteria",
+     "points": [
+      "Unenhanced CT attenuation <= 10 HU",
+      "Absolute percentage washout >= 60% at 15 min",
+      "Relative percentage washout >= 40% at 15 min",
+      "Signal drop on out-of-phase chemical shift MRI",
+      "Benign microvascular capillary architecture"
+     ]
+    },
+    "right": {
+     "title": "Non-Adenoma Washout Criteria",
+     "points": [
+      "Unenhanced CT attenuation > 10 HU",
+      "Absolute percentage washout < 60% at 15 min",
+      "Relative percentage washout < 40% at 15 min",
+      "Sluggish contrast clearance in metastases",
+      "Requires biopsy or PET-CT evaluation"
+     ]
+    }
+   },
+   "img": {
+    "src": "v1/kb/media/adrenal-incidentaloma-fig1.webp",
+    "alt": "CT comparison of benign lipid-rich adrenal adenoma versus suspicious adrenal mass",
+    "caption": "Washout kinetics and attenuation metrics in adrenal adenoma diagnosis"
+   }
+  },
+  {
+   "tx": "Adrenal **Pheochromocytoma** follows the classical 10% rule: 10% bilateral, 10% extra-adrenal, 10% malignant, and 10% familial syndromes. On T2-weighted MRI, pheochromocytomas exhibit marked hyperintensity known as the **lightbulb sign** alongside avid, heterogeneous contrast enhancement and extensive internal cystic or necrotic degeneration.",
+   "say": "Adrenal Pheochromocytoma follows the classical 10% rule, comprising 10% bilateral, 10% extra-adrenal, 10% malignant, and 10% familial syndromes. On T2-weighted MRI, pheochromocytomas exhibit marked hyperintensity known as the lightbulb sign alongside avid, heterogeneous contrast enhancement and extensive internal cystic or necrotic degeneration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "The 10% Rule Breakdown",
+     "Imaging Hallmarks"
+    ],
+    "rows": [
+     [
+      "Bilateral Tumours",
+      "10% bilateral presentation",
+      "Associated with MEN 2, VHL, and NF1 syndromes"
+     ],
+     [
+      "Extra-adrenal Location",
+      "10% paragangliomas",
+      "Organ of Zuckerkandl, bladder, and carotid body"
+     ],
+     [
+      "Malignant Potential",
+      "10% malignant course",
+      "Defined by metastases to non-chromaffin organs"
+     ],
+     [
+      "MRI Appearance",
+      "Lightbulb sign on T2-weighted scans",
+      "Fluid and capillary-rich cystic spaces produce high T2 signal"
+     ]
+    ]
+   },
+   "img": {
+    "src": "v1/kb/media/aldosteronism-pheochromocytoma-long-case-fig1.webp",
+    "alt": "Gross pathology and CT imaging of large necrotic adrenal phaeochromocytoma",
+    "caption": "Hypervascular heterogeneous mass with intense T2 signal in phaeochromocytoma"
+   }
+  },
+  {
+   "tx": "**Adrenocortical carcinoma** typically presents as a large, aggressive mass measuring greater than 5 cm in diameter. CT demonstrates prominent internal necrosis, haemorrhage, peripheral nodular enhancement with sluggish washout, and coarse **calcifications** present in up to 30% of cases alongside venous invasion.",
+   "say": "Adrenocortical carcinoma typically presents as a large, aggressive mass measuring greater than 5 centimetres in diameter. CT demonstrates prominent internal necrosis, haemorrhage, peripheral nodular enhancement with sluggish washout, and coarse calcifications present in up to 30% of cases alongside venous invasion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adrenocortical Carcinoma Features",
+     "points": [
+      "Large mass size exceeding 5 cm diameter",
+      "Coarse internal calcifications in 30% of cases",
+      "Extensive central necrosis and haemorrhage",
+      "Sluggish contrast washout on delayed CT",
+      "Direct invasion of renal vein and IVC"
+     ]
+    },
+    "right": {
+     "title": "Lipid-Rich Adrenal Adenoma",
+     "points": [
+      "Small, well-circumscribed mass (< 4 cm)",
+      "Homogeneous low attenuation (<= 10 HU)",
+      "Absence of calcifications or gross necrosis",
+      "Rapid contrast washout (>= 60% APW)",
+      "Absence of local organ or vascular invasion"
+     ]
+    }
+   }
   }
  ],
- "quiz": [
-  "ct-0ba5a9439ec7",
-  "ct-a079b76f014b",
-  "ct-c271505550c7"
+ "quiz": [],
+ "src": [
+  "Crack the Core Genitourinary / RDN11 Kidney Adrenal"
  ],
- "src": [],
  "refs": [
-  "Bosniak classification, 2019 update (Silverman et al.)",
-  "Campbell-Walsh-Wein Urology"
+  "Crack the Core Exam (CTC)",
+  "RDN11 Genitourinary Radiology",
+  "Bosniak 2019",
+  "ACR White Paper on Adrenal Incidentalomas"
  ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
  "checks": {
   "shape": true,
   "numbers": true,
   "drugs": true,
   "verbatim": true,
-  "dashes": true,
-  "verify": true,
+  "selfCheck": false,
   "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 106
+  "dropped": 0,
+  "bank": null
  }
 }

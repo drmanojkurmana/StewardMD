@@ -1,0 +1,289 @@
+{
+ "v": 1,
+ "module": "srd-ir",
+ "title": "Vascular and non-vascular intervention",
+ "minutes": 8,
+ "gen": "hand",
+ "steps": [
+  {
+   "tx": "A **Transjugular intrahepatic portosystemic shunt** (TIPS) decompresses portal hypertension by creating an artificial low-resistance conduit between the right hepatic vein and the right portal vein. Deployed with an expanded polytetrafluoroethylene stent graft, TIPS reduces the **portosystemic gradient** to below 12 mm Hg to manage refractory ascites and recurrent variceal hemorrhage.",
+   "say": "A Transjugular intrahepatic portosystemic shunt decompresses portal hypertension by creating an artificial low-resistance conduit between the right hepatic vein and the right portal vein. Deployed with an expanded polytetrafluoroethylene stent graft, TIPS reduces the portosystemic gradient to below 12 millimetres of mercury to manage refractory ascites and recurrent variceal hemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TIPS Step",
+     "Target Anatomy",
+     "Technical Objective"
+    ],
+    "rows": [
+     [
+      "Venous Access",
+      "Right internal jugular vein",
+      "Cannulation using Colapinto needle"
+     ],
+     [
+      "Hepatic Vein Wedging",
+      "Right hepatic vein",
+      "CO2 portography for spatial localization"
+     ],
+     [
+      "Parenchymal Puncture",
+      "Transhepatic anterior-inferior tract",
+      "Access into right portal vein branch"
+     ],
+     [
+      "Stent Deployment",
+      "PTFE-covered stent (Viatorr)",
+      "Gradient reduction to < 12 mm Hg"
+     ]
+    ]
+   },
+   "img": {
+    "src": "v1/kb/media/tips-and-portal-interventions-fig1.webp",
+    "alt": "Fluoroscopic image demonstrating TIPS stent deployment between right hepatic vein and portal vein",
+    "caption": "Transjugular intrahepatic portosystemic shunt connecting portal and hepatic veins"
+   }
+  },
+  {
+   "tx": "Endovascular **embolisation agents** are classified into temporary mechanical agents like gelatin sponge or **Gelfoam** (resorbed in 2 to 6 weeks) and permanent agents. Permanent agents include metallic microcoils, polyvinyl alcohol (PVA) particles, n-butyl cyanoacrylate tissue adhesive, and Onyx ethylene vinyl alcohol copolymer.",
+   "say": "Endovascular embolisation agents are classified into temporary mechanical agents like gelatin sponge or Gelfoam, which is resorbed in 2 to 6 weeks, and permanent agents. Permanent agents can contain metallic microcoils, polyvinyl alcohol particles, n-butyl cyanoacrylate tissue adhesive, and Onyx ethylene vinyl alcohol copolymer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Agent Class",
+     "Examples",
+     "Duration & Mechanism"
+    ],
+    "rows": [
+     [
+      "Temporary particulate",
+      "Gelfoam (gelatin sponge)",
+      "Resorbed over 2 to 6 weeks; temporary haemostasis"
+     ],
+     [
+      "Permanent particulate",
+      "Polyvinyl alcohol (PVA), microspheres",
+      "Permanent microvascular occlusion at arteriolar level"
+     ],
+     [
+      "Mechanical devices",
+      "Metallic microcoils, vascular plugs",
+      "Permanent mechanical obstruction with induced thrombosis"
+     ],
+     [
+      "Liquid embolic",
+      "NBCA glue, Onyx copolymer",
+      "Permanent cast polymerizing upon contact with blood"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An iatrogenic femoral **pseudoaneurysm** exhibits a characteristic **yin-yang sign** on colour Doppler ultrasound due to swirling bidirectional turbulent flow within the extravascular communicating sac. When neck anatomy is favourable, ultrasound-guided percutaneous thrombin injection achieves thrombosis exceeding 95% of cases without requiring open surgical repair.",
+   "say": "An iatrogenic femoral pseudoaneurysm exhibits a characteristic yin-yang sign on colour Doppler ultrasound due to swirling bidirectional turbulent flow within the extravascular communicating sac. When neck anatomy is favourable, ultrasound-guided percutaneous thrombin injection achieves thrombosis exceeding 95% of cases without requiring open surgical repair.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudoaneurysm Features",
+     "points": [
+      "Swirling yin-yang sign on colour Doppler",
+      "To-and-fro spectral Doppler neck waveform",
+      "Direct communication with arterial lumen",
+      "Thrombin injection achieves > 95% success",
+      "Monitored until neck thrombosis completes"
+     ]
+    },
+    "right": {
+     "title": "Uncomplicated Haematoma",
+     "points": [
+      "Non-pulsatile avascular fluid collection",
+      "Absence of internal colour Doppler flow",
+      "No direct communication with femoral artery",
+      "Spontaneous resorption over weeks",
+      "Conservative expectant clinical management"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transarterial chemoembolisation** (TACE) combines targeted intra-arterial infusion of chemotherapy (doxorubicin or cisplatin emulsified in **Lipiodol**) with particulate embolisation. Chemoembolization induces selective ischaemic necrosis of hypervascular hepatocellular carcinomas while sparing normal liver parenchyma that receives 75% of its perfusion from the portal vein.",
+   "say": "Transarterial chemoembolisation combines targeted intra-arterial infusion of chemotherapy, such as doxorubicin or cisplatin emulsified in Lipiodol, with particulate embolisation. Chemoembolization induces selective ischaemic necrosis of hypervascular hepatocellular carcinomas while sparing normal liver parenchyma that receives 75% of its perfusion from the portal vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TACE Phase",
+     "Mechanism of Action",
+     "Imaging Hallmark"
+    ],
+    "rows": [
+     [
+      "Lipiodol Emulsion",
+      "Selective microvascular uptake in tumor sinusoids",
+      "Dense radio-opaque staining on CT"
+     ],
+     [
+      "Particulate Embolization",
+      "Gelfoam or calibrated microspheres",
+      "Arrest of arterial tumor feeding inflow"
+     ],
+     [
+      "Dual Blood Supply",
+      "Spares background liver receiving portal flow",
+      "Preserves baseline hepatic functional reserve"
+     ]
+    ]
+   },
+   "img": {
+    "src": "v1/kb/media/ablation-and-liver-directed-therapy-fig1.webp",
+    "alt": "Angiographic and CT image demonstrating transcatheter arterial chemoembolization of hepatocellular carcinoma",
+    "caption": "Selective hepatic artery catheterization and lipiodol retention during TACE"
+   }
+  },
+  {
+   "tx": "Percutaneous **radiofrequency ablation** and microwave ablation induce thermal coagulative necrosis of hepatic malignancies through targeted heating. Achieving complete oncological eradication requires a minimum 5 to 10 mm circumferential **ablative margin** of normal liver parenchyma beyond gross tumor boundaries to prevent local microscopic recurrence.",
+   "say": "Percutaneous radiofrequency ablation and microwave ablation help to induce thermal coagulative necrosis of hepatic malignancies through targeted heating. Achieving complete oncological eradication requires a minimum 5 to 10 millimetre circumferential ablative margin of normal liver parenchyma beyond gross tumor boundaries to prevent local microscopic recurrence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ablative Margin Criteria",
+     "points": [
+      "Minimum 5 to 10 mm normal margin required",
+      "Assessed on immediate post-ablation CT/MRI",
+      "Zone of complete non-enhancement",
+      "Prevents microscopic satellite recurrence",
+      "Critical for primary tumors > 2 cm"
+     ]
+    },
+    "right": {
+     "title": "Heat Sink Pitfall",
+     "points": [
+      "Cooling effect near vessels > 3 mm",
+      "Dissipation of thermal energy by blood flow",
+      "Predisposes to focal marginal recurrence",
+      "Microwave ablation less prone than RFA",
+      "Adjunctive temporary balloon occlusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**May-Thurner syndrome** involves extrinsic compression of the left common **iliac vein** by the overlying right common iliac artery against the fifth lumbar vertebra (L5). Chronic arterial pulsation triggers endothelial trauma, venous web formation, and acute left iliofemoral deep vein thrombosis, treated successfully with endovascular self-expanding nitinol stenting.",
+   "say": "May-Thurner syndrome involves extrinsic compression of the left common iliac vein by the overlying right common iliac artery against the fifth lumbar vertebra. Chronic arterial pulsation triggers endothelial trauma, venous web formation, and acute left iliofemoral deep vein thrombosis, treated successfully with endovascular self-expanding nitinol stenting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Level",
+     "Relationship",
+     "Pathophysiological Consequence"
+    ],
+    "rows": [
+     [
+      "Overlying Artery",
+      "Right common iliac artery",
+      "Transmits systolic arterial pulsation against vein"
+     ],
+     [
+      "Compressed Vessel",
+      "Left common iliac vein",
+      "Luminal spur and fibrous web formation"
+     ],
+     [
+      "Underlying Bone",
+      "Fifth lumbar vertebra (L5)",
+      "Rigid osseous backstop preventing posterior displacement"
+     ],
+     [
+      "Endovascular Care",
+      "Self-expanding nitinol stent",
+      "Overcomes mechanical recoil and prevents recurrent DVT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Percutaneous transhepatic **biliary drainage** (PTBD) is performed under fluoroscopic or ultrasound guidance by puncturing a peripheral bile duct (segment 3 on the left or segment 6 on the right) to decompress severe **obstructive jaundice**. External-internal drainage restores physiological bile flow across malignant biliary strictures.",
+   "say": "Percutaneous transhepatic biliary drainage is performed under fluoroscopic or ultrasound guidance by puncturing a peripheral bile duct, ideally segment 3 on the left or segment 6 on the right, to decompress severe obstructive jaundice. External-internal drainage helps to restore physiological bile flow across malignant biliary strictures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PTBD Access Sites",
+     "points": [
+      "Left ductal access: Segment 3 branch",
+      "Right ductal access: Segment 6 branch",
+      "Peripheral puncture minimizes vascular laceration",
+      "Avoids central hilar major portal branches",
+      "Decompresses malignant obstructive jaundice"
+     ]
+    },
+    "right": {
+     "title": "Drainage Configurations",
+     "points": [
+      "External drainage: Catheter above obstruction",
+      "External-internal: Catheter traverses stricture into duodenum",
+      "Endoluminal metallic stenting for palliation",
+      "Restores bile salt enterohepatic circulation",
+      "Reduces cholangitis and bilirubin toxicity"
+     ]
+    }
+   },
+   "img": {
+    "src": "v1/kb/media/biliary-and-urinary-drainage-fig1.webp",
+    "alt": "Fluoroscopic image demonstrating biliary drainage catheter traversing stricture",
+    "caption": "Percutaneous transhepatic biliary drainage catheter decompressing obstructed biliary tree"
+   }
+  },
+  {
+   "tx": "Retrievable **Inferior vena cava filter** placement is indicated for acute venous thromboembolism with absolute contraindications to anticoagulation. The apex of the filter is positioned immediately below the lowest **renal vein** orifice to prevent filter tilting and mitigate bilateral renal venous thrombosis.",
+   "say": "Retrievable Inferior vena cava filter placement is indicated for acute venous thromboembolism with absolute contraindications to anticoagulation. The apex of the filter is positioned immediately below the lowest renal vein orifice to prevent filter tilting and mitigate bilateral renal venous thrombosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Placement Landmark",
+     "Target Relationship",
+     "Complication Avoided"
+    ],
+    "rows": [
+     [
+      "Filter Apex",
+      "Positioned immediately below lowest renal vein",
+      "Avoids renal vein thrombosis and turbulent flow"
+     ],
+     [
+      "Caval Diameter",
+      "Transverse diameter ≤ 28 mm for standard filters",
+      "Prevents filter migration into pulmonary circulation"
+     ],
+     [
+      "Cavitary Tilt",
+      "Longitudinal alignment < 15 degrees",
+      "Maintains clot capture efficiency and retrievability"
+     ],
+     [
+      "Filter Retrieval",
+      "Endovascular snare removal within window",
+      "Avoids chronic caval penetration and IVC occlusion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "Crack the Core Interventional Radiology / RDN11 Vascular"
+ ],
+ "refs": [
+  "Crack the Core Exam (CTC)",
+  "RDN11 Interventional Radiology",
+  "SIR Quality Improvement Guidelines"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}

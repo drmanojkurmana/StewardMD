@@ -1,0 +1,288 @@
+{
+ "v": 1,
+ "module": "srd-abd-liver",
+ "title": "Liver, biliary tree and pancreas",
+ "minutes": 8,
+ "gen": "hand",
+ "steps": [
+  {
+   "tx": "Under **LI-RADS** criteria, definitive **hepatocellular carcinoma** (LR-5) on multiphasic CT or MRI requires non-rim arterial phase hyperenhancement in a lesion measuring 10 mm or greater. In addition, the lesion must demonstrate non-peripheral washout or threshold growth defined as a 50% or greater increase in diameter within 6 months, or an enhancing capsule when 20 mm or larger.",
+   "say": "Under LI-RADS criteria, definitive hepatocellular carcinoma, designated as LR-5, on multiphasic CT or MRI requires non-rim arterial phase hyperenhancement in a lesion measuring 10 millimetres or greater. In addition, the lesion must demonstrate non-peripheral washout or threshold growth defined as a 50% or greater increase in diameter within 6 months, or an enhancing capsule when 20 millimetres or larger.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LR-5 Definitive Criteria",
+     "points": [
+      "Non-rim arterial phase hyperenhancement",
+      "Lesion size 10 mm or greater",
+      "Non-peripheral delayed phase washout",
+      "Enhancing capsule appearance",
+      "Threshold growth >= 50% in 6 months"
+     ]
+    },
+    "right": {
+     "title": "LR-M Non-HCC Malignancy",
+     "points": [
+      "Rim arterial phase hyperenhancement",
+      "Peripheral delayed phase washout",
+      "Delayed central progressive enhancement",
+      "Infiltrative or ill-defined margins",
+      "Suggests cholangiocarcinoma or metastasis"
+     ]
+    }
+   },
+   "img": {
+    "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+    "alt": "Multiphasic CT demonstrating arterial phase hyperenhancement and delayed phase washout in HCC",
+    "caption": "Classic non-rim APHE and delayed washout of hepatocellular carcinoma"
+   }
+  },
+  {
+   "tx": "A **Hepatic haemangioma** typically appears as a well-circumscribed, T2 hyperintense lesion on MRI examinations. Dynamic contrast imaging exhibits peripheral nodular discontinuous arterial enhancement, followed by progressive **centripetal** fill-in on portal venous and delayed phases matching blood pool attenuation without abnormal early arteriovenous shunting.",
+   "say": "A Hepatic haemangioma typically appears as a well-circumscribed, T2 hyperintense lesion on MRI examinations. Dynamic contrast imaging exhibits peripheral nodular discontinuous arterial enhancement, followed by progressive centripetal fill-in on portal venous and delayed phases matching blood pool attenuation without abnormal early arteriovenous shunting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Haemangioma Appearance",
+     "Vascular Mechanism"
+    ],
+    "rows": [
+     [
+      "Non-contrast",
+      "Hypoattenuating on CT, T2 hyperintense",
+      "Ectatic, slow-flowing blood spaces"
+     ],
+     [
+      "Arterial Phase",
+      "Peripheral nodular discontinuous puddling",
+      "Early filling of peripheral vascular lakes"
+     ],
+     [
+      "Portal Venous",
+      "Centripetal progressive fill-in",
+      "Inward expansion of pooled contrast"
+     ],
+     [
+      "Delayed Phase",
+      "Complete isoattenuation to blood pool",
+      "Uniform contrast pooling in sluggish cavernous spaces"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Focal nodular hyperplasia** demonstrates intense, homogeneous arterial enhancement with near-isointensity on portal venous phases. A pathognomonic central fibrous **stellate scar** exhibits delayed contrast enhancement on 10 to 20 minute delayed phases due to abundant myxoid stroma, differentiating it from hepatic adenomas.",
+   "say": "Focal nodular hyperplasia demonstrates intense, homogeneous arterial enhancement with near-isointensity on portal venous phases. A pathognomonic central fibrous stellate scar exhibits delayed contrast enhancement on 10 to 20 minute delayed phases due to abundant myxoid stroma, differentiating it from hepatic adenomas.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Focal Nodular Hyperplasia",
+     "points": [
+      "Central stellate scar with delayed enhancement",
+      "Intense homogeneous arterial hyperenhancement",
+      "Isointense to liver on portal venous phase",
+      "Contains functional hepatocytes and bile ducts",
+      "Retains hepatobiliary contrast (Eovist)"
+     ]
+    },
+    "right": {
+     "title": "Hepatic Adenoma",
+     "points": [
+      "Heterogeneous, fat and glycogen content",
+      "Haemorrhagic necrosis and calcifications",
+      "Lack of bile ducts, fails to excrete Eovist",
+      "Bleeding and malignant risk in beta-catenin type",
+      "Associated with oral contraceptive pills"
+     ]
+    }
+   },
+   "img": {
+    "src": "v1/kb/media/focal-nodular-hyperplasia-fig1.webp",
+    "alt": "Multiphasic MRI demonstrating central fibrous scar and intense arterial phase enhancement in FNH",
+    "caption": "Arterial hyperenhancement and delayed central scar enhancement in FNH"
+   }
+  },
+  {
+   "tx": "**Budd-Chiari syndrome** results from acute or chronic hepatic venous outflow obstruction involving the major hepatic veins. Computed tomography demonstrates heterogeneous parenchymal perfusion with peripheral hypoperfusion and compensatory massive **caudate lobe** hypertrophy, which preserves independent venous drainage directly into the retrohepatic inferior vena cava.",
+   "say": "Budd-Chiari syndrome results from acute or chronic hepatic venous outflow obstruction involving the major hepatic veins. Computed tomography demonstrates heterogeneous parenchymal perfusion with peripheral hypoperfusion and compensatory massive caudate lobe hypertrophy, which preserves independent venous drainage directly into the retrohepatic inferior vena cava.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging Feature",
+     "Anatomical Distribution",
+     "Pathophysiological Basis"
+    ],
+    "rows": [
+     [
+      "Caudate Lobe",
+      "Massive compensatory hypertrophy",
+      "Direct independent drainage into IVC spared from hepatic vein thrombosis"
+     ],
+     [
+      "Peripheral Liver",
+      "Severe atrophy, delayed perfusion",
+      "Elevated sinusoidal pressure and ischemic atrophy"
+     ],
+     [
+      "Flip-Flop Sign",
+      "Central arterial enhancement, peripheral delay",
+      "Arterialization of caudate with delayed peripheral washout"
+     ],
+     [
+      "IVC Compression",
+      "Slit-like compression of intrahepatic IVC",
+      "Mass effect from massively hypertrophied caudate lobe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Perihilar **cholangiocarcinoma**, known as a **Klatskin tumour**, arises at the confluence of the right and left hepatic ducts. Cross-sectional imaging demonstrates an infiltrating periductal soft tissue mass causing marked intrahepatic biliary ductal dilation with non-dilated extrahepatic ducts and hepatic capsular retraction.",
+   "say": "Perihilar cholangiocarcinoma, known as a Klatskin tumour, arises at the confluence of the right and left hepatic ducts. Cross-sectional imaging demonstrates an infiltrating periductal soft tissue mass causing marked intrahepatic biliary ductal dilation with non-dilated extrahepatic ducts and hepatic capsular retraction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Klatskin Tumour Features",
+     "points": [
+      "Infiltrative mass at hepatic duct bifurcation",
+      "Marked bilateral intrahepatic ductal dilatation",
+      "Normal caliber non-dilated extrahepatic common duct",
+      "Delayed contrast enhancement from fibrous stroma",
+      "Frequent vascular encasement of portal vein"
+     ]
+    },
+    "right": {
+     "title": "Bismuth-Corlette Staging",
+     "points": [
+      "Type 1: Below confluence of common hepatic duct",
+      "Type 2: Reaching bifurcation without branch extension",
+      "Type 3: Extending into right (3a) or left (3b) hepatic duct",
+      "Type 4: Involving bilateral secondary intrahepatic branches",
+      "Guides surgical resectability assessment"
+     ]
+    }
+   },
+   "img": {
+    "src": "v1/kb/media/cholangiocarcinoma-fig1.webp",
+    "alt": "Abdominal CT scan demonstrating perihilar cholangiocarcinoma with intrahepatic duct dilation",
+    "caption": "Biliary ductal dilation and confluence infiltration in Klatskin cholangiocarcinoma"
+   }
+  },
+  {
+   "tx": "**Autoimmune pancreatitis** type 1 is a systemic manifestation of **IgG4**-related fibroinflammatory disease. Computed tomography classically displays diffuse, sausage-like pancreatic enlargement with loss of normal lobular architecture, a hypoattenuating capsule-like halo rim, and delayed parenchymal contrast enhancement without prominent acute peripancreatic fat stranding.",
+   "say": "Autoimmune pancreatitis type 1 is a systemic manifestation of IgG4-related fibroinflammatory disease. Computed tomography classically displays diffuse, sausage-like pancreatic enlargement with loss of normal lobular architecture, a hypoattenuating capsule-like halo rim, and delayed parenchymal contrast enhancement without prominent acute peripancreatic fat stranding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Imaging Appearance",
+     "Clinical Correlation"
+    ],
+    "rows": [
+     [
+      "Gland Morphology",
+      "Diffuse sausage-like enlargement",
+      "Loss of lobular clefts and contour definition"
+     ],
+     [
+      "Peripancreatic Rim",
+      "Hypoattenuating capsule-like halo",
+      "Dense fibroinflammatory rim with lymphoplasmacytic infiltrate"
+     ],
+     [
+      "Enhancement Phase",
+      "Delayed parenchymal contrast enhancement",
+      "Fibrosis delaying contrast transit on late scans"
+     ],
+     [
+      "Serology & Response",
+      "Elevated serum IgG4 levels",
+      "Dramatic resolution following systemic corticosteroid therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pancreatic ductal adenocarcinoma** typically presents on dual-phase CT as an ill-defined, hypoattenuating mass in the pancreatic head. Obstruction triggers the pathognomonic **double-duct sign**, characterized by simultaneous dilation of the common bile duct and the main pancreatic duct with abrupt transition.",
+   "say": "Pancreatic ductal adenocarcinoma typically presents on dual-phase CT as an ill-defined, hypoattenuating mass in the pancreatic head. Obstruction triggers the pathognomonic double-duct sign, characterized by simultaneous dilation of the common bile duct and the main pancreatic duct with abrupt transition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Double-Duct Sign",
+     "points": [
+      "Dilation of common bile duct (> 8 mm)",
+      "Dilation of main pancreatic duct (> 3 mm)",
+      "Abrupt transition point in pancreatic head",
+      "High positive predictive value for malignancy",
+      "Associated with parenchymal tail atrophy"
+     ]
+    },
+    "right": {
+     "title": "Vascular Infiltration Criteria",
+     "points": [
+      "Arterial encasement > 180° defines unresectability",
+      "Coeliac axis and superior mesenteric artery involvement",
+      "Venous occlusion of superior mesenteric vein",
+      "Abutment <= 180° considered borderline resectable",
+      "Critical for Whipple surgical planning"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mucinous cystic neoplasm** of the pancreas arises almost exclusively in women exceeding 95% of cases, located predominantly within the pancreatic body or tail. Cross-sectional imaging reveals a thick-walled multilocular macrocystic lesion with internal septations, containing pathognomonic **ovarian-type stroma** on histopathology.",
+   "say": "Mucinous cystic neoplasm of the pancreas arises almost exclusively in women exceeding 95% of cases, located predominantly within the pancreatic body or tail. Cross-sectional imaging reveals a thick-walled multilocular macrocystic lesion with internal septations, containing pathognomonic ovarian-type stroma on histopathology.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathology Feature",
+     "Imaging Finding",
+     "Histological Hallmark"
+    ],
+    "rows": [
+     [
+      "Gender / Location",
+      "Women > 95%, body and tail of pancreas",
+      "Hormonal-dependent periductal stromal proliferation"
+     ],
+     [
+      "Cyst Architecture",
+      "Thick-walled macrocystic mass (> 2 cm)",
+      "Mucin-producing columnar epithelial lining"
+     ],
+     [
+      "Wall / Septa",
+      "Internal enhancing septa and peripheral calcification",
+      "Ovarian-type subepithelial dense spindle stroma"
+     ],
+     [
+      "Malignant Potential",
+      "Premalignant lesion requiring surgical resection",
+      "High-grade dysplasia or invasive adenocarcinoma risk"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "Crack the Core Gastrointestinal / RDN11 Liver Pancreas"
+ ],
+ "refs": [
+  "Crack the Core Exam (CTC)",
+  "RDN11 Abdominal Radiology",
+  "LI-RADS v2018",
+  "Atlanta Classification 2012"
+ ],
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}
