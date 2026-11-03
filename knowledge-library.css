@@ -501,7 +501,8 @@ body.dark #dxOverlay #dxMgmt.dx-reader .kbr-proto-group-title { color: #e6f0ed; 
 #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body > * {
   min-width: 0;
 }
-body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body,
+body.v3-dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
   border-color: rgba(255,255,255,.12);
   background: rgba(18,24,34,.96);
   box-shadow: 0 12px 36px rgba(0,0,0,.24), 0 2px 8px rgba(0,0,0,.16);
@@ -524,7 +525,8 @@ body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
     backdrop-filter: none;
     background: #fff;
   }
-  body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
+  body.dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body,
+  body.v3-dark #dxOverlay #dxMgmt.dx-reader .dx-mgmt-body {
     background: #121822;
   }
 }
