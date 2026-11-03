@@ -1,0 +1,134 @@
+{
+  "v": 1,
+  "module": "sgi-intestinal-tuberculosis",
+  "subject": "ss-gastroenterology",
+  "title": "Intestinal tuberculosis: differentiation from Crohn disease and therapy",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "**Intestinal tuberculosis** (ITB) preferentially targets the **ileocecal region** in over 70% of clinical cases, reflecting high physiological bile stasis and dense lymphoid follicle abundance in Peyer patches. Mycobacterium tuberculosis bacilli reach the bowel wall via swallowed infected sputum, unpasteurized milk, or hematogenous spread, manifesting with ulcerations, cicatricial strictures, or pseudotumoural masses.",
+      "say": "Intestinal tuberculosis targets the ileocecal region in more than seventy percent of cases. This localization reflects physiological stasis and dense lymphoid aggregates in Peyer patches. Mycobacterium tuberculosis reaches the gut through swallowed sputum, contaminated dairy, or hematogenous dissemination, producing mucosal ulcerations, strictures, or inflammatory masses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intestinal Tuberculosis",
+          "points": [
+            "Predominates in ileocecal region (> 70%)",
+            "Transverse circumferential ulcers",
+            "Patulous, incompetent ileocecal valve",
+            "Necrotic mesenteric nodes with rim enhancement"
+          ]
+        },
+        "right": {
+          "title": "Crohn Disease",
+          "points": [
+            "Any GI segment with skip areas",
+            "Longitudinal linear serpiginous ulcers",
+            "Strictured, destroyed ileocecal valve",
+            "Fibrofatty creeping fat and vascular comb sign"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Endoscopic differentiation between intestinal tuberculosis and Crohn disease centers on ulcer morphology and valve anatomy. Intestinal TB classically produces **transverse circular ulcers** aligned perpendicular to the longitudinal bowel axis, often accompanied by a **patulous ileocecal valve**. Conversely, Crohn disease produces deep longitudinal linear fissures, discrete aphthae, and mucosal cobblestoning.",
+      "say": "Endoscopic examination distinguishes intestinal tuberculosis from Crohn disease by evaluating ulcer orientation and valve configuration. Intestinal tuberculosis classically produces transverse circular ulcers aligned perpendicular to the bowel axis, frequently alongside a patulous ileocecal valve. In contrast, Crohn disease features longitudinal linear ulcers and cobblestoning.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Endoscopic Feature", "Intestinal Tuberculosis", "Crohn Disease"],
+        "rows": [
+          ["Ulcer orientation", "Transverse circular (perpendicular to axis)", "Longitudinal linear (parallel to axis)"],
+          ["Ileocecal valve appearance", "Patulous, gaping, incompetent valve", "Strictured, fixed, deformed valve"],
+          ["Mucosal background", "Surrounding mucosal erythema", "Normal intervening mucosa (skip lesions)"],
+          ["Cobblestoning & aphthae", "Rare or absent", "Commonly present"]
+        ]
+      }
+    },
+    {
+      "tx": "Histopathological examination provides definitive discriminating criteria. Intestinal tuberculosis features **large confluent** (> 400 micrometres) **caseating granulomas**, often numbering more than 5 granulomas per biopsy specimen, located prominently within mucosal and submucosal layers. In contrast, Crohn disease exhibits small (< 200 micrometres), discrete, non-caseating microgranulomas scattered sparsely.",
+      "say": "Histological evaluation provides objective criteria to differentiate both diseases. Intestinal tuberculosis demonstrates large confluent caseating granulomas measuring over four hundred micrometres, frequently exceeding five granulomas per biopsy specimen. In contrast, Crohn disease exhibits small discrete non-caseating granulomas without central necrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-and-granulomatous-inflammation-fig1.webp",
+        "alt": "Cross-section of a round granuloma with central caseous necrosis, Langhans giant cells, a rim of epithelioid macrophages, and an outer lymphocyte collar.",
+        "caption": "Caseous necrosis in the centre is the histologic mark that separates intestinal tuberculosis from non-caseating Crohn granulomas. No bowel and no size scale are drawn. Illustration: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Microbiological confirmation relies on tissue identification of acid-fast bacilli on mucosal biopsies. While conventional **Ziehl-Neelsen staining** yields low sensitivity in paucibacillary gut tissue, rapid real-time PCR using **GeneXpert MTB/RIF** on endoscopically acquired biopsy tissue provides rapid confirmation of Mycobacterium tuberculosis DNA alongside simultaneous rifampicin resistance detection within hours.",
+      "say": "Microbiological diagnosis requires detecting mycobacterial organisms directly within mucosal biopsies. Although traditional Ziehl-Neelsen staining has limited sensitivity in mucosal samples, rapid polymerase chain reaction using GeneXpert MTB/RIF provides reliable confirmation of Mycobacterium tuberculosis DNA and detects rifampicin resistance within hours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Mucosal biopsies from ulcer margin or base"},
+          {"id": "b", "label": "Ziehl-Neelsen acid-fast staining (low yield)"},
+          {"id": "c", "label": "GeneXpert MTB/RIF assay on biopsy tissue"},
+          {"id": "d", "label": "Rapid confirmation of MTB and rifampicin sensitivity"}
+        ],
+        "edges": [
+          ["a", "b", "histology"],
+          ["a", "c", "molecular PCR"],
+          ["c", "d", "provides"]
+        ]
+      }
+    },
+    {
+      "tx": "Computed tomography enterography (CTE) offers distinctive cross-sectional signs. Intestinal tuberculosis characteristically reveals **necrotic mesenteric lymph nodes** featuring marked **peripheral rim enhancement** with central hypoattenuation reflecting caseous necrosis. Conversely, mesenteric lymphadenopathy in Crohn disease demonstrates homogeneous enhancement without internal liquefied necrosis.",
+      "say": "Computed tomography enterography provides valuable cross-sectional findings that help differentiate intestinal tuberculosis from Crohn disease. Intestinal tuberculosis characteristically demonstrates necrotic mesenteric lymph nodes with peripheral rim enhancement around central hypoattenuation. In contrast, Crohn disease lymph nodes have uniform homogeneous contrast enhancement.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Radiological Sign", "Intestinal Tuberculosis", "Crohn Disease"],
+        "rows": [
+          ["Mesenteric lymph nodes", "Low-density necrotic centres with rim enhancement", "Homogeneously enhancing without necrosis"],
+          ["Bowel wall thickening", "Concentric, symmetric, localized to ileocecal", "Eccentric, asymmetric, transmural"],
+          ["Mesenteric vasculature", "Mild vascular engorgement", "Marked 'comb sign' of engorged vasa recta"],
+          ["Fibrofatty proliferation", "Absent or minimal", "Prominent creeping fat around bowel"]
+        ]
+      }
+    },
+    {
+      "tx": "When endoscopic, histopathologic, and microbiological evaluations remain indeterminate, a **therapeutic trial** of **antitubercular therapy** serves as an established diagnostic strategy in tuberculosis-endemic regions. Reassessment colonoscopy performed after 8 to 12 weeks of therapy that demonstrates complete mucosal healing and ulcer resolution confirms tuberculosis and excludes Crohn disease.",
+      "say": "In clinically ambiguous cases where diagnostic tests remain indeterminate, a therapeutic trial of antitubercular therapy serves as an established management strategy. Performing a repeat colonoscopy after eight to twelve weeks of treatment that confirms mucosal healing verifies the diagnosis of intestinal tuberculosis and excludes Crohn disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {"id": "a", "label": "Indeterminate ileocecal ulceration in endemic region"},
+          {"id": "b", "label": "Empirical therapeutic trial with ATT (never steroids alone)"},
+          {"id": "c", "label": "Surveillance colonoscopy at 8 to 12 weeks"},
+          {"id": "d", "label": "Complete mucosal healing: confirms intestinal TB"}
+        ],
+        "edges": [
+          ["a", "b", "initiate"],
+          ["b", "c", "re-evaluate"],
+          ["c", "d", "verifies"]
+        ]
+      }
+    },
+    {
+      "tx": "The standard curative **antitubercular therapy regimen** for drug-susceptible intestinal tuberculosis entails a 6-month course of daily oral treatment. Management comprises an intensive 2-month phase using four first-line bactericidal agents (**HRZE**: isoniazid, rifampicin, pyrazinamide, and ethambutol), followed by a 4-month continuation phase consisting of dual therapy with isoniazid and rifampicin (**HR**).",
+      "say": "The standard curative antitubercular therapy regimen for drug-sensitive intestinal tuberculosis requires a six-month course of oral treatment. The regimen comprises a two-month intensive phase with isoniazid, rifampicin, pyrazinamide, and ethambutol, designated as HRZE, followed by a four-month continuation phase with isoniazid and rifampicin, designated as HR.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Regimen Phase", "Duration", "Drug Components", "Therapeutic Objective"],
+        "rows": [
+          ["Intensive phase", "2 months", "HRZE (Isoniazid, Rifampicin, Pyrazinamide, Ethambutol)", "Rapid bactericidal action, prevents resistance"],
+          ["Continuation phase", "4 months", "HR (Isoniazid, Rifampicin)", "Sterilizing activity, clears persisting bacilli"]
+        ]
+      }
+    },
+    {
+      "tx": "Differentiating both conditions carries paramount therapeutic safety implications. Inadvertent administration of biologics or **immunosuppressive therapy** like anti-TNF inhibitors to an undiagnosed patient with intestinal tuberculosis suppresses granuloma-contained mycobacteria, precipitating lethal **disseminated tuberculosis**, fulminant peritonitis, multi-organ failure, and septic death in affected individuals.",
+      "say": "Accurate distinction between intestinal tuberculosis and Crohn disease is essential for clinical patient safety. Administering anti-TNF biologics or intense immunosuppressive therapy to an unrecognized case of intestinal tuberculosis dissolves protective granulomas. This mistake precipitates catastrophic disseminated tuberculosis, bowel perforation, and septic death.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tuberculosis-long-case-fig2.webp",
+        "alt": "Left panel shows a macrophage presenting Mycobacterium tuberculosis to a helper T cell, with interleukin-12, interferon-gamma, and TNF-alpha, then epithelioid cells and a Langhans giant cell. Right panel is a caseating granuloma with caseous necrosis, epithelioid macrophages, Langhans giant cells, helper and cytotoxic T lymphocytes, and a fibroblast capsule.",
+        "caption": "TNF-alpha is one signal that holds this granuloma together. Blocking TNF in untreated intestinal tuberculosis lets the contained bacilli disseminate. Illustration: StewardMD.",
+        "ar": 1.3405
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "hand"
+}
