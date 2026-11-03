@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "sen-dyslipidaemia",
+ "title": "Dyslipidaemia",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In clinical risk stratification by the European Society of Cardiology, individuals categorized as **very high cardiovascular risk** require an **LDL cholesterol** concentration strictly below 55 mg/dL and at least a 50% reduction from baseline. Many American guidelines cite below **70** mg/dL for high-risk cohorts. Clinicians must explicitly state which guideline target is being applied when setting therapeutic lipid goals for secondary prevention.",
+   "say": "For patients with very high cardiovascular risk, the European Society of Cardiology sets an LDL cholesterol goal below 55 mg/dL and at least a fifty percent reduction from baseline. Many guidelines also cite below 70 mg/dL for high-risk cohorts, and clinicians should state which guideline they are applying.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dyslipidemia-fig1.webp",
+    "alt": "Dyslipidemia Atherosclerotic Plaque Formation",
+    "caption": "Atherogenic lipoprotein infiltration, subendothelial oxidation, and foam cell accumulation. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Clinicians must strongly suspect heterozygous **familial hypercholesterolemia** (**FH**) when an adult presents with persistent LDL cholesterol exceeding 190 mg/dL (4.9 mmol/L), pathognomonic Achilles **tendon xanthomas**, or premature coronary artery disease. Over 90% of genetically confirmed FH cases harbor loss-of-function mutations in the LDL receptor gene (**LDLR**), with remaining cases driven by apolipoprotein B mutations or gain-of-function variants in **PCSK9**.",
+   "say": "Suspect heterozygous familial hypercholesterolemia in any adult presenting with an LDL cholesterol above 190 mg/dL or physical tendon xanthomas. Over ninety percent of monogenic cases arise from loss-of-function mutations in the LDL receptor gene, with the remainder caused by APOB or PCSK9 gain-of-function variants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Causal Gene",
+     "Genetic Mechanism",
+     "Phenotypic Frequency",
+     "Molecular Consequence"
+    ],
+    "rows": [
+     [
+      "LDLR (LDL Receptor)",
+      "Loss-of-function mutations",
+      "85% to 90% of monogenic FH",
+      "Impaired hepatic clearance of circulating LDL"
+     ],
+     [
+      "APOB (Apolipoprotein B)",
+      "R3500Q missense mutations",
+      "5% to 10% of monogenic FH",
+      "Defective ligand binding to LDL receptor"
+     ],
+     [
+      "PCSK9 (Proprotein Convertase)",
+      "Gain-of-function variants",
+      "<1% of monogenic FH",
+      "Excessive lysosomal degradation of LDLR"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High-intensity statin regimens comprise **atorvastatin** 40 to 80 mg daily or **rosuvastatin** 20 to 40 mg daily, reliably lowering LDL cholesterol by at least 50%. When combination therapy is required for severe hypertriglyceridaemia, **fenofibrate** represents the fibrate of choice because it does not inhibit statin glucuronidation. In contrast, **gemfibrozil** strongly inhibits UDP-glucuronosyltransferase UGT1A1 and OATP1B1, markedly increasing statin blood levels and precipitating life-threatening rhabdomyolysis.",
+   "say": "High-intensity statins include atorvastatin 40 to 80 mg and rosuvastatin 20 to 40 mg daily, achieving over fifty percent LDL reduction. When adding a fibrate for elevated triglycerides, fenofibrate is preferred; gemfibrozil must be avoided because it inhibits statin glucuronidation and dramatically increases rhabdomyolysis risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fenofibrate Combination",
+     "points": [
+      "Does not inhibit statin glucuronidation via UGT1A1",
+      "Minimal pharmacokinetic interaction with statins",
+      "Significantly lower risk of myopathy and rhabdomyolysis",
+      "Fibrate of choice when combined with statin therapy"
+     ]
+    },
+    "right": {
+     "title": "Gemfibrozil Combination",
+     "points": [
+      "Potent competitive inhibitor of UGT1A1 and OATP1B1",
+      "Increases serum statin concentrations up to several fold",
+      "Marked elevation in clinical rhabdomyolysis risk",
+      "Strictly contraindicated in combination with statin drugs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe **homozygous familial hypercholesterolemia** is characterized by plasma LDL cholesterol typically exceeding **400** to 500 mg/dL, presenting in early childhood with planar cutaneous xanthomas, premature atherosclerosis, and supravalvular aortic stenosis. Because LDL receptor function is absent, traditional statins exhibit limited efficacy. Targeted therapies include the angiopoietin-like 3 inhibitor **evinacumab** and the MTP inhibitor **lomitapide**, which clear lipids independently of the LDL receptor.",
+   "say": "Homozygous familial hypercholesterolemia presents in childhood with LDL cholesterol levels often exceeding 400 mg/dL and planar xanthomas. Because conventional therapies depend on functional LDL receptors, treatment requires receptor-independent therapies including evinacumab, lomitapide, and lipoprotein apheresis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Agent",
+     "Molecular Cellular Target",
+     "LDLR Independence",
+     "Clinical Monitoring"
+    ],
+    "rows": [
+     [
+      "Evinacumab (IV Infusion)",
+      "Angiopoietin-like 3 (ANGPTL3)",
+      "Completely LDLR-independent",
+      "Lowers LDL by ~50%; infusion reactions"
+     ],
+     [
+      "Lomitapide (Oral Capsule)",
+      "Microsomal triglyceride transfer protein",
+      "Completely LDLR-independent",
+      "Hepatic steatosis, elevated transaminases"
+     ],
+     [
+      "Lipoprotein Apheresis",
+      "Physical extracorporeal removal",
+      "Physical mechanical clearance",
+      "Biweekly sessions; vascular access required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe hypertriglyceridaemia with serum **triglycerides** exceeding 500 to 1000 mg/dL carries an immediate risk of precipitating acute necrotizing pancreatitis, mandating immediate dietary fat restriction and fibrate therapy. In patients with elevated cardiovascular risk and persistent fasting triglycerides between 135 and 499 mg/dL despite statin therapy, the landmark **REDUCE-IT** trial proved that high-dose purified **icosapent ethyl** (4 grams daily) significantly reduced major adverse cardiovascular events by 25%.",
+   "say": "Serum triglycerides above 500 mg/dL warrant aggressive therapy to prevent acute pancreatitis. In patients with persistent triglycerides up to 499 mg/dL on statins, the REDUCE-IT trial demonstrated that high-dose purified icosapent ethyl four grams daily reduced major adverse cardiovascular events by twenty-five percent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lipoprotein-metabolism-and-hyperlipidemias-fig1.webp",
+    "alt": "Lipoprotein Metabolism and Atherogenesis Pathways",
+    "caption": "Chylomicron, VLDL, and LDL metabolic cascade and endothelial interactions. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "**Familial chylomicronemia** syndrome (Fredrickson type I) is a rare autosomal recessive metabolic disorder caused by biallelic loss-of-function mutations in **lipoprotein lipase** (**LPL**) or its essential cofactor **apoC-III** / APOC2. Defective lipolysis causes extreme accumulation of dietary chylomicrons in fasting plasma, manifesting with lactescent milky plasma, eruptive cutaneous xanthomas, lipemia retinalis, hepatosplenomegaly, and recurrent life-threatening bouts of acute pancreatitis.",
+   "say": "Familial chylomicronemia syndrome is caused by genetic deficiency of lipoprotein lipase or its cofactor apolipoprotein C-2. Defective clearing of dietary chylomicrons results in milky lipaemic plasma, eruptive xanthomas, and recurrent bouts of severe acute pancreatitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Familial Chylomicronemia (Type I)",
+     "points": [
+      "Biallelic loss of LPL, APOC2, or GPIHBP1",
+      "Fasting chylomicrons present; clear infranatant",
+      "Serum triglycerides frequently >1500 to 2000 mg/dL",
+      "Extreme risk of pancreatitis; low atherogenicity"
+     ]
+    },
+    "right": {
+     "title": "Familial Combined (Type IIb)",
+     "points": [
+      "Polygenic overproduction of hepatic apoB-100",
+      "Both elevated LDL and VLDL particles",
+      "Triglycerides typically 200 to 500 mg/dL",
+      "Extremely high risk of premature coronary disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Familial **dysbetalipoproteinemia** (Fredrickson type III hyperlipoproteinemia) is an autosomal recessive disorder caused by homozygosity for the defective apolipoprotein E2 allele (**APOE2**). Defective binding of ApoE to hepatic remnant receptors prevents normal clearance of chylomicron remnants and intermediate-density lipoproteins. Diagnostic hallmarks include equivalent elevations of plasma total **cholesterol** and triglycerides (often in a 1:1 ratio) and pathognomonic orange-yellow **palmar xanthomas** in palmar creases.",
+   "say": "Familial dysbetalipoproteinemia results from homozygosity for the apolipoprotein E2 allele, which prevents normal hepatic clearance of chylomicron and IDL remnants. It is characterized by roughly equal elevations of plasma cholesterol and triglycerides and pathognomonic orange-yellow palmar crease xanthomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Feature",
+     "Biochemical Finding",
+     "Physical Sign",
+     "First-Line Pharmacotherapy"
+    ],
+    "rows": [
+     [
+      "Genotype",
+      "ApoE2/E2 homozygosity",
+      "Defective receptor binding",
+      "High-intensity statin plus fibrate"
+     ],
+     [
+      "Lipid Profile",
+      "Total cholesterol:TG ~ 1:1 ratio",
+      "VLDL/TG ratio >0.3",
+      "Weight reduction and dietary restriction"
+     ],
+     [
+      "Cutaneous Signs",
+      "Palmar crease xanthomas",
+      "Tubo-eruptive xanthomas on elbows",
+      "Complete regression with lipid normalization"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Circulating **lipoprotein(a)** represents an independent, genetically determined, causal risk factor for premature atherosclerotic cardiovascular disease and calcific aortic valve stenosis. International consensus guidelines advise measuring lipoprotein(a) at least once in every adult's lifetime. While traditional statins do not lower Lp(a), potent **PCSK9 inhibitors** (evolocumab, alirocumab) reduce Lp(a) concentrations by 20% to 30%, while emerging antisense oligonucleotides provide selective 80% to 90% reductions. High-dose **niacin** also lowers Lp(a).",
+   "say": "Lipoprotein(a) is an independent genetically determined cause of premature cardiovascular disease and aortic stenosis that should be measured at least once in a lifetime. Conventional statins do not reduce Lp(a), but PCSK9 inhibitors achieve modest reductions, while targeted antisense agents produce profound suppression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lipoprotein(a) Biology",
+     "points": [
+      "LDL particle linked to apolipoprotein(a) via disulfide bond",
+      "Homology with plasminogen promotes thrombosis",
+      "Genetically determined by LPA kringle-IV repeats",
+      "Elevated risk threshold: >50 mg/dL (125 nmol/L)"
+     ]
+    },
+    "right": {
+     "title": "Pharmacological Lowering",
+     "points": [
+      "Statins provide zero reduction (may slightly raise Lp(a))",
+      "PCSK9 inhibitors reduce Lp(a) by 20% to 30%",
+      "Niacin achieves modest 20% to 30% reduction",
+      "Targeted siRNA (pelacarsen, olpasiran) lowers Lp(a) >80%"
+     ]
+    }
+   }
+  }
+ ]
+}
