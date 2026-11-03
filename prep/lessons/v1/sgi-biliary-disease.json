@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "sgi-biliary-disease",
+ "subject": "ss-gastroenterology",
+ "title": "Gallstones, cholangitis and biliary strictures",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Tokyo Guidelines**, written as TG18, diagnose **acute cholangitis** from three domains: systemic inflammation such as fever or a high white count, cholestasis such as jaundice or abnormal liver tests, and imaging that shows a dilated or blocked bile duct. The drawing is an obstructing stone with ascending infection, and the side panels name the clinical clusters. Suspected cholangitis is a reason for antibiotics and a plan to drain, not a reason to watch overnight.",
+   "say": "Tokyo Guidelines, TG18, diagnose acute cholangitis from inflammation, cholestasis and imaging of a blocked duct. Start antibiotics and plan drainage. Do not watch a suspected cholangitis overnight.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholangitis-fig1.webp",
+    "alt": "An obstructing bile-duct stone with ascending infection. Side panels name Charcot triad and Reynolds pentad.",
+    "caption": "Acute cholangitis from a blocked duct. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Charcot triad** is fever, jaundice and right upper quadrant pain. **Reynolds pentad** adds hypotension and a changed mental state. Pentad means pus under pressure and needs emergency biliary decompression, usually by ERCP. Antibiotics alone do not drain a closed duct. Triad without shock still needs an early ERCP, but pentad is the one you do overnight. Do not wait for all five features before you call endoscopy. Many patients never show the full set.",
+   "say": "Charcot triad is fever, jaundice and right upper quadrant pain. Reynolds pentad is the triad plus shock and confusion. Pentad needs emergency drainage. Do not wait for every feature, because many patients never complete the list.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Charcot triad",
+     "points": [
+      "Fever, jaundice, right upper pain.",
+      "Suggests cholangitis.",
+      "Still needs source control."
+     ]
+    },
+    "right": {
+     "title": "Reynolds pentad",
+     "points": [
+      "Triad plus hypotension and confusion.",
+      "Suppurative cholangitis.",
+      "Emergency decompression."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**ASGE guidelines** sort **choledocholithiasis risk**. Very high risk means a stone already seen on ultrasound, or cholangitis, or a bilirubin above **4** mg per dL together with a dilated duct. Those patients go to therapeutic ERCP. Do not insert an extra MRCP in front of a stone you have already seen. Intermediate risk is the group for a non-invasive test. Low risk can go to cholecystectomy without a bile-duct procedure.",
+   "say": "ASGE guidelines send very high choledocholithiasis risk straight to ERCP. That means a stone on ultrasound, cholangitis, or bilirubin above 4 mg per dL with a dilated duct. Do not delay that group for another scan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Example",
+     "Next test"
+    ],
+    "rows": [
+     [
+      "Very high",
+      "Stone seen, cholangitis, or bilirubin above 4 with a wide duct",
+      "ERCP"
+     ],
+     [
+      "Intermediate",
+      "Dilated duct or a modest bilirubin rise",
+      "EUS or MRCP"
+     ],
+     [
+      "Low",
+      "No duct clues",
+      "Cholecystectomy without duct therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Endoscopic ultrasound** and **MRCP** are equivalent for finding bile-duct stones in the intermediate-risk patient. Both are sensitive above **95%**. Choose EUS when you may treat in the same session, and MRCP when you want a map without sedation. A negative study of this quality lets you leave the duct alone. Do not do both tests as a routine pair.",
+   "say": "Endoscopic ultrasound and MRCP both find duct stones with sensitivity above 95 percent in intermediate-risk patients. Pick EUS if you might treat immediately, and MRCP if you only need a map. A solid negative study means leave the duct alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endoscopic ultrasound",
+     "points": [
+      "Sensitivity above 95%.",
+      "Same session can proceed to ERCP.",
+      "Needs sedation."
+     ]
+    },
+    "right": {
+     "title": "MRCP",
+     "points": [
+      "Sensitivity above 95%.",
+      "No scope and no sedation.",
+      "Does not remove the stone."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mirizzi syndrome** is a stone stuck in the cystic duct or the gallbladder neck that compresses the common hepatic duct from outside. Jaundice looks like a duct stone, but the stone is not sitting in the common duct. Pressure and inflammation can open a **cholecystobiliary fistula**. Surgery is harder, and the duct is easy to injure. Warn the surgeon before a routine cholecystectomy when the imaging shows this compression.",
+   "say": "Mirizzi syndrome is extrinsic compression of the common hepatic duct by a stone in the cystic duct or gallbladder neck. A cholecystobiliary fistula may follow. The operation is not a routine cholecystectomy. Tell the surgeon first.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mirizzi-syndrome-fig1.webp",
+    "alt": "A stone in the gallbladder neck compressing the common hepatic duct, with a fistula panel.",
+    "caption": "Mirizzi compression and cholecystobiliary fistula. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Gallstone pancreatitis** that is mild should have an **index admission cholecystectomy** before discharge, once the attack has settled. Waiting for an outpatient date invites another attack and more biliary trouble. Severe pancreatitis with collections is different: do not operate on a hostile abdomen in the first days. The rule is for the mild attack that has resolved. Clear the duct first if a stone is still blocking it.",
+   "say": "Mild gallstone pancreatitis should have the gallbladder removed on the index admission, before discharge. Delay invites another attack. Do not apply that rule to severe pancreatitis with collections in the first days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Gallstone pancreatitis"
+     },
+     {
+      "id": "n2",
+      "label": "Mild and now settled"
+     },
+     {
+      "id": "n3",
+      "label": "Index admission cholecystectomy"
+     },
+     {
+      "id": "n4",
+      "label": "Severe with collections: not an early operation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n1",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Porcelain gallbladder** means extensive calcium in the gallbladder wall. It carries a higher risk of **gallbladder adenocarcinoma**, so prophylactic cholecystectomy is indicated when the patient can have an operation. The drawing shows the calcified wall, stones and a mucosal cancer, plus the CT rim. Do not quote an old very high percentage. The risk is elevated, and that is enough to remove the gallbladder. Incidental wall calcium on a CT needs a surgical opinion.",
+   "say": "Porcelain gallbladder is mural calcification and an elevated risk of gallbladder adenocarcinoma. Prophylactic cholecystectomy is the usual advice when the patient is fit. The risk is raised. It is not a reason to invent a precise percentage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/porcelain-gallbladder-fig1.webp",
+    "alt": "A calcified gallbladder wall beside mucosal cancer, with a CT rim of calcium.",
+    "caption": "Porcelain gallbladder and the cancer risk. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Primary sclerosing cholangitis** is chronic fibrosing strictures of intrahepatic and extrahepatic ducts. **MRCP** shows **beaded bile ducts**. Inflammatory bowel disease, usually ulcerative colitis, is present in over **70%**. The drawing shows the beads, a stricture, colonic inflammation and onion-skin fibrosis. These patients need colonoscopic surveillance and a plan for dominant strictures and cholangiocarcinoma. It is not the same disease as a single stone in the duct.",
+   "say": "Primary sclerosing cholangitis causes beaded bile ducts on MRCP. Inflammatory bowel disease is present in over 70 percent, usually ulcerative colitis. Colonoscopic surveillance is required, and dominant strictures plus cholangiocarcinoma remain part of the plan. This is not a one-off duct stone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/primary-sclerosing-cholangitis-fig1.webp",
+    "alt": "Beaded intrahepatic ducts, a biliary stricture, colonic inflammation and onion-skin fibrosis.",
+    "caption": "Primary sclerosing cholangitis with beaded ducts. StewardMD original."
+   }
+  }
+ ],
+ "quiz": [],
+ "src": [
+  "ss-c-biliary-ground"
+ ],
+ "refs": [
+  "Sleisenger and Fordtran 11e, gallstones and biliary disease",
+  "Tokyo Guidelines TG18",
+  "ASGE choledocholithiasis risk"
+ ],
+ "gen": "hand",
+ "checks": {
+  "shape": true,
+  "numbers": true,
+  "drugs": true,
+  "verbatim": true,
+  "selfCheck": false,
+  "redone": 0,
+  "dropped": 0,
+  "bank": null
+ }
+}

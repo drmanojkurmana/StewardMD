@@ -2,92 +2,210 @@
  "v": 1,
  "module": "sgi-gastric-neoplasms",
  "subject": "ss-gastroenterology",
- "title": "Gastric neoplasms: adenocarcinoma, hereditary diffuse cancer, GIST, MALT lymphoma and neuroendocrine tumours",
- "minutes": 6,
+ "title": "Gastric neoplasms: Lauren types, hereditary diffuse cancer, GIST and neuroendocrine tumours",
+ "minutes": 8,
  "steps": [
   {
-   "tx": "Gastric adenocarcinoma is classified by **Lauren** criteria into **intestinal** and **diffuse** types. Intestinal type forms gland-like structures and follows the Correa cascade from chronic gastritis through atrophy and **intestinal metaplasia** to dysplasia and cancer. Diffuse type infiltrates the wall without gland formation and includes **signet ring cells**. Diffuse tumours can thicken the wall, producing linitis plastica.",
-   "say": "Gastric adenocarcinoma is classified by Lauren criteria into intestinal and diffuse types. Intestinal type forms gland-like structures and follows the Correa cascade from chronic gastritis through atrophy and intestinal metaplasia to dysplasia and cancer. Diffuse type infiltrates the wall without forming glands and includes signet ring cells. Diffuse tumours can thicken the wall, producing linitis plastica.",
+   "tx": "The **Lauren classification** splits gastric adenocarcinoma into two patterns examiners contrast. Intestinal type forms glands, follows Helicobacter and intestinal metaplasia, and is the one that can be polypoid. Diffuse type infiltrates as discohesive **signet-ring cells** and is linked to **CDH1**. The photo shows a dense infiltrate under the mucosal glands, which is the diffuse pattern, not a polyp sitting on normal wall.",
+   "say": "Lauren classification separates intestinal-type glands from diffuse signet-ring cells. Intestinal type follows Helicobacter and metaplasia. Diffuse type infiltrates under the mucosa and is the pattern linked to CDH1. The image is that diffuse infiltrate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgi-gastric-neoplasms-fig1.webp",
+    "alt": "Gastric mucosa with glands above a dense diffuse cellular infiltrate in the wall.",
+    "caption": "Diffuse gastric carcinoma pattern under the mucosal glands. Image: Nephron, CC BY-SA 3.0, Wikimedia Commons."
+   }
+  },
+  {
+   "tx": "**Hereditary diffuse gastric cancer** is autosomal dominant. Germline inactivating **CDH1 mutations** remove E-cadherin, so signet-ring cells spread while the gastroscopy still looks nearly normal. Prophylactic total gastrectomy is the management once the pathogenic variant is confirmed, because biopsies miss the cells. First-degree relatives need genetic advice. A partial gastrectomy leaves stomach behind and is not the prophylactic operation.",
+   "say": "Hereditary diffuse gastric cancer comes from germline CDH1 mutations that inactivate E-cadherin. The mucosa can look normal while signet-ring cells are already there. Prophylactic total gastrectomy is the operation. A partial gastrectomy is not enough.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intestinal type",
+     "points": [
+      "Glands, Helicobacter, metaplasia.",
+      "Often distal, can be seen.",
+      "Endoscopic resection sometimes possible."
+     ]
+    },
+    "right": {
+     "title": "Diffuse and CDH1",
+     "points": [
+      "Signet-ring cells, E-cadherin lost.",
+      "Hereditary diffuse gastric cancer.",
+      "Prophylactic total gastrectomy."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Gastrointestinal stromal tumours** arise from the **interstitial cells of Cajal**. **CD117**, also called KIT, is expressed in over **95%**, and DOG1 is the backup stain when KIT is weak. Activating mutations sit in KIT or PDGFRA. The drawing shows several tumours in stomach and small bowel plus a KIT stain, which is the familial pattern. A solitary gastric GIST is the sporadic form of the same cell.",
+   "say": "Gastrointestinal stromal tumours come from interstitial cells of Cajal. CD117, or KIT, stains over 95 percent, and DOG1 helps when KIT is faint. Mutations are in KIT or PDGFRA. Multiple tumours suggest a familial pattern. A single gastric mass is the sporadic form.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/familial-gastrointestinal-stromal-tumor-fig1.webp",
+    "alt": "Several GISTs in stomach and small bowel, pacemaker cells in the wall, and a brown KIT stain.",
+    "caption": "Multiple GISTs with interstitial cells of Cajal and a KIT stain. StewardMD original."
+   }
+  },
+  {
+   "tx": "**Imatinib mesylate** is the selective **tyrosine kinase inhibitor** that changed GIST from a surgery-only disease. It is frontline treatment for unresectable or metastatic disease, and it is given after resection when the recurrence risk is high. Mutation testing still matters, because some PDGFRA variants respond poorly. It is not chemotherapy in the FLOT sense, and it is not the drug for ordinary gastric adenocarcinoma.",
+   "say": "Imatinib mesylate is the tyrosine kinase inhibitor used first for unresectable, metastatic, or high-risk resected GIST. Some PDGFRA mutations are poorly responsive, and genotype testing is still required. It is not the regimen used for ordinary gastric adenocarcinoma.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Feature",
-     "Intestinal",
-     "Diffuse"
+     "Situation",
+     "Role of imatinib"
     ],
     "rows": [
      [
-      "Glands",
-      "Present",
-      "Absent"
+      "Unresectable or metastatic GIST",
+      "Frontline tyrosine kinase inhibitor"
      ],
      [
-      "Typical cells",
-      "Columnar",
-      "Signet ring"
+      "High recurrence risk after resection",
+      "Adjuvant imatinib mesylate"
      ],
      [
-      "Precursor path",
-      "Correa cascade",
-      "Often de novo"
-     ],
-     [
-      "Key gene",
-      "Not gene-specific",
-      "CDH1 loss"
+      "Resistant PDGFRA variant",
+      "Imatinib may fail. Genotype first."
      ]
     ]
    }
   },
   {
-   "tx": "Germline **CDH1** mutation causes **hereditary diffuse gastric cancer**. Carriers face high lifetime gastric risk and also a raised risk of **lobular breast cancer**. Because early diffuse cancer spreads beneath intact mucosa, superficial biopsies can be falsely negative. Current practice for confirmed carriers is prophylactic total gastrectomy, with enhanced breast surveillance including annual breast MRI and clinical examination for women.",
-   "say": "Germline CDH1 mutation causes hereditary diffuse gastric cancer. Carriers face a high lifetime gastric risk and also a raised risk of lobular breast cancer. Because early diffuse cancer spreads beneath intact mucosa, superficial biopsies can be falsely negative. Current practice for confirmed carriers is prophylactic total gastrectomy, with enhanced breast surveillance including annual breast MRI and clinical examination for women.",
+   "tx": "**Gastric neuroendocrine tumours** come in three types. **Type 1 gastric NET** follows autoimmune atrophic gastritis and high gastrin, and it behaves in a benign way. Type 2 sits with Zollinger-Ellison syndrome and MEN1. Type 3 is sporadic, solitary and aggressive. Type 1 and type 2 are the gastrin-driven pair. Type 3 is the one you do not watch.",
+   "say": "Gastric neuroendocrine tumours are split into three types. Type 1 gastric NET follows autoimmune gastritis and high gastrin and is usually indolent. Type 2 comes with Zollinger-Ellison syndrome and MEN1. Type 3 is sporadic, solitary and aggressive.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/sgi-gastric-neoplasms-fig1.webp",
-    "alt": "Histological diagram showing signet ring cells diffusely infiltrating the gastric wall beneath an intact mucosal surface, characteristic of hereditary diffuse gastric cancer.",
-    "caption": "HDGC: signet ring cells infiltrate beneath intact mucosa. Image: Nephron, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 0.6667
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Setting",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "Type 1 gastric NET",
+      "Autoimmune atrophic gastritis, high gastrin",
+      "Usually indolent"
+     ],
+     [
+      "Type 2",
+      "Zollinger-Ellison syndrome and MEN1",
+      "Gastrin driven"
+     ],
+     [
+      "Type 3",
+      "Sporadic solitary lesion",
+      "Aggressive"
+     ]
+    ]
    }
   },
   {
-   "tx": "Staging and surgery matter for prognosis. A **junction tumour** whose epicentre lies within 2 cm of the gastro-oesophageal junction and extends into the oesophagus is staged as oesophageal. Pathological nodal staging needs at least **16 regional nodes** examined. Para-aortic node involvement is **M1**, not regional. Staging laparoscopy with peritoneal washing detects occult disease in advanced tumours, and FDG-PET is often unhelpful for diffuse, non-avid tumours.",
-   "say": "Staging and surgery matter for prognosis. A junction tumour whose epicentre lies within 2 centimetres of the gastro-oesophageal junction and extends into the oesophagus is staged as oesophageal. Pathological nodal staging needs at least 16 regional nodes examined. Para-aortic node involvement is M1, not regional. Staging laparoscopy with peritoneal washing detects occult disease in advanced tumours, and FDG-PET is often unhelpful for diffuse, non-avid tumours.",
-   "vis": null
+   "tx": "**Linitis plastica** is diffuse scirrhous carcinoma. Fibrous desmoplasia in the submucosa and muscularis propria turns the stomach into a rigid **leather bottle** that will not distend. Endoscopy can miss it because the mucosa is intact over the tumour. A barium study or a CT that shows a narrow undistent stomach is the clue. Prognosis is poor, and the operation, when it is possible, is total gastrectomy rather than a sleeve.",
+   "say": "Linitis plastica is a leather bottle stomach. Desmoplasia in the submucosa and muscle stops the stomach distending, often under an intact mucosa. Endoscopy alone can miss it. When surgery is possible it is a total gastrectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Looks like a leather bottle",
+     "points": [
+      "Linitis plastica, signet-ring diffuse cancer.",
+      "Poor distensibility.",
+      "Mucosa may still look intact."
+     ]
+    },
+    "right": {
+     "title": "Looks like a polyp or ulcer",
+     "points": [
+      "Intestinal-type adenocarcinoma.",
+      "Glands on the Lauren classification.",
+      "Endoscopy usually sees the lesion."
+     ]
+    }
+   }
   },
   {
-   "tx": "**Gastrointestinal stromal tumours** arise from **interstitial cells of Cajal** and usually carry activating **KIT** mutations, sometimes PDGFRA. Risk depends on size, mitotic count and site. Small tumours with very low mitotic counts carry negligible recurrence risk and need no adjuvant therapy. Higher-risk tumours are treated with adjuvant **imatinib**, a tyrosine kinase inhibitor. HER2 testing is a separate question: about 20% of metastatic gastric cancers overexpress HER2.",
-   "say": "Gastrointestinal stromal tumours arise from interstitial cells of Cajal and usually carry activating KIT mutations, sometimes PDGFRA. Risk depends on size, mitotic count and site. Small tumours with very low mitotic counts carry negligible recurrence risk and need no adjuvant therapy. Higher-risk tumours are treated with adjuvant imatinib, a tyrosine kinase inhibitor. HER2 testing is a separate question, because about 20 percent of metastatic gastric cancers overexpress HER2.",
-   "vis": null
+   "tx": "**Endoscopic submucosal dissection** for **early gastric cancer** is for **mucosal differentiated** adenocarcinoma. Without ulceration, size does not by itself forbid resection. If the lesion is ulcerated, it must be differentiated, **3 cm** or smaller, and free of lymphovascular invasion. Deeper submucosal cancer, poor differentiation with ulceration, or invaded vessels leaves the endoscopic option. Confirm the lift and the margins. This is not the operation for linitis plastica.",
+   "say": "Endoscopic resection of early gastric cancer is for mucosal differentiated adenocarcinoma. Without ulceration, size alone does not bar it. An ulcerated differentiated lesion must be 3 cm or smaller and free of lymphovascular invasion. Linitis plastica is not an endoscopic target.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Early gastric cancer"
+     },
+     {
+      "id": "n2",
+      "label": "Mucosal and differentiated?"
+     },
+     {
+      "id": "n3",
+      "label": "No ulcer: endoscopic resection"
+     },
+     {
+      "id": "n4",
+      "label": "Ulcer and over 3 cm, or vessels invaded: surgery"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
   },
   {
-   "tx": "Work-up of gastric neuroendocrine tumours separates **achlorhydria** from acid hypersecretion. Gastric pH and serum gastrin help distinguish type 1 from ZES-related type 2. Serum chromogranin A is a non-specific marker that PPI use can falsely raise. For tumours above 2 cm, contrast-enhanced CT is used for systemic staging. Recurrent or multiple type 1 tumours respond to somatostatin analogues such as octreotide or lanreotide, while poorly differentiated neuroendocrine carcinoma is evaluated with FDG-PET/CT. Total gastrectomy removes intrinsic factor, so lifelong vitamin B12 is mandatory.",
-   "say": "Work-up of gastric neuroendocrine tumours separates achlorhydria from acid hypersecretion. Gastric pH and serum gastrin help distinguish type 1 from ZES-related type 2. Serum chromogranin A is a non-specific marker that PPI use can falsely raise. For tumours above 2 centimetres, contrast-enhanced CT is used for systemic staging. Recurrent or multiple type 1 tumours respond to somatostatin analogues such as octreotide or lanreotide, while poorly differentiated neuroendocrine carcinoma is evaluated with FDG-PET/CT. Total gastrectomy removes intrinsic factor, so lifelong vitamin B12 is mandatory.",
-   "vis": null
+   "tx": "**FLOT chemotherapy** is fluorouracil, leucovorin, oxaliplatin and **docetaxel**. It is the standard perioperative treatment for locally advanced resectable gastric and gastroesophageal junction adenocarcinoma. Give it before and after surgery, not as a substitute for removing a resectable tumour. It is a cytotoxic regimen, unlike imatinib, which is for GIST. Patients need fitness for four drugs, including docetaxel.",
+   "say": "FLOT chemotherapy is fluorouracil, leucovorin, oxaliplatin and docetaxel. It is the perioperative standard for locally advanced resectable gastric and junctional adenocarcinoma. It surrounds an operation. It is not the drug used for GIST.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regimen",
+     "Drugs",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "FLOT chemotherapy",
+      "Fluorouracil, leucovorin, oxaliplatin, docetaxel",
+      "Resectable gastric adenocarcinoma"
+     ],
+     [
+      "Imatinib mesylate",
+      "Tyrosine kinase inhibitor",
+      "GIST, not FLOT disease"
+     ]
+    ]
+   }
   }
  ],
- "quiz": [
-  "q_3713a8f21096",
-  "q_e5a485315753",
-  "q_21bb7a6b2b9a"
+ "quiz": [],
+ "src": [
+  "ss-c-gastric-neoplasms-ground"
  ],
- "src": [],
  "refs": [
-  "Sobin LH, Gospodarowicz MK, Wittekind C. TNM Classification of Malignant Tumours, 8th edition (UICC/AJCC)"
+  "Sleisenger and Fordtran 11e, gastric neoplasms",
+  "FLOT perioperative chemotherapy is the regimen named in the blueprint"
  ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
+ "gen": "hand",
  "checks": {
   "shape": true,
   "numbers": true,
   "drugs": true,
   "verbatim": true,
-  "dashes": true,
-  "verify": true,
+  "selfCheck": false,
   "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 36
+  "dropped": 0,
+  "bank": null
  }
 }
