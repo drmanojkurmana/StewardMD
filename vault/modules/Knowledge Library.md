@@ -134,3 +134,7 @@ The reading text sits on one raised white sheet (solid fill, 1px border, contact
 - Related topics: `kbRelatedHTML()` at the end of `kbReaderBodyHTML` (no jump chip). `related()` picks 3 to 6: crossLinks, diseases that list each other in their differentials (parsed from additionalDifferentials and the two mimic lists), one-way differential links, then same system and class. Back from a related page returns to the page you came from (`opts.onBack`, `opts.backLabel`).
 - The Protocols tab search (kb-protocols.js) uses the same spelling normaliser and a typo fallback when nothing matches.
 - Tests: `test/kb-search.test.mjs` (79 query to top-result cases + ranking, related, speed) and `node test/run-kb-search-ui.mjs`.
+
+## Image Library (2026-11-04)
+
+The Library home carries an "Image Library" entry opening the shared central image bank ([[Image Library]], flag `smd_imglib` default ON): every captioned image in the app by system, including the Library figures. Built by `tools/build-image-library.mjs` into `kb/dist/imglib/`.
