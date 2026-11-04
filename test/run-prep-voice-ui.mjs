@@ -50,17 +50,18 @@ try {
     V.prefetch("Next sentence.");
     await new Promise((r) => setTimeout(r, 100));
     const p = V.say("This sentence is stopped before it can finish playing."); await new Promise((r) => setTimeout(r, 200)); V.stop(); await Promise.race([p, new Promise((r) => setTimeout(r, 3000))]);
-    const usable = V.usable(), rtf = V.rtf();
+    const usable = V.usable(), rtf = V.rtf(), saved = V.saved();
     V.release();
-    return { avail, before, state: "ready", last: prog[prog.length - 1], o, took, said: window.__said, usable, rtf, disposed: !!window.__disposed, after: V.state() };
+    return { avail, before, state: "ready", last: prog[prog.length - 1], o, took, said: window.__said, usable, rtf, disposed: !!window.__disposed, after: V.state(), saved };
   });
   ok(w.avail && w.before === "none", "the voice is available in this browser and starts empty");
   ok(w.last === 1 && w.rtf > 0 && w.usable, "it downloads, reports progress to 1, times itself and is usable on a fast phone (x" + w.rtf.toFixed(2) + ")");
   ok(w.o.lang === "en" && w.o.quant === "q8" && w.o.threads === 1 && w.o.device === "cpu" && w.o.voices === undefined && /vendor\/phonon-tts\/worker\.js$/.test(w.o.worker) && /phonon_tts_simd_bg\.wasm$/.test(w.o.simd), "it loads the vendored runtime, 8-bit, one thread, the one default voice, from the app bundle");
   ok(w.took > 400 && w.said.indexOf("Hello there.") >= 0 && w.said.indexOf("Next sentence.") >= 0, "say() speaks a sentence (at 1.25 times) and prefetch renders the next one");
   ok(w.disposed && w.after === "none", "stop() ends playback and release() frees the model");
+  ok(w.saved, "after the download the phone remembers it (saved), so the next Play loads it quietly instead of downloading again");
   await pg.evaluate(async () => { await window.PREP_VOICE.remove(); });
-  ok(await pg.evaluate(() => !!window.__cleared), "remove() clears the downloaded files");
+  ok(await pg.evaluate(() => !!window.__cleared && !window.PREP_VOICE.saved()), "remove() clears the downloaded files and the saved mark");
   // a phone too slow for it
   pg = await page(() => { window.__slow = 4000; });
   const slow = await pg.evaluate(async () => { const V = window.PREP_VOICE; await V.download(); return { usable: V.usable(), ready: V.ready(), rtf: V.rtf() }; });
