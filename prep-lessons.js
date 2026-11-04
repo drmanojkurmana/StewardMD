@@ -279,10 +279,57 @@
     for (m in a) if (!out[m] || a[m].gen === "hand") { e = { from: "app" }; for (k in a[m]) e[k] = a[m][k]; out[m] = e; }
     return { v: 1, modules: out };
   }
+  /* ---------- narration text and voice (pure) ---------- */
+  // What the voice reads: units and symbols spoken as words, markdown dropped, so a synthetic voice stops spelling them out.
+  var SAY_SUB = [
+    [/\*\*|__|`/g, ""], [/[#*_]{1,3}(?=\S)/g, ""],
+    [/\be\.g\.,?/gi, "for example,"], [/\bi\.e\.,?/gi, "that is,"], [/\bvs\.?(?=\s)/gi, "versus"], [/\bDr\./g, "Doctor"], [/\bapprox\./gi, "approximately"],
+    [/(\d)\s?mcg\b/gi, "$1 micrograms"], [/(\d)\s?mg\b/gi, "$1 milligrams"], [/(\d)\s?kg\b/gi, "$1 kilograms"], [/(\d)\s?(?:g)\b(?!\/)/g, "$1 grams"], [/\/kg\b/g, " per kilogram"],
+    [/(\d)\s?mL\b/gi, "$1 millilitres"], [/(\d)\s?mmHg\b/gi, "$1 millimetres of mercury"], [/(\d)\s?mmol\/L\b/gi, "$1 millimoles per litre"],
+    [/(\d)\s?mg\/dL\b/gi, "$1 milligrams per decilitre"], [/(\d)\s?\/\s?(?:uL|\u00b5L|\u03bcL)\b/g, "$1 per microlitre"],
+    [/(\d)\s?%/g, "$1 percent"], [/\s>=\s?|\s\u2265\s?/g, " at least "], [/\s<=\s?|\s\u2264\s?/g, " at most "], [/\s>\s?(?=\d)/g, " greater than "], [/\s<\s?(?=\d)/g, " less than "],
+    [/\u2192|->/g, " leads to "], [/\s&\s/g, " and "], [/~(?=\d)/g, "about "], [/(\d)\s?[\u2013\u2212-]\s?(?=\d)/g, "$1 to "], [/\u00b1/g, "plus or minus "],
+    [/\s{2,}/g, " "]
+  ];
+  function sayText(t) {
+    var x = String(t == null ? "" : t);
+    for (var i = 0; i < SAY_SUB.length; i++) x = x.replace(SAY_SUB[i][0], SAY_SUB[i][1]);
+    return x.trim();
+  }
+  // Sentences, so the voice restarts its intonation at each full stop and rests between them; a decimal or "1 DS" never splits.
+  function sayChunks(t) {
+    var x = sayText(t);
+    if (!x) return [];
+    var parts = x.replace(/([.!?:;])\s+(?=[A-Z0-9"(\u2018\u201c])/g, "$1\u0001").split("\u0001"), out = [];
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i].trim();
+      if (!p) continue;
+      if (out.length && p.length < 24 && out[out.length - 1].length < 140) out[out.length - 1] += " " + p; else out.push(p);
+    }
+    return out;
+  }
+  // Voice choice. Only English voices that run on the phone (nothing leaves it); the plain compact and the old
+  // robotic Eloquence/novelty voices are left alone. Premium and Enhanced (Settings, Accessibility, Spoken Content)
+  // and Siri voices win; among equals the Indian, then British, then US accent. -1: keep the system default.
+  function voiceScore(v) {
+    if (!v) return -1;
+    var lang = String(v.lang || "").replace("_", "-"), id = (String(v.voiceURI || "") + " " + String(v.name || "")).toLowerCase();
+    if (!/^en(-|$)/i.test(lang) || v.localService === false) return -1;
+    if (/eloquence|speech\.synthesis\.voice|novelty|compact/.test(id)) return -1;
+    var tier = /premium|neural/.test(id) ? 40 : /enhanced|siri/.test(id) ? 30 : 0;
+    if (!tier) return -1;
+    var acc = /^en-in$/i.test(lang) ? 6 : /^en-gb$/i.test(lang) ? 4 : /^en-us$/i.test(lang) ? 3 : /^en-au$/i.test(lang) ? 2 : 1;
+    return tier + acc;
+  }
+  function bestVoice(voices) {
+    var best = -1, top = -1;
+    for (var i = 0; voices && i < voices.length; i++) { var sc = voiceScore(voices[i]); if (sc > top) { top = sc; best = i; } }
+    return best;
+  }
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
     swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
-    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage };
+    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, voiceScore: voiceScore, bestVoice: bestVoice };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -359,17 +406,34 @@
     L.tok++;
     try { var P = plugin(); if (P && P.stop) P.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
   }
+  var voiceIx = null;   // the chosen native voice index (-1: system default), read once
+  function nativeVoice(P) {
+    if (voiceIx !== null) return Promise.resolve(voiceIx);
+    if (!P.getSupportedVoices) { voiceIx = -1; return Promise.resolve(-1); }
+    return P.getSupportedVoices().then(function (r) { voiceIx = bestVoice(r && r.voices); return voiceIx; }, function () { voiceIx = -1; return -1; });
+  }
+  function webVoice() {
+    try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
+  }
   function speak(text, rate, done) {
     stopVoice();
-    var tok = ++L.tok, fin = function () { if (tok === L.tok) done(); };
-    try {
-      var P = plugin();
-      if (P) { P.speak({ text: text, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }).then(fin, function () { if (tok === L.tok) { L.playing = false; draw(); } }); return; }
-      var u = new G.SpeechSynthesisUtterance(text);
-      u.lang = "en-IN"; u.rate = rate; u.onend = fin;
-      u.onerror = function () { if (tok === L.tok) { L.playing = false; draw(); } };
-      G.speechSynthesis.speak(u);
-    } catch (e) { L.playing = false; }
+    var tok = ++L.tok, chunks = sayChunks(text), n = 0;
+    var fail = function () { if (tok === L.tok) { L.playing = false; draw(); } };
+    var next = function () {
+      if (tok !== L.tok) return;
+      if (n >= chunks.length) { done(); return; }
+      var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
+      try {
+        var P = plugin();
+        if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
+        var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
+        u.lang = "en-IN"; u.rate = rate; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
+        u.onend = pause; u.onerror = fail;
+        G.speechSynthesis.speak(u);
+      } catch (e) { L.playing = false; }
+    };
+    if (!chunks.length) { done(); return; }
+    next();
   }
   function narrate() {
     var s = store();
