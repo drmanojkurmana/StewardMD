@@ -405,6 +405,30 @@
   function stopVoice() {
     L.tok++;
     try { var P = plugin(); if (P && P.stop) P.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
+    try { if (G.PREP_VOICE) G.PREP_VOICE.stop(); } catch (e) {}
+  }
+  /* The natural voice (prep-voice.js): the first tap of Play starts its one-time download while the system voice reads on;
+     once it is ready and this phone renders it fast enough, each sentence is spoken by it instead. */
+  function applyVoice() { var V = G.PREP_VOICE; if (V && V.use) V.use(store().lsp.eng || "kokoro"); return V; }
+  function voiceName() { var V = G.PREP_VOICE; if (!V || !V.info) return "Voice"; var i = V.info(V.current()); return i.name; }
+  function naturalStart() {
+    var V = applyVoice();
+    if (!V || V.current() === "system" || !V.available()) return;
+    V.unlock();
+    if (V.state() !== "none" && V.state() !== "error") return;
+    L.vdl = 0; drawBar();
+    var last = 0;
+    V.download(function (p) { var pc = Math.floor(p * 100); if ((pc !== last && pc - last >= 2) || pc === 100) { last = pc; L.vdl = p; drawBar(); } })
+      .then(function () { L.vdl = null; drawBar(); }, function () { L.vdl = null; drawBar(); });
+  }
+  var voiceIx = null;   // the chosen native voice index (-1: system default), read once
+  function nativeVoice(P) {
+    if (voiceIx !== null) return Promise.resolve(voiceIx);
+    if (!P.getSupportedVoices) { voiceIx = -1; return Promise.resolve(-1); }
+    return P.getSupportedVoices().then(function (r) { voiceIx = bestVoice(r && r.voices); return voiceIx; }, function () { voiceIx = -1; return -1; });
+  }
+  function webVoice() {
+    try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
   }
   var voiceIx = null;   // the chosen native voice index (-1: system default), read once
   function nativeVoice(P) {
@@ -424,6 +448,8 @@
       if (n >= chunks.length) { done(); return; }
       var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
       try {
+        var V = applyVoice();
+        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, fail); return; }
         var P = plugin();
         if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
         var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
@@ -443,7 +469,7 @@
       L.playing = false; drawBar();
     });
   }
-  function setPlaying(on) { L.playing = on && canSpeak(); if (L.playing) narrate(); else stopVoice(); drawBar(); }
+  function setPlaying(on) { L.playing = on && canSpeak(); if (L.playing) { naturalStart(); narrate(); } else stopVoice(); drawBar(); }
 
   /* ---------- drawing ---------- */
   function ico(n) { return host.ico(n); }
@@ -731,7 +757,7 @@
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
       (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +
         '<span class="pn-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>' +
-        '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>" : "") +
+        (L.vdl != null ? '<span class="pn-lsn-dl" role="status" aria-label="Downloading the natural voice, ' + Math.round(L.vdl * 100) + ' percent">' + voiceName() + " " + Math.round(L.vdl * 100) + "%</span>" : '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>") : "") +
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
@@ -744,6 +770,8 @@
   }
   function readerHtml() {
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
+    var V0 = G.PREP_VOICE, vi = V0 && V0.info ? V0.info(V0.current()) : null, vslow = vi && vi.id !== "system" && vi.state === "ready" && vi.rtf > 1.3;
+    var voiceBtn = canSpeak() && vi && V0.ids().length > 2 ? '<button type="button" class="pn-lsn-auto pn-lsn-voice" data-act="l-voice" aria-label="Narration voice: ' + vi.name + (vslow ? ", too slow on this phone, using the system voice" : "") + '. Tap to change">' + vi.name + (vslow ? " (slow)" : "") + "</button>" : "";
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
     var anim = L.dir ? (L.dir > 0 ? " fwd" : " rev") : "";
     var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
@@ -756,7 +784,7 @@
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
     // Share IDs (prep-ids.js): share in the bar, the lesson's ID at the foot of the page (tap copies).
     var IDS = G.PREP_IDS, lid = IDS ? IDS.ofLesson(L.key) : null, shareB = lid ? IDS.shareBtn(lid, "Share this lesson") : "";
-    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", autoBtn && shareB ? '<span class="pn-acts">' + autoBtn + shareB + "</span>" : autoBtn || shareB) +
+    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", (voiceBtn || autoBtn) && shareB ? '<span class="pn-acts">' + voiceBtn + autoBtn + shareB + "</span>" : voiceBtn + autoBtn || shareB) +
       '<div class="pn-lsn-prog" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="' + (L.i + 1) + '">' +
       pg.map(function (x, k) { var ix = typeof x !== "number" || interactive(les.steps[x]); return "<i" + (k <= L.i || ix ? ' class="' + (k <= L.i ? "on" : "") + (k === L.i ? " cur" : "") + (ix ? " ix" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn">' + body +
@@ -974,6 +1002,7 @@
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
+    try { var Vo = applyVoice(); if (Vo && Vo.available()) Vo.init(); } catch (e) {}   // a voice downloaded before loads from the phone now
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
@@ -1006,6 +1035,14 @@
     if (a === "l-prev") { if (L.i) go(L.i - 1); return; }
     if (a === "l-play") return setPlaying(!L.playing);
     if (a === "l-speed") { var s = store(); s.lsp.r = nextSpeed(s.lsp.r); host.save(); if (L.playing) narrate(); return drawBar(); }
+    if (a === "l-voice") {
+      var Vz = G.PREP_VOICE, sv = store(), ids = Vz.ids(), nx = ids[(ids.indexOf(sv.lsp.eng || "kokoro") + 1) % ids.length];
+      sv.lsp.eng = nx; host.save(); Vz.use(nx);
+      var was = L.playing; stopVoice(); L.vdl = null;
+      if (nx !== "system" && Vz.available() && (Vz.state() === "none" || Vz.state() === "error")) naturalStart();
+      if (was) narrate();
+      return draw("[data-act=l-voice]");
+    }
     if (a === "l-auto") { var s2 = store(); s2.lsp.au = s2.lsp.au ? 0 : 1; host.save(); return draw("[data-act=l-auto]"); }
     if (a === "l-zoom") {
       // The shared PrepNucleus image viewer when it is loaded (window.PREP_VIEWER.open), else the reader's own enlarge.
@@ -1035,7 +1072,7 @@
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
     return false;
   }
-  function leave() { L.playing = false; L.zoom = null; stopVoice(); }
+  function leave() { L.playing = false; L.zoom = null; stopVoice(); try { if (G.PREP_VOICE) G.PREP_VOICE.release(); } catch (e) {} }
   /* Taps on the interactive parts. Each updates its own part in place and keeps the focus on the control. */
   function ixAct(a, b) {
     var r = host.root && host.root(), p = page(), step = typeof p === "number" ? L.les.steps[p] : null, v = step && step.vis, ans = ansOf(L.i), k = +b.getAttribute("data-k");
