@@ -1927,7 +1927,28 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 .pn-root .pn-vtbl.pn-tight tbody th { min-width: 0; }
 .pn-root .pn-pearl-tablewrap.pn-tight :is(th, td) { padding-inline: 8px; min-width: 0; }
 
-.pn-root .pn-lsn-dl { flex: 0 0 auto; min-height: 44px; padding: 0 14px; border-radius: var(--pn-r-pill); display: inline-flex; align-items: center; background: var(--pn-s1); color: var(--pn-mut); font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; }
+/* One-time natural voice download: a card floating just above the lesson bar. */
+.pn-root .pn-lsn-bar > .pn-vdl { position: absolute; left: 12px; right: 12px; bottom: calc(100% + 10px); padding: 12px 14px 12px; border-radius: var(--pn-r-lg); background: var(--pn-s1); border: 1px solid var(--pn-edge); animation: pn-vdl-in var(--pn-d-base, 260ms) var(--pn-ease, ease) both; }
+.pn-root .pn-vdl-row { display: flex; align-items: center; gap: 12px; }
+.pn-root .pn-vdl-ic { flex: 0 0 auto; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--pn-pri-soft); color: var(--pn-pri); }
+.pn-root .pn-vdl-ic .pn-wave { height: 14px; gap: 2px; }
+.pn-root .pn-vdl-ic .pn-wave i { width: 2.5px; height: 14px; opacity: 1; animation: pn-wave 820ms ease-in-out infinite alternate; }
+.pn-root .pn-vdl-ic .pn-wave i:nth-child(2n) { animation-delay: -420ms; animation-duration: 700ms; }
+.pn-root .pn-vdl-ic .pn-wave i:nth-child(3) { animation-delay: -160ms; }
+.pn-root .pn-vdl-t { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.pn-root .pn-vdl-t b { font-size: 14px; font-weight: 700; color: var(--pn-text); }
+.pn-root .pn-vdl-t small { font-size: 12px; color: var(--pn-mut); line-height: 1.35; }
+.pn-root .pn-vdl-pc { flex: 0 0 auto; font-size: 15px; font-weight: 750; color: var(--pn-pri); font-variant-numeric: tabular-nums; }
+.pn-root .pn-vdl-track { position: relative; height: 6px; margin-top: 10px; border-radius: var(--pn-r-pill); background: var(--pn-ring-track, var(--pn-s2)); overflow: hidden; }
+.pn-root .pn-vdl-track i { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: var(--pn-pri); transition: width 400ms ease-out; overflow: hidden; }
+.pn-root .pn-vdl-track i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); transform: translateX(-100%); animation: pn-vdl-sheen 1.4s ease-in-out infinite; }
+.pn-root .pn-vdl.ok .pn-vdl-track i::after { animation: none; }
+.pn-root .pn-vdl.ok .pn-vdl-ic { background: var(--pn-ok-bg); color: var(--pn-ok); }
+.pn-root .pn-vdl.ok .pn-vdl-pc { color: var(--pn-ok); }
+.pn-root .pn-vdl.ok .pn-vdl-track i { background: var(--pn-ok); }
+@keyframes pn-vdl-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes pn-vdl-sheen { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-lsn-bar > .pn-vdl, .pn-root .pn-vdl-track i::after, .pn-root .pn-vdl-ic .pn-wave i { animation: none; } .pn-root .pn-vdl-track i { transition: none; } }
 
 /* Read-along: the sentence being spoken in a lesson step. */
 .pn-root .pn-sent { border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-color 220ms ease; }

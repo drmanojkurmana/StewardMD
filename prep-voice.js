@@ -8,11 +8,11 @@
  * file, without WebAssembly or workers, or on any failure the lesson speaks with the system voice.
  * window.SMD_PREP_VOICE = false switches it off (the UI tests do). Pure helpers load under node for tests.
  * API (window.PREP_VOICE): available(), state() none|downloading|loading|ready|error, progress() 0..1, error(), ready(),
- * usable(), rtf(), download(onProgress), init(), unlock(), say(text, rate) -> Promise (resolves when it has been
+ * usable(), rtf(), saved() (downloaded before), download(onProgress), init(), unlock(), say(text, rate) -> Promise (resolves when it has been
  * spoken), prefetch(text), stop(), release(), remove(). */
 (function (G) {
   "use strict";
-  var SR = 24000, BASE = "/vendor/phonon-tts/", RTF_MAX = 1.3, RTF_KEY = "prep_voice_rtf_phonon";
+  var SR = 24000, BASE = "/vendor/phonon-tts/", RTF_MAX = 1.3, RTF_KEY = "prep_voice_rtf_phonon", HAVE_KEY = "prep_voice_have_phonon";
 
   /* ---------- pure ---------- */
   function wavBlob(f32) {
@@ -74,12 +74,20 @@
     if (boot) return boot;
     st.s = "downloading"; st.p = 0; st.err = "";
     boot = load().then(function (t) { tts = t; st.s = "loading"; st.p = 0.99; tell(); return bench(); })
-      .then(function () { st.s = "ready"; st.p = 1; tell(); cbs = []; }, function (e) { boot = null; st.s = "error"; st.err = String(e && e.message || e); cbs = []; throw e; });
+      .then(function () { st.s = "ready"; st.p = 1; keep(); tell(); cbs = []; }, function (e) { boot = null; st.s = "error"; st.err = String(e && e.message || e); cbs = []; throw e; });
     return boot;
   }
+  /* Downloaded once: remember it, and ask the phone to keep this storage so it is not cleared to free space
+     (otherwise iOS and Android may evict Cache API data, and the next Play would download again). */
+  function keep() {
+    try { G.localStorage.setItem(HAVE_KEY, "1"); } catch (e) {}
+    try { var S = G.navigator && G.navigator.storage; if (S && S.persist) S.persist().catch(function () {}); } catch (e) {}
+  }
+  function saved() { try { return G.localStorage.getItem(HAVE_KEY) === "1"; } catch (e) { return false; } }
   // A voice downloaded before loads from the phone when a lesson opens.
   function init() {
     if (!can() || boot || st.s !== "none") return;
+    if (saved()) { download().catch(function () {}); return; }
     G.caches.keys().then(function (ks) { if (ks.some(function (k) { return /phonon/i.test(k); }) && st.s === "none") download().catch(function () {}); }, function () {});
   }
   function unlock() {
@@ -111,13 +119,13 @@
     try { if (t && t.dispose) t.dispose(); } catch (e) {}
   }
   function remove() {
-    release(); try { G.localStorage.removeItem(RTF_KEY); } catch (e) {}
+    release(); try { G.localStorage.removeItem(RTF_KEY); G.localStorage.removeItem(HAVE_KEY); } catch (e) {}
     return lib && lib.clearCache ? lib.clearCache() : Promise.resolve();
   }
   G.PREP_VOICE = {
     available: can, state: function () { return st.s; }, progress: function () { return st.p; }, error: function () { return st.err; },
     ready: function () { return st.s === "ready"; }, usable: function () { return st.s === "ready" && !(st.rtf > RTF_MAX); }, rtf: function () { return st.rtf || 0; },
-    download: download, init: init, unlock: unlock, say: say, prefetch: function (t) { if (st.s === "ready") synth(t).catch(function () {}); },
+    download: download, init: init, saved: saved, unlock: unlock, say: say, prefetch: function (t) { if (st.s === "ready") synth(t).catch(function () {}); },
     stop: stop, release: release, remove: remove, _pure: PURE
   };
 })(typeof window !== "undefined" ? window : this);

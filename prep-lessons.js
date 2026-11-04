@@ -464,19 +464,30 @@
     if (!V || !V.available()) return;
     V.unlock();
     if (V.state() !== "none" && V.state() !== "error") return;
-    L.vdl = 0; drawBar();
-    var last = 0;
-    V.download(function (p) { var pc = Math.floor(p * 100); if ((pc !== last && pc - last >= 2) || pc === 100) { last = pc; L.vdl = p; drawBar(); } })
-      .then(function () { L.vdl = null; drawBar(); }, function () { L.vdl = null; drawBar(); });
+    if (V.saved && V.saved()) { V.download().catch(function () {}); return; }   // already on the phone: load quietly, no card
+    L.vdl = 0; L.vok = false; drawBar();
+    V.download(function (p) { L.vdl = p; dlPaint(); })
+      .then(function () {
+        L.vdl = null; L.vok = true; drawBar();
+        G.setTimeout(function () { L.vok = false; drawBar(); }, 1800);
+      }, function () { L.vdl = null; L.vok = false; drawBar(); });
   }
-  var voiceIx = null;   // the chosen native voice index (-1: system default), read once
-  function nativeVoice(P) {
-    if (voiceIx !== null) return Promise.resolve(voiceIx);
-    if (!P.getSupportedVoices) { voiceIx = -1; return Promise.resolve(-1); }
-    return P.getSupportedVoices().then(function (r) { voiceIx = bestVoice(r && r.voices); return voiceIx; }, function () { voiceIx = -1; return -1; });
+  /* The one-time download card above the bar. Progress updates the fill in place, so it glides instead of redrawing. */
+  function dlHtml() {
+    if (L.vdl == null && !L.vok) return "";
+    var pc = L.vok ? 100 : Math.round(L.vdl * 100);
+    return '<div class="pn-vdl' + (L.vok ? " ok" : "") + '" role="status" aria-live="polite">' +
+      '<div class="pn-vdl-row"><span class="pn-vdl-ic" aria-hidden="true">' + (L.vok ? svg(ICO.tick, 16) : '<span class="pn-wave on"><i></i><i></i><i></i><i></i><i></i></span>') + "</span>" +
+      '<span class="pn-vdl-t"><b>' + (L.vok ? "Natural voice ready" : "Getting the natural voice") + "</b><small>" + (L.vok ? "Saved on this phone, works offline" : "One time, 65 MB. The phone voice reads meanwhile.") + "</small></span>" +
+      '<span class="pn-vdl-pc">' + pc + "%</span></div>" +
+      '<div class="pn-vdl-track"><i style="width:' + pc + '%"></i></div></div>';
   }
-  function webVoice() {
-    try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
+  function dlPaint() {
+    var r = host.root && host.root(), el = r && r.querySelector(".pn-vdl");
+    if (!el) { drawBar(); return; }
+    var pc = Math.round(L.vdl * 100), f = el.querySelector(".pn-vdl-track i"), t = el.querySelector(".pn-vdl-pc");
+    if (f) f.style.width = pc + "%";
+    if (t) t.textContent = pc + "%";
   }
   var voiceIx = null;   // the chosen native voice index (-1: system default), read once
   function nativeVoice(P) {
@@ -802,13 +813,13 @@
   function askable() { if (G.PREP_ASK) return true; var T = G.PREP_TEACHER; try { return !!(T && T.explainStep && T.ready && T.ready()); } catch (e) { return false; } }
   function barHtml() {
     var s = store(), last = L.i === pages(L.les).length - 1, speak = canSpeak();
-    return '<div class="pn-lsn-bar" id="pnLsnBar"><div class="pn-lsn-bin">' +
+    return '<div class="pn-lsn-bar" id="pnLsnBar">' + dlHtml() + '<div class="pn-lsn-bin">' +
       (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + (G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.html("mark", { size: 24, cls: "pl-mkai" }) : ic("ask")) + "</button>" : "") +
       '<button type="button" class="pn-ib" data-act="l-prev" aria-label="Previous step"' + (L.i ? "" : " disabled") + ">" + ic("back") + "</button>" +
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
       (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +
         '<span class="pn-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>' +
-        (L.vdl != null ? '<span class="pn-lsn-dl" role="status" aria-label="Downloading the natural voice, ' + Math.round(L.vdl * 100) + ' percent">Voice ' + Math.round(L.vdl * 100) + "%</span>" : '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>") : "") +
+        '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>" : "") +
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
