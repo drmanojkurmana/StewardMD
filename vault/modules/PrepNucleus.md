@@ -140,7 +140,13 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   tap to enlarge (opaque overlay, tap again for 2.2x, back/Escape closes it first). Finish: +10 XP a step on the first
   finish only, then "3 quick questions" through the normal runner (`study` mode: FSRS cards, mistakes), "Read again".
 - **Narration:** `Capacitor.Plugins.TextToSpeech` on native (`lang en-IN`, `rate` = speed), `speechSynthesis` on the
-  web; nothing leaves the phone. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
+  web; nothing leaves the phone.
+  Text goes through `sayText` first (mg, %, >, markdown spoken as words) and is read a sentence at a time (`sayChunks`,
+  160 ms rest between them). The voice is `bestVoice`: an installed on-device English voice whose identifier says
+  premium, enhanced, neural or Siri (iOS `voiceURI` is the AVSpeechSynthesisVoice identifier; the plugin's `voice` is an
+  index into that list); compact, Eloquence, novelty and network voices (`localService:false`) are never chosen, and
+  with none installed the en-IN system default stays. The better voices are a user download (iOS Settings,
+  Accessibility, Spoken Content, Voices), so a phone with only compact voices sounds as before. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
   reader, closing PrepNucleus or Ask MaiK stops it. No voice available: the play and speed controls are not drawn.
 - **Data and offline:** lessons, the index and `prep/lessons/media/*` ship in www (`scripts/build-www.sh`); each lesson
   is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. **Generated lessons are served from R2**
