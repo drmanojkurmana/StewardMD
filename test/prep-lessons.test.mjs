@@ -302,3 +302,22 @@ test("startPage: a link into the lesson opens at its step, a bad step keeps the 
   assert.equal(P.startPage(les, undefined, 1), 1, "no step, no change");
   assert.equal(P.startPage(les, null, 0), 0);
 });
+
+test("narration: units and symbols are spoken as words, sentences are read one at a time", () => {
+  assert.equal(P.sayText("Give **TMP-SMX** 1500 mg daily, CD4+ > 200/uL and 7%."), "Give TMP-SMX 1500 milligrams daily, CD4+ greater than 200 per microlitre and 7 percent.");
+  assert.equal(P.sayText("1.5 mg/kg"), "1.5 milligrams per kilogram");
+  const c = P.sayChunks("Give TMP-SMX 1 DS tablet 3 times weekly. Atovaquone 1.5 g is the alternative, for example in adults. Done.");
+  assert.equal(c.length, 2, "a decimal never splits and a short tail joins the sentence before it");
+  assert.ok(c[0].endsWith("weekly.") && /1\.5 grams/.test(c[1]));
+  assert.deepEqual(P.sayChunks(""), []);
+});
+
+test("narration: the voice picker takes a premium or enhanced on-device English voice and never a network or robotic one", () => {
+  const v = (name, lang, id, local) => ({ name, lang, voiceURI: id, localService: local !== false });
+  const vs = [v("Rishi", "en-IN", "com.apple.voice.compact.en-IN.Rishi"), v("Eddy", "en-US", "com.apple.eloquence.en-US.Eddy"), v("Ava", "en-US", "com.apple.voice.premium.en-US.Ava"), v("Isha", "en-IN", "com.apple.voice.enhanced.en-IN.Isha"), v("Net", "en-IN", "premium-net", false)];
+  assert.equal(P.bestVoice(vs), 2, "premium US beats enhanced Indian (quality first)");
+  assert.equal(P.bestVoice(vs.slice(0, 2)), -1, "only compact and robotic voices: keep the system default");
+  assert.equal(P.bestVoice(vs.slice(3)), 0, "enhanced Indian is taken");
+  assert.equal(P.bestVoice(vs.slice(4)), -1, "a voice that needs the network is never used");
+  assert.equal(P.bestVoice([v("Hindi", "hi-IN", "com.apple.voice.premium.hi-IN.Lekha")]), -1);
+});
