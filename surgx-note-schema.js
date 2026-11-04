@@ -352,8 +352,8 @@
           f("deliveryTime", "Time of delivery and method", {"type": "text", "required": true, "aiFillable": false, "ph": "hh:mm; cephalic / breech / forceps / vacuum"}),
           f("placenta", "Placenta delivery and completeness", {"type": "text", "aiFillable": true, "ph": "Controlled cord traction; complete"}),
           f("uterineClosure", "Uterine closure layers", {"type": "text", "required": true, "aiFillable": true, "ph": "Two layers, suture used"}),
-          f("ebl", "Measured blood loss (mL)", {"type": "text", "required": true, "aiFillable": false, "help": "Measured, not estimated"}),
-          f("cordGases", "Paired cord gases", {"type": "text", "aiFillable": false, "ph": "Arterial and venous pH, base excess, or not taken"})
+          f("cordGases", "Paired cord gases", {"type": "text", "aiFillable": false, "ph": "Arterial and venous pH, base excess, or not taken"}),
+          f("qbl", "Quantified blood loss (mL), weighed and measured", {"type": "text", "required": false, "aiFillable": false, "help": "Weigh swabs and measure suction. Visual estimates under-read obstetric haemorrhage."})
         ]
       }
     },
