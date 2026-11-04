@@ -1,7 +1,7 @@
 /* PrepNucleus natural voice: Phonon 31M (Gradium, Apache-2.0, 31M parameters, 64.5 MB at 8 bits), one voice (the model's
  * default), run by the vendored phonon-tts WebAssembly runtime (vendor/phonon-tts, MIT or Apache-2.0) in a module worker.
  * It reads the text itself, so there is no phonemizer or lexicon. The model downloads from Hugging Face (pinned commit)
- * on the first tap of Play in a lesson, is kept in the Cache API and works offline after that; no text or audio leaves
+ * on the first tap of Play in a lesson (the lesson waits for it, then reads with it), is kept in the Cache API and works offline after that; no text or audio leaves
  * the phone. One <audio> element plays each rendered sentence (WebAudio is muted by the iOS silent switch), unlocked inside
  * the Play tap. After loading, a short phrase is timed once: slower than RTF_MAX (seconds of work per second of speech)
  * and the voice would stall between sentences, so usable() is false and the lesson keeps the system voice. Without this

@@ -457,20 +457,23 @@
     try { var P = plugin(); if (P && P.stop) P.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
     try { if (G.PREP_VOICE) G.PREP_VOICE.stop(); } catch (e) {}
   }
-  /* The natural voice (prep-voice.js): the first tap of Play starts its one-time download while the system voice reads on;
-     once it is ready and this phone renders it fast enough, each sentence is spoken by it instead. */
-  function naturalStart() {
+  /* The natural voice (prep-voice.js) reads from the first word: the first tap of Play downloads it once (the card above
+     the bar shows progress) and reading starts when it is ready; a voice downloaded before loads quietly. The system voice
+     reads only when the natural voice cannot run on this phone (unsupported, failed, or too slow). Calls go() when reading
+     can start; a pause or a page change in the meantime cancels it through L.tok. */
+  function naturalStart(start) {
     var V = G.PREP_VOICE;
-    if (!V || !V.available()) return;
+    if (!V || !V.available()) { start(); return; }
     V.unlock();
-    if (V.state() !== "none" && V.state() !== "error") return;
-    if (V.saved && V.saved()) { V.download().catch(function () {}); return; }   // already on the phone: load quietly, no card
-    L.vdl = 0; L.vok = false; drawBar();
-    V.download(function (p) { L.vdl = p; dlPaint(); })
+    var s = V.state();
+    if (s === "ready" || s === "error") { start(); return; }
+    var tok = L.tok, card = !(V.saved && V.saved()) && s === "none";
+    if (card) { L.vdl = V.progress ? V.progress() : 0; L.vok = false; drawBar(); }
+    V.download(card ? function (p) { L.vdl = p; dlPaint(); } : null)
       .then(function () {
-        L.vdl = null; L.vok = true; drawBar();
-        G.setTimeout(function () { L.vok = false; drawBar(); }, 1800);
-      }, function () { L.vdl = null; L.vok = false; drawBar(); });
+        if (card) { L.vdl = null; L.vok = true; drawBar(); G.setTimeout(function () { L.vok = false; drawBar(); }, 1800); }
+      }, function () { L.vdl = null; L.vok = false; drawBar(); })
+      .then(function () { if (tok === L.tok && L.playing) start(); });
   }
   /* The one-time download card above the bar. Progress updates the fill in place, so it glides instead of redrawing. */
   function dlHtml() {
@@ -478,7 +481,7 @@
     var pc = L.vok ? 100 : Math.round(L.vdl * 100);
     return '<div class="pn-vdl' + (L.vok ? " ok" : "") + '" role="status" aria-live="polite">' +
       '<div class="pn-vdl-row"><span class="pn-vdl-ic" aria-hidden="true">' + (L.vok ? svg(ICO.tick, 16) : '<span class="pn-wave on"><i></i><i></i><i></i><i></i><i></i></span>') + "</span>" +
-      '<span class="pn-vdl-t"><b>' + (L.vok ? "Natural voice ready" : "Getting the natural voice") + "</b><small>" + (L.vok ? "Saved on this phone, works offline" : "One time, 65 MB. The phone voice reads meanwhile.") + "</small></span>" +
+      '<span class="pn-vdl-t"><b>' + (L.vok ? "Natural voice ready" : "Getting the natural voice") + "</b><small>" + (L.vok ? "Saved on this phone, works offline" : "One time, 65 MB. Reading starts when it is ready.") + "</small></span>" +
       '<span class="pn-vdl-pc">' + pc + "%</span></div>" +
       '<div class="pn-vdl-track"><i style="width:' + pc + '%"></i></div></div>';
   }
@@ -531,7 +534,7 @@
       L.playing = false; drawBar();
     }, map ? function (k) { hlSet(map[k]); } : null);
   }
-  function setPlaying(on) { L.playing = on && canSpeak(); if (L.playing) { naturalStart(); narrate(); } else stopVoice(); drawBar(); }
+  function setPlaying(on) { L.playing = on && canSpeak(); stopVoice(); if (L.playing) naturalStart(narrate); drawBar(); }
 
   /* ---------- drawing ---------- */
   function ico(n) { return host.ico(n); }
@@ -949,7 +952,7 @@
   function go(i, keepVoice) {
     L.dir = i > L.i ? 1 : -1; L.i = i; save();
     draw(L.dir > 0 ? "[data-act=l-next]" : "[data-act=l-prev]");
-    if (L.playing) narrate(); else if (!keepVoice) stopVoice();
+    if (L.playing) { stopVoice(); naturalStart(narrate); } else if (!keepVoice) stopVoice();
   }
   function next() {
     if (L.i < pages(L.les).length - 1) return go(L.i + 1);
