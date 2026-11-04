@@ -3,186 +3,192 @@
  "module": "scc-o2-delivery",
  "subject": "ss-critical-care",
  "title": "Oxygen delivery and tissue oxygenation",
- "minutes": 5,
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Tissues depend on a continuous supply of oxygen, and the circulation normally keeps delivery well ahead of what cells use. **Arterial oxygen content** (CaO2) is the total oxygen carried in arterial blood. It has two parts: oxygen bound to **haemoglobin** and a small **dissolved fraction** that rises with arterial partial pressure. **Oxygen delivery** (DO2) is **cardiac output** multiplied by CaO2, so anything that lowers either haemoglobin, saturation or output reduces the oxygen reaching tissues.",
-   "say": "Tissues depend on a continuous supply of oxygen, and the circulation normally keeps delivery well ahead of what cells use. Arterial oxygen content, or CaO2, is the total oxygen carried in arterial blood. It has two parts: oxygen bound to haemoglobin, and a small dissolved fraction that rises with arterial partial pressure. Oxygen delivery, or DO2, is cardiac output multiplied by CaO2. So anything that lowers haemoglobin, saturation or output reduces the oxygen reaching tissues.",
+   "tx": "**Arterial oxygen content** equals 1.34 times **haemoglobin** times arterial saturation, plus 0.003 times PaO2. The dissolved fraction is small, so haemoglobin and saturation decide content. In clinical practice, dissolved oxygen contributes only a minor fraction to total carriage under room air. Optimising oxygen saturation and red cell concentration remains the primary method to preserve oxygenation.",
+   "say": "Arterial oxygen content equals 1 point 34 times haemoglobin times arterial saturation, plus 0 point 003 times PaO2. The dissolved fraction is small, so haemoglobin and saturation decide content. In clinical practice, dissolved oxygen contributes only a minor fraction to total carriage under room air. Optimising oxygen saturation and red cell concentration remains the primary method to preserve oxygenation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hemoglobin-allostery-and-oxygen-delivery-fig1.webp",
+    "alt": "Hemoglobin allostery and oxygen dissociation curve with P50 and 2,3-BPG shifts",
+    "caption": "Hemoglobin allostery and oxygen dissociation curve with P50 and 2,3-BPG shifts",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Oxygen delivery** is cardiac output times arterial content. **Oxygen uptake** is cardiac output times the arterial to venous content difference. The normal **oxygen extraction ratio** is about 25%, and **mixed venous saturation** is about 65% to 75%. When delivery decreases, tissues compensate by increasing extraction to maintain consumption until a critical delivery threshold is reached.",
+   "say": "Oxygen delivery is cardiac output times arterial content. Oxygen uptake is cardiac output times the arterial to venous content difference. The normal oxygen extraction ratio is about 25%, and mixed venous saturation is about 65% to 75%. When delivery decreases, tissues compensate by increasing extraction to maintain consumption until a critical delivery threshold is reached.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Term",
-     "Formula or value",
-     "Role"
+     "Variable",
+     "Normal Value",
+     "Physiological Significance"
     ],
     "rows": [
      [
-      "CaO2",
-      "1.34 x Hb x SaO2 + 0.003 x PaO2",
-      "Oxygen content of arterial blood"
+      "Oxygen delivery (DO2)",
+      "900-1100 mL/min",
+      "Global rate of oxygen transport to microcirculation"
      ],
      [
-      "Bound fraction",
-      "1.34 x Hb x SaO2",
-      "Most oxygen, carried by haemoglobin"
+      "Oxygen uptake (VO2)",
+      "200-300 mL/min",
+      "Whole body cellular oxygen consumption"
      ],
      [
-      "Dissolved fraction",
-      "0.003 x PaO2",
-      "Small share, rises with PaO2"
+      "Oxygen extraction ratio",
+      "25% (20% to 30%)",
+      "Fraction of delivered oxygen utilized by tissues"
      ],
      [
-      "DO2",
-      "CO x CaO2 (x10 for units)",
-      "Oxygen delivered per minute"
+      "Mixed venous saturation",
+      "65% to 75%",
+      "Reserve oxygen returning from systemic circulation"
      ]
     ]
    }
   },
   {
-   "tx": "This figure links the **oxygen delivery** equation to the Fick principle, showing how haemoglobin, saturation and cardiac output set the ceiling for tissues. Follow the extraction ratio up to its **critical threshold**, where consumption starts to fall with delivery. Then sort each hypoxia pattern by whether the fault lies in lungs, blood, flow or cellular use.",
-   "say": "Rebuild the delivery equation from its parts and ask which part fails in anaemia, hypoxia and low output states. Watch extraction rise as delivery falls and mark where compensation runs out. Then place each hypoxia name at its faulty link and check venous saturation behaviour beside it.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-o2-delivery-fig1.webp",
-    "alt": "Oxygen delivery and consumption equations with the Fick principle, oxygen extraction ratio and critical delivery threshold, plus hypoxic, anaemic, stagnant and histotoxic hypoxia.",
-    "caption": "Oxygen delivery equation, Fick principle and types of hypoxia",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Oxygen use is judged by **oxygen consumption** (VO2), the amount tissues actually take up each minute. The share of delivered oxygen that tissues extract is the **oxygen extraction ratio** (O2ER). At rest the body keeps this ratio modest, leaving a reserve. While delivery stays adequate, consumption tracks demand. Once delivery drops past a **critical threshold**, extraction can no longer compensate and consumption begins to fall with delivery.",
-   "say": "Oxygen use is judged by oxygen consumption, usually written VO2, which is the amount tissues actually take up each minute. The share of delivered oxygen that tissues extract is the oxygen extraction ratio. At rest the body keeps that ratio modest, which leaves a reserve. While delivery stays adequate, consumption tracks demand. Once delivery falls past a critical threshold, extraction can no longer make up the difference, and consumption begins to fall along with delivery.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Reduced oxygen delivery"
-     },
-     {
-      "id": "b",
-      "label": "Tissues extract a larger share"
-     },
-     {
-      "id": "c",
-      "label": "O2ER rises"
-     },
-     {
-      "id": "d",
-      "label": "Critical delivery threshold reached"
-     },
-     {
-      "id": "e",
-      "label": "Consumption falls with delivery"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Venous blood reveals how much oxygen tissues left behind after extraction. **Mixed venous saturation** (SvO2) is sampled from the pulmonary artery and reflects global balance between supply and demand. **Central venous saturation** (ScvO2) comes from the superior vena cava and typically reads somewhat lower. A falling value points towards poor delivery or rising extraction, making ScvO2 the practical bedside surrogate.",
-   "say": "Venous blood reveals how much oxygen tissues left behind after extraction. Mixed venous saturation, SvO2, is sampled from the pulmonary artery and reflects global balance between supply and demand. Central venous saturation, ScvO2, comes from the superior vena cava and typically reads somewhat lower. A falling value points towards poor delivery or rising extraction, making ScvO2 the practical bedside surrogate.",
+   "tx": "**Central venous oxygen saturation** is not the same measurement as **mixed venous saturation**. A low central venous saturation still means delivery is short of demand. True mixed blood is sampled strictly from the pulmonary artery and contains coronary sinus drainage. Central venous blood comes from the superior vena cava and typically measures slightly higher or lower depending on cerebral metabolism.",
+   "say": "Central venous oxygen saturation is not the same measurement as mixed venous saturation. A low central venous saturation still means delivery is short of demand. True mixed blood is sampled strictly from the pulmonary artery and contains coronary sinus drainage. Central venous blood comes from the superior vena cava and typically measures slightly higher or lower depending on cerebral metabolism.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "SvO2",
+     "title": "Central venous saturation",
      "points": [
-      "Sampled from the pulmonary artery",
-      "Reflects global oxygen balance",
-      "Reference measure for whole body"
+      "Sampled from superior vena cava line",
+      "Reflects head and upper body extraction",
+      "Practical surrogate for global balance"
      ]
     },
     "right": {
-     "title": "ScvO2",
+     "title": "Mixed venous saturation",
      "points": [
-      "Sampled from the superior vena cava",
-      "Usually reads somewhat lower",
-      "Practical bedside surrogate"
+      "Sampled from pulmonary artery port",
+      "Includes coronary sinus desaturated blood",
+      "Gold standard reference for whole body"
      ]
     }
    }
   },
   {
-   "tx": "**Dysoxia** means tissues are unable to use oxygen even when delivery looks adequate. Causes include cyanide poisoning, which blocks cytochrome oxidase, and severe sepsis with mitochondrial dysfunction. Carbon monoxide is a separate problem, because it binds haemoglobin and makes pulse oximetry read falsely normal. In dysoxia, lactate may rise while DO2 and ScvO2 look normal or high.",
-   "say": "Dysoxia means tissues cannot use oxygen even when delivery looks adequate. Causes include cyanide poisoning, which blocks cytochrome oxidase, and severe sepsis with mitochondrial dysfunction. Carbon monoxide is a separate problem, because it binds haemoglobin and can make pulse oximetry read falsely normal. In dysoxia, lactate may rise while ScvO2 looks normal or high.",
+   "tx": "A venous to arterial **PCO2 gap** above 6 mmHg means blood flow is low even when venous oxygen saturation looks acceptable. Stagnant microvascular blood flow allows carbon dioxide generated by cellular respiration to accumulate in the capillary bed. A widened venoarterial carbon dioxide difference indicates persistent systemic hypoperfusion despite normal venous oxygen values.",
+   "say": "A venous to arterial PCO2 gap above 6 mmHg means blood flow is low even when venous oxygen saturation looks acceptable. Stagnant microvascular blood flow allows carbon dioxide generated by cellular respiration to accumulate in the capillary bed. A widened venoarterial carbon dioxide difference indicates persistent systemic hypoperfusion despite normal venous oxygen values.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Oxygen delivered"
-     },
-     {
-      "id": "b",
-      "label": "Cell cannot use it"
-     },
-     {
-      "id": "c",
-      "label": "Lactate rises"
-     },
-     {
-      "id": "d",
-      "label": "ScvO2 normal or high"
-     }
+    "kind": "table",
+    "cols": [
+     "PCO2 Difference",
+     "Threshold Value",
+     "Clinical Interpretation"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "Normal gap",
+      "Under 6 mmHg",
+      "Adequate tissue microvascular blood flow velocity"
      ],
      [
-      "b",
-      "c"
+      "Widened gap",
+      "Above 6 mmHg",
+      "Microcirculatory stagnation and persistent low flow state"
      ],
      [
-      "b",
-      "d"
+      "Fick principle for CO2",
+      "Inversely related",
+      "CO2 clearance slows as cardiac index drops"
      ]
     ]
    }
+  },
+  {
+   "tx": "**Type A** lactic acidosis is hypoperfusion. **Type B** lactic acidosis occurs with adrenaline, metformin, liver failure, or malignancy, so a high **lactate** is not proof of low flow. In severe sepsis and septic shock, non-hypoxic mechanisms frequently drive hyperlactataemia through beta2 adrenergic stimulation and impaired hepatic clearance rather than tissue dysoxia alone.",
+   "say": "Type A lactic acidosis is hypoperfusion. Type B lactic acidosis occurs with adrenaline, metformin, liver failure, or malignancy, so a high lactate is not proof of low flow. In severe sepsis and septic shock, non-hypoxic mechanisms frequently drive hyperlactataemia through beta2 adrenergic stimulation and impaired hepatic clearance rather than tissue dysoxia alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type A lactic acidosis",
+     "points": [
+      "Driven by systemic tissue hypoperfusion",
+      "Anaerobic glycolysis generates excess lactate",
+      "Seen in cardiogenic, hypovolaemic and septic shock"
+     ]
+    },
+    "right": {
+     "title": "Type B lactic acidosis",
+     "points": [
+      "Occurs without overt cellular hypoxia",
+      "Accelerated glycolysis from catecholamines or toxins",
+      "Impaired hepatic clearance from dysfunction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The default ICU red cell **transfusion threshold** is a haemoglobin of 7 g/dL. **TRICC** and **TRISS** found a restrictive strategy as safe as a liberal strategy in the patients they enrolled. Restrictive transfusion decreases viral transmission risks, volume overload, and transfusion-related acute lung injury without increasing mortality or ischemic complications in critically ill populations.",
+   "say": "The default ICU red cell transfusion threshold is a haemoglobin of 7 g/dL. TRICC and TRISS found a restrictive strategy as safe as a liberal strategy in the patients they enrolled. Restrictive transfusion decreases viral transmission risks, volume overload, and transfusion-related acute lung injury without increasing mortality or ischemic complications in critically ill populations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial Name",
+     "Patient Cohort",
+     "Transfusion Threshold Comparison"
+    ],
+    "rows": [
+     [
+      "TRICC trial",
+      "General ICU patients",
+      "Restrictive threshold 7 g/dL equivalent to liberal 10 g/dL"
+     ],
+     [
+      "TRISS trial",
+      "Septic shock cohort",
+      "Threshold 7 g/dL yielded similar 90-day survival"
+     ],
+     [
+      "Default threshold",
+      "Critically ill adults",
+      "7 g/dL target avoids transfusion-related adverse events"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute coronary syndrome** is the setting where a higher transfusion threshold is still debated. The **MINT** trial did not show that a restrictive strategy was better than a liberal strategy. Patients with acute myocardial infarction may benefit from higher oxygen carrying capacity, and liberal thresholds maintaining haemoglobin around 10 g/dL showed trends towards reduced recurrent infarction.",
+   "say": "Acute coronary syndrome is the setting where a higher transfusion threshold is still debated. The MINT trial did not show that a restrictive strategy was better than a liberal strategy. Patients with acute myocardial infarction may benefit from higher oxygen carrying capacity, and liberal thresholds maintaining haemoglobin around 10 g/dL showed trends towards reduced recurrent infarction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MINT restrictive strategy",
+     "points": [
+      "Transfusion triggered below 7 to 8 g/dL",
+      "Did not demonstrate clinical superiority",
+      "Trended towards more recurrent cardiac events"
+     ]
+    },
+    "right": {
+     "title": "MINT liberal strategy",
+     "points": [
+      "Transfusion maintained haemoglobin at 10 g/dL",
+      "Preserves oxygen carriage to ischaemic myocardium",
+      "Remains an individualised clinical decision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dysoxia** means the cell cannot use delivered oxygen, as in **cyanide** poisoning. Venous saturation stays high while lactate rises, and more oxygen delivery does not correct it. Uncoupling of oxidative phosphorylation or inhibition of cytochrome c oxidase paralyzes cellular respiration, leading to profound metabolic acidosis despite supranormal tissue oxygen levels.",
+   "say": "Dysoxia means the cell cannot use delivered oxygen, as in cyanide poisoning. Venous saturation stays high while lactate rises, and more oxygen delivery does not correct it. Uncoupling of oxidative phosphorylation or inhibition of cytochrome c oxidase paralyzes cellular respiration, leading to profound metabolic acidosis despite supranormal tissue oxygen levels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-o2-delivery-fig1.webp",
+    "alt": "Oxygen delivery and consumption equations with Fick principle and critical extraction threshold",
+    "caption": "Oxygen delivery and consumption equations with Fick principle and critical extraction threshold",
+    "ar": 1.3393
+   }
   }
- ],
- "quiz": [
-  "q_cb8f84912f6e",
-  "q_77b1b6f9df6d",
-  "q_04e00ede5c6a"
- ],
- "src": [],
- "refs": [
-  "AABB Clinical Practice Guidelines for Red Blood Cell Transfusion (2016)",
-  "Guyton and Hall Textbook of Medical Physiology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 26
- }
+ ]
 }

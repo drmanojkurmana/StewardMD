@@ -1,0 +1,190 @@
+{
+ "v": 1,
+ "module": "scc-niv-hfno",
+ "subject": "ss-critical-care",
+ "title": "Non-invasive ventilation and high flow nasal oxygen",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In **FLORALI**, **high flow nasal oxygen** did not clearly cut intubation in the whole group, but 90 day mortality was lower than with **non-invasive ventilation** or standard oxygen in acute hypoxaemic respiratory failure. High flow delivers heated humidified gas up to 60 L/min, washing out nasopharyngeal dead space and generating modest positive end-expiratory pressure.",
+   "say": "In FLORALI, high flow nasal oxygen did not clearly cut intubation in the whole group, but 90 day mortality was lower than with non-invasive ventilation or standard oxygen in acute hypoxaemic respiratory failure. High flow delivers heated humidified gas up to 60 L/min, washing out nasopharyngeal dead space and generating modest positive end-expiratory pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-intubation-cpap.webp",
+    "alt": "Continuous positive airway pressure interface and positive end-expiratory pressure support",
+    "caption": "Continuous positive airway pressure interface and positive end-expiratory pressure support",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "The **ROX index** is SpO2 over FiO2, divided by respiratory rate. A value below 3.85 at 12 hours predicts high flow failure. A value above 4.88 suggests success. Serial calculation of this ratio at 2, 6, and 12 hours identifies failing patients early, preventing delayed emergent intubation associated with increased ICU mortality.",
+   "say": "The ROX index is SpO2 over FiO2, divided by respiratory rate. A value below 3 point 85 at 12 hours predicts high flow failure. A value above 4 point 88 suggests success. Serial calculation of this ratio at 2, 6, and 12 hours identifies failing patients early, preventing delayed emergent intubation associated with increased ICU mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ROX Index Calculation",
+     "Threshold Range",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Formula",
+      "(SpO2 / FiO2) / RR",
+      "Bedside score predicting high flow therapy outcome"
+     ],
+     [
+      "Failure threshold",
+      "Below 3.85 at 12 hours",
+      "High risk of failure; proceed promptly with intubation"
+     ],
+     [
+      "Success threshold",
+      "Above 4.88 at 12 hours",
+      "Favourable response; continue high flow support safely"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Non-invasive ventilation** is first line for a **COPD exacerbation** with **respiratory acidosis** when the pH is about 7.25 to 7.35, and for cardiogenic pulmonary oedema treated with **CPAP**. Bilevel pressure support unloads fatigued ventilatory muscles, lowers arterial carbon dioxide tension, and markedly reduces the need for invasive mechanical ventilation in acute hypercapnic respiratory failure.",
+   "say": "Non-invasive ventilation is first line for a COPD exacerbation with respiratory acidosis when the pH is about 7 point 25 to 7 point 35, and for cardiogenic pulmonary oedema treated with CPAP. Bilevel pressure support unloads fatigued ventilatory muscles, lowers arterial carbon dioxide tension, and markedly reduces the need for invasive mechanical ventilation in acute hypercapnic respiratory failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "COPD exacerbation NIV",
+     "points": [
+      "Indicated for acute respiratory acidosis with pH 7.25 to 7.35",
+      "Provides inspiratory pressure support to augment tidal volume",
+      "Reduces work of breathing and lowers mortality"
+     ]
+    },
+    "right": {
+     "title": "Cardiogenic pulmonary oedema CPAP",
+     "points": [
+      "Continuous positive pressure recruits fluid-filled alveoli",
+      "Reduces left ventricular afterload and increases compliance",
+      "Rapidly relieves acute dyspnoea without invasive tube"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Helmet non-invasive ventilation** can deliver prolonged pressure support with less skin breakdown than a face mask. It still needs a clear plan for intubation if work of breathing stays high. The transparent helmet interface seals around the neck, enabling higher positive end-expiratory pressures with minimal air leaks while avoiding nasal bridge pressure ulceration.",
+   "say": "Helmet non-invasive ventilation can deliver prolonged pressure support with less skin breakdown than a face mask. It still needs a clear plan for intubation if work of breathing stays high. The transparent helmet interface seals around the neck, enabling higher positive end-expiratory pressures with minimal air leaks while avoiding nasal bridge pressure ulceration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Interface Type",
+     "Key Advantages",
+     "Monitoring Requirement"
+    ],
+    "rows": [
+     [
+      "Helmet interface",
+      "Zero nasal bridge pressure; permits high PEEP",
+      "Requires high fresh gas flow to avoid CO2 rebreathing"
+     ],
+     [
+      "Oronasal face mask",
+      "Familiar bedside application",
+      "Prone to facial skin necrosis and substantial air leakage"
+     ],
+     [
+      "Intubation plan",
+      "Strict clinical criteria",
+      "Urgent escalation if tachypnoea and accessory muscle use persist"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Patient self inflicted lung injury** is vigorous spontaneous breathing that overdistends and swings pleural pressure. It is a reason to intubate or deepen sedation, not to watch a tiring patient on high flow. Enormous transpulmonary pressure swings generate cyclic pendelluft gas movement, vascular engorgement, and worsening pulmonary vascular permeability oedema.",
+   "say": "Patient self inflicted lung injury is vigorous spontaneous breathing that overdistends and swings pleural pressure. It is a reason to intubate or deepen sedation, not to watch a tiring patient on high flow. Enormous transpulmonary pressure swings generate cyclic pendelluft gas movement, vascular engorgement, and worsening pulmonary vascular permeability oedema.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "P-SILI pathophysiology",
+     "points": [
+      "Excessive neuroventilatory drive produces high tidal volumes",
+      "Large negative pleural swings amplify lung strain",
+      "Pendelluft shifts gas between dependent and non-dependent zones"
+     ]
+    },
+    "right": {
+     "title": "Clinical management strategy",
+     "points": [
+      "Prompt intubation and controlled mechanical ventilation",
+      "Neuromuscular blockade or deeper sedation abolishes swings",
+      "Prevents irreversible progression to severe biotrauma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After extubation, high flow or non-invasive ventilation prevents **reintubation** in high risk patients, including those with hypercapnia or heart failure. Routine non-invasive ventilation in low risk patients can delay a needed reintubation. Prophylactic application in patients over 65 years provides proven benefit and decreases extubation failure within 48 hours.",
+   "say": "After extubation, high flow or non-invasive ventilation prevents reintubation in high risk patients, including those with hypercapnia or heart failure. Routine non-invasive ventilation in low risk patients can delay a needed reintubation. Prophylactic application in patients over 65 years provides proven benefit and decreases extubation failure within 48 hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Post-Extubation Strategy",
+     "Target Population",
+     "Evidence-Based Outcome"
+    ],
+    "rows": [
+     [
+      "Prophylactic NIV plus HFNO",
+      "High risk: hypercapnia, age over 65, heart failure",
+      "Significantly reduces 72-hour reintubation rate"
+     ],
+     [
+      "Rescue NIV for failed extubation",
+      "Unselected low risk patients",
+      "Delays necessary intubation and increases ICU mortality"
+     ],
+     [
+      "Standard oxygen alone",
+      "Uncomplicated elective extubation",
+      "Sufficient for low risk post-operative cohorts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **HACOR score** is used to combine heart rate, acidosis, consciousness, oxygenation, and respiratory rate to flag non-invasive ventilation failure. A rising score is a prompt to intubate. Assessing the HACOR score within the first two hours of non-invasive support accurately stratifies patients who are unlikely to succeed, preventing catastrophic sudden respiratory arrest.",
+   "say": "The HACOR score is used to combine heart rate, acidosis, consciousness, oxygenation, and respiratory rate to flag non-invasive ventilation failure. A rising score is a prompt to intubate. Assessing the HACOR score within the first two hours of non-invasive support accurately stratifies patients who are unlikely to succeed, preventing catastrophic sudden respiratory arrest.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HACOR components",
+     "points": [
+      "Heart rate tachycardia assessment",
+      "Acidosis measured by arterial pH",
+      "Consciousness via Glasgow Coma Scale",
+      "Oxygenation ratio PaO2/FiO2 and respiratory rate"
+     ]
+    },
+    "right": {
+     "title": "Clinical utility",
+     "points": [
+      "Score above 5 at 1 to 2 hours predicts failure",
+      "Provides objective threshold for escalation",
+      "Prevents delayed emergency endotracheal intubation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Awake prone positioning** improves oxygenation in hypoxaemic patients who are not intubated. It is not a substitute for intubation when work of breathing is unsustainable. Prone posture promotes dorsal lung alveolar recruitment, improves ventilation-perfusion matching, and decreases ventilation heterogeneity, but persistent severe retractions require prompt invasive airway protection.",
+   "say": "Awake prone positioning improves oxygenation in hypoxaemic patients who are not intubated. It is not a substitute for intubation when work of breathing is unsustainable. Prone posture promotes dorsal lung alveolar recruitment, improves ventilation-perfusion matching, and decreases ventilation heterogeneity, but persistent severe retractions require prompt invasive airway protection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/obstructive-sleep-apnoea-fig1.webp",
+    "alt": "Pharyngeal airway collapse during sleep and pneumatic splinting with positive airway pressure",
+    "caption": "Pharyngeal airway collapse during sleep and pneumatic splinting with positive airway pressure",
+    "ar": 1.3333
+   }
+  }
+ ]
+}

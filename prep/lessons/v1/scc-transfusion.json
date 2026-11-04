@@ -2,111 +2,188 @@
  "v": 1,
  "module": "scc-transfusion",
  "subject": "ss-critical-care",
- "title": "Transfusion Medicine and Blood Products: Core Principles for NEET-PG and INI-CET",
- "minutes": 5,
+ "title": "Transfusion medicine and blood products",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Transfusion reactions must be recognised early. **TRALI** presents within six hours with hypoxaemia and bilateral infiltrates without fluid overload, and management is supportive ventilation. **TACO** is volume overload from a transfused unit, typically in the elderly or those with heart failure, and is treated with diuretics. Raised **BNP or NT-proBNP** helps separate TACO from TRALI.",
-   "say": "Transfusion reactions must be recognised early. TRALI presents within six hours with hypoxaemia and bilateral infiltrates without fluid overload, and management is supportive ventilation. TACO is volume overload from a transfused unit, typically in the elderly or those with heart failure, and is treated with diuretics. Raised BNP or NT-proBNP helps separate TACO from TRALI.",
+   "tx": "The default ICU haemoglobin threshold is 7 g/dL, from **TRICC** and from **TRISS** in septic shock. Transfusion above that needs a reason, such as acute bleeding or an unstable coronary syndrome. Restrictive red cell administration minimizes immune modulation, circulatory overload, and allogeneic exposure without compromising patient survival.",
+   "say": "The default ICU haemoglobin threshold is 7 g/dL, from TRICC and from TRISS in septic shock. Transfusion above that needs a reason, such as acute bleeding or an unstable coronary syndrome. Restrictive red cell administration minimizes immune modulation, circulatory overload, and allogeneic exposure without compromising patient survival.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "TRALI",
-     "points": [
-      "Hypoxaemia within six hours",
-      "Bilateral infiltrates, no fluid overload",
-      "Supportive ventilation, avoid diuretics"
-     ]
-    },
-    "right": {
-     "title": "TACO",
-     "points": [
-      "Volume overload, raised BNP",
-      "Elderly or heart failure patients",
-      "Diuretics and slower transfusion"
-     ]
-    }
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-transfusion.webp",
+    "alt": "Blood component therapy indications, packed red blood cells, platelets, fresh frozen plasma and cryoprecipitate",
+    "caption": "Blood component therapy indications, packed red blood cells, platelets, fresh frozen plasma and cryoprecipitate",
+    "ar": 1.3333
    }
   },
   {
-   "tx": "Allergic and anaphylactic reactions need rapid action. Stop the transfusion at once and give **adrenaline** intramuscularly, 0.5 mg in adults, repeated every five minutes if needed. Febrile non-haemolytic reactions are managed with paracetamol and stopping the unit, with antihistamines reserved for allergic features. Under the Indian haemovigilance system, moderate and severe reactions must be reported to the hospital transfusion committee and the national programme.",
-   "say": "Allergic and anaphylactic reactions need rapid action. Stop the transfusion at once and give adrenaline intramuscularly, 0.5 mg in adults, repeated every five minutes if needed. Febrile non-haemolytic reactions are managed with paracetamol and stopping the unit, with antihistamines reserved for allergic features. Under the Indian haemovigilance system, moderate and severe reactions must be reported to the hospital transfusion committee and the national programme.",
+   "tx": "**MINT** did not show that a restrictive strategy was superior to a liberal strategy in **acute myocardial infarction**. Coronary disease is the situation where the threshold is individualised rather than copied from TRICC. Myocardial oxygen extraction is near maximum at baseline, making coronary perfusion uniquely sensitive to acute reductions in blood oxygen carrying capacity.",
+   "say": "MINT did not show that a restrictive strategy was superior to a liberal strategy in acute myocardial infarction. Coronary disease is the situation where the threshold is individualised rather than copied from TRICC. Myocardial oxygen extraction is near maximum at baseline, making coronary perfusion uniquely sensitive to acute reductions in blood oxygen carrying capacity.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Stop transfusion"
-     },
-     {
-      "id": "b",
-      "label": "Adrenaline IM 0.5 mg"
-     },
-     {
-      "id": "c",
-      "label": "Support airway and BP"
-     },
-     {
-      "id": "d",
-      "label": "Report to haemovigilance"
-     }
+    "kind": "table",
+    "cols": [
+     "Patient Population",
+     "Examined Thresholds",
+     "Trial Conclusion"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "General ICU (TRICC)",
+      "7 g/dL restrictive vs 10 g/dL liberal",
+      "Restrictive threshold is safe and reduces transfusions"
      ],
      [
-      "b",
-      "c"
+      "Septic shock (TRISS)",
+      "7 g/dL restrictive vs 9 g/dL liberal",
+      "Equivalent 90-day mortality and organ support days"
      ],
      [
-      "c",
-      "d"
+      "Myocardial infarction (MINT)",
+      "7 to 8 g/dL vs 10 g/dL liberal",
+      "Restrictive not superior; trend towards recurrent ischemia"
      ]
     ]
    }
   },
   {
-   "tx": "Platelet adhesion and aggregation depend on specific surface proteins. **Glycoprotein IIb-IIIa** binds fibrinogen to link platelets together, and its inhibition is the target of several antiplatelet drugs. Activated platelets expose **phosphatidylserine** on their membrane, providing the catalytic surface for prothrombin conversion to thrombin. Dense granules store serotonin, calcium and adenine nucleotides.",
-   "say": "Platelet adhesion and aggregation depend on specific surface proteins. Glycoprotein IIb-IIIa binds fibrinogen to link platelets together, and its inhibition is the target of several antiplatelet drugs. Activated platelets expose phosphatidylserine on their membrane, providing the catalytic surface for prothrombin conversion to thrombin. Dense granules store serotonin, calcium and adenine nucleotides.",
+   "tx": "**TRALI** is non-cardiogenic oedema during or within 6 hours of transfusion, from donor antibody or bioactive lipids. Treatment is oxygen and stopping the product. **Diuretic** is not the treatment. Anti-HLA or anti-HNA antibodies in donor plasma activate recipient pulmonary neutrophils, causing capillary breakdown and alveolar flooding.",
+   "say": "TRALI is non-cardiogenic oedema during or within 6 hours of transfusion, from donor antibody or bioactive lipids. Treatment is oxygen and stopping the product. Diuretic is not the treatment. Anti-HLA or anti-HNA antibodies in donor plasma activate recipient pulmonary neutrophils, causing capillary breakdown and alveolar flooding.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-transfusion-fig1.webp",
-    "alt": "Diagram illustrating platelet aggregation, showing GP IIb-IIIa binding fibrinogen and phosphatidylserine for thrombin generation.",
-    "caption": "Platelet aggregation: key proteins and catalytic surfaces. Image: Andre Berger, CC0/PD, Wikimedia Commons.",
-    "ar": 1.3241
+    "kind": "compare",
+    "left": {
+     "title": "TRALI characteristics",
+     "points": [
+      "Non-cardiogenic pulmonary permeability oedema",
+      "Normal or low central venous and wedge pressures",
+      "Supportive oxygenation and protective ventilation only"
+     ]
+    },
+    "right": {
+     "title": "Diuretic contraindication",
+     "points": [
+      "Diuretics do not address immune capillary leak",
+      "Can precipitate dangerous hypovolaemia and hypotension",
+      "Permanent deferral of implicated multiparous donor"
+     ]
+    }
    }
   },
   {
-   "tx": "Finally, remember the storage and administration rules. A red cell unit must be completed within **four hours** of leaving controlled storage. Always check identity, compatibility and consent before starting, and monitor the patient closely during the first fifteen minutes. Haemovigilance reporting closes the loop by identifying patterns of reactions across the hospital and the national system.",
-   "say": "Finally, remember the storage and administration rules. A red cell unit must be completed within four hours of leaving controlled storage. Always check identity, compatibility and consent before starting, and monitor the patient closely during the first fifteen minutes. Haemovigilance reporting closes the loop by identifying patterns of reactions across the hospital and the national system.",
-   "vis": null
+   "tx": "**TACO** is hydrostatic oedema from the volume and rate of transfusion, often with **hypertension**. It is treated as heart failure, and the next unit is given more slowly. Volume overload elevates left atrial pressures, widening pulse pressure, precipitating pulmonary congestion, and responding rapidly to loop diuretics and upright positioning.",
+   "say": "TACO is hydrostatic oedema from the volume and rate of transfusion, often with hypertension. It is treated as heart failure, and the next unit is given more slowly. Volume overload elevates left atrial pressures, widening pulse pressure, precipitating pulmonary congestion, and responding rapidly to loop diuretics and upright positioning.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "TRALI (Permeability)",
+     "TACO (Hydrostatic)"
+    ],
+    "rows": [
+     [
+      "Blood pressure",
+      "Hypotension common",
+      "Hypertension and wide pulse pressure"
+     ],
+     [
+      "Jugular venous pressure",
+      "Normal or flat",
+      "Elevated with prominent venous distension"
+     ],
+     [
+      "Response to furosemide",
+      "No improvement; risks shock",
+      "Prompt clinical diuresis and symptom resolution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fresh frozen plasma** does not reliably correct a mildly raised INR and is not given to a non-bleeding patient for an **INR of 1.5** before a routine procedure. Plasma has an intrinsic INR near 1.2 to 1.3, so administering it for mild coagulopathy yields negligible factor correction while exposing patients to TACO and TRALI.",
+   "say": "Fresh frozen plasma does not reliably correct a mildly raised INR and is not given to a non-bleeding patient for an INR of 1 point 5 before a routine procedure. Plasma has an intrinsic INR near 1 point 2 to 1 point 3, so administering it for mild coagulopathy yields negligible factor correction while exposing patients to TACO and TRALI.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mild coagulopathy (INR under 1.8)",
+     "points": [
+      "Adequate thrombin generation remains preserved in vitro",
+      "Plasma transfusion fails to normalize clotting parameters",
+      "Invasive procedures can proceed safely without plasma"
+     ]
+    },
+    "right": {
+     "title": "Legitimate plasma indications",
+     "points": [
+      "Active microvascular bleeding in massive transfusion",
+      "Proven multiple coagulation factor deficiency with haemorrhage",
+      "Therapeutic plasma exchange for thrombotic thrombocytopenic purpura"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cryoprecipitate** or **fibrinogen concentrate** is the replacement for a low **fibrinogen**. Plasma is a poor fibrinogen source because of the volume required. Supplying 2 to 4 grams of fibrinogen requires only two small bags of cryoprecipitate or lyophilized concentrate, whereas plasma would require several litres of fluid.",
+   "say": "Cryoprecipitate or fibrinogen concentrate is the replacement for a low fibrinogen. Plasma is a poor fibrinogen source because of the volume required. Supplying 2 to 4 grams of fibrinogen requires only two small bags of cryoprecipitate or lyophilized concentrate, whereas plasma would require several litres of fluid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Product",
+     "Fibrinogen Concentration",
+     "Clinical Utility"
+    ],
+    "rows": [
+     [
+      "Cryoprecipitate",
+      "Approx 150-250 mg fibrinogen per unit",
+      "10-unit pool rapidly raises fibrinogen by 50 to 100 mg/dL"
+     ],
+     [
+      "Fibrinogen concentrate",
+      "Pure virally inactivated factor I",
+      "Precise gram dosing without blood typing delay"
+     ],
+     [
+      "Fresh frozen plasma",
+      "Approx 2 mg/mL (very dilute)",
+      "Requires hazardous fluid volume to replenish fibrinogen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A competent **Jehovah's Witness** refusal of blood is respected. Iron, **erythropoietin**, and **cell salvage** are discussed. Blood is not given in secret. Multidisciplinary blood conservation bundles incorporating intraoperative autotransfusion, antifibrinolytics, high-dose intravenous iron, and recombinant erythropoietin optimize haemoglobin production legally and ethically.",
+   "say": "A competent Jehovah's Witness refusal of blood is respected. Iron, erythropoietin, and cell salvage are discussed. Blood is not given in secret. Multidisciplinary blood conservation bundles incorporating intraoperative autotransfusion, antifibrinolytics, high-dose intravenous iron, and recombinant erythropoietin optimize haemoglobin production legally and ethically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ethical and legal principles",
+     "points": [
+      "Autonomous adult refusal is legally binding",
+      "Emergency doctrine does not override known explicit refusal",
+      "Document specific fractions accepted on advance directive"
+     ]
+    },
+    "right": {
+     "title": "Bloodless medicine techniques",
+     "points": [
+      "Continuous closed-loop cell salvage autotransfusion",
+      "Intravenous ferric derisomaltose plus erythropoietin",
+      "Meticulous surgical haemostasis and minimal phlebotomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**One unit of red cells** in an adult raises haemoglobin by about 1 g/dL. Ordering two units by habit is an outdated reflex. Reassess after one unit when the patient is not exsanguinating. A single-unit transfusion policy halves unnecessary transfusions, lowers hospital costs, and reduces transfusion-associated circulatory overload.",
+   "say": "One unit of red cells in an adult raises haemoglobin by about 1 g/dL. Ordering two units by habit is an outdated reflex. Reassess after one unit when the patient is not exsanguinating. A single-unit transfusion policy halves unnecessary transfusions, lowers hospital costs, and reduces transfusion-associated circulatory overload.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-haemolytic-transfusion-reaction-fig1.webp",
+    "alt": "Acute haemolytic transfusion reaction immune complex formation, complement activation and intravascular haemolysis",
+    "caption": "Acute haemolytic transfusion reaction immune complex formation, complement activation and intravascular haemolysis",
+    "ar": 1.3333
+   }
   }
- ],
- "quiz": [
-  "q_e7149e1567aa",
-  "q_14dd528187b8",
-  "q_28a98cd0b945"
- ],
- "src": [],
- "refs": [
-  "Trial of Transfusion Requirements in Critical Care (TRICC), New England Journal of Medicine",
-  "NICE guideline on blood transfusion (NG24)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 5,
-  "kbWords": 0,
-  "itemN": 16
- }
+ ]
 }

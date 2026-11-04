@@ -1,0 +1,195 @@
+{
+ "v": 1,
+ "module": "scc-airway",
+ "subject": "ss-critical-care",
+ "title": "Airway management in the ICU",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **physiologically difficult airway** is hypotension, right ventricular failure, severe acidosis, or hypoxaemia. Induction and positive pressure ventilation reduce venous return, so the patient is resuscitated before the tube when time allows. Pre-induction vasopressors, volume loading, and careful agent selection mitigate post-induction cardiovascular collapse and arrest in critical illness.",
+   "say": "The physiologically difficult airway is hypotension, right ventricular failure, severe acidosis, or hypoxaemia. Induction and positive pressure ventilation reduce venous return, so the patient is resuscitated before the tube when time allows. Pre-induction vasopressors, volume loading, and careful agent selection mitigate post-induction cardiovascular collapse and arrest in critical illness.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-ana-airway_mouth.webp",
+    "alt": "Mouth opening assessment and modified Mallampati airway classification classes I to IV",
+    "caption": "Mouth opening assessment and modified Mallampati airway classification classes I to IV",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "The **DEVICE** trial showed a higher first attempt success with **video laryngoscopy** than with direct laryngoscopy in critically ill adults. A **bougie** is used when the view is poor. Integrating video laryngoscopy into routine critical care intubation minimizes laryngoscopic attempts, reduces oesophageal intubation rates, and improves glottic exposure during difficult intubations.",
+   "say": "The DEVICE trial showed a higher first attempt success with video laryngoscopy than with direct laryngoscopy in critically ill adults. A bougie is used when the view is poor. Integrating video laryngoscopy into routine critical care intubation minimizes laryngoscopic attempts, reduces oesophageal intubation rates, and improves glottic exposure during difficult intubations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Technique",
+     "DEVICE First Attempt Rate",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "Video laryngoscopy",
+      "85.1% first pass success",
+      "Standard first-line device in critically ill adults"
+     ],
+     [
+      "Direct laryngoscopy",
+      "70.8% first pass success",
+      "Higher failure rate and greater complication frequency"
+     ],
+     [
+      "Tracheal bougie introducer",
+      "Facilitates railroading",
+      "Recommended adjunct when vocal cord view is restricted"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **PREOXI** trial showed that non-invasive ventilation for preoxygenation reduced hypoxaemia compared with an oxygen mask. **Apnoeic oxygenation** with high flow nasal oxygen is added when it does not delay the tube. Maintaining positive end-expiratory pressure during preoxygenation recruits atelectatic alveoli and prolongs safe apnoea time in acute hypoxaemic respiratory failure.",
+   "say": "The PREOXI trial showed that non-invasive ventilation for preoxygenation reduced hypoxaemia compared with an oxygen mask. Apnoeic oxygenation with high flow nasal oxygen is added when it does not delay the tube. Maintaining positive end-expiratory pressure during preoxygenation recruits atelectatic alveoli and prolongs safe apnoea time in acute hypoxaemic respiratory failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PREOXI non-invasive preoxygenation",
+     "points": [
+      "Provides positive pressure alveolar recruitment",
+      "Significantly reduces severe hypoxaemia under 85%",
+      "Standard approach in hypoxaemic respiratory failure"
+     ]
+    },
+    "right": {
+     "title": "Apnoeic high flow nasal oxygen",
+     "points": [
+      "Delivers warm humidified oxygen up to 60 L/min",
+      "Maintains continuous alveolar diffusion during apnoea",
+      "Applied concurrently without delaying laryngoscopy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ketamine** is useful when blood pressure is low or when bronchospasm is present. The old absolute ban in raised intracranial pressure is not supported. **Etomidate** inhibits **11 beta hydroxylase**, so many clinicians avoid it in septic shock. Ketamine preserves sympathetic vascular tone and bronchodilates, making it a haemodynamically stable induction choice.",
+   "say": "Ketamine is useful when blood pressure is low or when bronchospasm is present. The old absolute ban in raised intracranial pressure is not supported. Etomidate inhibits 11 beta hydroxylase, so many clinicians avoid it in septic shock. Ketamine preserves sympathetic vascular tone and bronchodilates, making it a haemodynamically stable induction choice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Induction Drug",
+     "Key Pharmacology",
+     "Critical Care Utility"
+    ],
+    "rows": [
+     [
+      "Ketamine",
+      "Sympathomimetic NMDA receptor antagonist",
+      "Maintains perfusion in shock; dilates constricted bronchi"
+     ],
+     [
+      "Etomidate",
+      "GABA agonist inhibiting 11-beta hydroxylase",
+      "Causes transient adrenocortical suppression in sepsis"
+     ],
+     [
+      "Propofol",
+      "Potent systemic arterial vasodilator",
+      "Causes precipitous hypotension in volume-depleted states"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For rapid sequence intubation, **rocuronium** is given at 1.2 mg/kg. Immediate reversal needs **sugammadex** 16 mg/kg. **Succinylcholine** is avoided after burns, denervation, rhabdomyolysis, and when potassium is already high. Full dosing of rocuronium ensures optimal neuromuscular paralysis and glottic relaxation within sixty seconds of intravenous injection.",
+   "say": "For rapid sequence intubation, rocuronium is given at 1 point 2 mg/kg. Immediate reversal needs sugammadex 16 mg/kg. Succinylcholine is avoided after burns, denervation, rhabdomyolysis, and when potassium is already high. Full dosing of rocuronium ensures optimal neuromuscular paralysis and glottic relaxation within sixty seconds of intravenous injection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Paralytic Agent",
+     "RSI Dosing",
+     "Safety Cautions and Reversal"
+    ],
+    "rows": [
+     [
+      "Rocuronium",
+      "1.2 mg/kg IV",
+      "Rapid onset; emergency reversal with sugammadex 16 mg/kg"
+     ],
+     [
+      "Succinylcholine",
+      "1.5 mg/kg IV",
+      "Risk of lethal hyperkalaemia in burns and denervation"
+     ],
+     [
+      "Sugammadex",
+      "16 mg/kg IV",
+      "Chelates rocuronium for immediate complete reversal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A failed intubation follows a difficult airway algorithm: call for help, oxygenate with a **supraglottic** airway, and move to **front of neck access** if oxygen cannot be maintained. Do not repeat the same failing look. Rapid transition to scalpel-bougie-tube cricothyroidotomy prevents catastrophic hypoxic cardiac arrest in can't intubate can't oxygenate scenarios.",
+   "say": "A failed intubation follows a difficult airway algorithm: call for help, oxygenate with a supraglottic airway, and move to front of neck access if oxygen cannot be maintained. Do not repeat the same failing look. Rapid transition to scalpel-bougie-tube cricothyroidotomy prevents catastrophic hypoxic cardiac arrest in can't intubate can't oxygenate scenarios.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-ana-lma_insert.webp",
+    "alt": "Supraglottic airway placement steps, laryngeal mask positioning and seal confirmation",
+    "caption": "Supraglottic airway placement steps, laryngeal mask positioning and seal confirmation",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Waveform capnography** confirms tracheal placement. A single colour change on a colorimetric device can be misleading. Absent sustained end tidal CO2 means the tube is not in the trachea or pulmonary blood flow has stopped. At least five to six continuous, stable capnographic waveforms must be demonstrated to confirm true endotracheal intubation.",
+   "say": "Waveform capnography confirms tracheal placement. A single colour change on a colorimetric device can be misleading. Absent sustained end tidal CO2 means the tube is not in the trachea or pulmonary blood flow has stopped. At least five to six continuous, stable capnographic waveforms must be demonstrated to confirm true endotracheal intubation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continuous waveform capnography",
+     "points": [
+      "Mandatory gold standard for tube confirmation",
+      "Requires sustained rectangular exhaled waves",
+      "Flatline alerts immediately to oesophageal intubation"
+     ]
+    },
+    "right": {
+     "title": "Colorimetric indicator check",
+     "points": [
+      "pH sensitive indicator paper in breathing circuit",
+      "Can give false positive colour change from gastric acid",
+      "Inadequate for continuous ongoing verification"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After the tube, the stomach is decompressed, the **cuff pressure** is kept near 20 to 30 cmH2O, and a lung protective tidal volume is set at once rather than a large default volume. Proper cuff pressure prevents tracheal mucosal pressure necrosis while avoiding microaspiration of colonised pharyngeal secretions.",
+   "say": "After the tube, the stomach is decompressed, the cuff pressure is kept near 20 to 30 cmH2O, and a lung protective tidal volume is set at once rather than a large default volume. Proper cuff pressure prevents tracheal mucosal pressure necrosis while avoiding microaspiration of colonised pharyngeal secretions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Post-Intubation Task",
+     "Target Range",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Cuff pressure manometry",
+      "20 to 30 cmH2O",
+      "Prevents tracheal mucosal ischaemia and microaspiration"
+     ],
+     [
+      "Lung protective ventilation",
+      "6 mL/kg predicted body weight",
+      "Prevents volutrauma and ventilator-induced lung injury"
+     ],
+     [
+      "Gastric tube placement",
+      "Orogastric or nasogastric suction",
+      "Decompresses stomach to reduce aspiration risk"
+     ]
+    ]
+   }
+  }
+ ]
+}
