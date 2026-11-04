@@ -31,6 +31,15 @@ parallel safety case). The FAILING row is HAZ-DOWN-01, whose evidence suite is n
 SUITES list; that is a pre-existing gap, not a regression. Read the caveats; the summary line alone
 is not the state of the system.
 
+## iPad (2026-11-04, vault/plans/iPad-Standards.md)
+- WardSynQ chart: at 1000 px and wider on `html.smd-tablet`, `_render` wraps `chartView` in `ipadChart()` (ward.js): the
+  ward list is a rail beside the chart (`.w-ipad-split`, CSS in `ipad-hospital.css`). Rail rows send `railopen:<encounterId>`,
+  which refuses while `unsavedTyping()` (same words as the keyboard layer) and otherwise dispatches `open:`. Phones,
+  Split View and the node test sandboxes (no `classList`) get `chartView` unchanged.
+- Ward Sync (`ghis-ward.js`): at 1000 px and wider the lab drawer is the right pane beside the list (CSS keys off the
+  drawer's inline `display:none`); `openLab` keeps the list scroll and marks the card `.ghis-pt-sel` (cards carry `data-pid`).
+  The drawer's top offset (73 px) assumes the header's 44 px buttons; change both together.
+
 ## Ward Sync and WardSynQ are ONE system
 
 The existing "Ward Sync" (GIMSR GHIS integration: `ghis-ward.js`, plus `wardSync` state in `icu.js`,

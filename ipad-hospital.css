@@ -1,0 +1,152 @@
+/* ipad-hospital.css: iPad regular-width layouts for the hospital module group (vault/plans/iPad-Standards.md).
+ * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched.
+ * Specificity: html.smd-tablet is added to every selector so these rules outrank module CSS that is injected at run
+ * time (icu.js, ghis-ward.js, prescription.js append their <style> after this file). Inline styles need !important. */
+
+/* ---------------------------------------------------------------- ICU unit board
+ * The patient cards were one 1,334 px wide column (four vitals spread across the screen). They are a grid:
+ * two columns in portrait, three in landscape. The attention strip, filters and headings span the row. */
+@media (min-width: 700px) {
+  html.smd-tablet #icuRoot.icu-v2 .icu-v2-board { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; align-content: start; }
+  html.smd-tablet #icuRoot.icu-v2 .icu-v2-board > :not(.icu-v2-swipe) { grid-column: 1 / -1; min-width: 0; }
+  html.smd-tablet #icuRoot.icu-v2 .icu-v2-board > .icu-v2-swipe { min-width: 0; }
+  /* "Admit a patient" (connect-patient.js openAdmitChooser): a centred form sheet, not a bottom slab. */
+  html.smd-tablet #cptAdmitChooser { align-items: center !important; justify-content: center; }
+  html.smd-tablet #cptAdmitChooser > div { max-width: 540px; border-radius: 18px !important; border: 1px solid var(--line, #22303c); box-sizing: border-box; padding-bottom: 16px !important; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet #icuRoot.icu-v2 .icu-v2-board { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------------------------------------------------------------- WardSynQ (ward.js, #smdWard)
+ * ward.css gives 44 px targets only from 768 to 1180 px; iPad Pro landscape (1366) fell back to 29 px icon buttons and
+ * 24 px selects. Same targets at every regular width. */
+@media (min-width: 700px) {
+  html.smd-tablet #smdWard .w-ic, html.smd-tablet #smdWard .w-x { min-width: 44px; min-height: 44px; justify-content: center; align-items: center; }
+  html.smd-tablet #smdWard .w-btn.tiny, html.smd-tablet #smdWard .w-chip { min-height: 44px; }
+  html.smd-tablet #smdWard .w-f select, html.smd-tablet #smdWard .w-f textarea, html.smd-tablet #smdWard .w-filter select { min-height: 44px; }
+  /* A one-line field (the transfer reason ran 956 px) keeps a writing width; notes (textarea) still use the card. */
+  html.smd-tablet #smdWard .w-f > input:not([type=checkbox]):not([type=radio]) { max-width: 720px; }
+}
+
+/* ---------------------------------------------------------------- OPD Queue (queue.js, #smdQueue)
+ * Portrait: "Pause Queue" ran the full 788 px column under the consulting card. */
+@media (min-width: 700px) {
+  html.smd-tablet #smdQueue .q-pause { width: auto; max-width: 360px; min-width: 220px; min-height: 44px; margin-left: auto; margin-right: auto; display: flex; align-items: center; justify-content: center; gap: 6px; }
+}
+/* Patient list beside the chart (ward.js wraps the chart in .w-ipad-split at 1000 px and wider on smd-tablet).
+ * The rail is the same roster rows, the open patient highlighted; it scrolls on its own and stays in view. */
+@media (min-width: 1000px) {
+  html.smd-tablet #smdWard .w-ipad-split { display: grid; grid-template-columns: minmax(300px, 340px) minmax(0, 1fr); gap: 16px; align-items: start; }
+  html.smd-tablet #smdWard .w-ipad-detail { min-width: 0; }
+  html.smd-tablet #smdWard .w-ipad-rail { position: sticky; top: 0; max-height: calc(100vh - 86px); max-height: calc(100dvh - 86px); overflow-y: auto; overscroll-behavior: contain;
+    background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 16px; padding: 10px 12px; box-sizing: border-box; }
+  html.smd-tablet #smdWard .w-ipad-rail h3 { display: flex; align-items: baseline; gap: 8px; margin: 2px 2px 6px; font-size: 15px; }
+  html.smd-tablet #smdWard .w-ipad-rail h3 small { font-size: 12px; font-weight: 500; color: var(--on-surface-variant); }
+  html.smd-tablet #smdWard .w-ipad-rail .w-bed { padding: 8px 6px; border-radius: 12px; min-height: 60px; }
+  html.smd-tablet #smdWard .w-ipad-rail .w-bed.on { background: var(--primary-container); color: var(--on-primary-container); }
+  html.smd-tablet #smdWard .w-ipad-rail .w-bed.on .w-bed-no { background: var(--primary); color: var(--on-primary, #fff); }
+  html.smd-tablet #smdWard .w-ipad-rail .w-bed.on + .w-bed { border-top-color: transparent; }
+}
+
+/* ---------------------------------------------------------------- Ward Sync (ghis-ward.js, #ghisPanel)
+ * List: patient cards are a grid in a wider column. Landscape: tapping a patient opens the labs and imaging beside
+ * the list (the drawer becomes the right pane) instead of a full-screen push with values 1,300 px from their names.
+ * The drawer is open when its inline style is not display:none (ghis-ward.js openLab / closeLabDrawer). */
+@media (min-width: 700px) {
+  html.smd-tablet #ghisPanel .ghis-back, html.smd-tablet #ghisPanel .ghis-refresh-btn { width: 44px; height: 44px; }
+  html.smd-tablet #ghisPanel .ghis-logout-btn { width: 44px; min-height: 44px; }
+  html.smd-tablet #ghisPanel .ghis-filter-input, html.smd-tablet #ghisPanel .ghis-filter-sel { min-height: 44px; box-sizing: border-box; }
+  html.smd-tablet #ghisPanel .ghis-pt-call { min-height: 44px; box-sizing: border-box; }
+  html.smd-tablet #ghisPanel .ghis-back-sm { min-height: 44px; }
+  html.smd-tablet #ghisPanel #ghisAddTarget button { min-height: 44px; }
+  /* The search field ran 1,036 px in the wider list column; keep it a search-box width. */
+  html.smd-tablet #ghisPanel .ghis-filter-input { max-width: 720px; }
+  html.smd-tablet #ghisPanel .ghis-pt-card label { min-height: 44px; min-width: 44px; justify-content: center; }
+  /* "Lab Watch" in the patient pane: its own width, not a 900 px bar. */
+  html.smd-tablet #ghisPanel #ghisLabBody > .ghis-connect-btn { width: auto; min-height: 44px; padding-left: 20px; padding-right: 20px; display: inline-flex; align-items: center; gap: 6px; }
+  html.smd-tablet #ghisPanel #ghisWard.ghis-body { max-width: 1120px; margin-left: auto; margin-right: auto; width: 100%; box-sizing: border-box; }
+  html.smd-tablet #ghisPanel #ghisPatientList.ghis-pt-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet #ghisPanel #ghisPatientList.ghis-pt-list > :not(.ghis-pt-card) { grid-column: 1 / -1; }
+  html.smd-tablet #ghisPanel .ghis-pt-card { min-width: 0; }
+  /* Hospital picker tabs ("Select hospital" / "My Units") ran 1,334 px with a 660 px button each. */
+  html.smd-tablet #ghisPanel #ghisHospital.ghis-body > div:first-child { max-width: 720px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #ghisPanel #ghisWard.ghis-body:has(> #ghisLabDrawer:not([style*="none"])) { max-width: 400px; margin-left: 0; margin-right: 0; border-right: 1px solid var(--line, #e2e8f0); }
+  html.smd-tablet #ghisPanel #ghisWard.ghis-body:has(> #ghisLabDrawer:not([style*="none"])) #ghisPatientList.ghis-pt-list { grid-template-columns: minmax(0, 1fr); }
+  html.smd-tablet #ghisPanel #ghisWard.ghis-body:has(> #ghisLabDrawer:not([style*="none"])) .ghis-filter-row2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  /* 73 px = the Ward Sync header with 44 px buttons (14 + 44 + 14 + 1 px border). */
+  html.smd-tablet #ghisPanel .ghis-lab-drawer { position: fixed; top: calc(73px + env(safe-area-inset-top, 0px)); left: 400px; right: 0; bottom: 0; inset: calc(73px + env(safe-area-inset-top, 0px)) 0 0 400px; z-index: 2; }
+  html.smd-tablet #ghisPanel .ghis-lab-header { padding-top: 12px; }
+  html.smd-tablet #ghisPanel .ghis-lab-body > * { max-width: 880px; }
+  html.smd-tablet #ghisPanel .ghis-pt-card.ghis-pt-sel { border-color: var(--teal, #14b8a6); background: var(--teal-soft, #e3f1ee); }
+}
+
+/* ---------------------------------------------------------------- My Cases (#myCasesPanel)
+ * tablet-fit.css held it to a 760 px column with full-width buttons. The top bar spans the screen (back on the left),
+ * cases are a card grid, and the two actions are natural-width buttons. */
+@media (min-width: 700px) {
+  html.smd-tablet #myCasesPanel .mcp-header { padding-left: 16px; padding-right: 16px; }
+  html.smd-tablet #myCasesPanel .mcp-back { min-width: 44px; min-height: 44px; }
+  html.smd-tablet #myCasesPanel .mcp-body { padding-left: max(16px, calc(50% - 560px)); padding-right: max(16px, calc(50% - 560px)); }
+  html.smd-tablet #myCasesPanel #smdFindCaseBtn, html.smd-tablet #myCasesPanel #smdRecentCasesBtn { display: inline-flex !important; align-items: center; gap: 6px; width: auto !important; max-width: 100%; min-height: 44px; margin: 0 8px 12px 0 !important; vertical-align: top; }
+  html.smd-tablet #myCasesPanel #mcpList { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; align-items: start; }
+  html.smd-tablet #myCasesPanel #mcpList > :not(.mcp-case-card) { grid-column: 1 / -1; }
+  html.smd-tablet #myCasesPanel #mcpList > .mcp-case-card { max-width: none; margin: 0; min-width: 0; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet #myCasesPanel #mcpList { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------------------------------------------------------------- My Clinic (personal-clinic.js, #smdClinic)
+ * A 640 px column of full-width rows and a 608 px "New patient" bar. Patients are a grid; the button is its own size. */
+@media (min-width: 700px) {
+  html.smd-tablet #smdClinic .pc-ic { min-width: 44px; min-height: 44px; }
+  html.smd-tablet #smdClinic .pc-body { max-width: 1120px; }
+  html.smd-tablet #smdClinic .pc-add { width: auto; min-width: 220px; min-height: 44px; padding-left: 24px; padding-right: 24px; }
+  html.smd-tablet #smdClinic .pc-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet #smdClinic .pc-list > * { margin: 0; min-width: 0; }
+  html.smd-tablet #smdClinic .pc-list > :not(.pc-row) { grid-column: 1 / -1; }
+  html.smd-tablet #smdClinic .pc-btn2 { width: auto; min-width: 220px; min-height: 44px; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet #smdClinic .pc-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------------------------------------------------------------- OPD consult / EMR (opd-emr.js, #smdOpdEmr)
+ * The save bar's primary button took the full 930 px row. On a tablet it sits at the right of the same row. */
+@media (min-width: 700px) {
+  html.smd-tablet #smdOpdEmr .oe-savebar .oe-btn.primary, html.smd-tablet #smdOpdEmr .oe-savebar .oe-btn.authorise { flex: 0 0 auto; margin-left: auto; min-width: 220px; max-width: 360px; white-space: nowrap; }
+}
+
+/* ---------------------------------------------------------------- Prescription (prescription.js, #rxSheet)
+ * The dock stacked three quick buttons over a 900 px primary. On a tablet it is one bar: quick actions grouped on the
+ * left, the primary at its natural width on the right. The verification gate's lone button gets the same treatment. */
+@media (min-width: 700px) {
+  html.smd-tablet body #rxSheet .rx-dock { flex-direction: row; align-items: center; justify-content: center; gap: 12px; }
+  html.smd-tablet body #rxSheet .rx-dock > .rx-dock-quick { flex: 0 1 560px; width: auto; max-width: 560px; margin: 0; }
+  html.smd-tablet body #rxSheet .rx-dock > .rx-hero-export { flex: 0 0 auto; width: auto !important; min-width: 240px; max-width: 360px; min-height: 48px; margin: 0; padding-left: 24px; padding-right: 24px; }
+  html.smd-tablet body #rxSheet .rx-dock > .rx-hero-export:only-child { min-width: 280px; }
+  /* "+ Add clinic name..." and "+ Save Template Set" are actions, not 900 px bars. */
+  html.smd-tablet body #rxSheet #rxClinicAdd { width: auto !important; min-height: 44px; padding-left: 18px; padding-right: 18px; }
+  html.smd-tablet body #rxSheet .rx-tpl-row { display: flex; flex-wrap: wrap; gap: 10px; }
+  html.smd-tablet body #rxSheet .rx-tpl-row > * { width: auto; min-height: 44px; }
+  /* Verify a prescription: a centred form sheet, not a bottom slab. */
+  html.smd-tablet .rxv-ov { align-items: center; padding: 24px; box-sizing: border-box; }
+  html.smd-tablet .rxv-ov .rxv-sh { border-radius: 18px; max-width: 560px; padding-bottom: 20px; }
+}
+
+/* ---------------------------------------------------------------- OPD Queue console (opd.html, opd-dashboard.js)
+ * Portrait iPad: the "In the OPD now" table pushed its action column past the right edge. The Visit column is dropped
+ * between 700 and 1000 px and the visit type moves to the line under the name, as the phone layout already does. */
+@media (min-width: 700px) and (max-width: 999.98px) {
+  html.smd-tablet .dz-table td.dz-visit, html.smd-tablet .dz-table thead th:nth-child(3) { display: none; }
+  html.smd-tablet .dz-table .dz-vm { display: inline; }
+}
+
+/* ---------------------------------------------------------------- WardSynQ bedside (wardsynq/ui/opd.html)
+ * The wristband field ran 1,334 px. The page keeps its phone-identical control order (opd.css) in a centred column. */
+@media (min-width: 1000px) {
+  html.smd-tablet body.opd > main { max-width: 960px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+}

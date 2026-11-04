@@ -230,7 +230,7 @@
 
   function rowsHtml(shown, dec) {
     return shown.map(function (x) {
-      return '<button type="button" class="rv-row" data-rv-act="sel:' + esc(x.id) + '"><span class="rv-t">' + esc(x.title) + '</span><span class="rv-s">' + esc(x.sub || "") + "</span><span>" + statusPill(x.status) + decPill(dec[S.kind + ":" + x.id]) + "</span></button>";
+      return '<button type="button" class="rv-row' + (S.sel && x.id === S.sel ? ' on" aria-current="true' : "") + '" data-rv-act="sel:' + esc(x.id) + '"><span class="rv-t">' + esc(x.title) + '</span><span class="rv-s">' + esc(x.sub || "") + "</span><span>" + statusPill(x.status) + decPill(dec[S.kind + ":" + x.id]) + "</span></button>";
     }).join("");
   }
   function render() {
@@ -244,12 +244,13 @@
       return;
     }
     if (S.kind === "prep") { body.innerHTML = '<div class="kit dl">' + prepHtml(tabs) + "</div>"; body.scrollTop = top; return; }
-    var list = S.items[S.kind];
+    var list = S.items[S.kind], split = !!list && splitOn(), listTop = 0, detail = "", olist;
+    if (split && (olist = body.querySelector(".rv-split-list"))) listTop = olist.scrollTop;
     if (!list) { loadItems(S.kind).then(render); html = tabs + '<p class="kit-muted">Loading…</p>'; }
-    else if (S.sel) {
+    if (list && S.sel) {
       var it = list.filter(function (x) { return x.id === S.sel; })[0] || { id: S.sel, title: S.sel }, d = dec[S.kind + ":" + S.sel] || {}, r = reviewer();
       var tokText = (S.kind === "tokos" || S.kind === "narke") && !it.c;
-      html = '<button type="button" class="kit-link" data-rv-act="back">' + ms("arrow_back") + "Back to the list</button><h2 class=\"dl-h\">" + esc(it.title) + "</h2>" + statusPill(it.status) +
+      detail = (split ? "" : '<button type="button" class="kit-link" data-rv-act="back">' + ms("arrow_back") + "Back to the list</button>") + "<h2 class=\"dl-h\">" + esc(it.title) + "</h2>" + statusPill(it.status) +
         (it.c ? tokosCaseHtml(it.c) : "") +
         '<div class="kit-row"><button type="button" class="kit-pill" data-rv-act="read"' + (tokText ? ' aria-expanded="' + S.showText + '"' : "") + ">" + ms("menu_book") + (tokText && S.showText ? "Hide the text" : "Read it") + "</button></div>" +
         (tokText && S.showText ? tokosTextHtml(it.id) : "") +
@@ -259,7 +260,8 @@
         '<label class="kit-field" for="rv_name"><span class="kit-fl">Reviewer name</span><input id="rv_name" class="kit-inp" value="' + esc(r.name) + '"></label>' +
         '<label class="kit-field" for="rv_reg"><span class="kit-fl">Registration number' + (r.verified ? " (verified)" : "") + '</span><input id="rv_reg" class="kit-inp" value="' + esc(r.regNo) + '"' + (r.verified ? " readonly" : "") + "></label></div>" +
         '<div class="kit-row"><button type="button" class="kit-add" data-rv-act="save">' + ms("task_alt") + "Save decision</button>" + (d.decision ? '<button type="button" class="kit-clear" data-rv-act="undo">Remove my decision</button>' : "") + "</div>";
-    } else {
+    }
+    if (list && (!S.sel || split)) {
       var q = S.q.toLowerCase(), shown = list.filter(function (x) { return !q || (x.title + " " + x.id).toLowerCase().indexOf(q) >= 0; });
       html = '<p class="kit-muted">Read each item, then approve it or say what needs to change. Your decisions stay on this phone until you export them.</p>' +
         '<div class="kit-row"><button type="button" class="kit-add" data-rv-act="export"' + (n ? "" : " disabled") + ">" + ms("ios_share") + "Export " + n + " decision" + (n === 1 ? "" : "s") + "</button>" +
@@ -267,8 +269,15 @@
         '<label class="kit-field wide" for="rv_q"><span class="kit-fl">Search</span><input id="rv_q" type="search" class="kit-inp" value="' + esc(S.q) + '" autocomplete="off"></label>' +
         '<p class="kit-muted" id="rv_cnt">' + shown.length + " of " + list.length + '</p><div class="rv-list" id="rv_list">' + rowsHtml(shown, dec) + "</div>";
     }
+    if (list && split) html = '<div class="rv-split"><div class="rv-split-list">' + html + '</div><div class="rv-split-detail" aria-live="polite">' +
+      (detail || '<p class="kit-muted rv-split-empty">Choose an item to read it and record your decision.</p>') + "</div></div>";
+    else if (list && S.sel) html = detail;
     body.innerHTML = '<div class="kit dl">' + html + "</div>"; body.scrollTop = top;
+    if (split && (olist = body.querySelector(".rv-split-list"))) olist.scrollTop = listTop;
   }
+  /* iPad, landscape regular width (vault/plans/iPad-Standards.md rule 2): the list stays on the left and the chosen
+   * item opens beside it. Phones and Split View keep the full-screen list, then item, flow. */
+  function splitOn() { try { return !!(D && D.documentElement.classList.contains("smd-tablet") && G.innerWidth >= 1000); } catch (e) { return false; } }
   // PrepNucleus student reports (functions/api/prep/flag.js), owners only, read-only apart from Restore: an item that
   // three separate students reported is hidden from everyone until an owner restores it here.
   var PREP_REASON = { "wrong-key": "wrong key", unclear: "unclear", outdated: "outdated", typo: "typo", other: "other" };

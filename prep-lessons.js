@@ -297,15 +297,54 @@
     return x.trim();
   }
   // Sentences, so the voice restarts its intonation at each full stop and rests between them; a decimal or "1 DS" never splits.
-  function sayChunks(t) {
-    var x = sayText(t);
-    if (!x) return [];
-    var parts = x.replace(/([.!?:;])\s+(?=[A-Z0-9"(\u2018\u201c])/g, "$1\u0001").split("\u0001"), out = [];
+  // The split both the voice and the read-along use: at a full stop, colon or semicolon before a capital or a digit; a short
+  // piece joins the one before. A piece never ends inside **bold** (the markers stay balanced), so it can be drawn as is.
+  function splitSay(x) {
+    var parts = x.replace(/([.!?:;])\s+(?=[A-Z0-9"(\u2018\u201c])/g, "$1\u0001").split("\u0001"), out = [], hold = "";
     for (var i = 0; i < parts.length; i++) {
-      var p = parts[i].trim();
-      if (!p) continue;
+      var p = (hold ? hold + " " : "") + parts[i].trim();
+      hold = "";
+      if (!p.trim()) continue;
+      if ((p.match(/\*\*/g) || []).length % 2) { hold = p; continue; }
       if (out.length && p.length < 24 && out[out.length - 1].length < 140) out[out.length - 1] += " " + p; else out.push(p);
     }
+    if (hold) out.push(hold);
+    return out;
+  }
+  function sayChunks(t) {
+    var x = sayText(t);
+    return x ? splitSay(x) : [];
+  }
+  // The sentences of a step's displayed text (raw, with its **bold** marks), for the read-along highlight.
+  function stepSentences(tx) { var x = String(tx == null ? "" : tx).replace(/\s+/g, " ").trim(); return x ? splitSay(x) : []; }
+  function wordSet(t) { var m = String(t).toLowerCase().replace(/\*\*/g, "").match(/[a-z0-9]+/g) || [], o = {}, n = 0; for (var i = 0; i < m.length; i++) if (!o[m[i]]) { o[m[i]] = 1; n++; } return { w: o, n: n }; }
+  // Which displayed sentence each spoken piece is: the spoken text is worded slightly differently from the displayed text
+  // (and split differently about one step in five), so pieces are matched to sentences by shared words, never backwards,
+  // best total overlap (a small dynamic programme). Returns, for each spoken piece, an index into the sentences.
+  function alignSay(chunks, sents) {
+    var n = chunks.length, m = sents.length, i, j, k;
+    if (!n || !m) return [];
+    var cw = chunks.map(wordSet), sw = sents.map(wordSet), sc = [];
+    for (i = 0; i < n; i++) {
+      sc.push([]);
+      for (j = 0; j < m; j++) {
+        var both = 0; for (k in cw[i].w) if (sw[j].w[k]) both++;
+        var uni = cw[i].n + sw[j].n - both;
+        sc[i].push(uni ? both / uni : 0);
+      }
+    }
+    var best = [], from = [];
+    for (i = 0; i < n; i++) {
+      best.push([]); from.push([]);
+      for (j = 0; j < m; j++) {
+        var bp = -1, bv = i ? -1 : 0;
+        if (i) for (k = 0; k <= j; k++) if (best[i - 1][k] > bv) { bv = best[i - 1][k]; bp = k; }
+        best[i].push(bv + sc[i][j]); from[i].push(bp);
+      }
+    }
+    var e = 0; for (j = 1; j < m; j++) if (best[n - 1][j] > best[n - 1][e]) e = j;
+    var out = new Array(n);
+    for (i = n - 1; i >= 0; i--) { out[i] = e; e = from[i][e]; }
     return out;
   }
   // Voice choice. Only English voices that run on the phone (nothing leaves it); the plain compact and the old
@@ -329,7 +368,7 @@
   var PURE = { mergeIx: mergeIx, SPEEDS: SPEEDS, XP_STEP: XP_STEP, LIM: LIM, IMG_RE: IMG_RE, plain: plain, words: words, boldHtml: boldHtml, boldTerms: boldTerms, visText: visText,
     flowLevels: flowLevels, checkVis: checkVis, checkStep: checkStep, checkLesson: checkLesson, nextSpeed: nextSpeed, speedLabel: speedLabel, xpFor: xpFor,
     swipeDir: swipeDir, pickQuiz: pickQuiz, lessonImages: lessonImages, lessonsFor: lessonsFor, subjectLessons: subjectLessons, moduleOf: moduleOf, imgUrl: imgUrl, lessonImgUrl: lessonImgUrl,
-    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, voiceScore: voiceScore, bestVoice: bestVoice };
+    XP_HIT: XP_HIT, spotOk: spotOk, marksOk: marksOk, pairOk: pairOk, qcOk: qcOk, isTF: isTF, tidyLesson: tidyLesson, hitBox: hitBox, pages: pages, interactions: interactions, sliderPair: sliderPair, startPage: startPage, sayText: sayText, sayChunks: sayChunks, stepSentences: stepSentences, alignSay: alignSay, voiceScore: voiceScore, bestVoice: bestVoice };
   if (typeof module !== "undefined" && module.exports && !(G && G.document)) { module.exports = PURE; return; }
 
   /* ================= app ================= */
@@ -402,9 +441,56 @@
   /* ---------- narration ---------- */
   function plugin() { try { var C = G.Capacitor; return C && C.isNativePlatform && C.isNativePlatform() && C.Plugins && C.Plugins.TextToSpeech || null; } catch (e) { return null; } }
   function canSpeak() { return !!(plugin() || (G.speechSynthesis && G.SpeechSynthesisUtterance)); }
+  /* Read-along: the sentence being spoken is lit in the step's text and kept in view. */
+  function hlSet(k) {
+    var r = host && host.root && host.root(); if (!r) return;
+    var els = r.querySelectorAll(".pn-lsn-tx .pn-sent"), cur = null;
+    for (var i = 0; i < els.length; i++) { var on = i === k; if (els[i].classList.contains("on") !== on) els[i].classList.toggle("on", on); if (on) cur = els[i]; }
+    if (!cur || !cur.getBoundingClientRect) return;
+    var b = cur.getBoundingClientRect(), vh = G.innerHeight || 700;
+    if (b.top < 120 || b.bottom > vh - 150) { try { cur.scrollIntoView({ block: "center", behavior: reduced() ? "auto" : "smooth" }); } catch (e) {} }
+  }
+  function hlClear() { hlSet(-1); }
   function stopVoice() {
     L.tok++;
+    try { hlClear(); } catch (e) {}
     try { var P = plugin(); if (P && P.stop) P.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
+    try { if (G.PREP_VOICE) G.PREP_VOICE.stop(); } catch (e) {}
+  }
+  /* The natural voice (prep-voice.js) reads from the first word: the first tap of Play downloads it once (the card above
+     the bar shows progress) and reading starts when it is ready; a voice downloaded before loads quietly. The system voice
+     reads only when the natural voice cannot run on this phone (unsupported, failed, or too slow). Calls go() when reading
+     can start; a pause or a page change in the meantime cancels it through L.tok. */
+  function naturalStart(start) {
+    var V = G.PREP_VOICE;
+    if (!V || !V.available()) { start(); return; }
+    V.unlock();
+    var s = V.state();
+    if (s === "ready" || s === "error") { start(); return; }
+    var tok = L.tok, card = !(V.saved && V.saved()) && s === "none";
+    if (card) { L.vdl = V.progress ? V.progress() : 0; L.vok = false; drawBar(); }
+    V.download(card ? function (p) { L.vdl = p; dlPaint(); } : null)
+      .then(function () {
+        if (card) { L.vdl = null; L.vok = true; drawBar(); G.setTimeout(function () { L.vok = false; drawBar(); }, 1800); }
+      }, function () { L.vdl = null; L.vok = false; drawBar(); })
+      .then(function () { if (tok === L.tok && L.playing) start(); });
+  }
+  /* The one-time download card above the bar. Progress updates the fill in place, so it glides instead of redrawing. */
+  function dlHtml() {
+    if (L.vdl == null && !L.vok) return "";
+    var pc = L.vok ? 100 : Math.round(L.vdl * 100);
+    return '<div class="pn-vdl' + (L.vok ? " ok" : "") + '" role="status" aria-live="polite">' +
+      '<div class="pn-vdl-row"><span class="pn-vdl-ic" aria-hidden="true">' + (L.vok ? svg(ICO.tick, 16) : '<span class="pn-wave on"><i></i><i></i><i></i><i></i><i></i></span>') + "</span>" +
+      '<span class="pn-vdl-t"><b>' + (L.vok ? "Natural voice ready" : "Getting the natural voice") + "</b><small>" + (L.vok ? "Saved on this phone, works offline" : "One time, 65 MB. Reading starts when it is ready.") + "</small></span>" +
+      '<span class="pn-vdl-pc">' + pc + "%</span></div>" +
+      '<div class="pn-vdl-track"><i style="width:' + pc + '%"></i></div></div>';
+  }
+  function dlPaint() {
+    var r = host.root && host.root(), el = r && r.querySelector(".pn-vdl");
+    if (!el) { drawBar(); return; }
+    var pc = Math.round(L.vdl * 100), f = el.querySelector(".pn-vdl-track i"), t = el.querySelector(".pn-vdl-pc");
+    if (f) f.style.width = pc + "%";
+    if (t) t.textContent = pc + "%";
   }
   var voiceIx = null;   // the chosen native voice index (-1: system default), read once
   function nativeVoice(P) {
@@ -415,7 +501,7 @@
   function webVoice() {
     try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
   }
-  function speak(text, rate, done) {
+  function speak(text, rate, done, onPiece) {
     stopVoice();
     var tok = ++L.tok, chunks = sayChunks(text), n = 0;
     var fail = function () { if (tok === L.tok) { L.playing = false; draw(); } };
@@ -423,7 +509,10 @@
       if (tok !== L.tok) return;
       if (n >= chunks.length) { done(); return; }
       var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
+      if (onPiece) { try { onPiece(n - 1); } catch (e) {} }
       try {
+        var V = G.PREP_VOICE;
+        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, fail); return; }
         var P = plugin();
         if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
         var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
@@ -436,14 +525,16 @@
     next();
   }
   function narrate() {
-    var s = store();
-    speak(pageSay(), s.lsp.r, function () {
+    var s = store(), pg = page(), step = typeof pg === "number" ? L.les.steps[pg] : null, say = pageSay();
+    var map = step ? alignSay(sayChunks(say), stepSentences(step.tx)) : null;
+    speak(say, s.lsp.r, function () {
+      hlClear();
       if (!L.playing || L.fin) return;
       if (s.lsp.au && L.i < pages(L.les).length - 1) { go(L.i + 1, true); return; }
       L.playing = false; drawBar();
-    });
+    }, map ? function (k) { hlSet(map[k]); } : null);
   }
-  function setPlaying(on) { L.playing = on && canSpeak(); if (L.playing) narrate(); else stopVoice(); drawBar(); }
+  function setPlaying(on) { L.playing = on && canSpeak(); stopVoice(); if (L.playing) naturalStart(narrate); drawBar(); }
 
   /* ---------- drawing ---------- */
   function ico(n) { return host.ico(n); }
@@ -725,7 +816,7 @@
   function askable() { if (G.PREP_ASK) return true; var T = G.PREP_TEACHER; try { return !!(T && T.explainStep && T.ready && T.ready()); } catch (e) { return false; } }
   function barHtml() {
     var s = store(), last = L.i === pages(L.les).length - 1, speak = canSpeak();
-    return '<div class="pn-lsn-bar" id="pnLsnBar"><div class="pn-lsn-bin">' +
+    return '<div class="pn-lsn-bar" id="pnLsnBar">' + dlHtml() + '<div class="pn-lsn-bin">' +
       (askable() ? '<button type="button" class="pn-ib" data-act="l-ask" aria-label="Ask MaiK about this step">' + (G.SMD_MAIK_MARK ? G.SMD_MAIK_MARK.html("mark", { size: 24, cls: "pl-mkai" }) : ic("ask")) + "</button>" : "") +
       '<button type="button" class="pn-ib" data-act="l-prev" aria-label="Previous step"' + (L.i ? "" : " disabled") + ">" + ic("back") + "</button>" +
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
@@ -750,7 +841,7 @@
     var IDS0 = G.PREP_IDS, lid0 = IDS0 ? IDS0.ofLesson(L.key) : null, bm0 = !!(s.lpbm && s.lpbm[L.key]);
     var body = step ? '<article class="pn-lsn-step' + (isP ? " pn-pearl" : "") + anim + '" tabindex="-1" aria-roledescription="lesson step">' +
         (isP && L.i === 0 ? PEARL.headerHtml(les, lid0) : "") +
-        '<p class="pn-lsn-tx">' + boldHtml(step.tx) + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
+        '<p class="pn-lsn-tx">' + stepSentences(step.tx).map(function (t, k) { return '<span class="pn-sent" data-k="' + k + '">' + boldHtml(t) + "</span>"; }).join(" ") + "</p>" + visHtml(step.vis, p) + figChip(step) + (step.qc ? qcHtml(step.qc, p) : "") +
         (isP && step.vis ? PEARL.attributionLink(step.vis) : "") +
         (isP && L.i === n - 1 ? PEARL.footerHtml(les, lid0, bm0) : "") + "</article>"
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
@@ -861,7 +952,7 @@
   function go(i, keepVoice) {
     L.dir = i > L.i ? 1 : -1; L.i = i; save();
     draw(L.dir > 0 ? "[data-act=l-next]" : "[data-act=l-prev]");
-    if (L.playing) narrate(); else if (!keepVoice) stopVoice();
+    if (L.playing) { stopVoice(); naturalStart(narrate); } else if (!keepVoice) stopVoice();
   }
   function next() {
     if (L.i < pages(L.les).length - 1) return go(L.i + 1);
@@ -974,6 +1065,7 @@
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
+    try { if (G.PREP_VOICE && G.PREP_VOICE.available()) G.PREP_VOICE.init(); } catch (e) {}   // a voice downloaded before loads from the phone now
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
@@ -1035,7 +1127,7 @@
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
     return false;
   }
-  function leave() { L.playing = false; L.zoom = null; stopVoice(); }
+  function leave() { L.playing = false; L.zoom = null; stopVoice(); try { if (G.PREP_VOICE) G.PREP_VOICE.release(); } catch (e) {} }
   /* Taps on the interactive parts. Each updates its own part in place and keeps the focus on the control. */
   function ixAct(a, b) {
     var r = host.root && host.root(), p = page(), step = typeof p === "number" ? L.les.steps[p] : null, v = step && step.vis, ans = ansOf(L.i), k = +b.getAttribute("data-k");

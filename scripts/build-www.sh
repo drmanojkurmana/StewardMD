@@ -325,6 +325,8 @@ if [ -f prep/taxonomy.json ]; then
     mkdir -p "$WWW/prep/lessons/v1" && cp prep/lessons/v1/*.json "$WWW/prep/lessons/v1/"
     [ -d prep/lessons/media ] && mkdir -p "$WWW/prep/lessons/media" && cp prep/lessons/media/* "$WWW/prep/lessons/media/"
   fi
+  # Natural lesson voice (prep-voice.js): nothing to copy here. The runtime ships from vendor/phonon-tts (copied with vendor/), the
+  # 64.5 MB model is not bundled: the app downloads it from Hugging Face on the first tap of Play.
   # Interactive figures (fig-viewer.js): self-contained pages built with the Anima kit (MIT), dark + light, with their licence.
   if [ -d prep/figures ]; then
     mkdir -p "$WWW/prep/figures" && cp prep/figures/*.html prep/figures/figures.json prep/figures/ANIMA-LICENSE.txt prep/figures/ANATOMY-LICENSE.txt "$WWW/prep/figures/"

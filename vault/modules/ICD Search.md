@@ -89,3 +89,8 @@ dedup, cap-at-6, and malformed-input handling) — no network/LLM/D1 involved in
 - **`diagnosisIcd` is additive everywhere it's wired**, never a silent rewrite of an existing
   free-text field — the same safety posture as Scheme Search's "never guess a rate" rule, applied
   to "never let a code search quietly change what the clinician already documented."
+
+## iPad (2026-11-04, iPad standards pass)
+- On `html.smd-tablet` at 1000 px and wider, tapping a result opens the code in a pane beside the list
+  (`openDetailSplit` in `icd.js`, root class `.icd-split`, layout in `ipad-clinical.css`). Below 1000 px and on phones
+  the detail still replaces the list (unchanged). Picker mode (`SMD_ICD.pick`) never opens a detail.
