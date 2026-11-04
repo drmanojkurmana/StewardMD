@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "snp-ckd-mbd",
+  "subject": "ss-nephrology",
+  "title": "CKD Mineral and Bone Disorder",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**CKD-MBD**, or chronic kidney disease **mineral and bone disorder**, is a systemic disorder encompassing biochemical derangements of calcium, phosphorus, PTH, or vitamin D, osteodystrophy bone turnover abnormalities, and extensive cardiovascular **vascular calcification**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "CKD-MBD, or chronic kidney disease mineral and bone disorder, is a systemic disorder encompassing biochemical derangements of calcium, phosphorus, PTH, or vitamin D, osteodystrophy bone turnover abnormalities, and extensive cardiovascular vascular calcification. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-fig2.webp",
+        "alt": "CKD mineral and bone disorder with hyperphosphataemia, low calcitriol, secondary hyperparathyroidism, and vascular calcification.",
+        "caption": "Falling GFR driving phosphate retention, calcitriol loss, secondary hyperparathyroidism, renal osteodystrophy, and vascular calcification. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "The pathogenesis of **secondary hyperparathyroidism** begins early in CKD with renal phosphate retention and rising osteocyte **FGF23** secretion, which suppresses renal **1-alpha-hydroxylase** to cause profound **calcitriol** deficiency. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "The pathogenesis of secondary hyperparathyroidism begins early in CKD with renal phosphate retention and rising osteocyte FGF23 secretion, which suppresses renal 1-alpha-hydroxylase to cause profound calcitriol deficiency. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Phosphate retention and early FGF23 elevation"
+          },
+          {
+            "id": "b2",
+            "label": "Inhibition of renal CYP27B1 1-alpha-hydroxylase"
+          },
+          {
+            "id": "b3",
+            "label": "Calcitriol deficiency drives secondary hyperparathyroidism"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2",
+            "Osteocyte FGF23 excess"
+          ],
+          [
+            "b2",
+            "b3",
+            "Decreased intestinal calcium absorption"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**KDIGO** clinical guidelines suggest maintaining serum intact **parathyroid hormone**, or **iPTH**, levels in end-stage kidney disease on hemodialysis, designated as **CKD G5D**, in the target range of **2** to **9** times the assay upper normal limit, typically **130** to **600** pg/mL. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "KDIGO clinical guidelines suggest maintaining serum intact parathyroid hormone, or iPTH, levels in end-stage kidney disease on hemodialysis, designated as CKD G5D, in the target range of 2 to 9 times the assay upper normal limit, typically 130 to 600 pg/mL. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CKD G5D PTH Range",
+          "Target Level (pg/mL)",
+          "Underlying Bone Status"
+        ],
+        "rows": [
+          [
+            "Below target (< 2x normal)",
+            "< 130 pg/mL",
+            "Adynamic bone disease / low bone turnover"
+          ],
+          [
+            "Optimal target (2 to 9x normal)",
+            "130 to 600 pg/mL",
+            "Physiologically compensated uremic bone turnover"
+          ],
+          [
+            "Above target (> 9x normal)",
+            "> 600 pg/mL",
+            "High-turnover osteitis fibrosa cystica"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-calcium-based phosphate binders, including **sevelamer** carbonate, **lanthanum** carbonate, and **sucroferric oxyhydroxide**, prevent positive calcium balance and significantly attenuate progression of **coronary calcification** compared with calcium acetate. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Non-calcium-based phosphate binders, including sevelamer carbonate, lanthanum carbonate, and sucroferric oxyhydroxide, prevent positive calcium balance and significantly attenuate progression of coronary calcification compared with calcium acetate. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-Calcium Binders",
+          "points": [
+            "Agents: Sevelamer, lanthanum, sucroferric oxyhydroxide",
+            "Calcium balance: Neutral calcium balance without loading",
+            "Cardiovascular effect: Significantly attenuates vascular calcification",
+            "Lipid effect: Sevelamer binds bile acids and lowers LDL"
+          ]
+        },
+        "right": {
+          "title": "Calcium-Based Binders",
+          "points": [
+            "Agents: Calcium acetate, calcium carbonate",
+            "Calcium balance: Positive calcium load and accumulation",
+            "Cardiovascular effect: Accelerates medial arterial calcification",
+            "Cost profile: Low-cost but higher hypercalcemia risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Calcimimetics**, including oral **cinacalcet** and intravenous **etelcalcetide**, allosterically modulate the **calcium-sensing receptor** on parathyroid chief cells, suppressing PTH secretion while simultaneously lowering serum calcium and phosphorus concentrations. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Calcimimetics, including oral cinacalcet and intravenous etelcalcetide, allosterically modulate the calcium-sensing receptor on parathyroid chief cells, suppressing PTH secretion while simultaneously lowering serum calcium and phosphorus concentrations. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/parathyroid-calcium-disorders-fig2.webp",
+        "alt": "Parathyroid hormone acting on bone, kidney, and gut, with a calcimimetic site on the chief cell.",
+        "caption": "Parathyroid hormone axis across bone, kidney, and gut. Calcimimetics act on the chief-cell calcium-sensing receptor. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Adynamic bone disease** is a **low-turnover bone** disorder characterized by markedly depressed **osteoblast** and osteoclast activity and low bone formation, associated with **oversuppression** of PTH with iPTH under **100** pg/mL, carrying high fracture risk. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Adynamic bone disease is a low-turnover bone disorder characterized by markedly depressed osteoblast and osteoclast activity and low bone formation, associated with oversuppression of PTH with iPTH under 100 pg/mL, carrying high fracture risk. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adynamic Bone Disease",
+          "points": [
+            "Bone turnover: Markedly reduced low-turnover rate",
+            "PTH level: Oversuppressed iPTH < 100 pg/mL",
+            "Cellular activity: Striking absence of osteoblasts and osteoclasts",
+            "Management: Withhold calcimimetics and reduce calcium binders"
+          ]
+        },
+        "right": {
+          "title": "Osteitis Fibrosa Cystica",
+          "points": [
+            "Bone turnover: Markedly accelerated high-turnover rate",
+            "PTH level: Excessively elevated iPTH > 600 pg/mL",
+            "Cellular activity: Abundant osteoclasts with marrow fibrosis",
+            "Management: Intensify calcimimetics and vitamin D analogues"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Calciphylaxis**, also termed **calcific uremic arteriolopathy**, is a life-threatening syndrome of medial arteriolar calcification, endovascular fibrosis, and **microthrombosis** resulting in **ischemic ulcers** and necrotic subcutaneous plaques. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Calciphylaxis, also termed calcific uremic arteriolopathy, is a life-threatening syndrome of medial arteriolar calcification, endovascular fibrosis, and microthrombosis resulting in ischemic ulcers and necrotic subcutaneous plaques. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Calciphylaxis Finding",
+          "Pathophysiologic Basis"
+        ],
+        "rows": [
+          [
+            "Cutaneous lesions",
+            "Painful violaceous mottling and necrotic ulcers",
+            "Ischemic necrosis of subcutaneous adipose tissue"
+          ],
+          [
+            "Histopathology",
+            "Medial arteriolar calcification and intraluminal thrombosis",
+            "Widespread small vessel microcalcification"
+          ],
+          [
+            "Associated risk factors",
+            "Warfarin therapy, hyperphosphatemia, female sex",
+            "Inhibition of matrix Gla protein carboxylation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Medical management of **calciphylaxis** centers on intravenous **sodium thiosulfate** dosed at **25** g infused post-dialysis **3** times weekly, aggressive **wound care**, cessation of calcium binders and warfarin, and reducing calcium-phosphorus product. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Medical management of calciphylaxis centers on intravenous sodium thiosulfate dosed at 25 g infused post-dialysis 3 times weekly, aggressive wound care, cessation of calcium binders and warfarin, and reducing calcium-phosphorus product. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Discontinue warfarin, calcium, and vitamin D"
+          },
+          {
+            "id": "c2",
+            "label": "Sodium thiosulfate 25 g IV 3x weekly"
+          },
+          {
+            "id": "c3",
+            "label": "Specialized wound debridement and hyperbaric O2"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Arrest calcific crystal progression"
+          ],
+          [
+            "c2",
+            "c3",
+            "Promote antioxidant healing of ischemic tissue"
+          ]
+        ]
+      }
+    }
+  ]
+}

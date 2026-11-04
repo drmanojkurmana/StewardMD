@@ -1,0 +1,212 @@
+{
+  "v": 1,
+  "module": "snp-paraprotein-kidney",
+  "subject": "ss-nephrology",
+  "title": "Paraprotein-Related Kidney Disease and Amyloidosis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Myeloma cast nephropathy**, also termed light chain cast nephropathy, is the most common cause of acute kidney injury in multiple myeloma. It occurs when excess monoclonal **free light chains** coprecipitate with **Tamm-Horsfall** mucoprotein in distal tubules, forming dense fractured casts surrounded by multinucleated giant cells.",
+      "say": "Myeloma cast nephropathy, also termed light chain cast nephropathy, is the most common cause of acute kidney injury in multiple myeloma. It occurs when excess monoclonal free light chains coprecipitate with Tamm-Horsfall mucoprotein in distal tubules, forming dense fractured casts surrounded by multinucleated giant cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloma-fig1.webp",
+        "alt": "Renal biopsy showing fractured polychromatic tubular casts and multinucleated giant cells in myeloma.",
+        "caption": "Fractured intratubular light chain casts in myeloma cast nephropathy. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**AL amyloidosis** is caused by monoclonal light chains, predominantly lambda in **75%** to **80%** of cases, misfolding into insoluble **7.5** to **10** nm non-branching fibrils in a **beta-pleated** sheet configuration. Biopsy demonstrates diagnostic **apple-green birefringence** under polarized light following **Congo red** staining. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "AL amyloidosis is caused by monoclonal light chains, predominantly lambda in 75% to 80% of cases, misfolding into insoluble 7.5 to 10 nm non-branching fibrils in a beta-pleated sheet configuration. Biopsy demonstrates diagnostic apple-green birefringence under polarized light following Congo red staining. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/al-amyloidosis-fig1.webp",
+        "alt": "Histopathology of renal amyloidosis showing amorphous mesangial deposits and Congo red staining.",
+        "caption": "Congo red positivity and apple-green birefringence in AL amyloidosis. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Monoclonal gammopathy of renal significance**, designated as **MGRS**, defines a clonal B-cell or plasma cell proliferative disorder that fails to meet criteria for overt myeloma or lymphoma but produces a **nephrotoxic** monoclonal paraprotein that causes direct renal parenchymal injury. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Monoclonal gammopathy of renal significance, designated as MGRS, defines a clonal B-cell or plasma cell proliferative disorder that fails to meet criteria for overt myeloma or lymphoma but produces a nephrotoxic monoclonal paraprotein that causes direct renal parenchymal injury. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MGUS (Hematologic)",
+          "points": [
+            "Clonal burden: Small plasma cell clone < 10%",
+            "Organ damage: Absent end-organ CRAB manifestations",
+            "Renal status: Completely normal renal function and urinalysis",
+            "Therapy: Expectant observation without clone eradication"
+          ]
+        },
+        "right": {
+          "title": "MGRS (Nephrologic)",
+          "points": [
+            "Clonal burden: Small plasma cell clone < 10%",
+            "Organ damage: Severe progressive monoclonal kidney damage",
+            "Renal status: Proteinuria, nephrotic syndrome, or decline",
+            "Therapy: Clone-directed chemotherapy to preserve kidneys"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Light chain deposition disease**, or **LCDD**, predominantly involves **kappa** light chains in **80%** of cases. Light microscopy displays **nodular glomerulosclerosis** mimicking diabetic nephropathy, while immunofluorescence demonstrates continuous non-fibrillar linear kappa staining along glomerular and tubular basement membranes. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Light chain deposition disease, or LCDD, predominantly involves kappa light chains in 80% of cases. Light microscopy displays nodular glomerulosclerosis mimicking diabetic nephropathy, while immunofluorescence demonstrates continuous non-fibrillar linear kappa staining along glomerular and tubular basement membranes. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "AL Amyloidosis",
+          "Light Chain Deposition Disease"
+        ],
+        "rows": [
+          [
+            "Predominant light chain",
+            "Lambda light chains (75% to 80%)",
+            "Kappa light chains (80%)"
+          ],
+          [
+            "Ultrastructural appearance",
+            "Randomly arranged 7.5 to 10 nm fibrils",
+            "Granular non-fibrillar electron-dense deposits"
+          ],
+          [
+            "Congo red staining",
+            "Positive with apple-green birefringence",
+            "Completely negative"
+          ],
+          [
+            "Glomerular histology",
+            "Amorphous acellular mesangial expansion",
+            "Lobular nodular glomerulosclerosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The phase 3 **ANDROMEDA trial** established that subcutaneous **daratumumab**, an anti-**CD38** monoclonal antibody, combined with bortezomib, cyclophosphamide, and dexamethasone, produces significantly higher rates of complete hematologic and renal organ response in newly diagnosed **AL amyloidosis**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The phase 3 ANDROMEDA trial established that subcutaneous daratumumab, an anti-CD38 monoclonal antibody, combined with bortezomib, cyclophosphamide, and dexamethasone, produces significantly higher rates of complete hematologic and renal organ response in newly diagnosed AL amyloidosis. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Target plasma cell clone with Daratumumab"
+          },
+          {
+            "id": "d2",
+            "label": "Add Bortezomib, Cytoxan, Dexamethasone"
+          },
+          {
+            "id": "d3",
+            "label": "Rapid hematologic and renal organ response"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2",
+            "Subcutaneous anti-CD38 backbone"
+          ],
+          [
+            "d2",
+            "d3",
+            "ANDROMEDA trial verified superiority"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**AA amyloidosis** arises secondary to chronic persistent inflammation including rheumatoid arthritis, bronchiectasis, and **familial Mediterranean fever**. Cleavage of **serum amyloid A** creates deposits that characteristically lose their Congo red affinity following potassium **permanganate** oxidation. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "AA amyloidosis arises secondary to chronic persistent inflammation including rheumatoid arthritis, bronchiectasis, and familial Mediterranean fever. Cleavage of serum amyloid A creates deposits that characteristically lose their Congo red affinity following potassium permanganate oxidation. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AA Amyloidosis",
+          "points": [
+            "Precursor protein: Serum amyloid A (SAA) acute-phase reactant",
+            "Underlying causes: Familial Mediterranean fever, bronchiectasis, RA",
+            "Permanganate reaction: Loses Congo red staining after oxidation",
+            "Target therapy: Treat underlying chronic inflammatory drive"
+          ]
+        },
+        "right": {
+          "title": "AL Amyloidosis",
+          "points": [
+            "Precursor protein: Monoclonal immunoglobulin free light chains",
+            "Underlying causes: Clonal plasma cell proliferative disorder",
+            "Permanganate reaction: Retains Congo red positivity after oxidation",
+            "Target therapy: Clone-directed anti-plasma-cell chemotherapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **serum free light chain** assay, or **sFLC**, evaluates monoclonal burden. The normal ratio ranges from **0.26** to **1.65**, shifting to **0.37** to **3.10** in renal clearance reduction. An involved light chain level exceeding **1500** mg/L, or **100** mg/dL, strongly predicts **cast nephropathy**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The serum free light chain assay, or sFLC, evaluates monoclonal burden, where the normal ratio ranges from zero point twenty-six to one point sixty-five, shifting to zero point thirty-seven to three point ten in renal clearance reduction. An involved light chain level exceeding 1500 mg/L, or 100 mg/dL, strongly predicts cast nephropathy. Careful clinical evaluation and regular monitoring ensure optimal therapeutic outcomes in these complex patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Renal Status",
+          "Normal sFLC Ratio",
+          "Pathologic Interpretation"
+        ],
+        "rows": [
+          [
+            "Normal renal clearance",
+            "0.26 to 1.65",
+            "Normal polyclonal kappa and lambda balance"
+          ],
+          [
+            "Chronic kidney disease",
+            "0.37 to 3.10",
+            "Adjusted reference range due to reduced reticuloendothelial clearance"
+          ],
+          [
+            "Cast nephropathy risk",
+            "Ratio > 100 or involved FLC > 1500 mg/L",
+            "Immediate risk of tubular cast precipitation and AKI"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**C3 glomerulopathy** in older adults frequently represents an unappreciated manifestation of **MGRS**. In these patients, a monoclonal paraprotein functions as an autoantibody that constitutively activates the **alternative complement pathway**, driving isolated glomerular C3 accumulation. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "C3 glomerulopathy in older adults frequently represents an unappreciated manifestation of MGRS. In these patients, a monoclonal paraprotein functions as an autoantibody that constitutively activates the alternative complement pathway, driving isolated glomerular C3 accumulation. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Monoclonal paraprotein autoantibody"
+          },
+          {
+            "id": "c2",
+            "label": "Constitutive alternative complement activation"
+          },
+          {
+            "id": "c3",
+            "label": "Mesangial and capillary C3 deposition"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Stabilize C3 convertase / autoantibody"
+          ],
+          [
+            "c2",
+            "c3",
+            "C3 glomerulopathy in older adults"
+          ]
+        ]
+      }
+    }
+  ]
+}

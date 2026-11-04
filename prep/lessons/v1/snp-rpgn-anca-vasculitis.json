@@ -1,0 +1,208 @@
+{
+  "v": 1,
+  "module": "snp-rpgn-anca-vasculitis",
+  "subject": "ss-nephrology",
+  "title": "RPGN and ANCA-Associated Vasculitis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Rapidly progressive glomerulonephritis**, abbreviated as **RPGN**, denotes a clinical syndrome of rapid renal decline with more than **50%** loss of GFR within weeks, accompanied by active sediment and extensive **crescent formation** involving over 50% of glomeruli. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Rapidly progressive glomerulonephritis, abbreviated as RPGN, denotes a clinical syndrome of rapid renal decline with more than 50% loss of GFR within weeks, accompanied by active sediment and extensive crescent formation involving over 50% of glomeruli. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anca-small-vessel-vasculitis-long-case-fig1.webp",
+        "alt": "Renal biopsy showing cellular crescent formation and necrotizing glomerulonephritis.",
+        "caption": "Glomerular crescent formation and necrotizing capillary injury in RPGN. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Pauci-immune** necrotizing **crescentic glomerulonephritis** accounts for **80%** of RPGN cases in older adults. Biopsy reveals segmental fibrinoid necrosis and cellular crescents without significant immunoglobulin or complement deposition on **immunofluorescence**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "say": "Pauci-immune necrotizing crescentic glomerulonephritis accounts for 80% of RPGN cases in older adults. Biopsy demonstrates segmental fibrinoid necrosis and cellular crescents without significant immunoglobulin or complement deposition on immunofluorescence. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "RPGN Category",
+          "Immunofluorescence Pattern",
+          "Classic Clinical Etiology"
+        ],
+        "rows": [
+          [
+            "Type 1: Anti-GBM",
+            "Linear IgG along capillary loops",
+            "Goodpasture disease"
+          ],
+          [
+            "Type 2: Immune complex",
+            "Granular mesangial / capillary immune complexes",
+            "Lupus nephritis / post-infectious GN"
+          ],
+          [
+            "Type 3: Pauci-immune",
+            "Negative or trace immunofluorescence",
+            "ANCA-associated vasculitis (GPA / MPA)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Serological testing distinguishes vasculitic subsets. Granulomatosis with polyangiitis is predominantly linked to **c-ANCA** directed against **proteinase 3**, termed **PR3-ANCA**. In contrast, microscopic polyangiitis is associated with **p-ANCA** directed against **myeloperoxidase**, termed **MPO-ANCA**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Serological testing distinguishes vasculitic subsets. Granulomatosis with polyangiitis is predominantly linked to c-ANCA directed against proteinase 3, termed PR3-ANCA. In contrast, microscopic polyangiitis is associated with p-ANCA directed against myeloperoxidase, termed MPO-ANCA. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PR3-ANCA / GPA",
+          "points": [
+            "Pattern: Cytoplasmic c-ANCA",
+            "Antigen target: Proteinase 3",
+            "Clinical phenotype: Granulomatous airway lesions and cavitary nodules",
+            "Relapse profile: Significantly higher relapse rate"
+          ]
+        },
+        "right": {
+          "title": "MPO-ANCA / MPA",
+          "points": [
+            "Pattern: Perinuclear p-ANCA",
+            "Antigen target: Myeloperoxidase",
+            "Clinical phenotype: Severe pulmonary-renal syndrome without granulomas",
+            "Relapse profile: Lower relapse frequency but advanced fibrosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The landmark **RAVE trial** demonstrated that **rituximab** dosed at **375** mg/m2 weekly for **4** weeks is non-inferior to daily oral **cyclophosphamide** for remission induction in severe **ANCA-associated vasculitis**, and superior in patients presenting with relapsing disease. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The landmark RAVE trial demonstrated that rituximab dosed at 375 mg/m2 weekly for 4 weeks is non-inferior to daily oral cyclophosphamide for remission induction in severe ANCA-associated vasculitis, and superior in patients presenting with relapsing disease. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Induction Arm",
+          "Trial Regimen Protocol",
+          "Key RAVE Finding"
+        ],
+        "rows": [
+          [
+            "Rituximab arm",
+            "375 mg/m2 weekly x 4 doses",
+            "Superior in relapsing disease; avoids gonadal toxicity"
+          ],
+          [
+            "Cyclophosphamide arm",
+            "2 mg/kg/day oral for 3 to 6 months",
+            "Standard comparator; higher cumulative bladder cancer risk"
+          ],
+          [
+            "Glucocorticoid taper",
+            "High-dose pulsed methylprednisolone taper",
+            "Equivalent tapering schedule in both trial arms"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The multinational **PEXIVAS trial** evaluated therapeutic **plasma exchange**, abbreviated as **PEX**, in severe ANCA vasculitis. Routine plasma exchange demonstrated no significant reduction in long-term **end-stage kidney disease** or all-cause mortality across the overall study cohort. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The multinational PEXIVAS trial evaluated therapeutic plasma exchange, abbreviated as PEX, in severe ANCA vasculitis. Routine plasma exchange demonstrated no significant reduction in long-term end-stage kidney disease or all-cause mortality across the overall study cohort. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Severe ANCA vasculitis presentation"
+          },
+          {
+            "id": "p2",
+            "label": "Randomized to PEX versus no PEX"
+          },
+          {
+            "id": "p3",
+            "label": "No difference in long-term ESKD or death"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "PEXIVAS 704-patient trial"
+          ],
+          [
+            "p2",
+            "p3",
+            "Routine plasma exchange unproven"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Avacopan**, an oral selective **C5a receptor** 1 antagonist evaluated in the **ADVOCATE trial**, proved non-inferior to standard glucocorticoid tapers for induction. It allowed complete elimination of high-dose systemic **corticosteroid** therapy, significantly reducing steroid-related adverse events. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Avacopan, an oral selective C5a receptor 1 antagonist evaluated in the ADVOCATE trial, proved non-inferior to standard glucocorticoid tapers for induction. It allowed complete elimination of high-dose systemic corticosteroid therapy, significantly reducing steroid-related adverse events. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Avacopan Strategy",
+          "points": [
+            "Mechanism: Selective C5aR1 receptor antagonist",
+            "Glucocorticoid exposure: Completely eliminates high-dose oral steroids",
+            "eGFR trajectory: Sustained long-term renal function improvement",
+            "Toxicity profile: Significantly reduced infection and steroid morbidity"
+          ]
+        },
+        "right": {
+          "title": "Standard Steroid Taper",
+          "points": [
+            "Mechanism: Broad genomic and non-genomic glucocorticoid suppression",
+            "Glucocorticoid exposure: Prolonged high-dose oral prednisone taper",
+            "eGFR trajectory: Standard induction remission rate",
+            "Toxicity profile: High incidence of diabetes, cataracts, and osteopenia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Berden classification** stratifies renal biopsy prognosis in ANCA glomerulonephritis into four classes: **focal** with at least **50%** normal glomeruli conferring the best prognosis, **crescentic** with over 50% cellular crescents, mixed (intermediate prognosis), and **sclerotic** with over 50% global sclerosis conferring the poorest outcome. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The Berden classification stratifies renal biopsy prognosis in ANCA glomerulonephritis into four classes: focal with at least 50% normal glomeruli conferring the best prognosis, crescentic with over 50% cellular crescents, mixed (intermediate prognosis), and sclerotic with over 50% global sclerosis conferring the poorest outcome. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Berden Histologic Class",
+          "Biopsy Criteria",
+          "Renal Prognosis"
+        ],
+        "rows": [
+          [
+            "Focal class",
+            ">= 50% normal intact glomeruli",
+            "Highest renal recovery and survival"
+          ],
+          [
+            "Crescentic class",
+            ">= 50% cellular crescents",
+            "High response to aggressive immunosuppression"
+          ],
+          [
+            "Mixed class",
+            "Heterogeneous without single dominance",
+            "Intermediate renal functional recovery"
+          ],
+          [
+            "Sclerotic class",
+            ">= 50% globally sclerotic glomeruli",
+            "Poorest recovery; high progression to ESKD"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Maintenance therapy prevents devastating clinical relapses. The **MAINRITSAN trial** proved that **rituximab** administered at **500** mg IV every **6** months for **2** years is markedly superior to daily oral **azathioprine** in sustaining remission in ANCA vasculitis. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Maintenance therapy prevents devastating clinical relapses. The MAINRITSAN trial proved that rituximab administered at 500 mg IV every 6 months for 2 years is markedly superior to daily oral azathioprine in sustaining remission in ANCA vasculitis. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/granulomatosis-polyangiitis-fig1.webp",
+        "alt": "Granulomatosis with polyangiitis affecting the airway, lung, and kidney, often with c-ANCA.",
+        "caption": "Airway, lung, and kidney disease of granulomatosis with polyangiitis, the illness in which rituximab maintenance reduced relapses in MAINRITSAN. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    }
+  ]
+}

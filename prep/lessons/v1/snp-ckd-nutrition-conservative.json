@@ -1,107 +1,203 @@
 {
- "v": 1,
- "module": "snp-ckd-nutrition-conservative",
- "subject": "ss-nephrology",
- "title": "Nutrition and conservative kidney management",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Protein energy wasting (PEW) is a state of **loss of body protein and energy stores** seen in advanced CKD. It reflects reduced intake, inflammation and metabolic stress together. Malnutrition in CKD predicts poor outcomes, so nutritional status must be assessed early and repeatedly. Two commonly used tools are **subjective global assessment (SGA)** and the **malnutrition inflammation score (MIS)**, which adds inflammatory and dialysis-specific markers to the clinical history.",
-   "say": "Protein energy wasting is a state of loss of body protein and energy stores seen in advanced kidney disease. It reflects reduced intake, inflammation and metabolic stress together. Malnutrition predicts poor outcomes, so nutritional status must be assessed early and repeatedly. Two commonly used tools are subjective global assessment and the malnutrition inflammation score, which adds inflammatory and dialysis-specific markers to the clinical history.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Tool",
-     "What it uses",
-     "Use"
-    ],
-    "rows": [
-     [
-      "SGA",
-      "History and physical signs",
-      "Bedside screening"
-     ],
-     [
-      "MIS",
-      "SGA plus inflammation and body mass",
-      "Richer risk scoring"
-     ],
-     [
-      "Serum albumin",
-      "Liver output and inflammation",
-      "Supportive only"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In conservative management of advanced CKD, protein restriction is considered to slow decline, but it must never worsen wasting. Ketoanalogues are **essential amino acid analogues** given with a very low protein diet to supply nitrogen-free building blocks. They are an option for selected patients who cannot tolerate adequate protein intake. Energy intake should be maintained, as calorie deficit accelerates muscle loss.",
-   "say": "In conservative management of advanced kidney disease, protein restriction is considered to slow decline, but it must never worsen wasting. Ketoanalogues are essential amino acid analogues given with a very low protein diet to supply nitrogen-free building blocks. They suit selected patients who cannot tolerate adequate protein intake. Energy intake should be maintained, because a calorie deficit accelerates muscle loss.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-ckd-nutrition-conservative-fig1.webp",
-    "alt": "Diagram showing a low protein diet plate with ketoanalogues, illustrating their role in providing essential amino acids without nitrogen for CKD patients.",
-    "caption": "Ketoanalogues support very low protein diets in CKD, preventing wasting",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Dietary management of **potassium** and **phosphorus** is central in CKD. Potassium restriction is needed when serum levels rise, while hyperphosphataemia is treated with diet and phosphate binders. Phosphorus is often hidden in processed foods as **phosphate additives**, which are absorbed far more completely than natural organic phosphate. Patients should be taught to read food labels for phosphate additives.",
-   "say": "Dietary management of potassium and phosphorus is central in kidney disease. Potassium restriction is needed when serum levels rise, while raised phosphate is treated with diet and phosphate binders. Phosphorus is often hidden in processed foods as phosphate additives, which are absorbed far more completely than natural phosphate. Patients should learn to read food labels for these additives.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Natural phosphate",
-     "points": [
-      "Found in whole foods",
-      "Partly absorbed",
-      "Lower risk"
-     ]
+  "v": 1,
+  "module": "snp-ckd-nutrition-conservative",
+  "subject": "ss-nephrology",
+  "title": "Nutrition and Conservative Kidney Management",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Protein-energy wasting**, abbreviated as **PEW**, in chronic kidney disease is characterized by simultaneous loss of systemic somatic **muscle mass** and **visceral protein** reserves, driven by chronic uremic anorexia, persistent low-grade **inflammation**, and metabolic acidosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Protein-energy wasting, abbreviated as PEW, in chronic kidney disease is characterized by simultaneous loss of systemic somatic muscle mass and visceral protein reserves, driven by chronic uremic anorexia, persistent low-grade inflammation, and metabolic acidosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-ckd-nutrition-conservative-fig1.webp",
+        "alt": "Illustration of metabolic pathways in chronic kidney disease and nutritional management.",
+        "caption": "Metabolic derangements and protein-energy wasting in advanced CKD. Credit: StewardMD.",
+        "ar": 1.3333
+      }
     },
-    "right": {
-     "title": "Phosphate additives",
-     "points": [
-      "Added to processed foods",
-      "Almost fully absorbed",
-      "Higher risk"
-     ]
+    {
+      "tx": "The **KDOQI 2020** guidelines recommend dietary protein restriction of **0.55** to **0.60** g/kg/day, or very-low-protein diets of **0.28** to **0.43** g/kg/day supplemented with **ketoacid analogues**, in stable non-diabetic **CKD stages 3 to 5** to retard progression. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "The KDOQI 2020 guidelines advise clinicians on dietary protein restriction of 0 point 55 to 0 point 60 g/kg/day, or very-low-protein diets of 0 point 28 to 0 point 43 g/kg/day supplemented with ketoacid analogues, in stable non-diabetic CKD stages 3 to 5 to retard progression. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dietary Strategy",
+          "Protein Target (g/kg/day)",
+          "Target CKD Population"
+        ],
+        "rows": [
+          [
+            "Low-protein diet (LPD)",
+            "0.55 to 0.60 g/kg/day",
+            "Stable non-diabetic CKD stages 3 to 5"
+          ],
+          [
+            "Very-low-protein diet (VLPD)",
+            "0.28 to 0.43 g/kg/day + ketoacids",
+            "Motivated CKD patients with strict dietary oversight"
+          ],
+          [
+            "Diabetic CKD diet",
+            "0.60 to 0.80 g/kg/day",
+            "Optimizes glycemic and glycemic stability"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast to pre-dialysis restriction, patients undergoing maintenance **hemodialysis** and **peritoneal dialysis** require increased **dietary protein** of **1.0** to **1.2** g/kg/day to compensate for substantial dialytic amino acid and protein losses. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "In contrast to pre-dialysis restriction, patients undergoing maintenance hemodialysis and peritoneal dialysis require increased dietary protein of 1 point 0 to 1 point 2 g/kg/day to compensate for substantial dialytic amino acid and protein losses. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pre-Dialysis CKD (Stages 3-5)",
+          "points": [
+            "Protein target: Restricted to 0.55 to 0.60 g/kg/day",
+            "Pathophysiologic goal: Lower uremic toxins and hyperfiltration",
+            "Energy requirement: Preserved 30 to 35 kcal/kg/day",
+            "Monitoring: Prevent inadvertent protein-energy wasting"
+          ]
+        },
+        "right": {
+          "title": "Maintenance Dialysis (HD / PD)",
+          "points": [
+            "Protein target: Elevated to 1.0 to 1.2 g/kg/day",
+            "Pathophysiologic goal: Compensate for dialytic protein losses",
+            "Peritoneal loss: Up to 5 to 15 g protein lost daily in effluent",
+            "Clinical outcome: Higher protein intake reduces mortality"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Comprehensive conservative kidney management**, designated as **CCKM**, provides planned, holistic, patient-centered care for advanced kidney disease without dialysis, prioritizing **symptom control**, psychological support, and advanced care planning. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Comprehensive conservative kidney management, designated as CCKM, provides planned, holistic, patient-centered care for advanced kidney disease without dialysis, prioritizing symptom control, psychological support, and advanced care planning. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-fig1.webp",
+        "alt": "Shrunken kidney with glomerulosclerosis, tubular atrophy, interstitial fibrosis, uraemia, and anaemia.",
+        "caption": "Structural chronic kidney disease with uraemia and anaemia, the stage at which conservative kidney management is planned with the patient. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Comparative studies in **frail elderly** patients aged over **75** to **80** years with a **Charlson Comorbidity Index** of at least **8** show that **CCKM** achieves equivalent survival compared to dialysis, with fewer hospitalizations and superior home time. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Comparative studies in frail elderly patients aged over 75 to 80 years with a Charlson Comorbidity Index of at least 8 show that CCKM achieves equivalent survival compared to dialysis, with fewer hospitalizations and superior home time. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Care Pathway",
+          "Median Survival in Frail Elderly",
+          "Quality-of-Life Profile"
+        ],
+        "rows": [
+          [
+            "Comprehensive CCKM",
+            "Equivalent survival duration",
+            "Preserved independence, home days, and functional status"
+          ],
+          [
+            "Maintenance Hemodialysis",
+            "Similar survival in Charlson Index >= 8",
+            "High burden of access complications and hospitalizations"
+          ],
+          [
+            "Clinical indication",
+            "Shared decision-making in severe frailty",
+            "Focuses on palliative symptom burden reduction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Uremic pruritus** affects **40%** to **50%** of patients with advanced CKD. It is effectively relieved by **difelikefalin**, a selective peripheral **kappa-opioid** receptor agonist, or centrally acting **gabapentin** and pregabalin. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Uremic pruritus affects 40% to 50% of patients with advanced CKD. It is effectively relieved by difelikefalin, a selective peripheral kappa-opioid receptor agonist, or centrally acting gabapentin and pregabalin. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "u1",
+            "label": "Identify uremic pruritus in advanced CKD"
+          },
+          {
+            "id": "u2",
+            "label": "Difelikefalin peripheral kappa-opioid agonist"
+          },
+          {
+            "id": "u3",
+            "label": "Gabapentin / pregabalin post-dialysis"
+          }
+        ],
+        "edges": [
+          [
+            "u1",
+            "u2",
+            "First-line specialized therapy"
+          ],
+          [
+            "u2",
+            "u3",
+            "Centrally mediated itch pathway relief"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nutritional screening relies on validated clinical scoring instruments. The **Subjective Global Assessment**, or **SGA**, and the **Malnutrition-Inflammation Score**, or **MIS**, are recommended for regular periodic screening of nutritional status and PEW. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Nutritional screening relies on validated clinical scoring instruments. The Subjective Global Assessment, or SGA, and the Malnutrition-Inflammation Score, or MIS, are recommended for regular periodic screening of nutritional status and PEW. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Subjective Global Assessment (SGA)",
+          "points": [
+            "Components: Dietary history, weight changes, gastrointestinal symptoms",
+            "Physical exam: Subcutaneous fat and muscle wasting",
+            "Scoring: Categories A (well-nourished), B (moderate), C (severe)",
+            "Utility: Rapid bedside assessment"
+          ]
+        },
+        "right": {
+          "title": "Malnutrition-Inflammation Score (MIS)",
+          "points": [
+            "Components: 10 quantitative components combining SGA and laboratory",
+            "Biomarkers: Serum albumin and total iron-binding capacity",
+            "Scoring: Quantitative 0 to 30 scale",
+            "Utility: Strongest independent predictor of dialysis mortality"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Restless legs syndrome**, or **RLS**, in uremic patients exhibits nocturnal exacerbation and correlates with iron deficiency. First-line pharmacotherapy utilizes low-dose **gabapentin**, pregabalin, or intravenous **iron replacement**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Restless legs syndrome, or RLS, in uremic patients exhibits nocturnal exacerbation and correlates with iron deficiency. First-line pharmacotherapy utilizes low-dose gabapentin, pregabalin, or intravenous iron replacement. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Intervention",
+          "Dosing Protocol",
+          "Mechanism in Uremic RLS"
+        ],
+        "rows": [
+          [
+            "Intravenous iron",
+            "Target ferritin > 100 to 200 ng/mL",
+            "Reverses central dopamine receptor iron deficiency"
+          ],
+          [
+            "Gabapentin",
+            "100 to 200 mg post-dialysis",
+            "Modulates voltage-gated alpha-2-delta calcium channels"
+          ],
+          [
+            "Dopamine agonists",
+            "Pramipexole or ropinirole (second-line)",
+            "Directly stimulates striatal D2 and D3 receptors"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Restless legs syndrome affects many people on dialysis, disrupting sleep and daily life. First line steps include **correcting iron deficiency** and **optimising dialysis adequacy**, with gabapentinoids used when symptoms persist. **Advance care planning** is an ongoing dialogue about values, goals and preferred treatment, recorded so future decisions honour the patient's wishes. Start it early rather than waiting until dialysis is withdrawn.",
-   "say": "Restless legs syndrome affects many people on dialysis, disrupting sleep and daily life. First line steps include correcting iron deficiency and optimising dialysis adequacy, with gabapentinoids used when symptoms persist. Advance care planning is an ongoing dialogue about values, goals and preferred treatment, recorded so future decisions honour the patient's wishes. Start it early rather than waiting until dialysis is withdrawn.",
-   "vis": null
-  },
-  {
-   "tx": "Conservative kidney management offers an alternative to dialysis and is chosen through a **shared decision** that weighs the patient's wishes and **comorbidity**. Serum **albumin** is a poor marker of nutrition because it reflects inflammation as much as intake. Distinguish **protein energy wasting** from simple dietary restriction, since the former carries a worse prognosis. Before finalising any conservative plan, record **nutritional status**, potassium, phosphate and symptom burden.",
-   "say": "Conservative kidney management is an alternative to dialysis, and it is chosen through a shared decision that weighs the patient's wishes and comorbidity. Serum albumin is a poor marker of nutrition, because it reflects inflammation as much as intake. Distinguish protein energy wasting from simple dietary restriction, since the former carries a worse prognosis. Before finalising any conservative plan, record nutritional status, potassium, phosphate and symptom burden.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_3986b3015681",
-  "q_69768a4666b6",
-  "q_837ca185df45"
- ],
- "src": [],
- "refs": [
-  "KDIGO Clinical Practice Guideline for the Evaluation and Management of CKD",
-  "NICE Chronic kidney disease guideline"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 17
- }
+  ]
 }

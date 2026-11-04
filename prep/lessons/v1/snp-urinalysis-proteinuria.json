@@ -1,0 +1,174 @@
+{
+  "v": 1,
+  "module": "snp-urinalysis-proteinuria",
+  "subject": "ss-nephrology",
+  "title": "Urinalysis, Haematuria and Proteinuria",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Microscopic evaluation of urinary sediment provides an essential non-invasive window into renal parenchymal integrity. **Acanthocytes**, defined as ring-shaped red cells with blebs or vesicle projections, strongly establish active **glomerular haematuria** when they exceed **5%** of excreted red blood cells. Similarly, genuine **red blood cell casts** establish capillary wall disruption in acute glomerulonephritis, distinguishing glomerular bleeding from lower tract urological sources.",
+      "say": "Microscopic evaluation of urinary sediment provides an essential non-invasive window into renal parenchymal integrity. Acanthocytes, defined as ring-shaped red cells with blebs or vesicle projections, strongly establish active glomerular haematuria when they exceed 5% of excreted red blood cells. Similarly, genuine red blood cell casts establish capillary wall disruption in acute glomerulonephritis, distinguishing glomerular bleeding from lower tract urological sources.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-nephrotic-nephritic-rta-fig1.webp",
+        "alt": "Composite of nephrotic protein leak with oedema, nephritic glomerular bleeding, and a tubule with stones.",
+        "caption": "Nephrotic protein leak, nephritic glomerular bleeding, and tubular stones. The sediment findings in the text separate glomerular bleeding from lower tract blood. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Urinary casts form exclusively within distal tubular lumens. **Muddy brown granular casts** consist of sloughed necrotic tubular epithelial cells embedded in a **Tamm-Horsfall** mucoprotein matrix. Their presence confirms the diagnosis of **acute tubular necrosis** in acute kidney injury. In contrast, **broad waxy casts** with blunt fractured ends signify marked tubular dilation and stasis characteristic of advanced **chronic kidney disease**.",
+      "say": "Urinary casts form exclusively within distal tubular lumens. Muddy brown granular casts consist of sloughed necrotic tubular epithelial cells embedded in a Tamm-Horsfall mucoprotein matrix. Their presence confirms the diagnosis of acute tubular necrosis in acute kidney injury. In contrast, broad waxy casts with blunt fractured ends signify marked tubular dilation and stasis characteristic of advanced chronic kidney disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Tubular Necrosis",
+          "points": [
+            "Pathology: Tubular necrosis and sloughing",
+            "Cast type: Muddy brown granular casts",
+            "Matrix: Tamm-Horsfall mucoprotein core",
+            "Significance: Active ischemic or toxic damage"
+          ]
+        },
+        "right": {
+          "title": "Advanced CKD",
+          "points": [
+            "Pathology: Marked tubular dilation and atrophy",
+            "Cast type: Broad waxy casts with fractured ends",
+            "Matrix: Degenerated cellular matrix",
+            "Significance: Severe nephron loss and stasis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Standard **dipstick protein** detection relies on colorimetric dye binding with **tetrabromphenol blue**. This reagent is sensitive primarily to negatively charged albumin but fails to detect low concentrations of immunoglobulin light chains, termed **Bence Jones** proteinuria, or tubular microproteins. Sulfosalicylic acid precipitation testing is mandatory whenever light chain excretion is suspected clinically.",
+      "say": "Standard dipstick protein detection relies on colorimetric dye binding with tetrabromphenol blue. This reagent is sensitive primarily to negatively charged albumin but fails to detect low concentrations of immunoglobulin light chains, termed Bence Jones proteinuria, or tubular microproteins. Sulfosalicylic acid precipitation testing is mandatory whenever light chain excretion is suspected clinically.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Assay Method",
+          "Target Detected",
+          "Clinical Blind Spot"
+        ],
+        "rows": [
+          [
+            "Tetrabromphenol dipstick",
+            "Negatively charged albumin",
+            "Misses Bence Jones light chains"
+          ],
+          [
+            "Sulfosalicylic acid test",
+            "All excreted urinary proteins",
+            "Requires manual laboratory turbidity"
+          ],
+          [
+            "Urine protein electrophoresis",
+            "Monoclonal paraprotein bands",
+            "Requires specialized electrophoretic gel"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Quantitative staging of **albuminuria** relies on the spot **urine albumin-to-creatinine ratio**, abbreviated as **ACR**. Staging classifies excretion into category A1, denoting normal to mildly increased excretion under **30** mg/g; category A2, denoting moderately increased excretion between **30** and **300** mg/g; and category A3, signifying severely increased excretion exceeding **300** mg/g.",
+      "say": "Quantitative staging of albuminuria relies on the spot urine albumin-to-creatinine ratio, abbreviated as ACR. Staging classifies excretion into category A1, denoting normal to mildly increased excretion under 30 mg/g; category A2, denoting moderately increased excretion between 30 and 300 mg/g; and category A3, signifying severely increased excretion exceeding 300 mg/g.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a1",
+            "label": "Category A1: ACR < 30 mg/g"
+          },
+          {
+            "id": "a2",
+            "label": "Category A2: ACR 30 to 300 mg/g"
+          },
+          {
+            "id": "a3",
+            "label": "Category A3: ACR > 300 mg/g"
+          }
+        ],
+        "edges": [
+          [
+            "a1",
+            "a2",
+            "Progression"
+          ],
+          [
+            "a2",
+            "a3",
+            "Overt nephropathy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Orthostatic proteinuria**, or postural proteinuria, represents a benign condition present exclusively during upright posture and completely absent in first-morning **recumbent** urine samples. Total protein excretion typically remains under **1** g per day in young adults. Demonstrating normal protein excretion in recumbent first-morning samples confirms the diagnosis and avoids unnecessary invasive renal biopsies.",
+      "say": "Orthostatic proteinuria, or postural proteinuria, represents a benign condition present exclusively during upright posture and completely absent in first-morning recumbent urine samples. Total protein excretion typically remains under 1 g per day in young adults. Demonstrating normal protein excretion in recumbent first-morning samples confirms the diagnosis and avoids unnecessary invasive renal biopsies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Posture State",
+          "Timed Excretion Rate",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "First-morning recumbent",
+            "Zero protein excretion",
+            "Excludes intrinsic glomerular injury"
+          ],
+          [
+            "Daytime ambulatory",
+            "Proteinuria under 1 g/day",
+            "Benign hemodynamic orthostatic shift"
+          ],
+          [
+            "Long-term follow-up",
+            "Preserved normal eGFR",
+            "No structural progression over time"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tubular proteinuria** develops when proximal tubular injury impairs receptor-mediated endocytosis of freely filtered low-molecular-weight proteins. Patients excrete **beta-2 microglobulin**, alpha-1 microglobulin, and **retinol-binding protein** without nephrotic-range albuminuria. This distinctive pattern confirms tubulointerstitial disease, heavy metal nephrotoxicity, or Fanconi syndrome rather than glomerular filtration barrier disruption.",
+      "say": "Tubular proteinuria develops when proximal tubular injury impairs receptor-mediated endocytosis of freely filtered low-molecular-weight proteins. Patients excrete beta-2 microglobulin, alpha-1 microglobulin, and retinol-binding protein without nephrotic-range albuminuria. This distinctive pattern confirms tubulointerstitial disease, heavy metal nephrotoxicity, or Fanconi syndrome rather than glomerular filtration barrier disruption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Glomerular Proteinuria",
+          "points": [
+            "Pathology: Barrier pore defect and charge loss",
+            "Primary protein: Excreted albumin",
+            "Urinary biomarker: Highly elevated ACR",
+            "Clinical range: Frequently reaches nephrotic levels"
+          ]
+        },
+        "right": {
+          "title": "Tubular Proteinuria",
+          "points": [
+            "Pathology: Defective megalin-cubilin endocytosis",
+            "Primary proteins: Beta-2 microglobulin and retinol-binding protein",
+            "Urinary biomarker: Excreted low-molecular-weight proteins",
+            "Clinical range: Mild proteinuria below nephrotic range"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Microscopic crystal analysis identifies metabolic stones and acute nephrotoxins. Acidic urine reveals envelope-shaped **calcium oxalate** dihydrate crystals or dumbbell monohydrate crystals in **ethylene glycol** toxicity. In contrast, alkaline urine with urease-producing bacteria yields coffin-lid **magnesium ammonium phosphate** crystals, confirming struvite infection calculus formation.",
+      "say": "Microscopic crystal analysis identifies metabolic stones and acute nephrotoxins. Acidic urine reveals envelope-shaped calcium oxalate dihydrate crystals or dumbbell monohydrate crystals in ethylene glycol toxicity. In contrast, alkaline urine with urease-producing bacteria yields coffin-lid magnesium ammonium phosphate crystals, confirming struvite infection calculus formation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nephrolithiasis-fig1.webp",
+        "alt": "Calcium phosphate Randall plaque with a calcium oxalate stone growing on it.",
+        "caption": "Randall plaque with a calcium oxalate stone, the stone predicted by envelope oxalate crystals in acidic urine. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    }
+  ]
+}
