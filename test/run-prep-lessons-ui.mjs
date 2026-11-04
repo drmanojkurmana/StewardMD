@@ -154,13 +154,6 @@ try {
   const c0 = await ev(`return window.__ttsCancel;`);
   await click("#smdPrep [data-act=l-play]");
   ok(await ev(`return window.__ttsCancel;`) > c0 && await ev(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed");`) === "false", "Pause cancels the speech");
-  // ---- voice choice: System, Kokoro, Phonon; one tap cycles and the choice is kept (the voices themselves are switched off here)
-  const vb = () => ev(`var b=document.querySelector("#smdPrep [data-act=l-voice]"); return b ? b.textContent : "";`);
-  ok(await vb() === "Kokoro", "the lesson bar names the voice in use (Kokoro by default)");
-  const seq = [];
-  for (let k = 0; k < 3; k++) { await click("#smdPrep [data-act=l-voice]"); await sleep(120); seq.push(await vb()); }
-  ok(seq.join(",") === "Phonon,System,Kokoro", "each tap on the voice button moves to the next voice: " + seq.join(", "));
-  ok(await store(`s.lsp.eng`) === "kokoro", "the chosen voice is kept in the store");
 
   await click("#smdPrep [data-act=l-auto]");
   await shot("step3-compare");

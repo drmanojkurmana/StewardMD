@@ -12125,3 +12125,14 @@ manifests of the 10 newest versions in `ota/history.json` plus the live channel 
 build), then deletes unreferenced `ota/files/*` and old `ota/manifests/*`, and fails if the live build is missing a
 file. `.github/workflows/ota-prune.yml` runs it after every successful "OTA — publish live", in the `ota-stage`
 concurrency group. Consequence: rollback is possible only to the last 10 published versions.
+
+## Lesson narration: one on-device neural voice, Phonon 31M (owner, 2026-11-04)
+The system voice sounded artificial, so Learn got an on-device neural voice that downloads on the first tap of Play. Two
+were built and merged side by side to compare (#1966): Kokoro-82M (92 MB, needs a phonemizer; espeak-ng is GPL, so a CMU
+dictionary plus spelling rules was written instead) and Gradium's Phonon 31M (64.5 MB, Apache-2.0, reads text directly,
+runtime vendored as `vendor/phonon-tts`). The owner ruled: keep Phonon, one voice only, remove the rest. Kokoro, its
+lexicon, the voice-switch pill and the engine facade are gone; the system voice stays as the fallback (also used when a
+one-time speed timing says the phone renders slower than 1.3 times real time, and when the voice is unsupported or the
+download fails). Open: the real Phonon runtime has not been run by us, so its speed and behaviour in the iOS and Android
+WebViews are unverified. If it proves too slow or fails in the app, the options were KittenTTS nano (24 MB) or native MLX
+on iOS. Reversible: `window.SMD_PREP_VOICE = false`, or drop `prep-voice.js` from the loader list.
