@@ -1,148 +1,208 @@
 {
- "v": 1,
- "module": "snp-tubulopathies",
- "subject": "ss-nephrology",
- "title": "Inherited tubulopathies: salt handling defects and key syndromes",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Inherited tubulopathies are **monogenic transporter defects** of the renal tubule. Hypokalaemia with metabolic alkalosis tells you the tubule is wasting salt and potassium. Bartter syndrome affects the thick ascending limb and is normotensive with hypercalciuria. Gitelman syndrome affects the distal convoluted tubule and causes **hypomagnesaemia** with hypocalciuria. Liddle syndrome is a gain of **epithelial sodium channel** function, causing hypertension with suppressed renin and aldosterone.",
-   "say": "Inherited tubulopathies are monogenic transporter defects of the renal tubule. Hypokalaemia with metabolic alkalosis tells you the tubule is wasting salt and potassium. Bartter syndrome affects the thick ascending limb and is normotensive, with hypercalciuria. Gitelman syndrome affects the distal convoluted tubule and causes hypomagnesaemia with hypocalciuria. Liddle syndrome is a gain of epithelial sodium channel function, causing hypertension with suppressed renin and aldosterone.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Bartter",
-     "Gitelman",
-     "Liddle"
-    ],
-    "rows": [
-     [
-      "Tubular site",
-      "Thick ascending limb",
-      "Distal convoluted tubule",
-      "Collecting duct sodium channel"
-     ],
-     [
-      "Serum magnesium",
-      "Normal or low",
-      "Low",
-      "Normal"
-     ],
-     [
-      "Urinary calcium",
-      "High",
-      "Low",
-      "Normal"
-     ],
-     [
-      "Blood pressure",
-      "Normal or low",
-      "Normal or low",
-      "High"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Vomiting and covert diuretic use can mimic Bartter syndrome, so a **spot urine chloride** is the key discriminator. Bartter syndrome usually shows urine chloride above 35 mmol per litre because the salt loss is renal. Vomiting drives chloride out through the stomach, so urine chloride falls below 25 mmol per litre. Diuretic misuse also gives high urine chloride, so a urinary screen for diuretics is worth ordering.",
-   "say": "Vomiting and covert diuretic use can mimic Bartter syndrome, so a spot urine chloride is the key discriminator. Bartter syndrome usually shows urine chloride above 35 millimoles per litre because the salt loss is renal. Vomiting removes chloride through the stomach, so urine chloride falls below 25 millimoles per litre. Diuretic misuse also gives high urine chloride, so a urinary screen for diuretics is worth ordering.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Hypokalaemic alkalosis"
-     },
-     {
-      "id": "b",
-      "label": "Spot urine chloride"
-     },
-     {
-      "id": "c",
-      "label": "Above 35 mmol per litre"
-     },
-     {
-      "id": "d",
-      "label": "Below 25 mmol per litre"
-     },
-     {
-      "id": "e",
-      "label": "Renal salt loss: Bartter or diuretic"
-     },
-     {
-      "id": "f",
-      "label": "Vomiting"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "high"
-     ],
-     [
-      "b",
-      "d",
-      "low"
-     ],
-     [
-      "c",
-      "e"
-     ],
-     [
-      "d",
-      "f"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Bartter syndrome management targets the **prostaglandin E2 excess** that drives salt loss and renal injury. Potassium and salt replacement correct the deficits. In neonates, indomethacin at 1 to 3 mg per kg per 24 hours is used to counter prostaglandin E2. Potassium sparing agents such as amiloride can be added. Note that Bartter-like syndromes from aminoglycosides often resolve over weeks to months after stopping the drug.",
-   "say": "Bartter syndrome management targets the prostaglandin E2 excess that drives salt loss and renal injury. Potassium and salt replacement correct the deficits. In neonates, indomethacin at 1 to 3 milligrams per kilogram per 24 hours is used to counter prostaglandin E2. Potassium sparing agents such as amiloride can be added. Bartter-like syndromes caused by aminoglycosides often resolve over weeks to months after the drug is stopped.",
-   "vis": null
-  },
-  {
-   "tx": "Gitelman syndrome is autosomal recessive from **SLC12A3** mutations affecting the sodium chloride cotransporter. Hypomagnesaemia drives potassium wasting, so **magnesium replacement** is central to correcting potassium. Oral sodium chloride addresses the transporter defect, and magnesium chloride is preferred because it also replaces the chloride lost in urine. Affected individuals usually have normal or low blood pressure and muscle cramps, and the risk to each child of an affected couple is one in four.",
-   "say": "Gitelman syndrome is autosomal recessive, caused by mutations in the gene that encodes the sodium chloride cotransporter. Hypomagnesaemia drives potassium wasting, so magnesium replacement is central to correcting potassium. Oral sodium chloride addresses the transporter defect, and magnesium chloride is preferred because it also replaces the chloride lost in urine. Affected people usually have normal or low blood pressure and muscle cramps, and each child of two carriers has a one in four risk.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-tubulopathies-fig1.webp",
-    "alt": "Diagram showing the distal convoluted tubule with a defective NCC transporter, leading to hypomagnesaemia and potassium wasting.",
-    "caption": "Gitelman syndrome: SLC12A3 mutation affecting NCC in distal convoluted tubule",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Cystinosis is an autosomal recessive **lysosomal storage** disorder from CTNS mutations, causing cystine accumulation. It produces a renal Fanconi syndrome with phosphate and bicarbonate wasting, and corneal crystals causing photophobia. **Cysteamine** depletes intracellular cystine and is given orally, with topical eye drops for the cornea. Even after a successful kidney transplant, extrarenal cystine persists, so systemic cysteamine must continue.",
-   "say": "Cystinosis is an autosomal recessive lysosomal storage disorder caused by CTNS mutations, which leads to cystine accumulation. It produces a renal Fanconi syndrome with phosphate and bicarbonate wasting, and corneal crystals that cause photophobia. Cysteamine depletes intracellular cystine and is given orally, with topical eye drops for the cornea. Even after a successful kidney transplant, extrarenal cystine persists, so systemic cysteamine must continue.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_307e723581d6",
-  "q_01ef7d6a5d4b",
-  "q_07f3560c797b"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 27
- }
+  "v": 1,
+  "module": "snp-tubulopathies",
+  "subject": "ss-nephrology",
+  "title": "Inherited Tubulopathies",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Bartter syndrome** is an autosomal recessive salt-wasting tubulopathy of the thick ascending limb caused by mutations in NKCC2 (Type **1**, **SLC12A1**), ROMK (Type **2**, KCNJ1), **CLC-Kb** (Type **3**, CLCNKB), or **barttin** (Type **4**, BSND with sensorineural deafness), while Type **5** involves MAGED2.",
+      "say": "Bartter syndrome is an autosomal recessive salt-wasting tubulopathy of the thick ascending limb caused by mutations in NKCC2 (Type 1, SLC12A1), ROMK (Type 2, KCNJ1), CLC-Kb (Type 3, CLCNKB), or barttin (Type 4, BSND with sensorineural deafness), while Type 5 involves MAGED2.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-tubulopathies-fig1.webp",
+        "alt": "Diagram illustrating thick ascending limb and distal convoluted tubule solute transporters.",
+        "caption": "Solute transporter pathways and inherited genetic defects in tubulopathies. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Bartter syndrome manifests with hypokalemic metabolic alkalosis, **hyperreninemic hyperaldosteronism**, **normal-to-low blood pressure**, marked **hypercalciuria**, and early medullary **nephrocalcinosis**. Elevated urinary prostaglandin E2 is common, and early indomethacin therapy provides significant clinical improvement in affected infants. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Bartter syndrome manifests with hypokalemic metabolic alkalosis, hyperreninemic hyperaldosteronism, normal-to-low blood pressure, marked hypercalciuria, and early medullary nephrocalcinosis. Elevated urinary prostaglandin E2 is common, and early indomethacin therapy provides significant clinical improvement in affected infants. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "Antenatal Bartter (Types 1/2)",
+          "Classic Bartter (Type 3)"
+        ],
+        "rows": [
+          [
+            "Fetal onset",
+            "Severe maternal polyhydramnios",
+            "Normal amniotic fluid volume"
+          ],
+          [
+            "Renal calcification",
+            "Early medullary nephrocalcinosis",
+            "Absent or mild nephrocalcinosis"
+          ],
+          [
+            "Prostaglandin excretion",
+            "Massive urinary PGE2 excretion",
+            "Moderately elevated urinary prostanoids"
+          ],
+          [
+            "Therapeutic response",
+            "High sensitivity to indomethacin",
+            "Potassium and salt repletion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Gitelman syndrome** is an autosomal recessive tubulopathy caused by loss-of-function mutations in **SLC12A3** encoding the thiazide-sensitive **NCC** cotransporter in the **distal convoluted tubule**, typically presenting during adolescence or adult life with fatigue. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Gitelman syndrome is an autosomal recessive tubulopathy caused by loss-of-function mutations in SLC12A3 encoding the thiazide-sensitive NCC cotransporter in the distal convoluted tubule, typically presenting during adolescence or adult life with fatigue. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/renal-tubular-transport-and-diuretics-fig1.webp",
+        "alt": "Illustration of distal tubular sodium-chloride cotransport and thiazide diuretic binding.",
+        "caption": "Distal convoluted tubule NCC cotransporter mechanics in Gitelman syndrome. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Gitelman syndrome** is clinically distinguished from Bartter syndrome by prominent **hypocalciuria** with urine calcium-to-creatinine ratio under **0.20** mg/mg or **0.05** mmol/mmol, accompanied by severe refractory **hypomagnesemia** without medullary nephrocalcinosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Gitelman syndrome is clinically distinguished from Bartter syndrome by prominent hypocalciuria with urine calcium-to-creatinine ratio under 0.20 mg/mg or 0.05 mmol/mmol, accompanied by severe refractory hypomagnesemia without medullary nephrocalcinosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gitelman Syndrome",
+          "points": [
+            "Affected site: Distal convoluted tubule (NCC)",
+            "Calcium excretion: Marked hypocalciuria (< 0.2 mg/mg)",
+            "Magnesium status: Severe persistent hypomagnesemia",
+            "Nephrocalcinosis: Never observed on renal ultrasound"
+          ]
+        },
+        "right": {
+          "title": "Bartter Syndrome",
+          "points": [
+            "Affected site: Thick ascending limb (NKCC2 / ROMK)",
+            "Calcium excretion: Marked hypercalciuria",
+            "Magnesium status: Mild or normal serum magnesium",
+            "Nephrocalcinosis: Early prominent medullary calcification"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Liddle syndrome** is an autosomal dominant condition caused by gain-of-function mutations in the **PY motif** of the beta or gamma subunits of **ENaC**, preventing binding by **NEDD4-2** ubiquitin ligase and abolishing normal channel endocytosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Liddle syndrome is an autosomal dominant condition caused by gain-of-function mutations in the PY motif of the beta or gamma subunits of ENaC, preventing binding by NEDD4-2 ubiquitin ligase and abolishing normal channel endocytosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "e1",
+            "label": "Gain-of-function PY motif mutation in ENaC"
+          },
+          {
+            "id": "e2",
+            "label": "Disrupts NEDD4-2 ubiquitin ligase binding"
+          },
+          {
+            "id": "e3",
+            "label": "Constitutive apical ENaC membrane density"
+          }
+        ],
+        "edges": [
+          [
+            "e1",
+            "e2",
+            "Abolishes ubiquitin tagging"
+          ],
+          [
+            "e2",
+            "e3",
+            "Halts lysosomal channel degradation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Liddle syndrome** manifests as severe early-onset hypertension with hypokalemic metabolic alkalosis, suppressed plasma renin activity, and undetectable aldosterone, termed **pseudoaldosteronism**. It responds selectively to ENaC blockers **amiloride** or **triamterene**, whereas spironolactone is completely ineffective. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Liddle syndrome manifests as severe early-onset hypertension with hypokalemic metabolic alkalosis, suppressed plasma renin activity, and undetectable aldosterone, termed pseudoaldosteronism. It responds selectively to ENaC blockers amiloride or triamterene, whereas spironolactone is completely ineffective. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacologic Target",
+          "Liddle Syndrome",
+          "Primary Hyperaldosteronism"
+        ],
+        "rows": [
+          [
+            "Serum aldosterone level",
+            "Undetectable / profoundly suppressed",
+            "Markedly elevated autonomous secretion"
+          ],
+          [
+            "Spironolactone response",
+            "Zero therapeutic benefit",
+            "Dramatic blood pressure reduction"
+          ],
+          [
+            "Amiloride / triamterene",
+            "Cure of hypertension and hypokalemia",
+            "Effective secondary natriuretic agent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pseudohypoaldosteronism** type **1**, or **PHA1**, presents with salt wasting, hyperkalemic metabolic acidosis, and high aldosterone. Autosomal dominant PHA1 involves the mineralocorticoid receptor gene **NR3C2**, whereas recessive PHA1 involves loss-of-function **ENaC** mutations. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Pseudohypoaldosteronism type 1, or PHA1, presents with salt wasting, hyperkalemic metabolic acidosis, and high aldosterone. Autosomal dominant PHA1 involves the mineralocorticoid receptor gene NR3C2, whereas recessive PHA1 involves loss-of-function ENaC mutations. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Autosomal Dominant PHA1",
+          "points": [
+            "Gene defect: Inactivating mutation in NR3C2",
+            "Organ involvement: Restricted exclusively to renal tubules",
+            "Severity: Moderate salt-wasting and hyperkalemia",
+            "Prognosis: Improves spontaneously with advancing age"
+          ]
+        },
+        "right": {
+          "title": "Autosomal Recessive PHA1",
+          "points": [
+            "Gene defect: Loss-of-function mutations in ENaC subunits",
+            "Organ involvement: Systemic (colon, lungs, sweat glands, kidneys)",
+            "Severity: Life-threatening neonatal hyperkalemic salt crisis",
+            "Prognosis: Lifelong severe salt repletion requirement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gordon syndrome**, termed pseudohypoaldosteronism type **2** or familial hyperkalemic hypertension, is caused by mutations in **WNK4**, **WNK1**, **CUL3**, or **KLHL3**, driving constitutive activation of NCC and responding rapidly to low-dose **thiazide** diuretics. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Gordon syndrome, termed pseudohypoaldosteronism type 2 or familial hyperkalemic hypertension, is caused by mutations in WNK4, WNK1, CUL3, or KLHL3, driving constitutive activation of NCC and responding rapidly to low-dose thiazide diuretics. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Domain",
+          "Gordon Syndrome (PHA2)",
+          "Liddle Syndrome"
+        ],
+        "rows": [
+          [
+            "Serum potassium status",
+            "Severe hyperkalemia with metabolic acidosis",
+            "Severe hypokalemia with metabolic alkalosis"
+          ],
+          [
+            "Underlying cotransporter",
+            "Constitutive hyperactivation of distal NCC",
+            "Constitutive hyperactivation of collecting duct ENaC"
+          ],
+          [
+            "Curative medication",
+            "Low-dose thiazide diuretics (hydrochlorothiazide)",
+            "ENaC inhibitors (amiloride or triamterene)"
+          ]
+        ]
+      }
+    }
+  ]
 }
