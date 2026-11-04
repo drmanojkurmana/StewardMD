@@ -1,155 +1,212 @@
 {
- "v": 1,
- "module": "snp-transplant-rejection",
- "subject": "ss-nephrology",
- "title": "Allograft rejection and dysfunction: a high-yield lesson",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "**Allograft rejection** is the immune injury of a transplanted organ by the recipient's immune system. It is classified by the main effector arm: **T cell mediated rejection** (TCMR), driven by cytotoxic and helper T cells with mononuclear infiltrates and tubulitis, and **antibody mediated rejection** (AMR), driven by donor specific antibodies (DSA) against HLA or non-HLA antigens. Hyperacute rejection is the fastest form, occurring within minutes to hours of reperfusion from preformed antibodies.",
-   "say": "Allograft rejection is the immune injury of a transplanted organ by the recipient's immune system. It is classified by the main effector arm. T cell mediated rejection is driven by cytotoxic and helper T cells, with mononuclear infiltrates and tubulitis. Antibody mediated rejection is driven by donor specific antibodies against HLA or non-HLA antigens. Hyperacute rejection is the fastest form, occurring within minutes to hours of reperfusion, caused by preformed antibodies.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Type",
-     "Main driver",
-     "Typical timing",
-     "Key histology"
-    ],
-    "rows": [
-     [
-      "Hyperacute",
-      "Preformed antibodies",
-      "Minutes to hours",
-      "Vascular thrombosis, necrosis"
-     ],
-     [
-      "Acute TCMR",
-      "T cells",
-      "Weeks to months",
-      "Mononuclear infiltrate, tubulitis"
-     ],
-     [
-      "Acute AMR",
-      "DSA and complement",
-      "Days to weeks",
-      "Capillaritis, C4d positive"
-     ],
-     [
-      "Chronic AMR",
-      "DSA, multiple mechanisms",
-      "Months to years",
-      "Transplant glomerulopathy, multilayering"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Diagnosis in the Indian and global setting depends on a combination of tests, not creatinine alone. The **Banff classification** grades biopsies using scores for tubulitis, arteritis, glomerulitis, peritubular capillaritis and C4d. **C4d staining** in peritubular capillaries shows complement activation and supports AMR. Assess **donor specific antibodies** and **microvascular inflammation** (MVI), a combined glomerular and peritubular capillary score that predicts AMR and graft loss.",
-   "say": "Diagnosis depends on a combination of tests, not creatinine alone. The Banff classification grades biopsies using scores for tubulitis, arteritis, glomerulitis, peritubular capillaritis and C4d. C4d staining in peritubular capillaries shows complement activation and supports antibody mediated rejection. Assess donor specific antibodies and microvascular inflammation, a combined glomerular and peritubular capillary score that predicts antibody mediated rejection and graft loss.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-transplant-rejection-fig1.webp",
-    "alt": "Micrographs showing C4d staining, tubulitis, arteritis, glomerulitis, and peritubular capillaritis in kidney allograft biopsies, essential for Banff classification.",
-    "caption": "Key histological features for allograft rejection diagnosis. Image: Department of Pathology, Calicut Medical College, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.3333
-   }
-  },
-  {
-   "tx": "Treatment of acute rejection differs by type. **Acute TCMR** responds usually to pulsed methylprednisolone, and resistant cases may need anti-thymocyte globulin. **Acute AMR** needs a combined approach: **plasmapheresis** to remove antibody, **intravenous immunoglobulin** (IVIG) to modulate antibody and complement, and rituximab in selected cases. Steroids alone are insufficient for AMR, which is why it carries a worse prognosis than TCMR.",
-   "say": "Treatment of acute rejection differs by type. Acute T cell mediated rejection usually responds to pulsed methylprednisolone, and resistant cases may need anti-thymocyte globulin. Acute antibody mediated rejection needs a combined approach: plasmapheresis to remove antibody, intravenous immunoglobulin to modulate antibody and complement, and rituximab in selected cases. Steroids alone are insufficient, which is why this form carries a worse prognosis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Acute TCMR",
-     "points": [
-      "Pulsed methylprednisolone first line",
-      "Anti-thymocyte globulin if resistant",
-      "Good response in most"
-     ]
+  "v": 1,
+  "module": "snp-transplant-rejection",
+  "subject": "ss-nephrology",
+  "title": "Allograft Rejection and Dysfunction",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Hyperacute rejection** occurs within minutes of vascular clamp release, mediated by **pre-existing antibodies** against donor ABO or HLA class **1** antigens that activate complement, triggering widespread **thrombotic occlusion** and graft necrosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Hyperacute rejection occurs within minutes of vascular clamp release, mediated by pre-existing antibodies against donor ABO or HLA class 1 antigens that activate complement, triggering widespread thrombotic occlusion and graft necrosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-transplant-rejection-fig1.webp",
+        "alt": "Histopathology of hyperacute rejection showing widespread microvascular thrombosis and cortical necrosis.",
+        "caption": "Hyperacute rejection microvascular thrombosis and cortical infarction. Credit: StewardMD.",
+        "ar": 1.3333
+      }
     },
-    "right": {
-     "title": "Acute AMR",
-     "points": [
-      "Plasmapheresis to remove antibody",
-      "IVIG and sometimes rituximab",
-      "Steroids alone insufficient"
-     ]
+    {
+      "tx": "The **Banff classification** grades **TCMR** by interstitial inflammation and **tubulitis**: Grade IA displays i2/i3 with t2; Grade IB displays i2/i3 with t3; Grade II displays **intimal arteritis** with v1/v2; and Grade III displays transmural arteritis with v3. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "The Banff classification grades TCMR by interstitial inflammation and tubulitis: Grade IA displays i2/i3 with t2; Grade IB displays i2/i3 with t3; Grade II displays intimal arteritis with v1/v2; and Grade III displays transmural arteritis with v3. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Banff TCMR Category",
+          "Histological Lesion Criteria",
+          "First-Line Therapy"
+        ],
+        "rows": [
+          [
+            "Grade IA",
+            "Moderate interstitial inflammation (i2/i3) + mild tubulitis (t2)",
+            "Intravenous pulse methylprednisolone"
+          ],
+          [
+            "Grade IB",
+            "Severe tubulitis (t3) + interstitial inflammation (i2/i3)",
+            "High-dose intravenous methylprednisolone pulse"
+          ],
+          [
+            "Grade IIA / IIB",
+            "Arterial intimal arteritis (v1 / v2)",
+            "Thymoglobulin (rATG) lymphocyte depletion"
+          ],
+          [
+            "Grade III",
+            "Transmural arteritis and medial necrosis (v3)",
+            "Aggressive rATG and intensified maintenance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute **antibody-mediated rejection** requires three **Banff criteria**: histological tissue injury with glomerulitis and **peritubular capillaritis**, evidence of recent antibody action with **C4d** in at least **10%** of capillaries, and circulating **DSA**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Acute antibody-mediated rejection requires three Banff criteria: histological tissue injury with glomerulitis and peritubular capillaritis, evidence of recent antibody action with C4d in at least 10% of capillaries, and circulating DSA. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-transplant-rejection-fig1.webp",
+        "alt": "Renal allograft showing tubulitis, intimal arteritis, and peritubular capillaritis.",
+        "caption": "Tubulitis, intimal arteritis, and peritubular capillaritis. Capillaritis is one of the tissue-injury lesions in antibody-mediated rejection. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "First-line therapy for **acute cellular rejection** is intravenous **methylprednisolone** at **500** mg daily for **3** days, escalating to lymphocyte-depleting rabbit antithymocyte globulin, or **rATG**, for steroid-resistant or Banff Grade II/III vascular rejection. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "First-line therapy for acute cellular rejection is intravenous methylprednisolone at 500 mg daily for 3 days, escalating to lymphocyte-depleting rabbit antithymocyte globulin, or rATG, for steroid-resistant or Banff Grade II/III vascular rejection. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "r1",
+            "label": "Confirm Banff TCMR on allograft biopsy"
+          },
+          {
+            "id": "r2",
+            "label": "Pulse methylprednisolone 500 mg IV x 3 days"
+          },
+          {
+            "id": "r3",
+            "label": "Thymoglobulin rATG for steroid-resistant rejection"
+          }
+        ],
+        "edges": [
+          [
+            "r1",
+            "r2",
+            "Initial anti-inflammatory pulse"
+          ],
+          [
+            "r2",
+            "r3",
+            "Persistent allograft dysfunction at 5 to 7 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Acute antibody-mediated rejection** is treated with multimodal therapy including therapeutic **plasma exchange** (PEX) to remove circulating DSA, intravenous immunoglobulin, or **IVIG**, and anti-CD**20** monoclonal antibody **rituximab** or proteasome inhibitor bortezomib. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Acute antibody-mediated rejection is treated with multimodal therapy including therapeutic plasma exchange (PEX) to remove circulating DSA, intravenous immunoglobulin, or IVIG, and anti-CD20 monoclonal antibody rituximab or proteasome inhibitor bortezomib. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antibody Removal",
+          "points": [
+            "Modality: Therapeutic plasma exchange (5 to 7 sessions)",
+            "Target: Physical removal of circulating donor-specific anti-HLA IgG",
+            "Monitoring: Serial SAB Luminex DSA MFI tracking",
+            "Replacement: 5% albumin with fresh frozen plasma finishing"
+          ]
+        },
+        "right": {
+          "title": "Immunomodulation",
+          "points": [
+            "IVIg: Low-dose post-PEX (100 to 200 mg/kg) or high-dose (2 g/kg)",
+            "Rituximab: Single dose (375 mg/m2) to deplete CD20+ B cells",
+            "Bortezomib: Proteasome inhibitor targeting mature plasma cells",
+            "Tocilizumab: Anti-IL6 receptor blocker for chronic active AMR"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chronic active AMR** represents the leading cause of late allograft loss. Biopsy demonstrates **transplant glomerulopathy** with a cg score > **0**, showing basement membrane **double contours** and extensive peritubular capillary basement membrane multilayering. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Chronic active AMR represents the leading cause of late allograft loss. Biopsy demonstrates transplant glomerulopathy with a cg score exceeding 0, showing basement membrane double contours and extensive peritubular capillary basement membrane multilayering. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histological Feature",
+          "Ultrastructural Correlate",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Transplant glomerulopathy (cg)",
+            "Capillary basement membrane double contours",
+            "Progressive proteinuria and refractory allograft loss"
+          ],
+          [
+            "Peritubular multilayering (ptcml)",
+            ">= 7 layers in cortical peritubular capillaries",
+            "Hallmark of repetitive endothelial microvascular injury"
+          ],
+          [
+            "Arterial fibrointimal thickening (cv)",
+            "Neointimal hyperplasia in interlobular arteries",
+            "Severe chronic ischemic graft hypoperfusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Donor-derived cell-free DNA**, or **dd-cfDNA**, serves as a non-invasive **liquid biopsy** **biomarker**. A dd-cfDNA fraction exceeding **0.5%** to **1.0%** accurately differentiates acute allograft rejection from calcineurin inhibitor toxicity and stable graft function. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Donor-derived cell-free DNA, or dd-cfDNA, serves as a non-invasive liquid biopsy biomarker. A dd-cfDNA fraction exceeding 0.5% to 1.0% accurately differentiates acute allograft rejection from calcineurin inhibitor toxicity and stable graft function. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Protocol Biopsy Finding",
+          "Serum Creatinine Level",
+          "Therapeutic Recommendation"
+        ],
+        "rows": [
+          [
+            "Subclinical TCMR (tubulitis)",
+            "Completely normal and stable baseline",
+            "Treat with oral corticosteroid pulse and taper"
+          ],
+          [
+            "Subclinical AMR (C4d+ and DSA+)",
+            "Stable baseline eGFR",
+            "Optimize maintenance immunosuppression and monitor DSA"
+          ],
+          [
+            "Normal protocol histology",
+            "Stable baseline eGFR",
+            "Maintain baseline target trough concentrations"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Interstitial fibrosis** and **tubular atrophy**, abbreviated as **IFTA**, on protocol allograft biopsy reflects chronic **cumulative damage** from immune rejection, chronic calcineurin inhibitor nephrotoxicity, hypertension, and recurrent viral infections. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Interstitial fibrosis and tubular atrophy, abbreviated as IFTA, on protocol allograft biopsy reflects chronic cumulative damage from immune rejection, chronic calcineurin inhibitor nephrotoxicity, hypertension, and recurrent viral infections. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biomarker Assay",
+          "Rejection Threshold",
+          "Diagnostic Specificity"
+        ],
+        "rows": [
+          [
+            "Plasma dd-cfDNA fraction",
+            "> 0.5% to 1.0% of total cfDNA",
+            "Highly specific for active microvascular endothelial injury"
+          ],
+          [
+            "Urinary mRNA profiling",
+            "Elevated CXCL9, CXCL10, and granzyme B",
+            "Identifies active intragraft T-cell cytotoxic gene expression"
+          ],
+          [
+            "Calcineurin toxicity",
+            "Low dd-cfDNA (< 0.5%) with isometric vacuolization",
+            "Excludes allograft rejection without invasive biopsy"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "**Chronic active AMR** is defined by ongoing DSA, evidence of chronic tissue injury and the presence of peritubular capillary C4d or MVI. **Transplant glomerulopathy** is a key lesion, showing double contours of the glomerular basement membrane and severe multilayering of peritubular capillary basement membranes. Chronic allograft arteriopathy shows arterial intimal fibrosis with mononuclear cells. Note that C4d is not always required, since C4d negative cases exist.",
-   "say": "Chronic active antibody mediated rejection is defined by ongoing donor specific antibodies, evidence of chronic tissue injury, and peritubular capillary C4d or microvascular inflammation. Transplant glomerulopathy is a key lesion, showing double contours of the glomerular basement membrane and severe multilayering of peritubular capillary basement membranes. Chronic allograft arteriopathy shows arterial intimal fibrosis with mononuclear cells. C4d is not always required, since C4d negative cases exist.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "DSA present"
-     },
-     {
-      "id": "b",
-      "label": "Chronic tissue injury"
-     },
-     {
-      "id": "c",
-      "label": "C4d or MVI"
-     },
-     {
-      "id": "d",
-      "label": "Chronic active AMR"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "d"
-     ],
-     [
-      "b",
-      "d"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Chronic allograft nephropathy**, now termed **interstitial fibrosis and tubular atrophy** (IFTA), is a graft failure pattern beyond one year without a single acute cause such as toxicity or rejection. Calcineurin inhibitor toxicity, non-adherence and recurrent disease contribute. **Donor derived cell free DNA** (dd-cfDNA) is a non-invasive marker of graft injury; a rising fraction suggests injury and prompts biopsy or treatment review. Low tacrolimus levels can point to non-adherence.",
-   "say": "Chronic allograft nephropathy, now termed interstitial fibrosis and tubular atrophy, is a graft failure pattern beyond one year without a single acute cause such as toxicity or rejection. Calcineurin inhibitor toxicity, non-adherence and recurrent disease contribute. Donor derived cell free DNA is a non-invasive marker of graft injury. A rising fraction suggests injury and prompts biopsy or treatment review. Low tacrolimus levels can point to non-adherence.",
-   "vis": null
-  },
-  {
-   "tx": "Exam focus: **Hyperacute rejection** is immediate and preformed-antibody driven, so it is prevented by crossmatching. **Cardiac allograft vasculopathy** is diffuse intimal proliferation, detected best by intravascular ultrasound, and retransplantation is the definitive treatment for advanced disease. Post-transplant lymphoproliferative disorder is mostly Epstein-Barr virus driven; reduce immunosuppression first and use rituximab in aggressive cases. BK nephropathy is treated by reducing immunosuppression.",
-   "say": "Exam focus. Hyperacute rejection is immediate and preformed antibody driven, so it is prevented by crossmatching. Cardiac allograft vasculopathy is diffuse intimal proliferation, detected best by intravascular ultrasound, and retransplantation is the definitive treatment for advanced disease. Post-transplant lymphoproliferative disorder is mostly Epstein-Barr virus driven. Reduce immunosuppression first and use rituximab in aggressive cases. BK nephropathy is treated by reducing immunosuppression.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_81e5e4ad8b50",
-  "q_c7fb0d51c39f",
-  "q_412d9b6218f6"
- ],
- "src": [],
- "refs": [
-  "Banff Classification of Allograft Pathology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 54
- }
+  ]
 }

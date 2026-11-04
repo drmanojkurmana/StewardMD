@@ -1,0 +1,203 @@
+{
+  "v": 1,
+  "module": "snp-obstructive-uropathy",
+  "subject": "ss-nephrology",
+  "title": "Obstructive Uropathy",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Acute bilateral **urinary tract obstruction** triggers a **triphasic hemodynamic** response: an initial transient rise in blood flow and pressure during the first **1** to **2** hours, followed by renal **vasoconstriction** up to **24** hours, and persistent vasoconstriction thereafter. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Acute bilateral urinary tract obstruction triggers a triphasic hemodynamic response: an initial transient rise in blood flow and pressure during the first 1 to 2 hours, followed by renal vasoconstriction up to 24 hours, and persistent vasoconstriction thereafter. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/urinary-tract-obstruction-fig1.webp",
+        "alt": "Illustration of urinary tract obstruction showing pelvicalyceal dilation and parenchymal thinning.",
+        "caption": "Bilateral urinary tract obstruction mechanics and renal vasoconstriction. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Renal ultrasound** is the primary diagnostic imaging modality for evaluating obstructive uropathy, but false-negative examinations lacking **hydronephrosis** occur in early obstruction under **24** to **48** hours, profound volume depletion, or encasement by **retroperitoneal fibrosis**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Renal ultrasound is the primary diagnostic imaging modality for evaluating obstructive uropathy, but false-negative examinations lacking hydronephrosis occur in early obstruction under 24 to 48 hours, profound volume depletion, or encasement by retroperitoneal fibrosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Ultrasound Findings",
+          "points": [
+            "Calyceal dilation: Moderate to severe hydronephrosis",
+            "Parenchyma: Increased cortical echogenicity in chronic cases",
+            "Ureteral jets: Absent or asymmetrical on color Doppler",
+            "Bladder status: Distended post-void residual volume"
+          ]
+        },
+        "right": {
+          "title": "False-Negative Pitfalls",
+          "points": [
+            "Hyperacute obstruction: Onset under 24 to 48 hours",
+            "Volume depletion: Severe dehydration masking calyceal stretch",
+            "External encasement: Retroperitoneal fibrosis freezing ureters",
+            "Confirmatory test: Non-contrast CT or antegrade pyelography"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Post-obstructive diuresis**, or **POD**, is defined as profound **urine output** exceeding **200** mL/h for at least **2** consecutive hours or greater than **3** to **4** liters daily following surgical relief of severe bilateral urinary obstruction. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Post-obstructive diuresis, or POD, is defined as profound urine output exceeding 200 mL/h for at least 2 consecutive hours or greater than 3 to 4 liters daily following surgical relief of severe bilateral urinary obstruction. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diuresis Category",
+          "Hourly Urine Output",
+          "Underlying Physiology"
+        ],
+        "rows": [
+          [
+            "Physiologic diuresis",
+            "Urine output 150 to 250 mL/h",
+            "Excretion of accumulated retained water and urea solutes"
+          ],
+          [
+            "Pathologic diuresis",
+            "Urine output > 200 mL/h sustained",
+            "Impaired tubular reabsorption and medullary gradient washout"
+          ],
+          [
+            "Iatrogenic diuresis",
+            "Persistent polyuria matching IV input",
+            "Perpetuated by over-aggressive 100% fluid replacement"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pathologic post-obstructive diuresis** features inappropriate tubular sodium wasting and water loss driven by **medullary washout**, downregulation of collecting duct **aquaporins** including AQP2 and AQP3, impaired **NKCC2** cotransport, and complete resistance to vasopressin. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Pathologic post-obstructive diuresis features inappropriate tubular sodium wasting and water loss driven by medullary washout, downregulation of collecting duct aquaporins including AQP2 and AQP3, impaired NKCC2 cotransport, and complete resistance to vasopressin. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "High intratubular pressure in obstruction"
+          },
+          {
+            "id": "p2",
+            "label": "Downregulation of AQP2 and apical NKCC2"
+          },
+          {
+            "id": "p3",
+            "label": "Profound medullary osmotic washout"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2",
+            "Tubular epithelial stretch and ischemia"
+          ],
+          [
+            "p2",
+            "p3",
+            "Severe salt and water loss upon relief"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical management of **post-obstructive diuresis** mandates structured **electrolyte replacement** using **0.45%** **saline** with added potassium, replacing approximately **50%** to **75%** of hourly urinary losses to avoid perpetuating iatrogenic volume expansion. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Clinical management of post-obstructive diuresis mandates structured electrolyte replacement using 0.45% saline with added potassium, replacing approximately 50% to 75% of hourly urinary losses to avoid perpetuating iatrogenic volume expansion. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Recommended Protocol",
+          "points": [
+            "Fluid choice: Intravenous 0.45% sodium chloride",
+            "Replacement fraction: 50% to 75% of preceding hour urine volume",
+            "Potassium repletion: Supplemental potassium chloride added to fluids",
+            "Goal: Gradual autologous tapering of polyuric response"
+          ]
+        },
+        "right": {
+          "title": "Hazardous Practices",
+          "points": [
+            "Excessive replacement: Replacing 100% of hourly urine output",
+            "Inappropriate fluid: Large volumes of 0.9% normal saline",
+            "Consequence: Perpetuation of volume overload diuresis",
+            "Electrolyte risk: Severe hypokalemia and hypomagnesemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Retroperitoneal fibrosis**, known as **Ormond disease**, causes **medial deviation** of the middle third of both ureters with extrinsic hydronephrosis. It is idiopathic in two-thirds of cases, frequently representing an active manifestation of systemic **IgG4-related** disease. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Retroperitoneal fibrosis, known as Ormond disease, causes medial deviation of the middle third of both ureters with extrinsic hydronephrosis. It is idiopathic in two-thirds of cases, frequently representing an active manifestation of systemic IgG4-related disease. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/retroperitoneal-fibrosis-fig1.webp",
+        "alt": "Periaortic retroperitoneal fibrosis encasing the ureters and causing hydronephrosis.",
+        "caption": "Periaortic fibrosis with medial deviation of the ureters and hydronephrosis in Ormond disease. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Chronic unrelieved obstruction triggers **tubulointerstitial fibrosis**, tubular epithelial-to-mesenchymal transition, and progressive upregulation of **TGF-beta**, leading to irreversible nephron destruction and established chronic **obstructive nephropathy**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Chronic unrelieved obstruction triggers tubulointerstitial fibrosis, tubular epithelial-to-mesenchymal transition, and progressive upregulation of TGF-beta, leading to irreversible nephron destruction and established chronic obstructive nephropathy. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fibrotic Pathway",
+          "Molecular Mediator",
+          "Tissue Alteration"
+        ],
+        "rows": [
+          [
+            "Pro-fibrotic cytokine",
+            "TGF-beta 1 upregulation",
+            "Stimulates myofibroblast collagen deposition"
+          ],
+          [
+            "Epithelial transition",
+            "Epithelial-to-mesenchymal transdifferentiation",
+            "Loss of tubular epithelial cell polarization"
+          ],
+          [
+            "Vascular rarefaction",
+            "Peritubular capillary loss",
+            "Progressive chronic tubulointerstitial hypoxia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Electrolyte disturbances in chronic obstruction classically manifest as a hyperkalemic normal anion gap metabolic acidosis consistent with a **Type 4 RTA** phenotype, resulting from distal collecting duct **aldosterone resistance** and impaired proton secretion in **obstructive uropathy**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Electrolyte disturbances in chronic obstruction classically manifest as a hyperkalemic normal anion gap metabolic acidosis consistent with a Type 4 RTA phenotype, resulting from distal collecting duct aldosterone resistance and impaired proton secretion in obstructive uropathy. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Metabolic Variable",
+          "Chronic Obstructive Nephropathy",
+          "Clinical Management"
+        ],
+        "rows": [
+          [
+            "Acid-base status",
+            "Normal anion gap metabolic acidosis",
+            "Sodium bicarbonate supplementation"
+          ],
+          [
+            "Potassium balance",
+            "Hyperkalemia due to distal aldosterone resistance",
+            "Dietary restriction and loop diuretics"
+          ],
+          [
+            "Renal relief",
+            "Ureteral stenting or percutaneous nephrostomy",
+            "Reverses tubular resistance if relieved early"
+          ]
+        ]
+      }
+    }
+  ]
+}

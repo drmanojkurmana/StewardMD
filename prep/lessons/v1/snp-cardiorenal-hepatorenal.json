@@ -1,0 +1,208 @@
+{
+  "v": 1,
+  "module": "snp-cardiorenal-hepatorenal",
+  "subject": "ss-nephrology",
+  "title": "Cardiorenal and Hepatorenal Syndromes",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Type 1 cardiorenal syndrome** represents acute decompensated **heart failure** precipitating acute kidney injury. Pathophysiologically, **renal venous congestion** secondary to elevated central venous pressure is the primary hemodynamic driver of GFR decline rather than arterial forward failure alone. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Type 1 cardiorenal syndrome represents acute decompensated heart failure precipitating acute kidney injury. Pathophysiologically, renal venous congestion secondary to elevated central venous pressure is the primary hemodynamic driver of GFR decline rather than arterial forward failure alone. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Backward Failure (Venous)",
+          "points": [
+            "Driver: Elevated central venous pressure",
+            "Hemodynamics: Transmitted renal venous hypertension",
+            "Perfusion gradient: Reduced effective glomerular filtration pressure",
+            "Clinical marker: Hepatojugular reflux and renal congestion"
+          ]
+        },
+        "right": {
+          "title": "Forward Failure (Arterial)",
+          "points": [
+            "Driver: Depressed cardiac index and output",
+            "Hemodynamics: Decreased renal arterial flow",
+            "Renal response: Neurohormonal RAAS and SNS activation",
+            "Clinical marker: Narrow pulse pressure and cool extremities"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cardiorenal syndrome spans bidirectional pathology. **Type 2 cardiorenal** syndrome comprises chronic heart failure causing progressive CKD. Conversely, **Type 3** represents acute **renocardiac** syndrome where AKI induces acute heart failure, while **Type 4** is chronic renocardiac syndrome where CKD drives left ventricular hypertrophy. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Cardiorenal syndrome involves bidirectional pathology. Type 2 cardiorenal syndrome comprises chronic heart failure causing progressive CKD. Conversely, Type 3 represents acute renocardiac syndrome where AKI induces acute heart failure, while Type 4 is chronic renocardiac syndrome where CKD drives left ventricular hypertrophy. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome Subtype",
+          "Primary Organ Insult",
+          "Secondary Target Damage"
+        ],
+        "rows": [
+          [
+            "Type 1 cardiorenal",
+            "Acute heart failure decompensation",
+            "Acute kidney injury"
+          ],
+          [
+            "Type 2 cardiorenal",
+            "Chronic congestive heart failure",
+            "Progressive chronic kidney disease"
+          ],
+          [
+            "Type 3 renocardiac",
+            "Primary acute kidney injury",
+            "Acute pulmonary edema / heart failure"
+          ],
+          [
+            "Type 4 renocardiac",
+            "Primary chronic kidney disease",
+            "Left ventricular hypertrophy and cardiomyopathy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Worsening renal function** during aggressive decongestive therapy in decompensated heart failure often represents benign **hemoconcentration**. If clinical **decongestion** is actively succeeding with resolving pulmonary rales and peripheral edema, modest serum creatinine elevations do not warrant stopping diuretics. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Worsening renal function during aggressive decongestive therapy in decompensated heart failure often represents benign hemoconcentration. If clinical decongestion is actively succeeding with resolving pulmonary rales and peripheral edema, modest serum creatinine elevations do not warrant stopping diuretics. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Variable",
+          "Benign Hemoconcentration",
+          "True Renal Tubular Damage"
+        ],
+        "rows": [
+          [
+            "Hematocrit / total protein",
+            "Rises progressively during diuresis",
+            "Stable or falling"
+          ],
+          [
+            "Renal injury biomarkers",
+            "Negative or stable",
+            "Markedly elevated NGAL and KIM-1"
+          ],
+          [
+            "Clinical decongestion",
+            "Successful volume reduction",
+            "Refractory persistent fluid overload"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hepatorenal syndrome**, specifically **HRS-AKI**, requires advanced **cirrhosis** with ascites, KDIGO-defined AKI, absence of septic shock, and persistent renal failure despite **48** hours of diuretic cessation and **20%** intravenous **albumin expansion** at **1** g/kg/day without structural kidney damage. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Hepatorenal syndrome, specifically HRS-AKI, requires advanced cirrhosis with ascites, KDIGO-defined AKI, absence of septic shock, and persistent renal failure despite 48 hours of diuretic cessation and 20% intravenous albumin expansion at 1 g/kg/day without structural kidney damage. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatorenal-syndrome-fig1.webp",
+        "alt": "Diagram illustrating splanchnic arterial vasodilation, effective arterial underfilling, and hepatorenal syndrome.",
+        "caption": "Pathophysiologic cascade of hepatorenal syndrome in decompensated cirrhosis. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "The landmark **CONFIRM trial** established that intravenous **terlipressin**, administered as continuous infusion or **1** to **2** mg boluses every **4** to **6** hours, combined with **albumin**, significantly improves verified reversal of **hepatorenal syndrome** compared to placebo. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The landmark CONFIRM trial established that intravenous terlipressin, administered as continuous infusion or 1 to 2 mg boluses every 4 to 6 hours, combined with albumin, significantly improves verified reversal of hepatorenal syndrome compared to placebo. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Confirm HRS-AKI criteria"
+          },
+          {
+            "id": "h2",
+            "label": "Terlipressin 1 to 2 mg q4-6h IV"
+          },
+          {
+            "id": "h3",
+            "label": "IV Albumin 20 to 40 g daily"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2",
+            "Vasoconstrictor therapy"
+          ],
+          [
+            "h2",
+            "h3",
+            "Restore effective circulation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In intensive care settings, intravenous **Norepinephrine** titrated to elevate **mean arterial pressure** by **10** to **15** mmHg, administered alongside albumin, serves as an equally effective first-line vasoconstrictor alternative for managing **HRS-AKI**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "In intensive care settings, intravenous Norepinephrine titrated to elevate mean arterial pressure by 10 to 15 mmHg, administered alongside albumin, serves as an equally effective first-line vasoconstrictor alternative for managing HRS-AKI. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Terlipressin + Albumin",
+          "points": [
+            "Mechanism: Selective V1a splanchnic vasoconstrictor",
+            "Administration: Bolus or continuous IV infusion",
+            "Trial evidence: CONFIRM trial verified HRS reversal",
+            "Caution: Risk of respiratory failure from fluid overload"
+          ]
+        },
+        "right": {
+          "title": "Norepinephrine + Albumin",
+          "points": [
+            "Mechanism: Alpha-1 systemic and splanchnic agonist",
+            "Administration: Continuous central venous infusion",
+            "Titration target: Elevate MAP by 10 to 15 mmHg",
+            "Setting: Standard intensive care unit therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Transjugular intrahepatic portosystemic shunt, or **TIPS**, decompresses portal hypertension and alleviates **sinusoidal hypertension**. By reversing effective arterial underfilling, TIPS improves renal perfusion and refractory ascites in cirrhotic candidates with preserved liver function and low **MELD** score. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Transjugular intrahepatic portosystemic shunt, or TIPS, decompresses portal hypertension and alleviates sinusoidal hypertension. By reversing effective arterial underfilling, TIPS improves renal perfusion and refractory ascites in cirrhotic candidates with preserved liver function and low MELD score. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cirrhosis-and-its-complications-fig2.webp",
+        "alt": "Cirrhotic portosystemic collaterals with band ligation and a TIPS stent.",
+        "caption": "Portosystemic collaterals with a transjugular intrahepatic portosystemic shunt, which lowers portal pressure in selected patients with hepatorenal syndrome. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Liver transplantation** represents definitive curative management for hepatorenal syndrome. Simultaneous liver-kidney transplantation, abbreviated as **SLKT**, is formally indicated when AKI mandates **dialysis** for at least **4** weeks or when underlying baseline CKD with eGFR below **30** mL/min persists. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Liver transplantation serves as definitive curative management for hepatorenal syndrome. Simultaneous liver-kidney transplantation, abbreviated as SLKT, is formally indicated when AKI mandates dialysis for at least 4 weeks or when underlying baseline CKD with eGFR below 30 mL/min persists. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Transplantation Modality",
+          "Clinical Indication",
+          "Target Reversibility"
+        ],
+        "rows": [
+          [
+            "Isolated liver transplant",
+            "Acute HRS-AKI < 4 weeks duration",
+            "Full functional renal recovery expected"
+          ],
+          [
+            "Dual SLKT allocation",
+            "Dialysis duration >= 4 consecutive weeks",
+            "High risk of unrecovered native renal failure"
+          ],
+          [
+            "Dual SLKT allocation",
+            "Established baseline CKD with eGFR < 30",
+            "Permanent structural renal parenchymal disease"
+          ]
+        ]
+      }
+    }
+  ]
+}
