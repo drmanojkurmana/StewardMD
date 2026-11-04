@@ -1530,8 +1530,31 @@
       case "note": html = screenNote(); break;
       default: html = screenHome();
     }
+    if (html && r === "note" && tabletSplit()) html = noteSplit(html, routeArg());
     if (html) paint(html);
     try { if (ST()) ST().setLastSection(r); } catch (e) {}
+  }
+
+  /* iPad, landscape regular width (vault/plans/iPad-Standards.md rule 2): an open note sits beside
+   * the list of notes on this device, the selected one highlighted, instead of a full-screen push.
+   * Phones and Split View never take this path. It reads the same listNotes() the Notes screen
+   * shows; nothing is saved, loaded or changed here. */
+  function tabletSplit() {
+    try { return document.documentElement.classList.contains("smd-tablet") && window.innerWidth >= 1000; } catch (e) { return false; }
+  }
+  function noteSplit(html, currentId) {
+    var st = ST(), ns = NS(), list;
+    if (!st || !ns) return html;
+    try { list = st.listNotes(); } catch (e) { return html; }
+    var rows = list.length ? list.map(function (n) {
+      var t = ns.SCHEMAS[n.type], on = n.id === currentId;
+      return '<button class="sgx-row' + (on ? " on" : "") + '" data-sgx="noteswap" data-r="note/' + attr(n.id) + '"' + (on ? ' aria-current="true"' : "") + ">" +
+        '<span class="tx"><span class="tt">' + esc(n.label || (t ? t.title : "Note")) + "</span>" +
+        '<span class="sb">' + esc(t ? t.title : n.type) + " · " + (n.finalized ? "finalised" : "draft") + "</span></span></button>";
+    }).join("") : '<div class="sgx-empty">No saved notes on this device yet.</div>';
+    return '<div class="sgx-split"><aside class="sgx-split-list" aria-label="Notes on this device">' +
+      '<div class="sgx-seclabel">On this device</div>' + rows + "</aside>" +
+      '<div class="sgx-split-main">' + html + "</div></div>";
   }
 
   /* Live field editing without a re-render: repainting the whole screen on every keystroke would
@@ -1581,6 +1604,19 @@
       if (act === "close") { haptic("light"); if (window.SURGX) window.SURGX.close(); return; }
       if (act === "back") { haptic("light"); back(); return; }
       if (act === "go") { haptic("light"); go(t.getAttribute("data-r")); return; }
+      // iPad split: picking another note from the side list swaps the detail in place (no deeper stack).
+      if (act === "noteswap") {
+        haptic("light");
+        var dest = t.getAttribute("data-r"), cur = state.note;
+        var go2 = function () { replace(dest); try { state.host.scrollTop = 0; } catch (e) {} };
+        // Notes save only on Save, so the open draft is saved first (silently, as the hand-offs below do):
+        // one tap on the side list must never drop what was typed. A finalised note is not re-saved; a new
+        // note with nothing typed is not saved. If the save fails, the switch does not happen.
+        var typed = cur && cur.values && Object.keys(cur.values).some(function (k) { return String(cur.values[k] || "").trim(); });
+        if (cur && !cur.finalized && !cur.__failed && !cur.__loadingFor && (cur.id || typed)) { saveNote(true).then(function (ok) { if (ok) go2(); }); }
+        else go2();
+        return;
+      }
       if (act === "retry") { state.protoIndex = null; state.procList = null; state.evList = null; state.caseList = null; render(); return; }
 
       if (act === "calc") { openCalc(t.getAttribute("data-id")); return; }

@@ -583,3 +583,7 @@ CSV escaping, the consent gate and the backup envelope. `test/run-pglog-quick-ui
 real app in headless Chrome: three taps to a saved entry, the supervisor gate for an MS programme,
 dictation filling the form, the consent sheet blocking the camera, and the analytics page refusing
 to print a percentage from three procedures.
+
+## iPad (2026-11-04)
+On a tablet at 1000 px and wider `pglog-screens.js` `entrySplit()` shows an open entry beside the entries list
+(`data-pgl="entryswap"`). Styles in `ipad-care.css`.

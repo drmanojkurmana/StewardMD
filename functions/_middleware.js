@@ -255,6 +255,8 @@ export async function onRequest(context) {
       url.pathname === "/smd-num.js" ||
       url.pathname === "/opd-dashboard.js" ||
       url.pathname === "/opd-dashboard.css" ||
+      // iPad layouts for the OPD console (2026-11-04, vault/plans/iPad-Standards.md): layout only, no words, no PHI.
+      url.pathname === "/ipad-hospital.css" ||
       url.pathname === "/ward-labels.js" ||
       // The in-app DICOM viewer engine ward.js loads on first "View images" (no words, no PHI: parse, decode, draw).
       url.pathname === "/ward-dicom-viewer.js" ||
