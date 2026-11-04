@@ -1,0 +1,202 @@
+{
+  "id": "cancer-operation-principles",
+  "title": "Principles of a cancer operation",
+  "subtitle": "MDT before knife, margins, nodes, orientation",
+  "category": "onco_periop",
+  "specialty": "oncology",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "uicc-tnm",
+      "org": "Union for International Cancer Control (UICC)",
+      "title": "TNM Classification of Malignant Tumours, 8th edition (Brierley JD, Gospodarowicz MK, Wittekind C, eds.)",
+      "edition": "8th edition",
+      "year": 2017,
+      "url": "https://www.uicc.org/resources/tnm",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "esmo-colon",
+      "org": "European Society for Medical Oncology (ESMO)",
+      "title": "Localised colon cancer: ESMO Clinical Practice Guidelines for diagnosis, treatment and follow-up (Argiles G et al., Ann Oncol)",
+      "year": 2020,
+      "url": "https://www.esmo.org/guidelines/guidelines-by-topic/gastrointestinal-cancers/early-stage-colon-cancer",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng151",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Colorectal cancer (NG151)",
+      "year": 2020,
+      "url": "https://www.nice.org.uk/guidance/ng151",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "rcpath",
+      "org": "The Royal College of Pathologists",
+      "title": "Cancer datasets and tissue pathways",
+      "year": 2023,
+      "url": "https://www.rcpath.org/profession/guidelines/cancer-datasets-and-tissue-pathways.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "wses-crc",
+      "org": "World Society of Emergency Surgery (WSES)",
+      "title": "2017 WSES guidelines on colon and rectal cancer emergencies: obstruction and perforation (Pisano M et al., World J Emerg Surg)",
+      "year": 2018,
+      "url": "https://wjes.biomedcentral.com/articles/10.1186/s13017-018-0192-3",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "An elective cancer operation listed without a documented MDT decision."
+      },
+      {
+        "text": "Staging incomplete, or imaging older than the local standard, or not available in theatre."
+      },
+      {
+        "text": "No tissue diagnosis where one was obtainable and would change the operation."
+      },
+      {
+        "text": "An unexpected malignancy found at operation, and the temptation to perform an unplanned radical resection without staging or consent."
+      },
+      {
+        "text": "A positive margin (R1) or residual disease (R2) not recorded in the operative note or not fed back to the MDT."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Confirm the MDT outcome, the tissue diagnosis and complete staging before the operation; document the planned extent of resection and lymphadenectomy.",
+        "evidenceRef": "nice-ng151"
+      },
+      {
+        "text": "Plan for an R0 resection, meaning no residual tumour on microscopy. Know preoperatively which margin is likely to be threatened.",
+        "evidenceRef": "uicc-tnm"
+      },
+      {
+        "text": "Obtain consent that covers the realistic extensions: stoma, en bloc resection of an adherent organ, conversion, and the possibility that the tumour is unresectable.",
+        "evidenceRef": "esmo-colon"
+      },
+      {
+        "text": "Unexpected malignancy at an elective operation: if there is no emergency, biopsy, photograph, document, close, and stage. Do not perform a radical resection the patient has not consented to.",
+        "timeCritical": true,
+        "evidenceRef": "esmo-colon"
+      },
+      {
+        "text": "Unexpected malignancy causing the emergency (obstruction, perforation, bleeding): treat the emergency, and where the patient is stable, resect with oncological principles.",
+        "timeCritical": true,
+        "evidenceRef": "wses-crc"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Fitness for the planned operation, and frailty in the older patient.",
+        "calcs": [
+          "p_possum",
+          "rcri",
+          "cfs",
+          "charlson"
+        ]
+      },
+      {
+        "text": "Performance status, which determines eligibility for adjuvant treatment and therefore whether the operation achieves its purpose.",
+        "calcs": [
+          "ecog",
+          "karnofsky"
+        ]
+      },
+      {
+        "text": "Nutritional status before major resection; malnourished patients benefit from preoperative nutritional support.",
+        "calcs": [
+          "must",
+          "nrs2002"
+        ]
+      },
+      {
+        "text": "Thrombosis risk: cancer surgery is high risk and the plan for extended prophylaxis should be made now.",
+        "calcs": [
+          "caprini",
+          "khorana"
+        ]
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Cross-sectional staging appropriate to the tumour site, and any functional imaging the MDT requests."
+      },
+      {
+        "text": "Histology or cytology of the primary, and of a suspected metastasis when that would change the treatment."
+      },
+      {
+        "text": "Tumour markers where they serve as a baseline for follow-up (for example CEA in colorectal cancer)."
+      },
+      {
+        "text": "Completion of luminal assessment where synchronous tumours are possible, such as full colonoscopy before colectomy."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Correct anaemia preoperatively where time allows, typically with iron, rather than relying on transfusion.",
+        "evidenceRef": "nice-ng151"
+      },
+      {
+        "text": "Prehabilitation and nutrition in the weeks before major surgery when the cancer pathway allows.",
+        "evidenceRef": "esmo-colon"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Resect with clear margins. R0: no residual tumour. R1: microscopic tumour at the margin. R2: macroscopic tumour left behind. Record your intra-operative assessment of R status.",
+        "evidenceRef": "uicc-tnm"
+      },
+      {
+        "text": "Perform the lymphadenectomy the tumour requires. Nodal yield matters for staging: for colon cancer at least 12 nodes is the accepted minimum for adequate staging.",
+        "evidenceRef": "esmo-colon"
+      },
+      {
+        "text": "Remove adherent structures en bloc rather than separating them: adhesion may be tumour, and dividing it converts an R0 into an R1 resection.",
+        "evidenceRef": "esmo-colon"
+      },
+      {
+        "text": "Orient the specimen with sutures or clips, keep it intact, and send it with a request that states the clinical question and neoadjuvant treatment.",
+        "evidenceRef": "rcpath"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Return every resection specimen result to the MDT. An R1 or R2 resection needs a documented plan."
+      },
+      {
+        "text": "An unexpected malignancy goes to the relevant site-specific MDT, not just to the general surgical list."
+      },
+      {
+        "text": "Call a specialist colleague intra-operatively when the tumour is beyond your experience; an inadequate first operation cannot be undone."
+      }
+    ]
+  },
+  "notes": [
+    "The first operation is the patient's best chance. A non-radical resection with a positive margin is often not rescued by a second one.",
+    "Lymph node yield is partly the surgeon's (a high tie and an intact mesentery) and partly the pathologist's. Both are audited for a reason.",
+    "When you find a cancer you did not expect, the safest thing is usually to stop, stage it properly, and come back with consent and a plan."
+  ],
+  "calcs": [
+    "p_possum",
+    "rcri",
+    "cfs",
+    "charlson",
+    "ecog",
+    "karnofsky",
+    "must",
+    "nrs2002",
+    "caprini",
+    "khorana"
+  ]
+}

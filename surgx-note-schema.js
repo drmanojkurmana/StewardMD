@@ -370,6 +370,18 @@
         ]
       }
     },
+    "modified-radical-mastectomy": {
+      base: "operative", title: "Modified radical mastectomy",
+      prefill: {"procedure": "Modified radical mastectomy with level I and II axillary clearance"},
+      extra: {
+        "Operative detail": [
+          f("marginsAssessment", "Margins (surgeon's assessment, deep and skin)", {"type": "text", "aiFillable": false, "ph": "Pectoral fascia taken; any concern about a margin"}),
+          f("axillaryLevels", "Axillary levels cleared", {"type": "text", "required": true, "aiFillable": false, "ph": "Levels I and II; level III if taken"}),
+          f("nervesPreserved", "Long thoracic, thoracodorsal, medial pectoral, intercostobrachial nerves", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Each: preserved / divided (reason)"}),
+          f("orientationSutures", "Specimen orientation sutures", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. short superior, long lateral (state convention)"})
+        ]
+      }
+    },
     "paeds-herniotomy": {
       base: "operative", title: "Paediatric herniotomy",
       prefill: {"procedure": "Inguinal herniotomy"},
@@ -393,6 +405,32 @@
           f("myotomyLength", "Myotomy extent and completeness", {"type": "textarea", "aiFillable": true, "rows": 2, "ph": "Antrum to pyloroduodenal junction; halves move independently"}),
           f("leakTest", "Mucosal leak test", {"type": "text", "required": true, "aiFillable": false, "ph": "Done: negative / positive and repaired"}),
           f("localAnaesthetic", "Local anaesthetic agent and total dose (mg/kg)", {"type": "text", "aiFillable": false, "help": "Combined surgeon and anaesthetist total"})
+        ]
+      }
+    },
+    "right-hemicolectomy": {
+      base: "operative", title: "Right hemicolectomy",
+      prefill: {"procedure": "Laparoscopic / open right hemicolectomy"},
+      extra: {
+        "Operative detail": [
+          f("stagingFindings", "Staging findings (liver, peritoneum, tumour)", {"type": "textarea", "required": true, "aiFillable": true, "rows": 3, "ph": "Metastases seen / none; tumour fixity or invasion"}),
+          f("highTie", "Level of vascular ligation", {"type": "text", "required": true, "aiFillable": false, "ph": "Ileocolic at SMV origin; right colic; right branch of middle colic"}),
+          f("mesocolicPlane", "Mesocolic plane and specimen integrity", {"type": "text", "aiFillable": false, "ph": "Intact mesocolic envelope / defects"}),
+          f("anastomosis", "Anastomosis type", {"type": "text", "required": true, "aiFillable": false, "ph": "Stapled side-to-side / handsewn; intra- or extracorporeal; perfusion checked"}),
+          f("extractionSite", "Extraction site and wound protection", {"type": "text", "aiFillable": false, "ph": "Site; wound protector used"})
+        ]
+      }
+    },
+    "total-thyroidectomy": {
+      base: "operative", title: "Total thyroidectomy",
+      prefill: {"procedure": "Total thyroidectomy"},
+      extra: {
+        "Operative detail": [
+          f("rlnRight", "Right RLN identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No / not identified - state how", "help": "A visual identification confirmed by the surgeon."}),
+          f("rlnLeft", "Left RLN identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No / not identified - state how"}),
+          f("ionmSignals", "Nerve monitoring signals (V1, R1, R2, V2 each side)", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Values or 'present/absent' per side; any loss of signal and the action taken"}),
+          f("ebsln", "External branch of superior laryngeal nerve", {"type": "text", "aiFillable": false, "ph": "Identified / stimulated / not seen, each side"}),
+          f("parathyroids", "Parathyroids seen, preserved, autotransplanted", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Per gland: seen in situ / autotransplanted (site) / not seen"})
         ]
       }
     },
@@ -461,6 +499,19 @@
           f("landmarks", "Verumontanum and ureteric orifices preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, with detail"}),
           f("capsulePerforation", "Capsular perforation or open sinuses; sodium checked", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "None, or site, action taken and sodium result"}),
           f("catheterDetail", "Catheter type, size and balloon volume; irrigation", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. three-way, size Ch, balloon mL water, irrigation running"})
+        ]
+      }
+    },
+    "wle-sentinel-node-biopsy": {
+      base: "operative", title: "Wide local excision and sentinel node biopsy",
+      prefill: {"procedure": "Wide local excision with sentinel lymph node biopsy"},
+      extra: {
+        "Operative detail": [
+          f("localisation", "Localisation device and specimen radiograph", {"type": "text", "required": true, "aiFillable": false, "ph": "Device type; lesion and device confirmed in specimen: Yes / No"}),
+          f("orientationSutures", "Specimen orientation sutures and additional margins", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Convention used; any shaved margins and their orientation"}),
+          f("sentinelNodes", "Sentinel nodes removed (number, counts, blue)", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Node 1: count, blue Y/N; residual axillary count"}),
+          f("tracer", "Tracer technique", {"type": "text", "aiFillable": false, "ph": "Isotope / blue dye / magnetic; any reaction"}),
+          f("cavityClips", "Cavity clips placed", {"type": "text", "aiFillable": false, "ph": "Number and position"})
         ]
       }
     }

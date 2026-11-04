@@ -47,6 +47,22 @@
     {
       "id": "obgyn_emergency",
       "title": "Obstetric and gynaecological emergencies"
+    },
+    {
+      "id": "onco_emergencies",
+      "title": "Oncological emergencies"
+    },
+    {
+      "id": "onco_periop",
+      "title": "Cancer surgery: principles and recovery"
+    },
+    {
+      "id": "breast",
+      "title": "Breast"
+    },
+    {
+      "id": "endocrine_surgery",
+      "title": "Endocrine surgery"
     }
   ],
   "protocols": [
@@ -470,6 +486,106 @@
       "specialty": "obgyn",
       "file": "protocols/acute-abdomen-pregnancy.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "malignant-bowel-obstruction",
+      "kind": "authored",
+      "title": "Malignant bowel obstruction",
+      "subtitle": "Decompress, define the level, decide the goal",
+      "category": "onco_emergencies",
+      "specialty": "oncology",
+      "file": "protocols/malignant-bowel-obstruction.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "oncological-surgical-emergencies",
+      "kind": "authored",
+      "title": "Oncological surgical emergencies",
+      "subtitle": "Neutropenic enterocolitis, tumour perforation, tumour bleeding",
+      "category": "onco_emergencies",
+      "specialty": "oncology",
+      "file": "protocols/oncological-surgical-emergencies.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "svc-obstruction",
+      "kind": "authored",
+      "title": "Superior vena cava obstruction",
+      "subtitle": "The surgeon's role: tissue, airway caution, stent first",
+      "category": "onco_emergencies",
+      "specialty": "oncology",
+      "file": "protocols/svc-obstruction.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cancer-operation-principles",
+      "kind": "authored",
+      "title": "Principles of a cancer operation",
+      "subtitle": "MDT before knife, margins, nodes, orientation",
+      "category": "onco_periop",
+      "specialty": "oncology",
+      "file": "protocols/cancer-operation-principles.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "postop-major-cancer-surgery",
+      "kind": "authored",
+      "title": "After major cancer surgery",
+      "subtitle": "ERAS care, chyle leak, pancreatic fistula grading",
+      "category": "onco_periop",
+      "specialty": "oncology",
+      "file": "protocols/postop-major-cancer-surgery.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "breast-triple-assessment",
+      "kind": "authored",
+      "title": "Breast lump: triple assessment",
+      "subtitle": "Who to refer, and why all three must agree",
+      "category": "breast",
+      "specialty": "breast",
+      "file": "protocols/breast-triple-assessment.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "breast-abscess-mastitis",
+      "kind": "authored",
+      "title": "Breast abscess and lactational mastitis",
+      "subtitle": "Keep feeding, aspirate before you cut",
+      "category": "breast",
+      "specialty": "breast",
+      "file": "protocols/breast-abscess-mastitis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "thyroid-neck-haematoma",
+      "kind": "authored",
+      "title": "Neck haematoma after thyroid surgery",
+      "subtitle": "SCOOP at the bedside, then theatre",
+      "category": "endocrine_surgery",
+      "specialty": "endocrine",
+      "file": "protocols/thyroid-neck-haematoma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "post-thyroidectomy-hypocalcaemia",
+      "kind": "authored",
+      "title": "Hypocalcaemia after thyroidectomy",
+      "subtitle": "Predict with PTH, treat symptoms with IV calcium",
+      "category": "endocrine_surgery",
+      "specialty": "endocrine",
+      "file": "protocols/post-thyroidectomy-hypocalcaemia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "adrenal-crisis-phaeo-periop",
+      "kind": "authored",
+      "title": "Adrenal crisis and phaeochromocytoma surgery",
+      "subtitle": "Hydrocortisone now; alpha-block before the knife",
+      "category": "endocrine_surgery",
+      "specialty": "endocrine",
+      "file": "protocols/adrenal-crisis-phaeo-periop.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -519,6 +635,12 @@
       "id": "obgyn",
       "file": "steps/obgyn.json",
       "title": "Shared obstetric and gynaecological steps",
+      "shared": true
+    },
+    {
+      "id": "onco",
+      "file": "steps/onco.json",
+      "title": "Shared cancer-operation steps (oncology, breast, endocrine)",
       "shared": true
     }
   ],
@@ -762,6 +884,64 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 45
+    },
+    {
+      "id": "total-thyroidectomy",
+      "title": "Total thyroidectomy",
+      "subtitle": "Nerves, parathyroids, neuromonitoring",
+      "system": "endocrine",
+      "specialty": "endocrine",
+      "file": "procedures/total-thyroidectomy.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "modified-radical-mastectomy",
+      "title": "Modified radical mastectomy",
+      "subtitle": "Total mastectomy with level I and II axillary clearance",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/modified-radical-mastectomy.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "wle-sentinel-node-biopsy",
+      "title": "Wide local excision with sentinel node biopsy",
+      "subtitle": "Breast-conserving surgery and axillary staging",
+      "system": "breast",
+      "specialty": "breast",
+      "file": "procedures/wle-sentinel-node-biopsy.json",
+      "stepPacks": [
+        "core",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "right-hemicolectomy",
+      "title": "Right hemicolectomy",
+      "subtitle": "Oncological lymphadenectomy and complete mesocolic excision principles",
+      "system": "gastrointestinal",
+      "specialty": "oncology",
+      "file": "procedures/right-hemicolectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen",
+        "onco"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
     }
   ],
   "cases": [
@@ -886,6 +1066,32 @@
         "surgeon"
       ],
       "review": "ai_drafted"
+    },
+    {
+      "id": "stridor-post-thyroidectomy",
+      "title": "Stridor four hours after thyroidectomy",
+      "subtitle": "Endocrine surgery - the neck that is closing",
+      "specialty": "endocrine",
+      "file": "cases/stridor-post-thyroidectomy.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ovarian-cancer-distension",
+      "title": "Vomiting and distension in known ovarian cancer",
+      "subtitle": "Surgical oncology - the right operation, or none",
+      "specialty": "oncology",
+      "file": "cases/ovarian-cancer-distension.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
     }
   ],
   "specialties": [
@@ -916,6 +1122,18 @@
     {
       "id": "obgyn",
       "title": "Obstetric and gynaecological surgery"
+    },
+    {
+      "id": "oncology",
+      "title": "Surgical oncology"
+    },
+    {
+      "id": "breast",
+      "title": "Breast surgery"
+    },
+    {
+      "id": "endocrine",
+      "title": "Endocrine surgery"
     }
   ]
 }

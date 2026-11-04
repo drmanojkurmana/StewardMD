@@ -1,0 +1,155 @@
+{
+  "id": "breast-abscess-mastitis",
+  "title": "Breast abscess and lactational mastitis",
+  "subtitle": "Keep feeding, aspirate before you cut",
+  "category": "breast",
+  "specialty": "breast",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "abm-36",
+      "org": "Academy of Breastfeeding Medicine (ABM)",
+      "title": "ABM Clinical Protocol #36: The Mastitis Spectrum, Revised 2022 (Mitchell KB, Johnson HM, Rodriguez JM et al., Breastfeed Med)",
+      "year": 2022,
+      "url": "https://www.bfmed.org/protocols",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "who-mastitis",
+      "org": "World Health Organization (WHO)",
+      "title": "Mastitis: causes and management",
+      "year": 2000,
+      "url": "https://www.who.int/publications/i/item/WHO-FCH-CAH-00.13",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "dixon-bmj",
+      "org": "BMJ",
+      "title": "Treatment of breast infection (Dixon JM, Khan LR)",
+      "year": 2011,
+      "url": "https://www.bmj.com/content/342/bmj.d396",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Systemic sepsis: hypotension, tachycardia, rigors or confusion."
+      },
+      {
+        "text": "Skin necrosis or a rapidly spreading erythema: necrotising infection is rare but must be recognised."
+      },
+      {
+        "text": "Inflammation in a woman who is not breastfeeding, especially if older, or that fails to settle on appropriate antibiotics: inflammatory breast cancer must be excluded by biopsy."
+      },
+      {
+        "text": "Recurrent periareolar abscess in a smoker: periductal mastitis and a mammary duct fistula."
+      },
+      {
+        "text": "A fluctuant mass that persists after a course of antibiotics."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Continue breastfeeding from both breasts on demand. Do not advise stopping; abrupt cessation increases the risk of abscess.",
+        "evidenceRef": "abm-36"
+      },
+      {
+        "text": "Avoid deep breast massage and excessive pumping to 'empty' the breast; use ice, supportive measures and an anti-inflammatory analgesic such as ibuprofen.",
+        "evidenceRef": "abm-36"
+      },
+      {
+        "text": "Start antibiotics if symptoms do not improve within 12 to 24 hours of these measures, or sooner if the woman is acutely unwell. Choose an anti-staphylococcal agent compatible with breastfeeding, per local protocol.",
+        "evidenceRef": "who-mastitis"
+      },
+      {
+        "text": "Septic patient: cultures, IV antibiotics per local sepsis protocol, and urgent surgical review.",
+        "timeCritical": true,
+        "evidenceRef": "dixon-bmj"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Breastfeeding history: latch, frequency, pumping, nipple damage, and any recent change in feeding pattern."
+      },
+      {
+        "text": "Examine for a fluctuant or tender mass, skin changes and axillary nodes. Fluctuance is often absent in a deep abscess."
+      },
+      {
+        "text": "Systemic features and sepsis screen.",
+        "calcs": [
+          "qsofa",
+          "news2"
+        ]
+      },
+      {
+        "text": "Non-lactational infection: smoking, diabetes, periareolar location and previous episodes."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Breast ultrasound for any suspected abscess or failure to improve within 48 hours of antibiotics."
+      },
+      {
+        "text": "Culture of milk or pus, especially in hospital-acquired, recurrent or non-resolving infection, and where MRSA is prevalent."
+      },
+      {
+        "text": "Core biopsy for any persistent mass or inflammation outside lactation."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Adjust antibiotics to culture; consider MRSA cover where local prevalence or culture suggests it.",
+        "evidenceRef": "dixon-bmj"
+      },
+      {
+        "text": "Treat sepsis with fluids and IV antibiotics while arranging drainage.",
+        "evidenceRef": "dixon-bmj"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Breast abscess: ultrasound-guided needle aspiration, repeated as required, with antibiotics. This is first-line and usually avoids an incision.",
+        "evidenceRef": "dixon-bmj"
+      },
+      {
+        "text": "Incision and drainage when the overlying skin is thin or necrotic, the abscess is large or multiloculated, or repeated aspiration fails. Place the incision to allow continued breastfeeding.",
+        "evidenceRef": "dixon-bmj"
+      },
+      {
+        "text": "Breastfeeding can continue from the affected side after drainage unless the incision is close to the nipple; express that side if it is.",
+        "evidenceRef": "abm-36"
+      },
+      {
+        "text": "Recurrent periductal abscess or mammary duct fistula: definitive excision of the affected duct system electively, once the acute infection has settled; advise smoking cessation.",
+        "evidenceRef": "dixon-bmj"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Breast surgical team for any abscess, any non-lactational infection and any inflammation that does not settle."
+      },
+      {
+        "text": "Lactation support or midwifery for every lactating woman: feeding technique is part of the treatment."
+      },
+      {
+        "text": "Breast clinic for imaging and biopsy of any residual mass after the infection has resolved."
+      }
+    ]
+  },
+  "notes": [
+    "Mastitis is now understood as a spectrum driven by ductal inflammation and oedema. Advice to massage hard and empty the breast often makes it worse.",
+    "Aspiration before incision: most lactational abscesses resolve with repeated needle aspiration, leaving no scar and no interruption to feeding.",
+    "A red breast that has not settled after two courses of antibiotics is a cancer until a biopsy says otherwise."
+  ],
+  "calcs": [
+    "qsofa",
+    "news2"
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "id": "breast-triple-assessment",
+  "title": "Breast lump: triple assessment",
+  "subtitle": "Who to refer, and why all three must agree",
+  "category": "breast",
+  "specialty": "breast",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "nice-ng12",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Suspected cancer: recognition and referral (NG12)",
+      "year": 2015,
+      "url": "https://www.nice.org.uk/guidance/ng12",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "abs-diag",
+      "org": "Association of Breast Surgery (ABS)",
+      "title": "Best practice diagnostic guidelines for patients presenting with breast symptoms",
+      "year": 2010,
+      "url": "https://associationofbreastsurgery.org.uk/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng101",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Early and locally advanced breast cancer: diagnosis and management (NG101)",
+      "year": 2018,
+      "url": "https://www.nice.org.uk/guidance/ng101",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "mohfw-npcdcs",
+      "org": "Ministry of Health and Family Welfare, Government of India",
+      "title": "Operational framework: management of common cancers (population-based screening of oral, breast and cervical cancer)",
+      "year": 2016,
+      "url": "https://main.mohfw.gov.in/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "Aged 30 or over with an unexplained breast lump, with or without pain: suspected cancer pathway."
+      },
+      {
+        "text": "Aged 50 or over with nipple discharge, retraction or other changes of concern in one nipple only: suspected cancer pathway."
+      },
+      {
+        "text": "Skin changes suggestive of cancer: tethering, peau d'orange, ulceration, or a red breast that does not settle on antibiotics (inflammatory carcinoma)."
+      },
+      {
+        "text": "An unexplained axillary lump in someone aged 30 or over."
+      },
+      {
+        "text": "A breast lump in a man, particularly unilateral, hard and eccentric to the nipple."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "Refer on the suspected cancer pathway anyone aged 30 or over with an unexplained breast lump, and anyone aged 50 or over with unilateral nipple discharge, retraction or other changes of concern.",
+        "evidenceRef": "nice-ng12"
+      },
+      {
+        "text": "Consider suspected cancer referral for skin changes suggestive of breast cancer, or an unexplained axillary lump at 30 or over.",
+        "evidenceRef": "nice-ng12"
+      },
+      {
+        "text": "Under 30 with an unexplained lump: consider a non-urgent referral, unless other features raise concern.",
+        "evidenceRef": "nice-ng12"
+      },
+      {
+        "text": "In the clinic, complete all three arms of triple assessment at one visit where possible: clinical examination, imaging and needle biopsy.",
+        "evidenceRef": "abs-diag"
+      }
+    ],
+    "assess": [
+      {
+        "text": "History: duration, change with the menstrual cycle, pain, nipple changes, previous breast disease, hormone therapy, and family history of breast or ovarian cancer."
+      },
+      {
+        "text": "Examine both breasts and both axillae and the supraclavicular fossae, sitting and lying, with a chaperone. Record size, site by clock face and distance from the nipple, consistency, mobility and skin or chest wall fixation."
+      },
+      {
+        "text": "Score each arm of the assessment on the local five-point scale (clinical, imaging, pathology) so concordance can be checked."
+      },
+      {
+        "text": "In settings without organised mammographic screening, clinical breast examination is the frontline tool; train it and record it well."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Imaging: ultrasound first in younger women, and mammography with ultrasound from around 40, per local protocol."
+      },
+      {
+        "text": "Image-guided core needle biopsy of any solid lesion that is not clearly benign. Core biopsy is preferred to fine-needle aspiration for a breast lump because it gives histology and receptor status."
+      },
+      {
+        "text": "Ultrasound of the axilla, with needle sampling of an abnormal node."
+      },
+      {
+        "text": "Further imaging (MRI) only for specific indications such as lobular cancer, discordant findings or dense breasts, as decided by the MDT."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "Discordance between any two arms of the triple assessment means the result is not benign. Repeat the biopsy, or excise for diagnosis, and discuss at the MDT.",
+        "evidenceRef": "abs-diag"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Discuss every confirmed cancer, and every discordant or indeterminate result, at the breast MDT before treatment is planned.",
+        "evidenceRef": "nice-ng101"
+      },
+      {
+        "text": "Benign concordant findings (for example a fibroadenoma in a young woman) can be discharged with clear advice to return if the lump changes.",
+        "evidenceRef": "abs-diag"
+      },
+      {
+        "text": "Simple cysts that are symptomatic can be aspirated; a blood-stained aspirate, a residual mass, or recurrence needs further assessment.",
+        "evidenceRef": "abs-diag"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Breast MDT for all cancers and all discordant results."
+      },
+      {
+        "text": "Family history or genetics service where the history meets referral criteria."
+      },
+      {
+        "text": "Do not reassure on a single normal test. Reassurance follows concordant triple assessment, not a normal mammogram alone."
+      }
+    ]
+  },
+  "notes": [
+    "Triple assessment works because each arm covers the blind spots of the others. Its power comes from concordance, not from any one test.",
+    "A normal mammogram does not exclude cancer in a palpable lump, particularly in dense breasts or lobular cancer.",
+    "Breast pain on its own, without a lump, is rarely due to cancer and does not meet the suspected cancer criteria."
+  ]
+}

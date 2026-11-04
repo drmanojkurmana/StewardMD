@@ -1,0 +1,83 @@
+{
+  "id": "ovarian-cancer-distension",
+  "title": "Vomiting and distension in known ovarian cancer",
+  "subtitle": "Surgical oncology - the right operation, or none",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "malignant-bowel-obstruction",
+  "procedureRef": "laparotomy",
+  "sources": [
+    { "id": "mascc-mbo", "org": "Multinational Association of Supportive Care in Cancer (MASCC)", "title": "Medical management of malignant bowel obstruction in patients with advanced cancer: 2021 MASCC guideline update (Davis M et al., Support Care Cancer)", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Medical+management+of+malignant+bowel+obstruction+2021+MASCC+guideline+update", "accessed": "2026-11-04" },
+    { "id": "cochrane-mbo", "org": "Cochrane", "title": "Surgery for the resolution of symptoms in malignant bowel obstruction in advanced gynaecological and gastrointestinal cancer (Cousins SE, Tempest E, Feuer DJ)", "year": 2016, "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD002764.pub2/full", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 61-year-old woman with stage IIIC high-grade serous ovarian cancer, treated with cytoreductive surgery and chemotherapy two years ago, now on second-line chemotherapy for recurrence, presents with five days of colicky abdominal pain, abdominal distension and vomiting. She has not opened her bowels for three days. Her oncologist's last letter describes a rising CA-125 and new peritoneal nodules. She lives with her daughter and was walking to the market until last week.",
+  "vitals": { "HR": "104", "BP": "112/70", "RR": "20", "SpO2": "97% on room air", "Temp": "37.2 C" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "She is vomiting bile-stained fluid in the emergency department. What are your first actions?",
+      "hint": "Comfort and safety before a decision about theatre.",
+      "options": [
+        { "id": "a", "text": "Nasogastric tube, IV fluids with electrolyte correction, analgesia and an antiemetic, and check her for peritonism", "correct": true, "feedback": "Correct. Decompression and resuscitation relieve symptoms and protect the airway, whatever the eventual plan." },
+        { "id": "b", "text": "Metoclopramide for the vomiting and oral fluids", "correct": false, "feedback": "Prokinetics can worsen colic in complete obstruction, and oral intake will just be vomited back." },
+        { "id": "c", "text": "Book theatre for an emergency laparotomy", "correct": false, "feedback": "There is no sign yet of strangulation or perforation, and nobody knows the level, number of obstructions or her wishes." },
+        { "id": "d", "text": "Refer directly to palliative care and stop all investigations", "correct": false, "feedback": "Palliative care should be involved early, but she was active last week and may have a treatable single-level or benign obstruction." }
+      ],
+      "why": "In malignant bowel obstruction the immediate actions are the same whether the eventual plan is an operation, a stent or comfort care: decompress, rehydrate, correct electrolytes, relieve pain and nausea, and look specifically for the features of strangulation or perforation.",
+      "missedRedFlags": ["Peritonism or a rising lactate, which would change this to an emergency operation if she wants one"]
+    },
+    {
+      "id": "dp2", "phase": "investigate",
+      "prompt": "Which investigation changes the plan most?",
+      "hint": "You need the level, the number of levels and the extent of disease.",
+      "options": [
+        { "id": "a", "text": "CT abdomen and pelvis with IV contrast", "correct": true, "feedback": "Correct. CT defines the transition points, peritoneal disease, ascites, closed loops and other causes." },
+        { "id": "b", "text": "Plain abdominal radiograph only", "correct": false, "feedback": "It confirms obstruction but not the level, the number of levels or the cause, which are the questions that matter here." },
+        { "id": "c", "text": "CA-125", "correct": false, "feedback": "It tells you the disease is active, which you already know, and does not influence today's decision." },
+        { "id": "d", "text": "Colonoscopy", "correct": false, "feedback": "Not first-line in a vomiting, distended patient; it may have a role later if a single colonic stricture is shown and stenting is considered." }
+      ],
+      "why": "CT is the investigation that separates the patient who might benefit from an operation (single level, limited disease, no ascites) from the patient who will not (multiple levels, diffuse carcinomatosis, ascites). It also identifies benign causes like a hernia.",
+      "alternatives": ["A water-soluble contrast study may help if CT suggests adhesive obstruction in a patient without strangulation."]
+    },
+    {
+      "id": "dp3", "phase": "assess",
+      "prompt": "CT shows small bowel obstruction with three transition points in the pelvis and mid-abdomen, diffuse peritoneal nodules and moderate ascites. No closed loop, no free gas. What does this mean for surgery?",
+      "hint": "Think about which features predict a poor surgical outcome.",
+      "options": [
+        { "id": "a", "text": "Surgery is unlikely to relieve the obstruction and carries high morbidity and mortality; medical management is the main approach", "correct": true, "feedback": "Correct. Multiple levels, diffuse peritoneal disease and ascites are the classic predictors of a futile laparotomy." },
+        { "id": "b", "text": "She needs an urgent laparotomy and adhesiolysis", "correct": false, "feedback": "With three malignant transition points and carcinomatosis, a laparotomy is unlikely to restore function and often ends with a fistula." },
+        { "id": "c", "text": "An endoscopic stent will treat all three levels", "correct": false, "feedback": "Stents suit a single accessible level, such as the gastric outlet or left colon, not multiple small bowel obstructions." },
+        { "id": "d", "text": "She can be managed with laxatives as an outpatient", "correct": false, "feedback": "This is a mechanical obstruction with vomiting. Laxatives do not treat it and stimulant laxatives can worsen colic." }
+      ],
+      "why": "The evidence on surgery for malignant bowel obstruction shows that symptom relief after operation is limited when obstruction is at multiple levels with diffuse carcinomatosis and ascites, and that complications, re-obstruction and death in hospital are common. These findings shift the plan to medical management, with a venting gastrostomy if vomiting persists.",
+      "missedRedFlags": ["Treating the CT as an indication to operate because 'she was walking last week'"]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "What is the most appropriate management plan?",
+      "hint": "Several specialties, one conversation.",
+      "options": [
+        { "id": "a", "text": "Goals-of-care discussion with her and her daughter, the oncologist and palliative care; antisecretory treatment, antiemetic, analgesia, and consider a corticosteroid trial; venting gastrostomy if vomiting persists", "correct": true, "feedback": "Correct. This combines honest communication with the interventions most likely to let her eat a little and go home." },
+        { "id": "b", "text": "Total parenteral nutrition and keep nil by mouth indefinitely", "correct": false, "feedback": "Parenteral nutrition is a decision about expected survival and further cancer treatment, not a default. It needs the oncologist and the patient involved." },
+        { "id": "c", "text": "Leave the nasogastric tube in long term", "correct": false, "feedback": "A nasogastric tube is a short-term measure. Long term it is uncomfortable and a venting gastrostomy is preferred." },
+        { "id": "d", "text": "Discharge with oral morphine and review in clinic", "correct": false, "feedback": "Her obstruction and vomiting have not been controlled, and she needs a plan made with her and her family first." }
+      ],
+      "why": "The medical management of malignant bowel obstruction uses antisecretory drugs, antiemetics without prokinetics in complete obstruction, analgesia and a trial of corticosteroids. A venting gastrostomy can replace a nasogastric tube. The decision is made with the patient, guided by her goals and what further cancer treatment is realistic.",
+      "alternatives": ["If CT had shown a single level with limited disease and good performance status, a resection, bypass or stoma could be the right operation after the same conversation."]
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "Two days later she develops new fever, tachycardia and a tender, rigid abdomen. What now?",
+      "hint": "The plan made earlier does not prevent you reassessing.",
+      "options": [
+        { "id": "a", "text": "Recognise likely perforation, resuscitate, and revisit her wishes urgently with her and her daughter: an operation, or comfort-focused care, according to what she wants and what is achievable", "correct": true, "feedback": "Correct. A new complication needs a new decision, made with her, not by default in either direction." },
+        { "id": "b", "text": "Continue the medical plan unchanged: she is palliative", "correct": false, "feedback": "Palliative is not a reason to stop thinking. Perforation causes great distress and her wishes may include an operation or targeted comfort care." },
+        { "id": "c", "text": "Take her straight to theatre without discussion", "correct": false, "feedback": "An emergency laparotomy in this setting carries a high mortality. She has the right to decide, and the earlier conversation makes that quicker." },
+        { "id": "d", "text": "Increase the corticosteroid dose", "correct": false, "feedback": "Steroids do not treat perforation and may mask the signs further." }
+      ],
+      "why": "Peritonitis in a patient with advanced cancer is a decision point, not a predetermined outcome. Resuscitation, analgesia and a rapid, honest discussion about the realistic options allow her to choose between an operation with its risks and focused comfort care.",
+      "missedRedFlags": ["Attributing new fever and rigidity to the cancer without examining her for perforation"]
+    }
+  ]
+}

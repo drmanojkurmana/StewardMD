@@ -1,0 +1,62 @@
+{
+  "_comment": "Steps shared by cancer operations across surgical oncology, breast and endocrine surgery. Each one is authored once and referenced by every procedure that needs it.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.onco.mdt-check": {
+      "id": "step.onco.mdt-check", "kind": "checkpoint", "critical": true,
+      "title": "MDT decision, staging and diagnosis confirmed",
+      "why": "A cancer operation is one part of a treatment plan agreed by a multidisciplinary team. Operating without the tissue diagnosis, the staging and the documented MDT decision is how patients receive the wrong operation, or an operation they should never have had.",
+      "how": [
+        "Confirm the documented MDT outcome names this operation, on this side or segment, with this extent of nodal surgery.",
+        "Confirm the tissue diagnosis (histology or cytology) and that staging is complete for this tumour type, with imaging available in theatre.",
+        "Confirm neoadjuvant treatment is finished and the interval since it matches the plan.",
+        "Confirm consent covers the realistic alternatives and the extended procedures that may be needed, such as a stoma or a central neck dissection."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Accepting an MDT note that predates new imaging or a changed biopsy result.", "Proceeding on a radiological diagnosis alone when the MDT asked for tissue first."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.tumour-handling": {
+      "id": "step.onco.tumour-handling", "kind": "checkpoint",
+      "title": "Oncological handling: no touch, wound protection, clean field",
+      "why": "Tumour cells shed into the wound, the peritoneum or a port site produce a recurrence that no adjuvant therapy fully reverses. Handling the specimen as little as possible and protecting the wound are cheap and they are under the surgeon's control.",
+      "how": [
+        "Handle the tumour-bearing tissue as little as possible; retract the specimen by its normal edges, not by the tumour.",
+        "Control the vascular pedicle early where the operation allows it, before the tumour is mobilised.",
+        "Use a wound protector for any extraction site, and do not breach the tumour or the specimen capsule.",
+        "If the tumour is breached or spills, record it in the operative note and tell the MDT: it changes staging and adjuvant decisions."
+      ],
+      "structuresAtRisk": ["Wound and extraction site (implantation)", "Peritoneal surface"],
+      "pitfalls": ["Grasping the tumour with a toothed instrument to improve exposure.", "An unrecorded capsular breach that the pathologist and oncologist never learn about."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.specimen-orientation": {
+      "id": "step.onco.specimen-orientation", "kind": "checkpoint", "critical": true,
+      "title": "Orienting the cancer specimen for the pathologist",
+      "why": "Margin status and nodal yield are reported by the pathologist, but only from a specimen they can orient. An unoriented specimen with a close margin cannot tell anyone which margin to re-excise, so the patient may need a larger re-operation or a wider field of radiotherapy.",
+      "how": [
+        "Mark orientation with sutures or clips using the convention agreed with your pathology department, and write that convention on the request form.",
+        "Keep the specimen intact: do not open, slice or palpate-bisect it in theatre unless the pathologist asks.",
+        "Label separately any additional margins, nodes or nodal levels taken, each with its own orientation.",
+        "State the clinical question on the form: tumour type, neoadjuvant treatment, and the margin you are worried about."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["A single suture with no stated convention.", "Cutting into the specimen to 'have a look', which destroys the margin it was meant to assess."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.onco.axilla-entry": {
+      "id": "step.onco.axilla-entry", "kind": "dissection",
+      "title": "Entering the axilla through the clavipectoral fascia",
+      "why": "Every axillary operation, from a sentinel node biopsy to a level II clearance, starts by opening the clavipectoral fascia at the lateral border of pectoralis major. Entering in the right plane keeps the dissection lateral to the vessels and away from the nerves that matter.",
+      "how": [
+        "Identify the lateral border of pectoralis major and open the clavipectoral fascia just behind it.",
+        "Develop the axillary fat pad by blunt and sharp dissection, keeping the axillary vein as the superior limit you work towards, not through.",
+        "Look for the intercostobrachial nerve crossing the axilla transversely and preserve it where oncologically possible.",
+        "Keep haemostasis meticulous: blood-stained fat hides both the nerves and the blue or radioactive node."
+      ],
+      "structuresAtRisk": ["Axillary vein", "Intercostobrachial nerve", "Long thoracic nerve", "Thoracodorsal neurovascular bundle"],
+      "pitfalls": ["Dissecting too superficially in subcutaneous fat rather than below the fascia.", "Dividing the intercostobrachial nerve routinely when it could be kept."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}
