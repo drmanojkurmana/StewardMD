@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "sen-female-reproductive",
+ "subject": "ss-endocrinology",
+ "title": "Amenorrhea, polycystic ovary syndrome, and menopause",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Secondary amenorrhea** is three months without menses when cycles were regular, or six months when they were irregular. The first tests are pregnancy, TSH, prolactin, and FSH. A pelvic ultrasound is not ordered before pregnancy is excluded. Do not open the workup with a picture of the uterus.",
+   "say": "Secondary amenorrhea is three months without menses when cycles were regular, or six months when they were irregular. The first tests are pregnancy, TSH, prolactin, and FSH. A pelvic ultrasound is not ordered before pregnancy is excluded. Do not open the workup with a picture of the uterus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Secondary amenorrhea, 3 or 6 months"
+     },
+     {
+      "id": "b",
+      "label": "Pregnancy test first"
+     },
+     {
+      "id": "c",
+      "label": "TSH, prolactin, and FSH"
+     },
+     {
+      "id": "d",
+      "label": "Ultrasound only after pregnancy is excluded"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Rotterdam** criteria diagnose **polycystic** ovary syndrome when two of three features are present after exclusions. The features are oligo-ovulation, hyperandrogenism, and polycystic ovarian morphology. A modern transducer uses at least 20 follicles or a volume of at least 10 mL, and the older follicle count was 12. The LH to FSH ratio is not a criterion, even though the drawing prints a ratio above 2 to 1.",
+   "say": "The Rotterdam criteria diagnose polycystic ovary syndrome when two of three features are present after exclusions. The features are oligo-ovulation, hyperandrogenism, and polycystic ovarian morphology. A modern transducer uses at least 20 follicles or a volume of at least 10 mL, and the older follicle count was 12. The LH to FSH ratio is not a criterion, even though the drawing prints a ratio above 2 to 1.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pcos-hirsutism-rotterdam-metabolic-induction-fig1.webp",
+    "alt": "Drawing of the Rotterdam criteria after exclusions, with oligo-ovulation, Ferriman-Gallwey hirsutism, and at least 20 follicles or a volume of at least 10 mL. A side panel prints an LH to FSH ratio above 2 to 1.",
+    "caption": "The drawing shows two of three Rotterdam features and a follicle count of at least 20 or a volume of at least 10 mL. It also prints an LH to FSH ratio, which is not a diagnostic criterion (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Hirsutism** is **usually** scored with the modified Ferriman-Gallwey scale, and a score of 8 or higher is the common cutoff, with a lower threshold in some East Asian groups. A combined oral contraceptive is the first-line drug. Spironolactone is teratogenic, so contraception is required. Letrozole is preferred to clomiphene for ovulation induction, and the same card also names clomifene.",
+   "say": "Hirsutism is usually scored with the modified Ferriman-Gallwey scale, and a score of 8 or higher is the common cutoff, with a lower threshold in some East Asian groups. A combined oral contraceptive is the first-line drug. Spironolactone is teratogenic, so contraception is required. Letrozole is preferred to clomiphene for ovulation induction, and the same card also names clomifene.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Choice",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Ferriman-Gallwey score",
+      "8 or higher is the common cutoff"
+     ],
+     [
+      "First-line drug",
+      "Combined oral contraceptive"
+     ],
+     [
+      "Spironolactone",
+      "Teratogenic, so contraception is required"
+     ],
+     [
+      "Ovulation induction",
+      "Letrozole before clomiphene"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Functional hypothalamic** amenorrhea is an energy deficit with low LH and low oestradiol. The treatment is to eat more and train less. An oral contraceptive does not protect bone the way endogenous oestrogen does, and it hides recovery of the axis. Do not call this polycystic ovary syndrome when the LH is low and the energy deficit is obvious.",
+   "say": "Functional hypothalamic amenorrhea is an energy deficit with low LH and low oestradiol. The treatment is to eat more and train less. An oral contraceptive does not protect bone the way endogenous oestrogen does, and it hides recovery of the axis. Do not call this polycystic ovary syndrome when the LH is low and the energy deficit is obvious.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Functional hypothalamic amenorrhea",
+     "points": [
+      "Energy deficit",
+      "Low LH and low oestradiol",
+      "Eat more and train less"
+     ]
+    },
+    "right": {
+     "title": "What not to do",
+     "points": [
+      "An oral contraceptive is not bone protection",
+      "It hides recovery",
+      "A high LH ratio is a different disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Premature ovarian** insufficiency is amenorrhea before the age of 40, with two FSH results in the menopausal range at least one month apart. Hormone therapy is continued until the average age of natural menopause unless a contraindication is present. Causes include Turner syndrome, an FMR1 premutation, autoimmune disease, and iatrogenic injury. One raised FSH is not enough.",
+   "say": "Premature ovarian insufficiency is amenorrhea before the age of 40, with two FSH results in the menopausal range at least one month apart. Hormone therapy is continued until the average age of natural menopause unless a contraindication is present. Causes include Turner syndrome, an FMR1 premutation, autoimmune disease, and iatrogenic injury. One raised FSH is not enough.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Requirement",
+     "Premature ovarian insufficiency"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "Amenorrhea before 40 years"
+     ],
+     [
+      "FSH",
+      "Two menopausal values, a month apart"
+     ],
+     [
+      "Hormones",
+      "Until average menopause age if safe"
+     ],
+     [
+      "One FSH",
+      "Not diagnostic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Turner syndrome** is 45,X, with short stature, streak gonads, coarctation, a bicuspid aortic valve, a horseshoe kidney, and autoimmune thyroid disease. Pregnancy carries a high risk of aortic dissection. The drawing shows a webbed neck and a fibrous streak ovary on the left. The right panel is Asherman syndrome, and the cardiac lesions are not on the figure.",
+   "say": "Turner syndrome is 45,X, with short stature, streak gonads, coarctation, a bicuspid aortic valve, a horseshoe kidney, and autoimmune thyroid disease. Pregnancy carries a high risk of aortic dissection. The drawing shows a webbed neck and a fibrous streak ovary on the left. The right panel is Asherman syndrome, and the cardiac lesions are not on the figure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Drawing with a webbed neck and a fibrous streak ovary on the left, labelled as Turner syndrome, and intrauterine adhesions on the right, labelled as Asherman syndrome.",
+    "caption": "The left panel shows a webbed neck and a streak ovary. The right panel is Asherman syndrome, not coarctation, a bicuspid valve, or a horseshoe kidney (StewardMD)."
+   }
+  },
+  {
+   "tx": "You should **offer menopausal** hormone therapy for bothersome vasomotor symptoms when the woman is under 60, or within 10 years of menopause, and no contraindication is present. The Women's Health Initiative oestrogen plus progestin trial increased breast cancer, stroke, and venous thrombosis, and it reduced fractures. Do not start hormone therapy to prevent cardiovascular disease. Transdermal oestrogen has a lower clot risk than oral oestrogen.",
+   "say": "You should offer menopausal hormone therapy for bothersome vasomotor symptoms when the woman is under 60, or within 10 years of menopause, and no contraindication is present. The Women's Health Initiative oestrogen plus progestin trial increased breast cancer, stroke, and venous thrombosis, and it reduced fractures. Do not start hormone therapy to prevent cardiovascular disease. Transdermal oestrogen has a lower clot risk than oral oestrogen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "When therapy is offered",
+     "points": [
+      "Bothersome vasomotor symptoms",
+      "Under 60, or within 10 years of menopause",
+      "No contraindication"
+     ]
+    },
+    "right": {
+     "title": "What the WHI showed",
+     "points": [
+      "More breast cancer, stroke, and clots with combined therapy",
+      "Fewer fractures",
+      "Not a reason to start hormones for heart disease"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rapid virilization**, with a testosterone often above 150 to 200 ng/dL, suggests an androgen-secreting tumor rather than polycystic ovary syndrome. A high DHEAS points to an adrenal source. Image the suspected gland only after the biochemistry is back. A history measured in years fits polycystic ovary syndrome, and a history measured in weeks does not.",
+   "say": "Rapid virilization, with a testosterone often above 150 to 200 ng/dL, suggests an androgen-secreting tumor rather than polycystic ovary syndrome. A high DHEAS points to an adrenal source. Image the suspected gland only after the biochemistry is back. A history measured in years fits polycystic ovary syndrome, and a history measured in weeks does not.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Rapid virilization"
+     },
+     {
+      "id": "b",
+      "label": "Testosterone and DHEAS first"
+     },
+     {
+      "id": "c",
+      "label": "High DHEAS points to the adrenal"
+     },
+     {
+      "id": "d",
+      "label": "Image only after the biochemistry"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

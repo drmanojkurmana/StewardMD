@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sen-thyrotoxicosis",
+ "subject": "ss-endocrinology",
+ "title": "Graves disease and thyrotoxicosis",
+ "minutes": 9,
+ "steps": [
+  {
+   "tx": "**Graves disease** causes diffuse thyrotoxicosis with a high radioiodine uptake, TSH-receptor antibodies, and sometimes orbitopathy or pretibial myxoedema. A toxic nodule or toxic multinodular goitre has focal or patchy uptake and no TSH-receptor antibodies. The drawing shows receptor autoantibodies on the TSH receptor, a diffuse goitre, Graves ophthalmopathy, tremor, tachycardia, and pretibial myxoedema.",
+   "say": "Graves disease causes diffuse thyrotoxicosis with a high radioiodine uptake, TSH-receptor antibodies, and sometimes orbitopathy or pretibial myxoedema. A toxic nodule or toxic multinodular goitre has focal or patchy uptake and no TSH-receptor antibodies. The drawing shows receptor autoantibodies on the TSH receptor, a diffuse goitre, Graves ophthalmopathy, tremor, tachycardia, and pretibial myxoedema.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperthyroidism-fig1.webp",
+    "alt": "Drawing of thyrotoxicosis with TSH-receptor autoantibodies, a diffuse goitre, Graves ophthalmopathy, tremor, tachycardia, and pretibial myxoedema.",
+    "caption": "The drawing shows receptor autoantibodies at the TSH receptor, a diffuse goitre, Graves ophthalmopathy, tremor, tachycardia, and pretibial myxoedema. It does not show a radionuclide scan (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Painless thyroiditis**, iodine exposure, and exogenous thyroid hormone are all causes of low uptake. Factitious thyrotoxicosis has a low thyroglobulin, whereas thyroiditis has a high thyroglobulin. Antithyroid drugs do not treat thyroiditis. The scan row is drawn as a dark diffuse Graves pattern, a patchy multinodular pattern, and a faint thyroiditis pattern.",
+   "say": "Painless thyroiditis, iodine exposure, and exogenous thyroid hormone are all causes of low uptake. Factitious thyrotoxicosis has a low thyroglobulin, whereas thyroiditis has a high thyroglobulin. Antithyroid drugs do not treat thyroiditis. The scan row is drawn as a dark diffuse Graves pattern, a patchy multinodular pattern, and a faint thyroiditis pattern.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperthyroidism-and-other-causes-of-fig1.webp",
+    "alt": "Drawing comparing Graves disease with exophthalmos and a diffuse goitre, a toxic multinodular goitre, and three radionuclide patterns labelled Graves, multinodular, and thyroiditis.",
+    "caption": "The scan row draws a dark diffuse Graves pattern, a patchy multinodular pattern, and a faint thyroiditis pattern. Exophthalmos is drawn only on the Graves figure (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Methimazole** is the **preferred** antithyroid drug except in the first trimester of pregnancy and in thyroid storm, when propylthiouracil is preferred. Propylthiouracil also blocks peripheral conversion of T4 to T3, but it can cause severe liver injury, so it is not long-term first-line therapy. Both drugs can cause a rash and both can cause agranulocytosis, so the warning is the same whichever thionamide you choose.",
+   "say": "Methimazole is the preferred antithyroid drug except in the first trimester of pregnancy and in thyroid storm, when propylthiouracil is preferred. Propylthiouracil also blocks peripheral conversion of T4 to T3, but it can cause severe liver injury, so it is not long-term first-line therapy. Both drugs can cause a rash and both can cause agranulocytosis, so the warning is the same whichever thionamide you choose.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Drug",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Most adults",
+      "Methimazole",
+      "Preferred antithyroid drug"
+     ],
+     [
+      "First trimester",
+      "Propylthiouracil",
+      "Methimazole birth defects"
+     ],
+     [
+      "Thyroid storm",
+      "Propylthiouracil if available",
+      "Also blocks T4 to T3"
+     ],
+     [
+      "Long-term maintenance",
+      "Not propylthiouracil",
+      "Liver injury risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Agranulocytosis** from an antithyroid drug presents with fever and sore throat. Stop the drug and do not restart either thionamide, because the reaction can cross. Routine blood counts do not replace that warning. Tell every patient to stop the tablet and seek a count the same day if the throat is sore and a fever is present. A mild rash is a different problem and is not agranulocytosis.",
+   "say": "Agranulocytosis from an antithyroid drug presents with fever and sore throat. Stop the drug and do not restart either thionamide, because the reaction can cross. Routine blood counts do not replace that warning. Tell every patient to stop the tablet and seek a count the same day if the throat is sore and a fever is present. A mild rash is a different problem and is not agranulocytosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Agranulocytosis",
+     "points": [
+      "Fever and sore throat",
+      "Stop the drug the same day",
+      "Do not switch to the other thionamide"
+     ]
+    },
+    "right": {
+     "title": "Mild rash",
+     "points": [
+      "Itch without fever",
+      "Not marrow failure",
+      "Still needs a clinical review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Radioiodine** is **contraindicated** in pregnancy and during breastfeeding. It can worsen thyroid eye disease, so active moderate or severe orbitopathy is a reason to choose surgery or an antithyroid drug instead. If radioiodine must be used in milder active eye disease, glucocorticoid cover is given. A pregnancy test is confirmed before the dose in any person who could be pregnant.",
+   "say": "Radioiodine is contraindicated in pregnancy and during breastfeeding. It can worsen thyroid eye disease, so active moderate or severe orbitopathy is a reason to choose surgery or an antithyroid drug instead. If radioiodine must be used in milder active eye disease, glucocorticoid cover is given. A pregnancy test is confirmed before the dose in any person who could be pregnant.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Active orbitopathy?"
+     },
+     {
+      "id": "b",
+      "label": "Moderate or severe: avoid radioiodine"
+     },
+     {
+      "id": "c",
+      "label": "Mild active disease: steroid cover if radioiodine"
+     },
+     {
+      "id": "d",
+      "label": "Pregnancy: never radioiodine"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **beta blocker**, often propranolol, is started for symptomatic thyrotoxicosis because it relieves adrenergic symptoms and propranolol also slows T4 to T3 conversion. It does not treat the underlying gland. The drawing marks tachycardia and tremor, which are the symptoms a beta blocker is for. Continue the antithyroid drug, because the heart rate will return when the tablet is stopped if the gland is still overactive.",
+   "say": "A beta blocker, often propranolol, is started for symptomatic thyrotoxicosis because it relieves adrenergic symptoms and propranolol also slows T4 to T3 conversion. It does not treat the underlying gland. The drawing marks tachycardia and tremor, which are the symptoms a beta blocker is for. Continue the antithyroid drug, because the heart rate will return when the tablet is stopped if the gland is still overactive.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Beta blocker",
+     "points": [
+      "Relieves tremor and tachycardia",
+      "Propranolol slows T4 to T3",
+      "Does not cure the gland"
+     ]
+    },
+    "right": {
+     "title": "Thionamide",
+     "points": [
+      "Blocks new hormone synthesis",
+      "Methimazole in most adults",
+      "Does not empty stored hormone at once"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Thyroid storm** is a clinical diagnosis. A Burch-Wartofsky score of 45 or higher is highly suggestive. Treat with a thionamide first, propylthiouracil if it is available, then iodine, a beta blocker, and glucocorticoid, and treat the precipitant. Never give iodine before the thionamide, because iodine given first can fuel more hormone synthesis. Supportive care includes cooling and treatment of the infection or the surgery that set it off.",
+   "say": "Thyroid storm is a clinical diagnosis. A Burch-Wartofsky score of 45 or higher is highly suggestive. Treat with a thionamide first, propylthiouracil if it is available, then iodine, a beta blocker, and glucocorticoid, and treat the precipitant. Never give iodine before the thionamide, because iodine given first can fuel more hormone synthesis. Supportive care includes cooling and treatment of the infection or the surgery that set it off.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Thionamide first"
+     },
+     {
+      "id": "b",
+      "label": "Then iodine"
+     },
+     {
+      "id": "c",
+      "label": "Beta blocker and glucocorticoid"
+     },
+     {
+      "id": "d",
+      "label": "Treat the precipitant"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subclinical hyperthyroidism** is treated when the TSH is below 0.1 mIU/L in patients older than about 65 years, or when heart disease or osteoporosis is present. Beta blockade alone is not enough when the TSH stays fully suppressed and the risk is high. A TSH between 0.1 and the lower reference limit is a milder band, and treatment is individual. Repeat the TSH before you ablate a gland for one slightly low result.",
+   "say": "Subclinical hyperthyroidism is treated when the TSH is below 0.1 mIU/L in patients older than about 65 years, or when heart disease or osteoporosis is present. Beta blockade alone is not enough when the TSH stays fully suppressed and the risk is high. A TSH between 0.1 and the lower reference limit is a milder band, and treatment is individual. Repeat the TSH before you ablate a gland for one slightly low result.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TSH",
+     "Who is treated",
+     "What is not enough"
+    ],
+    "rows": [
+     [
+      "Below 0.1 mIU/L",
+      "Age over about 65, heart disease, or osteoporosis",
+      "Beta blocker alone"
+     ],
+     [
+      "0.1 to the lower limit",
+      "Consider if risk is high",
+      "One result is not an ablation"
+     ],
+     [
+      "Suppressed, pregnant",
+      "Separate pregnancy rules",
+      "Radioiodine is forbidden"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
