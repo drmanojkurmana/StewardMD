@@ -1,0 +1,203 @@
+{
+  "v": 1,
+  "module": "snp-glomerular-approach",
+  "subject": "ss-nephrology",
+  "title": "Approach to Glomerular Disease and Nephrotic Syndrome",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Nephrotic syndrome** is clinically defined by heavy **proteinuria** exceeding **3.5** g per **24** hours per **1.73** m2 or spot ratio above **3.0** g/g, marked **hypoalbuminemia** under 3.0 g/dL, severe peripheral **edema**, and hyperlipidemia. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Nephrotic syndrome is clinically defined by heavy proteinuria exceeding 3 point 5 g per 24 hours per 1 point 73 m2 or spot ratio above 3 point 0 g/g, accompanied by marked hypoalbuminemia under 3 point 0 g/dL, severe peripheral edema, and hyperlipidemia. Systematic clinical evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-diseases-nephritic-nephrotic-fig1.webp",
+        "alt": "Diagram contrasting clinical and pathological features of nephritic and nephrotic syndromes.",
+        "caption": "Glomerular presentation spectrum: nephrotic versus nephritic syndrome. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Venous thromboembolism**, including **renal vein thrombosis**, DVT, and pulmonary embolism, develops in **10%** to **30%** of patients with nephrotic syndrome. The thrombotic risk is highest in **membranous nephropathy** when serum albumin drops below **2.0** to **2.5** g/dL. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Venous thromboembolism, including renal vein thrombosis, DVT, and pulmonary embolism, develops in 10% to 30% of patients with nephrotic syndrome. The thrombotic risk is highest in membranous nephropathy when serum albumin drops below 2.0 to 2.5 g/dL. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hypercoagulable Factor",
+          "Pathophysiologic Alteration",
+          "Clinical Risk Impact"
+        ],
+        "rows": [
+          [
+            "Antithrombin III loss",
+            "Urinary wasting of anticoagulant factors",
+            "Marked reduction in heparin cofactor activity"
+          ],
+          [
+            "Hepatic fibrinogen synthesis",
+            "Reactive overproduction of procoagulants",
+            "Elevated fibrinogen, factor V, and factor VIII"
+          ],
+          [
+            "Platelet hyperreactivity",
+            "Increased arachidonic acid and aggregation",
+            "Spontaneous arterial and venous microthrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Prophylactic anticoagulation** in nephrotic syndrome is guided by bleeding risk and **serum albumin**. It is strongly indicated when albumin drops below **2.0** to **2.5** g/dL in **membranous nephropathy** with proteinuria exceeding **10** g/day or body mass index over **35** kg/m2. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Prophylactic anticoagulation in nephrotic syndrome is guided by bleeding risk and serum albumin. It is strongly indicated when albumin drops below 2.0 to 2.5 g/dL in membranous nephropathy with proteinuria exceeding 10 g/day or body mass index over 35 kg/m2. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High Thrombotic Risk",
+          "points": [
+            "Histology: Membranous nephropathy",
+            "Serum albumin: Below 2.0 to 2.5 g/dL",
+            "Urinary protein: Massive loss exceeding 10 g/day",
+            "Intervention: Full therapeutic anticoagulation"
+          ]
+        },
+        "right": {
+          "title": "High Bleeding Risk",
+          "points": [
+            "Coagulation: Baseline uncorrected coagulopathy",
+            "Clinical history: Recent gastrointestinal hemorrhage",
+            "Platelets: Severe thrombocytopenia",
+            "Intervention: Mechanical prophylaxis and statin therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hyperlipidemia** in nephrotic syndrome features elevated LDL and triglycerides driven by hepatic overproduction of **ApoB-100** lipoproteins in response to low oncotic pressure, coupled with reduced peripheral clearance by **lipoprotein lipase**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "say": "Hyperlipidemia in nephrotic syndrome features elevated LDL and triglycerides driven by hepatic overproduction of ApoB-100 lipoproteins in response to low oncotic pressure, coupled with reduced peripheral clearance by lipoprotein lipase. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "l1",
+            "label": "Hypoalbuminemia / low oncotic pressure"
+          },
+          {
+            "id": "l2",
+            "label": "Hepatic ApoB-100 overproduction"
+          },
+          {
+            "id": "l3",
+            "label": "Suppressed lipoprotein lipase catabolism"
+          }
+        ],
+        "edges": [
+          [
+            "l1",
+            "l2",
+            "Stimulate hepatic lipid synthesis"
+          ],
+          [
+            "l2",
+            "l3",
+            "Elevate circulating LDL and VLDL"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Edema formation involves two distinct pathophysiological mechanisms. The **underfill hypothesis** attributes fluid retention to low oncotic pressure activating secondary neurohormonal RAAS signaling. In contrast, the **overfill hypothesis** invokes primary distal sodium retention via **ENaC** activation by filtered **plasmin**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Edema formation involves two distinct pathophysiological mechanisms. The underfill hypothesis attributes fluid retention to low oncotic pressure activating secondary neurohormonal RAAS signaling. In contrast, the overfill hypothesis invokes primary distal sodium retention via ENaC activation by filtered plasmin. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Underfill Mechanism",
+          "points": [
+            "Primary insult: Severe hypoalbuminemia",
+            "Intravascular volume: Contracted effective circulating volume",
+            "Secondary response: Secondary RAAS and ADH activation",
+            "Typical disease: Minimal change disease in children"
+          ]
+        },
+        "right": {
+          "title": "Overfill Mechanism",
+          "points": [
+            "Primary insult: Filtered plasminogen converted to plasmin",
+            "Intravascular volume: Expanded plasma volume",
+            "Tubular target: Proteolytic cleavage and activation of ENaC",
+            "Typical disease: Adult nephrotic syndrome and glomerulonephritis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nephrotic patients display pronounced vulnerability to **encapsulated bacterial infections**, particularly **Streptococcus pneumoniae** peritonitis and cellulitis. This defect stems directly from urinary loss of **IgG** immunoglobulins and alternative complement components including factor B and **properdin**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Nephrotic patients display pronounced vulnerability to encapsulated bacterial infections, particularly Streptococcus pneumoniae peritonitis and cellulitis. This defect stems directly from urinary loss of IgG immunoglobulins and alternative complement components including factor B and properdin. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-misc-nephrotic.webp",
+        "alt": "Nephrotic syndrome with oedema and its major complications, including infection.",
+        "caption": "Nephrotic oedema with the complication set of infection, thrombosis, hypovolaemia, and hyperlipidaemia. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Nephritic syndrome** is characterized by the sudden onset of gross or microscopic hematuria with **dysmorphic red cells** and **RBC casts**, accompanied by mild-to-moderate non-nephrotic proteinuria, hypertension, oliguria, and elevated serum creatinine reflecting active inflammatory glomerular endocapillary injury. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Nephritic syndrome is characterized by the sudden onset of gross or microscopic hematuria with dysmorphic red cells and RBC casts, accompanied by mild-to-moderate non-nephrotic proteinuria, hypertension, oliguria, and elevated serum creatinine reflecting active inflammatory glomerular endocapillary injury. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Glomerular Lesion",
+          "Light Microscopy Pattern",
+          "Diagnostic Ultrastructure"
+        ],
+        "rows": [
+          [
+            "Minimal change disease",
+            "Optically normal glomeruli",
+            "Diffuse podocyte foot process effacement"
+          ],
+          [
+            "Membranous nephropathy",
+            "Diffuse capillary wall thickening",
+            "Subepithelial immune deposits with spikes"
+          ],
+          [
+            "Proliferative GN",
+            "Endocapillary and mesangial expansion",
+            "Subendothelial deposits and cellular crescents"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The glomerular filtration barrier charge and size selectivity resides within fenestrated endothelium, trilaminar basement membrane rich in negatively charged **heparan sulfate** proteoglycans, and podocyte **slit diaphragm** structures spanned by **nephrin** and **podocin** proteins. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "The glomerular filtration barrier charge and size selectivity resides within fenestrated endothelium, trilaminar basement membrane rich in negatively charged heparan sulfate proteoglycans, and podocyte slit diaphragm structures spanned by nephrin and podocin proteins. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Deposit Location",
+          "Typical Pathologic Entity",
+          "Associated Clinical Feature"
+        ],
+        "rows": [
+          [
+            "Subepithelial space",
+            "Primary membranous nephropathy",
+            "Anti-PLA2R antibody mediation"
+          ],
+          [
+            "Subendothelial space",
+            "Lupus nephritis class IV / MPGN",
+            "Hypocomplementemia and active sediment"
+          ],
+          [
+            "Mesangial matrix",
+            "IgA nephropathy",
+            "Recurrent synpharyngitic macroscopic hematuria"
+          ]
+        ]
+      }
+    }
+  ]
+}

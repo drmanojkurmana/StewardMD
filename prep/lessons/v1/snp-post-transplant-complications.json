@@ -1,124 +1,203 @@
 {
- "v": 1,
- "module": "snp-post-transplant-complications",
- "subject": "ss-nephrology",
- "title": "Medical complications after transplantation: NODAT, dyslipidaemia and key post-transplant problems",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Post-transplant **new-onset diabetes after transplantation** (NODAT) is a major metabolic complication. Steroids, calcineurin inhibitors such as tacrolimus, and obesity all contribute. Tacrolimus reduces glucokinase activity and GLUT-4 expression, which impairs insulin secretion and uptake. Hepatitis C also raises risk. Cumulative incidence reaches about 24 percent by three years in registry data. Screen glucose at 3, 6 and 12 months after transplant. HbA1c is unreliable in the early months because red cell turnover is altered.",
-   "say": "New-onset diabetes after transplantation is a major metabolic complication. Steroids, calcineurin inhibitors such as tacrolimus, and obesity all contribute. Tacrolimus reduces glucokinase activity and GLUT-4 expression, which impairs insulin secretion and uptake. Hepatitis C also raises the risk. Registry data show a cumulative incidence of about 24 percent by three years. Screen glucose at 3, 6 and 12 months after transplant. HbA1c is unreliable in the early months because red cell turnover is altered.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Driver",
-     "Mechanism",
-     "Practical step"
-    ],
-    "rows": [
-     [
-      "Steroids",
-      "Raise hepatic glucose output",
-      "Taper to 5 mg or less"
-     ],
-     [
-      "Tacrolimus",
-      "Lower glucokinase and GLUT-4",
-      "Reduce dose or switch if needed"
-     ],
-     [
-      "Obesity",
-      "TNF-alpha blunts glucose uptake",
-      "Lifestyle and weight control"
-     ],
-     [
-      "Hepatitis C",
-      "Insulin resistance",
-      "Treat the infection"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Management starts with **non-drug measures** and adjusting immunosuppression. Tapering prednisone to 5 mg or less per day clearly improves glucose tolerance. If hyperglycaemia persists, reduce tacrolimus or change agent, since the metabolic effect is partly reversible. Metformin is the usual first-line oral agent when graft function is adequate. Avoid thiazolidinediones in heart failure, and note that glyburide carries hypoglycaemia risk. Insulin is used when oral agents fail.",
-   "say": "Management starts with non-drug measures and adjusting immunosuppression. Tapering prednisone to 5 mg or less per day clearly improves glucose tolerance. If hyperglycaemia persists, reduce tacrolimus or change the agent, since the metabolic effect is partly reversible. Metformin is the usual first-line oral agent when graft function is adequate. Avoid pioglitazone in heart failure, and remember that glyburide carries a hypoglycaemia risk. Insulin is used when oral agents fail.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-post-transplant-complications-fig1.webp",
-    "alt": "Diagram showing a kidney transplant in the pelvis with a lymphocele compressing the ureter, illustrating a common surgical complication.",
-    "caption": "Lymphocele near transplanted kidney, a common surgical complication",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Post-transplant **erythrocytosis** and **hypertension** are frequent. Calcineurin inhibitors cause vasoconstriction, so BP control matters for graft and heart. Skin cancer and other malignancies are increased by lifelong immunosuppression, so annual skin review and sun protection are essential. Screen for cancer per standard age-based programmes. Recurrent disease such as FSGS and aHUS can threaten the new graft, and renal artery stenosis presents with new hypertension or falling function.",
-   "say": "Post-transplant erythrocytosis and hypertension are frequent. Calcineurin inhibitors cause vasoconstriction, so blood pressure control matters for the graft and the heart. Skin cancer and other malignancies are increased by lifelong immunosuppression, so annual skin review and sun protection are essential. Screen for cancer per standard age-based programmes. Recurrent disease such as FSGS and aHUS can threaten the new graft, and renal artery stenosis presents with new hypertension or falling function.",
-   "vis": null
-  },
-  {
-   "tx": "Surgical complications need prompt recognition. A **lymphocele** is a collection of lymph near the graft, often seen weeks after surgery, and may compress the ureter or vessels. A **urinary leak** typically appears in the first weeks as falling urine output with a raised drain or creatinine. Ultrasound confirms both, and drainage or stenting is used. Bone disease, including steroid-related osteoporosis and avascular necrosis, needs DEXA and calcium and vitamin D support.",
-   "say": "Surgical complications need prompt recognition. A lymphocele is a collection of lymph near the graft, often seen weeks after surgery, and may compress the ureter or vessels. A urinary leak typically appears in the first weeks as falling urine output with a raised drain or creatinine. Ultrasound confirms both, and drainage or stenting is used. Bone disease, including steroid-related osteoporosis and avascular necrosis, needs DEXA scanning and calcium and vitamin D support.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Falling graft function"
-     },
-     {
-      "id": "b",
-      "label": "Ultrasound"
-     },
-     {
-      "id": "c",
-      "label": "Lymphocele: drain or fenestrate"
-     },
-     {
-      "id": "d",
-      "label": "Urine leak: drain or stent"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "Fluid collection"
-     ],
-     [
-      "b",
-      "d",
-      "Urinoma"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "q_c9c063084384",
-  "q_30b83c270707",
-  "q_3578118b1824"
- ],
- "src": [],
- "refs": [
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 40
- }
+  "v": 1,
+  "module": "snp-post-transplant-complications",
+  "subject": "ss-nephrology",
+  "title": "Medical Complications After Transplantation",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**New-onset diabetes after transplantation**, termed **NODAT** or **PTDM**, develops in **15%** to **30%** of recipients, primarily driven by **tacrolimus**-induced beta-cell toxicity and **corticosteroid**-induced insulin resistance. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "New-onset diabetes after transplantation, termed NODAT or PTDM, develops in 15% to 30% of recipients, primarily driven by tacrolimus-induced beta-cell toxicity and corticosteroid-induced insulin resistance. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-post-transplant-complications-fig1.webp",
+        "alt": "Diagram illustrating metabolic and medical complications following renal transplantation.",
+        "caption": "Metabolic, cardiovascular, and surgical complications after kidney transplantation. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Squamous cell carcinoma**, or **SCC**, is the most common **skin cancer** and overall **post-transplant malignancy**, occurring with a **65**- to **250**-fold increased incidence compared to the general population and displaying aggressive biological behavior with high metastatic potential. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Squamous cell carcinoma, or SCC, is the most common skin cancer and overall post-transplant malignancy, occurring with a 65- to 250-fold increased incidence compared to the general population and displaying aggressive biological behavior with high metastatic potential. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early Lesions / Polymorphic PTLD",
+          "points": [
+            "Pathogenesis: Unchecked EBV-driven polyclonal B-cell proliferation",
+            "Histology: Heterogeneous lymphoid infiltrate preserving tissue architecture",
+            "Primary therapy: 50% reduction of maintenance immunosuppression",
+            "Prognosis: High response rate without aggressive chemotherapy"
+          ]
+        },
+        "right": {
+          "title": "Monomorphic PTLD (Lymphoma)",
+          "points": [
+            "Pathogenesis: True clonal malignant lymphoma (typically DLBCL)",
+            "Histology: Monoclonal sheets of atypical large lymphoid cells",
+            "Primary therapy: Rituximab combined with CHOP chemotherapy",
+            "Prognosis: Guarded; requires formal oncologic management"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Post-transplant erythrocytosis**, or **PTE**, defined by persistent **hematocrit** exceeding **51%** in men or **48%** in women, develops in **10%** to **15%** of recipients with well-functioning grafts, responding effectively to **ACE inhibitors** or ARBs. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Post-transplant erythrocytosis, or PTE, defined by persistent hematocrit exceeding 51% in men or 48% in women, develops in 10% to 15% of recipients with well-functioning grafts, responding effectively to ACE inhibitors or ARBs. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "PTE Characteristics",
+          "Therapeutic Response"
+        ],
+        "rows": [
+          [
+            "Diagnostic threshold",
+            "Hematocrit > 51% (males) or > 48% (females)",
+            "Excludes secondary causes of hypoxemia"
+          ],
+          [
+            "Pathophysiologic driver",
+            "Erythropoietin and renin secretion by native kidneys",
+            "Angiotensin II stimulates erythroid progenitors"
+          ],
+          [
+            "First-line therapy",
+            "Low-dose ACE inhibitors (enalapril) or ARBs",
+            "Suppresses renal erythropoietin production"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Transplant renal artery stenosis**, or **TRAS**, develops within **6** to **12** months post-transplant at or near the **arterial anastomosis**, presenting with **refractory hypertension** and an acute rise in serum creatinine upon initiating an ACE inhibitor. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Transplant renal artery stenosis, or TRAS, develops within 6 to 12 months post-transplant at or near the arterial anastomosis, presenting with refractory hypertension and an acute rise in serum creatinine upon initiating an ACE inhibitor. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-dialysis-transplant-long-case-fig1.webp",
+        "alt": "Pelvic renal allograft anastomosed to the iliac vessels, with a forearm fistula and shrunken native kidneys.",
+        "caption": "Renal allograft in the iliac fossa with its arterial anastomosis, the usual site of transplant renal artery stenosis. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Primary focal segmental glomerulosclerosis, or **FSGS recurrence**, develops in **30%** to **50%** of first kidney transplants and over **80%** in second grafts, presenting with heavy **nephrotic proteinuria** within hours post-surgery, treatable with urgent **plasma exchange**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Primary focal segmental glomerulosclerosis, or FSGS recurrence, develops in 30% to 50% of first kidney transplants and over 80% in second grafts, presenting with heavy nephrotic proteinuria within hours post-surgery, treatable with urgent plasma exchange. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "f1",
+            "label": "Massive proteinuria within hours post-transplant"
+          },
+          {
+            "id": "f2",
+            "label": "Initiate urgent therapeutic plasma exchange"
+          },
+          {
+            "id": "f3",
+            "label": "Combine with high-dose calcineurin inhibitors"
+          }
+        ],
+        "edges": [
+          [
+            "f1",
+            "f2",
+            "Circulating permeability factor clearance"
+          ],
+          [
+            "f2",
+            "f3",
+            "Rapid stabilization of podocyte cytoskeleton"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**aHUS recurrence** occurs in **60%** to **80%** of recipients with pathogenic **CFH** mutations. Prophylactic complement **C5 inhibition** with **eculizumab** or ravulizumab successfully prevents thrombotic microangiopathy and allograft loss. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "aHUS recurrence occurs in 60% to 80% of recipients with pathogenic CFH mutations. Prophylactic complement C5 inhibition with eculizumab or ravulizumab successfully prevents thrombotic microangiopathy and allograft loss. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CFH Mutation (High Risk)",
+          "points": [
+            "Recurrence frequency: 60% to 80% post-transplant",
+            "Pathology: Circulating alternative complement dysregulation",
+            "Prophylaxis: Mandatory pre-transplant eculizumab",
+            "Graft outcome: Preserved allograft survival with C5 blockade"
+          ]
+        },
+        "right": {
+          "title": "MCP / CD46 Mutation (Low Risk)",
+          "points": [
+            "Recurrence frequency: Under 15% to 20% post-transplant",
+            "Pathology: Membrane-bound regulator expressed on donor endothelium",
+            "Prophylaxis: Conservative monitoring without routine C5 inhibitors",
+            "Graft outcome: Favorable prognosis with donor MCP expression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A periallograft **lymphocele** occurs in up to **15%** to **20%** of kidney transplants. Collections causing **ureteral compression** or lower extremity edema are definitively managed with laparoscopic **peritoneal fenestration**, termed marsupialization. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "A periallograft lymphocele occurs in up to 15% to 20% of kidney transplants. Collections causing ureteral compression or lower extremity edema are definitively managed with laparoscopic peritoneal fenestration, termed marsupialization. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Intervention Modality",
+          "Technical Approach",
+          "Recurrence Rate"
+        ],
+        "rows": [
+          [
+            "Percutaneous aspiration",
+            "Simple needle aspiration under ultrasound",
+            "Recurrence rate exceeds 80% to 90%"
+          ],
+          [
+            "Percutaneous sclerosis",
+            "Povidone-iodine or doxycycline instillation",
+            "Moderate recurrence; infection risk"
+          ],
+          [
+            "Laparoscopic fenestration",
+            "Internal peritoneal window creation (marsupialization)",
+            "Gold standard definitive cure with < 5% recurrence"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Persistent **tertiary hyperparathyroidism** occurs in **30%** to **50%** of recipients due to autonomous parathyroid hyperplasia, presenting with refractory **hypercalcemia** and hypophosphatemia, managed with **cinacalcet** or subtotal parathyroidectomy. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "Persistent tertiary hyperparathyroidism occurs in 30% to 50% of recipients due to autonomous parathyroid hyperplasia, presenting with refractory hypercalcemia and hypophosphatemia, managed with cinacalcet or subtotal parathyroidectomy. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Modality",
+          "Mechanism of Action",
+          "Clinical Indication"
+        ],
+        "rows": [
+          [
+            "Cinacalcet",
+            "Allosteric CaSR activation lowering calcium and PTH",
+            "First-line medical therapy for persistent post-transplant hypercalcemia"
+          ],
+          [
+            "Subtotal parathyroidectomy",
+            "Surgical excision of 3.5 autonomous hyperplastic glands",
+            "Severe hypercalcemia > 11.5 mg/dL, nephrolithiasis, or cinacalcet failure"
+          ],
+          [
+            "Parathyroid autotransplantation",
+            "Total parathyroidectomy with forearm replantation",
+            "Prevents permanent hypoparathyroidism while curing autonomous secretion"
+          ]
+        ]
+      }
+    }
+  ]
 }

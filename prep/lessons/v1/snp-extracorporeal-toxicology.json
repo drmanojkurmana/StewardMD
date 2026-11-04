@@ -1,0 +1,203 @@
+{
+  "v": 1,
+  "module": "snp-extracorporeal-toxicology",
+  "subject": "ss-nephrology",
+  "title": "Poisoning and Extracorporeal Therapies",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **EXTRIP** 2015 criteria for **lithium toxicity** recommend **hemodialysis** when impaired kidney function coexists with a level above **4.0** mmol/L, or when seizures or life-threatening dysrhythmias occur at any level. A level above **5.0** mmol/L is a suggested indication. Older handbooks used **2.5** mmol/L plus **neurologic manifestations**, a cutoff EXTRIP replaced.",
+      "say": "The EXTRIP 2015 criteria for lithium toxicity recommend hemodialysis when impaired kidney function coexists with a level above 4.0 mmol/L, or when seizures or life-threatening dysrhythmias occur at any level. A level above 5.0 mmol/L is a suggested indication. Older handbooks used 2.5 mmol/L plus neurologic manifestations, a cutoff EXTRIP replaced.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Situation",
+          "Lithium level",
+          "EXTRIP stance"
+        ],
+        "rows": [
+          [
+            "Impaired kidney function",
+            "Above 4.0 mmol/L",
+            "Hemodialysis is recommended"
+          ],
+          [
+            "Seizures or a life-threatening dysrhythmia",
+            "Any serum level",
+            "Hemodialysis is recommended"
+          ],
+          [
+            "Older handbook chronic toxicity",
+            "Above 2.5 mmol/L with neurologic signs",
+            "Not an EXTRIP standalone cutoff"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Methanol poisoning** produces severe high anion gap acidosis and visual injury via alcohol dehydrogenase metabolism to **formic acid**, which inhibits cytochrome oxidase to cause **optic papillitis** and bilateral **putaminal necrosis**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Methanol poisoning produces severe high anion gap acidosis and visual injury via alcohol dehydrogenase metabolism to formic acid, which inhibits cytochrome oxidase to cause optic papillitis and bilateral putaminal necrosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/methanol-poisoning-fig1.webp",
+        "alt": "Illustration of methanol metabolic pathway generating toxic formic acid and basal ganglia injury.",
+        "caption": "Methanol metabolism to formic acid causing optic and putaminal necrosis. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Ethylene glycol** poisoning generates toxic **glycolic acid** and **oxalic acid**, causing severe metabolic acidosis and extensive precipitation of **calcium oxalate** monohydrate crystals throughout renal tubules, presenting with acute tubular necrosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Ethylene glycol poisoning generates toxic glycolic acid and oxalic acid, causing severe metabolic acidosis and extensive precipitation of calcium oxalate monohydrate crystals throughout renal tubules, presenting with acute tubular necrosis. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ethylene Glycol",
+          "points": [
+            "Toxic metabolites: Glycolic acid and oxalic acid",
+            "Urinary crystals: Dumbbell and envelope calcium oxalate",
+            "Target organ injury: Acute tubular necrosis and renal failure",
+            "Specific adjunct: Thiamine and pyridoxine cofactors"
+          ]
+        },
+        "right": {
+          "title": "Methanol",
+          "points": [
+            "Toxic metabolites: Formaldehyde and formic acid",
+            "Urinary crystals: Absent crystal precipitation",
+            "Target organ injury: Optic papillitis, blindness, putaminal necrosis",
+            "Specific adjunct: Folinic acid (leucovorin) cofactor"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fomepizole**, or **4-methylpyrazole**, administered as a **15** mg/kg loading dose, competitively inhibits **alcohol dehydrogenase** to block toxic metabolite generation in toxic alcohol poisoning, paired with immediate **hemodialysis** for severe acidemia with pH below **7.15**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Fomepizole, or 4-methylpyrazole, administered as a 15 mg/kg loading dose, competitively inhibits alcohol dehydrogenase to block toxic metabolite generation in toxic alcohol poisoning, paired with immediate hemodialysis for severe acidemia with pH below 7.15. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "f1",
+            "label": "Suspected toxic alcohol ingestion"
+          },
+          {
+            "id": "f2",
+            "label": "Fomepizole 15 mg/kg IV loading dose"
+          },
+          {
+            "id": "f3",
+            "label": "Urgent hemodialysis for pH < 7.15"
+          }
+        ],
+        "edges": [
+          [
+            "f1",
+            "f2",
+            "Competitive alcohol dehydrogenase blockade"
+          ],
+          [
+            "f2",
+            "f3",
+            "Rapid dialytic clearance of parent alcohol and metabolites"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe **salicylate** or **aspirin toxicity** is treated with emergent **hemodialysis** when serum levels exceed **90** mg/dL, or **6.5** mmol/L, in acute poisoning, or above **60** mg/dL in chronic poisoning with altered mental status or acidemia. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Severe salicylate or aspirin toxicity is treated with emergent hemodialysis when serum levels exceed 90 mg/dL, or 6.5 mmol/L, in acute poisoning, or above 60 mg/dL in chronic poisoning with altered mental status or acidemia. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/salicylate-tox-fig1.webp",
+        "alt": "Illustration of salicylate acid-base disturbance and uncoupling of oxidative phosphorylation.",
+        "caption": "Salicylate toxicity kinetics and emergency hemodialysis thresholds. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**EXTRIP** recommendations for **metformin-associated lactic acidosis**, designated as **MALA**, endorse prompt intermittent hemodialysis for severe refractory lactic acidosis when blood **lactate** exceeds **20** mmol/L or pH drops to **7.00** or lower. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "EXTRIP recommendations for metformin-associated lactic acidosis, designated as MALA, endorse prompt intermittent hemodialysis for severe refractory lactic acidosis when blood lactate exceeds 20 mmol/L or pH drops to 7.00 or lower. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Dialysis Criterion in MALA",
+          "Dialysis Goal"
+        ],
+        "rows": [
+          [
+            "Blood lactate concentration",
+            "Lactate > 20 mmol/L (or > 15 with shock)",
+            "Rapid dialytic clearance of accumulated lactate"
+          ],
+          [
+            "Arterial blood pH",
+            "Severe acidemia pH <= 7.00",
+            "Restore physiologic acid-base homeostasis"
+          ],
+          [
+            "Drug clearance",
+            "Metformin is water-soluble with low protein binding",
+            "Efficient extracorporeal removal of circulating drug"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Therapeutic plasma exchange**, or **TPE**, is an **ASFA** Category **I** first-line treatment for **TTP** and for **anti-GBM** disease with diffuse alveolar hemorrhage, because exchange removes the pathogenic antibody. In the 2023 ASFA update, ANCA-associated vasculitis with alveolar hemorrhage is Category III, so exchange is not established as routine care after PEXIVAS.",
+      "say": "Therapeutic plasma exchange, or TPE, is an ASFA Category I first-line treatment for TTP and for anti-GBM disease with diffuse alveolar hemorrhage, because exchange removes the pathogenic antibody. In the 2023 ASFA update, ANCA-associated vasculitis with alveolar hemorrhage is Category III, so exchange is not established as routine care after PEXIVAS.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "ASFA category",
+          "Why exchange is or is not routine"
+        ],
+        "rows": [
+          [
+            "TTP",
+            "Category I",
+            "Removes the antibody to ADAMTS13 and replaces the protease"
+          ],
+          [
+            "Anti-GBM disease with alveolar hemorrhage",
+            "Category I",
+            "Removes circulating anti-GBM IgG"
+          ],
+          [
+            "ANCA vasculitis with alveolar hemorrhage",
+            "Category III in 2023",
+            "PEXIVAS did not show a clear survival or kidney benefit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extracorporeal clearance via **hemoperfusion** or hemodialysis is fundamentally **ineffective** for intoxicants possessing an extraordinarily large **volume of distribution** exceeding **2** to **3** L/kg, such as tricyclic antidepressants, digoxin, and chloroquine. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Extracorporeal clearance via hemoperfusion or hemodialysis is fundamentally ineffective for intoxicants possessing an extraordinarily large volume of distribution exceeding 2 to 3 L/kg, such as tricyclic antidepressants, digoxin, and chloroquine. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dialyzable Toxins (Low Vd)",
+          "points": [
+            "Volume of distribution: Low (< 1 L/kg)",
+            "Protein binding: Low plasma protein binding",
+            "Molecular size: Small water-soluble molecules (< 500 Da)",
+            "Examples: Methanol, ethylene glycol, lithium, salicylates"
+          ]
+        },
+        "right": {
+          "title": "Non-Dialyzable Toxins (High Vd)",
+          "points": [
+            "Volume of distribution: High (> 2 to 3 L/kg)",
+            "Tissue sequestration: Extensive lipid and tissue binding",
+            "Extracorporeal removal: Ineffective; clearance negligible",
+            "Examples: Tricyclic antidepressants, digoxin, chloroquine"
+          ]
+        }
+      }
+    }
+  ]
+}

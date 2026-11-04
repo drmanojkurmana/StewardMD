@@ -1,0 +1,203 @@
+{
+  "v": 1,
+  "module": "snp-sodium-water",
+  "subject": "ss-nephrology",
+  "title": "Disorders of Sodium and Water",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Severe acute symptomatic **hyponatremia** is a medical emergency requiring rapid intervention to avert tentorial herniation and fatal **cerebral edema**. Clinicians administer an intravenous bolus of **100** to **150** mL of **3%** **hypertonic saline** infused over **10** to **20** minutes. This urgent bolus can be repeated up to twice at similar intervals to elevate serum sodium by **4** to **6** mmol/L, rapidly relieving neurocognitive distress and aborting active epileptic seizures.",
+      "say": "Severe acute symptomatic hyponatremia is a medical emergency requiring rapid intervention to avert tentorial herniation and fatal cerebral edema. Clinicians administer an intravenous bolus of 100 to 150 mL of 3% hypertonic saline infused over 10 to 20 minutes. This urgent bolus can be repeated up to twice at similar intervals to elevate serum sodium by 4 to 6 mmol/L, rapidly relieving neurocognitive distress and aborting active epileptic seizures.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hyponatremia-fig1.webp",
+        "alt": "ADH-driven water retention causing dilutional hyponatraemia and cerebral oedema.",
+        "caption": "Dilutional hyponatraemia with cerebral oedema, the emergency treated with a small bolus of 3 percent saline. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "In contrast to acute hyponatremia, brain astrocytes adapt to **chronic hyponatremia** by expelling organic intracellular osmolytes over 48 hours. Rapid active overcorrection drives pontine astrocyte dehydration and triggers catastrophic **osmotic demyelination syndrome**. Therefore, therapeutic sodium elevation must strictly never exceed **8** mmol/L over any **24**-hour period. In patients with advanced malnutrition, alcoholism, or concurrent hypokalemia, the 24-hour correction limit is lowered to **6** mmol/L.",
+      "say": "In contrast to acute hyponatremia, brain astrocytes adapt to chronic hyponatremia by expelling organic intracellular osmolytes over forty-eight hours. Rapid active overcorrection causes pontine astrocyte dehydration and triggers catastrophic osmotic demyelination syndrome. Therefore, therapeutic sodium elevation must strictly never exceed 8 mmol/L over any 24-hour period. In patients with advanced malnutrition, alcoholism, or concurrent hypokalemia, the 24-hour correction limit is lowered to 6 mmol/L.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient Risk Category",
+          "Maximum 24h Correction",
+          "Target Pathophysiology"
+        ],
+        "rows": [
+          [
+            "Standard clinical risk",
+            "8 mmol/L in 24 hours",
+            "Averts pontine astrocyte shrinkage"
+          ],
+          [
+            "High risk (alcoholism, malnutrition)",
+            "6 mmol/L in 24 hours",
+            "Protects depleted intracellular osmolytes"
+          ],
+          [
+            "Active overcorrection emergency",
+            "Prompt re-lowering with dDAVP",
+            "Re-expands dehydrated pontine neurons"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When inadvertent rapid water diuresis precipitates accidental **overcorrection** of serum sodium, emergency re-lowering is essential. Clinicians administer parenteral **desmopressin**, also known as **dDAVP**, at a dose of **1** to **2** mcg intravenously or subcutaneously. This is paired with an infusion of **5%** dextrose in water to promptly replace free water, halt unmonitored aquaresis, and re-establish safe serum sodium concentrations.",
+      "say": "When inadvertent rapid water diuresis precipitates accidental overcorrection of serum sodium, emergency re-lowering is essential. Clinicians administer parenteral desmopressin, also known as dDAVP, at a dose of 1 to 2 mcg intravenously or subcutaneously. This is paired with an infusion of 5% dextrose in water to promptly replace free water, halt unmonitored aquaresis, and re-establish safe serum sodium concentrations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "o1",
+            "label": "Sodium rise > 8 mmol/L / 24h"
+          },
+          {
+            "id": "o2",
+            "label": "Administer dDAVP 1 to 2 mcg"
+          },
+          {
+            "id": "o3",
+            "label": "Infuse 5% dextrose in water"
+          }
+        ],
+        "edges": [
+          [
+            "o1",
+            "o2",
+            "Rapid aquaresis detected"
+          ],
+          [
+            "o2",
+            "o3",
+            "Clamp free water clearance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnostic criteria for **SIADH** require confirmed hypotonicity with plasma osmolality below **275** mOsm/kg and inappropriately concentrated **urine osmolality** exceeding **100** mOsm/kg. Patients exhibit robust **urine sodium** excretion exceeding **30** mmol/L despite hypoosmolality, reflecting secondary natriuresis from volume expansion. Rigorous clinical evaluation must demonstrate **euvolemia** alongside verified normal thyroid and adrenal reserve.",
+      "say": "Diagnostic criteria for SIADH require confirmed hypotonicity with plasma osmolality below 275 mOsm/kg and inappropriately concentrated urine osmolality exceeding 100 mOsm/kg. Patients exhibit robust urine sodium excretion exceeding 30 mmol/L despite hypoosmolality, reflecting secondary natriuresis from volume expansion. Rigorous clinical evaluation must demonstrate euvolemia alongside verified normal thyroid and adrenal reserve.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SIADH (Euvolemic)",
+          "points": [
+            "Extracellular volume: Clinical euvolemia",
+            "Urine osmolality: Inappropriately concentrated > 100",
+            "Urine sodium: Elevated > 30 mmol/L",
+            "Endocrine: Normal thyroid and adrenal function"
+          ]
+        },
+        "right": {
+          "title": "Hypovolemic Hyponatremia",
+          "points": [
+            "Extracellular volume: Orthostatic hypotension and dry mucosa",
+            "Urine osmolality: Maximally concentrated > 400",
+            "Urine sodium: Avid retention < 20 mmol/L",
+            "Renal response: High aldosterone and avid proximal absorption"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tolvaptan** is an oral selective **V2 receptor antagonist** indicated for clinically significant hypervolemic and euvolemic hyponatremia. It acts on the collecting duct to promote solute-free water excretion. Therapy must be initiated strictly in a hospital setting without fluid restriction to monitor sodium increments. Regulatory guidance restricts treatment duration to **30** days due to potential **hepatotoxicity**.",
+      "say": "Tolvaptan is an oral selective V2 receptor antagonist indicated for clinically significant hypervolemic and euvolemic hyponatremia. It acts on the collecting duct to promote solute-free water excretion. Therapy must be initiated strictly in a hospital setting without fluid restriction to monitor sodium increments. Regulatory authorities require treatment duration to be capped at 30 days due to potential hepatotoxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Characteristic",
+          "Pharmacologic Profile",
+          "Safety Mandate"
+        ],
+        "rows": [
+          [
+            "Target mechanism",
+            "Selective collecting duct V2 blockade",
+            "Promotes pure aquaresis without kaliuresis"
+          ],
+          [
+            "Initiation setting",
+            "In-hospital without fluid restriction",
+            "Mandates frequent 4- to 6-hour sodium checks"
+          ],
+          [
+            "Therapy duration",
+            "Strict maximum of 30 days",
+            "Averts irreversible drug-induced liver injury"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pseudohyponatremia** is an in vitro laboratory artifact observed in severe hyperproteinemia or profound hyperlipidemia. Markedly elevated paraproteins expand the non-aqueous solid phase of plasma. Automated analyzers utilizing indirect **ion-selective electrode** methods dilute the total volume, reporting falsely depressed sodium. Direct potentiometry avoids sample pre-dilution and accurately measures aqueous sodium activity.",
+      "say": "Pseudohyponatremia is an in vitro laboratory artifact observed in severe hyperproteinemia or profound hyperlipidemia. Markedly elevated paraproteins expand the non-aqueous solid phase of plasma. Automated analyzers utilizing indirect ion-selective electrode methods dilute the total volume, reporting falsely depressed sodium. Direct potentiometry avoids sample pre-dilution and accurately measures aqueous sodium activity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indirect Potentiometry",
+          "points": [
+            "Method: Fixed-volume pre-dilution step",
+            "Solid phase: Expanded by lipids or paraproteins",
+            "Sodium reading: Falsely depressed concentration",
+            "Osmolality: Measured serum osmolality remains normal"
+          ]
+        },
+        "right": {
+          "title": "Direct Potentiometry",
+          "points": [
+            "Method: Undiluted electrode measurement",
+            "Solid phase: Does not interfere with reading",
+            "Sodium reading: Accurately reflects true activity",
+            "Clinical utility: Gold standard in multiple myeloma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Calculating the **free water deficit** guides therapy in hypernatremia. Deficit equals **total body water** multiplied by the ratio of serum sodium to **140** minus one. TBW is estimated as **0.6** of body weight in young men, **0.5** in young women and elderly men, and **0.45** in elderly women. In chronic hypernatremia, serum sodium lowering must not exceed **10** mmol/L over **24** hours to prevent cerebral edema.",
+      "say": "Calculating the free water deficit guides therapy in hypernatremia. Deficit equals total body water multiplied by the ratio of serum sodium to 140 minus one. Total body water is estimated as zero point six of body weight in young men, zero point five in young women and elderly men, and zero point forty-five in elderly women. In chronic hypernatremia, serum sodium lowering must not exceed 10 mmol/L over 24 hours to prevent cerebral edema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sodium-water-balance-and-osmolality-fig1.webp",
+        "alt": "Body fluid compartments and the osmolality relationship used in the free water deficit.",
+        "caption": "Intracellular and extracellular compartments with the osmolality relationship behind the free water deficit. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Beer potomania** and **tea-and-toast syndrome** cause severe hyponatremia driven by markedly deficient dietary **solute intake**. Because minimal urinary osmolality is fixed at fifty mOsm/kg, an excretion of only **250** mOsm daily limits maximum urine volume to five liters, leading to water retention with even modest fluid consumption.",
+      "say": "Beer potomania and tea-and-toast syndrome cause severe hyponatremia driven by markedly deficient dietary solute intake. Because minimal urinary osmolality is fixed at fifty mOsm/kg, an excretion of only 250 mOsm daily limits maximum urine volume to five liters, causing water retention with even modest fluid consumption.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Condition",
+          "Solute Intake Deficit",
+          "Pathophysiologic Mechanism"
+        ],
+        "rows": [
+          [
+            "Beer potomania",
+            "Heavy beer intake without food",
+            "Carbohydrate calories with negligible protein and electrolytes"
+          ],
+          [
+            "Tea-and-toast syndrome",
+            "Elderly carbohydrate malnutrition",
+            "Low urea generation impairs renal free water excretion capacity"
+          ],
+          [
+            "Clinical management",
+            "Gentle solute repletion with saline",
+            "Requires extreme vigilance to avoid rapid autologous diuresis"
+          ]
+        ]
+      }
+    }
+  ]
+}
