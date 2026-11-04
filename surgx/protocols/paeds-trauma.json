@@ -1,0 +1,67 @@
+{
+  "id": "paeds-trauma",
+  "title": "The injured child",
+  "subtitle": "Weight first, blood early, scan selectively",
+  "category": "paeds_surgery",
+  "specialty": "paediatric",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "atls10", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual: paediatric trauma", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-11-04" },
+    { "id": "nice-ng39", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "version": "NG39", "url": "https://www.nice.org.uk/guidance/ng39", "accessed": "2026-11-04" },
+    { "id": "pecarn", "org": "Pediatric Emergency Care Applied Research Network (PECARN)", "title": "Identification of children at very low risk of clinically-important brain injuries after head trauma (Kuppermann et al, Lancet 2009;374:1160-70)", "year": 2009, "url": "https://doi.org/10.1016/S0140-6736(09)61558-0", "accessed": "2026-11-04" },
+    { "id": "nice-ng232", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "version": "NG232", "url": "https://www.nice.org.uk/guidance/ng232", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Tachycardia, prolonged capillary refill, cool peripheries or altered behaviour. Children hold their blood pressure until very late; hypotension is a pre-arrest sign." },
+      { "text": "Abdominal bruising, a seat-belt sign or handlebar mark: a marker of visceral, pancreatic or bowel injury." },
+      { "text": "Reduced conscious level, a boggy scalp haematoma in an infant, or a full fontanelle." },
+      { "text": "An injury pattern that does not fit the history, delayed presentation, or injuries in a non-mobile infant: consider non-accidental injury." },
+      { "text": "Thoracic injury without rib fractures. The child's compliant chest wall transmits force to the lungs and heart without breaking." }
+    ],
+    "do_now": [
+      { "text": "Estimate weight immediately, from a parent-held record, a length-based tape or an age formula, and write it on the board. Every drug, fluid and tube size follows from it.", "calcs": ["paeds_weight"], "timeCritical": true, "evidenceRef": "atls10" },
+      { "text": "Airway with cervical spine protection, oxygen, and control of external haemorrhage. Infants' large occiput flexes the neck; pad under the shoulders.", "timeCritical": true, "evidenceRef": "atls10" },
+      { "text": "Intravenous or intraosseous access without prolonged attempts. Intraosseous access is appropriate early in a shocked child.", "timeCritical": true, "evidenceRef": "atls10" },
+      { "text": "Shock from haemorrhage: ATLS advises a single warmed isotonic crystalloid bolus of 20 mL/kg, then blood at 10 mL/kg if the child does not respond. NICE favours moving to blood components early and limiting crystalloid in active bleeding. Activate the paediatric major haemorrhage protocol.", "calcs": ["blood_volume"], "timeCritical": true, "evidenceRef": "atls10" },
+      { "text": "Give tranexamic acid as soon as possible in a child with major trauma and active or suspected bleeding, at the weight-based dose in the local paediatric protocol, and not later than three hours after injury.", "timeCritical": true, "evidenceRef": "nice-ng39" }
+    ],
+    "assess": [
+      { "text": "Use age-specific vital sign ranges. A heart rate normal for an adult may be shock in a toddler." },
+      { "text": "Paediatric GCS, pupils and glucose. Record by component.", "calcs": ["gcs", "gcs_p"] },
+      { "text": "Apply the PECARN head rule for the child with a minor head injury and GCS 14 or 15 to decide between CT, observation and discharge.", "calcs": ["pecarn_head"] },
+      { "text": "Secondary survey with the child exposed but kept warm. Children lose heat fast and hypothermia worsens coagulopathy." }
+    ],
+    "investigate": [
+      { "text": "Blood gas, full blood count, coagulation, crossmatch, amylase or lipase and liver enzymes; urinalysis for haematuria." },
+      { "text": "Imaging selectively, not as a pan-scan by default: radiation matters more in children. CT the regions that the clinical findings and the mechanism direct." },
+      { "text": "CT head using NICE NG232 criteria for children, or the PECARN rule where it is the local standard. Neither applies to a child with a GCS below 14." },
+      { "text": "FAST is useful when positive in an unstable child but a negative FAST does not exclude solid organ injury." },
+      { "text": "Skeletal survey and safeguarding referral when non-accidental injury is a possibility." }
+    ],
+    "resuscitate": [
+      { "text": "Transfuse red cells and plasma together in active haemorrhage, with platelets and fibrinogen guided by the paediatric major haemorrhage protocol and point-of-care testing.", "calcs": ["blood_volume", "allowable_blood_loss"], "evidenceRef": "nice-ng39" },
+      { "text": "Maintain normothermia actively: warmed fluids, warm room, overhead heaters.", "evidenceRef": "atls10" },
+      { "text": "Gastric decompression with a nasogastric or orogastric tube. Crying children swallow air, and a distended stomach splints the diaphragm and mimics abdominal injury.", "evidenceRef": "atls10" },
+      { "text": "Weight-based analgesia early; a child in pain cannot be examined reliably.", "evidenceRef": "atls10" }
+    ],
+    "definitive": [
+      { "text": "Haemodynamically stable children with blunt splenic or liver injury: non-operative management in a unit with paediatric surgical and intensive care capacity is the standard.", "evidenceRef": "atls10" },
+      { "text": "Operate for haemodynamic instability despite blood transfusion, peritonitis, or hollow viscus injury. Transfusion need beyond the major haemorrhage threshold in a protocol is a surgical decision, not an observation one.", "evidenceRef": "atls10" },
+      { "text": "Surgically significant intracranial haematoma: neurosurgery without delay.", "evidenceRef": "nice-ng232" }
+    ],
+    "escalate": [
+      { "text": "Paediatric major trauma centre for any severely injured child. Stabilise and transfer rather than undertaking non-essential procedures locally." },
+      { "text": "Paediatric anaesthetist and intensive care early, particularly for the airway." },
+      { "text": "Safeguarding team for any concern about the mechanism, the history or the timing." }
+    ]
+  },
+  "notes": [
+    "A child compensates for haemorrhage by tachycardia and vasoconstriction, then decompensates abruptly. Treat the trend, not a normal blood pressure.",
+    "Most paediatric solid organ injuries settle without surgery. The skill is selecting the few who do not, and being in a place that can operate when they declare themselves.",
+    "Write the weight, the fluid bolus volume and the blood volume on the board at the start. Arithmetic under pressure is where paediatric resuscitation goes wrong."
+  ],
+  "calcs": ["paeds_weight", "pecarn_head", "gcs", "gcs_p", "blood_volume", "allowable_blood_loss"]
+}

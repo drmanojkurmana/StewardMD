@@ -1,0 +1,64 @@
+{
+  "id": "pph-surgical",
+  "title": "Postpartum haemorrhage: the surgical ladder",
+  "subtitle": "Drugs, balloon, sutures, ligation, hysterectomy",
+  "category": "obgyn_emergency",
+  "specialty": "obgyn",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "rcog-gtg52", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Prevention and management of postpartum haemorrhage (Green-top Guideline No. 52; BJOG 2017;124:e106-e149)", "year": 2016, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/prevention-and-management-of-postpartum-haemorrhage-green-top-guideline-no-52/", "accessed": "2026-11-04" },
+    { "id": "figo-pph", "org": "International Federation of Gynecology and Obstetrics (FIGO)", "title": "FIGO recommendations on the management of postpartum hemorrhage 2022 (Int J Gynecol Obstet 2022)", "year": 2022, "url": "https://obgyn.onlinelibrary.wiley.com/journal/18793479", "accessed": "2026-11-04" },
+    { "id": "who-txa", "org": "World Health Organization (WHO)", "title": "WHO recommendation on tranexamic acid for the treatment of postpartum haemorrhage", "year": 2017, "url": "https://www.who.int/publications", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Blood loss above 1000 mL with continuing bleeding, or any loss with clinical shock: major PPH." },
+      { "text": "Tachycardia, pallor, agitation and falling urine output. Pregnant women compensate well and become hypotensive late." },
+      { "text": "Pain out of proportion, a high-riding uterus or an abnormal contour: uterine rupture or a broad ligament haematoma." },
+      { "text": "Bleeding that does not clot, oozing from cannula sites: coagulopathy, including amniotic fluid embolism or abruption." },
+      { "text": "Previous caesarean with placenta praevia: high risk of placenta accreta spectrum and massive haemorrhage." }
+    ],
+    "do_now": [
+      { "text": "Call for help: senior midwife, senior obstetrician, anaesthetist, haematology and the major obstetric haemorrhage protocol. Assign a scribe and measure blood loss.", "timeCritical": true, "evidenceRef": "rcog-gtg52" },
+      { "text": "Rub up a contraction (bimanual compression if needed), empty the bladder, and check that the placenta is complete. Think of the four Ts: tone, trauma, tissue, thrombin.", "timeCritical": true, "evidenceRef": "rcog-gtg52" },
+      { "text": "Uterotonics in sequence per RCOG GTG 52: oxytocin and ergometrine (unless hypertensive), oxytocin infusion, then carboprost and misoprostol. Use the doses in the local protocol derived from GTG 52.", "timeCritical": true, "evidenceRef": "rcog-gtg52" },
+      { "text": "Tranexamic acid 1 g intravenously as soon as possible and within three hours of birth; a second 1 g dose if bleeding continues after 30 minutes or restarts within 24 hours.", "timeCritical": true, "evidenceRef": "who-txa" },
+      { "text": "Two large-bore cannulae, crossmatch, coagulation and fibrinogen; transfuse to the major haemorrhage protocol.", "timeCritical": true, "evidenceRef": "rcog-gtg52" }
+    ],
+    "assess": [
+      { "text": "Quantify blood loss by weighing or measuring rather than estimating; visual estimates underestimate." },
+      { "text": "Examine the genital tract under good light and anaesthesia for trauma: cervical, vaginal and perineal tears." },
+      { "text": "Trend heart rate, blood pressure, shock index and urine output.", "calcs": ["shock_index"] }
+    ],
+    "investigate": [
+      { "text": "Full blood count, coagulation screen, fibrinogen, crossmatch, and point-of-care viscoelastic testing where available." },
+      { "text": "Venous or arterial gas with lactate and calcium." },
+      { "text": "Ultrasound for retained products if the cause is unclear and the woman is stable enough." }
+    ],
+    "resuscitate": [
+      { "text": "Red cells, plasma and platelets per the major haemorrhage protocol; replace fibrinogen early, guided by levels or viscoelastic tests.", "evidenceRef": "rcog-gtg52" },
+      { "text": "Keep warm, maintain calcium, and use cell salvage where available.", "evidenceRef": "rcog-gtg52" },
+      { "text": "Non-pneumatic anti-shock garment as a temporising measure during transfer in low-resource settings.", "evidenceRef": "figo-pph" }
+    ],
+    "definitive": [
+      { "text": "Move to surgery sooner rather than later when pharmacological measures fail. Repair genital tract trauma and remove retained tissue first if they are the cause.", "evidenceRef": "rcog-gtg52" },
+      { "text": "Intrauterine balloon tamponade is the first-line surgical step for atony when uterotonics fail.", "evidenceRef": "rcog-gtg52" },
+      { "text": "At laparotomy: haemostatic compression (brace) sutures such as B-Lynch, then bilateral uterine artery ligation, then internal iliac artery ligation by a surgeon experienced in it.", "evidenceRef": "rcog-gtg52" },
+      { "text": "Selective arterial embolisation by interventional radiology in a stable woman where it is immediately available.", "evidenceRef": "rcog-gtg52" },
+      { "text": "Hysterectomy sooner rather than later, particularly with placenta accreta or uterine rupture. A second experienced consultant should be involved in the decision where possible.", "evidenceRef": "rcog-gtg52" }
+    ],
+    "escalate": [
+      { "text": "Consultant obstetrician and consultant anaesthetist present for major PPH." },
+      { "text": "Interventional radiology and a vascular or gynae-oncology surgeon early when accreta is known or suspected." },
+      { "text": "Critical care after major haemorrhage, hysterectomy or massive transfusion." }
+    ]
+  },
+  "notes": [
+    "The ladder is climbed quickly. A woman who has lost two litres while each rung is tried for half an hour has been managed too slowly.",
+    "Tone is the commonest cause, but trauma is the commonest missed cause. Examine the genital tract properly.",
+    "A hysterectomy done in time is a life saved. One done after the fourth litre of transfusion is a gamble."
+  ],
+  "calcs": ["shock_index", "blood_volume"]
+}

@@ -1,0 +1,49 @@
+{
+  "_comment": "Shared paediatric surgical steps, used by two or more paediatric procedures (pyloromyotomy, herniotomy). Procedure-only steps live in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.paeds.physiology-gate": {
+      "id": "step.paeds.physiology-gate", "kind": "checkpoint", "critical": true,
+      "title": "Paediatric physiology check before anaesthesia",
+      "why": "Infants decompensate quickly and tolerate an uncorrected metabolic, glucose or temperature problem badly. In infant surgery the decision to start is often more important than the operation itself.",
+      "how": [
+        "Confirm today's weight and that drug and fluid doses on the chart are calculated from it.",
+        "Review the latest electrolytes, gas and glucose against the agreed criteria for this operation.",
+        "Record gestation at birth and post-menstrual age, and agree the post-operative apnoea monitoring plan with the anaesthetist.",
+        "Confirm fasting status, intravenous fluids running, and that the parents have been consented and know where the baby will recover."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Proceeding because the list is booked when the bloods do not meet the agreed criteria.",
+        "Using a birth weight from weeks ago instead of today's weight."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.warming": {
+      "id": "step.paeds.warming", "kind": "prep",
+      "title": "Thermal care for the infant",
+      "why": "Infants have a large surface area for their mass and little subcutaneous fat. Hypothermia increases oxygen consumption, worsens coagulation and delays emergence and feeding.",
+      "how": [
+        "Warm the theatre before the infant arrives, and use a forced-air warmer or warming mattress.",
+        "Cover the head and limbs and expose only the operative field.",
+        "Use warmed preparation and irrigation fluids, and monitor core temperature throughout."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Prolonged exposure during positioning and draping while the team waits.", "Pooled cold skin preparation under the infant."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.paeds.local-anaesthetic": {
+      "id": "step.paeds.local-anaesthetic", "kind": "prep",
+      "title": "Weight-based local anaesthetic infiltration",
+      "why": "Wound infiltration or a regional block reduces opioid need, and opioids increase the risk of post-operative apnoea in infants. The margin between a useful and a toxic local anaesthetic dose is narrow at this size.",
+      "how": [
+        "Agree the agent, concentration and maximum dose by weight with the anaesthetist before infiltration, and record it.",
+        "Aspirate before injecting and infiltrate slowly.",
+        "Count every local anaesthetic given by the surgeon and the anaesthetist together against the single maximum dose."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["The anaesthetist gives a caudal block and the surgeon infiltrates a further full dose without either knowing."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

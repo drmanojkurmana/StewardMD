@@ -39,6 +39,14 @@
     {
       "id": "uro_trauma",
       "title": "Genitourinary trauma"
+    },
+    {
+      "id": "paeds_surgery",
+      "title": "Paediatric surgical emergencies"
+    },
+    {
+      "id": "obgyn_emergency",
+      "title": "Obstetric and gynaecological emergencies"
     }
   ],
   "protocols": [
@@ -362,6 +370,106 @@
       "specialty": "urology",
       "file": "protocols/uro-renal-bladder-trauma.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-bilious-vomiting",
+      "kind": "authored",
+      "title": "Bilious vomiting in a neonate or infant",
+      "subtitle": "Malrotation with volvulus until proven otherwise",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-bilious-vomiting.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-intussusception",
+      "kind": "authored",
+      "title": "Intussusception",
+      "subtitle": "Enema reduction first, theatre when it fails or the child is sick",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-intussusception.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-pyloric-stenosis",
+      "kind": "authored",
+      "title": "Infantile hypertrophic pyloric stenosis",
+      "subtitle": "Fix the alkalosis first, then the pylorus",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-pyloric-stenosis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-trauma",
+      "kind": "authored",
+      "title": "The injured child",
+      "subtitle": "Weight first, blood early, scan selectively",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-inguinal-hernia",
+      "kind": "authored",
+      "title": "Inguinal hernia in a child",
+      "subtitle": "The incarcerated hernia: reduce, wait, repair",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-inguinal-hernia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "paeds-appendicitis",
+      "kind": "authored",
+      "title": "Appendicitis in a child",
+      "subtitle": "Score, ultrasound, then decide",
+      "category": "paeds_surgery",
+      "specialty": "paediatric",
+      "file": "protocols/paeds-appendicitis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ruptured-ectopic",
+      "kind": "authored",
+      "title": "Ruptured ectopic pregnancy",
+      "subtitle": "Positive test, pain, collapse: theatre",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/ruptured-ectopic.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ovarian-torsion",
+      "kind": "authored",
+      "title": "Ovarian (adnexal) torsion",
+      "subtitle": "Suspect it, scope it, untwist it",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/ovarian-torsion.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pph-surgical",
+      "kind": "authored",
+      "title": "Postpartum haemorrhage: the surgical ladder",
+      "subtitle": "Drugs, balloon, sutures, ligation, hysterectomy",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/pph-surgical.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-abdomen-pregnancy",
+      "kind": "authored",
+      "title": "The pregnant woman with an acute abdomen",
+      "subtitle": "Two patients, one operation, no delay",
+      "category": "obgyn_emergency",
+      "specialty": "obgyn",
+      "file": "protocols/acute-abdomen-pregnancy.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -399,6 +507,18 @@
       "id": "urology",
       "file": "steps/urology.json",
       "title": "Shared urology steps",
+      "shared": true
+    },
+    {
+      "id": "paeds",
+      "file": "steps/paeds.json",
+      "title": "Shared paediatric surgical steps",
+      "shared": true
+    },
+    {
+      "id": "obgyn",
+      "file": "steps/obgyn.json",
+      "title": "Shared obstetric and gynaecological steps",
       "shared": true
     }
   ],
@@ -584,6 +704,64 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 25
+    },
+    {
+      "id": "pyloromyotomy",
+      "title": "Pyloromyotomy (Ramstedt)",
+      "subtitle": "Open or laparoscopic, after correction",
+      "system": "gastrointestinal",
+      "specialty": "paediatric",
+      "file": "procedures/pyloromyotomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "paeds"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "paeds-herniotomy",
+      "title": "Paediatric inguinal herniotomy",
+      "subtitle": "High ligation of the patent processus vaginalis",
+      "system": "abdominal wall",
+      "specialty": "paediatric",
+      "file": "procedures/paeds-herniotomy.json",
+      "stepPacks": [
+        "core",
+        "paeds"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30
+    },
+    {
+      "id": "lscs",
+      "title": "Lower segment caesarean section",
+      "subtitle": "Category, incision, delivery, closure",
+      "system": "obstetric",
+      "specialty": "obgyn",
+      "file": "procedures/lscs.json",
+      "stepPacks": [
+        "core",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "lap-salpingectomy",
+      "title": "Laparoscopic salpingectomy for ectopic pregnancy",
+      "subtitle": "Evacuate, identify, remove the tube",
+      "system": "gynaecological",
+      "specialty": "obgyn",
+      "file": "procedures/lap-salpingectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "obgyn"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
     }
   ],
   "cases": [
@@ -680,6 +858,34 @@
         "surgeon"
       ],
       "review": "ai_drafted"
+    },
+    {
+      "id": "projectile-vomiting-infant",
+      "title": "Three weeks old and vomiting",
+      "subtitle": "Paediatric surgery: correct first, operate second",
+      "specialty": "paediatric",
+      "file": "cases/projectile-vomiting-infant.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "collapse-ectopic",
+      "title": "Collapse with abdominal pain",
+      "subtitle": "Emergency gynaecology: test, resuscitate, operate",
+      "specialty": "obgyn",
+      "file": "cases/collapse-ectopic.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
     }
   ],
   "specialties": [
@@ -702,6 +908,14 @@
     {
       "id": "urology",
       "title": "Urology"
+    },
+    {
+      "id": "paediatric",
+      "title": "Paediatric surgery"
+    },
+    {
+      "id": "obgyn",
+      "title": "Obstetric and gynaecological surgery"
     }
   ]
 }

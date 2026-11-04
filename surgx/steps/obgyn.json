@@ -1,0 +1,45 @@
+{
+  "_comment": "Shared obstetric and gynaecological surgical steps, used by two or more procedures (caesarean section, laparoscopic salpingectomy). Procedure-only steps live in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.obg.adnexal-check": {
+      "id": "step.obg.adnexal-check", "kind": "checkpoint",
+      "title": "Inspect both tubes and ovaries",
+      "why": "The state of the remaining tube and both ovaries determines future fertility, the choice between salpingectomy and salpingotomy, and what the woman is told afterwards. An unrecorded finding cannot be used later.",
+      "how": [
+        "Inspect the contralateral tube along its length, including the fimbrial end, and both ovaries.",
+        "Note adhesions, hydrosalpinx, endometriosis, cysts or other pathology.",
+        "Record the findings explicitly in the operation note, including 'normal'."
+      ],
+      "structuresAtRisk": ["Ovaries", "Fallopian tubes"],
+      "pitfalls": ["Omitting the check because the main procedure is complete.", "Not recording the contralateral tube, so fertility counselling has no basis."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.obg.blood-loss": {
+      "id": "step.obg.blood-loss", "kind": "checkpoint", "critical": true,
+      "title": "Quantify blood loss and agree the next step",
+      "why": "Visual estimates of blood loss are consistently low. A measured figure triggers the haemorrhage protocol at the right point and guides post-operative monitoring.",
+      "how": [
+        "Measure suction volumes (subtracting irrigation and amniotic fluid) and weigh swabs.",
+        "State the measured blood loss aloud to the anaesthetist and scribe before closure.",
+        "If the loss crosses the local major haemorrhage threshold, activate the protocol rather than waiting for the patient to become unstable."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Reporting an estimated rather than measured loss.", "Forgetting the blood in the drapes and on the floor."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.obg.rhesus": {
+      "id": "step.obg.rhesus", "kind": "checkpoint",
+      "title": "Rhesus status and anti-D",
+      "why": "A rhesus-negative woman exposed to fetal red cells can become sensitised, which threatens every future pregnancy. Anti-D given at the right time prevents it; the omission is silent and permanent.",
+      "how": [
+        "Confirm the woman's blood group and antibody status before she leaves recovery.",
+        "If rhesus-negative, ensure anti-D immunoglobulin is prescribed and given per national guidance for this procedure, with any test needed to decide the dose.",
+        "Document that it was given, or why it was not needed."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Assuming the ward will remember after discharge from theatre.", "Not checking the result of a group sent at admission."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

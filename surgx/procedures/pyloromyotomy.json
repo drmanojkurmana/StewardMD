@@ -1,0 +1,134 @@
+{
+  "id": "pyloromyotomy",
+  "title": "Pyloromyotomy (Ramstedt)",
+  "subtitle": "Open or laparoscopic, after correction",
+  "system": "gastrointestinal",
+  "aliases": ["Ramstedt pyloromyotomy", "pyloric stenosis repair", "lap pyloromyotomy"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "holcomb", "org": "Elsevier", "title": "Holcomb and Ashcraft's Pediatric Surgery: hypertrophic pyloric stenosis", "edition": "7th edition", "year": 2020, "url": "https://www.elsevier.com/", "accessed": "2026-11-04" },
+    { "id": "cochrane-pyl", "org": "Cochrane", "title": "Open versus laparoscopic pyloromyotomy for pyloric stenosis (Staerkle et al, CD012827)", "year": 2021, "url": "https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD012827.pub2/full", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["paeds_weight", "holliday"],
+  "chapters": {
+    "indications": [
+      "Infantile hypertrophic pyloric stenosis confirmed on ultrasound or by a palpable olive, after full correction of fluid, electrolyte and acid-base disturbance."
+    ],
+    "contraindications": [
+      "Uncorrected hypochloraemic alkalosis or dehydration. This is a reason to postpone, never to proceed.",
+      "Laparoscopic approach: an infant who cannot tolerate pneumoperitoneum, or a surgeon without laparoscopic pyloromyotomy experience. The open approach is the alternative."
+    ],
+    "preparation": [
+      "Electrolytes, gas and glucose within the criteria agreed with paediatric anaesthesia.",
+      "Nasogastric tube to empty the stomach immediately before induction.",
+      "Consent including mucosal perforation, incomplete myotomy, wound infection, incisional hernia, and post-operative vomiting.",
+      "Group and save per local policy."
+    ],
+    "positioning": [
+      "Supine on a warmed mattress. For laparoscopy, the infant is placed at the foot of the table or across it so the surgeon stands at the feet.",
+      "Arms secured above the head or by the sides with padding."
+    ],
+    "equipment": [
+      "Open: small retractors, pyloric spreader, fine forceps and blade.",
+      "Laparoscopic: 3 mm or 5 mm telescope, small-diameter instruments through stab incisions, an arthrotomy or retractable pyloromyotomy knife, and a pyloric spreader.",
+      "Paediatric warming equipment and a scale to weigh swabs."
+    ],
+    "anatomy": [
+      "The hypertrophied pylorus is a firm olive at the gastric outlet, just right of the midline beneath the liver edge.",
+      "The pyloric vein (of Mayo) marks the pyloroduodenal junction on the anterior surface.",
+      "At the duodenal end the hypertrophied muscle stops abruptly while the duodenal mucosa folds back as a fornix. This is where perforation happens.",
+      "The avascular plane on the anterosuperior surface is the site of the myotomy, away from the vessels on the greater and lesser curves."
+    ],
+    "criticalSafety": [
+      "Do not operate until the alkalosis is corrected.",
+      "The myotomy must extend from the gastric antrum onto the pylorus to just short of the duodenal fornix. Too short leaves an obstruction; too far perforates.",
+      "Test for mucosal perforation before closing, every time."
+    ],
+    "structuresAtRisk": [
+      "Duodenal mucosa at the fornix",
+      "Gastric mucosa",
+      "Liver edge during retraction",
+      "Bowel and bladder at umbilical entry"
+    ],
+    "commonErrors": [
+      "Stopping the myotomy short on the gastric side, leaving an incomplete pyloromyotomy and persistent vomiting.",
+      "Extending onto the duodenum, causing a perforation at the fornix.",
+      "Missing a small mucosal perforation because the leak test was skipped."
+    ],
+    "complications": [
+      "Mucosal perforation: repaired primarily if recognised; unrecognised it causes peritonitis within days.",
+      "Incomplete pyloromyotomy with persistent vomiting, requiring a redo.",
+      "Wound infection, incisional or umbilical hernia.",
+      "Post-operative apnoea related to anaesthesia in a young or previously alkalotic infant."
+    ],
+    "postop": [
+      "Early feeding per unit protocol; some vomiting in the first day is common and is not by itself a failure.",
+      "Continue intravenous fluids with glucose until feeding is established; monitor glucose.",
+      "Apnoea monitoring as agreed with the anaesthetist.",
+      "Fever, distension or irritability after day one suggests a missed perforation; review urgently."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.paeds.physiology-gate", "emphasis": "Chloride and bicarbonate within the agreed criteria. If not, cancel and keep correcting." },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic per local paediatric policy. Pharmacological thromboprophylaxis does not apply in infants." },
+    { "ref": "step.paeds.warming" },
+    { "ref": "step.core.positioning", "emphasis": "For laparoscopy, the infant at the end of the table with the surgeon at the feet and the monitor at the head." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.paeds.local-anaesthetic" },
+    { "ref": "step.lap.access", "emphasis": "Open umbilical entry in an infant. Use the lowest insufflation pressure and flow that give a view, agreed with the anaesthetist. For an open operation, use a right upper quadrant transverse or circumumbilical incision instead." },
+    { "ref": "step.lap.ports", "emphasis": "Working instruments through stab incisions in the right and left upper quadrants, without ports where possible." },
+    { "ref": "step.pyl.expose" },
+    { "ref": "step.pyl.myotomy" },
+    { "ref": "step.pyl.leak-test" },
+    { "ref": "step.core.haemostasis", "emphasis": "Ooze from the cut muscle edges stops once the pylorus is returned; do not diathermy near the mucosa." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.pyl.expose": {
+      "id": "step.pyl.expose", "kind": "dissection",
+      "title": "Exposing and stabilising the pylorus",
+      "why": "A stable, well-presented pylorus makes the myotomy controlled. Most perforations follow an incision made on a moving target.",
+      "how": [
+        "Identify the pylorus beneath the liver edge; lift the liver gently if needed.",
+        "Grasp the duodenum just distal to the pylorus (laparoscopic) or deliver the pylorus into the wound (open), holding it between finger and thumb.",
+        "Identify the pyloroduodenal junction and the avascular anterosuperior surface."
+      ],
+      "structuresAtRisk": ["Duodenum", "Liver edge"],
+      "pitfalls": ["Grasping the duodenum too firmly and causing a serosal tear."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pyl.myotomy": {
+      "id": "step.pyl.myotomy", "kind": "resection", "critical": true,
+      "title": "Seromuscular incision and spreading",
+      "why": "The operation relieves the obstruction by dividing every hypertrophied muscle fibre while leaving the mucosa intact. Completeness and mucosal integrity are both required.",
+      "how": [
+        "Incise the serosa and superficial muscle longitudinally on the avascular surface, from the antrum to just short of the pyloroduodenal junction.",
+        "Spread the muscle with a pyloric spreader until the submucosa bulges into the gap along the whole length.",
+        "Confirm that the two halves move independently of one another; if they do not, the myotomy is incomplete."
+      ],
+      "structuresAtRisk": ["Duodenal mucosa at the fornix", "Gastric mucosa"],
+      "pitfalls": ["Spreading at the duodenal end with force, which tears the fornix.", "Leaving residual fibres on the gastric side."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.pyl.leak-test": {
+      "id": "step.pyl.leak-test", "kind": "checkpoint", "critical": true,
+      "title": "Testing mucosal integrity",
+      "why": "A perforation repaired now is a minor event; a perforation discovered on day two is peritonitis in an infant.",
+      "how": [
+        "Ask the anaesthetist to insufflate air through the nasogastric tube while the duodenum is occluded distally.",
+        "Look for bubbles or bile at the myotomy, particularly at the duodenal end.",
+        "If a perforation is found, repair it, or close the myotomy and perform a fresh myotomy at a different site, and adjust the feeding plan."
+      ],
+      "structuresAtRisk": ["Duodenal mucosa"],
+      "pitfalls": ["Omitting the test in a myotomy that 'looked fine'."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

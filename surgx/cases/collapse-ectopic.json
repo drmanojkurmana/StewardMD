@@ -1,0 +1,96 @@
+{
+  "id": "collapse-ectopic",
+  "title": "Collapse with abdominal pain",
+  "subtitle": "Emergency gynaecology: test, resuscitate, operate",
+  "simulation": true,
+  "levels": ["student", "intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "ruptured-ectopic",
+  "procedureRef": "lap-salpingectomy",
+  "sources": [
+    { "id": "nice-ng126", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Ectopic pregnancy and miscarriage: diagnosis and initial management (NG126)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng126", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg21", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Diagnosis and management of ectopic pregnancy (Green-top Guideline No. 21)", "year": 2016, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/diagnosis-and-management-of-ectopic-pregnancy-green-top-guideline-no-21/", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 26-year-old woman collapses at work and is brought to the emergency department. She has had lower abdominal pain since the morning, worse on the left, and now has pain in her right shoulder. She had two loose stools earlier. She is not sure of her last period; she thinks it was about seven weeks ago but she has had some spotting this week.",
+  "vitals": { "Temp": "36.5 C", "HR": "118", "BP": "86/54", "RR": "24", "SpO2": "98% in air", "GCS": "15" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "Which test do you need in the first minutes?",
+      "hint": "It is cheap, quick and changes everything.",
+      "options": [
+        { "id": "a", "text": "Urine or serum pregnancy test", "correct": true, "feedback": "Correct. Every woman of reproductive age with abdominal pain or collapse needs one, immediately." },
+        { "id": "b", "text": "Stool culture, given the diarrhoea", "correct": false, "feedback": "Diarrhoea is a recognised presentation of ectopic pregnancy with blood irritating the pelvis. Gastroenteritis is the classic misdiagnosis." },
+        { "id": "c", "text": "CT abdomen", "correct": false, "feedback": "She is shocked. CT is not the first step, and a pregnancy test must precede it." },
+        { "id": "d", "text": "Troponin and ECG for the collapse", "correct": false, "feedback": "Reasonable in another context, but it ignores the most likely life-threatening cause in a young woman with pain." }
+      ],
+      "why": "Ruptured ectopic pregnancy is a cause of maternal death when it is labelled as gastroenteritis or a faint. Shoulder-tip pain, collapse and diarrhoea are signs of haemoperitoneum.",
+      "missedRedFlags": ["Shoulder-tip pain", "Diarrhoea attributed to gastroenteritis in a shocked young woman"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "The pregnancy test is positive. She is pale, tachycardic and hypotensive with a tender, guarded lower abdomen. What do you do next?",
+      "hint": "Several things happen at once; which option contains the call that matters most?",
+      "options": [
+        { "id": "a", "text": "Two large-bore cannulae, crossmatch, activate the major haemorrhage protocol, and call the gynaecologist and anaesthetist for theatre", "correct": true, "feedback": "Correct. This is a surgical haemorrhage. Resuscitation and the call to theatre run in parallel." },
+        { "id": "b", "text": "Give several litres of crystalloid and reassess in an hour", "correct": false, "feedback": "Crystalloid dilutes clotting factors and delays the definitive step. She needs blood and theatre." },
+        { "id": "c", "text": "Arrange a formal transvaginal scan in the radiology department", "correct": false, "feedback": "Sending a shocked woman away from resuscitation for a scan is dangerous and does not change the plan." },
+        { "id": "d", "text": "Measure serum hCG and repeat it in 48 hours", "correct": false, "feedback": "Serial hCG is for the stable woman with a pregnancy of unknown location, not a shocked one." }
+      ],
+      "why": "A positive pregnancy test, pain and shock is a ruptured ectopic until proven otherwise. The definitive treatment is surgical control of the bleeding, and every minute of delay is blood lost.",
+      "missedRedFlags": ["Hypotension in a young woman with a positive pregnancy test"]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "A bedside ultrasound in the resuscitation room shows free fluid in Morison pouch and an empty uterus. Does she need further imaging before theatre?",
+      "hint": "What would further imaging change?",
+      "options": [
+        { "id": "a", "text": "No. Proceed to theatre; the diagnosis will be confirmed at surgery", "correct": true, "feedback": "Correct. In an unstable woman, further imaging only delays haemorrhage control." },
+        { "id": "b", "text": "Yes, a CT to locate the bleeding", "correct": false, "feedback": "The source is known well enough. CT delays theatre in a shocked patient." },
+        { "id": "c", "text": "Yes, a transvaginal scan by the early pregnancy unit tomorrow", "correct": false, "feedback": "She may not survive until tomorrow without surgery." },
+        { "id": "d", "text": "Yes, a serum hCG level before deciding", "correct": false, "feedback": "The hCG level does not change the need for surgery in rupture with shock." }
+      ],
+      "why": "Imaging is for diagnostic uncertainty in a stable patient. Free fluid with a positive test and shock is enough to operate."
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "In theatre, which approach and operation are appropriate?",
+      "hint": "Consider the surgeon's experience, her stability, and the other tube.",
+      "options": [
+        { "id": "a", "text": "Laparoscopy if an experienced surgeon is present and she is responding to resuscitation, with salpingectomy if the other tube is healthy; laparotomy if laparoscopy would delay control", "correct": true, "feedback": "Correct. The route is chosen for speed of control; salpingectomy is preferred when the contralateral tube is healthy." },
+        { "id": "b", "text": "Methotrexate and observation", "correct": false, "feedback": "Medical management is never appropriate for a ruptured ectopic with haemodynamic compromise." },
+        { "id": "c", "text": "Salpingotomy in every case to preserve fertility", "correct": false, "feedback": "Salpingotomy is reserved for women with risk factors for infertility, and carries a risk of persistent trophoblast." },
+        { "id": "d", "text": "Total abdominal hysterectomy", "correct": false, "feedback": "Disproportionate. Tubal ectopic bleeding is controlled at the tube." }
+      ],
+      "why": "Laparoscopy is preferred in experienced hands even in rupture, because it offers faster recovery. Laparotomy remains correct when it is the fastest way to stop the bleeding. The contralateral tube decides between salpingectomy and salpingotomy.",
+      "stepRef": "step.salp.excise"
+    },
+    {
+      "id": "dp5", "phase": "operate",
+      "levels": ["resident", "surgeon"],
+      "prompt": "At laparoscopy there is a large haemoperitoneum with active bleeding from a ruptured left ampullary ectopic. What is your first move?",
+      "hint": "Suction or a grasper?",
+      "options": [
+        { "id": "a", "text": "Grasp the left tube to control the bleeding, then evacuate the haemoperitoneum", "correct": true, "feedback": "Correct. Control first, then clear the field." },
+        { "id": "b", "text": "Suction all the blood first to get a clear view", "correct": false, "feedback": "In an actively bleeding woman this loses time and blood. The tube can usually be found by following the fresh bleeding." },
+        { "id": "c", "text": "Inspect the upper abdomen systematically before touching the pelvis", "correct": false, "feedback": "The full survey follows once the bleeding is controlled." },
+        { "id": "d", "text": "Convert to laparotomy immediately in all cases of haemoperitoneum", "correct": false, "feedback": "Not mandatory. Conversion is for failure to control or a deteriorating woman." }
+      ],
+      "why": "The bleeding source in a ruptured tubal ectopic is small and accessible. Grasping it first stops the haemorrhage while the anaesthetist catches up.",
+      "stepRef": "step.salp.control"
+    },
+    {
+      "id": "dp6", "phase": "postop",
+      "prompt": "Salpingectomy is completed; the right tube is normal. Her blood group is O rhesus-negative. What must happen before discharge?",
+      "hint": "There is a drug, a test, and a conversation.",
+      "options": [
+        { "id": "a", "text": "Anti-D immunoglobulin, a urine pregnancy test at three weeks, advice about an early scan in a future pregnancy, and bereavement support", "correct": true, "feedback": "Correct. All four matter and all are easily forgotten after an emergency." },
+        { "id": "b", "text": "Serial serum hCG every 48 hours until negative", "correct": false, "feedback": "Serial hCG is needed after salpingotomy. After salpingectomy with a healthy contralateral tube, NICE advises a urine pregnancy test at three weeks." },
+        { "id": "c", "text": "Discharge with analgesia only", "correct": false, "feedback": "Missing anti-D risks sensitisation that affects every future pregnancy." },
+        { "id": "d", "text": "Advise her that future pregnancy is unlikely", "correct": false, "feedback": "With a healthy contralateral tube, most women can conceive again. Inaccurate advice causes lasting harm." }
+      ],
+      "why": "Rhesus sensitisation is preventable and silent. Follow-up depends on whether trophoblast could remain. The next pregnancy needs an early scan, and the loss needs acknowledgement.",
+      "missedRedFlags": ["Rhesus-negative status without anti-D"]
+    }
+  ]
+}

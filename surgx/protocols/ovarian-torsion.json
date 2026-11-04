@@ -1,0 +1,57 @@
+{
+  "id": "ovarian-torsion",
+  "title": "Ovarian (adnexal) torsion",
+  "subtitle": "Suspect it, scope it, untwist it",
+  "category": "obgyn_emergency",
+  "specialty": "obgyn",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "acog-783", "org": "American College of Obstetricians and Gynecologists (ACOG)", "title": "Adnexal torsion in adolescents (Committee Opinion No. 783)", "year": 2019, "url": "https://www.acog.org/clinical/clinical-guidance/committee-opinion/articles/2019/08/adnexal-torsion-in-adolescents", "accessed": "2026-11-04" },
+    { "id": "rcog-gtg62", "org": "Royal College of Obstetricians and Gynaecologists (RCOG)", "title": "Management of suspected ovarian masses in premenopausal women (Green-top Guideline No. 62)", "year": 2011, "url": "https://www.rcog.org.uk/guidance/browse-all-guidance/green-top-guidelines/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Sudden-onset unilateral lower abdominal pain with nausea and vomiting, in a girl or woman with a known or found adnexal mass." },
+      { "text": "Intermittent pain over days that becomes constant: partial torsion that has completed." },
+      { "text": "Pregnancy, ovarian stimulation for assisted conception, and a mass in a child: all raise the risk." },
+      { "text": "Fever, peritonism and a raised lactate late in the history: possible necrosis." }
+    ],
+    "do_now": [
+      { "text": "Pregnancy test, analgesia, nil by mouth and intravenous access.", "evidenceRef": "acog-783" },
+      { "text": "Clinical suspicion of torsion is the indication for prompt surgical exploration. Do not wait for a definitive imaging diagnosis.", "timeCritical": true, "evidenceRef": "acog-783" },
+      { "text": "Call the gynaecologist (or paediatric surgeon for a child) at the point of suspicion, and book theatre.", "timeCritical": true, "evidenceRef": "acog-783" }
+    ],
+    "assess": [
+      { "text": "Character and timing of pain, previous episodes, menstrual history, known cysts, fertility treatment." },
+      { "text": "Abdominal examination for a mass and peritonism; consider appendicitis, ectopic, ruptured cyst and pelvic inflammatory disease." },
+      { "text": "Haemodynamic status: a haemorrhagic cyst or an ectopic can coexist or mimic.", "calcs": ["shock_index"] }
+    ],
+    "investigate": [
+      { "text": "Pelvic ultrasound (transvaginal where appropriate, transabdominal in children): an enlarged ovary, often with a mass, peripheral follicles or a whirlpool sign of the pedicle." },
+      { "text": "Normal Doppler flow does not exclude torsion. Dual blood supply means arterial flow can persist in a twisted ovary." },
+      { "text": "Full blood count, C-reactive protein, hCG; tumour markers only if malignancy is suspected, sent before theatre so they do not delay it." }
+    ],
+    "resuscitate": [
+      { "text": "Adequate analgesia and antiemetics; intravenous fluids while nil by mouth.", "evidenceRef": "acog-783" }
+    ],
+    "definitive": [
+      { "text": "Laparoscopy with detorsion and ovarian conservation. A dark, blue-black ovary frequently recovers; its appearance at surgery does not reliably predict viability.", "evidenceRef": "acog-783" },
+      { "text": "Oophorectomy is rarely required and is reserved for a clearly necrotic, disintegrating ovary or a suspected malignancy in a postmenopausal woman.", "evidenceRef": "acog-783" },
+      { "text": "Cystectomy at the same operation can be difficult in an oedematous ovary; detorsion alone with interval imaging is acceptable, with a delayed cystectomy if the cyst persists.", "evidenceRef": "acog-783" },
+      { "text": "Suspicious mass features in a premenopausal woman: manage per the RCOG ovarian mass guidance and involve a gynaecological oncologist before radical surgery.", "evidenceRef": "rcog-gtg62" }
+    ],
+    "escalate": [
+      { "text": "Paediatric surgeon or paediatric gynaecologist for children; adult gynaecology for adolescents according to local arrangement." },
+      { "text": "Gynaecological oncology if the mass appears malignant." },
+      { "text": "Obstetric team when torsion occurs in pregnancy." }
+    ]
+  },
+  "notes": [
+    "Torsion is a clinical diagnosis confirmed at laparoscopy. A normal Doppler has sent many ovaries home to infarct.",
+    "Untwist and keep. The black ovary that looks dead at surgery often functions on follow-up imaging.",
+    "In a child, think about torsion of a normal ovary and of the opposite side in future: consider oophoropexy in recurrent torsion or a single remaining ovary."
+  ],
+  "calcs": ["shock_index"]
+}

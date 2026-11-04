@@ -328,6 +328,35 @@
         ]
       }
     },
+    "lap-salpingectomy": {
+      base: "operative", title: "Laparoscopic salpingectomy",
+      prefill: {"procedure": "Laparoscopic salpingectomy for ectopic pregnancy"},
+      extra: {
+        "Operative detail": [
+          f("ectopicSite", "Side and site of ectopic, ruptured or not", {"type": "text", "required": true, "aiFillable": true, "ph": "Left ampullary, ruptured"}),
+          f("haemoperitoneum", "Haemoperitoneum volume (mL)", {"type": "text", "required": true, "aiFillable": false}),
+          f("contralateralTube", "Contralateral tube and ovaries", {"type": "text", "required": true, "aiFillable": true, "ph": "Normal / abnormal (describe)"}),
+          f("procedureChoice", "Salpingectomy or salpingotomy, and reason", {"type": "text", "aiFillable": true}),
+          f("antiD", "Rhesus status and anti-D", {"type": "text", "required": true, "aiFillable": false, "ph": "Rh positive / Rh negative: anti-D given"}),
+          f("followUp", "Follow-up plan", {"type": "text", "aiFillable": true, "ph": "UPT at 3 weeks / serial hCG"})
+        ]
+      }
+    },
+    "lscs": {
+      base: "operative", title: "Lower segment caesarean section",
+      prefill: {"procedure": "Lower segment caesarean section"},
+      extra: {
+        "Operative detail": [
+          f("urgencyCategory", "Indication and urgency category", {"type": "text", "required": true, "aiFillable": true, "ph": "Indication; category 1 / 2 / 3 / 4; decision time"}),
+          f("uterineIncision", "Uterine incision and any extension", {"type": "text", "required": true, "aiFillable": true, "ph": "Transverse lower segment; extensions"}),
+          f("deliveryTime", "Time of delivery and method", {"type": "text", "required": true, "aiFillable": false, "ph": "hh:mm; cephalic / breech / forceps / vacuum"}),
+          f("placenta", "Placenta delivery and completeness", {"type": "text", "aiFillable": true, "ph": "Controlled cord traction; complete"}),
+          f("uterineClosure", "Uterine closure layers", {"type": "text", "required": true, "aiFillable": true, "ph": "Two layers, suture used"}),
+          f("ebl", "Measured blood loss (mL)", {"type": "text", "required": true, "aiFillable": false, "help": "Measured, not estimated"}),
+          f("cordGases", "Paired cord gases", {"type": "text", "aiFillable": false, "ph": "Arterial and venous pH, base excess, or not taken"})
+        ]
+      }
+    },
     "lumbar-discectomy-ces": {
       base: "operative", title: "Lumbar decompression for cauda equina syndrome",
       prefill: {"procedure": "Lumbar discectomy and decompression for cauda equina syndrome"},
@@ -338,6 +367,32 @@
           f("decompressionExtent", "Extent of bony decompression", {"type": "text", "required": true, "aiFillable": true, "ph": "Laminotomy / hemilaminectomy / laminectomy"}),
           f("sacFreeAtEnd", "Thecal sac and roots free at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, roots mobile, no retained fragment"}),
           f("durotomy", "Dural tear and repair", {"type": "text", "required": true, "aiFillable": false, "ph": "None / tear: repair method and bed-rest plan"})
+        ]
+      }
+    },
+    "paeds-herniotomy": {
+      base: "operative", title: "Paediatric herniotomy",
+      prefill: {"procedure": "Inguinal herniotomy"},
+      extra: {
+        "Operative detail": [
+          f("side", "Side and findings", {"type": "text", "required": true, "aiFillable": true, "ph": "Left / right / bilateral; sac contents"}),
+          f("sacLigation", "Sac ligation level", {"type": "text", "aiFillable": true, "ph": "High ligation at internal ring"}),
+          f("vasVessels", "Vas and testicular vessels identified and preserved", {"type": "text", "required": true, "aiFillable": false}),
+          f("testisPosition", "Testis position at end of procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "In scrotum, confirmed by palpation"}),
+          f("apnoeaPlan", "Post-operative apnoea monitoring plan", {"type": "text", "aiFillable": true})
+        ]
+      }
+    },
+    "pyloromyotomy": {
+      base: "operative", title: "Pyloromyotomy",
+      prefill: {"procedure": "Ramstedt pyloromyotomy (open / laparoscopic)"},
+      extra: {
+        "Operative detail": [
+          f("preopElectrolytes", "Pre-operative chloride, bicarbonate and potassium", {"type": "text", "required": true, "aiFillable": false, "ph": "Values and time of sample"}),
+          f("approach", "Approach", {"type": "text", "required": true, "aiFillable": true, "ph": "Laparoscopic / open RUQ / circumumbilical"}),
+          f("myotomyLength", "Myotomy extent and completeness", {"type": "textarea", "aiFillable": true, "rows": 2, "ph": "Antrum to pyloroduodenal junction; halves move independently"}),
+          f("leakTest", "Mucosal leak test", {"type": "text", "required": true, "aiFillable": false, "ph": "Done: negative / positive and repaired"}),
+          f("localAnaesthetic", "Local anaesthetic agent and total dose (mg/kg)", {"type": "text", "aiFillable": false, "help": "Combined surgeon and anaesthetist total"})
         ]
       }
     },
