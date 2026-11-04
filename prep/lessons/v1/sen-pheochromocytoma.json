@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "sen-pheochromocytoma",
+ "title": "Pheochromocytoma and paraganglioma",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The classic clinical presentation of **pheochromocytoma** combines episodic headache, sweating, and palpitations with paroxysmal or sustained hypertension. Biochemical screening relies on measuring **plasma free metanephrines** or 24-hour urinary fractionated **metanephrines**, collected under quiet resting conditions. Because chromaffin tumour cells continuously metabolize catecholamines into metanephrines, measuring metanephrines demonstrates diagnostic sensitivity exceeding 97%, outperforming episodic parent catecholamines.",
+   "say": "The classic triad of pheochromocytoma includes headache, sweating, and palpitations with hypertension. Screening relies on measuring plasma free metanephrines or twenty-four-hour urinary fractionated metanephrines. Because chromaffin cells continuously metabolize catecholamines into metanephrines, these tests provide sensitivity exceeding ninety-seven percent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aldosteronism-pheochromocytoma-long-case-fig1.webp",
+    "alt": "Adrenal Adenoma and Phaeochromocytoma Pathology",
+    "caption": "Adrenal gross pathology demonstrating large vascular pheochromocytoma. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "A plasma metanephrine result exceeding **3** times the upper reference limit is highly diagnostic of pheochromocytoma. In contrast, borderline mild elevations often represent false-positive results triggered by physical stress, obstructive sleep apnea, tricyclic antidepressants, or serotonin-norepinephrine reuptake inhibitors. Clinicians must eliminate interfering medications, repeat resting tests, and biochemically confirm **metanephrines** excess before ordering cross-sectional anatomical imaging or contemplating any needle biopsy.",
+   "say": "A metanephrine level exceeding three times the upper reference limit strongly indicates a pheochromocytoma. Borderline mild elevations are frequently false positives caused by medications or stress. Clinicians must confirm biochemical metanephrine excess before ordering radiological scans or considering invasive procedures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alpha Blockade First",
+     "points": [
+      "Titrate phenoxybenzamine or doxazosin",
+      "Relaxes peripheral systemic vascular beds",
+      "Restores intravascular contracted blood volume",
+      "Encourage high-salt diet to prevent orthostasis"
+     ]
+    },
+    "right": {
+     "title": "Subsequent Beta Blockade",
+     "points": [
+      "Introduced 3 to 4 days after alpha blockade established",
+      "Controls reflex adrenergic tachycardia",
+      "Cardioselective agents (metoprolol, atenolol)",
+      "Never administered in isolation as monotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cross-sectional anatomical imaging with contrast computed tomography or magnetic resonance imaging should be performed only after biochemical hypersecretion is established. When tumour localization is negative, extra-adrenal, or metastatic, functional molecular imaging utilizing **Ga-68 DOTATATE** positron emission tomography targeting somatostatin receptor subtype 2 is indicated. Clinicians must never perform a percutaneous needle **biopsy** on a suspected pheochromocytoma because biopsy can trigger fatal catecholamine storm.",
+   "say": "Anatomical imaging should be performed only after positive biochemical testing. When cross-sectional imaging is negative or extra-adrenal disease is suspected, Gallium-68 DOTATATE PET provides superior localization. Percutaneous needle biopsy is strictly contraindicated because puncturing the mass can precipitate a fatal hypertensive crisis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "borderline",
+      "label": "Borderline High Metanephrines"
+     },
+     {
+      "id": "clonidine",
+      "label": "Administer Oral Clonidine 0.3 mg"
+     },
+     {
+      "id": "suppress",
+      "label": "Suppression >50% (Normal)"
+     },
+     {
+      "id": "autonomous",
+      "label": "Persistent Elevation (Pheochromocytoma)"
+     }
+    ],
+    "edges": [
+     [
+      "borderline",
+      "clonidine",
+      "test protocol"
+     ],
+     [
+      "clonidine",
+      "suppress",
+      "sympathetic drive inhibited"
+     ],
+     [
+      "clonidine",
+      "autonomous",
+      "autonomous secretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At least **30**% of all pheochromocytomas and paragangliomas arise from an underlying germline pathogenic mutation. Major hereditary syndromic associations include multiple endocrine neoplasia type 2 driven by the **RET** proto-oncogene, **von Hippel-Lindau** disease, neurofibromatosis type 1, and succinate dehydrogenase subunit mutations. Among these, germline pathogenic variants in **SDHB** carry the highest risk of extra-adrenal sympathetic paraganglioma, local invasiveness, and distant metastatic dissemination.",
+   "say": "At least thirty percent of pheochromocytomas and paragangliomas are caused by germline mutations. Key hereditary syndromes arise from MEN2 RET mutations, von Hippel-Lindau disease, and succinate dehydrogenase gene alterations. Variants in SDHB lead to the highest risk of metastatic extra-adrenal malignancy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pheochromocytoma-fig2.webp",
+    "alt": "Pheochromocytoma Catecholamine Excess",
+    "caption": "Catecholamine metabolic pathways and functional imaging distribution. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Preoperative medical preparation mandates establishing comprehensive **alpha blockade** for **7** to **14** days before surgery, utilizing the noncompetitive antagonist **phenoxybenzamine** or selective agents like **doxazosin**, accompanied by high dietary sodium and volume expansion. A **beta blocker** should be introduced only after several days of alpha blockade if reflex tachycardia persists. Administering a beta blocker first leaves vascular alpha receptors unopposed, triggering catastrophic hypertensive crisis.",
+   "say": "Preoperative preparation requires seven to fourteen days of alpha blockade with phenoxybenzamine or doxazosin along with liberal salt and fluid intake. A beta blocker may be added only after adequate alpha blockade to treat residual tachycardia. Starting a beta blocker first permits unopposed alpha-mediated vasoconstriction, precipitating severe hypertensive crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging Modality",
+     "Molecular Cellular Target",
+     "Optimal Clinical Utility",
+     "Sensitivity in SDHB Metastases"
+    ],
+    "rows": [
+     [
+      "Ga-68 DOTATATE PET-CT",
+      "Somatostatin receptor SSTR-2",
+      "Extra-adrenal paraganglioma & metastases",
+      "Exceptional (>95% sensitivity)"
+     ],
+     [
+      "I-123 MIBG SPECT-CT",
+      "Norepinephrine transporter (NET)",
+      "Adrenal pheochromocytoma & I-131 selection",
+      "Moderate (60% to 75% sensitivity)"
+     ],
+     [
+      "F-18 FDG PET-CT",
+      "Glucose metabolism (GLUT transporters)",
+      "Rapidly progressing aggressive metastases",
+      "High in dedifferentiated tumours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following surgical tumour resection and ligation of the adrenal vein, sudden cessation of high circulating catecholamines leaves a down-regulated vascular bed, risking profound hypotension. Concurrently, rapid unmasking of previously suppressed pancreatic beta cells triggers **rebound insulin** secretion, predisposing the patient to acute symptomatic **hypoglycemia**. Routine postoperative blood glucose surveillance and continuous dextrose infusions are mandatory standard elements of postoperative critical care recovery.",
+   "say": "After surgical removal of the tumor, abrupt cessation of catecholamines causes vascular collapse and hypotension. Concurrently, sudden rebound insulin secretion from disinhibited pancreatic beta cells can cause severe acute hypoglycemia. Routine blood glucose monitoring and intravenous dextrose infusions are essential during postoperative recovery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cortical-Sparing Adrenalectomy",
+     "points": [
+      "Indicated in hereditary bilateral pheochromocytoma",
+      "Preserves normal adrenal cortex (>=15% volume)",
+      "Prevents permanent primary adrenal insufficiency",
+      "Low local recurrence risk (5% to 10%)"
+     ]
+    },
+    "right": {
+     "title": "Total Bilateral Adrenalectomy",
+     "points": [
+      "Mandatory if complete medullary replacement exists",
+      "Lifelong hydrocortisone and fludrocortisone required",
+      "Perpetual lifetime risk of fatal Addisonian crisis",
+      "Complete elimination of ipsilateral recurrence"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When pheochromocytoma presents during **pregnancy**, medical alpha blockade with **phenoxybenzamine** represents the standard drug therapy. If diagnosed early in gestation, definitive laparoscopic adrenalectomy is electively performed during the **second trimester**, when organogenesis is complete and uterine size does not obscure surgical visualization. When diagnosed during the third trimester, medical blockade continues until fetal maturity, followed by planned cesarean delivery.",
+   "say": "When diagnosed during pregnancy, phenoxybenzamine is the preferred alpha blocker. If detected early in gestation, laparoscopic tumour resection is safely planned during the second trimester. If identified in late pregnancy, medical blockade is maintained until fetal maturity, coordinating delivery with surgical tumour excision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physiologic Parameter",
+     "Preoperative Target Endpoint",
+     "Intervention Method",
+     "Complication Prevented"
+    ],
+    "rows": [
+     [
+      "Seated Blood Pressure",
+      "Less than 130/80 mmHg",
+      "Alpha-blocker dose escalation",
+      "Intraoperative hypertensive paroxysms"
+     ],
+     [
+      "Standing Systolic Pressure",
+      "Greater than 90 mmHg",
+      "High-sodium diet & oral hydration",
+      "Symptomatic postural syncope"
+     ],
+     [
+      "Target Heart Rate",
+      "60 to 70 bpm seated",
+      "Secondary beta-blocker introduction",
+      "Intraoperative tachyarrhythmias"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant **metastatic** disease occurs in over 30% to 50% of patients with extra-adrenal sympathetic paragangliomas harboring an **SDHB** mutation. When surgical resection of widespread metastases is impossible, lifelong hemodynamic blood pressure control with medical **alpha blockade** must continue indefinitely. Systemic oncological therapeutic options include high-specific-activity I-131 MIBG, peptide receptor radionuclide therapy with Lu-177 DOTATATE, cyclophosphamide-vincristine-dacarbazine chemotherapy, or tyrosine kinase inhibitors such as sunitinib.",
+   "say": "Metastatic malignancy is common in extra-adrenal paragangliomas carrying SDHB mutations. In inoperable metastatic disease, blood pressure control with oral alpha blockade must continue indefinitely. Therapeutic systemic options provide radionuclide therapy with Lu-177 DOTATATE or MIBG, systemic chemotherapy, and tyrosine kinase inhibitors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Postoperative Hypotension",
+     "points": [
+      "Sudden loss of high catecholamine vasoconstriction",
+      "Down-regulated alpha-adrenergic receptor density",
+      "Managed with aggressive isotonic saline resuscitation",
+      "Norepinephrine or vasopressin infusion if refractory"
+     ]
+    },
+    "right": {
+     "title": "Postoperative Hypoglycaemia",
+     "points": [
+      "Abrupt removal of alpha-2 adrenergic insulin block",
+      "Massive rebound insulin exocytosis from beta cells",
+      "Occurs within 2 to 6 hours after resection",
+      "Requires continuous 5% to 10% dextrose infusions"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -2,153 +2,185 @@
  "v": 1,
  "module": "sen-endocrine-testing",
  "subject": "ss-endocrinology",
- "title": "Endocrine testing and assay interpretation: pitfalls that mislead results",
- "minutes": 5,
+ "title": "Endocrine testing and assay interpretation",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Immunoassays are quick, but they can return falsely abnormal values. The **hook effect** occurs when an extremely high analyte concentration saturates both capture and detection antibodies in a sandwich assay, producing a falsely low or normal reading. Suspect it when the result conflicts with the clinical picture, such as a very high tumour marker with modest symptoms. Diluting the sample and repeating the test usually reveals the true value.",
-   "say": "Immunoassays are quick, but they can return falsely abnormal values. The hook effect happens when an extremely high analyte level saturates both capture and detection antibodies in a sandwich assay, so the reading looks falsely low or normal. Suspect it when the result does not fit the clinical picture. Diluting the sample and repeating the test usually uncovers the true value.",
+   "tx": "**Biotin** binds streptavidin and so it distorts immunoassays that use that pair. A sandwich assay such as TSH reads falsely low because the signal falls. A competitive assay such as free T4 reads falsely high. Those two errors together can imitate Graves disease in a person who is actually euthyroid. Patients should stop biotin for at least 48 hours before the blood is drawn.",
+   "say": "Biotin binds streptavidin and so it distorts immunoassays that use that pair. A sandwich assay such as TSH reads falsely low because the signal falls. A competitive assay such as free T4 reads falsely high. Those two errors together can imitate Graves disease in a person who is actually euthyroid. Patients should stop biotin for at least 48 hours before the blood is drawn.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Assay issue",
-     "Typical clue",
-     "Action"
+     "Assay",
+     "Example",
+     "Biotin effect"
     ],
     "rows": [
      [
-      "Hook effect",
-      "Very high analyte, low reading",
-      "Dilute sample and repeat"
+      "Sandwich",
+      "TSH",
+      "Falsely low"
      ],
      [
-      "Macroprolactin",
-      "Raised prolactin, few symptoms",
-      "Polyethylene glycol precipitation"
+      "Competitive",
+      "Free T4",
+      "Falsely high"
      ],
      [
-      "Heterophile antibodies",
-      "Discordant results across assays",
-      "Use alternative assay"
+      "Action",
+      "Hold biotin",
+      "At least 48 hours"
      ]
     ]
    }
   },
   {
-   "tx": "The **hook effect** occurs when an extremely high analyte concentration saturates both capture and detection antibodies in a sandwich immunoassay, so the signal falls and the result looks falsely normal or low. Serial dilution of the sample reveals it, because the diluted value rises. **Macroprolactin** is a large complex of prolactin with IgG that has low bioactivity, so it causes a raised prolactin without symptoms. Precipitation with polyethylene glycol confirms it.",
-   "say": "The hook effect occurs when an extremely high analyte concentration saturates both antibodies in a sandwich immunoassay, so the result looks falsely low. Serial dilution of the sample reveals it, because the diluted value rises. Macroprolactin is a large complex of prolactin bound to IgG with low bioactivity, so it raises the measured prolactin without symptoms. Polyethylene glycol precipitation confirms it.",
+   "tx": "The **hook effect** is a falsely low result when the analyte is extremely high, classically a giant prolactinoma. Both capture and detection antibodies are saturated, so the sandwich never forms. The true prolactin is unmasked when the sample is diluted in series. **Heterophile antibodies** do the opposite and can falsely raise a sandwich assay by bridging the antibodies without any analyte.",
+   "say": "The hook effect is a falsely low result when the analyte is extremely high, classically a giant prolactinoma. Both capture and detection antibodies are saturated, so the sandwich never forms. The true prolactin is unmasked when the sample is diluted in series. Heterophile antibodies do the opposite and can falsely raise a sandwich assay by bridging the antibodies without any analyte.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prolactinoma-fig1.webp",
+    "alt": "Coronal diagram of a prolactinoma between the cavernous sinuses, under the optic chiasm and pituitary stalk, above the sphenoid sinus.",
+    "caption": "Sellar anatomy of a prolactinoma. The mass sits under the optic chiasm and between the cavernous sinuses. This drawing does not show the hook effect. Dilution, not the picture, unmasks a falsely low prolactin. Credit: StewardMD.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Macroprolactin** is a biologically quiet complex of prolactin and immunoglobulin. The assay counts it, but the patient often has little clinical disease. **Polyethylene glycol** precipitation that leaves a recovery below 40 percent means macroprolactin accounts for most of the measured prolactin. Treatment is not required for the high number alone when symptoms and the monomer fraction are quiet.",
+   "say": "Macroprolactin is a biologically quiet complex of prolactin and immunoglobulin. The assay counts it, but the patient often has little clinical disease. Polyethylene glycol precipitation that leaves a recovery below 40 percent means macroprolactin accounts for most of the measured prolactin. Treatment is not required for the high number alone when symptoms and the monomer fraction are quiet.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Hook effect",
+     "title": "True hyperprolactinaemia",
      "points": [
-      "Very high analyte level",
-      "Falsely low or normal reading",
-      "Dilution gives a higher value"
+      "Monomer stays after polyethylene glycol",
+      "Recovery is well above 40 percent",
+      "Galactorrhoea or hypogonadism is present",
+      "Look for a prolactinoma or a drug cause"
      ]
     },
     "right": {
      "title": "Macroprolactin",
      "points": [
-      "Large prolactin-IgG complex",
-      "Raised prolactin, few symptoms",
-      "PEG precipitation confirms"
+      "Most of the signal precipitates",
+      "Recovery falls below 40 percent",
+      "Symptoms are often absent",
+      "Dopamine agonist treatment is not required for the number"
      ]
     }
    }
   },
   {
-   "tx": "**Heterophile antibodies** are human antibodies that bind the animal immunoglobulins used in assays, forming false bridges between capture and detection reagents. This can produce spuriously high or low results. Discordant values across different platforms are the clue. **LC-MS/MS** measures the analyte by mass and avoids most antibody-based interference, so it is preferred for steroids such as cortisol and aldosterone when accuracy matters.",
-   "say": "Heterophile antibodies are human antibodies that bind the animal immunoglobulins used in assays, forming false bridges between capture and detection reagents. This can produce spuriously high or low results. Discordant values across different platforms are the clue. Liquid chromatography tandem mass spectrometry, known as LC-MS/MS, measures the analyte by mass and avoids most antibody interference, so it is preferred for steroids such as cortisol and aldosterone when accuracy matters.",
+   "tx": "The **insulin tolerance test** is the reference stimulation test for cortisol reserve and for growth hormone reserve. It is adequate only if the glucose falls below 40 mg/dL. It is contraindicated in ischaemic heart disease, seizure disorder, and frail older adults. A doctor must be present, and intravenous glucose must be ready before the insulin is given.",
+   "say": "The insulin tolerance test is the reference stimulation test for cortisol reserve and for growth hormone reserve. It is adequate only if the glucose falls below 40 mg/dL. It is contraindicated in ischaemic heart disease, seizure disorder, and frail older adults. A doctor must be present, and intravenous glucose must be ready before the insulin is given.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Discordant results"
-     },
-     {
-      "id": "b",
-      "label": "Suspect heterophile antibody"
-     },
-     {
-      "id": "c",
-      "label": "Retest on alternative assay"
-     },
-     {
-      "id": "d",
-      "label": "LC-MS/MS for steroids"
-     }
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Rule"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "Adequate stimulus",
+      "Glucose below 40 mg/dL"
      ],
      [
-      "b",
-      "c"
+      "What it tests",
+      "Cortisol and growth hormone"
      ],
      [
-      "c",
-      "d"
+      "Do not use",
+      "Ischaemic heart disease, seizures, frailty"
      ]
     ]
    }
   },
   {
-   "tx": "Dynamic testing uses **stimulation** or **suppression** to probe endocrine reserve. Stimulation tests detect **under-secretion**, such as a short adrenal stimulation test for adrenal insufficiency. Suppression tests detect **autonomous secretion**, such as an overnight low-dose suppression test for Cushing syndrome. **Reference intervals** must match the assay and population, as a single value taken out of context can mislead.",
-   "say": "Dynamic testing uses stimulation or suppression to probe endocrine reserve. Stimulation tests detect under-secretion, such as a short adrenal stimulation test for adrenal insufficiency. Suppression tests detect autonomous secretion, such as an overnight low-dose suppression test for Cushing syndrome. Reference intervals must match the assay and population, because a single value taken out of context can mislead.",
+   "tx": "A peak growth hormone at or below 5 point 1 mcg/L on an adequate insulin tolerance test supports **adult growth hormone deficiency**, using the Endocrine Society cutoff. The glucagon test is the usual alternative when hypoglycaemia is unsafe. Obesity blunts the growth hormone peak, so a borderline result in an obese adult needs that context and is not read as a simple yes.",
+   "say": "A peak growth hormone at or below 5 point 1 mcg/L on an adequate insulin tolerance test supports adult growth hormone deficiency, using the Endocrine Society cutoff. The glucagon test is the usual alternative when hypoglycaemia is unsafe. Obesity blunts the growth hormone peak, so a borderline result in an obese adult needs that context and is not read as a simple yes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Insulin tolerance test",
+     "points": [
+      "Reference test for adult growth hormone deficiency",
+      "Needs glucose below 40 mg/dL",
+      "Peak at or below 5.1 mcg/L supports deficiency",
+      "Unsafe in heart disease or seizures"
+     ]
+    },
+    "right": {
+     "title": "Glucagon test",
+     "points": [
+      "Used when insulin hypoglycaemia is unsafe",
+      "Does not require a glucose below 40 mg/dL",
+      "Obesity can blunt the peak on either test",
+      "Still a stimulation test, not a random level"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The 1 mg overnight **dexamethasone suppression test** is a screen, not a localisation test. A next-morning cortisol of 1 point 8 mcg/dL, which is 50 nmol/L or higher, is an abnormal result. Do not image the pituitary or the adrenals before the biochemical diagnosis of Cushing syndrome is secure. A random afternoon cortisol is not a screening test.",
+   "say": "The 1 mg overnight dexamethasone suppression test is a screen, not a localisation test. A next-morning cortisol of 1 point 8 mcg/dL, which is 50 nmol/L or higher, is an abnormal result. Do not image the pituitary or the adrenals before the biochemical diagnosis of Cushing syndrome is secure. A random afternoon cortisol is not a screening test.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cushing-syndrome-fig2.webp",
+    "alt": "Four causes of Cushing syndrome: exogenous steroid, pituitary adenoma, ectopic ACTH, and adrenal tumour, beside the clinical features.",
+    "caption": "Causes of cortisol excess, which the 1 mg dexamethasone test does not separate. Exogenous steroid, a pituitary adenoma, ectopic ACTH, and an adrenal tumour are drawn as different sources. An abnormal screen is a next-morning cortisol of 1.8 mcg/dL (50 nmol/L) or higher. Localisation comes after that screen. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**Inferior petrosal sinus sampling** separates pituitary Cushing disease from ectopic ACTH secretion. A central to peripheral ACTH ratio of at least 2 before **CRH**, or at least 3 after CRH, supports a pituitary source. It is done only after ACTH-dependent Cushing syndrome is proved. It is not a screening test and it is not used to decide whether Cushing syndrome is present.",
+   "say": "Inferior petrosal sinus sampling separates pituitary Cushing disease from ectopic ACTH secretion. A central to peripheral ACTH ratio of at least 2 before CRH, or at least 3 after CRH, supports a pituitary source. It is done only after ACTH-dependent Cushing syndrome is proved. It is not a screening test and it is not used to decide whether Cushing syndrome is present.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Test type",
-     "Purpose",
-     "Example"
+     "Ratio",
+     "Meaning"
     ],
     "rows": [
      [
-      "Stimulation",
-      "Detects under-secretion",
-      "Short adrenal stimulation test"
+      "Central to peripheral at least 2",
+      "Before CRH, favours pituitary"
      ],
      [
-      "Suppression",
-      "Detects autonomous secretion",
-      "Overnight low-dose suppression test"
+      "Central to peripheral at least 3",
+      "After CRH, favours pituitary"
      ],
      [
-      "Venous sampling",
-      "Localises source",
-      "Adrenal vein sampling"
+      "Prerequisite",
+      "ACTH-dependent Cushing already proved"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenal vein sampling** is a localisation test for primary aldosteronism after the diagnosis is confirmed and surgery is desired. With cosyntropin, a **selectivity index** of at least 5 shows the catheter is in the adrenal vein. A **lateralization index** of at least 4 supports a unilateral source. Sampling is not required when a young adult has a clear unilateral adenoma and a very high aldosterone.",
+   "say": "Adrenal vein sampling is a localisation test for primary aldosteronism after the diagnosis is confirmed and surgery is desired. With cosyntropin, a selectivity index of at least 5 shows the catheter is in the adrenal vein. A lateralization index of at least 4 supports a unilateral source. Sampling is not required when a young adult has a clear unilateral adenoma and a very high aldosterone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Index",
+     "Cutoff with cosyntropin",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Selectivity index",
+      "At least 5",
+      "Catheter is in the adrenal vein"
+     ],
+     [
+      "Lateralization index",
+      "At least 4",
+      "Supports a unilateral source"
      ]
     ]
    }
   }
- ],
- "quiz": [
-  "q_4eb0d856c8d7",
-  "q_1d5d9c556814",
-  "q_4de26e5b12c8"
- ],
- "src": [],
- "refs": [
-  "Endocrine Society Clinical Practice Guidelines on Primary Aldosteronism (Funder and colleagues)",
-  "Endocrine Society Clinical Practice Guidelines on Cushing Syndrome (Nieman and colleagues)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 62
- }
+ ]
 }

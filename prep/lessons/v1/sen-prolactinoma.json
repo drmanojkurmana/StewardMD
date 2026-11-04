@@ -1,0 +1,186 @@
+{
+ "v": 1,
+ "module": "sen-prolactinoma",
+ "title": "Hyperprolactinaemia and prolactinoma",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A **prolactinoma** represents the most common functioning pituitary adenoma encountered in clinical endocrinology. True prolactin-secreting lactotroph adenomas must be distinguished from nonfunctioning sellar macroadenomas causing hyperprolactinaemia through pituitary stalk compression, commonly designated the **stalk effect**. Stalk compression disrupts physiological hypothalamic dopamine transport to normal lactotrophs, typically resulting in modest hyperprolactinaemia with serum prolactin concentrations remaining below 100 to 200 mcg/L.",
+   "say": "A prolactinoma is the most common functioning pituitary adenoma. It must be differentiated from nonfunctioning sellar tumours that cause hyperprolactinaemia via the stalk effect. Stalk compression interrupts dopamine delivery and produces modest prolactin elevations below 100 to 200 mcg/L, whereas true macroprolactinomas cause much higher elevations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prolactinoma-fig1.webp",
+    "alt": "Prolactinoma Sellar Anatomy",
+    "caption": "Sellar MRI demonstrating pituitary prolactinoma and stalk relationship. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "The selective D2 receptor agonist **cabergoline** represents first-line medical therapy for prolactinoma, demonstrating superior efficacy and tolerability over short-acting **bromocriptine**. As an ergot-derived **dopamine agonist**, cabergoline normalizes circulating prolactin concentrations and achieves substantial tumour shrinkage in over 80% to 90% of microadenomas and macroadenomas. Transsphenoidal surgery is reserved for patients refractory to medical management or those experiencing progressive visual compromise from apoplexy.",
+   "say": "Cabergoline is first-line drug therapy for prolactinoma because it normalizes prolactin and shrinks tumours more effectively than bromocriptine. As a potent dopamine agonist, it produces significant tumour reduction in most patients. Neurosurgical resection is reserved for medication intolerance, treatment resistance, or acute visual decline.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-cabergoline.webp",
+    "alt": "Cabergoline Mechanism",
+    "caption": "Hypothalamic-pituitary lactotroph cell showing dopamine agonist cabergoline suppressing prolactin exocytosis. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Clinicians must obtain a surveillance baseline and periodic transthoracic echocardiogram to monitor for cardiac **valvular regurgitation** when **cabergoline** is administered at cumulative high doses. While standard prolactinoma doses of 0.5 to 1.0 mg weekly carry negligible cardiac risk, cumulative weekly doses exceeding 2 mg per week for prolonged periods can stimulate serotonin 5-HT2B receptors on cardiac valvular interstitial cells, producing fibrotic valvular thickening and regurgitation.",
+   "say": "Echocardiographic surveillance is recommended when cabergoline is administered at doses above 2 mg per week for prolonged durations. High cumulative agonist exposure stimulates cardiac serotonin 5-HT2B receptors, which can lead to fibrotic valvular thickening and clinically significant valvular regurgitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cabergoline Regimen",
+     "5-HT2B Receptor Stimulation",
+     "Valvular Fibrosis Risk",
+     "Echocardiographic Monitoring"
+    ],
+    "rows": [
+     [
+      "Standard dose (<2 mg/week)",
+      "Negligible receptor engagement",
+      "Extremely low risk",
+      "Baseline echocardiogram, clinical monitoring"
+     ],
+     [
+      "High dose (>2 mg/week)",
+      "Progressive agonist engagement",
+      "Documented valvulopathy risk",
+      "Serial echocardiography every 12 to 24 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before committing an asymptomatic patient to therapy for moderately raised prolactin, clinicians must exclude **macroprolactin** by precipitating serum with polyethylene glycol. Macroprolactin consists of high-molecular-weight prolactin-IgG autoantibody complexes with minimal in vivo bioactivity. Furthermore, in patients with giant pituitary macroadenomas and unexpectedly mild prolactin elevations, serial serum dilution is mandatory to overcome assay saturation from the high-dose **hook effect**.",
+   "say": "Before treating mildly elevated prolactin, clinicians should precipitate serum with polyethylene glycol to rule out macroprolactin. In giant pituitary macroadenomas presenting with falsely modest prolactin levels, serial sample dilution is essential to eliminate the high-dose hook effect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Macroprolactin Artefact",
+     "points": [
+      "Monomeric prolactin complexed with IgG",
+      "Biologically inactive in vivo",
+      "PEG precipitation recovery <40%",
+      "Requires no dopamine agonist therapy"
+     ]
+    },
+    "right": {
+     "title": "Hook Effect Artefact",
+     "points": [
+      "Extreme monomeric hyperprolactinaemia",
+      "Assay antibodies saturated by excess antigen",
+      "Falsely low or normal reported result",
+      "Corrected by 1:100 serum dilution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In women with a **microprolactinoma**, guidelines advise discontinuing dopamine agonist therapy as soon as **pregnancy** is confirmed, because the risk of clinically significant tumour enlargement during gestation remains below 2% to 3%. Conversely, in macroprolactinoma with optochiasmatic proximity, treatment with **bromocriptine** may be continued throughout gestation due to its extensive established safety profile in pregnancy, monitoring visual fields closely.",
+   "say": "In women with a microprolactinoma, discontinue dopamine agonist therapy once pregnancy is confirmed because gestation-associated tumour expansion is rare. For macroadenomas with chiasmal abutment, bromocriptine can be maintained throughout gestation given its documented fetal safety profile and close visual field monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adenoma Classification",
+     "Gestational Expansion Risk",
+     "Management Strategy",
+     "Visual Field Surveillance"
+    ],
+    "rows": [
+     [
+      "Microprolactinoma (<10 mm)",
+      "Less than 2% to 3%",
+      "Discontinue agonist upon conception",
+      "Assess only if headaches or visual symptoms occur"
+     ],
+     [
+      "Macroprolactinoma (>=10 mm)",
+      "Approximately 15% to 30%",
+      "Continue bromocriptine or close monitoring",
+      "Formal perimetry every trimester"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Second-generation antipsychotics, most notably **risperidone**, and dopamine-blocking antiemetics such as **metoclopramide** frequently induce symptomatic **drug-induced hyperprolactinemia**. By exerting potent D2 receptor antagonism at the median eminence outside the blood-brain barrier, these agents eliminate tonic dopaminergic inhibition. Serum prolactin frequently rises to 100 to 200 mcg/L, causing secondary hypogonadism, amenorrhoea, erectile dysfunction, and galactorrhoea in the absence of a sellar mass.",
+   "say": "Second-generation antipsychotics like risperidone and antiemetics like metoclopramide commonly induce drug-induced hyperprolactinemia through pituitary D2 receptor blockade. Circulating prolactin often reaches 100 to 200 mcg/L, producing symptomatic hypogonadism, amenorrhoea, and galactorrhoea.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Drug-Induced Hyperprolactinemia",
+     "points": [
+      "D2 receptor antagonism at median eminence",
+      "Prolactin level typically 50 to 200 mcg/L",
+      "Normal pituitary anatomy on contrast MRI",
+      "Normalizes within 48 to 72 hours of drug cessation"
+     ]
+    },
+    "right": {
+     "title": "Prolactinoma Secretion",
+     "points": [
+      "Autonomous neoplastic lactotroph secretion",
+      "Prolactin level correlates directly with tumor size",
+      "Macroadenomas typically exhibit prolactin >250 mcg/L",
+      "Requires prolonged dopamine agonist pharmacotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "True **dopamine agonist resistance** is defined as the inability to achieve biochemical prolactin normalization or at least 50% tumour volume reduction despite escalating doses of **cabergoline** up to 2 mg or more per week. Resistant prolactinomas more frequently occur in men, exhibit invasive suprasellar or cavernous sinus expansion, and harbor aggressive histologic features with elevated Ki-67 labeling index, often requiring transsphenoidal debulking, radiation, or temozolomide.",
+   "say": "Dopamine agonist resistance occurs when maximum tolerated doses of cabergoline fail to normalize prolactin or reduce tumour volume by half. Resistant tumours are more common in men and frequently exhibit aggressive cavernous sinus invasion requiring multimodal surgical, radiation, or alkylating chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Agonist Sensitive Prolactinoma",
+     "points": [
+      "Biochemical normalization on standard dose",
+      "Tumour volume regression >=50%",
+      "Preserved lactotroph D2 receptor density",
+      "Excellent long-term control on cabergoline"
+     ]
+    },
+    "right": {
+     "title": "Dopamine Agonist Resistant",
+     "points": [
+      "Persistent hyperprolactinaemia on >=2 mg/week",
+      "Sub-50% shrinkage or disease progression",
+      "D2 receptor down-regulation or low expression",
+      "Requires surgery, stereotactic radiotherapy, or temozolomide"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hyperprolactinaemia typically presents in premenopausal women with spontaneous or expressive **galactorrhea**, oligomenorrhoea, or secondary amenorrhoea. In men, clinical presentation is characteristically insidious, manifesting primarily with hypogonadotrophic **hypogonadism**, decreased libido, erectile dysfunction, oligospermia, and visual field deficits from macroadenoma compression. Prolactin suppresses hypothalamic GnRH pulsatility, leading directly to subnormal luteinizing hormone and follicle-stimulating hormone secretion.",
+   "say": "Hyperprolactinaemia presents in premenopausal women with galactorrhea, oligomenorrhoea, and anovulatory infertility. In men, presentation is characteristically delayed, manifesting as hypogonadotropic hypogonadism, erectile dysfunction, and compressive visual defects from neglected macroadenomas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Demographic",
+     "Primary Endocrine Symptoms",
+     "Sellar Presentation",
+     "Underlying Mechanism"
+    ],
+    "rows": [
+     [
+      "Premenopausal Women",
+      "Galactorrhea, amenorrhoea, infertility",
+      "Commonly microadenomas (<10 mm)",
+      "Suppression of hypothalamic GnRH pulse generator"
+     ],
+     [
+      "Men and Postmenopausal",
+      "Decreased libido, erectile dysfunction",
+      "Commonly macroadenomas (>=10 mm)",
+      "Hypogonadotropic hypogonadism and mass effect"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "sen-hypothyroidism",
+ "subject": "ss-endocrinology",
+ "title": "Hypothyroidism",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Primary hypothyroidism** has a high TSH and a low free T4. **Subclinical hypothyroidism** has a high TSH and a normal free T4. Hashimoto thyroiditis is the usual cause where iodine intake is sufficient, and **TPO antibodies** support that cause. A single slightly high TSH is repeated before a lifelong label is applied.",
+   "say": "Primary hypothyroidism has a high TSH and a low free T4. Subclinical hypothyroidism has a high TSH and a normal free T4. Hashimoto thyroiditis is the usual cause where iodine intake is sufficient, and TPO antibodies support that cause. A single slightly high TSH is repeated before a lifelong label is applied.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypothyroidism-fig2.webp",
+    "alt": "Hypothalamic pituitary thyroid axis with a table: primary hypothyroidism has low free T4 and high TSH, central has low free T4 with low or normal TSH, subclinical has normal free T4 and high TSH.",
+    "caption": "The table matches the laboratory split. Primary hypothyroidism: low free T4 and high TSH. Central hypothyroidism: low free T4 with a low or normal TSH. Subclinical hypothyroidism: normal free T4 and high TSH. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "Full replacement **levothyroxine** in a young adult is about 1 point 6 mcg/kg/day, taken fasting and separated from calcium, iron, and some antacids. In older adults and in known coronary disease, start at 25 to 50 mcg and titrate to the **TSH**. A full replacement dose on day one can provoke angina in a patient with coronary disease.",
+   "say": "Full replacement levothyroxine in a young adult is about 1 point 6 mcg/kg/day, taken fasting and separated from calcium, iron, and some antacids. In older adults and in known coronary disease, start at 25 to 50 mcg and titrate to the TSH. A full replacement dose on day one can provoke angina in a patient with coronary disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Who",
+     "Starting plan"
+    ],
+    "rows": [
+     [
+      "Young adult",
+      "About 1.6 mcg/kg/day"
+     ],
+     [
+      "Older adult or coronary disease",
+      "25 to 50 mcg, then titrate"
+     ],
+     [
+      "Target in primary disease",
+      "TSH in the reference range"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treat **subclinical hypothyroidism** when the **TSH** is 10 mIU/L or higher. Below that, treat if the patient is pregnant, trying to conceive, or clearly symptomatic, especially if TPO antibodies are positive. A TSH that is only slightly high in an older adult is often watched. Repeat the test before you commit the patient to lifelong replacement.",
+   "say": "Treat subclinical hypothyroidism when the TSH is 10 mIU/L or higher. Below that, treat if the patient is pregnant, trying to conceive, or clearly symptomatic, especially if TPO antibodies are positive. A TSH that is only slightly high in an older adult is often watched. Repeat the test before you commit the patient to lifelong replacement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treat",
+     "points": [
+      "TSH at or above 10 mIU/L",
+      "Pregnancy or a plan to conceive",
+      "Clear symptoms with positive TPO antibodies",
+      "A rising TSH on a later sample"
+     ]
+    },
+    "right": {
+     "title": "Often watch",
+     "points": [
+      "TSH only slightly high",
+      "Older adult without symptoms",
+      "No pregnancy plan",
+      "Confirm with a second sample first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Central hypothyroidism** has a low free T4 with a low or inappropriately normal TSH. Titrate levothyroxine to the **free T4**, not the TSH, because the TSH cannot be trusted. Replace cortisol first if hypopituitarism is possible. Starting thyroxine while cortisol is missing can precipitate adrenal crisis.",
+   "say": "Central hypothyroidism has a low free T4 with a low or inappropriately normal TSH. Titrate levothyroxine to the free T4, not the TSH, because the TSH cannot be trusted. Replace cortisol first if hypopituitarism is possible. Starting thyroxine while cortisol is missing can precipitate adrenal crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Low free T4, low or normal TSH",
+      "Central hypothyroidism"
+     ],
+     [
+      "Titrate to",
+      "Free T4, not TSH"
+     ],
+     [
+      "Before thyroxine",
+      "Replace cortisol if the pituitary may have failed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Myxedema coma** is decompensated hypothyroidism with hypothermia, hyponatremia, hypoventilation, and a precipitant such as infection or a sedative. Give intravenous **levothyroxine**, a typical load of 200 to 400 mcg, plus **glucocorticoid** until adrenal insufficiency is excluded. Look for the precipitant. Passive warming is used, and hypoventilation may need support of the airway.",
+   "say": "Myxedema coma is decompensated hypothyroidism with hypothermia, hyponatremia, hypoventilation, and a precipitant such as infection or a sedative. Give intravenous levothyroxine, a typical load of 200 to 400 mcg, plus glucocorticoid until adrenal insufficiency is excluded. Look for the precipitant. Passive warming is used, and hypoventilation may need support of the airway.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myxedema-fig1.webp",
+    "alt": "Myxoedema coma diagram with thyroid atrophy, hypothermia, alveolar hypoventilation, sinus bradycardia, pericardial effusion, and a hyponatraemia label.",
+    "caption": "Decompensated hypothyroidism: thyroid atrophy, severe hypothermia, alveolar hypoventilation, sinus bradycardia, and pericardial effusion. A hyponatraemia label is also present. The drawing is the syndrome, not the intravenous dose. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "In **pregnancy**, increase the **levothyroxine** dose by about 30 percent as soon as conception is suspected, which is two extra tablets a week, and check the TSH about every 4 weeks. Return to the pre-pregnancy dose after delivery. A woman who is already replaced should not wait for the first antenatal visit to take the extra tablets.",
+   "say": "In pregnancy, increase the levothyroxine dose by about 30 percent as soon as conception is suspected, which is two extra tablets a week, and check the TSH about every 4 weeks. Return to the pre-pregnancy dose after delivery. A woman who is already replaced should not wait for the first antenatal visit to take the extra tablets.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "When",
+     "Levothyroxine plan"
+    ],
+    "rows": [
+     [
+      "Conception suspected",
+      "About 30 percent more, two extra tablets a week"
+     ],
+     [
+      "During pregnancy",
+      "TSH about every 4 weeks"
+     ],
+     [
+      "After delivery",
+      "Return to the pre-pregnancy dose"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Levothyroxine** requirements rise with estrogen, with drugs that induce its metabolism such as **rifampin**, **carbamazepine**, and phenytoin, and with malabsorption or **coeliac disease**. A rising TSH on a stable dose should prompt a review of how and when the tablet is taken, and of new medicines. Calcium and iron taken in the same swallow bind the dose.",
+   "say": "Levothyroxine requirements rise with estrogen, with drugs that induce its metabolism such as rifampin, carbamazepine, and phenytoin, and with malabsorption or coeliac disease. A rising TSH on a stable dose should prompt a review of how and when the tablet is taken, and of new medicines. Calcium and iron taken in the same swallow bind the dose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Requirement rises",
+     "points": [
+      "Estrogen, including pregnancy",
+      "Rifampin, carbamazepine, phenytoin",
+      "Coeliac disease and other malabsorption",
+      "Calcium or iron taken with the tablet"
+     ]
+    },
+    "right": {
+     "title": "Requirement falls",
+     "points": [
+      "After delivery",
+      "After the inducing drug is stopped",
+      "After coeliac disease is treated",
+      "If the patient loses weight on a full replacement dose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Do not treat **nonthyroidal illness** with **levothyroxine**. A low T3 in a patient in the intensive care unit is an adaptation, not myxedema, unless the history and the free T4 show true hypothyroidism. Reverse T3 is not required to make that distinction on the ward. Repeat the thyroid tests after the acute illness has settled.",
+   "say": "Do not treat nonthyroidal illness with levothyroxine. A low T3 in a patient in the intensive care unit is an adaptation, not myxedema, unless the history and the free T4 show true hypothyroidism. Reverse T3 is not required to make that distinction on the ward. Repeat the thyroid tests after the acute illness has settled.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nonthyroidal illness",
+     "points": [
+      "Low T3 is common in critical illness",
+      "It is an adaptation, not myxedema",
+      "Levothyroxine is not the treatment",
+      "Repeat tests after recovery"
+     ]
+    },
+    "right": {
+     "title": "True hypothyroidism",
+     "points": [
+      "History of thyroid disease or neck treatment",
+      "Free T4 is low, not only T3",
+      "TSH is high if the disease is primary",
+      "Replacement is indicated"
+     ]
+    }
+   }
+  }
+ ]
+}

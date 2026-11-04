@@ -1,0 +1,198 @@
+{
+ "v": 1,
+ "module": "sen-osteoporosis",
+ "title": "Osteoporosis",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "By World Health Organization criteria on dual-energy X-ray absorptiometry, **osteoporosis** is defined by a bone mineral density **T-score** of **-2.5** standard deviations or lower at the lumbar spine, femoral neck, or total hip in postmenopausal women and men aged **50** years or older. In younger adults, premenopausal women, and children, the **Z-score** is used, where a value of **-2.0** or lower indicates bone mineral density below the expected range for age, demanding an investigation for secondary causes.",
+   "say": "Osteoporosis is defined by a T-score of minus two point five or lower at the spine or hip in postmenopausal women and men aged fifty or older. In younger individuals and children, the Z-score is utilized, where a value at or below minus two point zero signifies bone density below the expected range for age.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/osteoporosis-fig1.webp",
+    "alt": "Osteoporosis Bone and Fractures",
+    "caption": "Trabecular microarchitecture deterioration and fragility fracture sites. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "A T-score between -1.0 and -2.5 defines **osteopenia**. To guide therapeutic decisions in osteopenia, the validated **FRAX** algorithm calculates the 10-year probability of hip fracture and major osteoporotic fracture. Pharmacological therapy is formally indicated when the 10-year hip fracture probability is **3**% or greater, or when the 10-year major osteoporotic fracture probability reaches at least **20**% on FRAX, identifying high-risk individuals who benefit from antiresorptive intervention.",
+   "say": "A T-score between minus one point zero and minus two point five defines osteopenia. The FRAX tool calculates fracture risk, recommending medical therapy when the ten-year probability of hip fracture is three percent or higher, or when the ten-year major osteoporotic fracture risk is twenty percent or greater.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk Metric Category",
+     "Intervention Threshold",
+     "Calculation Determinants",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "Major Osteoporotic Fracture",
+      ">=20% 10-year probability",
+      "Age, sex, BMI, prior fracture, steroid use",
+      "Initiate pharmacological antiresorptive therapy"
+     ],
+     [
+      "Hip Fracture Probability",
+      ">=3% 10-year probability",
+      "Femoral neck bone mineral density, smoking",
+      "Initiate high-potency antiresorptive or anabolic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before initiating osteoporosis therapy, clinicians must evaluate for underlying **secondary osteoporosis**, particularly when an unexpectedly low Z-score is detected. Diagnostic workup screens for primary hyperparathyroidism, thyrotoxicosis, male hypogonadism, subclinical Cushing syndrome, intestinal malabsorption from **coeliac disease**, and multiple **myeloma** via serum protein electrophoresis and free light chains. Identifying and treating secondary disorders is essential before starting lifelong antiresorptives.",
+   "say": "Before treating osteoporosis, clinicians must systematically exclude secondary causes such as hyperparathyroidism, thyrotoxicosis, coeliac disease, Cushing syndrome, hypogonadism, and multiple myeloma. A low Z-score mandates this comprehensive metabolic and haematological search.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Osteoporosis",
+     "points": [
+      "Postmenopausal estrogen deficiency in women",
+      "Age-related senile bone loss in older men",
+      "Normal routine biochemical screening panels",
+      "Managed with standard antiresorptive protocols"
+     ]
+    },
+    "right": {
+     "title": "Secondary Osteoporosis",
+     "points": [
+      "Coeliac disease causing calcium/vitamin D malabsorption",
+      "Multiple myeloma producing osteolytic bone destruction",
+      "Endocrine excess: hyperthyroid, Cushing, hyperparathyroid",
+      "Requires targeted correction of underlying systemic cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Oral bisphosphonates such as weekly **alendronate** (70 mg) and yearly intravenous **zoledronic acid** (**5** mg) represent evidence-based first-line antiresorptive therapy. Oral agents must be taken on an empty stomach with plain water, remaining upright for 30 minutes. While rare at standard osteoporosis doses, long-term suppression of bone remodeling beyond 3 to 5 years can predispose to **atypical femoral fracture** and osteonecrosis of the jaw, which occur far more commonly with oncological dosing.",
+   "say": "Oral alendronate and annual intravenous zoledronic acid five milligrams are first-line antiresorptive drugs. Oral bisphosphonates require fasting ingestion with water, remaining upright. Rare complications like atypical femoral fractures and osteonecrosis of the jaw are far more frequent at high oncological cancer doses than osteoporosis doses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral Alendronate",
+     "points": [
+      "70 mg orally once weekly on empty stomach",
+      "Must take with full glass of plain tap water",
+      "Strictly maintain upright posture for >=30 minutes",
+      "Inhibits osteoclastic farnesyl pyrophosphate synthase"
+     ]
+    },
+    "right": {
+     "title": "Intravenous Zoledronic Acid",
+     "points": [
+      "Annual 5 mg IV infusion over 15 minutes",
+      "Bypasses upper gastrointestinal tract entirely",
+      "Substantially reduces vertebral and hip fractures",
+      "Contraindicated if creatinine clearance <35 mL/min"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The monoclonal antibody **denosumab** administered as **60** mg subcutaneously every **6** months represents an effective antiresorptive option for patients intolerant of bisphosphonates or with renal impairment. However, because denosumab does not incorporate into bone matrix, discontinuing injections without transitioning to a follow-on bisphosphonate triggers a rapid rebound surge in osteoclast activity, causing rapid bone mineral loss and multiple cascading **vertebral fractures**. An exit plan is mandatory before initiation.",
+   "say": "Denosumab administered at sixty milligrams subcutaneously every six months is a potent antiresorptive option. Because denosumab does not bind the bone matrix, stopping it without a follow-on bisphosphonate causes rapid rebound bone loss and catastrophic multiple vertebral fractures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/fracture-complications-early-late-fig1.webp",
+    "alt": "Fracture Complications and Bone Resorption",
+    "caption": "Bone remodeling cycle, osteoclast apoptosis, and structural fracture lines. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "In patients with very high fracture risk or prior vertebral fractures, osteoanabolic agents are preferred initial therapy. Daily subcutaneous **teriparatide** (PTH 1-34) or **abaloparatide** stimulates osteoblastic bone formation and is administered for a lifetime limit of **24** months, followed immediately by an antiresorptive drug to consolidate bone gains. Similarly, the sclerostin inhibitor **romosozumab** is administered for **12** months, followed by an antiresorptive, carrying a cardiovascular precaution in patients with prior myocardial infarction.",
+   "say": "Anabolic agents like teriparatide and abaloparatide stimulate osteoblasts and are given for up to twenty-four months, followed by an antiresorptive to maintain bone gains. Romosozumab is given for twelve months followed by an antiresorptive, but is avoided in patients with recent myocardial infarction or stroke.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anabolic Teriparatide",
+     "points": [
+      "Pulsatile daily subcutaneous 20 mcg injections",
+      "Stimulates new trabecular and cortical bone formation",
+      "Lifetime duration limited to 24 months",
+      "Must be followed by bisphosphonate to retain gains"
+     ]
+    },
+    "right": {
+     "title": "Dual-Action Romosozumab",
+     "points": [
+      "Monthly subcutaneous sclerostin monoclonal antibody",
+      "Increases bone formation while decreasing resorption",
+      "12-month course followed by antiresorptive",
+      "Avoid in patients with MI or stroke within 12 months"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the management of **glucocorticoid-induced osteoporosis**, American College of Rheumatology guidelines recommend proactive treatment for patients initiating **prednisone** at doses of **2.5** mg or higher daily for an anticipated duration of **3** months or longer when fracture risk is moderate or high. High-risk patients should begin oral bisphosphonate therapy or an anabolic agent concurrently with steroid initiation, rather than delaying treatment until after a fragility fracture occurs.",
+   "say": "For glucocorticoid-induced osteoporosis, guidelines recommend proactive treatment when starting prednisone at doses of two point five milligrams or more daily for three months or longer in patients at moderate or high fracture risk. Antiresorptive or anabolic therapy should begin concurrently with glucocorticoid therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Clinical Profile",
+     "Daily Prednisolone Equivalent",
+     "Fracture Risk Level",
+     "Recommended Prophylaxis"
+    ],
+    "rows": [
+     [
+      "Adults >=40 years on steroids",
+      ">=2.5 mg/day for >=3 months",
+      "Moderate or high FRAX probability",
+      "Oral bisphosphonate (alendronate/risedronate)"
+     ],
+     [
+      "Adults with prior fragility fracture",
+      "Any ongoing glucocorticoid dose",
+      "Very high clinical risk",
+      "Bisphosphonate or anabolic teriparatide"
+     ],
+     [
+      "Younger adults (<40 years)",
+      ">=5 mg/day for >=3 months",
+      "History of prior osteoporotic fracture",
+      "Initiate antiresorptive treatment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adequate nutritional intake of elemental **calcium** at approximately **1000** to **1200** mg daily from dietary sources plus supplements, alongside the correction of **vitamin D** deficiency (targeting serum 25-hydroxyvitamin D >=30 ng/mL), constitutes the indispensable physiological foundation of every osteoporosis regimen. However, clinicians must recognize that calcium and vitamin D supplementation alone is insufficient to treat established osteoporosis with existing fragility fractures, which mandates prescription pharmacotherapy.",
+   "say": "Adequate daily calcium intake of one thousand to twelve hundred milligrams combined with vitamin D repletion forms the foundation of all osteoporosis regimens. However, calcium and vitamin D alone are insufficient to treat established osteoporosis with fractures, requiring prescription antiresorptive or anabolic therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nutritional Component",
+     "Recommended Daily Intake",
+     "Target Serum Concentration",
+     "Clinical Role in Regimens"
+    ],
+    "rows": [
+     [
+      "Elemental Calcium",
+      "1000 to 1200 mg/day (diet + supplements)",
+      "Normal ionized calcium range",
+      "Essential substrate for mineralization"
+     ],
+     [
+      "Dietary Vitamin D3",
+      "800 to 2000 IU/day cholecalciferol",
+      "25-OH Vitamin D >=30 ng/mL",
+      "Optimizes intestinal calcium absorption"
+     ],
+     [
+      "Prescription Drugs",
+      "Bisphosphonates / Anabolic therapy",
+      "Normal bone turnover markers",
+      "Directly reduces fragility fracture risk"
+     ]
+    ]
+   }
+  }
+ ]
+}
