@@ -430,6 +430,15 @@
   function webVoice() {
     try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
   }
+  var voiceIx = null;   // the chosen native voice index (-1: system default), read once
+  function nativeVoice(P) {
+    if (voiceIx !== null) return Promise.resolve(voiceIx);
+    if (!P.getSupportedVoices) { voiceIx = -1; return Promise.resolve(-1); }
+    return P.getSupportedVoices().then(function (r) { voiceIx = bestVoice(r && r.voices); return voiceIx; }, function () { voiceIx = -1; return -1; });
+  }
+  function webVoice() {
+    try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoice(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; }
+  }
   function speak(text, rate, done) {
     stopVoice();
     var tok = ++L.tok, chunks = sayChunks(text), n = 0;
