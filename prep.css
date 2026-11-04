@@ -1916,6 +1916,17 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 .pn-root .pn-menu .pn-ib:nth-child(4) { animation-delay: 120ms; }
 @media (prefers-reduced-motion: reduce) { .pn-root .pn-menu, .pn-root .pn-menu .pn-ib { animation: none; } }
 
+/* Tables: tightened to fit when they nearly do; otherwise they scroll, fade the edge that has more, and nudge once. */
+.pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-ovf { --pn-fl: 0px; --pn-fr: 0px; -webkit-mask-image: linear-gradient(90deg, transparent 0, black var(--pn-fl), black calc(100% - var(--pn-fr)), transparent 100%); mask-image: linear-gradient(90deg, transparent 0, black var(--pn-fl), black calc(100% - var(--pn-fr)), transparent 100%); }
+.pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-more-l { --pn-fl: 26px; }
+.pn-root :is(.pn-vtbl, .pn-xt, .pn-pearl-tablewrap).pn-more-r { --pn-fr: 34px; }
+.pn-root .pn-xt.pn-tight table { font-size: 13.5px; }
+.pn-root .pn-xt.pn-tight th, .pn-root .pn-xt.pn-tight td { min-width: 0; padding: 8px 8px; }
+.pn-root .pn-vtbl.pn-tight table { font-size: 13px; }
+.pn-root .pn-vtbl.pn-tight th, .pn-root .pn-vtbl.pn-tight td { padding: 8px 8px; }
+.pn-root .pn-vtbl.pn-tight tbody th { min-width: 0; }
+.pn-root .pn-pearl-tablewrap.pn-tight :is(th, td) { padding-inline: 8px; min-width: 0; }
+
 /* ---- Why option chips (free stored explanation) ---- */
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-why-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }

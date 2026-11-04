@@ -1468,6 +1468,53 @@
     lessonZoomToViewer();
     try { if (G.PREP_TIDE) G.PREP_TIDE.sync(root); } catch (e) {}
     try { if (G.PREP_NAV) G.PREP_NAV.sync(root); } catch (e) {}   // the floating tab bar (prep-nav.js)
+    try { tableFit(root); } catch (e) {}
+  }
+  /* Tables (lesson steps, explanations): one that nearly fits is tightened until it does; one that is really wider
+     scrolls sideways, fades the edge that has more, and nudges once when first on screen so nobody has to guess. */
+  function tableFit(scope) {
+    var ws = scope.querySelectorAll(".pn-vtbl, .pn-xt, .pn-pearl-tablewrap");
+    for (var i = 0; i < ws.length; i++) tableOne(ws[i]);
+  }
+  function tableEdges(w) {
+    var max = w.scrollWidth - w.clientWidth;
+    w.classList.toggle("pn-more-l", w.scrollLeft > 2);
+    w.classList.toggle("pn-more-r", w.scrollLeft < max - 2);
+  }
+  function tableOne(w) {
+    var cw = w.clientWidth;
+    if (!cw) return;
+    w.classList.remove("pn-tight", "pn-ovf");
+    if (w.scrollWidth - cw > 1) { w.classList.add("pn-tight"); if (w.scrollWidth - cw > 1) w.classList.remove("pn-tight"); }
+    if (w.scrollWidth - cw <= 1) { w.classList.remove("pn-more-l", "pn-more-r"); return; }
+    w.classList.add("pn-ovf");
+    tableEdges(w);
+    if (!w.__pnT) {
+      w.__pnT = { stop: false, done: false };
+      w.addEventListener("scroll", function () { tableEdges(w); }, { passive: true });
+      w.addEventListener("pointerdown", function () { w.__pnT.stop = true; }, { passive: true });
+    }
+    var t = w.__pnT;
+    if (t.done || reducedMo()) return;
+    var go = function () {
+      if (t.done || t.stop || w.scrollLeft > 0) return;
+      t.done = true;
+      var dist = Math.min(44, w.scrollWidth - w.clientWidth), t0 = null;
+      var step = function (now) {
+        if (t.stop) return;
+        if (t0 === null) t0 = now;
+        var p = Math.min(1, (now - t0) / 1100);
+        w.scrollLeft = dist * Math.sin(Math.PI * p) * (1 - 0.25 * p);
+        if (p < 1) G.requestAnimationFrame(step); else w.scrollLeft = 0;
+      };
+      G.requestAnimationFrame(step);
+    };
+    if (G.IntersectionObserver) {
+      var io = new G.IntersectionObserver(function (es) {
+        if (es[0] && es[0].isIntersecting && es[0].intersectionRatio >= 0.6) { io.disconnect(); G.setTimeout(go, 350); }
+      }, { threshold: [0.6] });
+      io.observe(w);
+    } else G.setTimeout(go, 600);
   }
   function reducedMo() { try { return G.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) { return false; } }
   // A screen that fills in after its paint (a list read from storage) is not yet tall enough for the kept position:
@@ -4568,6 +4615,6 @@
 
   var API_OBJ = { open: open, close: close, back: back, loadItems: function (subject, module) { return loadModule(subject, module); }, fixesFor: fixesFor,
     // After an editor saves or reverts a fix on this phone: forget the cached index and the loaded modules so the next open shows it.
-    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
+    refreshFixes: function () { var s = load(); delete s.fxix; save(); Object.keys(st.mem).forEach(function (k) { if (k.indexOf("mod:") === 0 || k.indexOf("fx:") === 0) delete st.mem[k]; }); }, isOpen: function () { return st.open; }, _pure: PURE, _tableFit: tableFit, _st: st, _host: HOST, openCreditSheet: openCreditSheet, closeCreditSheet: closeCreditSheet, renderImageCredits: renderImageCredits };
   G.PREP = API_OBJ;
 })(typeof window !== "undefined" ? window : this);
