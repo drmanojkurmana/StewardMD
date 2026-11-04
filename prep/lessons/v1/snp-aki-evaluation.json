@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "snp-aki-evaluation",
+  "subject": "ss-nephrology",
+  "title": "AKI Definition, Staging and Evaluation",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**KDIGO** defines **acute kidney injury** by an absolute rise in **serum creatinine** of at least **0.3** mg/dL within **48** hours, a rise of at least **1.5** times baseline within **7** days, or a **urine volume** under **0.5** mL/kg/h for **6** consecutive hours.",
+      "say": "KDIGO defines acute kidney injury by an absolute rise in serum creatinine of at least 0 point 3 mg/dL within 48 hours, a rise of at least 1 point 5 times baseline within 7 days, or a urine volume under 0 point 5 mL/kg/h for 6 consecutive hours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aki-fig1.webp",
+        "alt": "Prerenal hypoperfusion, intrinsic tubular injury, and obstruction as the three sites of acute kidney injury.",
+        "caption": "Prerenal, intrinsic, and postrenal acute kidney injury. The KDIGO creatinine and urine rules decide which patients enter this differential. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**KDIGO Stage 3** criteria comprise a **3.0**-fold increase in serum creatinine from baseline, a level reaching at least **4.0** mg/dL with an acute rise of at least **0.5** mg/dL, initiation of **kidney replacement therapy**, or complete **anuria** for at least **12** hours.",
+      "say": "KDIGO Stage 3 criteria include a 3 point 0-fold increase in serum creatinine from baseline, a level reaching at least 4 point 0 mg/dL with an acute rise of at least 0 point 5 mg/dL, initiation of kidney replacement therapy, or complete anuria for at least 12 hours.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "KDIGO Stage",
+          "Serum Creatinine Criteria",
+          "Urine Output Criteria"
+        ],
+        "rows": [
+          [
+            "Stage 1",
+            "Rise >= 0.3 mg/dL or 1.5 to 1.9 times",
+            "< 0.5 mL/kg/h for 6 to 12 hours"
+          ],
+          [
+            "Stage 2",
+            "2.0 to 2.9 times baseline",
+            "< 0.5 mL/kg/h for >= 12 hours"
+          ],
+          [
+            "Stage 3",
+            ">= 3.0 times, >= 4.0 mg/dL, or KRT",
+            "< 0.3 mL/kg/h for >= 24h or anuria >= 12h"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fractional excretion of sodium**, abbreviated as **FENa**, evaluates tubular sodium handling capacity. Values below **1%** classically denote **prerenal azotemia**, though FENa may rise above **1%** when patients receive concurrent diuretic therapy or have baseline chronic kidney disease that impairs acute tubular sodium retention.",
+      "say": "Fractional excretion of sodium, abbreviated as FENa, evaluates tubular sodium handling capacity. Values below 1% classically denote prerenal azotemia, though FENa may rise above 1% when patients receive concurrent diuretic therapy or have baseline chronic kidney disease that impairs acute tubular sodium retention.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aki-fig2.webp",
+        "alt": "Tubular epithelial sloughing with granular cast formation in acute tubular necrosis.",
+        "caption": "Sloughed tubular cells and granular casts of acute tubular necrosis, the pattern in which fractional excretion of sodium is usually above 1 percent. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Fractional excretion of urea**, or **FEUrea**, calculated as urinary urea times plasma creatinine divided by plasma urea times urine creatinine multiplied by **100**, reliably differentiates **prerenal azotemia** from tubular necrosis. A value below **35%** confirms prerenal pathophysiology despite diuretic use.",
+      "say": "Fractional excretion of urea, or FEUrea, calculated as urinary urea times plasma creatinine divided by plasma urea times urine creatinine multiplied by 100, reliably differentiates prerenal azotemia from tubular necrosis. A value below 35% confirms prerenal pathophysiology despite diuretic use.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prerenal Azotemia",
+          "points": [
+            "FENa (no diuretics): Under 1%",
+            "FEUrea (with diuretics): Under 35%",
+            "Urine osmolality: Concentrated > 500 mOsm/kg",
+            "Urine sediment: Hyaline casts and normal cells"
+          ]
+        },
+        "right": {
+          "title": "Acute Tubular Necrosis",
+          "points": [
+            "FENa (intrinsic damage): Exceeds 2%",
+            "FEUrea: Exceeds 50%",
+            "Urine osmolality: Isosthenuria 280 to 320 mOsm/kg",
+            "Urine sediment: Muddy brown granular casts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Urinary concentrating indices provide key diagnostic distinction. Intact tubular function in prerenal azotemia produces a **urine osmolality** exceeding **500** mOsm/kg and specific gravity above **1.020**, with urine-to-plasma creatinine over **40**. In acute tubular necrosis, impaired concentration yields **isosthenuria** between **280** and **320** mOsm/kg and ratios below **20**.",
+      "say": "Urinary concentrating indices provide key diagnostic distinction. Intact tubular function in prerenal azotemia produces a urine osmolality exceeding 500 mOsm/kg and specific gravity above 1 point 020, with urine-to-plasma creatinine over 40. In acute tubular necrosis, impaired concentration yields isosthenuria between 280 and 320 mOsm/kg and ratios below 20.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Parameter",
+          "Prerenal Azotemia",
+          "Acute Tubular Necrosis"
+        ],
+        "rows": [
+          [
+            "Urine osmolality",
+            "> 500 mOsm/kg",
+            "280 to 320 mOsm/kg (isosthenuric)"
+          ],
+          [
+            "Urine/plasma creatinine",
+            "> 40",
+            "< 20"
+          ],
+          [
+            "Specific gravity",
+            "> 1.020",
+            "< 1.010"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **furosemide stress test**, or **FST**, assesses functional tubular reserve. Clinicians administer **1.0** mg/kg IV furosemide in diuretic-naive patients or **1.5** mg/kg in prior users; a cumulative **urine output** under **200** mL within **2** hours strongly predicts progression to severe stage **3** AKI.",
+      "say": "The furosemide stress test, or FST, assesses functional tubular reserve. Clinicians administer 1 point 0 mg/kg IV furosemide in diuretic-naive patients or 1 point 5 mg/kg in prior users; a cumulative urine output under 200 mL within 2 hours strongly predicts progression to severe stage 3 AKI.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "f1",
+            "label": "Administer IV furosemide"
+          },
+          {
+            "id": "f2",
+            "label": "Measure urine output at 2h"
+          },
+          {
+            "id": "f3",
+            "label": "< 200 mL predicts Stage 3 AKI"
+          }
+        ],
+        "edges": [
+          [
+            "f1",
+            "f2",
+            "1.0 or 1.5 mg/kg bolus"
+          ],
+          [
+            "f2",
+            "f3",
+            "Failed stress test response"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute kidney injury lasting beyond **7** days without complete functional recovery is categorized formally as **acute kidney disease**, abbreviated as **AKD**. When renal functional impairment and structural injury persist beyond **90** days, the condition formally transitions into established **chronic kidney disease** requiring long-term staging and follow-up.",
+      "say": "Acute kidney injury lasting beyond 7 days without complete functional recovery is categorized formally as acute kidney disease, abbreviated as AKD. When renal functional impairment and structural injury persist beyond 90 days, the condition formally transitions into established chronic kidney disease requiring long-term staging and follow-up.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Acute Kidney Injury: Day 1 to 7"
+          },
+          {
+            "id": "t2",
+            "label": "Acute Kidney Disease: Day 7 to 90"
+          },
+          {
+            "id": "t3",
+            "label": "Chronic Kidney Disease: > 90 Days"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "Persistent impairment > 7 days"
+          ],
+          [
+            "t2",
+            "t3",
+            "Persistent impairment > 90 days"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Subclinical AKI** represents intrinsic tubular damage identified by **biomarker** elevation, including **NGAL**, KIM-1, and **TIMP-2**, occurring in the complete absence of changes in serum creatinine or urine output. Despite maintaining normal creatinine, affected patients experience significantly increased short-term and long-term in-hospital mortality.",
+      "say": "Subclinical AKI represents intrinsic tubular damage identified by biomarker elevation, including NGAL, KIM-1, and TIMP-2, occurring in the complete absence of changes in serum creatinine or urine output. Despite maintaining normal creatinine, affected patients experience significantly increased short-term and long-term in-hospital mortality.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "Serum Creatinine",
+          "Injury Biomarkers (NGAL/TIMP-2)"
+        ],
+        "rows": [
+          [
+            "Normal renal status",
+            "Normal baseline",
+            "Negative / undetectable"
+          ],
+          [
+            "Subclinical AKI",
+            "Normal baseline",
+            "Elevated (positive damage)"
+          ],
+          [
+            "Overt clinical AKI",
+            "Elevated (KDIGO stage)",
+            "Elevated (positive damage)"
+          ]
+        ]
+      }
+    }
+  ]
+}

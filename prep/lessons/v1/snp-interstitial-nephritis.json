@@ -1,0 +1,203 @@
+{
+  "v": 1,
+  "module": "snp-interstitial-nephritis",
+  "subject": "ss-nephrology",
+  "title": "Acute and Chronic Interstitial Nephritis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Drug-induced **acute interstitial nephritis**, abbreviated as **AIN**, is an immune-mediated hypersensitivity reaction triggered most frequently by **proton pump inhibitors**, beta-lactam antibiotics, fluoroquinolones, sulfonamides, and **NSAIDs**, causing acute renal functional decline. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "say": "Drug-induced acute interstitial nephritis, abbreviated as AIN, is an immune-mediated hypersensitivity reaction triggered most frequently by proton pump inhibitors, beta-lactam antibiotics, fluoroquinolones, sulfonamides, and NSAIDs, causing acute renal functional decline. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tubulointerstitial-disease-fig1.webp",
+        "alt": "Kidney biopsy of acute interstitial nephritis with interstitial inflammation and tubulitis, glomeruli spared.",
+        "caption": "Interstitial inflammation and tubulitis with spared glomeruli, the biopsy of drug-induced acute interstitial nephritis. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "The classical **allergic triad** of fever, maculopapular rash, and peripheral **eosinophilia** is present in fewer than **10%** of patients with drug-induced **AIN**. Because clinical signs are frequently subtle, definitive diagnosis requires confirmation by percutaneous **kidney biopsy**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "The classical allergic triad of fever, maculopapular rash, and peripheral eosinophilia is present in fewer than 10% of patients with drug-induced AIN. Because clinical signs are frequently subtle, definitive diagnosis requires confirmation by percutaneous kidney biopsy. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Sensitivity in Drug AIN",
+          "Diagnostic Utility"
+        ],
+        "rows": [
+          [
+            "Classic allergic triad",
+            "Present in < 10% of cases",
+            "Poor sensitivity; absence never excludes AIN"
+          ],
+          [
+            "Sterile pyuria / WBC casts",
+            "Present in 50% to 70% of cases",
+            "Suggests active tubulointerstitial inflammation"
+          ],
+          [
+            "Percutaneous renal biopsy",
+            "Gold standard (> 95% definitive)",
+            "Confirms tubulitis and guides steroid timing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Histopathological examination in acute interstitial nephritis demonstrates prominent **interstitial edema**, dense infiltration by lymphocytes and macrophages, interspersed **eosinophils**, and active **tubulitis** characterized by inflammatory cells crossing tubular basement membranes. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "say": "Histopathological examination in acute interstitial nephritis demonstrates prominent interstitial edema, dense infiltration by lymphocytes and macrophages, interspersed eosinophils, and active tubulitis characterized by inflammatory cells crossing tubular basement membranes. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring. Careful ongoing monitoring ensures optimal patient outcomes and prevents secondary complications.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Phase (AIN)",
+          "points": [
+            "Interstitial changes: Marked interstitial edema",
+            "Infiltrate: T lymphocytes, monocytes, eosinophils",
+            "Tubular injury: Active tubulitis with basement membrane crossing",
+            "Reversibility: Highly reversible with prompt therapy"
+          ]
+        },
+        "right": {
+          "title": "Chronic Phase (CIN)",
+          "points": [
+            "Interstitial changes: Extensive collagenous fibrosis",
+            "Infiltrate: Sparse mononuclear inflammatory cells",
+            "Tubular injury: Widespread tubular atrophy and thyroidization",
+            "Reversibility: Irreversible permanent nephron loss"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Early oral **corticosteroid** therapy with **prednisone** at **1** mg/kg/day for **2** to **3** weeks followed by a **4**- to **6**-week taper, initiated within **7** to **14** days of offending drug cessation, significantly accelerates renal recovery and suppresses irreversible **interstitial fibrosis**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Early oral corticosteroid therapy with prednisone at 1 mg/kg/day for 2 to 3 weeks followed by a 4- to 6-week taper, initiated within 7 to 14 days of offending drug cessation, significantly accelerates renal recovery and suppresses irreversible interstitial fibrosis. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Discontinue culprit medication immediately"
+          },
+          {
+            "id": "t2",
+            "label": "Prednisone 1 mg/kg/day within 7 to 14 days"
+          },
+          {
+            "id": "t3",
+            "label": "Taper over 4 to 6 weeks to prevent fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "No recovery at 5 to 7 days"
+          ],
+          [
+            "t2",
+            "t3",
+            "Rapid functional eGFR recovery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**NSAID-induced** interstitial nephritis characteristically combines interstitial inflammatory infiltration with heavy **nephrotic-range proteinuria**. Renal biopsy reveals marked podocyte foot process effacement identical to **minimal change** disease, mediated by cyclooxygenase inhibition shunting arachidonate to leukotrienes. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "NSAID-induced interstitial nephritis characteristically combines interstitial inflammatory infiltration with heavy nephrotic-range proteinuria. Renal biopsy reveals marked podocyte foot process effacement identical to minimal change disease, mediated by cyclooxygenase inhibition shunting arachidonate to leukotrienes. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard Drug AIN (PPI / Antibiotics)",
+          "points": [
+            "Proteinuria level: Sub-nephrotic tubular proteinuria < 1 g/day",
+            "Glomerular structure: Completely normal podocyte foot processes",
+            "Allergic features: Eosinophils and mild systemic signs",
+            "Renal recovery: Rapid upon drug withdrawal and steroids"
+          ]
+        },
+        "right": {
+          "title": "NSAID-Induced AIN",
+          "points": [
+            "Proteinuria level: Heavy nephrotic-range proteinuria > 3.5 g/day",
+            "Glomerular structure: Diffuse podocyte foot process effacement",
+            "Pathophysiology: Dual interstitial nephritis and minimal change lesion",
+            "Renal recovery: Prolonged recovery requiring extended steroid taper"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**IgG4-related** tubulointerstitial nephritis presents with dense plasma cell infiltration containing greater than **10** **IgG4-positive plasma cells** per high-power field, characteristic **storiform fibrosis**, and elevated serum IgG4, frequently accompanied by autoimmune pancreatitis. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "IgG4-related tubulointerstitial nephritis presents with dense plasma cell infiltration containing greater than 10 IgG4-positive plasma cells per high-power field, characteristic storiform fibrosis, and elevated serum IgG4, frequently accompanied by autoimmune pancreatitis. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Domain",
+          "Consensus Biopsy Finding",
+          "Therapeutic Response"
+        ],
+        "rows": [
+          [
+            "Histopathology",
+            "Dense lymphoplasmacytic infiltrate with > 10 IgG4+ cells/HPF",
+            "Dramatic response to systemic corticosteroids"
+          ],
+          [
+            "Tissue architecture",
+            "Storiform cartwheel collagenous fibrosis",
+            "Can progress to irreversible renal atrophy if untreated"
+          ],
+          [
+            "Serology & imaging",
+            "Elevated serum IgG4 and bilateral swollen kidneys",
+            "Normalizes in parallel with disease remission"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tubulointerstitial nephritis and uveitis**, designated as **TINU syndrome**, predominantly affects adolescent females. Patients present with acute interstitial nephritis, elevated urinary **beta-2 microglobulin**, and painful bilateral **anterior uveitis**, responding favorably to systemic corticosteroids. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Tubulointerstitial nephritis and uveitis, designated as TINU syndrome, predominantly affects adolescent females. Patients present with acute interstitial nephritis, elevated urinary beta-2 microglobulin, and painful bilateral anterior uveitis, responding favorably to systemic corticosteroids. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tubulointerstitial-nephritis-uveitis-fig1.webp",
+        "alt": "Illustration of anterior chamber eye inflammation paired with tubulointerstitial nephritis.",
+        "caption": "Bilateral anterior uveitis and acute tubulointerstitial nephritis in TINU syndrome. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "**Balkan endemic nephropathy** and Chinese herb nephropathy are caused by chronic ingestion of **aristolochic acid**. Biopsy shows extensive **hypocellular interstitial fibrosis** and marked urothelial atypia, carrying an extraordinarily high risk of **upper tract urothelial carcinoma**. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "say": "Balkan endemic nephropathy and Chinese herb nephropathy are caused by chronic ingestion of aristolochic acid. Biopsy shows extensive hypocellular interstitial fibrosis and marked urothelial atypia, carrying an extraordinarily high risk of upper tract urothelial carcinoma. Thorough clinical assessment and laboratory correlation remain vital for accurate diagnosis and patient monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathologic Parameter",
+          "Aristolochic Acid Nephropathy",
+          "Clinical Consequence"
+        ],
+        "rows": [
+          [
+            "Renal biopsy",
+            "Acellular hypocellular interstitial fibrosis",
+            "Progressive shrinkage of bilateral kidneys"
+          ],
+          [
+            "Tubular changes",
+            "Marked tubular atrophy without cellular inflammation",
+            "Silent progression to end-stage kidney disease"
+          ],
+          [
+            "Malignancy risk",
+            "Over 40% develop upper tract urothelial cancer",
+            "Mandates regular bilateral ureteroscopic surveillance"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,121 +1,203 @@
 {
- "v": 1,
- "module": "snp-haemodialysis-complications",
- "subject": "ss-nephrology",
- "title": "Complications of haemodialysis: intradialytic and acute complications",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Dialysis disequilibrium syndrome occurs when urea and other solutes are removed faster from blood than from brain. The brain osmolality stays high, so water shifts in and causes cerebral oedema. It typically appears during or just after the first sessions, with **headache**, nausea, restlessness, confusion and, in severe cases, seizures. Prevention is the key exam point: use short, gentle initial sessions, low blood flow, and a higher dialysate sodium. Mannitol or hypertonic saline are reserved for refractory cases.",
-   "say": "Dialysis disequilibrium syndrome happens when urea and other solutes leave the blood faster than they leave the brain. The brain stays relatively hyperosmolar, so water moves in and causes cerebral oedema. It usually appears during or just after the first sessions, with headache, nausea, restlessness, confusion and sometimes seizures. Prevention is the key exam point: use short, gentle initial sessions, low blood flow and a higher dialysate sodium. Mannitol or hypertonic saline are reserved for refractory cases.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Dialysis disequilibrium syndrome"
-    ],
-    "rows": [
-     [
-      "Timing",
-      "First or early sessions"
-     ],
-     [
-      "Key symptom",
-      "Headache and confusion"
-     ],
-     [
-      "Main cause",
-      "Rapid urea removal"
-     ],
-     [
-      "First step",
-      "Modify prescription"
-     ],
-     [
-      "Refractory option",
-      "Mannitol or hypertonic saline"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Intradialytic hypotension is the most common acute complication. Fluid removal beyond the refilling capacity of the vascular bed drops blood pressure. A **nadir systolic pressure below 90 mm Hg** is independently linked to higher mortality. Management includes reducing ultrafiltration, cooling the dialysate, and reviewing antihypertensives. Muscle cramps, often during late ultrafiltration, respond to hypertonic saline or dextrose and to reducing ultrafiltration, not to loop diuretics.",
-   "say": "Intradialytic hypotension is the most common acute complication. Fluid removal faster than the vascular bed can refill drops blood pressure. A nadir systolic pressure below 90 mm Hg is independently linked to higher mortality. Management includes reducing ultrafiltration, cooling the dialysate and reviewing antihypertensive drugs. Muscle cramps, often during late ultrafiltration, respond to hypertonic saline or dextrose, not to loop diuretics.",
-   "vis": null
-  },
-  {
-   "tx": "**Air embolism** most often enters through the **venous line** or a disconnected circuit. Clues include sudden breathlessness, chest pain, falling blood pressure and a drop in **end-tidal CO2**. Immediately stop the pump, clamp the line and give **high-flow oxygen**. Position the patient in the **left lateral decubitus Trendelenburg** posture so air settles in the right atrial apex, away from the pulmonary outflow. **Transoesophageal echocardiography** is the most sensitive confirmation test.",
-   "say": "Air embolism most often enters through the venous line or a disconnected circuit. Clues include sudden breathlessness, chest pain, falling blood pressure and a drop in end-tidal CO2. Immediately stop the pump, clamp the line and give high-flow oxygen. Position the patient in the left lateral decubitus Trendelenburg posture so air settles in the right atrial apex, away from the pulmonary outflow. Transoesophageal echocardiography is the most sensitive confirmation test.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Stop pump and clamp line"
-     },
-     {
-      "id": "b",
-      "label": "High-flow oxygen"
-     },
-     {
-      "id": "c",
-      "label": "Left lateral Trendelenburg"
-     },
-     {
-      "id": "d",
-      "label": "Support and monitor"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Haemolysis during dialysis classically produces a dark, port-wine venous line and pink plasma after centrifugation. Typical causes include hypotonic or contaminated dialysate, overheating and toxic chemicals such as chloramines. Hepatitis B remains a key infection risk, so **HBsAg-positive patients** should be isolated and given dedicated machines. Long-term amyloid deposits built from **beta-2 microglobulin** cause carpal tunnel syndrome and subchondral cysts. Biopsy with Congo red staining confirms the diagnosis.",
-   "say": "Haemolysis during dialysis gives a dark, port-wine venous line and pink plasma after centrifugation. Typical causes include hypotonic or contaminated dialysate, overheating and toxic chemicals such as chloramines. Hepatitis B remains a key infection risk, so patients who are HBsAg positive, meaning hepatitis B surface antigen positive, should be isolated and given dedicated machines. Long-term dialysis-related amyloidosis from beta-2 microglobulin causes carpal tunnel syndrome and subchondral cysts. Biopsy with Congo red staining confirms the diagnosis.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/snp-haemodialysis-complications-fig1.webp",
-    "alt": "Diagram showing dark, port-wine blood in a dialysis venous line and pink plasma in a centrifuged blood sample, indicating haemolysis.",
-    "caption": "Haemolysis: port-wine venous line and pink plasma",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_078729d180f3",
-  "q_bb792cf546a4",
-  "q_f76a116462c2"
- ],
- "src": [],
- "refs": [
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 43
- }
+  "v": 1,
+  "module": "snp-haemodialysis-complications",
+  "subject": "ss-nephrology",
+  "title": "Complications of Haemodialysis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Intradialytic hypotension**, abbreviated as **IDH**, defined by a **systolic blood pressure** drop of at least **20** mmHg or mean arterial pressure decline of at least **10** mmHg with symptoms, occurs in **15%** to **20%** of maintenance hemodialysis sessions. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Intradialytic hypotension, abbreviated as IDH, defined by a systolic blood pressure drop of at least 20 mmHg or mean arterial pressure decline of at least 10 mmHg with symptoms, occurs in 15% to 20% of maintenance hemodialysis sessions. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/snp-haemodialysis-complications-fig1.webp",
+        "alt": "Clinical diagram illustrating hemodynamic instability and hypotension during hemodialysis.",
+        "caption": "Intradialytic hypotension pathophysiology and hemodynamic shifts. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "An excessive **Ultrafiltration rate**, or **UFR**, exceeding **13** mL/kg/h independently induces subclinical **myocardial stunning**, transient cerebral ischemia, and mesenteric hypoperfusion, accelerating cumulative cardiovascular mortality in maintenance hemodialysis patients. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "say": "An excessive Ultrafiltration rate, or UFR, exceeding 13 mL/kg/h independently induces subclinical myocardial stunning, transient cerebral ischemia, and mesenteric hypoperfusion, accelerating cumulative cardiovascular mortality in maintenance hemodialysis patients. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients. Structured clinical management and regular follow-up help guide therapeutic optimization and prevent disease complications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "UFR Threshold",
+          "Organ Perfusion Consequence",
+          "Clinical Strategy"
+        ],
+        "rows": [
+          [
+            "UFR <= 10 mL/kg/h",
+            "Preserved coronary and cerebral perfusion",
+            "Standard safe ultrafiltration target"
+          ],
+          [
+            "UFR 10 to 13 mL/kg/h",
+            "Mild transient myocardial strain",
+            "Monitor intradialytic blood pressure closely"
+          ],
+          [
+            "UFR > 13 mL/kg/h",
+            "Recurrent myocardial stunning and stunning",
+            "Extend treatment duration or add ultrafiltration sessions"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dialysis disequilibrium syndrome**, or **DDS**, is a neurological emergency during initial dialysis in patients with severe azotemia and BUN exceeding **150** mg/dL. It is driven by **reverse osmotic** fluid shifts precipitating acute **cerebral edema**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Dialysis disequilibrium syndrome, or DDS, is a neurological emergency during initial dialysis in patients with severe azotemia and BUN exceeding 150 mg/dL. It is driven by reverse osmotic fluid shifts precipitating acute cerebral edema. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-dialysis-transplant-long-case-fig1.webp",
+        "alt": "Shrunken native kidneys, a pelvic renal allograft, and a forearm arteriovenous fistula.",
+        "caption": "Forearm arteriovenous fistula used for haemodialysis. Disequilibrium is a risk at the first sessions through that access when the urea is very high. Credit: StewardMD.",
+        "ar": 1.3333
+      }
+    },
+    {
+      "tx": "Effective **prevention of DDS** when initiating hemodialysis requires limiting treatment duration to **2.0** to **2.5** hours, keeping **blood flow rate** low between **150** and **200** mL/min, and targeting a gentle **urea reduction** of **30%** to **40%**. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Effective prevention of DDS when initiating hemodialysis requires limiting treatment duration to 2.0 to 2.5 hours, keeping blood flow rate low between 150 and 200 mL/min, and targeting a gentle urea reduction of 30% to 40%. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Severe baseline azotemia BUN > 150 mg/dL"
+          },
+          {
+            "id": "d2",
+            "label": "Limit run time to 2.0 to 2.5 hours"
+          },
+          {
+            "id": "d3",
+            "label": "Restrict blood flow rate to 150 to 200 mL/min"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2",
+            "High risk of disequilibrium"
+          ],
+          [
+            "d2",
+            "d3",
+            "Cap urea reduction at 30% to 40%"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A **Type A first-use** hypersensitivity reaction occurs within minutes of initiating hemodialysis, mediated by IgE against **ethylene oxide** sterilant or **AN69** dialyzer membranes in patients taking **ACE inhibitors**, requiring immediate circuit clamping without returning blood. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "A Type A first-use hypersensitivity reaction occurs within minutes of initiating hemodialysis, mediated by IgE against ethylene oxide sterilant or AN69 dialyzer membranes in patients taking ACE inhibitors, requiring immediate circuit clamping without returning blood. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type A Reaction (Anaphylactic)",
+          "points": [
+            "Onset: Within first 5 to 20 minutes of treatment",
+            "Mediators: IgE to ethylene oxide or bradykinin via AN69/ACEi",
+            "Clinical presentation: Dyspnea, bronchospasm, urticaria, hypotension",
+            "Emergency action: Immediately clamp circuit; NEVER return blood"
+          ]
+        },
+        "right": {
+          "title": "Type B Reaction (Nonspecific)",
+          "points": [
+            "Onset: 20 to 40 minutes into session",
+            "Mediators: Alternate complement pathway activation (C3a, C5a)",
+            "Clinical presentation: Chest tightness and vague back pain",
+            "Action: Supportive therapy; session can typically continue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Type B first-use** reactions manifest **20** to **40** minutes into hemodialysis with chest and back pain driven by **complement activation** generating **C3a** and **C5a** upon blood contact with bio-incompatible dialyzer membranes. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Type B first-use reactions manifest 20 to 40 minutes into hemodialysis with chest and back pain driven by complement activation generating C3a and C5a upon blood contact with bio-incompatible dialyzer membranes. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dialyzer Membrane",
+          "Complement Biocompatibility",
+          "Clinical Reaction Risk"
+        ],
+        "rows": [
+          [
+            "Unmodified cellulose",
+            "Strong alternative complement activation",
+            "High incidence of Type B back and chest pain"
+          ],
+          [
+            "Substituted cellulose",
+            "Moderate complement activation",
+            "Reduced incidence of intradialytic symptoms"
+          ],
+          [
+            "Synthetic polysulfone / polyamide",
+            "Highly biocompatible; minimal complement cleavage",
+            "Negligible risk of Type B reactions"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dialysis-related amyloidosis** is caused by systemic deposition of **beta-2 microglobulin** amyloid fibrils in patients undergoing long-term hemodialysis for over **10** years, classically presenting with bilateral **carpal tunnel syndrome** and subchondral bone cysts. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Dialysis-related amyloidosis is caused by systemic deposition of beta-2 microglobulin amyloid fibrils in patients undergoing long-term hemodialysis for over 10 years, classically presenting with bilateral carpal tunnel syndrome and subchondral bone cysts. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dialysis Amyloidosis Features",
+          "points": [
+            "Precursor protein: Circulating beta-2 microglobulin",
+            "Dialysis duration: Typically requires > 8 to 10 years on hemodialysis",
+            "Skeletal findings: Bilateral carpal tunnel syndrome and bone cysts",
+            "Definitive therapy: Renal transplantation halts progression"
+          ]
+        },
+        "right": {
+          "title": "Preventive Strategies",
+          "points": [
+            "Membrane selection: High-flux biocompatible synthetic dialyzers",
+            "Modality: Online hemodiafiltration (HDF) with convection",
+            "Water purity: Ultrapure dialysate to suppress chronic inflammation",
+            "Early transplantation: Timely allograft placement before osteoarthropathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acquired cystic kidney disease**, or **ACKD**, develops in **50%** of patients on hemodialysis for **3** years and over **80%** after **10** years, carrying a **6**-fold increased risk of **renal cell carcinoma** requiring regular surveillance. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "say": "Acquired cystic kidney disease, or ACKD, develops in 50% of patients on hemodialysis for 3 years and over 80% after 10 years, carrying a 6-fold increased risk of renal cell carcinoma requiring regular surveillance. Systematic diagnostic evaluation and careful monitoring remain vital for preserving optimal clinical outcomes in these patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dialysis Duration",
+          "ACKD Prevalence",
+          "Malignancy Screening Protocol"
+        ],
+        "rows": [
+          [
+            "Under 3 years",
+            "10% to 20% prevalence",
+            "Baseline renal ultrasonography"
+          ],
+          [
+            "3 to 10 years",
+            "50% to 70% prevalence",
+            "Biennial renal ultrasound or contrast CT/MRI"
+          ],
+          [
+            "Over 10 years",
+            "Exceeds 80% prevalence",
+            "Annual ultrasound to detect papillary or clear cell RCC"
+          ]
+        ]
+      }
+    }
+  ]
 }
