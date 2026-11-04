@@ -921,7 +921,7 @@
           var showDoc = doc && doc.toLowerCase() !== 'dr' && doc.toLowerCase() !== 'dr.';
           var dept = (p.deptDescription || '').trim();
           var added = !!_addedPids[p.patientId];
-          return '<div class="ghis-pt-card" onclick="GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">' +
+          return '<div class="ghis-pt-card" data-pid="' + esc(p.patientId) + '" onclick="GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">' +
             '<div class="ghis-pt-top">' +
               '<label style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:0 0 auto;margin-right:10px;cursor:pointer;font:700 10px var(--sans,system-ui);color:' + (added ? 'var(--teal,#0e6e63)' : 'var(--slate,#5a7184)') + '" onclick="event.stopPropagation()" title="Add to the current dashboard unit">' +
                 '<input type="checkbox"' + (added ? ' checked' : '') + ' style="width:20px;height:20px" onchange="GHIS.toggleAdd(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\',this)"><span>' + (added ? 'Added' : 'Add') + '</span>' +
@@ -1139,9 +1139,18 @@
           // + the drawer's own scroll so the detail opens like a fresh screen from its header.
           try {
             var ward = document.getElementById('ghisWard');
+            // iPad landscape (ipad-hospital.css): the drawer is the right pane beside the list, so the list
+            // keeps its place and the tapped card is marked as the open patient. Phones are unchanged.
+            var split = document.documentElement.classList.contains('smd-tablet') && window.innerWidth >= 1000;
             GHIS._listScroll = ward ? ward.scrollTop : 0;
-            if (ward) ward.scrollTop = 0;
+            if (ward && !split) ward.scrollTop = 0;
             drawer.scrollTop = 0;
+            if (split) {
+              var lb = document.getElementById('ghisLabBody'); if (lb) lb.scrollTop = 0;
+              Array.prototype.forEach.call(document.querySelectorAll('#ghisPatientList .ghis-pt-card'), function (c) {
+                c.classList.toggle('ghis-pt-sel', c.getAttribute('data-pid') === String(patientId));
+              });
+            }
           } catch (e) {}
           GHIS.loadMedications(patientId);
           GHIS.loadRadiology(patientId);
@@ -1673,6 +1682,7 @@
     
       window.closeLabDrawer = function() {
         document.getElementById('ghisLabDrawer').style.display = 'none';
+        try { Array.prototype.forEach.call(document.querySelectorAll('#ghisPatientList .ghis-pt-sel'), function (c) { c.classList.remove('ghis-pt-sel'); }); } catch (e) {}
         // Restore the patient-list scroll position saved when the drawer opened (openLab reset it
         // to 0 so the detail opened from its top) — back returns you where you were in the list.
         try { var ward = document.getElementById('ghisWard'); if (ward && window.GHIS && GHIS._listScroll != null) ward.scrollTop = GHIS._listScroll; } catch (e) {}

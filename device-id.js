@@ -26,7 +26,7 @@
   function coarseModel() {
     try {
       var ua = navigator.userAgent || "";
-      if (/iPad/.test(ua)) return "iPad";
+      if (/iPad/.test(ua) || (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1)) return "iPad";   // iPadOS sends a Mac user agent
       if (/iPhone/.test(ua)) return "iPhone";
       var m = ua.match(/Android[^;]*;\s*([^);]+)/); if (m) return m[1].replace(/Build.*/, "").trim();
       if (/Macintosh/.test(ua)) return "Mac";

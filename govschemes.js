@@ -146,6 +146,7 @@
 
   /* ---------------- shell: tabs + breadcrumb + body ---------------- */
   function renderList() {
+    clearSplit();
     setTitle("Scheme Search");
     var b = root.querySelector("#gsBody");
     b.innerHTML =
@@ -223,6 +224,7 @@
   }
   function renderBrowseBody() {
     var m = root.querySelector("#gsBrowse"); if (!m) return;
+    clearSplit();
     renderCrumbs();
     if (st.browse.level === "states") return renderStatesGrid(m);
     if (st.browse.level === "schemes") return renderSchemesList(m);
@@ -386,6 +388,7 @@
     }
     list.innerHTML = html;
     list.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.addEventListener("click", function () { openDetail(c.getAttribute("data-id")); }); });
+    markSel(list);
     var more = list.querySelector("#gsMore");
     if (more) more.addEventListener("click", function () { more.textContent = "Loading…"; more.disabled = true; loadBrowsePage(false); });
   }
@@ -437,6 +440,7 @@
     if (!rows.length) { r.innerHTML = '<div class="gs-empty">No scheme packages match “' + esc(q) + '”. Try a shorter term, or switch to Browse.</div>'; return; }
     r.innerHTML = rows.map(function (x) { return rowHTML(x, { showState: true, showScheme: true }); }).join("");
     r.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.addEventListener("click", function () { openDetail(c.getAttribute("data-id")); }); });
+    markSel(r);
   }
   // opts: { showState, showScheme, showSpeciality } - which context pills to show. Browse views
   // already filtered to one state/scheme so those pills would be redundant noise there; Search
@@ -482,7 +486,38 @@
   }
 
   /* ---------------- detail view ---------------- */
+  // iPad regular width (vault/plans/iPad-Standards.md): a package picked from a list opens in a pane beside the list
+  // (.gs-split, styled in ipad-clinical.css) instead of replacing it. Phones and narrow Split View never take this path.
+  var dseq = 0, splitId = null;
+  function splitOn() {
+    return document.documentElement.classList.contains("smd-tablet") && window.innerWidth >= 1000;
+  }
+  function clearSplit() {
+    splitId = null; dseq++;
+    if (root) root.classList.remove("gs-split");
+  }
+  function markSel(scope) {
+    if (!splitId || !scope) return;
+    scope.querySelectorAll(".gs-card[data-id]").forEach(function (c) { c.classList.toggle("sel", c.getAttribute("data-id") === splitId); });
+  }
+  function openDetailSplit(id) {
+    var pane = root.querySelector(".gs-pane");
+    if (!pane) { pane = document.createElement("div"); pane.className = "gs-pane"; pane.setAttribute("aria-live", "polite"); root.appendChild(pane); }
+    splitId = id;
+    root.classList.add("gs-split");
+    markSel(root.querySelector("#gsBody"));
+    pane.innerHTML = '<div class="gs-hint">Loading…</div>';
+    pane.scrollTop = 0;
+    var mySeq = ++dseq;
+    GSAPI.pkg(id).then(function (d) {
+      if (mySeq !== dseq || splitId !== id) return;
+      if (d == null) { pane.innerHTML = '<div class="gs-err">Could not load this package. Check your connection and try again.</div>'; return; }
+      renderDetail(pane, d);
+      setTitle("Scheme Search");
+    });
+  }
   function openDetail(id) {
+    if (splitOn() && st.view === "list") { openDetailSplit(id); return; }
     st.view = "detail"; st.detailId = id;
     setTitle("Package detail");
     var b = root.querySelector("#gsBody");
