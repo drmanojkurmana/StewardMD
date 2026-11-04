@@ -231,16 +231,24 @@ export function buildAll(root = ROOT) {
   /* 8. Openly licensed pathology and histology micrographs from Wikimedia Commons (tools/fetch-commons-pathology.mjs:
    *    CC BY, CC BY-SA, CC0 or public domain only; the uploader's own English description is the caption). The
    *    viewer shows author and licence and links to the Commons file page, which is the attribution CC BY asks for. */
+  const COMMONS_BUDGET = 640 * 1024, sysBytes = new Map();
+  for (const it of items) sysBytes.set(it.sys, (sysBytes.get(it.sys) || 0) + JSON.stringify(it).length);
   const cp = readJSON(path.join(root, "kb/imglib/commons-pathology.json"));
   for (const m of (cp && cp.items) || []) {
     if (!m || !/^https:\/\/upload\.wikimedia\.org\//.test(String(m.src || "")) || !m.licence || !m.page) continue;
     const cap = clean(m.caption);
     if (!cap) continue;
     const system = clean(m.system) || "Pathology and Immunology";
-    push({ s: m.src, t: clean(m.title), c: cap, a: clean(m.title), ar: m.w && m.h ? +(m.w / m.h).toFixed(4) : null,
+    /* Title stands in for alt and ref name (the viewer falls back to it), and each system file keeps a byte budget
+     * so the per-system download stays phone-sized: the in-app sources fill first, Commons tops up. */
+    const e = { s: m.src, t: clean(m.title), c: cap, ar: m.w && m.h ? +(m.w / m.h).toFixed(3) : null,
       k: clean(m.kind) || "Histopathology", o: "commons", f: m.kind === "Histology" ? "Commons histology" : "Commons pathology",
-      ri: m.page, rn: clean(m.title), cr: clean(m.author), li: clean(m.licence), lk: "commons", u: m.page,
-      sys: slugify(system), sysName: sysName(slugify(system), system) });
+      cr: clean(m.author).slice(0, 100), li: clean(m.licence), lk: "commons", u: m.page,
+      sys: slugify(system), sysName: sysName(slugify(system), system) };
+    const len = JSON.stringify(e).length;
+    if ((sysBytes.get(e.sys) || 0) + len > COMMONS_BUDGET) continue;
+    sysBytes.set(e.sys, (sysBytes.get(e.sys) || 0) + len);
+    push(e);
   }
 
   /* Group by system, stable order: count desc, then name. */
