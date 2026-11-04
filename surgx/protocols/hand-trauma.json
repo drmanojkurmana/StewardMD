@@ -1,0 +1,178 @@
+{
+  "id": "hand-trauma",
+  "title": "Hand injuries",
+  "subtitle": "Flexor tendons, injection injuries and fight bites",
+  "category": "plastics_emergency",
+  "specialty": "plastics",
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    {
+      "id": "tang-2022",
+      "org": "Tang JB. J Hand Surg Eur 47:31",
+      "title": "Flexor tendon repair: recent changes and current methods",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34738496/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "hogan-2006",
+      "org": "Hogan CJ et al. J Orthop Trauma 20:503",
+      "title": "High-pressure injection injuries to the upper extremity: a review of the literature",
+      "year": 2006,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16891944/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng184",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Human and animal bites: antimicrobial prescribing (NG184)",
+      "year": 2020,
+      "version": "NG184",
+      "url": "https://www.nice.org.uk/guidance/ng184",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "smith-2016",
+      "org": "Smith HR et al. Eur J Trauma Emerg Surg 42:701",
+      "title": "Predicting serious complications and high cost of treatment of tooth-knuckle injuries: a systematic literature review",
+      "year": 2016,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27363840/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "atls",
+      "org": "American College of Surgeons Committee on Trauma",
+      "title": "Advanced Trauma Life Support (ATLS) Student Course Manual",
+      "edition": "10th edition",
+      "year": 2018,
+      "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "bands": {
+    "red_flags": [
+      {
+        "text": "A small wound over a knuckle after a punch: a fight bite, with the joint or tendon often breached by a tooth."
+      },
+      {
+        "text": "A high-pressure injection injury: a pinhole entry wound with little pain at first. It is a surgical emergency that looks trivial."
+      },
+      {
+        "text": "A finger lying straighter than its neighbours: the flexor cascade is broken, so a flexor tendon is divided."
+      },
+      {
+        "text": "Numbness on one side of a digit distal to a wound: a divided digital nerve."
+      },
+      {
+        "text": "A pale or congested digit, or no bleeding from the wound edge."
+      },
+      {
+        "text": "Kanavel signs: a uniformly swollen finger held flexed, tender along the sheath, with pain on passive extension. Flexor sheath infection."
+      }
+    ],
+    "do_now": [
+      {
+        "text": "High-pressure injection injury: refer immediately to the hand surgeon for emergency decompression and debridement. Do not wait for swelling or pain to declare it.",
+        "timeCritical": true,
+        "evidenceRef": "hogan-2006"
+      },
+      {
+        "text": "Human bite that has broken the skin and drawn blood, including a fight bite: offer antibiotic prophylaxis using the NICE first-choice agent or local equivalent.",
+        "timeCritical": true,
+        "evidenceRef": "nice-ng184"
+      },
+      {
+        "text": "Fight bite: radiograph for fracture or tooth fragment and arrange formal exploration and washout. Delay is the main driver of joint infection and stiffness.",
+        "timeCritical": true,
+        "evidenceRef": "smith-2016"
+      },
+      {
+        "text": "Check tetanus status and immunise per the national schedule.",
+        "evidenceRef": "atls"
+      }
+    ],
+    "assess": [
+      {
+        "text": "Examine before any local anaesthetic: cascade at rest, flexor digitorum profundus (hold the middle phalanx, flex the tip) and superficialis (hold the other fingers straight, flex the finger at the proximal interphalangeal joint) in each digit."
+      },
+      {
+        "text": "Flexor tendon zones: I distal to the superficialis insertion; II from the A1 pulley at the distal palmar crease to the superficialis insertion; III the palm; IV the carpal tunnel; V the forearm. Thumb zones T1 to T3."
+      },
+      {
+        "text": "A fight-bite wound is made with the fist clenched. Examine the knuckle flexed: the tendon wound slides proximal to the skin wound when the finger straightens."
+      },
+      {
+        "text": "Injection injuries: what was injected, at what pressure, and when. Paint and organic solvents carry the worst prognosis."
+      },
+      {
+        "text": "Sensation in each digital nerve territory and perfusion of each digit, documented."
+      }
+    ],
+    "investigate": [
+      {
+        "text": "Radiographs for fractures, foreign bodies, tooth fragments and radio-opaque injected material."
+      },
+      {
+        "text": "Swab any discharge from an infected bite to guide treatment."
+      },
+      {
+        "text": "Ultrasound is useful when a partial tendon injury or a retained foreign body is suspected and examination is equivocal."
+      }
+    ],
+    "resuscitate": [
+      {
+        "text": "High-pressure injection injury: broad-spectrum antibiotics per local protocol alongside urgent surgery, not instead of it.",
+        "evidenceRef": "hogan-2006"
+      }
+    ],
+    "definitive": [
+      {
+        "text": "Flexor tendon division: repair by a hand surgeon as a primary or delayed primary repair within the first days, using a strong multi-strand core repair.",
+        "evidenceRef": "tang-2022"
+      },
+      {
+        "text": "Allow the repair to glide: partial venting of the A2 or A4 pulley is acceptable when it is the obstacle, and early protected active motion with a hand therapist follows.",
+        "evidenceRef": "tang-2022"
+      },
+      {
+        "text": "Fight bite: exploration of the extensor mechanism and joint, thorough washout, debridement, wound left open, and antibiotics.",
+        "timeCritical": true,
+        "evidenceRef": "smith-2016"
+      },
+      {
+        "text": "High-pressure injection: wide decompression and debridement of injected material, often staged. Amputation rates are higher with organic solvents and paint.",
+        "timeCritical": true,
+        "evidenceRef": "hogan-2006"
+      },
+      {
+        "text": "Reassess any bite if infection develops or worsens rapidly, or does not improve within 24 to 48 hours of treatment.",
+        "evidenceRef": "nice-ng184"
+      }
+    ],
+    "escalate": [
+      {
+        "text": "Hand surgery on-call for every injection injury, every suspected flexor tendon or digital nerve division, and every fight bite."
+      },
+      {
+        "text": "Flexor sheath infection: urgent sheath washout, the same day."
+      },
+      {
+        "text": "Amputated digit: wrap in moist gauze in a sealed bag placed on ice, never directly on ice, and discuss replantation at once."
+      }
+    ]
+  },
+  "notes": [
+    "For injection injuries, avoid a digital ring block: added volume in a tight digit raises pressure further. A more proximal block or general anaesthesia is safer.",
+    "Partial flexor tendon lacerations can still flex the finger, with pain. Pain on resisted flexion deserves exploration.",
+    "Wide-awake local anaesthesia without a tourniquet lets the patient move the repair on the table, so gap and pulley impingement are seen before closure."
+  ],
+  "calcs": [
+    "mrc_power"
+  ]
+}

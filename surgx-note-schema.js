@@ -341,6 +341,26 @@
         ]
       }
     },
+    "dynamic-hip-screw": {
+      base: "operative", title: "Dynamic hip screw",
+      prefill: {"procedure": "Dynamic (sliding) hip screw fixation", "incision": "Lateral approach to proximal femur"},
+      extra: {
+        "Operative detail": [
+          f("fractureClass", "Fracture pattern and lateral wall", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. two-part intertrochanteric, lateral wall intact"}),
+          f("reduction", "Reduction achieved (AP and lateral)", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("tipApex", "Lag screw position and tip-apex distance", {"type": "text", "required": true, "aiFillable": false, "ph": "Central-central, TAD in mm", "help": "Measured from the final images, not estimated."}),
+          f("plateDetail", "Plate angle, holes and screws", {"type": "text", "required": false, "aiFillable": true})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."}),
+          f("imageIntensifier", "Image intensifier dose and screening time", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. dose (cGy cm2) and time (s) from the C-arm", "help": "Read from the machine at the end of the case."})
+        ],
+        "Plan": [
+          f("nvStatusPostop", "Neurovascular status post-op", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Pulses, capillary refill, motor and sensory function distal to the operation", "help": "A physical examination you performed. Not dictated."}),
+          f("weightBearing", "Weight-bearing status", {"type": "text", "required": true, "aiFillable": true, "ph": "Full weight-bearing unless stated"})
+        ]
+      }
+    },
     "evd-insertion": {
       base: "operative", title: "External ventricular drain insertion",
       prefill: {"procedure": "External ventricular drain insertion"},
@@ -422,6 +442,25 @@
         ]
       }
     },
+    "leg-fasciotomy": {
+      base: "operative", title: "Fasciotomy of the leg",
+      prefill: {"procedure": "Two-incision four-compartment fasciotomy of the leg"},
+      extra: {
+        "Operative detail": [
+          f("compartmentsReleased", "Compartments released", {"type": "text", "required": true, "aiFillable": false, "ph": "Anterior / lateral / superficial posterior / deep posterior", "help": "Confirmed by direct inspection of each compartment."}),
+          f("muscleViability", "Muscle viability by compartment", {"type": "textarea", "required": true, "aiFillable": true, "rows": 4, "ph": "Colour, consistency, contractility, bleeding for each compartment"}),
+          f("muscleExcised", "Muscle excised", {"type": "text", "required": false, "aiFillable": true, "ph": "or 'None'"}),
+          f("secondLook", "Planned second look (date) and plastics discussion", {"type": "text", "required": true, "aiFillable": true})
+        ],
+        "Accounting": [
+          f("tourniquetTime", "Tourniquet time and pressure", {"type": "text", "required": true, "aiFillable": false, "ph": "Inflated / deflated times, pressure, or 'Not inflated'", "help": "Taken from the theatre record."})
+        ],
+        "Plan": [
+          f("nvStatusPostop", "Neurovascular status post-op", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Pulses, capillary refill, motor and sensory function distal to the operation", "help": "A physical examination you performed. Not dictated."}),
+          f("renalPlan", "Creatine kinase, renal and urine output monitoring", {"type": "text", "required": true, "aiFillable": true})
+        ]
+      }
+    },
     "loop-ileostomy": {
       base: "operative", title: "Loop ileostomy formation or closure",
       prefill: {"procedure": "Loop ileostomy (formation / closure)"},
@@ -486,6 +525,27 @@
           f("grommetType", "Grommet type", {"type": "text", "required": true, "aiFillable": false, "ph": "Make and type, per ear"}),
           f("incisionSite", "Myringotomy site", {"type": "text", "required": false, "aiFillable": true, "ph": "Anteroinferior quadrant"}),
           f("followUp", "Drops and follow-up", {"type": "text", "required": false, "aiFillable": true, "ph": "Drops; review with hearing test within 3 months"})
+        ]
+      }
+    },
+    "open-fracture-debridement": {
+      base: "operative", title: "Open fracture debridement and external fixation",
+      prefill: {"procedure": "Debridement of open fracture, lavage and spanning external fixation"},
+      extra: {
+        "Operative detail": [
+          f("gustilo", "Gustilo-Anderson grade (after debridement)", {"type": "text", "required": true, "aiFillable": true, "ph": "I / II / IIIA / IIIB / IIIC"}),
+          f("tissueExcised", "Tissue excised, layer by layer", {"type": "textarea", "required": true, "aiFillable": true, "rows": 4, "ph": "Skin, fat, fascia, muscle by compartment, bone fragments removed"}),
+          f("lavageVolume", "Irrigation fluid and volume", {"type": "text", "required": false, "aiFillable": true}),
+          f("frameConstruct", "Frame construct and pin sites", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("coverPlan", "Plan and date for definitive fixation and soft-tissue cover", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."}),
+          f("imageIntensifier", "Image intensifier dose and screening time", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. dose (cGy cm2) and time (s) from the C-arm", "help": "Read from the machine at the end of the case."}),
+          f("tourniquetTime", "Tourniquet time and pressure", {"type": "text", "required": false, "aiFillable": false, "ph": "Inflated / deflated times, pressure, or 'Not inflated'", "help": "Taken from the theatre record."})
+        ],
+        "Plan": [
+          f("nvStatusPostop", "Neurovascular status post-op", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Pulses, capillary refill, motor and sensory function distal to the operation", "help": "A physical examination you performed. Not dictated."})
         ]
       }
     },
@@ -556,6 +616,26 @@
         ]
       }
     },
+    "split-skin-graft": {
+      base: "operative", title: "Split-thickness skin graft",
+      prefill: {"procedure": "Split-thickness skin graft"},
+      extra: {
+        "Operative detail": [
+          f("recipientBed", "Recipient site, size and bed preparation", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("donorSite", "Graft donor site", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. left anterolateral thigh", "help": "Where the graft was taken from. Recorded by the operating team."}),
+          f("graftDetail", "Dermatome setting and meshing ratio", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. thickness setting, mesh 1:1.5 or sheet"}),
+          f("fixation", "Fixation and dressing", {"type": "text", "required": true, "aiFillable": true, "ph": "Staples / sutures / glue; bolster or negative pressure"}),
+          f("donorDressing", "Donor site dressing", {"type": "text", "required": false, "aiFillable": true})
+        ],
+        "Accounting": [
+          f("tourniquetTime", "Tourniquet time and pressure", {"type": "text", "required": false, "aiFillable": false, "ph": "Inflated / deflated times, pressure, or 'Not inflated'", "help": "Taken from the theatre record."})
+        ],
+        "Plan": [
+          f("firstInspection", "Date of first graft inspection", {"type": "text", "required": true, "aiFillable": true}),
+          f("nvStatusPostop", "Neurovascular status post-op", {"type": "textarea", "required": false, "aiFillable": false, "rows": 2, "ph": "Pulses, capillary refill, motor and sensory function distal to the operation", "help": "A physical examination you performed. Not dictated."})
+        ]
+      }
+    },
     "surgical-tracheostomy": {
       base: "operative", title: "Open surgical tracheostomy",
       prefill: {"procedure": "Open surgical tracheostomy"},
@@ -567,6 +647,27 @@
           f("stayCapnography", "Capnography confirmed and stay sutures", {"type": "text", "required": true, "aiFillable": false, "ph": "EtCO2 trace confirmed; stay sutures yes / no, labelled"}),
           f("bedheadSign", "Bedhead sign completed and spare tubes with patient", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No"}),
           f("firstTubeChange", "Plan for first tube change", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "Timing and who performs it"})
+        ]
+      }
+    },
+    "tibial-im-nail": {
+      base: "operative", title: "Intramedullary nailing of the tibia",
+      prefill: {"procedure": "Reamed locked intramedullary nailing of the tibia"},
+      extra: {
+        "Operative detail": [
+          f("entryPoint", "Entry approach", {"type": "text", "required": true, "aiFillable": true, "ph": "Infrapatellar / suprapatellar / parapatellar"}),
+          f("reaming", "Reaming and nail size", {"type": "text", "required": true, "aiFillable": true, "ph": "Reamed to x mm, nail diameter and length"}),
+          f("locking", "Locking screws (number, site, static or dynamic)", {"type": "text", "required": true, "aiFillable": true}),
+          f("alignment", "Alignment and rotation check", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "help": "Compared with the other leg. A physical check."})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."}),
+          f("imageIntensifier", "Image intensifier dose and screening time", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. dose (cGy cm2) and time (s) from the C-arm", "help": "Read from the machine at the end of the case."}),
+          f("tourniquetTime", "Tourniquet time and pressure", {"type": "text", "required": false, "aiFillable": false, "ph": "Inflated / deflated times, pressure, or 'Not inflated'", "help": "Taken from the theatre record."})
+        ],
+        "Plan": [
+          f("nvStatusPostop", "Neurovascular status post-op", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Pulses, capillary refill, motor and sensory function distal to the operation", "help": "A physical examination you performed. Not dictated."}),
+          f("compartmentPlan", "Compartment observation plan", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Hourly observations for 48 hours; block in place?"})
         ]
       }
     },

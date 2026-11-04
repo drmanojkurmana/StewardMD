@@ -1,0 +1,270 @@
+{
+  "id": "crushed-leg-pain",
+  "title": "The crushed leg",
+  "subtitle": "Pain out of proportion on the trauma ward",
+  "simulation": true,
+  "levels": [
+    "intern",
+    "resident",
+    "surgeon"
+  ],
+  "review": {
+    "status": "ai_drafted"
+  },
+  "protocolRef": "compartment-syndrome",
+  "procedureRef": "leg-fasciotomy",
+  "sources": [
+    {
+      "id": "boast-acs",
+      "org": "British Orthopaedic Association (BOA)",
+      "title": "BOAST: Diagnosis and Management of Compartment Syndrome of the Extremities",
+      "year": 2025,
+      "version": "updated July 2025",
+      "url": "https://www.boa.ac.uk/resource/boast-10-pdf.html",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng37",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Fractures (complex): assessment and management (NG37)",
+      "year": 2016,
+      "version": "NG37",
+      "url": "https://www.nice.org.uk/guidance/ng37",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "mcqueen-1996",
+      "org": "McQueen MM et al. J Bone Joint Surg Br 78:99",
+      "title": "Compartment monitoring in tibial fractures: the pressure threshold for decompression",
+      "year": 1996,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/8898137/",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "stem": "A 32-year-old warehouse worker's right leg was crushed under a falling pallet at 14:00. Radiographs show a closed, displaced fracture of the tibial shaft. He was placed in an above-knee backslab with a crepe bandage and admitted for nailing on tomorrow's list. At 21:30 the nurse calls: he has had three doses of intravenous morphine in two hours and is still in severe pain.",
+  "vitals": {
+    "Temp": "37.2 C",
+    "HR": "108",
+    "BP": "132/78",
+    "RR": "20",
+    "SpO2": "98% on air",
+    "Pain": "9/10 despite morphine"
+  },
+  "decisionPoints": [
+    {
+      "id": "dp1",
+      "phase": "triage",
+      "prompt": "What do you do first?",
+      "hint": "His analgesia requirement is the observation that matters.",
+      "options": [
+        {
+          "id": "a",
+          "text": "Go now, split the backslab and bandage down to skin, examine the leg, and reassess within 30 minutes",
+          "correct": true,
+          "feedback": "Correct. Releasing everything to skin is both a treatment and a diagnostic step, and the examination cannot be done by telephone."
+        },
+        {
+          "id": "b",
+          "text": "Prescribe a further dose of morphine and ask the nurse to call back if it does not work",
+          "correct": false,
+          "feedback": "Escalating opioid need after a tibial fracture is the earliest sign of compartment syndrome. More morphine treats the symptom and hides the diagnosis."
+        },
+        {
+          "id": "c",
+          "text": "Elevate the leg high on pillows and review on the morning ward round",
+          "correct": false,
+          "feedback": "Leaving it until morning is the error that costs limbs. High elevation also lowers perfusion pressure in the compartment."
+        },
+        {
+          "id": "d",
+          "text": "Request a repeat radiograph to check the fracture position",
+          "correct": false,
+          "feedback": "A radiograph does not show compartment pressure, and it delays the examination that does."
+        }
+      ],
+      "why": "Pain out of proportion to the injury, shown here by an escalating opioid requirement, is the cardinal early feature of acute compartment syndrome. The BOAST asks for circumferential dressings to be released to skin and the limb re-evaluated within 30 minutes, by someone who can make a decision.",
+      "missedRedFlags": [
+        "Three doses of morphine in two hours with ongoing severe pain",
+        "A tibial shaft fracture from a crush mechanism, the highest-risk combination"
+      ]
+    },
+    {
+      "id": "dp2",
+      "phase": "assess",
+      "prompt": "With the backslab split, the calf and anterior leg are tense. Passive extension of his toes makes him cry out. Dorsalis pedis is palpable. Sensation in the first web space is reduced. What is your conclusion?",
+      "hint": "Which of these findings is reassuring, and should it be?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Acute compartment syndrome; the palpable pulse does not exclude it",
+          "correct": true,
+          "feedback": "Correct. Pain on passive stretch, tense compartments and a deep peroneal sensory change make the diagnosis; the pulse is a late sign to lose."
+        },
+        {
+          "id": "b",
+          "text": "Compartment syndrome is unlikely because the foot pulse is present",
+          "correct": false,
+          "feedback": "Compartment pressure that kills muscle is far below arterial pressure. Pulses usually persist until very late."
+        },
+        {
+          "id": "c",
+          "text": "Fracture pain needing a nerve block",
+          "correct": false,
+          "feedback": "A block would remove the symptom you are relying on to make the diagnosis, in a patient who has the diagnosis."
+        },
+        {
+          "id": "d",
+          "text": "Deep vein thrombosis",
+          "correct": false,
+          "feedback": "DVT does not cause pain on passive toe stretch or a deep peroneal nerve deficit within hours of injury."
+        }
+      ],
+      "why": "The diagnosis is clinical: pain out of proportion, pain on passive stretch of the muscles in the compartment, a tense compartment and a sensory change in the nerve running through it. Pulselessness and paralysis are late findings, and waiting for them means waiting for dead muscle.",
+      "missedRedFlags": [
+        "Reduced sensation in the first web space, which is the deep peroneal nerve in the anterior compartment",
+        "Relying on a palpable pulse as reassurance"
+      ]
+    },
+    {
+      "id": "dp3",
+      "phase": "investigate",
+      "prompt": "He is alert and the signs are clear. Does he need compartment pressure measurement before the decision?",
+      "options": [
+        {
+          "id": "a",
+          "text": "No. The diagnosis is clinical and pressure measurement should not delay fasciotomy in an alert patient with clear signs",
+          "correct": true,
+          "feedback": "Correct. Pressure monitoring is for inconclusive signs or a patient who cannot be assessed, not to confirm the obvious."
+        },
+        {
+          "id": "b",
+          "text": "Yes. Fasciotomy should only be done if the absolute pressure exceeds 40 mmHg",
+          "correct": false,
+          "feedback": "A normal-looking number does not overrule clear clinical signs, and absolute thresholds miss patients with low diastolic pressures."
+        },
+        {
+          "id": "c",
+          "text": "Arrange an MRI of the leg first",
+          "correct": false,
+          "feedback": "MRI adds nothing to the decision and costs hours the muscle does not have."
+        },
+        {
+          "id": "d",
+          "text": "Arterial duplex to exclude a vascular injury",
+          "correct": false,
+          "feedback": "There is no sign of arterial injury, and the scan would delay the operation that is needed."
+        }
+      ],
+      "why": "Intracompartmental pressure measurement belongs to diagnostic uncertainty: the unconscious, sedated or blocked patient, or equivocal signs. When it is used, the BOAST interprets a diastolic minus compartment pressure difference below 30 mmHg as increased risk, and the decision rests with a consultant.",
+      "alternatives": [
+        "If he had been intubated on intensive care, pressure measurement of all four compartments with a simultaneous blood pressure would be the right next step."
+      ]
+    },
+    {
+      "id": "dp4",
+      "phase": "decide",
+      "prompt": "When should he have surgery?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Immediately, as an NCEPOD category 1 emergency, with the consultant informed",
+          "correct": true,
+          "feedback": "Correct. Decompression follows diagnosis without delay."
+        },
+        {
+          "id": "b",
+          "text": "On tomorrow's trauma list with the planned nailing",
+          "correct": false,
+          "feedback": "Muscle ischaemia is irreversible within hours. Combining the operations for convenience is how a compartment syndrome becomes a Volkmann contracture."
+        },
+        {
+          "id": "c",
+          "text": "After six more hours of hourly observations to see if it settles",
+          "correct": false,
+          "feedback": "The diagnosis is already made. Further observation is delay."
+        },
+        {
+          "id": "d",
+          "text": "Once his creatine kinase has been checked",
+          "correct": false,
+          "feedback": "Creatine kinase is useful for renal monitoring but does not decide whether to operate."
+        }
+      ],
+      "why": "The BOAST is explicit that immediate surgical decompression follows a diagnosis of compartment syndrome. The fracture can be stabilised at the same operation if the team and kit are ready, but the fasciotomy does not wait for the fixation.",
+      "missedRedFlags": [
+        "Deferring an established compartment syndrome to a planned list"
+      ]
+    },
+    {
+      "id": "dp5",
+      "phase": "operate",
+      "prompt": "Which operation releases all four compartments of the leg?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Two long incisions: lateral, anterior to the fibula, for the anterior and lateral compartments; medial, behind the tibia, for the superficial and deep posterior compartments, with soleus taken off the tibia",
+          "correct": true,
+          "feedback": "Correct. This is the two-incision, four-compartment fasciotomy the BOAST recommends."
+        },
+        {
+          "id": "b",
+          "text": "A single lateral incision releasing the anterior compartment only",
+          "correct": false,
+          "feedback": "Three compartments remain closed, including the deep posterior, which holds the tibial nerve and posterior tibial artery."
+        },
+        {
+          "id": "c",
+          "text": "Short skin incisions with subcutaneous fasciotomy to minimise scarring",
+          "correct": false,
+          "feedback": "The skin itself can constrict swollen muscle, and blind fascial release misses compartments."
+        },
+        {
+          "id": "d",
+          "text": "Medial incision through the superficial posterior compartment only",
+          "correct": false,
+          "feedback": "The deep posterior compartment lies under soleus and is the one most often missed."
+        }
+      ],
+      "why": "Lower limb fasciotomy should decompress all four compartments through two incisions placed on the fasciotomy lines, which also preserve the perforators needed for later flap cover. Each compartment's muscle viability is documented by name.",
+      "stepRef": "step.fas.medial",
+      "missedRedFlags": [
+        "Failing to release the deep posterior compartment"
+      ]
+    },
+    {
+      "id": "dp6",
+      "phase": "postop",
+      "prompt": "The wounds are left open with a negative-pressure dressing. What is the plan?",
+      "options": [
+        {
+          "id": "a",
+          "text": "Plastic surgery discussion within 24 hours, a second look within 72 hours or sooner, and monitoring of creatine kinase, renal function and urine output",
+          "correct": true,
+          "feedback": "Correct. That is the BOAST standard, and the renal monitoring covers rhabdomyolysis."
+        },
+        {
+          "id": "b",
+          "text": "Close the skin primarily at the end of this operation",
+          "correct": false,
+          "feedback": "Primary closure re-creates the compartment. The wounds are left open."
+        },
+        {
+          "id": "c",
+          "text": "Discharge when pain settles with outpatient wound review",
+          "correct": false,
+          "feedback": "A second look is mandatory and soft-tissue closure or cover must be planned."
+        },
+        {
+          "id": "d",
+          "text": "Review the wound in two weeks",
+          "correct": false,
+          "feedback": "Dead muscle not seen at the first look must be found within days, not weeks."
+        }
+      ],
+      "why": "Fasciotomy is the first operation of a sequence. A second look identifies muscle that was doubtful, the plastic surgeon plans closure or grafting, and the renal function is watched because necrotic muscle releases myoglobin.",
+      "alternatives": [
+        "Delayed primary closure or a split-thickness skin graft are both reasonable ways to manage the wounds once the swelling settles."
+      ]
+    }
+  ]
+}

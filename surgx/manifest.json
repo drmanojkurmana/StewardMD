@@ -83,6 +83,18 @@
     {
       "id": "eye_emergency",
       "title": "Eye emergencies"
+    },
+    {
+      "id": "ortho_trauma",
+      "title": "Orthopaedic trauma"
+    },
+    {
+      "id": "ortho_emergency",
+      "title": "Limb and joint emergencies"
+    },
+    {
+      "id": "plastics_emergency",
+      "title": "Hand and plastic surgery emergencies"
     }
   ],
   "protocols": [
@@ -916,6 +928,106 @@
       "specialty": "ophthalmology",
       "file": "protocols/eye-acute-angle-closure-red-eye.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "open-fracture",
+      "kind": "authored",
+      "title": "Open fractures",
+      "subtitle": "Antibiotics in the hour, orthoplastic debridement",
+      "category": "ortho_trauma",
+      "specialty": "orthopaedics",
+      "file": "protocols/open-fracture.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "hip-fracture",
+      "kind": "authored",
+      "title": "Hip fracture pathway",
+      "subtitle": "Analgesia now, theatre within a day, walk the next",
+      "category": "ortho_trauma",
+      "specialty": "orthopaedics",
+      "file": "protocols/hip-fracture.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pelvic-fracture-haemorrhage",
+      "kind": "authored",
+      "title": "Pelvic fracture with haemorrhage",
+      "subtitle": "Binder, blood, then embolise or pack",
+      "category": "ortho_trauma",
+      "specialty": "orthopaedics",
+      "file": "protocols/pelvic-fracture-haemorrhage.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "compartment-syndrome",
+      "kind": "authored",
+      "title": "Acute compartment syndrome",
+      "subtitle": "Pain out of proportion is the sign; fasciotomy is the treatment",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/compartment-syndrome.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "septic-arthritis",
+      "kind": "authored",
+      "title": "Septic arthritis",
+      "subtitle": "Aspirate, then wash out; the child's hip included",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/septic-arthritis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "dislocation-neurovascular",
+      "kind": "authored",
+      "title": "Major joint dislocation with neurovascular compromise",
+      "subtitle": "Examine, reduce, re-examine, image the artery",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/dislocation-neurovascular.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pulseless-limb-fracture",
+      "kind": "authored",
+      "title": "The pulseless limb after fracture or dislocation",
+      "subtitle": "Realign, re-examine, revascularise within the hour",
+      "category": "ortho_emergency",
+      "specialty": "orthopaedics",
+      "file": "protocols/pulseless-limb-fracture.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "hand-trauma",
+      "kind": "authored",
+      "title": "Hand injuries",
+      "subtitle": "Flexor tendons, injection injuries and fight bites",
+      "category": "plastics_emergency",
+      "specialty": "plastics",
+      "file": "protocols/hand-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "flap-monitoring",
+      "kind": "authored",
+      "title": "Flap monitoring and the failing flap",
+      "subtitle": "Free and pedicled flaps: the first 48 hours",
+      "category": "plastics_emergency",
+      "specialty": "plastics",
+      "file": "protocols/flap-monitoring.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "facial-lacerations-bites",
+      "kind": "authored",
+      "title": "Complex facial lacerations and dog bites",
+      "subtitle": "Clean, protect the nerves and ducts, align the landmarks",
+      "category": "plastics_emergency",
+      "specialty": "plastics",
+      "file": "protocols/facial-lacerations-bites.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -989,6 +1101,12 @@
       "id": "ent",
       "file": "steps/ent.json",
       "title": "Shared ENT steps",
+      "shared": true
+    },
+    {
+      "id": "ortho",
+      "file": "steps/ortho.json",
+      "title": "Shared orthopaedic and limb steps",
       "shared": true
     }
   ],
@@ -1461,6 +1579,79 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 15
+    },
+    {
+      "id": "dynamic-hip-screw",
+      "title": "Dynamic hip screw",
+      "subtitle": "Sliding hip screw for an intertrochanteric fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/dynamic-hip-screw.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "tibial-im-nail",
+      "title": "Intramedullary nailing of the tibia",
+      "subtitle": "Reamed locked nailing of a tibial shaft fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/tibial-im-nail.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "open-fracture-debridement",
+      "title": "Debridement of an open fracture with external fixation",
+      "subtitle": "Orthoplastic wound excision, lavage and spanning frame",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/open-fracture-debridement.json",
+      "stepPacks": [
+        "core",
+        "ortho",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "leg-fasciotomy",
+      "title": "Fasciotomy of the leg",
+      "subtitle": "Two-incision, four-compartment decompression",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/leg-fasciotomy.json",
+      "stepPacks": [
+        "core",
+        "ortho",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "split-skin-graft",
+      "title": "Split-thickness skin graft",
+      "subtitle": "Harvest, mesh, inset and protect",
+      "system": "skin and soft tissue",
+      "specialty": "plastics",
+      "file": "procedures/split-skin-graft.json",
+      "stepPacks": [
+        "core",
+        "ortho",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
     }
   ],
   "cases": [
@@ -1690,6 +1881,33 @@
         "surgeon"
       ],
       "review": "ai_drafted"
+    },
+    {
+      "id": "crushed-leg-pain",
+      "title": "The crushed leg",
+      "subtitle": "Pain out of proportion on the trauma ward",
+      "specialty": "orthopaedics",
+      "file": "cases/crushed-leg-pain.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "elderly-fall-hip",
+      "title": "Fallen and cannot weight-bear",
+      "subtitle": "The hip fracture pathway, from front door to first walk",
+      "specialty": "orthopaedics",
+      "file": "cases/elderly-fall-hip.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
     }
   ],
   "specialties": [
@@ -1748,6 +1966,14 @@
     {
       "id": "ophthalmology",
       "title": "Eye emergencies"
+    },
+    {
+      "id": "orthopaedics",
+      "title": "Orthopaedics and trauma"
+    },
+    {
+      "id": "plastics",
+      "title": "Plastics, burns and hand"
     }
   ]
 }

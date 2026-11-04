@@ -260,6 +260,41 @@ try {
   ok((await ev("!!document.querySelector('#surgxRoot .sgx-opt.right')")) === true, "the correct option is marked");
   ok((await ev("!!document.querySelector('#surgxRoot .sgx-opt[disabled]')")) === true, "the question locks after answering");
 
+  /* ── 7b. SPECIALTY BROWSING (2026-11-04): every specialty reachable, search narrows ── */
+  await ev("window.SMD_SURGX_SCREENS.go('protocols')");
+  ok(await waitFor("#surgxRoot .sgx-spec .sgx-chip"), "SPEC: the protocol list has a specialty chip row");
+  {
+    const chips = await ev("[...document.querySelectorAll('#surgxRoot .sgx-spec .sgx-chip')].map(b => b.textContent)");
+    ok(Array.isArray(chips) && chips.length >= 17, `SPEC: All plus every specialty is offered (${chips && chips.length})`);
+    ok(["Urology", "Neurosurgery and spine"].every((t) => chips.includes(t)) || chips.some((t) => /Urology/.test(t)),
+      "SPEC: specialty titles come from the manifest, not raw ids");
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "Urology");
+    await sleep(300);
+    const rows = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(rows.length >= 8 && rows.some((t) => /scrot/i.test(t)) && !rows.some((t) => /Appendic|Acute abdomen/i.test(t)),
+      `SPEC: picking Urology shows only urology protocols (${rows.length})`);
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
+    await ev(`(() => { const el = document.querySelector('#surgxRoot #sgxFind'); el.value = "torsion"; el.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`);
+    await sleep(500);
+    const hits = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(hits.length >= 1 && hits.length < 10, `SPEC: search narrows the list (${hits.length} for 'torsion')`);
+    ok((await ev("document.activeElement && document.activeElement.id")) === "sgxFind", "SPEC: the search box keeps focus while typing");
+    await ev(`(() => { const el = document.querySelector('#surgxRoot #sgxFind'); el.value = ""; el.dispatchEvent(new Event("input", { bubbles: true })); return true; })()`);
+    await sleep(400);
+  }
+  await ev("window.SMD_SURGX_SCREENS.go('procedures')");
+  await sleep(500);
+  {
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "ENT");
+    await sleep(300);
+    const procs = await ev("[...document.querySelectorAll('#surgxRoot .sgx-row .tt')].map(e => e.textContent)");
+    ok(procs.some((t) => /Tonsillectomy/i.test(t)), "SPEC: the ENT filter is shared with Procedures and shows tonsillectomy");
+    await clickText("#surgxRoot .sgx-row", "Tonsillectomy");
+    ok(await waitFor("#surgxRoot .sgx-tab"), "SPEC: a new-specialty procedure opens with its chapters");
+    await clickText("#surgxRoot .sgx-spec .sgx-chip", "All");
+  }
+  await ev("(() => { const S = window.SMD_SURGX_SCREENS._state(); S.spec = ''; S.find = ''; return true; })()");
+
   /* ── 8. NOTES: the finalise gate ───────────────────────────────────────── */
   console.log("\n--- 01 notes ---");
   // The harness reuses --user-data-dir, so localStorage survives between runs, and the "verified
