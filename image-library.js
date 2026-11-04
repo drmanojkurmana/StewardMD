@@ -149,7 +149,7 @@
     r.querySelector(".igl-body").innerHTML =
       (shown.length ? '<div class="igl-grid">' + shown.map(function (e, i) {
         return '<button type="button" class="igl-card" data-igl="open" data-i="' + i + '">' +
-          '<span class="igl-thumb"' + (e.ar ? ' style="aspect-ratio:' + e.ar + '"' : "") + '><img src="' + esc(imgUrl(e.s)) +
+          '<span class="igl-thumb"><img src="' + esc(imgUrl(e.s)) +
           '" alt="' + esc(e.a || e.t) + '" loading="lazy" decoding="async"></span>' +
           '<span class="igl-cardt">' + esc(e.t) + '</span><span class="igl-cardf">' + esc(e.f) + " · " + esc(e.k) + "</span></button>";
       }).join("") + "</div>" : '<p class="igl-empty">No images match. Try a shorter search or clear a filter.</p>') +
