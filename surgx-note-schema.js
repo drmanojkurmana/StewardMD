@@ -369,6 +369,32 @@
         ]
       }
     },
+    "hartmanns-procedure": {
+      base: "operative", title: "Hartmann's procedure",
+      prefill: {"procedure": "Hartmann's procedure (sigmoid colectomy, end colostomy, closure of rectal stump)", "incision": "Midline laparotomy"},
+      extra: {
+        "Operative detail": [
+          f("contamination", "Peritoneal contamination", {"type": "text", "required": true, "aiFillable": true, "ph": "Purulent / faecal; localised / generalised", "help": "Hinchey grade if diverticular"}),
+          f("leftUreter", "Left ureter identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, and where"}),
+          f("rectalStump", "Rectal stump: level, closure, marking", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Rectosigmoid junction, stapled, marked with long non-absorbable sutures"}),
+          f("stomaDetail", "Stoma: type, site, height, viability", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "End colostomy, LIF, flush, pink and healthy", "help": "Viability is a physical check at the end of the operation"})
+        ]
+      }
+    },
+    "lap-perforated-duodenal-ulcer": {
+      base: "operative", title: "Laparoscopic repair of perforated duodenal ulcer",
+      prefill: {"procedure": "Laparoscopic omental patch repair of perforated duodenal ulcer and peritoneal lavage", "anaesthesia": "GA with ETT"},
+      extra: {
+        "Operative detail": [
+          f("perforationSite", "Perforation: site and size", {"type": "text", "required": true, "aiFillable": true, "ph": "Anterior D1, 5 mm"}),
+          f("contamination", "Contamination", {"type": "text", "required": true, "aiFillable": true, "ph": "Bilious / purulent / food; four-quadrant or localised"}),
+          f("repair", "Repair technique", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Three interrupted sutures over pedicled omental patch"}),
+          f("leakTest", "Leak test result", {"type": "text", "required": true, "aiFillable": false, "ph": "Air or methylene blue test negative"}),
+          f("biopsy", "Biopsy taken (gastric perforation)", {"type": "text", "required": false, "aiFillable": false, "ph": "Yes / Not applicable"}),
+          f("conversion", "Conversion to open", {"type": "text", "required": false, "aiFillable": true, "ph": "or 'No'"})
+        ]
+      }
+    },
     "lap-salpingectomy": {
       base: "operative", title: "Laparoscopic salpingectomy",
       prefill: {"procedure": "Laparoscopic salpingectomy for ectopic pregnancy"},
@@ -380,6 +406,20 @@
           f("procedureChoice", "Salpingectomy or salpingotomy, and reason", {"type": "text", "aiFillable": true}),
           f("antiD", "Rhesus status and anti-D", {"type": "text", "required": true, "aiFillable": false, "ph": "Rh positive / Rh negative: anti-D given"}),
           f("followUp", "Follow-up plan", {"type": "text", "aiFillable": true, "ph": "UPT at 3 weeks / serial hCG"})
+        ]
+      }
+    },
+    "loop-ileostomy": {
+      base: "operative", title: "Loop ileostomy formation or closure",
+      prefill: {"procedure": "Loop ileostomy (formation / closure)"},
+      extra: {
+        "Operative detail": [
+          f("operationType", "Formation or closure", {"type": "text", "required": true, "aiFillable": true, "ph": "Formation / closure"}),
+          f("stomaDetail", "Stoma: type, site, spout, viability, rod", {"type": "textarea", "required": false, "aiFillable": false, "rows": 3, "ph": "Loop ileostomy, RIF, afferent limb spouted 2 to 3 cm, pink, rod yes/no", "help": "Formation only. Viability and orientation are physical checks."}),
+          f("distanceFromIcv", "Distance of loop from ileocaecal valve", {"type": "text", "required": false, "aiFillable": false, "ph": "cm"}),
+          f("anastomosis", "Closure anastomosis: technique, stapled or handsewn", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "Stapled side-to-side / handsewn single-layer", "help": "Closure only"}),
+          f("leakTest", "Anastomosis checked (patency, integrity)", {"type": "text", "required": false, "aiFillable": false, "ph": "Closure only"}),
+          f("woundClosure", "Fascia and skin closure", {"type": "text", "required": false, "aiFillable": true, "ph": "Fascia closed, skin purse-string"})
         ]
       }
     },
@@ -473,6 +513,20 @@
           f("mesocolicPlane", "Mesocolic plane and specimen integrity", {"type": "text", "aiFillable": false, "ph": "Intact mesocolic envelope / defects"}),
           f("anastomosis", "Anastomosis type", {"type": "text", "required": true, "aiFillable": false, "ph": "Stapled side-to-side / handsewn; intra- or extracorporeal; perfusion checked"}),
           f("extractionSite", "Extraction site and wound protection", {"type": "text", "aiFillable": false, "ph": "Site; wound protector used"})
+        ]
+      }
+    },
+    "small-bowel-resection": {
+      base: "operative", title: "Small bowel resection",
+      prefill: {"procedure": "Small bowel resection with anastomosis", "incision": "Midline laparotomy"},
+      extra: {
+        "Operative detail": [
+          f("indicationFinding", "Finding and segment resected", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Strangulated ileum from band, 40 cm resected, 60 cm from ICV"}),
+          f("anastomosis", "Anastomosis: technique, stapled or handsewn", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Stapled side-to-side / handsewn single-layer extramucosal"}),
+          f("leakTest", "Anastomosis checked (perfusion, patency, integrity)", {"type": "text", "required": true, "aiFillable": false}),
+          f("residualLength", "Residual small bowel length and ICV status", {"type": "text", "required": true, "aiFillable": false, "ph": "Measured length in cm; ileocaecal valve present / absent", "help": "Measured, not estimated"}),
+          f("mesentericDefect", "Mesenteric defect closed", {"type": "text", "required": false, "aiFillable": true, "ph": "Yes / No"}),
+          f("secondLook", "Second look planned", {"type": "text", "required": false, "aiFillable": true, "ph": "or 'No'"})
         ]
       }
     },

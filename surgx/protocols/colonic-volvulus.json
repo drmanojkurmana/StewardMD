@@ -1,0 +1,62 @@
+{
+  "id": "colonic-volvulus",
+  "title": "Sigmoid and caecal volvulus",
+  "subtitle": "Decompress the sigmoid, resect the caecum",
+  "category": "abdomen",
+  "specialty": "general",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "ascrs-volvulus-2021", "org": "American Society of Colon and Rectal Surgeons (ASCRS)", "title": "Clinical Practice Guidelines for the Management of Colonic Volvulus and Acute Colonic Pseudo-Obstruction", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/34016826/", "accessed": "2026-11-04" },
+    { "id": "wses-sv-2023", "org": "World Society of Emergency Surgery (WSES)", "title": "WSES consensus guidelines on sigmoid volvulus management", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37189134/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Peritonitis, fever, tachycardia, raised lactate or free air: suspect gangrene or perforation. This patient goes to theatre, not to endoscopy." },
+      { "text": "Dark, haemorrhagic or ulcerated mucosa at endoscopic decompression: ischaemia, abandon decompression and operate." },
+      { "text": "Massive caecal distension with right iliac fossa tenderness: impending caecal perforation." },
+      { "text": "A frail elderly patient whose symptoms are atypical: volvulus in nursing-home residents and patients with neurological disease often presents late and quietly." }
+    ],
+    "do_now": [
+      { "text": "Resuscitate with intravenous fluids, correct electrolytes, nasogastric decompression if vomiting, and urinary catheter.", "timeCritical": true, "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "CT abdomen and pelvis with contrast to confirm the diagnosis, distinguish sigmoid from caecal volvulus, and look for ischaemia or perforation.", "timeCritical": true, "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "Sigmoid volvulus without peritonitis or ischaemia: urgent endoscopic detorsion and decompression, usually by flexible sigmoidoscopy, with mucosal assessment.", "timeCritical": true, "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "Peritonitis, perforation or ischaemia: emergency laparotomy and resection without attempting endoscopic decompression.", "timeCritical": true, "evidenceRef": "wses-sv-2023" }
+    ],
+    "assess": [
+      { "text": "Peritoneal signs, physiology and lactate decide the route: endoscopy or theatre.", "calcs": ["qsofa", "shock_index"] },
+      { "text": "Frailty and goals of care, recorded early. Many patients with sigmoid volvulus are elderly with neurological or psychiatric comorbidity." },
+      { "text": "Risk of emergency laparotomy if surgery is likely.", "calcs": ["p_possum"] }
+    ],
+    "investigate": [
+      { "text": "FBC, U&E, CRP, lactate, group and save." },
+      { "text": "CT with intravenous contrast: whirl sign, bird's beak, absent wall enhancement, pneumatosis and portal venous gas." },
+      { "text": "Plain radiograph may show the coffee-bean sign of sigmoid volvulus, but CT is the test that changes management." },
+      { "text": "Endoscopic mucosal assessment at the time of sigmoid decompression." }
+    ],
+    "resuscitate": [
+      { "text": "After successful sigmoid decompression, leave a rectal decompression tube in place temporarily to reduce early recurrence.", "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "Broad-spectrum antibiotics per local protocol for suspected ischaemia or perforation, before theatre.", "evidenceRef": "wses-sv-2023" }
+    ],
+    "definitive": [
+      { "text": "Sigmoid volvulus after successful decompression: sigmoid colectomy during the same admission in fit patients, because recurrence after decompression alone is high.", "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "Gangrenous or perforated sigmoid: resection, usually Hartmann's procedure in the unstable or contaminated patient; primary anastomosis only in a stable patient with a healthy field.", "evidenceRef": "wses-sv-2023" },
+      { "text": "Caecal volvulus: endoscopic detorsion is not recommended; right hemicolectomy is the operation, with primary anastomosis in a stable patient or an ileostomy when unstable or contaminated.", "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "Caecopexy or detorsion alone is not recommended for caecal volvulus because of recurrence.", "evidenceRef": "ascrs-volvulus-2021" },
+      { "text": "Patients unfit for resection after sigmoid decompression: discuss alternatives such as percutaneous endoscopic colostomy in specialist settings, accepting the limited evidence.", "evidenceRef": "wses-sv-2023" }
+    ],
+    "escalate": [
+      { "text": "Consultant surgeon for any volvulus with signs of ischaemia, and before deciding not to resect after decompression." },
+      { "text": "Endoscopist out of hours for sigmoid decompression; if none is available, a consultant decision on rigid sigmoidoscopy or surgery." },
+      { "text": "Critical care for perforation, sepsis or a high predicted mortality." },
+      { "text": "Palliative care input for frail patients in whom resection is not appropriate." }
+    ]
+  },
+  "notes": [
+    "Sigmoid and caecal volvulus are different diseases. The sigmoid is decompressed first and resected later; the caecum goes straight to resection.",
+    "Decompression without a plan for resection is a plan for readmission. The recurrence after decompression alone is the reason to operate on the same admission.",
+    "Look at the mucosa, not just at the gas. Successful detorsion of ischaemic bowel does not make it viable."
+  ],
+  "calcs": ["qsofa", "shock_index", "p_possum"]
+}

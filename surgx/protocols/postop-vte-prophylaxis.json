@@ -1,0 +1,65 @@
+{
+  "id": "postop-vte-prophylaxis",
+  "title": "Post-operative VTE prophylaxis",
+  "subtitle": "Assess every patient, balance clot against bleed",
+  "category": "perioperative",
+  "specialty": "periop",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-ng89", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism (NG89)", "year": 2018, "url": "https://www.nice.org.uk/guidance/ng89", "accessed": "2026-11-04" },
+    { "id": "accp-2012-surgery", "org": "American College of Chest Physicians (ACCP)", "title": "Prevention of VTE in nonorthopedic surgical patients: Antithrombotic Therapy and Prevention of Thrombosis, 9th ed", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/22315263/", "accessed": "2026-11-04" },
+    { "id": "ash-2019-surgery", "org": "American Society of Hematology (ASH)", "title": "American Society of Hematology 2019 guidelines for management of venous thromboembolism: prevention of VTE in surgical hospitalized patients", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31794602/", "accessed": "2026-11-04" },
+    { "id": "asra-2018", "org": "American Society of Regional Anesthesia and Pain Medicine (ASRA)", "title": "Regional anesthesia in the patient receiving antithrombotic or thrombolytic therapy, fourth edition", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29561531/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Calf swelling, unexplained tachycardia, pleuritic chest pain, hypoxaemia or collapse after surgery: suspect deep vein thrombosis or pulmonary embolism and investigate." },
+      { "text": "Active bleeding, a falling haemoglobin or a high-risk haemostatic situation: reconsider pharmacological prophylaxis." },
+      { "text": "An epidural or spinal catheter in place: the timing of every anticoagulant dose and of catheter removal matters." },
+      { "text": "Thrombocytopenia developing 5 to 10 days after starting heparin: heparin-induced thrombocytopenia." },
+      { "text": "A patient whose VTE risk assessment was never done or never repeated." }
+    ],
+    "do_now": [
+      { "text": "Assess VTE and bleeding risk for every surgical patient on admission, using a recognised tool, and record it.", "timeCritical": true, "evidenceRef": "nice-ng89" },
+      { "text": "Reassess at the consultant review and whenever the clinical situation changes.", "evidenceRef": "nice-ng89" },
+      { "text": "Abdominal surgery with VTE risk outweighing bleeding risk: mechanical prophylaxis from admission until mobility is no longer significantly reduced, and pharmacological prophylaxis for a minimum of 7 days if bleeding risk is low.", "evidenceRef": "nice-ng89" },
+      { "text": "Extend pharmacological prophylaxis to 28 days after major cancer surgery in the abdomen.", "evidenceRef": "nice-ng89" }
+    ],
+    "assess": [
+      { "text": "Score VTE risk with the Caprini score in general and abdominal-pelvic surgery, as used by ACCP to grade prophylaxis.", "calcs": ["caprini"] },
+      { "text": "Patient bleeding risk: active bleeding, acquired or inherited bleeding disorders, concurrent anticoagulants, thrombocytopenia, uncontrolled hypertension, and procedures with high bleeding consequences." },
+      { "text": "Renal function, weight and platelet count, which determine the agent and dose.", "calcs": ["crcl"] },
+      { "text": "Suspected DVT or PE: assess clinical probability before testing.", "calcs": ["wells_dvt", "wells_pe"] }
+    ],
+    "investigate": [
+      { "text": "Baseline full blood count, renal function and coagulation before starting pharmacological prophylaxis." },
+      { "text": "Platelet count monitoring where heparin-induced thrombocytopenia is a concern per local protocol." },
+      { "text": "Compression ultrasound or CT pulmonary angiography for suspected VTE; do not wait for symptoms to settle." }
+    ],
+    "resuscitate": [
+      { "text": "Caprini very low risk: early and frequent ambulation. Low risk (1 to 2): mechanical prophylaxis. Moderate risk (3 to 4): low-molecular-weight heparin, low-dose unfractionated heparin, or mechanical prophylaxis if bleeding risk is high.", "evidenceRef": "accp-2012-surgery" },
+      { "text": "Caprini high risk (5 or more): pharmacological prophylaxis plus mechanical prophylaxis unless bleeding risk is high; extended prophylaxis after abdominal or pelvic cancer surgery.", "evidenceRef": "accp-2012-surgery" },
+      { "text": "Where pharmacological prophylaxis is contraindicated, use mechanical methods such as intermittent pneumatic compression, and add the drug when bleeding risk falls.", "evidenceRef": "ash-2019-surgery" },
+      { "text": "Neuraxial catheters: leave at least 12 hours after a prophylactic dose of low-molecular-weight heparin before insertion or removal, and give the next dose no sooner than 4 hours after removal.", "evidenceRef": "asra-2018" }
+    ],
+    "definitive": [
+      { "text": "Low-molecular-weight heparin is the usual pharmacological agent; adjust for renal function and weight per local protocol.", "evidenceRef": "nice-ng89" },
+      { "text": "Do not offer anti-embolism stockings to patients with suspected or proven peripheral arterial disease, severe peripheral neuropathy, or skin conditions that stockings would damage.", "evidenceRef": "nice-ng89" },
+      { "text": "Encourage early mobilisation and adequate hydration as part of every prophylaxis plan.", "evidenceRef": "nice-ng89" },
+      { "text": "Give the patient verbal and written information about VTE, prophylaxis at home, and how to administer injections if extended prophylaxis is prescribed.", "evidenceRef": "nice-ng89" }
+    ],
+    "escalate": [
+      { "text": "Haematology for heparin-induced thrombocytopenia, previous VTE on prophylaxis, thrombophilia or very high bleeding risk." },
+      { "text": "Anaesthesia before any anticoagulant dose change in a patient with a neuraxial catheter." },
+      { "text": "Senior surgeon if bleeding risk is uncertain after major surgery; the decision to withhold prophylaxis should be explicit and dated." }
+    ]
+  },
+  "notes": [
+    "Hospital-acquired VTE is one of the commonest preventable causes of death after surgery. The step that fails most often is the reassessment, not the first assessment.",
+    "Most post-operative pulmonary emboli occur in patients whose risk was known. Extended prophylaxis after abdominal cancer surgery is the most commonly missed element.",
+    "Mechanical prophylaxis buys time when bleeding risk is high. It is not a substitute for adding the drug once that risk falls."
+  ],
+  "calcs": ["caprini", "crcl", "wells_dvt", "wells_pe"]
+}

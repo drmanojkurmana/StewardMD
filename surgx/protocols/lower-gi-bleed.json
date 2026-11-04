@@ -1,0 +1,68 @@
+{
+  "id": "lower-gi-bleed",
+  "title": "Acute lower GI bleeding",
+  "subtitle": "Shock index first, localise before you operate",
+  "category": "abdomen",
+  "specialty": "general",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "bsg-lgib-2019", "org": "British Society of Gastroenterology (BSG)", "title": "Diagnosis and management of acute lower gastrointestinal bleeding: guidelines from the British Society of Gastroenterology", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30792244/", "accessed": "2026-11-04" },
+    { "id": "oakland-2017", "org": "Lancet Gastroenterology and Hepatology", "title": "Derivation and validation of a novel risk score for safe discharge after acute lower gastrointestinal bleeding (Oakland score)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28651935/", "accessed": "2026-11-04" },
+    { "id": "acg-lgib-2023", "org": "American College of Gastroenterology (ACG)", "title": "Management of patients with acute lower gastrointestinal bleeding: an updated ACG guideline", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/36735555/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Shock index (heart rate divided by systolic blood pressure) above 1: an unstable bleed by the BSG definition." },
+      { "text": "Haematochezia with shock: up to about one in seven of these bleeds is from an upper GI source." },
+      { "text": "Bleeding on anticoagulants or dual antiplatelet therapy, or after recent polypectomy." },
+      { "text": "Previous aortic surgery or an aortic graft with any GI bleed: think aorto-enteric fistula." },
+      { "text": "Ongoing transfusion requirement, or rebleeding after an apparent stop." }
+    ],
+    "do_now": [
+      { "text": "Calculate the shock index at the door. Above 1, resuscitate and treat as an unstable bleed.", "timeCritical": true, "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Two large-bore cannulae, bloods including crossmatch, and activate the major haemorrhage protocol for shock.", "timeCritical": true, "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Restrictive red cell transfusion: threshold 70 g/L with a target of 70 to 90 g/L, or threshold 80 g/L and target 100 g/L with a history of cardiovascular disease.", "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Unstable patient: CT angiography first to localise the bleed, unless an upper GI source is suspected, in which case upper endoscopy comes first.", "timeCritical": true, "evidenceRef": "bsg-lgib-2019" }
+    ],
+    "assess": [
+      { "text": "Stable patients: calculate the Oakland score (age, sex, previous LGIB admission, rectal examination findings, heart rate, systolic pressure, haemoglobin). A score of 8 or less with no other reason to admit permits discharge with urgent outpatient investigation.", "calcs": ["shock_index", "modified_shock_index"] },
+      { "text": "Drug history in detail: anticoagulant, antiplatelet, the indication for each, coronary stent dates, and recent dose changes." },
+      { "text": "Digital rectal examination and proctoscopy in every patient. Anorectal sources are common and easily missed." },
+      { "text": "Consider an upper source when the urea is raised disproportionately or the patient is shocked." }
+    ],
+    "investigate": [
+      { "text": "FBC, U&E, coagulation, group and crossmatch, venous gas with lactate." },
+      { "text": "CT angiography for the unstable patient, as the first localising test." },
+      { "text": "Colonoscopy on the next available list for stable patients who are admitted, after bowel preparation." },
+      { "text": "Upper GI endoscopy when no lower source is found or an upper source is suspected." },
+      { "text": "Small bowel evaluation (capsule or CT enterography) for a recurrent bleed with negative upper and lower endoscopy." }
+    ],
+    "resuscitate": [
+      { "text": "Warfarin: interrupt at presentation, and in unstable bleeding reverse with prothrombin complex concentrate and intravenous vitamin K.", "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Direct oral anticoagulants: interrupt; for life-threatening bleeding on dabigatran, consider idarucizumab. Reversal of factor Xa inhibitors follows local protocol and haematology advice.", "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Aspirin for primary prevention: stop permanently. Aspirin for secondary prevention: do not stop routinely, and if stopped, restart once haemostasis is achieved.", "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Dual antiplatelet therapy: continue aspirin; the P2Y12 inhibitor may be held only after discussion with cardiology, and not within 90 days of an acute coronary syndrome or 30 days of a coronary stent without that discussion.", "evidenceRef": "bsg-lgib-2019" }
+    ],
+    "definitive": [
+      { "text": "Positive CT angiogram: catheter angiography and embolisation, ideally within 60 minutes in a centre with a 24/7 interventional radiology service.", "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Stable admitted patients: colonoscopy with endoscopic haemostasis for a stigmata-bearing lesion, such as a diverticular or post-polypectomy bleed.", "evidenceRef": "acg-lgib-2023" },
+      { "text": "Laparotomy only after every effort to localise the bleed radiologically or endoscopically, except in exceptional circumstances. Blind subtotal colectomy has high rebleeding and mortality.", "evidenceRef": "bsg-lgib-2019" },
+      { "text": "Low-risk stable patients by Oakland score: discharge with urgent outpatient colonoscopy or flexible sigmoidoscopy.", "evidenceRef": "oakland-2017" },
+      { "text": "Restart warfarin around 7 days after the bleed in most patients, sooner with bridging in high thrombotic risk, and decide DOAC restart with the prescriber.", "evidenceRef": "bsg-lgib-2019" }
+    ],
+    "escalate": [
+      { "text": "Consultant surgeon, interventional radiology and gastroenterology together for any unstable bleed." },
+      { "text": "Transfer to a centre with 24/7 interventional radiology when the local unit cannot provide it and the patient can be stabilised for transfer." },
+      { "text": "Cardiology before holding antiplatelets in a patient with a recent coronary stent." },
+      { "text": "Critical care for ongoing transfusion or organ dysfunction." }
+    ]
+  },
+  "notes": [
+    "Most lower GI bleeds stop spontaneously. The task is to identify the few that will not, and the shock index does that faster than anything else.",
+    "Localise before you operate. A surgeon who resects the wrong segment of colon has removed the colon and left the bleeding.",
+    "The rectal examination is the cheapest investigation and the one most often skipped."
+  ],
+  "calcs": ["shock_index", "modified_shock_index", "gbs"]
+}

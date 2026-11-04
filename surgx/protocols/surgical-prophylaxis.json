@@ -1,0 +1,64 @@
+{
+  "id": "surgical-prophylaxis",
+  "title": "Surgical antibiotic prophylaxis",
+  "subtitle": "Right drug, right time, stop at the end",
+  "category": "perioperative",
+  "specialty": "periop",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "who-ssi", "org": "World Health Organization (WHO)", "title": "Global guidelines for the prevention of surgical site infection (first edition 2016, second edition 2018)", "year": 2018, "url": "https://www.who.int/publications/i/item/9789241550475", "accessed": "2026-11-04" },
+    { "id": "ashp-2013", "org": "ASHP, IDSA, SIS and SHEA", "title": "Clinical practice guidelines for antimicrobial prophylaxis in surgery", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/23327981/", "accessed": "2026-11-04" },
+    { "id": "nice-ng125", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Surgical site infections: prevention and treatment (NG125)", "year": 2019, "url": "https://www.nice.org.uk/guidance/ng125", "accessed": "2026-11-04" },
+    { "id": "icmr-amr", "org": "Indian Council of Medical Research (ICMR)", "title": "Treatment Guidelines for Antimicrobial Use in Common Syndromes", "year": 2019, "url": "https://www.icmr.gov.in/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Prophylaxis continued for days 'to be safe' after a clean or clean-contaminated operation. It adds resistance, Clostridioides difficile and kidney injury, not protection." },
+      { "text": "A dose given on the ward hours before transfer to theatre, or after the incision: mistimed prophylaxis is close to no prophylaxis." },
+      { "text": "A contaminated or dirty operation labelled as 'prophylaxis': that patient needs treatment, with a defined course." },
+      { "text": "A penicillin allergy label accepted without asking what happened. Most labels are not true IgE-mediated allergy, and avoiding a beta-lactam increases infection risk." },
+      { "text": "Known MRSA carriage, which changes the agent." }
+    ],
+    "do_now": [
+      { "text": "Give prophylaxis as a single intravenous dose before incision. ASHP/IDSA/SIS/SHEA advise starting within 60 minutes before incision (120 minutes for vancomycin and fluoroquinolones); WHO advises within 120 minutes, taking the drug's half-life into account.", "timeCritical": true, "evidenceRef": "ashp-2013" },
+      { "text": "Confirm at the time out that prophylaxis has been given and when.", "timeCritical": true, "evidenceRef": "who-ssi" },
+      { "text": "Choose a narrow agent that covers the likely organisms of the operative site, usually a first-generation cephalosporin such as cefazolin, with anaerobic cover added for colorectal and some other operations, per the local or ICMR policy.", "evidenceRef": "icmr-amr" },
+      { "text": "Dose by weight: cefazolin 2 g for adults, 3 g for those weighing 120 kg or more, per ASHP/IDSA/SIS/SHEA.", "evidenceRef": "ashp-2013" }
+    ],
+    "assess": [
+      { "text": "Classify the wound: clean (no viscus entered), clean-contaminated (controlled entry into the respiratory, alimentary or genitourinary tract), contaminated (spillage, open fresh trauma, acute non-purulent inflammation), dirty (pus, perforated viscus, old trauma)." },
+      { "text": "Prophylaxis is indicated for clean-contaminated operations, for clean operations with an implant or prosthesis, and where infection would be catastrophic. For other clean operations, follow the procedure-specific recommendation, because the evidence differs between procedures." },
+      { "text": "Take an allergy history that describes the reaction. A remote non-severe rash is not a contraindication to cefazolin in most patients; anaphylaxis or a severe cutaneous reaction is." },
+      { "text": "Renal function for agents whose redosing interval changes, and MRSA status where screening exists.", "calcs": ["crcl", "ckdepi"] }
+    ],
+    "investigate": [
+      { "text": "MRSA screening where local policy requires it before implant surgery." },
+      { "text": "Allergy delabelling pathways, where available, for patients with a low-risk penicillin allergy history." }
+    ],
+    "resuscitate": [
+      { "text": "Redose intraoperatively when the operation exceeds two half-lives of the agent (around every 4 hours for cefazolin) or blood loss exceeds 1500 mL in adults.", "evidenceRef": "ashp-2013" },
+      { "text": "Supporting measures: clip rather than shave hair if removal is needed, alcohol-based chlorhexidine skin preparation, and normothermia.", "evidenceRef": "who-ssi" },
+      { "text": "Decolonise known Staphylococcus aureus nasal carriers with mupirocin and chlorhexidine before cardiothoracic and orthopaedic surgery.", "evidenceRef": "who-ssi" }
+    ],
+    "definitive": [
+      { "text": "Stop prophylaxis at the end of the operation. WHO recommends against continuing it after the operation to prevent surgical site infection.", "evidenceRef": "who-ssi" },
+      { "text": "Do not continue prophylaxis because a drain or line is in place.", "evidenceRef": "who-ssi" },
+      { "text": "Contaminated and dirty operations receive treatment-course antibiotics, kept short and defined after source control.", "evidenceRef": "ashp-2013" },
+      { "text": "For true beta-lactam allergy, use the locally recommended alternative, typically clindamycin or vancomycin, with Gram-negative cover added when the operation requires it.", "evidenceRef": "ashp-2013" },
+      { "text": "Follow the hospital antibiotic policy, which reflects local resistance patterns, and audit compliance.", "evidenceRef": "nice-ng125" }
+    ],
+    "escalate": [
+      { "text": "Microbiology or infectious diseases for MRSA carriers, multidrug-resistant colonisation, and complex allergy." },
+      { "text": "Antimicrobial stewardship team for audit of timing, choice and duration." },
+      { "text": "Allergy service for patients whose label blocks first-line agents repeatedly." }
+    ]
+  },
+  "notes": [
+    "Prophylaxis protects the wound during the operation. Its benefit is in tissue concentration at the moment of contamination, which is why timing matters more than duration.",
+    "Prolonged post-operative prophylaxis is one of the commonest forms of antibiotic misuse in Indian and international hospitals and is a target of every stewardship programme.",
+    "A good time out question is not 'antibiotics given?' but 'what was given, and at what time?'."
+  ],
+  "calcs": ["crcl", "ckdepi"]
+}

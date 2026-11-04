@@ -1,0 +1,64 @@
+{
+  "id": "eras-bundle",
+  "title": "Enhanced Recovery After Surgery",
+  "subtitle": "ERAS colorectal bundle: compliance is the intervention",
+  "category": "perioperative",
+  "specialty": "periop",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "eras-colorectal-2018", "org": "ERAS Society", "title": "Guidelines for perioperative care in elective colorectal surgery: Enhanced Recovery After Surgery (ERAS) Society recommendations 2018", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30426190/", "accessed": "2026-11-04" },
+    { "id": "eras-society", "org": "ERAS Society", "title": "ERAS Society guidelines library", "year": 2026, "url": "https://erassociety.org/guidelines/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A patient falling off the pathway: not tolerating diet, not mobilising, rising pain or rising heart rate. This is a complication until shown otherwise, not an ERAS failure." },
+      { "text": "Discharge criteria met on paper while the patient still has tachycardia, rising inflammatory markers or new pain." },
+      { "text": "Unrecognised malnutrition or anaemia at pre-assessment, which ERAS elements cannot overcome on the day." },
+      { "text": "Low pathway compliance on audit: outcomes track compliance with the bundle, not the existence of a protocol." }
+    ],
+    "do_now": [
+      { "text": "Pre-admission: counselling and written information about the pathway, the expected length of stay and the patient's role.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Pre-admission optimisation: smoking and alcohol cessation, correction of anaemia, and nutritional screening with supplementation where malnourished; prehabilitation where available.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Fasting: clear fluids up to 2 hours and solids up to 6 hours before induction, with pre-operative oral carbohydrate loading in non-diabetic patients.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Avoid routine long-acting sedative premedication.", "evidenceRef": "eras-colorectal-2018" }
+    ],
+    "assess": [
+      { "text": "Nutritional risk at pre-assessment.", "calcs": ["must", "nrs2002"] },
+      { "text": "Risk of post-operative nausea and vomiting, to plan multimodal prophylaxis.", "calcs": ["apfel"] },
+      { "text": "Obstructive sleep apnoea and frailty, which change opioid and monitoring decisions.", "calcs": ["stopbang", "cfs"] },
+      { "text": "Daily review against the pathway milestones: diet, mobility, catheter, drains, analgesia and discharge criteria." }
+    ],
+    "investigate": [
+      { "text": "Haemoglobin and iron studies early enough to treat iron deficiency before surgery." },
+      { "text": "Audit compliance with each ERAS element prospectively; the ERAS Society interactive audit system or a local equivalent." }
+    ],
+    "resuscitate": [
+      { "text": "Intra-operative: antimicrobial prophylaxis and skin preparation, standardised anaesthesia with short-acting agents, and multimodal PONV prophylaxis.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Minimally invasive surgery where expertise allows.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Avoid fluid overload: a near-zero fluid balance approach, with goal-directed therapy for high-risk patients.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Maintain normothermia with active warming throughout.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Mechanical bowel preparation alone should not be used routinely for colonic surgery; mechanical preparation combined with oral antibiotics may be considered. Preparation is usually used before rectal surgery.", "evidenceRef": "eras-colorectal-2018" }
+    ],
+    "definitive": [
+      { "text": "No routine nasogastric tube, and no routine abdominal drains after colonic surgery.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Multimodal, opioid-sparing analgesia: regular paracetamol and NSAIDs where appropriate, with regional techniques suited to the approach.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Early oral intake, usually within 24 hours, and early mobilisation from the day of surgery.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Early removal of the urinary catheter, usually within 24 hours after colonic surgery.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Prevent ileus: avoid fluid overload, minimise opioids, and consider chewing gum.", "evidenceRef": "eras-colorectal-2018" },
+      { "text": "Glycaemic control and thromboprophylaxis, including extended prophylaxis after major cancer surgery.", "evidenceRef": "eras-colorectal-2018" }
+    ],
+    "escalate": [
+      { "text": "Senior review when a patient deviates from the pathway milestones; deviation is often the first sign of a complication." },
+      { "text": "Dietitian for malnourished patients before and after surgery." },
+      { "text": "An ERAS lead or coordinator who owns audit and feedback; compliance falls without one." }
+    ]
+  },
+  "notes": [
+    "ERAS is a bundle. The individual elements have modest effects; consistent delivery of most of them is what shortens stay and reduces complications.",
+    "Early discharge is the result of recovery, not its target. A patient who misses a milestone needs examining, not chasing.",
+    "The elements that matter most are the ones easiest to drop: carbohydrate loading, avoiding fluid overload, early catheter removal and getting out of bed on day zero."
+  ],
+  "calcs": ["must", "nrs2002", "apfel", "stopbang", "cfs"]
+}

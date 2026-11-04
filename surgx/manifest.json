@@ -694,6 +694,126 @@
       "specialty": "cardiothoracic",
       "file": "protocols/pneumothorax.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "acute-pancreatitis",
+      "kind": "authored",
+      "title": "Acute pancreatitis",
+      "subtitle": "Classify by organ failure, resuscitate moderately, delay intervention",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/acute-pancreatitis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "lower-gi-bleed",
+      "kind": "authored",
+      "title": "Acute lower GI bleeding",
+      "subtitle": "Shock index first, localise before you operate",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/lower-gi-bleed.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "colonic-volvulus",
+      "kind": "authored",
+      "title": "Sigmoid and caecal volvulus",
+      "subtitle": "Decompress the sigmoid, resect the caecum",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/colonic-volvulus.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "anastomotic-leak",
+      "kind": "authored",
+      "title": "Anastomotic leak",
+      "subtitle": "Suspect early, scan early, control the source",
+      "category": "perioperative",
+      "specialty": "general",
+      "file": "protocols/anastomotic-leak.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "bile-duct-injury",
+      "kind": "authored",
+      "title": "Bile duct injury after cholecystectomy",
+      "subtitle": "Recognise, drain, define, refer to HPB",
+      "category": "perioperative",
+      "specialty": "general",
+      "file": "protocols/bile-duct-injury.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "perianal-sepsis",
+      "kind": "authored",
+      "title": "Perianal sepsis and acute anorectal conditions",
+      "subtitle": "Abscess, thrombosed haemorrhoid, fissure, pilonidal",
+      "category": "abdomen",
+      "specialty": "general",
+      "file": "protocols/perianal-sepsis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "who-safety-checklist",
+      "kind": "authored",
+      "title": "WHO Surgical Safety Checklist",
+      "subtitle": "Sign in, time out, sign out: what each item prevents",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/who-safety-checklist.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "surgical-prophylaxis",
+      "kind": "authored",
+      "title": "Surgical antibiotic prophylaxis",
+      "subtitle": "Right drug, right time, stop at the end",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/surgical-prophylaxis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "periop-antithrombotic",
+      "kind": "authored",
+      "title": "Peri-operative anticoagulants and antiplatelets",
+      "subtitle": "When to stop, whether to bridge, when to restart",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/periop-antithrombotic.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "periop-diabetes-steroids",
+      "kind": "authored",
+      "title": "Peri-operative diabetes, SGLT2 inhibitors and steroid cover",
+      "subtitle": "Keep glucose safe, avoid ketoacidosis, prevent adrenal crisis",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/periop-diabetes-steroids.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eras-bundle",
+      "kind": "authored",
+      "title": "Enhanced Recovery After Surgery",
+      "subtitle": "ERAS colorectal bundle: compliance is the intervention",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/eras-bundle.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "postop-vte-prophylaxis",
+      "kind": "authored",
+      "title": "Post-operative VTE prophylaxis",
+      "subtitle": "Assess every patient, balance clot against bleed",
+      "category": "perioperative",
+      "specialty": "periop",
+      "file": "protocols/postop-vte-prophylaxis.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -755,6 +875,12 @@
       "id": "vascular",
       "file": "steps/vascular.json",
       "title": "Shared open arterial steps",
+      "shared": true
+    },
+    {
+      "id": "bowel",
+      "file": "steps/bowel.json",
+      "title": "Shared bowel, stoma and anastomosis steps",
       "shared": true
     }
   ],
@@ -1111,6 +1237,66 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 30
+    },
+    {
+      "id": "hartmanns-procedure",
+      "title": "Hartmann's procedure",
+      "subtitle": "Sigmoid resection, end colostomy, closed rectal stump",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/hartmanns-procedure.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 150
+    },
+    {
+      "id": "loop-ileostomy",
+      "title": "Loop ileostomy: formation and closure",
+      "subtitle": "Defunctioning stoma and its reversal",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/loop-ileostomy.json",
+      "stepPacks": [
+        "core",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "lap-perforated-duodenal-ulcer",
+      "title": "Laparoscopic repair of perforated duodenal ulcer",
+      "subtitle": "Omental patch, washout, treat the cause",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/lap-perforated-duodenal-ulcer.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "small-bowel-resection",
+      "title": "Small bowel resection with anastomosis",
+      "subtitle": "Resect what is dead, keep what is alive, measure what is left",
+      "system": "gastrointestinal",
+      "specialty": "general",
+      "file": "procedures/small-bowel-resection.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "bowel"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
     }
   ],
   "cases": [
@@ -1282,6 +1468,32 @@
       "subtitle": "Ruptured abdominal aortic aneurysm",
       "specialty": "vascular",
       "file": "cases/pulsatile-mass-collapse.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "severe-pancreatitis-restraint",
+      "title": "Severe acute pancreatitis, day 2 to day 14",
+      "subtitle": "When not to operate",
+      "specialty": "general",
+      "file": "cases/severe-pancreatitis-restraint.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "apixaban-clopidogrel-hernia",
+      "title": "Apixaban and clopidogrel before a hernia repair",
+      "subtitle": "Peri-operative antithrombotic planning",
+      "specialty": "periop",
+      "file": "cases/apixaban-clopidogrel-hernia.json",
       "levels": [
         "intern",
         "resident",

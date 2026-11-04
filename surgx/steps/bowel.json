@@ -1,0 +1,148 @@
+{
+  "_comment": "SURGX shared bowel steps: stoma siting, formation and maturation, mesenteric and bowel division, anastomosis and leak testing. Used by two or more GI procedures (Hartmann's, loop ileostomy, small bowel resection, perforated duodenal ulcer repair). Procedure-only steps stay in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.bowel.stoma-siting": {
+      "id": "step.bowel.stoma-siting", "kind": "prep",
+      "title": "Pre-operative stoma siting",
+      "why": "Most stoma leaks, skin problems and appliance failures trace back to where the stoma was put. A site chosen with the patient sitting, standing and dressed avoids creases, scars and the belt line that are invisible on a supine anaesthetised abdomen.",
+      "how": [
+        "Mark the site before theatre whenever time allows, ideally with a stoma specialist nurse, for any operation in which a stoma is possible.",
+        "Examine the patient lying, sitting and standing. Choose a flat area of at least the size of the appliance flange, within the rectus sheath, below the belt line and where the patient can see it.",
+        "Avoid the umbilicus, costal margin, anterior superior iliac spine, existing scars, skin folds and the planned incision.",
+        "Mark both iliac fossae if the type of stoma is uncertain, and record which is which."
+      ],
+      "structuresAtRisk": ["Peristomal skin"],
+      "pitfalls": [
+        "Siting on the supine anaesthetised patient, where a deep crease becomes visible only when the patient sits up on day two.",
+        "Siting lateral to the rectus, which raises the risk of parastomal hernia and prolapse."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.trephine": {
+      "id": "step.bowel.trephine", "kind": "access",
+      "title": "Creating the stoma trephine",
+      "why": "The trephine is a hole in the abdominal wall that must be large enough to keep the stoma perfused and small enough not to become a parastomal hernia. Both errors are made in this one minute.",
+      "how": [
+        "Excise a disc of skin at the marked site, roughly the diameter of the bowel being brought out; do not excise subcutaneous fat, just part it.",
+        "Incise the anterior rectus sheath in a cruciate or vertical line, split the rectus muscle in the line of its fibres, and retract it.",
+        "Identify and protect the inferior epigastric vessels before incising the posterior sheath and peritoneum.",
+        "Keep the skin, sheath and peritoneal openings in line by holding the wound edges in their anatomical position, typically admitting two fingers for an ileostomy."
+      ],
+      "structuresAtRisk": ["Inferior epigastric artery and veins", "Underlying bowel when the peritoneum is opened"],
+      "pitfalls": [
+        "Misaligned layers, which kink the bowel as it passes through and cause outflow obstruction.",
+        "An oversized fascial opening, which is the mechanism of a parastomal hernia.",
+        "An undersized opening that throttles the mesentery and makes the stoma dusky by the evening."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.stoma-mature": {
+      "id": "step.bowel.stoma-mature", "kind": "reconstruction",
+      "title": "Maturing the stoma and checking viability",
+      "why": "Small bowel effluent is caustic. A spouted ileostomy protects the skin for life; a flush ileostomy causes years of leakage. Viability is judged after closure because closure changes the tension and the perfusion.",
+      "how": [
+        "Mature only after the main wound is closed and covered, so faecal contamination does not reach it.",
+        "Ileostomy: evert to a spout of roughly 2 to 3 cm (Brooke technique) using three-point sutures through the bowel edge, the seromuscular layer at the skin level and the dermis.",
+        "Colostomy: suture flush or slightly raised, full-thickness bowel to dermis.",
+        "Inspect the mucosa: pink and bleeding from the cut edge is viable; dusky that does not improve, or black, needs revision now.",
+        "Apply a clear drainable appliance so that colour can be checked on the ward without removing it."
+      ],
+      "structuresAtRisk": ["Marginal vessels at the stoma edge", "Peristomal skin"],
+      "pitfalls": [
+        "Sutures through the dermal surface rather than the dermis, which leave mucosal implants on the skin.",
+        "Accepting a dusky stoma at the end of the operation and hoping it improves overnight.",
+        "Under-spouting an ileostomy because the mesentery is short; mobilise more instead."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.mesentery-division": {
+      "id": "step.bowel.mesentery-division", "kind": "resection",
+      "title": "Dividing the mesentery",
+      "why": "The mesenteric division decides the blood supply of both cut ends. Stay close enough to the bowel to keep the arcades of the retained bowel intact, and far enough from it that the cut ends are not stripped.",
+      "how": [
+        "Transilluminate the mesentery to see the arcades and choose a line that preserves supply to both retained ends.",
+        "Score the peritoneum on both faces, then divide between clips or ties, or with a vessel-sealing device in thin mesentery.",
+        "Ligate larger vessels individually; a thick inflamed mesentery is taken in small bites.",
+        "For a benign resection, divide close to the bowel; for malignancy, take the mesentery to its origin as the oncological plan dictates."
+      ],
+      "structuresAtRisk": ["Arcades supplying the retained bowel", "Superior mesenteric vessels at the root", "Ureter and gonadal vessels behind the sigmoid mesentery"],
+      "pitfalls": [
+        "Tied pedicles slipping in an oedematous mesentery, producing a mesenteric haematoma that compromises the anastomosis.",
+        "Skeletonising more than about 1 cm of bowel wall at the planned division point."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.bowel-division": {
+      "id": "step.bowel.bowel-division", "kind": "resection",
+      "title": "Dividing the bowel",
+      "why": "Division is where contamination of the field happens. A stapled or clamped division keeps contents in, and the state of the cut ends after division is the first real test of their blood supply.",
+      "how": [
+        "Pack off the field with moist swabs before division.",
+        "Divide with a linear cutting stapler, or between non-crushing and crushing clamps, at the point already prepared on the mesenteric border.",
+        "Check the cut ends: pulsatile or bright bleeding from the mesenteric edge is reassuring; dark oozing or no bleeding is not.",
+        "Hand the specimen off the field and change contaminated instruments."
+      ],
+      "structuresAtRisk": ["Mesenteric vessels at the division point"],
+      "pitfalls": [
+        "Including the mesentery in the staple line, which bleeds and devascularises the end.",
+        "Dividing without packing off in an obstructed, loaded bowel."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.anastomosis-stapled": {
+      "id": "step.bowel.anastomosis-stapled", "kind": "reconstruction", "critical": true,
+      "title": "Stapled side-to-side (functional end-to-end) anastomosis",
+      "why": "An anastomosis heals only if it is well perfused, tension-free and made between healthy ends. The stapler gives a reproducible, wide lumen, but it does not compensate for poor blood supply or a patient in shock.",
+      "how": [
+        "Decide first whether an anastomosis is safe at all: haemodynamic instability, vasopressors, gross contamination, malnutrition and doubtful viability favour a stoma or a delayed anastomosis.",
+        "Lay the two limbs side by side along their antimesenteric borders, make enterotomies at the corner, and fire a linear cutting stapler, keeping the mesentery clear.",
+        "Inspect the staple line from inside for bleeding.",
+        "Close the common enterotomy with a further transverse stapler firing or a handsewn layer, staggering the staple lines.",
+        "Place a reinforcing suture at the crotch of the anastomosis, where tension concentrates."
+      ],
+      "structuresAtRisk": ["Mesentery caught in the stapler jaws", "Back wall of the bowel during closure of the enterotomy"],
+      "pitfalls": [
+        "Overlapping staple lines at the crotch without reinforcement.",
+        "Using a stapler cartridge whose staple height is wrong for thick, oedematous bowel."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.anastomosis-handsewn": {
+      "id": "step.bowel.anastomosis-handsewn", "kind": "reconstruction", "critical": true,
+      "title": "Handsewn anastomosis",
+      "why": "A handsewn anastomosis adapts to bowel of mismatched calibre, to thick oedematous wall and to settings without a stapler. Its safety rests on taking the submucosa, the strength layer, in every bite.",
+      "how": [
+        "Confirm both ends bleed and lie together without tension; mobilise further rather than pull.",
+        "Single-layer extramucosal interrupted or continuous technique with a slowly absorbable monofilament suture, end-to-end or end-to-side.",
+        "Include the submucosa in every bite, with even spacing and depth, roughly 5 mm bites placed 5 mm apart as a guide.",
+        "Begin at the mesenteric border, where leaks most often start because the bowel wall is hidden by fat.",
+        "Correct a calibre mismatch with an antimesenteric (Cheatle) slit on the narrower end."
+      ],
+      "structuresAtRisk": ["Mesenteric border of the bowel", "Marginal vessels"],
+      "pitfalls": [
+        "Strangulating the edges by tying too tightly, which causes ischaemia rather than strength.",
+        "Missing the mesenteric corner, the usual site of a leak."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.bowel.leak-check": {
+      "id": "step.bowel.leak-check", "kind": "checkpoint", "critical": true,
+      "title": "Checking the repair or anastomosis",
+      "why": "A defect found on the table costs a stitch. The same defect found on day four costs a re-laparotomy. A deliberate check and an inspection of perfusion take less than two minutes.",
+      "how": [
+        "Inspect the whole circumference, including the mesenteric border and the crotch of a stapled anastomosis.",
+        "Confirm the lumen is patent by palpation between finger and thumb.",
+        "Confirm perfusion of both sides; consider an objective perfusion assessment where it is available.",
+        "For a gastroduodenal repair, test with air insufflated via a nasogastric tube under saline, or with dilute methylene blue, and reinforce any leak.",
+        "Record the check and its result in the operative note."
+      ],
+      "structuresAtRisk": ["The repair itself"],
+      "pitfalls": [
+        "A negative air test treated as a guarantee: it excludes a technical hole, not later ischaemic breakdown.",
+        "Skipping the check because the anastomosis 'looks fine'."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}
