@@ -228,6 +228,21 @@ export function buildAll(root = ROOT) {
       cr: clean(c.author), li: clean(c.licence), lk: "prep", sys: slugify(system), sysName: system });
   }
 
+  /* 8. Openly licensed pathology and histology micrographs from Wikimedia Commons (tools/fetch-commons-pathology.mjs:
+   *    CC BY, CC BY-SA, CC0 or public domain only; the uploader's own English description is the caption). The
+   *    viewer shows author and licence and links to the Commons file page, which is the attribution CC BY asks for. */
+  const cp = readJSON(path.join(root, "kb/imglib/commons-pathology.json"));
+  for (const m of (cp && cp.items) || []) {
+    if (!m || !/^https:\/\/upload\.wikimedia\.org\//.test(String(m.src || "")) || !m.licence || !m.page) continue;
+    const cap = clean(m.caption);
+    if (!cap) continue;
+    const system = clean(m.system) || "Pathology and Immunology";
+    push({ s: m.src, t: clean(m.title), c: cap, a: clean(m.title), ar: m.w && m.h ? +(m.w / m.h).toFixed(4) : null,
+      k: clean(m.kind) || "Histopathology", o: "commons", f: m.kind === "Histology" ? "Commons histology" : "Commons pathology",
+      ri: m.page, rn: clean(m.title), cr: clean(m.author), li: clean(m.licence), lk: "commons", u: m.page,
+      sys: slugify(system), sysName: sysName(slugify(system), system) });
+  }
+
   /* Group by system, stable order: count desc, then name. */
   const bySys = new Map();
   for (const e of items) {
