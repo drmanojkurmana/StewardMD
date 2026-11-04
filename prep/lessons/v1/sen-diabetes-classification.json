@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "sen-diabetes-classification",
+ "subject": "ss-endocrinology",
+ "title": "Classification and diagnosis of diabetes",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Diabetes** is **diagnosed** by the ADA when fasting plasma glucose is at least 126 mg/dL, the 2-hour value on an OGTT is at least 200 mg/dL, or the HbA1c is at least 6.5 percent. A random glucose of at least 200 mg/dL with classic symptoms is also diagnostic. Without symptoms, an abnormal result is confirmed unless the hyperglycaemia is unequivocal.",
+   "say": "Diabetes is diagnosed by the ADA when fasting plasma glucose is at least 126 mg/dL, the 2-hour value on an OGTT is at least 200 mg/dL, or the HbA1c is at least 6.5 percent. A random glucose of at least 200 mg/dL with classic symptoms is also diagnostic. Without symptoms, an abnormal result is confirmed unless the hyperglycaemia is unequivocal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Diabetes threshold"
+    ],
+    "rows": [
+     [
+      "Fasting plasma glucose",
+      "At least 126 mg/dL"
+     ],
+     [
+      "2-hour OGTT",
+      "At least 200 mg/dL"
+     ],
+     [
+      "A1c",
+      "At least 6.5 percent"
+     ],
+     [
+      "Random glucose plus symptoms",
+      "At least 200 mg/dL"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Prediabetes** on the ADA definition is a **fasting** plasma glucose of 100 to 125 mg/dL, a 2-hour value of 140 to 199 mg/dL, or an A1c of 5.7 to 6.4 percent. The WHO fasting cutoff of 110 mg/dL is not the ADA rule. These ranges are a risk state, and they are not yet diabetes. Name the criteria, because the two fasting cutoffs are not the same.",
+   "say": "Prediabetes on the ADA definition is a fasting plasma glucose of 100 to 125 mg/dL, a 2-hour value of 140 to 199 mg/dL, or an A1c of 5.7 to 6.4 percent. The WHO fasting cutoff of 110 mg/dL is not the ADA rule. These ranges are a risk state, and they are not yet diabetes. Name the criteria, because the two fasting cutoffs are not the same.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ADA prediabetes",
+     "points": [
+      "Fasting glucose 100 to 125 mg/dL",
+      "2-hour value 140 to 199 mg/dL",
+      "A1c 5.7 to 6.4 percent"
+     ]
+    },
+    "right": {
+     "title": "Do not mix systems",
+     "points": [
+      "WHO fasting cutoff is 110 mg/dL",
+      "The ADA teaching cutoff is 100",
+      "Say which system you are using"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Type** 1 **diabetes** is immune destruction of beta cells. The antibodies are GAD65, IA-2, ZnT8, and insulin antibody, and the C-peptide is low once the honeymoon is over. Latent autoimmune diabetes in adults is the slower antibody-positive form. The drawing marks about six months to insulin, but time to insulin varies from months to a few years, so that mark is not a rule.",
+   "say": "Type 1 diabetes is immune destruction of beta cells. The antibodies are GAD65, IA-2, ZnT8, and insulin antibody, and the C-peptide is low once the honeymoon is over. Latent autoimmune diabetes in adults is the slower antibody-positive form. The drawing marks about six months to insulin, but time to insulin varies from months to a few years, so that mark is not a rule.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/latent-autoimmune-diabetes-fig1.webp",
+    "alt": "Drawing titled latent autoimmune diabetes in adults, with islet T cells and antibodies to GAD65, ICA, IA-2, and ZnT8, plus three curves of insulin requirement.",
+    "caption": "The drawing shows GAD65, ICA, IA-2, and ZnT8, and three curves from steep childhood type 1 to a flatter type 2. The six-month label on the figure is not a universal rule (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Type 2 diabetes** is more than insulin resistance. The ominous octet includes increased glucagon, increased hepatic glucose output, and an incretin deficit. Fasting glucose reflects hepatic glucose output more than muscle uptake. The drawing contrasts immune destruction in type 1 with impaired secretion, resistance, and hepatic glucose production in type 2.",
+   "say": "Type 2 diabetes is more than insulin resistance. The ominous octet includes increased glucagon, increased hepatic glucose output, and an incretin deficit. Fasting glucose reflects hepatic glucose output more than muscle uptake. The drawing contrasts immune destruction in type 1 with impaired secretion, resistance, and hepatic glucose production in type 2.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-mellitus-fig1.webp",
+    "alt": "Drawing comparing type 1 diabetes, with autoantibodies and beta-cell destruction, and type 2 diabetes, with impaired secretion, insulin resistance, and increased hepatic glucose production.",
+    "caption": "The drawing separates immune beta-cell loss in type 1 from impaired secretion, insulin resistance, and hepatic glucose production in type 2. Diagnostic numbers are not printed (StewardMD)."
+   }
+  },
+  {
+   "tx": "The **Diabetes Prevention** Program showed that lifestyle change reduced new diabetes by 58 percent and that metformin reduced it by 31 percent. Lifestyle is the stronger prevention tool, and metformin is an option when lifestyle is not enough. These figures are for people with prediabetes, and they are not a treatment trial of established type 1 diabetes.",
+   "say": "The Diabetes Prevention Program showed that lifestyle change reduced new diabetes by 58 percent and that metformin reduced it by 31 percent. Lifestyle is the stronger prevention tool, and metformin is an option when lifestyle is not enough. These figures are for people with prediabetes, and they are not a treatment trial of established type 1 diabetes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Prediabetes on ADA criteria"
+     },
+     {
+      "id": "b",
+      "label": "Lifestyle change, about 58 percent fewer cases"
+     },
+     {
+      "id": "c",
+      "label": "Metformin, about 31 percent fewer cases"
+     },
+     {
+      "id": "d",
+      "label": "Lifestyle is the stronger prevention tool"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Teplizumab** is **given** as a 14-day course in stage 2 type 1 diabetes, when at least two antibodies and dysglycaemia are present and insulin is not yet required. It can delay stage 3, and it does not replace insulin once stage 3 has started. It is not a treatment for ordinary type 2 diabetes. Do not offer it to a patient who is already in diabetic ketoacidosis.",
+   "say": "Teplizumab is given as a 14-day course in stage 2 type 1 diabetes, when at least two antibodies and dysglycaemia are present and insulin is not yet required. It can delay stage 3, and it does not replace insulin once stage 3 has started. It is not a treatment for ordinary type 2 diabetes. Do not offer it to a patient who is already in diabetic ketoacidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Teplizumab place"
+    ],
+    "rows": [
+     [
+      "Stage 2",
+      "Antibodies plus dysglycaemia, not yet on insulin"
+     ],
+     [
+      "Course",
+      "14 days"
+     ],
+     [
+      "Effect",
+      "Delays stage 3, does not replace insulin"
+     ],
+     [
+      "Stage 3 or ketoacidosis",
+      "Not the indication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ketosis-prone** type 2 diabetes presents with diabetic ketoacidosis, often in a person of African or Asian ancestry. Antibodies are negative, and insulin can sometimes be stopped after the acute episode when endogenous insulin returns. This remission is not type 1 diabetes. Keep sick-day rules, because ketoacidosis can return.",
+   "say": "Ketosis-prone type 2 diabetes presents with diabetic ketoacidosis, often in a person of African or Asian ancestry. Antibodies are negative, and insulin can sometimes be stopped after the acute episode when endogenous insulin returns. This remission is not type 1 diabetes. Keep sick-day rules, because ketoacidosis can return.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ketosis-prone type 2",
+     "points": [
+      "Presents in ketoacidosis",
+      "Antibodies are negative",
+      "Insulin can sometimes be stopped later"
+     ]
+    },
+    "right": {
+     "title": "Classic type 1",
+     "points": [
+      "Antibodies are usually present",
+      "C-peptide stays low",
+      "Insulin is not a temporary course"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fibrocalculous pancreatic** diabetes is a tropical form, including in India. The patient is often young and lean, with abdominal pain and pancreatic calcification, and insulin is required. Ketoacidosis is less typical than in type 1 diabetes. Do not call every young lean insulin-treated patient type 1 when the pancreas is calcified.",
+   "say": "Fibrocalculous pancreatic diabetes is a tropical form, including in India. The patient is often young and lean, with abdominal pain and pancreatic calcification, and insulin is required. Ketoacidosis is less typical than in type 1 diabetes. Do not call every young lean insulin-treated patient type 1 when the pancreas is calcified.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "Fibrocalculous pancreatic diabetes"
+    ],
+    "rows": [
+     [
+      "Setting",
+      "Tropical regions, including India"
+     ],
+     [
+      "Body and pain",
+      "Young, lean, abdominal pain"
+     ],
+     [
+      "Imaging",
+      "Pancreatic calcification"
+     ],
+     [
+      "Ketosis",
+      "Often absent, unlike classic type 1"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

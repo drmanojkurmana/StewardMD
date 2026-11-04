@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "sen-primary-aldosteronism",
+ "subject": "ss-endocrinology",
+ "title": "Primary aldosteronism and mineralocorticoid excess",
+ "minutes": 9,
+ "steps": [
+  {
+   "tx": "**Screen** for **primary** aldosteronism in resistant hypertension, hypertension with spontaneous or diuretic-induced hypokalemia, an adrenal incidentaloma with hypertension, early-onset hypertension, or a family history of early hypertension or stroke. Many patients are normokalaemic, so a normal potassium does not exclude the disease. The drawing shows a canary yellow cortical adenoma driving sodium retention and potassium loss, which is why the potassium can be low, but a normal potassium is still compatible.",
+   "say": "Screen for primary aldosteronism in resistant hypertension, hypertension with spontaneous or diuretic-induced hypokalemia, an adrenal incidentaloma with hypertension, early-onset hypertension, or a family history of early hypertension or stroke. Many patients are normokalaemic, so a normal potassium does not exclude the disease. The drawing shows a canary yellow cortical adenoma driving sodium retention and potassium loss, which is why the potassium can be low, but a normal potassium is still compatible.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aldosterone-producing-adenoma-fig1.webp",
+    "alt": "Drawing of a canary yellow adenoma on the adrenal cortex and a collecting duct reabsorbing sodium and excreting potassium.",
+    "caption": "The drawing shows a canary yellow cortical adenoma and a collecting duct taking up sodium and losing potassium. It does not show the aldosterone to renin ratio (StewardMD)."
+   }
+  },
+  {
+   "tx": "The **screening test** is the plasma aldosterone concentration divided by plasma renin. A commonly used positive screen is a ratio above 30 when aldosterone is measured in ng/dL and renin in ng/mL/h, together with an aldosterone above 10 ng/dL. The laboratory's own cutoff and units must be used. A ratio without the units is not an answer, because a direct renin concentration uses a different number from plasma renin activity.",
+   "say": "The screening test is the plasma aldosterone concentration divided by plasma renin. A commonly used positive screen is a ratio above 30 when aldosterone is measured in ng/dL and renin in ng/mL/h, together with an aldosterone above 10 ng/dL. The laboratory's own cutoff and units must be used. A ratio without the units is not an answer, because a direct renin concentration uses a different number from plasma renin activity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Piece",
+     "Common teaching cutoff"
+    ],
+    "rows": [
+     [
+      "Aldosterone over renin",
+      "Ratio above 30 in ng/dL per ng/mL/h"
+     ],
+     [
+      "Aldosterone itself",
+      "Above 10 ng/dL with that ratio"
+     ],
+     [
+      "Units",
+      "Use the laboratory cutoff"
+     ],
+     [
+      "Potassium",
+      "Normal does not exclude the disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stop spironolactone** and eplerenone for 4 to 6 weeks before the ratio, because they raise renin and can falsely normalise the screen. A beta blocker can suppress renin and falsely raise the ratio, so an abnormal result on a beta blocker still needs confirmation. Do not stop every antihypertensive for weeks in a patient with dangerous pressure. The mineralocorticoid receptor antagonists are the drugs that most reliably wreck the screen.",
+   "say": "Stop spironolactone and eplerenone for 4 to 6 weeks before the ratio, because they raise renin and can falsely normalise the screen. A beta blocker can suppress renin and falsely raise the ratio, so an abnormal result on a beta blocker still needs confirmation. Do not stop every antihypertensive for weeks in a patient with dangerous pressure. The mineralocorticoid receptor antagonists are the drugs that most reliably wreck the screen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stop before the ratio",
+     "points": [
+      "Spironolactone and eplerenone",
+      "4 to 6 weeks",
+      "They raise renin and hide the disease"
+     ]
+    },
+    "right": {
+     "title": "Interpret with care",
+     "points": [
+      "A beta blocker suppresses renin",
+      "The ratio can look falsely high",
+      "An abnormal result still needs confirmation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Confirm** with a suppression test unless spontaneous hypokalaemia, undetectable renin, and a plasma aldosterone above 20 ng/dL already make the diagnosis obvious. After intravenous saline, failure of aldosterone to fall below 10 ng/dL supports primary aldosteronism. Saline loading is avoided in uncontrolled hypertension or heart failure. A patient who is already in pulmonary oedema does not need a saline infusion to prove the diagnosis.",
+   "say": "Confirm with a suppression test unless spontaneous hypokalaemia, undetectable renin, and a plasma aldosterone above 20 ng/dL already make the diagnosis obvious. After intravenous saline, failure of aldosterone to fall below 10 ng/dL supports primary aldosteronism. Saline loading is avoided in uncontrolled hypertension or heart failure. A patient who is already in pulmonary oedema does not need a saline infusion to prove the diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Positive aldosterone renin ratio"
+     },
+     {
+      "id": "b",
+      "label": "Obvious case: skip suppression"
+     },
+     {
+      "id": "c",
+      "label": "Otherwise a saline infusion test"
+     },
+     {
+      "id": "d",
+      "label": "Aldosterone stays at or above 10 ng/dL"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **unilateral aldosterone**-producing adenoma, Conn syndrome, is treated by laparoscopic adrenalectomy. Bilateral idiopathic hyperplasia is treated with a mineralocorticoid receptor antagonist. Spironolactone causes gynecomastia, and eplerenone is the alternative. The yellow nodule on the drawing is the adenoma you can remove. Hyperplasia is not a nodule you should chase with an operation on both glands.",
+   "say": "A unilateral aldosterone-producing adenoma, Conn syndrome, is treated by laparoscopic adrenalectomy. Bilateral idiopathic hyperplasia is treated with a mineralocorticoid receptor antagonist. Spironolactone causes gynecomastia, and eplerenone is the alternative. The yellow nodule on the drawing is the adenoma you can remove. Hyperplasia is not a nodule you should chase with an operation on both glands.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unilateral adenoma",
+     "points": [
+      "Conn syndrome",
+      "Laparoscopic adrenalectomy",
+      "Biochemistry and sampling come first"
+     ]
+    },
+    "right": {
+     "title": "Bilateral hyperplasia",
+     "points": [
+      "Mineralocorticoid receptor antagonist",
+      "Spironolactone causes gynecomastia",
+      "Eplerenone is the alternative"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Adrenal vein** sampling is recommended before surgery in most patients who want an operation. It can be omitted in a patient younger than 35 years with marked aldosterone excess, spontaneous hypokalaemia, and a clear unilateral adenoma with a normal contralateral gland on imaging. Imaging cannot tell a nonfunctioning adenoma from an aldosterone-producing one in an older adult. Do not book the theatre from the CT alone.",
+   "say": "Adrenal vein sampling is recommended before surgery in most patients who want an operation. It can be omitted in a patient younger than 35 years with marked aldosterone excess, spontaneous hypokalaemia, and a clear unilateral adenoma with a normal contralateral gland on imaging. Imaging cannot tell a nonfunctioning adenoma from an aldosterone-producing one in an older adult. Do not book the theatre from the CT alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Who",
+     "Sampling"
+    ],
+    "rows": [
+     [
+      "Most people who want surgery",
+      "Adrenal vein sampling first"
+     ],
+     [
+      "Under 35, marked excess, low potassium, clear one-sided adenoma",
+      "Sampling can be omitted"
+     ],
+     [
+      "Older adult with a nodule",
+      "CT does not prove the source"
+     ],
+     [
+      "Bilateral hyperplasia",
+      "No adrenalectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Familial hyperaldosteronism** type I, glucocorticoid-remediable aldosteronism, is a chimeric CYP11B1/CYP11B2 gene. Aldosterone is under ACTH control, so low-dose dexamethasone suppresses it, and family members are screened. It presents with early hypertension and haemorrhagic stroke. The drawing shows the chimeric gene, ACTH driving ectopic aldosterone synthase, and a family history of early haemorrhagic stroke.",
+   "say": "Familial hyperaldosteronism type I, glucocorticoid-remediable aldosteronism, is a chimeric CYP11B1/CYP11B2 gene. Aldosterone is under ACTH control, so low-dose dexamethasone suppresses it, and family members are screened. It presents with early hypertension and haemorrhagic stroke. The drawing shows the chimeric gene, ACTH driving ectopic aldosterone synthase, and a family history of early haemorrhagic stroke.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glucocorticoid-remediable-aldosteronism-fig1.webp",
+    "alt": "Drawing of a chimeric CYP11B1 and CYP11B2 gene, ACTH-driven aldosterone, early hypertension, hypokalaemia, and a family history of haemorrhagic stroke.",
+    "caption": "The drawing shows the chimeric CYP11B1/CYP11B2 gene, ACTH driving aldosterone, and early hypertension with a family history of haemorrhagic stroke. Low-dose dexamethasone is named on the treatment panel (StewardMD)."
+   }
+  },
+  {
+   "tx": "Do not **start** a **workup** for primary aldosteronism by removing an incidental adrenal nodule. Imaging cannot tell a nonfunctioning adenoma from an aldosterone-producing one. Biochemistry and, when needed, adrenal vein sampling come first. A normal potassium is not a reason to skip the ratio when the blood pressure is resistant. Screen, confirm, then decide who goes to sampling, and only then decide who goes to theatre.",
+   "say": "Do not start a workup for primary aldosteronism by removing an incidental adrenal nodule. Imaging cannot tell a nonfunctioning adenoma from an aldosterone-producing one. Biochemistry and, when needed, adrenal vein sampling come first. A normal potassium is not a reason to skip the ratio when the blood pressure is resistant. Screen, confirm, then decide who goes to sampling, and only then decide who goes to theatre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Screen with the ratio"
+     },
+     {
+      "id": "b",
+      "label": "Confirm unless the case is obvious"
+     },
+     {
+      "id": "c",
+      "label": "Sample the adrenal veins if surgery is planned"
+     },
+     {
+      "id": "d",
+      "label": "Remove a gland only when it is the source"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
