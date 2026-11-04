@@ -57,6 +57,7 @@ const store = (expr) => ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")
 
 // speechSynthesis stub: records every utterance and cancel, and ends an utterance after 0.4 s (a step is read a sentence at a time).
 const TTS_STUB = `
+  window.SMD_PREP_VOICE = false;
   window.__tts = []; window.__ttsCancel = 0;
   window.SpeechSynthesisUtterance = function (t) { this.text = t; this.rate = 1; this.lang = ""; };
   var cur = null;

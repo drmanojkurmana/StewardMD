@@ -146,7 +146,20 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   premium, enhanced, neural or Siri (iOS `voiceURI` is the AVSpeechSynthesisVoice identifier; the plugin's `voice` is an
   index into that list); compact, Eloquence, novelty and network voices (`localService:false`) are never chosen, and
   with none installed the en-IN system default stays. The better voices are a user download (iOS Settings,
-  Accessibility, Spoken Content, Voices), so a phone with only compact voices sounds as before. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
+  Accessibility, Spoken Content, Voices), so a phone with only compact voices sounds as before.
+  **Natural voice (`prep-voice.js`, optional):** Kokoro-82M quantised ONNX (92 MB, Apache-2.0, `af_heart`) run by the
+  vendored onnxruntime-web (WASM, one thread). The first tap of Play starts the download (Hugging Face, pinned revision,
+  size and sha256 checked, kept in Cache API `prep-voice-v1`) while the system voice keeps reading; the bar shows "Voice
+  n%" in place of the speed button. Text becomes phonemes through the CMU dictionary (ISC; `prep/tts/lex-v1.txt`, built by
+  `tools/prep-voice-lex.mjs` from the lessons' words, ships in www) with spelling and suffix rules for words it lacks
+  (no espeak: it is GPL). After loading, a fixed phrase is timed once (`prep_voice_rtf` in localStorage); above 1.3 times
+  real time the voice is `usable() === false` and the lesson keeps the system voice, because it would stall between
+  sentences. Audio plays through one `<audio>` element (WebAudio is muted by the iOS silent switch), unlocked inside the
+  Play tap. The session is released when the lesson closes. `window.SMD_PREP_VOICE = false` turns it off (UI tests).
+  Measured on a 4-core x86 VM: Kokoro q8 renders 2.3 times real time in WASM (1.4 natively), so it only helps on phones
+  fast enough; speech was checked by transcription (Whisper base.en reads the output back word for word). Not yet timed
+  on an iPhone or an Android phone. Open: a smaller model (KittenTTS nano, 24 MB, 0.4 times real time natively, same
+  input format) or native MLX for iOS if phones come out slow. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
   reader, closing PrepNucleus or Ask MaiK stops it. No voice available: the play and speed controls are not drawn.
 - **Data and offline:** lessons, the index and `prep/lessons/media/*` ship in www (`scripts/build-www.sh`); each lesson
   is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. **Generated lessons are served from R2**

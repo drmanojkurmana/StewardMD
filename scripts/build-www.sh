@@ -325,6 +325,9 @@ if [ -f prep/taxonomy.json ]; then
     mkdir -p "$WWW/prep/lessons/v1" && cp prep/lessons/v1/*.json "$WWW/prep/lessons/v1/"
     [ -d prep/lessons/media ] && mkdir -p "$WWW/prep/lessons/media" && cp prep/lessons/media/* "$WWW/prep/lessons/media/"
   fi
+  # Natural lesson voice (prep-voice.js): the pronunciation lexicon, about 330 KB (tools/prep-voice-lex.mjs). The model itself
+  # (Kokoro, 92 MB) is not bundled: the app downloads it from Hugging Face on the first tap of Play.
+  [ -f prep/tts/lex-v1.txt ] && mkdir -p "$WWW/prep/tts" && cp prep/tts/lex-v1.txt "$WWW/prep/tts/"
   # Interactive figures (fig-viewer.js): self-contained pages built with the Anima kit (MIT), dark + light, with their licence.
   if [ -d prep/figures ]; then
     mkdir -p "$WWW/prep/figures" && cp prep/figures/*.html prep/figures/figures.json prep/figures/ANIMA-LICENSE.txt prep/figures/ANATOMY-LICENSE.txt "$WWW/prep/figures/"

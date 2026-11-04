@@ -405,6 +405,19 @@
   function stopVoice() {
     L.tok++;
     try { var P = plugin(); if (P && P.stop) P.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
+    try { if (G.PREP_VOICE) G.PREP_VOICE.stop(); } catch (e) {}
+  }
+  /* The natural voice (prep-voice.js): the first tap of Play starts its one-time download while the system voice reads on;
+     once it is ready and this phone renders it fast enough, each sentence is spoken by it instead. */
+  function naturalStart() {
+    var V = G.PREP_VOICE;
+    if (!V || !V.available()) return;
+    V.unlock();
+    if (V.state() !== "none" && V.state() !== "error") return;
+    L.vdl = 0; drawBar();
+    var last = 0;
+    V.download(function (p) { var pc = Math.floor(p * 100); if ((pc !== last && pc - last >= 2) || pc === 100) { last = pc; L.vdl = p; drawBar(); } })
+      .then(function () { L.vdl = null; drawBar(); }, function () { L.vdl = null; drawBar(); });
   }
   var voiceIx = null;   // the chosen native voice index (-1: system default), read once
   function nativeVoice(P) {
@@ -424,6 +437,8 @@
       if (n >= chunks.length) { done(); return; }
       var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
       try {
+        var V = G.PREP_VOICE;
+        if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, fail); return; }
         var P = plugin();
         if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
         var u = new G.SpeechSynthesisUtterance(part), wv = webVoice();
@@ -443,7 +458,7 @@
       L.playing = false; drawBar();
     });
   }
-  function setPlaying(on) { L.playing = on && canSpeak(); if (L.playing) narrate(); else stopVoice(); drawBar(); }
+  function setPlaying(on) { L.playing = on && canSpeak(); if (L.playing) { naturalStart(); narrate(); } else stopVoice(); drawBar(); }
 
   /* ---------- drawing ---------- */
   function ico(n) { return host.ico(n); }
@@ -731,7 +746,7 @@
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
       (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +
         '<span class="pn-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>' +
-        '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>" : "") +
+        (L.vdl != null ? '<span class="pn-lsn-dl" role="status" aria-label="Downloading the natural voice, ' + Math.round(L.vdl * 100) + ' percent">Voice ' + Math.round(L.vdl * 100) + "%</span>" : '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>") : "") +
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
@@ -974,6 +989,7 @@
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
+    try { if (G.PREP_VOICE && G.PREP_VOICE.available()) G.PREP_VOICE.init(); } catch (e) {}   // a voice downloaded before loads from the phone now
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
@@ -1035,7 +1051,7 @@
     if (host.stackTop() === L.view) { L.playing = false; stopVoice(); }
     return false;
   }
-  function leave() { L.playing = false; L.zoom = null; stopVoice(); }
+  function leave() { L.playing = false; L.zoom = null; stopVoice(); try { if (G.PREP_VOICE) G.PREP_VOICE.release(); } catch (e) {} }
   /* Taps on the interactive parts. Each updates its own part in place and keeps the focus on the control. */
   function ixAct(a, b) {
     var r = host.root && host.root(), p = page(), step = typeof p === "number" ? L.les.steps[p] : null, v = step && step.vis, ans = ansOf(L.i), k = +b.getAttribute("data-k");
