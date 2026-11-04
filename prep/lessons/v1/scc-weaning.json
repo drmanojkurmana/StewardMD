@@ -2,97 +2,76 @@
  "v": 1,
  "module": "scc-weaning",
  "subject": "ss-critical-care",
- "title": "Weaning and liberation from mechanical ventilation",
- "minutes": 6,
+ "title": "Weaning and liberation from ventilation",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [
+  "q_2ac1d367800d",
+  "q_df86a9d47531",
+  "q_351f86de855b"
+ ],
  "steps": [
   {
-   "tx": "Weaning is the process of moving a patient from invasive mechanical support to **spontaneous breathing**. Liberation is the final outcome, meaning the patient is off the ventilator and, usually, extubated. Weaning often consumes a large share of total ventilation time, roughly 40 percent in commonly quoted estimates. Planning for extubation should begin on day one of intubation, not when the patient seems ready. Ventilator-induced diaphragm dysfunction and respiratory muscle weakness are common reasons weaning fails.",
-   "say": "Weaning is the process of moving a patient from invasive mechanical support to spontaneous breathing. Liberation is the final outcome, meaning the patient is off the ventilator and, usually, extubated. Weaning often consumes a large share of total ventilation time, roughly 40 percent in commonly quoted estimates. Planning for extubation should begin on day one of intubation, not when the patient seems ready. Ventilator-induced diaphragm dysfunction and respiratory muscle weakness are common reasons weaning fails.",
+   "tx": "A **spontaneous breathing trial** lasts 30 to 120 minutes on a T piece or on pressure support of about 5 to 8 cmH2O with PEEP 5. Failure is distress, a rising PaCO2, hypoxia, or haemodynamic instability. Passing the clock is not enough if the patient is sweating and tiring at minute 20. Stop the trial and rest the patient.",
+   "say": "A spontaneous breathing trial lasts 30 to 120 minutes on a T piece or on pressure support of about 5 to 8 cmH2O with PEEP 5. Failure is distress, a rising PaCO2, hypoxia, or haemodynamic instability. Passing the clock is not enough if the patient is sweating and tiring at minute 20. Stop the trial and rest the patient.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/scc-weaning-fig1.webp",
-    "alt": "Flowchart illustrating the process from intubation to mechanical ventilation, weaning, and eventual liberation/extubation.",
-    "caption": "Weaning and liberation from mechanical ventilation: a patient's journey",
-    "ar": 1.8349
+    "alt": "Pathway from intubation to ventilation, a spontaneous breathing step, and liberation or extubation, with a note that planning starts on day one.",
+    "caption": "Planning starts on day one. The middle box is a spontaneous breathing trial, not a slow cut in the SIMV rate. The drawing does not show the 30 to 120 minute clock, the pressure support of 5 to 8, or a cuff leak. Credit: StewardMD.",
+    "ar": 1.835
    }
   },
   {
-   "tx": "A **spontaneous breathing trial** (SBT) tests whether the patient can breathe without support, usually for 30 to 120 minutes on minimal pressure support of about 5 to 8 cmH2O. Trials lasting 30 to 120 minutes predict safe extubation in roughly 80 percent of patients. A **rapid shallow breathing index** (RSBI) below 105 breaths per minute per litre is associated with success, while values above 105 predict failure. Passing an SBT does not guarantee success, as extubation failure still occurs in 10 to 20 percent.",
-   "say": "A spontaneous breathing trial tests whether the patient can breathe without support, usually for 30 to 120 minutes on minimal pressure support of about 5 to 8 centimetres of water. Trials lasting 30 to 120 minutes predict safe extubation in roughly 80 percent of patients. A rapid shallow breathing index below 105 breaths per minute per litre is associated with success, while values above 105 predict failure. Passing an SBT does not guarantee success, as extubation failure still occurs in 10 to 20 percent.",
+   "tx": "The **rapid shallow breathing index** is respiratory rate divided by tidal volume in litres, measured over a minute on a T piece. A value below 105 favours extubation and does not by itself authorise it. A low index in a patient who cannot clear secretions is still a failed plan. The index is one fact, not the decision.",
+   "say": "The rapid shallow breathing index is respiratory rate divided by tidal volume in litres, measured over a minute on a T piece. A value below 105 favours extubation and does not by itself authorise it. A low index in a patient who cannot clear secretions is still a failed plan. The index is one fact, not the decision.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Parameter",
-     "Favours success",
-     "Predicts failure"
+     "Index",
+     "Use"
     ],
     "rows": [
      [
-      "RSBI (breaths/min/L)",
+      "Calculation",
+      "Rate divided by tidal volume in litres"
+     ],
+     [
       "Below 105",
-      "Above 105"
+      "Favours extubation"
      ],
      [
-      "SBT duration",
-      "30 to 120 min",
-      "Shorter or incomplete"
+      "Above 105",
+      "Predicts failure, not a ban"
      ],
      [
-      "Extubation failure",
-      "Around 10 to 20 percent despite passing SBT",
-      "Not applicable"
+      "What it ignores",
+      "Secretions, airway swelling, mentation"
      ]
     ]
    }
   },
   {
-   "tx": "Two main methods are used for weaning: **T-piece** trials and **pressure support ventilation** (PSV). Pressure support reduces the resistive work of the endotracheal tube and circuit, and it is associated with higher extubation success than T-piece trials in many analyses. After failing an SBT, gradual reduction of pressure support or repeat T-piece trials is recommended rather than abrupt withdrawal. Cuff leak testing before extubation helps identify airway oedema risk, and a leak under 110 mL is linked to post-extubation stridor.",
-   "say": "Two main methods are used for weaning, T-piece trials and pressure support ventilation. Pressure support reduces the resistive work of the endotracheal tube and circuit, and it is associated with higher extubation success than T-piece trials in many analyses. After failing a trial, gradual reduction of pressure support or repeat T-piece trials is recommended rather than abrupt withdrawal. A cuff leak test before extubation helps identify airway swelling risk, and a leak under 110 millilitres is linked to post-extubation stridor.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "T-piece trial",
-     "points": [
-      "Patient breathes through humidified tube",
-      "No added support",
-      "Work of breathing higher"
-     ]
-    },
-    "right": {
-     "title": "Pressure support",
-     "points": [
-      "Support offsets tube resistance",
-      "Patient triggers and flow cycles",
-      "Associated with higher success"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Extubation should be followed by prophylactic **non-invasive ventilation** (NIV) in high-risk patients, such as those with COPD and hypercapnia, to reduce reintubation. Where NIV is not tolerated or not suitable, **high-flow nasal oxygen** (HFNO) is an alternative. Before extubation, a patient lacking a cuff leak may receive short-course corticosteroids to reduce post-extubation stridor. Indian and US practice both follow these principles, though local protocols vary.",
-   "say": "Extubation should be followed by prophylactic non-invasive ventilation in high-risk patients, such as those with COPD and hypercapnia, to reduce reintubation. Where non-invasive ventilation is not tolerated or not suitable, high-flow nasal oxygen is an alternative. Before extubation, a patient lacking a cuff leak may receive short-course corticosteroids to reduce post-extubation stridor. Indian and US practice both follow these principles, though local protocols vary.",
+   "tx": "The Awakening and Breathing Controlled trial showed that pairing a **spontaneous awakening trial** with a breathing trial reduced time on the ventilator and reduced mortality compared with usual sedation practice. Wake the patient, then test breathing. A trial done under a heavy infusion does not measure the patient who will be extubated.",
+   "say": "The Awakening and Breathing Controlled trial showed that pairing a spontaneous awakening trial with a breathing trial reduced time on the ventilator and reduced mortality compared with usual sedation practice. Wake the patient, then test breathing. A trial done under a heavy infusion does not measure the patient who will be extubated.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "SBT passed"
+      "label": "Stop sedation"
      },
      {
       "id": "b",
-      "label": "Cuff leak check"
+      "label": "Spontaneous awakening trial"
      },
      {
       "id": "c",
-      "label": "Steroids if no leak"
+      "label": "Then a breathing trial"
      },
      {
       "id": "d",
-      "label": "Extubate"
-     },
-     {
-      "id": "e",
-      "label": "Prophylactic NIV or HFNO"
+      "label": "Fewer ventilator days"
      }
     ],
     "edges": [
@@ -102,79 +81,129 @@
      ],
      [
       "b",
-      "c",
-      "No leak"
-     ],
-     [
-      "b",
-      "d",
-      "Leak present"
+      "c"
      ],
      [
       "c",
       "d"
-     ],
-     [
-      "d",
-      "e",
-      "High risk"
      ]
     ]
    }
   },
   {
-   "tx": "Weaning categories help guide management. **Simple weaning** means extubation succeeds at the first SBT. **Difficult weaning** requires up to three trials or up to seven days. **Prolonged weaning** needs more than three trials or more than seven days. Failure of weaning is often linked to diaphragm dysfunction, poor cardiac reserve, metabolic issues and high work of breathing. Structured protocols reduce time on the ventilator.",
-   "say": "Weaning categories help guide management. Simple weaning means extubation succeeds at the first trial. Difficult weaning requires up to three trials or up to seven days. Prolonged weaning needs more than three trials or more than seven days. Failure of weaning is often linked to diaphragm dysfunction, poor cardiac reserve, metabolic issues and high work of breathing. Structured protocols reduce time on the ventilator.",
+   "tx": "An absent **cuff leak**, often a volume difference below 110 mL, is a predictor of post extubation stridor. A short course of corticosteroid before extubation is reasonable in that high risk patient. The steroid does not replace a plan for reintubation. A good leak does not prove the patient will protect the airway.",
+   "say": "An absent cuff leak, often a volume difference below 110 mL, is a predictor of post extubation stridor. A short course of corticosteroid before extubation is reasonable in that high risk patient. The steroid does not replace a plan for reintubation. A good leak does not prove the patient will protect the airway.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Poor leak",
+     "points": [
+      "Often under 110 mL difference",
+      "Risk of stridor",
+      "Consider steroid before extubation"
+     ]
+    },
+    "right": {
+     "title": "Good leak",
+     "points": [
+      "Less worry about swelling",
+      "Airway protection is separate",
+      "Secretions can still fail the extubation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **TracMan** trial compared **tracheostomy** within 4 days with tracheostomy after day 10. Early tracheostomy did not reduce mortality. The operation is timed for the patient who is likely to need the tube for longer, not as a routine on day 4. Bleeding risk and the airway plan come before the calendar.",
+   "say": "The TracMan trial compared tracheostomy within 4 days with tracheostomy after day 10. Early tracheostomy did not reduce mortality. The operation is timed for the patient who is likely to need the tube for longer, not as a routine on day 4. Bleeding risk and the airway plan come before the calendar.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Category",
-     "Trials or time",
-     "Typical course"
+     "TracMan question",
+     "Answer"
     ],
     "rows": [
      [
-      "Simple",
-      "First SBT succeeds",
-      "Extubate promptly"
+      "Early arm",
+      "Tracheostomy within 4 days"
      ],
      [
-      "Difficult",
-      "Up to 3 trials or up to 7 days",
-      "Gradual support reduction"
+      "Later arm",
+      "After day 10"
      ],
      [
-      "Prolonged",
-      "More than 3 trials or over 7 days",
-      "Specialist weaning unit"
+      "Mortality",
+      "Not reduced by going early"
+     ],
+     [
+      "Still individual",
+      "Who will need a long airway"
      ]
     ]
    }
+  },
+  {
+   "tx": "The **ABCDEF** bundle is a daily checklist: assess pain, pair awakening with a breathing trial, choose the sedation, monitor delirium, mobilise early, and engage the family. It is a checklist, not a single drug. Missing the delirium screen or the family is a failed bundle even if the ventilator settings look tidy.",
+   "say": "The ABCDEF bundle is a daily checklist: assess pain, pair awakening with a breathing trial, choose the sedation, monitor delirium, mobilise early, and engage the family. It is a checklist, not a single drug. Missing the delirium screen or the family is a failed bundle even if the ventilator settings look tidy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Letter",
+     "Daily act"
+    ],
+    "rows": [
+     [
+      "A and B",
+      "Pain, awakening, and a breathing trial"
+     ],
+     [
+      "C",
+      "Choice of analgesia and sedation"
+     ],
+     [
+      "D and E",
+      "Delirium screen and early mobility"
+     ],
+     [
+      "F",
+      "Family engagement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Extubation failure** is reintubation within about 48 hours. Non-invasive ventilation can rescue a hypercapnic COPD patient. It should not be used to delay reintubation in a patient who has failed with hypoxaemic distress. Waiting on a mask while the oxygen falls is how a simple reintubation becomes an arrest.",
+   "say": "Extubation failure is reintubation within about 48 hours. Non-invasive ventilation can rescue a hypercapnic COPD patient. It should not be used to delay reintubation in a patient who has failed with hypoxaemic distress. Waiting on a mask while the oxygen falls is how a simple reintubation becomes an arrest.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mask can rescue",
+     "points": [
+      "Hypercapnic COPD",
+      "Awake and protecting the airway",
+      "Clear plan if the gas worsens"
+     ]
+    },
+    "right": {
+     "title": "Do not delay a tube",
+     "points": [
+      "Hypoxaemic distress",
+      "Tiring under the mask",
+      "Reintubate rather than watch"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A diaphragm **thickening fraction** below about 30% on ultrasound is associated with weaning failure. It does not replace a breathing trial. The probe measures one hemidiaphragm, and a poor window is an unusable number. Paradoxical abdominal movement is the clinical cousin of a weak diaphragm, and it is not the fraction itself.",
+   "say": "A diaphragm thickening fraction below about 30% on ultrasound is associated with weaning failure. It does not replace a breathing trial. The probe measures one hemidiaphragm, and a poor window is an unusable number. Paradoxical abdominal movement is the clinical cousin of a weak diaphragm, and it is not the fraction itself.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/disorders-of-ventilation-fig1.webp",
+    "alt": "Four drawings comparing normal inspiration and expiration with paradoxical chest and abdominal movement in diaphragmatic weakness.",
+    "caption": "Paradoxical inspiration draws the abdomen in when the diaphragm is weak. This is not a thickening-fraction measurement, not an RSBI, and not a cuff leak. Credit: StewardMD.",
+    "ar": 1.835
+   }
   }
- ],
- "quiz": [
-  "q_2ac1d367800d",
-  "q_df86a9d47531",
-  "q_351f86de855b"
- ],
- "src": [],
- "refs": [
-  "Boles JM et al. Weaning from mechanical ventilation. European Respiratory Journal, 2007.",
-  "Mehta AB et al. ATS/ERS Guideline Update: Liberation from mechanical ventilation. Am J Respir Crit Care Med, 2017."
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 37
- }
+ ]
 }

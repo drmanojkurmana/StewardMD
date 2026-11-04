@@ -2,148 +2,198 @@
  "v": 1,
  "module": "scc-neuro-monitoring",
  "subject": "ss-critical-care",
- "title": "Neuromonitoring: Intracranial Pressure, Perfusion and Adjunct Tools",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**Cerebral perfusion pressure** (CPP) equals mean arterial pressure minus ICP. Ischaemic injury is avoided by keeping CPP above roughly 60 mm Hg in adult trauma care, following Brain Trauma Foundation style targets. Cerebral blood flow is maintained by **autoregulation**: when systemic pressure falls, cerebral vessels dilate. Chronic hypertension shifts the autoregulatory curve to the right, so a higher mean arterial pressure is needed to protect perfusion.",
-   "say": "Cerebral perfusion pressure equals mean arterial pressure minus intracranial pressure. Ischaemic injury is avoided by keeping this above roughly 60 millimetres of mercury in adult trauma care, in line with Brain Trauma Foundation style targets. Cerebral blood flow is maintained by autoregulation. When systemic pressure falls, cerebral vessels dilate. Chronic hypertension shifts the autoregulatory curve to the right, so a higher mean arterial pressure is needed to protect perfusion.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Mean arterial pressure"
-     },
-     {
-      "id": "b",
-      "label": "Minus ICP"
-     },
-     {
-      "id": "c",
-      "label": "Cerebral perfusion pressure"
-     },
-     {
-      "id": "d",
-      "label": "Keep above about 60"
-     },
-     {
-      "id": "e",
-      "label": "Autoregulation preserves flow"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Invasive monitoring is the reference for **ICP**. A **ventricular catheter** is the gold standard: it gives global pressure, allows therapeutic CSF drainage and can be recalibrated after insertion. Intraparenchymal fibreoptic probes suit patients with midline shift or oedema where ventricles are hard to cannulate, but they cannot be recalibrated. Epidural sensors are least sensitive. Monitoring is indicated in severe traumatic brain injury with GCS 8 or less. Anticoagulation is a contraindication to placement.",
-   "say": "Invasive monitoring is the reference method for intracranial pressure. A ventricular catheter is the gold standard. It gives global pressure, allows therapeutic drainage of cerebrospinal fluid and can be recalibrated after insertion. Intraparenchymal fibreoptic probes suit patients with midline shift or oedema, where ventricles are hard to cannulate, but they cannot be recalibrated. Epidural sensors are the least sensitive. Monitoring is indicated in severe traumatic brain injury with a Glasgow Coma Scale of 8 or less. Anticoagulation is a contraindication to placement.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Ventricular catheter",
-     "points": [
-      "Gold standard",
-      "Allows CSF drainage",
-      "Can be recalibrated"
-     ]
-    },
-    "right": {
-     "title": "Intraparenchymal probe",
-     "points": [
-      "Useful with midline shift",
-      "Cannot be recalibrated",
-      "Localised reading"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Non-invasive tools estimate pressure. **Optic nerve sheath diameter** (ONSD) is measured by ocular ultrasound about 3 mm behind the globe, with the probe placed gently on the closed eyelid to avoid globe pressure. An upper normal limit of 5 mm is used, and serial readings are more useful than a single one. The 30-degree test helps separate raised pressure from other causes of sheath enlargement. **Transcranial Doppler** gives middle cerebral artery velocity but does not replace direct monitoring. Open globe injury is a contraindication to ocular scanning.",
-   "say": "Non-invasive tools estimate pressure. Optic nerve sheath diameter is measured by ocular ultrasound about 3 millimetres behind the globe, with the probe placed gently on the closed eyelid to avoid pressure on the eye. An upper normal limit of 5 millimetres is used, and serial readings are more useful than a single one. The 30-degree test helps separate raised pressure from other causes of sheath enlargement. Transcranial Doppler gives middle cerebral artery velocity but does not replace direct monitoring. Ocular scanning is contraindicated in open globe injury.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Tool",
-     "What it gives",
-     "Key point"
-    ],
-    "rows": [
-     [
-      "ONSD ultrasound",
-      "Sheath width at 3 mm",
-      "Upper normal 5 mm, trend it"
-     ],
-     [
-      "Transcranial Doppler",
-      "Middle cerebral artery velocity",
-      "Not a replacement for ICP"
-     ],
-     [
-      "Pupillometry",
-      "Pupil size and reactivity",
-      "Quantifies pupil response"
-     ],
-     [
-      "Bispectral index",
-      "Depth of sedation",
-      "Not an ICP measure"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Refractory high ICP drops **cerebral perfusion pressure**, causing ischaemia and herniation. Exam answer pattern: ventricular catheter for ICP, ONSD above 5 mm as a screening sign, and CPP above about 60 mm Hg. Remember that CPP is mean arterial pressure minus ICP, and that the bispectral index does not measure intracranial pressure.",
-   "say": "Refractory high intracranial pressure drops cerebral perfusion pressure, causing ischaemia and herniation. For the exam, remember a ventricular catheter for pressure, an optic nerve sheath diameter above 5 millimetres as a screening sign, and a cerebral perfusion pressure above about 60 millimetres of mercury. Cerebral perfusion pressure is mean arterial pressure minus intracranial pressure, and the bispectral index does not measure intracranial pressure.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-neuro-monitoring-fig1.webp",
-    "alt": "Diagram illustrating the pathological consequences of high intracranial pressure, including reduced cerebral perfusion pressure, brain ischemia, and herniation.",
-    "caption": "High ICP leads to low CPP, brain ischemia, and herniation",
-    "ar": 1.8349
-   }
-  }
- ],
+ "title": "Neuromonitoring",
+ "minutes": 8,
+ "gen": "AI",
  "quiz": [
   "q_55c9976b6811",
   "q_bea58b43386a",
   "q_ea2ae423c8d7"
  ],
- "src": [],
- "refs": [
-  "Brain Trauma Foundation: Guidelines for the Management of Severe Traumatic Brain Injury (Editors: Carney N et al.)",
-  "Monro-Kellie doctrine (standard neurocritical care teaching)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 37
- }
+ "steps": [
+  {
+   "tx": "An **external ventricular drain** both measures intracranial pressure and drains cerebrospinal fluid. It is zeroed at the external auditory meatus, the surface mark for the **foramen of Monro**. An intraparenchymal monitor cannot drain. A drain that is open to drainage is not, at that moment, a continuous pressure recording.",
+   "say": "An external ventricular drain both measures intracranial pressure and drains cerebrospinal fluid. It is zeroed at the external auditory meatus, the surface mark for the foramen of Monro. An intraparenchymal monitor cannot drain. A drain that is open to drainage is not, at that moment, a continuous pressure recording.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/brain-tumour-fig1.webp",
+    "alt": "Axial drawing of a cerebral tumour with vasogenic oedema, midline shift, a compressed ventricle, subfalcine herniation, and uncal herniation.",
+    "caption": "Mass effect is why pressure is monitored: shift, a compressed ventricle, and herniation. This drawing is a tumour, not an external ventricular drain, and the optic nerve sheath is not shown. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**Cerebral perfusion pressure** is mean arterial pressure minus intracranial pressure. The Brain Trauma Foundation target range is 60 to 70 mmHg. Raising the pressure far above that does not improve outcome and can increase oedema. The formula is only as good as the zero of the monitor and the arterial transducer.",
+   "say": "Cerebral perfusion pressure is mean arterial pressure minus intracranial pressure. The Brain Trauma Foundation target range is 60 to 70 mmHg. Raising the pressure far above that does not improve outcome and can increase oedema. The formula is only as good as the zero of the monitor and the arterial transducer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pressure",
+     "Bedside use"
+    ],
+    "rows": [
+     [
+      "Perfusion pressure",
+      "Mean arterial pressure minus intracranial pressure"
+     ],
+     [
+      "Target",
+      "60 to 70 mmHg"
+     ],
+     [
+      "Much higher targets",
+      "No outcome gain, more oedema"
+     ],
+     [
+      "A wrong zero",
+      "Makes both numbers false"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Brain Trauma Foundation recommends treating **intracranial pressure** above 22 mmHg. A single high number is interpreted with the scan and the examination, not in isolation. A pressure of 18 with a new dilated pupil is more urgent than a pressure of 23 in a patient who is otherwise stable and already draining.",
+   "say": "The Brain Trauma Foundation recommends treating intracranial pressure above 22 mmHg. A single high number is interpreted with the scan and the examination, not in isolation. A pressure of 18 with a new dilated pupil is more urgent than a pressure of 23 in a patient who is otherwise stable and already draining.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/traumatic-brain-injury-hematomas-and-icp-fig1.webp",
+    "alt": "Diagram of a biconvex epidural haematoma, a crescent subdural haematoma, the Monro-Kellie compartments, and uncal herniation compressing the third nerve.",
+    "caption": "Epidural blood is biconvex and subdural blood is crescentic. The inset shows brain, blood, and cerebrospinal fluid sharing one space, and uncal herniation on the third nerve. No optic-nerve measurement and no drain zero. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "An **optic nerve sheath** diameter above 5 mm suggests raised intracranial pressure. The exact cutoff varies between studies, and the measurement does not replace an invasive monitor when one is indicated. A normal sheath does not clear a patient who is deteriorating. The scan and the examination still decide.",
+   "say": "An optic nerve sheath diameter above 5 mm suggests raised intracranial pressure. The exact cutoff varies between studies, and the measurement does not replace an invasive monitor when one is indicated. A normal sheath does not clear a patient who is deteriorating. The scan and the examination still decide.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sheath ultrasound",
+     "points": [
+      "Above 5 mm suggests raised pressure",
+      "Cutoff varies by study",
+      "Useful when no monitor is in"
+     ]
+    },
+    "right": {
+     "title": "What it cannot do",
+     "points": [
+      "Replace an indicated invasive monitor",
+      "Clear a worsening examination",
+      "Drain cerebrospinal fluid"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transcranial Doppler** of the middle cerebral artery helps when velocity and the **Lindegaard** ratio are read together. Mean velocity above 120 cm/s with a ratio above 3 suggests vasospasm. Velocity above 200 cm/s with a ratio above 6 suggests severe vasospasm. Velocity alone can also rise with hyperaemia, so the ratio stops that mistake.",
+   "say": "Transcranial Doppler of the middle cerebral artery helps when velocity and the Lindegaard ratio are read together. Mean velocity above 120 cm/s with a ratio above 3 suggests vasospasm. Velocity above 200 cm/s with a ratio above 6 suggests severe vasospasm. Velocity alone can also rise with hyperaemia, so the ratio stops that mistake.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Doppler finding",
+     "Reading"
+    ],
+    "rows": [
+     [
+      "Above 120 cm/s and ratio above 3",
+      "Vasospasm"
+     ],
+     [
+      "Above 200 cm/s and ratio above 6",
+      "Severe vasospasm"
+     ],
+     [
+      "High velocity, low ratio",
+      "Think of hyperaemia"
+     ],
+     [
+      "Ratio",
+      "Intracranial velocity over extracranial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Continuous EEG** is used to find **nonconvulsive** seizures in unexplained coma after convulsive status, cardiac arrest, or a structural brain injury. The trace is reviewed because the patient is not shaking. Treating a trace you have not confirmed wastes sedation and hides the examination.",
+   "say": "Continuous EEG is used to find nonconvulsive seizures in unexplained coma after convulsive status, cardiac arrest, or a structural brain injury. The trace is reviewed because the patient is not shaking. Treating a trace you have not confirmed wastes sedation and hides the examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "When to record",
+     "What you are looking for"
+    ],
+    "rows": [
+     [
+      "Coma after convulsive status",
+      "Ongoing nonconvulsive seizures"
+     ],
+     [
+      "After cardiac arrest",
+      "Seizures without movement"
+     ],
+     [
+      "Structural brain injury",
+      "Unexplained failure to wake"
+     ],
+     [
+      "A normal trace",
+      "Look for another cause of coma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Brain tissue oxygen** tension below 20 mmHg is a commonly used treatment threshold. It is an adjunct to intracranial pressure, not a reason to ignore a high pressure. A low tissue oxygen with a normal pressure still needs a cause: low arterial oxygen, low haemoglobin, or low flow. The probe is sitting in one small region.",
+   "say": "Brain tissue oxygen tension below 20 mmHg is a commonly used treatment threshold. It is an adjunct to intracranial pressure, not a reason to ignore a high pressure. A low tissue oxygen with a normal pressure still needs a cause: low arterial oxygen, low haemoglobin, or low flow. The probe is sitting in one small region.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Low brain tissue oxygen",
+     "points": [
+      "Threshold often 20 mmHg",
+      "Check oxygen, haemoglobin, and flow",
+      "One region, not the whole brain"
+     ]
+    },
+    "right": {
+     "title": "High intracranial pressure",
+     "points": [
+      "Treat the pressure on its own merits",
+      "Oxygen does not cancel 22 mmHg",
+      "Drain or osmotherapy as indicated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Jugular venous saturation** is normally about 55% to 75%. A fall below 50% means the brain is extracting more because delivery is low. A very high value means flow is excessive or the brain is not using oxygen. The catheter sees one jugular vein, so a focal injury on the other side can be missed.",
+   "say": "Jugular venous saturation is normally about 55% to 75%. A fall below 50% means the brain is extracting more because delivery is low. A very high value means flow is excessive or the brain is not using oxygen. The catheter sees one jugular vein, so a focal injury on the other side can be missed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Jugular saturation",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "55% to 75%",
+      "Usual range"
+     ],
+     [
+      "Below 50%",
+      "Delivery is low for demand"
+     ],
+     [
+      "Very high",
+      "Luxury flow or dead tissue"
+     ],
+     [
+      "Limit",
+      "One vein, not the whole brain"
+     ]
+    ]
+   }
+  }
+ ]
 }

@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "scc-acute-resp-failure",
+ "subject": "ss-critical-care",
+ "title": "Acute hypoxaemic and hypercapnic respiratory failure",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Hypoxaemia has five mechanisms: low inspired oxygen, hypoventilation, diffusion limitation, **ventilation perfusion mismatch**, and **shunt**. Shunt does not correct fully with added oxygen, because blood that bypasses the alveoli never sees the oxygen. Mismatch usually improves when the inspired oxygen rises. That difference is the practical test.",
+   "say": "Hypoxaemia has five mechanisms: low inspired oxygen, hypoventilation, diffusion limitation, ventilation perfusion mismatch, and shunt. Shunt does not correct fully with added oxygen, because blood that bypasses the alveoli never sees the oxygen. Mismatch usually improves when the inspired oxygen rises. That difference is the practical test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism",
+     "Response to oxygen"
+    ],
+    "rows": [
+     [
+      "Low inspired oxygen",
+      "Corrects when the inspired gas is restored"
+     ],
+     [
+      "Hypoventilation",
+      "Corrects, but carbon dioxide remains"
+     ],
+     [
+      "Mismatch",
+      "Usually improves"
+     ],
+     [
+      "Shunt",
+      "Does not correct fully"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **alveolar to arterial oxygen gradient** is high in mismatch, shunt, and diffusion limitation. It is normal in hypoventilation and in low inspired oxygen, which separates those causes. A normal gradient with a high carbon dioxide is pump failure or a poor inspired gas, not a flooded alveolus. Calculate it before you blame the lung.",
+   "say": "The alveolar to arterial oxygen gradient is high in mismatch, shunt, and diffusion limitation. It is normal in hypoventilation and in low inspired oxygen, which separates those causes. A normal gradient with a high carbon dioxide is pump failure or a poor inspired gas, not a flooded alveolus. Calculate it before you blame the lung.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gradient stays normal",
+     "points": [
+      "Hypoventilation",
+      "Low inspired oxygen",
+      "Lung itself is not the main fault"
+     ]
+    },
+    "right": {
+     "title": "Gradient is high",
+     "points": [
+      "Mismatch",
+      "Shunt",
+      "Diffusion limitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypercapnic** failure is ventilatory pump failure: low drive, weakness, or a load the patient cannot meet, as in severe airway obstruction. **Hypoxaemic** failure is lung parenchymal failure. The blood gas shows which one dominates, and the neck and the abdomen show whether the pump is failing before the numbers become extreme.",
+   "say": "Hypercapnic failure is ventilatory pump failure: low drive, weakness, or a load the patient cannot meet, as in severe airway obstruction. Hypoxaemic failure is lung parenchymal failure. The blood gas shows which one dominates, and the neck and the abdomen show whether the pump is failing before the numbers become extreme.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+    "alt": "Side by side drawings of type 1 hypoxaemic failure and type 2 hypercapnic failure with oxygen therapy versus ventilatory support.",
+    "caption": "Type 1 is drawn as an oxygenation problem and type 2 as a failure to clear carbon dioxide. The masks are schematic. The five mechanisms of hypoxaemia are not all drawn. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "A **COPD exacerbation** with acidosis is treated first with non-invasive ventilation, controlled oxygen, bronchodilators, and steroids. Intubation is for exhaustion, vomiting, or a falling pH despite non-invasive ventilation. High concentration oxygen without a target makes the carbon dioxide rise in a patient who was still safe on the mask.",
+   "say": "A COPD exacerbation with acidosis is treated first with non-invasive ventilation, controlled oxygen, bronchodilators, and steroids. Intubation is for exhaustion, vomiting, or a falling pH despite non-invasive ventilation. High concentration oxygen without a target makes the carbon dioxide rise in a patient who was still safe on the mask.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Acidotic COPD exacerbation"
+     },
+     {
+      "id": "b",
+      "label": "Non-invasive ventilation first"
+     },
+     {
+      "id": "c",
+      "label": "Controlled oxygen, bronchodilator, steroid"
+     },
+     {
+      "id": "d",
+      "label": "Intubate if tiring or pH falls"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cardiogenic pulmonary oedema** is treated with CPAP or non-invasive ventilation plus treatment of the heart. It is not treated as ARDS with a dry strategy until the filling pressure is addressed. Removing fluid from a lung that is wet because the left atrial pressure is high is the treatment. A low tidal volume does not replace a nitrate or a diuretic.",
+   "say": "Cardiogenic pulmonary oedema is treated with CPAP or non-invasive ventilation plus treatment of the heart. It is not treated as ARDS with a dry strategy until the filling pressure is addressed. Removing fluid from a lung that is wet because the left atrial pressure is high is the treatment. A low tidal volume does not replace a nitrate or a diuretic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiogenic oedema",
+     "points": [
+      "CPAP or non-invasive ventilation",
+      "Treat the filling pressure",
+      "Nitrate and diuretic if pressure allows"
+     ]
+    },
+    "right": {
+     "title": "Not the first move",
+     "points": [
+      "A dry ARDS fluid strategy",
+      "Ignoring the heart",
+      "Waiting for a Berlin label"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neuromuscular respiratory failure, as in **Guillain-Barre** syndrome or myasthenic crisis, shows a falling **vital capacity** and a weak cough before the gas is severely abnormal. Waiting for hypercapnia is late. Count the breaths, watch the neck, and measure the capacity while the patient can still perform the test.",
+   "say": "Neuromuscular respiratory failure, as in Guillain-Barre syndrome or myasthenic crisis, shows a falling vital capacity and a weak cough before the gas is severely abnormal. Waiting for hypercapnia is late. Count the breaths, watch the neck, and measure the capacity while the patient can still perform the test.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/disorders-of-ventilation-fig1.webp",
+    "alt": "Normal diaphragmatic breathing beside paradoxical abdominal movement when the diaphragm is weak.",
+    "caption": "The abdomen draws in during inspiration when the diaphragm is weak. That sign appears in neuromuscular failure before the carbon dioxide is severely high. It is not a vital-capacity number. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "The **20 mL/kg** rule is a teaching trigger for intubation in neuromuscular weakness. Intubate when vital capacity is below 20 mL/kg, when maximum inspiratory pressure is worse than minus 30 cmH2O, or when maximum expiratory pressure is below 40 cmH2O. Do not wait until all three are failed and the patient is already retaining carbon dioxide.",
+   "say": "The 20 mL/kg rule is a teaching trigger for intubation in neuromuscular weakness. Intubate when vital capacity is below 20 mL/kg, when maximum inspiratory pressure is worse than minus 30 cmH2O, or when maximum expiratory pressure is below 40 cmH2O. Do not wait until all three are failed and the patient is already retaining carbon dioxide.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "20, 30, 40 trigger",
+     "Threshold"
+    ],
+    "rows": [
+     [
+      "Vital capacity",
+      "Below 20 mL/kg"
+     ],
+     [
+      "Maximum inspiratory pressure",
+      "Worse than minus 30 cmH2O"
+     ],
+     [
+      "Maximum expiratory pressure",
+      "Below 40 cmH2O"
+     ],
+     [
+      "Timing",
+      "Do not wait for all three plus hypercapnia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Type 1** and **type 2** respiratory failure can coexist. The first blood gas and the examination decide whether the patient needs oxygen, pressure support, or a protected airway. A pneumonia can be hypoxaemic until fatigue adds hypercapnia. Treating only the oxygen saturation then misses the pump that is about to stop.",
+   "say": "Type 1 and type 2 respiratory failure can coexist. The first blood gas and the examination decide whether the patient needs oxygen, pressure support, or a protected airway. A pneumonia can be hypoxaemic until fatigue adds hypercapnia. Treating only the oxygen saturation then misses the pump that is about to stop.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 dominant",
+     "points": [
+      "Low oxygen, carbon dioxide normal or low",
+      "Parenchymal failure",
+      "Oxygen and the cause"
+     ]
+    },
+    "right": {
+     "title": "Type 2 added",
+     "points": [
+      "Carbon dioxide rises as the pump tires",
+      "Needs ventilatory support",
+      "Oxygen alone will not clear it"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "module": "scc-tbi",
+ "subject": "ss-critical-care",
+ "title": "Traumatic brain injury",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A single episode of **hypoxia** or **hypotension** is a doubling of the harm of a traumatic brain injury. The airway, the oxygen, and the blood pressure are dealt with before the CT scanner. A trip to the scanner with a falling pressure is how a survivable injury is made worse. The scan is second.",
+   "say": "A single episode of hypoxia or hypotension is a doubling of the harm of a traumatic brain injury. The airway, the oxygen, and the blood pressure are dealt with before the CT scanner. A trip to the scanner with a falling pressure is how a survivable injury is made worse. The scan is second.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Airway and oxygen"
+     },
+     {
+      "id": "b",
+      "label": "Blood pressure"
+     },
+     {
+      "id": "c",
+      "label": "Only then the scanner"
+     },
+     {
+      "id": "d",
+      "label": "A falling pressure aborts the trip"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Intracranial pressure** above 22 mmHg is treated. **Cerebral perfusion pressure** is kept between 60 and 70 mmHg, and it is not pushed higher by routine vasopressors. The two numbers are read together. A tidy perfusion pressure does not excuse a pressure above 22 that is left untreated.",
+   "say": "Intracranial pressure above 22 mmHg is treated. Cerebral perfusion pressure is kept between 60 and 70 mmHg, and it is not pushed higher by routine vasopressors. The two numbers are read together. A tidy perfusion pressure does not excuse a pressure above 22 that is left untreated.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/traumatic-brain-injury-hematomas-and-icp-fig1.webp",
+    "alt": "Biconvex epidural and crescent subdural collections, the Monro-Kellie idea, and uncal herniation.",
+    "caption": "Epidural and subdural patterns, the fixed intracranial volume, and uncal herniation with a third-nerve palsy. The drawing does not mark 22 mmHg or a perfusion-pressure target. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "**Mannitol** or **3% saline** is hyperosmolar therapy for a raised pressure. The dose band, the usual saline volume, and the osmolality hold are in the table. Saline is the choice when the patient is hypotensive, because mannitol is a diuretic and it can drop the pressure further. Mannitol is held when the osmolality is already too high.",
+   "say": "Mannitol or 3% saline is hyperosmolar therapy for a raised pressure. The dose band, the usual saline volume, and the osmolality hold are in the table. Saline is the choice when the patient is hypotensive, because mannitol is a diuretic and it can drop the pressure further. Mannitol is held when the osmolality is already too high.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hyperosmolar choice",
+     "Exam number"
+    ],
+    "rows": [
+     [
+      "Mannitol",
+      "0.25 to 1 g/kg"
+     ],
+     [
+      "3% saline",
+      "A bolus of about 150 mL"
+     ],
+     [
+      "Hold mannitol",
+      "Osmolality above 320 mOsm/kg"
+     ],
+     [
+      "Low blood pressure",
+      "Choose 3% saline, not mannitol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **CRASH** trial showed that **corticosteroids** increased mortality in traumatic brain injury. Steroids are not used for the brain injury. A swollen brain is not an indication for dexamethasone here. The trial is why that habit is stopped, and a rising pressure is not a reason to restart it.",
+   "say": "The CRASH trial showed that corticosteroids increased mortality in traumatic brain injury. Steroids are not used for the brain injury. A swollen brain is not an indication for dexamethasone here. The trial is why that habit is stopped, and a rising pressure is not a reason to restart it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CRASH result",
+     "points": [
+      "Corticosteroids increased death",
+      "The injury was traumatic brain injury",
+      "The signal was harm"
+     ]
+    },
+    "right": {
+     "title": "Practice",
+     "points": [
+      "Steroids are not used for the brain",
+      "Swelling is not a steroid indication",
+      "Do not restart the old habit"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**DECRA** found that early decompressive craniectomy for diffuse injury lowered the pressure and worsened functional outcome. **RESCUEicp**, with craniectomy as a last tier, lowered mortality and increased survival with severe disability. Early surgery for a number is not the same decision as surgery when every other tier has failed. The family is told about survival with severe disability.",
+   "say": "DECRA found that early decompressive craniectomy for diffuse injury lowered the pressure and worsened functional outcome. RESCUEicp, with craniectomy as a last tier, lowered mortality and increased survival with severe disability. Early surgery for a number is not the same decision as surgery when every other tier has failed. The family is told about survival with severe disability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "DECRA",
+     "points": [
+      "Early craniectomy for diffuse injury",
+      "Pressure fell",
+      "Function was worse"
+     ]
+    },
+    "right": {
+     "title": "RESCUEicp",
+     "points": [
+      "Last-tier craniectomy",
+      "Mortality fell",
+      "More survival with severe disability"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**EUROTHERM** found that **hypothermia** used as a stage of pressure treatment worsened outcome. Routine hypothermia is not used. A cool patient is not a treatment plan. Fever is still treated, and that is not the same as inducing hypothermia to chase a pressure.",
+   "say": "EUROTHERM found that hypothermia used as a stage of pressure treatment worsened outcome. Routine hypothermia is not used. A cool patient is not a treatment plan. Fever is still treated, and that is not the same as inducing hypothermia to chase a pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Temperature plan",
+     "Verdict"
+    ],
+    "rows": [
+     [
+      "EUROTHERM hypothermia tier",
+      "Outcome was worse"
+     ],
+     [
+      "Routine hypothermia",
+      "It is not used"
+     ],
+     [
+      "Fever",
+      "Still treated"
+     ],
+     [
+      "Chasing pressure with cold",
+      "Not a plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phenytoin** or **levetiracetam** for 7 days is prevention of early post-traumatic seizures. Prolonged prophylaxis does not prevent late epilepsy, and it is not continued by habit. The week is the course. A month of the drug is not a better version of the same plan.",
+   "say": "Phenytoin or levetiracetam for 7 days is prevention of early post-traumatic seizures. Prolonged prophylaxis does not prevent late epilepsy, and it is not continued by habit. The week is the course. A month of the drug is not a better version of the same plan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Traumatic brain injury"
+     },
+     {
+      "id": "b",
+      "label": "Phenytoin or levetiracetam"
+     },
+     {
+      "id": "c",
+      "label": "Stop at 7 days"
+     },
+     {
+      "id": "d",
+      "label": "Late epilepsy is not prevented by a longer course"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Glasgow coma scale** is repeated, and the motor score is the part that is recorded with care. A dilated pupil with a falling score is a surgical emergency until a CT has shown otherwise. The eye score and the verbal score are not a substitute for the motor score. A single roadside number is not the examination.",
+   "say": "The Glasgow coma scale is repeated, and the motor score is the part that is recorded with care. A dilated pupil with a falling score is a surgical emergency until a CT has shown otherwise. The eye score and the verbal score are not a substitute for the motor score. A single roadside number is not the examination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/brain-tumour-fig1.webp",
+    "alt": "Coronal drawing of a mass with oedema, midline shift, and herniation.",
+    "caption": "This is a tumour drawing of mass effect, midline shift, and herniation. It is not a trauma CT, and it does not mark a pressure of 22 mmHg. The pattern of herniation is the point. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  }
+ ]
+}

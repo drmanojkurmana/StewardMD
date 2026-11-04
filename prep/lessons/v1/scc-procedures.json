@@ -2,113 +2,99 @@
  "v": 1,
  "module": "scc-procedures",
  "subject": "ss-critical-care",
- "title": "ICU Procedures: Scope Overview and Core Safety Principles",
- "minutes": 6,
+ "title": "ICU procedures",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [
+  "q_84392b7bd0fa",
+  "q_111d097e7d8d",
+  "q_1a33f1d79258"
+ ],
  "steps": [
   {
-   "tx": "ICU procedures cover **central venous catheterization**, **arterial cannulation**, tracheostomy, bronchoscopy, intercostal drain insertion, lumbar puncture, pericardiocentesis, paracentesis and the central line insertion bundle. Each carries a risk of bleeding, infection or organ injury. Safe practice starts with a clear indication, consent, and a check of coagulation and anticoagulant status. Ultrasound guidance is preferred wherever it is available, because it lowers complications and improves first-pass success.",
-   "say": "ICU procedures cover central venous catheterization, arterial cannulation, tracheostomy, bronchoscopy, intercostal drain insertion, lumbar puncture, pericardiocentesis, paracentesis and the central line insertion bundle. Each carries a risk of bleeding, infection or organ injury. Safe practice starts with a clear indication, consent, and a check of coagulation and anticoagulant status. Ultrasound guidance is preferred wherever it is available, because it lowers complications and improves first-pass success.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Procedure",
-     "Main risk",
-     "Key safeguard"
-    ],
-    "rows": [
-     [
-      "Central venous line",
-      "Pneumothorax, bleeding",
-      "Ultrasound guidance"
-     ],
-     [
-      "Arterial cannula",
-      "Ischaemia, haematoma",
-      "Allen test and distal checks"
-     ],
-     [
-      "Lumbar puncture",
-      "Spinal haematoma",
-      "Anticoagulant washout"
-     ],
-     [
-      "Pericardiocentesis",
-      "Cardiac puncture",
-      "Echo-guided approach"
-     ],
-     [
-      "Central line bundle",
-      "Bloodstream infection",
-      "Full barrier precautions"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Before any **lumbar puncture**, review the patient's **anticoagulant** and **antiplatelet** use. Warfarin is usually stopped several days beforehand, and the **INR** should be checked on the day of the procedure. Direct oral anticoagulants generally need a longer washout, often around 48 to 72 hours, although this depends on **renal function** and the specific drug. Antiplatelet agents vary, so timing should be discussed with the treating team and local guidance followed.",
-   "say": "Before any lumbar puncture, review the patient's anticoagulant and antiplatelet use. Warfarin is usually stopped several days beforehand, and the INR should be checked on the day of the procedure. Direct oral anticoagulants generally need a longer washout, often around 48 to 72 hours, although this depends on renal function and the specific drug. Antiplatelet agents vary, so timing should be discussed with the treating team and local guidance followed.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Agent",
-     "Typical pre-procedure gap",
-     "Notes"
-    ],
-    "rows": [
-     [
-      "Warfarin",
-      "Several days, INR checked",
-      "Confirm INR is normal on the day"
-     ],
-     [
-      "Direct oral anticoagulant",
-      "About 48 to 72 hours",
-      "Longer if renal impairment"
-     ],
-     [
-      "Antiplatelet agents",
-      "Varies by drug",
-      "Discuss with the treating team"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In patients with **chronic liver disease**, the INR and platelet count guide safety. Many spinal procedure guidelines accept an INR below 1.5 and a platelet count above 50,000 per microlitre. Platelet thresholds should be interpreted with the clinical picture and any transfusion plan. In a patient with a degenerate spine or a difficult anatomy, fluoroscopy or ultrasound can help place the needle. The operator should record the decision and the reasons in the notes.",
-   "say": "In patients with chronic liver disease, the INR and platelet count guide safety. Many spinal procedure guidelines accept an INR below 1.5 and a platelet count above 50,000 per microlitre. Platelet thresholds should be interpreted with the clinical picture and any transfusion plan. In a patient with a degenerate spine or a difficult anatomy, fluoroscopy or ultrasound can help place the needle. The operator should record the decision and the reasons in the notes.",
+   "tx": "An **internal jugular** central venous catheter is placed under **ultrasound**. The wire is seen in the vein before any **dilator** is passed. If a large dilator has already entered the carotid artery, it is not pulled out on the ward. That hole is a surgical repair.",
+   "say": "An internal jugular central venous catheter is placed under ultrasound. The wire is seen in the vein before any dilator is passed. If a large dilator has already entered the carotid artery, it is not pulled out on the ward. That hole is a surgical repair.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-procedures-fig1.webp",
-    "alt": "Diagram illustrating safety considerations for lumbar puncture, including coagulation thresholds (INR, platelets) and the use of ultrasound or fluoroscopy guidance for difficult anatomy.",
-    "caption": "Lumbar puncture safety: coagulation and imaging guidance",
-    "ar": 1.8349
+    "src": "v1/kb/media/central-venous-catheters-care-fig1.webp",
+    "alt": "Catheter tip at a central vein junction, with unnamed device types and a blockage.",
+    "caption": "The useful part is the tip sitting at the superior vena cava to right atrium junction. The labels Device Type A and Device Type B are unnamed, so they are not a recommendation. The drawing does not show ultrasound of the wire, or a dilator in the carotid. Credit: StewardMD.",
+    "ar": 1.835
    }
   },
   {
-   "tx": "Before a lumbar puncture, exclude **obstructive hydrocephalus** or a mass lesion with neuroimaging, since herniation is the main hazard. Patients with raised intracranial pressure need imaging first. Post-dural puncture headache is typically positional, and conservative care comes first. If it is refractory, a fluoroscopy-guided epidural blood patch is an established option. Remember that the exam expects you to link imaging, the needle bevel orientation and the blood patch treatment.",
-   "say": "Before a lumbar puncture, exclude obstructive hydrocephalus or a mass lesion with neuroimaging, since herniation is the main hazard. Patients with raised intracranial pressure need imaging first. Post-dural puncture headache is typically positional, and conservative care comes first. If it is refractory, a fluoroscopy-guided epidural blood patch is an established option. Remember that the exam expects you to link imaging, the needle bevel orientation and the blood patch treatment.",
+   "tx": "The **3SITES** trial found a lower composite of bloodstream infection and symptomatic thrombosis with the **subclavian** vein than with the jugular or femoral vein, at the cost of more **pneumothorax**. A patient with bad clotting is given a vein that can be compressed. The trial is a default, and it is not a site that ignores the lungs.",
+   "say": "The 3SITES trial found a lower composite of bloodstream infection and symptomatic thrombosis with the subclavian vein than with the jugular or femoral vein, at the cost of more pneumothorax. A patient with bad clotting is given a vein that can be compressed. The trial is a default, and it is not a site that ignores the lungs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "3SITES subclavian",
+     "points": [
+      "Fewer infections and thromboses",
+      "More pneumothorax",
+      "A reasonable default"
+     ]
+    },
+    "right": {
+     "title": "When not to follow it",
+     "points": [
+      "Bad clotting needs a compressible vein",
+      "Severe lung disease may change the site",
+      "The trial is not blind to the pleura"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A radial **arterial cannula** is transduced at the **phlebostatic axis**, the 4th intercostal space at the mid thorax. A dampened trace is an underestimate of the systolic pressure. The **Allen test** does not reliably predict hand ischaemia, and it does not delay the line in an unstable patient.",
+   "say": "A radial arterial cannula is transduced at the phlebostatic axis, the 4th intercostal space at the mid thorax. A dampened trace is an underestimate of the systolic pressure. The Allen test does not reliably predict hand ischaemia, and it does not delay the line in an unstable patient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial line point",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Zero",
+      "Phlebostatic axis, 4th intercostal space"
+     ],
+     [
+      "Dampened trace",
+      "Systolic pressure is underestimated"
+     ],
+     [
+      "Allen test",
+      "Does not predict hand ischaemia"
+     ],
+     [
+      "Unstable patient",
+      "The test does not delay the line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Percutaneous dilatational tracheostomy** is elective, it is guided by **bronchoscopy**, and it is sited between tracheal ring 2 and ring 4. It is not made through the cricoid, and it is not an emergency airway. Coagulopathy and very high ventilator pressures are a higher risk. The same bronchoscopy can clear a mucus plug, and the airway is kept secure.",
+   "say": "Percutaneous dilatational tracheostomy is elective, it is guided by bronchoscopy, and it is sited between tracheal ring 2 and ring 4. It is not made through the cricoid, and it is not an emergency airway. Coagulopathy and very high ventilator pressures are a higher risk. The same bronchoscopy can clear a mucus plug, and the airway is kept secure.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Suspected raised ICP"
+      "label": "Elective, not an emergency airway"
      },
      {
       "id": "b",
-      "label": "Neuroimaging first"
+      "label": "Bronchoscopy throughout"
      },
      {
       "id": "c",
-      "label": "Lumbar puncture if safe"
+      "label": "Ring 2 to ring 4, not the cricoid"
      },
      {
       "id": "d",
-      "label": "Refractory headache"
-     },
-     {
-      "id": "e",
-      "label": "Epidural blood patch"
+      "label": "Defer if clotting or ventilator pressure is extreme"
      }
     ],
     "edges": [
@@ -123,64 +109,101 @@
      [
       "c",
       "d"
-     ],
-     [
-      "d",
-      "e"
      ]
     ]
    }
   },
   {
-   "tx": "The **central line insertion bundle** lowers **bloodstream infection** by grouping several evidence-based actions. It includes **hand hygiene**, **maximal sterile barrier precautions**, an **antiseptic skin preparation** applied before insertion, site selection that favours lower infection risk where feasible, and a **daily review** of whether the line is still needed. Ultrasound guidance and sterile technique for arterial and airway procedures rely on the same principles. Document each element, as audits check it.",
-   "say": "The central line insertion bundle lowers bloodstream infection by grouping several evidence-based actions. It includes hand hygiene, maximal sterile barrier precautions, an antiseptic skin preparation applied before insertion, site selection that favours lower infection risk where feasible, and a daily review of whether the line is still needed. Ultrasound guidance and sterile technique for arterial and airway procedures rely on the same principles. Document each element, as audits check it.",
+   "tx": "A chest drain is placed in the **triangle of safety**, just above a rib, after a finger sweep, and it is put on an **underwater seal**. A bubbling drain is never clamped, and a tube that has slipped out is not pushed back in. **Needle decompression** of tension is the 4th or 5th intercostal space in the anterior axillary line. The 2nd intercostal space, midclavicular, is an alternative, and a short needle can fail in a thick chest, so a drain follows.",
+   "say": "A chest drain is placed in the triangle of safety, just above a rib, after a finger sweep, and it is put on an underwater seal. A bubbling drain is never clamped, and a tube that has slipped out is not pushed back in. Needle decompression of tension is the 4th or 5th intercostal space in the anterior axillary line. The 2nd intercostal space, midclavicular, is an alternative, and a short needle can fail in a thick chest, so a drain follows.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Bundle element",
-     "Purpose"
+     "Chest procedure",
+     "Rule"
     ],
     "rows": [
      [
-      "Hand hygiene",
-      "Reduces contamination"
+      "Drain site",
+      "Triangle of safety, above the rib"
      ],
      [
-      "Maximal barrier precautions",
-      "Covers patient and operator"
+      "Seal",
+      "Underwater, never clamp a bubbling drain"
      ],
      [
-      "Antiseptic skin preparation",
-      "Lowers skin flora before insertion"
+      "Needle, preferred",
+      "4th or 5th space, anterior axillary"
      ],
      [
-      "Daily line review",
-      "Removes lines no longer needed"
+      "Needle, alternative",
+      "2nd space, midclavicular, then a drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lumbar puncture** is avoided when a mass is causing **midline shift**, when the skin is infected, or when a coagulopathy is uncorrected. **Opening pressure** is measured with the patient lateral. A postural headache afterwards is not meningitis, unless fever or a falling conscious level is also present.",
+   "say": "Lumbar puncture is avoided when a mass is causing midline shift, when the skin is infected, or when a coagulopathy is uncorrected. Opening pressure is measured with the patient lateral. A postural headache afterwards is not meningitis, unless fever or a falling conscious level is also present.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-procedures-fig1.webp",
+    "alt": "A lumbar puncture safety box listing an INR threshold and a platelet threshold.",
+    "caption": "The chart puts an INR below 1.5 and platelets above 50,000 into a box labelled Safety. Those are common local thresholds, not a guarantee and not the paracentesis rule. They do not override midline shift. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "**Pericardiocentesis** for **tamponade** is guided by echocardiography. In cardiac arrest the approach is subxiphoid. Blood from a cardiac chamber is blood that clots in the bowl, and blood that has sat in the pericardium often does not. **Pulsus paradoxus**, distended neck veins, and chamber collapse are support for the diagnosis before the needle goes in.",
+   "say": "Pericardiocentesis for tamponade is guided by echocardiography. In cardiac arrest the approach is subxiphoid. Blood from a cardiac chamber is blood that clots in the bowl, and blood that has sat in the pericardium often does not. Pulsus paradoxus, distended neck veins, and chamber collapse are support for the diagnosis before the needle goes in.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Blood that clots in the bowl",
+     "points": [
+      "Likely from a cardiac chamber",
+      "The needle is in the heart",
+      "Stop and reassess"
+     ]
+    },
+    "right": {
+     "title": "Blood that does not clot",
+     "points": [
+      "Often pericardial",
+      "Echo still guides the needle",
+      "Pulsus and collapse support tamponade"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic **paracentesis** in cirrhosis is not delayed for a moderately raised INR, because missing infected ascites is more dangerous than the tap. When more than 5 litres are removed, **albumin** is given at about 6 to 8 g per litre removed. The central-line bundle is a separate rule: **chlorhexidine** skin preparation and a **maximal sterile barrier**, and it is listed beside the tap rule so the two are not mixed.",
+   "say": "Diagnostic paracentesis in cirrhosis is not delayed for a moderately raised INR, because missing infected ascites is more dangerous than the tap. When more than 5 litres are removed, albumin is given at about 6 to 8 g per litre removed. The central-line bundle is a separate rule: chlorhexidine skin preparation and a maximal sterile barrier, and it is listed beside the tap rule so the two are not mixed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedure",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Diagnostic tap",
+      "Do not delay for a moderate INR"
+     ],
+     [
+      "More than 5 litres",
+      "Albumin about 6 to 8 g per litre"
+     ],
+     [
+      "Central line skin prep",
+      "Chlorhexidine"
+     ],
+     [
+      "Central line drape",
+      "Maximal sterile barrier, plus a daily removal decision"
      ]
     ]
    }
   }
- ],
- "quiz": [
-  "q_84392b7bd0fa",
-  "q_111d097e7d8d",
-  "q_1a33f1d79258"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 36
- }
+ ]
 }
