@@ -1,0 +1,197 @@
+{
+ "v": 1,
+ "module": "sen-hypopituitarism",
+ "subject": "ss-endocrinology",
+ "title": "Hypopituitarism and pituitary apoplexy",
+ "minutes": 9,
+ "steps": [
+  {
+   "tx": "Replace **cortisol** before **thyroxine** when hypopituitarism is possible. Thyroid hormone speeds cortisol clearance, so levothyroxine started while cortisol is low can precipitate an adrenal crisis. Give hydrocortisone first if the patient is unwell, and add levothyroxine only after glucocorticoid cover is in place. A low free T4 with a low or normal TSH is central hypothyroidism, and it is not the first drug to start.",
+   "say": "Replace cortisol before thyroxine when hypopituitarism is possible. Thyroid hormone speeds cortisol clearance, so levothyroxine started while cortisol is low can precipitate an adrenal crisis. Give hydrocortisone first if the patient is unwell, and add levothyroxine only after glucocorticoid cover is in place. A low free T4 with a low or normal TSH is central hypothyroidism, and it is not the first drug to start.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspected hypopituitarism"
+     },
+     {
+      "id": "b",
+      "label": "Replace cortisol first"
+     },
+     {
+      "id": "c",
+      "label": "Then start levothyroxine"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In slowly progressive hypopituitarism, **growth hormone** and the **gonadotropins** usually fail before TSH and ACTH. The drawing shows that usual order, with growth hormone first and ACTH later. Apoplexy and hypophysitis break that order, and ACTH deficiency can be the first and most dangerous deficit. Prolactin is often the last to fall, so a woman who still lactates can already lack cortisol.",
+   "say": "In slowly progressive hypopituitarism, growth hormone and the gonadotropins usually fail before TSH and ACTH. The drawing shows that usual order, with growth hormone first and ACTH later. Apoplexy and hypophysitis break that order, and ACTH deficiency can be the first and most dangerous deficit. Prolactin is often the last to fall, so a woman who still lactates can already lack cortisol.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypopituitarism-fig1.webp",
+    "alt": "Diagram of anterior pituitary axes. The usual slow order is drawn as growth hormone, then gonadotropins, then TSH, then ACTH. Sheehan syndrome and pituitary apoplexy are listed as causes.",
+    "caption": "The drawing lists Sheehan syndrome and pituitary apoplexy among the causes, and it draws the slow order as growth hormone, then gonadotropins, then TSH, then ACTH. It does not show a stimulation-test cutoff (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Sheehan syndrome** follows severe postpartum haemorrhage with pituitary ischaemia. Failure to lactate and persistent amenorrhea are the classic clues, and other anterior pituitary deficits can appear later. The drawing names failure of postpartum lactation under the prolactin axis. Do not wait for every axis to fail before you replace cortisol, because ACTH deficiency can declare itself during a later illness.",
+   "say": "Sheehan syndrome follows severe postpartum haemorrhage with pituitary ischaemia. Failure to lactate and persistent amenorrhea are the classic clues, and other anterior pituitary deficits can appear later. The drawing names failure of postpartum lactation under the prolactin axis. Do not wait for every axis to fail before you replace cortisol, because ACTH deficiency can declare itself during a later illness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clue",
+     "What it means"
+    ],
+    "rows": [
+     [
+      "Postpartum hemorrhage",
+      "Failure to lactate, think Sheehan"
+     ],
+     [
+      "Amenorrhea that persists",
+      "Gonadotropin loss is common"
+     ],
+     [
+      "Collapse in a later illness",
+      "ACTH deficiency until proved otherwise"
+     ],
+     [
+      "Empty sella on a scan",
+      "Not proof of hormone loss by itself"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pituitary apoplexy** is sudden haemorrhage or infarction, often into an existing adenoma. The presentation is a sudden severe headache, visual loss, and acute cortisol deficiency. Give intravenous hydrocortisone as soon as the diagnosis is suspected. Surgery is for deteriorating vision or a falling level of consciousness, and it is not required for every bleed. The film is an enlarged sella with mixed signal and no labels.",
+   "say": "Pituitary apoplexy is sudden haemorrhage or infarction, often into an existing adenoma. The presentation is a sudden severe headache, visual loss, and acute cortisol deficiency. Give intravenous hydrocortisone as soon as the diagnosis is suspected. Surgery is for deteriorating vision or a falling level of consciousness, and it is not required for every bleed. The film is an enlarged sella with mixed signal and no labels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pituitary-apoplexy-fig1.webp",
+    "alt": "Sagittal MRI of the head showing an enlarged pituitary fossa with mixed signal and no labels, names, or side markers.",
+    "caption": "Sagittal MRI of an enlarged sellar mass with mixed signal. No labels are printed on the film (Dr Frank Gaillard, CC BY-SA 3.0)."
+   }
+  },
+  {
+   "tx": "**Lymphocytic hypophysitis** often presents in late pregnancy or after delivery. ACTH deficiency is common, the stalk may be thickened, and the gland can imitate a pituitary mass. Hormone replacement is required even when the mass is observed rather than removed. Do not mistake it for Sheehan syndrome: there may be no haemorrhage, and the MRI clue is stalk thickening rather than an empty sella.",
+   "say": "Lymphocytic hypophysitis often presents in late pregnancy or after delivery. ACTH deficiency is common, the stalk may be thickened, and the gland can imitate a pituitary mass. Hormone replacement is required even when the mass is observed rather than removed. Do not mistake it for Sheehan syndrome, because there may be no haemorrhage, and the MRI clue is stalk thickening rather than an empty sella.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lymphocytic hypophysitis",
+     "points": [
+      "Late pregnancy or postpartum",
+      "ACTH deficiency is common",
+      "Stalk may be thickened",
+      "Replace hormones even if observed"
+     ]
+    },
+    "right": {
+     "title": "Sheehan syndrome",
+     "points": [
+      "Follows severe haemorrhage",
+      "Failure to lactate is the clue",
+      "Other deficits can come later",
+      "Cortisol still comes first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Immune checkpoint** inhibitor hypophysitis is linked more strongly to **CTLA-4 blockade** than to PD-1 blockade. ACTH deficiency is often permanent. High-dose glucocorticoid treats headache and mass effect, but it does not reliably restore pituitary function. Continue hormone replacement when the cancer drug is working. A tired patient on ipilimumab needs a morning cortisol before the fatigue is blamed on the cancer alone.",
+   "say": "Immune checkpoint inhibitor hypophysitis is linked more strongly to CTLA-4 blockade than to PD-1 blockade. ACTH deficiency is often permanent. High-dose glucocorticoid treats headache and mass effect, but it does not reliably restore pituitary function. Continue hormone replacement when the cancer drug is working. A tired patient on ipilimumab needs a morning cortisol before the fatigue is blamed on the cancer alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug class",
+     "Typical endocrine hit",
+     "What often persists"
+    ],
+    "rows": [
+     [
+      "CTLA-4 blockade",
+      "Hypophysitis",
+      "ACTH deficiency"
+     ],
+     [
+      "PD-1 or PD-L1 blockade",
+      "Thyroiditis more often",
+      "Hypothyroidism after the toxic phase"
+     ],
+     [
+      "Either class, if unwell",
+      "Check cortisol first",
+      "Do not wait on a stable patient in shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adult **growth hormone** replacement is considered only after the other deficient axes are replaced and a **stimulation test** confirms the deficit. It is not started on a low IGF-1 alone. The insulin tolerance test cutoff used by the Endocrine Society is a peak at or below 5.1 micrograms per litre. That test is unsafe in ischaemic heart disease and in seizure disorder, so another stimulus is chosen when those risks are present.",
+   "say": "Adult growth hormone replacement is considered only after the other deficient axes are replaced and a stimulation test confirms the deficit. It is not started on a low IGF-1 alone. The insulin tolerance test cutoff used by the Endocrine Society is a peak at or below 5.1 micrograms per litre. That test is unsafe in ischaemic heart disease and in seizure disorder, so another stimulus is chosen when those risks are present.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decision",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Low IGF-1 alone",
+      "Not enough to start adult growth hormone"
+     ],
+     [
+      "Other axes",
+      "Replace cortisol and thyroxine first"
+     ],
+     [
+      "Insulin tolerance test",
+      "Peak at or below 5.1 micrograms per litre"
+     ],
+     [
+      "Heart disease or seizures",
+      "Do not use the insulin test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Traumatic brain** injury and subarachnoid haemorrhage can cause hypopituitarism at the time of injury or months later, so a normal early screen does not close the question. An empty sella is often an incidental imaging finding and does not by itself prove hormone deficiency. Test the axes when symptoms appear, and always secure cortisol before thyroid hormone. The order of loss in trauma is not the slow adenoma order.",
+   "say": "Traumatic brain injury and subarachnoid haemorrhage can cause hypopituitarism at the time of injury or months later, so a normal early screen does not close the question. An empty sella is often an incidental imaging finding and does not by itself prove hormone deficiency. Test the axes when symptoms appear, and always secure cortisol before thyroid hormone. The order of loss in trauma is not the slow adenoma order.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Slow adenoma",
+     "points": [
+      "Growth hormone and gonadotropins fail first",
+      "TSH and ACTH fail later",
+      "Order is a clue, not a rule"
+     ]
+    },
+    "right": {
+     "title": "Acute causes",
+     "points": [
+      "Apoplexy, trauma, or hypophysitis",
+      "ACTH can fail first",
+      "Empty sella does not prove deficiency"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
