@@ -1,0 +1,68 @@
+{
+  "id": "ent-stridor-airway",
+  "title": "Stridor and the emergency airway",
+  "subtitle": "Including front-of-neck access and tracheostomy emergencies",
+  "category": "ent_airway",
+  "specialty": "ent",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "ntsp-2012", "org": "National Tracheostomy Safety Project (NTSP)", "title": "Multidisciplinary guidelines for the management of tracheostomy and laryngectomy airway emergencies (Anaesthesia 2012)", "year": 2012, "url": "https://pubmed.ncbi.nlm.nih.gov/22731935/", "accessed": "2026-11-04" },
+    { "id": "das-2015", "org": "Difficult Airway Society (DAS)", "title": "Difficult Airway Society 2015 guidelines for management of unanticipated difficult intubation in adults", "year": 2015, "url": "https://pubmed.ncbi.nlm.nih.gov/26556848/", "accessed": "2026-11-04" },
+    { "id": "das-ati-2020", "org": "Difficult Airway Society (DAS)", "title": "Difficult Airway Society guidelines for awake tracheal intubation (ATI) in adults", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31729018/", "accessed": "2026-11-04" },
+    { "id": "cochrane-croup-steroid", "org": "Cochrane", "title": "Glucocorticoids for croup in children", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/36626194/", "accessed": "2026-11-04" },
+    { "id": "cochrane-croup-adrenaline", "org": "Cochrane", "title": "Nebulized epinephrine for croup in children", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/24114291/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Stridor at rest, drooling, inability to swallow saliva, or a muffled voice: the upper airway is critically narrowed." },
+      { "text": "Tripod posture, use of accessory muscles, agitation, or the opposite: exhaustion, quietening and drowsiness. A quieter stridor in a tiring patient is worse, not better." },
+      { "text": "Falling oxygen saturation is a late sign in upper airway obstruction. Do not wait for it." },
+      { "text": "A tracheostomy or laryngectomy patient in respiratory distress: assume the tube is blocked or displaced until proven otherwise." },
+      { "text": "Rapid progression over hours: supraglottitis, angioedema, deep neck infection, or a haematoma after neck surgery." },
+      { "text": "A bleeding or expanding neck after thyroid or neck surgery with stridor: open the wound at the bedside." }
+    ],
+    "do_now": [
+      { "text": "Call for help at once: the most senior anaesthetist and ENT surgeon available. Declare the airway emergency in those words.", "timeCritical": true, "evidenceRef": "das-ati-2020" },
+      { "text": "Keep the patient upright and calm, with high-flow oxygen. Do not lie them flat, do not send them to the scanner unaccompanied, and do not examine the throat of a child with suspected epiglottitis.", "timeCritical": true, "evidenceRef": "das-ati-2020" },
+      { "text": "Tracheostomy patient: follow the NTSP algorithm. Apply high-flow oxygen to both the face and the tracheostomy, remove any speaking valve or cap, remove the inner tube, and pass a suction catheter.", "timeCritical": true, "evidenceRef": "ntsp-2012" },
+      { "text": "If the suction catheter does not pass and the patient is not improving, deflate the cuff. If still not improving, remove the tracheostomy tube.", "timeCritical": true, "evidenceRef": "ntsp-2012" },
+      { "text": "Waveform capnography on any tracheostomy or airway device as soon as it is available. A flat trace means no ventilation through that route.", "timeCritical": true, "evidenceRef": "ntsp-2012" }
+    ],
+    "assess": [
+      { "text": "Phase of stridor: inspiratory suggests a supraglottic or glottic lesion, biphasic a subglottic or upper tracheal lesion, expiratory a lower tracheal or bronchial lesion." },
+      { "text": "Flexible nasendoscopy by ENT, at the bedside and with the airway team present, if the patient is stable enough. It shows the level and the size of the airway." },
+      { "text": "In children, score croup severity and look for features that do not fit croup: toxic appearance, drooling, high fever.", "calcs": ["westley_croup"] },
+      { "text": "Check the bedhead sign for any neck breather: tracheostomy (upper airway present) or laryngectomy (no connection between mouth and lungs). It changes everything that follows." },
+      { "text": "Track respiratory rate, work of breathing, and an early warning score.", "calcs": ["news2"] }
+    ],
+    "investigate": [
+      { "text": "Imaging only once the airway is safe, and only with an escort who can manage it. CT of the neck delineates tumour, abscess and haematoma." },
+      { "text": "Blood gas when the patient is stable enough; do not distress a child with stridor for a sample." },
+      { "text": "Blood tests are secondary. No test should delay securing the airway." }
+    ],
+    "resuscitate": [
+      { "text": "Croup in children: a single dose of oral corticosteroid (dexamethasone) for all severities, with nebulised adrenaline as a temporising measure in moderate or severe croup.", "evidenceRef": "cochrane-croup-steroid" },
+      { "text": "Nebulised adrenaline buys time but its effect is short-lived. Observe after giving it, and do not discharge on its effect.", "evidenceRef": "cochrane-croup-adrenaline" },
+      { "text": "Tracheostomy patient after tube removal: oxygenate by the standard upper airway routes with the stoma covered, or via the stoma with a paediatric face mask or laryngeal mask. A laryngectomy patient can only be oxygenated via the stoma.", "evidenceRef": "ntsp-2012" }
+    ],
+    "definitive": [
+      { "text": "For an anticipated difficult airway in a patient who is still oxygenating, secure the airway awake, in theatre, with a surgeon scrubbed and the neck marked for front-of-neck access before anything else is done.", "timeCritical": true, "evidenceRef": "das-ati-2020" },
+      { "text": "Cannot intubate, cannot oxygenate: proceed to emergency front-of-neck access through the cricothyroid membrane using the scalpel, bougie and tube technique, as DAS describes.", "timeCritical": true, "evidenceRef": "das-2015" },
+      { "text": "Tracheostomy patient with an upper airway who cannot be oxygenated after tube removal: secondary oxygenation by oral intubation, or by intubating the stoma with a small tube, preferably guided by a fibreoptic scope.", "timeCritical": true, "evidenceRef": "ntsp-2012" },
+      { "text": "Treat the cause once the airway is secure: drainage of an abscess or haematoma, treatment of angioedema, or a planned surgical tracheostomy for an obstructing tumour.", "evidenceRef": "das-ati-2020" }
+    ],
+    "escalate": [
+      { "text": "Senior anaesthetist and senior ENT surgeon for every stridulous adult. Paediatric anaesthesia and paediatric ENT for a child." },
+      { "text": "Critical care for every patient whose airway has been at risk, including those who improved with adrenaline or steroids." },
+      { "text": "Do not transfer a patient with a threatened airway to another hospital without first securing the airway or having airway-competent staff in the vehicle." }
+    ]
+  },
+  "notes": [
+    "The question in stridor is not 'what is the diagnosis' but 'how much time is there'. Bring the people who can secure the airway before you need them.",
+    "Every tracheostomy and laryngectomy patient should have a bedhead sign. The single most important fact on it is whether the patient can be oxygenated from the mouth.",
+    "Front-of-neck access is a decision, not a skill problem. The failure in most reported cases is the delay in declaring 'cannot intubate, cannot oxygenate'."
+  ],
+  "calcs": ["westley_croup", "news2"]
+}

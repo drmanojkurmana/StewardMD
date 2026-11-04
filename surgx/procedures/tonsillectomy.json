@@ -1,0 +1,139 @@
+{
+  "id": "tonsillectomy",
+  "title": "Tonsillectomy",
+  "subtitle": "Stay on the capsule, check the fossae twice",
+  "system": "ent",
+  "aliases": ["tonsillectomy", "adenotonsillectomy", "tonsil removal", "quinsy tonsillectomy"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "aaohns-tonsil-2019", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical Practice Guideline: Tonsillectomy in Children (Update)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/30798778/", "accessed": "2026-11-04" },
+    { "id": "npta", "org": "Royal College of Surgeons of England and British Association of Otorhinolaryngologists", "title": "Key messages from the National Prospective Tonsillectomy Audit (Laryngoscope 2007)", "year": 2007, "url": "https://pubmed.ncbi.nlm.nih.gov/17415144/", "accessed": "2026-11-04" },
+    { "id": "nice-ipg150", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Electrosurgery (diathermy and coblation) for tonsillectomy (IPG150)", "year": 2005, "url": "https://www.nice.org.uk/guidance/ipg150", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["apfel", "stopbang", "ebv"],
+  "chapters": {
+    "indications": [
+      "Recurrent throat infection meeting the documented frequency criteria used by the AAO-HNSF guideline: at least 7 episodes in the past year, at least 5 a year for 2 years, or at least 3 a year for 3 years, each with a documented qualifying feature.",
+      "Obstructive sleep-disordered breathing in a child with tonsillar hypertrophy, usually as adenotonsillectomy.",
+      "Recurrent peritonsillar abscess, or a quinsy with a history of recurrent tonsillitis.",
+      "Suspected malignancy: a unilaterally enlarged, firm or ulcerated tonsil, or an unknown primary in the neck. Send the specimen fresh or in formalin per the histopathology request, and tell the pathologist."
+    ],
+    "contraindications": [
+      "Uncorrected bleeding disorder. Take a bleeding history in every patient; investigate a positive one before listing.",
+      "Acute tonsillitis at the time of surgery for an elective case (quinsy tonsillectomy is a separate, deliberate decision).",
+      "Velopharyngeal insufficiency or a submucous cleft, which raise the risk of hypernasal speech, particularly with adenoidectomy.",
+      "A child whose comorbidity makes day-case surgery unsafe is not a contraindication, but it changes where the operation is done."
+    ],
+    "preparation": [
+      "Polysomnography before surgery for children with obesity, Down syndrome, craniofacial abnormality, neuromuscular disorder, sickle cell disease or mucopolysaccharidosis, as the AAO-HNSF guideline advises.",
+      "Plan overnight inpatient monitoring for children under 3 years and for those with severe obstructive sleep apnoea on polysomnography.",
+      "A single intra-operative dose of intravenous dexamethasone. No routine perioperative antibiotics: the guideline recommends against them.",
+      "Consent must include bleeding (primary and secondary, with the possibility of return to theatre), pain for up to two weeks, damage to teeth, lips and tongue, and the small risk of voice change."
+    ],
+    "positioning": [
+      "Supine, shoulder roll, head extended on a head ring. Extension opens the view but must be moderated in Down syndrome because of atlantoaxial instability.",
+      "Mouth gag with a tongue blade sized so the tube sits in the groove, suspended on Draffin rods or a gag holder.",
+      "Surgeon at the head, headlight on, suction to hand before the gag opens."
+    ],
+    "equipment": [
+      "Mouth gag (Boyle-Davis or equivalent) with a range of tongue blades and a preformed or reinforced tube.",
+      "Cold steel set: tonsil holding forceps, Mollison dissector, Eves snare; ties on a Negus or similar ligature carrier.",
+      "Bipolar diathermy, or coblation, with the technique chosen in advance. Hot techniques raise the risk of secondary haemorrhage, and the National Prospective Tonsillectomy Audit and NICE IPG150 both emphasise training and audit for them.",
+      "Tonsil swabs counted in and out; postnasal space mirror or endoscope; adenoid curette if adenoidectomy is planned."
+    ],
+    "anatomy": [
+      "The tonsil sits in the tonsillar fossa between the palatoglossal (anterior) and palatopharyngeal (posterior) pillars. Its capsule is separated from the superior constrictor by loose areolar tissue: this is the dissection plane.",
+      "Blood supply enters mainly at the lower pole from the tonsillar branch of the facial artery, with contributions from the ascending pharyngeal, lingual, ascending palatine and descending palatine arteries. The paratonsillar vein runs on the lateral surface and is a common cause of bleeding.",
+      "The glossopharyngeal nerve lies deep to the lower pole on the constrictor. Deep dissection or diathermy there can cause post-operative taste change and referred otalgia.",
+      "The internal carotid artery lies about 2 cm posterolateral to the fossa and may be closer and tortuous in some patients. A pulsatile fossa is a reason to stop and think."
+    ],
+    "criticalSafety": [
+      "Stay on the capsule. Every complication of the dissection, including bleeding, nerve injury and excessive pain, comes from going deep into the constrictor.",
+      "Haemostasis is checked with the gag released and re-opened, because suspension compresses vessels and conceals bleeding.",
+      "The throat pack and every swab are counted out before the gag is removed. A retained swab in the nasopharynx is an airway obstruction at extubation."
+    ],
+    "structuresAtRisk": [
+      "Superior constrictor muscle",
+      "Glossopharyngeal nerve at the lower pole",
+      "Paratonsillar vein and lower pole vessels",
+      "Teeth, lips and tongue under the gag",
+      "Uvula and soft palate"
+    ],
+    "commonErrors": [
+      "Dissecting into the constrictor at the upper pole, where the plane is first found, and then following the wrong plane down.",
+      "Excessive bipolar diathermy on the fossa, which increases pain and secondary haemorrhage.",
+      "Judging haemostasis only while the gag is open and the blood pressure is low.",
+      "Trapping the lip between the teeth and the gag."
+    ],
+    "complications": [
+      "Primary haemorrhage within 24 hours, usually technical, and secondary haemorrhage after 24 hours, commonly between days 5 and 10, associated with infection and slough separation. Both can need a return to theatre.",
+      "Pain, often worse around days 4 to 7, with referred otalgia. Poor oral intake from pain leads to dehydration and to secondary bleeding.",
+      "Post-operative respiratory compromise in children with severe obstructive sleep apnoea.",
+      "Dental injury, temporomandibular joint pain, taste disturbance, velopharyngeal insufficiency, and rarely nasopharyngeal stenosis."
+    ],
+    "postop": [
+      "Analgesia with regular paracetamol and ibuprofen, which the AAO-HNSF guideline recommends. Codeine must not be given to children under 12.",
+      "Eat and drink normally: a normal diet helps the fossae to heal and reduces infection. White slough on the fossae is normal and is not pus.",
+      "Every patient leaves with written advice that any bleeding from the mouth, including small amounts, means return to hospital straight away, and with the ward's direct telephone number.",
+      "A child who is swallowing repeatedly, vomiting dark blood, or becoming tachycardic is bleeding until examined. See the post-tonsillectomy haemorrhage protocol."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Ask about bleeding in the family and easy bruising in the child. A positive bleeding history found in the anaesthetic room is a cancelled case." },
+    { "ref": "step.ent.preop-data-check", "emphasis": "Infection count documented, or sleep study result, or the clinical suspicion of malignancy that justifies the operation." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "No routine antibiotics for tonsillectomy. Single intra-operative dose of intravenous dexamethasone, unless contraindicated." },
+    { "ref": "step.ent.airway-share" },
+    { "ref": "step.core.positioning", "emphasis": "Moderate the neck extension in Down syndrome. Check the tube is not kinked by the tongue blade once the gag is opened." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.tonsil.gag" },
+    { "ref": "step.tonsil.dissection" },
+    { "ref": "step.core.haemostasis", "emphasis": "Ties or bipolar on discrete vessels only. Release the gag for a minute, re-open, and look again." },
+    { "ref": "step.ent.pharynx-clearance" },
+    { "ref": "step.core.counts", "emphasis": "Tonsil swabs and the throat pack are counted out before the gag comes out." },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.ent.airway-handover", "emphasis": "Tonsil position in recovery. State the bleeding risk and that frequent swallowing means bleeding." },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.tonsil.gag": {
+      "id": "step.tonsil.gag",
+      "kind": "access",
+      "title": "Insert and suspend the mouth gag",
+      "why": "The gag gives the exposure for the whole operation and is also the commonest cause of avoidable harm: kinked tubes, chipped teeth and trapped lips.",
+      "how": [
+        "Choose a tongue blade long enough to reach past the tonsils, with the tube sitting in its groove.",
+        "Open the gag gradually with an eye on the upper teeth and lips, and check with the anaesthetist that ventilation pressures have not changed.",
+        "Suspend the gag and confirm a full view of both tonsils and the soft palate. Palpate the palate for a submucous cleft before any adenoid surgery."
+      ],
+      "structuresAtRisk": ["Teeth", "Lips", "Endotracheal tube"],
+      "pitfalls": [
+        "A blade too short, so the tongue base bulges into the view and the lower pole cannot be reached.",
+        "Opening the gag fully in one movement and losing the tube's position."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.tonsil.dissection": {
+      "id": "step.tonsil.dissection",
+      "kind": "resection",
+      "critical": true,
+      "title": "Dissection in the peritonsillar plane",
+      "why": "The plane between the capsule and the constrictor is nearly bloodless when found and followed. Leaving it is what causes bleeding, nerve injury and a painful fossa.",
+      "how": [
+        "Grasp the upper pole and retract it medially. Incise the mucosa of the anterior pillar close to the tonsil.",
+        "Find the white capsule at the upper pole and develop the plane with a dissector or bipolar, keeping the capsule in view throughout.",
+        "Separate from the posterior pillar, preserving its mucosa, and work down to the lower pole.",
+        "Divide the lower pole pedicle with a snare or under direct vision with bipolar, and tie or seal any vessel at the lower pole.",
+        "Pack the fossa with a counted swab while the other side is done."
+      ],
+      "structuresAtRisk": ["Superior constrictor", "Glossopharyngeal nerve", "Paratonsillar vein"],
+      "pitfalls": [
+        "Muscle fibres on the specimen: the dissection has gone deep.",
+        "Leaving a lower pole remnant, which can bleed and regrow."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

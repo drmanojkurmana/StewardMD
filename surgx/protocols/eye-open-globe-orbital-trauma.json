@@ -1,0 +1,64 @@
+{
+  "id": "eye-open-globe-orbital-trauma",
+  "title": "Open globe and orbital trauma",
+  "subtitle": "Shield the globe; release a tense orbit with a lateral canthotomy",
+  "category": "eye_emergency",
+  "specialty": "ophthalmology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "coo-penetrating", "org": "College of Optometrists", "title": "Clinical Management Guideline: Trauma (penetrating)", "year": 2026, "url": "https://www.college-optometrists.org/clinical-guidance/clinical-management-guidelines/trauma_penetrating", "accessed": "2026-11-04" },
+    { "id": "coo-blunt", "org": "College of Optometrists", "title": "Clinical Management Guideline: Trauma (blunt)", "year": 2026, "url": "https://www.college-optometrists.org/clinical-guidance/clinical-management-guidelines/trauma_blunt", "accessed": "2026-11-04" },
+    { "id": "kuhn-bett", "org": "Ophthalmology", "title": "A standardized classification of ocular trauma (Kuhn et al.)", "year": 1996, "url": "https://pubmed.ncbi.nlm.nih.gov/8594508/", "accessed": "2026-11-04" },
+    { "id": "lima-ocs", "org": "Survey of Ophthalmology", "title": "Orbital compartment syndrome: the ophthalmic surgical emergency (Lima et al.)", "year": 2009, "url": "https://pubmed.ncbi.nlm.nih.gov/19539832/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "An irregular or peaked pupil, a shallow or flat anterior chamber, uveal tissue at the wound, or a deflated globe: open globe injury." },
+      { "text": "Hammering metal on metal, grinding, or a high-velocity projectile: an intraocular foreign body until a CT says otherwise, even with a tiny entry wound." },
+      { "text": "After trauma, or after sinus, orbital or lid surgery: proptosis, a tense orbit, reduced vision, a relative afferent pupillary defect and restricted eye movements. This is orbital compartment syndrome." },
+      { "text": "Subconjunctival haemorrhage extending all the way round the cornea with reduced vision: possible occult posterior rupture." },
+      { "text": "Restricted upgaze with nausea, bradycardia and a white-looking eye in a child after blunt trauma: trapdoor orbital floor fracture with muscle entrapment." }
+    ],
+    "do_now": [
+      { "text": "Suspected open globe: apply a rigid shield that rests on the bony orbit, with no pressure on the eye and no pad underneath. Nothing goes into the eye: no drops, no ointment, no tonometry.", "timeCritical": true, "evidenceRef": "coo-penetrating" },
+      { "text": "Suspected open globe: antiemetic and analgesia to prevent vomiting and straining, nil by mouth, head up. Do not remove a protruding foreign body.", "timeCritical": true, "evidenceRef": "coo-penetrating" },
+      { "text": "Orbital compartment syndrome with threatened vision: perform lateral canthotomy and inferior cantholysis at once, without waiting for imaging or an ophthalmologist to arrive.", "timeCritical": true, "evidenceRef": "lima-ocs" },
+      { "text": "Check tetanus status and start intravenous antibiotics for an open globe per local protocol, to reduce the risk of endophthalmitis.", "timeCritical": true, "evidenceRef": "coo-penetrating" }
+    ],
+    "assess": [
+      { "text": "Visual acuity in each eye, even if only perception of light. It is the strongest predictor of outcome and the baseline for every later decision.", "calcs": ["logmar"] },
+      { "text": "Pupils for a relative afferent pupillary defect, looking only, without pressing on the eye." },
+      { "text": "Classify the injury: open globe (laceration, penetrating, perforating, intraocular foreign body, rupture) or closed globe (contusion, lamellar laceration). The classification guides prognosis and planning." },
+      { "text": "Orbital compartment syndrome is a clinical diagnosis: proptosis, a tight orbit that resists gentle retropulsion, raised intraocular pressure, reduced vision or a relative afferent pupillary defect, and ophthalmoplegia. Retropulsion is only tested once an open globe has been excluded." },
+      { "text": "Examine for associated injuries: head injury, facial fractures, and the cervical spine. Record the GCS alongside the eye findings.", "calcs": ["gcs"] }
+    ],
+    "investigate": [
+      { "text": "CT of the orbits with fine cuts for suspected open globe, intraocular foreign body, or orbital fracture. Do not request MRI when a metallic foreign body is possible." },
+      { "text": "Imaging must never delay a canthotomy for a clinical orbital compartment syndrome." },
+      { "text": "Pre-operative bloods and fasting status for an open globe that will go to theatre." }
+    ],
+    "resuscitate": [
+      { "text": "Treat life-threatening injuries first in multiple trauma. The eye waits, shielded, but is not forgotten at handover.", "evidenceRef": "coo-blunt" },
+      { "text": "Avoid any pressure on the eye during airway management, transfer and examination. Instruct the team and the patient.", "evidenceRef": "coo-penetrating" }
+    ],
+    "definitive": [
+      { "text": "Urgent primary repair of an open globe by ophthalmology, as soon as safely possible, with removal of any intraocular foreign body.", "timeCritical": true, "evidenceRef": "coo-penetrating" },
+      { "text": "Lateral canthotomy: after local anaesthetic, crush the lateral canthus with a straight haemostat, then cut it horizontally to the orbital rim. Then cantholysis: identify and cut the inferior crus of the lateral canthal tendon until the lower lid is freely mobile.", "timeCritical": true, "evidenceRef": "lima-ocs" },
+      { "text": "After canthotomy, recheck vision, pupil and orbital tension. If the orbit is still tight, add superior cantholysis, and arrange urgent ophthalmology and imaging for the cause.", "evidenceRef": "lima-ocs" },
+      { "text": "Orbital floor fractures without entrapment are usually managed with observation and later review; a trapdoor fracture with muscle entrapment in a child needs urgent surgical release.", "evidenceRef": "coo-blunt" }
+    ],
+    "escalate": [
+      { "text": "On-call ophthalmology immediately for every suspected open globe and every orbital compartment syndrome, including after the canthotomy has been done." },
+      { "text": "Maxillofacial surgery or ENT for orbital fractures, and neurosurgery for associated intracranial injury." },
+      { "text": "Transfer for open globe repair with the shield in place, nil by mouth, with antiemetic cover and the CT images sent ahead." }
+    ]
+  },
+  "notes": [
+    "A lateral canthotomy is a simple procedure that saves sight. The error is not doing it badly; it is waiting for someone else to do it.",
+    "Never check the pressure in an eye that might be open. The shield is the treatment until theatre.",
+    "Retrobulbar haemorrhage after sinus or lid surgery presents to the ward or recovery team, not to the eye department. Everyone who looks after these patients should know the signs."
+  ],
+  "calcs": ["logmar", "gcs"]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "eye-acute-angle-closure-red-eye",
+  "title": "Acute angle closure and the acute red eye",
+  "subtitle": "Painful red eye with blurred vision is never conjunctivitis",
+  "category": "eye_emergency",
+  "specialty": "ophthalmology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "aao-pacd-ppp", "org": "American Academy of Ophthalmology (AAO)", "title": "Primary Angle-Closure Disease Preferred Practice Pattern", "year": 2026, "url": "https://pubmed.ncbi.nlm.nih.gov/41665581/", "accessed": "2026-11-04" },
+    { "id": "egs-2021", "org": "European Glaucoma Society (EGS)", "title": "European Glaucoma Society Terminology and Guidelines for Glaucoma, 5th Edition", "year": 2021, "url": "https://pubmed.ncbi.nlm.nih.gov/34675001/", "accessed": "2026-11-04" },
+    { "id": "coo-pac", "org": "College of Optometrists", "title": "Clinical Management Guideline: Primary angle closure / primary angle closure glaucoma", "year": 2026, "url": "https://www.college-optometrists.org/clinical-guidance/clinical-management-guidelines/primaryangleclosure_primaryangleclosureglaucoma_pa", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A painful red eye with reduced vision, haloes around lights, headache, nausea or vomiting, a cloudy cornea and a fixed mid-dilated pupil: acute angle closure." },
+      { "text": "Red eye in a contact lens wearer with pain and a white corneal spot: microbial keratitis, which can perforate within days." },
+      { "text": "Photophobia with ciliary injection (redness concentrated around the cornea) and a small pupil: anterior uveitis." },
+      { "text": "Deep boring pain that wakes the patient, with a violaceous hue and tenderness: scleritis, often with systemic disease." },
+      { "text": "Red eye after recent intraocular surgery or injection with pain and reduced vision: endophthalmitis." },
+      { "text": "Headache with nausea and vomiting labelled as migraine or gastroenteritis in an older patient: look at the eyes." }
+    ],
+    "do_now": [
+      { "text": "Suspected acute angle closure: same-day, immediate ophthalmology referral. It is an emergency that threatens permanent visual loss.", "timeCritical": true, "evidenceRef": "coo-pac" },
+      { "text": "Start lowering the intraocular pressure while waiting, per local protocol: topical agents (beta-blocker, alpha-agonist, then a miotic once pressure begins to fall) and a systemic carbonic anhydrase inhibitor, after checking contraindications.", "timeCritical": true, "evidenceRef": "aao-pacd-ppp" },
+      { "text": "Treat pain and vomiting; both perpetuate the attack and the patient's distress.", "evidenceRef": "aao-pacd-ppp" },
+      { "text": "Do not dilate the pupil of a patient with a red painful eye and a shallow anterior chamber.", "timeCritical": true, "evidenceRef": "egs-2021" }
+    ],
+    "assess": [
+      { "text": "Visual acuity in each eye, every time. Reduced acuity separates the dangerous red eye from the benign one.", "calcs": ["logmar"] },
+      { "text": "Pupil: fixed and mid-dilated in angle closure, small in uveitis, normal in conjunctivitis." },
+      { "text": "Corneal clarity, fluorescein staining for a defect or an ulcer, and the pattern of redness: diffuse with discharge in conjunctivitis, around the cornea in keratitis, uveitis and angle closure." },
+      { "text": "Shine a pen torch from the side: a shadow on the far iris suggests a shallow anterior chamber." },
+      { "text": "Ask about contact lens wear, recent eye surgery or injection, trauma, systemic inflammatory disease, and recent medicines that dilate the pupil (anticholinergics, sympathomimetics, topiramate)." }
+    ],
+    "investigate": [
+      { "text": "Intraocular pressure measurement by an ophthalmologist or trained practitioner. Very high pressure confirms the diagnosis in the context." },
+      { "text": "Gonioscopy and anterior segment imaging by ophthalmology to confirm closure and assess the fellow eye." },
+      { "text": "Corneal scrape and culture for suspected microbial keratitis, by ophthalmology, before antibiotics if possible." },
+      { "text": "Renal function and electrolytes before or soon after a systemic carbonic anhydrase inhibitor." }
+    ],
+    "resuscitate": [
+      { "text": "Lie the patient supine while waiting. Check for asthma, heart block and heart failure before a topical beta-blocker, and for sulphonamide allergy and renal impairment before acetazolamide.", "evidenceRef": "aao-pacd-ppp" },
+      { "text": "Hyperosmotic agents are used by ophthalmology when pressure does not respond to first-line treatment.", "evidenceRef": "aao-pacd-ppp" }
+    ],
+    "definitive": [
+      { "text": "Laser peripheral iridotomy once the cornea clears, to relieve pupillary block, and prophylactic iridotomy in the fellow eye, which is at high risk.", "evidenceRef": "aao-pacd-ppp" },
+      { "text": "Lens extraction is an alternative or subsequent definitive treatment in selected patients, decided by the ophthalmologist.", "evidenceRef": "egs-2021" }
+    ],
+    "escalate": [
+      { "text": "On-call ophthalmology immediately for suspected angle closure, endophthalmitis or a corneal ulcer in a contact lens wearer." },
+      { "text": "Same-day ophthalmology for any red eye with reduced vision, photophobia, a fixed or abnormal pupil, a corneal opacity, or severe pain." },
+      { "text": "Suspected microbial keratitis, uveitis, scleritis and endophthalmitis are treated by ophthalmology after same-day assessment, not empirically in the emergency department." },
+      { "text": "Primary care follow-up is appropriate only for a red eye with normal vision, a normal pupil, no photophobia and a clear cornea." }
+    ]
+  },
+  "notes": [
+    "Measure the vision. A red eye with normal acuity is rarely an emergency; a red eye with reduced acuity always is.",
+    "Acute angle closure is often triaged as a stroke, migraine or gastroenteritis because the patient complains of headache and vomiting. The eye is red and the pupil is fixed.",
+    "Treat the fellow eye: it has the same anatomy and the same risk."
+  ],
+  "calcs": ["logmar"]
+}

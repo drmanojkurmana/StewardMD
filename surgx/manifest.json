@@ -71,6 +71,18 @@
     {
       "id": "thoracic",
       "title": "Chest and cardiothoracic emergencies"
+    },
+    {
+      "id": "ent_airway",
+      "title": "ENT airway emergencies"
+    },
+    {
+      "id": "ent_emergency",
+      "title": "ENT emergencies"
+    },
+    {
+      "id": "eye_emergency",
+      "title": "Eye emergencies"
     }
   ],
   "protocols": [
@@ -814,6 +826,96 @@
       "specialty": "periop",
       "file": "protocols/postop-vte-prophylaxis.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "ent-epistaxis",
+      "kind": "authored",
+      "title": "Epistaxis",
+      "subtitle": "The ladder: pressure, cautery, pack, ligate or embolise",
+      "category": "ent_emergency",
+      "specialty": "ent",
+      "file": "protocols/ent-epistaxis.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-post-tonsillectomy-haemorrhage",
+      "kind": "authored",
+      "title": "Post-tonsillectomy haemorrhage",
+      "subtitle": "Every bleed is admitted; a child hides blood loss until late",
+      "category": "ent_emergency",
+      "specialty": "ent",
+      "file": "protocols/ent-post-tonsillectomy-haemorrhage.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-stridor-airway",
+      "kind": "authored",
+      "title": "Stridor and the emergency airway",
+      "subtitle": "Including front-of-neck access and tracheostomy emergencies",
+      "category": "ent_airway",
+      "specialty": "ent",
+      "file": "protocols/ent-stridor-airway.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-deep-neck-infection",
+      "kind": "authored",
+      "title": "Deep neck space infection and Ludwig angina",
+      "subtitle": "Including peritonsillar abscess: the airway first, then the pus",
+      "category": "ent_airway",
+      "specialty": "ent",
+      "file": "protocols/ent-deep-neck-infection.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-foreign-body",
+      "kind": "authored",
+      "title": "Airway and oesophageal foreign body",
+      "subtitle": "A choking history means bronchoscopy; a button battery means now",
+      "category": "ent_airway",
+      "specialty": "ent",
+      "file": "protocols/ent-foreign-body.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "ent-sudden-hearing-loss-facial-palsy",
+      "kind": "authored",
+      "title": "Sudden sensorineural hearing loss and acute facial palsy",
+      "subtitle": "Bell's palsy and the otological causes: the steroid window is short",
+      "category": "ent_emergency",
+      "specialty": "ent",
+      "file": "protocols/ent-sudden-hearing-loss-facial-palsy.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eye-chemical-injury",
+      "kind": "authored",
+      "title": "Chemical eye injury",
+      "subtitle": "Irrigate first, examine second, check the pH last",
+      "category": "eye_emergency",
+      "specialty": "ophthalmology",
+      "file": "protocols/eye-chemical-injury.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eye-open-globe-orbital-trauma",
+      "kind": "authored",
+      "title": "Open globe and orbital trauma",
+      "subtitle": "Shield the globe; release a tense orbit with a lateral canthotomy",
+      "category": "eye_emergency",
+      "specialty": "ophthalmology",
+      "file": "protocols/eye-open-globe-orbital-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "eye-acute-angle-closure-red-eye",
+      "kind": "authored",
+      "title": "Acute angle closure and the acute red eye",
+      "subtitle": "Painful red eye with blurred vision is never conjunctivitis",
+      "category": "eye_emergency",
+      "specialty": "ophthalmology",
+      "file": "protocols/eye-acute-angle-closure-red-eye.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -881,6 +983,12 @@
       "id": "bowel",
       "file": "steps/bowel.json",
       "title": "Shared bowel, stoma and anastomosis steps",
+      "shared": true
+    },
+    {
+      "id": "ent",
+      "file": "steps/ent.json",
+      "title": "Shared ENT steps",
       "shared": true
     }
   ],
@@ -1297,6 +1405,62 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 120
+    },
+    {
+      "id": "tonsillectomy",
+      "title": "Tonsillectomy",
+      "subtitle": "Stay on the capsule, check the fossae twice",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/tonsillectomy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "surgical-tracheostomy",
+      "title": "Open surgical tracheostomy",
+      "subtitle": "The airway is the anaesthetist's until the new tube is confirmed",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/surgical-tracheostomy.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "fess",
+      "title": "Functional endoscopic sinus surgery (FESS)",
+      "subtitle": "Read the CT before the nose: the orbit and skull base are millimetres away",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/fess.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "myringotomy-grommets",
+      "title": "Myringotomy and grommet insertion",
+      "subtitle": "Anteroinferior incision, away from the ossicles",
+      "system": "ent",
+      "specialty": "ent",
+      "file": "procedures/myringotomy-grommets.json",
+      "stepPacks": [
+        "core",
+        "ent"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 15
     }
   ],
   "cases": [
@@ -1500,6 +1664,32 @@
         "surgeon"
       ],
       "review": "ai_drafted"
+    },
+    {
+      "id": "post-tonsillectomy-bleed-night",
+      "title": "Bleeding on day six after tonsillectomy",
+      "subtitle": "Secondary post-tonsillectomy haemorrhage at night",
+      "specialty": "ent",
+      "file": "cases/post-tonsillectomy-bleed-night.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "displaced-tracheostomy-ward",
+      "title": "The tracheostomy that moved",
+      "subtitle": "Displaced tracheostomy on the ward",
+      "specialty": "ent",
+      "file": "cases/displaced-tracheostomy-ward.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
     }
   ],
   "specialties": [
@@ -1550,6 +1740,14 @@
     {
       "id": "cardiothoracic",
       "title": "Cardiothoracic surgery"
+    },
+    {
+      "id": "ent",
+      "title": "ENT and head and neck"
+    },
+    {
+      "id": "ophthalmology",
+      "title": "Eye emergencies"
     }
   ]
 }

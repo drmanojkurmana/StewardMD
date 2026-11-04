@@ -1,0 +1,64 @@
+{
+  "id": "ent-sudden-hearing-loss-facial-palsy",
+  "title": "Sudden sensorineural hearing loss and acute facial palsy",
+  "subtitle": "Bell's palsy and the otological causes: the steroid window is short",
+  "category": "ent_emergency",
+  "specialty": "ent",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "aaohns-ssnhl-2019", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical Practice Guideline: Sudden Hearing Loss (Update)", "year": 2019, "url": "https://pubmed.ncbi.nlm.nih.gov/31369359/", "accessed": "2026-11-04" },
+    { "id": "aaohns-bells-2013", "org": "American Academy of Otolaryngology-Head and Neck Surgery Foundation (AAO-HNSF)", "title": "Clinical practice guideline: Bell's palsy", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/24189771/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Facial weakness that spares the forehead: an upper motor neurone lesion. This is a stroke pathway patient, not Bell's palsy." },
+      { "text": "Sudden hearing loss or facial palsy with other neurological signs, severe vertigo with inability to walk, or a new headache: posterior circulation stroke until imaged." },
+      { "text": "Vesicles in the ear canal, on the pinna or palate with facial palsy and often hearing loss or vertigo: Ramsay Hunt syndrome." },
+      { "text": "Facial palsy with ear discharge, a painful ear, or a known cholesteatoma: otogenic facial palsy, which needs ENT treatment of the ear." },
+      { "text": "Facial palsy after head injury, especially if immediate and complete: temporal bone fracture." },
+      { "text": "Slowly progressive weakness over weeks, recurrent palsy on the same side, or a parotid mass: tumour until proven otherwise." },
+      { "text": "Bilateral simultaneous facial palsy: Guillain-Barre syndrome, Lyme disease, sarcoidosis or leukaemia, not Bell's palsy." }
+    ],
+    "do_now": [
+      { "text": "Sudden hearing loss: distinguish sensorineural from conductive loss at the first assessment, with history, otoscopy and tuning fork tests (Weber lateralises away from a sensorineural loss).", "timeCritical": true, "evidenceRef": "aaohns-ssnhl-2019" },
+      { "text": "Bell's palsy in patients 16 years and older: oral corticosteroids within 72 hours of onset.", "timeCritical": true, "evidenceRef": "aaohns-bells-2013" },
+      { "text": "Eye protection for any patient with incomplete eye closure: lubricants, taping or a moisture chamber at night, and advice on symptoms of corneal exposure.", "timeCritical": true, "evidenceRef": "aaohns-bells-2013" },
+      { "text": "Sudden sensorineural hearing loss: corticosteroids may be offered as initial therapy within two weeks of onset, after discussion of benefits and risks.", "timeCritical": true, "evidenceRef": "aaohns-ssnhl-2019" }
+    ],
+    "assess": [
+      { "text": "Grade the facial weakness at presentation and at each review, so that recovery or progression is visible.", "calcs": ["house_brackmann"] },
+      { "text": "Examine the ears, parotid, neck, skin and cranial nerves. Otoscopy is mandatory in every facial palsy: it finds the otitis media, cholesteatoma or vesicles that change the diagnosis." },
+      { "text": "Sudden hearing loss: define onset (within 72 hours), side, tinnitus, aural fullness and vertigo. Bilateral or recurrent loss widens the differential." },
+      { "text": "Bell's palsy is a diagnosis of exclusion: acute onset, unilateral, lower motor neurone, maximum within 72 hours, with no other cause found." }
+    ],
+    "investigate": [
+      { "text": "Audiometry to confirm sensorineural loss as soon as possible, and within 14 days of onset." },
+      { "text": "MRI of the internal auditory meatus and cerebellopontine angle, or auditory brainstem response testing, to look for retrocochlear pathology such as vestibular schwannoma." },
+      { "text": "No routine laboratory tests and no routine CT head for sudden hearing loss. No routine laboratory tests or imaging for typical new-onset Bell's palsy." },
+      { "text": "CT temporal bone for facial palsy with ear disease or trauma. Electrodiagnostic testing may be offered for complete palsy, not for incomplete palsy." }
+    ],
+    "resuscitate": [
+      { "text": "Do not prescribe antivirals alone for Bell's palsy. They may be offered in combination with steroids within 72 hours.", "evidenceRef": "aaohns-bells-2013" },
+      { "text": "Do not routinely prescribe antivirals, thrombolytics, vasodilators, vasoactive substances or antioxidants for sudden sensorineural hearing loss.", "evidenceRef": "aaohns-ssnhl-2019" }
+    ],
+    "definitive": [
+      { "text": "Incomplete recovery of sudden hearing loss 2 to 6 weeks after onset: offer intratympanic corticosteroid as salvage therapy.", "evidenceRef": "aaohns-ssnhl-2019" },
+      { "text": "Hyperbaric oxygen may be offered with steroids within two weeks of onset, or as salvage within one month, where available.", "evidenceRef": "aaohns-ssnhl-2019" },
+      { "text": "Reassess or refer to a facial nerve specialist for new or worsening neurological findings, developing ocular symptoms, or incomplete facial recovery three months after onset.", "evidenceRef": "aaohns-bells-2013" },
+      { "text": "Counsel on the expected course and arrange audiological rehabilitation, including hearing aids or implantable devices, for persistent hearing loss.", "evidenceRef": "aaohns-ssnhl-2019" }
+    ],
+    "escalate": [
+      { "text": "Stroke team immediately for a central facial palsy or sudden hearing loss with neurological signs." },
+      { "text": "ENT on the same day for otogenic facial palsy (acute otitis media, cholesteatoma, necrotising otitis externa), Ramsay Hunt syndrome, or facial palsy after temporal bone fracture. These are treated differently from Bell's palsy." },
+      { "text": "Ophthalmology urgently for a red, painful eye or reduced vision in a patient who cannot close the eye." }
+    ]
+  },
+  "notes": [
+    "Look in the ear. The single commonest error in facial palsy is calling it Bell's without otoscopy, and missing the otitis media or cholesteatoma that needed surgery.",
+    "Sudden sensorineural hearing loss is an ENT emergency that is often treated as wax or a cold. A tuning fork at the first visit separates the two in a minute.",
+    "The eye is the organ at risk in facial palsy. A patient who cannot close it needs protection the same day."
+  ],
+  "calcs": ["house_brackmann"]
+}

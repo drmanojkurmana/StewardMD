@@ -369,6 +369,19 @@
         ]
       }
     },
+    "fess": {
+      base: "operative", title: "Functional endoscopic sinus surgery",
+      prefill: {"procedure": "Functional endoscopic sinus surgery"},
+      extra: {
+        "Operative detail": [
+          f("extent", "Extent of surgery by side", {"type": "textarea", "required": true, "aiFillable": true, "rows": 3, "ph": "e.g. Left: uncinectomy, middle meatal antrostomy, anterior and posterior ethmoidectomy"}),
+          f("ctLandmarks", "CT reviewed: skull base, lamina, Onodi, sphenoid, anterior ethmoidal artery", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Keros grade, dehiscences, variants"}),
+          f("orbitCheck", "Orbit check at end, orbital fat seen", {"type": "text", "required": true, "aiFillable": false, "ph": "Eyes soft and equal; orbital fat yes / no"}),
+          f("skullBase", "Skull base breach or CSF leak", {"type": "text", "required": true, "aiFillable": true, "ph": "None / describe and repair"}),
+          f("nasalPacking", "Nasal packing and neuropatty count", {"type": "text", "required": true, "aiFillable": false, "ph": "Type, side, removal plan; patties counted out"})
+        ]
+      }
+    },
     "hartmanns-procedure": {
       base: "operative", title: "Hartmann's procedure",
       prefill: {"procedure": "Hartmann's procedure (sigmoid colectomy, end colostomy, closure of rectal stump)", "incision": "Midline laparotomy"},
@@ -463,6 +476,19 @@
         ]
       }
     },
+    "myringotomy-grommets": {
+      base: "operative", title: "Myringotomy and grommet insertion",
+      prefill: {"procedure": "Myringotomy and grommet insertion"},
+      extra: {
+        "Operative detail": [
+          f("earsOperated", "Ear(s) operated", {"type": "text", "required": true, "aiFillable": false, "ph": "Right / left / bilateral"}),
+          f("drumFindings", "Tympanic membrane and middle ear findings", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Effusion: serous / mucoid / purulent / dry; retraction"}),
+          f("grommetType", "Grommet type", {"type": "text", "required": true, "aiFillable": false, "ph": "Make and type, per ear"}),
+          f("incisionSite", "Myringotomy site", {"type": "text", "required": false, "aiFillable": true, "ph": "Anteroinferior quadrant"}),
+          f("followUp", "Drops and follow-up", {"type": "text", "required": false, "aiFillable": true, "ph": "Drops; review with hearing test within 3 months"})
+        ]
+      }
+    },
     "open-raaa-repair": {
       base: "operative", title: "Open repair of ruptured AAA",
       prefill: {"procedure": "Open repair of ruptured abdominal aortic aneurysm", "incision": "Midline laparotomy"},
@@ -527,6 +553,33 @@
           f("residualLength", "Residual small bowel length and ICV status", {"type": "text", "required": true, "aiFillable": false, "ph": "Measured length in cm; ileocaecal valve present / absent", "help": "Measured, not estimated"}),
           f("mesentericDefect", "Mesenteric defect closed", {"type": "text", "required": false, "aiFillable": true, "ph": "Yes / No"}),
           f("secondLook", "Second look planned", {"type": "text", "required": false, "aiFillable": true, "ph": "or 'No'"})
+        ]
+      }
+    },
+    "surgical-tracheostomy": {
+      base: "operative", title: "Open surgical tracheostomy",
+      prefill: {"procedure": "Open surgical tracheostomy"},
+      extra: {
+        "Operative detail": [
+          f("tubeDetail", "Tube type, size and cuff", {"type": "text", "required": true, "aiFillable": false, "ph": "Make, size, cuffed / uncuffed, fenestrated / not, adjustable flange"}),
+          f("trachealOpening", "Tracheal opening and level", {"type": "text", "required": true, "aiFillable": true, "ph": "Window / slit / flap, rings 2 to 3 or 3 to 4"}),
+          f("isthmus", "Thyroid isthmus", {"type": "text", "required": false, "aiFillable": true, "ph": "Divided and ligated / retracted"}),
+          f("stayCapnography", "Capnography confirmed and stay sutures", {"type": "text", "required": true, "aiFillable": false, "ph": "EtCO2 trace confirmed; stay sutures yes / no, labelled"}),
+          f("bedheadSign", "Bedhead sign completed and spare tubes with patient", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No"}),
+          f("firstTubeChange", "Plan for first tube change", {"type": "textarea", "required": false, "aiFillable": true, "rows": 2, "ph": "Timing and who performs it"})
+        ]
+      }
+    },
+    "tonsillectomy": {
+      base: "operative", title: "Tonsillectomy",
+      prefill: {"procedure": "Bilateral tonsillectomy"},
+      extra: {
+        "Operative detail": [
+          f("tonsilTechnique", "Dissection technique", {"type": "text", "required": true, "aiFillable": true, "ph": "Cold steel / bipolar / coblation / other", "help": "Hot techniques carry a higher secondary haemorrhage rate; record it for audit."}),
+          f("haemostasisMethod", "Haemostasis method", {"type": "text", "required": true, "aiFillable": true, "ph": "Ties / bipolar / packs"}),
+          f("fossaeCheckedGagRelease", "Fossae checked after gag release", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No", "help": "A physical check by the operating surgeon."}),
+          f("throatPackRemoved", "Throat pack and swabs removed, postnasal space cleared", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, counted out / No pack used"}),
+          f("dexamethasoneGiven", "Intra-operative dexamethasone", {"type": "text", "required": false, "aiFillable": false, "ph": "Given / not given (reason)"})
         ]
       }
     },

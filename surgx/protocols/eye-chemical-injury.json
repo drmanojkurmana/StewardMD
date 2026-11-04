@@ -1,0 +1,61 @@
+{
+  "id": "eye-chemical-injury",
+  "title": "Chemical eye injury",
+  "subtitle": "Irrigate first, examine second, check the pH last",
+  "category": "eye_emergency",
+  "specialty": "ophthalmology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "coo-chemical", "org": "College of Optometrists", "title": "Clinical Management Guideline: Trauma (chemical)", "year": 2026, "url": "https://www.college-optometrists.org/clinical-guidance/clinical-management-guidelines/trauma_chemical", "accessed": "2026-11-04" },
+    { "id": "dua-2001", "org": "British Journal of Ophthalmology", "title": "A new classification of ocular surface burns (Dua, King and Joseph)", "year": 2001, "url": "https://pubmed.ncbi.nlm.nih.gov/11673310/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Alkali exposure: cement, lime, plaster, oven and drain cleaners, ammonia. Alkalis penetrate the eye and keep damaging it after the exposure ends." },
+      { "text": "A white, blanched area at the limbus or conjunctiva: limbal ischaemia. A white eye after a chemical injury can be the worst eye, not the best." },
+      { "text": "Corneal haze through which iris detail is hard to see, or a total epithelial defect." },
+      { "text": "Reduced visual acuity, severe pain, or raised intraocular pressure." },
+      { "text": "Assault with a chemical, or exposure to hydrofluoric acid: systemic toxicity and safeguarding issues as well as the eye." }
+    ],
+    "do_now": [
+      { "text": "Irrigate immediately with copious water or saline, before history, before visual acuity, and before any referral call. Time to irrigation determines prognosis.", "timeCritical": true, "evidenceRef": "coo-chemical" },
+      { "text": "Instil topical anaesthetic to allow the patient to open the eye, and hold the lids apart. Irrigation that the patient blinks away is not irrigation.", "timeCritical": true, "evidenceRef": "coo-chemical" },
+      { "text": "Evert the upper lid and sweep both fornices to remove retained particles, especially lime or cement, which keep releasing alkali.", "timeCritical": true, "evidenceRef": "coo-chemical" },
+      { "text": "Check the pH of the tear film with indicator paper in the fornix after irrigation, wait, and check again. Continue irrigating until the pH is neutral and stays neutral.", "timeCritical": true, "evidenceRef": "coo-chemical" }
+    ],
+    "assess": [
+      { "text": "Visual acuity once irrigation has started, documented for each eye.", "calcs": ["logmar"] },
+      { "text": "The agent: name, acid or alkali, concentration, time of exposure, and whether first aid irrigation was given at the scene. Ask for the container or safety data sheet." },
+      { "text": "Fluorescein to show the extent of the epithelial defect. Look specifically at the limbus for blanching, and grade the severity by limbal involvement in clock hours and the extent of conjunctival involvement." },
+      { "text": "Check the other eye and the skin of the face and lids, which are commonly involved." }
+    ],
+    "investigate": [
+      { "text": "Repeat pH checks after each phase of irrigation. A pH that drifts back towards alkaline means a retained particle or deep tissue reservoir." },
+      { "text": "Intraocular pressure measurement by ophthalmology, as raised pressure is a recognised complication of severe alkali injury." },
+      { "text": "No imaging is needed unless there is associated trauma or a suspected intraocular foreign body." }
+    ],
+    "resuscitate": [
+      { "text": "Analgesia, and a cycloplegic for comfort in significant injuries, per local protocol.", "evidenceRef": "coo-chemical" },
+      { "text": "Topical antibiotic prophylaxis for an epithelial defect, per local protocol.", "evidenceRef": "coo-chemical" }
+    ],
+    "definitive": [
+      { "text": "Same-day ophthalmology review for any injury beyond a mild one with a small epithelial defect and no limbal involvement. Severe injuries go immediately.", "timeCritical": true, "evidenceRef": "coo-chemical" },
+      { "text": "Ophthalmology grade the injury by limbal ischaemia and conjunctival involvement, which predicts outcome and guides treatment.", "evidenceRef": "dua-2001" },
+      { "text": "Ophthalmology-led treatment for moderate and severe injuries may include topical steroids, agents to support collagen repair, amniotic membrane and, later, limbal stem cell surgery.", "evidenceRef": "dua-2001" },
+      { "text": "Mild injuries with a neutral pH and a small defect can be managed with lubricants and topical antibiotic and reviewed, with clear advice to return if vision worsens.", "evidenceRef": "coo-chemical" }
+    ],
+    "escalate": [
+      { "text": "On-call ophthalmology for any alkali injury, any limbal blanching, corneal haze, reduced vision, or a pH that will not normalise." },
+      { "text": "Poisons information service for an unfamiliar agent, and toxicology or critical care for hydrofluoric acid or large exposures." },
+      { "text": "Burns or plastic surgery for associated facial and lid burns." }
+    ]
+  },
+  "notes": [
+    "The first drop of water matters more than the first ophthalmologist. Start irrigating at triage.",
+    "A quiet white eye after alkali exposure may be ischaemic, not uninjured. Look at the limbal vessels.",
+    "Lime and cement leave particles in the fornices that keep burning. Double-evert the upper lid."
+  ],
+  "calcs": ["logmar"]
+}

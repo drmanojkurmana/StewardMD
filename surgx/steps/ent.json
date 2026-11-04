@@ -1,0 +1,81 @@
+{
+  "_comment": "Shared ENT steps: each is used by two or more ENT procedures. Procedure-only steps live in the procedure's steps_local. The shared airway is what makes ENT different from every other specialty, so these steps are mostly about who owns the airway, and when.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.ent.preop-data-check": {
+      "id": "step.ent.preop-data-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Confirm the investigation that justifies the operation",
+      "why": "ENT operations are often elective and sided, and each rests on one investigation: the audiogram and tympanogram for grommets, the CT for sinus surgery, the documented infection count or sleep study for tonsillectomy. Checking it in theatre catches the wrong side, the outdated scan and the indication that has quietly resolved.",
+      "how": [
+        "Display the key investigation in theatre before the time-out, not just in the notes.",
+        "Confirm side and indication against it aloud, for example: bilateral effusion with flat tympanograms, or left-sided disease on the CT.",
+        "For sinus surgery, the CT stays on screen for the whole operation and is reviewed with the anatomy checklist before the first instrument enters the nose.",
+        "If the investigation is missing, outdated or does not support the operation, stop and discuss rather than proceed on memory."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Operating on the side written on the list rather than the side shown by the investigation.",
+        "Proceeding on a clinic letter when the scan or audiogram itself has not been seen."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ent.airway-share": {
+      "id": "step.ent.airway-share",
+      "kind": "prep",
+      "critical": true,
+      "title": "Shared airway plan with the anaesthetist",
+      "why": "In ENT surgery the surgeon and the anaesthetist work in the same space. The tube, the throat pack, the gag and the head position all belong to both of them, and an airway plan that is not spoken aloud is an airway plan that only one of them holds.",
+      "how": [
+        "Agree the airway device and its fixation: reinforced or preformed tube, laryngeal mask, or the existing tracheostomy or endotracheal tube.",
+        "Agree whether a throat pack is placed, who places it, and record it on the whiteboard so its removal is a counted event.",
+        "State the plan if the airway is lost during the case: who acts first, and whether front-of-neck access is the rescue.",
+        "For a shared or difficult airway, the surgeon stays in theatre during induction and is ready to act."
+      ],
+      "structuresAtRisk": ["Airway"],
+      "pitfalls": [
+        "A throat pack placed by one person and not recorded anywhere, then left in at extubation.",
+        "Assuming the anaesthetist knows how far the head will be extended or turned."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ent.pharynx-clearance": {
+      "id": "step.ent.pharynx-clearance",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Clear the pharynx: throat pack out, clot out, postnasal space checked",
+      "why": "A retained throat pack or a clot in the nasopharynx sitting above the larynx can obstruct the airway completely after extubation. This is the ENT version of the swab count, and it is done under direct vision.",
+      "how": [
+        "Remove the throat pack and state its removal aloud so the anaesthetist and scrub practitioner record it.",
+        "Suction the oropharynx and, with a mirror or endoscope, the postnasal space. Remove any clot there before it is aspirated at extubation.",
+        "Look again at the operative bed with blood pressure restored to normal before declaring haemostasis.",
+        "Consider gentle aspiration of the stomach through an orogastric tube when blood has been swallowed, to reduce post-operative vomiting of altered blood that is mistaken for a bleed."
+      ],
+      "structuresAtRisk": ["Airway"],
+      "pitfalls": [
+        "Checking only the oropharynx and missing a clot in the nasopharynx behind the soft palate.",
+        "Declaring haemostasis under deliberately lowered blood pressure."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.ent.airway-handover": {
+      "id": "step.ent.airway-handover",
+      "kind": "checkpoint",
+      "title": "Airway handover to recovery and the ward",
+      "why": "Most ENT airway catastrophes happen after the operation, in recovery or on the ward, in the hands of people who were not in theatre. The handover is how the theatre knowledge reaches them.",
+      "how": [
+        "State the airway: tube or tracheostomy type and size, whether the cuff is up, whether the upper airway is patent, and whether the patient can be oxygenated from above.",
+        "State the bleeding risk and what bleeding would look like: frequent swallowing, fresh blood from mouth or nose, rising heart rate in a child.",
+        "For a tracheostomy, confirm the bedhead sign, spare tubes, obturator, suction and humidification are with the patient before they leave theatre.",
+        "Position: tonsil position (lateral, head down) after tonsillectomy; head up after sinus and neck surgery."
+      ],
+      "structuresAtRisk": ["Airway"],
+      "pitfalls": [
+        "A handover that covers the operation but not what to do if the airway fails.",
+        "A patient arriving on the ward with a new tracheostomy and no emergency equipment at the bedside."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}
