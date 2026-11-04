@@ -5,6 +5,24 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-11-04 · iPad shell: native iPad layout and hardware keyboard (owner: "work like native iPad app")
+
+**Decision.** A shell layer for large touch screens, `ipad-native.css` + `ipad-native.js`, scoped to `html.smd-tablet`
+(set before first paint by an inline script in `index.html`: more than one touch point and shorter screen side >= 600,
+the same test as `bigTouchD()` in home.js). At 700 px and wider: the five tabs gather in the middle of the dock, the
+Home tool grid is 4 columns (5 from 1100 px), and `.hv-sheet` (More, Display, Customize) floats as a 600 px card
+20 px above the dock instead of a full-width slab. Trackpad hover tints only under `(any-hover: hover) and
+(any-pointer: fine)`. Keyboard: Cmd+1..5 tabs (Home only), Cmd+[ back (`SMD_SWIPE_BACK.goBack`), Cmd+, Settings,
+Esc closes the sheet, Cmd+/ or hold Cmd shows a shortcut card. Navigation only, nothing writes.
+Also: `dialog-motion.js` closes a sheet to its own closed CSS transform (a fixed translateY(100%) left the floating
+card's top peeking over the dock), and `voice.js`, `device-id.js`, `native-push.js` now treat a touch "Macintosh" user
+agent as iPad (iPadOS WKWebView sends the desktop UA, so voice used WebKit speech recognition on iPad only).
+**Why.** Module inner layouts already pass `test/run-ipad-layout-ui.mjs`; what still read as a stretched phone was the
+shell: tabs 270 px apart, 300 px gaps between tool orbs, edge-to-edge sheets, no keyboard.
+**Trade-off.** Split View / Slide Over under 700 px keeps the phone layout. Module-owned sheets (75 files) are not
+converted. Web shortcuts cannot appear in the system Cmd-hold overlay (that needs native UIKeyCommand), hence our card.
+**Status.** Default on; kill switch localStorage `smd_ipad_native=0`. Needs build-www + native rebuild; confirm on a device.
+
 ## 2026-10-30 · PrepNucleus Play: Gen Z features, honest by rule (owner: "build all")
 
 **Decision.** Twelve engagement features in one optional module (`prep-play.js`, flag `smd_prep_play` default on) plus

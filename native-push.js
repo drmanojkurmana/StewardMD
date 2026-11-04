@@ -142,7 +142,7 @@
       var m = ua.match(/OS (\d+[_.]\d+(?:[_.]\d+)?) like Mac OS X/) || ua.match(/Android (\d+(?:\.\d+)*)/);
       if (m) os = m[1].replace(/_/g, ".");
     } catch (e) {}
-    var model = /iPad/.test(ua) ? "iPad" : /iPhone/.test(ua) ? "iPhone" : /Android/.test(ua) ? "Android" : null;
+    var model = (/iPad/.test(ua) || (/Macintosh/.test(ua) && (navigator.maxTouchPoints || 0) > 1)) ? "iPad" : /iPhone/.test(ua) ? "iPhone" : /Android/.test(ua) ? "Android" : null;
     var app = null;
     try { app = (window.SMD_BUILD || (document.querySelector('script[src*="app.js"]') || {}).getAttribute
       && (document.querySelector('script[src*="app.js"]').getAttribute("src") || "").split("?v=")[1]) || null; } catch (e) {}
