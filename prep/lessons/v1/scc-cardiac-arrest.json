@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "scc-cardiac-arrest",
+ "title": "Cardiac arrest and post resuscitation care",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "High quality **CPR** is a rate of 100 to 120 compressions each minute, a depth of 5 to 6 cm, full chest recoil, and the shortest pauses you can manage. Once an advanced airway is in place, give 10 breaths each minute so ventilation does not interrupt compressions. Change the person compressing before fatigue sets in. The drawing shows sternal compression, coronary flow, and an airway. It does not print the rate or the depth.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anaesthesia-cpr-periarrest-long-case-fig1.webp",
+    "alt": "Cardiopulmonary resuscitation drawing with sternal compression, an endotracheal airway, coronary and cerebral blood flow, and defibrillator pads.",
+    "caption": "Sternal compression, an airway, coronary flow, and pad placement. The rate and the depth are not printed on the drawing (StewardMD)."
+   },
+   "say": "High quality CPR is a rate of 100 to 120 compressions each minute, a depth of 5 to 6 cm, full chest recoil, and the shortest pauses you can manage. Once an advanced airway is in place, give 10 breaths each minute so ventilation does not interrupt compressions. Change the person compressing before fatigue sets in. The drawing shows sternal compression, coronary flow, and an airway. It does not print the rate or the depth."
+  },
+  {
+   "tx": "**Ventricular fibrillation** and pulseless ventricular tachycardia are the shockable rhythms. Asystole and pulseless electrical activity are not shocked. Give adrenaline as soon as access exists in a non shockable rhythm, and after the first shocks have failed in a shockable rhythm. The usual dose is 1 mg, repeated every 3 to 5 minutes. The drawing splits the two paths. Its causes box prints 4 Hs twice, so use the list in the next step.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-arrest-management-fig1.webp",
+    "alt": "Cardiac arrest algorithm splitting shockable and non shockable rhythms, with defibrillation on one path and compressions on the other.",
+    "caption": "Shockable and non shockable paths, then return of circulation. The causes box prints 4 Hs twice and does not list them. Drug doses are not on this drawing (StewardMD)."
+   },
+   "say": "Ventricular fibrillation and pulseless ventricular tachycardia are the shockable rhythms. Asystole and pulseless electrical activity are not shocked. Give adrenaline as soon as access exists in a non shockable rhythm, and after the first shocks have failed in a shockable rhythm. The usual dose is 1 mg, repeated every 3 to 5 minutes. The drawing splits the two paths. Its causes box prints 4 Hs twice, so use the list in the next step."
+  },
+  {
+   "tx": "**PARAMEDIC2** found that adrenaline raised survival at 30 days and did not raise favourable neurological survival. Amiodarone or lidocaine is for a shockable rhythm that persists after the initial shocks. Amiodarone 300 mg is the usual first dose, with a further 150 mg if the rhythm persists. Neither drug replaces defibrillation. Keep compressing between shocks. A syringe is not a reason to pause the chest.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What adrenaline did",
+     "points": [
+      "PARAMEDIC2 raised 30 day survival",
+      "Favourable neurological survival did not rise",
+      "Still given on the arrest algorithm"
+     ]
+    },
+    "right": {
+     "title": "Refractory shockable rhythm",
+     "points": [
+      "Amiodarone 300 mg, then 150 mg",
+      "Lidocaine if amiodarone is unavailable",
+      "Neither replaces a shock"
+     ]
+    }
+   },
+   "say": "PARAMEDIC2 found that adrenaline raised survival at 30 days and did not raise favourable neurological survival. Amiodarone or lidocaine is for a shockable rhythm that persists after the initial shocks. Amiodarone 300 mg is the usual first dose, with a further 150 mg if the rhythm persists. Neither drug replaces defibrillation. Keep compressing between shocks. A syringe is not a reason to pause the chest."
+  },
+  {
+   "tx": "The reversible causes are listed as the **Hs and Ts**. They are hypoxia, hypovolaemia, hydrogen ion excess, low or high potassium, and hypothermia, then tension pneumothorax, tamponade, toxins, and thrombosis in a coronary artery or the pulmonary artery. Keep searching for them while compressions continue. Ultrasound may show tamponade or pneumothorax, but it must not lengthen the pause. A dilated right ventricle by itself does not prove embolism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hs",
+     "Ts",
+     "While you look"
+    ],
+    "rows": [
+     [
+      "Hypoxia, hypovolaemia, hydrogen ion",
+      "Tension pneumothorax, tamponade",
+      "Keep compressing"
+     ],
+     [
+      "Low or high potassium, hypothermia",
+      "Toxins, coronary or pulmonary thrombosis",
+      "Do not lengthen the pause"
+     ],
+     [
+      "Treat the one you find",
+      "Thrombolysis if embolism is likely",
+      "Ultrasound must be brief"
+     ]
+    ]
+   },
+   "say": "The reversible causes are listed as the Hs and Ts. They are hypoxia, hypovolaemia, hydrogen ion excess, low or high potassium, and hypothermia, then tension pneumothorax, tamponade, toxins, and thrombosis in a coronary artery or the pulmonary artery. Keep searching for them while compressions continue. Ultrasound may show tamponade or pneumothorax, but it must not lengthen the pause. A dilated right ventricle by itself does not prove embolism."
+  },
+  {
+   "tx": "**TTM2** compared cooling to 33 degrees with normothermia and early treatment of fever. Cooling did not improve the outcome, and it caused more arrhythmia. Prevent fever in a patient who is not waking. Routine cooling to 33 degrees is not required. Use a deliberate temperature plan that stops fever, rather than a race to a cold target. Do not pour cold intravenous fluid before the hospital.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trial or plan",
+     "Temperature",
+     "What to do"
+    ],
+    "rows": [
+     [
+      "TTM2 hypothermia arm",
+      "33 degrees",
+      "No outcome gain, more arrhythmia"
+     ],
+     [
+      "TTM2 comparator",
+      "Normothermia, treat fever",
+      "The arm that matched cooling"
+     ],
+     [
+      "Current practice",
+      "Prevent fever",
+      "Do not mandate cooling to 33"
+     ]
+    ]
+   },
+   "say": "TTM2 compared cooling to 33 degrees with normothermia and early treatment of fever. Cooling did not improve the outcome, and it caused more arrhythmia. Prevent fever in a patient who is not waking. Routine cooling to 33 degrees is not required. Use a deliberate temperature plan that stops fever, rather than a race to a cold target. Do not pour cold intravenous fluid before the hospital."
+  },
+  {
+   "tx": "After the circulation returns, you should avoid hypoxia and you should also avoid hyperoxia. Target **normocapnia**, and support a mean arterial pressure of at least 65 mmHg, using fluid and noradrenaline. ST elevation, or cardiogenic shock with a likely cardiac cause, goes to coronary angiography. Without ST elevation, do not rush to the laboratory when another cause is more likely. The first hour is oxygen, carbon dioxide, and pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Aim",
+     "Avoid"
+    ],
+    "rows": [
+     [
+      "Oxygen",
+      "Enough, then titrate down",
+      "Hypoxia and hyperoxia"
+     ],
+     [
+      "Carbon dioxide",
+      "Normocapnia",
+      "Over ventilation"
+     ],
+     [
+      "Mean arterial pressure",
+      "At least 65 mmHg",
+      "A long hypotensive hour"
+     ]
+    ]
+   },
+   "say": "After the circulation returns, you should avoid hypoxia and you should also avoid hyperoxia. Target normocapnia, and support a mean arterial pressure of at least 65 mmHg, using fluid and noradrenaline. ST elevation, or cardiogenic shock with a likely cardiac cause, goes to coronary angiography. Without ST elevation, do not rush to the laboratory when another cause is more likely. The first hour is oxygen, carbon dioxide, and pressure."
+  },
+  {
+   "tx": "**Neuroprognostication** uses several tests, and it is not done before 72 hours, because sedative drug may still be present. No single sign is used alone to withdraw care. One unreactive pupil on the first day is not that decision. Wait until the temperature is normal and the sedatives have cleared, then combine the examination with other tests. A conversation with the family is not a score on a chart.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Too early",
+     "points": [
+      "Before 72 hours",
+      "One unreactive pupil on day 1",
+      "Sedative still on board"
+     ]
+    },
+    "right": {
+     "title": "When you may judge",
+     "points": [
+      "After 72 hours",
+      "Normothermia, sedatives cleared",
+      "Several tests, not one"
+     ]
+    }
+   },
+   "say": "Neuroprognostication uses several tests, and it is not done before 72 hours, because sedative drug may still be present. No single sign is used alone to withdraw care. One unreactive pupil on the first day is not that decision. Wait until the temperature is normal and the sedatives have cleared, then combine the examination with other tests. A conversation with the family is not a score on a chart."
+  },
+  {
+   "tx": "The later worrying signs are absent pupillary and corneal reflexes, a highly malignant EEG, a high **neuron specific enolase**, and diffuse anoxic injury on imaging. An enolase above 60 micrograms per litre, at 48 or 72 hours, is one of those signs. **Status myoclonus** together with a malignant EEG is ominous. Isolated myoclonus, especially when the EEG background is benign, is not the same finding and can recover. Two concordant tests outweigh one dramatic sign.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "How it is used",
+     "Do not"
+    ],
+    "rows": [
+     [
+      "Absent pupillary and corneal reflexes",
+      "After 72 hours, with other tests",
+      "Decide from the pupils alone"
+     ],
+     [
+      "Neuron specific enolase above 60",
+      "A high value supports a poor outcome",
+      "Treat one number as the verdict"
+     ],
+     [
+      "Status myoclonus with a malignant EEG",
+      "Ominous when the EEG agrees",
+      "Call isolated myoclonus the same"
+     ]
+    ]
+   },
+   "say": "The later worrying signs are absent pupillary and corneal reflexes, a highly malignant EEG, a high neuron specific enolase, and diffuse anoxic injury on imaging. An enolase above 60 micrograms per litre, at 48 or 72 hours, is one of those signs. Status myoclonus together with a malignant EEG is ominous. Isolated myoclonus, especially when the EEG background is benign, is not the same finding and can recover. Two concordant tests outweigh one dramatic sign."
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Marino ICU Book 5e, Cardiac Arrest",
+  "Washington Manual of Critical Care 4e, Post-Cardiac Arrest Management",
+  "ERC adult advanced life support",
+  "PARAMEDIC2, New England Journal of Medicine 2018",
+  "TTM2, New England Journal of Medicine 2021"
+ ]
+}
