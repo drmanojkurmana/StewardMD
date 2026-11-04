@@ -3,147 +3,187 @@
  "module": "scc-sepsis-def",
  "subject": "ss-critical-care",
  "title": "Sepsis definitions and pathophysiology",
- "minutes": 5,
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "**Sepsis** is defined under Sepsis-3 as life-threatening organ dysfunction caused by a dysregulated host response to infection. Organ dysfunction is identified by an acute rise in the **SOFA score** of 2 points or more from baseline. Sepsis-3 replaced the older SIRS-based definition because SIRS criteria lacked specificity, flagging many non-infectious inflammatory states as sepsis.",
-   "say": "Sepsis, under Sepsis-3, is life-threatening organ dysfunction caused by a dysregulated host response to infection. Organ dysfunction is identified by an acute rise in the SOFA score of 2 points or more from baseline. Sepsis-3 replaced the older SIRS-based definition because SIRS criteria lacked specificity, flagging many non-infectious inflammatory states as sepsis.",
+   "tx": "**Sepsis-3** defines sepsis as life threatening organ dysfunction from a dysregulated host response, recognised as infection plus an acute **SOFA** rise of at least 2 points. **SIRS** is not the definition. Systemic inflammatory response criteria lack specificity and occur in non-infectious insults, whereas an acute shift in SOFA reflects measurable physiological organ failure.",
+   "say": "Sepsis-3 defines sepsis as life threatening organ dysfunction from a dysregulated host response, recognised as infection plus an acute SOFA rise of at least 2 points. SIRS is not the definition. Systemic inflammatory response criteria lack specificity and occur in non-infectious insults, whereas an acute shift in SOFA reflects measurable physiological organ failure.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-sepsis-def-fig1.webp",
-    "alt": "Diagram explaining Sepsis-3 definition: infection, dysregulated response, organ dysfunction identified by SOFA score rise, replacing SIRS.",
-    "caption": "Sepsis-3 definition and SOFA score criteria",
-    "ar": 1.8349
+    "src": "v1/kb/media/septic-shock-fig1.webp",
+    "alt": "Host immune response dysregulation, endothelial injury, microvascular leakage and vasoplegia in sepsis",
+    "caption": "Host immune response dysregulation, endothelial injury, microvascular leakage and vasoplegia in sepsis",
+    "ar": 1.3333
    }
   },
   {
-   "tx": "The **SOFA score** grades six organ systems, namely respiration, coagulation, liver, cardiovascular, central nervous system and renal function, each on a scale from 0 to 4. The **qSOFA** tool relies on three bedside observations: a raised respiratory rate, altered mentation and low systolic pressure. qSOFA works as a rapid risk screen rather than a diagnostic test, so a positive result prompts closer assessment.",
-   "say": "Clinicians score six organ systems with the SOFA tool: breathing, clotting, liver, circulation, brain function and kidneys, each rated from 0 to 4. The qSOFA screen uses three quick checks at the bedside: a raised breathing rate, a change in alertness and low systolic pressure. It flags risk quickly, but it does not confirm a diagnosis.",
+   "tx": "**Septic shock** is a vasopressor requirement to keep mean arterial pressure at least 65 mmHg plus a **lactate** above 2 mmol/L despite adequate fluid. Either finding alone is not the definition. Combining persistent vasopressor dependence with cellular metabolic distress identifies a distinct subset with hospital mortality exceeding forty percent.",
+   "say": "Septic shock is a vasopressor requirement to keep mean arterial pressure at least 65 mmHg plus a lactate above 2 mmol/L despite adequate fluid. Either finding alone is not the definition. Combining persistent vasopressor dependence with cellular metabolic distress identifies a distinct subset with hospital mortality exceeding forty percent.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Tool",
-     "Components",
-     "Use"
+     "Diagnostic Criteria",
+     "Threshold Value",
+     "Clinical Rationale"
     ],
     "rows": [
      [
-      "SOFA",
-      "Six organ systems, each graded 0 to 4",
-      "Quantifies organ dysfunction"
+      "Vasopressor requirement",
+      "Maintain MAP at or above 65 mmHg",
+      "Reflects profound pathological vasoplegia"
      ],
      [
-      "qSOFA",
-      "Raised respiratory rate, altered mentation, low systolic pressure",
-      "Bedside risk screen"
+      "Serum lactate level",
+      "Above 2 mmol/L (18 mg/dL)",
+      "Demonstrates cellular metabolic dysoxia"
      ],
      [
-      "SIRS",
-      "Temperature, heart rate, respiratory rate, white cell count",
-      "Older criteria, low specificity"
+      "Fluid resuscitation",
+      "After adequate intravascular loading",
+      "Excludes simple uncorrected hypovolaemia"
      ]
     ]
    }
   },
   {
-   "tx": "**Septic shock** is sepsis with vasopressor need to keep MAP at or above 65 mmHg and a **lactate** above 2 mmol/L despite adequate fluid resuscitation. The lactate rise reflects tissue hypoperfusion and anaerobic metabolism. Mitochondrial dysfunction also impairs oxygen use, so lactate can rise even when delivery looks adequate.",
-   "say": "Septic shock is sepsis with vasopressor need to keep mean arterial pressure at or above 65 mmHg and a lactate above 2 mmol/L despite adequate fluid resuscitation. The lactate rise reflects tissue hypoperfusion and anaerobic metabolism. Mitochondrial dysfunction also impairs oxygen use, so lactate can rise even when delivery looks adequate.",
-   "vis": null
-  },
-  {
-   "tx": "Pathophysiology involves a **cytokine storm** of pro-inflammatory mediators, followed by **immunoparalysis** in many patients. The **endothelial glycocalyx** is degraded, causing capillary leak and interstitial oedema that widen the oxygen-diffusion distance. Microvascular thrombosis with consumption of platelets and clotting factors produces **sepsis-induced coagulopathy**.",
-   "say": "Pathophysiology involves a cytokine storm of pro-inflammatory mediators, followed by immunoparalysis in many patients. The endothelial glycocalyx is degraded, causing capillary leak and interstitial oedema that widen the oxygen-diffusion distance. Microvascular thrombosis with consumption of platelets and clotting factors produces sepsis-induced coagulopathy.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Infection"
-     },
-     {
-      "id": "b",
-      "label": "Cytokine storm"
-     },
-     {
-      "id": "c",
-      "label": "Glycocalyx loss"
-     },
-     {
-      "id": "d",
-      "label": "Capillary leak"
-     },
-     {
-      "id": "e",
-      "label": "Microthrombi"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "b",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Sepsis phenotypes and distributive physiology matter for management. Distributive septic shock shows low systemic vascular resistance with high cardiac output and warm peripheral skin. Sepsis-induced cardiomyopathy can convert it to a **mixed shock** pattern, which point-of-care ultrasound helps identify. Fluids should be targeted and reassessed dynamically rather than given as fixed large volumes.",
-   "say": "Sepsis phenotypes and distributive physiology matter for management. Distributive septic shock shows low systemic vascular resistance with high cardiac output and warm peripheral skin. Sepsis-induced cardiomyopathy can convert it to a mixed shock pattern, which point-of-care ultrasound helps identify. Fluids should be targeted and reassessed dynamically rather than given as fixed large volumes.",
+   "tx": "**qSOFA** is a bedside prompt outside the ICU, not a diagnostic criterion. A low qSOFA does not exclude sepsis. Counting respiratory rate of 22 or more, systolic blood pressure of 100 mmHg or less, and altered mentation identifies ward patients at elevated risk of deterioration without requiring laboratory tests.",
+   "say": "qSOFA is a bedside prompt outside the ICU, not a diagnostic criterion. A low qSOFA does not exclude sepsis. Counting respiratory rate of 22 or more, systolic blood pressure of 100 mmHg or less, and altered mentation identifies ward patients at elevated risk of deterioration without requiring laboratory tests.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Distributive septic shock",
+     "title": "qSOFA bedside tool",
      "points": [
-      "Low systemic vascular resistance",
-      "High cardiac output",
-      "Warm peripheral skin"
+      "Includes respiratory rate 22 or greater",
+      "Includes altered mentation with GCS under 15",
+      "Includes systolic blood pressure 100 mmHg or less"
      ]
     },
     "right": {
-     "title": "Mixed shock",
+     "title": "Clinical positioning",
      "points": [
-      "Sepsis plus cardiac dysfunction",
-      "Low cardiac index on echo",
-      "Needs tailored management"
+      "Screening trigger for non-ICU wards",
+      "Low sensitivity limits rule-out utility",
+      "Positive score warrants immediate SOFA assessment"
      ]
     }
    }
+  },
+  {
+   "tx": "Endothelial **glycocalyx injury** increases permeability, so fluid leaves the vessels and the patient becomes oedematous while still intravascularly depleted early on. Shedding of syndecan and heparan sulphate disrupts vascular barrier integrity, causing massive transcapillary albumin flux and profound third-space tissue oedema.",
+   "say": "Endothelial glycocalyx injury increases permeability, so fluid leaves the vessels and the patient becomes oedematous while still intravascularly depleted early on. Shedding of syndecan and heparan sulphate disrupts vascular barrier integrity, causing massive transcapillary albumin flux and profound third-space tissue oedema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Microvascular Layer",
+     "Disruption Mechanism",
+     "Haemodynamic Consequence"
+    ],
+    "rows": [
+     [
+      "Endothelial glycocalyx",
+      "Cleavage by matrix metalloproteinases",
+      "Loss of vascular charge barrier and permeability leak"
+     ],
+     [
+      "Vascular smooth muscle",
+      "Inducible nitric oxide synthase activation",
+      "Profound arterial vasoplegia refractory to catecholamines"
+     ],
+     [
+      "Capillary perfusion",
+      "Microthrombi and leucocyte plugging",
+      "Heterogeneous capillary flow and functional shunting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Later sepsis includes **immunoparalysis**, with falling monocyte **HLA-DR** and secondary infection. More immunosuppression is not the treatment of that phase. Lymphocyte apoptosis and immune checkpoint upregulation leave prolonged ICU survivors vulnerable to opportunistic viral reactivation, invasive fungal infections, and hospital-acquired multidrug-resistant pathogens.",
+   "say": "Later sepsis includes immunoparalysis, with falling monocyte HLA-DR and secondary infection. More immunosuppression is not the treatment of that phase. Lymphocyte apoptosis and immune checkpoint upregulation leave prolonged ICU survivors vulnerable to opportunistic viral reactivation, invasive fungal infections, and hospital-acquired multidrug-resistant pathogens.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Initial hyperinflammation",
+     "points": [
+      "Pro-inflammatory cytokine storm activation",
+      "Massive TNF-alpha and interleukin release",
+      "Tissue collateral damage and early shock"
+     ]
+    },
+    "right": {
+     "title": "Secondary immunoparalysis",
+     "points": [
+      "Profound depletion of CD4 and dendritic cells",
+      "Marked suppression of monocyte HLA-DR expression",
+      "High susceptibility to secondary nosocomial sepsis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Sepsis induced coagulopathy** is a distinct score from overt DIC. **Thrombocytopenia** and a rising INR in sepsis are a reason to look for DIC, not an automatic plasma transfusion. Prophylactic transfusion of clotting factors without active haemorrhage or planned invasive procedures exposes patients to transfusion-related acute lung injury without improving survival.",
+   "say": "Sepsis induced coagulopathy is a distinct score from overt DIC. Thrombocytopenia and a rising INR in sepsis are a reason to look for DIC, not an automatic plasma transfusion. Prophylactic transfusion of clotting factors without active haemorrhage or planned invasive procedures exposes patients to transfusion-related acute lung injury without improving survival.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Coagulopathy Phase",
+     "Laboratory Features",
+     "Management Strategy"
+    ],
+    "rows": [
+     [
+      "Sepsis-induced coagulopathy",
+      "Platelets under 150,000 and INR over 1.2",
+      "Treat underlying sepsis; initiate heparin prophylaxis"
+     ],
+     [
+      "Overt DIC",
+      "Low fibrinogen, elevated D-dimer, schistocytes",
+      "Serial laboratory tracking; avoid empiric plasma"
+     ],
+     [
+      "Transfusion indication",
+      "Active bleeding or pre-procedural risk",
+      "Administer targeted platelets or cryoprecipitate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **cytokine storm** is the phenotype of some viral and **CAR-T** illnesses. Ordinary bacterial sepsis is not treated with cytokine blockade outside a specific indication such as COVID-19. Targeting individual inflammatory mediators with monoclonal antibodies in unselected bacterial sepsis repeatedly failed to demonstrate clinical survival benefits in large multicentre trials.",
+   "say": "A cytokine storm is the phenotype of some viral and CAR-T illnesses. Ordinary bacterial sepsis is not treated with cytokine blockade outside a specific indication such as COVID-19. Targeting individual inflammatory mediators with monoclonal antibodies in unselected bacterial sepsis repeatedly failed to demonstrate clinical survival benefits in large multicentre trials.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Targeted cytokine release syndrome",
+     "points": [
+      "Triggered by CAR-T cells or severe viral pneumonia",
+      "Massive systemic interleukin-6 and interferon surge",
+      "Responds dramatically to targeted tocilizumab blockade"
+     ]
+    },
+    "right": {
+     "title": "Bacterial sepsis pathogenesis",
+     "points": [
+      "Broad poly-microbial and complex immune cascade",
+      "Redundant overlapping inflammatory signalling pathways",
+      "Anti-TNF and anti-IL-1 therapies proved ineffective"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Mitochondrial dysfunction** is one reason lactate stays high after perfusion has been restored. It is not fixed by another litre of fluid. Cytopathic hypoxia and inhibition of pyruvate dehydrogenase prevent normal aerobic respiration, so loading additional volume merely accelerates fluid overload without improving cellular bioenergetic ATP production.",
+   "say": "Mitochondrial dysfunction is one reason lactate stays high after perfusion has been restored. It is not fixed by another litre of fluid. Cytopathic hypoxia and inhibition of pyruvate dehydrogenase prevent normal aerobic respiration, so loading additional volume merely accelerates fluid overload without improving cellular bioenergetic ATP production.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/septic-shock-fig2.webp",
+    "alt": "Pathophysiological bundle of septic shock, cellular dysoxia, mitochondrial dysfunction and organ failure",
+    "caption": "Pathophysiological bundle of septic shock, cellular dysoxia, mitochondrial dysfunction and organ failure",
+    "ar": 1.3333
+   }
   }
- ],
- "quiz": [
-  "q_6940f9901961",
-  "q_7c4d14d8fc2c",
-  "q_24dbf8c60ddd"
- ],
- "src": [],
- "refs": [
-  "Singer M, et al. The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3). JAMA 2016",
-  "Evans L, et al. Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 4,
-  "kbWords": 0,
-  "itemN": 40
- }
+ ]
 }

@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "scc-transplant-icu",
+ "subject": "ss-critical-care",
+ "title": "Organ transplant critical care",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Primary non-function** of a liver graft is failure in the first days, with rising lactate, coagulopathy, and hypoglycaemia, while Doppler shows a patent **hepatic artery**. Early **hepatic artery thrombosis** produces the same blood tests and the artery is not patent. Thrombosis goes back to theatre. Non-function needs retransplantation. The Doppler is done before the two are confused.",
+   "say": "Primary non-function of a liver graft is failure in the first days, with rising lactate, coagulopathy, and hypoglycaemia, while Doppler shows a patent hepatic artery. Early hepatic artery thrombosis produces the same blood tests and the artery is not patent. Thrombosis goes back to theatre. Non-function needs retransplantation. The Doppler is done before the two are confused.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-transplant-rejection-fig1.webp",
+    "alt": "Cellular and antibody-mediated allograft rejection pathways and microvascular injury",
+    "caption": "Cellular and antibody-mediated allograft rejection pathways and microvascular injury",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Hepatic artery thrombosis also threatens the bile duct later, as **ischaemic cholangiopathy**, even if the artery was reopened. A rising **bilirubin** weeks afterwards is not labelled rejection until the artery and the ducts have been imaged. Because the donor biliary epithelium depends exclusively on the hepatic arterial plexus for perfusion, arterial compromise causes stricturing and necrosis.",
+   "say": "Hepatic artery thrombosis also threatens the bile duct later, as ischaemic cholangiopathy, even if the artery was reopened. A rising bilirubin weeks afterwards is not labelled rejection until the artery and the ducts have been imaged. Because the donor biliary epithelium depends exclusively on the hepatic arterial plexus for perfusion, arterial compromise causes stricturing and necrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication Phase",
+     "Diagnostic Finding",
+     "Clinical Action"
+    ],
+    "rows": [
+     [
+      "Acute arterial thrombosis",
+      "Absent hepatic arterial Doppler waveform",
+      "Immediate emergency surgical re-exploration and thrombectomy"
+     ],
+     [
+      "Late ischaemic cholangiopathy",
+      "Multiple intrahepatic biliary strictures on MRCP",
+      "Endoscopic stenting; evaluate for retransplantation"
+     ],
+     [
+      "Differential diagnosis",
+      "Rising transaminases and bilirubin",
+      "Mandatory vascular Doppler before treating acute rejection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Delayed graft function** of a kidney is the need for dialysis in the first 7 days and is usually tubular injury from ischaemia. Hypotension and nephrotoxins are avoided. If function does not return, a biopsy looks for rejection, and the **calcineurin inhibitor** level is checked rather than guessed. Preserving renal allograft perfusion pressure accelerates tubular regeneration.",
+   "say": "Delayed graft function of a kidney is the need for dialysis in the first 7 days and is usually tubular injury from ischaemia. Hypotension and nephrotoxins are avoided. If function does not return, a biopsy looks for rejection, and the calcineurin inhibitor level is checked rather than guessed. Preserving renal allograft perfusion pressure accelerates tubular regeneration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ischaemic delayed graft function",
+     "points": [
+      "Defined as requirement for dialysis in post-transplant week 1",
+      "Driven by donor brain death, warm and cold ischaemia",
+      "Requires maintenance of adequate MAP and volume"
+     ]
+    },
+    "right": {
+     "title": "Early allograft rejection",
+     "points": [
+      "Suspected if oliguria persists or creatinine fails to fall",
+      "Renal allograft biopsy provides definitive histological proof",
+      "Calcineurin inhibitor trough levels differentiate toxicity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Primary graft dysfunction** of a lung is bilateral infiltrates and poor gas exchange within 72 hours, not explained by rejection, infection, or cardiogenic oedema. A **PaO2/FiO2** below 200 is the severe grade. Ventilation is lung protective, and extracorporeal support is used when that fails. Reperfusion injury alters capillary permeability, producing an ARDS-like syndrome in the newly implanted allograft.",
+   "say": "Primary graft dysfunction of a lung is bilateral infiltrates and poor gas exchange within 72 hours, not explained by rejection, infection, or cardiogenic oedema. A PaO2/FiO2 below 200 is the severe grade. Ventilation is lung protective, and extracorporeal support is used when that fails. Reperfusion injury alters capillary permeability, producing an ARDS-like syndrome in the newly implanted allograft.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PGD Grade",
+     "PaO2/FiO2 Ratio and Radiography",
+     "Management Approach"
+    ],
+    "rows": [
+     [
+      "Grade 1 PGD",
+      "PaO2/FiO2 > 300 with diffuse infiltrates",
+      "Conservative fluid management and lung protective ventilation"
+     ],
+     [
+      "Grade 2 PGD",
+      "PaO2/FiO2 200 to 300 with infiltrates",
+      "Low tidal volume (6 mL/kg) and moderate PEEP titration"
+     ],
+     [
+      "Grade 3 severe PGD",
+      "PaO2/FiO2 < 200 with bilateral infiltrates",
+      "Inhaled nitric oxide and early veno-venous ECMO"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hyperacute rejection** is preformed antibody attacking the graft within minutes, and the graft is removed. **Acute cellular rejection** is T-cell injury over days to weeks and is treated by increasing immunosuppression. They are not the same process. Hyperacute rejection triggers catastrophic complement-mediated thrombosis, while cellular rejection manifests with lymphocytic interstitial infiltration.",
+   "say": "Hyperacute rejection is preformed antibody attacking the graft within minutes, and the graft is removed. Acute cellular rejection is T-cell injury over days to weeks and is treated by increasing immunosuppression. They are not the same process. Hyperacute rejection triggers catastrophic complement-mediated thrombosis, while cellular rejection manifests with lymphocytic interstitial infiltration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperacute antibody rejection",
+     "points": [
+      "Mediated by preformed donor-specific anti-HLA antibodies",
+      "Occurs immediately upon reperfusion on the operating table",
+      "Widespread thrombosis and necrosis; requires graft excision"
+     ]
+    },
+    "right": {
+     "title": "Acute cellular rejection",
+     "points": [
+      "Mediated by host T-cell recognition of allograft antigens",
+      "Develops days to months post-transplantation",
+      "Responds effectively to high-dose intravenous methylprednisolone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Calcineurin inhibitor neurotoxicity** causes tremor and **posterior reversible encephalopathy**, with visual change, seizures, and posterior changes on MRI. The blood level is checked, the blood pressure is treated, and the drug is reduced or switched. It is not a stroke for thrombolysis. Tacrolimus and ciclosporin cause cerebral endothelial dysfunction and vasogenic oedema.",
+   "say": "Calcineurin inhibitor neurotoxicity causes tremor and posterior reversible encephalopathy, with visual change, seizures, and posterior changes on MRI. The blood level is checked, the blood pressure is treated, and the drug is reduced or switched. It is not a stroke for thrombolysis. Tacrolimus and ciclosporin cause cerebral endothelial dysfunction and vasogenic oedema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neurotoxic Manifestation",
+     "Clinical Presentation",
+     "Therapeutic Action"
+    ],
+    "rows": [
+     [
+      "Mild neurotoxicity",
+      "Fine postural tremor, headache, insomnia",
+      "Check drug trough levels and down-titrate dose"
+     ],
+     [
+      "Severe PRES syndrome",
+      "Cortical blindness, seizures, confusion, hypertension",
+      "Stop calcineurin inhibitor; control blood pressure aggressively"
+     ],
+     [
+      "MRI neuroimaging",
+      "Parieto-occipital subcortical vasogenic oedema",
+      "Resolves completely following drug withdrawal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Infections** follow a rough calendar. In the first month they are bacterial, surgical, or donor-derived. From month 1 to month 6 they are **opportunistic**, including **cytomegalovirus** and Pneumocystis. After prophylaxis stops, community infection and late cytomegalovirus appear. Co-trimoxazole is not omitted for convenience. A fever is not called rejection until infection has been considered.",
+   "say": "Infections follow a rough calendar. In the first month they are bacterial, surgical, or donor-derived. From month 1 to month 6 they are opportunistic, including cytomegalovirus and Pneumocystis. After prophylaxis stops, community infection and late cytomegalovirus appear. Co-trimoxazole is not omitted for convenience. A fever is not called rejection until infection has been considered.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Post-transplant infection timeline",
+     "points": [
+      "Month 0 to 1: Wound infections, catheter bacteremias, donor infections",
+      "Month 1 to 6: CMV reactivation, Pneumocystis jirovecii, fungal sepsis",
+      "Beyond month 6: Community pathogens and atypical viral infections"
+     ]
+    },
+    "right": {
+     "title": "Prophylaxis principles",
+     "points": [
+      "Co-trimoxazole prevents Pneumocystis and Nocardia",
+      "Valganciclovir prevents high-risk CMV reactivation",
+      "Always rule out active infection before pulsing steroids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Maintenance immunosuppression** is usually a calcineurin inhibitor, an **antimetabolite**, and a **steroid**. The inhibitor injures the kidney, the antimetabolite suppresses marrow and gut, and the steroid raises glucose. All three are not stopped because of a fever. Stopping them causes rejection, which is then mistaken for worsening infection.",
+   "say": "Maintenance immunosuppression is usually a calcineurin inhibitor, an antimetabolite, and a steroid. The inhibitor injures the kidney, the antimetabolite suppresses marrow and gut, and the steroid raises glucose. All three are not stopped because of a fever. Stopping them causes rejection, which is then mistaken for worsening infection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/immunosuppressants-calcineurin-biologics-jak-fig1.webp",
+    "alt": "Immunosuppressive drug sites of action, calcineurin inhibition and antimetabolite lymphocyte suppression",
+    "caption": "Immunosuppressive drug sites of action, calcineurin inhibition and antimetabolite lymphocyte suppression",
+    "ar": 1.3333
+   }
+  }
+ ]
+}

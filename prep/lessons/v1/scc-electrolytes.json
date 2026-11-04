@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "scc-electrolytes",
+ "subject": "ss-critical-care",
+ "title": "Electrolyte disorders in the ICU",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Severe symptoms of **hyponatraemia**, seizures or deep coma, are treated with a 100 to 150 mL bolus of **3% saline** over 10 to 20 minutes, which can be repeated twice. The aim of the bolus is a rise of about 4 to 6 mmol/L. Rapid partial correction reduces brain swelling and terminates herniation.",
+   "say": "Severe symptoms of hyponatraemia, seizures or deep coma, are treated with a 100 to 150 mL bolus of 3% saline over 10 to 20 minutes, which can be repeated twice. The aim of the bolus is a rise of about 4 to 6 mmol/L. Rapid partial correction reduces brain swelling and terminates herniation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-emergency-correction.webp",
+    "alt": "Emergency correction of life-threatening electrolyte disturbances and hyperkalaemia membrane stabilisation",
+    "caption": "Emergency correction of life-threatening electrolyte disturbances and hyperkalaemia membrane stabilisation",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "The European limit is a rise of at most 10 mmol/L in the first 24 hours and 8 mmol/L in the next 24 hours, with a tighter limit of 8 mmol/L in the first day for high risk patients. Overcorrection risks **osmotic demyelination**. Patients with chronic alcoholism, malnutrition, or advanced cirrhosis are exceptionally vulnerable to pontine myelinolysis.",
+   "say": "The European limit is a rise of at most 10 mmol/L in the first 24 hours and 8 mmol/L in the next 24 hours, with a tighter limit of 8 mmol/L in the first day for high risk patients. Overcorrection risks osmotic demyelination. Patients with chronic alcoholism, malnutrition, or advanced cirrhosis are exceptionally vulnerable to pontine myelinolysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Correction Period",
+     "Standard Maximum Rise",
+     "High-Risk Limit"
+    ],
+    "rows": [
+     [
+      "First 24 hours",
+      "Maximum 10 mmol/L rise",
+      "Strictly limit to 6 to 8 mmol/L in advanced liver disease"
+     ],
+     [
+      "Subsequent 24 hours",
+      "Maximum 8 mmol/L rise",
+      "Continuous monitoring to prevent rapid overshooting"
+     ],
+     [
+      "Pathological risk",
+      "Osmotic demyelination syndrome",
+      "Irreversible flaccid quadriplegia and pseudobulbar palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If sodium rises too fast, **desmopressin** and **5% dextrose** are used to re-lower it. Free water restriction alone will not catch a rapid aquaresis. When the underlying cause of hyponatraemia resolves, sudden spontaneous water excretion can drive sodium concentrations up dangerously, requiring proactive clamp therapy with synthetic vasopressin analogues.",
+   "say": "If sodium rises too fast, desmopressin and 5% dextrose are used to re-lower it. Free water restriction alone will not catch a rapid aquaresis. When the underlying cause of hyponatraemia resolves, sudden spontaneous water excretion can drive sodium concentrations up dangerously, requiring proactive clamp therapy with synthetic vasopressin analogues.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aquaresis identification",
+     "points": [
+      "Urine output surges over 200 mL per hour",
+      "Urinary osmolality drops below serum osmolality",
+      "Serum sodium increases faster than 1 mmol/L per hour"
+     ]
+    },
+    "right": {
+     "title": "Rescue re-lowering strategy",
+     "points": [
+      "Administer desmopressin 1 to 2 mcg IV to halt aquaresis",
+      "Infuse intravenous 5% dextrose to replace deficit",
+      "Re-establish safe trajectory under 8 mmol/L per day"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypernatraemia** is a **free water deficit**. The deficit is replaced slowly, usually no faster than 10 mmol/L per day, unless the rise was acute over minutes, as in salt poisoning. Brain cells generate idiogenic intracellular osmoles during chronic hypertonicity, so rapid rehydration causes lethal intracellular cerebral oedema and seizures.",
+   "say": "Hypernatraemia is a free water deficit. The deficit is replaced slowly, usually no faster than 10 mmol/L per day, unless the rise was acute over minutes, as in salt poisoning. Brain cells generate idiogenic intracellular osmoles during chronic hypertonicity, so rapid rehydration causes lethal intracellular cerebral oedema and seizures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypernatraemia Classification",
+     "Target Correction Velocity",
+     "Clinical Caveats"
+    ],
+    "rows": [
+     [
+      "Chronic (onset over 48 hours)",
+      "Maximum 10 mmol/L per 24 hours",
+      "Replace free water deficit slowly using enteral water or D5W"
+     ],
+     [
+      "Acute salt intoxication",
+      "Rapid correction 1 to 2 mmol/L/h",
+      "Osmoles have not accumulated; rapid lowering is safe"
+     ],
+     [
+      "Fluid formula",
+      "Deficit = Total Body Water x ((Na/140) - 1)",
+      "Add ongoing insensible and urinary free water losses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "ECG changes of **hyperkalaemia** are treated with **intravenous calcium**, which stabilises the membrane and does not lower the potassium. **Insulin with glucose**, and nebulised salbutamol, shift potassium inward. Removal is by diuretic, resin, or dialysis. Calcium chloride restores normal resting myocardial membrane potential within three minutes.",
+   "say": "ECG changes of hyperkalaemia are treated with intravenous calcium, which stabilises the membrane and does not lower the potassium. Insulin with glucose, and nebulised salbutamol, shift potassium inward. Removal is by diuretic, resin, or dialysis. Calcium chloride restores normal resting myocardial membrane potential within three minutes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Membrane stabilisation",
+     "points": [
+      "Calcium chloride 1 g or calcium gluconate 3 g IV",
+      "Rapidly reverses peaked T waves and widened QRS",
+      "Zero effect on actual serum potassium concentration"
+     ]
+    },
+    "right": {
+     "title": "Intracellular shifting",
+     "points": [
+      "Regular insulin activates Na+/K+ ATPase pumps",
+      "Nebulised salbutamol provides synergistic shifting",
+      "Sodium bicarbonate useful in metabolic acidosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A standard shift dose is 10 units of regular insulin with 25 g of glucose. The glucose is checked for hours because **hypoglycaemia** outlasts the potassium fall. Peak potassium lowering occurs at thirty to sixty minutes, but the biological half-life of intravenous insulin frequently induces delayed severe hypoglycaemia up to six hours later.",
+   "say": "A standard shift dose is 10 units of regular insulin with 25 g of glucose. The glucose is checked for hours because hypoglycaemia outlasts the potassium fall. Peak potassium lowering occurs at thirty to sixty minutes, but the biological half-life of intravenous insulin frequently induces delayed severe hypoglycaemia up to six hours later.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shifting Regimen",
+     "Administration Route",
+     "Monitoring Requirement"
+    ],
+    "rows": [
+     [
+      "10 units regular insulin",
+      "Intravenous bolus injection",
+      "Shifts potassium into intracellular compartment"
+     ],
+     [
+      "25 to 50 g glucose (D50W)",
+      "Concurrent intravenous infusion",
+      "Prevents acute neuroglycopenic complications"
+     ],
+     [
+      "Blood glucose tracking",
+      "Hourly checks for at least 4 to 6 hours",
+      "Detects late hypoglycaemia after insulin clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Refeeding syndrome** drops phosphate, potassium, and magnesium when carbohydrate is restarted. **Thiamine** is given first, calories are increased slowly, and phosphate is replaced before a cardiac arrhythmia. Glucose administration stimulates insulin release, driving extracellular electrolytes into cells for carbohydrate phosphorylation and ATP generation.",
+   "say": "Refeeding syndrome drops phosphate, potassium, and magnesium when carbohydrate is restarted. Thiamine is given first, calories are increased slowly, and phosphate is replaced before a cardiac arrhythmia. Glucose administration stimulates insulin release, driving extracellular electrolytes into cells for carbohydrate phosphorylation and ATP generation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Electrolyte shift consequences",
+     "points": [
+      "Severe hypophosphataemia halts cellular ATP production",
+      "Hypokalaemia and hypomagnesaemia trigger arrhythmias",
+      "Acute thiamine consumption precipitates Wernicke encephalopathy"
+     ]
+    },
+    "right": {
+     "title": "Preventive critical care protocol",
+     "points": [
+      "Administer high-dose parenteral thiamine prior to feeding",
+      "Start caloric delivery cautiously at 10 kcal/kg/day",
+      "Proactively replete phosphate and electrolytes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hypomagnesaemia** causes refractory hypokalaemia and hypocalcaemia. Magnesium is replaced before expecting the potassium to stay up. **Deep tendon reflexes** are watched when magnesium is infused. Intracellular magnesium is an essential cofactor for Na+/K+ ATPase and parathyroid hormone secretion, so hypokalaemia and hypocalcaemia resist correction until magnesium normalises.",
+   "say": "Hypomagnesaemia causes refractory hypokalaemia and hypocalcaemia. Magnesium is replaced before expecting the potassium to stay up. Deep tendon reflexes are watched when magnesium is infused. Intracellular magnesium is an essential cofactor for Na+/K+ ATPase and parathyroid hormone secretion, so hypokalaemia and hypocalcaemia resist correction until magnesium normalises.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/distal-renal-tubular-acidosis-fig1.webp",
+    "alt": "Renal tubular ion transport mechanisms, potassium handling and acid-base regulation",
+    "caption": "Renal tubular ion transport mechanisms, potassium handling and acid-base regulation",
+    "ar": 1.3333
+   }
+  }
+ ]
+}

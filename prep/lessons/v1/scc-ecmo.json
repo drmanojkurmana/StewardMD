@@ -4,152 +4,186 @@
  "subject": "ss-critical-care",
  "title": "Extracorporeal life support: modes, cannulation and weaning",
  "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "**Extracorporeal life support** (ECLS) uses a pump and oxygenator outside the body to take over gas exchange or circulation. The two main modes are **venovenous (VV) ECMO**, which supports the lungs alone, and **venoarterial (VA) ECMO**, which supports both heart and lungs. VV ECMO suits severe ARDS when cardiac output is adequate, while VA ECMO suits cardiogenic shock. Choose the mode by the failing organ, not by habit.",
-   "say": "Extracorporeal life support uses a pump and oxygenator outside the body to take over gas exchange or circulation. The two main modes are venovenous ECMO, which supports the lungs alone, and venoarterial ECMO, which supports both heart and lungs. Venovenous ECMO suits severe ARDS when cardiac output is adequate, while venoarterial ECMO suits cardiogenic shock. Choose the mode by the failing organ, not by habit.",
+   "tx": "**EOLIA** enrolled very severe ARDS, including PaO2/FiO2 below 50 for more than 3 hours or below 80 for more than 6 hours despite optimisation. The primary 60 day mortality difference was not statistically significant, and many control patients crossed over to **ECMO**. Bayesian post-hoc analyses suggested a substantial probability of treatment benefit for early extracorporeal gas exchange.",
+   "say": "EOLIA enrolled very severe ARDS, including PaO2/FiO2 below 50 for more than 3 hours or below 80 for more than 6 hours despite optimisation. The primary 60 day mortality difference was not statistically significant, and many control patients crossed over to ECMO. Bayesian post-hoc analyses suggested a substantial probability of treatment benefit for early extracorporeal gas exchange.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cpb-bypass-myocardial-protection-fig1.webp",
+    "alt": "Extracorporeal circuit architecture with centrifugal pump, membrane oxygenator and vascular cannulation",
+    "caption": "Extracorporeal circuit architecture with centrifugal pump, membrane oxygenator and vascular cannulation",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**CESAR** randomised transfer to an ECMO centre, not ECMO itself. Survival without severe disability was better in the transfer arm. Not every transferred patient received ECMO. Centralising care in specialized tertiary centres with dedicated perfusion teams, structured protective ventilation protocols, and round-the-clock retrieval capabilities explains much of the demonstrated clinical advantage.",
+   "say": "CESAR randomised transfer to an ECMO centre, not ECMO itself. Survival without severe disability was better in the transfer arm. Not every transferred patient received ECMO. Centralising care in specialized tertiary centres with dedicated perfusion teams, structured protective ventilation protocols, and round-the-clock retrieval capabilities explains much of the demonstrated clinical advantage.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Feature",
-     "VV ECMO",
-     "VA ECMO"
+     "Trial Name",
+     "Randomisation Design",
+     "Key Clinical Finding"
     ],
     "rows": [
      [
-      "Main target",
-      "Lungs",
-      "Heart and lungs"
+      "CESAR trial",
+      "Transfer to specialized centre vs local care",
+      "63% vs 47% survival without severe disability at 6 months"
      ],
      [
-      "Typical indication",
-      "Severe ARDS, stable cardiac index",
-      "Cardiogenic shock, post-cardiotomy"
+      "Protocol delivery",
+      "Specialist critical care evaluation",
+      "25% of transferred patients improved with conventional care"
      ],
      [
-      "Returns blood to",
-      "Venous system",
-      "Arterial system"
-     ],
-     [
-      "Risk to watch",
-      "Harlequin syndrome",
-      "Left ventricular distension"
+      "System message",
+      "Regional referral networks",
+      "Early transfer to expert centres improves complex ARDS outcomes"
      ]
     ]
    }
   },
   {
-   "tx": "Cannulation choice shapes flow and recirculation. **Bicaval dual-lumen cannulas** and **multistage right internal jugular catheters** reduce recirculation and allow mobilisation in VV ECMO. For femoral VA ECMO, a **distal perfusion catheter** lowers the risk of acute limb ischaemia. Peripheral arterial disease is a reason to avoid femoral arterial cannulation. After cardiotomy, central cannulation lets existing bypass cannulas join the circuit.",
-   "say": "Cannulation choice shapes flow and recirculation. Bicaval dual-lumen cannulas and multistage right internal jugular catheters reduce recirculation and allow mobilisation in venovenous ECMO. For femoral venoarterial ECMO, a distal perfusion catheter lowers the risk of acute limb ischaemia. Peripheral arterial disease is a reason to avoid femoral arterial cannulation. After cardiotomy, central cannulation lets existing bypass cannulas join the circuit.",
+   "tx": "**VV-ECMO** supports gas exchange and does not provide cardiac output. **VA-ECMO** bypasses the heart and lungs and does provide flow. The configuration is chosen from the failing organ. Veno-venous cannulation removes blood from a vena cava and returns oxygenated blood to the right atrium, maintaining native pulsatile pulmonary circulation.",
+   "say": "VV-ECMO supports gas exchange and does not provide cardiac output. VA-ECMO bypasses the heart and lungs and does provide flow. The configuration is chosen from the failing organ. Veno-venous cannulation removes blood from a vena cava and returns oxygenated blood to the right atrium, maintaining native pulsatile pulmonary circulation.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Venovenous options",
+     "title": "Veno-venous (VV-ECMO)",
      "points": [
-      "Bicaval dual-lumen cannula",
-      "Multistage right IJ catheter",
-      "Allows out-of-bed mobilisation"
+      "Indicated for isolated refractory respiratory failure",
+      "Provides oxygenation and decarboxylation only",
+      "Relies entirely on native cardiac contractility"
      ]
     },
     "right": {
-     "title": "Venoarterial options",
+     "title": "Veno-arterial (VA-ECMO)",
      "points": [
-      "Distal perfusion catheter for femoral access",
-      "Avoid femoral arterial cannula if peripheral arterial disease",
-      "Central cannulation after cardiotomy"
+      "Indicated for cardiogenic shock and cardiac arrest",
+      "Provides full haemodynamic and respiratory support",
+      "Returns pressurized blood directly into arterial tree"
      ]
     }
    }
   },
   {
-   "tx": "Timing and candidacy matter. In acute myocardial infarction with cardiogenic shock, each 12-hour delay in **VA ECMO** start is associated with about a 6 percent rise in adjusted in-hospital mortality. **E-CPR** is reasonable when flow can be established within 60 minutes of arrest in selected patients. Confirm cannula position daily, and again whenever ECMO flow drops significantly, because displacement is a common silent problem.",
-   "say": "Timing and candidacy matter. In acute myocardial infarction with cardiogenic shock, each twelve hour delay in venoarterial ECMO start is associated with about a six percent rise in adjusted in hospital mortality. Extracorporeal cardiopulmonary resuscitation is reasonable when flow can be established within sixty minutes of arrest in selected patients. Confirm cannula position daily, and again whenever ECMO flow drops significantly, because displacement is a common silent problem.",
+   "tx": "**Harlequin**, or north south, syndrome on peripheral VA-ECMO occurs when the recovering heart ejects poorly oxygenated blood to the upper body while the femoral return oxygenates the legs. The **right radial arterial** gas detects and confirms it. Mixing of native desaturated blood with retrograde oxygenated perfusate occurs in the aortic arch, risking cerebral and coronary hypoxic injury.",
+   "say": "Harlequin, or north south, syndrome on peripheral VA-ECMO occurs when the recovering heart ejects poorly oxygenated blood to the upper body while the femoral return oxygenates the legs. The right radial arterial gas detects and confirms it. Mixing of native desaturated blood with retrograde oxygenated perfusate occurs in the aortic arch, risking cerebral and coronary hypoxic injury.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-ecmo-fig1.webp",
-    "alt": "Diagram illustrating correct and displaced ECMO cannula positions, highlighting the importance of daily confirmation.",
-    "caption": "Confirm daily ECMO cannula position to prevent complications",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Weaning from **VA ECMO** is a structured trial. Reduce pump flow stepwise, holding each reduced flow for at least 60 minutes, and monitor with echocardiography. A reasonable ejection fraction threshold to start weaning is about 25 to 30 percent. If perfusion fails, with falling urine output or rising lactate, return to full support rather than pushing lower. Circuit flow below about 2.5 L/min raises thrombosis risk, so avoid prolonged low flows.",
-   "say": "Weaning from venoarterial ECMO is a structured trial. Reduce pump flow stepwise, holding each reduced flow for at least sixty minutes, and monitor with echocardiography. A reasonable ejection fraction threshold to start weaning is about twenty five to thirty percent. If perfusion fails, with rising lactate, return to full support rather than pushing lower. Circuit flow below about two and a half litres per minute raises thrombosis risk, so avoid prolonged low flows.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Reduce flow stepwise"
-     },
-     {
-      "id": "b",
-      "label": "Hold 60 min and echo"
-     },
-     {
-      "id": "c",
-      "label": "Perfusion stable?"
-     },
-     {
-      "id": "d",
-      "label": "Continue lower flow"
-     },
-     {
-      "id": "e",
-      "label": "Return to full support"
-     }
+    "kind": "table",
+    "cols": [
+     "Differential Hypoxaemia",
+     "Pathophysiological Mechanism",
+     "Bedside Detection and Management"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "Upper body hypoxaemia",
+      "Native LV ejects desaturated blood from injured lungs",
+      "Monitor right radial arterial line and cerebral oximetry"
      ],
      [
-      "b",
-      "c"
+      "Lower body hyperoxaemia",
+      "Retrograde femoral ECMO cannula delivers oxygenated blood",
+      "Femoral perfusion maintains subdiaphragmatic viscera"
      ],
      [
-      "c",
-      "d",
-      "yes"
-     ],
-     [
-      "c",
-      "e",
-      "no"
+      "Corrective strategy",
+      "V-AV hybrid cannulation or ventilator optimization",
+      "Add right internal jugular venous infusion line"
      ]
     ]
    }
   },
   {
-   "tx": "After decannulation, perform a **venous Doppler ultrasound** of the limbs to exclude thrombosis in cannulated vessels. If cannulas are left in situ, flush them with heparin and maintain systemic anticoagulation to prevent line clot. Anticoagulate the circuit throughout, monitoring with activated clotting time or anti-Xa levels, and watch for pump flow drops. A sudden 40 percent fall in flow with stable pump speed suggests impaired venous return, so consider tamponade first.",
-   "say": "After decannulation, perform a venous Doppler ultrasound of the limbs to exclude thrombosis in cannulated vessels. If cannulas are left in place, flush them with heparin and maintain systemic anticoagulation to prevent clot. Anticoagulate the circuit throughout, monitoring with activated clotting time or anti-Xa levels. A sudden forty percent fall in flow with stable pump speed suggests impaired venous return, so consider tamponade first.",
-   "vis": null
+   "tx": "Peripheral VA-ECMO increases **left ventricular afterload**. A distended, non-ejecting left ventricle needs a **vent**, such as an **Impella**, a septostomy, or an intra-aortic balloon. Retrograde arterial flow increases end-systolic wall stress, causing left ventricular dilation, catastrophic pulmonary oedema, intracardiac stasis, and aortic valve closure that halts coronary perfusion.",
+   "say": "Peripheral VA-ECMO increases left ventricular afterload. A distended, non-ejecting left ventricle needs a vent, such as an Impella, a septostomy, or an intra-aortic balloon. Retrograde arterial flow increases end-systolic wall stress, causing left ventricular dilation, catastrophic pulmonary oedema, intracardiac stasis, and aortic valve closure that halts coronary perfusion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "LV afterload increase",
+     "points": [
+      "Retrograde femoral arterial jet impedes LV ejection",
+      "Elevates end-diastolic pressure and wall stress",
+      "Triggers hydrostatic pulmonary capillary flooding"
+     ]
+    },
+    "right": {
+     "title": "Unloading modalities",
+     "points": [
+      "Impella microaxial transvalvular pump (ECPELLA)",
+      "Percutaneous balloon atrial septostomy decompresses LA",
+      "Direct surgical apical vent or intra-aortic balloon pump"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Circuit **anticoagulation** is usually **unfractionated heparin**, monitored by **anti-Xa** or **ACT**. Bleeding, not clotting alone, is the complication that most often limits support. Continuous contact with synthetic tubing activates the contact coagulation cascade and platelets, requiring constant titration to balance intracranial haemorrhage risks against acute oxygenator membrane thrombosis.",
+   "say": "Circuit anticoagulation is usually unfractionated heparin, monitored by anti-Xa or ACT. Bleeding, not clotting alone, is the complication that most often limits support. Continuous contact with synthetic tubing activates the contact coagulation cascade and platelets, requiring constant titration to balance intracranial haemorrhage risks against acute oxygenator membrane thrombosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anticoagulation Metric",
+     "Typical Target Range",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Anti-Xa activity assay",
+      "0.2 to 0.4 IU/mL",
+      "More reliable heparin monitoring than aPTT in acute illness"
+     ],
+     [
+      "Activated clotting time",
+      "160 to 200 seconds",
+      "Rapid point-of-care test during cannulation and procedures"
+     ],
+     [
+      "Platelet target",
+      "Maintain above 50,000 /mcL",
+      "Reduces risk of lethal gastrointestinal and intracranial bleeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **RESP score** estimates survival on respiratory ECMO. The **SAVE score** estimates survival on cardiac ECMO. Both are **counselling** tools, not a refusal rule used alone. Scoring incorporates age, immunocompromised status, pre-cannulation mechanical ventilation duration, neurological dysfunction, and organ failure markers to assist shared clinical decision-making.",
+   "say": "The RESP score estimates survival on respiratory ECMO. The SAVE score estimates survival on cardiac ECMO. Both are counselling tools, not a refusal rule used alone. Scoring incorporates age, immunocompromised status, pre-cannulation mechanical ventilation duration, neurological dysfunction, and organ failure markers to assist shared clinical decision-making.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RESP prognostic score",
+     "points": [
+      "Validated for acute severe hypoxaemic respiratory failure",
+      "Stratifies survival from Class I over 90% to Class V under 20%",
+      "Considers duration of mechanical ventilation prior to ECMO"
+     ]
+    },
+    "right": {
+     "title": "SAVE prognostic score",
+     "points": [
+      "Validated for refractory cardiogenic shock on VA-ECMO",
+      "Incorporate aetiology, pre-ECMO arrest, and organ failure",
+      "Guides multidisciplinary expectations and family discussions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Extracorporeal carbon dioxide removal** uses low blood flow and does not oxygenate. It is not standard ARDS care. **ECPR** is VA-ECMO started during cardiac arrest, and it is limited to systems that can cannulate without a long no-flow time. Rapid establishment of extracorporeal cardiopulmonary resuscitation within sixty minutes of collapse maximizes neurologically intact survival.",
+   "say": "Extracorporeal carbon dioxide removal uses low blood flow and does not oxygenate. It is not standard ARDS care. ECPR is VA-ECMO started during cardiac arrest, and it is limited to systems that can cannulate without a long no-flow time. Rapid establishment of extracorporeal cardiopulmonary resuscitation within sixty minutes of collapse maximizes neurologically intact survival.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-surgery-cabg-valvular-repair-and-cardiopulmonary-bypass-fig1.webp",
+    "alt": "Central and peripheral vascular cannulation for extracorporeal circulation and circuit connections",
+    "caption": "Central and peripheral vascular cannulation for extracorporeal circulation and circuit connections",
+    "ar": 1.3333
+   }
   }
- ],
- "quiz": [
-  "q_5a080730aab0",
-  "q_19049c333b74",
-  "q_772f5b2651a1"
- ],
- "src": [],
- "refs": [
-  "Extracorporeal Life Support Organization (ELSO) General Guidelines"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 37
- }
+ ]
 }
