@@ -409,9 +409,11 @@
   }
   /* The natural voice (prep-voice.js): the first tap of Play starts its one-time download while the system voice reads on;
      once it is ready and this phone renders it fast enough, each sentence is spoken by it instead. */
+  function applyVoice() { var V = G.PREP_VOICE; if (V && V.use) V.use(store().lsp.eng || "kokoro"); return V; }
+  function voiceName() { var V = G.PREP_VOICE; if (!V || !V.info) return "Voice"; var i = V.info(V.current()); return i.name; }
   function naturalStart() {
-    var V = G.PREP_VOICE;
-    if (!V || !V.available()) return;
+    var V = applyVoice();
+    if (!V || V.current() === "system" || !V.available()) return;
     V.unlock();
     if (V.state() !== "none" && V.state() !== "error") return;
     L.vdl = 0; drawBar();
@@ -437,7 +439,7 @@
       if (n >= chunks.length) { done(); return; }
       var part = chunks[n++], pause = function () { G.setTimeout(next, 160); };
       try {
-        var V = G.PREP_VOICE;
+        var V = applyVoice();
         if (V && V.usable()) { if (chunks[n]) V.prefetch(chunks[n], rate); V.say(part, rate).then(pause, fail); return; }
         var P = plugin();
         if (P) { nativeVoice(P).then(function (vi) { if (tok !== L.tok) return; var o = { text: part, lang: "en-IN", rate: rate, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return P.speak(o); }).then(pause, fail); return; }
@@ -746,7 +748,7 @@
       // Play is a pill: the icon and a small waveform that moves only while the voice speaks.
       (speak ? '<button type="button" class="pn-lsn-play' + (L.playing ? " on" : "") + '" data-act="l-play" aria-pressed="' + L.playing + '" aria-label="' + (L.playing ? "Pause narration" : "Play narration") + '">' + ic(L.playing ? "pause" : "play") +
         '<span class="pn-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></button>' +
-        (L.vdl != null ? '<span class="pn-lsn-dl" role="status" aria-label="Downloading the natural voice, ' + Math.round(L.vdl * 100) + ' percent">Voice ' + Math.round(L.vdl * 100) + "%</span>" : '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>") : "") +
+        (L.vdl != null ? '<span class="pn-lsn-dl" role="status" aria-label="Downloading the natural voice, ' + Math.round(L.vdl * 100) + ' percent">' + voiceName() + " " + Math.round(L.vdl * 100) + "%</span>" : '<button type="button" class="pn-lsn-spd" data-act="l-speed" aria-label="Narration speed ' + s.lsp.r + ' times, change">' + speedLabel(s.lsp.r) + "</button>") : "") +
       '<button type="button" class="pn-btn pri pn-lsn-next" data-act="l-next">' + (last ? "Finish" : "Next") + " " + ic(last ? "check" : "next") + "</button></div></div>";
   }
   function drawBar() { var r = host.root && host.root(), el = r && r.querySelector("#pnLsnBar"); if (el) el.outerHTML = barHtml(); }
@@ -759,6 +761,8 @@
   }
   function readerHtml() {
     var les = L.les, pg = pages(les), n = pg.length, p = pg[L.i], s = store(), step = typeof p === "number" ? les.steps[p] : null;
+    var V0 = G.PREP_VOICE, vi = V0 && V0.info ? V0.info(V0.current()) : null, vslow = vi && vi.id !== "system" && vi.state === "ready" && vi.rtf > 1.3;
+    var voiceBtn = canSpeak() && vi && V0.ids().length > 2 ? '<button type="button" class="pn-lsn-auto pn-lsn-voice" data-act="l-voice" aria-label="Narration voice: ' + vi.name + (vslow ? ", too slow on this phone, using the system voice" : "") + '. Tap to change">' + vi.name + (vslow ? " (slow)" : "") + "</button>" : "";
     var autoBtn = canSpeak() ? '<button type="button" class="pn-lsn-auto' + (s.lsp.au ? " on" : "") + '" data-act="l-auto" aria-pressed="' + !!s.lsp.au + '" aria-label="Auto-advance with narration">Auto</button>' : "";
     var anim = L.dir ? (L.dir > 0 ? " fwd" : " rev") : "";
     var PEARL = G.PREP_PEARL, isP = !!(PEARL && PEARL.isPearl(les));
@@ -771,7 +775,7 @@
       : '<article class="pn-lsn-step pn-lsn-pg pn-pg-' + p + anim + '" tabindex="-1" aria-roledescription="lesson step">' + (p === "cards" ? cardsPage() : keysPage()) + "</article>";
     // Share IDs (prep-ids.js): share in the bar, the lesson's ID at the foot of the page (tap copies).
     var IDS = G.PREP_IDS, lid = IDS ? IDS.ofLesson(L.key) : null, shareB = lid ? IDS.shareBtn(lid, "Share this lesson") : "";
-    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", autoBtn && shareB ? '<span class="pn-acts">' + autoBtn + shareB + "</span>" : autoBtn || shareB) +
+    return host.bar(escH(les.title), (step ? "Step " : "Page ") + (L.i + 1) + " of " + n, "back", (voiceBtn || autoBtn) && shareB ? '<span class="pn-acts">' + voiceBtn + autoBtn + shareB + "</span>" : voiceBtn + autoBtn || shareB) +
       '<div class="pn-lsn-prog" role="progressbar" aria-label="Lesson progress" aria-valuemin="1" aria-valuemax="' + n + '" aria-valuenow="' + (L.i + 1) + '">' +
       pg.map(function (x, k) { var ix = typeof x !== "number" || interactive(les.steps[x]); return "<i" + (k <= L.i || ix ? ' class="' + (k <= L.i ? "on" : "") + (k === L.i ? " cur" : "") + (ix ? " ix" : "") + '"' : "") + "></i>"; }).join("") + "</div>" +
       '<div class="pn-body pn-lsn" id="pnLsn">' + body +
@@ -989,7 +993,7 @@
     host = h;
     key = key || mid;
     L.sid = sid; L.mid = mid; L.key = key; L.fin = false; L.zoom = null; L.playing = false; L.ans = {}; L.sc = { ok: 0, n: 0, run: 0, best: 0 };
-    try { if (G.PREP_VOICE && G.PREP_VOICE.available()) G.PREP_VOICE.init(); } catch (e) {}   // a voice downloaded before loads from the phone now
+    try { var Vo = applyVoice(); if (Vo && Vo.available()) Vo.init(); } catch (e) {}   // a voice downloaded before loads from the phone now
     var view = function () { if (L.les && L.key === key) draw(); };
     var loading = function () { host.paint(host.bar("Lesson", "", "back") + '<div class="pn-body"><p class="pn-load" role="status">Loading the lesson…</p></div>'); };
     L.view = view; L.loading = loading;
@@ -1022,6 +1026,14 @@
     if (a === "l-prev") { if (L.i) go(L.i - 1); return; }
     if (a === "l-play") return setPlaying(!L.playing);
     if (a === "l-speed") { var s = store(); s.lsp.r = nextSpeed(s.lsp.r); host.save(); if (L.playing) narrate(); return drawBar(); }
+    if (a === "l-voice") {
+      var Vz = G.PREP_VOICE, sv = store(), ids = Vz.ids(), nx = ids[(ids.indexOf(sv.lsp.eng || "kokoro") + 1) % ids.length];
+      sv.lsp.eng = nx; host.save(); Vz.use(nx);
+      var was = L.playing; stopVoice(); L.vdl = null;
+      if (nx !== "system" && Vz.available() && (Vz.state() === "none" || Vz.state() === "error")) naturalStart();
+      if (was) narrate();
+      return draw("[data-act=l-voice]");
+    }
     if (a === "l-auto") { var s2 = store(); s2.lsp.au = s2.lsp.au ? 0 : 1; host.save(); return draw("[data-act=l-auto]"); }
     if (a === "l-zoom") {
       // The shared PrepNucleus image viewer when it is loaded (window.PREP_VIEWER.open), else the reader's own enlarge.

@@ -71,6 +71,43 @@ try {
   const again = await page2.evaluate(async () => { const V = window.PREP_VOICE; await V.download(); return V.state(); });
   ok(again === "ready" && hf === before, "a second launch loads the model from the cache with no download");
 } catch (e) { console.log("FAIL " + (e && e.stack || e)); fails++; }
+
+// ---- Phonon engine wiring, against a stub of the phonon-tts module (the real runtime is vendored in vendor/phonon-tts and is
+// not run here): registration, the engine switch, download progress, the speed benchmark, say, stop, release.
+try {
+  const ctx2 = await browser.newContext();
+  await ctx2.route(BASE + "__blank", (r) => r.fulfill({ contentType: "text/html", body: "<!doctype html><meta charset=\"utf-8\"><title>phonon</title>" }));
+  await ctx2.route(BASE + "vendor/phonon-tts/index.js", (r) => r.fulfill({ contentType: "text/javascript", body: `
+    export class PhononTTS { static async load(o) {
+      o.onProgress({ file: "model.q8.gguf", loaded: 0, total: 1000 }); await new Promise((r) => setTimeout(r, 20)); o.onProgress({ file: "model.q8.gguf", loaded: 1000, total: 1000 });
+      window.__phononOpts = { lang: o.lang, quant: o.quant, threads: o.threads, device: o.device, worker: o.workerUrl, wasm: o.wasmUrl, simd: o.simdWasmUrl };
+      const t = new PhononTTS(); t.sampleRate = 24000; return t; }
+      async synth(text, opt) { window.__phononSaid = (window.__phononSaid || []).concat([text]); await new Promise((r) => setTimeout(r, 30)); const a = new Float32Array(24000); for (let i = 0; i < a.length; i++) a[i] = 0.2 * Math.sin(i / 20); return a; }
+      dispose() { window.__phononDisposed = true; } }
+    export async function clearCache() { window.__phononCleared = true; }` }));
+  const pg = await ctx2.newPage();
+  pg.on("pageerror", (e) => console.log("PAGEERR " + e.message));
+  await pg.goto(BASE + "__blank");
+  await pg.addScriptTag({ url: "/prep-voice.js" });
+  await pg.addScriptTag({ url: "/prep-voice-phonon.js" });
+  const w = await pg.evaluate(async () => {
+    const V = window.PREP_VOICE, ids = V.ids(); V.use("phonon"); V.unlock();
+    const prog = []; await V.download((p) => prog.push(p));
+    const o = window.__phononOpts, i = V.info("phonon");
+    const t0 = Date.now(); await V.say("Hello there.", 1.25); const took = Date.now() - t0;
+    V.prefetch("Next sentence.", 1);
+    await new Promise((r) => setTimeout(r, 100));
+    V.release();
+    return { ids, cur: V.current(), name: i.name, state: i.state, rtfSet: i.rtf > 0, last: prog[prog.length - 1], o, took, said: window.__phononSaid, disposed: !!window.__phononDisposed, after: V.state() };
+  });
+  ok(w.ids.join(",") === "system,kokoro,phonon" && w.cur === "phonon", "both engines are registered and use() switches between them");
+  ok(w.state === "ready" && w.last === 1 && w.rtfSet && w.name === "Phonon", "Phonon downloads, reports progress to 1, times itself and is ready");
+  ok(w.o.lang === "en" && w.o.quant === "q8" && w.o.threads === 1 && w.o.device === "cpu" && /vendor\/phonon-tts\/worker\.js$/.test(w.o.worker) && /phonon_tts_simd_bg\.wasm$/.test(w.o.simd), "it loads the vendored runtime, 8-bit, one thread, from the app bundle");
+  ok(w.took > 400 && w.said.indexOf("Hello there.") >= 0 && w.said.indexOf("Next sentence.") >= 0, "say() speaks a sentence (played at 1.25 times) and prefetch renders the next one");
+  ok(w.disposed && w.after === "none", "release() frees the model");
+  await pg.evaluate(async () => { await window.PREP_VOICE.remove("phonon"); });
+  ok(await pg.evaluate(() => !!window.__phononCleared), "remove() clears the downloaded files");
+} catch (e) { console.log("FAIL phonon wiring: " + (e && e.stack || e)); fails++; }
 await browser.close(); serve.kill();
 console.log(fails ? "FAILED " + fails : "ALL PASS");
 process.exit(fails ? 1 : 0);

@@ -142,7 +142,7 @@ try {
   await shot("step2-playing");
   await click("#smdPrep [data-act=l-speed]");
   ok(await ev(`return document.querySelector("#smdPrep [data-act=l-speed]").textContent;`) === "1.25x", "speed cycles to 1.25x");
-  ok(await until(`return window.__tts.length===2 && window.__tts[1].rate===1.25;`, 2000), "a speed change while playing restarts the step at the new rate");
+  ok(await until(`return window.__tts.some(function (u) { return u.rate===1.25 && /^A suspicious lump goes through triple assessment/.test(u.text); });`, 2000), "a speed change while playing restarts the step at the new rate");
   ok(await store(`s.lsp.r`) === 1.25, "the speed is kept in the store");
   ok(await until(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed")==="false";`, 4000) && await step() === "Step 2 of 8", "without auto-advance the narration ends on the same step and Play resets");
   await click("#smdPrep [data-act=l-auto]");
@@ -154,6 +154,14 @@ try {
   const c0 = await ev(`return window.__ttsCancel;`);
   await click("#smdPrep [data-act=l-play]");
   ok(await ev(`return window.__ttsCancel;`) > c0 && await ev(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed");`) === "false", "Pause cancels the speech");
+  // ---- voice choice: System, Kokoro, Phonon; one tap cycles and the choice is kept (the voices themselves are switched off here)
+  const vb = () => ev(`var b=document.querySelector("#smdPrep [data-act=l-voice]"); return b ? b.textContent : "";`);
+  ok(await vb() === "Kokoro", "the lesson bar names the voice in use (Kokoro by default)");
+  const seq = [];
+  for (let k = 0; k < 3; k++) { await click("#smdPrep [data-act=l-voice]"); await sleep(120); seq.push(await vb()); }
+  ok(seq.join(",") === "Phonon,System,Kokoro", "each tap on the voice button moves to the next voice: " + seq.join(", "));
+  ok(await store(`s.lsp.eng`) === "kokoro", "the chosen voice is kept in the store");
+
   await click("#smdPrep [data-act=l-auto]");
   await shot("step3-compare");
 

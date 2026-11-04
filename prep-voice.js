@@ -288,23 +288,45 @@
     try { audio.src = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAwF0AAICuAAACABAAZGF0YQAAAAA="; var pr = audio.play(); if (pr && pr.catch) pr.catch(function () {}); } catch (e) {}
   }
   function stop() { tok++; try { if (audio) { audio.pause(); audio.removeAttribute("src"); } } catch (e) {} if (cur) { cur(); cur = null; } }
+  // Shared by every engine: one <audio> element plays the rendered clip (24 kHz mono), so the silent switch does not mute it.
+  function begin() { return ++tok; }
+  function playWave(wave, prate, my) {
+    if (my !== tok) return Promise.resolve();
+    return new Promise(function (res, rej) {
+      if (!audio) audio = new G.Audio();
+      var url = G.URL.createObjectURL(new G.Blob([wavBlob(wave)], { type: "audio/wav" })), done = function () { cur = null; try { G.URL.revokeObjectURL(url); } catch (e) {} };
+      cur = function () { done(); res(); };
+      audio.onended = function () { done(); res(); };
+      audio.onerror = function () { done(); rej(new Error("audio")); };
+      audio.src = url;
+      audio.playbackRate = prate || 1;
+      var pr = audio.play(); if (pr && pr.catch) pr.catch(function (e) { done(); rej(e); });
+    });
+  }
   function say(text, rate) {
     if (st.s !== "ready") return Promise.reject(new Error("not ready"));
-    var my = ++tok;
-    return synth(text, rate).then(function (wave) {
-      if (my !== tok) return;
-      return new Promise(function (res, rej) {
-        if (!audio) audio = new G.Audio();
-        var url = G.URL.createObjectURL(new G.Blob([wavBlob(wave)], { type: "audio/wav" })), done = function () { cur = null; try { G.URL.revokeObjectURL(url); } catch (e) {} };
-        cur = function () { done(); res(); };
-        audio.onended = function () { done(); res(); };
-        audio.onerror = function () { done(); rej(new Error("audio")); };
-        audio.src = url;
-        var pr = audio.play(); if (pr && pr.catch) pr.catch(function (e) { done(); rej(e); });
-      });
-    });
+    var my = begin();
+    return synth(text, rate).then(function (wave) { return playWave(wave, 1, my); });
   }
   function prefetch(text, rate) { if (st.s === "ready") synth(text, rate).catch(function () {}); }
   function remove() { release(); try { G.localStorage.removeItem("prep_voice_rtf"); } catch (e) {} try { return G.caches.delete(CACHE); } catch (e) { return Promise.resolve(); } }
-  G.PREP_VOICE = { state: function () { return st.s; }, progress: function () { return st.p; }, error: function () { return st.err; }, ready: function () { return st.s === "ready"; }, usable: usable, rtf: function () { return st.rtf || 0; }, release: release, available: can, download: download, init: init, unlock: unlock, render: synth, phonemes: function (t) { return phonemize(t, lex); }, say: say, prefetch: prefetch, stop: stop, remove: remove, _pure: PURE };
+  var KOK = { name: "Kokoro", mb: 92, state: function () { return st.s; }, progress: function () { return st.p; }, error: function () { return st.err; }, ready: function () { return st.s === "ready"; }, usable: usable, rtf: function () { return st.rtf || 0; }, release: release, available: can, download: download, init: init, unlock: unlock, render: synth, phonemes: function (t) { return phonemize(t, lex); }, say: say, prefetch: prefetch, stop: stop, remove: remove, _pure: PURE };
+  // The voices a lesson can use: this file's Kokoro and, when its file is loaded, Phonon (prep-voice-phonon.js).
+  // use("system") means neither: the lesson speaks with the phone's own voice.
+  var engines = { kokoro: KOK }, order = ["kokoro"], pick = "kokoro";
+  var host = { begin: begin, play: playWave, halt: stop, unlock: unlock, sr: SR };
+  function E() { return engines[pick] || null; }
+  function pass(fn, dflt) { return function () { var e = E(); return e && e[fn] ? e[fn].apply(e, arguments) : typeof dflt === "function" ? dflt() : dflt; }; }
+  function noVoice() { return Promise.reject(new Error("system voice")); }
+  G.PREP_VOICE = {
+    register: function (id, make) { if (!engines[id]) { engines[id] = make(host); order.push(id); } },
+    ids: function () { return ["system"].concat(order); }, use: function (id) { var n = id === "system" || engines[id] ? id : "kokoro"; if (n !== pick) stop(); pick = n; return pick; }, current: function () { return pick; },
+    info: function (id) { var e = engines[id]; return e ? { id: id, name: e.name, mb: e.mb, state: e.state(), progress: e.progress(), rtf: e.rtf() } : { id: "system", name: "System", mb: 0, state: "ready", progress: 1, rtf: 0 }; },
+    engine: function (id) { return engines[id] || null; },
+    available: pass("available", false), state: pass("state", "none"), progress: pass("progress", 0), error: pass("error", ""), ready: pass("ready", false), usable: pass("usable", false),
+    rtf: pass("rtf", 0), release: function () { var k; for (k in engines) if (engines[k].release) engines[k].release(); }, download: pass("download", noVoice),
+    init: pass("init"), unlock: unlock, say: pass("say", noVoice), prefetch: pass("prefetch"), stop: stop,
+    remove: function (id) { var e = engines[id]; return e && e.remove ? e.remove() : Promise.resolve(); },
+    render: KOK.render, phonemes: KOK.phonemes, _pure: PURE
+  };
 })(typeof window !== "undefined" ? window : this);

@@ -159,7 +159,18 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   Measured on a 4-core x86 VM: Kokoro q8 renders 2.3 times real time in WASM (1.4 natively), so it only helps on phones
   fast enough; speech was checked by transcription (Whisper base.en reads the output back word for word). Not yet timed
   on an iPhone or an Android phone. Open: a smaller model (KittenTTS nano, 24 MB, 0.4 times real time natively, same
-  input format) or native MLX for iOS if phones come out slow. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
+  input format) or native MLX for iOS if phones come out slow.
+  **Second engine, Phonon 31M (`prep-voice-phonon.js`, optional; added 2026-11-04 so both can be compared on a phone):**
+  Gradium's phonon-31m-en (Apache-2.0, 64.5 MB q8, pinned commit) run by the vendored `phonon-tts` 0.6.0 WebAssembly
+  runtime (`vendor/phonon-tts/`, MIT or Apache-2.0, single-thread builds only: the threaded one needs a cross-origin
+  isolated page). It reads text directly (no phonemizer, no lexicon), streams in a module worker, and downloads on first
+  use into the Cache API; same one-time timing gate (`prep_voice_rtf_phonon`, usable at 1.3 times real time or better).
+  Speed is the audio element's `playbackRate`. `prep-voice.js` is now a facade: `PREP_VOICE.ids()` is `system`, `kokoro`,
+  `phonon`; `use(id)` picks one; the lesson's top bar has a pill that cycles them (kept as `lsp.eng`, default `kokoro`;
+  a pill reading "(slow)" means that engine is too slow on the phone and the system voice is reading). Tests drive Phonon
+  through a stub module (`test/run-prep-voice-ui.mjs`); **the real Phonon runtime has not been run by us** (the sandbox
+  blocked executing the npm package), so its speed, sound and behaviour inside the iOS/Android WebView (module worker on
+  the app's scheme, Cache API writes from a worker) are unverified. Decide between the engines after using both. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
   reader, closing PrepNucleus or Ask MaiK stops it. No voice available: the play and speed controls are not drawn.
 - **Data and offline:** lessons, the index and `prep/lessons/media/*` ship in www (`scripts/build-www.sh`); each lesson
   is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. **Generated lessons are served from R2**
