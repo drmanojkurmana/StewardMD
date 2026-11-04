@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "sen-growth-disorders",
+ "subject": "ss-endocrinology",
+ "title": "Short stature and growth hormone",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Height, growth velocity, mid-parental height, and bone age are recorded **before** a **stimulation** test. A normal velocity near the mid-parental height is familial short stature, and a stimulation test is not the first action. Measure properly on two visits before you label a child deficient. A single short measurement without a velocity is not a diagnosis.",
+   "say": "Height, growth velocity, mid-parental height, and bone age are recorded before a stimulation test. A normal velocity near the mid-parental height is familial short stature, and a stimulation test is not the first action. Measure properly on two visits before you label a child deficient. A single short measurement without a velocity is not a diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Height, velocity, mid-parental height"
+     },
+     {
+      "id": "b",
+      "label": "Bone age"
+     },
+     {
+      "id": "c",
+      "label": "Only then a stimulation test"
+     },
+     {
+      "id": "d",
+      "label": "Normal velocity near parents is familial"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An IGF-1 level **that** is **normal** for age and puberty makes severe growth hormone deficiency unlikely. A low IGF-1 is not sufficient, because malnutrition, hypothyroidism, and chronic illness also lower it. You should replace thyroid hormone, and you should treat the illness, before the growth axis is interpreted. Normal here means the reference range, and it is not a stimulation result.",
+   "say": "An IGF-1 level that is normal for age and puberty makes severe growth hormone deficiency unlikely. A low IGF-1 is not sufficient, because malnutrition, hypothyroidism, and chronic illness also lower it. You should replace thyroid hormone, and you should treat the illness, before the growth axis is interpreted. Normal here means the reference range, and it is not a stimulation result.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "IGF-1 in the reference range",
+     "points": [
+      "Severe deficiency is unlikely",
+      "Still read age and puberty",
+      "Not a stimulation test"
+     ]
+    },
+    "right": {
+     "title": "A low IGF-1",
+     "points": [
+      "Not sufficient by itself",
+      "Malnutrition can lower it",
+      "Hypothyroidism and chronic illness can lower it"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Isolated growth** hormone deficiency usually needs two growth hormone stimulation tests. The traditional peak is below 10 micrograms per litre, and many current assays use a lower cutoff, so the method is named. The drawing shows a youthful face, truncal adiposity, proportionate slow growth, and a delayed bone age. It does not print the cutoff or the two-test rule.",
+   "say": "Isolated growth hormone deficiency usually needs two growth hormone stimulation tests. The traditional peak is below 10 micrograms per litre, and many current assays use a lower cutoff, so the method is named. The drawing shows a youthful face, truncal adiposity, proportionate slow growth, and a delayed bone age. It does not print the cutoff or the two-test rule.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/isolated-growth-hormone-deficiency-fig1.webp",
+    "alt": "Drawing of isolated growth hormone deficiency with a youthful face, truncal adiposity, low IGF-1, proportionate slow growth, and a delayed bone-age hand.",
+    "caption": "The drawing shows a youthful face, truncal adiposity, proportionate short stature, and a delayed bone age. It does not print a peak cutoff (StewardMD)."
+   }
+  },
+  {
+   "tx": "In **adults** the **insulin** tolerance test cutoff is a peak at or below 5.1 micrograms per litre. The test is contraindicated in ischaemic heart disease and in seizure disorder. A low IGF-1 alone does not start treatment of adult growth hormone deficiency. Another stimulus is chosen when the insulin test is unsafe.",
+   "say": "In adults the insulin tolerance test cutoff is a peak at or below 5.1 micrograms per litre. The test is contraindicated in ischaemic heart disease and in seizure disorder. A low IGF-1 alone does not start treatment of adult growth hormone deficiency. Another stimulus is chosen when the insulin test is unsafe.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adult decision",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Insulin tolerance test",
+      "Peak at or below 5.1 micrograms per litre"
+     ],
+     [
+      "Ischaemic heart disease",
+      "Do not use the insulin test"
+     ],
+     [
+      "Seizure disorder",
+      "Do not use the insulin test"
+     ],
+     [
+      "Low IGF-1 alone",
+      "Not an indication to start"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Laron syndrome** is growth hormone receptor resistance, with a high growth hormone level and a very low IGF-1. Growth hormone treatment fails, and mecasermin, which is recombinant IGF-1, is the replacement. Do not keep increasing the growth hormone dose when the receptor cannot respond. This is not ordinary isolated deficiency.",
+   "say": "Laron syndrome is growth hormone receptor resistance, with a high growth hormone level and a very low IGF-1. Growth hormone treatment fails, and mecasermin, which is recombinant IGF-1, is the replacement. Do not keep increasing the growth hormone dose when the receptor cannot respond. This is not ordinary isolated deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Laron syndrome",
+     "points": [
+      "Receptor resistance",
+      "Growth hormone is high",
+      "IGF-1 is very low, mecasermin is used"
+     ]
+    },
+    "right": {
+     "title": "Isolated deficiency",
+     "points": [
+      "Growth hormone is low on testing",
+      "IGF-1 is low",
+      "Growth hormone replacement can work"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Growth hormone** without classic deficiency is approved for Turner syndrome, SHOX deficiency, and a child born small for gestational age with no catch-up by about 2 to 4 years. It is also approved for Prader-Willi syndrome and for growth failure in chronic kidney disease. The indication is the syndrome, and a failed stimulation test is not required for these labels.",
+   "say": "Growth hormone without classic deficiency is approved for Turner syndrome, SHOX deficiency, and a child born small for gestational age with no catch-up by about 2 to 4 years. It is also approved for Prader-Willi syndrome and for growth failure in chronic kidney disease. The indication is the syndrome, and a failed stimulation test is not required for these labels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Stimulation test"
+    ],
+    "rows": [
+     [
+      "Turner syndrome or SHOX deficiency",
+      "Not required for the label"
+     ],
+     [
+      "Small for gestational age, no catch-up by 2 to 4 years",
+      "Not required for the label"
+     ],
+     [
+      "Prader-Willi syndrome",
+      "Not required for the label"
+     ],
+     [
+      "Chronic kidney disease growth failure",
+      "Not required for the label"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "You should **counsel families** that growth hormone can cause benign intracranial hypertension, slipped capital femoral epiphysis, worsening scoliosis, and insulin resistance. A limp or a severe headache is not ordinary growing pain, and it needs a same-week review. The family should stop the dose and seek care for visual change. These harms are uncommon, and they are real.",
+   "say": "You should counsel families that growth hormone can cause benign intracranial hypertension, slipped capital femoral epiphysis, worsening scoliosis, and insulin resistance. A limp or a severe headache is not ordinary growing pain, and it needs a same-week review. The family should stop the dose and seek care for visual change. These harms are uncommon, and they are real.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Counsel families before the first dose"
+     },
+     {
+      "id": "b",
+      "label": "Headache or visual change: stop and review"
+     },
+     {
+      "id": "c",
+      "label": "A limp is not growing pain"
+     },
+     {
+      "id": "d",
+      "label": "Think intracranial pressure or a slipped epiphysis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Achondroplasia** is an **FGFR3** gain of function, and it is not growth hormone deficiency. Vosoritide, a C-type natriuretic peptide analogue, is disease-modifying in achondroplasia, and it is not a treatment for idiopathic short stature. The drawing shows frontal bossing, rhizomelic shortening, lumbar lordosis, and the growth plate. It does not label FGFR3 or vosoritide.",
+   "say": "Achondroplasia is an FGFR3 gain of function, and it is not growth hormone deficiency. Vosoritide, a C-type natriuretic peptide analogue, is disease-modifying in achondroplasia, and it is not a treatment for idiopathic short stature. The drawing shows frontal bossing, rhizomelic shortening, lumbar lordosis, and the growth plate. It does not label FGFR3 or vosoritide.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/achondroplasia-fig1.webp",
+    "alt": "Drawing of achondroplasia with frontal bossing, rhizomelic limb shortening, lumbar lordosis, and a close view of the epiphyseal growth plate.",
+    "caption": "The drawing shows frontal bossing, rhizomelic shortening, lumbar lordosis, and the growth plate. FGFR3 and vosoritide are not labelled (StewardMD)."
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

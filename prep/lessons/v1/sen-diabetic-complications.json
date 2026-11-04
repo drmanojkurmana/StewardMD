@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "sen-diabetic-complications",
+ "subject": "ss-endocrinology",
+ "title": "Microvascular complications of diabetes",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "You should **screen** for **diabetic retinopathy** at diagnosis in type 2 diabetes and within 5 years of diagnosis in type 1 diabetes, and then each year. Proliferative disease is neovascularization. A rapid fall in A1c can worsen retinopathy, which is the SUSTAIN-6 caution. The figure is a drawing of microaneurysms, haemorrhages, exudates, cotton-wool spots, and new vessels, and it is not a fundus photograph.",
+   "say": "You should screen for diabetic retinopathy at diagnosis in type 2 diabetes and within 5 years of diagnosis in type 1 diabetes, and then each year. Proliferative disease is neovascularization. A rapid fall in A1c can worsen retinopathy, which is the SUSTAIN-6 caution. The figure is a drawing of microaneurysms, haemorrhages, exudates, cotton-wool spots, and new vessels, and it is not a fundus photograph.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-retinopathy-fig1.webp",
+    "alt": "Drawing of diabetic retinal lesions, including microaneurysms, haemorrhages, hard exudates, cotton-wool spots, the macula, and neovascularisation.",
+    "caption": "This is a drawing of microaneurysms, haemorrhages, hard exudates, cotton-wool spots, and neovascularisation. It is not a fundus photograph (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Moderately increased** albuminuria is a urine albumin to creatinine ratio of 30 to 299 mg/g, and severely increased albuminuria is 300 mg/g or higher. An ACE inhibitor or an ARB is used when albuminuria and hypertension coexist. The two classes are never combined. A normal dipstick does not replace the ratio, because moderately increased albuminuria is often dipstick negative.",
+   "say": "Moderately increased albuminuria is a urine albumin to creatinine ratio of 30 to 299 mg/g, and severely increased albuminuria is 300 mg/g or higher. An ACE inhibitor or an ARB is used when albuminuria and hypertension coexist. The two classes are never combined. A normal dipstick does not replace the ratio, because moderately increased albuminuria is often dipstick negative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urine albumin to creatinine ratio",
+     "Category",
+     "Blood pressure drug"
+    ],
+    "rows": [
+     [
+      "30 to 299 mg/g",
+      "Moderately increased",
+      "ACE inhibitor or ARB if hypertensive"
+     ],
+     [
+      "300 mg/g or higher",
+      "Severely increased",
+      "Same RAS blocker, still not both"
+     ],
+     [
+      "ACE inhibitor plus ARB",
+      "Not used",
+      "The combination is avoided"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An **SGLT2 inhibitor** is used for diabetic kidney disease when the eGFR is inside the kidney-outcome range for that drug. Finerenone is considered when albuminuria persists on a RAS blocker. Metformin is not a kidney-protective drug. Do not withhold an SGLT2 inhibitor only because the A1c is already at target if the kidney indication is present.",
+   "say": "An SGLT2 inhibitor is used for diabetic kidney disease when the eGFR is inside the kidney-outcome range for that drug. Finerenone is considered when albuminuria persists on a RAS blocker. Metformin is not a kidney-protective drug. Do not withhold an SGLT2 inhibitor only because the A1c is already at target if the kidney indication is present.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Kidney-protective choices",
+     "points": [
+      "SGLT2 inhibitor inside its eGFR range",
+      "Finerenone if albuminuria persists on a RAS blocker",
+      "ACE inhibitor or ARB when hypertension coexists"
+     ]
+    },
+    "right": {
+     "title": "Not kidney protection",
+     "points": [
+      "Metformin",
+      "Combining an ACE inhibitor with an ARB",
+      "Chasing A1c alone when the kidney indication is already met"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Distal symmetric** polyneuropathy is the common pattern, and a 10 g monofilament test is done each year. Pain is treated with pregabalin, duloxetine, or gabapentin. The drawing names pregabalin, duloxetine, and amitriptyline, and gabapentin is in the text only. Tight glucose slows the onset of neuropathy, but it rarely abolishes established pain.",
+   "say": "Distal symmetric polyneuropathy is the common pattern, and a 10 g monofilament test is done each year. Pain is treated with pregabalin, duloxetine, or gabapentin. The drawing names pregabalin, duloxetine, and amitriptyline, and gabapentin is in the text only. Tight glucose slows the onset of neuropathy, but it rarely abolishes established pain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-neuropathy-fig1.webp",
+    "alt": "Drawing of stocking-glove sensory loss, a 10 g monofilament at the metatarsal heads, a tuning fork, loss of the ankle jerk, and a Charcot foot with a painless ulcer.",
+    "caption": "The drawing shows stocking-glove loss, monofilament sites, and a Charcot foot. The drug line prints pregabalin, duloxetine, and amitriptyline. Gabapentin is not on the figure (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Cardiac autonomic** neuropathy causes resting tachycardia and orthostatic hypotension, and it marks a higher mortality. A resting heart rate that stays high, or a blood pressure that falls on standing, is not dismissed as fitness or simple dehydration. Glucose control does not reverse an established autonomic deficit. Ask about erectile dysfunction when the heart rate looks fixed.",
+   "say": "Cardiac autonomic neuropathy causes resting tachycardia and orthostatic hypotension, and it marks a higher mortality. A resting heart rate that stays high, or a blood pressure that falls on standing, is not dismissed as fitness or simple dehydration. Glucose control does not reverse an established autonomic deficit. Ask about erectile dysfunction when the heart rate looks fixed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "What it suggests"
+    ],
+    "rows": [
+     [
+      "Resting tachycardia",
+      "Cardiac autonomic neuropathy"
+     ],
+     [
+      "Fall in blood pressure on standing",
+      "Orthostatic hypotension, higher mortality"
+     ],
+     [
+      "Fixed heart rate",
+      "Do not call it fitness"
+     ],
+     [
+      "Established deficit",
+      "Glucose control rarely reverses it"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Charcot neuroarthropathy** is a hot, swollen, relatively painless foot in a patient with neuropathy and intact pulses. The treatment is a total contact cast and protected non-weight bearing. Do not treat it as cellulitis and then let the patient walk. The drawing shows the rocker-bottom foot and a painless plantar ulcer beside the monofilament sites.",
+   "say": "Charcot neuroarthropathy is a hot, swollen, relatively painless foot in a patient with neuropathy and intact pulses. The treatment is a total contact cast and protected non-weight bearing. Do not treat it as cellulitis and then let the patient walk. The drawing shows the rocker-bottom foot and a painless plantar ulcer beside the monofilament sites.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Hot swollen foot, relatively painless"
+     },
+     {
+      "id": "b",
+      "label": "Neuropathy with intact pulses"
+     },
+     {
+      "id": "c",
+      "label": "Total contact cast, do not walk on it"
+     },
+     {
+      "id": "d",
+      "label": "Not cellulitis followed by weight bearing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **main biochemical** routes of microvascular injury are the polyol pathway, advanced glycation end products, protein kinase C, and oxidative stress. Gastroparesis causes early satiety and a mismatch between insulin and food. Metoclopramide is limited by tardive dyskinesia, so it is not a long open-ended prescription. You should name the pathway if the question is about mechanism.",
+   "say": "The main biochemical routes of microvascular injury are the polyol pathway, advanced glycation end products, protein kinase C, and oxidative stress. Gastroparesis causes early satiety and a mismatch between insulin and food. Metoclopramide is limited by tardive dyskinesia, so it is not a long open-ended prescription. You should name the pathway if the question is about mechanism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Microvascular routes",
+     "points": [
+      "Polyol pathway",
+      "Advanced glycation end products",
+      "Protein kinase C and oxidative stress"
+     ]
+    },
+    "right": {
+     "title": "Gut complication",
+     "points": [
+      "Early satiety",
+      "Insulin and food are mismatched",
+      "Metoclopramide is limited by tardive dyskinesia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **Steno**-2 study **showed** that multifactorial targets beat glucose control alone for cardiovascular and microvascular outcomes. An ankle-brachial index can be falsely high when the arteries are calcified, so a high index does not exclude ischaemia in a diabetic foot. Combine pressure, pulses, and the wound, and do not trust one number. Glucose is necessary, and it is not sufficient.",
+   "say": "The Steno-2 study showed that multifactorial targets beat glucose control alone for cardiovascular and microvascular outcomes. An ankle-brachial index can be falsely high when the arteries are calcified, so a high index does not exclude ischaemia in a diabetic foot. Combine pressure, pulses, and the wound, and do not trust one number. Glucose is necessary, and it is not sufficient.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pitfall",
+     "Safer reading"
+    ],
+    "rows": [
+     [
+      "Glucose target alone",
+      "Steno-2 favoured several risk factors together"
+     ],
+     [
+      "High ankle-brachial index",
+      "Calcified arteries can fake a high value"
+     ],
+     [
+      "One number",
+      "Use pulses, the wound, and the pressure"
+     ],
+     [
+      "Established complication",
+      "Prevention and treatment are not the same"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
