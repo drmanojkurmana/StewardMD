@@ -1,126 +1,189 @@
 {
- "v": 1,
- "module": "srh-emergencies",
- "subject": "ss-rheumatology-immunology",
- "title": "Rheumatologic emergencies: key syndromes for NEET-PG and INI-CET",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**Scleroderma renal crisis** is an emergency in systemic sclerosis, marked by sudden severe hypertension and rapidly falling kidney function. Vasospasm reduces renal perfusion and activates the renin-angiotensin system. Recent high-dose corticosteroid use is a documented risk factor. Early recognition matters because untreated disease carries very high one-year mortality.",
-   "say": "Scleroderma renal crisis is an emergency in systemic sclerosis, marked by sudden severe hypertension and rapidly falling kidney function. Vasospasm reduces renal perfusion and activates the renin angiotensin system. Recent high dose corticosteroid use is a documented risk factor. Early recognition matters because untreated disease carries very high one year mortality.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srh-emergencies-fig1.webp",
-    "alt": "Diagram showing scleroderma renal crisis: renal vasospasm, reduced perfusion, renin-angiotensin system activation, severe hypertension, and rapidly falling kidney function.",
-    "caption": "Scleroderma renal crisis: Vasospasm, RAS activation, hypertension, kidney failure",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "The cornerstone of treatment is an **ACE inhibitor**, with captopril the classic short-acting agent used to titrate blood pressure safely. ACE inhibitors have transformed survival in this condition. If blood pressure stays above target on maximal dosing, a **dihydropyridine calcium channel blocker** is the appropriate add-on. Continue the ACE inhibitor even if dialysis is started, since some patients recover renal function.",
-   "say": "The cornerstone of treatment is an ACE inhibitor, with captopril the classic short acting agent used to titrate blood pressure safely. ACE inhibitors have transformed survival in this condition. If blood pressure stays above target on maximal dosing, a dihydropyridine calcium channel blocker is the appropriate add on. Continue the ACE inhibitor even if dialysis is started, since some patients recover renal function.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Situation",
-     "Action"
-    ],
-    "rows": [
-     [
-      "Initial crisis",
-      "Short-acting ACE inhibitor, titrated"
-     ],
-     [
-      "BP above target at max dose",
-      "Add dihydropyridine calcium channel blocker"
-     ],
-     [
-      "Dialysis needed",
-      "Continue ACE inhibitor"
-     ],
-     [
-      "Prophylaxis in normal patients",
-      "Not effective, avoid"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Antiphospholipid syndrome** requires a clinical event plus persistent laboratory positivity. Lupus anticoagulant, anticardiolipin and anti-beta2-glycoprotein I antibodies are the key tests. Confirm persistence on two occasions at least **12 weeks apart** to exclude transient antibodies. Warfarin with an INR of 2.0 to 3.0 is the standard long-term anticoagulant after a first venous thrombosis in definite APS.",
-   "say": "Antiphospholipid syndrome requires a clinical event plus persistent laboratory positivity. Lupus anticoagulant, anticardiolipin and anti beta two glycoprotein I antibodies are the key tests. Confirm persistence on two occasions at least 12 weeks apart to exclude transient antibodies. Warfarin with an INR of 2.0 to 3.0 is the standard long term anticoagulant after a first venous thrombosis in definite APS.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Clinical event"
-     },
-     {
-      "id": "b",
-      "label": "Antibody positive"
-     },
-     {
-      "id": "c",
-      "label": "Repeat at 12 weeks"
-     },
-     {
-      "id": "d",
-      "label": "Definite APS"
-     },
-     {
-      "id": "e",
-      "label": "Warfarin INR 2-3"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Catastrophic antiphospholipid syndrome** involves thrombosis in three or more organs within about a week, with small vessel occlusion. Surgery, infection and anticoagulation withdrawal are important triggers. Definite diagnosis needs histological confirmation plus laboratory evidence. Pregnancy-related management is different: no treatment is needed for positive antibodies alone, while a prior thrombosis or pregnancy loss calls for aspirin with or without heparin.",
-   "say": "Catastrophic antiphospholipid syndrome involves thrombosis in three or more organs within about a week, with small vessel occlusion. Surgery, infection and anticoagulation withdrawal are important triggers. Definite diagnosis needs histological confirmation plus laboratory evidence. Pregnancy related management is different: no treatment is needed for positive antibodies alone, while a prior thrombosis or pregnancy loss calls for aspirin with or without heparin.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_0fd15db67711",
-  "q_37c1bf7f675e",
-  "q_490f7375e48b"
- ],
- "src": [],
- "refs": [
-  "Revised Sapporo (Sydney) classification criteria for antiphospholipid syndrome",
-  "EULAR recommendations for the management of systemic sclerosis"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 36
- }
+  "v": 1,
+  "module": "srh-emergencies",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Rheumatologic emergencies",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Catastrophic antiphospholipid syndrome** or CAPS is an acute medical emergency characterized by rapid multiorgan microvascular thrombosis involving **3 or more organ systems in less than 1 week**. Emergency management requires aggressive **triple therapy**: intravenous pulse methylprednisolone (1 g daily for 3 days), therapeutic parenteral **heparin**, and **plasma exchange** or IVIG.",
+      "say": "Catastrophic antiphospholipid syndrome causes widespread microvascular thrombosis across 3 or more organs within one week. Triple therapy combines pulse steroids, heparin, and plasma exchange.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/catastrophic-aps-fig1.webp",
+        "alt": "Multiorgan microvascular thrombosis in catastrophic antiphospholipid syndrome",
+        "caption": "Catastrophic APS causes rapidly progressive multiorgan thrombosis requiring urgent triple therapy. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Scleroderma renal crisis** or SRC presents as an acute hypertensive emergency characterized by malignant accelerated hypertension, rapid oliguric acute kidney injury, and microangiopathic hemolytic anemia. Treatment demands immediate upward titration of short-acting oral **ACE inhibitors** such as **captopril**, gradually reducing blood pressure over **48 to 72 hours** while avoiding sudden hypotension.",
+      "say": "Scleroderma renal crisis presents with accelerated hypertension, oliguria, and hemolytic anemia. Immediate treatment requires short-acting ACE inhibitors like captopril.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/scleroderma-renal-crisis-fig1.webp",
+        "alt": "Malignant renovascular hypertension and ACE inhibitor therapy in scleroderma renal crisis",
+        "caption": "Scleroderma renal crisis features severe renovascular hypertension, treated promptly with captopril. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Diffuse alveolar hemorrhage** or DAH in pulmonary-renal syndrome presents with acute dyspnea, hemoptysis, hypoxemic respiratory failure, bilateral alveolar infiltrates, and an abrupt drop in hemoglobin with **increased DLCO**. Urgent bronchoscopy with sequential bronchoalveolar lavage shows **progressively bloodier aliquots** containing hemosiderin-laden macrophages.",
+      "say": "Diffuse alveolar hemorrhage manifests with hemoptysis, falling hemoglobin, and increased diffusing capacity. Sequential bronchoalveolar lavage demonstrates progressively bloodier aliquots.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute dyspnea, hemoptysis, and bilateral diffuse alveolar infiltrates"
+          },
+          {
+            "id": "b",
+            "label": "Abrupt hemoglobin drop with elevated carbon monoxide diffusing capacity (DLCO)"
+          },
+          {
+            "id": "c",
+            "label": "Sequential BAL yielding progressively bloodier aliquots and hemosiderin macrophages"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Atlantoaxial subluxation** with cervical myelopathy in rheumatoid arthritis presents with occipital pain radiating to vertex, Lhermitte sign, and spastic quadriparesis. Cervical flexion radiography confirms instability if the **anterior atlanto-dens interval exceeds 3 mm**; a posterior atlanto-dental interval of **14 mm or less** signals imminent spinal cord compression requiring urgent neurosurgical stabilization.",
+      "say": "Atlantoaxial subluxation presents with occipital pain, spastic quadriparesis, and hyperreflexia. A posterior canal interval of 14 mm or less demands urgent neurosurgical decompression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiographic sign",
+          "Measurement threshold",
+          "Neurosurgical implication"
+        ],
+        "rows": [
+          [
+            "Anterior ADI (AADI)",
+            ">3 mm on lateral flexion radiograph",
+            "Transverse odontoid ligament rupture"
+          ],
+          [
+            "Posterior ADI (PADI)",
+            "<=14 mm space available for cord",
+            "High risk of cervical myelopathy and medullary compression"
+          ],
+          [
+            "Surgical indication",
+            "PADI <=14 mm or neurological deficit",
+            "Urgent posterior atlantoaxial fusion and stabilization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Giant cell arteritis** presenting with acute visual loss or transient amaurosis fugax is an ophthalmic emergency. Intravenous pulse **methylprednisolone at 500 to 1,000 mg daily for 3 consecutive days** must be administered immediately, prior to performing temporal artery biopsy, to prevent bilateral irreversible anterior ischemic optic neuropathy.",
+      "say": "Acute visual disturbance in giant cell arteritis is an emergency. Intravenous pulse methylprednisolone must be administered immediately to prevent irreversible blindness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute visual blurring, amaurosis fugax, or diplopia in elderly patient"
+          },
+          {
+            "id": "b",
+            "label": "Immediate IV pulse methylprednisolone 500 to 1,000 mg daily for 3 days"
+          },
+          {
+            "id": "c",
+            "label": "Subsequent temporal artery biopsy and vascular ultrasound to confirm vasculitis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Macrophage activation syndrome** or MAS is a secondary hemophagocytic lymphohistiocytosis complicating systemic JIA or adult-onset Still disease. Hallmarks include persistent unremitting fever, falling ESR paradoxically accompanied by **extreme hyperferritinemia exceeding 10,000 ng/mL**, consumptive hypofibrinogenemia, thrombocytopenia, and bone marrow hemophagocytosis, managed with **anakinra** or pulse steroids.",
+      "say": "Macrophage activation syndrome features unremitting fever, a falling ESR, and extreme hyperferritinemia over 10,000 ng per mL. Emergency therapy requires pulse steroids and anakinra.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical and laboratory paradoxes",
+          "points": [
+            "Extreme hyperferritinemia >10,000 ng/mL",
+            "ESR paradoxically falls due to hypofibrinogenemia",
+            "Severe bicytopenia or pancytopenia"
+          ]
+        },
+        "right": {
+          "title": "Emergency management",
+          "points": [
+            "High-dose pulse IV methylprednisolone",
+            "Recombinant IL-1 receptor antagonist anakinra",
+            "Cyclosporine A or etoposide for refractory cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Native joint bacterial septic arthritis** is an orthopedic emergency causing rapid enzymatic chondrolysis and irreversible articular destruction within **24 to 48 hours**. Urgent diagnostic **arthrocentesis** for synovial leukocyte count, Gram stain, and culture must be performed immediately, followed by empiric intravenous bactericidal antibiotics and prompt complete joint decompression.",
+      "say": "Bacterial septic arthritis causes irreversible chondrolysis within 24 to 48 hours. Immediate arthrocentesis must precede empiric intravenous bactericidal antibiotics and joint decompression.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/infectious-arthritis-fig1.webp",
+        "alt": "Septic arthritis synovial infection, joint destruction, and emergency decompression",
+        "caption": "Bacterial septic arthritis requires urgent diagnostic arthrocentesis and intravenous antibiotic therapy. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Acute lupus myocarditis** presents with resting tachycardia, gallop rhythm, acute congestive heart failure, and cardiogenic shock. Cardiac MRI reveals extensive myocardial edema on T2-weighted sequences and diffuse non-ischemic late gadolinium enhancement; urgent therapy demands intravenous **pulse methylprednisolone** combined with **cyclophosphamide** or IVIG.",
+      "say": "Acute lupus myocarditis manifests with resting tachycardia, cardiogenic shock, and heart failure. Cardiac MRI confirms myocardial edema, managed with pulse steroids and cyclophosphamide.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Unexplained resting tachycardia, chest pain, and acute ventricular failure"
+          },
+          {
+            "id": "b",
+            "label": "Cardiac MRI demonstrates T2 myocardial edema and late gadolinium enhancement"
+          },
+          {
+            "id": "c",
+            "label": "Immediate intravenous pulse methylprednisolone and cyclophosphamide rescue"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
 }

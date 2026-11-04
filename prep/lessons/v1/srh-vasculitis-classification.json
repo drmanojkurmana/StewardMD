@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "srh-vasculitis-classification",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Classification and assessment of vasculitis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **2012 Revised Chapel Hill Consensus Conference** or CHCC classifies systemic vasculitides based on predominant vessel caliber. Categories comprise **large vessel vasculitis** affecting aorta and major branches, **medium vessel vasculitis** targeting visceral arteries, and **small vessel vasculitis** involving intraparenchymal arterioles, capillaries, and venules.",
+      "say": "The Chapel Hill Consensus classifies vasculitis by predominant vessel size. Categories divide into large vessel, medium vessel, and small vessel diseases.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/vasculitis-fig1.webp",
+        "alt": "Chapel Hill Consensus Conference vessel caliber classification of systemic vasculitis",
+        "caption": "The Chapel Hill Consensus classifies vasculitides by vessel caliber and pathophysiology. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Small vessel vasculitis is subdivided into pauci-immune **ANCA-associated vasculitides** and **immune complex vasculitides**. ANCA-associated vasculitides comprise microscopic polyangiitis, granulomatosis with polyangiitis, and eosinophilic GPA. Immune complex vasculitides feature antibody-antigen deposition including anti-GBM disease, cryoglobulinemic vasculitis, IgA vasculitis, and hypocomplementemic urticarial vasculitis.",
+      "say": "Small vessel vasculitis divides into ANCA-associated forms and immune complex diseases. Immune complex forms include anti-GBM disease, cryoglobulinemia, and IgA vasculitis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ANCA-associated vasculitis",
+          "points": [
+            "Pauci-immune: minimal vessel wall antibody",
+            "MPO-ANCA or PR3-ANCA serology",
+            "MPA, GPA, and eosinophilic GPA"
+          ]
+        },
+        "right": {
+          "title": "Immune complex vasculitis",
+          "points": [
+            "Abundant immunoglobulins and complement in vessel walls",
+            "Associated with hypocomplementemia",
+            "Anti-GBM, cryoglobulinemia, and IgA vasculitis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Variable vessel vasculitis** designates systemic disorders capable of inflaming arteries, veins, and capillaries of any caliber. The prototypical disorders are **Behcet disease**, marked by recurrent orogenital aphthae, pathergy, and uveitis, and **Cogan syndrome**, characterized by non-syphilitic interstitial keratitis, vestibuloauditory dysfunction, and aortitis.",
+      "say": "Variable vessel vasculitis affects blood vessels of any caliber and type. Classic prototypes include Behcet disease and Cogan syndrome.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/beh-et-syndrome-fig1.webp",
+        "alt": "Multisystem variable caliber vascular inflammation in Behcet disease",
+        "caption": "Variable-vessel vasculitis damages arteries, veins, and microvasculature. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Single-organ vasculitis** or SOV is necrotizing vasculitis confined to arteries or veins within an isolated organ without systemic involvement. Prototypic examples include **primary angiitis of the central nervous system**, cutaneous leukocytoclastic angiitis, isolated testicular vasculitis, and isolated coronary arteritis, requiring rigorous systemic exclusion.",
+      "say": "Single-organ vasculitis affects vessels within one organ without systemic disease. Examples include primary CNS angiitis and isolated cutaneous vasculitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Localized vasculitic injury demonstrated on tissue biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Exclusion of systemic constitutional and multiorgan signs"
+          },
+          {
+            "id": "c",
+            "label": "Classification as single-organ vasculitis (PACNS, cutaneous angiitis)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary vasculitis arises from defined etiologies or underlying systemic conditions. Recognized categories include vasculitis associated with systemic diseases such as **lupus vasculitis**, **rheumatoid vasculitis**, and sarcoidosis. In contrast, vasculitis with probable etiology encompasses **hepatitis B-associated polyarteritis nodosa** and **hepatitis C-associated cryoglobulinemia**.",
+      "say": "Secondary vasculitides develop from underlying infections or autoimmune diseases. Examples include hepatitis B-related PAN and hepatitis C cryoglobulinemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vasculitis category",
+          "Underlying trigger or association",
+          "Primary therapeutic target"
+        ],
+        "rows": [
+          [
+            "Hepatitis B vasculitis",
+            "Immune complexes in medium arteries",
+            "Direct-acting antivirals and short-course steroids"
+          ],
+          [
+            "Hepatitis C cryoglobulinemia",
+            "Mixed IgM-IgG cryoglobulin deposition",
+            "Sofosbuvir-based antivirals and rituximab"
+          ],
+          [
+            "Rheumatoid vasculitis",
+            "Severe longstanding seropositive RA",
+            "Aggressive biologic immunosuppression"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **2022 ACR/EULAR classification criteria** provide validated scoring systems for five primary vasculitides: GPA, MPA, EGPA, Takayasu arteritis, and giant cell arteritis. These modern criteria incorporate surrogate imaging, ANCA antibody specificity by immunoassay, and detailed clinical features with weighted points and validated diagnostic thresholds.",
+      "say": "The 2022 ACR/EULAR criteria provide modern weighted scoring sets for primary vasculitides. They incorporate specific ANCA immunoassays and advanced vascular imaging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vasculitis syndrome",
+          "Key positive scoring items",
+          "Classification threshold"
+        ],
+        "rows": [
+          [
+            "GPA criteria",
+            "C-ANCA/PR3-ANCA (+5), nasal crusting (+3), cavitary lung (+2)",
+            "Score >=5 points"
+          ],
+          [
+            "MPA criteria",
+            "P-ANCA/MPO-ANCA (+6), pauci-immune glomerulonephritis (+3)",
+            "Score >=5 points"
+          ],
+          [
+            "EGPA criteria",
+            "Asthma (+3), blood eosinophils >=1,000 (+5), nasal polyps (+3)",
+            "Score >=6 points"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Vasculitis disease activity is prospectively measured using the **Birmingham Vasculitis Activity Score** or BVAS version 3 across 64 defined items in nine organ systems. BVAS captures active, new, or worsening reversible inflammation, rigorously distinguishing acute disease activity from irreversible permanent damage measured by the **Vasculitis Damage Index** or VDI.",
+      "say": "The Birmingham Vasculitis Activity Score quantifies reversible active disease across nine organ domains, while the Vasculitis Damage Index tracks permanent damage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BVAS (Activity score)",
+          "points": [
+            "Evaluates 64 active inflammatory items",
+            "Reflects reversible inflammatory changes",
+            "Scores only new or worsening manifestations"
+          ]
+        },
+        "right": {
+          "title": "VDI (Damage index)",
+          "points": [
+            "Captures fixed scarring present >=3 months",
+            "Includes therapy-related permanent complications",
+            "Can only remain stable or increase over time"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The revised **Five-Factor Score** predicts 5-year mortality in necrotizing systemic vasculitides including PAN, MPA, and EGPA. The 5 adverse prognostic factors comprise **age over 65 years**, cardiac involvement, gastrointestinal ischemia, renal insufficiency with serum creatinine **150 micromol/L or higher**, and the absence of ENT symptoms.",
+      "say": "The Five-Factor Score predicts mortality in necrotizing vasculitis. Scoring factors include age over 65, cardiac, gastrointestinal, and renal involvement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Five-Factor Score domain",
+          "Criteria threshold",
+          "Prognostic impact"
+        ],
+        "rows": [
+          [
+            "Age",
+            "Patient age >65 years",
+            "Scores 1 point; elevated 5-year mortality"
+          ],
+          [
+            "Cardiovascular",
+            "Cardiomyopathy, heart failure, pericarditis",
+            "Scores 1 point; indicates severe visceral vasculitis"
+          ],
+          [
+            "Gastrointestinal",
+            "Severe bowel ischemia, perforation, bleeding",
+            "Scores 1 point; high risk of acute surgical fatality"
+          ],
+          [
+            "Renal function",
+            "Peak serum creatinine >=150 micromol/L",
+            "Scores 1 point; indicates advanced nephron loss"
+          ],
+          [
+            "ENT involvement",
+            "Absence of ENT symptoms",
+            "Scores 1 point; absence portends worse prognosis"
+          ]
+        ]
+      }
+    }
+  ]
+}

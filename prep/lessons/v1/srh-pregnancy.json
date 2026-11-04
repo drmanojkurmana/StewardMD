@@ -1,147 +1,217 @@
 {
- "v": 1,
- "module": "srh-pregnancy",
- "subject": "ss-rheumatology-immunology",
- "title": "Pregnancy and reproductive health in rheumatic disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Preconception planning is the first priority. Pregnancy should be deferred until the disease has been **quiescent for at least 6 months**, so that flares during pregnancy are less likely. Women should be counselled early, ideally before conception, so that medicines can be reviewed. Disease activity, renal function and antiphospholipid status should all be checked before trying to conceive.",
-   "say": "Preconception planning is the first priority. Pregnancy should be deferred until the disease has been quiescent for at least 6 months, so that flares during pregnancy are less likely. Women should be counselled early, ideally before conception, so that medicines can be reviewed. Disease activity, renal function and antiphospholipid status should all be checked before trying to conceive.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug",
-     "Pre-conception advice",
-     "Reason"
-    ],
-    "rows": [
-     [
-      "Hydroxychloroquine",
-      "Continue",
-      "Lowers flare risk"
-     ],
-     [
-      "Mycophenolate",
-      "Stop 6 weeks before",
-      "Teratogenic"
-     ],
-     [
-      "Methotrexate",
-      "Stop before conception",
-      "Teratogenic"
-     ],
-     [
-      "Cyclophosphamide",
-      "Avoid in pregnancy",
-      "Gonadal and fetal toxicity"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Hydroxychloroquine** should be continued through pregnancy, because stopping it raises the risk of flares. **Mycophenolate**, **methotrexate** and **cyclophosphamide** are contraindicated in pregnancy. Mycophenolate must be stopped at least 6 weeks before conception, and a compatible agent such as azathioprine or a calcineurin inhibitor may be substituted.",
-   "say": "Hydroxychloroquine should be continued through pregnancy, because stopping it raises the risk of flares. Mycophenolate, methotrexate and cyclophosphamide are contraindicated in pregnancy. Mycophenolate must be stopped at least 6 weeks before conception, and a compatible agent such as azathioprine or a calcineurin inhibitor may be substituted.",
-   "vis": null
-  },
-  {
-   "tx": "Women with **anti-Ro/SSA** antibodies carry a risk of **congenital heart block** and **neonatal lupus**. Fetal heart rate monitoring is usually begun between 16 and 26 weeks of gestation. Hydroxychloroquine reduces the risk of heart block in these pregnancies. Neonatal lupus can cause rash, cytopenias and transaminitis in the newborn, and these usually resolve.",
-   "say": "Women with anti Ro SSA antibodies carry a risk of congenital heart block and neonatal lupus. Fetal heart rate monitoring is usually begun between 16 and 26 weeks of gestation. Hydroxychloroquine reduces the risk of heart block in these pregnancies. Neonatal lupus can cause rash, cytopenias and transaminitis in the newborn, and these usually resolve.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Anti-Ro positive"
-     },
-     {
-      "id": "b",
-      "label": "Hydroxychloroquine"
-     },
-     {
-      "id": "c",
-      "label": "Fetal monitoring 16 to 26 weeks"
-     },
-     {
-      "id": "d",
-      "label": "Heart block risk reduced"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Pre-eclampsia can mimic a **lupus flare**, so the two must be told apart. Pre-eclampsia tends to present with new hypertension and rising proteinuria with a low platelet count, while a flare usually shows active serology and urinary sediment. **Low-dose aspirin**, 75 to 150 mg daily, is started from 12 weeks of gestation to reduce pre-eclampsia risk in women with SLE or antiphospholipid syndrome.",
-   "say": "Pre-eclampsia can mimic a lupus flare, so the two must be told apart. Pre-eclampsia tends to present with new hypertension and rising proteinuria with a low platelet count, while a flare usually shows active serology and urinary sediment. Low-dose aspirin, 75 to 150 mg daily, is started from 12 weeks of gestation to reduce pre-eclampsia risk in women with SLE or antiphospholipid syndrome.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Pre-eclampsia",
-     "points": [
-      "New hypertension",
-      "Rising proteinuria",
-      "Low platelets",
-      "Often after 20 weeks"
-     ]
+  "v": 1,
+  "module": "srh-pregnancy",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Pregnancy and reproductive health in rheumatic disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Preconception counseling in systemic lupus erythematosus mandates maintaining quiescent disease or low disease activity for at least **6 months** prior to conception. Planning pregnancy during stable remission significantly minimizes maternal lupus flares, renal relapses, preeclampsia, fetal growth restriction, and preterm birth.",
+      "say": "Preconception counseling requires stable disease remission for at least 6 months before conception. This significantly reduces maternal flares, preeclampsia, and preterm delivery.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-lupus-erythematosus-fig1.webp",
+        "alt": "Maternal systemic lupus erythematosus counseling and pregnancy timing",
+        "caption": "Maintaining stable disease remission for 6 months prior to pregnancy optimizes maternal-fetal outcomes. Credit: StewardMD.",
+        "ar": 1.33
+      }
     },
-    "right": {
-     "title": "Lupus flare",
-     "points": [
-      "Active serology",
-      "Active urinary sediment",
-      "Complement consumption",
-      "Can occur at any stage"
-     ]
+    {
+      "tx": "**Hydroxychloroquine** is safe and strongly recommended throughout pregnancy and lactation in all women with SLE. Continuation of hydroxychloroquine lowers maternal flare rates, reduces preeclampsia risk, improves fetal outcomes, and **halves the recurrence risk of congenital heart block** in mothers carrying anti-Ro/SSA antibodies.",
+      "say": "Hydroxychloroquine is safe and continued throughout pregnancy and breastfeeding. It prevents disease flares, lowers preeclampsia risk, and halves congenital heart block recurrence.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antimalarial benefit",
+          "Underlying mechanism",
+          "Clinical outcome in pregnancy"
+        ],
+        "rows": [
+          [
+            "Maternal flare prevention",
+            "Sustains endosomal TLR inhibition",
+            "Reduces risk of gestational lupus flares by >50%"
+          ],
+          [
+            "Preeclampsia reduction",
+            "Improves endothelial function and trophoblast invasion",
+            "Significantly decreases early-onset preeclampsia"
+          ],
+          [
+            "Fetal cardioprotection",
+            "Inhibits antibody-mediated AV nodal fibrosis",
+            "Halves congenital heart block recurrence in anti-Ro+ mothers"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Transplacental crossing of maternal **anti-Ro/SSA** and **anti-La/SSB** antibodies causes neonatal lupus erythematosus. The most severe permanent complication is **congenital complete third-degree heart block**, which develops irreversibly between **16 and 26 weeks of gestation** due to antibody-mediated autoimmune myocarditis and atrioventricular nodal fibrosis.",
+      "say": "Transplacental maternal anti-Ro antibodies cause neonatal lupus. The most severe complication is congenital complete heart block, which develops between 16 and 26 weeks of gestation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Maternal anti-Ro/SSA antibodies cross placenta at 16 weeks gestation"
+          },
+          {
+            "id": "b",
+            "label": "Autoantibody binding to fetal cardiomyocytes and calcium channels"
+          },
+          {
+            "id": "c",
+            "label": "Irreversible AV nodal calcification and complete congenital heart block"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Serial fetal echocardiography is recommended **every 1 to 2 weeks from 16 to 26 weeks gestation** in anti-Ro/SSA-positive pregnancies to detect emerging PR interval prolongation. Emerging first- or second-degree heart block warrants immediate maternal treatment with fluorinated oral **dexamethasone at 4 mg daily**, which crosses the placenta unmetabolized to arrest inflammatory nodal injury.",
+      "say": "Serial fetal echocardiography every 1 to 2 weeks from 16 to 26 weeks detects early AV block. Incomplete heart block is treated with transplacental dexamethasone 4 mg daily.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fluorinated steroids (Dexamethasone)",
+          "points": [
+            "Crosses placental barrier unmetabolized",
+            "Dose 4 mg daily for emerging heart block",
+            "Inhibits active fetal carditis and second-degree block"
+          ]
+        },
+        "right": {
+          "title": "Non-fluorinated steroids (Prednisolone)",
+          "points": [
+            "90% metabolized by placental 11-beta-HSD2",
+            "Minimal fetal exposure; ideal for maternal flares",
+            "Ineffective for treating fetal cardiac nodal inflammation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In obstetric antiphospholipid syndrome, pregnancy with recurrent early miscarriages is treated with **low-dose aspirin combined with prophylactic low-molecular-weight heparin**. In women with a history of thrombotic APS, **therapeutic doses of low-molecular-weight heparin** are mandatory throughout pregnancy, converting back to warfarin postpartum.",
+      "say": "Obstetric antiphospholipid syndrome requires low-dose aspirin and prophylactic low-molecular-weight heparin. Women with prior thrombosis mandate therapeutic-dose heparin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Obstetric APS history",
+          "Antenatal regimen",
+          "Postpartum management"
+        ],
+        "rows": [
+          [
+            "Recurrent early miscarriages",
+            "Low-dose aspirin (75-100 mg) + prophylactic LMWH",
+            "Prophylactic LMWH for 6 weeks postpartum"
+          ],
+          [
+            "Prior arterial or venous thrombosis",
+            "Low-dose aspirin + therapeutic-dose LMWH",
+            "Resume long-term oral anticoagulation with warfarin"
+          ],
+          [
+            "Isolated aPL without events",
+            "Low-dose aspirin monotherapy",
+            "Postpartum thrombosis risk assessment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immunosuppressive medications safe throughout pregnancy comprise **hydroxychloroquine, azathioprine at 2 mg/kg/day or less, sulfasalazine, cyclosporine, and tacrolimus**. Non-fluorinated glucocorticoids like **prednisone** are largely degraded by placental 11-beta-hydroxysteroid dehydrogenase type 2 enzymes, effectively treating maternal disease flares with minimal direct fetal glucocorticoid exposure.",
+      "say": "Pregnancy-compatible immunosuppressants include hydroxychloroquine, azathioprine, sulfasalazine, and calcineurin inhibitors. Prednisone is largely degraded by placental enzymes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug safety tier",
+          "Specific medications",
+          "Gestational use guidelines"
+        ],
+        "rows": [
+          [
+            "Compatible in pregnancy",
+            "Hydroxychloroquine, azathioprine, sulfasalazine, tacrolimus",
+            "Continue throughout pregnancy and breastfeeding"
+          ],
+          [
+            "Low-dose corticosteroids",
+            "Prednisone / prednisolone <=20 mg/day",
+            "Safe for acute maternal inflammatory flares"
+          ],
+          [
+            "Strictly teratogenic",
+            "Methotrexate, mycophenolate, leflunomide, cyclophosphamide",
+            "Must be discontinued prior to planned conception"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Teratogenic antirheumatic medications must be discontinued well prior to conception. **Methotrexate** must be stopped at least **1 to 3 months** prior to conception. **Mycophenolate mofetil** must be stopped at least **6 weeks** prior, while **leflunomide** mandates an accelerated **cholestyramine washout of 8 g three times daily for 11 days**.",
+      "say": "Teratogenic drugs must be stopped prior to conception: methotrexate 1 to 3 months before, mycophenolate 6 weeks before, and leflunomide requires cholestyramine washout.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Methotrexate stopped 1 to 3 months preconception with high-dose folate"
+          },
+          {
+            "id": "b",
+            "label": "Mycophenolate mofetil stopped at least 6 weeks before conception"
+          },
+          {
+            "id": "c",
+            "label": "Leflunomide cholestyramine washout: 8 g TID for 11 days until drug level <0.02 mg/L"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Certolizumab pegol** is a PEGylated Fab fragment of an anti-TNF antibody lacking an Fc portion. Because placental transfer requires Fc receptor binding, certolizumab exhibits **minimal to absent transplacental transfer** throughout all trimesters, making it the preferred anti-TNF biologic for women desiring pregnancy or breastfeeding.",
+      "say": "Certolizumab pegol lacks an Fc region and shows zero to minimal placental transfer. It is the preferred anti-TNF biologic throughout pregnancy and lactation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Certolizumab pegol",
+          "points": [
+            "PEGylated Fab fragment without Fc portion",
+            "Zero active transport across placental FcRn",
+            "Safe to continue through all three trimesters"
+          ]
+        },
+        "right": {
+          "title": "Full-length IgG1 biologics (Infliximab/Adalimumab)",
+          "points": [
+            "Active transplacental FcRn transport after week 20",
+            "High fetal serum levels if given in late pregnancy",
+            "Discontinued at week 20-30 to avoid infant immunosuppression"
+          ]
+        }
+      }
     }
-   }
-  },
-  {
-   "tx": "**TNF inhibitors** differ in how they reach the foetus. Agents built as **pegylated Fab fragments** lack a significant Fc region, so they cross the placenta poorly and may be continued in pregnancy when disease control needs it. Most other **monoclonal antibodies** carry an Fc portion, which allows active transport across the placenta in the third trimester, so stopping them around the second trimester is commonly considered. Compatibility with breastfeeding should still be checked case by case.",
-   "say": "TNF inhibitors differ in how they reach the foetus. Pegylated Fab fragments lack a significant Fc region, so they cross the placenta poorly and can sometimes be continued in pregnancy if the disease needs it. Most other monoclonal antibodies have an Fc portion that allows active transport across the placenta in the third trimester, so stopping them around the second trimester is often considered. Breastfeeding compatibility should be checked for each agent.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srh-pregnancy-fig1.webp",
-    "alt": "Diagram showing pegylated Fab fragment TNF inhibitors poorly crossing the placenta, while Fc-containing monoclonal antibodies actively cross to the fetus, especially in the third trimester.",
-    "caption": "TNF inhibitor placental transfer depends on molecular structure",
-    "ar": 1.8349
-   }
-  }
- ],
- "quiz": [
-  "q_252c5f0a73ea",
-  "q_2c06f1a49ff2",
-  "q_add1135e272b"
- ],
- "src": [],
- "refs": [
-  "EULAR recommendations for women's health and the management of family planning, assessment of pregnancy risk and treatment in rheumatic diseases"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 57
- }
+  ]
 }

@@ -1,156 +1,214 @@
 {
- "v": 1,
- "module": "srh-ra-pathogenesis",
- "subject": "ss-rheumatology-immunology",
- "title": "Rheumatoid arthritis: pathogenesis and diagnosis",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Rheumatoid arthritis is a chronic **inflammatory polyarthritis** driven by an autoimmune response. Genetic risk is largely carried by the **HLA-DRB1 shared epitope**, and environmental triggers such as cigarette smoking act on this background. Smoking promotes lung and joint exposure to citrullinated proteins, which the immune system begins to recognise as foreign.",
-   "say": "Rheumatoid arthritis is a chronic inflammatory polyarthritis driven by an autoimmune response. Genetic risk is largely carried by the HLA DRB1 shared epitope, and environmental triggers such as cigarette smoking act on this background. Smoking promotes lung and joint exposure to citrullinated proteins, which the immune system begins to recognise as foreign.",
-   "vis": null
-  },
-  {
-   "tx": "Arginine residues in proteins are converted to **citrulline** by the enzyme **peptidyl arginine deiminase**, commonly called PAD. Antibodies against citrullinated proteins, known as **anti-CCP or ACPA**, arise from this process. These antibodies can appear up to about 10 years before clinical symptoms, and rheumatoid factor may also be detectable early.",
-   "say": "Arginine residues in proteins are converted to citrulline by the enzyme peptidyl arginine deiminase, commonly called PAD. Antibodies against citrullinated proteins, known as anti CCP or ACPA, arise from this process. These antibodies can appear up to about 10 years before clinical symptoms, and rheumatoid factor may also be detectable early.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Marker",
-     "Key feature",
-     "Role in diagnosis"
-    ],
-    "rows": [
-     [
-      "Anti-CCP",
-      "Targets citrullinated peptides",
-      "High specificity, around 95%"
-     ],
-     [
-      "Rheumatoid factor",
-      "Anti-IgG Fc antibody",
-      "Useful but less specific"
-     ],
-     [
-      "HLA-DRB1 allele",
-      "Genetic susceptibility",
-      "Not diagnostic on its own"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In the **synovium**, fibroblast-like synoviocytes become invasive and form a **pannus** that spreads over cartilage and bone. RANKL released by synoviocytes and inflammatory cells activates osteoclasts, causing **bone erosions**. TNF-alpha further suppresses bone formation and promotes osteoclast development, so erosion becomes the structural hallmark of the disease.",
-   "say": "In the synovium, fibroblast like synoviocytes become invasive and form a pannus that spreads over cartilage and bone. RANKL released by synoviocytes and inflammatory cells activates osteoclasts, causing bone erosions. TNF alpha further suppresses bone formation and promotes osteoclast development, so erosion becomes the structural hallmark of the disease.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Citrullinated antigen"
-     },
-     {
-      "id": "b",
-      "label": "Synovial inflammation"
-     },
-     {
-      "id": "c",
-      "label": "Pannus formation"
-     },
-     {
-      "id": "d",
-      "label": "RANKL and TNF"
-     },
-     {
-      "id": "e",
-      "label": "Bone erosion"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The 2010 ACR-EULAR classification uses a **score of 6 or more** for definite RA. Points are given for joint number and distribution, serology (**anti-CCP or RF**), acute phase reactants such as CRP or ESR, and symptom duration of six weeks or more. Involvement of small joints of hands and feet, especially MCP and PIP joints, scores higher than large joint involvement.",
-   "say": "The 2010 ACR EULAR classification uses a score of 6 or more for definite rheumatoid arthritis. Points are given for joint number and distribution, serology including anti CCP or rheumatoid factor, acute phase reactants such as CRP or ESR, and symptom duration of six weeks or more. Involvement of small joints of the hands and feet, especially the MCP and PIP joints, scores higher than large joint involvement.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srh-ra-pathogenesis-fig1.webp",
-    "alt": "Table summarizing the 2010 ACR-EULAR classification criteria for rheumatoid arthritis, including joint involvement, serology, acute phase reactants, and symptom duration.",
-    "caption": "2010 ACR-EULAR RA classification criteria",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Clinical features help separate RA from mimics. RA causes **morning stiffness lasting more than one hour**, symmetric small joint swelling of MCPs, PIPs and wrists, and **ulnar deviation**, **swan neck** and **boutonniere deformities**. Distal interphalangeal joints are usually spared, which points away from RA and towards osteoarthritis.",
-   "say": "Clinical features help separate rheumatoid arthritis from its mimics. Rheumatoid arthritis causes morning stiffness lasting more than one hour, symmetric small joint swelling of the MCPs, PIPs and wrists, and ulnar deviation, swan neck and boutonniere deformities. Distal interphalangeal joints are usually spared, which points away from rheumatoid arthritis and towards osteoarthritis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Suggests RA",
-     "points": [
-      "Morning stiffness over one hour",
-      "Symmetric MCP and PIP swelling",
-      "Wrist involvement",
-      "Ulnar deviation and deformities"
-     ]
+  "v": 1,
+  "module": "srh-ra-pathogenesis",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Rheumatoid arthritis pathogenesis and diagnosis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Genetic susceptibility to rheumatoid arthritis maps predominantly to the **shared epitope**, a conserved amino acid sequence in the third hypervariable region of **HLA-DRB1** alleles including DRB1*0401 and DRB1*0404. Cigarette smoking and mucosal inflammation in genetically susceptible individuals trigger post-translational protein citrullination. This interaction produces high-affinity **anti-citrullinated protein antibodies** or ACPA years before clinical joint inflammation emerges.",
+      "say": "Rheumatoid arthritis susceptibility maps to the HLA-DRB1 shared epitope. Cigarette smoking in susceptible individuals promotes protein citrullination and triggers high-affinity anti-CCP antibodies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Mechanism",
+          "Clinical implication"
+        ],
+        "rows": [
+          [
+            "HLA-DRB1 allele",
+            "Shared epitope pentapeptide",
+            "Strong risk for ACPA-positive RA"
+          ],
+          [
+            "Cigarette smoking",
+            "Induces pulmonary citrullination",
+            "Synergistic gene-environment trigger"
+          ],
+          [
+            "ACPA emergence",
+            "High-affinity autoantibodies",
+            "Precedes arthritis by up to 10 years"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Suggests osteoarthritis",
-     "points": [
-      "Short morning stiffness",
-      "DIP joint involvement",
-      "Bony enlargement",
-      "Asymmetric pattern"
-     ]
+    {
+      "tx": "Enzymatic conversion of arginine residues to citrulline is mediated by calcium-dependent **peptidylarginine deiminase** enzymes **PAD2** and **PAD4**. Citrullination alters protein electrical charge, allowing neoepitopes to fit into HLA-DRB1 antigen-binding grooves. Porphyromonas gingivalis expresses bacterial **PPAD**, providing a mechanistic link between periodontal disease, neoepitope generation, and systemic autoimmunity.",
+      "say": "Peptidylarginine deiminase enzymes convert neutral arginine into citrulline residues. Bacterial PPAD from periodontal infection also generates citrullinated neoepitopes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "PAD2, PAD4, or bacterial PPAD activation"
+          },
+          {
+            "id": "b",
+            "label": "Arginine residues converted to citrulline"
+          },
+          {
+            "id": "c",
+            "label": "ACPA autoantibody formation and binding"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **2010 ACR/EULAR classification criteria** classify definite rheumatoid arthritis using a scoring threshold of **6 or more points** out of 10. Criteria assess joint involvement with up to **5 points**, serology including **rheumatoid factor** and ACPA with up to **3 points**, symptom duration of **6 weeks or more** earning **1 point**, and abnormal acute-phase reactants contributing **1 point**.",
+      "say": "The 2010 ACR and EULAR criteria classify definite rheumatoid arthritis with a score of 6 or more points. Points evaluate joint distribution, serology, symptom duration, and acute phase reactants.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/srh-ra-pathogenesis-fig1.webp",
+        "alt": "2010 ACR-EULAR classification criteria for rheumatoid arthritis",
+        "caption": "The 2010 ACR-EULAR criteria classify rheumatoid arthritis using a 10-point scoring algorithm. Credit: StewardMD.",
+        "ar": 1.83
+      }
+    },
+    {
+      "tx": "The rheumatoid **synovial pannus** is an invasive, hyperplastic fibrovascular tissue that attaches directly to articular cartilage and subchondral bone. Activated **fibroblast-like synoviocytes** exhibit tumor-like autonomous behavior, secreting destructive matrix metalloproteinases **MMP-1**, **MMP-3**, and **MMP-13**, alongside cathepsins that degrade type II collagen and proteoglycan aggrecan matrices.",
+      "say": "The invasive rheumatoid synovial pannus destroys cartilage and bone. Fibroblast-like synoviocytes secrete matrix metalloproteinases that degrade type II collagen and aggrecan.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/arthritis-soft-tissue-gist-sarcoma-fig1.webp",
+        "alt": "Rheumatoid synovial pannus and articular bone destruction",
+        "caption": "Fibroblast-like synoviocytes and inflammatory pannus drive cartilage and bone erosion. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Marginal bone erosion at the cartilage-pannus junction is driven by **receptor activator of nuclear factor-kappa B ligand** or **RANKL**. Synovial T cells and activated synoviocytes express high levels of RANKL, binding **RANK** on osteoclast precursors. Macrophage colony-stimulating factor and TNF-alpha synergistically drive osteoclast differentiation, producing irreversible subchondral **bone erosions**.",
+      "say": "Receptor activator of NF-kappa B ligand stimulates osteoclast differentiation at the cartilage junction. Synovial RANKL binding to RANK produces characteristic marginal bone erosions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Synovial T cells express RANKL"
+          },
+          {
+            "id": "b",
+            "label": "RANK activation on osteoclast precursors"
+          },
+          {
+            "id": "c",
+            "label": "Osteoclast differentiation and bone erosion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Early rheumatoid arthritis presents with symmetrical inflammatory polyarthritis predominantly involving metacarpophalangeal, proximal interphalangeal, and metatarsophalangeal joints. Inflammatory **morning stiffness** persists for **30 to 60 minutes** or longer. A critical clinical hallmark is sparing of the **distal interphalangeal joints** and thoracolumbar spine, distinguishing rheumatoid arthritis from primary nodal osteoarthritis.",
+      "say": "Early rheumatoid arthritis causes symmetric MCP and PIP swelling with morning stiffness exceeding 30 to 60 minutes. Sparing of the DIP joints differentiates RA from osteoarthritis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rheumatoid arthritis",
+          "points": [
+            "Symmetrical MCP, PIP, and wrist synovitis",
+            "Morning stiffness lasting over 30 to 60 minutes",
+            "Distal interphalangeal joints spared",
+            "Elevated ESR, CRP, RF, and ACPA"
+          ]
+        },
+        "right": {
+          "title": "Osteoarthritis",
+          "points": [
+            "Heberden DIP and Bouchard PIP nodes",
+            "Transient stiffness lasting under 30 minutes",
+            "First carpometacarpal involvement",
+            "Normal inflammatory markers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Untreated persistent synovitis produces classic deformities. Tendon stretching and volar subluxation cause **ulnar deviation** at metacarpophalangeal joints. PIP hyperextension with DIP flexion creates the **swan-neck deformity**. PIP flexion with DIP hyperextension produces the **boutonniere deformity**. Radial subluxation of the first MCP with hyperextension of the interphalangeal joint forms the **hitchhiker thumb**.",
+      "say": "Chronic untreated rheumatoid synovitis causes ulnar deviation at the knuckles. Tendon damage produces characteristic swan-neck, boutonniere, and hitchhiker thumb deformities.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Deformity",
+          "Joint mechanics",
+          "Anatomical defect"
+        ],
+        "rows": [
+          [
+            "Swan-neck",
+            "PIP hyperextension, DIP flexion",
+            "Volar plate laxity, lateral band slip"
+          ],
+          [
+            "Boutonniere",
+            "PIP flexion, DIP hyperextension",
+            "Central slip rupture of extensor tendon"
+          ],
+          [
+            "Ulnar drift",
+            "Volar subluxation of MCPs",
+            "Collateral ligament attenuation"
+          ],
+          [
+            "Z-deformity",
+            "MCP flexion, IP hyperextension",
+            "Extensor pollicis brevis attenuation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emerging post-translational autoantibodies provide prognostic refinement. **Anti-carbamylated protein antibodies** or anti-CarP and anti-acetylated protein antibodies identify patients with severe erosive progression. Notably, anti-CarP antibodies occur in **16 percent to 30 percent** of seronegative rheumatoid arthritis patients lacking both rheumatoid factor and ACPA, predicting worse radiographic joint destruction.",
+      "say": "Anti-carbamylated protein antibodies identify patients with aggressive erosive disease. Anti-CarP antibodies occur in seronegative individuals and predict severe radiographic progression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Protein carbamylation via cyanate"
+          },
+          {
+            "id": "b",
+            "label": "Anti-CarP autoantibody production"
+          },
+          {
+            "id": "c",
+            "label": "Accelerated radiographic joint erosion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Synovial fluid in RA is **inflammatory**, typically with 5,000 to 50,000 WBC per microlitre and neutrophil predominance. Septic arthritis must be excluded, and **Staphylococcus aureus** is the commonest organism in RA patients. Early referral within about six weeks of symptom onset is advised, and **methotrexate** with folic acid is first-line csDMARD treatment.",
-   "say": "Synovial fluid in rheumatoid arthritis is inflammatory, typically with 5,000 to 50,000 white cells per microlitre and neutrophil predominance. Septic arthritis must be excluded, and Staphylococcus aureus is the commonest organism in rheumatoid arthritis patients. Early referral within about six weeks of symptom onset is advised, and methotrexate with folic acid is first line csDMARD treatment.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_e55979d6ca0d",
-  "q_002a7252fcab",
-  "q_1e4960a7f59c"
- ],
- "src": [],
- "refs": [
-  "Aletaha D et al. 2010 Rheumatoid arthritis classification criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative (Arthritis and Rheumatism)",
-  "NICE guideline NG100 Rheumatoid arthritis in adults: management"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 56
- }
+  ]
 }

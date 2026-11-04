@@ -1,0 +1,229 @@
+{
+  "v": 1,
+  "module": "srh-pan",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Polyarteritis nodosa",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Polyarteritis nodosa** or PAN is a systemic necrotizing vasculitis that selectively affects medium-sized and small muscular arteries. A defining clinical hallmark is that PAN characteristically **spares the pulmonary arterial circulation** and microvasculature such as postcapillary venules and glomeruli, demonstrating **no association with ANCA** autoantibodies.",
+      "say": "Polyarteritis nodosa is a necrotizing arteritis of medium and small muscular arteries. It characteristically spares the pulmonary vasculature and has no association with ANCA.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/polyarteritis-nodosa-fig1.webp",
+        "alt": "Polyarteritis nodosa angiographic and histological characteristics",
+        "caption": "PAN targets medium-sized muscular arteries while sparing pulmonary circulation and glomeruli. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **2022 ACR/EULAR classification criteria** for polyarteritis nodosa require biopsy confirmation of necrotizing arteritis or angiographic aneurysms or occlusions. Patients must accrue **5 or more points** across weighted domains including mononeuritis multiplex, motor neuropathy, testicular pain, livedo reticularis, renal insufficiency, and unexplained abdominal angina.",
+      "say": "The 2022 ACR and EULAR criteria require at least 5 points for classifying polyarteritis nodosa. Key criteria include mononeuritis multiplex, testicular pain, and livedo reticularis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classification domain",
+          "Clinical or diagnostic finding",
+          "Weighted points"
+        ],
+        "rows": [
+          [
+            "Neurological",
+            "Mononeuritis multiplex or motor neuropathy",
+            "3 points"
+          ],
+          [
+            "Histopathology",
+            "Biopsy of necrotizing arteritis in medium artery",
+            "3 points"
+          ],
+          [
+            "Angiography",
+            "Visceral microaneurysms or stenoses",
+            "2 points"
+          ],
+          [
+            "Urological",
+            "Testicular pain or tenderness",
+            "2 points"
+          ],
+          [
+            "Cutaneous",
+            "Livedo reticularis or necrotic ulcers",
+            "1 point"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary polyarteritis nodosa is historically associated with active **Hepatitis B virus** infection in up to 30 percent of cases worldwide. Circulating **HBsAg-anti-HBs immune complexes** deposit in arterial branching bifurcations, typically presenting acutely within the first **6 months** following acute HBV acquisition.",
+      "say": "Secondary polyarteritis nodosa links to acute Hepatitis B infection. Circulating hepatitis B immune complexes deposit in arterial walls within 6 months of acute infection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute Hepatitis B viral infection with high viral load"
+          },
+          {
+            "id": "b",
+            "label": "Circulating HBsAg-anti-HBs immune complex formation"
+          },
+          {
+            "id": "c",
+            "label": "Vessel wall deposition causing secondary necrotizing arteritis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renal involvement in PAN is driven by necrotizing arteritis of the main, lobar, and arcuate renal arteries, causing downstream renal cortical infarction and severe renin-mediated **renovascular hypertension**. True **glomerulonephritis is absent** in PAN because glomerular capillaries are small vessels completely spared by the disease.",
+      "say": "Renal disease in PAN stems from renal arteritis causing severe renovascular hypertension. Glomerulonephritis is absent because glomerular capillaries are spared.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Renal findings in PAN",
+          "points": [
+            "Medium-sized renal artery branch vasculitis",
+            "Severe renin-dependent renovascular hypertension",
+            "Multiple wedge-shaped renal cortical infarcts"
+          ]
+        },
+        "right": {
+          "title": "Glomerular preservation in PAN",
+          "points": [
+            "Glomerular capillaries completely spared",
+            "Absent glomerulonephritis and red cell casts",
+            "Distinguishes PAN from ANCA-associated vasculitis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Visceral catheter angiography or CT angiography provides decisive diagnostic images, demonstrating characteristic **microaneurysms of 1 to 5 mm** and segmental stenoses at branching bifurcations of the renal, mesenteric, and hepatic arteries. This classic vascular distortion produces the diagnostic **beads-on-a-string** angiographic sign.",
+      "say": "Catheter angiography demonstrates classic microaneurysms measuring 1 to 5 millimeters. The resulting beads on a string appearance is diagnostic.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Transmural necrotizing inflammation weakens internal elastic lamina"
+          },
+          {
+            "id": "b",
+            "label": "Pulsatile stress causes focal aneurysmal outpouchings (1 to 5 mm)"
+          },
+          {
+            "id": "c",
+            "label": "Alternating saccular aneurysms and stenoses show beads-on-a-string pattern"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gastrointestinal involvement presents with postprandial **abdominal angina**, bowel ischemia, transmural infarction, and life-threatening visceral perforation. Mesenteric ischemia represents the leading cause of death in severe polyarteritis nodosa, constituting an automatic adverse score on the **Five-Factor Score** that mandates aggressive cyclophosphamide and high-dose corticosteroid therapy.",
+      "say": "Mesenteric arteritis presents with postprandial abdominal angina and bowel infarction. Gastrointestinal involvement carries high mortality on the Five-Factor Score.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "GI manifestation",
+          "Pathological mechanism",
+          "Clinical management"
+        ],
+        "rows": [
+          [
+            "Abdominal angina",
+            "Postprandial mesenteric hypoperfusion",
+            "Urgent systemic immunosuppression"
+          ],
+          [
+            "Bowel infarction",
+            "Transmural mesenteric arterial thrombosis",
+            "Emergency surgical laparotomy and resection"
+          ],
+          [
+            "Aneurysmal rupture",
+            "Ruptured hepatic or splenic microaneurysm",
+            "Emergency transcatheter arterial embolization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line induction therapy for severe idiopathic PAN with a **Five-Factor Score of 1 or more** combines high-dose systemic glucocorticoids with **intravenous cyclophosphamide**. Conversely, mild non-organ-threatening disease with a Five-Factor Score of zero can be managed initially with oral glucocorticoid monotherapy alone.",
+      "say": "Severe idiopathic polyarteritis nodosa requires high-dose corticosteroids combined with cyclophosphamide. Mild disease without poor prognostic factors responds to steroids alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Severe PAN (FFS >=1)",
+          "points": [
+            "Pulse methylprednisolone followed by high-dose oral steroids",
+            "Intravenous pulsed cyclophosphamide induction",
+            "Transition to azathioprine or methotrexate maintenance"
+          ]
+        },
+        "right": {
+          "title": "Mild PAN (FFS = 0)",
+          "points": [
+            "Oral prednisone 1 mg/kg/day monotherapy",
+            "Avoids routine initial cytotoxic chemotherapy",
+            "Escalate to cyclophosphamide if disease progresses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Management of **HBV-associated PAN** differs fundamentally from idiopathic disease. Treatment combines a short, time-limited course of corticosteroids and **plasma exchange** alongside immediate antiviral therapy with **entecavir or tenofovir**. Long-term cytotoxic immunosuppression must be strictly avoided as it promotes uncontrolled viral replication and fulminant hepatic failure.",
+      "say": "Hepatitis B-associated PAN requires antivirals entecavir or tenofovir with short-term plasma exchange. Long-term cytotoxic immunosuppressants are avoided to prevent hepatic necrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Immediate potent oral antiviral therapy (entecavir or tenofovir)"
+          },
+          {
+            "id": "b",
+            "label": "Short-course corticosteroids and plasma exchange to clear immune complexes"
+          },
+          {
+            "id": "c",
+            "label": "Strict avoidance of long-term cytotoxic cyclophosphamide"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

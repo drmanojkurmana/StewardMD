@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "srh-gout",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Gout and hyperuricemia",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Hyperuricemia** is defined biochemically as serum urate exceeding **6.8 mg/dL**, which marks the physiologic saturation limit of monosodium urate in plasma at 37 degrees Celsius. Elevated urate reflects renal underexcretion in **90 percent** of patients, driven by urate transporter **URAT1** and **GLUT9** variations, whereas urate overproduction accounts for only **10 percent** of presentations.",
+      "say": "Hyperuricemia occurs when serum urate exceeds 6.8 mg per dL. Renal underexcretion accounts for 90 percent of hyperuricemic cases via URAT1 transporter mechanisms.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gout-fig1.webp",
+        "alt": "Monosodium urate crystals under polarized light microscopy",
+        "caption": "Supersaturation causes precipitation of needle-shaped monosodium urate crystals. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Acute gout presents classically as **podagra**, an exquisite monoarthritis of the first metatarsophalangeal joint in over **50 percent** of initial attacks and **90 percent** over time. Inflammation begins abruptly, often overnight, peaking within **12 to 24 hours** with dramatic erythema, warmth, and marked tenderness mimicking bacterial cellulitis or septic arthritis.",
+      "say": "Acute gout presents classically as podagra affecting the first metatarsophalangeal joint. Pain peaks rapidly within 12 to 24 hours with intense swelling mimicking cellulitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/crystal-arthritis-fig2.webp",
+        "alt": "Podagra, tophi formation, and therapeutic pathways in gout",
+        "caption": "First MTP joint involvement and subcutaneous tophi in chronic gouty arthritis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The diagnostic gold standard is arthrocentesis identifying intracellular and extracellular **monosodium urate** crystals within synovial fluid. Under compensated polarized light microscopy, urate crystals appear needle-shaped with bright **negative birefringence**, showing yellow coloration when parallel to the compensator axis and blue when perpendicular.",
+      "say": "Arthrocentesis demonstrates needle-shaped monosodium urate crystals with negative birefringence. Crystals turn yellow when parallel to the compensator and blue when perpendicular.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Arthrocentesis of acutely inflamed joint"
+          },
+          {
+            "id": "b",
+            "label": "Compensated polarized light microscopy"
+          },
+          {
+            "id": "c",
+            "label": "Needle-shaped crystals with negative birefringence"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dual-energy computed tomography** or DECT identifies monosodium urate deposits with high diagnostic sensitivity and specificity, color-coding crystal aggregates green. On musculoskeletal ultrasound, articular cartilage surface crystal deposition produces the characteristic **double contour sign**, which persists even during asymptomatic intercritical periods.",
+      "say": "Dual-energy CT confirms monosodium urate crystal deposits by color-coding them green. Joint ultrasound reveals the pathognomonic double contour sign over articular cartilage.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Imaging modality",
+          "Pathognomonic sign",
+          "Diagnostic utility"
+        ],
+        "rows": [
+          [
+            "Dual-energy CT (DECT)",
+            "Color-coded green urate mapping",
+            "Detects subclinical tophaceous deposition"
+          ],
+          [
+            "Ultrasound",
+            "Double contour sign on cartilage",
+            "Identifies crystal coating on hyaline cartilage"
+          ],
+          [
+            "Conventional X-ray",
+            "Punched-out erosions with overhanging rims",
+            "Late chronic structural joint damage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line therapy for acute gout flares includes oral **colchicine**, nonsteroidal anti-inflammatory drugs, or systemic **glucocorticoids**. Colchicine is most effective when initiated within **24 hours** of symptom onset, dosed as **1.2 mg** followed by **0.6 mg 1 hour later**, avoiding older high-dose toxic regimens.",
+      "say": "First-line therapy for acute gout flares includes colchicine, nonsteroidal anti-inflammatory drugs, or oral corticosteroids, with low-dose colchicine using 1.2 milligrams followed by 0.6 milligrams one hour later.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute gout flare diagnosed within 24 hours"
+          },
+          {
+            "id": "b",
+            "label": "Low-dose colchicine: 1.2 mg then 0.6 mg"
+          },
+          {
+            "id": "c",
+            "label": "Rapid suppression of neutrophil inflammasome activation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Urate-lowering therapy or ULT is indicated in patients with **1 or more tophi**, radiographic damage, or **2 or more flares annually**. Target serum urate is **below 6.0 mg/dL**, or **below 5.0 mg/dL** in severe tophaceous gout to accelerate crystal dissolution. ULT should be initiated during an acute flare under anti-inflammatory coverage rather than delayed.",
+      "say": "Urate-lowering therapy is indicated for patients with frequent flares, radiographic erosions, or subcutaneous tophi, with target serum urate maintained below 6.0 milligrams per deciliter, or below 5.0 in severe tophaceous disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard target",
+          "points": [
+            "Serum urate below 6.0 mg/dL",
+            "Prevents new crystal nucleation",
+            "Indicated for uncomplicated recurrent gout",
+            "Reduces long-term flare frequency"
+          ]
+        },
+        "right": {
+          "title": "Tophaceous target",
+          "points": [
+            "Serum urate below 5.0 mg/dL",
+            "Accelerates tophus dissolution",
+            "Indicated for extensive tophi or erosions",
+            "Achieved with potent ULT titration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Allopurinol** is the first-line urate-lowering drug, initiated at **100 mg daily** and titrated upward to **800 mg daily** as needed to achieve target urate, including in chronic kidney disease. Prior to starting allopurinol, screening for the **HLA-B*5801** allele is recommended in individuals of Southeast Asian and African descent to prevent fatal hypersensitivity.",
+      "say": "Allopurinol is the preferred urate-lowering agent, initiated at 100 mg daily and titrated upward. Screening for HLA-B*5801 prevents severe cutaneous hypersensitivity reactions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Step",
+          "Recommendation",
+          "Rationale"
+        ],
+        "rows": [
+          [
+            "Starting dose",
+            "100 mg daily (lower in advanced CKD)",
+            "Prevents precipitation of acute mobilization flares"
+          ],
+          [
+            "Titration",
+            "Upward to 800 mg daily as required",
+            "Treat-to-target until urate <6.0 mg/dL"
+          ],
+          [
+            "Genetic screen",
+            "Test HLA-B*5801 in high-risk groups",
+            "Prevents allopurinol severe cutaneous adverse reactions"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Febuxostat** is a non-purine xanthine oxidase inhibitor used when allopurinol is contraindicated or ineffective. In refractory tophaceous gout, **pegloticase**, a recombinant pegylated mammalian **uricase**, rapidly metabolizes uric acid into soluble allantoin, administered at **8 mg every 2 weeks** under monitoring for anti-drug antibodies.",
+      "say": "Febuxostat provides an effective non-purine xanthine oxidase inhibitor option. In refractory tophaceous disease, pegloticase rapidly converts uric acid into soluble allantoin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe refractory tophaceous gout"
+          },
+          {
+            "id": "b",
+            "label": "Infuse pegloticase 8 mg every 2 weeks"
+          },
+          {
+            "id": "c",
+            "label": "Uric acid converted to soluble allantoin"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

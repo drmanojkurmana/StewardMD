@@ -1,0 +1,214 @@
+{
+  "v": 1,
+  "module": "srh-metabolic-bone",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Osteoporosis and metabolic bone disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The World Health Organization defines **osteoporosis** by bone mineral density measured by dual-energy X-ray absorptiometry. A **T-score of -2.5 or lower** at the lumbar spine, femoral neck, or total hip establishes osteoporosis, whereas **osteopenia** spans T-scores between **-1.0 and -2.5**. A fragility fracture of the hip or vertebra confirms osteoporosis irrespective of bone mineral density.",
+      "say": "The World Health Organization defines osteoporosis by dual-energy X-ray absorptiometry. A T-score of -2.5 or lower or a fragility fracture establishes the diagnosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/metabolic-bone-osteoporosis-paget-long-case-fig1.webp",
+        "alt": "Key clinical and imaging features of osteoporosis and metabolic bone disease",
+        "caption": "Bone mineral density T-score categories and fragility fracture sites. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **FRAX tool** calculates 10-year probability of major osteoporotic and hip fractures. Clinical risk factors include age, sex, low body mass index, prior fragility fracture, parental hip fracture, current smoking, alcohol intake of **3 or more units daily**, rheumatoid arthritis, secondary osteoporosis, and systemic **glucocorticoid therapy** exceeding **5 mg daily of prednisone** for 3 months or more.",
+      "say": "The FRAX tool calculates ten-year probability of major osteoporotic fractures. Assessment integrates age, prior fractures, femoral neck bone density, and glucocorticoid use.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FRAX risk variable",
+          "Cutoff or definition",
+          "Impact on fracture probability"
+        ],
+        "rows": [
+          [
+            "Glucocorticoids",
+            ">=5 mg daily prednisone for >=3 months",
+            "Substantially increases spinal and hip risk"
+          ],
+          [
+            "Prior fracture",
+            "Adult low-trauma fragility fracture",
+            "Doubles subsequent fracture probability"
+          ],
+          [
+            "Alcohol consumption",
+            "3 or more units daily",
+            "Dose-dependent impairment of osteoblast function"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bone remodeling reflects coupled osteoclast resorption and osteoblast formation. Osteoclast differentiation is driven by **RANKL** binding **RANK** on myeloid precursors. Osteoblasts secrete decoy receptor **osteoprotegerin** or OPG, which neutralizes RANKL. **Sclerostin**, secreted by osteocytes, inhibits **Wnt/beta-catenin signaling**, suppressing bone formation.",
+      "say": "Bone remodeling depends on coupled osteoclast and osteoblast activity. RANKL stimulates osteoclast resorption, while osteocyte sclerostin suppresses Wnt-mediated bone formation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bone-and-mineral-metabolism-in-fig2.webp",
+        "alt": "Bone remodeling cycle with osteoporosis drug targets shown",
+        "caption": "Coupled bone remodeling pathways and targeted pharmacologic intervention sites. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Oral **bisphosphonates** including **alendronate** at **70 mg weekly** and **risedronate** at **35 mg weekly** inhibit osteoclast **farnesyl pyrophosphate synthase**, inducing osteoclast apoptosis. Intravenous **zoledronic acid** at **5 mg annually** provides potent antiresorptive protection. A drug holiday is considered after **3 to 5 years** in low-risk individuals to reduce atypical femur fracture risk.",
+      "say": "Bisphosphonates inhibit osteoclast farnesyl pyrophosphate synthase to reduce bone resorption. Oral alendronate or annual zoledronic acid infusions provide durable fracture prevention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Bisphosphonate binds hydroxyapatite bone mineral"
+          },
+          {
+            "id": "b",
+            "label": "Inhibition of farnesyl pyrophosphate synthase"
+          },
+          {
+            "id": "c",
+            "label": "Osteoclast apoptosis and reduced bone loss"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Denosumab** is a fully human monoclonal antibody that binds and neutralizes **RANKL**, administered as **60 mg subcutaneously every 6 months**. Unlike bisphosphonates, denosumab does not incorporate into bone matrix; cessation results in rapid **rebound osteoclast activation** with vertebral fractures, mandating immediate transition to a bisphosphonate if discontinued.",
+      "say": "Denosumab neutralizes RANKL to suppress bone resorption. Discontinuation triggers rapid rebound osteoclast activation, requiring prompt transition to a bisphosphonate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bisphosphonates",
+          "points": [
+            "Incorporate permanently into bone matrix",
+            "Persistent antiresorptive effect after stopping",
+            "Drug holidays safe after 3 to 5 years",
+            "Slow release from mineralized bone"
+          ]
+        },
+        "right": {
+          "title": "Denosumab",
+          "points": [
+            "Circulating antibody, does not bind matrix",
+            "Rapid offset of effect at 6 months",
+            "Severe rebound vertebral fractures if stopped",
+            "Requires immediate bisphosphonate bridge"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Anabolic therapy with **teriparatide** (recombinant human **PTH 1-34** at **20 mcg daily subcutaneously**) or **abaloparatide** stimulates osteoblastic bone formation. Treatment is limited to **18 to 24 months** and is reserved for severe osteoporosis with T-scores **-3.0 or lower** or multiple vertebral fractures, followed immediately by an antiresorptive agent to preserve acquired bone.",
+      "say": "Teriparatide stimulates osteoblast bone formation when administered as a daily subcutaneous injection. Treatment is limited to 24 months and requires subsequent antiresorptive therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe osteoporosis with vertebral fractures"
+          },
+          {
+            "id": "b",
+            "label": "Teriparatide 20 mcg daily for 18 to 24 months"
+          },
+          {
+            "id": "c",
+            "label": "Sequential antiresorptive consolidation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Romosozumab** is a humanized monoclonal antibody targeting **sclerostin**, exhibiting a dual action that stimulates bone formation while simultaneously decreasing bone resorption. Dosed at **210 mg subcutaneously monthly for 12 months**, it carries a boxed warning against use in patients with myocardial infarction or stroke within the preceding year.",
+      "say": "Romosozumab binds sclerostin to stimulate bone formation while decreasing resorption. It is administered monthly for 12 months, avoiding use in recent stroke or myocardial infarction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Romosozumab action",
+          "Clinical context"
+        ],
+        "rows": [
+          [
+            "Target",
+            "Sclerostin inhibition",
+            "Releases Wnt/beta-catenin pathway"
+          ],
+          [
+            "Dual mechanism",
+            "Stimulates formation, reduces resorption",
+            "Produces dramatic early bone mineral density gains"
+          ],
+          [
+            "Dosing and duration",
+            "210 mg monthly for 12 months",
+            "Must transition to antiresorptive after 1 year"
+          ],
+          [
+            "Cardiovascular caution",
+            "Avoid if recent MI or stroke (<1 yr)",
+            "Cardiovascular safety signal in clinical trials"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Osteomalacia** is defective bone matrix mineralization, predominantly caused by severe **vitamin D deficiency** with serum 25-hydroxyvitamin D below **10 to 12 ng/mL** or renal phosphate wasting. Laboratory evaluation shows low-normal calcium, low phosphate, markedly elevated **alkaline phosphatase**, and elevated parathyroid hormone. Radiographs reveal pseudofractures or **Looser zones** along compressive bone margins.",
+      "say": "Osteomalacia represents impaired bone mineralization from severe vitamin D deficiency or hypophosphatemia. Typical findings include elevated alkaline phosphatase and Looser zones on X-ray.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Severe vitamin D deficiency (<10 ng/mL)"
+          },
+          {
+            "id": "b",
+            "label": "High alkaline phosphatase and secondary PTH rise"
+          },
+          {
+            "id": "c",
+            "label": "Impaired matrix mineralization and Looser zones"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

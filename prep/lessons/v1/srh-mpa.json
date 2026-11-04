@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "srh-mpa",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Microscopic polyangiitis and AAV management",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Microscopic polyangiitis** or MPA is a systemic necrotizing small vessel vasculitis that characteristically lacks granulomatous inflammation. Clinically, it frequently presents as a severe pulmonary-renal syndrome featuring **rapidly progressive glomerulonephritis** and pulmonary capillaritis causing life-threatening **diffuse alveolar hemorrhage** requiring immediate intensive care.",
+      "say": "Microscopic polyangiitis is a necrotizing small vessel vasculitis without granulomas. It frequently presents with rapidly progressive glomerulonephritis and alveolar hemorrhage.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/microscopic-polyangiitis-fig1.webp",
+        "alt": "Pauci-immune necrotizing crescentic glomerulonephritis in microscopic polyangiitis",
+        "caption": "Renal biopsy demonstrates pauci-immune crescentic glomerulonephritis in MPA. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Circulating perinuclear ANCA or **p-ANCA** targeting **myeloperoxidase** or MPO-ANCA is detected in **70 to 85 percent** of patients with microscopic polyangiitis. Anti-MPO autoantibodies bind cytokine-primed neutrophils, triggering an uncontrolled oxidative burst, granular enzyme release, and direct cytotoxic lysis of microvascular endothelium.",
+      "say": "Up to 85 percent of microscopic polyangiitis patients carry anti-myeloperoxidase antibodies. These autoantibodies trigger neutrophil activation and endothelial damage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Circulating anti-MPO autoantibodies bind primed neutrophils"
+          },
+          {
+            "id": "b",
+            "label": "Neutrophil respiratory burst and granular proteolysis"
+          },
+          {
+            "id": "c",
+            "label": "Microvascular endothelial detachment and capillaritis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renal involvement occurs in over **90 percent** of patients with MPA, manifesting as **pauci-immune necrotizing crescentic glomerulonephritis**. Light microscopy reveals segmental glomerular fibrinoid necrosis and extensive crescent formation, while immunofluorescence microscopy confirms the absence of significant immune complex or complement deposition.",
+      "say": "Renal disease affects over 90 percent of MPA patients as necrotizing crescentic glomerulonephritis. Immunofluorescence confirms a pauci-immune pattern without immune complexes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Microscopic modality",
+          "Pathological finding",
+          "Diagnostic meaning"
+        ],
+        "rows": [
+          [
+            "Light microscopy",
+            "Fibrinoid necrosis and cellular crescents",
+            "Reflects acute rupture of glomerular basement membrane"
+          ],
+          [
+            "Immunofluorescence",
+            "Scant or absent immunoglobulins (pauci-immune)",
+            "Distinguishes MPA from lupus nephritis and anti-GBM disease"
+          ],
+          [
+            "Electron microscopy",
+            "No dense immune complex deposits",
+            "Rules out subendothelial or mesangial immune complex deposition"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unlike granulomatosis with polyangiitis, microscopic polyangiitis is clearly distinguished by the **complete absence of granulomatous inflammation** in the upper or lower respiratory tracts. Patients with MPA do not develop destructive saddle-nose deformities, cartilaginous destruction, subglottic stenosis, or cavitating parenchymal lung nodules on chest imaging.",
+      "say": "Microscopic polyangiitis lacks granulomatous airway inflammation. Patients do not develop saddle-nose deformity, subglottic stenosis, or cavitating pulmonary nodules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Microscopic polyangiitis",
+          "points": [
+            "Non-granulomatous necrotizing capillaritis",
+            "MPO-ANCA predominance in 70 to 85%",
+            "No saddle-nose deformity or subglottic stenosis"
+          ]
+        },
+        "right": {
+          "title": "Granulomatosis with polyangiitis",
+          "points": [
+            "Necrotizing granulomatous inflammation",
+            "PR3-ANCA predominance in 80 to 90%",
+            "Cavitary pulmonary nodules and nasal destruction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fibrosing **interstitial lung disease** occurs in **15 to 30 percent** of MPO-ANCA positive patients with microscopic polyangiitis. Characteristically showing a usual interstitial pneumonia or nonspecific interstitial pneumonia pattern on high-resolution chest CT, ILD frequently precedes systemic vasculitic features and confers significant long-term mortality.",
+      "say": "Interstitial lung disease complicates up to 30 percent of MPO-ANCA positive cases. Interstitial fibrosis often precedes systemic vasculitis and worsens long-term prognosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic MPO-ANCA mediated microvascular alveolar inflammation"
+          },
+          {
+            "id": "b",
+            "label": "Fibroblast activation and progressive collagen deposition"
+          },
+          {
+            "id": "c",
+            "label": "UIP or NSIP pattern on chest CT with restrictive lung defect"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line remission induction for organ- or life-threatening MPA combines high-dose systemic glucocorticoids with either **rituximab at 375 mg/m2 weekly for 4 doses** or **intravenous cyclophosphamide**. Landmark randomized clinical trials have established equivalent efficacy between rituximab and cyclophosphamide for achieving complete clinical remission.",
+      "say": "Remission induction for severe MPA combines glucocorticoids with either rituximab or cyclophosphamide. Both agents demonstrate equivalent remission induction rates.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Induction regimen",
+          "Dosing schedule",
+          "Key clinical consideration"
+        ],
+        "rows": [
+          [
+            "Rituximab",
+            "375 mg/m2 weekly for 4 weeks or 1,000 mg twice",
+            "Preferred for relapsing disease and fertility preservation"
+          ],
+          [
+            "Cyclophosphamide",
+            "Intravenous pulses 15 mg/kg every 2 to 3 weeks",
+            "Preferred in severe pulmonary hemorrhage or renal crisis"
+          ],
+          [
+            "Glucocorticoids",
+            "IV methylprednisolone pulse followed by rapid oral taper",
+            "PEXIVAS-reduced steroid regimen lowers serious infection risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The landmark **PEXIVAS trial** demonstrated that routine **therapeutic plasma exchange** did not reduce the composite incidence of death or end-stage renal disease in severe AAV presenting with advanced renal failure or alveolar hemorrhage. Consequently, plasma exchange is now reserved specifically for concurrent anti-GBM disease or severe hypoxemic alveolar hemorrhage refractory to therapy.",
+      "say": "The PEXIVAS trial showed that routine plasma exchange did not prevent death or end-stage kidney failure. Plasma exchange is reserved for refractory alveolar hemorrhage or anti-GBM overlap.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PEXIVAS trial findings",
+          "points": [
+            "Evaluated 704 patients with severe AAV",
+            "Plasma exchange did not reduce death or ESRD",
+            "Reduced-dose steroids showed equal efficacy and fewer infections"
+          ]
+        },
+        "right": {
+          "title": "Current plasma exchange indications",
+          "points": [
+            "Concurrent anti-GBM autoantibodies",
+            "Severe hypoxemic alveolar hemorrhage failing therapy",
+            "Refractory rapidly progressive renal failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Remission maintenance relies on **rituximab at 500 mg every 6 months** or daily oral **azathioprine at 2 mg/kg**, continued for at least **24 months** following complete clinical remission. Concomitant prophylaxis against **Pneumocystis jirovecii pneumonia** with trimethoprim-sulfamethoxazole is mandatory throughout immunosuppressive therapy to prevent fatal opportunistic pulmonary infections.",
+      "say": "Remission maintenance requires rituximab every 6 months or azathioprine for at least 24 months. Pneumocystis prophylaxis with co-trimoxazole is mandatory.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anca-small-vessel-vasculitis-long-case-fig1.webp",
+        "alt": "Long-term immunosuppression and infection prophylaxis in ANCA vasculitis",
+        "caption": "Maintenance immunosuppression requires vigilant Pneumocystis jirovecii prophylaxis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    }
+  ]
+}

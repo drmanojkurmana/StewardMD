@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "module": "srh-fibromyalgia",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Fibromyalgia and chronic widespread pain",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **2016 revised ACR diagnostic criteria** define fibromyalgia by a **Widespread Pain Index of 7 or more** and **Symptom Severity Scale score of 5 or more**, or alternatively a WPI of 4 to 6 with SSS score of **9 or more**. Pain must be generalized across at least **4 of 5 defined body regions** and persist for at least **3 months**.",
+      "say": "The 2016 revised criteria define fibromyalgia using the Widespread Pain Index and Symptom Severity Scale. Generalized pain must span at least 4 of 5 body regions for 3 months.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic domain",
+          "Criteria threshold",
+          "Operational requirement"
+        ],
+        "rows": [
+          [
+            "Widespread Pain Index (WPI)",
+            "WPI >=7 with SSS >=5, OR WPI 4-6 with SSS >=9",
+            "Quantifies pain across 19 body regions"
+          ],
+          [
+            "Symptom Severity Scale (SSS)",
+            "Assesses fatigue, waking unrefreshed, cognitive symptoms",
+            "Scored 0 to 3 for each core symptom"
+          ],
+          [
+            "Pain distribution",
+            "Generalized pain in >=4 of 5 anatomical regions",
+            "Excludes isolated localized regional pain syndromes"
+          ],
+          [
+            "Chronicity",
+            "Persistent symptoms present >=3 months",
+            "Eliminates transient post-viral or acute myalgias"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Central sensitization** is the neurobiological core of fibromyalgia, driven by impaired descending serotonergic and noradrenergic pain-inhibitory pathways. Cerebrospinal fluid analysis reveals significantly elevated concentrations of excitatory neurotransmitters including **substance P**, **glutamate**, and **nerve growth factor**, amplifying nociceptive signal transmission in the dorsal horn.",
+      "say": "Central sensitization is marked by deficient descending inhibitory pathways and elevated excitatory transmitters. CSF analysis demonstrates elevated substance P, glutamate, and nerve growth factor.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/fibromyalgia-fig1.webp",
+        "alt": "Neurobiology of central sensitization and neurotransmitter imbalances in fibromyalgia",
+        "caption": "Central sensitization is characterized by deficient inhibitory control and elevated excitatory transmitters. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Functional magnetic resonance imaging or fMRI during sensory pain processing demonstrates aberrant neural activation in the **insula**, **anterior cingulate cortex**, and primary somatosensory cortex at low stimulus pressures. This cerebral hyperresponsiveness objectively validates true mechanical and thermal **allodynia** and hyperalgesia in patients with fibromyalgia.",
+      "say": "Functional MRI demonstrates hyperactivation in the insula and anterior cingulate cortex during low stimulus pressures. This confirms mechanical allodynia and altered central processing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Low stimulus pressure applied to peripheral tender points"
+          },
+          {
+            "id": "b",
+            "label": "Exaggerated ascending spinothalamic signal amplification"
+          },
+          {
+            "id": "c",
+            "label": "fMRI hyperactivation in insula and anterior cingulate cortex confirming allodynia"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pregabalin** is an approved alpha-2-delta ligand that binds presynaptic voltage-gated calcium channels in the spinal cord, decreasing calcium influx and suppressing excitatory neurotransmitter release. Dosed at **300 to 450 mg/day divided twice daily**, pregabalin significantly alleviates widespread pain, reduces sleep disruption, and improves functional status.",
+      "say": "Pregabalin binds alpha-2-delta calcium channels to decrease excitatory neurotransmitter release. Dosed at 300 to 450 mg daily, it improves pain and restorative sleep.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pregabalin pharmacology",
+          "points": [
+            "Target dose 300 to 450 mg daily divided twice daily",
+            "Binds alpha-2-delta subunit of calcium channels",
+            "Suppresses glutamate, substance P, and noradrenaline"
+          ]
+        },
+        "right": {
+          "title": "Clinical considerations",
+          "points": [
+            "Gradual upward dose titration minimizes dizziness",
+            "Side effects: somnolence, peripheral edema, weight gain",
+            "Excreted renally; requires dose adjustment in renal impairment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Duloxetine** is a balanced dual serotonin-norepinephrine reuptake inhibitor approved for fibromyalgia. Administered at **60 mg once daily**, duloxetine reinforces descending noradrenergic and serotonergic bulbospinal inhibitory pain pathways, significantly reducing chronic widespread pain scores and fatigue independently of baseline depression scores.",
+      "say": "Duloxetine is a serotonin-norepinephrine reuptake inhibitor dosed at 60 mg once daily. It reinforces descending pain-inhibitory pathways to reduce widespread pain and fatigue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Duloxetine 60 mg daily inhibits presynaptic serotonin and norepinephrine reuptake"
+          },
+          {
+            "id": "b",
+            "label": "Enhanced synaptic transmitter levels in descending bulbospinal tract"
+          },
+          {
+            "id": "c",
+            "label": "Inhibition of dorsal horn nociceptive transmission and pain reduction"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Milnacipran** is an alternative SNRI with higher relative selectivity for norepinephrine reuptake inhibition compared to serotonin. Dosed at **100 to 200 mg/day divided twice daily**, milnacipran enhances descending adrenergic inhibition, producing marked improvements in patient global impression of change, cognitive dysfunction or fibro-fog, and chronic widespread pain.",
+      "say": "Milnacipran is an SNRI with strong norepinephrine selectivity dosed at 100 to 200 mg daily. It improves chronic widespread pain, fatigue, and cognitive dysfunction.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacological agent",
+          "Mechanism of action",
+          "Approved daily target dose"
+        ],
+        "rows": [
+          [
+            "Pregabalin",
+            "Alpha-2-delta presynaptic calcium channel ligand",
+            "300 to 450 mg daily in divided doses"
+          ],
+          [
+            "Duloxetine",
+            "Dual serotonin-norepinephrine reuptake inhibitor",
+            "60 mg once daily orally"
+          ],
+          [
+            "Milnacipran",
+            "Selective noradrenaline-predominant SNRI",
+            "100 to 200 mg daily in divided doses"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Non-pharmacological management receives the strongest EULAR recommendation. Core interventions comprise low-impact **aerobic exercise** such as walking, swimming, or cycling performed for **at least 150 minutes per week**, alongside **cognitive behavioral therapy** or CBT to modify maladaptive pain catastrophizing and promote restorative sleep hygiene.",
+      "say": "Non-pharmacological therapies have the strongest EULAR recommendation. Prescribing 150 minutes weekly of low-impact aerobic exercise and cognitive behavioral therapy is essential.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Non-drug modality",
+          "Prescribed regimen",
+          "EULAR evidence grade"
+        ],
+        "rows": [
+          [
+            "Aerobic exercise",
+            "Walking, water aerobics, cycling >=150 min/week",
+            "Strongest recommendation (Grade A)"
+          ],
+          [
+            "Cognitive behavioral therapy",
+            "Structured CBT targeting pain catastrophizing",
+            "Grade A recommendation for mood and coping"
+          ],
+          [
+            "Hydrotherapy / Balneotherapy",
+            "Heated pool therapy 2 to 3 sessions weekly",
+            "Improves stiffness and immediate pain relief"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Opioids and systemic corticosteroids** demonstrate zero clinical efficacy against central pain processing in fibromyalgia and are **strongly contraindicated**. Opioids exacerbate opioid-induced hyperalgesia, promote severe physical dependence, and worsen cognitive impairment, while systemic corticosteroids incur severe metabolic toxicities without analgesic benefit.",
+      "say": "Opioids and systemic corticosteroids are ineffective in fibromyalgia and strongly contraindicated. Opioids trigger hyperalgesia and dependence while steroids carry high toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Contraindicated: Opioids",
+          "points": [
+            "No efficacy for central sensitization",
+            "Triggers opioid-induced hyperalgesia",
+            "High risk of physical dependence and addiction"
+          ]
+        },
+        "right": {
+          "title": "Contraindicated: Glucocorticoids",
+          "points": [
+            "Fibromyalgia lacks peripheral tissue inflammation",
+            "Zero analgesic benefit in clinical trials",
+            "Incurs osteoporosis, avascular necrosis, and diabetes"
+          ]
+        }
+      }
+    }
+  ]
+}

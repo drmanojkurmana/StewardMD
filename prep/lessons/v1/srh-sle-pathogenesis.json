@@ -1,0 +1,205 @@
+{
+  "v": 1,
+  "module": "srh-sle-pathogenesis",
+  "subject": "ss-rheumatology-immunology",
+  "title": "SLE pathogenesis and classification",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Systemic lupus erythematosus** or SLE is a prototypic multisystem autoimmune disease driven by defective clearance of apoptotic cell debris. Impaired phagocytosis leads to secondary necrosis, exposing intracellular nuclear chromatin, small nuclear ribonucleoproteins, and double-stranded DNA to antigen-presenting cells, breaking immunologic self-tolerance.",
+      "say": "Systemic lupus erythematosus develops from defective clearance of apoptotic cell debris. Secondary necrosis exposes nuclear antigens to initiate autoimmune responses across multiple organ systems.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sle-flare-fig1.webp",
+        "alt": "Apoptotic debris clearance defect and nuclear antigen exposure in lupus",
+        "caption": "Defective clearance of apoptotic debris drives autoantibody generation in SLE. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Endosomal pattern recognition receptors **TLR7** and **TLR9** within plasmacytoid dendritic cells internalise nucleic acid-containing immune complexes through surface **Fc-gamma-RIIa** or CD32. Receptor engagement triggers massive synthesis of **type I interferons** including IFN-alpha and IFN-beta, creating the characteristic pathogenic **interferon gene signature** that sustains systemic inflammation.",
+      "say": "Plasmacytoid dendritic cells uptake nucleic acid complexes via Fc-gamma receptor 2a. Activation of TLR7 and TLR9 stimulates high levels of type one interferon.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Nucleic acid immune complexes bind Fc-gamma-RIIa"
+          },
+          {
+            "id": "b",
+            "label": "Endosomal TLR7 and TLR9 receptor activation"
+          },
+          {
+            "id": "c",
+            "label": "Interferon-alpha release and interferon gene signature"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "B cell hyperreactivity and breach of humoral tolerance in SLE are driven by excess **BAFF** or B cell activating factor, alongside **APRIL**. Elevated BAFF sustains self-reactive plasma cells, promoting polyclonal hypergammaglobulinemia and the emergence of pathogenic, high-affinity autoantibodies targeting nuclear structures.",
+      "say": "Excess BAFF and APRIL sustain autoreactive B cells and plasma cells in SLE. This cytokine excess drives persistent production of high-affinity pathogenic autoantibodies.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cytokine signal",
+          "Cellular target",
+          "Pathologic effect"
+        ],
+        "rows": [
+          [
+            "BAFF excess",
+            "Transitional and mature B cells",
+            "Promotes survival of autoreactive clones"
+          ],
+          [
+            "APRIL signalling",
+            "Long-lived plasma cells",
+            "Sustains persistent autoantibody secretion"
+          ],
+          [
+            "Therapeutic targeting",
+            "Belimumab antibody",
+            "Inhibits soluble BAFF to induce B cell apoptosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Genetic susceptibility to lupus highlights early classical complement components including homozygous deficiencies of **C1q**, **C1r**, **C1s**, and **C4A/B**. Notably, homozygous **C1q deficiency** confers greater than **90 percent penetrance** of severe, early-onset cutaneous lupus erythematosus, immune complex glomerulonephritis, and severe neuropsychiatric involvement.",
+      "say": "Homozygous deficiency of early classical complement factors causes severe lupus. Genetic C1q deficiency confers over 90 percent penetrance of severe early-onset disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/complement-c3-deficiency-fig1.webp",
+        "alt": "Early complement component deficiency and lupus risk",
+        "caption": "Early classical complement deficiency impairs clearance of apoptotic bodies, predisposing to SLE. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Dysregulated neutrophil activation generates excessive **neutrophil extracellular traps** or NETs through suicidal or vital NETosis. These traps present antimicrobial peptide LL-37, modified histones, and externalised DNA. Defective degradation by serum **DNase I** perpetuates immune complex deposition, activating endothelial cells and accelerating vascular injury in lupus nephritis.",
+      "say": "Exaggerated NETosis releases extracellular traps studded with histones and DNA. Impaired clearance by DNase I sustains immune complex formation and vascular endothelial injury.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "NET component",
+          "Mechanism of exposure",
+          "Pathogenic consequence"
+        ],
+        "rows": [
+          [
+            "Extracellular DNA",
+            "Extruded chromatin lattices",
+            "Stimulates TLR9 and cGAS-STING pathways"
+          ],
+          [
+            "Antimicrobial peptide LL-37",
+            "Complexed with autoantigens",
+            "Protects DNA from enzymatic degradation"
+          ],
+          [
+            "Impaired DNase I",
+            "Reduced serum nuclease activity",
+            "Prolongs tissue exposure and immune activation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Subendothelial and mesangial immune complex deposition triggers classical complement activation. Cleavage fragments generate anaphylatoxins **C3a** and **C5a**, recruiting inflammatory neutrophils and macrophages through Mac-1 integrins. Active inflammatory flares characteristically cause profound consumption with **depressed C3 and C4** complement levels that correlate with active disease.",
+      "say": "Immune complex deposition in capillaries activates classical complement. Anaphylatoxins C3a and C5a recruit leukocytes, producing tissue necrosis and dropping serum C3 and C4.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Immune complexes deposit in capillary walls"
+          },
+          {
+            "id": "b",
+            "label": "Classical pathway activation generates C3a and C5a"
+          },
+          {
+            "id": "c",
+            "label": "Leukocyte recruitment and hypocomplementemia with low C3/C4"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lupus T cells exhibit deficient interleukin-2 production, hyperactive calcium influx, and replacement of the normal T cell receptor zeta chain by the **Fc-epsilon-RI-gamma** subunit. Furthermore, suppression by CD4 positive CD25 positive **FOXP3 positive regulatory T cells** is impaired, enabling follicular helper T cells to provide unconstrained help to autoreactive B cells.",
+      "say": "T cells in lupus display defective interleukin-2 synthesis and rewiring of the receptor zeta chain. Impaired regulatory T cell activity permits unchecked B cell help.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Healthy T cell physiology",
+          "points": [
+            "Normal TCR zeta chain signalling",
+            "Robust interleukin-2 synthesis",
+            "Active FOXP3 Treg suppression"
+          ]
+        },
+        "right": {
+          "title": "Lupus T cell aberrations",
+          "points": [
+            "Fc-epsilon-RI-gamma replaces zeta chain",
+            "Defective IL-2 and hyperactive calcium fluxes",
+            "Unrestrained follicular helper T cell activity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Environmental triggers precipitate acute flares in genetically primed hosts. Solar **ultraviolet radiation** induces keratinocyte apoptosis, causing cell-surface translocation of **Ro/SSA** and nuclear antigens. In addition, latent **Epstein-Barr virus** infection promotes autoimmunity via molecular mimicry between EBNA-1 and Sm core proteins, while estrogens enhance B cell longevity.",
+      "say": "Environmental triggers include ultraviolet radiation, which induces keratinocyte apoptosis and exposes Ro antigens. Epstein-Barr virus infection triggers autoimmunity through molecular mimicry.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trigger factor",
+          "Biological mechanism",
+          "Clinical outcome"
+        ],
+        "rows": [
+          [
+            "Ultraviolet light (UVB)",
+            "Keratinocyte apoptosis and Ro surface shift",
+            "Photosensitive cutaneous flares"
+          ],
+          [
+            "Epstein-Barr virus",
+            "EBNA-1 homology with autoantigen Sm",
+            "Cross-reactive humoral autoimmunity"
+          ],
+          [
+            "Estrogen exposure",
+            "Enhances B cell survival and prolactin release",
+            "Female predominance during reproductive years"
+          ]
+        ]
+      }
+    }
+  ]
+}
