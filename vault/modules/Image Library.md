@@ -30,7 +30,7 @@ Library, plus the same screen in Ophthalmós filtered to Eye, and ECGs included.
   licence and its button opens the Commons file page (`lk: "commons"`, `u` = page URL) through the Capacitor Browser,
   which is the attribution CC BY needs. Re-run the fetch to refresh; it refuses to overwrite with 40% fewer images. It writes
   `kb/dist/imglib/index.json` plus one small file per canonical system (29 systems,
-  about 3.6 MB total, largest file about 524 KB), copied by `scripts/build-www.sh`.
+  about 5.7 MB total with the Commons set, 10,199 images, largest file about 630 KB; Commons images fill each system only up to a 680 KB budget so the in-app images always fit), copied by `scripts/build-www.sh`.
   Images load from their existing URLs (the `/api/prep/bank/` R2 bank, the bundled
   learn media, Wikimedia); the bank stores only src, title, caption, alt, aspect
   ratio, kind, origin, source module, credit and licence. An image with no caption

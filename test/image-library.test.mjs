@@ -5,7 +5,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { buildAll, canonicalSystem, captionOf, kindOf, writeIndex } from "../tools/build-image-library.mjs";
+import { buildAll, canonicalSystem, captionOf, commonsSrc, commonsTitle, kindOf, tidyCommonsCaption, writeIndex } from "../tools/build-image-library.mjs";
 
 const require = createRequire(import.meta.url);
 const PURE = require("../image-library.js");
@@ -121,6 +121,12 @@ test("commons import: helpers keep the uploader's text and drop empty captions",
   assert.equal(usableCaption("Own work", "x"), false);
   assert.equal(usableCaption("Micrograph", "x"), false);
   assert.equal(usableCaption("Micrograph of a hepatocellular carcinoma. H&E stain.", "Hcc"), true);
+  assert.equal(tidyCommonsCaption("Micrograph of a chondroblastoma . H&E stain . Related images Intermed. mag. Very high mag."), "Micrograph of a chondroblastoma. H&E stain.");
+  assert.equal(commonsSrc("https://upload.wikimedia.org/wikipedia/commons/3/3d/X.jpg?utm_source=commons.wikimedia.org"), "https://upload.wikimedia.org/wikipedia/commons/3/3d/X.jpg");
+  assert.equal(commonsSrc("https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/X.png/960px-X.png"), "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/X.png/960px-X.png");
+  assert.equal(commonsSrc("https://example.com/x.jpg"), "");
+  assert.equal(commonsTitle("Mucinous carcinoma", "x"), "Mucinous carcinoma");
+  assert.equal(commonsTitle("Dsrct1", "Desmoplastic small round cell tumor. H&E stain."), "Desmoplastic small round cell tumor");
 });
 
 test("commons import: every merged image is openly licensed, attributed and linked to its Commons page", () => {
@@ -128,7 +134,7 @@ test("commons import: every merged image is openly licensed, attributed and link
   const all = Object.values(d.bySystem).flat().filter((e) => e.lk === "commons");
   assert.ok(all.length > 300, "pathology and histology images merged, got " + all.length);
   for (const e of all) {
-    assert.match(e.s, /^https:\/\/upload\.wikimedia\.org\//);
+    assert.match(e.s, /^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?]+$/);
     assert.match(e.u, /^https:\/\/commons\.wikimedia\.org\//);
     assert.match(e.li, /^(cc[ -]by(-sa)?[ -]\d|cc0|public domain|pd)/i, "open licence: " + e.li);
     assert.doesNotMatch(e.li, /\bnc\b|\bnd\b/i);
