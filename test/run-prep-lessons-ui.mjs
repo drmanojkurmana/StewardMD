@@ -55,14 +55,14 @@ const shot = async (name) => {
 const step = () => ev(`var p=document.querySelector("#smdPrep .pn-t p"); return p ? p.textContent : "";`);
 const store = (expr) => ev(`var s=JSON.parse(localStorage.getItem("smd_prep_v1")); return ${expr};`);
 
-// speechSynthesis stub: records every utterance and cancel, and ends an utterance after 1.5 s (the time it "speaks").
+// speechSynthesis stub: records every utterance and cancel, and ends an utterance after 0.4 s (a step is read a sentence at a time).
 const TTS_STUB = `
   window.__tts = []; window.__ttsCancel = 0;
   window.SpeechSynthesisUtterance = function (t) { this.text = t; this.rate = 1; this.lang = ""; };
   var cur = null;
   Object.defineProperty(window, "speechSynthesis", { configurable: true, value: { speaking: false,
     speak: function (u) { cur = u; window.__tts.push({ text: u.text, rate: u.rate, lang: u.lang }); this.speaking = true; var self = this;
-      setTimeout(function () { if (cur === u) { self.speaking = false; cur = null; if (u.onend) u.onend({}); } }, 1500); },
+      setTimeout(function () { if (cur === u) { self.speaking = false; cur = null; if (u.onend) u.onend({}); } }, 400); },
     cancel: function () { window.__ttsCancel++; cur = null; this.speaking = false; } } });`;
 
 try {
