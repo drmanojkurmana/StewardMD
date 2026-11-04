@@ -2019,3 +2019,14 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 @media (prefers-reduced-motion: reduce) {
   .pn-root .pn-why-chip { transition: none; }
 }
+/* More menu: opens from the button's corner, rows rise in one after another; a lit row (bookmarked, has a note) shows a tick. */
+@keyframes pn-menu-in { from { opacity: 0; transform: translateY(-6px) scale(.88); } to { opacity: 1; transform: none; } }
+@keyframes pn-menu-row { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+.pn-root .pn-menu { transform-origin: top right; animation: pn-menu-in 180ms var(--pn-ease, ease-out) both; }
+.pn-root .pn-menu .pn-ib { animation: pn-menu-row 220ms var(--pn-ease, ease-out) both; }
+.pn-root .pn-menu .pn-ib:nth-child(2) { animation-delay: 40ms; }
+.pn-root .pn-menu .pn-ib:nth-child(3) { animation-delay: 80ms; }
+.pn-root .pn-menu .pn-ib:nth-child(4) { animation-delay: 120ms; }
+.pn-root .pn-menu .pn-ib.on::before { content: "\2713"; order: 2; margin-left: auto; font-weight: 700; font-size: 16px; color: var(--pn-pri); }
+.pn-root .pn-menu .pn-ib.on { background: var(--pn-pri-soft); }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-menu, .pn-root .pn-menu .pn-ib { animation: none; } }
