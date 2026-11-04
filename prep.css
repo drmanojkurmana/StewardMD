@@ -1929,6 +1929,11 @@ body.dark .pn-root .pn-proto-sheet .pn-sheet-act .pn-btn {
 
 .pn-root .pn-lsn-dl { flex: 0 0 auto; min-height: 44px; padding: 0 14px; border-radius: var(--pn-r-pill); display: inline-flex; align-items: center; background: var(--pn-s1); color: var(--pn-mut); font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums; }
 
+/* Read-along: the sentence being spoken in a lesson step. */
+.pn-root .pn-sent { border-radius: 6px; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-color 220ms ease; }
+.pn-root .pn-sent.on { background: var(--pn-pri-soft); }
+@media (prefers-reduced-motion: reduce) { .pn-root .pn-sent { transition: none; } }
+
 /* ---- Why option chips (free stored explanation) ---- */
 .pn-root .pn-why-wrap { margin: 10px 0 6px; display: flex; flex-direction: column; gap: 8px; }
 .pn-root .pn-why-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }

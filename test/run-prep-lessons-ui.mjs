@@ -136,6 +136,10 @@ try {
   await click("#smdPrep [data-act=l-play]");
   ok(await until(`return window.__tts.length===1;`, 3000), "Play speaks");
   ok(await ev(`var u=window.__tts[0]; return /^A suspicious lump goes through triple assessment/.test(u.text) && u.rate===1 && u.lang==="en-IN";`) === true, "it speaks the step's narration at 1x, en-IN");
+  ok(await ev(`var on=document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent.on"); return on.length===1 && on[0].getAttribute("data-k")==="0" && /^A suspicious lump/.test(on[0].textContent);`) === true, "read-along: the first sentence is lit while it is spoken");
+  ok(await until(`var on=document.querySelector("#smdPrep .pn-lsn-tx .pn-sent.on"); return !!on && Number(on.getAttribute("data-k"))>=1;`, 4000), "read-along: the light moves on to the next sentence as the voice does");
+  ok(await ev(`var s=document.querySelectorAll("#smdPrep .pn-lsn-tx .pn-sent"), tx=document.querySelector("#smdPrep .pn-lsn-tx"); return s.length>=3 && tx.textContent.replace(/\\s+/g," ").trim().indexOf("A suspicious lump goes through triple assessment")===0;`) === true, "read-along: the step text reads the same with its sentences wrapped");
+  await shot("step2-readalong");
   ok(await ev(`var b=document.querySelector("#smdPrep [data-act=l-play]"); return b.getAttribute("aria-pressed")==="true" && b.getAttribute("aria-label")==="Pause narration";`) === true, "Play becomes Pause");
   ok(await ev(`var w=document.querySelectorAll("#smdPrep .pn-lsn-play.on .pn-wave i"); return w.length===5 && getComputedStyle(w[0]).animationName==="pn-wave";`) === true, "the Play pill's waveform moves while the voice speaks");
   ok(await ev(`var i=document.querySelectorAll("#smdPrep .pn-lsn-prog i"); return i[1].classList.contains("cur") && i[0].classList.contains("on") && !i[0].classList.contains("cur") && i[1].getBoundingClientRect().width > i[0].getBoundingClientRect().width * 2;`) === true, "step dots: the current step is the lit pill");
@@ -154,6 +158,7 @@ try {
   const c0 = await ev(`return window.__ttsCancel;`);
   await click("#smdPrep [data-act=l-play]");
   ok(await ev(`return window.__ttsCancel;`) > c0 && await ev(`return document.querySelector("#smdPrep [data-act=l-play]").getAttribute("aria-pressed");`) === "false", "Pause cancels the speech");
+  ok(await ev(`return document.querySelectorAll("#smdPrep .pn-sent.on").length===0;`) === true, "read-along: pausing clears the light");
 
   await click("#smdPrep [data-act=l-auto]");
   await shot("step3-compare");
