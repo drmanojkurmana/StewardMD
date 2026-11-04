@@ -1,0 +1,210 @@
+{
+  "v": 1,
+  "module": "srh-sle-management",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Management of SLE",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Hydroxychloroquine** or HCQ is universally recommended for all SLE patients unless strictly contraindicated. Daily dosing must be maintained at or below **5.0 mg/kg actual body weight** to prevent long-term retinal toxicity. Hydroxychloroquine prevents disease flares, reduces organ damage accrual, improves lipid profiles, and halves overall mortality.",
+      "say": "Hydroxychloroquine is recommended for all lupus patients at a daily dose not exceeding 5.0 mg per kilogram actual body weight. It prevents flares and significantly reduces mortality.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-lupus-erythematosus-fig2.webp",
+        "alt": "Comprehensive clinical management of systemic lupus erythematosus",
+        "caption": "Baseline hydroxychloroquine therapy forms the cornerstone of SLE disease control. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The modern therapeutic target in SLE is achieving the **Lupus Low Disease Activity State** or LLDAS, or complete clinical remission. LLDAS requires a **SLEDAI-2K of 4 or less**, no new disease activity in any organ system, a physician global assessment score of **1.0 or less**, and maintenance **prednisone of 7.5 mg or less daily**.",
+      "say": "Treating lupus aims for low disease activity or remission. The LLDAS target mandates a SLEDAI-2K of 4 or less with prednisone at or below 7.5 milligrams daily.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "LLDAS domain",
+          "Required threshold",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "SLEDAI-2K score",
+            "Score <=4",
+            "Controls active systemic inflammation"
+          ],
+          [
+            "Glucocorticoid dose",
+            "Prednisone <=7.5 mg daily",
+            "Minimizes cumulative glucocorticoid damage"
+          ],
+          [
+            "Physician Global (PGA)",
+            "PGA <=1.0 on visual analogue scale",
+            "Confirms clinical stability without new organ flares"
+          ],
+          [
+            "Immunosuppressants",
+            "Stable tolerated maintenance doses",
+            "Allows sustained immunologic disease control"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic corticosteroids control acute flares but require rapid tapering. Guidelines emphasize reducing maintenance prednisone to **5.0 mg daily or less**, aiming for complete withdrawal whenever clinically achievable. Maintaining minimal steroid exposure prevents long-term irreversible cardiovascular events, osteoporotic fractures, avascular necrosis, and cataract formation.",
+      "say": "Systemic corticosteroids require rapid tapering toward maintenance doses of 5.0 milligrams daily or less. Tapering prevents long-term cardiovascular and bone complications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High-dose induction for acute severe organ flare"
+          },
+          {
+            "id": "b",
+            "label": "Prompt steroid taper with steroid-sparing immunosuppressants"
+          },
+          {
+            "id": "c",
+            "label": "Maintenance prednisone <=5.0 mg daily or complete cessation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For active arthritis or refractory cutaneous manifestations failing antimalarial monotherapy, early steroid-sparing agents are initiated. Weekly **methotrexate at 15 to 25 mg** or daily **azathioprine at 2 mg/kg** controls inflammatory joint pain and subacute cutaneous lupus, facilitating glucocorticoid tapering.",
+      "say": "Methotrexate or azathioprine provides effective steroid-sparing immunosuppression. These agents treat active inflammatory arthritis and refractory cutaneous lupus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methotrexate therapy",
+          "points": [
+            "Dose 15 to 25 mg weekly",
+            "Preferred for inflammatory synovitis",
+            "Mandates folic acid co-prescription"
+          ]
+        },
+        "right": {
+          "title": "Azathioprine therapy",
+          "points": [
+            "Dose 2 mg/kg daily",
+            "Safe during pregnancy and lactation",
+            "Requires baseline TPMT enzyme testing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Renal involvement and severe extra-renal lupus respond effectively to **mycophenolate mofetil** at **2 to 3 g daily**. Mycophenolate inhibits inosine monophosphate dehydrogenase, suppressing active lymphocyte proliferation. It is strictly **contraindicated during pregnancy** due to severe teratogenicity, requiring planned substitution with azathioprine prior to conception.",
+      "say": "Mycophenolate mofetil at 2 to 3 grams daily is preferred for lupus nephritis and severe manifestations. It is strictly contraindicated in pregnancy due to teratogenicity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lupus-nephritis-fig1.webp",
+        "alt": "Lupus nephritis induction and maintenance pharmacotherapy",
+        "caption": "Mycophenolate mofetil induces and maintains remission in proliferative lupus nephritis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The targeted human monoclonal antibody **belimumab** binds soluble BAFF, preventing B cell survival. Dosed intravenously at **10 mg/kg monthly** or subcutaneously at **200 mg weekly**, belimumab is approved for active SLE failing standard therapy and active lupus nephritis, significantly reducing severe flares and lowering daily corticosteroid requirements.",
+      "say": "Belimumab binds soluble BAFF to inhibit autoreactive B cell survival. It is approved for refractory SLE and active lupus nephritis to lower corticosteroid exposure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent parameter",
+          "Belimumab specification",
+          "Clinical advantage"
+        ],
+        "rows": [
+          [
+            "Mechanism",
+            "Monoclonal antibody neutralizing soluble BAFF",
+            "Depletes autoreactive transitional and naive B cells"
+          ],
+          [
+            "Dosing route",
+            "10 mg/kg IV every 4 weeks or 200 mg SC weekly",
+            "Flexible clinic or home self-administration"
+          ],
+          [
+            "Renal indication",
+            "Approved add-on for active lupus nephritis",
+            "Accelerates renal response rates when added to MMF"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Anifrolumab** is a fully human monoclonal antibody that selectively targets **type I interferon receptor subunit 1** or IFNAR1. Administered at **300 mg intravenously every 4 weeks**, anifrolumab blocks signalling by all type I interferons. It demonstrates superior efficacy in refractory moderate-to-severe cutaneous and joint lupus, necessitating prior herpes zoster vaccination.",
+      "say": "Anifrolumab binds type one interferon receptor subunit 1 at 300 milligrams monthly. It controls refractory cutaneous and musculoskeletal lupus, warranting zoster vaccination.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Type I interferons (alpha/beta) bind IFNAR1 complex"
+          },
+          {
+            "id": "b",
+            "label": "Anifrolumab 300 mg IV blocks receptor subunit 1"
+          },
+          {
+            "id": "c",
+            "label": "Suppression of downstream JAK-STAT interferon signature"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe, life-threatening, or refractory lupus flares failing conventional therapies warrant B cell depletion with **rituximab**. This anti-CD20 monoclonal antibody is indicated off-label for refractory autoimmune thrombocytopenia, severe autoimmune hemolytic anemia, refractory proliferative lupus nephritis, and neuropsychiatric lupus.",
+      "say": "Rituximab depletes CD20 positive B cells in refractory life-threatening lupus. It is used off-label for severe thrombocytopenia, hemolytic anemia, and refractory nephritis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Refractory manifestation",
+          "Rituximab regimen",
+          "Expected therapeutic benefit"
+        ],
+        "rows": [
+          [
+            "Severe immune cytopenias",
+            "1,000 mg IV on days 1 and 15",
+            "Rapid platelet and hemoglobin recovery"
+          ],
+          [
+            "Refractory lupus nephritis",
+            "Two 1 g infusions with methylprednisolone",
+            "Clears proteinuria and stabilizes glomerular filtration"
+          ],
+          [
+            "Severe CNS involvement",
+            "Combined with cyclophosphamide",
+            "Suppresses acute neuroinflammatory destruction"
+          ]
+        ]
+      }
+    }
+  ]
+}

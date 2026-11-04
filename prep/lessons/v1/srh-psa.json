@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "srh-psa",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Psoriatic arthritis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Psoriatic arthritis** or PsA affects up to **30 percent** of individuals with cutaneous psoriasis. Cutaneous plaques precede peripheral or axial articular symptoms by an average of **7 to 10 years** in the majority of cases. Nail lesions including **nail pitting**, hyperkeratosis, and **onycholysis** elevate arthritis risk **3-fold**, reflecting close anatomic enthesopathy linking the extensor tendon to the nail bed.",
+      "say": "Psoriatic arthritis affects up to 30 percent of patients with cutaneous psoriasis. Nail pitting and onycholysis indicate a 3-fold higher risk of developing articular disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/psoriasis-fig1.webp",
+        "alt": "Clinical photograph of nail pitting and onycholysis in psoriasis",
+        "caption": "Nail changes including pitting and onycholysis link closely to DIP arthritis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **CASPAR criteria** classify psoriatic arthritis in patients with inflammatory articular disease. Classification requires **3 or more points** from 5 categories: current psoriasis scoring **2 points**, or personal or family history scoring **1 point**; typical **psoriatic nail dystrophy** scoring **1 point**; negative **rheumatoid factor** scoring **1 point**; current or past **dactylitis** scoring **1 point**; and radiographic evidence of **juxta-articular new bone formation** scoring **1 point**.",
+      "say": "The CASPAR criteria classify psoriatic arthritis using a threshold of 3 or more points. Points evaluate active or historic psoriasis, nail dystrophy, dactylitis, and periosteal new bone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CASPAR category",
+          "Clinical feature",
+          "Assigned score"
+        ],
+        "rows": [
+          [
+            "Skin evidence",
+            "Current psoriasis (2 pts) or history (1 pt)",
+            "Max 2 points"
+          ],
+          [
+            "Nail dystrophy",
+            "Pitting, onycholysis, hyperkeratosis",
+            "1 point"
+          ],
+          [
+            "Serology",
+            "Negative rheumatoid factor by any method",
+            "1 point"
+          ],
+          [
+            "Dactylitis",
+            "Current swelling or documented past history",
+            "1 point"
+          ],
+          [
+            "Radiology",
+            "Juxta-articular new bone on hand/foot films",
+            "1 point"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Moll and Wright identified 5 clinical patterns of psoriatic arthritis: **asymmetric oligoarthritis** affecting fewer than 5 joints; **symmetric polyarthritis** resembling rheumatoid arthritis; **distal interphalangeal predominant** disease; destructive **arthritis mutilans** with telescoping digits; and **axial spondyloarthritis** presenting with unilateral sacroiliitis and syndesmophytes.",
+      "say": "Moll and Wright recognized five clinical patterns of psoriatic arthritis. Manifestations range from asymmetric oligoarthritis and DIP disease to severe arthritis mutilans.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/juvenile-psoriatic-arthritis-fig1.webp",
+        "alt": "Dactylitis and asymmetrical peripheral joint synovitis",
+        "caption": "Clinical patterns include dactylitis, asymmetric peripheral arthritis, and axial involvement. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Dactylitis** or sausage digit represents diffuse, uniform, painful swelling of an entire finger or toe. Occurring in up to **40 percent** of psoriatic arthritis patients, it reflects concomitant digital flexor tenosynovitis, enthesitis, and soft tissue edema. Dactylitis serves as an indicator of aggressive erosive disease and counts toward CASPAR classification.",
+      "say": "Dactylitis produces uniform sausage digit swelling affecting an entire digit. It reflects tenosynovitis and enthesitis, indicating an aggressive erosive disease course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Digital enthesitis and tenosynovitis"
+          },
+          {
+            "id": "b",
+            "label": "Diffuse soft tissue swelling (sausage digit)"
+          },
+          {
+            "id": "c",
+            "label": "Elevates risk for radiographic progression"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Radiographic hallmarks of psoriatic arthritis reflect the unique coexistence of bone erosion and pathological bone formation. Classic findings include the **pencil-in-cup deformity** from DIP marginal erosion, periostitis with **whiskering**, fluffy periarticular new bone, and non-marginal asymmetrical paramarginal **syndesmophytes** in the spine.",
+      "say": "Radiographs show concurrent bone erosion and bone proliferation. Characteristic findings include pencil-in-cup deformities, periosteal whiskering, and non-marginal syndesmophytes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Psoriatic arthritis films",
+          "points": [
+            "Pencil-in-cup deformity at DIP joints",
+            "Juxta-articular fluffy new bone formation",
+            "Entheseal periostitis and bone whiskering",
+            "Asymmetrical non-marginal syndesmophytes"
+          ]
+        },
+        "right": {
+          "title": "Rheumatoid arthritis films",
+          "points": [
+            "Purely erosive marginal bone lesions",
+            "Symmetrical periarticular osteopenia",
+            "Absence of new bone formation",
+            "DIP joints characteristically spared"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In peripheral psoriatic arthritis, **methotrexate** at **15 to 25 mg weekly** represents the standard first-line conventional synthetic DMARD, showing efficacy for joint and skin inflammation. Alternative csDMARDs include **leflunomide** and **sulfasalazine**. Notably, csDMARDs show zero efficacy for axial disease or enthesitis, requiring progression to biologic therapy.",
+      "say": "Methotrexate is the primary first-line conventional DMARD for peripheral psoriatic arthritis. Conventional synthetic agents fail to treat axial disease or isolated enthesitis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Domain",
+          "First-line medication",
+          "Efficacy spectrum"
+        ],
+        "rows": [
+          [
+            "Peripheral arthritis",
+            "Methotrexate 15 to 25 mg weekly",
+            "Controls synovitis and cutaneous plaques"
+          ],
+          [
+            "Alternative csDMARD",
+            "Leflunomide 20 mg daily",
+            "Effective for peripheral articular disease"
+          ],
+          [
+            "Axial / Entheseal",
+            "Biologic therapy (TNF / IL-17)",
+            "csDMARDs show no efficacy in spine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Biologic and targeted synthetic therapies for psoriatic arthritis encompass multiple mechanisms. **TNF inhibitors** including **adalimumab** and **etanercept** control joint and skin disease. The **IL-17A inhibitor** **secukinumab** and dual **IL-17A/F inhibitor** **bimekizumab** demonstrate superior cutaneous clearance. Oral **JAK inhibitors** like **tofacitinib** provide targeted synthetic alternatives.",
+      "say": "Biologic therapies include TNF inhibitors and interleukin-17 blockers. Secukinumab and bimekizumab provide high cutaneous clearance alongside durable articular control.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Methotrexate failure or axial involvement"
+          },
+          {
+            "id": "b",
+            "label": "Initiate TNF inhibitor or IL-17 blocker"
+          },
+          {
+            "id": "c",
+            "label": "Rapid joint protection and skin clearance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Deucravacitinib** is an oral, first-in-class allosteric inhibitor of **tyrosine kinase 2** or TYK2. By binding selectively to the regulatory pseudokinase domain rather than the active catalytic ATP site, it blocks receptor signaling for **IL-23**, **IL-12**, and **type I interferons** without inhibiting JAK1, JAK2, or JAK3, avoiding classical JAK-associated cytopenias and lipid disturbances.",
+      "say": "Deucravacitinib selectively inhibits TYK2 by binding its regulatory pseudokinase domain. This allosteric mechanism suppresses interleukin-23 signaling without traditional JAK inhibitor toxicities.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Mechanism",
+          "Clinical advantage"
+        ],
+        "rows": [
+          [
+            "Target",
+            "TYK2 pseudokinase domain",
+            "High allosteric selectivity"
+          ],
+          [
+            "Downstream inhibition",
+            "IL-23, IL-12, type I IFNs",
+            "Suppresses Th17 pathway and plaque formation"
+          ],
+          [
+            "Safety profile",
+            "Spares JAK1, JAK2, and JAK3",
+            "Avoids cytopenias, thrombosis, and lipid shifts"
+          ]
+        ]
+      }
+    }
+  ]
+}

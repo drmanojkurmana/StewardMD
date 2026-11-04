@@ -1,0 +1,219 @@
+{
+  "v": 1,
+  "module": "srh-single-organ",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Cogan syndrome and single organ vasculitis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Cogan syndrome** is a rare chronic systemic autoimmune disorder and variable-vessel vasculitis characterized by ocular inflammation and sensorineural hearing loss. The disease classically affects young adults, linking non-syphilitic ocular lesions with severe inner ear audiovestibular dysfunction.",
+      "say": "Cogan syndrome is a systemic variable-vessel vasculitis of young adults. It pairs inflammatory ocular disease with progressive vestibuloauditory impairment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cogan-syndrome-fig1.webp",
+        "alt": "Clinical features and audiovestibular involvement in Cogan syndrome",
+        "caption": "Cogan syndrome pairs ocular inflammation with severe audiovestibular dysfunction. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The definitive clinical hallmark of classic Cogan syndrome is **bilateral non-syphilitic interstitial keratitis** occurring alongside severe **M\u00e9ni\u00e8re-like vestibuloauditory dysfunction**. Patients experience acute vertigo, ataxia, nausea, vomiting, tinnitus, and rapidly progressive sensorineural hearing loss that can lead to permanent bilateral deafness within weeks.",
+      "say": "Classic Cogan syndrome couples bilateral interstitial keratitis with severe Meniere-like vertigo and rapid sensorineural hearing loss that can cause bilateral deafness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acute non-syphilitic interstitial keratitis on slit-lamp exam"
+          },
+          {
+            "id": "b",
+            "label": "M\u00e9ni\u00e8re-like vertigo, severe ataxia, and high-frequency tinnitus"
+          },
+          {
+            "id": "c",
+            "label": "Rapidly progressive sensorineural hearing loss risking permanent deafness"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Atypical Cogan syndrome presents with ocular manifestations other than interstitial keratitis, such as **episcleritis, scleritis, or posterior uveitis**, or audiovestibular symptoms separated in onset by **more than 2 years**. Atypical disease carries a significantly higher frequency of systemic necrotizing vasculitis and vascular complications.",
+      "say": "Atypical Cogan syndrome presents with scleritis, uveitis, or a delay exceeding two years between eye and ear symptoms. It has higher rates of systemic vasculitis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Cogan syndrome",
+          "points": [
+            "Interstitial keratitis within 2 years of vestibuloauditory signs",
+            "M\u00e9ni\u00e8re-like acute vestibular episodes",
+            "Systemic vasculitis in 10 to 15 percent"
+          ]
+        },
+        "right": {
+          "title": "Atypical Cogan syndrome",
+          "points": [
+            "Scleritis, uveitis, or retinal vasculitis",
+            "Onset interval between eye and ear >2 years",
+            "Higher incidence of aortitis and aortic insufficiency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic cardiovascular complications develop in up to **10 to 15 percent** of patients with Cogan syndrome. The most serious vascular lesion is **aortitis**, which causes ascending aortic aneurysmal dilation and severe acute **aortic valve regurgitation**, frequently requiring surgical aortic root replacement.",
+      "say": "Up to 15 percent of Cogan syndrome patients develop aortitis. Ascending aortic dilation leads to severe aortic regurgitation requiring surgical valve replacement.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cardiovascular lesion",
+          "Anatomical site",
+          "Clinical management"
+        ],
+        "rows": [
+          [
+            "Aortitis",
+            "Ascending aorta and aortic arch",
+            "High-dose glucocorticoids and biologic immunosuppression"
+          ],
+          [
+            "Aortic insufficiency",
+            "Aortic valve annular dilation",
+            "Surgical aortic valve and root replacement"
+          ],
+          [
+            "Coronary arteritis",
+            "Coronary ostial stenosis",
+            "Surgical coronary artery bypass grafting"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Single-organ vasculitis** or SOV is defined by the Chapel Hill Consensus as necrotizing arteritis or phlebitis strictly limited to a single anatomical organ, lacking systemic features. Prototypic variants comprise **primary angiitis of the central nervous system**, cutaneous leukocytoclastic angiitis, isolated testicular vasculitis, and isolated gastrointestinal arteritis.",
+      "say": "Single-organ vasculitis is confined to one anatomical organ without systemic involvement. Prototypic examples include primary CNS angiitis and isolated cutaneous vasculitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Necrotizing vascular injury verified in solitary organ tissue"
+          },
+          {
+            "id": "b",
+            "label": "Systemic PET-CT, angiograms, and laboratory workup show zero extracranial lesions"
+          },
+          {
+            "id": "c",
+            "label": "Confirmed single-organ vasculitis (PACNS, isolated retinal vasculitis)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Primary angiitis of the central nervous system** or PACNS is restricted to parenchymal and leptomeningeal arteries under 500 micrometres. Clinical hallmarks include persistent subacute headaches, progressive cognitive decline, and recurrent multifocal ischemic strokes, with definitive diagnosis established by **stereotactic brain-leptomeningeal biopsy**.",
+      "say": "Primary angiitis of the central nervous system affects small cerebral arteries. Patients present with headaches and strokes, requiring brain biopsy for definitive confirmation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PACNS pathology",
+          "points": [
+            "Granulomatous, lymphocytic, or necrotizing arteritis",
+            "Affects small leptomeningeal arteries <500 \u00b5m",
+            "Brain biopsy remains definitive gold standard"
+          ]
+        },
+        "right": {
+          "title": "RCVS (Vasculitis mimic)",
+          "points": [
+            "Reversible cerebral vasoconstriction syndrome",
+            "Thunderclap headaches without vascular inflammation",
+            "Complete resolution on repeat imaging at 3 months"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cutaneous single-organ vasculitis** presents with isolated palpable purpura, livedo reticularis, or cutaneous nodules without visceral or renal disease. Histology shows **leukocytoclastic vasculitis** with postcapillary venular fibrinoid necrosis and neutrophil karyorrhexis. Most cases represent self-limiting post-infectious or drug-induced hypersensitivity.",
+      "say": "Cutaneous single-organ vasculitis presents with isolated palpable purpura. Biopsy shows leukocytoclastic vasculitis with fibrinoid necrosis and neutrophil nuclear debris.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic domain",
+          "Pathological feature",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Clinical presentation",
+            "Palpable purpura over lower extremities",
+            "Confirms non-blanching microvascular dermal leakage"
+          ],
+          [
+            "Histopathology",
+            "Leukocytoclasia and fibrinoid necrosis",
+            "Diagnostic for dermal postcapillary venulitis"
+          ],
+          [
+            "Immunofluorescence",
+            "Scant or isolated IgM/C3 deposits",
+            "Distinguishes from IgA vasculitis (Henoch-Schonlein)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Therapy for acute audiovestibular dysfunction in Cogan syndrome demands immediate **high-dose systemic glucocorticoids** with oral prednisone at 1 mg/kg/day or IV pulse methylprednisolone. For refractory inner ear sensorineural loss, TNF inhibitors such as **infliximab** or tocilizumab preserve hearing; patients with profound bilateral deafness benefit significantly from **cochlear implantation**.",
+      "say": "Acute hearing loss in Cogan syndrome mandates immediate high-dose glucocorticoids. Infliximab controls refractory inflammation, while cochlear implants restore hearing in deafness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Immediate pulse methylprednisolone within 2 weeks of hearing onset"
+          },
+          {
+            "id": "b",
+            "label": "Early escalation to infliximab or tocilizumab for refractory deafness"
+          },
+          {
+            "id": "c",
+            "label": "Cochlear implantation for permanent profound bilateral sensorineural loss"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

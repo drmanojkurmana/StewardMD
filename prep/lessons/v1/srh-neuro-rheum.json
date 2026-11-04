@@ -1,123 +1,212 @@
 {
- "v": 1,
- "module": "srh-neuro-rheum",
- "subject": "ss-rheumatology-immunology",
- "title": "Neurological manifestations of rheumatic disease",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Rheumatic diseases can damage the nervous system in several distinct patterns. The **mononeuritis multiplex** pattern means several separate peripheral nerves are injured in an asymmetric way, classically seen in vasculitis such as polyarteritis nodosa and rheumatoid vasculitis. Nerve biopsy and nerve conduction studies help confirm the pattern. Recognising which nerves are involved guides urgent treatment decisions.",
-   "say": "Rheumatic diseases can damage the nervous system in several distinct patterns. The mononeuritis multiplex pattern means several separate peripheral nerves are injured in an asymmetric way. It is classically seen in vasculitis such as polyarteritis nodosa and rheumatoid vasculitis. Nerve biopsy and nerve conduction studies help confirm the pattern. Recognising which nerves are involved guides urgent treatment decisions.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srh-neuro-rheum-fig1.webp",
-    "alt": "Diagram showing multiple, distinct, asymmetrically affected peripheral nerves and a nerve biopsy with vasculitis, characteristic of mononeuritis multiplex.",
-    "caption": "Mononeuritis multiplex: asymmetric injury to multiple peripheral nerves",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Sjogren syndrome commonly causes a **small fibre neuropathy**. Patients complain of burning pain, numbness and dysautonomia, while strength and large fibre reflexes are often preserved. Skin biopsy showing reduced intraepidermal nerve fibre density supports the diagnosis. Testing for small fibre function is the key step in examination.",
-   "say": "Sjogren syndrome commonly causes a small fibre neuropathy. Patients complain of burning pain, numbness and dysautonomia, while strength and large fibre reflexes are often preserved. Skin biopsy showing reduced intraepidermal nerve fibre density supports the diagnosis. Testing for small fibre function is the key step in examination.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Small fibre neuropathy",
-     "Large fibre neuropathy"
-    ],
-    "rows": [
-     [
-      "Main symptom",
-      "Burning pain, numbness",
-      "Weakness, unsteadiness"
-     ],
-     [
-      "Reflexes",
-      "Usually preserved",
-      "Often reduced"
-     ],
-     [
-      "Key test",
-      "Skin biopsy",
-      "Nerve conduction studies"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Neuropsychiatric lupus** covers central and peripheral nervous involvement in systemic lupus erythematosus. Antiribosomal P antibodies are associated with diffuse psychosis and mood disturbance. Acute confusional states, seizures and cerebrovascular events also occur. Exclude infection and metabolic causes before attributing symptoms to lupus.",
-   "say": "Neuropsychiatric lupus covers central and peripheral nervous involvement in systemic lupus erythematosus. Antiribosomal P antibodies are associated with diffuse psychosis and mood disturbance. Acute confusional states, seizures and cerebrovascular events also occur. Exclude infection and metabolic causes before attributing symptoms to lupus.",
-   "vis": null
-  },
-  {
-   "tx": "**CNS vasculitis** can cause headache, focal deficits and cognitive change. Primary angiitis of the central nervous system is diagnosed after excluding secondary causes, and MRI with angiography plus leptomeningeal biopsy are key investigations. **Transverse myelitis** presents with a sensory level, limb weakness and bladder dysfunction over hours to days. Its link with aquaporin-4 antibodies in neuromyelitis optica spectrum disorder matters, because overlap with connective tissue disease is recognised.",
-   "say": "CNS vasculitis can cause headache, focal deficits and cognitive change. Primary angiitis of the central nervous system is diagnosed after excluding secondary causes. MRI with angiography plus leptomeningeal biopsy are key investigations. Transverse myelitis presents with a sensory level, limb weakness and bladder dysfunction over hours to days. Its link with aquaporin-4 antibodies in neuromyelitis optica spectrum disorder matters, because overlap with connective tissue disease is recognised.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Myelitis symptoms"
-     },
-     {
-      "id": "b",
-      "label": "MRI spinal cord"
-     },
-     {
-      "id": "c",
-      "label": "Test aquaporin-4 antibody"
-     },
-     {
-      "id": "d",
-      "label": "Treat and monitor"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Trigeminal sensory neuropathy** causes numbness or pain over the face in the trigeminal distribution, often a clue to Sjogren syndrome or connective tissue disease. **Sensory ganglionopathy** affects dorsal root ganglia and produces asymmetric sensory ataxia with pseudoathetosis. Both conditions tend to be underdiagnosed, so sensory examination and nerve conduction studies help distinguish them from peripheral neuropathy.",
-   "say": "Trigeminal sensory neuropathy causes numbness or pain over the face in the trigeminal distribution. It is often a clue to Sjogren syndrome or connective tissue disease. Sensory ganglionopathy affects dorsal root ganglia and produces asymmetric sensory ataxia with pseudoathetosis. Both conditions tend to be underdiagnosed, so sensory examination and nerve conduction studies help distinguish them from peripheral neuropathy.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_c7e2a9272710",
-  "q_fa17c5c4fccf",
-  "q_2a6b8aaa30c8"
- ],
- "src": [],
- "refs": [
-  "Harrison's Principles of Internal Medicine",
-  "Kelley and Firestein's Textbook of Rheumatology"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 22
- }
+  "v": 1,
+  "module": "srh-neuro-rheum",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Neurological manifestations of rheumatic disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Neuropsychiatric systemic lupus erythematosus** or NPSLE encompasses 19 case definitions standardized by the ACR. Diffuse neuropsychiatric syndromes such as lupus psychosis and severe cognitive dysfunction correlate strongly with **anti-ribosomal P antibodies**, while active psychosis is accompanied by CSF lymphocytic pleocytosis and elevated IgG index.",
+      "say": "Neuropsychiatric lupus encompasses 19 ACR definitions. Diffuse psychiatric manifestations and lupus psychosis link with anti-ribosomal P antibodies and elevated CSF IgG index.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "NPSLE category",
+          "Clinical manifestation",
+          "Diagnostic biomarker"
+        ],
+        "rows": [
+          [
+            "Diffuse central NPSLE",
+            "Lupus psychosis, acute confusional state, cognitive decline",
+            "Anti-ribosomal P antibodies, elevated CSF IgG index"
+          ],
+          [
+            "Focal central NPSLE",
+            "Ischemic stroke, transient ischemic attack",
+            "Antiphospholipid antibodies (lupus anticoagulant, aCL)"
+          ],
+          [
+            "Peripheral NPSLE",
+            "Guillain-Barre-like syndrome, mononeuritis multiplex",
+            "Abnormal electromyography and nerve conduction studies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neuromyelitis optica spectrum disorder** or NMOSD co-occurs with systemic lupus erythematosus and Sjogren disease. Pathogenic IgG antibodies target **aquaporin-4** water channels on astrocyte foot processes, causing extensive astrocytopathy that produces **longitudinally extensive transverse myelitis** spanning **3 or more vertebral segments** on MRI.",
+      "say": "Neuromyelitis optica spectrum disorder co-occurs with SLE and Sjogren disease. Anti-aquaporin-4 antibodies attack astrocytes, causing transverse myelitis spanning 3 or more vertebral segments.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/neuromyelitis-optica-spectrum-disorder-fig1.webp",
+        "alt": "Aquaporin-4 targeting and longitudinally extensive transverse myelitis in NMOSD",
+        "caption": "Pathogenic anti-AQP4 antibodies target astrocytes, causing extensive transverse myelitis. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Primary angiitis of the central nervous system** or PACNS is restricted to parenchymal and leptomeningeal arteries under 500 micrometres. Definitive diagnosis requires high-resolution vessel wall MRI or **stereotactic brain-leptomeningeal biopsy** demonstrating transmural granulomatous, lymphocytic, or necrotizing arteritis, carefully excluding reversible cerebral vasoconstriction syndrome.",
+      "say": "Primary CNS angiitis is restricted to small cerebral arteries. High-resolution vessel wall MRI and brain-leptomeningeal biopsy provide definitive histopathologic confirmation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Subacute cognitive decline, persistent headache, recurrent strokes"
+          },
+          {
+            "id": "b",
+            "label": "High-resolution vessel wall MRI showing concentric arterial enhancement"
+          },
+          {
+            "id": "c",
+            "label": "Targeted stereotactic brain and leptomeningeal biopsy confirms transmural arteritis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mononeuritis multiplex** is an asymmetric, asynchronous axonal neuropathy involving **2 or more non-contiguous nerve trunks**. It is the neurological hallmark of necrotizing systemic vasculitides including polyarteritis nodosa, EGPA, and microscopic polyangiitis, caused by ischemic infarction of nerve fascicles from **vasculitis of epineurial arterioles**.",
+      "say": "Mononeuritis multiplex affects two or more non-contiguous peripheral nerve trunks. It represents the neurologic hallmark of necrotizing vasculitis caused by epineurial arteritis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mononeuritis multiplex",
+          "points": [
+            "Asymmetric, multifocal axonal nerve infarction",
+            "Hallmark of PAN, EGPA, and MPA vasculitis",
+            "Urgent immunosuppression halts progression"
+          ]
+        },
+        "right": {
+          "title": "Distal symmetric polyneuropathy",
+          "points": [
+            "Symmetric stocking-glove sensory loss",
+            "Common in diabetes and systemic sclerosis",
+            "Slowly progressive length-dependent axonal loss"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Neuro-Behcet disease** manifests with parenchymal involvement in **80 percent** of cases, presenting as a brainstem-diencephalic syndrome with pyramidal and cerebellar signs. Non-parenchymal disease in **20 percent** presents as **cerebral venous sinus thrombosis**. Parenchymal neuro-Behcet requires emergency pulse methylprednisolone combined with **anti-TNF therapy** or azathioprine.",
+      "say": "Neuro-Behcet disease presents with parenchymal brainstem involvement in 80 percent and cerebral venous thrombosis in 20 percent. Parenchymal disease responds to steroids and anti-TNF therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Neuro-Behcet subtype",
+          "Frequency and presentation",
+          "First-line management"
+        ],
+        "rows": [
+          [
+            "Parenchymal disease",
+            "80%; brainstem diencephalic syndrome, ataxia, pyramidal signs",
+            "High-dose glucocorticoids plus infliximab or azathioprine"
+          ],
+          [
+            "Non-parenchymal disease",
+            "20%; dural venous sinus thrombosis, intracranial hypertension",
+            "Short-course glucocorticoids and systemic therapeutic anticoagulation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neurosarcoidosis** exhibits a strong predilection for the skull base and leptomeninges. Common manifestations include **cranial neuropathy VII** presenting with unilateral or bilateral Bell palsy in **50 percent**, hypothalamic-pituitary granulomas causing diabetes insipidus, and nodular leptomeningeal enhancement on post-contrast MRI.",
+      "say": "Neurosarcoidosis has a predilection for basal meninges. It causes facial nerve palsy in 50 percent of cases, diabetes insipidus, and nodular leptomeningeal enhancement on MRI.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Non-caseating granulomatous infiltration of basal leptomeninges"
+          },
+          {
+            "id": "b",
+            "label": "Unilateral or bilateral cranial nerve VII palsy in 50 percent"
+          },
+          {
+            "id": "c",
+            "label": "Hypothalamic-pituitary axis granulomas causing central diabetes insipidus"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hypertrophic pachymeningitis** is marked by diffuse, fibrotic thickening of the cranial or spinal dura mater with prominent contrast enhancement sparing the underlying leptomeninges. It is a characteristic neuro-rheumatologic complication of **IgG4-related disease** and ANCA-associated vasculitis, particularly **PR3-positive GPA**.",
+      "say": "Hypertrophic pachymeningitis is marked by diffuse dural thickening with contrast enhancement. It is a characteristic complication of IgG4-related disease and PR3-positive GPA.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IgG4-related pachymeningitis",
+          "points": [
+            "Dense IgG4+ lymphoplasmacytic dural infiltrate",
+            "Accompanied by elevated serum IgG4",
+            "Rapid response to corticosteroids and rituximab"
+          ]
+        },
+        "right": {
+          "title": "GPA pachymeningitis",
+          "points": [
+            "Necrotizing granulomatous dural inflammation",
+            "Strongly linked with PR3-c-ANCA serology",
+            "Responsive to cyclophosphamide or rituximab"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In rheumatoid arthritis, cervical spine involvement produces **atlantoaxial subluxation** when synovial pannus erodes the transverse odontoid ligament. Instability is defined on flexion-extension radiographs by an **anterior atlanto-dens interval exceeding 3 mm** in adults; an anterior interval **greater than 9 mm** indicates impending medullary compression requiring surgical stabilization.",
+      "say": "Synovial pannus erodes the transverse odontoid ligament in rheumatoid arthritis, causing atlantoaxial subluxation. An anterior interval over 9 mm warns of impending cord compression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cervical measurement",
+          "Threshold dimension",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Normal AADI in adults",
+            "<=3 mm on lateral flexion radiograph",
+            "Intact transverse ligament stability"
+          ],
+          [
+            "Pathological subluxation",
+            ">3 mm on flexion view",
+            "Indicates transverse odontoid ligament incompetence"
+          ],
+          [
+            "Imminent medullary risk",
+            ">9 mm AADI or PADI <=14 mm",
+            "Urgent surgical posterior cervical fusion indicated"
+          ]
+        ]
+      }
+    }
+  ]
 }

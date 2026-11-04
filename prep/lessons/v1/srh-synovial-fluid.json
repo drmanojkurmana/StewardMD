@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "srh-synovial-fluid",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Synovial fluid analysis and arthrocentesis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Arthrocentesis synovial fluid leukocyte counts classify joint effusions into clear diagnostic tiers. Normal synovial fluid contains fewer than **200** white blood cells per microlitre. Non-inflammatory fluid exhibits **200 to 2,000** cells per microlitre. Inflammatory effusions contain **2,000 to 50,000** cells with greater than **50 percent** neutrophils. Septic effusions typically exceed **50,000** cells with greater than **75 percent** polymorphonuclear leukocytes.",
+      "say": "Synovial leukocyte counts classify effusions into clear diagnostic categories. Inflammatory fluid spans 2,000 to 50,000 cells per microlitre with neutrophil predominance. Septic effusions usually exceed 50,000 cells per microlitre.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Category",
+          "WBC count (/microL)",
+          "Neutrophils (%)",
+          "Common etiologies"
+        ],
+        "rows": [
+          [
+            "Normal",
+            "Fewer than 200",
+            "Under 25 percent",
+            "Healthy joint"
+          ],
+          [
+            "Non-inflammatory",
+            "200 to 2,000",
+            "Under 50 percent",
+            "Osteoarthritis, trauma"
+          ],
+          [
+            "Inflammatory",
+            "2,000 to 50,000",
+            "Over 50 percent",
+            "Rheumatoid arthritis, gout"
+          ],
+          [
+            "Septic",
+            "Over 50,000",
+            "Over 75 percent",
+            "Bacterial septic arthritis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Compensated polarized light microscopy confirms crystal-induced arthropathies. Using a red compensator, **monosodium urate** crystals appear slender and needle-shaped with strong **negative birefringence**. Crystals aligned parallel to the compensator slow axis exhibit brilliant **yellow** coloration, whereas perpendicular crystals turn **blue**. This optical profile confirms acute gouty arthritis.",
+      "say": "Monosodium urate crystals appear needle-shaped with strong negative birefringence under polarized light microscopy. They appear yellow when aligned parallel to the compensator axis and blue when perpendicular.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gout-fig1.webp",
+        "alt": "Polarized light microscopy of needle-shaped monosodium urate crystals",
+        "caption": "Monosodium urate crystals show bright needle morphology with negative birefringence. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Calcium pyrophosphate dihydrate** crystals display distinct physical and optical properties. CPPD crystals are characteristically rhomboid or rod-shaped with weak **positive birefringence**. When oriented parallel to the compensator slow axis, CPPD crystals appear **blue**, whereas perpendicular crystals turn **yellow**. These findings identify pseudogout and articular chondrocalcinosis in acutely inflamed joints.",
+      "say": "Calcium pyrophosphate dihydrate crystals are rhomboid with weak positive birefringence. Under compensated polarized light, they appear blue when parallel to the compensator axis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/crystal-arthritis-fig1.webp",
+        "alt": "Comparison of monosodium urate and calcium pyrophosphate crystals",
+        "caption": "Comparison of monosodium urate and calcium pyrophosphate dihydrate crystal morphology. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Basic calcium phosphate** crystals cause rapid, destructive articular breakdown. These hydroxyapatite complexes are ultramicroscopic and lack birefringence under polarized light microscopy. Identification requires transmission electron microscopy or **alizarin red S** staining, which demonstrates characteristic globular clumping. They classically precipitate in **Milwaukee shoulder syndrome**, precipitating advanced rotator cuff tears and rapid joint loss.",
+      "say": "Basic calcium phosphate crystals are non-birefringent under light microscopy. Alizarin red S staining reveals globular clumps in Milwaukee shoulder syndrome with rotator cuff destruction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ultramicroscopic hydroxyapatite crystals"
+          },
+          {
+            "id": "b",
+            "label": "Alizarin red S staining shows clumping"
+          },
+          {
+            "id": "c",
+            "label": "Rapid destruction in Milwaukee shoulder"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Aspiration of **hemarthrosis** yields grossly bloody joint fluid that fails to form a clot if intra-articular bleeding occurred prior to the tap. Centrifugation separates the bloody sample into dense erythrocyte sediment and xanthochromic supernatant. The presence of floating **fat globules** on the supernatant confirms an occult **intra-articular fracture** extending directly into marrow fat.",
+      "say": "Gross hemarthrosis does not clot if bleeding occurred prior to aspiration. Floating fat globules on centrifuged supernatant confirm an intra-articular fracture into marrow fat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Traumatic tap",
+          "points": [
+            "Uneven blood clearing during aspiration",
+            "Aspirated fluid readily clots in syringe",
+            "Clear supernatant after centrifugation",
+            "Absence of surface fat droplets"
+          ]
+        },
+        "right": {
+          "title": "True hemarthrosis",
+          "points": [
+            "Uniform bloody fluid throughout tap",
+            "Fluid fails to clot due to defibrination",
+            "Xanthochromic supernatant",
+            "Floating fat globules confirm fracture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cholesterol crystals** form within chronically inflamed joint and bursal cavities. They appear morphologically as large, flat, notched rectangular plates with moderate variable birefringence. These lipid plates accumulate in chronic rheumatoid arthritis or tuberculous effusions as consequences of synovial tissue necrosis. Their detection confirms long-standing local tissue degeneration.",
+      "say": "Cholesterol crystals appear as flat, notched rectangular plates in chronic joint effusions. They reflect chronic tissue necrosis in long-standing rheumatoid or tuberculous joints.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic rheumatoid or tuberculous synovitis"
+          },
+          {
+            "id": "b",
+            "label": "Synovial tissue necrosis and lipid release"
+          },
+          {
+            "id": "c",
+            "label": "Large notched rectangular cholesterol plates"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synovial fluid Gram staining identifies causative bacteria in **50 percent to 75 percent** of non-gonococcal septic arthritis cases. However, Gram stain sensitivity falls below **25 percent** in disseminated gonococcal arthritis. Suspected gonococcal infection mandates chocolate agar culture, Thayer-Martin selective medium, and prompt nucleic acid amplification testing.",
+      "say": "Synovial Gram stain detects pathogens in 50 to 75 percent of non-gonococcal infections. Disseminated gonococcal arthritis yields under 25 percent sensitivity on stain, requiring chocolate agar culture.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathogen group",
+          "Gram stain yield",
+          "Culture media",
+          "Clinical features"
+        ],
+        "rows": [
+          [
+            "Non-gonococcal",
+            "50 to 75 percent",
+            "Standard blood agar",
+            "Severe purulent effusion"
+          ],
+          [
+            "Gonococcal",
+            "Under 25 percent",
+            "Thayer-Martin, chocolate agar",
+            "Young adults, tenosynovitis"
+          ],
+          [
+            "Mycobacterial",
+            "Under 30 percent",
+            "Lowenstein-Jensen",
+            "Indolent monoarthritis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic crystal identification never eliminates concurrent bacterial joint infection. Crystal-induced arthritis and true bacterial septic arthritis coexist in **1.5 percent to 5 percent** of acute presentations. Even when monosodium urate or CPPD crystals are abundant, cloudy or purulent synovial fluid mandates immediate microbial cultures and empiric parenteral antibiotic therapy.",
+      "say": "Crystal arthritis and bacterial septic arthritis coexist in up to 5 percent of acute presentations. Finding crystals in cloudy fluid never eliminates the need for bacterial cultures.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Arthrocentesis shows crystals"
+          },
+          {
+            "id": "b",
+            "label": "Fluid is purulent with high WBC"
+          },
+          {
+            "id": "c",
+            "label": "Perform cultures and treat sepsis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

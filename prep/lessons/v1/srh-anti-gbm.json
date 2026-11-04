@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "srh-anti-gbm",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Anti-GBM disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Anti-glomerular basement membrane disease** or Goodpasture disease is a severe autoimmune small vessel vasculitis caused by pathogenic autoantibodies directed against the **non-collagenous 1 domain of the alpha-3 chain of type IV collagen**. Autoantibodies attack basement membranes of renal glomeruli and pulmonary alveoli.",
+      "say": "Anti-GBM disease is caused by autoantibodies targeting the alpha-3 chain of type IV collagen. Autoantibodies damage the glomerular and alveolar basement membranes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/goodpasture-fig1.webp",
+        "alt": "Pathogenic autoantibody targeting of alpha-3 type IV collagen in anti-GBM disease",
+        "caption": "Autoantibodies target the NC1 domain of alpha-3 type IV collagen in glomerular and alveolar membranes. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The clinical presentation is dominated by acute **rapidly progressive glomerulonephritis** in nearly 90 percent of patients. In 40 to 60 percent of individuals, concomitant alveolar capillaritis causes **diffuse alveolar hemorrhage**, constituting classic **Goodpasture syndrome** presenting with hemoptysis, dyspnea, and bilateral pulmonary infiltrates.",
+      "say": "Patients present with rapidly progressive glomerulonephritis and alveolar hemorrhage. The combination of nephritis and pulmonary hemorrhage defines Goodpasture syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Circulating anti-GBM autoantibodies bind alveolar and glomerular capillaries"
+          },
+          {
+            "id": "b",
+            "label": "Complement activation and intense neutrophilic capillaritis"
+          },
+          {
+            "id": "c",
+            "label": "Pulmonary-renal syndrome with hemoptysis and rapidly progressive renal failure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The diagnostic gold standard is direct immunofluorescence on renal biopsy, demonstrating **bright linear ribbon-like IgG staining** along the entire glomerular capillary basement membrane, occasionally accompanied by linear **C3 deposition**. This pathognomonic linear pattern contrasts sharply with granular immune complex deposits or pauci-immune vasculitis.",
+      "say": "Direct immunofluorescence demonstrates bright linear ribbon-like IgG deposition along glomerular capillaries. This linear pattern is pathognomonic for anti-GBM disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-diseases-fig2.webp",
+        "alt": "Direct immunofluorescence demonstrating pathognomonic linear IgG staining along GBM",
+        "caption": "Pathognomonic linear IgG immunofluorescence along glomerular capillary walls in anti-GBM disease. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Genetic susceptibility exhibits an extraordinary association with **HLA-DRB1*15:01**, which confers an odds ratio exceeding **8 to 10** for developing anti-GBM disease. In contrast, HLA-DRB1*01 and HLA-DRB1*07 provide strong dominant negative protection against developing autoreactive anti-alpha3(IV)NC1 antibodies.",
+      "say": "Genetic susceptibility is strongly linked to HLA-DRB1*15:01, conferring an odds ratio over 8. Conversely, HLA-DRB1*01 and DRB1*07 alleles confer protection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "HLA allele",
+          "Immune association",
+          "Mechanistic impact"
+        ],
+        "rows": [
+          [
+            "HLA-DRB1*15:01",
+            "Strong disease susceptibility (OR >8)",
+            "Presents alpha-3(IV)NC1 epitopes to autoreactive CD4+ T cells"
+          ],
+          [
+            "HLA-DRB1*03:01",
+            "Secondary susceptibility allele",
+            "Augments pathogenic autoantibody synthesis"
+          ],
+          [
+            "HLA-DRB1*01:01",
+            "Dominant protection",
+            "Promotes deletion of autoreactive T-cell clones"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In intact pulmonary capillaries, the collagen alpha-3(IV)NC1 epitope is sequestered from circulating antibodies. Exposure to environmental toxins including **tobacco smoke inhalation**, hydrocarbon solvents, or lower respiratory infections disrupts the alveolar endothelial barrier, exposing cryptic antigens and triggering acute pulmonary hemorrhage.",
+      "say": "Alveolar basement membrane epitopes remain shielded until exposed by toxins. Tobacco smoke or volatile hydrocarbons disrupt endothelium to trigger pulmonary hemorrhage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cryptic alpha-3(IV)NC1 epitopes shielded by intact alveolar endothelium"
+          },
+          {
+            "id": "b",
+            "label": "Inhalation of cigarette smoke or hydrocarbons causes capillary disruption"
+          },
+          {
+            "id": "c",
+            "label": "Anti-GBM antibodies access basement membrane, triggering alveolar hemorrhage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Between **20 and 35 percent** of patients with anti-GBM disease exhibit concurrent **double-positive ANCA**, predominantly targeting myeloperoxidase or MPO-ANCA. Double-positive patients typically behave like ANCA-associated vasculitis with higher long-term relapse rates, requiring prolonged maintenance immunosuppression.",
+      "say": "Up to 35 percent of anti-GBM patients are double-positive for ANCA, mostly MPO-ANCA. Double-positive cases exhibit higher relapse rates requiring maintenance therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Isolated anti-GBM disease",
+          "points": [
+            "Relapses exceptionally rare once cleared (<3%)",
+            "No maintenance immunosuppression needed",
+            "Severe early glomerular destruction"
+          ]
+        },
+        "right": {
+          "title": "Double-positive (anti-GBM + ANCA)",
+          "points": [
+            "Relapses occur in up to 25 to 30%",
+            "Requires prolonged maintenance immunosuppression",
+            "Features systemic necrotizing vasculitis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Emergency induction combines daily **therapeutic plasma exchange** for **14 consecutive days** with high-dose oral **prednisone at 1 mg/kg daily** and **oral cyclophosphamide at 2 mg/kg daily**. Plasma exchange mechanically clears pathogenic circulating anti-GBM autoantibodies, while cyclophosphamide arrests ongoing de novo antibody production.",
+      "say": "Immediate treatment combines daily plasma exchange for 14 days with prednisone and cyclophosphamide. Plasma exchange clears circulating antibodies while cyclophosphamide stops synthesis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment modality",
+          "Dosing protocol",
+          "Therapeutic goal"
+        ],
+        "rows": [
+          [
+            "Plasma exchange",
+            "4-liter exchange daily for 14 days or until anti-GBM undetectable",
+            "Rapidly clears circulating pathogenic IgG antibodies"
+          ],
+          [
+            "Corticosteroids",
+            "IV methylprednisolone 1 g x 3 days, then oral prednisone 1 mg/kg",
+            "Suppresses acute glomerular and alveolar inflammation"
+          ],
+          [
+            "Cyclophosphamide",
+            "Oral 2 mg/kg/day or pulsed IV for 2 to 3 months",
+            "Eliminates clone producing autoantibodies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renal recovery correlates directly with serum creatinine at clinical presentation. When patients present **dialysis-dependent with 100 percent cellular crescents** on biopsy and zero urine output, renal recovery is virtually nil; aggressive immunosuppression in this setting may be withheld unless active life-threatening pulmonary hemorrhage is present.",
+      "say": "Dialysis dependence and 100 percent glomerular crescents at presentation portend virtually zero renal recovery. Aggressive therapy is reserved if alveolar hemorrhage coexists.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Serum creatinine <5.7 mg/dL at diagnosis: high renal recovery rate"
+          },
+          {
+            "id": "b",
+            "label": "Serum creatinine >5.7 mg/dL: variable recovery with urgent therapy"
+          },
+          {
+            "id": "c",
+            "label": "Oliguric dialysis-dependence with 100% crescents: virtually zero recovery"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    }
+  ]
+}

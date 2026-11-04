@@ -1,131 +1,220 @@
 {
- "v": 1,
- "module": "srh-sjogren",
- "subject": "ss-rheumatology-immunology",
- "title": "Sjogren disease: sicca, antibodies, glandular biopsy and lymphoma surveillance",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Sjogren disease is a chronic autoimmune exocrinopathy in which lymphocytes infiltrate lacrimal and salivary glands. It presents with **keratoconjunctivitis sicca** (dry eyes) and **xerostomia** (dry mouth). Systemic features include fatigue, arthralgia, Raynaud phenomenon, parotid swelling and cutaneous vasculitis. Most patients have a slow, benign course, but lymphoma is the key threat.",
-   "say": "Sjogren disease is a chronic autoimmune condition in which lymphocytes infiltrate the lacrimal and salivary glands. It presents with keratoconjunctivitis sicca, meaning dry eyes, and xerostomia, meaning dry mouth. Systemic features include fatigue, arthralgia, Raynaud phenomenon, parotid swelling and cutaneous vasculitis. Most patients have a slow, benign course, but lymphoma is the key threat.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/srh-sjogren-fig1.webp",
-    "alt": "Diagram showing Sjogren disease affecting lacrimal and salivary glands, leading to dry eyes and dry mouth. Inset shows lymphocyte infiltration.",
-    "caption": "Sjogren disease: autoimmune attack on exocrine glands causing sicca symptoms. Image: Scientific Animations, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 1.1925
-   }
-  },
-  {
-   "tx": "Diagnosis rests on objective sicca plus supportive serology. Anti-Ro/SSA and anti-La/SSB antibodies are characteristic, alongside a positive **ANA** and **rheumatoid factor**. Schirmer test of 5 mm or less in 5 minutes supports diagnosis, and unstimulated whole saliva flow of 0.1 mL per minute or less scores. **Labial minor salivary gland biopsy** with focus score 1 or more per 4 mm squared is the most specific test.",
-   "say": "Diagnosis rests on objective sicca plus supportive serology. Anti-Ro SSA and anti-La SSB antibodies are characteristic, alongside a positive ANA and rheumatoid factor. A Schirmer test of 5 millimetres or less in 5 minutes supports the diagnosis, and unstimulated whole saliva flow of 0.1 millilitres per minute or less scores. Labial minor salivary gland biopsy with a focus score of 1 or more per 4 millimetres squared is the most specific test.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Test",
-     "Positive threshold",
-     "Note"
-    ],
-    "rows": [
-     [
-      "Schirmer I",
-      "5 mm or less in 5 min",
-      "Tear flow"
-     ],
-     [
-      "Unstimulated saliva",
-      "0.1 mL/min or less",
-      "Salivary hypofunction"
-     ],
-     [
-      "Ocular staining",
-      "Score 5 or more",
-      "Van Bijsterveld 4 or more"
-     ],
-     [
-      "Labial biopsy",
-      "Focus score 1 or more",
-      "Per 4 mm squared"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Lymphoma risk is the dominant long-term hazard. Sjogren carries the highest lymphoma risk of any autoimmune disease, mostly extranodal **MALT lymphoma**. Red flags include persistent unilateral parotid enlargement, a lymph node mass above 7 cm, new cytopenias, low C4, cryoglobulins and palpable purpura. Such features demand urgent investigation, not assumption of flare.",
-   "say": "Lymphoma risk is the dominant long-term hazard. Sjogren carries the highest lymphoma risk of any autoimmune disease, mostly extranodal MALT lymphoma. Red flags include persistent unilateral parotid enlargement, a lymph node mass above 7 centimetres, new cytopenias, low C4, cryoglobulins and palpable purpura. Such features demand urgent investigation rather than assumption of a flare.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Persistent parotid swelling"
-     },
-     {
-      "id": "b",
-      "label": "Lymph node above 7 cm or cytopenias"
-     },
-     {
-      "id": "c",
-      "label": "Urgent workup for B-cell lymphoma"
-     },
-     {
-      "id": "d",
-      "label": "Biopsy and staging"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Renal and pregnancy issues matter. Interstitial nephritis may be silent, presenting only with **distal renal tubular acidosis**, which can progress to nephrocalcinosis if untreated. In pregnancy, anti-Ro antibodies risk neonatal lupus and **congenital heart block**, so fetal surveillance is needed. Consider HIV or HCV sicca, sarcoidosis and IgG4-related disease as mimics.",
-   "say": "Renal and pregnancy issues matter. Interstitial nephritis may be silent, presenting only with distal renal tubular acidosis, which can progress to nephrocalcinosis if untreated. In pregnancy, anti-Ro antibodies carry a risk of neonatal lupus and congenital heart block, so fetal surveillance is needed. Consider HIV or HCV sicca, sarcoidosis and IgG4-related disease as mimics.",
-   "vis": null
-  },
-  {
-   "tx": "Management is symptomatic and multidisciplinary. Treat dry eyes with artificial tears, topical **ciclosporin** or lifitegrast, and punctal occlusion, trying plugs before cautery. Treat dry mouth with saliva substitutes and secretagogues such as **pilocarpine** or cevimeline. Hydroxychloroquine helps arthralgia and fatigue. Refractory systemic disease with vasculitis may need rituximab.",
-   "say": "Management is symptomatic and multidisciplinary. Treat dry eyes with artificial tears, topical ciclosporin or lifitegrast, and punctal occlusion, trying plugs before cautery. Treat dry mouth with saliva substitutes and secretagogues such as pilocarpine or cevimeline. Hydroxychloroquine helps arthralgia and fatigue. Refractory systemic disease with vasculitis may need rituximab.",
-   "vis": null
-  }
- ],
- "quiz": [
-  "q_94804cfbdb68",
-  "q_e43b0254873f",
-  "q_3f9421e35a1a"
- ],
- "src": [
-  "kb-reference-sjogren-syndrome",
-  "kb-reference-sj-gren-s-disease",
-  "kb-reference-neuronal-ceroid-lipofuscinosis-cln3"
- ],
- "refs": [
-  "2016 ACR-EULAR classification criteria for Sjogren syndrome"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 3,
-  "kbWords": 2480,
-  "itemN": 28
- }
+  "v": 1,
+  "module": "srh-sjogren",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Sjogren disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Sjogren disease** is a chronic systemic autoimmune exocrinopathy characterized by dense lymphocytic infiltration of salivary and lacrimal glands. Exocrine destruction results in classic sicca symptoms: **xerostomia** or dry mouth, and **keratoconjunctivitis sicca** or dry eyes, demonstrating a profound female preponderance of approximately 9 to 1.",
+      "say": "Sjogren disease is an autoimmune exocrinopathy causing lymphocytic infiltration of salivary and lacrimal glands. Patients present with dry eyes and dry mouth with marked female predominance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sj-gren-s-disease-fig1.webp",
+        "alt": "Pathology of salivary and lacrimal gland infiltration in Sjogren syndrome",
+        "caption": "Lymphocytic infiltration causes acinar gland destruction and severe sicca symptoms. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "The **2016 ACR/EULAR classification criteria** apply to patients presenting with daily dry eye or dry mouth symptoms. The scoring system assigns **3 points** for focal lymphocytic sialadenitis with a focus score of 1 or more on minor salivary gland biopsy, and **3 points** for positive anti-SSA/Ro antibodies. A cumulative score of **4 or more points** confirms classification.",
+      "say": "The ACR and EULAR criteria require at least 4 points to classify Sjogren disease. Positive salivary biopsy focus score and positive anti-SSA Ro each contribute 3 points.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic item",
+          "Threshold definition",
+          "Criteria score weight"
+        ],
+        "rows": [
+          [
+            "Labial gland biopsy",
+            "Focus score >=1 per 4 mm2 tissue",
+            "3 points"
+          ],
+          [
+            "Anti-SSA/Ro serology",
+            "Positive serum autoantibodies",
+            "3 points"
+          ],
+          [
+            "Ocular staining score",
+            "Score >=5 or van Bijsterveld >=4",
+            "1 point"
+          ],
+          [
+            "Schirmer test",
+            "<=5 mm wetting in 5 minutes",
+            "1 point"
+          ],
+          [
+            "Unstimulated salivary flow",
+            "<=0.1 mL per minute",
+            "1 point"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive histopathologic confirmation relies on minor labial salivary gland biopsy. A positive diagnostic **focus score** requires the presence of at least **1 focus** containing **50 or more mononuclear inflammatory cells** per **4 square millimetres** of glandular tissue, predominantly composed of CD4 positive T helper cells and infiltrating B lymphocytes.",
+      "say": "Salivary gland biopsy evaluates focal lymphocytic infiltration. A positive focus score requires at least one aggregate of 50 mononuclear cells per 4 square millimeters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Incisional labial minor salivary gland biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Microscopic quantification across 4 square mm"
+          },
+          {
+            "id": "c",
+            "label": "Focus score >=1 aggregate of 50 mononuclear cells confirms Sjogren"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extraglandular manifestations involve multiple organ systems in up to 30 to 40 percent of patients. Common features include non-erosive inflammatory arthritis, interstitial lung disease, Raynaud phenomenon, and **type II mixed cryoglobulinemia**. Cutaneous involvement manifests as **palpable purpura** driven by cutaneous leukocytoclastic vasculitis.",
+      "say": "Extraglandular manifestations occur in up to 40 percent of Sjogren patients. Features include non-erosive arthritis, interstitial lung disease, and purpuric vasculitis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ system",
+          "Extraglandular manifestation",
+          "Clinical biomarker"
+        ],
+        "rows": [
+          [
+            "Cutaneous",
+            "Palpable purpura and leukocytoclastic vasculitis",
+            "Cryoglobulins and low C4"
+          ],
+          [
+            "Pulmonary",
+            "Lymphocytic interstitial pneumonia (LIP) / NSIP",
+            "High-resolution chest CT changes"
+          ],
+          [
+            "Neurological",
+            "Sensory ganglionopathy and painful small fiber neuropathy",
+            "Abnormal skin biopsy epidermal nerve density"
+          ],
+          [
+            "Musculoskeletal",
+            "Symmetrical non-erosive polyarthritis",
+            "Elevated rheumatoid factor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renal involvement predominantly takes the form of chronic **tubulointerstitial nephritis**, leading to distal **type 1 renal tubular acidosis**. Impaired collecting duct hydrogen ion secretion causes hypokalemia, hyperchloremic metabolic acidosis, alkaline urine pH, medullary nephrocalcinosis, and recurrent hypokalemic periodic paralysis.",
+      "say": "Tubulointerstitial nephritis causes distal type 1 renal tubular acidosis. Impaired proton excretion leads to hypokalemia, alkaline urine pH, and nephrocalcinosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Lymphocytic tubulointerstitial infiltration"
+          },
+          {
+            "id": "b",
+            "label": "Distal intercalated cell proton pump failure"
+          },
+          {
+            "id": "c",
+            "label": "Type 1 RTA with hyperchloremic acidosis, hypokalemia, nephrocalcinosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients with Sjogren disease carry an extraordinary **15- to 20-fold increased lifetime risk** of developing **non-Hodgkin B cell lymphoma**, predominantly **mucosa-associated lymphoid tissue** or MALT lymphoma of the parotid glands. Red flags include persistent painless parotid enlargement, low serum C4, monoclonal paraproteinemia, and cryoglobulins.",
+      "say": "Sjogren disease carries a 15- to 20-fold increased risk of non-Hodgkin B cell lymphoma, particularly MALT lymphoma. Persistent parotid swelling and low C4 are red flags.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-polyendocrine-type-3-fig1.webp",
+        "alt": "MALT lymphoma risk and parotid gland monitoring in Sjogren syndrome",
+        "caption": "Chronic B-cell stimulation predisposes to marginal zone and MALT lymphomas. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Symptomatic treatment of sicca symptoms combines preservative-free artificial tears and oral secretagogues. Muscarinic agonists **pilocarpine at 5 mg three to four times daily** or **cevimeline at 30 mg three times daily** stimulate residual functional exocrine acini, relieving dry mouth and ocular grittiness.",
+      "say": "Secretagogues pilocarpine and cevimeline stimulate muscarinic receptors on residual salivary tissue. They effectively relieve distressing oral and ocular dryness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pilocarpine therapy",
+          "points": [
+            "Dose 5 mg three to four times daily",
+            "Non-selective muscarinic agonist",
+            "Common side effect: diaphoresis"
+          ]
+        },
+        "right": {
+          "title": "Cevimeline therapy",
+          "points": [
+            "Dose 30 mg three times daily",
+            "Selective M1 and M3 muscarinic agonist",
+            "Fewer cardiac and bronchospastic side effects"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Extraglandular systemic disease activity is quantified using the **EULAR Sjogren Syndrome Disease Activity Index** or ESSDAI across 12 organ domains. Mild articular symptoms respond to hydroxychloroquine, whereas severe cryoglobulinemic vasculitis, glomerulonephritis, or central neuropathy requires systemic glucocorticoids and B cell depletion with **rituximab**.",
+      "say": "The ESSDAI instrument scores systemic organ activity in Sjogren disease. Severe manifestations like cryoglobulinemic vasculitis require corticosteroids and rituximab.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "ESSDAI severity tier",
+          "Clinical presentation",
+          "Recommended therapeutic strategy"
+        ],
+        "rows": [
+          [
+            "Low activity (<5)",
+            "Mild arthralgias and cutaneous dryness",
+            "Hydroxychloroquine 5 mg/kg daily"
+          ],
+          [
+            "Moderate activity (5 to 13)",
+            "Active inflammatory arthritis, mild cytopenias",
+            "Low-dose prednisone and azathioprine"
+          ],
+          [
+            "High activity (>=14)",
+            "Cryoglobulinemic vasculitis, neuropathy, renal disease",
+            "Pulse methylprednisolone and rituximab infusions"
+          ]
+        ]
+      }
+    }
+  ]
 }

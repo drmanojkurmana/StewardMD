@@ -1,0 +1,205 @@
+{
+  "v": 1,
+  "module": "srh-autoinflammatory",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Monogenic autoinflammatory syndromes",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Monogenic autoinflammatory syndromes** are inherited disorders of innate immunity characterized by recurrent unprovoked episodes of sterile systemic inflammation. In contrast to autoimmune disorders, autoinflammatory diseases exhibit **hyperactivation of innate immune pathways** with zero high-titer autoantibodies or antigen-specific autoreactive T cells.",
+      "say": "Monogenic autoinflammatory syndromes are inherited disorders of innate immunity. They feature recurrent sterile inflammation without high-titer autoantibodies or antigen-specific T cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amyloidosis-autoinflammatory-long-case-fig1.webp",
+        "alt": "Innate immune hyperactivation in monogenic autoinflammatory syndromes",
+        "caption": "Autoinflammatory syndromes arise from innate immune dysregulation without autoantibodies. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Familial Mediterranean fever** or FMF is an autosomal recessive disorder caused by **MEFV mutations** encoding pyrin. Attacks characteristically last **12 to 72 hours**, featuring high spiking fever, sterile peritonitis, pleuritis, and an **erysipelas-like erythema** over the lower leg. Lifelong daily oral **colchicine** prevents recurrent attacks and lethal renal AA amyloidosis.",
+      "say": "Familial Mediterranean fever is caused by recessive MEFV mutations. Attacks last 12 to 72 hours with fever, serositis, and erysipelas-like rash, treated with lifelong colchicine.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-mediterranean-fever-fig1.webp",
+        "alt": "MEFV pyrin mutations, peritonitis, and colchicine therapy in FMF",
+        "caption": "Familial Mediterranean fever presents with episodic serositis and requires lifelong colchicine. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**Cryopyrin-Associated Periodic Syndromes** or CAPS are autosomal dominant conditions caused by gain-of-function **NLRP3 mutations**. CAPS comprises a severity continuum: familial cold autoinflammatory syndrome, **Muckle-Wells syndrome** featuring urticaria, progressive sensorineural deafness, and amyloidosis, and severe neonatal-onset **NOMID/CINCA**. All forms respond dramatically to **IL-1 blockade** with anakinra or canakinumab.",
+      "say": "Cryopyrin-associated periodic syndromes arise from gain-of-function NLRP3 mutations. Muckle-Wells features cold urticaria and progressive deafness, responding promptly to IL-1 blockade.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CAPS phenotype",
+          "Distinguishing features",
+          "Severity tier"
+        ],
+        "rows": [
+          [
+            "FCAS",
+            "Cold-induced urticaria, arthralgia, conjunctivitis",
+            "Mild phenotype"
+          ],
+          [
+            "Muckle-Wells syndrome",
+            "Sensorineural hearing loss, chronic urticaria, AA amyloidosis",
+            "Moderate phenotype"
+          ],
+          [
+            "NOMID / CINCA",
+            "Chronic aseptic meningitis, patellar epiphyseal overgrowth, papilledema",
+            "Severe life-threatening phenotype"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**TNF Receptor-Associated Periodic Syndrome** or TRAPS is an autosomal dominant disorder caused by **TNFRSF1A mutations** encoding the 55-kDa TNF receptor. TRAPS is distinguished by prolonged inflammatory episodes lasting **1 to 3 weeks**, marked by migratory myalgias with monocytic fasciitis, painful periorbital edema, and high risk of **AA amyloidosis**, responding to IL-1 inhibitors.",
+      "say": "TRAPS is caused by dominant TNFRSF1A mutations with prolonged attacks lasting 1 to 3 weeks. Typical findings include migratory myalgias, periorbital edema, and amyloidosis risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Misfolded mutant 55-kDa TNF receptor retained in endoplasmic reticulum"
+          },
+          {
+            "id": "b",
+            "label": "Prolonged attacks (1 to 3 weeks) with myalgia and periorbital edema"
+          },
+          {
+            "id": "c",
+            "label": "Dramatic therapeutic response to IL-1 receptor antagonist anakinra"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mevalonate kinase deficiency** or Hyper-IgD syndrome is an autosomal recessive disorder caused by **MVK mutations** in cholesterol biosynthesis. Attacks occur every **4 to 6 weeks**, lasting 3 to 7 days, frequently provoked by childhood vaccinations. Features include painful cervical lymphadenopathy, aphthous ulcers, abdominal pain, and elevated serum **IgD and IgA**.",
+      "say": "Mevalonate kinase deficiency presents with fever episodes triggered by vaccinations. Attacks feature cervical lymphadenopathy, oral aphthae, and elevated IgD and IgA.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Mevalonate kinase deficiency (HIDS)",
+          "Clinical detail"
+        ],
+        "rows": [
+          [
+            "Inheritance and gene",
+            "Autosomal recessive; MVK gene",
+            "Impaired isoprenoid and cholesterol biosynthesis"
+          ],
+          [
+            "Attack duration and triggers",
+            "Episodes last 3 to 7 days every 4 to 6 weeks",
+            "Characteristically provoked by childhood immunizations"
+          ],
+          [
+            "Diagnostic biomarkers",
+            "Elevated serum IgD and IgA, urinary mevalonic acid",
+            "Mevalonic acid elevated during active febrile episodes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Blau syndrome** is an autosomal dominant pediatric granulomatous autoinflammatory disorder caused by gain-of-function **NOD2** or CARD15 mutations. It is clinically defined by the classic triad of **granulomatous polyarthritis**, **panuveitis**, and **camptodactyly** with a brownish-tan papular cutaneous rash.",
+      "say": "Blau syndrome is an autosomal dominant disorder caused by NOD2 mutations. The classic triad comprises granulomatous polyarthritis, panuveitis, and camptodactyly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blau syndrome triad",
+          "points": [
+            "Granulomatous boggy polyarthritis",
+            "Severe sight-threatening panuveitis",
+            "Tan papular rash with camptodactyly"
+          ]
+        },
+        "right": {
+          "title": "Molecular genetics",
+          "points": [
+            "Gain-of-function NOD2 / CARD15 gene mutations",
+            "Constitutive NF-kappa-B transcription activation",
+            "Responsive to TNF-alpha inhibitors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PAPA syndrome** or Pyogenic Arthritis, Pyoderma gangrenosum, and Acne is an autosomal dominant condition caused by **PSTPIP1 mutations**. Defective hyperphosphorylation drives hyperactive uninhibited binding to pyrin, provoking massive sterile neutrophilic joint destruction, recurrent pyogenic monoarthritis, and destructive ulcerating **pyoderma gangrenosum**.",
+      "say": "PAPA syndrome is caused by PSTPIP1 mutations altering pyrin binding. Patients suffer sterile pyogenic arthritis, severe cystic acne, and pyoderma gangrenosum.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "PSTPIP1 mutation increases pyrin-inflammasome assembly"
+          },
+          {
+            "id": "b",
+            "label": "Excessive interleukin-1-beta processing and neutrophil influx"
+          },
+          {
+            "id": "c",
+            "label": "Sterile pyogenic arthritis and severe pyoderma gangrenosum"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Type I interferonopathies** including Aicardi-Gouti\u00e8res syndrome and **SAVI** or STING-associated vasculopathy with onset in infancy are monogenic disorders marked by constitutive upregulation of type I interferons. Manifestations include severe microangiopathic telangiectasias, **chilblains**, intracranial calcifications, and interstitial pulmonary fibrosis, responding to **JAK inhibitors**.",
+      "say": "Type one interferonopathies like SAVI exhibit constitutive interferon signaling. Features include microangiopathy, chilblains, and lung fibrosis, responsive to JAK inhibitors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "Underlying gene",
+          "Pathognomonic features"
+        ],
+        "rows": [
+          [
+            "SAVI",
+            "STING1 gain-of-function",
+            "Severe digital necrosis, chilblains, pulmonary fibrosis"
+          ],
+          [
+            "Aicardi-Gouti\u00e8res",
+            "TREX1, RNASEH2A/B/C",
+            "Infantile encephalopathy, intracranial calcification"
+          ],
+          [
+            "Therapeutic response",
+            "Oral JAK1/JAK2 inhibitors",
+            "Suppresses downstream STAT phosphorylation"
+          ]
+        ]
+      }
+    }
+  ]
+}

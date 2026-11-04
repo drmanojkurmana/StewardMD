@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "srh-amyloidosis",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Amyloidosis in rheumatology",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Amyloidosis** encompasses protein-folding disorders wherein soluble precursor proteins aggregate into insoluble, unbranched **7.5 to 10 nanometre cross-beta-sheet fibrils**. Extracellular deposition in interstitial tissue progressively disrupts normal tissue architecture and impairs vital organ function.",
+      "say": "Amyloidosis is a protein-misfolding disorder forming unbranched cross-beta-sheet fibrils. Extracellular deposition causes progressive organ dysfunction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aa-amyloidosis-fig1.webp",
+        "alt": "Amyloid fibril formation and extracellular deposition pathways",
+        "caption": "Misfolded precursor proteins aggregate into rigid cross-beta fibrils that deposit extracellularly. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Definitive histopathologic diagnosis requires tissue biopsy showing pathognomonic **apple-green birefringence** under cross-polarized light microscopy following **Congo red staining**. Initial screening relies on abdominal subcutaneous fat pad aspiration with **70 to 80 percent sensitivity**, followed by labial salivary gland or direct organ biopsy.",
+      "say": "Diagnosis requires Congo red staining demonstrating apple-green birefringence under polarized light. Abdominal fat pad aspiration provides 70 to 80 percent screening sensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Abdominal subcutaneous fat pad aspirate or organ biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Congo red histochemical staining of tissue sections"
+          },
+          {
+            "id": "c",
+            "label": "Pathognomonic apple-green birefringence under cross-polarized microscopy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**AL amyloidosis** is caused by a clonal plasma cell dyscrasia producing misfolded monoclonal immunoglobulin light chains, predominantly **lambda light chains in 75 percent**. Hallmark clinical signs include nephrotic syndrome, restrictive cardiomyopathy with low ECG voltages, pathognomonic **macroglossia in 15 percent**, and periorbital ecchymoses or **raccoon eyes**.",
+      "say": "AL amyloidosis is caused by clonal plasma cell light chains, mostly lambda. Hallmarks include nephrotic syndrome, restrictive cardiomyopathy, macroglossia, and raccoon eyes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/al-amyloidosis-fig1.webp",
+        "alt": "Clinical hallmarks of AL amyloidosis: macroglossia, purpura, and nephrotic syndrome",
+        "caption": "AL amyloidosis features light-chain deposition causing macroglossia and purpura. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "**AA amyloidosis** is reactive to sustained, chronic systemic inflammation such as long-standing rheumatoid arthritis, ankylosing spondylitis, familial Mediterranean fever, or chronic bronchiectasis. Cytokines IL-6 and IL-1 stimulate hepatic overproduction of acute-phase **serum amyloid A**, whose cleavage fragments deposit predominantly in renal glomeruli causing heavy **nephrotic proteinuria**.",
+      "say": "AA amyloidosis develops from chronic inflammation like rheumatoid arthritis or FMF. Hepatic serum amyloid A deposits in kidneys, producing heavy proteinuria.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Inflammatory disease",
+          "Mechanism of AA induction",
+          "Target organ impact"
+        ],
+        "rows": [
+          [
+            "Rheumatoid arthritis",
+            "Chronic IL-6 driving hepatic SAA synthesis",
+            "Glomerular amyloidosis with nephrotic proteinuria"
+          ],
+          [
+            "Familial Mediterranean fever",
+            "Recurrent pyrin inflammasome activation",
+            "Progressive renal failure; prevented by colchicine"
+          ],
+          [
+            "Bronchiectasis / Osteomyelitis",
+            "Persistent suppurative bacterial inflammation",
+            "Renal and splenic amyloid deposition"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Transthyretin amyloidosis** or ATTR arises from misfolded transthyretin. It occurs as **wild-type ATTRwt**, formerly senile amyloidosis, affecting elderly men with restrictive cardiomyopathy and bilateral carpal tunnel syndrome, or as hereditary mutant **variant ATTRv**, caused by mutations such as **Val122Ile** or **Val30Met** causing familial amyloid polyneuropathy and cardiomyopathy.",
+      "say": "Transthyretin amyloidosis occurs as wild-type in elderly men or as hereditary mutant variants. Mutations like Val30Met produce familial polyneuropathy and cardiomyopathy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wild-type ATTR (ATTRwt)",
+          "points": [
+            "Affects elderly men (>65 years)",
+            "Carpal tunnel syndrome precedes heart failure",
+            "Normal TTR gene sequence"
+          ]
+        },
+        "right": {
+          "title": "Variant hereditary ATTR (ATTRv)",
+          "points": [
+            "Autosomal dominant TTR gene mutations",
+            "Val30Met (polyneuropathy) and Val122Ile (cardiomyopathy)",
+            "Earlier clinical onset in middle age"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cardiac amyloidosis characteristically shows concentric biventricular wall thickening with small ventricular cavities and severe diastolic dysfunction. A classic diagnostic paradox is **low QRS voltage on ECG despite thickened ventricular myocardium on echocardiography**, alongside **apical sparing** of longitudinal strain on echocardiographic speckle tracking.",
+      "say": "Cardiac amyloidosis exhibits low ECG voltages despite marked ventricular thickening on echocardiogram. Speckle tracking demonstrates a classic apical sparing pattern.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Amyloid fibril infiltration of ventricular myocardium"
+          },
+          {
+            "id": "b",
+            "label": "Concentric ventricular thickening with low QRS voltages on ECG"
+          },
+          {
+            "id": "c",
+            "label": "Preserved apical strain with impaired basal strain (apical sparing)"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nuclear bone scintigraphy with **technetium-99m pyrophosphate** or 99mTc-PYP enables non-biopsy diagnosis of ATTR cardiac amyloidosis. Intense myocardial tracer uptake reaching **Perugini grade 2 or 3**, when combined with negative serum and urine immunofixation and normal serum free light chain ratios, confirms ATTR cardiomyopathy without endomyocardial biopsy.",
+      "say": "Technetium-99m pyrophosphate scintigraphy showing grade 2 or 3 uptake confirms ATTR cardiac amyloidosis non-invasively, provided monoclonal light chains are excluded.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Perugini scintigraphy grade",
+          "Tracer myocardial uptake",
+          "Diagnostic interpretation"
+        ],
+        "rows": [
+          [
+            "Grade 0",
+            "No myocardial tracer uptake",
+            "Negative for ATTR cardiac amyloidosis"
+          ],
+          [
+            "Grade 1",
+            "Myocardial uptake less than rib uptake",
+            "Equivocal; warrants biopsy or CMR"
+          ],
+          [
+            "Grade 2 or 3",
+            "Myocardial uptake equal to or greater than rib uptake",
+            "Diagnostic of ATTR cardiomyopathy if light chains negative"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Modern therapy directly targets precursor protein production. AL amyloidosis is treated with anti-plasma cell regimens combining **daratumumab, bortezomib, cyclophosphamide, and dexamethasone**. In ATTR amyloidosis, the oral kinetic tetramer stabilizer **tafamidis at 61 mg daily** or gene-silencing siRNA **patisiran** halts neurologic and cardiac disease progression.",
+      "say": "AL amyloidosis is treated with daratumumab, bortezomib, and dexamethasone. ATTR cardiomyopathy responds to tafamidis or gene-silencing agents like patisiran.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AL amyloidosis therapy",
+          "points": [
+            "Dara-CyBorD anti-plasma cell regimen",
+            "Eliminates clonal light chain synthesis",
+            "Followed by autologous stem cell transplantation"
+          ]
+        },
+        "right": {
+          "title": "ATTR amyloidosis therapy",
+          "points": [
+            "Tafamidis 61 mg daily stabilizes TTR tetramers",
+            "Patisiran or vutrisiran silences hepatic TTR synthesis",
+            "Halts progressive cardiomyopathy and neuropathy"
+          ]
+        }
+      }
+    }
+  ]
+}

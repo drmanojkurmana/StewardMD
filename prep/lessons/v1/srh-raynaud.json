@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "srh-raynaud",
+  "subject": "ss-rheumatology-immunology",
+  "title": "Raynaud phenomenon",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Raynaud phenomenon** is an episodic, reversible vasospastic disorder affecting digital arteries and arterioles in response to cold exposure or emotional stress. The classic triphasic color sequence begins with intense pallor or **white blanching** from digital ischemia, followed by cyanosis or **blue discoloration** from deoxygenation, and concludes with erythema or **red reperfusion**.",
+      "say": "Raynaud phenomenon is an episodic digital vasospasm triggered by cold or emotional stress. The classic response exhibits ischemic pallor, cyanosis, and reperfusion erythema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/raynaud-phenomenon-fig1.webp",
+        "alt": "Triphasic color sequence and vascular changes in Raynaud phenomenon",
+        "caption": "Classic triphasic digital response: ischemic pallor, cyanosis, and reperfusion erythema. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Distinguishing **primary Raynaud phenomenon** or Raynaud disease from secondary disease is critical. Primary Raynaud begins under **age 30**, exhibits symmetric bilateral episodes, normal nailfold capillaroscopy, **negative ANA serology**, normal erythrocyte sedimentation rate, and zero tissue necrosis or digital gangrene.",
+      "say": "Primary Raynaud disease occurs in young individuals with symmetric attacks. Nailfold capillaries, autoantibodies, and inflammatory markers are entirely normal without ulceration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Raynaud disease",
+          "points": [
+            "Onset typically under age 30",
+            "Symmetrical attacks with no digital ulcers",
+            "Normal capillaroscopy and negative ANA"
+          ]
+        },
+        "right": {
+          "title": "Secondary Raynaud phenomenon",
+          "points": [
+            "Onset after age 30 or male sex",
+            "Digital ulcers, necrosis, or asymmetry",
+            "Enlarged capillary loops and positive autoantibodies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Secondary Raynaud phenomenon** arises from underlying connective tissue disorders, most notably **systemic sclerosis** in over 90 percent of cases, mixed connective tissue disease, and systemic lupus erythematosus. Red flags include onset **after age 30**, asymmetric distribution, excruciating pain, digital pitting scars, ulcerations, or digital gangrene.",
+      "say": "Secondary Raynaud phenomenon links to underlying autoimmune disease, especially systemic sclerosis. Warning signs include onset after age 30, digital ulceration, and severe pain.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Underlying condition",
+          "Prevalence in cohort",
+          "Associated clinical features"
+        ],
+        "rows": [
+          [
+            "Systemic sclerosis (SSc)",
+            "Greater than 90 percent",
+            "Sclerodactyly, telangiectasias, pulmonary fibrosis"
+          ],
+          [
+            "Mixed connective tissue disease",
+            "Approximately 85 percent",
+            "Puffy fingers, synovitis, high-titer anti-U1-RNP"
+          ],
+          [
+            "Systemic lupus erythematosus",
+            "Approximately 30 percent",
+            "Malar rash, arthritis, hypocomplementemia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Nailfold capillaroscopy** is the most sensitive non-invasive bedside investigation to distinguish primary from secondary Raynaud. In early systemic sclerosis, capillaroscopy shows **giant dilated capillary loops** exceeding 50 micrometres and microhemorrhages, progressing in late disease to severe **capillary drop-out**, extensive avascular areas, and disorganized neoangiogenesis.",
+      "say": "Nailfold capillaroscopy distinguishes primary from secondary disease. Systemic sclerosis displays giant capillary loops, microhemorrhages, and progressive vascular dropout.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Normal parallel hairpin capillary loops in primary Raynaud"
+          },
+          {
+            "id": "b",
+            "label": "Early SSc pattern: giant dilated loops (>50 micrometres)"
+          },
+          {
+            "id": "c",
+            "label": "Late SSc pattern: extensive capillary dropout and avascular desert"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "General and non-pharmacologic management constitutes foundational care for all patients. Measures include keeping the entire core body warm with layered thermal clothing, wearing insulated gloves and socks, strict **complete cessation of tobacco smoking**, and strict avoidance of sympathomimetic decongestants, ergot derivatives, and non-selective beta-blockers.",
+      "say": "Conservative management requires keeping the core body warm and avoiding chilling. Complete tobacco cessation and avoiding sympathomimetic drugs are mandatory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lifestyle intervention",
+          "Physiologic mechanism",
+          "Clinical recommendation"
+        ],
+        "rows": [
+          [
+            "Core temperature protection",
+            "Prevents reflex cutaneous sympathetic vasoconstriction",
+            "Layered garments, electric hand warmers"
+          ],
+          [
+            "Tobacco cessation",
+            "Eliminates nicotine-induced microvascular spasm",
+            "Mandatory absolute abstinence"
+          ],
+          [
+            "Medication review",
+            "Removes vasoconstrictive pharmacologic triggers",
+            "Discontinue beta-blockers and decongestants"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dihydropyridine calcium channel blockers are the initial pharmacological treatment of choice. Oral **nifedipine at 30 to 60 mg daily** in extended-release formulation or **amlodipine at 5 to 10 mg daily** relaxes vascular smooth muscle, reducing the frequency, duration, and severity of vasospastic digital attacks.",
+      "say": "Dihydropyridine calcium channel blockers are first-line pharmacotherapy for Raynaud phenomenon. Extended-release nifedipine reduces attack frequency and severity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cold-induced calcium influx in digital vascular smooth muscle"
+          },
+          {
+            "id": "b",
+            "label": "Dihydropyridine blockade with nifedipine 30 to 60 mg daily"
+          },
+          {
+            "id": "c",
+            "label": "Arteriolar vasodilation and decreased digital attack frequency"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For patients with inadequate clinical response or intolerable ankle edema from calcium channel blockers, **phosphodiesterase-5 inhibitors** are highly effective second-line therapies. Oral **sildenafil at 20 mg three times daily** or **tadalafil at 20 mg alternate days** increases intracellular cyclic GMP, enhancing digital blood flow and healing refractory ulcers.",
+      "say": "Phosphodiesterase-5 inhibitors provide effective add-on therapy for refractory vasospasm. Sildenafil elevates cyclic GMP to improve digital perfusion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First-line: Calcium blockers",
+          "points": [
+            "Nifedipine 30 to 60 mg daily",
+            "Direct smooth muscle relaxation",
+            "Limits: pedal edema, headache, flushing"
+          ]
+        },
+        "right": {
+          "title": "Second-line: PDE-5 inhibitors",
+          "points": [
+            "Sildenafil 20 mg three times daily",
+            "Augments endothelial nitric oxide-cGMP",
+            "Effective for active digital ulcer healing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Severe acute digital ischemia, critical digital ulcers, or impending gangrene requires emergency hospital admission and continuous intravenous prostacyclin infusions with **iloprost**. To prevent recurrent digital ischemic ulcers in systemic sclerosis, oral **bosentan**, a dual endothelin receptor antagonist, significantly reduces the formation of new ulcers.",
+      "say": "Critical digital ischemia requires hospital admission and intravenous iloprost infusions. Oral bosentan prevents recurrent digital ulcers in systemic sclerosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/juvenile-systemic-sclerosis-fig1.webp",
+        "alt": "Digital ulcers and vascular complications in systemic sclerosis",
+        "caption": "Critical digital ischemia and ulcers require intravenous iloprost and bosentan therapy. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    }
+  ]
+}

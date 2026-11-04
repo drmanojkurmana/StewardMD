@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "srh-nsaids-colchicine",
+  "subject": "ss-rheumatology-immunology",
+  "title": "NSAIDs, colchicine and analgesics",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Nonsteroidal anti-inflammatory drugs** or NSAIDs inhibit cyclooxygenase enzymes COX-1 and COX-2, preventing the conversion of arachidonic acid to prostaglandins and thromboxane. Constitutive **COX-1** maintains gastric mucosal cytoprotection and platelet thromboxane A2 synthesis, whereas inducible **COX-2** is upregulated at sites of joint and soft tissue inflammation.",
+      "say": "NSAIDs inhibit cyclooxygenase enzymes COX-1 and COX-2. Constitutive COX-1 maintains gastric protection, while inducible COX-2 drives inflammatory prostaglandin synthesis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-fig2.webp",
+        "alt": "Cyclooxygenase inhibition and gastric mucosal prostaglandin synthesis pathways",
+        "caption": "Non-selective NSAIDs inhibit COX-1 and COX-2, impairing gastric mucosal defense. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "Selective **COX-2 inhibitors** such as celecoxib and etoricoxib significantly reduce endoscopic and clinically evident upper gastrointestinal ulceration and bleeding compared to non-selective NSAIDs. However, high-risk patients with prior bleeding ulcers require combined therapy with a **proton pump inhibitor** for gastroprotection.",
+      "say": "Selective COX-2 inhibitors like celecoxib reduce gastrointestinal bleeding. High-risk patients with prior ulcers still require co-prescribed proton pump inhibitors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-selective NSAIDs (Naproxen/Ibuprofen)",
+          "points": [
+            "Inhibits both COX-1 and COX-2 enzymes",
+            "High rate of peptic ulceration and bleeding",
+            "Suppresses platelet thromboxane aggregation"
+          ]
+        },
+        "right": {
+          "title": "Selective COX-2 inhibitors (Celecoxib)",
+          "points": [
+            "Selectively spares constitutive gastric COX-1",
+            "50% reduction in symptomatic gastrointestinal ulcers",
+            "Zero antiplatelet effect; does not alter bleeding time"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Renal toxicities of NSAIDs arise from suppressing constitutive renal **prostaglandin E2 and prostacyclin**, which normally preserve renal blood flow and maintain glomerular filtration rate during effective circulatory hypovolemia. NSAIDs trigger acute prerenal acute kidney injury via **afferent arteriolar vasoconstriction**, hyperkalemia, and acute interstitial nephritis.",
+      "say": "NSAIDs suppress renal prostaglandins that maintain glomerular perfusion. They trigger prerenal acute kidney injury through afferent arteriolar vasoconstriction and hyperkalemia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nsaids-antipyretic-analgesics-fig1.webp",
+        "alt": "Renal hemodynamics and afferent arteriolar vasoconstriction from NSAIDs",
+        "caption": "NSAIDs induce afferent arteriolar vasoconstriction, dropping glomerular filtration in hypovolemia. Credit: StewardMD.",
+        "ar": 1.33
+      }
+    },
+    {
+      "tx": "All NSAIDs, with the possible exception of low-dose naproxen, increase the relative risk of myocardial infarction, stroke, systemic hypertension, and heart failure exacerbations. This cardiovascular toxicity is driven by suppressing endothelial **COX-2-derived anti-thrombotic prostacyclin** without concomitantly suppressing platelet **COX-1-derived pro-thrombotic thromboxane A2**.",
+      "say": "All NSAIDs elevate the risk of myocardial infarction, stroke, and hypertension. This cardiovascular risk stems from suppressing endothelial prostacyclin without suppressing thromboxane.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Selective or non-selective inhibition of endothelial COX-2"
+          },
+          {
+            "id": "b",
+            "label": "Depressed vasodilatory, anti-thrombotic prostacyclin (PGI2) levels"
+          },
+          {
+            "id": "c",
+            "label": "Unchecked platelet thromboxane A2 driving vasoconstriction and thrombosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Colchicine** exerts its primary anti-inflammatory mechanism by binding unpolymerized tubulin heterodimers, inhibiting **microtubule polymerization and elongation**. Disrupting microtubule dynamics paralyzes neutrophil chemotaxis, lysosomal degranulation, phagocytosis, and suppresses activation of the **NLRP3 inflammasome**.",
+      "say": "Colchicine binds unpolymerized tubulin to prevent microtubule polymerization. This disrupts neutrophil chemotaxis, phagocytosis, and suppresses NLRP3 inflammasome assembly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Colchicine binds cytosolic tubulin heterodimers"
+          },
+          {
+            "id": "b",
+            "label": "Inhibition of microtubule polymerization and cytoskeletal arrest"
+          },
+          {
+            "id": "c",
+            "label": "Suppression of neutrophil chemotaxis and NLRP3 inflammasome activation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The randomized **AGREE trial** established that low-dose colchicine (**1.2 mg immediately followed by 0.6 mg 1 hour later**, total 1.8 mg over 1 hour) achieves equivalent pain reduction to high-dose regimens (4.8 mg over 6 hours) in acute gout flares, while exhibiting a gastrointestinal safety profile indistinguishable from placebo.",
+      "say": "The AGREE trial established that low-dose colchicine, 1.2 mg followed by 0.6 mg one hour later, is as effective as high-dose regimens while avoiding severe diarrhea.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trial parameter",
+          "Low-dose regimen (AGREE)",
+          "High-dose regimen (Historic)"
+        ],
+        "rows": [
+          [
+            "Dosing protocol",
+            "1.2 mg stat then 0.6 mg at 1 hour (total 1.8 mg)",
+            "1.2 mg stat then 0.6 mg hourly for 6 hours (total 4.8 mg)"
+          ],
+          [
+            "Clinical efficacy",
+            "Greater than 50% pain relief at 24 hours",
+            "Equivalent 50% pain relief at 24 hours"
+          ],
+          [
+            "Adverse events",
+            "Diarrhea rate 23% (identical to placebo)",
+            "Severe diarrhea and vomiting in 77% of patients"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Colchicine is metabolized hepatically by **CYP3A4** and exported into bile and urine by the **P-glycoprotein efflux transporter**. Co-administration of strong CYP3A4 or P-glycoprotein inhibitors such as **clarithromycin**, ketoconazole, or cyclosporine in patients with renal or hepatic impairment causes fatal colchicine accumulation with severe neuromyopathy and bone marrow aplasia.",
+      "say": "Colchicine is metabolized by CYP3A4 and cleared by P-glycoprotein. Combining colchicine with clarithromycin or cyclosporine can cause fatal toxicity and bone marrow failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Colchicine clearance pathways",
+          "points": [
+            "Hepatic oxidative metabolism by CYP3A4",
+            "Biliary and renal export by P-glycoprotein",
+            "Narrow therapeutic therapeutic index"
+          ]
+        },
+        "right": {
+          "title": "Dangerous drug interactions",
+          "points": [
+            "Clarithromycin, erythromycin, ketoconazole",
+            "Cyclosporine, verapamil, diltiazem",
+            "Triggers fatal rhabdomyolysis and pancytopenia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Low-dose colchicine at **0.5 mg daily** exerts systemic vascular cardioprotective benefits. The landmark **LoDoCo2** and **COLCOT** randomized clinical trials demonstrated that low-dose colchicine significantly reduces major adverse cardiovascular events including myocardial infarction, stroke, and cardiovascular death in chronic coronary artery disease and post-infarction care.",
+      "say": "Low-dose colchicine at 0.5 mg daily provides vascular cardioprotection. The LoDoCo2 and COLCOT trials showed significant reductions in myocardial infarction and stroke.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cardiovascular trial",
+          "Patient population",
+          "Primary cardiovascular outcome"
+        ],
+        "rows": [
+          [
+            "COLCOT trial",
+            "Post-myocardial infarction within 30 days",
+            "23% relative risk reduction in major cardiovascular events"
+          ],
+          [
+            "LoDoCo2 trial",
+            "Chronic stable coronary artery disease",
+            "28% reduction in cardiovascular death, MI, or stroke"
+          ],
+          [
+            "Mechanism of benefit",
+            "Inhibition of plaque NLRP3 inflammasome",
+            "Stabilizes coronary atheromatous fibrous cap"
+          ]
+        ]
+      }
+    }
+  ]
+}
