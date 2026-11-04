@@ -2,117 +2,152 @@
  "v": 1,
  "module": "scc-endocrine-icu",
  "subject": "ss-critical-care",
- "title": "Endocrine emergencies in critical care: DKA, HHS and glycaemic control",
- "minutes": 5,
+ "title": "Endocrine emergencies in critical care",
+ "minutes": 8,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "**Hyperosmolar hyperglycaemic state** (HHS) has marked hyperglycaemia and **hyperosmolality** with little ketosis, often in older adults with type 2 diabetes. Effective osmolality is 2Na plus glucose divided by 18. Common triggers include infection, stroke, and drugs such as **thiazide diuretics**. Mortality is substantially higher than in DKA, so precipitants must be sought actively.",
-   "say": "Hyperosmolar hyperglycaemic state, or HHS, has marked hyperglycaemia and hyperosmolality with little ketosis, often in older adults with type 2 diabetes. Effective osmolality is calculated as twice sodium plus glucose divided by 18. Common triggers include infection, stroke, and drugs such as thiazide diuretics. Mortality is substantially higher than in DKA, so precipitants must be sought actively.",
+   "tx": "Diabetic ketoacidosis is treated with fluid first, and **insulin** at 0.1 units/kg/h is started only after the potassium is known. If the potassium is below 3.3 mmol/L, you should withhold that insulin until the potassium has been replaced. Bicarbonate is considered only when the pH is below 6.9, and it is not a routine part of the protocol. The drawing is the ketogenesis pathway that follows low insulin, the potassium line on it is cut off, and the insulin rate is not printed.",
+   "say": "Diabetic ketoacidosis is treated with fluid first, and insulin at 0.1 units/kg/h is started only after the potassium is known. If the potassium is below 3.3 mmol/L, you should withhold that insulin until the potassium has been replaced. Bicarbonate is considered only when the pH is below 6.9, and it is not a routine part of the protocol. The drawing is the ketogenesis pathway that follows low insulin, the potassium line on it is cut off, and the insulin rate is not printed.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Dehydration and glucose above 600"
-     },
-     {
-      "id": "b",
-      "label": "Hyperosmolality and little ketosis"
-     },
-     {
-      "id": "c",
-      "label": "Look for trigger such as infection"
-     },
-     {
-      "id": "d",
-      "label": "Slow fluids and insulin"
-     }
+    "kind": "image",
+    "src": "v1/kb/media/fuel-metabolism-feed-fast-cycle-and-dka-fig1.webp",
+    "alt": "Diagram of fasting and diabetic ketogenesis, from lipolysis in fat to ketone bodies in the liver, with acidosis and osmotic diuresis.",
+    "caption": "Fasting and diabetic ketogenesis, from lipolysis to ketone bodies, with acidosis and osmotic diuresis. The potassium line is cut off. The insulin infusion rate is not printed (StewardMD).",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "Add dextrose when the glucose falls to about 200 mg/dL, and keep the insulin running until the **anion gap** closes. Stopping insulin because the glucose looks normal leaves the ketoacidosis untreated. The gap, not the glucose alone, is what tells you the ketones are clearing. You should check the glucose often, because dextrose does not remove the risk of a later fall. A normal glucose is not the end of the protocol.",
+   "say": "Add dextrose when the glucose falls to about 200 mg/dL, and keep the insulin running until the anion gap closes. Stopping insulin because the glucose looks normal leaves the ketoacidosis untreated. The gap, not the glucose alone, is what tells you the ketones are clearing. You should check the glucose often, because dextrose does not remove the risk of a later fall. A normal glucose is not the end of the protocol.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Glucose",
+     "Insulin",
+     "Dextrose"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "Still high",
+      "Keep the infusion",
+      "Not yet"
      ],
      [
-      "b",
-      "c"
+      "About 200 mg/dL",
+      "Keep the infusion",
+      "Add dextrose"
      ],
      [
-      "c",
-      "d"
+      "Gap closed",
+      "Then you may step down",
+      "Still watch the glucose"
      ]
     ]
    }
   },
   {
-   "tx": "**Potassium** needs careful handling in both conditions. Total body potassium is depleted by osmotic diuresis and vomiting, even when the serum value looks normal or high. Insulin drives potassium into cells, so serum levels can fall quickly. Do not start insulin if potassium is below 3.3 mEq/L, and replace it first. Check electrolytes and gases every 2 to 3 hours during treatment.",
-   "say": "Potassium needs careful handling in both conditions. Total body potassium is depleted by osmotic diuresis and vomiting, even when the serum value looks normal or high. Insulin drives potassium into cells, so serum levels can fall quickly. Do not start insulin if potassium is below 3.3 mEq/L, and replace it first. Check electrolytes and gases every 2 to 3 hours during treatment.",
+   "tx": "The **hyperosmolar hyperglycaemic state** is more dehydrated and less acidotic than ketoacidosis. Enough insulin is often present to suppress ketogenesis, which is why the gap may stay near normal. Fluid is the main treatment, and insulin doses are smaller than in ketoacidosis. Thrombosis risk is high, so you should look for clot while the osmolality falls. The drawing is suppressed ketogenesis, extreme hyperglycaemia, and cerebral dehydration. Its insulin lack label is printed twice, and no dose is on the figure.",
+   "say": "The hyperosmolar hyperglycaemic state is more dehydrated and less acidotic than ketoacidosis. Enough insulin is often present to suppress ketogenesis, which is why the gap may stay near normal. Fluid is the main treatment, and insulin doses are smaller than in ketoacidosis. Thrombosis risk is high, so you should look for clot while the osmolality falls. The drawing is suppressed ketogenesis, extreme hyperglycaemia, and cerebral dehydration. Its insulin lack label is printed twice, and no dose is on the figure.",
    "vis": {
     "kind": "image",
-    "src": "v1/kb/media/fuel-metabolism-feed-fast-cycle-and-dka-fig1.webp",
-    "alt": "Adipocyte lipolysis, hepatic ketogenesis and osmotic diuresis with total-body potassium loss in diabetic ketoacidosis.",
-    "caption": "Lipolysis, hepatic ketogenesis and osmotic diuresis with total-body potassium loss. The insulin hold threshold is in the text, not on the drawing (StewardMD).",
+    "src": "v1/kb/media/hhs-fig1.webp",
+    "alt": "Pathway of hyperosmolar hyperglycaemic state, from relative insulin lack to suppressed ketogenesis, extreme hyperglycaemia, osmotic diuresis, and cerebral dehydration.",
+    "caption": "Relative insulin lack with ketogenesis suppressed, extreme hyperglycaemia, osmotic diuresis, and cerebral dehydration. The insulin lack label is printed twice. No dose and no osmolality cutoff are on the drawing (StewardMD).",
     "ar": 1.3405
    }
   },
   {
-   "tx": "**Euglycaemic DKA** occurs with glucose below about 250 mg/dL and is linked to **SGLT2 inhibitors**, low carbohydrate intake, pregnancy and surgery. These drugs raise glucagon and ketone production while lowering insulin. Diagnose with beta-hydroxybutyrate. Treat with insulin and dextrose infusion together, so acidosis resolves while glucose stays safe. Stop the SGLT2 inhibitor. In pregnancy, maternal and fetal mortality risk is high.",
-   "say": "Euglycaemic DKA occurs with glucose below about 250 mg/dL and is linked to SGLT2 inhibitors, low carbohydrate intake, pregnancy and surgery. These drugs raise glucagon and ketone production while lowering insulin. Diagnose it with beta-hydroxybutyrate. Treat with insulin and dextrose infusion together, so acidosis resolves while glucose stays safe. Stop the SGLT2 inhibitor. In pregnancy, maternal and fetal mortality risk is high.",
+   "tx": "**NICE-SUGAR** found that an intensive glucose target of 81 to 108 mg/dL increased mortality compared with a target of 180 mg/dL or less. You should start insulin when the glucose is at or above 180 mg/dL. The usual intensive care target is about 144 to 180 mg/dL. A tighter target buys hypoglycaemia. It does not buy a better survival.",
+   "say": "NICE-SUGAR found that an intensive glucose target of 81 to 108 mg/dL increased mortality compared with a target of 180 mg/dL or less. You should start insulin when the glucose is at or above 180 mg/dL. The usual intensive care target is about 144 to 180 mg/dL. A tighter target buys hypoglycaemia. It does not buy a better survival.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Mechanism",
+     "title": "Intensive target",
      "points": [
-      "Less insulin",
-      "More glucagon",
-      "More ketones"
+      "81 to 108 mg/dL",
+      "Mortality rose in NICE-SUGAR",
+      "More hypoglycaemia"
      ]
     },
     "right": {
-     "title": "Treatment",
+     "title": "Moderate target",
      "points": [
-      "Insulin infusion",
-      "Add dextrose",
-      "Stop SGLT2 inhibitor"
+      "180 mg/dL or less was safer",
+      "Start insulin at or above 180",
+      "Usual aim about 144 to 180"
      ]
     }
    }
   },
   {
-   "tx": "In critical illness, **NICE-SUGAR** trials showed that tight glucose control increases **hypoglycaemia** and mortality, so a moderate target is preferred over strict normalisation. **Sliding-scale insulin** alone is inadequate. Use scheduled **basal plus prandial insulin** when eating, or an **intravenous infusion** when unstable. Consider **critical illness corticosteroid insufficiency** and **adrenal crisis** in shock unresponsive to fluids.",
-   "say": "In critical illness, NICE-SUGAR trials showed that tight glucose control increases hypoglycaemia and mortality, so a moderate target is preferred over strict normalisation. Sliding-scale insulin alone is inadequate. Use scheduled basal plus prandial insulin when eating, or an intravenous infusion when unstable. Consider critical illness corticosteroid insufficiency and adrenal crisis in shock unresponsive to fluids.",
+   "tx": "**Corticosteroid insufficiency** in critical illness is not diagnosed by a random cortisol. If septic shock still needs a high vasopressor dose after fluid, you should give **hydrocortisone** without waiting for a stimulation test. That test does not change the first decision in this patient. A single cortisol value is not a gate you have to pass. Treat the shock you can see.",
+   "say": "Corticosteroid insufficiency in critical illness is not diagnosed by a random cortisol. If septic shock still needs a high vasopressor dose after fluid, you should give hydrocortisone without waiting for a stimulation test. That test does not change the first decision in this patient. A single cortisol value is not a gate you have to pass. Treat the shock you can see.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "What you do",
+     "What you do not do"
+    ],
+    "rows": [
+     [
+      "Random cortisol",
+      "Does not make the diagnosis",
+      "Do not wait on one number"
+     ],
+     [
+      "Shock on vasopressors after fluid",
+      "Give hydrocortisone",
+      "Do not wait for a stim test"
+     ],
+     [
+      "A test that will not change care",
+      "Skip it for now",
+      "Do not delay the drug"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenal crisis** is shock together with a suggestive history. Treatment is intravenous hydrocortisone 100 mg, given with saline. **Fludrocortisone** is for confirmed primary adrenal failure after the crisis, and not for the first hour. The drawing is cortisol deficiency and aldosterone loss, with refractory hypotension, hyponatraemia, and hyperkalaemia. The hydrocortisone dose is not printed on that drawing.",
+   "say": "Adrenal crisis is shock together with a suggestive history. Treatment is intravenous hydrocortisone 100 mg, given with saline. Fludrocortisone is for confirmed primary adrenal failure after the crisis, and not for the first hour. The drawing is cortisol deficiency and aldosterone loss, with refractory hypotension, hyponatraemia, and hyperkalaemia. The hydrocortisone dose is not printed on that drawing.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-endocrine-icu-fig1.webp",
-    "alt": "Flowchart showing critical illness glucose management, comparing tight vs. moderate control, and different insulin regimens.",
-    "caption": "Glucose control in critical illness: moderate targets and appropriate insulin",
-    "ar": 1.8349
+    "src": "v1/kb/media/adrenal-crisis-fig1.webp",
+    "alt": "Adrenal crisis diagram with cortisol deficiency, aldosterone loss, refractory hypotension, hyponatraemia, and hyperkalaemia.",
+    "caption": "Cortisol deficiency and aldosterone loss, with refractory hypotension, hyponatraemia, and hyperkalaemia. The hydrocortisone dose is not printed (StewardMD).",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**Thyroid storm** treatment starts with a beta blocker and a thionamide. Iodine is given at least one hour after the thionamide, so the gland cannot turn the new iodine into more hormone. A glucocorticoid is given as well, and you should treat the trigger. **Propylthiouracil** is preferred when it is available, because it also blocks peripheral conversion. The drawing is the hormone surge, with fever, atrial fibrillation, and high output failure. The drug order is not printed.",
+   "say": "Thyroid storm treatment starts with a beta blocker and a thionamide. Iodine is given at least one hour after the thionamide, so the gland cannot turn the new iodine into more hormone. A glucocorticoid is given as well, and you should treat the trigger. Propylthiouracil is preferred when it is available, because it also blocks peripheral conversion. The drawing is the hormone surge, with fever, atrial fibrillation, and high output failure. The drug order is not printed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-storm-fig1.webp",
+    "alt": "Thyroid storm diagram with a free hormone surge, fever, atrial fibrillation, high output failure, and triggers of infection, surgery, and trauma.",
+    "caption": "Free hormone surge with fever, atrial fibrillation, high output failure, and triggers such as infection, surgery, and trauma. The order of a thionamide before iodine is not printed (StewardMD).",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "**Myxoedema** coma is treated with intravenous thyroid hormone and a stress dose glucocorticoid until adrenal failure is excluded. Rewarming is passive, because active warming can drop the blood pressure. Sedatives and hyponatraemia are common precipitants you should look for. The drawing is hypothermia, hypoventilation, bradycardia, a pericardial effusion, and hyponatraemia. The hormone replacement and the glucocorticoid are not printed on it.",
+   "say": "Myxoedema coma is treated with intravenous thyroid hormone and a stress dose glucocorticoid until adrenal failure is excluded. Rewarming is passive, because active warming can drop the blood pressure. Sedatives and hyponatraemia are common precipitants you should look for. The drawing is hypothermia, hypoventilation, bradycardia, a pericardial effusion, and hyponatraemia. The hormone replacement and the glucocorticoid are not printed on it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myxedema-fig1.webp",
+    "alt": "Myxoedema coma diagram with hypothermia, thyroid atrophy, hypoventilation, bradycardia, pericardial effusion, and hyponatraemia.",
+    "caption": "Hypothermia, alveolar hypoventilation, sinus bradycardia, pericardial effusion, and hyponatraemia. Thyroid hormone and the glucocorticoid are not printed (StewardMD).",
+    "ar": 1.3405
    }
   }
  ],
- "quiz": [
-  "q_738a32063dd2",
-  "q_4b2f8d62abea",
-  "q_8dacd1bd36d9"
- ],
- "src": [],
+ "quiz": [],
  "refs": [
-  "NICE guideline on diabetes in adults: management of hyperglycaemia in hospital",
-  "NICE-SUGAR Study Investigators, New England Journal of Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 31
- }
+  "Washington Manual of Critical Care 4e, Diabetic Ketoacidosis and Glucose Control",
+  "Washington Manual of Critical Care 4e, Adrenal Insufficiency and Thyroid Disorders",
+  "Marino ICU Book 5e, endocrine emergencies",
+  "NICE-SUGAR, New England Journal of Medicine 2009"
+ ]
 }
