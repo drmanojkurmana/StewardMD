@@ -2,34 +2,110 @@
  "v": 1,
  "module": "scc-trauma-care",
  "subject": "ss-critical-care",
- "title": "Trauma critical care: primary survey, haemorrhage and chest trauma essentials",
- "minutes": 6,
+ "title": "Trauma critical care",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [
+  "q_c798f421000f",
+  "q_bafc84d7f2f7",
+  "q_fbc974ca9816"
+ ],
  "steps": [
   {
-   "tx": "The **xABCDE** approach guides the primary survey. External haemorrhage is controlled first, because exsanguinating bleeding kills faster than any airway problem. Then the airway is secured with cervical spine protection, followed by breathing and circulation. Uncontrolled haemorrhage is the most common preventable cause of early death, so direct pressure and tourniquets come before everything else in a bleeding patient.",
-   "say": "The xABCDE approach guides the primary survey. External haemorrhage is controlled first, because exsanguinating bleeding kills faster than any airway problem. Then the airway is secured with cervical spine protection, followed by breathing and circulation. Uncontrolled haemorrhage is the most common preventable cause of early death, so direct pressure and tourniquets come before everything else in a bleeding patient.",
+   "tx": "The trauma **primary survey** is catastrophic external bleeding and the airway together, then breathing, circulation, disability, and exposure. The **cervical spine** is immobilised until it is cleared. A full history is not required before those first actions. The story can wait. The bleeding and the airway are first.",
+   "say": "The trauma primary survey is catastrophic external bleeding and the airway together, then breathing, circulation, disability, and exposure. The cervical spine is immobilised until it is cleared. A full history is not required before those first actions. The story can wait. The bleeding and the airway are first.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/advanced-trauma-life-support-primary-survey-fig1.webp",
+    "alt": "Supine patient with a tube, a cervical collar, an anterior chest needle, and an arm intravenous line.",
+    "caption": "A secured airway, a cervical collar, an anterior chest needle, and an arm line. The arm line is not a pelvic binder or a tourniquet. The needle is drawn on the anterior chest, and current teaching also uses the lateral 4th or 5th space. The drawing does not show catastrophic bleeding control coming with the airway. Credit: StewardMD.",
+    "ar": 1.333
+   }
+  },
+  {
+   "tx": "A **tertiary survey** is a repeated head-to-toe examination within 24 hours, after resuscitation, and it looks for injuries that were missed in the first hour. It is written down. A normal first pass does not retire the search. The second look is part of the admission, and it is not optional.",
+   "say": "A tertiary survey is a repeated head-to-toe examination within 24 hours, after resuscitation, and it looks for injuries that were missed in the first hour. It is written down. A normal first pass does not retire the search. The second look is part of the admission, and it is not optional.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Survey",
+     "When it happens"
+    ],
+    "rows": [
+     [
+      "Primary",
+      "Bleeding and airway first, before the history"
+     ],
+     [
+      "Secondary",
+      "The fuller look once the first threats are held"
+     ],
+     [
+      "Tertiary",
+      "Head to toe again within 24 hours"
+     ],
+     [
+      "A normal first pass",
+      "Does not retire the tertiary survey"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute **traumatic coagulopathy** is present on arrival, and it is driven by shock and tissue injury, not only by later dilution. **Damage control** surgery is packing and a temporary closure when the **lethal triad** of hypothermia, acidosis, and coagulopathy is underway. Crystalloid is limited. Physiology is corrected in the ICU before the definitive reconstruction.",
+   "say": "Acute traumatic coagulopathy is present on arrival, and it is driven by shock and tissue injury, not only by later dilution. Damage control surgery is packing and a temporary closure when the lethal triad of hypothermia, acidosis, and coagulopathy is underway. Crystalloid is limited. Physiology is corrected in the ICU before the definitive reconstruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Bleeding, low output, compensation cascades, the lethal triad, and an ATLS class table.",
+    "caption": "Blood-loss classes and the lethal triad of hypothermia, acidosis, and coagulopathy. The classes are estimates of haemorrhage, not a shock index. The drawing does not show a pelvic binder or a damage-control pack. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "An open-book pelvic fracture in a shocked patient gets a **pelvic binder** centred over the **greater trochanters**, and it is not placed over the iliac crests. The next move is haemorrhage control. A long CT tour is not the next step while the blood pressure is still falling. The binder is a bridge to haemostasis, and it is not the end of treatment.",
+   "say": "An open-book pelvic fracture in a shocked patient gets a pelvic binder centred over the greater trochanters, and it is not placed over the iliac crests. The next move is haemorrhage control. A long CT tour is not the next step while the blood pressure is still falling. The binder is a bridge to haemostasis, and it is not the end of treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Binder position",
+     "points": [
+      "Centred on the greater trochanters",
+      "Not on the iliac crests",
+      "For an open-book pelvis in shock"
+     ]
+    },
+    "right": {
+     "title": "What comes next",
+     "points": [
+      "Haemorrhage control",
+      "Not a long CT tour while pressure falls",
+      "The binder is a bridge"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The hypoxia of a **flail chest** is the pulmonary **contusion** underneath, and it is not the paradoxical movement alone. Analgesia, including an epidural in a selected patient, and non-invasive ventilation are tried when the airway is safe. Intubation is for the patient who is tiring. Surgical **fixation** is for a chest wall that is still failing after that care, and it is not for every broken rib.",
+   "say": "The hypoxia of a flail chest is the pulmonary contusion underneath, and it is not the paradoxical movement alone. Analgesia, including an epidural in a selected patient, and non-invasive ventilation are tried when the airway is safe. Intubation is for the patient who is tiring. Surgical fixation is for a chest wall that is still failing after that care, and it is not for every broken rib.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Control external bleeding"
+      "label": "Flail chest, hypoxia is the contusion"
      },
      {
       "id": "b",
-      "label": "Airway with spine care"
+      "label": "Analgesia, epidural if selected"
      },
      {
       "id": "c",
-      "label": "Breathing"
+      "label": "Non-invasive ventilation if the airway is safe"
      },
      {
       "id": "d",
-      "label": "Circulation"
-     },
-     {
-      "id": "e",
-      "label": "Disability and exposure"
+      "label": "Intubate if tiring; fixation if the wall still fails"
      }
     ],
     "edges": [
@@ -44,109 +120,90 @@
      [
       "c",
       "d"
-     ],
-     [
-      "d",
-      "e"
      ]
     ]
    }
   },
   {
-   "tx": "In haemorrhagic shock, **tranexamic acid** 1 g is given intravenously over 10 minutes, ideally within 3 hours of injury. Massive transfusion is best delivered in a 1:1 ratio of red cells to plasma to limit **dilutional coagulopathy**. Ionised calcium should be kept between 1.1 and 1.3 mmol/L. Permissive hypotension aims for a systolic pressure of 80 to 90 mmHg in non-head-injured patients, avoiding the aim of normal pressures.",
-   "say": "In haemorrhagic shock, tranexamic acid 1 g is given intravenously over 10 minutes, ideally within 3 hours of injury. Massive transfusion is best delivered in a 1:1 ratio of red cells to plasma to limit dilutional coagulopathy. Ionised calcium should be kept between 1.1 and 1.3 millimoles per litre. Permissive hypotension aims for a systolic pressure of 80 to 90 millimetres of mercury in non-head-injured patients.",
+   "tx": "**Abdominal compartment syndrome** is a **bladder pressure** above 20 mmHg with new organ failure. Intra-abdominal hypertension is a sustained bladder pressure of 12 mmHg or more. The pressure is measured at end expiration, with the patient supine. Sedation, nasogastric drainage, and treatment of ascites come before laparotomy, unless the abdomen is already why the patient is dying.",
+   "say": "Abdominal compartment syndrome is a bladder pressure above 20 mmHg with new organ failure. Intra-abdominal hypertension is a sustained bladder pressure of 12 mmHg or more. The pressure is measured at end expiration, with the patient supine. Sedation, nasogastric drainage, and treatment of ascites come before laparotomy, unless the abdomen is already why the patient is dying.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Element",
-     "Target or dose",
-     "Note"
+     "Bladder pressure",
+     "Name"
     ],
     "rows": [
      [
-      "Tranexamic acid",
-      "1 g IV over 10 minutes",
-      "Within 3 hours of injury"
+      "12 mmHg or more, sustained",
+      "Intra-abdominal hypertension"
      ],
      [
-      "Red cells to plasma",
-      "1:1 ratio",
-      "Limits dilution"
+      "Above 20 mmHg plus organ failure",
+      "Abdominal compartment syndrome"
      ],
      [
-      "Ionised calcium",
-      "1.1 to 1.3 mmol/L",
-      "Supports clotting"
+      "How to measure",
+      "End expiration, supine"
      ],
      [
-      "Systolic BP (no TBI)",
-      "80 to 90 mmHg",
-      "Permissive hypotension"
+      "Before laparotomy",
+      "Sedation, drainage, ascites, unless dying now"
      ]
     ]
    }
   },
   {
-   "tx": "Blunt chest trauma can cause a **flail chest**, defined as three or more ribs fractured in at least two places, creating a segment with paradoxical movement. Pain causes splinting and atelectasis. Multimodal analgesia, including thoracic epidural or paravertebral blocks, improves ventilation. CT is the best imaging for flail segments and lung contusion. Cautious fluids are needed because excess loading worsens pulmonary contusion and **ARDS** risk.",
-   "say": "Blunt chest trauma can cause a flail chest, defined as three or more ribs fractured in at least two places, creating a segment with paradoxical movement. Pain causes splinting and atelectasis. Multimodal analgesia, including thoracic epidural or paravertebral blocks, improves ventilation. CT is the best imaging for flail segments and lung contusion. Cautious fluids are needed because excess loading worsens pulmonary contusion and acute respiratory distress syndrome risk.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-trauma-care-fig1.webp",
-    "alt": "Diagram showing flail chest with paradoxical movement of a fractured rib segment during breathing, alongside a CT scan showing rib fractures and lung contusion.",
-    "caption": "Flail chest: paradoxical movement from multiple rib fractures. Image: James Heilman, MD, CC BY-SA 4.0, Wikimedia Commons.",
-    "ar": 0.9683
-   }
-  },
-  {
-   "tx": "Blast injury can damage the lungs even when eardrums are intact, so absent tympanic rupture does not exclude significant primary blast injury. Blast lung can allow air entry into pulmonary veins, causing **arterial air embolism** and sudden collapse. Aggressive positive-pressure ventilation must be avoided because it worsens lung damage. Manage as a full trauma patient with a standard primary survey.",
-   "say": "Blast injury can damage the lungs even when eardrums are intact, so absent eardrum rupture does not exclude significant primary blast injury. Blast lung can allow air entry into pulmonary veins, causing arterial air embolism and sudden collapse. Aggressive positive pressure ventilation must be avoided because it worsens lung damage. Manage as a full trauma patient with a standard primary survey.",
+   "tx": "**Fat embolism** is usually seen 24 to 72 hours after a long-bone or pelvic fracture, with hypoxia, confusion, and **petechiae** on the conjunctiva or the axilla. Treatment is oxygen and fixation of the fracture. There is no specific drug, and steroids are not a routine antidote. The rash is a clue, and it is not a reason for a steroid.",
+   "say": "Fat embolism is usually seen 24 to 72 hours after a long-bone or pelvic fracture, with hypoxia, confusion, and petechiae on the conjunctiva or the axilla. Treatment is oxygen and fixation of the fracture. There is no specific drug, and steroids are not a routine antidote. The rash is a clue, and it is not a reason for a steroid.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Blast lung risks",
+     "title": "When it appears",
      "points": [
-      "Air embolism to brain or heart",
-      "Worsened by forced ventilation"
+      "24 to 72 hours after the fracture",
+      "Long bone or pelvis",
+      "Hypoxia, confusion, petechiae"
      ]
     },
     "right": {
-     "title": "Safe approach",
+     "title": "Treatment",
      "points": [
-      "Standard primary survey",
-      "Gentle ventilation strategy"
+      "Oxygen",
+      "Fix the fracture",
+      "No routine steroid"
      ]
     }
    }
   },
   {
-   "tx": "A tertiary survey is repeated within 24 hours to find occult injuries missed earlier. Abdominal compartment syndrome and fat embolism syndrome are also key late complications in critical care. Trauma care sits within **damage control surgery**, where a short operation controls bleeding and contamination, and the patient moves to intensive care to be rewarmed and corrected before definitive repair.",
-   "say": "A tertiary survey is repeated within 24 hours to find occult injuries missed earlier. Abdominal compartment syndrome and fat embolism syndrome are also key late complications in critical care. Trauma care sits within damage control surgery, where a short operation controls bleeding and contamination, and the patient moves to intensive care to be rewarmed and corrected before definitive repair.",
-   "vis": null
+   "tx": "**Neurogenic shock** is hypotension with bradycardia from a high cord injury, usually above T6, and it is treated with a vasopressor and sometimes atropine. **Spinal shock** is a temporary loss of reflexes below the lesion. They are not the same, and neither is haemorrhagic shock. High-dose **methylprednisolone** is not routine. A crushed limb is a source of potassium and **myoglobin** when it is freed, so isotonic fluid is running before release, and a tight compartment is a fasciotomy.",
+   "say": "Neurogenic shock is hypotension with bradycardia from a high cord injury, usually above T6, and it is treated with a vasopressor and sometimes atropine. Spinal shock is a temporary loss of reflexes below the lesion. They are not the same, and neither is haemorrhagic shock. High-dose methylprednisolone is not routine. A crushed limb is a source of potassium and myoglobin when it is freed, so isotonic fluid is running before release, and a tight compartment is a fasciotomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Label",
+     "What it is"
+    ],
+    "rows": [
+     [
+      "Neurogenic shock",
+      "Low pressure and bradycardia, usually above T6"
+     ],
+     [
+      "Spinal shock",
+      "Reflexes lost below the lesion, for a time"
+     ],
+     [
+      "Haemorrhagic shock",
+      "A different illness, look for bleeding"
+     ],
+     [
+      "Methylprednisolone",
+      "Not routine; watch myoglobin on limb release"
+     ]
+    ]
+   }
   }
- ],
- "quiz": [
-  "q_c798f421000f",
-  "q_bafc84d7f2f7",
-  "q_fbc974ca9816"
- ],
- "src": [],
- "refs": [
-  "Advanced Trauma Life Support (ATLS) Student Course Manual, American College of Surgeons",
-  "NICE guideline NG39 Major trauma: assessment and initial management"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 33
- }
+ ]
 }

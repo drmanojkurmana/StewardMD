@@ -2,162 +2,208 @@
  "v": 1,
  "module": "scc-pancreatitis",
  "subject": "ss-critical-care",
- "title": "Severe Acute Pancreatitis: Classification, Resuscitation, Nutrition and Infected Necrosis",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "Gallstones and alcohol are the commonest causes, with gallstones responsible for roughly 30 to 60 percent of cases. An **ALT above three times normal** or biliary dilatation on imaging points to a biliary cause. Hypertriglyceridaemia can falsely lower amylase, so **lipase** is the preferred enzyme. Persistent organ failure, not enzyme magnitude, decides severity.",
-   "say": "Gallstones and alcohol are the commonest causes, with gallstones responsible for roughly 30 to 60 percent of cases. An ALT above three times normal or biliary dilatation on imaging points to a biliary cause. Hypertriglyceridaemia can falsely lower amylase, so lipase is the preferred enzyme. Persistent organ failure, not enzyme magnitude, decides severity.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-pancreatitis-fig1.webp",
-    "alt": "Diagram showing gallstones and alcohol as primary causes of acute pancreatitis. It highlights ALT, biliary dilatation, and lipase as diagnostic indicators, and persistent organ failure as a severity marker.",
-    "caption": "Common causes and key diagnostic markers of acute pancreatitis",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Early fluid resuscitation should be moderate and goal-directed, not aggressive. **Ringer lactate** is preferred over 0.9 percent saline. A **10 mL/kg bolus** is reserved for signs of hypovolaemia. Haemoconcentration above 44 percent and BUN above 25 mg/dL are markers of severity. Aggressive high-volume fluid loading risks abdominal compartment syndrome.",
-   "say": "Early fluid resuscitation should be moderate and goal-directed, not aggressive. Ringer lactate is preferred over 0.9 percent saline. A 10 mL per kg bolus is reserved for signs of hypovolaemia. Haemoconcentration above 44 percent and BUN above 25 mg per dL are markers of severity. Aggressive high-volume fluid loading risks abdominal compartment syndrome.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Assess volume status"
-     },
-     {
-      "id": "b",
-      "label": "Hypovolaemic signs?"
-     },
-     {
-      "id": "c",
-      "label": "10 mL/kg Ringer lactate"
-     },
-     {
-      "id": "d",
-      "label": "Moderate goal-directed fluids"
-     },
-     {
-      "id": "e",
-      "label": "Monitor urine output and haematocrit"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "yes"
-     ],
-     [
-      "b",
-      "d",
-      "no"
-     ],
-     [
-      "c",
-      "e"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Infected pancreatic necrosis** typically appears after one to two weeks, with persistent fever, leucocytosis and gas bubbles in a collection on CT. Contrast-enhanced CT defines extent and wall maturity. Drainage is delayed until the **walled-off necrosis** wall matures, usually about four weeks. Asymptomatic sterile collections are managed conservatively.",
-   "say": "Infected pancreatic necrosis typically appears after one to two weeks, with persistent fever, leucocytosis and gas bubbles in a collection on CT. Contrast-enhanced CT defines extent and wall maturity. Drainage is delayed until the walled-off necrosis wall matures, usually about four weeks. Asymptomatic sterile collections are managed conservatively.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Sterile necrosis",
-     "points": [
-      "No gas on CT",
-      "Stable clinically",
-      "Conservative care"
-     ]
-    },
-    "right": {
-     "title": "Infected necrosis",
-     "points": [
-      "Gas bubbles on CT",
-      "Fever and leucocytosis",
-      "Targeted antibiotics and drainage"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The **step-up approach** is the preferred strategy for infected necrosis: start with percutaneous or endoscopic transmural drainage, then move to minimally invasive necrosectomy if needed, and reserve open surgery as a last resort. This reduces morbidity. Intra-abdominal hypertension above 12 mmHg with organ dysfunction signals **abdominal compartment syndrome**, requiring decompression.",
-   "say": "The step-up approach is the preferred strategy for infected necrosis. Start with percutaneous or endoscopic transmural drainage, then move to minimally invasive necrosectomy if needed, and reserve open surgery as a last resort. This reduces morbidity. Intra-abdominal hypertension above 12 mmHg with organ dysfunction signals abdominal compartment syndrome, requiring decompression.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Infected necrosis confirmed"
-     },
-     {
-      "id": "b",
-      "label": "Percutaneous or endoscopic drainage"
-     },
-     {
-      "id": "c",
-      "label": "Minimally invasive necrosectomy"
-     },
-     {
-      "id": "d",
-      "label": "Open surgery if still failing"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c",
-      "if no improvement"
-     ],
-     [
-      "c",
-      "d",
-      "if no improvement"
-     ]
-    ]
-   }
-  }
- ],
+ "title": "Severe acute pancreatitis",
+ "minutes": 8,
+ "gen": "AI",
  "quiz": [
   "q_58a9c70f8d36",
   "q_d51db961fbd8",
   "q_c10163db7ef6"
  ],
- "src": [],
- "refs": [
-  "Revised Atlanta Classification of acute pancreatitis (2012)",
-  "NICE guideline on acute pancreatitis (NG104)",
-  "IAP/APA evidence-based guidelines for the management of acute pancreatitis (2013)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 58
- }
+ "steps": [
+  {
+   "tx": "The **revised Atlanta** classification is mild disease, moderately severe disease when organ failure lasts under 48 hours or a local complication is present, and severe disease when organ failure persists beyond 48 hours. The 48 hour mark is what separates a transient failure from severe disease. A bad first night is not severe disease until that time has passed.",
+   "say": "The revised Atlanta classification is mild disease, moderately severe disease when organ failure lasts under 48 hours or a local complication is present, and severe disease when organ failure persists beyond 48 hours. The 48 hour mark is what separates a transient failure from severe disease. A bad first night is not severe disease until that time has passed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-pancreatitis-fig1.webp",
+    "alt": "Gallstones and alcohol as causes, lipase compared with amylase, and boxes for organ failure.",
+    "caption": "Gallstones, with an ALT rise and biliary dilatation, and alcohol. Lipase is compared with amylase. The lipase arrow does not mean lipase becomes amylase. The organ-failure boxes do not time the 48 hour Atlanta rule. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "**WATERFALL** was stopped early because aggressive fluid, a large bolus and then 3 mL/kg/h, caused more fluid overload than a moderate strategy, and it did not improve outcomes. Moderate fluid is the practice. A large hourly rate is not a resuscitation target in pancreatitis.",
+   "say": "WATERFALL was stopped early because aggressive fluid, a large bolus and then 3 mL/kg/h, caused more fluid overload than a moderate strategy, and it did not improve outcomes. Moderate fluid is the practice. A large hourly rate is not a resuscitation target in pancreatitis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aggressive arm",
+     "points": [
+      "A large bolus, then 3 mL/kg/h",
+      "More fluid overload",
+      "The trial was stopped early"
+     ]
+    },
+    "right": {
+     "title": "What is done now",
+     "points": [
+      "Moderate fluid",
+      "No outcome gain from the aggressive rate",
+      "Watch for overload"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Early **enteral feeding** is safe, and it is preferred to parenteral nutrition. **Prophylactic antibiotics** do not prevent infection of necrosis, and they are not given for every pancreatitis. Feeding the gut is not the same decision as covering necrosis with a drug. Antibiotics are for infection that is present, not for the diagnosis itself.",
+   "say": "Early enteral feeding is safe, and it is preferred to parenteral nutrition. Prophylactic antibiotics do not prevent infection of necrosis, and they are not given for every pancreatitis. Feeding the gut is not the same decision as covering necrosis with a drug. Antibiotics are for infection that is present, not for the diagnosis itself.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decision",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Feeding",
+      "Early enteral feeding is preferred"
+     ],
+     [
+      "Parenteral nutrition",
+      "Not the default"
+     ],
+     [
+      "Prophylactic antibiotics",
+      "They do not prevent infected necrosis"
+     ],
+     [
+      "Antibiotics",
+      "For infection that is already there"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The PANTER trial is the support for a **step-up** approach: delay, then percutaneous or endoscopic drainage, then **necrosectomy** only if it is still needed. Open necrosectomy is not the first operation. Drainage is the first procedure when a procedure is required.",
+   "say": "The PANTER trial is the support for a step-up approach: delay, then percutaneous or endoscopic drainage, then necrosectomy only if it is still needed. Open necrosectomy is not the first operation. Drainage is the first procedure when a procedure is required.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Infected necrosis, if the patient can wait"
+     },
+     {
+      "id": "b",
+      "label": "Delay while the collection matures"
+     },
+     {
+      "id": "c",
+      "label": "Drain, percutaneous or endoscopic"
+     },
+     {
+      "id": "d",
+      "label": "Necrosectomy only if drainage fails"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intervention for infected necrosis is delayed to about 4 weeks when the patient can be stabilised, so the collection is **walled off**. Deterioration is an override of that calendar. A stable patient is not taken to necrosectomy in the first week because the scan looks ugly.",
+   "say": "Intervention for infected necrosis is delayed to about 4 weeks when the patient can be stabilised, so the collection is walled off. Deterioration is an override of that calendar. A stable patient is not taken to necrosectomy in the first week because the scan looks ugly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/walled-off-pancreatic-necrosis-fig1.webp",
+    "alt": "Transgastric stent draining walled-off pancreatic necrosis into the stomach.",
+    "caption": "A transgastric stent into a walled-off collection. The capsule is why the delay is about 4 weeks when the patient can wait. The drawing does not show a patient who is deteriorating, and that patient is not held to the calendar. Credit: StewardMD.",
+    "ar": 1.333
+   }
+  },
+  {
+   "tx": "**Abdominal compartment syndrome** is sought when ventilation or urine output is worse. A bladder pressure above 20 mmHg with new organ failure is the definition. The pressure is measured, and it is not guessed from the girth of the abdomen. A tight abdomen without organ failure is not the syndrome.",
+   "say": "Abdominal compartment syndrome is sought when ventilation or urine output is worse. A bladder pressure above 20 mmHg with new organ failure is the definition. The pressure is measured, and it is not guessed from the girth of the abdomen. A tight abdomen without organ failure is not the syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Bladder pressure above 20 mmHg",
+      "The pressure half of the definition"
+     ],
+     [
+      "New organ failure",
+      "Required as well"
+     ],
+     [
+      "Tight abdomen alone",
+      "Not the syndrome"
+     ],
+     [
+      "How it is found",
+      "Measure, do not guess from girth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gallstone pancreatitis with **cholangitis**, or with biliary obstruction that persists, is an indication for urgent **ERCP**. ERCP is not routine for every gallstone pancreatitis without those features. A stone that has passed, in a patient who is not infected, does not need emergency cannulation of the duct.",
+   "say": "Gallstone pancreatitis with cholangitis, or with biliary obstruction that persists, is an indication for urgent ERCP. ERCP is not routine for every gallstone pancreatitis without those features. A stone that has passed, in a patient who is not infected, does not need emergency cannulation of the duct.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urgent ERCP",
+     "points": [
+      "Cholangitis",
+      "Biliary obstruction that persists",
+      "The duct is the emergency"
+     ]
+    },
+    "right": {
+     "title": "Not routine",
+     "points": [
+      "Gallstones without those features",
+      "A stone that has already passed",
+      "Cannulation is not automatic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severity scores such as Ranson or APACHE do not change the first day of care. **Organ failure** on the ward round does. Lactate, urine output, and the oxygen need are the practical monitors. A score on admission is not a substitute for that examination.",
+   "say": "Severity scores such as Ranson or APACHE do not change the first day of care. Organ failure on the ward round does. Lactate, urine output, and the oxygen need are the practical monitors. A score on admission is not a substitute for that examination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tool",
+     "What it changes today"
+    ],
+    "rows": [
+     [
+      "Ranson or APACHE",
+      "Not the first day of care"
+     ],
+     [
+      "Organ failure",
+      "This changes the round"
+     ],
+     [
+      "Lactate and urine",
+      "Practical monitors"
+     ],
+     [
+      "Oxygen need",
+      "Practical monitor"
+     ]
+    ]
+   }
+  }
+ ]
 }

@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "scc-shock-approach",
+ "subject": "ss-critical-care",
+ "title": "Approach to shock",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Shock is inadequate tissue perfusion. The four bedside patterns are **hypovolaemic**, **distributive**, **cardiogenic**, and **obstructive**. Ultrasound and the examination can sort them before a long fluid trial. Filling a patient who has tamponade, a massive pulmonary embolus, or a failing left ventricle makes the shock worse.",
+   "say": "Shock is inadequate tissue perfusion. The four bedside patterns are hypovolaemic, distributive, cardiogenic, and obstructive. Ultrasound and the examination can sort them before a long fluid trial. Filling a patient who has tamponade, a massive pulmonary embolus, or a failing left ventricle makes the shock worse.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiogenic-shock-fig2.webp",
+    "alt": "Shock comparison table of cardiogenic, hypovolaemic, and septic patterns with preload, output, vascular resistance, and mixed venous saturation.",
+    "caption": "Three patterns are in the table: cardiogenic cold and wet, hypovolaemic cold and dry, and septic warm and dry. Obstructive shock is not drawn. The CI and wedge cutoffs are a classic infarct definition, not the first test for every patient. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "The **shock index** is heart rate divided by systolic pressure. A value above 1 suggests significant blood loss or shock and is more sensitive than blood pressure alone. A normal blood pressure with a heart rate of 120 already has an index above 1. Do not wait for hypotension before you treat bleeding.",
+   "say": "The shock index is heart rate divided by systolic pressure. A value above 1 suggests significant blood loss or shock and is more sensitive than blood pressure alone. A normal blood pressure with a heart rate of 120 already has an index above 1. Do not wait for hypotension before you treat bleeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shock index",
+     "Reading"
+    ],
+    "rows": [
+     [
+      "Calculation",
+      "Heart rate divided by systolic pressure"
+     ],
+     [
+      "Above 1",
+      "Suggests serious shock or blood loss"
+     ],
+     [
+      "Normal blood pressure",
+      "Does not clear a high index"
+     ],
+     [
+      "Use",
+      "Earlier than waiting for hypotension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The initial **mean arterial pressure** target in septic and vasodilatory shock is 65 mmHg. The 65 trial and SEPSISPAM did not show an overall mortality benefit from a higher default target. Start at 65. Raise it only for a reason you can name, such as a patient whose kidney was failing at that pressure and who has chronic hypertension.",
+   "say": "The initial mean arterial pressure target in septic and vasodilatory shock is 65 mmHg. The 65 trial and SEPSISPAM did not show an overall mortality benefit from a higher default target. Start at 65. Raise it only for a reason you can name, such as a patient whose kidney was failing at that pressure and who has chronic hypertension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Starting target",
+     "points": [
+      "Mean pressure 65 mmHg",
+      "Septic and vasodilatory shock",
+      "No overall gain from a higher default"
+     ]
+    },
+    "right": {
+     "title": "Not the default",
+     "points": [
+      "80 mmHg for everyone",
+      "Chasing a number after perfusion is back",
+      "Ignoring the cause of the shock"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "SEPSISPAM suggested that a higher mean pressure, near 80 to 85 mmHg, reduced the need for renal replacement in patients with **chronic hypertension**, at the cost of more atrial fibrillation. It is not the starting target for everyone. The higher number is a trial in a selected patient, and it is reviewed, not left on overnight by habit.",
+   "say": "SEPSISPAM suggested that a higher mean pressure, near 80 to 85 mmHg, reduced the need for renal replacement in patients with chronic hypertension, at the cost of more atrial fibrillation. It is not the starting target for everyone. The higher number is a trial in a selected patient, and it is reviewed, not left on overnight by habit.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SEPSISPAM signal",
+     "Limit"
+    ],
+    "rows": [
+     [
+      "Who",
+      "Patients with chronic hypertension"
+     ],
+     [
+      "Higher target",
+      "Near 80 to 85 mmHg"
+     ],
+     [
+      "Possible gain",
+      "Less renal replacement"
+     ],
+     [
+      "Cost",
+      "More atrial fibrillation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ANDROMEDA-SHOCK** compared **capillary refill** guided resuscitation with lactate guided resuscitation. The mortality difference was not statistically significant. Capillary refill longer than 3 seconds is still a useful perfusion sign. A normal refill with a high lactate is a reason to ask whether the lactate is type B, not a reason for another litre.",
+   "say": "ANDROMEDA-SHOCK compared capillary refill guided resuscitation with lactate guided resuscitation. The mortality difference was not statistically significant. Capillary refill longer than 3 seconds is still a useful perfusion sign. A normal refill with a high lactate is a reason to ask whether the lactate is type B, not a reason for another litre.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypovolemic-shock-fig1.webp",
+    "alt": "Hypovolaemic shock pathway from blood loss to low preload, vasoconstriction, lactic acidosis, and an ATLS class table.",
+    "caption": "This panel is the hypovolaemic pattern and the ATLS blood-loss classes. It is not obstructive shock and it does not show capillary refill time. Class volumes assume a large adult. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**Lactate clearance** reassures, but chasing a normal lactate with more fluid after perfusion has recovered causes overload. Type B lactate will not clear with fluid. A falling lactate after the skin is warm and the urine has returned is information. Another bolus at that point is how the lung floods.",
+   "say": "Lactate clearance reassures, but chasing a normal lactate with more fluid after perfusion has recovered causes overload. Type B lactate will not clear with fluid. A falling lactate after the skin is warm and the urine has returned is information. Another bolus at that point is how the lung floods.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lactate is useful",
+     "points": [
+      "It was high and it falls",
+      "Perfusion signs agree",
+      "The cause is being treated"
+     ]
+    },
+    "right": {
+     "title": "Lactate is a trap",
+     "points": [
+      "Type B will not clear with fluid",
+      "Perfusion already recovered",
+      "More fluid then causes overload"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A low **mixed venous saturation** with a high lactate suggests delivery failure. A high mixed venous saturation with a high lactate suggests distributive shock or a utilisation defect. The venous gas tells you whether the tissues are extracting. It does not name the organism or the bleeding vessel.",
+   "say": "A low mixed venous saturation with a high lactate suggests delivery failure. A high mixed venous saturation with a high lactate suggests distributive shock or a utilisation defect. The venous gas tells you whether the tissues are extracting. It does not name the organism or the bleeding vessel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venous saturation and lactate",
+     "Pattern"
+    ],
+    "rows": [
+     [
+      "Low saturation, high lactate",
+      "Delivery failure"
+     ],
+     [
+      "High saturation, high lactate",
+      "Distributive shock or poor use"
+     ],
+     [
+      "What it needs",
+      "A central or mixed venous sample"
+     ],
+     [
+      "What it is not",
+      "A culture or a diagnosis of bleeding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first hour is for the cause. Bleeding needs control, tamponade needs drainage, and tension pneumothorax needs a needle. Sepsis needs antibiotics and **source control**. Cardiogenic shock needs reperfusion. Vasopressors do not replace that. A neat blood pressure on noradrenaline, with the abdomen still bleeding, is not resuscitation.",
+   "say": "The first hour is for the cause. Bleeding needs control, tamponade needs drainage, and tension pneumothorax needs a needle. Sepsis needs antibiotics and source control. Cardiogenic shock needs reperfusion. Vasopressors do not replace that. A neat blood pressure on noradrenaline, with the abdomen still bleeding, is not resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Name the pattern"
+     },
+     {
+      "id": "b",
+      "label": "Fix the cause in the first hour"
+     },
+     {
+      "id": "c",
+      "label": "Blood, drain, needle, antibiotic, or reperfusion"
+     },
+     {
+      "id": "d",
+      "label": "Vasopressor does not replace that"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ]
+}

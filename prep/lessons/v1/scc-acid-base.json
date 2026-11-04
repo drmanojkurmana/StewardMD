@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "module": "scc-acid-base",
+ "subject": "ss-critical-care",
+ "title": "Acid-base disorders",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The **anion gap** is sodium minus chloride minus bicarbonate, and a normal gap is about 8 to 12. For **albumin**, about 2.5 is added for every 1 g/dL that albumin is below 4, because a low albumin can hide a high-gap acidosis. A gap that looks normal in a hypoalbuminaemic patient is not reassuring until that correction is made.",
+   "say": "The anion gap is sodium minus chloride minus bicarbonate, and a normal gap is about 8 to 12. For albumin, about 2.5 is added for every 1 g/dL that albumin is below 4, because a low albumin can hide a high-gap acidosis. A gap that looks normal in a hypoalbuminaemic patient is not reassuring until that correction is made.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acid-base-disorders-and-anion-gap-fig1.webp",
+    "alt": "Lungs and a nephron beside unlabelled coloured columns for the anion gap.",
+    "caption": "Ventilation and renal acid handling, plus coloured anion-gap columns. The columns are not labelled ions. Winter's formula and the albumin correction are not drawn. Credit: StewardMD.",
+    "ar": 1.333
+   }
+  },
+  {
+   "tx": "The **Winter formula** is the expected compensatory PaCO2 in a metabolic acidosis. It is one and a half times the bicarbonate plus 8, plus or minus 2, and the digits are in the table. A PaCO2 that is far from that estimate is a second respiratory disorder. The formula is a check for a second process, and it is not a ventilator setting.",
+   "say": "The Winter formula is the expected compensatory PaCO2 in a metabolic acidosis. It is one and a half times the bicarbonate plus 8, plus or minus 2, and the digits are in the table. A PaCO2 that is far from that estimate is a second respiratory disorder. The formula is a check for a second process, and it is not a ventilator setting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Winter piece",
+     "Number"
+    ],
+    "rows": [
+     [
+      "Multiply bicarbonate by",
+      "1.5"
+     ],
+     [
+      "Then add",
+      "8"
+     ],
+     [
+      "Allow",
+      "plus or minus 2"
+     ],
+     [
+      "If PaCO2 is far off",
+      "A second respiratory disorder is present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **delta ratio** compares the rise in the anion gap with the fall in bicarbonate. A value near 1 is a pure high-gap acidosis. A low value means a normal-gap acidosis is present as well. The ratio is how a mixed metabolic acidosis is recognised, and it is not a reason to ignore the chloride.",
+   "say": "The delta ratio compares the rise in the anion gap with the fall in bicarbonate. A value near 1 is a pure high-gap acidosis. A low value means a normal-gap acidosis is present as well. The ratio is how a mixed metabolic acidosis is recognised, and it is not a reason to ignore the chloride.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Delta ratio near 1",
+     "points": [
+      "The gap rise matches the bicarbonate fall",
+      "A pure high-gap acidosis",
+      "One metabolic process"
+     ]
+    },
+    "right": {
+     "title": "A low delta ratio",
+     "points": [
+      "The bicarbonate fell further than the gap rose",
+      "A normal-gap acidosis is also present",
+      "Look at the chloride"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The Stewart approach is based on the **strong ion difference**. A large saline infusion narrows that difference by raising chloride, and the result is a **hyperchloremic** normal-gap acidosis. Balanced crystalloid can avoid that chloride load when the patient needs a lot of fluid. A clinician who only looks for ketoacidosis will miss this normal gap.",
+   "say": "The Stewart approach is based on the strong ion difference. A large saline infusion narrows that difference by raising chloride, and the result is a hyperchloremic normal-gap acidosis. Balanced crystalloid can avoid that chloride load when the patient needs a lot of fluid. A clinician who only looks for ketoacidosis will miss this normal gap.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Large saline load",
+     "points": [
+      "Chloride rises",
+      "The strong ion difference narrows",
+      "Hyperchloremic normal-gap acidosis"
+     ]
+    },
+    "right": {
+     "title": "What it is not",
+     "points": [
+      "It is not a high anion gap",
+      "It is not ketoacidosis",
+      "Lactate may be normal"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An **osmolar gap** above 10, together with a high anion gap acidosis, is a suggestion of methanol or ethylene glycol until that is disproved. Treatment is **fomepizole**, and dialysis is added when the poisoning is severe. The level is not required before treatment if the clinical picture fits. Waiting for a send-out result is how the acidosis deepens.",
+   "say": "An osmolar gap above 10, together with a high anion gap acidosis, is a suggestion of methanol or ethylene glycol until that is disproved. Treatment is fomepizole, and dialysis is added when the poisoning is severe. The level is not required before treatment if the clinical picture fits. Waiting for a send-out result is how the acidosis deepens.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "High gap acidosis and osmolar gap above 10"
+     },
+     {
+      "id": "b",
+      "label": "Treat as toxic alcohol"
+     },
+     {
+      "id": "c",
+      "label": "Fomepizole now"
+     },
+     {
+      "id": "d",
+      "label": "Dialysis if the poisoning is severe"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ketoacidosis** from diabetes, alcohol, or starvation is a high-gap acidosis. Euglycaemic ketoacidosis on an **SGLT2** inhibitor is missed if the clinician waits for a high glucose. The glucose can be normal. The ketones and the gap are what make the diagnosis, and the drug is stopped.",
+   "say": "Ketoacidosis from diabetes, alcohol, or starvation is a high-gap acidosis. Euglycaemic ketoacidosis on an SGLT2 inhibitor is missed if the clinician waits for a high glucose. The glucose can be normal. The ketones and the gap are what make the diagnosis, and the drug is stopped.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ketoacidosis setting",
+     "The trap"
+    ],
+    "rows": [
+     [
+      "Diabetic",
+      "High gap, glucose is usually high"
+     ],
+     [
+      "Alcohol or starvation",
+      "High gap, glucose may be low"
+     ],
+     [
+      "SGLT2 inhibitor",
+      "The glucose can be normal"
+     ],
+     [
+      "What to measure",
+      "Ketones and the gap, not glucose alone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chloride-responsive metabolic alkalosis has a **urine chloride** below 20 mmol/L, and it is treated with chloride and volume. Chloride-resistant alkalosis has a urine chloride above 20, and it includes hyperaldosteronism and severe hypokalaemia. The urine chloride is how those two alkaloses are separated. More saline is the wrong treatment for the resistant form.",
+   "say": "Chloride-responsive metabolic alkalosis has a urine chloride below 20 mmol/L, and it is treated with chloride and volume. Chloride-resistant alkalosis has a urine chloride above 20, and it includes hyperaldosteronism and severe hypokalaemia. The urine chloride is how those two alkaloses are separated. More saline is the wrong treatment for the resistant form.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urine chloride below 20",
+     "points": [
+      "Chloride responsive",
+      "Volume and chloride depletion",
+      "Saline is the treatment"
+     ]
+    },
+    "right": {
+     "title": "Urine chloride above 20",
+     "points": [
+      "Chloride resistant",
+      "Hyperaldosteronism or severe hypokalaemia",
+      "More saline is not the fix"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **respiratory acidosis** with a normal pH and a high bicarbonate is chronic. An acute rise in PaCO2 of 10 mmHg raises bicarbonate by only about 1 mmol/L. The chronic rule, applied to an acute patient, will hide how severe the acidaemia is about to become. The pH is read with the time course, not with the bicarbonate alone.",
+   "say": "A respiratory acidosis with a normal pH and a high bicarbonate is chronic. An acute rise in PaCO2 of 10 mmHg raises bicarbonate by only about 1 mmol/L. The chronic rule, applied to an acute patient, will hide how severe the acidaemia is about to become. The pH is read with the time course, not with the bicarbonate alone.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+    "alt": "Type 1 hypoxaemic failure beside type 2 hypercapnic failure.",
+    "caption": "Type 2 failure is pump failure with a high carbon dioxide. Winter's formula is not drawn, and the acute bicarbonate rise of about 1 is not on the figure. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  }
+ ]
+}

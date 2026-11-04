@@ -2,116 +2,202 @@
  "v": 1,
  "module": "scc-sepsis-management",
  "subject": "ss-critical-care",
- "title": "Sepsis resuscitation and management: the hour one approach",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "Sepsis is life-threatening organ dysfunction caused by a **dysregulated host response** to infection. Septic shock is sepsis with vasopressor need to keep mean arterial pressure at 65 mmHg or more, plus lactate above 2 mmol/L despite adequate fluid. Recognise it early, because every hour of delay raises mortality. Use the qSOFA and SOFA scores to flag patients at risk.",
-   "say": "Sepsis is life-threatening organ dysfunction caused by a dysregulated host response to infection. Septic shock is sepsis with a need for vasopressors to keep mean arterial pressure at 65 millimetres of mercury or more, plus a lactate above 2 millimoles per litre despite adequate fluid. Recognise it early, because every hour of delay raises mortality. Use the qSOFA and SOFA scores to flag patients at risk.",
-   "vis": null
-  },
-  {
-   "tx": "The **hour one bundle** is the core of early sepsis care and is designed to be completed within the first hour of recognition. Measure **lactate** and repeat it if the first value is raised, since this guides how urgently tissue hypoperfusion is being treated. Draw **blood cultures** before the first antibiotic dose, then give **broad-spectrum antibiotics** promptly when septic shock is probable. Start a **crystalloid** fluid bolus for hypotension or raised lactate, and add a **vasopressor** if hypotension persists during or after fluid.",
-   "say": "The hour one bundle is the heart of early sepsis care and aims to be finished within the first hour. Check lactate and repeat it if the first result is high, because this shows how much tissue is being underperfused. Take blood cultures before the first antibiotic dose, then start broad spectrum antibiotics quickly when septic shock is likely. Give a crystalloid fluid bolus for low blood pressure or raised lactate, and add a vasopressor if the pressure stays low during or after fluids.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Element",
-     "Action",
-     "Timing"
-    ],
-    "rows": [
-     [
-      "Lactate",
-      "Measure and repeat if raised",
-      "Within the first hour"
-     ],
-     [
-      "Blood cultures",
-      "Draw before the first antibiotic dose",
-      "Before antibiotics"
-     ],
-     [
-      "Antibiotics",
-      "Broad spectrum when shock is probable",
-      "Within the first hour"
-     ],
-     [
-      "Fluids",
-      "Crystalloid bolus for hypotension or raised lactate",
-      "Early, during resuscitation"
-     ],
-     [
-      "Vasopressor",
-      "Add if hypotension persists after fluid",
-      "When pressure stays low"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Early **antibiotics** and **source control** work together in septic shock. Treatment should begin within one hour of recognition, because each hour of delay is linked to higher mortality. Select empirical agents according to the likely infective source and local resistance patterns. Once **culture** results return, **de-escalate** to a narrower agent. Drain collections, remove infected catheters or devices, and relieve obstruction as soon as feasible.",
-   "say": "Early antibiotics and source control work together in septic shock. Treatment should begin within one hour of recognition, because each hour of delay is linked to higher mortality. Select empirical agents according to the likely infective source and local resistance patterns. Once culture results return, de-escalate to a narrower agent. Drain collections, remove infected catheters or devices, and relieve obstruction as soon as feasible.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-sepsis-management-fig1.webp",
-    "alt": "Diagram showing a timeline of sepsis management, highlighting early broad-spectrum antibiotics and source control procedures within the first hour of recognition.",
-    "caption": "Early antibiotics and source control are critical within one hour of sepsis recognition",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Early goal directed therapy from the Rivers trial used central venous oxygen saturation targets. Later trials, ProCESS, ARISE and ProMISe, found protocolised resuscitation did not beat usual care. Current practice therefore uses **individualised resuscitation** guided by perfusion markers such as lactate, capillary refill and urine output. Avoid over-reliance on any single fixed target.",
-   "say": "Early goal directed therapy from the Rivers trial used central venous oxygen saturation targets. Later trials, ProCESS, ARISE and ProMISe, found protocolised resuscitation did not beat usual care. Current practice therefore uses individualised resuscitation guided by perfusion markers such as lactate, capillary refill and urine output. Avoid over-reliance on any single fixed target.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Rivers era",
-     "points": [
-      "Protocolised targets",
-      "Central venous oxygen saturation",
-      "Mortality benefit in original trial"
-     ]
-    },
-    "right": {
-     "title": "Modern practice",
-     "points": [
-      "Individualised resuscitation",
-      "Lactate and capillary refill guide",
-      "Later trials showed no added benefit"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Adjunct therapies should be used selectively rather than as routine add-ons. A **corticosteroid** may be considered in septic shock when **vasopressor** requirements stay high despite adequate fluid resuscitation and first-line support, based on trials such as ADRENAL and APROCCHSS. Large trials of **antioxidant vitamin infusion** have not shown a survival benefit, so routine use is discouraged. For **prolonged beta-lactam infusion**, BLING III found no mortality difference compared with intermittent dosing, although target drug levels were reached more often.",
-   "say": "Adjunct therapies should be used selectively rather than as routine add-ons. A corticosteroid may be considered in septic shock when vasopressor requirements stay high despite adequate fluid resuscitation and first-line support, based on trials such as ADRENAL and APROCCHSS. Large trials of antioxidant vitamin infusion have not shown a survival benefit, so routine use is discouraged. For prolonged beta-lactam infusion, BLING III found no mortality difference compared with intermittent dosing, although target drug levels were reached more often.",
-   "vis": null
-  }
- ],
+ "title": "Sepsis resuscitation and management",
+ "minutes": 8,
+ "gen": "AI",
  "quiz": [
   "q_4e58df050b14",
   "q_a294e1ab41fb",
   "q_b3210cfaac60"
  ],
- "src": [],
- "refs": [
-  "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021 (Evans L et al.)",
-  "ADRENAL trial; APROCCHSS trial; LOVIT trial; BLING III trial; ProCESS, ARISE and ProMISe trials"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 44
- }
+ "steps": [
+  {
+   "tx": "When shock is present, or the likelihood of sepsis is high, **antibiotics** are given immediately, ideally within 1 hour. When sepsis is only possible and shock is absent, the search is rapid and antibiotics are given within 3 hours if concern persists. A possible infection without shock is not the same clock as shock.",
+   "say": "When shock is present, or the likelihood of sepsis is high, antibiotics are given immediately, ideally within 1 hour. When sepsis is only possible and shock is absent, the search is rapid and antibiotics are given within 3 hours if concern persists. A possible infection without shock is not the same clock as shock.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shock or high likelihood",
+     "points": [
+      "Antibiotics immediately",
+      "The aim is within 1 hour",
+      "Do not wait for a full workup"
+     ]
+    },
+    "right": {
+     "title": "Possible sepsis, no shock",
+     "points": [
+      "Investigate at once",
+      "Antibiotics within 3 hours if concern remains",
+      "This is not the shock clock"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Blood cultures** are taken before the antibiotic when that pause does not delay the dose. **Source control** is drainage or an operation that removes the infected focus, and it is done as soon as it can be arranged. A clock on the chart does not postpone a needed operation. Cultures are not a reason to watch a shocked patient without a drug.",
+   "say": "Blood cultures are taken before the antibiotic when that pause does not delay the dose. Source control is drainage or an operation that removes the infected focus, and it is done as soon as it can be arranged. A clock on the chart does not postpone a needed operation. Cultures are not a reason to watch a shocked patient without a drug.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Shock or likely sepsis"
+     },
+     {
+      "id": "b",
+      "label": "Cultures if they do not delay"
+     },
+     {
+      "id": "c",
+      "label": "Antibiotic on time"
+     },
+     {
+      "id": "d",
+      "label": "Source control as soon as it can be done"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **hour-1 bundle** is a lactate, cultures, antibiotics, 30 mL/kg of crystalloid when perfusion is poor or the lactate is at least 4 mmol/L, and a vasopressor if hypotension continues during or after that fluid. The 30 mL/kg volume is for hypoperfusion. It is not a fixed litre for every fever.",
+   "say": "The hour-1 bundle is a lactate, cultures, antibiotics, 30 mL/kg of crystalloid when perfusion is poor or the lactate is at least 4 mmol/L, and a vasopressor if hypotension continues during or after that fluid. The 30 mL/kg volume is for hypoperfusion. It is not a fixed litre for every fever.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/septic-shock-fig2.webp",
+    "alt": "Septic shock drawing with vasodilation, leak, lactate, and bundle boxes for fluid, noradrenaline, antibiotics, source control, and lactate.",
+    "caption": "The 30 mL/kg box is crystalloid for hypoperfusion. The lactate box is the septic-shock threshold beside vasopressors, and it is not a reason to chase a normal lactate. The 1 hour antibiotic box is for shock or a high likelihood, not for every possible infection. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**ProCESS**, **ARISE**, and **ProMISe** did not confirm Rivers early goal-directed therapy. Mandatory central venous saturation targets, and protocolised transfusion, are not used. Early antibiotics, source control, and a check of perfusion are still the work. A central line is for access or a vasopressor, and it is not placed to chase a saturation number.",
+   "say": "ProCESS, ARISE, and ProMISe did not confirm Rivers early goal-directed therapy. Mandatory central venous saturation targets, and protocolised transfusion, are not used. Early antibiotics, source control, and a check of perfusion are still the work. A central line is for access or a vasopressor, and it is not placed to chase a saturation number.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Old protocol piece",
+     "What the later trials support"
+    ],
+    "rows": [
+     [
+      "Mandatory central venous saturation",
+      "It is not a target"
+     ],
+     [
+      "Protocolised transfusion",
+      "It is not routine"
+     ],
+     [
+      "Early antibiotics",
+      "They stay"
+     ],
+     [
+      "Source control",
+      "It stays, as soon as it can be done"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If fluid and vasopressors do not restore stability, intravenous **hydrocortisone** at 200 mg per day is a reasonable addition. The **ADRENAL** trial did not reduce 90 day mortality. **APROCCHSS**, which added fludrocortisone, did reduce 90 day mortality. Fludrocortisone is not required by every guideline, and the steroid is not a substitute for source control.",
+   "say": "If fluid and vasopressors do not restore stability, intravenous hydrocortisone at 200 mg per day is a reasonable addition. The ADRENAL trial did not reduce 90 day mortality. APROCCHSS, which added fludrocortisone, did reduce 90 day mortality. Fludrocortisone is not required by every guideline, and the steroid is not a substitute for source control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ADRENAL",
+     "points": [
+      "Hydrocortisone alone",
+      "No reduction in 90 day mortality",
+      "Shock that is already established"
+     ]
+    },
+    "right": {
+     "title": "APROCCHSS",
+     "points": [
+      "Hydrocortisone plus fludrocortisone",
+      "90 day mortality was reduced",
+      "Fludrocortisone is not in every guideline"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**HYPRESS** found that hydrocortisone did not prevent progression from severe sepsis to shock. Steroids are not started just because the patient might become shocked. They are started when shock is established and fluid plus a vasopressor have not restored stability. An anticipatory steroid is not prevention.",
+   "say": "HYPRESS found that hydrocortisone did not prevent progression from severe sepsis to shock. Steroids are not started just because the patient might become shocked. They are started when shock is established and fluid plus a vasopressor have not restored stability. An anticipatory steroid is not prevention.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Moment",
+     "Steroid?"
+    ],
+    "rows": [
+     [
+      "Severe sepsis, no shock",
+      "HYPRESS: it does not prevent shock"
+     ],
+     [
+      "Might become shocked",
+      "That fear is not an indication"
+     ],
+     [
+      "Shock, fluid and vasopressor fail",
+      "Hydrocortisone is then reasonable"
+     ],
+     [
+      "Source still undrained",
+      "The steroid does not replace drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**LOVIT** found that high-dose intravenous **vitamin C** increased the risk of death or persistent organ dysfunction in septic adults. Vitamin C is not a sepsis drug. A vitamin cocktail is not a rescue when the source is still undrained. An infusion that was started outside a trial is stopped.",
+   "say": "LOVIT found that high-dose intravenous vitamin C increased the risk of death or persistent organ dysfunction in septic adults. Vitamin C is not a sepsis drug. A vitamin cocktail is not a rescue when the source is still undrained. An infusion that was started outside a trial is stopped.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What LOVIT tested",
+     "points": [
+      "High-dose intravenous vitamin C",
+      "Septic adults",
+      "Death or lasting organ failure rose"
+     ]
+    },
+    "right": {
+     "title": "What to do",
+     "points": [
+      "Vitamin C is not a sepsis drug",
+      "Drain the source",
+      "Stop a non-trial infusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Noradrenaline** is started through a well watched peripheral line if central access would delay treatment of profound hypotension. The infusion is moved to a central vein as soon as that is safe. A peripheral vasopressor is a bridge. It is not a plan to leave a concentrated infusion in a small vein overnight.",
+   "say": "Noradrenaline is started through a well watched peripheral line if central access would delay treatment of profound hypotension. The infusion is moved to a central vein as soon as that is safe. A peripheral vasopressor is a bridge. It is not a plan to leave a concentrated infusion in a small vein overnight.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sepsis-fig2.webp",
+    "alt": "Cytokine storm with endothelial injury, capillary leak, inducible nitric oxide, microthrombi, and vasodilation.",
+    "caption": "The drawing is the leak, the microthrombi, and the vasodilation that make a vasopressor necessary. It does not show a peripheral cannula, a vitamin C dose, or a steroid. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  }
+ ]
 }

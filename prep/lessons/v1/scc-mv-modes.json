@@ -3,144 +3,191 @@
  "module": "scc-mv-modes",
  "subject": "ss-critical-care",
  "title": "Modes of mechanical ventilation and waveforms",
- "minutes": 7,
- "steps": [
-  {
-   "tx": "Every ventilator breath is described by its **trigger** (how the breath starts), its **limit** (what is held constant during inspiration) and its **cycle** (how the breath ends). Volume control delivers a set tidal volume with a set flow, so peak pressure varies with compliance and resistance. Pressure control sets the inspiratory pressure and time, so delivered volume varies with mechanics. Knowing which variable is fixed is the first step in reading any waveform.",
-   "say": "Every ventilator breath is described by its trigger, which is how the breath starts, its limit, which is what is held constant during inspiration, and its cycle, which is how the breath ends. Volume control delivers a set tidal volume at a set flow, so peak pressure changes with compliance and resistance. Pressure control sets the inspiratory pressure and time, so the delivered volume changes with the mechanics of the lungs.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Mode",
-     "Fixed variable",
-     "Varies with mechanics"
-    ],
-    "rows": [
-     [
-      "Volume control",
-      "Tidal volume and flow",
-      "Peak and plateau pressure"
-     ],
-     [
-      "Pressure control",
-      "Inspiratory pressure and time",
-      "Tidal volume and flow"
-     ],
-     [
-      "Pressure support",
-      "Pressure above PEEP",
-      "Volume and rate"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Assist-control (AC) gives a full set breath for every patient trigger, while **SIMV** delivers mandatory breaths at a set rate and allows spontaneous breaths between them. **Pressure support ventilation (PSV)** supports each spontaneous breath to a set pressure and cycles when flow falls to a set percentage of peak flow, often 25 percent. PSV reduces the work of breathing and is the usual mode for weaning. Its back-up rate should be active during weaning trials.",
-   "say": "Assist-control gives a full set breath for every patient trigger. SIMV delivers mandatory breaths at a set rate and allows spontaneous breaths between them. Pressure support ventilation supports each spontaneous breath to a set pressure and cycles when flow falls to a set percentage of peak flow, often 25 percent. It reduces the work of breathing and is the usual mode for weaning, and its back-up rate should be active.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-mv-modes-fig1.webp",
-    "alt": "Waveforms for Assist-Control, SIMV, and Pressure Support Ventilation, showing patient triggers, mandatory, and spontaneous breaths.",
-    "caption": "Common mechanical ventilation modes: AC, SIMV, and PSV waveforms",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "**Patient ventilator dyssynchrony** occurs when the patient's timing or demand does not match the machine. **Double triggering** happens when two breaths are delivered for one effort, often when inspiratory time is too short. **Reverse triggering** means a passive ventilator breath provokes an effort from the patient. Scalloped inspiratory pressure curves suggest flow starvation, where the set flow cannot meet demand.",
-   "say": "Patient ventilator dyssynchrony occurs when the patient's timing or demand does not match the machine. Double triggering happens when two breaths are delivered for one effort, often when inspiratory time is too short. Reverse triggering means a passive ventilator breath provokes an effort from the patient. Scalloped inspiratory pressure curves suggest flow starvation, where the set flow cannot meet demand.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Effort starts"
-     },
-     {
-      "id": "b",
-      "label": "Flow too low"
-     },
-     {
-      "id": "c",
-      "label": "Scalloped curve"
-     },
-     {
-      "id": "d",
-      "label": "Raise flow or switch mode"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Auto-PEEP** (intrinsic PEEP) appears when expiratory flow does not return to zero before the next breath, usually from dynamic hyperinflation in COPD or asthma. It causes hypotension through reduced venous return and makes triggering difficult. Management is to lower the respiratory rate and tidal volume, lengthen expiratory time, and treat bronchospasm. External PEEP near 80 percent of the auto-PEEP value may help triggering.",
-   "say": "Auto-PEEP, also called intrinsic PEEP, appears when expiratory flow does not return to zero before the next breath, usually from dynamic hyperinflation in COPD or asthma. It causes hypotension through reduced venous return and makes triggering difficult. Management is to lower the respiratory rate and tidal volume, lengthen expiratory time, and treat bronchospasm. External PEEP near 80 percent of the auto-PEEP value may help triggering.",
-   "vis": null
-  },
-  {
-   "tx": "In volume control, **plateau pressure** reflects elastic recoil and tidal volume, while **peak pressure** adds airway resistance. A rise in peak pressure with unchanged plateau points to resistance, such as bronchospasm, secretions or a kinked tube. In ARDS, the ARDSNet protocol uses a tidal volume of 6 mL/kg predicted body weight and keeps plateau pressure at or below 30 cm H2O, accepting permissive hypercapnia.",
-   "say": "In volume control, plateau pressure reflects elastic recoil and tidal volume, while peak pressure adds airway resistance. A rise in peak pressure with an unchanged plateau points to resistance, such as bronchospasm, secretions or a kinked tube. In ARDS, the ARDSNet protocol uses a tidal volume of 6 mL per kg predicted body weight and keeps plateau pressure at or below 30 centimetres of water, accepting permissive hypercapnia.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Peak pressure",
-     "points": [
-      "Includes resistance",
-      "Rises with secretions",
-      "Rises with bronchospasm"
-     ]
-    },
-    "right": {
-     "title": "Plateau pressure",
-     "points": [
-      "Reflects elastic recoil",
-      "Target 30 cm H2O or less",
-      "Guides barotrauma risk"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "**NAVA** (neurally adjusted ventilatory assist) uses the electrical activity of the diaphragm to time and scale each breath, improving synchrony. **Adaptive support ventilation (ASV)** automatically chooses the pressure, rate and volume needed for a target minute ventilation. **APRV** holds a high CPAP for most of the cycle with brief releases. In India, use these modes according to local ICU availability and the clinical question.",
-   "say": "NAVA uses the electrical activity of the diaphragm to time and scale each breath, improving synchrony. Adaptive support ventilation automatically chooses the pressure, rate and volume needed for a target minute ventilation. APRV holds a high CPAP for most of the cycle with brief releases. Choose these modes according to local ICU availability and the clinical question.",
-   "vis": null
-  }
- ],
+ "minutes": 8,
+ "gen": "AI",
  "quiz": [
   "q_3065e8ca11b5",
   "q_20e18fc6fdd3",
   "q_a290d7517ed3"
  ],
- "src": [],
- "refs": [
-  "ARDS Network. Ventilation with lower tidal volumes as compared with traditional tidal volumes for acute lung injury and the acute respiratory distress syndrome. N Engl J Med 2000",
-  "Tobin MJ. Principles and Practice of Mechanical Ventilation (Tobin MJ, Editor)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 37
- }
+ "steps": [
+  {
+   "tx": "**Volume control** sets tidal volume and flow, and airway pressure varies with compliance and resistance. **Pressure control** sets inspiratory pressure and time, and tidal volume falls when the lung stiffens. The clinician has to notice a falling volume on a pressure breath, because the ventilator will not alarm on volume unless a limit was set.",
+   "say": "Volume control sets tidal volume and flow, and airway pressure varies with compliance and resistance. Pressure control sets inspiratory pressure and time, and tidal volume falls when the lung stiffens. The clinician has to notice a falling volume on a pressure breath, because the ventilator will not alarm on volume unless a limit was set.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Set by the clinician",
+     "What then varies"
+    ],
+    "rows": [
+     [
+      "Volume control: volume and flow",
+      "Airway pressure"
+     ],
+     [
+      "Pressure control: pressure and time",
+      "Tidal volume"
+     ],
+     [
+      "Stiff lung on pressure control",
+      "Volume falls"
+     ],
+     [
+      "Stiff lung on volume control",
+      "Pressure rises"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pressure support** is a spontaneous mode. The patient triggers every breath, and the breath cycles when inspiratory flow falls to a set fraction of peak flow. There is no guaranteed rate unless backup apnoea ventilation is on. A patient who is tiring can look comfortable for a few minutes and then stop triggering.",
+   "say": "Pressure support is a spontaneous mode. The patient triggers every breath, and the breath cycles when inspiratory flow falls to a set fraction of peak flow. There is no guaranteed rate unless backup apnoea ventilation is on. A patient who is tiring can look comfortable for a few minutes and then stop triggering.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-mv-modes-fig1.webp",
+    "alt": "Pressure, flow, and volume sketches for assist control, SIMV with a spontaneous breath, and pressure support.",
+    "caption": "Assist control shows a patient trigger on a delivered breath. SIMV shows mandatory breaths with one spontaneous breath between them. Pressure support shows flow-cycled breaths and no set rate. Volume control versus pressure control is not labelled as such. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "**SIMV** is a mix of mandatory breaths and spontaneous breaths. It is not a weaning mode. The added work of breathing on the spontaneous breaths delays liberation, because those breaths are often poorly supported. A falling mandatory rate is not the same as a spontaneous breathing trial. Readiness is tested by a trial, not by stretching SIMV over days.",
+   "say": "SIMV is a mix of mandatory breaths and spontaneous breaths. It is not a weaning mode. The added work of breathing on the spontaneous breaths delays liberation, because those breaths are often poorly supported. A falling mandatory rate is not the same as a spontaneous breathing trial. Readiness is tested by a trial, not by stretching SIMV over days.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SIMV",
+     "points": [
+      "Mandatory breaths plus spontaneous breaths",
+      "Spontaneous breaths add work",
+      "Not a weaning mode"
+     ]
+    },
+    "right": {
+     "title": "A breathing trial",
+     "points": [
+      "Support is low on purpose",
+      "The trial is timed",
+      "Failure means stop and rest"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**PRVC**, or pressure regulated volume control, targets a tidal volume by adjusting inspiratory pressure from breath to breath. It is still a pressure breath, and a sudden cough can make the ventilator drop the pressure and underdeliver. The set volume is a target, not a guarantee, on the breath the patient is fighting.",
+   "say": "PRVC, or pressure regulated volume control, targets a tidal volume by adjusting inspiratory pressure from breath to breath. It is still a pressure breath, and a sudden cough can make the ventilator drop the pressure and underdeliver. The set volume is a target, not a guarantee, on the breath the patient is fighting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PRVC behaviour",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Breath type",
+      "Pressure, with a volume target"
+     ],
+     [
+      "Lung gets stiffer",
+      "Pressure is stepped up"
+     ],
+     [
+      "A cough looks like a large volume",
+      "Pressure may be cut"
+     ],
+     [
+      "Next breaths",
+      "Volume can be underdelivered"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**APRV** uses a long high pressure time and a short release. The short release generates auto-PEEP, which is part of how the mode holds the lung open. It is not first line ARDS ventilation. Rescue use is a senior decision after lung protective ventilation has already been done properly, not a starting mode.",
+   "say": "APRV uses a long high pressure time and a short release. The short release generates auto-PEEP, which is part of how the mode holds the lung open. It is not first line ARDS ventilation. Rescue use is a senior decision after lung protective ventilation has already been done properly, not a starting mode.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ards-fig1.webp",
+    "alt": "Three alveoli labelled exudative phase with oedema and hyaline membranes, proliferative phase with type II cells, and fibrotic phase.",
+    "caption": "These are the phases of diffuse alveolar damage. APRV is not drawn. The histology is not a reason to choose APRV, and the lesson does not use it as first line ventilation. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "**NAVA** is scaled in proportion to the diaphragmatic electrical signal. **Proportional assist** ventilation assists in proportion to measured effort. Both need a reliable signal and an awake drive. A poor catheter signal or a patient with no drive makes the mode look like failure of the lung when the problem is the signal.",
+   "say": "NAVA is scaled in proportion to the diaphragmatic electrical signal. Proportional assist ventilation assists in proportion to measured effort. Both need a reliable signal and an awake drive. A poor catheter signal or a patient with no drive makes the mode look like failure of the lung when the problem is the signal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "NAVA",
+     "points": [
+      "Follows the diaphragm electrical signal",
+      "Needs a good catheter signal",
+      "No drive means no assist"
+     ]
+    },
+    "right": {
+     "title": "Proportional assist",
+     "points": [
+      "Follows measured effort",
+      "Needs a reliable effort signal",
+      "Also fails if the drive is absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Double triggering** stacks two breaths and raises tidal volume. **Reverse triggering** is diaphragmatic effort provoked by the ventilator breath, often under deep sedation, and it also stacks volume. Both can deliver a tidal volume far above the set one. The waveform shows two efforts or two deliveries where one breath was intended.",
+   "say": "Double triggering stacks two breaths and raises tidal volume. Reverse triggering is diaphragmatic effort provoked by the ventilator breath, often under deep sedation, and it also stacks volume. Both can deliver a tidal volume far above the set one. The waveform shows two efforts or two deliveries where one breath was intended.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Asynchrony",
+     "What you see"
+    ],
+    "rows": [
+     [
+      "Double triggering",
+      "Two breaths stacked, large volume"
+     ],
+     [
+      "Reverse triggering",
+      "Effort starts after the machine breath"
+     ],
+     [
+      "Usual setting",
+      "Deep sedation for reverse triggering"
+     ],
+     [
+      "Harm",
+      "Volume above the lung protective target"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On a volume breath the flow waveform is set by the clinician, often a **square wave**. On a pressure breath the flow waveform is **decelerating**. Reading the wrong waveform leads to the wrong diagnosis of dyssynchrony. Name the mode before you name the problem, or a normal decelerating flow will be called obstruction.",
+   "say": "On a volume breath the flow waveform is set by the clinician, often a square wave. On a pressure breath the flow waveform is decelerating. Reading the wrong waveform leads to the wrong diagnosis of dyssynchrony. Name the mode before you name the problem, or a normal decelerating flow will be called obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Volume breath",
+     "points": [
+      "Flow shape is chosen",
+      "Often a square wave",
+      "Pressure varies"
+     ]
+    },
+    "right": {
+     "title": "Pressure breath",
+     "points": [
+      "Flow is decelerating",
+      "Volume varies",
+      "Do not call that obstruction"
+     ]
+    }
+   }
+  }
+ ]
 }

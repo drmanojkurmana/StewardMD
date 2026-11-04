@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "scc-cardiogenic-shock",
+ "subject": "ss-critical-care",
+ "title": "Cardiogenic shock and mechanical circulatory support",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**SCAI** shock stages run from A, at risk, to E, extremis. The stage is reassessed after each intervention because a patient moves between stages in hours. A patient who was at risk before a procedure can be in extremis by the evening. Writing the stage once, on admission, misses that movement.",
+   "say": "SCAI shock stages run from A, at risk, to E, extremis. The stage is reassessed after each intervention because a patient moves between stages in hours. A patient who was at risk before a procedure can be in extremis by the evening. Writing the stage once, on admission, misses that movement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SCAI stage",
+     "Plain meaning"
+    ],
+    "rows": [
+     [
+      "A",
+      "At risk, not yet shocked"
+     ],
+     [
+      "B and C",
+      "Hypotension, then classic shock"
+     ],
+     [
+      "D",
+      "Deteriorating despite support"
+     ],
+     [
+      "E",
+      "Extremis, impending arrest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In infarct related cardiogenic shock with multivessel disease, **CULPRIT-SHOCK** showed that culprit lesion only PCI, with later staged revascularisation, was better than immediate multivessel PCI. Open the artery that caused the shock. Leave the bystander lesions for a staged sitting unless they are the reason the patient is still dying.",
+   "say": "In infarct related cardiogenic shock with multivessel disease, CULPRIT-SHOCK showed that culprit lesion only PCI, with later staged revascularisation, was better than immediate multivessel PCI. Open the artery that caused the shock. Leave the bystander lesions for a staged sitting unless they are the reason the patient is still dying.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CULPRIT-SHOCK",
+     "points": [
+      "Culprit lesion only, first",
+      "Stage the other lesions",
+      "Better than immediate multivessel PCI"
+     ]
+    },
+    "right": {
+     "title": "Not the trial",
+     "points": [
+      "Opening every stenosis at once",
+      "A stable elective multivessel case",
+      "Shock from a non-coronary cause"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**IABP-SHOCK II** found that a routine intra-aortic balloon pump did not reduce 30 day mortality in infarct related cardiogenic shock. A balloon is not inserted by default. Selected mechanical problems, such as a ventricular septal rupture while a team is arranging definitive care, are a different conversation from a routine balloon in every infarct shock.",
+   "say": "IABP-SHOCK II found that a routine intra-aortic balloon pump did not reduce 30 day mortality in infarct related cardiogenic shock. A balloon is not inserted by default. Selected mechanical problems, such as a ventricular septal rupture while a team is arranging definitive care, are a different conversation from a routine balloon in every infarct shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IABP-SHOCK II",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Population",
+      "Infarct related cardiogenic shock"
+     ],
+     [
+      "Routine balloon",
+      "No reduction in 30 day death"
+     ],
+     [
+      "Default",
+      "Do not insert one in everyone"
+     ],
+     [
+      "Separate question",
+      "A mechanical complication awaiting repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**DanGer Shock** found that **Impella** CP reduced 180 day death in selected patients with ST elevation myocardial infarction and cardiogenic shock. That result does not extend to every non-ischaemic shock. Copying the device into a dilated cardiomyopathy, or into a patient the trial would have excluded, is not what the trial showed.",
+   "say": "DanGer Shock found that Impella CP reduced 180 day death in selected patients with ST elevation myocardial infarction and cardiogenic shock. That result does not extend to every non-ischaemic shock. Copying the device into a dilated cardiomyopathy, or into a patient the trial would have excluded, is not what the trial showed.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiogenic-shock-fig1.webp",
+    "alt": "Heart with an infarct, low output, pulmonary oedema, hypotension, coronary hypoperfusion, and vasoconstriction in a loop.",
+    "caption": "The spiral from infarct to low output, oedema, hypotension, and worse coronary flow. Impella, a balloon pump, and ECMO are not drawn. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**ECLS-SHOCK** found that early **VA-ECMO** did not reduce 30 day death in infarct related cardiogenic shock. ECMO is not the default mechanical support. It remains a rescue for a patient who is otherwise dying and has a plan, not a treatment you start because the lactate is high and the trial was negative for routine early use.",
+   "say": "ECLS-SHOCK found that early VA-ECMO did not reduce 30 day death in infarct related cardiogenic shock. ECMO is not the default mechanical support. It remains a rescue for a patient who is otherwise dying and has a plan, not a treatment you start because the lactate is high and the trial was negative for routine early use.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ECLS-SHOCK",
+     "points": [
+      "Early VA-ECMO in infarct shock",
+      "No reduction in 30 day death",
+      "Not the default"
+     ]
+    },
+    "right": {
+     "title": "Still a rescue conversation",
+     "points": [
+      "Arrest or extremis with a recovery plan",
+      "A reversible cause",
+      "Not a lactate trigger alone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Right ventricular infarction** presents with hypotension, clear lungs, and a raised jugular venous pressure. Treatment is reperfusion, cautious fluid, and avoidance of nitrates. A pulmonary artery catheter will show a high right pressure and a low or normal wedge. A nitrate that unloads the right ventricle can collapse the output.",
+   "say": "Right ventricular infarction presents with hypotension, clear lungs, and a raised jugular venous pressure. Treatment is reperfusion, cautious fluid, and avoidance of nitrates. A pulmonary artery catheter will show a high right pressure and a low or normal wedge. A nitrate that unloads the right ventricle can collapse the output.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Right ventricular infarct",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Bedside",
+      "Low pressure, clear lungs, high jugular pressure"
+     ],
+     [
+      "Catheter",
+      "High right pressure, low or normal wedge"
+     ],
+     [
+      "Treat",
+      "Reperfusion and cautious fluid"
+     ],
+     [
+      "Avoid",
+      "Nitrates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **cold and wet** profile is low cardiac output with pulmonary congestion and is the classic cardiogenic shock bed. Cold and dry is low output without congestion. Warm and wet is congestion with a preserved output. Naming the profile chooses fluid, diuretic, or inotrope. Warm and wet does not need an inotrope.",
+   "say": "The cold and wet profile is low cardiac output with pulmonary congestion and is the classic cardiogenic shock bed. Cold and dry is low output without congestion. Warm and wet is congestion with a preserved output. Naming the profile chooses fluid, diuretic, or inotrope. Warm and wet does not need an inotrope.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiogenic-shock-fig2.webp",
+    "alt": "Downward spiral of cardiogenic shock beside a table that labels cardiogenic shock as cold and wet.",
+    "caption": "The phenotype column marks cardiogenic shock as cold and wet, hypovolaemic shock as cold and dry, and septic shock as warm and dry. Warm and wet, congestion with a preserved output, is not a separate row. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**Noradrenaline** is preferred to dopamine when a vasopressor is needed in cardiogenic shock. **Dobutamine** is added for low output once the pressure is high enough for coronary perfusion. Starting dobutamine into a systolic pressure that cannot perfuse the heart makes the tachycardia and the ischaemia worse. Pressure is secured first, and then the inotrope is added.",
+   "say": "Noradrenaline is preferred to dopamine when a vasopressor is needed in cardiogenic shock. Dobutamine is added for low output once the pressure is high enough for coronary perfusion. Starting dobutamine into a systolic pressure that cannot perfuse the heart makes the tachycardia and the ischaemia worse. Pressure is secured first, and then the inotrope is added.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cardiogenic shock needs a vasopressor"
+     },
+     {
+      "id": "b",
+      "label": "Noradrenaline, not dopamine"
+     },
+     {
+      "id": "c",
+      "label": "Once pressure is safe, add dobutamine for low output"
+     },
+     {
+      "id": "d",
+      "label": "Do not start the inotrope into profound hypotension"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ]
+}

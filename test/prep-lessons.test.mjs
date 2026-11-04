@@ -136,7 +136,10 @@ test("gate: no 12-word copy, no dash, only cleared images", () => {
     "v1/lessons/media/sgi-gi-physiology-nutrition-fig1.webp",
     "clinix/media/practicals/surg-tub-minnesota-tube.webp",
     "clinix/media/skills/skill-ix-surg-dysphagia_workup.webp",
+    "tokos/media/instruments/in-01.webp",
+    "clinix-barrelchest.jpg",
   ]) assert.deepEqual(G.gateStep(step({ vis: { kind: "image", src, alt: "a", caption: "c" } }), GROUND), [], src);
+  assert.match(G.gateStep(step({ vis: { kind: "image", src: "prep/pearl-figs/pearl-heart-shunts.svg", alt: "a", caption: "c" } }), GROUND).join(), /not cleared/, "pearl SVGs stay rejected: not bundled by scripts/build-www.sh");
 });
 test("gate: narration must be full natural sentences, rejecting telegraphic chains", () => {
   const good = "Monosaccharides cannot be hydrolysed into simpler sugars. They are classed as aldoses or ketoses by their carbonyl group.";
