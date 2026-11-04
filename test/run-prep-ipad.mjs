@@ -116,7 +116,7 @@ try {
     window.SMD_PREP_BANK_VER="v1"; window.SMD_PREP_PYQ_VER="v2"; if(!L) window.SMD_PREP_BASE=F; window.SMD_PREP_BANK_API=F+"api/"; window.SMD_PREP_FLAG_API=${JSON.stringify(FIX + "hidden.json")};
     window.confirm=function(){return true;}; window.SMD_PREP_ONBOARD=false; window.toast=function(m){(window.__toasts=window.__toasts||[]).push(m);};
     window.SMD_AUTH={currentUser:{uid:"u1",displayName:"Asha Rao",email:"asha@example.com",getIdToken:function(){return Promise.resolve("tok");},getIdTokenResult:function(){return Promise.resolve({token:"tok",claims:{}});}}};
-    window.__tts=[]; window.SpeechSynthesisUtterance=function(t){this.text=t;this.rate=1;this.lang="";};
+    window.SMD_PREP_VOICE=false; window.__tts=[]; window.SpeechSynthesisUtterance=function(t){this.text=t;this.rate=1;this.lang="";};
     Object.defineProperty(window,"speechSynthesis",{configurable:true,value:{speaking:false,speak:function(u){window.__tts.push(u.text);this.speaking=true;},cancel:function(){this.speaking=false;}}});
   })();` });
   const clean = `["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); return 1;`;
