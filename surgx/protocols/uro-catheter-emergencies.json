@@ -1,0 +1,62 @@
+{
+  "id": "uro-catheter-emergencies",
+  "title": "Paraphimosis and catheter emergencies",
+  "subtitle": "Traumatic catheterisation, stuck balloons, urethral injury",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "eau-paeds", "org": "European Association of Urology (EAU) and European Society for Paediatric Urology (ESPU)", "title": "EAU Guidelines on Paediatric Urology: phimosis and paraphimosis", "year": 2024, "url": "https://uroweb.org/guidelines/paediatric-urology", "accessed": "2026-11-04" },
+    { "id": "eau-trauma", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Urological Trauma: urethral trauma", "year": 2024, "url": "https://uroweb.org/guidelines/urological-trauma", "accessed": "2026-11-04" },
+    { "id": "eaun-cath", "org": "European Association of Urology Nurses (EAUN)", "title": "Evidence-based guidelines for best practice in urological health care: catheterisation, indwelling catheters in adults, urethral and suprapubic", "year": 2012, "url": "https://nurses.uroweb.org/", "accessed": "2026-11-04" },
+    { "id": "baus-spc", "org": "British Association of Urological Surgeons (BAUS)", "title": "British Association of Urological Surgeons' suprapubic catheter practice guidelines (Harrison SCW et al., BJU International)", "year": 2011, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=British+Association+of+Urological+Surgeons+suprapubic+catheter+practice+guidelines", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A swollen, painful glans with a tight band of retracted foreskin behind it, often in a catheterised or confused patient whose foreskin was not replaced: paraphimosis." },
+      { "text": "Pain, bleeding and no urine flow after a catheter balloon is inflated: the balloon is in the urethra." },
+      { "text": "Blood at the meatus, inability to void, or a perineal or penile 'butterfly' haematoma after pelvic fracture or straddle injury: urethral injury." },
+      { "text": "A catheter balloon that will not deflate, or a catheter that has fallen out of a recently formed suprapubic tract." },
+      { "text": "Fever and rigors after a difficult or traumatic catheterisation." }
+    ],
+    "do_now": [
+      { "text": "Paraphimosis: give analgesia or a penile block, reduce the oedema with sustained manual compression, then reduce the foreskin by pushing the glans back while drawing the foreskin forward.", "timeCritical": true, "evidenceRef": "eau-paeds" },
+      { "text": "If manual reduction fails, a dorsal slit under anaesthesia is required; do not leave a constricting band in place.", "timeCritical": true, "evidenceRef": "eau-paeds" },
+      { "text": "Balloon inflated in the urethra: deflate it immediately, remove the catheter, and do not reattempt blindly. Ask for urological help for a further attempt, ideally with a flexible cystoscope and guidewire.", "timeCritical": true, "evidenceRef": "eaun-cath" },
+      { "text": "Suspected urethral injury: do not attempt blind urethral catheterisation by an inexperienced operator. Divert the urine with a suprapubic catheter if the patient cannot void, and image the urethra.", "timeCritical": true, "evidenceRef": "eau-trauma" },
+      { "text": "Dislodged suprapubic catheter: replace it promptly through the existing tract, because a fresh tract can close within hours; a recently formed tract, in the first weeks after insertion, may need replacement by the urology team.", "timeCritical": true, "evidenceRef": "baus-spc" }
+    ],
+    "assess": [
+      { "text": "Always replace the foreskin after catheterisation or examination, and document that you did so." },
+      { "text": "Before any catheter in trauma, examine the meatus, the perineum and, where indicated, the rectum." },
+      { "text": "Sepsis screen after a traumatic catheterisation in infected urine.", "calcs": ["qsofa", "news2"] }
+    ],
+    "investigate": [
+      { "text": "Retrograde urethrography when urethral injury is suspected, in a stable patient, before further attempts at urethral catheterisation." },
+      { "text": "Bladder ultrasound to confirm retention or a full bladder before suprapubic access." },
+      { "text": "Ultrasound to see a balloon that will not deflate, and to guide its puncture." }
+    ],
+    "resuscitate": [
+      { "text": "Treat urosepsis after traumatic catheterisation with antibiotics per local protocol once cultures are sent.", "evidenceRef": "eaun-cath" }
+    ],
+    "definitive": [
+      { "text": "Paraphimosis: after reduction, arrange elective circumcision discussion for recurrent or underlying phimosis.", "evidenceRef": "eau-paeds" },
+      { "text": "False passage: a urethral catheter passed by a urologist under direct vision is left for a period to allow healing; otherwise a suprapubic catheter.", "evidenceRef": "eaun-cath" },
+      { "text": "Non-deflating balloon: cut the inflation valve arm first; if that fails, pass a fine guidewire up the inflation channel, or puncture the balloon under ultrasound guidance. Retrieve and inspect the balloon fragments.", "evidenceRef": "eaun-cath" },
+      { "text": "Pelvic fracture urethral injury: suprapubic diversion, with primary realignment in selected cases and delayed urethroplasty for the resulting stricture.", "evidenceRef": "eau-trauma" }
+    ],
+    "escalate": [
+      { "text": "Urology registrar for any traumatic catheterisation, suspected urethral injury, or failed paraphimosis reduction." },
+      { "text": "Trauma team leader before catheterising any patient with a pelvic fracture." },
+      { "text": "Radiology for a balloon puncture under ultrasound guidance." }
+    ]
+  },
+  "notes": [
+    "Paraphimosis is iatrogenic far more often than it should be. The fix is a habit: the foreskin goes back over the glans every time.",
+    "Never over-inflate a balloon to burst it, and never inject solvents into it. Fragments are left behind and become bladder stones.",
+    "In a pelvic fracture, the first catheter attempt is the one that matters. A confident gentle attempt by an experienced urologist is very different from repeated attempts by the most junior person in the room."
+  ],
+  "calcs": ["qsofa", "news2"]
+}

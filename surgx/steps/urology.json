@@ -1,0 +1,90 @@
+{
+  "_comment": "Shared urology steps (endoscopic bladder access, resection platform, chip evacuation, perforation check, three-way catheter). Used by TURP, TURBT and suprapubic catheter insertion. Procedure-only steps live in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.uro.cystoscopy": {
+      "id": "step.uro.cystoscopy", "kind": "access",
+      "title": "Urethrocystoscopy and systematic bladder inspection",
+      "why": "Every endoscopic bladder operation starts with a complete map. A tumour, stone, diverticulum or ureteric orifice that is not seen at the start is the one that gets resected, missed or perforated later.",
+      "how": [
+        "Pass the cystoscope under direct vision along the whole urethra, inspecting it as you go; never advance blind against resistance.",
+        "Note the length and occlusion of the prostatic urethra, the verumontanum, and the bladder neck.",
+        "Inspect the entire bladder systematically with the 30 and 70 degree lenses: dome, walls, trigone, both ureteric orifices and the bladder neck, with the bladder moderately filled.",
+        "Record the findings as a diagram before any resection begins."
+      ],
+      "structuresAtRisk": ["Urethra (false passage)", "Ureteric orifices"],
+      "pitfalls": [
+        "Missing the dome and the anterior wall because the bladder was overfilled or the lens never rotated upwards.",
+        "Forcing the instrument through a stricture or a high bladder neck and creating a false passage."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.uro.resectoscope": {
+      "id": "step.uro.resectoscope", "kind": "access", "critical": true,
+      "title": "Resectoscope set-up, irrigation fluid and urethral calibration",
+      "why": "The choice of energy and irrigation fluid decides whether a patient can develop TUR syndrome, and an under-calibrated urethra is where post-operative strictures come from.",
+      "how": [
+        "Confirm the energy platform with the team. Monopolar resection needs a non-conducting, non-haemolytic fluid such as glycine; bipolar resection uses normal saline.",
+        "Hang the irrigant at a height that gives a clear view at the lowest pressure needed; higher pressure increases fluid absorption.",
+        "Lubricate generously and calibrate the urethra gently with sounds or an Otis urethrotome if the sheath does not pass easily; do not force the sheath.",
+        "Introduce the sheath with the obturator, then the working element under vision, and check the loop, the return of fluid and the diathermy settings before the first cut."
+      ],
+      "structuresAtRisk": ["Urethra and meatus", "Bladder neck"],
+      "pitfalls": [
+        "Using saline with a monopolar loop. It does not cut, and the team turns the power up instead of checking the fluid.",
+        "A sheath forced through a tight meatus, leaving a meatal or bulbar stricture."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.uro.chip-evacuation": {
+      "id": "step.uro.chip-evacuation", "kind": "resection",
+      "title": "Chip evacuation and specimen collection",
+      "why": "Retained chips block the catheter and cause clot retention in recovery, and every chip is tissue the pathologist needs for staging or for an incidental cancer.",
+      "how": [
+        "Evacuate the chips with an Ellik evacuator or a bladder syringe through the sheath until no further fragments return.",
+        "Re-inspect the bladder for remaining chips, especially in the dome and behind the bladder neck.",
+        "Collect all fragments for histology; label separately any specimen that needs its own report."
+      ],
+      "structuresAtRisk": ["Bladder wall (vigorous evacuation through a perforation)"],
+      "pitfalls": [
+        "Aggressive Ellik pressure when a perforation is suspected, pushing fluid and chips outside the bladder.",
+        "Declaring the bladder empty without looking."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.uro.perforation-check": {
+      "id": "step.uro.perforation-check", "kind": "checkpoint", "critical": true,
+      "title": "Final inspection: perforation, orifices and landmarks",
+      "why": "A perforation recognised in theatre changes the plan and is usually manageable; one recognised in recovery presents as abdominal distension, pain and fluid overload, and costs time the patient may not have.",
+      "how": [
+        "Inspect the resected area at low pressure: fat seen through the capsule or bladder wall, or black space beyond, means perforation.",
+        "Check that both ureteric orifices are intact and that the verumontanum and external sphincter are preserved.",
+        "Feel the abdomen under the drapes: new distension or firmness suggests extravasation.",
+        "State the findings to the anaesthetist: extent of resection, any perforation, and the time on irrigation."
+      ],
+      "structuresAtRisk": ["Prostatic capsule", "Bladder wall and peritoneum", "Ureteric orifices", "External urethral sphincter"],
+      "pitfalls": [
+        "Finishing the case because it is nearly finished when a perforation is seen.",
+        "Not telling the anaesthetist, who is the person most likely to see the first sign of absorption."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.uro.three-way-catheter": {
+      "id": "step.uro.three-way-catheter", "kind": "closure",
+      "title": "Three-way catheter and continuous irrigation",
+      "why": "After a resection the bladder must stay empty and free of clot while the raw surface stops oozing. A blocked catheter in recovery means clot retention, pain and secondary bleeding.",
+      "how": [
+        "Pass a three-way irrigating catheter of adequate size over an introducer if needed, confirming free drainage before inflating the balloon.",
+        "Inflate the balloon with sterile water to the volume the manufacturer specifies, and record catheter type, size and balloon volume in the note.",
+        "Start continuous irrigation with normal saline and confirm a light pink return before leaving theatre.",
+        "Hand over the irrigation plan and the input-output chart explicitly to the recovery and ward nurses."
+      ],
+      "structuresAtRisk": ["Prostatic fossa or resection bed (catheter tip passing under the trigone)"],
+      "pitfalls": [
+        "The catheter tip passing into a false passage under the bladder neck after a TURP; the balloon is then inflated in the prostatic fossa.",
+        "Irrigation started without anyone recording input and output, so retained fluid goes unnoticed."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

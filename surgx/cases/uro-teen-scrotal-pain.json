@@ -1,0 +1,83 @@
+{
+  "id": "uro-teen-scrotal-pain",
+  "title": "Scrotal pain at 2am",
+  "subtitle": "A 15-year-old with sudden left testicular pain",
+  "simulation": true,
+  "levels": ["student", "intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "uro-acute-scrotum",
+  "procedureRef": "uro-scrotal-exploration",
+  "sources": [
+    { "id": "eau-paeds", "org": "European Association of Urology (EAU) and European Society for Paediatric Urology (ESPU)", "title": "EAU Guidelines on Paediatric Urology: acute scrotum in children", "year": 2024, "url": "https://uroweb.org/guidelines/paediatric-urology", "accessed": "2026-11-04" },
+    { "id": "twist", "org": "The Journal of Urology (Barbosa JA et al.)", "title": "Development and initial validation of a scoring system to diagnose testicular torsion in children (TWIST)", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Development+and+initial+validation+of+a+scoring+system+to+diagnose+testicular+torsion+in+children", "accessed": "2026-11-04" }
+  ],
+  "stem": "A 15-year-old boy is brought to the emergency department at 2am by his mother. He woke at about 12:30am with severe left-sided lower abdominal and scrotal pain and has vomited twice. He is embarrassed and initially says his 'stomach hurts'. He had a similar pain last month that settled after an hour. The emergency physician calls you, the surgical resident on call.",
+  "vitals": { "Temp": "37.1 C", "HR": "108", "BP": "128/74", "RR": "18", "SpO2": "99% on air", "Pain": "9/10" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "On the phone the emergency physician asks whether you want an ultrasound arranged before you come down. What do you say?",
+      "hint": "Think about which test answers the question fastest, and what a scan at 2am costs in time.",
+      "options": [
+        { "id": "a", "text": "I am coming now to examine him. Keep him nil by mouth, give analgesia, and alert theatre and the anaesthetist that a scrotal exploration is likely", "correct": true, "feedback": "Correct. The decision is clinical, and the clock started at 12:30. Preparing theatre in parallel costs nothing." },
+        { "id": "b", "text": "Yes, get a Doppler ultrasound and call me with the result", "correct": false, "feedback": "An out-of-hours scan commonly adds hours, and a reassuring scan does not exclude torsion. This is the commonest route to a lost testis." },
+        { "id": "c", "text": "Start antibiotics for epididymitis and refer to the morning clinic", "correct": false, "feedback": "Sudden pain waking him from sleep with vomiting in an adolescent is torsion until proven otherwise. Epididymitis is a diagnosis of exclusion here." },
+        { "id": "d", "text": "Ask paediatrics to see him first because of his age", "correct": false, "feedback": "Adding a referral step adds delay. This is a surgical emergency and a surgeon needs to examine him." }
+      ],
+      "why": "Testicular torsion is a time-critical ischaemic emergency. The history alone (sudden onset waking from sleep, vomiting, an adolescent, a previous self-limiting episode) is enough to set the theatre pathway in motion. Imaging should never be the gate to the surgeon's examination.",
+      "missedRedFlags": ["Vomiting with scrotal pain, which favours torsion over epididymitis", "A previous episode that settled, suggesting intermittent torsion", "Abdominal pain as the presenting complaint in an adolescent boy"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "The left testis is swollen, very tender, high-riding with a horizontal lie, and the left cremasteric reflex is absent. What is your assessment?",
+      "hint": "Count the features of the clinical torsion score.",
+      "options": [
+        { "id": "a", "text": "High clinical probability of torsion: proceed directly to scrotal exploration without imaging", "correct": true, "feedback": "Correct. Swelling, hardness, an absent cremasteric reflex, nausea and vomiting, and a high-riding testis together give a high score, and a high score supports going straight to theatre." },
+        { "id": "b", "text": "Intermediate probability: obtain an ultrasound before deciding", "correct": false, "feedback": "This is not an intermediate picture. Imaging here only delays the operation that will be needed." },
+        { "id": "c", "text": "Probable torsion of the appendix testis: manage with analgesia", "correct": false, "feedback": "Appendix testis torsion causes localised upper-pole tenderness with a normally lying testis and a preserved reflex. This examination is different." },
+        { "id": "d", "text": "Probable epididymo-orchitis: send urine and start antibiotics", "correct": false, "feedback": "There is no urinary history, onset was sudden, and the signs point to torsion. A positive dipstick would not change that." }
+      ],
+      "why": "The TWIST score combines testicular swelling, a hard testis, an absent cremasteric reflex, nausea or vomiting, and a high-riding testis. A high score identifies boys who can go to theatre without a scan; a low score makes torsion less likely but never removes clinical judgement.",
+      "missedRedFlags": ["A high-riding testis with a horizontal lie", "Absent cremasteric reflex on the painful side"]
+    },
+    {
+      "id": "dp3", "phase": "decide",
+      "prompt": "Theatre will be free in about 40 minutes. His mother asks what will happen. What do you consent for?",
+      "hint": "What might you find, and what will you do about the other side?",
+      "options": [
+        { "id": "a", "text": "Scrotal exploration, detorsion, fixation of both testes, and possible removal of the left testis if it is not viable", "correct": true, "feedback": "Correct. Consent must cover bilateral fixation and the possibility of orchidectomy, discussed honestly with the young person and his mother." },
+        { "id": "b", "text": "Left scrotal exploration and fixation only", "correct": false, "feedback": "The predisposing anatomy is usually bilateral, so the right testis must be fixed too, and orchidectomy must be consented for." },
+        { "id": "c", "text": "Exploration only; you will come back to discuss fixation after seeing the findings", "correct": false, "feedback": "You cannot come back mid-operation. Every foreseeable decision needs consent beforehand." },
+        { "id": "d", "text": "Defer consent to the morning when his father is available", "correct": false, "feedback": "Delay costs the testis. A parent with parental responsibility is present and the young person can take part in the discussion now." }
+      ],
+      "why": "Consent covers the foreseeable outcomes: detorsion and fixation, contralateral fixation, and orchidectomy for a non-viable testis. Involving an adolescent in the conversation respects his developing autonomy and helps him understand why both sides are being operated on.",
+      "alternatives": ["If theatre is delayed, manual detorsion with analgesia is a reasonable temporising step. It does not replace exploration and fixation."]
+    },
+    {
+      "id": "dp4", "phase": "operate",
+      "prompt": "At exploration the left cord has two full twists and the testis is dark blue. After detorsion it remains dusky. What do you do next?",
+      "hint": "Do not decide on first sight.",
+      "options": [
+        { "id": "a", "text": "Wrap it in warm saline, fix the right testis meanwhile, then reassess; incise the tunica albuginea and look for fresh bleeding if still in doubt", "correct": true, "feedback": "Correct. Many dusky testes recover after detorsion and warming. Use the time productively on the other side, then decide on objective evidence." },
+        { "id": "b", "text": "Proceed to left orchidectomy immediately", "correct": false, "feedback": "Premature. A testis that looks dark immediately after detorsion may still be viable." },
+        { "id": "c", "text": "Fix it in place without further assessment and close", "correct": false, "feedback": "A frankly necrotic testis left in place risks infection and prolonged pain. Viability must be judged, not assumed." },
+        { "id": "d", "text": "Close and arrange a Doppler scan in the morning", "correct": false, "feedback": "The decision belongs in theatre, now. A second operation helps no one." }
+      ],
+      "why": "Viability is assessed after detorsion and warming, by colour and, if needed, by incising the tunica albuginea to see whether it bleeds fresh blood. The wait is used to fix the contralateral testis. Decide with a senior surgeon.",
+      "stepRef": "step.scrot.viability",
+      "missedRedFlags": ["Removing a testis that might recover"]
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "The left testis pinked up and bled from the tunical incision. Both testes were fixed. What do you tell the family?",
+      "hint": "Think about what may still happen over the next months.",
+      "options": [
+        { "id": "a", "text": "The testis was saved and both sides are fixed, but it may still shrink over the coming months; he will be reviewed to check its size", "correct": true, "feedback": "Correct. Honest counselling about possible atrophy, and follow-up to assess it, are part of the operation." },
+        { "id": "b", "text": "Everything is fine and no follow-up is needed", "correct": false, "feedback": "Atrophy after a prolonged ischaemic period is common enough that follow-up and honest counselling are needed." },
+        { "id": "c", "text": "He will certainly lose the left testis eventually", "correct": false, "feedback": "Overly pessimistic. Many salvaged testes retain size and function." },
+        { "id": "d", "text": "He should avoid all sport permanently", "correct": false, "feedback": "There is no basis for this. Return to activity follows wound healing and comfort." }
+      ],
+      "why": "Salvage does not guarantee a normal testis. Telling the family about the possibility of atrophy, and the reason both testes were fixed, avoids a later sense that something was hidden. Teach him that any future testicular pain needs immediate assessment."
+    }
+  ]
+}

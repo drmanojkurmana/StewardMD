@@ -354,6 +354,60 @@
           f("icpMonitor", "ICP monitor or drain placed", {"type": "text", "required": false, "aiFillable": false, "ph": "None / parenchymal / EVD"})
         ]
       }
+    },
+    "uro-scrotal-exploration": {
+      base: "operative", title: "Scrotal exploration",
+      prefill: {"procedure": "Scrotal exploration and bilateral testicular fixation", "incision": "Median raphe"},
+      extra: {
+        "Operative detail": [
+          f("painOnset", "Time of pain onset and time of incision", {"type": "text", "required": true, "aiFillable": false, "help": "Ischaemic time is the main prognostic fact."}),
+          f("torsionFindings", "Side, degrees of twist and direction", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. left, 720 degrees, medial; or no torsion found"}),
+          f("viability", "Viability after detorsion and warming", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Colour, tunical bleeding, decision and who agreed it"}),
+          f("fixation", "Fixation method, both sides", {"type": "text", "required": true, "aiFillable": true, "ph": "Suture type and points, or dartos pouch; contralateral fixed: Yes / No"}),
+          f("orchidectomy", "Orchidectomy and specimen", {"type": "text", "required": false, "aiFillable": false, "ph": "Not performed, or side and specimen sent"})
+        ]
+      }
+    },
+    "uro-suprapubic-catheter": {
+      base: "operative", title: "Suprapubic catheter insertion",
+      prefill: {"procedure": "Suprapubic catheter insertion", "anaesthesia": "Local anaesthetic"},
+      extra: {
+        "Operative detail": [
+          f("guidance", "Bladder confirmation and guidance", {"type": "text", "required": true, "aiFillable": false, "ph": "Ultrasound / cystoscopic / open; bowel excluded: Yes / No"}),
+          f("previousSurgery", "Previous lower abdominal surgery or scars", {"type": "text", "required": true, "aiFillable": true}),
+          f("seekerAspiration", "Urine aspirated with seeker needle; depth", {"type": "text", "required": true, "aiFillable": false}),
+          f("catheterDetail", "Catheter type, size and balloon volume", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. silicone, size Ch, balloon mL water"}),
+          f("firstChange", "Plan for first catheter change", {"type": "text", "required": true, "aiFillable": true, "help": "Who changes it and when."})
+        ]
+      }
+    },
+    "uro-turbt": {
+      base: "operative", title: "Transurethral resection of bladder tumour",
+      prefill: {"procedure": "Transurethral resection of bladder tumour (TURBT)"},
+      extra: {
+        "Operative detail": [
+          f("tumourMap", "Tumour number, size, site and appearance", {"type": "textarea", "required": true, "aiFillable": true, "rows": 3, "help": "Describe as a bladder diagram: wall, distance from orifices."}),
+          f("bimanual", "Bimanual examination before and after", {"type": "text", "required": true, "aiFillable": false, "ph": "No mass / mobile mass / fixed mass"}),
+          f("completeness", "Resection complete; detrusor in base specimen", {"type": "text", "required": true, "aiFillable": false, "ph": "Complete / incomplete; base sent separately: Yes / No"}),
+          f("perforation", "Bladder perforation", {"type": "text", "required": true, "aiFillable": false, "ph": "None / extraperitoneal / intraperitoneal, and action"}),
+          f("instillation", "Immediate post-operative instillation", {"type": "text", "required": true, "aiFillable": false, "ph": "Given (agent, time) / withheld and reason"}),
+          f("catheterDetail", "Catheter type, size and balloon volume", {"type": "text", "required": false, "aiFillable": false})
+        ]
+      }
+    },
+    "uro-turp": {
+      base: "operative", title: "Transurethral resection of the prostate",
+      prefill: {"procedure": "Transurethral resection of the prostate (TURP)", "anaesthesia": "Spinal"},
+      extra: {
+        "Operative detail": [
+          f("energyIrrigant", "Energy platform and irrigation fluid", {"type": "text", "required": true, "aiFillable": true, "ph": "Bipolar / saline, or monopolar / glycine", "help": "The fluid decides the TUR syndrome risk."}),
+          f("resectionTime", "Resection time (minutes)", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. start and finish times"}),
+          f("resectedWeight", "Resected tissue weight (g)", {"type": "text", "required": true, "aiFillable": false, "help": "Weighed in theatre."}),
+          f("landmarks", "Verumontanum and ureteric orifices preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, with detail"}),
+          f("capsulePerforation", "Capsular perforation or open sinuses; sodium checked", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "None, or site, action taken and sodium result"}),
+          f("catheterDetail", "Catheter type, size and balloon volume; irrigation", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. three-way, size Ch, balloon mL water, irrigation running"})
+        ]
+      }
     }
     /* ── end specialty templates ── */
   };

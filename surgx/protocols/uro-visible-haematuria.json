@@ -1,0 +1,62 @@
+{
+  "id": "uro-visible-haematuria",
+  "title": "Visible haematuria and clot retention",
+  "subtitle": "Stop the clots, then find the cancer",
+  "category": "uro_emergency",
+  "specialty": "urology",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-ng12", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Suspected cancer: recognition and referral (NG12)", "year": 2015, "version": "NG12", "url": "https://www.nice.org.uk/guidance/ng12", "accessed": "2026-11-04" },
+    { "id": "eau-nmibc", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Non-muscle-invasive Bladder Cancer", "year": 2024, "url": "https://uroweb.org/guidelines/non-muscle-invasive-bladder-cancer", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Haematuria with haemodynamic instability or a falling haemoglobin." },
+      { "text": "Clot retention: suprapubic pain, a palpable bladder, and a catheter that drains little or nothing." },
+      { "text": "Painless visible haematuria in an adult, especially a smoker or someone with occupational chemical exposure: urothelial cancer until proven otherwise." },
+      { "text": "Haematuria after pelvic radiotherapy or cyclophosphamide: haemorrhagic cystitis, which can be relentless." },
+      { "text": "Haematuria with loin pain and a mass, or with a recent renal biopsy or trauma: a renal source." }
+    ],
+    "do_now": [
+      { "text": "Clot retention: insert a large-bore three-way haematuria catheter and wash the bladder out by hand with a bladder syringe until the return is clot-free, before starting continuous irrigation.", "timeCritical": true, "evidenceRef": "campbell" },
+      { "text": "Run continuous bladder irrigation at a rate that keeps the effluent light pink, and record input and output so that retained irrigant is detected early.", "timeCritical": true, "evidenceRef": "campbell" },
+      { "text": "Shocked or bleeding heavily: two large-bore cannulae, crossmatch, and activate the major haemorrhage protocol if needed.", "timeCritical": true, "evidenceRef": "campbell" }
+    ],
+    "assess": [
+      { "text": "Anticoagulant and antiplatelet history, and when the last dose was taken. Anticoagulation unmasks pathology; it rarely explains haematuria on its own." },
+      { "text": "Pattern: initial, terminal or total haematuria; clots and their shape; associated pain or urinary symptoms." },
+      { "text": "Smoking, occupational exposure, pelvic radiotherapy, recent instrumentation, and travel or residence in schistosomiasis-endemic areas." },
+      { "text": "Haemodynamic status and renal function.", "calcs": ["shock_index", "kdigo_aki"] }
+    ],
+    "investigate": [
+      { "text": "Full blood count, renal function, coagulation, group and save, urine culture." },
+      { "text": "Refer adults meeting national criteria on the urgent suspected cancer pathway: NICE NG12 uses unexplained visible haematuria at 45 years and over, without urinary infection or persisting after its treatment." },
+      { "text": "Upper tract imaging (CT urography in most adults) and cystoscopy. Every adult with unexplained visible haematuria needs both the bladder and the upper tracts examined." },
+      { "text": "Do not stop the work-up because an infection or anticoagulant has been found." }
+    ],
+    "resuscitate": [
+      { "text": "Review the anticoagulant with the prescribing team: balance the bleeding against the indication, and reverse only for life-threatening bleeding per local protocol.", "evidenceRef": "campbell" },
+      { "text": "Transfuse to need; correct coagulopathy.", "evidenceRef": "campbell" }
+    ],
+    "definitive": [
+      { "text": "Clot retention not controlled by washout and irrigation: cystoscopy under anaesthesia, clot evacuation, and diathermy or resection of the bleeding source.", "evidenceRef": "campbell" },
+      { "text": "A bladder tumour seen at cystoscopy is resected with detrusor muscle in the specimen for staging.", "evidenceRef": "eau-nmibc" },
+      { "text": "Refractory haemorrhagic cystitis: escalate through intravesical agents, hyperbaric oxygen for radiation cystitis, selective embolisation of the internal iliac branches, and, rarely, diversion or cystectomy, with specialist input at each step.", "evidenceRef": "campbell" },
+      { "text": "Upper tract bleeding (tumour, arteriovenous malformation, post-biopsy) is often best managed by angioembolisation.", "evidenceRef": "campbell" }
+    ],
+    "escalate": [
+      { "text": "Urology on call for clot retention that does not clear with the first washout." },
+      { "text": "Interventional radiology for persistent upper tract or refractory bladder bleeding." },
+      { "text": "Senior review for any patient transfused more than once for haematuria." }
+    ]
+  },
+  "notes": [
+    "Irrigation does not clear an established clot. Wash out by hand first, otherwise the irrigation fluid fills the bladder around the clot and you create retention with a full bladder of saline.",
+    "A catheter that stops draining during irrigation is an emergency: stop the inflow, check for retention, and wash out. Bladder rupture from over-distension is possible.",
+    "The commonest error in haematuria is stopping the investigation at the first plausible explanation: a urine infection, warfarin, or a stone."
+  ],
+  "calcs": ["shock_index", "kdigo_aki"]
+}

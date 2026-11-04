@@ -31,6 +31,14 @@
     {
       "id": "neuro_spine",
       "title": "Spinal emergencies"
+    },
+    {
+      "id": "uro_emergency",
+      "title": "Urological emergencies"
+    },
+    {
+      "id": "uro_trauma",
+      "title": "Genitourinary trauma"
     }
   ],
   "protocols": [
@@ -274,6 +282,86 @@
       "specialty": "neurosurgery",
       "file": "protocols/mscc.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "uro-acute-retention",
+      "kind": "authored",
+      "title": "Acute urinary retention",
+      "subtitle": "Drain the bladder, then find the cause",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-acute-retention.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-acute-scrotum",
+      "kind": "authored",
+      "title": "Testicular torsion and the acute scrotum",
+      "subtitle": "Torsion until the theatre says otherwise",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-acute-scrotum.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-fournier",
+      "kind": "authored",
+      "title": "Fournier gangrene",
+      "subtitle": "Necrotising infection of the perineum: cut early, cut again",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-fournier.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-obstructed-kidney",
+      "kind": "authored",
+      "title": "Renal colic and the obstructed infected kidney",
+      "subtitle": "Infection behind a stone: decompress first",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-obstructed-kidney.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-priapism",
+      "kind": "authored",
+      "title": "Priapism",
+      "subtitle": "Ischaemic or not: the corporal gas decides",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-priapism.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-visible-haematuria",
+      "kind": "authored",
+      "title": "Visible haematuria and clot retention",
+      "subtitle": "Stop the clots, then find the cancer",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-visible-haematuria.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-catheter-emergencies",
+      "kind": "authored",
+      "title": "Paraphimosis and catheter emergencies",
+      "subtitle": "Traumatic catheterisation, stuck balloons, urethral injury",
+      "category": "uro_emergency",
+      "specialty": "urology",
+      "file": "protocols/uro-catheter-emergencies.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-renal-bladder-trauma",
+      "kind": "authored",
+      "title": "Renal and bladder trauma",
+      "subtitle": "Grade it, keep the kidney, find the rupture",
+      "category": "uro_trauma",
+      "specialty": "urology",
+      "file": "protocols/uro-renal-bladder-trauma.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -305,6 +393,12 @@
       "id": "neuro",
       "file": "steps/neuro.json",
       "title": "Shared neurosurgical and spinal steps",
+      "shared": true
+    },
+    {
+      "id": "urology",
+      "file": "steps/urology.json",
+      "title": "Shared urology steps",
       "shared": true
     }
   ],
@@ -435,6 +529,61 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 90
+    },
+    {
+      "id": "uro-turp",
+      "title": "Transurethral resection of the prostate (TURP)",
+      "subtitle": "Resect between the bladder neck and the verumontanum, and watch the fluid",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-turp.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "uro-turbt",
+      "title": "Transurethral resection of bladder tumour (TURBT)",
+      "subtitle": "Complete resection with detrusor muscle in the specimen",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-turbt.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "uro-scrotal-exploration",
+      "title": "Scrotal exploration with bilateral orchidopexy",
+      "subtitle": "Untwist, judge viability, fix both sides",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-scrotal-exploration.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45
+    },
+    {
+      "id": "uro-suprapubic-catheter",
+      "title": "Suprapubic catheter insertion",
+      "subtitle": "Full bladder, no bowel in the way",
+      "system": "urology",
+      "specialty": "urology",
+      "file": "procedures/uro-suprapubic-catheter.json",
+      "stepPacks": [
+        "core",
+        "urology"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
     }
   ],
   "cases": [
@@ -504,6 +653,33 @@
         "surgeon"
       ],
       "review": "ai_drafted"
+    },
+    {
+      "id": "uro-teen-scrotal-pain",
+      "title": "Scrotal pain at 2am",
+      "subtitle": "A 15-year-old with sudden left testicular pain",
+      "specialty": "urology",
+      "file": "cases/uro-teen-scrotal-pain.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "uro-fever-obstructing-stone",
+      "title": "Fever with an obstructing stone",
+      "subtitle": "Renal colic that has become urosepsis",
+      "specialty": "urology",
+      "file": "cases/uro-fever-obstructing-stone.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
     }
   ],
   "specialties": [
@@ -522,6 +698,10 @@
     {
       "id": "neurosurgery",
       "title": "Neurosurgery and spine"
+    },
+    {
+      "id": "urology",
+      "title": "Urology"
     }
   ]
 }
