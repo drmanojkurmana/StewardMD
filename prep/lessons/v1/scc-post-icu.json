@@ -3,62 +3,98 @@
  "module": "scc-post-icu",
  "subject": "ss-critical-care",
  "title": "ICU-acquired complications and rehabilitation",
- "minutes": 7,
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [
+  "q_f6b05688eebe",
+  "q_00ff33f33daf",
+  "q_c562b58a417b"
+ ],
  "steps": [
   {
-   "tx": "ICU survivors often carry **post intensive care syndrome**, a cluster of new or worsened problems in physical, cognitive and mental health that persist after discharge. It is common and under-recognised. Its three domains are physical weakness, cognitive impairment and psychological distress. Screening should be planned from the start, not left until the patient leaves hospital. Families are affected too, so family support forms part of care.",
-   "say": "ICU survivors often carry post intensive care syndrome, a cluster of new or worsened problems in physical, cognitive and mental health that persist after discharge. It is common and under-recognised. Its three domains are physical weakness, cognitive impairment and psychological distress. Screening should be planned from the start, not left until the patient leaves hospital. Families are affected too, so family support forms part of care.",
+   "tx": "**Post-intensive care syndrome** is a new or worse impairment of the body, of **cognition**, or of mental health that persists after critical illness. Families can develop anxiety, depression, and complicated grief, which is the family form of the same syndrome. It is sought after discharge. It is not a diagnosis that is made on the day of admission.",
+   "say": "Post-intensive care syndrome is a new or worse impairment of the body, of cognition, or of mental health that persists after critical illness. Families can develop anxiety, depression, and complicated grief, which is the family form of the same syndrome. It is sought after discharge. It is not a diagnosis that is made on the day of admission.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-post-icu-fig1.webp",
+    "alt": "A follow-up clinic after critical illness.",
+    "caption": "A follow-up clinic, which is where the body, cognition, and mental health are looked for after discharge. The drawing is not an in-ICU delirium score, and it is not a mobilisation protocol. Credit: StewardMD.",
+    "ar": 1.545
+   }
+  },
+  {
+   "tx": "The **TEAM** trial compared a higher dose of early active **mobilisation** with usual mobilisation. Days alive and out of hospital at 180 days were a median of 143 with the higher dose and 145 with usual care, and that difference was not significant. Adverse events were more common with the higher dose. Usual mobilisation is continued. The trial is an argument against an aggressive dose in an unstable patient, and it is not an argument against sitting up.",
+   "say": "The TEAM trial compared a higher dose of early active mobilisation with usual mobilisation. Days alive and out of hospital at 180 days were a median of 143 with the higher dose and 145 with usual care, and that difference was not significant. Adverse events were more common with the higher dose. Usual mobilisation is continued. The trial is an argument against an aggressive dose in an unstable patient, and it is not an argument against sitting up.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Higher-dose TEAM arm",
+     "points": [
+      "143 days alive out of hospital at 180 days",
+      "Not a significant gain",
+      "More adverse events"
+     ]
+    },
+    "right": {
+     "title": "Usual mobilisation",
+     "points": [
+      "145 days at 180 days",
+      "This continues",
+      "Sitting up is not forbidden"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The physical part of the syndrome is often **ICU-acquired weakness**. An **MRC sum score** below 48 out of 60, when the patient can be tested, is the mark of it. Lighter sedation and less paralysis are the prevention. No drug is a reversal once the weakness is established.",
+   "say": "The physical part of the syndrome is often ICU-acquired weakness. An MRC sum score below 48 out of 60, when the patient can be tested, is the mark of it. Lighter sedation and less paralysis are the prevention. No drug is a reversal once the weakness is established.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Domain",
-     "Typical problem",
-     "Example feature"
+     "Point",
+     "Practice"
     ],
     "rows": [
      [
-      "Physical",
-      "Muscle weakness",
-      "ICU acquired weakness"
+      "MRC sum score",
+      "Below 48 out of 60, if the patient can be tested"
      ],
      [
-      "Cognitive",
-      "Memory and attention loss",
-      "Slowed processing"
+      "Prevention",
+      "Lighter sedation, less paralysis"
      ],
      [
-      "Psychological",
-      "Distress and flashbacks",
-      "PTSD symptoms"
+      "A reversing drug",
+      "None"
+     ],
+     [
+      "When it is named",
+      "After the illness, as part of the syndrome"
      ]
     ]
    }
   },
   {
-   "tx": "**ICU acquired weakness** is symmetrical limb and respiratory muscle weakness that develops during critical illness without another cause. Prolonged immobility, sepsis and high dose corticosteroids raise the risk. **Early mobilisation** and progressive rehabilitation, started as soon as the patient is stable, reduce its duration and help function recover. Physiotherapy should be part of daily ICU routine.",
-   "say": "ICU acquired weakness is symmetrical limb and respiratory muscle weakness that develops during critical illness without another cause. Prolonged immobility, sepsis and high dose corticosteroids raise the risk. Early mobilisation and progressive rehabilitation, started as soon as the patient is stable, reduce its duration and help function recover. Physiotherapy should be part of daily ICU routine.",
+   "tx": "**Pressure injury** is prevented by repositioning and by **offloading** devices, including the mask, the tube ties, and the lines. An ulcer under a device is still a pressure injury. It is recorded as a safety event. A device-shaped ulcer is not a separate category that can be ignored.",
+   "say": "Pressure injury is prevented by repositioning and by offloading devices, including the mask, the tube ties, and the lines. An ulcer under a device is still a pressure injury. It is recorded as a safety event. A device-shaped ulcer is not a separate category that can be ignored.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Critical illness"
+      "label": "Mask, ties, and lines are devices"
      },
      {
       "id": "b",
-      "label": "Immobility and sepsis"
+      "label": "Offload and reposition"
      },
      {
       "id": "c",
-      "label": "Muscle weakness"
+      "label": "An ulcer under a device is a pressure injury"
      },
      {
       "id": "d",
-      "label": "Early mobilisation"
-     },
-     {
-      "id": "e",
-      "label": "Better recovery"
+      "label": "Record it as a safety event"
      }
     ],
     "edges": [
@@ -72,105 +108,96 @@
      ],
      [
       "c",
-      "d",
-      "prevent"
-     ],
-     [
-      "d",
-      "e"
+      "d"
      ]
     ]
    }
   },
   {
-   "tx": "Pressure injuries arise when **sustained pressure** and **shear forces** compromise blood flow to skin over bony prominences, particularly in patients who cannot move. A **risk assessment** tool should be completed on admission and revisited at regular intervals. Prevention rests on **repositioning schedules**, **pressure redistributing surfaces** and adequate **nutrition**. Staging depends on tissue depth, ranging from non-blanching erythema through to full-thickness loss.",
-   "say": "Pressure injuries happen when sustained pressure and shear forces reduce blood flow to skin over bony points, especially in patients who cannot move. Risk should be assessed on admission and reviewed regularly. The main preventive steps are repositioning on a schedule, using pressure redistributing surfaces and ensuring good nutrition. Staging is based on how deep the tissue damage goes, from skin that stays red when pressed through to loss of full skin thickness.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Stage",
-     "Key feature"
-    ],
-    "rows": [
-     [
-      "1",
-      "Intact skin with non-blanching redness"
-     ],
-     [
-      "2",
-      "Partial thickness loss, shallow ulcer or blister"
-     ],
-     [
-      "3",
-      "Full thickness loss, fat visible, no exposed bone or tendon"
-     ],
-     [
-      "4",
-      "Full thickness loss with exposed bone, tendon or muscle"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Critically ill patients carry a high **venous thromboembolism** risk because of immobility, sepsis and central lines. Unless contraindicated, **pharmacological prophylaxis** with a daily injected anticoagulant is the default, and **mechanical methods** such as compression devices are added when bleeding risk is high. **Stress ulcer prophylaxis** should be limited to patients with clear risk factors, such as coagulopathy or prolonged ventilation, because routine use adds little benefit and can increase pneumonia.",
-   "say": "Critically ill patients carry a high venous thromboembolism risk because of immobility, sepsis and central lines. Unless contraindicated, pharmacological prophylaxis with a daily injected anticoagulant is the default, and mechanical methods such as compression devices are added when bleeding risk is high. Stress ulcer prophylaxis should be limited to patients with clear risk factors, such as coagulopathy or prolonged ventilation, because routine use adds little benefit and can increase pneumonia.",
+   "tx": "**Venous thromboembolism** prophylaxis is low-molecular-weight heparin while bleeding risk allows it. The **PROTECT** trial found fewer pulmonary emboli with **dalteparin** than with unfractionated heparin, and there was no mortality difference. Mechanical compression is the bridge while anticoagulation is unsafe, and it is not a permanent substitute once bleeding has stopped.",
+   "say": "Venous thromboembolism prophylaxis is low-molecular-weight heparin while bleeding risk allows it. The PROTECT trial found fewer pulmonary emboli with dalteparin than with unfractionated heparin, and there was no mortality difference. Mechanical compression is the bridge while anticoagulation is unsafe, and it is not a permanent substitute once bleeding has stopped.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Give prophylaxis",
+     "title": "PROTECT dalteparin",
      "points": [
-      "Injected anticoagulant first line",
-      "Mechanical methods if bleeding risk high"
+      "Fewer pulmonary emboli",
+      "No mortality difference",
+      "Preferred while bleeding allows"
      ]
     },
     "right": {
-     "title": "Targeted ulcer prophylaxis",
+     "title": "Mechanical compression",
      "points": [
-      "Only with clear risk factors",
-      "Avoid routine use in others"
+      "The bridge if anticoagulation is unsafe",
+      "Not a permanent substitute",
+      "Stop the bridge when bleeding stops"
      ]
     }
    }
   },
   {
-   "tx": "Long term **cognitive impairment** and **post traumatic stress disorder** are common after critical illness. Memory, attention and executive function may remain impaired for months. PTSD symptoms include flashbacks, nightmares and avoidance of reminders of the ICU. **ICU diaries**, written by staff or family during the stay, help patients make sense of lost memories and can reduce distress. Follow up clinics allow structured review of physical, cognitive and psychological needs.",
-   "say": "Long term cognitive impairment and post traumatic stress disorder are common after critical illness. Memory, attention and executive function may remain impaired for months. PTSD symptoms include flashbacks, nightmares and avoidance of reminders of the ICU. ICU diaries, written by staff or family during the stay, help patients make sense of lost memories and can reduce distress. Follow up clinics allow structured review of physical, cognitive and psychological needs.",
-   "vis": null
+   "tx": "**Stress ulcer** prophylaxis is for the patient who is ventilated or coagulopathic, and it is stopped when that risk has stopped. **SUP-ICU** found that **pantoprazole** did not reduce 90 day mortality, and it did reduce clinically important bleeding. A proton pump inhibitor that is continued onto the ward with no indication is not what the trial supports.",
+   "say": "Stress ulcer prophylaxis is for the patient who is ventilated or coagulopathic, and it is stopped when that risk has stopped. SUP-ICU found that pantoprazole did not reduce 90 day mortality, and it did reduce clinically important bleeding. A proton pump inhibitor that is continued onto the ward with no indication is not what the trial supports.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SUP-ICU finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "90 day mortality",
+      "Not reduced by pantoprazole"
+     ],
+     [
+      "Important bleeding",
+      "Reduced"
+     ],
+     [
+      "Who gets it",
+      "Ventilated or coagulopathic patients"
+     ],
+     [
+      "Ward discharge",
+      "Stop it if the risk has stopped"
+     ]
+    ]
+   }
   },
   {
-   "tx": "Plan a structured **follow up clinic** for survivors, usually reviewing them within weeks to months of discharge. The review covers function, cognition, mood, sleep and return to work, with referral to physiotherapy, psychology or rehabilitation as needed. Early identification of problems is the key exam point, as it allows timely rehabilitation and support for the patient and family.",
-   "say": "Plan a structured follow up clinic for survivors, usually reviewing them within weeks to months of discharge. The review covers function, cognition, mood, sleep and return to work, with referral to physiotherapy, psychology or rehabilitation as needed. Early identification of problems is the key exam point, as it allows timely rehabilitation and support for the patient and family.",
+   "tx": "**Post-traumatic stress disorder** and problems with thinking are common, and they are missed if the only question is about the wound. Follow-up is a set of questions about memory, concentration, mood, and nightmares. A **follow-up clinic** is the structure that catches them. The wound check is not that clinic.",
+   "say": "Post-traumatic stress disorder and problems with thinking are common, and they are missed if the only question is about the wound. Follow-up is a set of questions about memory, concentration, mood, and nightmares. A follow-up clinic is the structure that catches them. The wound check is not that clinic.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-post-icu-fig1.webp",
-    "alt": "Diagram illustrating the structured components of an ICU follow-up clinic, covering assessment areas and referral pathways.",
-    "caption": "Structured ICU follow-up clinic components for comprehensive survivor care",
-    "ar": 1.8349
+    "src": "v1/kb/media/delirium-overview-fig1.webp",
+    "alt": "CAM delirium criteria beside the PINCH ME list of precipitants.",
+    "caption": "CAM is an acute change and inattention, plus disorganised thinking or an altered level. PINCH ME is a list of precipitants. CAM is the diagnosis used in the ICU. It is not the score of the follow-up clinic. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "An **ICU diary** can help a patient make sense of delusions. The evidence is mixed, and a diary is not a treatment for weakness or for post-traumatic stress disorder by itself. **Rehabilitation** begins with sitting and with range of movement when the patient is stable, and it is timed with the sedation break. It is not the high-dose TEAM protocol on the first unstable day.",
+   "say": "An ICU diary can help a patient make sense of delusions. The evidence is mixed, and a diary is not a treatment for weakness or for post-traumatic stress disorder by itself. Rehabilitation begins with sitting and with range of movement when the patient is stable, and it is timed with the sedation break. It is not the high-dose TEAM protocol on the first unstable day.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ICU diary",
+     "points": [
+      "May help make sense of delusions",
+      "Evidence is mixed",
+      "Not a treatment for weakness or PTSD"
+     ]
+    },
+    "right": {
+     "title": "Rehabilitation",
+     "points": [
+      "Sitting and range of movement",
+      "Timed with the sedation break",
+      "Not high-dose TEAM while unstable"
+     ]
+    }
    }
   }
- ],
- "quiz": [
-  "q_f6b05688eebe",
-  "q_00ff33f33daf",
-  "q_c562b58a417b"
- ],
- "src": [],
- "refs": [
-  "NICE guideline on rehabilitation after critical illness"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 9
- }
+ ]
 }

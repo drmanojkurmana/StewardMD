@@ -2,95 +2,151 @@
  "v": 1,
  "module": "scc-pharm-icu",
  "subject": "ss-critical-care",
- "title": "Pharmacology in critical illness: altered drug handling",
- "minutes": 5,
+ "title": "Pharmacology in critical illness",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [
+  "q_1037f0ef757c",
+  "q_1ef727ac09ce",
+  "q_3548a5a7241c"
+ ],
  "steps": [
   {
-   "tx": "Critical illness changes the **volume of distribution** because capillary leak, fluid resuscitation and oedema expand body water. Hydrophilic drugs such as aminoglycosides and beta-lactams spread into this larger space, so early loading doses are often needed and should not be reduced. Low albumin, or **hypoalbuminaemia**, raises the free fraction of highly protein-bound drugs such as phenytoin, so total levels can look low while effect and toxicity rise.",
-   "say": "Critical illness changes the volume of distribution because capillary leak, fluid resuscitation and oedema expand body water. Hydrophilic drugs such as aminoglycosides and beta-lactams spread into this larger space, so early loading doses are often needed and should not be reduced. Low albumin, known as hypoalbuminaemia, raises the free fraction of highly protein-bound drugs such as phenytoin. Total levels can then look low while effect and toxicity rise. Remember the free drug is the active part.",
+   "tx": "Hydrophilic drugs such as aminoglycosides, vancomycin, and beta-lactams have a larger **volume of distribution** in sepsis and after fluid. The **loading dose** is not reduced just because the creatinine is high. The first dose is what fills that expanded space. A renal cut on day one is how the patient is underdosed on the day that matters.",
+   "say": "Hydrophilic drugs such as aminoglycosides, vancomycin, and beta-lactams have a larger volume of distribution in sepsis and after fluid. The loading dose is not reduced just because the creatinine is high. The first dose is what fills that expanded space. A renal cut on day one is how the patient is underdosed on the day that matters.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Change",
-     "Effect on drug",
-     "Practical implication"
-    ],
-    "rows": [
-     [
-      "Fluid shifts",
-      "Larger volume of distribution",
-      "Give full loading dose"
-     ],
-     [
-      "Hypoalbuminaemia",
-      "More free drug fraction",
-      "Interpret total levels cautiously"
-     ],
-     [
-      "Lipophilic drugs",
-      "Stored in fat and tissue",
-      "Effect may last longer"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/lessons/media/scc-pharm-icu-fig1.webp",
+    "alt": "Liver clearance falling when blood flow falls, beside drug lost into an extracorporeal circuit.",
+    "caption": "The left panel is high-extraction clearance falling when liver blood flow falls in shock. The right panel is circuit sequestration of lipophilic drugs, which this lesson does not dose. It does not show a loading dose or augmented renal clearance. Credit: StewardMD.",
+    "ar": 1.835
    }
   },
   {
-   "tx": "**Augmented renal clearance** occurs in young trauma or septic patients with high cardiac output, so renally excreted drugs such as beta-lactams are cleared faster and may fall below target. By contrast, **acute kidney injury** lowers clearance and drug accumulation follows. Give full loading doses in both settings, then tailor maintenance doses to the estimated glomerular filtration rate and review them daily.",
-   "say": "Augmented renal clearance occurs in young trauma or septic patients with high cardiac output. Renally excreted drugs such as beta-lactams are cleared faster and may fall below target. By contrast, acute kidney injury lowers clearance, so drugs accumulate. Give full loading doses in both settings. Then tailor maintenance doses to the estimated glomerular filtration rate, and review them daily as kidney function changes.",
+   "tx": "**Augmented renal clearance** above about 130 mL/min is underdosing of renally cleared antibiotics in young trauma and neurosurgical patients. A normal serum creatinine does not exclude it. The young patient with a normal creatinine can still clear the drug too fast. A ward dose is then too small.",
+   "say": "Augmented renal clearance above about 130 mL/min is underdosing of renally cleared antibiotics in young trauma and neurosurgical patients. A normal serum creatinine does not exclude it. The young patient with a normal creatinine can still clear the drug too fast. A ward dose is then too small.",
    "vis": {
     "kind": "compare",
     "left": {
      "title": "Augmented clearance",
      "points": [
-      "Young trauma or sepsis",
-      "High cardiac output",
-      "Risk of underdosing",
-      "Consider higher or extended dosing"
+      "Above about 130 mL/min",
+      "Young trauma and neurosurgery",
+      "Renally cleared antibiotics run out"
      ]
     },
     "right": {
-     "title": "Reduced clearance",
+     "title": "What misleads",
      "points": [
-      "Acute kidney injury",
-      "Drug accumulation",
-      "Risk of toxicity",
-      "Reduce maintenance dose"
+      "The creatinine can be normal",
+      "A ward dose is then too small",
+      "Shock is the opposite problem"
      ]
     }
    }
   },
   {
-   "tx": "**Hepatic clearance** falls in shock, liver dysfunction and reduced hepatic blood flow, particularly for drugs with a high **extraction ratio**, where clearance depends heavily on liver blood flow rather than enzyme capacity. **ECMO sequestration** adds a further problem, because lipophilic drugs bind to circuit tubing and oxygenator membranes, lowering plasma concentrations. Dose cautiously and check levels early after starting extracorporeal support or changing the circuit.",
-   "say": "Hepatic clearance falls in shock, liver dysfunction and reduced hepatic blood flow. This is most important for drugs whose clearance depends heavily on liver blood flow, which is what an extraction ratio describes. ECMO sequestration adds a further problem. Lipophilic drugs bind to circuit tubing and oxygenator membranes, so plasma concentrations fall. Dose cautiously, and check levels early after starting extracorporeal support or changing the circuit.",
+   "tx": "**Hypoalbuminaemia** is a higher free fraction of **phenytoin** and of valproate. A total level can look low while the free level is adequate. Dose changes are based on the free level when it is available. A bigger dose for a low total level can push the free level into toxicity.",
+   "say": "Hypoalbuminaemia is a higher free fraction of phenytoin and of valproate. A total level can look low while the free level is adequate. Dose changes are based on the free level when it is available. A bigger dose for a low total level can push the free level into toxicity.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-pharm-icu-fig1.webp",
-    "alt": "Diagram showing reduced hepatic drug clearance due to impaired blood flow and liver dysfunction, alongside lipophilic drug sequestration by an ECMO circuit.",
-    "caption": "Hepatic clearance and ECMO sequestration alter drug levels in critical illness",
-    "ar": 1.8349
+    "kind": "table",
+    "cols": [
+     "Level",
+     "How to read it"
+    ],
+    "rows": [
+     [
+      "Total phenytoin",
+      "It can look low if albumin is low"
+     ],
+     [
+      "Free level",
+      "This is the active drug"
+     ],
+     [
+      "Valproate",
+      "The same albumin problem"
+     ],
+     [
+      "Dose change",
+      "Use the free level when it exists"
+     ]
+    ]
    }
   },
   {
-   "tx": "**Therapeutic drug monitoring** guides dosing of narrow therapeutic index drugs such as vancomycin, aminoglycosides and phenytoin, using trough or peak levels adjusted for albumin and kidney function. **Drug interactions** in ICU patients are common, for example azole antifungals or macrolides inhibiting CYP3A4 and raising levels of drugs such as midazolam or amiodarone. Review the full medication list at every prescribing round.",
-   "say": "Therapeutic drug monitoring guides dosing of narrow therapeutic index drugs such as vancomycin, aminoglycosides and phenytoin. Use trough or peak levels, adjusted for albumin and kidney function. Drug interactions in ICU patients are common. For example, azole antifungals or macrolides inhibit CYP3A4 and raise levels of midazolam or amiodarone. Review the full medication list at every prescribing round.",
+   "tx": "High-**extraction** drugs such as **lidocaine** are cleared by liver blood flow. Shock is a fall in that clearance. Low-extraction drugs are dependent on enzyme activity and on protein binding. A lidocaine infusion at the ward rate is too fast once the liver is underperfused.",
+   "say": "High-extraction drugs such as lidocaine are cleared by liver blood flow. Shock is a fall in that clearance. Low-extraction drugs are dependent on enzyme activity and on protein binding. A lidocaine infusion at the ward rate is too fast once the liver is underperfused.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High extraction",
+     "points": [
+      "Lidocaine is the example",
+      "Clearance follows liver blood flow",
+      "Shock raises the level"
+     ]
+    },
+    "right": {
+     "title": "Low extraction",
+     "points": [
+      "Enzymes and binding dominate",
+      "Flow is less decisive",
+      "The dose logic is different"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cisatracurium** is cleared by **Hofmann** elimination, and it does not depend on the kidney or the liver. It is the neuromuscular blocker that is chosen when those organs have failed. Laudanosine is less of a concern than it is with atracurium. Organ failure is not a reason to avoid this drug.",
+   "say": "Cisatracurium is cleared by Hofmann elimination, and it does not depend on the kidney or the liver. It is the neuromuscular blocker that is chosen when those organs have failed. Laudanosine is less of a concern than it is with atracurium. Organ failure is not a reason to avoid this drug.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blocker point",
+     "Cisatracurium"
+    ],
+    "rows": [
+     [
+      "Clearance",
+      "Hofmann elimination"
+     ],
+     [
+      "Kidney and liver",
+      "Not required"
+     ],
+     [
+      "When to choose it",
+      "Those organs have failed"
+     ],
+     [
+      "Laudanosine",
+      "Less concern than with atracurium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Therapeutic drug monitoring** is used for **vancomycin**, for aminoglycosides, and for beta-lactam levels when they can be had in prolonged shock. A standard ward dose is the wrong dose in that patient. The level is how underdosing and accumulation are both caught. A protocol dose without a level is a guess.",
+   "say": "Therapeutic drug monitoring is used for vancomycin, for aminoglycosides, and for beta-lactam levels when they can be had in prolonged shock. A standard ward dose is the wrong dose in that patient. The level is how underdosing and accumulation are both caught. A protocol dose without a level is a guess.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Azole or macrolide started"
+      "label": "Shock and a renally cleared drug"
      },
      {
       "id": "b",
-      "label": "CYP3A4 inhibited"
+      "label": "Loading dose is not renally cut"
      },
      {
       "id": "c",
-      "label": "Midazolam levels rise"
+      "label": "A level if it can be had"
      },
      {
       "id": "d",
-      "label": "Reduce dose and monitor"
+      "label": "Maintenance follows the level and the kidney"
      }
     ],
     "edges": [
@@ -108,28 +164,40 @@
      ]
     ]
    }
+  },
+  {
+   "tx": "Drug interactions in the ICU are dominated by azoles, **amiodarone**, macrolides, and enzyme inducers such as **rifampicin** and phenytoin. The QT interval and calcineurin-inhibitor levels are checked when those drugs are combined. A new macrolide on top of amiodarone is a QT problem until it is proved otherwise.",
+   "say": "Drug interactions in the ICU are dominated by azoles, amiodarone, macrolides, and enzyme inducers such as rifampicin and phenytoin. The QT interval and calcineurin-inhibitor levels are checked when those drugs are combined. A new macrolide on top of amiodarone is a QT problem until it is proved otherwise.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
+    "alt": "Electrocardiogram of polymorphic ventricular tachycardia with wide irregular complexes.",
+    "caption": "Polymorphic ventricular tachycardia, the rhythm a QT-prolonging combination can produce. Headers are rate, lead, and paper speed, with no name. It does not show a drug level or a loading dose. Credit: Panthro, via Wikimedia Commons.",
+    "ar": 3.918
+   }
+  },
+  {
+   "tx": "Renal dose adjustment is for **maintenance doses**, and it is not automatic for the first dose of a hydrophilic antibiotic in sepsis. Underdosing the first day is a common error. The loading dose is sized to the expanded space. The later doses are what the kidney, or the lack of one, should change.",
+   "say": "Renal dose adjustment is for maintenance doses, and it is not automatic for the first dose of a hydrophilic antibiotic in sepsis. Underdosing the first day is a common error. The loading dose is sized to the expanded space. The later doses are what the kidney, or the lack of one, should change.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First dose",
+     "points": [
+      "Sized to the volume of distribution",
+      "Not cut for a high creatinine",
+      "Sepsis expands that volume"
+     ]
+    },
+    "right": {
+     "title": "Later doses",
+     "points": [
+      "These are the maintenance doses",
+      "The kidney changes them",
+      "A level beats a ward chart"
+     ]
+    }
+   }
   }
- ],
- "quiz": [
-  "q_1037f0ef757c",
-  "q_1ef727ac09ce",
-  "q_3548a5a7241c"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 2,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 21
- }
+ ]
 }

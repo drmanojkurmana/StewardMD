@@ -1,0 +1,205 @@
+{
+ "v": 1,
+ "module": "scc-envenomation",
+ "subject": "ss-critical-care",
+ "title": "Envenomation",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Systemic envenoming, and not a pair of fang marks alone, is the indication for **anti-snake venom**. The **20 minute whole blood clotting test** is incoagulable in a viper bite with coagulopathy. Progressive neurotoxicity is the other indication. Local swelling that is not progressing does not, by itself, demand venom.",
+   "say": "Systemic envenoming, and not a pair of fang marks alone, is the indication for anti-snake venom. The 20 minute whole blood clotting test is incoagulable in a viper bite with coagulopathy. Progressive neurotoxicity is the other indication. Local swelling that is not progressing does not, by itself, demand venom.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/disorders-caused-by-venomous-snakebites-fig1.webp",
+    "alt": "A limb with fang marks and a haemorrhagic blister, plus neuromuscular blockade and endothelial injury.",
+    "caption": "Fang marks, a haemorrhagic blister, blockade at the neuromuscular junction, and endothelial injury. Marks alone are not an indication for anti-snake venom. The 20 minute whole blood clotting test is not drawn. Credit: StewardMD.",
+    "ar": 1.333
+   }
+  },
+  {
+   "tx": "Indian **polyvalent** anti-snake venom covers the cobra, the common krait, **Russell's viper**, and the **saw-scaled viper**. It does not cover the **hump-nosed pit viper**. More vials cannot neutralise a venom the product does not contain. Identifying the snake, when that is possible, is more useful than extra vials of the wrong product.",
+   "say": "Indian polyvalent anti-snake venom covers the cobra, the common krait, Russell's viper, and the saw-scaled viper. It does not cover the hump-nosed pit viper. More vials cannot neutralise a venom the product does not contain. Identifying the snake, when that is possible, is more useful than extra vials of the wrong product.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Snake",
+     "Covered by Indian polyvalent venom?"
+    ],
+    "rows": [
+     [
+      "Cobra and common krait",
+      "Yes"
+     ],
+     [
+      "Russell's viper",
+      "Yes"
+     ],
+     [
+      "Saw-scaled viper",
+      "Yes"
+     ],
+     [
+      "Hump-nosed pit viper",
+      "No"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The usual initial dose for systemic envenoming is 10 vials, infused, with no subcutaneous **test dose**. A test dose does not predict anaphylaxis, and it is a delay. If the 20 minute whole blood clotting test is still abnormal at 6 hours, or if neurotoxic signs are progressing, a further dose is considered.",
+   "say": "The usual initial dose for systemic envenoming is 10 vials, infused, with no subcutaneous test dose. A test dose does not predict anaphylaxis, and it is a delay. If the 20 minute whole blood clotting test is still abnormal at 6 hours, or if neurotoxic signs are progressing, a further dose is considered.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Systemic envenoming"
+     },
+     {
+      "id": "b",
+      "label": "10 vials infused, no test dose"
+     },
+     {
+      "id": "c",
+      "label": "Recheck clotting at 6 hours, or neurotoxicity"
+     },
+     {
+      "id": "d",
+      "label": "A further dose is considered if either persists"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Anaphylaxis** to anti-snake venom is treated by stopping the infusion and giving intramuscular **adrenaline**. The venom is restarted once the reaction has settled, if systemic envenoming is still present. There is no test dose that makes anaphylaxis impossible. Adrenaline treats the reaction, and it is not a reason to abandon a patient who still has venom on board.",
+   "say": "Anaphylaxis to anti-snake venom is treated by stopping the infusion and giving intramuscular adrenaline. The venom is restarted once the reaction has settled, if systemic envenoming is still present. There is no test dose that makes anaphylaxis impossible. Adrenaline treats the reaction, and it is not a reason to abandon a patient who still has venom on board.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "During anaphylaxis",
+     "points": [
+      "Stop the infusion",
+      "Intramuscular adrenaline",
+      "Watch the airway"
+     ]
+    },
+    "right": {
+     "title": "After it settles",
+     "points": [
+      "Restart venom if envenoming continues",
+      "A test dose would not have prevented this",
+      "Do not abandon the indication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cobra** venom acts after the synapse, and **neostigmine** with atropine can improve that weakness. **Krait** venom acts before the synapse, and neostigmine often does little. A krait bite with failing ventilation is an intubation. Anti-snake venom does not immediately reverse paralysis that is already established.",
+   "say": "Cobra venom acts after the synapse, and neostigmine with atropine can improve that weakness. Krait venom acts before the synapse, and neostigmine often does little. A krait bite with failing ventilation is an intubation. Anti-snake venom does not immediately reverse paralysis that is already established.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cobra",
+     "points": [
+      "Acts after the synapse",
+      "Neostigmine with atropine can help",
+      "Ventilation is still watched"
+     ]
+    },
+    "right": {
+     "title": "Krait",
+     "points": [
+      "Acts before the synapse",
+      "Neostigmine often does little",
+      "Failing ventilation is intubated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An arterial **tourniquet**, cutting the wound, and suction are harmful, and they do not remove venom. The limb is **immobilised** and the patient is moved. A tourniquet that has been on for a long time is released only where a sudden fall in pressure can be treated. That release is a resuscitation, and it is not done in a moving vehicle with no drugs.",
+   "say": "An arterial tourniquet, cutting the wound, and suction are harmful, and they do not remove venom. The limb is immobilised and the patient is moved. A tourniquet that has been on for a long time is released only where a sudden fall in pressure can be treated. That release is a resuscitation, and it is not done in a moving vehicle with no drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Action",
+     "Verdict"
+    ],
+    "rows": [
+     [
+      "Arterial tourniquet, cutting, suction",
+      "Harm, and venom stays"
+     ],
+     [
+      "Immobilise and move",
+      "This is the field care"
+     ],
+     [
+      "Long tourniquet",
+      "Release only where shock can be treated"
+     ],
+     [
+      "Pressure fall on release",
+      "Be ready to resuscitate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An Indian red **scorpion** sting is an autonomic storm and pulmonary oedema. **Prazosin** by mouth in an adult, repeated until the extremities are warm and dry, is the treatment, and the dose is under the figure. Anti-snake venom has no role. Pulmonary oedema is treated as heart failure, and it is not treated as a snake bite.",
+   "say": "An Indian red scorpion sting is an autonomic storm and pulmonary oedema. Prazosin by mouth in an adult, repeated until the extremities are warm and dry, is the treatment, and the dose is under the figure. Anti-snake venom has no role. Pulmonary oedema is treated as heart failure, and it is not treated as a snake bite.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scorpion-sting-fig1.webp",
+    "alt": "Scorpion telson, a sodium channel, a catecholamine surge, and pulmonary oedema.",
+    "caption": "Venom opens sodium channels, catecholamines surge, and pulmonary oedema follows. The drawing does not show the prazosin dose, which is 0.5 mg by mouth in an adult, repeated until the limbs are warm and dry. Anti-snake venom is not on the figure and has no role. Credit: StewardMD.",
+    "ar": 1.333
+   }
+  },
+  {
+   "tx": "A **Hymenoptera** sting that has caused anaphylaxis is treated with intramuscular adrenaline into the thigh, and the airway is watched. The adult dose is in the table, and it is 1 in 1000 adrenaline. An antihistamine is only an adjunct. Many stings without anaphylaxis are a toxic envenoming, and they can injure the kidney, which is a different illness.",
+   "say": "A Hymenoptera sting that has caused anaphylaxis is treated with intramuscular adrenaline into the thigh, and the airway is watched. The adult dose is in the table, and it is 1 in 1000 adrenaline. An antihistamine is only an adjunct. Many stings without anaphylaxis are a toxic envenoming, and they can injure the kidney, which is a different illness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sting picture",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Anaphylaxis",
+      "Adrenaline 0.5 mg of 1 in 1000, thigh"
+     ],
+     [
+      "Airway",
+      "Watched, adrenaline is not delayed"
+     ],
+     [
+      "Antihistamine",
+      "An adjunct only"
+     ],
+     [
+      "Many stings, no anaphylaxis",
+      "Toxic illness, kidney can fail"
+     ]
+    ]
+   }
+  }
+ ]
+}

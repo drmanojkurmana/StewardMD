@@ -2,30 +2,110 @@
  "v": 1,
  "module": "scc-cardiac-icu",
  "subject": "ss-critical-care",
- "title": "Arrhythmias and Acute Cardiac Care in the ICU",
- "minutes": 6,
+ "title": "Arrhythmias and acute cardiac care in the ICU",
+ "minutes": 8,
+ "gen": "AI",
+ "quiz": [
+  "q_846b913672e6",
+  "q_ba67a54f9660",
+  "q_d7eca831dcf7"
+ ],
  "steps": [
   {
-   "tx": "Start by sorting every tachycardia by stability. An **unstable** patient, with hypotension, altered consciousness or chest pain, needs immediate **synchronised cardioversion** for a broad-complex tachycardia, not drugs. A regular broad-complex tachycardia in a patient with prior myocardial infarction is presumed ventricular tachycardia until proven otherwise. Stable patients get a slower, drug-based approach.",
-   "say": "Start by sorting every tachycardia by stability. An unstable patient, with hypotension, altered consciousness or chest pain, needs immediate synchronised cardioversion for a broad-complex tachycardia, not drugs. A regular broad-complex tachycardia in a patient with prior myocardial infarction is presumed ventricular tachycardia until proven otherwise. Stable patients get a slower, drug-based approach.",
+   "tx": "New **atrial fibrillation**, a chaotic atrial rhythm, is often driven by sepsis, withdrawal, or stretch of the atrium. The unstable patient is electrically cardioverted, and the stable patient is rate controlled. Anticoagulation is chosen from stroke risk and bleeding risk, and it is not a reflex heparin infusion. Treating the rhythm and leaving the sepsis in place does not remove the trigger.",
+   "say": "New atrial fibrillation, a chaotic atrial rhythm, is often driven by sepsis, withdrawal, or stretch of the atrium. The unstable patient is electrically cardioverted, and the stable patient is rate controlled. Anticoagulation is chosen from stroke risk and bleeding risk, and it is not a reflex heparin infusion. Treating the rhythm and leaving the sepsis in place does not remove the trigger.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/atrial-fib-fig1.webp",
+    "alt": "Pulmonary vein foci, chaotic atrial wavelets, a left atrial appendage thrombus, and a rhythm strip with no P waves.",
+    "caption": "Pulmonary-vein triggers, chaotic wavelets, appendage thrombus, and an irregular strip with no P waves. The drawing does not show a rate target or an anticoagulation score. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**Amiodarone** is the usual rhythm drug when the heart is structurally abnormal. A fast infusion can drop the blood pressure. Thyroid disease and lung toxicity from a long course can outlast the ICU stay, so the drug is not a casual discharge prescription. The acute rhythm is the indication, and a stop date is part of the order.",
+   "say": "Amiodarone is the usual rhythm drug when the heart is structurally abnormal. A fast infusion can drop the blood pressure. Thyroid disease and lung toxicity from a long course can outlast the ICU stay, so the drug is not a casual discharge prescription. The acute rhythm is the indication, and a stop date is part of the order.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Amiodarone point",
+     "What to do"
+    ],
+    "rows": [
+     [
+      "Structural heart disease",
+      "It is the usual rhythm drug"
+     ],
+     [
+      "Fast infusion",
+      "The blood pressure can fall"
+     ],
+     [
+      "Long course",
+      "Thyroid and lung toxicity can outlast the ICU"
+     ],
+     [
+      "On discharge",
+      "A stop date is part of the plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Synchronised cardioversion** is for an unstable tachyarrhythmia that still has a pulse, because the shock is timed off the QRS. Pulseless ventricular tachycardia and **ventricular fibrillation** are defibrillated, and they are not synchronised. A synchronised shock that waits for a QRS will not fire when there is no organised complex.",
+   "say": "Synchronised cardioversion is for an unstable tachyarrhythmia that still has a pulse, because the shock is timed off the QRS. Pulseless ventricular tachycardia and ventricular fibrillation are defibrillated, and they are not synchronised. A synchronised shock that waits for a QRS will not fire when there is no organised complex.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shock with a pulse",
+     "points": [
+      "Synchronised cardioversion",
+      "The shock is timed off the QRS",
+      "The patient is unstable but perfusing"
+     ]
+    },
+    "right": {
+     "title": "No pulse",
+     "points": [
+      "Defibrillation, not synchronised",
+      "Ventricular fibrillation or pulseless VT",
+      "Waiting for a QRS will not fire"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Torsades de pointes** is a twisting polymorphic ventricular tachycardia. It is treated with **magnesium sulfate** 2 g even when the serum magnesium is normal. Potassium is corrected, the QT drug is stopped, and pacing or isoproterenol is used when the rhythm is pause dependent. A normal magnesium result is not a reason to withhold that dose.",
+   "say": "Torsades de pointes is a twisting polymorphic ventricular tachycardia. It is treated with magnesium sulfate 2 g even when the serum magnesium is normal. Potassium is corrected, the QT drug is stopped, and pacing or isoproterenol is used when the rhythm is pause dependent. A normal magnesium result is not a reason to withhold that dose.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
+    "alt": "Electrocardiogram strip of polymorphic ventricular tachycardia with wide irregular QRS complexes.",
+    "caption": "A wide, irregular, polymorphic ventricular rhythm. The headers are rate, lead, and paper speed only, with no name. It does not show the QT interval, a magnesium level, or a pacing spike. Credit: Panthro, via Wikimedia Commons.",
+    "ar": 3.918
+   }
+  },
+  {
+   "tx": "**Transvenous pacing** is for symptomatic bradycardia that has not responded to atropine or a chronotropic infusion, and it is also for overdrive pacing of recurrent pause-dependent torsades. Asynchronous pacing that lands on a T wave can start ventricular fibrillation. Capture and the sensing threshold are checked before the team leaves the bedside.",
+   "say": "Transvenous pacing is for symptomatic bradycardia that has not responded to atropine or a chronotropic infusion, and it is also for overdrive pacing of recurrent pause-dependent torsades. Asynchronous pacing that lands on a T wave can start ventricular fibrillation. Capture and the sensing threshold are checked before the team leaves the bedside.",
    "vis": {
     "kind": "flow",
     "nodes": [
      {
       "id": "a",
-      "label": "Tachycardia on ECG"
+      "label": "Bradycardia with symptoms"
      },
      {
       "id": "b",
-      "label": "Unstable?"
+      "label": "Atropine or infusion"
      },
      {
       "id": "c",
-      "label": "Synchronised cardioversion"
+      "label": "Transvenous wire if that fails"
      },
      {
       "id": "d",
-      "label": "Stable: narrow or broad?"
+      "label": "Check capture before leaving"
      }
     ],
     "edges": [
@@ -35,64 +115,105 @@
      ],
      [
       "b",
-      "c",
-      "Yes"
+      "c"
      ],
      [
-      "b",
-      "d",
-      "No"
+      "c",
+      "d"
      ]
     ]
    }
   },
   {
-   "tx": "For stable **narrow-complex** supraventricular tachycardia, adenosine is the first drug. The initial dose is 6 mg as a rapid bolus followed immediately by a 20 mL saline flush, with a second dose of 12 mg if needed. Adenosine is useful diagnostically as well as therapeutically, since it terminates AV nodal dependent circuits. Unstable patients still need cardioversion first.",
-   "say": "For stable narrow-complex supraventricular tachycardia, adenosine is the first drug. The initial dose is 6 mg as a rapid bolus followed immediately by a 20 mL saline flush, with a second dose of 12 mg if needed. Adenosine is useful diagnostically as well as therapeutically, since it terminates AV nodal dependent circuits. Unstable patients still need cardioversion first.",
-   "vis": null
-  },
-  {
-   "tx": "Torsades de pointes is a polymorphic tachycardia with QRS complexes twisting around the baseline, usually linked to a prolonged QT. Give **magnesium sulfate** 2 g IV over 10 minutes as first-line treatment, even if serum magnesium looks normal. Keep serum potassium between 4.5 and 5.0 mmol/L. Levels above 3.5 mmol/L risk respiratory depression. For refractory cases, overdrive pacing or isoproterenol may be used.",
-   "say": "Torsades de pointes is a polymorphic tachycardia with QRS complexes twisting around the baseline, usually linked to a prolonged QT. Give magnesium sulfate 2 g IV over 10 minutes as first-line treatment, even if serum magnesium looks normal. Keep serum potassium between 4.5 and 5.0 mmol/L. Levels above 3.5 mmol/L risk respiratory depression. For refractory cases, overdrive pacing or isoproterenol may be used.",
+   "tx": "**Acute decompensated heart failure** with pulmonary oedema is treated with non-invasive ventilation, a nitrate when the blood pressure allows it, and a diuretic. Inotropes are for low-output shock, and they are not for every wet patient. A wet patient with a safe blood pressure does not need an inotrope because the radiograph is white.",
+   "say": "Acute decompensated heart failure with pulmonary oedema is treated with non-invasive ventilation, a nitrate when the blood pressure allows it, and a diuretic. Inotropes are for low-output shock, and they are not for every wet patient. A wet patient with a safe blood pressure does not need an inotrope because the radiograph is white.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-cardiac-icu-fig1.webp",
-    "alt": "Electrocardiogram showing Torsades de pointes, a polymorphic ventricular tachycardia with QRS complexes twisting around the baseline, often linked to prolonged QT.",
-    "caption": "Torsades de pointes: polymorphic QRS complexes twisting around the baseline. Image: Jer5150, CC BY-SA 3.0, Wikimedia Commons.",
-    "ar": 1.7832
+    "kind": "compare",
+    "left": {
+     "title": "Wet and a safe pressure",
+     "points": [
+      "Non-invasive ventilation",
+      "Nitrate if the pressure allows",
+      "A diuretic for congestion"
+     ]
+    },
+    "right": {
+     "title": "Low output shock",
+     "points": [
+      "The pressure is secured first",
+      "An inotrope is then considered",
+      "A white radiograph is not the trigger"
+     ]
+    }
    }
   },
   {
-   "tx": "Recurrent ventricular arrhythmias need a structured plan. An ICD gives **secondary prevention** after sustained VT with structural heart disease, and antitachycardia pacing terminates most VT episodes without shock. Three or more VT or VF episodes within 24 hours define **electrical storm**. Manage it by treating reversible triggers such as ischaemia, hypokalaemia and hypomagnesaemia first, then antiarrhythmics and sympathetic blockade.",
-   "say": "Recurrent ventricular arrhythmias need a structured plan. An ICD gives secondary prevention after sustained VT with structural heart disease, and antitachycardia pacing terminates most VT episodes without shock. Three or more VT or VF episodes within 24 hours define electrical storm. Manage it by treating reversible triggers such as ischaemia, hypokalaemia and hypomagnesaemia first, then antiarrhythmics and sympathetic blockade.",
-   "vis": null
+   "tx": "A **hypertensive emergency** is organ injury, and it is not a blood pressure number by itself. Encephalopathy, pulmonary oedema, an acute coronary syndrome, dissection, or eclampsia is the injury that defines it. The pressure is lowered in a controlled way. It is not normalised within minutes, except in dissection and eclampsia, where the fall is faster.",
+   "say": "A hypertensive emergency is organ injury, and it is not a blood pressure number by itself. Encephalopathy, pulmonary oedema, an acute coronary syndrome, dissection, or eclampsia is the injury that defines it. The pressure is lowered in a controlled way. It is not normalised within minutes, except in dissection and eclampsia, where the fall is faster.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "How fast the pressure falls"
+    ],
+    "rows": [
+     [
+      "Encephalopathy or oedema",
+      "Controlled, not to normal in minutes"
+     ],
+     [
+      "Acute coronary syndrome",
+      "Controlled fall, treat the heart"
+     ],
+     [
+      "Aortic dissection",
+      "The fall is faster"
+     ],
+     [
+      "Eclampsia",
+      "The fall is faster, and delivery is the cure"
+     ]
+    ]
+   }
   },
   {
-   "tx": "Atrial fibrillation of 48 hours or more needs anticoagulation or a transoesophageal echocardiogram before elective cardioversion, to exclude left atrial thrombus. Anticoagulation continues for at least 4 weeks after successful cardioversion. In acute decompensated heart failure, consider the **hypertensive emergency** and **aortic dissection** pathways separately, because the drugs and targets differ. Confirm the diagnosis before choosing antihypertensives.",
-   "say": "Atrial fibrillation of 48 hours or more needs anticoagulation or a transoesophageal echocardiogram before elective cardioversion, to exclude left atrial thrombus. Anticoagulation continues for at least 4 weeks after successful cardioversion. In acute decompensated heart failure, consider the hypertensive emergency and aortic dissection pathways separately, because the drugs and targets differ. Confirm the diagnosis before choosing antihypertensives.",
-   "vis": null
+   "tx": "**ST elevation** myocardial infarction in the ICU is still an indication for immediate reperfusion. A new murmur after infarction can be a mechanical complication: septal rupture, **papillary muscle** rupture, or free-wall rupture. Those lesions need a surgeon or a device. A higher nitrate dose is not the treatment for a ruptured muscle.",
+   "say": "ST elevation myocardial infarction in the ICU is still an indication for immediate reperfusion. A new murmur after infarction can be a mechanical complication: septal rupture, papillary muscle rupture, or free-wall rupture. Those lesions need a surgeon or a device. A higher nitrate dose is not the treatment for a ruptured muscle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ST elevation in the ICU"
+     },
+     {
+      "id": "b",
+      "label": "Immediate reperfusion"
+     },
+     {
+      "id": "c",
+      "label": "New murmur after infarction"
+     },
+     {
+      "id": "d",
+      "label": "Surgeon or device, not more nitrate"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
   }
- ],
- "quiz": [
-  "q_846b913672e6",
-  "q_ba67a54f9660",
-  "q_d7eca831dcf7"
- ],
- "src": [],
- "refs": [],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 51
- }
+ ]
 }
