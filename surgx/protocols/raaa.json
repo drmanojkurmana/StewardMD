@@ -1,0 +1,69 @@
+{
+  "id": "raaa",
+  "title": "Ruptured abdominal aortic aneurysm",
+  "subtitle": "Permissive hypotension, CT if it responds, EVAR first if it fits",
+  "category": "vascular",
+  "specialty": "vascular",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "esvs-aaa-2024", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2024 Clinical Practice Guidelines on the Management of Abdominal Aorto-Iliac Artery Aneurysms", "year": 2024, "url": "https://pubmed.ncbi.nlm.nih.gov/38307694/", "accessed": "2026-11-04" },
+    { "id": "svs-aaa-2018", "org": "Society for Vascular Surgery (SVS)", "title": "The Society for Vascular Surgery practice guidelines on the care of patients with an abdominal aortic aneurysm", "year": 2018, "url": "https://pubmed.ncbi.nlm.nih.gov/29268916/", "accessed": "2026-11-04" },
+    { "id": "improve", "org": "IMPROVE Trial Investigators", "title": "Endovascular or open repair strategy for ruptured abdominal aortic aneurysm: 30 day outcomes from IMPROVE randomised trial (BMJ)", "year": 2014, "url": "https://pubmed.ncbi.nlm.nih.gov/24418950/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Collapse or syncope with abdominal, back or flank pain in anyone over about 50, especially a male smoker. This is a rupture until proven otherwise." },
+      { "text": "A known aneurysm with new pain, even with normal observations. A symptomatic intact aneurysm is an urgent repair, not an outpatient review." },
+      { "text": "Shock that responds briefly to fluid and then recurs: the retroperitoneum has stopped containing the bleed." },
+      { "text": "Renal colic, diverticulitis or a 'muscular back' diagnosed for the first time in an older vasculopath. These are the classic misdiagnoses." },
+      { "text": "Loss of consciousness or cardiac arrest before repair. Outcome is very poor and the decision to operate must be made by a senior." }
+    ],
+    "do_now": [
+      { "text": "Call the on-call vascular surgeon, anaesthetist and theatre at the first suspicion. Do not wait for imaging to make the call.", "timeCritical": true, "evidenceRef": "svs-aaa-2018" },
+      { "text": "Two large-bore cannulae, crossmatch, activate the major haemorrhage protocol. Do not place an arterial or central line if it delays transfer to CT or theatre.", "timeCritical": true, "evidenceRef": "esvs-aaa-2024" },
+      { "text": "Permissive hypotension: accept a low systolic pressure while the patient is conscious and talking. Give blood products rather than crystalloid, and avoid fluid boluses aimed at a normal pressure.", "timeCritical": true, "evidenceRef": "esvs-aaa-2024" },
+      { "text": "Aim for a door-to-intervention time under 90 minutes. Every unnecessary step before theatre is time the retroperitoneum may not give you.", "timeCritical": true, "evidenceRef": "svs-aaa-2018" },
+      { "text": "Do not induce general anaesthesia outside theatre. Induction removes sympathetic tone and abdominal wall tamponade, and can precipitate arrest.", "timeCritical": true, "evidenceRef": "esvs-aaa-2024" }
+    ],
+    "assess": [
+      { "text": "Conscious level is the best bedside measure of perfusion here. A talking patient with a low pressure is perfusing their brain.", "calcs": ["shock_index"] },
+      { "text": "Palpate for an expansile mass, but its absence does not exclude rupture, particularly in an obese or distended abdomen." },
+      { "text": "Ask about prior aneurysm surveillance, previous EVAR or open repair, and anticoagulants. A previous repair raises endoleak, graft infection and aorto-enteric fistula." },
+      { "text": "Assess frailty and premorbid function quickly, and look for an advance decision. These shape whether repair is offered at all." },
+      { "text": "Check the groins and legs for pulses and mottling: limb ischaemia and access vessel size both matter for EVAR." }
+    ],
+    "investigate": [
+      { "text": "Bedside ultrasound confirms an aneurysm but cannot exclude rupture. Its role is to make the call, not to make the diagnosis." },
+      { "text": "CT angiography in the patient who is stable or responding to resuscitation. It confirms rupture and decides whether the anatomy suits EVAR." },
+      { "text": "Group and crossmatch, FBC, coagulation, fibrinogen, U&E, venous or arterial gas with lactate. Viscoelastic testing where available." },
+      { "text": "The unstable patient who does not respond goes straight to theatre. CT in that patient is a scan on the way to the mortuary." }
+    ],
+    "resuscitate": [
+      { "text": "Haemostatic resuscitation with blood and products per the major haemorrhage protocol. Correct fibrinogen and calcium, and keep the patient warm.", "evidenceRef": "esvs-aaa-2024" },
+      { "text": "Consider EVAR under local anaesthesia with sedation kept to a minimum. In IMPROVE, local anaesthesia was associated with lower mortality.", "evidenceRef": "improve" },
+      { "text": "In refractory shock, a percutaneous aortic occlusion balloon placed via the femoral or brachial route can buy time for repair.", "evidenceRef": "esvs-aaa-2024" },
+      { "text": "Prepare and drape the abdomen and both groins before induction for open repair, with the surgeon scrubbed and ready to clamp.", "evidenceRef": "esvs-aaa-2024" }
+    ],
+    "definitive": [
+      { "text": "Endovascular repair is the first choice for a ruptured aneurysm with suitable anatomy, in centres that can offer it around the clock.", "evidenceRef": "esvs-aaa-2024" },
+      { "text": "Open repair when the anatomy does not suit EVAR, or when an endovascular service is not available within a safe time.", "evidenceRef": "esvs-aaa-2024" },
+      { "text": "An endovascular-first strategy did not reduce 30-day mortality versus open repair in IMPROVE, but gave earlier discharge and was cost-effective. Choose the repair the team can deliver fastest and best.", "evidenceRef": "improve" },
+      { "text": "After either repair, monitor intra-abdominal pressure. Abdominal compartment syndrome is common after rupture and needs decompressive laparotomy.", "evidenceRef": "esvs-aaa-2024" },
+      { "text": "Where repair is judged futile, offer good palliative care with the family present. This is a legitimate and kind outcome, not a failure.", "evidenceRef": "esvs-aaa-2024" }
+    ],
+    "escalate": [
+      { "text": "Consultant vascular surgeon and consultant anaesthetist for every rupture, including the decision not to operate." },
+      { "text": "If there is no vascular service on site, transfer to the nearest centre that can repair a rupture, after senior-to-senior discussion. Do not delay transfer for CT if the receiving centre will scan." },
+      { "text": "Interventional radiology and the hybrid theatre team at the same call as theatre, so EVAR is not delayed by a second call." },
+      { "text": "Critical care bed for every survivor. Plan it before the patient leaves theatre." }
+    ]
+  },
+  "notes": [
+    "The pressure that keeps the patient talking is the right pressure. Chasing a normal number with crystalloid dilutes clotting and blows the clot off the hole.",
+    "Ultrasound tells you there is an aneurysm. The clinical picture tells you it has ruptured. CT tells you how to fix it, if there is time.",
+    "Most deaths from rupture happen before hospital. The ones you see have already been selected by a contained bleed: do not waste that."
+  ],
+  "calcs": ["shock_index", "map"]
+}

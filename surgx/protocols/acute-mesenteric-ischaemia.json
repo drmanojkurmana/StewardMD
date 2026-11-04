@@ -1,0 +1,64 @@
+{
+  "id": "acute-mesenteric-ischaemia",
+  "title": "Acute mesenteric ischaemia",
+  "subtitle": "Suspect early, CT angiography, revascularise before you resect",
+  "category": "vascular",
+  "specialty": "vascular",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "esvs-mes-2017", "org": "European Society for Vascular Surgery (ESVS)", "title": "Management of the Diseases of Mesenteric Arteries and Veins: Clinical Practice Guidelines of the ESVS", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/28359440/", "accessed": "2026-11-04" },
+    { "id": "wses-ami-2022", "org": "World Society of Emergency Surgery (WSES)", "title": "Acute mesenteric ischemia: updated guidelines of the World Society of Emergency Surgery", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/36261857/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Severe abdominal pain out of proportion to the examination, especially with AF, recent myocardial infarction or known vascular disease." },
+      { "text": "Gut emptying (vomiting or diarrhoea) at the onset of pain, in an older patient with a cardiac source. The classic embolic triad." },
+      { "text": "Post-prandial pain and weight loss before the acute event: acute-on-chronic thrombosis of a mesenteric stenosis." },
+      { "text": "A critically ill patient on vasopressors, dialysis or after cardiac surgery with new distension, feed intolerance or rising lactate: non-occlusive mesenteric ischaemia." },
+      { "text": "Peritonitis, blood per rectum or rising lactate: transmural infarction is established and the window for bowel salvage is closing." }
+    ],
+    "do_now": [
+      { "text": "CT angiography immediately when acute mesenteric ischaemia is suspected. Do not delay it because of renal function: the risk of missing the diagnosis outweighs the risk to the kidney.", "timeCritical": true, "evidenceRef": "esvs-mes-2017" },
+      { "text": "Start intravenous unfractionated heparin once the diagnosis is suspected, unless contraindicated.", "timeCritical": true, "evidenceRef": "wses-ami-2022" },
+      { "text": "Call the vascular and general surgical teams together. This is a two-team operation.", "timeCritical": true, "evidenceRef": "esvs-mes-2017" },
+      { "text": "Fluid resuscitation, broad-spectrum antibiotics per local protocol, nasogastric decompression and analgesia.", "evidenceRef": "wses-ami-2022" }
+    ],
+    "assess": [
+      { "text": "Early on the abdomen may be soft and minimally tender. Signs of peritonitis mean the bowel is already infarcting." },
+      { "text": "Look for the source: AF, recent infarct, valve disease, previous emboli to the limbs, and a history of mesenteric angina." },
+      { "text": "Ask about thrombophilia, cancer, oral contraception, portal hypertension and previous venous thrombosis for mesenteric venous thrombosis." },
+      { "text": "Score organ dysfunction in the critically ill patient; it guides the extent of operation.", "calcs": ["sofa", "qsofa"] }
+    ],
+    "investigate": [
+      { "text": "Biphasic CT angiography, arterial and portal venous phases, is the diagnostic test of choice for arterial and venous causes." },
+      { "text": "A normal D-dimer makes acute mesenteric ischaemia unlikely; a raised one is not specific." },
+      { "text": "Lactate is a late marker. A normal lactate does not exclude ischaemia and must never delay imaging." },
+      { "text": "FBC, U&E, LFT, amylase, coagulation, gas and group and save. ECG for AF." }
+    ],
+    "resuscitate": [
+      { "text": "Correct hypovolaemia and acidosis, and minimise vasoconstrictors where possible because they worsen splanchnic flow.", "evidenceRef": "wses-ami-2022" },
+      { "text": "Non-occlusive ischaemia: treat the low-flow state, and consider intra-arterial vasodilator infusion through the angiography catheter.", "evidenceRef": "esvs-mes-2017" },
+      { "text": "Mesenteric venous thrombosis without peritonitis: anticoagulation is the primary treatment.", "evidenceRef": "esvs-mes-2017" }
+    ],
+    "definitive": [
+      { "text": "Peritonitis or suspected infarction: emergency laparotomy. Revascularise the superior mesenteric artery before resecting bowel, because bowel that looks dead may recover once flow returns.", "evidenceRef": "esvs-mes-2017" },
+      { "text": "Embolic occlusion: open superior mesenteric embolectomy or endovascular aspiration. Thrombotic occlusion: endovascular stenting, open retrograde stenting or bypass.", "evidenceRef": "esvs-mes-2017" },
+      { "text": "Endovascular revascularisation first is reasonable in a patient without peritonitis in a centre that offers it, with laparoscopy or laparotomy to assess the bowel after.", "evidenceRef": "wses-ami-2022" },
+      { "text": "Resect only clearly non-viable bowel, leave the bowel in discontinuity and plan a second-look laparotomy at 24 to 48 hours.", "evidenceRef": "wses-ami-2022" }
+    ],
+    "escalate": [
+      { "text": "Consultant vascular and general surgeons together for the decision to operate and the plan for revascularisation." },
+      { "text": "Interventional radiology for endovascular options; transfer to a centre with a hybrid theatre where possible and safe." },
+      { "text": "Critical care for every operated patient. Discuss futility early when the whole small bowel is infarcted." },
+      { "text": "Long-term follow-up for anticoagulation, the embolic source and intestinal failure if extensive resection was needed." }
+    ]
+  },
+  "notes": [
+    "The diagnosis is made by suspecting it. Pain out of proportion in an old patient with AF is mesenteric until CT says otherwise.",
+    "Flow first, then judge the gut. The colour after revascularisation is the colour that counts.",
+    "Do not anastomose ischaemic bowel. Discontinuity and a planned second look are the safe defaults."
+  ],
+  "calcs": ["sofa", "qsofa"]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "acute-limb-ischaemia",
+  "title": "Acute limb ischaemia",
+  "subtitle": "Heparin now, classify, revascularise by the clock",
+  "category": "vascular",
+  "specialty": "vascular",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "esvs-ali-2020", "org": "European Society for Vascular Surgery (ESVS)", "title": "ESVS 2020 Clinical Practice Guidelines on the Management of Acute Limb Ischaemia", "year": 2020, "url": "https://pubmed.ncbi.nlm.nih.gov/31899099/", "accessed": "2026-11-04" },
+    { "id": "fogarty-1963", "org": "Fogarty TJ et al., Surgery, Gynecology and Obstetrics", "title": "A method for extraction of arterial emboli and thrombi", "year": 1963, "url": "https://pubmed.ncbi.nlm.nih.gov/13945714/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Sensory loss beyond the toes, or any muscle weakness. The limb is immediately threatened (Rutherford IIb) and needs revascularisation without delay." },
+      { "text": "Rigid, tender calf muscles, fixed mottling that does not blanch, and paralysis. These suggest irreversible ischaemia (Rutherford III)." },
+      { "text": "Bilateral leg ischaemia, or ischaemia with abdominal pain: think saddle embolus, aortic dissection or concurrent mesenteric embolus." },
+      { "text": "A cold leg with a palpable popliteal pulse on the other side, or a pulsatile popliteal fossa: thrombosed popliteal aneurysm, which has a high amputation rate." },
+      { "text": "Rising potassium, acidosis, dark urine or a swollen tense leg after revascularisation: reperfusion injury and compartment syndrome." }
+    ],
+    "do_now": [
+      { "text": "Give an intravenous bolus of unfractionated heparin as soon as acute limb ischaemia is diagnosed, unless there is a contraindication.", "timeCritical": true, "evidenceRef": "esvs-ali-2020" },
+      { "text": "Call the vascular surgeon immediately. A threatened limb has hours, not a day.", "timeCritical": true, "evidenceRef": "esvs-ali-2020" },
+      { "text": "Classify the limb now using the Rutherford acute categories: I viable, IIa marginally threatened, IIb immediately threatened, III irreversible. The class sets the clock.", "timeCritical": true, "evidenceRef": "esvs-ali-2020" },
+      { "text": "Analgesia, keep the limb dependent and protected, avoid heat and pressure on the heel.", "evidenceRef": "esvs-ali-2020" }
+    ],
+    "assess": [
+      { "text": "The six Ps: pain, pallor, pulselessness, paraesthesia, paralysis, perishingly cold. Sensory and motor function are what separate IIa from IIb." },
+      { "text": "Test sensation in the foot and dorsiflexion of the toes. Loss of light touch and weakness of the toes are early; calf tenderness is late." },
+      { "text": "Embolus or thrombosis: sudden onset, a known source such as AF, normal pulses in the other leg favour embolus. Claudication history and absent contralateral pulses favour thrombosis on existing disease." },
+      { "text": "Handheld Doppler at the ankle: an inaudible arterial signal with an audible venous signal fits class II, and the neurology decides IIa from IIb. Loss of the venous signal as well suggests class III." },
+      { "text": "Check the other leg, both arms and the abdomen. Emboli rarely travel alone." }
+    ],
+    "investigate": [
+      { "text": "ECG, FBC, U&E, CK, coagulation, group and save. Baseline potassium and CK before reperfusion." },
+      { "text": "CT angiography for IIa, and for IIb only if it will not delay revascularisation. IIb with a clear embolic history can go straight to theatre with on-table angiography." },
+      { "text": "Duplex ultrasound for a suspected popliteal aneurysm, of both popliteal fossae." },
+      { "text": "Echocardiography after the limb is safe, to look for a cardiac source of embolus." }
+    ],
+    "resuscitate": [
+      { "text": "Continue heparin infusion before and after revascularisation per local protocol, then plan long-term anticoagulation for an embolic source.", "evidenceRef": "esvs-ali-2020" },
+      { "text": "Correct hypovolaemia and monitor urine output: reperfusion releases potassium, acid and myoglobin.", "evidenceRef": "esvs-ali-2020" },
+      { "text": "Measure potassium and CK in the hours after reperfusion and treat hyperkalaemia promptly.", "evidenceRef": "esvs-ali-2020" }
+    ],
+    "definitive": [
+      { "text": "IIb: immediate revascularisation. IIa: urgent revascularisation, with time for imaging and planning.", "evidenceRef": "esvs-ali-2020" },
+      { "text": "Embolus: surgical balloon catheter embolectomy, usually from the groin, with completion imaging. The technique has changed little since its description.", "evidenceRef": "fogarty-1963" },
+      { "text": "Thrombosis on existing disease: catheter-directed thrombolysis, percutaneous thrombectomy, or bypass, chosen on anatomy and the time the limb can tolerate. Thrombolysis is slower and is best kept for limbs that can wait.", "evidenceRef": "esvs-ali-2020" },
+      { "text": "Consider four-compartment fasciotomy after revascularisation of a limb with prolonged or severe ischaemia, and perform it through two incisions.", "evidenceRef": "esvs-ali-2020" },
+      { "text": "Rutherford III: primary amputation or palliation. Revascularising a dead limb risks fatal reperfusion injury.", "evidenceRef": "esvs-ali-2020" }
+    ],
+    "escalate": [
+      { "text": "Consultant vascular surgeon for every IIb and III limb, and for any decision for amputation or palliation." },
+      { "text": "If there is no vascular service, transfer immediately after heparin. Do not wait for CT in the referring hospital if it will delay transfer." },
+      { "text": "Interventional radiology for thrombolysis or hybrid procedures; cardiology for the embolic source." },
+      { "text": "Critical care for reperfusion injury, hyperkalaemia or renal failure." }
+    ]
+  },
+  "notes": [
+    "The question is not 'is there a pulse' but 'can the patient feel and move the toes'. Neurology is the clock.",
+    "Embolus and thrombosis look alike in the first hour and behave very differently on the table. A failed embolectomy in a diseased artery is a thrombosis and needs a different operation.",
+    "Fasciotomy done early is a scar; fasciotomy done late is a debridement. If you are wondering, do it."
+  ]
+}

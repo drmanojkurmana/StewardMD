@@ -301,6 +301,19 @@
       }
     },
     /* ── specialty templates (generated from the specialty content authoring, 2026-11-04) ── */
+    "below-knee-amputation": {
+      base: "operative", title: "Below-knee amputation",
+      prefill: {"procedure": "Below-knee amputation, long posterior flap"},
+      extra: {
+        "Operative detail": [
+          f("sideConfirmed", "Side confirmed and marked", {"type": "text", "required": true, "aiFillable": false, "ph": "Left / Right, confirmed with patient"}),
+          f("boneLevels", "Tibial and fibular cut levels", {"type": "text", "required": true, "aiFillable": false, "ph": "Tibia cm below joint line; fibula cm shorter"}),
+          f("tissueViability", "Muscle and skin viability at the level", {"type": "textarea", "aiFillable": true, "rows": 2}),
+          f("tourniquet", "Tourniquet use and time", {"type": "text", "aiFillable": false, "ph": "Not used / used without exsanguination, minutes"}),
+          f("specimenSent", "Limb and bone margin sent", {"type": "text", "aiFillable": false, "ph": "Histology / bone for culture"})
+        ]
+      }
+    },
     "burr-hole-csdh": {
       base: "operative", title: "Burr hole evacuation of chronic subdural haematoma",
       prefill: {"procedure": "Burr hole evacuation of chronic subdural haematoma"},
@@ -311,6 +324,20 @@
           f("fluidCharacter", "Haematoma fluid character and pressure", {"type": "text", "required": false, "aiFillable": true, "ph": "Motor-oil / mixed / clotted; under pressure?"}),
           f("drainDetail", "Drain type, position and plan", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Subdural / subgaleal / none (reason); bag level; removal plan"}),
           f("antithromboticPlan", "Antithrombotic restart plan", {"type": "text", "required": false, "aiFillable": true, "help": "Agreed date and indication, or 'not on antithrombotics'"})
+        ]
+      }
+    },
+    "chest-drain-insertion": {
+      base: "operative", title: "Chest drain insertion",
+      prefill: {"procedure": "Intercostal chest drain insertion", "anaesthesia": "Local anaesthetic"},
+      extra: {
+        "Operative detail": [
+          f("sideSite", "Side and site (space, line)", {"type": "text", "required": true, "aiFillable": false, "ph": "Right, 5th space, mid-axillary line"}),
+          f("ultrasoundGuided", "Ultrasound guidance", {"type": "text", "required": true, "aiFillable": false, "ph": "Real-time / site marked / not used (reason)"}),
+          f("drainTechnique", "Technique and drain size", {"type": "text", "required": true, "aiFillable": true, "ph": "Seldinger 12 Fr / blunt dissection 28 Fr"}),
+          f("guidewireRemoved", "Guidewire removed and seen intact", {"type": "text", "aiFillable": false, "ph": "Yes / not applicable"}),
+          f("initialOutput", "Initial drainage (character and volume)", {"type": "text", "aiFillable": false}),
+          f("positionConfirmed", "Position confirmed", {"type": "text", "aiFillable": false, "ph": "Swinging, bubbling, chest radiograph"})
         ]
       }
     },
@@ -325,6 +352,20 @@
           f("openingPressure", "Opening pressure and CSF appearance", {"type": "text", "required": true, "aiFillable": false, "ph": "cmH2O; clear / bloodstained / cloudy"}),
           f("evdLevel", "Reference level and drainage height", {"type": "text", "required": true, "aiFillable": false, "ph": "Zero at tragus; chamber at _ cmH2O; open / clamped"}),
           f("csfSent", "CSF samples sent", {"type": "text", "required": false, "aiFillable": false, "ph": "Microscopy, culture, other / none"})
+        ]
+      }
+    },
+    "femoral-embolectomy": {
+      base: "operative", title: "Femoral embolectomy",
+      prefill: {"procedure": "Femoral balloon catheter embolectomy"},
+      extra: {
+        "Operative detail": [
+          f("rutherfordClass", "Pre-operative Rutherford acute class", {"type": "text", "required": true, "aiFillable": false, "ph": "I / IIa / IIb / III"}),
+          f("arteriotomy", "Arteriotomy and closure", {"type": "text", "aiFillable": true, "ph": "Transverse primary / longitudinal with patch"}),
+          f("catheterPasses", "Catheter passes and clot retrieved", {"type": "textarea", "aiFillable": true, "rows": 2}),
+          f("completionImaging", "Completion angiography findings", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2}),
+          f("fasciotomy", "Fasciotomy performed or reason not", {"type": "text", "required": true, "aiFillable": false}),
+          f("embolusHistology", "Embolus sent for histology", {"type": "text", "aiFillable": false, "ph": "Yes / No"})
         ]
       }
     },
@@ -379,6 +420,20 @@
           f("axillaryLevels", "Axillary levels cleared", {"type": "text", "required": true, "aiFillable": false, "ph": "Levels I and II; level III if taken"}),
           f("nervesPreserved", "Long thoracic, thoracodorsal, medial pectoral, intercostobrachial nerves", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Each: preserved / divided (reason)"}),
           f("orientationSutures", "Specimen orientation sutures", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. short superior, long lateral (state convention)"})
+        ]
+      }
+    },
+    "open-raaa-repair": {
+      base: "operative", title: "Open repair of ruptured AAA",
+      prefill: {"procedure": "Open repair of ruptured abdominal aortic aneurysm", "incision": "Midline laparotomy"},
+      extra: {
+        "Operative detail": [
+          f("proximalControl", "Proximal control (level and method)", {"type": "text", "required": true, "aiFillable": true, "ph": "Supracoeliac / infrarenal clamp / aortic occlusion balloon"}),
+          f("clampTimes", "Clamp times (suprarenal and total)", {"type": "text", "required": true, "aiFillable": false, "ph": "Suprarenal: min; total: min"}),
+          f("graftDetail", "Graft type, size and lot number", {"type": "text", "required": true, "aiFillable": false, "ph": "Tube / bifurcated, size, lot"}),
+          f("imaAndColon", "Inferior mesenteric artery and colon perfusion", {"type": "textarea", "aiFillable": true, "rows": 2}),
+          f("limbPerfusion", "Limb perfusion at end of procedure", {"type": "text", "required": true, "aiFillable": false, "ph": "Pulses / Doppler signals, both feet"}),
+          f("abdominalClosure", "Abdominal closure and retained packs", {"type": "text", "required": true, "aiFillable": false, "ph": "Primary / temporary closure; number of packs left"})
         ]
       }
     },

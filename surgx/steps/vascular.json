@@ -1,0 +1,96 @@
+{
+  "_comment": "Steps shared by open arterial operations (ruptured AAA repair, femoral embolectomy, and future bypass and trauma repairs). Authored once, referenced by many. Procedure-only steps stay in each procedure's steps_local.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.vasc.vessel-control": {
+      "id": "step.vasc.vessel-control",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Proximal and distal control before opening the artery",
+      "why": "An artery opened without control bleeds at arterial pressure into a field you can no longer see. Control first turns a haemorrhage into a planned arteriotomy.",
+      "how": [
+        "Expose the artery above and below the planned arteriotomy, in healthy tissue away from haematoma or disease where possible.",
+        "Pass slings or tapes around each vessel, including the important branches, and identify where each clamp will go before applying any.",
+        "Handle the artery by its adventitia or slings, never with forceps on the intima-bearing wall.",
+        "State aloud to the anaesthetist when a clamp is going on and when it is coming off."
+      ],
+      "structuresAtRisk": ["Accompanying veins, which tear easily during circumferential dissection", "Adjacent nerves", "Small side branches avulsed by traction on slings"],
+      "pitfalls": [
+        "Clamping a heavily calcified segment, which cracks the plaque and causes a dissection.",
+        "Dissecting circumferentially around a vessel when a clamp applied from the front would do."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.heparin": {
+      "id": "step.vasc.heparin",
+      "kind": "checkpoint",
+      "title": "Systemic heparin before clamping",
+      "why": "Static blood beyond a clamp clots within minutes. Heparin before clamping prevents distal thrombosis that would undo the repair.",
+      "how": [
+        "Agree the heparin dose with the anaesthetist per local protocol, and give it a few minutes before the clamps go on.",
+        "Record the time and dose; check clotting (for example ACT) during long clamp times if the unit uses it.",
+        "In active haemorrhage, such as a ruptured aneurysm or trauma, the dose may be reduced or omitted: decide this explicitly and say so."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Clamping before the heparin has circulated.",
+        "Forgetting that the patient is heparinised when assessing bleeding at closure."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.flush-backbleed": {
+      "id": "step.vasc.flush-backbleed",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Flushing and back-bleeding before the final sutures",
+      "why": "Clot, air and debris left in the lumen go straight to the distal bed when flow is restored. Forward flushing and back-bleeding clear them while you still have control.",
+      "how": [
+        "Before tying the last suture, release the distal clamp briefly to back-bleed, then the proximal clamp to forward-flush.",
+        "Irrigate the lumen with heparinised saline and remove any loose thrombus or intimal flaps.",
+        "Assess the strength of back-bleeding: weak or absent back-bleeding suggests residual distal thrombus."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Skipping the flush to save a minute at the end of a long operation.",
+        "Accepting poor back-bleeding without imaging or further catheter passes."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.restore-flow": {
+      "id": "step.vasc.restore-flow",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Restoring flow with the anaesthetist warned",
+      "why": "Declamping releases cold, acidic, potassium-rich blood into the circulation and drops the pressure suddenly. Warned and staged, it is uneventful; unannounced, it can arrest the patient.",
+      "how": [
+        "Tell the anaesthetist before releasing each clamp so that volume and vasopressors are ready.",
+        "Release slowly, one limb or one clamp at a time, and be ready to reapply if the pressure falls sharply.",
+        "Check the suture lines for bleeding as pressure returns, and repair with fine sutures while still able to clamp."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Releasing both iliac clamps together after a long clamp time.",
+        "Chasing suture line bleeding with more sutures before giving heparin reversal, warmth and clotting factors a chance."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vasc.perfusion-check": {
+      "id": "step.vasc.perfusion-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Confirming distal perfusion before leaving theatre",
+      "why": "A technically perfect anastomosis with a thrombosed or embolised distal bed is a failed operation. The time to find it is while the patient is still on the table.",
+      "how": [
+        "Examine both feet (or hands) under the drapes: colour, capillary refill, palpable pulses, and handheld Doppler signals.",
+        "Perform completion angiography or duplex when the result is in doubt, or routinely after embolectomy.",
+        "Compare with the pre-operative state and the other limb, and document what you found."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Draping the feet out of view, so that distal ischaemia is found in recovery.",
+        "Assuming a poor foot is vasospasm and closing."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

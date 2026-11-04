@@ -1,0 +1,192 @@
+{
+  "id": "chest-drain-insertion",
+  "title": "Intercostal chest drain insertion",
+  "subtitle": "Seldinger and blunt dissection techniques",
+  "system": "thoracic",
+  "aliases": ["chest tube", "intercostal drain", "ICD", "tube thoracostomy"],
+  "estMinutes": 30,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "bts-procedures-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Clinical Statement on pleural procedures", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433579/", "accessed": "2026-11-04" },
+    { "id": "bts-pleural-2023", "org": "British Thoracic Society (BTS)", "title": "British Thoracic Society Guideline for pleural disease", "year": 2023, "url": "https://pubmed.ncbi.nlm.nih.gov/37433578/", "accessed": "2026-11-04" },
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["nexus_chest"],
+  "chapters": {
+    "indications": [
+      "Pneumothorax needing drainage: tension after decompression, secondary pneumothorax, symptomatic primary pneumothorax after failed or declined aspiration, and pneumothorax in a ventilated patient.",
+      "Haemothorax and haemopneumothorax, typically with a large-bore drain in trauma.",
+      "Pleural infection (empyema or complicated parapneumonic effusion).",
+      "Symptomatic effusion needing drainage, and pleurodesis."
+    ],
+    "contraindications": [
+      "No safe window on ultrasound for a fluid drain.",
+      "Suspected large bulla or lobar collapse mistaken for pneumothorax or effusion: CT first.",
+      "Relative: uncorrected coagulopathy or anticoagulation in an elective case, previous pleurodesis or surgery on that side (adhesions), skin infection at the site.",
+      "A post-pneumonectomy space, unless directed by the thoracic team."
+    ],
+    "preparation": [
+      "Confirm the side and indication against current imaging; mark the side.",
+      "Thoracic ultrasound for every fluid drain, at the bedside, with the patient in the position of insertion.",
+      "Written consent where possible: pain, bleeding, infection, failure, organ injury and malposition.",
+      "Use a procedural safety checklist, an assistant, monitoring, oxygen and resuscitation equipment.",
+      "Premedication with analgesia; sedation only with appropriate monitoring."
+    ],
+    "positioning": [
+      "Semi-recumbent with the ipsilateral arm behind the head, exposing the axilla.",
+      "Alternatively, sitting and leaning forward over a table for posterior fluid collections under ultrasound guidance."
+    ],
+    "equipment": [
+      "Seldinger kit: introducer needle, guidewire, dilators and small-bore drain.",
+      "For blunt dissection: scalpel, curved blunt forceps (for example a Spencer Wells), large-bore drain without a trocar.",
+      "Local anaesthetic, sterile pack, suture for securing the drain, dressing.",
+      "Underwater seal bottle primed with sterile water, or a valved system as appropriate."
+    ],
+    "anatomy": [
+      "The safe triangle: anterior border of latissimus dorsi, lateral border of pectoralis major, a horizontal line at the level of the nipple (fifth intercostal space), apex below the axilla.",
+      "The neurovascular bundle runs along the inferior border of each rib. Insert just above the upper border of the rib below.",
+      "The diaphragm rises high in expiration, especially on the right with the liver beneath; below the nipple line it may be at the insertion site.",
+      "The long thoracic nerve runs on serratus anterior behind the mid-axillary line; the intercostal vessels are tortuous posteriorly and in older patients."
+    ],
+    "criticalSafety": [
+      "Never use a trocar.",
+      "Stay above the rib below and within the safe triangle.",
+      "Aspirate air or fluid with the anaesthetic needle before committing to the drain. No aspirate, no drain.",
+      "Account for the guidewire after every Seldinger insertion.",
+      "Never clamp a bubbling drain; keep the bottle below the chest."
+    ],
+    "structuresAtRisk": [
+      "Intercostal artery, vein and nerve",
+      "Lung",
+      "Diaphragm, liver and spleen",
+      "Heart and great vessels",
+      "Long thoracic nerve"
+    ],
+    "commonErrors": [
+      "Inserting too low, below the nipple line, into the abdomen.",
+      "Not confirming fluid on ultrasound immediately before insertion.",
+      "Pushing the dilator or drain too deep with force, risking lung or mediastinal injury.",
+      "Securing the drain with a purse-string suture that later causes a poor scar, or with a suture that does not hold the drain."
+    ],
+    "complications": [
+      "Pain, the commonest complication.",
+      "Bleeding from intercostal vessel injury, and haemothorax.",
+      "Malposition: subcutaneous, intra-fissural, intra-abdominal or intrapulmonary.",
+      "Organ injury: lung, liver, spleen, heart.",
+      "Drain displacement or blockage, especially with small-bore drains.",
+      "Infection at the site or empyema; surgical emphysema; re-expansion pulmonary oedema."
+    ],
+    "postop": [
+      "Chest radiograph to confirm position.",
+      "Drain chart: swinging, bubbling, volume and character, recorded at least daily and hourly in haemothorax.",
+      "Flush small-bore drains per local protocol to prevent blockage.",
+      "Daily review of the need for the drain; remove when the indication has resolved."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the side against the imaging AND the examination. Wrong-side chest drains are reported every year." },
+    { "ref": "step.core.timeout", "emphasis": "A bedside procedure deserves the same pause: identity, side, indication, imaging, coagulation and allergies." },
+    { "ref": "step.core.positioning", "emphasis": "Arm behind the head opens the safe triangle and moves latissimus dorsi back." },
+    { "ref": "step.cd.site" },
+    { "ref": "step.core.prep-drape", "emphasis": "Full aseptic technique: skin preparation, sterile gloves and gown, and a large sterile drape." },
+    { "ref": "step.cd.anaesthesia" },
+    { "ref": "step.cd.seldinger" },
+    { "ref": "step.cd.blunt" },
+    { "ref": "step.cd.secure" },
+    { "ref": "step.core.counts", "emphasis": "For Seldinger drains, the guidewire is seen and accounted for after the drain is in. A retained guidewire is a never event." },
+    { "ref": "step.cd.confirm" },
+    { "ref": "step.core.debrief", "emphasis": "Document side, site, size, technique, ultrasound use, fluid character and volume, and the plan for drain management." }
+  ],
+  "steps_local": {
+    "step.cd.site": {
+      "id": "step.cd.site",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Site selection with ultrasound",
+      "why": "Most serious drain injuries come from inserting where there is no pleural target or below the diaphragm. Ultrasound shows where the target is and where the diaphragm moves.",
+      "how": [
+        "Identify the safe triangle by palpation.",
+        "For fluid, scan the site and mark it with the patient in the insertion position, noting depth to pleura and the diaphragm position through respiration.",
+        "For pneumothorax, confirm the side on imaging and choose a site in the safe triangle, usually the fourth or fifth space in the mid-axillary line."
+      ],
+      "structuresAtRisk": ["Diaphragm, liver and spleen"],
+      "pitfalls": ["Marking on one day and inserting on another.", "Using a radiograph alone to choose a fluid site."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cd.anaesthesia": {
+      "id": "step.cd.anaesthesia",
+      "kind": "prep",
+      "title": "Local anaesthesia and confirmatory aspiration",
+      "why": "Adequate local anaesthesia makes the procedure tolerable, and aspirating air or fluid with the needle confirms that the pleural space is where you think it is.",
+      "how": [
+        "Infiltrate skin, then the tissues just above the upper border of the rib, down to the parietal pleura, which is the most sensitive layer.",
+        "Aspirate as you advance. Air or fluid confirms entry into the pleural space and gives the depth.",
+        "Stay within the maximum safe dose of local anaesthetic for the patient's weight."
+      ],
+      "structuresAtRisk": ["Intercostal neurovascular bundle"],
+      "pitfalls": ["Proceeding when the needle aspirates nothing.", "Insufficient anaesthesia of the parietal pleura."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cd.seldinger": {
+      "id": "step.cd.seldinger",
+      "kind": "access",
+      "critical": true,
+      "title": "Seldinger technique (small-bore drain)",
+      "why": "Small-bore drains are first line for most pneumothoraces and effusions; they are less painful and as effective. The risk lies in the dilator, which can go too deep.",
+      "how": [
+        "Advance the introducer needle above the rib, aspirating, until air or fluid is obtained.",
+        "Pass the guidewire through the needle, remove the needle, and keep hold of the wire at all times.",
+        "Make a small skin nick and pass the dilator over the wire only to the depth of the pleura measured on the needle, holding it close to the skin to limit depth.",
+        "Pass the drain over the wire to the planned length, remove the wire, and connect to the drainage system."
+      ],
+      "structuresAtRisk": ["Lung", "Intercostal vessels", "Mediastinum if the dilator is pushed too far"],
+      "pitfalls": ["Losing the guidewire into the chest.", "Dilating with excessive force or depth."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cd.blunt": {
+      "id": "step.cd.blunt",
+      "kind": "access",
+      "critical": true,
+      "title": "Blunt dissection technique (large-bore drain)",
+      "why": "Large-bore drains are used for trauma haemothorax and some viscous collections. Blunt dissection into the pleura with a finger sweep confirms the space and finds adhesions before the drain goes in.",
+      "how": [
+        "Make a skin incision of a size to admit a finger, parallel to the rib, over the space chosen.",
+        "Spread bluntly with curved forceps over the top of the rib below and through the intercostal muscles, then puncture the parietal pleura.",
+        "Insert a finger to confirm the pleural space and sweep for adhesions and the lung.",
+        "Guide the drain in with forceps or a finger, directed apically for air and basally for fluid, without a trocar."
+      ],
+      "structuresAtRisk": ["Intercostal vessels", "Lung", "Diaphragm and abdominal organs"],
+      "pitfalls": ["A skin incision too small, leading to force.", "Skipping the finger sweep."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cd.secure": {
+      "id": "step.cd.secure",
+      "kind": "closure",
+      "title": "Securing the drain and connecting the seal",
+      "why": "Drain displacement is a common reason for repeat procedures. A well-anchored drain connected to a correctly primed seal is the end of the procedure, not an afterthought.",
+      "how": [
+        "Anchor the drain with a strong suture, avoiding purse-string sutures that cause poor scars.",
+        "Apply a transparent dressing that allows the site to be seen; add an omental tag of tape.",
+        "Connect to an underwater seal, confirm the tube is submerged, and check for swinging and bubbling."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Bulky dressings that hide displacement.", "An unprimed underwater seal."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.cd.confirm": {
+      "id": "step.cd.confirm",
+      "kind": "checkpoint",
+      "title": "Confirming position and function",
+      "why": "A drain that swings and drains is in the pleura; a radiograph confirms it is in the right part of it and that no complication has followed.",
+      "how": [
+        "Observe swinging with respiration and bubbling or drainage.",
+        "Chest radiograph after insertion.",
+        "Control the drainage of large effusions and stop for chest tightness or cough."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Assuming position without imaging.", "Draining a large effusion all at once."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

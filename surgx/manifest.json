@@ -63,6 +63,14 @@
     {
       "id": "endocrine_surgery",
       "title": "Endocrine surgery"
+    },
+    {
+      "id": "vascular",
+      "title": "Vascular emergencies"
+    },
+    {
+      "id": "thoracic",
+      "title": "Chest and cardiothoracic emergencies"
     }
   ],
   "protocols": [
@@ -586,6 +594,106 @@
       "specialty": "endocrine",
       "file": "protocols/adrenal-crisis-phaeo-periop.json",
       "review": "ai_drafted"
+    },
+    {
+      "id": "raaa",
+      "kind": "authored",
+      "title": "Ruptured abdominal aortic aneurysm",
+      "subtitle": "Permissive hypotension, CT if it responds, EVAR first if it fits",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/raaa.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-limb-ischaemia",
+      "kind": "authored",
+      "title": "Acute limb ischaemia",
+      "subtitle": "Heparin now, classify, revascularise by the clock",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/acute-limb-ischaemia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "clti-diabetic-foot",
+      "kind": "authored",
+      "title": "Chronic limb-threatening ischaemia and the ischaemic diabetic foot",
+      "subtitle": "Drain sepsis first, then stage with WIfI and revascularise",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/clti-diabetic-foot.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-mesenteric-ischaemia",
+      "kind": "authored",
+      "title": "Acute mesenteric ischaemia",
+      "subtitle": "Suspect early, CT angiography, revascularise before you resect",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/acute-mesenteric-ischaemia.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "limb-vascular-trauma",
+      "kind": "authored",
+      "title": "Limb vascular trauma and haemorrhage control",
+      "subtitle": "Tourniquet, hard signs, shunt or repair",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/limb-vascular-trauma.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "av-access-complications",
+      "kind": "authored",
+      "title": "Dialysis access complications",
+      "subtitle": "Bleeding, thrombosis and steal in AV fistulas and grafts",
+      "category": "vascular",
+      "specialty": "vascular",
+      "file": "protocols/av-access-complications.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "chest-drain-management",
+      "kind": "authored",
+      "title": "Chest drain: insertion and management",
+      "subtitle": "Safe triangle, image guidance, and when not to",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/chest-drain-management.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "massive-haemothorax",
+      "kind": "authored",
+      "title": "Massive haemothorax and resuscitative thoracotomy",
+      "subtitle": "Drain output, the thoracotomy decision, and who should be opened",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/massive-haemothorax.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cardiac-tamponade",
+      "kind": "authored",
+      "title": "Cardiac tamponade after cardiac surgery and in trauma",
+      "subtitle": "Recognise it, open the chest early, avoid the induction trap",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/cardiac-tamponade.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pneumothorax",
+      "kind": "authored",
+      "title": "Spontaneous and tension pneumothorax",
+      "subtitle": "Symptoms and risk, not size alone, decide the intervention",
+      "category": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "protocols/pneumothorax.json",
+      "review": "ai_drafted"
     }
   ],
   "stepPacks": [
@@ -641,6 +749,12 @@
       "id": "onco",
       "file": "steps/onco.json",
       "title": "Shared cancer-operation steps (oncology, breast, endocrine)",
+      "shared": true
+    },
+    {
+      "id": "vascular",
+      "file": "steps/vascular.json",
+      "title": "Shared open arterial steps",
       "shared": true
     }
   ],
@@ -942,6 +1056,61 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 180
+    },
+    {
+      "id": "open-raaa-repair",
+      "title": "Open repair of ruptured abdominal aortic aneurysm",
+      "subtitle": "Outline level, with damage control",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/open-raaa-repair.json",
+      "stepPacks": [
+        "core",
+        "abdomen",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 180
+    },
+    {
+      "id": "femoral-embolectomy",
+      "title": "Femoral embolectomy",
+      "subtitle": "Balloon catheter embolectomy for acute limb ischaemia",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/femoral-embolectomy.json",
+      "stepPacks": [
+        "core",
+        "vascular"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "below-knee-amputation",
+      "title": "Below-knee amputation",
+      "subtitle": "Long posterior myocutaneous flap",
+      "system": "vascular",
+      "specialty": "vascular",
+      "file": "procedures/below-knee-amputation.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "chest-drain-insertion",
+      "title": "Intercostal chest drain insertion",
+      "subtitle": "Seldinger and blunt dissection techniques",
+      "system": "thoracic",
+      "specialty": "cardiothoracic",
+      "file": "procedures/chest-drain-insertion.json",
+      "stepPacks": [
+        "core"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 30
     }
   ],
   "cases": [
@@ -1092,6 +1261,33 @@
         "surgeon"
       ],
       "review": "ai_drafted"
+    },
+    {
+      "id": "cold-leg-af",
+      "title": "Sudden cold painful leg",
+      "subtitle": "Acute limb ischaemia in atrial fibrillation",
+      "specialty": "vascular",
+      "file": "cases/cold-leg-af.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "pulsatile-mass-collapse",
+      "title": "Collapse, abdominal pain and a pulsatile mass",
+      "subtitle": "Ruptured abdominal aortic aneurysm",
+      "specialty": "vascular",
+      "file": "cases/pulsatile-mass-collapse.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
     }
   ],
   "specialties": [
@@ -1134,6 +1330,14 @@
     {
       "id": "endocrine",
       "title": "Endocrine surgery"
+    },
+    {
+      "id": "vascular",
+      "title": "Vascular surgery"
+    },
+    {
+      "id": "cardiothoracic",
+      "title": "Cardiothoracic surgery"
     }
   ]
 }
