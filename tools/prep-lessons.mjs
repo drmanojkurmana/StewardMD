@@ -194,12 +194,16 @@ export function toStep(r) {
 // ---- gates -------------------------------------------------------------------------------------------------------
 /* In-app files, plus the R2 bank paths the lesson client already loads (prep-lessons.js lessonImgUrl:
    any src matching /^v\d{1,3}\//). KB and existing lesson figures use v1/kb/media and v1/lessons/media.
-   CliniX practicals and skills are copied into the web root by scripts/build-www.sh. */
+   CliniX practicals and skills are copied into the web root by scripts/build-www.sh. Tokos instruments ship
+   the same way (the whole tokos/ dir is copied), and root clinix-*.jpg files ship via the root-image glob.
+   Deliberately NOT cleared: prep/pearl-figs/*.svg are not copied by scripts/build-www.sh, so a lesson that
+   cites one fails until the figure is verified to resolve in the built bundle. */
 export const CLEARED_MEDIA = [
   /^prep\/lessons\/media\/[a-z0-9-]+\.(?:svg|webp|png)$/,
-  /^tokos\/media\/(?:fetal-planes|hc-biometry)\/[a-z0-9-]+\.(?:webp|png)$/,
+  /^tokos\/media\/(?:fetal-planes|hc-biometry|instruments)\/[a-z0-9-]+\.(?:webp|png)$/,
   /^v1\/(?:kb|lessons)\/media\/[a-z0-9_-]+\.webp$/,
   /^clinix\/media\/(?:practicals|skills)\/[a-z0-9_-]+\.webp$/,
+  /^clinix-[a-z0-9-]+\.jpg$/,
 ];
 function visStrings(v) { return v ? LP.visText(v).split(/\s*\n\s*/).filter(Boolean) : []; }
 
