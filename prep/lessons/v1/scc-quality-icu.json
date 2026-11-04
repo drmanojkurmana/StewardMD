@@ -2,121 +2,188 @@
  "v": 1,
  "module": "scc-quality-icu",
  "subject": "ss-critical-care",
- "title": "ICU Organisation, Quality and Safety: Ventilator Care and Early Warning",
- "minutes": 5,
+ "title": "ICU organisation, quality and safety",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Ventilated patients need a structured bedside check before any change. Start with **vital signs**, an **arterial blood gas**, and chest sounds. These markers show whether the ventilator is doing its job. When a high pressure alarm sounds, the first duty is to identify its cause before touching any setting. Silencing the alarm or raising the tidal volume without a diagnosis can worsen injury. Common causes include secretions, kinking, patient coughing, and a tension **pneumothorax**, which needs urgent bedside review.",
-   "say": "Ventilated patients need a structured bedside check before any change. Start with vital signs, an arterial blood gas, and chest sounds. These markers show whether the ventilator is doing its job. When a high pressure alarm sounds, the first duty is to identify its cause before touching any setting. Silencing the alarm or raising the tidal volume without a diagnosis can worsen injury. Common causes include secretions, kinking, patient coughing, and a tension pneumothorax, which needs urgent bedside review.",
+   "tx": "A **closed ICU** is one in which the intensivist writes the orders. Observational comparisons link and associate that model with better outcomes. An **open unit**, where every parent team writes its own critical care, fragments the plan. A title on the door, without the authority to change the ventilator, is not a closed unit.",
+   "say": "A closed ICU is one in which the intensivist writes the orders. Observational comparisons link and associate that model with better outcomes. An open unit, where every parent team writes its own critical care, fragments the plan. A title on the door, without the authority to change the ventilator, is not a closed unit.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-tub-central-venous-catheter.webp",
+    "alt": "Multilumen central venous catheter components, aseptic insertion bundle landmarks and line maintenance",
+    "caption": "Multilumen central venous catheter components, aseptic insertion bundle landmarks and line maintenance",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "The **MERIT** trial introduced a **medical emergency team** and did not significantly reduce the composite of cardiac arrest, unplanned ICU admission, and unexpected death. Calling criteria are still widely used. The trial is a reason not to claim a mortality benefit it did not show. Rapid response systems improve timely clinical evaluation even if trial endpoints remained neutral.",
+   "say": "The MERIT trial introduced a medical emergency team and did not significantly reduce the composite of cardiac arrest, unplanned ICU admission, and unexpected death. Calling criteria are still widely used. The trial is a reason not to claim a mortality benefit it did not show. Rapid response systems improve timely clinical evaluation even if trial endpoints remained neutral.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Alarm cause",
-     "Bedside clue",
-     "Immediate step"
+     "Trial Characteristic",
+     "MERIT Protocol",
+     "Outcome Finding"
     ],
     "rows": [
      [
-      "Secretions or kinked tube",
-      "Sawtooth waveform, suction needed",
-      "Suction and check tubing"
+      "Cluster-randomised design",
+      "23 Australian hospitals evaluated",
+      "Standardized rapid response team implementation"
      ],
      [
-      "Patient coughing or fighting",
-      "Asynchrony on the waveform",
-      "Assess sedation and comfort"
+      "Composite primary outcome",
+      "Cardiac arrest, unplanned ICU admission, death",
+      "No statistically significant difference between arms"
      ],
      [
-      "Tension pneumothorax",
-      "Falling saturation, one-sided silence",
-      "Urgent decompression, call senior"
-     ],
-     [
-      "Mainstem intubation",
-      "Unilateral breath sounds",
-      "Reposition the tube"
+      "Implementation reality",
+      "Widely adopted international standard",
+      "Promotes patient safety culture and early resuscitation"
      ]
     ]
    }
   },
   {
-   "tx": "Weaning and mode choice matter for safe liberation. **Pressure support ventilation** is generally preferred over **SIMV** for weaning, because SIMV is associated with longer time on the ventilator. For a patient with a neuromuscular disorder and normal lungs, the goal is to reduce work of breathing, so a mode that assists each spontaneous effort is chosen. Auto-PEEP from dynamic hyperinflation, seen in severe COPD, can cause hypotension and a sudden tension pneumothorax.",
-   "say": "Weaning and mode choice matter for safe liberation. Pressure support ventilation is generally preferred over SIMV for weaning, because SIMV is associated with longer time on the ventilator. For a patient with a neuromuscular disorder and normal lungs, the goal is to reduce work of breathing, so a mode that assists each spontaneous effort is chosen. Auto-PEEP from dynamic hyperinflation, seen in severe COPD, can cause hypotension and a sudden tension pneumothorax.",
+   "tx": "A **NEWS2** total of 7 or more is the high-risk band and needs an emergency response. A score of 3 in one parameter needs urgent review even when the total looks moderate. **Scale 2**, for a patient at risk of **hypercapnic respiratory failure**, sets the oxygen saturation target at 88 to 92 percent. Scale 1 is the default.",
+   "say": "A NEWS2 total of 7 or more is the high-risk band and needs an emergency response. A score of 3 in one parameter needs urgent review even when the total looks moderate. Scale 2, for a patient at risk of hypercapnic respiratory failure, sets the oxygen saturation target at 88 to 92 percent. Scale 1 is the default.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Assess drive and gas exchange"
-     },
-     {
-      "id": "b",
-      "label": "Pressure support for weaning"
-     },
-     {
-      "id": "c",
-      "label": "Check for auto-PEEP"
-     },
-     {
-      "id": "d",
-      "label": "Trial of spontaneous breathing"
-     }
+    "kind": "compare",
+    "left": {
+     "title": "NEWS2 risk bands",
+     "points": [
+      "Score 0 to 4: Low clinical risk; ward-level monitoring",
+      "Score 5 to 6 or individual score 3: Medium risk; urgent review",
+      "Score 7 or greater: High clinical risk; emergency ICU response"
+     ]
+    },
+    "right": {
+     "title": "Scale 2 oxygen saturation",
+     "points": [
+      "Applied in confirmed chronic hypercapnic respiratory failure",
+      "Calibrated target saturation range 88% to 92%",
+      "Prevents unwarranted alarms from controlled physiological hypoxaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In the NHSN framework a **ventilator-associated condition** is a rise in the daily minimum FiO2 of 0.20 or more, or in PEEP of 3 cmH2O or more, sustained for 2 calendar days after a stable baseline. An **infection-related ventilator-associated complication** adds abnormal temperature or white cell count and a new antibiotic. This is surveillance. It is not the same as a clinical pneumonia, and it is not by itself a reason to start antibiotics.",
+   "say": "In the NHSN framework a ventilator-associated condition is a rise in the daily minimum FiO2 of 0 point 20 or more, or in PEEP of 3 cmH2O or more, sustained for 2 calendar days after a stable baseline. An infection-related ventilator-associated complication adds abnormal temperature or white cell count and a new antibiotic. This is surveillance. It is not the same as a clinical pneumonia, and it is not by itself a reason to start antibiotics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "NHSN Surveillance Tier",
+     "Diagnostic Criteria",
+     "Clinical Significance"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "Ventilator-associated condition",
+      "FiO2 rise >= 0.20 or PEEP rise >= 3 cmH2O for 2 days",
+      "Reflects objective sustained respiratory deterioration"
      ],
      [
-      "b",
-      "c"
+      "Infection-related VAC",
+      "VAC criteria plus fever or leucocytosis plus new antibiotic",
+      "Identifies pulmonary or extrapulmonary infectious triggers"
      ],
      [
-      "c",
-      "d"
+      "Surveillance distinction",
+      "Standardized quality metric",
+      "Does not equate to microbiological ventilator pneumonia"
      ]
     ]
    }
   },
   {
-   "tx": "Early warning scores such as the **NEWS** score detect deterioration before arrest. Scores rise with abnormal respiratory rate, oxygen saturation, temperature, blood pressure, pulse, consciousness and oxygen use. A high total triggers escalation to a **rapid response team** and senior review. Quality checks, including ventilator checklists and handover, reduce **ventilator associated events**. Any manual change to ventilator settings must be followed by checking alarm limits and reviewing the patient's response.",
-   "say": "Early warning scores such as the NEWS score detect deterioration before arrest. Scores rise with abnormal respiratory rate, oxygen saturation, temperature, blood pressure, pulse, consciousness and oxygen use. A high total triggers escalation to a rapid response team and senior review. Quality checks, including ventilator checklists and handover, reduce ventilator associated events. Any manual change to ventilator settings must be followed by checking alarm limits and reviewing the patient's response.",
+   "tx": "The **Michigan Keystone programme** used a **central-line checklist** and a rule that any member of the team could stop the procedure when a step was missed. Catheter bloodstream infections fell. It was a collaborative, not a randomised trial. The steps remain hand hygiene, chlorhexidine, a full barrier, a safer site, and removal of the line.",
+   "say": "The Michigan Keystone programme used a central-line checklist and a rule that any member of the team could stop the procedure when a step was missed. Catheter bloodstream infections fell. It was a collaborative, not a randomised trial. The steps remain hand hygiene, chlorhexidine, a full barrier, a safer site, and removal of the line.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Keystone ICU bundle",
+     "points": [
+      "Strict hand hygiene prior to catheter placement",
+      "Chlorhexidine skin antisepsis with adequate drying time",
+      "Full-barrier sterile draping and subclavian site preference"
+     ]
+    },
+    "right": {
+     "title": "Safety culture empowerment",
+     "points": [
+      "Bedside nurses empowered to halt non-compliant procedures",
+      "Dramatic sustained reduction in catheter bloodstream infections",
+      "Daily audit ensuring prompt removal of unneeded lines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Structured handover is conducted using **ISBAR**: identity, situation, background, assessment, and recommendation. A list of drugs with no plan loses the sickest problem. The incoming clinician repeats that problem back. Standardizing structured clinical communication during multidisciplinary shift transitions eliminates information omissions and reduces preventable medical errors.",
+   "say": "Structured handover is conducted using ISBAR: identity, situation, background, assessment, and recommendation. A list of drugs with no plan loses the sickest problem. The incoming clinician repeats that problem back. Standardizing structured clinical communication during multidisciplinary shift transitions eliminates information omissions and reduces preventable medical errors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ISBAR Element",
+     "Clinical Content",
+     "Communication Objective"
+    ],
+    "rows": [
+     [
+      "Identity and Situation",
+      "Patient name, bed, primary admitting diagnosis",
+      "Establishes immediate patient context"
+     ],
+     [
+      "Background and Assessment",
+      "Clinical course, organ support, trajectory",
+      "Summarizes physiological stability and risks"
+     ],
+     [
+      "Recommendation and Readback",
+      "Explicit overnight plan and escalation triggers",
+      "Ensures mutual understanding and shared mental model"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tele-ICU** lets an intensivist review a remote unit and support the local nurse and doctor. It does not see the skin, the family, or a displaced tube as well as the person at the bedside. The **bedside check** still happens. Remote audio-visual monitoring expands specialist access across community hospitals but cannot replace direct physical examination.",
+   "say": "Tele-ICU lets an intensivist review a remote unit and support the local nurse and doctor. It does not see the skin, the family, or a displaced tube as well as the person at the bedside. The bedside check still happens. Remote audio-visual monitoring expands specialist access across community hospitals but cannot replace direct physical examination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tele-ICU capabilities",
+     "points": [
+      "Centralized specialist oversight of physiological trends",
+      "Early identification of clinical deterioration markers",
+      "Continuous decision support for remote regional centres"
+     ]
+    },
+    "right": {
+     "title": "Bedside care primacy",
+     "points": [
+      "Direct tactile physical examination and tube security",
+      "Compassionate face-to-face communication with families",
+      "Immediate hands-on procedural interventions and airway rescue"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **daily goals sheet** states the sedation target, the ventilation plan, the feeding plan, and which lines and drugs can stop. A **pharmacist on the round** catches dose errors. These are safety practices, not paperwork for its own sake. Structured multidisciplinary rounds streamline clinical workflows and optimize patient outcomes.",
+   "say": "A daily goals sheet states the sedation target, the ventilation plan, the feeding plan, and which lines and drugs can stop. A pharmacist on the round catches dose errors. These are safety practices, not paperwork for its own sake. Structured multidisciplinary rounds streamline clinical workflows and optimize patient outcomes.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-quality-icu-fig1.webp",
-    "alt": "A diagram showing the National Early Warning Score (NEWS) chart, detailing physiological parameters, scoring, and escalation pathways for patient deterioration.",
-    "caption": "Early Warning Scores guide escalation for deteriorating ventilated patients. Image: Royal College of Physicians, CC0/PD, Wikimedia Commons.",
-    "ar": 0.6682
+    "src": "clinix/media/skills/skill-ix-surg-thoracocentesis_icd.webp",
+    "alt": "Procedural safety checklist, triangle of safety anatomical landmarks and chest drain underwater seal apparatus",
+    "caption": "Procedural safety checklist, triangle of safety anatomical landmarks and chest drain underwater seal apparatus",
+    "ar": 1.3333
    }
-  },
-  {
-   "tx": "Competence governs who may adjust ventilator parameters. A non-respiratory staff member must show competency equivalent to a respiratory therapist before changing settings such as **PEEP**. Competency is documented through training and supervised practice. Staff workload and **burnout** also affect safety, so ICU staffing should match patient acuity. Intensivist presence and **tele-ICU** support can extend expert oversight to smaller units, improving outcomes where specialists are scarce.",
-   "say": "Competence governs who may adjust ventilator parameters. A non-respiratory staff member must show competency equivalent to a respiratory therapist before changing settings such as PEEP. Competency is documented through training and supervised practice. Staff workload and burnout also affect safety, so ICU staffing should match patient acuity. Intensivist presence and tele-ICU support can extend expert oversight to smaller units, improving outcomes where specialists are scarce.",
-   "vis": null
   }
- ],
- "quiz": [
-  "q_8c182f44c313",
-  "q_1d42611beb7a",
-  "q_494b4926de26"
- ],
- "src": [],
- "refs": [
-  "NICE guideline on acutely ill adults in hospital (NICE CG50 NEWS2 context)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 3,
-  "kbWords": 0,
-  "itemN": 10
- }
+ ]
 }

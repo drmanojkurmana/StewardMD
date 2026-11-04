@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "scc-status-epilepticus",
+ "subject": "ss-critical-care",
+ "title": "Status epilepticus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "First line treatment is a **benzodiazepine**: intravenous **lorazepam** 0.1 mg/kg, or intramuscular **midazolam** when there is no line. Underdosing the benzodiazepine is the common error. Prompt administration of full weight-based doses terminates seizure activity before GABA receptor internalization leads to pharmacoresistance.",
+   "say": "First line treatment is a benzodiazepine: intravenous lorazepam 0 point 1 mg/kg, or intramuscular midazolam when there is no line. Underdosing the benzodiazepine is the common error. Prompt administration of full weight-based doses terminates seizure activity before GABA receptor internalization leads to pharmacoresistance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/status-epilepticus-fig1.webp",
+    "alt": "Stepwise management algorithm for status epilepticus with first, second and third-line anticonvulsants",
+    "caption": "Stepwise management algorithm for status epilepticus with first, second and third-line anticonvulsants",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**RAMPART** showed that **intramuscular midazolam** was at least as effective as intravenous lorazepam in the prehospital setting. Do not delay the first dose to place a drip. Rapid autoinjector or intramuscular injection achieves therapeutic brain levels faster by eliminating vascular access delays in seizing patients.",
+   "say": "RAMPART showed that intramuscular midazolam was at least as effective as intravenous lorazepam in the prehospital setting. Do not delay the first dose to place a drip. Rapid autoinjector or intramuscular injection achieves therapeutic brain levels faster by eliminating vascular access delays in seizing patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RAMPART Regimen",
+     "Administration Route",
+     "Seizure Cessation Without Recurrence"
+    ],
+    "rows": [
+     [
+      "Intramuscular midazolam (10 mg)",
+      "IM injection without IV line",
+      "73.4% successful termination upon hospital arrival"
+     ],
+     [
+      "Intravenous lorazepam (4 mg)",
+      "IV access required first",
+      "63.4% successful termination (access delays onset)"
+     ],
+     [
+      "Clinical priority",
+      "Immediate first dose",
+      "Do not delay anticonvulsant to establish peripheral cannula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ESETT** found that **levetiracetam**, **fosphenytoin**, and **valproate** were equivalent as the second line drug. One of them is given immediately after the benzodiazepine, at a full loading dose. Choosing any of the three established agents achieves approximately fifty percent seizure termination in established benzodiazepine-refractory status.",
+   "say": "ESETT found that levetiracetam, fosphenytoin, and valproate were equivalent as the second line drug. One of them is given immediately after the benzodiazepine, at a full loading dose. Choosing any of the three established agents achieves approximately fifty percent seizure termination in established benzodiazepine-refractory status.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ESETT trial drug dosing",
+     "points": [
+      "Levetiracetam 60 mg/kg IV (maximum 4500 mg)",
+      "Fosphenytoin 20 mg PE/kg IV (maximum 1500 mg PE)",
+      "Sodium valproate 40 mg/kg IV (maximum 3000 mg)"
+     ]
+    },
+    "right": {
+     "title": "Clinical equivalence",
+     "points": [
+      "Approximately 50% cessation rate across all three arms",
+      "Equivalent safety profiles regarding hypotension and intubation",
+      "Infuse full weight-adjusted loading dose over 10 minutes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Refractory status epilepticus**, continuing after benzodiazepine and a second drug, is treated with a **midazolam** or **propofol** infusion and continuous EEG. **Ketamine** is an adjunct when those fail. General anaesthesia is titrated to achieve electrographic burst suppression, arresting ongoing excitotoxic neuronal necrosis.",
+   "say": "Refractory status epilepticus, continuing after benzodiazepine and a second drug, is treated with a midazolam or propofol infusion and continuous EEG. Ketamine is an adjunct when those fail. General anaesthesia is titrated to achieve electrographic burst suppression, arresting ongoing excitotoxic neuronal necrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Continuous Infusion",
+     "Dosing Protocol",
+     "Key Monitoring Target"
+    ],
+    "rows": [
+     [
+      "Propofol",
+      "20 to 80 mcg/kg/min infusion",
+      "Watch for PRIS, hypertriglyceridaemia, and metabolic acidosis"
+     ],
+     [
+      "Midazolam",
+      "0.2 mg/kg bolus then 0.05 to 2 mg/kg/h",
+      "Titrate to continuous electrographic burst suppression"
+     ],
+     [
+      "Ketamine",
+      "1 to 2 mg/kg bolus then 1 to 5 mg/kg/h",
+      "Blocks upregulated NMDA receptors in prolonged status"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Super refractory status** is defined when seizures continue despite 24 hours of anaesthetic infusion. The search turns to **autoimmune encephalitis**, a missed metabolic cause, and a specialist anaesthetic plan. Consideration of NORSE and testing for anti-NMDAR antibodies warrants early immunotherapy with methylprednisolone, intravenous immunoglobulin, or plasma exchange.",
+   "say": "Super refractory status is defined when seizures continue despite 24 hours of anaesthetic infusion. The search turns to autoimmune encephalitis, a missed metabolic cause, and a specialist anaesthetic plan. Consideration of NORSE and testing for anti-NMDAR antibodies warrants early immunotherapy with methylprednisolone, intravenous immunoglobulin, or plasma exchange.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aetiological investigation",
+     "points": [
+      "Screen for paraneoplastic and autoimmune antibodies",
+      "Perform lumbar puncture for viral PCR and oligoclonal bands",
+      "High-resolution brain MRI and toxicological screens"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic escalation",
+     "points": [
+      "Early high-dose pulse methylprednisolone therapy",
+      "Intravenous immunoglobulin or therapeutic plasma exchange",
+      "Ketogenic diet and inhalational isoflurane anaesthesia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nonconvulsive status** is in the differential of unexplained coma after a convulsion. **EEG** makes the diagnosis. A normal CT does not exclude it. Electrographic seizure activity frequently persists after motor manifestations have ceased, maintaining continuous cerebral metabolic strain and secondary ischaemic neuronal death.",
+   "say": "Nonconvulsive status is in the differential of unexplained coma after a convulsion. EEG makes the diagnosis. A normal CT does not exclude it. Electrographic seizure activity frequently persists after motor manifestations have ceased, maintaining continuous cerebral metabolic strain and secondary ischaemic neuronal death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Presentation",
+     "Diagnostic Standard",
+     "Management Action"
+    ],
+    "rows": [
+     [
+      "Persistent coma post-convulsion",
+      "Continuous bedside video-EEG monitoring",
+      "Look for rhythmic epileptiform discharges or evolving patterns"
+     ],
+     [
+      "Subtle clinical motor twitches",
+      "Salzburg consensus criteria on EEG",
+      "Diagnoses nonconvulsive status without gross tonic-clonic jerks"
+     ],
+     [
+      "Normal cranial CT scan",
+      "Rules out acute haemorrhage only",
+      "Cannot exclude ongoing nonconvulsive electrographic status"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Glucose** is checked at once. **Hyponatraemia**, hypoxia, and a **toxic alcohol** are treated as causes, not as spectators, while the seizure drugs are given. Correcting acute metabolic derangements and reversing cerebral hypoperfusion is essential to terminate refractory seizures driven by systemic neurochemical disturbances.",
+   "say": "Glucose is checked at once. Hyponatraemia, hypoxia, and a toxic alcohol are treated as causes, not as spectators, while the seizure drugs are given. Correcting acute metabolic derangements and reversing cerebral hypoperfusion is essential to terminate refractory seizures driven by systemic neurochemical disturbances.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapid metabolic screening",
+     "points": [
+      "Point-of-care capillary blood glucose measurement",
+      "Electrolyte panel focusing on sodium and calcium",
+      "Arterial blood gas identifying severe anoxia or acidosis"
+     ]
+    },
+    "right": {
+     "title": "Targeted corrective therapy",
+     "points": [
+      "Intravenous 50% dextrose for confirmed hypoglycaemia",
+      "Hypertonic 3% saline bolus for acute hyponatraemic seizures",
+      "Specific antidotes for isoniazid or ethylene glycol"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Valproate** is avoided in known mitochondrial disease, pregnancy when an alternative exists, and significant **liver failure**. **Fosphenytoin** causes hypotension and is given with monitoring. Sodium valproate precipitates fatal hepatic failure in POLG mutations, while rapid fosphenytoin infusions induce cardiac arrhythmias.",
+   "say": "Valproate is avoided in known mitochondrial disease, pregnancy when an alternative exists, and significant liver failure. Fosphenytoin causes hypotension and is given with monitoring. Sodium valproate precipitates fatal hepatic failure in POLG mutations, while rapid fosphenytoin infusions induce cardiac arrhythmias.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/seizures-and-epilepsy-fig1.webp",
+    "alt": "EEG: Generalized Seizure Activity",
+    "caption": "EEG: Generalized Seizure Activity",
+    "ar": 1.3333
+   }
+  }
+ ]
+}

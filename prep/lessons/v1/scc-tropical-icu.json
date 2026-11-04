@@ -2,64 +2,188 @@
  "v": 1,
  "module": "scc-tropical-icu",
  "subject": "ss-critical-care",
- "title": "Tropical infections in the ICU: high-yield essentials",
+ "title": "Tropical infections in the ICU",
  "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Severe **falciparum malaria** is a medical emergency with high mortality. Start **intravenous artesunate** promptly, using weight-based dosing, and continue it through the early phase of treatment before switching to oral therapy once the patient can swallow safely. Do not delay treatment while awaiting results if suspicion is high. Monitor **blood glucose** closely, because hypoglycaemia is common, and watch for **acute kidney injury** and cerebral involvement.",
-   "say": "Severe falciparum malaria is a medical emergency with high mortality. Start intravenous artesunate promptly, using weight-based dosing, and continue it through the early phase of treatment before switching to oral therapy once the patient can swallow safely. Do not delay treatment while awaiting results if suspicion is high. Monitor blood glucose closely, because hypoglycaemia is common, and watch for acute kidney injury and cerebral involvement.",
-   "vis": null
-  },
-  {
-   "tx": "In **severe dengue**, the main danger is plasma leakage during the **critical phase**, which usually starts as the fever settles. Give isotonic crystalloid cautiously, guided by **haematocrit**, pulse, blood pressure and urine output, rather than large fixed boluses. Avoid NSAIDs because of bleeding risk. Watch closely for **shock** and for fluid overload, especially in patients with reduced cardiac reserve.",
-   "say": "In severe dengue, the main danger is plasma leakage during the critical phase, which usually starts as the fever settles. Give isotonic crystalloid cautiously, guided by haematocrit, pulse, blood pressure and urine output, rather than large fixed boluses. Avoid NSAIDs because of bleeding risk. Watch closely for shock and for fluid overload, especially in patients with reduced cardiac reserve.",
-   "vis": null
-  },
-  {
-   "tx": "**Pulmonary haemorrhage** is a leading cause of death in severe leptospirosis and can appear suddenly with breathlessness and blood-stained sputum. Ventilate with lung-protective settings, using a tidal volume of 6 mL/kg predicted body weight and plateau pressure below 30 cmH2O. Avoid liberal fluid loading. A low platelet count alone does not justify transfusion; give platelets only for active bleeding or significant coagulopathy.",
-   "say": "Pulmonary haemorrhage is a leading cause of death in severe leptospirosis and can appear suddenly with breathlessness and blood-stained sputum. Ventilate with lung-protective settings, using a tidal volume of 6 millilitres per kilogram of predicted body weight and a plateau pressure below 30 centimetres of water. Avoid liberal fluid loading. A low platelet count alone does not justify transfusion; give platelets only for active bleeding or significant coagulopathy.",
+   "tx": "Severe **falciparum malaria** is treated with intravenous **artesunate**, 2.4 mg/kg at 0, 12, and 24 hours, then daily until the patient can take oral treatment. **Quinine** is the alternative only when artesunate is unavailable. Artesunate rapidly kills all circulating parasite stages, clearing parasitaemia significantly faster and lowering mortality compared to quinine.",
+   "say": "Severe falciparum malaria is treated with intravenous artesunate, 2 point 4 mg/kg at 0, 12, and 24 hours, then daily until the patient can take oral treatment. Quinine is the alternative only when artesunate is unavailable. Artesunate rapidly kills all circulating parasite stages, clearing parasitaemia significantly faster and lowering mortality compared to quinine.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-tropical-icu-fig1.webp",
-    "alt": "Chest imaging showing diffuse alveolar haemorrhage due to severe leptospirosis, emphasizing the need for lung-protective ventilation strategies.",
-    "caption": "Pulmonary haemorrhage in severe leptospirosis requires lung-protective ventilation",
-    "ar": 1.8349
+    "src": "v1/kb/media/scrub-typhus-fig1.webp",
+    "alt": "Orientia tsutsugamushi vasculitis, pathognomonic cutaneous eschar and multiorgan failure",
+    "caption": "Orientia tsutsugamushi vasculitis, pathognomonic cutaneous eschar and multiorgan failure",
+    "ar": 1.3333
    }
   },
   {
-   "tx": "In **tetanus**, the toxin disrupts autonomic control, so patients swing between hypertension and hypotension, and may develop **arrhythmias** and profuse sweating. Manage spasms with **benzodiazepines** in a quiet room, and monitor blood pressure closely because it can change abruptly. For **rabies**, once neurological symptoms appear the disease is almost always fatal, so prevention is the priority. Wash every wound thoroughly with soap and water for 15 minutes, then start post-exposure prophylaxis without delay.",
-   "say": "In tetanus, the toxin disrupts autonomic control, so patients swing between hypertension and hypotension, and may develop arrhythmias and profuse sweating. Manage spasms with benzodiazepines in a quiet room, and monitor blood pressure closely because it can change abruptly. For rabies, once neurological symptoms appear the disease is almost always fatal, so prevention is the priority. Wash every wound thoroughly with soap and water for 15 minutes, then start post-exposure prophylaxis without delay.",
-   "vis": null
+   "tx": "Severe malaria is known to cause **cerebral malaria**, shock, acidosis, severe anaemia, **hypoglycaemia**, renal failure, and pulmonary oedema. Hypoglycaemia is checked often because quinine and the disease both cause it. Cytoadherence and microvascular sequestration of parasitised erythrocytes in cerebral capillaries produce coma and uncal herniation.",
+   "say": "Severe malaria is known to cause cerebral malaria, shock, acidosis, severe anaemia, hypoglycaemia, renal failure, and pulmonary oedema. Hypoglycaemia is checked often because quinine and the disease both cause it. Cytoadherence and microvascular sequestration of parasitised erythrocytes in cerebral capillaries produce coma and uncal herniation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severe Malaria Feature",
+     "Pathological Mechanism",
+     "Clinical Priority"
+    ],
+    "rows": [
+     [
+      "Cerebral malaria",
+      "Parasite sequestration in cerebral microvessels",
+      "Maintain airway; avoid steroids or mannitol"
+     ],
+     [
+      "Metabolic acidosis",
+      "Microvascular obstruction and tissue hypoperfusion",
+      "Fluid resuscitation; monitor base deficit"
+     ],
+     [
+      "Hypoglycaemia",
+      "Hyperinsulinaemia from quinine and parasite consumption",
+      "Serial blood glucose checks every 4 hours"
+     ]
+    ]
+   }
   },
   {
-   "tx": "**Tropical multiorgan dysfunction syndrome** arises when several organs fail together, often from sepsis, shock or overlapping infections. Manage it as septic shock: early reassessment, source control, guided fluid resuscitation and organ support. Track lactate, renal function, platelet count and bilirubin daily, and escalate care early rather than late.",
-   "say": "Tropical multiorgan dysfunction syndrome arises when several organs fail together, often from sepsis, shock or overlapping infections. Manage it as septic shock: early reassessment, source control, guided fluid resuscitation and organ support. Track lactate, renal function, platelet count and bilirubin daily, and escalate care early rather than late.",
-   "vis": null
+   "tx": "Severe **dengue** leaks plasma. Fluid is titrated to perfusion and haematocrit, and it is stopped when the leak reverses, or the patient is pushed into **pulmonary oedema**. There is no routine bolus for every high haematocrit. Plasma leakage is transient and self-limiting, typically resolving within forty-eight hours of defervescence.",
+   "say": "Severe dengue leaks plasma. Fluid is titrated to perfusion and haematocrit, and it is stopped when the leak reverses, or the patient is pushed into pulmonary oedema. There is no routine bolus for every high haematocrit. Plasma leakage is transient and self-limiting, typically resolving within forty-eight hours of defervescence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Critical leakage phase",
+     "points": [
+      "Marked by rising haematocrit and pleural effusions",
+      "Titrate crystalloids to maintain urine output 0.5 mL/kg/h",
+      "Use colloids only for refractory profound shock"
+     ]
+    },
+    "right": {
+     "title": "Convalescent reabsorption phase",
+     "points": [
+      "Extravasated fluid re-enters intravascular compartment",
+      "Immediately discontinue intravenous infusion",
+      "Over-resuscitation triggers fatal pulmonary oedema"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Scrub typhus** is treated with **doxycycline**. An **eschar** is useful when present and is often absent. Delay in doxycycline is what makes the ICU course, not a missing eschar. Orientia tsutsugamushi induces widespread endothelial vasculitis, resulting in severe acute respiratory distress syndrome, acute kidney injury, and distributive shock.",
+   "say": "Scrub typhus is treated with doxycycline. An eschar is useful when present and is often absent. Delay in doxycycline is what makes the ICU course, not a missing eschar. Orientia tsutsugamushi induces widespread endothelial vasculitis, resulting in severe acute respiratory distress syndrome, acute kidney injury, and distributive shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Diagnostic Clue",
+     "Frequency in Endemic ICU",
+     "Management Action"
+    ],
+    "rows": [
+     [
+      "Cigarette-burn cutaneous eschar",
+      "Present in 20% to 50% of cases",
+      "Search axilla, groin, and flexural folds"
+     ],
+     [
+      "Systemic vasculitis syndrome",
+      "ARDS, meningoencephalitis, shock",
+      "Start empiric doxycycline 100 mg twice daily"
+     ],
+     [
+      "Alternative agent",
+      "Azithromycin 500 mg daily",
+      "Safe option in pregnancy and severe intolerance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Leptospirosis** with Weil disease or **pulmonary haemorrhage** is treated with penicillin or ceftriaxone, plus support of the lung and the kidney. **Conjunctival suffusion** and calf tenderness are clinical clues. Leptospiral toxin damages alveolar capillary membranes, triggering catastrophic intra-alveolar haemorrhage requiring urgent protective lung mechanical ventilation.",
+   "say": "Leptospirosis with Weil disease or pulmonary haemorrhage is treated with penicillin or ceftriaxone, plus support of the lung and the kidney. Conjunctival suffusion and calf tenderness are clinical clues. Leptospiral toxin damages alveolar capillary membranes, triggering catastrophic intra-alveolar haemorrhage requiring urgent protective lung mechanical ventilation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Severe pulmonary leptospirosis",
+     "points": [
+      "Presents with haemoptysis and bilateral alveolar infiltrates",
+      "Rapidly progresses to asphyxiating diffuse haemorrhage",
+      "Requires early lung protective mechanical ventilation"
+     ]
+    },
+    "right": {
+     "title": "Weil disease manifestation",
+     "points": [
+      "Classic triad of jaundice, renal failure and bleeding",
+      "Conjugated hyperbilirubinaemia out of proportion to transaminases",
+      "Treat with intravenous ceftriaxone or penicillin G"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Melioidosis**, Burkholderia pseudomallei, needs prolonged **eradication** after the intensive phase. It is in the differential of community sepsis in endemic districts, and ordinary short course antibiotics relapse. Initial therapy with intravenous ceftazidime or meropenem must be followed by oral co-trimoxazole for three to six months.",
+   "say": "Melioidosis, Burkholderia pseudomallei, needs prolonged eradication after the intensive phase. It is in the differential of community sepsis in endemic districts, and ordinary short course antibiotics relapse. Initial therapy with intravenous ceftazidime or meropenem must be followed by oral co-trimoxazole for three to six months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Phase",
+     "Regimen Duration",
+     "Antimicrobial Choice"
+    ],
+    "rows": [
+     [
+      "Intensive phase",
+      "At least 14 days IV (longer if deep abscess)",
+      "Ceftazidime 2 g IV 8-hourly or meropenem 1 g IV 8-hourly"
+     ],
+     [
+      "Eradication phase",
+      "12 to 24 weeks oral therapy",
+      "Oral co-trimoxazole plus folic acid to prevent relapse"
+     ],
+     [
+      "Clinical presentation",
+      "Diabetes mellitus is major risk",
+      "Multiple splenic microabscesses and pneumonia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tetanus** autonomic storms are treated in a quiet room, with **magnesium**, benzodiazepines, and wound care. **Metronidazole** is preferred to penicillin. Human tetanus immunoglobulin neutralises unbound toxin. Tetanospasmin permanently blocks inhibitory GABA and glycine release, producing severe muscle rigidity and profound sympathetic overactivity.",
+   "say": "Tetanus autonomic storms are treated in a quiet room, with magnesium, benzodiazepines, and wound care. Metronidazole is preferred to penicillin. Human tetanus immunoglobulin neutralises unbound toxin. Tetanospasmin permanently blocks inhibitory GABA and glycine release, producing severe muscle rigidity and profound sympathetic overactivity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Autonomic storm control",
+     "points": [
+      "Intravenous magnesium sulfate infusion targets 2 to 4 mmol/L",
+      "High-dose diazepam or midazolam controls severe spasms",
+      "Early elective tracheostomy secures compromised airway"
+     ]
+    },
+    "right": {
+     "title": "Etiological eradication",
+     "points": [
+      "Metronidazole 500 mg IV 8-hourly clears Clostridium tetani",
+      "Human tetanus immunoglobulin 3000 to 6000 units IM",
+      "Surgical wound debridement removes toxin source"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rabies** encephalitic disease is fatal once it is clinically established. ICU care is palliative unless the case meets a published treatment protocol in a specialist centre. **Post exposure prophylaxis** is the intervention that works, and it is given before symptoms. Immediate wound washing, vaccine, and rabies immunoglobulin prevent central nervous system invasion.",
+   "say": "Rabies encephalitic disease is fatal once it is clinically established. ICU care is palliative unless the case meets a published treatment protocol in a specialist centre. Post exposure prophylaxis is the intervention that works, and it is given before symptoms. Immediate wound washing, vaccine, and rabies immunoglobulin prevent central nervous system invasion.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-enteric-bleeding_check.webp",
+    "alt": "Capillary fragility assessment with tourniquet test and severe dengue plasma leakage warning signs",
+    "caption": "Capillary fragility assessment with tourniquet test and severe dengue plasma leakage warning signs",
+    "ar": 1.3333
+   }
   }
- ],
- "quiz": [
-  "q_942d763a001d",
-  "q_36e5b176657b",
-  "q_3e3751baa08b"
- ],
- "src": [],
- "refs": [
-  "WHO Guidelines for malaria",
-  "Harrison's Principles of Internal Medicine"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 3,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 45
- }
+ ]
 }

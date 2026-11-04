@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "scc-vasopressors",
+ "subject": "ss-critical-care",
+ "title": "Vasopressors and inotropes",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Noradrenaline** is the first line vasopressor in septic shock. **Adrenaline** is added, or substituted, when noradrenaline does not restore perfusion. **Dopamine** is not first line because it causes more arrhythmia. Noradrenaline acts predominantly on vascular alpha-1 receptors to restore systemic vascular resistance and mean arterial pressure without inducing profound tachycardia.",
+   "say": "Noradrenaline is the first line vasopressor in septic shock. Adrenaline is added, or substituted, when noradrenaline does not restore perfusion. Dopamine is not first line because it causes more arrhythmia. Noradrenaline acts predominantly on vascular alpha-1 receptors to restore systemic vascular resistance and mean arterial pressure without inducing profound tachycardia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anaphylaxis-fig2.webp",
+    "alt": "Adrenergic receptor subtypes alpha-1, beta-1 and beta-2 with intracellular signalling pathways",
+    "caption": "Adrenergic receptor subtypes alpha-1, beta-1 and beta-2 with intracellular signalling pathways",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**VASST** found no overall mortality difference between **vasopressin** and noradrenaline. Vasopressin is a second agent to raise mean pressure or to reduce the noradrenaline dose, typically at a fixed 0.03 units per minute. It is not titrated like noradrenaline. Stimulating vascular V1a receptors bypasses adrenergic desensitisation and restores vascular tone in catecholamine-resistant vasodilatory shock.",
+   "say": "VASST found no overall mortality difference between vasopressin and noradrenaline. Vasopressin is a second agent to raise mean pressure or to reduce the noradrenaline dose, typically at a fixed 0 point 03 units per minute. It is not titrated like noradrenaline. Stimulating vascular V1a receptors bypasses adrenergic desensitisation and restores vascular tone in catecholamine-resistant vasodilatory shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vasopressor Agent",
+     "Receptor Targets",
+     "Dosing Protocol in Septic Shock"
+    ],
+    "rows": [
+     [
+      "Noradrenaline",
+      "Potent alpha-1 with modest beta-1",
+      "Titrate dynamically to target MAP at or above 65 mmHg"
+     ],
+     [
+      "Vasopressin",
+      "V1a vascular smooth muscle receptors",
+      "Administer at fixed 0.03 units/min as catecholamine-sparing adjunct"
+     ],
+     [
+      "VASST trial finding",
+      "Equal overall 28-day mortality",
+      "Trended towards improved survival in milder shock under 15 mcg/min"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ATHOS-3** showed that **angiotensin II** increased the proportion of patients with refractory vasodilatory shock who met a mean pressure target at 3 hours. It is a rescue drug, not a first line drug. Exogenous angiotensin II stimulates AT1 receptors and restores end-organ perfusion in severe high-output shock with renin-angiotensin dysregulation.",
+   "say": "ATHOS-3 showed that angiotensin II increased the proportion of patients with refractory vasodilatory shock who met a mean pressure target at 3 hours. It is a rescue drug, not a first line drug. Exogenous angiotensin II stimulates AT1 receptors and restores end-organ perfusion in severe high-output shock with renin-angiotensin dysregulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ATHOS-3 primary endpoint",
+     "points": [
+      "69.9% achieved targeted MAP rise vs 23.4% placebo",
+      "Significant sparing of background catecholamine doses",
+      "Demonstrated efficacy in severe vasoplegic shock"
+     ]
+    },
+    "right": {
+     "title": "Clinical positioning",
+     "points": [
+      "Reserved as third-line rescue after noradrenaline and vasopressin",
+      "Useful in acute kidney injury with high baseline renin",
+      "Monitored closely for venous thromboembolic complications"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dobutamine** is the inotrope for persistent hypoperfusion with cardiac dysfunction after volume and pressure are adequate. **Levosimendan** did not improve outcomes in **LeoPARDS** and is not routine. Dobutamine stimulates cardiac beta-1 receptors to augment myocardial contractility and stroke volume, overcoming septic myocardial depression and restoring microvascular capillary flow.",
+   "say": "Dobutamine is the inotrope for persistent hypoperfusion with cardiac dysfunction after volume and pressure are adequate. Levosimendan did not improve outcomes in LeoPARDS and is not routine. Dobutamine stimulates cardiac beta-1 receptors to augment myocardial contractility and stroke volume, overcoming septic myocardial depression and restoring microvascular capillary flow.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inotropic Drug",
+     "Mechanism",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "Dobutamine",
+      "Beta-1 adrenergic agonist with mild beta-2",
+      "Add 2.5 to 20 mcg/kg/min for persistent low cardiac output"
+     ],
+     [
+      "Levosimendan",
+      "Calcium sensitizer and K-ATP opener",
+      "LeoPARDS showed no benefit and more tachyarrhythmias in sepsis"
+     ],
+     [
+      "Milrinone",
+      "Phosphodiesterase-3 enzyme inhibitor",
+      "Alternative inotrope; causes peripheral vasodilatation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Phenylephrine** is a pure alpha agonist used when tachyarrhythmia forbids noradrenaline. It can drop cardiac output by raising afterload, so it is a poor choice in a failing left ventricle. Pure peripheral vasoconstriction increases systemic vascular resistance at the expense of stroke volume when myocardial contractile reserve is severely impaired.",
+   "say": "Phenylephrine is a pure alpha agonist used when tachyarrhythmia forbids noradrenaline. It can drop cardiac output by raising afterload, so it is a poor choice in a failing left ventricle. Pure peripheral vasoconstriction increases systemic vascular resistance at the expense of stroke volume when myocardial contractile reserve is severely impaired.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Phenylephrine clinical utility",
+     "points": [
+      "Pure alpha-1 adrenergic vascular agonist",
+      "Zero direct chronotropic or inotropic stimulation",
+      "Indicated when severe tachyarrhythmias limit noradrenaline"
+     ]
+    },
+    "right": {
+     "title": "Haemodynamic hazards",
+     "points": [
+      "Abruptly elevates left ventricular afterload",
+      "Reduces cardiac output in patients with systolic dysfunction",
+      "Triggers reflex bradycardia and decreases splanchnic perfusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Milrinone** is a phosphodiesterase inhibitor that dilates the pulmonary vascular bed and can worsen hypotension. It is an option in right ventricular failure when blood pressure allows, not a reflex inotrope. Inhibiting cyclic AMP breakdown augments lusitropy and reduces right ventricular afterload, but requires co-administration of a vasopressor to maintain perfusion pressure.",
+   "say": "Milrinone is a phosphodiesterase inhibitor that dilates the pulmonary vascular bed and can worsen hypotension. It is an option in right ventricular failure when blood pressure allows, not a reflex inotrope. Inhibiting cyclic AMP breakdown augments lusitropy and reduces right ventricular afterload, but requires co-administration of a vasopressor to maintain perfusion pressure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Action",
+     "Haemodynamic Effect",
+     "Clinical Caveat"
+    ],
+    "rows": [
+     [
+      "Inodilator property",
+      "Increases cardiac index while reducing SVR and PVR",
+      "Avoid boluses to prevent sudden cardiovascular collapse"
+     ],
+     [
+      "Right ventricular unloading",
+      "Lowers pulmonary vascular resistance selectively",
+      "First-line inotrope for pulmonary hypertension with RV failure"
+     ],
+     [
+      "Renal elimination",
+      "Extended elimination half-life in renal failure",
+      "Requires substantial dose reductions in acute kidney injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methylene blue** inhibits the nitric oxide pathway and is a rescue for **refractory vasoplegia**. It is avoided in glucose-6-phosphate dehydrogenase deficiency and with serotonergic drugs. Blocking soluble guanylyl cyclase prevents excessive cyclic GMP accumulation, restoring vascular smooth muscle tone in postcardiac surgery vasoplegia and refractory distributive shock.",
+   "say": "Methylene blue inhibits the nitric oxide pathway and is a rescue for refractory vasoplegia. It is avoided in glucose-6-phosphate dehydrogenase deficiency and with serotonergic drugs. Blocking soluble guanylyl cyclase prevents excessive cyclic GMP accumulation, restoring vascular smooth muscle tone in postcardiac surgery vasoplegia and refractory distributive shock.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanism and indication",
+     "points": [
+      "Inhibits endothelial nitric oxide synthase and guanylyl cyclase",
+      "Rapidly elevates systemic vascular resistance in vasoplegia",
+      "Effective rescue in postcardiopulmonary bypass shock"
+     ]
+    },
+    "right": {
+     "title": "Safety contraindications",
+     "points": [
+      "Severe haemolytic anaemia in G6PD deficiency",
+      "Potent MAO inhibitor causing fatal serotonin syndrome with SSRIs",
+      "Causes transient false desaturation on pulse oximeters"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A **peripheral vasopressor** is acceptable for a short time if central access would delay treatment, with a protocol for extravasation. **Phentolamine** is the local antidote for a tissue injury from extravasation. Infusing dilute noradrenaline through a well-sited large antecubital vein prevents resuscitation delays while preparing for definitive ultrasound-guided central line placement.",
+   "say": "A peripheral vasopressor is acceptable for a short time if central access would delay treatment, with a protocol for extravasation. Phentolamine is the local antidote for a tissue injury from extravasation. Infusing dilute noradrenaline through a well-sited large antecubital vein prevents resuscitation delays while preparing for definitive ultrasound-guided central line placement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiogenic-shock-fig2.webp",
+    "alt": "Haemodynamic spiral of refractory myocardial dysfunction, systemic hypoperfusion and vasopressor support",
+    "caption": "Haemodynamic spiral of refractory myocardial dysfunction, systemic hypoperfusion and vasopressor support",
+    "ar": 1.3333
+   }
+  }
+ ]
+}
