@@ -6,13 +6,13 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "Infectious vulnerability following kidney transplantation follows Fishman's classic **three-period timeline**: Month **1** is dominated by nosocomial wound and surgical complications; Months **1** to **6** feature opportunistic viral and fungal pathogens; and beyond Month **6**, patients experience community-acquired pneumonia or chronic viral complications.",
-   "say": "Infectious vulnerability following kidney transplantation follows Fishman's classic three-period timeline: Month 1 is dominated by nosocomial wound and surgical complications; Months 1 to 6 feature opportunistic viral and fungal pathogens; and beyond Month 6, patients experience community-acquired pneumonia or chronic viral complications.",
+   "tx": "Infectious vulnerability following kidney transplantation follows the **Fishman timeline**: Month **1** is dominated by nosocomial wound and surgical complications; Months **1** to **6** feature opportunistic viral and fungal pathogens; and beyond Month **6**, patients experience community-acquired pneumonia or chronic viral complications.",
+   "say": "Infectious vulnerability following kidney transplantation follows the Fishman timeline: Month 1 is dominated by nosocomial wound and surgical complications; Months 1 to 6 feature opportunistic viral and fungal pathogens; and beyond Month 6, patients experience community-acquired pneumonia or chronic viral complications.",
    "vis": {
     "kind": "image",
     "src": "v1/lessons/media/snp-transplant-infections-fig1.webp",
     "alt": "Infection timeline after renal transplant with prophylaxis",
-    "caption": "Post-transplantation timeline of opportunistic infections and prophylaxis (StewardMD). Features: Fishman timeline, CMV.",
+    "caption": "Post-transplantation timeline of opportunistic infections and prophylaxis (StewardMD).",
     "ar": 1.7778
    }
   },
@@ -100,8 +100,8 @@
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/bk-virus-nephropathy-fig1.webp",
-    "alt": "BKPyV Nephropathy Pathology and Ground-Glass Inclusions",
-    "caption": "Tubular epithelial ground-glass nuclear inclusions and SV40 large T antigen staining (StewardMD). Features: PTLD, Epstein-Barr virus, EBV, lymphoproliferative.",
+    "alt": "BK virus nephropathy with ground-glass nuclear inclusions",
+    "caption": "Tubular cells with ground-glass nuclear inclusions that stain for SV40 large T antigen (StewardMD).",
     "ar": 1.7778
    }
   },
@@ -186,6 +186,31 @@
       "Inactivated SARS-CoV-2 and Hepatitis B vaccines"
      ]
     }
+   }
+  },
+  {
+   "tx": "**Post-transplant lymphoproliferative disorder** (**PTLD**) is driven mainly by **Epstein-Barr virus** (**EBV**). The highest risk is an EBV-seronegative recipient of an EBV-seropositive kidney. The growth is usually a B-cell lymphoproliferative clone. Reducing immunosuppression is the first treatment, and rituximab is added when the cells express CD20.",
+   "say": "Post-transplant lymphoproliferative disorder is usually driven by Epstein-Barr virus. The highest risk is a recipient who has never met the virus and receives a kidney from a donor who has. Reducing immunosuppression is the first treatment, and rituximab is added when the B cells express CD20.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Cause",
+      "Epstein-Barr virus driving a B-cell clone"
+     ],
+     [
+      "Highest risk",
+      "EBV-seronegative recipient, EBV-seropositive donor"
+     ],
+     [
+      "First treatment",
+      "Reduce immunosuppression, then rituximab if CD20 is present"
+     ]
+    ]
    }
   }
  ],

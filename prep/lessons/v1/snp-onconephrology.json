@@ -6,37 +6,14 @@
  "gen": "AI",
  "steps": [
   {
-   "tx": "The consensus **Cairo-Bishop diagnostic criteria** for laboratory **tumor lysis syndrome** (**TLS**) require two or more metabolic derangements within **3** to **7** days of initiating chemotherapy: serum **uric acid** >= **8.0** mg/dL, **potassium** >= **6.0** mmol/L, phosphorus >= **4.5** mg/dL, or **calcium** <= **7.0** mg/dL (or a **25%** change from baseline).",
-   "say": "The consensus Cairo-Bishop diagnostic criteria for laboratory tumor lysis syndrome require two or more metabolic derangements within 3 to 7 days of initiating chemotherapy: serum uric acid 8.0 mg/dL or higher, potassium 6.0 mmol/L or higher, phosphorus 4.5 mg/dL or higher, or calcium 7.0 mg/dL or lower.",
+   "tx": "The consensus **Cairo-Bishop diagnostic criteria** for laboratory **tumor lysis syndrome** (**TLS**) require two or more metabolic derangements within **3** to **7** days of initiating chemotherapy: serum **uric acid** >= **8.0** mg/dL, **hyperkalemia** (potassium >= **6.0** mmol/L), phosphorus >= **4.5** mg/dL, or **calcium** <= **7.0** mg/dL (or a **25%** change from baseline).",
+   "say": "The consensus Cairo-Bishop diagnostic criteria for laboratory tumor lysis syndrome require two or more metabolic derangements within 3 to 7 days of initiating chemotherapy: serum uric acid 8.0 mg/dL or higher, hyperkalemia with potassium 6.0 mmol/L or higher, phosphorus 4.5 mg/dL or higher, or calcium 7.0 mg/dL or lower.",
    "vis": {
-    "kind": "table",
-    "cols": [
-     "Laboratory Parameter",
-     "Cairo-Bishop Diagnostic Cutoff",
-     "Clinical Consequence"
-    ],
-    "rows": [
-     [
-      "Hyperuricemia",
-      "Uric acid >= 8.0 mg/dL (or 25% increase)",
-      "Acute intraluminal uric acid crystalluria"
-     ],
-     [
-      "Hyperkalemia",
-      "Potassium >= 6.0 mmol/L (or 25% increase)",
-      "Lethal ventricular cardiac arrhythmias"
-     ],
-     [
-      "Hyperphosphatemia",
-      "Phosphorus >= 4.5 mg/dL (or 25% increase)",
-      "Metastatic calcium-phosphate precipitation"
-     ],
-     [
-      "Hypocalcemia",
-      "Calcium <= 7.0 mg/dL (or 25% decrease)",
-      "Neuromuscular tetany and QT prolongation"
-     ]
-    ]
+    "kind": "image",
+    "src": "v1/kb/media/tumour-lysis-syndrome-fig1.webp",
+    "alt": "Tumour lysis releasing potassium, phosphate, and uric acid, with crystals in tubules",
+    "caption": "Lysing tumour cells release potassium, phosphate, and uric acid, and calcium phosphate crystals block tubules (StewardMD).",
+    "ar": 1.7778
    }
   },
   {
@@ -191,11 +168,29 @@
    "tx": "Emerging cellular therapies including **CAR T-cell therapy** can precipitate severe **cytokine release syndrome** (**CRS**) driven by massive supraphysiological release of interleukin-6 (**IL-6**). Systemic capillary hyperpermeability and vasodilation provoke profound hypotension and acute kidney injury, which is effectively reversed by the monoclonal anti-IL-6 receptor antibody **tocilizumab**.",
    "say": "Emerging cellular therapies including CAR T-cell therapy can precipitate severe cytokine release syndrome driven by massive supraphysiological release of interleukin-6. Systemic capillary hyperpermeability and vasodilation provoke profound hypotension and acute kidney injury, which is effectively reversed by the monoclonal anti-IL-6 receptor antibody tocilizumab.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/myeloma-fig1.webp",
-    "alt": "Multiple Myeloma Pathophysiology and Cast Nephropathy",
-    "caption": "Malignancy-associated cytokine release, paraproteinemia, and renal damage (StewardMD).",
-    "ar": 1.7778
+    "kind": "table",
+    "cols": [
+     "Cytokine release syndrome",
+     "What happens"
+    ],
+    "rows": [
+     [
+      "Trigger",
+      "CAR T-cell therapy releases interleukin-6"
+     ],
+     [
+      "Circulation",
+      "Vasodilation and capillary leak cause hypotension"
+     ],
+     [
+      "Kidney",
+      "The pressure drop produces acute kidney injury"
+     ],
+     [
+      "Treatment",
+      "Tocilizumab blocks the interleukin-6 receptor"
+     ]
+    ]
    }
   }
  ],
