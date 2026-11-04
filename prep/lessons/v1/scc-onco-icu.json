@@ -2,128 +2,202 @@
  "v": 1,
  "module": "scc-onco-icu",
  "subject": "ss-critical-care",
- "title": "Tumour lysis syndrome in the critically ill cancer patient",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "**Tumour lysis syndrome** (TLS) follows rapid release of intracellular contents after cytotoxic therapy kills tumour cells. The release causes **hyperkalaemia**, **hyperphosphataemia**, hypocalcaemia, and **hyperuricaemia**, which can lead to acute kidney injury and arrhythmias. Burkitt lymphoma, high-grade non-Hodgkin lymphoma, and acute leukaemia carry the highest risk. Pre-existing renal impairment is an established predisposing factor, as is high tumour proliferation rate and large tumour burden.",
-   "say": "Tumour lysis syndrome follows rapid release of intracellular contents after cytotoxic therapy kills tumour cells. The release causes hyperkalaemia, hyperphosphataemia, hypocalcaemia, and hyperuricaemia, which can lead to acute kidney injury and arrhythmias. Burkitt lymphoma, high-grade non-Hodgkin lymphoma, and acute leukaemia carry the highest risk. Pre-existing renal impairment is an established predisposing factor, as is high tumour proliferation rate and large tumour burden.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-onco-icu-fig1.webp",
-    "alt": "Diagram illustrating cancer cell lysis, releasing potassium, phosphate, and uric acid, leading to hyperkalaemia, hyperphosphataemia, hypocalcaemia, and acute kidney injury.",
-    "caption": "Pathophysiology of tumour lysis syndrome and its clinical consequences",
-    "ar": 1.8349
-   }
-  },
-  {
-   "tx": "Diagnosis of **tumour lysis syndrome** relies on the **Cairo-Bishop** definitions. Laboratory disease requires abnormal levels of uric acid, potassium, phosphate or calcium around the time of cytotoxic treatment, judged against a recent window before and after therapy. Clinical disease adds kidney injury, cardiac rhythm disturbance or seizures. Raised phosphate is typical after chemotherapy, whereas spontaneous breakdown may leave phosphate normal. Dangerous **ventricular arrhythmias** make continuous ECG monitoring essential.",
-   "say": "Diagnosis of tumour lysis syndrome relies on the Cairo-Bishop definitions. Laboratory disease needs abnormal levels of uric acid, potassium, phosphate or calcium around the time of cytotoxic treatment, judged against a recent window before and after therapy. Clinical disease adds kidney injury, cardiac rhythm disturbance or seizures. Raised phosphate is typical after chemotherapy, whereas spontaneous breakdown may leave phosphate normal. Dangerous ventricular arrhythmias make continuous ECG monitoring essential.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Laboratory TLS",
-     "Clinical TLS"
-    ],
-    "rows": [
-     [
-      "Lab criteria",
-      "Abnormal uric acid, potassium, phosphate or calcium",
-      "Lab criteria plus organ effect"
-     ],
-     [
-      "Organ effect",
-      "None",
-      "Renal impairment, arrhythmia or seizure"
-     ],
-     [
-      "Management focus",
-      "Prevention and monitoring",
-      "Urgent treatment and dialysis if needed"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Prevention is the priority. Start **allopurinol** 24 to 48 hours before chemotherapy, or use **rasburicase** when uric acid is high or the patient is at high risk. Rasburicase converts uric acid to allantoin, which is far more soluble. Check G6PD status before rasburicase, because it can cause haemolysis in G6PD deficiency. Give hydration with urine output near 2 mL/kg/h. Avoid potassium and calcium in initial fluids, and avoid routine alkalinisation because it promotes calcium-phosphate precipitation.",
-   "say": "Prevention is the priority. Start allopurinol 24 to 48 hours before chemotherapy, or use rasburicase when uric acid is high or the patient is at high risk. Rasburicase converts uric acid to allantoin, which is far more soluble. Check G6PD status before rasburicase, because it can cause haemolysis in G6PD deficiency. Give hydration with urine output near 2 mL per kilogram per hour. Avoid potassium and calcium in initial fluids, and avoid routine alkalinisation because it promotes calcium-phosphate precipitation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "High risk?"
-     },
-     {
-      "id": "b",
-      "label": "Allopurinol 24-48 h before"
-     },
-     {
-      "id": "c",
-      "label": "Rasburicase if uric acid high"
-     },
-     {
-      "id": "d",
-      "label": "Hydrate to 2 mL/kg/h"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b",
-      "Standard"
-     ],
-     [
-      "a",
-      "c",
-      "Very high"
-     ],
-     [
-      "b",
-      "d"
-     ],
-     [
-      "c",
-      "d"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Beyond TLS, the critically ill cancer patient often has **neutropenic sepsis**, **cytokine release syndrome** after CAR-T therapy, and **haemophagocytic lymphohistiocytosis** (HLH). HLH is diagnosed by at least five of eight HLH-2004 criteria. Malignancy is the commonest adult trigger, and malignancy-associated HLH carries a much poorer median survival than non-malignant HLH. Differentiation syndrome occurs with arsenic and retinoic acid therapy in acute promyelocytic leukaemia.",
-   "say": "Beyond TLS, the critically ill cancer patient often has neutropenic sepsis, cytokine release syndrome after CAR-T therapy, and haemophagocytic lymphohistiocytosis. HLH is diagnosed by at least five of eight HLH-2004 criteria. Malignancy is the commonest adult trigger, and malignancy-associated HLH carries a much poorer median survival than non-malignant HLH. Differentiation syndrome occurs with arsenic and retinoic acid therapy in acute promyelocytic leukaemia.",
-   "vis": null
-  },
-  {
-   "tx": "Set goals early. A **time limited trial** of intensive care is reasonable when the expected outcome is poor, with shared decisions involving the patient and family. Relapsed lymphoma with HLH and multiorgan failure that does not respond to bridging therapy has a poor prognosis, and **haematopoietic stem cell transplant** is the only potentially curative option once stable. Document the review points and the criteria for stopping escalation.",
-   "say": "Set goals early. A time limited trial of intensive care is reasonable when the expected outcome is poor, with shared decisions involving the patient and family. Relapsed lymphoma with HLH and multiorgan failure that does not respond to bridging therapy has a poor prognosis, and haematopoietic stem cell transplant is the only potentially curative option once stable. Document the review points and the criteria for stopping escalation.",
-   "vis": null
-  }
- ],
+ "title": "Critically ill cancer and immunocompromised patient",
+ "minutes": 8,
+ "gen": "AI",
  "quiz": [
   "q_1fbeea96db52",
   "q_496f4173ba93",
   "q_21125503a1f0"
  ],
- "src": [],
- "refs": [
-  "Cairo MS, Bishop M. Tumour lysis syndrome: new therapeutic strategies and classification. British Journal of Haematology (2004)",
-  "Histiocyte Society HLH-2004 diagnostic criteria"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 27
- }
+ "steps": [
+  {
+   "tx": "**Tumour lysis** is two or more of a high uric acid, a high potassium, a high phosphate, and a low calcium, from a tumour that is breaking down. Clinical lysis is kidney injury, an arrhythmia, or a seizure. **Rasburicase** destroys uric acid that is already present. **Allopurinol** only stops new uric acid, and it is the drug when **G6PD** deficiency rules out rasburicase, because rasburicase causes haemolysis in that deficiency.",
+   "say": "Tumour lysis is two or more of a high uric acid, a high potassium, a high phosphate, and a low calcium, from a tumour that is breaking down. Clinical lysis is kidney injury, an arrhythmia, or a seizure. Rasburicase destroys uric acid that is already present. Allopurinol only stops new uric acid, and it is the drug when G6PD deficiency rules out rasburicase, because rasburicase causes haemolysis in that deficiency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/scc-onco-icu-fig1.webp",
+    "alt": "Tumour lysis cascade from cell breakdown to uric acid, potassium, phosphate, and low calcium.",
+    "caption": "Cell breakdown releasing uric acid, potassium, and phosphate, with the calcium falling. The dose, about 0.2 mg/kg of rasburicase, is not drawn, and neither is the G6PD ban. Calcium is for tetany or an arrhythmia only, because it precipitates with phosphate. Credit: StewardMD.",
+    "ar": 1.835
+   }
+  },
+  {
+   "tx": "**Neutropenic sepsis** is fever when the neutrophil count is below 500 per microlitre, or is about to fall after cytotoxic treatment. An **antipseudomonal** beta-lactam is given within 1 hour. The count is not awaited if that history is clear. Vancomycin is added for a suspicious line, severe mucositis, resistant gram-positive infection, or shock, and it is not automatic for every fever.",
+   "say": "Neutropenic sepsis is fever when the neutrophil count is below 500 per microlitre, or is about to fall after cytotoxic treatment. An antipseudomonal beta-lactam is given within 1 hour. The count is not awaited if that history is clear. Vancomycin is added for a suspicious line, severe mucositis, resistant gram-positive infection, or shock, and it is not automatic for every fever.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/febrile-neutropenia-fig1.webp",
+    "alt": "Mucosal injury, neutrophils below 500, and an antipseudomonal antibiotic within 1 hour.",
+    "caption": "Mucosal barrier injury, a neutrophil count below 500, and an antipseudomonal beta-lactam within 1 hour. Vancomycin is limited to listed indications. Any later antifungal line on the figure is not a clock this lesson sets. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**Cytokine release syndrome** after CAR-T cell therapy is fever, then hypotension or hypoxia. Grade 2 or higher is treated with **tocilizumab**. Immune effector cell **neurotoxicity** is confusion, loss of speech, or seizures, and it is treated with a corticosteroid. Tocilizumab does not usefully enter the brain, so it is not the treatment of that neurotoxicity.",
+   "say": "Cytokine release syndrome after CAR-T cell therapy is fever, then hypotension or hypoxia. Grade 2 or higher is treated with tocilizumab. Immune effector cell neurotoxicity is confusion, loss of speech, or seizures, and it is treated with a corticosteroid. Tocilizumab does not usefully enter the brain, so it is not the treatment of that neurotoxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cytokine release syndrome",
+     "points": [
+      "Fever, then hypotension or hypoxia",
+      "Grade 2 or higher gets tocilizumab",
+      "This is not the pneumonia use"
+     ]
+    },
+    "right": {
+     "title": "Neurotoxicity",
+     "points": [
+      "Confusion, speech loss, or seizures",
+      "A corticosteroid is the treatment",
+      "Tocilizumab does not treat the brain"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Leukostasis** is sludging in the lungs and the brain. It is more likely above a white cell count of 100 times 10 to the 9 per litre in acute myeloid leukaemia, and at still higher counts in lymphoblastic leukaemia. Red cells are not transfused before the count falls, because viscosity would rise. **Hydroxyurea** or induction chemotherapy is the treatment. **Leukapheresis** is for symptoms, and it is not for a number alone.",
+   "say": "Leukostasis is sludging in the lungs and the brain. It is more likely above a white cell count of 100 times 10 to the 9 per litre in acute myeloid leukaemia, and at still higher counts in lymphoblastic leukaemia. Red cells are not transfused before the count falls, because viscosity would rise. Hydroxyurea or induction chemotherapy is the treatment. Leukapheresis is for symptoms, and it is not for a number alone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Count",
+      "More likely above 100 in myeloid leukaemia"
+     ],
+     [
+      "Red cells",
+      "Not before the count falls"
+     ],
+     [
+      "Hydroxyurea or induction",
+      "The treatment"
+     ],
+     [
+      "Leukapheresis",
+      "For symptoms, not a number alone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Differentiation syndrome** from **all-trans retinoic acid** or arsenic trioxide is fever, weight gain, pulmonary infiltrates, and hypotension in acute promyelocytic leukaemia. **Dexamethasone** 10 mg every 12 hours is started. The differentiating drug is continued unless the reaction is immediately life-threatening. Stopping it casually is how the leukaemia is allowed to return.",
+   "say": "Differentiation syndrome from all-trans retinoic acid or arsenic trioxide is fever, weight gain, pulmonary infiltrates, and hypotension in acute promyelocytic leukaemia. Dexamethasone 10 mg every 12 hours is started. The differentiating drug is continued unless the reaction is immediately life-threatening. Stopping it casually is how the leukaemia is allowed to return.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "ATRA or arsenic, then fever and infiltrates"
+     },
+     {
+      "id": "b",
+      "label": "Dexamethasone 10 mg every 12 hours"
+     },
+     {
+      "id": "c",
+      "label": "Continue the differentiating drug"
+     },
+     {
+      "id": "d",
+      "label": "Stop it only if immediately life-threatening"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Haemophagocytic lymphohistiocytosis** is fever, cytopenias, a high triglyceride or a low fibrinogen, and often haemophagocytosis, from a cytokine storm. A **ferritin** above 10000 ng/mL is support for the diagnosis, and it does not prove it in an adult with sepsis or liver failure. Severe disease is treated with **etoposide** and dexamethasone, and the trigger is treated at the same time.",
+   "say": "Haemophagocytic lymphohistiocytosis is fever, cytopenias, a high triglyceride or a low fibrinogen, and often haemophagocytosis, from a cytokine storm. A ferritin above 10000 ng/mL is support for the diagnosis, and it does not prove it in an adult with sepsis or liver failure. Severe disease is treated with etoposide and dexamethasone, and the trigger is treated at the same time.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What supports HLH",
+     "points": [
+      "Fever and cytopenias",
+      "High triglyceride or low fibrinogen",
+      "Ferritin above 10000 supports, does not prove"
+     ]
+    },
+    "right": {
+     "title": "Treatment of severe disease",
+     "points": [
+      "Etoposide and dexamethasone",
+      "Treat infection or lymphoma too",
+      "Sepsis can raise ferritin without HLH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diffuse alveolar haemorrhage** is infiltrates and a falling haemoglobin, and the lavage is bloodier with each aliquot. **Engraftment syndrome** is fever, a rash, and capillary leak as the neutrophil count recovers after a stem-cell transplant. Both can look like infection. A corticosteroid is used once cultures are sent and infection is being treated, and it is not a substitute for that search.",
+   "say": "Diffuse alveolar haemorrhage is infiltrates and a falling haemoglobin, and the lavage is bloodier with each aliquot. Engraftment syndrome is fever, a rash, and capillary leak as the neutrophil count recovers after a stem-cell transplant. Both can look like infection. A corticosteroid is used once cultures are sent and infection is being treated, and it is not a substitute for that search.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Picture",
+     "Clue"
+    ],
+    "rows": [
+     [
+      "Diffuse alveolar haemorrhage",
+      "Lavage bloodier with each aliquot"
+     ],
+     [
+      "Engraftment syndrome",
+      "Fever, rash, leak as neutrophils return"
+     ],
+     [
+      "Both",
+      "Can look like infection"
+     ],
+     [
+      "Steroid",
+      "After cultures, not instead of them"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **time-limited trial** is a named treatment, the outcome that would count as benefit, and the day the team and the family will look again. It is for a real but uncertain chance of recovery, such as a first episode of organ failure in a new cancer. It is not an open-ended promise, and it is not a way to avoid saying that a treatment cannot work.",
+   "say": "A time-limited trial is a named treatment, the outcome that would count as benefit, and the day the team and the family will look again. It is for a real but uncertain chance of recovery, such as a first episode of organ failure in a new cancer. It is not an open-ended promise, and it is not a way to avoid saying that a treatment cannot work.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "A time-limited trial",
+     "points": [
+      "Names the treatment and the benefit",
+      "Names the day of review",
+      "For a real but uncertain chance"
+     ]
+    },
+    "right": {
+     "title": "What it is not",
+     "points": [
+      "An open-ended promise",
+      "A way to avoid a clear no",
+      "Care with no chance of the named benefit"
+     ]
+    }
+   }
+  }
+ ]
 }

@@ -2,104 +2,202 @@
  "v": 1,
  "module": "scc-aki",
  "subject": "ss-critical-care",
- "title": "Acute kidney injury in critical illness: staging, causes and key management",
- "minutes": 5,
- "steps": [
-  {
-   "tx": "**KDIGO criteria** flag acute kidney injury when serum creatinine climbs or urine volume drops. The most severe band, **stage 3**, applies when creatinine reaches three times the pre-illness value, or passes 4.0 mg/dL, or when dialysis is begun. Very low urine output lasting a full day, or no urine for half a day, also qualifies. Compare against the latest steady value recorded before the illness, since a reassuring first result can still hide evolving injury.",
-   "say": "KDIGO criteria flag acute kidney injury when creatinine rises or urine output falls. The most severe band, stage 3, applies when creatinine reaches three times the pre-illness value, or climbs past 4.0 milligrams per decilitre, or when dialysis is started. Very low urine output lasting a full day, or no urine for half a day, also qualifies. Always compare with the latest steady value recorded before the illness. A reassuring first blood test does not rule out evolving injury, because the blood level responds slowly to damage.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Stage 3 threshold"
-    ],
-    "rows": [
-     [
-      "Serum creatinine",
-      "Three times baseline, or 4.0 mg/dL or more"
-     ],
-     [
-      "Urine output",
-      "Under 0.3 mL/kg/h for 24 hours or longer"
-     ],
-     [
-      "Absent urine",
-      "No urine for 12 hours or longer"
-     ],
-     [
-      "Dialysis",
-      "Kidney replacement therapy started"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Classify the **cause** as prerenal, intrinsic or postrenal. Prerenal causes include hypovolaemia, sepsis, cardiorenal and hepatorenal states, NSAIDs and RAS blockers. Intrinsic causes include acute tubular injury, interstitial nephritis and glomerulonephritis. Postrenal causes are obstruction, excluded early by bladder scan and renal ultrasound. Urine sodium or **FeNa** below 1% supports prerenal states, but is unreliable after diuretics, in sepsis, contrast AKI and CKD.",
-   "say": "Classify the cause as prerenal, intrinsic or postrenal. Prerenal causes include hypovolaemia, sepsis, cardiorenal and hepatorenal states, NSAIDs and RAS blockers. Intrinsic causes include acute tubular injury, interstitial nephritis and glomerulonephritis. Postrenal causes are obstruction, which is excluded early with a bladder scan and renal ultrasound. Urine sodium or FENa below 1 percent supports a prerenal state, but it is unreliable after diuretics, in sepsis, contrast AKI and CKD.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Prerenal",
-     "points": [
-      "Hypovolaemia or sepsis",
-      "Cardiorenal or hepatorenal",
-      "NSAIDs and RAS blockers",
-      "FeNa below 1 percent"
-     ]
-    },
-    "right": {
-     "title": "Intrinsic and postrenal",
-     "points": [
-      "Acute tubular injury",
-      "Interstitial nephritis or GN",
-      "Obstruction on ultrasound",
-      "FeNa unreliable in sepsis"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Give **buffered crystalloid** only for hypovolaemia or likely fluid responsiveness. Ringer lactate or Plasma-Lyte is preferred over 0.9% saline, given in boluses with reassessment after each. Never use hydroxyethyl starch, which raises the need for dialysis. Target MAP above 65 mmHg and add a vasopressor if fluids fail. Avoid repeated boluses in an oliguric patient who is already euvolaemic or overloaded.",
-   "say": "Give buffered crystalloid only for hypovolaemia or likely fluid responsiveness. Ringer lactate or Plasma-Lyte is preferred over 0.9 percent saline, given in boluses with reassessment after each. Never use hydroxyethyl starch, which raises the need for dialysis. Target a mean arterial pressure above 65 mmHg and add a vasopressor if fluids fail. Avoid repeated boluses in an oliguric patient who is already euvolaemic or overloaded.",
-   "vis": null
-  },
-  {
-   "tx": "Use **loop diuretics** only for clinically significant volume overload, given as intermittent IV boluses. Diuretics and low-dose dopamine do not prevent or treat AKI itself. For severe metabolic acidosis with pH below 7.20 and no other urgent dialysis indication, IV sodium bicarbonate is suggested over dialysis, watching for volume overload and hypernatraemia. Start dialysis for life-threatening complications such as refractory pulmonary oedema, hyperkalaemia or dialysable toxins.",
-   "say": "Use loop diuretics only for clinically significant volume overload, given as intermittent IV boluses. Diuretics and low-dose dopamine do not prevent or treat AKI itself. For severe metabolic acidosis with pH below 7.20 and no other urgent dialysis indication, IV sodium bicarbonate is suggested over dialysis, watching for volume overload and hypernatraemia. Start dialysis for life-threatening complications such as refractory pulmonary oedema, hyperkalaemia or dialysable toxins.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-aki-fig1.webp",
-    "alt": "Flow chart showing management of acute kidney injury complications, including use of diuretics for volume overload, bicarbonate for acidosis, and indications for dialysis.",
-    "caption": "Management of AKI complications: diuretics, bicarbonate, and dialysis indications",
-    "ar": 1.8349
-   }
-  }
- ],
+ "title": "Acute kidney injury in critical illness",
+ "minutes": 8,
+ "gen": "AI",
  "quiz": [
   "q_1291bcc53e1f",
   "q_2b0124ee78da",
   "q_3be7f0f0af1c"
  ],
- "src": [
-  "kb-clinical-protocols-acute-kidney-injury"
- ],
- "refs": [
-  "KDIGO Clinical Practice Guideline for Acute Kidney Injury"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 3,
-  "kbWords": 661,
-  "itemN": 46
- }
+ "steps": [
+  {
+   "tx": "**KDIGO** **stage 1** is the mildest band: a creatinine rise above the patient's own baseline, or a short run of low urine output. The multiples and the hour limits are the exam cuts, and they are written under the figure. The stage is a description of the injury. It does not order dialysis by itself.",
+   "say": "KDIGO stage 1 is the mildest band: a creatinine rise above the patient's own baseline, or a short run of low urine output. The multiples and the hour limits are the exam cuts, and they are written under the figure. The stage is a description of the injury. It does not order dialysis by itself.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aki-fig1.webp",
+    "alt": "Three patterns of acute kidney injury: prerenal hypoperfusion, intrinsic tubular injury, and postrenal obstruction.",
+    "caption": "Prerenal, intrinsic, and postrenal groups. The drawing is not a KDIGO chart. Stage 1 is creatinine 1.5 to 1.9 times baseline, a rise of at least 0.3 mg/dL within 48 hours, or urine below 0.5 mL/kg/h for 6 to 12 hours. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  },
+  {
+   "tx": "**Stage 2** is a larger multiple of baseline, or oliguria that has lasted about half a day or more. **Stage 3** is a tripling of creatinine, a hard creatinine threshold, renal replacement itself, or a longer anuria. The digits are in the table. Stage 3 is where replacement is discussed, and it is not an automatic start.",
+   "say": "Stage 2 is a larger multiple of baseline, or oliguria that has lasted about half a day or more. Stage 3 is a tripling of creatinine, a hard creatinine threshold, renal replacement itself, or a longer anuria. The digits are in the table. Stage 3 is where replacement is discussed, and it is not an automatic start.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "KDIGO band",
+     "Creatinine or urine"
+    ],
+    "rows": [
+     [
+      "Stage 2",
+      "2.0 to 2.9 times, or urine below 0.5 mL/kg/h for 12 hours"
+     ],
+     [
+      "Stage 3 creatinine",
+      "3 times baseline, or at least 4 mg/dL"
+     ],
+     [
+      "Stage 3 urine",
+      "Below 0.3 mL/kg/h for 24 hours, or anuria 12 hours"
+     ],
+     [
+      "Replacement",
+      "Discussed in stage 3, not automatic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **PRESERVE** trial found no benefit from bicarbonate or from N-acetylcysteine around iodinated **contrast**. Volume expansion is the prevention when the eGFR is below 30. Metformin is held around the exposure. A normal creatinine does not make a large contrast load safe in a patient who is already dry.",
+   "say": "The PRESERVE trial found no benefit from bicarbonate or from N-acetylcysteine around iodinated contrast. Volume expansion is the prevention when the eGFR is below 30. Metformin is held around the exposure. A normal creatinine does not make a large contrast load safe in a patient who is already dry.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What did not help",
+     "points": [
+      "Sodium bicarbonate",
+      "N-acetylcysteine",
+      "PRESERVE found no benefit"
+     ]
+    },
+    "right": {
+     "title": "What is still done",
+     "points": [
+      "Volume expansion if eGFR is below 30",
+      "Hold metformin around the exposure",
+      "Do not dry the patient first"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rhabdomyolysis** is treated with early isotonic fluid. A creatine kinase in the tens of thousands is support for the diagnosis. Alkalinisation of the urine is optional, and it is stopped if the calcium falls. Compartment syndrome is a surgical diagnosis, and it is not treated by fluid alone.",
+   "say": "Rhabdomyolysis is treated with early isotonic fluid. A creatine kinase in the tens of thousands is support for the diagnosis. Alkalinisation of the urine is optional, and it is stopped if the calcium falls. Compartment syndrome is a surgical diagnosis, and it is not treated by fluid alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Muscle injury and a dark urine"
+     },
+     {
+      "id": "b",
+      "label": "Early isotonic fluid"
+     },
+     {
+      "id": "c",
+      "label": "Stop alkali if calcium falls"
+     },
+     {
+      "id": "d",
+      "label": "Fasciotomy if the compartment is tight"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cardiorenal syndrome type 1** is acute heart failure that has caused acute kidney injury. The treatment is the heart failure, and it is not a fluid bolus given because the creatinine rose. More salt water in a congested patient can make both the lungs and the kidney worse. The rising creatinine is a reason to treat the heart, not to ignore the congestion.",
+   "say": "Cardiorenal syndrome type 1 is acute heart failure that has caused acute kidney injury. The treatment is the heart failure, and it is not a fluid bolus given because the creatinine rose. More salt water in a congested patient can make both the lungs and the kidney worse. The rising creatinine is a reason to treat the heart, not to ignore the congestion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cardiorenal type 1",
+     "points": [
+      "The heart failed first",
+      "The kidney injury is the result",
+      "Treat the congestion and the output"
+     ]
+    },
+    "right": {
+     "title": "A reflex fluid bolus",
+     "points": [
+      "The creatinine rise is not hypovolaemia by default",
+      "Fluid can flood the lungs",
+      "The heart is the treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hepatorenal** syndrome is a diagnosis of exclusion in cirrhosis with acute kidney injury. **Terlipressin** plus albumin can improve reversal. The **CONFIRM** trial also showed more respiratory failure, so the patient is watched for pulmonary oedema. A response in the creatinine is not a success if the patient is now in respiratory failure.",
+   "say": "Hepatorenal syndrome is a diagnosis of exclusion in cirrhosis with acute kidney injury. Terlipressin plus albumin can improve reversal. The CONFIRM trial also showed more respiratory failure, so the patient is watched for pulmonary oedema. A response in the creatinine is not a success if the patient is now in respiratory failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Diagnosis",
+      "Exclusion in cirrhosis, not the first label"
+     ],
+     [
+      "Drug",
+      "Terlipressin plus albumin"
+     ],
+     [
+      "CONFIRM",
+      "More respiratory failure was seen"
+     ],
+     [
+      "Watch",
+      "Pulmonary oedema can undo the gain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **furosemide stress test** is 1 mg/kg, or 1.5 mg/kg if the patient has already had a loop diuretic. Urine output below 200 mL in 2 hours is a prediction of progression and a higher chance of needing renal replacement. The test is a forecast. It is not an order to start dialysis that hour.",
+   "say": "A furosemide stress test is 1 mg/kg, or 1.5 mg/kg if the patient has already had a loop diuretic. Urine output below 200 mL in 2 hours is a prediction of progression and a higher chance of needing renal replacement. The test is a forecast. It is not an order to start dialysis that hour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "How the test is given",
+     "points": [
+      "1 mg/kg if loop-naive",
+      "1.5 mg/kg if loops were already used",
+      "Watch the next 2 hours"
+     ]
+    },
+    "right": {
+     "title": "How it is read",
+     "points": [
+      "Below 200 mL in 2 hours is a poor response",
+      "Progression is more likely",
+      "It does not start dialysis by itself"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**NGAL** and other biomarkers can rise early. They do not replace KDIGO staging when the decision is to start or withhold renal replacement. A biomarker is an early signal. It is not a stage, and it is not a dialysis order.",
+   "say": "NGAL and other biomarkers can rise early. They do not replace KDIGO staging when the decision is to start or withhold renal replacement. A biomarker is an early signal. It is not a stage, and it is not a dialysis order.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aki-fig2.webp",
+    "alt": "Tubule with epithelial sloughing, a bare basement membrane, and muddy brown casts.",
+    "caption": "Muddy brown casts and a bare basement membrane mean tubular injury. They are not a KDIGO stage, not an NGAL number, and not hepatorenal syndrome. Credit: StewardMD.",
+    "ar": 1.34
+   }
+  }
+ ]
 }
