@@ -5621,8 +5621,14 @@
     return out.slice(0, limit || 40);
   }
   function kbOpen(id) {
+    // No entry id: open the Knowledge Library itself instead of an empty disease reader.
+    if (!id) { try { if (window.SB && SB.openRef) SB.openRef("syndromes"); } catch (e) {} return; }
     var library = document.getElementById("sbrefOverlay"), libraryBody = document.getElementById("sbrefBody");
     var fromLibrary = !!(library && library.classList.contains("open"));
+    // iPad landscape (ipad-knowledge.css): the library stays beside the reader as a list column; mark the open entry.
+    if (fromLibrary && libraryBody && document.documentElement.classList.contains("smd-tablet") && innerWidth >= 700) {
+      try { Array.prototype.forEach.call(libraryBody.querySelectorAll(".kblib-row[data-kb]"), function (r) { if (r.getAttribute("data-kb") === String(id)) r.setAttribute("aria-current", "true"); else r.removeAttribute("aria-current"); }); } catch (e) {}
+    }
     _libReturnScroll = fromLibrary && libraryBody ? libraryBody.scrollTop : null;
     try { var bd = document.getElementById("spBackdrop"); if (bd) bd.classList.add("hidden"); } catch (e) {}
     try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}

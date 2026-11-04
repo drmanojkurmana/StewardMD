@@ -1,2 +1,159 @@
 /* ipad-knowledge.css: iPad regular-width layouts for the knowledge module group (vault/plans/iPad-Standards.md).
- * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched. */
+ * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched.
+ * Covers: Knowledge Library (Syndromes / iLearn / AWaRe / Guidelines / Protocols and the protocol reader), the disease
+ * reader beside the library in landscape, MaiK (empty state, composer, model picker), the universal search overlay,
+ * the Image Library and the figure viewer.
+ *
+ * Library layout rules are container queries on #sbrefBody (container "kblib"), not viewport queries: in landscape the
+ * library also renders as a 380 px list column beside the disease reader, where it must fall back to the phone layout.
+ * Specificity: #sbrefOverlay #sbrefBody (two ids) plus html.smd-tablet, so module CSS injected later does not win. */
+
+@media (min-width: 700px) {
+  /* ---------------------------------------------------------------------------------------------------------------
+   * Knowledge Library shell: #sbrefBody is the scroller (full width); the content column is 1,120 px in landscape
+   * (a browsing grid, not reading text), 960 px otherwise. */
+  html.smd-tablet #sbrefOverlay #sbrefBody:is(.kblib-tool-page, :has(.kblib-discover)) { container: kblib / inline-size; }
+  /* Search fields keep a search-field width (about 720 px); the sticky band behind them still spans the column. */
+  html.smd-tablet #sbrefOverlay #sbrefBody .kblib-searchbox :is(input, .kblib-search, .kblib-tool-search) { max-width: 720px; }
+  /* A single "Show more" button is its natural width, not the column. */
+  html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-more { width: auto; min-width: 240px; max-width: 360px; margin-inline: auto; padding-inline: 28px; }
+  /* iPad back pill on the protocol reader: a 44 px target */
+  html.smd-tablet #sbrefOverlay #sbrefBody .kbp-back { display: inline-flex; align-items: center; width: auto; min-height: 44px; }
+
+  @container kblib (min-width: 700px) {
+    /* Discover (Syndromes): "Your library" and the Image Library card sit side by side; everything else spans. */
+    html.smd-tablet #sbrefOverlay #sbrefBody .sbref-sec.kblib-discover { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 32px; align-items: start; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover > * { grid-column: 1 / -1; min-width: 0; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover > .kblib-personal { grid-column: 1; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover > .kblib-imglib { grid-column: 2; align-self: start; margin-top: 16px; }
+    /* The disease index: a grid of entries, two across. */
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; }
+    /* A <button> centres its content vertically; in a grid row of mixed heights the entries must start at the top. */
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-grid > .kblib-row { display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; }
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-protocols .kbp-group > .kbp-row { align-self: start; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-grid > .kblib-row:last-child { border-bottom: 1px solid var(--kl-line, var(--line)); }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-filters { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 24px; }
+
+    /* Guidelines: each organisation group lists its sources two across. */
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-guidelines .sbref-sec { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-content: start; }
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-guidelines .sbref-sec > :not(.sbref-gl) { grid-column: 1 / -1; }
+    /* Protocols list: rows two across inside each subject group; the group heading spans. */
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-tool-protocols .kbp-group,
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-protocols .kbp-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 32px; align-content: start; }
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-protocols .kbp-group > :not(.kbp-row) { grid-column: 1 / -1; }
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-protocols .kbp-row { padding-inline: 4px; }
+    /* Basis segmented control keeps a control width instead of stretching to the column. */
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-protocols .kbp-basis { max-width: 520px; }
+  }
+
+  @container kblib (min-width: 1000px) {
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-guidelines .sbref-sec { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-protocols .kbp-group { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    html.smd-tablet #sbrefOverlay #sbrefBody .il-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    /* Protocol reader: the section list becomes a sticky column on the left; the text column stays readable. */
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader { display: grid; grid-template-columns: 220px minmax(0, 1fr); column-gap: 40px; align-items: start; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader > * { grid-column: 2; min-width: 0; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader > :is(.kbp-back, .kblib-tool-intro) { grid-column: 1 / -1; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader > .kbp-back { justify-self: start; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader > .kbp-toc { grid-column: 1; grid-row: 3 / span 40; position: sticky; top: 12px; display: flex; flex-direction: column; align-items: stretch; gap: 4px; overflow: visible; margin: 0; padding: 4px 0 0; border: 0; white-space: normal; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader > .kbp-toc .kbp-jump { flex: 0 0 auto; width: 100%; min-height: 44px; justify-content: flex-start; text-align: left; white-space: normal; border-radius: 10px; }
+    html.smd-tablet #sbrefOverlay #sbrefBody .kbp-reader > .kblib-tool-intro .kbp-summary { max-width: 760px; }
+  }
+
+  /* Split View (and the 380 px list column): phone grids, whatever the viewport says. */
+  @container kblib (max-width: 699px) {
+    html.smd-tablet #sbrefOverlay #sbrefBody .kblib-discover .kblib-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    html.smd-tablet #sbrefOverlay #sbrefBody .il-grid { grid-template-columns: 1fr; }
+  }
+}
+
+/* Landscape: a wider browsing column for the library (the protocol reader keeps its own reading column). */
+@media (min-width: 1100px) {
+  html.smd-tablet #sbrefOverlay #sbrefBody:is(.kblib-tool-page, :has(.kblib-discover)) {
+    padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 1120px) / 2));
+    padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 1120px) / 2));
+  }
+  html.smd-tablet #sbrefOverlay:is(:has(.kblib-discover), :has(.kblib-tool-page)) .sbref-top { padding-inline: max(18px, calc((100% - 1120px) / 2)); }
+  /* AWaRe: Access, Watch and Reserve side by side (the cards are direct children of the scroller, so this is a
+     viewport query; AWaRe never shows in the split list column). */
+  html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-aware:has(> .aware-card) { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); column-gap: 28px; align-content: start; }
+  html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-aware:has(> .aware-card) > :not(.aware-card) { grid-column: 1 / -1; }
+  html.smd-tablet #sbrefOverlay #sbrefBody.kblib-tool-aware > .aware-card { margin: 0 !important; }
+
+}
+
+/* List and detail, landscape (1,000 px and wider). */
+@media (min-width: 1000px) {
+  /* a disease opened from the library opens BESIDE it. The library becomes a 380 px list column on the
+   * left (its own scroller, phone layout via the container queries above) and the reader fills the rest. Back
+   * ("Library") closes the reader and the library takes the full width again. Tapping another entry swaps the reader. */
+  html.smd-tablet body:has(#dxOverlay.dx-reference-mode.on) #sbrefOverlay.open:has(.kblib-discover) .sbref-shell {
+    width: 380px; max-width: 380px; margin: 0; border-right: 1px solid var(--line, #e3e6ea);
+  }
+  html.smd-tablet body:has(#dxOverlay.dx-reference-mode.on) #sbrefOverlay.open:has(.kblib-discover) .sbref-top { padding-inline: 16px; }
+  html.smd-tablet body:has(#dxOverlay.dx-reference-mode.on) #sbrefOverlay.open #sbrefBody:has(.kblib-discover) {
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: 16px;
+  }
+  html.smd-tablet body:has(#sbrefOverlay.open .kblib-discover) #dxOverlay.dx-reference-mode.on {
+    left: 380px; right: 0; width: auto; box-shadow: -1px 0 0 var(--line, #e3e6ea);
+  }
+  /* The reader page (#dxMgmt, position: fixed; inset: 0 from reasoning.js) moves into the detail pane. Its gutters were
+     sized from the viewport (100vw); in the pane they come from the pane. */
+  html.smd-tablet body:has(#sbrefOverlay.open .kblib-discover) #dxOverlay.dx-reference-mode.on #dxMgmt.dx-reader {
+    left: 380px; right: 0; width: auto;
+    --rd-gut-l: 32px; --rd-gut-r: max(32px, env(safe-area-inset-right, 0px));
+  }
+  html.smd-tablet body:has(#dxOverlay.dx-reference-mode.on) #sbrefOverlay.open #sbrefBody .kblib-row[aria-current="true"] {
+    background: color-mix(in srgb, var(--kl-accent, #5956a5) 12%, transparent) !important;
+    box-shadow: inset 3px 0 0 var(--kl-accent, #5956a5);
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  /* -----------------------------------------------------------------------------------------------------------------
+   * MaiK. Empty state: the three starting points lay out across the width instead of a 560 px phone stack. */
+  html.smd-tablet body #maikSheet.maik-polished .maik-empty { max-width: 880px; }
+  html.smd-tablet body #maikSheet.maik-polished .maik-empty .maik-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: 100%; border: 0; border-radius: 0; overflow: visible; background: transparent; }
+  html.smd-tablet body #maikSheet.maik-polished .maik-empty .maik-card { width: auto; margin: 0; height: 100%; align-items: flex-start; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid var(--mk-bd); border-radius: 18px; background: var(--mk-soft); position: relative; }
+  html.smd-tablet body #maikSheet.maik-polished .maik-empty .maik-card-tx { width: 100%; }
+  html.smd-tablet body #maikSheet.maik-polished .maik-empty .maik-card-ch { position: absolute; top: 18px; right: 14px; }
+  /* Transcript and composer share one 840 px column (maik-polish.css used 960 px, which made the question field
+     940 px wide in landscape); the writing field stays centred under the conversation. */
+  html.smd-tablet body #maikSheet.maik-polished :is(.maik-body, .maik-cmp) { padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 840px) / 2)); padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 840px) / 2)); }
+  html.smd-tablet body #maikSheet.maik-polished .maik-cmp-in { max-width: 840px; margin-inline: auto; }
+  /* Model picker: a centred form sheet, not a full-width bottom slab. */
+  html.smd-tablet #maikModelPicker { align-items: center !important; justify-content: center; padding: 24px; }
+  html.smd-tablet #maikModelPicker #maikModelSheetInner { width: min(620px, 100%) !important; max-height: min(80dvh, 80vh, 820px) !important; border-radius: 18px !important; box-shadow: 0 24px 64px rgba(0, 0, 0, .28) !important; padding-bottom: 14px !important; overflow: hidden; }
+}
+
+@media (min-width: 700px) {
+  /* -----------------------------------------------------------------------------------------------------------------
+   * Universal search (search.js, Cmd+K): the field, the category chips and the results share one centred 800 px
+   * column (search.css only centred the field and results from 900 px, and left the chips at the left edge). */
+  html.smd-tablet body .us-panel :is(.us-head, .us-chips, .us-body) { padding-left: max(24px, env(safe-area-inset-left, 0px), calc(50% - 400px)); padding-right: max(24px, env(safe-area-inset-right, 0px), calc(50% - 400px)); }
+  html.smd-tablet body .us-panel .us-chip { min-height: 44px; }
+
+  /* -----------------------------------------------------------------------------------------------------------------
+   * Image Library (image-library.js): the grids use the screen (a centred 1,200 px column, more columns), the
+   * search field keeps a field width, the single "Show more" button its natural width. */
+  html.smd-tablet body .igl-overlay :is(.igl-bar, .igl-tools, .igl-body) { padding-left: max(16px, env(safe-area-inset-left, 0px), calc(50% - 600px)); padding-right: max(16px, env(safe-area-inset-right, 0px), calc(50% - 600px)); }
+  html.smd-tablet body .igl-overlay .igl-q { max-width: 720px; }
+  html.smd-tablet body .igl-overlay :is(.igl-sysgrid, .igl-grid) { max-width: none; gap: 14px; }
+  html.smd-tablet body .igl-overlay .igl-more { width: auto; min-width: 240px; max-width: 360px; margin-inline: auto; padding-inline: 28px; }
+  /* Viewer, portrait: the caption is a readable line length, not the full width. */
+  html.smd-tablet body .igl-overlay .igl-vmeta > * { max-width: 760px; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet body .igl-overlay :is(.igl-sysgrid, .igl-grid) { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+/* Image viewer, landscape: the picture on the left, title and caption in a side column (both axes used, the caption
+   no longer squeezes the picture to 58 % of the height). */
+@media (min-width: 1000px) and (orientation: landscape) {
+  html.smd-tablet body .igl-overlay .igl-viewer:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr) 380px; grid-template-rows: auto minmax(0, 1fr); }
+  html.smd-tablet body .igl-overlay .igl-viewer > .igl-vbar { grid-column: 1 / -1; grid-row: 1; }
+  html.smd-tablet body .igl-overlay .igl-viewer > .igl-vstage { grid-column: 1; grid-row: 2; min-height: 0; }
+  html.smd-tablet body .igl-overlay .igl-viewer > .igl-vmeta { grid-column: 2; grid-row: 2; max-height: none; padding: 20px 20px calc(20px + env(safe-area-inset-bottom)); }
+}
