@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 
 test("app boot loads only tokos-loader.js; the loader lists the engine and Tokós files at one version token", () => {
   const html = readFileSync("index.html", "utf8");
-  const eng = /(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|tokos[-.\w]*)\.(js|css)\?v=\w+/g;
+  const eng = /(?<![\w-])(specialty(-(core|data|stage|shell|learn|bank|explore|tools|notes))?|tokos[-.\w]*)\.(js|css)\?v=\w+/g;
   assert.deepEqual(html.match(eng), ["tokos-loader.js?v=tok12"], "boot requests no engine or Tokós file but the loader");
   const L = readFileSync("tokos-loader.js", "utf8"), v = /var V = "(\w+)"/.exec(L)[1];
   assert.equal(v, "tok12", "the loader injects at the same token as its own tag");

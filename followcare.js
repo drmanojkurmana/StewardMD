@@ -429,6 +429,7 @@
       body.innerHTML = "";
       if (res.status === 401) { body.appendChild(h("div", { "class": "fc-empty", text: "Please sign in to use FollowCare." })); return; }
       var list = sortEpisodes((res.body && res.body.episodes) || []);
+      lastBoard = list;
       var c = counts(list);
       var page = h("div", { "class": "fc-dashboard" });
       body.appendChild(page);
@@ -829,8 +830,28 @@
     return h("div", { "class": "fc-voice-card", style: "margin:12px 0;padding:12px 14px;border:1px solid var(--line,#dbe4e2);border-radius:12px;background:var(--panel,#fff)" }, lines);
   }
 
+  /* iPad, landscape regular width (vault/plans/iPad-Standards.md rule 2): the recovery board stays
+   * on the left and the chosen patient opens beside it, like Mail. It reuses the rows the board
+   * last loaded (no extra request). Phones and Split View keep the full-screen push. */
+  var lastBoard = [];
+  function splitBoard(body, episodeId) {
+    try {
+      if (!(document.documentElement.classList.contains("smd-tablet") && G.innerWidth >= 1000) || !lastBoard.length) return null;
+      var aside = h("div", { "class": "fc-split-list", "aria-label": "Recovery board" }, [h("div", { "class": "fc-sect", text: "Needs attention" })]);
+      lastBoard.forEach(function (ep) {
+        var r = episodeRow(ep);
+        if (ep.episodeId === episodeId) { r.classList.add("on"); r.setAttribute("aria-current", "true"); }
+        aside.appendChild(r);
+      });
+      var main = h("div", { "class": "fc-split-main" });
+      body.classList.add("fc-split");
+      body.appendChild(aside); body.appendChild(main);
+      return main;
+    } catch (e) { return null; }
+  }
   function renderDetail(episodeId) {
     var body = shell();
+    body = splitBoard(body, episodeId) || body;
     body.innerHTML = "";
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: open, text: "‹ Board" }));
     body.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));

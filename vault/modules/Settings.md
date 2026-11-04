@@ -49,3 +49,9 @@ node test/image-engine-local.test.mjs
 The browser harnesses require Chrome and a Node runtime with global WebSocket support; they start their local server when needed. Record the actual pass/fail results in the delivery report rather than interpreting this command list as a completed test run.
 
 The existing `test/run-graphite-dark-ui.mjs` harness has a syntax issue that prevents its intended check; its failure is not evidence of a Settings rendering regression. Browser inspection cannot establish native permission prompts, haptic output, Apple Watch/Wear OS pairing, on-device model execution or native update behavior. No physical native-device testing was performed for this refresh; those platform paths retain their existing implementation and require device verification separately.
+
+## iPad split view (2026-11-04)
+`ipad-account.css` (only on `html.smd-tablet`, 700 px and wider) gives Settings 44 px category buttons and, from 960 px
+(iPad landscape), the iPadOS split view: search plus the category list in a sticky 280 px sidebar, the selected
+category's groups on the right. Same `settings-ui.js` nodes and handlers; CSS only. Experimental keeps its centred column.
+Phones and Split View (507 px) are unchanged.

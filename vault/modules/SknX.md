@@ -68,3 +68,7 @@ Design spec: `docs/superpowers/specs/2026-08-03-sknx-ai-design.md`. Plans: `docs
 - **⚠️ MELANOMA GAP (cloud classifier):** the 59 SCIN conditions have NO melanoma class, and `sknx-cloudvision.js` sends `features:{}` (no ABCDE) → the cloud engine CANNOT rule out melanoma. A pigmented/changing/bleeding lesion still needs clinical melanoma assessment. Follow-up: run the on-device HAM engine (has melanoma/BCC/SCC) as a PARALLEL cancer screen alongside the cloud differential. The console + README carry a loud persistent caveat.
 
 Deps: [[ThoreX]] (proxy + PDF pattern) · [[Infra]] (Gemini/Vertex, Vectorize `KB_VECTORIZE`) · [[AI Control Center]] (`sknx_llm` feature) · `SMD_RX` (prescription.js, Phase 3).
+
+## iPad (2026-11-04)
+On a tablet in landscape the result screen shows the analysed photo left of the findings (`renderResult`, display only);
+the review screen puts photo and history side by side (`ipad-care.css`).

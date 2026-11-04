@@ -3259,8 +3259,30 @@
       case "certify": title = "Certification"; sub = "Signatures and the official PDF"; body = screenCertify(); break;
       default: body = wrap(errorState("Unknown screen."));
     }
+    if (h0 === "entry" && tabletSplit()) body = entrySplit(body, a);
     state.host.innerHTML = head(title, sub) + body;
     bind();
+  }
+
+  /* iPad, landscape regular width (vault/plans/iPad-Standards.md rule 2): an open entry sits beside the
+   * list of entries, the open one highlighted, instead of a full-screen push. Same rows and data the
+   * All entries screen shows; phones and Split View never take this path. */
+  function tabletSplit() {
+    try { return document.documentElement.classList.contains("smd-tablet") && window.innerWidth >= 1000; } catch (e) { return false; }
+  }
+  function entrySplit(body, current) {
+    try {
+      var st = ST();
+      var all = arr(state.dash && state.dash.entries).concat(st ? st.drafts() : []);
+      if (!all.length) return body;
+      all = all.slice().sort(function (x, y) { return String(y.occurredAt).localeCompare(String(x.occurredAt)); });
+      var rows = all.map(function (e) {
+        var row = entryRow(e, String(e.id).indexOf("loc_") === 0).replace('data-pgl="go"', 'data-pgl="entryswap"');
+        return String(e.id) === String(current) ? row.replace('class="pgl-row"', 'class="pgl-row on" aria-current="true"') : row;
+      }).join("");
+      return '<div class="pgl-split"><aside class="pgl-split-list" aria-label="All entries">' + rows + "</aside>" +
+        '<div class="pgl-split-main">' + body + "</div></div>";
+    } catch (e) { return body; }
   }
 
   /* ── events ──────────────────────────────────────────────────────────────── */
@@ -3341,6 +3363,7 @@
     switch (a) {
       case "close": return window.PGLOG && window.PGLOG.close();
       case "back": return back();
+      case "entryswap": haptic("light"); replace(t.getAttribute("data-r")); try { state.host.scrollTop = 0; } catch (e) {} return;
       case "go": {
         var dest = t.getAttribute("data-r");
         // The console needs the org's programmes and the NMC specialty list; neither is in the

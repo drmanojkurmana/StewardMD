@@ -20,7 +20,7 @@
   // Shared inline-SVG icon accessor (window.ICONS catalog); text-safe fallback for load-order safety.
   function vcIco(n){ return (window.ICONS && ICONS.get) ? ICONS.get(n) : ""; }
 
-  function isIOS() { return /iP(hone|ad|od)/i.test(navigator.userAgent || ""); }
+  function isIOS() { return /iP(hone|ad|od)/i.test(navigator.userAgent || "") || (/Macintosh/.test(navigator.userAgent || "") && (navigator.maxTouchPoints || 0) > 1); }   // iPadOS sends a Mac user agent
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function blobToDataURL(b) { return new Promise(function (res, rej) { var r = new FileReader(); r.onload = function () { res(r.result); }; r.onerror = rej; r.readAsDataURL(b); }); }
 
