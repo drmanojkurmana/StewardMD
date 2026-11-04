@@ -1,0 +1,66 @@
+{
+  "id": "traumatic-haematoma-surgery",
+  "title": "Extradural and acute subdural haematoma",
+  "subtitle": "The decision to operate",
+  "category": "neuro_cranial",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "btf-surg", "org": "Brain Trauma Foundation", "title": "Guidelines for the surgical management of traumatic brain injury (Bullock et al, Neurosurgery 2006;58(3 Suppl):S2-1 to S2-62)", "year": 2006, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Bullock+2006+surgical+management+of+traumatic+brain+injury+Neurosurgery", "accessed": "2026-11-04" },
+    { "id": "btf4", "org": "Brain Trauma Foundation", "title": "Guidelines for the management of severe traumatic brain injury, 4th edition", "edition": "4th edition", "year": 2016, "url": "https://braintrauma.org/guidelines", "accessed": "2026-11-04" },
+    { "id": "nice-ng232", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "version": "NG232", "url": "https://www.nice.org.uk/guidance/ng232", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A lucid interval followed by a falling GCS: the classic extradural haematoma course." },
+      { "text": "Anisocoria, or a new fixed dilated pupil, with a haematoma on CT." },
+      { "text": "A fall of 2 or more GCS points, particularly in the motor component, since the scan." },
+      { "text": "A temporal or posterior fossa haematoma. These compress the brainstem with smaller volumes and less warning." },
+      { "text": "Anticoagulated or thrombocytopenic patient: the haematoma is likely to expand until reversed." }
+    ],
+    "do_now": [
+      { "text": "Airway, oxygenation and blood pressure first. Avoid hypoxia and hypotension, which independently worsen outcome.", "timeCritical": true, "evidenceRef": "btf4" },
+      { "text": "Send the CT to neurosurgery and make the referral immediately; for a deteriorating patient, prepare theatre in parallel.", "timeCritical": true, "evidenceRef": "nice-ng232" },
+      { "text": "Reverse anticoagulation and correct coagulopathy as soon as the haematoma is seen, per local protocol.", "timeCritical": true, "evidenceRef": "nice-ng232" },
+      { "text": "For signs of herniation, give hyperosmolar therapy as a bridge to theatre, not a substitute.", "timeCritical": true, "evidenceRef": "btf4" }
+    ],
+    "assess": [
+      { "text": "GCS by component and pupils, recorded with the time, before and after any sedation.", "calcs": ["gcs", "gcs_p"] },
+      { "text": "Measure the haematoma on CT: maximum thickness, midline shift at the septum pellucidum, volume, and state of the basal cisterns.", "calcs": ["abc2_ich_volume"] },
+      { "text": "Location matters: temporal and posterior fossa lesions deserve a lower threshold for surgery." },
+      { "text": "Look for associated injury: contusions, skull fracture, cervical spine injury, and extracranial bleeding." }
+    ],
+    "investigate": [
+      { "text": "Non-contrast CT head, with bone windows for fractures crossing the middle meningeal groove or a venous sinus." },
+      { "text": "Coagulation screen, platelets, group and cross-match." },
+      { "text": "Repeat CT within a few hours for a non-operated haematoma, and at once for any deterioration." },
+      { "text": "Consider CT venography when a fracture crosses a venous sinus." }
+    ],
+    "resuscitate": [
+      { "text": "Maintain systolic blood pressure and oxygenation to BTF targets during the wait for theatre.", "evidenceRef": "btf4" },
+      { "text": "Head up about 30 degrees with the neck neutral, once the spine allows.", "evidenceRef": "btf4" },
+      { "text": "Treat seizures promptly; each one raises intracranial pressure.", "evidenceRef": "btf4" }
+    ],
+    "definitive": [
+      { "text": "Extradural haematoma over 30 cm3: evacuate, regardless of GCS.", "timeCritical": true, "evidenceRef": "btf-surg" },
+      { "text": "Extradural haematoma under 30 cm3, under 15 mm thick, with under 5 mm shift, in a patient with GCS above 8 and no focal deficit: may be observed with serial CT in a neurosurgical centre.", "evidenceRef": "btf-surg" },
+      { "text": "Extradural haematoma in coma (GCS below 9) with anisocoria: evacuate as soon as possible.", "timeCritical": true, "evidenceRef": "btf-surg" },
+      { "text": "Acute subdural haematoma thicker than 10 mm or with more than 5 mm shift: evacuate, regardless of GCS.", "timeCritical": true, "evidenceRef": "btf-surg" },
+      { "text": "Smaller acute subdural in a comatose patient: evacuate if GCS falls by 2 or more, pupils become asymmetric or fixed, or ICP exceeds 20 mmHg.", "evidenceRef": "btf-surg" },
+      { "text": "Operate by craniotomy with a large enough flap; leave the bone flap out when the brain is swollen at the end of the evacuation.", "evidenceRef": "btf-surg" }
+    ],
+    "escalate": [
+      { "text": "A patient deteriorating from an extradural haematoma who cannot reach a neurosurgeon in time is the one situation where a local surgeon may need to decompress. Agree this by telephone with neurosurgery." },
+      { "text": "Transfer intubated with images available, blood pressure controlled, and the receiving theatre told the time of departure." },
+      { "text": "Every non-operated haematoma is observed in a unit that can operate on it." }
+    ]
+  },
+  "notes": [
+    "In an extradural, the brain underneath is often normal. Speed decides the outcome, and outcomes after prompt surgery are excellent.",
+    "In an acute subdural, the haematoma is usually a marker of the brain injury beneath it. Plan for swelling and be ready to leave the flap out.",
+    "Measurement thresholds tell you who must have surgery. They do not tell you who can safely avoid it: the clinical trend does."
+  ],
+  "calcs": ["gcs", "gcs_p", "abc2_ich_volume"]
+}

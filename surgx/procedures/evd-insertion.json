@@ -1,0 +1,131 @@
+{
+  "id": "evd-insertion",
+  "title": "External ventricular drain insertion",
+  "subtitle": "Frontal approach at Kocher point",
+  "system": "neurological",
+  "aliases": ["EVD", "ventriculostomy", "external ventricular drainage"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "ncs-evd", "org": "Neurocritical Care Society", "title": "The insertion and management of external ventricular drains: an evidence-based consensus statement (Fried et al, Neurocrit Care 2016;24:61-81)", "year": 2016, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Fried+2016+insertion+and+management+of+external+ventricular+drains+consensus", "accessed": "2026-11-04" },
+    { "id": "btf4", "org": "Brain Trauma Foundation", "title": "Guidelines for the management of severe traumatic brain injury, 4th edition", "edition": "4th edition", "year": 2016, "url": "https://braintrauma.org/guidelines", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["gcs"],
+  "chapters": {
+    "indications": [
+      "Acute obstructive hydrocephalus causing reduced consciousness, for example from intraventricular or posterior fossa haemorrhage, or subarachnoid haemorrhage.",
+      "Intracranial pressure monitoring with the option of therapeutic CSF drainage in severe traumatic brain injury.",
+      "Temporary CSF diversion after removal of an infected shunt.",
+      "Access for CSF sampling or intraventricular therapy as directed by the neurosurgical team."
+    ],
+    "contraindications": [
+      "Uncorrected coagulopathy or thrombocytopenia, except in a life-threatening emergency after a senior decision.",
+      "Scalp infection at the entry site; choose another site.",
+      "Slit ventricles where cannulation is unlikely; consider image guidance."
+    ],
+    "preparation": [
+      "Review the CT for ventricular size, midline shift and the side with the larger frontal horn; the non-dominant (usually right) side is the default.",
+      "Correct coagulation per local protocol.",
+      "Prepare the drainage system, transducer and sterile field before the incision.",
+      "Clip hair rather than shave; apply antiseptic per local protocol."
+    ],
+    "positioning": [
+      "Supine with the head neutral and the head of bed elevated about 30 degrees.",
+      "Nasion and tragus visible and accessible for trajectory landmarks.",
+      "Can be performed at the bedside in intensive care or in theatre per local policy."
+    ],
+    "equipment": [
+      "Twist drill or perforator, ventricular catheter with stylet, tunnelling trocar.",
+      "Closed EVD drainage system with drip chamber and pressure transducer.",
+      "Sterile specimen pots for CSF."
+    ],
+    "anatomy": [
+      "Kocher point is about 11 cm behind the nasion and about 3 cm lateral to the midline, roughly in the mid-pupillary line and in front of the coronal suture, avoiding the motor strip.",
+      "The trajectory is perpendicular to the skull surface, aiming in the coronal plane towards the medial canthus of the ipsilateral eye and in the sagittal plane towards the external auditory meatus.",
+      "The foramen of Monro lies at a depth of about 5 to 7 cm from the skull surface in an adult, and is the target for the catheter tip.",
+      "The superior sagittal sinus runs in the midline; staying 3 cm lateral avoids it and its bridging veins."
+    ],
+    "criticalSafety": [
+      "Never pass the catheter more than three times; each pass increases the risk of haemorrhage. Use image guidance after a failed pass.",
+      "Stop advancing once CSF flows; do not keep going to a fixed depth.",
+      "Prescribe the reference level and drainage height in writing at the end of the procedure."
+    ],
+    "structuresAtRisk": [
+      "Superior sagittal sinus and bridging veins",
+      "Motor cortex if the entry is too posterior",
+      "Caudate nucleus, internal capsule and thalamus if the trajectory is off target",
+      "Choroid plexus and septal veins"
+    ],
+    "commonErrors": [
+      "Entry point too medial or too posterior.",
+      "Aiming too laterally, missing the ventricle in a shifted brain.",
+      "Multiple passes in pursuit of CSF.",
+      "Losing a large volume of CSF quickly, risking upward herniation or haemorrhage."
+    ],
+    "complications": [
+      "Tract or intraventricular haemorrhage.",
+      "Malposition, blockage and over- or underdrainage.",
+      "Ventriculitis, the main complication of prolonged drainage.",
+      "Accidental dislodgement.",
+      "Seizures."
+    ],
+    "postop": [
+      "CT to confirm catheter position per local protocol.",
+      "Level to the agreed reference point, usually the tragus, with the drip chamber at the prescribed height; clamp for any position change.",
+      "Hourly output, column swing and CSF character.",
+      "Minimise sampling and disconnections; follow a care bundle to reduce infection."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Document capacity or the best-interests decision; many patients cannot consent." },
+    { "ref": "step.neuro.preop-check", "emphasis": "Read the ventricular anatomy and midline shift from the scan before choosing the side." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Single-dose prophylaxis at insertion per local protocol; prolonged prophylaxis is not supported." },
+    { "ref": "step.core.positioning", "emphasis": "Head neutral, nose pointing to the ceiling, so the trajectory landmarks are true." },
+    { "ref": "step.neuro.cranial-landmarks", "emphasis": "Mark Kocher point and draw the trajectory lines on the drapes-to-be." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.neuro.burr-hole", "emphasis": "A twist-drill hole is usual at the bedside; keep it perpendicular to the skull." },
+    { "ref": "step.neuro.dura-open", "emphasis": "Coagulate and nick the dura just enough to pass the catheter." },
+    { "ref": "step.evd.cannulate" },
+    { "ref": "step.evd.connect" },
+    { "ref": "step.neuro.drain-tunnel", "emphasis": "A long tunnel reduces infection; secure the catheter firmly at the exit." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.neuro.postop-neuro-obs" },
+    { "ref": "step.core.debrief", "emphasis": "Write the opening pressure, the reference level and the drain height in the note." }
+  ],
+  "steps_local": {
+    "step.evd.cannulate": {
+      "id": "step.evd.cannulate",
+      "kind": "access",
+      "critical": true,
+      "title": "Ventricular cannulation",
+      "why": "This is the step where brain is traversed. Accurate landmarks and a disciplined limit on passes are what keep haemorrhage and malposition rare.",
+      "how": [
+        "Pass the catheter with stylet perpendicular to the skull, aiming at the ipsilateral medial canthus and the external auditory meatus.",
+        "Advance slowly; a give is often felt as the ependyma is entered, usually at about 5 to 7 cm.",
+        "Remove the stylet once CSF returns and advance the soft catheter a little further without the stylet.",
+        "If no CSF after a pass, withdraw fully, re-check landmarks and redirect. Stop after three passes."
+      ],
+      "structuresAtRisk": ["Caudate nucleus", "Internal capsule", "Septal and thalamostriate veins"],
+      "pitfalls": ["Redirecting the catheter without withdrawing it, creating a second tract within the brain."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.evd.connect": {
+      "id": "step.evd.connect",
+      "kind": "checkpoint",
+      "title": "Opening pressure, sampling and connection",
+      "why": "The opening pressure is a one-time measurement that guides further management, and a closed system from the start is the best protection against infection.",
+      "how": [
+        "Measure the opening pressure with the column or transducer before releasing CSF.",
+        "Send a CSF sample if indicated.",
+        "Connect to the closed drainage system, confirm the column swings, and avoid releasing a large volume rapidly."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": ["Draining large volumes on connection, especially with a posterior fossa lesion or an unsecured aneurysm."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

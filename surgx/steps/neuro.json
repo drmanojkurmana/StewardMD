@@ -1,0 +1,155 @@
+{
+  "_comment": "Steps shared by two or more neurosurgical and spinal operations (burr hole, trauma craniotomy, external ventricular drain, lumbar decompression). Author once, reference everywhere.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.neuro.preop-check": {
+      "id": "step.neuro.preop-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Neurological baseline, side and coagulation check",
+      "why": "In neurosurgery the side and the level are read off a scan, not seen on the skin, and the patient often cannot confirm them. A fresh GCS and pupil check tells you whether the plan made an hour ago is still the right plan.",
+      "how": [
+        "Record GCS by component and pupil size and reaction immediately before anaesthesia, with the time.",
+        "Put the most recent scan up in theatre. Read the side (or spinal level) aloud from the images with the team, and match it to the consent and the skin mark.",
+        "Confirm coagulation, platelet count, and that anticoagulant or antiplatelet reversal has been given or deliberately withheld.",
+        "Confirm blood is grouped and saved or cross-matched according to the operation."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Operating on the side written on the request form rather than the side shown on the scan.",
+        "Assuming a coagulopathy has been corrected because reversal was prescribed, without a repeat result.",
+        "Using an old scan when the patient has deteriorated since it was taken."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.cranial-landmarks": {
+      "id": "step.neuro.cranial-landmarks",
+      "kind": "prep",
+      "title": "Marking cranial landmarks and the incision",
+      "why": "Cranial surgery is planned on surface landmarks that predict what lies beneath. A burr hole or flap in the wrong place turns a simple operation into a hunt, and a badly planned incision compromises the scalp blood supply.",
+      "how": [
+        "Mark the midline, the coronal suture, the pinna and the zygoma before draping, while you can still see the whole head.",
+        "Project the lesion from the scan onto the scalp, and plan the burr hole or flap over its thickest part.",
+        "Keep incisions behind the hairline where possible, and keep a flap base broad enough to carry its blood supply.",
+        "For a ventricular catheter, mark Kocher point: about 11 cm behind the nasion and about 3 cm from the midline, in the mid-pupillary line, anterior to the coronal suture."
+      ],
+      "structuresAtRisk": [
+        "Superficial temporal artery",
+        "Frontal branch of the facial nerve",
+        "Superior sagittal sinus near the midline"
+      ],
+      "pitfalls": [
+        "Marking after draping, when the midline is no longer visible.",
+        "Placing a frontal burr hole too close to the midline and onto the sagittal sinus or its bridging veins."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.burr-hole": {
+      "id": "step.neuro.burr-hole",
+      "kind": "access",
+      "critical": true,
+      "title": "Making a burr hole",
+      "why": "The burr hole is the entry point to the cranial cavity. The perforator is designed to stop at the inner table, but that only works if it is held perpendicular to the skull and allowed to do the work.",
+      "how": [
+        "Incise the scalp to bone, reflect the pericranium and place a self-retaining retractor.",
+        "Use the perforator perpendicular to the skull surface with steady pressure and continuous irrigation, until the clutch disengages at the inner table.",
+        "Widen with a burr if needed, and clear the inner table rim with a fine punch or curette.",
+        "Control diploic bleeding with bone wax and dural surface bleeding with bipolar diathermy."
+      ],
+      "structuresAtRisk": [
+        "Dura and underlying cortex",
+        "Venous sinuses and bridging veins",
+        "Middle meningeal artery under the pterion"
+      ],
+      "pitfalls": [
+        "Angling the perforator, so one edge breaks through before the clutch releases and the drill plunges.",
+        "Using a perforator in a thin, child or osteoporotic skull without extra caution."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.dura-open": {
+      "id": "step.neuro.dura-open",
+      "kind": "access",
+      "title": "Opening the dura",
+      "why": "The dura is the last barrier before brain. Opening it in a controlled way, with the cortex protected, prevents cortical injury and avoids tearing veins that are stretched across the subdural space.",
+      "how": [
+        "Coagulate the dural surface with bipolar diathermy before opening it.",
+        "Lift the dura with a hook or fine forceps and open it with a blade, so the cortex falls away rather than being cut.",
+        "Open in a cruciate or curvilinear fashion sized to the task, with the base towards the venous sinus.",
+        "Look for brain swelling as you open. Tense dura and bulging cortex change the plan."
+      ],
+      "structuresAtRisk": [
+        "Cortex",
+        "Bridging veins and cortical veins",
+        "Venous sinuses"
+      ],
+      "pitfalls": [
+        "Opening tense dura widely over a swollen brain, so the brain herniates through the defect.",
+        "Cutting the dura without lifting it off the cortex."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.drain-tunnel": {
+      "id": "step.neuro.drain-tunnel",
+      "kind": "closure",
+      "title": "Tunnelling and securing a cranial drain",
+      "why": "A cranial drain is a direct path from skin to the central nervous system. A long subcutaneous tunnel and a secure fixation reduce infection and accidental removal, both of which carry serious consequences.",
+      "how": [
+        "Tunnel the catheter subcutaneously away from the wound, exiting through a separate stab incision.",
+        "Secure it at the exit site with a purse-string or anchoring suture, and avoid kinking it in the tunnel.",
+        "Connect to a closed sterile drainage system, and confirm free flow before the drapes come down.",
+        "Label the drain clearly, and agree in writing whether it is to be left open, clamped, or levelled to a set height."
+      ],
+      "structuresAtRisk": [
+        "Scalp vessels",
+        "The catheter itself, from kinking or puncture"
+      ],
+      "pitfalls": [
+        "Exiting the drain through the main wound, which raises the risk of wound leak and infection.",
+        "Leaving the drain unlabelled so the ward does not know what it is or how to manage it."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.dural-repair": {
+      "id": "step.neuro.dural-repair",
+      "kind": "reconstruction",
+      "title": "Dural closure or repair",
+      "why": "A watertight dura keeps cerebrospinal fluid in and infection out. An unrepaired breach can cause a CSF leak, a pseudomeningocele, meningitis or intracranial hypotension.",
+      "how": [
+        "Close the dura primarily with a fine non-absorbable suture where the edges come together without tension.",
+        "Use a graft (pericranium, fascia or a licensed substitute) where primary closure would compress the brain or narrow the theca.",
+        "For an incidental spinal durotomy, repair primarily if accessible, reinforce with a patch or sealant per local practice, and test with a Valsalva manoeuvre requested from the anaesthetist.",
+        "Record the breach, the repair and any post-operative instructions on positioning and mobilisation."
+      ],
+      "structuresAtRisk": [
+        "Nerve roots herniating through a spinal durotomy",
+        "Cortex under a tight cranial closure"
+      ],
+      "pitfalls": [
+        "Forcing a tight primary closure over a swollen brain.",
+        "Catching a nerve root in a spinal dural suture.",
+        "Not telling the ward team about a durotomy, so a post-operative headache or wound leak is missed."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.neuro.postop-neuro-obs": {
+      "id": "step.neuro.postop-neuro-obs",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Post-operative neurological observation plan",
+      "why": "Post-operative haematoma and swelling present as a change in neurological observations, often hours after surgery. The plan only works if someone knows the baseline and has a written trigger for calling.",
+      "how": [
+        "Write the post-operative GCS, pupils and limb power (or lower-limb and sphincter function after spinal surgery) as a baseline.",
+        "Prescribe the frequency of neurological observations and a specific trigger: a fall in GCS, a new pupil change, new weakness or new retention.",
+        "State in the note who is called and that an urgent CT or MRI follows any trigger.",
+        "Hand over drains, devices and the plan for anticoagulant restart to the receiving team."
+      ],
+      "structuresAtRisk": [],
+      "pitfalls": [
+        "Writing 'routine neuro obs' without a baseline or a trigger.",
+        "Attributing a falling GCS to the anaesthetic or to sedation without imaging."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

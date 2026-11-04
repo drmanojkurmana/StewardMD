@@ -1,0 +1,68 @@
+{
+  "id": "acute-spinal-cord-injury",
+  "title": "Acute spinal cord injury",
+  "subtitle": "Protect, perfuse, classify, decompress",
+  "category": "neuro_spine",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "isncsci", "org": "American Spinal Injury Association (ASIA)", "title": "International Standards for Neurological Classification of Spinal Cord Injury (ISNCSCI), revised 2019", "year": 2019, "url": "https://asia-spinalinjury.org/international-standards-neurological-classification-sci-isncsci-worksheet/", "accessed": "2026-11-04" },
+    { "id": "nice-ng41", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Spinal injury: assessment and initial management (NG41)", "year": 2016, "version": "NG41", "url": "https://www.nice.org.uk/guidance/ng41", "accessed": "2026-11-04" },
+    { "id": "aans-cns-2013", "org": "AANS/CNS Joint Section on Disorders of the Spine and Peripheral Nerves", "title": "Guidelines for the management of acute cervical spine and spinal cord injuries (Walters et al, Neurosurgery 2013;60 Suppl 1:82-91 and series)", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Walters+2013+guidelines+management+acute+cervical+spine+spinal+cord+injuries+update", "accessed": "2026-11-04" },
+    { "id": "aospine-2017", "org": "AO Spine", "title": "A clinical practice guideline for the management of acute spinal cord injury (Fehlings et al, Global Spine J 2017;7(3 Suppl):84S-94S)", "year": 2017, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Fehlings+2017+clinical+practice+guideline+management+acute+spinal+cord+injury+Global+Spine", "accessed": "2026-11-04" },
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Weakness, numbness or paraesthesia in the limbs after trauma, even if it is improving." },
+      { "text": "Hypotension with bradycardia and warm peripheries: neurogenic shock, usually from a cervical or high thoracic injury." },
+      { "text": "Diaphragmatic breathing, a weak cough or a falling vital capacity in a cervical injury: impending respiratory failure." },
+      { "text": "Priapism or loss of anal tone in an unconscious trauma patient." },
+      { "text": "Ankylosing spondylitis or diffuse idiopathic skeletal hyperostosis with any neck or back pain after a minor fall. These spines fracture like long bones and are unstable." },
+      { "text": "Any ascending neurological level, which may signal cord oedema or haematoma and threatens the airway." }
+    ],
+    "do_now": [
+      { "text": "Primary survey with spinal motion restriction. The airway comes first; manual in-line stabilisation during intubation.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Treat hypotension. Exclude haemorrhage before attributing it to neurogenic shock; both can coexist.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Log-roll with adequate staff, and remove the patient from a hard board as soon as practical to protect skin.", "evidenceRef": "nice-ng41" },
+      { "text": "Urgent imaging: CT of the injured region, and MRI for neurological deficit to define cord compression.", "timeCritical": true, "evidenceRef": "nice-ng41" }
+    ],
+    "assess": [
+      { "text": "Full ISNCSCI examination: key muscles, light touch and pin prick in every dermatome, deep anal pressure and voluntary anal contraction.", "calcs": ["asia_impairment"] },
+      { "text": "Record the neurological level and the AIS grade. Sacral sparing decides complete versus incomplete, and changes the prognosis." },
+      { "text": "Clear the cervical spine with a validated rule in an alert, unintoxicated patient without distracting injury.", "calcs": ["canadian_cspine", "nexus_cspine"] },
+      { "text": "Repeat the examination. An early examination in spinal shock can underestimate what is preserved.", "calcs": ["gcs"] }
+    ],
+    "investigate": [
+      { "text": "CT of the whole spine in a high-energy injury or a known spinal fracture, because non-contiguous fractures are common." },
+      { "text": "MRI to assess cord compression, cord signal, disc and ligament injury, and epidural haematoma." },
+      { "text": "CT angiography of the neck when the fracture pattern or mechanism suggests vertebral artery injury, per local protocol." },
+      { "text": "Baseline vital capacity and blood gas in cervical injury; repeat them, because respiratory function can deteriorate over days." }
+    ],
+    "resuscitate": [
+      { "text": "Augment mean arterial pressure. AANS/CNS suggests 85 to 90 mmHg for the first 7 days; follow the spinal unit target, with fluids then vasopressors.", "evidenceRef": "aans-cns-2013" },
+      { "text": "Treat symptomatic bradycardia in high cervical injury, which can follow suctioning or turning, per local protocol.", "evidenceRef": "atls" },
+      { "text": "Insert a urinary catheter early; the bladder is areflexic and over-distension causes harm.", "evidenceRef": "nice-ng41" },
+      { "text": "Anticipate ventilatory failure in cervical injury, and intubate electively rather than in extremis.", "evidenceRef": "atls" }
+    ],
+    "definitive": [
+      { "text": "Early surgical decompression, within 24 hours of injury where feasible, for a compressed cord.", "timeCritical": true, "evidenceRef": "aospine-2017" },
+      { "text": "Closed reduction of a cervical facet dislocation in an awake, examinable patient, or open reduction, per the spinal surgeon's plan.", "timeCritical": true, "evidenceRef": "aans-cns-2013" },
+      { "text": "Methylprednisolone is not routine. AANS/CNS advise against it; AO Spine offers a 24-hour infusion started within 8 hours as an option. Decide with the spinal surgeon.", "evidenceRef": "aospine-2017" },
+      { "text": "Stabilise unstable injuries and begin pressure, bladder, bowel and venous thromboembolism care from day one.", "evidenceRef": "nice-ng41" }
+    ],
+    "escalate": [
+      { "text": "Contact the regional spinal surgical team and spinal cord injury centre on the day of injury, before transfer is needed." },
+      { "text": "Intensive care for cervical and high thoracic injuries with any respiratory compromise or haemodynamic instability." },
+      { "text": "Any deterioration in neurological level is an emergency: repeat MRI and inform the spinal surgeon immediately." }
+    ]
+  },
+  "notes": [
+    "The worst missed spinal injury is in the patient with a stiff spine and a trivial fall. Image them, and image the whole spine.",
+    "Neurogenic shock is warm and slow. A cold, tachycardic trauma patient with a cord injury is still bleeding until proven otherwise.",
+    "Classify with ISNCSCI, not with impressions. 'Weak legs' cannot be compared tomorrow; an AIS grade and a level can."
+  ],
+  "calcs": ["asia_impairment", "canadian_cspine", "nexus_cspine", "gcs"]
+}

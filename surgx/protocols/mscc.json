@@ -1,0 +1,64 @@
+{
+  "id": "mscc",
+  "title": "Metastatic spinal cord compression",
+  "subtitle": "Suspect, steroid, scan, decide within 24 hours",
+  "category": "neuro_spine",
+  "specialty": "neurosurgery",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-11-04",
+  "nextReviewDue": "2027-11-04",
+  "sources": [
+    { "id": "nice-ng234", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Spinal metastases and metastatic spinal cord compression (NG234)", "year": 2023, "version": "NG234", "url": "https://www.nice.org.uk/guidance/ng234", "accessed": "2026-11-04" },
+    { "id": "patchell", "org": "Patchell RA et al, The Lancet", "title": "Direct decompressive surgical resection in the treatment of spinal cord compression caused by metastatic cancer: a randomised trial (Lancet 2005;366:643-48)", "year": 2005, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Patchell+2005+direct+decompressive+surgical+resection+metastatic+cancer+Lancet", "accessed": "2026-11-04" },
+    { "id": "sins", "org": "Spine Oncology Study Group", "title": "A novel classification system for spinal instability in neoplastic disease (Fisher et al, Spine 2010;35:E1221-9)", "year": 2010, "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Fisher+2010+novel+classification+system+spinal+instability+neoplastic+disease", "accessed": "2026-11-04" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Known cancer with new spinal pain, especially thoracic, progressive, nocturnal, or worse on coughing or lying flat." },
+      { "text": "Band-like pain around the chest or abdomen." },
+      { "text": "Limb weakness, sensory level, difficulty walking, or new bladder or bowel dysfunction in a patient with cancer." },
+      { "text": "Spinal pain in a patient with no known cancer but with weight loss, a history of smoking, or a breast lump: MSCC can be the first presentation." },
+      { "text": "Rapidly progressive weakness: loss of the ability to walk is the main determinant of outcome." }
+    ],
+    "do_now": [
+      { "text": "Contact the MSCC coordinator or acute oncology service immediately for advice and to start the pathway.", "timeCritical": true, "evidenceRef": "nice-ng234" },
+      { "text": "Suspected MSCC with neurological symptoms or signs: whole-spine MRI as soon as possible, within 24 hours.", "timeCritical": true, "evidenceRef": "nice-ng234" },
+      { "text": "Give dexamethasone 16 mg (oral or intravenous) as soon as possible to people with suspected MSCC and neurological symptoms or signs, unless lymphoma is suspected and steroids would compromise the diagnosis.", "timeCritical": true, "evidenceRef": "nice-ng234" },
+      { "text": "Keep the spine in neutral alignment with careful handling until spinal stability has been assessed.", "evidenceRef": "nice-ng234" }
+    ],
+    "assess": [
+      { "text": "Full neurological examination, recording the motor grade and whether the patient can walk, with the time.", "calcs": ["asia_impairment"] },
+      { "text": "Assess spinal stability from imaging and pain behaviour.", "calcs": ["sins"] },
+      { "text": "Primary tumour type and its radiosensitivity, extent of systemic disease, performance status, and the patient's own goals." },
+      { "text": "Bladder and bowel function, and pressure areas." }
+    ],
+    "investigate": [
+      { "text": "Whole-spine MRI, because multilevel disease is common and changes the plan." },
+      { "text": "CT where MRI is contraindicated, and CT for surgical planning of bony anatomy." },
+      { "text": "If no known primary: staging CT and tissue diagnosis, without delaying decompression in a patient losing function." },
+      { "text": "Blood glucose monitoring once on steroids; full blood count, calcium and renal function." }
+    ],
+    "resuscitate": [
+      { "text": "Analgesia, and thromboprophylaxis when immobile, per local protocol.", "evidenceRef": "nice-ng234" },
+      { "text": "Gastroprotection and glucose monitoring while on dexamethasone; taper after definitive treatment.", "evidenceRef": "nice-ng234" },
+      { "text": "Treat hypercalcaemia if present, per local protocol.", "evidenceRef": "nice-ng234" }
+    ],
+    "definitive": [
+      { "text": "Definitive treatment plan agreed by the senior spinal surgeon and clinical oncologist, ideally within 24 hours of the MRI.", "timeCritical": true, "evidenceRef": "nice-ng234" },
+      { "text": "Surgical decompression and stabilisation for selected patients, especially those still able to walk or recently lost it, with single-area compression and a reasonable prognosis.", "evidenceRef": "patchell" },
+      { "text": "Surgery to stabilise the spine for mechanical instability, regardless of neurological status, when fit.", "evidenceRef": "sins" },
+      { "text": "Radiotherapy for patients not having surgery, and after surgery, per the oncologist.", "evidenceRef": "nice-ng234" }
+    ],
+    "escalate": [
+      { "text": "Senior spinal surgical and oncology input on the day of diagnosis. A weekend is not a reason to delay." },
+      { "text": "Involve palliative care early for symptom control and for shared decisions about treatment intensity." },
+      { "text": "Rehabilitation and discharge planning from the start, including bladder, bowel, skin and mobility needs." }
+    ]
+  },
+  "notes": [
+    "Ambulatory status at diagnosis predicts ambulatory status after treatment. The aim is to treat before the patient stops walking.",
+    "Back pain in a patient with cancer is MSCC until proven otherwise. Pain often precedes neurology by weeks.",
+    "An unstable spine needs surgery even if the cord is not compressed, and radiotherapy will not restore stability."
+  ],
+  "calcs": ["asia_impairment", "sins"]
+}

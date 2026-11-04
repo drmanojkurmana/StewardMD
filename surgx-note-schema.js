@@ -299,7 +299,63 @@
           f("cavityManagement", "Cavity management / packing", { rows: 2 })
         ]
       }
+    },
+    /* ── specialty templates (generated from the specialty content authoring, 2026-11-04) ── */
+    "burr-hole-csdh": {
+      base: "operative", title: "Burr hole evacuation of chronic subdural haematoma",
+      prefill: {"procedure": "Burr hole evacuation of chronic subdural haematoma"},
+      extra: {
+        "Operative detail": [
+          f("preopGcsPupils", "Pre-op GCS (E V M) and pupils", {"type": "text", "required": true, "aiFillable": false, "ph": "E_ V_ M_, pupils L _ mm R _ mm, reactive?"}),
+          f("sideBurrHoles", "Side and number of burr holes", {"type": "text", "required": true, "aiFillable": false, "ph": "Left / right / bilateral; frontal, parietal"}),
+          f("fluidCharacter", "Haematoma fluid character and pressure", {"type": "text", "required": false, "aiFillable": true, "ph": "Motor-oil / mixed / clotted; under pressure?"}),
+          f("drainDetail", "Drain type, position and plan", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Subdural / subgaleal / none (reason); bag level; removal plan"}),
+          f("antithromboticPlan", "Antithrombotic restart plan", {"type": "text", "required": false, "aiFillable": true, "help": "Agreed date and indication, or 'not on antithrombotics'"})
+        ]
+      }
+    },
+    "evd-insertion": {
+      base: "operative", title: "External ventricular drain insertion",
+      prefill: {"procedure": "External ventricular drain insertion"},
+      extra: {
+        "Operative detail": [
+          f("preopGcsPupils", "Pre-procedure GCS (E V M) and pupils", {"type": "text", "required": true, "aiFillable": false, "ph": "E_ V_ M_, pupils L _ mm R _ mm"}),
+          f("sideEntry", "Side, entry point and number of passes", {"type": "text", "required": true, "aiFillable": false, "ph": "Right Kocher point, 1 pass"}),
+          f("catheterDepth", "Catheter depth at skin / skull", {"type": "text", "required": true, "aiFillable": false, "ph": "cm"}),
+          f("openingPressure", "Opening pressure and CSF appearance", {"type": "text", "required": true, "aiFillable": false, "ph": "cmH2O; clear / bloodstained / cloudy"}),
+          f("evdLevel", "Reference level and drainage height", {"type": "text", "required": true, "aiFillable": false, "ph": "Zero at tragus; chamber at _ cmH2O; open / clamped"}),
+          f("csfSent", "CSF samples sent", {"type": "text", "required": false, "aiFillable": false, "ph": "Microscopy, culture, other / none"})
+        ]
+      }
+    },
+    "lumbar-discectomy-ces": {
+      base: "operative", title: "Lumbar decompression for cauda equina syndrome",
+      prefill: {"procedure": "Lumbar discectomy and decompression for cauda equina syndrome"},
+      extra: {
+        "Operative detail": [
+          f("preopNeuroBladder", "Pre-op lower-limb, saddle and bladder status (with time)", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "Power, saddle sensation, PVR / catheter, time of onset"}),
+          f("levelConfirmed", "Level confirmed on imaging", {"type": "text", "required": true, "aiFillable": false, "ph": "L4/5 confirmed on lateral image intensifier"}),
+          f("decompressionExtent", "Extent of bony decompression", {"type": "text", "required": true, "aiFillable": true, "ph": "Laminotomy / hemilaminectomy / laminectomy"}),
+          f("sacFreeAtEnd", "Thecal sac and roots free at end", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, roots mobile, no retained fragment"}),
+          f("durotomy", "Dural tear and repair", {"type": "text", "required": true, "aiFillable": false, "ph": "None / tear: repair method and bed-rest plan"})
+        ]
+      }
+    },
+    "trauma-craniotomy-edh": {
+      base: "operative", title: "Trauma craniotomy for extradural haematoma",
+      prefill: {"procedure": "Craniotomy and evacuation of extradural haematoma"},
+      extra: {
+        "Operative detail": [
+          f("preopGcsPupils", "Pre-op GCS (E V M) and pupils", {"type": "text", "required": true, "aiFillable": false, "ph": "E_ V_ M_, pupils L _ mm R _ mm, reactive?"}),
+          f("clotSource", "Clot volume, location and bleeding source", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "e.g. left temporal EDH, MMA branch coagulated"}),
+          f("duraFindings", "Dura opened and findings", {"type": "text", "required": true, "aiFillable": false, "ph": "Not opened / opened: subdural, contusion, swelling"}),
+          f("boneFlapStatus", "Bone flap replaced or stored (where)", {"type": "text", "required": true, "aiFillable": false, "ph": "Replaced, plates / stored in bone bank / abdominal pocket"}),
+          f("duralClosure", "Dural closure and hitch sutures", {"type": "text", "required": false, "aiFillable": false, "ph": "Hitches placed; primary / duraplasty (material)"}),
+          f("icpMonitor", "ICP monitor or drain placed", {"type": "text", "required": false, "aiFillable": false, "ph": "None / parenchymal / EVD"})
+        ]
+      }
     }
+    /* ── end specialty templates ── */
   };
 
   /* Resolve a type + optional template into a single flat schema. Pure. */

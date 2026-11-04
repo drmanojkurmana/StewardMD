@@ -1,55 +1,527 @@
 {
   "_comment": "SURGX catalog. Small on purpose: the app fetches this first (no-store, so it is never the stale copy), then only the unit the clinician actually opened. Modelled on clinix/manifest.json and atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load). Protocols marked kind:'engine' are NOT authored here - they are projections of the ws-surgery.js decision engine, which remains the single home of that clinical logic.",
   "schemaVersion": 1,
-  "contentVersion": "0.1.2-isofig",
-  "updated": "2026-08-24",
+  "contentVersion": "0.2.0-allspec",
+  "updated": "2026-11-04",
   "categories": [
-    { "id": "trauma", "title": "Trauma" },
-    { "id": "resuscitation", "title": "Shock and resuscitation" },
-    { "id": "abdomen", "title": "Acute abdomen" },
-    { "id": "infection", "title": "Surgical infection" },
-    { "id": "perioperative", "title": "Peri-operative" }
+    {
+      "id": "trauma",
+      "title": "Trauma"
+    },
+    {
+      "id": "resuscitation",
+      "title": "Shock and resuscitation"
+    },
+    {
+      "id": "abdomen",
+      "title": "Acute abdomen"
+    },
+    {
+      "id": "infection",
+      "title": "Surgical infection"
+    },
+    {
+      "id": "perioperative",
+      "title": "Peri-operative"
+    },
+    {
+      "id": "neuro_cranial",
+      "title": "Cranial neurosurgical emergencies"
+    },
+    {
+      "id": "neuro_spine",
+      "title": "Spinal emergencies"
+    }
   ],
   "protocols": [
-    { "id": "atls-primary-survey", "kind": "authored", "title": "Trauma primary survey (ABCDE)", "subtitle": "The first ten minutes", "category": "trauma", "file": "protocols/atls-primary-survey.json", "review": "ai_drafted" },
-    { "id": "haemorrhagic-shock", "kind": "authored", "title": "Haemorrhagic shock", "subtitle": "Recognise, stop the bleeding, resuscitate", "category": "resuscitation", "file": "protocols/haemorrhagic-shock.json", "review": "ai_drafted" },
-    { "id": "surgical-sepsis", "kind": "authored", "title": "Sepsis with a surgical source", "subtitle": "Source control is the treatment", "category": "resuscitation", "file": "protocols/surgical-sepsis.json", "review": "ai_drafted" },
-    { "id": "chest-trauma", "kind": "authored", "title": "Chest trauma", "subtitle": "The six that kill early", "category": "trauma", "file": "protocols/chest-trauma.json", "review": "ai_drafted" },
-    { "id": "head-injury", "kind": "authored", "title": "Head injury", "subtitle": "Who scans, who transfers, who watches", "category": "trauma", "file": "protocols/head-injury.json", "review": "ai_drafted" },
-    { "id": "burns", "kind": "authored", "title": "Major burns", "subtitle": "Airway, area, fluids, transfer", "category": "trauma", "file": "protocols/burns.json", "review": "ai_drafted" },
-    { "id": "upper-gi-bleed", "kind": "authored", "title": "Upper GI bleeding", "subtitle": "Resuscitate, risk-stratify, scope", "category": "abdomen", "file": "protocols/upper-gi-bleed.json", "review": "ai_drafted" },
-    { "id": "postop-deterioration", "kind": "authored", "title": "Post-operative deterioration", "subtitle": "It is a leak until proven otherwise", "category": "perioperative", "file": "protocols/postop-deterioration.json", "review": "ai_drafted" },
-
-    { "id": "acute_abdomen", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "gi_perforation", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "bowel_obstruction", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "cholecystitis", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "cholangitis", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
-    { "id": "liver_abscess", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
-    { "id": "colitis", "kind": "engine", "category": "abdomen", "subtitle": "Shared with Internal Medicine" },
-    { "id": "hernia", "kind": "engine", "category": "abdomen", "subtitle": "Interactive - select findings" },
-    { "id": "nec_sti", "kind": "engine", "category": "infection", "subtitle": "Surgical emergency" },
-    { "id": "abscess", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
-    { "id": "cellulitis", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
-    { "id": "wound_infection", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" },
-    { "id": "diabetic_foot", "kind": "engine", "category": "infection", "subtitle": "Interactive - select findings" }
+    {
+      "id": "atls-primary-survey",
+      "kind": "authored",
+      "title": "Trauma primary survey (ABCDE)",
+      "subtitle": "The first ten minutes",
+      "category": "trauma",
+      "file": "protocols/atls-primary-survey.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "haemorrhagic-shock",
+      "kind": "authored",
+      "title": "Haemorrhagic shock",
+      "subtitle": "Recognise, stop the bleeding, resuscitate",
+      "category": "resuscitation",
+      "file": "protocols/haemorrhagic-shock.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "surgical-sepsis",
+      "kind": "authored",
+      "title": "Sepsis with a surgical source",
+      "subtitle": "Source control is the treatment",
+      "category": "resuscitation",
+      "file": "protocols/surgical-sepsis.json",
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "chest-trauma",
+      "kind": "authored",
+      "title": "Chest trauma",
+      "subtitle": "The six that kill early",
+      "category": "trauma",
+      "file": "protocols/chest-trauma.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "head-injury",
+      "kind": "authored",
+      "title": "Head injury",
+      "subtitle": "Who scans, who transfers, who watches",
+      "category": "trauma",
+      "file": "protocols/head-injury.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "burns",
+      "kind": "authored",
+      "title": "Major burns",
+      "subtitle": "Airway, area, fluids, transfer",
+      "category": "trauma",
+      "file": "protocols/burns.json",
+      "review": "ai_drafted",
+      "specialty": "trauma"
+    },
+    {
+      "id": "upper-gi-bleed",
+      "kind": "authored",
+      "title": "Upper GI bleeding",
+      "subtitle": "Resuscitate, risk-stratify, scope",
+      "category": "abdomen",
+      "file": "protocols/upper-gi-bleed.json",
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "postop-deterioration",
+      "kind": "authored",
+      "title": "Post-operative deterioration",
+      "subtitle": "It is a leak until proven otherwise",
+      "category": "perioperative",
+      "file": "protocols/postop-deterioration.json",
+      "review": "ai_drafted",
+      "specialty": "periop"
+    },
+    {
+      "id": "acute_abdomen",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "gi_perforation",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "bowel_obstruction",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "cholecystitis",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "cholangitis",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Shared with Internal Medicine",
+      "specialty": "general"
+    },
+    {
+      "id": "liver_abscess",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Shared with Internal Medicine",
+      "specialty": "general"
+    },
+    {
+      "id": "colitis",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Shared with Internal Medicine",
+      "specialty": "general"
+    },
+    {
+      "id": "hernia",
+      "kind": "engine",
+      "category": "abdomen",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "nec_sti",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Surgical emergency",
+      "specialty": "general"
+    },
+    {
+      "id": "abscess",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "cellulitis",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "wound_infection",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "diabetic_foot",
+      "kind": "engine",
+      "category": "infection",
+      "subtitle": "Interactive - select findings",
+      "specialty": "general"
+    },
+    {
+      "id": "raised-icp",
+      "kind": "authored",
+      "title": "Raised intracranial pressure and herniation",
+      "subtitle": "Recognise, buy time, decompress",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/raised-icp.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "acute-spinal-cord-injury",
+      "kind": "authored",
+      "title": "Acute spinal cord injury",
+      "subtitle": "Protect, perfuse, classify, decompress",
+      "category": "neuro_spine",
+      "specialty": "neurosurgery",
+      "file": "protocols/acute-spinal-cord-injury.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "cauda-equina-syndrome",
+      "kind": "authored",
+      "title": "Cauda equina syndrome",
+      "subtitle": "Suspect early, scan the same day, decompress",
+      "category": "neuro_spine",
+      "specialty": "neurosurgery",
+      "file": "protocols/cauda-equina-syndrome.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "aneurysmal-sah",
+      "kind": "authored",
+      "title": "Aneurysmal subarachnoid haemorrhage",
+      "subtitle": "Diagnose, grade, secure the aneurysm",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/aneurysmal-sah.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "traumatic-haematoma-surgery",
+      "kind": "authored",
+      "title": "Extradural and acute subdural haematoma",
+      "subtitle": "The decision to operate",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/traumatic-haematoma-surgery.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "csf-device-malfunction",
+      "kind": "authored",
+      "title": "EVD and shunt malfunction or infection",
+      "subtitle": "Blocked, overdraining or infected CSF devices",
+      "category": "neuro_cranial",
+      "specialty": "neurosurgery",
+      "file": "protocols/csf-device-malfunction.json",
+      "review": "ai_drafted"
+    },
+    {
+      "id": "mscc",
+      "kind": "authored",
+      "title": "Metastatic spinal cord compression",
+      "subtitle": "Suspect, steroid, scan, decide within 24 hours",
+      "category": "neuro_spine",
+      "specialty": "neurosurgery",
+      "file": "protocols/mscc.json",
+      "review": "ai_drafted"
+    }
   ],
   "stepPacks": [
-    { "id": "core", "file": "steps/core.json", "title": "Steps shared by every operation", "shared": true },
-    { "id": "laparoscopy", "file": "steps/laparoscopy.json", "title": "Laparoscopic access and closure", "shared": true },
-    { "id": "abdomen", "file": "steps/abdomen.json", "title": "Open abdominal steps", "shared": true },
-    { "id": "softtissue", "file": "steps/softtissue.json", "title": "Soft-tissue and drainage steps", "shared": true }
+    {
+      "id": "core",
+      "file": "steps/core.json",
+      "title": "Steps shared by every operation",
+      "shared": true
+    },
+    {
+      "id": "laparoscopy",
+      "file": "steps/laparoscopy.json",
+      "title": "Laparoscopic access and closure",
+      "shared": true
+    },
+    {
+      "id": "abdomen",
+      "file": "steps/abdomen.json",
+      "title": "Open abdominal steps",
+      "shared": true
+    },
+    {
+      "id": "softtissue",
+      "file": "steps/softtissue.json",
+      "title": "Soft-tissue and drainage steps",
+      "shared": true
+    },
+    {
+      "id": "neuro",
+      "file": "steps/neuro.json",
+      "title": "Shared neurosurgical and spinal steps",
+      "shared": true
+    }
   ],
   "procedures": [
-    { "id": "appendicectomy", "title": "Appendicectomy", "subtitle": "Open and laparoscopic", "system": "gastrointestinal", "file": "procedures/appendicectomy.json", "stepPacks": ["core", "laparoscopy", "abdomen"], "review": "ai_drafted", "estMinutes": 45 },
-    { "id": "lap-cholecystectomy", "title": "Laparoscopic cholecystectomy", "subtitle": "Critical View of Safety", "system": "hepatobiliary", "file": "procedures/lap-cholecystectomy.json", "stepPacks": ["core", "laparoscopy"], "review": "ai_drafted", "estMinutes": 60 },
-    { "id": "hernia-repair", "title": "Open inguinal hernia repair", "subtitle": "Lichtenstein tension-free mesh", "system": "abdominal wall", "file": "procedures/hernia-repair.json", "stepPacks": ["core", "abdomen"], "review": "ai_drafted", "estMinutes": 50 },
-    { "id": "laparotomy", "title": "Exploratory laparotomy", "subtitle": "Systematic exploration and damage control", "system": "gastrointestinal", "file": "procedures/laparotomy.json", "stepPacks": ["core", "abdomen"], "review": "ai_drafted", "estMinutes": 90 },
-    { "id": "abscess-drainage", "title": "Abscess incision and drainage", "subtitle": "Source control at its simplest", "system": "soft tissue", "file": "procedures/abscess-drainage.json", "stepPacks": ["core", "softtissue"], "review": "ai_drafted", "estMinutes": 20 }
+    {
+      "id": "appendicectomy",
+      "title": "Appendicectomy",
+      "subtitle": "Open and laparoscopic",
+      "system": "gastrointestinal",
+      "file": "procedures/appendicectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 45,
+      "specialty": "general"
+    },
+    {
+      "id": "lap-cholecystectomy",
+      "title": "Laparoscopic cholecystectomy",
+      "subtitle": "Critical View of Safety",
+      "system": "hepatobiliary",
+      "file": "procedures/lap-cholecystectomy.json",
+      "stepPacks": [
+        "core",
+        "laparoscopy"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60,
+      "specialty": "general"
+    },
+    {
+      "id": "hernia-repair",
+      "title": "Open inguinal hernia repair",
+      "subtitle": "Lichtenstein tension-free mesh",
+      "system": "abdominal wall",
+      "file": "procedures/hernia-repair.json",
+      "stepPacks": [
+        "core",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 50,
+      "specialty": "general"
+    },
+    {
+      "id": "laparotomy",
+      "title": "Exploratory laparotomy",
+      "subtitle": "Systematic exploration and damage control",
+      "system": "gastrointestinal",
+      "file": "procedures/laparotomy.json",
+      "stepPacks": [
+        "core",
+        "abdomen"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90,
+      "specialty": "general"
+    },
+    {
+      "id": "abscess-drainage",
+      "title": "Abscess incision and drainage",
+      "subtitle": "Source control at its simplest",
+      "system": "soft tissue",
+      "file": "procedures/abscess-drainage.json",
+      "stepPacks": [
+        "core",
+        "softtissue"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20,
+      "specialty": "general"
+    },
+    {
+      "id": "burr-hole-csdh",
+      "title": "Burr hole evacuation of chronic subdural haematoma",
+      "subtitle": "Wash out, drain, prevent recurrence",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/burr-hole-csdh.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 60
+    },
+    {
+      "id": "trauma-craniotomy-edh",
+      "title": "Trauma craniotomy for extradural haematoma",
+      "subtitle": "With decompressive craniectomy as the bailout",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/trauma-craniotomy-edh.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "evd-insertion",
+      "title": "External ventricular drain insertion",
+      "subtitle": "Frontal approach at Kocher point",
+      "system": "neurological",
+      "specialty": "neurosurgery",
+      "file": "procedures/evd-insertion.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 40
+    },
+    {
+      "id": "lumbar-discectomy-ces",
+      "title": "Lumbar decompression for cauda equina syndrome",
+      "subtitle": "Discectomy with laminotomy or laminectomy",
+      "system": "spine",
+      "specialty": "neurosurgery",
+      "file": "procedures/lumbar-discectomy-ces.json",
+      "stepPacks": [
+        "core",
+        "neuro"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    }
   ],
   "cases": [
-    { "id": "rlq-pain-young-man", "title": "Right iliac fossa pain", "subtitle": "Emergency - who goes to theatre", "file": "cases/rlq-pain-young-man.json", "levels": ["student", "intern", "resident", "surgeon"], "review": "ai_drafted" },
-    { "id": "preop-cardiac-risk", "title": "Fit for surgery?", "subtitle": "Pre-operative decision-making", "file": "cases/preop-cardiac-risk.json", "levels": ["intern", "resident", "surgeon"], "review": "ai_drafted" },
-    { "id": "pod3-tachycardia", "title": "Tachycardia on day three", "subtitle": "Post-operative deterioration", "file": "cases/pod3-tachycardia.json", "levels": ["intern", "resident", "surgeon"], "review": "ai_drafted" }
+    {
+      "id": "rlq-pain-young-man",
+      "title": "Right iliac fossa pain",
+      "subtitle": "Emergency - who goes to theatre",
+      "file": "cases/rlq-pain-young-man.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "preop-cardiac-risk",
+      "title": "Fit for surgery?",
+      "subtitle": "Pre-operative decision-making",
+      "file": "cases/preop-cardiac-risk.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted",
+      "specialty": "periop"
+    },
+    {
+      "id": "pod3-tachycardia",
+      "title": "Tachycardia on day three",
+      "subtitle": "Post-operative deterioration",
+      "file": "cases/pod3-tachycardia.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted",
+      "specialty": "general"
+    },
+    {
+      "id": "edh-lucid-interval",
+      "title": "Talking, then not",
+      "subtitle": "Lucid interval after a blow to the head",
+      "specialty": "neurosurgery",
+      "file": "cases/edh-lucid-interval.json",
+      "levels": [
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    },
+    {
+      "id": "back-pain-retention",
+      "title": "Back pain and a full bladder",
+      "subtitle": "Suspected cauda equina syndrome",
+      "specialty": "neurosurgery",
+      "file": "cases/back-pain-retention.json",
+      "levels": [
+        "student",
+        "intern",
+        "resident",
+        "surgeon"
+      ],
+      "review": "ai_drafted"
+    }
+  ],
+  "specialties": [
+    {
+      "id": "general",
+      "title": "General, GI and HPB surgery"
+    },
+    {
+      "id": "trauma",
+      "title": "Trauma"
+    },
+    {
+      "id": "periop",
+      "title": "Peri-operative care"
+    },
+    {
+      "id": "neurosurgery",
+      "title": "Neurosurgery and spine"
+    }
   ]
 }
