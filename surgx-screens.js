@@ -72,6 +72,9 @@
     evList: null, evQuery: "",
     // cases
     caseList: null, kase: null, caseAnswers: null, caseIdx: 0, caseLevel: "",
+    // specialty browsing, shared by protocols / procedures / cases so a surgeon who picks
+    // "Urology" once sees urology in every section
+    catalog: null, spec: "", find: "",
     // notes
     noteIndex: null, note: null, noteSchema: null, noteType: "", noteTemplate: ""
   };
@@ -228,8 +231,8 @@
 
   var SECTIONS = [
     { n: "01", id: "notes", act: "notes", tt: "Notes", sb: "Operative, pre-op, post-op, progress and discharge documentation", icon: "clinical_notes" },
-    { n: "02", id: "protocols", act: "protocols", tt: "Protocols", sb: "Trauma, surgical emergencies and peri-operative pathways", icon: "emergency" },
-    { n: "03", id: "procedures", act: "procedures", tt: "Procedures", sb: "Step-by-step operative reference and structures at risk", icon: "content_cut" },
+    { n: "02", id: "protocols", act: "protocols", tt: "Protocols", sb: "Emergencies and pathways across every surgical specialty", icon: "emergency" },
+    { n: "03", id: "procedures", act: "procedures", tt: "Procedures", sb: "Step-by-step operative reference, by specialty", icon: "content_cut" },
     { n: "04", id: "evidence", act: "evidence", tt: "Evidence", sb: "Guidelines, sources and the reasoning behind them", icon: "menu_book" },
     { n: "05", id: "cases", act: "cases", tt: "Cases", sb: "Interactive surgical reasoning with a senior surgeon's questions", icon: "psychology" }
   ];
@@ -287,6 +290,71 @@
     infection: "Surgical infection", perioperative: "Peri-operative", surgical_emergency: "Surgical emergency"
   };
 
+
+  /* ── specialty browsing ──────────────────────────────────────────────────── */
+
+  // Titles come from manifest.specialties / manifest.categories so new content needs no code
+  // change; these are only the fallback for an old cached manifest.
+  var SPEC_FALLBACK = { general: "General and GI surgery", trauma: "Trauma", periop: "Peri-operative care" };
+  function ensureCatalog() {
+    if (state.catalog) return;
+    var cc = C(); if (!cc) return;
+    state.catalog = { specialties: [], categories: [] };
+    cc.loadCatalog().then(function (cat) {
+      state.catalog = { specialties: (cat && cat.specialties) || [], categories: (cat && cat.categories) || [] };
+      var h = routeHead();
+      if (h === "protocols" || h === "procedures" || h === "cases") render();
+    });
+  }
+  function specTitle(id) {
+    var list = (state.catalog && state.catalog.specialties) || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].title;
+    return SPEC_FALLBACK[id] || id;
+  }
+  function catTitle(id) {
+    var list = (state.catalog && state.catalog.categories) || [];
+    for (var i = 0; i < list.length; i++) if (list[i].id === id) return list[i].title;
+    return CAT_TITLES[id] || id;
+  }
+  function specOf(x) { return (x && x.specialty) || "general"; }
+  // Order follows manifest.specialties, then anything unlisted, so the chip row is stable.
+  function specOrder(list) {
+    var seen = {}, out = [];
+    ((state.catalog && state.catalog.specialties) || []).forEach(function (s) {
+      if (list.some(function (x) { return specOf(x) === s.id; })) { seen[s.id] = 1; out.push(s.id); }
+    });
+    list.forEach(function (x) { var k = specOf(x); if (!seen[k]) { seen[k] = 1; out.push(k); } });
+    return out;
+  }
+  function matchesFind(x) {
+    var q = String(state.find || "").trim().toLowerCase();
+    if (!q) return true;
+    var hay = [x.title, x.subtitle, x.system, specTitle(specOf(x))].concat(x.aliases || []).join(" ").toLowerCase();
+    return q.split(/\s+/).every(function (w) { return hay.indexOf(w) >= 0; });
+  }
+  function browseFilter(list) {
+    return list.filter(function (x) { return (!state.spec || specOf(x) === state.spec) && matchesFind(x); });
+  }
+  // Search box + specialty chips. Hidden for a single-specialty list, where it would be noise.
+  function browseBar(list, what) {
+    var order = specOrder(list);
+    var chips = order.length > 1 ? '<div class="sgx-spec" role="tablist" aria-label="Specialty">' +
+      '<button class="sgx-chip' + (!state.spec ? " on" : "") + '" data-sgx="spec" data-id="">All</button>' +
+      order.map(function (k) {
+        return '<button class="sgx-chip' + (state.spec === k ? " on" : "") + '" data-sgx="spec" data-id="' + attr(k) + '">' + esc(specTitle(k)) + "</button>";
+      }).join("") + "</div>" : "";
+    return '<input class="sgx-find" id="sgxFind" type="search" autocomplete="off" placeholder="Search ' + attr(what) +
+      '" aria-label="Search ' + attr(what) + '" value="' + attr(state.find) + '">' + chips;
+  }
+  function rowsBySpec(list, rowFn) {
+    var shown = browseFilter(list);
+    if (!shown.length) return '<div class="sgx-empty">Nothing matches. Clear the search or pick another specialty.</div>';
+    return specOrder(shown).map(function (k) {
+      return '<div class="sgx-seclabel">' + esc(specTitle(k)) + "</div>" +
+        shown.filter(function (x) { return specOf(x) === k; }).map(rowFn).join("");
+    }).join("");
+  }
+
   function screenProtocols() {
     if (state.protoIndex === null) {
       var cc = C();
@@ -301,25 +369,32 @@
       return head("Protocols", "02") +
         emptyState("emergency", "No protocols available", "Protocols could not be loaded. Check your connection and try again.");
     }
-    var groups = {}, order = [];
-    state.protoIndex.forEach(function (p) {
-      var c = p.category || "surgical_emergency";
-      if (!groups[c]) { groups[c] = []; order.push(c); }
-      groups[c].push(p);
-    });
-    var html = order.map(function (c) {
-      return '<div class="sgx-seclabel">' + esc(CAT_TITLES[c] || c) + "</div>" +
-        groups[c].map(function (p) {
-          return '<button class="sgx-row" data-sgx="go" data-r="protocol/' + attr(p.id) + '">' +
-            '<span class="tx"><span class="tt">' + esc(p.title) + "</span>" +
-            (p.subtitle ? '<span class="sb">' + esc(p.subtitle) + "</span>" : "") + "</span>" +
-            '<span class="go">' + ic("chevron_right") + "</span></button>";
-        }).join("");
-    }).join("");
+    ensureCatalog();
+    function protoRow(p) {
+      return '<button class="sgx-row" data-sgx="go" data-r="protocol/' + attr(p.id) + '">' +
+        '<span class="tx"><span class="tt">' + esc(p.title) + "</span>" +
+        (p.subtitle ? '<span class="sb">' + esc(p.subtitle) + "</span>" : "") + "</span>" +
+        '<span class="go">' + ic("chevron_right") + "</span></button>";
+    }
+    var html;
+    if (state.spec) {
+      // One specialty: group by clinical category inside it, as before.
+      var shown = browseFilter(state.protoIndex), groups = {}, order = [];
+      shown.forEach(function (p) {
+        var c = p.category || "surgical_emergency";
+        if (!groups[c]) { groups[c] = []; order.push(c); }
+        groups[c].push(p);
+      });
+      html = shown.length ? order.map(function (c) {
+        return '<div class="sgx-seclabel">' + esc(catTitle(c)) + "</div>" + groups[c].map(protoRow).join("");
+      }).join("") : '<div class="sgx-empty">Nothing matches. Clear the search or pick another specialty.</div>';
+    } else {
+      html = rowsBySpec(state.protoIndex, protoRow);
+    }
     return head("Protocols", "02") + wrap(
       '<div class="sgx-banner info">' + ic("bolt") +
       " Red flags and immediate actions are always at the top. Interactive protocols recalculate as you tick findings.</div>" +
-      html);
+      browseBar(state.protoIndex, "protocols") + html);
   }
 
   function screenProtocol() {
@@ -489,16 +564,17 @@
       return head("Procedures", "03") +
         emptyState("surgical", "No procedures available", "Procedures could not be loaded. Check your connection and try again.");
     }
-    var rows = state.procList.map(function (p) {
+    ensureCatalog();
+    var rows = rowsBySpec(state.procList, function (p) {
       return '<button class="sgx-row" data-sgx="go" data-r="procedure/' + attr(p.id) + '">' +
         '<span class="tx"><span class="tt">' + esc(p.title) + "</span>" +
         '<span class="sb">' + esc(p.subtitle || p.system || "") + (p.estMinutes ? " · about " + p.estMinutes + " min" : "") + "</span></span>" +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
-    }).join("");
+    });
     return head("Procedures", "03") + wrap(
       '<div class="sgx-banner info">' + ic("school") +
       " Educational reference. These pages describe operations; they do not make decisions about a particular patient.</div>" +
-      rows);
+      browseBar(state.procList, "procedures") + rows);
   }
 
   function screenProcedure() {
@@ -739,15 +815,17 @@
     }).join("");
 
     var st = ST();
-    var rows = state.caseList.filter(function (c) {
+    ensureCatalog();
+    var atLevel = state.caseList.filter(function (c) {
       return !c.levels || c.levels.indexOf(lv) >= 0;
-    }).map(function (c) {
+    });
+    var rows = atLevel.length ? browseBar(atLevel, "cases") + rowsBySpec(atLevel, function (c) {
       var prev = st ? st.caseResult(c.id) : null;
       return '<button class="sgx-row" data-sgx="go" data-r="case/' + attr(c.id) + '">' +
         '<span class="tx"><span class="tt">' + esc(c.title) + "</span>" +
         '<span class="sb">' + esc(c.subtitle || "") + (prev ? " · attempted" : "") + "</span></span>" +
         '<span class="go">' + ic("chevron_right") + "</span></button>";
-    }).join("");
+    }) : "";
 
     return head("Cases", "05") + wrap(
       '<div class="sgx-banner sim">' + ic("science") + " Simulation. Not real patients.</div>" +
@@ -1468,7 +1546,15 @@
       (provLabel ? '<span class="sgx-prov ' + pv + '">' + provLabel + "</span>" : "") +
       "</label>";
     if (f.help) h += '<div class="help">' + esc(f.help) + "</div>";
-    if (f.type === "text") {
+    if (f.type === "choice" && f.options && f.options.length) {
+      // Tap targets, one per option. The value is a plain string, so the note text, completeness
+      // and provenance treat it exactly like a typed field; a tap is the clinician's own act.
+      h += '<div class="sgx-choice" role="radiogroup" id="sgxF-' + attr(f.k) + '">' + f.options.map(function (o) {
+        var on = v === o;
+        return '<button type="button" class="sgx-chip' + (on ? " on" : "") + '" role="radio" aria-checked="' + (on ? "true" : "false") +
+          '" data-sgx="choice" data-k="' + attr(f.k) + '" data-v="' + attr(o) + '">' + esc(o) + "</button>";
+      }).join("") + "</div>";
+    } else if (f.type === "text") {
       h += '<input id="sgxF-' + attr(f.k) + '" type="text" data-sgx-field="' + attr(f.k) + '"' + (f.k === "patientRef" ? " data-phi-input" : "") + ' value="' + attr(v) +
         '" placeholder="' + attr(f.ph) + '">';
     } else {
@@ -1477,7 +1563,9 @@
     }
     // Confirmation is an explicit act. A dictated or generated field that reads correctly is still
     // not a field the surgeon has put their name to, and an operative note is signed.
-    if (v.trim() && pv !== "clinician") {
+    if (f.type === "choice") {
+      // A tap IS the confirmation; there is no separate Confirm step for a choice.
+    } else if (v.trim() && pv !== "clinician") {
       h += '<button class="sgx-confirm" data-sgx="confirm" data-k="' + attr(f.k) + '">' + ic("check") + " Confirm as mine</button>";
     } else if (v.trim() && pv === "clinician") {
       h += '<button class="sgx-confirm done" data-sgx="confirm" data-k="' + attr(f.k) + '" disabled>' + ic("check_circle") + " Confirmed</button>";
@@ -1752,6 +1840,7 @@
       if (act === "tab") { state.procTab = t.getAttribute("data-id"); render(); try { state.host.scrollTop = 0; } catch (er) {} return; }
 
       // cases
+      if (act === "spec") { state.spec = t.getAttribute("data-id") || ""; haptic("light"); render(); return; }
       if (act === "level") { state.caseLevel = t.getAttribute("data-id"); state.kase = null; render(); return; }
       if (act === "answer") {
         var dp = t.getAttribute("data-dp"), opt = t.getAttribute("data-opt");
@@ -1779,6 +1868,16 @@
       }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
       if (act === "notestructure") { structureNote(); return; }
+      if (act === "choice") {
+        if (!state.note || state.note.finalized) return;
+        var ck = t.getAttribute("data-k"), cv = t.getAttribute("data-v");
+        // Tapping the selected option again clears it, so a mis-tap is undoable without a reset.
+        if (state.note.values[ck] === cv) { state.note.values[ck] = ""; state.note.provenance[ck] = "missing"; }
+        else { state.note.values[ck] = cv; state.note.provenance[ck] = "clinician"; }
+        haptic("light");
+        render();
+        return;
+      }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
         if (!state.note) return;
@@ -2097,6 +2196,17 @@
       var el = e.target;
       if (el && el.getAttribute && el.getAttribute("data-sgx-field") != null) { onFieldInput(el); return; }
       if (el && el.hasAttribute && el.hasAttribute("data-sgx-label")) { if (state.note) state.note.label = el.value; return; }
+      if (el && el.id === "sgxFind") {
+        state.find = el.value;
+        clearTimeout(rootEl.__fT);
+        rootEl.__fT = setTimeout(function () {
+          var pos = el.selectionStart;
+          render();
+          var again = state.root.querySelector("#sgxFind");
+          if (again) { again.focus(); try { again.setSelectionRange(pos, pos); } catch (er) {} }
+        }, 220);
+        return;
+      }
       if (el && el.id === "sgxEvQ") {
         state.evQuery = el.value;
         clearTimeout(rootEl.__evT);

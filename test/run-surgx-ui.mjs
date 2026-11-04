@@ -355,6 +355,33 @@ try {
     })()`);
     ok(filled > 8, `every required field can be typed (${filled} filled)`);
     await sleep(300);
+
+    /* WHO Surgical Safety Checklist (2026-11-04): choice fields are TAPS, never typed and never
+     * AI-filled. Still missing until tapped, so typing alone must not finalise. */
+    ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('WHO Surgical Safety Checklist')")) === true,
+      "WHO: the operative note carries the Surgical Safety Checklist");
+    ok((await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').disabled")) === true,
+      "WHO: the required sign in / time out / sign out items still block finalising until tapped");
+    ok((await ev("!!document.querySelector('#surgxRoot [data-sgx=\"choice\"][data-k=\"whoTimeOut\"][data-v=\"Not done\"]')")) === true,
+      "WHO: 'Not done' is a recordable answer, not just a Done tick");
+    const tapped = await ev(`(() => {
+      const S = window.SMD_SURGX_SCREENS._state();
+      const fields = S.noteSchema.sections.reduce((a, s) => a.concat(s.fields), []);
+      let n = 0;
+      fields.forEach(f => {
+        if (!f.required || f.type !== "choice") return;
+        const b = document.querySelector('#surgxRoot [data-sgx="choice"][data-k="' + f.k + '"][data-v="Done"]');
+        if (!b) return;
+        b.click(); n++;
+      });
+      return n;
+    })()`);
+    ok(tapped === 3, `WHO: the three required checklist items are tappable (${tapped})`);
+    await sleep(300);
+    ok((await ev("window.SMD_SURGX_SCREENS._state().note.provenance.whoTimeOut")) === "clinician",
+      "WHO: a tap is the clinician's own act (provenance clinician)");
+    ok((await ev("document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('Time out: patient, site and procedure confirmed aloud: Done')")) === true,
+      "WHO: the exported note text carries the checklist answer");
     ok((await ev("document.querySelector('#surgxRoot .sgx-sticky .stat').textContent.includes('Ready to finalise')")) === true,
       "with every required field confirmed, the status bar says so");
     ok((await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').disabled")) === false,

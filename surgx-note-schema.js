@@ -37,7 +37,10 @@
       phi: o.phi === true,
       rows: o.rows || (o.type === "text" ? 1 : 2),
       ph: o.ph || "",
-      help: o.help || ""
+      help: o.help || "",
+      // type:"choice" renders as a row of tap targets. The stored value is still a plain string, so
+      // completeness, provenance and the exported note text treat it exactly like a typed field.
+      options: o.options instanceof Array ? o.options.slice() : null
     };
   }
   function sec(title, fields, o) {
@@ -53,6 +56,42 @@
       f("sex", "Sex", { type: "text", aiFillable: false, phi: true }),
       f("date", "Date", { type: "text", required: true, aiFillable: false, ph: "e.g. 24 Aug 2026" })
     ].concat(extra || []), { note: "Identifiers stay on this device. Never AI-filled." });
+  }
+
+  /* WHO Surgical Safety Checklist (2009), recorded in the operative note. Every item is a team act
+   * performed in the room, so every item is aiFillable:false: a model must never be able to state
+   * that a time out happened. "Not done" is a valid, recordable answer; a checklist that can only
+   * say "Done" teaches people to tick it. */
+  var WHO_DONE = ["Done", "Not done"];
+  var WHO_DONE_NA = ["Done", "Not applicable", "Not done"];
+  function whoChecklist() {
+    function c(k, label, req, opts, help) {
+      return f(k, label, { type: "choice", options: opts || WHO_DONE, required: !!req, aiFillable: false, help: help || "" });
+    }
+    return sec("WHO Surgical Safety Checklist", [
+      c("whoSignInIdentity", "Sign in: identity, site, procedure and consent confirmed with the patient", true),
+      c("whoSignInSite", "Sign in: site marked", false, WHO_DONE_NA),
+      c("whoSignInAnaes", "Sign in: anaesthesia safety check complete, pulse oximeter on and working", false),
+      c("whoSignInRisk", "Sign in: allergy, difficult airway and blood loss risk reviewed", false, null,
+        "Blood loss risk: more than 500 mL in an adult, or 7 mL/kg in a child, needs access and blood planned."),
+      c("whoTimeOutTeam", "Time out: team introduced by name and role", false),
+      c("whoTimeOut", "Time out: patient, site and procedure confirmed aloud", true),
+      c("whoTimeOutAbx", "Time out: antibiotic prophylaxis given within the last 60 minutes", false, WHO_DONE_NA),
+      c("whoTimeOutEvents", "Time out: critical steps, duration, blood loss and equipment concerns discussed", false),
+      c("whoTimeOutImaging", "Time out: essential imaging displayed", false, WHO_DONE_NA),
+      c("whoSignOut", "Sign out: procedure recorded, counts correct, specimens labelled", true),
+      c("whoSignOutRecovery", "Sign out: equipment problems and key recovery concerns handed over", false)
+    ], { note: "A team check done in the room. Never AI-filled." });
+  }
+
+  /* Clavien-Dindo grade. The app's Calculators module has the full classifier (clavien_dindo); this
+   * records the grade the surgeon assigned. Grading is a judgement, so it is never AI-filled. */
+  var CLAVIEN = ["None", "I", "II", "IIIa", "IIIb", "IVa", "IVb", "V"];
+  function clavien() {
+    return f("clavienDindo", "Complication grade (Clavien-Dindo)", {
+      type: "choice", options: CLAVIEN, aiFillable: false,
+      help: "I: any deviation without specific treatment. II: drugs, blood or TPN. III: intervention (a: no GA, b: under GA). IV: organ failure needing ICU (a: single, b: multi). V: death."
+    });
   }
 
   var SCHEMAS = {
@@ -116,6 +155,7 @@
           f("counts", "Swab, instrument and needle counts", { type: "text", required: true, aiFillable: false, help: "A count is a two-person physical check. No AI writes this field." }),
           f("complications", "Intra-operative complications", { required: true, rows: 2, ph: "or 'None'" })
         ]),
+        whoChecklist(),
         sec("Plan", [
           f("postopPlan", "Post-operative instructions", { required: true, rows: 4 }),
           f("antibiotics", "Antibiotics", { rows: 2 }),
@@ -140,7 +180,8 @@
         sec("Assessment and plan", [
           f("assessment", "Assessment", { required: true, rows: 3 }),
           f("plan", "Plan", { required: true, rows: 4 }),
-          f("escalation", "Escalation / who was informed", { rows: 2 })
+          f("escalation", "Escalation / who was informed", { rows: 2 }),
+          clavien()
         ])
       ]
     },
@@ -178,7 +219,8 @@
           f("course", "Hospital course", { required: true, rows: 6 }),
           f("investigationsKey", "Key investigations", { rows: 4 }),
           f("pendingResults", "Results / cultures pending", { rows: 2 }),
-          f("histopathology", "Histopathology", { rows: 2, ph: "or 'Awaited'" })
+          f("histopathology", "Histopathology", { rows: 2, ph: "or 'Awaited'" }),
+          clavien()
         ]),
         sec("Discharge", [
           f("condition", "Condition at discharge", { required: true, rows: 3 }),
