@@ -2685,15 +2685,17 @@
     // Study: bookmark and, once answered, report, as labelled icon buttons in the bar.
     // Share IDs (prep-ids.js): share in the bar, the ID itself under the question (tap copies). Not your own deck's items.
     var IDS = !own && G.PREP_IDS ? G.PREP_IDS : null, qid = IDS ? IDS.ofItem(it) : null;
-    var acts = (qid ? IDS.shareBtn(qid) : "") + (TOOLS ? TOOLS.noteBtn(it) : "") + (own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>") +
+    var bmBtn = own || it._py ? "" : '<button type="button" class="pn-ib' + (bm ? " on" : "") + '" data-act="bookmark" aria-pressed="' + bm + '" aria-label="' + (bm ? "Remove bookmark" : "Bookmark this question") + '">' + ico("bm", bm) + "</button>";
+    var acts = (qid ? IDS.shareBtn(qid) : "") + (TOOLS ? TOOLS.noteBtn(it) : "") +
       (shown && (!own || it.qg) ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
     // A clock per question shows its figure in the progress row, at the end of the line (the bar keeps the title room).
     var clk = r.limit || r.qsec || r.sc ? (r.qc && r.qc.used ? "" : clockHtml(r)) : "";
-    // Share, note, bookmark and report fold into one "More" button (a menu under it) so the title keeps its room.
+    // Bookmark, the most used, stays in the bar; share, note and report fold into one "More" button (a menu under it).
     if ((acts.match(/<button/g) || []).length > 1) {
       acts = '<span class="pn-more"><button type="button" class="pn-ib" data-act="actsmenu" aria-haspopup="true" aria-expanded="false" aria-label="More actions">' + ico("dots") + "</button>" +
         '<div class="pn-menu" role="group" aria-label="Question actions" hidden>' + acts + "</div></span>";
     }
+    acts = bmBtn + acts;
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
     var fb = "", revealFb = false;
     if (shown) {
