@@ -1,2 +1,149 @@
 /* ipad-learning.css: iPad regular-width layouts for the learning module group (vault/plans/iPad-Standards.md).
  * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched. */
+
+/* ==== CliniX (clinix.css draws the phone; clinix.css already caps the scroller's children at 960 px from 700 px) ==== */
+@media (min-width: 700px) {
+  /* Lists: a group of three or more rows becomes a grid of row cards, two a row (three from 1100 px). Section
+     subheads inside a list keep the full width. Works for the PrepNucleus look (.cx-pn, grouped card) and the teal one. */
+  html.smd-tablet #clinixRoot .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; background: none; box-shadow: none; border-radius: 0; overflow: visible; }
+  html.smd-tablet #clinixRoot .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) > :not(.cx-row) { grid-column: 1 / -1; }
+  html.smd-tablet #clinixRoot.cx-pn .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) > .cx-row { min-width: 0; background: var(--cx-surface); border-radius: var(--cx-r); box-shadow: var(--cx-elev); }
+  html.smd-tablet body.dark #clinixRoot.cx-pn .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) > .cx-row { box-shadow: 0 0 0 1px var(--cx-edge); }
+  html.smd-tablet #clinixRoot.cx-pn .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) > .cx-row::before { display: none; }
+  html.smd-tablet #clinixRoot .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) > .cx-subh { padding-left: 4px; }
+
+  /* Hub controls keep phone sizes: the MBBS / PG switch and the station's exam / practice switch, centred. */
+  /* !important on max-width: the column rule below (and clinix.css's) is more specific and would set it back to 960. */
+  html.smd-tablet #clinixRoot .cx-mode-bar, html.smd-tablet #clinixRoot .cx-exam-mode-wrap { width: auto; max-width: 480px !important; margin-left: auto; margin-right: auto; }
+  html.smd-tablet #clinixRoot .cx-mode-note { text-align: center; }
+  html.smd-tablet #clinixRoot .cx-mode-btn { min-height: 44px; }
+
+  /* 44 px targets: bar buttons, the viva tier switch and the voice toggle. */
+  html.smd-tablet #clinixRoot .cx-back, html.smd-tablet #clinixRoot .cx-close { width: 44px; height: 44px; }
+  html.smd-tablet #clinixRoot .cx-tier-btn { min-height: 44px; padding: 0 16px; }
+  html.smd-tablet #clinixRoot .cx-voice-btn { width: 44px; height: 44px; }
+
+  /* Task screens (lesson, viva, case, OSCE station, spotter, Chief's round) and a disease's chapter path: a readable
+     760 px column. */
+  html.smd-tablet #clinixRoot .cx-scroll:has(> .cx-turn, > .cx-spotter-arena, > .cx-station, > .cx-viva-toprow, > .cx-chief-q, > .cx-case-open, > .cx-rail) > :not(.cx-head):not(.cx-stick) { max-width: 760px; }
+
+  /* Buttons are not bars: a primary action, the mic, Show the answer and Ask MaiK are at most 360 px, centred.
+     Two buttons in one nav row share it (each up to 360 px). */
+  html.smd-tablet #clinixRoot .cx-nav { justify-content: center; }
+  html.smd-tablet #clinixRoot .cx-nav > .cx-btn { flex: 0 1 360px; max-width: 360px; }
+  html.smd-tablet #clinixRoot .cx-btn--full, html.smd-tablet #clinixRoot .cx-free > .cx-btn, html.smd-tablet #clinixRoot .cx-mic-btn,
+  html.smd-tablet #clinixRoot .cx-showans, html.smd-tablet #clinixRoot .cx-abg-box > .cx-btn, html.smd-tablet #clinixRoot .cx-prac-hero-quiz-btn {
+    display: flex; align-items: center; justify-content: center; width: 100%; max-width: 360px; margin-left: auto; margin-right: auto; }
+  html.smd-tablet #clinixRoot .cx-free > .cx-btn { align-self: center; }
+  html.smd-tablet #clinixRoot .cx-scroll > .cx-ask-maik { width: auto; max-width: 360px !important; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+
+  /* Search fields stay field sized. */
+  html.smd-tablet #clinixRoot .cx-dx-search > .cx-input { max-width: 720px; }
+
+  /* The case's "Stuck? See what you can ask" toggle is inline, so the column's auto margins never centred it and it sat
+     at the screen edge: a block of its own width, centred like Show the answer. */
+  html.smd-tablet #clinixRoot .cx-scroll > .cx-chips-toggle { display: flex; width: max-content; margin-left: auto; margin-right: auto; }
+  html.smd-tablet #clinixRoot [data-act="cx-script-gen"] { max-width: 360px; }
+
+  /* Chief's ward round: its answers two by two. */
+  html.smd-tablet #clinixRoot .cx-rows:has(> .cx-spotter-opt) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; background: none; box-shadow: none; overflow: visible; }
+  html.smd-tablet #clinixRoot .cx-rows:has(> .cx-spotter-opt) > .cx-spotter-opt { min-width: 0; margin: 0; min-height: 52px; }
+
+  /* Spotter: the four answers two by two under the stem. */
+  html.smd-tablet #clinixRoot .cx-spotter-arena:has(> .cx-spotter-opt) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 10px; }
+  html.smd-tablet #clinixRoot .cx-spotter-arena:has(> .cx-spotter-opt) > :not(.cx-spotter-opt) { grid-column: 1 / -1; }
+  html.smd-tablet #clinixRoot .cx-spotter-opt { min-height: 52px; }
+}
+@media (min-width: 1000px) {
+  /* Learn by disease: three system cards a row. */
+  html.smd-tablet #clinixRoot .cx-sys-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1100px) {
+  /* Landscape hubs and lists use a 1120 px column, three row cards a row; task screens keep their 760 px. */
+  html.smd-tablet #clinixRoot .cx-scroll:not(:has(> .cx-turn, > .cx-spotter-arena, > .cx-station, > .cx-viva-toprow, > .cx-chief-q, > .cx-case-open, > .cx-rail)) > :not(.cx-head):not(.cx-stick) { max-width: 1120px; }
+  html.smd-tablet #clinixRoot .cx-rows:has(> .cx-row ~ .cx-row ~ .cx-row) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  html.smd-tablet #clinixRoot .cx-sys-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ==== Kardia (its own screens; the Specialty Engine shell it runs in is styled in ipad-specialty.css) ==== */
+@media (min-width: 700px) {
+  /* Learn: exam paths two across. */
+  html.smd-tablet .krd-root .kpath-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .krd-root .kpath-list > .kpath-row { min-width: 0; }
+  html.smd-tablet .krd-root .kpath-list .kpath-btn { white-space: nowrap; }
+
+  /* Practice: drills and protocols two across (hairlines kept per row pair, as ipad-specialty.css does for hub rows). */
+  html.smd-tablet .krd-root .krdp > .sp-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .krd-root .krdp > .sp-rows > li > .sp-row { height: 100%; border-top: 1px solid var(--sp-s2); border-radius: 0; }
+  html.smd-tablet .krd-root .krdp > .sp-rows > li:nth-child(-n+2) > .sp-row { border-top: 0; }
+  html.smd-tablet .krd-root .krdp-real select { max-width: 480px; }
+
+  /* Calculators list: a field-sized search and the calculators two across (each keeps its Save button beside it, so
+     three across would squeeze the names). Headings, chips and the search keep the full width. */
+  html.smd-tablet .krd-root .kcalc-search { max-width: 720px; display: block; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-row) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; align-content: start; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-row) > :not(.kcalc-row) { grid-column: 1 / -1; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-row) > .kcalc-row { min-width: 0; margin: 4px 0; }
+
+  /* Calculator: Save and Copy link are buttons, not bars. */
+  html.smd-tablet .krd-root .kcalc-favbig, html.smd-tablet .krd-root .kcalc-copy, html.smd-tablet .krd-root .kcalc-trustbtn { width: auto; min-width: 200px; max-width: 360px; padding-left: 20px; padding-right: 20px; }
+}
+/* Calculator in landscape: the figure on the left, the inputs and the live result beside it, so a value and its grade are
+   on screen together. Everything else keeps the full column. */
+@media (min-width: 1000px) and (orientation: landscape) {
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 28px; align-items: start; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) > * { grid-column: 1 / -1; justify-self: stretch; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) > :is(.kcalc-back, .kcalc-favbig, .kcalc-copy) { justify-self: start; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) > section:has(> .kcalc-figure) { grid-column: 1; grid-row: span 2; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) > section:has(.kcalc-field) { grid-column: 2; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) > [id^="kcalc-live"] { grid-column: 2; }
+  html.smd-tablet .krd-root .kcalc:has(> .kcalc-back) > section:has(> .kcalc-figure) .kcalc-canvas { max-height: 60vh; object-fit: contain; }
+}
+
+/* ==== PrepNucleus (prep.css round 8 already lays out home, subjects, sheets, the runner and lessons for iPad; the owner
+   called it "perfect on iPad" on 2026-10-16, so only the screens still drawn as a phone list change here) ==== */
+@media (min-width: 700px) {
+  /* First-run setup (exam, NEET-SS group or INI-SS subject, minutes a day): the choices are a grid of cards, two a row
+     (three from 1100 px), not ten 900 px bars. The same choices inside the plan sheet stay a grouped list. */
+  html.smd-tablet .pn-root .pl-ob .pl-opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet .pn-root .pl-ob .pl-opt { min-width: 0; height: 100%; }
+  /* Back and Continue are buttons, centred under the choices, not one 900 px bar. */
+  html.smd-tablet .pn-root .pl-ob .pl-obnav { justify-content: center; }
+  html.smd-tablet .pn-root .pl-ob .pl-obnav > .pn-btn { flex: 0 1 300px; }
+  /* My stats: Share my progress is a button, not a bar across the level card. */
+  html.smd-tablet .pn-root .pn-btn[data-act="a-share"] { width: auto; min-width: 240px; max-width: 360px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet .pn-root .pl-ob .pl-opts { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ==== KardiQ X and Learn ECG (#kardioxRoot; kardiox.css centres every screen in a 760 px column from 820 px) ==== */
+@media (min-width: 700px) {
+  /* The column: 760 px for reading screens (lesson, quiz, report), 1120 px for the library so its rows can sit side
+     by side. --kxpad is the scroller's side padding, which the bars below use to reach the screen edges. */
+  html.smd-tablet #kardioxRoot .kx-scroll { --kxcol: 760px; --kxpad: max(0px, calc((100vw - var(--kxcol)) / 2));
+    padding-left: var(--kxpad); padding-right: var(--kxpad); }
+  html.smd-tablet #kardioxRoot .kx-scroll:has(.kx-lib-head) { --kxcol: 1120px; }
+
+  /* Top bars span the screen (back or close on the left, actions on the right), their content stays on the column. */
+  html.smd-tablet #kardioxRoot :is(.kx-src-head, .kx-why-head, .kx-cmp-head, .kx-hist-head, .kx-lib-head, .kx-lesson-head, .kx-quiz-top, .kx-fc-head) {
+    margin-left: calc(-1 * var(--kxpad)); margin-right: calc(-1 * var(--kxpad));
+    padding-left: calc(var(--kxpad) + 16px); padding-right: calc(var(--kxpad) + 16px); }
+
+  /* 44 px targets: library bar buttons and filter chips. */
+  html.smd-tablet #kardioxRoot .kx-lib-back, html.smd-tablet #kardioxRoot .kx-lib-bm { width: 44px; height: 44px; }
+  html.smd-tablet #kardioxRoot .kx-lib-chip { min-height: 44px; padding-left: 16px; padding-right: 16px; }
+  html.smd-tablet #kardioxRoot .kx-lib-search { max-width: 720px; }
+
+  /* Library: lessons two a row (three from 1100 px). */
+  html.smd-tablet #kardioxRoot .kx-lib-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  html.smd-tablet #kardioxRoot .kx-lib-rows > * { min-width: 0; }
+
+  /* Quiz: the four answers two by two under the ECG and the question; Submit is a button, not a bar. */
+  html.smd-tablet #kardioxRoot .kx-quiz-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  html.smd-tablet #kardioxRoot .kx-quiz-options > .kx-quiz-option { min-width: 0; height: 100%; }
+  html.smd-tablet #kardioxRoot .kx-quiz-submit { display: flex; width: 100%; max-width: 360px; margin-left: auto; margin-right: auto; justify-content: center; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet #kardioxRoot .kx-lib-rows { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
