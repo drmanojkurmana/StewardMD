@@ -1,2 +1,208 @@
 /* ipad-care.css: iPad regular-width layouts for the care module group (vault/plans/iPad-Standards.md).
- * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched. */
+ * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched.
+ * Modules: imaging beta notice, SknX, ThoreX, FundX, SURGX, Review Desk, FollowCare, NMC eLOGBook, Insulin, Neonatal,
+ * Oncology (ONCQIS home, its tools, OncoTree). The list/detail splits (SURGX notes, logbook entries, Review Desk,
+ * FollowCare patients) are rendered by the module JS only at 1000 px and wider on a tablet; this file lays them out. */
+
+/* ---------- Imaging beta notice (experimental-beta-notice.js) ----------
+   A phone bottom sheet glued to the bottom of a 1366 px screen. iPad: a centred form sheet. */
+@media (min-width: 700px) {
+  html.smd-tablet .smd-beta-ov { align-items: center; padding: 24px; }
+  html.smd-tablet .smd-beta-sh { max-width: 540px; border-radius: 18px; padding: 24px 24px 20px; box-shadow: 0 24px 60px -20px rgba(0,0,0,.35); }
+  html.smd-tablet .smd-beta-b { min-height: 48px; }
+}
+
+/* ---------- SknX and ThoreX: shared frame ----------
+   Both modules padded their scroller to a 760 px column, so each screen's top bar stopped 300 px short of the screen
+   edges. iPad: the scroller has no side padding; the top bar (each screen's first child) spans the screen, close or
+   back at its left edge, and every other block is the centred 760 px column. */
+@media (min-width: 700px) {
+  html.smd-tablet :is(#sknxRoot .sknx-scroll, #thorexRoot .tx-scroll) { padding-left: 0; padding-right: 0; }
+  html.smd-tablet :is(#sknxRoot .sknx-scroll, #thorexRoot .tx-scroll) > * { max-width: 760px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+  html.smd-tablet :is(#sknxRoot .sknx-scroll, #thorexRoot .tx-scroll) > :first-child:is(header, [class*="-head"]) { max-width: none; padding-left: 20px; padding-right: 20px; }
+  html.smd-tablet #sknxRoot .sknx-scroll > .sknx-capture { max-width: none; }
+  html.smd-tablet #sknxRoot .sknx-capture > :not(header) { max-width: 760px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+  html.smd-tablet #sknxRoot .sknx-capture > header { padding-left: 20px; padding-right: 20px; }
+  html.smd-tablet #sknxRoot :is(.sknx-actions, .sknx-review-footer) .sknx-btn { width: auto; min-width: 240px; max-width: 360px; }
+}
+
+/* ---------- SknX ----------
+   iPad landscape: the photo and its context side by side on the review screen; on the results screen the analysed
+   photo (added by sknx-screens.js on a tablet in landscape only) sits left of the findings. */
+@media (min-width: 1000px) {
+  html.smd-tablet #sknxRoot .sknx-scroll > :is(.sknx-review, .sknx-result-body:has(> .sknx-result-photo)) { max-width: 1180px; }
+  html.smd-tablet #sknxRoot .sknx-review { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: auto auto auto 1fr auto auto; column-gap: 32px; align-items: start; }
+  html.smd-tablet #sknxRoot .sknx-review > .sknx-journey { grid-column: 1 / -1; }
+  html.smd-tablet #sknxRoot .sknx-review > .sknx-preview { grid-column: 1; grid-row: 2; margin-top: 0; }
+  html.smd-tablet #sknxRoot .sknx-review > .sknx-btn-secondary { grid-column: 1; grid-row: 3; justify-self: start; width: auto; }
+  html.smd-tablet #sknxRoot .sknx-review > :is(.sknx-hx-wrap, .sknx-error, .sknx-review-footer) { grid-column: 2; }
+  html.smd-tablet #sknxRoot .sknx-review > .sknx-hx-wrap { grid-row: 2 / 5; margin-top: 0; }
+  html.smd-tablet #sknxRoot .sknx-review > .sknx-error { grid-row: 5; }
+  html.smd-tablet #sknxRoot .sknx-review > .sknx-review-footer { grid-row: 6; }
+  html.smd-tablet #sknxRoot .sknx-result-body:has(> .sknx-result-photo) { display: flow-root; }
+  html.smd-tablet #sknxRoot .sknx-result-photo { float: left; width: 42%; margin: 0 32px 16px 0; }
+  html.smd-tablet #sknxRoot .sknx-result-photo img { display: block; width: 100%; max-height: 70vh; object-fit: contain; border-radius: 16px; background: var(--sknx-surf-2, #eef2f2); }
+  html.smd-tablet #sknxRoot .sknx-result-photo figcaption { margin-top: 8px; font-size: 12px; color: var(--sknx-text-2, #5b6b6d); }
+  html.smd-tablet #sknxRoot .sknx-result-body:has(> .sknx-result-photo) > :not(.sknx-result-photo) { margin-left: calc(42% + 32px); max-width: calc(58% - 32px); box-sizing: border-box; }
+}
+
+/* ---------- ThoreX ----------
+   The X-ray sat above the findings, so reading a finding meant scrolling away from the film. iPad landscape: film
+   (with its identifier note and heatmap chips) on the left, findings and report on the right. */
+@media (min-width: 1000px) {
+  html.smd-tablet #thorexRoot .tx-scroll > .tx-result-body:has(> .tx-xray) { max-width: 1240px; display: flow-root; }
+  html.smd-tablet #thorexRoot .tx-result-body > :is(.tx-xray, .tx-phi, .tx-heat-strip) { float: left; clear: left; width: 46%; box-sizing: border-box; }
+  html.smd-tablet #thorexRoot .tx-result-body > .tx-xray img.tx-xray-base { max-height: 72vh; object-fit: contain; }
+  html.smd-tablet #thorexRoot .tx-result-body:has(> .tx-xray) > :not(.tx-xray):not(.tx-phi):not(.tx-heat-strip) { margin-left: calc(46% + 28px); max-width: calc(54% - 28px); box-sizing: border-box; }
+  html.smd-tablet #thorexRoot .tx-result-body:has(> .tx-xray) .tx-result-panels.tx-dual { flex-direction: column; }
+}
+
+/* ---------- SURGX ----------
+   Hub: five full-width rows in a column. Lists (protocols, procedures, evidence, cases, notes): one row per line.
+   iPad: sections as a grid, lists in two columns, the hero aligned to the content column. Notes: list and note side
+   by side in landscape (surgx-screens.js noteSplit). */
+@media (min-width: 700px) {
+  html.smd-tablet #surgxRoot .sgx-hero { padding-left: max(24px, calc((100% - 960px) / 2 + 14px)); padding-right: max(24px, calc((100% - 960px) / 2 + 14px)); }
+  html.smd-tablet #surgxRoot .sgx-wrap:has(> .sgx-sec + .sgx-sec),
+  html.smd-tablet #surgxRoot .sgx-scroll > .sgx-wrap:has(> .sgx-row + .sgx-row) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; align-content: start; }
+  html.smd-tablet #surgxRoot .sgx-wrap:has(> .sgx-sec + .sgx-sec) > :not(.sgx-sec),
+  html.smd-tablet #surgxRoot .sgx-scroll > .sgx-wrap:has(> .sgx-row + .sgx-row) > :not(.sgx-row):not(.sgx-sec) { grid-column: 1 / -1; }
+  html.smd-tablet #surgxRoot .sgx-sec { margin-bottom: 12px; }
+  html.smd-tablet #surgxRoot .sgx-btn.wide { width: auto; min-width: 240px; max-width: 360px; }
+  html.smd-tablet #surgxRoot .sgx-search { max-width: 720px; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #surgxRoot .sgx-wrap:has(> .sgx-sec + .sgx-sec) { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 1180px; }
+  html.smd-tablet #surgxRoot .sgx-hero { padding-left: max(24px, calc((100% - 1180px) / 2 + 14px)); padding-right: max(24px, calc((100% - 1180px) / 2 + 14px)); }
+  /* Notes split: list column on the left, the open note on the right; each scrolls on its own. */
+  html.smd-tablet #surgxRoot .sgx-scroll:has(> .sgx-split) { padding-bottom: 0; overflow: hidden; }
+  html.smd-tablet #surgxRoot .sgx-split { display: grid; grid-template-columns: minmax(320px, 360px) minmax(0, 1fr); height: 100%; }
+  html.smd-tablet #surgxRoot .sgx-split-list { overflow-y: auto; overscroll-behavior: contain; padding: calc(env(safe-area-inset-top, 0px) + 10px) 14px 32px; border-right: 1px solid var(--sgx-line); background: var(--sgx-surface-2, #f4f6f8); }
+  html.smd-tablet #surgxRoot .sgx-split-list .sgx-seclabel { margin-top: 8px; }
+  html.smd-tablet #surgxRoot .sgx-split-list .sgx-row.on { border-color: var(--sgx-steel); box-shadow: inset 3px 0 0 var(--sgx-steel); background: var(--sgx-steel-soft, rgba(31,78,95,.08)); }
+  html.smd-tablet #surgxRoot .sgx-split-main { overflow-y: auto; overscroll-behavior: contain; min-width: 0; }
+  html.smd-tablet #surgxRoot .sgx-split-main > .sgx-wrap { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ---------- Review Desk (review-desk.js) ----------
+   A 780 px list, then a full-screen item. iPad: wider list in two columns; in landscape the list stays on the left
+   and the chosen item opens beside it (review-desk.js splitOn). */
+@media (min-width: 700px) {
+  html.smd-tablet #smdReview .kit.dl { max-width: 960px; }
+  html.smd-tablet #smdReview .rv-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet #smdReview .kit-field.wide:has(#rv_q) { max-width: 720px; }
+  html.smd-tablet #smdReview .rv-row.on { border-color: var(--primary); box-shadow: inset 3px 0 0 var(--primary); background: color-mix(in srgb, var(--primary) 8%, var(--sc-lowest)); }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #smdReview .kit-sheet-body:has(.rv-split) { overflow: hidden; padding: 0; }
+  html.smd-tablet #smdReview .kit.dl:has(> .rv-split) { max-width: none; height: 100%; }
+  html.smd-tablet #smdReview .rv-split { display: grid; grid-template-columns: minmax(340px, 400px) minmax(0, 1fr); height: 100%; }
+  html.smd-tablet #smdReview .rv-split-list, html.smd-tablet #smdReview .rv-split-detail { overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  html.smd-tablet #smdReview .rv-split-list { padding: 12px 16px 28px; border-right: 1px solid var(--sc-low); background: var(--surface); }
+  html.smd-tablet #smdReview .rv-split-list .rv-list { grid-template-columns: minmax(0, 1fr); }
+  html.smd-tablet #smdReview .rv-split-list .kit-field.wide { max-width: none; }
+  html.smd-tablet #smdReview .rv-split-detail { padding: 20px max(24px, calc((100% - 760px) / 2)) calc(28px + env(safe-area-inset-bottom)); }
+  html.smd-tablet #smdReview .rv-split-detail > .rv-pill { align-self: flex-start; }
+  html.smd-tablet #smdReview .rv-split-empty { margin: auto; text-align: center; }
+}
+
+/* ---------- FollowCare (followcare.js) ----------
+   The board is a grouped list in a 960 px column (kept), with a settings button stretched across it. iPad: the button at
+   its natural size; in landscape the board stays on the left while a patient is open (followcare.js splitBoard). */
+@media (min-width: 700px) {
+  html.smd-tablet .fc-sheet.fcui2 .fc-q-actions { max-width: 640px; }
+  html.smd-tablet .fc-sheet.fcui2 .fc-q-settings { width: auto; min-width: 280px; justify-self: start; }
+  html.smd-tablet .fc-sheet.fcui2 .fc-bd > .fc-btn.sec:first-child { width: auto; }
+  html.smd-tablet .fc-sheet.fcui2 :is(.fc-bd, .fc-split-main) > .fc-btn:not(.fc-q-settings) { max-width: 440px; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet .fc-sheet.fcui2 .fc-bd.fc-split { display: grid; grid-template-columns: minmax(340px, 400px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); overflow: hidden; padding: 0; }
+  html.smd-tablet .fc-sheet.fcui2 .fc-split-list, html.smd-tablet .fc-sheet.fcui2 .fc-split-main { overflow-y: auto; overscroll-behavior: contain; min-width: 0; }
+  html.smd-tablet .fc-sheet.fcui2 .fc-split-list { padding: 4px 16px 28px; border-right: 1px solid var(--rds-line); background: var(--rds-surface); }
+  html.smd-tablet .fc-sheet.fcui2 .fc-split-list .fc-row { width: 100%; }
+  html.smd-tablet .fc-sheet.fcui2 .fc-split-list .fc-row.on { border-color: #0e6e63; box-shadow: inset 3px 0 0 #0e6e63; }
+  html.smd-tablet .fc-sheet.fcui2 .fc-split-main { padding: 20px max(24px, calc((100% - 760px) / 2)) calc(24px + env(safe-area-inset-bottom)); }
+}
+
+/* ---------- NMC eLOGBook (pglog-screens.js) ----------
+   Entry lists ran one row per line; an entry opened full screen. iPad: rows in two columns; in landscape an open entry
+   sits beside the list (pglog-screens.js entrySplit). */
+@media (min-width: 700px) {
+  html.smd-tablet #pglogRoot .pgl-wrap:has(> .pgl-row + .pgl-row) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; align-content: start; }
+  html.smd-tablet #pglogRoot .pgl-wrap:has(> .pgl-row + .pgl-row) > :not(.pgl-row) { grid-column: 1 / -1; }
+  html.smd-tablet #pglogRoot .pgl-wrap > .pgl-btn.wide, html.smd-tablet #pglogRoot .pgl-state .pgl-btn { width: auto; min-width: 240px; max-width: 360px; }
+  html.smd-tablet #pglogRoot .pgl-actionbar { justify-content: center; }
+  html.smd-tablet #pglogRoot .pgl-actionbar > .pgl-btn:only-child { flex: 0 1 auto; min-width: 280px; max-width: 360px; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #pglogRoot .pgl-scroll:has(.pgl-split) { padding-left: max(24px, calc((100vw - 1240px) / 2)); padding-right: max(24px, calc((100vw - 1240px) / 2)); }
+  html.smd-tablet #pglogRoot .pgl-split { display: grid; grid-template-columns: minmax(320px, 380px) minmax(0, 1fr); column-gap: 24px; align-items: start; }
+  html.smd-tablet #pglogRoot .pgl-split-list { position: sticky; top: 64px; max-height: calc(100vh - 64px); overflow-y: auto; overscroll-behavior: contain; padding: 14px 14px 32px; border-right: 1px solid var(--pgl-line); box-sizing: border-box; }
+  html.smd-tablet #pglogRoot .pgl-split-list .pgl-row { width: 100%; }
+  html.smd-tablet #pglogRoot .pgl-split-list .pgl-row.on { border-color: var(--pgl-acc, #0e6e63); box-shadow: inset 3px 0 0 var(--pgl-acc, #0e6e63); }
+  html.smd-tablet #pglogRoot .pgl-split-main { min-width: 0; }
+  html.smd-tablet #pglogRoot .pgl-split-main .pgl-wrap { max-width: 760px; }
+}
+
+/* ---------- Insulin (insulin.js) ----------
+   The patient-type question was five stretched 718 px rows and a 784 px Skip button. iPad: the choices in two columns,
+   Skip at its natural width. */
+@media (min-width: 700px) {
+  html.smd-tablet #insulinRoot .ins-ask { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet #insulinRoot .ins-ask > .ins-askbtn { margin: 0; width: auto; }
+  html.smd-tablet #insulinRoot .ins-skip { display: block; width: auto; min-width: 280px; max-width: 420px; margin-left: auto; margin-right: auto; }
+}
+
+/* ---------- Neonatal (neo-hub.js) ----------
+   A 760 px scroller in the middle of the screen, the tools one per line, the Close link 626 px wide. iPad: the scroller
+   spans the screen, tools in two columns; in landscape the baby details and the tools sit side by side. */
+@media (min-width: 700px) {
+  html.smd-tablet #neoHub .nh-x { flex: 0 0 auto; width: auto; justify-self: start; align-self: center; }
+  html.smd-tablet #neoHub .nh-body { max-width: none; margin: 0; width: auto; padding-left: max(24px, calc((100% - 960px) / 2)); padding-right: max(24px, calc((100% - 960px) / 2)); }
+  html.smd-tablet #neoHub .nh-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html.smd-tablet #neoHub .nh-tools > .nh-tool { border-right: 1px solid var(--nh-line); }
+  html.smd-tablet #neoHub .nh-card > .nh-btn.pri { display: block; width: auto; min-width: 240px; max-width: 360px; margin-left: auto; margin-right: auto; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #neoHub .nh-body:has(> [data-nh=record]) { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: 24px; align-content: start; align-items: start;
+    padding-left: max(24px, calc((100% - 1240px) / 2)); padding-right: max(24px, calc((100% - 1240px) / 2)); }
+  html.smd-tablet #neoHub .nh-body:has(> [data-nh=record]) > * { grid-column: 1; }
+  html.smd-tablet #neoHub .nh-body:has(> [data-nh=record]) > [data-nh=screen], html.smd-tablet #neoHub .nh-body:has(> [data-nh=record]) > .nh-intro { grid-column: 2; grid-row: 1 / span 3; }
+  html.smd-tablet #neoHub .nh-body:has(> [data-nh=record]) > .nh-intro + [data-nh=screen] { grid-row: 2 / span 2; }
+  html.smd-tablet #neoHub .nh-body:has(> [data-nh=record]) .nh-tools { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------- Oncology: ONCQIS home and its tools (onco-home.css .oh-overlay) ----------
+   Every tool (home, staging, RECIST, CTCAE, protocols ...) used a 920 px scroller in the middle of the screen with one
+   card per line. iPad: the scroller spans the screen, cards in two columns, search capped. */
+@media (min-width: 700px) {
+  html.smd-tablet .oh-overlay .oh-body { max-width: none; margin: 0; padding-left: max(24px, calc((100% - 1040px) / 2)); padding-right: max(24px, calc((100% - 1040px) / 2)); }
+  html.smd-tablet .oh-overlay .oh-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet .oh-overlay .oh-grid > .oh-card-wrap { border-radius: 14px; overflow: hidden; border: 1px solid var(--rds-line, #e3e7ee); }
+  html.smd-tablet .oh-overlay .oh-search { max-width: 720px; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet .oh-overlay .oh-body { padding-left: max(24px, calc((100% - 1180px) / 2)); padding-right: max(24px, calc((100% - 1180px) / 2)); }
+}
+
+/* ---------- OncoTree (oncotree.css) ----------
+   The disease picker ran edge to edge on a 1366 px screen, a 1,310 px search field and 1,338 px rows. iPad: a centred
+   1180 px picker, search capped, diseases in two (portrait) or three (landscape) columns. */
+@media (min-width: 700px) {
+  html.smd-tablet .ot-overlay .ot-picker { max-width: 1180px; margin-left: auto; margin-right: auto; }
+  html.smd-tablet .ot-overlay .ot-search-box { max-width: 720px; }
+  html.smd-tablet .ot-overlay .ot-picker-tabs { max-width: 720px; }
+  html.smd-tablet .ot-overlay .ot-disease-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  html.smd-tablet .ot-overlay .ot-disease-list > .ot-disease { margin: 0; width: auto; }
+  html.smd-tablet .ot-overlay .ot-disease-list > :not(.ot-disease) { grid-column: 1 / -1; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet .ot-overlay .ot-disease-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+/* ---------- FollowCare patient check-in (followcare.html, standalone page) ----------
+   Already a centred 600 to 640 px form, which suits a questionnaire. iPad: the Send button keeps a normal width instead
+   of stretching across the card. Scoped to the portal's own body > .wrap so nothing in index.html matches. */
+@media (min-width: 700px) {
+  html.smd-tablet body > .wrap:has(> header.top) #main .cta { display: block; width: auto; min-width: 280px; max-width: 360px; margin-left: auto; margin-right: auto; }
+}

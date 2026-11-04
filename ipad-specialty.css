@@ -1,2 +1,145 @@
 /* ipad-specialty.css: iPad regular-width layouts for the specialty module group (vault/plans/iPad-Standards.md).
- * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched. */
+ * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched.
+ * Groups: the shared Specialty Engine shell (.sp-root: Tokós, Narkē and Kardia), Ophthalmós (.oph-overlay; its own CSS
+ * is synced byte-for-byte from the module repo, so its iPad rules live here), Specialty Kits, RadioAnatome, Code Blue.
+ * specialty.css is injected after this file, so engine rules carry html.smd-tablet for specificity, not !important. */
+
+@media (min-width: 700px) {
+  /* ---------- Specialty Engine shell ---------- */
+
+  /* Welcome: Learn and Test side by side instead of two 960 px bars. */
+  html.smd-tablet .sp-root .ln-choices,
+  html.smd-tablet .oph-overlay .ln-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  html.smd-tablet .sp-root .ln-choices > li,
+  html.smd-tablet .oph-overlay .ln-choices > li { display: flex; }
+  html.smd-tablet .sp-root .ln-choice,
+  html.smd-tablet .oph-overlay .ln-choice { min-height: 132px; align-items: flex-start; padding: 20px; }
+  html.smd-tablet .sp-root .ln-choice .sp-chev,
+  html.smd-tablet .oph-overlay .ln-choice .oph-chev { align-self: center; }
+
+  /* Hub, tools, question-bank topics, labour scenarios: rows laid out two across, hairlines kept per row pair. */
+  html.smd-tablet .sp-root .sp-col > .sp-rows,
+  html.smd-tablet .sp-root .sp-col > section > .sp-rows { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .sp-root .sp-col > .sp-rows > li > .sp-row,
+  html.smd-tablet .sp-root .sp-col > section > .sp-rows > li > .sp-row { height: 100%; border-top: 1px solid var(--sp-s2); border-radius: 0; }
+  html.smd-tablet .sp-root .sp-col > .sp-rows > li:nth-child(-n+2) > .sp-row,
+  html.smd-tablet .sp-root .sp-col > section > .sp-rows > li:nth-child(-n+2) > .sp-row { border-top: 0; }
+  html.smd-tablet .sp-root .sp-col > .sp-rows > li:only-child { grid-column: 1 / -1; }
+
+  /* Learn home: a unit's lessons two across. */
+  html.smd-tablet .sp-root .ln-lessons { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .sp-root .ln-lessons > li > .ln-row { height: 100%; border-top: 1px solid var(--sp-s2); border-radius: 0; }
+  html.smd-tablet .sp-root .ln-lessons > li:nth-child(-n+2) > .ln-row { border-top: 0; }
+
+  /* Learn home "Start here" card: picture beside the text, not a letterboxed banner over it. */
+  html.smd-tablet .sp-root .ln-start { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  html.smd-tablet .sp-root .ln-start-img { height: auto; min-height: 220px; }
+  html.smd-tablet .sp-root .ln-start-img.diagram { border-bottom: 0; border-right: 1px solid var(--sp-line); }
+  html.smd-tablet .sp-root .ln-start-b { padding: 20px 24px; align-self: center; }
+  html.smd-tablet .sp-root .ln-start:not(:has(.ln-start-img)) { grid-template-columns: minmax(0, 1fr); }
+
+  /* Primary buttons keep a phone width instead of spanning the 960 px column. */
+  html.smd-tablet .sp-root .sp-btn.sp-wide { width: auto; min-width: 240px; max-width: 360px; }
+  html.smd-tablet .oph-overlay .oph-btn.oph-wide { width: auto; min-width: 240px; max-width: 360px; }
+
+  /* Ophthalmós homes: the same 960 px column as the engine (its synced CSS caps them at 720 px), clinics two across.
+     The encounter keeps its own stage-and-panel layout. */
+  html.smd-tablet .oph-overlay .oph-scroll.oph-pad:not(.oph-enc *) { padding-left: max(28px, calc((100% - 960px) / 2)); padding-right: max(28px, calc((100% - 960px) / 2)); }
+  html.smd-tablet .oph-overlay .ln-col { max-width: none; }
+  html.smd-tablet .oph-overlay .oph-clinics { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .oph-overlay .oph-clinics > li > .oph-clinic { height: 100%; }
+  html.smd-tablet .oph-overlay .oph-clinics > li:only-child { grid-column: 1 / -1; }
+  html.smd-tablet .oph-overlay .ln-lessons { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .oph-overlay .ln-start { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  html.smd-tablet .oph-overlay .ln-start-img { height: auto; min-height: 220px; }
+  html.smd-tablet .oph-overlay .ln-start-b { padding: 20px 24px; align-self: center; }
+}
+
+/* Calculators in landscape: inputs on the left, the result card on the right and in view (Ophthalmós's synced CSS has the
+   same idea for its own tools; the engine's .tl-wrap was capped at 720 px, which squeezed the inputs to 256 px). */
+@media (min-width: 900px) and (orientation: landscape) {
+  html.smd-tablet .sp-root .tl-wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 400px); grid-template-areas: none; column-gap: 32px;
+    align-items: start; max-width: 1040px; padding: 0 28px; }
+  html.smd-tablet .sp-root .tl-wrap > * { grid-area: auto / 1; }
+  html.smd-tablet .sp-root .tl-wrap > .tl-sumwrap { grid-column: 2; grid-row: 1 / span 20; }
+}
+
+/* Tokós clinics in landscape. CTG: the trace stays full width and pinned (it is a long horizontal strip); the checklist
+   below it goes two questions across in the same 960 px column as the hub, so it needs half the scrolling.
+   Ultrasound planes and HC: the scan fills the left of the screen, the question and Check sit in a side panel. */
+@media (min-width: 1000px) and (orientation: landscape) {
+  html.smd-tablet .tok-root .tok-scroll > .tok-pad, html.smd-tablet .tok-root .tok-strip-head, html.smd-tablet .tok-root .tok-cal-bar,
+  html.smd-tablet .tok-root #tokChecklist, html.smd-tablet .tok-root .tok-reveal, html.smd-tablet .tok-root .tok-foot.tok-pad {
+    padding-left: max(28px, calc((100% - 960px) / 2)); padding-right: max(28px, calc((100% - 960px) / 2)); }
+  html.smd-tablet .tok-root #tokChecklist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; align-items: start; }
+  html.smd-tablet .tok-root #tokChecklist > :not(fieldset) { grid-column: 1 / -1; }
+  html.smd-tablet .tok-root #tokChecklist .tok-q[data-q="uc"] .tok-opts,
+  html.smd-tablet .tok-root #tokChecklist .tok-q[data-q="action"] .tok-opts { grid-template-columns: minmax(0, 1fr); }
+
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) { display: grid; grid-template-columns: minmax(0, 1fr) minmax(340px, 400px); grid-template-rows: minmax(0, 1fr) auto auto;
+    align-items: start; overflow: hidden; padding-bottom: 0; }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) > .tus-hold { grid-column: 1; grid-row: 1 / span 3; position: static; box-shadow: none; height: 100%;
+    display: flex; flex-direction: column; border-right: 1px solid var(--tk-line); }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) .tus-stage { max-height: calc(100% - 64px); max-width: 100%; margin: 0 auto; }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) > .tok-pad { grid-column: 2; grid-row: 1; align-self: stretch; overflow-y: auto; overscroll-behavior: contain;
+    padding: 4px 24px calc(16px + env(safe-area-inset-bottom, 0px)); min-height: 0; }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) > .tok-foot.tok-pad { grid-row: 2; position: static; overflow: visible; padding-top: 10px; padding-bottom: 6px; }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) > .tok-pad .tus-q .tok-opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) > .tus-hold .tus-bar { padding-left: 16px; padding-right: 16px; }
+  html.smd-tablet .tok-root .tok-scroll:has(> .tus-hold) > .sp-draft { grid-column: 2; grid-row: 3; margin: 8px 24px 12px; }
+}
+
+@media (min-width: 700px) {
+  /* Tokós clinics: the pinned Check bar keeps a phone-width button, centred under the column. */
+  html.smd-tablet .tok-root .tok-foot > .tok-btn { max-width: 360px; align-self: center; }
+}
+
+/* Answer lists (question bank, capnography and monitor clinics): two across in landscape, so four answers sit in two
+   rows under the question instead of four 960 px bars. Portrait keeps one per row for long answers. */
+@media (min-width: 1000px) and (orientation: landscape) {
+  html.smd-tablet .sp-root .sp-answers:has(> .sp-ans:last-child:nth-child(even)) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 700px) {
+  /* Question-bank topics (engine and Ophthalmós) and Ophthalmós study notes: two across, hairline per row pair. */
+  html.smd-tablet .sp-root .mcq-topics,
+  html.smd-tablet .oph-overlay .mcq-topics,
+  html.smd-tablet .oph-overlay .oph-nlist { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  html.smd-tablet .sp-root .mcq-topics > li > .mcq-topic { height: 100%; border-top: 1px solid var(--sp-s2); border-radius: 0; }
+  html.smd-tablet .sp-root .mcq-topics > li:nth-child(-n+2) > .mcq-topic { border-top: 0; }
+  html.smd-tablet .oph-overlay .mcq-topics > li > *,
+  html.smd-tablet .oph-overlay .oph-nlist > li > .oph-nrow { height: 100%; }
+}
+@media (min-width: 700px) {
+  html.smd-tablet .oph-overlay .oph-scroll input[type="search"], html.smd-tablet .oph-overlay .oph-scroll input[type="text"],
+  html.smd-tablet .sp-root .sp-scroll input[type="search"] { max-width: 720px; }
+}
+
+/* ---------- RadioAnatome ---------- */
+@media (min-width: 700px) {
+  /* Module list: series two across (three in landscape) under each region heading; search a readable 720 px. */
+  html.smd-tablet .atlas-overlay .atlas-search { max-width: 720px; }
+  html.smd-tablet .atlas-overlay .atlas-grp { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 12px; }
+  html.smd-tablet .atlas-overlay .atlas-grp > :not(.atlas-row) { grid-column: 1 / -1; }
+  html.smd-tablet .atlas-overlay .atlas-chip { min-height: 44px; }
+}
+@media (min-width: 1100px) {
+  html.smd-tablet .atlas-overlay .atlas-grp { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 700px) {
+  /* 3D Anatomy: the canvas keeps the full width; the search and the Reference / Living CT switch keep phone widths. */
+  html.smd-tablet .a3d-search { max-width: 720px; }
+  html.smd-tablet .a3d-src { max-width: 480px; }
+}
+
+/* ---------- Specialty Kits ---------- */
+@media (min-width: 700px) {
+  /* The kit opened from an ICU or ward patient (#smdKitHost) is a helper over the patient, not a full-screen task:
+     a centred form sheet, the patient still visible around it. The standalone Home kit (#smdKit) stays full screen
+     with its 780 px column (a long page of tool cards with their own four-across forms). */
+  html.smd-tablet #smdKitHost { background: rgba(0, 0, 0, .32); }
+  html.smd-tablet #smdKitHost > .kit-sheet { width: min(820px, calc(100% - 48px)); height: calc(100% - 64px); margin: 32px auto; border-radius: 16px;
+    overflow: hidden; background: var(--bg); box-shadow: 0 24px 64px rgba(0, 0, 0, .28); }
+  html.smd-tablet #smdKitHost .kit-hfoot { justify-content: flex-end; }
+  html.smd-tablet #smdKitHost .kit-hfoot > .kit-hexport { flex: 0 1 auto; min-width: 200px; }
+}

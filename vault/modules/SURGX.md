@@ -290,3 +290,8 @@ config for project `stewardmd`). Verified against production, not assumed: a POS
 write gate is open and the request only failed on auth. Probe writes nothing (no valid session).
 
 - **Iso figure (2026-10-12):** see [[Iso Figures]] for the isometric equipment figure shown here, its flag `smd_iso` and tests.
+
+## iPad (2026-11-04)
+`ipad-care.css` lays out the hub as a grid and lists in two columns on `html.smd-tablet` at 700 px and wider. In landscape
+(tablet, 1000 px and wider) `surgx-screens.js` `noteSplit()` renders an open note beside the "On this device" list
+(`data-sgx="noteswap"` replaces the route, no deeper stack). It only reads `listNotes()`; no storage code changed.

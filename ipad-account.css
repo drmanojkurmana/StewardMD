@@ -1,2 +1,153 @@
 /* ipad-account.css: iPad regular-width layouts for the account module group (vault/plans/iPad-Standards.md).
- * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched. */
+ * Every rule is scoped to html.smd-tablet and a min-width: 700px query, so phones and narrow Split View are untouched.
+ * This file loads in the head, before settings-ui.css and the injected module styles, so each selector carries the
+ * html.smd-tablet prefix for the extra specificity it needs to win over the module's own rule. */
+
+/* 1. Settings (sidebar-redesign.js #sbrSettings, enhanced by settings-ui.js).
+      Portrait: the readable 960 px column settings-ui.css already gives, with 44 px category buttons.
+      Landscape: the iPadOS Settings split view. Search and the category list sit in a sticky 280 px sidebar on the
+      left, the selected category's rows fill the pane on the right. The category buttons are the same nodes and keep
+      their handlers and aria-pressed state; only their placement changes. */
+@media (min-width: 700px) {
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .settings-nav button { min-height: 44px; padding: 8px 16px; }
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .sbr-set-back { min-height: 44px; min-width: 44px; }
+}
+@media (min-width: 960px) {
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .sbr-set-head {
+    padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 1080px) / 2));
+    padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 1080px) / 2));
+  }
+  html.smd-tablet .sbr-set-ov[data-settings-ui]:not(#sbrExperimental) .sbr-set-body {
+    display: grid; grid-template-columns: 280px minmax(0, 1fr); column-gap: 40px; align-items: start;
+    padding-left: max(28px, env(safe-area-inset-left, 0px), calc((100vw - 1080px) / 2));
+    padding-right: max(28px, env(safe-area-inset-right, 0px), calc((100vw - 1080px) / 2));
+    padding-top: 24px;
+  }
+  /* The one-line tagline would push the sidebar below the first group; iPadOS Settings has none. */
+  html.smd-tablet .sbr-set-ov[data-settings-ui]:not(#sbrExperimental) .sbr-set-body > .settings-intro { display: none; }
+  html.smd-tablet .sbr-set-ov[data-settings-ui]:not(#sbrExperimental) .sbr-set-body > .settings-tools {
+    grid-column: 1; grid-row: 1 / span 40; position: sticky; top: 88px; margin: 0;
+  }
+  html.smd-tablet .sbr-set-ov[data-settings-ui]:not(#sbrExperimental) .sbr-set-body > :not(.settings-intro):not(.settings-tools) { grid-column: 2; min-width: 0; }
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .settings-nav { flex-direction: column; flex-wrap: nowrap; gap: 2px; margin: 16px 0 12px; }
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .settings-nav button {
+    width: 100%; text-align: left; border-radius: 10px; border-color: transparent; background: transparent;
+    padding: 10px 14px; font-size: 15px; box-shadow: none;
+  }
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .settings-nav button:active { transform: none; }
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .settings-nav button[aria-pressed=true] { background: var(--settings-primary); border-color: var(--settings-primary); color: #fff; }
+  html.smd-tablet body:is(.dark, .v3-dark) .sbr-set-ov[data-settings-ui] .settings-nav button:not([aria-pressed=true]) { background: transparent; border-color: transparent; }
+  html.smd-tablet .sbr-set-ov[data-settings-ui] .settings-results { margin: 0; }
+}
+
+/* 2. Pro paywall (pro-paywall.js #proPay; the same shell carries the AI limit and top-up sheets). On a phone it is a
+      520 px sheet glued to the bottom edge. On iPad it is a centred 600 px form sheet with all four corners rounded
+      (test/run-ipad-layout-ui.mjs holds it to a dialog, 700 px or less). Styles are inline, hence !important. */
+@media (min-width: 700px) {
+  html.smd-tablet #proPay { align-items: center !important; padding: 32px; box-sizing: border-box; }
+  html.smd-tablet #proPay > [role=dialog] {
+    max-width: 600px !important; border-radius: 22px !important;
+    max-height: min(calc(100vh - 64px), 980px) !important; max-height: min(calc(100dvh - 64px), 980px) !important;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .3) !important;
+  }
+}
+/* 3. Side drawer (#sbDrawer, SB.open). Already a left side panel; on iPad it gets the width of an iPadOS sidebar so the
+      account card ("Not signed in, Guest mode ...") and long rows are not cut at 286 px. */
+@media (min-width: 700px) {
+  html.smd-tablet #sbDrawer.sb-drawer { width: 340px; }
+}
+
+/* 4. All tools sheet (home.js openAllTools, inside the shell's .hv-sheet card). A browse list of 40 plus tools: in
+      landscape the card widens and each section lays its tools out in two columns. Rows are made inline-flex halves
+      rather than a grid on <details>, which older WebKit cannot lay out as a grid. Portrait keeps one column. */
+@media (min-width: 1000px) {
+  html.smd-tablet body .hv-sheet.hv-sheet:has(.hv-at-list) { left: max(24px, calc(50vw - 460px)); right: max(24px, calc(50vw - 460px)); }
+  html.smd-tablet body .hv-sheet:has(.hv-at-list) .hv-at-list .hv-at-row { display: inline-flex; vertical-align: top; width: 50%; box-sizing: border-box; }
+  html.smd-tablet body .hv-sheet:has(.hv-at-list) .hv-at-list .hv-at-row[hidden] { display: none; }
+}
+
+/* 5. Help & Support centre (bug-report.js #bugcRoot). bug-report.js centres the body's children at 720 px from 900 px
+      up, but its own .hs-sec and .bc-tg margins (same ID specificity, later) win, so "Your conversations" and the
+      Shake switch sat at the left edge under a centred hero. One column for every child, from 700 px; in landscape
+      the three ways to reach the team sit side by side instead of three stacked full-width cards. */
+@media (min-width: 700px) {
+  html.smd-tablet #bugcRoot .bc-body > * { max-width: 720px; margin-left: auto; margin-right: auto; box-sizing: border-box; }
+}
+@media (min-width: 1000px) {
+  html.smd-tablet #bugcRoot .bc-body > * { max-width: 880px; }
+  html.smd-tablet #bugcRoot .bc-body > .hs-acts { flex-direction: row; align-items: stretch; }
+  html.smd-tablet #bugcRoot .bc-body > .hs-acts > .hs-act { flex: 1 1 0; min-width: 0; }
+}
+
+/* 6. Alerts (home.js #ntfOverlay, the bell). Two 665 px tab halves spanned iPad Pro; iPadOS centres a segmented
+      choice. The list below already sits in a readable column. */
+@media (min-width: 700px) {
+  html.smd-tablet #ntfOverlay .ntf-tabs { justify-content: center; }
+  html.smd-tablet #ntfOverlay .ntf-tab { flex: 0 1 220px; min-height: 44px; }
+}
+
+/* 7. Profile setup (profile-setup.js #pfSetupRoot): a 560 px sheet glued to the bottom edge becomes a centred form
+      sheet. In landscape the eight fields sit in two columns in a 760 px card, so the form fits an 820 px tall
+      screen without scrolling; the picker view (.pfs-choose, one search list) keeps its single column. */
+@media (min-width: 700px) {
+  html.smd-tablet #pfSetupRoot { align-items: center; padding: 24px; }
+  html.smd-tablet #pfSetupRoot .pfs-card { border-radius: 20px; max-height: min(92vh, 980px); padding-bottom: 20px; }
+}
+@media (min-width: 960px) and (orientation: landscape) {
+  html.smd-tablet #pfSetupRoot .pfs-card:not(.pfs-choose) { max-width: 760px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: 18px; align-content: start; padding: 22px 24px 20px; }
+  html.smd-tablet #pfSetupRoot .pfs-card:not(.pfs-choose) > :not(.pfs-f) { grid-column: 1 / -1; }
+  html.smd-tablet #pfSetupRoot .pfs-card:not(.pfs-choose) > .pfs-acts { justify-content: flex-end; }
+  html.smd-tablet #pfSetupRoot .pfs-card:not(.pfs-choose) > .pfs-acts > .pfs-btn { flex: 0 0 180px; }
+}
+
+/* 8. Verify your mobile number (phone-verify.js #phvRoot): centred form sheet instead of a bottom sheet. With the
+      keyboard up (.kb) the root's bottom padding is the keyboard height, so centring still clears the keys. */
+@media (min-width: 700px) {
+  html.smd-tablet #phvRoot { align-items: center; padding-left: 24px; padding-right: 24px; }
+  html.smd-tablet #phvRoot .phv-card, html.smd-tablet #phvRoot.kb .phv-card { border-radius: 24px; }
+}
+
+/* 9. Search Medical Register (nmc-register.js #smdNmc): the search field ran 1,334 px across the bottom of iPad Pro.
+      A 640 px form sheet near the top, so the results list grows down into the space below it. */
+@media (min-width: 700px) {
+  html.smd-tablet #smdNmc .smdnmc-sheet {
+    left: max(24px, calc(50vw - 320px)); right: max(24px, calc(50vw - 320px));
+    top: max(48px, 10vh); bottom: auto; max-height: 80vh; border-radius: 20px;
+    padding-bottom: 18px;
+  }
+  html.smd-tablet #smdNmc .smdnmc-x { min-width: 44px; min-height: 44px; }
+}
+
+/* 10. Profile sheet for a guest (home.js .hv-acct inside the shell's .hv-sheet card): the two buttons ran the card's
+       full 546 px. iPad buttons keep a natural width. */
+@media (min-width: 700px) {
+  html.smd-tablet body .hv-sheet .hv-acct > button { max-width: 400px; margin-left: auto !important; margin-right: auto !important; }
+}
+
+/* 11. Welcome (onboarding.js .smdt-wel): the role chips wrapped into three rows inside 340 px, and the call to action
+       sat 200 px below them at the bottom edge. The chips get one row and the button stays with the content. */
+@media (min-width: 700px) {
+  html.smd-tablet .smdt-wel .smdt-wel-p { max-width: 460px; }
+  html.smd-tablet .smdt-wel .smdt-roles { max-width: 880px; }
+  html.smd-tablet .smdt-wel > div:first-child { flex: 0 0 auto !important; }
+  html.smd-tablet .smdt-wel .smdt-wel-cta { margin-top: 40px; max-width: 360px; }
+}
+
+/* 12. App lock choice (applock.js #smdApplock): a 360 px card wrapped "No lock, open automatically" onto two lines
+       and its warning onto five. A 480 px dialog. */
+@media (min-width: 700px) {
+  html.smd-tablet #smdApplock .smdal-card { max-width: 480px; }
+}
+
+/* 13. Sign-in gate (index.html #accountGate): the 360 px column sat at the top of the screen with the bottom two
+       thirds empty. Centre it with auto margins (safe if it outgrows the screen: it still scrolls from the top). */
+@media (min-width: 700px) {
+  html.smd-tablet #accountGate .account-inner { max-width: 440px; margin-top: auto; margin-bottom: auto; }
+}
+
+/* 14. Report a problem / ask / feedback sheet (bug-report.js #bugrRoot): centred form sheet instead of a 520 px bottom
+       sheet. Its footer keeps the safe-area padding it carries for the phone. */
+@media (min-width: 700px) {
+  html.smd-tablet #bugrRoot { align-items: center; padding: 24px; box-sizing: border-box; }
+  html.smd-tablet #bugrRoot .bg-card { max-width: 600px; border-radius: 24px; max-height: min(calc(100% - 48px), 900px); }
+}

@@ -62,7 +62,7 @@
 <!-- Refined clinical look for INNER screens only (never #homeV2; owner 2026-10-12). Class smd-refined on <html> is set below; localStorage smd_refined="0" turns it off. -->
 <link rel="stylesheet" href="/refined.css?v=rf1-noempty1">
 <!-- Native-app behaviour app-wide (no tap flash, no double-tap zoom, no selectable buttons, no page rubber-band). Owner 2026-10-16. localStorage smd_native_feel=0 turns it off. -->
-<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf6-ipad2"><link rel="stylesheet" href="/ipad-native.css?v=ipn1"><link rel="stylesheet" href="/ipad-clinical.css?v=ipm1"><link rel="stylesheet" href="/ipad-knowledge.css?v=ipm1"><link rel="stylesheet" href="/ipad-hospital.css?v=ipm1"><link rel="stylesheet" href="/ipad-learning.css?v=ipm1"><link rel="stylesheet" href="/ipad-specialty.css?v=ipm1"><link rel="stylesheet" href="/ipad-care.css?v=ipm1"><link rel="stylesheet" href="/ipad-account.css?v=ipm1"><script>/* ipad-native.css/js: a large touch screen (iPad, big Android tablet) gets html.smd-tablet before first paint. Kill switch: localStorage smd_ipad_native=0 */try{(function(){var s=window.screen||{};if((navigator.maxTouchPoints||0)>1&&Math.min(s.width||0,s.height||0)>=600&&localStorage.getItem("smd_ipad_native")!=="0")document.documentElement.classList.add("smd-tablet")})()}catch(e){}</script><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
+<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf6-ipad2"><link rel="stylesheet" href="/ipad-native.css?v=ipn1"><link rel="stylesheet" href="/ipad-clinical.css?v=ipm2"><link rel="stylesheet" href="/ipad-knowledge.css?v=ipm1"><link rel="stylesheet" href="/ipad-hospital.css?v=ipm2"><link rel="stylesheet" href="/ipad-learning.css?v=ipm1"><link rel="stylesheet" href="/ipad-specialty.css?v=ipm2"><link rel="stylesheet" href="/ipad-care.css?v=ipm2"><link rel="stylesheet" href="/ipad-account.css?v=ipm2"><script>/* ipad-native.css/js: a large touch screen (iPad, big Android tablet) gets html.smd-tablet before first paint. Kill switch: localStorage smd_ipad_native=0 */try{(function(){var s=window.screen||{};if((navigator.maxTouchPoints||0)>1&&Math.min(s.width||0,s.height||0)>=600&&localStorage.getItem("smd_ipad_native")!=="0")document.documentElement.classList.add("smd-tablet")})()}catch(e){}</script><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
 <link rel="stylesheet" href="/motion.css?v=gold1-pf2">
 <script src="/smd-num.js?v=num2" defer></script>
 <!-- B2 privacy mode (window.SMD_PRIVACY_MODE; not privacy-config.js's SMD_PRIVACY): one tap in the home header masks patient names, IDs, phones and photos ON
@@ -2432,7 +2432,7 @@ window.openExternal = function (u) {
 <!-- Clinical review desk: clinicians approve or comment on AI-drafted protocols, kits and consent templates,
      then export the decisions (applied with scripts/apply-reviews.mjs). Flag smd_review_desk (default ON). -->
 <script src="/review-prepfix.js?v=pf3" defer></script>
-<script src="/review-desk.js?v=rev5-prep3-anest1-onc2" defer></script>
+<script src="/review-desk.js?v=rev5-prep3-anest1-onc2-ipad1" defer></script>
 <!-- Clinical Bulletins: signed practice updates on the disease reader (flag smd_kb_bulletins, default off)
      + the Review Desk signing tab. docs/CLINICAL_AUTO_UPDATE_ENGINEERING_SPEC.md -->
 <script src="/bulletins.js?v=bl6" defer></script>
@@ -2530,8 +2530,8 @@ window.openExternal = function (u) {
 <script src="/antibiogram-flags.js?v=abgf3" defer></script>
 <script src="/antibiogram-v2.js?v=abgv20-pro1-qa2-undo1-ipad3" defer></script>
 <script src="/antibiogram.js?v=gold992-rotate-fix-nobooks1-abg6-pro1-red1-ipad2" defer></script>
-<script src="/govschemes.js?v=gs4-catsearch" defer></script>
-<script src="/icd.js?v=hardlocal3-us1-conv5" defer></script>
+<script src="/govschemes.js?v=gs4-catsearch-ipad1" defer></script>
+<script src="/icd.js?v=hardlocal3-us1-conv5-ipad1" defer></script>
 <link rel="stylesheet" href="/search.css?v=us2-ipad1">
 <script src="/search.js?v=us2-nodash1-kbproto2-kits1-alltools1-neo1-pf1-adultref1-mkai1-mkw1-krd1" defer></script>
 <script src="/asp-region.js?v=gold363-abg7-r4" defer></script>
@@ -2764,7 +2764,7 @@ window.openExternal = function (u) {
 <script src="/sknx-compare.js?v=sx13" defer></script>
 <script src="/sknx-rx.js?v=sx13" defer></script>
 <script src="/sknx.js?v=sx16-ux-roles1" defer></script>
-<script src="/sknx-screens.js?v=sx17-calm-beta1" defer></script>
+<script src="/sknx-screens.js?v=sx17-calm-beta1-ipad1" defer></script>
 <!-- Mandatory beta notice for the four clinically unvalidated imaging AI modules (ThoreX, KardiQ X,
      SknX, FundX). Wraps each module's own open(), so every entry path shows it: home tile, sidebar
      row, deep link, access-code gate, and the Physician Pro early-access path. Must load AFTER all
@@ -2806,7 +2806,7 @@ window.openExternal = function (u) {
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=hardlocal3" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=hardlocal3-allopen1-cel1-pm1-mkai1-mkw1-iso1" defer></script>
+<script src="/surgx-screens.js?v=hardlocal3-allopen1-cel1-pm1-mkai1-mkw1-iso1-ipad1" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
      owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
@@ -2838,7 +2838,7 @@ window.openExternal = function (u) {
 <script src="/pglog-backup.js?v=pglb1" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag-fr1" defer></script>
 <script src="/pglog-ai.js?v=hardlocal3-easy1" defer></script>
-<script src="/pglog-screens.js?v=pgl27-quick-easy1-cel1-pm1" defer></script>
+<script src="/pglog-screens.js?v=pgl27-quick-easy1-cel1-pm1-ipad1" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
@@ -2867,7 +2867,7 @@ window.openExternal = function (u) {
 <script src="/followcare-analytics.js?v=fc3" defer></script>
 <script src="/followcare-integration.js?v=fc7" defer></script>
 <script src="/followcare-intel.js?v=fc7" defer></script>
-<script src="/followcare.js?v=fc21-appshell-testdest1-fr1-pm1-ipad2" defer></script>
+<script src="/followcare.js?v=fc21-appshell-testdest1-fr1-pm1-ipad3" defer></script>
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 
@@ -2904,7 +2904,7 @@ window.openExternal = function (u) {
 <!-- G2: the offline outbox for the six bedside writes (window.WARD_OFFLINE). Before ward.js, which uses it. -->
 <script src="/ward-offline.js?v=3" defer></script>
 <script src="/ward-labels.js?v=1-sid1-tok1" defer></script>
-<script src="/ward.js?v=ward76-tele1-pm1-mkai1-mkw1-ipad1" defer></script>
+<script src="/ward.js?v=ward76-tele1-pm1-mkai1-mkw1-ipad2" defer></script>
 <!-- Discharge summary workstation (window.DISCHARGE). Reads the assembled summary, lets a treating
      clinician correct it section by section, and signs it into an immutable version. Opened from a
      discharged patient on the ward screen: DISCHARGE.open({orgId, encounterId}). -->
@@ -3023,7 +3023,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter18-endpointonly16-labdates2-hosp-signin1Reg1-wslabs1-fr1-pm1"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1-demohosp3-adapter18-endpointonly16-labdates2-hosp-signin1Reg1-wslabs1-fr1-pm1-ipad1"; document.body.appendChild(s); }
     // Offline "Test Hospital" demo dataset — 25 fictional patients, real-shaped labs, no GHIS
     // login needed. Loaded alongside ghis-ward.js so the setup screen's demo button works the
     // moment Ward Sync opens.
