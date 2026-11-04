@@ -2,116 +2,188 @@
  "v": 1,
  "module": "scc-nutrition",
  "subject": "ss-critical-care",
- "title": "Nutrition in critical illness: enteral versus parenteral route, timing and targets",
- "minutes": 5,
+ "title": "Nutrition in critical illness",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Critically ill patients have high metabolic stress and often cannot eat. The first decision is **route**. If the gut works and the patient is haemodynamically stable, **enteral nutrition** is preferred over **parenteral nutrition** because it preserves gut mucosa, costs less and causes fewer infective and thrombotic complications. Parenteral feeding is reserved for patients in whom the gut cannot be used, such as severe short bowel or contraindicated enteral access.",
-   "say": "Critically ill patients have high metabolic stress and often cannot eat. The first decision is route. If the gut works and the patient is haemodynamically stable, enteral nutrition is preferred over parenteral nutrition, because it preserves gut mucosa, costs less and causes fewer infective and thrombotic complications. Parenteral feeding is reserved for patients in whom the gut cannot be used, such as severe short bowel or contraindicated enteral access.",
+   "tx": "Start **enteral nutrition** within 24 to 48 hours in a patient who is resuscitated and has a working gut. The **gastric route** is first. **Post-pyloric feeding** is for intolerance or high aspiration risk, not the default. Early enteral nutrition maintains gut mucosal barrier integrity, prevents bacterial translocation, and dampens systemic inflammatory responses.",
+   "say": "Start enteral nutrition within 24 to 48 hours in a patient who is resuscitated and has a working gut. The gastric route is first. Post-pyloric feeding is for intolerance or high aspiration risk, not the default. Early enteral nutrition maintains gut mucosal barrier integrity, prevents bacterial translocation, and dampens systemic inflammatory responses.",
    "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Enteral",
-     "points": [
-      "Gut preserved",
-      "Cheaper",
-      "Fewer infections",
-      "Needs working gut"
-     ]
-    },
-    "right": {
-     "title": "Parenteral",
-     "points": [
-      "Bypasses gut",
-      "Central line needed",
-      "Higher infection risk",
-      "Used when gut fails"
-     ]
-    }
+    "kind": "image",
+    "src": "v1/kb/media/fuel-metabolism-feed-fast-cycle-and-dka-fig1.webp",
+    "alt": "Metabolic substrate utilisation, catabolic stress response and refeeding insulin surges",
+    "caption": "Metabolic substrate utilisation, catabolic stress response and refeeding insulin surges",
+    "ar": 1.3333
    }
   },
   {
-   "tx": "Timing matters. Feeding should start early once the patient is **haemodynamically stable**, and early enteral feeding is linked with better outcomes. Haemodynamic instability with poor perfusion, such as high-dose vasopressors and mottled skin, is a reason to defer feeding. Absent bowel sounds do not need to delay enteral feeding. Start with **trophic feeding**, a small dose that maintains gut integrity, then advance.",
-   "say": "Timing matters. Feeding should start early once the patient is haemodynamically stable, and early enteral feeding is linked with better outcomes. Haemodynamic instability with poor perfusion, such as high-dose vasopressors and mottled skin, is a reason to defer feeding. Absent bowel sounds do not need to delay enteral feeding. Start with trophic feeding, a small dose that maintains gut integrity, then advance.",
+   "tx": "**CALORIES** found no mortality difference between the early parenteral route and the early enteral route. **NUTRIREA-2** found more bowel ischaemia with early full dose enteral feeding in shocked patients, without a mortality benefit. Enteral feeds must be held during escalating vasopressor therapy to avoid non-occlusive mesenteric ischaemia.",
+   "say": "CALORIES found no mortality difference between the early parenteral route and the early enteral route. NUTRIREA-2 found more bowel ischaemia with early full dose enteral feeding in shocked patients, without a mortality benefit. Enteral feeds must be held during escalating vasopressor therapy to avoid non-occlusive mesenteric ischaemia.",
    "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "Assess perfusion"
-     },
-     {
-      "id": "b",
-      "label": "Stable?"
-     },
-     {
-      "id": "c",
-      "label": "Start trophic feed"
-     },
-     {
-      "id": "d",
-      "label": "Defer and reassess"
-     }
+    "kind": "table",
+    "cols": [
+     "Landmark Trial",
+     "Intervention Comparison",
+     "Key Clinical Takeaway"
     ],
-    "edges": [
+    "rows": [
      [
-      "a",
-      "b"
+      "CALORIES trial",
+      "Early parenteral vs early enteral feeding",
+      "Equivalent 30-day mortality and infectious complications"
      ],
      [
-      "b",
-      "c",
-      "Yes"
+      "NUTRIREA-2 trial",
+      "Early full enteral vs parenteral in shock",
+      "Enteral arm caused significantly more acute mesenteric ischaemia"
      ],
      [
-      "b",
-      "d",
-      "No"
+      "Resuscitation rule",
+      "Vasopressor stabilisation",
+      "Withhold enteral nutrition during acute unresuscitated shock"
      ]
     ]
    }
   },
   {
-   "tx": "Consider the **NUTRIC score** when deciding which patients may benefit most from intensive feeding, since those at high nutritional risk tend to gain more. Routine **gastric residual volume** checks add little, so monitoring should be selective. Severely malnourished patients face **refeeding syndrome**, which shows as **hypophosphataemia** alongside low potassium and magnesium. Begin feeding cautiously at a low rate and check blood chemistry frequently over the first few days.",
-   "say": "Consider the NUTRIC score when deciding which patients may benefit most from intensive feeding, since those at high nutritional risk tend to gain more. Routine gastric residual volume checks add little, so monitoring should be selective. Severely malnourished patients face refeeding syndrome, which shows as hypophosphataemia alongside low potassium and magnesium. Begin feeding cautiously at a low rate and check blood chemistry frequently over the first few days.",
+   "tx": "**EDEN** found that **trophic enteral feeding** for the first 6 days was not inferior to full enteral feeding for ventilator free days. Full calories on day 1 are not mandatory. Delivering minimal trophic volume around 10 to 20 mL per hour preserves gut architecture while preventing hyperglycaemia, gastrointestinal distension, and metabolic stress.",
+   "say": "EDEN found that trophic enteral feeding for the first 6 days was not inferior to full enteral feeding for ventilator free days. Full calories on day 1 are not mandatory. Delivering minimal trophic volume around 10 to 20 mL per hour preserves gut architecture while preventing hyperglycaemia, gastrointestinal distension, and metabolic stress.",
    "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/scc-nutrition-fig1.webp",
-    "alt": "Diagram illustrating refeeding syndrome, showing how rapid refeeding in malnourished patients leads to insulin surge, causing intracellular shifts of phosphate, potassium, and magnesium, resulting in severe hypophosphatemia, hypokalemia, and hypomagnesemia.",
-    "caption": "Refeeding syndrome: electrolyte shifts and cautious feeding",
-    "ar": 1.8349
+    "kind": "compare",
+    "left": {
+     "title": "EDEN trophic feeding arm",
+     "points": [
+      "Delivered 10 to 20 mL/h (approx 400 kcal/day)",
+      "Equivalent ventilator-free days and 60-day mortality",
+      "Significantly lower gastrointestinal intolerance and diarrhea"
+     ]
+    },
+    "right": {
+     "title": "Full enteral feeding arm",
+     "points": [
+      "Targeted full caloric prescription from day one",
+      "Showed no clinical benefit in functional recovery",
+      "Higher rates of vomiting and elevated gastric residuals"
+     ]
+    }
    }
   },
   {
-   "tx": "Glutamine is not routinely supplemented in critical illness. The REDOXS trial found that high-dose parenteral glutamine did not improve outcomes and may increase mortality in multiorgan failure. Diarrhoea on enteral feeds is often drug related, especially with **antibiotics**, and soluble fibre can help. Remember that lipid emulsions should be given at around 0.7 to 1.5 g/kg/day, and that essential fatty acid deficiency can appear after about three weeks of fat-free parenteral feeding.",
-   "say": "Glutamine is not routinely supplemented in critical illness. The REDOXS trial found that high-dose parenteral glutamine did not improve outcomes and may increase mortality in multiorgan failure. Diarrhoea on enteral feeds is often drug related, especially with antibiotics, and soluble fibre can help. Remember that lipid emulsions should be given at around 0.7 to 1.5 grams per kilogram per day, and that essential fatty acid deficiency can appear after about three weeks of fat-free parenteral feeding.",
-   "vis": null
+   "tx": "The **EFFORT Protein** trial found that a higher protein dose did not improve outcomes and may harm patients with **acute kidney injury** and high organ failure scores. More protein is not always better. Supplying protein in excess of 2.2 g/kg/day during acute illness exacerbates uraemic solute load and cellular organ failure.",
+   "say": "The EFFORT Protein trial found that a higher protein dose did not improve outcomes and may harm patients with acute kidney injury and high organ failure scores. More protein is not always better. Supplying protein in excess of 2 point 2 g/kg/day during acute illness exacerbates uraemic solute load and cellular organ failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "EFFORT Protein Arm",
+     "Protein Prescription",
+     "Clinical Outcome in Sepsis/AKI"
+    ],
+    "rows": [
+     [
+      "High protein group",
+      "At least 2.2 g/kg/day",
+      "Poorer recovery and increased mortality in severe AKI"
+     ],
+     [
+      "Standard protein group",
+      "At most 1.2 g/kg/day",
+      "Better clinical trajectory in multiple organ dysfunction"
+     ],
+     [
+      "Current consensus",
+      "1.2 to 2.0 g/kg/day",
+      "Titrate protein moderately and avoid excessive early loads"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**PERMIT** found that **permissive underfeeding** of calories, with protein maintained, did not change mortality compared with full calorie feeding. Providing 40% to 60% of calculated caloric needs alongside recommended protein intake achieves equivalent clinical outcomes, demonstrating that avoiding early overfeeding is safe in critical illness.",
+   "say": "PERMIT found that permissive underfeeding of calories, with protein maintained, did not change mortality compared with full calorie feeding. Providing 40% to 60% of calculated caloric needs alongside recommended protein intake achieves equivalent clinical outcomes, demonstrating that avoiding early overfeeding is safe in critical illness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Permissive underfeeding (PERMIT)",
+     "points": [
+      "Targeted 40% to 60% of caloric requirements",
+      "Maintained full recommended target protein dose",
+      "Identical 90-day mortality and hospital discharge rates"
+     ]
+    },
+    "right": {
+     "title": "Targeted full feeding",
+     "points": [
+      "Targeted 70% to 100% of calculated calories",
+      "Higher incidence of insulin requirement and hypercapnia",
+      "Confirmed hypocaloric feeding is clinically non-inferior"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**EPaNIC** found that early **supplemental parenteral nutrition** increased infections compared with withholding it until day 8. Parenteral nutrition is not added on day 1 just to meet a calorie target. Allowing mild early macronutrient deficit promotes cellular autophagy and clears damaged organelles, protecting against nosocomial infection.",
+   "say": "EPaNIC found that early supplemental parenteral nutrition increased infections compared with withholding it until day 8. Parenteral nutrition is not added on day 1 just to meet a calorie target. Allowing mild early macronutrient deficit promotes cellular autophagy and clears damaged organelles, protecting against nosocomial infection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "EPaNIC Timing Strategy",
+     "Protocol Details",
+     "Infection and ICU Stay Outcome"
+    ],
+    "rows": [
+     [
+      "Early parenteral nutrition",
+      "Started within 48 hours to meet deficit",
+      "Increased hospital infections and delayed ICU discharge"
+     ],
+     [
+      "Late parenteral nutrition",
+      "Withheld until day 8 of ICU stay",
+      "Accelerated recovery and reduced new organ failure"
+     ],
+     [
+      "Modern nutrition guideline",
+      "Avoid early supplementation",
+      "Delay parenteral nutrition until second week if enteral fails"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A single **gastric residual** below 500 mL is not a reason to stop feeds. **Prokinetics** are tried before the tube is declared a failure. Residual checks are not required by routine. Monitoring for abdominal distension and passage of flatus is safer than reflexively interrupting nutrition for moderate aspirated fluid volumes.",
+   "say": "A single gastric residual below 500 mL is not a reason to stop feeds. Prokinetics are tried before the tube is declared a failure. Residual checks are not required by routine. Monitoring for abdominal distension and passage of flatus is safer than reflexively interrupting nutrition for moderate aspirated fluid volumes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastric residual volume policy",
+     "points": [
+      "Threshold up to 500 mL without vomiting is acceptable",
+      "Avoid routine hourly aspirate checks in stable patients",
+      "Prevents unwarranted interruption of nutritional delivery"
+     ]
+    },
+    "right": {
+     "title": "Motility enhancement",
+     "points": [
+      "Intravenous metoclopramide 10 mg 8-hourly",
+      "Low-dose erythromycin 100 to 250 mg 8-hourly",
+      "Post-pyloric feeding if dysmotility persists despite drugs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Refeeding risk** is highest in starved, alcoholic, and very underweight patients. Give **thiamine**, replace phosphate, potassium, and magnesium, and raise calories over several days. Cautious stepwise escalation of nutritional delivery over four to seven days prevents fatal cardiopulmonary decompensation and ventricular arrhythmias during metabolic recovery.",
+   "say": "Refeeding risk is highest in starved, alcoholic, and very underweight patients. Give thiamine, replace phosphate, potassium, and magnesium, and raise calories over several days. Cautious stepwise escalation of nutritional delivery over four to seven days prevents fatal cardiopulmonary decompensation and ventricular arrhythmias during metabolic recovery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-diet-food-composition.webp",
+    "alt": "Caloric density, macronutrient distribution and protein provision in clinical nutritional support",
+    "caption": "Caloric density, macronutrient distribution and protein provision in clinical nutritional support",
+    "ar": 1.3333
+   }
   }
- ],
- "quiz": [
-  "q_b71d4920c9a1",
-  "q_f96ead89ae7a",
-  "q_52e0b042323f"
- ],
- "src": [],
- "refs": [
-  "ESPEN Guidelines on Nutrition in Critical Care",
-  "EDEN Trial (Rice et al., NEJM 2012)",
-  "REDOXS Trial (Heyland et al., NEJM 2011)"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 1,
-  "kbWords": 0,
-  "itemN": 52
- }
+ ]
 }

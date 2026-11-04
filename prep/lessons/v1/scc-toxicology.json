@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "module": "scc-toxicology",
+ "subject": "ss-critical-care",
+ "title": "Poisoning in the ICU",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Organophosphate poisoning** is treated with **atropine** until the chest is dry, doubling the dose every few minutes. **Pralidoxime** is added early, before the enzyme has aged, and it is most useful for nicotinic weakness. A clear chest is the endpoint. Carbamate poisoning needs atropine. Pralidoxime is not required for a pure **carbamate**.",
+   "say": "Organophosphate poisoning is treated with atropine until the chest is dry, doubling the dose every few minutes. Pralidoxime is added early, before the enzyme has aged, and it is most useful for nicotinic weakness. A clear chest is the endpoint. Carbamate poisoning needs atropine. Pralidoxime is not required for a pure carbamate.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/organophosphate-poisoning-fig1.webp",
+    "alt": "Acetylcholinesterase inhibition, cholinergic crisis toxidrome and nicotinic versus muscarinic receptor signs",
+    "caption": "Acetylcholinesterase inhibition, cholinergic crisis toxidrome and nicotinic versus muscarinic receptor signs",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Paraquat** has no antidote. Charcoal is reasonable early if the airway is protected. The lung injury is progressive fibrosis. **Supplemental oxygen** can worsen that injury, so the lowest inspired oxygen that keeps an acceptable saturation is used. A small swallow of the concentrated liquid is often fatal, and the **mouth burns** are the clue.",
+   "say": "Paraquat has no antidote. Charcoal is reasonable early if the airway is protected. The lung injury is progressive fibrosis. Supplemental oxygen can worsen that injury, so the lowest inspired oxygen that keeps an acceptable saturation is used. A small swallow of the concentrated liquid is often fatal, and the mouth burns are the clue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Toxic Feature",
+     "Pathological Effect",
+     "Clinical Management Rule"
+    ],
+    "rows": [
+     [
+      "Redox cycling injury",
+      "Superoxide generation destroys pneumocytes",
+      "Strictly restrict supplemental oxygen to avoid free radical injury"
+     ],
+     [
+      "Caustic mucosal burn",
+      "Severe ulceration of tongue and pharynx",
+      "Early activated charcoal or Fuller earth if presented in 1 hour"
+     ],
+     [
+      "Progressive fibrosis",
+      "Fatal intra-alveolar pulmonary fibrosis",
+      "Supportive care only; haemoperfusion has unproven benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Aluminium phosphide** releases **phosphine** and causes refractory shock and metabolic acidosis. There is no specific antidote. **Magnesium** is often infused in Indian practice and has not been shown to reduce death. The airway and the circulation are treated directly. A lavage ritual is not a reason to delay that support.",
+   "say": "Aluminium phosphide releases phosphine and causes refractory shock and metabolic acidosis. There is no specific antidote. Magnesium is often infused in Indian practice and has not been shown to reduce death. The airway and the circulation are treated directly. A lavage ritual is not a reason to delay that support.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Phosphine toxicity mechanisms",
+     "points": [
+      "Inhibits cytochrome c oxidase in cardiac mitochondria",
+      "Severe myocardial depression and peripheral vasoplegia",
+      "Profound lactic acidosis and ventricular arrhythmias"
+     ]
+    },
+    "right": {
+     "title": "Evidence-based critical care",
+     "points": [
+      "No specific pharmacological antidote exists",
+      "Magnesium infusion shows no proven mortality reduction",
+      "Focus entirely on aggressive haemodynamic and mechanical support"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**N-acetylcysteine** is started when the 4 hour **paracetamol** level is above the treatment line, or immediately if the presentation is late or the overdose was staggered. The intravenous course is 150 mg/kg over 1 hour, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours. The clock starts from the time of ingestion, and a late start is still worthwhile in liver injury.",
+   "say": "N-acetylcysteine is started when the 4 hour paracetamol level is above the treatment line, or immediately if the presentation is late or the overdose was staggered. The intravenous course is 150 mg/kg over 1 hour, then 50 mg/kg over 4 hours, then 100 mg/kg over 16 hours. The clock starts from the time of ingestion, and a late start is still worthwhile in liver injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "NAC Infusion Phase",
+     "Intravenous Dosage",
+     "Infusion Duration"
+    ],
+    "rows": [
+     [
+      "Loading infusion",
+      "150 mg/kg IV in 200 mL D5W",
+      "Administer over exactly 60 minutes"
+     ],
+     [
+      "Second maintenance",
+      "50 mg/kg IV in 500 mL D5W",
+      "Infuse continuously over 4 hours"
+     ],
+     [
+      "Third maintenance",
+      "100 mg/kg IV in 1000 mL D5W",
+      "Infuse over 16 hours; continue if ALT or INR elevated"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fomepizole** blocks alcohol dehydrogenase in **methanol** and **ethylene glycol** poisoning. The load is 15 mg/kg, then 10 mg/kg every 12 hours while dialysis is not running. The interval is shortened during haemodialysis because the drug is removed. Dialysis is added for visual symptoms, refractory acidosis, renal failure, or a very high level. Ethanol is only the fallback when fomepizole is unavailable.",
+   "say": "Fomepizole blocks alcohol dehydrogenase in methanol and ethylene glycol poisoning. The load is 15 mg/kg, then 10 mg/kg every 12 hours while dialysis is not running. The interval is shortened during haemodialysis because the drug is removed. Dialysis is added for visual symptoms, refractory acidosis, renal failure, or a very high level. Ethanol is only the fallback when fomepizole is unavailable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fomepizole protocol",
+     "points": [
+      "Competitive antagonist of alcohol dehydrogenase",
+      "Load 15 mg/kg followed by 10 mg/kg 12-hourly",
+      "Increase dosing frequency to 4-hourly during dialysis"
+     ]
+    },
+    "right": {
+     "title": "Indications for hemodialysis",
+     "points": [
+      "Methanol level over 50 mg/dL or visual impairment",
+      "Severe high anion gap metabolic acidosis below 7.25",
+      "Acute kidney injury from ethylene glycol oxalate crystals"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Tricyclic antidepressant** toxicity is known to widen the QRS by sodium channel blockade. **Sodium bicarbonate** is given when the QRS is wider than 100 ms, or when there is a ventricular arrhythmia or hypotension. The pH is taken to about 7.45 to 7.55. Seizures are stopped with a **benzodiazepine**. Phenytoin is avoided, because it blocks the same channel.",
+   "say": "Tricyclic antidepressant toxicity is known to widen the QRS by sodium channel blockade. Sodium bicarbonate is given when the QRS is wider than 100 ms, or when there is a ventricular arrhythmia or hypotension. The pH is taken to about 7 point 45 to 7 point 55. Seizures are stopped with a benzodiazepine. Phenytoin is avoided, because it blocks the same channel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ECG / Clinical Sign",
+     "Pathological Cut-Off",
+     "Therapeutic Action"
+    ],
+    "rows": [
+     [
+      "QRS duration over 100 ms",
+      "Sodium channel blockade in His-Purkinje",
+      "Bolus 1 to 2 mmol/kg hypertonic sodium bicarbonate"
+     ],
+     [
+      "QRS duration over 160 ms",
+      "High risk of ventricular arrhythmias",
+      "Titrate bicarbonate infusion to target arterial pH 7.45-7.55"
+     ],
+     [
+      "Drug-induced seizures",
+      "Excitotoxic cortical activation",
+      "Treat with IV benzodiazepines; strictly avoid phenytoin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Calcium channel blocker** shock is treated with calcium and with **high-dose insulin**, about 1 unit/kg as a bolus and then 1 unit/kg/h, plus dextrose so the glucose stays safe. **Lipid emulsion** 20 percent, 1.5 mL/kg as a bolus, is the rescue for local anaesthetic systemic toxicity and a late adjunct in this poisoning. Vasopressors support the pressure while those treatments act.",
+   "say": "Calcium channel blocker shock is treated with calcium and with high-dose insulin, about 1 unit/kg as a bolus and then 1 unit/kg/h, plus dextrose so the glucose stays safe. Lipid emulsion 20 percent, 1 point 5 mL/kg as a bolus, is the rescue for local anaesthetic systemic toxicity and a late adjunct in this poisoning. Vasopressors support the pressure while those treatments act.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-dose insulin euglycaemic therapy",
+     "points": [
+      "Bolus 1 unit/kg regular insulin with 25 g dextrose",
+      "Continuous infusion 1 to 10 units/kg/h titrated",
+      "Overcomes myocardial metabolic starvation and improves inotropy"
+     ]
+    },
+    "right": {
+     "title": "Intravenous lipid emulsion rescue",
+     "points": [
+      "20% lipid emulsion bolus 1.5 mL/kg over 1 minute",
+      "Followed by maintenance infusion 0.25 mL/kg/min",
+      "Acts as lipid sink for lipophilic local anaesthetics and toxins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Digoxin specific antibody fragments** are given for a life-threatening arrhythmia, a potassium above 5 mmol/L, or renal failure with clear **digoxin** toxicity. Calcium is not the treatment of that hyperkalaemia. **EXTRIP dialysis** is for a small, poorly protein bound toxin, including severe **salicylate**, lithium, metformin lactic acidosis, theophylline, and valproate. Intermittent haemodialysis clears them faster than continuous therapy when the blood pressure allows. Salicylate is also alkalinised with bicarbonate while dialysis is arranged.",
+   "say": "Digoxin specific antibody fragments are given for a life-threatening arrhythmia, a potassium above 5 mmol/L, or renal failure with clear digoxin toxicity. Calcium is not the treatment of that hyperkalaemia. EXTRIP dialysis is for a small, poorly protein bound toxin, including severe salicylate, lithium, metformin lactic acidosis, theophylline, and valproate. Intermittent haemodialysis clears them faster than continuous therapy when the blood pressure allows. Salicylate is also alkalinised with bicarbonate while dialysis is arranged.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-paed-poisoning_antidotes.webp",
+    "alt": "Systematic toxidrome recognition table and matching specific pharmacological antidotes",
+    "caption": "Systematic toxidrome recognition table and matching specific pharmacological antidotes",
+    "ar": 1.3333
+   }
+  }
+ ]
+}

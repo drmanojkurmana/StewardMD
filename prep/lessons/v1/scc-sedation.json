@@ -1,0 +1,190 @@
+{
+ "v": 1,
+ "module": "scc-sedation",
+ "subject": "ss-critical-care",
+ "title": "Analgesia, sedation and delirium",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "**Analgesia** comes before sedation. Pain is treated with an opioid, and the **sedation target** is light, a **RASS** of 0 to minus 2, unless prone ventilation or intracranial pressure control requires deeper sedation. An analgosedation approach manages discomfort first, minimizing unnecessary hypnotic infusions and accelerating liberation from mechanical ventilation.",
+   "say": "Analgesia comes before sedation. Pain is treated with an opioid, and the sedation target is light, a RASS of 0 to minus 2, unless prone ventilation or intracranial pressure control requires deeper sedation. An analgosedation approach manages discomfort first, minimizing unnecessary hypnotic infusions and accelerating liberation from mechanical ventilation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-fig1.webp",
+    "alt": "Pathophysiological cascades, neurotransmitter imbalances and clinical trajectory of intensive care delirium",
+    "caption": "Pathophysiological cascades, neurotransmitter imbalances and clinical trajectory of intensive care delirium",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**SPICE III** found no overall 90 day mortality benefit of **dexmedetomidine** as the primary sedative. **Bradycardia** and hypotension were more common. It remains useful when the goal is a lighter, more interactive patient. Alpha-2 agonism preserves respiratory drive and facilitates cooperative wakefulness without providing significant amnesia.",
+   "say": "SPICE III found no overall 90 day mortality benefit of dexmedetomidine as the primary sedative. Bradycardia and hypotension were more common. It remains useful when the goal is a lighter, more interactive patient. Alpha-2 agonism preserves respiratory drive and facilitates cooperative wakefulness without providing significant amnesia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SPICE III Finding",
+     "Outcome Value",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "90-day mortality",
+      "29.1% dexmedetomidine vs 29.1% usual care",
+      "No overall survival advantage for early dexmedetomidine"
+     ],
+     [
+      "Ventilator-free days",
+      "Similar across both treatment arms",
+      "Did not accelerate liberation in the primary analysis"
+     ],
+     [
+      "Adverse events",
+      "Significantly increased bradycardia and hypotension",
+      "Titrate carefully and avoid in severe heart block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**MENDS2** found no difference in delirium or other major outcomes between dexmedetomidine and propofol. Either is acceptable. **Benzodiazepines** are associated with more **delirium** and are not the routine infusion. Propofol and dexmedetomidine remain the guideline-recommended primary sedatives, while lorazepam and midazolam infusions should be avoided.",
+   "say": "MENDS2 found no difference in delirium or other major outcomes between dexmedetomidine and propofol. Either is acceptable. Benzodiazepines are associated with more delirium and are not the routine infusion. Propofol and dexmedetomidine remain the guideline-recommended primary sedatives, while lorazepam and midazolam infusions should be avoided.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Propofol and dexmedetomidine",
+     "points": [
+      "Equivalent delirium-free days in septic mechanical ventilation",
+      "Rapid titratability and predictable offset of effect",
+      "First-line agents recommended in PADIS guidelines"
+     ]
+    },
+    "right": {
+     "title": "Benzodiazepine risks",
+     "points": [
+      "Independent risk factor for developing transition to delirium",
+      "Prolonged drug accumulation and active metabolites",
+      "Restrict to alcohol withdrawal and neuromuscular blockade"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Propofol infusion syndrome** is metabolic acidosis, **rhabdomyolysis**, hypertriglyceridaemia, bradycardia, and renal failure, usually at doses above 4 mg/kg/h for more than 48 hours. The infusion is stopped. Impairment of mitochondrial fatty acid oxidation produces cardiac failure and refractory cardiovascular collapse.",
+   "say": "Propofol infusion syndrome is metabolic acidosis, rhabdomyolysis, hypertriglyceridaemia, bradycardia, and renal failure, usually at doses above 4 mg/kg/h for more than 48 hours. The infusion is stopped. Impairment of mitochondrial fatty acid oxidation produces cardiac failure and refractory cardiovascular collapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PRIS Feature",
+     "Pathological Abnormality",
+     "Immediate Management Action"
+    ],
+    "rows": [
+     [
+      "High-risk threshold",
+      "Infusion rates exceeding 4 to 5 mg/kg/h for >48h",
+      "Cap hourly dosing and switch agents early"
+     ],
+     [
+      "Clinical hallmarks",
+      "Brugada-like ECG, refractory bradycardia, severe acidosis",
+      "Stop propofol immediately; start inotropic support"
+     ],
+     [
+      "Metabolic markers",
+      "Surging creatine kinase and hypertriglyceridaemia",
+      "Initiate renal replacement therapy for acidosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**CAM-ICU** is the screening tool. Delirium is **hypoactive** more often than agitated, so a quiet patient is not assumed to be comfortable. Hypoactive delirium presents with lethargy, psychomotor slowing, and withdrawal, and carries an equally severe mortality risk compared to hyperactive agitated presentations.",
+   "say": "CAM-ICU is the screening tool. Delirium is hypoactive more often than agitated, so a quiet patient is not assumed to be comfortable. Hypoactive delirium presents with lethargy, psychomotor slowing, and withdrawal, and carries an equally severe mortality risk compared to hyperactive agitated presentations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CAM-ICU assessment steps",
+     "points": [
+      "Feature 1: Acute onset or fluctuating course",
+      "Feature 2: Inattention (SAVEHAART letter test)",
+      "Feature 3: Altered level of consciousness (RASS)",
+      "Feature 4: Disorganised thinking screening questions"
+     ]
+    },
+    "right": {
+     "title": "Motoric delirium subtypes",
+     "points": [
+      "Hypoactive subtype represents over 60% of cases",
+      "Frequently missed without routine active screening",
+      "Associated with worse long-term cognitive outcomes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**MIND-USA** found that **haloperidol** or **ziprasidone** did not shorten delirium compared with placebo. Haloperidol is for dangerous agitation, not a treatment of delirium itself. **AID-ICU** did not show a gain in days alive and out of hospital. Antipsychotics do not alter underlying neuroinflammation or delirium duration.",
+   "say": "MIND-USA found that haloperidol or ziprasidone did not shorten delirium compared with placebo. Haloperidol is for dangerous agitation, not a treatment of delirium itself. AID-ICU did not show a gain in days alive and out of hospital. Antipsychotics do not alter underlying neuroinflammation or delirium duration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Landmark Delirium Trial",
+     "Tested Antipsychotics",
+     "Primary Finding"
+    ],
+    "rows": [
+     [
+      "MIND-USA trial",
+      "Haloperidol, ziprasidone, or placebo",
+      "No difference in duration of delirium or coma"
+     ],
+     [
+      "AID-ICU trial",
+      "Haloperidol vs placebo in ICU delirium",
+      "No improvement in 90-day survival or hospital-free days"
+     ],
+     [
+      "Clinical indication",
+      "Severe hyperactive agitation",
+      "Administer short-term haloperidol only to prevent acute self-harm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rivastigmine** increased mortality in one ICU delirium trial and is not used. **Melatonin** is not a proven preventive. Cholinesterase inhibitors are strictly avoided in critical illness, and routine pharmaceutical sleep aids do not reduce delirium incidence or ICU length of stay.",
+   "say": "Rivastigmine increased mortality in one ICU delirium trial and is not used. Melatonin is not a proven preventive. Cholinesterase inhibitors are strictly avoided in critical illness, and routine pharmaceutical sleep aids do not reduce delirium incidence or ICU length of stay.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rivastigmine trial harm",
+     "points": [
+      "Randomised trial stopped early due to excess mortality",
+      "Severe cholinergic autonomic side effects",
+      "Absolute contraindication for delirium therapy"
+     ]
+    },
+    "right": {
+     "title": "Melatonin and non-pharmacology",
+     "points": [
+      "Exogenous melatonin lacks robust outcome evidence",
+      "Prioritise ABCDEF bundle and daytime mobilization",
+      "Optimise sleep hygiene, reorientation and noise reduction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Daily awakening**, or a protocol that keeps sedation light, is paired with a **breathing trial**. A continuous benzodiazepine infusion with no holiday is an outdated default. Coordinated spontaneous awakening and breathing trials shorten mechanical ventilation, reduce tracheostomy rates, and improve 1-year functional survival.",
+   "say": "Daily awakening, or a protocol that keeps sedation light, is paired with a breathing trial. A continuous benzodiazepine infusion with no holiday is an outdated default. Coordinated spontaneous awakening and breathing trials shorten mechanical ventilation, reduce tracheostomy rates, and improve 1-year functional survival.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-overview-fig1.webp",
+    "alt": "Confusion Assessment Method for the ICU diagnostic flowchart and predisposing clinical risk factors",
+    "caption": "Confusion Assessment Method for the ICU diagnostic flowchart and predisposing clinical risk factors",
+    "ar": 1.3333
+   }
+  }
+ ]
+}
