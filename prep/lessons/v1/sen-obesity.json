@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "module": "sen-obesity",
+ "subject": "ss-endocrinology",
+ "title": "Obesity, metabolic syndrome, and bariatric surgery",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "**Body mass** index is scored with the WHO cutoffs of 25 for overweight and 30 for obesity. The Asian-Indian consensus uses 23 for overweight and 25 for obesity, so a BMI that is 27 is already obesity in that frame. Do not quote only the WHO numbers for an Indian patient. Height and weight are measured, and the category is not guessed from the doorway.",
+   "say": "Body mass index is scored with the WHO cutoffs of 25 for overweight and 30 for obesity. The Asian-Indian consensus uses 23 for overweight and 25 for obesity, so a BMI that is 27 is already obesity in that frame. Do not quote only the WHO numbers for an Indian patient. Height and weight are measured, and the category is not guessed from the doorway.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Frame",
+     "Overweight",
+     "Obesity"
+    ],
+    "rows": [
+     [
+      "WHO",
+      "BMI 25",
+      "BMI 30"
+     ],
+     [
+      "Asian-Indian consensus",
+      "BMI 23",
+      "BMI 25"
+     ],
+     [
+      "Exam habit",
+      "Name the frame",
+      "Do not mix the cutoffs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **practical metabolic** syndrome definition needs three of five features. The Indian waist cutoffs often used are 90 cm in men and 80 cm in women. Triglycerides of at least 150 mg/dL, HDL cholesterol below 40 mg/dL in men or below 50 mg/dL in women, blood pressure of at least 130 over 85, and fasting glucose of at least 100 mg/dL complete the set. The drawing shows visceral fat and does not print those numbers.",
+   "say": "A practical metabolic syndrome definition needs three of five features. The Indian waist cutoffs often used are 90 cm in men and 80 cm in women. Triglycerides of at least 150 mg/dL, HDL cholesterol below 40 mg/dL in men or below 50 mg/dL in women, blood pressure of at least 130 over 85, and fasting glucose of at least 100 mg/dL complete the set. The drawing shows visceral fat and does not print those numbers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/the-metabolic-syndrome-fig1.webp",
+    "alt": "Drawing of visceral adiposity, free fatty acids, hepatic steatosis, the insulin receptor, and endothelial dysfunction.",
+    "caption": "The drawing shows visceral fat, hepatic steatosis, and endothelial dysfunction. Waist, triglyceride, and HDL cutoffs are not printed on the figure (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Leptin deficiency** is treated with leptin replacement. MC4R deficiency is the commonest monogenic obesity, and heterozygous MC4R disease is not a setmelanotide indication. Setmelanotide is used for POMC, PCSK1, and LEPR deficiency, and for Bardet-Biedl syndrome. The drawing shows leptin on the arcuate nucleus through POMC and MC4R, and it does not show a dose.",
+   "say": "Leptin deficiency is treated with leptin replacement. MC4R deficiency is the commonest monogenic obesity, and heterozygous MC4R disease is not a setmelanotide indication. Setmelanotide is used for POMC, PCSK1, and LEPR deficiency, and for Bardet-Biedl syndrome. The drawing shows leptin on the arcuate nucleus through POMC and MC4R, and it does not show a dose.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/obesity-fig1.webp",
+    "alt": "Drawing of the arcuate nucleus with POMC to MC4R, AGRP and NPY, leptin and insulin, and gut hormones including GLP-1, CCK, GIP, and ghrelin.",
+    "caption": "The drawing shows leptin and insulin at the arcuate nucleus, POMC to MC4R, and gut hormones. It does not show bariatric anatomy or a drug dose (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Prader-Willi** syndrome starts with neonatal hypotonia and then hyperphagia, hypogonadism, and short stature. The genetic cause is a missing paternal contribution at 15q11. Growth hormone is used in childhood. Food access is the treatment of hyperphagia, and willpower is not the explanation you should give the family.",
+   "say": "Prader-Willi syndrome starts with neonatal hypotonia and then hyperphagia, hypogonadism, and short stature. The genetic cause is a missing paternal contribution at 15q11. Growth hormone is used in childhood. Food access is the treatment of hyperphagia, and willpower is not the explanation you should give the family.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prader-Willi",
+     "points": [
+      "Neonatal hypotonia, then hyperphagia",
+      "Paternal 15q11",
+      "Growth hormone in childhood"
+     ]
+    },
+    "right": {
+     "title": "Not the lesson",
+     "points": [
+      "Willpower as the cause",
+      "Ordinary dieting advice alone",
+      "Ignoring hypogonadism and short stature"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Semaglutide** at 2.4 mg **weekly**, as in the STEP programme, and tirzepatide in SURMOUNT, are used with a diet. Orlistat blocks intestinal fat absorption and can cause deficiency of the fat-soluble vitamins. A weekly injection is not a substitute for a diet history. Stop and reassess if gallbladder pain or severe vomiting appears.",
+   "say": "Semaglutide at 2.4 mg weekly, as in the STEP programme, and tirzepatide in SURMOUNT, are used with a diet. Orlistat blocks intestinal fat absorption and can cause deficiency of the fat-soluble vitamins. A weekly injection is not a substitute for a diet history. Stop and reassess if gallbladder pain or severe vomiting appears.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Semaglutide 2.4 mg weekly",
+      "STEP, used with diet"
+     ],
+     [
+      "Tirzepatide",
+      "SURMOUNT, used with diet"
+     ],
+     [
+      "Orlistat",
+      "Blocks fat absorption"
+     ],
+     [
+      "Fat-soluble vitamins",
+      "Can fall on orlistat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Bariatric surgery** is considered at a BMI of at least 40, or at least 35 with type 2 diabetes or another serious comorbidity. The Asian-Indian threshold is often 32.5 when a comorbidity is present. Surgery is not the first conversation before a structured diet attempt, unless delay is already unsafe. No bank figure shows the operations, so the anatomy is taught in words.",
+   "say": "Bariatric surgery is considered at a BMI of at least 40, or at least 35 with type 2 diabetes or another serious comorbidity. The Asian-Indian threshold is often 32.5 when a comorbidity is present. Surgery is not the first conversation before a structured diet attempt, unless delay is already unsafe. No bank figure shows the operations, so the anatomy is taught in words.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "BMI at least 40, or 35 with serious disease"
+     },
+     {
+      "id": "b",
+      "label": "Asian-Indian often 32.5 with comorbidity"
+     },
+     {
+      "id": "c",
+      "label": "Structured diet unless delay is unsafe"
+     },
+     {
+      "id": "d",
+      "label": "Then discuss the operation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Roux-en-Y gastric** bypass causes more micronutrient loss than a sleeve, including iron, vitamin B12, vitamin D, calcium, and thiamine. Wernicke encephalopathy can follow prolonged vomiting. Supplements are continued for life, and a normal early blood panel does not end the follow-up. Thiamine is given before dextrose if the patient is vomiting and losing weight fast.",
+   "say": "Roux-en-Y gastric bypass causes more micronutrient loss than a sleeve, including iron, vitamin B12, vitamin D, calcium, and thiamine. Wernicke encephalopathy can follow prolonged vomiting. Supplements are continued for life, and a normal early blood panel does not end the follow-up. Thiamine is given before dextrose if the patient is vomiting and losing weight fast.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Roux-en-Y gastric bypass",
+     "points": [
+      "More micronutrient loss than a sleeve",
+      "Iron, B12, vitamin D, calcium, thiamine",
+      "Supplements for life"
+     ]
+    },
+    "right": {
+     "title": "Either operation, if vomiting",
+     "points": [
+      "Wernicke can follow prolonged vomiting",
+      "Give thiamine before dextrose",
+      "Do not wait for a low level"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Dumping syndrome** and post-bariatric hypoglycemia are treated with diet first, using small meals, less sugar, and fluid kept apart from food. Pharmacotherapy is a later step. Give thiamine before glucose if vomiting and rapid weight loss are present, because dextrose alone can precipitate Wernicke encephalopathy. A late dump is hypoglycaemia, and a large carbohydrate meal is not the fix.",
+   "say": "Dumping syndrome and post-bariatric hypoglycemia are treated with diet first, using small meals, less sugar, and fluid kept apart from food. Pharmacotherapy is a later step. Give thiamine before glucose if vomiting and rapid weight loss are present, because dextrose alone can precipitate Wernicke encephalopathy. A late dump is hypoglycaemia, and a large carbohydrate meal is not the fix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Problem",
+     "First move"
+    ],
+    "rows": [
+     [
+      "Early dumping",
+      "Small meals, less sugar, fluid apart from food"
+     ],
+     [
+      "Late hypoglycaemia",
+      "Diet first, not a sugar binge"
+     ],
+     [
+      "Vomiting and fast weight loss",
+      "Thiamine before dextrose"
+     ],
+     [
+      "Drug therapy",
+      "Only after the diet step"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
