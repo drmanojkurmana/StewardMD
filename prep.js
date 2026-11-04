@@ -1251,6 +1251,7 @@
   var ICON = {
     lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     menu: '<path d="M4 7h16M4 12h16M4 17h11"/>', back: '<path d="M15 18l-6-6 6-6"/>', close: '<path d="M18 6L6 18M6 6l12 12"/>', chev: '<path d="M9 6l6 6-6 6"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/>',
+    dots: '<path d="M12 5v.01M12 12v.01M12 19v.01" stroke-width="3"/>',
     bm: '<path d="M6 3h12v18l-6-4-6 4z"/>', plus: '<path d="M12 5v14M5 12h14"/>', star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',
     flag: '<path d="M5 21V4h11l-1.5 4L16 12H5"/>', play: '<path d="M7 5l12 7-12 7z"/>', clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     dl: '<path d="M12 4v11M7 10l5 5 5-5M5 20h14"/>', search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>', next: '<path d="M5 12h14M13 6l6 6-6 6"/>', check: '<path d="M5 12l5 5 9-10"/>', x: '<path d="M6 6l12 12M18 6L6 18"/>',
@@ -2688,6 +2689,11 @@
       (shown && (!own || it.qg) ? '<button type="button" class="pn-ib" data-act="report" aria-label="Report this question">' + ico("flag") + "</button>" : "");
     // A clock per question shows its figure in the progress row, at the end of the line (the bar keeps the title room).
     var clk = r.limit || r.qsec || r.sc ? (r.qc && r.qc.used ? "" : clockHtml(r)) : "";
+    // Share, note, bookmark and report fold into one "More" button (a menu under it) so the title keeps its room.
+    if ((acts.match(/<button/g) || []).length > 1) {
+      acts = '<span class="pn-more"><button type="button" class="pn-ib" data-act="actsmenu" aria-haspopup="true" aria-expanded="false" aria-label="More actions">' + ico("dots") + "</button>" +
+        '<div class="pn-menu" role="group" aria-label="Question actions" hidden>' + acts + "</div></span>";
+    }
     var right = r.mode === "exam" ? clk : acts || clk ? '<span class="pn-acts">' + clk + acts + "</span>" : "";
     var fb = "", revealFb = false;
     if (shown) {
@@ -4229,7 +4235,18 @@
   /* ---------- events ---------- */
   function onClick(e) {
     var b = e.target.closest ? e.target.closest("[data-act]") : null;
+    // The question-actions menu closes on any tap outside it, or on the button that opened it.
+    var om = root && root.querySelector(".pn-menu:not([hidden])");
+    if (om && !(e.target.closest && e.target.closest(".pn-more")) || (om && b && b.getAttribute("data-act") === "actsmenu")) {
+      om.hidden = true; var ob = om.parentNode.querySelector("[data-act=actsmenu]"); if (ob) ob.setAttribute("aria-expanded", "false");
+      if (b && b.getAttribute("data-act") === "actsmenu") return;
+    }
     if (!b || !root.contains(b) || b.getAttribute("aria-disabled") === "true" || b.disabled) return;
+    if (b.getAttribute("data-act") === "actsmenu") {
+      var mn = b.parentNode.querySelector(".pn-menu");
+      if (mn) { mn.hidden = false; b.setAttribute("aria-expanded", "true"); }
+      return;
+    }
     // The tap that ends a sheet drag is not a press on whatever it lifted over.
     if (e.isTrusted && Date.now() - (st.sheetDragAt || 0) < 350 && b.closest(".pn-sheet-wrap")) return;
     var a = b.getAttribute("data-act"), v = b.getAttribute("data-v"), s = load();
