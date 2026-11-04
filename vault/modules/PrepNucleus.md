@@ -148,30 +148,23 @@ module. Decision: [[decisions/Decisions]] 2026-10-06 "PrepNucleus Lessons".
   with none installed the en-IN system default stays. The better voices are a user download (iOS Settings,
   Accessibility, Spoken Content, Voices), so a phone with only compact voices sounds as before. Pause stops and Play restarts the current step (the plugin has no pause). Leaving the
   reader, closing PrepNucleus or Ask MaiK stops it. No voice available: the play and speed controls are not drawn.
-  **Natural voice (`prep-voice.js`, optional):** Kokoro-82M quantised ONNX (92 MB, Apache-2.0, `af_heart`) run by the
-  vendored onnxruntime-web (WASM, one thread). The first tap of Play starts the download (Hugging Face, pinned revision,
-  size and sha256 checked, kept in Cache API `prep-voice-v1`) while the system voice keeps reading; the bar shows "Voice
-  n%" in place of the speed button. Text becomes phonemes through the CMU dictionary (ISC; `prep/tts/lex-v1.txt`, built by
-  `tools/prep-voice-lex.mjs` from the lessons' words, ships in www) with spelling and suffix rules for words it lacks
-  (no espeak: it is GPL). After loading, a fixed phrase is timed once (`prep_voice_rtf` in localStorage); above 1.3 times
-  real time the voice is `usable() === false` and the lesson keeps the system voice, because it would stall between
-  sentences. Audio plays through one `<audio>` element (WebAudio is muted by the iOS silent switch), unlocked inside the
-  Play tap. The session is released when the lesson closes. `window.SMD_PREP_VOICE = false` turns it off (UI tests).
-  Measured on a 4-core x86 VM: Kokoro q8 renders 2.3 times real time in WASM (1.4 natively), so it only helps on phones
-  fast enough; speech was checked by transcription (Whisper base.en reads the output back word for word). Not yet timed
-  on an iPhone or an Android phone. Open: a smaller model (KittenTTS nano, 24 MB, 0.4 times real time natively, same
-  input format) or native MLX for iOS if phones come out slow.
-  **Second engine, Phonon 31M (`prep-voice-phonon.js`, optional; added 2026-11-04 so both can be compared on a phone):**
-  Gradium's phonon-31m-en (Apache-2.0, 64.5 MB q8, pinned commit) run by the vendored `phonon-tts` 0.6.0 WebAssembly
-  runtime (`vendor/phonon-tts/`, MIT or Apache-2.0, single-thread builds only: the threaded one needs a cross-origin
-  isolated page). It reads text directly (no phonemizer, no lexicon), streams in a module worker, and downloads on first
-  use into the Cache API; same one-time timing gate (`prep_voice_rtf_phonon`, usable at 1.3 times real time or better).
-  Speed is the audio element's `playbackRate`. `prep-voice.js` is now a facade: `PREP_VOICE.ids()` is `system`, `kokoro`,
-  `phonon`; `use(id)` picks one; the lesson's top bar has a pill that cycles them (kept as `lsp.eng`, default `kokoro`;
-  a pill reading "(slow)" means that engine is too slow on the phone and the system voice is reading). Tests drive Phonon
-  through a stub module (`test/run-prep-voice-ui.mjs`); **the real Phonon runtime has not been run by us** (the sandbox
-  blocked executing the npm package), so its speed, sound and behaviour inside the iOS/Android WebView (module worker on
-  the app's scheme, Cache API writes from a worker) are unverified. Decide between the engines after using both.
+  **Natural voice (`prep-voice.js`, optional):** Phonon 31M (Gradium phonon-31m-en, Apache-2.0, 64.5 MB at 8 bits, pinned
+  commit), its one default voice, run by the vendored `phonon-tts` 0.6.0 WebAssembly runtime (`vendor/phonon-tts/`, MIT or
+  Apache-2.0; single-thread builds only, because the threaded one needs a cross-origin isolated page the app does not
+  have) in a module worker. It reads the text itself: no phonemizer, no lexicon. The first tap of Play starts the
+  download (Hugging Face, kept in the Cache API `phonon-tts-v1`) while the system voice keeps reading; the bar shows
+  "Voice n%" in place of the speed button; a voice downloaded before loads when a lesson opens and is released when it
+  closes. After loading, a short phrase is timed once (`prep_voice_rtf_phonon` in localStorage): slower than 1.3 times
+  real time and `usable()` is false, so the lesson keeps the system voice rather than stall between sentences. Each
+  sentence (`sayChunks`) is rendered, the next one rendered ahead, and played through one `<audio>` element unlocked in
+  the Play tap (WebAudio is muted by the iOS silent switch); the lesson's speed is its `playbackRate`.
+  `window.SMD_PREP_VOICE = false` turns it off (the UI tests do). Tests use a stub of the module
+  (`test/run-prep-voice-ui.mjs`). **The real Phonon runtime has not been run by us** (the sandbox blocked executing the
+  npm package): its speed, sound and behaviour in the iOS and Android WebViews (module worker on the app's scheme,
+  Cache API writes from a worker) are unverified, and so is whether phones keep up. History: Kokoro-82M (92 MB,
+  onnxruntime-web, CMU lexicon phonemizer) was built and merged in #1966 beside Phonon for a comparison, rendered 2.3
+  times real time on a 4-core VM, and was removed on the owner's call; the system-voice work (voice choice, units as
+  words, sentence by sentence) stays as the fallback.
 - **Data and offline:** lessons, the index and `prep/lessons/media/*` ship in www (`scripts/build-www.sh`); each lesson
   is also kept in IndexedDB `prep-bank` under `lessons/v1/<module>.json`. **Generated lessons are served from R2**
   (2026-10-06, branch `feat/prep-native`): `prep-bank/v1/lessons/index.json` + `<module>.json` (1,082 modules, uploaded
