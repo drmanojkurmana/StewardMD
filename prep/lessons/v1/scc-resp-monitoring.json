@@ -3,128 +3,187 @@
  "module": "scc-resp-monitoring",
  "subject": "ss-critical-care",
  "title": "Respiratory mechanics and capnography",
- "minutes": 5,
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "**Transpulmonary pressure** is the net distending force across the lung. It equals alveolar pressure minus **intrapleural pressure**. During spontaneous inspiration, intrapleural pressure becomes more negative, so the gradient across the lung widens and the lung expands. Stiff lungs with low **static compliance** need a larger transpulmonary pressure to deliver the same tidal volume.",
-   "say": "Transpulmonary pressure is the net distending force across the lung. It equals alveolar pressure minus intrapleural pressure. During spontaneous inspiration, intrapleural pressure becomes more negative, so the gradient across the lung widens and the lung expands. Stiff lungs with low static compliance need a larger transpulmonary pressure to deliver the same tidal volume.",
+   "tx": "**Plateau pressure** is measured with an end inspiratory hold when flow is zero. **Peak pressure** includes and incorporates airway resistance. A high peak with a normal plateau is resistance, as in asthma. When both pressures are elevated together, it signifies and proves low respiratory compliance. Measuring static pressures during zero flow isolates the elastic recoil of the lungs from resistive forces.",
+   "say": "Plateau pressure is measured with an end inspiratory hold when flow is zero. Peak pressure includes and incorporates airway resistance. A high peak with a normal plateau is resistance, as in asthma. When both pressures are elevated together, it signifies and proves low respiratory compliance. Measuring static pressures during zero flow isolates the elastic recoil of the lungs from resistive forces.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pulmonary-mechanics-and-surfactant-fig1.webp",
+    "alt": "Pulmonary compliance curves, airway resistance and alveolar surface tension mechanics",
+    "caption": "Pulmonary compliance curves, airway resistance and alveolar surface tension mechanics",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Driving pressure** is plateau pressure minus total PEEP. In ARDS, a driving pressure above 15 cmH2O is associated with higher mortality. It is not itself a randomised target. Titrating tidal volume to achieve lower driving pressures minimizes cyclic alveolar mechanical strain, reflecting the functional size of the aerated baby lung rather than predicted body weight alone.",
+   "say": "Driving pressure is plateau pressure minus total PEEP. In ARDS, a driving pressure above 15 cmH2O is associated with higher mortality. It is not itself a randomised target. Titrating tidal volume to achieve lower driving pressures minimizes cyclic alveolar mechanical strain, reflecting the functional size of the aerated baby lung rather than predicted body weight alone.",
    "vis": {
     "kind": "table",
     "cols": [
-     "Quantity",
-     "Meaning",
-     "Clinical note"
+     "Pressure Variable",
+     "Formula and Calculation",
+     "Safety Limit in ARDS"
     ],
     "rows": [
      [
-      "Transpulmonary pressure",
-      "Alveolar minus pleural pressure",
-      "Distending force on lung"
+      "Peak inspiratory pressure",
+      "Resistive plus elastic pressure",
+      "Keep below 35 cmH2O to avoid barotrauma"
      ],
      [
-      "Intrapleural pressure",
-      "Pressure in pleural space",
-      "Estimated by oesophageal pressure"
-     ],
-     [
-      "Static compliance",
-      "Volume change per unit pressure",
-      "Falls in ARDS and fibrosis"
+      "Plateau pressure",
+      "Static elastic recoil at zero flow",
+      "Keep at or below 30 cmH2O"
      ],
      [
       "Driving pressure",
-      "Plateau minus PEEP",
-      "Predicts outcome in ARDS"
+      "Plateau pressure minus total PEEP",
+      "Aim below 15 cmH2O to prevent volutrauma"
      ]
     ]
    }
   },
   {
-   "tx": "An **oesophageal balloon** is used to estimate intrapleural pressure, because the oesophagus lies beside the lungs and transmits pleural pressure. The measured oesophageal pressure is then used to calculate transpulmonary pressure. This helps guide PEEP titration and detect injurious stress in ARDS when chest wall stiffness is a concern.",
-   "say": "An oesophageal balloon is used to estimate intrapleural pressure, because the oesophagus lies beside the lungs and transmits pleural pressure. The measured oesophageal pressure is then used to calculate transpulmonary pressure. This helps guide PEEP titration and detect injurious stress in ARDS when chest wall stiffness is a concern.",
+   "tx": "Respiratory system **compliance** is tidal volume divided by plateau pressure minus total PEEP. Total PEEP includes **auto-PEEP** measured with an expiratory hold in a passive patient. Gas trapping in severe airflow obstruction creates dynamic hyperinflation, which increases intrathoracic pressure, impairs venous return, and triggers patient-ventilator dyssynchrony if left undetected.",
+   "say": "Respiratory system compliance is tidal volume divided by plateau pressure minus total PEEP. Total PEEP includes auto-PEEP measured with an expiratory hold in a passive patient. Gas trapping in severe airflow obstruction creates dynamic hyperinflation, which increases intrathoracic pressure, impairs venous return, and triggers patient-ventilator dyssynchrony if left undetected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Set extrinsic PEEP",
+     "points": [
+      "Set on ventilator console",
+      "Prevents end-expiratory alveolar collapse",
+      "Directly measured on pressure manometer"
+     ]
+    },
+    "right": {
+     "title": "Intrinsic auto-PEEP",
+     "points": [
+      "Results from incomplete expiratory emptying",
+      "Requires end-expiratory pause to quantify",
+      "Must be added to set PEEP to compute compliance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A time **capnogram** has a dead space phase, a transition, and an alveolar plateau. A slanted plateau means obstructed emptying. A sudden fall in **end tidal CO2** means a fall in pulmonary blood flow, a disconnection, or oesophageal intubation. Monitoring capnography provides real-time information regarding ventilation, alveolar emptying uniformity, and pulmonary capillary perfusion.",
+   "say": "A time capnogram has a dead space phase, a transition, and an alveolar plateau. A slanted plateau means obstructed emptying. A sudden fall in end tidal CO2 means a fall in pulmonary blood flow, a disconnection, or oesophageal intubation. Monitoring capnography provides real-time information regarding ventilation, alveolar emptying uniformity, and pulmonary capillary perfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Waveform Feature",
+     "Morphology",
+     "Clinical Cause"
+    ],
+    "rows": [
+     [
+      "Phase I and II",
+      "Initial flat baseline and steep upstroke",
+      "Anatomical dead space clearing to mixed gas"
+     ],
+     [
+      "Phase III alveolar plateau",
+      "Slanted ascending shark fin shape",
+      "Bronchospasm, asthma, or severe COPD obstruction"
+     ],
+     [
+      "Sudden drop to near zero",
+      "Loss of continuous rectangular waves",
+      "Tracheal tube dislodgement or cardiac arrest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Transpulmonary pressure** is airway pressure minus pleural pressure, estimated with an oesophageal balloon. The **EPVent-2** trial did not show a benefit of oesophageal pressure guided PEEP over an empiric high PEEP table. While transpulmonary measurements distinguish chest wall stiffness from lung elastance, routine titration using oesophageal catheters did not improve survival in clinical trials.",
+   "say": "Transpulmonary pressure is airway pressure minus pleural pressure, estimated with an oesophageal balloon. The EPVent-2 trial did not show a benefit of oesophageal pressure guided PEEP over an empiric high PEEP table. While transpulmonary measurements distinguish chest wall stiffness from lung elastance, routine titration using oesophageal catheters did not improve survival in clinical trials.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oesophageal balloon guided PEEP",
+     "points": [
+      "Estimates pleural pressure at mid-oesophagus",
+      "Targets positive end-expiratory transpulmonary pressure",
+      "EPVent-2 showed no survival advantage"
+     ]
+    },
+    "right": {
+     "title": "Empiric high PEEP table",
+     "points": [
+      "Standardized FiO2 and PEEP combination ladder",
+      "Eliminates invasive balloon positioning errors",
+      "Demonstrated equivalent clinical endpoints"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**P0.1** is the airway pressure drop in the first 100 ms of an occluded breath. A P0.1 above about 3.5 cmH2O means respiratory drive is high. Excessive respiratory drive exposes patients to spontaneous patient self-inflicted lung injury and diaphragmatic myotrauma, whereas a very low value reflects oversedation or ventilatory over-assistance.",
+   "say": "P0 point 1 is the airway pressure drop in the first 100 ms of an occluded breath. A P0 point 1 above about 3 point 5 cmH2O means respiratory drive is high. Excessive respiratory drive exposes patients to spontaneous patient self-inflicted lung injury and diaphragmatic myotrauma, whereas a very low value reflects oversedation or ventilatory over-assistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "P0.1 Range",
+     "Patient Drive Status",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "Under 1.5 cmH2O",
+      "Depressed neuroventilatory drive",
+      "Assess for oversedation or excessive support"
+     ],
+     [
+      "1.5 to 3.5 cmH2O",
+      "Optimal physiological breathing effort",
+      "Maintain current ventilatory weaning plan"
+     ],
+     [
+      "Above 3.5 cmH2O",
+      "Excessive patient effort and drive",
+      "Adjust support to avoid patient self-inflicted lung injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On a constant flow breath, a **stress index** below 1 suggests tidal recruitment and a stress index above 1 suggests overdistension. An index near 1 is the shape associated with a safer tidal breath. Analyzing the slope of airway pressure during constant flow ventilation allows clinicians to detect dynamic mechanical changes without interrupting respiratory delivery.",
+   "say": "On a constant flow breath, a stress index below 1 suggests tidal recruitment and a stress index above 1 suggests overdistension. An index near 1 is the shape associated with a safer tidal breath. Analyzing the slope of airway pressure during constant flow ventilation allows clinicians to detect dynamic mechanical changes without interrupting respiratory delivery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stress index below 1",
+     "points": [
+      "Downward concavity on pressure curve",
+      "Indicates progressive tidal recruitment during inspiration",
+      "Suggests baseline PEEP may be inadequate"
+     ]
+    },
+    "right": {
+     "title": "Stress index above 1",
+     "points": [
+      "Upward concavity on pressure curve",
+      "Indicates end-inspiratory alveolar overdistension",
+      "Suggests tidal volume or PEEP is excessive"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Electrical impedance tomography** is used to map regional ventilation. It is a research and specialist tool, not a substitute for plateau pressure and driving pressure. Bedside cross-sectional impedance imaging identifies dorsal atelectasis and ventral overdistension in acute lung injury, but standard airway pressure parameters remain the validated cornerstone of protective mechanical ventilation.",
+   "say": "Electrical impedance tomography is used to map regional ventilation. It is a research and specialist tool, not a substitute for plateau pressure and driving pressure. Bedside cross-sectional impedance imaging identifies dorsal atelectasis and ventral overdistension in acute lung injury, but standard airway pressure parameters remain the validated cornerstone of protective mechanical ventilation.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-resp-monitoring-fig1.webp",
-    "alt": "Diagram showing oesophageal balloon placement to estimate intrapleural pressure and calculate transpulmonary pressure.",
-    "caption": "Oesophageal balloon estimates intrapleural pressure for transpulmonary pressure",
-    "ar": 1.8349
+    "src": "v1/kb/media/vap-fig1.webp",
+    "alt": "Ventilator-associated pneumonia pathophysiology, endotracheal biofilm and microaspiration",
+    "caption": "Ventilator-associated pneumonia pathophysiology, endotracheal biofilm and microaspiration",
+    "ar": 1.3333
    }
-  },
-  {
-   "tx": "**Auto-PEEP** occurs when expiration is incomplete, so air is trapped and alveolar pressure stays positive at end expiration. It is typical of obstructive disease such as severe COPD or asthma with high minute ventilation. Capnography shows a waveform that fails to return to baseline before the next breath. Auto-PEEP raises work of breathing, can cause barotrauma and haemodynamic collapse, and is reduced by slowing the rate and prolonging expiration.",
-   "say": "Auto-PEEP occurs when expiration is incomplete, so air is trapped and alveolar pressure stays positive at end expiration. It is typical of obstructive disease such as severe COPD or asthma with high minute ventilation. Capnography shows a waveform that fails to return to baseline before the next breath. Auto-PEEP raises work of breathing, can cause barotrauma and haemodynamic collapse, and is reduced by slowing the rate and prolonging expiration.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "a",
-      "label": "High minute ventilation"
-     },
-     {
-      "id": "b",
-      "label": "Short expiratory time"
-     },
-     {
-      "id": "c",
-      "label": "Air trapping"
-     },
-     {
-      "id": "d",
-      "label": "Auto-PEEP"
-     },
-     {
-      "id": "e",
-      "label": "Barotrauma or collapse"
-     }
-    ],
-    "edges": [
-     [
-      "a",
-      "b"
-     ],
-     [
-      "b",
-      "c"
-     ],
-     [
-      "c",
-      "d"
-     ],
-     [
-      "d",
-      "e"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In cardiac arrest, a **persistently low ETCO2** below about 10 mm Hg after 20 minutes of CPR suggests poor resuscitation outcome, while a **sudden rise** towards 35 mm Hg suggests return of spontaneous circulation. Capnography also detects opioid-induced hypoventilation earlier than pulse oximetry, which can stay normal on supplemental oxygen. Microstream sampling is preferred in neonates and low tidal volume patients for accuracy.",
-   "say": "In cardiac arrest, a persistently low ETCO2 below about 10 mm Hg after 20 minutes of CPR suggests poor resuscitation outcome, while a sudden rise towards 35 mm Hg suggests return of spontaneous circulation. Capnography also detects opioid-induced hypoventilation earlier than pulse oximetry, which can stay normal on supplemental oxygen. Microstream sampling is preferred in neonates and low tidal volume patients for accuracy.",
-   "vis": null
   }
- ],
- "quiz": [
-  "q_d027ab669c61",
-  "q_10373ea21820",
-  "q_d04b3b7515f0"
- ],
- "src": [],
- "refs": [
-  "American Heart Association Guidelines for CPR and ECC"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 2,
-  "kbWords": 0,
-  "itemN": 39
- }
+ ]
 }

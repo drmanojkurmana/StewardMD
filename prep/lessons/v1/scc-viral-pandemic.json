@@ -3,82 +3,187 @@
  "module": "scc-viral-pandemic",
  "subject": "ss-critical-care",
  "title": "Viral pneumonia and pandemic critical care",
- "minutes": 5,
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
  "steps": [
   {
-   "tx": "Severe **influenza** is managed with **antiviral therapy** started as early as possible after symptom onset, but treatment should still be considered in severe or deteriorating illness even when presentation is later. Dosing follows local licensed guidance, with adjustment for **renal impairment**. Antivirals are never a substitute for **ICU support** such as oxygen, **ventilation** and haemodynamic care. Consider **bacterial co-infection** in ventilated patients and review cultures.",
-   "say": "Severe influenza is managed with antiviral therapy started as early as possible after symptom onset, but treatment should still be considered in severe or deteriorating illness even when presentation is later. Dosing follows local licensed guidance, with adjustment for renal impairment. Antivirals are never a substitute for ICU support such as oxygen, ventilation and haemodynamic care. Consider bacterial co-infection in ventilated patients and review cultures.",
-   "vis": null
+   "tx": "**RECOVERY** showed that **dexamethasone** 6 mg daily for up to 10 days reduced 28 day mortality in COVID-19 patients who needed oxygen or ventilation. Patients who did not need oxygen were not helped. Suppressing hyperinflammatory cytokine storms and blunting secondary lung injury saves lives exclusively in those with significant respiratory impairment.",
+   "say": "RECOVERY showed that dexamethasone 6 mg daily for up to 10 days reduced 28 day mortality in COVID-19 patients who needed oxygen or ventilation. Patients who did not need oxygen were not helped. Suppressing hyperinflammatory cytokine storms and blunting secondary lung injury saves lives exclusively in those with significant respiratory impairment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/covid19-fig1.webp",
+    "alt": "SARS-CoV-2 viral structure, spike protein receptor binding and pulmonary alveolar infiltration",
+    "caption": "SARS-CoV-2 viral structure, spike protein receptor binding and pulmonary alveolar infiltration",
+    "ar": 1.3333
+   }
   },
   {
-   "tx": "During a pandemic, demand can exceed **surge capacity** of beds, ventilators and staff. **Crisis standards of care** allow temporary change in how scarce resources are allocated, using transparent, pre-agreed criteria rather than first-come first-served decisions. Ventilator allocation should be guided by likelihood of benefit, not by age alone. Ethical frameworks emphasise fairness, consistency and documentation.",
-   "say": "During a pandemic, demand can exceed surge capacity of beds, ventilators and staff. Crisis standards of care allow temporary change in how scarce resources are allocated, using transparent, pre-agreed criteria rather than first-come first-served decisions. Ventilator allocation should be guided by likelihood of benefit, not by age alone. Ethical frameworks emphasise fairness, consistency and documentation.",
+   "tx": "**REMAP-CAP** found that **tocilizumab** improved outcomes in critically ill COVID-19. **Baricitinib** is an alternative immunomodulator in patients with progressing disease and inflammation. Targeted inhibition of interleukin-6 receptors or Janus kinase pathways curbs systemic hyperinflammation and accelerates recovery when added to baseline glucocorticoid therapy in worsening viral hypoxaemic failure.",
+   "say": "REMAP-CAP found that tocilizumab improved outcomes in critically ill COVID-19. Baricitinib is an alternative immunomodulator in patients with progressing disease and inflammation. Targeted inhibition of interleukin-6 receptors or Janus kinase pathways curbs systemic hyperinflammation and accelerates recovery when added to baseline glucocorticoid therapy in worsening viral hypoxaemic failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunomodulator",
+     "Mechanism of Action",
+     "Trial Evidence and Indication"
+    ],
+    "rows": [
+     [
+      "Tocilizumab",
+      "Recombinant IL-6 receptor antagonist",
+      "REMAP-CAP showed reduced organ support days and mortality"
+     ],
+     [
+      "Baricitinib",
+      "Selective JAK1 and JAK2 kinase inhibitor",
+      "COV-BARRIER demonstrated improved 28-day survival"
+     ],
+     [
+      "Combination rule",
+      "Pair with dexamethasone",
+      "Initiate within 24 to 48 hours of rapid clinical deterioration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "COVID-19 ARDS is still ARDS for the ventilator: 6 mL/kg predicted body weight, **plateau pressure** at most 30 cmH2O, and **prone positioning** when the **PaO2/FiO2** is below 150. Despite early claims of unique physiological phenotypes, standard lung protective ventilation and prolonged prone sessions for 16 consecutive hours confer proven survival advantages.",
+   "say": "COVID-19 ARDS is still ARDS for the ventilator: 6 mL/kg predicted body weight, plateau pressure at most 30 cmH2O, and prone positioning when the PaO2/FiO2 is below 150. Despite early claims of unique physiological phenotypes, standard lung protective ventilation and prolonged prone sessions for 16 consecutive hours confer proven survival advantages.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Usual care",
+     "title": "Low tidal volume ventilation",
      "points": [
-      "First come first served",
-      "Individual bedside judgement",
-      "Standard staffing ratios"
+      "Set strictly to 6 mL/kg predicted body weight",
+      "Maintains end-inspiratory plateau pressure at or below 30 cmH2O",
+      "Prevents cyclic alveolar overdistension and volutrauma"
      ]
     },
     "right": {
-     "title": "Crisis standards",
+     "title": "Prone positioning protocol",
      "points": [
-      "Pre-agreed transparent criteria",
-      "Likelihood of benefit guides use",
-      "Ethics review and documentation"
+      "Mandated for severe ARDS with PaO2/FiO2 below 150",
+      "Delivered in sustained cycles of at least 16 hours",
+      "Promotes dorsal recruitment and balances transpulmonary gradients"
      ]
     }
    }
   },
   {
-   "tx": "Ventilator-associated pneumonia, or **VAP**, is a separate threat that often coexists in long ICU stays. Pathogens reach the lower airway mainly by microaspiration of colonised secretions around the endotracheal cuff. Diagnosis needs new or progressive radiographic infiltrate plus clinical features such as fever, leukocytosis and purulent secretions. Prevention bundles, including head-of-bed elevation and daily oral care, reduce its incidence.",
-   "say": "Ventilator-associated pneumonia, or VAP, is a separate threat that often coexists in long ICU stays. Pathogens reach the lower airway mainly by microaspiration of colonised secretions around the endotracheal cuff. Diagnosis needs new or progressive radiographic infiltrate plus clinical features such as fever, leukocytosis and purulent secretions. Prevention bundles, including head-of-bed elevation and daily oral care, reduce its incidence.",
+   "tx": "**Awake prone positioning** is used in hypoxaemic COVID-19 before intubation. It does not replace intubation when the work of breathing is rising. While turning awake patients into the prone position improves arterial oxygen saturation and reduces subjective dyspnoea, clinicians must not overlook exhausting respiratory efforts and impending muscular fatigue.",
+   "say": "Awake prone positioning is used in hypoxaemic COVID-19 before intubation. It does not replace intubation when the work of breathing is rising. While turning awake patients into the prone position improves arterial oxygen saturation and reduces subjective dyspnoea, clinicians must not overlook exhausting respiratory efforts and impending muscular fatigue.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/vap-fig1.webp",
-    "alt": "Intubated airway with subglottic secretions, cuff microaspiration, luminal biofilm, purulent bronchitis and alveolar consolidation.",
-    "caption": "Cuff microaspiration, luminal biofilm and alveolar consolidation in ventilator-associated pneumonia (StewardMD).",
-    "ar": 1.3405
+    "kind": "table",
+    "cols": [
+     "Clinical Modality",
+     "Physiological Effect",
+     "Threshold for Escalation"
+    ],
+    "rows": [
+     [
+      "Awake prone positioning",
+      "Recruits dorsal lung segments and improves V/Q ratio",
+      "Sustained tachypnoea or diaphoresis warrants intubation"
+     ],
+     [
+      "Oxygen interface",
+      "Combined with HFNO or CPAP interfaces",
+      "ROX index below 3.85 indicates imminent failure"
+     ],
+     [
+      "Intubation trigger",
+      "Refractory work of breathing",
+      "Immediate transition to invasive mechanical ventilation"
+     ]
+    ]
    }
   },
   {
-   "tx": "Empiric antibiotics for suspected VAP should be started promptly after respiratory cultures are obtained, not delayed for results. Choice depends on prior antibiotic exposure within ninety days and local resistance data, which raise the risk of multidrug-resistant organisms such as **Pseudomonas aeruginosa** and MRSA. Necrotising pneumonia usually needs at least fourteen days of treatment. Narrow the regimen once cultures return.",
-   "say": "Empiric antibiotics for suspected VAP should be started promptly after respiratory cultures are obtained, not delayed for results. Choice depends on prior antibiotic exposure within ninety days and local resistance data, which raise the risk of multidrug-resistant organisms such as Pseudomonas aeruginosa and MRSA. Necrotising pneumonia usually needs at least fourteen days of treatment. Narrow the regimen once cultures return.",
+   "tx": "**Oseltamivir** is given for severe **influenza** even when symptom onset was more than 48 hours earlier. Antibiotics are added only when bacterial coinfection is likely, not as a reflex. Neuraminidase inhibitors continue to reduce viral shedding and ICU length of stay in critically ill patients presenting beyond the traditional outpatient therapeutic window.",
+   "say": "Oseltamivir is given for severe influenza even when symptom onset was more than 48 hours earlier. Antibiotics are added only when bacterial coinfection is likely, not as a reflex. Neuraminidase inhibitors continue to reduce viral shedding and ICU length of stay in critically ill patients presenting beyond the traditional outpatient therapeutic window.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oseltamivir in severe influenza",
+     "points": [
+      "Initiate immediately in suspected or confirmed severe cases",
+      "Clinical benefit documented beyond standard 48-hour cut-off",
+      "Administer via enteral tube at standard 75 mg twice daily"
+     ]
+    },
+    "right": {
+     "title": "Bacterial coinfection management",
+     "points": [
+      "Secondary Staphylococcus aureus or Streptococcus pneumoniae",
+      "Prescribe targeted antibiotics for lobar consolidation",
+      "Avoid indiscriminate empirical broad-spectrum coverage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Routine antibacterial therapy and routine therapeutic anticoagulation are not treatments for viral pneumonia. **Prophylactic anticoagulation** still applies unless bleeding forbids it. Microvascular pulmonary immunothrombosis occurs frequently in severe viral pneumonia, but full therapeutic dosing failed to demonstrate benefit in critically ill patients in the multiplatform trials.",
+   "say": "Routine antibacterial therapy and routine therapeutic anticoagulation are not treatments for viral pneumonia. Prophylactic anticoagulation still applies unless bleeding forbids it. Microvascular pulmonary immunothrombosis occurs frequently in severe viral pneumonia, but full therapeutic dosing failed to demonstrate benefit in critically ill patients in the multiplatform trials.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapy Domain",
+     "Recommended Practice",
+     "Evidence Rationale"
+    ],
+    "rows": [
+     [
+      "Antibiotic stewardship",
+      "Withhold routine antibacterial agents",
+      "Pure viral pneumonitis does not benefit from antibiotics"
+     ],
+     [
+      "Venous thromboprophylaxis",
+      "Standard prophylactic dose LMWH",
+      "Mandatory to prevent deep vein thrombosis and PE"
+     ],
+     [
+      "Full therapeutic anticoagulation",
+      "Reserved for proven thrombosis only",
+      "Trials showed increased major bleeding without mortality benefit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surge triage uses a published framework and a physiology score such as **SOFA**. It does not use **social worth**. The same rules apply to every patient when crisis standards are declared. Ethical crisis resource allocation requires transparent, objective scoring systems evaluated by independent triage officers to distribute scarce intensive care beds equitably.",
+   "say": "Surge triage uses a published framework and a physiology score such as SOFA. It does not use social worth. The same rules apply to every patient when crisis standards are declared. Ethical crisis resource allocation requires transparent, objective scoring systems evaluated by independent triage officers to distribute scarce intensive care beds equitably.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Objective physiological scoring",
+     "points": [
+      "Sequential Organ Failure Assessment (SOFA) scoring",
+      "Assesses short-term survivability and organ dysfunction",
+      "Re-evaluated dynamically during ongoing ICU treatment"
+     ]
+    },
+    "right": {
+     "title": "Ethical triage principles",
+     "points": [
+      "Absolute prohibition on social worth or discrimination",
+      "Separation of bedside clinician from triage decision officer",
+      "Application of consistent crisis standard protocols"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Staff protection is fit tested respiratory protection for **aerosol generating procedures**, including intubation. A viral pandemic plan names the device, the team, and the doffing area before the patient arrives. High-filtration N95 or FFP3 respirators, eye protection, and supervised doffing protocols eliminate hospital-acquired transmission to healthcare personnel.",
+   "say": "Staff protection is fit tested respiratory protection for aerosol generating procedures, including intubation. A viral pandemic plan names the device, the team, and the doffing area before the patient arrives. High-filtration N95 or FFP3 respirators, eye protection, and supervised doffing protocols eliminate hospital-acquired transmission to healthcare personnel.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/scc-viral-pandemic-fig1.webp",
-    "alt": "Flowchart for empiric VAP antibiotic selection, emphasizing prompt initiation, consideration of prior exposure, local resistance, and specific MDR organisms like Pseudomonas and MRSA, with subsequent narrowing.",
-    "caption": "Empiric VAP antibiotics: prompt, guided by history, resistance, and culture results",
-    "ar": 1.8349
+    "src": "v1/kb/media/ards-fig2.webp",
+    "alt": "Diffuse alveolar damage, hyaline membrane formation and acute respiratory distress syndrome pathogenesis",
+    "caption": "Diffuse alveolar damage, hyaline membrane formation and acute respiratory distress syndrome pathogenesis",
+    "ar": 1.3333
    }
   }
- ],
- "quiz": [
-  "q_1dfe95600f87",
-  "q_93d8c89cebdf",
-  "q_0a17fd1fbd2f"
- ],
- "src": [],
- "refs": [
-  "RECOVERY Collaborative Group, dexamethasone trial, New England Journal of Medicine",
-  "NICE COVID-19 rapid guideline: managing COVID-19"
- ],
- "gen": "AI",
- "run": "links100",
- "model": "claude-haiku-5-5",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 1,
-  "dropped": 4,
-  "kbWords": 0,
-  "itemN": 18
- }
+ ]
 }
