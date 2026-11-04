@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "sen-cushing-syndrome",
+ "subject": "ss-endocrinology",
+ "title": "Cushing syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Screen for **Cushing syndrome** when the clinical suspicion is real, not for every obese patient. Two abnormal results among late-night salivary cortisol, 24-hour urinary free cortisol, and the 1 mg overnight dexamethasone suppression test support the diagnosis. A morning cortisol of 1.8 mcg/dL or higher after 1 mg dexamethasone is abnormal. The drawing shows the stigmata that justify the screen, including moon face, a buffalo hump, purple striae, and easy bruising.",
+   "say": "Screen for Cushing syndrome when the clinical suspicion is real, not for every obese patient. Two abnormal results among late-night salivary cortisol, 24-hour urinary free cortisol, and the 1 mg overnight dexamethasone suppression test support the diagnosis. A morning cortisol of 1.8 mcg/dL or higher after 1 mg dexamethasone is abnormal. The drawing shows the stigmata that justify the screen, including moon face, a buffalo hump, purple striae, and easy bruising.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cushing-syndrome-fig1.webp",
+    "alt": "Drawing of a person with moon face, buffalo hump, central obesity, purple striae, thin skin, proximal weakness, hypertension, and easy bruising.",
+    "caption": "The drawing labels moon face, a buffalo hump, central obesity, purple striae, thin skin, proximal weakness, hypertension, and easy bruising. It is not a diagnostic algorithm (StewardMD)."
+   }
+  },
+  {
+   "tx": "Once **Cushing syndrome** is confirmed, measure plasma **ACTH** before any scan. A value below 10 pg/mL supports an ACTH-independent adrenal source. A value above 20 pg/mL supports an ACTH-dependent source, either a pituitary adenoma or ectopic secretion. Values between those cutoffs are repeated. The left side of the drawing separates exogenous steroid, pituitary disease, ectopic ACTH, and an adrenal tumour.",
+   "say": "Once Cushing syndrome is confirmed, measure plasma ACTH before any scan. A value below 10 pg/mL supports an ACTH-independent adrenal source. A value above 20 pg/mL supports an ACTH-dependent source, either a pituitary adenoma or ectopic secretion. Values between those cutoffs are repeated. The left side of the drawing separates exogenous steroid, pituitary disease, ectopic ACTH, and an adrenal tumour.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cushing-syndrome-fig2.webp",
+    "alt": "Two-panel drawing of Cushing causes on the HPA axis and of clinical features including moon face, buffalo hump, striae, and proximal wasting.",
+    "caption": "The left panel draws four causes: exogenous steroid, pituitary Cushing disease, ectopic ACTH, and an adrenal tumour. The right panel draws the body habitus. No dexamethasone cutoff is printed (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Inferior petrosal** sinus sampling is the most accurate test to separate Cushing disease from ectopic ACTH secretion when the pituitary MRI is negative or equivocal. A central to peripheral ACTH ratio of at least 3 after CRH supports a pituitary source. A ratio below that does not, by itself, send the patient to adrenal surgery. Sampling is done only after biochemical Cushing syndrome is secure.",
+   "say": "Inferior petrosal sinus sampling is the most accurate test to separate Cushing disease from ectopic ACTH secretion when the pituitary MRI is negative or equivocal. A central to peripheral ACTH ratio of at least 3 after CRH supports a pituitary source. A ratio below that does not, by itself, send the patient to adrenal surgery. Sampling is done only after biochemical Cushing syndrome is secure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ACTH result",
+     "Favoured source",
+     "Next step"
+    ],
+    "rows": [
+     [
+      "Below 10 pg/mL",
+      "Adrenal, ACTH-independent",
+      "Adrenal imaging"
+     ],
+     [
+      "Above 20 pg/mL",
+      "Pituitary or ectopic",
+      "MRI, then petrosal sampling if needed"
+     ],
+     [
+      "Between 10 and 20",
+      "Unclear",
+      "Repeat the ACTH"
+     ],
+     [
+      "Petrosal ratio at least 3 after CRH",
+      "Pituitary",
+      "Treat as Cushing disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Do not **order** a **pituitary** MRI or an adrenal CT as the first test. Nonfunctioning incidentalomas are common, and imaging is interpreted only after biochemistry shows where the cortisol is coming from. A visible adenoma does not prove it secretes ACTH. Start with the screen, confirm the syndrome, then measure ACTH, and only then choose the scan.",
+   "say": "Do not order a pituitary MRI or an adrenal CT as the first test. Nonfunctioning incidentalomas are common, and imaging is interpreted only after biochemistry shows where the cortisol is coming from. A visible adenoma does not prove it secretes ACTH. Start with the screen, confirm the syndrome, then measure ACTH, and only then choose the scan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Two abnormal screens"
+     },
+     {
+      "id": "b",
+      "label": "Confirm the syndrome"
+     },
+     {
+      "id": "c",
+      "label": "Measure ACTH"
+     },
+     {
+      "id": "d",
+      "label": "Image the source"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alcohol excess**, severe depression, and poorly controlled diabetes can cause pseudo-Cushing physiology and an abnormal suppression test. The history is part of the test, and a single abnormal screen is not an operation. Pause and retest when the alcohol, the mood disorder, or the glucose is controlled. The body habitus on the drawing can be seen in simple obesity, so the biochemistry has to carry the diagnosis.",
+   "say": "Alcohol excess, severe depression, and poorly controlled diabetes can cause pseudo-Cushing physiology and an abnormal suppression test. The history is part of the test, and a single abnormal screen is not an operation. Pause and retest when the alcohol, the mood disorder, or the glucose is controlled. The body habitus on the drawing can be seen in simple obesity, so the biochemistry has to carry the diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Cushing syndrome",
+     "points": [
+      "Two abnormal screens",
+      "ACTH then directed imaging",
+      "Progressive stigmata and weakness"
+     ]
+    },
+    "right": {
+     "title": "Pseudo-Cushing",
+     "points": [
+      "Alcohol excess or severe depression",
+      "Poorly controlled diabetes",
+      "Retest after the driver is treated"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**First-line** treatment of Cushing disease is transsphenoidal surgery. When surgery is not curative, options include repeat surgery, radiotherapy, or medical therapy. **Ketoconazole**, metyrapone, and osilodrostat block cortisol synthesis. Osilodrostat inhibits 11-beta-hydroxylase. Medical therapy is a bridge or a fallback, and it is not a substitute for removing a resectable pituitary adenoma.",
+   "say": "First-line treatment of Cushing disease is transsphenoidal surgery. When surgery is not curative, options include repeat surgery, radiotherapy, or medical therapy. Ketoconazole, metyrapone, and osilodrostat block cortisol synthesis. Osilodrostat inhibits 11-beta-hydroxylase. Medical therapy is a bridge or a fallback, and it is not a substitute for removing a resectable pituitary adenoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Action",
+     "Exam point"
+    ],
+    "rows": [
+     [
+      "Ketoconazole",
+      "Blocks cortisol synthesis",
+      "Liver injury is watched"
+     ],
+     [
+      "Metyrapone",
+      "Blocks cortisol synthesis",
+      "Used when oral blockade is needed"
+     ],
+     [
+      "Osilodrostat",
+      "Inhibits 11-beta-hydroxylase",
+      "Synthesis blocker, not a receptor blocker"
+     ],
+     [
+      "Surgery",
+      "Removes the adenoma",
+      "First-line for Cushing disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mifepristone blocks** the glucocorticoid receptor. Serum cortisol rises or stays high and cannot be used to judge control, so glucose and clinical features are followed instead. **Pasireotide** can treat Cushing disease but worsens hyperglycaemia, so it is a poor choice when diabetes is already severe. Neither drug replaces surgery when a pituitary adenoma can be removed.",
+   "say": "Mifepristone blocks the glucocorticoid receptor. Serum cortisol rises or stays high and cannot be used to judge control, so glucose and clinical features are followed instead. Pasireotide can treat Cushing disease but worsens hyperglycaemia, so it is a poor choice when diabetes is already severe. Neither drug replaces surgery when a pituitary adenoma can be removed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mifepristone",
+     "points": [
+      "Blocks the glucocorticoid receptor",
+      "Cortisol stays high",
+      "Follow glucose, not the cortisol level"
+     ]
+    },
+    "right": {
+     "title": "Pasireotide",
+     "points": [
+      "Can treat Cushing disease",
+      "Worsens hyperglycaemia",
+      "Watch diabetes closely"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Nelson syndrome** is an enlarging corticotroph tumour with rising ACTH and skin pigmentation after bilateral adrenalectomy for Cushing disease. The neck and the knuckles darken because ACTH is high and cortisol is absent. Subclinical autonomous cortisol secretion is a failed 1 mg dexamethasone test without overt Cushing stigmata, usually from an adrenal incidentaloma, and it is linked to hypertension, diabetes, and bone loss.",
+   "say": "Nelson syndrome is an enlarging corticotroph tumour with rising ACTH and skin pigmentation after bilateral adrenalectomy for Cushing disease. The neck and the knuckles darken because ACTH is high and cortisol is absent. Subclinical autonomous cortisol secretion is a failed 1 mg dexamethasone test without overt Cushing stigmata, usually from an adrenal incidentaloma, and it is linked to hypertension, diabetes, and bone loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Entity",
+     "What you see",
+     "Why it matters"
+    ],
+    "rows": [
+     [
+      "Nelson syndrome",
+      "Rising ACTH and pigmentation",
+      "After both adrenals are removed"
+     ],
+     [
+      "Autonomous cortisol secretion",
+      "Failed 1 mg test, no stigmata",
+      "Linked to pressure, glucose, and bone"
+     ],
+     [
+      "Overt Cushing syndrome",
+      "Stigmata plus biochemistry",
+      "Needs a source, not a casual scan"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

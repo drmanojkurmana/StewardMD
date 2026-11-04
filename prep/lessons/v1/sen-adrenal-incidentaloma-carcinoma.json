@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "sen-adrenal-incidentaloma-carcinoma",
+ "subject": "ss-endocrinology",
+ "title": "Adrenal incidentaloma and adrenocortical carcinoma",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Every **adrenal incidentaloma** needs a 1 mg dexamethasone suppression test, because hormone excess is common and a normal scan does not prove a silent gland. Plasma or urinary metanephrines are added when hypertension or spells are present. An aldosterone renin ratio is added when hypertension or unexplained hypokalaemia is present. Do not start with a biopsy or an operation.",
+   "say": "Every adrenal incidentaloma needs a 1 mg dexamethasone suppression test, because hormone excess is common and a normal scan does not prove a silent gland. Plasma or urinary metanephrines are added when hypertension or spells are present. An aldosterone renin ratio is added when hypertension or unexplained hypokalaemia is present. Do not start with a biopsy or an operation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "When it is done"
+    ],
+    "rows": [
+     [
+      "1 mg dexamethasone test",
+      "Every adrenal mass"
+     ],
+     [
+      "Metanephrines",
+      "Hypertension or spells"
+     ],
+     [
+      "Aldosterone renin ratio",
+      "Hypertension or unexplained hypokalaemia"
+     ],
+     [
+      "Biopsy",
+      "Not the opening test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Unenhanced attenuation** below 10 Hounsfield units on CT is the lipid-rich adenoma pattern. Absolute washout above 60 percent and relative washout above 40 percent also support a benign lesion. The drawing labels low attenuation on the benign side and malignant features on the carcinoma side. It does not print the 10 HU number or the washout percentages.",
+   "say": "Unenhanced attenuation below 10 Hounsfield units on CT is the lipid-rich adenoma pattern. Absolute washout above 60 percent and relative washout above 40 percent also support a benign lesion. The drawing labels low attenuation on the benign side and malignant features on the carcinoma side. It does not print the 10 HU number or the washout percentages.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adrenal-incidentaloma-fig1.webp",
+    "alt": "Cartoon axial CT pair. The left panel is labelled benign lipid-rich adenoma with low attenuation. The right panel is labelled adrenocortical carcinoma with malignant features.",
+    "caption": "The drawing contrasts a lipid-rich adenoma marked low attenuation with an adrenocortical carcinoma marked as malignant features. The 10 HU cutoff and the washout percentages are not printed on the figure (StewardMD)."
+   }
+  },
+  {
+   "tx": "Surgery is considered when the mass is 4 cm or larger and is not a clear benign adenoma, when hormone excess needs an operation, or when the imaging is suspicious. The **risk** of **adrenocortical** carcinoma rises with size and with malignant features, but size alone is not a diagnosis. A 3 cm lipid-rich adenoma with a normal hormone screen is not an emergency operation.",
+   "say": "Surgery is considered when the mass is 4 cm or larger and is not a clear benign adenoma, when hormone excess needs an operation, or when the imaging is suspicious. The risk of adrenocortical carcinoma rises with size and with malignant features, but size alone is not a diagnosis. A 3 cm lipid-rich adenoma with a normal hormone screen is not an emergency operation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Consider surgery",
+     "points": [
+      "At least 4 cm and not a clear adenoma",
+      "Hormone excess that needs an operation",
+      "Suspicious imaging features"
+     ]
+    },
+    "right": {
+     "title": "Do not rush to theatre",
+     "points": [
+      "Lipid-rich adenoma under 4 cm",
+      "Normal hormone screen",
+      "Size alone is not a diagnosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Do not **biopsy** an **adrenal** mass until a pheochromocytoma is excluded, because needling a pheochromocytoma can precipitate a crisis. A typical adenoma is not biopsied. Biopsy is reserved for known extra-adrenal cancer when the result would change treatment. Cytology cannot separate an adrenal adenoma from an adrenocortical carcinoma.",
+   "say": "Do not biopsy an adrenal mass until a pheochromocytoma is excluded, because needling a pheochromocytoma can precipitate a crisis. A typical adenoma is not biopsied. Biopsy is reserved for known extra-adrenal cancer when the result would change treatment. Cytology cannot separate an adrenal adenoma from an adrenocortical carcinoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Exclude pheochromocytoma first"
+     },
+     {
+      "id": "b",
+      "label": "Typical adenoma: do not biopsy"
+     },
+     {
+      "id": "c",
+      "label": "Known extra-adrenal cancer only"
+     },
+     {
+      "id": "d",
+      "label": "Only if the result changes treatment"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autonomous cortisol** secretion is a failed 1 mg dexamethasone test without the overt stigmata of Cushing syndrome. It is linked to hypertension, diabetes, and osteoporosis, and the decision for surgery is individual. A normal outward appearance does not cancel an abnormal suppression test. You should ask about fractures, new diabetes, and difficult blood pressure before the patient is discharged.",
+   "say": "Autonomous cortisol secretion is a failed 1 mg dexamethasone test without the overt stigmata of Cushing syndrome. It is linked to hypertension, diabetes, and osteoporosis, and the decision for surgery is individual. A normal outward appearance does not cancel an abnormal suppression test. You should ask about fractures, new diabetes, and difficult blood pressure before the patient is discharged.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Finding",
+     "What it means"
+    ],
+    "rows": [
+     [
+      "Failed 1 mg test, no overt Cushing",
+      "Autonomous cortisol secretion"
+     ],
+     [
+      "Hypertension, diabetes, bone loss",
+      "Associated harm, not a scan finding"
+     ],
+     [
+      "Decision for surgery",
+      "Individual, not automatic"
+     ],
+     [
+      "Normal appearance",
+      "Does not cancel the failed test"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenocortical carcinoma** often co-secretes cortisol and androgens. Virilization together with Cushing features in a large adrenal mass is carcinoma until it is proved otherwise. A pure aldosterone-secreting carcinoma is uncommon. The drawing shows an invasive mass, necrosis, vena cava thrombus, and renal vein invasion, and it does not name a drug.",
+   "say": "Adrenocortical carcinoma often co-secretes cortisol and androgens. Virilization together with Cushing features in a large adrenal mass is carcinoma until it is proved otherwise. A pure aldosterone-secreting carcinoma is uncommon. The drawing shows an invasive mass, necrosis, vena cava thrombus, and renal vein invasion, and it does not name a drug.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adrenocortical-carcinoma-fig1.webp",
+    "alt": "Drawing of an invasive adrenal tumour with necrosis, a vena cava thrombus, renal vein invasion, a displaced kidney, and a histology inset.",
+    "caption": "The drawing shows an invasive adrenal mass with necrosis, vena cava thrombus, and renal vein invasion. Mitotane is not named on the figure (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Mitotane** is an **adrenolytic** drug used for adrenocortical carcinoma. It induces cortisol metabolism and causes adrenal insufficiency, so glucocorticoid replacement is required. ENSAT stage and the Ki-67 index guide prognosis after surgery. Mitotane is not a treatment for a lipid-rich nonfunctioning adenoma.",
+   "say": "Mitotane is an adrenolytic drug used for adrenocortical carcinoma. It induces cortisol metabolism and causes adrenal insufficiency, so glucocorticoid replacement is required. ENSAT stage and the Ki-67 index guide prognosis after surgery. Mitotane is not a treatment for a lipid-rich nonfunctioning adenoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Point",
+     "Practice"
+    ],
+    "rows": [
+     [
+      "Drug class",
+      "Adrenolytic, not a simple inhibitor"
+     ],
+     [
+      "Cortisol",
+      "Metabolism rises, so replacement is required"
+     ],
+     [
+      "Prognosis",
+      "ENSAT stage and Ki-67"
+     ],
+     [
+      "Benign adenoma",
+      "Not an indication for mitotane"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **clearly benign** nonfunctioning adenoma under 4 cm does not need years of repeat CT. One follow-up image is enough when the first study was indeterminate. Hormones are repeated only if new clinical features appear. Do not schedule annual scans out of habit once the mass is lipid rich, small, and biochemically silent.",
+   "say": "A clearly benign nonfunctioning adenoma under 4 cm does not need years of repeat CT. One follow-up image is enough when the first study was indeterminate. Hormones are repeated only if new clinical features appear. Do not schedule annual scans out of habit once the mass is lipid rich, small, and biochemically silent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clearly benign, under 4 cm, silent"
+     },
+     {
+      "id": "b",
+      "label": "No years of repeat CT"
+     },
+     {
+      "id": "c",
+      "label": "One image only if the first study was unclear"
+     },
+     {
+      "id": "d",
+      "label": "Repeat hormones only for new features"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}

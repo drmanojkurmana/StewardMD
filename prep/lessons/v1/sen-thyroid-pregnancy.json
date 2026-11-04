@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "sen-thyroid-pregnancy",
+ "subject": "ss-endocrinology",
+ "title": "Thyroid disease in pregnancy",
+ "minutes": 9,
+ "steps": [
+  {
+   "tx": "If a **trimester-specific** TSH reference range is not available, the ATA accepts an upper limit of about 4.0 mIU/L. The lower limit in the first trimester can be about 0.1 mIU/L because hCG stimulates the thyroid. A TSH of 0.2 in week 8 is often normal physiology, and it is not Graves disease by itself. Use the assay range when the laboratory provides one, and use 4.0 mIU/L only when that range is missing.",
+   "say": "If a trimester-specific TSH reference range is not available, the ATA accepts an upper limit of about 4.0 mIU/L. The lower limit in the first trimester can be about 0.1 mIU/L because hCG stimulates the thyroid. A TSH of 0.2 in week 8 is often normal physiology, and it is not Graves disease by itself. Use the assay range when the laboratory provides one, and use 4.0 mIU/L only when that range is missing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "TSH guide"
+    ],
+    "rows": [
+     [
+      "Trimester range available",
+      "Use the laboratory range"
+     ],
+     [
+      "No trimester range",
+      "Upper limit about 4.0 mIU/L"
+     ],
+     [
+      "First trimester lower limit",
+      "Can be about 0.1 mIU/L"
+     ],
+     [
+      "hCG effect",
+      "Stimulates the thyroid, suppresses TSH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **woman already** on levothyroxine should increase the dose by about 30 percent, which is 2 extra tablets a week, as soon as pregnancy is confirmed. Have the TSH checked about every 4 weeks through mid pregnancy. Waiting for the first antenatal visit leaves the fetus with weeks of a low thyroxine supply. The increase is for a woman who is already replaced, and it is not a reason to start thyroxine in a euthyroid woman.",
+   "say": "A woman already on levothyroxine should increase the dose by about 30 percent, which is 2 extra tablets a week, as soon as pregnancy is confirmed. Have the TSH checked about every 4 weeks through mid pregnancy. Waiting for the first antenatal visit leaves the fetus with weeks of a low thyroxine supply. The increase is for a woman who is already replaced, and it is not a reason to start thyroxine in a euthyroid woman.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pregnancy confirmed on levothyroxine"
+     },
+     {
+      "id": "b",
+      "label": "Add 2 tablets a week"
+     },
+     {
+      "id": "c",
+      "label": "TSH about every 4 weeks"
+     },
+     {
+      "id": "d",
+      "label": "Through mid pregnancy"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Use **propylthiouracil** in the **first** trimester because methimazole is associated with aplasia cutis and choanal atresia. After the first trimester many clinicians switch back to methimazole because propylthiouracil hepatotoxicity is the greater ongoing risk. Both drugs cross the placenta. Keep the dose as low as possible, because overtreatment causes fetal goitre and fetal hypothyroidism.",
+   "say": "Use propylthiouracil in the first trimester because methimazole is associated with aplasia cutis and choanal atresia. After the first trimester many clinicians switch back to methimazole because propylthiouracil hepatotoxicity is the greater ongoing risk. Both drugs cross the placenta. Keep the dose as low as possible, because overtreatment causes fetal goitre and fetal hypothyroidism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First trimester",
+     "points": [
+      "Propylthiouracil is preferred",
+      "Methimazole is linked to aplasia cutis and choanal atresia",
+      "Both drugs still cross the placenta"
+     ]
+    },
+    "right": {
+     "title": "After the first trimester",
+     "points": [
+      "Many switch back to methimazole",
+      "Propylthiouracil liver injury is the ongoing risk",
+      "Lowest effective dose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Gestational transient** thyrotoxicosis from very high hCG, often with hyperemesis, has a suppressed TSH, a negative TSH-receptor antibody, and no goitre or orbitopathy. It is not treated with an antithyroid drug. Graves disease in pregnancy has a positive TSH-receptor antibody. The drawing shows the Graves pattern, with ophthalmopathy and a diffuse goitre, which gestational thyrotoxicosis does not have.",
+   "say": "Gestational transient thyrotoxicosis from very high hCG, often with hyperemesis, has a suppressed TSH, a negative TSH-receptor antibody, and no goitre or orbitopathy. It is not treated with an antithyroid drug. Graves disease in pregnancy has a positive TSH-receptor antibody. The drawing shows the Graves pattern, with ophthalmopathy and a diffuse goitre, which gestational thyrotoxicosis does not have.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperthyroidism-fig1.webp",
+    "alt": "Drawing of Graves thyrotoxicosis with receptor autoantibodies, diffuse goitre, ophthalmopathy, tremor, and pretibial myxoedema.",
+    "caption": "The drawing shows a diffuse goitre, Graves ophthalmopathy, and receptor autoantibodies. Gestational thyrotoxicosis lacks the goitre and the eye disease, and the drawing is not a pregnancy diagram (StewardMD)."
+   }
+  },
+  {
+   "tx": "TSH-**receptor antibody** crosses the placenta and can cause fetal and neonatal thyrotoxicosis. Measure it at the first visit in a woman with current or past Graves disease, including after definitive therapy with radioiodine or surgery. A woman whose gland was removed can still carry the antibody. A negative antibody is the usual finding in gestational transient thyrotoxicosis, and that result lets you avoid an antithyroid drug.",
+   "say": "TSH-receptor antibody crosses the placenta and can cause fetal and neonatal thyrotoxicosis. Measure it at the first visit in a woman with current or past Graves disease, including after definitive therapy with radioiodine or surgery. A woman whose gland was removed can still carry the antibody. A negative antibody is the usual finding in gestational transient thyrotoxicosis, and that result lets you avoid an antithyroid drug.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TRAb",
+     "Meaning in pregnancy"
+    ],
+    "rows": [
+     [
+      "Positive, current Graves",
+      "Fetus can become thyrotoxic"
+     ],
+     [
+      "Positive after surgery or radioiodine",
+      "Antibody can still cross"
+     ],
+     [
+      "Negative, with hyperemesis",
+      "Fits gestational thyrotoxicosis"
+     ],
+     [
+      "First visit",
+      "Measure it, do not guess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Radioiodine** is **absolutely** contraindicated in pregnancy and while breastfeeding. A pregnancy test is confirmed before radioiodine in any person who could be pregnant. There is no safe trimester for a therapeutic dose. If a woman is breastfeeding, the radioiodine wait is a hard stop, and surgery or a thionamide is the alternative. The scan patterns on the next drawing are for diagnosis, not a licence to treat with iodine.",
+   "say": "Radioiodine is absolutely contraindicated in pregnancy and while breastfeeding. A pregnancy test is confirmed before radioiodine in any person who could be pregnant. There is no safe trimester for a therapeutic dose. If a woman is breastfeeding, the radioiodine wait is a hard stop, and surgery or a thionamide is the alternative. The scan patterns on the next drawing are for diagnosis, not a licence to treat with iodine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperthyroidism-and-other-causes-of-fig1.webp",
+    "alt": "Drawing of Graves features, a multinodular goitre, and radionuclide patterns for Graves, multinodular disease, and thyroiditis.",
+    "caption": "The faint scan is labelled thyroiditis, and the dark diffuse scan is labelled Graves. The drawing does not show a pregnant patient, and radioiodine is not a pregnancy treatment (StewardMD)."
+   }
+  },
+  {
+   "tx": "The WHO **iodine intake** in pregnancy is 250 mcg per day. Severe iodine deficiency causes maternal and fetal hypothyroidism and is still a preventable cause of impaired neurodevelopment. Routine high-dose iodine is not a treatment for Graves disease, and excess iodine can worsen thyrotoxicosis. Use iodised salt and the recommended intake, not an unmeasured supplement from a wellness shop.",
+   "say": "The WHO iodine intake in pregnancy is 250 mcg per day. Severe iodine deficiency causes maternal and fetal hypothyroidism and is still a preventable cause of impaired neurodevelopment. Routine high-dose iodine is not a treatment for Graves disease, and excess iodine can worsen thyrotoxicosis. Use iodised salt and the recommended intake, not an unmeasured supplement from a wellness shop.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right iodine intake",
+     "points": [
+      "About 250 mcg per day in pregnancy",
+      "Prevents fetal hypothyroidism",
+      "Iodised salt is the usual source"
+     ]
+    },
+    "right": {
+     "title": "Wrong use of iodine",
+     "points": [
+      "Not a treatment for Graves disease",
+      "Excess can worsen thyrotoxicosis",
+      "Never a radioiodine substitute"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Postpartum thyroiditis** occurs within 12 months of delivery, often with a thyrotoxic phase then a hypothyroid phase, a low uptake, and positive TPO antibodies. The thyrotoxic phase is managed with a beta blocker, not methimazole. A TSH is checked at about 6 weeks if the woman is symptomatic. The faint thyroiditis scan on the uptake drawing is the pattern, and an antithyroid drug does not help a gland that is leaking stored hormone.",
+   "say": "Postpartum thyroiditis occurs within 12 months of delivery, often with a thyrotoxic phase then a hypothyroid phase, a low uptake, and positive TPO antibodies. The thyrotoxic phase is managed with a beta blocker, not methimazole. A TSH is checked at about 6 weeks if the woman is symptomatic. The faint thyroiditis scan on the uptake drawing is the pattern, and an antithyroid drug does not help a gland that is leaking stored hormone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Uptake",
+     "Treatment"
+    ],
+    "rows": [
+     [
+      "Thyrotoxic, early",
+      "Low",
+      "Beta blocker, not methimazole"
+     ],
+     [
+      "Hypothyroid, later",
+      "Not a hot gland",
+      "Levothyroxine if she is symptomatic"
+     ],
+     [
+      "Timing",
+      "Within 12 months",
+      "TSH at about 6 weeks if symptoms"
+     ],
+     [
+      "Antibodies",
+      "TPO often positive",
+      "Not a reason for radioiodine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI"
+}
