@@ -20,7 +20,7 @@ const PORT = Number(process.env.PORT || 9034), CDP = Number(process.env.CDP_PORT
 const SHOTS = process.env.SHOTS || "/tmp/stewardmd-kb-reader";
 const DISEASES = (process.env.DISEASES || "MENINGITIS,CAP,gout,sickle_cell_disease,adult_jaundice,stable_angina,atrial_fib").split(",");
 const ORDER = ["kbr-glance", "kbr-causes", "kbr-patho", "kbr-dx", "kbr-ddx", "kbr-mgmt", "kbr-prog", "kbr-pearls", "kbr-refs", "kbr-related"];
-const HOME = { diagnostic: "kbr-dx", figures: "kbr-dx", ddx: "kbr-ddx", treatment: "kbr-mgmt", flowchart: "kbr-mgmt", "flowchart-dx": "kbr-dx", foot: "kbr-refs" };
+const HOME = { diagnostic: "kbr-dx", figures: "kbr-dx", "figures-patho": "kbr-patho", "figures-dx": "kbr-dx", "figures-mgmt": "kbr-mgmt", ddx: "kbr-ddx", treatment: "kbr-mgmt", flowchart: "kbr-mgmt", "flowchart-dx": "kbr-dx", foot: "kbr-refs" };
 
 const server = spawn("node", [repo + "test/serve.mjs", repo, String(PORT)], { stdio: "ignore" });
 const chrome = spawn(process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
