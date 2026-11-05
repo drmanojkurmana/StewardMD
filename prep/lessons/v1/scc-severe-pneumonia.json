@@ -1,0 +1,182 @@
+{
+ "v": 1,
+ "module": "scc-severe-pneumonia",
+ "title": "Severe pneumonia and ventilator-associated pneumonia",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Severe community acquired pneumonia** is one major criterion, invasive ventilation or septic shock, or three minor criteria. That severity is what selects the ICU and broader antibiotics. A ward pneumonia that does not meet this bar is not treated as the ICU disease. You should name the criterion you are using. A low oxygen saturation alone is not automatically the major criterion.",
+   "say": "Severe community acquired pneumonia is one major criterion, invasive ventilation or septic shock, or three minor criteria. That severity is what selects the ICU and broader antibiotics. A ward pneumonia that does not meet this bar is not treated as the ICU disease. You should name the criterion you are using. A low oxygen saturation alone is not automatically the major criterion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/severe-cap-fig1.webp",
+    "alt": "Multilobar consolidation with alveolar flooding, hyaline membrane, and intrapulmonary shunt.",
+    "caption": "Multilobar consolidation, alveolar flooding, and shunt. The major and minor criteria, and the steroid trial, are not on this drawing (StewardMD)."
+   }
+  },
+  {
+   "tx": "**CAPE COD** showed that **hydrocortisone** reduced 28 day mortality in severe community acquired pneumonia in the ICU. It is not a steroid prescription for every ward pneumonia. The patients were sick enough to be in intensive care. You should not copy the drug onto a patient who is eating lunch on a general ward. Severity is the gate.",
+   "say": "CAPE COD showed that hydrocortisone reduced 28 day mortality in severe community acquired pneumonia in the ICU. It is not a steroid prescription for every ward pneumonia. The patients were sick enough to be in intensive care. You should not copy the drug onto a patient who is eating lunch on a general ward. Severity is the gate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CAPE COD steroid",
+     "points": [
+      "Severe pneumonia in the ICU",
+      "Hydrocortisone reduced 28 day mortality",
+      "The patient met severe criteria"
+     ]
+    },
+    "right": {
+     "title": "Not this trial",
+     "points": [
+      "Ordinary ward pneumonia",
+      "No automatic steroid",
+      "Severity is the gate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ventilator associated pneumonia** is suspected from a new infiltrate plus fever, purulent sputum, or worsening gas exchange. The **Clinical Pulmonary Infection Score** is not accurate enough to use alone. You should take a culture and look at the whole picture. A score is not a reason to start or stop antibiotics by itself. The chest film can lag behind the bedside.",
+   "say": "Ventilator associated pneumonia is suspected from a new infiltrate plus fever, purulent sputum, or worsening gas exchange. The Clinical Pulmonary Infection Score is not accurate enough to use alone. You should take a culture and look at the whole picture. A score is not a reason to start or stop antibiotics by itself. The chest film can lag behind the bedside.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vap-fig1.webp",
+    "alt": "Intubated airway with subglottic secretions, cuff microaspiration, luminal biofilm, purulent bronchitis, and alveolar consolidation.",
+    "caption": "Cuff microaspiration, luminal biofilm, and alveolar consolidation in ventilator-associated pneumonia. The seven day course is not drawn (StewardMD)."
+   }
+  },
+  {
+   "tx": "IDSA **2016** suggests an **endotracheal aspirate** rather than insisting on a **bronchoalveolar lavage** for every patient. Quantitative cultures are an option, not a requirement. You should not delay the first antibiotic dose for a perfect sample in septic shock. A non-invasive sample is enough for most patients. Lavage is for selected questions, not for every new fever.",
+   "say": "IDSA 2016 suggests an endotracheal aspirate rather than insisting on a bronchoalveolar lavage for every patient. Quantitative cultures are an option, not a requirement. You should not delay the first antibiotic dose for a perfect sample in septic shock. A non-invasive sample is enough for most patients. Lavage is for selected questions, not for every new fever.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sample",
+     "IDSA 2016 stance",
+     "What not to do"
+    ],
+    "rows": [
+     [
+      "Endotracheal aspirate",
+      "Suggested non-invasive sample",
+      "Do not insist on lavage for everyone"
+     ],
+     [
+      "Bronchoalveolar lavage",
+      "An option",
+      "Do not delay antibiotics in shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **7 day** antibiotic course is enough for most ventilator associated pneumonia that is responding. Longer courses are for Pseudomonas, Acinetobacter, or a slow clinical response, not for every case. You should review the culture and the fever before you extend. A calendar habit of 14 days is not the guideline. Response is what decides the length.",
+   "say": "A 7 day antibiotic course is enough for most ventilator associated pneumonia that is responding. Longer courses are for Pseudomonas, Acinetobacter, or a slow clinical response, not for every case. You should review the culture and the fever before you extend. A calendar habit of 14 days is not the guideline. Response is what decides the length.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stop near 7 days",
+     "points": [
+      "The patient is responding",
+      "The organism is ordinary",
+      "The culture has come back"
+     ]
+    },
+    "right": {
+     "title": "Consider longer",
+     "points": [
+      "Pseudomonas or Acinetobacter",
+      "Slow clinical response",
+      "Not a reflex for every case"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prevention is **head of bed** elevation, daily sedation breaks, and **subglottic** secretion drainage. Routine circuit changes do not prevent pneumonia. Oral chlorhexidine is no longer assumed to be harmless. You should keep the head up and wake the patient every day. Changing a clean circuit on a timetable is not prevention. A bundle is the boring work that matters.",
+   "say": "Prevention is head of bed elevation, daily sedation breaks, and subglottic secretion drainage. Routine circuit changes do not prevent pneumonia. Oral chlorhexidine is no longer assumed to be harmless. You should keep the head up and wake the patient every day. Changing a clean circuit on a timetable is not prevention. A bundle is the boring work that matters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Do",
+     "Do not assume",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Head of bed up, sedation break, subglottic drainage",
+      "These are the prevention steps",
+      "They cut aspiration and time on the tube"
+     ],
+     [
+      "Routine circuit changes",
+      "They do not prevent pneumonia",
+      "Chlorhexidine is not assumed harmless"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Empiric cover follows local resistance and the risk of **methicillin resistant** Staphylococcus aureus and **Pseudomonas**. Double gram negative cover is stopped once susceptibilities return. You should not leave two antipseudomonal drugs running after the laboratory has answered. Local resistance is the map. A famous foreign regimen is not a substitute for that map.",
+   "say": "Empiric cover follows local resistance and the risk of methicillin resistant Staphylococcus aureus and Pseudomonas. Double gram negative cover is stopped once susceptibilities return. You should not leave two antipseudomonal drugs running after the laboratory has answered. Local resistance is the map. A famous foreign regimen is not a substitute for that map.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "risk",
+      "label": "Risk of MRSA and Pseudomonas"
+     },
+     {
+      "id": "cover",
+      "label": "Empiric cover from local resistance"
+     },
+     {
+      "id": "narrow",
+      "label": "Stop double cover when sensitivities return"
+     }
+    ],
+    "edges": [
+     [
+      "risk",
+      "cover"
+     ],
+     [
+      "cover",
+      "narrow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A parapneumonic effusion that is frankly purulent, culture positive, or pH below 7.20 is an **empyema** and is drained. Antibiotics alone do not treat an empyema. You should not watch a rind of pus because the antibiotic is broad. A pH below 7.20 is a drainage number. A simple sympathetic effusion is not the same fluid.",
+   "say": "A parapneumonic effusion that is frankly purulent, culture positive, or pH below 7 point 20 is an empyema and is drained. Antibiotics alone do not treat an empyema. You should not watch a rind of pus because the antibiotic is broad. A pH below 7 point 20 is a drainage number. A simple sympathetic effusion is not the same fluid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Drain",
+     "points": [
+      "Frank pus or a positive culture",
+      "pH below 7.20",
+      "Antibiotics alone will fail"
+     ]
+    },
+    "right": {
+     "title": "Do not call it empyema yet",
+     "points": [
+      "A small sympathetic effusion",
+      "pH is not in that range",
+      "Still follow the clinical picture"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Marino ICU Book 5e Ch. 29 Ventilator-Associated Pneumonia",
+  "Washington Manual of Critical Care 4e, Community-Acquired Pneumonia and Nosocomial Pneumonia"
+ ]
+}
