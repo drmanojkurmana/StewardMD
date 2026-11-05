@@ -813,6 +813,84 @@
         ]
       }
     },
+    "uro-adult-circumcision": {
+      base: "operative", title: "Adult circumcision",
+      prefill: {"procedure": "Adult circumcision"},
+      extra: {
+        "Operative detail": [
+          f("penileBlock", "Penile block: agent and volume, no adrenaline", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. plain agent, volume, dorsal nerve and ring block"}),
+          f("prepuceGlans", "Prepuce, glans and meatus appearance", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. lichen sclerosus, meatus normal / stenosed, no lesion"}),
+          f("frenularArtery", "Frenular artery management", {"type": "text", "required": true, "aiFillable": false, "ph": "Ligated / bipolar; haemostasis confirmed"}),
+          f("suspiciousLesion", "Suspicious lesion found", {"type": "text", "required": true, "aiFillable": false, "ph": "None / biopsied and circumcision not completed"})
+        ]
+      }
+    },
+    "uro-dj-stent": {
+      base: "operative", title: "Retrograde double-J stent insertion",
+      prefill: {"procedure": "Retrograde double-J ureteric stent insertion"},
+      extra: {
+        "Operative detail": [
+          f("obstructionLevel", "Level and cause of obstruction on pyelogram", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. right PUJ, impacted stone at the pelvic brim"}),
+          f("pelvicUrine", "Urine from the renal pelvis; cultures sent", {"type": "text", "required": true, "aiFillable": false, "ph": "Clear / cloudy / pus; bladder and pelvic samples sent separately: Yes / No"}),
+          f("stentSpec", "Stent type, diameter, length and side", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. left double-J, diameter Fr, length cm, no string"}),
+          f("stentPositionConfirmed", "Both coils confirmed on saved image", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No"}),
+          f("stentRemovalPlan", "Stent register entry and removal or exchange date", {"type": "text", "required": true, "aiFillable": false, "ph": "Registered: Yes / No; date"}),
+          f("decompressionOnly", "Definitive treatment deferred and plan", {"type": "text", "required": false, "aiFillable": true, "ph": "e.g. decompression only for infection; ureteroscopy after antibiotics"})
+        ]
+      }
+    },
+    "uro-hydrocele-repair": {
+      base: "operative", title: "Hydrocele repair",
+      prefill: {"procedure": "Hydrocele repair"},
+      extra: {
+        "Operative detail": [
+          f("usTestisNormal", "Pre-operative ultrasound: testis normal", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes, date / No (then why proceed)"}),
+          f("hydroceleTechnique", "Technique", {"type": "text", "required": true, "aiFillable": true, "ph": "Jaboulay eversion (with or without excision) / Lord plication"}),
+          f("fluidAndSac", "Fluid character and sac thickness", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. clear straw fluid, thin sac"}),
+          f("testisEpididymis", "Testis and epididymis on inspection", {"type": "text", "required": true, "aiFillable": false, "ph": "Normal / abnormal, describe and action"})
+        ]
+      }
+    },
+    "uro-inguinal-orchidectomy": {
+      base: "operative", title: "Radical inguinal orchidectomy",
+      prefill: {"procedure": "Radical inguinal orchidectomy"},
+      extra: {
+        "Operative detail": [
+          f("preopMarkers", "Pre-operative tumour markers drawn", {"type": "text", "required": true, "aiFillable": false, "ph": "AFP, beta-hCG, LDH: date drawn"}),
+          f("spermBanking", "Sperm banking offered and outcome", {"type": "text", "required": true, "aiFillable": false, "ph": "Offered: Yes; banked / declined / not possible"}),
+          f("cordLigation", "Cord control and ligation level; marker suture", {"type": "text", "required": true, "aiFillable": false, "ph": "Early clamp at deep ring: Yes; ligation at deep ring; non-absorbable marker: Yes"}),
+          f("prosthesisDetail", "Prosthesis", {"type": "text", "required": true, "aiFillable": false, "ph": "Declined / inserted: type, size, batch"}),
+          f("contralateralTestis", "Contralateral testis assessment and biopsy", {"type": "text", "required": false, "aiFillable": false, "ph": "Normal on ultrasound / biopsy taken and why"})
+        ]
+      }
+    },
+    "uro-pcnl": {
+      base: "operative", title: "Percutaneous nephrolithotomy",
+      prefill: {"procedure": "Percutaneous nephrolithotomy (PCNL)"},
+      extra: {
+        "Operative detail": [
+          f("pcnlPosition", "Position and puncture guidance", {"type": "text", "required": true, "aiFillable": true, "ph": "Prone / supine; fluoroscopy / ultrasound"}),
+          f("accessCalyx", "Calyx punctured and relation to ribs", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. posterior lower pole calyx, subcostal"}),
+          f("tractSize", "Tract dilatation method and sheath size", {"type": "text", "required": true, "aiFillable": false, "ph": "Balloon / serial / one-shot; sheath Fr"}),
+          f("stoneFreeStatus", "Stone-free status at the end", {"type": "text", "required": true, "aiFillable": false, "ph": "Stone-free / residual fragments / significant residual stone, and plan"}),
+          f("exitStrategy", "Exit: nephrostomy, stent or tubeless", {"type": "text", "required": true, "aiFillable": false, "ph": "Nephrostomy size / double-J / tubeless; image saved"}),
+          f("chestCheck", "Chest assessment after access", {"type": "text", "required": true, "aiFillable": false, "ph": "Not needed (subcostal) / fluoroscopy clear / chest X-ray requested"})
+        ]
+      }
+    },
+    "uro-radical-nephrectomy": {
+      base: "operative", title: "Radical nephrectomy",
+      prefill: {"procedure": "Radical nephrectomy"},
+      extra: {
+        "Operative detail": [
+          f("rnApproach", "Approach and conversion", {"type": "text", "required": true, "aiFillable": true, "ph": "Laparoscopic transperitoneal / retroperitoneoscopic / open (incision); converted: No / Yes and reason"}),
+          f("hilarVessels", "Renal arteries and veins: number found and how ligated", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "e.g. 1 artery, 1 vein; clips / stapler; vein flattened after artery ligation"}),
+          f("adrenalNodes", "Adrenal and lymph node decisions", {"type": "text", "required": true, "aiFillable": true, "ph": "Adrenal spared / removed (reason); nodes not dissected / dissected"}),
+          f("venousThrombus", "Renal vein or caval thrombus", {"type": "text", "required": true, "aiFillable": false, "ph": "None / renal vein / caval, level and management"}),
+          f("visceralInjury", "Visceral or vascular injury", {"type": "text", "required": true, "aiFillable": false, "ph": "None / organ, recognition and repair"})
+        ]
+      }
+    },
     "uro-scrotal-exploration": {
       base: "operative", title: "Scrotal exploration",
       prefill: {"procedure": "Scrotal exploration and bilateral testicular fixation", "incision": "Median raphe"},
@@ -864,6 +942,32 @@
           f("landmarks", "Verumontanum and ureteric orifices preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, with detail"}),
           f("capsulePerforation", "Capsular perforation or open sinuses; sodium checked", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "None, or site, action taken and sodium result"}),
           f("catheterDetail", "Catheter type, size and balloon volume; irrigation", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. three-way, size Ch, balloon mL water, irrigation running"})
+        ]
+      }
+    },
+    "uro-ureteroscopy-laser": {
+      base: "operative", title: "Ureteroscopy and laser lithotripsy",
+      prefill: {"procedure": "Ureteroscopy with laser lithotripsy"},
+      extra: {
+        "Operative detail": [
+          f("stoneSiteSize", "Stone side, site, size and number", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. left distal ureter, single stone, size on CT"}),
+          f("scopeAccess", "Scopes used and access sheath", {"type": "text", "required": true, "aiFillable": true, "ph": "Semirigid / flexible; sheath size or none"}),
+          f("laserSettings", "Laser type and settings", {"type": "text", "required": true, "aiFillable": false, "ph": "Holmium / thulium; fibre size; energy and frequency"}),
+          f("stoneFreeStatus", "Stone-free status at the end", {"type": "text", "required": true, "aiFillable": false, "ph": "Stone-free / small residual fragments / significant residual stone"}),
+          f("ureteralInjury", "Ureteric injury on withdrawal inspection", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "None / mucosal / perforation / other, and action"}),
+          f("stentRemovalPlan", "Stent detail and removal date", {"type": "text", "required": true, "aiFillable": false, "ph": "No stent, or type, size, length, string, removal date booked", "help": "Every stent goes on the register."})
+        ]
+      }
+    },
+    "uro-varicocelectomy": {
+      base: "operative", title: "Subinguinal microsurgical varicocelectomy",
+      prefill: {"procedure": "Subinguinal microsurgical varicocelectomy"},
+      extra: {
+        "Operative detail": [
+          f("variSideGrade", "Side and clinical grade", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. left, grade III"}),
+          f("arteriesPreserved", "Testicular arteries identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Number; Doppler and vasodilator used: Yes / No"}),
+          f("veinsLigated", "Internal and external spermatic veins ligated", {"type": "text", "required": true, "aiFillable": false, "ph": "Number internal / external; gubernacular veins: Yes / No"}),
+          f("lymphaticsVas", "Lymphatics and vas with its vessels preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, detail"})
         ]
       }
     },

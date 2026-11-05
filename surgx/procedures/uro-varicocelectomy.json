@@ -1,0 +1,213 @@
+{
+  "id": "uro-varicocelectomy",
+  "title": "Subinguinal microsurgical varicocelectomy",
+  "subtitle": "Ligate the veins, save the artery, the lymphatics and the vas",
+  "system": "urology",
+  "aliases": ["varicocele ligation", "microsurgical varicocelectomy", "subinguinal varicocelectomy", "Marmar approach"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-srh", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Sexual and Reproductive Health (male infertility and varicocele)", "year": 2024, "url": "https://uroweb.org/guidelines/sexual-and-reproductive-health", "accessed": "2026-11-04" },
+    { "id": "aua-asrm-infertility", "org": "American Urological Association (AUA) and American Society for Reproductive Medicine (ASRM)", "title": "Diagnosis and Treatment of Infertility in Men: AUA/ASRM Guideline", "year": 2020, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/male-infertility", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["bmi", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Clinically palpable varicocele in a man of an infertile couple with abnormal semen parameters, where the female partner has normal or treatable fertility, per the infertility guidelines.",
+      "Adolescent varicocele with a progressive failure of testicular growth on the affected side, per the guidelines.",
+      "Symptomatic varicocele with scrotal ache or heaviness not settling with conservative measures, after counselling that pain relief is not guaranteed.",
+      "Selected men with clinical varicocele and non-obstructive azoospermia or raised sperm DNA fragmentation, after specialist discussion."
+    ],
+    "contraindications": [
+      "Subclinical varicocele (detected only on imaging) in an infertile man: treatment is not recommended by the guidelines.",
+      "Normal semen parameters in a man without symptoms or testicular growth failure.",
+      "A new varicocele, particularly right-sided, sudden in onset or not decompressing when lying down, until a retroperitoneal or renal mass has been excluded on imaging.",
+      "Recurrent varicocele after previous surgery may be better treated by radiological embolisation."
+    ],
+    "preparation": [
+      "Clinical grading standing and with Valsalva, testicular volume, and a scrotal ultrasound.",
+      "Semen analysis (two samples where indicated) and hormone profile per infertility guidance; assessment of the female partner.",
+      "Consent: hydrocele, recurrence or persistence, testicular artery injury and testicular atrophy, haematoma, infection, numbness or pain in the groin, and that improvement in semen quality or pregnancy is not guaranteed.",
+      "Discuss alternatives: radiological embolisation, laparoscopic or open retroperitoneal ligation, and assisted reproduction."
+    ],
+    "positioning": [
+      "Supine; the operating microscope positioned before draping with a sterile cover, and the surgeon seated comfortably."
+    ],
+    "equipment": [
+      "Operating microscope with variable magnification, microsurgical instruments, micro-bipolar.",
+      "Micro-Doppler probe and topical papaverine or plain lidocaine to dilate and identify the testicular artery.",
+      "Fine non-absorbable ties or ligaclips for veins; vessel loops.",
+      "Soft sling (Penrose drain or tape) for the cord."
+    ],
+    "anatomy": [
+      "A varicocele is dilatation of the pampiniform plexus, more common on the left because the left testicular vein drains at right angles into the left renal vein.",
+      "At the subinguinal level, just below the external ring, the cord contains several internal spermatic veins, one or more testicular arteries, lymphatics, the vas with its artery and veins, and cremasteric vessels.",
+      "The testicular artery is often surrounded by a network of small veins; it may be multiple at this level.",
+      "Lymphatics are thin, clear, valved channels; ligating them causes hydrocele.",
+      "External spermatic (cremasteric) veins run outside the internal spermatic fascia and can sustain a recurrence if left."
+    ],
+    "criticalSafety": [
+      "Identify the testicular artery before ligating anything, using magnification, Doppler and topical vasodilator.",
+      "Preserve the vas deferens and its own vessels; they become the testis's main supply if the testicular artery is lost.",
+      "Preserve the lymphatics to avoid a post-operative hydrocele.",
+      "If the artery cannot be confidently identified, ligate only what is certainly vein rather than risk the testis."
+    ],
+    "structuresAtRisk": [
+      "Testicular artery or arteries",
+      "Vas deferens and the deferential artery",
+      "Lymphatics",
+      "Ilioinguinal nerve and genital branch of the genitofemoral nerve"
+    ],
+    "commonErrors": [
+      "Incomplete delivery of the cord, leaving veins outside the sling.",
+      "Ligating a small artery mistaken for a vein because Doppler was not used.",
+      "Ligating lymphatics as 'small veins'.",
+      "Missing external spermatic veins, leading to recurrence."
+    ],
+    "complications": [
+      "Hydrocele, minimised by lymphatic sparing.",
+      "Persistence or recurrence of the varicocele.",
+      "Testicular atrophy after arterial ligation, uncommon with microsurgical technique.",
+      "Scrotal or wound haematoma and infection.",
+      "Groin numbness or pain from nerve injury."
+    ],
+    "postop": [
+      "Day surgery; scrotal support and simple analgesia.",
+      "Return to normal activity when comfortable; avoid heavy lifting in the early period.",
+      "Repeat semen analysis after at least one full spermatogenic cycle, typically at around three months and again later, as the guidelines and local service advise.",
+      "Review for hydrocele, recurrence and testicular size."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the indication meets the guideline criteria (clinical varicocele with abnormal semen parameters, or adolescent growth failure, or pain) and record it." },
+    { "ref": "step.uro.scrotal-imaging-check", "emphasis": "Confirm the grade, testicular volumes and semen results; a right-sided or non-decompressing varicocele needs abdominal imaging first." },
+    { "ref": "step.core.timeout", "emphasis": "Check the microscope, Doppler and papaverine or lidocaine are in the room before incision." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Supine, with the microscope and the surgeon's seat set before draping." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.vari.incision" },
+    { "ref": "step.uro.cord-delivery", "emphasis": "At the subinguinal level, lift the cord through the wound on a sling, below the external ring; the canal is not opened." },
+    { "ref": "step.vari.open-fascia" },
+    { "ref": "step.vari.artery" },
+    { "ref": "step.vari.lymphatics" },
+    { "ref": "step.vari.veins" },
+    { "ref": "step.vari.external-veins" },
+    { "ref": "step.vari.artery-bailout" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "Close Scarpa's fascia and skin with absorbable sutures; local anaesthetic infiltration to the wound." },
+    { "ref": "step.core.debrief", "emphasis": "Record arteries, lymphatics and vas preserved, the number of veins ligated, and the semen analysis plan." }
+  ],
+  "steps_local": {
+    "step.vari.incision": {
+      "id": "step.vari.incision", "kind": "access",
+      "title": "Subinguinal incision over the external ring",
+      "why": "The subinguinal approach avoids opening the external oblique aponeurosis, which means less pain and faster recovery, at the cost of more veins and smaller arteries at this level; the microscope makes that trade worthwhile.",
+      "how": [
+        "Palpate the external ring and make a short transverse or oblique incision just below it.",
+        "Divide Camper's and Scarpa's fascia, controlling the superficial external pudendal vessels.",
+        "Expose the cord as it emerges from the external ring."
+      ],
+      "structuresAtRisk": ["Superficial external pudendal vessels", "Ilioinguinal nerve as it emerges from the external ring"],
+      "pitfalls": [
+        "An incision placed too low on the scrotum, where the cord is less well defined."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vari.open-fascia": {
+      "id": "step.vari.open-fascia", "kind": "dissection",
+      "title": "Open the cord fasciae under the microscope",
+      "why": "The veins, artery and lymphatics lie inside the internal spermatic fascia. Opening it carefully under magnification exposes them without damage; the vas stays outside this compartment and is set aside first.",
+      "how": [
+        "Bring the microscope in and open the external spermatic fascia and cremaster longitudinally.",
+        "Identify the vas with its vessels and keep it separate, outside the dissection, throughout.",
+        "Open the internal spermatic fascia to expose the internal spermatic veins, the artery and the lymphatics."
+      ],
+      "structuresAtRisk": ["Vas deferens and the deferential vessels", "Cremasteric vessels"],
+      "pitfalls": [
+        "Bringing the vas into the dissection compartment and ligating its vessels."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vari.artery": {
+      "id": "step.vari.artery", "kind": "checkpoint", "critical": true,
+      "title": "Identify and protect the testicular artery",
+      "why": "Loss of the testicular artery can cause atrophy of the very testis the operation is meant to help. At this level the artery is small, may be multiple, and is wrapped in veins, so it is found deliberately, not assumed.",
+      "how": [
+        "Apply topical papaverine or plain lidocaine to dilate the artery and reverse spasm.",
+        "Look for pulsation under magnification and confirm with the micro-Doppler.",
+        "Dissect the artery or arteries free of the surrounding veins and tag each with a vessel loop.",
+        "Count and record the arteries identified."
+      ],
+      "structuresAtRisk": ["Testicular artery or arteries"],
+      "pitfalls": [
+        "Relying on visible pulsation alone when the artery is in spasm.",
+        "Stopping after finding one artery when there are two."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vari.lymphatics": {
+      "id": "step.vari.lymphatics", "kind": "checkpoint",
+      "title": "Identify and preserve the lymphatics",
+      "why": "Lymphatic ligation is the main cause of hydrocele after varicocelectomy. Microsurgical identification lets them be kept.",
+      "how": [
+        "Look for thin, clear, non-pulsatile channels with no blood within them; under magnification some show valves.",
+        "Separate them from the veins and protect them.",
+        "Preserve several lymphatic channels; do not ligate a clear channel."
+      ],
+      "structuresAtRisk": ["Lymphatics"],
+      "pitfalls": [
+        "Ligating collapsed small veins and lymphatics together in one bundle."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vari.veins": {
+      "id": "step.vari.veins", "kind": "resection", "critical": true,
+      "title": "Ligate and divide the internal spermatic veins",
+      "why": "Every internal spermatic vein left patent can carry reflux and cause persistence or recurrence; every artery or lymphatic caught causes harm. Each vessel is individually identified before it is ligated.",
+      "how": [
+        "Ligate each internal spermatic vein individually with fine ties or clips and divide it, with the artery and lymphatics held clear on their loops.",
+        "Dissect the small veins adherent to the artery off it and ligate them separately.",
+        "When finished, only the artery or arteries, the lymphatics and the vas with its vessels should remain in continuity in the cord."
+      ],
+      "structuresAtRisk": ["Testicular artery", "Lymphatics"],
+      "pitfalls": [
+        "Mass ligation of a bundle containing an artery.",
+        "Leaving periarterial veins, a recognised cause of recurrence."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vari.external-veins": {
+      "id": "step.vari.external-veins", "kind": "resection",
+      "title": "External spermatic and cremasteric veins",
+      "why": "Dilated veins outside the internal spermatic fascia can maintain the varicocele. Ligating the large ones reduces recurrence.",
+      "how": [
+        "Inspect the cremasteric layer and the floor of the cord for dilated external spermatic veins.",
+        "Ligate and divide dilated veins, avoiding the vas and its vessels and the genital nerve.",
+        "Delivery of the testis to ligate gubernacular veins is optional and practice varies; if done, return the testis without twist."
+      ],
+      "structuresAtRisk": ["Genital branch of the genitofemoral nerve", "Vas deferens"],
+      "pitfalls": [
+        "Including the vas or its vessels when taking cremasteric veins at the floor of the cord."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.vari.artery-bailout": {
+      "id": "step.vari.artery-bailout", "kind": "bailout",
+      "title": "Artery not found, or injured",
+      "why": "The operation is elective and for fertility or comfort; it must not cost the testis. When the artery is uncertain or damaged, the safest choice is to do less, and to record exactly what happened.",
+      "how": [
+        "If the artery cannot be identified with confidence despite vasodilator and Doppler, ligate only vessels that are unequivocally veins and leave the rest.",
+        "If the artery is injured, consider microsurgical repair if skills allow; otherwise rely on collateral supply from the deferential and cremasteric arteries, which is why the vas and its vessels are preserved.",
+        "Call a senior microsurgeon if available, tell the patient after recovery, and arrange follow-up of testicular size."
+      ],
+      "structuresAtRisk": ["Testis (ischaemia)"],
+      "pitfalls": [
+        "Completing a full ligation 'to avoid recurrence' with the artery not identified."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

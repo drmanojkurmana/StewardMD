@@ -1,0 +1,217 @@
+{
+  "id": "uro-adult-circumcision",
+  "title": "Adult circumcision",
+  "subtitle": "Bipolar only, mark before cutting, control the frenular artery",
+  "system": "urology",
+  "aliases": ["circumcision", "sleeve circumcision", "preputial excision", "adult male circumcision"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "baus-circ", "org": "British Association of Urological Surgeons (BAUS)", "title": "Circumcision in adults (patient information leaflet)", "year": 2023, "url": "https://www.baus.org.uk/patients/information_leaflets/", "accessed": "2026-11-04" },
+    { "id": "eau-penile", "org": "European Association of Urology (EAU) and American Society of Clinical Oncology (ASCO)", "title": "EAU-ASCO Guidelines on Penile Cancer", "year": 2024, "url": "https://uroweb.org/guidelines/penile-cancer", "accessed": "2026-11-04" },
+    { "id": "who-mmc", "org": "World Health Organization (WHO)", "title": "Manual for male circumcision under local anaesthesia and HIV prevention services for adolescent boys and men", "year": 2018, "url": "https://www.who.int/publications", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Pathological phimosis, including lichen sclerosus (balanitis xerotica obliterans) not responding to topical treatment.",
+      "Recurrent balanoposthitis.",
+      "Paraphimosis that recurs or after reduction, and preputial pathology such as recurrent fissuring.",
+      "Diagnostic and therapeutic excision of preputial lesions, after appropriate assessment for malignancy.",
+      "Religious, cultural or personal reasons in a consenting adult, and voluntary medical male circumcision for HIV prevention within programmes."
+    ],
+    "contraindications": [
+      "Congenital penile abnormalities (hypospadias, chordee, buried or webbed penis) without specialist assessment: the prepuce may be needed for reconstruction.",
+      "Suspected penile cancer: biopsy and staging first; treatment follows the penile cancer guideline.",
+      "Active infection of the prepuce or glans: treat first.",
+      "Uncorrected bleeding disorder."
+    ],
+    "preparation": [
+      "Examine the prepuce, glans and meatus; record lichen sclerosus, meatal stenosis and any lesion.",
+      "Check for diabetes in recurrent balanitis.",
+      "Consent: bleeding (especially from the frenular artery), infection, altered sensation, cosmetic dissatisfaction, too much or too little skin removed, wound breakdown, meatal stenosis, and the need to avoid erections and intercourse for several weeks; the operation is irreversible.",
+      "Choose anaesthesia with the patient: penile block under local anaesthetic, or general anaesthetic with a block."
+    ],
+    "positioning": [
+      "Supine with the legs slightly apart."
+    ],
+    "equipment": [
+      "Minor set with fine artery forceps, fine scissors, skin marker.",
+      "Bipolar diathermy only; monopolar is not used on the penis.",
+      "Plain local anaesthetic without adrenaline for the block.",
+      "Fine absorbable sutures for the skin anastomosis; non-adherent dressing."
+    ],
+    "anatomy": [
+      "The prepuce has an outer skin layer and an inner mucosal layer; the inner layer meets the glans at the coronal sulcus.",
+      "The frenulum on the ventral surface contains the frenular artery, a branch of the dorsal artery, which is the commonest source of post-operative bleeding.",
+      "The dorsal neurovascular bundle (deep dorsal vein, dorsal arteries and dorsal nerves) lies deep to Buck's fascia on the dorsum; the block targets the nerves beneath Buck's fascia at the base.",
+      "The urethra lies ventrally and close to the frenulum; deep ventral sutures or diathermy can injure it."
+    ],
+    "criticalSafety": [
+      "Never use local anaesthetic with adrenaline in a penile block, by long-standing convention, and never use monopolar diathermy on the penis.",
+      "Mark the incision lines before cutting; the shaft skin removed cannot be replaced.",
+      "Identify and control the frenular artery specifically.",
+      "A suspicious lesion is biopsied and staged before definitive surgery, not excised as part of a routine circumcision."
+    ],
+    "structuresAtRisk": [
+      "Glans (laceration during separation of adhesions or excision)",
+      "Urethra and meatus",
+      "Frenular artery",
+      "Dorsal neurovascular bundle",
+      "Shaft skin (over-resection)"
+    ],
+    "commonErrors": [
+      "Removing too much shaft skin by pulling the prepuce forward under tension before cutting.",
+      "Leaving too much inner prepuce, producing a redundant cuff and oedema.",
+      "Unequal resection with a dorsal or ventral excess (a 'dog ear').",
+      "Missing the frenular artery and bleeding in recovery.",
+      "Monopolar diathermy on the penis."
+    ],
+    "complications": [
+      "Bleeding, usually from the frenulum, and haematoma.",
+      "Wound infection and dehiscence.",
+      "Oedema of the remaining inner prepuce, which settles over weeks.",
+      "Cosmetic dissatisfaction, skin bridges, excess or deficient skin.",
+      "Meatal stenosis, particularly with lichen sclerosus.",
+      "Altered glans sensation; rarely, urethral fistula or glans injury."
+    ],
+    "postop": [
+      "Day surgery; pass urine before discharge.",
+      "Simple analgesia; the block wears off in hours.",
+      "Gentle washing from the next day or two; loose underwear.",
+      "Absorbable sutures fall out over a few weeks.",
+      "Avoid intercourse and masturbation until the wound has fully healed, usually several weeks.",
+      "Histology review: lichen sclerosus needs follow-up of the glans and meatus, and any dysplasia or malignancy goes to MDT."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Discuss the cosmetic result and how much skin will be removed. Record any lesion, lichen sclerosus or meatal narrowing seen." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Antibiotic prophylaxis is not routine for a clean circumcision; treat active infection first." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape", "emphasis": "Retract the prepuce as far as it will go and clean beneath it." },
+    { "ref": "step.circ.block" },
+    { "ref": "step.circ.adhesions-inspect" },
+    { "ref": "step.circ.lesion-bailout" },
+    { "ref": "step.circ.outer-incision" },
+    { "ref": "step.circ.inner-incision" },
+    { "ref": "step.circ.excise" },
+    { "ref": "step.core.haemostasis", "emphasis": "Bipolar only, precise points; ask the patient (if awake) to relax and wait a moment for vessels to show. Ligate the frenular artery rather than relying on coagulation." },
+    { "ref": "step.circ.anastomosis" },
+    { "ref": "step.core.specimen", "emphasis": "Send the prepuce for histology, particularly with lichen sclerosus or any visible abnormality." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "The skin is closed by the anastomosis; apply a non-adherent dressing that does not constrict the shaft." },
+    { "ref": "step.core.debrief", "emphasis": "Record the appearance of the glans and meatus, the frenular artery management, and the histology plan." }
+  ],
+  "steps_local": {
+    "step.circ.block": {
+      "id": "step.circ.block", "kind": "prep",
+      "title": "Penile block (dorsal nerve and ring block)",
+      "why": "A good block makes the operation painless under local anaesthetic and reduces post-operative pain after a general anaesthetic. The penis is supplied by end arteries, which is why adrenaline is avoided.",
+      "how": [
+        "Calculate the maximum safe dose of plain local anaesthetic for the patient's weight before drawing up.",
+        "Infiltrate a ring block around the base of the penis subcutaneously, and inject either side of the midline beneath Buck's fascia on the dorsum to block the dorsal nerves, aspirating before each injection.",
+        "Wait for the block to work and test it before the first incision."
+      ],
+      "structuresAtRisk": ["Dorsal vessels (intravascular injection)", "Corpora cavernosa (needle too deep)"],
+      "pitfalls": [
+        "Using a pre-mixed local anaesthetic with adrenaline from the wrong tray.",
+        "Starting the incision before the block has taken."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.adhesions-inspect": {
+      "id": "step.circ.adhesions-inspect", "kind": "checkpoint",
+      "title": "Free adhesions and inspect the glans and meatus",
+      "why": "The prepuce may hide adhesions, smegma, lichen sclerosus, meatal stenosis or a tumour. They must be seen before any skin is removed, because the findings change the operation.",
+      "how": [
+        "If the prepuce will not retract, make a short dorsal slit under vision to allow full retraction, keeping the blade off the glans.",
+        "Separate preputial adhesions gently with a blunt probe or swab.",
+        "Inspect the entire glans, the coronal sulcus and the meatus; calibrate the meatus if narrowing is suspected."
+      ],
+      "structuresAtRisk": ["Glans", "Meatus"],
+      "pitfalls": [
+        "A dorsal slit blade passed blindly beneath a tight prepuce, lacerating the glans or entering the meatus."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.lesion-bailout": {
+      "id": "step.circ.lesion-bailout", "kind": "bailout", "critical": true,
+      "title": "Suspicious lesion: biopsy and stop",
+      "why": "Penile cancer often presents under a phimosis. A circumcision that cuts through or near an invasive tumour loses the margins and the staging, and makes organ-sparing treatment harder.",
+      "how": [
+        "If the glans or inner prepuce shows an ulcer, mass, or suspicious plaque, take a representative biopsy and do not proceed to formal circumcision.",
+        "A dorsal slit can be left to allow access and hygiene.",
+        "Refer to the penile cancer MDT, with the histology, for staging and definitive treatment."
+      ],
+      "structuresAtRisk": ["Glans (tumour)", "Inguinal lymph nodes (staging lost)"],
+      "pitfalls": [
+        "Completing the circumcision and sending the prepuce as the 'biopsy'."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.outer-incision": {
+      "id": "step.circ.outer-incision", "kind": "access", "critical": true,
+      "title": "Mark and incise the outer prepuce at the corona",
+      "why": "The outer incision decides how much shaft skin remains. Marked with the prepuce in its natural, unretracted position, it removes the prepuce and preserves the shaft; cut with the prepuce pulled forward, it takes shaft skin that cannot be replaced.",
+      "how": [
+        "With the prepuce unretracted and the penis untensioned, mark a circumferential line on the outer skin at the level of the coronal sulcus, following its V-shape ventrally at the frenulum.",
+        "Incise along the marked line through skin only, with the scalpel, staying superficial to the dartos.",
+        "Coagulate skin edge bleeders with bipolar as you go."
+      ],
+      "structuresAtRisk": ["Shaft skin", "Dorsal neurovascular bundle (too-deep incision)"],
+      "pitfalls": [
+        "Pulling the prepuce forward over the glans before marking, which moves shaft skin into the excision."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.inner-incision": {
+      "id": "step.circ.inner-incision", "kind": "access",
+      "title": "Mark and incise the inner prepuce",
+      "why": "Too long an inner cuff swells and looks poor; too short makes the anastomosis tight against the glans and risks injury to the sulcus. A cuff of a few millimetres behind the corona heals best.",
+      "how": [
+        "Retract the prepuce fully and mark a line on the inner prepuce a few millimetres proximal to the coronal sulcus, parallel to it, sparing the frenulum ventrally.",
+        "Incise through mucosa only, with the glans protected."
+      ],
+      "structuresAtRisk": ["Coronal sulcus and glans", "Frenulum and urethra ventrally"],
+      "pitfalls": [
+        "Cutting the inner incision against the corona, leaving nothing to suture to."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.excise": {
+      "id": "step.circ.excise", "kind": "resection",
+      "title": "Excise the sleeve of prepuce",
+      "why": "The sleeve is removed in the plane superficial to Buck's fascia. Staying in this plane keeps the dorsal neurovascular bundle and the urethra out of the way and keeps bleeding small.",
+      "how": [
+        "Divide the sleeve of skin between the two incisions dorsally in the midline, then excise it circumferentially in the plane just beneath the dartos.",
+        "Ventrally, take the frenular tissue carefully, identifying the frenular artery and clamping and ligating it.",
+        "Keep the dissection superficial to Buck's fascia throughout."
+      ],
+      "structuresAtRisk": ["Dorsal neurovascular bundle", "Frenular artery", "Urethra"],
+      "pitfalls": [
+        "Dissecting deep on the dorsum into the dorsal vein, causing troublesome bleeding.",
+        "Ventral diathermy close to the urethra."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.circ.anastomosis": {
+      "id": "step.circ.anastomosis", "kind": "reconstruction",
+      "title": "Skin-to-mucosa anastomosis",
+      "why": "Sutures placed in quadrants first spread the skin evenly and prevent a twisted or uneven result; the ventral frenular stitch closes the area that bleeds most.",
+      "how": [
+        "Place a ventral frenular suture (horizontal mattress or U-stitch) incorporating the frenular area, then a dorsal midline suture, then sutures at three and nine o'clock.",
+        "Close the gaps between with interrupted fine absorbable sutures, taking skin and mucosa only.",
+        "Check the result: no rotation, no excess skin, no tension, and the coronal sulcus visible all the way round."
+      ],
+      "structuresAtRisk": ["Urethra (deep ventral suture)"],
+      "pitfalls": [
+        "Deep ventral bites that catch the urethra.",
+        "Tight continuous sutures that strangle the edges as oedema develops."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

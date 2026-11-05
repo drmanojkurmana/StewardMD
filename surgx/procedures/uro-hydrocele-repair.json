@@ -1,0 +1,199 @@
+{
+  "id": "uro-hydrocele-repair",
+  "title": "Hydrocele repair (Jaboulay or Lord)",
+  "subtitle": "Image the testis first, then choose the repair for the sac",
+  "system": "urology",
+  "aliases": ["hydrocelectomy", "Jaboulay procedure", "eversion of the sac", "Lord's plication", "adult hydrocele repair"],
+  "estMinutes": 40,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "baus-hydrocele", "org": "British Association of Urological Surgeons (BAUS)", "title": "Removal of a hydrocele (patient information leaflet)", "year": 2023, "url": "https://www.baus.org.uk/patients/information_leaflets/", "accessed": "2026-11-04" },
+    { "id": "eau-testis", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Testicular Cancer", "year": 2024, "url": "https://uroweb.org/guidelines/testicular-cancer", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Symptomatic primary (idiopathic) hydrocele in an adult: discomfort, size, cosmetic concern or difficulty with clothing or activity.",
+      "Hydrocele large enough to prevent examination of the testis, after ultrasound has shown a normal testis.",
+      "Secondary hydrocele only after the underlying cause has been identified and treated.",
+      "Filarial hydrocele in endemic regions, after antifilarial treatment per local programme guidance; the sac is often thick and calls for excision."
+    ],
+    "contraindications": [
+      "An intratesticular mass or a testis that cannot be assessed on ultrasound: no scrotal operation until a tumour is excluded.",
+      "Active scrotal infection or epididymo-orchitis.",
+      "A communicating hydrocele (hernial sac in continuity), which needs an inguinal approach.",
+      "Small, asymptomatic hydroceles do not need surgery."
+    ],
+    "preparation": [
+      "Scrotal ultrasound of both testes in every adult before repair.",
+      "Review anticoagulant and antiplatelet drugs; scrotal haematoma is the main complication and is more likely in anticoagulated patients.",
+      "Consent: haematoma (which may need drainage), infection, recurrence, persistent swelling for weeks, chronic scrotal pain, injury to the epididymis or vas with possible effect on fertility, and rarely testicular atrophy.",
+      "Discuss that the scrotum will be swollen and bruised for some weeks after surgery."
+    ],
+    "positioning": [
+      "Supine, legs slightly apart; the penis taped up onto the abdomen out of the field."
+    ],
+    "equipment": [
+      "Minor general set with fine dissecting scissors and forceps, bipolar diathermy.",
+      "Absorbable sutures for the sac, dartos and skin.",
+      "Scrotal support or close-fitting underwear and a fluffy gauze dressing."
+    ],
+    "anatomy": [
+      "A primary hydrocele is fluid within the tunica vaginalis, the closed peritoneal remnant that covers the front and sides of the testis and epididymis.",
+      "The layers from skin inwards are scrotal skin, dartos, external spermatic fascia, cremasteric fascia and muscle, internal spermatic fascia, then the parietal tunica vaginalis.",
+      "The epididymis lies posterolateral to the testis and the vas runs medially and upwards from its tail; both lie at the back of the sac where it is reflected onto the testis.",
+      "The blood supply of the testis enters at its posterior border with the cord; dissection behind the testis risks it."
+    ],
+    "criticalSafety": [
+      "Never open a scrotum for a hydrocele without an ultrasound that shows a normal testis.",
+      "An unexpected testicular mass at operation is a reason to stop, not to proceed with a scrotal orchidectomy.",
+      "Meticulous haemostasis of the sac edges and dartos: the scrotum is a large, distensible space that can hold a large haematoma.",
+      "Keep the epididymis and vas in view whenever the sac is excised or plicated near the back of the testis."
+    ],
+    "structuresAtRisk": [
+      "Epididymis",
+      "Vas deferens",
+      "Testicular blood supply at the posterior border and cord",
+      "Testis (unrecognised tumour)"
+    ],
+    "commonErrors": [
+      "Dissecting the sac from the dartos widely, opening a large raw space that bleeds.",
+      "Excising sac close to the epididymis, injuring it or the vas.",
+      "Leaving the cut sac edges unsecured, so they ooze into the scrotum.",
+      "Twisting the testis when replacing it, after a Jaboulay eversion."
+    ],
+    "complications": [
+      "Scrotal haematoma, the most common complication, occasionally needing surgical drainage.",
+      "Wound and scrotal infection.",
+      "Recurrence of the hydrocele.",
+      "Persistent scrotal swelling and induration that may take weeks to settle.",
+      "Chronic scrotal pain.",
+      "Epididymal injury with obstruction, rarely testicular atrophy."
+    ],
+    "postop": [
+      "Scrotal support and ice packs for the first days to limit swelling.",
+      "Day surgery in most patients; review if the scrotum becomes rapidly enlarging, tense or very painful, which suggests haematoma.",
+      "Advise that swelling and bruising may last several weeks and that the testis may feel firm while it settles.",
+      "Return to work and activity once comfortable; avoid heavy lifting and strenuous activity in the early period.",
+      "Follow up any unexpected finding or abnormal histology."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the side on the awake patient; for bilateral hydroceles record whether both are being repaired." },
+    { "ref": "step.uro.scrotal-imaging-check", "emphasis": "A large hydrocele hides the testis from examination; the ultrasound is the only proof that it is normal." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Clean procedure: antibiotic prophylaxis per local policy, not routinely." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.hyd.incision" },
+    { "ref": "step.hyd.deliver" },
+    { "ref": "step.hyd.open-inspect" },
+    { "ref": "step.hyd.mass-bailout" },
+    { "ref": "step.hyd.sac-repair" },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the cut edge of the sac, the dartos and the skin edges; bleeding points in the scrotum are small and many, and each one matters." },
+    { "ref": "step.hyd.replace-close" },
+    { "ref": "step.core.specimen", "emphasis": "Send excised sac for histology when it is thick, irregular or the cause is uncertain; record 'none sent' after a Lord's plication." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure", "emphasis": "Absorbable interrupted or continuous skin sutures; a fluffy gauze and scrotal support give gentle compression." },
+    { "ref": "step.core.debrief", "emphasis": "Record the technique used, the appearance of the testis and epididymis, and the haematoma warning given to the patient." }
+  ],
+  "steps_local": {
+    "step.hyd.incision": {
+      "id": "step.hyd.incision", "kind": "access",
+      "title": "Scrotal incision through the dartos",
+      "why": "A transverse incision along the skin creases, between visible vessels, heals with the least scarring and bleeding; the dartos is a vascular muscle layer, and the plane beneath it determines how much the scrotum bleeds afterwards.",
+      "how": [
+        "Steady the hydrocele by stretching the scrotal skin over it with the non-dominant hand.",
+        "Make a transverse incision over the anterior surface, avoiding visible skin vessels, or use a median raphe incision for bilateral repair.",
+        "Divide the dartos with diathermy until the shiny outer surface of the hydrocele sac is seen."
+      ],
+      "structuresAtRisk": ["Scrotal skin vessels", "Hydrocele sac (opened too early, losing the plane)"],
+      "pitfalls": [
+        "Cutting through the sac in the same stroke, collapsing it before the plane has been found."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hyd.deliver": {
+      "id": "step.hyd.deliver", "kind": "dissection",
+      "title": "Delivering the sac (Jaboulay) or preserving the plane (Lord)",
+      "why": "The choice of repair decides the dissection. Jaboulay needs the sac delivered so it can be everted; Lord's plication works through a small opening without separating the sac from the dartos, which is why it bleeds less.",
+      "how": [
+        "Jaboulay: free the intact sac from the dartos with blunt dissection in the avascular plane, and deliver the sac with the testis through the incision.",
+        "Lord: do not dissect around the sac; open it in situ and deliver only the testis through a small opening.",
+        "Choose Lord for thin-walled, small to moderate hydroceles; choose Jaboulay, with or without excision, for large or thick-walled sacs."
+      ],
+      "structuresAtRisk": ["Dartos vessels", "Cord at the upper pole of the sac"],
+      "pitfalls": [
+        "Choosing Lord for a large, thick sac, which plicates into a bulky mass and recurs.",
+        "Wide blunt dissection in the scrotum for a Lord repair."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hyd.open-inspect": {
+      "id": "step.hyd.open-inspect", "kind": "checkpoint", "critical": true,
+      "title": "Open the sac, drain the fluid and inspect the testis",
+      "why": "This is the first direct look at the testis and epididymis, and the last chance to recognise that the problem is not a simple hydrocele.",
+      "how": [
+        "Open the sac anteriorly, away from the testis, and drain the fluid, noting its colour: clear and straw-coloured is expected; blood, pus or chylous fluid needs explanation.",
+        "Inspect and palpate the testis and epididymis; identify the epididymis and vas posteriorly before cutting further.",
+        "Record the appearance of the testis, epididymis and fluid."
+      ],
+      "structuresAtRisk": ["Testis (incised when opening a tense sac)", "Epididymis"],
+      "pitfalls": [
+        "Opening a tense sac with a deep stab and cutting the testis beneath it.",
+        "Not feeling the testis because the ultrasound was normal."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hyd.mass-bailout": {
+      "id": "step.hyd.mass-bailout", "kind": "bailout", "critical": true,
+      "title": "Unexpected testicular mass: stop",
+      "why": "Removing a testicular cancer through the scrotum breaches the lymphatic drainage and may change staging and treatment. An unexpected mass at hydrocele repair is managed as a possible tumour, not removed on the spot.",
+      "how": [
+        "Do not biopsy the testis or perform an orchidectomy through the scrotal incision.",
+        "Close the scrotum and inform the patient after recovery.",
+        "Arrange tumour markers, ultrasound review and urgent discussion at the urology cancer MDT, with inguinal exploration as needed.",
+        "Record the finding and the decision clearly."
+      ],
+      "structuresAtRisk": ["Testis and scrotal skin (tumour seeding)"],
+      "pitfalls": [
+        "Proceeding to a scrotal orchidectomy because the patient is already asleep."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hyd.sac-repair": {
+      "id": "step.hyd.sac-repair", "kind": "reconstruction", "critical": true,
+      "title": "Jaboulay eversion or Lord plication",
+      "why": "Both repairs stop the secreting tunica vaginalis from re-forming a closed sac: Jaboulay by turning it inside out behind the testis, Lord by gathering it into a collar. Each fails if done too tightly round the cord or too close to the epididymis.",
+      "how": [
+        "Jaboulay: trim excess sac if very large, leaving a margin, then evert the remaining sac behind the testis and cord and approximate its edges loosely behind the cord with absorbable sutures, without constricting it.",
+        "Lord: place a series of radial plicating absorbable sutures from the cut edge of the tunica to its reflection at the junction with the testis, around the circumference, and tie them to gather the sac into a ruff.",
+        "With either technique, keep the epididymis and vas in view and outside the sutures.",
+        "Over-sew or coagulate any cut edge of the sac carefully; it bleeds from its whole length."
+      ],
+      "structuresAtRisk": ["Epididymis", "Vas deferens", "Cord vessels (constriction behind the cord)"],
+      "pitfalls": [
+        "Closing the everted sac tightly round the cord, causing venous congestion of the testis.",
+        "Plication sutures that catch the epididymis."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hyd.replace-close": {
+      "id": "step.hyd.replace-close", "kind": "closure",
+      "title": "Replace the testis and close the dartos",
+      "why": "A testis replaced with a twist, or into a dead space in the scrotum, causes pain and haematoma. A closed dartos layer is the haemostatic layer; the skin is not.",
+      "how": [
+        "Replace the testis in its normal orientation, with the epididymis posterior and no twist in the cord.",
+        "Close the dartos with a continuous absorbable suture, obliterating the space without strangulating tissue.",
+        "Consider a small drain only when haemostasis is uncertain in a very large cavity, and record why."
+      ],
+      "structuresAtRisk": ["Spermatic cord (torsion on replacement)"],
+      "pitfalls": [
+        "Closing skin only, leaving the dartos to bleed into the scrotum."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

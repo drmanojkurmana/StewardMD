@@ -1,0 +1,239 @@
+{
+  "id": "uro-radical-nephrectomy",
+  "title": "Radical nephrectomy (open and laparoscopic principles)",
+  "subtitle": "Outside Gerota's fascia, artery before vein, specimen out intact",
+  "system": "urology",
+  "aliases": ["RN", "laparoscopic radical nephrectomy", "LRN", "open radical nephrectomy", "nephrectomy for renal cell carcinoma"],
+  "estMinutes": 180,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-rcc", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Renal Cell Carcinoma", "year": 2024, "url": "https://uroweb.org/guidelines/renal-cell-carcinoma", "accessed": "2026-11-04" },
+    { "id": "aua-renal-mass", "org": "American Urological Association (AUA)", "title": "Renal Mass and Localized Renal Cancer: Evaluation, Management, and Follow-up: AUA Guideline", "year": 2021, "url": "https://www.auanet.org/guidelines-and-quality/guidelines/renal-mass-and-localized-renal-cancer-evaluation-management-and-follow-up", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["imdc_rcc", "mskcc_rcc", "ckdepi", "caprini", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Localised renal cell carcinoma not suitable for partial nephrectomy because of tumour size, location or complexity, as decided by the MDT.",
+      "Locally advanced renal cell carcinoma, including tumours with renal vein or inferior vena caval thrombus (with appropriate vascular planning).",
+      "Selected patients with metastatic disease for cytoreductive nephrectomy, as decided by the MDT in the context of systemic therapy.",
+      "Other malignant renal tumours where radical removal of the kidney is indicated; upper tract urothelial cancer needs nephroureterectomy, not this operation."
+    ],
+    "contraindications": [
+      "A tumour suitable for nephron-sparing surgery, where partial nephrectomy is the guideline-preferred option, particularly for small tumours.",
+      "A solitary kidney or significant chronic kidney disease where removal would mean dialysis, unless no alternative exists and the patient has accepted it.",
+      "Fitness that does not allow major surgery; active surveillance or ablation may be preferred for small masses in frail patients.",
+      "Laparoscopic approach relatively contraindicated for large tumours with extensive local invasion or high-level caval thrombus; the open approach is then chosen."
+    ],
+    "preparation": [
+      "MDT discussion with staging: contrast CT of the abdomen and chest; MRI where venous thrombus extent is uncertain.",
+      "Assessment of the contralateral kidney's anatomy and function, and estimated GFR; split function where uncertain.",
+      "Cross-sectional imaging reviewed for the number of renal arteries and veins, venous tributaries, adrenal involvement, nodes and the level of any thrombus.",
+      "Group and crossmatch per local policy and the expected blood loss; VTE risk assessment.",
+      "Consent: bleeding and transfusion; injury to bowel, spleen, pancreas, liver, duodenum, vena cava and aorta; pneumothorax; conversion from laparoscopic to open; chronic kidney disease and its long-term implications; wound complications and hernia; positive margins and recurrence; and death."
+    ],
+    "positioning": [
+      "Laparoscopic transperitoneal: modified flank (45 to 60 degrees), operated side up, kidney rest or bridge raised under the flank, table flexed, with the arms supported and the axilla protected.",
+      "Open flank: full lateral with the table broken; open anterior (subcostal or chevron): supine with a bolster under the flank; a thoracoabdominal approach for selected large upper pole tumours.",
+      "Strap the patient securely before tilting; pad the dependent shoulder, hip and peroneal nerve, and place an axillary roll."
+    ],
+    "equipment": [
+      "Laparoscopic set: camera, ports, atraumatic graspers, energy device, suction-irrigation, locking polymer clips and vascular staplers, and a specimen retrieval bag.",
+      "Open set: self-retaining retractor suitable for the flank or upper abdomen, long instruments, vascular clamps and vascular sutures.",
+      "Vascular instruments open on the back table in every case, laparoscopic or open, for immediate conversion.",
+      "Cell salvage per local policy and discussion of the oncological situation."
+    ],
+    "anatomy": [
+      "Gerota's (perirenal) fascia encloses the kidney, perirenal fat and adrenal; a radical nephrectomy removes the kidney within it, so the dissection stays outside the fascia.",
+      "On the right, the hepatic flexure and duodenum lie anterior to the kidney and must be mobilised (Kocher manoeuvre) to expose the inferior vena cava and the short right renal vein.",
+      "On the left, the splenic flexure, spleen and tail of pancreas lie anterior and superior; the long left renal vein receives the gonadal vein inferiorly, the adrenal vein superiorly and a lumbar vein posteriorly.",
+      "The renal artery usually lies posterior and slightly superior to the renal vein; multiple arteries are common and are seen on the pre-operative CT.",
+      "The ureter and gonadal vein lie on psoas at the lower pole and lead the dissection up to the hilum."
+    ],
+    "criticalSafety": [
+      "Know the number of renal arteries and veins from the CT before starting, and count them in the operation.",
+      "Ligate the artery before the vein. If the vein remains distended after arterial ligation, there is another artery.",
+      "Never divide what you have not identified: the superior mesenteric artery and the aorta can be mistaken for the left renal artery, and the vena cava for the right renal vein.",
+      "Vascular instruments open and a clear conversion plan agreed before the hilum is dissected.",
+      "Remove the specimen intact in a bag; do not morcellate a cancer."
+    ],
+    "structuresAtRisk": [
+      "Inferior vena cava and right renal vein",
+      "Aorta and superior mesenteric artery",
+      "Duodenum (right)",
+      "Spleen and tail of pancreas (left)",
+      "Liver and colon",
+      "Diaphragm and pleura",
+      "Lumbar veins and the left adrenal and gonadal veins"
+    ],
+    "commonErrors": [
+      "Entering Gerota's fascia and dissecting on the tumour.",
+      "Taking the vein first and causing venous congestion and bleeding from the kidney.",
+      "Missing an accessory or lower pole artery that was visible on the CT.",
+      "Splenic capsular tear from traction on the splenocolic attachments.",
+      "Converting too late, after significant blood loss, rather than early."
+    ],
+    "complications": [
+      "Haemorrhage, intra-operative or post-operative, needing transfusion or return to theatre.",
+      "Visceral injury: spleen, pancreas (pancreatic leak), duodenum, colon, liver.",
+      "Pneumothorax from diaphragmatic injury.",
+      "Chylous ascites after hilar lymphatic disruption.",
+      "Chronic kidney disease in the remaining kidney over time.",
+      "Wound infection, incisional hernia, flank bulge from intercostal nerve injury after flank incision.",
+      "VTE, chest infection, ileus."
+    ],
+    "postop": [
+      "Enhanced recovery: early mobilisation and feeding, multimodal analgesia, VTE prophylaxis per risk assessment.",
+      "Monitor haemoglobin, renal function and urine output; a rise in creatinine is expected and the trend matters more than the single value.",
+      "Watch for signs of bleeding, pancreatic leak (on the left) and chest complications.",
+      "Review the histology at MDT for stage, grade and margins, and plan follow-up imaging per guideline risk group.",
+      "Long-term advice on protecting the remaining kidney: blood pressure control, avoidance of nephrotoxic drugs, and renal function monitoring."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm the side against the CT, and that partial nephrectomy has been considered and the reason it is not being done is recorded." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Staging complete, MDT outcome documented, contralateral kidney function confirmed, and thrombus level known." },
+    { "ref": "step.core.timeout", "emphasis": "State the number of renal arteries and veins on the CT, the conversion plan, and blood availability." },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Flank or modified flank with the table flexed: check the dependent arm, the axillary roll and the peroneal nerve, and strap the patient before testing the tilt." },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare and drape wide enough to convert to an open incision without re-preparing." },
+    { "ref": "step.rn.access" },
+    { "ref": "step.onco.tumour-handling", "emphasis": "The specimen is handled by Gerota's fascia and the surrounding fat, never by the tumour." },
+    { "ref": "step.rn.mobilise" },
+    { "ref": "step.rn.ureter-gonadal" },
+    { "ref": "step.rn.hilum" },
+    { "ref": "step.rn.vessel-ligation" },
+    { "ref": "step.rn.vascular-bailout" },
+    { "ref": "step.rn.upper-pole-adrenal" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Bag the specimen intact and extract through an incision large enough for it; no morcellation. In the open operation, lift it out as one piece." },
+    { "ref": "step.onco.specimen-orientation" },
+    { "ref": "step.core.haemostasis", "emphasis": "Lower the pneumoperitoneum pressure to look at the renal bed, adrenal and hilar stumps, the spleen and the liver." },
+    { "ref": "step.abd.drain", "emphasis": "A drain is not routine; consider it after a difficult dissection, a pancreatic tail injury or a lymphadenectomy." },
+    { "ref": "step.core.counts" },
+    { "ref": "step.abd.mass-closure", "emphasis": "Open: close the flank or subcostal incision in layers. Laparoscopic: close the fascia of the extraction site and of the larger ports." },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record the vessels found and how they were ligated, adrenal and node decisions, any visceral injury, and the remaining kidney's function plan." }
+  ],
+  "steps_local": {
+    "step.rn.access": {
+      "id": "step.rn.access", "kind": "access",
+      "title": "Access: laparoscopic ports or open incision",
+      "why": "The access decides how easily the hilum can be reached and controlled. Laparoscopic is standard for most tumours that do not need an open approach; open access is chosen for large, invasive or thrombus-bearing tumours, and is the fallback for every laparoscopic case.",
+      "how": [
+        "Laparoscopic transperitoneal: establish pneumoperitoneum, place the camera port lateral to the rectus at or near the umbilicus, with working ports to triangulate on the hilum; on the right add a liver retractor port.",
+        "Retroperitoneoscopic: develop the retroperitoneal space with a balloon below the twelfth rib, giving direct access to the posterior hilum without mobilising bowel.",
+        "Open: a flank incision through or above the twelfth rib, or an anterior subcostal or chevron incision for large tumours and caval access.",
+        "Survey the abdomen for unexpected metastatic disease before committing."
+      ],
+      "structuresAtRisk": ["Bowel and major vessels (port and needle entry)", "Pleura (flank incision above the twelfth rib)", "Intercostal and subcostal nerves"],
+      "pitfalls": [
+        "Ports placed too close to the hilum to work on it.",
+        "A flank incision that runs into the pleura without recognition."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rn.mobilise": {
+      "id": "step.rn.mobilise", "kind": "dissection", "critical": true,
+      "title": "Reflecting the colon and the overlying viscera",
+      "why": "The kidney lies behind the colon and, on each side, a different organ that can be injured: the duodenum on the right, the spleen and pancreas on the left. A correct plane makes the hilum appear; a wrong one makes these organs bleed or leak.",
+      "how": [
+        "Incise the line of Toldt and reflect the colon medially in the plane between the mesocolon and Gerota's fascia.",
+        "Right: mobilise the hepatic flexure, divide the triangular and coronary attachments as needed and lift the liver, then Kocherise the duodenum to expose the vena cava.",
+        "Left: divide the splenorenal and splenocolic attachments so the spleen and tail of pancreas fall medially with the colon, avoiding traction on the splenic capsule.",
+        "Keep Gerota's fascia intact on the kidney side throughout."
+      ],
+      "structuresAtRisk": ["Duodenum", "Spleen", "Tail of pancreas", "Colon and its mesentery", "Liver"],
+      "pitfalls": [
+        "Dissecting in the mesocolon and devascularising the colon.",
+        "A thermal injury to the duodenum from the energy device, presenting days later."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rn.ureter-gonadal": {
+      "id": "step.rn.ureter-gonadal", "kind": "dissection",
+      "title": "Ureter and gonadal vein: lift the lower pole",
+      "why": "The ureter and gonadal vein on psoas are the most reliable landmarks in the retroperitoneum. Following them up leads to the hilum, and lifting the lower pole on the ureter puts the hilum under tension where it can be seen.",
+      "how": [
+        "Identify the gonadal vein and the ureter on psoas below the lower pole; on the left the gonadal vein leads directly to the left renal vein.",
+        "Lift the ureter with the lower pole fat, dissecting on psoas and staying lateral to the great vessels.",
+        "Divide the ureter between clips once the hilum is under control, or earlier if it helps exposure, and include it with the specimen.",
+        "Preserve the gonadal vein on the right where possible; on the left it may be clipped and divided where it joins the renal vein."
+      ],
+      "structuresAtRisk": ["Gonadal vein (avulsion from the vena cava on the right)", "Inferior vena cava", "Genitofemoral nerve on psoas"],
+      "pitfalls": [
+        "Traction on the right gonadal vein tearing it off the vena cava.",
+        "Mistaking the gonadal vein for the ureter."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rn.hilum": {
+      "id": "step.rn.hilum", "kind": "dissection", "critical": true,
+      "title": "Hilar dissection: identify every artery and vein",
+      "why": "The hilum is where the operation is won or lost. Every vessel counted on the CT must be found, identified for what it is, and dissected free enough to ligate safely before any is divided.",
+      "how": [
+        "With the lower pole lifted, dissect the hilum from below, defining the renal vein first and then the artery behind and usually above it.",
+        "On the left, identify and divide the gonadal, adrenal and lumbar tributaries of the renal vein as needed to free it and reach the artery behind.",
+        "On the right, the renal vein is short and joins the vena cava directly; identify the artery between the vena cava and the vein, or behind the vena cava.",
+        "Count the vessels found against the CT; palpate or inspect the renal vein for tumour thrombus before ligation."
+      ],
+      "structuresAtRisk": ["Renal artery and vein", "Inferior vena cava", "Aorta and superior mesenteric artery", "Lumbar veins"],
+      "pitfalls": [
+        "Dissecting medially on the left past the aorta and finding the superior mesenteric artery.",
+        "A lumbar vein torn behind the left renal vein, which then retracts and bleeds."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rn.vessel-ligation": {
+      "id": "step.rn.vessel-ligation", "kind": "resection", "critical": true,
+      "title": "Ligation: artery first, then vein",
+      "why": "Taking the artery first stops inflow while the vein drains the kidney; taking the vein first leaves a kidney full of blood with nowhere to go, and it bleeds. A vein that stays distended after the artery is ligated means a missed artery.",
+      "how": [
+        "Ligate the renal artery with locking polymer clips or a vascular stapler, leaving adequate cuff on the patient side, and divide it.",
+        "Wait and look: the renal vein should flatten. If it does not, find the other artery before going further.",
+        "Ligate and divide the renal vein with a vascular stapler or clips; on the right, keep the staple line clear of the vena cava.",
+        "Check both stumps under lowered pressure before moving on."
+      ],
+      "structuresAtRisk": ["Renal artery stump", "Renal vein and inferior vena cava", "Aorta"],
+      "pitfalls": [
+        "Firing a stapler across a clip, which causes a stapler misfire and bleeding.",
+        "Taking the vein while it is still distended."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rn.vascular-bailout": {
+      "id": "step.rn.vascular-bailout", "kind": "bailout", "critical": true,
+      "title": "Major bleeding or failure to progress: control and convert",
+      "why": "Conversion is not a failure; delayed conversion is. A vascular injury at the hilum can lose blood faster than it can be replaced, and the way out is immediate pressure, resuscitation and an open field with the right help.",
+      "how": [
+        "Apply direct pressure with a grasper and swab or, open, with a finger or swab stick; increase pneumoperitoneum briefly if it helps while the team prepares.",
+        "Tell the anaesthetist, call for senior and vascular help, and get blood and cell salvage ready.",
+        "Convert to open with pressure maintained; obtain proximal and distal control before attempting repair of the vena cava or a major vessel.",
+        "Convert also for failure to progress, unclear anatomy at the hilum, or adhesions that prevent a safe plane."
+      ],
+      "structuresAtRisk": ["Inferior vena cava", "Aorta", "Renal vessels", "Lumbar veins"],
+      "pitfalls": [
+        "Applying clips blindly into a pool of blood.",
+        "Waiting for the anaesthetist to say the patient is unstable before converting."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.rn.upper-pole-adrenal": {
+      "id": "step.rn.upper-pole-adrenal", "kind": "resection",
+      "title": "Upper pole and adrenal: decide, then free the specimen",
+      "why": "Routine adrenalectomy is not needed when imaging shows the adrenal is uninvolved; removing it adds bleeding and morbidity. Where the tumour involves the adrenal or upper pole, it comes en bloc. Either way the specimen must be freed outside Gerota's fascia.",
+      "how": [
+        "Decide on the adrenal from the CT and the operative findings: spare it if uninvolved, remove it en bloc if involved or inseparable.",
+        "To spare the adrenal, dissect between the upper pole and the adrenal, taking care with adrenal vessels; to remove it, ligate the adrenal vein (on the right, directly into the vena cava) and free it with the kidney.",
+        "Free the posterior and lateral attachments of Gerota's fascia from psoas and the diaphragm, preserving the fascia over the tumour.",
+        "Perform lymph node dissection only where nodes are enlarged on imaging or at operation, as the guidelines advise."
+      ],
+      "structuresAtRisk": ["Adrenal vein and the vena cava (right)", "Inferior phrenic vessels", "Diaphragm and pleura", "Spleen and liver"],
+      "pitfalls": [
+        "Tearing the short right adrenal vein off the vena cava.",
+        "Breaching Gerota's fascia over an upper pole tumour during the final mobilisation."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

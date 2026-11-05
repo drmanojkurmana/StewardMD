@@ -1,0 +1,222 @@
+{
+  "id": "uro-inguinal-orchidectomy",
+  "title": "Radical inguinal orchidectomy for testicular tumour",
+  "subtitle": "Markers first, inguinal approach, clamp the cord before the testis moves",
+  "system": "urology",
+  "aliases": ["radical orchidectomy", "inguinal orchiectomy", "radical orchiectomy", "orchidectomy for testicular cancer"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "eau-testis", "org": "European Association of Urology (EAU)", "title": "EAU Guidelines on Testicular Cancer", "year": 2024, "url": "https://uroweb.org/guidelines/testicular-cancer", "accessed": "2026-11-04" },
+    { "id": "nccn-testis", "org": "National Comprehensive Cancer Network (NCCN)", "title": "NCCN Clinical Practice Guidelines in Oncology: Testicular Cancer", "year": 2025, "url": "https://www.nccn.org/guidelines/category_1", "accessed": "2026-11-04" },
+    { "id": "campbell", "org": "Elsevier", "title": "Campbell-Walsh-Wein Urology", "edition": "12th edition", "year": 2020, "url": "https://shop.elsevier.com/", "accessed": "2026-11-04" }
+  ],
+  "calcs": ["igcccg", "clavien_dindo"],
+  "chapters": {
+    "indications": [
+      "Testicular mass on examination and ultrasound suspicious of a germ cell or other malignant testicular tumour.",
+      "Diagnosis, local control and staging of testicular cancer; it is the first treatment in almost every case.",
+      "In life-threatening metastatic disease, chemotherapy may start first on the basis of markers and imaging, with orchidectomy delayed, as decided by the MDT."
+    ],
+    "contraindications": [
+      "Scrotal approach: never used for a suspected testicular tumour.",
+      "Small tumours in a solitary testis or bilateral tumours, where testis-sparing surgery may be appropriate in a specialist centre.",
+      "Uncertain diagnosis where frozen section through an inguinal approach could spare the testis.",
+      "Life-threatening metastatic disease needing immediate chemotherapy."
+    ],
+    "preparation": [
+      "Scrotal ultrasound of both testes; tumour markers (AFP, beta-hCG and LDH) drawn before orchidectomy.",
+      "Staging CT of the chest, abdomen and pelvis, which may be done before or soon after surgery, without delaying the operation.",
+      "Offer semen cryopreservation before orchidectomy, and certainly before any further treatment; arrange it urgently if accepted.",
+      "Offer a testicular prosthesis, at the same operation or later.",
+      "Consent: bleeding and scrotal haematoma, infection, ilioinguinal nerve injury with numbness, chronic groin pain, effects on fertility and hormone levels, prosthesis complications if inserted, and the possibility that histology is benign.",
+      "Consider biopsy of the contralateral testis in men at high risk of germ cell neoplasia in situ (small atrophic testis, history of maldescent), per the guideline."
+    ],
+    "positioning": [
+      "Supine; the scrotum included in the field so the testis can be pushed up into the wound."
+    ],
+    "equipment": [
+      "Hernia-type set with self-retaining retractor.",
+      "Soft non-crushing clamp or a rubber sling for early cord control.",
+      "Non-absorbable ligatures for the cord stump, absorbable sutures for the aponeurosis and wound.",
+      "Testicular prosthesis of the chosen size if planned."
+    ],
+    "anatomy": [
+      "The testis drains by lymphatics along the testicular vessels to the retroperitoneal nodes at the renal hilum level; the scrotal skin drains to the inguinal nodes.",
+      "This is why the approach is inguinal: a scrotal incision opens a second lymphatic route and contaminates the scrotum.",
+      "The spermatic cord runs through the inguinal canal from the deep ring, lateral to the inferior epigastric vessels, to the superficial ring.",
+      "The ilioinguinal nerve lies on the cord in the canal under the external oblique aponeurosis; the genital branch of the genitofemoral nerve runs with the cord."
+    ],
+    "criticalSafety": [
+      "Inguinal approach only; never incise the scrotum or the tunica for a suspected tumour.",
+      "Control the cord with a soft clamp at the deep ring before handling the testis.",
+      "Ligate the cord high, at the deep ring, with the vas and the vessels ligated separately and a long non-absorbable marker suture left for later identification.",
+      "Markers drawn before the operation; fertility preservation offered before it."
+    ],
+    "structuresAtRisk": [
+      "Ilioinguinal nerve",
+      "Genital branch of the genitofemoral nerve",
+      "Inferior epigastric vessels at the deep ring",
+      "Floor of the inguinal canal (creating a hernia)",
+      "Scrotal skin (tumour contamination)"
+    ],
+    "commonErrors": [
+      "Delivering the testis before cord control, squeezing tumour cells into the lymphatics and veins.",
+      "Low ligation of the cord, leaving a long stump with tumour-bearing tissue.",
+      "Mass ligation of the cord, which can slip and bleed into the retroperitoneum.",
+      "Not offering sperm banking or a prosthesis.",
+      "Breaching the scrotal skin while delivering the testis."
+    ],
+    "complications": [
+      "Scrotal haematoma and retroperitoneal bleeding from a slipped cord ligature.",
+      "Wound infection.",
+      "Ilioinguinal nerve injury: numbness or chronic groin pain.",
+      "Prosthesis infection, extrusion or malposition.",
+      "Hypogonadism, particularly with a poorly functioning contralateral testis.",
+      "Psychological effects of loss of a testis."
+    ],
+    "postop": [
+      "Day case or overnight stay; scrotal support.",
+      "Repeat tumour markers after orchidectomy, timed to their half-lives, as the guideline describes, to judge clearance.",
+      "Ensure staging is complete and the case is discussed at the testicular cancer MDT with histology.",
+      "Check hormone levels and fertility status where indicated; follow up the contralateral testis.",
+      "Teach testicular self-examination of the remaining testis."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Confirm side with the patient and the ultrasound; record that sperm banking and a prosthesis were offered and the patient's decision." },
+    { "ref": "step.onco.mdt-check", "emphasis": "Markers drawn before the knife; staging planned or done; the operation is not delayed for staging." },
+    { "ref": "step.uro.scrotal-imaging-check", "emphasis": "Review the contralateral testis: a lesion there changes the plan." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis", "emphasis": "Prophylaxis per local policy, particularly if a prosthesis is to be inserted." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape", "emphasis": "Include the scrotum in the field." },
+    { "ref": "step.orch.incision" },
+    { "ref": "step.uro.cord-delivery", "emphasis": "Here the canal is opened, the cord is lifted at the pubic tubercle, and the ilioinguinal nerve is protected out of the way." },
+    { "ref": "step.orch.cord-clamp" },
+    { "ref": "step.onco.tumour-handling", "emphasis": "The testis is never squeezed or incised; it is handled through its coverings." },
+    { "ref": "step.orch.deliver" },
+    { "ref": "step.orch.doubt-bailout" },
+    { "ref": "step.orch.high-ligation" },
+    { "ref": "step.orch.prosthesis" },
+    { "ref": "step.onco.specimen-orientation", "emphasis": "Send the testis and cord intact with the cord end marked; never bivalve it in theatre." },
+    { "ref": "step.core.haemostasis", "emphasis": "Inspect the scrotal cavity and the cord stump; scrotal haematoma and retroperitoneal bleeding from the stump are the important bleeds." },
+    { "ref": "step.orch.canal-closure" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief", "emphasis": "Record the level of ligation, the marker suture, prosthesis details if inserted, and the plan for post-operative markers and MDT." }
+  ],
+  "steps_local": {
+    "step.orch.incision": {
+      "id": "step.orch.incision", "kind": "access",
+      "title": "Inguinal incision and opening of the canal",
+      "why": "The inguinal approach reaches the cord at the deep ring, where it can be controlled and ligated high, and keeps the scrotum untouched.",
+      "how": [
+        "Make an incision in the groin crease above and parallel to the inguinal ligament, from over the deep ring towards the pubic tubercle.",
+        "Divide Camper's and Scarpa's fascia and expose the external oblique aponeurosis and the superficial ring.",
+        "Open the aponeurosis in the line of its fibres through the superficial ring, protecting the ilioinguinal nerve beneath it."
+      ],
+      "structuresAtRisk": ["Ilioinguinal nerve (under the aponeurosis)", "Superficial epigastric vessels"],
+      "pitfalls": [
+        "Opening the aponeurosis with a deep cut that divides the nerve beneath."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.cord-clamp": {
+      "id": "step.orch.cord-clamp", "kind": "checkpoint", "critical": true,
+      "title": "Early cord control at the deep ring",
+      "why": "Clamping the cord before the testis is handled closes the venous and lymphatic exit from the tumour while it is being manipulated, which is the oncological principle of the operation.",
+      "how": [
+        "Dissect the cord up to the deep ring.",
+        "Apply a soft non-crushing clamp or a tightened rubber sling across the whole cord at the deep ring.",
+        "Only then begin to mobilise the testis."
+      ],
+      "structuresAtRisk": ["Inferior epigastric vessels", "Peritoneum at the deep ring (indirect sac)"],
+      "pitfalls": [
+        "Pulling the testis up into the wound to find the cord, before it is clamped."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.deliver": {
+      "id": "step.orch.deliver", "kind": "dissection",
+      "title": "Deliver the testis from the scrotum",
+      "why": "The testis comes up into the groin wound within its coverings. Pushing it up from below and dividing the gubernaculum delivers it without a scrotal incision and without breaching the tunica.",
+      "how": [
+        "Invaginate the scrotum with a hand from below to push the testis up the cord into the wound, while gentle traction is applied on the cord.",
+        "Divide the gubernacular attachment with diathermy, staying close to the testis and away from the scrotal skin.",
+        "Keep the tunica vaginalis intact around the testis."
+      ],
+      "structuresAtRisk": ["Scrotal skin (button-holed)", "Tunica vaginalis (breached over tumour)"],
+      "pitfalls": [
+        "Diathermy through the scrotal skin while dividing the gubernaculum."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.doubt-bailout": {
+      "id": "step.orch.doubt-bailout", "kind": "bailout",
+      "title": "Diagnostic doubt or solitary testis: inguinal exploration and frozen section",
+      "why": "Not every testicular lesion is malignant, and in a solitary testis or bilateral disease every millimetre of testis matters. The inguinal route with cord control allows a safe look and a frozen section without compromising a cancer operation.",
+      "how": [
+        "With the cord clamped and the field isolated with packs, open the tunica vaginalis and inspect the testis.",
+        "Excise the lesion for frozen section where testis-sparing surgery is being considered, with the agreement of the patient in advance.",
+        "Proceed to radical orchidectomy if the frozen section shows malignancy (outside the specialist testis-sparing setting) or is inconclusive and the consent covers it.",
+        "Seek senior help and follow the plan agreed at consent."
+      ],
+      "structuresAtRisk": ["Remaining testicular tissue", "Wound (tumour spill)"],
+      "pitfalls": [
+        "Opening the testis without cord control or field isolation.",
+        "Making an intra-operative decision that the patient has not consented to."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.high-ligation": {
+      "id": "step.orch.high-ligation", "kind": "resection", "critical": true,
+      "title": "High ligation and division of the cord",
+      "why": "The cord is the first route of spread. Ligating it at the deep ring removes as much as possible with the specimen, and a long non-absorbable marker makes it findable at any later retroperitoneal surgery.",
+      "how": [
+        "Separate the vas from the vessels at the deep ring.",
+        "Ligate the vas and the vessels separately, transfixing the vascular bundle, with non-absorbable ligatures.",
+        "Leave a long tail on the vascular ligature to mark the stump and allow it to retract into the deep ring.",
+        "Divide the cord distal to the ligatures and check the stump for bleeding before it retracts."
+      ],
+      "structuresAtRisk": ["Inferior epigastric vessels", "Cord stump (slipped ligature and retroperitoneal haematoma)"],
+      "pitfalls": [
+        "A single mass ligature on a bulky cord that slips once it retracts.",
+        "Ligation at the superficial ring, leaving a long stump."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.prosthesis": {
+      "id": "step.orch.prosthesis", "kind": "reconstruction",
+      "title": "Testicular prosthesis, if chosen",
+      "why": "Many men value a prosthesis, and it is easier to place at the time of orchidectomy. It is a foreign body in a recently operated field, so it is placed and secured in a way that keeps it low and uninfected.",
+      "how": [
+        "Change gloves and confirm the size with the patient's earlier choice.",
+        "Place the prosthesis in the scrotum through the inguinal wound, low in the cavity.",
+        "Secure it with a suture to the dartos at the scrotal base, and close the neck of the scrotum to prevent it riding up.",
+        "Record the type, size and batch."
+      ],
+      "structuresAtRisk": ["Scrotal skin (pressure and extrusion)"],
+      "pitfalls": [
+        "Placing a prosthesis into a cavity contaminated by a breached tumour or a haematoma."
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.orch.canal-closure": {
+      "id": "step.orch.canal-closure", "kind": "closure",
+      "title": "Close the external oblique with the nerve protected",
+      "why": "The aponeurosis is the strength layer of the groin; closing it restores the canal and, done carelessly, entraps the ilioinguinal nerve in the suture line.",
+      "how": [
+        "Lay the ilioinguinal nerve back on the floor of the canal and keep it in view.",
+        "Close the external oblique aponeurosis with a continuous absorbable suture, recreating the superficial ring without narrowing it.",
+        "Infiltrate local anaesthetic before closing Scarpa's fascia."
+      ],
+      "structuresAtRisk": ["Ilioinguinal nerve"],
+      "pitfalls": [
+        "Catching the nerve in the closure and causing chronic groin pain."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}
