@@ -1,0 +1,283 @@
+{
+  "id": "flexor-tendon-repair",
+  "title": "Flexor tendon repair (zone II)",
+  "subtitle": "Primary repair with a multistrand core suture and epitendinous suture",
+  "system": "musculoskeletal",
+  "aliases": [
+    "flexor tendon repair",
+    "zone 2 repair",
+    "FDP repair",
+    "no man's land repair"
+  ],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "tang-2022",
+      "org": "Tang JB. J Hand Surg Eur 47:31",
+      "title": "Flexor tendon repair: recent changes and current methods",
+      "year": 2022,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34738496/",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "lalonde-2009-flexor",
+      "org": "Lalonde DH. Plast Reconstr Surg 123:623",
+      "title": "Wide-awake flexor tendon repair",
+      "year": 2009,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Lalonde+wide-awake+flexor+tendon+repair+Plast+Reconstr+Surg+2009",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "lalonde-2017-walant",
+      "org": "Lalonde DH. J Hand Surg Eur 42:886",
+      "title": "Conceptual origins, current practice, and views of wide awake hand surgery",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Lalonde+conceptual+origins+current+practice+and+views+of+wide+awake+hand+surgery",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "quickdash"
+  ],
+  "chapters": {
+    "indications": [
+      "Complete division of FDP, with or without FDS, in zone II (from the distal palmar crease to the FDS insertion on the middle phalanx).",
+      "Partial lacerations involving a large part of the tendon or causing triggering.",
+      "Primary or delayed primary repair, ideally within days of injury; late presentations may need staged reconstruction."
+    ],
+    "contraindications": [
+      "Heavily contaminated or infected wounds: debride first and repair when clean.",
+      "Segmental tendon loss, crushed sheath, or pulleys destroyed: plan staged reconstruction.",
+      "Patient unable to engage with the strict therapy programme: discuss alternatives.",
+      "Associated injuries that threaten the digit (devascularisation) take priority."
+    ],
+    "preparation": [
+      "Document the mechanism, the time of injury, hand dominance and occupation; examine FDP and FDS of each digit separately, and digital nerve sensation and perfusion.",
+      "Radiograph for fractures and foreign bodies.",
+      "Arrange hand therapy before surgery so splinting and early active motion start on time.",
+      "Consent risks to discuss: rupture of the repair, adhesions and stiffness needing tenolysis, joint contracture, bowstringing, infection, digital nerve repair outcome, cold intolerance, complex regional pain syndrome, staged reconstruction, and the importance of the therapy programme."
+    ],
+    "positioning": [
+      "Supine, arm on a hand table, shoulder abducted no more than 90 degrees; lead hand or assistant to hold the fingers."
+    ],
+    "equipment": [
+      "Hand set with fine instruments, loupe magnification or an operating microscope for nerve repair.",
+      "Core suture material in a strong looped or double strand, fine epitendinous suture, and fine nylon for nerve repair.",
+      "Fine paediatric feeding tube or catheter for tendon retrieval; hypodermic needles for holding the tendon."
+    ],
+    "anatomy": [
+      "In zone II, FDP and FDS run together in the fibro-osseous sheath; FDS splits around FDP at Camper's chiasm and inserts on the middle phalanx.",
+      "The annular pulleys A2 (proximal phalanx) and A4 (middle phalanx) prevent bowstringing; cruciate pulleys between them allow the sheath to fold.",
+      "The vincula carry blood to the tendons and should be preserved.",
+      "The digital neurovascular bundles lie on either side of the sheath and are often divided with the tendon."
+    ],
+    "criticalSafety": [
+      "Handle tendons only at their cut ends.",
+      "Preserve the critical pulleys while allowing the repair to glide.",
+      "Use a repair strong enough for early active motion, and check it for gapping.",
+      "Repair divided digital nerves."
+    ],
+    "structuresAtRisk": [
+      "Digital nerves and arteries",
+      "A2 and A4 pulleys",
+      "Vincula",
+      "Tendon surface"
+    ],
+    "commonErrors": [
+      "A two-strand repair followed by an early active programme.",
+      "Repair gapping or catching that is not detected before closure.",
+      "Destroying pulleys to make the repair easier.",
+      "No therapy referral, or a splint in the wrong position."
+    ],
+    "complications": [
+      "Repair rupture, usually in the first weeks and often with forceful use.",
+      "Adhesions and loss of active flexion, sometimes needing tenolysis.",
+      "PIP or DIP joint flexion contracture.",
+      "Bowstringing, infection, digital nerve symptoms, cold intolerance.",
+      "Complex regional pain syndrome."
+    ],
+    "postop": [
+      "Dorsal blocking splint with the wrist in neutral or slight flexion, MCP joints flexed and the IP joints straight, per the local hand therapy protocol.",
+      "Early active motion within days under a hand therapist, following a protocol matched to the repair strength.",
+      "No forceful gripping or lifting until the therapist and surgeon allow, usually after several weeks.",
+      "Clear advice that a sudden loss of flexion means rupture and needs urgent review."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Record the pre-operative examination of each tendon and nerve, and consent for nerve repair and possible staged reconstruction."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Antibiotics per local policy for a traumatic wound; check tetanus status."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine, arm on a hand table, shoulder abducted no more than 90 degrees; lead hand or assistant to hold the fingers."
+    },
+    {
+      "ref": "step.hand.anaesthesia",
+      "emphasis": "WALANT allows the patient to flex actively, so the repair can be tested for gapping and gliding (Lalonde)."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "Under regional or general anaesthesia; not needed with WALANT."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.hand.incision",
+      "emphasis": "Extend the wound with Brunner zigzags or a mid-lateral incision, proximally and distally, to reach both tendon ends."
+    },
+    {
+      "ref": "step.hand.nerve-protection",
+      "emphasis": "Digital nerves are often divided with the tendon. Repair them under magnification after the tendon repair."
+    },
+    {
+      "ref": "step.ftr.retrieve"
+    },
+    {
+      "ref": "step.ftr.pulleys"
+    },
+    {
+      "ref": "step.ftr.core-suture"
+    },
+    {
+      "ref": "step.ftr.epitendinous"
+    },
+    {
+      "ref": "step.hand.active-check",
+      "emphasis": "Ask for active flexion and extension: look for gapping, catching on a pulley or triggering, and correct it now."
+    },
+    {
+      "ref": "step.hand.unexpected-findings",
+      "emphasis": "Segmental loss, a destroyed pulley system or a tendon that will not reach without tension: do not force a repair; plan staged reconstruction with a senior hand surgeon."
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.hand.dressing-therapy",
+      "emphasis": "Dorsal blocking splint applied in theatre; hand therapy starts within days with an early active motion protocol."
+    },
+    {
+      "ref": "step.ortho.nv-check",
+      "emphasis": "Record capillary refill of the digit and nerve repair status."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.ftr.retrieve": {
+      "id": "step.ftr.retrieve",
+      "kind": "dissection",
+      "title": "Exposing and retrieving the tendon ends",
+      "why": "The proximal tendon end retracts into the palm or the sheath. Repeated grasping of the tendon surface with forceps damages it and causes adhesions, so retrieval is planned and atraumatic.",
+      "how": [
+        "Extend the wound with Brunner or mid-lateral incisions to expose the sheath and find the distal tendon end by flexing the digit.",
+        "Retrieve the proximal end by flexing the wrist and MCP joints and milking proximally to distally; if it has retracted into the palm, open over the palm and pass a fine catheter or tube down the sheath to deliver it.",
+        "Hold the tendon only at its cut end, and pass a transverse needle through the sheath and tendon to keep it out to length while repairing.",
+        "Identify which tendons are cut (FDP, one or both FDS slips) and inspect both digital nerves."
+      ],
+      "structuresAtRisk": [
+        "Tendon surface (handling damage)",
+        "Digital nerves and arteries",
+        "Flexor sheath and pulleys"
+      ],
+      "pitfalls": [
+        "Repeated blind grabbing in the sheath with forceps.",
+        "Mistaking an FDS slip for the FDP end."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ftr.pulleys": {
+      "id": "step.ftr.pulleys",
+      "kind": "dissection",
+      "title": "Managing the sheath and pulleys",
+      "why": "A2 and A4 are the pulleys that matter most for flexion, but a bulky repair catching on them restricts gliding and ruptures. Opening the sheath through windows, and partial venting of a tight pulley, protect both function and the repair.",
+      "how": [
+        "Open the sheath through windows between the pulleys (cruciate or flap incisions) to reach the tendon ends.",
+        "Preserve as much of A2 and A4 as the repair allows. If the repair catches, vent part of A2 or A4 rather than leave the repair jammed, as described by Tang.",
+        "Decide about FDS in tight zone IIC: repairing both slips can make the sheath crowded; repairing one slip or leaving FDS unrepaired is an option to keep FDP gliding.",
+        "Close the sheath only if it can be done without narrowing it."
+      ],
+      "structuresAtRisk": [
+        "A2 and A4 pulleys",
+        "Vinculae (tendon blood supply)"
+      ],
+      "pitfalls": [
+        "Excising an entire A2 or A4 pulley.",
+        "Forcing a bulky repair under an intact pulley."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ftr.core-suture": {
+      "id": "step.ftr.core-suture",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Multistrand core suture",
+      "why": "The strength of the repair is roughly proportional to the number of core strands crossing it, and the purchase of each grasp. Enough strength allows early active motion, which reduces adhesions and gives the best result.",
+      "how": [
+        "Use a multistrand core repair (at least four strands, for example a 4-strand or a 6-strand M-Tang technique) with a strong looped or double suture.",
+        "Place the core suture purchase well back from each cut end (the purchase length recommended by the technique), with locking or grasping loops.",
+        "Tension the core so the repair is slightly tight with no gap; a gap of a few millimetres under load predicts rupture.",
+        "Bury the knots within or between the tendon ends where possible, and keep the repair low in bulk."
+      ],
+      "structuresAtRisk": [
+        "Tendon ends (fraying from repeated passes)",
+        "Repair (gapping)"
+      ],
+      "pitfalls": [
+        "A two-strand core repair that will not tolerate active motion.",
+        "Short purchase that pulls out.",
+        "A loose core that gaps under load."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.ftr.epitendinous": {
+      "id": "step.ftr.epitendinous",
+      "kind": "reconstruction",
+      "title": "Epitendinous (peripheral) suture",
+      "why": "The peripheral suture tidies the repair surface so it glides through the pulleys, and adds some strength and gap resistance.",
+      "how": [
+        "Run a fine continuous epitendinous suture around the repair, with bites taken a short distance from the cut edge.",
+        "Smooth any ragged surface so the repair passes under the pulleys without catching.",
+        "Check that the repair is smooth and not bunched; correct any step."
+      ],
+      "structuresAtRisk": [
+        "Repair surface"
+      ],
+      "pitfalls": [
+        "Taking deep peripheral bites that bunch the repair.",
+        "Omitting the peripheral suture in a ragged repair, so it catches on the pulley."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

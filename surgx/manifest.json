@@ -1120,6 +1120,12 @@
       "file": "steps/anorectal.json",
       "title": "Shared anorectal and perianal steps",
       "shared": true
+    },
+    {
+      "id": "hand",
+      "file": "steps/hand.json",
+      "title": "Shared hand surgery steps",
+      "shared": true
     }
   ],
   "procedures": [
@@ -1897,6 +1903,135 @@
       ],
       "review": "ai_drafted",
       "estMinutes": 60
+    },
+    {
+      "id": "total-hip-replacement",
+      "title": "Total hip replacement (posterior approach)",
+      "subtitle": "Primary hip arthroplasty through the posterior approach",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/total-hip-replacement.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 120
+    },
+    {
+      "id": "hip-hemiarthroplasty",
+      "title": "Hemiarthroplasty of the hip",
+      "subtitle": "Cemented hemiarthroplasty for a displaced intracapsular neck of femur fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/hip-hemiarthroplasty.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "total-knee-replacement",
+      "title": "Total knee replacement",
+      "subtitle": "Primary cemented knee arthroplasty through a medial parapatellar approach",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/total-knee-replacement.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 110
+    },
+    {
+      "id": "ankle-orif",
+      "title": "Open reduction and internal fixation of the ankle",
+      "subtitle": "Lateral malleolus plate and syndesmosis fixation for an unstable ankle fracture",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/ankle-orif.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
+    },
+    {
+      "id": "distal-radius-fixation",
+      "title": "Distal radius fracture fixation",
+      "subtitle": "Volar locking plate, with K-wire fixation as the alternative",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/distal-radius-fixation.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 75
+    },
+    {
+      "id": "acl-reconstruction",
+      "title": "Arthroscopic ACL reconstruction (hamstring graft)",
+      "subtitle": "Anatomical single-bundle reconstruction with semitendinosus and gracilis autograft",
+      "system": "musculoskeletal",
+      "specialty": "orthopaedics",
+      "file": "procedures/acl-reconstruction.json",
+      "stepPacks": [
+        "core",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 100
+    },
+    {
+      "id": "carpal-tunnel-release",
+      "title": "Open carpal tunnel release",
+      "subtitle": "Decompression of the median nerve at the wrist",
+      "system": "musculoskeletal",
+      "specialty": "plastics",
+      "file": "procedures/carpal-tunnel-release.json",
+      "stepPacks": [
+        "core",
+        "hand",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 25
+    },
+    {
+      "id": "trigger-finger-release",
+      "title": "Trigger finger release",
+      "subtitle": "Open A1 pulley release, wide awake or under tourniquet",
+      "system": "musculoskeletal",
+      "specialty": "plastics",
+      "file": "procedures/trigger-finger-release.json",
+      "stepPacks": [
+        "core",
+        "hand",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 20
+    },
+    {
+      "id": "flexor-tendon-repair",
+      "title": "Flexor tendon repair (zone II)",
+      "subtitle": "Primary repair with a multistrand core suture and epitendinous suture",
+      "system": "musculoskeletal",
+      "specialty": "plastics",
+      "file": "procedures/flexor-tendon-repair.json",
+      "stepPacks": [
+        "core",
+        "hand",
+        "ortho"
+      ],
+      "review": "ai_drafted",
+      "estMinutes": 90
     }
   ],
   "cases": [

@@ -301,6 +301,38 @@
       }
     },
     /* ── specialty templates (generated from the specialty content authoring, 2026-11-04) ── */
+    "acl-reconstruction": {
+      base: "operative", title: "ACL reconstruction",
+      prefill: {"procedure": "Arthroscopic ACL reconstruction with hamstring autograft"},
+      extra: {
+        "Operative detail": [
+          f("euaFindings", "Examination under anaesthesia (both knees)", {"type": "text", "required": true, "aiFillable": false, "ph": "Lachman, pivot shift, collateral and posterolateral laxity", "help": "A physical examination finding."}),
+          f("meniscusCartilage", "Meniscal and chondral findings and treatment", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2}),
+          f("graftDetail", "Graft configuration, diameter and length", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. four-strand semitendinosus and gracilis, diameter in mm", "help": "Measured on the sizing block."}),
+          f("tunnelFixation", "Tunnel positions and fixation", {"type": "text", "required": true, "aiFillable": true, "ph": "Femoral tunnel technique, femoral and tibial fixation"}),
+          f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."})
+        ]
+      }
+    },
+    "ankle-orif": {
+      base: "operative", title: "Ankle ORIF",
+      prefill: {"procedure": "Open reduction and internal fixation of ankle fracture"},
+      extra: {
+        "Operative detail": [
+          f("fibulaFixation", "Fibular reduction and fixation", {"type": "text", "required": true, "aiFillable": true, "ph": "Lag screw, plate type and position, number of screws"}),
+          f("medialFixation", "Medial malleolus or deltoid", {"type": "text", "required": false, "aiFillable": true, "ph": "Fixation used, or not required"}),
+          f("syndesmosisTest", "Syndesmosis stress test and fixation", {"type": "text", "required": true, "aiFillable": false, "ph": "Test result; screws or suture-button, number and level", "help": "The stress test is a physical intra-operative finding."}),
+          f("weightBearing", "Weight-bearing instruction and protection", {"type": "text", "required": true, "aiFillable": true})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."}),
+          f("imageIntensifier", "Image intensifier dose and screening time", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. dose (cGy cm2) and time (s) from the C-arm", "help": "Read from the machine at the end of the case."})
+        ]
+      }
+    },
     "below-knee-amputation": {
       base: "operative", title: "Below-knee amputation",
       prefill: {"procedure": "Below-knee amputation, long posterior flap"},
@@ -327,6 +359,18 @@
         ]
       }
     },
+    "carpal-tunnel-release": {
+      base: "operative", title: "Carpal tunnel release",
+      prefill: {"procedure": "Open carpal tunnel release", "incision": "Palmar incision in line with the ring finger radial border"},
+      extra: {
+        "Operative detail": [
+          f("nerveAppearance", "Median nerve appearance and motor branch anatomy", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. hourglass constriction, extraligamentous motor branch"}),
+          f("releaseExtent", "Extent of release confirmed", {"type": "text", "required": true, "aiFillable": false, "ph": "Distal fat pad to distal antebrachial fascia", "help": "Confirmed by the surgeon in theatre."}),
+          f("canalFindings", "Other findings in the canal", {"type": "text", "required": false, "aiFillable": true, "ph": "Tenosynovitis, mass, anomalous muscle, or none"}),
+          f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
+        ]
+      }
+    },
     "chest-drain-insertion": {
       base: "operative", title: "Chest drain insertion",
       prefill: {"procedure": "Intercostal chest drain insertion", "anaesthesia": "Local anaesthetic"},
@@ -338,6 +382,22 @@
           f("guidewireRemoved", "Guidewire removed and seen intact", {"type": "text", "aiFillable": false, "ph": "Yes / not applicable"}),
           f("initialOutput", "Initial drainage (character and volume)", {"type": "text", "aiFillable": false}),
           f("positionConfirmed", "Position confirmed", {"type": "text", "aiFillable": false, "ph": "Swinging, bubbling, chest radiograph"})
+        ]
+      }
+    },
+    "distal-radius-fixation": {
+      base: "operative", title: "Distal radius fracture fixation",
+      prefill: {"procedure": "Fixation of distal radius fracture"},
+      extra: {
+        "Operative detail": [
+          f("fixationMethod", "Fixation method", {"type": "text", "required": true, "aiFillable": true, "ph": "Volar locking plate, K-wires, bridge plate or external fixator"}),
+          f("reductionParams", "Reduction achieved", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Radial height, inclination, volar tilt, articular step"}),
+          f("screwCheck", "Dorsal tangential view and screw length check", {"type": "text", "required": true, "aiFillable": false, "ph": "Done; any screw exchanged", "help": "Read from the saved images."}),
+          f("drujStability", "DRUJ stability", {"type": "text", "required": true, "aiFillable": false, "ph": "Stable or unstable, in which rotation", "help": "A physical examination finding."})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."}),
+          f("imageIntensifier", "Image intensifier dose and screening time", {"type": "text", "required": true, "aiFillable": false, "ph": "e.g. dose (cGy cm2) and time (s) from the C-arm", "help": "Read from the machine at the end of the case."})
         ]
       }
     },
@@ -415,6 +475,20 @@
         ]
       }
     },
+    "flexor-tendon-repair": {
+      base: "operative", title: "Flexor tendon repair (zone II)",
+      prefill: {"procedure": "Primary flexor tendon repair, zone II"},
+      extra: {
+        "Operative detail": [
+          f("tendonsInjured", "Tendons divided and repaired, digit and zone", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "e.g. FDP and FDS, right middle finger, zone IIB"}),
+          f("coreTechnique", "Core repair technique, strands and suture", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. 6-strand M-Tang with looped suture, running epitendinous"}),
+          f("pulleyVenting", "Pulleys preserved or vented", {"type": "text", "required": true, "aiFillable": true}),
+          f("gapCheck", "Active or passive gap and gliding check", {"type": "text", "required": true, "aiFillable": false, "ph": "No gap on full active flexion, or how tested", "help": "Observed in theatre."}),
+          f("digitalNerves", "Digital nerves: intact or repaired", {"type": "text", "required": true, "aiFillable": true}),
+          f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
+        ]
+      }
+    },
     "haemorrhoidectomy": {
       base: "operative", title: "Haemorrhoidectomy",
       prefill: {"procedure": "Milligan-Morgan haemorrhoidectomy"},
@@ -437,6 +511,21 @@
           f("leftUreter", "Left ureter identified and preserved", {"type": "text", "required": true, "aiFillable": false, "ph": "Yes / No, and where"}),
           f("rectalStump", "Rectal stump: level, closure, marking", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Rectosigmoid junction, stapled, marked with long non-absorbable sutures"}),
           f("stomaDetail", "Stoma: type, site, height, viability", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "ph": "End colostomy, LIF, flush, pink and healthy", "help": "Viability is a physical check at the end of the operation"})
+        ]
+      }
+    },
+    "hip-hemiarthroplasty": {
+      base: "operative", title: "Hemiarthroplasty of the hip",
+      prefill: {"procedure": "Cemented hemiarthroplasty of the hip"},
+      extra: {
+        "Operative detail": [
+          f("headSize", "Measured femoral head and prosthetic head size", {"type": "text", "required": true, "aiFillable": false, "ph": "Measured diameter and head chosen (unipolar or bipolar)", "help": "Measured with the gauge in theatre."}),
+          f("acetabulumState", "Acetabular cartilage", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. healthy cartilage, no arthritis"}),
+          f("cementEvent", "Cement safety pause and any cardiovascular event", {"type": "text", "required": true, "aiFillable": false, "ph": "Pause performed; any hypotension or desaturation at cementing"}),
+          f("weightBearing", "Weight-bearing instruction", {"type": "text", "required": true, "aiFillable": true, "ph": "Full weight bearing as tolerated, or the reason for restriction"})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."})
         ]
       }
     },
@@ -786,6 +875,38 @@
         ]
       }
     },
+    "total-hip-replacement": {
+      base: "operative", title: "Total hip replacement (posterior approach)",
+      prefill: {"procedure": "Primary total hip replacement", "incision": "Posterior approach to the hip"},
+      extra: {
+        "Operative detail": [
+          f("cupPosition", "Cup size, fixation and orientation", {"type": "text", "required": true, "aiFillable": true, "ph": "Size, cemented or uncemented, screws (quadrant), inclination and anteversion estimate"}),
+          f("stemDetail", "Stem size, fixation and head/neck", {"type": "text", "required": true, "aiFillable": true, "ph": "Stem size, cemented or press-fit, head diameter and neck length"}),
+          f("hipStability", "Stability and leg length at final reduction", {"type": "textarea", "required": true, "aiFillable": false, "rows": 2, "help": "Positions tested and the leg length reference used. A physical check."}),
+          f("posteriorRepair", "Posterior capsule and rotator repair", {"type": "text", "required": true, "aiFillable": true, "ph": "e.g. capsule and rotators repaired through trochanteric drill holes"}),
+          f("cementEvent", "Cement safety pause and any cardiovascular event", {"type": "text", "required": false, "aiFillable": false, "ph": "Pause performed; any hypotension or desaturation at cementing"})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."})
+        ]
+      }
+    },
+    "total-knee-replacement": {
+      base: "operative", title: "Total knee replacement",
+      prefill: {"procedure": "Primary total knee replacement", "incision": "Midline skin incision, medial parapatellar arthrotomy"},
+      extra: {
+        "Operative detail": [
+          f("alignmentCuts", "Alignment targets and bone cuts", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Distal femoral valgus, tibial slope, resection depths"}),
+          f("softTissueRelease", "Soft-tissue releases and gap balance", {"type": "textarea", "required": true, "aiFillable": true, "rows": 2, "ph": "Releases performed, final flexion and extension gaps"}),
+          f("patellaDetail", "Patella: resurfaced or not, and tracking", {"type": "text", "required": true, "aiFillable": true}),
+          f("finalRange", "Final range and stability on table", {"type": "text", "required": true, "aiFillable": false, "ph": "Extension to flexion in degrees, stability in extension and flexion", "help": "A physical examination finding."}),
+          f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
+        ],
+        "Accounting": [
+          f("implantRegister", "Implant register: make, size, serial / lot number", {"type": "textarea", "required": true, "aiFillable": false, "rows": 3, "ph": "Each implant on its own line", "help": "Copy from the implant stickers. A physical record, never AI-filled."})
+        ]
+      }
+    },
     "total-thyroidectomy": {
       base: "operative", title: "Total thyroidectomy",
       prefill: {"procedure": "Total thyroidectomy"},
@@ -810,6 +931,18 @@
           f("boneFlapStatus", "Bone flap replaced or stored (where)", {"type": "text", "required": true, "aiFillable": false, "ph": "Replaced, plates / stored in bone bank / abdominal pocket"}),
           f("duralClosure", "Dural closure and hitch sutures", {"type": "text", "required": false, "aiFillable": false, "ph": "Hitches placed; primary / duraplasty (material)"}),
           f("icpMonitor", "ICP monitor or drain placed", {"type": "text", "required": false, "aiFillable": false, "ph": "None / parenchymal / EVD"})
+        ]
+      }
+    },
+    "trigger-finger-release": {
+      base: "operative", title: "Trigger finger release",
+      prefill: {"procedure": "Open A1 pulley release"},
+      extra: {
+        "Operative detail": [
+          f("digitReleased", "Digit(s) released", {"type": "text", "required": true, "aiFillable": false, "ph": "Side and digit, e.g. right ring finger", "help": "Must match the marked site."}),
+          f("pulleyFindings", "A1 pulley and tendon findings", {"type": "text", "required": true, "aiFillable": true, "ph": "Thickened A1, nodule, A2 preserved"}),
+          f("activeCheckResult", "Active movement check", {"type": "text", "required": true, "aiFillable": false, "ph": "Full fist and extension without triggering, or not possible (anaesthesia)", "help": "Observed in theatre."}),
+          f("tourniquetTime", "Tourniquet pressure and time (or none)", {"type": "text", "required": true, "aiFillable": false, "ph": "Pressure (mmHg) and minutes, or WALANT, no tourniquet", "help": "Read from the tourniquet machine; a physical record."})
         ]
       }
     },

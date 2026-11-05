@@ -1,0 +1,216 @@
+{
+  "id": "trigger-finger-release",
+  "title": "Trigger finger release",
+  "subtitle": "Open A1 pulley release, wide awake or under tourniquet",
+  "system": "musculoskeletal",
+  "aliases": [
+    "trigger finger",
+    "trigger thumb release",
+    "A1 pulley release",
+    "stenosing tenosynovitis release"
+  ],
+  "estMinutes": 20,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "fiorini-2018-trigger",
+      "org": "Fiorini HJ et al. Cochrane Database Syst Rev (CD009860)",
+      "title": "Surgery for trigger finger",
+      "year": 2018,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Fiorini+surgery+for+trigger+finger+Cochrane",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "lalonde-2017-walant",
+      "org": "Lalonde DH. J Hand Surg Eur 42:886",
+      "title": "Conceptual origins, current practice, and views of wide awake hand surgery",
+      "year": 2017,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Lalonde+conceptual+origins+current+practice+and+views+of+wide+awake+hand+surgery",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "quickdash"
+  ],
+  "chapters": {
+    "indications": [
+      "Trigger finger or thumb persisting or recurring after one or more corticosteroid injections.",
+      "A locked digit that cannot be actively extended.",
+      "Patients who prefer surgery after discussion, including some with diabetes in whom injection is less effective."
+    ],
+    "contraindications": [
+      "Untreated triggering of short duration, where splinting or injection may resolve it.",
+      "Infection in the flexor sheath (a different emergency operation).",
+      "Rheumatoid tenosynovitis: consider tenosynovectomy rather than A1 release, which can worsen ulnar drift."
+    ],
+    "preparation": [
+      "Clinical diagnosis: a palpable nodule at the A1 pulley with triggering or locking; check for other digits and for carpal tunnel syndrome, which commonly coexists.",
+      "Plan wide-awake local anaesthesia to allow an active check.",
+      "Consent risks to discuss: infection, scar tenderness, digital nerve injury (especially in the thumb), incomplete release with persistent triggering, bowstringing, stiffness, complex regional pain syndrome and recurrence."
+    ],
+    "positioning": [
+      "Supine, arm on a hand table, shoulder abducted no more than 90 degrees; lead hand or assistant to hold the fingers."
+    ],
+    "equipment": [
+      "Hand set with fine scissors and small retractors, tendon hook, bipolar diathermy, loupe magnification.",
+      "Local anaesthetic with adrenaline for WALANT, and the adrenaline reversal agent available per local protocol."
+    ],
+    "anatomy": [
+      "The A1 pulley overlies the MCP joint volar plate; A2 starts just distal to it over the proximal phalanx and is critical for flexion.",
+      "The digital nerves lie on either side of the flexor sheath, palmar to the arteries at this level.",
+      "In the thumb, the radial digital nerve crosses obliquely from ulnar to radial close to the A1 pulley and is the structure most often injured."
+    ],
+    "criticalSafety": [
+      "Identify both neurovascular bundles, and in the thumb find the radial digital nerve before dividing the pulley.",
+      "Divide the whole A1 pulley and nothing beyond it.",
+      "Check active movement before closure."
+    ],
+    "structuresAtRisk": [
+      "Digital nerves and arteries",
+      "Thumb radial digital nerve",
+      "A2 pulley",
+      "Flexor tendons"
+    ],
+    "commonErrors": [
+      "Incomplete release of the distal A1.",
+      "Thumb radial digital nerve injury through a poorly visualised incision.",
+      "Dividing the A2 pulley."
+    ],
+    "complications": [
+      "Persistent triggering from incomplete release.",
+      "Digital nerve injury with numbness or painful neuroma.",
+      "Bowstringing, stiffness, flexion contracture at the PIP joint in long-standing cases.",
+      "Infection, scar tenderness, complex regional pain syndrome."
+    ],
+    "postop": [
+      "Light dressing; full active finger movement from the day of surgery.",
+      "Wound review and suture removal per local practice.",
+      "Hand therapy for a pre-existing PIP flexion contracture or stiffness.",
+      "Return early for persistent triggering, numbness or signs of infection."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Mark the affected digit; trigger fingers are often multiple and on both hands."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Routine antibiotic prophylaxis is generally not needed for a short clean hand operation; follow local policy."
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Supine, arm on a hand table, shoulder abducted no more than 90 degrees; lead hand or assistant to hold the fingers."
+    },
+    {
+      "ref": "step.hand.anaesthesia",
+      "emphasis": "Wide-awake local is ideal here: the active check proves the release."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "Not needed with WALANT; if used, record the time."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.hand.incision",
+      "emphasis": "Transverse in the palmar crease over A1, or longitudinal or oblique; for the thumb, a transverse incision in the MCP crease with care for the radial digital nerve."
+    },
+    {
+      "ref": "step.hand.nerve-protection",
+      "emphasis": "Both bundles are close to the pulley; in the thumb the radial digital nerve crosses the field obliquely."
+    },
+    {
+      "ref": "step.tf.expose-a1"
+    },
+    {
+      "ref": "step.tf.divide-a1"
+    },
+    {
+      "ref": "step.hand.active-check",
+      "emphasis": "Full active fist and extension, several times, with no triggering. Passive extension of the PIP joint checks for a fixed contracture."
+    },
+    {
+      "ref": "step.hand.unexpected-findings",
+      "emphasis": "A large nodule, a ganglion, tenosynovitis or an anomalous FDS: send tissue if abnormal and do not extend the operation without consent."
+    },
+    {
+      "ref": "step.core.haemostasis"
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.hand.dressing-therapy",
+      "emphasis": "Light dressing, no splint, active movement from the start."
+    },
+    {
+      "ref": "step.ortho.nv-check"
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.tf.expose-a1": {
+      "id": "step.tf.expose-a1",
+      "kind": "dissection",
+      "critical": true,
+      "title": "Exposing the A1 pulley",
+      "why": "The A1 pulley lies over the metacarpophalangeal joint, with the digital neurovascular bundles on either side and, in the thumb, the radial digital nerve crossing obliquely close to it. Exposure is by spreading, never cutting blindly.",
+      "how": [
+        "Locate the A1 pulley over the metacarpal head: under the distal palmar crease for the ring and little fingers, between the creases for the middle finger, under the proximal palmar crease for the index, and at the MCP flexion crease for the thumb.",
+        "Spread the fat longitudinally with fine scissors and retract with small retractors to show the pulley and both neurovascular bundles.",
+        "Identify the proximal edge of the A1 pulley and the flexor sheath distal to it."
+      ],
+      "structuresAtRisk": [
+        "Radial and ulnar digital nerves and arteries",
+        "Thumb radial digital nerve (crosses obliquely over the A1 pulley region)"
+      ],
+      "pitfalls": [
+        "Transverse cutting through fat in the thumb, dividing the radial digital nerve.",
+        "Working through an incision too small to see both bundles."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tf.divide-a1": {
+      "id": "step.tf.divide-a1",
+      "kind": "resection",
+      "critical": true,
+      "title": "Dividing the A1 pulley completely and preserving A2",
+      "why": "Triggering persists if any part of A1 is left, and the finger bowstrings if the A2 pulley is divided. The safe zone is the full length of A1 and no further.",
+      "how": [
+        "Divide the A1 pulley longitudinally in its midline with a blade or scissors, along its full length.",
+        "Identify the distal edge of A1 and the start of the A2 pulley, and stop there.",
+        "Pull the flexor tendons up with a small hook to confirm free gliding; in persistent triggering, look for a nodule, an FDS slip band or a tight proximal part of A2.",
+        "In rheumatoid disease, avoid A1 release that promotes ulnar drift; tenosynovectomy may be the right operation instead."
+      ],
+      "structuresAtRisk": [
+        "A2 pulley",
+        "Digital neurovascular bundles",
+        "Flexor tendons (laceration)"
+      ],
+      "pitfalls": [
+        "Incomplete distal release of A1.",
+        "Dividing into A2, causing bowstringing."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

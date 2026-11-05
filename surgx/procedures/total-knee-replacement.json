@@ -1,0 +1,294 @@
+{
+  "id": "total-knee-replacement",
+  "title": "Total knee replacement",
+  "subtitle": "Primary cemented knee arthroplasty through a medial parapatellar approach",
+  "system": "musculoskeletal",
+  "aliases": [
+    "TKR",
+    "total knee arthroplasty",
+    "TKA",
+    "knee replacement"
+  ],
+  "estMinutes": 110,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "nice-ng157",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Joint replacement (primary): hip, knee and shoulder (NG157)",
+      "year": 2020,
+      "url": "https://www.nice.org.uk/guidance/ng157",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng89",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Venous thromboembolism in over 16s: reducing the risk of hospital-acquired deep vein thrombosis or pulmonary embolism (NG89)",
+      "year": 2018,
+      "version": "NG89, last updated 2019",
+      "url": "https://www.nice.org.uk/guidance/ng89",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "nice-ng24",
+      "org": "National Institute for Health and Care Excellence (NICE)",
+      "title": "Blood transfusion (NG24)",
+      "year": 2015,
+      "url": "https://www.nice.org.uk/guidance/ng24",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "oxford_knee",
+    "womac",
+    "caprini",
+    "stopbang"
+  ],
+  "chapters": {
+    "indications": [
+      "End-stage tricompartmental knee arthritis (osteoarthritis, inflammatory or post-traumatic) with pain and functional limitation despite non-operative treatment.",
+      "Selected unicompartmental disease where a partial knee replacement is not suitable; NICE NG157 asks that both partial and total replacement be considered when both are options.",
+      "The decision rests on symptoms and their effect on life, not on age, BMI or a score threshold alone (NICE NG157)."
+    ],
+    "contraindications": [
+      "Active infection in the knee or elsewhere until treated.",
+      "Non-functioning extensor mechanism, unless reconstructed.",
+      "Neuropathic knee, severe peripheral arterial disease or poor skin: relative, and needs specialist planning.",
+      "Medical comorbidity making the risk unacceptable after optimisation."
+    ],
+    "preparation": [
+      "Standing anteroposterior and lateral knee radiographs and a skyline patella view; long-leg views where the deformity or previous surgery makes alignment uncertain. Template implant sizes and the distal femoral valgus angle.",
+      "Preoperative assessment for anaemia, diabetes control, skin, infection sources and MRSA status per local policy.",
+      "Tranexamic acid unless contraindicated, and peripheral pulses checked and recorded.",
+      "Consent risks to discuss: infection, stiffness, persistent pain and dissatisfaction, instability, bleeding, wound problems, venous thromboembolism, nerve injury (common peroneal), vascular injury, periprosthetic fracture, numbness lateral to the scar, loosening and later revision, and the risks of anaesthesia and death."
+    ],
+    "positioning": [
+      "Supine with a foot rest or leg holder that keeps the knee at about 90 degrees of flexion and a lateral thigh post.",
+      "Tourniquet high on the thigh if one will be used, protected from preparation fluid.",
+      "Contralateral heel and sacrum padded."
+    ],
+    "equipment": [
+      "Laminar flow theatre and the templated implant system, with the more constrained inserts available.",
+      "Intramedullary femoral and extramedullary tibial alignment guides, cutting blocks, spacer blocks and trials.",
+      "Cement, cement gun or syringes, pulsatile lavage; navigation or robotic system if used locally."
+    ],
+    "anatomy": [
+      "The popliteal artery lies close behind the posterior tibial cortex at the level of the tibial cut, separated only by popliteus and the capsule.",
+      "The common peroneal nerve winds round the fibular neck and is stretched by correcting a fixed valgus or flexion deformity.",
+      "The superficial MCL inserts several centimetres below the joint line on the medial tibia and is the main medial stabiliser.",
+      "The transepicondylar axis approximates the flexion-extension axis of the knee and guides femoral rotation."
+    ],
+    "criticalSafety": [
+      "Retractor behind the tibia and controlled saw depth during the tibial cut.",
+      "Watch the patellar tendon insertion during flexion and eversion.",
+      "Cement safety pause with the anaesthetist; deflate the tourniquet per plan and secure haemostasis.",
+      "Record and hand over foot dorsiflexion after correcting a valgus or flexion deformity."
+    ],
+    "structuresAtRisk": [
+      "Popliteal artery and tibial nerve",
+      "Common peroneal nerve",
+      "Medial collateral ligament",
+      "Patellar tendon insertion",
+      "Infrapatellar branch of the saphenous nerve"
+    ],
+    "commonErrors": [
+      "Femoral component internally rotated, causing patellar maltracking and flexion instability.",
+      "Unequal flexion and extension gaps.",
+      "Oversized femoral component overstuffing the patellofemoral joint.",
+      "Retained posterior cement or osteophyte limiting flexion."
+    ],
+    "complications": [
+      "Periprosthetic joint infection and wound breakdown.",
+      "Stiffness and arthrofibrosis, sometimes needing manipulation under anaesthesia.",
+      "Persistent pain and dissatisfaction despite a technically good result.",
+      "Instability, patellar maltracking, periprosthetic fracture.",
+      "Common peroneal nerve palsy, popliteal artery injury (rare but limb-threatening).",
+      "Venous thromboembolism, bleeding and transfusion, loosening and revision."
+    ],
+    "postop": [
+      "Mobilise on the day of surgery where possible, with weight bearing as tolerated.",
+      "Early range-of-movement physiotherapy with a goal for flexion and full extension.",
+      "Thromboprophylaxis for the duration NICE NG89 sets for knee replacement, with mechanical prophylaxis in hospital.",
+      "Wound and neurovascular checks, haemoglobin, postoperative radiograph, and follow-up with outcome scores and registry data."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check"
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis",
+      "emphasis": "Antibiotic before tourniquet inflation; tranexamic acid unless contraindicated."
+    },
+    {
+      "ref": "step.ortho.arthroplasty-asepsis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Foot rest set so the knee holds at about 90 degrees; lateral post at the thigh."
+    },
+    {
+      "ref": "step.ortho.tourniquet",
+      "emphasis": "If used, inflate after exsanguination, record the time, and decide whether to deflate before closure or after dressing per your unit's practice."
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.tkr.approach"
+    },
+    {
+      "ref": "step.tkr.bone-cuts"
+    },
+    {
+      "ref": "step.tkr.rotation-balance"
+    },
+    {
+      "ref": "step.ortho.trial-reduction",
+      "emphasis": "Full extension without hyperextension, stable to varus and valgus stress in extension and mid-flexion, balanced in flexion, and central patellar tracking."
+    },
+    {
+      "ref": "step.ortho.implant-check"
+    },
+    {
+      "ref": "step.ortho.cement-implant",
+      "emphasis": "Cement tibia then femur (or as the system recommends). Clear posterior cement before it sets, with the knee in extension to pressurise."
+    },
+    {
+      "ref": "step.ortho.periprosthetic-fracture",
+      "emphasis": "In the knee, watch the femoral condyles during box preparation and the tibial plateau during impaction; an MCL injury is also managed here: repair and consider a more constrained insert."
+    },
+    {
+      "ref": "step.tkr.patella-closure"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Release the tourniquet and coagulate the lateral genicular and posterior vessels before closing."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.ortho.nv-check",
+      "emphasis": "Foot pulses, capillary return and active dorsiflexion as soon as the block allows."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.tkr.approach": {
+      "id": "step.tkr.approach",
+      "kind": "access",
+      "critical": true,
+      "title": "Medial parapatellar arthrotomy and exposure",
+      "why": "The medial parapatellar approach exposes the whole knee and is extensile. The patellar tendon insertion is the weak point: an avulsion is a disaster that is far easier to prevent than to repair.",
+      "how": [
+        "Midline skin incision with the knee flexed, from above the patella to just medial to the tibial tubercle; raise full-thickness medial flaps only as far as needed.",
+        "Open the joint along the medial border of the quadriceps tendon, around the medial patella and along the medial border of the patellar tendon, leaving a cuff of tissue for closure.",
+        "Release the deep medial structures off the proximal tibia subperiosteally as far as the deformity needs; excise the anterior horns of the menisci, the fat pad as needed and the cruciate ligaments according to the implant design.",
+        "Sublux or evert the patella laterally and flex the knee while watching the patellar tendon insertion; release more laterally or protect the insertion with a pin if it is under tension."
+      ],
+      "structuresAtRisk": [
+        "Patellar tendon insertion (avulsion)",
+        "Infrapatellar branch of the saphenous nerve (numb area lateral to the scar)",
+        "Medial collateral ligament (superficial)"
+      ],
+      "pitfalls": [
+        "Flexing the knee with a tight everted patella and avulsing the patellar tendon.",
+        "Thin skin flaps that necrose."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tkr.bone-cuts": {
+      "id": "step.tkr.bone-cuts",
+      "kind": "resection",
+      "critical": true,
+      "title": "Distal femoral and proximal tibial bone cuts",
+      "why": "The bone cuts set the limb's mechanical alignment and the size of the extension and flexion gaps. Each cut is measured and checked before the saw runs, because bone removed cannot be replaced.",
+      "how": [
+        "Distal femur: enter the canal with the intramedullary rod at the planned point, set the valgus angle from the templated anatomical-mechanical difference, and resect the planned thickness.",
+        "Proximal tibia: set an extramedullary (or intramedullary) guide perpendicular to the mechanical axis in the coronal plane with the slope recommended for the implant, and resect from the less worn side.",
+        "Protect the medial collateral ligament, the patellar tendon and the posterior structures with retractors during every tibial cut; keep the saw blade from running posteriorly beyond the cortex.",
+        "Check each cut with an alignment rod or block before moving on."
+      ],
+      "structuresAtRisk": [
+        "Popliteal artery and tibial nerve posterior to the tibia",
+        "Medial collateral ligament",
+        "Patellar tendon",
+        "Common peroneal nerve posterolaterally"
+      ],
+      "pitfalls": [
+        "Saw blade passing through the posterior tibial cortex towards the popliteal vessels.",
+        "Cutting the MCL with the blade.",
+        "Resecting from the worn side, removing too much bone."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tkr.rotation-balance": {
+      "id": "step.tkr.rotation-balance",
+      "kind": "reconstruction",
+      "critical": true,
+      "title": "Femoral sizing, rotation and gap balancing",
+      "why": "A knee is stable when the extension and flexion gaps are equal and rectangular. Femoral rotation decides the shape of the flexion gap and patellar tracking; malrotation is a common cause of a painful, unstable knee.",
+      "how": [
+        "Size the femur and set its rotation from more than one reference: the transepicondylar axis, the anteroposterior (Whiteside) line and the posterior condylar axis, or by a gap-balancing technique.",
+        "Make the anterior, posterior and chamfer cuts; remove posterior osteophytes and loose bodies.",
+        "Assess extension and flexion gaps with spacers or trials. Correct a tight side with a staged soft-tissue release appropriate to the deformity (for example the deep medial structures and semimembranosus in a varus knee).",
+        "Release in small steps and reassess each time; an over-released MCL may need a more constrained implant."
+      ],
+      "structuresAtRisk": [
+        "Medial collateral ligament (over-release)",
+        "Common peroneal nerve (correction of a fixed valgus or flexion deformity)",
+        "Popliteal tendon and posterolateral corner"
+      ],
+      "pitfalls": [
+        "Setting femoral rotation from the posterior condyles alone in a knee with a hypoplastic lateral condyle.",
+        "Releasing more than needed, creating instability."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.tkr.patella-closure": {
+      "id": "step.tkr.patella-closure",
+      "kind": "closure",
+      "title": "Patellar resurfacing, tracking and arthrotomy closure",
+      "why": "Patellofemoral pain is a leading cause of dissatisfaction after knee replacement. Restoring patellar thickness and confirming central tracking reduces it, and a watertight arthrotomy closure protects the joint from the wound.",
+      "how": [
+        "Resurface the patella per the plan (NICE NG157 recommends offering patellar resurfacing), restoring its original thickness and leaving enough bone to avoid fracture.",
+        "Check tracking with the trials through full flexion without holding the patella; if it tilts or subluxes, recheck component rotation before doing a lateral release.",
+        "Close the arthrotomy in layers, starting at the superior pole of the patella, with the knee flexed so the repair is not tight.",
+        "Check the full range of movement after closure."
+      ],
+      "structuresAtRisk": [
+        "Patella (fracture from over-resection)",
+        "Patellar tendon",
+        "Lateral superior genicular artery (lateral release)"
+      ],
+      "pitfalls": [
+        "Over-resecting the patella.",
+        "Using a lateral release to treat maltracking caused by component malrotation.",
+        "Closing the arthrotomy with the knee straight."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

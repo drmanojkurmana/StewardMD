@@ -1,0 +1,261 @@
+{
+  "id": "distal-radius-fixation",
+  "title": "Distal radius fracture fixation",
+  "subtitle": "Volar locking plate, with K-wire fixation as the alternative",
+  "system": "musculoskeletal",
+  "aliases": [
+    "volar locking plate",
+    "VLP",
+    "distal radius ORIF",
+    "K-wiring of the wrist",
+    "Colles fracture fixation",
+    "Smith fracture fixation"
+  ],
+  "estMinutes": 75,
+  "educationalOnly": true,
+  "review": {
+    "status": "ai_drafted",
+    "reviewer": "",
+    "date": ""
+  },
+  "sources": [
+    {
+      "id": "costa-2014-drafft",
+      "org": "Costa ML et al. BMJ 349:g4807",
+      "title": "Percutaneous fixation with Kirschner wires versus volar locking plate fixation in adults with dorsally displaced fracture of distal radius: randomised clinical trial",
+      "year": 2014,
+      "url": "https://pubmed.ncbi.nlm.nih.gov/?term=Costa+percutaneous+fixation+Kirschner+wires+versus+volar+locking+plate+dorsally+displaced+fracture+distal+radius",
+      "accessed": "2026-11-04"
+    },
+    {
+      "id": "aaos-dr-2020",
+      "org": "American Academy of Orthopaedic Surgeons (AAOS)",
+      "title": "Management of Distal Radius Fractures: Evidence-Based Clinical Practice Guideline",
+      "year": 2020,
+      "url": "https://www.orthoguidelines.org",
+      "accessed": "2026-11-04"
+    }
+  ],
+  "calcs": [
+    "quickdash"
+  ],
+  "chapters": {
+    "indications": [
+      "Displaced distal radius fractures that cannot be held reduced in a cast or that redisplace, judged against radial height, inclination, tilt and articular congruity.",
+      "Volar shear (Smith and volar Barton) fractures: these are unstable and usually need a volar buttress plate.",
+      "Displaced intra-articular fractures with a significant articular step or gap.",
+      "In older, lower-demand patients, the benefit of operative over cast treatment is smaller; discuss with the patient (AAOS 2020)."
+    ],
+    "contraindications": [
+      "Undisplaced or stable fractures: cast treatment.",
+      "Poor skin or infection at the incision site.",
+      "Medical frailty where a cast gives an acceptable functional result.",
+      "K-wires alone: not for volar shear fractures or highly comminuted intra-articular fractures."
+    ],
+    "preparation": [
+      "Posteroanterior and lateral wrist radiographs after the initial reduction; CT for complex intra-articular patterns.",
+      "Record median nerve function before surgery; a progressive median nerve deficit after a distal radius fracture is acute carpal tunnel syndrome and needs urgent decompression.",
+      "Consent risks to discuss: infection, nerve injury (median, palmar cutaneous, superficial radial), tendon irritation or rupture (EPL, FPL), loss of reduction, stiffness, complex regional pain syndrome, metalwork removal, pin-site infection for K-wires, and the non-operative alternative."
+    ],
+    "positioning": [
+      "Supine with the arm on a radiolucent hand table, forearm supinated for the volar approach.",
+      "Upper arm tourniquet; image intensifier able to reach posteroanterior, lateral and tilted views."
+    ],
+    "equipment": [
+      "Distal radius volar locking plate system with fixed or variable-angle locking screws.",
+      "K-wires and drill guides, pointed reduction clamps, small elevators.",
+      "Image intensifier, and traction (finger traps) if used."
+    ],
+    "anatomy": [
+      "The watershed line is the most volar ridge of the distal radius; a plate placed distal to it contacts flexor pollicis longus.",
+      "The palmar cutaneous branch of the median nerve runs ulnar to the FCR tendon and is protected by staying within the FCR sheath.",
+      "Lister's tubercle guides the EPL, which runs on the dorsal surface and is vulnerable to long dorsal screws.",
+      "Normal radiographic parameters include radial inclination, radial height and volar tilt; restoring them, and articular congruity, is the goal of reduction."
+    ],
+    "criticalSafety": [
+      "Stay within the FCR sheath, and proximal to the watershed line.",
+      "Check dorsal screw length on a dorsal tangential view.",
+      "Check median nerve function and DRUJ stability before leaving theatre."
+    ],
+    "structuresAtRisk": [
+      "Median nerve and its palmar cutaneous branch",
+      "Radial artery",
+      "Flexor pollicis longus",
+      "Extensor pollicis longus",
+      "Superficial radial nerve (K-wires and styloid exposure)"
+    ],
+    "commonErrors": [
+      "Plate placed distal to the watershed line.",
+      "Dorsal screws too long.",
+      "Articular step left unreduced because only the extra-articular alignment was assessed.",
+      "Missed DRUJ instability."
+    ],
+    "complications": [
+      "Tendon irritation or rupture (EPL, FPL).",
+      "Median nerve symptoms, including acute carpal tunnel syndrome.",
+      "Loss of reduction, malunion, stiffness.",
+      "Complex regional pain syndrome.",
+      "Pin-site infection and wire migration with K-wires."
+    ],
+    "postop": [
+      "Elevation and finger movement from the day of surgery; check swelling and median nerve function.",
+      "Plate: a short period in a splint then early wrist movement with hand therapy, per the surgeon's instruction. K-wires: cast or splint until wire removal.",
+      "Radiographs at early follow-up to confirm the reduction has held.",
+      "Advise about warning signs of tendon rupture (sudden loss of thumb extension or flexion) and complex regional pain syndrome."
+    ]
+  },
+  "steps": [
+    {
+      "ref": "step.core.consent-check",
+      "emphasis": "Record median nerve function before surgery."
+    },
+    {
+      "ref": "step.core.timeout"
+    },
+    {
+      "ref": "step.core.prophylaxis"
+    },
+    {
+      "ref": "step.core.positioning",
+      "emphasis": "Arm on a radiolucent hand table, forearm supinated, shoulder abducted no more than 90 degrees."
+    },
+    {
+      "ref": "step.ortho.tourniquet"
+    },
+    {
+      "ref": "step.ortho.image-intensifier"
+    },
+    {
+      "ref": "step.core.prep-drape"
+    },
+    {
+      "ref": "step.dr.fcr-approach"
+    },
+    {
+      "ref": "step.ortho.fracture-exposure",
+      "emphasis": "Inspect the volar cortex for the key reduction; keep soft tissue on small articular fragments."
+    },
+    {
+      "ref": "step.ortho.reduction-check",
+      "emphasis": "Restore radial height and inclination on the PA, volar tilt on the lateral, and the articular surface on a tilted lateral. Reduction of the volar cortex is often the key."
+    },
+    {
+      "ref": "step.ortho.provisional-fixation",
+      "emphasis": "A K-wire through the radial styloid commonly holds the reduction while the plate is placed."
+    },
+    {
+      "ref": "step.ortho.implant-check"
+    },
+    {
+      "ref": "step.ortho.plate-fixation",
+      "emphasis": "Position the plate first with a screw in the oblong hole, adjust under screening, then fix distally with locking screws in the subchondral bone, short of the dorsal cortex."
+    },
+    {
+      "ref": "step.dr.screw-check"
+    },
+    {
+      "ref": "step.dr.kwire"
+    },
+    {
+      "ref": "step.ortho.fixation-bailout",
+      "emphasis": "For severe comminution that the plate cannot hold, consider a dorsal bridge plate or a spanning external fixator."
+    },
+    {
+      "ref": "step.ortho.final-imaging"
+    },
+    {
+      "ref": "step.core.haemostasis",
+      "emphasis": "Release the tourniquet and check the radial artery branches before closure; repair pronator quadratus where possible."
+    },
+    {
+      "ref": "step.core.counts"
+    },
+    {
+      "ref": "step.core.skin-closure"
+    },
+    {
+      "ref": "step.ortho.nv-check",
+      "emphasis": "Median nerve sensation and finger perfusion; elevate and start finger movement."
+    },
+    {
+      "ref": "step.core.debrief"
+    }
+  ],
+  "steps_local": {
+    "step.dr.fcr-approach": {
+      "id": "step.dr.fcr-approach",
+      "kind": "access",
+      "critical": true,
+      "title": "Volar approach through the flexor carpi radialis sheath",
+      "why": "Working through the floor of the FCR sheath keeps the radial artery to one side and the median nerve and its palmar cutaneous branch to the other, and gives direct access to the volar radius under pronator quadratus.",
+      "how": [
+        "Incise longitudinally over the FCR tendon, from the distal wrist crease proximally, without crossing the crease at a right angle.",
+        "Open the FCR sheath, retract the tendon ulnarward and incise the floor of the sheath; sweep the flexor pollicis longus ulnarward with a finger.",
+        "Elevate pronator quadratus from its radial border in an L-shape, leaving a cuff for repair where possible.",
+        "Release brachioradialis from the radial styloid if needed to reduce the styloid fragment, protecting the first dorsal compartment tendons and the superficial radial nerve."
+      ],
+      "structuresAtRisk": [
+        "Palmar cutaneous branch of the median nerve (ulnar to FCR)",
+        "Median nerve",
+        "Radial artery (radial to FCR)",
+        "Flexor pollicis longus"
+      ],
+      "pitfalls": [
+        "Straying ulnar to the FCR sheath into the median nerve territory.",
+        "Dissecting distal to the watershed line, where the volar wrist ligaments and the FPL are at risk."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dr.screw-check": {
+      "id": "step.dr.screw-check",
+      "kind": "checkpoint",
+      "critical": true,
+      "title": "Plate position and screw length check",
+      "why": "Volar plates cause harm from the edges: a plate distal to the watershed line rubs the flexor tendons, and dorsal screws that are too long rupture the extensor tendons. Standard lateral views underestimate dorsal screw length.",
+      "how": [
+        "Confirm on the lateral that the plate sits proximal to the watershed line, or as close to it as the fracture allows, and flush with bone.",
+        "Take a tilted lateral to see the articular surface and a dorsal tangential (skyline) view to check that no screw passes beyond the dorsal cortex.",
+        "Choose distal screws short of the dorsal cortex; exchange any screw that is too long.",
+        "Check distal radioulnar joint stability in supination, neutral and pronation, and compare with the other side."
+      ],
+      "structuresAtRisk": [
+        "Extensor pollicis longus and other extensor tendons (long dorsal screws)",
+        "Flexor pollicis longus (distal plate)",
+        "Radiocarpal and distal radioulnar joints"
+      ],
+      "pitfalls": [
+        "Relying on the standard lateral view to judge dorsal screw length.",
+        "Leaving a prominent distal plate edge."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "step.dr.kwire": {
+      "id": "step.dr.kwire",
+      "kind": "reconstruction",
+      "title": "K-wire fixation (alternative to plating)",
+      "why": "For dorsally displaced fractures that reduce closed, K-wire fixation gave similar function at one year to a volar locking plate in the DRAFFT trial, with a shorter, cheaper operation. It suits fractures without significant intra-articular displacement or volar instability.",
+      "how": [
+        "Reduce closed by traction and manipulation and confirm on both views.",
+        "Make a small incision at each wire entry point and spread bluntly down to bone, using a drill guide, to avoid the superficial radial nerve and the extensor tendons.",
+        "Insert wires through the radial styloid and dorsally (crossed, or intrafocal to buttress the dorsal fragment), engaging the far cortex.",
+        "Screen in two planes, bend and cut the wires outside the skin, and dress the pin sites; plan wire removal in clinic at the interval set by the local protocol."
+      ],
+      "structuresAtRisk": [
+        "Superficial radial nerve",
+        "Extensor tendons (EPL, first dorsal compartment)",
+        "Radial artery"
+      ],
+      "pitfalls": [
+        "Inserting wires percutaneously without a guide, transfixing the superficial radial nerve or a tendon.",
+        "Using K-wires alone for a volar shear or highly comminuted intra-articular fracture."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}
