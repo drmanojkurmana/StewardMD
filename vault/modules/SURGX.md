@@ -301,6 +301,9 @@ After the 2026-11-04 audit (5.5/10, general surgery only), content covers 16 spe
 peri-operative care, ENT, eye emergencies, urology, neurosurgery, orthopaedics, plastics, vascular, cardiothoracic,
 paediatric surgery, O&G, surgical oncology, breast, endocrine. Totals: 97 protocols (84 authored + 13 engine),
 38 procedures, 19 cases, 64 evidence records, 13 step packs. Everything new is `ai_drafted`.
+Round 2 (2026-11-05, operations only): 70 more procedures, so **108 procedures** and 18 step packs
+(new: `hernia`, `anorectal`, `hpb`, `hand`, `thoracic`, `neck`; others appended to, never edited). Each 15 to 22 steps,
+every chapter filled, a bail-out step, a note template; per-set step reuse 71 to 84%.
 - **`specialty`** on every manifest entry; `manifest.specialties[]` and `manifest.categories[]` hold the titles, so a new
   specialty needs no code. `surgx-content.js` passes `specialty` through `protocolIndex()`.
 - **Browsing:** `surgx-screens.js` `browseBar()` (search + specialty chips), `rowsBySpec()`. One `state.spec` /
