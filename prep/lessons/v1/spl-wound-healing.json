@@ -1,0 +1,195 @@
+{
+ "gen": "AI",
+ "minutes": 8,
+ "module": "spl-wound-healing",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Healing moves through four overlapping phases in order. Haemostasis forms the clot, inflammation clears debris, proliferation builds granulation tissue, and remodelling strengthens the scar. The phases overlap rather than switching cleanly. Treatment at each visit should match whichever phase dominates the wound bed.",
+   "tx": "Wound healing proceeds through **four overlapping phases** in fixed order: haemostasis (blood clotting that seals vessels), inflammation (white cells clearing debris), proliferation (new tissue filling the gap), and remodelling or maturation (collagen strengthening over months). The phases overlap rather than switching cleanly, so judge which phase dominates before choosing dressings or procedures.",
+   "vis": {
+    "caption": "Granulation tissue with new vessels forms in proliferation, while excess collagen marks abnormal scarring. Match treatment to the dominant phase. Credit: StewardMD.",
+    "kind": "image",
+    "src": "v1/kb/media/surgical-wound-healing-and-scarring-fig1.webp",
+    "ar": 1.33,
+    "alt": "Granulation tissue with new vessels beside excessive keloid collagen proliferation."
+   }
+  },
+  {
+   "say": "Platelets do more than plug the hole. Their clot releases platelet-derived growth factor and transforming growth factor beta. These signals are calling inflammatory cells first and instructing fibroblasts later. A dry wound with no clot scaffold heals slowly. Keep the wound moist so this signalling layer survives.",
+   "tx": "The haemostatic clot is a signalling organ. **Platelets** trapped in fibrin (a mesh protein that forms the clot scaffold) release platelet-derived growth factor (PDGF, a fibroblast attractant) and transforming growth factor beta (TGF-beta, a collagen synthesis signal). These mediators summon neutrophils first and fibroblasts later, so a desiccated wound with a dead clot loses its instructive layer.",
+   "vis": {
+    "cols": [
+     "Phase",
+     "Key cell and signal"
+    ],
+    "rows": [
+     [
+      "Haemostasis",
+      "Platelets release PDGF and TGF-beta"
+     ],
+     [
+      "Inflammation",
+      "Neutrophils then macrophages clear debris"
+     ],
+     [
+      "Proliferation",
+      "Fibroblasts lay Type III collagen"
+     ],
+     [
+      "Remodelling",
+      "Type I collagen replaces Type III"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "say": "Macrophages arrive at 48 to 72 hours and take command. They digest the remaining debris and release the growth factors that launch proliferation. A wound stuck in inflammation carries pus and slough, so it will never receive this handover signal. Clear the infection and dead tissue so macrophages can finish the job.",
+   "tx": "**Macrophages** (large scavenger cells that digest debris and bacteria) enter the wound at 48 to 72 hours and act as the key regulatory cell of healing. They orchestrate the transition from inflammation to proliferation by releasing growth signals for fibroblasts and vessels. A wound stuck in prolonged inflammation never receives this handover, which is why infected or necrotic wounds stall.",
+   "vis": {
+    "cols": [
+     "Time after injury",
+     "What dominates"
+    ],
+    "rows": [
+     [
+      "First hours",
+      "Platelet clot and neutrophil influx"
+     ],
+     [
+      "48 to 72 hours",
+      "Macrophages take regulatory control"
+     ],
+     [
+      "Days 3 to 21",
+      "Fibroblast proliferation and granulation"
+     ],
+     [
+      "Weeks to months",
+      "Collagen remodelling and strengthening"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "say": "Early granulation tissue is built from Type Three collagen, which is thin and weak. Over weeks, enzymes remove it and stronger Type One collagen takes its place. Normal unwounded dermis holds about four parts Type One to one part Type Three. A pale flat scar has completed this exchange.",
+   "tx": "**Type III collagen** (thin early fibres laid quickly in granulation tissue) is synthesised first, then gradually replaced by stronger **Type I collagen** (thick organised fibres of mature dermis) during maturation. Normal adult unwounded dermis holds a Type I to Type III ratio of about 4:1. A soft pale flat scar has largely completed this exchange, while a raised red scar has not.",
+   "vis": {
+    "left": {
+     "points": [
+      "Thin Type III fibres laid quickly",
+      "Abundant vessels and fibroblasts",
+      "Red raised fragile surface"
+     ],
+     "title": "Early granulation tissue"
+    },
+    "right": {
+     "points": [
+      "Strong Type I fibres organised",
+      "Vessels regress, cells quieten",
+      "Pale flat 4:1 collagen ratio"
+     ],
+     "title": "Mature remodelled scar"
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "say": "Tensile strength is regained slowly, so the closure needs protection while collagen matures. At three weeks the wound holds only about twenty percent of normal skin strength. Even at three months it plateaus near seventy to eighty percent and never reaches one hundred. Counsel against heavy loading early, and plan suture removal and splinting around this curve.",
+   "tx": "**Tensile strength** (the pulling force a wound withstands before splitting) returns slowly: about 20% of normal skin at 3 weeks, plateauing at approximately 70% to 80% of uninjured strength by 3 months, and never reaching 100%. Early loading, haematoma, or infection flattens this curve further, so protect closures and time suture removal to the expected strength.",
+   "vis": {
+    "cols": [
+     "Time after closure",
+     "Expected strength"
+    ],
+    "rows": [
+     [
+      "1 week",
+      "Sutures carry almost all load"
+     ],
+     [
+      "3 weeks",
+      "About 20% of normal skin"
+     ],
+     [
+      "6 weeks",
+      "Rising but still fragile"
+     ],
+     [
+      "3 months",
+      "Plateau near 70% to 80%"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "say": "A hypertrophic scar stays inside the original wound borders and usually flattens by itself over twelve to twenty four months. A keloid invades normal skin beyond the margins, keeps growing, and rarely regresses. Pressure and silicone are usually enough for the first. The second needs combination therapy and honest counselling about recurrence.",
+   "tx": "**Hypertrophic scars** (raised red scars confined to healing skin) stay strictly within the original wound boundaries and typically regress spontaneously over 12 to 24 months. **Keloids** (firm nodular scars with claw-like extensions) grow beyond the original wound margins into normal adjacent dermis, rarely regress, and recur frequently after simple surgical excision. Location across a joint and family history raise suspicion.",
+   "vis": {
+    "left": {
+     "points": [
+      "Stays within wound boundaries",
+      "Regresses over 12 to 24 months",
+      "Pressure and silicone usually enough"
+     ],
+     "title": "Hypertrophic scar"
+    },
+    "right": {
+     "points": [
+      "Extends into normal adjacent dermis",
+      "Rarely regresses on its own",
+      "High recurrence after excision alone"
+     ],
+     "title": "Keloid"
+    },
+    "kind": "compare"
+   }
+  },
+  {
+   "tx": "First-line conservative care for established hypertrophic and keloid scars pairs **silicone gel sheeting** (a hydrating occlusive cover that softens and flattens scar) with intralesional **triamcinolone** (a steroid injected into the scar that damps fibroblast activity). Acetonide suspension is the standard preparation. Reserve excision, pressure, laser, or radiotherapy for scars that fail this combination after several months.",
+   "say": "Start every established hypertrophic or keloid scar on silicone gel sheeting plus intralesional triamcinolone injections. Silicone hydrates and softens the scar while the steroid damps fibroblast overactivity. The acetonide suspension is the standard preparation. Reserve excision, pressure garments, laser, or radiotherapy for scars that fail this combination after several months of honest use.",
+   "vis": {
+    "cols": [
+     "Treatment",
+     "Role and caution"
+    ],
+    "rows": [
+     [
+      "Silicone gel sheeting",
+      "First line hydration and flattening"
+     ],
+     [
+      "Intralesional triamcinolone",
+      "First line fibroblast suppression"
+     ],
+     [
+      "Surgical excision alone",
+      "High keloid recurrence, avoid solo"
+     ],
+     [
+      "Laser or radiotherapy",
+      "Reserve for refractory scars"
+     ]
+    ],
+    "kind": "table"
+   }
+  },
+  {
+   "tx": "Necrotic tissue and slough stall the macrophage handover, so **debridement** (surgical removal of dead tissue until bleeding viable edges show) must precede any expectation of healing. The heel ulcer here carries adherent slough over the wound bed and needs sharp clearance plus pressure relief. Dress the clean granulating bed moist, protect it from loading, and let proliferation proceed.",
+   "say": "Dead tissue stalls healing at the inflammation stage, so debride before expecting progress. This heel ulcer carries adherent slough that blocks the macrophage handover to proliferation. Clear it sharply back to bleeding viable edges and remove the pressure that caused it. Then dress the clean granulating bed moist and keep all load off it.",
+   "vis": {
+    "alt": "Heel ulcer with adherent yellow slough over the wound bed needing sharp debridement and pressure relief.",
+    "caption": "Slough-covered heel ulcer: sharp debridement to viable edges plus pressure relief must precede healing. Credit: Bobjgalindo.",
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+    "ar": 1.33
+   }
+  }
+ ],
+ "subject": "ss-plastic-surgery",
+ "title": "Wound Healing Biology, Cytokines and Abnormal Scars",
+ "v": 1
+}

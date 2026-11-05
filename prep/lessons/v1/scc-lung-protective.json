@@ -1,0 +1,183 @@
+{
+ "v": 1,
+ "module": "scc-lung-protective",
+ "title": "Lung-protective ventilation and ventilator-induced lung injury",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**ARDSNet** compared 6 mL/kg **predicted body weight** with 12 mL/kg, and limited **plateau pressure** to 30 cmH2O. The lower volume reduced mortality. The volume is predicted body weight, not the weight on the bed. An obese patient is harmed if you use actual weight and call it lung protection.",
+   "say": "ARDSNet compared 6 mL/kg predicted body weight with 12 mL/kg, and limited plateau pressure to 30 cmH2O. The lower volume reduced mortality. The volume is predicted body weight, not the weight on the bed. An obese patient is harmed if you use actual weight and call it lung protection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ards-fig1.webp",
+    "alt": "Three alveoli labelled exudative, proliferative, and fibrotic phases of diffuse alveolar damage.",
+    "caption": "Exudative, proliferative, and fibrotic phases of alveolar damage. This is not the ARDSNet survival curve and not a PEEP table (StewardMD)."
+   }
+  },
+  {
+   "tx": "**Predicted body weight** in kilograms is 50 plus 0.91 times height in centimetres minus 152.4 for men. For women it is 45.5 plus 0.91 times height in centimetres minus 152.4. Height, not the bed weight, is what sets the tidal volume. Guessing height from a habit is how patients receive 12 mL/kg by another name.",
+   "say": "Predicted body weight in kilograms is 50 plus 0 point 91 times height in centimetres minus 152 point 4 for men. For women it is 45 point 5 plus 0 point 91 times height in centimetres minus 152 point 4. Height, not the bed weight, is what sets the tidal volume. Guessing height from a habit is how patients receive 12 mL/kg by another name.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sex",
+     "Predicted weight, kilograms",
+     "What not to use"
+    ],
+    "rows": [
+     [
+      "Men",
+      "50 plus 0.91 times (height in cm minus 152.4)",
+      "Actual body weight"
+     ],
+     [
+      "Women",
+      "45.5 plus 0.91 times (height in cm minus 152.4)",
+      "Ideal weight remembered from a ward round"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Volutrauma** is overdistension. **Barotrauma** is high transpulmonary pressure with air leak. **Atelectrauma** is repeated opening and closing of alveoli. **Biotrauma** is mediator release from those injuries. The names describe mechanisms. A patient can have more than one at the same time if the tidal volume is large and the PEEP is too low.",
+   "say": "Volutrauma is overdistension. Barotrauma is high transpulmonary pressure with air leak. Atelectrauma is repeated opening and closing of alveoli. Biotrauma is mediator release from those injuries. The names describe mechanisms. A patient can have more than one at the same time if the tidal volume is large and the PEEP is too low.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Too much volume or pressure",
+     "points": [
+      "Volutrauma from overdistension",
+      "Barotrauma with air leak",
+      "Biotrauma from the injury"
+     ]
+    },
+    "right": {
+     "title": "Too little end-expiratory volume",
+     "points": [
+      "Atelectrauma, open and close",
+      "Biotrauma again",
+      "PEEP is the tool, not a bigger breath"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The ARDSNet lower **PEEP** and FiO2 table was the table used in the original volume trial. Later trials of a higher PEEP table, including **ALVEOLI**, did not show a mortality benefit in unselected ARDS. Higher PEEP is a choice for a very hypoxaemic patient whose right ventricle can tolerate it, not a new default for every intubation.",
+   "say": "The ARDSNet lower PEEP and FiO2 table was the table used in the original volume trial. Later trials of a higher PEEP table, including ALVEOLI, did not show a mortality benefit in unselected ARDS. Higher PEEP is a choice for a very hypoxaemic patient whose right ventricle can tolerate it, not a new default for every intubation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Table",
+     "What the trials showed",
+     "Practical use"
+    ],
+    "rows": [
+     [
+      "Lower PEEP FiO2 table",
+      "Used in the volume trial",
+      "The default pairing"
+     ],
+     [
+      "Higher PEEP table, ALVEOLI",
+      "No mortality benefit in unselected ARDS",
+      "Not automatic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **ART trial** of a lung **recruitment** manoeuvre plus PEEP titration increased mortality. Routine recruitment manoeuvres are not used. A brief rise in pressure to open collapsed lung can drop the blood pressure at once. If you ever recruit, watch the circulation and stop when it fails. Do not make it a protocol for every new ARDS admission.",
+   "say": "The ART trial of a lung recruitment manoeuvre plus PEEP titration increased mortality. Routine recruitment manoeuvres are not used. A brief rise in pressure to open collapsed lung can drop the blood pressure at once. If you ever recruit, watch the circulation and stop when it fails. Do not make it a protocol for every new ARDS admission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "art",
+      "label": "ART: recruitment plus PEEP titration"
+     },
+     {
+      "id": "harm",
+      "label": "Mortality increased"
+     },
+     {
+      "id": "stop",
+      "label": "Do not use routine recruitment"
+     }
+    ],
+    "edges": [
+     [
+      "art",
+      "harm"
+     ],
+     [
+      "harm",
+      "stop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Permissive hypercapnia** is accepted so that tidal volume and plateau pressure stay safe. In the ARDSNet protocol the pH was allowed to fall to 7.15, and bicarbonate was permitted below that. Chasing a normal carbon dioxide with bigger breaths recreates the injury the trial prevented. A rising carbon dioxide is tolerated. A falling pH below 7.15 is reassessed.",
+   "say": "Permissive hypercapnia is accepted so that tidal volume and plateau pressure stay safe. In the ARDSNet protocol the pH was allowed to fall to 7 point 15, and bicarbonate was permitted below that. Chasing a normal carbon dioxide with bigger breaths recreates the injury the trial prevented. A rising carbon dioxide is tolerated. A falling pH below 7 point 15 is reassessed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Priority",
+     "Limit",
+     "What you accept"
+    ],
+    "rows": [
+     [
+      "Tidal volume and plateau",
+      "6 mL/kg predicted weight, plateau 30",
+      "Carbon dioxide may rise"
+     ],
+     [
+      "pH",
+      "Allowed down to 7.15",
+      "Bicarbonate only below that"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mechanical power** is the combination of tidal volume, pressure, flow, and respiratory rate. Higher power is associated with worse outcomes. There is no single mandated safe cutoff to write on a ventilator order. Lowering the rate, the volume, or the driving pressure is what lowers power. Do not quote a magic number the trials did not set.",
+   "say": "Mechanical power is the combination of tidal volume, pressure, flow, and respiratory rate. Higher power is associated with worse outcomes. There is no single mandated safe cutoff to write on a ventilator order. Lowering the rate, the volume, or the driving pressure is what lowers power. Do not quote a magic number the trials did not set.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Raises mechanical power",
+     "points": [
+      "Large tidal volume",
+      "High driving pressure",
+      "A fast respiratory rate"
+     ]
+    },
+    "right": {
+     "title": "What is not true",
+     "points": [
+      "No single safe cutoff is mandated",
+      "Power is not a ventilator mode",
+      "Association is not a new order"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Driving pressure** above 15 cmH2O tracks mortality in observational ARDS data. It is plateau pressure minus PEEP. Limiting it means lowering tidal volume, or raising PEEP only when that does not push plateau pressure into an unsafe range. A lower driving pressure bought by a dangerous plateau is not a win.",
+   "say": "Driving pressure above 15 cmH2O tracks mortality in observational ARDS data. It is plateau pressure minus PEEP. Limiting it means lowering tidal volume, or raising PEEP only when that does not push plateau pressure into an unsafe range. A lower driving pressure bought by a dangerous plateau is not a win.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ards-fig2.webp",
+    "alt": "Normal alveolus beside an injured alveolus with hyaline membranes, and a Berlin criteria panel.",
+    "caption": "Diffuse alveolar damage beside a normal alveolus. The side panel is a Berlin summary. Driving pressure and the 15 cmH2O observational cutoff are not drawn (StewardMD)."
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Marino ICU Book 5e Ch. 24 Acute Respiratory Distress Syndrome",
+  "Marino ICU Book 5e Ch. 27 Conventional Mechanical Ventilation"
+ ]
+}

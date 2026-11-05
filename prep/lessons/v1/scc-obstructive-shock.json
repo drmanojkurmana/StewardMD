@@ -1,0 +1,176 @@
+{
+ "v": 1,
+ "module": "scc-obstructive-shock",
+ "title": "Obstructive shock and massive pulmonary embolism",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cardiac tamponade** equalises diastolic pressures, because a tense sac limits filling in every chamber. Pulsus paradoxus, a plethoric inferior vena cava, and right chamber collapse on echo support the diagnosis. Electrical alternans is a late electrocardiogram clue. A fluid bolus can only temporise. Drainage is the treatment, and fluid alone is not.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tamponade-fig1.webp",
+    "alt": "Cardiac tamponade drawing with tense pericardial fluid, right chamber collapse, septal shift, impaired diastolic filling, a pulsus paradoxus label, and an electrical alternans tracing.",
+    "caption": "Tense fluid, right chamber collapse, septal shift, and electrical alternans. Equalised pressure numbers and the drainage needle are not drawn (StewardMD)."
+   },
+   "say": "Cardiac tamponade equalises diastolic pressures, because a tense sac limits filling in every chamber. Pulsus paradoxus, a plethoric inferior vena cava, and right chamber collapse on echo support the diagnosis. Electrical alternans is a late electrocardiogram clue. A fluid bolus can only temporise. Drainage is the treatment, and fluid alone is not."
+  },
+  {
+   "tx": "**Tension pneumothorax** is a clinical diagnosis in a patient who is crashing. Absent breath sounds on one side, tracheal shift, and hypotension are enough to act. Decompress at once, then place a chest drain. Do not wait for a chest radiograph, because that delay can be fatal. The inset is labelled with two needle sites. The drain still has to follow the needle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tension-pneumothorax-fig1.webp",
+    "alt": "Right tension pneumothorax with a collapsed lung, mediastinal shift, a kinked vena cava, and a needle decompression inset.",
+    "caption": "Collapse, mediastinal shift, and a kinked vena cava, with two needle sites in the inset. The chest drain that must follow is not drawn (StewardMD)."
+   },
+   "say": "Tension pneumothorax is a clinical diagnosis in a patient who is crashing. Absent breath sounds on one side, tracheal shift, and hypotension are enough to act. Decompress at once, then place a chest drain. Do not wait for a chest radiograph, because that delay can be fatal. The inset is labelled with two needle sites. The drain still has to follow the needle."
+  },
+  {
+   "tx": "**Massive pulmonary embolism** means embolism that has caused hypotension. When bleeding risk allows, systemic thrombolysis is alteplase 100 mg over 2 hours. If the patient has arrested and embolism is the suspected cause, use the accelerated regimen of 0.6 mg per kg over 15 minutes, and do not exceed 50 mg. Continue resuscitation after the dose. A patient whose pressure is holding does not receive this regimen.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Situation",
+     "Pressure",
+     "Thrombolysis"
+    ],
+    "rows": [
+     [
+      "Massive pulmonary embolism",
+      "Hypotension",
+      "Alteplase 100 mg over 2 hours"
+     ],
+     [
+      "Arrest, embolism suspected",
+      "No pulse",
+      "Accelerated dose, cap 50 mg"
+     ],
+     [
+      "Pressure maintained",
+      "Stable",
+      "Not this regimen"
+     ]
+    ]
+   },
+   "say": "Massive pulmonary embolism means embolism that has caused hypotension. When bleeding risk allows, systemic thrombolysis is alteplase 100 mg over 2 hours. If the patient has arrested and embolism is the suspected cause, use the accelerated regimen of 0.6 mg per kg over 15 minutes, and do not exceed 50 mg. Continue resuscitation after the dose. A patient whose pressure is holding does not receive this regimen."
+  },
+  {
+   "tx": "**Catheter directed** treatment is for massive or high intermediate embolism when systemic thrombolysis is contraindicated or has already failed, and only in a centre that can perform it. It is not the first step in a stable patient. A large clot on the scan, with a normal blood pressure, is not a reason to instrument the pulmonary artery. Escalate when the patient deteriorates. Do not chase the picture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Catheter directed",
+     "points": [
+      "Lysis contraindicated or already failed",
+      "Only where a team can do it",
+      "Not the first step if stable"
+     ]
+    },
+    "right": {
+     "title": "Systemic thrombolysis",
+     "points": [
+      "Massive embolism with hypotension",
+      "Alteplase when bleeding risk allows",
+      "Not for a stable intermediate case"
+     ]
+    }
+   },
+   "say": "Catheter directed treatment is for massive or high intermediate embolism when systemic thrombolysis is contraindicated or has already failed, and only in a centre that can perform it. It is not the first step in a stable patient. A large clot on the scan, with a normal blood pressure, is not a reason to instrument the pulmonary artery. Escalate when the patient deteriorates. Do not chase the picture."
+  },
+  {
+   "tx": "The **McConnell** sign is sparing of the right ventricular apex while the free wall moves poorly. It is not specific for embolism. A dilated right ventricle in shock can also be a right ventricular infarct or chronic pulmonary hypertension. Echocardiography looks for those mimics. It does not clear the diagnosis. Many patients with embolism have a normal study, so a reassuring echo is not a rule out.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Echo finding",
+     "What it can mean",
+     "What it cannot do"
+    ],
+    "rows": [
+     [
+      "McConnell sign",
+      "An indirect clue only",
+      "Prove embolism by itself"
+     ],
+     [
+      "Dilated right ventricle",
+      "Embolism, infarct, or chronic pulmonary hypertension",
+      "Name one cause"
+     ],
+     [
+      "Normal study",
+      "Still possible in embolism",
+      "Send the patient home"
+     ]
+    ]
+   },
+   "say": "The McConnell sign is sparing of the right ventricular apex while the free wall moves poorly. It is not specific for embolism. A dilated right ventricle in shock can also be a right ventricular infarct or chronic pulmonary hypertension. Echocardiography looks for those mimics. It does not clear the diagnosis. Many patients with embolism have a normal study, so a reassuring echo is not a rule out."
+  },
+  {
+   "tx": "**Intermediate risk** embolism means right ventricular strain, or a raised troponin or BNP, without hypotension. Routine thrombolysis is not used in that group, because bleeding rises and the outcome does not improve. Rescue thrombolysis is for the patient who deteriorates. Anticoagulate, watch the blood pressure, and be ready to escalate. A positive biomarker in a stable patient is a reason to watch, not a reason to lyse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "strain",
+      "label": "Right ventricular strain or a raised biomarker"
+     },
+     {
+      "id": "stable",
+      "label": "Blood pressure still normal"
+     },
+     {
+      "id": "watch",
+      "label": "Anticoagulate and watch"
+     },
+     {
+      "id": "rescue",
+      "label": "Rescue thrombolysis only if the patient deteriorates"
+     }
+    ],
+    "edges": [
+     [
+      "strain",
+      "stable"
+     ],
+     [
+      "stable",
+      "watch"
+     ],
+     [
+      "watch",
+      "rescue"
+     ]
+    ]
+   },
+   "say": "Intermediate risk embolism means right ventricular strain, or a raised troponin or BNP, without hypotension. Routine thrombolysis is not used in that group, because bleeding rises and the outcome does not improve. Rescue thrombolysis is for the patient who deteriorates. Anticoagulate, watch the blood pressure, and be ready to escalate. A positive biomarker in a stable patient is a reason to watch, not a reason to lyse."
+  },
+  {
+   "tx": "**Right ventricular failure** from an acute embolism gets worse when airway pressure is high, and when the blood is acidotic or hypoxic, because each of those raises pulmonary vascular resistance. Noradrenaline supports the perfusion pressure. Give fluid only when the ventricle is underfilled. A large bolus over distends the right side and pushes the septum left. Avoid intubation when you can, because induction can stop the circulation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pe-fig2.webp",
+    "alt": "Pulmonary embolism drawing with a saddle embolus, raised pulmonary vascular resistance, right ventricular dilation, septal shift, obstructive shock, dead space, and shunt.",
+    "caption": "Raised pulmonary vascular resistance, right ventricular dilation, and obstructive shock. The McConnell sign and the alteplase dose are not drawn (StewardMD)."
+   },
+   "say": "Right ventricular failure from an acute embolism gets worse when airway pressure is high, and when the blood is acidotic or hypoxic, because each of those raises pulmonary vascular resistance. Noradrenaline supports the perfusion pressure. Give fluid only when the ventricle is underfilled. A large bolus over distends the right side and pushes the septum left. Avoid intubation when you can, because induction can stop the circulation."
+  },
+  {
+   "tx": "**Abdominal compartment syndrome** can obstruct venous return and mimic obstructive shock. A sustained bladder pressure above 20 mmHg, together with new organ failure, defines it. A tense abdomen, rising airway pressure, and falling urine output are the bedside clues. Measure the pressure through the urinary catheter. Refractory cases need decompression. More vasopressor does not relieve the compressed vena cava.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-peritonitis-damage-control-and-compartment-syndrome-fig1.webp",
+    "alt": "Peritonitis causing abdominal compartment syndrome, with vena cava compression, diaphragmatic elevation, and an open abdomen after decompressive laparotomy.",
+    "caption": "Vena cava compression and an open abdomen after decompression. The drawing shows peritonitis as the cause. The 20 mmHg cutoff is not printed (StewardMD)."
+   },
+   "say": "Abdominal compartment syndrome can obstruct venous return and mimic obstructive shock. A sustained bladder pressure above 20 mmHg, together with new organ failure, defines it. A tense abdomen, rising airway pressure, and falling urine output are the bedside clues. Measure the pressure through the urinary catheter. Refractory cases need decompression. More vasopressor does not relieve the compressed vena cava."
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Washington Manual of Critical Care 4e, Mechanical Causes of Shock",
+  "Marino ICU Book 5e, Acute Pulmonary Embolism",
+  "ESC pulmonary embolism guidelines 2019",
+  "WSACS intra-abdominal hypertension definitions"
+ ]
+}

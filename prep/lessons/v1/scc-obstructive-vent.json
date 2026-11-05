@@ -1,0 +1,174 @@
+{
+ "v": 1,
+ "module": "scc-obstructive-vent",
+ "title": "Ventilation in obstructive airway disease",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dynamic hyperinflation** in asthma and COPD is treated with a low respiratory rate, a long **expiratory time**, and a tidal volume near 6 to 8 mL/kg. Minute ventilation is limited on purpose. Adding breaths to chase the carbon dioxide is how the chest stops emptying. The trapped gas, not a weak heart, is often the reason the blood pressure falls.",
+   "say": "Dynamic hyperinflation in asthma and COPD is treated with a low respiratory rate, a long expiratory time, and a tidal volume near 6 to 8 mL/kg. Minute ventilation is limited on purpose. Adding breaths to chase the carbon dioxide is how the chest stops emptying. The trapped gas, not a weak heart, is often the reason the blood pressure falls.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/copd-exacerbation-fig1.webp",
+    "alt": "COPD exacerbation cascade from flow limitation to air trapping, auto-PEEP, and hypercapnic acidosis, with a treatment box.",
+    "caption": "Flow limitation, air trapping, and auto-PEEP. The treatment box prints a steroid dose and an oxygen target that this lesson does not use. The ventilator rate is in the text (StewardMD)."
+   }
+  },
+  {
+   "tx": "Sudden hypotension on the ventilator in asthma is often **auto-PEEP** impairing venous return. You should disconnect the circuit and let the chest empty, then give fluid. The rate is not the first thing to raise. If the pressure does not return after the chest has emptied, you should look for pneumothorax and for bleeding. A bolus into a still-trapped chest does not fix the obstruction.",
+   "say": "Sudden hypotension on the ventilator in asthma is often auto-PEEP impairing venous return. You should disconnect the circuit and let the chest empty, then give fluid. The rate is not the first thing to raise. If the pressure does not return after the chest has emptied, you should look for pneumothorax and for bleeding. A bolus into a still-trapped chest does not fix the obstruction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "drop",
+      "label": "Sudden hypotension in asthma"
+     },
+     {
+      "id": "empty",
+      "label": "Disconnect and let the chest empty"
+     },
+     {
+      "id": "then",
+      "label": "Fluid, then look for pneumothorax"
+     }
+    ],
+    "edges": [
+     [
+      "drop",
+      "empty"
+     ],
+     [
+      "empty",
+      "then"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**External PEEP** in triggered COPD is set below measured auto-PEEP, often near 80% of it, so the patient can trigger without beating the whole trapped pressure. In a paralysed asthmatic patient, external PEEP is not routinely stacked on top of auto-PEEP. Stacking can worsen hyperinflation. The two diseases are not ventilated with the same PEEP habit.",
+   "say": "External PEEP in triggered COPD is set below measured auto-PEEP, often near 80% of it, so the patient can trigger without beating the whole trapped pressure. In a paralysed asthmatic patient, external PEEP is not routinely stacked on top of auto-PEEP. Stacking can worsen hyperinflation. The two diseases are not ventilated with the same PEEP habit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Triggered COPD",
+     "points": [
+      "External PEEP near 80% of auto-PEEP",
+      "Helps the patient trigger",
+      "Still keep a long expiratory time"
+     ]
+    },
+    "right": {
+     "title": "Paralysed asthma",
+     "points": [
+      "Do not stack external PEEP",
+      "Empty the chest if pressure falls",
+      "Limit the minute ventilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Permissive hypercapnia** is accepted in **status asthmaticus**. A high plateau pressure is a signal to lower minute ventilation, not to add more breaths. The carbon dioxide is allowed to rise so the lung can empty. A normal blood gas bought with a fast rate is a bad trade. You should recheck for pneumothorax if the peak pressure jumps.",
+   "say": "Permissive hypercapnia is accepted in status asthmaticus. A high plateau pressure is a signal to lower minute ventilation, not to add more breaths. The carbon dioxide is allowed to rise so the lung can empty. A normal blood gas bought with a fast rate is a bad trade. You should recheck for pneumothorax if the peak pressure jumps.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Signal",
+     "What you change",
+     "What you do not do"
+    ],
+    "rows": [
+     [
+      "High plateau in asthma",
+      "Lower the rate and the minute ventilation",
+      "Do not add breaths"
+     ],
+     [
+      "Rising carbon dioxide",
+      "Accept permissive hypercapnia",
+      "Do not chase a normal gas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intravenous **magnesium sulfate** 2 g is an adjunct in acute severe asthma that is not responding. It is not a substitute for oxygen, nebulised bronchodilators, and corticosteroids. **Ketamine** is a bronchodilator and an induction option in status asthmaticus. **Heliox** with at least 70% helium reduces turbulent flow when the oxygen need allows that mix.",
+   "say": "Intravenous magnesium sulfate 2 g is an adjunct in acute severe asthma that is not responding. It is not a substitute for oxygen, nebulised bronchodilators, and corticosteroids. Ketamine is a bronchodilator and an induction option in status asthmaticus. Heliox with at least 70% helium reduces turbulent flow when the oxygen need allows that mix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adjunct",
+     "Where it fits",
+     "What it does not replace"
+    ],
+    "rows": [
+     [
+      "Magnesium sulfate 2 g",
+      "Severe asthma not responding",
+      "Oxygen, nebulisers, and steroids"
+     ],
+     [
+      "Ketamine",
+      "Induction in status asthmaticus",
+      "The ventilator strategy"
+     ],
+     [
+      "Heliox, at least 70% helium",
+      "When oxygen need allows",
+      "A hypoxic patient who needs a high FiO2"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For a **COPD exacerbation**, non-invasive ventilation is started when there is respiratory acidosis, and invasive ventilation uses the same long expiratory time. Oxygen is targeted, not left at a high uncontrolled FiO2. A patient who is tiring, or who cannot protect the airway, is intubated. Non-invasive support is not a reason to delay that decision until the arrest.",
+   "say": "For a COPD exacerbation, non-invasive ventilation is started when there is respiratory acidosis, and invasive ventilation uses the same long expiratory time. Oxygen is targeted, not left at a high uncontrolled FiO2. A patient who is tiring, or who cannot protect the airway, is intubated. Non-invasive support is not a reason to delay that decision until the arrest.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+    "alt": "Type 1 hypoxaemic respiratory failure beside type 2 hypercapnic failure.",
+    "caption": "Type 1 is an oxygenation failure and type 2 is a failure of carbon dioxide clearance. Auto-PEEP and the helium mix are not drawn (StewardMD)."
+   }
+  },
+  {
+   "tx": "A **pneumothorax** in obstructed ventilation can be tension physiology from gas trapping as well as from a ruptured alveolus. Falling blood pressure with rising peak pressure is a prompt to disconnect the circuit and to search for pneumothorax. You should decompress a tension picture and then place a chest drain. A radiograph is not the first test in a patient who is crashing.",
+   "say": "A pneumothorax in obstructed ventilation can be tension physiology from gas trapping as well as from a ruptured alveolus. Falling blood pressure with rising peak pressure is a prompt to disconnect the circuit and to search for pneumothorax. You should decompress a tension picture and then place a chest drain. A radiograph is not the first test in a patient who is crashing.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-tension_pneumothorax.webp",
+    "alt": "Tension pneumothorax with mediastinal shift and needle decompression, beside an open chest wound.",
+    "caption": "Collapsed lung, shift away from the air, and needle decompression sites. The open-wound dressing is a different injury. The asthma rate is not on this sheet (StewardMD)."
+   }
+  },
+  {
+   "tx": "Obstructed ventilation is a plan you can say out loud: long expiration, low rate, limited **minute ventilation**, and a hand on the blood pressure. Bronchodilators and steroids are given. The ventilator is not used to normalise the carbon dioxide in the first hour. If the chest is silent and the pressure is falling, you should empty the chest before you reach for another drug.",
+   "say": "Obstructed ventilation is a plan you can say out loud: long expiration, low rate, limited minute ventilation, and a hand on the blood pressure. Bronchodilators and steroids are given. The ventilator is not used to normalise the carbon dioxide in the first hour. If the chest is silent and the pressure is falling, you should empty the chest before you reach for another drug.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do this",
+     "points": [
+      "Long expiratory time",
+      "Rate low enough for the chest to empty",
+      "Disconnect if venous return fails"
+     ]
+    },
+    "right": {
+     "title": "Do not do this",
+     "points": [
+      "Raise the rate to fix the gas",
+      "Stack PEEP in paralysed asthma",
+      "Wait for a film in a crashing patient"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "refs": [
+  "Marino ICU Book 5e Ch. 23 Asthma and COPD in the ICU",
+  "Washington Manual of Critical Care 4e, Acute Severe Asthma"
+ ]
+}
