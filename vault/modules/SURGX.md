@@ -340,3 +340,18 @@ antislop and Appllama skills. Polish, not a redesign: layout, behaviour and copy
 - Fixed while here: the procedure header double-escaped its specialty ("O&G" would show as "O&amp;G"), and protocol
   headers said only "Protocol" instead of the category title.
 - Check: `impeccable detect` on surgx.css and graphite-dark.css returns no findings.
+
+### Second anti-slop pass (2026-11-05, owner: "still looks vibe coded")
+Structure, not detail, was the tell. Changed:
+- **Home hero card removed.** The boxed dark gradient card became a native large title on the theatre-green wash
+  (`.sgx-hero` transparent, logo ink in light / white in dark, wordmark in theatre green). `--sgx-hero-a/b` deleted;
+  `graphite-dark.css` now sets the SURGX hero transparent instead of painting it.
+- **Protocol items grouped:** consecutive `.sgx-item` in a band join into one list with hairline separators.
+- **Meta pills are plain text** (sources, review date, framing): no border, no fill, one line.
+- **Explanation banners are footnotes** (`.sgx-banner.info`, `.sgx-banner.sim`: no box). Real warnings keep their box.
+- **Tabs** are an underline tab bar on the header colour, not pills.
+- **Segmented controls** for exclusive choices: the case level picker and every note `choice` field (WHO checklist,
+  Clavien-Dindo). The lock icon is not shown on choice fields: a tap-only field can never be AI-filled.
+- **Evidence "Used by"** lists real protocol and operation titles as rows (`itemTitle()`), not raw ids on pills.
+- Case vitals read as label over value (tabular numbers, sans), not mono pills; phase label capitalised.
+- Radii 12 / 10 (was 16 / 12).
