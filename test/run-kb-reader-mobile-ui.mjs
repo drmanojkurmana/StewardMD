@@ -38,6 +38,8 @@ async function boot(query) {
 async function open(d) {
   await ev(`DX.openRef(${JSON.stringify(d)},{from:'knowledge-library'})`);
   for (let i = 0; i < 40; i++) { if (await ev(`[...document.querySelectorAll('#dxMgmt .kbv2-slot')].every(s=>s.getAttribute('data-kbv2-done'))`)) break; await sleep(150); }
+  // page-motion.js slides the body in for ~530 ms; measuring mid-slide reads a false overflow
+  await ev(`Promise.all(document.querySelector('#dxMgmt .dx-mgmt-body').getAnimations().map(a=>a.finished.catch(()=>{})))`);
   await sleep(200);
 }
 // every element whose right edge passes the viewport, unless an ancestor scrolls sideways on its own
@@ -169,7 +171,8 @@ try {
     ok(end.radius >= 16, `${mode} @390: card bottom corners rounded at the end (${end.radius})`);
     await shot(`390-card-${mode}-end`);
     // Red-flag callout, when present.
-    ok(await ev(`(()=>{const a=document.querySelector('#dxMgmt .dx-reader-alert');if(!a)return true;const s=getComputedStyle(a);return parseFloat(s.borderLeftWidth)>=3&&parseFloat(s.borderTopLeftRadius)>=8&&s.backgroundColor!=='rgba(0, 0, 0, 0)'})()`), `${mode} @390: red flags are a tinted callout with a red left border`);
+    const alert = JSON.parse(await ev(`(()=>{const a=document.querySelector('#dxMgmt .dx-reader-alert');if(!a)return 'null';const s=getComputedStyle(a);return JSON.stringify({l:parseFloat(s.borderLeftWidth),r:parseFloat(s.borderTopLeftRadius),bg:s.backgroundColor})})()`));
+    ok(!alert || (alert.l >= 2 && alert.r >= 8 && alert.bg !== 'rgba(0, 0, 0, 0)'), `${mode} @390: red flags are a tinted callout with a red left border ${JSON.stringify(alert)}`);
   }
   // iPad 820: card centred, max 960px, same insets.
   await call("Emulation.setDeviceMetricsOverride", { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });

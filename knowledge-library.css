@@ -690,6 +690,8 @@ body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert h4::befo
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 22V3' stroke='%23ff8b84' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M5 4h13l-3 4 3 4H5z' fill='%23ff8b84'/%3E%3C/svg%3E");
 }
 body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) .dx-reader-alert { background: rgba(255, 139, 132, 0.13); }
+/* the table scroll-hint fade paints --panel; on the card it must be the card colour or it shows as black bars */
+body.dark #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) :is(.kbv2-scroll, .kbr-scroll) { --panel: var(--kbr-card-bg); }
 /* Key terms: soft lavender pill. Background only, no vertical padding, so
  * line height and wrapping are unchanged. */
 #dxOverlay #dxMgmt.dx-reader:has(.kbr-sheet) [class^="md-"]:not(.md-abs):not(.md-emerg):not(.md-cite) {
