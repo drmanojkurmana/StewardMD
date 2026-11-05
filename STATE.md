@@ -4,8 +4,14 @@
 - **Active Worktree**: `/Volumes/WD BLACK SN7100 1TB Media/stewardmd/wt/ss-lessons-C`
 - **Branch**: `ss-lessons-C`
 - **Current Mode**: Sequential Mode across lanes A, B, C
-- **Current Subject in Queue**: Medical Oncology (`ss-medical-oncology`) [Subject #1 in SS-QUEUE.md]
-- **Current Stage**: Stage 1 (Blueprint by Lane A; Audit & Image Clearance by Lanes B/C)
+- **Current Subject in Queue**: Neurosurgery (`ss-neurosurgery`) [Subject #13 in SS-QUEUE.md; subjects 1-12 DONE]
+- **Current Stage**: Stage 1 (blueprint todo: Lane A has not drafted it yet; Lane C audits existing lessons only)
+
+## 2026-11-06 run 8 (writer muse-spark-1.3, main e99c84fe7 = origin/main): ss-neurosurgery stage-1 closeout
+- Queue re-read: ss-neurosurgery still `blueprint: todo`, lane C `todo`; no stage-2 topics, no lessons written, no blind fact-check owed, no FLAGS rows.
+- Audit re-verified on main: checkLesson `[]` x3 (sur-brain-tumours, sur-head-injury, sur-hydrocephalus); R2 200 x4 byte-identical; --check fails all pre-existing and logged (head-injury steps 4-6 + hydrocephalus step-5 narration in LESSONS-GARBLED.md lines 1224/1226; hydrocephalus step-4 numbers 40/50; brain-tumours verbatim/drug-grounding for stage-2). No removals/swaps/needs, so no audit PR owed.
+- Lane-C PRs #1978/#1981/#1988 all MERGEABLE (gh API; #1988 UNSTABLE = pending checks only); no rebase needed.
+- Safekeeping: 6 paediatric blueprints on this branch, untouched. Closeout commit carries the branch copies of SS-LESSONS-C-PROGRESS.md + SS-LESSONS-C-NEUROSURGERY-AUDIT.md (synced from main checkout) and this STATE.md. No PR opened. Queue line 13 untouched.
 
 ---
 
