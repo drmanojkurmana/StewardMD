@@ -3,7 +3,7 @@
  "module": "sgm-pk-principles",
  "subject": "ss-general-medicine",
  "title": "Pharmacokinetics in clinical practice",
- "minutes": 6,
+ "minutes": 7,
  "steps": [
   {
    "tx": "Pharmacokinetics describes what the body does to a drug. **Volume of distribution** (Vd) links the amount of drug in the body to the plasma concentration, so Vd equals total body drug divided by plasma concentration. A lipophilic drug spreads into tissues and has a large Vd, while a drug confined to plasma has a small one. Vd is a theoretical space, not a real anatomical volume.",
@@ -110,6 +110,17 @@
       "d"
      ]
     ]
+   }
+  },
+  {
+   "tx": "The figure traces an oral dose through the gut wall and **portal vein** into the liver, where **first-pass metabolism** removes part of the dose before it reaches the blood, while an injected bolus enters veins directly. The inset curves show a lower area under the curve for oral dosing, which is why **bioavailability** sits below one for oral drugs and equals one for intravenous dosing. The lesson uses this path to explain lost fraction.",
+   "say": "This diagram follows an oral drug from the gut through the portal vein to the liver, where first-pass metabolism in gut wall and liver removes part of the dose before it reaches the circulation, while an intravenous bolus enters the systemic veins directly. The concentration time inset shows a smaller area under the curve after oral dosing than after intravenous dosing. That ratio is absolute bioavailability, which equals one for intravenous dosing by definition. Picture the gut and liver as toll gates the oral dose must pass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sgm-pk-principles-gen1.webp",
+    "alt": "Diagram traces oral drug through gut and liver to blood beside direct intravenous entry with curve inset.",
+    "caption": "Oral path with gut and liver loss beside direct intravenous entry, Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

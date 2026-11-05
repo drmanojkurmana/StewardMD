@@ -3,7 +3,7 @@
   "module": "son-crc-metastatic",
   "subject": "ss-medical-oncology",
   "title": "Metastatic colorectal cancer: molecular profiling, targeted biologics and surgical resection",
-  "minutes": 8,
+  "minutes": 9,
   "steps": [
     {
       "tx": "Comprehensive molecular profiling is critical before initiating targeted therapy for advanced bowel cancer. Testing for **Extended RAS** mutations across KRAS and NRAS exons 2, 3, and 4 alongside **BRAF V600E** mutations guides systemic treatment selection. Tumours harbouring activating mutations in either KRAS, NRAS, or BRAF demonstrate complete intrinsic resistance to monoclonal antibodies targeting EGFR, making molecular characterisation mandatory prior to prescribing anti-EGFR therapy.",
@@ -121,6 +121,17 @@
             "Rapid disease progression"
           ]
         }
+      }
+    },
+    {
+      "tx": "The cell diagram explains dual blockade in pretreated **BRAF V600E** colorectal cancer. Surface receptors signal through the MAPK chain, and blocking BRAF alone invites rapid EGFR feedback reactivation. Oral **encorafenib** therefore shuts the mutant BRAF node while intravenous **cetuximab** caps EGFR above, closing the loop together. The lesson presents this paired vertical blockade as the targeted standard that prolonged survival beyond standard chemotherapy.",
+      "say": "Follow the pathway from membrane to nucleus. The mutant BRAF node drives MAPK signalling, but EGFR feedback can restart it when BRAF is blocked alone. The figure pairs oral encorafenib inside the cell with intravenous cetuximab on the surface receptor, shutting both levels at once. That dual vertical approach is the lesson standard for pretreated BRAF mutant disease, chosen over chemotherapy alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/son-crc-metastatic-gen2.webp",
+        "alt": "The diagram shows a mutant cell with surface and internal blockers shutting a signalling chain.",
+        "caption": "Mutant cell with paired surface and internal blockade, Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

@@ -3,7 +3,7 @@
   "module": "sca-stemi",
   "subject": "ss-cardiology",
   "title": "ST Elevation Myocardial Infarction Management",
-  "minutes": 9,
+  "minutes": 10,
   "steps": [
     {
       "tx": "Diagnostic **ST-segment elevation** requires new elevation at the J-point in two **contiguous leads** of at least **1** mm in all leads except V2-V3, where thresholds are at least **2.5** mm in men under **40**, at least **2.0** mm in men **40** and older, and at least **1.5** mm in women. These age- and sex-adjusted cutoffs prevent overdiagnosis of benign early repolarization while ensuring timely identification of acute transmural infarction.",
@@ -191,6 +191,17 @@
             "Preload maintenance protocol"
           ]
         ]
+      }
+    },
+    {
+      "tx": "The right sided set pairs inferior ST elevation in leads two, three and aVF with STE in **lead V4R**, the marker of **right ventricular infarction**. The inset reminds that these patients are **preload dependent** with hypotension yet clear lungs, because the failing right chamber cannot fill the left. That physiology is why fluids support output while nitrates and diuretics would collapse it.",
+      "say": "Start with the bottom rhythm strip and the inferior leads, which lift off the baseline as an inferior attack. Then move rightward to V4R, where the same lift confirms the right ventricle is involved. Those patients need filling, not unloading, so the box pairs clear lungs and low pressure with fluids over nitrates. Use V4R as the branch point that flips the usual acute coronary management.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/sca-stemi-gen2.webp",
+        "alt": "Right sided ECG shows inferior ST elevation with confirmatory ST elevation in lead V4R.",
+        "caption": "Right sided ECG tracing linking inferior elevation to V4R right ventricular involvement, Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
